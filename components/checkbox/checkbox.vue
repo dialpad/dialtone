@@ -1,0 +1,110 @@
+<template>
+  <label>
+    <div :class="internalDisabled ? 'd-checkbox-group--disabled' : 'd-checkbox-group'">
+      <div class="d-checkbox__input">
+        <input
+          type="checkbox"
+          :checked="internalChecked"
+          :name="internalName"
+          :value="value"
+          :disabled="internalDisabled"
+          :class="['d-checkbox', inputValidationClass, inputClass]"
+          v-bind="$attrs"
+          v-on="inputListeners"
+        >
+      </div>
+      <div
+        class="d-checkbox__copy d-checkbox__label"
+        data-qa="checkbox-label-description-container"
+      >
+        <div
+          :class="labelClass"
+          v-bind="labelChildProps"
+          data-qa="checkbox-label"
+        >
+          <!-- @slot slot for Checkbox Label -->
+          <slot>{{ label }}</slot>
+        </div>
+        <div
+          v-if="$slots.description || description"
+          :class="['d-checkbox__description', descriptionValidationClass, descriptionClass]"
+          v-bind="descriptionChildProps"
+          data-qa="checkbox-description"
+        >
+          <!-- @slot slot for Checkbox Description -->
+          <slot name="description">{{ description }}</slot>
+        </div>
+      </div>
+    </div>
+  </label>
+</template>
+
+<script>
+// Imports
+import {
+  InputMixin,
+  CheckableMixin,
+  GroupableMixin,
+} from '../mixins/input.js';
+import { CHECKBOX_INPUT_VALIDATION_CLASSES, CHECKBOX_DESCRIPTION_VALIDATION_CLASSES } from './checkbox_constants';
+
+export default {
+  name: 'HsCheckbox',
+
+  mixins: [InputMixin, CheckableMixin, GroupableMixin],
+
+  computed: {
+    inputValidationClass () {
+      return CHECKBOX_INPUT_VALIDATION_CLASSES[this.internalValidationState];
+    },
+
+    descriptionValidationClass () {
+      return CHECKBOX_DESCRIPTION_VALIDATION_CLASSES[this.internalValidationState];
+    },
+
+    checkboxGroupValueChecked () {
+      return this.groupContext?.selectedValues?.includes(this.value) ?? false;
+    },
+
+    inputListeners () {
+      return {
+        /* TODO
+            Check if any usages of this component leverage $listeners and either remove if unused or scope the removal
+            and migration prior to upgrading to Vue 3.x
+        */
+        // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
+        ...this.$listeners,
+        /*
+         * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input
+         * element which will result in the hander being called twice (once on the input element and once by the emitted
+         * input event by the change listener).
+        */
+        input: () => {},
+        change: event => this.emitValue(event.target.value, event.target.checked),
+      };
+    },
+  },
+
+  watch: {
+    checkboxGroupValueChecked: {
+      immediate: true,
+      handler (newCheckboxGroupValueChecked) {
+        if (this.hasGroup) {
+          // update internal value when the checkbox group value changes
+          this.internalChecked = newCheckboxGroupValueChecked;
+        }
+      },
+    },
+  },
+
+  methods: {
+    emitValue (value, checked) {
+      // update provided value if injected
+      this.setGroupValue(value, checked);
+
+      // emit the state of the checkbox
+      this.$emit('input', checked);
+    },
+  },
+};
+</script>

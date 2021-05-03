@@ -1,0 +1,119 @@
+<template>
+  <label>
+    <div :class="internalDisabled ? 'd-radio-group--disabled' : 'd-radio-group'">
+      <div class="d-radio__input">
+        <input
+          :checked="internalChecked"
+          :name="internalName"
+          :value="value"
+          :disabled="internalDisabled"
+          type="radio"
+          :class="['d-radio', inputValidationClass, inputClass]"
+          v-bind="$attrs"
+          v-on="inputListeners"
+        >
+      </div>
+      <div
+        class="d-radio__copy d-radio__label"
+        data-qa="radio-label-description-container"
+      >
+        <div
+          :class="labelClass"
+          v-bind="labelChildProps"
+          data-qa="radio-label"
+        >
+          <!-- @slot slot for Radio Label -->
+          <slot>{{ label }}</slot>
+        </div>
+        <div
+          v-if="$slots.description || description"
+          :class="['d-radio__description', descriptionValidationClass, descriptionClass]"
+          v-bind="descriptionChildProps"
+          data-qa="radio-description"
+        >
+          <!-- @slot slot for Radio Description -->
+          <slot name="description">{{ description }}</slot>
+        </div>
+      </div>
+    </div>
+  </label>
+</template>
+
+<script>
+import {
+  InputMixin,
+  CheckableMixin,
+  GroupableMixin,
+} from '../mixins/input.js';
+import { RADIO_INPUT_VALIDATION_CLASSES, RADIO_DESCRIPTION_VALIDATION_CLASSES } from './radio_constants';
+
+export default {
+  name: 'HsRadio',
+
+  mixins: [InputMixin, CheckableMixin, GroupableMixin],
+
+  props: {
+    /**
+     * A provided value for the radio
+     */
+    value: {
+      type: [String, Number],
+      default: '',
+    },
+  },
+
+  computed: {
+    inputValidationClass () {
+      return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];
+    },
+
+    descriptionValidationClass () {
+      return RADIO_DESCRIPTION_VALIDATION_CLASSES[this.internalValidationState];
+    },
+
+    radioGroupValue () {
+      return this.groupContext?.selectedValue;
+    },
+
+    inputListeners () {
+      return {
+        /* TODO
+            Check if any usages of this component leverage $listeners and either remove if unused or scope the removal
+            and migration prior to upgrading to Vue 3.x
+        */
+        ...this.$listeners,
+        /*
+         * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input
+         * element which will result in the hander being called twice (once on the input element and once by the emitted
+         * input event by the change listener).
+        */
+        input: () => {},
+        change: event => this.emitValue(event.target.value),
+      };
+    },
+  },
+
+  watch: {
+    radioGroupValue: {
+      immediate: true,
+      handler (newRadioGroupValue) {
+        if (this.hasGroup) {
+          // update internal value when the radio group value changes
+          this.internalChecked = newRadioGroupValue === this.value;
+        }
+      },
+    },
+  },
+
+  methods: {
+    emitValue (value) {
+      if (value !== this.radioGroupValue) {
+        // update provided value if injected
+        this.setGroupValue(value);
+
+        this.$emit('input', value);
+      }
+    },
+  },
+};
+</script>

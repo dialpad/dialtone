@@ -1,0 +1,14 @@
+{
+  "name": "generator-handset",
+  "version": "0.1.0",
+  "description": "generate boilerplate for new handset components",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^1.1.1"
+  }
+}

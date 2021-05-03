@@ -1,0 +1,75 @@
+{
+  "name": "dialtone-vue",
+  "version": "1.0.0",
+  "description": "Vue component library for Dialtone components",
+  "main": "index.js",
+  "files": [
+    "/components"
+  ],
+  "scripts": {
+    "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
+    "build:wc": "vue-cli-service build --target wc --name dialtone-vue 'components/*.vue'",
+    "test": "vue-cli-service test:unit components/**/*.test.js",
+    "lint:code": "esplint ./",
+    "lint:docs": "markdownlint '**/*.mdx'",
+    "lint": "run-s lint:code lint:docs",
+    "storybook": "npm run --prefix storybook storybook",
+    "install:storybook": "npm install --prefix storybook",
+    "build:storybook": "npm run --prefix storybook build"
+  },
+  "dependencies": {
+    "@dialpad/dialtone": "6.0.0-beta.2",
+    "v-click-outside": "^3.1.2"
+  },
+  "devDependencies": {
+    "@dialpad/generator-dp": "^1.0.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-unit-mocha": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "core-js": "^3.6.5",
+    "eslint": "^7.11.0",
+    "eslint-config-semistandard": "^15.0.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-mocha": "^8.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^7.0.1",
+    "eslint-plugin-vuejs-accessibility": "^0.6.0",
+    "esplint": "^0.9.1",
+    "jsdom": "14.1.0",
+    "jsdom-global": "3.0.2",
+    "less": "3.9.0",
+    "less-loader": "^6.2.0",
+    "markdownlint": "^0.22.0",
+    "markdownlint-cli": "^0.26.0",
+    "mocha": "^6.2.3",
+    "mocha-loader": "^5.1.0",
+    "npm-run-all": "^4.1.3",
+    "null-loader": "^4.0.0",
+    "sinon": "^7.3.1",
+    "source-map-support": "^0.5.19",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11",
+    "yo": "^3.1.1"
+  },
+  "peerDependencies": {
+    "@dialpad/dialtone": "6.0.0-beta.2",
+    "vue": "^2.6.11"
+  },
+  "private": true,
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 14"
+  },
+  "volta": {
+    "node": "14.14.0"
+  }
+}

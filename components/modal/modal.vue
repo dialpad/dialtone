@@ -1,0 +1,237 @@
+<template>
+  <div
+    :class="modalClasses"
+    data-qa="hs-modal"
+    :aria-hidden="(!show).toString()"
+    @click.self="close"
+    @keydown.esc="close"
+    @keydown.tab="trapFocus"
+    @transitionend.self="setFocusAfterTransition"
+  >
+    <div
+      class="d-modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      :aria-describedby="describedById"
+      :aria-labelledby="labelledById"
+    >
+      <div
+        v-if="$slots.header"
+        :id="labelledById"
+        class="d-modal__title"
+        data-qa="hs-modal-title"
+      >
+        <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
+        <slot name="header" />
+      </div>
+      <h1
+        v-else
+        :id="labelledById"
+        class="d-modal__title"
+        data-qa="hs-modal-title"
+      >
+        {{ title }}
+      </h1>
+
+      <div
+        v-if="$slots.default"
+        class="d-modal__copy"
+        data-qa="hs-modal-copy"
+      >
+        <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
+        <slot />
+      </div>
+      <p
+        v-else
+        class="d-modal__copy"
+        data-qa="hs-modal-copy"
+      >
+        {{ copy }}
+      </p>
+
+      <footer
+        v-if="hasFooterSlot"
+        class="d-modal__footer"
+      >
+        <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
+        <slot name="footer" />
+      </footer>
+      <hs-button
+        class="d-modal__close"
+        circle
+        importance="clear"
+        :aria-label="closeButtonProps.ariaLabel"
+        v-bind="closeButtonProps"
+        @click="close"
+      >
+        <template #icon>
+          <icon-close />
+        </template>
+      </hs-button>
+    </div>
+  </div>
+</template>
+
+<script>
+import HsButton from '../button/button.vue';
+import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
+import Modal from '../mixins/modal.js';
+import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
+import { getUniqueString } from '../utils';
+
+/**
+ * Base Vue component for Dialtone Modal.
+ * @displayName HsModal
+ */
+export default {
+  name: 'HsModal',
+
+  components: {
+    HsButton,
+    IconClose,
+  },
+
+  mixins: [Modal],
+
+  props: {
+    /**
+     * A set of props to be passed into the modal's close button. Requires an 'ariaLabel' property.
+     */
+    closeButtonProps: {
+      type: Object,
+      required: true,
+      validator: (props) => {
+        return !!props.ariaLabel;
+      },
+    },
+
+    /**
+     * Body text to display as the modal's main content.
+     */
+    copy: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Id to use for the dialog's aria-describedby.
+     * Recommended only if the dialog content itself isn't enough to give full context,
+     * as screen readers should recite the dialog contents by default before any aria-description.
+     */
+    describedById: {
+      type: String,
+    },
+
+    /**
+     * Id to use for the dialog's aria-labelledby.
+     */
+    labelledById: {
+      type: String,
+      default: function () { return getUniqueString(); },
+    },
+
+    /**
+     * Whether the modal should be shown.  Parent component can sync on this value to control the modal's visibility.
+     */
+    show: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Title text to display in the modal header.
+     */
+    title: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * The theme of the modal.
+     * @values default or danger
+     * kind - default or danger (https://dialpad.design/components/modal/)
+     */
+    kind: {
+      type: String,
+      default: '',
+      validator: (k) => Object.values(MODAL_KIND_MODIFIERS).includes(k),
+    },
+
+    /**
+     * The size of the modal.
+     * @values default or full
+     * size - default or full (https://dialpad.design/components/modal/)
+     */
+    size: {
+      type: String,
+      default: '',
+      validator: (s) => Object.values(MODAL_SIZE_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Additional class name for the root modal element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    contentClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+  },
+
+  computed: {
+    hasFooterSlot () {
+      return !!this.$slots.footer;
+    },
+
+    modalClasses () {
+      return [
+        {
+          'd-modal': true,
+          [`d-modal--${this.kind}`]: this.kind,
+          [`d-modal--${this.size}`]: this.size,
+        },
+        this.contentClass,
+      ];
+    },
+  },
+
+  watch: {
+    show: {
+      immediate: true,
+      handler (isShowing) {
+        if (isShowing) {
+          // Set a reference to the previously-active element, to which we'll return focus on modal close.
+          this.previousActiveElement = document.activeElement;
+        } else {
+          // Modal is being hidden, so return focus to the previously active element before clearing the reference.
+          this.previousActiveElement?.focus();
+          this.previousActiveElement = null;
+        }
+      },
+    },
+  },
+
+  methods: {
+    close () {
+      this.$emit('update:show', false);
+    },
+
+    setFocusAfterTransition ({ propertyName }) {
+      // We only focus if the dialog is showing, and 'transform' seems to be the most reliable property to track.
+      // Note: 'visibility' would be an ideal prop to watch here, but it doesn't fire if the previous close transition
+      // was still in progress, making it a little flakey when quickly opening/closing a modal repeatedly.
+      if (!this.show || propertyName !== 'transform') {
+        return;
+      }
+      this.focusFirstElement();
+    },
+
+    trapFocus (e) {
+      if (this.show) {
+        this.focusTrappedTabPress(e);
+      }
+    },
+  },
+};
+</script>

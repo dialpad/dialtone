@@ -1,0 +1,34 @@
+{
+  "recordVersion": 1,
+  "configHash": "bc9f0e28a9c7a5e937370e9f2f5ea2a8a86295b3",
+  "files": {
+    "components/banner/banner.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 3
+    },
+    "components/button/button.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 2,
+      "complexity": 2
+    },
+    "components/input/input.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 1
+    },
+    "components/lazy_show/lazy_show.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 1
+    },
+    "components/mixins/modal.js": {
+      "complexity": 1
+    },
+    "components/notice/notice.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 4
+    },
+    "components/notice/notice_action.vue": {
+      "vue/no-deprecated-destroyed-lifecycle": 1
+    },
+    "components/popover/popover_default.story.vue": {
+      "vue/no-deprecated-v-bind-sync": 1
+    },
+    "components/radio/radio.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 1
+    }
+  }
+}

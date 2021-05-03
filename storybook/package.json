@@ -1,0 +1,37 @@
+{
+  "name": "dialtone-vue-storybook",
+  "version": "1.0.0",
+  "description": "Storybook for Dialtone Vue",
+  "scripts": {
+    "storybook": "NODE_PATH=./node_modules start-storybook -c ../.storybook --no-version-updates --ci -p 9010",
+    "build": "NODE_PATH=./node_modules build-storybook -c ../.storybook -o compiled"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@storybook/addon-a11y": "^6.1.14",
+    "@storybook/addons": "^6.1.14",
+    "@storybook/theming": "^6.1.14",
+    "@storybook/addon-actions": "^6.1.14",
+    "@storybook/addon-backgrounds": "^6.1.14",
+    "@storybook/addon-controls": "^6.1.14",
+    "@storybook/addon-docs": "^6.1.14",
+    "@storybook/addon-links": "^6.1.14",
+    "@storybook/source-loader": "^6.1.14",
+    "@storybook/addon-viewport": "^6.1.14",
+    "@storybook/vue": "^6.1.14",
+    "babel-loader": "^8.1.0",
+    "babel-preset-vue": "^2.0.2",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "dependencies": {
+    "vue": "^2.6.11"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 14"
+  },
+  "volta": {
+    "node": "14.14.0"
+  }
+}

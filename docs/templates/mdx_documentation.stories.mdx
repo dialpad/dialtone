@@ -1,0 +1,57 @@
+<Meta title="Docs/Templates/MDX Documentation" />
+
+# MDX Documentation Template
+
+```jsx
+    // MDX Documentation Template
+    import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+    import HsMyComponent from './my_component';
+
+    # My Component
+
+    <Subtitle>
+      Some description of the component functionality.
+    </Subtitle>
+
+    ## Base Style
+
+    Some description of how to use the base component, potential gotchas and limitations.
+
+    <Canvas>
+      <Story id="<GROUP>-my-component--default" />
+    </Canvas>
+
+    ## Variants
+
+    <Canvas>
+      <Story id="<GROUP>-my-component--variants" />
+    </Canvas>
+
+    ## Props, Slots & Events
+
+    <ArgsTable of={HsMyComponent} />
+
+    ## Usage
+
+    ### Import
+
+    ```jsx
+    import { HsMyComponent } from '@dialpad/handset';
+    ```
+
+    ### With Some Variant
+
+    ```vue
+    <hs-my-component
+      some="variant"
+    />
+    ```
+
+    ### With Some Other Variant
+
+    ```vue
+    <hs-my-component
+      some-other="variant"
+    />
+    ```
+```

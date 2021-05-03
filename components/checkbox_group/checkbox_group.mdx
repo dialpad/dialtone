@@ -1,0 +1,164 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import HsCheckboxGroup from './checkbox_group';
+
+# Checkbox Group
+
+<Subtitle>
+  Checkbox Groups are convenience components for a grouping of related Checkboxes. While each Checkbox within the group
+  is independent, the `v-model` on the group provides a convenient interface for determining which Checkboxes within
+  the group are checked.
+</Subtitle>
+
+## Base Style
+
+Checkbox Groups are typically paired with a legend which identifies the group. If no legend is provided then it is
+expected that an `aria-label` will be given in order to provide an invisible label to screen readers. Each Checkbox
+Group should contain one or more Checkboxes which users can make selection(s) from.
+
+<Canvas>
+  <Story id="forms-checkbox-group--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="forms-checkbox-group--variants" />
+</Canvas>
+
+## Model
+
+The Vue model contains a list of selected option(s) within the group, see example below:
+
+```js
+// default = []
+const selectedValues = ['checked_option_1', 'checked_option_2'];
+```
+
+## Props, Slots & Events
+
+<ArgsTable of={HsCheckboxGroup} />
+
+## Usage
+
+### Import
+
+```jsx
+import {
+  VALIDATION_MESSAGE_TYPES,
+  HsCheckbox,
+  HsCheckboxGroup
+} from '@dialpad/handset';
+```
+
+### With Legend
+
+```jsx
+<hs-checkbox-group
+  name="my-group-name"
+  legend="My Legend"
+>
+  <hs-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <hs-checkbox
+    value="option2"
+    label="Option 2"
+  />
+</hs-checkbox-group>
+```
+
+### With Slotted Legend
+
+```html
+<hs-checkbox-group name="my-group-name">
+  <hs-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <hs-checkbox
+    value="option2"
+    label="Option 2"
+  />
+  <template #legend>
+    With Slotted Legend
+  </template>
+</hs-checkbox-group>
+```
+
+### With Selected Values
+
+```html
+<hs-checkbox-group
+  name="my-group-name"
+  legend="My Legend"
+  :selected-values="['option1']"
+>
+  <hs-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <hs-checkbox
+    value="option2"
+    label="Option 2"
+  />
+</hs-checkbox-group>
+```
+
+### Disabled
+
+```jsx
+<hs-checkbox-group
+  name="my-group-name"
+  legend="My Legend"
+  disabled
+>
+  <hs-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <hs-checkbox
+    value="option2"
+    label="Option 2"
+  />
+</hs-checkbox-group>
+```
+
+### With Validation Messages
+
+```html
+<hs-checkbox-group
+  name="my-group-name"
+  legend="My Legend"
+  :messages="[{ message: 'My Success Message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+>
+  <hs-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <hs-checkbox
+    value="option2"
+    label="Option 2"
+  />
+</hs-checkbox-group>
+```
+
+### With Validation Messages Hidden
+
+```html
+<hs-checkbox-group
+  name="my-group-name"
+  legend="My Legend"
+  :messages="[{ message: 'My Success Message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+  :show-messages="false"
+>
+  <hs-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <hs-checkbox
+    value="option2"
+    label="Option 2"
+  />
+</hs-checkbox-group>
+```

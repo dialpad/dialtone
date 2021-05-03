@@ -1,0 +1,184 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import HsInput from './input';
+
+# Inputs
+
+<Subtitle>
+  Input fields are text areas used to gather information from users.
+  It can have a range of options and supports several text formats including numbers.
+</Subtitle>
+
+## Base Style
+
+Inputs are normally paired with a label, but there are times when they can be used without a label.
+Placeholder text should primarily be used as a content prompt and only provided when needed.
+
+<Canvas>
+  <Story id="forms-input--default" />
+</Canvas>
+
+## Props
+
+<ArgsTable of={HsInput} />
+
+## Usage
+
+```js
+import { HsInput } from '@dialpad/handset';
+```
+
+```html
+<hs-input
+  v-model="text"
+  placeholder="placeholder"
+/>
+```
+
+## With Description
+
+Provides additional information to the user regarding the input element.
+
+<Canvas>
+  <Story id="forms-input--with-description" />
+</Canvas>
+
+### Usage
+
+```js
+import { HsInput } from '@dialpad/handset';
+```
+
+```jsx
+<hs-input
+  v-model="text"
+  placeholder="placeholder"
+  description="Description"
+/>
+```
+
+## With Clear Button
+
+Displays a clear button the user can click to clear the input
+
+<Canvas>
+  <Story id="forms-input--with-clear-button" />
+</Canvas>
+
+### Usage
+
+```js
+import { HsInput } from '@dialpad/handset';
+```
+
+```jsx
+<hs-input
+  v-model="text"
+  placeholder="placeholder"
+  :show-clear-button="true"
+/>
+```
+
+## Validation States
+
+Provides feedback to the user based on their interction, or lack thereof, with an input.
+
+### Warning
+
+Warns the user that the value(s) they've entered has a potential problem,
+but it doesn't block them from proceeding with input submission.
+
+<Canvas>
+  <Story id="forms-input--with-warn" />
+</Canvas>
+
+#### Usage
+
+```js
+import { HsInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
+```
+
+```html
+<hs-input
+  v-model="text"
+  placeholder="placeholder"
+  :messages="[{
+    message: 'This is a warning message',
+    type: VALIDATION_MESSAGE_TYPES.WARNING,
+  }]"
+/>
+```
+
+### Error
+
+Alerts the user that the value(s) they've entered is incorrect,
+not provided, or has some issue that will block them from proceeding with input submission.
+
+<Canvas>
+  <Story id="forms-input--with-error" />
+</Canvas>
+
+#### Usage
+
+```js
+import { HsInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
+```
+
+```html
+<hs-input
+  v-model="text"
+  placeholder="placeholder"
+  :messages="[{
+    message: 'This is an error message',
+    type: VALIDATION_MESSAGE_TYPES.ERROR,
+  }]"
+/>
+```
+
+### Success
+
+Notifies the user that the value(s) they've entered is correct.
+
+<Canvas>
+  <Story id="forms-input--with-success" />
+</Canvas>
+
+#### Usage
+
+```js
+import { HsInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
+```
+
+```html
+<hs-input
+  v-model="text"
+  placeholder="placeholder"
+  :messages="[{
+    message: 'This is a success message',
+    type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+  }]"
+/>
+```
+
+## Sizes
+
+|name           |prop value                     |size|Example                                |
+|---            |---                            |--- |---                                    |
+|**Extra Small**|INPUT_SIZE_TYPES.EXTRA_SMALL   |12px|<Story id="forms-input--extra-small" />|
+|**Small**      |INPUT_SIZE_TYPES.SMALL         |14px|<Story id="forms-input--small" />      |
+|**Default**    |-                              |16px|<Story id="forms-input--default" />    |
+|**Large**      |INPUT_SIZE_TYPES.LARGE         |20px|<Story id="forms-input--large" />      |
+|**Extra Large**|INPUT_SIZE_TYPES.EXTRA_LARGE   |24px|<Story id="forms-input--extra-large" />|
+
+### Usage
+
+```js
+import { HsInput, INPUT_SIZE_TYPES } from '@dialpad/handset';
+```
+
+```html
+<hs-input
+  v-model="text"
+  placeholder="placeholder"
+  :size="INPUT_SIZE_TYPES.<SIZE>"
+/>
+```
