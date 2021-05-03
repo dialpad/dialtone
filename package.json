@@ -9,7 +9,7 @@
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
     "build:wc": "vue-cli-service build --target wc --name dialtone-vue 'components/*.vue'",
-    "test": "vue-cli-service test:unit components/**/*.test.js",
+    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
     "lint:code": "esplint ./",
     "lint:docs": "markdownlint '**/*.mdx'",
     "lint": "run-s lint:code lint:docs",
