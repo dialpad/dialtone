@@ -14,8 +14,8 @@
     "lint:docs": "markdownlint '**/*.mdx'",
     "lint": "run-s lint:code lint:docs",
     "storybook": "npm run --prefix storybook storybook",
-    "install:storybook": "npm install --prefix storybook",
-    "build:storybook": "npm run --prefix storybook build"
+    "storybook:install": "npm install --prefix storybook",
+    "storybook:build": "npm run --prefix storybook build"
   },
   "dependencies": {
     "@dialpad/dialtone": "6.0.0-beta.2",
