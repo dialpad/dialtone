@@ -22,8 +22,6 @@ const lessLoaders = [
 
 module.exports = {
   webpackFinal: async (config) => {
-    config.resolve.alias['@dialpad/dialtone'] = path.resolve(__dirname, '../node_modules/@dialpad/dialtone/lib/dist')
-
     config.module.rules.push({
       test: /\.less$/,
       use: lessLoaders,
