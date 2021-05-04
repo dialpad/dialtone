@@ -2,7 +2,7 @@
   "name": "dialtone-vue",
   "version": "1.0.0-beta.1",
   "description": "Vue component library for Dialtone components",
-  "repository":"https://github.com/dialpad/dialtone-vue",
+  "repository": "https://github.com/dialpad/dialtone-vue",
   "files": [
     "dist/*.js"
   ],

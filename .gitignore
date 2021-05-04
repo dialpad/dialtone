@@ -9,7 +9,6 @@ node_modules
 .DS_Store
 .env.local
 .env.*.local
-.npmrc
 
 # Log files
 npm-debug.log*
