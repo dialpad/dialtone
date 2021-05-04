@@ -19,8 +19,8 @@
     </p>
   </div>
 </template>
-<script>
 
+<script>
 export default {
   name: 'HsNoticeContent',
 
@@ -39,5 +39,4 @@ export default {
     },
   },
 };
-
 </script>

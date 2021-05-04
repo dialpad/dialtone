@@ -52,6 +52,8 @@ export default {
 
   mixins: [InputMixin, CheckableMixin, GroupableMixin],
 
+  inheritAttrs: false,
+
   props: {
     /**
      * A provided value for the radio

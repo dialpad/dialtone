@@ -38,6 +38,8 @@ export default {
 
   mixins: [InputMixin, GroupableMixin],
 
+  inheritAttrs: false,
+
   computed: {
     inputValidationClass () {
       return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];

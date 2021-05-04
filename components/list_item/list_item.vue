@@ -3,7 +3,7 @@
   <li
     :id="id"
     :class="['hs-list-item', 'd-fs14', 'd-lh6', 'd-py6', 'd-px16', 'd-d-flex', 'd-ai-center',
-             {'hs-list-item-clickable': clickable, 'd-jc-space-between': this.$slots.iconRight}]"
+             { 'hs-list-item-clickable': clickable, 'd-jc-space-between': this.$slots.iconRight }]"
     :tabindex="clickable ? 0 : -1"
     @keydown.enter="clicked"
     @keydown.space="clicked"
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-
 // A generic list item, can be made clickable with the clickable prop
 // which will cause the component to emit a click event
 

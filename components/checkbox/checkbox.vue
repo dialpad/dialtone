@@ -53,6 +53,8 @@ export default {
 
   mixins: [InputMixin, CheckableMixin, GroupableMixin],
 
+  inheritAttrs: false,
+
   computed: {
     inputValidationClass () {
       return CHECKBOX_INPUT_VALIDATION_CLASSES[this.internalValidationState];

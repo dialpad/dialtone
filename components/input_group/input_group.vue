@@ -25,11 +25,14 @@
 
 <script>
 import { InputGroupMixin } from '../mixins/input_group';
+import { HsValidationMessages } from '../validation_messages';
 
 export default {
   name: 'HsInputGroup',
 
   mixins: [InputGroupMixin],
+
+  components: { HsValidationMessages },
 
   props: {
     /**

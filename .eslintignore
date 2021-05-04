@@ -11,3 +11,6 @@ tests/compiled
 
 # ejs files
 **/*.ejs
+
+# builds
+dist
