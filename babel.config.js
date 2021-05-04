@@ -11,6 +11,7 @@ module.exports = {
   plugins: [
     // Installed with @vue/cli-plugin-babel
     '@babel/plugin-proposal-optional-chaining',
-    '@babel/transform-runtime',
+    '@babel/plugin-proposal-nullish-coalescing-operator',
+    ['@babel/transform-runtime', { regenerator: false }],
   ],
 };
