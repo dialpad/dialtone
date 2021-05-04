@@ -59,7 +59,7 @@ import {
   POPOVER_VERTICAL_ALIGNMENT,
 } from './popover_constants';
 import util from '../utils';
-import clickOutside from '../../node_modules/v-click-outside';
+import clickOutside from 'v-click-outside';
 import Modal from '../mixins/modal.js';
 
 export default {

@@ -84,9 +84,7 @@ module.exports = (_env, _argv) => {
 
     resolve: {
       extensions: ['.js', '.vue'],
-      alias: {
-        '@dialpad/dialtone': path.resolve(__dirname, '..', 'node_modules', '@dialpad', 'dialtone', 'lib', 'dist'),
-      },
+      alias: {},
     },
 
     plugins: [
