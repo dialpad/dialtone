@@ -2,10 +2,8 @@
   "name": "dialtone-vue",
   "version": "1.0.0",
   "description": "Vue component library for Dialtone components",
-  "main": "index.js",
-  "files": [
-    "/components"
-  ],
+  "files": ["dist/*"],
+  "main": "./dist/dialtone-vue.common.js",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
