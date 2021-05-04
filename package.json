@@ -4,7 +4,7 @@
   "description": "Vue component library for Dialtone components",
   "repository":"https://github.com/dialpad/dialtone-vue",
   "files": [
-    "dist"
+    "dist/*.js"
   ],
   "main": "./dist/dialtone-vue.common.js",
   "scripts": {
