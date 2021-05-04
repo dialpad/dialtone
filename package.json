@@ -1,5 +1,5 @@
 {
-  "name": "dialtone-vue",
+  "name": "@dialpad/dialtone-vue",
   "version": "1.0.0-beta.1",
   "description": "Vue component library for Dialtone components",
   "repository": "https://github.com/dialpad/dialtone-vue",
@@ -11,6 +11,7 @@
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
     "deploy:npm": "npm pack",
     "deploy": "run-s build deploy:npm",
+    "prepublishOnly": "npm run build",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
     "lint:code": "esplint ./",
@@ -67,7 +68,6 @@
     "@dialpad/dialtone": "6.0.0-beta.2",
     "vue": "^2.6.11"
   },
-  "private": true,
   "engineStrict": true,
   "engines": {
     "node": ">= 14"
