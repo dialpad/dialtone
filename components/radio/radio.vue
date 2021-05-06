@@ -39,7 +39,7 @@
           :show-messages="showMessages"
           :class="messagesClass"
           v-bind="messagesChildProps"
-          data-qa="hs-radio-messages"
+          data-qa="hs-radio-validation-messages"
         />
       </div>
     </div>

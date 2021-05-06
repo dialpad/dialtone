@@ -1,6 +1,6 @@
 <template>
   <label>
-    <div :class="internalDisabled ? 'd-checkbox-group--disabled' : 'd-checkbox-group'">
+    <div :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
       <div class="d-checkbox__input">
         <input
           type="checkbox"
@@ -34,6 +34,13 @@
           <!-- @slot slot for Checkbox Description -->
           <slot name="description">{{ description }}</slot>
         </div>
+        <hs-validation-messages
+          :validation-messages="formattedMessages"
+          :show-messages="showMessages"
+          :class="messagesClass"
+          v-bind="messagesChildProps"
+          data-qa="hs-checkbox-validation-messages"
+        />
       </div>
     </div>
   </label>
@@ -45,13 +52,17 @@ import {
   InputMixin,
   CheckableMixin,
   GroupableMixin,
+  MessagesMixin,
 } from '../mixins/input.js';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES, CHECKBOX_DESCRIPTION_VALIDATION_CLASSES } from './checkbox_constants';
+import { HsValidationMessages } from '../validation_messages';
 
 export default {
   name: 'HsCheckbox',
 
-  mixins: [InputMixin, CheckableMixin, GroupableMixin],
+  components: { HsValidationMessages },
+
+  mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 
   inheritAttrs: false,
 

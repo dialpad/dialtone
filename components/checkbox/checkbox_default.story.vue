@@ -12,6 +12,7 @@
     :description-class="descriptionClass"
     :label-child-props="labelChildProps"
     :description-child-props="descriptionChildProps"
+    :messages="messages"
     @input="onInput"
   >
     <template v-if="defaultSlot">

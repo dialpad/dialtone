@@ -171,14 +171,29 @@
       checked
     />
     <!-- Checked and Disabled With Description -->
+
+    <!-- Checked and With Description and Success validation message -->
+    <hs-checkbox
+      name="checked-disabled-with-description"
+      value="Value"
+      label="Checked Disabled"
+      description="With Description"
+      :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+      checked
+    />
+    <!-- Checked and Disabled With Description -->
   </div>
 </template>
 
 <script>
 import HsCheckbox from './checkbox';
+import { VALIDATION_MESSAGE_TYPES } from '../constants';
 
 export default {
   name: 'CheckboxVariants',
   components: { HsCheckbox },
+  created () {
+    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
+  },
 };
 </script>
