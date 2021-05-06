@@ -80,18 +80,19 @@
 
 <script>
 import { INPUT_TYPES, INPUT_SIZE_TYPES } from './input_constants.js';
-import { validationMessageValidator } from '../validators';
 import {
   getUniqueString,
-  formatMessages,
   getValidationState,
 } from '../utils';
 import { HsValidationMessages } from '../validation_messages';
+import { MessagesMixin } from '../mixins/input.js';
 
 export default {
   name: 'HsInput',
 
   components: { HsValidationMessages },
+
+  mixins: [MessagesMixin],
 
   inheritAttrs: false,
 
@@ -147,45 +148,12 @@ export default {
     },
 
     /**
-     * Validation messages
-     */
-    messages: {
-      type: Array,
-      default: () => [],
-      validator: messages => validationMessageValidator(messages),
-    },
-
-    /**
-     * Used to hide / show the validation messages
-     */
-    showMessages: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
      * Size of the input, one of `xs`, `sm`, `''`, `lg`, `xl`
      */
     size: {
       type: String,
       default: '',
       validator: (t) => Object.values(INPUT_SIZE_TYPES).includes(t),
-    },
-
-    /**
-     * Used to customize the the validation messages component
-     */
-    messagesClass: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * A set of props that are passed into the validation messages component
-     */
-    messagesChildProps: {
-      type: Object,
-      default: () => ({}),
     },
   },
 
@@ -219,10 +187,6 @@ export default {
 
     descriptionKey () {
       return `input-description-${getUniqueString()}`;
-    },
-
-    formattedMessages () {
-      return formatMessages(this.messages);
     },
 
     inputState () {
@@ -299,8 +263,9 @@ export default {
   },
 };
 </script>
+
 <style lang="less">
 .base-input .base-button__icon {
-  margin: 0px;
+  margin: 0;
 }
 </style>

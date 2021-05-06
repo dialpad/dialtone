@@ -171,16 +171,31 @@
       disabled
     />
     <!-- Disabled and Checked With Description -->
+
+    <!-- Checked Success With Messages -->
+    <hs-radio
+      name="ValidationMessageSuccess"
+      value="Validation Message Success"
+      label="Validation Message Success"
+      validation-state="success"
+      :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+      checked
+    />
+    <!-- Checked With Messages -->
   </div>
 </template>
 
 <script>
 import HsRadio from './radio';
 import fixDefaultSlot from '../plugins/fixDefaultSlot';
+import { VALIDATION_MESSAGE_TYPES } from '../constants';
 
 export default {
   name: 'RadioVariants',
   components: { HsRadio },
   mixins: [fixDefaultSlot],
+  created () {
+    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
+  },
 };
 </script>

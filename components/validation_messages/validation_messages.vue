@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="showMessages"
+    v-if="showMessages && !isFilteredValidationMessagesEmpty"
     :class="['base-input__messages', 'd-margin-top4']"
     data-qa="validation-messages-container"
   >
@@ -10,7 +10,7 @@
       role="status"
       aria-live="polite"
       data-qa="validation-message"
-      :class="['base-input__message', 'd-input-message', `base-input__message--${type}`, `d-input-message--${type}`]"
+      :class="['base-input__message', 'd-validation-message', `base-input__message--${type}`, `d-validation-message--${type}`]"
     >
       {{ message }}
     </div>
@@ -30,7 +30,7 @@ export default {
 
   props: {
     /**
-     * The id of the radio group
+     * The id of the validation message
      */
     id: {
       type: String,
@@ -59,6 +59,10 @@ export default {
   },
 
   computed: {
+    isFilteredValidationMessagesEmpty () {
+      return this.filteredValidationMessages.length === 0;
+    },
+
     filteredValidationMessages () {
       return filterFormattedMessages(this.validationMessages);
     },
@@ -70,7 +74,7 @@ export default {
 
   methods: {
     getMessageKey (type, index) {
-      return `radio-group-message-${type}-${index}-${this.id}`;
+      return `validation-message-${type}-${index}-${this.id}`;
     },
   },
 };

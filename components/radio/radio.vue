@@ -1,6 +1,6 @@
 <template>
   <label>
-    <div :class="internalDisabled ? 'd-radio-group--disabled' : 'd-radio-group'">
+    <div :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
       <div class="d-radio__input">
         <input
           :checked="internalChecked"
@@ -34,6 +34,13 @@
           <!-- @slot slot for Radio Description -->
           <slot name="description">{{ description }}</slot>
         </div>
+        <hs-validation-messages
+          :validation-messages="formattedMessages"
+          :show-messages="showMessages"
+          :class="messagesClass"
+          v-bind="messagesChildProps"
+          data-qa="hs-radio-messages"
+        />
       </div>
     </div>
   </label>
@@ -44,13 +51,17 @@ import {
   InputMixin,
   CheckableMixin,
   GroupableMixin,
+  MessagesMixin,
 } from '../mixins/input.js';
 import { RADIO_INPUT_VALIDATION_CLASSES, RADIO_DESCRIPTION_VALIDATION_CLASSES } from './radio_constants';
+import { HsValidationMessages } from '../validation_messages';
 
 export default {
   name: 'HsRadio',
 
-  mixins: [InputMixin, CheckableMixin, GroupableMixin],
+  components: { HsValidationMessages },
+
+  mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 
   inheritAttrs: false,
 

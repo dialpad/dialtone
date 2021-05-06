@@ -147,7 +147,7 @@ describe('Handset Input tests', function () {
 
     describe('When no validation message(s) are provided', function () {
       it('should not render any validation messages', function () {
-        assert.equal(wrapper.findAll('.d-input-message').length, 0);
+        assert.equal(wrapper.findAll('.d-validation-message').length, 0);
       });
       it('should not have an input state', function () { assert.isNull(wrapper.vm.inputState); });
     });
@@ -164,12 +164,12 @@ describe('Handset Input tests', function () {
             { message: errorMessage2, type: 'error' },
           ],
         });
-        assert.equal(wrapper.findAll('.d-input-message').length, 0);
+        assert.equal(wrapper.findAll('.d-validation-message').length, 0);
         assert.equal(wrapper.vm.inputState, 'error', 'message type error present');
 
         await wrapper.setProps({ showMessages: true });
 
-        const inputErrorMessages = wrapper.findAll('.d-input-message--error');
+        const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
         assert.equal(inputErrorMessages.length, 2);
         assert.equal(inputErrorMessages.at(0).text(), errorMessage1);
         assert.equal(inputErrorMessages.at(1).text(), errorMessage2);
@@ -187,8 +187,8 @@ describe('Handset Input tests', function () {
         });
         assert.equal(wrapper.vm.inputState, 'error', 'message type error present');
 
-        const inputMessages = wrapper.findAll('.d-input-message');
-        const inputErrorMessages = wrapper.findAll('.d-input-message--error');
+        const inputMessages = wrapper.findAll('.d-validation-message');
+        const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
         assert.equal(inputMessages.length, 1);
         assert.equal(inputErrorMessages.length, 1);
         assert.equal(inputErrorMessages.at(0).text(), strErrorMessage);
@@ -205,8 +205,8 @@ describe('Handset Input tests', function () {
         });
         assert.equal(wrapper.vm.inputState, 'warning', 'message type warning present');
 
-        const inputMessages = wrapper.findAll('.d-input-message');
-        const inputWarningMessages = wrapper.findAll('.d-input-message--warning');
+        const inputMessages = wrapper.findAll('.d-validation-message');
+        const inputWarningMessages = wrapper.findAll('.d-validation-message--warning');
         assert.equal(inputMessages.length, 1);
         assert.equal(inputWarningMessages.length, 1);
         assert.equal(inputWarningMessages.at(0).text(), warningMessage);
@@ -224,8 +224,8 @@ describe('Handset Input tests', function () {
         });
         assert.equal(wrapper.vm.inputState, 'success', 'message type success present');
 
-        const inputMessages = wrapper.findAll('.d-input-message');
-        const inputSuccessMessages = wrapper.findAll('.d-input-message--success');
+        const inputMessages = wrapper.findAll('.d-validation-message');
+        const inputSuccessMessages = wrapper.findAll('.d-validation-message--success');
         assert.equal(inputMessages.length, 2);
         assert.equal(inputSuccessMessages.length, 2);
         assert.equal(inputSuccessMessages.at(0).text(), successMessage1);
