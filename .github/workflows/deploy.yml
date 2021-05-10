@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ release ]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    env:
+      NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: Install Vue CLI
+        run: npm install -g @vue/cli
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Run Linters
+        run: npm run lint
+
+      - name: Deploy package
+        run: npm run deploy
