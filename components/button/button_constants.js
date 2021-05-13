@@ -25,6 +25,8 @@ export const ICON_POSITION_MODIFIERS = {
   right: 'd-btn__icon--right',
 };
 
+// TODO: Use LINK_KIND_MODIFIERS from the link component
+// rather than this one once it gets merged in.
 export const LINK_KIND_MODIFIERS = {
   default: 'd-link',
   warning: 'd-link--warning',
