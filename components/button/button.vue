@@ -293,7 +293,8 @@ export default {
     if (process.env.NODE_ENV === 'production') return;
 
     if (this.isUnsupportedCircleButton()) {
-      Vue.util.warn('Unsupported button: primary d-btn--circle and outlined d-btn--circle--danger are not supported.', this);
+      Vue.util.warn(`Unsupported button: primary \
+d-btn--circle and outlined d-btn--circle--danger are not supported.`, this);
     }
     if (this.isUnsupportedInvertedLink()) {
       Vue.util.warn('Unsupported link: inverted link is neither d-link--inverted nor d-link--inverted--danger.', this);
