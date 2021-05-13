@@ -1,7 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { assert } from 'chai';
 import sinon from 'sinon';
-import BaseButton from './button.vue';
+import DtButton from './button.vue';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 
 describe('Dialtone Vue Button tests', function () {
@@ -14,8 +14,8 @@ describe('Dialtone Vue Button tests', function () {
   let propsData;
 
   const _setElements = function () {
-    button = wrapper.find('.base-button__button');
-    icon = wrapper.find('.base-button__icon');
+    button = wrapper.find('[data-qa="dt-button"]');
+    icon = wrapper.find('[data-qa="dt-button-icon"]');
   };
 
   const _assertButtonDefaultClasses = function () {
@@ -31,7 +31,7 @@ describe('Dialtone Vue Button tests', function () {
     describe('When rendered with default props', function () {
       beforeEach(function () {
         propsData = {};
-        wrapper = shallowMount(BaseButton, { propsData, localVue: this.localVue });
+        wrapper = shallowMount(DtButton, { propsData, localVue: this.localVue });
         _setElements();
       });
 
@@ -217,7 +217,7 @@ describe('Dialtone Vue Button tests', function () {
     describe('With icon slot populated', function () {
       beforeEach(function () {
         propsData = {};
-        wrapper = shallowMount(BaseButton, {
+        wrapper = shallowMount(DtButton, {
           propsData,
           slots: {
             icon: EmptyComponentFixture,
@@ -243,7 +243,7 @@ describe('Dialtone Vue Button tests', function () {
     describe('When default slot is populated with text', function () {
       beforeEach(function () {
         propsData = {};
-        wrapper = shallowMount(BaseButton, {
+        wrapper = shallowMount(DtButton, {
           propsData,
           slots: {
             default: 'hello',
@@ -264,7 +264,7 @@ describe('Dialtone Vue Button tests', function () {
       buttonStub = sinon.stub();
       listeners = { click: buttonStub };
       propsData = {};
-      wrapper = shallowMount(BaseButton, {
+      wrapper = shallowMount(DtButton, {
         listeners,
         propsData,
         slots: {
@@ -292,7 +292,7 @@ describe('Dialtone Vue Button tests', function () {
 
   describe('Accessibility Tests', function () {
     beforeEach(function () {
-      wrapper = shallowMount(BaseButton, {
+      wrapper = shallowMount(DtButton, {
         listeners,
         propsData,
         localVue: this.localVue,
