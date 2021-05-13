@@ -17,6 +17,10 @@ module.exports = {
       allow: ['^opt_'], // Allow opt_varname arguments.
     }],
     'comma-dangle': ['error', 'always-multiline'],
+    'max-len': ['error', {
+      code: 120,
+      tabWidth: 2,
+    }],
     'prefer-promise-reject-errors': ['error', {
       allowEmptyReject: true,
     }],
@@ -59,6 +63,7 @@ module.exports = {
     'vue/no-static-inline-styles': ['error'],
 
     'max-lines': ['error', { max: 300, skipBlankLines: true, skipComments: true }],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
     complexity: ['warn', 5],
 
     //             Vue core extensions

@@ -29,7 +29,13 @@
       :transition="transition"
       :show="open"
       :class="[
-        'd-border d-border-color--ash-dark d-border-radius--sm d-bgc-white d-box-shadow--md d-mt4 d-p-absolute d-z-index--popover',
+        'd-border',
+        'd-border-color--ash-dark',
+        'd-border-radius--sm',
+        'd-bgc-white d-box-shadow--md',
+        'd-mt4',
+        'd-p-absolute',
+        'd-z-index--popover',
         'hs-popover__content',
         `hs-popover__content--align-${alignment}`,
         `hs-popover__content--valign-${verticalAlignment}`,

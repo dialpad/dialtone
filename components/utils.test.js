@@ -43,8 +43,12 @@ describe('Util Tests', function () {
 
     it('should return a string', function () { assert.exists(getUniqueString()); });
     it('should return a unique string', function () { assert.notStrictEqual(getUniqueString(), getUniqueString()); });
-    it('should have default prefix', function () { assert.strictEqual(getUniqueString().includes(DEFAULT_PREFIX), true); });
-    it('should use provided prefix', function () { assert.strictEqual(getUniqueString(prefix).includes(prefix), true); });
+    it('should have default prefix', function () {
+      assert.strictEqual(getUniqueString().includes(DEFAULT_PREFIX), true);
+    });
+    it('should use provided prefix', function () {
+      assert.strictEqual(getUniqueString(prefix).includes(prefix), true);
+    });
   });
 
   describe('formatMessages', function () {
@@ -229,15 +233,21 @@ describe('Util Tests', function () {
     });
 
     describe('when formatted message list is undefined', function () {
-      it('should return false', function () { assert.strictEqual(hasFormattedMessageOfType(undefined, VALIDATION_MESSAGE_TYPES.ERROR), false); });
+      it('should return false', function () {
+        assert.strictEqual(hasFormattedMessageOfType(undefined, VALIDATION_MESSAGE_TYPES.ERROR), false);
+      });
     });
 
     describe('when formatted message list is null', function () {
-      it('should return false', function () { assert.strictEqual(hasFormattedMessageOfType(null, VALIDATION_MESSAGE_TYPES.ERROR), false); });
+      it('should return false', function () {
+        assert.strictEqual(hasFormattedMessageOfType(null, VALIDATION_MESSAGE_TYPES.ERROR), false);
+      });
     });
 
     describe('when the formatted message list is empty', function () {
-      it('should return false', function () { assert.strictEqual(hasFormattedMessageOfType([], VALIDATION_MESSAGE_TYPES.ERROR), false); });
+      it('should return false', function () {
+        assert.strictEqual(hasFormattedMessageOfType([], VALIDATION_MESSAGE_TYPES.ERROR), false);
+      });
     });
 
     describe('when there is a formatted message list', function () {
@@ -247,19 +257,27 @@ describe('Util Tests', function () {
       });
 
       describe('when there is no given type', function () {
-        it('should return false', function () { assert.strictEqual(hasFormattedMessageOfType(formattedMessages), false); });
+        it('should return false', function () {
+          assert.strictEqual(hasFormattedMessageOfType(formattedMessages), false);
+        });
       });
 
       describe('when there is an undefined given type', function () {
-        it('should return false', function () { assert.strictEqual(hasFormattedMessageOfType(formattedMessages, undefined), false); });
+        it('should return false', function () {
+          assert.strictEqual(hasFormattedMessageOfType(formattedMessages, undefined), false);
+        });
       });
 
       describe('when there is a null given type', function () {
-        it('should return false', function () { assert.strictEqual(hasFormattedMessageOfType(formattedMessages, null), false); });
+        it('should return false', function () {
+          assert.strictEqual(hasFormattedMessageOfType(formattedMessages, null), false);
+        });
       });
 
       describe('when there is an empty given type', function () {
-        it('should return false', function () { assert.strictEqual(hasFormattedMessageOfType(formattedMessages, ''), false); });
+        it('should return false', function () {
+          assert.strictEqual(hasFormattedMessageOfType(formattedMessages, ''), false);
+        });
       });
 
       describe('when there is no formatted message of the given type', function () {
@@ -283,7 +301,9 @@ describe('Util Tests', function () {
     });
 
     describe('when all message types are SUCCESS', function () {
-      it('should return SUCCESS', function () { assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.SUCCESS); });
+      it('should return SUCCESS', function () {
+        assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.SUCCESS);
+      });
     });
 
     describe('when there is a WARNING message type', function () {
@@ -292,7 +312,9 @@ describe('Util Tests', function () {
         _addFormattedMessage(VALIDATION_MESSAGE_TYPES.WARNING);
       });
 
-      it('should return WARNING', function () { assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.WARNING); });
+      it('should return WARNING', function () {
+        assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.WARNING);
+      });
     });
 
     describe('when there is an ERROR message type', function () {
@@ -302,7 +324,9 @@ describe('Util Tests', function () {
         _addFormattedMessage(VALIDATION_MESSAGE_TYPES.ERROR);
       });
 
-      it('should return ERROR', function () { assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.ERROR); });
+      it('should return ERROR', function () {
+        assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.ERROR);
+      });
     });
   });
 });

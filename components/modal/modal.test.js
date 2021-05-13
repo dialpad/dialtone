@@ -84,7 +84,8 @@ describe('Handset Modal Tests', function () {
     assert.equal(closeBtn.attributes(labelProp), newAriaLabel);
   });
 
-  it('Should emit a sync-able update event when overlay / close-icon are clicked, or escape key is pressed', async function () {
+  it('Should emit a sync-able update event when overlay / close-icon are clicked' +
+     ', or escape key is pressed', async function () {
     const syncEvent = 'update:show';
     assert.isEmpty(wrapper.emitted());
 

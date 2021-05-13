@@ -10,7 +10,12 @@
       role="status"
       aria-live="polite"
       data-qa="validation-message"
-      :class="['base-input__message', 'd-validation-message', `base-input__message--${type}`, `d-validation-message--${type}`]"
+      :class="[
+        'base-input__message',
+        'd-validation-message',
+        `base-input__message--${type}`,
+        `d-validation-message--${type}`,
+      ]"
     >
       {{ message }}
     </div>
