@@ -16,7 +16,6 @@ describe('Dialtone Vue Button tests', function () {
   const _setElements = function () {
     button = wrapper.find('.base-button__button');
     icon = wrapper.find('.base-button__icon');
-    label = wrapper.find('.base-button__label');
   };
 
   const _assertButtonDefaultClasses = function () {
