@@ -206,7 +206,9 @@ describe('Handset Radio Tests', function () {
           _setSlotContainers();
         });
 
-        it('should have slotted description', function () { assert.strictEqual(descriptionSlotContainer.text(), slotDescription); });
+        it('should have slotted description', function () {
+          assert.strictEqual(descriptionSlotContainer.text(), slotDescription);
+        });
       });
 
       describe('When slotted label and description are provided', function () {
@@ -218,7 +220,9 @@ describe('Handset Radio Tests', function () {
         });
 
         it('should have slotted label', function () { assert.strictEqual(labelSlotContainer.text(), slotLabel); });
-        it('should have slotted description', function () { assert.strictEqual(descriptionSlotContainer.text(), slotDescription); });
+        it('should have slotted description', function () {
+          assert.strictEqual(descriptionSlotContainer.text(), slotDescription);
+        });
       });
     });
 
@@ -310,7 +314,9 @@ describe('Handset Radio Tests', function () {
         // Test Setup
         beforeEach(function () { input.trigger('click'); });
 
-        it('should emit the input event with Value', function () { itBehavesLikeEmitsExpectedEvent(wrapper, 'input', value); });
+        it('should emit the input event with Value', function () {
+          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', value);
+        });
       });
     });
 

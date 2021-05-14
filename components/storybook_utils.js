@@ -32,8 +32,10 @@ export function getIconNames () {
 
 /**
  * Extracts filename and component name from all files in a directory.
- * @param {object} requireContext - a requireContext containing the path of the directory you would like to read files from
- * @returns {{fileName: string, componentName: string}} object containing both the filename and component name in PascalCase.
+ * @param {object} requireContext - a requireContext containing the path of the
+ * directory you would like to read files from
+ * @returns {{fileName: string, componentName: string}} object containing both the
+ * filename and component name in PascalCase.
  */
 export const getComponentFilesFromDir = (requireContext) => {
   const files = [];
@@ -46,7 +48,8 @@ export const getComponentFilesFromDir = (requireContext) => {
   return files;
 };
 
-export const generateTemplate = (component, { props = [], excludeProps = [], customProps = [], childTemplate } = {}) => {
+export const generateTemplate = (component,
+  { props = [], excludeProps = [], customProps = [], childTemplate } = {}) => {
   if (!component) {
     console.warn('Generate template: Please provide a component');
     return '';

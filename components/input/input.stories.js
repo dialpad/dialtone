@@ -39,7 +39,7 @@ export const argTypesData = {
     table: {
       category: 'native props',
       defaultValue: {
-        summary: "''",
+        summary: '\'\'',
       },
     },
     control: 'text',

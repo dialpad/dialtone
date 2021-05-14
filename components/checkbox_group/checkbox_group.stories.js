@@ -125,8 +125,12 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, CheckboxGroupDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, CheckboxGroupVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) => {
+  createTemplateFromVueFile(args, argTypes, CheckboxGroupDefaultTemplate);
+};
+const VariantsTemplate = (args, { argTypes }) => {
+  createTemplateFromVueFile(args, argTypes, CheckboxGroupVariantsTemplate);
+};
 
 // Stories
 export const Default = DefaultTemplate.bind({});

@@ -20,7 +20,7 @@ export const argTypesData = {
     table: {
       category: 'slot data',
       defaultValue: {
-        summary: "'Button'",
+        summary: '\'Button\'',
       },
       type: {
         summary: 'node',
@@ -177,7 +177,8 @@ const Template = (_args, { argTypes }) => {
   };
 };
 
-const invertedTemplate = '<div class="d-background-color--slate-light d-border-radius--md d-p16 d-flow16"><story /></div>';
+const invertedTemplate = `<div class="d-background-color--slate-light \
+d-border-radius--md d-p16 d-flow16"><story /></div>`;
 
 export const Default = Template.bind({});
 
