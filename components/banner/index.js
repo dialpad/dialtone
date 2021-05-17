@@ -1,1 +1,1 @@
-export { default as HsBanner } from './banner.vue';
+export { default as DtBanner } from './banner.vue';

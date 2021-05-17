@@ -5,7 +5,7 @@
 ```js
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import HsMyComponent from './my_component.vue';
+import DtMyComponent from './my_component.vue';
 
 // Constants
 const basePropsData = {};
@@ -27,7 +27,7 @@ describe('My Component Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(HsMyComponent, {
+    wrapper = shallowMount(DtMyComponent, {
       propsData,
       attrs,
       slots,

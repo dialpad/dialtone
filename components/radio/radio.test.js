@@ -19,7 +19,7 @@ import {
   RADIO_INPUT_VALIDATION_CLASSES,
   RADIO_DESCRIPTION_VALIDATION_CLASSES,
 } from './radio_constants';
-import HsRadio from './radio.vue';
+import DtRadio from './radio.vue';
 
 const baseValue = 'Value';
 const basePropsData = {
@@ -27,7 +27,7 @@ const basePropsData = {
   value: baseValue,
 };
 
-describe('Handset Radio Tests', function () {
+describe('Dialtone Vue Radio Tests', function () {
   // Wrappers
   let wrapper;
   let input;
@@ -42,7 +42,7 @@ describe('Handset Radio Tests', function () {
 
   // Helpers
   const _setWrappers = () => {
-    wrapper = shallowMount(HsRadio, {
+    wrapper = shallowMount(DtRadio, {
       propsData,
       slots,
       attrs,

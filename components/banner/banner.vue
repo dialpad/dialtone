@@ -9,14 +9,14 @@
       :aria-labelledby="titleId"
       :aria-describedby="contentId"
     >
-      <hs-notice-icon
+      <dt-notice-icon
         :kind="kind"
         v-on="$listeners"
       >
         <!-- @slot Use a custom icon -->
         <slot name="icon" />
-      </hs-notice-icon>
-      <hs-notice-content
+      </dt-notice-icon>
+      <dt-notice-content
         :title-id="titleId"
         :content-id="contentId"
         :title="title"
@@ -29,34 +29,34 @@
         </template>
         <!-- @slot the main textual content of the banner -->
         <slot />
-      </hs-notice-content>
-      <hs-notice-action
+      </dt-notice-content>
+      <dt-notice-action
         :hide-close="hideClose"
         :close-button-props="closeButtonProps"
         v-on="$listeners"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
         <slot name="action" />
-      </hs-notice-action>
+      </dt-notice-action>
     </div>
   </aside>
 </template>
 
 <script>
-import HsNoticeIcon from '../notice/notice_icon';
-import HsNoticeContent from '../notice/notice_content';
-import HsNoticeAction from '../notice/notice_action';
+import DtNoticeIcon from '../notice/notice_icon';
+import DtNoticeContent from '../notice/notice_content';
+import DtNoticeAction from '../notice/notice_action';
 import { NOTICE_KINDS } from '../notice/notice_constants';
 import Modal from '../mixins/modal.js';
 import util from '../utils';
 
 export default {
-  name: 'HsBanner',
+  name: 'DtBanner',
 
   components: {
-    HsNoticeIcon,
-    HsNoticeContent,
-    HsNoticeAction,
+    DtNoticeIcon,
+    DtNoticeContent,
+    DtNoticeAction,
   },
 
   mixins: [Modal],

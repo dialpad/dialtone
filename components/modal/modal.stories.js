@@ -1,8 +1,8 @@
-import HsModal from './modal.vue';
+import DtModal from './modal.vue';
 import ModalMdx from './modal.mdx';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { generateTemplate } from '../storybook_utils';
-import HsButton from '../button/button';
+import DtButton from '../button/button';
 
 export const argTypesData = {
   // Slots
@@ -76,7 +76,7 @@ orci ipsum et velit.`,
 
 export default {
   title: 'Elements/Modal',
-  component: HsModal,
+  component: DtModal,
   parameters: {
     docs: {
       page: ModalMdx,
@@ -87,30 +87,30 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const modalTemplate = generateTemplate(HsModal, {
+const modalTemplate = generateTemplate(DtModal, {
   customProps: ['class="d-p-static"'],
 });
 const defaultTemplate = (args, { argTypes }) => {
   return {
-    components: { HsModal },
+    components: { DtModal },
     template: modalTemplate,
     props: Object.keys(argTypes),
   };
 };
 export const Default = defaultTemplate.bind({});
 
-const footerTemplate = generateTemplate(HsModal, {
+const footerTemplate = generateTemplate(DtModal, {
   childTemplate: `
     <template #footer>
-      <hs-button :kind="kind" importance="primary">Confirm</hs-button>
-      <hs-button :kind="kind" importance="clear">Cancel</hs-button>
+      <dt-button :kind="kind" importance="primary">Confirm</dt-button>
+      <dt-button :kind="kind" importance="clear">Cancel</dt-button>
     </template>
   `,
   customProps: ['class="d-p-static"'],
 });
 const withFooterTemplate = (args, { argTypes }) => {
   return {
-    components: { HsButton, HsModal },
+    components: { DtButton, DtModal },
     template: footerTemplate,
     props: Object.keys(argTypes),
   };
@@ -123,7 +123,7 @@ WithDangerStyle.args = { kind: 'danger' };
 export const WithFullSize = defaultTemplate.bind({});
 WithFullSize.args = { size: 'full' };
 
-const slotsTemplate = generateTemplate(HsModal, {
+const slotsTemplate = generateTemplate(DtModal, {
   childTemplate: `
     <template #header>
       <div class="d-fl-center d-p12 d-background-color--blue-lighter">
@@ -138,7 +138,7 @@ const slotsTemplate = generateTemplate(HsModal, {
 });
 const withCustomHeaderAndContentTemplate = (args, { argTypes }) => {
   return {
-    components: { HsButton, HsModal },
+    components: { DtButton, DtModal },
     template: slotsTemplate,
     props: Object.keys(argTypes),
   };

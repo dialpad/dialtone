@@ -1,1 +1,1 @@
-export { default as HsListSection } from './list_section.vue';
+export { default as DtListSection } from './list_section.vue';

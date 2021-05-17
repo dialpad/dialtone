@@ -1,5 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import HsCheckbox from './checkbox';
+import DtCheckbox from './checkbox';
 
 # Checkbox
 
@@ -25,20 +25,20 @@ used with a description which describes the option.
 
 ## Props
 
-<ArgsTable of={HsCheckbox} />
+<ArgsTable of={DtCheckbox} />
 
 ## Usage
 
 ### Import
 
 ```jsx
-import { HsCheckbox, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
+import { DtCheckbox, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 ```
 
 ### With Label Prop
 
 ```jsx
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
   label="My Label"
 />
@@ -47,7 +47,7 @@ import { HsCheckbox, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
 ### With Label and Description Props
 
 ```jsx
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
   label="My Label"
   description="My Description"
@@ -57,43 +57,43 @@ import { HsCheckbox, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
 ### With Slotted Label
 
 ```jsx
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
 >
   My Label
-</hs-checkbox>
+</dt-checkbox>
 ```
 
 ### With Slotted Description
 
 ```html
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
   label="My Label"
 >
   <template #description>
     My Description
   </template>
-</hs-checkbox>
+</dt-checkbox>
 ```
 
 ### With Slotted Label and Description
 
 ```html
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
 >
   My Label
   <template #description>
     My Description
   </template>
-</hs-checkbox>
+</dt-checkbox>
 ```
 
 ### Checked
 
 ```jsx
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
   label="My Label"
   checked
@@ -103,7 +103,7 @@ import { HsCheckbox, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
 ### Disabled
 
 ```jsx
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
   label="My Label"
   disabled
@@ -115,7 +115,7 @@ import { HsCheckbox, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
 <h4 style={{ color: 'green' }}>Success</h4>
 
 ```html
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
   label="My Label"
   :validation-state="VALIDATION_MESSAGE_TYPES.SUCCESS"
@@ -125,7 +125,7 @@ import { HsCheckbox, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
 <h4 style={{ color: 'Goldenrod' }}>Warning</h4>
 
 ```html
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
   label="My Label"
   :validation-state="VALIDATION_MESSAGE_TYPES.WARNING"
@@ -135,7 +135,7 @@ import { HsCheckbox, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
 <h4 style={{ color: 'red' }}>Error</h4>
 
 ```html
-<hs-checkbox
+<dt-checkbox
   value="optionValue"
   label="My Label"
   :validation-state="VALIDATION_MESSAGE_TYPES.ERROR"

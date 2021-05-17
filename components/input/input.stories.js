@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
-import HsInput from './input';
+import DtInput from './input';
 import InputMdx from './input.mdx';
 import InputDefault from './input_default.story.vue';
 
@@ -11,14 +11,14 @@ export const argTypesData = {
     control: 'text',
   },
   type: {
-    defaultValue: HsInput.props.type.default,
+    defaultValue: DtInput.props.type.default,
     control: {
       type: 'select',
       options: ['text', 'textarea', 'password', 'email', 'number'],
     },
     table: {
       defaultValue: {
-        summary: HsInput.props.type.default,
+        summary: DtInput.props.type.default,
       },
     },
   },
@@ -118,7 +118,7 @@ const decorator = () => ({
 
 export default {
   title: 'Forms/Input',
-  component: HsInput,
+  component: DtInput,
   parameters: {
     docs: {
       page: InputMdx,
@@ -136,7 +136,7 @@ export const Default = Template.bind({});
 Default.parameters = {
   docs: {
     source: {
-      code: '<hs-input label="Label" />',
+      code: '<dt-input label="Label" />',
     },
   },
 };
@@ -160,7 +160,7 @@ WithWarn.args = {
 WithWarn.parameters = {
   docs: {
     source: {
-      code: '<hs-input :messages="[{ message: \'This is a warning message\', type: \'warning\' }]" />',
+      code: '<dt-input :messages="[{ message: \'This is a warning message\', type: \'warning\' }]" />',
     },
   },
 };
@@ -172,7 +172,7 @@ WithError.args = {
 WithError.parameters = {
   docs: {
     source: {
-      code: '<hs-input :messages="[{ message: \'This is an error message\', type: \'error\' }]" />',
+      code: '<dt-input :messages="[{ message: \'This is an error message\', type: \'error\' }]" />',
     },
   },
 };
@@ -184,7 +184,7 @@ WithSuccess.args = {
 WithSuccess.parameters = {
   docs: {
     source: {
-      code: '<hs-input :messages="[{ message: \'This is a success message\', type: \'success\' }]" />',
+      code: '<dt-input :messages="[{ message: \'This is a success message\', type: \'success\' }]" />',
     },
   },
 };

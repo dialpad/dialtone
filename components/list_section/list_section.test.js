@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
-import HsListSection from './list_section.vue';
+import DtListSection from './list_section.vue';
 
 // Constants
 const basePropsData = {
@@ -25,7 +25,7 @@ describe('ListSection tests', function () {
   let showMoreLessButton;
 
   const _setWrappers = () => {
-    wrapper = mount(HsListSection, {
+    wrapper = mount(DtListSection, {
       propsData: propsData,
       slots: slotsData,
       localVue: this.localVue,

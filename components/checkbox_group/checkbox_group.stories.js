@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import HsCheckboxGroup from './checkbox_group';
+import DtCheckboxGroup from './checkbox_group';
 import CheckboxGroupMdx from './checkbox_group.mdx';
 import CheckboxGroupDefaultTemplate from './checkbox_group_default.story.vue';
 import CheckboxGroupVariantsTemplate from './checkbox_group_variants.story.vue';
@@ -113,7 +113,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Forms/Checkbox Group',
-  component: HsCheckboxGroup,
+  component: DtCheckboxGroup,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

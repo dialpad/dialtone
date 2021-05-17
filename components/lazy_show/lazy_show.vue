@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'HsLazyShow',
+  name: 'DtLazyShow',
 
   /******************
    *     PROPS      *

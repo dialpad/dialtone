@@ -1,7 +1,7 @@
 <template>
   <div id="forms-radio--variants-container">
     <!-- Default -->
-    <hs-radio
+    <dt-radio
       name="Value"
       value="Value"
       label="Default"
@@ -9,7 +9,7 @@
     <!-- Default -->
 
     <!-- With Description -->
-    <hs-radio
+    <dt-radio
       name="ValueWDesc"
       value="Value"
       label="With"
@@ -18,16 +18,16 @@
     <!-- With Description -->
 
     <!-- With Slotted Label -->
-    <hs-radio
+    <dt-radio
       name="ValueWSlot"
       value="Value"
     >
       With Slotted Label
-    </hs-radio>
+    </dt-radio>
     <!-- With Slotted Label -->
 
     <!-- With Slotted Description -->
-    <hs-radio
+    <dt-radio
       name="ValueWSlottedDescription"
       value="Value"
       label="With"
@@ -35,11 +35,11 @@
       <template #description>
         Slotted Description
       </template>
-    </hs-radio>
+    </dt-radio>
     <!-- With Slotted Description -->
 
     <!-- With Slotted Label and Description -->
-    <hs-radio
+    <dt-radio
       name="ValueWSlottedLabelAndDescription"
       value="Value"
     >
@@ -47,11 +47,11 @@
       <template #description>
         And Slotted Description
       </template>
-    </hs-radio>
+    </dt-radio>
     <!-- With Slotted Label and Description -->
 
     <!-- Checked -->
-    <hs-radio
+    <dt-radio
       name="Checked"
       value="Checked"
       label="Checked"
@@ -60,7 +60,7 @@
     <!-- Checked -->
 
     <!-- Checked With Description -->
-    <hs-radio
+    <dt-radio
       name="CheckedWDesc"
       value="Checked"
       label="Checked"
@@ -70,7 +70,7 @@
     <!-- Checked With Description -->
 
     <!-- Success With Description -->
-    <hs-radio
+    <dt-radio
       name="Success"
       value="Validation"
       label="Success"
@@ -80,7 +80,7 @@
     <!-- Success With Description -->
 
     <!-- Warning With Description -->
-    <hs-radio
+    <dt-radio
       name="Warning"
       value="Validation"
       label="Warning"
@@ -90,7 +90,7 @@
     <!-- Warning With Description -->
 
     <!-- Error With Description -->
-    <hs-radio
+    <dt-radio
       name="Error"
       value="Validation"
       label="Error"
@@ -100,7 +100,7 @@
     <!-- Error With Description -->
 
     <!-- Checked Warning With Description -->
-    <hs-radio
+    <dt-radio
       name="WarningChecked"
       value="Validation"
       label="Warning"
@@ -111,7 +111,7 @@
     <!-- Checked Warning With Description -->
 
     <!-- Checked Error With Description -->
-    <hs-radio
+    <dt-radio
       name="ErrorChecked"
       value="Validation"
       label="Error"
@@ -122,7 +122,7 @@
     <!-- Checked Error With Description -->
 
     <!-- Checked Success With Description -->
-    <hs-radio
+    <dt-radio
       name="SuccessChecked"
       value="Validation"
       label="Success"
@@ -133,7 +133,7 @@
     <!-- Checked Success With Description -->
 
     <!-- Disabled -->
-    <hs-radio
+    <dt-radio
       name="Disabled"
       value="Disabled"
       label="Disabled"
@@ -142,7 +142,7 @@
     <!-- Disabled -->
 
     <!-- Disabled With Description -->
-    <hs-radio
+    <dt-radio
       name="DisabledWDesc"
       value="Disabled"
       label="Disabled"
@@ -152,7 +152,7 @@
     <!-- Disabled With Description -->
 
     <!-- Disabled and Checked -->
-    <hs-radio
+    <dt-radio
       name="CheckedDisabled"
       value="Checked"
       label="Disabled & Checked"
@@ -162,7 +162,7 @@
     <!-- Disabled and Checked -->
 
     <!-- Disabled and Checked With Description -->
-    <hs-radio
+    <dt-radio
       name="CheckedDisabledWDesc"
       value="Checked"
       label="Disabled & Checked"
@@ -173,7 +173,7 @@
     <!-- Disabled and Checked With Description -->
 
     <!-- Checked Success With Messages -->
-    <hs-radio
+    <dt-radio
       name="ValidationMessageSuccess"
       value="Validation Message Success"
       label="Validation Message Success"
@@ -186,13 +186,13 @@
 </template>
 
 <script>
-import HsRadio from './radio';
+import DtRadio from './radio';
 import fixDefaultSlot from '../plugins/fixDefaultSlot';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
 
 export default {
   name: 'RadioVariants',
-  components: { HsRadio },
+  components: { DtRadio },
   mixins: [fixDefaultSlot],
   created () {
     this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;

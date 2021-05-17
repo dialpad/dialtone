@@ -2,19 +2,20 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 
 <Meta title="Docs/Component Driven Development/Yeoman Generator" />
 
-# Handset Yeoman Generator
+# Dialtone Vue Yeoman Generator
 
 ## Usage
 
-We can use the Handset [Yeoman](https://yeoman.io/) Generator to initialize a new component within the Handset project.
+We can use the Dialtone Vue [Yeoman](https://yeoman.io/) Generator to initialize a new component within the Dialtone Vue
+project.
 
 ```bash
-# From Handset root directory
-npx yo handset
+# From Dialtone Vue root directory
+npx yo dialtone-vue
 ```
 
 After running the command above you will be prompted for the name of the new component that you would like to create. It
-is recommended that the name has the following format `HsMyComponent`.
+is recommended that the name has the following format `DtMyComponent`.
 
 The generator will then display all of the files that have been initialized.
 
@@ -22,17 +23,17 @@ The generator will then display all of the files that have been initialized.
 
 ### Updating The Generator
 
-Update(s) to the generator can be applied within the following file `generator-handset/generators/app/index.js`.
+Update(s) to the generator can be applied within the following file `generator-dialtone-vue/generators/app/index.js`.
 
 ### Creating / Updating Template(s)
 
-The templates used by the generator are located in the following directory `generator-handset/generators/app/templates`.
+The templates used by the generator are located in the following directory `generator-dialtone-vue/generators/app/templates`.
 These templates are written in [Embedded JavaScript](https://ejs.co/) `.ejs`.
 
 #### Variables
 
 Variables can be added to these templates using the following format `<%= myVariableName %>`. In order to use the
-variable it will have to be defined in the generator `generator-handset/generators/app/index.js`.
+variable it will have to be defined in the generator `generator-dialtone-vue/generators/app/index.js`.
 
 #### Documentation
 

@@ -4,7 +4,7 @@
     role="group"
     :aria-labelledby="`${id}-list-section-header`"
     tabindex="-1"
-    :class="['hs-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-border-color--ash-darker',
+    :class="['dt-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-border-color--ash-darker',
              { 'd-border-bottom': separator }]"
   >
     <h3
@@ -27,7 +27,7 @@
       <vnodes :vnodes="displayedItems" />
     </ol>
 
-    <hs-button
+    <dt-button
       v-if="isCollapsible"
       :id="`${id}-list-section-show-more-less`"
       link
@@ -35,7 +35,7 @@
       @click="showMoreLessClicked"
     >
       {{ showMoreLessText }}
-    </hs-button>
+    </dt-button>
   </div>
 </template>
 
@@ -49,7 +49,7 @@
      above the max you'd press "show more" to display.
 */
 import utils from '../utils';
-import { HsButton } from '../button';
+import { DtButton } from '../button';
 
 export default {
   name: 'ListSection',
@@ -61,7 +61,7 @@ export default {
       functional: true,
       render: (h, ctx) => ctx.props.vnodes,
     },
-    HsButton,
+    DtButton,
   },
 
   props: {
@@ -91,13 +91,13 @@ export default {
 
     textMore: {
       type: String,
-      // TODO needs to be translated, but handset can't do it.
+      // TODO needs to be translated, but Dialtone Vue can't do it.
       default: 'Show more',
     },
 
     textLess: {
       type: String,
-      // TODO needs to be translated, but handset can't do it.
+      // TODO needs to be translated, but Dialtone Vue can't do it.
       default: 'Show less',
     },
   },
@@ -141,7 +141,7 @@ export default {
 </script>
 
 <style lang="less">
-.hs-list-section[tabindex="-1"]:focus {
+.dt-list-section[tabindex="-1"]:focus {
   outline: none;
 }
 </style>

@@ -1,8 +1,8 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 
-import HsNoticeAction from './notice_action';
-import HsButton from '../button/button';
+import DtNoticeAction from './notice_action';
+import DtButton from '../button/button';
 
 // Constants
 const basePropsData = {
@@ -14,7 +14,7 @@ const baseSlotsData = {
   default: 'this is the action slot content',
 };
 
-describe('HsNoticeAction tests', function () {
+describe('DtNoticeAction tests', function () {
   let wrapper;
 
   const propsData = basePropsData;
@@ -23,7 +23,7 @@ describe('HsNoticeAction tests', function () {
   let closeButton;
 
   const _setWrappers = () => {
-    wrapper = shallowMount(HsNoticeAction, {
+    wrapper = shallowMount(DtNoticeAction, {
       propsData: propsData,
       slots: slotsData,
       localVue: this.localVue,
@@ -32,7 +32,7 @@ describe('HsNoticeAction tests', function () {
   };
 
   const _setChildWrappers = () => {
-    closeButton = wrapper.findComponent(HsButton);
+    closeButton = wrapper.findComponent(DtButton);
   };
 
   before(function () {

@@ -1,5 +1,5 @@
 <template>
-  <hs-radio-group
+  <dt-radio-group
     :id="id"
     :name="name"
     :legend="legend"
@@ -14,13 +14,13 @@
     @input="onInput"
   >
     <slot>
-      <hs-radio
+      <dt-radio
         v-for="option in options"
         :key="option.value"
         :value="option.value"
       >
         <span>{{ option.label }}</span>
-      </hs-radio>
+      </dt-radio>
     </slot>
     <template
       v-if="legendSlot"
@@ -28,15 +28,15 @@
     >
       <span v-html="legendSlot" />
     </template>
-  </hs-radio-group>
+  </dt-radio-group>
 </template>
 
 <script>
-import { HsRadio } from '../radio';
-import HsRadioGroup from './radio_group';
+import { DtRadio } from '../radio';
+import DtRadioGroup from './radio_group';
 
 export default {
   name: 'RadioGroupDefault',
-  components: { HsRadio, HsRadioGroup },
+  components: { DtRadio, DtRadioGroup },
 };
 </script>

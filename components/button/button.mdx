@@ -1,5 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import HsButton from './button';
+import DtButton from './button';
 
 # Buttons
 
@@ -48,13 +48,13 @@ aren't buttons (or can't use the disabled attribute).
 ### Usage
 
 ```js
-import { HsButton } from '@dialpad/handset';
+import { DtButton } from '@dialpad/dialtone-vue';
 ```
 
 ```vue
-<hs-button importance="clear/outlined/primary">
+<dt-button importance="clear/outlined/primary">
   Button
-</hs-button>
+</dt-button>
 ```
 
 ## Sizes
@@ -78,13 +78,13 @@ The danger button style is used to communicate destructive actions such as delet
 ### Usage
 
 ```js
-import { HsButton } from '@dialpad/handset';
+import { DtButton } from '@dialpad/dialtone-vue';
 ```
 
 ```vue
-<hs-button kind="danger">
+<dt-button kind="danger">
   Danger Button
-</hs-button>
+</dt-button>
 ```
 
 ## Inverted
@@ -99,13 +99,13 @@ conjunction with the `importance` prop for different kinds of inverted buttons.
 ### Usage
 
 ```js
-import { HsButton } from '@dialpad/handset';
+import { DtButton } from '@dialpad/dialtone-vue';
 ```
 
 ```vue
-<hs-button inverted>
+<dt-button inverted>
   Button
-</hs-button>
+</dt-button>
 ```
 
 ## Icons
@@ -120,14 +120,14 @@ prop to control the position of the icon within the button (unless using a circl
 ### Usage
 
 ```js
-import { HsButton } from '@dialpad/handset';
+import { DtButton } from '@dialpad/dialtone-vue';
 ```
 
 ```vue
-<hs-button>
+<dt-button>
   Button
   <icon-star #icon />
-</hs-button>
+</dt-button>
 ```
 
 ## Circle Buttons
@@ -141,13 +141,13 @@ An icon-only button in a circle. When using a circle button, the `icon` slot sho
 ### Usage
 
 ```js
-import { HsButton } from '@dialpad/handset';
+import { DtButton } from '@dialpad/dialtone-vue';
 ```
 
 ```vue
-<hs-button circle importance="outline">
+<dt-button circle importance="outline">
   <icon-camera #icon />
-</hs-button>
+</dt-button>
 ```
 
 ## Link Buttons
@@ -162,11 +162,11 @@ styled as a link, but does not transition the user to a different route.
 ### Usage
 
 ```js
-import { HsButton } from '@dialpad/handset';
+import { DtButton } from '@dialpad/dialtone-vue';
 ```
 
 ```vue
-<hs-button link>
+<dt-button link>
   Link
-</hs-button>
+</dt-button>
 ```

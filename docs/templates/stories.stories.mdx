@@ -5,7 +5,7 @@
 ```jsx
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import HsMyComponent from './my_component';
+import DtMyComponent from './my_component';
 import MyComponentMdx from './my_component.mdx';
 import MyComponentDefaultTemplate from './my_component_default.story.vue';
 import MyComponentVariantsTemplate from './my_component_variants.story.vue';
@@ -93,7 +93,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Group/MyComponent',
-  component: HsMyComponent,
+  component: DtMyComponent,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

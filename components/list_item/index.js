@@ -1,1 +1,1 @@
-export { default as HsListItem } from './list_item.vue';
+export { default as DtListItem } from './list_item.vue';

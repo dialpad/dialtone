@@ -1,5 +1,5 @@
 // import { action } from '@storybook/addon-actions';
-import HsButton, {
+import DtButton, {
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
   BUTTON_IMPORTANCE_MODIFIERS,
@@ -153,7 +153,7 @@ export const argsData = {
 
 export default {
   title: 'Elements/Buttons',
-  component: HsButton,
+  component: DtButton,
   parameters: {
     docs: {
       page: BaseButtonMdx,
@@ -164,14 +164,14 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const baseButtonTemplate = generateTemplate(HsButton, {
+const baseButtonTemplate = generateTemplate(DtButton, {
   customProps: [':disabled="disabled"', ':style="{ width }"'],
   childTemplate: '{{ text }}<template #icon><component :is="icon" /></template>',
 });
 
 const Template = (_args, { argTypes }) => {
   return {
-    components: { HsButton, IconCamera, IconStar },
+    components: { DtButton, IconCamera, IconStar },
     template: baseButtonTemplate,
     props: Object.keys(argTypes),
   };
@@ -196,7 +196,7 @@ Danger.args = { kind: 'danger', text: 'Danger!' };
 Danger.parameters = {
   docs: {
     source: {
-      code: '<hs-button kind="danger">Danger!</hs-button>',
+      code: '<dt-button kind="danger">Danger!</dt-button>',
     },
   },
 };
@@ -209,7 +209,7 @@ Inverted.decorators = [() => ({
 Inverted.parameters = {
   docs: {
     source: {
-      code: '<hs-button inverted>Button</hs-button>',
+      code: '<dt-button inverted>Button</dt-button>',
     },
   },
 };
@@ -223,10 +223,10 @@ WithIcon.parameters = {
   docs: {
     source: {
       code: `
-<hs-button>
+<dt-button>
   Button
   <icon-star #icon />
-</hs-button>
+</dt-button>
     `,
     },
   },
@@ -238,9 +238,9 @@ Circle.parameters = {
   docs: {
     source: {
       code: `
-<hs-button circle importance="outline">
+<dt-button circle importance="outline">
   <icon-camera #icon />
-</hs-button>
+</dt-button>
     `,
     },
   },
@@ -251,7 +251,7 @@ Link.args = { link: true, text: 'Link' };
 Link.parameters = {
   docs: {
     source: {
-      code: '<hs-button link>Link</hs-button>',
+      code: '<dt-button link>Link</dt-button>',
     },
   },
 };

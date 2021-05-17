@@ -44,7 +44,7 @@ import {
  * @displayName HSButton
  */
 export default {
-  name: 'HsButton',
+  name: 'DtButton',
 
   props: {
     /**

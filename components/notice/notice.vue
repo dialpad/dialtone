@@ -4,14 +4,14 @@
     :role="role"
     v-on="$listeners"
   >
-    <hs-notice-icon
+    <dt-notice-icon
       :kind="kind"
       v-on="$listeners"
     >
       <!-- @slot Use a custom icon -->
       <slot name="icon" />
-    </hs-notice-icon>
-    <hs-notice-content
+    </dt-notice-icon>
+    <dt-notice-content
       :title-id="titleId"
       :content-id="contentId"
       :title="title"
@@ -24,30 +24,30 @@
       </template>
       <!-- @slot the main textual content of the notice -->
       <slot />
-    </hs-notice-content>
-    <hs-notice-action
+    </dt-notice-content>
+    <dt-notice-action
       :hide-close="hideClose"
       :close-button-props="closeButtonProps"
       v-on="$listeners"
     >
       <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
       <slot name="action" />
-    </hs-notice-action>
+    </dt-notice-action>
   </aside>
 </template>
 <script>
-import HsNoticeIcon from './notice_icon';
-import HsNoticeContent from './notice_content';
-import HsNoticeAction from './notice_action';
+import DtNoticeIcon from './notice_icon';
+import DtNoticeContent from './notice_content';
+import DtNoticeAction from './notice_action';
 import { NOTICE_KINDS } from './notice_constants.js';
 
 export default {
-  name: 'HsNotice',
+  name: 'DtNotice',
 
   components: {
-    HsNoticeIcon,
-    HsNoticeContent,
-    HsNoticeAction,
+    DtNoticeIcon,
+    DtNoticeContent,
+    DtNoticeAction,
   },
 
   props: {

@@ -17,10 +17,10 @@ import {
   itBehavesLikeAppliesClassToChild,
   itBehavesLikeAppliesChildProp,
 } from '../../tests/shared_examples/extendability';
-import { HsValidationMessages } from '../validation_messages';
-import { HsCheckbox } from '../checkbox';
+import { DtValidationMessages } from '../validation_messages';
+import { DtCheckbox } from '../checkbox';
 import CheckboxesFixture from './checkboxes_decorator.vue';
-import HsCheckboxGroup from './checkbox_group.vue';
+import DtCheckboxGroup from './checkbox_group.vue';
 
 // Constants
 const basePropsData = {
@@ -49,7 +49,7 @@ describe('Checkbox Group Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(HsCheckboxGroup, {
+    wrapper = shallowMount(DtCheckboxGroup, {
       propsData,
       attrs,
       slots,
@@ -60,7 +60,7 @@ describe('Checkbox Group Tests', function () {
   };
 
   const _mountWrappers = () => {
-    wrapper = mount(HsCheckboxGroup, {
+    wrapper = mount(DtCheckboxGroup, {
       propsData,
       slots,
       attrs,
@@ -104,10 +104,10 @@ describe('Checkbox Group Tests', function () {
       it('should have a checkbox group', function () { assert.strictEqual(checkboxGroup.exists(), true); });
       it('should not have a legend', function () { assert.strictEqual(checkboxGroupLegend.exists(), false); });
       it('should not have checkboxes', function () {
-        assert.lengthOf(wrapper.findAllComponents(HsCheckbox), 0);
+        assert.lengthOf(wrapper.findAllComponents(DtCheckbox), 0);
       });
       it('should not have validation messages', function () {
-        assert.lengthOf(wrapper.findComponent(HsValidationMessages)?.props('validationMessages'), 0);
+        assert.lengthOf(wrapper.findComponent(DtValidationMessages)?.props('validationMessages'), 0);
       });
     });
 
@@ -122,7 +122,7 @@ describe('Checkbox Group Tests', function () {
         beforeEach(function () { _setWrappers(); });
 
         it('should have checkboxes', function () {
-          assert.lengthOf(wrapper.findAllComponents(HsCheckbox), 3);
+          assert.lengthOf(wrapper.findAllComponents(DtCheckbox), 3);
         });
       });
     });
@@ -303,7 +303,7 @@ describe('Checkbox Group Tests', function () {
 
     describe('value', function () {
       // Test Environment
-      const prop = HsCheckboxGroup.props.value;
+      const prop = DtCheckboxGroup.props.value;
 
       describe('When a value is not provided', function () {
         itBehavesLikePassesCustomPropValidation(prop);

@@ -13,7 +13,7 @@
     </legend>
     <!-- @slot slot for Input Group Components -->
     <slot />
-    <hs-validation-messages
+    <dt-validation-messages
       :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
@@ -25,14 +25,14 @@
 
 <script>
 import { InputGroupMixin } from '../mixins/input_group';
-import { HsValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '../validation_messages';
 
 export default {
-  name: 'HsInputGroup',
+  name: 'DtInputGroup',
 
   mixins: [InputGroupMixin],
 
-  components: { HsValidationMessages },
+  components: { DtValidationMessages },
 
   props: {
     /**
