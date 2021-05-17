@@ -1,7 +1,7 @@
 <template>
   <div class="d-notice__actions">
     <slot />
-    <hs-button
+    <dt-button
       v-if="!hideClose"
       ref="closeButton"
       importance="clear"
@@ -14,19 +14,19 @@
       <template #icon>
         <icon-close />
       </template>
-    </hs-button>
+    </dt-button>
   </div>
 </template>
 <script>
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
-import HsButton from '../button/button';
+import DtButton from '../button/button';
 
 export default {
-  name: 'HsNoticeAction',
+  name: 'DtNoticeAction',
 
   components: {
     IconClose,
-    HsButton,
+    DtButton,
   },
 
   props: {

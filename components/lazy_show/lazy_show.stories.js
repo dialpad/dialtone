@@ -1,4 +1,4 @@
-import { HsLazyShow } from './';
+import { DtLazyShow } from './';
 import LazyShowDefault from './lazy_show_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import LazyShowMdx from './lazy_show.mdx';
@@ -14,7 +14,7 @@ const argTypesData = {
 
 export default {
   title: 'Utilities/Lazy Show',
-  component: HsLazyShow,
+  component: DtLazyShow,
   argTypes: argTypesData,
   parameters: {
     docs: {

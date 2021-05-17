@@ -1,1 +1,1 @@
-export { default as HsRadioGroup } from './radio_group.vue';
+export { default as DtRadioGroup } from './radio_group.vue';

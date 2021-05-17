@@ -1,5 +1,5 @@
 <template>
-  <hs-input
+  <dt-input
     :value="value"
     :type="type"
     :messages="messages"
@@ -51,16 +51,16 @@
     >
       <span v-html="description" />
     </template>
-  </hs-input>
+  </dt-input>
 </template>
 
 <script>
-import HsInput from './input';
+import DtInput from './input';
 import icon from '../mixins/icon';
 
 export default {
   name: 'InputDefault',
-  components: { HsInput },
+  components: { DtInput },
   mixins: [icon],
 };
 </script>

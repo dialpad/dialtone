@@ -1,5 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import HsValidationMessages from './validation_messages';
+import DtValidationMessages from './validation_messages';
 
 # Validation Messages
 
@@ -22,7 +22,7 @@ Each provided validation message has the following format:
 ## Base Style
 
 Validation messages are typically paired with an input element. They are currently built in to some of
-our shared input components such as `hs-input`, `hs-radio-group`.
+our shared input components such as `dt-input`, `dt-radio-group`.
 
 <Canvas>
   <Story id="forms-validation-messages--default" />
@@ -36,20 +36,20 @@ our shared input components such as `hs-input`, `hs-radio-group`.
 
 ## Props
 
-<ArgsTable of={HsValidationMessages} />
+<ArgsTable of={DtValidationMessages} />
 
 ## Usage
 
 ### Import
 
 ```jsx
-import { HsValidationMessages } from '@dialpad/handset';
+import { DtValidationMessages } from '@dialpad/dialtone-vue';
 ```
 
 <h3 style={{ color: 'red' }}>With Error Messages</h3>
 
 ```vue
-<hs-validation-messages
+<dt-validation-messages
   :validationMessages="[{ message: 'Error', type: 'error' }]"
 />
 ```
@@ -57,7 +57,7 @@ import { HsValidationMessages } from '@dialpad/handset';
 <h3 style={{ color: 'Goldenrod' }}>With Warning Messages</h3>
 
 ```vue
-<hs-validation-messages
+<dt-validation-messages
   :validationMessages="[{ message: 'Warning', type: 'warning' }]"
 />
 ```
@@ -65,7 +65,7 @@ import { HsValidationMessages } from '@dialpad/handset';
 <h3 style={{ color: 'green' }}>With Success Messages</h3>
 
 ```vue
-<hs-validation-messages
+<dt-validation-messages
   :validationMessages="[{ message: 'Success', type: 'success' }]"
 />
 ```

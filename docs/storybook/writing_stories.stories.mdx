@@ -28,15 +28,15 @@ For example, the `WithSuccess` story from `input.stories.js` gets rendered as:
 
 ```js
 # input.stories.js
-import HsInput from './input';
+import DtInput from './input';
 
 ...
 
 // Template of the story component, this is a harness Vue component that
-// wraps the HsInput component
+// wraps the DtInput component
 const Template = (args, { argTypes }) => {
   return {
-    components: { HsInput },
+    components: { DtInput },
     template: baseInputTemplate,
     props: Object.keys(argTypes),
     methods: { onInput: action('input') },
@@ -69,11 +69,11 @@ the same `*.stories.js` file are defined. It also provides fields for addon conf
 ```js
 // input.stories.js
 
-import HsInput from './input';
+import DtInput from './input';
 
 export default {
   title: 'Forms/Input',
-  component: HsInput,
+  component: DtInput,
   parameters: { ... },
   decorators: [ ... ],
 };
@@ -99,17 +99,17 @@ components are held. The `Template` is reused in each story as named exports and
 
 const Template = (args, { argTypes }) => {
   return {
-    components: { HsInput },
+    components: { DtInput },
     template: baseInputTemplate,
     props: Object.keys(argTypes),
   };
 };
 
-// Hs Input -> Default story
+// Dt Input -> Default story
 export const Default = Template.bind({});
-// Hs Input -> With Warn story
+// Dt Input -> With Warn story
 export const WithWarn = Template.bind({});
-// Hs Input -> With Error story
+// Dt Input -> With Error story
 export const WithError = Template.bind({});
 ```
 
@@ -119,18 +119,18 @@ To write stories, we first import the component that we wish to write stories fo
 
 ```js
 // input.stories.js
-import HsInput from './input';
+import DtInput from './input';
 ```
 
 Then we will define the `Default Export` for the simplest use case (No configuration):
 
 ```js
 // input.stories.js
-import HsInput from './input';
+import DtInput from './input';
 
 export default {
   title: 'Forms/Input',
-  component: HsInput,
+  component: DtInput,
 };
 ```
 
@@ -153,8 +153,8 @@ First we will define the harness that will render our component:
 // input.stories.js
 const Template = () => {
   return {
-    components: { HsInput },
-    template: <hs-input />,
+    components: { DtInput },
+    template: <dt-input />,
   };
 };
 ```
@@ -166,8 +166,8 @@ that our component expects so Storybook can interact with our component's intern
 // input.stories.js
 const Template = () => {
   return {
-    components: { HsInput },
-    template: <hs-input :name="name" :value="value" ... />,
+    components: { DtInput },
+    template: <dt-input :name="name" :value="value" ... />,
     props: [name, value ...],
   };
 };
@@ -186,7 +186,7 @@ takes in 2 arguments. We can also use the `generateTemplate` method to bind all 
  * the customProps field let's the user pass in additional bindings if desired.
  *
  * So this will generate the string:
- * <hs-input
+ * <dt-input
  *  :name="name"
  *  :type="type"
  *  :value="value"
@@ -194,7 +194,7 @@ takes in 2 arguments. We can also use the `generateTemplate` method to bind all 
  *  :placeholder="placeholder",
  * />
  */
-const baseInputTemplate = generateTemplate(HsInput, {
+const baseInputTemplate = generateTemplate(DtInput, {
   customProps: [
     ':placeholder="placeholder"',
   ],
@@ -207,7 +207,7 @@ const baseInputTemplate = generateTemplate(HsInput, {
  */
 const Template = (args, { argTypes }) => {
   return {
-    components: { HsInput },
+    components: { DtInput },
     template: baseInputTemplate,
     props: Object.keys(argTypes),
   };
@@ -226,7 +226,7 @@ In order to address a current storybook bug where props that share the same name
 sidebar controls we must define the slots controls in `argTypesData` as seen in the example below.
 
 ```js
-import HsNotice from './notice';
+import DtNotice from './notice';
 import NoticeDefault from './NoticeDefault.story.vue';
 
 export const argTypesData = {
@@ -244,7 +244,7 @@ export const argTypesData = {
 
 export default {
   title: 'Elements/Notice',
-  component: HsNotice,
+  component: DtNotice,
   argTypes: argTypesData,
   excludeStories: /.Data$/,
 };
@@ -265,7 +265,7 @@ folder as the corresponding stories.js file. In this case it is in the same fold
 
 ```jsx
 <template>
-  <hs-notice
+  <dt-notice
     :kind="kind"
     :title="title"
     :title-id="titleId"
@@ -292,16 +292,16 @@ folder as the corresponding stories.js file. In this case it is in the same fold
     >
       <span v-html="titleOverride" />
     </template>
-  </hs-notice>
+  </dt-notice>
 </template>
 
 <script>
-import HsNotice from './notice';
+import DtNotice from './notice';
 import icon from '../mixins/icon';
 
 export default {
   name: 'NoticeDefault',
-  components: { HsNotice },
+  components: { DtNotice },
   mixins: [icon],
 };
 </script>
@@ -315,15 +315,15 @@ will on other named exports will create stories with those props set.
 
 ```js
 // input.stories.js
-import HsInput from './input';
+import DtInput from './input';
 import { generateTemplate } from '../storybook_utils';
 
 export default {
   title: 'Forms/Input',
-  component: HsInput,
+  component: DtInput,
 };
 
-const baseInputTemplate = generateTemplate(HsInput, {
+const baseInputTemplate = generateTemplate(DtInput, {
   customProps: [
     ':placeholder="placeholder"',
   ],
@@ -331,7 +331,7 @@ const baseInputTemplate = generateTemplate(HsInput, {
 
 const Template = (args, { argTypes }) => {
   return {
-    components: { HsInput },
+    components: { DtInput },
     template: baseInputTemplate,
     props: Object.keys(argTypes),
   };
@@ -359,11 +359,11 @@ field in the `default export`
 ```js
 // input.stories.js
 
-import HsInput from './input';
+import DtInput from './input';
 
 export default {
   title: 'Forms/Input',
-  component: HsInput,
+  component: DtInput,
   parameters: { ... },
   decorators: [ ... ],
   excludeStories: /.*Data$/, // Ignores all named exports that end with "Data"

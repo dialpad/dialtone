@@ -1,1 +1,1 @@
-export { default as HsRadio } from './radio.vue';
+export { default as DtRadio } from './radio.vue';

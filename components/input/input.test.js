@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
-import HsInput from './input.vue';
+import DtInput from './input.vue';
 
 // Constants
 const basePropsData = {
@@ -14,7 +14,7 @@ const baseAttrs = {
   name: 'input-name',
 };
 
-describe('Handset Input tests', function () {
+describe('Dialtone Vue Input tests', function () {
   // Wrappers
   let wrapper;
   let label;
@@ -31,14 +31,14 @@ describe('Handset Input tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    label = wrapper.find('[data-qa="hs-input-label"]');
-    description = wrapper.find('[data-qa="hs-input-description"]');
+    label = wrapper.find('[data-qa="dt-input-label"]');
+    description = wrapper.find('[data-qa="dt-input-description"]');
     nativeInput = wrapper.find('input');
     nativeTextarea = wrapper.find('textarea');
   };
 
   const _mountWrapper = () => {
-    wrapper = mount(HsInput, {
+    wrapper = mount(DtInput, {
       propsData,
       attrs,
       slots,
@@ -71,7 +71,9 @@ describe('Handset Input tests', function () {
     // Shared Examples
     const itBehavesLikeRendersDescription = (descriptionText) => {
       it('should render the description', function () { assert.isTrue(description.exists()); });
-      it('should have description class', function () { assert.isTrue(description.classes().includes('d-description')); });
+      it('should have description class', function () {
+        assert.isTrue(description.classes().includes('d-description'));
+      });
       it('should have a generated id', function () { assert.exists(description.attributes('id')); });
       it('should display the correct description', function () {
         assert.strictEqual(description.text(), descriptionText);
@@ -90,8 +92,12 @@ describe('Handset Input tests', function () {
       });
 
       it('should render the native input', function () { assert.isTrue(nativeInput.exists()); });
-      it('should have a type prop', function () { assert.strictEqual(nativeInput.attributes('type'), propsData.type); });
-      it('should have a bound value prop', function () { assert.strictEqual(nativeInput.element.value, propsData.value); });
+      it('should have a type prop', function () {
+        assert.strictEqual(nativeInput.attributes('type'), propsData.type);
+      });
+      it('should have a bound value prop', function () {
+        assert.strictEqual(nativeInput.element.value, propsData.value);
+      });
       it('should have input class', function () { assert.isTrue(nativeInput.classes().includes('d-input')); });
       it('should display the initial value prop', function () {
         assert.strictEqual(nativeInput.element.value, wrapper.vm.value);

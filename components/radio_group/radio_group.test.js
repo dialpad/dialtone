@@ -1,8 +1,8 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount, mount } from '@vue/test-utils';
-import { HsValidationMessages } from '../validation_messages';
-import { HsRadio } from '../radio';
-import HsRadioGroup from './radio_group.vue';
+import { DtValidationMessages } from '../validation_messages';
+import { DtRadio } from '../radio';
+import DtRadioGroup from './radio_group.vue';
 import RadiosFixture from '../../tests/fixtures/radios.vue';
 
 // Test Constants
@@ -13,7 +13,7 @@ const basePropsData = {
 };
 const baseAttrs = { 'aria-label': 'Test Radio Group' };
 
-describe('Handset Radio Group Tests', function () {
+describe('Dialtone Vue Radio Group Tests', function () {
   // Wrappers
   let wrapper;
   let radioGroup;
@@ -31,7 +31,7 @@ describe('Handset Radio Group Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(HsRadioGroup, {
+    wrapper = shallowMount(DtRadioGroup, {
       propsData,
       slots,
       attrs,
@@ -41,7 +41,7 @@ describe('Handset Radio Group Tests', function () {
   };
 
   const _mountWrappers = () => {
-    wrapper = mount(HsRadioGroup, {
+    wrapper = mount(DtRadioGroup, {
       propsData,
       slots,
       attrs,
@@ -84,25 +84,25 @@ describe('Handset Radio Group Tests', function () {
 
     const itBehavesLikeDoesNotHaveRadios = () => {
       it('should not have radios', function () {
-        assert.lengthOf(wrapper.findAllComponents(HsRadio), 0);
+        assert.lengthOf(wrapper.findAllComponents(DtRadio), 0);
       });
     };
 
     const itBehavesLikeHasRadios = (numRadios) => {
       it('should have radios', function () {
-        assert.lengthOf(wrapper.findAllComponents(HsRadio), numRadios);
+        assert.lengthOf(wrapper.findAllComponents(DtRadio), numRadios);
       });
     };
 
     const itBehavesLikeDoesNotHaveValidationMessages = () => {
       it('should not have validation messages', function () {
-        assert.lengthOf(wrapper.findComponent(HsValidationMessages)?.props('validationMessages'), 0);
+        assert.lengthOf(wrapper.findComponent(DtValidationMessages)?.props('validationMessages'), 0);
       });
     };
 
     const itBehavesLikeHasValidationMessages = (numMessages) => {
       it('should have validation messages', function () {
-        assert.lengthOf(wrapper.findComponent(HsValidationMessages)?.props('validationMessages'), numMessages);
+        assert.lengthOf(wrapper.findComponent(DtValidationMessages)?.props('validationMessages'), numMessages);
       });
     };
 

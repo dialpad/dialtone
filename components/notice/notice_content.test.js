@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import HsNoticeContent from './notice_content';
+import DtNoticeContent from './notice_content';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 
 // Constants
@@ -13,7 +13,7 @@ const baseSlotsData = {
   default: 'this is the content',
 };
 
-describe('HsNoticeContent tests', function () {
+describe('DtNoticeContent tests', function () {
   let wrapper;
   let propsData;
   let slotsData;
@@ -24,7 +24,7 @@ describe('HsNoticeContent tests', function () {
   const _setWrappers = () => {
     propsData = basePropsData;
     slotsData = baseSlotsData;
-    wrapper = shallowMount(HsNoticeContent, {
+    wrapper = shallowMount(DtNoticeContent, {
       propsData: propsData,
       slots: slotsData,
       localVue: this.localVue,

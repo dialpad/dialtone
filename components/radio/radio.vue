@@ -34,12 +34,12 @@
           <!-- @slot slot for Radio Description -->
           <slot name="description">{{ description }}</slot>
         </div>
-        <hs-validation-messages
+        <dt-validation-messages
           :validation-messages="formattedMessages"
           :show-messages="showMessages"
           :class="messagesClass"
           v-bind="messagesChildProps"
-          data-qa="hs-radio-validation-messages"
+          data-qa="dt-radio-validation-messages"
         />
       </div>
     </div>
@@ -54,12 +54,12 @@ import {
   MessagesMixin,
 } from '../mixins/input.js';
 import { RADIO_INPUT_VALIDATION_CLASSES, RADIO_DESCRIPTION_VALIDATION_CLASSES } from './radio_constants';
-import { HsValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '../validation_messages';
 
 export default {
-  name: 'HsRadio',
+  name: 'DtRadio',
 
-  components: { HsValidationMessages },
+  components: { DtValidationMessages },
 
   mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 

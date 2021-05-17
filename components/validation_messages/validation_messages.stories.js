@@ -1,6 +1,6 @@
 import { generateTemplate } from '../storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
-import HsValidationMessages from './validation_messages';
+import DtValidationMessages from './validation_messages';
 import BaseValidationMessagesMdx from './validation_messages.mdx';
 
 // Constants
@@ -24,7 +24,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Forms/Validation Messages',
-  component: HsValidationMessages,
+  component: DtValidationMessages,
   parameters: {
     docs: {
       page: BaseValidationMessagesMdx,
@@ -36,10 +36,10 @@ export default {
 };
 
 // Validation Messages Template
-const baseRadioTemplate = generateTemplate(HsValidationMessages, {});
+const baseRadioTemplate = generateTemplate(DtValidationMessages, {});
 const Template = (_args, { argTypes }) => {
   return {
-    components: { HsValidationMessages },
+    components: { DtValidationMessages },
     template: baseRadioTemplate,
     props: Object.keys(argTypes),
   };
@@ -51,18 +51,18 @@ export const Default = Template.bind({});
 // Variants Story
 const VariantsTemplate = () => {
   return {
-    components: { HsValidationMessages },
+    components: { DtValidationMessages },
     template: `
       <div id="forms-validation-messages--variants-container">
-        <hs-validation-messages
+        <dt-validation-messages
           :validationMessages="[{ message: 'With Success Validation Message', type: 'success' }]"
         />
         <br />
-        <hs-validation-messages
+        <dt-validation-messages
           :validationMessages="[{ message: 'With Warning Validation Message', type: 'warning' }]"
         />
         <br />
-        <hs-validation-messages
+        <dt-validation-messages
           :validationMessages="[{ message: 'With Error Validation Message', type: 'error' }]"
         />
         <br />

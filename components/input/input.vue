@@ -2,14 +2,14 @@
   <div
     ref="container"
     class="base-input"
-    data-qa="hs-input"
+    data-qa="dt-input"
   >
     <!-- @slot slot for Icon -->
     <slot name="icon" />
     <label
       class="base-input__label"
       :aria-details="$slots.description || description ? descriptionKey : undefined"
-      data-qa="hs-input-label"
+      data-qa="dt-input-label"
     >
       <!-- @slot slot for label, defaults to label prop -->
       <slot name="labelSlot">
@@ -21,7 +21,7 @@
         v-if="$slots.description || description"
         :id="descriptionKey"
         :class="['d-description', 'd-margin-bottom2', descriptionSizeModifierClass]"
-        data-qa="hs-input-description"
+        data-qa="dt-input-description"
       >
         <!-- @slot slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
@@ -42,7 +42,7 @@
           :disabled="disabled"
           :class="inputClasses()"
           v-bind="$attrs"
-          data-qa="hs-input-input"
+          data-qa="dt-input-input"
           v-on="inputListeners"
         />
         <input
@@ -54,7 +54,7 @@
           :disabled="disabled"
           :class="inputClasses()"
           v-bind="$attrs"
-          data-qa="hs-input-input"
+          data-qa="dt-input-input"
           v-on="inputListeners"
         >
         <div class="d-p-relative">
@@ -68,12 +68,12 @@
         </div>
       </div>
     </label>
-    <hs-validation-messages
+    <dt-validation-messages
       :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
       v-bind="messagesChildProps"
-      data-qa="hs-input-messages"
+      data-qa="dt-input-messages"
     />
   </div>
 </template>
@@ -84,13 +84,13 @@ import {
   getUniqueString,
   getValidationState,
 } from '../utils';
-import { HsValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '../validation_messages';
 import { MessagesMixin } from '../mixins/input.js';
 
 export default {
-  name: 'HsInput',
+  name: 'DtInput',
 
-  components: { HsValidationMessages },
+  components: { DtValidationMessages },
 
   mixins: [MessagesMixin],
 

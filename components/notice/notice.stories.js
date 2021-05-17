@@ -1,4 +1,4 @@
-import HsNotice from './notice';
+import DtNotice from './notice';
 import { NOTICE_KINDS } from './notice_constants';
 import NoticeDefault from './notice_default.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
@@ -47,7 +47,7 @@ export const argTypesData = {
 
 export default {
   title: 'Elements/Notice',
-  component: HsNotice,
+  component: DtNotice,
   argTypes: argTypesData,
   excludeStories: /.Data$/,
 };

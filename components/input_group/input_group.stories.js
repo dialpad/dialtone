@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import HsInputGroup from './input_group';
+import DtInputGroup from './input_group';
 import InputGroupMdx from './input_group.mdx';
 import InputGroupDefaultTemplate from './input_group_default.story.vue';
 import InputGroupVariantsTemplate from './input_group_variants.story.vue';
@@ -88,7 +88,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Forms/Input Group',
-  component: HsInputGroup,
+  component: DtInputGroup,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

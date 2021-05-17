@@ -26,7 +26,7 @@ const kindToIcon = new Map([
 ]);
 
 export default {
-  name: 'HsNoticeIcon',
+  name: 'DtNoticeIcon',
 
   components: {
     IconInfo,

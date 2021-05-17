@@ -1,7 +1,7 @@
 <template>
   <div
     :class="modalClasses"
-    data-qa="hs-modal"
+    data-qa="dt-modal"
     :aria-hidden="(!show).toString()"
     @click.self="close"
     @keydown.esc="close"
@@ -19,7 +19,7 @@
         v-if="$slots.header"
         :id="labelledById"
         class="d-modal__title"
-        data-qa="hs-modal-title"
+        data-qa="dt-modal-title"
       >
         <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
         <slot name="header" />
@@ -28,7 +28,7 @@
         v-else
         :id="labelledById"
         class="d-modal__title"
-        data-qa="hs-modal-title"
+        data-qa="dt-modal-title"
       >
         {{ title }}
       </h1>
@@ -36,7 +36,7 @@
       <div
         v-if="$slots.default"
         class="d-modal__copy"
-        data-qa="hs-modal-copy"
+        data-qa="dt-modal-copy"
       >
         <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
         <slot />
@@ -44,7 +44,7 @@
       <p
         v-else
         class="d-modal__copy"
-        data-qa="hs-modal-copy"
+        data-qa="dt-modal-copy"
       >
         {{ copy }}
       </p>
@@ -56,7 +56,7 @@
         <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
         <slot name="footer" />
       </footer>
-      <hs-button
+      <dt-button
         class="d-modal__close"
         circle
         importance="clear"
@@ -67,13 +67,13 @@
         <template #icon>
           <icon-close />
         </template>
-      </hs-button>
+      </dt-button>
     </div>
   </div>
 </template>
 
 <script>
-import HsButton from '../button/button.vue';
+import DtButton from '../button/button.vue';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import Modal from '../mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
@@ -81,13 +81,13 @@ import { getUniqueString } from '../utils';
 
 /**
  * Base Vue component for Dialtone Modal.
- * @displayName HsModal
+ * @displayName DtModal
  */
 export default {
-  name: 'HsModal',
+  name: 'DtModal',
 
   components: {
-    HsButton,
+    DtButton,
     IconClose,
   },
 

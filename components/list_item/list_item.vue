@@ -2,8 +2,8 @@
   <!-- slot with list item content goes here -->
   <li
     :id="id"
-    :class="['hs-list-item', 'd-fs14', 'd-lh6', 'd-py6', 'd-px16', 'd-d-flex', 'd-ai-center',
-             { 'hs-list-item-clickable': clickable, 'd-jc-space-between': this.$slots.iconRight }]"
+    :class="['dt-list-item', 'd-fs14', 'd-lh6', 'd-py6', 'd-px16', 'd-d-flex', 'd-ai-center',
+             { 'dt-list-item-clickable': clickable, 'd-jc-space-between': this.$slots.iconRight }]"
     :tabindex="clickable ? 0 : -1"
     @keydown.enter="clicked"
     @keydown.space="clicked"
@@ -53,12 +53,12 @@ export default {
 </script>
 
 <style lang="less">
-.hs-list-item[tabindex="-1"]:focus {
+.dt-list-item[tabindex="-1"]:focus {
   outline: none;
 }
 
-.hs-list-item-clickable:hover,
-.hs-list-item-clickable:focus {
+.dt-list-item-clickable:hover,
+.dt-list-item-clickable:focus {
   background-color: hsla(var(--primary-color--h), var(--primary-color--s), var(--primary-color--l), 0.1);
   cursor: pointer;
 }

@@ -16,7 +16,7 @@ import {
 } from '../../tests/shared_examples/extendability';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES, CHECKBOX_DESCRIPTION_VALIDATION_CLASSES } from './checkbox_constants';
-import HsCheckbox from './checkbox.vue';
+import DtCheckbox from './checkbox.vue';
 
 // Constants
 const baseValue = 'Value';
@@ -48,7 +48,7 @@ describe('Checkbox Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(HsCheckbox, {
+    wrapper = shallowMount(DtCheckbox, {
       propsData,
       attrs,
       slots,

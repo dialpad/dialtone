@@ -19,7 +19,7 @@ import {
   RADIO_INPUT_VALIDATION_CLASSES,
   RADIO_DESCRIPTION_VALIDATION_CLASSES,
 } from './radio_constants';
-import HsRadio from './radio.vue';
+import DtRadio from './radio.vue';
 
 const baseValue = 'Value';
 const basePropsData = {
@@ -27,7 +27,7 @@ const basePropsData = {
   value: baseValue,
 };
 
-describe('Handset Radio Tests', function () {
+describe('Dialtone Vue Radio Tests', function () {
   // Wrappers
   let wrapper;
   let input;
@@ -42,7 +42,7 @@ describe('Handset Radio Tests', function () {
 
   // Helpers
   const _setWrappers = () => {
-    wrapper = shallowMount(HsRadio, {
+    wrapper = shallowMount(DtRadio, {
       propsData,
       slots,
       attrs,
@@ -206,7 +206,9 @@ describe('Handset Radio Tests', function () {
           _setSlotContainers();
         });
 
-        it('should have slotted description', function () { assert.strictEqual(descriptionSlotContainer.text(), slotDescription); });
+        it('should have slotted description', function () {
+          assert.strictEqual(descriptionSlotContainer.text(), slotDescription);
+        });
       });
 
       describe('When slotted label and description are provided', function () {
@@ -218,7 +220,9 @@ describe('Handset Radio Tests', function () {
         });
 
         it('should have slotted label', function () { assert.strictEqual(labelSlotContainer.text(), slotLabel); });
-        it('should have slotted description', function () { assert.strictEqual(descriptionSlotContainer.text(), slotDescription); });
+        it('should have slotted description', function () {
+          assert.strictEqual(descriptionSlotContainer.text(), slotDescription);
+        });
       });
     });
 
@@ -310,7 +314,9 @@ describe('Handset Radio Tests', function () {
         // Test Setup
         beforeEach(function () { input.trigger('click'); });
 
-        it('should emit the input event with Value', function () { itBehavesLikeEmitsExpectedEvent(wrapper, 'input', value); });
+        it('should emit the input event with Value', function () {
+          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', value);
+        });
       });
     });
 

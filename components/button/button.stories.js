@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import HsButton from './button';
+import DtButton from './button';
 import {
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
@@ -157,7 +157,7 @@ export const argsData = {
 
 export default {
   title: 'Elements/Buttons',
-  component: HsButton,
+  component: DtButton,
   parameters: {
     docs: {
       page: BaseButtonMdx,

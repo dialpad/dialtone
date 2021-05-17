@@ -1,6 +1,7 @@
 <template>
   <button
     :class="['base-button__button', buttonClasses]"
+    data-qa="dt-button"
     :type="type"
     :aria-live="computedAriaLive"
     v-on="buttonListeners"
@@ -8,6 +9,7 @@
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
       v-if="$slots.icon"
+      data-qa="dt-button-icon"
       :class="['base-button__icon', iconClasses]"
     >
       <!-- @slot Button icon -->
@@ -16,6 +18,7 @@
       />
     </span>
     <span
+      data-qa="dt-button-label"
       :class="['base-button__label', 'd-btn__label']"
     >
       <slot />
@@ -41,7 +44,7 @@ import {
  * @displayName HSButton
  */
 export default {
-  name: 'HsButton',
+  name: 'DtButton',
 
   props: {
     /**
