@@ -2,110 +2,110 @@
   <div id="elements-button--variants-container">
     <div class="d-mb16">
       <!-- Default -->
-      <hs-button>
+      <dt-button>
         Primary
-      </hs-button>
+      </dt-button>
 
       <!-- Outlined -->
-      <hs-button importance="outlined">
+      <dt-button importance="outlined">
         Outlined
-      </hs-button>
+      </dt-button>
 
       <!-- Clear -->
-      <hs-button importance="clear">
+      <dt-button importance="clear">
         Clear
-      </hs-button>
+      </dt-button>
     </div>
     <div class="d-mb16">
       <!-- Danger -->
-      <hs-button kind="danger">
+      <dt-button kind="danger">
         Danger
-      </hs-button>
+      </dt-button>
 
       <!-- Inverted -->
-      <hs-button kind="inverted">
+      <dt-button kind="inverted">
         Inverted
-      </hs-button>
+      </dt-button>
 
       <!-- Disabled -->
-      <hs-button disabled>
+      <dt-button disabled>
         Disabled
-      </hs-button>
+      </dt-button>
     </div>
     <div class="d-mb16">
       <!-- Extra Small -->
-      <hs-button size="xs">
+      <dt-button size="xs">
         Extra Small
-      </hs-button>
+      </dt-button>
 
       <!-- Small -->
-      <hs-button size="sm">
+      <dt-button size="sm">
         Small
-      </hs-button>
+      </dt-button>
 
       <!-- Medium -->
-      <hs-button size="md">
+      <dt-button size="md">
         Medium
-      </hs-button>
+      </dt-button>
 
       <!-- Large -->
-      <hs-button size="lg">
+      <dt-button size="lg">
         Large
-      </hs-button>
+      </dt-button>
 
       <!-- Extra Large -->
-      <hs-button size="xl">
+      <dt-button size="xl">
         Extra Large
-      </hs-button>
+      </dt-button>
     </div>
     <div class="d-mb16">
       <!-- Circle -->
-      <hs-button
+      <dt-button
         importance="outlined"
         circle
       >
         <template #icon>
           <icon-dialpad-glyph />
         </template>
-      </hs-button>
+      </dt-button>
 
       <!-- Icon Left -->
-      <hs-button>
+      <dt-button>
         <template #icon>
           <icon-dialpad-glyph />
         </template>
         Icon Left
-      </hs-button>
+      </dt-button>
 
       <!-- Icon Right -->
-      <hs-button icon-position="right">
+      <dt-button icon-position="right">
         <template #icon>
           <icon-dialpad-glyph />
         </template>
         Icon Right
-      </hs-button>
+      </dt-button>
     </div>
     <div class="d-mb16">
       <!-- Loading -->
-      <hs-button loading>
+      <dt-button loading>
         Button
-      </hs-button>
+      </dt-button>
     </div>
     <div class="d-mb16">
       <!-- Link Button -->
-      <hs-button link>
+      <dt-button link>
         Link Button
-      </hs-button>
+      </dt-button>
     </div>
   </div>
 </template>
 
 <script>
-import HsButton from './button';
+import DtButton from './button';
 import IconDialpadGlyph from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadGlyph';
 
 export default {
   name: 'ButtonVariants',
-  components: { HsButton, IconDialpadGlyph },
+  components: { DtButton, IconDialpadGlyph },
 };
 </script>

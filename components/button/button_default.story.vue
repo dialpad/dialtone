@@ -1,5 +1,5 @@
 <template>
-  <hs-button
+  <dt-button
     :importance="importance"
     :type="type"
     :size="size"
@@ -23,16 +23,16 @@
     >
       <component :is="icon" />
     </template>
-  </hs-button>
+  </dt-button>
 </template>
 
 <script>
-import HsButton from './button';
+import DtButton from './button';
 import icon from '../mixins/icon';
 
 export default {
   name: 'ButtonDefault',
-  components: { HsButton },
+  components: { DtButton },
   mixins: [icon],
 };
 </script>
