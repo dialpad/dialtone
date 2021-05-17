@@ -4,6 +4,7 @@
     data-qa="dt-button"
     :type="type"
     :aria-live="computedAriaLive"
+    :aria-label="loading ? 'loading' : undefined"
     v-on="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
