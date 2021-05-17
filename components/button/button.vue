@@ -9,7 +9,7 @@
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
-      v-if="$slots.icon"
+      v-if="$slots.icon && !link"
       data-qa="dt-button-icon"
       :class="['base-button__icon', iconClasses]"
     >
