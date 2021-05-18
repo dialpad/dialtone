@@ -1,5 +1,5 @@
 import {
-  HsPopover,
+  DtPopover,
   POPOVER_PADDING_CLASSES,
   POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_VERTICAL_ALIGNMENT,
@@ -11,7 +11,7 @@ import PopoverMdx from './popover.mdx';
 
 const argTypesData = {
   id: {
-    defaultValue: 'HsPopover__content0',
+    defaultValue: 'DtPopover__content0',
     table: {
       defaultValue: {
         summary: 'Automatically generated unique ID',
@@ -46,7 +46,7 @@ const argTypesData = {
 
 export default {
   title: 'Elements/Popovers',
-  component: HsPopover,
+  component: DtPopover,
   argTypes: argTypesData,
   parameters: {
     docs: {
@@ -67,19 +67,19 @@ Default.parameters = {
   docs: {
     source: {
       code: `
-<hs-popover :open.sync="open">
+<dt-popover :open.sync="open">
   <template #anchor="{ attrs }">
-    <hs-button
+    <dt-button
       v-bind="attrs"
       @click="open = !open"
     >
       Click to open
-    </hs-button>
+    </dt-button>
   </template>
   <template #content>
     <p>I will be displayed in the popover!</p>
   </template>
-</hs-popover>
+</dt-popover>
     `,
     },
   },
@@ -94,10 +94,10 @@ FixedRight.parameters = {
   docs: {
     source: {
       code: `
-<hs-popover fixedAlignment="right">
+<dt-popover fixedAlignment="right">
   <template #anchor="{ attrs }"></template>
   <template #content></template>
-</hs-popover>
+</dt-popover>
     `,
     },
   },
@@ -109,10 +109,10 @@ NoPadding.parameters = {
   docs: {
     source: {
       code: `
-<hs-popover padding="none">
+<dt-popover padding="none">
   <template #anchor="{ attrs }"></template>
   <template #content></template>
-</hs-popover>
+</dt-popover>
     `,
     },
   },

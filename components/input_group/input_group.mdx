@@ -1,5 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import HsInputGroup from './input_group';
+import DtInputGroup from './input_group';
 
 # Input Group
 
@@ -40,14 +40,14 @@ The Vue model is dependant on the child component(s) implementing the provided `
 ```html
 <script>
 import {
-  HsInputMixin,
-  HsGroupableInputMixin,
-} from '@dialpad/handset';
+  DtInputMixin,
+  DtGroupableInputMixin,
+} from '@dialpad/dialtone-vue';
 
 export default {
   name: 'MyInputElement',
 
-  mixins: [HsInputMixin, HsGroupableInputMixin],
+  mixins: [DtInputMixin, DtGroupableInputMixin],
 
   computed: {
     groupValue () {
@@ -89,7 +89,7 @@ export default {
 
 ## Props, Slots & Events
 
-<ArgsTable of={HsInputGroup} />
+<ArgsTable of={DtInputGroup} />
 
 ## Usage
 
@@ -98,79 +98,79 @@ export default {
 ```jsx
 import {
   VALIDATION_MESSAGE_TYPES,
-  HsInputGroup
-} from '@dialpad/handset';
+  DtInputGroup
+} from '@dialpad/dialtone-vue';
 ```
 
 ### With Legend
 
 ```html
-<hs-input-group
+<dt-input-group
   name="my-group-name"
   legend="My Legend"
 >
   <!-- Slotted Input Elements -->
-</hs-input-group>
+</dt-input-group>
 ```
 
 ### With Slotted Legend
 
 ```html
-<hs-input-group name="my-group-name">
+<dt-input-group name="my-group-name">
   <!-- Slotted Input Elements -->
   <template #legend>
     With Slotted Legend
   </template>
-</hs-input-group>
+</dt-input-group>
 ```
 
 ### With Value
 
 ```html
-<hs-input-group
+<dt-input-group
   name="my-group-name"
   legend="My Legend"
   :value="['option1']"
 >
   <!-- Slotted Input Elements -->
-</hs-input-group>
+</dt-input-group>
 ```
 
 ### Disabled
 
 ```html
-<hs-input-group
+<dt-input-group
   name="my-group-name"
   legend="My Legend"
   disabled
 >
   <!-- Slotted Input Elements -->
-</hs-input-group>
+</dt-input-group>
 ```
 
 ### With Validation Messages
 
 ```html
-<hs-input-group
+<dt-input-group
   name="my-group-name"
   legend="My Legend"
   :messages="[{ message: 'My Success Message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
 >
   <!-- Slotted Input Elements -->
-</hs-input-group>
+</dt-input-group>
 ```
 
 ### With Validation Messages Hidden
 
 ```html
-<hs-input-group
+<dt-input-group
   name="my-group-name"
   legend="My Legend"
   :messages="[{ message: 'My Success Message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
   :show-messages="false"
 >
   <!-- Slotted Input Elements -->
-</hs-input-group>
+</dt-input-group>
 ```
 
 ### Extending
@@ -182,11 +182,11 @@ If your input(s) require additional logic in order to be grouped then you can ex
 
 ```html
 <script>
-import { HsInputGroup } from '@dialpad/handset';
+import { DtInputGroup } from '@dialpad/dialtone-vue';
 
 export default {
   name: "MyComponent",
-  extends: HsInputGroup,
+  extends: DtInputGroup,
   ...
 };
 </script>

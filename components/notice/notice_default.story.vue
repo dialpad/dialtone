@@ -1,5 +1,5 @@
 <template>
-  <hs-notice
+  <dt-notice
     :kind="kind"
     :title="title"
     :title-id="titleId"
@@ -26,16 +26,16 @@
     >
       <span v-html="titleOverride" />
     </template>
-  </hs-notice>
+  </dt-notice>
 </template>
 
 <script>
-import HsNotice from './notice';
+import DtNotice from './notice';
 import icon from '../mixins/icon';
 
 export default {
   name: 'NoticeDefault',
-  components: { HsNotice },
+  components: { DtNotice },
   mixins: [icon],
 };
 </script>

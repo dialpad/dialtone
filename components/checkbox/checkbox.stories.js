@@ -4,7 +4,7 @@ import { VALIDATION_MESSAGE_TYPES } from '../constants';
 import CheckboxDefault from './checkbox_default.story.vue';
 import CheckboxVariants from './checkbox_variants.story.vue';
 import BaseCheckboxMdx from './checkbox.mdx';
-import HsCheckbox from './checkbox';
+import DtCheckbox from './checkbox';
 
 // Default Prop Values
 export const argsData = {
@@ -94,7 +94,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Forms/Checkbox',
-  component: HsCheckbox,
+  component: DtCheckbox,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

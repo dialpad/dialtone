@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="showMessages && !isFilteredValidationMessagesEmpty"
-    class="base-input__messages"
+    class="base-input__messages d-d-flex d-fd-column"
     data-qa="validation-messages-container"
   >
     <div
@@ -10,7 +10,12 @@
       role="status"
       aria-live="polite"
       data-qa="validation-message"
-      :class="['base-input__message', 'd-validation-message', `base-input__message--${type}`, `d-validation-message--${type}`]"
+      :class="[
+        'base-input__message',
+        'd-validation-message',
+        `base-input__message--${type}`,
+        `d-validation-message--${type}`,
+      ]"
     >
       {{ message }}
     </div>
@@ -26,7 +31,7 @@ import {
 } from '../utils';
 
 export default {
-  name: 'HsValidationMessages',
+  name: 'DtValidationMessages',
 
   props: {
     /**

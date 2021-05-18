@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
-import HsValidationMessages from './validation_messages.vue';
+import DtValidationMessages from './validation_messages.vue';
 import {
   setFormattedValidationMessages,
   addFormattedValidationMessage,
@@ -30,7 +30,7 @@ describe('Validation Messages Tests', function () {
 
   // Helpers
   const _setWrappers = () => {
-    wrapper = shallowMount(HsValidationMessages, {
+    wrapper = shallowMount(DtValidationMessages, {
       propsData,
       attrs,
       localVue: this.localVue,
@@ -170,7 +170,7 @@ describe('Validation Messages Tests', function () {
   describe('Validation Tests', function () {
     describe('When there are validation messages', function () {
       // Test Environment
-      const prop = HsValidationMessages.props.validationMessages;
+      const prop = DtValidationMessages.props.validationMessages;
 
       itBehavesLikePassesCustomPropValidation(prop, ['Error']);
 

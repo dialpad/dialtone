@@ -1,11 +1,11 @@
 <script>
 import Vue from 'vue';
-import { HsInputGroup } from '../input_group';
+import { DtInputGroup } from '../input_group';
 
 export default {
-  name: 'HsCheckboxGroup',
+  name: 'DtCheckboxGroup',
 
-  extends: HsInputGroup,
+  extends: DtInputGroup,
 
   model: {
     prop: 'selectedValues',

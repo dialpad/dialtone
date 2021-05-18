@@ -1,7 +1,9 @@
 import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
-import HsInput from './input.vue';
+import { INPUT_SIZES } from './input_constants';
+import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd.vue';
+import DtInput from './input.vue';
 
 // Constants
 const basePropsData = {
@@ -14,13 +16,16 @@ const baseAttrs = {
   name: 'input-name',
 };
 
-describe('Handset Input tests', function () {
+describe('Dialtone Vue Input tests', function () {
   // Wrappers
   let wrapper;
+  let labelWrapper;
   let label;
   let description;
   let nativeInput;
   let nativeTextarea;
+  let leftIconWrapper;
+  let rightIconWrapper;
 
   // Test Environment
   let propsData;
@@ -31,14 +36,17 @@ describe('Handset Input tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    label = wrapper.find('[data-qa="hs-input-label"]');
-    description = wrapper.find('[data-qa="hs-input-description"]');
+    labelWrapper = wrapper.find('[data-qa="dt-input-label-wrapper"]');
+    label = wrapper.find('[data-qa="dt-input-label"]');
+    description = wrapper.find('[data-qa="dt-input-description"]');
     nativeInput = wrapper.find('input');
     nativeTextarea = wrapper.find('textarea');
+    leftIconWrapper = wrapper.find('[data-qa="dt-input-left-icon-wrapper"]');
+    rightIconWrapper = wrapper.find('[data-qa="dt-input-right-icon-wrapper"]');
   };
 
   const _mountWrapper = () => {
-    wrapper = mount(HsInput, {
+    wrapper = mount(DtInput, {
       propsData,
       attrs,
       slots,
@@ -69,15 +77,25 @@ describe('Handset Input tests', function () {
 
   describe('Presentation Tests', function () {
     // Shared Examples
+    function itBehavesLikeHasIconSizeClass (iconWrapper, size) {
+      if (size !== INPUT_SIZES.DEFAULT) {
+        assert.isTrue(iconWrapper.classes().includes(`d-input-icon--${size}`));
+      } else {
+        assert.isFalse(iconWrapper.classes().includes(`d-input-icon--${size}`));
+      }
+    }
+
     const itBehavesLikeRendersDescription = (descriptionText) => {
       it('should render the description', function () { assert.isTrue(description.exists()); });
-      it('should have description class', function () { assert.isTrue(description.classes().includes('d-description')); });
+      it('should have description class', function () {
+        assert.isTrue(description.classes().includes('d-description'));
+      });
       it('should have a generated id', function () { assert.exists(description.attributes('id')); });
       it('should display the correct description', function () {
         assert.strictEqual(description.text(), descriptionText);
       });
-      it('should have aria details defined on label', function () {
-        assert.strictEqual(description.attributes('id'), label.attributes('aria-details'));
+      it('should have aria details defined on label wrapper', function () {
+        assert.strictEqual(description.attributes('id'), labelWrapper.attributes('aria-details'));
       });
     };
 
@@ -90,8 +108,12 @@ describe('Handset Input tests', function () {
       });
 
       it('should render the native input', function () { assert.isTrue(nativeInput.exists()); });
-      it('should have a type prop', function () { assert.strictEqual(nativeInput.attributes('type'), propsData.type); });
-      it('should have a bound value prop', function () { assert.strictEqual(nativeInput.element.value, propsData.value); });
+      it('should have a type prop', function () {
+        assert.strictEqual(nativeInput.attributes('type'), propsData.type);
+      });
+      it('should have a bound value prop', function () {
+        assert.strictEqual(nativeInput.element.value, propsData.value);
+      });
       it('should have input class', function () { assert.isTrue(nativeInput.classes().includes('d-input')); });
       it('should display the initial value prop', function () {
         assert.strictEqual(nativeInput.element.value, wrapper.vm.value);
@@ -119,8 +141,8 @@ describe('Handset Input tests', function () {
       beforeEach(async function () { _setChildWrappers(); });
 
       it('should not render a description', function () { assert.isFalse(description.exists()); });
-      it('should not have aria details defined on label', function () {
-        assert.notExists(label.attributes('aria-details'));
+      it('should not have aria details defined on label wrapper', function () {
+        assert.notExists(labelWrapper.attributes('aria-details'));
       });
     });
 
@@ -143,6 +165,88 @@ describe('Handset Input tests', function () {
       });
 
       itBehavesLikeRendersDescription('Description');
+    });
+
+    describe('When a left icon is provided', function () {
+      // Shared Examples
+      const itBehavesLikeRendersLeftInputIcon = (size = INPUT_SIZES.DEFAULT) => {
+        it('should render the icon wrapper', function () { assert.isTrue(leftIconWrapper.exists()); });
+        it('should have input icon class', function () {
+          assert.isTrue(leftIconWrapper.classes().includes('d-input-icon'));
+        });
+        it('should have input icon side class', function () {
+          assert.isTrue(leftIconWrapper.classes().includes('d-input-icon--left'));
+        });
+        it('should have input icon size class', function () { itBehavesLikeHasIconSizeClass(leftIconWrapper, size); });
+        it('should render the provided icon', function () { assert.isTrue(wrapper.findComponent(IconAdd).exists()); });
+      };
+
+      // Test Setup
+      beforeEach(async function () {
+        slots = { leftIcon: IconAdd };
+      });
+
+      describe('When a size is not provided', function () {
+        // Test Setup
+        beforeEach(async function () {
+          _mountWrapper();
+          _setChildWrappers();
+        });
+
+        itBehavesLikeRendersLeftInputIcon();
+      });
+
+      describe('When a size is provided', function () {
+        // Test Setup
+        beforeEach(async function () {
+          propsData = { size: INPUT_SIZES.EXTRA_LARGE };
+          _mountWrapper();
+          _setChildWrappers();
+        });
+
+        itBehavesLikeRendersLeftInputIcon(INPUT_SIZES.EXTRA_LARGE);
+      });
+    });
+
+    describe('When a right icon is provided', function () {
+      // Shared Examples
+      const itBehavesLikeRendersRightInputIcon = (size = INPUT_SIZES.DEFAULT) => {
+        it('should render the icon wrapper', function () { assert.isTrue(rightIconWrapper.exists()); });
+        it('should have input icon class', function () {
+          assert.isTrue(rightIconWrapper.classes().includes('d-input-icon'));
+        });
+        it('should have input icon side class', function () {
+          assert.isTrue(rightIconWrapper.classes().includes('d-input-icon--right'));
+        });
+        it('should have input icon size class', function () { itBehavesLikeHasIconSizeClass(rightIconWrapper, size); });
+        it('should render the provided icon', function () { assert.isTrue(wrapper.findComponent(IconAdd).exists()); });
+      };
+
+      // Test Setup
+      beforeEach(async function () {
+        slots = { rightIcon: IconAdd };
+      });
+
+      describe('When a size is not provided', function () {
+        // Test Setup
+        beforeEach(async function () {
+          _mountWrapper();
+          _setChildWrappers();
+        });
+
+        itBehavesLikeRendersRightInputIcon();
+      });
+
+      describe('When a size is provided', function () {
+        // Test Setup
+        beforeEach(async function () {
+          propsData = { size: INPUT_SIZES.EXTRA_LARGE };
+          _mountWrapper();
+          _setChildWrappers();
+        });
+
+        itBehavesLikeRendersRightInputIcon(INPUT_SIZES.EXTRA_LARGE);
+      });
     });
 
     describe('When no validation message(s) are provided', function () {
@@ -230,6 +334,50 @@ describe('Handset Input tests', function () {
         assert.equal(inputSuccessMessages.length, 2);
         assert.equal(inputSuccessMessages.at(0).text(), successMessage1);
         assert.equal(inputSuccessMessages.at(1).text(), successMessage2);
+      });
+    });
+
+    describe('When a size is provided', function () {
+      // Test Environment
+      let size;
+
+      // Shared Examples
+      const itBehavesLikeAddsInputAndLabelSizeClasses = () => {
+        it('should add input size class', function () {
+          assert.isTrue(nativeInput.classes().includes(`d-input--${size}`));
+        });
+        it('should add label size class', function () { assert.isTrue(label.classes().includes(`d-label--${size}`)); });
+      };
+
+      // Test Setup
+      beforeEach(async function () {
+        propsData = { size, label: 'Label', description: 'Description' };
+        _mountWrapper();
+        _setChildWrappers();
+      });
+
+      describe('When size is EXTRA_SMALL', function () {
+        // Test Setup
+        before(function () {
+          size = INPUT_SIZES.EXTRA_SMALL;
+        });
+
+        itBehavesLikeAddsInputAndLabelSizeClasses();
+        it('should not add description size class', function () {
+          assert.isFalse(description.classes().includes(`d-description--${size}`));
+        });
+      });
+
+      describe('When size is EXTRA_LARGE', function () {
+        // Test Setup
+        before(function () {
+          size = INPUT_SIZES.EXTRA_LARGE;
+        });
+
+        itBehavesLikeAddsInputAndLabelSizeClasses();
+        it('should add description size class', function () {
+          assert.isTrue(description.classes().includes(`d-description--${size}`));
+        });
       });
     });
   });

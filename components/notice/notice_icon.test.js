@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import HsNoticeIcon from './notice_icon';
+import DtNoticeIcon from './notice_icon';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import IconCamera from '@dialpad/dialtone/lib/dist/vue/icons/IconCamera';
 
@@ -11,7 +11,7 @@ const basePropsData = {
 const baseSlotsData = {
 };
 
-describe('HsNoticeIcon tests', function () {
+describe('DtNoticeIcon tests', function () {
   let wrapper;
   let iconDiv;
   let cameraIcon;
@@ -20,7 +20,7 @@ describe('HsNoticeIcon tests', function () {
   let slotsData;
 
   const _setWrappers = () => {
-    wrapper = shallowMount(HsNoticeIcon, {
+    wrapper = shallowMount(DtNoticeIcon, {
       propsData: propsData,
       slots: slotsData,
       localVue: this.localVue,

@@ -1,9 +1,9 @@
 export {
-  InputMixin as HsInputMixin,
-  CheckableMixin as HsCheckableInputMixin,
-  GroupableMixin as HsGroupableInputMixin,
+  InputMixin as DtInputMixin,
+  CheckableMixin as DtCheckableInputMixin,
+  GroupableMixin as DtGroupableInputMixin,
 } from './input';
 
 export {
-  InputGroupMixin as HsInputGroupMixin,
+  InputGroupMixin as DtInputGroupMixin,
 } from './input_group';

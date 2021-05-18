@@ -1,4 +1,4 @@
-export { default as HsPopover } from './popover.vue';
+export { default as DtPopover } from './popover.vue';
 export {
   POPOVER_PADDING_CLASSES,
   POPOVER_HORIZONTAL_ALIGNMENT,

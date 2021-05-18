@@ -1,5 +1,5 @@
 <template>
-  <hs-input
+  <dt-input
     :value="value"
     :type="type"
     :messages="messages"
@@ -11,34 +11,9 @@
     :show-messages="showMessages"
     :messages-class="messagesClass"
     :placeholder="placeholder"
-    :show-clear-button="showClearButton"
     @input="onInput"
     @clear="onClear"
   >
-    <template
-      v-if="icon"
-      #icon
-    >
-      <component :is="icon" />
-    </template>
-    <template
-      v-if="innerLeft"
-      #innerLeft
-    >
-      <component
-        :is="innerLeft"
-        class="d-svg--size16"
-      />
-    </template>
-    <template
-      v-if="innerRight"
-      #innerRight
-    >
-      <component
-        :is="innerRight"
-        class="d-svg--size16"
-      />
-    </template>
     <template
       v-if="label"
       #label
@@ -51,16 +26,28 @@
     >
       <span v-html="description" />
     </template>
-  </hs-input>
+    <template
+      v-if="leftIcon"
+      #leftIcon
+    >
+      <component :is="leftIcon" />
+    </template>
+    <template
+      v-if="rightIcon"
+      #rightIcon
+    >
+      <component :is="rightIcon" />
+    </template>
+  </dt-input>
 </template>
 
 <script>
-import HsInput from './input';
+import DtInput from './input';
 import icon from '../mixins/icon';
 
 export default {
   name: 'InputDefault',
-  components: { HsInput },
+  components: { DtInput },
   mixins: [icon],
 };
 </script>

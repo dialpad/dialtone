@@ -4,61 +4,64 @@
     :role="role"
     v-on="$listeners"
   >
-    <hs-notice-icon
+    <dt-notice-icon
       :kind="kind"
       v-on="$listeners"
     >
       <!-- @slot Use a custom icon -->
       <slot name="icon" />
-    </hs-notice-icon>
-    <hs-notice-content
+    </dt-notice-icon>
+    <dt-notice-content
       :title-id="titleId"
       :content-id="contentId"
       :title="title"
       v-on="$listeners"
     >
       <template #titleOverride>
-        <!-- @slot Allows you to override the title, only use this if you need to override with something other than text. Otherwise use the "title" prop. -->
+        <!-- @slot Allows you to override the title, only use this if you need
+        to override with something other than text. Otherwise use the "title" prop. -->
         <slot name="titleOverride" />
       </template>
       <!-- @slot the main textual content of the notice -->
       <slot />
-    </hs-notice-content>
-    <hs-notice-action
+    </dt-notice-content>
+    <dt-notice-action
       :hide-close="hideClose"
       :close-button-props="closeButtonProps"
       v-on="$listeners"
     >
       <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
       <slot name="action" />
-    </hs-notice-action>
+    </dt-notice-action>
   </aside>
 </template>
 <script>
-import HsNoticeIcon from './notice_icon';
-import HsNoticeContent from './notice_content';
-import HsNoticeAction from './notice_action';
+import DtNoticeIcon from './notice_icon';
+import DtNoticeContent from './notice_content';
+import DtNoticeAction from './notice_action';
 import { NOTICE_KINDS } from './notice_constants.js';
 
 export default {
-  name: 'HsNotice',
+  name: 'DtNotice',
 
   components: {
-    HsNoticeIcon,
-    HsNoticeContent,
-    HsNoticeAction,
+    DtNoticeIcon,
+    DtNoticeContent,
+    DtNoticeAction,
   },
 
   props: {
     /**
-     * Sets an ID on the title element of the component. Useful for aria-describedby or aria-labelledby or any other reason you may need an id to refer to the title.
+     * Sets an ID on the title element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the title.
      */
     titleId: {
       type: String,
       default: undefined,
     },
     /**
-     * Sets an ID on the content element of the component. Useful for aria-describedby or aria-labelledby or any other reason you may need an id to refer to the content.
+     * Sets an ID on the content element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the content.
      */
     contentId: {
       type: String,
@@ -72,7 +75,8 @@ export default {
       default: '',
     },
     /**
-     * Used in scenarios where the message needs to visually dominate the screen. This will also change the aria role from status to alert.
+     * Used in scenarios where the message needs to visually dominate the screen.
+     * This will also change the aria role from status to alert.
      */
     important: {
       type: Boolean,

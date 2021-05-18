@@ -1,7 +1,7 @@
 <template>
   <div id="forms-checkbox--variants-container">
     <!-- Default -->
-    <hs-checkbox
+    <dt-checkbox
       name="default"
       value="Value"
       label="Default"
@@ -9,7 +9,7 @@
     <!-- Default -->
 
     <!-- With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="with-description"
       value="Value"
       label="With"
@@ -18,16 +18,16 @@
     <!-- With Description -->
 
     <!-- With Slotted Label -->
-    <hs-checkbox
+    <dt-checkbox
       name="with-slotted-label"
       value="Value"
     >
       With Slotted Label
-    </hs-checkbox>
+    </dt-checkbox>
     <!-- With Slotted Label -->
 
     <!-- With Slotted Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="with-slotted-description"
       label="With"
       value="Value"
@@ -35,11 +35,11 @@
       <template #description>
         Slotted Description
       </template>
-    </hs-checkbox>
+    </dt-checkbox>
     <!-- With Slotted Description -->
 
     <!-- With Slotted Label and Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="with-slotted-label-and-description"
       value="Value"
     >
@@ -47,11 +47,11 @@
       <template #description>
         And Slotted Description
       </template>
-    </hs-checkbox>
+    </dt-checkbox>
     <!-- With Slotted Label and Description -->
 
     <!-- Checked -->
-    <hs-checkbox
+    <dt-checkbox
       name="checked"
       value="Value"
       label="Checked"
@@ -60,7 +60,7 @@
     <!-- Checked -->
 
     <!-- Checked With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="checked-with-description"
       value="Value"
       label="Checked"
@@ -70,7 +70,7 @@
     <!-- Checked With Description -->
 
     <!-- Success With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="success-with-description"
       value="Value"
       label="Success"
@@ -80,7 +80,7 @@
     <!-- Success With Description -->
 
     <!-- Warning With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="warning-with-description"
       value="Value"
       label="Warning"
@@ -90,7 +90,7 @@
     <!-- Warning With Description -->
 
     <!-- Error With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="error-with-description"
       value="Value"
       label="Error"
@@ -100,7 +100,7 @@
     <!-- Error With Description -->
 
     <!-- Checked Success With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="checked-success-with-description"
       value="Value"
       label="Checked Success"
@@ -111,7 +111,7 @@
     <!-- Checked Success With Description -->
 
     <!-- Checked Warning With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="checked-warning-with-description"
       value="Value"
       label="Checked Warning"
@@ -122,7 +122,7 @@
     <!-- Checked Warning With Description -->
 
     <!-- Checked Error With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="checked-error-with-description"
       value="Value"
       label="Checked Error"
@@ -133,7 +133,7 @@
     <!-- Checked Error With Description -->
 
     <!-- Disabled -->
-    <hs-checkbox
+    <dt-checkbox
       name="disabled"
       value="Value"
       label="Disabled"
@@ -142,7 +142,7 @@
     <!-- Disabled -->
 
     <!-- Disabled With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="disabled-with-description"
       value="Value"
       label="Disabled"
@@ -152,7 +152,7 @@
     <!-- Disabled With Description -->
 
     <!-- Checked and Disabled -->
-    <hs-checkbox
+    <dt-checkbox
       name="checked-disabled"
       value="Value"
       label="Disabled"
@@ -162,7 +162,7 @@
     <!-- Checked and Disabled -->
 
     <!-- Checked and Disabled With Description -->
-    <hs-checkbox
+    <dt-checkbox
       name="checked-disabled-with-description"
       value="Value"
       label="Checked Disabled"
@@ -173,7 +173,7 @@
     <!-- Checked and Disabled With Description -->
 
     <!-- Checked and With Description and Success validation message -->
-    <hs-checkbox
+    <dt-checkbox
       name="checked-disabled-with-description"
       value="Value"
       label="Checked Disabled"
@@ -186,12 +186,12 @@
 </template>
 
 <script>
-import HsCheckbox from './checkbox';
+import DtCheckbox from './checkbox';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
 
 export default {
   name: 'CheckboxVariants',
-  components: { HsCheckbox },
+  components: { DtCheckbox },
   created () {
     this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
   },

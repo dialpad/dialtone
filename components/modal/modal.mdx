@@ -1,5 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import HsModal from './modal';
+import DtModal from './modal';
 
 # Modals
 
@@ -8,7 +8,7 @@ import HsModal from './modal';
   page content.
 </Subtitle>
 
-_Note: in Dialpad, you should use the `BaseModal` component, which is a wrapper around `HsModal` and integrates with the
+_Note: in Dialpad, you should use the `BaseModal` component, which is a wrapper around `DtModal` and integrates with the
 existing Backbone overlays and provides the translated `closeButtonProps.ariaLabel` prop automatically. The rest of the
 API is the same._
 
@@ -51,20 +51,20 @@ In addition to the footer, custom elements can be inserted into the header and b
 
 ## Props
 
-<ArgsTable of={HsModal} />
+<ArgsTable of={DtModal} />
 
 ## Usage
 
 ### Import
 
 ```jsx
-import { HsModal } from '@dialpad/handset';
+import { DtModal } from '@dialpad/dialtone-vue';
 ```
 
 ### With Props
 
 ```vue
-<hs-modal
+<dt-modal
   copy="Main dialog text, such as a description of available options or actions."
   title="Title for the dialog's header"
   :close-button-props="{ ariaLabel: 'Close the dialog' }"
@@ -75,45 +75,45 @@ import { HsModal } from '@dialpad/handset';
 ### With Slotted Content (Default Slot)
 
 ```vue
-<hs-modal
+<dt-modal
   title="Title for the dialog's header"
   :close-button-props="{ ariaLabel: 'Close the dialog' }"
   :show.sync="showModal"
 >
   <div>Custom content</div>
-</hs-modal>
+</dt-modal>
 ```
 
 ### With Slotted Content and Danger Style
 
 ```vue
-<hs-modal
+<dt-modal
   title="Title for the dialog's header"
   kind="danger"
   :close-button-props="{ ariaLabel: 'Close the dialog' }"
   :show.sync="showModal"
 >
   <div>Custom content</div>
-</hs-modal>
+</dt-modal>
 ```
 
 ### With Slotted Content and Full Size
 
 ```vue
-<hs-modal
+<dt-modal
   title="Title for the dialog's header"
   size="full"
   :close-button-props="{ ariaLabel: 'Close the dialog' }"
   :show.sync="showModal"
 >
   <div>Custom content</div>
-</hs-modal>
+</dt-modal>
 ```
 
 ### With Default Copy Text, Slotted Header and Footer
 
 ```vue
-<hs-modal
+<dt-modal
   copy="Main dialog text, such as a description of available options or actions."
   :close-button-props="{ ariaLabel: 'Close the dialog' }"
   :show.sync="showModal"
@@ -125,5 +125,5 @@ import { HsModal } from '@dialpad/handset';
     <div>Confirm</div>
     <div>Cancel</div>
   </template>
-</hs-modal>
+</dt-modal>
 ```

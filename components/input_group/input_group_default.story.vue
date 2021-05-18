@@ -1,5 +1,5 @@
 <template>
-  <hs-input-group
+  <dt-input-group
     :id="id"
     :name="name"
     :legend="legend"
@@ -28,17 +28,17 @@
     >
       <span v-html="legendSlot" />
     </template>
-  </hs-input-group>
+  </dt-input-group>
 </template>
 
 <script>
 import InputDecorator from './decorators/input';
-import HsInputGroup from './input_group';
+import DtInputGroup from './input_group';
 
 export default {
   name: 'InputGroupDefault',
 
-  components: { InputDecorator, HsInputGroup },
+  components: { InputDecorator, DtInputGroup },
 
   data () {
     return {

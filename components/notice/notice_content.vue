@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'HsNoticeContent',
+  name: 'DtNoticeContent',
 
   props: {
     title: {

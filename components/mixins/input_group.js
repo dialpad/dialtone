@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { HsValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '../validation_messages';
 import { validationMessageValidator } from '../validators';
 import {
   getUniqueString,
@@ -12,7 +12,7 @@ import {
  * commonly used in our input group components.
  */
 export const InputGroupMixin = {
-  components: { HsValidationMessages },
+  components: { DtValidationMessages },
 
   // provide data to slotted components
   provide () {

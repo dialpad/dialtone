@@ -6,8 +6,15 @@ export function itBehavesLikeHasValidationClasses (
   descriptionValidationClasses,
   validationState,
 ) {
-  assert.strictEqual(wrapper.find(`.${inputValidationClasses[validationState]}`).exists(), true, 'has input validation class');
-  assert.strictEqual(wrapper.find(`.${descriptionValidationClasses[validationState]}`).exists(), true, 'has description validation class');
+  assert.strictEqual(
+    wrapper.find(`.${inputValidationClasses[validationState]}`).exists(),
+    true,
+    'has input validation class',
+  );
+  assert.strictEqual(
+    wrapper.find(`.${descriptionValidationClasses[validationState]}`).exists(),
+    true,
+    'has description validation class');
 }
 
 export function itBehavesLikeChecked (input) {

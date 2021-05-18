@@ -1,21 +1,21 @@
 <template>
   <div>
-    <hs-checkbox
+    <dt-checkbox
       v-for="option in options"
       :key="option.value"
       :value="option.value"
     >
       <span>{{ option.label }}</span>
-    </hs-checkbox>
+    </dt-checkbox>
   </div>
 </template>
 
 <script>
-import { HsCheckbox } from '../checkbox';
+import { DtCheckbox } from '../checkbox';
 
 export default {
   name: 'CheckboxesDecorator',
-  components: { HsCheckbox },
+  components: { DtCheckbox },
   created () {
     this.options = [
       { label: 'Apple', value: 'apple' },

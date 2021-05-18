@@ -12,10 +12,10 @@ import {
   itBehavesLikeAppliesClassToChild,
   itBehavesLikeAppliesChildProp,
 } from '../../tests/shared_examples/extendability';
-import { HsValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '../validation_messages';
 import InputFixture from './decorators/input.vue';
 import InputsFixture from './decorators/inputs.vue';
-import HsInputGroup from './input_group.vue';
+import DtInputGroup from './input_group.vue';
 
 // Constants
 const basePropsData = {
@@ -44,7 +44,7 @@ describe('Input Group Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(HsInputGroup, {
+    wrapper = shallowMount(DtInputGroup, {
       propsData,
       attrs,
       slots,
@@ -55,7 +55,7 @@ describe('Input Group Tests', function () {
   };
 
   const _mountWrappers = () => {
-    wrapper = mount(HsInputGroup, {
+    wrapper = mount(DtInputGroup, {
       propsData,
       slots,
       attrs,
@@ -102,7 +102,7 @@ describe('Input Group Tests', function () {
         assert.lengthOf(wrapper.findAllComponents(InputFixture), 0);
       });
       it('should not have validation messages', function () {
-        assert.lengthOf(wrapper.findComponent(HsValidationMessages)?.props('validationMessages'), 0);
+        assert.lengthOf(wrapper.findComponent(DtValidationMessages)?.props('validationMessages'), 0);
       });
     });
 

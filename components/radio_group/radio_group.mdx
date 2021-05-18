@@ -1,5 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import HsRadioGroup from './radio_group';
+import DtRadioGroup from './radio_group';
 
 # Radio Groups
 
@@ -25,14 +25,14 @@ contain one or more Radios which users will make a selection from.
 
 ## Props
 
-<ArgsTable of={HsRadioGroup} />
+<ArgsTable of={DtRadioGroup} />
 
 ## Usage
 
 ### Import
 
 ```jsx
-import { HsRadio, HsRadioGroup } from '@dialpad/handset';
+import { DtRadio, DtRadioGroup } from '@dialpad/dialtone-vue';
 ```
 
 ### With Slots
@@ -40,14 +40,14 @@ import { HsRadio, HsRadioGroup } from '@dialpad/handset';
 Passing in Radio components by slot.
 
 ```vue
-<hs-radio-group
+<dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
   legend="Fruits"
 >
-  <hs-radio value="pear">Pear</hs-radio>
-  <hs-radio value="kiwi">Kiwi</hs-radio>
-</hs-radio-group>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+</dt-radio-group>
 ```
 
 ### With Options
@@ -63,19 +63,19 @@ const options = [
 ```
 
 ```vue
-<hs-radio-group
+<dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
   legend="Fruits"
 >
-  <hs-radio
+  <dt-radio
     v-for="option in options"
     :key="option.value"
     :value="option.value"
   >
     <span>{{ option.label }}</span>
-  </hs-radio>
-</hs-radio-group>
+  </dt-radio>
+</dt-radio-group>
 ```
 
 ### Without Legend
@@ -83,14 +83,14 @@ const options = [
 When no legend is provided it is expected that an `aria-label` is passed into the component.
 
 ```vue
-<hs-radio-group
+<dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
   aria-label="Fruits"
 >
-  <hs-radio value="pear">Pear</hs-radio>
-  <hs-radio value="kiwi">Kiwi</hs-radio>
-</hs-radio-group>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+</dt-radio-group>
 ```
 
 ### With Slotted Legend
@@ -98,16 +98,16 @@ When no legend is provided it is expected that an `aria-label` is passed into th
 The legend can also be passed by slot.
 
 ```vue
-<hs-radio-group
+<dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
 >
-  <hs-radio value="pear">Pear</hs-radio>
-  <hs-radio value="kiwi">Kiwi</hs-radio>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
   <template #legend>
     Fruits
   </template>
-</hs-radio-group>
+</dt-radio-group>
 ```
 
 ### With Event Hander
@@ -115,15 +115,15 @@ The legend can also be passed by slot.
 The event handler is only needed if you need to do additional processing. The v-model is automatically updated.
 
 ```vue
-<hs-radio-group
+<dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
   legend="Fruits"
   @input="onInput"
 >
-  <hs-radio value="pear">Pear</hs-radio>
-  <hs-radio value="kiwi">Kiwi</hs-radio>
-</hs-radio-group>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+</dt-radio-group>
 ```
 
 ### With Validation Messages
@@ -131,41 +131,41 @@ The event handler is only needed if you need to do additional processing. The v-
 <h4 style={{ color: 'red' }}>Error</h4>
 
 ```vue
-<hs-radio-group
+<dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
   legend="Fruits"
   :messages="[{ message: 'Error', type: 'error' }]"
 >
-  <hs-radio value="pear">Pear</hs-radio>
-  <hs-radio value="kiwi">Kiwi</hs-radio>
-</hs-radio-group>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+</dt-radio-group>
 ```
 
 <h4 style={{ color: 'Goldenrod' }}>Warning</h4>
 
 ```vue
-<hs-radio-group
+<dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
   legend="Fruits"
   :messages="[{ message: 'Warning', type: 'warning' }]"
 >
-  <hs-radio value="pear">Pear</hs-radio>
-  <hs-radio value="kiwi">Kiwi</hs-radio>
-</hs-radio-group>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+</dt-radio-group>
 ```
 
 <h4 style={{ color: 'green' }}>Success</h4>
 
 ```vue
-<hs-radio-group
+<dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
   legend="Fruits"
   :messages="[{ message: 'Success', type: 'success' }]"
 >
-  <hs-radio value="pear">Pear</hs-radio>
-  <hs-radio value="kiwi">Kiwi</hs-radio>
-</hs-radio-group>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+</dt-radio-group>
 ```

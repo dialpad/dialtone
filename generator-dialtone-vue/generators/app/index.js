@@ -9,15 +9,15 @@ module.exports = class extends Generator {
         {
           type: 'input',
           name: 'componentName',
-          message: 'What is the name of your new component? (PascalCase, prefix with Hs):',
-          default: 'HsComponent',
+          message: 'What is the name of your new component? (PascalCase, prefix with Dt):',
+          default: 'DtComponent',
         },
       ]);
       valid = true;
-      // validate starts with Hs
-      if (!_.startsWith(this.inputValues.componentName, 'Hs')) {
+      // validate starts with Dt
+      if (!_.startsWith(this.inputValues.componentName, 'Dt')) {
         valid = false;
-        this.log('Error: name must start with Hs');
+        this.log('Error: name must start with Dt');
       }
       // validate pascal case
       if (!this.inputValues.componentName.match(/^([A-Z][a-z]+)+$/)) {

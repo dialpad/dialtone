@@ -2,7 +2,7 @@
   <component
     :is="elementType"
     v-click-outside="() => close('click-outside')"
-    class="d-p-relative hs-popover"
+    class="d-p-relative dt-popover"
   >
     <div
       :id="!ariaLabelledby && labelledBy"
@@ -18,7 +18,7 @@
         }"
       />
     </div>
-    <hs-lazy-show
+    <dt-lazy-show
       :id="id"
       ref="container"
       :role="role"
@@ -29,11 +29,17 @@
       :transition="transition"
       :show="open"
       :class="[
-        'd-border d-border-color--ash-dark d-border-radius--sm d-bgc-white d-box-shadow--md d-mt4 d-p-absolute d-z-index--popover',
-        'hs-popover__content',
-        `hs-popover__content--align-${alignment}`,
-        `hs-popover__content--valign-${verticalAlignment}`,
-        `hs-popover__content--pad-${padding}`,
+        'd-border',
+        'd-border-color--ash-dark',
+        'd-border-radius--sm',
+        'd-bgc-white d-box-shadow--md',
+        'd-mt4',
+        'd-ps-absolute',
+        'd-z-index--popover',
+        'dt-popover__content',
+        `dt-popover__content--align-${alignment}`,
+        `dt-popover__content--valign-${verticalAlignment}`,
+        `dt-popover__content--pad-${padding}`,
         contentClass,
       ]"
       tabindex="-1"
@@ -44,14 +50,14 @@
 
       <div
         v-if="hasCaret"
-        class="d-bgc-white d-mtn4 d-border-top d-border-left d-border-color--ash-dark hs-popover__caret"
+        class="d-bgc-white d-mtn4 d-border-top d-border-left d-border-color--ash-dark dt-popover__caret"
       />
-    </hs-lazy-show>
+    </dt-lazy-show>
   </component>
 </template>
 
 <script>
-import { HsLazyShow } from '../lazy_show';
+import { DtLazyShow } from '../lazy_show';
 import {
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
@@ -63,13 +69,13 @@ import clickOutside from 'v-click-outside';
 import Modal from '../mixins/modal.js';
 
 export default {
-  name: 'HsPopover',
+  name: 'DtPopover',
 
   /********************
    * CHILD COMPONENTS *
    ********************/
   components: {
-    HsLazyShow,
+    DtLazyShow,
   },
 
   directives: {
@@ -128,7 +134,7 @@ export default {
 
     /**
      * Named transition when the content display is toggled.
-     * @see HsLazyShow
+     * @see DtLazyShow
      */
     transition: {
       type: String,
@@ -172,7 +178,7 @@ export default {
     id: {
       type: String,
       default () {
-        return util.getUniqueString('HsPopover__content');
+        return util.getUniqueString('DtPopover__content');
       },
     },
 
@@ -241,7 +247,7 @@ export default {
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
-      return this.ariaLabelledby || (!this.ariaLabel && util.getUniqueString('HsPopover__anchor'));
+      return this.ariaLabelledby || (!this.ariaLabel && util.getUniqueString('DtPopover__anchor'));
     },
 
     isDialog () {
@@ -342,11 +348,11 @@ export default {
 <style lang="less">
   @import "../../css/dialtone.less";
 
-  .hs-popover__content {
+  .dt-popover__content {
     &--align-right {
       right: @su0;
 
-      .hs-popover__caret {
+      .dt-popover__caret {
         right: @su24;
       }
     }
@@ -356,7 +362,7 @@ export default {
       margin-top: @su0;
       margin-bottom: @su4;
 
-      .hs-popover__caret {
+      .dt-popover__caret {
         top: auto;
         bottom: -@su4;
         transform: rotate(225deg);
@@ -380,7 +386,7 @@ export default {
     }
   }
 
-  .hs-popover__caret {
+  .dt-popover__caret {
     top: @su0;
     height: @su6;
     width: @su6;

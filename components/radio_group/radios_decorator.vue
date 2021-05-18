@@ -1,21 +1,21 @@
 <template>
   <div>
-    <hs-radio
+    <dt-radio
       v-for="option in options"
       :key="option.value"
       :value="option.value"
     >
       <span>{{ option.label }}</span>
-    </hs-radio>
+    </dt-radio>
   </div>
 </template>
 
 <script>
-import { HsRadio } from '../radio';
+import { DtRadio } from '../radio';
 
 export default {
   name: 'RadiosDecorator',
-  components: { HsRadio },
+  components: { DtRadio },
   created () {
     this.options = [
       { label: 'Apple', value: 'apple' },

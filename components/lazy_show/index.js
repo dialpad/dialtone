@@ -1,1 +1,1 @@
-export { default as HsLazyShow } from './lazy_show.vue';
+export { default as DtLazyShow } from './lazy_show.vue';

@@ -1,128 +1,270 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { assert } from 'chai';
 import sinon from 'sinon';
-import BaseButton from './button.vue';
+import DtButton from './button.vue';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 
-describe('Handset button tests', function () {
+describe('Dialtone Vue Button tests', function () {
   let wrapper;
   let button;
   let icon;
-  let label;
 
   let buttonStub;
   let listeners;
   let propsData;
 
-  let _setElements;
+  const _setElements = function () {
+    button = wrapper.find('[data-qa="dt-button"]');
+    icon = wrapper.find('[data-qa="dt-button-icon"]');
+  };
 
-  describe('Tests without icon slot', function () {
-    before(function () {
-      this.localVue = createLocalVue();
+  const _assertButtonDefaultClasses = function () {
+    const expected = ['base-button__button', 'd-btn', 'd-btn--primary'];
+    assert.isTrue(button.classes().every(function (value, index) { return value === expected[index]; }));
+  };
+
+  before(function () {
+    this.localVue = createLocalVue();
+  });
+
+  describe('Presentation Tests', function () {
+    describe('When rendered with default props', function () {
+      beforeEach(function () {
+        propsData = {};
+        wrapper = shallowMount(DtButton, { propsData, localVue: this.localVue });
+        _setElements();
+      });
+
+      it('Should render the native button', function () {
+        assert.exists(wrapper, 'wrapper exists');
+        assert.isTrue(button.exists(), '<button> native html must be rendered');
+      });
+
+      it('Should render primary by default', async function () {
+        // Default (no props) button should be d-btn--primary
+        assert.isTrue(button.classes().includes('d-btn--primary'));
+      });
+
+      describe('When button is a circle', function () {
+        beforeEach(async function () {
+          // Test that main class is populated with input props
+          const props = {
+            circle: true,
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('Should have circle class', async function () {
+          button = wrapper.find('.base-button__button');
+          assert.isTrue(button.classes().includes('d-btn--circle'));
+        });
+      });
+
+      describe('When button has kind set to danger', function () {
+        beforeEach(async function () {
+          // Test that main class is populated with input props
+          const props = {
+            kind: 'danger',
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('Should have danger class', async function () {
+          button = wrapper.find('.base-button__button');
+          assert.isTrue(button.classes().includes('d-btn--danger'));
+        });
+      });
+
+      describe('When button has an invalid kind prop', function () {
+        beforeEach(async function () {
+          const props = {
+            kind: 'bad',
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('should not have danger class', async function () {
+          _assertButtonDefaultClasses();
+        });
+      });
+
+      describe('When button has importance set to outlined', function () {
+        beforeEach(async function () {
+          // Test that main class is populated with input props
+          const props = {
+            importance: 'outlined',
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('Should have outlined class', async function () {
+          button = wrapper.find('.base-button__button');
+          assert.isTrue(button.classes().includes('d-btn--outlined'));
+        });
+      });
+
+      describe('When button has an invalid importance prop', function () {
+        beforeEach(async function () {
+          const props = {
+            importance: 'bad',
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('should not have importance class', async function () {
+          _assertButtonDefaultClasses();
+        });
+      });
+
+      describe('When button has loading set to true', function () {
+        beforeEach(async function () {
+          // Test that main class is populated with input props
+          const props = {
+            loading: true,
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('Should have loading class', async function () {
+          button = wrapper.find('.base-button__button');
+          assert.isTrue(button.classes().includes('d-btn--loading'));
+        });
+      });
+
+      describe('When button has loading set to false', function () {
+        beforeEach(async function () {
+          const props = {
+            loading: false,
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('should not have loading class', async function () {
+          _assertButtonDefaultClasses();
+        });
+      });
+
+      describe('When size is set to xl', function () {
+        beforeEach(async function () {
+          // Test that main class is populated with input props
+          const props = {
+            size: 'xl',
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('Class is set to the correct size', async function () {
+          button = wrapper.find('.base-button__button');
+          assert.isTrue(button.classes().includes('d-btn--xl'));
+        });
+      });
+
+      describe('When button has an invalid size prop', function () {
+        beforeEach(async function () {
+          const props = {
+            size: 'extra medium',
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('should not have a size class', async function () {
+          _assertButtonDefaultClasses();
+        });
+      });
+
+      describe('When link prop is set to true', function () {
+        beforeEach(async function () {
+          const props = {
+            link: true,
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('d-link class is rendered on button', function () {
+          assert.isTrue(button.classes().includes('d-link'));
+        });
+
+        describe('When link kind is invalid', function () {
+          beforeEach(async function () {
+            const props = {
+              linkKind: 'fake kind',
+            };
+            await wrapper.setProps(props);
+          });
+
+          it('does not set any link kind class', function () {
+            button = wrapper.find('.base-button__button');
+            const expected = ['base-button__button', 'd-link'];
+            assert.isTrue(button.classes().every(function (value, index) { return value === expected[index]; }));
+          });
+        });
+
+        describe('When link kind is danger', function () {
+          beforeEach(async function () {
+            const props = {
+              linkKind: 'danger',
+            };
+            await wrapper.setProps(props);
+          });
+
+          it('sets the correct class', function () {
+            assert.isTrue(button.classes().includes('d-link--danger'));
+          });
+        });
+      });
     });
 
-    beforeEach(function () {
-      buttonStub = sinon.stub();
-      listeners = { click: buttonStub };
-      propsData = {};
-      wrapper = shallowMount(BaseButton, { listeners, propsData, localVue: this.localVue });
-      _setElements = function () {
-        button = wrapper.find('.base-button__button');
+    describe('With icon slot populated', function () {
+      beforeEach(function () {
+        propsData = {};
+        wrapper = shallowMount(DtButton, {
+          propsData,
+          slots: {
+            icon: EmptyComponentFixture,
+          },
+          localVue: this.localVue,
+        });
+        _setElements();
+      });
+
+      it('Should add appropriate position class to icon when iconPosition is "left"', async function () {
+        await wrapper.setProps({ iconPosition: 'left' });
         icon = wrapper.find('.base-button__icon');
-        label = wrapper.find('.base-button__label');
-      };
-      _setElements();
+        assert.isTrue(icon.classes().includes('d-btn__icon--left'));
+      });
+
+      it('Should add appropriate position class to icon when iconPosition is "right"', async function () {
+        await wrapper.setProps({ iconPosition: 'right' });
+        icon = wrapper.find('.base-button__icon');
+        assert.isTrue(icon.classes().includes('d-btn__icon--right'));
+      });
     });
 
-    it('Should render the native button', function () {
-      assert.exists(wrapper, 'wrapper exists');
-      assert.isTrue(button.exists(), '<button> native html must be rendered');
-    });
+    describe('When default slot is populated with text', function () {
+      beforeEach(function () {
+        propsData = {};
+        wrapper = shallowMount(DtButton, {
+          propsData,
+          slots: {
+            default: 'hello',
+          },
+          localVue: this.localVue,
+        });
+        _setElements();
+      });
 
-    it('Should add appropriate main d-btn class to button based on props', async function () {
-      // Default (no props) button should be d-btn--primary
-      assert.isTrue(button.classes().includes('d-btn--primary'));
-
-      // Test that main class is populated with input props
-      let props = {
-        circle: true,
-        kind: 'danger',
-        importance: 'primary',
-        loading: true,
-      };
-      await wrapper.setProps(props);
-      button = wrapper.find('.base-button__button');
-      assert.isTrue(button.classes().includes('d-btn--circle--danger--primary--loading'));
-
-      // Test that main class uses empty modifiers when bad props are passed in
-      props = {
-        circle: false,
-        kind: 'fake kind',
-        importance: 'fake importance',
-        loading: false,
-      };
-
-      await wrapper.setProps(props);
-      assert.isTrue(button.classes().includes('d-btn'));
-    });
-
-    it('Should add appropriate size class to button based on props', async function () {
-      // Default (no props) button should be d-btn (i.e. medium size)
-      assert.isTrue(button.classes().includes('d-btn'));
-
-      // Test that main class is populated with input props
-      let props = {
-        circle: true,
-        size: 'xl',
-      };
-      await wrapper.setProps(props);
-      button = wrapper.find('.base-button__button');
-      assert.isTrue(button.classes().includes('d-btn--circle--xl'));
-
-      // Test that main class should use empty modifiers when provided props are not supported
-      props = {
-        circle: false,
-        size: 'extra medium',
-      };
-      await wrapper.setProps(props);
-      assert.isTrue(button.classes().includes('d-btn'));
-    });
-
-    it('Should add appropriate link class to button based on props', async function () {
-      const props = { link: false };
-      await wrapper.setProps(props);
-      // If link is false, should not assign d-link classes to button
-      assert.isEmpty(button.classes().filter(bc => bc.includes('d-link')));
-
-      // Test that link class uses empty modifiers when provided props are not supported
-      props.link = true;
-      props.linkKind = 'fake kind';
-      await wrapper.setProps(props);
-      button = wrapper.find('.base-button__button');
-      assert.isTrue(button.classes().includes('d-link'));
-
-      // Test when all props are valid
-      props.linkKind = 'danger';
-      props.linkInverted = true;
-
-      await wrapper.setProps(props);
-      assert.isTrue(button.classes().includes('d-link--inverted--danger'));
-    });
-
-    it('Should call listener if associated action happens', async function () {
-      assert.isFalse(buttonStub.called);
-      await button.trigger('click');
-      assert.isTrue(buttonStub.called);
-      assert.equal(wrapper.emitted().click);
+      it('text should display in the button label', function () {
+        assert.strictEqual(wrapper.find('.base-button__label').text(), 'hello');
+      });
     });
   });
 
-  describe('Tests with icon slot', function () {
+  describe('Interactivity Tests', function () {
     beforeEach(function () {
       buttonStub = sinon.stub();
       listeners = { click: buttonStub };
       propsData = {};
-      wrapper = shallowMount(BaseButton, {
+      wrapper = shallowMount(DtButton, {
         listeners,
         propsData,
         slots: {
@@ -133,34 +275,55 @@ describe('Handset button tests', function () {
       _setElements();
     });
 
-    it('Should add appropriate position class to button based on props', async function () {
-      assert.isFalse(button.classes().includes('button__left-align'));
+    describe('When button is clicked', function () {
+      beforeEach(async function () {
+        await button.trigger('click');
+      });
 
-      await wrapper.setProps({ iconPosition: 'left-align' });
+      it('Should call listener', async function () {
+        assert.isTrue(buttonStub.called);
+      });
 
-      button = wrapper.find('.base-button__button');
-      assert.isTrue(button.classes().includes('button__left-align'));
+      it('Should emit click event', function () {
+        assert.equal(wrapper.emitted().click);
+      });
+    });
+  });
+
+  describe('Accessibility Tests', function () {
+    beforeEach(function () {
+      wrapper = shallowMount(DtButton, {
+        listeners,
+        propsData,
+        localVue: this.localVue,
+      });
+      _setElements();
     });
 
-    it('Should add appropriate position class to icon based on props', async function () {
-      await wrapper.setProps({ iconPosition: 'right-align' });
+    describe('When assertiveOnFocus is true', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ assertiveOnFocus: true });
+      });
 
-      icon = wrapper.find('.base-button__icon');
-      assert.isTrue(icon.classes().includes('d-btn__icon--last'));
-    });
+      describe('When button is focused', function () {
+        beforeEach(async function () {
+          await wrapper.setData({ isInFocus: true });
+        });
 
-    it('Should add appropriate position class to label based on props', async function () {
-      await wrapper.setProps({ iconPosition: 'split-left' });
+        it('aria-live should be set to "assertive"', async function () {
+          assert.isTrue(wrapper.attributes('aria-live') === 'assertive');
+        });
+      });
 
-      label = wrapper.find('.base-button__label');
-      assert.isTrue(label.classes().includes('d-flex1'));
-      assert.isFalse(label.classes().includes('button__label__right-align'));
+      describe('When button is not in focus', function () {
+        beforeEach(async function () {
+          await wrapper.setData({ isInFocus: false });
+        });
 
-      await wrapper.setProps({ iconPosition: 'right-align' });
-
-      label = wrapper.find('.base-button__label');
-      assert.isTrue(label.classes().includes('d-flex1'));
-      assert.isTrue(label.classes().includes('button__label__right-align'));
+        it('aria-live is falsy"', async function () {
+          assert.isNotOk(wrapper.attributes('aria-live'));
+        });
+      });
     });
   });
 });

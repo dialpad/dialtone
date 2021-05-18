@@ -1,8 +1,8 @@
 <template>
   <div
     :class="modalClasses"
-    data-qa="hs-modal"
-    :aria-hidden="(!show).toString()"
+    data-qa="dt-modal"
+    :aria-hidden="open"
     @click.self="close"
     @keydown.esc="close"
     @keydown.tab="trapFocus"
@@ -18,37 +18,49 @@
       <div
         v-if="$slots.header"
         :id="labelledById"
-        class="d-modal__title"
-        data-qa="hs-modal-title"
+        class="d-modal__header"
+        data-qa="dt-modal-title"
       >
         <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
         <slot name="header" />
       </div>
-      <h1
+      <h2
         v-else
         :id="labelledById"
-        class="d-modal__title"
-        data-qa="hs-modal-title"
+        class="d-modal__header"
+        data-qa="dt-modal-title"
       >
         {{ title }}
-      </h1>
-
+      </h2>
+      <dt-button
+        class="d-modal__close"
+        circle
+        size="lg"
+        importance="clear"
+        :aria-label="closeButtonProps.ariaLabel"
+        v-bind="closeButtonProps"
+        :kind="kind"
+        @click="close"
+      >
+        <template #icon>
+          <icon-close />
+        </template>
+      </dt-button>
       <div
         v-if="$slots.default"
-        class="d-modal__copy"
-        data-qa="hs-modal-copy"
+        class="d-modal__content"
+        data-qa="dt-modal-copy"
       >
         <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
         <slot />
       </div>
       <p
         v-else
-        class="d-modal__copy"
-        data-qa="hs-modal-copy"
+        class="d-modal__content"
+        data-qa="dt-modal-copy"
       >
         {{ copy }}
       </p>
-
       <footer
         v-if="hasFooterSlot"
         class="d-modal__footer"
@@ -56,24 +68,12 @@
         <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
         <slot name="footer" />
       </footer>
-      <hs-button
-        class="d-modal__close"
-        circle
-        importance="clear"
-        :aria-label="closeButtonProps.ariaLabel"
-        v-bind="closeButtonProps"
-        @click="close"
-      >
-        <template #icon>
-          <icon-close />
-        </template>
-      </hs-button>
     </div>
   </div>
 </template>
 
 <script>
-import HsButton from '../button/button.vue';
+import DtButton from '../button/button.vue';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import Modal from '../mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
@@ -81,13 +81,13 @@ import { getUniqueString } from '../utils';
 
 /**
  * Base Vue component for Dialtone Modal.
- * @displayName HsModal
+ * @displayName DtModal
  */
 export default {
-  name: 'HsModal',
+  name: 'DtModal',
 
   components: {
-    HsButton,
+    DtButton,
     IconClose,
   },
 
@@ -173,13 +173,17 @@ export default {
      * Can accept all of String, Object, and Array, i.e. has the
      * same api as Vue's built-in handling of the class attribute.
      */
-    contentClass: {
+    modalClass: {
       type: [String, Object, Array],
       default: '',
     },
   },
 
   computed: {
+    open () {
+      return `${!this.show}`;
+    },
+
     hasFooterSlot () {
       return !!this.$slots.footer;
     },
@@ -191,7 +195,7 @@ export default {
           [`d-modal--${this.kind}`]: this.kind,
           [`d-modal--${this.size}`]: this.size,
         },
-        this.contentClass,
+        this.modalClass,
       ];
     },
   },

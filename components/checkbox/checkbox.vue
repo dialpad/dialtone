@@ -34,12 +34,12 @@
           <!-- @slot slot for Checkbox Description -->
           <slot name="description">{{ description }}</slot>
         </div>
-        <hs-validation-messages
+        <dt-validation-messages
           :validation-messages="formattedMessages"
           :show-messages="showMessages"
           :class="messagesClass"
           v-bind="messagesChildProps"
-          data-qa="hs-checkbox-validation-messages"
+          data-qa="dt-checkbox-validation-messages"
         />
       </div>
     </div>
@@ -55,12 +55,12 @@ import {
   MessagesMixin,
 } from '../mixins/input.js';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES, CHECKBOX_DESCRIPTION_VALIDATION_CLASSES } from './checkbox_constants';
-import { HsValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '../validation_messages';
 
 export default {
-  name: 'HsCheckbox',
+  name: 'DtCheckbox',
 
-  components: { HsValidationMessages },
+  components: { DtValidationMessages },
 
   mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 

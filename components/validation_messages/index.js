@@ -1,1 +1,1 @@
-export { default as HsValidationMessages } from './validation_messages.vue';
+export { default as DtValidationMessages } from './validation_messages.vue';
