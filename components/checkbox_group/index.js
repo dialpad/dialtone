@@ -1,1 +1,1 @@
-export { default as HsCheckboxGroup } from './checkbox_group.vue';
+export { default as DtCheckboxGroup } from './checkbox_group.vue';

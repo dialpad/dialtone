@@ -1,12 +1,14 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import HsButton from './button';
+import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import ButtonDefault from './button_default.story.vue';
+import DtButton from './button';
 
-# Buttons
+# Button
 
 <Subtitle>
-  Buttons are UI elements which allow users to take actions throughout the app.
-  It is important they are identifiable, consistent, communicate their actions clearly,
-  and are appropriately sized to their action.
+  A button is a UI element which allows users to take an action throughout the app.
+  It is important a button is identifiable, consistent, and communicates its actions clearly,
+  and is appropriately sized to its action.
 </Subtitle>
 
 ## Styles
@@ -22,151 +24,33 @@ minimally important actions. This is the default importance level of all buttons
 but no background color.
 
 3. **Primary**: This is the highest visual importance a button can have.
-It provides a border and a background color.
+It provides a border and a background color. It is recommended
+that only one button have the primary button style within a section or page.
 
-These button styles are provided in three visual styles are:
+These button styles are provided in three visual styles:
 
 1. **Default / Blue**: Our normal blue button colors.
 2. **Danger**: Buttons associated with potentially destructive actions. Appears as red.
 3. **Inverted**: For scenarios when you want to place a button on a non-white.
 
-## Default
-
-The default button offers three button styles. To help provide clarity to users, it is recommended
-that only one button have the primary button style within a section or page.
-
 > **Please note** that all button classes have hover, active, focus, and disabled states within them.
 Specific classes are provided for the disabled state so this can be applied to objects that
 aren't buttons (or can't use the disabled attribute).
 
-|name        |prop value             |Default                                       |Disabled
-|---         |---                    |---                                           |---
-|**Default** |`importance='clear'`   |<Story id="elements-buttons--clear" />   |<Story id="elements-buttons--disabled" />
-|**Outlined**|`importance='outlined'`|<Story id="elements-buttons--outlined" />|<Story id="elements-buttons--disabled" />
-|**Filled**  |`importance='primary'` |<Story id="elements-buttons--default" /> |<Story id="elements-buttons--disabled" />
-
 ### Usage
 
 ```js
-import { HsButton } from '@dialpad/handset';
+import { DtButton } from '@dialpad/dialtone-vue';
 ```
 
-```vue
-<hs-button importance="clear/outlined/primary">
-  Button
-</hs-button>
-```
-
-## Sizes
-
-|name            |prop value    |Default
-|---             |---           |---
-|**Extra Small** |`size='xs'`   |<Story id="elements-buttons--extra-small" />
-|**Small**       |`size='sm'`   |<Story id="elements-buttons--small" />
-|**Default**     |`size='md'`   |<Story id="elements-buttons--default" />
-|**Large**       |`size='lg'`   |<Story id="elements-buttons--large" />
-|**Extra Large** |`size='xl'`   |<Story id="elements-buttons--extra-large" />
-
-## Danger
-
-The danger button style is used to communicate destructive actions such as deleting content, accounts, or canceling services.
+## Base Style
 
 <Canvas>
-  <Story id="elements-buttons--danger" />
+  <Story id="elements-button--default" />
 </Canvas>
 
-### Usage
-
-```js
-import { HsButton } from '@dialpad/handset';
-```
-
-```vue
-<hs-button kind="danger">
-  Danger Button
-</hs-button>
-```
-
-## Inverted
-
-The inverted button style is used to visually separate buttons set on darker backgrounds. This can be used in
-conjunction with the `importance` prop for different kinds of inverted buttons.
+## Variants
 
 <Canvas>
-  <Story id="elements-buttons--inverted" />
+  <Story id="elements-button--variants" />
 </Canvas>
-
-### Usage
-
-```js
-import { HsButton } from '@dialpad/handset';
-```
-
-```vue
-<hs-button inverted>
-  Button
-</hs-button>
-```
-
-## Icons
-
-Buttons can optionally have icons passed through the `icon` named slot. When you pass an icon, use the `iconPosition`
-prop to control the position of the icon within the button (unless using a circle button).
-
-<Canvas>
-  <Story id="elements-buttons--with-icon" />
-</Canvas>
-
-### Usage
-
-```js
-import { HsButton } from '@dialpad/handset';
-```
-
-```vue
-<hs-button>
-  Button
-  <icon-star #icon />
-</hs-button>
-```
-
-## Circle Buttons
-
-An icon-only button in a circle. When using a circle button, the `icon` slot should be passed.
-
-<Canvas>
-  <Story id="elements-buttons--circle" />
-</Canvas>
-
-### Usage
-
-```js
-import { HsButton } from '@dialpad/handset';
-```
-
-```vue
-<hs-button circle importance="outline">
-  <icon-camera #icon />
-</hs-button>
-```
-
-## Link Buttons
-
-A button that is styled as a link. Link buttons should be used whenever you have an element that is clickable and
-styled as a link, but does not transition the user to a different route.
-
-<Canvas>
-  <Story id="elements-buttons--link" />
-</Canvas>
-
-### Usage
-
-```js
-import { HsButton } from '@dialpad/handset';
-```
-
-```vue
-<hs-button link>
-  Link
-</hs-button>
-```

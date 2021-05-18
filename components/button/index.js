@@ -1,1 +1,1 @@
-export { default as HsButton } from './button.vue';
+export { default as DtButton } from './button.vue';

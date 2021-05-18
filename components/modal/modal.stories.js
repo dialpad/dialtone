@@ -1,8 +1,8 @@
-import HsModal from './modal.vue';
+import DtModal from './modal.vue';
 import ModalMdx from './modal.mdx';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { generateTemplate } from '../storybook_utils';
-import HsButton from '../button/button';
+import DtButton from '../button/button';
 
 export const argTypesData = {
   // Slots
@@ -35,7 +35,9 @@ export const argTypesData = {
 
   // Events
   'update:show': {
-    description: 'The modal will emit a "false" boolean value for this event when the user performs a modal-closing action.  Parent components can sync on this value to create a 2-way binding to control modal visibility.',
+    description: `The modal will emit a "false" boolean value for this event when the \
+user performs a modal-closing action.  Parent components can sync on this value to create \
+a 2-way binding to control modal visibility.`,
     table: {
       type: {
         summary: 'boolean',
@@ -61,16 +63,20 @@ export const argTypesData = {
 // Default Props for all variations
 export const argsData = {
   closeButtonProps: {
-    ariaLabel: 'close modal',
+    ariaLabel: 'Close',
   },
-  copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lacus quis velit viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque orci ipsum et velit.',
+  copy: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lacus quis velit \
+viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum \
+maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
+Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
+orci ipsum et velit.`,
   show: true,
   title: 'Example Title',
 };
 
 export default {
   title: 'Elements/Modal',
-  component: HsModal,
+  component: DtModal,
   parameters: {
     docs: {
       page: ModalMdx,
@@ -81,30 +87,30 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const modalTemplate = generateTemplate(HsModal, {
+const modalTemplate = generateTemplate(DtModal, {
   customProps: ['class="d-p-static"'],
 });
 const defaultTemplate = (args, { argTypes }) => {
   return {
-    components: { HsModal },
+    components: { DtModal },
     template: modalTemplate,
     props: Object.keys(argTypes),
   };
 };
 export const Default = defaultTemplate.bind({});
 
-const footerTemplate = generateTemplate(HsModal, {
+const footerTemplate = generateTemplate(DtModal, {
   childTemplate: `
     <template #footer>
-      <hs-button :kind="kind" importance="primary">Confirm</hs-button>
-      <hs-button :kind="kind" importance="clear">Cancel</hs-button>
+      <dt-button :kind="kind" importance="primary">Confirm</dt-button>
+      <dt-button :kind="kind" importance="clear">Cancel</dt-button>
     </template>
   `,
   customProps: ['class="d-p-static"'],
 });
 const withFooterTemplate = (args, { argTypes }) => {
   return {
-    components: { HsButton, HsModal },
+    components: { DtButton, DtModal },
     template: footerTemplate,
     props: Object.keys(argTypes),
   };
@@ -117,14 +123,14 @@ WithDangerStyle.args = { kind: 'danger' };
 export const WithFullSize = defaultTemplate.bind({});
 WithFullSize.args = { size: 'full' };
 
-const slotsTemplate = generateTemplate(HsModal, {
+const slotsTemplate = generateTemplate(DtModal, {
   childTemplate: `
     <template #header>
-      <div class="d-fl-center d-p12 d-background-color--blue-lighter">
+      <div class="d-fl-center d-p12 d-bgc-blue-100">
         <div>[custom header]</div>
       </div>
     </template>
-    <div class="d-fl-center d-p32 d-background-color--sunflower">
+    <div class="d-fl-center d-p32 d-bgc-yellow-300">
       <h2>[custom body]</h2>
     </div>
   `,
@@ -132,7 +138,7 @@ const slotsTemplate = generateTemplate(HsModal, {
 });
 const withCustomHeaderAndContentTemplate = (args, { argTypes }) => {
   return {
-    components: { HsButton, HsModal },
+    components: { DtButton, DtModal },
     template: slotsTemplate,
     props: Object.keys(argTypes),
   };

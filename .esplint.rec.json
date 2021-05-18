@@ -6,8 +6,7 @@
       "vue/no-deprecated-dollar-listeners-api": 3
     },
     "components/button/button.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 2,
-      "complexity": 2
+      "vue/no-deprecated-dollar-listeners-api": 2
     },
     "components/input/input.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1

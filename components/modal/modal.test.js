@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import HsButton from '../button/button.vue';
-import HsModal from './modal.vue';
+import DtButton from '../button/button.vue';
+import DtModal from './modal.vue';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 
 const basePropsData = {
@@ -9,7 +9,7 @@ const basePropsData = {
   },
 };
 
-describe('Handset Modal Tests', function () {
+describe('Dialtone Vue Modal Tests', function () {
   let wrapper;
 
   let closeBtn;
@@ -24,17 +24,17 @@ describe('Handset Modal Tests', function () {
   });
 
   beforeEach(function () {
-    wrapper = shallowMount(HsModal, {
+    wrapper = shallowMount(DtModal, {
       localVue: this.localVue,
       propsData: basePropsData,
-      stubs: { HsButton },
+      stubs: { DtButton },
     });
 
     _setElements = function () {
-      closeBtn = wrapper.findComponent(HsButton);
-      copy = wrapper.find('[data-qa="hs-modal-copy"]');
-      overlay = wrapper.find('[data-qa="hs-modal"]');
-      title = wrapper.find('[data-qa="hs-modal-title"]');
+      closeBtn = wrapper.findComponent(DtButton);
+      copy = wrapper.find('[data-qa="dt-modal-copy"]');
+      overlay = wrapper.find('[data-qa="dt-modal"]');
+      title = wrapper.find('[data-qa="dt-modal-title"]');
     };
     _setElements();
   });
@@ -55,7 +55,7 @@ describe('Handset Modal Tests', function () {
     const contentText = 'test content';
     const headerText = 'test header';
 
-    wrapper = shallowMount(HsModal, {
+    wrapper = shallowMount(DtModal, {
       localVue: this.localVue,
       propsData: {
         ...basePropsData,
@@ -66,7 +66,7 @@ describe('Handset Modal Tests', function () {
         default: `<p>${contentText}</p>`,
         header: `<h1>${headerText}</h1>`,
       },
-      stubs: { HsButton },
+      stubs: { DtButton },
     });
     _setElements();
 
@@ -84,7 +84,8 @@ describe('Handset Modal Tests', function () {
     assert.equal(closeBtn.attributes(labelProp), newAriaLabel);
   });
 
-  it('Should emit a sync-able update event when overlay / close-icon are clicked, or escape key is pressed', async function () {
+  it('Should emit a sync-able update event when overlay / close-icon are clicked' +
+     ', or escape key is pressed', async function () {
     const syncEvent = 'update:show';
     assert.isEmpty(wrapper.emitted());
 
@@ -103,10 +104,10 @@ describe('Handset Modal Tests', function () {
 
   it('Should pass content class through to root modal element', async function () {
     // TODO: Use a shared test case for this
-    const contentClass = 'content-class';
-    assert.isFalse(overlay.classes(contentClass));
+    const modalClass = 'modal-class';
+    assert.isFalse(overlay.classes(modalClass));
 
-    await wrapper.setProps({ contentClass });
-    assert.isTrue(overlay.classes(contentClass));
+    await wrapper.setProps({ modalClass });
+    assert.isTrue(overlay.classes(modalClass));
   });
 });

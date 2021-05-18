@@ -3,7 +3,7 @@
     <button @click="displayBanner = true">
       Click to show!
     </button>
-    <hs-banner
+    <dt-banner
       v-if="displayBanner"
       :kind="kind"
       :title="title"
@@ -33,18 +33,18 @@
       >
         <span v-html="titleOverride" />
       </template>
-    </hs-banner>
+    </dt-banner>
   </div>
 </template>
 
 <script>
-import HsBanner from '../banner/banner';
-import HsButton from '../button/button';
+import DtBanner from '../banner/banner';
+import DtButton from '../button/button';
 import icon from '../mixins/icon';
 
 export default {
   name: 'BannerDefault',
-  components: { HsBanner, HsButton },
+  components: { DtBanner, DtButton },
   mixins: [icon],
   data () {
     return {

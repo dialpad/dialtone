@@ -21,6 +21,7 @@ export * from './components/mixins';
 // Constants
 export {
   VALIDATION_MESSAGE_TYPES,
+  DESCRIPTION_SIZE_TYPES,
   DEFAULT_VALIDATION_MESSAGE_TYPE,
 } from './components/constants';
 

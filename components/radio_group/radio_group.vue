@@ -1,10 +1,10 @@
 <script>
-import { HsInputGroup } from '../input_group';
+import { DtInputGroup } from '../input_group';
 
 export default {
-  name: 'HsRadioGroup',
+  name: 'DtRadioGroup',
 
-  extends: HsInputGroup,
+  extends: DtInputGroup,
 
   props: {
     /**

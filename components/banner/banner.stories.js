@@ -1,4 +1,4 @@
-import HsBanner from './banner';
+import DtBanner from './banner';
 import BannerDefault from './banner_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import { argTypesData } from '../notice/notice.stories.js';
@@ -22,7 +22,7 @@ argTypesData.contentId = {
 
 export default {
   title: 'Elements/Banner',
-  component: HsBanner,
+  component: DtBanner,
   argTypes: argTypesData,
   excludeStories: /.Data$/,
 };

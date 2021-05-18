@@ -1,5 +1,5 @@
 <template>
-  <hs-checkbox
+  <dt-checkbox
     :label="label"
     :name="name"
     :value="value"
@@ -24,14 +24,14 @@
     >
       <span v-html="descriptionSlot" />
     </template>
-  </hs-checkbox>
+  </dt-checkbox>
 </template>
 
 <script>
-import HsCheckbox from './checkbox';
+import DtCheckbox from './checkbox';
 
 export default {
   name: 'CheckboxDefault',
-  components: { HsCheckbox },
+  components: { DtCheckbox },
 };
 </script>

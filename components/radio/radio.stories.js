@@ -4,7 +4,7 @@ import { VALIDATION_MESSAGE_TYPES } from '../constants';
 import RadioDefault from './radio_default.story.vue';
 import RadioVariants from './radio_variants.story.vue';
 import RadioMdx from './radio.mdx';
-import HsRadio from './radio';
+import DtRadio from './radio';
 
 // Default Prop Values
 export const argsData = {
@@ -95,7 +95,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Forms/Radio',
-  component: HsRadio,
+  component: DtRadio,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

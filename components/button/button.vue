@@ -1,14 +1,17 @@
 <template>
   <button
-    :class="['base-button__button', ...buttonClasses]"
+    :class="['base-button__button', buttonClasses]"
+    data-qa="dt-button"
     :type="type"
     :aria-live="computedAriaLive"
+    :aria-label="loading ? 'loading' : $attrs['aria-label']"
     v-on="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
-      v-if="hasIconSlot"
-      :class="['base-button__icon', 'd-btn__icon', iconPositionClass]"
+      v-if="$slots.icon && !link"
+      data-qa="dt-button-icon"
+      :class="['base-button__icon', iconClasses]"
     >
       <!-- @slot Button icon -->
       <slot
@@ -16,63 +19,39 @@
       />
     </span>
     <span
-      v-if="hasIconSlot"
-      :class="['base-button__label', 'd-btn__label', ...labelPositionClasses]"
+      data-qa="dt-button-label"
+      :class="['base-button__label', 'd-btn__label']"
     >
       <slot />
     </span>
-    <!-- @slot Button content -->
-    <slot v-else />
   </button>
 </template>
 
 <script>
 import Vue from 'vue';
 
-export const BUTTON_SIZE_MODIFIERS = {
-  xs: '--xs',
-  sm: '--sm',
-  md: '',
-  lg: '--lg',
-  xl: '--xl',
-};
-
-export const BUTTON_KIND_MODIFIERS = {
-  default: '',
-  danger: '--danger',
-  inverted: '--inverted',
-};
-
-export const BUTTON_IMPORTANCE_MODIFIERS = {
-  clear: '',
-  primary: '--primary',
-  outlined: '--outlined',
-};
-
-export const BUTTON_TYPES = ['submit', 'reset', 'button'];
-
-export const ICON_POSITIONS = ['left-align', 'split-left', 'center-align', 'right-align'];
-
-export const LINK_KIND_MODIFIERS = {
-  default: '',
-  warning: '--warning',
-  danger: '--danger',
-  success: '--success',
-  dark: '--dark',
-};
+import {
+  BUTTON_SIZE_MODIFIERS,
+  BUTTON_KIND_MODIFIERS,
+  BUTTON_IMPORTANCE_MODIFIERS,
+  BUTTON_TYPES,
+  ICON_POSITION_MODIFIERS,
+  LINK_KIND_MODIFIERS,
+  INVALID_COMBINATION,
+} from './button_constants';
 
 /**
  * Base Vue component for Dialtone Buttons.
  * @displayName HSButton
  */
 export default {
-  name: 'HsButton',
+  name: 'DtButton',
 
   props: {
     /**
      * Whether the button is a circle or not.
      * @values true, false
-     * @see https://dialpad.design/components/buttons/
+     * @see https://dialpad.design/components/button/
      */
     circle: {
       type: Boolean,
@@ -81,19 +60,19 @@ export default {
 
     /**
      * The position of the icon slot within the button.
-     * @values left, split-left, center, right
-     * @see https://dialpad.design/components/buttons/
+     * @values left, right
+     * @see https://dialpad.design/components/button/
      */
     iconPosition: {
       type: String,
-      default: 'center-align',
-      validator: (position) => ICON_POSITIONS.includes(position),
+      default: 'left',
+      validator: (position) => Object.keys(ICON_POSITION_MODIFIERS).includes(position),
     },
 
     /**
      * The fill and outline of the button associated with its visual importance.
      * @values clear, outlined, primary
-     * @see https://dialpad.design/components/buttons/
+     * @see https://dialpad.design/components/button/
      */
     importance: {
       type: String,
@@ -104,7 +83,7 @@ export default {
     /**
      * Whether the button should be styled as a link or not.
      * @values true, false
-     * @see https://dialpad.design/components/links/#
+     * @see https://dialpad.design/components/link
      */
     link: {
       type: Boolean,
@@ -112,19 +91,9 @@ export default {
     },
 
     /**
-     * Whether the link should be inverted if the button is styled as a link.
-     * @values true, false
-     * @see https://dialpad.design/components/links/#
-     */
-    linkInverted: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
      * The color of the link and button if the button is styled as a link.
      * @values danger, dark, default, success, warning
-     * @see https://dialpad.design/components/links/#
+     * @see https://dialpad.design/components/link
      */
     linkKind: {
       type: String,
@@ -146,7 +115,7 @@ export default {
     /**
      * The size of the button.
      * @values xs, s, md, lg, xl
-     * @see https://dialpad.design/components/buttons/
+     * @see https://dialpad.design/components/button
      */
     size: {
       type: String,
@@ -157,7 +126,7 @@ export default {
     /**
      * Whether the button should display a loading animation or not.
      * @values true, false
-     * @see https://dialpad.design/components/buttons/
+     * @see https://dialpad.design/components/button
      */
     loading: {
       type: Boolean,
@@ -167,7 +136,7 @@ export default {
     /**
      * The color of the button.
      * @values default, danger, inverted
-     * kind - default, danger, or inverted (https://dialpad.design/components/buttons/)
+     * @see https://dialpad.design/components/button
      */
     kind: {
       type: String,
@@ -207,6 +176,7 @@ export default {
         focusin: (e) => {
           this.isInFocus = true;
         },
+
         focusout: (e) => {
           this.isInFocus = false;
         },
@@ -218,112 +188,56 @@ export default {
     },
 
     buttonClasses () {
-      const classes = this.link
-        ? [this.buttonLinkClass]
-        : [this.buttonMainClass, this.buttonSizeClass];
-
-      return [...classes, this.buttonIconPositionClass];
-    },
-
-    buttonMainClass () {
-      const shape = this.circle ? '--circle' : '';
-      const kind = BUTTON_KIND_MODIFIERS[this.kind] || '';
-      const importance = BUTTON_IMPORTANCE_MODIFIERS[this.importance] || '';
-      const loading = this.loading ? '--loading' : '';
-
-      // Button class structure: .d-btn--shape--kind--importance--state
-      return `d-btn${shape}${kind}${importance}${loading}`;
-    },
-
-    buttonLinkClass () {
-      const inverted = this.linkInverted ? '--inverted' : '';
-      const linkKind = LINK_KIND_MODIFIERS[this.linkKind] || '';
-
-      // Link class structure: .d-link--inverted--kind
-      return `d-link${inverted}${linkKind}`;
-    },
-
-    buttonSizeClass () {
-      const shape = this.circle ? '--circle' : '';
-      const size = BUTTON_SIZE_MODIFIERS[this.size] || '';
-
-      // Size class structure: .d-btn--shape--size
-      return `d-btn${shape}${size}`;
-    },
-
-    buttonIconPositionClass () {
-      // Note(cormac): When it has an icon, a button only needs extra styling if its icon is positioned left-align.
-      if (this.hasIconSlot && this.iconPosition === 'left-align') {
-        return 'button__left-align';
+      if (this.link) {
+        return ['d-link',
+          LINK_KIND_MODIFIERS[this.linkKind],
+          BUTTON_SIZE_MODIFIERS[this.size],
+        ];
       }
-
-      return '';
+      return ['d-btn',
+        BUTTON_IMPORTANCE_MODIFIERS[this.importance],
+        BUTTON_KIND_MODIFIERS[this.kind],
+        BUTTON_SIZE_MODIFIERS[this.size],
+        {
+          'd-btn--circle': this.circle,
+          'd-btn--loading': this.loading,
+        },
+      ];
     },
 
-    hasIconSlot () {
-      return !!this.$slots.icon;
-    },
-
-    iconPositionClass () {
-      // Note(cormac): When a button has an icon, the icon only needs extra styling when it's positioned right-align.
-      if (this.hasIconSlot && this.iconPosition === 'right-align') {
-        return 'd-btn__icon--last';
-      }
-
-      return '';
-    },
-
-    labelPositionClasses () {
-      if (!this.hasIconSlot) {
-        return [];
-      }
-
-      const classes = [];
-      if (this.iconPosition === 'split-left' || this.iconPosition === 'right-align') {
-        classes.push('d-flex1');
-      }
-      if (this.iconPosition === 'right-align') {
-        classes.push('button__label__right-align');
-      }
-      return classes;
+    iconClasses () {
+      return [
+        'd-btn__icon',
+        ICON_POSITION_MODIFIERS[this.iconPosition],
+      ];
     },
   },
 
-  created: function () {
-    if (process.env.NODE_ENV === 'production') return;
+  watch: {
+    $props: {
+      immediate: true,
+      handler () {
+        if (process.env.NODE_ENV === 'production') return;
 
-    if (this.isUnsupportedCircleButton()) {
-      Vue.util.warn('Unsupported button: primary d-btn--circle and outlined d-btn--circle--danger are not supported.', this);
-    }
-    if (this.isUnsupportedInvertedLink()) {
-      Vue.util.warn('Unsupported link: inverted link is neither d-link--inverted nor d-link--inverted--danger.', this);
-    }
-    if (this.circle && this.link) {
-      Vue.util.warn('Unsupported link: circle d-link is not supported.', this);
-    }
+        if (this.circle && this.link) {
+          Vue.util.warn('You cannot enable circle and link at the same time', this);
+        }
+
+        this.isInvalidPropCombination(this.circle, this.kind, this.importance);
+      },
+    },
   },
 
   methods: {
-    isUnsupportedCircleButton () {
-      // Caveat: d-btn--circle can't be primary and d-btn--circle--danger can't be outlined.
-      const isBtnCirclePrimary = this.circle && this.kind === 'default' && this.importance === 'primary';
-      const isBtnCircleDangerOutlined = this.circle && this.kind === 'danger' && this.importance === 'outlined';
-
-      return isBtnCirclePrimary || isBtnCircleDangerOutlined;
-    },
-
-    isUnsupportedInvertedLink () {
-      return this.linkInverted && this.linkKind !== 'danger' && this.linkKind !== 'default';
+    isInvalidPropCombination (circle, kind, importance) {
+      for (const row of INVALID_COMBINATION) {
+        if (circle === row.circle && kind === row.kind && importance === row.importance) {
+          console.error(row.message);
+          return false;
+        }
+      }
+      return true;
     },
   },
 };
 </script>
-
-<style lang="less">
-  @import '../../css/dialtone.less';
-
-  .button__left-align,
-  .button__label__right-align {
-    .d-jc-flex-start();
-  }
-</style>

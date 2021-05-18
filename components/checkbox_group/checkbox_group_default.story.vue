@@ -1,5 +1,5 @@
 <template>
-  <hs-checkbox-group
+  <dt-checkbox-group
     :id="id"
     :name="name"
     :legend="legend"
@@ -14,13 +14,13 @@
     @input="onInput"
   >
     <slot>
-      <hs-checkbox
+      <dt-checkbox
         v-for="option in options"
         :key="option.value"
         :value="option.value"
       >
         <span>{{ option.label }}</span>
-      </hs-checkbox>
+      </dt-checkbox>
     </slot>
     <template
       v-if="legendSlot"
@@ -28,15 +28,15 @@
     >
       <span v-html="legendSlot" />
     </template>
-  </hs-checkbox-group>
+  </dt-checkbox-group>
 </template>
 
 <script>
-import { HsCheckbox } from '../checkbox';
-import HsCheckboxGroup from './checkbox_group';
+import { DtCheckbox } from '../checkbox';
+import DtCheckboxGroup from './checkbox_group';
 
 export default {
   name: 'CheckboxGroupDefault',
-  components: { HsCheckbox, HsCheckboxGroup },
+  components: { DtCheckbox, DtCheckboxGroup },
 };
 </script>

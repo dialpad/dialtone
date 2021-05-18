@@ -1,5 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import { HsLazyShow } from './';
+import { DtLazyShow } from './';
 
 # Lazy Show
 
@@ -9,7 +9,7 @@ import { HsLazyShow } from './';
 
 ## Basic Usage
 
-`HsLazyShow` is essentially a combination of a `v-if` and `v-show`. This means that the child slot will not be
+`DtLazyShow` is essentially a combination of a `v-if` and `v-show`. This means that the child slot will not be
 rendered/initialized until the first time `show` is `true`, after which the slot will stay in the DOM and be
 hidden/shown with the `v-show` directive. This is useful to prevent elements which are hidden from being rendered
 immediately, but keeping them alive when toggled later.
@@ -20,16 +20,16 @@ so you can pass any valid Vue `transition` class to control the enter/leave tran
 ### Import
 
 ```jsx
-import { HsLazyShow } from '@dialpad/handset';
+import { DtLazyShow } from '@dialpad/dialtone-vue';
 ```
 
 ```jsx
-<hs-lazy-show
+<dt-lazy-show
   :transition="transition"
   :show="open"
 >
   I'm Lazy!
-</hs-lazy-show>
+</dt-lazy-show>
 ```
 
 <Canvas>
@@ -38,4 +38,4 @@ import { HsLazyShow } from '@dialpad/handset';
 
 ## Props, Slots & Events
 
-<ArgsTable of={HsLazyShow} />
+<ArgsTable of={DtLazyShow} />

@@ -1,5 +1,5 @@
 <template>
-  <hs-popover
+  <dt-popover
     :id="id"
     :open.sync="isOpen"
     :element-type="elementType"
@@ -14,28 +14,28 @@
     :fixed-vertical-alignment="fixedVerticalAlignment"
   >
     <template #anchor="{ attrs }">
-      <hs-button
+      <dt-button
         v-bind="attrs"
         @click="isOpen = !isOpen"
       >
         Click to open
-      </hs-button>
+      </dt-button>
     </template>
     <template #content>
       <p class="d-fs14 d-m0">
         I will be displayed in the popover!
       </p>
     </template>
-  </hs-popover>
+  </dt-popover>
 </template>
 
 <script>
-import { HsPopover } from './';
-import { HsButton } from '../button';
+import { DtPopover } from './';
+import { DtButton } from '../button';
 
 export default {
   name: 'PopoverDefault',
-  components: { HsPopover, HsButton },
+  components: { DtPopover, DtButton },
 
   props: {
     open: {

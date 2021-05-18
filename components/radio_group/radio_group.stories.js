@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import HsRadioGroup from './radio_group';
+import DtRadioGroup from './radio_group';
 import RadioGroupMdx from './radio_group.mdx';
 import RadioGroupDefaultTemplate from './radio_group_default.story.vue';
 import RadioGroupVariantsTemplate from './radio_group_variants.story.vue';
@@ -105,7 +105,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Forms/Radio Group',
-  component: HsRadioGroup,
+  component: DtRadioGroup,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

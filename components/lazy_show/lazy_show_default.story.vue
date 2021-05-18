@@ -1,9 +1,9 @@
 <template>
   <div>
-    <hs-button @click="isShown = !isShown">
+    <dt-button @click="isShown = !isShown">
       Toggle
-    </hs-button>
-    <hs-lazy-show
+    </dt-button>
+    <dt-lazy-show
       :show="isShown"
       :transition="transition"
     >
@@ -15,16 +15,16 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       />
-    </hs-lazy-show>
+    </dt-lazy-show>
   </div>
 </template>
 <script>
-import { HsLazyShow } from './';
-import { HsButton } from '../button';
+import { DtLazyShow } from './';
+import { DtButton } from '../button';
 
 export default {
   name: 'LazyShowDefault',
-  components: { HsLazyShow, HsButton },
+  components: { DtLazyShow, DtButton },
 
   props: {
     show: {
