@@ -107,8 +107,8 @@ const Template = (args, { argTypes }) => {
 
 // Dt Input -> Default story
 export const Default = Template.bind({});
-// Dt Input -> With Warn story
-export const WithWarn = Template.bind({});
+// Dt Input -> With Warning story
+export const WithWarning = Template.bind({});
 // Dt Input -> With Error story
 export const WithError = Template.bind({});
 ```
@@ -340,9 +340,9 @@ const Template = (args, { argTypes }) => {
 // Default story
 export const Default = Template.bind({});
 
-// With Warn story with the 'messages' props set
-export const WithWarn = Template.bind({});
-WithWarn.args = {
+// With Warning story with the 'messages' props set
+export const WithWarning = Template.bind({});
+WithWarning.args = {
   messages: [{ message: 'This is a warning message', type: 'warning' }],
 };
 ```

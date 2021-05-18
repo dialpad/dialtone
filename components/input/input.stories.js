@@ -1,6 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 import DtInput from './input';
+import { INPUT_SIZES } from './input_constants';
 import InputMdx from './input.mdx';
 import InputDefault from './input_default.story.vue';
 
@@ -28,7 +29,13 @@ export const argTypesData = {
   size: {
     control: {
       type: 'select',
-      options: ['xs', 'sm', '', 'lg', 'xl'],
+      options: Object.values(INPUT_SIZES),
+    },
+    defaultValue: INPUT_SIZES.DEFAULT,
+    table: {
+      defaultValue: {
+        summary: INPUT_SIZES.DEFAULT,
+      },
     },
   },
   messagesChildProps: { control: null },
@@ -65,13 +72,7 @@ export const argTypesData = {
     },
   },
 
-  icon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-  },
-
-  innerLeft: {
+  leftIcon: {
     table: {
       type: { summary: 'VNode' },
     },
@@ -81,7 +82,7 @@ export const argTypesData = {
     },
   },
 
-  innerRight: {
+  rightIcon: {
     table: {
       type: { summary: 'VNode' },
     },
@@ -147,17 +148,27 @@ WithDescription.args = {
   description: 'Description',
 };
 
-export const WithClearButton = Template.bind({});
-WithClearButton.args = {
-  label: 'Label',
-  showClearButton: true,
+export const WithLeftIcon = Template.bind({});
+WithLeftIcon.args = {
+  leftIcon: 'IconSend',
 };
 
-export const WithWarn = Template.bind({});
-WithWarn.args = {
+export const WithRightIcon = Template.bind({});
+WithRightIcon.args = {
+  rightIcon: 'IconLock',
+};
+
+export const WithBothIcons = Template.bind({});
+WithBothIcons.args = {
+  leftIcon: 'IconSend',
+  rightIcon: 'IconLock',
+};
+
+export const WithWarning = Template.bind({});
+WithWarning.args = {
   messages: [{ message: 'This is a warning message', type: 'warning' }],
 };
-WithWarn.parameters = {
+WithWarning.parameters = {
   docs: {
     source: {
       code: '<dt-input :messages="[{ message: \'This is a warning message\', type: \'warning\' }]" />',
@@ -200,9 +211,12 @@ WithMultipleMessages.args = {
 
 export const ExtraSmall = Template.bind({});
 ExtraSmall.args = { size: 'xs' };
+
 export const Small = Template.bind({});
 Small.args = { size: 'sm' };
+
 export const Large = Template.bind({});
 Large.args = { size: 'lg' };
+
 export const ExtraLarge = Template.bind({});
 ExtraLarge.args = { size: 'xl' };

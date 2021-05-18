@@ -4,8 +4,8 @@ import DtInput from './input';
 # Inputs
 
 <Subtitle>
-  Input fields are text areas used to gather information from users.
-  It can have a range of options and supports several text formats including numbers.
+  An input field is an input control that allows users to enter alphanumeric information. It can have a range of options
+  and supports single line and multi-line lengths, as well as varying formats, including numbers, masked passwords, etc.
 </Subtitle>
 
 ## Base Style
@@ -56,26 +56,86 @@ import { DtInput } from '@dialpad/dialtone-vue';
 />
 ```
 
-## With Clear Button
+## With Left Icon
 
-Displays a clear button the user can click to clear the input
+Provides left icon within the form input
 
 <Canvas>
-  <Story id="forms-input--with-clear-button" />
+  <Story id="forms-input--with-left-icon" />
 </Canvas>
 
 ### Usage
 
 ```js
+import IconSend from '@dialpad/dialtone/lib/dist/vue/icons/IconSend.vue';
 import { DtInput } from '@dialpad/dialtone-vue';
 ```
 
-```jsx
+```html
 <dt-input
   v-model="text"
   placeholder="placeholder"
-  :show-clear-button="true"
-/>
+>
+  <template #leftIcon>
+    <icon-send />
+  </template>
+</dt-input>
+```
+
+## With Right Icon
+
+Provides right icon within the form input
+
+<Canvas>
+  <Story id="forms-input--with-right-icon" />
+</Canvas>
+
+### Usage
+
+```js
+import IconLock from '@dialpad/dialtone/lib/dist/vue/icons/IconLock.vue';
+import { DtInput } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-input
+  v-model="text"
+  placeholder="placeholder"
+>
+  <template #rightIcon>
+    <icon-lock />
+  </template>
+</dt-input>
+```
+
+## With Both Icons
+
+Provides both icons within the form input
+
+<Canvas>
+  <Story id="forms-input--with-both-icons" />
+</Canvas>
+
+### Usage
+
+```js
+import IconSend from '@dialpad/dialtone/lib/dist/vue/icons/IconSend.vue';
+import IconLock from '@dialpad/dialtone/lib/dist/vue/icons/IconLock.vue';
+import { DtInput } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-input
+  v-model="text"
+  placeholder="placeholder"
+>
+  <template #leftIcon>
+    <icon-send />
+  </template>
+  <template #rightIcon>
+    <icon-lock />
+  </template>
+</dt-input>
 ```
 
 ## Validation States
@@ -163,22 +223,22 @@ import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 |name           |prop value                     |size|Example                                |
 |---            |---                            |--- |---                                    |
-|**Extra Small**|INPUT_SIZE_TYPES.EXTRA_SMALL   |12px|<Story id="forms-input--extra-small" />|
-|**Small**      |INPUT_SIZE_TYPES.SMALL         |14px|<Story id="forms-input--small" />      |
+|**Extra Small**|INPUT_SIZES.EXTRA_SMALL   |12px|<Story id="forms-input--extra-small" />|
+|**Small**      |INPUT_SIZES.SMALL         |14px|<Story id="forms-input--small" />      |
 |**Default**    |-                              |16px|<Story id="forms-input--default" />    |
-|**Large**      |INPUT_SIZE_TYPES.LARGE         |20px|<Story id="forms-input--large" />      |
-|**Extra Large**|INPUT_SIZE_TYPES.EXTRA_LARGE   |24px|<Story id="forms-input--extra-large" />|
+|**Large**      |INPUT_SIZES.LARGE         |20px|<Story id="forms-input--large" />      |
+|**Extra Large**|INPUT_SIZES.EXTRA_LARGE   |24px|<Story id="forms-input--extra-large" />|
 
 ### Usage
 
 ```js
-import { DtInput, INPUT_SIZE_TYPES } from '@dialpad/dialtone-vue';
+import { DtInput, INPUT_SIZES } from '@dialpad/dialtone-vue';
 ```
 
 ```html
 <dt-input
   v-model="text"
   placeholder="placeholder"
-  :size="INPUT_SIZE_TYPES.<SIZE>"
+  :size="INPUT_SIZES.<SIZE>"
 />
 ```

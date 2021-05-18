@@ -4,36 +4,49 @@
     class="base-input"
     data-qa="dt-input"
   >
-    <!-- @slot slot for Icon -->
-    <slot name="icon" />
     <label
       class="base-input__label"
       :aria-details="$slots.description || description ? descriptionKey : undefined"
-      data-qa="dt-input-label"
+      data-qa="dt-input-label-wrapper"
     >
       <!-- @slot slot for label, defaults to label prop -->
       <slot name="labelSlot">
-        <div :class="['base-input__label-text', 'd-label', 'd-margin-bottom2', labelSizeModifierClass]">
+        <div
+          data-qa="dt-input-label"
+          :class="['base-input__label-text', 'd-label', labelSizeModifierClass]"
+        >
           {{ label }}
         </div>
       </slot>
       <div
         v-if="$slots.description || description"
         :id="descriptionKey"
-        :class="['d-description', 'd-margin-bottom2', descriptionSizeModifierClass]"
+        :class="['base-input__description', 'd-description', descriptionSizeModifierClass]"
         data-qa="dt-input-description"
       >
         <!-- @slot slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
-      <div class="d-d-flex d-ai-center">
-        <div
-          v-if="$slots.innerLeft"
-          class="d-p-absolute d-z-index--base1 d-ml8 d-pl2 d-lh-none"
+      <div class="d-ps-relative">
+        <span
+          v-if="$slots.leftIcon"
+          :class="inputIconClasses('left')"
+          data-qa="dt-input-left-icon-wrapper"
           @focusout="onBlur"
         >
-          <slot name="innerLeft" />
-        </div>
+          <slot name="leftIcon" />
+        </span>
+        <!--
+          Right Icon must come before input / textarea as there is no such thing as a previous sibling css selector
+        -->
+        <span
+          v-if="$slots.rightIcon"
+          :class="inputIconClasses('right')"
+          data-qa="dt-input-right-icon-wrapper"
+          @focusout="onBlur"
+        >
+          <slot name="rightIcon" />
+        </span>
         <textarea
           v-if="isTextarea"
           ref="input"
@@ -57,15 +70,6 @@
           data-qa="dt-input-input"
           v-on="inputListeners"
         >
-        <div class="d-p-relative">
-          <div
-            v-if="$slots.innerRight"
-            class="d-z-index--base1 d-p0 d-m0 d-lh-none d-p-absolute d-ln24 d-tn8"
-            @focusout="onBlur"
-          >
-            <slot name="innerRight" />
-          </div>
-        </div>
       </div>
     </label>
     <dt-validation-messages
@@ -79,7 +83,8 @@
 </template>
 
 <script>
-import { INPUT_TYPES, INPUT_SIZE_TYPES } from './input_constants.js';
+import { DESCRIPTION_SIZE_TYPES } from '../constants.js';
+import { INPUT_TYPES, INPUT_SIZES } from './input_constants.js';
 import {
   getUniqueString,
   getValidationState,
@@ -148,12 +153,12 @@ export default {
     },
 
     /**
-     * Size of the input, one of `xs`, `sm`, `''`, `lg`, `xl`
+     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
      */
     size: {
       type: String,
-      default: '',
-      validator: (t) => Object.values(INPUT_SIZE_TYPES).includes(t),
+      default: INPUT_SIZES.DEFAULT,
+      validator: (t) => Object.values(INPUT_SIZES).includes(t),
     },
   },
 
@@ -163,6 +168,10 @@ export default {
 
     isTextarea () {
       return this.type === INPUT_TYPES.TEXTAREA;
+    },
+
+    isDefaultSize () {
+      return this.size === INPUT_SIZES.DEFAULT;
     },
 
     inputComponent () {
@@ -198,7 +207,7 @@ export default {
     },
 
     sizeModifierClass () {
-      if (!this.size || !Object.values(INPUT_SIZE_TYPES).includes(this.size)) {
+      if (this.isDefaultSize || !Object.values(INPUT_SIZES).includes(this.size)) {
         return '';
       }
 
@@ -206,16 +215,17 @@ export default {
     },
 
     labelSizeModifierClass () {
-      if (!this.size || !Object.values(INPUT_SIZE_TYPES).includes(this.size)) {
+      if (this.isDefaultSize || !Object.values(INPUT_SIZES).includes(this.size)) {
         return '';
       }
       return `d-label--${this.size}`;
     },
 
     descriptionSizeModifierClass () {
-      if (!this.size || !Object.values(INPUT_SIZE_TYPES).includes(this.size)) {
+      if (this.isDefaultSize || !Object.values(DESCRIPTION_SIZE_TYPES).includes(this.size)) {
         return '';
       }
+
       return `d-description--${this.size}`;
     },
 
@@ -224,12 +234,19 @@ export default {
   methods: {
     inputClasses () {
       return [
+        'base-input__input',
         `d-${this.inputComponent}`,
         { [`d-${this.inputComponent}--${this.inputState} base-input__input--${this.inputState}`]: this.showInputState },
-        { 'd-pl32': this.$slots.innerLeft },
-        { 'd-pr32': this.$slots.innerRight },
         this.sizeModifierClass,
-        'base-input__input',
+      ];
+    },
+
+    inputIconClasses (side) {
+      return [
+        `base-input__icon--${side}`,
+        'd-input-icon',
+        `d-input-icon--${side}`,
+        { [`d-input-icon--${this.size}`]: !this.isDefaultSize },
       ];
     },
 
@@ -265,7 +282,4 @@ export default {
 </script>
 
 <style lang="less">
-.base-input .base-button__icon {
-  margin: 0;
-}
 </style>

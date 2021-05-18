@@ -8,15 +8,15 @@ export const INPUT_TYPES = {
   NUMBER: 'number',
 };
 
-export const INPUT_SIZE_TYPES = {
+export const INPUT_SIZES = {
   EXTRA_SMALL: 'xs',
   SMALL: 'sm',
-  DEFAULT: '',
+  DEFAULT: 'md',
   LARGE: 'lg',
   EXTRA_LARGE: 'xl',
 };
 
 export default {
   INPUT_TYPES,
-  INPUT_SIZE_TYPES,
+  INPUT_SIZES,
 };

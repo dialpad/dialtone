@@ -89,7 +89,7 @@ When adding a new component, please add its exports to `index.js`, including any
 ```js
 export {
   default as DtInput,
-  INPUT_SIZE_TYPES,
+  INPUT_SIZES,
 } from './components/input.vue';
 ```
 
