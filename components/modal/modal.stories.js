@@ -63,7 +63,7 @@ a 2-way binding to control modal visibility.`,
 // Default Props for all variations
 export const argsData = {
   closeButtonProps: {
-    ariaLabel: 'close modal',
+    ariaLabel: 'Close',
   },
   copy: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lacus quis velit \
 viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum \
@@ -126,11 +126,11 @@ WithFullSize.args = { size: 'full' };
 const slotsTemplate = generateTemplate(DtModal, {
   childTemplate: `
     <template #header>
-      <div class="d-fl-center d-p12 d-background-color--blue-lighter">
+      <div class="d-fl-center d-p12 d-bgc-blue-100">
         <div>[custom header]</div>
       </div>
     </template>
-    <div class="d-fl-center d-p32 d-background-color--sunflower">
+    <div class="d-fl-center d-p32 d-bgc-yellow-300">
       <h2>[custom body]</h2>
     </div>
   `,
