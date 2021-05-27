@@ -8,6 +8,7 @@ export const BUTTON_SIZE_MODIFIERS = {
 
 export const BUTTON_KIND_MODIFIERS = {
   default: '',
+  muted: 'd-btn--muted',
   danger: 'd-btn--danger',
   inverted: 'd-btn--inverted',
 };

@@ -1,13 +1,16 @@
 <template>
-  <div class="d-notice__actions">
+  <div
+    class="d-notice__actions"
+    data-qa="notice-content-actions"
+  >
     <slot />
     <dt-button
       v-if="!hideClose"
       ref="closeButton"
+      size="sm"
       importance="clear"
       circle
-      class="d-notice__btn d-notice__close"
-      :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : null"
+      :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : 'Close'"
       v-bind="closeButtonProps"
       @click="close"
     >

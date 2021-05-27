@@ -1,7 +1,8 @@
 <template>
   <div
     v-if="defaultIcon || $slots.default"
-    class="d-notice__icon d-as-center"
+    aria-hidden="true"
+    class="d-notice__icon"
   >
     <slot>
       <component
@@ -12,28 +13,30 @@
 </template>
 
 <script>
+import IconTranscript from '@dialpad/dialtone/lib/dist/vue/icons/IconTranscript';
 import IconInfo from '@dialpad/dialtone/lib/dist/vue/icons/IconInfo';
 import IconWarning from '@dialpad/dialtone/lib/dist/vue/icons/IconWarning';
 import IconError from '@dialpad/dialtone/lib/dist/vue/icons/IconError';
-import IconCheckmark from '@dialpad/dialtone/lib/dist/vue/icons/IconCheckmark';
+import IconCheckCircle from '@dialpad/dialtone/lib/dist/vue/icons/IconCheckCircle';
 import { NOTICE_KINDS } from './notice_constants.js';
 
 const kindToIcon = new Map([
   ['info', 'IconInfo'],
-  ['success', 'IconCheckmark'],
+  ['success', 'IconCheckCircle'],
   ['warning', 'IconWarning'],
   ['error', 'IconError'],
-  ['base', null],
+  ['base', 'IconTranscript'],
 ]);
 
 export default {
   name: 'DtNoticeIcon',
 
   components: {
+    IconTranscript,
     IconInfo,
     IconWarning,
     IconError,
-    IconCheckmark,
+    IconCheckCircle,
   },
 
   props: {
