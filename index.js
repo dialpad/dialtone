@@ -7,6 +7,7 @@ export * from './components/modal';
 export * from './components/lazy_show';
 export * from './components/list_section';
 export * from './components/list_item';
+export * from './components/link';
 export * from './components/notice';
 export * from './components/popover';
 export * from './components/radio';

@@ -10,6 +10,7 @@
     </slot>
   </div>
 </template>
+
 <script>
 import IconInfo from '@dialpad/dialtone/lib/dist/vue/icons/IconInfo';
 import IconWarning from '@dialpad/dialtone/lib/dist/vue/icons/IconWarning';
