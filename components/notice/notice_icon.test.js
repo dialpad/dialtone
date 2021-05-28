@@ -29,7 +29,7 @@ describe('DtNoticeIcon tests', function () {
 
   const _setChildWrappers = () => {
     cameraIcon = wrapper.findComponent(IconCamera);
-    baseIcon = wrapper.find('icontranscript-stub');
+    baseIcon = wrapper.find('iconlightbulb-stub');
     warningIcon = wrapper.find('iconwarning-stub');
   };
 

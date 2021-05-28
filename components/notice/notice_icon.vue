@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import IconTranscript from '@dialpad/dialtone/lib/dist/vue/icons/IconTranscript';
+import IconLightbulb from '@dialpad/dialtone/lib/dist/vue/icons/IconLightbulb';
 import IconInfo from '@dialpad/dialtone/lib/dist/vue/icons/IconInfo';
 import IconWarning from '@dialpad/dialtone/lib/dist/vue/icons/IconWarning';
 import IconError from '@dialpad/dialtone/lib/dist/vue/icons/IconError';
@@ -25,14 +25,14 @@ const kindToIcon = new Map([
   ['success', 'IconCheckCircle'],
   ['warning', 'IconWarning'],
   ['error', 'IconError'],
-  ['base', 'IconTranscript'],
+  ['base', 'IconLightbulb'],
 ]);
 
 export default {
   name: 'DtNoticeIcon',
 
   components: {
-    IconTranscript,
+    IconLightbulb,
     IconInfo,
     IconWarning,
     IconError,
