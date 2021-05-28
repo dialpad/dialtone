@@ -252,7 +252,7 @@ export default {
 
     onBlur (e) {
       // Do not emit a blur event if the target element is a child of this component
-      if (!this.$refs.container.contains(e.relatedTarget)) {
+      if (!this.$refs.container?.contains(e.relatedTarget)) {
         this.$emit('blur', e);
       }
     },
