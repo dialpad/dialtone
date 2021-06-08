@@ -1,6 +1,9 @@
 <template>
   <span
-    :class="badgeClasses"
+    :class="[
+      'd-badge',
+      BADGE_COLOR_MODIFIERS[color],
+    ]"
     data-qa="dt-badge"
   >
     <!-- @slot Slot for badge content, defaults to text prop -->
@@ -35,10 +38,10 @@ export default {
     },
   },
 
-  computed: {
-    badgeClasses () {
-      return ['d-badge', BADGE_COLOR_MODIFIERS[this.color]];
-    },
+  data () {
+    return {
+      BADGE_COLOR_MODIFIERS,
+    };
   },
 };
 </script>
