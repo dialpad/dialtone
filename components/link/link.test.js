@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
-  LINK_VARIANTS_CLASSES,
+  LINK_KIND_MODIFIERS,
   DANGER,
   SUCCESS,
   WARNING,
@@ -42,7 +42,7 @@ describe('Dialtone Vue Link tests', function () {
   const itBehavesLikeHasCorrectKindClass = kind => {
     it('should have correct class', async function () {
       await wrapper.setProps({ kind });
-      itBehavesLikeHasCorrectClass(nativeLink, LINK_VARIANTS_CLASSES[kind]);
+      itBehavesLikeHasCorrectClass(nativeLink, LINK_KIND_MODIFIERS[kind]);
     });
   };
 

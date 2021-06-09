@@ -36,9 +36,10 @@ import {
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_TYPES,
   ICON_POSITION_MODIFIERS,
-  LINK_KIND_MODIFIERS,
   INVALID_COMBINATION,
 } from './button_constants';
+
+import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 
 /**
  * Base Vue component for Dialtone Buttons.

@@ -1,6 +1,9 @@
 <template>
   <a
-    :class="linkClasses"
+    :class="[
+      'd-link',
+      LINK_KIND_MODIFIERS[kind],
+    ]"
     data-qa="dt-link"
   >
     <slot />
@@ -8,7 +11,7 @@
 </template>
 
 <script>
-import { LINK_VARIANTS } from './link_constants.js';
+import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants.js';
 
 export default {
   name: 'DtLink',
@@ -28,13 +31,10 @@ export default {
     },
   },
 
-  computed: {
-    linkClasses () {
-      return [
-        'd-link',
-        { [`d-link--${this.kind}`]: this.kind.length > 0 },
-      ];
-    },
+  data () {
+    return {
+      LINK_KIND_MODIFIERS,
+    };
   },
 };
 </script>

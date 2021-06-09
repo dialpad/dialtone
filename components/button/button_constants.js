@@ -26,17 +26,6 @@ export const ICON_POSITION_MODIFIERS = {
   right: 'd-btn__icon--right',
 };
 
-// TODO: Use LINK_KIND_MODIFIERS from the link component
-// rather than this one once it gets merged in.
-export const LINK_KIND_MODIFIERS = {
-  default: 'd-link',
-  warning: 'd-link--warning',
-  danger: 'd-link--danger',
-  success: 'd-link--success',
-  muted: 'd-link--muted',
-  inverted: 'd-link--inverted',
-};
-
 export const INVALID_COMBINATION = [
   {
     circle: true,
@@ -66,6 +55,5 @@ export default {
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_TYPES,
   ICON_POSITION_MODIFIERS,
-  LINK_KIND_MODIFIERS,
   INVALID_COMBINATION,
 };
