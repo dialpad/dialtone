@@ -3,7 +3,11 @@
     <label>
       <div
         :aria-details="labelAriaDetails"
-        :class="labelClasses"
+        :class="[
+          'd-label',
+          LABEL_SIZE_MODIFIERS[size],
+          labelClass,
+        ]"
         v-bind="labelChildProps"
         data-qa="dt-select-label"
       >
@@ -13,7 +17,11 @@
       <div
         v-if="$slots.description || description"
         :id="descriptionKey"
-        :class="descriptionClasses"
+        :class="[
+          'd-description',
+          DESCRIPTION_SIZE_MODIFIERS[size],
+          descriptionClass,
+        ]"
         v-bind="descriptionChildProps"
         data-qa="dt-select-description"
       >
@@ -21,11 +29,18 @@
         <slot name="description">{{ description }}</slot>
       </div>
       <div
-        :class="selectClasses"
+        :class="[
+          'd-select',
+          SELECT_SIZE_MODIFIERS[size],
+          selectClass,
+        ]"
         data-qa="dt-select-wrapper"
       >
         <select
-          :class="selectInputClasses"
+          :class="[
+            'd-select__input',
+            SELECT_STATE_MODIFIERS[state],
+          ]"
           v-bind="$attrs"
           v-on="selectListeners"
           data-qa="dt-select"
@@ -181,6 +196,15 @@ export default {
     },
   },
 
+  data () {
+    return {
+      LABEL_SIZE_MODIFIERS,
+      DESCRIPTION_SIZE_MODIFIERS,
+      SELECT_SIZE_MODIFIERS,
+      SELECT_STATE_MODIFIERS,
+    };
+  },
+
   computed: {
     selectListeners () {
       return {
@@ -202,37 +226,6 @@ export default {
 
     state () {
       return getValidationState(this.formattedMessages);
-    },
-
-    selectClasses () {
-      return [
-        'd-select',
-        SELECT_SIZE_MODIFIERS[this.size],
-        this.selectClass,
-      ];
-    },
-
-    selectInputClasses () {
-      return [
-        'd-select__input',
-        SELECT_STATE_MODIFIERS[this.state],
-      ];
-    },
-
-    labelClasses () {
-      return [
-        'd-label',
-        LABEL_SIZE_MODIFIERS[this.size],
-        this.labelClass,
-      ];
-    },
-
-    descriptionClasses () {
-      return [
-        'd-description',
-        DESCRIPTION_SIZE_MODIFIERS[this.size],
-        this.descriptionClass,
-      ];
     },
 
     selectKey () {
