@@ -16,8 +16,6 @@ import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants.js';
 export default {
   name: 'DtLink',
 
-  inheritAttrs: true,
-
   props: {
     /**
      * Applies the link variant styles
