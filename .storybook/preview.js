@@ -1,6 +1,7 @@
 import '../css/dialtone-globals.less';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { addParameters } from '@storybook/vue';
+import { version } from '../package.json';
 import theme from './theme';
 import Vue from 'vue';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
@@ -25,9 +26,12 @@ export const parameters = {
       method: 'alphabetical',
       // Make sure the docs come first
       order: [
-        'Docs',
+        `Version ${version}`,
         [
           'Welcome',
+        ],
+        'Docs',
+        [
           'Component Driven Development',
           [
             'Yeoman Generator',
