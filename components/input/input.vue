@@ -13,7 +13,11 @@
       <slot name="labelSlot">
         <div
           data-qa="dt-input-label"
-          :class="['base-input__label-text', 'd-label', labelSizeModifierClass]"
+          :class="[
+            'base-input__label-text',
+            'd-label',
+            { [`d-label--${size}`]: (!isDefaultSize && isValidSize) },
+          ]"
         >
           {{ label }}
         </div>
@@ -21,7 +25,11 @@
       <div
         v-if="$slots.description || description"
         :id="descriptionKey"
-        :class="['base-input__description', 'd-description', descriptionSizeModifierClass]"
+        :class="[
+          'base-input__description',
+          'd-description',
+          { [`d-description--${size}`]: (!isDefaultSize && isValidDescriptionSize) },
+        ]"
         data-qa="dt-input-description"
       >
         <!-- @slot slot for description, defaults to description prop -->
@@ -174,6 +182,14 @@ export default {
       return this.size === INPUT_SIZES.DEFAULT;
     },
 
+    isValidSize () {
+      return Object.values(INPUT_SIZES).includes(this.size);
+    },
+
+    isValidDescriptionSize () {
+      return Object.values(DESCRIPTION_SIZE_TYPES).includes(this.size);
+    },
+
     inputComponent () {
       if (this.isTextarea) {
         return 'textarea';
@@ -207,28 +223,12 @@ export default {
     },
 
     sizeModifierClass () {
-      if (this.isDefaultSize || !Object.values(INPUT_SIZES).includes(this.size)) {
+      if (this.isDefaultSize || !this.isValidSize) {
         return '';
       }
 
       return `d-${this.inputComponent}--${this.size}`;
     },
-
-    labelSizeModifierClass () {
-      if (this.isDefaultSize || !Object.values(INPUT_SIZES).includes(this.size)) {
-        return '';
-      }
-      return `d-label--${this.size}`;
-    },
-
-    descriptionSizeModifierClass () {
-      if (this.isDefaultSize || !Object.values(DESCRIPTION_SIZE_TYPES).includes(this.size)) {
-        return '';
-      }
-
-      return `d-description--${this.size}`;
-    },
-
   },
 
   methods: {
