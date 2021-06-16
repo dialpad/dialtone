@@ -1,6 +1,9 @@
 <template>
   <button
-    :class="['base-button__button', buttonClasses]"
+    :class="[
+      'base-button__button',
+      buttonClasses,
+    ]"
     data-qa="dt-button"
     :type="type"
     :aria-live="computedAriaLive"
@@ -11,7 +14,11 @@
     <span
       v-if="$slots.icon && !link"
       data-qa="dt-button-icon"
-      :class="['base-button__icon', iconClasses]"
+      :class="[
+        'base-button__icon',
+        'd-btn__icon',
+        ICON_POSITION_MODIFIERS[iconPosition],
+      ]"
     >
       <!-- @slot Button icon -->
       <slot
@@ -161,6 +168,7 @@ export default {
 
   data () {
     return {
+      ICON_POSITION_MODIFIERS,
       // whether the button is currently in focus
       isInFocus: false,
     };
@@ -190,12 +198,14 @@ export default {
 
     buttonClasses () {
       if (this.link) {
-        return ['d-link',
+        return [
+          'd-link',
           LINK_KIND_MODIFIERS[this.linkKind],
           BUTTON_SIZE_MODIFIERS[this.size],
         ];
       }
-      return ['d-btn',
+      return [
+        'd-btn',
         BUTTON_IMPORTANCE_MODIFIERS[this.importance],
         BUTTON_KIND_MODIFIERS[this.kind],
         BUTTON_SIZE_MODIFIERS[this.size],
@@ -203,13 +213,6 @@ export default {
           'd-btn--circle': this.circle,
           'd-btn--loading': this.loading,
         },
-      ];
-    },
-
-    iconClasses () {
-      return [
-        'd-btn__icon',
-        ICON_POSITION_MODIFIERS[this.iconPosition],
       ];
     },
   },
