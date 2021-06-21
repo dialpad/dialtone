@@ -6,6 +6,8 @@ import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/eve
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,
+  itBehavesLikeDoesNotRaiseAnyVueWarnings,
+  itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
 import {
   itBehavesLikeAppliesClassToChild,
@@ -338,6 +340,9 @@ describe('DtSelectMenu Tests', function () {
     });
 
     describe('Options Validation', function () {
+      // Test Environment
+      const warningMessage = 'Options are expected to be provided via prop or slot';
+
       // Test Setup
       before(function () {
         Vue.config.silent = true;
@@ -354,25 +359,13 @@ describe('DtSelectMenu Tests', function () {
         Vue.config.silent = false;
       });
 
-      // Shared Examples
-      const itBehavesLikeDoesNotRaiseAnyWarnings = () => {
-        it('should not raise any warnings', function () { assert.isTrue(Vue.util.warn.notCalled); });
-      };
-
-      const itBehavesLikeRaisesWarning = () => {
-        it('should raise a single warning', function () { assert.isTrue(Vue.util.warn.calledOnce); });
-        it('should have expected warning message', function () {
-          assert.strictEqual(Vue.util.warn.firstCall.args[0], 'Options are expected to be provided via prop or slot');
-        });
-      };
-
       describe('When options are provided via prop', function () {
         // Test Setup
         beforeEach(function () {
           _mountWrappers();
         });
 
-        itBehavesLikeDoesNotRaiseAnyWarnings();
+        itBehavesLikeDoesNotRaiseAnyVueWarnings();
 
         describe('When updated options are empty', function () {
           // Test Setup
@@ -380,7 +373,7 @@ describe('DtSelectMenu Tests', function () {
             await wrapper.setProps({ options: [] });
           });
 
-          itBehavesLikeRaisesWarning();
+          itBehavesLikeRaisesSingleVueWarning(warningMessage);
         });
       });
 
@@ -392,7 +385,7 @@ describe('DtSelectMenu Tests', function () {
           _mountWrappers();
         });
 
-        itBehavesLikeDoesNotRaiseAnyWarnings();
+        itBehavesLikeDoesNotRaiseAnyVueWarnings();
       });
 
       describe('When options are not provided', function () {
@@ -402,7 +395,7 @@ describe('DtSelectMenu Tests', function () {
           _mountWrappers();
         });
 
-        itBehavesLikeRaisesWarning();
+        itBehavesLikeRaisesSingleVueWarning(warningMessage);
       });
     });
   });

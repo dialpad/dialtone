@@ -1,0 +1,74 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtAvatar from './avatar';
+
+# Avatar
+
+<Subtitle>
+  An avatar is a visual representation of a user or object.
+</Subtitle>
+
+## Default
+
+<Canvas>
+  <Story id="elements-avatar--default" />
+</Canvas>
+
+## Icon
+
+<Canvas>
+  <Story id="elements-avatar--icon" />
+</Canvas>
+
+## Initials
+
+<Canvas>
+  <Story id="elements-avatar--initials" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable of={DtAvatar} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtAvatar } from '@dialpad/dialtone-vue';
+```
+
+### Image
+
+`src` and `alt` are required attributes for image avatars. They are overridden by the default slot.
+
+```jsx
+<dt-avatar
+  src=""
+  alt=""
+/>
+```
+
+### With Kind
+
+```jsx
+<dt-avatar
+  kind="default | icon | initials"
+/>
+```
+
+### With Color
+
+```jsx
+<dt-avatar
+  color="orange-200 | orange-300 | orange-400 | orange-500 | pink-300 | pink-400 | pink-500 | pink-600 |
+purple-200 | purple-300 | purple-500 | purple-600 | yellow-200 | yellow-300 | yellow-400 | yellow-500"
+/>
+```
+
+### With Size
+
+```jsx
+<dt-avatar
+  size="sm | md | lg"
+/>
+```
