@@ -2,6 +2,7 @@
 export * from './components/avatar';
 export * from './components/badge';
 export * from './components/banner';
+export * from './components/breadcrumbs';
 export * from './components/button';
 export * from './components/input';
 export * from './components/input_group';

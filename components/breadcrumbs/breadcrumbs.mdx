@@ -1,0 +1,100 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtBreadcrumbs from './breadcrumbs';
+import DtBreadcrumbItem from './breadcrumb_item';
+
+# Breadcrumbs
+
+<Subtitle>
+Breadcrumbs are links used to provide context for the currently-viewed page and
+where it is located within the overall site structure.
+</Subtitle>
+
+Breadcrumbs show users where they are within a site’s hierarchy. Breadcrumbs help orient the user and allow for
+navigation to previous page levels. It can be appropriate to use a breadcrumb when:
+
+- The user is many levels of navigation deep
+- The current page does not have its own navigation
+- The user needs to quickly go back to the previous parent page
+
+## When not to use
+
+Breadcrumbs are always treated as secondary and should not entirely replace the primary navigation.
+They shouldn’t be used for products that have single level navigation because they create unnecessary clutter.
+
+## Base Style
+
+Breadcrumbs should be the first page element—placed directly above the page’s title.
+All pages that appear in the breadcrumb should link to their respective page.
+The page the user is on should always be the last page listed and not linked.
+
+These breadcrumbs styles are provided in two visual styles:
+
+1. **Default**: Our muted link color.
+2. **Inverted**: For scenarios when you want to place the breadcrumbs on a non-white.
+
+<Canvas>
+  <Story id="elements-breadcrumbs--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="elements-breadcrumbs--variants" />
+</Canvas>
+
+## Accessibility
+
+HTML doesn't provide dedicated semantic elements for breadcrumbs, so we need to add a
+few ARIA attributes to make them accessible.
+
+- `nav` - Use this landmark element to guide screen readers to this navigational unit.
+- `aria-label="breadcrumbs"` - applied to the nav landmark element, this provides a description of the navigation unit.
+- `ol` - This child element of .d-breadcrumbs communicates that breadcrumbs are a structured, navigational
+hierarchy to screen readers.
+- `aria-current="location"` - used to denote the current page.
+
+## Props, Slots & Events
+
+### Breadcrumbs Props
+
+<ArgsTable of={DtBreadcrumbs} />
+
+### Breadcrumb Item Props
+
+Breadcrumb items include [Link component](/?path=/docs/elements-link--default).
+
+<ArgsTable of={DtBreadcrumbItem} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtBreadcrumbs, DtBreadcrumbItem } from '@dialpad/handset';
+```
+
+### With Props
+
+```vue
+<dt-breadcrumbs
+  :breadcrumbs="[{
+    href: '#',
+    label: 'Root',
+  }]"
+/>
+```
+
+### With inverted and slot
+
+```vue
+<dt-breadcrumbs inverted>
+  <dt-breadcrumb-item
+      inverted
+      selected
+      label="label"
+      url="#"
+  >
+    Label
+  </dt-breadcrumb-item>
+</dt-breadcrumbs>
+```
