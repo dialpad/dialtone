@@ -1,0 +1,146 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtTooltip from './tooltip';
+
+# Tooltip
+
+<Subtitle>
+    A tooltip is a floating label that briefly explains an action, function, or an element.
+    Its content is exclusively text and shouldn't be vital information for users.
+    If richer media is desired, consider using a popover instead.
+</Subtitle>
+
+## Default
+
+The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a
+screen element or component, a text box displays information about that element (such as a description of a button's
+function, or what an abbreviation stands for). The tooltip is displayed continuously as long as the user hovers over the
+element
+
+A tooltip has two slots:
+
+1. **the anchor** required slot
+2. **the default** slot (which could be replaced with prop message)
+
+<Canvas>
+  <Story id="elements-tooltip--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="elements-tooltip--variants" />
+</Canvas>
+
+## Props & Slots
+
+<ArgsTable of={DtTooltip} />
+
+## Accessibility
+
+Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
+See also [wai aria practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/#tooltip).
+
+### General info
+
+1. **Twelve directions are offered:** three on each face of the tooltip.
+2. **Inverted:** Inverts styles to work on dark backgrounds.
+
+### Anchor
+
+The anchor element that activates the tooltip should be fully accessible by keyboard. The easiest way to do this is by
+using an element like an `DtButton` that is already accessible. The user should also be able to close the tooltip
+content using the `ESC` key for most ARIA roles.
+
+There are some required ARIA attributes for the anchor element (such as `aria-hidden` set based on `open`).
+To make this as straightforward as possible, these ARIA attributes are passed
+with the correct values as the `attrs` to the anchor slot. Applying them is as simple as using `v-bind`.
+
+### Focus & Keyboard
+
+Due to the different contexts in which a tooltip can be used, focus management and
+keyboard shortcut ESC is provided.
+You are encouraged to consult the ARIA documentation for the particular role
+
+## Usage
+
+### Import
+
+```jsx
+import { DtTooltip, TOOLTIP_DIRECTION_MODIFIERS } from '@dialpad/dialtone-vue';
+```
+
+### Arrow Directions
+
+'bottom-center' is assigned by default.
+Twelve directions are offered: three on each face of the tooltip.
+
+```html
+<dt-tooltip
+  message="Message"
+>
+  <template #anchor>
+    <dt-button importance="outlined">
+      Anchor
+    </dt-button>
+  </template>
+</dt-tooltip>
+```
+
+### Default
+
+```html
+<dt-tooltip>
+    Message
+    <template #anchor>
+      Anchor
+    </template>
+</dt-tooltip>
+```
+
+### Open state
+
+```html
+<dt-tooltip
+    :show="true"
+    :hover="false"
+    message="Message"
+>
+    <template #anchor>
+      <dt-button
+        importance="outlined"
+      >
+        Open default state
+      </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### top-left
+
+```html
+<dt-tooltip
+    arrow-direction="top-left"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            top-left
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### top-center
+
+```html
+<dt-tooltip
+    arrow-direction="top-center"
+    message="Message"
+    >
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            top-center
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
