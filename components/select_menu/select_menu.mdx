@@ -1,0 +1,138 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtSelectMenu from './select_menu';
+
+# Select Menu
+
+<Subtitle>
+  A select menu is an input control that allows users to choose one option from a list.
+</Subtitle>
+
+## Base Style
+
+A select is normally paired with a label, but there are times when it can be used without a label. Don't rely on the
+placeholder text as a label.
+
+<Canvas>
+  <Story id="forms-select-menu--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="forms-select-menu--variants" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable of={DtSelectMenu} />
+
+## Usage
+
+### Option Object Structure
+
+```js
+{
+  index: number,           // Optional
+  value: number || string, // Required
+  label: string,           // Required
+}
+```
+
+### Import
+
+```js
+import { DtSelectMenu, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
+
+const options = [
+  { value: 1, label: 'Option 1' },
+  { value: 2, label: 'Option 2' },
+  { value: 3, label: 'Option 3' },
+];
+```
+
+### Default
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+  :options="options"
+/>
+```
+
+### With Description
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+  description="Some Description"
+  :options="options"
+/>
+```
+
+### With Slotted Label
+
+```html
+<dt-select-menu
+  name="select-menu"
+  :options="options"
+>
+  <template #label>
+    Select Menu
+  </template>
+</dt-select-menu>
+```
+
+### With Slotted Description
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+  :options="options"
+>
+  <template #description>
+    Some Description
+  </template>
+</dt-select-menu>
+```
+
+### With Slotted Options
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+>
+  <option
+    v-for="option in options"
+    :key="`select-menu-option-${option.value}`"
+    :value="option.value"
+  >
+    {{ option.label }}
+  </option>
+</dt-select-menu>
+```
+
+### With Validation Messages
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+  :options="options"
+  :messages="[{ message: 'Some Success Message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+/>
+```
+
+### With Size
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+  :options="options"
+  size="xs"
+/>
+```

@@ -1,0 +1,17 @@
+export const BADGE_COLOR_MODIFIERS = {
+  base: '',
+  'black-700': 'd-badge--black-700',
+  'green-400': 'd-badge--green-400',
+  'orange-400': 'd-badge--orange-400',
+  'pink-300': 'd-badge--pink-300',
+  'pink-500': 'd-badge--pink-500',
+  'pink-600': 'd-badge--pink-600',
+  'pink-700': 'd-badge--pink-700',
+  'purple-100': 'd-badge--purple-100',
+  'purple-300': 'd-badge--purple-300',
+  'purple-500': 'd-badge--purple-500',
+  'purple-700': 'd-badge--purple-700',
+  'red-500': 'd-badge--red-500',
+  white: 'd-badge--white',
+  'yellow-300': 'd-badge--yellow-300',
+};

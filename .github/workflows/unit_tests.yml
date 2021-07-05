@@ -13,6 +13,8 @@ jobs:
 
     env:
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      STORYBOOK_ROOT: ./storybook
+      NODE_MODULES_CACHE_VERSION: v1
 
     steps:
       - name: Check out branch
@@ -23,10 +25,25 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: Install Vue CLI
-        run: npm install -g @vue/cli
+      - name: Use Library Cache
+        id: library-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules/
+            ~/.npm
+          key: ${{ format('{0}-dialtone-vue-library-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('package-lock.json'))) }}
+
+      - name: Use Documentation Cache
+        id: doc-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ env.STORYBOOK_ROOT }}/node_modules/
+          key: ${{ format('{0}-dialtone-vue-documentation-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('{0}/package-lock.json', env.STORYBOOK_ROOT))) }}
 
       - name: Install dependencies
+        if: steps.library-cache.outputs.cache-hit != 'true' || steps.doc-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Run unit tests

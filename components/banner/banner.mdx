@@ -1,0 +1,76 @@
+import { Canvas, Story, Subtitle } from '@storybook/addon-docs/blocks';
+
+# Banner
+
+<Subtitle>
+    Banners are a type of <a href="/?path=/docs/elements-notice--default">notice</a>, delivering system and engagement messaging.
+    These are highly intrusive notices and should be used sparingly and appropriately.
+</Subtitle>
+
+## Styles
+
+System banners are used for **system** messaging. They are full-width notices placed in one of two locations:
+
+1. **Above everything else:** If the banner is related to the entire app (e.g. the user lost internet service),
+place the banner first. These should not be dismissable until the issue is resolved. To pin the banner to the top of
+the app, add the `pinned` property.
+2. **Below the top bar:** This is the default location for system banners. Use these when it affects only a particular
+area of the product (e.g. when the user is in Do Not Disturb mode).
+
+### Usage
+
+```js
+import { DtBanner } from '@dialpad/dialtone-vue';
+```
+
+## Base Style
+
+The typical banner will have a title, description and an action button
+
+<Canvas>
+  <Story id="elements-banner--default" />
+</Canvas>
+
+## Variants
+
+Provides different styles of banners
+
+### Error
+
+Applies error visual style.
+
+<Canvas>
+    <Story id="elements-banner--error" />
+</Canvas>
+
+### Info
+
+Applies info visual style.
+
+<Canvas>
+  <Story id="elements-banner--info" />
+</Canvas>
+
+### Success
+
+Success visual style.
+
+<Canvas>
+  <Story id="elements-banner--success" />
+</Canvas>
+
+### Pinned
+
+Pins the banner to the top of the window
+
+<Canvas>
+    <Story id="elements-banner--pinned" />
+</Canvas>
+
+### Warning
+
+Warning visual style.
+
+<Canvas>
+    <Story id="elements-banner--warning" />
+</Canvas>

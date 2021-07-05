@@ -39,7 +39,7 @@ import { DtRadio, DtRadioGroup } from '@dialpad/dialtone-vue';
 
 Passing in Radio components by slot.
 
-```vue
+```html
 <dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
@@ -62,7 +62,7 @@ const options = [
 ];
 ```
 
-```vue
+```html
 <dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
@@ -82,7 +82,7 @@ const options = [
 
 When no legend is provided it is expected that an `aria-label` is passed into the component.
 
-```vue
+```html
 <dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
@@ -97,7 +97,7 @@ When no legend is provided it is expected that an `aria-label` is passed into th
 
 The legend can also be passed by slot.
 
-```vue
+```html
 <dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
@@ -114,7 +114,7 @@ The legend can also be passed by slot.
 
 The event handler is only needed if you need to do additional processing. The v-model is automatically updated.
 
-```vue
+```html
 <dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
@@ -130,7 +130,7 @@ The event handler is only needed if you need to do additional processing. The v-
 
 <h4 style={{ color: 'red' }}>Error</h4>
 
-```vue
+```html
 <dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
@@ -144,7 +144,7 @@ The event handler is only needed if you need to do additional processing. The v-
 
 <h4 style={{ color: 'Goldenrod' }}>Warning</h4>
 
-```vue
+```html
 <dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"
@@ -158,7 +158,7 @@ The event handler is only needed if you need to do additional processing. The v-
 
 <h4 style={{ color: 'green' }}>Success</h4>
 
-```vue
+```html
 <dt-radio-group
   v-model="selectedFruits"
   name="fruits-radio-group"

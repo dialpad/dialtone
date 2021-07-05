@@ -1,8 +1,8 @@
 <template>
   <aside
     :class="noticeClass"
-    :role="role"
     v-on="$listeners"
+    data-qa="notice"
   >
     <dt-notice-icon
       :kind="kind"
@@ -15,6 +15,7 @@
       :title-id="titleId"
       :content-id="contentId"
       :title="title"
+      :role="role"
       v-on="$listeners"
     >
       <template #titleOverride>
@@ -39,7 +40,7 @@
 import DtNoticeIcon from './notice_icon';
 import DtNoticeContent from './notice_content';
 import DtNoticeAction from './notice_action';
-import { NOTICE_KINDS } from './notice_constants.js';
+import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants.js';
 
 export default {
   name: 'DtNotice',
@@ -59,6 +60,7 @@ export default {
       type: String,
       default: undefined,
     },
+
     /**
      * Sets an ID on the content element of the component. Useful for aria-describedby
      * or aria-labelledby or any other reason you may need an id to refer to the content.
@@ -67,6 +69,7 @@ export default {
       type: String,
       default: undefined,
     },
+
     /**
      * Title header of the notice. This can be left blank to remove the title from the notice entirely.
      */
@@ -74,6 +77,20 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+     * Provides a role for the notice. 'status' is used to communicate a message. 'alert' is used to communicate an
+     * important message that does not contain any interactive elements. 'alertdialog' is used to communicate an
+     * important message that does contain interactive elements.
+     */
+    role: {
+      type: String,
+      default: 'status',
+      validate (role) {
+        return NOTICE_ROLES.includes(role);
+      },
+    },
+
     /**
      * Used in scenarios where the message needs to visually dominate the screen.
      * This will also change the aria role from status to alert.
@@ -82,6 +99,7 @@ export default {
       type: Boolean,
       default: false,
     },
+
     /**
      * Severity level of the notice, sets the icon and background
      */
@@ -92,6 +110,7 @@ export default {
         return NOTICE_KINDS.includes(kind);
       },
     },
+
     /**
      * Props for the notice close button.
      */
@@ -99,6 +118,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
+
     /**
      * Hides the close button from the notice
      */
@@ -114,9 +134,6 @@ export default {
         `d-notice--${this.kind}`,
         { 'd-notice--important': this.important },
       ];
-    },
-    role () {
-      return this.important ? 'alert' : 'status';
     },
   },
 };

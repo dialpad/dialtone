@@ -1,6 +1,11 @@
 <template>
   <div
-    :class="modalClasses"
+    :class="[
+      'd-modal',
+      MODAL_KIND_MODIFIERS[kind],
+      MODAL_SIZE_MODIFIERS[size],
+      modalClass,
+    ]"
     data-qa="dt-modal"
     :aria-hidden="open"
     @click.self="close"
@@ -153,8 +158,8 @@ export default {
      */
     kind: {
       type: String,
-      default: '',
-      validator: (k) => Object.values(MODAL_KIND_MODIFIERS).includes(k),
+      default: 'default',
+      validator: (k) => Object.keys(MODAL_KIND_MODIFIERS).includes(k),
     },
 
     /**
@@ -164,8 +169,8 @@ export default {
      */
     size: {
       type: String,
-      default: '',
-      validator: (s) => Object.values(MODAL_SIZE_MODIFIERS).includes(s),
+      default: 'default',
+      validator: (s) => Object.keys(MODAL_SIZE_MODIFIERS).includes(s),
     },
 
     /**
@@ -179,6 +184,13 @@ export default {
     },
   },
 
+  data () {
+    return {
+      MODAL_KIND_MODIFIERS,
+      MODAL_SIZE_MODIFIERS,
+    };
+  },
+
   computed: {
     open () {
       return `${!this.show}`;
@@ -186,17 +198,6 @@ export default {
 
     hasFooterSlot () {
       return !!this.$slots.footer;
-    },
-
-    modalClasses () {
-      return [
-        {
-          'd-modal': true,
-          [`d-modal--${this.kind}`]: this.kind,
-          [`d-modal--${this.size}`]: this.size,
-        },
-        this.modalClass,
-      ];
     },
   },
 

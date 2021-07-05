@@ -8,6 +8,7 @@ export const BUTTON_SIZE_MODIFIERS = {
 
 export const BUTTON_KIND_MODIFIERS = {
   default: '',
+  muted: 'd-btn--muted',
   danger: 'd-btn--danger',
   inverted: 'd-btn--inverted',
 };
@@ -23,17 +24,6 @@ export const BUTTON_TYPES = ['submit', 'reset', 'button'];
 export const ICON_POSITION_MODIFIERS = {
   left: 'd-btn__icon--left',
   right: 'd-btn__icon--right',
-};
-
-// TODO: Use LINK_KIND_MODIFIERS from the link component
-// rather than this one once it gets merged in.
-export const LINK_KIND_MODIFIERS = {
-  default: 'd-link',
-  warning: 'd-link--warning',
-  danger: 'd-link--danger',
-  success: 'd-link--success',
-  muted: 'd-link--muted',
-  inverted: 'd-link--inverted',
 };
 
 export const INVALID_COMBINATION = [
@@ -65,6 +55,5 @@ export default {
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_TYPES,
   ICON_POSITION_MODIFIERS,
-  LINK_KIND_MODIFIERS,
   INVALID_COMBINATION,
 };

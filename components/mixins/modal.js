@@ -26,11 +26,29 @@ export default {
     async focusFirstElement (el) {
       await this.$nextTick();
       const focusableElements = this._getFocusableElements(el);
+      const elToFocus = this._getFirstFocusElement(focusableElements);
+      elToFocus?.focus();
+    },
+
+    /**
+     * internal use only.
+     *
+     * @param focusableElements - list of focusable elements
+     * @returns {*} - first DOM element that is focusable.
+     * @private
+     */
+    _getFirstFocusElement (focusableElements) {
       if (!focusableElements.length) {
         return;
       }
-      focusableElements[0].focus();
+      let firstFocusEl = focusableElements[0];
+      // If first element is a checkbox, put focus on the selected checkbox or the first checkbox if none are selected.
+      if (firstFocusEl.matches('[type="radio"]:not(:checked)')) {
+        firstFocusEl = focusableElements.find(el => el.checked && el.name === firstFocusEl.name) || firstFocusEl;
+      }
+      return firstFocusEl;
     },
+
     /**
      * internal use only.
      *
@@ -45,6 +63,7 @@ export default {
           style.getPropertyValue('visibility') !== 'hidden';
       });
     },
+
     /**
      * tabs to the next element contained within your component
      * @param {object} e - keypress event
@@ -63,7 +82,7 @@ export default {
         return;
       }
 
-      const firstFocusableElement = focusableElements[0];
+      const firstFocusableElement = this._getFirstFocusElement(focusableElements);
       const lastFocusableElement = focusableElements[focusableElements.length - 1];
 
       if (e.shiftKey) {

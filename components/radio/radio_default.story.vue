@@ -29,11 +29,9 @@
 
 <script>
 import DtRadio from './radio';
-import fixDefaultSlot from '../plugins/fixDefaultSlot';
 
 export default {
   name: 'RadioDefault',
   components: { DtRadio },
-  mixins: [fixDefaultSlot],
 };
 </script>
