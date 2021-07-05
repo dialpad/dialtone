@@ -37,7 +37,7 @@ import { DtRadio, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 ### With Label Prop
 
-```vue
+```html
 <dt-radio
   value="optionValue"
   label="My Label"
@@ -46,7 +46,7 @@ import { DtRadio, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 ### With Slotted Label
 
-```vue
+```html
 <dt-radio value="optionValue">
   My Label
 </dt-radio>
@@ -54,7 +54,7 @@ import { DtRadio, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 ### With Description
 
-```vue
+```html
 <dt-radio
   value="optionValue"
   description="My Description"
@@ -65,7 +65,7 @@ import { DtRadio, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 ### With Slotted Label and Description
 
-```vue
+```html
 <dt-radio value="optionValue">
   My Label
   <template #description>
@@ -76,7 +76,7 @@ import { DtRadio, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 ### With Group
 
-```vue
+```html
 <dt-radio
   value="optionValue"
   name="groupName"
@@ -88,7 +88,7 @@ import { DtRadio, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 <h4 style={{ color: 'red' }}>Error</h4>
 
-```vue
+```html
 <dt-radio
   value="optionValue"
   :validationState="VALIDATION_MESSAGE_TYPES.ERROR"
@@ -97,7 +97,7 @@ import { DtRadio, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 <h4 style={{ color: 'Goldenrod' }}>Warning</h4>
 
-```vue
+```html
 <dt-radio
   value="optionValue"
   :validationState="VALIDATION_MESSAGE_TYPES.WARNING"
@@ -106,7 +106,7 @@ import { DtRadio, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 <h4 style={{ color: 'green' }}>Success</h4>
 
-```vue
+```html
 <dt-radio
   value="optionValue"
   :validationState="VALIDATION_MESSAGE_TYPES.SUCCESS"
