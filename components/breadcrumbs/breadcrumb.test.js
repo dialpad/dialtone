@@ -5,7 +5,6 @@ import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from
 
 // Constants
 const basePropsData = {
-  'aria-label': 'breadcrumbs',
   inverted: false,
   breadcrumbs: [{
     url: '#',
@@ -41,8 +40,8 @@ describe('Dialtone Vue Breadcrumb tests', function () {
 
   // Helpers
   const _setWrappers = () => {
-    breadcrumbs = wrapper.find('[aria-label="breadcrumbs"]');
-    breadcrumbItems = wrapper.findAll('.d-breadcrumbs__item');
+    breadcrumbs = wrapper.find('[data-qa="dt-breadcrumbs"]');
+    breadcrumbItems = wrapper.findAll('[data-qa="dt-breadcrumb-item"]');
   };
 
   const _mountWrapper = () => {
@@ -96,6 +95,18 @@ describe('Dialtone Vue Breadcrumb tests', function () {
           return item.classes().includes(BREADCRUMB_ITEM_SELECTED_MODIFIER);
         });
         assert.equal(elementWithValidAria.length, 1);
+      });
+    });
+  });
+
+  describe('Accessibility Tests', function () {
+    describe('When a new area-label is provided', function () {
+      before(function () {
+        basePropsData.ariaLabel = 'newAria';
+      });
+
+      it('should update area-label value', function () {
+        assert.strictEqual(breadcrumbs.attributes('aria-label'), 'newAria');
       });
     });
   });
