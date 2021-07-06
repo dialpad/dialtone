@@ -20,6 +20,24 @@ export const DESCRIPTION_SIZE_TYPES = {
   EXTRA_LARGE: 'xl',
 };
 
+// Description size variants
+export const DESCRIPTION_SIZE_MODIFIERS = {
+  xs: '',
+  sm: '',
+  md: '',
+  lg: 'd-description--lg',
+  xl: 'd-description--xl',
+};
+
+// Label size variants
+export const LABEL_SIZE_MODIFIERS = {
+  xs: 'd-label--xs',
+  sm: 'd-label--sm',
+  md: '',
+  lg: 'd-label--lg',
+  xl: 'd-label--xl',
+};
+
 /*
  * Any string message or message object in the messages prop that do not specify
  * a 'type' attributes will default to 'DEFAULT_MESSAGE_TYPE'.

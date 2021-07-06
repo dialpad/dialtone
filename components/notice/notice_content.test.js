@@ -65,6 +65,7 @@ describe('DtNoticeContent tests', function () {
         slotsData.titleOverride = 'this is an override title';
         _setWrappers();
       });
+
       it('displays the correct text', function () {
         assert.strictEqual(title.text(), slotsData.titleOverride);
       });

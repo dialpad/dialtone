@@ -126,7 +126,7 @@ WithFullSize.args = { size: 'full' };
 const slotsTemplate = generateTemplate(DtModal, {
   childTemplate: `
     <template #header>
-      <div class="d-fl-center d-p12 d-bgc-blue-100">
+      <div class="d-fl-center d-p12 d-bgc-purple-100">
         <div>[custom header]</div>
       </div>
     </template>

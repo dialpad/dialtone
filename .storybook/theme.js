@@ -9,7 +9,7 @@ export default create({
   base: 'light',
   brandTitle: 'Dialpad storybook',
   brandImage: dialpadLogo,
-  fontBase: '"Roboto"',
+  fontBase: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
   colorPrimary: '#1738FA',
   colorSecondary: '#1111A1',
 });

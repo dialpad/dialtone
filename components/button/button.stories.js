@@ -6,8 +6,8 @@ import {
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_TYPES,
   ICON_POSITION_MODIFIERS,
-  LINK_KIND_MODIFIERS,
 } from './button_constants';
+import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 import BaseButtonMdx from './button.mdx';
 import ButtonDefault from './button_default.story.vue';
 import ButtonVariants from './button_variants.story.vue';

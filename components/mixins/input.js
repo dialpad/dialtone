@@ -277,7 +277,7 @@ export const MessagesMixin = {
      * Used to customize the the validation messages component
      */
     messagesClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 

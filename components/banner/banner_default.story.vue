@@ -1,8 +1,9 @@
 <template>
   <div>
-    <button @click="displayBanner = true">
+    <dt-button @click="displayBanner = true">
       Click to show!
-    </button>
+    </dt-button>
+
     <dt-banner
       v-if="displayBanner"
       :kind="kind"
@@ -12,14 +13,28 @@
       :important="important"
       :pinned="pinned"
       :hide-close="hideClose"
+      :close-button-props="buttonCloseProps"
       @close="displayBanner = false"
     >
-      <span v-html="defaultSlot" />
+      <span>
+        Message body with
+        <a
+          href="#"
+          class="d-link"
+          :class="linkClass"
+        >a link.</a>
+      </span>
+
       <template
         v-if="action"
         #action
       >
-        <span v-html="action" />
+        <dt-button
+          :kind="buttonKind"
+          importance="outlined"
+        >
+          {{ action }}
+        </dt-button>
       </template>
       <template
         v-if="icon"
@@ -44,12 +59,41 @@ import icon from '../mixins/icon';
 
 export default {
   name: 'BannerDefault',
+
   components: { DtBanner, DtButton },
+
   mixins: [icon],
+
   data () {
     return {
       displayBanner: false,
     };
+  },
+
+  computed: {
+    shouldInvertButton () {
+      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+    },
+
+    isInverted () {
+      return this.important && this.shouldInvertButton;
+    },
+
+    buttonKind () {
+      return this.isInverted ? 'inverted' : 'muted';
+    },
+
+    linkClass () {
+      return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
+    },
+
+    buttonCloseProps () {
+      return {
+        ...this.closeButtonProps,
+        kind: this.buttonKind,
+        ariaLabel: 'Close',
+      };
+    },
   },
 };
 </script>

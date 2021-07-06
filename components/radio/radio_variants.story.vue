@@ -187,13 +187,11 @@
 
 <script>
 import DtRadio from './radio';
-import fixDefaultSlot from '../plugins/fixDefaultSlot';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
 
 export default {
   name: 'RadioVariants',
   components: { DtRadio },
-  mixins: [fixDefaultSlot],
   created () {
     this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
   },
