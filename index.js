@@ -15,6 +15,7 @@ export * from './components/notice';
 export * from './components/popover';
 export * from './components/radio';
 export * from './components/radio_group';
+export * from './components/tabs';
 export * from './components/validation_messages';
 export * from './components/checkbox';
 export * from './components/checkbox_group';

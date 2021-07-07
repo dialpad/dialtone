@@ -320,7 +320,7 @@ describe('Dialtone Vue Button tests', function () {
           await wrapper.setData({ isInFocus: false });
         });
 
-        it('aria-live is falsy"', async function () {
+        it('aria-live is "falsy"', async function () {
           assert.isNotOk(wrapper.attributes('aria-live'));
         });
       });
