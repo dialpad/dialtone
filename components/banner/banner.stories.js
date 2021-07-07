@@ -2,7 +2,7 @@ import DtBanner from './banner';
 import BaseBannerMdx from './banner.mdx';
 import BannerDefault from './banner_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import { argTypesData } from '../notice/notice.stories.js';
+import { argsData, argTypesData } from '../notice/notice.stories.js';
 
 argTypesData.titleId = {
   defaultValue: '',
@@ -29,6 +29,7 @@ export default {
       page: BaseBannerMdx,
     },
   },
+  args: argsData,
   argTypes: argTypesData,
   excludeStories: /.Data$/,
 };
