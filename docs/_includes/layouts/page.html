@@ -6,13 +6,16 @@
       {% include header.html %}
       <div class="d-d-grid d-gl-docsite-toc d-p16 md:d-d-block">
         {% include nav.html %}
-        <main id="content" class="d-ga-content d-stack32 d-ps-relative d-mb32 js-content">
+        <main id="content" class="d-ga-content d-stack64 d-ps-relative d-mb32 js-content">
           <header class="d-stack2">
             {% if title %}
-              <h1 class="d-headline42 d-lh6 d-mb12">{{ title }}</h1>
+              <h1 class="d-headline42 d-lh6 d-mb4">{{ title }}</h1>
+              {% if storybook-url %}
+                <a class="d-link d-fs14 d-mb24" href="{{ storybook-url }}" target="_blank">View Storybook{% iconSystem "launch", "d-ml4 d-svg--size18" %}</a>
+              {% endif %}
             {% endif %}
             {% if description %}
-              <p class="d-fs20 d-lh4">{{ description }}</p>
+              <p class="d-fs20 d-lh6">{{ description }}</p>
             {% endif %}
           </header>
           <div class="d-stack64">

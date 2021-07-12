@@ -2,8 +2,10 @@
 layout: page
 title: Banner
 description: A banner is a type of <a class="d-link" href="/components/notice">notice</a>, delivering system and engagement messaging. It is highly intrusive and should be used sparingly and appropriately.
+storybook-url: https://vue.dialpad.design/?path=/story/elements-banner--default
 ---
 <section class="d-stack16">
+  {% header "h2", "Overview" %}
   {% paragraph %}System banners are used for <strong>system</strong> messaging. They are full-width notices placed in one of two locations:{% endparagraph %}
   {% ol %}
     <li><strong>Above everything else:</strong> If the banner is related to the entire app (e.g. the user lost internet service), place the banner first. <em>These should not be dismissable until the issue is resolved.</em> To pin the banner to the top of the app, add the {% code %}.d-notice--pinned{% endcode %} class.</li>
