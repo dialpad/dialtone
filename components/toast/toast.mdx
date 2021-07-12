@@ -1,0 +1,133 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtToast from './toast';
+
+# Toast
+
+<Subtitle>
+  A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions.
+  It contains at-a-glance information about outcomes and can be paired with actions.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="elements-toast--default" />
+</Canvas>
+
+## Variants
+
+### Error
+
+<Canvas>
+  <Story id="elements-toast--error" />
+</Canvas>
+
+### Info
+
+<Canvas>
+  <Story id="elements-toast--info" />
+</Canvas>
+
+### Success
+
+<Canvas>
+  <Story id="elements-toast--success" />
+</Canvas>
+
+### Warning
+
+<Canvas>
+  <Story id="elements-toast--warning" />
+</Canvas>
+
+### Important
+
+<Canvas>
+  <Story id="elements-toast--important" />
+</Canvas>
+
+## Accessibility
+
+`role="status"` is the default role attribute, and it's recommended to use this role unless you want to show an
+error message where `role="alert"` will be valid. Take into account that if you invoke multiple toasts
+with `role="alert"`, screen readers could override its speech queue and causes to miss a toast message.
+
+## Props, Slots & Events
+
+<ArgsTable of={DtToast} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtToast } from '@dialpad/dialtone-vue';
+```
+
+### Methods
+
+Instance methods can be executed assigning a reference ID to the component using
+[ref](https://v3.vuejs.org/guide/component-template-refs.html) attribute.
+
+#### show()
+
+Instance method that shows the toast element for the default or provided duration time.
+
+#### close()
+
+Instance method that closes the toast and removes it from the DOM.
+
+### Events
+
+`close` is fired when close button is clicked.
+
+#### Example
+
+```html
+<template>
+  <button type="button" @click="openToast">Click to show!</button>
+  <dt-toast
+    ref="toast"
+    :title="title"
+    :message="message"
+    @close="closeToast"
+  ></dt-toast>
+</template>
+
+<script>
+import { DtToast } from '@dialpad/dialtone-vue';
+
+export default {
+  components: { DtToast },
+  data () {
+    return {
+      title: 'Title',
+      message: 'Message body.'
+    }
+  },
+  methods: {
+    openToast () {
+      this.$refs.toast.open();
+    },
+    closeToast () {
+      this.$refs.toast.close();
+    },
+  },
+}
+</script>
+```
+
+### With duration
+
+It's recommended to use a time of at least 6000 ms (minimum duration and default value) to give users enough time
+to read the toast. Take into account that the time necessary to read and comprehend the message could vary in users.
+For instance, users using assistive technology, or users with language barriers could potentially need more time to
+read and understand the message.
+
+```html
+<dt-toast
+  title="Title"
+  message="Message"
+  :duration="7500"
+/>
+```

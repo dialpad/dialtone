@@ -28,6 +28,9 @@
     },
     "components/radio/radio.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
+    },
+    "components/toast/toast.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 3
     }
   }
 }
