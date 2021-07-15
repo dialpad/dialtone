@@ -3,7 +3,7 @@
     class="d-notice__content"
     data-qa="notice-content"
   >
-    <h1
+    <p
       v-if="title || this.$slots.titleOverride"
       :id="titleId"
       class="d-notice__title"
@@ -12,7 +12,7 @@
       <slot name="titleOverride">
         {{ title }}
       </slot>
-    </h1>
+    </p>
     <p
       :id="contentId"
       class="d-notice__message"
