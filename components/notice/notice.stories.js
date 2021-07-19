@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import DtNotice from './notice';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
 import NoticeDefault from './notice_default.story.vue';
+import DtNoticeMdx from './notice.mdx';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 
 // Default Prop Values
@@ -56,12 +57,18 @@ export const argTypesData = {
   },
 };
 
+// Story Collection
 export default {
   title: 'Elements/Notice',
   component: DtNotice,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.Data$/,
+  parameters: {
+    docs: {
+      page: DtNoticeMdx,
+    },
+  },
 };
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, NoticeDefault);

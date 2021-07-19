@@ -50,9 +50,9 @@ import icon from '../mixins/icon';
 export default {
   name: 'NoticeDefault',
 
-  mixins: [icon],
-
   components: { DtButton, DtNotice },
+
+  mixins: [icon],
 
   computed: {
     shouldInvertButton () {
@@ -73,7 +73,9 @@ export default {
 
     computedCloseButtonProps () {
       return {
+        ...this.closeButtonProps,
         kind: this.buttonKind,
+        ariaLabel: 'Close',
       };
     },
   },
