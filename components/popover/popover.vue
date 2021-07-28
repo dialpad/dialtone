@@ -2,7 +2,7 @@
   <component
     :is="elementType"
     v-click-outside="() => close('click-outside')"
-    class="d-p-relative dt-popover"
+    class="d-ps-relative dt-popover"
   >
     <div
       :id="!ariaLabelledby && labelledBy"
@@ -29,13 +29,14 @@
       :transition="transition"
       :show="open"
       :class="[
-        'd-border',
-        'd-border-color--ash-dark',
-        'd-border-radius--sm',
-        'd-bgc-white d-box-shadow--md',
+        'd-ba',
+        'd-bc-black-075',
+        'd-bar4',
+        'd-bgc-white',
+        'd-bs-md',
         'd-mt4',
         'd-ps-absolute',
-        'd-z-index--popover',
+        'd-zi-popover',
         'dt-popover__content',
         `dt-popover__content--align-${alignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
@@ -50,7 +51,7 @@
 
       <div
         v-if="hasCaret"
-        class="d-bgc-white d-mtn4 d-border-top d-border-left d-border-color--ash-dark dt-popover__caret"
+        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret"
       />
     </dt-lazy-show>
   </component>
