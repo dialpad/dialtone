@@ -174,14 +174,15 @@
 
     <!-- Checked and With Description and Success validation message -->
     <dt-checkbox
-      name="checked-disabled-with-description"
+      name="checked-with-description-and-validation-message"
       value="Value"
-      label="Checked Disabled"
+      label="Checked"
       description="With Description"
+      validation-state="success"
       :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
       checked
     />
-    <!-- Checked and Disabled With Description -->
+    <!-- Checked and With Description and Success validation message -->
   </div>
 </template>
 
