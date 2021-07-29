@@ -41,7 +41,7 @@ Storybook provides a sandbox to develop and experiment with components locally, 
 To run Storybook locally, first install the dependencies:
 
 ```
-npm run install:storybook
+npm run storybook:install
 ```
 
 Then you can run the dev server:
