@@ -27,7 +27,7 @@
         </div>
         <div
           v-if="$slots.description || description"
-          :class="['d-radio__description', descriptionValidationClass, descriptionClass]"
+          :class="['d-description', descriptionValidationClass, descriptionClass]"
           v-bind="descriptionChildProps"
           data-qa="radio-description"
         >
