@@ -5,8 +5,8 @@ export const RADIO_INPUT_VALIDATION_CLASSES = {
 };
 
 export const RADIO_DESCRIPTION_VALIDATION_CLASSES = {
-  warning: 'd-radio__description--warning',
   error: 'd-radio__description--error',
+  warning: 'd-radio__description--warning',
   success: 'd-radio__description--success',
 };
 
