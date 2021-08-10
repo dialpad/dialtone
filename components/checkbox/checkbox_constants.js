@@ -5,9 +5,9 @@ export const CHECKBOX_INPUT_VALIDATION_CLASSES = {
 };
 
 export const CHECKBOX_DESCRIPTION_VALIDATION_CLASSES = {
-  error: 'd-description--error',
-  warning: 'd-description--warning',
-  success: 'd-description--success',
+  error: 'd-checkbox__description--error',
+  warning: 'd-checkbox__description--warning',
+  success: 'd-checkbox__description--success',
 };
 
 export default {
