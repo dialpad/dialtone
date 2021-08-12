@@ -1,24 +1,24 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		// FILES
-		"files.exclude": {
-			"**/.git": true,
-			"**/.DS_Store": true,
-		},
-		// SEARCH
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // FILES
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true
+    },
+    // SEARCH
     // Note that gitignored files are automatically excluded from search. Do not add files
     // here that are already gitignored.
     "search.exclude": {
       "**/package-lock.json": true,
       "**/locale": true
     },
-		"search.followSymlinks": false,
-		// SPACING
+    "search.followSymlinks": false,
+    // SPACING
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.trimAutoWhitespace": true,
@@ -27,7 +27,7 @@
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
 
-		// LINTING / FORMATTING
+    // LINTING / FORMATTING
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
     },
@@ -43,9 +43,9 @@
     "vetur.completion.tagCasing": "kebab",
     "vetur.format.enable": false,
     "vetur.validation.script": false,
-    "vetur.validation.template": false,
-	},
-	"launch": {
+    "vetur.validation.template": false
+  },
+  "launch": {
     "version": "0.2.0",
     "configurations": [
       {
@@ -55,19 +55,19 @@
         "url": "http://localhost:9011",
         "webRoot": "${workspaceFolder}",
         "smartStep": true,
-				"sourceMapPathOverrides": {
-          "webpack:///../*": "${webRoot}/*",
-        },
+        "sourceMapPathOverrides": {
+          "webpack:///../*": "${webRoot}/*"
+        }
       },
-			{
+      {
         "type": "node",
         "request": "launch",
         "name": "Debug JS unit tests",
         "program": "${workspaceFolder}/node_modules/@vue/cli-service/bin/vue-cli-service",
         "args": [
-					"test:unit",
-					"--timeout",
-					"0",
+          "test:unit",
+          "--timeout",
+          "0",
           "--colors",
           "--require",
           "source-map-support/register",
@@ -81,17 +81,17 @@
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen",
         "skipFiles": ["<node_internals>/**/*.js", "**/node_modules/**/*"]
-      },
+      }
       // for some reason when adding grep this just skips the breakpoints?
-			// {
+      // {
       //   "type": "node",
       //   "request": "launch",
       //   "name": "Debug single JS unit test",
       //   "program": "${workspaceFolder}/node_modules/@vue/cli-service/bin/vue-cli-service",
       //   "args": [
-			// 		"test:unit",
-			// 		"--timeout",
-			// 		"0",
+      // 		"test:unit",
+      // 		"--timeout",
+      // 		"0",
       //     "--colors",
       //     "--require",
       //     "source-map-support/register",
@@ -99,7 +99,7 @@
       //     "jsdom-global/register",
       //     "-R",
       //     "min",
-			// 		"--fgrep",
+      // 		"--fgrep",
       //     "${input:testname}",
       //     "${workspaceFolder}/components/**/*.test.js"
       //   ],
@@ -108,14 +108,14 @@
       //   "internalConsoleOptions": "neverOpen",
       //   "skipFiles": ["<node_internals>/**/*.js", "**/node_modules/**/*"]
       // },
-		],
-		"inputs": [
+    ],
+    "inputs": [
       {
         "id": "testname",
         "description": "test or suite name:",
         "default": "",
         "type": "promptString"
-      },
-		],
-	},
+      }
+    ]
+  }
 }
