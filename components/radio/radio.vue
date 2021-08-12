@@ -27,7 +27,7 @@
         </div>
         <div
           v-if="$slots.description || description"
-          :class="['d-description', descriptionValidationClass, descriptionClass]"
+          :class="['d-description', descriptionClass]"
           v-bind="descriptionChildProps"
           data-qa="radio-description"
         >
@@ -53,7 +53,7 @@ import {
   GroupableMixin,
   MessagesMixin,
 } from '../mixins/input.js';
-import { RADIO_INPUT_VALIDATION_CLASSES, RADIO_DESCRIPTION_VALIDATION_CLASSES } from './radio_constants';
+import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
 
 export default {
@@ -78,10 +78,6 @@ export default {
   computed: {
     inputValidationClass () {
       return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];
-    },
-
-    descriptionValidationClass () {
-      return RADIO_DESCRIPTION_VALIDATION_CLASSES[this.internalValidationState];
     },
 
     radioGroupValue () {
