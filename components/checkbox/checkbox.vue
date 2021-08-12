@@ -27,7 +27,7 @@
         </div>
         <div
           v-if="$slots.description || description"
-          :class="['d-description', descriptionValidationClass, descriptionClass]"
+          :class="['d-description', descriptionClass]"
           v-bind="descriptionChildProps"
           data-qa="checkbox-description"
         >
@@ -54,7 +54,7 @@ import {
   GroupableMixin,
   MessagesMixin,
 } from '../mixins/input.js';
-import { CHECKBOX_INPUT_VALIDATION_CLASSES, CHECKBOX_DESCRIPTION_VALIDATION_CLASSES } from './checkbox_constants';
+import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
 
 export default {
@@ -69,10 +69,6 @@ export default {
   computed: {
     inputValidationClass () {
       return CHECKBOX_INPUT_VALIDATION_CLASSES[this.internalValidationState];
-    },
-
-    descriptionValidationClass () {
-      return CHECKBOX_DESCRIPTION_VALIDATION_CLASSES[this.internalValidationState];
     },
 
     checkboxGroupValueChecked () {

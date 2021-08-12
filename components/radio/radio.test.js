@@ -15,10 +15,7 @@ import {
   itBehavesLikeAppliesChildProp,
 } from '../../tests/shared_examples/extendability';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
-import {
-  RADIO_INPUT_VALIDATION_CLASSES,
-  RADIO_DESCRIPTION_VALIDATION_CLASSES,
-} from './radio_constants';
+import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import DtRadio from './radio.vue';
 
 const baseValue = 'Value';
@@ -59,7 +56,6 @@ describe('Dialtone Vue Radio Tests', function () {
       itBehavesLikeHasValidationClasses(
         wrapper,
         RADIO_INPUT_VALIDATION_CLASSES,
-        RADIO_DESCRIPTION_VALIDATION_CLASSES,
         checkboxValidationState,
       );
     });
