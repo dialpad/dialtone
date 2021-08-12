@@ -1,8 +1,8 @@
 import DtModal from './modal.vue';
 import ModalMdx from './modal.mdx';
+import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
-import { generateTemplate } from '../storybook_utils';
-import DtButton from '../button/button';
+import { createTemplateFromVueFile } from '../storybook_utils';
 
 export const argTypesData = {
   // Slots
@@ -45,7 +45,9 @@ a 2-way binding to control modal visibility.`,
     },
   },
 
+  // Props
   size: {
+    defaultValue: 'default',
     control: {
       type: 'select',
       options: Object.keys(MODAL_SIZE_MODIFIERS),
@@ -53,9 +55,16 @@ a 2-way binding to control modal visibility.`,
   },
 
   kind: {
+    defaultValue: 'default',
     control: {
       type: 'select',
       options: Object.keys(MODAL_KIND_MODIFIERS),
+    },
+  },
+
+  showFooter: {
+    table: {
+      disable: true,
     },
   },
 };
@@ -70,7 +79,6 @@ viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. V
 maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
-  show: true,
   title: 'Example Title',
 };
 
@@ -87,60 +95,39 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const modalTemplate = generateTemplate(DtModal, {
-  customProps: ['class="d-p-static"'],
-});
-const defaultTemplate = (args, { argTypes }) => {
-  return {
-    components: { DtModal },
-    template: modalTemplate,
-    props: Object.keys(argTypes),
-  };
+// Templates
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtModalDefaultTemplate);
+
+// Stories
+export const Default = DefaultTemplate.bind({});
+Default.args = {
 };
-export const Default = defaultTemplate.bind({});
 
-const footerTemplate = generateTemplate(DtModal, {
-  childTemplate: `
-    <template #footer>
-      <dt-button :kind="kind" importance="primary">Confirm</dt-button>
-      <dt-button :kind="kind" importance="clear">Cancel</dt-button>
-    </template>
-  `,
-  customProps: ['class="d-p-static"'],
-});
-const withFooterTemplate = (args, { argTypes }) => {
-  return {
-    components: { DtButton, DtModal },
-    template: footerTemplate,
-    props: Object.keys(argTypes),
-  };
+export const WithFooter = DefaultTemplate.bind({});
+WithFooter.args = {
+  showFooter: true,
 };
-export const WithFooter = withFooterTemplate.bind({});
 
-export const WithDangerStyle = withFooterTemplate.bind({});
-WithDangerStyle.args = { kind: 'danger' };
+export const WithDangerStyle = DefaultTemplate.bind({});
+WithDangerStyle.args = {
+  kind: 'danger',
+  showFooter: true,
+};
 
-export const WithFullSize = defaultTemplate.bind({});
-WithFullSize.args = { size: 'full' };
+export const WithFullSize = DefaultTemplate.bind({});
+WithFullSize.args = {
+  size: 'full',
+  showFooter: true,
+};
 
-const slotsTemplate = generateTemplate(DtModal, {
-  childTemplate: `
-    <template #header>
-      <div class="d-fl-center d-p12 d-bgc-purple-100">
-        <div>[custom header]</div>
-      </div>
-    </template>
+export const WithCustomHeaderAndContent = DefaultTemplate.bind({});
+WithCustomHeaderAndContent.args = {
+  header: `
+    <div class="d-fl-center d-p12 d-bgc-purple-100">
+      <div>[custom header]</div>
+    </div>`,
+  default: `
     <div class="d-fl-center d-p32 d-bgc-yellow-300">
       <h2>[custom body]</h2>
-    </div>
-  `,
-  customProps: ['class="d-p-static"'],
-});
-const withCustomHeaderAndContentTemplate = (args, { argTypes }) => {
-  return {
-    components: { DtButton, DtModal },
-    template: slotsTemplate,
-    props: Object.keys(argTypes),
-  };
+    </div>`,
 };
-export const WithCustomHeaderAndContent = withCustomHeaderAndContentTemplate.bind({});
