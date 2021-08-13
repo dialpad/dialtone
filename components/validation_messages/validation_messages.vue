@@ -17,7 +17,7 @@
         `d-validation-message--${type}`,
       ]"
     >
-      {{ message }}
+      <p v-html="message" />
     </div>
   </div>
 </template>
