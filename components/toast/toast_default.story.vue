@@ -1,20 +1,21 @@
 <template>
   <div>
-    <dt-button @click="displayBanner = true">
+    <dt-button @click="buttonClicked">
       Click to show!
     </dt-button>
 
-    <dt-banner
-      v-if="displayBanner"
+    <dt-toast
+      ref="toast"
       :kind="kind"
       :title="title"
+      :message="message"
       :title-id="titleId"
       :content-id="contentId"
       :important="important"
-      :pinned="pinned"
       :hide-close="hideClose"
+      :duration="duration"
       :close-button-props="buttonCloseProps"
-      @close="displayBanner = false; onClose($event)"
+      @close="closeToast(); onClose($event)"
     >
       <span
         v-if="defaultSlot"
@@ -29,15 +30,13 @@
         >a link</a>.
       </span>
 
-      <template
-        v-if="action"
-        #action
-      >
+      <template #action>
         <dt-button
-          :kind="buttonKind"
+          size="sm"
           importance="outlined"
+          :kind="buttonKind"
         >
-          {{ action }}
+          Action
         </dt-button>
       </template>
       <template
@@ -52,27 +51,21 @@
       >
         <span v-html="titleOverride" />
       </template>
-    </dt-banner>
+    </dt-toast>
   </div>
 </template>
 
 <script>
-import DtBanner from '../banner/banner';
+import DtToast from './toast';
 import DtButton from '../button/button';
 import icon from '../mixins/icon';
 
 export default {
-  name: 'BannerDefault',
+  name: 'ToastDefault',
 
-  components: { DtBanner, DtButton },
+  components: { DtToast, DtButton },
 
   mixins: [icon],
-
-  data () {
-    return {
-      displayBanner: false,
-    };
-  },
 
   computed: {
     shouldInvertButton () {
@@ -97,6 +90,16 @@ export default {
         kind: this.buttonKind,
         ariaLabel: 'Close',
       };
+    },
+  },
+
+  methods: {
+    buttonClicked () {
+      this.$refs.toast.show();
+    },
+
+    closeToast () {
+      this.$refs.toast.close();
     },
   },
 };

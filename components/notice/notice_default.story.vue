@@ -6,14 +6,26 @@
     :content-id="contentId"
     :important="important"
     :hide-close="hideClose"
-    :closeButtonProps="computedCloseButtonProps"
+    :close-button-props="computedCloseButtonProps"
+    @close="onClose($event)"
   >
-    <span v-html="defaultSlot" />
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
+    <span v-else>
+      Message body with
+      <a
+        href="#"
+        class="d-link"
+        :class="linkClass"
+      >a link</a>.
+    </span>
     <template #action>
       <dt-button
         size="sm"
         importance="outlined"
-        :kind="actionKind"
+        :kind="buttonKind"
       >
         Action
       </dt-button>
@@ -40,22 +52,33 @@ import icon from '../mixins/icon';
 
 export default {
   name: 'NoticeDefault',
-  mixins: [icon],
 
   components: { DtButton, DtNotice },
 
-  computed: {
-    actionKind () {
-      if (this.important && (this.kind === 'base' || this.kind === 'info' || this.kind === 'error')) {
-        return 'inverted';
-      }
+  mixins: [icon],
 
-      return 'muted';
+  computed: {
+    shouldInvertButton () {
+      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+    },
+
+    isInverted () {
+      return this.important && this.shouldInvertButton;
+    },
+
+    buttonKind () {
+      return this.isInverted ? 'inverted' : 'muted';
+    },
+
+    linkClass () {
+      return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
     },
 
     computedCloseButtonProps () {
       return {
-        kind: this.actionKind,
+        ...this.closeButtonProps,
+        kind: this.buttonKind,
+        ariaLabel: 'Close',
       };
     },
   },

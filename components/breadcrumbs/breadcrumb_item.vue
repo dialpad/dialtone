@@ -1,5 +1,6 @@
 <template>
   <li
+    data-qa="dt-breadcrumb-item"
     :class="[
       'd-breadcrumbs__item',
       { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },

@@ -15,7 +15,7 @@ import {
   itBehavesLikeAppliesChildProp,
 } from '../../tests/shared_examples/extendability';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
-import { CHECKBOX_INPUT_VALIDATION_CLASSES, CHECKBOX_DESCRIPTION_VALIDATION_CLASSES } from './checkbox_constants';
+import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import DtCheckbox from './checkbox.vue';
 
 // Constants
@@ -65,7 +65,6 @@ describe('Checkbox Tests', function () {
       itBehavesLikeHasValidationClasses(
         wrapper,
         CHECKBOX_INPUT_VALIDATION_CLASSES,
-        CHECKBOX_DESCRIPTION_VALIDATION_CLASSES,
         checkboxValidationState,
       );
     });

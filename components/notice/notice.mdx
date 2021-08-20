@@ -1,0 +1,99 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtNotice from './notice';
+
+# Notice
+
+<Subtitle>
+  A notice is an informational and assistive message that appears inline with content.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="elements-notice--default" />
+</Canvas>
+
+## Variants
+
+### Error
+
+<Canvas>
+  <Story id="elements-notice--error" />
+</Canvas>
+
+### Info
+
+<Canvas>
+  <Story id="elements-notice--info" />
+</Canvas>
+
+### Success
+
+<Canvas>
+  <Story id="elements-notice--success" />
+</Canvas>
+
+### Warning
+
+<Canvas>
+  <Story id="elements-notice--warning" />
+</Canvas>
+
+### Important
+
+<Canvas>
+  <Story id="elements-notice--important" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable of={DtNotice} />
+
+## Usage
+
+### Import
+
+```js
+import { DtNotice } from '@dialpad/dialtone-vue';
+```
+
+### Events
+
+`close` is fired when close button is clicked.
+
+#### Example
+
+```html
+<template>
+  <button type="button" @click="showNotice">Click to show!</button>
+  <dt-notice
+    :title="title"
+    v-if="isNoticeShown"
+    @close="closeNotice"
+  >
+    Message body
+  </dt-notice>
+</template>
+
+<script>
+import { DtNotice } from '@dialpad/dialtone-vue';
+
+export default {
+  components: { DtNotice },
+  data () {
+    return {
+      title: 'Title',
+      isNoticeShown: false,
+    }
+  },
+  methods: {
+    showNotice () {
+      this.isNoticeShown = true;
+    },
+    closeNotice () {
+      this.isNoticeShown = false;
+    },
+  },
+}
+</script>
+```

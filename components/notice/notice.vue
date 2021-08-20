@@ -127,6 +127,7 @@ export default {
       default: false,
     },
   },
+
   computed: {
     noticeClass () {
       return [

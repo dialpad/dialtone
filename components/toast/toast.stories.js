@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
-import DtNotice from './notice';
-import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
-import NoticeDefault from './notice_default.story.vue';
-import DtNoticeMdx from './notice.mdx';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import DtToast from './toast';
+import DtToastMdx from './toast.mdx';
+import DtToastDefaultTemplate from './toast_default.story.vue';
+import { NOTICE_KINDS } from '../notice';
 
 // Default Prop Values
 export const argsData = {
@@ -11,18 +11,31 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Props
+  titleId: {
+    defaultValue: '',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  contentId: {
+    defaultValue: '',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
   kind: {
     control: {
       type: 'select',
       options: NOTICE_KINDS,
     },
   },
-  role: {
-    control: {
-      type: 'select',
-      options: NOTICE_ROLES,
-    },
-  },
+
+  // Slots
   titleOverride: {
     table: {
       type: { summary: 'text/html' },
@@ -59,55 +72,61 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Notice',
-  component: DtNotice,
+  title: 'Elements/Toast',
+  component: DtToast,
   args: argsData,
   argTypes: argTypesData,
-  excludeStories: /.Data$/,
+  excludeStories: /.*Data$/,
   parameters: {
     docs: {
-      page: DtNoticeMdx,
+      page: DtToastMdx,
     },
   },
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, NoticeDefault);
+// Templates
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtToastDefaultTemplate,
+);
 
-export const Default = Template.bind({});
+// Stories
+export const Default = DefaultTemplate.bind({});
 Default.args = {
   title: 'Base title (optional)',
   kind: 'base',
 };
 
-export const Error = Template.bind({});
+export const Error = DefaultTemplate.bind({});
 Error.args = {
   ...Default.args,
   title: 'Error title (optional)',
   kind: 'error',
 };
 
-export const Info = Template.bind({});
+export const Info = DefaultTemplate.bind({});
 Info.args = {
   ...Default.args,
   title: 'Info title (optional)',
   kind: 'info',
 };
 
-export const Success = Template.bind({});
+export const Success = DefaultTemplate.bind({});
 Success.args = {
   ...Default.args,
   title: 'Success title (optional)',
   kind: 'success',
 };
 
-export const Warning = Template.bind({});
+export const Warning = DefaultTemplate.bind({});
 Warning.args = {
   ...Default.args,
   title: 'Warning title (optional)',
   kind: 'warning',
 };
 
-export const Important = Template.bind({});
+export const Important = DefaultTemplate.bind({});
 Important.args = {
   ...Default.args,
   important: true,

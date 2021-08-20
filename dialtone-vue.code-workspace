@@ -1,0 +1,121 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // FILES
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true
+    },
+    // SEARCH
+    // Note that gitignored files are automatically excluded from search. Do not add files
+    // here that are already gitignored.
+    "search.exclude": {
+      "**/package-lock.json": true,
+      "**/locale": true
+    },
+    "search.followSymlinks": false,
+    // SPACING
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.trimAutoWhitespace": true,
+    "files.trimTrailingWhitespace": true,
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+
+    // LINTING / FORMATTING
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "javascript.format.enable": false,
+    "eslint.format.enable": true,
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "vue",
+      "vue-html",
+      "html"
+    ],
+    "vetur.completion.tagCasing": "kebab",
+    "vetur.format.enable": false,
+    "vetur.validation.script": false,
+    "vetur.validation.template": false
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "pwa-chrome",
+        "request": "launch",
+        "name": "Debug Local JS (storybook)",
+        "url": "http://localhost:9011",
+        "webRoot": "${workspaceFolder}",
+        "smartStep": true,
+        "sourceMapPathOverrides": {
+          "webpack:///../*": "${webRoot}/*"
+        }
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug JS unit tests",
+        "program": "${workspaceFolder}/node_modules/@vue/cli-service/bin/vue-cli-service",
+        "args": [
+          "test:unit",
+          "--timeout",
+          "0",
+          "--colors",
+          "--require",
+          "source-map-support/register",
+          "--require",
+          "jsdom-global/register",
+          "-R",
+          "min",
+          "${workspaceFolder}/components/**/*.test.js"
+        ],
+        "smartStep": true,
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "skipFiles": ["<node_internals>/**/*.js", "**/node_modules/**/*"]
+      }
+      // for some reason when adding grep this just skips the breakpoints?
+      // {
+      //   "type": "node",
+      //   "request": "launch",
+      //   "name": "Debug single JS unit test",
+      //   "program": "${workspaceFolder}/node_modules/@vue/cli-service/bin/vue-cli-service",
+      //   "args": [
+      // 		"test:unit",
+      // 		"--timeout",
+      // 		"0",
+      //     "--colors",
+      //     "--require",
+      //     "source-map-support/register",
+      //     "--require",
+      //     "jsdom-global/register",
+      //     "-R",
+      //     "min",
+      // 		"--fgrep",
+      //     "${input:testname}",
+      //     "${workspaceFolder}/components/**/*.test.js"
+      //   ],
+      //   "smartStep": true,
+      //   "console": "integratedTerminal",
+      //   "internalConsoleOptions": "neverOpen",
+      //   "skipFiles": ["<node_internals>/**/*.js", "**/node_modules/**/*"]
+      // },
+    ],
+    "inputs": [
+      {
+        "id": "testname",
+        "description": "test or suite name:",
+        "default": "",
+        "type": "promptString"
+      }
+    ]
+  }
+}
