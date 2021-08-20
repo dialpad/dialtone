@@ -3,7 +3,6 @@ import { assert } from 'chai';
 export function itBehavesLikeHasValidationClasses (
   wrapper,
   inputValidationClasses,
-  descriptionValidationClasses,
   validationState,
 ) {
   assert.strictEqual(
@@ -11,10 +10,6 @@ export function itBehavesLikeHasValidationClasses (
     true,
     'has input validation class',
   );
-  assert.strictEqual(
-    wrapper.find(`.${descriptionValidationClasses[validationState]}`).exists(),
-    true,
-    'has description validation class');
 }
 
 export function itBehavesLikeChecked (input) {

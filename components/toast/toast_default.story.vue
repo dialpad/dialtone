@@ -17,7 +17,11 @@
       :close-button-props="buttonCloseProps"
       @close="closeToast(); onClose($event)"
     >
-      <span>
+      <span
+        v-if="defaultSlot"
+        v-html="defaultSlot"
+      />
+      <span v-else>
         Message body with
         <a
           href="#"
