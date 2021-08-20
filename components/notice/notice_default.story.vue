@@ -9,7 +9,11 @@
     :close-button-props="computedCloseButtonProps"
     @close="onClose($event)"
   >
-    <span>
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
+    <span v-else>
       Message body with
       <a
         href="#"
@@ -17,7 +21,6 @@
         :class="linkClass"
       >a link</a>.
     </span>
-
     <template #action>
       <dt-button
         size="sm"
