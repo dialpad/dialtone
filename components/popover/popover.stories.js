@@ -61,7 +61,7 @@ const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argType
 export const Default = Template.bind({});
 Default.args = {};
 Default.decorators = [() => ({
-  template: '<div class="d-height1"><story /></div>',
+  template: '<div class="d-h102"><story /></div>',
 })];
 Default.parameters = {
   docs: {
@@ -88,7 +88,7 @@ Default.parameters = {
 export const FixedRight = Template.bind({});
 FixedRight.args = { ...Default.args, fixedAlignment: 'right' };
 FixedRight.decorators = [() => ({
-  template: '<div class="d-height1 d-ta-right"><story /></div>',
+  template: '<div class="d-h102 d-ta-right"><story /></div>',
 })];
 FixedRight.parameters = {
   docs: {
