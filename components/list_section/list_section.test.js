@@ -84,7 +84,7 @@ describe('ListSection tests', function () {
         await wrapper.setProps({ separator: true });
       });
       it('separator is displayed correctly', function () {
-        assert.isTrue(rootElement.classes('d-border-bottom'));
+        assert.isTrue(rootElement.classes('d-bb'));
       });
     });
 

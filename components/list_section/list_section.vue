@@ -4,8 +4,8 @@
     role="group"
     :aria-labelledby="`${id}-list-section-header`"
     tabindex="-1"
-    :class="['dt-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-border-color--ash-darker',
-             { 'd-border-bottom': separator }]"
+    :class="['dt-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-bc-black-200',
+             { 'd-bb': separator }]"
   >
     <h3
       v-if="header"

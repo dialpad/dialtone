@@ -59,7 +59,7 @@ export default {
 
 .dt-list-item-clickable:hover,
 .dt-list-item-clickable:focus {
-  background-color: hsla(var(--primary-color--h), var(--primary-color--s), var(--primary-color--l), 0.1);
+  background-color: hsla(var(--primary-color-h), var(--primary-color-s), var(--primary-color-l), 0.1);
   cursor: pointer;
 }
 </style>
