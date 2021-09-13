@@ -38,6 +38,7 @@
         {{ title }}
       </h2>
       <dt-button
+        v-if="!hideClose"
         class="d-modal__close"
         circle
         size="lg"
@@ -181,6 +182,14 @@ export default {
     modalClass: {
       type: [String, Object, Array],
       default: '',
+    },
+
+    /**
+     * Hides the close button on the modal
+     */
+    hideClose: {
+      type: Boolean,
+      default: false,
     },
   },
 
