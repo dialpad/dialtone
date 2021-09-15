@@ -7,26 +7,37 @@
       :kind="kind"
       :size="size"
       :copy="copy"
+      :hide-close="hideClose"
       @update:show="close"
     >
       <template
         v-if="header"
         #header
       >
-        <span v-html="header"></span>
+        <span v-html="header" />
       </template>
       <template
         v-if="defaultSlot"
         #default
       >
-        <span v-html="defaultSlot"></span>
+        <span v-html="defaultSlot" />
       </template>
       <template
         v-if="showFooter"
         #footer
       >
-        <dt-button :kind="kind" importance="primary">Confirm</dt-button>
-        <dt-button :kind="kind" importance="clear">Cancel</dt-button>
+        <dt-button
+          :kind="kind"
+          importance="primary"
+        >
+          Confirm
+        </dt-button>
+        <dt-button
+          :kind="kind"
+          importance="clear"
+        >
+          Cancel
+        </dt-button>
       </template>
     </dt-modal>
     <dt-button
