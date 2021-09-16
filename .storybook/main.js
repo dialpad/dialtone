@@ -44,6 +44,8 @@ module.exports = {
       filename: 'preview.[name].js',
     };
 
+    config.devtool = 'source-map'
+
     return config;
   },
 
