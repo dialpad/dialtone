@@ -1,0 +1,1 @@
+d-some-auto-gen-class|width: 10px; height: 20px;
