@@ -14,7 +14,9 @@
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
     "lint:code": "esplint ./",
+    "lint-staged:code": "eslint --fix",
     "lint:docs": "markdownlint '**/*.mdx'",
+    "lint-staged:docs": "markdownlint --fix",
     "lint": "run-s lint:code lint:docs",
     "storybook": "npm run --prefix storybook storybook",
     "storybook:install": "npm install --prefix storybook",
@@ -51,6 +53,7 @@
     "jsdom-global": "3.0.2",
     "less": "3.9.0",
     "less-loader": "^6.2.0",
+    "lint-staged": "^11.1.2",
     "markdownlint": "^0.22.0",
     "markdownlint-cli": "^0.26.0",
     "mocha": "^6.2.3",
@@ -68,7 +71,7 @@
     "vue": "^2.6.11"
   },
   "gitHooks": {
-    "pre-commit": "npm run lint"
+    "pre-commit": "lint-staged"
   },
   "engineStrict": true,
   "engines": {
