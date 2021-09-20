@@ -2,19 +2,15 @@
 
 Dialtone Vue is a library of Vue components for [Dialtone][dt]. The goal is to simplify and standardize the use of common UI patterns and behaviour across all Dialpad projects.
 
-**[Component Documentation Site ↗️][handbook]**
+**[Component Documentation Site ↗️][dialtone-vue]**
 
 [dt]: https://dialpad.design
 
 ### Project Status
 
-Dialtone Vue is a new project, and as such it is under constant development as we add new components and refine existing ones. Please refer to the [project board][project] to see the status of Dialtone Vue components and request new components that should be in the Dialtone Vue library.
+Dialtone Vue is a new project, and as such it is under constant development as we add new components and refine existing ones. Please refer to the [jira board][jira] to see the status of Dialtone Vue components and request new components that should be in the Dialtone Vue library.
 
-[project]: https://github.com/orgs/dialpad/projects/1
-
-### Timeline
-
-Our goal is to have a stable 1.0 release in Q3 2021. At this point, we will split Dialtone Vue into a separate repository and follow semantic versioning.
+[jira]: https://switchcomm.atlassian.net/secure/RapidBoard.jspa?rapidView=246
 
 ## Usage
 
@@ -26,13 +22,13 @@ import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 ## Storybook Component Documentation
 
-Dialtone Vue uses [Storybook][storybook] for documentation of components, as well as an environment for local development. Please see the [Storybook Documentation Site][handbook] for specific usage information and interactive documentation for each Dialtone Vue component.
+Dialtone Vue uses [Storybook][storybook] for documentation of components, as well as an environment for local development. Please see the [Storybook Documentation Site][dialtone-vue] for specific usage information and interactive documentation for each Dialtone Vue component.
 
 All components in Dialtone Vue should have stories written for them in Storybook. For more information on how to write stories, see the [documentation][stories].
 
 [storybook]: https://storybook.js.org
-[handbook]: https://dialtone-vue.netlify.app
-[stories]: https://dialtone-vue.netlify.app/?path=/story/docs-storybook-getting-started--page
+[dialtone-vue]: https://vue.dialpad.design
+[stories]: https://vue.dialpad.design/?path=/story/docs-storybook-getting-started--page
 
 ### Running Storybook Locally
 
@@ -74,9 +70,9 @@ npm install
 
 Dialtone components should utilize the global immutable CSS classes provided by Dialtone whenever possible. It is a requirement of any project using Dialtone Vue to include these classes.
 
-If needed, you can also write custom CSS using the Dialtone LESS variables or mixins by importing `../css/dialtone.less`.
+If needed, you can also write custom CSS using Dialtone LESS variables by importing `../css/dialtone.less`.
 
-Please **do not** use any scoped CSS in Dialtone Vue components.
+Please **do not** use any scoped CSS or mixins in Dialtone Vue components.
 
 ### Unit Tests
 
