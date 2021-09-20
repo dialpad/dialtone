@@ -6,6 +6,7 @@
     :kind="kind"
     :circle="circle"
     :loading="loading"
+    :label-class="labelClass"
     :assertive-on-focus="assertiveOnFocus"
     :link="link"
     :link-kind="linkKind"

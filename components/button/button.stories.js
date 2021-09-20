@@ -120,6 +120,13 @@ export const argTypesData = {
     },
   },
 
+  // Pass Through Class Controls
+  labelClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+
   // Action Event Handlers
   onClick: {
     table: {
