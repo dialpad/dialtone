@@ -17,7 +17,10 @@
     @focusout="onFocusOut"
     @focusin="onFocusIn"
   >
-    <span v-html="defaultSlot" />
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
     <template
       v-if="icon"
       #icon

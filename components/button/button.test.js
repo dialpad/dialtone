@@ -48,6 +48,10 @@ describe('Dialtone Vue Button tests', function () {
         assert.isTrue(button.classes().includes('d-btn--primary'));
       });
 
+      it('Should not render label', async function () {
+        assert.isFalse(label.exists());
+      });
+
       describe('When button is a circle', function () {
         beforeEach(async function () {
           // Test that main class is populated with input props
@@ -301,7 +305,11 @@ describe('Dialtone Vue Button tests', function () {
         propsData = {
           labelClass: customClass,
         };
-        wrapper = shallowMount(DtButton, { propsData, localVue: this.localVue });
+        wrapper = shallowMount(DtButton, {
+          propsData,
+          slots: { default: 'My Button Label' },
+          localVue: this.localVue,
+        });
         _setElements();
       });
 
