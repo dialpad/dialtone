@@ -17,7 +17,7 @@
 @z-index--toast:@zi-navigation
 @z-index--drawer:@zi-drawer
 @z-index--modal:@zi-modal
-@tooltip-color:@black-700
+@tooltip-color:@black-025
 @light-background--stop2:@white
 @color--white:@white
 @color--dark-lighter:@black-600
