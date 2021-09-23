@@ -37,21 +37,6 @@
       >
         {{ title }}
       </h2>
-      <dt-button
-        v-if="!hideClose"
-        class="d-modal__close"
-        circle
-        size="lg"
-        importance="clear"
-        :aria-label="closeButtonProps.ariaLabel"
-        v-bind="closeButtonProps"
-        :kind="kind"
-        @click="close"
-      >
-        <template #icon>
-          <icon-close />
-        </template>
-      </dt-button>
       <div
         v-if="$slots.default"
         class="d-modal__content"
@@ -74,6 +59,21 @@
         <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
         <slot name="footer" />
       </footer>
+      <dt-button
+        v-if="!hideClose"
+        class="d-modal__close"
+        circle
+        size="lg"
+        importance="clear"
+        :aria-label="closeButtonProps.ariaLabel"
+        v-bind="closeButtonProps"
+        :kind="kind"
+        @click="close"
+      >
+        <template #icon>
+          <icon-close />
+        </template>
+      </dt-button>
     </div>
   </div>
 </template>
