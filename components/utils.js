@@ -43,7 +43,7 @@ export function filterFormattedMessages (formattedMessages) {
     return [];
   }
 
-  return formattedMessages.filter(message => message.type === validationState);
+  return formattedMessages.filter(message => !!message.message && message.type === validationState);
 }
 
 /*
