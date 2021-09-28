@@ -2,9 +2,9 @@ name: Linters
 
 on:
   pull_request:
-    branches: [ main, release ]
+    branches: [ staging, production ]
   push:
-    branches: [ main ]
+    branches: [ staging ]
 
 jobs:
   linters:
