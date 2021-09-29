@@ -12,6 +12,7 @@
       <!-- @slot slot for label, defaults to label prop -->
       <slot name="labelSlot">
         <div
+          v-if="label"
           data-qa="dt-input-label"
           :class="[
             'base-input__label-text',

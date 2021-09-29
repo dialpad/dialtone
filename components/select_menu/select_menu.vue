@@ -2,6 +2,7 @@
   <div>
     <label>
       <div
+        v-if="$slots.label || label"
         :aria-details="labelAriaDetails"
         :class="[
           'd-label',
@@ -42,8 +43,8 @@
             SELECT_STATE_MODIFIERS[state],
           ]"
           v-bind="$attrs"
-          v-on="selectListeners"
           data-qa="dt-select"
+          v-on="selectListeners"
         >
           <!-- @slot Slot for select menu options, defaults to options prop -->
           <slot>
@@ -245,6 +246,14 @@ export default {
     },
   },
 
+  mounted () {
+    this.validateOptionsPresence();
+  },
+
+  beforeUpdate () {
+    this.validateOptionsPresence();
+  },
+
   methods: {
     emitValue (value) {
       this.$emit('input', value);
@@ -260,14 +269,6 @@ export default {
         Vue.util.warn('Options are expected to be provided via prop or slot', this);
       }
     },
-  },
-
-  mounted () {
-    this.validateOptionsPresence();
-  },
-
-  beforeUpdate () {
-    this.validateOptionsPresence();
   },
 };
 </script>

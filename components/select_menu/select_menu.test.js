@@ -124,6 +124,16 @@ describe('DtSelectMenu Tests', function () {
       });
     });
 
+    describe('When a label is not provided', function () {
+      // Test Setup
+      beforeEach(function () {
+        propsData = { options: OPTIONS };
+        _setWrappers();
+      });
+
+      it('should not render a label', function () { assert.isFalse(label.exists()); });
+    });
+
     describe('When a label is provided via slot', function () {
       // Test Environment
       const slottedLabel = 'Slotted Label';

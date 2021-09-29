@@ -136,6 +136,13 @@ describe('Dialtone Vue Input tests', function () {
       });
     });
 
+    describe('When a label is not provided', function () {
+      // Test Setup
+      beforeEach(async function () { _setChildWrappers(); });
+
+      it('should not render a label', function () { assert.isFalse(label.exists()); });
+    });
+
     describe('When a description is not provided', function () {
       // Test Setup
       beforeEach(async function () { _setChildWrappers(); });
