@@ -35,7 +35,7 @@
         <!-- @slot slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
-      <div class="d-ps-relative">
+      <div class="d-input__wrapper">
         <span
           v-if="$slots.leftIcon"
           :class="inputIconClasses('left')"
