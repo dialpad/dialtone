@@ -12,6 +12,7 @@
     :description-class="descriptionClass"
     :label-child-props="labelChildProps"
     :description-child-props="descriptionChildProps"
+    :indeterminate="indeterminate"
     :messages="messages"
     @input="onInput"
   >

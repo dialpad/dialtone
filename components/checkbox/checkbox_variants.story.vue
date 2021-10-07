@@ -69,6 +69,24 @@
     />
     <!-- Checked With Description -->
 
+    <!-- Indeterminate -->
+    <dt-checkbox
+      name="indeterminate"
+      value="indeterminateValue"
+      label="Indeterminate Checkbox"
+      indeterminate
+    />
+
+    <!-- Indeterminate Disabled -->
+    <dt-checkbox
+      name="indeterminate-disabled"
+      value="indeterminateValue"
+      label="Indeterminate Disabled Checkbox"
+      indeterminate
+      disabled
+    />
+    <!-- Indeterminate Disabled -->
+
     <!-- Success With Description -->
     <dt-checkbox
       name="success-with-description"

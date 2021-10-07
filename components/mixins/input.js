@@ -145,7 +145,13 @@ export const CheckableMixin = {
       type: Boolean,
       default: false,
     },
-
+    /**
+     * Indeterminate State
+     */
+    indeterminate: {
+      type: Boolean,
+      default: false,
+    },
     /**
      * The value of the input
      */

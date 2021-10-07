@@ -10,6 +10,7 @@
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
           v-bind="$attrs"
+          :indeterminate.prop="indeterminate"
           v-on="inputListeners"
         >
       </div>
