@@ -51,7 +51,7 @@ import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 
 /**
  * Base Vue component for Dialtone Buttons.
- * @displayName HSButton
+ * @displayName DtButton
  */
 export default {
   name: 'DtButton',

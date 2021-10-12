@@ -45,7 +45,7 @@ export const LABEL_SIZE_MODIFIERS = {
 export const DEFAULT_VALIDATION_MESSAGE_TYPE = VALIDATION_MESSAGE_TYPES.ERROR;
 
 // Default prefix used for ids
-export const DEFAULT_PREFIX = 'hs';
+export const DEFAULT_PREFIX = 'dt';
 
 export default {
   VALIDATION_MESSAGE_TYPES,

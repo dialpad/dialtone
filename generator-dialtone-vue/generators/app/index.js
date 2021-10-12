@@ -26,7 +26,7 @@ module.exports = class extends Generator {
       }
     } while (!valid);
 
-    // convert to snake case and remove the 'hs' as we don't use it in the filename
+    // convert to snake case and remove the 'dt' as we don't use it in the filename
     this.fileName = _.snakeCase(this.inputValues.componentName.slice(2));
     this.componentNameKebab = _.kebabCase(this.inputValues.componentName);
     this.componentName = this.inputValues.componentName;
