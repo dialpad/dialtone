@@ -38,6 +38,9 @@ export const argTypesData = {
       },
     },
   },
+  inputClass: {
+    control: 'text',
+  },
   messagesChildProps: { control: null },
 
   // Native Props

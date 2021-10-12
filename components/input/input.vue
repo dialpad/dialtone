@@ -166,6 +166,16 @@ export default {
       default: INPUT_SIZES.DEFAULT,
       validator: (t) => Object.values(INPUT_SIZES).includes(t),
     },
+
+    /**
+     * Additional class name for the input element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    inputClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
   },
 
   emits: ['blur', 'input', 'clear'],
@@ -240,6 +250,7 @@ export default {
           'd-input-icon--right': this.$slots.rightIcon,
         },
         this.sizeModifierClass,
+        this.inputClass,
       ];
     },
 
