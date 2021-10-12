@@ -34,6 +34,7 @@
           'd-select',
           SELECT_SIZE_MODIFIERS[size],
           selectClass,
+          { 'd-select--disabled': disabled },
         ]"
         data-qa="dt-select-wrapper"
       >
@@ -44,6 +45,7 @@
           ]"
           v-bind="$attrs"
           data-qa="dt-select"
+          :disabled="disabled"
           v-on="selectListeners"
         >
           <!-- @slot Slot for select menu options, defaults to options prop -->
@@ -194,6 +196,14 @@ export default {
     optionChildProps: {
       type: Object,
       default: () => ({}),
+    },
+
+    /**
+     * Disabled state of the select
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 
