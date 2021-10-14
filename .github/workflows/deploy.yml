@@ -2,7 +2,10 @@ name: Deploy
 
 on:
   push:
-    branches: [ production ]
+    branches:
+      - production
+      - alpha
+      - beta
 
 jobs:
   deploy:
@@ -21,7 +24,11 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: Set token
+      - name: parse branch from ref
+        id: branch
+        run: echo ::set-output name=BRANCH::${GITHUB_REF/refs\/heads\//}
+
+      - name: Set npm token
         run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Install dependencies
@@ -33,5 +40,10 @@ jobs:
       - name: Run Linters
         run: npm run lint
 
-      - name: Deploy package
-        run: npm run deploy
+      - name: Deploy production
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: npm publish
+
+      - name: Deploy prerelease
+        if: ${{ github.ref != 'refs/heads/production' }}
+        run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}

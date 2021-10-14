@@ -9,7 +9,6 @@
   "main": "./dist/dialtone-vue.common.js",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
-    "deploy": "npm publish",
     "prepublishOnly": "npm run build",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
