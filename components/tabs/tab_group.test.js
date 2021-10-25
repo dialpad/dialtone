@@ -133,7 +133,35 @@ describe('Dialtone Vue Tab Group tests', function () {
       });
     });
   });
+
   describe('Interactivity Tests', function () {
+    describe('When selected is provided', function () {
+      beforeEach(function () {
+        propsData.selected = optionTabs[1].panelId;
+        _mountWrapper();
+      });
+
+      it('should set initially selected tab', function () {
+        assert.strictEqual(wrapper.vm.provideObj.selected, optionTabs[1].panelId);
+        assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'true');
+      });
+    });
+
+    describe('When selected is updated', function () {
+      beforeEach(async function () {
+        _mountWrapper();
+        // Simulating the third tab being set programmatically after the second tab was selected by a user.
+        tabs.at(1).vm.$el.click();
+        propsData.selected = optionTabs[2].panelId;
+        await wrapper.setProps(propsData);
+      });
+
+      it('should override currently selected tab', async function () {
+        assert.strictEqual(wrapper.vm.provideObj.selected, optionTabs[2].panelId);
+        assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
+      });
+    });
+
     describe('Correct selected state', function () {
       beforeEach(async function () {
         optionTabs[0].selected = true;
@@ -148,6 +176,7 @@ describe('Dialtone Vue Tab Group tests', function () {
         assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'true');
       });
     });
+
     describe('Correct change event', function () {
       beforeEach(function () {
         tabs.at(1).vm.$el.click();
@@ -157,6 +186,7 @@ describe('Dialtone Vue Tab Group tests', function () {
         assert.strictEqual(wrapper.emitted('change').length, 1);
       });
     });
+
     describe('Correct key navigation', function () {
       describe('On keyup left', function () {
         beforeEach(async function () {
@@ -220,6 +250,7 @@ describe('Dialtone Vue Tab Group tests', function () {
           });
         });
       });
+
       describe('On keydown home and enter', function () {
         beforeEach(async function () {
           tabs.at(2).vm.$el.focus();
