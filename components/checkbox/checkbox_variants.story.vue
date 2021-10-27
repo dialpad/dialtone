@@ -26,6 +26,17 @@
     </dt-checkbox>
     <!-- With Slotted Label -->
 
+    <!-- Without any label/description. -->
+    <!-- Note: must have an aria-label if no label is passed either through props/slots -->
+
+    <dt-checkbox
+      name="without-label-nor-description"
+      aria-label="My aria label"
+      value="Value"
+    />
+
+    <!-- Without any label/description -->
+
     <!-- With Slotted Description -->
     <dt-checkbox
       name="with-slotted-description"

@@ -15,10 +15,12 @@
         >
       </div>
       <div
+        v-if="hasLabelOrDescription"
         class="d-checkbox__copy d-checkbox__label"
         data-qa="checkbox-label-description-container"
       >
         <div
+          v-if="hasLabel"
           :class="labelClass"
           v-bind="labelChildProps"
           data-qa="checkbox-label"
@@ -27,7 +29,7 @@
           <slot>{{ label }}</slot>
         </div>
         <div
-          v-if="$slots.description || description"
+          v-if="hasDescription"
           :class="['d-description', descriptionClass]"
           v-bind="descriptionChildProps"
           data-qa="checkbox-description"
@@ -67,6 +69,8 @@ export default {
 
   inheritAttrs: false,
 
+  emits: ['input'],
+
   computed: {
     inputValidationClass () {
       return CHECKBOX_INPUT_VALIDATION_CLASSES[this.internalValidationState];
@@ -74,6 +78,18 @@ export default {
 
     checkboxGroupValueChecked () {
       return this.groupContext?.selectedValues?.includes(this.value) ?? false;
+    },
+
+    hasLabel () {
+      return !!(this.$slots.default || this.label);
+    },
+
+    hasDescription () {
+      return !!(this.$slots.description || this.description);
+    },
+
+    hasLabelOrDescription () {
+      return this.hasLabel || this.hasDescription;
     },
 
     inputListeners () {
@@ -107,6 +123,10 @@ export default {
     },
   },
 
+  mounted () {
+    this.runValidations();
+  },
+
   methods: {
     emitValue (value, checked) {
       // update provided value if injected
@@ -114,6 +134,10 @@ export default {
 
       // emit the state of the checkbox
       this.$emit('input', checked);
+    },
+
+    runValidations () {
+      this.validateInputLabels(this.hasLabel, this.$attrs['aria-label']);
     },
   },
 };

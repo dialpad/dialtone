@@ -12,6 +12,7 @@
     "prepublishOnly": "npm run build",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
+    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
     "lint:code": "esplint ./",
     "lint-staged:code": "eslint --fix",
     "lint:docs": "markdownlint '**/*.mdx'",

@@ -124,6 +124,21 @@ export const InputMixin = {
       this.internalValidationState = newValidationState;
     },
   },
+
+  methods: {
+    /**
+     * @param {Boolean | String} hasLabelOrLabel either a boolean indicating the label exists or the label itself
+     * @param {String} ariaLabel the aria-label passed (null/undefined if it's not passed)
+     */
+    validateInputLabels (hasLabelOrLabel, ariaLabel) {
+      if (!hasLabelOrLabel && !ariaLabel) {
+        Vue.util.warn(
+          'You must provide an aria-label when there is no label passed',
+          this,
+        );
+      }
+    },
+  },
 };
 
 /**

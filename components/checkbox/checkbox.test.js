@@ -1,22 +1,22 @@
-import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { assert } from 'chai';
 import sinon from 'sinon';
 import {
-  itBehavesLikeEmitsExpectedEvent,
   itBehavesLikeDoesNotEmitEvents,
+  itBehavesLikeEmitsExpectedEvent,
 } from '../../tests/shared_examples/events';
 import {
-  itBehavesLikeHasValidationClasses,
+  itBehavesLikeAppliesChildProp,
+  itBehavesLikeAppliesClassToChild,
+} from '../../tests/shared_examples/extendability';
+import {
   itBehavesLikeChecked,
+  itBehavesLikeHasValidationClasses,
   itBehavesLikeNotChecked,
 } from '../../tests/shared_examples/input';
-import {
-  itBehavesLikeAppliesClassToChild,
-  itBehavesLikeAppliesChildProp,
-} from '../../tests/shared_examples/extendability';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
-import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import DtCheckbox from './checkbox.vue';
+import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 
 // Constants
 const baseValue = 'Value';
@@ -31,6 +31,7 @@ describe('Checkbox Tests', function () {
   let input;
   let label;
   let description;
+  let labelDescriptionContainer;
 
   // Environment
   const value = baseValue;
@@ -45,6 +46,7 @@ describe('Checkbox Tests', function () {
     input = wrapper.find('input');
     label = wrapper.find('[data-qa="checkbox-label"]');
     description = wrapper.find('[data-qa="checkbox-description"]');
+    labelDescriptionContainer = wrapper.find('[data-qa="checkbox-label-description-container"]');
   };
 
   const _setWrappers = () => {
@@ -91,29 +93,62 @@ describe('Checkbox Tests', function () {
       // Test Setup
       beforeEach(function () { _setWrappers(); });
 
-      it('should exist', function () { assert.exists(wrapper); });
-      it('should have checkbox group class', function () { assert.exists(wrapper.find('.d-checkbox-group')); });
+      it('should exist', function () { assert.isTrue(wrapper.exists()); });
+      it('should have checkbox group class', function () {
+        assert.isTrue(wrapper.find('.d-checkbox-group').exists());
+      });
 
       describe('Checkbox Input Tests', function () {
-        it('should exist', function () { assert.exists(input); });
+        it('should exist', function () { assert.isTrue(input.exists()); });
         it('should have type checkbox', function () { assert.strictEqual(input.attributes('type'), 'checkbox'); });
         it('should not be checked', function () { itBehavesLikeNotChecked(input); });
       });
 
       describe('Checkbox Label Tests', function () {
-        it('should exist', function () { assert.exists(label); });
+        it('should exist', function () { assert.isTrue(label.exists()); });
         it('should match provided label prop', function () { assert.strictEqual(label.text(), propsData.label); });
       });
     });
 
-    describe('When a description is provided', function () {
+    describe('When a label prop is provided', function () {
+      // Test Setup
+      beforeEach(function () {
+        propsData = { ...basePropsData, label: 'My Label' };
+        _setWrappers();
+      });
+
+      it('should exist', function () { assert.isTrue(label.exists()); });
+    });
+
+    describe('When a description prop is provided', function () {
       // Test Setup
       beforeEach(function () {
         propsData = { ...basePropsData, description: 'Description' };
         _setWrappers();
       });
 
-      it('should exist', function () { assert.exists(description); });
+      it('should exist', function () { assert.isTrue(description.exists()); });
+    });
+
+    describe('When neither a label prop/slot nor a description prop/slot is provided', function () {
+      // Test Setup
+      beforeEach(function () {
+        propsData = { value: baseValue };
+        slots = {};
+        _setWrappers();
+      });
+
+      it('should remove the description wrapper if no description is provided', function () {
+        assert.isFalse(description.exists());
+      });
+      it('should remove the label wrapper if no label is provided', function () {
+        assert.isFalse(label.exists());
+      });
+      it('should remove the checkbox label/description container if neither is provided', function () {
+        assert.isFalse(labelDescriptionContainer.exists());
+      });
+
+      it('should keep the input checkbox', function () { assert.isTrue(input.exists()); });
     });
 
     describe('When a validation state is provided', function () {
@@ -157,7 +192,9 @@ describe('Checkbox Tests', function () {
       });
 
       it('should disable input', function () { assert.strictEqual(input.element.disabled, true); });
-      it('should have disabled class', function () { assert.exists(wrapper.find('.d-checkbox-group--disabled')); });
+      it('should have disabled class', function () {
+        assert.isTrue(wrapper.find('.d-checkbox-group--disabled').exists());
+      });
     });
 
     describe('When slot(s) are provided', function () {
