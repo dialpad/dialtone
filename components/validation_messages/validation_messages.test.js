@@ -146,6 +146,74 @@ describe('Validation Messages Tests', function () {
         });
       });
     });
+
+    describe('When there are malformed validation messages', function () {
+      // Test Environment
+      const emptyValidationMessage = '';
+
+      // Test Setup
+      beforeEach(function () {
+        validationMessages = setFormattedValidationMessages(VALIDATION_MESSAGE_TYPES.WARNING, emptyValidationMessage);
+      });
+
+      describe('When there is a warning validation message with an empty message', function () {
+        // Test Setup
+        beforeEach(function () {
+          propsData = { ...basePropsData, validationMessages };
+          _setWrappers();
+        });
+
+        itBehavesLikeHasNoVisibleValidationMessages();
+      });
+
+      describe('When there is also a correct success validation message', function () {
+        // Test Environment
+        const successValidationMessage = 'Success';
+
+        // Test Setup
+        beforeEach(function () {
+          validationMessages = addFormattedValidationMessage(
+            validationMessages,
+            VALIDATION_MESSAGE_TYPES.SUCCESS,
+            successValidationMessage,
+          );
+        });
+
+        describe('When the validation message renders', function () {
+          // Test Setup
+          beforeEach(function () {
+            propsData = { ...basePropsData, validationMessages };
+            _setWrappers();
+          });
+
+          itBehavesLikeHasNoVisibleValidationMessages();
+        });
+      });
+
+      describe('When there is also a correct warning validation message', function () {
+        // Test Environment
+        const warningValidationMessage = 'Warning';
+
+        // Test Setup
+        beforeEach(function () {
+          validationMessages = addFormattedValidationMessage(
+            validationMessages,
+            VALIDATION_MESSAGE_TYPES.WARNING,
+            warningValidationMessage,
+          );
+        });
+
+        describe('When the validation message renders', function () {
+          // Test Setup
+          beforeEach(function () {
+            propsData = { ...basePropsData, validationMessages };
+            _setWrappers();
+          });
+
+          itBehavesLikeHasValidationMessages(1, warningValidationMessage);
+        });
+      });
+    });
   });
 
   describe('Accessibility Tests', function () {
