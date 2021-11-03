@@ -1,17 +1,50 @@
 # Releasing
 
-In order to push the production branch to trigger a build to [npmjs](https://npmjs.com), you will need to either be an admin of the dialtone repository, be a user with the "Maintain" role or have manually been given permission on your user.
+## Requirements to run `semantic-release`, which is used in this guide https://semantic-release.gitbook.io/semantic-release/#requirements
 
-1. Make sure your staging and production branches are up-to-date locally. You should be in the `staging` branch. If you are doing a prerelease you should be in whatever named branch you have been working off for the prerelease. Also it’s a good idea to stop your local server while versioning.
-2. In your CLI window, run `./release.sh` from the dialtone repository directory.
-3. It will prompt you to enter a version. enter major, minor, or patch depending on what your change consists of. Major versions are breaking changes. Minor versions are large changes but backward compatible. Patches are bug fixes to existing Dialtone items. You may also enter an exact version if you need to.
-> Note on a prerelease our convention is major.minor.patch-prerelease.buildmetadata ex. `6.0.0-alpha.1`.
-4. After entering your version number the package.json version numbers will be updated and committed with a git tag matching the version you entered. This will then be automatically pushed to the remote
-5. `git checkout production` to move to the production branch
-> Note if you would like to deploy a prerelease (alpha or beta). You would do this on a branch named `alpha` or `beta` instead of `production`. This will automatically tag the deployment to npm as a alpha or beta release so npm does not consider it to be the latest version. It could be installed with the command `npm i dialtone-vue@beta`
-6. `git merge staging --ff-only` (or your prerelease working branch) to merge the changes to this branch
-7. `git push` to push the branch. This will trigger the deploy.
-8. You should be able to see your deploy running at https://github.com/dialpad/dialtone-vue/actions
-9. When this has completed the new version of the package has been deployed to npm, and the documentation website (`vue.dialpad.design`) is now updated.
-10. Finally you need to [draft a release on Github](https://github.com/dialpad/dialtone-vue/releases/new).
-11. Now you’re done.
+`semantic-release` uses the commit messages to determine the consumer impact of changes in the codebase. In Dialtone Vue we use [conventional commits specification](https://www.conventionalcommits.org/en/v1.0.0/#specification) for commit messages, so semantic-release automatically determines the next semantic version number, generates a changelog and publishes the release.
+
+| Commit Type | Release type           |
+| ------------- |:-------------:|
+| Commit with breaking change     | Major release |
+| Commit with type feat      | Minor release      |
+| Commit with type fix | Patch release      |
+| Commit with type perf | Patch release      |
+
+## Steps
+
+In order to push the `production` branch to trigger a release to [npmjs](https://npmjs.com) and Github Releases, you will need to either be an admin of the Dialtone Vue repository, be a user with the "Maintain" role or have manually been given permission on your user.
+
+1. Make sure your `staging` and `production` branches are up-to-date locally. You should be in the `staging` branch. If you want to make a prerelease, it should be `beta` or `alpha` branch instead of `staging`.
+2. Stop your local server and keep your working directory clean before versioning.
+3. In your CLI window, run `npm run release` from the Dialtone Vue repository directory.
+4. The script will update the `package.json` and `package-lock.json` files with the version number according to the types of changes introduced since the last release and will add release notes in the `CHANGELOG.MD` file.
+5. A release commit and a git tag associated with this commit will be created and pushed to the remote.
+
+---
+
+**If you have made a production release:**
+
+6. We are ready to deploy the release. Switch to the `production` branch: `git checkout production`.
+7. Merge the release commits from `staging` using [`fast-forward` strategy](https://git-scm.com/docs/git-merge#Documentation/git-merge.txt---ff-only): `git merge staging --ff-only`.
+8. If the commits are merged correctly, it's ready to deploy and publish this release by pushing to the remote: `git push`. This will trigger the deploy through a Github Action.
+
+---
+
+**If you have made a pre-release (`alpha` or `beta`):**
+
+6. Since your pre-release branch was pushed to the remote, the deploy Github Action should have been triggered.
+7. Update the `staging` branch with the release you have made on `alpha` or `beta` branch:
+
+Replace `$BRANCH` with `alpha` or `beta` depending on the pre-release you made:
+```
+git checkout staging
+git merge --ff-only $BRANCH
+```
+8. Push to the remote: `git push`. Make sure `staging` and the release branch keep up-to-date after the release.
+
+---
+
+9. You should be able to see your deployment running at https://github.com/dialpad/dialtone-vue/actions.
+10. When this Github Action has been completed, the new version of the package should have been deployed to Github releases, npm, and the documentation website (`vue.dialpad.design`) is now updated (if it was a production release).
+11. Now you’re ready to update your projects to use the latest Dialtone Vue version 🎉.

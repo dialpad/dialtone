@@ -1,0 +1,24 @@
+name: Lint PR title
+
+on:
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+    branches:
+      - staging
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint pull request title
+        run: echo "${{ github.event.pull_request.title }}" | npx commitlint --verbose
