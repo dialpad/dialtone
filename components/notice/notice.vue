@@ -1,8 +1,8 @@
 <template>
   <aside
     :class="noticeClass"
-    v-on="$listeners"
     data-qa="notice"
+    v-on="$listeners"
   >
     <dt-notice-icon
       :kind="kind"
@@ -36,6 +36,7 @@
     </dt-notice-action>
   </aside>
 </template>
+
 <script>
 import DtNoticeIcon from './notice_icon';
 import DtNoticeContent from './notice_content';
@@ -130,9 +131,16 @@ export default {
 
   computed: {
     noticeClass () {
+      const noticeKinds = {
+        error: 'd-notice--error',
+        info: 'd-notice--info',
+        success: 'd-notice--success',
+        warning: 'd-notice--warning',
+        base: 'd-notice--base',
+      };
       return [
         'd-notice',
-        `d-notice--${this.kind}`,
+        noticeKinds[this.kind],
         { 'd-notice--important': this.important },
       ];
     },

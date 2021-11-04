@@ -13,7 +13,7 @@
       :class="[
         'd-ps-absolute',
         'd-tooltip',
-        `d-tooltip__arrow--${arrowDirection}`,
+        arrowDirectionClass,
         TOOLTIP_KIND_MODIFIERS[shouldShowTooltip ? 'show' : 'hide'],
         {
           [ TOOLTIP_KIND_MODIFIERS.hover ]: shouldHasHoverModifier,
@@ -147,6 +147,25 @@ export default {
 
     ariaHidden () {
       return `${!this.isTooltipVisible}`;
+    },
+
+    arrowDirectionClass () {
+      const arrowDirections = {
+        'top-left': 'd-tooltip__arrow--top-left',
+        'top-center': 'd-tooltip__arrow--top-center',
+        'top-right': 'd-tooltip__arrow--top-right',
+        'right-top': 'd-tooltip__arrow--right-top',
+        'right-center': 'd-tooltip__arrow--right-center',
+        'right-bottom': 'd-tooltip__arrow--right-bottom',
+        'bottom-left': 'd-tooltip__arrow--bottom-left',
+        'bottom-center': 'd-tooltip__arrow--bottom-center',
+        'bottom-right': 'd-tooltip__arrow--bottom-right',
+        'left-top': 'd-tooltip__arrow--left-top',
+        'left-center': 'd-tooltip__arrow--left-center',
+        'left-bottom': 'd-tooltip__arrow--left-bottom',
+      };
+
+      return arrowDirections[this.arrowDirection];
     },
   },
 

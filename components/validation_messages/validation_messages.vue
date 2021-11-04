@@ -13,8 +13,7 @@
       :class="[
         'base-input__message',
         'd-validation-message',
-        `base-input__message--${type}`,
-        `d-validation-message--${type}`,
+        messageTypeClass(type),
       ]"
     >
       <p v-html="message" />
@@ -80,6 +79,16 @@ export default {
   methods: {
     getMessageKey (type, index) {
       return `validation-message-${type}-${index}-${this.id}`;
+    },
+
+    messageTypeClass (type) {
+      const messageTypesClasses = {
+        error: 'base-input__message--error d-validation-message--error',
+        warning: 'base-input__message--warning d-validation-message--warning',
+        success: 'base-input__message--success d-validation-message--success',
+      };
+
+      return messageTypesClasses[type];
     },
   },
 };

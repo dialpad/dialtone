@@ -17,7 +17,7 @@
           :class="[
             'base-input__label-text',
             'd-label',
-            { [`d-label--${size}`]: (!isDefaultSize && isValidSize) },
+            labelSizeClasses[size],
           ]"
         >
           {{ label }}
@@ -29,7 +29,7 @@
         :class="[
           'base-input__description',
           'd-description',
-          { [`d-description--${size}`]: (!isDefaultSize && isValidDescriptionSize) },
+          descriptionSizeClasses[size],
         ]"
         data-qa="dt-input-description"
       >
@@ -180,6 +180,23 @@ export default {
 
   emits: ['blur', 'input', 'clear'],
 
+  data () {
+    return {
+      descriptionSizeClasses: {
+        lg: 'd-description--lg',
+        xl: 'd-description--xl',
+      },
+
+      labelSizeClasses: {
+        xs: 'd-label--xs',
+        sm: 'd-label--sm',
+        md: 'd-label--md',
+        lg: 'd-label--lg',
+        xl: 'd-label--xl',
+      },
+    };
+  },
+
   computed: {
 
     isTextarea () {
@@ -235,31 +252,68 @@ export default {
         return '';
       }
 
-      return `d-${this.inputComponent}--${this.size}`;
+      const sizeClasses = {
+        input: {
+          xs: 'd-input--xs',
+          sm: 'd-input--sm',
+          lg: 'd-input--lg',
+          xl: 'd-input--xl',
+        },
+
+        textarea: {
+          xs: 'd-textarea--xs',
+          sm: 'd-textarea--sm',
+          lg: 'd-textarea--lg',
+          xl: 'd-textarea--xl',
+        },
+      };
+
+      return sizeClasses[this.inputComponent][this.size];
     },
   },
 
   methods: {
     inputClasses () {
+      const inputStateClasses = {
+        input: {
+          error: 'd-input--error',
+          warning: 'd-input--warning',
+          success: 'd-input--success',
+        },
+
+        textarea: {
+          error: 'd-textarea--error',
+          warning: 'd-textarea--warning',
+          success: 'd-textarea--success',
+        },
+      };
+
       return [
         'base-input__input',
-        `d-${this.inputComponent}`,
-        {
-          [`d-${this.inputComponent}--${this.inputState} base-input__input--${this.inputState}`]: this.showInputState,
-          'd-input-icon--left': this.$slots.leftIcon,
-          'd-input-icon--right': this.$slots.rightIcon,
-        },
+        this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
+        { 'd-input-icon--left': this.$slots.leftIcon, 'd-input-icon--right': this.$slots.rightIcon },
         this.sizeModifierClass,
         this.inputClass,
+        inputStateClasses[this.inputComponent][this.inputState],
       ];
     },
 
     inputIconClasses (side) {
+      const iconSizeClasses = {
+        xs: 'd-input-icon--xs',
+        sm: 'd-input-icon--sm',
+        lg: 'd-input-icon--lg',
+        xl: 'd-input-icon--xl',
+      };
+      const iconOrientationClasses = {
+        left: 'base-input__icon--left d-input-icon--left',
+        right: 'base-input__icon--right d-input-icon--right',
+      };
+
       return [
-        `base-input__icon--${side}`,
         'd-input-icon',
-        `d-input-icon--${side}`,
-        { [`d-input-icon--${this.size}`]: !this.isDefaultSize },
+        iconOrientationClasses[side],
+        iconSizeClasses[this.size],
       ];
     },
 
