@@ -1,9 +1,14 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
+import {
+  itBehavesLikeAppliesClassToChild,
+  itBehavesLikeAppliesChildProp,
+} from '../../tests/shared_examples/extendability';
 import DtTabGroup from './tab_group.vue';
 import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
 import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS } from './tabs_constants';
+
 const optionTabPanel = [
   {
     id: '2',
@@ -361,6 +366,30 @@ describe('Dialtone Vue Tab Group tests', function () {
           assert.strictEqual(tabAttrs.id, tabPanelAttrs['aria-labelledby']);
           assert.strictEqual(tabAttrs['aria-controls'], tabPanelAttrs.id);
         });
+      });
+    });
+  });
+
+  describe('Extendability Tests', function () {
+    describe('When tab list class is provided', function () {
+      beforeEach(function () {
+        propsData.tabListClass = 'my-custom-class';
+        _mountWrapper();
+      });
+
+      it('should apply custom class to tab list', function () {
+        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', tabList);
+      });
+    });
+
+    describe('When tab list child props are provided', function () {
+      beforeEach(function () {
+        propsData.tabListChildProps = { some: 'prop' };
+        _mountWrapper();
+      });
+
+      it('tab list should have provided child prop', function () {
+        itBehavesLikeAppliesChildProp(tabList, 'some', 'prop');
       });
     });
   });
