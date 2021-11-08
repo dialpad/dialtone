@@ -1,5 +1,7 @@
 <template>
-  <div
+  <dt-lazy-show
+    transition="d-modal"
+    :show="show"
     :class="[
       'd-modal',
       MODAL_KIND_MODIFIERS[kind],
@@ -11,71 +13,77 @@
     @click.self="close"
     @keydown.esc="close"
     @keydown.tab="trapFocus"
-    @transitionend.self="setFocusAfterTransition"
+    @after-enter.self="setFocusAfterTransition"
   >
-    <div
-      class="d-modal__dialog"
-      role="dialog"
-      aria-modal="true"
-      :aria-describedby="describedById"
-      :aria-labelledby="labelledById"
+    <transition
+      appear
+      name="d-modal__dialog"
     >
       <div
-        v-if="$slots.header"
-        :id="labelledById"
-        class="d-modal__header"
-        data-qa="dt-modal-title"
+        v-show="show"
+        class="d-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        :aria-describedby="describedById"
+        :aria-labelledby="labelledById"
       >
-        <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
-        <slot name="header" />
+        <div
+          v-if="$slots.header"
+          :id="labelledById"
+          class="d-modal__header"
+          data-qa="dt-modal-title"
+        >
+          <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
+          <slot name="header" />
+        </div>
+        <h2
+          v-else
+          :id="labelledById"
+          class="d-modal__header"
+          data-qa="dt-modal-title"
+        >
+          {{ title }}
+        </h2>
+        <div
+          v-if="$slots.default"
+          class="d-modal__content"
+          data-qa="dt-modal-copy"
+        >
+          <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
+          <slot />
+        </div>
+        <p
+          v-else
+          class="d-modal__content"
+          data-qa="dt-modal-copy"
+        >
+          {{ copy }}
+        </p>
+        <footer
+          v-if="hasFooterSlot"
+          class="d-modal__footer"
+        >
+          <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
+          <slot name="footer" />
+        </footer>
+        <dt-button
+          v-if="!hideClose"
+          class="d-modal__close"
+          circle
+          size="lg"
+          importance="clear"
+          :aria-label="closeButtonProps.ariaLabel"
+          v-bind="closeButtonProps"
+          :kind="kind"
+          @click="close"
+        >
+          <template #icon>
+            <icon-close />
+          </template>
+        </dt-button>
       </div>
-      <h2
-        v-else
-        :id="labelledById"
-        class="d-modal__header"
-        data-qa="dt-modal-title"
-      >
-        {{ title }}
-      </h2>
-      <div
-        v-if="$slots.default"
-        class="d-modal__content"
-        data-qa="dt-modal-copy"
-      >
-        <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
-        <slot />
-      </div>
-      <p
-        v-else
-        class="d-modal__content"
-        data-qa="dt-modal-copy"
-      >
-        {{ copy }}
-      </p>
-      <footer
-        v-if="hasFooterSlot"
-        class="d-modal__footer"
-      >
-        <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
-        <slot name="footer" />
-      </footer>
-      <dt-button
-        v-if="!hideClose"
-        class="d-modal__close"
-        circle
-        size="lg"
-        importance="clear"
-        :aria-label="closeButtonProps.ariaLabel"
-        v-bind="closeButtonProps"
-        :kind="kind"
-        @click="close"
-      >
-        <template #icon>
-          <icon-close />
-        </template>
-      </dt-button>
-    </div>
-  </div>
+    </transition>
+  </dt-lazy-show>
 </template>
 
 <script>
@@ -84,6 +92,7 @@ import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import Modal from '../mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '../utils';
+import DtLazyShow from '../lazy_show/lazy_show';
 
 /**
  * Base Vue component for Dialtone Modal.
@@ -93,6 +102,7 @@ export default {
   name: 'DtModal',
 
   components: {
+    DtLazyShow,
     DtButton,
     IconClose,
   },
@@ -231,13 +241,7 @@ export default {
       this.$emit('update:show', false);
     },
 
-    setFocusAfterTransition ({ propertyName }) {
-      // We only focus if the dialog is showing, and 'transform' seems to be the most reliable property to track.
-      // Note: 'visibility' would be an ideal prop to watch here, but it doesn't fire if the previous close transition
-      // was still in progress, making it a little flakey when quickly opening/closing a modal repeatedly.
-      if (!this.show || propertyName !== 'transform') {
-        return;
-      }
+    setFocusAfterTransition () {
       this.focusFirstElement();
     },
 
@@ -249,3 +253,27 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+@import "../../css/dialtone.less";
+
+.d-modal-enter, .d-modal-leave-to {
+  .d-modal--animate();
+}
+
+.d-modal__dialog-enter, .d-modal__dialog-leave-to {
+  .d-modal__dialog--animate();
+}
+
+.d-modal-enter-active, .d-modal__dialog-enter-active {
+  .d-modal--animate-in();
+}
+
+.d-modal-leave-active {
+  .d-modal--animate-out();
+}
+
+.d-modal__dialog-leave-active {
+  .d-modal__dialog--animate-out();
+}
+</style>

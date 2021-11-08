@@ -12,7 +12,7 @@
       "vue/no-deprecated-dollar-listeners-api": 1
     },
     "components/lazy_show/lazy_show.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1
+      "vue/no-deprecated-dollar-listeners-api": 2
     },
     "components/mixins/modal.js": {
       "complexity": 1

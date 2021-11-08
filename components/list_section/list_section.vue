@@ -61,6 +61,7 @@ export default {
       functional: true,
       render: (h, ctx) => ctx.props.vnodes,
     },
+
     DtButton,
   },
 
@@ -115,16 +116,20 @@ export default {
       }
       return true;
     },
+
     showMoreLessText () {
       return this.showAll ? this.textLess : this.textMore;
     },
+
     hiddenCount () {
       return this.itemCount - this.displayedItems.length;
     },
+
     itemCount () {
       // eslint-disable-next-line vue/require-slots-as-functions
       return this.$slots.default.length;
     },
+
     displayedItems () {
       // filtering the slot v-nodes to only display up to maxDisplayed items
       // eslint-disable-next-line vue/require-slots-as-functions
