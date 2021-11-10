@@ -35,11 +35,6 @@ module.exports = {
     });
 
     config.module.rules.push({
-      test: /\.css$/,
-      use: cssLoaders,
-    });
-
-    config.module.rules.push({
       test: /\.(stories|story)\.[tj]sx?$/,
       loader: require.resolve('@storybook/source-loader'),
       exclude: [/node_modules/],
