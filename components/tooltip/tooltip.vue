@@ -184,7 +184,7 @@ export default {
          * type.
          */
         // Add aria description to each anchored child
-        this.$refs.anchor?.children?.forEach(child => {
+        [...(this.$refs.anchor?.children || [])].forEach(child => {
           child.setAttribute('aria-describedby', this.id);
         });
       } else {
