@@ -8,6 +8,7 @@
       :size="size"
       :copy="copy"
       :hide-close="hideClose"
+      :labelled-by-id="labelledById"
       @update:show="close"
     >
       <template
@@ -26,18 +27,24 @@
         v-if="showFooter"
         #footer
       >
-        <dt-button
-          :kind="kind"
-          importance="primary"
-        >
-          Confirm
-        </dt-button>
-        <dt-button
-          :kind="kind"
-          importance="clear"
-        >
-          Cancel
-        </dt-button>
+        <span
+          v-if="footer"
+          v-html="footer"
+        />
+        <div v-else>
+          <dt-button
+            :kind="kind"
+            importance="primary"
+          >
+            Confirm
+          </dt-button>
+          <dt-button
+            :kind="kind"
+            importance="clear"
+          >
+            Cancel
+          </dt-button>
+        </div>
       </template>
     </dt-modal>
     <dt-button
@@ -83,8 +90,9 @@ export default {
   },
 
   methods: {
-    close () {
+    close (event) {
       this.isOpen = !this.isOpen;
+      this.onClose(event);
     },
   },
 

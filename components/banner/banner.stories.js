@@ -4,8 +4,12 @@ import BannerDefault from './banner_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import { argsData, argTypesData } from '../notice/notice.stories.js';
 
+argTypesData.role = {
+  table: {
+    disable: true,
+  },
+};
 argTypesData.titleId = {
-  defaultValue: '',
   table: {
     defaultValue: {
       summary: 'generated unique ID',
@@ -13,7 +17,6 @@ argTypesData.titleId = {
   },
 };
 argTypesData.contentId = {
-  defaultValue: '',
   table: {
     defaultValue: {
       summary: 'generated unique ID',
@@ -22,9 +25,12 @@ argTypesData.contentId = {
 };
 
 export default {
-  title: 'Elements/Banner',
+  title: 'Components/Banner',
   component: DtBanner,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: BaseBannerMdx,
     },

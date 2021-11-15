@@ -4,6 +4,18 @@ import { createTemplateFromVueFile } from '../storybook_utils';
 import LazyShowMdx from './lazy_show.mdx';
 
 const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Props
   transition: {
     control: {
       type: 'select',
@@ -17,6 +29,9 @@ export default {
   component: DtLazyShow,
   argTypes: argTypesData,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: LazyShowMdx,
     },

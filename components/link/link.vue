@@ -5,6 +5,7 @@
       LINK_KIND_MODIFIERS[kind],
     ]"
     data-qa="dt-link"
+    v-on="$listeners"
   >
     <slot />
   </a>
@@ -28,6 +29,8 @@ export default {
       },
     },
   },
+
+  emits: ['click', 'focusin', 'focusout'],
 
   data () {
     return {

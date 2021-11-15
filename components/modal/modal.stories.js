@@ -3,32 +3,59 @@ import ModalMdx from './modal.mdx';
 import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { createTemplateFromVueFile } from '../storybook_utils';
+import { action } from '@storybook/addon-actions';
 
 export const argTypesData = {
   // Slots
   default: {
+    control: 'text',
     table: {
-      category: 'slot data',
       type: {
-        summary: 'node',
+        summary: 'VNode',
       },
     },
   },
-
   footer: {
+    control: 'text',
     table: {
-      category: 'slot data',
       type: {
-        summary: 'node',
+        summary: 'VNode',
+      },
+    },
+  },
+  header: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
       },
     },
   },
 
-  header: {
+  // Props
+  size: {
+    defaultValue: 'default',
+    control: {
+      type: 'select',
+      options: Object.keys(MODAL_SIZE_MODIFIERS),
+    },
+  },
+  kind: {
+    defaultValue: 'default',
+    control: {
+      type: 'select',
+      options: Object.keys(MODAL_KIND_MODIFIERS),
+    },
+  },
+  showFooter: {
     table: {
-      category: 'slot data',
-      type: {
-        summary: 'node',
+      disable: true,
+    },
+  },
+  labelledById: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
       },
     },
   },
@@ -44,25 +71,7 @@ a 2-way binding to control modal visibility.`,
       },
     },
   },
-
-  // Props
-  size: {
-    defaultValue: 'default',
-    control: {
-      type: 'select',
-      options: Object.keys(MODAL_SIZE_MODIFIERS),
-    },
-  },
-
-  kind: {
-    defaultValue: 'default',
-    control: {
-      type: 'select',
-      options: Object.keys(MODAL_KIND_MODIFIERS),
-    },
-  },
-
-  showFooter: {
+  onClose: {
     table: {
       disable: true,
     },
@@ -80,12 +89,16 @@ maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
   title: 'Example Title',
+  onClose: action('update:show'),
 };
 
 export default {
-  title: 'Elements/Modal',
+  title: 'Components/Modal',
   component: DtModal,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: ModalMdx,
     },

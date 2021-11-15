@@ -7,6 +7,43 @@ import InputDefault from './input_default.story.vue';
 
 // Controls
 export const argTypesData = {
+  // Slots
+  description: {
+    description: 'slot for description, defaults to description prop',
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  leftIcon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
+  rightIcon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
+  labelSlot: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
   // Props
   value: {
     control: 'text',
@@ -42,69 +79,85 @@ export const argTypesData = {
     control: 'text',
   },
   messagesChildProps: { control: null },
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
 
-  // Native Props
+  // HTML attributes
   placeholder: {
-    description: 'native input placeholder',
+    description: 'HTML input placeholder attribute',
     table: {
-      category: 'native props',
-      defaultValue: {
-        summary: '\'\'',
-      },
+      category: 'html attributes',
     },
     control: 'text',
   },
 
-  // Slots
-  label: {
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
     table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
-  description: {
-    description: 'slot for description, defaults to description prop',
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
-  leftIcon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
-  },
-
-  rightIcon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'select',
-      options: getIconNames(),
+      category: 'directives',
     },
   },
 
   // Action Event Handlers
+  onBlur: {
+    table: {
+      disable: true,
+    },
+  },
   onInput: {
     table: {
       disable: true,
     },
   },
-
   onClear: {
     table: {
       disable: true,
+    },
+  },
+  onFocusIn: {
+    table: {
+      disable: true,
+    },
+  },
+  onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
+
+  blur: {
+    description: 'Native input blur event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  input: {
+    description: 'Native input event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  clear: {
+    description: 'Native input clear event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusin: {
+    description: 'Native input focusin event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusout: {
+    description: 'Native input focusout event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
@@ -112,8 +165,11 @@ export const argTypesData = {
 export const argsData = {
   placeholder: 'placeholder',
   label: 'Label',
+  onBlur: action('blur'),
   onInput: action('input'),
   onClear: action('clear'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
 };
 
 const decorator = () => ({
@@ -121,9 +177,12 @@ const decorator = () => ({
 });
 
 export default {
-  title: 'Forms/Input',
+  title: 'Components/Input',
   component: DtInput,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: InputMdx,
     },

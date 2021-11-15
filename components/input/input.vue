@@ -178,7 +178,7 @@ export default {
     },
   },
 
-  emits: ['blur', 'input', 'clear'],
+  emits: ['blur', 'input', 'clear', 'focusin', 'focusout'],
 
   data () {
     return {

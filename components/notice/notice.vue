@@ -129,6 +129,8 @@ export default {
     },
   },
 
+  emits: ['close'],
+
   computed: {
     noticeClass () {
       const noticeKinds = {

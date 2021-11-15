@@ -12,9 +12,27 @@ export const argsData = {
 };
 
 export const argTypesData = {
-  // Action Event Handlers
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  tabs: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Props
   size: {
-    defaultValue: '',
+    defaultValue: 'default',
     control: {
       type: 'select',
       options: TAB_LIST_SIZES,
@@ -27,16 +45,26 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  change: {
+    description: 'Change tab event with the arguments: `selected` id of the current tab and `disabled` value',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
 };
 
 // Story Collection
 export default {
-  title: 'Elements/Tabs',
+  title: 'Components/Tabs',
   component: DtTabGroup,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtTabsMdx,
     },

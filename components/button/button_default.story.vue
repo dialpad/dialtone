@@ -14,8 +14,8 @@
     :disabled="disabled"
     :style="{ width: width }"
     @click="onClick"
-    @focusout="onFocusOut"
     @focusin="onFocusIn"
+    @focusout="onFocusOut"
   >
     <span
       v-if="defaultSlot"

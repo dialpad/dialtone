@@ -14,6 +14,26 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  anchor: {
+    name: 'anchor',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   // Props
   show: {
     description: 'Used to show tooltip',
@@ -25,31 +45,16 @@ export const argTypesData = {
       },
     },
   },
-
   arrowDirection: {
     control: {
       type: 'select',
       options: TOOLTIP_DIRECTION_MODIFIERS,
     },
   },
-
-  // Slots
-  default: {
-    control: 'text',
+  id: {
     table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  anchor: {
-    name: 'anchor',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
+      defaultValue: {
+        summary: 'generated unique ID',
       },
     },
   },
@@ -57,12 +62,15 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Tooltip',
+  title: 'Components/Tooltip',
   component: DtTooltip,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtTooltipMdx,
     },

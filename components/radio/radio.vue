@@ -75,6 +75,8 @@ export default {
     },
   },
 
+  emits: ['input', 'focusin', 'focusout'],
+
   computed: {
     inputValidationClass () {
       return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];

@@ -14,34 +14,26 @@ import ButtonVariants from './button_variants.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 
 export const argTypesData = {
-  // Props
-  disabled: {
-    description: 'native "disabled" prop',
-    defaultValue: false,
-    type: {
-      summary: 'boolean',
-    },
+  // Slots
+  default: {
     table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'false',
-      },
-    },
-    control: 'boolean',
-  },
-  width: {
-    table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'auto',
-      },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
     },
   },
+  icon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
 
-  // Buttons
+  // Props
   importance: {
     control: {
       type: 'select',
@@ -66,15 +58,12 @@ export const argTypesData = {
       options: Object.keys(BUTTON_KIND_MODIFIERS),
     },
   },
-
-  // Links
   link: {
     defaultValue: false,
     type: {
       summary: 'boolean',
     },
     table: {
-      category: 'Link props',
       defaultValue: {
         summary: 'false',
       },
@@ -82,48 +71,46 @@ export const argTypesData = {
     control: 'boolean',
   },
   linkKind: {
-    table: {
-      category: 'Link props',
-    },
     control: {
       type: 'select',
       options: Object.keys(LINK_KIND_MODIFIERS),
     },
   },
-
-  // Args related to icons.
-  icon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
-  },
   iconPosition: {
-    table: {
-      category: 'Icon props',
-    },
     control: {
       type: 'select',
       options: Object.keys(ICON_POSITION_MODIFIERS),
     },
   },
+  labelClass: {
+    description: 'Pass through classes. Used to customize the label container',
+  },
 
-  default: {
+  // HTML attributes
+  disabled: {
+    description: 'HTML button disabled attribute',
+    defaultValue: false,
+    type: {
+      summary: 'boolean',
+    },
     table: {
-      type: { summary: 'VNode' },
+      category: 'html attributes',
+      defaultValue: {
+        summary: 'false',
+      },
+    },
+    control: 'boolean',
+  },
+  width: {
+    description: 'HTML button width attribute',
+    table: {
+      category: 'html attributes',
+      defaultValue: {
+        summary: 'auto',
+      },
     },
     control: {
       type: 'text',
-    },
-  },
-
-  // Pass Through Class Controls
-  labelClass: {
-    table: {
-      category: 'pass through classes',
     },
   },
 
@@ -133,23 +120,31 @@ export const argTypesData = {
       disable: true,
     },
   },
-  onFocusOut: {
-    table: {
-      disable: true,
-    },
-  },
   onFocusIn: {
     table: {
       disable: true,
     },
   },
+  onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
 
-  focusout: {
+  click: {
+    description: 'Native button click event',
     table: {
       type: { summary: 'event' },
     },
   },
   focusin: {
+    description: 'Native button focusin event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusout: {
+    description: 'Native button focusout event',
     table: {
       type: { summary: 'event' },
     },
@@ -158,14 +153,17 @@ export const argTypesData = {
 
 export const argsData = {
   onClick: action('click'),
-  onFocusOut: action('focusout'),
   onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
 };
 
 export default {
-  title: 'Elements/Button',
+  title: 'Components/Button',
   component: DtButton,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: BaseButtonMdx,
     },

@@ -3,6 +3,7 @@ import {
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
 } from './constants';
+import Vue from 'vue';
 
 let UNIQUE_ID_COUNTER = 0;
 
@@ -81,10 +82,28 @@ export function findFirstFocusableNode (element) {
   return element?.querySelector(FOCUSABLE_SELECTOR);
 }
 
+/* html-fragment component:
+ * To render html without wrapping in another element as when using v-html.
+ * props: html
+ */
+export const htmlFragment = {
+  name: 'html-fragment',
+  functional: true,
+  props: ['html'],
+  render (h, ctx) {
+    return new Vue({
+      name: 'Inner',
+      beforeCreate () { this.$createElement = h; },
+      template: `<div>${ctx.props.html}</div>`,
+    }).$mount()._vnode.children;
+  },
+};
+
 export default {
   getUniqueString,
   formatMessages,
   filterFormattedMessages,
   hasFormattedMessageOfType,
   getValidationState,
+  htmlFragment,
 };

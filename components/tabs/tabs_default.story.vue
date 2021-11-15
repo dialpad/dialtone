@@ -19,20 +19,23 @@
           panel-id="2"
           selected
         >
-          First
+          <p v-if="tabs" v-html="tabs"></p>
+          <p v-else>First</p>
         </dt-tab>
         <dt-tab
           id="3"
           panel-id="4"
         >
-          Second
+          <p v-if="tabs" v-html="tabs"></p>
+          <p v-else>Second</p>
         </dt-tab>
         <dt-tab
           id="5"
           panel-id="6"
           label="Third Label"
         >
-          Third
+          <p v-if="tabs" v-html="tabs"></p>
+          <p v-else>Third</p>
         </dt-tab>
       </template>
 
@@ -45,19 +48,22 @@
           id="2"
           tab-id="1"
         >
-          <p>First Panel</p>
+          <p v-if="defaultSlot" v-html="defaultSlot"></p>
+          <p v-else>First Panel</p>
         </dt-tab-panel>
         <dt-tab-panel
           id="4"
           tab-id="3"
         >
-          <p>Second Panel</p>
+          <p v-if="defaultSlot" v-html="defaultSlot"></p>
+          <p v-else>Second Panel</p>
         </dt-tab-panel>
         <dt-tab-panel
           id="6"
           tab-id="5"
         >
-          <p>Third Panel</p>
+          <p v-if="defaultSlot" v-html="defaultSlot"></p>
+          <p v-else>Third Panel</p>
         </dt-tab-panel>
       </div>
     </dt-tab-group>

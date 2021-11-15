@@ -1,4 +1,5 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
+import { action } from '@storybook/addon-actions';
 import DtLink from './link';
 import DtLinkMdx from './link.mdx';
 import DtLinkDefaultTemplate from './link_default.story.vue';
@@ -9,10 +10,23 @@ import { LINK_VARIANTS } from './link_constants';
 export const argsData = {
   default: 'Default link',
   href: '#',
+  onClick: action('click'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
 };
 
 // Controls
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   // Props
   kind: {
     defaultValue: '',
@@ -22,56 +36,79 @@ export const argTypesData = {
     },
   },
 
-  // Native Props
+  // HTML attributes
   href: {
-    description: 'native "href" prop',
+    description: 'HTML a href attribute',
     defaultValue: undefined,
     type: {
       summary: 'string',
     },
     table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'undefined',
-      },
+      category: 'html attributes',
     },
     control: 'text',
   },
   rel: {
-    description: `native "rel" prop. Relationship between the location in the document containing the hyperlink
+    description: `HTML a rel attribute. Relationship between the location in the document containing the hyperlink
         and the destination resource.`,
     defaultValue: undefined,
     type: {
       summary: 'string',
     },
     table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'undefined',
-      },
+      category: 'html attributes',
     },
     control: 'text',
   },
 
-  // Slots
-  default: {
-    control: 'text',
+  // Action Event Handlers
+  onClick: {
     table: {
-      type: {
-        summary: 'text/html',
-      },
+      disable: true,
+    },
+  },
+  onFocusIn: {
+    table: {
+      disable: true,
+    },
+  },
+  onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
+
+  click: {
+    description: 'Native click event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusin: {
+    description: 'Native focusin event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusout: {
+    description: 'Native focusout event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Elements/Link',
+  title: 'Components/Link',
   component: DtLink,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtLinkMdx,
     },

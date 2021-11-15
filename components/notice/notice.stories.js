@@ -8,24 +8,14 @@ import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 // Default Prop Values
 export const argsData = {
   onClose: action('close'),
+  onClick: action('click'),
 };
 
 export const argTypesData = {
-  kind: {
-    control: {
-      type: 'select',
-      options: NOTICE_KINDS,
-    },
-  },
-  role: {
-    control: {
-      type: 'select',
-      options: NOTICE_ROLES,
-    },
-  },
+  // Slots
   titleOverride: {
     table: {
-      type: { summary: 'text/html' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -42,29 +32,66 @@ export const argTypesData = {
   },
   default: {
     table: {
-      type: { summary: 'text/html' },
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  action: {
+    table: {
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
     },
   },
 
+  // Props
+  kind: {
+    control: {
+      type: 'select',
+      options: NOTICE_KINDS,
+    },
+  },
+  role: {
+    control: {
+      type: 'select',
+      options: NOTICE_ROLES,
+    },
+  },
+
   // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
   onClose: {
     table: {
       disable: true,
+    },
+  },
+
+  close: {
+    description: 'Close button click event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Elements/Notice',
+  title: 'Components/Notice',
   component: DtNotice,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtNoticeMdx,
     },

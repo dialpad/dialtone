@@ -69,7 +69,7 @@ export default {
 
   inheritAttrs: false,
 
-  emits: ['input'],
+  emits: ['input', 'focusin', 'focusout'],
 
   computed: {
     inputValidationClass () {

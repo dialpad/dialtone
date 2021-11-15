@@ -95,7 +95,7 @@ export default {
      */
     size: {
       type: String,
-      default: '',
+      default: 'default',
       validate (size) {
         return TAB_LIST_SIZES.includes(size);
       },
@@ -117,6 +117,8 @@ export default {
       default: () => ({}),
     },
   },
+
+  emits: ['change'],
 
   data () {
     return {

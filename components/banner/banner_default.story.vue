@@ -36,6 +36,7 @@
         <dt-button
           :kind="buttonKind"
           importance="outlined"
+          @click="onClick"
         >
           {{ action }}
         </dt-button>

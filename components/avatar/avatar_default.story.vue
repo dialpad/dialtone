@@ -1,5 +1,6 @@
 <template>
   <dt-avatar
+    :id="id"
     :kind="kind"
     :size="size"
     :color="color"
@@ -14,9 +15,9 @@
         :is="defaultSlot"
         v-if="kind === 'icon'"
       />
-      <span
+      <html-fragment
         v-else
-        v-html="defaultSlot"
+        :html="defaultSlot"
       />
     </template>
   </dt-avatar>
@@ -25,10 +26,11 @@
 <script>
 import DtAvatar from './avatar';
 import icon from '../mixins/icon';
+import { htmlFragment } from '../utils';
 
 export default {
   name: 'DtAvatarDefault',
-  components: { DtAvatar },
+  components: { DtAvatar, htmlFragment },
   mixins: [icon],
 };
 </script>

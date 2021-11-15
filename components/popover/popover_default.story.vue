@@ -12,6 +12,7 @@
     :transition="transition"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
+    @update:open="onClose"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -23,7 +24,8 @@
     </template>
     <template #content>
       <p class="d-fs14 d-m0">
-        I will be displayed in the popover!
+        <span v-if="content" v-html="content"></span>
+        <span v-else>I will be displayed in the popover!</span>
       </p>
     </template>
   </dt-popover>

@@ -5,6 +5,16 @@ import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } 
 import DtAvatarMdx from './avatar.mdx';
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   // Props
   kind: {
     defaultValue: 'default',
@@ -27,15 +37,22 @@ export const argTypesData = {
       options: Object.keys(AVATAR_COLOR_MODIFIERS),
     },
   },
-
-  // Native Props
-  src: {
-    description: 'Native image src. Required for image avatars. Overridden by the default slot',
+  avatarClass: {
+    description: 'Pass through classes. Used to customize the avatar container',
+  },
+  id: {
     table: {
-      category: 'native props',
       defaultValue: {
-        summary: 'undefined',
+        summary: 'generated unique ID',
       },
+    },
+  },
+
+  // HTML attributes
+  src: {
+    description: 'HTML image src attribute. Required for image avatars. Overridden by the default slot',
+    table: {
+      category: 'html attributes',
     },
     type: {
       summary: 'string',
@@ -43,44 +60,27 @@ export const argTypesData = {
     control: 'text',
   },
   alt: {
-    description: 'Native image alt. Required for image avatars. Overridden by the default slot',
+    description: 'HTML image alt attribute. Required for image avatars. Overridden by the default slot',
     table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'undefined',
-      },
+      category: 'html attributes',
     },
     type: {
       summary: 'string',
     },
     control: 'text',
   },
-
-  // Pass Through Class Controls
-  avatarClass: {
-    table: {
-      category: 'Pass through classes',
-    },
-  },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
 };
 
 // Story Collection
 export default {
-  title: 'Elements/Avatar',
+  title: 'Components/Avatar',
   component: DtAvatar,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtAvatarMdx,
     },

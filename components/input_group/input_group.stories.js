@@ -23,12 +23,28 @@ export const argsData = {
 
 // Controls
 export const argTypesData = {
-  // Props
-  'v-model': {
-    description: 'Supported by this component',
-    // remove control
-    control: null,
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
   },
+  legendSlot: {
+    name: 'legend',
+    description: 'Slot for legend',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Props
   legend: {
     description: 'The legend of the input group',
     table: {
@@ -48,25 +64,20 @@ export const argTypesData = {
       category: 'props',
     },
   },
-
-  // Slots
-  default: {
-    control: 'text',
+  id: {
     table: {
-      type: {
-        summary: 'text/html',
+      defaultValue: {
+        summary: 'generated unique ID',
       },
     },
   },
-  legendSlot: {
-    name: 'legend',
-    description: 'Slot for legend',
-    control: 'text',
+
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
     table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
+      category: 'directives',
     },
   },
 
@@ -87,12 +98,15 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Forms/Input Group',
+  title: 'Components/Input Group',
   component: DtInputGroup,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: InputGroupMdx,
     },

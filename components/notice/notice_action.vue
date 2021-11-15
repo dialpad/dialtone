@@ -20,6 +20,7 @@
     </dt-button>
   </div>
 </template>
+
 <script>
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import DtButton from '../button/button';
@@ -43,6 +44,8 @@ export default {
       default: false,
     },
   },
+
+  emits: ['close'],
 
   created () {
     if (!this.hideClose && !this.closeButtonProps.ariaLabel) {

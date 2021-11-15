@@ -1,4 +1,4 @@
-export const TAB_LIST_SIZES = ['', 'sm'];
+export const TAB_LIST_SIZES = ['default', 'sm'];
 
 export const TAB_LIST_SIZE_MODIFIERS = {
   sm: 'd-tablist--sm',

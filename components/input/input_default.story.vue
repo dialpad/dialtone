@@ -12,14 +12,17 @@
     :messages-class="messagesClass"
     :placeholder="placeholder"
     :input-class="inputClass"
+    @blur="onBlur"
     @input="onInput"
     @clear="onClear"
+    @focusin="onFocusIn"
+    @focusout="onFocusOut"
   >
     <template
-      v-if="label"
-      #label
+      v-if="labelSlot"
+      #labelSlot
     >
-      <span v-html="label" />
+      <span v-html="labelSlot" />
     </template>
     <template
       v-if="description"

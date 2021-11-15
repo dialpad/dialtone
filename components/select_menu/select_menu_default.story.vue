@@ -22,28 +22,30 @@
     @change="onChange"
   >
     <template
-      #label
       v-if="labelSlot"
+      #label
     >
       <span v-html="labelSlot" />
     </template>
     <template
-      #description
       v-if="descriptionSlot"
+      #description
     >
       <span v-html="descriptionSlot" />
     </template>
-    <div v-if="defaultSlot">
-      <div v-html="defaultSlot" />
-    </div>
+    <html-fragment
+      v-if="defaultSlot"
+      :html="defaultSlot"
+    />
   </dt-select-menu>
 </template>
 
 <script>
 import DtSelectMenu from './select_menu';
+import { htmlFragment } from '../utils';
 
 export default {
   name: 'DtSelectMenuDefault',
-  components: { DtSelectMenu },
+  components: { DtSelectMenu, htmlFragment },
 };
 </script>

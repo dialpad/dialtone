@@ -8,37 +8,14 @@ import { NOTICE_KINDS } from '../notice';
 // Default Prop Values
 export const argsData = {
   onClose: action('close'),
+  onClick: action('click'),
 };
 
 export const argTypesData = {
-  // Props
-  titleId: {
-    defaultValue: '',
-    table: {
-      defaultValue: {
-        summary: 'generated unique ID',
-      },
-    },
-  },
-  contentId: {
-    defaultValue: '',
-    table: {
-      defaultValue: {
-        summary: 'generated unique ID',
-      },
-    },
-  },
-  kind: {
-    control: {
-      type: 'select',
-      options: NOTICE_KINDS,
-    },
-  },
-
   // Slots
   titleOverride: {
     table: {
-      type: { summary: 'text/html' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -55,29 +32,74 @@ export const argTypesData = {
   },
   default: {
     table: {
-      type: { summary: 'text/html' },
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  action: {
+    table: {
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
     },
   },
 
+  // Props
+  titleId: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  contentId: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  kind: {
+    control: {
+      type: 'select',
+      options: NOTICE_KINDS,
+    },
+  },
+
   // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
   onClose: {
     table: {
       disable: true,
+    },
+  },
+
+  close: {
+    description: 'Close button click event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Elements/Toast',
+  title: 'Components/Toast',
   component: DtToast,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtToastMdx,
     },

@@ -14,6 +14,9 @@
     "components/lazy_show/lazy_show.vue": {
       "vue/no-deprecated-dollar-listeners-api": 2
     },
+    "components/link/link.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 1
+    },
     "components/mixins/modal.js": {
       "complexity": 1
     },

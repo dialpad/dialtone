@@ -6,6 +6,16 @@ import { BADGE_COLOR_MODIFIERS } from './badge_constants';
 import DtBadgeMdx from './badge.mdx';
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   // Props
   color: {
     defaultValue: 'base',
@@ -14,25 +24,18 @@ export const argTypesData = {
       options: Object.keys(BADGE_COLOR_MODIFIERS),
     },
   },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
 };
 
 // Story Collection
 export default {
-  title: 'Elements/Badge',
+  title: 'Components/Badge',
   component: DtBadge,
   excludeStories: /.*Data$/,
   argTypes: argTypesData,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtBadgeMdx,
     },

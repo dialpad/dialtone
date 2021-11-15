@@ -14,6 +14,8 @@
     :description-child-props="descriptionChildProps"
     :messages="messages"
     @input="onInput"
+    @focusin="onFocusIn"
+    @focusout="onFocusOut"
   >
     <template v-if="defaultSlot">
       <span v-html="defaultSlot" />

@@ -30,6 +30,17 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Props
   breadcrumbs: {
     control: 'object',
     table: {
@@ -38,33 +49,19 @@ export const argTypesData = {
       },
     },
   },
-  id: {
-    control: 'text',
-    table: {
-      defaultValue: {
-        summary: 'uniq id',
-      },
-    },
-  },
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
 };
 
 // Story Collection
 export default {
-  title: 'Elements/Breadcrumbs',
+  title: 'Components/Breadcrumbs',
   component: DtBreadcrumbs,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtBreadcrumbsMdx,
     },

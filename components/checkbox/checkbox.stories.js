@@ -13,15 +13,34 @@ export const argsData = {
   label: 'Checkbox',
   validationState: '',
   onInput: action('input'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
 };
 
 // Prop Controls
 export const argTypesData = {
-  // Props
-  'v-model': {
-    description: 'Supported by this component',
-    control: null,
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
   },
+  descriptionSlot: {
+    name: 'description',
+    description: 'slot for Checkbox Description',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Props
   description: {
     description: 'Describes the checkbox option',
     table: {
@@ -62,24 +81,12 @@ export const argTypesData = {
     control: null,
   },
 
-  // Slots
-  default: {
-    control: 'text',
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
     table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-  descriptionSlot: {
-    name: 'description',
-    description: 'slot for Checkbox Description',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
+      category: 'directives',
     },
   },
 
@@ -89,16 +96,48 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onFocusIn: {
+    table: {
+      disable: true,
+    },
+  },
+  onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
+
+  input: {
+    description: 'Native input event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusin: {
+    description: 'Native input focusin event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusout: {
+    description: 'Native input focusout event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
 };
 
 // Story Collection
 export default {
-  title: 'Forms/Checkbox',
+  title: 'Components/Checkbox',
   component: DtCheckbox,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: BaseCheckboxMdx,
     },

@@ -22,6 +22,39 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Slots
+  labelSlot: {
+    name: 'label',
+    description: 'Slot for label, defaults to label prop',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  descriptionSlot: {
+    name: 'description',
+    description: 'Slot for description, defaults to description prop',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  default: {
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   // Props
   label: {
     description: 'Label for the select',
@@ -53,7 +86,6 @@ export const argTypesData = {
       type: 'text',
     },
   },
-
   options: {
     control: {
       type: 'object',
@@ -69,7 +101,6 @@ export const argTypesData = {
       },
     },
   },
-
   size: {
     description: 'Controls the size of the select',
     control: {
@@ -87,24 +118,45 @@ export const argTypesData = {
       },
     },
   },
-
-  // Native Props
-  'v-model': {
-    description: 'Supported by this component',
-    control: null,
-    table: {
-      category: 'native props',
-    },
+  labelClass: {
+    description: 'Pass through classes. Used to customize the label container',
   },
+  descriptionClass: {
+    description: 'Pass through classes. Used to customize the description container',
+  },
+  selectClass: {
+    description: 'Pass through classes. Used to customize the select',
+  },
+  optionClass: {
+    description: 'Pass through classes. Used to customize each option, should options be provided via prop',
+  },
+  messagesClass: {
+    description: 'Pass through classes. Used to customize the the validation messages component',
+  },
+  labelChildProps: {
+    description: 'Pass through props. A set of props that are passed into the label container',
+  },
+  descriptionChildProps: {
+    description: 'Pass through props. A set of props that are passed into the description container',
+  },
+  optionChildProps: {
+    description: `Pass through props. A set of props that are passed into each option,
+     should options be provided via prop`,
+  },
+  messagesChildProps: {
+    description: 'Pass through props. A set of props that are passed into the validation messages component',
+  },
+
+  // HTML attributes
   value: {
-    description: 'Provides a value for the select',
+    description: 'HTML select value attribute. Provides a value for the select',
     control: {
       type: 'select',
       options: SELECT_OPTIONS.map(option => option.value),
     },
     defaultValue: SELECT_OPTIONS[0].value,
     table: {
-      category: 'native props',
+      category: 'html attributes',
       type: {
         summary: 'string',
       },
@@ -114,13 +166,13 @@ export const argTypesData = {
     },
   },
   name: {
-    description: 'Provides a name for the select',
+    description: 'HTML select name attribute. Provides a name for the select',
     control: {
       type: 'text',
     },
     defaultValue: '',
     table: {
-      category: 'native props',
+      category: 'html attributes',
       type: {
         summary: 'string',
       },
@@ -129,15 +181,14 @@ export const argTypesData = {
       },
     },
   },
-
   disabled: {
-    description: 'Disables the select',
+    description: 'HTML select disabled attribute. Disables the select',
     control: {
       type: 'boolean',
     },
     defaultValue: false,
     table: {
-      category: 'native props',
+      category: 'html attributes',
       type: {
         summary: 'boolean',
       },
@@ -147,87 +198,12 @@ export const argTypesData = {
     },
   },
 
-  // Pass Through Class Controls
-  labelClass: {
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
     table: {
-      category: 'pass through classes',
-    },
-  },
-  descriptionClass: {
-    table: {
-      category: 'pass through classes',
-    },
-  },
-  selectClass: {
-    table: {
-      category: 'pass through classes',
-    },
-  },
-  optionClass: {
-    table: {
-      category: 'pass through classes',
-    },
-  },
-  messagesClass: {
-    table: {
-      category: 'pass through classes',
-    },
-  },
-
-  // Pass Through Prop Controls
-  labelChildProps: {
-    table: {
-      category: 'pass through props',
-    },
-  },
-  descriptionChildProps: {
-    table: {
-      category: 'pass through props',
-    },
-  },
-  optionChildProps: {
-    table: {
-      category: 'pass through props',
-    },
-  },
-  messagesChildProps: {
-    table: {
-      category: 'pass through props',
-    },
-  },
-
-  // Slots
-  labelSlot: {
-    name: 'label',
-    description: 'Slot for label, defaults to label prop',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  descriptionSlot: {
-    name: 'description',
-    description: 'Slot for description, defaults to description prop',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  default: {
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
+      category: 'directives',
     },
   },
 
@@ -247,12 +223,15 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Forms/Select Menu',
+  title: 'Components/Select Menu',
   component: DtSelectMenu,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtSelectMenuMdx,
     },

@@ -160,6 +160,8 @@ export default {
     },
   },
 
+  emits: ['close'],
+
   data () {
     return {
       hidden: true,

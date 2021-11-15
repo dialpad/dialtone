@@ -134,6 +134,8 @@ export default {
     },
   },
 
+  emits: ['close'],
+
   computed: {
     role () {
       return this.important ? 'alertdialog' : 'status';
