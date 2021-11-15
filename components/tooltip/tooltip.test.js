@@ -166,10 +166,43 @@ describe('Dialtone Vue Tooltip tests', function () {
         });
       });
     });
+
+    describe('When the tooltip is going to be hidden', function () {
+      it('should emit a sync-able update event', async function () {
+        // Test setup
+        wrapper = shallowMount(DtTooltip, {
+          localVue: createLocalVue(),
+          propsData: {
+            show: true,
+            hover: false,
+          },
+          slots,
+        });
+        _setWrappers();
+
+        const syncEvent = 'update:show';
+        assert.isEmpty(wrapper.emitted());
+
+        await escape();
+        assert.equal(wrapper.emitted()[syncEvent].length, 1);
+        assert.isFalse(wrapper.emitted()[syncEvent][0][0]);
+
+        await blur();
+        assert.equal(wrapper.emitted()[syncEvent].length, 2);
+        assert.isFalse(wrapper.emitted()[syncEvent][1][0]);
+      });
+    });
   });
 
   describe('Accessibility Tests', function () {
     beforeEach(async function () {
+      // Test setup
+      wrapper = shallowMount(DtTooltip, {
+        localVue: createLocalVue(),
+        slots,
+      });
+      _setWrappers();
+
       await blur();
     });
     describe('When anchor has focus', function () {

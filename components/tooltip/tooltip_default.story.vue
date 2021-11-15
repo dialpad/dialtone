@@ -15,6 +15,7 @@
         :show="show"
         :inverted="inverted"
         :hover="hover"
+        @update:show="onClose"
       >
         <template v-if="defaultSlot">
           {{ defaultSlot }}

@@ -207,14 +207,22 @@ export default {
     },
 
     onBlur () {
+      this.triggerUpdateShowEvent();
       this.isHover = false;
       this.isDismissed = false;
       this.isChildFocused = false;
     },
 
     onEsc () {
+      this.triggerUpdateShowEvent();
       this.isDismissed = (this.hover && this.isHover) || !this.show;
       this.isChildFocused = false;
+    },
+
+    triggerUpdateShowEvent () {
+      if (this.isTooltipVisible) {
+        this.$emit('update:show', false);
+      }
     },
   },
 };
