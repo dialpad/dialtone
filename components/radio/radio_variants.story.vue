@@ -1,5 +1,5 @@
 <template>
-  <div id="forms-radio--variants-container">
+  <div id="components-radio--variants-container">
     <!-- Default -->
     <dt-radio
       name="Value"

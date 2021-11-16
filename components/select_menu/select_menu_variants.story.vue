@@ -1,6 +1,6 @@
 <template>
   <div
-    id="forms-select-menu--variants-container"
+    id="components-select-menu--variants-container"
     class="d-d-flex d-fd-column d-stack32 d-p32"
   >
     <!-- Default -->

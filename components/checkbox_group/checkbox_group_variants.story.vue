@@ -1,5 +1,5 @@
 <template>
-  <div id="forms-checkbox-group--variants-container">
+  <div id="components-checkbox-group--variants-container">
     <!-- Default -->
     <dt-checkbox-group
       name="checkbox-group-default"

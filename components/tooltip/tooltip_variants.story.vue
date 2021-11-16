@@ -1,6 +1,6 @@
 <template>
   <div
-    id="forms-radio--variants-container"
+    id="components-radio--variants-container"
     class="d-pt64 d-px64"
   >
     <!-- Arrow Description -->

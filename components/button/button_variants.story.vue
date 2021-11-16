@@ -1,5 +1,5 @@
 <template>
-  <div id="elements-button--variants-container">
+  <div id="components-button--variants-container">
     <div class="d-mb16">
       <!-- Default -->
       <dt-button>

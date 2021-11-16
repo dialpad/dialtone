@@ -1,5 +1,5 @@
 <template>
-  <div id="forms-input-group--variants-container">
+  <div id="components-input-group--variants-container">
     <!-- Default -->
     <dt-input-group
       name="input-group-default"

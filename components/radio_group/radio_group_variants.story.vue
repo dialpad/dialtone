@@ -1,5 +1,5 @@
 <template>
-  <div id="forms-radio-group--variants-container">
+  <div id="components-radio-group--variants-container">
     <!-- Default -->
     <dt-radio-group
       name="radio-group-default"

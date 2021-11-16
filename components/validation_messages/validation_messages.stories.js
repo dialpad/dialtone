@@ -60,7 +60,7 @@ const VariantsTemplate = () => {
   return {
     components: { DtValidationMessages },
     template: `
-      <div id="forms-validation-messages--variants-container">
+      <div id="components-validation-messages--variants-container">
         <dt-validation-messages
           :validationMessages="[{ message: 'With Success Validation Message', type: 'success' }]"
         />
