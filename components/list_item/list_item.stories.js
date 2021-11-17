@@ -157,7 +157,7 @@ const decorator = () => ({
 
 // Story Collection
 export default {
-  title: 'Elements/List Item',
+  title: 'Components/List Item',
   component: DtListItem,
   args: argsData,
   argTypes: argTypesData,
