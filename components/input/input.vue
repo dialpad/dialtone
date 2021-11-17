@@ -276,25 +276,28 @@ export default {
     inputClasses () {
       const inputStateClasses = {
         input: {
-          error: 'd-input--error',
-          warning: 'd-input--warning',
-          success: 'd-input--success',
+          error: 'd-input--error base-input__input--error',
+          warning: 'd-input--warning base-input__input--warning',
+          success: 'd-input--success base-input__input--success',
         },
 
         textarea: {
-          error: 'd-textarea--error',
-          warning: 'd-textarea--warning',
-          success: 'd-textarea--success',
+          error: 'd-textarea--error base-input__input--error',
+          warning: 'd-textarea--warning base-input__input--warning',
+          success: 'd-textarea--success base-input__input--success',
         },
       };
 
       return [
         'base-input__input',
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
-        { 'd-input-icon--left': this.$slots.leftIcon, 'd-input-icon--right': this.$slots.rightIcon },
+        {
+          [inputStateClasses[this.inputComponent][this.inputState]]: this.showInputState,
+          'd-input-icon--left': this.$slots.leftIcon,
+          'd-input-icon--right': this.$slots.rightIcon,
+        },
         this.sizeModifierClass,
         this.inputClass,
-        inputStateClasses[this.inputComponent][this.inputState],
       ];
     },
 
@@ -311,9 +314,9 @@ export default {
       };
 
       return [
-        'd-input-icon',
         iconOrientationClasses[side],
-        iconSizeClasses[this.size],
+        'd-input-icon',
+        { [iconSizeClasses[this.size]]: !this.isDefaultSize },
       ];
     },
 
