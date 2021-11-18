@@ -10,7 +10,7 @@
     <h3
       v-if="header"
       :id="`${id}-list-section-header`"
-      class="d-pl16 d-mt6"
+      class="d-pl12 d-mt6"
     >
       {{ header }}
     </h3>
@@ -33,7 +33,7 @@
         v-if="isCollapsible"
         :id="`${id}-list-section-show-more-less`"
         link
-        class="d-ml16 d-py6"
+        class="d-ml12 d-py6"
         @click="showMoreLessClicked"
       >
         {{ showMoreLessText }}
