@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="!hidden"
     :id="`dt-panel-${id}`"
     role="tabpanel"
     tabindex="0"
@@ -14,7 +15,7 @@
     data-qa="dt-tab-panel"
   >
     <!-- @slot Default slot for Tab Panel -->
-    <slot v-show="!hidden" />
+    <slot />
   </div>
 </template>
 
