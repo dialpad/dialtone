@@ -2,27 +2,26 @@
   "name": "@dialpad/dialtone-vue",
   "version": "1.4.0",
   "description": "Vue component library for Dialtone components",
-  "repository": "git@github.com:dialpad/dialtone-vue.git",
+  "scripts": {
+    "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
+    "lint": "run-s lint:code lint:docs",
+    "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
+    "lint-staged:code": "eslint --fix",
+    "lint-staged:docs": "markdownlint --fix",
+    "lint:code": "esplint ./",
+    "lint:docs": "markdownlint '**/*.mdx'",
+    "prepublishOnly": "npm run build",
+    "release": "semantic-release --no-ci --extends ./release-local.config.js",
+    "storybook": "npm run --prefix storybook storybook",
+    "storybook:build": "npm run --prefix storybook build",
+    "storybook:install": "npm install --prefix storybook",
+    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
+    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js"
+  },
+  "main": "./dist/dialtone-vue.common.js",
   "files": [
     "dist/*.js"
   ],
-  "main": "./dist/dialtone-vue.common.js",
-  "scripts": {
-    "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
-    "prepublishOnly": "npm run build",
-    "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
-    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
-    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
-    "lint:code": "esplint ./",
-    "lint-staged:code": "eslint --fix",
-    "lint:docs": "markdownlint '**/*.mdx'",
-    "lint-staged:docs": "markdownlint --fix",
-    "lint": "run-s lint:code lint:docs",
-    "release": "semantic-release --no-ci --extends ./release-local.config.js",
-    "storybook": "npm run --prefix storybook storybook",
-    "storybook:install": "npm install --prefix storybook",
-    "storybook:build": "npm run --prefix storybook build"
-  },
   "dependencies": {
     "v-click-outside": "^3.1.2"
   },
@@ -32,11 +31,13 @@
     "@dialpad/dialtone": "^6.7.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@vue/cli-plugin-babel": "~4.4.6",
-    "@vue/cli-plugin-eslint": "~4.4.6",
-    "@vue/cli-plugin-unit-mocha": "~4.4.6",
-    "@vue/cli-service": "~4.4.6",
-    "@vue/test-utils": "^1.0.3",
+    "@vue/cli-plugin-babel": "~4.5.15",
+    "@vue/cli-plugin-eslint": "^5.0.0-rc.1",
+    "@vue/cli-plugin-unit-mocha": "~4.5.15",
+    "@vue/cli-service": "~4.5.15",
+    "@vue/compat": "^3.1.0",
+    "@vue/compiler-sfc": "^3.1.0",
+    "@vue/test-utils": "^2.0.0-rc.16",
     "babel-eslint": "^10.1.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "chai": "^4.2.0",
@@ -67,22 +68,22 @@
     "semantic-release": "^18.0.0",
     "sinon": "^7.3.1",
     "source-map-support": "^0.5.19",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11",
+    "vue": "^3.1.0",
     "yo": "^3.1.1"
   },
   "peerDependencies": {
     "@dialpad/dialtone": ">=6.7",
-    "vue": "^2.6.11"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "./scripts/commit-msg"
+    "vue": "^3.1.0"
   },
   "engineStrict": true,
   "engines": {
     "node": ">= 14.17"
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "./scripts/commit-msg"
+  },
+  "repository": "git@github.com:dialpad/dialtone-vue.git",
   "volta": {
     "node": "14.18.1"
   }
