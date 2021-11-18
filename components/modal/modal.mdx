@@ -1,5 +1,4 @@
-import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtModal from './modal';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 # Modals
 
@@ -49,9 +48,9 @@ In addition to the footer, custom elements can be inserted into the header and b
   <Story id="components-modal--with-custom-header-and-content" />
 </Canvas>
 
-## Props
+## Slots, Props & Events
 
-<ArgsTable of={DtModal} />
+<ArgsTable story={PRIMARY_STORY} />
 
 ## Usage
 

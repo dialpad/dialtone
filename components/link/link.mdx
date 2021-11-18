@@ -1,5 +1,4 @@
-import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtLink from './link';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 # Links
 
@@ -21,12 +20,12 @@ Links allow users to click their way from page to page.
   <Story id="components-link--variants" />
 </Canvas>
 
-## Props, Slots & Events
+## Slots, Props & Events
 
 This element's attributes include [The Anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a)
 attributes.
 
-<ArgsTable of={DtLink} />
+<ArgsTable story={PRIMARY_STORY} />
 
 ## Usage
 

@@ -1,5 +1,4 @@
-import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtTabGroup from './tab_group';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import DtTabPanel from './tab_panel';
 import DtTab from './tab';
 
@@ -26,11 +25,11 @@ Tabs have two slots:
     <Story id="components-tabs--variants" />
 </Canvas>
 
-## Props, Slots & Events
+## Slots, Props & Events
 
 ### TabGroup Props
 
-<ArgsTable of={DtTabGroup} />
+<ArgsTable story={PRIMARY_STORY} />
 
 ### TabPanel Props
 

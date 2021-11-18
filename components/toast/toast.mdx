@@ -1,5 +1,4 @@
-import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtToast from './toast';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 # Toast
 
@@ -52,9 +51,9 @@ import DtToast from './toast';
 error message where `role="alert"` will be valid. Take into account that if you invoke multiple toasts
 with `role="alert"`, screen readers could override its speech queue and causes to miss a toast message.
 
-## Props, Slots & Events
+## Slots, Props & Events
 
-<ArgsTable of={DtToast} />
+<ArgsTable story={PRIMARY_STORY} />
 
 ## Usage
 

@@ -4,8 +4,7 @@
 
 ```jsx
     // MDX Documentation Template
-    import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-    import DtMyComponent from './my_component';
+    import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
     # My Component
 
@@ -27,9 +26,9 @@
       <Story id="<GROUP>-my-component--variants" />
     </Canvas>
 
-    ## Props, Slots & Events
+    ## Slots, Props & Events
 
-    <ArgsTable of={DtMyComponent} />
+    <ArgsTable story={PRIMARY_STORY} />
 
     ## Usage
 

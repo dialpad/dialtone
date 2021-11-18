@@ -1,7 +1,4 @@
-import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
-import ButtonDefault from './button_default.story.vue';
-import DtButton from './button';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 # Button
 
@@ -54,3 +51,7 @@ import { DtButton } from '@dialpad/dialtone-vue';
 <Canvas>
   <Story id="components-button--variants" />
 </Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />

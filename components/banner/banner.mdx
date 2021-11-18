@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 # Banner
 
@@ -41,7 +41,7 @@ Provides different styles of banners
 Applies error visual style.
 
 <Canvas>
-    <Story id="components-banner--error" />
+  <Story id="components-banner--error" />
 </Canvas>
 
 ### Info
@@ -65,7 +65,7 @@ Success visual style.
 Pins the banner to the top of the window
 
 <Canvas>
-    <Story id="components-banner--pinned" />
+  <Story id="components-banner--pinned" />
 </Canvas>
 
 ### Warning
@@ -73,5 +73,9 @@ Pins the banner to the top of the window
 Warning visual style.
 
 <Canvas>
-    <Story id="components-banner--warning" />
+  <Story id="components-banner--warning" />
 </Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />

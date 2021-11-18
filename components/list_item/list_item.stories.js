@@ -12,79 +12,6 @@ export const argsData = {
 };
 
 export const argTypesData = {
-  // Props
-  id: {
-    table: {
-      type: { summary: 'string' },
-      defaultValue: { summary: 'generated unique ID' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
-  role: {
-    table: {
-      type: { summary: 'string' },
-      defaultValue: { summary: 'listitem' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
-  elementType: {
-    table: {
-      type: { summary: 'string' },
-      defaultValue: { summary: 'li' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
-  type: {
-    table: {
-      type: { summary: 'string' },
-      defaultValue: { summary: LIST_ITEM_TYPES.DEFAULT },
-    },
-    control: {
-      type: 'select',
-      options: Object.values(LIST_ITEM_TYPES),
-    },
-  },
-
-  navigationType: {
-    table: {
-      type: { summary: 'string' },
-      defaultValue: { summary: 'none' },
-    },
-    control: {
-      type: 'select',
-      options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
-    },
-  },
-
-  index: {
-    table: {
-      type: { summary: 'number' },
-      defaultValue: { summary: 'null' },
-    },
-    control: {
-      type: 'number',
-    },
-  },
-
-  isHighlighted: {
-    table: {
-      type: { summary: 'string' },
-      defaultValue: { summary: false },
-    },
-    control: {
-      type: 'boolean',
-    },
-  },
-
   // Slots
   default: {
     description: 'Slot for the main content',
@@ -96,7 +23,6 @@ export const argTypesData = {
       type: 'text',
     },
   },
-
   left: {
     description: 'Slot for the left content',
     table: {
@@ -108,7 +34,6 @@ export const argTypesData = {
       options: getIconNames(),
     },
   },
-
   right: {
     description: 'Slot for the right content',
     table: {
@@ -120,7 +45,6 @@ export const argTypesData = {
       options: getIconNames(),
     },
   },
-
   subtitle: {
     description: 'Slot for the content below the main content',
     table: {
@@ -131,7 +55,6 @@ export const argTypesData = {
       type: 'text',
     },
   },
-
   bottom: {
     description: 'Slot for the content below the subtitle',
     table: {
@@ -143,10 +66,75 @@ export const argTypesData = {
     },
   },
 
+  // Props
+  id: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: 'generated unique ID' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  role: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: 'listitem' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  elementType: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: 'li' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  type: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: LIST_ITEM_TYPES.DEFAULT },
+    },
+    control: {
+      type: 'select',
+      options: Object.values(LIST_ITEM_TYPES),
+    },
+  },
+  navigationType: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: 'none' },
+    },
+    control: {
+      type: 'select',
+      options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
+    },
+  },
+  isHighlighted: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: false },
+    },
+    control: {
+      type: 'boolean',
+    },
+  },
+
   // Action Event Handlers
   onClick: {
     table: {
       disable: true,
+    },
+  },
+
+  click: {
+    description: 'Click event fired when clicking on the item',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
