@@ -17,7 +17,7 @@ export const argTypesData = {
     description: 'Slot for the main content',
     table: {
       category: 'slots',
-      type: { summary: 'string' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -49,7 +49,7 @@ export const argTypesData = {
     description: 'Slot for the content below the main content',
     table: {
       category: 'slots',
-      type: { summary: 'string' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -59,7 +59,7 @@ export const argTypesData = {
     description: 'Slot for the content below the subtitle',
     table: {
       category: 'slots',
-      type: { summary: 'string' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -152,6 +152,9 @@ export default {
   decorators: [decorator],
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtListItemMdx,
     },
