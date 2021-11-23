@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { warn } from 'vue';
 
 import {
   BUTTON_SIZE_MODIFIERS,
@@ -234,7 +234,7 @@ export default {
         if (process.env.NODE_ENV === 'production') return;
 
         if (this.circle && this.link) {
-          Vue.util.warn('You cannot enable circle and link at the same time', this);
+          warn('You cannot enable circle and link at the same time', this);
         }
 
         this.isInvalidPropCombination(this.circle, this.kind, this.importance);

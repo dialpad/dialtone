@@ -9,7 +9,6 @@
   >
     <template
       v-if="defaultSlot"
-      #default
     >
       <component
         :is="defaultSlot"

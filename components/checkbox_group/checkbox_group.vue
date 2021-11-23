@@ -1,5 +1,5 @@
 <script>
-import Vue from 'vue';
+import { warn } from 'vue';
 import { DtInputGroup } from '../input_group';
 
 export default {
@@ -23,7 +23,7 @@ export default {
           return true;
         }
 
-        Vue.util.warn(
+        warn(
           'Component uses selectedValues to initialize the model, value is not supported by this component',
           this,
         );

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { warn } from 'vue';
 import {
   AVATAR_SIZE_MODIFIERS,
   AVATAR_COLOR_MODIFIERS,
@@ -101,7 +101,7 @@ export default {
       if (this.kind === 'default' && !this.$slots.default) {
         // Check that default slot image required attributes are provided
         if (!this.$attrs.src || !this.$attrs.alt) {
-          Vue.util.warn('src and alt attributes are required for image avatars', this);
+          warn('src and alt attributes are required for image avatars', this);
         }
       }
     },

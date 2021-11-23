@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { warn } from 'vue';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
 import { validationMessageValidator } from '../validators';
 import { formatMessages } from '../utils';
@@ -132,7 +132,7 @@ export const InputMixin = {
      */
     validateInputLabels (hasLabelOrLabel, ariaLabel) {
       if (!hasLabelOrLabel && !ariaLabel) {
-        Vue.util.warn(
+        warn(
           'You must provide an aria-label when there is no label passed',
           this,
         );
@@ -283,7 +283,7 @@ export const GroupableMixin = {
     const reactiveGroupName = this.groupContext?.name;
 
     if (!!this.name && hasGroupName && reactiveGroupName !== this.name) {
-      Vue.util.warn(
+      warn(
         'Component is being used inside a Group. Did you mean to override the name prop value ' +
         `(${reactiveGroupName}) with (${this.name})? It is recommended to only set name at the Group level.`,
         this,

@@ -18,15 +18,16 @@
     "@storybook/addons": "^6.3.2",
     "@storybook/source-loader": "^6.3.2",
     "@storybook/theming": "^6.3.2",
-    "@storybook/vue": "^6.3.2",
+    "@storybook/vue3": "^6.3.2",
+    "@vue/compiler-sfc": "^3.2.22",
     "babel-loader": "^8.1.0",
     "babel-preset-vue": "^2.0.2",
     "generate-file-webpack-plugin": "^1.0.1",
-    "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.11"
+    "vue-loader": "^15.9.3"
   },
   "dependencies": {
-    "vue": "^2.6.11"
+    "vue": "^3.2.22",
+    "@vue/compat": "^3.2.22"
   },
   "engineStrict": true,
   "engines": {

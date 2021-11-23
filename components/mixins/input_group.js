@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { warn } from 'vue';
 import { DtValidationMessages } from '../validation_messages';
 import { validationMessageValidator } from '../validators';
 import {
@@ -161,7 +161,7 @@ export const InputGroupMixin = {
 
   mounted () {
     if (!this.legend && !this.$slots.legend && !this.$attrs['aria-label']) {
-      Vue.util.warn('It is expected that an aria-label is provided when there is no legend.', this);
+      warn('It is expected that an aria-label is provided when there is no legend.', this);
     }
   },
 };

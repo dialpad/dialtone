@@ -3,7 +3,7 @@ import {
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
 } from './constants';
-import Vue from 'vue';
+import { createApp } from 'vue';
 
 let UNIQUE_ID_COUNTER = 0;
 
@@ -91,11 +91,12 @@ export const htmlFragment = {
   functional: true,
   props: ['html'],
   render (h, ctx) {
-    return new Vue({
+    console.log('HTML Fragment: ', h, ctx);
+    return createApp({
       name: 'Inner',
       beforeCreate () { this.$createElement = h; },
       template: `<div>${ctx.props.html}</div>`,
-    }).$mount()._vnode.children;
+    }).mount()._vnode.children;
   },
 };
 

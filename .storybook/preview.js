@@ -1,12 +1,13 @@
 import '../css/dialtone-globals.less';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { addParameters } from '@storybook/vue';
+import { addParameters } from '@storybook/vue3';
 import { version } from '../package.json';
 import theme from './theme';
-import Vue from 'vue';
+import { createApp } from 'vue';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 
-Vue.use(fixDefaultSlot);
+const app = createApp({});
+app.use(fixDefaultSlot);
 
 addParameters({
   docs: {
