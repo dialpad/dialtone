@@ -1,18 +1,29 @@
 <template>
   <dt-popover
     :id="id"
-    :open.sync="isOpen"
-    :element-type="elementType"
-    :content-class="contentClass"
-    :padding="padding"
-    :has-caret="hasCaret"
-    :role="role"
-    :aria-label="ariaLabel"
-    :aria-labelledby="ariaLabelledby"
-    :transition="transition"
+    :open="isOpen"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
-    @update:open="onClose"
+    :content-class="contentClass"
+    :has-caret="hasCaret"
+    :padding="padding"
+    :hide-on-click="hideOnClick"
+    :role="role"
+    :element-type="elementType"
+    :transition="transition"
+    :aria-labelledby="ariaLabelledby"
+    :aria-label="ariaLabel"
+    :focus-anchor-on-close="focusAnchorOnClose"
+    :offset="offset"
+    :append-to="appendTo"
+    :interactive="interactive"
+    :flip-boundary="flipBoundary"
+    :interactive-border="interactiveBorder"
+    :trigger="trigger"
+    :modal="modal"
+    :content-width="contentWidth"
+    width-content="anchor"
+    @update:open="updateOpen"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -24,7 +35,10 @@
     </template>
     <template #content>
       <p class="d-fs14 d-m0">
-        <span v-if="content" v-html="content"></span>
+        <span
+          v-if="content"
+          v-html="content"
+        />
         <span v-else>I will be displayed in the popover!</span>
       </p>
     </template>
@@ -36,8 +50,11 @@ import { DtPopover } from './';
 import { DtButton } from '../button';
 
 export default {
-  name: 'PopoverDefault',
-  components: { DtPopover, DtButton },
+  name: 'PopoverDefaultStory',
+  components: {
+    DtPopover,
+    DtButton,
+  },
 
   props: {
     open: {
@@ -55,6 +72,13 @@ export default {
   watch: {
     open (isOpen) {
       this.isOpen = isOpen;
+    },
+  },
+
+  methods: {
+    updateOpen (isOpen) {
+      this.isOpen = isOpen;
+      this.onClose(isOpen);
     },
   },
 };

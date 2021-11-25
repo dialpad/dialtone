@@ -99,6 +99,14 @@ export const htmlFragment = {
   },
 };
 
+const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout;
+
+export const flushPromises = () => {
+  return new Promise((resolve) => {
+    scheduler(resolve);
+  });
+};
+
 export default {
   getUniqueString,
   formatMessages,
@@ -106,4 +114,5 @@ export default {
   hasFormattedMessageOfType,
   getValidationState,
   htmlFragment,
+  flushPromises,
 };

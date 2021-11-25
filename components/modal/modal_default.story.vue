@@ -76,7 +76,7 @@ export default {
 
   data () {
     return {
-      isOpen: false,
+      isOpen: this.show,
     };
   },
 
@@ -86,6 +86,14 @@ export default {
         ...this.closeButtonProps,
         ariaLabel: 'Close',
       };
+    },
+  },
+
+  watch: {
+    show: {
+      handler () {
+        this.isOpen = this.show;
+      },
     },
   },
 

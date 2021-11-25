@@ -24,7 +24,7 @@
     "storybook:build": "npm run --prefix storybook build"
   },
   "dependencies": {
-    "v-click-outside": "^3.1.2"
+    "tippy.js": "^6.3.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",

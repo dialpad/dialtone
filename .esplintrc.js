@@ -8,5 +8,7 @@ module.exports = {
     'vue/no-deprecated-destroyed-lifecycle',
     'vue/no-deprecated-v-bind-sync',
     'complexity',
+    'vuejs-accessibility/iframe-has-title',
+    'max-lines'
   ],
 };

@@ -12,8 +12,9 @@
       :inverted="inverted"
     >
       <html-fragment
+        v-if="defaultSlot"
         :html="defaultSlot"
-        v-if="defaultSlot"></html-fragment>
+      />
     </dt-breadcrumbs>
   </div>
 </template>

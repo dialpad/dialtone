@@ -1,6 +1,6 @@
 <template>
   <dt-lazy-show
-    transition="d-modal"
+    transition="d-zoom"
     :show="show"
     :class="[
       'd-modal',
@@ -255,27 +255,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-@import "../../css/dialtone.less";
-
-.d-modal-enter, .d-modal-leave-to {
-  .d-modal--animate();
-}
-
-.d-modal__dialog-enter, .d-modal__dialog-leave-to {
-  .d-modal__dialog--animate();
-}
-
-.d-modal-enter-active, .d-modal__dialog-enter-active {
-  .d-modal--animate-in();
-}
-
-.d-modal-leave-active {
-  .d-modal--animate-out();
-}
-
-.d-modal__dialog-leave-active {
-  .d-modal__dialog--animate-out();
-}
-</style>

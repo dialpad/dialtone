@@ -49,6 +49,7 @@ module.exports = {
       disallowVueBuiltInComponents: true,
       disallowVue3BuiltInComponents: true,
     }],
+    'vue/no-v-model-argument': ['warn'],
     'vue/padding-line-between-blocks': ['warn'],
     'vue/require-direct-export': ['warn'],
     'vue/require-name-property': ['error'],
@@ -61,8 +62,9 @@ module.exports = {
     'vue/v-on-event-hyphenation': ['error'],
     'vue/no-template-target-blank': ['error'],
     'vue/no-static-inline-styles': ['error'],
+    'vuejs-accessibility/iframe-has-title': 'warn',
 
-    'max-lines': ['error', { max: 300, skipBlankLines: true, skipComments: true }],
+    'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
     complexity: ['warn', 5],
 

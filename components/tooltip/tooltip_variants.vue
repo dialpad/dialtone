@@ -1,19 +1,21 @@
 <template>
   <div
-    id="components-radio--variants-container"
+    id="forms-radio--variants-container"
     class="d-pt64 d-px64"
   >
     <!-- Arrow Description -->
     <div
       v-for="(rowDirection, i) in TOOLTIP_DIRECTION_MODIFIERS"
       :key="i"
-      class="d-mb64 d-d-flex d-jc-space-between d-ai-center"
+      class="d-mb64 d-d-flex d-jc-center d-ai-center"
     >
       <dt-tooltip
         v-for="direction in rowDirection"
         :key="direction"
         :arrow-direction="direction"
         :message="localMessage"
+        :offset="[0, 0]"
+        class="d-mx64"
       >
         <template #anchor>
           <dt-button
@@ -30,25 +32,47 @@
       <dt-tooltip
         class="d-mb64"
         :message="localMessage"
+        :offset="[0, 0]"
       >
         <template #anchor>
-          {{ localAnchor }}
+          <span>{{ localAnchor }}</span>
         </template>
       </dt-tooltip>
     </div>
-    <div class="d-fd-column d-pt24 d-d-flex d-jc-center">
+    <div class="d-d-flex d-jc-center d-w100p">
       <!-- Open state -->
       <dt-tooltip
         class="d-mb64 d-mt16"
-        :show="true"
-        :hover="false"
         :message="localMessage"
+        trigger="click"
+        hide-on-click
+        :offset="[0, 0]"
+        show
       >
         <template #anchor>
           <dt-button
             importance="outlined"
           >
-            Open default state
+            {{ openDefaultState }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </div>
+    <div class="d-d-flex d-jc-center d-w100p">
+      <!-- Open state -->
+      <dt-tooltip
+        class="d-mb64 d-mt16"
+        :message="localMessage"
+        trigger="click"
+        hide-on-click="toggle"
+        :offset="[0, 0]"
+        show
+      >
+        <template #anchor>
+          <dt-button
+            importance="outlined"
+          >
+            {{ openDefaultState }}
           </dt-button>
         </template>
       </dt-tooltip>
@@ -57,17 +81,19 @@
       <div class="d-py64">
         <!-- Inverted state -->
         <dt-tooltip
-          :show="true"
-          :hover="false"
+          show
           :inverted="true"
+          trigger="click"
           :message="localMessage"
+          hide-on-click="toggle"
+          :offset="[0, 0]"
         >
           <template #anchor>
             <dt-button
               kind="inverted"
               importance="outlined"
             >
-              Open inverted state
+              {{ openInvertedState }}
             </dt-button>
           </template>
         </dt-tooltip>
@@ -98,6 +124,8 @@ export default {
       TOOLTIP_DIRECTION_MODIFIERS: sliceIntoChunks(TOOLTIP_DIRECTION_MODIFIERS, 3),
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       localAnchor: 'Hover over me to see a tooltip',
+      openDefaultState: 'Open default state on click',
+      openInvertedState: 'Open inverted state on click',
     };
   },
 };

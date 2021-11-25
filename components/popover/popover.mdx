@@ -8,8 +8,9 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 
 ## Basic Usage
 
-Popovers may be used standalone, or to create a dropdown menu or other complex control. Popovers are not modal elements,
-for a modal dialog that takes over the whole screen, use a DtModal component.
+Popovers may be used standalone, or to create a dropdown menu or other complex control.
+If you want use popover as a component which takes over the whole screen, there's a prop modal for that, or you can use
+DtModal. Keep in mind accessibility for popover and modal components are different.
 
 A popover has 2 major pieces that are provided as required named slots: the **anchor** and the **content**.
 
@@ -18,9 +19,9 @@ content. Normally a button, the anchor can be any *interactive* element that cou
 content. For example, the anchor could be an input element with a conditionally displayed listbox content element to
 implement an auto-suggest form component.
 
-The **content** slot will be rendered lazily when the popover is open. The popover content will automatically be closed
-when clicking outside the content (using the click-outside directive) so it is important to use `.sync` on the `show`
-prop (or `v-model:open` in Vue 3) so it can be updated if the popover closes itself.
+The **content** slot will be rendered lazily when the popover is open. By default, the popover content will
+automatically be closed when clicking outside the content or on escape key press, so it is important to use `.sync` on
+the `open` prop (or `v-model:open` in Vue 3) so it can be updated if the popover closes itself.
 
 ### Import
 
@@ -33,6 +34,25 @@ import { DtPopover } from '@dialpad/dialtone-vue';
 ```jsx
 <dt-popover
   :open.sync="open"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #content>
+    <p>I will be displayed in the popover!</p>
+  </template>
+</dt-popover>
+```
+
+or
+
+```jsx
+<dt-popover
+  :open="open"
 >
   <template #anchor="{ attrs }">
     <dt-button
@@ -54,8 +74,16 @@ import { DtPopover } from '@dialpad/dialtone-vue';
 
 ## Accessibility
 
-There are a few important considerations to ensure popover controls are accessible. By default, the popover content will
-have a generic role of "dialog".
+Popover, in their current implementation, are accessible when used as interactive components.
+Content will be read to screen reader users, and the popover markup by default get appended to the `parent`
+(also it could be placed to the end of `<body>` or other DOM element)
+
+There are a few important considerations to ensure popover controls are accessible.
+The popover, by default:
+
+- the popover content will have a generic role of "dialog".
+- focus will be transferred into the popover to the first content focusable element, and after close, triggering
+element will be focused (like in the modal component)
 
 ### Anchor
 
@@ -78,11 +106,9 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 1. Pass `aria-label`, which is the text label that will be applied to the dialog content.
 2. Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
 
-### Focus & Keyboard
+### Keyboard
 
-Due to the different contexts in which a popover can be used, focus management and keyboard shortcuts like `ESC` are not
-provided for you. You are encouraged to consult the ARIA documentation for the particular role you are implementing to
-see how keyboard focus & shortcuts should be implemented.
+The popover closes on `ESC` key press.
 
 ## Variants
 
@@ -91,11 +117,14 @@ see how keyboard focus & shortcuts should be implemented.
 The popover content supports both fixed and dynamic horizontal and vertical alignment around the anchor element. If
 `fixedAlignment`/`fixedVerticalAlignment` are passed, the popover will always be positioned in that direction. If you
 omit either of them, the popover will dynamically adjust the corresponding position, trying not to clip the content
-relative to the `$root` element (**not** the viewport!). This calculation happens each time the popover is opened
-(not when the screen is resized).
+relative to the `$root` element. This calculation happens each time the popover is opened or window is resized.
 
-For example: with no `fixedAlignment`, a popover anchor positioned such that the content, when open, would overflow the
-`$root` element's right bounds will open to the left.
+### Flip
+
+The popover uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
+[popper](https://popper.js.org/docs/v2/modifiers/flip/), which has flip modifier (which can change the placement of a
+popper when it's scheduled to overflow a given boundary). By default, boundary is `clippingParents`
+(corresponding popover prop is `flipBoundary`).
 
 <Canvas>
   <Story id="components-popovers--fixed-right" />

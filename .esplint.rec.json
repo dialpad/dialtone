@@ -1,6 +1,6 @@
 {
   "recordVersion": 1,
-  "configHash": "bc9f0e28a9c7a5e937370e9f2f5ea2a8a86295b3",
+  "configHash": "8dbf85332497122d8a139286ca9dcf3ccd3d9d58",
   "files": {
     "components/banner/banner.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3
@@ -26,14 +26,19 @@
     "components/notice/notice_action.vue": {
       "vue/no-deprecated-destroyed-lifecycle": 1
     },
-    "components/popover/popover_default.story.vue": {
-      "vue/no-deprecated-v-bind-sync": 1
+    "components/popover/popover.vue": {
+      "vue/no-deprecated-destroyed-lifecycle": 1,
+      "max-lines": 1,
+      "complexity": 1
     },
     "components/radio/radio.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },
     "components/toast/toast.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3
+    },
+    "components/tooltip/tooltip.vue": {
+      "vue/no-deprecated-destroyed-lifecycle": 1
     }
   }
 }
