@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/dialpad/dialtone-vue/compare/v1.5.0...v1.6.0) (2021-11-25)
+
+
+### Bug Fixes
+
+* add our alpha sort to list-item. Change slot types to VNode for consistiency ([#202](https://github.com/dialpad/dialtone-vue/issues/202)) ([686b2b9](https://github.com/dialpad/dialtone-vue/commit/686b2b919f8882588f8374729538242071e0abcf))
+
+
+### Features
+
+* components tooltip and popover. absolute positioning (dt 40) ([#194](https://github.com/dialpad/dialtone-vue/issues/194)) ([dd9e44d](https://github.com/dialpad/dialtone-vue/commit/dd9e44dbc1ea0a5439652e8b0597e5d3e254f68a)), closes [#131](https://github.com/dialpad/dialtone-vue/issues/131) [#177](https://github.com/dialpad/dialtone-vue/issues/177) [#178](https://github.com/dialpad/dialtone-vue/issues/178) [#135](https://github.com/dialpad/dialtone-vue/issues/135)
+
 # [1.5.0](https://github.com/dialpad/dialtone-vue/compare/v1.4.0...v1.5.0) (2021-11-19)
 
 
