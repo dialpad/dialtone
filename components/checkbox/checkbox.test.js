@@ -11,7 +11,7 @@ import {
 } from '../../tests/shared_examples/extendability';
 import {
   itBehavesLikeChecked,
-  itBehavesLikeHasValidationClasses,
+  itBehavesLikeHasValidationClasses, itBehavesLikeIndeterminate,
   itBehavesLikeNotChecked,
 } from '../../tests/shared_examples/input';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
@@ -281,6 +281,21 @@ describe('Checkbox Tests', function () {
             itBehavesLikeDoesNotEmitEvents(wrapper);
           });
         });
+      });
+    });
+
+    describe('When indeterminate', function () {
+      before(function () {
+        propsData = { ...basePropsData, indeterminate: true };
+        _setWrappers();
+      });
+      it('shows indeterminate visual state', function () { itBehavesLikeIndeterminate(input); });
+
+      describe('When clicking on an indeterminate checkbox', function () {
+        beforeEach(async function () {
+          input.trigger('click');
+        });
+        it('should uncheck', function () { itBehavesLikeNotChecked(input); });
       });
     });
 

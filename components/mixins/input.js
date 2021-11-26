@@ -161,7 +161,7 @@ export const CheckableMixin = {
       default: false,
     },
     /**
-     * Indeterminate State
+     * Indeterminate State, toggling indeterminate checkbox will uncheck
      */
     indeterminate: {
       type: Boolean,
@@ -179,6 +179,7 @@ export const CheckableMixin = {
   data () {
     return {
       internalChecked: this.checked,
+      internalIndeterminate: this.indeterminate,
     };
   },
 
@@ -186,6 +187,10 @@ export const CheckableMixin = {
     checked (newChecked) {
       // update internal checked when the prop changes
       this.internalChecked = newChecked;
+    },
+
+    indeterminate (newValue) {
+      this.internalIndeterminate = newValue;
     },
   },
 };

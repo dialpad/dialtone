@@ -20,8 +20,13 @@ export function itBehavesLikeNotChecked (input) {
   assert.strictEqual(input.element.checked, false, 'should not be checked');
 }
 
+export function itBehavesLikeIndeterminate (input) {
+  assert.strictEqual(input.element.indeterminate, true, 'visually should be indeterminate');
+}
+
 export default {
   itBehavesLikeHasValidationClasses,
   itBehavesLikeChecked,
   itBehavesLikeNotChecked,
+  itBehavesLikeIndeterminate,
 };
