@@ -118,7 +118,7 @@ const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argType
 export const Default = Template.bind({});
 Default.args = {};
 Default.decorators = [() => ({
-  template: '<div class="d-h102"><story /></div>',
+  template: `<div class="d-h100vh d-d-flex d-ai-center d-jc-center"><story /></div>`,
 })];
 Default.parameters = {
   docs: {
