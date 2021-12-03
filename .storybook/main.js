@@ -23,28 +23,6 @@ const lessLoaders = [
 ];
 
 module.exports = {
-  resolve: {
-    alias: {
-      vue: '@vue/compat'
-    }
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          compilerOptions: {
-            compatConfig: {
-              MODE: 2
-            }
-          }
-        }
-      }
-    ]
-  },
-
   webpackFinal: async (config) => {
     config.plugins.push(generate({
       file: 'version.txt',
