@@ -31,11 +31,44 @@ The **bottom** slot can be used to display content below the subtitle slot.
   <Story id="components-list-item--default" />
 </Canvas>
 
-### Usage
+## Variants
+
+### Custom List Item
+
+When `type` is set to "custom" the list item will not render any styles or slots. This type can be
+used when the list item has to support content that does not work with the default structure.
+
+<Canvas>
+  <Story id="components-list-item--custom" />
+</Canvas>
+
+## Slots, Props and Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Accessibility
+
+The list item should be provided an approriate role as the prop `role` or the role defaults to "listitem"
+when not provided.
+
+When `navigation-type` is set to "tab" the list item is set hover and focus styles and a tabindex so
+that it can receive focus. This should be used for lists that contain mixed content, for example a list
+in which some items are clickable/focusable and some are static.
+
+When `navigation-type` is set to "arrow-keys" the props `setHighlight` and `isHighlighted` should
+also be provided. The list item is not focusable, but it can be highlighted using keyboard
+navigation. When the list item receives a highlight either by hovering over it with a
+mouse or via keyboard navigation the ARIA attribute `aria-selected` is set to "true".
+
+## Usage
+
+### Import
 
 ```js
 import { DtListItem } from '@dialpad/dialtone-vue';
 ```
+
+### Base Style
 
 ```html
 <ol>
@@ -64,43 +97,10 @@ import { DtListItem } from '@dialpad/dialtone-vue';
 </ol>
 ```
 
-## Accessibility
-
-The list item should be provided an approriate role as the prop `role` or the role defaults to "listitem"
-when not provided.
-
-When `navigation-type` is set to "tab" the list item is set hover and focus styles and a tabindex so
-that it can receive focus. This should be used for lists that contain mixed content, for example a list
-in which some items are clickable/focusable and some are static.
-
-When `navigation-type` is set to "arrow-keys" the props `setHighlight` and `isHighlighted` should
-also be provided. The list item is not focusable, but it can be highlighted using keyboard
-navigation. When the list item receives a highlight either by hovering over it with a
-mouse or via keyboard navigation the ARIA attribute `aria-selected` is set to "true".
-
-## Variants
-
 ### Custom List Item
-
-When `type` is set to "custom" the list item will not render any styles or slots. This type can be
-used when the list item has to support content that does not work with the default structure.
-
-<Canvas>
-  <Story id="components-list-item--custom" />
-</Canvas>
-
-### Usage
-
-```js
-import { DtListItem } from '@dialpad/dialtone-vue';
-```
 
 ```html
 <dt-list-item type="custom">
   Custom List Item Content
 </dt-list-item>
 ```
-
-## Slots, Props and Events
-
-<ArgsTable story={PRIMARY_STORY} />
