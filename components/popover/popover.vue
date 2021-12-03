@@ -557,6 +557,10 @@ export default {
               fallbackPlacements: this.fallbackPlacements,
             },
           },
+          {
+            name: 'hide',
+            enabled: this.appendTo !== 'parent',
+          },
           getArrowDetected(({ state }) => {
             this.verticalAlignment = state.placement.includes('top') ? 'top' : 'bottom';
             if (state.placement === 'top' || state.placement === 'bottom') {
