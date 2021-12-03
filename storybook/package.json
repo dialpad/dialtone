@@ -23,11 +23,10 @@
     "babel-loader": "^8.1.0",
     "babel-preset-vue": "^2.0.2",
     "generate-file-webpack-plugin": "^1.0.1",
-    "vue-loader": "^15.9.3"
+    "vue-loader": "^16.8.3"
   },
   "dependencies": {
-    "vue": "^3.2.22",
-    "@vue/compat": "^3.2.22"
+    "vue": "^3.2.22"
   },
   "engineStrict": true,
   "engines": {
