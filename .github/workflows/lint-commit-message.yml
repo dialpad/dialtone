@@ -21,4 +21,9 @@ jobs:
         run: npm ci
 
       - name: Lint commit message
-        run: echo "${{ github.event.head_commit.message }}" | npx commitlint --verbose
+        run: |
+          echo "This commit should adhere to the commit message convention."
+          echo "correct format: <type>(<scope>): <subject>"
+          echo "example: feat: add modal component"
+          echo "Please amend your commit message (git commit --amend) if commitlint reports an error and push using: git push --force-with-lease"
+          echo "${{ github.event.head_commit.message }}" | npx commitlint --verbose
