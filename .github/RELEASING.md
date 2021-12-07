@@ -11,6 +11,11 @@
 | Commit with type fix | Patch release      |
 | Commit with type perf | Patch release      |
 
+Since Dialtone Vue is a private repository, and semantic-release will push the release commit to the remote server when releasing,
+it's required to set up SSH authentication in Github to authenticate to the remote server. See the [Github docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh) to set up SSH credentials.
+If you have correctly set up the SSH credentials, you can verify that semantic-release can push to the remote server by running on the `staging` branch: `npm run release -- --dry-run`.
+With the `--dry-run` flag, you can get a preview of the pending release and if everything is okay, you can see in the output: `[semantic-release] › ✔  Allowed to push to the Git repository`. 
+
 ## Steps
 
 In order to push the `production` branch to trigger a release to [npmjs](https://npmjs.com) and Github Releases, you will need to either be an admin of the Dialtone Vue repository, be a user with the "Maintain" role or have manually been given permission on your user.
