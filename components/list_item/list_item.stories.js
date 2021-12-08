@@ -159,7 +159,7 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemDefaultTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtListItemDefaultTemplate);
 const CustomTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemCustomTemplate);
 
 // Stories

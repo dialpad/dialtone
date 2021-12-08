@@ -109,7 +109,7 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtModalDefaultTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtModalDefaultTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

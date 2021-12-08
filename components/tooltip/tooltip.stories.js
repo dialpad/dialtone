@@ -97,8 +97,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtTooltipDefaultTemplate);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtTooltipVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

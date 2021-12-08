@@ -4,17 +4,18 @@
  * get messy when rendered via a template string. Will pass args and argTypes
  * into the component so it is able to be live edited with storybook controls addon.
  * @param {object} args storybook control args
- * @param {object} argTypes storybook control argument settings
  * @param {component} templateComponent vue component template for rendering to storybook.
  *                                      Note this should not be the component itself,
  *                                      but rather the usage of that component.
  * @returns {component} the template component with props and args added.
  */
-export const createTemplateFromVueFile = (args, argTypes, templateComponent) => {
-  templateComponent.props = Object.keys(argTypes);
-  templateComponent.args = args;
-  return templateComponent;
-};
+export const createTemplateFromVueFile = (args, templateComponent) => ({
+  components: { templateComponent },
+  setup () {
+    return { args };
+  },
+  template: '<template-component v-bind="args"></template-component>',
+});
 
 /**
  * Gets the full list of icon component names from the dialtone package

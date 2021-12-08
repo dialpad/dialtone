@@ -131,8 +131,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioGroupDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioGroupVariantsTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, RadioGroupDefaultTemplate);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, RadioGroupVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

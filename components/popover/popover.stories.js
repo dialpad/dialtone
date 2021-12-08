@@ -100,7 +100,7 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverDefault);
+const Template = (args) => createTemplateFromVueFile(args, PopoverDefault);
 
 export const Default = Template.bind({});
 Default.args = {};

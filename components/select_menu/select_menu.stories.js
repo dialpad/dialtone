@@ -239,9 +239,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtSelectMenuDefaultTemplate,
 );
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(

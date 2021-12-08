@@ -98,7 +98,7 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, NoticeDefault);
+const Template = (args) => createTemplateFromVueFile(args, NoticeDefault);
 
 export const Default = Template.bind({});
 Default.args = {

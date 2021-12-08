@@ -40,7 +40,7 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, BannerDefault);
+const Template = (args) => createTemplateFromVueFile(args, BannerDefault);
 
 export const Default = Template.bind({});
 Default.args = {
