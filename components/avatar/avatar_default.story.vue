@@ -1,18 +1,18 @@
 <template>
   <dt-avatar
-    :id="id"
-    :kind="kind"
-    :size="size"
-    :color="color"
-    :src="src"
-    :alt="alt"
+    :id="$attrs.id"
+    :kind="$attrs.kind"
+    :size="$attrs.size"
+    :color="$attrs.color"
+    :src="$attrs.src"
+    :alt="$attrs.alt"
   >
     <template
       v-if="defaultSlot"
     >
       <component
         :is="defaultSlot"
-        v-if="kind === 'icon'"
+        v-if="$attrs.kind === 'icon'"
       />
       <html-fragment
         v-else
