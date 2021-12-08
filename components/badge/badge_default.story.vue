@@ -1,7 +1,7 @@
 <template>
   <dt-badge
-    :text="text"
-    :color="color"
+    :text="$attrs.text"
+    :color="$attrs.color"
   >
     <template v-if="defaultSlot">
       {{ defaultSlot }}
