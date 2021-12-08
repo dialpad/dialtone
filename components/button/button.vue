@@ -229,6 +229,7 @@ export default {
 
   watch: {
     $props: {
+      deep: true,
       immediate: true,
       handler () {
         if (process.env.NODE_ENV === 'production') return;
