@@ -1,13 +1,13 @@
 <template>
   <dt-notice
-    :kind="kind"
-    :title="title"
-    :title-id="titleId"
-    :content-id="contentId"
-    :important="important"
-    :hide-close="hideClose"
-    :close-button-props="computedCloseButtonProps"
-    @close="onClose($event)"
+    :kind="$attrs.kind"
+    :title="$attrs.title"
+    :title-id="$attrs.titleId"
+    :content-id="$attrs.contentId"
+    :important="$attrs.important"
+    :hide-close="$attrs.hideClose"
+    :close-button-props="$attrs.computedCloseButtonProps"
+    @close="$attrs.onClose($event)"
   >
     <span
       v-if="defaultSlot"
@@ -23,30 +23,30 @@
     </span>
     <template #action>
       <span
-        v-if="action"
-        v-html="action"
+        v-if="$attrs.action"
+        v-html="$attrs.action"
       />
       <dt-button
         v-else
         size="sm"
         importance="outlined"
         :kind="buttonKind"
-        @click="onClick"
+        @click="$attrs.onClick"
       >
         Action
       </dt-button>
     </template>
     <template
-      v-if="icon"
+      v-if="$attrs.icon"
       #icon
     >
-      <component :is="icon" />
+      <component :is="$attrs.icon" />
     </template>
     <template
-      v-if="titleOverride"
+      v-if="$attrs.titleOverride"
       #titleOverride
     >
-      <span v-html="titleOverride" />
+      <span v-html="$attrs.titleOverride" />
     </template>
   </dt-notice>
 </template>

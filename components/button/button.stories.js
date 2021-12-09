@@ -177,6 +177,7 @@ const Template = (args) => createTemplateFromVueFile(args, ButtonDefault);
 
 export const Default = Template.bind({});
 Default.args = {
+  default: 'Button',
 };
 
 const VariantsTemplate = (args) => createTemplateFromVueFile(args, ButtonVariants);

@@ -2,12 +2,6 @@
   "recordVersion": 1,
   "configHash": "bc9f0e28a9c7a5e937370e9f2f5ea2a8a86295b3",
   "files": {
-    "components/banner/banner.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 3
-    },
-    "components/button/button.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 2
-    },
     "components/input/input.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },

@@ -6,15 +6,15 @@
 
     <dt-banner
       v-if="displayBanner"
-      :kind="kind"
-      :title="title"
-      :title-id="titleId"
-      :content-id="contentId"
-      :important="important"
-      :pinned="pinned"
-      :hide-close="hideClose"
+      :kind="$attrs.kind"
+      :title="$attrs.title"
+      :title-id="$attrs.titleId"
+      :content-id="$attrs.contentId"
+      :important="$attrs.important"
+      :pinned="$attrs.pinned"
+      :hide-close="$attrs.hideClose"
       :close-button-props="buttonCloseProps"
-      @close="displayBanner = false; onClose($event)"
+      @close="displayBanner = false; $attrs.onClose($event)"
     >
       <span
         v-if="defaultSlot"
@@ -30,28 +30,28 @@
       </span>
 
       <template
-        v-if="action"
+        v-if="$attrs.action"
         #action
       >
         <dt-button
           :kind="buttonKind"
           importance="outlined"
-          @click="onClick"
+          @click="$attrs.onClick"
         >
-          {{ action }}
+          {{ $attrs.action }}
         </dt-button>
       </template>
       <template
-        v-if="icon"
+        v-if="$attrs.icon"
         #icon
       >
-        <component :is="icon" />
+        <component :is="$attrs.icon" />
       </template>
       <template
-        v-if="titleOverride"
+        v-if="$attrs.titleOverride"
         #titleOverride
       >
-        <span v-html="titleOverride" />
+        <span v-html="$attrs.titleOverride" />
       </template>
     </dt-banner>
   </div>
@@ -69,6 +69,8 @@ export default {
 
   mixins: [icon],
 
+  inheritAttrs: false,
+
   data () {
     return {
       displayBanner: false,
@@ -77,11 +79,11 @@ export default {
 
   computed: {
     shouldInvertButton () {
-      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
     },
 
     isInverted () {
-      return this.important && this.shouldInvertButton;
+      return this.$attrs.important && this.shouldInvertButton;
     },
 
     buttonKind () {
@@ -94,7 +96,7 @@ export default {
 
     buttonCloseProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         kind: this.buttonKind,
         ariaLabel: 'Close',
       };
