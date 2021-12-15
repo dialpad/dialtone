@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/dialpad/dialtone-vue/compare/v1.6.1...v1.7.0) (2021-12-15)
+
+
+### Bug Fixes
+
+* popover component. remove overlay on before destroy ([#214](https://github.com/dialpad/dialtone-vue/issues/214)) ([3f88ad8](https://github.com/dialpad/dialtone-vue/commit/3f88ad8b8c062094073917ae71030120ed6ac096))
+
+
+### Features
+
+* add button group component ([#204](https://github.com/dialpad/dialtone-vue/issues/204)) ([99bbe17](https://github.com/dialpad/dialtone-vue/commit/99bbe1717627234d1dc7b091ec775403808daeed))
+
 ## [1.6.1](https://github.com/dialpad/dialtone-vue/compare/v1.6.0...v1.6.1) (2021-12-03)
 
 
