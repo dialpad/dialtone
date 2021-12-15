@@ -1,7 +1,10 @@
 <template>
-  <component :is="elementType">
+  <component
+    :is="elementType"
+    ref="popover"
+  >
     <dt-lazy-show
-      v-show="modal"
+      v-if="modal"
       ref="overlay"
       :show="modal && isOpeningPopover"
       transition="d-zoom"
@@ -432,8 +435,9 @@ export default {
     if (this.modal) {
       this.anchorEl.classList.add('d-zi-notification');
       zIndex = zIndex > 600 ? zIndex : 700;
+      this.appendOverlay();
     }
-    this.appendOverlay();
+
     // align popover content width when
     if (this.contentWidth === 'anchor') {
       window.addEventListener('resize', this.onResize);
@@ -463,13 +467,21 @@ export default {
 
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize);
+    this.removeOverlay();
     this.tip?.destroy();
+    this.removeReferences();
   },
 
   /******************
    *     METHODS    *
    ******************/
   methods: {
+    removeReferences () {
+      this.anchorEl = null;
+      this.popoverContentEl = null;
+      this.tip = null;
+    },
+
     appendOverlay () {
       const overlay = this.$refs.overlay.$el;
       const { lastChild } = this.overlayAppendTo;
@@ -477,6 +489,12 @@ export default {
         this.overlayAppendTo.insertBefore(overlay, lastChild);
       } else {
         this.overlayAppendTo.append(overlay);
+      }
+    },
+
+    removeOverlay () {
+      if (this.$refs.overlay && this.$refs.overlay.$el) {
+        this.$refs.popover.append(this.$refs.overlay.$el);
       }
     },
 
