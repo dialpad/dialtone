@@ -1,0 +1,113 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtKeyboardShortcut from './keyboard_shortcut.vue';
+
+# Keyboard Shortcut
+
+<Subtitle>
+    This component displays a visual representation of a keyboard shortcut to the user.
+</Subtitle>
+
+## Base Style
+
+Keyboard shortcut outlines a key combination with a border to represent a keyboard shortcut. '+'
+will be rendered as an icon rather than text. Supported symbol tags can be used in the shortcut
+prop, see the [Props, Slots & Events section](#props-slots--events).
+
+<Canvas>
+  <Story id="components-keyboard-shortcut--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-keyboard-shortcut--variants" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+- Commands shown should always be device specific (different systems may require a different shortcut combination).
+- Commonly used in list item, tooltips.
+- Don't use actual “+” key as a shortcut.
+- Avoid using browser or operating system shortcuts, Control+P is print for example.
+
+### Import
+
+```jsx
+import { DtKeyboardShortcut } from '@dialpad/dialtone-vue';
+```
+
+### Inverted Style
+
+```html
+<dt-keyboard-shortcut
+  inverted
+  shortcut="{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}+E+B"
+/>
+```
+
+### Default Shortcut
+
+```html
+<dt-keyboard-shortcut
+  shortcut="Option+{cmd}+{win}+Shift+{arrow-up}"
+/>
+```
+
+### Shortcut size variation
+
+```html
+<dt-keyboard-shortcut
+  class="d-fs16"
+  shortcut="{cmd}+Y"
+/>
+```
+
+### All available shortcut aliases
+
+```html
+<dt-keyboard-shortcut
+  shortcut="{cmd}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
+/>
+```
+
+### Inline with text and screen reader text
+
+```html
+Press
+<dt-keyboard-shortcut
+  screen-reader-text="Ctrl and F5"
+  shortcut="Ctrl + F5"
+/>
+to hard refresh the page.
+```
+
+### Accessibility
+
+Keyboard shortcuts should be visible to sighted users and made available to assistive technology.
+This keyboard shortcut component is purely visual by default, and will not read out to a screen reader.
+
+[aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)
+should be used on the anchor element of the keyboard shortcut to indicate the existence of it to assistive
+technology.
+
+If your keyboard shortcut is [inline with text](#variants), you can set the screenReaderText prop so it is
+read by AT.
+
+Example:
+
+```html
+// This button can be activated by pressing control+shift+v, let's indicate that
+// to the screenreader by using aria-keyshortcuts.
+<button aria-keyshortcuts="control+shift+v">Press Me</button>
+```
+
+Abbreviations / symbols should be read out in full for voiceover / screen readers.
+
+### References
+
+- [Keyboard Symbols](http://xahlee.info/comp/unicode_computing_symbols.html)
+- [aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)

@@ -1,7 +1,11 @@
 <template>
   <div>
-    <dt-button importance="primary">{{'Confirm'}}</dt-button>
-    <dt-button importance="outlined">{{'Cancel'}}</dt-button>
+    <dt-button importance="primary">
+      {{ 'Confirm' }}
+    </dt-button>
+    <dt-button importance="outlined">
+      {{ 'Cancel' }}
+    </dt-button>
   </div>
 </template>
 

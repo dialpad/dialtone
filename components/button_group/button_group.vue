@@ -7,7 +7,7 @@
     role="group"
   >
     <!-- @slot Default slot for button items -->
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

@@ -4,7 +4,8 @@
   >
     <html-fragment
       v-if="defaultSlot"
-      :html="defaultSlot" />
+      :html="defaultSlot"
+    />
     <template v-else>
       <dt-button
         class="d-mr6"
