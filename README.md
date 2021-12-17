@@ -40,4 +40,4 @@ If you would like to contribute to Dialtone Vue the first step is to get the pro
 4. Run local dev server `npm start`
 5. Visit local dev server at http://localhost:9011/
 
-Next read the more detailed contributor documentation in [CONTRIBUTING.md](./CONTRIBUTING.md).
+Next read the more detailed contributor documentation in [CONTRIBUTING.md](.github/CONTRIBUTING.md).

@@ -6,7 +6,7 @@ Before contributing a new component to Dialtone Vue, please check the [Jira boar
 
 ### What Is Dialtone Vue?
 
-Dialtone is a design system by Dialpad comprised of CSS components, Vue components, utility classes, visual assets, documentation. Dialtone-Vue is the Vue component portion of Dialtone and is distributed as a separate package. It is recommended that you are familiar with [Dialtone](https://github.com/dialpad/dialtone/tree/staging) as well as it's [contribution guide](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
+Dialtone is a design system by Dialpad comprised of CSS components, Vue components, utility classes, visual assets, documentation. Dialtone Vue is the Vue component portion of Dialtone and is distributed as a separate package. It is recommended that you are familiar with [Dialtone](https://github.com/dialpad/dialtone/tree/staging) as well as it's [contribution guide](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
 
 Dialtone is a dependency of Dialtone Vue.
 
