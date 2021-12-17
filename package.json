@@ -19,6 +19,7 @@
     "lint-staged:docs": "markdownlint --fix",
     "lint": "run-s lint:code lint:docs",
     "release": "semantic-release --no-ci --extends ./release-local.config.js",
+    "start": "npm run storybook",
     "storybook": "npm run --prefix storybook storybook",
     "storybook:install": "npm install --prefix storybook",
     "storybook:build": "npm run --prefix storybook build"
