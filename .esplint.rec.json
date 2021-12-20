@@ -1,6 +1,6 @@
 {
   "recordVersion": 1,
-  "configHash": "8dbf85332497122d8a139286ca9dcf3ccd3d9d58",
+  "configHash": "24ac6beb718c1dbe558ced7e73ed2e67df60ba06",
   "files": {
     "components/banner/banner.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3
@@ -33,6 +33,9 @@
     },
     "components/radio/radio.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
+    },
+    "components/skeleton/skeleton-paragraph.vue": {
+      "complexity": 1
     },
     "components/toast/toast.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3

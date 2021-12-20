@@ -23,6 +23,7 @@ export * from './components/checkbox_group';
 export * from './components/select_menu';
 export * from './components/toast';
 export * from './components/tooltip';
+export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
 
 // Mixins

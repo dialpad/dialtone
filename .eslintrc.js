@@ -63,6 +63,7 @@ module.exports = {
     'vue/no-template-target-blank': ['error'],
     'vue/no-static-inline-styles': ['error'],
     'vuejs-accessibility/iframe-has-title': 'warn',
+    'vuejs-accessibility/aria-props': 'warn',
 
     'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
