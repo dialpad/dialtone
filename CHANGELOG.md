@@ -1,3 +1,16 @@
+# [1.8.0](https://github.com/dialpad/dialtone-vue/compare/v1.7.0...v1.8.0) (2022-01-04)
+
+
+### Bug Fixes
+
+* popover stories ([#216](https://github.com/dialpad/dialtone-vue/issues/216)) ([8229467](https://github.com/dialpad/dialtone-vue/commit/8229467b25342540163e61f8fc5797beb1e780b2))
+
+
+### Features
+
+* add keyboard shortcut component ([#209](https://github.com/dialpad/dialtone-vue/issues/209)) ([88efc48](https://github.com/dialpad/dialtone-vue/commit/88efc4882812d391bb9200c2c1f7cdb7dc56d5a9))
+* component skeleton ([#203](https://github.com/dialpad/dialtone-vue/issues/203)) ([ce2a4d2](https://github.com/dialpad/dialtone-vue/commit/ce2a4d21dc45924e0eec561299de768ba8ae5222))
+
 # [1.7.0](https://github.com/dialpad/dialtone-vue/compare/v1.6.1...v1.7.0) (2021-12-15)
 
 
