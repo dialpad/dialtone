@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/dialpad/dialtone-vue/compare/v1.8.1...v1.8.2) (2022-01-06)
+
+
+### Bug Fixes
+
+* skeleton-text import ([#221](https://github.com/dialpad/dialtone-vue/issues/221)) ([ff6ca97](https://github.com/dialpad/dialtone-vue/commit/ff6ca978f20a20d8f160fecfde040deacdc735df))
+
 ## [1.8.1](https://github.com/dialpad/dialtone-vue/compare/v1.8.0...v1.8.1) (2022-01-06)
 
 
