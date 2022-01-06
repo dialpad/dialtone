@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { DtSkeletonText } from './index';
+import DtSkeletonText from './skeleton-text';
 
 const validator = number => number !== '' && !Number.isNaN(Number(number));
 export default {
