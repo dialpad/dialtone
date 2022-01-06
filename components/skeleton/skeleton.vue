@@ -122,3 +122,36 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+// The --placeholder-from-color and --placeholder-to-color
+// custom properties can be set on the parent class of the
+// placeholder to control the animation colors.
+.skeleton-placeholder {
+  display: flex;
+  stroke: none;
+  fill: var(--placeholder-from-color, var(--black-075));
+  background: var(--placeholder-from-color, var(--black-075));
+
+  &--animate {
+    animation-name: placeholder-throb;
+    animation-iteration-count: infinite;
+  }
+}
+
+// the animation is used by the skeleton component
+@keyframes placeholder-throb {
+  10% {
+    fill: var(--placeholder-from-color, var(--black-075));
+    background: var(--placeholder-from-color, var(--black-075));
+  }
+  50% {
+    fill: var(--placeholder-to-color, var(--black-025));
+    background: var(--placeholder-to-color, var(--black-025));
+  }
+  90% {
+    fill: var(--placeholder-from-color, var(--black-075));
+    background: var(--placeholder-from-color, var(--black-075));
+  }
+}
+</style>
