@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/dialpad/dialtone-vue/compare/v1.8.0...v1.8.1) (2022-01-06)
+
+
+### Bug Fixes
+
+* bad exports on skeleton ([#220](https://github.com/dialpad/dialtone-vue/issues/220)) ([5b66ae7](https://github.com/dialpad/dialtone-vue/commit/5b66ae75c8034434b02f67b26f4fb9136966032e))
+
 # [1.8.0](https://github.com/dialpad/dialtone-vue/compare/v1.7.0...v1.8.0) (2022-01-04)
 
 
