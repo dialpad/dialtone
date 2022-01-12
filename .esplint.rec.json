@@ -17,6 +17,9 @@
     "components/link/link.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },
+    "components/mixins/dom.js": {
+      "complexity": 2
+    },
     "components/mixins/modal.js": {
       "complexity": 1
     },
