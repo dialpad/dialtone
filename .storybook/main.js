@@ -6,6 +6,10 @@ const generate = require('generate-file-webpack-plugin');
 const cssLoaders = [
   'style-loader',
   { loader: 'css-loader', options: { sourceMap: true }},
+  {
+    loader: "postcss-loader",
+    options: { postcssOptions: { plugins: [["postcss-focus-visible"]] }},
+  }
 ];
 
 const lessLoaders = [
@@ -82,5 +86,6 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/addon-viewport',
     '@storybook/addon-backgrounds',
+    '@storybook/addon-postcss'
   ],
 };

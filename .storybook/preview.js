@@ -5,6 +5,7 @@ import { version } from '../package.json';
 import theme from './theme';
 import Vue from 'vue';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
+import focusVisiblePolyfill from 'focus-visible';
 
 Vue.use(fixDefaultSlot);
 
