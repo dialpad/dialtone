@@ -1,3 +1,16 @@
+# [1.9.0](https://github.com/dialpad/dialtone-vue/compare/v1.8.2...v1.9.0) (2022-01-13)
+
+
+### Bug Fixes
+
+* include tabindex=-1 in focusFirstElement ([#219](https://github.com/dialpad/dialtone-vue/issues/219)) ([2ca4577](https://github.com/dialpad/dialtone-vue/commit/2ca4577fafca59ece95bfa86a7b0e6a880141e39))
+
+
+### Features
+
+* add dropdown component ([#215](https://github.com/dialpad/dialtone-vue/issues/215)) ([d3a3918](https://github.com/dialpad/dialtone-vue/commit/d3a39184303b0ea59d01476c32f22909e693e9ad))
+* create combobox component ([#199](https://github.com/dialpad/dialtone-vue/issues/199)) ([cefdd5a](https://github.com/dialpad/dialtone-vue/commit/cefdd5ac88df07b9b6933f1d9692348f58ac0a50))
+
 ## [1.8.2](https://github.com/dialpad/dialtone-vue/compare/v1.8.1...v1.8.2) (2022-01-06)
 
 
