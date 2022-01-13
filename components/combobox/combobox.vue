@@ -48,6 +48,7 @@ export default {
   mixins: [
     KeyboardNavigation({
       indexKey: 'highlightIndex',
+      listElementKey: 'listRef',
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
@@ -117,6 +118,10 @@ export default {
         class: 'd-ps-relative',
         'aria-label': this.listAriaLabel,
       };
+    },
+
+    listRef () {
+      return this.$refs.listWrapper;
     },
 
     /*

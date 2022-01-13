@@ -17,10 +17,10 @@ export default ({
   listItemRole = 'option',
   // Key of the data prop that will be added to the component.
   indexKey = 'highlightIndex',
+  // Key of the computed prop that references the list element.
+  listElementKey = 'listRef',
   // Optional, Key of the computed prop that references the currently active item element.
   activeItemKey = '',
-  // Optional, Key of the computed prop that references the list element.
-  listElementKey = '',
   // Optional, name of the method that toggles the list visibility. Used for
   // opening the list when up or down is pressed.
   openMethod = null,
@@ -32,6 +32,8 @@ export default ({
   endOfListMethod = null,
   // Scroll the active element into view when highlighted by a keyboard event.
   scrollToOnHighlight = true,
+  // Focus the active element on keyboard navigation
+  focusOnKeyboardNavigation = false,
 } = {}) => ({
   mixins: [Dom],
 
@@ -39,14 +41,31 @@ export default ({
     return {
       [indexKey]: 0,
       scrollToOnHighlight: scrollToOnHighlight,
+      focusOnKeyboardNavigation: focusOnKeyboardNavigation,
     };
   },
 
   methods: {
+    // Returns the list element
+    // this[listElement] can be a Vue component, in which case we need to target
+    // the $el property, or it can simply be an html element.
+    _getListElement () {
+      return this[listElementKey]?.$el || this[listElementKey];
+    },
+
     // Gets the length of all the items in the list, uses the listItemRole param to determine
     // whether an element is a list item.
     _itemsLength () {
-      return this.$el.querySelectorAll(`[role="${listItemRole}"]`).length;
+      const listElement = this._getListElement();
+
+      if (!listElement) {
+        console.error(`listElementKey is required or the referenced element doesn't exist. Received ',
+          listElement: `, listElement);
+
+        return 0;
+      }
+
+      return listElement.querySelectorAll(`[role="${listItemRole}"]`).length;
     },
 
     onUpKey () {
@@ -59,6 +78,7 @@ export default ({
         this[beginningOfListMethod]();
       }
       this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
     onDownKey () {
@@ -71,16 +91,19 @@ export default ({
         this[endOfListMethod]();
       }
       this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
     onHomeKey () {
       this.jumpToBeginning();
       this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
     onEndKey () {
       this.jumpToEnd();
       this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
     jumpToBeginning () {
@@ -105,11 +128,20 @@ export default ({
       }
       const activeItemEl = this[activeItemKey];
       if (activeItemEl) {
-        // this[listElement] can be a Vue component, in which case we need to target
-        // the $el property, or it can simply be an html element. When it's not passed
+        // When listElementKey is not passed,
         // scrollElementIntoViewIfNeeded will default to the immediate wrapper of the item.
-        const listElement = this[listElementKey]?.$el || this[listElementKey];
+        const listElement = this._getListElement();
         this.scrollElementIntoViewIfNeeded(activeItemEl, null, null, listElement);
+      }
+    },
+
+    focusActiveItemIfNeeded () {
+      if (!this.focusOnKeyboardNavigation) {
+        return;
+      }
+      const activeItemEl = this[activeItemKey];
+      if (activeItemEl) {
+        activeItemEl.focus();
       }
     },
   },

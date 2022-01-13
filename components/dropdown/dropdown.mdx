@@ -1,0 +1,110 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+# Dropdown
+
+<Subtitle>
+  A Dropdown presents a list of options or actions.
+</Subtitle>
+
+## Base Style
+
+The dropdown component provides accessibility controls when using with List item component.
+
+The dropdown has 2 major pieces that are provided as required named slots: the anchor and the list.
+
+The **anchor** slot contains the element that controls the dropdown's visibility.
+
+The **list** slot contains a list of items to show as dropdown menu items.
+
+<Canvas>
+  <Story id="components-dropdown--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-dropdown--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Accessibility
+
+The dropdown menu has a role of "menu" and the list items have a role "menuitem".
+
+See [W3C guidelines](https://www.w3.org/TR/wai-aria-practices/#menubutton) for more information.
+
+### List Item
+
+The list item should support keyboard navigation. The dropdown provides a `getItemProps` method
+that should be passed the index of the item and binded to the items. A `activeItemIndex` prop is provided
+that can be used to determine which item should be highlighted. Similarly a `setHighlightIndex` method is provided
+and it expects the index to be passed. It can be used to update the currently highlighted item. It is recommended
+to use `DtListItem` component as it supports all the necessary accessibility props and interactions.
+
+### Focus & Keyboard
+
+A dropdown menu has well defined standard
+[keyboard interactions](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-links.html#kbd_label)
+that it should support.
+The focus will be set to the the active item on keyboard navigation. `UP` and `DOWN` arrows move the highlighted
+selection between the list items. `HOME` and `END` keys will jump straight to the first or the last item.
+Once the beginning or the end of the list is reached the selection will move to the opposite end of the list by default.
+If you want custom behavior you can pass `onBeginningOfList` and `onEndOfList` methods as props.
+
+Pressing `ESC` key while the input has focus will emit an **escape** event and will close the dropdown. `ENTER` key will
+emit a **select** event with the index of the currently highlighted list item. When the highlight
+selection changes, a **highlight** event is emitted with the index of the currently highlighted item.
+`SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
+
+## Usage
+
+### Import
+
+```jsx
+import { DtDropdown } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-dropdown
+  :open="isOpen"
+  @highlight="onHighlight"
+  @select="onSelect"
+  @escape="onEscape"
+  @update:open="updateOpen"
+>
+  <template #anchor="{ attrs }">
+    <dt-link
+      v-bind="attrs"
+      class="d-link"
+      href="#"
+      @click.prevent="isOpen = !isOpen"
+      @keydown.space="isOpen = !isOpen"
+    >
+      Click to open
+    </dt-link>
+  </template>
+  <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+    <ul
+      v-bind="listProps"
+    >
+      <dt-list-item
+        v-for="(item, i) in items"
+        v-bind="getItemProps(i)"
+        :key="item.id"
+        :is-highlighted="activeItemIndex === i"
+        :set-highlight="() => setHighlightIndex(i)"
+        :navigation-type="navigationType"
+        @click="onSelect(i)"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </ul>
+  </template>
+</dt-dropdown>
+```
+
+Note that the `anchor` slot that manages the list's visibility is using a similar pattern as in the
+[Popover component](?path=/docs/components-popovers--default#basic-usage).
