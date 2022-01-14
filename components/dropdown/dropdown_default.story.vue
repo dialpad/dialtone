@@ -5,17 +5,17 @@
     :fixed-alignment="fixedAlignment"
     :content-width="contentWidth"
     :padding="padding"
+    :navigation-type="navigationType"
     @highlight="onHighlight"
     @select="onDropdownSelect"
     @escape="onDropdownEscape"
-    :navigation-type="navigationType"
     @update:open="updateOpen"
   >
     <template #anchor="{ attrs }">
       <div
         v-if="anchor"
-        v-html="anchor">
-      </div>
+        v-html="anchor"
+      />
       <dt-button
         v-else
         v-bind="attrs"
@@ -28,7 +28,7 @@
       <div
         v-if="list"
         v-html="list"
-      ></div>
+      />
       <ul
         v-else
         v-bind="listProps"

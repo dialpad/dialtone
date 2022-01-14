@@ -2,6 +2,7 @@
   <component
     :is="elementType"
     ref="popover"
+    data-qa="dt-popover-container"
     v-on="$listeners"
   >
     <dt-lazy-show
@@ -10,13 +11,13 @@
       :show="modal && isOpeningPopover"
       transition="d-zoom"
       class="
-        d-popover-overlay
         d-ps-fixed
         d-all0
+        d-zi-modal
         d-fl-center
         d-fd-column
+        d-popover-overlay
         d-vi-visible
-        d-zi-modal
         d-o100
         d-bgc-black-900
       "
@@ -25,6 +26,7 @@
     <div
       :id="!ariaLabelledby && labelledBy"
       ref="anchor"
+      data-qa="dt-popover-anchor"
     >
       <!-- @slot Anchor element that activates the popover. -->
       <slot
@@ -40,41 +42,90 @@
       :id="id"
       ref="content"
       :role="role"
-      v-on="$listeners"
       data-qa="dt-popover"
       :aria-hidden="`${!showPopover}`"
       :aria-labelledby="labelledBy"
       :aria-label="ariaLabel"
-      :aria-modal="isDialog"
+      :aria-modal="modal"
       :transition="transition"
       :show="showPopover"
       :class="[
-        'dt-popover-box',
         'd-bgc-white',
-        'd-bc-black-075',
-        'd-bs-md',
-        'd-wmx-unset',
-        'd-bar4',
-        POPOVER_PADDING_CLASSES[padding],
+        'd-bs-card',
+        'd-bar8',
+        'd-bc-black-100',
+        'dt-popover-box',
         `dt-popover__content--align-${horizontalAlignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
-        'd-m0',
-        contentClass,
+        {
+          'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeader,
+          'd-of-auto': Boolean(maxHeight),
+          'd-wmx-unset': !Boolean(maxWidth),
+        },
       ]"
+      :style="{
+        'max-height': maxHeight,
+        'max-width': maxWidth,
+      }"
       tabindex="-1"
       appear
+      v-on="$listeners"
       @keydown="onKeydown"
       @after-leave="onLeave"
       @enter="isOpeningPopover = true"
       @leave="isOpeningPopover = false"
       @after-enter="onOpen"
     >
-      <!-- @slot content that is displayed in the popover when it is open. -->
-      <slot name="content" />
       <div
         v-if="hasCaret"
-        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
+        class="
+          d-ps-absolute
+          dt-popover__caret
+          d-mtn2
+          d-bt
+          d-bl
+          d-w4
+          d-h4
+          d-bgc-white
+          d-bc-transparent
+        "
       />
+      <popover-header
+        v-if="isHeaderVisible"
+        ref="popover__header"
+        :header-class="headerClass"
+        :title="title"
+        :show-close-button="showCloseButton"
+        :close-button-props="closeButtonProps"
+        :has-box-shadow="hasBoxShadow"
+        @close="closePopover"
+      >
+        <template #title>
+          <!-- @slot Slot for popover header title, defaults to title prop -->
+          <slot name="title" />
+        </template>
+        <template #headerActions>
+          <!-- @slot Additional actions near close button. Should be used only for secondary and tertiary buttons -->
+          <slot name="headerActions" />
+        </template>
+      </popover-header>
+      <!-- @slot content that is displayed in the popover when it is open. -->
+      <div
+        ref="popover__content"
+        data-qa="dt-popover-content"
+        :class="[
+          'dt-popover__content',
+          POPOVER_PADDING_CLASSES[padding],
+          {
+            'd-of-auto': fixedHeader,
+          },
+          contentClass,
+        ]"
+        @scroll="onScrollContent"
+      >
+        <!-- @slot Content element to display inside the popover. -->
+        <slot name="content" />
+      </div>
     </dt-lazy-show>
   </component>
 </template>
@@ -93,6 +144,7 @@ import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 import ModalMixin from '../mixins/modal.js';
+import PopoverHeader from './popover_header';
 
 export default {
   name: 'DtPopover',
@@ -102,6 +154,7 @@ export default {
    ********************/
   components: {
     DtLazyShow,
+    PopoverHeader,
   },
 
   mixins: [ModalMixin],
@@ -158,6 +211,15 @@ export default {
     },
 
     /**
+     * A set of props to be passed into the popover's header close button.
+     * Requires an 'ariaLabel' property, when the header popover is visible
+     */
+    closeButtonProps: {
+      type: Object,
+      default: () => ({}),
+    },
+
+    /**
      * Whether or not the popover content is shown. Supports .sync modifier.
      */
     open: {
@@ -210,13 +272,13 @@ export default {
      * Additional class name for the content wrapper element.
      */
     contentClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 
     /**
-     * Width configuration for the popover content. 'anchor' is one possible string value.
-     * If passed, the popover content will be set same width with anchor element onShow popover event
+     * Width configuration for the popover content. When its value is 'anchor',
+     * the popover content will be set the same width with anchor element onShow popover event
      */
     contentWidth: {
       type: String,
@@ -233,6 +295,9 @@ export default {
       default: true,
     },
 
+    /**
+     * Determines should the anchor be focused after closing the popover
+     */
     focusAnchorOnClose: {
       type: Boolean,
       default: true,
@@ -295,7 +360,7 @@ export default {
     /**
      * Determines the size of the invisible border around the
      * tippy that will prevent it from hiding if the cursor left it.
-     * */
+     */
     interactiveBorder: {
       type: Number,
       default: 2,
@@ -304,7 +369,7 @@ export default {
     /**
      * Determines the events that cause the tippy to show.
      * Multiple event names are separated by spaces.
-     * **/
+     */
     trigger: {
       type: String,
       default: 'manual',
@@ -314,7 +379,7 @@ export default {
      * Determines if the tippy hides upon clicking the
      * reference or outside of the tippy.
      * The behavior can depend upon the trigger events used.
-     * */
+     */
     hideOnClick: {
       type: [Boolean, String],
       default: true,
@@ -323,20 +388,81 @@ export default {
       },
     },
 
+    /**
+     * Determines modal state, when the popover's overlay is rendered
+     */
     modal: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Determines title for popover header.
+     * If provided prop is not null, corresponding holder div will be rendered
+     */
+    title: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Determines the popover's z-index
+     */
     zIndex: {
       type: [Number, String],
       default: 300,
       validator: zIndex => !!Number(zIndex),
     },
 
+    /**
+     * Determines html element container for popover's overlay,
+     * which will be rendered when 'modal' property is 'true'.
+     */
     overlayAppendTo: {
       type: HTMLElement,
       default: () => document.body,
+    },
+
+    /**
+     * Determines maximum height for the popover before overflow.
+     * Possible units rem|px|em
+     */
+    maxHeight: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|%|em
+     */
+    maxWidth: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Determines fixed / sticky styles for popover header
+     */
+    fixedHeader: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Determines visibility for close button
+     */
+    showCloseButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    headerClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
@@ -351,12 +477,18 @@ export default {
       showPopover: this.open,
       isPreventHidePopover: false,
       closedByClickOutside: false,
+      focusCloseButton: false,
       anchorEl: null,
       popoverContentEl: null,
+      hasScrolled: false,
     };
   },
 
   computed: {
+    hasBoxShadow () {
+      return this.hasScrolled && this.fixedHeader;
+    },
+
     fallbackPlacements () {
       const verticalVariants = POPOVER_VERTICAL_ALIGNMENT.filter(alignment => alignment);
       const horizontalVariants = POPOVER_HORIZONTAL_ALIGNMENT.filter(alignment => alignment);
@@ -396,6 +528,18 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
+    },
+
+    isHeaderVisible () {
+      return this.isTitleVisible || this.areHeaderButtonsVisible;
+    },
+
+    isTitleVisible () {
+      return this.$slots.title || this.title !== null;
+    },
+
+    areHeaderButtonsVisible () {
+      return this.$slots.headerActions;
     },
   },
 
@@ -482,6 +626,10 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    onScrollContent ({ target }) {
+      this.hasScrolled = target.scrollTop > 0;
+    },
+
     removeReferences () {
       this.anchorEl = null;
       this.popoverContentEl = null;
@@ -542,7 +690,7 @@ export default {
 
     onOpen () {
       this.$emit('update:open', true);
-      this.focusFirstElementIfNeeded();
+      this.focusFirstElementIfNeeded(this.$refs.popover__content);
     },
 
     onHide () {
@@ -571,7 +719,7 @@ export default {
     },
 
     onKeydown (e) {
-      if (this.isDialog && e.key === 'Tab') {
+      if (e.key === 'Tab') {
         this.focusTrappedTabPress(e, this.popoverContentEl);
       }
     },
@@ -624,9 +772,14 @@ export default {
       this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
     },
 
-    focusFirstElementIfNeeded (e) {
+    focusFirstElementIfNeeded (domEl) {
       if (this.isDialog || this.isMenu) {
-        this.focusFirstElement(e);
+        const focusableElements = this._getFocusableElements(domEl);
+        if (focusableElements.length !== 0) {
+          this.focusFirstElement(domEl);
+        } else if (this.showCloseButton) {
+          this.$refs.popover__header?.focusCloseButton();
+        }
       }
     },
   },
@@ -643,6 +796,12 @@ export default {
     }
   }
 
+  &--align-left {
+    .dt-popover__caret {
+      left: @su24;
+    }
+  }
+
   &--align-center {
     .dt-popover__caret {
       left: 50%;
@@ -655,7 +814,7 @@ export default {
     margin-bottom: @su4;
 
     .dt-popover__caret {
-      bottom: -@su4;
+      bottom: 0;
       transform: rotate(225deg);
     }
   }
@@ -691,6 +850,10 @@ export default {
   *:before,
   *:after {
     box-sizing: border-box;
+  }
+
+  &__grid {
+    grid-template-rows: auto 1fr;
   }
 }
 </style>

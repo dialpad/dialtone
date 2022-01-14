@@ -1,17 +1,17 @@
 <template>
   <div class="d-d-flex">
     <dt-dropdown
-      class="d-mr8"
       v-for="(variant, i) in variants.fixedAlignment"
       :key="i"
+      class="d-mr8"
       :open="isOpen[variant]"
       :fixed-alignment="variant"
       :content-width="contentWidth"
       :padding="padding"
+      :navigation-type="navigationType"
       @highlight="onHighlight"
       @select="onSelect"
       @escape="onDropdownEscape($event, variant)"
-      :navigation-type="navigationType"
       @update:open="updateOpen($event, variant)"
     >
       <template #anchor>
@@ -33,8 +33,8 @@
             :is-highlighted="activeItemIndex === i"
             :set-highlight="() => setHighlightIndex(i)"
             :navigation-type="navigationType"
-            @click="onDropdownSelect($event, variant, i)"
             :focusable="true"
+            @click="onDropdownSelect($event, variant, i)"
           >
             {{ item.name }}
           </dt-list-item>
@@ -61,6 +61,7 @@ export default {
         center: false,
         right: false,
       },
+
       variants: {
         fixedAlignment: ['left', 'center', 'right'],
       },

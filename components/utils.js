@@ -16,6 +16,8 @@ const FOCUSABLE_SELECTOR_NOT_HIDDEN_DISABLED = `${FOCUSABLE_SELECTOR_NOT_HIDDEN}
 // selector to find focusable elements
 const FOCUSABLE_SELECTOR = `a,frame,iframe,${FOCUSABLE_SELECTOR_NOT_HIDDEN_DISABLED},*[tabindex]`;
 
+const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout;
+
 export function getUniqueString (prefix = DEFAULT_PREFIX) {
   return `${prefix}${UNIQUE_ID_COUNTER++}`;
 }
@@ -98,8 +100,6 @@ export const htmlFragment = {
     }).$mount()._vnode.children;
   },
 };
-
-const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout;
 
 export const flushPromises = () => {
   return new Promise((resolve) => {

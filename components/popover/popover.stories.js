@@ -7,6 +7,7 @@ import {
   POPOVER_CONTENT_WIDTHS,
 } from './';
 import PopoverDefault from './popover_default.story.vue';
+import PopoverVariants from './popover_variants.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
@@ -22,6 +23,28 @@ const argTypesData = {
     },
   },
   content: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  titleSlot: {
+    name: 'title',
+    description: 'Slot for popover header title, defaults to title prop',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
+  headerActions: {
     control: 'text',
     table: {
       type: {
@@ -86,6 +109,22 @@ const argTypesData = {
       },
     },
   },
+  title: {
+    description: `Determines title for popover header. If provided prop is not null,
+     corresponding holder div will be rendered`,
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
 
   // Events
   onClose: {
@@ -132,6 +171,7 @@ export default {
 };
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverDefault);
+const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverVariants);
 
 export const Default = Template.bind({});
 Default.args = {};
@@ -160,56 +200,4 @@ Default.parameters = {
   },
 };
 
-export const FixedRight = Template.bind({});
-FixedRight.args = { ...Default.args, fixedAlignment: 'right' };
-FixedRight.decorators = [() => ({
-  template: '<div class="d-h102 d-ai-center d-ta-right"><story /></div>',
-})];
-FixedRight.parameters = {
-  docs: {
-    source: {
-      code: `
-<dt-popover fixedAlignment="right">
-  <template #anchor="{ attrs }"></template>
-  <template #content></template>
-</dt-popover>
-    `,
-    },
-  },
-};
-
-export const NoPadding = Template.bind({});
-NoPadding.args = { ...Default.args, padding: 'none', open: true };
-NoPadding.decorators = [() => ({
-  template: '<div class="d-d-flex d-jc-center d-ai-center d-h102"><story /></div>',
-})];
-NoPadding.parameters = {
-  docs: {
-    source: {
-      code: `
-<dt-popover padding="none">
-  <template #anchor="{ attrs }"></template>
-  <template #content></template>
-</dt-popover>
-    `,
-    },
-  },
-};
-
-export const overlayModal = Template.bind({});
-overlayModal.args = { ...Default.args, open: true, modal: true };
-overlayModal.decorators = [() => ({
-  template: '<div class="d-d-flex d-jc-center d-ai-center d-h102"><story /></div>',
-})];
-overlayModal.parameters = {
-  docs: {
-    source: {
-      code: `
-<dt-popover padding="none">
-  <template #anchor="{ attrs }"></template>
-  <template #content></template>
-</dt-popover>
-    `,
-    },
-  },
-};
+export const Variants = TemplateVariants.bind({});

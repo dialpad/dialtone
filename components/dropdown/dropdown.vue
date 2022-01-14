@@ -1,12 +1,12 @@
 <template>
   <dt-popover
+    ref="popover"
     :content-width="contentWidth"
     :open="open"
     :has-caret="false"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
     :padding="padding"
-    ref="popover"
     role="menu"
     v-on="$listeners"
     @update:open="setInitialHighlightIndex"
@@ -22,7 +22,7 @@
       <slot
         name="anchor"
         v-bind="props"
-      ></slot>
+      />
     </template>
     <template #content>
       <div
