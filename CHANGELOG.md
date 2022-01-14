@@ -1,3 +1,16 @@
+# [1.10.0](https://github.com/dialpad/dialtone-vue/compare/v1.9.0...v1.10.0) (2022-01-14)
+
+
+### Bug Fixes
+
+* component skeleton documentation fixes ([#218](https://github.com/dialpad/dialtone-vue/issues/218)) ([58bdcf9](https://github.com/dialpad/dialtone-vue/commit/58bdcf9a98466c7e8cddd8986998d5902b8b3d48))
+
+
+### Features
+
+* add focus-visible polyfill ([#222](https://github.com/dialpad/dialtone-vue/issues/222)) ([ce089a8](https://github.com/dialpad/dialtone-vue/commit/ce089a8dd8f5b1465d533b60fa9d82c1523990b4))
+* add header to component popover, update a11y documentation ([#217](https://github.com/dialpad/dialtone-vue/issues/217)) ([cdfb459](https://github.com/dialpad/dialtone-vue/commit/cdfb459541597ae5d56224f897186159b9fd18cc))
+
 # [1.9.0](https://github.com/dialpad/dialtone-vue/compare/v1.8.2...v1.9.0) (2022-01-13)
 
 
