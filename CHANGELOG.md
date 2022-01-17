@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/dialpad/dialtone-vue/compare/v1.10.0...v1.10.1) (2022-01-17)
+
+
+### Bug Fixes
+
+* broken styles in list item ([#225](https://github.com/dialpad/dialtone-vue/issues/225)) ([be69a85](https://github.com/dialpad/dialtone-vue/commit/be69a85627a2e7e9c37af46a1e30f517e096bfc5))
+
 # [1.10.0](https://github.com/dialpad/dialtone-vue/compare/v1.9.0...v1.10.0) (2022-01-14)
 
 
