@@ -183,17 +183,15 @@ export default {
 </script>
 
 <style lang="less">
-  .dt-list-item--focusable {
-      &:hover,
-      &:focus,
-      &:focus-within,
-      &.dt-list-item--highlighted {
-          background-color: hsla(var(--black-400-h), var(--black-400-s), var(--black-400-l), 0.15);
-          cursor: pointer;
-      }
+.dt-list-item--focusable:hover,
+.dt-list-item--focusable:focus,
+.dt-list-item--focusable:focus-within,
+.dt-list-item--highlighted {
+  background-color: hsla(var(--black-400-h), var(--black-400-s), var(--black-400-l), 0.15);
+  cursor: pointer;
+}
 
-      &:focus-visible {
-        outline: var(--primary-color) solid 2px;
-      }
-  }
+.dt-list-item--focusable:focus-visible {
+  outline-color: var(--primary-color);
+}
 </style>
