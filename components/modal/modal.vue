@@ -21,7 +21,7 @@
     >
       <div
         v-show="show"
-        class="d-modal__dialog"
+        :class="['d-modal__dialog', dialogClass]"
         role="dialog"
         aria-modal="true"
         :aria-describedby="describedById"
@@ -190,6 +190,16 @@ export default {
      * same api as Vue's built-in handling of the class attribute.
      */
     modalClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the dialog element within the modal.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    dialogClass: {
       type: [String, Object, Array],
       default: '',
     },
