@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/dialpad/dialtone-vue/compare/v1.10.1...v1.11.0) (2022-01-20)
+
+
+### Features
+
+* add dialogClass prop to modal ([4500ade](https://github.com/dialpad/dialtone-vue/commit/4500adea34df6a5923b96a573284212761505ab5))
+
 ## [1.10.1](https://github.com/dialpad/dialtone-vue/compare/v1.10.0...v1.10.1) (2022-01-17)
 
 
