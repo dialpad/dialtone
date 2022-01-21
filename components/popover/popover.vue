@@ -21,7 +21,7 @@
         d-o100
         d-bgc-black-900
       "
-      @click.self="closePopover"
+      @click.self="closePopoverOnClick"
     />
     <div
       :id="!ariaLabelledby && labelledBy"
@@ -562,8 +562,10 @@ export default {
     open (isOpen, isPrev) {
       if (isOpen) {
         this.tip.show();
+        this.addClosePopoverEventLister();
       } else if (!isOpen && isPrev !== isOpen) {
         this.showPopover = false;
+        this.removeClosePopoverEventLister();
       }
     },
 
@@ -612,6 +614,7 @@ export default {
     }));
     if (this.showPopover) {
       this.tip.show();
+      this.addClosePopoverEventLister();
     }
   },
 
@@ -620,12 +623,21 @@ export default {
     this.removeOverlay();
     this.tip?.destroy();
     this.removeReferences();
+    this.removeClosePopoverEventLister();
   },
 
   /******************
    *     METHODS    *
    ******************/
   methods: {
+    addClosePopoverEventLister () {
+      window.addEventListener('dt-popover-close', this.closePopover);
+    },
+
+    removeClosePopoverEventLister () {
+      window.removeEventListener('dt-popover-close', this.closePopover);
+    },
+
     onScrollContent ({ target }) {
       this.hasScrolled = target.scrollTop > 0;
     },
@@ -663,8 +675,12 @@ export default {
     },
 
     closePopover () {
+      this.tip.hide();
+    },
+
+    closePopoverOnClick () {
       if (typeof this.hideOnClick === 'boolean' && this.hideOnClick) {
-        this.tip.hide();
+        this.closePopover();
       }
     },
 

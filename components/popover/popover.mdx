@@ -122,6 +122,16 @@ but instead create a `div` element right within the `body` and use it as contain
 You can find the recommended way to use the popover in the
 [documentation](https://popper.js.org/docs/v2/performance/#attaching-elements-to-the-dom)
 
+### Force close all opened instances
+
+When the popover is open, it will attach an event listener into the window object, so you can close the instances
+dispatching the `dt-popover-close` event in the window object:
+
+```js
+const e = new Event('dt-popover-close');
+window.dispatchEvent(e);
+```
+
 ## Accessibility
 
 Popover, in their current implementation, are accessible when used as interactive components.

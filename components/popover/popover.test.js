@@ -242,6 +242,22 @@ describe('Dialtone Vue Popover tests', function () {
         assert.isFalse(getValueUpdateShow());
       });
     });
+
+    describe('When a "dt-popover-close" event is emitted in the window object', function () {
+      beforeEach(async function () {
+        _mountWrapper();
+      });
+
+      it('should close opened popover', async function () {
+        // Open popover so the event listener is attached
+        await wrapper.setProps({ open: true });
+        await flushPromises();
+
+        window.dispatchEvent(new window.Event('dt-popover-close'));
+        await awaitLazyShowUpdated();
+        assert.isFalse(getValueUpdateShow());
+      });
+    });
   });
 
   describe('Accessibility Tests', function () {
