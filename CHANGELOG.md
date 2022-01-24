@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/dialpad/dialtone-vue/compare/v1.11.0...v1.12.0) (2022-01-24)
+
+
+### Features
+
+* add event `dt-popover-close` to close popover instances ([#228](https://github.com/dialpad/dialtone-vue/issues/228)) ([65da860](https://github.com/dialpad/dialtone-vue/commit/65da860deecacdc8c219313beda433b5baa38e74))
+* dt-toggle ([#226](https://github.com/dialpad/dialtone-vue/issues/226)) ([002c780](https://github.com/dialpad/dialtone-vue/commit/002c7804d7495eeecdaad1fcab27a29557681db6))
+
 # [1.11.0](https://github.com/dialpad/dialtone-vue/compare/v1.10.1...v1.11.0) (2022-01-20)
 
 
