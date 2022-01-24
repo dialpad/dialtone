@@ -705,7 +705,7 @@ export default {
     },
 
     onOpen () {
-      this.$emit('update:open', true);
+      this.$emit('update:open', true, this.$refs.popover__content);
       this.focusFirstElementIfNeeded(this.$refs.popover__content);
     },
 
