@@ -700,7 +700,7 @@ export default {
         this.focusFirstElementIfNeeded(this.$refs.anchor);
       }
       this.closedByClickOutside = false;
-      this.tip.unmount();
+      this.tip?.unmount();
       this.$emit('update:open', false);
     },
 

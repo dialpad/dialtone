@@ -280,7 +280,7 @@ export default {
   methods: {
     async onLeave () {
       this.isPreventHideTooltip = true;
-      this.tip.unmount();
+      this.tip?.unmount();
       this.$emit('update:show', false);
     },
 
