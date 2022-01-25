@@ -18,6 +18,7 @@
         :offset="offset"
         :append-to="appendTo"
         :interactive="interactive"
+        :content-class="contentClass"
         :flip-boundary="flipBoundary"
         :interactive-border="interactiveBorder"
         :trigger="trigger"
