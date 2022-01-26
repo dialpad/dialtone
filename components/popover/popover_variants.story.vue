@@ -129,9 +129,9 @@
     <dt-popover
       :open="openPopoverWithHeader"
       :show-close-button="true"
-      :fixed-header="isHeaderFixed"
-      title="Potential Title"
+      :fixed-header-footer="isHeaderFixed"
       content-class="d-pl12 d-pr16"
+      header-class="d-d-flex d-jc-space-between d-ai-center"
       class="d-mr12"
       max-height="20rem"
       max-width="50rem"
@@ -145,8 +145,36 @@
           v-bind="attrs"
           @click="openPopoverWithHeader = !openPopoverWithHeader"
         >
-          Popover header, custom width and height
+          Popover with header
         </dt-button>
+      </template>
+      <template #headerContent>
+        <div>Potential Title</div>
+        <div class="d-d-flex d-jc-flex-end">
+          <dt-button
+            circle
+            class="d-p6 d-bc-transparent"
+            importance="outlined"
+          >
+            <template #icon>
+              <icon-launch
+                class="d-svg--size20"
+              />
+            </template>
+          </dt-button>
+
+          <dt-button
+            circle
+            class="d-p6 d-bc-transparent"
+            importance="outlined"
+          >
+            <template #icon>
+              <icon-menu-vertical
+                class="d-svg--size20"
+              />
+            </template>
+          </dt-button>
+        </div>
       </template>
       <template #content>
         <div class="d-fs14 d-m0">
@@ -158,46 +186,53 @@
             </dt-button>
           </div>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
         </div>
       </template>
-      <template #headerActions>
-        <dt-button
-          circle
-          class="d-p6 d-bc-transparent"
-          importance="outlined"
-        >
-          <template #icon>
-            <icon-launch
-              class="d-svg--size20"
-            />
-          </template>
-        </dt-button>
+    </dt-popover>
 
+    <dt-popover
+      :open="openPopoverWithFooter"
+      :fixed-header-footer="true"
+      content-class="d-pl12 d-pr16"
+      class="d-mr12"
+      max-height="20rem"
+      max-width="50rem"
+      :close-button-props="{
+        ariaLabel: 'Close popover',
+      }"
+      @update:open="openPopoverWithFooter = $event"
+    >
+      <template #anchor="{ attrs }">
         <dt-button
-          circle
-          class="d-p6 d-bc-transparent"
-          importance="outlined"
+          v-bind="attrs"
+          @click="openPopoverWithFooter = !openPopoverWithFooter"
         >
-          <template #icon>
-            <icon-menu-vertical
-              class="d-svg--size20"
-            />
-          </template>
+          Popover with footer
         </dt-button>
+      </template>
+      <template #footerContent>
+        <div>This is a footer</div>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
+          <p>
+            {{ sampleText }}
+          </p>
+          <p>
+            {{ sampleText }}
+          </p>
+          <p>
+            {{ sampleText }}
+          </p>
+        </div>
       </template>
     </dt-popover>
   </div>
@@ -231,9 +266,15 @@ export default {
       openAlignmentLeft: false,
       openWithOverlay: false,
       openPopoverWithHeader: false,
+      openPopoverWithFooter: false,
       openPopoverWithNoPadding: false,
       isHeaderFixed: false,
       isOpen: this.open || false,
+      sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Consequuntur delectus distinctio id iure labore,
+            maiores mollitia reprehenderit sunt tempore veritatis.
+            Aliquam delectus earum ex, expedita ipsam nobis
+            obcaecati quibusdam repudiandae.`,
     };
   },
 

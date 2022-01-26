@@ -12,10 +12,9 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 - Popover can be used as base container to build other components such as: dropdown, filter, extra actions
 and selections, feature explanation, promotions etc.
 - Align left / right / center or top / bottom / center.
-- Specific header usage
-  - Header is always placed at the top of the popover frame
-  - Header can optionally be set as fixed when the popover needs scroll behavior.
-  - Additional actions can be placed in the upper right portion of the header and should be limited to no more than 3 actions.
+- Header / Footer
+  - Header / Footer is always placed at the top and bottom of the popover frame respectively.
+  - Header / Footer is set as fixed by default. This can be disabled by setting fixedHeaderFooter to false
 
 <Canvas>
   <Story id="components-popovers--default" />
@@ -134,16 +133,16 @@ window.dispatchEvent(e);
 
 ## Accessibility
 
-Popover, in their current implementation, are accessible when used as interactive components.
-Content will be read to screen reader users, and the popover markup by default get appended to the `parent`
+Popovers, in their current implementation, are accessible when used as interactive components.
+Content will be read to screen reader users, and the popover markup by default is appended to the `parent`
 (also it could be placed to the end of `<body>` or other DOM element)
 
 There are a few important considerations to ensure popover controls are accessible.
 The popover, by default:
 
 - the popover content will have a generic role of "dialog" ( `menu`, `listbox` also possible roles as well)
-- focus will be transferred into the popover to the first content focusable element, and after close, triggering
-element will be focused (like it's in the modal component)
+- on open, focus will be transferred to the first focusable element within the popover, after close the triggering
+element will be focused.
 
 ### Anchor
 
@@ -168,10 +167,10 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 
 ### Keyboard support
 
-- when popover opens the focus will be moved to the first focusable element inside the content's container
-- the user can dismiss the popover pressing the `ESC` key after that the focus will be returned to the element
-that launched it
-- the user can go thought focusable elements using the `TAB` key, if the popover has defined header, the focus will be
+- When popover opens the focus will be moved to the first focusable element inside the popover.
+- The user can dismiss the popover pressing the `ESC` key, after that the focus will be returned to the element
+that launched it.
+- The user can traverse focusable elements using the `TAB` key. If the popover has a defined header, the focus will be
 moved to the header buttons after the last focusable element inside content's container.
 
 ### References

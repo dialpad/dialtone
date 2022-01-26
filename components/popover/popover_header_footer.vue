@@ -1,9 +1,9 @@
 <template>
   <div
-    data-qa="dt-popover-header"
+    data-qa="dt-popover-header-footer"
     :class="[
       'd-d-flex',
-      'd-ai-flex-start',
+      'd-ai-center',
       'd-fs16',
       'd-fw-bold',
       'd-of-auto',
@@ -12,39 +12,33 @@
       'd-pl12',
       'd-pr8',
       'd-py6',
-      'd-bb',
       'd-baw1',
       'd-bc-black-075',
       {
+        'd-bb': type === 'header',
+        'd-bt': type === 'footer',
         'd-bs-card': hasBoxShadow,
-        'd-jc-space-between': isTitleVisible,
-        'd-jc-flex-end': !isTitleVisible,
+        'd-jc-flex-end': !$slots.content,
       },
-      headerClass,
     ]"
   >
     <div
-      v-if="isTitleVisible"
-      data-qa="dt-popover-title"
-      class="d-to-ellipsis d-pt6"
+      v-if="$slots.content"
+      data-qa="dt-popover-header-footer-content"
+      :class="['d-to-ellipsis', 'd-w100p', contentClass]"
     >
-      <slot name="title">
-        {{ title }}
-      </slot>
+      <slot name="content" />
     </div>
     <div
-      v-if="areHeaderButtonsVisible"
+      v-if="showCloseButton"
       class="d-pl6 d-d-flex d-ws-nowrap"
     >
-      <slot name="headerActions" />
       <dt-button
-        v-if="showCloseButton"
         ref="popover__close-button"
         class="d-p6 d-bc-transparent"
         importance="outlined"
         kind="muted"
         circle
-        :aria-label="closeButtonProps.ariaLabel"
         v-bind="closeButtonProps"
         @click="$emit('close')"
       >
@@ -62,28 +56,27 @@
 import DtButton from '../button/button';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 export default {
-  name: 'PopoverHeader',
+  name: 'PopoverHeaderFooter',
   components: {
     DtButton,
     IconClose,
   },
 
   props: {
-    /**
-     * Additional class name for the content wrapper element.
-     */
-    headerClass: {
-      type: [String, Array, Object],
-      default: '',
+    // eslint-disable-next-line vue/require-default-prop
+    type: {
+      type: String,
+      validator: function (value) {
+        return ['header', 'footer'].includes(value);
+      },
     },
 
     /**
-     * Determines title for popover header.
-     * If provided prop is not null, corresponding holder div will be rendered
+     * Additional class name for the content wrapper element.
      */
-    title: {
-      type: String,
-      default: null,
+    contentClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**
@@ -100,7 +93,7 @@ export default {
      */
     closeButtonProps: {
       type: Object,
-      required: true,
+      default: () => {},
     },
 
     /**
@@ -109,16 +102,6 @@ export default {
     hasBoxShadow: {
       type: Boolean,
       default: false,
-    },
-  },
-
-  computed: {
-    isTitleVisible () {
-      return this.$slots.title || this.title !== null;
-    },
-
-    areHeaderButtonsVisible () {
-      return this.$slots.headerActions || this.showCloseButton;
     },
   },
 
