@@ -1,5 +1,4 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
-import DtCombobox from './combobox';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 # Combobox
 
@@ -23,39 +22,9 @@ The **list** contains a list of items to show in the context of the input's valu
   <Story id="components-combobox--default" />
 </Canvas>
 
-### Usage
+## Slots, Props and Events
 
-```js
-import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
-```
-
-```html
-<dt-combobox
-  list-aria-label="Example list items"
-  @escape="onEscape"
-  @highlight="onHighlight"
-  @select="onSelect"
->
-  <template #input="{ inputProps }">
-    <dt-input v-bind="inputProps" />
-  </template>
-  <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
-    <ol v-bind="listProps">
-      <dt-list-item
-        v-bind="getItemProps(i)"
-        v-for="(item, i) in items"
-        :key="item.id"
-        :is-highlighted="activeItemIndex === i"
-        :set-highlight="() => setHighlightIndex(i)"
-        navigation-type="arrow-keys"
-        @click="onSelect(i)"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </ol>
-  </template>
-</dt-combobox>
-```
+<ArgsTable story={PRIMARY_STORY} />
 
 ## Accessibility
 
@@ -82,10 +51,7 @@ HTML element, such as `<ol></ol>`.
 
 ### List Item
 
-The list item should be compatible with keyboard navigation. The combobox provides a `getItemProps` method
-that should be passed the index of the item and binded to the items. A `activeItemIndex` prop is provided
-that can be used to determine which item should be highlighted. Similarly a `setHighlightIndex` method is provided
-and it expects the index to be passed. It can be used to update the currently highlighted item. It is recommended
+The list item should be compatible with keyboard navigation. It is recommended
 to use `DtListItem` component as it supports all the necessary accessibility props and interactions.
 
 ### Focus & Keyboard
@@ -102,6 +68,36 @@ based on the use case. Commonly the `ESC` key might hide the list or empty the i
 emit a **select** event with the index of the currently highlighted list item. When the highlight
 selection changes, a **highlight** event is emitted with the index of the currently highlighted item.
 
-## Slots, Props and Events
+### Usage
 
-<ArgsTable of={PRIMARY_STORY} />
+```js
+import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-combobox
+  list-aria-label="Example list items"
+  @escape="onEscape"
+  @highlight="onHighlight"
+  @select="onSelect"
+>
+  <template #input="{ inputProps }">
+    <dt-input v-bind="inputProps" />
+  </template>
+  <template #list="{ listProps }">
+    <ol v-bind="listProps">
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        navigation-type="arrow-keys"
+        role="option"
+        @click="onSelect(i)"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </ol>
+  </template>
+</dt-combobox>
+```
+
+`onSelect` is the method event handler that receives the index of each item.

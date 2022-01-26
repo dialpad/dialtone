@@ -42,7 +42,7 @@ export default {
 
   mixins: [
     KeyboardNavigation({
-      listElementKey: 'listRef',
+      listElementKey: 'getListElement',
       afterHighlightMethod: 'afterHighlightMethod',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
@@ -55,13 +55,11 @@ export default {
     };
   },
 
-  computed: {
-    listRef () {
+  methods: {
+    getListElement () {
       return this.$refs.listWrapper;
     },
-  },
 
-  methods: {
     beginningOfListMethod () {
       return true;
     },

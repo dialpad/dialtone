@@ -123,36 +123,6 @@ describe('Dialtone Vue Dropdown Tests', function () {
       _setWrappers();
     });
 
-    describe('When the dropdown is open and "Enter" key is pressed but no item is highlighted', function () {
-      beforeEach(async function () {
-        await wrapper.setData({ highlightIndex: -1 });
-        await wrapper.trigger('keydown.enter');
-      });
-
-      it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
-      it('should not call listener', function () { assert.isFalse(selectStub.called); });
-    });
-
-    describe('When the dropdown is open and "Enter" key is pressed when an item is highlighted', function () {
-      beforeEach(async function () {
-        await wrapper.setData({ highlightIndex: 1 });
-        await wrapper.trigger('keydown.enter');
-      });
-
-      it('should emit select event', function () { assert.equal(wrapper.emitted().select.length, 1); });
-      it('should call listener', function () { assert.isTrue(selectStub.called); });
-    });
-
-    describe('When the dropdown is closed and "Enter" key is pressed', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ open: false });
-        await wrapper.trigger('keydown.enter');
-      });
-
-      it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
-      it('should not call listener', function () { assert.isFalse(selectStub.called); });
-    });
-
     describe('When "Esc" key is pressed', function () {
       beforeEach(async function () {
         await wrapper.trigger('keydown.esc');

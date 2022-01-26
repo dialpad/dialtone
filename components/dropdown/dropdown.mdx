@@ -36,13 +36,11 @@ The dropdown menu has a role of "menu" and the list items have a role "menuitem"
 
 See [W3C guidelines](https://www.w3.org/TR/wai-aria-practices/#menubutton) for more information.
 
-### List Item
+### List
 
-The list item should support keyboard navigation. The dropdown provides a `getItemProps` method
-that should be passed the index of the item and binded to the items. A `activeItemIndex` prop is provided
-that can be used to determine which item should be highlighted. Similarly a `setHighlightIndex` method is provided
-and it expects the index to be passed. It can be used to update the currently highlighted item. It is recommended
-to use `DtListItem` component as it supports all the necessary accessibility props and interactions.
+The Dropdown is rendered with semantic `<ul>` and `<li>`. The `list` slot is wrapped in `<ul>` element so make sure
+the items are wrapped in `<li>` element and each item has the `menuitem` role. It is recommended to use the [List Item
+component](?path=/story/components-list-item--default) as it supports all the necessary accessibility props and interactions.
 
 ### Focus & Keyboard
 
@@ -54,57 +52,84 @@ selection between the list items. `HOME` and `END` keys will jump straight to th
 Once the beginning or the end of the list is reached the selection will move to the opposite end of the list by default.
 If you want custom behavior you can pass `onBeginningOfList` and `onEndOfList` methods as props.
 
-Pressing `ESC` key while the input has focus will emit an **escape** event and will close the dropdown. `ENTER` key will
-emit a **select** event with the index of the currently highlighted list item. When the highlight
+Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the highlight
 selection changes, a **highlight** event is emitted with the index of the currently highlighted item.
 `SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
 
 ## Usage
 
+Use the Dropdown component when you have a list of links or actions that can be performed. Use the
+[Select Menu](?path=/story/components-select-menu--default) component to allow the users to choose one option from the list.
+
 ### Import
 
 ```jsx
-import { DtDropdown } from '@dialpad/dialtone-vue';
+import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
 ```
 
 ```html
 <dt-dropdown
   :open="isOpen"
   @highlight="onHighlight"
-  @select="onSelect"
   @escape="onEscape"
   @update:open="updateOpen"
 >
-  <template #anchor="{ attrs }">
-    <dt-link
+  <template #anchor="{ attrs, toggleOpen }">
+    <dt-button
       v-bind="attrs"
-      class="d-link"
-      href="#"
-      @click.prevent="isOpen = !isOpen"
-      @keydown.space="isOpen = !isOpen"
+      @click.prevent="toggleOpen"
     >
       Click to open
-    </dt-link>
+    </dt-button>
   </template>
-  <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
-    <ul
-      v-bind="listProps"
+  <template #list="{ close }">
+    <dt-list-item
+      v-for="(item, i) in items"
+      :key="item.id"
+      :navigation-type="navigationType"
+      role="menuitem"
+      @click="close(); handleItem(i);"
     >
-      <dt-list-item
-        v-for="(item, i) in items"
-        v-bind="getItemProps(i)"
-        :key="item.id"
-        :is-highlighted="activeItemIndex === i"
-        :set-highlight="() => setHighlightIndex(i)"
-        :navigation-type="navigationType"
-        @click="onSelect(i)"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </ul>
+      {{ item.name }}
+    </dt-list-item>
   </template>
 </dt-dropdown>
 ```
 
-Note that the `anchor` slot that manages the list's visibility is using a similar pattern as in the
-[Popover component](?path=/docs/components-popovers--default#basic-usage).
+`toggleOpen` is the method event handler passed to the `anchor` that controls the dropdown's visibility and
+`close` is the method event handler passed to the `list` slots that closes the dropdown when clicking on the item.
+
+It's possible to specify different event handlers per each list item in case you are not using `v-for` for
+rendering items:
+
+```html
+<dt-dropdown
+  :open="isOpen"
+  @highlight="onHighlight"
+  @escape="onEscape"
+  @update:open="updateOpen"
+>
+  <template #anchor="{ attrs, toggleOpen }">
+    <dt-button
+      v-bind="attrs"
+      @click.prevent="toggleOpen"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      role="menuitem"
+      @click="onClick(); handleFirstItem();"
+    >
+      First item
+    </dt-list-item>
+    <dt-list-item
+      role="menuitem"
+      @click="close(); handleSecondItem();"
+    >
+      Second item
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```

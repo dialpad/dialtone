@@ -114,15 +114,6 @@ export const argTypesData = {
       options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
     },
   },
-  isHighlighted: {
-    table: {
-      type: { summary: 'string' },
-      defaultValue: { summary: false },
-    },
-    control: {
-      type: 'boolean',
-    },
-  },
 
   // Action Event Handlers
   onClick: {

@@ -1,17 +1,16 @@
 <template>
   <dt-dropdown
-    :open="isOpen"
+    :open="open"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
     :content-width="contentWidth"
     :padding="padding"
     :navigation-type="navigationType"
     @highlight="onHighlight"
-    @select="onDropdownSelect"
     @escape="onDropdownEscape"
-    @update:open="updateOpen"
+    @update:open="onUpdateOpen"
   >
-    <template #anchor="{ attrs }">
+    <template #anchor="{ attrs, toggleOpen }">
       <div
         v-if="anchor"
         v-html="anchor"
@@ -19,33 +18,26 @@
       <dt-button
         v-else
         v-bind="attrs"
-        @click.prevent="isOpen = !isOpen"
+        @click.prevent="toggleOpen"
       >
         Click to open
       </dt-button>
     </template>
-    <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+    <template #list="{ close }">
       <div
         v-if="list"
         v-html="list"
       />
-      <ul
+      <dt-list-item
         v-else
-        v-bind="listProps"
-        class="d-p0"
+        v-for="(item) in items"
+        role="menuitem"
+        :key="item.id"
+        :navigation-type="navigationType"
+        @click="close"
       >
-        <dt-list-item
-          v-for="(item, i) in items"
-          v-bind="getItemProps(i)"
-          :key="item.id"
-          :is-highlighted="navigationType === LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS && activeItemIndex === i"
-          :set-highlight="() => setHighlightIndex(i)"
-          :navigation-type="navigationType"
-          @click="onDropdownSelect(i)"
-        >
-          {{ item.name }}
-        </dt-list-item>
-      </ul>
+        {{ item.name }}
+      </dt-list-item>
     </template>
   </dt-dropdown>
 </template>
@@ -63,7 +55,6 @@ export default {
 
   data () {
     return {
-      isOpen: this.open || false,
       LIST_ITEM_NAVIGATION_TYPES,
     };
   },
@@ -78,26 +69,8 @@ export default {
     },
   },
 
-  watch: {
-    open: {
-      handler () {
-        this.isOpen = this.open;
-      },
-    },
-  },
-
   methods: {
-    updateOpen (isOpen) {
-      this.isOpen = isOpen;
-    },
-
-    onDropdownSelect (i) {
-      this.isOpen = false;
-      this.onSelect(i);
-    },
-
     onDropdownEscape () {
-      this.isOpen = false;
       this.onEscape();
     },
   },

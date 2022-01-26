@@ -30,9 +30,6 @@
       <slot
         name="list"
         :list-props="listProps"
-        :get-item-props="getItemProps"
-        :active-item-index="highlightIndex"
-        :set-highlight-index="setHighlightIndex"
         :opened="onOpen"
       />
     </div>
@@ -49,7 +46,8 @@ export default {
   mixins: [
     KeyboardNavigation({
       indexKey: 'highlightIndex',
-      listElementKey: 'listRef',
+      idKey: 'highlightId',
+      listElementKey: 'getListElement',
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
@@ -130,21 +128,6 @@ export default {
       };
     },
 
-    listRef () {
-      return this.outsideRenderedListRef ?? this.$refs.listWrapper;
-    },
-
-    /*
-     * These props are wrapped in a function that expects that an index is passed.
-     */
-    getItemProps () {
-      return (i) => ({
-        role: 'option',
-        // The ids have to be generated here since we use them for activeItemId.
-        id: this.getItemId(i),
-      });
-    },
-
     beginningOfListMethod () {
       return this.onBeginningOfList || this.jumpToEnd;
     },
@@ -157,28 +140,30 @@ export default {
       if (!this.showList || this.highlightIndex < 0) {
         return;
       }
-      return this.getItemId(this.highlightIndex);
+      return this.highlightId;
     },
 
     activeItemEl () {
-      return document.getElementById(this.activeItemId);
+      return this.getListElement().querySelector('#' + this.highlightId);
     },
   },
 
   watch: {
     showList () {
       // When the list's visibility changes reset the highlight index.
-      this.setHighlightIndex(0);
+      this.$nextTick(function () {
+        this.setInitialHighlightIndex();
+      });
     },
   },
 
   methods: {
-    clearHighlightIndex () {
-      this.setHighlightIndex(-1);
+    getListElement () {
+      return this.outsideRenderedListRef ?? this.$refs.listWrapper;
     },
 
-    getItemId (i) {
-      return `${this.listId}-item${i}`;
+    clearHighlightIndex () {
+      this.setHighlightIndex(-1);
     },
 
     afterHighlight () {
@@ -197,6 +182,13 @@ export default {
 
     onOpen (open, contentRef) {
       this.outsideRenderedListRef = contentRef;
+    },
+
+    setInitialHighlightIndex () {
+      if (this.showList) {
+        // When the list's is shown, reset the highlight index.
+        this.setHighlightIndex(0);
+      }
     },
   },
 };

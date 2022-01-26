@@ -2,16 +2,17 @@
   <dt-popover
     ref="popover"
     :content-width="contentWidth"
-    :open="open"
+    :open="isOpen"
     :has-caret="false"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
     :padding="padding"
     role="menu"
     v-on="$listeners"
-    @update:open="setInitialHighlightIndex"
+    @update:open="updateInitialHighlightIndex"
     @keydown.esc.stop="onEscapeKey"
     @keydown.enter="onEnterKey"
+    @keydown.space="onSpaceKey"
     @keydown.up.stop.prevent="onUpKeyPress"
     @keydown.down.prevent="onDownKeyPress"
     @keydown.home.stop.prevent="onHomeKey"
@@ -20,25 +21,26 @@
     <template #anchor="props">
       <!-- @slot Anchor element that activates the dropdown -->
       <slot
+        ref="anchor"
         name="anchor"
+        :toggle-open="toggle"
         v-bind="props"
       />
     </template>
     <template #content>
-      <div
+      <ul
+        :id="listId"
         ref="listWrapper"
+        class="d-p0 d-ps-relative"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
       >
         <!-- @slot Slot for the list component -->
         <slot
           name="list"
-          :list-props="listProps"
-          :get-item-props="getItemProps"
-          :active-item-index="highlightIndex"
-          :set-highlight-index="setHighlightIndex"
+          :close="close"
         />
-      </div>
+      </ul>
     </template>
   </dt-popover>
 </template>
@@ -59,7 +61,8 @@ export default {
   mixins: [
     KeyboardNavigation({
       indexKey: 'highlightIndex',
-      listElementKey: 'listRef',
+      idKey: 'highlightId',
+      listElementKey: 'getListElement',
       listItemRole: 'menuitem',
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
@@ -71,11 +74,11 @@ export default {
 
   props: {
     /**
-     * Whether the dropdown should be shown. Supports .sync modifier.
+     * Optional prop to manage dropdown opening. Supports .sync modifier.
      */
     open: {
       type: Boolean,
-      required: true,
+      default: false,
     },
 
     /**
@@ -156,39 +159,17 @@ export default {
     },
   },
 
-  emits: ['select', 'escape', 'highlight'],
+  emits: ['escape', 'highlight', 'update:open'],
 
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
+      openedWithKeyboard: false,
+      isOpen: this.open,
     };
   },
 
   computed: {
-    listProps () {
-      return {
-        id: this.listId,
-        // The list has to be positioned relatively so that the auto-scroll can
-        // calculate the correct offset for the list items.
-        class: 'd-ps-relative',
-      };
-    },
-
-    listRef () {
-      return this.$refs.listWrapper;
-    },
-
-    /*
-     * These props are wrapped in a function that expects that an index is passed.
-     */
-    getItemProps () {
-      return (i) => ({
-        role: 'menuitem',
-        // The ids have to be generated here since we use them for activeItemId.
-        id: this.getItemId(i),
-      });
-    },
-
     beginningOfListMethod () {
       return this.onBeginningOfList || this.jumpToEnd;
     },
@@ -197,41 +178,68 @@ export default {
       return this.onEndOfList || this.jumpToBeginning;
     },
 
-    activeItemId () {
-      if (!this.open || this.highlightIndex < 0) {
-        return;
-      }
-      return this.getItemId(this.highlightIndex);
-    },
-
     activeItemEl () {
-      return document.getElementById(this.activeItemId);
+      return this.getListElement().querySelector('#' + this.highlightId);
     },
   },
 
   methods: {
-    setInitialHighlightIndex () {
-      if (this.open && this.navigationType !== this.LIST_ITEM_NAVIGATION_TYPES.NONE) {
-        // When the list's is shown, reset the highlight index.
-        this.setHighlightIndex(0);
-      }
+    getListElement () {
+      return this.$refs.listWrapper;
     },
 
     clearHighlightIndex () {
       this.setHighlightIndex(-1);
     },
 
-    getItemId (i) {
-      return `${this.listId}-item${i}`;
-    },
-
     afterHighlight () {
       this.$emit('highlight', this.highlightIndex);
     },
 
+    updateInitialHighlightIndex (isPopoverOpen) {
+      if (isPopoverOpen) {
+        // If the dropdown was opened with keyboard, focus first element
+        if (this.openedWithKeyboard) {
+          // Focus first item on keyboard navigation
+          this.$refs.popover.focusFirstElement(this.getListElement());
+
+          if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+            this.setHighlightIndex(0);
+          }
+
+          this.$emit('update:open', true);
+        }
+      } else {
+        this.clearHighlightIndex();
+
+        if (this.openedWithKeyboard) {
+          // Return focus to anchor element since it had the focus
+          this.$refs.popover.focusFirstElement(this.$refs.anchor);
+          this.openedWithKeyboard = false;
+        }
+
+        this.isOpen = false;
+        this.$emit('update:open', false);
+      }
+    },
+
+    toggle () {
+      this.isOpen = !this.isOpen;
+    },
+
+    close () {
+      this.isOpen = false;
+    },
+
+    onSpaceKey () {
+      if (!this.isOpen) {
+        this.openedWithKeyboard = true;
+      }
+    },
+
     onEnterKey () {
-      if (this.open && this.highlightIndex >= 0) {
-        this.$emit('select', this.highlightIndex);
+      if (!this.isOpen) {
+        this.openedWithKeyboard = true;
       }
     },
 
@@ -248,7 +256,14 @@ export default {
     },
 
     onEscapeKey () {
+      this.isOpen = false;
       this.$emit('escape');
+    },
+  },
+
+  watch: {
+    open (newValue) {
+      this.isOpen = newValue;
     },
   },
 };

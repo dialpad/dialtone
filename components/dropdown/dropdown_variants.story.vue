@@ -4,41 +4,30 @@
       v-for="(variant, i) in variants.fixedAlignment"
       :key="i"
       class="d-mr8"
-      :open="isOpen[variant]"
       :fixed-alignment="variant"
       :content-width="contentWidth"
       :padding="padding"
       :navigation-type="navigationType"
       @highlight="onHighlight"
-      @select="onSelect"
       @escape="onDropdownEscape($event, variant)"
-      @update:open="updateOpen($event, variant)"
     >
-      <template #anchor>
+      <template #anchor="{ toggleOpen }">
         <dt-button
-          @click.prevent="isOpen[variant] = !isOpen[variant]"
+          @click.prevent="toggleOpen"
         >
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
-      <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
-        <ul
-          v-bind="listProps"
-          class="d-p0 d-w100p"
+      <template #list="{ close }">
+        <dt-list-item
+          v-for="(item) in items"
+          role="menuitem"
+          :key="item.id"
+          :navigation-type="navigationType"
+          @click="close"
         >
-          <dt-list-item
-            v-for="(item, i) in items"
-            v-bind="getItemProps(i)"
-            :key="item.id"
-            :is-highlighted="activeItemIndex === i"
-            :set-highlight="() => setHighlightIndex(i)"
-            :navigation-type="navigationType"
-            :focusable="true"
-            @click="onDropdownSelect($event, variant, i)"
-          >
-            {{ item.name }}
-          </dt-list-item>
-        </ul>
+          {{ item.name }}
+        </dt-list-item>
       </template>
     </dt-dropdown>
   </div>
@@ -56,12 +45,6 @@ export default {
 
   data () {
     return {
-      isOpen: {
-        left: false,
-        center: false,
-        right: false,
-      },
-
       variants: {
         fixedAlignment: ['left', 'center', 'right'],
       },
@@ -79,17 +62,7 @@ export default {
   },
 
   methods: {
-    updateOpen (isOpen, key) {
-      this.isOpen[key] = isOpen;
-    },
-
-    onDropdownSelect (event, key, item) {
-      this.isOpen[key] = false;
-      this.onSelect(item);
-    },
-
     onDropdownEscape (event, key) {
-      this.isOpen[key] = false;
       this.onEscape();
     },
   },

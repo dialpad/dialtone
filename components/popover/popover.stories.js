@@ -111,7 +111,7 @@ const argTypesData = {
   },
 
   // Events
-  onClose: {
+  onUpdateOpen: {
     table: {
       disable: true,
     },
@@ -119,8 +119,8 @@ const argTypesData = {
 
   'update:open': {
     description: `The popover will emit a boolean value for this event when the \
-user performs a popover-closing or opening action. Parent components can sync on this value to create \
-a 2-way binding to control popover visibility.`,
+user performs a popover-closing or opening action and also the popover content reference when it was open. \
+Parent components can sync on this value to create a 2-way binding to control popover visibility.`,
     table: {
       type: {
         summary: 'boolean',
@@ -135,7 +135,7 @@ a 2-way binding to control popover visibility.`,
 
 // Default Props for all variations
 export const argsData = {
-  onClose: action('update:show'),
+  onUpdateOpen: action('update:show'),
 };
 
 export default {

@@ -7,3 +7,7 @@ export {
 export {
   InputGroupMixin as DtInputGroupMixin,
 } from './input_group';
+
+export {
+  default as DtKeyboardListNavigationMixin,
+} from './keyboard_list_navigation';

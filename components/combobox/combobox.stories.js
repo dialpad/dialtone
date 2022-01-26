@@ -96,7 +96,7 @@ export const argTypesData = {
   },
 
   escape: {
-    description: 'Event fired when clicking on the item',
+    description: 'Event fired when pressing escape',
     table: {
       type: { summary: 'event' },
     },

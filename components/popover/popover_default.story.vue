@@ -113,7 +113,7 @@ export default {
   methods: {
     updateOpen (isOpen) {
       this.isOpen = isOpen;
-      this.onClose(isOpen);
+      this.onUpdateOpen(...arguments);
     },
   },
 };

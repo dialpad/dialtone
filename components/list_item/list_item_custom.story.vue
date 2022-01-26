@@ -1,57 +1,61 @@
 <template>
-  <dt-list-item
-    navigation-type="tab"
-    type="custom"
-    @click="onClick"
+  <div
+    ref="listWrapper"
   >
+    <dt-list-item
+      navigation-type="tab"
+      type="custom"
+      @click="onClick"
+    >
     <span
       v-if="defaultSlot"
       v-html="defaultSlot"
     />
-    <div
-      v-else
-      class="custom-list-item d-ps-relative d-py8 d-px12 d-d-flex d-ai-center"
-    >
-      <time
-        class="custom-list-item--time d-fs12 d-pr12"
-        datetime="10:00"
+      <div
+        v-else
+        class="custom-list-item d-ps-relative d-py8 d-px12 d-d-flex d-ai-center"
       >
-        10:00
-      </time>
-      <span class="d-fs14">
+        <time
+          class="custom-list-item--time d-fs12 d-pr12"
+          datetime="10:00"
+        >
+          10:00
+        </time>
+        <span class="d-fs14">
         Custom List Item Example
       </span>
-      <div class="custom-list-item--actions d-ps-absolute d-p6 d-tn8 d-r12 d-d-flex d-bgc-white d-bar4 d-bs-md">
-        <dt-button
-          class="d-p4 d-py8"
-          importance="clear"
-          @click.stop="() => {}"
-        >
-          <template #icon>
-            <icon-social aria-hidden="false" />
-          </template>
-        </dt-button>
-        <dt-button
-          class="d-p4 d-py8 d-ml4"
-          importance="clear"
-          @click.stop="() => {}"
-        >
-          <template #icon>
-            <icon-star-outline aria-hidden="false" />
-          </template>
-        </dt-button>
-        <dt-button
-          class="d-p4 d-py8 d-ml4"
-          importance="clear"
-          @click.stop="() => {}"
-        >
-          <template #icon>
-            <icon-menu-vertical aria-hidden="false" />
-          </template>
-        </dt-button>
+        <div class="custom-list-item--actions d-ps-absolute d-p6 d-tn8 d-r12 d-d-flex d-bgc-white d-bar4 d-bs-md">
+          <dt-button
+            class="d-p4 d-py8"
+            importance="clear"
+            @click.stop="() => {}"
+          >
+            <template #icon>
+              <icon-social aria-hidden="false"/>
+            </template>
+          </dt-button>
+          <dt-button
+            class="d-p4 d-py8 d-ml4"
+            importance="clear"
+            @click.stop="() => {}"
+          >
+            <template #icon>
+              <icon-star-outline aria-hidden="false"/>
+            </template>
+          </dt-button>
+          <dt-button
+            class="d-p4 d-py8 d-ml4"
+            importance="clear"
+            @click.stop="() => {}"
+          >
+            <template #icon>
+              <icon-menu-vertical aria-hidden="false"/>
+            </template>
+          </dt-button>
+        </div>
       </div>
-    </div>
-  </dt-list-item>
+    </dt-list-item>
+  </div>
 </template>
 
 <script>
@@ -60,6 +64,7 @@ import DtListItem from './list_item';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
 import IconSocial from '@dialpad/dialtone/lib/dist/vue/icons/IconSocial';
 import IconStarOutline from '@dialpad/dialtone/lib/dist/vue/icons/IconStarOutline';
+import KeyboardNavigation from '../mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',
@@ -71,28 +76,42 @@ export default {
     IconSocial,
     IconStarOutline,
   },
+
+  mixins: [
+    KeyboardNavigation({
+      indexKey: 'highlightIndex',
+      idKey: 'highlightId',
+      listElementKey: 'getListElement',
+    }),
+  ],
+
+  methods: {
+    getListElement () {
+      return this.$refs.listWrapper;
+    },
+  },
 };
 </script>
 
 <style lang="less">
-  .custom-list-item {
-    &--time,
-    &--actions {
-      opacity: 0;
-    }
+.custom-list-item {
+  &--time,
+  &--actions {
+    opacity: 0;
   }
+}
 
-  .dt-list-item:hover,
-  .dt-list-item:focus-within {
-    .custom-list-item--time {
-      opacity: 0.75;
-    }
+.dt-list-item:hover,
+.dt-list-item:focus-within {
+  .custom-list-item--time {
+    opacity: 0.75;
   }
+}
 
-  .dt-list-item:hover,
-  .dt-list-item:focus-within {
-    .custom-list-item--actions {
-      opacity: 1;
-    }
+.dt-list-item:hover,
+.dt-list-item:focus-within {
+  .custom-list-item--actions {
+    opacity: 1;
   }
+}
 </style>

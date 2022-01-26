@@ -782,7 +782,7 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      if (this.isDialog || this.isMenu) {
+      if (this.isDialog) {
         const focusableElements = this._getFocusableElements(domEl);
         if (focusableElements.length !== 0) {
           this.focusFirstElement(domEl);

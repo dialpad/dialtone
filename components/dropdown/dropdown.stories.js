@@ -15,8 +15,8 @@ import {
 // Default Prop Values
 export const argsData = {
   onHighlight: action('highlight'),
-  onSelect: action('select'),
   onEscape: action('escape'),
+  onUpdateOpen: action('update:open'),
 };
 
 export const argTypesData = {
@@ -106,12 +106,12 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onHighlight: {
+  onUpdateOpen: {
     table: {
       disable: true,
     },
   },
-  onSelect: {
+  onHighlight: {
     table: {
       disable: true,
     },
@@ -122,14 +122,18 @@ export const argTypesData = {
     },
   },
 
-  highlight: {
-    description: 'Event fired when the highlight changes',
+  'update:open': {
+    description: `The dropdown will emit a boolean value for this event when the \
+user performs a closing or opening action and also the dropdown content reference when it was open. \
+Parent components can sync on this value to create a 2-way binding to control dropdown visibility.`,
     table: {
-      type: { summary: 'event' },
+      type: {
+        summary: 'boolean',
+      },
     },
   },
-  select: {
-    description: 'Select item event',
+  highlight: {
+    description: 'Event fired when the highlight changes',
     table: {
       type: { summary: 'event' },
     },

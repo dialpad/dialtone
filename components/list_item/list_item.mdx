@@ -48,17 +48,16 @@ used when the list item has to support content that does not work with the defau
 
 ## Accessibility
 
-The list item should be provided an approriate role as the prop `role` or the role defaults to "listitem"
+The list item should be provided an appropriate role as the prop `role` or the role defaults to "listitem"
 when not provided.
 
 When `navigation-type` is set to "tab" the list item is set hover and focus styles and a tabindex so
-that it can receive focus. This should be used for lists that contain mixed content, for example a list
-in which some items are clickable/focusable and some are static.
+that it can receive focus on tab navigation. This should be used for lists that contain mixed content, for example
+a list in which some items are clickable/focusable and some are static.
 
-When `navigation-type` is set to "arrow-keys" the props `setHighlight` and `isHighlighted` should
-also be provided. The list item is not focusable, but it can be highlighted using keyboard
-navigation. When the list item receives a highlight either by hovering over it with a
-mouse or via keyboard navigation the ARIA attribute `aria-selected` is set to "true".
+When `navigation-type` is set to "arrow-keys" the items can be highlighted using keyboard
+navigation. When the list item receives a highlight via keyboard navigation the ARIA attribute
+`aria-selected` is set to "true".
 
 ## Usage
 
@@ -75,9 +74,6 @@ import { DtListItem } from '@dialpad/dialtone-vue';
   <dt-list-item
     v-for="(item, i) in items"
     navigation-type="arrow-keys"
-    :id="getItemId(i)"
-    :set-highlight="() => setHighlight(i)"
-    :is-highlighted="isHighlighted"
     @click="onClick"
   >
     <template #left>
@@ -104,3 +100,59 @@ import { DtListItem } from '@dialpad/dialtone-vue';
   Custom List Item Content
 </dt-list-item>
 ```
+
+### With keyboard navigation
+
+Components that support list items like: Combobox, Dropdown already handle keyboard navigation so use this documentation
+when implementing list item navigation in other components.
+
+In order to use the `DtKeyboardListNavigationMixin` mixin that provides the functionality to navigate the items
+using keyboard, you should define a `ref` to the list's wrapper:
+
+```html
+<ol
+  ref="listWrapper"
+>
+  <dt-list-item
+    v-for="(item, i) in items"
+    navigation-type="arrow-keys"
+    @click="onClick"
+  >
+    <template #left>
+      <icon-contacts />
+    </template>
+    Example List Item
+    <template #subtitle>
+      Example Description
+    </template>
+    <template #bottom>
+      <dt-badge text="Label" />
+    </template>
+    <template #right>
+      <icon-launch />
+    </template>
+  </dt-list-item>
+</ol>
+```
+
+Also, define a method returning this list ref, so it can be passed to the the `keyboard list navigation` mixin as it's
+required.
+
+```js
+  mixins: [
+    KeyboardNavigation({
+      indexKey: 'highlightIndex',
+      idKey: 'highlightId',
+      listElementKey: 'getListElement',
+    }),
+  ],
+
+  methods: {
+    getListElement () {
+      return this.$refs.listWrapper;
+    },
+  }
+```
+
+That's all needed from the container component, the parameters used in the `KeyboardNavigation` are described in
+the mixin.
