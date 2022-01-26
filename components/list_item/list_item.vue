@@ -5,6 +5,7 @@
     :class="['dt-list-item d-ls-none focus-visible', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
+      'dt-list-item--hoverable': isHoverable,
     }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
@@ -120,6 +121,13 @@ export default {
       // Navigation type has to be set to "tab".
       return this.navigationType === LIST_ITEM_NAVIGATION_TYPES.TAB;
     },
+
+    /**
+     * Whether or not to apply hover styles.
+     */
+    isHoverable () {
+      return this.navigationType !== LIST_ITEM_NAVIGATION_TYPES.NONE;
+    },
   },
   methods: {
     onClick () {
@@ -130,7 +138,7 @@ export default {
 </script>
 
 <style lang="less">
-.dt-list-item:hover,
+.dt-list-item--hoverable:hover,
 .dt-list-item--focusable:focus,
 .dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
