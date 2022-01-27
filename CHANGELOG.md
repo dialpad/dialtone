@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/dialpad/dialtone-vue/compare/v1.13.0...v1.13.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* update list item to apply hover when navigationType is set ([#234](https://github.com/dialpad/dialtone-vue/issues/234)) ([23c4dda](https://github.com/dialpad/dialtone-vue/commit/23c4ddace6d3b20a5a3b953e535091ca3750bb74))
+
 # [1.13.0](https://github.com/dialpad/dialtone-vue/compare/v1.12.0...v1.13.0) (2022-01-26)
 
 
