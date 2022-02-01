@@ -183,6 +183,12 @@ export default {
     },
   },
 
+  watch: {
+    open (newValue) {
+      this.isOpen = newValue;
+    },
+  },
+
   methods: {
     getListElement () {
       return this.$refs.listWrapper;
@@ -258,12 +264,6 @@ export default {
     onEscapeKey () {
       this.isOpen = false;
       this.$emit('escape');
-    },
-  },
-
-  watch: {
-    open (newValue) {
-      this.isOpen = newValue;
     },
   },
 };

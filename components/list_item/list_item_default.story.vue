@@ -11,17 +11,17 @@
       @click="onClick"
     >
       <template #left>
-        <component :is="left"/>
+        <component :is="left" />
       </template>
-      <span v-html="defaultSlot"/>
+      <span v-html="defaultSlot" />
       <template #subtitle>
-        <span v-html="subtitle"/>
+        <span v-html="subtitle" />
       </template>
       <template #bottom>
-        <span v-html="bottom"/>
+        <span v-html="bottom" />
       </template>
       <template #right>
-        <component :is="right"/>
+        <component :is="right" />
       </template>
     </dt-list-item>
   </ul>

@@ -5,7 +5,7 @@ import DtTooltip from './tooltip.vue';
 import { DtButton } from '../button';
 import {
   TOOLTIP_KIND_MODIFIERS,
-  TOOLTIP_DIRECTION_MODIFIERS,
+  TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 import { flushPromises } from '../utils';
 
@@ -129,18 +129,18 @@ describe('Dialtone Vue Tooltip tests', function () {
     it('should render the container', function () { assert.isTrue(tooltipContainer.exists()); });
     it('should render the tooltip', function () { assert.isTrue(tooltip.exists()); });
     it('should set default classes', function () {
-      assert.isTrue(tooltip.classes('d-tooltip__arrow--bottom-center'));
+      assert.isTrue(tooltip.classes('d-tooltip__arrow-tippy--top'));
     });
   });
 
   describe('When an arrow direction is provided', function () {
-    TOOLTIP_DIRECTION_MODIFIERS.forEach(arrowDirection => describe(`When direction is ${arrowDirection}`, function () {
+    TOOLTIP_DIRECTIONS.forEach(arrowDirection => describe(`When direction is ${arrowDirection}`, function () {
       beforeEach(async function () {
         await wrapper.setProps({ arrowDirection });
       });
 
       it('should have correct arrow direction class', async function () {
-        assert.isTrue(tooltip.classes(`d-tooltip__arrow--${arrowDirection}`));
+        assert.isTrue(tooltip.classes(`d-tooltip__arrow-tippy--${arrowDirection}`));
       });
     }));
   });

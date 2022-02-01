@@ -29,10 +29,10 @@
         v-html="list"
       />
       <dt-list-item
-        v-else
         v-for="(item) in items"
-        role="menuitem"
+        v-else
         :key="item.id"
+        role="menuitem"
         :navigation-type="navigationType"
         @click="close"
       >

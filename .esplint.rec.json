@@ -35,7 +35,7 @@
     "components/popover/popover.vue": {
       "vue/no-deprecated-destroyed-lifecycle": 1,
       "vue/no-deprecated-dollar-listeners-api": 2,
-      "complexity": 1
+      "max-lines": 1
     },
     "components/radio/radio.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1

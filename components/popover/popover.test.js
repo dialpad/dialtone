@@ -4,10 +4,6 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
 import { DtButton } from '../button';
 import { flushPromises } from '../utils';
-import {
-  POPOVER_HORIZONTAL_ALIGNMENT,
-  POPOVER_VERTICAL_ALIGNMENT,
-} from './popover_constants';
 // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
 // Need to mock them to avoid error
 global.requestAnimationFrame = sinon.spy();
@@ -141,25 +137,6 @@ describe('Dialtone Vue Popover tests', function () {
     it('should set default classes', function () {
       assert.exists(popover.classes('dt-popover__content--align-right'));
       assert.exists(popover.classes('dt-popover__content--valign-bottom'));
-    });
-  });
-
-  describe('When an arrow direction is provided', function () {
-    POPOVER_VERTICAL_ALIGNMENT.filter(v => v).forEach(verticalAlignment => {
-      POPOVER_HORIZONTAL_ALIGNMENT.filter(v => v).forEach(horizontalAlignment =>
-        describe(`When direction is ${verticalAlignment}-${horizontalAlignment}`, function () {
-          beforeEach(async function () {
-            await wrapper.setProps({
-              fixedVerticalAlignment: verticalAlignment,
-              fixedAlignment: horizontalAlignment,
-            });
-          });
-
-          it('should have correct arrow direction class', async function () {
-            assert.exists(popover.classes(`dt-popover__content--align-${horizontalAlignment}`));
-            assert.exists(popover.classes(`dt-popover__content--valign-${verticalAlignment}`));
-          });
-        }));
     });
   });
 

@@ -55,8 +55,6 @@
         'd-bar8',
         'd-bc-black-100',
         'dt-popover-box',
-        `dt-popover__content--align-${horizontalAlignment}`,
-        `dt-popover__content--valign-${verticalAlignment}`,
         {
           'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeaderFooter,
           'd-of-auto': Boolean(maxHeight),
@@ -76,20 +74,6 @@
       @leave="isOpeningPopover = false"
       @after-enter="onOpen"
     >
-      <div
-        v-if="hasCaret"
-        class="
-          d-ps-absolute
-          dt-popover__caret
-          d-mtn2
-          d-bt
-          d-bl
-          d-w4
-          d-h4
-          d-bgc-white
-          d-bc-transparent
-        "
-      />
       <popover-header-footer
         v-if="$slots.headerContent || showCloseButton"
         ref="popover__header"
@@ -136,20 +120,19 @@
 </template>
 
 <script>
-/* eslint-disable max-lines */
-import tippy from 'tippy.js/headless';
-import { hideOnEsc, getArrowDetected } from '../tooltip/modifiers';
 import {
   POPOVER_CONTENT_WIDTHS,
-  POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
-  POPOVER_VERTICAL_ALIGNMENT,
 } from './popover_constants';
 import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 import ModalMixin from '../mixins/modal.js';
+import {
+  createTippy,
+  getPopperOptions,
+} from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer';
 
 export default {
@@ -245,36 +228,6 @@ export default {
     },
 
     /**
-     * Fixed vertical alignment of the popover content. If passed, the popover
-     * will always display anchored to the top or bottom of the anchor element.
-     * If null, the content will be positioned on whichever side has the most
-     * available space relative to the root Vue element. String values must be
-     * one of `top` or `bottom`.
-     */
-    fixedVerticalAlignment: {
-      type: String,
-      default: null,
-      validator: (align) => {
-        return POPOVER_VERTICAL_ALIGNMENT.includes(align);
-      },
-    },
-
-    /**
-     * Fixed horizontal alignment of the popover content. If passed, the
-     * popover will always display anchored to the left or right of the
-     * anchor element. If null, the content will be positioned on whichever
-     * side has the most available space relative to the root Vue element.
-     * String values must be one of `left` or `right`.
-     */
-    fixedAlignment: {
-      type: String,
-      default: null,
-      validator: (align) => {
-        return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
-      },
-    },
-
-    /**
      * Additional class name for the content wrapper element.
      */
     contentClass: {
@@ -290,15 +243,6 @@ export default {
       type: String,
       default: null,
       validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
-    },
-
-    /**
-     * Whether or not a carat (arrow) should be shown from the content pointing
-     * at the anchor.
-     */
-    hasCaret: {
-      type: Boolean,
-      default: true,
     },
 
     /**
@@ -421,6 +365,23 @@ export default {
     },
 
     /**
+     * This property is needed for define fallback placements
+     * by providing a list of placements to try.
+     * */
+    fallbackPlacements: {
+      type: Array,
+      default: () => ['left-end', 'top-end'],
+    },
+
+    /**
+     * Describes the preferred placement of the popover
+     */
+    placement: {
+      type: String,
+      default: 'bottom-end',
+    },
+
+    /**
      * Determines maximum height for the popover before overflow.
      * Possible units rem|px|em
      */
@@ -476,8 +437,6 @@ export default {
   data () {
     return {
       POPOVER_PADDING_CLASSES,
-      verticalAlignment: '',
-      horizontalAlignment: '',
       isOpeningPopover: false,
       showPopover: this.open,
       isPreventHidePopover: false,
@@ -492,33 +451,6 @@ export default {
   computed: {
     hasBoxShadow () {
       return this.hasScrolled && this.fixedHeaderFooter;
-    },
-
-    fallbackPlacements () {
-      const verticalVariants = POPOVER_VERTICAL_ALIGNMENT.filter(alignment => alignment);
-      const horizontalVariants = POPOVER_HORIZONTAL_ALIGNMENT.filter(alignment => alignment);
-      if (this.fixedAlignment === null && this.fixedVerticalAlignment === null) {
-        return verticalVariants.map(vertical =>
-          horizontalVariants.map(horizontal =>
-            this.getPlacement(vertical, horizontal)),
-        ).flat();
-      }
-
-      if (this.fixedAlignment === null) {
-        return horizontalVariants
-          .map(horizontal => this.getPlacement(this.fixedVerticalAlignment, horizontal));
-      }
-
-      if (this.fixedVerticalAlignment === null) {
-        return verticalVariants
-          .map(vertical => this.getPlacement(vertical, this.fixedAlignment));
-      }
-
-      return [];
-    },
-
-    placement () {
-      return this.getPlacement(this.fixedVerticalAlignment, this.fixedAlignment);
     },
 
     isDialog () {
@@ -543,15 +475,6 @@ export default {
       });
     },
 
-    fallbackPlacements: {
-      deep: true,
-      handler () {
-        this.tip?.setProps({
-          popperOptions: this.getPopperOptions(),
-        });
-      },
-    },
-
     open (isOpen, isPrev) {
       if (isOpen) {
         this.tip.show();
@@ -570,8 +493,6 @@ export default {
   },
 
   mounted () {
-    // local verticalAlignment is needed for flipping
-    this.verticalAlignment = this.fixedVerticalAlignment;
     // support single anchor for popover, not multi anchor
     this.anchorEl = this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
@@ -587,24 +508,26 @@ export default {
     if (this.contentWidth === 'anchor') {
       window.addEventListener('resize', this.onResize);
     }
-    this.tip = tippy(this.anchorEl, this.getOptions({
-      popperOptions: this.getPopperOptions(),
-      tippyOptions: {
-        placement: this.placement,
-        hideOnClick: this.hideOnClick,
-        offset: this.offset,
-        interactiveBorder: this.interactiveBorder,
-        appendTo: this.appendTo,
-        interactive: this.interactive,
-        allowHTML: true,
-        trigger: this.trigger,
-        zIndex,
-        onHide: this.onHide,
-        onMount: this.onMount,
-        onClickOutside: this.onClickOutside,
-        onShow: this.onShow,
-      },
-    }));
+    this.tip = createTippy(this.anchorEl, {
+      popperOptions: getPopperOptions({
+        boundary: this.flipBoundary,
+        flip: this.fallbackPlacements,
+        hasHideModifierEnabled: this.appendTo !== 'parent',
+      }),
+      contentElement: this.popoverContentEl,
+      placement: this.placement,
+      hideOnClick: this.hideOnClick,
+      offset: this.offset,
+      interactiveBorder: this.interactiveBorder,
+      appendTo: this.appendTo,
+      interactive: this.interactive,
+      trigger: this.trigger,
+      zIndex,
+      onHide: this.onHide,
+      onMount: this.onMount,
+      onClickOutside: this.onClickOutside,
+      onShow: this.onShow,
+    });
     if (this.showPopover) {
       this.tip.show();
       this.addClosePopoverEventLister();
@@ -655,16 +578,6 @@ export default {
       if (this.$refs.overlay && this.$refs.overlay.$el) {
         this.$refs.popover.append(this.$refs.overlay.$el);
       }
-    },
-
-    getPlacement (vertical = 'bottom', horizontal = 'end') {
-      const verticalAlignment = vertical || 'bottom';
-      const horizontalAlignment = horizontal || 'end';
-      if (horizontalAlignment === 'center') return verticalAlignment;
-      if (horizontalAlignment === 'left' || horizontalAlignment === 'right') {
-        return `${verticalAlignment}-${horizontalAlignment === 'left' ? 'start' : 'end'}`;
-      }
-      return `${verticalAlignment}-${horizontalAlignment}`;
     },
 
     closePopover () {
@@ -733,49 +646,6 @@ export default {
       }
     },
 
-    getPopperOptions () {
-      return {
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              boundary: this.flipBoundary,
-              fallbackPlacements: this.fallbackPlacements,
-            },
-          },
-          {
-            name: 'hide',
-            enabled: this.appendTo !== 'parent',
-          },
-          getArrowDetected(({ state }) => {
-            this.verticalAlignment = state.placement.includes('top') ? 'top' : 'bottom';
-            if (state.placement === 'top' || state.placement === 'bottom') {
-              this.horizontalAlignment = 'center';
-            } else {
-              this.horizontalAlignment = state.placement.includes('start') ? 'left' : 'right';
-            }
-          }),
-        ],
-      };
-    },
-
-    getOptions ({ popperOptions, tippyOptions } = {}) {
-      return {
-        popperOptions,
-        ...tippyOptions,
-        plugins: [hideOnEsc],
-        render: () => {
-          // The recommended structure is to use the popper as an outer wrapper
-          const popper = document.createElement('div');
-          popper.className = 'tippy-box d-ps-absolute';
-          popper.appendChild(this.popoverContentEl);
-          return {
-            popper,
-          };
-        },
-      };
-    },
-
     async setPopoverContentAnchorWidth () {
       await this.$nextTick();
       this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
@@ -797,49 +667,6 @@ export default {
 
 <style lang="less">
 @import "../../css/dialtone.less";
-
-.dt-popover__content {
-  &--align-right {
-    .dt-popover__caret {
-      right: @su24;
-    }
-  }
-
-  &--align-left {
-    .dt-popover__caret {
-      left: @su24;
-    }
-  }
-
-  &--align-center {
-    .dt-popover__caret {
-      left: 50%;
-    }
-  }
-
-  &--valign-top {
-    bottom: 100%;
-    margin-top: @su0;
-    margin-bottom: @su4;
-
-    .dt-popover__caret {
-      bottom: 0;
-      transform: rotate(225deg);
-    }
-  }
-
-  &--valign-bottom {
-    .dt-popover__caret {
-      bottom: 100%;
-      top: 0;
-      transform: rotate(45deg);
-    }
-  }
-}
-
-.dt-popover__caret {
-  transform: rotate(45deg);
-}
 
 .tippy-box[data-popper-reference-hidden],
 .tippy-box[data-popper-escaped] {

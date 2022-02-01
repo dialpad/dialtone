@@ -5,7 +5,7 @@ import DtTooltipDefault from './tooltip_default.story';
 import DtTooltipVariantsTemplate from './tooltip_variants';
 import { action } from '@storybook/addon-actions';
 
-import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_HIDE_ON_CLICK_VARIANTS } from './tooltip_constants';
+import { TOOLTIP_DIRECTIONS, TOOLTIP_HIDE_ON_CLICK_VARIANTS } from './tooltip_constants';
 import DtTooltipMdx from './tooltip.mdx';
 
 // Default Prop Values
@@ -28,12 +28,12 @@ export const argTypesData = {
   arrowDirection: {
     control: {
       type: 'select',
-      options: TOOLTIP_DIRECTION_MODIFIERS,
+      options: TOOLTIP_DIRECTIONS,
     },
   },
 
   flip: {
-    defaultValue: ['left-center', 'top-center'],
+    defaultValue: ['right', 'bottom'],
   },
 
   offset: {

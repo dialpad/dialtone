@@ -21,8 +21,8 @@
       <template #list="{ close }">
         <dt-list-item
           v-for="(item) in items"
-          role="menuitem"
           :key="item.id"
+          role="menuitem"
           :navigation-type="navigationType"
           @click="close"
         >

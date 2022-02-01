@@ -5,7 +5,7 @@
   >
     <!-- Arrow Description -->
     <div
-      v-for="(rowDirection, i) in TOOLTIP_DIRECTION_MODIFIERS"
+      v-for="(rowDirection, i) in TOOLTIP_DIRECTIONS"
       :key="i"
       class="d-mb64 d-d-flex d-jc-center d-ai-center"
     >
@@ -105,7 +105,7 @@
 <script>
 import DtTooltip from './tooltip';
 import { DtButton } from './../button';
-import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
+import { TOOLTIP_DIRECTIONS } from './tooltip_constants';
 
 function sliceIntoChunks (arr, chunkSize) {
   const res = [];
@@ -121,7 +121,7 @@ export default {
   components: { DtTooltip, DtButton },
   data () {
     return {
-      TOOLTIP_DIRECTION_MODIFIERS: sliceIntoChunks(TOOLTIP_DIRECTION_MODIFIERS, 3),
+      TOOLTIP_DIRECTIONS: sliceIntoChunks(TOOLTIP_DIRECTIONS, 3),
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       localAnchor: 'Hover over me to see a tooltip',
       openDefaultState: 'Open default state on click',

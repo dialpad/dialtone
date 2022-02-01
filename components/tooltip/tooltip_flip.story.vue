@@ -9,7 +9,7 @@
         <dt-tooltip
           v-if="parentNode"
           :id="id"
-          arrow-direction="bottom-center"
+          arrow-direction="top"
           class="tooltip"
           :flip-boundary="parentNode"
           :flip="flip"

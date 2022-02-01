@@ -129,6 +129,7 @@ export default {
       return this.navigationType !== LIST_ITEM_NAVIGATION_TYPES.NONE;
     },
   },
+
   methods: {
     onClick () {
       this.$emit('click');

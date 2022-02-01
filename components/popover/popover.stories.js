@@ -1,8 +1,6 @@
 import {
   DtPopover,
   POPOVER_PADDING_CLASSES,
-  POPOVER_HORIZONTAL_ALIGNMENT,
-  POPOVER_VERTICAL_ALIGNMENT,
   POPOVER_ROLES,
   POPOVER_CONTENT_WIDTHS,
 } from './';
@@ -12,6 +10,7 @@ import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
+import { POPOVER_DIRECTIONS } from './popover_constants';
 
 const argTypesData = {
   // Slots
@@ -73,27 +72,15 @@ const argTypesData = {
       options: POPOVER_ROLES,
     },
   },
-  fixedAlignment: {
-    defaultValue: null,
+  placement: {
+    defaultValue: 'bottom-end',
     control: {
       type: 'select',
-      options: POPOVER_HORIZONTAL_ALIGNMENT,
+      options: POPOVER_DIRECTIONS,
     },
     table: {
       defaultValue: {
-        summary: 'null',
-      },
-    },
-  },
-  fixedVerticalAlignment: {
-    defaultValue: null,
-    control: {
-      type: 'select',
-      options: POPOVER_VERTICAL_ALIGNMENT,
-    },
-    table: {
-      defaultValue: {
-        summary: 'null',
+        summary: 'bottom-end',
       },
     },
   },
@@ -160,7 +147,7 @@ const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args,
 export const Default = Template.bind({});
 Default.args = {};
 Default.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+  template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
 })];
 Default.parameters = {
   docs: {

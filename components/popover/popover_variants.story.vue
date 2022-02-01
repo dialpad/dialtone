@@ -2,8 +2,8 @@
   <div class="d-d-flex d-fw-wrap d-w100p d-flg12 d-fl-col4">
     <dt-popover
       :open="openAlignmentLeft"
-      fixed-alignment="left"
       width-content="anchor"
+      placement="bottom-start"
       class="d-mr12"
       @update:open="openAlignmentLeft = $event"
     >
@@ -22,6 +22,9 @@
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
               @click="openAlignmentLeft = !openAlignmentLeft"
             >
@@ -33,7 +36,6 @@
     </dt-popover>
     <dt-popover
       :open="openAlignmentRight"
-      fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
       @update:open="openAlignmentRight = $event"
@@ -53,6 +55,9 @@
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
               @click="openAlignmentRight = !openAlignmentRight"
             >
@@ -65,7 +70,6 @@
     <dt-popover
       :open="openPopoverWithNoPadding"
       padding="none"
-      fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
       @update:open="openPopoverWithNoPadding = $event"
@@ -97,7 +101,6 @@
     <dt-popover
       :open="openWithOverlay"
       :modal="true"
-      fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
       @update:open="openWithOverlay = $event"
@@ -117,6 +120,9 @@
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
               @click="openWithOverlay = !openWithOverlay"
             >
@@ -129,6 +135,7 @@
     <dt-popover
       :open="openPopoverWithHeader"
       :show-close-button="true"
+      placement="bottom-start"
       :fixed-header-footer="isHeaderFixed"
       content-class="d-pl12 d-pr16"
       header-class="d-d-flex d-jc-space-between d-ai-center"
@@ -178,7 +185,7 @@
       </template>
       <template #content>
         <div class="d-fs14 d-m0">
-          <div>
+          <div class="d-mb4">
             <dt-button
               @click="isHeaderFixed = !isHeaderFixed"
             >

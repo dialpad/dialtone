@@ -20,8 +20,8 @@
       >
         <dt-list-item
           v-for="(item, i) in displayItems"
-          role="option"
           :key="item.id"
+          role="option"
           navigation-type="arrow-keys"
           @click="onComboboxSelect(i)"
         >
