@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/dialpad/dialtone-vue/compare/v1.13.1...v1.13.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* apply fixed header classes only if slots not empty ([a0f58f1](https://github.com/dialpad/dialtone-vue/commit/a0f58f16db26293d6d2a2e779161f5f943e8d3a9))
+
 ## [1.13.1](https://github.com/dialpad/dialtone-vue/compare/v1.13.0...v1.13.1) (2022-01-27)
 
 
