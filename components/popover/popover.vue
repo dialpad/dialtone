@@ -56,7 +56,7 @@
         'd-bc-black-100',
         'dt-popover-box',
         {
-          'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeaderFooter,
+          'd-d-grid d-of-hidden dt-popover-box__grid': isFixedHeaderFooter(),
           'd-of-auto': Boolean(maxHeight),
           'd-wmx-unset': !Boolean(maxWidth),
         },
@@ -96,7 +96,7 @@
           'dt-popover__content',
           POPOVER_PADDING_CLASSES[padding],
           {
-            'd-of-auto': fixedHeaderFooter,
+            'd-of-auto': isFixedHeaderFooter(),
           },
           contentClass,
         ]"
@@ -546,6 +546,11 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    isFixedHeaderFooter () {
+      // don't apply fixed header/footer classes if there's nothing in the slots
+      return this.fixedHeaderFooter && (this.$slots.headerContent || this.$slots.footerContent);
+    },
+
     addClosePopoverEventLister () {
       window.addEventListener('dt-popover-close', this.closePopover);
     },
