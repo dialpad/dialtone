@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import RadiosDecorator from './radios_decorator';
 import DtRadioGroup from './radio_group';
 

@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtTabGroup from './tab_group';
 import DtTabsMdx from './tabs.mdx';
 import DtTabsDefaultTemplate from './tabs_default.story.vue';

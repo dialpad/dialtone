@@ -1,5 +1,5 @@
 import { SHORTCUTS_ALIASES_LIST } from './keyboard_shortcut_constants';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtKeyboardShortcut from './keyboard_shortcut.vue';
 import DtKeyboardShortcutMdx from './keyboard_shortcut.mdx';
 import DtKeyboardShortcutDefaultTemplate from './keyboard_shortcut_default.story.vue';

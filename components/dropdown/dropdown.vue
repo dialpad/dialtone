@@ -34,6 +34,7 @@
         class="d-p0 d-ps-relative"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
+        @mouseover.capture="onMouseHighlight"
       >
         <!-- @slot Slot for the list component -->
         <slot
@@ -46,10 +47,10 @@
 </template>
 
 <script>
-import KeyboardNavigation from '../mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { DtPopover } from '../popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'DtDropdown',
@@ -164,7 +165,6 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
-      openedWithKeyboard: false,
       isOpen: this.open,
     };
   },
@@ -190,6 +190,14 @@ export default {
   },
 
   methods: {
+    onMouseHighlight (e) {
+      const liElement = e.target.closest('li');
+
+      if (liElement && liElement.classList.contains('dt-list-item--hoverable') && this.highlightId !== liElement.id) {
+        this.setHighlightId(liElement.id);
+      }
+    },
+
     getListElement () {
       return this.$refs.listWrapper;
     },
@@ -204,25 +212,12 @@ export default {
 
     updateInitialHighlightIndex (isPopoverOpen) {
       if (isPopoverOpen) {
-        // If the dropdown was opened with keyboard, focus first element
-        if (this.openedWithKeyboard) {
-          // Focus first item on keyboard navigation
-          this.$refs.popover.focusFirstElement(this.getListElement());
-
-          if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
-            this.setHighlightIndex(0);
-          }
-
-          this.$emit('update:open', true);
+        if (this.openedWithKeyboard && this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+          this.setHighlightIndex(0);
         }
+        this.$emit('update:open', true);
       } else {
         this.clearHighlightIndex();
-
-        if (this.openedWithKeyboard) {
-          // Return focus to anchor element since it had the focus
-          this.$refs.popover.focusFirstElement(this.$refs.anchor);
-          this.openedWithKeyboard = false;
-        }
 
         this.isOpen = false;
         this.$emit('update:open', false);

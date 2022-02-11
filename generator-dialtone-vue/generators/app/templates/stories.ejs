@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import <%= componentName %> from './<%= fileName %>';
 import <%= componentName %>Mdx from './<%= fileName %>.mdx';
 import <%= componentName %>DefaultTemplate from './<%= fileName %>_default.story.vue';
@@ -80,7 +80,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Group/<%= componentName %>',
+  title: '<%= isRecipe ? 'Recipes' : 'Components' %>/<%= category ? category + '/' : '' %><%= componentName %>',
   component: <%= componentName %>,
   args: argsData,
   argTypes: argTypesData,

@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import InputsDecorator from './decorators/inputs';
 import DtInputGroup from './input_group';
 

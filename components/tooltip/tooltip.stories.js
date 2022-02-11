@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtTooltip from './tooltip';
 import DtTooltipFlipTemplate from './tooltip_flip.story.vue';
 import DtTooltipDefault from './tooltip_default.story';

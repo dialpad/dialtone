@@ -78,7 +78,7 @@ import Vue from 'vue';
 import {
   LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
-} from '../constants';
+} from '@/common/constants';
 import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
@@ -86,8 +86,8 @@ import {
 import {
   getUniqueString,
   getValidationState,
-} from '../utils';
-import { MessagesMixin } from '../mixins/input.js';
+} from '@/common/utils';
+import { MessagesMixin } from '@/common/mixins/input.js';
 import { optionsValidator } from './select_menu_validators.js';
 import { DtValidationMessages } from '../validation_messages';
 

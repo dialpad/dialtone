@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtDropdown from './dropdown';
 import DtDropdownMdx from './dropdown.mdx';
 import DtDropdownDefaultTemplate from './dropdown_default.story.vue';

@@ -187,7 +187,7 @@
 
 <script>
 import DtRadio from './radio';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {
   name: 'RadioVariants',

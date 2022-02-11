@@ -33,8 +33,8 @@ import DtBadge from '../badge/badge';
 import DtButton from '../button/button';
 import DtListItem from './list_item';
 import IconPhone from '@dialpad/dialtone/lib/dist/vue/icons/IconPhone';
-import icon from '../mixins/icon';
-import KeyboardNavigation from '../mixins/keyboard_list_navigation';
+import icon from '@/common/mixins/icon';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',

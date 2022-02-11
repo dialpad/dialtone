@@ -2,6 +2,12 @@
   "recordVersion": 1,
   "configHash": "24ac6beb718c1dbe558ced7e73ed2e67df60ba06",
   "files": {
+    "common/mixins/dom.js": {
+      "complexity": 2
+    },
+    "common/mixins/modal.js": {
+      "complexity": 1
+    },
     "components/banner/banner.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3
     },
@@ -19,12 +25,6 @@
     },
     "components/link/link.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
-    },
-    "components/mixins/dom.js": {
-      "complexity": 2
-    },
-    "components/mixins/modal.js": {
-      "complexity": 1
     },
     "components/notice/notice.vue": {
       "vue/no-deprecated-dollar-listeners-api": 4

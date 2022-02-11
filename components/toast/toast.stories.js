@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtToast from './toast';
 import DtToastMdx from './toast.mdx';
 import DtToastDefaultTemplate from './toast_default.story.vue';

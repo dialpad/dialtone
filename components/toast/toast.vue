@@ -53,7 +53,7 @@ import DtNoticeIcon from '../notice/notice_icon';
 import DtNoticeContent from '../notice/notice_content';
 import DtNoticeAction from '../notice/notice_action';
 import { NOTICE_KINDS } from '../notice/notice_constants';
-import util from '../utils';
+import util from '@/common/utils';
 import { TOAST_ROLES } from './toast_constants';
 
 export default {

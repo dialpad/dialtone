@@ -89,14 +89,14 @@
 </template>
 
 <script>
-import { DESCRIPTION_SIZE_TYPES } from '../constants.js';
+import { DESCRIPTION_SIZE_TYPES } from '@/common/constants.js';
 import { INPUT_TYPES, INPUT_SIZES } from './input_constants.js';
 import {
   getUniqueString,
   getValidationState,
-} from '../utils';
+} from '@/common/utils';
 import { DtValidationMessages } from '../validation_messages';
-import { MessagesMixin } from '../mixins/input.js';
+import { MessagesMixin } from '@/common/mixins/input.js';
 
 export default {
   name: 'DtInput',

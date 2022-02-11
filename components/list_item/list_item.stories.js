@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtListItem from './list_item';
 import DtListItemMdx from './list_item.mdx';
 import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './list_item_constants.js';

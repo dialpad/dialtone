@@ -89,9 +89,9 @@
 <script>
 import DtButton from '../button/button.vue';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
-import Modal from '../mixins/modal.js';
+import Modal from '@/common/mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 
 /**

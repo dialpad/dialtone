@@ -29,19 +29,19 @@ export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
 
 // Mixins
-export * from './components/mixins';
+export * from './common/mixins';
 
 // Constants
 export {
   VALIDATION_MESSAGE_TYPES,
   DESCRIPTION_SIZE_TYPES,
   DEFAULT_VALIDATION_MESSAGE_TYPE,
-} from './components/constants';
+} from './common/constants';
 
 // Validators
 export {
   validationMessageValidator,
-} from './components/validators';
+} from './common/validators';
 
 // Utils
 export {
@@ -49,4 +49,4 @@ export {
   formatMessages,
   filterFormattedMessages,
   getValidationState,
-} from './components/utils';
+} from './common/utils';

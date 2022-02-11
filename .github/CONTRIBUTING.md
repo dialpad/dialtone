@@ -168,7 +168,7 @@ If a consumer does not provide an id to a component as a prop we will generate a
 
 ```vue
 <script>
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 export default {
   props: {
     id: {

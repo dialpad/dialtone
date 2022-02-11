@@ -125,14 +125,15 @@ import {
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
 } from './popover_constants';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
-import ModalMixin from '../mixins/modal.js';
+import ModalMixin from '@/common/mixins/modal.js';
 import {
   createTippy,
   getPopperOptions,
 } from './tippy_utils';
+
 import PopoverHeaderFooter from './popover_header_footer';
 
 export default {
@@ -657,13 +658,11 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      if (this.isDialog) {
-        const focusableElements = this._getFocusableElements(domEl);
-        if (focusableElements.length !== 0) {
-          this.focusFirstElement(domEl);
-        } else if (this.showCloseButton) {
-          this.$refs.popover__header?.focusCloseButton();
-        }
+      const focusableElements = this._getFocusableElements(domEl, true);
+      if (focusableElements.length !== 0) {
+        this.focusFirstElement(domEl);
+      } else if (this.showCloseButton) {
+        this.$refs.popover__header?.focusCloseButton();
       }
     },
   },

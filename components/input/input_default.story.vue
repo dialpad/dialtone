@@ -47,7 +47,7 @@
 
 <script>
 import DtInput from './input';
-import icon from '../mixins/icon';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'InputDefault',

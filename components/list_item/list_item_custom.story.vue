@@ -64,7 +64,7 @@ import DtListItem from './list_item';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
 import IconSocial from '@dialpad/dialtone/lib/dist/vue/icons/IconSocial';
 import IconStarOutline from '@dialpad/dialtone/lib/dist/vue/icons/IconStarOutline';
-import KeyboardNavigation from '../mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',

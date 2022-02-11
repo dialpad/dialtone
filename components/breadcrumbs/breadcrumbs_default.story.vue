@@ -21,7 +21,7 @@
 
 <script>
 import DtBreadcrumbs from './breadcrumbs';
-import { htmlFragment } from '../utils';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtBreadcrumbsDefault',

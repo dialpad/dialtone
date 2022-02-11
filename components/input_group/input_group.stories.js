@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtInputGroup from './input_group';
 import InputGroupMdx from './input_group.mdx';
 import InputGroupDefaultTemplate from './input_group_default.story.vue';

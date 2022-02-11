@@ -1,9 +1,9 @@
-import { InputMixin } from '../mixins/input';
+import { InputMixin } from '@/common/mixins/input';
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,
 } from '../../tests/shared_examples/validation';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 describe('Input Mixin Tests', function () {
   describe('Validation Tests', function () {

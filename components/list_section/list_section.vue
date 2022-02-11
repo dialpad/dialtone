@@ -53,7 +53,7 @@
      above the max you'd press "show more" to display.
   -  Allows to add additional content to list footer.
 */
-import utils from '../utils';
+import utils from '@/common/utils';
 import { DtButton } from '../button';
 
 export default {

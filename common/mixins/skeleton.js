@@ -1,4 +1,4 @@
-import { SKELETON_RIPPLE_DURATION } from '../skeleton/skeleton_constants';
+import { SKELETON_RIPPLE_DURATION } from '@/components/skeleton/skeleton_constants';
 
 export default {
   computed: {

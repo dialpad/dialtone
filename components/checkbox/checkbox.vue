@@ -56,7 +56,7 @@ import {
   CheckableMixin,
   GroupableMixin,
   MessagesMixin,
-} from '../mixins/input.js';
+} from '@/common/mixins/input.js';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
 

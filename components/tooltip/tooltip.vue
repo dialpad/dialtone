@@ -44,7 +44,7 @@ import {
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_HIDE_ON_CLICK_VARIANTS, TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import {
   createTippy,

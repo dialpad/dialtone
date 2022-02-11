@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtBreadcrumbs from './breadcrumbs';
 import DtBreadcrumbsMdx from './breadcrumbs.mdx';
 import DtBreadcrumbsDefaultTemplate from './breadcrumbs_default.story.vue';

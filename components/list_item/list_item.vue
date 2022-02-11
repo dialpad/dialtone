@@ -35,7 +35,7 @@ import {
   LIST_ITEM_NAVIGATION_TYPES,
 } from './list_item_constants.js';
 import DtDefaultListItem from './default_list_item';
-import utils from '../utils';
+import utils from '@/common/utils';
 
 export default {
   name: 'ListItem',
