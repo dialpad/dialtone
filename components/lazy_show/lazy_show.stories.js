@@ -1,6 +1,6 @@
 import { DtLazyShow } from './';
 import LazyShowDefault from './lazy_show_default.story.vue';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import LazyShowMdx from './lazy_show.mdx';
 
 const argTypesData = {

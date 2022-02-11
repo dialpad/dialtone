@@ -7,7 +7,7 @@
  * To be effective, you must bind the onUpKey and onDownKey events, usually to
  * the root element of the component.
  */
-import Dom from '../mixins/dom';
+import Dom from './dom';
 
 export default ({
   // Role of the list items in the component. This is used to identify the list items
@@ -65,7 +65,7 @@ export default ({
       const listElement = this._getListElement();
 
       if (!listElement) {
-        console.error(`listElementKey is required or the referenced element doesn't exist. Received 
+        console.error(`listElementKey is required or the referenced element doesn't exist. Received
           listElement: `, listElement);
 
         return 0;

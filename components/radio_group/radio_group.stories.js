@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRadioGroup from './radio_group';
 import RadioGroupMdx from './radio_group.mdx';
 import RadioGroupDefaultTemplate from './radio_group_default.story.vue';

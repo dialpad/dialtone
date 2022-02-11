@@ -1,11 +1,11 @@
 import Vue from 'vue';
-import { DtValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '@/components/validation_messages';
 import { validationMessageValidator } from '../validators';
 import {
   getUniqueString,
   formatMessages,
   getValidationState,
-} from '../utils';
+} from '@/common/utils';
 
 /**
  * This mixin provides a base provide obj and set of components, props, computed, watchers and data attributes that are

@@ -7,10 +7,10 @@
       type="custom"
       @click="onClick"
     >
-    <span
-      v-if="defaultSlot"
-      v-html="defaultSlot"
-    />
+      <span
+        v-if="defaultSlot"
+        v-html="defaultSlot"
+      />
       <div
         v-else
         class="custom-list-item d-ps-relative d-py8 d-px12 d-d-flex d-ai-center"
@@ -22,8 +22,8 @@
           10:00
         </time>
         <span class="d-fs14">
-        Custom List Item Example
-      </span>
+          Custom List Item Example
+        </span>
         <div class="custom-list-item--actions d-ps-absolute d-p6 d-tn8 d-r12 d-d-flex d-bgc-white d-bar4 d-bs-md">
           <dt-button
             class="d-p4 d-py8"
@@ -31,7 +31,7 @@
             @click.stop="() => {}"
           >
             <template #icon>
-              <icon-social aria-hidden="false"/>
+              <icon-social aria-hidden="false" />
             </template>
           </dt-button>
           <dt-button
@@ -40,7 +40,7 @@
             @click.stop="() => {}"
           >
             <template #icon>
-              <icon-star-outline aria-hidden="false"/>
+              <icon-star-outline aria-hidden="false" />
             </template>
           </dt-button>
           <dt-button
@@ -49,7 +49,7 @@
             @click.stop="() => {}"
           >
             <template #icon>
-              <icon-menu-vertical aria-hidden="false"/>
+              <icon-menu-vertical aria-hidden="false" />
             </template>
           </dt-button>
         </div>
@@ -64,7 +64,7 @@ import DtListItem from './list_item';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
 import IconSocial from '@dialpad/dialtone/lib/dist/vue/icons/IconSocial';
 import IconStarOutline from '@dialpad/dialtone/lib/dist/vue/icons/IconStarOutline';
-import KeyboardNavigation from '../mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',

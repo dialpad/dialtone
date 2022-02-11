@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
 import { DtButton } from '../button';
-import { flushPromises } from '../utils';
+import { flushPromises } from '@/common/utils';
 import {
   POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_VERTICAL_ALIGNMENT,

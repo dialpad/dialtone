@@ -11,17 +11,17 @@
       @click="onClick"
     >
       <template #left>
-        <component :is="left"/>
+        <component :is="left" />
       </template>
-      <span v-html="defaultSlot"/>
+      <span v-html="defaultSlot" />
       <template #subtitle>
-        <span v-html="subtitle"/>
+        <span v-html="subtitle" />
       </template>
       <template #bottom>
-        <span v-html="bottom"/>
+        <span v-html="bottom" />
       </template>
       <template #right>
-        <component :is="right"/>
+        <component :is="right" />
       </template>
     </dt-list-item>
   </ul>
@@ -33,8 +33,8 @@ import DtBadge from '../badge/badge';
 import DtButton from '../button/button';
 import DtListItem from './list_item';
 import IconPhone from '@dialpad/dialtone/lib/dist/vue/icons/IconPhone';
-import icon from '../mixins/icon';
-import KeyboardNavigation from '../mixins/keyboard_list_navigation';
+import icon from '@/common/mixins/icon';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',

@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import KeyboardNavigation from '../mixins/keyboard_list_navigation';
-import { getUniqueString } from '../utils';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'DtCombobox',

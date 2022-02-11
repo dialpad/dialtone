@@ -11,7 +11,7 @@ import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 import BaseButtonMdx from './button.mdx';
 import ButtonDefault from './button_default.story.vue';
 import ButtonVariants from './button_variants.story.vue';
-import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
 export const argTypesData = {
   // Slots

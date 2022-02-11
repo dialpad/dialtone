@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import RadioDefault from './radio_default.story.vue';
 import RadioVariants from './radio_variants.story.vue';
 import RadioMdx from './radio.mdx';

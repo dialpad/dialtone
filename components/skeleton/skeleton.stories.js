@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtSkeleton from './skeleton';
 import DtSkeletonMdx from './skeleton.mdx';
 import DtSkeletonDefaultTemplate from './skeleton_default.story.vue';
@@ -85,7 +85,7 @@ export const argTypesData = {
     defaultValue: '',
   },
   offset: {
-    description: `RippleDuration controls how long the delay is for the animation of a 
+    description: `RippleDuration controls how long the delay is for the animation of a
     placeholder 1000 pixels from the top of the page. Each placeholder
     from the top down will have a delay duration from 0 to this offset.
     The delay of each placeholder animation is based on how far down the page

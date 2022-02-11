@@ -1,5 +1,5 @@
-import { generateTemplate } from '../storybook_utils';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { generateTemplate } from '@/common/storybook_utils';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './validation_messages';
 import BaseValidationMessagesMdx from './validation_messages.mdx';
 

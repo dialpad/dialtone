@@ -1,4 +1,4 @@
-import { getComponentFilesFromDir } from '../storybook_utils';
+import { getComponentFilesFromDir } from '@/common/storybook_utils';
 
 export default {
   created () {

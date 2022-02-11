@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtCombobox from './combobox';
 import DtComboboxMdx from './combobox.mdx';
 import DtComboboxDefaultTemplate from './combobox_default.story.vue';

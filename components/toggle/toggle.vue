@@ -30,7 +30,7 @@
 
 <script>
 import Vue from 'vue';
-import utils from '../utils';
+import utils from '@/common/utils';
 
 export default {
 

@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
-import { validationMessageValidator } from '../validators';
-import { formatMessages } from '../utils';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
+import { validationMessageValidator } from '@/common/validators';
+import { formatMessages } from '@/common/utils';
 
 /**
  * This mixin provides a base set of props, watchers and data attributes that are commonly used in our input components.

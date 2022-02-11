@@ -146,10 +146,10 @@ import {
   POPOVER_ROLES,
   POPOVER_VERTICAL_ALIGNMENT,
 } from './popover_constants';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
-import ModalMixin from '../mixins/modal.js';
+import ModalMixin from '@/common/mixins/modal.js';
 import PopoverHeaderFooter from './popover_header_footer';
 
 export default {

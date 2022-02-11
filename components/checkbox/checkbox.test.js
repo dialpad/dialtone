@@ -14,7 +14,7 @@ import {
   itBehavesLikeHasValidationClasses, itBehavesLikeIndeterminate,
   itBehavesLikeNotChecked,
 } from '../../tests/shared_examples/input';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtCheckbox from './checkbox.vue';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 

@@ -14,7 +14,7 @@
 
 <script>
 import DtSkeleton from './skeleton';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'DtSkeletonDefault',

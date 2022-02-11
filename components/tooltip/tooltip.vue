@@ -48,7 +48,7 @@ import {
   TOOLTIP_DIRECTION_MODIFIERS,
   TOOLTIP_HIDE_ON_CLICK_VARIANTS,
 } from './tooltip_constants';
-import { findFirstFocusableNode, getUniqueString } from '../utils';
+import { findFirstFocusableNode, getUniqueString } from '@/common/utils';
 import { hideOnEsc, getArrowDetected } from './modifiers';
 import DtLazyShow from '../lazy_show/lazy_show';
 export default {

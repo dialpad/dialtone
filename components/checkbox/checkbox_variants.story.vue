@@ -217,7 +217,7 @@
 
 <script>
 import DtCheckbox from './checkbox';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {
   name: 'CheckboxVariants',

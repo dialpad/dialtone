@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtButtonGroup from './button_group';
 import DtButtonGroupMdx from './button_group.mdx';
 import DtButtonGroupDefaultTemplate from './button_group_default.story.vue';

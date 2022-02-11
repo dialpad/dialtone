@@ -50,6 +50,11 @@ module.exports = {
       filename: 'preview.[name].js',
     };
 
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, ".."),
+    };
+
     config.devtool = 'source-map'
 
     return config;
@@ -76,6 +81,7 @@ module.exports = {
 
   stories: [
     '../components/**/*.stories.@(js|mdx)',
+    '../recipes/**/*.stories.@(js|mdx)',
     '../docs/**/*.stories.@(js|mdx)',
   ],
   addons: [

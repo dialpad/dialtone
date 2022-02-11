@@ -25,7 +25,7 @@
 <script>
 import DtButtonGroup from './button_group';
 import { DtButton } from '../button';
-import { htmlFragment } from '../utils';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtButtonGroupDefault',

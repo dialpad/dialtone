@@ -1,7 +1,7 @@
 import DtBanner from './banner';
 import BaseBannerMdx from './banner.mdx';
 import BannerDefault from './banner_default.story.vue';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { argsData, argTypesData } from '../notice/notice.stories.js';
 
 argTypesData.role = {

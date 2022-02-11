@@ -7,7 +7,7 @@ import {
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_DIRECTION_MODIFIERS,
 } from './tooltip_constants';
-import { flushPromises } from '../utils';
+import { flushPromises } from '@/common/utils';
 
 // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
 // Need to mock them to avoid error

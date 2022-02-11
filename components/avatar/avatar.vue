@@ -28,7 +28,7 @@ import {
   AVATAR_COLOR_MODIFIERS,
   AVATAR_KIND_MODIFIERS,
 } from './avatar_constants.js';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'DtAvatar',

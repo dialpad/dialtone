@@ -76,7 +76,7 @@
 <script>
 import { DtPopover } from './';
 import { DtButton } from '../button';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'PopoverDefaultStory',

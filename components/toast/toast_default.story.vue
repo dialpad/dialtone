@@ -64,7 +64,7 @@
 <script>
 import DtToast from './toast';
 import DtButton from '../button/button';
-import icon from '../mixins/icon';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'ToastDefault',

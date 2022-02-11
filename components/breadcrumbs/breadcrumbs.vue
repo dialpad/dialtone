@@ -24,7 +24,7 @@
 <script>
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants.js';
 import DtBreadcrumbItem from './breadcrumb_item';
-import util from '../utils';
+import util from '@/common/utils';
 
 export default {
   name: 'DtBreadcrumbs',

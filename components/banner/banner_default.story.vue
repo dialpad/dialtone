@@ -60,7 +60,7 @@
 <script>
 import DtBanner from '../banner/banner';
 import DtButton from '../button/button';
-import icon from '../mixins/icon';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'BannerDefault',

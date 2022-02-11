@@ -16,7 +16,7 @@ import {
 import {
   LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
-} from '../constants';
+} from '@/common/constants';
 import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
