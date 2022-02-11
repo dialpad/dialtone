@@ -521,14 +521,6 @@ export default {
       return this.getPlacement(this.fixedVerticalAlignment, this.fixedAlignment);
     },
 
-    isDialog () {
-      return this.role === 'dialog';
-    },
-
-    isMenu () {
-      return this.role === 'menu';
-    },
-
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
@@ -787,13 +779,11 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      if (this.isDialog) {
-        const focusableElements = this._getFocusableElements(domEl);
-        if (focusableElements.length !== 0) {
-          this.focusFirstElement(domEl);
-        } else if (this.showCloseButton) {
-          this.$refs.popover__header?.focusCloseButton();
-        }
+      const focusableElements = this._getFocusableElements(domEl, true);
+      if (focusableElements.length !== 0) {
+        this.focusFirstElement(domEl);
+      } else if (this.showCloseButton) {
+        this.$refs.popover__header?.focusCloseButton();
       }
     },
   },
