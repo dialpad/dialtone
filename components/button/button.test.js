@@ -151,6 +151,44 @@ describe('Dialtone Vue Button tests', function () {
         });
       });
 
+      describe('When button only contains an icon', function () {
+        beforeEach(function () {
+          propsData = {};
+          wrapper = shallowMount(DtButton, {
+            propsData,
+            slots: {
+              icon: EmptyComponentFixture,
+            },
+            localVue: this.localVue,
+          });
+          _setElements();
+        });
+
+        it('should have icon only class', async function () {
+          button = wrapper.find('.base-button__button');
+          assert.isTrue(button.classes().includes('d-btn--icon-only'));
+        });
+      });
+
+      describe('When button contains an icon and text', function () {
+        beforeEach(function () {
+          propsData = {};
+          wrapper = shallowMount(DtButton, {
+            propsData,
+            slots: {
+              default: 'text',
+              icon: EmptyComponentFixture,
+            },
+            localVue: this.localVue,
+          });
+          _setElements();
+        });
+
+        it('should not have icon only class', async function () {
+          _assertButtonDefaultClasses();
+        });
+      });
+
       describe('When size is set to xl', function () {
         beforeEach(async function () {
           // Test that main class is populated with input props

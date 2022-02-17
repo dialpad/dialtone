@@ -85,6 +85,13 @@
         </template>
       </dt-button>
 
+      <!-- Icon Only -->
+      <dt-button>
+        <template #icon>
+          <icon-dialpad-glyph />
+        </template>
+      </dt-button>
+
       <!-- Icon Left -->
       <dt-button>
         <template #icon>
