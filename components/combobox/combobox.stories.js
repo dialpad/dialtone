@@ -129,6 +129,9 @@ export default {
     docs: {
       page: DtComboboxMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 

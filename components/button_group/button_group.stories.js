@@ -35,6 +35,9 @@ export default {
     docs: {
       page: DtButtonGroupMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 

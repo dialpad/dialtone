@@ -149,6 +149,9 @@ export default {
     docs: {
       page: DtListItemMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 

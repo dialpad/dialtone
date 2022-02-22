@@ -150,6 +150,9 @@ export default {
     docs: {
       page: PopoverMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   excludeStories: /.Data$/,
 };
@@ -185,3 +188,5 @@ Default.parameters = {
 };
 
 export const Variants = TemplateVariants.bind({});
+Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

@@ -103,6 +103,9 @@ export default {
     docs: {
       page: DtTooltipMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -119,6 +122,8 @@ Default.args = {};
 
 export const Variants = TooltipVariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 
 export const Flip = TooltipFlipTemplate.bind({});
 Flip.args = {};
+Flip.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

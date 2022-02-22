@@ -35,6 +35,9 @@ export default {
     docs: {
       page: LazyShowMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   excludeStories: /.Data$/,
 };

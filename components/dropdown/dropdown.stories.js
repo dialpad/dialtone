@@ -160,6 +160,9 @@ export default {
     docs: {
       page: DtDropdownMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -184,6 +187,7 @@ Default.decorators = [() => ({
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.decorators = [() => ({
   template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
 })];
