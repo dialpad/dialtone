@@ -1,6 +1,6 @@
 import tippy from 'tippy.js';
 import { getArrowDetected, hideOnEsc } from '../tooltip/modifiers';
-import { findFirstFocusableNode } from '../utils';
+import { findFirstFocusableNode } from '@/common/utils';
 
 export const BASE_TIPPY_DIRECTIONS = [
   'bottom', 'bottom-start', 'bottom-end',

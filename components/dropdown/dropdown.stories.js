@@ -7,9 +7,7 @@ import DtDropdownVariantsTemplate from './dropdown_variants.story.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
 import {
   POPOVER_CONTENT_WIDTHS,
-  POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_PADDING_CLASSES,
-  POPOVER_VERTICAL_ALIGNMENT,
 } from '../popover';
 
 // Default Prop Values
@@ -67,30 +65,6 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: Object.keys(POPOVER_PADDING_CLASSES),
-    },
-  },
-  fixedVerticalAlignment: {
-    defaultValue: null,
-    control: {
-      type: 'select',
-      options: POPOVER_VERTICAL_ALIGNMENT,
-    },
-    table: {
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-  },
-  fixedAlignment: {
-    defaultValue: 'left',
-    control: {
-      type: 'select',
-      options: POPOVER_HORIZONTAL_ALIGNMENT,
-    },
-    table: {
-      defaultValue: {
-        summary: 'left',
-      },
     },
   },
   contentWidth: {

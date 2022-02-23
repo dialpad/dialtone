@@ -1,26 +1,7 @@
 <template>
   <div
     data-qa="dt-popover-header-footer"
-    :class="[
-      'd-d-flex',
-      'd-ai-center',
-      'd-fs16',
-      'd-fw-bold',
-      'd-of-auto',
-      'd-hmn48',
-      'd-w100p',
-      'd-pl12',
-      'd-pr8',
-      'd-py6',
-      'd-baw1',
-      'd-bc-black-075',
-      {
-        'd-bb': type === 'header',
-        'd-bt': type === 'footer',
-        'd-bs-card': hasBoxShadow,
-        'd-jc-flex-end': !$slots.content,
-      },
-    ]"
+    :class="type === 'header' ? 'd-popover__header' : 'd-popover__footer'"
   >
     <div
       v-if="$slots.content"
@@ -95,15 +76,9 @@ export default {
       type: Object,
       default: () => {},
     },
-
-    /**
-     * Determines fixed / sticky styles for popover header
-     */
-    hasBoxShadow: {
-      type: Boolean,
-      default: false,
-    },
   },
+
+  emits: ['close'],
 
   methods: {
     focusCloseButton () {

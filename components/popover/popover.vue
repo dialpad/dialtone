@@ -1,128 +1,105 @@
 <template>
-  <component
-    :is="elementType"
-    ref="popover"
-    data-qa="dt-popover-container"
-    v-on="$listeners"
-  >
+  <div>
     <dt-lazy-show
-      v-if="modal"
-      ref="overlay"
       :show="modal && isOpeningPopover"
       transition="d-zoom"
-      class="
-        d-ps-fixed
-        d-all0
-        d-zi-modal
-        d-fl-center
-        d-fd-column
-        d-popover-overlay
-        d-vi-visible
-        d-o100
-        d-bgc-black-900
-      "
-      @click.self="closePopoverOnClick"
+      class="d-modal"
+      aria-hidden="false"
     />
-    <div
-      :id="!ariaLabelledby && labelledBy"
-      ref="anchor"
-      data-qa="dt-popover-anchor"
-    >
-      <!-- @slot Anchor element that activates the popover. Usually a button. -->
-      <slot
-        name="anchor"
-        :attrs="{
-          'aria-expanded': showPopover.toString(),
-          'aria-controls': id,
-          'aria-haspopup': role,
-        }"
-      />
-    </div>
-    <dt-lazy-show
-      :id="id"
-      ref="content"
-      :role="role"
-      data-qa="dt-popover"
-      :aria-hidden="`${!showPopover}`"
-      :aria-labelledby="labelledBy"
-      :aria-label="ariaLabel"
-      :aria-modal="modal"
-      :transition="transition"
-      :show="showPopover"
-      :class="[
-        'd-bgc-white',
-        'd-bs-card',
-        'd-bar8',
-        'd-bc-black-100',
-        'dt-popover-box',
-        {
-          'd-d-grid d-of-hidden dt-popover-box__grid': isFixedHeaderFooter(),
-          'd-of-auto': Boolean(maxHeight),
-          'd-wmx-unset': !Boolean(maxWidth),
-        },
-      ]"
-      :style="{
-        'max-height': maxHeight,
-        'max-width': maxWidth,
-      }"
-      tabindex="-1"
-      appear
+    <component
+      :is="elementType"
+      ref="popover"
+      class="d-popover"
+      data-qa="dt-popover-container"
       v-on="$listeners"
-      @keydown="onKeydown"
-      @after-leave="onLeave"
-      @enter="isOpeningPopover = true"
-      @leave="isOpeningPopover = false"
-      @after-enter="onOpen"
     >
-      <popover-header-footer
-        v-if="$slots.headerContent || showCloseButton"
-        ref="popover__header"
-        :content-class="headerClass"
-        type="header"
-        :show-close-button="showCloseButton"
-        :close-button-props="closeButtonProps"
-        :has-box-shadow="hasBoxShadow"
-        @close="closePopover"
-      >
-        <template #content>
-          <!-- @slot Slot for popover header content -->
-          <slot name="headerContent" />
-        </template>
-      </popover-header-footer>
       <div
-        ref="popover__content"
-        data-qa="dt-popover-content"
-        :class="[
-          'dt-popover__content',
-          POPOVER_PADDING_CLASSES[padding],
-          {
-            'd-of-auto': isFixedHeaderFooter(),
-          },
-          contentClass,
-        ]"
-        @scroll="onScrollContent"
+        :id="!ariaLabelledby && labelledBy"
+        ref="anchor"
+        data-qa="dt-popover-anchor"
       >
-        <!-- @slot content that is displayed in the popover when it is open. -->
-        <slot name="content" />
+        <!-- @slot Anchor element that activates the popover. Usually a button. -->
+        <slot
+          name="anchor"
+          :attrs="{
+            'aria-expanded': showPopover.toString(),
+            'aria-controls': id,
+            'aria-haspopup': role,
+          }"
+        />
       </div>
-      <popover-header-footer
-        v-if="$slots.footerContent"
-        type="footer"
-        :content-class="footerClass"
-        :has-box-shadow="hasBoxShadow"
+      <dt-lazy-show
+        :id="id"
+        ref="content"
+        :role="role"
+        data-qa="dt-popover"
+        :aria-hidden="`${!showPopover}`"
+        :aria-labelledby="labelledBy"
+        :aria-label="ariaLabel"
+        :aria-modal="modal"
+        :transition="transition"
+        :show="showPopover"
+        :class="['d-popover__dialog']"
+        :style="{
+          'max-height': maxHeight,
+          'max-width': maxWidth,
+        }"
+        tabindex="-1"
+        appear
+        v-on="$listeners"
+        @keydown="onKeydown"
+        @after-leave="onLeave"
+        @enter="isOpeningPopover = true"
+        @leave="isOpeningPopover = false"
+        @after-enter="onOpen"
       >
-        <template #content>
-          <slot name="footerContent" />
-        </template>
-      </popover-header-footer>
-    </dt-lazy-show>
-  </component>
+        <popover-header-footer
+          v-if="$slots.headerContent || showCloseButton"
+          ref="popover__header"
+          :content-class="[POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding], headerClass]"
+          type="header"
+          :show-close-button="showCloseButton"
+          :close-button-props="closeButtonProps"
+          @close="closePopover"
+        >
+          <template #content>
+            <!-- @slot Slot for popover header content -->
+            <slot name="headerContent" />
+          </template>
+        </popover-header-footer>
+        <div
+          ref="popover__content"
+          data-qa="dt-popover-content"
+          :class="[
+            'd-popover__content',
+            POPOVER_PADDING_CLASSES[padding],
+            contentClass,
+          ]"
+          @scroll="onScrollContent"
+        >
+          <!-- @slot content that is displayed in the popover when it is open. -->
+          <slot name="content" />
+        </div>
+        <popover-header-footer
+          v-if="$slots.footerContent"
+          type="footer"
+          :content-class="[POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding], footerClass]"
+        >
+          <template #content>
+            <slot name="footerContent" />
+          </template>
+        </popover-header-footer>
+      </dt-lazy-show>
+    </component>
+  </div>
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import {
   POPOVER_CONTENT_WIDTHS,
   POPOVER_PADDING_CLASSES,
+  POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_ROLES,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
@@ -348,24 +325,6 @@ export default {
     },
 
     /**
-     * Determines the popover's z-index
-     */
-    zIndex: {
-      type: [Number, String],
-      default: 300,
-      validator: zIndex => !!Number(zIndex),
-    },
-
-    /**
-     * Determines html element container for popover's overlay,
-     * which will be rendered when 'modal' property is 'true'.
-     */
-    overlayAppendTo: {
-      type: HTMLElement,
-      default: () => document.body,
-    },
-
-    /**
      * This property is needed for define fallback placements
      * by providing a list of placements to try.
      * */
@@ -401,14 +360,6 @@ export default {
     },
 
     /**
-     * Determines fixed / sticky styles for popover header
-     */
-    fixedHeaderFooter: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
      * Determines visibility for close button
      */
     showCloseButton: {
@@ -438,6 +389,7 @@ export default {
   data () {
     return {
       POPOVER_PADDING_CLASSES,
+      POPOVER_HEADER_FOOTER_PADDING_CLASSES,
       isOpeningPopover: false,
       showPopover: this.open,
       isPreventHidePopover: false,
@@ -450,10 +402,6 @@ export default {
   },
 
   computed: {
-    hasBoxShadow () {
-      return this.hasScrolled && this.fixedHeaderFooter;
-    },
-
     isDialog () {
       return this.role === 'dialog';
     },
@@ -470,6 +418,12 @@ export default {
   },
 
   watch: {
+    modal (modal) {
+      this.tip.setProps({
+        zIndex: modal ? 650 : 300,
+      });
+    },
+
     placement (placement) {
       this.tip?.setProps({
         placement,
@@ -497,13 +451,6 @@ export default {
     // support single anchor for popover, not multi anchor
     this.anchorEl = this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
-    let zIndex = this.zIndex;
-    // align z-indexes when popover has modal prop
-    if (this.modal) {
-      this.anchorEl.classList.add('d-zi-notification');
-      zIndex = zIndex > 600 ? zIndex : 700;
-      this.appendOverlay();
-    }
 
     // align popover content width when
     if (this.contentWidth === 'anchor') {
@@ -523,8 +470,8 @@ export default {
       appendTo: this.appendTo,
       interactive: this.interactive,
       trigger: this.trigger,
-      zIndex,
       onHide: this.onHide,
+      zIndex: this.modal ? 650 : 300,
       onMount: this.onMount,
       onClickOutside: this.onClickOutside,
       onShow: this.onShow,
@@ -537,7 +484,6 @@ export default {
 
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize);
-    this.removeOverlay();
     this.tip?.destroy();
     this.removeReferences();
     this.removeClosePopoverEventLister();
@@ -568,22 +514,6 @@ export default {
       this.anchorEl = null;
       this.popoverContentEl = null;
       this.tip = null;
-    },
-
-    appendOverlay () {
-      const overlay = this.$refs.overlay.$el;
-      const { lastChild } = this.overlayAppendTo;
-      if (lastChild) {
-        this.overlayAppendTo.insertBefore(overlay, lastChild);
-      } else {
-        this.overlayAppendTo.append(overlay);
-      }
-    },
-
-    removeOverlay () {
-      if (this.$refs.overlay && this.$refs.overlay.$el) {
-        this.$refs.popover.append(this.$refs.overlay.$el);
-      }
     },
 
     closePopover () {
@@ -670,30 +600,11 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../css/dialtone.less";
-
-.tippy-box[data-popper-reference-hidden],
-.tippy-box[data-popper-escaped] {
-  .dt-popover-box {
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
-
-.d-popover-overlay {
-  --bgo: 85% !important;
-}
-
-.dt-popover-box {
-  &,
-  *,
-  *:before,
-  *:after {
-    box-sizing: border-box;
-  }
-
-  &__grid {
-    grid-template-rows: auto 1fr;
-  }
-}
+// .tippy-box[data-popper-reference-hidden],
+// .tippy-box[data-popper-escaped] {
+//   .dt-popover-box {
+//     visibility: hidden;
+//     pointer-events: none;
+//   }
+// }
 </style>
