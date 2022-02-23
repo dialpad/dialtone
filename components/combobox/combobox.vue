@@ -25,7 +25,7 @@
       data-qa="dt-combobox-list-wrapper"
       @mouseleave="clearHighlightIndex"
       @focusout="clearHighlightIndex"
-      @mouseover.capture="onMouseHighlight"
+      @mousemove.capture="onMouseHighlight"
     >
       <!-- @slot Slot for the combobox list element -->
       <slot

@@ -34,7 +34,7 @@
         class="d-p0 d-ps-relative"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
-        @mouseover.capture="onMouseHighlight"
+        @mousemove.capture="onMouseHighlight"
       >
         <!-- @slot Slot for the list component -->
         <slot
@@ -195,6 +195,7 @@ export default {
 
       if (liElement && liElement.classList.contains('dt-list-item--hoverable') && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
+        liElement.focus();
       }
     },
 

@@ -139,7 +139,6 @@ export default {
 </script>
 
 <style lang="less">
-.dt-list-item--hoverable:hover,
 .dt-list-item--focusable:focus,
 .dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
