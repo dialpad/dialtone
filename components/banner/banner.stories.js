@@ -34,6 +34,9 @@ export default {
     docs: {
       page: BaseBannerMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   args: argsData,
   argTypes: argTypesData,

@@ -110,6 +110,9 @@ export default {
     docs: {
       page: InputGroupMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -123,3 +126,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

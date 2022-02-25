@@ -1,3 +1,29 @@
+# [1.14.0](https://github.com/dialpad/dialtone-vue/compare/v1.13.2...v1.14.0) (2022-02-18)
+
+
+### Bug Fixes
+
+* keyboard nav bugs, combobox, dropdown ([#236](https://github.com/dialpad/dialtone-vue/issues/236)) ([a7cf63e](https://github.com/dialpad/dialtone-vue/commit/a7cf63ee44eee7559daaae47b8252e5cab4359b7))
+* storybook addon-docs define alias ([#240](https://github.com/dialpad/dialtone-vue/issues/240)) ([dd83bac](https://github.com/dialpad/dialtone-vue/commit/dd83bacdb35658cf45d92493a44949da64828516))
+
+
+### Features
+
+* add icon only variant with rectangular button ([#239](https://github.com/dialpad/dialtone-vue/issues/239)) ([dafd7cb](https://github.com/dialpad/dialtone-vue/commit/dafd7cbe1c64c32132487ae52fd9b42536c4e11c))
+
+# [1.14.0](https://github.com/dialpad/dialtone-vue/compare/v1.13.2...v1.14.0) (2022-02-18)
+
+
+### Bug Fixes
+
+* keyboard nav bugs, combobox, dropdown ([#236](https://github.com/dialpad/dialtone-vue/issues/236)) ([a7cf63e](https://github.com/dialpad/dialtone-vue/commit/a7cf63ee44eee7559daaae47b8252e5cab4359b7))
+* storybook addon-docs define alias ([#240](https://github.com/dialpad/dialtone-vue/issues/240)) ([dd83bac](https://github.com/dialpad/dialtone-vue/commit/dd83bacdb35658cf45d92493a44949da64828516))
+
+
+### Features
+
+* add icon only variant with rectangular button ([#239](https://github.com/dialpad/dialtone-vue/issues/239)) ([dafd7cb](https://github.com/dialpad/dialtone-vue/commit/dafd7cbe1c64c32132487ae52fd9b42536c4e11c))
+
 ## [1.13.2](https://github.com/dialpad/dialtone-vue/compare/v1.13.1...v1.13.2) (2022-02-03)
 
 

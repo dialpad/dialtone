@@ -115,16 +115,10 @@ Default.args = {};
 
 export const Variants = TooltipVariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = {
-  controls: { disabled: true },
-  options: { showPanel: false },
-};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 
 export const Flip = TooltipFlipTemplate.bind({});
 Flip.args = {
   default: 'Scroll down to see how the tooltip changes based on the available space.',
 };
-Flip.parameters = {
-  controls: { disabled: true },
-  options: { showPanel: false },
-};
+Flip.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

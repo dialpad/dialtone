@@ -95,6 +95,9 @@ export default {
     docs: {
       page: DtNoticeMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 

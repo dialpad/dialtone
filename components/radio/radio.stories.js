@@ -142,6 +142,9 @@ export default {
     docs: {
       page: RadioMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -155,3 +158,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

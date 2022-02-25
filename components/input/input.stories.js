@@ -186,6 +186,9 @@ export default {
     docs: {
       page: InputMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   decorators: [decorator],
   excludeStories: /.*Data$/,

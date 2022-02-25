@@ -167,6 +167,9 @@ export default {
     docs: {
       page: BaseButtonMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   args: argsData,
   argTypes: argTypesData,
@@ -183,5 +186,5 @@ Default.args = {
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ButtonVariants);
 
 export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { controls: { disable: true }, actions: { disable: true } };
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.args = {};

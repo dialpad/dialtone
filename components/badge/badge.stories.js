@@ -39,6 +39,9 @@ export default {
     docs: {
       page: DtBadgeMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -53,5 +56,5 @@ Default.args = {
 };
 
 export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { controls: { disable: true }, actions: { disable: true } };
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.args = {};

@@ -102,6 +102,9 @@ export default {
     docs: {
       page: ModalMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   args: argsData,
   argTypes: argTypesData,

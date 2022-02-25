@@ -104,6 +104,9 @@ export default {
     docs: {
       page: DtSkeletonMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -128,3 +131,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

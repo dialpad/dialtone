@@ -36,6 +36,9 @@ export default {
     docs: {
       page: BaseValidationMessagesMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   args: argsData,
   argTypes: argTypesData,
@@ -79,5 +82,7 @@ const VariantsTemplate = () => {
 };
 export const Variants = VariantsTemplate.bind({});
 Variants.parameters = {
-  controls: { hideNoControlsWarning: true },
+  controls: { hideNoControlsWarning: true, disable: true },
+  actions: { disable: true },
+  options: { showPanel: false },
 };

@@ -84,6 +84,9 @@ export default {
     docs: {
       page: DtAvatarMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 

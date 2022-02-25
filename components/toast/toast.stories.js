@@ -103,6 +103,9 @@ export default {
     docs: {
       page: DtToastMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 

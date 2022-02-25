@@ -181,7 +181,5 @@ Default.parameters = {
 };
 
 export const Variants = TemplateVariants.bind({});
-Variants.parameters = {
-  controls: { disabled: true },
-  options: { showPanel: false },
-};
+Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
