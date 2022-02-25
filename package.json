@@ -11,7 +11,7 @@
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
     "prepublishOnly": "npm run build",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
-    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
+    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
     "lint:code": "esplint ./",
     "lint-staged:code": "eslint --fix",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
-    "@dialpad/dialtone": "^6.17.0",
+    "@dialpad/dialtone": "^6.18.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@vue/cli-plugin-babel": "~4.4.6",
@@ -74,7 +74,7 @@
     "yo": "^4.3.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=6.17",
+    "@dialpad/dialtone": ">=6.18",
     "vue": "^2.6.11"
   },
   "gitHooks": {
