@@ -23,7 +23,7 @@ export default {
       await this.$nextTick();
       const focusableElements = this._getFocusableElements(el, true);
       const elToFocus = this._getFirstFocusElement(focusableElements);
-      elToFocus?.focus();
+      elToFocus?.focus({ preventScroll: true });
     },
 
     /**

@@ -21,7 +21,7 @@ export const createTippy = (anchorElement, options) => {
 
 export const getPopperOptions = ({
   boundary = 'clippingParents',
-  flip = [],
+  fallbackPlacements = [],
   onChangePlacement = () => {},
   hasHideModifierEnabled = false,
 } = {}) => {
@@ -30,7 +30,7 @@ export const getPopperOptions = ({
       {
         name: 'flip',
         options: {
-          fallbackPlacements: flip,
+          fallbackPlacements: fallbackPlacements,
           boundary,
         },
       },

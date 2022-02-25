@@ -133,14 +133,14 @@ describe('Dialtone Vue Tooltip tests', function () {
     });
   });
 
-  describe('When an arrow direction is provided', function () {
-    TOOLTIP_DIRECTIONS.forEach(arrowDirection => describe(`When direction is ${arrowDirection}`, function () {
+  describe('When a placement is provided', function () {
+    TOOLTIP_DIRECTIONS.forEach(placement => describe(`When direction is ${placement}`, function () {
       beforeEach(async function () {
-        await wrapper.setProps({ arrowDirection });
+        await wrapper.setProps({ placement: placement });
       });
 
       it('should have correct arrow direction class', async function () {
-        assert.isTrue(tooltip.classes(`d-tooltip__arrow-tippy--${arrowDirection}`));
+        assert.isTrue(tooltip.classes(`d-tooltip__arrow-tippy--${placement}`));
       });
     }));
   });

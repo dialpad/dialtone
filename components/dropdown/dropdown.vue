@@ -2,15 +2,14 @@
   <dt-popover
     ref="popover"
     :content-width="contentWidth"
-    :open="isOpen"
-    :has-caret="false"
-    :fixed-vertical-alignment="fixedVerticalAlignment"
-    :fixed-alignment="fixedAlignment"
+    :open="open"
+    :placement="placement"
+    :fallback-placements="fallbackPlacements"
     :padding="padding"
     role="menu"
+    :modal="modal"
     v-on="$listeners"
-    @update:open="updateInitialHighlightIndex"
-    @keydown.esc.stop="onEscapeKey"
+    @opened="updateInitialHighlightIndex"
     @keydown.enter="onEnterKey"
     @keydown.space="onSpaceKey"
     @keydown.up.stop.prevent="onUpKeyPress"
@@ -18,16 +17,15 @@
     @keydown.home.stop.prevent="onHomeKey"
     @keydown.end.stop.prevent="onEndKey"
   >
-    <template #anchor="props">
+    <template #anchor="{ attrs }">
       <!-- @slot Anchor element that activates the dropdown -->
       <slot
         ref="anchor"
         name="anchor"
-        :toggle-open="toggle"
-        v-bind="props"
+        v-bind="attrs"
       />
     </template>
-    <template #content>
+    <template #content="{ close }">
       <ul
         :id="listId"
         ref="listWrapper"
@@ -75,11 +73,13 @@ export default {
 
   props: {
     /**
-     * Optional prop to manage dropdown opening. Supports .sync modifier.
+     * Controls whether the dropdown is shown. Leaving this null will have the dropdown trigger on click by default.
+     * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
+     * Supports .sync modifier
      */
     open: {
       type: Boolean,
-      default: false,
+      default: null,
     },
 
     /**
@@ -91,8 +91,17 @@ export default {
     },
 
     /**
-     * Width configuration for the dropdown. 'anchor' is one possible string value.
-     * If passed, the dropdown will be set same width with anchor element
+     * Determines modal state, dropdown has a modal overlay preventing interaction with elements
+     * below it, but it is invisible.
+     */
+    modal: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Width configuration for the popover content. When its value is 'anchor',
+     * the popover content will have the same width as the anchor.
      */
     contentWidth: {
       type: String,
@@ -121,26 +130,22 @@ export default {
     },
 
     /**
-     * Fixed vertical alignment of the dropdown content. If passed, the dropdown
-     * will always display anchored to the top or bottom of the anchor element.
-     * If null, the content will be positioned on whichever side has the most
-     * available space relative to the root Vue element. String values must be
-     * one of `top` or `bottom`.
-     */
-    fixedVerticalAlignment: {
-      type: String,
-      default: null,
+     * If the dropdown does not fit in the direction described by "placement",
+     * it will attempt to change it's direction to the "fallbackPlacements".
+     * */
+    fallbackPlacements: {
+      type: Array,
+      default: () => {
+        return ['auto'];
+      },
     },
 
     /**
-     * Fixed horizontal alignment of the dropdown content. If passed, the
-     * dropdown will always display anchored to the left, center or right of the
-     * anchor element. If null, the content will be positioned on whichever
-     * side has the most available space relative to the root Vue element.
+     * The direction the dropdown displays relative to the anchor.
      */
-    fixedAlignment: {
+    placement: {
       type: String,
-      default: 'left',
+      default: 'bottom',
     },
 
     /**
@@ -160,12 +165,12 @@ export default {
     },
   },
 
-  emits: ['escape', 'highlight', 'update:open'],
+  emits: ['highlight', 'update:open', 'opened'],
 
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
-      isOpen: this.open,
+      openedWithKeyboard: false,
     };
   },
 
@@ -180,12 +185,6 @@ export default {
 
     activeItemEl () {
       return this.getListElement().querySelector('#' + this.highlightId);
-    },
-  },
-
-  watch: {
-    open (newValue) {
-      this.isOpen = newValue;
     },
   },
 
@@ -215,31 +214,22 @@ export default {
         if (this.openedWithKeyboard && this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
           this.setHighlightIndex(0);
         }
-        this.$emit('update:open', true);
+        this.$emit('opened', true);
       } else {
         this.clearHighlightIndex();
-
-        this.isOpen = false;
-        this.$emit('update:open', false);
+        this.openedWithKeyboard = false;
+        this.$emit('opened', false);
       }
     },
 
-    toggle () {
-      this.isOpen = !this.isOpen;
-    },
-
-    close () {
-      this.isOpen = false;
-    },
-
     onSpaceKey () {
-      if (!this.isOpen) {
+      if (!this.open) {
         this.openedWithKeyboard = true;
       }
     },
 
     onEnterKey () {
-      if (!this.isOpen) {
+      if (!this.open) {
         this.openedWithKeyboard = true;
       }
     },
@@ -254,11 +244,6 @@ export default {
       if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
         return this.onDownKey();
       }
-    },
-
-    onEscapeKey () {
-      this.isOpen = false;
-      this.$emit('escape');
     },
   },
 };

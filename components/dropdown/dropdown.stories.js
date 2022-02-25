@@ -9,12 +9,12 @@ import {
   POPOVER_CONTENT_WIDTHS,
   POPOVER_PADDING_CLASSES,
 } from '../popover';
+import { POPOVER_DIRECTIONS } from '../popover/popover_constants';
 
 // Default Prop Values
 export const argsData = {
   onHighlight: action('highlight'),
-  onEscape: action('escape'),
-  onUpdateOpen: action('update:open'),
+  onOpened: action('opened'),
 };
 
 export const argTypesData = {
@@ -61,6 +61,18 @@ export const argTypesData = {
       },
     },
   },
+  placement: {
+    defaultValue: 'bottom',
+    control: {
+      type: 'select',
+      options: POPOVER_DIRECTIONS,
+    },
+    table: {
+      defaultValue: {
+        summary: 'bottom',
+      },
+    },
+  },
   padding: {
     control: {
       type: 'select',
@@ -80,7 +92,7 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onUpdateOpen: {
+  onOpened: {
     table: {
       disable: true,
     },
@@ -90,30 +102,20 @@ export const argTypesData = {
       disable: true,
     },
   },
-  onEscape: {
+  'update:open': {
     table: {
       disable: true,
     },
   },
 
-  'update:open': {
-    description: `The dropdown will emit a boolean value for this event when the \
-user performs a closing or opening action and also the dropdown content reference when it was open. \
-Parent components can sync on this value to create a 2-way binding to control dropdown visibility.`,
-    table: {
-      type: {
-        summary: 'boolean',
-      },
-    },
-  },
-  highlight: {
-    description: 'Event fired when the highlight changes',
+  opened: {
+    description: `emitted when dropdown is shown or hidden.`,
     table: {
       type: { summary: 'event' },
     },
   },
-  escape: {
-    description: 'Event fired when when pressing escape',
+  highlight: {
+    description: 'Event fired when the highlight changes',
     table: {
       type: { summary: 'event' },
     },
@@ -131,6 +133,7 @@ export default {
     controls: {
       sort: 'requiredFirst',
     },
+    options: { showPanel: true },
     docs: {
       page: DtDropdownMdx,
     },
@@ -161,3 +164,7 @@ Variants.args = {};
 Variants.decorators = [() => ({
   template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
 })];
+Variants.parameters = {
+  controls: { disabled: true },
+  options: { showPanel: false },
+};

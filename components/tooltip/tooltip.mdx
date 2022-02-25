@@ -77,27 +77,15 @@ import { DtTooltip, TOOLTIP_TIPPY_DIRECTIONS } from '@dialpad/dialtone-vue';
 
 ### Arrow Directions
 
-'bottom-center' is assigned by default.
+'top' is assigned by default.
 Twelve directions are offered: three on each face of the tooltip.
 
-### Flip
+### Fallback Placements
 
 The tooltip uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
-[popper](https://popper.js.org/docs/v2/modifiers/flip/), which has flip modifier (which can change the placement of a
-tooltip when it's scheduled to overflow a given boundary). By default, boundary is `clippingParents`
-(corresponding popover prop is `flipBoundary`).
-
-```html
-<dt-tooltip
-  message="Message"
->
-  <template #anchor>
-    <dt-button importance="outlined">
-      Anchor
-    </dt-button>
-  </template>
-</dt-tooltip>
-```
+[popper](https://popper.js.org/docs/v2/modifiers/flip/), if the tooltip opens in a placement where it will
+be clipped, it will move to a new position. It will do this automatically by default, but if you want to
+manually specify which position it will move to in what order you can do so via the fallbackPlacements prop.
 
 ### Default
 
@@ -114,9 +102,8 @@ tooltip when it's scheduled to overflow a given boundary). By default, boundary 
 
 ```html
 <dt-tooltip
-    trigger="click"
-    hide-on-click="toggle"
     message="Message"
+    :show="true"
 >
     <template #anchor>
       <dt-button
@@ -128,31 +115,31 @@ tooltip when it's scheduled to overflow a given boundary). By default, boundary 
 </dt-tooltip>
 ```
 
-### top-left
+### top-start
 
 ```html
 <dt-tooltip
-    arrow-direction="top-left"
+    placement="top-start"
     message="Message"
 >
     <template #anchor>
-        <dt-button importance="outlined" class="d-w128">
-            top-left
+        <dt-button>
+            top-start
         </dt-button>
     </template>
 </dt-tooltip>
 ```
 
-### top-center
+### top
 
 ```html
 <dt-tooltip
-    arrow-direction="top-center"
+    placement="top"
     message="Message"
     >
     <template #anchor>
         <dt-button importance="outlined" class="d-w128">
-            top-center
+            top
         </dt-button>
     </template>
 </dt-tooltip>

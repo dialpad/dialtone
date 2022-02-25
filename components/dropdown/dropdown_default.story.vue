@@ -1,16 +1,17 @@
+<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-dropdown
-    :open="open"
-    :fixed-vertical-alignment="fixedVerticalAlignment"
-    :fixed-alignment="fixedAlignment"
+    :open.sync="isOpen"
+    :placement="placement"
+    :fallback-placements="fallbackPlacements"
     :content-width="contentWidth"
     :padding="padding"
+    :modal="modal"
     :navigation-type="navigationType"
     @highlight="onHighlight"
-    @escape="onDropdownEscape"
-    @update:open="onUpdateOpen"
+    @opened="onOpened"
   >
-    <template #anchor="{ attrs, toggleOpen }">
+    <template #anchor="{ attrs }">
       <div
         v-if="anchor"
         v-html="anchor"
@@ -18,7 +19,6 @@
       <dt-button
         v-else
         v-bind="attrs"
-        @click.prevent="toggleOpen"
       >
         Click to open
       </dt-button>
@@ -56,6 +56,7 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
+      isOpen: this.open,
     };
   },
 
@@ -69,9 +70,9 @@ export default {
     },
   },
 
-  methods: {
-    onDropdownEscape () {
-      this.onEscape();
+  watch: {
+    open (open) {
+      this.isOpen = open;
     },
   },
 };

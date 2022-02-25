@@ -7,19 +7,12 @@
       <div class="some-text" />
       <div class="some-text">
         <dt-tooltip
-          v-if="parentNode"
           :id="id"
-          arrow-direction="top"
+          :placement="placement"
           class="tooltip"
-          :flip-boundary="parentNode"
-          :flip="flip"
+          :fallback-placements="['right', 'bottom']"
           :offset="offset"
-          :append-to="appendTo"
-          :interactive="interactive"
-          :interactive-border="interactiveBorder"
-          trigger="click"
-          hide-on-click="toggle"
-          :show="show"
+          :show="true"
         >
           <template #anchor="{ attrs }">
             <dt-button
@@ -53,10 +46,6 @@ export default {
     DtButton,
   },
 
-  data: () => ({
-    parentNode: null,
-  }),
-
   computed: {
     buttonKind () {
       return this.inverted ? 'inverted' : 'default';
@@ -64,7 +53,7 @@ export default {
   },
 
   mounted () {
-    this.parentNode = this.$refs.container;
+    this.$refs.container.scrollTo(0, this.$refs.container.scrollHeight / 3);
   },
 };
 </script>

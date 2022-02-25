@@ -9,8 +9,12 @@ import PopoverVariants from './popover_variants.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
-import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 import { POPOVER_DIRECTIONS } from './popover_constants';
+
+// Default Props for all variations
+export const argsData = {
+  onOpened: action('opened'),
+};
 
 const argTypesData = {
   // Slots
@@ -96,37 +100,42 @@ const argTypesData = {
       },
     },
   },
+  transition: {
+    control: {
+      type: 'select',
+      options: ['', 'fade', 'pop', 'shake'],
+    },
+  },
 
   // Events
-  onUpdateOpen: {
+  onOpened: {
     table: {
       disable: true,
     },
   },
 
   'update:open': {
-    description: `The popover will emit a boolean value for this event when the \
-user performs a popover-closing or opening action and also the popover content reference when it was open. \
-Parent components can sync on this value to create a 2-way binding to control popover visibility.`,
+    table: {
+      disable: true,
+    },
+  },
+
+  opened: {
+    description: `emitted when popover is shown or hidden.`,
     table: {
       type: {
-        summary: 'boolean',
+        summary: 'event',
       },
     },
   },
   hideOnClick: {
     type: 'select',
-    options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
+    options: [true, false],
   },
 };
 
-// Default Props for all variations
-export const argsData = {
-  onUpdateOpen: action('update:show'),
-};
-
 export default {
-  title: 'Components/Popovers',
+  title: 'Components/Popover',
   component: DtPopover,
   args: argsData,
   argTypes: argTypesData,
@@ -134,6 +143,7 @@ export default {
     controls: {
       sort: 'requiredFirst',
     },
+    options: { showPanel: true },
     docs: {
       page: PopoverMdx,
     },
@@ -153,11 +163,10 @@ Default.parameters = {
   docs: {
     source: {
       code: `
-<dt-popover :open.sync="open">
+<dt-popover>
   <template #anchor="{ attrs }">
     <dt-button
       v-bind="attrs"
-      @click="open = !open"
     >
       Click to open
     </dt-button>
@@ -172,3 +181,7 @@ Default.parameters = {
 };
 
 export const Variants = TemplateVariants.bind({});
+Variants.parameters = {
+  controls: { disabled: true },
+  options: { showPanel: false },
+};

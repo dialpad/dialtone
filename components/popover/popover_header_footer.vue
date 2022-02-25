@@ -1,7 +1,10 @@
 <template>
   <div
     data-qa="dt-popover-header-footer"
-    :class="type === 'header' ? 'd-popover__header' : 'd-popover__footer'"
+    :class="{
+      'd-popover__header': type === 'header',
+      'd-popover__footer': type === 'footer',
+    }"
   >
     <div
       v-if="$slots.content"
@@ -10,26 +13,23 @@
     >
       <slot name="content" />
     </div>
-    <div
+    <dt-button
       v-if="showCloseButton"
-      class="d-pl6 d-d-flex d-ws-nowrap"
+      ref="popover__close-button"
+      data-qa="dt-popover-close"
+      class="d-p6 d-mr6 d-bc-transparent"
+      importance="outlined"
+      kind="muted"
+      circle
+      v-bind="closeButtonProps"
+      @click="$emit('close')"
     >
-      <dt-button
-        ref="popover__close-button"
-        class="d-p6 d-bc-transparent"
-        importance="outlined"
-        kind="muted"
-        circle
-        v-bind="closeButtonProps"
-        @click="$emit('close')"
-      >
-        <template #icon>
-          <icon-close
-            class="d-svg--size20"
-          />
-        </template>
-      </dt-button>
-    </div>
+      <template #icon>
+        <icon-close
+          class="d-svg--size20"
+        />
+      </template>
+    </dt-button>
   </div>
 </template>
 

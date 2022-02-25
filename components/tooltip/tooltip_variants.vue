@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-bare-strings-in-template -->
 <template>
   <div
     id="forms-radio--variants-container"
@@ -12,7 +13,7 @@
       <dt-tooltip
         v-for="direction in rowDirection"
         :key="direction"
-        :arrow-direction="direction"
+        :placement="direction"
         :message="localMessage"
         :offset="[0, 0]"
         class="d-mx64"
@@ -35,25 +36,8 @@
         :offset="[0, 0]"
       >
         <template #anchor>
-          <span>{{ localAnchor }}</span>
-        </template>
-      </dt-tooltip>
-    </div>
-    <div class="d-d-flex d-jc-center d-w100p">
-      <!-- Open state -->
-      <dt-tooltip
-        class="d-mb64 d-mt16"
-        :message="localMessage"
-        trigger="click"
-        hide-on-click
-        :offset="[0, 0]"
-        show
-      >
-        <template #anchor>
-          <dt-button
-            importance="outlined"
-          >
-            {{ openDefaultState }}
+          <dt-button link>
+            Link Tooltip
           </dt-button>
         </template>
       </dt-tooltip>
@@ -63,16 +47,15 @@
       <dt-tooltip
         class="d-mb64 d-mt16"
         :message="localMessage"
-        trigger="click"
-        hide-on-click="toggle"
         :offset="[0, 0]"
-        show
+        :show="show1"
       >
         <template #anchor>
           <dt-button
             importance="outlined"
+            @click="show1 = !show1"
           >
-            {{ openDefaultState }}
+            Open on click
           </dt-button>
         </template>
       </dt-tooltip>
@@ -81,11 +64,8 @@
       <div class="d-py64">
         <!-- Inverted state -->
         <dt-tooltip
-          show
           :inverted="true"
-          trigger="click"
           :message="localMessage"
-          hide-on-click="toggle"
           :offset="[0, 0]"
         >
           <template #anchor>
@@ -93,7 +73,7 @@
               kind="inverted"
               importance="outlined"
             >
-              {{ openInvertedState }}
+              Inverted
             </dt-button>
           </template>
         </dt-tooltip>
@@ -123,9 +103,7 @@ export default {
     return {
       TOOLTIP_DIRECTIONS: sliceIntoChunks(TOOLTIP_DIRECTIONS, 3),
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-      localAnchor: 'Hover over me to see a tooltip',
-      openDefaultState: 'Open default state on click',
-      openInvertedState: 'Open inverted state on click',
+      show1: false,
     };
   },
 };
