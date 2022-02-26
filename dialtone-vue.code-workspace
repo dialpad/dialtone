@@ -22,6 +22,7 @@
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.trimAutoWhitespace": true,
+    "editor.rulers": [120],
     "files.trimTrailingWhitespace": true,
     "files.eol": "\n",
     "files.insertFinalNewline": true,
