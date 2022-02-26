@@ -1,3 +1,10 @@
+# [2.0.0-beta.3](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2022-02-26)
+
+
+### Bug Fixes
+
+* overlength mdx ([b4f64d8](https://github.com/dialpad/dialtone-vue/commit/b4f64d87f63eabbdcde69359f4904c8a141c7d41))
+
 # [2.0.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2022-02-26)
 
 
