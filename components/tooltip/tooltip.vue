@@ -7,6 +7,7 @@
       @focusout="onLeaveAnchor"
       @mouseenter="onEnterAnchor"
       @mouseleave="onLeaveAnchor"
+      @keydown.esc="onLeaveAnchor"
     >
       <slot
         name="anchor"
@@ -258,6 +259,7 @@ export default {
     },
 
     onEnterTransitionComplete () {
+      console.log('on enter');
       this.$emit('shown', true);
       if (this.show !== null) {
         this.$emit('update:show', true);
