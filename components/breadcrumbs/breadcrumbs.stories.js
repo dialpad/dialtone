@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtBreadcrumbs from './breadcrumbs';
 import DtBreadcrumbsMdx from './breadcrumbs.mdx';
 import DtBreadcrumbsDefaultTemplate from './breadcrumbs_default.story.vue';
@@ -65,6 +65,9 @@ export default {
     docs: {
       page: DtBreadcrumbsMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -80,3 +83,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

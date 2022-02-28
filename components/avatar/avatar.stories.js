@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtAvatar from './avatar';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
@@ -83,6 +83,9 @@ export default {
     },
     docs: {
       page: DtAvatarMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };

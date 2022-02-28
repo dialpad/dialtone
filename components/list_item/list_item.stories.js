@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtListItem from './list_item';
 import DtListItemMdx from './list_item.mdx';
 import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './list_item_constants.js';
@@ -17,7 +17,7 @@ export const argTypesData = {
     description: 'Slot for the main content',
     table: {
       category: 'slots',
-      type: { summary: 'string' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -49,7 +49,7 @@ export const argTypesData = {
     description: 'Slot for the content below the main content',
     table: {
       category: 'slots',
-      type: { summary: 'string' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -59,7 +59,7 @@ export const argTypesData = {
     description: 'Slot for the content below the subtitle',
     table: {
       category: 'slots',
-      type: { summary: 'string' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -114,15 +114,6 @@ export const argTypesData = {
       options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
     },
   },
-  isHighlighted: {
-    table: {
-      type: { summary: 'string' },
-      defaultValue: { summary: false },
-    },
-    control: {
-      type: 'boolean',
-    },
-  },
 
   // Action Event Handlers
   onClick: {
@@ -152,8 +143,14 @@ export default {
   decorators: [decorator],
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtListItemMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };

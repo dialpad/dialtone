@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 import DtLink from './link';
 import DtLinkMdx from './link.mdx';
@@ -112,6 +112,9 @@ export default {
     docs: {
       page: DtLinkMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -125,3 +128,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

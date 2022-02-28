@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { SELECT_SIZE_MODIFIERS } from './select_menu_constants';
 import DtSelectMenu from './select_menu';
 import DtSelectMenuMdx from './select_menu.mdx';
@@ -235,6 +235,9 @@ export default {
     docs: {
       page: DtSelectMenuMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -255,3 +258,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

@@ -22,12 +22,12 @@
 </template>
 
 <script>
-import { validationMessageValidator } from '../validators';
+import { validationMessageValidator } from '@/common/validators';
 import {
   getUniqueString,
   filterFormattedMessages,
   getValidationState,
-} from '../utils';
+} from '@/common/utils';
 
 export default {
   name: 'DtValidationMessages',

@@ -33,6 +33,22 @@
       </dt-button>
     </div>
     <div class="d-mb16">
+      <!-- Muted clear -->
+      <dt-button
+        kind="muted"
+        importance="clear"
+      >
+        Muted clear
+      </dt-button>
+      <!-- Muted outline -->
+      <dt-button
+        kind="muted"
+        importance="outlined"
+      >
+        Muted Outlined
+      </dt-button>
+    </div>
+    <div class="d-mb16">
       <!-- Extra Small -->
       <dt-button size="xs">
         Extra Small
@@ -64,6 +80,13 @@
         importance="outlined"
         circle
       >
+        <template #icon>
+          <icon-dialpad-glyph />
+        </template>
+      </dt-button>
+
+      <!-- Icon Only -->
+      <dt-button>
         <template #icon>
           <icon-dialpad-glyph />
         </template>

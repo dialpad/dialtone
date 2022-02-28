@@ -34,12 +34,6 @@ These button styles are provided in three visual styles:
 Specific classes are provided for the disabled state so this can be applied to objects that
 aren't buttons (or can't use the disabled attribute).
 
-### Usage
-
-```js
-import { DtButton } from '@dialpad/dialtone-vue';
-```
-
 ## Base Style
 
 <Canvas>
@@ -55,3 +49,25 @@ import { DtButton } from '@dialpad/dialtone-vue';
 ## Slots, Props & Events
 
 <ArgsTable story={PRIMARY_STORY} />
+
+## Accessibility
+
+If you want the user to navigate to a new page or to a different section on the same page, use the
+[Link component](?path=/story/components-link--default). Use buttons to trigger actions, such as "Search",
+"Cancel", "Submit", etc.
+
+## Usage
+
+### Import
+
+```js
+import { DtButton } from '@dialpad/dialtone-vue';
+```
+
+### Default
+
+```html
+<dt-button>
+ Button 
+</dt-button>
+```

@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import { InputGroupMixin } from '../mixins/input_group';
+import { InputGroupMixin } from '@/common/mixins/input_group';
 import { DtValidationMessages } from '../validation_messages';
 
 export default {
   name: 'DtInputGroup',
 
-  mixins: [InputGroupMixin],
-
   components: { DtValidationMessages },
+
+  mixins: [InputGroupMixin],
 
   props: {
     /**

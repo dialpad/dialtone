@@ -41,6 +41,18 @@ These breadcrumbs styles are provided in two visual styles:
   <Story id="components-breadcrumbs--variants" />
 </Canvas>
 
+## Slots, Props & Events
+
+### Breadcrumbs Props
+
+<ArgsTable story={PRIMARY_STORY} />
+
+### Breadcrumb Item Props
+
+Breadcrumb items include [Link component](?path=/story/components-link--default).
+
+<ArgsTable of={DtBreadcrumbItem} />
+
 ## Accessibility
 
 HTML doesn't provide dedicated semantic elements for breadcrumbs, so we need to add a
@@ -51,18 +63,6 @@ few ARIA attributes to make them accessible.
 - `ol` - This child element of .d-breadcrumbs communicates that breadcrumbs are a structured, navigational
 hierarchy to screen readers.
 - `aria-current="location"` - used to denote the current page.
-
-## Slots, Props & Events
-
-### Breadcrumbs Props
-
-<ArgsTable story={PRIMARY_STORY} />
-
-### Breadcrumb Item Props
-
-Breadcrumb items include [Link component](/?path=/docs/components-link--default).
-
-<ArgsTable of={DtBreadcrumbItem} />
 
 ## Usage
 

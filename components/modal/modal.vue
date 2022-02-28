@@ -1,6 +1,6 @@
 <template>
   <dt-lazy-show
-    transition="d-modal"
+    transition="d-zoom"
     :show="show"
     :class="[
       'd-modal',
@@ -21,7 +21,7 @@
     >
       <div
         v-show="show"
-        class="d-modal__dialog"
+        :class="['d-modal__dialog', dialogClass]"
         role="dialog"
         aria-modal="true"
         :aria-describedby="describedById"
@@ -89,9 +89,9 @@
 <script>
 import DtButton from '../button/button.vue';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
-import Modal from '../mixins/modal.js';
+import Modal from '@/common/mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 
 /**
@@ -195,6 +195,16 @@ export default {
     },
 
     /**
+     * Additional class name for the dialog element within the modal.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    dialogClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
      * Hides the close button on the modal
      */
     hideClose: {
@@ -255,27 +265,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-@import "../../css/dialtone.less";
-
-.d-modal-enter, .d-modal-leave-to {
-  .d-modal--animate();
-}
-
-.d-modal__dialog-enter, .d-modal__dialog-leave-to {
-  .d-modal__dialog--animate();
-}
-
-.d-modal-enter-active, .d-modal__dialog-enter-active {
-  .d-modal--animate-in();
-}
-
-.d-modal-leave-active {
-  .d-modal--animate-out();
-}
-
-.d-modal__dialog-leave-active {
-  .d-modal__dialog--animate-out();
-}
-</style>

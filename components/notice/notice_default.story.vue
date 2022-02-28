@@ -54,7 +54,7 @@
 <script>
 import { DtButton } from '../button';
 import DtNotice from './notice';
-import icon from '../mixins/icon';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'NoticeDefault',

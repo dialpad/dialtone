@@ -10,7 +10,7 @@
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
           v-bind="$attrs"
-          :indeterminate.prop="indeterminate"
+          :indeterminate.prop="internalIndeterminate"
           v-on="inputListeners"
         >
       </div>
@@ -56,7 +56,7 @@ import {
   CheckableMixin,
   GroupableMixin,
   MessagesMixin,
-} from '../mixins/input.js';
+} from '@/common/mixins/input.js';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
 
@@ -106,7 +106,7 @@ export default {
          * input event by the change listener).
         */
         input: () => {},
-        change: event => this.emitValue(event.target.value, event.target.checked),
+        change: event => this.emitValue(event.target),
       };
     },
   },
@@ -128,7 +128,15 @@ export default {
   },
 
   methods: {
-    emitValue (value, checked) {
+    emitValue (target) {
+      let { value, checked } = target;
+      // Expected: Indeterminate -> unchecked. We need to manually set DOM property `checked` to false
+      // and update this.internalIndeterminate.
+      if (this.internalIndeterminate) {
+        checked = false;
+        this.internalIndeterminate = false;
+        target.checked = false;
+      }
       // update provided value if injected
       this.setGroupValue(value, checked);
 

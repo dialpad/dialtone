@@ -1,27 +1,30 @@
 <template>
-  <dt-list-item
-    :id="id"
-    :role="role"
-    :element-type="elementType"
-    :type="type"
-    :is-highlighted="isHighlighted"
-    :navigation-type="navigationType"
-    @click="onClick"
+  <ul
+    ref="listWrapper"
   >
-    <template #left>
-      <component :is="left" />
-    </template>
-    <span v-html="defaultSlot" />
-    <template #subtitle>
-      <span v-html="subtitle" />
-    </template>
-    <template #bottom>
-      <span v-html="bottom" />
-    </template>
-    <template #right>
-      <component :is="right" />
-    </template>
-  </dt-list-item>
+    <dt-list-item
+      :id="id"
+      :role="role"
+      :element-type="elementType"
+      :type="type"
+      :navigation-type="navigationType"
+      @click="onClick"
+    >
+      <template #left>
+        <component :is="left" />
+      </template>
+      <span v-html="defaultSlot" />
+      <template #subtitle>
+        <span v-html="subtitle" />
+      </template>
+      <template #bottom>
+        <span v-html="bottom" />
+      </template>
+      <template #right>
+        <component :is="right" />
+      </template>
+    </dt-list-item>
+  </ul>
 </template>
 
 <script>
@@ -30,7 +33,8 @@ import DtBadge from '../badge/badge';
 import DtButton from '../button/button';
 import DtListItem from './list_item';
 import IconPhone from '@dialpad/dialtone/lib/dist/vue/icons/IconPhone';
-import icon from '../mixins/icon';
+import icon from '@/common/mixins/icon';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',
@@ -43,6 +47,19 @@ export default {
     IconPhone,
   },
 
-  mixins: [icon],
+  mixins: [
+    icon,
+    KeyboardNavigation({
+      indexKey: 'highlightIndex',
+      idKey: 'highlightId',
+      listElementKey: 'getListElement',
+    }),
+  ],
+
+  methods: {
+    getListElement () {
+      return this.$refs.listWrapper;
+    },
+  },
 };
 </script>

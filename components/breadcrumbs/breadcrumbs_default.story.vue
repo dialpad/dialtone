@@ -12,15 +12,16 @@
       :inverted="inverted"
     >
       <html-fragment
+        v-if="defaultSlot"
         :html="defaultSlot"
-        v-if="defaultSlot"></html-fragment>
+      />
     </dt-breadcrumbs>
   </div>
 </template>
 
 <script>
 import DtBreadcrumbs from './breadcrumbs';
-import { htmlFragment } from '../utils';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtBreadcrumbsDefault',

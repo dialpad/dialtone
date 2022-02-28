@@ -18,12 +18,6 @@ the app, add the `pinned` property.
 2. **Below the top bar:** This is the default location for system banners. Use these when it affects only a particular
 area of the product (e.g. when the user is in Do Not Disturb mode).
 
-### Usage
-
-```js
-import { DtBanner } from '@dialpad/dialtone-vue';
-```
-
 ## Base Style
 
 The typical banner will have a title, description and an action button
@@ -79,3 +73,35 @@ Warning visual style.
 ## Slots, Props & Events
 
 <ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```js
+import { DtBanner, DtButton } from '@dialpad/dialtone-vue';
+```
+
+### Default
+
+```html
+<dt-banner
+  title="Optional title"
+>
+  Message body with
+  <a
+    href="#"
+    class="d-link"
+  >a link</a>.
+  <template
+    #action
+  >
+    <dt-button
+      importance="outlined"
+      @click="onClick"
+    >
+      Action
+    </dt-button>
+  </template>
+</dt-banner>
+```

@@ -3,6 +3,9 @@
     "module": "commonjs",
     "target": "esnext",
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
   },
   "include": ["*.{js,vue}"],
   "exclude": ["**/node_modules", "**/compiled", "**/.cache", "**/compressed"],

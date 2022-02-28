@@ -7,6 +7,8 @@
       :kind="kind"
       :size="size"
       :copy="copy"
+      :modal-class="modalClass"
+      :dialog-class="dialogClass"
       :hide-close="hideClose"
       :labelled-by-id="labelledById"
       @update:show="close"
@@ -76,7 +78,7 @@ export default {
 
   data () {
     return {
-      isOpen: false,
+      isOpen: this.show,
     };
   },
 
@@ -86,6 +88,14 @@ export default {
         ...this.closeButtonProps,
         ariaLabel: 'Close',
       };
+    },
+  },
+
+  watch: {
+    show: {
+      handler () {
+        this.isOpen = this.show;
+      },
     },
   },
 

@@ -4,17 +4,20 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import DtListItem from './list_item.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from './list_item_constants.js';
 
+const basePropsData = {
+  id: 'dt-item',
+};
+
 describe('Dialtone Vue ListItem tests', function () {
   // Wrappers
   let wrapper;
 
   // Test Environment
-  let propsData;
+  let propsData = basePropsData;
   let slots;
   let listeners;
   let provide;
   let clickStub;
-  let setHighlightStub;
 
   const _mountWrapper = () => {
     wrapper = mount(DtListItem, {
@@ -33,15 +36,16 @@ describe('Dialtone Vue ListItem tests', function () {
 
   beforeEach(function () {
     clickStub = sinon.stub();
-    setHighlightStub = sinon.stub();
     listeners = { click: clickStub };
+    provide = { highlightId: () => 'dt-item2' };
     _mountWrapper();
   });
 
   // Test Teardown
   afterEach(function () {
-    propsData = {};
+    propsData = basePropsData;
     slots = {};
+    provide = {};
   });
 
   describe('Presentation Tests', function () {
@@ -77,11 +81,6 @@ describe('Dialtone Vue ListItem tests', function () {
     });
 
     describe('When item is not highlighted', function () {
-      // Test Setup
-      beforeEach(async function () {
-        await wrapper.setProps({ isHighlighted: false });
-      });
-
       it('should not apply the class to the wrapper.', function () {
         assert.isFalse(wrapper.classes('dt-list-item--highlighted'));
       });
@@ -93,7 +92,7 @@ describe('Dialtone Vue ListItem tests', function () {
     describe('When item is highlighted', function () {
       // Test Setup
       beforeEach(async function () {
-        await wrapper.setProps({ isHighlighted: true });
+        await wrapper.setProps({ id: 'dt-item2' });
       });
 
       it('should apply the class to the wrapper.', function () {
@@ -156,33 +155,6 @@ describe('Dialtone Vue ListItem tests', function () {
       });
 
       itBehavesLikeHandlesClick();
-    });
-
-    describe('When mousemove is detected but item is not highlightable', function () {
-      // Test Setup
-      beforeEach(async function () {
-        await wrapper.setProps({ setHighlight: null });
-        await wrapper.trigger('mousemove');
-      });
-
-      it('should not call setHighlight', function () {
-        assert.equal(setHighlightStub.callCount, 0);
-      });
-    });
-
-    describe('When mousemove is detected and item is highlightable', function () {
-      // Test Setup
-      beforeEach(async function () {
-        await wrapper.setProps({
-          setHighlight: setHighlightStub,
-          navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
-        });
-        await wrapper.trigger('mousemove');
-      });
-
-      it('should call setHighlight once', function () {
-        assert.equal(setHighlightStub.callCount, 1);
-      });
     });
   });
 });

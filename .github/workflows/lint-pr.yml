@@ -27,8 +27,14 @@ jobs:
         if: ${{ github.event.pull_request.commits == '1' }}
         run: |
           echo "Since your PR has a single commit, this commit should adhere to the commit message convention."
+          echo "correct format: <type>(<scope>): <subject>"
+          echo "example: feat: add modal component"
           echo "Please amend your commit message (git commit --amend) if commitlint reports an error and push using: git push --force-with-lease"
-          echo "$(git show -s --format=%B HEAD^2)" | npx commitlint --verbose --help-url https://github.com/dialpad/dialtone-vue/blob/staging/.github/COMMIT_CONVENTION.md --verbose
+          echo "$(git show -s --format=%B HEAD^2)" | npx commitlint --verbose
 
       - name: Lint pull request title
-        run: echo "${{ github.event.pull_request.title }}" | npx commitlint --verbose
+        run: |
+          echo "The PR's title should adhere to the commit message convention."
+          echo "correct format: <type>(<scope>): <subject>"
+          echo "example: feat: add modal component"
+          echo "${{ github.event.pull_request.title }}" | npx commitlint --verbose

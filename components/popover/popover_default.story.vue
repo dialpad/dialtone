@@ -1,18 +1,36 @@
 <template>
   <dt-popover
     :id="id"
-    :open.sync="isOpen"
-    :element-type="elementType"
-    :content-class="contentClass"
-    :padding="padding"
-    :has-caret="hasCaret"
-    :role="role"
-    :aria-label="ariaLabel"
-    :aria-labelledby="ariaLabelledby"
-    :transition="transition"
+    :key="uniqueKey"
+    :open="isOpen"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
-    @update:open="onClose"
+    :content-class="contentClass"
+    :has-caret="hasCaret"
+    :padding="padding"
+    :hide-on-click="hideOnClick"
+    :role="role"
+    :element-type="elementType"
+    :transition="transition"
+    :aria-labelledby="ariaLabelledby"
+    :aria-label="ariaLabel"
+    :focus-anchor-on-close="focusAnchorOnClose"
+    :offset="offset"
+    :append-to="appendTo"
+    :interactive="interactive"
+    :flip-boundary="flipBoundary"
+    :interactive-border="interactiveBorder"
+    :trigger="trigger"
+    :modal="modal"
+    :content-width="contentWidth"
+    :show-close-button="showCloseButton"
+    :header-class="headerClass"
+    :footer-class="footerClass"
+    :fixed-header-footer="fixedHeaderFooter"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
+    width-content="anchor"
+    @update:open="updateOpen"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -23,10 +41,34 @@
       </dt-button>
     </template>
     <template #content>
-      <p class="d-fs14 d-m0">
-        <span v-if="content" v-html="content"></span>
-        <span v-else>I will be displayed in the popover!</span>
-      </p>
+      <div class="d-fs14 d-m0">
+        <span
+          v-if="content"
+          v-html="content"
+        />
+        <template v-else>
+          <p class="d-mb4">
+            I will be displayed in the popover!
+          </p>
+          <dt-button
+            @click="isOpen = !isOpen"
+          >
+            Click to close
+          </dt-button>
+        </template>
+      </div>
+    </template>
+    <template
+      v-if="headerContent"
+      #headerContent
+    >
+      <span v-html="headerContent" />
+    </template>
+    <template
+      v-if="footerContent"
+      #footerContent
+    >
+      <span v-html="footerContent" />
     </template>
   </dt-popover>
 </template>
@@ -34,10 +76,14 @@
 <script>
 import { DtPopover } from './';
 import { DtButton } from '../button';
+import { getUniqueString } from '@/common/utils';
 
 export default {
-  name: 'PopoverDefault',
-  components: { DtPopover, DtButton },
+  name: 'PopoverDefaultStory',
+  components: {
+    DtPopover,
+    DtButton,
+  },
 
   props: {
     open: {
@@ -52,9 +98,22 @@ export default {
     };
   },
 
+  computed: {
+    uniqueKey () {
+      return getUniqueString();
+    },
+  },
+
   watch: {
     open (isOpen) {
       this.isOpen = isOpen;
+    },
+  },
+
+  methods: {
+    updateOpen (isOpen) {
+      this.isOpen = isOpen;
+      this.onUpdateOpen(...arguments);
     },
   },
 };

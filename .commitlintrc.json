@@ -17,6 +17,10 @@
         "style",
         "test"
       ]
-    ]
-  }
+    ],
+    "header-max-length": [2, "always", 72],
+    "body-max-line-length": [0, "always", 100],
+    "subject-full-stop": [0, "never", "."]
+  },
+  "helpUrl": "https://github.com/dialpad/dialtone-vue/blob/staging/.github/COMMIT_CONVENTION.md"
 }

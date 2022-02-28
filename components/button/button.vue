@@ -2,7 +2,7 @@
   <button
     :class="[
       'base-button__button',
-      buttonClasses,
+      buttonClasses(),
     ]"
     data-qa="dt-button"
     :type="type"
@@ -12,7 +12,7 @@
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
-      v-if="$slots.icon && !link"
+      v-if="shouldRenderIcon()"
       data-qa="dt-button-icon"
       :class="[
         'base-button__icon',
@@ -207,7 +207,25 @@ export default {
     computedAriaLive () {
       return this.assertiveOnFocus && this.isInFocus ? 'assertive' : this.$attrs.ariaLive;
     },
+  },
 
+  watch: {
+    $props: {
+      deep: true,
+      immediate: true,
+      handler () {
+        if (process.env.NODE_ENV === 'production') return;
+
+        if (this.circle && this.link) {
+          warn('You cannot enable circle and link at the same time', this);
+        }
+
+        this.isInvalidPropCombination(this.circle, this.kind, this.importance);
+      },
+    },
+  },
+
+  methods: {
     buttonClasses () {
       if (this.link) {
         return [
@@ -224,27 +242,11 @@ export default {
         {
           'd-btn--circle': this.circle,
           'd-btn--loading': this.loading,
+          'd-btn--icon-only': this.isIconOnly(),
         },
       ];
     },
-  },
 
-  watch: {
-    $props: {
-      immediate: true,
-      handler () {
-        if (process.env.NODE_ENV === 'production') return;
-
-        if (this.circle && this.link) {
-          warn('You cannot enable circle and link at the same time', this);
-        }
-
-        this.isInvalidPropCombination(this.circle, this.kind, this.importance);
-      },
-    },
-  },
-
-  methods: {
     isInvalidPropCombination (circle, kind, importance) {
       for (const row of INVALID_COMBINATION) {
         if (circle === row.circle && kind === row.kind && importance === row.importance) {
@@ -253,6 +255,14 @@ export default {
         }
       }
       return true;
+    },
+
+    shouldRenderIcon () {
+      return this.$slots.icon && !this.link;
+    },
+
+    isIconOnly () {
+      return this.shouldRenderIcon() && !this.$slots.default;
     },
   },
 };

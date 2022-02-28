@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtBadge from './badge';
 import DtBadgeDefaultTemplate from './badge_default.story.vue';
 import DtBadgeVariantsTemplate from './badge_variants.story.vue';
@@ -36,6 +36,9 @@ export default {
     docs: {
       page: DtBadgeMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -50,5 +53,5 @@ Default.args = {
 };
 
 export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { controls: { disable: true }, actions: { disable: true } };
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.args = {};

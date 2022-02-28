@@ -1,0 +1,43 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtButtonGroup from './button_group';
+
+# Button Group
+
+<Subtitle>
+  Button Groups are used to group buttons that have a relationship or similar actions.
+</Subtitle>
+
+## Base Style
+
+Buttons are surrounded by a parent that handles the layout of the buttons.
+
+<Canvas>
+  <Story id="components-button-group--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtButtonGroup, DtButton } from '@dialpad/dialtone-vue';
+```
+
+#### Default
+
+```html
+<template>
+  <dt-button-group>
+    <dt-button importance="primary">
+      Confirm
+    </dt-button>
+    <dt-button importance="outlined">
+      Cancel
+    </dt-button>
+  </dt-button-group>
+</template>
+```

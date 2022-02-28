@@ -3,9 +3,10 @@
 -->
 <template>
   <label>
-    <div>
+    <div class="d-radio-group">
       <input
         type="radio"
+        class="d-radio"
         :checked="internalChecked"
         :name="internalName"
         :value="value"
@@ -15,6 +16,7 @@
         v-on="inputListeners"
       >
       <span
+        class="d-radio__copy d-radio__label"
         :class="labelClass"
         v-bind="labelChildProps"
         data-qa="input-decorator-label"
@@ -31,7 +33,7 @@ import { RADIO_INPUT_VALIDATION_CLASSES } from '../../radio/radio_constants';
 import {
   InputMixin,
   GroupableMixin,
-} from '../../mixins/input';
+} from '@/common/mixins/input';
 
 export default {
   name: 'InputDecorator',

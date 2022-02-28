@@ -11,7 +11,7 @@ import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 import BaseButtonMdx from './button.mdx';
 import ButtonDefault from './button_default.story.vue';
 import ButtonVariants from './button_variants.story.vue';
-import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
 export const argTypesData = {
   // Slots
@@ -167,6 +167,9 @@ export default {
     docs: {
       page: BaseButtonMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   args: argsData,
   argTypes: argTypesData,
@@ -183,5 +186,5 @@ Default.args = {
 const VariantsTemplate = (args) => createTemplateFromVueFile(args, ButtonVariants);
 
 export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { controls: { disable: true }, actions: { disable: true } };
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.args = {};

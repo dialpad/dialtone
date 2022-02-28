@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import CheckboxDefault from './checkbox_default.story.vue';
 import CheckboxVariants from './checkbox_variants.story.vue';
 import BaseCheckboxMdx from './checkbox.mdx';
@@ -141,6 +141,9 @@ export default {
     docs: {
       page: BaseCheckboxMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -154,3 +157,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

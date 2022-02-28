@@ -39,6 +39,18 @@ export const INVALID_COMBINATION = [
     importance: 'outlined',
     message: _invalidCombinationMessage(true, 'danger', 'outlined'),
   },
+  {
+    circle: true,
+    kind: 'muted',
+    importance: 'primary',
+    message: _invalidCombinationMessage(true, 'muted', 'primary'),
+  },
+  {
+    circle: false,
+    kind: 'muted',
+    importance: 'primary',
+    message: _invalidCombinationMessage(false, 'muted', 'primary'),
+  },
 ];
 
 function _invalidCombinationMessage (circle, kind, importance) {

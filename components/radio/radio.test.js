@@ -14,7 +14,7 @@ import {
   itBehavesLikeAppliesClassToChild,
   itBehavesLikeAppliesChildProp,
 } from '../../tests/shared_examples/extendability';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import DtRadio from './radio.vue';
 

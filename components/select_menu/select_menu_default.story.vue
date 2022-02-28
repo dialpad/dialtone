@@ -42,7 +42,7 @@
 
 <script>
 import DtSelectMenu from './select_menu';
-import { htmlFragment } from '../utils';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtSelectMenuDefault',

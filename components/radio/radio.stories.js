@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import RadioDefault from './radio_default.story.vue';
 import RadioVariants from './radio_variants.story.vue';
 import RadioMdx from './radio.mdx';
@@ -142,6 +142,9 @@ export default {
     docs: {
       page: RadioMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -155,3 +158,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

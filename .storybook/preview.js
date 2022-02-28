@@ -4,6 +4,7 @@ import { addParameters, app } from '@storybook/vue3';
 import { version } from '../package.json';
 import theme from './theme';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
+import focusVisiblePolyfill from 'focus-visible';
 
 app.use(fixDefaultSlot);
 

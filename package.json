@@ -1,21 +1,22 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "1.4.0",
+  "version": "1.14.0",
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
     "lint": "run-s lint:code lint:docs",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
+    "lint:code": "esplint ./",
     "lint-staged:code": "eslint --fix",
     "lint-staged:docs": "markdownlint --fix",
-    "lint:code": "esplint ./",
     "lint:docs": "markdownlint '**/*.mdx'",
     "prepublishOnly": "npm run build",
     "release": "semantic-release --no-ci --extends ./release-local.config.js",
+    "start": "npm run storybook",
     "storybook": "npm run --prefix storybook storybook",
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
-    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
+    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js"
   },
   "main": "./dist/dialtone-vue.common.js",
@@ -23,12 +24,12 @@
     "dist/*.js"
   ],
   "dependencies": {
-    "v-click-outside": "^3.1.2"
+    "tippy.js": "^6.3.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^14.1.0",
-    "@commitlint/config-conventional": "^14.1.0",
-    "@dialpad/dialtone": "^6.7.0",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@dialpad/dialtone": "^6.18.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@vue/cli-plugin-babel": "~4.5.15",
@@ -59,6 +60,7 @@
     "less": "3.9.0",
     "less-loader": "^6.2.0",
     "lint-staged": "^11.1.2",
+    "macos-release": "^3.0.1",
     "markdownlint": "^0.22.0",
     "markdownlint-cli": "^0.26.0",
     "mocha": "^6.2.3",
@@ -72,16 +74,18 @@
     "yo": "^3.1.1"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=6.7",
-    "vue": "^3.1.0"
-  },
-  "engineStrict": true,
-  "engines": {
-    "node": ">= 14.17"
+    "@dialpad/dialtone": ">=6.18",
+    "vue": "^3.1.0",
+    "vue-template-compiler": "^2.6.11",
+    "yo": "^4.3.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
     "commit-msg": "./scripts/commit-msg"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 14.17"
   },
   "repository": "git@github.com:dialpad/dialtone-vue.git",
   "volta": {

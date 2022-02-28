@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
   lintOnSave: false,
   css: { extract: false },
@@ -18,5 +19,12 @@ module.exports = {
           },
         };
       });
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': path.join(__dirname, '.'),
+      },
+    },
   },
 };

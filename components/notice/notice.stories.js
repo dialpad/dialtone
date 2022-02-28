@@ -3,7 +3,7 @@ import DtNotice from './notice';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
 import NoticeDefault from './notice_default.story.vue';
 import DtNoticeMdx from './notice.mdx';
-import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
 // Default Prop Values
 export const argsData = {
@@ -94,6 +94,9 @@ export default {
     },
     docs: {
       page: DtNoticeMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };

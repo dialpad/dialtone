@@ -4,6 +4,9 @@ export * from './components/badge';
 export * from './components/banner';
 export * from './components/breadcrumbs';
 export * from './components/button';
+export * from './components/button_group';
+export * from './components/combobox';
+export * from './components/dropdown';
 export * from './components/input';
 export * from './components/input_group';
 export * from './components/modal';
@@ -22,21 +25,23 @@ export * from './components/checkbox_group';
 export * from './components/select_menu';
 export * from './components/toast';
 export * from './components/tooltip';
+export * from './components/skeleton';
+export * from './components/keyboard_shortcut';
 
 // Mixins
-export * from './components/mixins';
+export * from './common/mixins';
 
 // Constants
 export {
   VALIDATION_MESSAGE_TYPES,
   DESCRIPTION_SIZE_TYPES,
   DEFAULT_VALIDATION_MESSAGE_TYPE,
-} from './components/constants';
+} from './common/constants';
 
 // Validators
 export {
   validationMessageValidator,
-} from './components/validators';
+} from './common/validators';
 
 // Utils
 export {
@@ -44,4 +49,4 @@ export {
   formatMessages,
   filterFormattedMessages,
   getValidationState,
-} from './components/utils';
+} from './common/utils';

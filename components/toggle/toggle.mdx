@@ -1,0 +1,83 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+# Toggle
+
+<Subtitle>
+  Toggles (aka "Switches") are control elements that allow the user to make a binary on/off selection.
+  They are commonly used in places like settings and user preferences, but can appear in the product UI as well.
+</Subtitle>
+
+## Base Style
+
+Toggles are typically paired with a label which identifies the option.
+
+<Canvas>
+  <Story id="components-toggle--default" />
+</Canvas>
+
+## Accessibility
+
+This component uses a native button element under the hood that has a role `switch` and type `button` to improve accessibility.
+
+[See W3C guidelines](https://www.w3.org/TR/2021/NOTE-wai-aria-practices-1.2-20211129/examples/switch/switch-button.html)
+for more information.
+
+### Button
+
+The button element should be fully accessible by keyboard. To accomplish this, the `DtToggle` component automatically
+populates several ARIA attributes to the underlying `button` element depending on the checked and
+disabled states. However, if a label default slot is not used with `DtToggle`
+(without including an `aria-label`), a console warning error will be thrown indicating that this issue exists.
+
+### Focus & Keyboard
+
+The button element should capture keyboard focus as long as it is not disabled (`disabled` prop is `true`).
+`ENTER` key will
+emit a **change** event with the current value of the toggle and will change its internal `checked` state.
+
+## Variants
+
+<Canvas>
+  <Story id="components-toggle--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtToggle } from '@dialpad/dialtone-vue';
+```
+
+### With Label
+
+```jsx
+<dt-toggle
+>
+  My Label
+</dt-toggle>
+```
+
+### Label & Checked
+
+```jsx
+<dt-toggle
+  checked
+>
+  My Label
+</dt-toggle>
+```
+
+### Disabled
+
+```jsx
+<dt-toggle
+  disabled
+>
+  My Label
+</dt-toggle>
+```
