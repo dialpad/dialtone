@@ -1,3 +1,10 @@
+# [2.0.0-beta.4](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2022-03-01)
+
+
+### Bug Fixes
+
+* z-index issue and focus on mouse click issue ([29f8da5](https://github.com/dialpad/dialtone-vue/commit/29f8da51e4c8b01857a1346daf6929f6179f7844))
+
 # [2.0.0-beta.3](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2022-02-26)
 
 
