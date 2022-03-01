@@ -6,7 +6,7 @@
     :aria-owns="listId"
     aria-haspopup="listbox"
     @keydown.esc.stop="onEscapeKey"
-    @keydown.enter="onEnterKey"
+    @keydown.enter.exact="onEnterKey"
     @keydown.up.stop.prevent="onUpKey"
     @keydown.down.stop.prevent="onDownKey"
     @keydown.home.stop.prevent="onHomeKey"
