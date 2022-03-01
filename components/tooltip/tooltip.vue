@@ -229,13 +229,12 @@ export default {
 
   methods: {
     calculateAnchorZindex () {
-      // get the zIndex of the anchor element
-      const styles = window.getComputedStyle(getAnchor(this.$refs.anchor), null);
-      const zIndex = parseInt(styles.getPropertyValue('z-index'));
-      // if less than 400 set to 400, otherwise use the z-index of the anchor
-      // so it does not appear behind the window it's within
-      if (!zIndex || zIndex < 400) return 400;
-      return zIndex;
+      // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
+      if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+        return 651;
+      } else {
+        return 400;
+      }
     },
 
     onEnterAnchor (e) {
@@ -259,7 +258,6 @@ export default {
     },
 
     onEnterTransitionComplete () {
-      console.log('on enter');
       this.$emit('shown', true);
       if (this.show !== null) {
         this.$emit('update:show', true);

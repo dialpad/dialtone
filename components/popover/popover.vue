@@ -17,7 +17,8 @@
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
         data-qa="dt-popover-anchor"
-        @click.capture="defaultToggleOpen"
+        @mouseup.capture="defaultToggleOpen"
+        @keydown.enter.capture="defaultToggleOpen"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -338,7 +339,7 @@ export default {
       POPOVER_PADDING_CLASSES,
       POPOVER_HEADER_FOOTER_PADDING_CLASSES,
       isOpen: false,
-      closedByClickOutside: false,
+      triggeredByMouse: false,
       anchorEl: null,
       popoverContentEl: null,
     };
@@ -448,16 +449,18 @@ export default {
    ******************/
   methods: {
     calculateAnchorZindex () {
-      // get the zIndex of the anchor element
-      const styles = window.getComputedStyle(this.anchorEl, null);
-      const zIndex = parseInt(styles.getPropertyValue('z-index'));
-      // if less than 300 set to 300, otherwise use the z-index of the anchor
-      // so it does not appear behind the window it's within
-      if (!zIndex || zIndex < 300) return 300;
-      return zIndex;
+      // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
+      if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+        return 650;
+      } else {
+        return 300;
+      }
     },
 
     defaultToggleOpen (e) {
+      if (e.type === 'click') {
+        this.triggeredByMouse = true;
+      }
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
       this.open ?? (this.anchorEl.contains(e.target) && this.toggleOpen());
@@ -496,10 +499,7 @@ export default {
     },
 
     onLeaveTransitionComplete () {
-      if (!this.closedByClickOutside) {
-        this.focusFirstElementIfNeeded(this.$refs.anchor);
-      }
-      this.closedByClickOutside = false;
+      this.focusFirstElementIfNeeded(this.$refs.anchor);
       this.tip?.unmount();
       this.$emit('opened', false);
       if (this.open !== null) {
@@ -524,7 +524,7 @@ export default {
       // If a modal popover is opened inside of this one, do not hide on click out
       const innerModals = this.popoverContentEl.querySelector('.d-modal--transparent[aria-hidden="false"]');
       if (!innerModals) {
-        this.closedByClickOutside = true;
+        this.triggeredByMouse = true;
         this.closePopover();
       }
     },
@@ -544,6 +544,10 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
+      if (this.triggeredByMouse) {
+        this.triggeredByMouse = false;
+        return;
+      }
       const focusableElements = this._getFocusableElements(domEl, true);
       if (focusableElements.length !== 0) {
         this.focusFirstElement(domEl);
