@@ -1,3 +1,10 @@
+# [2.0.0-beta.6](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2022-03-02)
+
+
+### Features
+
+* add dialogClass prop ([612094d](https://github.com/dialpad/dialtone-vue/commit/612094dab4da9eff64aca8bff840eba8afc0fab7))
+
 # [2.0.0-beta.5](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2022-03-02)
 
 
