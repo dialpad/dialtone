@@ -15,19 +15,19 @@
     >
       <template
         v-if="header"
-        #header
+        slot="header"
       >
         <span v-html="header" />
       </template>
       <template
         v-if="defaultSlot"
-        #default
+        slot="default"
       >
         <span v-html="defaultSlot" />
       </template>
       <template
         v-if="showFooter"
-        #footer
+        slot="footer"
       >
         <span
           v-if="footer"

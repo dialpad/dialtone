@@ -11,18 +11,24 @@
       @highlight="onHighlight"
       @escape="onDropdownEscape($event, variant)"
     >
-      <template #anchor="{ toggleOpen }">
+      <template
+        slot="anchor"
+        slot-scope="{ toggleOpen }"
+      >
         <dt-button
           @click.prevent="toggleOpen"
         >
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
-      <template #list="{ close }">
+      <template
+        slot="list"
+        slot-scope="{ close }"
+      >
         <dt-list-item
           v-for="(item) in items"
-          role="menuitem"
           :key="item.id"
+          role="menuitem"
           :navigation-type="navigationType"
           @click="close"
         >

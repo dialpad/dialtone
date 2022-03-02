@@ -6,14 +6,20 @@
     @highlight="onHighlight"
     @select="onComboboxSelect"
   >
-    <template #input="{ inputProps }">
+    <template
+      slot="input"
+      slot-scope="{ inputProps }"
+    >
       <dt-input
         v-model="value"
         v-bind="inputProps"
         placeholder="Type to show the items"
       />
     </template>
-    <template #list="{ listProps }">
+    <template
+      slot="list"
+      slot-scope="{ listProps }"
+    >
       <ol
         v-bind="listProps"
         class="d-p0 d-mt8 d-hmx332 d-of-y-auto"
@@ -25,7 +31,7 @@
           navigation-type="arrow-keys"
           @click="onComboboxSelect(i)"
         >
-          <template #left>
+          <template slot="left">
             <dt-avatar
               kind="initials"
               color="purple-500"

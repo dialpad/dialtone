@@ -26,7 +26,10 @@
         :transition="transition"
         @update:show="updateShow"
       >
-        <template #anchor="{ attrs }">
+        <template
+          slot="anchor"
+          slot-scope="{ attrs }"
+        >
           <dt-button
             importance="outlined"
             :kind="buttonKind"

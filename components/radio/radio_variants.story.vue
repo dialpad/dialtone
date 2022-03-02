@@ -32,7 +32,7 @@
       value="Value"
       label="With"
     >
-      <template #description>
+      <template slot="description">
         Slotted Description
       </template>
     </dt-radio>
@@ -44,7 +44,7 @@
       value="Value"
     >
       With Slotted Label
-      <template #description>
+      <template slot="description">
         And Slotted Description
       </template>
     </dt-radio>

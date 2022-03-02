@@ -165,27 +165,7 @@ Default.args = {};
 Default.decorators = [() => ({
   template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
 })];
-Default.parameters = {
-  docs: {
-    source: {
-      code: `
-<dt-popover :open.sync="open">
-  <template #anchor="{ attrs }">
-    <dt-button
-      v-bind="attrs"
-      @click="open = !open"
-    >
-      Click to open
-    </dt-button>
-  </template>
-  <template #content>
-    <p>I will be displayed in the popover!</p>
-  </template>
-</dt-popover>
-    `,
-    },
-  },
-};
+Default.parameters = {};
 
 export const Variants = TemplateVariants.bind({});
 Variants.args = {};

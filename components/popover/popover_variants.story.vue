@@ -7,7 +7,10 @@
       class="d-mr12"
       @update:open="openAlignmentLeft = $event"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
           @click="openAlignmentLeft = !openAlignmentLeft"
@@ -15,7 +18,7 @@
           Fixed alignment left
         </dt-button>
       </template>
-      <template #content>
+      <template slot="content">
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -38,7 +41,10 @@
       class="d-mr12"
       @update:open="openAlignmentRight = $event"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
           @click="openAlignmentRight = !openAlignmentRight"
@@ -46,7 +52,7 @@
           Fixed alignment right
         </dt-button>
       </template>
-      <template #content>
+      <template slot="content">
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -70,7 +76,10 @@
       class="d-mr12"
       @update:open="openPopoverWithNoPadding = $event"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
           @click="openPopoverWithNoPadding = !openPopoverWithNoPadding"
@@ -78,7 +87,7 @@
           No padding
         </dt-button>
       </template>
-      <template #content>
+      <template slot="content">
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -102,7 +111,10 @@
       class="d-mr12"
       @update:open="openWithOverlay = $event"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
           @click="openWithOverlay = !openWithOverlay"
@@ -110,7 +122,7 @@
           Overlay Modal
         </dt-button>
       </template>
-      <template #content>
+      <template slot="content">
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -140,7 +152,10 @@
       }"
       @update:open="openPopoverWithHeader = $event"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
           @click="openPopoverWithHeader = !openPopoverWithHeader"
@@ -148,7 +163,7 @@
           Popover with header
         </dt-button>
       </template>
-      <template #headerContent>
+      <template slot="headerContent">
         <div>Potential Title</div>
         <div class="d-d-flex d-jc-flex-end">
           <dt-button
@@ -156,7 +171,7 @@
             class="d-p6 d-bc-transparent"
             importance="outlined"
           >
-            <template #icon>
+            <template slot="icon">
               <icon-launch
                 class="d-svg--size20"
               />
@@ -168,7 +183,7 @@
             class="d-p6 d-bc-transparent"
             importance="outlined"
           >
-            <template #icon>
+            <template slot="icon">
               <icon-menu-vertical
                 class="d-svg--size20"
               />
@@ -176,7 +191,7 @@
           </dt-button>
         </div>
       </template>
-      <template #content>
+      <template slot="content">
         <div class="d-fs14 d-m0">
           <div>
             <dt-button
@@ -210,7 +225,10 @@
       }"
       @update:open="openPopoverWithFooter = $event"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
           @click="openPopoverWithFooter = !openPopoverWithFooter"
@@ -218,10 +236,10 @@
           Popover with footer
         </dt-button>
       </template>
-      <template #footerContent>
+      <template slot="footerContent">
         <div>This is a footer</div>
       </template>
-      <template #content>
+      <template slot="content">
         <div class="d-fs14 d-m0">
           <p>
             {{ sampleText }}

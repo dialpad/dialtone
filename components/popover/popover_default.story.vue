@@ -32,7 +32,10 @@
     width-content="anchor"
     @update:open="updateOpen"
   >
-    <template #anchor="{ attrs }">
+    <template
+      slot="anchor"
+      slot-scope="{ attrs }"
+    >
       <dt-button
         v-bind="attrs"
         @click="isOpen = !isOpen"
@@ -40,7 +43,7 @@
         Click to open
       </dt-button>
     </template>
-    <template #content>
+    <template slot="content">
       <div class="d-fs14 d-m0">
         <span
           v-if="content"
@@ -60,13 +63,13 @@
     </template>
     <template
       v-if="headerContent"
-      #headerContent
+      slot="headerContent"
     >
       <span v-html="headerContent" />
     </template>
     <template
       v-if="footerContent"
-      #footerContent
+      slot="footerContent"
     >
       <span v-html="footerContent" />
     </template>

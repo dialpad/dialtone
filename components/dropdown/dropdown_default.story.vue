@@ -10,7 +10,10 @@
     @escape="onDropdownEscape"
     @update:open="onUpdateOpen"
   >
-    <template #anchor="{ attrs, toggleOpen }">
+    <template
+      slot="anchor"
+      slot-scope="{ attrs, toggleOpen }"
+    >
       <div
         v-if="anchor"
         v-html="anchor"
@@ -23,7 +26,10 @@
         Click to open
       </dt-button>
     </template>
-    <template #list="{ close }">
+    <template
+      slot="list"
+      slot-scope="{ close }"
+    >
       <div
         v-if="list"
         v-html="list"

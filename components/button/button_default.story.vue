@@ -23,7 +23,7 @@
     />
     <template
       v-if="icon"
-      #icon
+      slot="icon"
     >
       <component :is="icon" />
     </template>
