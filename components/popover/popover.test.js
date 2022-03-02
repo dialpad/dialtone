@@ -82,7 +82,7 @@ describe('Dialtone Vue Popover tests', function () {
   describe('Presentation Tests', function () {
     describe('When Popover is open', function () {
       beforeEach(async function () {
-        await button.trigger('click');
+        await button.trigger('mouseup');
         _setChildWrappers();
       });
       it('should render the component', function () { assert.isTrue(wrapper.exists()); });
@@ -115,7 +115,7 @@ describe('Dialtone Vue Popover tests', function () {
 
       describe('When anchor is clicked', function () {
         beforeEach(async function () {
-          await button.trigger('click');
+          await button.trigger('mouseup');
           _setChildWrappers();
         });
 
@@ -137,7 +137,7 @@ describe('Dialtone Vue Popover tests', function () {
 
       describe('When anchor is clicked', function () {
         beforeEach(async function () {
-          await button.trigger('click');
+          await button.trigger('mouseup');
           _setChildWrappers();
         });
 
@@ -155,7 +155,7 @@ describe('Dialtone Vue Popover tests', function () {
 
       describe('When anchor is clicked', function () {
         beforeEach(async function () {
-          await button.trigger('click');
+          await button.trigger('mouseup');
           _setChildWrappers();
         });
 
