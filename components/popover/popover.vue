@@ -41,7 +41,7 @@
         :aria-modal="`${!modal}`"
         :transition="transition"
         :show="isOpen"
-        :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }]"
+        :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }, dialogClass]"
         :style="{
           'max-height': maxHeight,
           'max-width': maxWidth,
@@ -327,6 +327,14 @@ export default {
      * Additional class name for the footer content wrapper element.
      */
     footerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the dialog element.
+     */
+    dialogClass: {
       type: [String, Array, Object],
       default: '',
     },
