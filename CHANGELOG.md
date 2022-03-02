@@ -1,3 +1,10 @@
+# [2.0.0-beta.5](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2022-03-02)
+
+
+### Bug Fixes
+
+* tests ([9a18f53](https://github.com/dialpad/dialtone-vue/commit/9a18f53255e96bca7a021414d4d4810f1b09d18c))
+
 # [2.0.0-beta.4](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2022-03-01)
 
 
