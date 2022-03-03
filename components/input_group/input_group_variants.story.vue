@@ -21,7 +21,7 @@
     <!-- With Slotted Legend -->
     <dt-input-group name="input-group-with-slotted-legend">
       <inputs-decorator />
-      <template #legend>
+      <template slot="legend">
         With Slotted Legend
       </template>
     </dt-input-group>

@@ -34,6 +34,7 @@
 * tooltip tests ([6358d36](https://github.com/dialpad/dialtone-vue/commit/6358d3653d084364637fb0ae6f2814604dfffc57))
 
 # [2.0.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v1.14.0...v2.0.0-beta.1) (2022-02-25)
+# [1.15.0](https://github.com/dialpad/dialtone-vue/compare/v1.14.0...v1.15.0) (2022-02-28)
 
 
 ### Bug Fixes

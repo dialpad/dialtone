@@ -10,12 +10,15 @@
       :navigation-type="navigationType"
       @highlight="onHighlight"
     >
-      <template #anchor>
+      <template slot="anchor">
         <dt-button>
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
-      <template #list="{ close }">
+      <template
+        slot="list"
+        slot-scope="{ close }"
+      >
         <dt-list-item
           v-for="(item) in items"
           :key="item.id"

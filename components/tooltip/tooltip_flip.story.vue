@@ -14,7 +14,10 @@
           :offset="offset"
           :show="true"
         >
-          <template #anchor="{ attrs }">
+          <template
+            slot="anchor"
+            slot-scope="{ attrs }"
+          >
             <dt-button
               importance="outlined"
               :kind="buttonKind"
@@ -23,7 +26,7 @@
               Click me to see a tooltip
             </dt-button>
           </template>
-          <template #default>
+          <template slot="default">
             <div>
               {{ defaultSlot }}
             </div>

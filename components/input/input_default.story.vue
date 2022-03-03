@@ -20,25 +20,25 @@
   >
     <template
       v-if="labelSlot"
-      #labelSlot
+      slot="labelSlot"
     >
       <span v-html="labelSlot" />
     </template>
     <template
       v-if="description"
-      #description
+      slot="description"
     >
       <span v-html="description" />
     </template>
     <template
       v-if="leftIcon"
-      #leftIcon
+      slot="leftIcon"
     >
       <component :is="leftIcon" />
     </template>
     <template
       v-if="rightIcon"
-      #rightIcon
+      slot="rightIcon"
     >
       <component :is="rightIcon" />
     </template>

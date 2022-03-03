@@ -21,7 +21,10 @@
         :show.sync="show"
         @shown="onShown"
       >
-        <template #anchor="{ attrs }">
+        <template
+          slot="anchor"
+          slot-scope="{ attrs }"
+        >
           <dt-button
             importance="outlined"
             :kind="buttonKind"

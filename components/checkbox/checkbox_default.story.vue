@@ -23,7 +23,7 @@
     </template>
     <template
       v-if="descriptionSlot"
-      #description
+      slot="description"
     >
       <span v-html="descriptionSlot" />
     </template>

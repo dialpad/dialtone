@@ -24,14 +24,20 @@
     :max-width="maxWidth"
     @opened="onOpened"
   >
-    <template #anchor="{ attrs }">
+    <template
+      slot="anchor"
+      slot-scope="{ attrs }"
+    >
       <dt-button
         v-bind="attrs"
       >
         Click to open
       </dt-button>
     </template>
-    <template #content="{ close }">
+    <template
+      slot="content"
+      slot-scope="{ close }"
+    >
       <div class="d-fs14 d-m0">
         <span
           v-if="content"
@@ -49,13 +55,13 @@
     </template>
     <template
       v-if="headerContent"
-      #headerContent
+      slot="headerContent"
     >
       <span v-html="headerContent" />
     </template>
     <template
       v-if="footerContent"
-      #footerContent
+      slot="footerContent"
     >
       <span v-html="footerContent" />
     </template>

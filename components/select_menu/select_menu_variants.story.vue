@@ -28,7 +28,7 @@
       name="with-slotted-label"
       :options="options"
     >
-      <template #label>
+      <template slot="label">
         With Slotted Label
       </template>
     </dt-select-menu>
@@ -41,7 +41,7 @@
       label="With"
       :options="options"
     >
-      <template #description>
+      <template slot="description">
         Slotted Description
       </template>
     </dt-select-menu>

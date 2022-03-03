@@ -11,7 +11,10 @@
     @highlight="onHighlight"
     @opened="onOpened"
   >
-    <template #anchor="{ attrs }">
+    <template
+      slot="anchor"
+      slot-scope="{ attrs }"
+    >
       <div
         v-if="anchor"
         v-html="anchor"
@@ -23,7 +26,10 @@
         Click to open
       </dt-button>
     </template>
-    <template #list="{ close }">
+    <template
+      slot="list"
+      slot-scope="{ close }"
+    >
       <div
         v-if="list"
         v-html="list"

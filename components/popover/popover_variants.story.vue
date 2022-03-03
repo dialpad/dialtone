@@ -7,14 +7,20 @@
       placement="bottom-start"
       class="d-mr12"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
         >
           bottom-end placement
         </dt-button>
       </template>
-      <template #content="{ close }">
+      <template
+        slot="content"
+        slot-scope="{ close }"
+      >
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -37,14 +43,20 @@
       width-content="anchor"
       class="d-mr12"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
         >
           bottom-start placement
         </dt-button>
       </template>
-      <template #content="{ close }">
+      <template
+        slot="content"
+        slot-scope="{ close }"
+      >
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -68,14 +80,20 @@
       width-content="anchor"
       class="d-mr12"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
         >
           No padding
         </dt-button>
       </template>
-      <template #content="{ close }">
+      <template
+        slot="content"
+        slot-scope="{ close }"
+      >
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -96,14 +114,20 @@
       width-content="anchor"
       class="d-mr12"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
         >
           Non-Modal
         </dt-button>
       </template>
-      <template #content="{ close }">
+      <template
+        slot="content"
+        slot-scope="{ close }"
+      >
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -132,14 +156,17 @@
         ariaLabel: 'Close popover',
       }"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
         >
           Popover with header
         </dt-button>
       </template>
-      <template #headerContent>
+      <template slot="headerContent">
         <div>
           Potential Title
         </div>
@@ -149,7 +176,7 @@
             class="d-p6 d-bc-transparent"
             importance="outlined"
           >
-            <template #icon>
+            <template slot="icon">
               <icon-launch
                 class="d-svg--size20"
               />
@@ -161,7 +188,7 @@
             class="d-p6 d-bc-transparent"
             importance="outlined"
           >
-            <template #icon>
+            <template slot="icon">
               <icon-menu-vertical
                 class="d-svg--size20"
               />
@@ -169,7 +196,7 @@
           </dt-button>
         </div>
       </template>
-      <template #content>
+      <template slot="content">
         <div class="d-fs14 d-m0">
           <p>
             {{ sampleText }}
@@ -221,17 +248,20 @@
         ariaLabel: 'Close popover',
       }"
     >
-      <template #anchor="{ attrs }">
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
         <dt-button
           v-bind="attrs"
         >
           Popover with footer
         </dt-button>
       </template>
-      <template #footerContent>
+      <template slot="footerContent">
         <div>This is a footer</div>
       </template>
-      <template #content>
+      <template slot="content">
         <div class="d-fs14 d-m0">
           <p>
             {{ sampleText }}

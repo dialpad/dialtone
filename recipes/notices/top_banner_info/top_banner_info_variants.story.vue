@@ -9,7 +9,7 @@
       class="d-mb6"
       color-code="yellow400"
     >
-      <template #left>
+      <template slot="left">
         <span class="d-fw-bold"> Active Call </span> 3:21
       </template>
       <div class="d-d-flex d-c-pointer">
@@ -20,11 +20,11 @@
       class="d-mb6"
       color-code="red200"
     >
-      <template #left>
+      <template slot="left">
         <span class="d-fw-bold"> Active Call </span> 3:21
       </template>
       <span> Caller ID: Aerolabs Support (415) 583-3482 </span>
-      <template #right>
+      <template slot="right">
         <span class="d-fw-bold"> Admin is listening in </span> 0:21
       </template>
     </dt-recipe-top-banner-info>
@@ -32,7 +32,7 @@
       class="d-mb6"
       color-code="black100"
     >
-      <template #left>
+      <template slot="left">
         <span class="d-fw-bold"> Connecting Call </span>
       </template>
       <span> Your caller ID: (415) 555-1234 </span>
@@ -41,7 +41,7 @@
       class="d-mb6"
       color-code="green200"
     >
-      <template #left>
+      <template slot="left">
         <span class="d-fw-bold"> Ringing... </span>
       </template>
       <span> Your caller ID: (415) 555-1234 </span>
@@ -49,7 +49,7 @@
     <dt-recipe-top-banner-info
       color-code="yellow200"
     >
-      <template #left>
+      <template slot="left">
         <span class="d-fw-bold">Joseph Lumaban</span>
         <div class="d-fc-red-500 d-fw-bold">
           On hold 00:08
@@ -60,7 +60,7 @@
           importance="clear"
           kind="muted"
         >
-          <template #icon>
+          <template slot="icon">
             <icon-park />
           </template>
           Park
@@ -69,7 +69,7 @@
           importance="clear"
           kind="muted"
         >
-          <template #icon>
+          <template slot="icon">
             <icon-phone-transfer />
           </template>
           Transfer
@@ -78,13 +78,13 @@
           importance="clear"
           kind="danger"
         >
-          <template #icon>
+          <template slot="icon">
             <icon-call-end-arrow />
           </template>
           End Call
         </dt-button>
       </div>
-      <template #right>
+      <template slot="right">
         <span class="d-fw-bold d-c-pointer">Click to answer</span> and put the active call on hold
       </template>
     </dt-recipe-top-banner-info>

@@ -21,7 +21,7 @@
     <!-- With Slotted Legend -->
     <dt-checkbox-group name="checkbox-group-with-slotted-legend">
       <dt-checkboxes-decorator />
-      <template #legend>
+      <template slot="legend">
         With Slotted Legend
       </template>
     </dt-checkbox-group>
