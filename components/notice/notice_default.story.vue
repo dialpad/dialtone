@@ -1,17 +1,17 @@
 <template>
   <dt-notice
-    :kind="$attrs.kind"
-    :title="$attrs.title"
-    :title-id="$attrs.titleId"
-    :content-id="$attrs.contentId"
-    :important="$attrs.important"
-    :hide-close="$attrs.hideClose"
-    :close-button-props="$attrs.computedCloseButtonProps"
-    @close="$attrs.onClose($event)"
+    :kind="args.kind"
+    :title="args.title"
+    :title-id="args.titleId"
+    :content-id="args.contentId"
+    :important="args.important"
+    :hide-close="args.hideClose"
+    :close-button-props="args.computedCloseButtonProps"
+    @close="args.onClose($event)"
   >
     <span
-      v-if="defaultSlot"
-      v-html="defaultSlot"
+      v-if="args.default"
+      v-html="args.default"
     />
     <span v-else>
       Message body with
@@ -23,30 +23,30 @@
     </span>
     <template #action>
       <span
-        v-if="$attrs.action"
-        v-html="$attrs.action"
+        v-if="args.action"
+        v-html="args.action"
       />
       <dt-button
         v-else
         size="sm"
         importance="outlined"
         :kind="buttonKind"
-        @click="$attrs.onClick"
+        @click="args.onClick"
       >
         Action
       </dt-button>
     </template>
     <template
-      v-if="$attrs.icon"
+      v-if="args.icon"
       #icon
     >
-      <component :is="$attrs.icon" />
+      <component :is="args.icon" />
     </template>
     <template
-      v-if="$attrs.titleOverride"
+      v-if="args.titleOverride"
       #titleOverride
     >
-      <span v-html="$attrs.titleOverride" />
+      <span v-html="args.titleOverride" />
     </template>
   </dt-notice>
 </template>

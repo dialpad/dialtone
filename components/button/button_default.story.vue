@@ -1,31 +1,31 @@
 <template>
   <dt-button
-    :importance="$attrs.importance"
-    :type="$attrs.type"
-    :size="$attrs.size"
-    :kind="$attrs.kind"
-    :circle="$attrs.circle"
-    :loading="$attrs.loading"
-    :label-class="$attrs.labelClass"
-    :assertive-on-focus="$attrs.assertiveOnFocus"
-    :link="$attrs.link"
-    :link-kind="$attrs.linkKind"
-    :icon-position="$attrs.iconPosition"
-    :disabled="$attrs.disabled"
-    :style="{ width: $attrs.width }"
-    @click="$attrs.onClick"
-    @focusin="$attrs.onFocusIn"
-    @focusout="$attrs.onFocusOut"
+    :importance="args.importance"
+    :type="args.type"
+    :size="args.size"
+    :kind="args.kind"
+    :circle="args.circle"
+    :loading="args.loading"
+    :label-class="args.labelClass"
+    :assertive-on-focus="args.assertiveOnFocus"
+    :link="args.link"
+    :link-kind="args.linkKind"
+    :icon-position="args.iconPosition"
+    :disabled="args.disabled"
+    :style="{ width: args.width }"
+    @click="args.onClick"
+    @focusin="args.onFocusIn"
+    @focusout="args.onFocusOut"
   >
     <span
-      v-if="defaultSlot"
-      v-html="defaultSlot"
+      v-if="args.default"
+      v-html="args.default"
     />
     <template
-      v-if="$attrs.icon"
+      v-if="args.icon"
       #icon
     >
-      <component :is="$attrs.icon" />
+      <component :is="args.icon" />
     </template>
   </dt-button>
 </template>

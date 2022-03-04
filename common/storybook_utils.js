@@ -9,13 +9,12 @@
  *                                      but rather the usage of that component.
  * @returns {component} the template component with props and args added.
  */
-export const createTemplateFromVueFile = (args, templateComponent) => ({
-  components: { templateComponent },
-  setup () {
+export const createTemplateFromVueFile = (args, templateComponent) => {
+  templateComponent.setup = () => {
     return { args };
-  },
-  template: '<template-component v-bind="args"></template-component>',
-});
+  };
+  return templateComponent;
+};
 
 /**
  * Gets the full list of icon component names from the dialtone package

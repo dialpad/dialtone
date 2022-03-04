@@ -1,22 +1,22 @@
 <template>
   <dt-avatar
-    :id="$attrs.id"
-    :kind="$attrs.kind"
-    :size="$attrs.size"
-    :color="$attrs.color"
-    :src="$attrs.src"
-    :alt="$attrs.alt"
+    :id="args.id"
+    :kind="args.kind"
+    :size="args.size"
+    :color="args.color"
+    :src="args.src"
+    :alt="args.alt"
   >
     <template
-      v-if="defaultSlot"
+      v-if="args.default"
     >
       <component
-        :is="defaultSlot"
-        v-if="$attrs.kind === 'icon'"
+        :is="args.default"
+        v-if="args.kind === 'icon'"
       />
       <html-fragment
         v-else
-        :html="defaultSlot"
+        :html="args.default"
       />
     </template>
   </dt-avatar>
