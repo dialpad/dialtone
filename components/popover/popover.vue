@@ -466,7 +466,7 @@ export default {
     },
 
     defaultToggleOpen (e) {
-      if (e.type === 'click') {
+      if (e.type === 'mouseup') {
         this.triggeredByMouse = true;
       }
       // Only use default toggle behaviour if the user has not set the open prop.
@@ -516,9 +516,9 @@ export default {
     },
 
     async onEnterTransitionComplete () {
-      this.$emit('opened', true);
+      this.$emit('opened', true, this.$refs.popover__content);
       if (this.open !== null) {
-        this.$emit('update:open', true, this.$refs.popover__content);
+        this.$emit('update:open', true);
       }
       this.focusFirstElementIfNeeded(this.$refs.popover__content);
     },
