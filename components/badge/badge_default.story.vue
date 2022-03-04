@@ -1,10 +1,10 @@
 <template>
   <dt-badge
-    :text="args.text"
-    :color="args.color"
+    :text="$attrs.text"
+    :color="$attrs.color"
   >
-    <template v-if="args.default">
-      {{ args.default }}
+    <template v-if="defaultSlot">
+      {{ defaultSlot }}
     </template>
   </dt-badge>
 </template>

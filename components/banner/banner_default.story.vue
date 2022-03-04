@@ -6,19 +6,19 @@
 
     <dt-banner
       v-if="displayBanner"
-      :kind="args.kind"
-      :title="args.title"
-      :title-id="args.titleId"
-      :content-id="args.contentId"
-      :important="args.important"
-      :pinned="args.pinned"
-      :hide-close="args.hideClose"
+      :kind="$attrs.kind"
+      :title="$attrs.title"
+      :title-id="$attrs.titleId"
+      :content-id="$attrs.contentId"
+      :important="$attrs.important"
+      :pinned="$attrs.pinned"
+      :hide-close="$attrs.hideClose"
       :close-button-props="buttonCloseProps"
-      @close="displayBanner = false; args.onClose($event)"
+      @close="displayBanner = false; $attrs.onClose($event)"
     >
       <span
-        v-if="args.default"
-        v-html="args.default"
+        v-if="defaultSlot"
+        v-html="defaultSlot"
       />
       <span v-else>
         Message body with
@@ -30,28 +30,28 @@
       </span>
 
       <template
-        v-if="args.action"
+        v-if="$attrs.action"
         #action
       >
         <dt-button
           :kind="buttonKind"
           importance="outlined"
-          @click="args.onClick"
+          @click="$attrs.onClick"
         >
-          {{ args.action }}
+          {{ $attrs.action }}
         </dt-button>
       </template>
       <template
-        v-if="args.icon"
+        v-if="$attrs.icon"
         #icon
       >
-        <component :is="args.icon" />
+        <component :is="$attrs.icon" />
       </template>
       <template
-        v-if="args.titleOverride"
+        v-if="$attrs.titleOverride"
         #titleOverride
       >
-        <span v-html="args.titleOverride" />
+        <span v-html="$attrs.titleOverride" />
       </template>
     </dt-banner>
   </div>
@@ -79,11 +79,11 @@ export default {
 
   computed: {
     shouldInvertButton () {
-      return this.args.kind === 'base' || this.args.kind === 'error' || this.args.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
     },
 
     isInverted () {
-      return this.args.important && this.shouldInvertButton;
+      return this.$attrs.important && this.shouldInvertButton;
     },
 
     buttonKind () {
@@ -96,7 +96,7 @@ export default {
 
     buttonCloseProps () {
       return {
-        ...this.args.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         kind: this.buttonKind,
         ariaLabel: 'Close',
       };
