@@ -1,3 +1,10 @@
+# [2.0.0-beta.7](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2022-03-04)
+
+
+### Bug Fixes
+
+* popover open event, popover focus bug ([a8fe310](https://github.com/dialpad/dialtone-vue/commit/a8fe310fe3488cbcc0d9135cd5cea0d8119f29cb))
+
 # [2.0.0-beta.6](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2022-03-02)
 
 
