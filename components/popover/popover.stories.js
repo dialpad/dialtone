@@ -128,10 +128,6 @@ const argTypesData = {
       },
     },
   },
-  hideOnClick: {
-    type: 'select',
-    options: [true, false],
-  },
 };
 
 export default {

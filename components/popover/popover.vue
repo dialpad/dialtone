@@ -19,6 +19,7 @@
         data-qa="dt-popover-anchor"
         @mouseup.capture="defaultToggleOpen"
         @keydown.enter.capture="defaultToggleOpen"
+        @keydown.escape.capture="closePopover"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -252,11 +253,23 @@ export default {
       default: () => [0, 4],
     },
 
-    /***
+    /**
      * Determines if the popover hides upon clicking the
      * reference or outside of the content box.
      */
     hideOnClick: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Determines if the first element within the popover will
+     * be focused when the anchor is triggered, and the anchor
+     * will be focused when the popover is closed. Note even
+     * if enabled this will only happen when activated by
+     * keyboard.
+     */
+    autoFocus: {
       type: Boolean,
       default: true,
     },
@@ -552,7 +565,7 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      if (this.triggeredByMouse) {
+      if (this.triggeredByMouse || !this.autoFocus) {
         this.triggeredByMouse = false;
         return;
       }
