@@ -1,3 +1,10 @@
+# [2.0.0-beta.8](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2022-03-05)
+
+
+### Features
+
+* add autoFocus prop ([92f14af](https://github.com/dialpad/dialtone-vue/commit/92f14afb06f8adff5a13ebbbf4db3e83f3cabfc9))
+
 # [2.0.0-beta.7](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2022-03-04)
 
 
