@@ -1,3 +1,10 @@
+# [2.0.0-beta.9](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2022-03-07)
+
+
+### Bug Fixes
+
+* mouse highlighting with combobox popover ([48c629c](https://github.com/dialpad/dialtone-vue/commit/48c629cb1c1430ea25e0ab09cfe8fd98b8e34ac7))
+
 # [2.0.0-beta.8](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2022-03-05)
 
 
