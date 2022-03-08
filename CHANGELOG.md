@@ -1,3 +1,10 @@
+# [2.0.0-beta.10](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2022-03-08)
+
+
+### Features
+
+* add default mouse highlighting on list_item ([db75ac3](https://github.com/dialpad/dialtone-vue/commit/db75ac31fc9e1dd9a2fabe812cd9934888ddaf01))
+
 # [2.0.0-beta.9](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2022-03-07)
 
 
