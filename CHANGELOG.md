@@ -1,3 +1,15 @@
+# [1.16.0](https://github.com/dialpad/dialtone-vue/compare/v1.15.0...v1.16.0) (2022-03-08)
+
+
+### Bug Fixes
+
+* make padding same on both sides on keyboard shortcut ([2b8113c](https://github.com/dialpad/dialtone-vue/commit/2b8113ce1d597211713faa5acb623685ae863a75))
+
+
+### Features
+
+* add contact info component for call info display ([#249](https://github.com/dialpad/dialtone-vue/issues/249)) ([8195314](https://github.com/dialpad/dialtone-vue/commit/81953141235af95c5d10842c6d314ecc8d089bc2))
+
 # [1.15.0](https://github.com/dialpad/dialtone-vue/compare/v1.14.0...v1.15.0) (2022-02-28)
 
 
