@@ -6,7 +6,7 @@
     :aria-owns="listId"
     aria-haspopup="listbox"
     @keydown.esc.stop="onEscapeKey"
-    @keydown.enter="onEnterKey"
+    @keydown.enter.exact="onEnterKey"
     @keydown.up.stop.prevent="onUpKey"
     @keydown.down.stop.prevent="onDownKey"
     @keydown.home.stop.prevent="onHomeKey"
@@ -150,11 +150,16 @@ export default {
   },
 
   watch: {
-    showList () {
+    showList (showList) {
       // When the list's visibility changes reset the highlight index.
       this.$nextTick(function () {
         this.setInitialHighlightIndex();
       });
+
+      if (!showList && this.outsideRenderedListRef) {
+        this.outsideRenderedListRef.removeEventListener('mousemove', this.onMouseHighlight);
+        this.outsideRenderedListRef = null;
+      }
     },
   },
 
@@ -191,6 +196,7 @@ export default {
 
     onOpen (open, contentRef) {
       this.outsideRenderedListRef = contentRef;
+      this.outsideRenderedListRef.addEventListener('mousemove', this.onMouseHighlight);
     },
 
     setInitialHighlightIndex () {

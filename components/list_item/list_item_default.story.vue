@@ -10,17 +10,17 @@
       :navigation-type="navigationType"
       @click="onClick"
     >
-      <template #left>
+      <template slot="left">
         <component :is="left" />
       </template>
       <span v-html="defaultSlot" />
-      <template #subtitle>
+      <template slot="subtitle">
         <span v-html="subtitle" />
       </template>
-      <template #bottom>
+      <template slot="bottom">
         <span v-html="bottom" />
       </template>
-      <template #right>
+      <template slot="right">
         <component :is="right" />
       </template>
     </dt-list-item>

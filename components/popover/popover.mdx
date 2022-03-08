@@ -3,48 +3,42 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 # Popovers
 
 <Subtitle>
-  Popovers are a generic component that conditionally displays a content overlay in-line with an anchor element.
+  A Popover displays a content overlay when its anchor element is activated.
 </Subtitle>
 
 ## Base Style
 
-- Popover frame is created with a white rounded rectangle, with grey outline and box shadow. It may or may not have a header.
-- Popover can be used as base container to build other components such as: dropdown, filter, extra actions
-and selections, feature explanation, promotions etc.
-- Align left / right / center or top / bottom / center.
-- Header / Footer
-  - Header / Footer is always placed at the top and bottom of the popover frame respectively.
-  - Header / Footer is set as fixed by default. This can be disabled by setting fixedHeaderFooter to false
+- Activating the anchor will display a white content box with rounded corners, and a box shadow.
+- The popover may optionally have a header / footer.
+  - Header / Footer is always placed at the top and bottom of the popover frame respectively and will remain in place as
+the main content is scrolled.
+  - Header / Footer will remain in place as the main content is scrolled.
+- Setting the max height of the popover will make the content scrollable. Otherwise the popover will size to fit its
+content
 
 <Canvas>
-  <Story id="components-popovers--default" />
+  <Story id="components-popover--default" />
 </Canvas>
 
 ## Variants
 
-### Dynamic alignment
-
-The popover content supports both fixed and dynamic horizontal and vertical alignment around the anchor element. If
-`fixedAlignment`/`fixedVerticalAlignment` are passed, the popover will always be positioned in that direction. If you
-omit either of them, the popover will dynamically adjust the corresponding position, trying not to clip the content
-relative to the `$root` element. This calculation happens each time the popover is opened or window is resized.
-
-### Flip
+### Fallback Placements
 
 The popover uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
-[popper](https://popper.js.org/docs/v2/modifiers/flip/), which has flip modifier (which can change the placement of a
-popper when it's scheduled to overflow a given boundary). By default, boundary is `clippingParents`
-(corresponding popover prop is `flipBoundary`).
+[popper](https://popper.js.org/docs/v2/modifiers/flip/), if the popover opens in a placement where it will
+be clipped, it will move to a new position. It will do this automatically by default, but if you want to
+manually specify which position it will move to in what order you can do so via the fallbackPlacements prop.
 
 ### Padding
 
 Padding options for the popover content are provided via size classes `small`/`medium`/`large` in order to standardize
-the look of the popover content between usages. To remove the padding from the content, you can pass `none`:
+the look of the popover content between usages. To remove the padding from the content, you can pass `none`. Setting
+`none` will also allow you to set custom padding via utility classes (Ex: you only want padding on the left.).
 
 ### Variants
 
 <Canvas>
-  <Story id="components-popovers--variants" />
+  <Story id="components-popover--variants" />
 </Canvas>
 
 ## Slots, Props & Events
@@ -54,10 +48,11 @@ the look of the popover content between usages. To remove the padding from the c
 ## Basic Usage
 
 Popovers may be used standalone, or to create a dropdown menu or other complex control.
-If you want to use the popover as a component which takes over the whole screen, there's a prop `modal` for that,
-or you can use `DtModal` component. Keep in mind accessibility for popover and modal components are different.
+Setting the `modal` prop will set an invisible overlay which will prevent interaction with anything rendered outside
+of the popover. Note we also have the [dt-modal](/story/components-modal--default) component which should be used
+for fullscreen modals that are not displayed relative to the anchor.
 
-A popover has 2 major pieces that are provided as required named slots: the **anchor** and the **content**.
+A popover has 2 main required slots: the **anchor** and the **content**.
 
 The **anchor** is the control that the content will be positioned relative to and triggers the visibility of the
 content. Normally a button, the anchor can be any *interactive* element that could control the visibility of the popover
@@ -65,8 +60,9 @@ content. For example, the anchor could be an input element with a conditionally 
 implement an auto-suggest form component.
 
 The **content** slot will be rendered lazily when the popover is open. By default, the popover content will
-automatically be closed when clicking outside the content or on `ESC` key press, so it is important to use `.sync` on
-the `open` prop (or `v-model:open` in Vue 3) so it can be updated if the popover closes itself.
+be opened when the anchor is clicked, and closed when clicking outside the content or on `ESC` key press. You may
+override this behaviour by using `.sync` on the open prop (or `v-model:open` in Vue 3) in which you can open or close
+the content using whichever condition you wish.
 
 ### Import
 
@@ -77,9 +73,7 @@ import { DtPopover } from '@dialpad/dialtone-vue';
 ### Basic usage with named slots
 
 ```jsx
-<dt-popover
-  :open.sync="open"
->
+<dt-popover>
   <template #anchor="{ attrs }">
     <dt-button
       v-bind="attrs"
@@ -92,34 +86,6 @@ import { DtPopover } from '@dialpad/dialtone-vue';
   </template>
 </dt-popover>
 ```
-
-or
-
-```jsx
-<dt-popover
-  :open="open"
->
-  <template #anchor="{ attrs }">
-    <dt-button
-      v-bind="attrs"
-      @click="open = !open"
-    >
-      Click to open
-    </dt-button>
-  </template>
-  <template #content>
-    <p>I will be displayed in the popover!</p>
-  </template>
-</dt-popover>
-```
-
-### Attaching elements to the DOM
-
-> To ensure the best possible performance, it's recommended to not attach elements directly to the `body` element,
-but instead create a `div` element right within the `body` and use it as container of your poppers.
-
-You can find the recommended way to use the popover in the
-[documentation](https://popper.js.org/docs/v2/performance/#attaching-elements-to-the-dom)
 
 ### Force close all opened instances
 
@@ -134,8 +100,7 @@ window.dispatchEvent(e);
 ## Accessibility
 
 Popovers, in their current implementation, are accessible when used as interactive components.
-Content will be read to screen reader users, and the popover markup by default is appended to the `parent`
-(also it could be placed to the end of `<body>` or other DOM element)
+Content will be read to screen reader users, and the popover markup by is appended to the `<body>`
 
 There are a few important considerations to ensure popover controls are accessible.
 The popover, by default:
@@ -166,6 +131,8 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 2. Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
 
 ### Keyboard support
+
+The below keyboard functionality is automatically implemented when using the popover component:
 
 - When popover opens the focus will be moved to the first focusable element inside the popover.
 - The user can dismiss the popover pressing the `ESC` key, after that the focus will be returned to the element

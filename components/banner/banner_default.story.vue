@@ -5,7 +5,7 @@
     </dt-button>
 
     <dt-banner
-      v-if="displayBanner"
+      v-show="displayBanner"
       :kind="$attrs.kind"
       :title="$attrs.title"
       :title-id="$attrs.titleId"
@@ -31,7 +31,7 @@
 
       <template
         v-if="$attrs.action"
-        #action
+        slot="action"
       >
         <dt-button
           :kind="buttonKind"
@@ -43,13 +43,13 @@
       </template>
       <template
         v-if="$attrs.icon"
-        #icon
+        slot="icon"
       >
         <component :is="$attrs.icon" />
       </template>
       <template
         v-if="$attrs.titleOverride"
-        #titleOverride
+        slot="titleOverride"
       >
         <span v-html="$attrs.titleOverride" />
       </template>

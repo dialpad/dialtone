@@ -58,4 +58,12 @@ export const parameters = {
       ],
     },
   },
+  docs: {
+    transformSource: (src) => {
+      if (typeof src === 'object') return src
+
+      // remove <template> and </template> tags
+      return src.slice(10, -12);
+    }
+  }
 };

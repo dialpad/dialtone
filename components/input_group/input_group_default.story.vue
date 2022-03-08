@@ -1,6 +1,7 @@
 <template>
   <dt-input-group
     :id="id"
+    v-model="internalValue"
     :name="name"
     :legend="legend"
     :disabled="disabled"
@@ -10,7 +11,6 @@
     :messages-class="messagesClass"
     :legend-child-props="legendChildProps"
     :messages-child-props="messagesChildProps"
-    v-model="internalValue"
     @input="onInput"
   >
     <slot>
@@ -24,7 +24,7 @@
     </slot>
     <template
       v-if="legendSlot"
-      #legend
+      slot="legend"
     >
       <span v-html="legendSlot" />
     </template>

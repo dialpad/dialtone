@@ -21,7 +21,7 @@
         :class="linkClass"
       >a link</a>.
     </span>
-    <template #action>
+    <template slot="action">
       <span
         v-if="$attrs.action"
         v-html="$attrs.action"
@@ -38,13 +38,13 @@
     </template>
     <template
       v-if="$attrs.icon"
-      #icon
+      slot="icon"
     >
       <component :is="$attrs.icon" />
     </template>
     <template
       v-if="$attrs.titleOverride"
-      #titleOverride
+      slot="titleOverride"
     >
       <span v-html="$attrs.titleOverride" />
     </template>

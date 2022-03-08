@@ -13,7 +13,7 @@
       :tab-list-child-props="tabListChildProps"
       @change="onChange"
     >
-      <template #tabs>
+      <template slot="tabs">
         <dt-tab
           id="1"
           panel-id="2"

@@ -141,6 +141,16 @@ describe('Dialtone Vue Combobox tests', function () {
       it('should emit select event', function () { assert.equal(wrapper.emitted().select.length, 1); });
     });
 
+    describe('When "Enter" key is pressed with another key and item is highlighted', function () {
+      beforeEach(async function () {
+        await wrapper.setData({ highlightIndex: 1 });
+        await wrapper.trigger('keydown.shift.enter');
+      });
+
+      it('should not call listener', function () { assert.isFalse(selectStub.called); });
+      it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
+    });
+
     describe('When "Esc" key is pressed', function () {
       beforeEach(async function () {
         await wrapper.trigger('keydown.esc');

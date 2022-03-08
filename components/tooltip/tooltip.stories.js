@@ -5,55 +5,18 @@ import DtTooltipDefault from './tooltip_default.story';
 import DtTooltipVariantsTemplate from './tooltip_variants';
 import { action } from '@storybook/addon-actions';
 
-import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_HIDE_ON_CLICK_VARIANTS } from './tooltip_constants';
+import { TOOLTIP_DIRECTIONS } from './tooltip_constants';
 import DtTooltipMdx from './tooltip.mdx';
 
 // Default Prop Values
 export const argsData = {
-  show: false,
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
-  default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-  onClose: action('update:show'),
+  default: `This is a simple tooltip. You can set the position of the tooltip using the placement prop!`,
+  onShown: action('shown'),
 };
 
 export const argTypesData = {
-  id: {
-    table: {
-      defaultValue: {
-        summary: 'generated unique ID',
-      },
-    },
-  },
-  arrowDirection: {
-    control: {
-      type: 'select',
-      options: TOOLTIP_DIRECTION_MODIFIERS,
-    },
-  },
-
-  flip: {
-    defaultValue: ['left-center', 'top-center'],
-  },
-
-  offset: {
-    defaultValue: [0, 0],
-  },
-
-  hideOnClick: {
-    type: 'select',
-    options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
-  },
-
-  flipBoundary: {
-    defaultValue: 'clippingParents',
-  },
-  transition: {
-    control: {
-      type: 'select',
-      options: ['', 'fade', 'slide-down', 'pop', 'shake'],
-    },
-  },
   // Slots
   default: {
     control: 'text',
@@ -74,20 +37,49 @@ export const argTypesData = {
       },
     },
   },
+
+  // Props
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  placement: {
+    control: {
+      type: 'select',
+      options: TOOLTIP_DIRECTIONS,
+    },
+  },
+
+  offset: {
+    defaultValue: [0, 0],
+  },
+
+  transition: {
+    control: {
+      type: 'select',
+      options: ['', 'fade', 'pop', 'shake'],
+    },
+  },
   // Events
+  onShown: {
+    table: {
+      disable: true,
+    },
+  },
   'update:show': {
-    description: `The tooltip will emit a "false" boolean value for this event when the \
-user performs a tooltip-closing action. Parent components can sync on this value to create \
-a 2-way binding to control tooltip visibility.`,
+    table: {
+      disable: true,
+    },
+  },
+  shown: {
+    description: `emitted when tooltip is shown or hidden`,
     table: {
       type: {
         summary: 'boolean',
       },
-    },
-  },
-  onClose: {
-    table: {
-      disable: true,
     },
   },
 };
@@ -100,11 +92,12 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
+    options: { showPanel: true },
     docs: {
       page: DtTooltipMdx,
-    },
-    options: {
-      showPanel: true,
     },
   },
 };
@@ -125,5 +118,7 @@ Variants.args = {};
 Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 
 export const Flip = TooltipFlipTemplate.bind({});
-Flip.args = {};
+Flip.args = {
+  default: 'Scroll down to see how the tooltip changes based on the available space.',
+};
 Flip.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

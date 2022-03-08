@@ -24,7 +24,7 @@
     </slot>
     <template
       v-if="legendSlot"
-      #legend
+      slot="legend"
     >
       <span v-html="legendSlot" />
     </template>
