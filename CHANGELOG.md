@@ -1,3 +1,12 @@
+# [2.0.0-beta.13](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.12...v2.0.0-beta.13) (2022-03-09)
+
+
+### Bug Fixes
+
+* focus when triggered by mouse ([09437b4](https://github.com/dialpad/dialtone-vue/commit/09437b4b72139e11b6c4949cb120bbe7c731adf0))
+* initial focus fixes ([c14b135](https://github.com/dialpad/dialtone-vue/commit/c14b1355de1b4dbe3c79d4ba691546560fcb9e9a))
+* prevent wheel when popover modal opened ([a3f8af9](https://github.com/dialpad/dialtone-vue/commit/a3f8af9d8902f8abcce7355c2b01a4e01acd7a61))
+
 # [2.0.0-beta.12](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.11...v2.0.0-beta.12) (2022-03-09)
 
 
