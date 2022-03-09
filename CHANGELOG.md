@@ -1,3 +1,10 @@
+# [2.0.0-beta.12](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.11...v2.0.0-beta.12) (2022-03-09)
+
+
+### Bug Fixes
+
+* is not a function bug ([181098c](https://github.com/dialpad/dialtone-vue/commit/181098c548fb32a057745a47d603c6aedad0e6a0))
+
 # [2.0.0-beta.11](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.10...v2.0.0-beta.11) (2022-03-08)
 
 
