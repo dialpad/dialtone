@@ -124,7 +124,7 @@ export default {
      */
     isHighlighted () {
       if (this.isHoverable) {
-        return this.highlightId() ? this.id === this.highlightId() : this.mouseHighlighted;
+        return this.highlightId && this.highlightId() ? this.id === this.highlightId() : this.mouseHighlighted;
       }
       return false;
     },
