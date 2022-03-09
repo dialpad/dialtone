@@ -18,7 +18,8 @@
       "vue/no-deprecated-dollar-listeners-api": 1
     },
     "components/input/input.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1
+      "vue/no-deprecated-dollar-listeners-api": 1,
+      "max-lines": 1
     },
     "components/lazy_show/lazy_show.vue": {
       "vue/no-deprecated-dollar-listeners-api": 2
