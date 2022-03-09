@@ -18,6 +18,7 @@
         ref="anchor"
         data-qa="dt-popover-anchor"
         @mouseup.capture="defaultToggleOpen"
+        @wheel="(e) => (isOpen && modal) && e.preventDefault()"
         @keydown.enter.capture="defaultToggleOpen"
         @keydown.escape.capture="closePopover"
       >

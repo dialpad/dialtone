@@ -22,11 +22,7 @@
         slot-scope="{ close }"
       >
         <div class="d-fs14 d-m0">
-          <p
-            v-if="content"
-            v-html="content"
-          />
-          <div v-else>
+          <div>
             <p class="d-mb4">
               I will be displayed in the popover!
             </p>
@@ -58,11 +54,7 @@
         slot-scope="{ close }"
       >
         <div class="d-fs14 d-m0">
-          <p
-            v-if="content"
-            v-html="content"
-          />
-          <div v-else>
+          <div>
             <p class="d-mb4">
               I will be displayed in the popover!
             </p>
@@ -95,11 +87,7 @@
         slot-scope="{ close }"
       >
         <div class="d-fs14 d-m0">
-          <p
-            v-if="content"
-            v-html="content"
-          />
-          <div v-else>
+          <div>
             <dt-button
               @click="close"
             >
@@ -129,11 +117,7 @@
         slot-scope="{ close }"
       >
         <div class="d-fs14 d-m0">
-          <p
-            v-if="content"
-            v-html="content"
-          />
-          <div v-else>
+          <div>
             <p class="d-mb4">
               I will be displayed in the popover!
             </p>
