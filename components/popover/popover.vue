@@ -264,18 +264,6 @@ export default {
     },
 
     /**
-     * Determines if the first element within the popover will
-     * be focused when the anchor is triggered, and the anchor
-     * will be focused when the popover is closed. Note even
-     * if enabled this will only happen when activated by
-     * keyboard.
-     */
-    autoFocus: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
      * Determines modal state. If enabled popover has a modal overlay
      * preventing interaction with elements below it, but it is invisible.
      */
@@ -361,7 +349,6 @@ export default {
       POPOVER_PADDING_CLASSES,
       POPOVER_HEADER_FOOTER_PADDING_CLASSES,
       isOpen: false,
-      triggeredByMouse: false,
       anchorEl: null,
       popoverContentEl: null,
     };
@@ -480,9 +467,6 @@ export default {
     },
 
     defaultToggleOpen (e) {
-      if (e.type === 'mouseup') {
-        this.triggeredByMouse = true;
-      }
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
       this.open ?? (this.anchorEl.contains(e.target) && this.toggleOpen());
@@ -546,7 +530,6 @@ export default {
       // If a modal popover is opened inside of this one, do not hide on click out
       const innerModals = this.popoverContentEl.querySelector('.d-modal--transparent[aria-hidden="false"]');
       if (!innerModals) {
-        this.triggeredByMouse = true;
         this.closePopover();
       }
     },
@@ -566,17 +549,15 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      if (!this.autoFocus) return;
-      if (this.triggeredByMouse) {
-        this.$refs.content.$el.focus();
-        this.triggeredByMouse = false;
-        return;
-      }
+      if (!this.modal) return;
       const focusableElements = this._getFocusableElements(domEl, true);
       if (focusableElements.length !== 0) {
         this.focusFirstElement(domEl);
       } else if (this.showCloseButton) {
         this.$refs.popover__header?.focusCloseButton();
+      } else {
+        // if there are no focusable elements at all focus the dialog itself
+        this.$refs.content.$el.focus();
       }
     },
   },

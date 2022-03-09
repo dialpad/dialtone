@@ -79,6 +79,7 @@ export default {
 
       const focusableElements = this._getFocusableElements(el);
       if (!focusableElements.length) {
+        e.preventDefault();
         return;
       }
 
