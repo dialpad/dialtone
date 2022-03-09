@@ -566,7 +566,9 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      if (this.triggeredByMouse || !this.autoFocus) {
+      if (!this.autoFocus) return;
+      if (this.triggeredByMouse) {
+        this.$refs.content.$el.focus();
         this.triggeredByMouse = false;
         return;
       }
