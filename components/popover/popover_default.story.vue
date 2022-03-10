@@ -16,7 +16,7 @@
     :aria-label="ariaLabel"
     :offset="offset"
     :modal="modal"
-    :auto-focus="autoFocus"
+    :initial-focus-element="initialFocusElement"
     :content-width="contentWidth"
     :show-close-button="showCloseButton"
     :header-class="headerClass"
