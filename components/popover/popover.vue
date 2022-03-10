@@ -344,7 +344,8 @@ export default {
 
     /**
      * The element that is focused when the popover is opened. This can be an
-     * HTMLElement within the popover, 'first' which will automatically focus
+     * HTMLElement within the popover, a string starting with '#' which will
+     * find the element by ID. 'first' which will automatically focus
      * the first element, or 'dialog' which will focus the dialog window itself.
      * If the dialog is modal this prop cannot be 'none'.
      */
@@ -353,7 +354,8 @@ export default {
       default: 'none',
       validator: initialFocusElement => {
         return POPOVER_INITIAL_FOCUS_STRINGS.includes(initialFocusElement) ||
-          (initialFocusElement instanceof HTMLElement);
+          (initialFocusElement instanceof HTMLElement) ||
+          initialFocusElement.startsWith('#');
       },
     },
   },
@@ -558,12 +560,27 @@ export default {
       if (this.initialFocusElement === 'dialog') {
         this.$refs.content.$el.focus();
       }
+      // find by ID
+      if (this.initialFocusElement.startsWith('#')) {
+        this.focusInitialElementById();
+      }
       if (this.initialFocusElement === 'first') {
         this.focusFirstElementIfNeeded(this.$refs.popover__content);
       }
       if (this.initialFocusElement instanceof HTMLElement) {
         this.initialFocusElement.focus();
       }
+    },
+
+    focusInitialElementById () {
+      const result = this.$refs.content.$el.querySelector(this.initialFocusElement);
+      if (result) {
+        result.focus();
+      } else {
+        console.warn('Could not find the element specified in dt-popover prop "initialFocusElement". ' +
+          'Defaulting to focusing the dialog.');
+      }
+      result ? result.focus() : this.$refs.content.$el.focus();
     },
 
     onResize () {

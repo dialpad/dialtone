@@ -48,7 +48,10 @@
           <p class="d-mb4">
             I will be displayed in the popover!
           </p>
-          <dt-button @click="close">
+          <dt-button
+            id="content-close"
+            @click="close"
+          >
             Click to close
           </dt-button>
         </template>

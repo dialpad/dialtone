@@ -74,7 +74,7 @@ const argTypesData = {
   initialFocusElement: {
     control: {
       type: 'select',
-      options: Object.values(POPOVER_INITIAL_FOCUS_STRINGS),
+      options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-closeee'],
     },
   },
   role: {

@@ -140,9 +140,9 @@ that launched it.
 moved to the header buttons after the last focusable element inside content's container.
 
 Additionally you must use the "initialFocusElement" prop to set which element is initially focused when the popover
-opens. You can set this to "first" to focus the first focusable element, "dialog" to focus the dialog itself or
-you may pass in an HTML element within the popover to be focused. If set to "none" the focus will remain on the anchor,
-however this is invalid behavior if the popover is modal.
+opens. You can set this to "first" to focus the first focusable element, "dialog" to focus the dialog itself, a string
+starting with '#' to focus an element by id within the dialog or  you may pass in an HTMLElement directly.
+If set to "none" the focus will remain on the anchor, however this is invalid behavior if the popover is modal.
 
 ### References
 
