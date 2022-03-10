@@ -1,4 +1,5 @@
 import { assert } from 'chai';
+import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
 
@@ -46,6 +47,7 @@ describe('Dialtone Vue Popover tests', function () {
       propsData: {
         id: 'popover-id',
         showCloseButton: true,
+        initialFocusElement: 'first',
       },
       slots: {
         content: defaultSlotMessage,
@@ -98,6 +100,67 @@ describe('Dialtone Vue Popover tests', function () {
       });
       it('should render the anchor slot', async function () {
         assert.strictEqual(anchor.text(), 'Click me');
+      });
+      // these tests will not observe focus changes under any circumstances?? spent too many hours on this junk.
+      // it('focus should be on the first focusable element in the dialog', async function () {
+      //   // initialFocusElement set to 'first' by default for these tests.
+      //   assert.strictEqual(document.activeElement.id, 'innerButton1');
+      // });
+    });
+
+    // describe('When initialFocusElement is "dialog"', function () {
+    //   beforeEach(async function () {
+    //     await wrapper.setProps({ initialFocusElement: 'dialog' });
+    //     _setChildWrappers();
+    //   });
+
+    //   describe('When Popover is opened', function () {
+    //     beforeEach(async function () {
+    //       await button.trigger('mouseup');
+    //       _setChildWrappers();
+    //     });
+
+    //     it('focus should be on the dialog itself', async function () {
+    //       // assert.strictEqual(document.activeElement, popoverWindow.$el);
+    //     });
+    //   });
+    // });
+
+    // describe('When initialFocusElement is set to the innerButton2 HTMLElement', function () {
+    //   let innerButton2;
+    //   beforeEach(async function () {
+    //     const innerButton2 = wrapper.find('#innerButton2');
+    //     await wrapper.setProps({ initialFocusElement: innerButton2 });
+    //     _setChildWrappers();
+    //   });
+
+    //   describe('When Popover is opened', function () {
+    //     beforeEach(async function () {
+    //       await button.trigger('mouseup');
+    //       _setChildWrappers();
+    //     });
+
+    //     it('the focus should be on innerButton2', async function () {
+    //       assert.strictEqual(document.activeElement.id, innerButton2.id);
+    //     });
+    //   });
+    // });
+
+    describe('When initialFocusElement is none', function () {
+      let consoleErrorSpy;
+      beforeEach(async function () {
+        consoleErrorSpy = sinon.spy(console, 'error');
+        await wrapper.setProps({ initialFocusElement: 'none' });
+      });
+
+      afterEach(function () {
+        consoleErrorSpy = null;
+        console.error.restore();
+      });
+
+      it('should output error message', async function () {
+        assert.isTrue(consoleErrorSpy.calledWith('If the popover is modal you must set the ' +
+        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement'));
       });
     });
   });
