@@ -1,3 +1,10 @@
+# [2.0.0-beta.14](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.13...v2.0.0-beta.14) (2022-03-10)
+
+
+### Features
+
+* add initialFocusElement prop ([f88c2c3](https://github.com/dialpad/dialtone-vue/commit/f88c2c386f2a883268815fa43b4b7ecf0d48c087))
+
 # [2.0.0-beta.13](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.12...v2.0.0-beta.13) (2022-03-09)
 
 
