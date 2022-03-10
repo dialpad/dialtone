@@ -5,13 +5,14 @@
     :class="['dt-list-item d-ls-none focus-visible', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
-      'dt-list-item--hoverable': isHoverable,
     }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
     :aria-selected="isHighlighted"
     @keydown.enter="onClick"
     @keydown.space="onClick"
+    @mousemove="onMouseHover"
+    @mouseleave="onMouseLeave"
     @click="onClick"
   >
     <component
@@ -100,6 +101,13 @@ export default {
 
   emits: ['click'],
 
+  data () {
+    return {
+      injected: false,
+      mouseHighlighted: false,
+    };
+  },
+
   computed: {
     listItemType () {
       switch (this.type) {
@@ -112,9 +120,13 @@ export default {
 
     /**
      * For keyboard navigation, whether or not this item is currently highlighted.
+     * An injected highlightId will override the default mouseover highlight.
      */
     isHighlighted () {
-      return this.highlightId ? this.id === this.highlightId() : false;
+      if (this.isHoverable) {
+        return this.highlightId && this.highlightId() ? this.id === this.highlightId() : this.mouseHighlighted;
+      }
+      return false;
     },
 
     isFocusable () {
@@ -133,6 +145,14 @@ export default {
   methods: {
     onClick () {
       this.$emit('click');
+    },
+
+    onMouseHover () {
+      this.mouseHighlighted = true;
+    },
+
+    onMouseLeave () {
+      this.mouseHighlighted = false;
     },
   },
 };

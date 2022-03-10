@@ -6,6 +6,7 @@ import { LIST_ITEM_NAVIGATION_TYPES } from './list_item_constants.js';
 
 const basePropsData = {
   id: 'dt-item',
+  navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
 };
 
 describe('Dialtone Vue ListItem tests', function () {
