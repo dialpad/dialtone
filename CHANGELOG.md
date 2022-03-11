@@ -1,3 +1,10 @@
+# [2.0.0-beta.17](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2022-03-11)
+
+
+### Bug Fixes
+
+* only show tooltip on visible focus ([38d21cc](https://github.com/dialpad/dialtone-vue/commit/38d21cc4dcc7400c6578af2a606997a46cf1c4be))
+
 # [2.0.0-beta.16](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2022-03-11)
 
 
