@@ -23,12 +23,10 @@
       >
         <template
           slot="anchor"
-          slot-scope="{ attrs }"
         >
           <dt-button
             importance="outlined"
             :kind="buttonKind"
-            v-bind="attrs"
           >
             {{ anchor }}
           </dt-button>

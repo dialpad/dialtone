@@ -11,9 +11,6 @@
     >
       <slot
         name="anchor"
-        :attrs="{
-          'aria-describedby': id,
-        }"
       />
     </div>
     <dt-lazy-show
@@ -237,8 +234,25 @@ export default {
       }
     },
 
+    hasVisibleFocus () {
+      return getAnchor(this.$refs.anchor).hasAttribute('data-focus-visible-added');
+    },
+
     onEnterAnchor (e) {
-      if (this.show === null) this.isShown = true;
+      if (e.type === 'focusin') {
+        // only show tooltips on visible focus when triggered via focus.
+        // when the user is using the mouse they only want tooltips to display
+        // on mouseover.
+        //
+        // Example: anchor of a popover is a button with tooltip.
+        // closing it with the mouse would trigger the tooltip to display as
+        // the anchor is focused on close. Not what we want.
+        if (this.show === null && this.hasVisibleFocus()) {
+          this.isShown = true;
+        }
+      } else {
+        if (this.show === null) this.isShown = true;
+      }
     },
 
     onLeaveAnchor (e) {

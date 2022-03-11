@@ -5,6 +5,7 @@
     <dt-popover
       width-content="anchor"
       placement="bottom-start"
+      initial-focus-element="first"
       class="d-mr12"
     >
       <template
@@ -37,6 +38,7 @@
     </dt-popover>
     <dt-popover
       width-content="anchor"
+      initial-focus-element="first"
       class="d-mr12"
     >
       <template
@@ -70,6 +72,7 @@
     <dt-popover
       padding="none"
       width-content="anchor"
+      initial-focus-element="first"
       class="d-mr12"
     >
       <template
@@ -134,6 +137,7 @@
       :show-close-button="true"
       placement="bottom-start"
       header-class="d-d-flex d-ai-center d-jc-space-between"
+      initial-focus-element="first"
       max-height="20rem"
       max-width="50rem"
       :close-button-props="{
@@ -144,11 +148,16 @@
         slot="anchor"
         slot-scope="{ attrs }"
       >
-        <dt-button
-          v-bind="attrs"
-        >
-          Popover with header
-        </dt-button>
+        <dt-tooltip>
+          <template #anchor>
+            <dt-button
+              v-bind="attrs"
+            >
+              Popover with header and anchor tooltip
+            </dt-button>
+          </template>
+          This is a test tooltip
+        </dt-tooltip>
       </template>
       <template slot="headerContent">
         <div>
@@ -199,6 +208,7 @@
       :show-close-button="true"
       max-height="20rem"
       max-width="50rem"
+      initial-focus-element="first"
       :close-button-props="{
         ariaLabel: 'Close popover',
       }"
@@ -228,6 +238,7 @@
     <dt-popover
       max-height="20rem"
       max-width="50rem"
+      initial-focus-element="first"
       :close-button-props="{
         ariaLabel: 'Close popover',
       }"
@@ -262,6 +273,7 @@
 
     <dt-popover
       content-class="d-pl12 d-pr16"
+      initial-focus-element="first"
       class="d-mr12"
       max-height="20rem"
       max-width="50rem"
@@ -344,6 +356,7 @@
     <dt-popover
       content-class="d-pl12 d-pr16"
       class="d-mr12"
+      initial-focus-element="first"
       max-height="20rem"
       max-width="50rem"
     >
@@ -380,6 +393,7 @@
     <dt-popover
       content-class="d-pl12 d-pr16"
       class="d-mr12"
+      :modal="false"
       max-height="20rem"
       max-width="50rem"
       :open.sync="openPopoverWithTriggerOverride"
