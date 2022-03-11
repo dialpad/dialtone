@@ -1,3 +1,10 @@
+# [2.0.0-beta.18](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.17...v2.0.0-beta.18) (2022-03-11)
+
+
+### Bug Fixes
+
+* nexttick in wrong place ([ca19667](https://github.com/dialpad/dialtone-vue/commit/ca19667aea83001da1042842cd88c747ab80ad48))
+
 # [2.0.0-beta.17](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2022-03-11)
 
 
