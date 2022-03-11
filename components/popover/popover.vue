@@ -539,9 +539,9 @@ export default {
 
     async onLeaveTransitionComplete () {
       if (this.modal) {
+        this.focusFirstElement(this.$refs.anchor);
         // await next tick in case the user wants to change focus themselves.
         await this.$nextTick();
-        this.focusFirstElement(this.$refs.anchor);
       }
       this.tip?.unmount();
       this.$emit('opened', false);
