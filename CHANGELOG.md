@@ -1,3 +1,10 @@
+# [2.0.0-beta.15](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.14...v2.0.0-beta.15) (2022-03-11)
+
+
+### Features
+
+* add initialFocusById ([de9e62b](https://github.com/dialpad/dialtone-vue/commit/de9e62b54112319076fe48399167bc27bd739a90))
+
 # [2.0.0-beta.14](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.13...v2.0.0-beta.14) (2022-03-10)
 
 
