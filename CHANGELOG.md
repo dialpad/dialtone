@@ -1,3 +1,10 @@
+# [2.0.0-beta.16](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2022-03-11)
+
+
+### Bug Fixes
+
+* don't render tooltip when blank ([7ff76d6](https://github.com/dialpad/dialtone-vue/commit/7ff76d65999d384f05a587944114f1a65ebf5a01))
+
 # [2.0.0-beta.15](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.14...v2.0.0-beta.15) (2022-03-11)
 
 
