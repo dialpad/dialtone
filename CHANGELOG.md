@@ -1,3 +1,10 @@
+# [2.0.0-beta.19](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.18...v2.0.0-beta.19) (2022-03-12)
+
+
+### Bug Fixes
+
+* protect null in combobox onopen ([2332306](https://github.com/dialpad/dialtone-vue/commit/2332306ade6e6ab066040a221515c74423a9f3d2))
+
 # [2.0.0-beta.18](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.17...v2.0.0-beta.18) (2022-03-11)
 
 
