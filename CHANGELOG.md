@@ -1,3 +1,16 @@
+# [2.0.0](https://github.com/dialpad/dialtone-vue/compare/v1.16.0...v2.0.0) (2022-03-12)
+
+
+### Features
+
+* add length validation in the input component ([#238](https://github.com/dialpad/dialtone-vue/issues/238)) ([3faae3e](https://github.com/dialpad/dialtone-vue/commit/3faae3ebc7a7b69b77e99f71a00f9b0124da5f4f))
+* alignment of props, behaviour, a11y in Popover, Tooltip ([#256](https://github.com/dialpad/dialtone-vue/issues/256)) ([1f4342d](https://github.com/dialpad/dialtone-vue/commit/1f4342db3691d89b77f42750bfa58112374bb972))
+
+
+### BREAKING CHANGES
+
+* many changes in prop naming and structure.
+
 # [1.16.0](https://github.com/dialpad/dialtone-vue/compare/v1.15.0...v1.16.0) (2022-03-08)
 
 
