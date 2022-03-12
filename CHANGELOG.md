@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/dialpad/dialtone-vue/compare/v2.0.0...v2.0.1) (2022-03-12)
+
+
+### Bug Fixes
+
+* revert add length validation in the input component ([ee13fb6](https://github.com/dialpad/dialtone-vue/commit/ee13fb6b26b65c36271bc95fb7548d7124e12417))
+
 # [2.0.0](https://github.com/dialpad/dialtone-vue/compare/v1.16.0...v2.0.0) (2022-03-12)
 
 
