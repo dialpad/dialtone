@@ -1,23 +1,17 @@
 <template>
   <div class="d-d-flex">
     <dt-dropdown
-      v-for="(variant, i) in variants.fixedAlignment"
+      v-for="(variant, i) in variants.placement"
       :key="i"
       class="d-mr8"
-      :fixed-alignment="variant"
+      :placement="variant"
       :content-width="contentWidth"
       :padding="padding"
       :navigation-type="navigationType"
       @highlight="onHighlight"
-      @escape="onDropdownEscape($event, variant)"
     >
-      <template
-        slot="anchor"
-        slot-scope="{ toggleOpen }"
-      >
-        <dt-button
-          @click.prevent="toggleOpen"
-        >
+      <template slot="anchor">
+        <dt-button>
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
@@ -52,7 +46,7 @@ export default {
   data () {
     return {
       variants: {
-        fixedAlignment: ['left', 'center', 'right'],
+        placement: ['bottom-start', 'bottom', 'bottom-end'],
       },
     };
   },
@@ -64,12 +58,6 @@ export default {
         { name: '2nd menu item', id: 2 },
         { name: '3rd menu item', id: 3 },
       ];
-    },
-  },
-
-  methods: {
-    onDropdownEscape (event, key) {
-      this.onEscape();
     },
   },
 };

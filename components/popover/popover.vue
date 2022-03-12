@@ -1,155 +1,129 @@
 <template>
-  <component
-    :is="elementType"
-    ref="popover"
-    data-qa="dt-popover-container"
-    v-on="$listeners"
-  >
+  <div>
     <dt-lazy-show
-      v-if="modal"
-      ref="overlay"
-      :show="modal && isOpeningPopover"
+      :show="modal && isOpen"
       transition="d-zoom"
-      class="
-        d-ps-fixed
-        d-all0
-        d-zi-modal
-        d-fl-center
-        d-fd-column
-        d-popover-overlay
-        d-vi-visible
-        d-o100
-        d-bgc-black-900
-      "
-      @click.self="closePopoverOnClick"
+      class="d-modal--transparent"
+      :aria-hidden="modal && isOpen ? 'false' : 'true'"
     />
-    <div
-      :id="!ariaLabelledby && labelledBy"
-      ref="anchor"
-      data-qa="dt-popover-anchor"
-    >
-      <!-- @slot Anchor element that activates the popover. Usually a button. -->
-      <slot
-        name="anchor"
-        :attrs="{
-          'aria-expanded': showPopover.toString(),
-          'aria-controls': id,
-          'aria-haspopup': role,
-        }"
-      />
-    </div>
-    <dt-lazy-show
-      :id="id"
-      ref="content"
-      :role="role"
-      data-qa="dt-popover"
-      :aria-hidden="`${!showPopover}`"
-      :aria-labelledby="labelledBy"
-      :aria-label="ariaLabel"
-      :aria-modal="modal"
-      :transition="transition"
-      :show="showPopover"
-      :class="[
-        'd-bgc-white',
-        'd-bs-card',
-        'd-bar8',
-        'd-bc-black-100',
-        'dt-popover-box',
-        `dt-popover__content--align-${horizontalAlignment}`,
-        `dt-popover__content--valign-${verticalAlignment}`,
-        {
-          'd-d-grid d-of-hidden dt-popover-box__grid': isFixedHeaderFooter(),
-          'd-of-auto': Boolean(maxHeight),
-          'd-wmx-unset': !Boolean(maxWidth),
-        },
-      ]"
-      :style="{
-        'max-height': maxHeight,
-        'max-width': maxWidth,
-      }"
-      tabindex="-1"
-      appear
+    <component
+      :is="elementType"
+      ref="popover"
+      :class="['d-popover', { 'd-popover__anchor--modal-opened': modal && isOpen }]"
+      data-qa="dt-popover-container"
       v-on="$listeners"
-      @keydown="onKeydown"
-      @after-leave="onLeave"
-      @enter="isOpeningPopover = true"
-      @leave="isOpeningPopover = false"
-      @after-enter="onOpen"
     >
       <div
-        v-if="hasCaret"
-        class="
-          d-ps-absolute
-          dt-popover__caret
-          d-mtn2
-          d-bt
-          d-bl
-          d-w4
-          d-h4
-          d-bgc-white
-          d-bc-transparent
-        "
-      />
-      <popover-header-footer
-        v-if="$slots.headerContent || showCloseButton"
-        ref="popover__header"
-        :content-class="headerClass"
-        type="header"
-        :show-close-button="showCloseButton"
-        :close-button-props="closeButtonProps"
-        :has-box-shadow="hasBoxShadow"
-        @close="closePopover"
+        :id="!ariaLabelledby && labelledBy"
+        ref="anchor"
+        data-qa="dt-popover-anchor"
+        @mouseup.capture="defaultToggleOpen"
+        @wheel="(e) => (isOpen && modal) && e.preventDefault()"
+        @keydown.enter.capture="defaultToggleOpen"
+        @keydown.escape.capture="closePopover"
       >
-        <template #content>
-          <!-- @slot Slot for popover header content -->
-          <slot name="headerContent" />
-        </template>
-      </popover-header-footer>
-      <div
-        ref="popover__content"
-        data-qa="dt-popover-content"
-        :class="[
-          'dt-popover__content',
-          POPOVER_PADDING_CLASSES[padding],
-          {
-            'd-of-auto': isFixedHeaderFooter(),
-          },
-          contentClass,
-        ]"
-        @scroll="onScrollContent"
-      >
-        <!-- @slot content that is displayed in the popover when it is open. -->
-        <slot name="content" />
+        <!-- @slot Anchor element that activates the popover. Usually a button. -->
+        <slot
+          name="anchor"
+          :attrs="{
+            'aria-expanded': isOpen.toString(),
+            'aria-controls': id,
+            'aria-haspopup': role,
+          }"
+        />
       </div>
-      <popover-header-footer
-        v-if="$slots.footerContent"
-        type="footer"
-        :content-class="footerClass"
-        :has-box-shadow="hasBoxShadow"
+      <dt-lazy-show
+        :id="id"
+        ref="content"
+        :role="role"
+        data-qa="dt-popover"
+        :aria-hidden="`${!isOpen}`"
+        :aria-labelledby="labelledBy"
+        :aria-label="ariaLabel"
+        :aria-modal="`${!modal}`"
+        :transition="transition"
+        :show="isOpen"
+        :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }, dialogClass]"
+        :style="{
+          'max-height': maxHeight,
+          'max-width': maxWidth,
+        }"
+        tabindex="-1"
+        appear
+        v-on="$listeners"
+        @keydown.capture="onKeydown"
+        @after-leave="onLeaveTransitionComplete"
+        @after-enter="onEnterTransitionComplete"
       >
-        <template #content>
-          <slot name="footerContent" />
-        </template>
-      </popover-header-footer>
-    </dt-lazy-show>
-  </component>
+        <popover-header-footer
+          v-if="$slots.headerContent || showCloseButton"
+          ref="popover__header"
+          :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
+          :content-class="headerClass"
+          type="header"
+          :show-close-button="showCloseButton"
+          :close-button-props="closeButtonProps"
+          @close="closePopover"
+        >
+          <template #content>
+            <!-- @slot Slot for popover header content -->
+            <slot
+              name="headerContent"
+              :close="closePopover"
+            />
+          </template>
+        </popover-header-footer>
+        <div
+          ref="popover__content"
+          data-qa="dt-popover-content"
+          :class="[
+            'd-popover__content',
+            POPOVER_PADDING_CLASSES[padding],
+            contentClass,
+          ]"
+        >
+          <!-- @slot content that is displayed in the popover when it is open. -->
+          <slot
+            name="content"
+            :close="closePopover"
+          />
+        </div>
+        <popover-header-footer
+          v-if="$slots.footerContent"
+          ref="popover__footer"
+          type="footer"
+          :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
+          :content-class="footerClass"
+        >
+          <template #content>
+            <slot
+              name="footerContent"
+              :close="closePopover"
+            />
+          </template>
+        </popover-header-footer>
+      </dt-lazy-show>
+    </component>
+  </div>
 </template>
 
 <script>
 /* eslint-disable max-lines */
-import tippy from 'tippy.js/headless';
-import { hideOnEsc, getArrowDetected } from '../tooltip/modifiers';
 import {
   POPOVER_CONTENT_WIDTHS,
-  POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_PADDING_CLASSES,
+  POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_ROLES,
-  POPOVER_VERTICAL_ALIGNMENT,
+  POPOVER_INITIAL_FOCUS_STRINGS,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
-import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 import ModalMixin from '@/common/mixins/modal.js';
+import {
+  createTippy,
+  getPopperOptions,
+} from './tippy_utils';
+
 import PopoverHeaderFooter from './popover_header_footer';
 
 export default {
@@ -166,6 +140,16 @@ export default {
   mixins: [ModalMixin],
 
   props: {
+    /**
+     * Controls whether the popover is shown. Leaving this null will have the popover trigger on click by default.
+     * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
+     * Supports .sync modifier
+     */
+    open: {
+      type: Boolean,
+      default: null,
+    },
+
     /**
      * Element type (tag name) of the root element of the component.
      */
@@ -226,51 +210,13 @@ export default {
     },
 
     /**
-     * Whether or not the popover content is shown. Supports .sync modifier.
-     */
-    open: {
-      type: Boolean,
-      required: true,
-    },
-
-    /**
      * Padding size class for the popover content.
      */
     padding: {
       type: String,
       default: 'large',
       validator: (padding) => {
-        return !!POPOVER_PADDING_CLASSES[padding];
-      },
-    },
-
-    /**
-     * Fixed vertical alignment of the popover content. If passed, the popover
-     * will always display anchored to the top or bottom of the anchor element.
-     * If null, the content will be positioned on whichever side has the most
-     * available space relative to the root Vue element. String values must be
-     * one of `top` or `bottom`.
-     */
-    fixedVerticalAlignment: {
-      type: String,
-      default: null,
-      validator: (align) => {
-        return POPOVER_VERTICAL_ALIGNMENT.includes(align);
-      },
-    },
-
-    /**
-     * Fixed horizontal alignment of the popover content. If passed, the
-     * popover will always display anchored to the left or right of the
-     * anchor element. If null, the content will be positioned on whichever
-     * side has the most available space relative to the root Vue element.
-     * String values must be one of `left` or `right`.
-     */
-    fixedAlignment: {
-      type: String,
-      default: null,
-      validator: (align) => {
-        return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
+        return Object.keys(POPOVER_PADDING_CLASSES).some((item) => item === padding);
       },
     },
 
@@ -284,29 +230,12 @@ export default {
 
     /**
      * Width configuration for the popover content. When its value is 'anchor',
-     * the popover content will be set the same width with anchor element onShow popover event
+     * the popover content will have the same width as the anchor.
      */
     contentWidth: {
       type: String,
       default: null,
       validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
-    },
-
-    /**
-     * Whether or not a carat (arrow) should be shown from the content pointing
-     * at the anchor.
-     */
-    hasCaret: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Determines whether the anchor should be focused after closing the popover.
-     */
-    focusAnchorOnClose: {
-      type: Boolean,
-      default: true,
     },
 
     /**
@@ -318,106 +247,49 @@ export default {
     },
 
     /**
-     *  Displaces the tippy from its reference element
-     *  in pixels (skidding and distance).
+     *  Displaces the content box from its anchor element
+     *  by the specified number of pixels.
      */
     offset: {
-      type: [Number, Array],
+      type: Array,
       default: () => [0, 4],
     },
 
     /**
-     * The element to append the tippy to.
+     * Determines if the popover hides upon clicking the
+     * anchor or outside of the content box.
      */
-    appendTo: {
-      type: [String, HTMLElement],
-      default: () => document.body,
-    },
-
-    /**
-     * Determines if the tippy has interactive content inside of it,
-     * so that it can be hovered over and clicked inside without hiding.
-     */
-    interactive: {
+    hideOnClick: {
       type: Boolean,
       default: true,
     },
 
     /**
-     * This describes the area that the element
-     * will be checked for overflow relative to.
-     */
-    flipBoundary: {
-      type: [String, HTMLElement, Array],
-      default: 'clippingParents',
-      validator (boundary) {
-        if (typeof boundary === 'string') {
-          return boundary === 'clippingParents';
-        }
-
-        if (Array.isArray(boundary)) {
-          return boundary.every(el => el instanceof HTMLElement);
-        }
-
-        return boundary instanceof HTMLElement;
-      },
-    },
-
-    /**
-     * Determines the size of the invisible border around the
-     * tippy that will prevent it from hiding if the cursor left it.
-     */
-    interactiveBorder: {
-      type: Number,
-      default: 2,
-    },
-
-    /**
-     * Determines the events that cause the tippy to show.
-     * Multiple event names are separated by spaces.
-     */
-    trigger: {
-      type: String,
-      default: 'manual',
-    },
-
-    /***
-     * Determines if the tippy hides upon clicking the
-     * reference or outside of the tippy.
-     * The behavior can depend upon the trigger events used.
-     */
-    hideOnClick: {
-      type: [Boolean, String],
-      default: true,
-      validator (value) {
-        return TOOLTIP_HIDE_ON_CLICK_VARIANTS.some(variant => variant === value);
-      },
-    },
-
-    /**
-     * Determines modal state, when the popover's overlay is rendered
+     * Determines modal state. If enabled popover has a modal overlay
+     * preventing interaction with elements below it, but it is invisible.
      */
     modal: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Determines the popover's z-index
-     */
-    zIndex: {
-      type: [Number, String],
-      default: 300,
-      validator: zIndex => !!Number(zIndex),
+     * If the popover does not fit in the direction described by "placement",
+     * it will attempt to change it's direction to the "fallbackPlacements".
+     * */
+    fallbackPlacements: {
+      type: Array,
+      default: () => {
+        return ['auto'];
+      },
     },
 
     /**
-     * Determines html element container for popover's overlay,
-     * which will be rendered when 'modal' property is 'true'.
+     * The direction the popover displays relative to the anchor.
      */
-    overlayAppendTo: {
-      type: HTMLElement,
-      default: () => document.body,
+    placement: {
+      type: String,
+      default: 'bottom-end',
     },
 
     /**
@@ -436,14 +308,6 @@ export default {
     maxWidth: {
       type: String,
       default: '',
-    },
-
-    /**
-     * Determines fixed / sticky styles for popover header
-     */
-    fixedHeaderFooter: {
-      type: Boolean,
-      default: true,
     },
 
     /**
@@ -469,58 +333,46 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Additional class name for the dialog element.
+     */
+    dialogClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * The element that is focused when the popover is opened. This can be an
+     * HTMLElement within the popover, a string starting with '#' which will
+     * find the element by ID. 'first' which will automatically focus
+     * the first element, or 'dialog' which will focus the dialog window itself.
+     * If the dialog is modal this prop cannot be 'none'.
+     */
+    initialFocusElement: {
+      type: [String, HTMLElement],
+      default: 'none',
+      validator: initialFocusElement => {
+        return POPOVER_INITIAL_FOCUS_STRINGS.includes(initialFocusElement) ||
+          (initialFocusElement instanceof HTMLElement) ||
+          initialFocusElement.startsWith('#');
+      },
+    },
   },
 
-  emits: ['update:open'],
+  emits: ['update:open', 'opened'],
 
   data () {
     return {
       POPOVER_PADDING_CLASSES,
-      verticalAlignment: '',
-      horizontalAlignment: '',
-      isOpeningPopover: false,
-      showPopover: this.open,
-      isPreventHidePopover: false,
-      closedByClickOutside: false,
-      focusCloseButton: false,
+      POPOVER_HEADER_FOOTER_PADDING_CLASSES,
+      isOpen: false,
       anchorEl: null,
       popoverContentEl: null,
-      hasScrolled: false,
     };
   },
 
   computed: {
-    hasBoxShadow () {
-      return this.hasScrolled && this.fixedHeaderFooter;
-    },
-
-    fallbackPlacements () {
-      const verticalVariants = POPOVER_VERTICAL_ALIGNMENT.filter(alignment => alignment);
-      const horizontalVariants = POPOVER_HORIZONTAL_ALIGNMENT.filter(alignment => alignment);
-      if (this.fixedAlignment === null && this.fixedVerticalAlignment === null) {
-        return verticalVariants.map(vertical =>
-          horizontalVariants.map(horizontal =>
-            this.getPlacement(vertical, horizontal)),
-        ).flat();
-      }
-
-      if (this.fixedAlignment === null) {
-        return horizontalVariants
-          .map(horizontal => this.getPlacement(this.fixedVerticalAlignment, horizontal));
-      }
-
-      if (this.fixedVerticalAlignment === null) {
-        return verticalVariants
-          .map(vertical => this.getPlacement(vertical, this.fixedAlignment));
-      }
-
-      return [];
-    },
-
-    placement () {
-      return this.getPlacement(this.fixedVerticalAlignment, this.fixedAlignment);
-    },
-
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
@@ -529,149 +381,150 @@ export default {
   },
 
   watch: {
+    $props: {
+      immediate: true,
+      deep: true,
+      handler () {
+        this.validateProps();
+      },
+    },
+
+    modal (modal) {
+      this.tip.setProps({
+        zIndex: modal ? 650 : 300,
+      });
+    },
+
+    offset (offset) {
+      this.tip.setProps({
+        offset: offset,
+      });
+    },
+
+    fallbackPlacements (fallbackPlacements) {
+      this.tip.setProps({
+        popperOptions: getPopperOptions({
+          fallbackPlacements: fallbackPlacements,
+          hasHideModifierEnabled: true,
+        }),
+      });
+    },
+
     placement (placement) {
       this.tip?.setProps({
         placement,
       });
     },
 
-    fallbackPlacements: {
-      deep: true,
-      handler () {
-        this.tip?.setProps({
-          popperOptions: this.getPopperOptions(),
-        });
+    open: {
+      handler: function (open) {
+        if (open !== null) {
+          this.isOpen = open;
+        }
       },
+
+      immediate: true,
     },
 
-    open (isOpen, isPrev) {
+    isOpen (isOpen, isPrev) {
       if (isOpen) {
         this.tip.show();
-        this.addClosePopoverEventLister();
+        this.addClosePopoverEventListener();
       } else if (!isOpen && isPrev !== isOpen) {
-        this.showPopover = false;
-        this.removeClosePopoverEventLister();
+        this.removeClosePopoverEventListener();
+        this.tip.hide();
       }
-    },
-
-    hideOnClick () {
-      this.tip?.setProps({
-        hideOnClick: this.hideOnClick,
-      });
     },
   },
 
   mounted () {
-    // local verticalAlignment is needed for flipping
-    this.verticalAlignment = this.fixedVerticalAlignment;
     // support single anchor for popover, not multi anchor
     this.anchorEl = this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
-    let zIndex = this.zIndex;
-    // align z-indexes when popover has modal prop
-    if (this.modal) {
-      this.anchorEl.classList.add('d-zi-notification');
-      zIndex = zIndex > 600 ? zIndex : 700;
-      this.appendOverlay();
-    }
 
     // align popover content width when
     if (this.contentWidth === 'anchor') {
       window.addEventListener('resize', this.onResize);
     }
-    this.tip = tippy(this.anchorEl, this.getOptions({
-      popperOptions: this.getPopperOptions(),
-      tippyOptions: {
-        placement: this.placement,
-        hideOnClick: this.hideOnClick,
-        offset: this.offset,
-        interactiveBorder: this.interactiveBorder,
-        appendTo: this.appendTo,
-        interactive: this.interactive,
-        allowHTML: true,
-        trigger: this.trigger,
-        zIndex,
-        onHide: this.onHide,
-        onMount: this.onMount,
-        onClickOutside: this.onClickOutside,
-        onShow: this.onShow,
-      },
-    }));
-    if (this.showPopover) {
+    this.tip = createTippy(this.anchorEl, {
+      popperOptions: getPopperOptions({
+        fallbackPlacements: this.fallbackPlacements,
+        hasHideModifierEnabled: true,
+      }),
+      contentElement: this.popoverContentEl,
+      placement: this.placement,
+      offset: this.offset,
+      appendTo: document.body,
+      interactive: true,
+      trigger: 'manual',
+      // We have to manage hideOnClick functionality manually to handle
+      // popover within popover situations.
+      hideOnClick: false,
+      zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+      onClickOutside: this.onClickOutside,
+      onShow: this.onShow,
+    });
+
+    // immediate watcher fires before mounted, so have this here in case
+    // show prop was initially set to true.
+    if (this.isOpen) {
       this.tip.show();
-      this.addClosePopoverEventLister();
     }
   },
 
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize);
-    this.removeOverlay();
     this.tip?.destroy();
     this.removeReferences();
-    this.removeClosePopoverEventLister();
+    this.removeClosePopoverEventListener();
   },
 
   /******************
    *     METHODS    *
    ******************/
   methods: {
-    isFixedHeaderFooter () {
-      // don't apply fixed header/footer classes if there's nothing in the slots
-      return this.fixedHeaderFooter && (this.$slots.headerContent || this.$slots.footerContent);
+    validateProps () {
+      if (this.modal && this.initialFocusElement === 'none') {
+        console.error('If the popover is modal you must set the ' +
+        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
+      }
     },
 
-    addClosePopoverEventLister () {
+    calculateAnchorZindex () {
+      // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
+      if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+        return 650;
+      } else {
+        return 300;
+      }
+    },
+
+    defaultToggleOpen (e) {
+      // Only use default toggle behaviour if the user has not set the open prop.
+      // Check that the anchor element specifically was clicked.
+      this.open ?? (this.anchorEl.contains(e.target) && this.toggleOpen());
+    },
+
+    toggleOpen () {
+      this.isOpen = !this.isOpen;
+    },
+
+    addClosePopoverEventListener () {
       window.addEventListener('dt-popover-close', this.closePopover);
     },
 
-    removeClosePopoverEventLister () {
+    removeClosePopoverEventListener () {
       window.removeEventListener('dt-popover-close', this.closePopover);
     },
 
-    onScrollContent ({ target }) {
-      this.hasScrolled = target.scrollTop > 0;
+    closePopover () {
+      this.isOpen = false;
     },
 
     removeReferences () {
       this.anchorEl = null;
       this.popoverContentEl = null;
       this.tip = null;
-    },
-
-    appendOverlay () {
-      const overlay = this.$refs.overlay.$el;
-      const { lastChild } = this.overlayAppendTo;
-      if (lastChild) {
-        this.overlayAppendTo.insertBefore(overlay, lastChild);
-      } else {
-        this.overlayAppendTo.append(overlay);
-      }
-    },
-
-    removeOverlay () {
-      if (this.$refs.overlay && this.$refs.overlay.$el) {
-        this.$refs.popover.append(this.$refs.overlay.$el);
-      }
-    },
-
-    getPlacement (vertical = 'bottom', horizontal = 'end') {
-      const verticalAlignment = vertical || 'bottom';
-      const horizontalAlignment = horizontal || 'end';
-      if (horizontalAlignment === 'center') return verticalAlignment;
-      if (horizontalAlignment === 'left' || horizontalAlignment === 'right') {
-        return `${verticalAlignment}-${horizontalAlignment === 'left' ? 'start' : 'end'}`;
-      }
-      return `${verticalAlignment}-${horizontalAlignment}`;
-    },
-
-    closePopover () {
-      this.tip.hide();
-    },
-
-    closePopoverOnClick () {
-      if (typeof this.hideOnClick === 'boolean' && this.hideOnClick) {
-        this.closePopover();
-      }
     },
 
     async onShow () {
@@ -684,36 +537,54 @@ export default {
       }
     },
 
-    onLeave () {
-      this.isPreventHidePopover = true;
-      if (this.focusAnchorOnClose && !this.closedByClickOutside) {
-        this.focusFirstElementIfNeeded(this.$refs.anchor);
+    async onLeaveTransitionComplete () {
+      if (this.modal) {
+        this.focusFirstElement(this.$refs.anchor);
+        // await next tick in case the user wants to change focus themselves.
+        await this.$nextTick();
       }
-      this.closedByClickOutside = false;
       this.tip?.unmount();
-      this.$emit('update:open', false);
+      this.$emit('opened', false);
+      if (this.open !== null) {
+        this.$emit('update:open', false);
+      }
     },
 
-    onOpen () {
-      this.$emit('update:open', true, this.$refs.popover__content);
-      this.focusFirstElementIfNeeded(this.$refs.popover__content);
+    async onEnterTransitionComplete () {
+      this.focusInitialElement();
+      // await next tick in case the user wants to change focus themselves.
+      await this.$nextTick();
+      this.$emit('opened', true, this.$refs.popover__content);
+      if (this.open !== null) {
+        this.$emit('update:open', true);
+      }
     },
 
-    onHide () {
-      this.showPopover = false;
-      /**
-       *  https://atomiks.github.io/tippyjs/v6/all-props/#onhide
-       *  return false from 'onHide' lifecycle to cancel a hide based on a condition.
-      **/
-      return this.isPreventHidePopover;
+    focusInitialElement () {
+      if (this.initialFocusElement === 'dialog') {
+        this.$refs.content.$el.focus();
+      }
+      // find by ID
+      if (this.initialFocusElement.startsWith('#')) {
+        this.focusInitialElementById();
+      }
+      if (this.initialFocusElement === 'first') {
+        this.focusFirstElementIfNeeded(this.$refs.popover__content);
+      }
+      if (this.initialFocusElement instanceof HTMLElement) {
+        this.initialFocusElement.focus();
+      }
     },
 
-    onMount () {
-      this.isPreventHidePopover = false;
-      this.showPopover = true;
-      this.tip?.setProps({
-        placement: this.placement,
-      });
+    focusInitialElementById () {
+      const result = this.$refs.content.$el.querySelector(this.initialFocusElement);
+      if (result) {
+        result.focus();
+      } else {
+        console.warn('Could not find the element specified in dt-popover prop "initialFocusElement". ' +
+          'Defaulting to focusing the dialog.');
+      }
+      result ? result.focus() : this.$refs.content.$el.focus();
     },
 
     onResize () {
@@ -721,56 +592,21 @@ export default {
     },
 
     onClickOutside () {
-      this.closedByClickOutside = true;
+      if (!this.hideOnClick) return;
+      // If a modal popover is opened inside of this one, do not hide on click out
+      const innerModals = this.popoverContentEl.querySelector('.d-modal--transparent[aria-hidden="false"]');
+      if (!innerModals) {
+        this.closePopover();
+      }
     },
 
     onKeydown (e) {
       if (e.key === 'Tab') {
         this.focusTrappedTabPress(e, this.popoverContentEl);
       }
-    },
-
-    getPopperOptions () {
-      return {
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              boundary: this.flipBoundary,
-              fallbackPlacements: this.fallbackPlacements,
-            },
-          },
-          {
-            name: 'hide',
-            enabled: this.appendTo !== 'parent',
-          },
-          getArrowDetected(({ state }) => {
-            this.verticalAlignment = state.placement.includes('top') ? 'top' : 'bottom';
-            if (state.placement === 'top' || state.placement === 'bottom') {
-              this.horizontalAlignment = 'center';
-            } else {
-              this.horizontalAlignment = state.placement.includes('start') ? 'left' : 'right';
-            }
-          }),
-        ],
-      };
-    },
-
-    getOptions ({ popperOptions, tippyOptions } = {}) {
-      return {
-        popperOptions,
-        ...tippyOptions,
-        plugins: [hideOnEsc],
-        render: () => {
-          // The recommended structure is to use the popper as an outer wrapper
-          const popper = document.createElement('div');
-          popper.className = 'tippy-box d-ps-absolute';
-          popper.appendChild(this.popoverContentEl);
-          return {
-            popper,
-          };
-        },
-      };
+      if (e.key === 'Escape') {
+        this.closePopover();
+      }
     },
 
     async setPopoverContentAnchorWidth () {
@@ -784,6 +620,9 @@ export default {
         this.focusFirstElement(domEl);
       } else if (this.showCloseButton) {
         this.$refs.popover__header?.focusCloseButton();
+      } else {
+        // if there are no focusable elements at all focus the dialog itself
+        this.$refs.content.$el.focus();
       }
     },
   },
@@ -791,73 +630,11 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../css/dialtone.less";
-
-.dt-popover__content {
-  &--align-right {
-    .dt-popover__caret {
-      right: @su24;
-    }
-  }
-
-  &--align-left {
-    .dt-popover__caret {
-      left: @su24;
-    }
-  }
-
-  &--align-center {
-    .dt-popover__caret {
-      left: 50%;
-    }
-  }
-
-  &--valign-top {
-    bottom: 100%;
-    margin-top: @su0;
-    margin-bottom: @su4;
-
-    .dt-popover__caret {
-      bottom: 0;
-      transform: rotate(225deg);
-    }
-  }
-
-  &--valign-bottom {
-    .dt-popover__caret {
-      bottom: 100%;
-      top: 0;
-      transform: rotate(45deg);
-    }
-  }
-}
-
-.dt-popover__caret {
-  transform: rotate(45deg);
-}
-
 .tippy-box[data-popper-reference-hidden],
 .tippy-box[data-popper-escaped] {
-  .dt-popover-box {
+  .d-popover__dialog {
     visibility: hidden;
     pointer-events: none;
-  }
-}
-
-.d-popover-overlay {
-  --bgo: 85% !important;
-}
-
-.dt-popover-box {
-  &,
-  *,
-  *:before,
-  *:after {
-    box-sizing: border-box;
-  }
-
-  &__grid {
-    grid-template-rows: auto 1fr;
   }
 }
 </style>

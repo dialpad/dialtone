@@ -1,17 +1,21 @@
 import {
   DtPopover,
   POPOVER_PADDING_CLASSES,
-  POPOVER_HORIZONTAL_ALIGNMENT,
-  POPOVER_VERTICAL_ALIGNMENT,
   POPOVER_ROLES,
   POPOVER_CONTENT_WIDTHS,
+  POPOVER_INITIAL_FOCUS_STRINGS,
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import PopoverVariants from './popover_variants.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
-import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
+import { POPOVER_DIRECTIONS } from './popover_constants';
+
+// Default Props for all variations
+export const argsData = {
+  onOpened: action('opened'),
+};
 
 const argTypesData = {
   // Slots
@@ -67,33 +71,27 @@ const argTypesData = {
       options: Object.keys(POPOVER_PADDING_CLASSES),
     },
   },
+  initialFocusElement: {
+    control: {
+      type: 'select',
+      options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
+    },
+  },
   role: {
     control: {
       type: 'select',
       options: POPOVER_ROLES,
     },
   },
-  fixedAlignment: {
-    defaultValue: null,
+  placement: {
+    defaultValue: 'bottom-end',
     control: {
       type: 'select',
-      options: POPOVER_HORIZONTAL_ALIGNMENT,
+      options: POPOVER_DIRECTIONS,
     },
     table: {
       defaultValue: {
-        summary: 'null',
-      },
-    },
-  },
-  fixedVerticalAlignment: {
-    defaultValue: null,
-    control: {
-      type: 'select',
-      options: POPOVER_VERTICAL_ALIGNMENT,
-    },
-    table: {
-      defaultValue: {
-        summary: 'null',
+        summary: 'bottom-end',
       },
     },
   },
@@ -109,37 +107,38 @@ const argTypesData = {
       },
     },
   },
+  transition: {
+    control: {
+      type: 'select',
+      options: ['', 'fade', 'pop', 'shake'],
+    },
+  },
 
   // Events
-  onUpdateOpen: {
+  onOpened: {
     table: {
       disable: true,
     },
   },
 
   'update:open': {
-    description: `The popover will emit a boolean value for this event when the \
-user performs a popover-closing or opening action and also the popover content reference when it was open. \
-Parent components can sync on this value to create a 2-way binding to control popover visibility.`,
+    table: {
+      disable: true,
+    },
+  },
+
+  opened: {
+    description: `emitted when popover is shown or hidden.`,
     table: {
       type: {
-        summary: 'boolean',
+        summary: 'event',
       },
     },
   },
-  hideOnClick: {
-    type: 'select',
-    options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
-  },
-};
-
-// Default Props for all variations
-export const argsData = {
-  onUpdateOpen: action('update:show'),
 };
 
 export default {
-  title: 'Components/Popovers',
+  title: 'Components/Popover',
   component: DtPopover,
   args: argsData,
   argTypes: argTypesData,
@@ -147,11 +146,9 @@ export default {
     controls: {
       sort: 'requiredFirst',
     },
+    options: { showPanel: true },
     docs: {
       page: PopoverMdx,
-    },
-    options: {
-      showPanel: true,
     },
   },
   excludeStories: /.Data$/,
@@ -163,7 +160,7 @@ const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args,
 export const Default = Template.bind({});
 Default.args = {};
 Default.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+  template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
 })];
 Default.parameters = {};
 

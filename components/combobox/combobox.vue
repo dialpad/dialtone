@@ -150,11 +150,16 @@ export default {
   },
 
   watch: {
-    showList () {
+    showList (showList) {
       // When the list's visibility changes reset the highlight index.
       this.$nextTick(function () {
         this.setInitialHighlightIndex();
       });
+
+      if (!showList && this.outsideRenderedListRef) {
+        this.outsideRenderedListRef.removeEventListener('mousemove', this.onMouseHighlight);
+        this.outsideRenderedListRef = null;
+      }
     },
   },
 
@@ -162,7 +167,7 @@ export default {
     onMouseHighlight (e) {
       const liElement = e.target.closest('li');
 
-      if (liElement && liElement.classList.contains('dt-list-item--hoverable') && this.highlightId !== liElement.id) {
+      if (liElement && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
       }
     },
@@ -191,6 +196,7 @@ export default {
 
     onOpen (open, contentRef) {
       this.outsideRenderedListRef = contentRef;
+      this.outsideRenderedListRef?.addEventListener('mousemove', this.onMouseHighlight);
     },
 
     setInitialHighlightIndex () {

@@ -69,15 +69,12 @@ import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
 
 ```html
 <dt-dropdown
-  :open="isOpen"
   @highlight="onHighlight"
-  @escape="onEscape"
-  @update:open="updateOpen"
+  @opened="onOpen"
 >
-  <template #anchor="{ attrs, toggleOpen }">
+  <template #anchor="{ attrs }">
     <dt-button
       v-bind="attrs"
-      @click.prevent="toggleOpen"
     >
       Click to open
     </dt-button>
@@ -96,7 +93,7 @@ import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
 </dt-dropdown>
 ```
 
-`toggleOpen` is the method event handler passed to the `anchor` that controls the dropdown's visibility and
+If you wish to override the default behavior of clicking on the anchor to open the dropdown, set the `open` prop.
 `close` is the method event handler passed to the `list` slots that closes the dropdown when clicking on the item.
 
 It's possible to specify different event handlers per each list item in case you are not using `v-for` for
@@ -104,15 +101,12 @@ rendering items:
 
 ```html
 <dt-dropdown
-  :open="isOpen"
   @highlight="onHighlight"
-  @escape="onEscape"
   @update:open="updateOpen"
 >
-  <template #anchor="{ attrs, toggleOpen }">
+  <template #anchor="{ attrs }">
     <dt-button
       v-bind="attrs"
-      @click.prevent="toggleOpen"
     >
       Click to open
     </dt-button>

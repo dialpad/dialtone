@@ -28,8 +28,6 @@ describe('Dialtone Vue Dropdown Tests', function () {
   let slots = baseSlots;
   let scopedSlots = {};
   let listeners;
-  let selectStub;
-  let escapeStub;
   let highlightStub;
 
   // Helpers
@@ -101,9 +99,10 @@ describe('Dialtone Vue Dropdown Tests', function () {
       // Test setup
       beforeEach(function () {
         scopedSlots = {
-          anchor: `<a href="#" id="anchor" v-bind="props.attrs">Link</a>`,
+          anchor: `<template #anchor="{ attrs }"><a href="#" id="anchor" v-bind="attrs">Link</a></template>`,
         };
         _setWrappers();
+        wrapper.vm.$nextTick();
       });
 
       it('aria-expanded should be "true"', function () {
@@ -116,20 +115,9 @@ describe('Dialtone Vue Dropdown Tests', function () {
   describe('Interactivity Tests', function () {
     // Test setup
     beforeEach(function () {
-      selectStub = sinon.stub();
-      escapeStub = sinon.stub();
       highlightStub = sinon.stub();
-      listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub };
+      listeners = { highlight: highlightStub };
       _setWrappers();
-    });
-
-    describe('When "Esc" key is pressed', function () {
-      beforeEach(async function () {
-        await wrapper.trigger('keydown.esc');
-      });
-
-      it('should call listener', function () { assert.isTrue(escapeStub.called); });
-      it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
     });
 
     describe('When the highlightIndex changes', function () {
