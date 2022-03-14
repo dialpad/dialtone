@@ -196,7 +196,7 @@ export default {
 
     onOpen (open, contentRef) {
       this.outsideRenderedListRef = contentRef;
-      this.outsideRenderedListRef.addEventListener('mousemove', this.onMouseHighlight);
+      this.outsideRenderedListRef?.addEventListener('mousemove', this.onMouseHighlight);
     },
 
     setInitialHighlightIndex () {

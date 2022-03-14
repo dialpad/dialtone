@@ -163,6 +163,8 @@ describe('Dialtone Vue Tooltip tests', function () {
 
       describe('When focusin tooltip', function () {
         beforeEach(async function () {
+          // set data-focus-visible-added attribute to emulate visible focus
+          wrapper.vm.$refs.anchor.firstElementChild.setAttribute('data-focus-visible-added', '');
           await anchor.trigger('focusin');
         });
 

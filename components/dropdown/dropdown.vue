@@ -4,6 +4,7 @@
     :content-width="contentWidth"
     :open="open"
     :placement="placement"
+    initial-focus-element="first"
     :fallback-placements="fallbackPlacements"
     :padding="padding"
     role="menu"

@@ -1,3 +1,35 @@
+## [2.0.1](https://github.com/dialpad/dialtone-vue/compare/v2.0.0...v2.0.1) (2022-03-12)
+
+
+### Bug Fixes
+
+* revert add length validation in the input component ([ee13fb6](https://github.com/dialpad/dialtone-vue/commit/ee13fb6b26b65c36271bc95fb7548d7124e12417))
+
+# [2.0.0](https://github.com/dialpad/dialtone-vue/compare/v1.16.0...v2.0.0) (2022-03-12)
+
+
+### Features
+
+* add length validation in the input component ([#238](https://github.com/dialpad/dialtone-vue/issues/238)) ([3faae3e](https://github.com/dialpad/dialtone-vue/commit/3faae3ebc7a7b69b77e99f71a00f9b0124da5f4f))
+* alignment of props, behaviour, a11y in Popover, Tooltip ([#256](https://github.com/dialpad/dialtone-vue/issues/256)) ([1f4342d](https://github.com/dialpad/dialtone-vue/commit/1f4342db3691d89b77f42750bfa58112374bb972))
+
+
+### BREAKING CHANGES
+
+* many changes in prop naming and structure.
+
+# [1.16.0](https://github.com/dialpad/dialtone-vue/compare/v1.15.0...v1.16.0) (2022-03-08)
+
+
+### Bug Fixes
+
+* make padding same on both sides on keyboard shortcut ([2b8113c](https://github.com/dialpad/dialtone-vue/commit/2b8113ce1d597211713faa5acb623685ae863a75))
+
+
+### Features
+
+* add contact info component for call info display ([#249](https://github.com/dialpad/dialtone-vue/issues/249)) ([8195314](https://github.com/dialpad/dialtone-vue/commit/81953141235af95c5d10842c6d314ecc8d089bc2))
+
 # [1.15.0](https://github.com/dialpad/dialtone-vue/compare/v1.14.0...v1.15.0) (2022-02-28)
 
 
@@ -6,29 +38,9 @@
 * multiple items being highlighted at the same time ([#245](https://github.com/dialpad/dialtone-vue/issues/245)) ([05d6c6d](https://github.com/dialpad/dialtone-vue/commit/05d6c6d911d9a67eb4975296072b40cc25c924be))
 
 
-### Code Refactoring
-
-* component popover, tooltip(update css,alignment,class-naming) ([#223](https://github.com/dialpad/dialtone-vue/issues/223)) ([45c48a4](https://github.com/dialpad/dialtone-vue/commit/45c48a473665f065020818be675f18f34d565179))
-
-
 ### Features
 
 * add top banner info component for call info display ([#246](https://github.com/dialpad/dialtone-vue/issues/246)) ([8f47407](https://github.com/dialpad/dialtone-vue/commit/8f474073743c5123396252ec288a468affdaef4a))
-
-
-### BREAKING CHANGES
-
-* removed fixedVerticalAlignment, fixedAlignment props for the popover component
-
-* fix merge
-
-* fix tests
-
-* fix story
-
-* clean up stories and documentation
-
-Co-authored-by: Brad Paugh <brad.paugh@dialpad.com>
 
 # [1.14.0](https://github.com/dialpad/dialtone-vue/compare/v1.13.2...v1.14.0) (2022-02-18)
 
