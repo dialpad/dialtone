@@ -1,3 +1,10 @@
+# [2.1.0-beta.4](https://github.com/dialpad/dialtone-vue/compare/v2.1.0-beta.3...v2.1.0-beta.4) (2022-03-14)
+
+
+### Bug Fixes
+
+* add immediate for value watcher ([0244ff0](https://github.com/dialpad/dialtone-vue/commit/0244ff0203e408c406236dc96bffb98aa9894e22))
+
 # [2.1.0-beta.3](https://github.com/dialpad/dialtone-vue/compare/v2.1.0-beta.2...v2.1.0-beta.3) (2022-03-14)
 
 
