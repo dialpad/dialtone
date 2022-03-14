@@ -430,6 +430,10 @@ export default {
     },
 
     calculateLength (value) {
+      if (value === null) {
+        return 0;
+      }
+
       return [...value].length;
     },
 
