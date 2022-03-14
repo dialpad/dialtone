@@ -292,7 +292,7 @@ export default {
     },
 
     inputState () {
-      return getValidationState(this.formattedMessages);
+      return getValidationState(this.validationMessages);
     },
 
     defaultLengthCalculation () {
