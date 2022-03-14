@@ -420,7 +420,6 @@ export default {
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         {
           [inputStateClasses[this.inputComponent][this.inputState]]: this.showInputState,
-          [inputStateClasses[this.inputComponent][this.inputLengthState]]: this.showLengthLimitValidation,
           'd-input-icon--left': this.$slots.leftIcon,
           'd-input-icon--right': this.$slots.rightIcon,
         },
