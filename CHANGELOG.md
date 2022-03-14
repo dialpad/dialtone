@@ -1,3 +1,10 @@
+# [2.1.0-beta.3](https://github.com/dialpad/dialtone-vue/compare/v2.1.0-beta.2...v2.1.0-beta.3) (2022-03-14)
+
+
+### Bug Fixes
+
+* inputstate ([3720078](https://github.com/dialpad/dialtone-vue/commit/37200786e9bf34741a503f04ebbc401710c233e6))
+
 # [2.1.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2022-03-14)
 
 
