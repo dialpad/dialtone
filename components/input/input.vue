@@ -24,31 +24,17 @@
         </div>
       </slot>
       <div
-        v-if="$slots.description || description || shouldValidateLength"
+        v-if="$slots.description || description"
         :id="descriptionKey"
         :class="[
           'base-input__description',
           'd-description',
-          'd-fd-column',
           descriptionSizeClasses[size],
         ]"
         data-qa="dt-input-description"
       >
-        <div
-          v-if="$slots.description || description"
-        >
-          <!-- @slot slot for description, defaults to description prop -->
-          <slot name="description">{{ description }}</slot>
-        </div>
-        <div
-          v-if="shouldValidateLength"
-          data-qa="dt-input-length-description"
-          :class="[
-            'd-mb2',
-          ]"
-        >
-          {{ validationProps.length.description }}
-        </div>
+        <!-- @slot slot for description, defaults to description prop -->
+        <slot name="description">{{ description }}</slot>
       </div>
       <div class="d-input__wrapper">
         <span
@@ -66,7 +52,6 @@
           :name="name"
           :disabled="disabled"
           :class="inputClasses()"
-          :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
           v-on="inputListeners"
@@ -79,7 +64,6 @@
           :type="type"
           :disabled="disabled"
           :class="inputClasses()"
-          :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
           v-on="inputListeners"
@@ -95,7 +79,7 @@
       </div>
     </label>
     <dt-validation-messages
-      :validation-messages="validationMessages"
+      :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
       v-bind="messagesChildProps"
@@ -105,7 +89,7 @@
 </template>
 
 <script>
-import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '@/common/constants.js';
+import { DESCRIPTION_SIZE_TYPES } from '@/common/constants.js';
 import { INPUT_TYPES, INPUT_SIZES } from './input_constants.js';
 import {
   getUniqueString,
@@ -192,31 +176,9 @@ export default {
       type: [String, Object, Array],
       default: '',
     },
-
-    /**
-     * The current character length that the user has entered into the input.
-     * This will only need to be used if you are using validate.length and
-     * the string contains abnormal characters.
-     * For example, an emoji could take up many characters in the input, but should only count as 1 character.
-     * If no number is provided, a built-in length calculation will be used for the length validation.
-     */
-    currentLength: {
-      type: Number,
-      default: null,
-    },
-
-    /**
-     * Validation for the input. Supports maximum length validation with the structure:
-     * `{ "length": {"description": string, "max": number, "warn": number, "message": string,
-     * "limitMaxLength": boolean }}`
-     */
-    validate: {
-      type: Object,
-      default: null,
-    },
   },
 
-  emits: ['blur', 'input', 'clear', 'focus', 'focusin', 'focusout', 'update:length', 'update:invalid'],
+  emits: ['blur', 'input', 'clear', 'focusin', 'focusout'],
 
   data () {
     return {
@@ -232,12 +194,6 @@ export default {
         lg: 'd-label--lg',
         xl: 'd-label--xl',
       },
-
-      isInputFocused: false,
-
-      isInvalid: false,
-
-      defaultLength: 0,
     };
   },
 
@@ -275,15 +231,7 @@ export default {
         */
         ...this.$listeners,
         input: event => this.$emit('input', event.target.value),
-        focus: event => {
-          this.isInputFocused = true;
-          this.$emit('focus', event);
-        },
-
-        blur: event => {
-          this.isInputFocused = false;
-          this.onBlur(event);
-        },
+        blur: event => this.onBlur(event),
       };
     },
 
@@ -295,67 +243,8 @@ export default {
       return getValidationState(this.formattedMessages);
     },
 
-    defaultLengthCalculation () {
-      return this.calculateLength(this.value);
-    },
-
-    validationProps () {
-      return {
-        length: {
-          description: this?.validate?.length?.description,
-          max: this?.validate?.length?.max,
-          warn: this?.validate?.length?.warn,
-          message: this?.validate?.length?.message,
-          limitMaxLength: this?.validate?.length?.limitMaxLength ? this.validate.length.limitMaxLength : false,
-        },
-      };
-    },
-
-    validationMessages () {
-      // Add length validation message if exists
-      if (this.showLengthLimitValidation) {
-        return this.formattedMessages.concat([this.inputLengthErrorMessage()]);
-      }
-
-      return this.formattedMessages;
-    },
-
     showInputState () {
       return this.showMessages && this.inputState;
-    },
-
-    inputLength () {
-      return this.currentLength ? this.currentLength : this.defaultLengthCalculation;
-    },
-
-    inputLengthState () {
-      if (this.inputLength < this.validationProps.length.warn) {
-        return null;
-      } else if (this.inputLength < this.validationProps.length.max) {
-        return this.validationProps.length.warn ? VALIDATION_MESSAGE_TYPES.WARNING : null;
-      } else {
-        return VALIDATION_MESSAGE_TYPES.ERROR;
-      }
-    },
-
-    shouldValidateLength () {
-      return !!(
-        this.validationProps.length.description &&
-        this.validationProps.length.max
-      );
-    },
-
-    shouldLimitMaxLength () {
-      return this.shouldValidateLength && this.validationProps.length.limitMaxLength;
-    },
-
-    showLengthLimitValidation () {
-      return (
-        this.shouldValidateLength &&
-        this.inputLengthState !== null &&
-        this.validationProps.length.message &&
-        (this.isInputFocused || this.isInvalid)
-      );
     },
 
     sizeModifierClass () {
@@ -383,22 +272,6 @@ export default {
     },
   },
 
-  watch: {
-    isInvalid (val) {
-      this.$emit('update:invalid', val);
-    },
-
-    value () {
-      if (this.shouldValidateLength) {
-        this.validateLength(this.inputLength);
-      }
-
-      if (this.currentLength == null) {
-        this.$emit('update:length', this.calculateLength(this.value));
-      }
-    },
-  },
-
   methods: {
     inputClasses () {
       const inputStateClasses = {
@@ -420,24 +293,12 @@ export default {
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         {
           [inputStateClasses[this.inputComponent][this.inputState]]: this.showInputState,
-          [inputStateClasses[this.inputComponent][this.inputLengthState]]: this.showLengthLimitValidation,
           'd-input-icon--left': this.$slots.leftIcon,
           'd-input-icon--right': this.$slots.rightIcon,
         },
         this.sizeModifierClass,
         this.inputClass,
       ];
-    },
-
-    calculateLength (value) {
-      return [...value].length;
-    },
-
-    inputLengthErrorMessage () {
-      return {
-        message: this.validationProps.length.message,
-        type: this.inputLengthState,
-      };
     },
 
     inputIconClasses (side) {
@@ -485,10 +346,6 @@ export default {
 
     getMessageKey (type, index) {
       return `message-${type}-${index}`;
-    },
-
-    validateLength (length) {
-      this.isInvalid = (length > this.validationProps.length.max);
     },
   },
 };
