@@ -359,65 +359,17 @@
           <p>
             {{ sampleText }}
           </p>
-          <dt-dropdown>
-            <template #anchor="{ attrs }">
-              <dt-button
-                v-bind="attrs"
-              >
-                Open dropdown
+          <p>
+            {{ sampleText }}
+          </p>
+          <dt-tooltip>
+            <template #anchor>
+              <dt-button>
+                Hover me
               </dt-button>
             </template>
-            <template #list="{ close }">
-              <dt-list-item
-                key="pd-1"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 1
-              </dt-list-item>
-              <dt-list-item
-                key="pd-2"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 2 Item 2 Item 2
-              </dt-list-item>
-              <dt-list-item
-                key="pd-3"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 3
-              </dt-list-item>
-              <dt-list-item
-                key="pd-4"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 4
-              </dt-list-item>
-              <dt-list-item
-                key="pd-5"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 5
-              </dt-list-item>
-              <dt-list-item
-                key="pd-6"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 6
-              </dt-list-item>
-            </template>
-          </dt-dropdown>
+            This is the tooltip content
+          </dt-tooltip>
         </div>
       </template>
     </dt-popover>
@@ -427,19 +379,19 @@
       class="d-mr12"
       max-height="20rem"
       max-width="50rem"
+      :open.sync="openPopoverWithTriggerOverride"
     >
       <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
+          @mouseover="onMouseOver"
+          @mouseout="onMouseOut"
         >
-          Popover with tooltip
+          Popover with mouseover trigger
         </dt-button>
       </template>
       <template #content>
         <div class="d-fs14 d-m0">
-          <p>
-            {{ sampleText }}
-          </p>
           <p>
             {{ sampleText }}
           </p>

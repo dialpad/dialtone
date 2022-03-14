@@ -16,7 +16,7 @@
     :aria-label="ariaLabel"
     :offset="offset"
     :modal="modal"
-    :auto-focus="autoFocus"
+    :initial-focus-element="initialFocusElement"
     :content-width="contentWidth"
     :show-close-button="showCloseButton"
     :header-class="headerClass"
@@ -48,7 +48,10 @@
           <p class="d-mb4">
             I will be displayed in the popover!
           </p>
-          <dt-button @click="close">
+          <dt-button
+            id="content-close"
+            @click="close"
+          >
             Click to close
           </dt-button>
         </template>

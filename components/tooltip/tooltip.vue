@@ -19,7 +19,7 @@
     <dt-lazy-show
       :id="id"
       ref="content"
-      :show="isShown"
+      :show="isShown && (!!message.trim() || !!$slots.default)"
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"

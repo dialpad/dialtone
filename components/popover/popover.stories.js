@@ -3,6 +3,7 @@ import {
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
   POPOVER_CONTENT_WIDTHS,
+  POPOVER_INITIAL_FOCUS_STRINGS,
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import PopoverVariants from './popover_variants.story.vue';
@@ -68,6 +69,12 @@ const argTypesData = {
     control: {
       type: 'select',
       options: Object.keys(POPOVER_PADDING_CLASSES),
+    },
+  },
+  initialFocusElement: {
+    control: {
+      type: 'select',
+      options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
     },
   },
   role: {

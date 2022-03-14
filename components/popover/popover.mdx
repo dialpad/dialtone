@@ -134,11 +134,15 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 
 The below keyboard functionality is automatically implemented when using the popover component:
 
-- When popover opens the focus will be moved to the first focusable element inside the popover.
 - The user can dismiss the popover pressing the `ESC` key, after that the focus will be returned to the element
 that launched it.
 - The user can traverse focusable elements using the `TAB` key. If the popover has a defined header, the focus will be
 moved to the header buttons after the last focusable element inside content's container.
+
+Additionally you must use the "initialFocusElement" prop to set which element is initially focused when the popover
+opens. You can set this to "first" to focus the first focusable element, "dialog" to focus the dialog itself, a string
+starting with '#' to focus an element by id within the dialog or  you may pass in an HTMLElement directly.
+If set to "none" the focus will remain on the anchor, however this is invalid behavior if the popover is modal.
 
 ### References
 

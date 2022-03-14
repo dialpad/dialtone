@@ -114,6 +114,7 @@ import {
   POPOVER_PADDING_CLASSES,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_ROLES,
+  POPOVER_INITIAL_FOCUS_STRINGS,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
@@ -340,6 +341,23 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * The element that is focused when the popover is opened. This can be an
+     * HTMLElement within the popover, a string starting with '#' which will
+     * find the element by ID. 'first' which will automatically focus
+     * the first element, or 'dialog' which will focus the dialog window itself.
+     * If the dialog is modal this prop cannot be 'none'.
+     */
+    initialFocusElement: {
+      type: [String, HTMLElement],
+      default: 'none',
+      validator: initialFocusElement => {
+        return POPOVER_INITIAL_FOCUS_STRINGS.includes(initialFocusElement) ||
+          (initialFocusElement instanceof HTMLElement) ||
+          initialFocusElement.startsWith('#');
+      },
+    },
   },
 
   emits: ['update:open', 'opened'],
@@ -363,6 +381,14 @@ export default {
   },
 
   watch: {
+    $props: {
+      immediate: true,
+      deep: true,
+      handler () {
+        this.validateProps();
+      },
+    },
+
     modal (modal) {
       this.tip.setProps({
         zIndex: modal ? 650 : 300,
@@ -457,6 +483,13 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    validateProps () {
+      if (this.modal && this.initialFocusElement === 'none') {
+        console.error('If the popover is modal you must set the ' +
+        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
+      }
+    },
+
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
       if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
@@ -505,7 +538,9 @@ export default {
     },
 
     onLeaveTransitionComplete () {
-      this.focusFirstElementIfNeeded(this.$refs.anchor);
+      if (this.modal) {
+        this.focusFirstElement(this.$refs.anchor);
+      }
       this.tip?.unmount();
       this.$emit('opened', false);
       if (this.open !== null) {
@@ -513,12 +548,39 @@ export default {
       }
     },
 
-    async onEnterTransitionComplete () {
+    onEnterTransitionComplete () {
+      this.focusInitialElement();
       this.$emit('opened', true, this.$refs.popover__content);
       if (this.open !== null) {
         this.$emit('update:open', true);
       }
-      this.focusFirstElementIfNeeded(this.$refs.popover__content);
+    },
+
+    focusInitialElement () {
+      if (this.initialFocusElement === 'dialog') {
+        this.$refs.content.$el.focus();
+      }
+      // find by ID
+      if (this.initialFocusElement.startsWith('#')) {
+        this.focusInitialElementById();
+      }
+      if (this.initialFocusElement === 'first') {
+        this.focusFirstElementIfNeeded(this.$refs.popover__content);
+      }
+      if (this.initialFocusElement instanceof HTMLElement) {
+        this.initialFocusElement.focus();
+      }
+    },
+
+    focusInitialElementById () {
+      const result = this.$refs.content.$el.querySelector(this.initialFocusElement);
+      if (result) {
+        result.focus();
+      } else {
+        console.warn('Could not find the element specified in dt-popover prop "initialFocusElement". ' +
+          'Defaulting to focusing the dialog.');
+      }
+      result ? result.focus() : this.$refs.content.$el.focus();
     },
 
     onResize () {
@@ -549,7 +611,6 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      if (!this.modal) return;
       const focusableElements = this._getFocusableElements(domEl, true);
       if (focusableElements.length !== 0) {
         this.focusFirstElement(domEl);
