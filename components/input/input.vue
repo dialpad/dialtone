@@ -388,14 +388,17 @@ export default {
       this.$emit('update:invalid', val);
     },
 
-    value () {
-      if (this.shouldValidateLength) {
-        this.validateLength(this.inputLength);
-      }
+    value: {
+      immediate: true,
+      handler (newValue) {
+        if (this.shouldValidateLength) {
+          this.validateLength(this.inputLength);
+        }
 
-      if (this.currentLength == null) {
-        this.$emit('update:length', this.calculateLength(this.value));
-      }
+        if (this.currentLength == null) {
+          this.$emit('update:length', this.calculateLength(newValue));
+        }
+      },
     },
   },
 
