@@ -1,3 +1,17 @@
+# [2.1.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.0.1...v2.1.0-beta.1) (2022-03-14)
+
+
+### Bug Fixes
+
+* add validation in calculateLength ([eec8652](https://github.com/dialpad/dialtone-vue/commit/eec865242e3a9f8d61d4c2989f76cb857400144d))
+* revert add length validation in the input component ([0ed0cde](https://github.com/dialpad/dialtone-vue/commit/0ed0cde8f8e5fd28b96c984793f163816faf12c1))
+
+
+### Features
+
+* add length validation in the input component ([b063876](https://github.com/dialpad/dialtone-vue/commit/b063876e45b7c22e963a6a2b1bc0f2ef7ae37be5))
+* add length validation in the input component ([592acb1](https://github.com/dialpad/dialtone-vue/commit/592acb191c662dd53d38cc982c804d791b0875e2))
+
 # [2.1.0](https://github.com/dialpad/dialtone-vue/compare/v2.0.1...v2.1.0) (2022-03-14)
 
 
