@@ -1,3 +1,10 @@
+# [2.1.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2022-03-14)
+
+
+### Bug Fixes
+
+* remove length validation class ([7b0ffad](https://github.com/dialpad/dialtone-vue/commit/7b0ffad20f07cc8fed7efac62b19ab0939024860))
+
 # [2.1.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.0.1...v2.1.0-beta.1) (2022-03-14)
 
 
