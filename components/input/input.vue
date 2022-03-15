@@ -292,7 +292,7 @@ export default {
     },
 
     inputState () {
-      return getValidationState(this.formattedMessages);
+      return getValidationState(this.validationMessages);
     },
 
     defaultLengthCalculation () {
@@ -388,14 +388,17 @@ export default {
       this.$emit('update:invalid', val);
     },
 
-    value () {
-      if (this.shouldValidateLength) {
-        this.validateLength(this.inputLength);
-      }
+    value: {
+      immediate: true,
+      handler (newValue) {
+        if (this.shouldValidateLength) {
+          this.validateLength(this.inputLength);
+        }
 
-      if (this.currentLength == null) {
-        this.$emit('update:length', this.calculateLength(this.value));
-      }
+        if (this.currentLength == null) {
+          this.$emit('update:length', this.calculateLength(newValue));
+        }
+      },
     },
   },
 
@@ -420,7 +423,6 @@ export default {
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         {
           [inputStateClasses[this.inputComponent][this.inputState]]: this.showInputState,
-          [inputStateClasses[this.inputComponent][this.inputLengthState]]: this.showLengthLimitValidation,
           'd-input-icon--left': this.$slots.leftIcon,
           'd-input-icon--right': this.$slots.rightIcon,
         },
@@ -430,6 +432,10 @@ export default {
     },
 
     calculateLength (value) {
+      if (value === null) {
+        return 0;
+      }
+
       return [...value].length;
     },
 
