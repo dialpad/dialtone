@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Vue component library for Dialtone components",
   "repository": "git@github.com:dialpad/dialtone-vue.git",
   "files": [
