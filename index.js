@@ -30,8 +30,8 @@ export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
 
 // Recipes
-export * from './components/recipes/list_items/contact_info';
-export * from './components/recipes/notices/top_banner_info';
+export * from './recipes/list_items/contact_info';
+export * from './recipes/notices/top_banner_info';
 
 // Mixins
 export * from './common/mixins';
