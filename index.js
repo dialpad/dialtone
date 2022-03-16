@@ -29,7 +29,7 @@ export * from './components/tooltip';
 export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
 
-// Recipes
+/// Recipes
 export * from './recipes/list_items/contact_info';
 export * from './recipes/notices/top_banner_info';
 
