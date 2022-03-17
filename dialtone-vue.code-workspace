@@ -44,7 +44,12 @@
     "vetur.completion.tagCasing": "kebab",
     "vetur.format.enable": false,
     "vetur.validation.script": false,
-    "vetur.validation.template": false
+    "vetur.validation.template": false,
+    "yaml.format.enable": true,
+    "yaml.format.singleQuote": true,
+    "yaml.schemas": {
+      "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
+    },
   },
   "launch": {
     "version": "0.2.0",
