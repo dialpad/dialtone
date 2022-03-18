@@ -5,7 +5,7 @@
     <dt-list-item
       navigation-type="tab"
       type="custom"
-      @click="onClick"
+      @click="$attrs.onClick"
     >
       <span
         v-if="defaultSlot"
@@ -30,7 +30,7 @@
             importance="clear"
             @click.stop="() => {}"
           >
-            <template slot="icon">
+            <template #icon>
               <icon-social aria-hidden="false" />
             </template>
           </dt-button>
@@ -39,7 +39,7 @@
             importance="clear"
             @click.stop="() => {}"
           >
-            <template slot="icon">
+            <template #icon>
               <icon-star-outline aria-hidden="false" />
             </template>
           </dt-button>
@@ -48,7 +48,7 @@
             importance="clear"
             @click.stop="() => {}"
           >
-            <template slot="icon">
+            <template #icon>
               <icon-menu-vertical aria-hidden="false" />
             </template>
           </dt-button>

@@ -1,47 +1,47 @@
 <template>
   <div>
     <dt-modal
-      :title="title"
+      :title="$attrs.title"
       :close-button-props="buttonCloseProps"
       :show="isOpen"
-      :kind="kind"
-      :size="size"
-      :copy="copy"
-      :modal-class="modalClass"
-      :dialog-class="dialogClass"
-      :hide-close="hideClose"
-      :labelled-by-id="labelledById"
+      :kind="$attrs.kind"
+      :size="$attrs.size"
+      :copy="$attrs.copy"
+      :modal-class="$attrs.modalClass"
+      :dialog-class="$attrs.dialogClass"
+      :hide-close="$attrs.hideClose"
+      :labelled-by-id="$attrs.labelledById"
       @update:show="close"
     >
       <template
-        v-if="header"
-        slot="header"
+        v-if="$attrs.header"
+        #header
       >
-        <span v-html="header" />
+        <span v-html="$attrs.header" />
       </template>
       <template
         v-if="defaultSlot"
-        slot="default"
+        #default
       >
         <span v-html="defaultSlot" />
       </template>
       <template
         v-if="showFooter"
-        slot="footer"
+        #footer
       >
         <span
-          v-if="footer"
-          v-html="footer"
+          v-if="$attrs.footer"
+          v-html="$attrs.footer"
         />
         <div v-else>
           <dt-button
-            :kind="kind"
+            :kind="$attrs.kind"
             importance="primary"
           >
             Confirm
           </dt-button>
           <dt-button
-            :kind="kind"
+            :kind="$attrs.kind"
             importance="clear"
           >
             Cancel
@@ -85,7 +85,7 @@ export default {
   computed: {
     buttonCloseProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         ariaLabel: 'Close',
       };
     },
@@ -102,7 +102,7 @@ export default {
   methods: {
     close (event) {
       this.isOpen = !this.isOpen;
-      this.onClose(event);
+      this.$attrs.onClose(event);
     },
   },
 

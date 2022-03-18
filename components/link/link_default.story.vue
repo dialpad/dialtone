@@ -1,12 +1,12 @@
 <template>
   <div>
     <dt-link
-      :href="href"
-      :kind="kind"
-      :rel="rel"
-      @click="onClick"
-      @focusin="onFocusIn"
-      @focusout="onFocusOut"
+      :href="$attrs.href"
+      :kind="$attrs.kind"
+      :rel="$attrs.rel"
+      @click="$attrs.onClick"
+      @focusin="$attrs.onFocusIn"
+      @focusout="$attrs.onFocusOut"
     >
       {{ defaultSlot }}
     </dt-link>

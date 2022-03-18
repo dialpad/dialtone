@@ -1,48 +1,42 @@
 <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-popover
-    :id="id"
-    :key="uniqueKey"
-    :open.sync="isOpen"
-    :placement="placement"
-    :content-class="contentClass"
-    :fallback-placements="fallbackPlacements"
-    :padding="padding"
-    :hide-on-click="hideOnClick"
-    :role="role"
-    :element-type="elementType"
-    :transition="transition"
-    :aria-labelledby="ariaLabelledby"
-    :aria-label="ariaLabel"
-    :offset="offset"
-    :modal="modal"
-    :initial-focus-element="initialFocusElement"
-    :content-width="contentWidth"
-    :show-close-button="showCloseButton"
-    :header-class="headerClass"
-    :footer-class="footerClass"
-    :max-height="maxHeight"
-    :max-width="maxWidth"
-    @opened="onOpened"
+    :id="$attrs.id"
+    :key="$attrs.uniqueKey"
+    v-model:open="isOpen"
+    :placement="$attrs.placement"
+    :content-class="$attrs.contentClass"
+    :fallback-placements="$attrs.fallbackPlacements"
+    :padding="$attrs.padding"
+    :hide-on-click="$attrs.hideOnClick"
+    :role="$attrs.role"
+    :element-type="$attrs.elementType"
+    :transition="$attrs.transition"
+    :aria-labelledby="$attrs.ariaLabelledby"
+    :aria-label="$attrs.ariaLabel"
+    :offset="$attrs.offset"
+    :modal="$attrs.modal"
+    :initial-focus-element="$attrs.initialFocusElement"
+    :content-width="$attrs.contentWidth"
+    :show-close-button="$attrs.showCloseButton"
+    :header-class="$attrs.headerClass"
+    :footer-class="$attrs.footerClass"
+    :max-height="$attrs.maxHeight"
+    :max-width="$attrs.maxWidth"
+    @opened="$attrs.onOpened"
   >
-    <template
-      slot="anchor"
-      slot-scope="{ attrs }"
-    >
+    <template #anchor="{ attrs }">
       <dt-button
         v-bind="attrs"
       >
         Click to open
       </dt-button>
     </template>
-    <template
-      slot="content"
-      slot-scope="{ close }"
-    >
+    <template #content="{ close }">
       <div class="d-fs14 d-m0">
         <span
-          v-if="content"
-          v-html="content"
+          v-if="$attrs.content"
+          v-html="$attrs.content"
         />
         <template v-else>
           <p class="d-mb4">
@@ -58,16 +52,16 @@
       </div>
     </template>
     <template
-      v-if="headerContent"
-      slot="headerContent"
+      v-if="$attrs.headerContent"
+      #headerContent
     >
-      <span v-html="headerContent" />
+      <span v-html="$attrs.headerContent" />
     </template>
     <template
-      v-if="footerContent"
-      slot="footerContent"
+      v-if="$attrs.footerContent"
+      #footerContent
     >
-      <span v-html="footerContent" />
+      <span v-html="$attrs.footerContent" />
     </template>
   </dt-popover>
 </template>

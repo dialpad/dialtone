@@ -5,25 +5,22 @@
       :key="i"
       class="d-mr8"
       :placement="variant"
-      :content-width="contentWidth"
-      :padding="padding"
-      :navigation-type="navigationType"
-      @highlight="onHighlight"
+      :content-width="$attrs.contentWidth"
+      :padding="$attrs.padding"
+      :navigation-type="$attrs.navigationType"
+      @highlight="$attrs.onHighlight"
     >
-      <template slot="anchor">
+      <template #anchor>
         <dt-button>
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
-      <template
-        slot="list"
-        slot-scope="{ close }"
-      >
+      <template #list="{ close }">
         <dt-list-item
           v-for="(item) in items"
           :key="item.id"
           role="menuitem"
-          :navigation-type="navigationType"
+          :navigation-type="$attrs.navigationType"
           @click="close"
         >
           {{ item.name }}

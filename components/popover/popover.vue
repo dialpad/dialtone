@@ -11,7 +11,7 @@
       ref="popover"
       :class="['d-popover', { 'd-popover__anchor--modal-opened': modal && isOpen }]"
       data-qa="dt-popover-container"
-      v-on="$listeners"
+      v-bind="$attrs"
     >
       <div
         :id="!ariaLabelledby && labelledBy"
@@ -49,8 +49,7 @@
           'max-width': maxWidth,
         }"
         tabindex="-1"
-        appear
-        v-on="$listeners"
+        v-bind="$attrs"
         @keydown.capture="onKeydown"
         @after-leave="onLeaveTransitionComplete"
         @after-enter="onEnterTransitionComplete"
@@ -139,11 +138,13 @@ export default {
 
   mixins: [ModalMixin],
 
+  inheritAttrs: false,
+
   props: {
     /**
      * Controls whether the popover is shown. Leaving this null will have the popover trigger on click by default.
      * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
-     * Supports .sync modifier
+     * Supports v-model
      */
     open: {
       type: Boolean,
@@ -472,7 +473,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
     this.removeReferences();

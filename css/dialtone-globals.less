@@ -17,10 +17,10 @@
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.18s ease-in-out;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter-from, .fade-leave-to {
   opacity: 0 !important;
 }
-.fade-enter-to, .fade-leave {
+.fade-enter-to, .fade-leave-from {
   opacity: 1 !important;
 }
 
@@ -32,7 +32,7 @@
   transition: transform 0.28s ease-in;
 }
 
-.slide-down-enter {
+.slide-down-enter-from {
   transform: translateY(-100%);
 }
 
@@ -109,11 +109,11 @@
   animation: fade-out 0.18s ease-in-out;
 }
 
-.d-zoom-enter, .d-zoom-leave-to {
+.d-zoom-enter-from, .d-zoom-leave-to {
   .d-modal--animate();
 }
 
-.d-zoom__dialog-enter, .d-zoom__dialog-leave-to {
+.d-zoom__dialog-enter-from, .d-zoom__dialog-leave-to {
   .d-modal__dialog--animate();
 }
 

@@ -9,7 +9,7 @@
     :padding="padding"
     role="menu"
     :modal="modal"
-    v-on="$listeners"
+    v-bind="$attrs"
     @opened="updateInitialHighlightIndex"
     @keydown.enter="onEnterKey"
     @keydown.space="onSpaceKey"
@@ -58,6 +58,8 @@ export default {
     DtPopover,
   },
 
+  inheritAttrs: false,
+
   mixins: [
     KeyboardNavigation({
       indexKey: 'highlightIndex',
@@ -76,7 +78,7 @@ export default {
     /**
      * Controls whether the dropdown is shown. Leaving this null will have the dropdown trigger on click by default.
      * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
-     * Supports .sync modifier
+     * Supports v-model
      */
     open: {
       type: Boolean,

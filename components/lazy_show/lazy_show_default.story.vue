@@ -5,7 +5,7 @@
     </dt-button>
     <dt-lazy-show
       :show="isShown"
-      :transition="transition"
+      :transition="$attrs.transition"
     >
       <iframe
         width="560"
@@ -18,6 +18,7 @@
     </dt-lazy-show>
   </div>
 </template>
+
 <script>
 import { DtLazyShow } from './';
 import { DtButton } from '../button';

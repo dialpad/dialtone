@@ -1,22 +1,23 @@
 <template>
-  <!-- applies the transition on initial render -->
-  <transition
+  <Transition
     :name="transition"
     :appear="appear"
-    v-on="$listeners"
+    v-bind="$attrs"
   >
     <div
       v-show="show"
-      v-on="$listeners"
+      v-bind="$attrs"
     >
       <slot v-if="initialized" />
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script>
 export default {
   name: 'DtLazyShow',
+
+  inheritAttrs: false,
 
   /******************
    *     PROPS      *

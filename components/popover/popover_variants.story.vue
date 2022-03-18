@@ -8,20 +8,14 @@
       initial-focus-element="first"
       class="d-mr12"
     >
-      <template
-        slot="anchor"
-        slot-scope="{ attrs }"
-      >
+      <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
         >
           bottom-end placement
         </dt-button>
       </template>
-      <template
-        slot="content"
-        slot-scope="{ close }"
-      >
+      <template #content="{ close }">
         <div class="d-fs14 d-m0">
           <div>
             <p class="d-mb4">
@@ -41,20 +35,14 @@
       initial-focus-element="first"
       class="d-mr12"
     >
-      <template
-        slot="anchor"
-        slot-scope="{ attrs }"
-      >
+      <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
         >
           bottom-start placement
         </dt-button>
       </template>
-      <template
-        slot="content"
-        slot-scope="{ close }"
-      >
+      <template #content="{ close }">
         <div class="d-fs14 d-m0">
           <div>
             <p class="d-mb4">
@@ -75,20 +63,14 @@
       initial-focus-element="first"
       class="d-mr12"
     >
-      <template
-        slot="anchor"
-        slot-scope="{ attrs }"
-      >
+      <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
         >
           No padding
         </dt-button>
       </template>
-      <template
-        slot="content"
-        slot-scope="{ close }"
-      >
+      <template #content="{ close }">
         <div class="d-fs14 d-m0">
           <div>
             <dt-button
@@ -105,20 +87,14 @@
       width-content="anchor"
       class="d-mr12"
     >
-      <template
-        slot="anchor"
-        slot-scope="{ attrs }"
-      >
+      <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
         >
           Non-Modal
         </dt-button>
       </template>
-      <template
-        slot="content"
-        slot-scope="{ close }"
-      >
+      <template #content="{ close }">
         <div class="d-fs14 d-m0">
           <div>
             <p class="d-mb4">
@@ -144,10 +120,7 @@
         ariaLabel: 'Close popover',
       }"
     >
-      <template
-        slot="anchor"
-        slot-scope="{ attrs }"
-      >
+      <template #anchor="{ attrs }">
         <dt-tooltip>
           <template #anchor>
             <dt-button
@@ -159,7 +132,7 @@
           This is a test tooltip
         </dt-tooltip>
       </template>
-      <template slot="headerContent">
+      <template #headerContent>
         <div>
           Potential Title
         </div>
@@ -169,7 +142,7 @@
             class="d-p6 d-bc-transparent"
             importance="outlined"
           >
-            <template slot="icon">
+            <template #icon>
               <icon-launch
                 class="d-svg--size20"
               />
@@ -181,7 +154,7 @@
             class="d-p6 d-bc-transparent"
             importance="outlined"
           >
-            <template slot="icon">
+            <template #icon>
               <icon-menu-vertical
                 class="d-svg--size20"
               />
@@ -189,7 +162,7 @@
           </dt-button>
         </div>
       </template>
-      <template slot="content">
+      <template #content>
         <div class="d-fs14 d-m0">
           <p>
             {{ sampleText }}
@@ -243,20 +216,17 @@
         ariaLabel: 'Close popover',
       }"
     >
-      <template
-        slot="anchor"
-        slot-scope="{ attrs }"
-      >
+      <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
         >
           Popover with footer
         </dt-button>
       </template>
-      <template slot="footerContent">
+      <template #footerContent>
         <div>This is a footer</div>
       </template>
-      <template slot="content">
+      <template #content>
         <div class="d-fs14 d-m0">
           <p>
             {{ sampleText }}
@@ -372,84 +342,6 @@
           <p>
             {{ sampleText }}
           </p>
-          <dt-dropdown>
-            <template #anchor="{ attrs }">
-              <dt-button
-                v-bind="attrs"
-              >
-                Open dropdown
-              </dt-button>
-            </template>
-            <template #list="{ close }">
-              <dt-list-item
-                key="pd-1"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 1
-              </dt-list-item>
-              <dt-list-item
-                key="pd-2"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 2 Item 2 Item 2
-              </dt-list-item>
-              <dt-list-item
-                key="pd-3"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 3
-              </dt-list-item>
-              <dt-list-item
-                key="pd-4"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 4
-              </dt-list-item>
-              <dt-list-item
-                key="pd-5"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 5
-              </dt-list-item>
-              <dt-list-item
-                key="pd-6"
-                navigation-type="arrow-keys"
-                role="menuitem"
-                @click="close"
-              >
-                Item 6
-              </dt-list-item>
-            </template>
-          </dt-dropdown>
-        </div>
-      </template>
-    </dt-popover>
-
-    <dt-popover
-      content-class="d-pl12 d-pr16"
-      class="d-mr12"
-      max-height="20rem"
-      max-width="50rem"
-    >
-      <template #anchor="{ attrs }">
-        <dt-button
-          v-bind="attrs"
-        >
-          Popover with tooltip
-        </dt-button>
-      </template>
-      <template #content>
-        <div class="d-fs14 d-m0">
           <p>
             {{ sampleText }}
           </p>
@@ -469,20 +361,20 @@
     </dt-popover>
 
     <dt-popover
+      v-model:open="openPopoverWithTriggerOverride"
       content-class="d-pl12 d-pr16"
       class="d-mr12"
       :modal="false"
       max-height="20rem"
       max-width="50rem"
-      :open.sync="openPopoverWithTriggerOverride"
     >
       <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
-          @mouseover="onMouseOver"
-          @mouseout="onMouseOut"
+          @mouseenter="onMouseEnter"
+          @mouseleave="onMouseLeave"
         >
-          Popover with mouseover trigger
+          Popover with mouseenter trigger
         </dt-button>
       </template>
       <template #content>
@@ -529,11 +421,11 @@ export default {
   },
 
   methods: {
-    onMouseOver () {
+    onMouseEnter () {
       this.openPopoverWithTriggerOverride = true;
     },
 
-    onMouseOut () {
+    onMouseLeave () {
       this.openPopoverWithTriggerOverride = false;
     },
   },
