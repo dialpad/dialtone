@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-dropdown
     v-model:open="isOpen"

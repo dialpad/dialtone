@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
 
     env:
@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Check out branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v1
@@ -40,9 +40,21 @@ jobs:
       - name: Run Linters
         run: npm run lint
 
+      - name: Build storybook
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: npm run storybook:install && npm run storybook:build
+
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
+
+      - name: Deploy to GitHub Pages
+        if: ${{ github.ref == 'refs/heads/production' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: storybook/compiled
+          clean-exclude: deploy-previews
 
       - name: Deploy prerelease
         if: ${{ github.ref != 'refs/heads/production' }}

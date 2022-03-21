@@ -24,9 +24,14 @@ export * from './components/checkbox';
 export * from './components/checkbox_group';
 export * from './components/select_menu';
 export * from './components/toast';
+export * from './components/toggle';
 export * from './components/tooltip';
 export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
+
+/// Recipes
+export * from './recipes/list_items/contact_info';
+export * from './recipes/notices/top_banner_info';
 
 // Mixins
 export * from './common/mixins';

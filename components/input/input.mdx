@@ -218,6 +218,92 @@ import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 />
 ```
 
+## With Validation
+
+### Maximum Length Validation
+
+Adds validation for the input length. Make sure to provide the following props:
+
+- `currentLength` the current character length that the user has entered into the input.
+This must be input manually as sometimes characters do not count as 1 character.
+For example an emoji could take up many characters in the input, but should only count as 1 character.
+If you don't pass `currentLength`, the component will use a built-in length calculation.
+- `validate` should be an object with the validation rules to apply to the input. Maximum length validation
+is supported with the following configuration:
+
+```js
+length: {
+  // describes the maximum length allowed and shown in the label
+  description: string,        // Required
+  // maximum length allowed to enter
+  max: number,                // Required
+  // message to show in the warning or error validation message
+  message: string,            // Required
+  // length from which the validation message will be shown as a warning,
+  // when the maximum length is reached, the validation message will be shown as an error
+  warn: number,               // Optional
+  // set maxlength attribute, defaults to false
+  limitMaxLength: boolean,    // Optional
+},
+```
+
+If the input is invalid due to the validation, the validation message will be shown even when the input lost
+focus, otherwise the validation message will be hidden when the user unfocuses the input.
+
+<Canvas>
+  <Story id="components-input--with-length-validation" />
+</Canvas>
+
+### Usage
+
+```html
+<dt-input
+  v-model="text"
+  placeholder="placeholder"
+  currentLength="currentLength"
+  :validate="validate"
+/>
+```
+
+```js
+import { DtInput } from '@dialpad/dialtone-vue';
+
+export default {
+  data () {
+    maxCharacters: 25,
+  },
+
+  computed: {
+    currentLength () {
+      // To be implemented
+    },
+
+    remainingCharacters () {
+      return this.maxCharacters - this.currentLength;
+    }
+
+    validationMessage () {
+      if (this.remainingCharacters < 0) {
+        return `${Math.abs(remainingCharacters)} characters over limit`;
+      } else {
+        return `${remainingCharacters} characters left`;
+      }      
+    },
+
+    validate () {
+      return {
+        length: {
+          description: 'Max 25 characters.',
+          max: this.maxCharacters,
+          warn: 15,
+          message: this.validationMessage
+        },
+      }      
+    },
+  }
+}
+```
+
 ## Sizes
 
 |name           |prop value                     |size|Example                                |

@@ -1,0 +1,64 @@
+name: Deploy Preview
+
+on: pull_request
+
+env:
+  # It is impossible to manually delete the cache, so if you are ever in a
+  # situation where you need to remove a previous cache just increment
+  # the version number
+  DIALTONE_VUE_DEPLOY_PREVIEW_CACHE_VERSION: v1
+
+jobs:
+
+  deploy:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+
+    - uses: actions/cache@v2
+      id: npm-cache
+      with:
+        path: |
+          **/node_modules/
+        key: ${{ format('{0}-dialtone-vue-node-modules-{1}-{2}', runner.os, env.DIALTONE_VUE_DEPLOY_PREVIEW_CACHE_VERSION, hashFiles('**/package-lock.json')) }}
+
+    - name: Install dialtone vue dependencies
+      if: steps.npm-cache.outputs.cache-hit != 'true'
+      run: npm ci
+
+    - name: Install storybook dependencies
+      if: steps.npm-cache.outputs.cache-hit != 'true'
+      run: npm run storybook:install
+
+    - name: Build storybook
+      run: npm run storybook:build
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
+      with:
+        branch: gh-pages
+        folder: storybook/compiled
+        target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
+
+    - name: Add Message
+      uses: mshick/add-pr-comment@v1
+      env:
+        BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        message: |
+          ✔️ Deploy Preview ready!
+          😎 Browse the preview: https://dialpad.github.io/dialtone-vue/deploy-previews/pr-${{ github.event.pull_request.number }}
+          🔨 If you experience an SSL issue then wait 2 minutes and try again.
+        allow-repeats: true

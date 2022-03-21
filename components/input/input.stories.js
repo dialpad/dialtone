@@ -84,6 +84,20 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  currentLength: {
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
+  validate: {
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
 
   // HTML attributes
   placeholder: {
@@ -119,12 +133,27 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onFocus: {
+    table: {
+      disable: true,
+    },
+  },
   onFocusIn: {
     table: {
       disable: true,
     },
   },
   onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
+  onUpdateLength: {
+    table: {
+      disable: true,
+    },
+  },
+  onUpdateIsInvalid: {
     table: {
       disable: true,
     },
@@ -148,6 +177,12 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+  focus: {
+    description: 'Native input focus event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
   focusin: {
     description: 'Native input focusin event',
     table: {
@@ -160,6 +195,18 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+  'update:length': {
+    description: 'Length of the input when currentLength prop is not passed',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  'update:invalid': {
+    description: 'Result of the input validation',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
 };
 
 export const argsData = {
@@ -168,8 +215,11 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onClear: action('clear'),
+  onFocus: action('focus'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
+  onUpdateLength: action('update:length'),
+  onUpdateIsInvalid: action('update:invalid'),
 };
 
 const decorator = () => ({
@@ -261,3 +311,15 @@ Large.args = { size: 'lg' };
 
 export const ExtraLarge = Template.bind({});
 ExtraLarge.args = { size: 'xl' };
+
+export const WithLengthValidation = Template.bind({});
+WithLengthValidation.args = {
+  validate: {
+    length: {
+      description: 'Max 25 characters.',
+      max: 25,
+      warn: 15,
+      limitMaxLength: false,
+    },
+  },
+};

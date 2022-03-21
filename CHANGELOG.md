@@ -1,3 +1,71 @@
+## [2.1.1](https://github.com/dialpad/dialtone-vue/compare/v2.1.0...v2.1.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* add missing exports to index.js ([c5c5e39](https://github.com/dialpad/dialtone-vue/commit/c5c5e39b35d99335bfc4c9b530f2c73f9e8cbbed))
+* fix input length validation ([#269](https://github.com/dialpad/dialtone-vue/issues/269)) ([42c57ef](https://github.com/dialpad/dialtone-vue/commit/42c57efa84349d16d841965144a88dc2c2278120))
+* update to force release ([d75b090](https://github.com/dialpad/dialtone-vue/commit/d75b090eb4e1cb4cd661ac122389afeafdfbfcc3))
+
+# [2.1.0](https://github.com/dialpad/dialtone-vue/compare/v2.0.1...v2.1.0) (2022-03-16)
+
+
+### Bug Fixes
+
+* add missing exports to index.js ([c5c5e39](https://github.com/dialpad/dialtone-vue/commit/c5c5e39b35d99335bfc4c9b530f2c73f9e8cbbed))
+* fix input length validation ([#269](https://github.com/dialpad/dialtone-vue/issues/269)) ([42c57ef](https://github.com/dialpad/dialtone-vue/commit/42c57efa84349d16d841965144a88dc2c2278120))
+* revert add length validation in the input component ([0ed0cde](https://github.com/dialpad/dialtone-vue/commit/0ed0cde8f8e5fd28b96c984793f163816faf12c1))
+* update to force release ([d75b090](https://github.com/dialpad/dialtone-vue/commit/d75b090eb4e1cb4cd661ac122389afeafdfbfcc3))
+
+
+### Features
+
+* add length validation in the input component ([b063876](https://github.com/dialpad/dialtone-vue/commit/b063876e45b7c22e963a6a2b1bc0f2ef7ae37be5))
+* add length validation in the input component ([592acb1](https://github.com/dialpad/dialtone-vue/commit/592acb191c662dd53d38cc982c804d791b0875e2))
+
+# [2.1.0](https://github.com/dialpad/dialtone-vue/compare/v2.0.1...v2.1.0) (2022-03-16)
+
+
+### Bug Fixes
+
+* add missing exports to index.js ([c5c5e39](https://github.com/dialpad/dialtone-vue/commit/c5c5e39b35d99335bfc4c9b530f2c73f9e8cbbed))
+* fix input length validation ([#269](https://github.com/dialpad/dialtone-vue/issues/269)) ([42c57ef](https://github.com/dialpad/dialtone-vue/commit/42c57efa84349d16d841965144a88dc2c2278120))
+* revert add length validation in the input component ([0ed0cde](https://github.com/dialpad/dialtone-vue/commit/0ed0cde8f8e5fd28b96c984793f163816faf12c1))
+
+
+### Features
+
+* add length validation in the input component ([b063876](https://github.com/dialpad/dialtone-vue/commit/b063876e45b7c22e963a6a2b1bc0f2ef7ae37be5))
+* add length validation in the input component ([592acb1](https://github.com/dialpad/dialtone-vue/commit/592acb191c662dd53d38cc982c804d791b0875e2))
+
+# [2.1.0](https://github.com/dialpad/dialtone-vue/compare/v2.0.1...v2.1.0) (2022-03-16)
+
+
+### Bug Fixes
+
+* add missing exports to index.js ([c5c5e39](https://github.com/dialpad/dialtone-vue/commit/c5c5e39b35d99335bfc4c9b530f2c73f9e8cbbed))
+* fix input length validation ([#269](https://github.com/dialpad/dialtone-vue/issues/269)) ([42c57ef](https://github.com/dialpad/dialtone-vue/commit/42c57efa84349d16d841965144a88dc2c2278120))
+* revert add length validation in the input component ([0ed0cde](https://github.com/dialpad/dialtone-vue/commit/0ed0cde8f8e5fd28b96c984793f163816faf12c1))
+
+
+### Features
+
+* add length validation in the input component ([b063876](https://github.com/dialpad/dialtone-vue/commit/b063876e45b7c22e963a6a2b1bc0f2ef7ae37be5))
+* add length validation in the input component ([592acb1](https://github.com/dialpad/dialtone-vue/commit/592acb191c662dd53d38cc982c804d791b0875e2))
+
+# [2.1.0](https://github.com/dialpad/dialtone-vue/compare/v2.0.1...v2.1.0) (2022-03-14)
+
+
+### Bug Fixes
+
+* revert add length validation in the input component ([1dbfedc](https://github.com/dialpad/dialtone-vue/commit/1dbfedcfb8c87759b42791f7643613f692da9469))
+
+
+### Features
+
+* add length validation in the input component ([b5fc958](https://github.com/dialpad/dialtone-vue/commit/b5fc958f68251d64d544325319ba347a33ec4cc3))
+* add length validation in the input component" ([aac5471](https://github.com/dialpad/dialtone-vue/commit/aac5471647bcf7ff346cd0e11b5e2daf755f5160))
+
 ## [2.0.1](https://github.com/dialpad/dialtone-vue/compare/v2.0.0...v2.0.1) (2022-03-12)
 
 

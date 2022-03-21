@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.0.0-beta.8",
+  "version": "2.1.1",
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
-    "@dialpad/dialtone": "^6.19.0-beta.2",
+    "@dialpad/dialtone": "^6.19.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@vue/cli-plugin-babel": "~4.5.15",
