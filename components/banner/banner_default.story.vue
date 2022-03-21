@@ -31,7 +31,7 @@
 
       <template
         v-if="$attrs.action"
-        slot="action"
+        #action
       >
         <dt-button
           :kind="buttonKind"
@@ -43,13 +43,13 @@
       </template>
       <template
         v-if="$attrs.icon"
-        slot="icon"
+        #icon
       >
         <component :is="$attrs.icon" />
       </template>
       <template
         v-if="$attrs.titleOverride"
-        slot="titleOverride"
+        #titleOverride
       >
         <span v-html="$attrs.titleOverride" />
       </template>

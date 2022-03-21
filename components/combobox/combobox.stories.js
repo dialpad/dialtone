@@ -6,7 +6,7 @@ import DtComboboxDefaultTemplate from './combobox_default.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  showList: true,
+  sbShowList: true,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
@@ -136,9 +136,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtComboboxDefaultTemplate,
 );
 

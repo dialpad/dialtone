@@ -63,10 +63,6 @@ export default {
   data () {
     return {
       internalValue: this.value,
-      // wrap values in object to make reactive
-      provideObj: {
-        value: this.value,
-      },
     };
   },
 
@@ -80,8 +76,11 @@ export default {
      * need this to pass value to slotted inputs if modified outside
      * input group.
      */
-    internalValue (newInternalValue) {
-      this.provideObj.value = newInternalValue;
+    internalValue: {
+      immediate: true,
+      handler (newInternalValue) {
+        this.provideObj.value = newInternalValue;
+      },
     },
   },
 

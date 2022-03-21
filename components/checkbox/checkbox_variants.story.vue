@@ -43,7 +43,7 @@
       label="With"
       value="Value"
     >
-      <template slot="description">
+      <template #description>
         Slotted Description
       </template>
     </dt-checkbox>
@@ -55,7 +55,7 @@
       value="Value"
     >
       With Slotted Label
-      <template slot="description">
+      <template #description>
         And Slotted Description
       </template>
     </dt-checkbox>

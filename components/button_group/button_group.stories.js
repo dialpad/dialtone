@@ -18,10 +18,8 @@ export const argTypesData = {
   // Props
   alignment: {
     defaultValue: 'start',
-    control: {
-      type: 'select',
-      options: Object.keys(BUTTON_GROUP_ALIGNMENT),
-    },
+    control: 'select',
+    options: Object.keys(BUTTON_GROUP_ALIGNMENT),
   },
 };
 
@@ -42,9 +40,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtButtonGroupDefaultTemplate,
 );
 

@@ -91,6 +91,10 @@ export const argTypesData = {
     },
   },
 
+  input: {
+    control: false,
+  },
+
   // Story Variables
   options: {
     table: {
@@ -142,11 +146,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => {
-  return createTemplateFromVueFile(args, argTypes, CheckboxGroupDefaultTemplate);
+const DefaultTemplate = (args) => {
+  return createTemplateFromVueFile(args, CheckboxGroupDefaultTemplate);
 };
-const VariantsTemplate = (args, { argTypes }) => {
-  return createTemplateFromVueFile(args, argTypes, CheckboxGroupVariantsTemplate);
+const VariantsTemplate = (args) => {
+  return createTemplateFromVueFile(args, CheckboxGroupVariantsTemplate);
 };
 
 // Stories

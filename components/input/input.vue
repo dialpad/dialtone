@@ -62,7 +62,7 @@
         <textarea
           v-if="isTextarea"
           ref="input"
-          :value="value"
+          :value="modelValue"
           :name="name"
           :disabled="disabled"
           :class="inputClasses()"
@@ -74,7 +74,7 @@
         <input
           v-else
           ref="input"
-          :value="value"
+          :value="modelValue"
           :name="name"
           :type="type"
           :disabled="disabled"
@@ -145,7 +145,7 @@ export default {
     /**
      * Value of the input
      */
-    value: {
+    modelValue: {
       type: [String, Number],
       default: '',
     },
@@ -216,7 +216,17 @@ export default {
     },
   },
 
-  emits: ['blur', 'input', 'clear', 'focus', 'focusin', 'focusout', 'update:length', 'update:invalid'],
+  emits: [
+    'input',
+    'blur',
+    'clear',
+    'focus',
+    'focusin',
+    'focusout',
+    'update:modelValue',
+    'update:length',
+    'update:invalid',
+  ],
 
   data () {
     return {
@@ -269,21 +279,23 @@ export default {
 
     inputListeners () {
       return {
-        /* TODO
-            Check if any usages of this component leverage $listeners and either remove if unused or scope the removal
-            and migration prior to upgrading to Vue 3.x
-        */
-        ...this.$listeners,
-        input: event => this.$emit('input', event.target.value),
-        focus: event => {
-          this.isInputFocused = true;
-          this.$emit('focus', event);
+        input: event => {
+          this.$emit('input', event.target.value);
+          this.$emit('update:modelValue', event.target.value);
         },
 
         blur: event => {
           this.isInputFocused = false;
           this.onBlur(event);
         },
+
+        focus: event => {
+          this.isInputFocused = true;
+          this.$emit('focus', event);
+        },
+
+        focusin: event => this.$emit('focusin', event),
+        focusout: event => this.$emit('focusout', event),
       };
     },
 
@@ -296,7 +308,7 @@ export default {
     },
 
     defaultLengthCalculation () {
-      return this.calculateLength(this.value);
+      return this.calculateLength(this.modelValue);
     },
 
     validationProps () {
@@ -388,7 +400,7 @@ export default {
       this.$emit('update:invalid', val);
     },
 
-    value: {
+    modelValue: {
       immediate: true,
       handler (newValue) {
         if (this.shouldValidateLength) {

@@ -27,36 +27,26 @@ export const argTypesData = {
     table: {
       type: { summary: 'VNode' },
     },
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
+    control: 'select',
+    options: getIconNames(),
   },
 
   // Props
   importance: {
-    control: {
-      type: 'select',
-      options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
-    },
+    control: 'select',
+    options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
   },
   type: {
-    control: {
-      type: 'select',
-      options: BUTTON_TYPES,
-    },
+    control: 'select',
+    options: BUTTON_TYPES,
   },
   size: {
-    control: {
-      type: 'select',
-      options: Object.keys(BUTTON_SIZE_MODIFIERS),
-    },
+    control: 'select',
+    options: Object.keys(BUTTON_SIZE_MODIFIERS),
   },
   kind: {
-    control: {
-      type: 'select',
-      options: Object.keys(BUTTON_KIND_MODIFIERS),
-    },
+    control: 'select',
+    options: Object.keys(BUTTON_KIND_MODIFIERS),
   },
   link: {
     defaultValue: false,
@@ -71,16 +61,12 @@ export const argTypesData = {
     control: 'boolean',
   },
   linkKind: {
-    control: {
-      type: 'select',
-      options: Object.keys(LINK_KIND_MODIFIERS),
-    },
+    control: 'select',
+    options: Object.keys(LINK_KIND_MODIFIERS),
   },
   iconPosition: {
-    control: {
-      type: 'select',
-      options: Object.keys(ICON_POSITION_MODIFIERS),
-    },
+    control: 'select',
+    options: Object.keys(ICON_POSITION_MODIFIERS),
   },
   labelClass: {
     description: 'Pass through classes. Used to customize the label container',

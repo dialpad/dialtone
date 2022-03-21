@@ -42,6 +42,8 @@ export default {
 
   inheritAttrs: false,
 
+  emits: ['input'],
+
   computed: {
     inputValidationClass () {
       return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];

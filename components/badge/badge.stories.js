@@ -20,6 +20,7 @@ export const argTypesData = {
   color: {
     defaultValue: 'base',
     options: Object.keys(BADGE_COLOR_MODIFIERS),
+    control: 'select',
   },
 };
 

@@ -67,13 +67,11 @@ export default {
     },
   },
 
+  emits: ['input'],
+
   data () {
     return {
       internalValue: this.selectedValues,
-      // wrap values in object to make reactive
-      provideObj: {
-        selectedValues: this.selectedValues,
-      },
     };
   },
 
@@ -83,12 +81,15 @@ export default {
     },
 
     /*
-     * watching value to support 2 way binding for slotted checkboxes.
-     * need this to pass value to slotted checkboxes if modified outside
-     * checkbox group.
-     */
-    internalValue (newInternalValue) {
-      this.provideObj.selectedValues = newInternalValue;
+    * watching value to support 2 way binding for slotted checkboxes.
+    * need this to pass value to slotted checkboxes if modified outside
+    * checkbox group.
+    */
+    internalValue: {
+      immediate: true,
+      handler (newInternalValue) {
+        this.provideObj.selectedValues = newInternalValue;
+      },
     },
   },
 

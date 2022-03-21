@@ -1,6 +1,9 @@
 <template>
-  <div id="components-button--variants-container">
-    <div class="d-mb16">
+  <div
+    id="components-button--variants-container"
+    class="d-stack16"
+  >
+    <div class="d-flow4">
       <!-- Default -->
       <dt-button>
         Primary
@@ -16,7 +19,7 @@
         Clear
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow4">
       <!-- Danger -->
       <dt-button kind="danger">
         Danger
@@ -32,7 +35,7 @@
         Disabled
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow4">
       <!-- Muted clear -->
       <dt-button
         kind="muted"
@@ -48,7 +51,7 @@
         Muted Outlined
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow4">
       <!-- Extra Small -->
       <dt-button size="xs">
         Extra Small
@@ -74,27 +77,27 @@
         Extra Large
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow4">
       <!-- Circle -->
       <dt-button
         importance="outlined"
         circle
       >
-        <template slot="icon">
+        <template #icon>
           <icon-dialpad-glyph />
         </template>
       </dt-button>
 
       <!-- Icon Only -->
       <dt-button>
-        <template slot="icon">
+        <template #icon>
           <icon-dialpad-glyph />
         </template>
       </dt-button>
 
       <!-- Icon Left -->
       <dt-button>
-        <template slot="icon">
+        <template #icon>
           <icon-dialpad-glyph />
         </template>
         Icon Left
@@ -102,19 +105,19 @@
 
       <!-- Icon Right -->
       <dt-button icon-position="right">
-        <template slot="icon">
+        <template #icon>
           <icon-dialpad-glyph />
         </template>
         Icon Right
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow4">
       <!-- Loading -->
       <dt-button loading>
         Button
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow4">
       <!-- Link Button -->
       <dt-button link>
         Link Button

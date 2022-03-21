@@ -8,7 +8,8 @@
     :type="type"
     :aria-live="computedAriaLive"
     :aria-label="loading ? 'loading' : $attrs['aria-label']"
-    v-bind="buttonListeners"
+    v-bind="$attrs"
+    v-on="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
@@ -176,7 +177,7 @@ export default {
     },
   },
 
-  emits: ['onClick', 'onFocusin', 'onFocusout'],
+  emits: ['click', 'focusin', 'focusout'],
 
   data () {
     return {
@@ -189,17 +190,16 @@ export default {
   computed: {
 
     buttonListeners () {
-      if (!this.assertiveOnFocus) {
-        return this.$attrs;
-      }
       return {
-        ...this.$attrs,
+        click: (e) => this.$emit('click', e),
         focusin: (e) => {
-          this.isInFocus = true;
+          this.isInFocus = this.assertiveOnFocus;
+          this.$emit('focusin', e);
         },
 
         focusout: (e) => {
           this.isInFocus = false;
+          this.$emit('focusout', e);
         },
       };
     },

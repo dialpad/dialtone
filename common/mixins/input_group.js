@@ -115,6 +115,8 @@ export const InputGroupMixin = {
     },
   },
 
+  emits: ['input'],
+
   data () {
     const formattedMessages = formatMessages(this.messages);
 

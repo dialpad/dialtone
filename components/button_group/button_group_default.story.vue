@@ -1,6 +1,6 @@
 <template>
   <dt-button-group
-    :alignment="alignment"
+    :alignment="$attrs.alignment"
   >
     <html-fragment
       v-if="defaultSlot"

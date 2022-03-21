@@ -72,10 +72,10 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtBreadcrumbsDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtBreadcrumbsVariantsTemplate);
+const DefaultTemplate = (args) =>
+  createTemplateFromVueFile(args, DtBreadcrumbsDefaultTemplate);
+const VariantsTemplate = (args) =>
+  createTemplateFromVueFile(args, DtBreadcrumbsVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

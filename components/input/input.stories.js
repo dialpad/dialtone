@@ -21,10 +21,8 @@ export const argTypesData = {
     table: {
       type: { summary: 'VNode' },
     },
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
+    control: 'select',
+    options: getIconNames(),
   },
   rightIcon: {
     table: {
@@ -45,15 +43,13 @@ export const argTypesData = {
   },
 
   // Props
-  value: {
+  modelValue: {
     control: 'text',
   },
   type: {
     defaultValue: DtInput.props.type.default,
-    control: {
-      type: 'select',
-      options: ['text', 'textarea', 'password', 'email', 'number'],
-    },
+    control: 'select',
+    options: ['text', 'textarea', 'password', 'email', 'number'],
     table: {
       defaultValue: {
         summary: DtInput.props.type.default,
@@ -64,11 +60,8 @@ export const argTypesData = {
     control: 'object',
   },
   size: {
-    control: {
-      type: 'select',
-      options: Object.values(INPUT_SIZES),
-    },
-    defaultValue: INPUT_SIZES.DEFAULT,
+    control: 'select',
+    options: Object.values(INPUT_SIZES),
     table: {
       defaultValue: {
         summary: INPUT_SIZES.DEFAULT,
@@ -205,6 +198,11 @@ export const argTypesData = {
     description: 'Result of the input validation',
     table: {
       type: { summary: 'event' },
+    },
+  },
+  'update:modelValue': {
+    table: {
+      disable: true,
     },
   },
 };

@@ -9,7 +9,6 @@
       "complexity": 1
     },
     "components/input/input.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1,
       "max-lines": 1
     },
     "components/notice/notice.vue": {

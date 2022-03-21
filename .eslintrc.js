@@ -129,8 +129,6 @@ module.exports = {
       files: ['**/*.story.vue'],
       rules: {
         'vue/no-bare-strings-in-template': ['off'],
-        'vue/no-deprecated-slot-attribute': ['off'],
-        'vue/no-deprecated-slot-scope-attribute': ['off'],
       },
     },
   ],

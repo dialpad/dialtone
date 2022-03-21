@@ -2,12 +2,12 @@
   <div>
     <dt-breadcrumbs
       class="d-py16 d-px12"
-      :breadcrumbs="breadcrumbs"
+      :breadcrumbs="$attrs.breadcrumbs"
     />
     <div class="d-bgc-purple-800 d-py16 d-px12">
       <dt-breadcrumbs
         inverted
-        :breadcrumbs="breadcrumbs"
+        :breadcrumbs="$attrs.breadcrumbs"
       />
     </div>
 
@@ -15,7 +15,7 @@
       class="d-py16 d-px12"
     >
       <dt-breadcrumb-item
-        v-for="breadcrumb in breadcrumbs"
+        v-for="breadcrumb in $attrs.breadcrumbs"
         :key="breadcrumb.label"
         v-bind="breadcrumb"
       />
