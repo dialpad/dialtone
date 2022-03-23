@@ -107,6 +107,22 @@
         </template>
         Icon Right
       </dt-button>
+
+      <!-- Icon Top -->
+      <dt-button icon-position="top">
+        <template slot="icon">
+          <icon-dialpad-glyph />
+        </template>
+        Icon Top
+      </dt-button>
+
+      <!-- Icon Bottom -->
+      <dt-button icon-position="bottom">
+        <template slot="icon">
+          <icon-dialpad-glyph />
+        </template>
+        Icon Bottom
+      </dt-button>
     </div>
     <div class="d-mb16">
       <!-- Loading -->
