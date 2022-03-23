@@ -4,7 +4,7 @@
     data-qa="notice-content"
   >
     <p
-      v-if="title || this.$slots.titleOverride"
+      v-if="title || $slots.titleOverride"
       :id="titleId"
       class="d-notice__title"
       data-qa="notice-content-title"

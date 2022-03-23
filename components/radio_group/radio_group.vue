@@ -40,14 +40,7 @@ export default {
     },
   },
 
-  data () {
-    return {
-      // wrap values in object to make reactive
-      provideObj: {
-        selectedValue: this.value,
-      },
-    };
-  },
+  emits: ['input'],
 
   watch: {
     /*

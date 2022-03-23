@@ -2,11 +2,9 @@
   <aside
     :class="noticeClass"
     data-qa="notice"
-    v-on="$listeners"
   >
     <dt-notice-icon
       :kind="kind"
-      v-on="$listeners"
     >
       <!-- @slot Use a custom icon -->
       <slot name="icon" />
@@ -16,7 +14,6 @@
       :content-id="contentId"
       :title="title"
       :role="role"
-      v-on="$listeners"
     >
       <template #titleOverride>
         <!-- @slot Allows you to override the title, only use this if you need
@@ -29,7 +26,7 @@
     <dt-notice-action
       :hide-close="hideClose"
       :close-button-props="closeButtonProps"
-      v-on="$listeners"
+      @close="$emit('close')"
     >
       <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
       <slot name="action" />
@@ -129,7 +126,7 @@ export default {
     },
   },
 
-  emits: ['close'],
+  emits: ['close', 'click'],
 
   computed: {
     noticeClass () {

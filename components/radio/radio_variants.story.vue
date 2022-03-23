@@ -32,7 +32,7 @@
       value="Value"
       label="With"
     >
-      <template slot="description">
+      <template #description>
         Slotted Description
       </template>
     </dt-radio>
@@ -44,7 +44,7 @@
       value="Value"
     >
       With Slotted Label
-      <template slot="description">
+      <template #description>
         And Slotted Description
       </template>
     </dt-radio>
@@ -192,8 +192,10 @@ import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 export default {
   name: 'RadioVariants',
   components: { DtRadio },
-  created () {
-    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
+  setup () {
+    return {
+      VALIDATION_MESSAGE_TYPES,
+    };
   },
 };
 </script>

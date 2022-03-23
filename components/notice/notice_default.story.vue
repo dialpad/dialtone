@@ -6,8 +6,8 @@
     :content-id="$attrs.contentId"
     :important="$attrs.important"
     :hide-close="$attrs.hideClose"
-    :close-button-props="$attrs.computedCloseButtonProps"
-    @close="$attrs.onClose($event)"
+    :close-button-props="computedCloseButtonProps"
+    @close="$attrs.onClose($event);"
   >
     <span
       v-if="defaultSlot"
@@ -21,7 +21,7 @@
         :class="linkClass"
       >a link</a>.
     </span>
-    <template slot="action">
+    <template #action>
       <span
         v-if="$attrs.action"
         v-html="$attrs.action"
@@ -38,13 +38,13 @@
     </template>
     <template
       v-if="$attrs.icon"
-      slot="icon"
+      #icon
     >
       <component :is="$attrs.icon" />
     </template>
     <template
       v-if="$attrs.titleOverride"
-      slot="titleOverride"
+      #titleOverride
     >
       <span v-html="$attrs.titleOverride" />
     </template>
@@ -65,11 +65,11 @@ export default {
 
   computed: {
     shouldInvertButton () {
-      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
     },
 
     isInverted () {
-      return this.important && this.shouldInvertButton;
+      return this.$attrs.important && this.shouldInvertButton;
     },
 
     buttonKind () {
@@ -82,7 +82,7 @@ export default {
 
     computedCloseButtonProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         kind: this.buttonKind,
         ariaLabel: 'Close',
       };

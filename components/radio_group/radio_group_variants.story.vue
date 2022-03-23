@@ -21,7 +21,7 @@
     <!-- With Slotted Legend -->
     <dt-radio-group name="radio-group-with-slotted-legend">
       <radios-decorator />
-      <template slot="legend">
+      <template #legend>
         With Slotted Legend
       </template>
     </dt-radio-group>
@@ -98,8 +98,10 @@ import DtRadioGroup from './radio_group';
 export default {
   name: 'RadioGroupVariants',
   components: { RadiosDecorator, DtRadioGroup },
-  created () {
-    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
+  setup () {
+    return {
+      VALIDATION_MESSAGE_TYPES,
+    };
   },
 };
 </script>

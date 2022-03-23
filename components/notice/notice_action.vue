@@ -59,7 +59,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     this.lastFocusedElement?.focus();
   },
 

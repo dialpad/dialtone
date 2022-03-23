@@ -1,37 +1,37 @@
 <template>
   <dt-select-menu
-    :label="label"
-    :options="options"
-    :size="size"
-    :description="description"
-    :show-messages="showMessages"
-    :messages="messages"
-    :name="name"
-    :value="value"
-    :disabled="disabled"
-    :label-class="labelClass"
-    :description-class="descriptionClass"
-    :select-class="selectClass"
-    :option-class="optionClass"
-    :messages-class="messagesClass"
-    :label-child-props="labelChildProps"
-    :description-child-props="descriptionChildProps"
-    :option-child-props="optionChildProps"
-    :messages-child-props="messagesChildProps"
-    @input="onInput"
-    @change="onChange"
+    :label="$attrs.label"
+    :options="$attrs.options"
+    :size="$attrs.size"
+    :description="$attrs.description"
+    :show-messages="$attrs.showMessages"
+    :messages="$attrs.messages"
+    :name="$attrs.name"
+    :value="$attrs.value"
+    :disabled="$attrs.disabled"
+    :label-class="$attrs.labelClass"
+    :description-class="$attrs.descriptionClass"
+    :select-class="$attrs.selectClass"
+    :option-class="$attrs.optionClass"
+    :messages-class="$attrs.messagesClass"
+    :label-child-props="$attrs.labelChildProps"
+    :description-child-props="$attrs.descriptionChildProps"
+    :option-child-props="$attrs.optionChildProps"
+    :messages-child-props="$attrs.messagesChildProps"
+    @input="$attrs.onInput"
+    @change="$attrs.onChange"
   >
     <template
-      v-if="labelSlot"
-      slot="label"
+      v-if="$attrs.labelSlot"
+      #label
     >
-      <span v-html="labelSlot" />
+      <span v-html="$attrs.labelSlot" />
     </template>
     <template
-      v-if="descriptionSlot"
-      slot="description"
+      v-if="$attrs.descriptionSlot"
+      #description
     >
-      <span v-html="descriptionSlot" />
+      <span v-html="$attrs.descriptionSlot" />
     </template>
     <html-fragment
       v-if="defaultSlot"

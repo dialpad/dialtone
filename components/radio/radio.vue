@@ -75,7 +75,7 @@ export default {
     },
   },
 
-  emits: ['input', 'focusin', 'focusout'],
+  emits: ['input', 'focus', 'focusin', 'focusout'],
 
   computed: {
     inputValidationClass () {
@@ -88,17 +88,14 @@ export default {
 
     inputListeners () {
       return {
-        /* TODO
-            Check if any usages of this component leverage $listeners and either remove if unused or scope the removal
-            and migration prior to upgrading to Vue 3.x
-        */
-        ...this.$listeners,
         /*
          * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input
-         * element which will result in the hander being called twice (once on the input element and once by the emitted
-         * input event by the change listener).
+         * element which will result in the handler being called twice
+         * (once on the input element and once by the emitted input event by the change listener).
         */
         input: () => {},
+        focusin: event => this.$emit('focusin', event),
+        focusout: event => this.$emit('focusout', event),
         change: event => this.emitValue(event.target.value),
       };
     },
