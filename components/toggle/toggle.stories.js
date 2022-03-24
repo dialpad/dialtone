@@ -97,8 +97,8 @@ export default {
 };
 
 // Toggle Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleDefault);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleVariants);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, ToggleDefault);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, ToggleVariants);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

@@ -1,27 +1,27 @@
 <template>
   <div
     :class="{
-      'd-bgc-purple-800': inverted,
+      'd-bgc-purple-800': $attrs.inverted,
     }"
   >
     <dt-tab-group
-      :size="size"
-      :inverted="inverted"
-      :borderless="borderless"
-      :disabled="disabled"
-      :tab-list-class="tabListClass"
-      :tab-list-child-props="tabListChildProps"
-      @change="onChange"
+      :size="$attrs.size"
+      :inverted="$attrs.inverted"
+      :borderless="$attrs.borderless"
+      :disabled="$attrs.disabled"
+      :tab-list-class="$attrs.tabListClass"
+      :tab-list-child-props="$attrs.tabListChildProps"
+      @change="$attrs.onChange"
     >
-      <template slot="tabs">
+      <template #tabs>
         <dt-tab
           id="1"
           panel-id="2"
           selected
         >
           <p
-            v-if="tabs"
-            v-html="tabs"
+            v-if="$attrs.tabs"
+            v-html="$attrs.tabs"
           />
           <p v-else>
             First
@@ -32,8 +32,8 @@
           panel-id="4"
         >
           <p
-            v-if="tabs"
-            v-html="tabs"
+            v-if="$attrs.tabs"
+            v-html="$attrs.tabs"
           />
           <p v-else>
             Second
@@ -45,8 +45,8 @@
           label="Third Label"
         >
           <p
-            v-if="tabs"
-            v-html="tabs"
+            v-if="$attrs.tabs"
+            v-html="$attrs.tabs"
           />
           <p v-else>
             Third
@@ -56,7 +56,7 @@
 
       <div
         :class="{
-          'd-fc-white': inverted,
+          'd-fc-white': $attrs.inverted,
         }"
       >
         <dt-tab-panel

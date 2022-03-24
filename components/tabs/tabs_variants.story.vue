@@ -17,7 +17,7 @@
           },
         ]"
       >
-        <template slot="tabs">
+        <template #tabs>
           <dt-tab
             id="1"
             panel-id="2"

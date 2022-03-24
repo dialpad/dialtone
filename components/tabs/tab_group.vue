@@ -3,6 +3,7 @@
     data-qa="dt-tab-group"
   >
     <div
+      ref="tabs"
       :class="[
         'd-tablist',
         TAB_LIST_SIZE_MODIFIERS[size],
@@ -175,7 +176,8 @@ export default {
     },
 
     getTabChildren () {
-      return this.$children.map(({ $el }) => $el)
+      const tabs = Array.from(this.$refs.tabs.children);
+      return tabs
         .filter(({ className }) => className.includes('d-tab'))
         .map(el => {
           return ({

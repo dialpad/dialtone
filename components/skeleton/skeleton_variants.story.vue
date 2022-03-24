@@ -17,7 +17,7 @@
             shape: 'circle',
           }"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <p>M (32x32px)</p>
         <dt-skeleton
@@ -25,7 +25,7 @@
             shape: 'circle',
           }"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <p>L (48x48px)</p>
         <dt-skeleton
@@ -33,7 +33,7 @@
             size: 'lg',
             shape: 'circle',
           }"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
       </div>
       <div class="d-p4 d-fl1 d-w25p">
@@ -46,14 +46,14 @@
             shape: 'square',
           }"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
       </div>
       <div class="d-p4 d-fl1 d-w25p">
         <h3>Text: Body</h3>
         <p class="d-mb24" />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
@@ -73,7 +73,7 @@
             headingHeight: 'sm',
           }"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <p>M (height: 24px)</p>
         <dt-skeleton
@@ -83,7 +83,7 @@
             width: '240px',
           }"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <p>L (height: 32px)</p>
         <dt-skeleton
@@ -92,7 +92,7 @@
             headingHeight: 'lg',
             width: '320px',
           }"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
       </div>
     </section>
@@ -104,7 +104,7 @@
         <h3>Text List</h3>
         <p class="d-mb24" />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
@@ -112,7 +112,7 @@
           class="d-mb16"
         />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
@@ -120,7 +120,7 @@
           class="d-mb16"
         />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
@@ -128,7 +128,7 @@
           class="d-mb16"
         />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
@@ -149,7 +149,7 @@
               rows: 1,
             },
           }"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
 
         <h3 class="d-pt16">
@@ -166,7 +166,7 @@
               rows: 1,
             },
           }"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <h3 class="d-pt16">
           Messages / Transcript / Comment
@@ -183,7 +183,7 @@
               ],
             },
           }"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
       </div>
       <div class="d-p4 d-fl1 d-w50p">
@@ -198,7 +198,7 @@
             maxWidth: 100,
             minWidth: 80,
           }"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :offset="0.5"
         />
       </div>

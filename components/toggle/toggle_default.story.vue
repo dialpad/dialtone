@@ -1,10 +1,10 @@
 <template>
   <dt-toggle
-    :checked="checked"
-    :disabled="disabled"
-    :label-class="labelClass"
-    :label-child-props="labelChildProps"
-    @change="onChange"
+    :checked="$attrs.checked"
+    :disabled="$attrs.disabled"
+    :label-class="$attrs.labelClass"
+    :label-child-props="$attrs.labelChildProps"
+    @change="$attrs.onChange"
   >
     <span
       v-if="defaultSlot"

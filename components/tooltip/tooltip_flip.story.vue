@@ -7,17 +7,14 @@
       <div class="some-text" />
       <div class="some-text">
         <dt-tooltip
-          :id="id"
-          :placement="placement"
+          :id="$attrs.id"
+          :placement="$attrs.placement"
           class="tooltip"
           :fallback-placements="['right', 'bottom']"
-          :offset="offset"
+          :offset="$attrs.offset"
           :show="true"
         >
-          <template
-            slot="anchor"
-            slot-scope="{ attrs }"
-          >
+          <template #anchor="{ attrs }">
             <dt-button
               importance="outlined"
               :kind="buttonKind"
@@ -26,7 +23,7 @@
               Click me to see a tooltip
             </dt-button>
           </template>
-          <template slot="default">
+          <template #default>
             <div>
               {{ defaultSlot }}
             </div>
@@ -51,7 +48,7 @@ export default {
 
   computed: {
     buttonKind () {
-      return this.inverted ? 'inverted' : 'default';
+      return this.$attrs.inverted ? 'inverted' : 'default';
     },
   },
 

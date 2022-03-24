@@ -1,7 +1,8 @@
-import { generateTemplate } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './validation_messages';
 import BaseValidationMessagesMdx from './validation_messages.mdx';
+import DtValidationMessagesDefaultTemplate from './validation_messages_default.story.vue';
 
 // Constants
 const VALIDATION_MESSAGES = [{
@@ -46,17 +47,11 @@ export default {
 };
 
 // Validation Messages Template
-const baseRadioTemplate = generateTemplate(DtValidationMessages, {});
-const Template = (_args, { argTypes }) => {
-  return {
-    components: { DtValidationMessages },
-    template: baseRadioTemplate,
-    props: Object.keys(argTypes),
-  };
-};
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtValidationMessagesDefaultTemplate);
 
 // Stories
-export const Default = Template.bind({});
+export const Default = DefaultTemplate.bind({});
+Default.args = {};
 
 // Variants Story
 const VariantsTemplate = () => {

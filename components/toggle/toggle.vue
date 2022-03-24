@@ -20,8 +20,7 @@
         'd-toggle--checked': internalChecked,
         'd-toggle--disabled': disabled,
       }]"
-      v-bind="$attrs"
-      v-on="inputListeners"
+      v-bind="inputListeners"
     >
       <span class="d-toggle__inner" />
     </button>
@@ -29,7 +28,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { warn } from 'vue';
 import utils from '@/common/utils';
 
 export default {
@@ -83,9 +82,8 @@ export default {
 
     inputListeners () {
       return {
-        // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
-        ...this.$listeners,
-        click: _ => this.toggleCheckedValue(),
+        ...this.$attrs,
+        onClick: _ => this.toggleCheckedValue(),
       };
     },
   },
@@ -116,7 +114,7 @@ export default {
 
     validateInputLabels (hasLabel, ariaLabel) {
       if (!hasLabel && !ariaLabel) {
-        Vue.util.warn(
+        warn(
           'You must provide an aria-label when there is no label passed',
           this,
         );

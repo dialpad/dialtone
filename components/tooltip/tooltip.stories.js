@@ -103,11 +103,11 @@ export default {
 };
 
 // Templates
-const TooltipFlipTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtTooltipFlipTemplate);
-const TooltipDefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefault);
-const TooltipVariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
+const TooltipFlipTemplate = (args) =>
+  createTemplateFromVueFile(args, DtTooltipFlipTemplate);
+const TooltipDefaultTemplate = (args) => createTemplateFromVueFile(args, DtTooltipDefault);
+const TooltipVariantsTemplate = (args) =>
+  createTemplateFromVueFile(args, DtTooltipVariantsTemplate);
 // Stories
 
 export const Default = TooltipDefaultTemplate.bind({});

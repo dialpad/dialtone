@@ -79,9 +79,8 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
   DtTabsDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtTabsVariantsTemplate,
 );
 

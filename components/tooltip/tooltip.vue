@@ -218,7 +218,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.tip) {
       this.tip?.destroy();
     }

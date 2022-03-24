@@ -13,7 +13,6 @@
       <div class="d-toast__dialog">
         <dt-notice-icon
           :kind="kind"
-          v-on="$listeners"
         >
           <!-- @slot Use a custom icon -->
           <slot name="icon" />
@@ -23,7 +22,6 @@
           :content-id="contentId"
           :title="title"
           :role="role"
-          v-on="$listeners"
         >
           <template #titleOverride>
             <!-- @slot Allows you to override the title, only use this if you need to override
@@ -38,7 +36,7 @@
         <dt-notice-action
           :hide-close="hideClose"
           :close-button-props="closeButtonProps"
-          v-on="$listeners"
+          @close="$emit('close')"
         >
           <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
           <slot name="action" />
@@ -160,7 +158,7 @@ export default {
     },
   },
 
-  emits: ['close'],
+  emits: ['close', 'click'],
 
   data () {
     return {
@@ -182,11 +180,7 @@ export default {
     },
   },
 
-  /* TODO Vue 3 Migration
-   * destroyed() should be updated to unmounted() when migrating to Vue 3.
-   */
-  // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
-  destroyed () {
+  unmounted () {
     clearTimeout(this.displayTimer);
   },
 
