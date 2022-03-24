@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/dialpad/dialtone-vue/compare/v3.0.0...v3.0.1) (2022-03-24)
+
+
+### Bug Fixes
+
+* problem with popover variants ([e014b02](https://github.com/dialpad/dialtone-vue/commit/e014b02a615a9757aa9fa7fb8d807ee5aef8035a))
+
 # [3.0.0](https://github.com/dialpad/dialtone-vue/compare/v2.1.1...v3.0.0) (2022-03-24)
 
 
