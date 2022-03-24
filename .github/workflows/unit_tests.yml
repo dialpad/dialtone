@@ -2,9 +2,9 @@ name: Unit Tests
 
 on:
   pull_request:
-    branches: [ staging, staging-vue3, vue3, production ]
+    branches: [ staging, production ]
   push:
-    branches: [ staging, staging-vue3 ]
+    branches: [ staging ]
 
 jobs:
   unit_tests:
