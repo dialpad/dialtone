@@ -5,6 +5,7 @@ on:
     types: ['opened', 'edited', 'reopened', 'synchronize']
     branches:
       - staging
+      - staging-vue3
 
 jobs:
   commitlint:
