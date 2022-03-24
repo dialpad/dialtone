@@ -36,7 +36,6 @@
     "@vue/cli-plugin-eslint": "^5.0.0-rc.1",
     "@vue/cli-plugin-unit-mocha": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
-    "@vue/compat": "^3.1.0",
     "@vue/compiler-sfc": "^3.1.0",
     "@vue/test-utils": "^2.0.0-rc.16",
     "babel-eslint": "^10.1.0",
