@@ -1,3 +1,34 @@
+# [3.0.0](https://github.com/dialpad/dialtone-vue/compare/v2.1.1...v3.0.0) (2022-03-24)
+
+
+### Bug Fixes
+
+* add vue3 branch to commit message lint ([b685cc8](https://github.com/dialpad/dialtone-vue/commit/b685cc876a729284d739c19d67b6dd7577c04585))
+* fix storybook package-lock.json ([#254](https://github.com/dialpad/dialtone-vue/issues/254)) ([b57b17c](https://github.com/dialpad/dialtone-vue/commit/b57b17c86691fcf4a66411422929012278d46615))
+* fix the way storybook args are handled in vue3 ([#250](https://github.com/dialpad/dialtone-vue/issues/250)) ([f2ad98d](https://github.com/dialpad/dialtone-vue/commit/f2ad98d4bed472136625d98c1f2efa7882a34816))
+* rename args -> $attrs and fix createTemplateFromVueFile function ([#251](https://github.com/dialpad/dialtone-vue/issues/251)) ([3bda977](https://github.com/dialpad/dialtone-vue/commit/3bda977ffe64a55241a0a62df75d7c8881768f85))
+
+
+### Code Refactoring
+
+* popover component ([#252](https://github.com/dialpad/dialtone-vue/issues/252)) ([4544c83](https://github.com/dialpad/dialtone-vue/commit/4544c837f99db3a25e37270170d2ab38c7803069)), closes [#223](https://github.com/dialpad/dialtone-vue/issues/223) [#235](https://github.com/dialpad/dialtone-vue/issues/235) [#243](https://github.com/dialpad/dialtone-vue/issues/243) [#242](https://github.com/dialpad/dialtone-vue/issues/242)
+
+
+### Features
+
+* **button:** support top and bottom iconPositions ([7b40812](https://github.com/dialpad/dialtone-vue/commit/7b408126a4fea69a23b43cae40231a1be6fedf43))
+* dt-407 support "top" and "bottom" as valid iconPositions for dt-button ([#284](https://github.com/dialpad/dialtone-vue/issues/284)) ([414aac3](https://github.com/dialpad/dialtone-vue/commit/414aac3dcdcac870808a18ab8625a32f4733f06a))
+* **vue 3:** component migration avatar to combobox ([#278](https://github.com/dialpad/dialtone-vue/issues/278)) ([4d479e3](https://github.com/dialpad/dialtone-vue/commit/4d479e32c671166370051cf537b68d4741ba8484))
+* **vue 3:** migrate notice to select menu ([#288](https://github.com/dialpad/dialtone-vue/issues/288)) ([37f0fd1](https://github.com/dialpad/dialtone-vue/commit/37f0fd1da6f150ec19e30bc14abf486f24c7cc03))
+* **vue 3:** remove @vue/compat ([#291](https://github.com/dialpad/dialtone-vue/issues/291)) ([122573b](https://github.com/dialpad/dialtone-vue/commit/122573b1d87f9ab9173f6017917ab332a45af870))
+* **vue3:** migrate dropdown to modal component ([#277](https://github.com/dialpad/dialtone-vue/issues/277)) ([fcfb355](https://github.com/dialpad/dialtone-vue/commit/fcfb355cf4bfbfa3588bab06470624191a60b819))
+* **vue3:** migrate skeleton to validation messages component ([#290](https://github.com/dialpad/dialtone-vue/issues/290)) ([e6ca99e](https://github.com/dialpad/dialtone-vue/commit/e6ca99e3fe3846b6ba0f53f8cb08ae99c94812a7))
+
+
+### BREAKING CHANGES
+
+* removed fixedVerticalAlignment, fixedAlignment props for the popover component
+
 ## [2.1.1](https://github.com/dialpad/dialtone-vue/compare/v2.1.0...v2.1.1) (2022-03-16)
 
 
