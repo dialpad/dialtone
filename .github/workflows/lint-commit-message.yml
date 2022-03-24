@@ -6,6 +6,7 @@ on:
       - staging
       - staging-vue3
       - production
+      - vue3
 
 jobs:
   commitlint:
