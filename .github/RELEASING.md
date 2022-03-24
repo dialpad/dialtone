@@ -14,7 +14,7 @@
 Since Dialtone Vue is a private repository, and semantic-release will push the release commit to the remote server when releasing,
 it's required to set up SSH authentication in Github to authenticate to the remote server. See the [Github docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh) to set up SSH credentials.
 If you have correctly set up the SSH credentials, you can verify that semantic-release can push to the remote server by running on the `staging` branch: `npm run release -- --dry-run`.
-With the `--dry-run` flag, you can get a preview of the pending release and if everything is okay, you can see in the output: `[semantic-release] › ✔  Allowed to push to the Git repository`. 
+With the `--dry-run` flag, you can get a preview of the pending release and if everything is okay, you can see in the output: `[semantic-release] › ✔  Allowed to push to the Git repository`.
 
 ## Steps
 
@@ -36,6 +36,12 @@ In order to push the `production` branch to trigger a release to [npmjs](https:/
 
 ---
 
+**Vue 3 Release**
+
+If you wish to make a vue 3 release follow the exact steps above except substitute `staging` for `staging-vue3` and `production` for `vue3`.
+
+---
+
 **If you have made a pre-release (`alpha` or `beta`):**
 
 6. Since your pre-release branch was pushed to the remote, the deploy Github Action should have been triggered.
@@ -51,5 +57,5 @@ git merge --ff-only $BRANCH
 ---
 
 9. You should be able to see your deployment running at https://github.com/dialpad/dialtone-vue/actions.
-10. When this Github Action has been completed, the new version of the package should have been deployed to Github releases, npm, and the documentation website (`vue.dialpad.design`) is now updated (if it was a production release).
+10. When this Github Action has been completed, the new version of the package should have been deployed to Github releases, npm, and the documentation website (`vue.dialpad.design`) is now updated (if it was a production release). You can see the vue 3 release at (`vue.dialpad.design/vue3`).
 11. Now you’re ready to update your projects to use the latest Dialtone Vue version 🎉.

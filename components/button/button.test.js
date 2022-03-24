@@ -265,6 +265,7 @@ describe('Dialtone Vue Button tests', function () {
         wrapper = shallowMount(DtButton, {
           propsData,
           slots: {
+            default: 'text',
             icon: EmptyComponentFixture,
           },
           localVue: this.localVue,
@@ -282,6 +283,20 @@ describe('Dialtone Vue Button tests', function () {
         await wrapper.setProps({ iconPosition: 'right' });
         icon = wrapper.find('.base-button__icon');
         assert.isTrue(icon.classes().includes('d-btn__icon--right'));
+      });
+
+      it('Should add appropriate classes when iconPosition is "top"', async function () {
+        await wrapper.setProps({ iconPosition: 'top' });
+        icon = wrapper.find('.base-button__icon');
+        assert.isTrue(icon.classes().includes('d-btn__icon--top'));
+        assert.isTrue(button.classes().includes('d-btn--vertical'));
+      });
+
+      it('Should add appropriate classes when iconPosition is "bottom"', async function () {
+        await wrapper.setProps({ iconPosition: 'bottom' });
+        icon = wrapper.find('.base-button__icon');
+        assert.isTrue(icon.classes().includes('d-btn__icon--bottom'));
+        assert.isTrue(button.classes().includes('d-btn--vertical'));
       });
     });
 

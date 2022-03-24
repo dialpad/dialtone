@@ -9,13 +9,13 @@
   >
     <template
       v-if="left"
-      slot="left"
+      #left
     >
       <span v-html="left" />
     </template>
     <template
       v-else
-      slot="left"
+      #left
     >
       <span class="d-fw-bold"> Active Call </span>
     </template>
@@ -25,13 +25,13 @@
     <span v-else> Caller ID: Aerolabs Support (415) 583-3482 </span>
     <template
       v-if="right"
-      slot="right"
+      #right
     >
       <span v-html="right" />
     </template>
     <template
       v-else
-      slot="right"
+      #right
     >
       <span class="d-fw-bold"> Recording ON </span>
     </template>

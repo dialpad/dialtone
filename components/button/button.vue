@@ -73,7 +73,7 @@ export default {
 
     /**
      * The position of the icon slot within the button.
-     * @values left, right
+     * @values left, right, top, bottom
      * @see https://dialpad.design/components/button/
      */
     iconPosition: {
@@ -243,6 +243,7 @@ export default {
           'd-btn--circle': this.circle,
           'd-btn--loading': this.loading,
           'd-btn--icon-only': this.isIconOnly(),
+          'd-btn--vertical': this.isVerticalIconLayout(),
         },
       ];
     },
@@ -263,6 +264,10 @@ export default {
 
     isIconOnly () {
       return this.shouldRenderIcon() && !this.$slots.default;
+    },
+
+    isVerticalIconLayout () {
+      return this.shouldRenderIcon() && !this.isIconOnly() && ['top', 'bottom'].includes(this.iconPosition);
     },
   },
 };
