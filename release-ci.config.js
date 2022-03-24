@@ -2,7 +2,7 @@ module.exports = {
   branches: [
     'production',
     'staging',
-    'vue3-staging',
+    'staging-vue3',
     'vue3',
     {
       name: 'beta',
