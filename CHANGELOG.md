@@ -1,3 +1,18 @@
+# [2.2.0](https://github.com/dialpad/dialtone-vue/compare/v2.1.1...v2.2.0) (2022-03-25)
+
+
+### Bug Fixes
+
+* add vue3 branch to commit message lint ([b685cc8](https://github.com/dialpad/dialtone-vue/commit/b685cc876a729284d739c19d67b6dd7577c04585))
+* **popover:** transparent overlay render at the root ([#295](https://github.com/dialpad/dialtone-vue/issues/295)) ([f8c2b25](https://github.com/dialpad/dialtone-vue/commit/f8c2b25ae1086856913667d54cbd6e8e09fe0e20))
+* update list-item padding 2 -> 4 ([#292](https://github.com/dialpad/dialtone-vue/issues/292)) ([d32669e](https://github.com/dialpad/dialtone-vue/commit/d32669e7e7d76b4113bd70e4e36e759f8616eee9))
+
+
+### Features
+
+* **button:** support top and bottom iconPositions ([7b40812](https://github.com/dialpad/dialtone-vue/commit/7b408126a4fea69a23b43cae40231a1be6fedf43))
+* dt-407 support "top" and "bottom" as valid iconPositions for dt-button ([#284](https://github.com/dialpad/dialtone-vue/issues/284)) ([414aac3](https://github.com/dialpad/dialtone-vue/commit/414aac3dcdcac870808a18ab8625a32f4733f06a))
+
 ## [2.1.1](https://github.com/dialpad/dialtone-vue/compare/v2.1.0...v2.1.1) (2022-03-16)
 
 
