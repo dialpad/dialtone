@@ -1,11 +1,11 @@
 <template>
   <div>
-    <dt-lazy-show
-      :show="modal && isOpen"
-      transition="d-zoom"
-      class="d-modal--transparent"
-      :aria-hidden="modal && isOpen ? 'false' : 'true'"
-    />
+    <portal v-if="modal && isOpen">
+      <div
+        class="d-modal--transparent"
+        :aria-hidden="modal && isOpen ? 'false' : 'true'"
+      />
+    </portal>
     <component
       :is="elementType"
       ref="popover"
@@ -118,6 +118,7 @@ import {
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
+import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal.js';
 import {
   createTippy,
@@ -135,6 +136,7 @@ export default {
   components: {
     DtLazyShow,
     PopoverHeaderFooter,
+    Portal,
   },
 
   mixins: [ModalMixin],
@@ -594,7 +596,7 @@ export default {
     onClickOutside () {
       if (!this.hideOnClick) return;
       // If a modal popover is opened inside of this one, do not hide on click out
-      const innerModals = this.popoverContentEl.querySelector('.d-modal--transparent[aria-hidden="false"]');
+      const innerModals = this.popoverContentEl.querySelector('.d-popover__anchor--modal-opened');
       if (!innerModals) {
         this.closePopover();
       }

@@ -25,6 +25,7 @@
     "storybook:build": "npm run --prefix storybook build"
   },
   "dependencies": {
+    "@linusborg/vue-simple-portal": "^0.1.5",
     "tippy.js": "^6.3.1"
   },
   "devDependencies": {
