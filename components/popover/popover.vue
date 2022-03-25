@@ -1,11 +1,14 @@
 <template>
   <div>
-    <dt-lazy-show
-      :show="modal && isOpen"
-      transition="d-zoom"
-      class="d-modal--transparent"
-      :aria-hidden="modal && isOpen ? 'false' : 'true'"
-    />
+    <Teleport
+      v-if="modal && isOpen"
+      to="body"
+    >
+      <div
+        class="d-modal--transparent"
+        :aria-hidden="modal && isOpen ? 'false' : 'true'"
+      />
+    </Teleport>
     <component
       :is="elementType"
       ref="popover"
@@ -595,7 +598,7 @@ export default {
     onClickOutside () {
       if (!this.hideOnClick) return;
       // If a modal popover is opened inside of this one, do not hide on click out
-      const innerModals = this.popoverContentEl.querySelector('.d-modal--transparent[aria-hidden="false"]');
+      const innerModals = this.popoverContentEl.querySelector('.d-popover__anchor--modal-opened');
       if (!innerModals) {
         this.closePopover();
       }
