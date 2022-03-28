@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/dialpad/dialtone-vue/compare/v2.2.0...v2.2.1) (2022-03-28)
+
+
+### Bug Fixes
+
+* error with number value in calculateLength ([#299](https://github.com/dialpad/dialtone-vue/issues/299)) ([7ceda32](https://github.com/dialpad/dialtone-vue/commit/7ceda327935313b29a97eb56bb332adc8c6fcc75))
+
 # [2.2.0](https://github.com/dialpad/dialtone-vue/compare/v2.1.1...v2.2.0) (2022-03-25)
 
 
