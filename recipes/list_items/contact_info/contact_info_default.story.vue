@@ -1,36 +1,36 @@
 <template>
   <dt-recipe-contact-info
-    :avatar-src="avatarSrc"
-    :avatar-initials="avatarInitials"
-    :avatar-color="avatarColor"
-    :user-status-color="userStatusColor"
+    :avatar-src="$attrs.avatarSrc"
+    :avatar-initials="$attrs.avatarInitials"
+    :avatar-color="$attrs.avatarColor"
+    :user-status-color="$attrs.userStatusColor"
   >
     <template
-      v-if="header"
+      v-if="$attrs.header"
       #header
     >
-      <span v-html="header" />
+      <span v-html="$attrs.header" />
     </template>
 
     <template
-      v-if="subtitle"
+      v-if="$attrs.subtitle"
       #subtitle
     >
-      <span v-html="subtitle" />
+      <span v-html="$attrs.subtitle" />
     </template>
 
     <template
-      v-if="right"
+      v-if="$attrs.right"
       #right
     >
-      <span v-html="right" />
+      <span v-html="$attrs.right" />
     </template>
 
     <template
-      v-if="bottom"
+      v-if="$attrs.bottom"
       #bottom
     >
-      <span v-html="bottom" />
+      <span v-html="$attrs.bottom" />
     </template>
   </dt-recipe-contact-info>
 </template>

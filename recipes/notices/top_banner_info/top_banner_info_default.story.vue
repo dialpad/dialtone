@@ -5,13 +5,13 @@
     as the storybook control defined in the corresponding `.story.js` file.
   -->
   <dt-recipe-top-banner-info
-    :color-code="colorCode"
+    :color-code="$attrs.colorCode"
   >
     <template
-      v-if="left"
+      v-if="$attrs.left"
       #left
     >
-      <span v-html="left" />
+      <span v-html="$attrs.left" />
     </template>
     <template
       v-else
@@ -24,10 +24,10 @@
     </template>
     <span v-else> Caller ID: Aerolabs Support (415) 583-3482 </span>
     <template
-      v-if="right"
+      v-if="$attrs.right"
       #right
     >
-      <span v-html="right" />
+      <span v-html="$attrs.right" />
     </template>
     <template
       v-else

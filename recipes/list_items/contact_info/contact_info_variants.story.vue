@@ -34,7 +34,7 @@
         <template #subtitle>
           <div
             class="d-fc-red-500"
-            @click.stop="onMarkAsSpam"
+            @click.stop="$attrs.onMarkAsSpam"
           >
             Mark as spam
           </div>
@@ -48,7 +48,7 @@
       <dt-button
         importance="clear"
         kind="muted"
-        @click="onGoupContactClick"
+        @click="$attrs.onGroupContactClick"
       >
         <dt-recipe-contact-info>
           <template #header>
@@ -154,8 +154,8 @@
         Contact with items in right slot
       </p>
       <dt-recipe-contact-info
-        :avatar-initials="avatarInitials"
-        :avatar-color="avatarColor"
+        :avatar-initials="$attrs.avatarInitials"
+        :avatar-color="$attrs.avatarColor"
       >
         <template #header>
           <div class="d-fw-bold d-fs16">
@@ -178,7 +178,7 @@
           2 matches found.
           <dt-button
             link
-            @click.stop="onConnectToARecord"
+            @click.stop="$attrs.onConnectToARecord"
           >
             Connect to a record
           </dt-button>
