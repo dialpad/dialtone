@@ -6,7 +6,7 @@
     :placement="placement"
     initial-focus-element="first"
     :fallback-placements="fallbackPlacements"
-    :padding="padding"
+    padding="none"
     role="menu"
     :modal="modal"
     v-bind="$attrs"
@@ -30,7 +30,7 @@
       <ul
         :id="listId"
         ref="listWrapper"
-        class="d-p0 d-ps-relative"
+        :class="['d-ps-relative', 'd-px0', DROPDOWN_PADDING_CLASSES[padding]]"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
         @mousemove.capture="onMouseHighlight"
@@ -49,6 +49,9 @@
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { DtPopover } from '../popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
+import {
+  DROPDOWN_PADDING_CLASSES,
+} from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 
 export default {
@@ -86,11 +89,14 @@ export default {
     },
 
     /**
-     * Padding size class for the dropdown.
+     * Vertical padding size around the list element.
      */
     padding: {
       type: String,
-      default: 'none',
+      default: 'small',
+      validator: (padding) => {
+        return Object.keys(DROPDOWN_PADDING_CLASSES).some((item) => item === padding);
+      },
     },
 
     /**
@@ -173,6 +179,7 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
+      DROPDOWN_PADDING_CLASSES,
       openedWithKeyboard: false,
     };
   },
