@@ -15,7 +15,7 @@ jobs:
       - name: Check if -vue3 branch exists
         if: "!contains( github.event.pull_request.labels.*.name, 'vue2-only')"
         id: branch_exists
-        run: git ls-remote --heads origin ${{ github.head_ref }}-vue3
+        run: git ls-remote --exit-code --heads origin ${{ github.head_ref }}-vue3
 
       - name: Check if -vue3 branch exists
         if: failure()
