@@ -1,6 +1,5 @@
 import { assert } from 'chai';
 import {
-  createLocalVue,
   shallowMount,
   mount,
 } from '@vue/test-utils';
@@ -18,7 +17,7 @@ import InputsFixture from './decorators/inputs.vue';
 import DtInputGroup from './input_group.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   name: 'my-input-group',
 };
 const baseAttrs = { 'aria-label': 'Test Input Group' };
@@ -31,7 +30,7 @@ describe('Input Group Tests', function () {
   let inputGroupMessages;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = baseAttrs;
   let slots = {};
   let provide = {};
@@ -40,40 +39,35 @@ describe('Input Group Tests', function () {
   const _setChildWrappers = () => {
     inputGroup = wrapper.find('[data-qa="input-group"]');
     inputGroupLegend = wrapper.find('[data-qa="input-group-legend"]');
-    inputGroupMessages = wrapper.find('[data-qa="input-group-messages"]');
+    inputGroupMessages = wrapper.findComponent('[data-qa="input-group-messages"]');
   };
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtInputGroup, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   const _mountWrappers = () => {
     wrapper = mount(DtInputGroup, {
-      propsData,
+      props,
       slots,
       attrs,
       provide,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = baseAttrs;
     slots = {};
     provide = {};
@@ -114,7 +108,7 @@ describe('Input Group Tests', function () {
 
       describe('When the input group renders', function () {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(function () { _mountWrappers(); });
 
         it('should have inputs', function () {
           assert.lengthOf(wrapper.findAllComponents(InputFixture), 3);
@@ -125,7 +119,7 @@ describe('Input Group Tests', function () {
     describe('When a legend is provided via prop', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, legend };
+        props = { ...baseProps, legend };
         _setWrappers();
       });
 
@@ -148,8 +142,8 @@ describe('Input Group Tests', function () {
       describe('When a legend is also provided via prop', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = {
-            ...basePropsData,
+          props = {
+            ...baseProps,
             legend: 'A legend which should not be displayed',
           };
           _setWrappers();
@@ -169,7 +163,7 @@ describe('Input Group Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, messages: ['Error'] };
+        props = { ...baseProps, messages: ['Error'] };
       });
 
       describe('When the validation messages are shown', function () {
@@ -185,7 +179,7 @@ describe('Input Group Tests', function () {
       describe('When the validation messages are hidden', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...propsData, showMessages: false };
+          props = { ...props, showMessages: false };
           _setWrappers();
         });
 
@@ -229,7 +223,7 @@ describe('Input Group Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, value: initialValue };
+        props = { ...baseProps, value: initialValue };
       });
 
       describe('When an input is not selected', function () {
@@ -269,7 +263,7 @@ describe('Input Group Tests', function () {
     describe('When the input group is disabled', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, disabled: true };
+        props = { ...baseProps, disabled: true };
         _mountWrappers();
       });
 
@@ -295,13 +289,13 @@ describe('Input Group Tests', function () {
 
     // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
-      propsData[childClassName] = customClass;
+      props[childClassName] = customClass;
       _setWrappers();
       element = wrapper.find(selector);
     };
 
     const _setupChildPropsTest = (childPropsName, selector) => {
-      propsData[childPropsName] = childProps;
+      props[childPropsName] = childProps;
       _setWrappers();
       element = wrapper.find(selector);
     };
@@ -325,8 +319,8 @@ describe('Input Group Tests', function () {
     });
 
     beforeEach(function () {
-      propsData = {
-        ...basePropsData,
+      props = {
+        ...baseProps,
         legend: 'My Legend',
         messages: ['Error'],
       };
@@ -377,7 +371,7 @@ describe('Input Group Tests', function () {
 
       // Helpers
       const _setupQaLabelTest = (qaLabelPropName) => {
-        propsData[qaLabelPropName] = customQaLabel;
+        props[qaLabelPropName] = customQaLabel;
         _setWrappers();
       };
 

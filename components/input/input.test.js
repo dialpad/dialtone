@@ -1,14 +1,14 @@
 import sinon from 'sinon';
 import { assert } from 'chai';
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { INPUT_SIZES } from './input_constants';
 import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd.vue';
 import DtInput from './input.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   type: 'text',
-  value: 'value',
+  modelValue: 'value',
 };
 
 const baseAttrs = {
@@ -28,10 +28,9 @@ describe('Dialtone Vue Input tests', function () {
   let rightIconWrapper;
 
   // Test Environment
-  let propsData;
+  let props;
   let attrs;
   let slots;
-  let listeners;
   let inputStub;
 
   // Helpers
@@ -47,30 +46,26 @@ describe('Dialtone Vue Input tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtInput, {
-      propsData,
+      props,
       attrs,
       slots,
-      listeners,
-      localVue: this.localVue,
     });
   };
 
   // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   beforeEach(function () {
-    propsData = basePropsData;
-    attrs = baseAttrs;
+    props = baseProps;
     inputStub = sinon.stub();
-    listeners = { input: inputStub };
+    attrs = {
+      ...baseAttrs,
+      onInput: inputStub,
+    };
     _mountWrapper();
   });
 
   // Test Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = baseAttrs;
     slots = {};
   });
@@ -109,14 +104,14 @@ describe('Dialtone Vue Input tests', function () {
 
       it('should render the native input', function () { assert.isTrue(nativeInput.exists()); });
       it('should have a type prop', function () {
-        assert.strictEqual(nativeInput.attributes('type'), propsData.type);
+        assert.strictEqual(nativeInput.attributes('type'), props.type);
       });
       it('should have a bound value prop', function () {
-        assert.strictEqual(nativeInput.element.value, propsData.value);
+        assert.strictEqual(nativeInput.element.value, props.modelValue);
       });
       it('should have input class', function () { assert.isTrue(nativeInput.classes().includes('d-input')); });
       it('should display the initial value prop', function () {
-        assert.strictEqual(nativeInput.element.value, wrapper.vm.value);
+        assert.strictEqual(nativeInput.element.value, wrapper.vm.modelValue);
       });
     });
 
@@ -132,7 +127,7 @@ describe('Dialtone Vue Input tests', function () {
       it('should not have a bound value prop', function () { assert.isUndefined(nativeTextarea.attributes().value); });
       it('should have textarea class', function () { assert.isTrue(nativeTextarea.classes().includes('d-textarea')); });
       it('should display the initial value prop', function () {
-        assert.strictEqual(nativeTextarea.element.value, wrapper.vm.value);
+        assert.strictEqual(nativeTextarea.element.value, wrapper.vm.modelValue);
       });
     });
 
@@ -218,7 +213,7 @@ describe('Dialtone Vue Input tests', function () {
       describe('When a size is provided', function () {
         // Test Setup
         beforeEach(async function () {
-          propsData = { size: INPUT_SIZES.EXTRA_LARGE };
+          props = { size: INPUT_SIZES.EXTRA_LARGE };
           _mountWrapper();
           _setChildWrappers();
         });
@@ -259,7 +254,7 @@ describe('Dialtone Vue Input tests', function () {
       describe('When a size is provided', function () {
         // Test Setup
         beforeEach(async function () {
-          propsData = { size: INPUT_SIZES.EXTRA_LARGE };
+          props = { size: INPUT_SIZES.EXTRA_LARGE };
           _mountWrapper();
           _setChildWrappers();
         });
@@ -370,7 +365,7 @@ describe('Dialtone Vue Input tests', function () {
 
       // Test Setup
       beforeEach(async function () {
-        propsData = { size, label: 'Label', description: 'Description' };
+        props = { size, label: 'Label', description: 'Description' };
         _mountWrapper();
         _setChildWrappers();
       });
@@ -414,7 +409,7 @@ describe('Dialtone Vue Input tests', function () {
 
       // Test Setup
       beforeEach(async function () {
-        propsData = {
+        props = {
           currentLength,
           validate,
         };
@@ -492,7 +487,7 @@ describe('Dialtone Vue Input tests', function () {
         });
 
         it('should show an error validation message', async function () {
-          await wrapper.setProps({ value: 'new value with 28 characters' });
+          await wrapper.setProps({ modelValue: 'new value with 28 characters' });
 
           const inputMessages = wrapper.findAll('.d-validation-message');
           const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
@@ -537,22 +532,22 @@ describe('Dialtone Vue Input tests', function () {
 
         describe('When a new value is provided', function () {
           // Test Setup
-          beforeEach(async function () { await wrapper.setProps({ value: newValue }); });
+          beforeEach(async function () { await wrapper.setProps({ modelValue: newValue }); });
 
           it('should update input value', function () { assert.equal(nativeInput.element.value, newValue); });
         });
 
         describe('When a new value exceeds the maximum length', function () {
           it('should emit an "update:invalid" event with true', async function () {
-            await wrapper.setProps({ value: newValue });
+            await wrapper.setProps({ modelValue: newValue });
             assert.equal(wrapper.emitted()['update:invalid'][0][0], true);
           });
         });
 
         describe('When a new value is within the maximum length after exceeding it', function () {
           it('should emit an "update:invalid" event with false', async function () {
-            await wrapper.setProps({ value: newValue });
-            await wrapper.setProps({ value: userTextInputVal });
+            await wrapper.setProps({ modelValue: newValue });
+            await wrapper.setProps({ modelValue: userTextInputVal });
             assert.equal(wrapper.emitted()['update:invalid'][1][0], false);
           });
         });
@@ -570,22 +565,22 @@ describe('Dialtone Vue Input tests', function () {
 
         describe('When a new value is provided', function () {
           // Test Setup
-          beforeEach(async function () { await wrapper.setProps({ value: newValue }); });
+          beforeEach(async function () { await wrapper.setProps({ modelValue: newValue }); });
 
           it('should update input value', function () { assert.equal(nativeTextarea.element.value, newValue); });
         });
 
         describe('When a new value exceeds the maximum length', function () {
           it('should emit an "update:invalid" event with true', async function () {
-            await wrapper.setProps({ value: newValue });
+            await wrapper.setProps({ modelValue: newValue });
             assert.equal(wrapper.emitted()['update:invalid'][0][0], true);
           });
         });
 
         describe('When a new value is within the maximum length after exceeding it', function () {
           it('should emit an "update:invalid" event with false', async function () {
-            await wrapper.setProps({ value: newValue });
-            await wrapper.setProps({ value: userTextInputVal });
+            await wrapper.setProps({ modelValue: newValue });
+            await wrapper.setProps({ modelValue: userTextInputVal });
             assert.equal(wrapper.emitted()['update:invalid'][1][0], false);
           });
         });
@@ -601,11 +596,11 @@ describe('Dialtone Vue Input tests', function () {
 
     it('should handle pass through props/attrs', async function () {
       // Validating all attrs from base-input get passed down to the native input.
-      assert.include(nativeInput.attributes(), attrs);
+      assert.include(nativeInput.attributes(), baseAttrs);
       assert.isUndefined(nativeInput.attributes().disabled);
 
       await wrapper.setProps({ disabled: true });
-      assert.equal(nativeInput.attributes().disabled, 'disabled');
+      assert.strictEqual(nativeInput.element.disabled, true);
     });
   });
 });
