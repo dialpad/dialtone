@@ -127,7 +127,7 @@ export default {
 
     /**
      * The size of the button.
-     * @values xs, s, md, lg, xl
+     * @values xs, sm, md, lg, xl
      * @see https://dialpad.design/components/button
      */
     size: {
