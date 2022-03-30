@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtDefaultListItem from './default_list_item.vue';
 
 describe('Dialtone Vue DefaultListItem tests', function () {
@@ -28,10 +28,6 @@ describe('Dialtone Vue DefaultListItem tests', function () {
   };
 
   // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   beforeEach(function () {
     _mountWrapper();
   });

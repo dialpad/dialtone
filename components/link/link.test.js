@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
   LINK_KIND_MODIFIERS,
@@ -12,7 +12,7 @@ import {
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   href: '#',
 };
 
@@ -22,7 +22,7 @@ describe('Dialtone Vue Link tests', function () {
   let nativeLink;
 
   // Environment
-  const propsData = basePropsData;
+  const props = baseProps;
   const slots = { default: 'Slotted Link' };
 
   // Helpers
@@ -31,10 +31,9 @@ describe('Dialtone Vue Link tests', function () {
   };
 
   const _mountWrapper = () => {
-    wrapper = shallowMount(DtLink, {
-      propsData,
+    wrapper = mount(DtLink, {
+      props,
       slots,
-      localVue: createLocalVue(),
     });
     _setWrappers();
   };

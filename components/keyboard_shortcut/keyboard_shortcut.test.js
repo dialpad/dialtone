@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtKeyboardShortcut from './keyboard_shortcut.vue';
 import { SHORTCUTS_ALIASES_LIST } from './keyboard_shortcut_constants';
 
@@ -11,7 +11,7 @@ import IconArrowForward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowForw
 import IconArrowBackward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowBackwards';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   shortcut: SHORTCUTS_ALIASES_LIST.join('+').trim(),
 };
 
@@ -21,7 +21,7 @@ describe('DtKeyboardShortcut Tests', function () {
   let mountedIcons = {};
 
   // Environment
-  const propsData = basePropsData;
+  const props = baseProps;
 
   // Helpers
   const _setChildWrappers = () => {
@@ -37,8 +37,7 @@ describe('DtKeyboardShortcut Tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtKeyboardShortcut, {
-      propsData,
-      localVue: this.localVue,
+      props,
     });
     _setChildWrappers();
   };
@@ -48,11 +47,6 @@ describe('DtKeyboardShortcut Tests', function () {
       assert.isTrue(mountedIcon.exists());
     });
   }
-
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   describe('Presentation Tests', function () {
     // Setup

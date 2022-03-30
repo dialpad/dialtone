@@ -1,10 +1,10 @@
 import sinon from 'sinon';
 import { assert } from 'chai';
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtListItem from './list_item.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from './list_item_constants.js';
 
-const basePropsData = {
+const baseProps = {
   id: 'dt-item',
   navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
 };
@@ -14,38 +14,36 @@ describe('Dialtone Vue ListItem tests', function () {
   let wrapper;
 
   // Test Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let slots;
-  let listeners;
+  let attrs;
   let provide;
   let clickStub;
 
   const _mountWrapper = () => {
     wrapper = mount(DtListItem, {
-      propsData,
+      props,
       slots,
-      listeners,
-      provide,
-      localVue: this.localVue,
+      attrs,
+      global: {
+        provide,
+      },
     });
   };
 
   // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   beforeEach(function () {
     clickStub = sinon.stub();
-    listeners = { click: clickStub };
+    attrs = { onClick: clickStub };
     provide = { highlightId: () => 'dt-item2' };
     _mountWrapper();
   });
 
   // Test Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     slots = {};
+    attrs = {};
     provide = {};
   });
 
@@ -85,8 +83,8 @@ describe('Dialtone Vue ListItem tests', function () {
       it('should not apply the class to the wrapper.', function () {
         assert.isFalse(wrapper.classes('dt-list-item--highlighted'));
       });
-      it('aria-selected should not be set', function () {
-        assert.isUndefined(wrapper.attributes('aria-selected'));
+      it('aria-selected should be set to "false"', function () {
+        assert.isTrue(wrapper.attributes('aria-selected') === 'false');
       });
     });
 
@@ -111,13 +109,13 @@ describe('Dialtone Vue ListItem tests', function () {
       });
 
       it('should use the provided element type on the wrapper.', function () {
-        assert.isTrue(wrapper.is('div'));
+        assert.equal(wrapper.element.tagName, 'DIV');
       });
     });
 
     describe('When element type is not provided', function () {
       it('should use the default element type on the wrapper.', function () {
-        assert.isTrue(wrapper.is('li'));
+        assert.equal(wrapper.element.tagName, 'LI');
       });
     });
   });

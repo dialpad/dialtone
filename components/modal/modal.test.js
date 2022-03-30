@@ -1,9 +1,10 @@
 import { assert } from 'chai';
 import DtButton from '../button/button.vue';
 import DtModal from './modal.vue';
-import { createLocalVue, shallowMount, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 
-const basePropsData = {
+const baseProps = {
+  show: true,
   closeButtonProps: {
     ariaLabel: 'test close aria label',
   },
@@ -19,15 +20,12 @@ describe('Dialtone Vue Modal Tests', function () {
 
   let _setElements;
 
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
+  // Setup
   beforeEach(function () {
-    wrapper = shallowMount(DtModal, {
-      localVue: this.localVue,
-      propsData: basePropsData,
-      stubs: { DtButton },
+    wrapper = mount(DtModal, {
+      props: {
+        ...baseProps,
+      },
     });
 
     _setElements = function () {
@@ -57,6 +55,7 @@ describe('Dialtone Vue Modal Tests', function () {
 
   it('Close button is hidden if hideClose prop is true', async function () {
     await wrapper.setProps({ hideClose: true });
+    _setElements();
     assert.isFalse(closeBtn.exists());
   });
 
@@ -64,10 +63,9 @@ describe('Dialtone Vue Modal Tests', function () {
     const contentText = 'test content';
     const headerText = 'test header';
 
-    wrapper = shallowMount(DtModal, {
-      localVue: this.localVue,
-      propsData: {
-        ...basePropsData,
+    wrapper = mount(DtModal, {
+      props: {
+        ...baseProps,
         copy: 'non-slot copy',
         title: 'non-slot title',
       },
@@ -75,7 +73,6 @@ describe('Dialtone Vue Modal Tests', function () {
         default: `<p>${contentText}</p>`,
         header: `<h1>${headerText}</h1>`,
       },
-      stubs: { DtButton },
     });
     _setElements();
 
@@ -87,7 +84,7 @@ describe('Dialtone Vue Modal Tests', function () {
     const labelProp = 'aria-label';
     const newAriaLabel = 'NEW test close aria label';
 
-    assert.equal(closeBtn.attributes(labelProp), basePropsData.closeButtonProps.ariaLabel);
+    assert.equal(closeBtn.attributes(labelProp), baseProps.closeButtonProps.ariaLabel);
     await wrapper.setProps({ closeButtonProps: { ariaLabel: newAriaLabel } });
     _setElements();
     assert.equal(closeBtn.attributes(labelProp), newAriaLabel);
@@ -96,14 +93,8 @@ describe('Dialtone Vue Modal Tests', function () {
   it('Should emit a sync-able update event when overlay / close-icon are clicked' +
      ', or escape key is pressed', async function () {
     wrapper = mount(DtModal, {
-      localVue: this.localVue,
-      propsData: {
-        ...basePropsData,
-        show: true,
-      },
-      stubs: {
-        DtButton,
-        transition: false,
+      props: {
+        ...baseProps,
       },
     });
     _setElements();
@@ -130,6 +121,7 @@ describe('Dialtone Vue Modal Tests', function () {
     assert.isFalse(overlay.classes(modalClass));
 
     await wrapper.setProps({ modalClass });
+    _setElements();
     assert.isTrue(overlay.classes(modalClass));
   });
 });

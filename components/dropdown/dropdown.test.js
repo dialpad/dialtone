@@ -1,10 +1,10 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { config, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
 import sinon from 'sinon';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   open: true,
 };
 
@@ -21,30 +21,33 @@ describe('Dialtone Vue Dropdown Tests', function () {
   // Wrappers
   let wrapper;
   let anchorElement;
+  let popover;
+  let popoverContent;
   let listWrapper;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let slots = baseSlots;
-  let scopedSlots = {};
-  let listeners;
+  let attrs;
   let highlightStub;
 
   // Helpers
   const _setChildWrappers = () => {
     anchorElement = wrapper.find('#anchor');
-    listWrapper = wrapper.find('[data-qa="dt-dropdown-list-wrapper"]');
+    popover = wrapper.findComponent({ ref: 'popover' });
+    popoverContent = popover.findComponent({ ref: 'content' });
+    listWrapper = popoverContent.find('[data-qa="dt-dropdown-list-wrapper"]');
   };
 
   const _setWrappers = () => {
     wrapper = mount(DtDropdown, {
-      propsData,
+      props,
       slots,
-      scopedSlots,
-      listeners,
-      localVue: this.localVue,
-      stubs: {
-        transition: false,
+      attrs,
+      global: {
+        stubs: {
+          transition: false,
+        },
       },
     });
     _setChildWrappers();
@@ -52,17 +55,19 @@ describe('Dialtone Vue Dropdown Tests', function () {
 
   // Setup
   before(function () {
-    this.localVue = createLocalVue();
+    config.renderStubDefaultSlot = true;
   });
 
-  // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
-    slots = baseSlots;
-    scopedSlots = {};
-    listeners = {};
+  // Test Teardown
+  after(function () {
+    config.renderStubDefaultSlot = false;
   });
-  after(function () {});
+
+  afterEach(function () {
+    props = baseProps;
+    slots = baseSlots;
+    attrs = {};
+  });
 
   describe('Presentation Tests', function () {
     // Test setup
@@ -75,7 +80,7 @@ describe('Dialtone Vue Dropdown Tests', function () {
     describe('When a list is provided', function () {
       it('should render the list wrapper', function () { assert.isTrue(listWrapper.exists()); });
       it('should render the anchor', function () { assert.isTrue(anchorElement.exists()); });
-      it('should render the list', function () { assert.isTrue(wrapper.find('#list').exists()); });
+      it('should render the list', function () { assert.isTrue(listWrapper.find('#list').exists()); });
     });
   });
 
@@ -83,8 +88,8 @@ describe('Dialtone Vue Dropdown Tests', function () {
     describe('When the dropdown is not open', function () {
       // Test setup
       beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+        props = {
+          ...baseProps,
           open: false,
         };
         _setWrappers();
@@ -98,11 +103,10 @@ describe('Dialtone Vue Dropdown Tests', function () {
     describe('When the dropdown is open', function () {
       // Test setup
       beforeEach(function () {
-        scopedSlots = {
-          anchor: `<template #anchor="{ attrs }"><a href="#" id="anchor" v-bind="attrs">Link</a></template>`,
+        slots = {
+          anchor: `<template #anchor="attrs"><a href="#" id="anchor" v-bind="attrs">Link</a></template>`,
         };
         _setWrappers();
-        wrapper.vm.$nextTick();
       });
 
       it('aria-expanded should be "true"', function () {
@@ -116,7 +120,7 @@ describe('Dialtone Vue Dropdown Tests', function () {
     // Test setup
     beforeEach(function () {
       highlightStub = sinon.stub();
-      listeners = { highlight: highlightStub };
+      attrs = { onHighlight: highlightStub };
       _setWrappers();
     });
 
