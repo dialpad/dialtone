@@ -4,6 +4,7 @@
       <div
         class="d-modal--transparent"
         :aria-hidden="modal && isOpen ? 'false' : 'true'"
+        @click.prevent.stop
       />
     </portal>
     <component
@@ -17,9 +18,8 @@
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
         data-qa="dt-popover-anchor"
-        @mouseup.capture="defaultToggleOpen"
+        @click.capture="defaultToggleOpen"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
-        @keydown.enter.capture="defaultToggleOpen"
         @keydown.escape.capture="closePopover"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
