@@ -1,11 +1,11 @@
 import sinon from 'sinon';
 import { assert } from 'chai';
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtCombobox from './combobox.vue';
 import DtInput from '../input/input.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   listAriaLabel: '',
   listId: 'list',
   showList: true,
@@ -18,10 +18,9 @@ describe('Dialtone Vue Combobox tests', function () {
   let listWrapper;
 
   // Test Environment
-  let propsData;
+  let props;
   let attrs;
   let slots;
-  let listeners;
   let selectStub;
   let escapeStub;
   let highlightStub;
@@ -34,32 +33,26 @@ describe('Dialtone Vue Combobox tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtCombobox, {
-      propsData,
+      props,
       attrs,
       slots,
-      listeners,
-      localVue: this.localVue,
     });
   };
 
   // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   beforeEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     selectStub = sinon.stub();
     escapeStub = sinon.stub();
     highlightStub = sinon.stub();
-    listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub };
+    attrs = { onSelect: selectStub, onEscape: escapeStub, onHighlight: highlightStub };
     _mountWrapper();
     _setChildWrappers();
   });
 
   // Test Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     slots = {};
   });
 

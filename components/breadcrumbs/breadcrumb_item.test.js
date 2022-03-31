@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
 
 const breadcrumbItemOption = {
@@ -14,9 +14,8 @@ describe('Dialtone Vue Breadcrumb tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtBreadcrumbItem, {
-      propsData: breadcrumbItemOption,
+      props: breadcrumbItemOption,
       slots: breadcrumbItemSlot,
-      localVue: createLocalVue(),
     });
   };
 

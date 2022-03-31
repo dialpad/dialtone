@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { assert } from 'chai';
 import sinon from 'sinon';
 import {
@@ -20,7 +20,7 @@ import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 
 // Constants
 const baseValue = 'Value';
-const basePropsData = {
+const baseProps = {
   label: 'My Checkbox Label',
   value: baseValue,
 };
@@ -35,11 +35,10 @@ describe('Checkbox Tests', function () {
 
   // Environment
   const value = baseValue;
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
-  let listeners = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -50,13 +49,13 @@ describe('Checkbox Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtCheckbox, {
-      propsData,
+    wrapper = mount(DtCheckbox, {
+      props,
       attrs,
       slots,
-      provide,
-      listeners,
-      localVue: this.localVue,
+      global: {
+        provide,
+      },
     });
     _setChildWrappers();
   };
@@ -73,18 +72,14 @@ describe('Checkbox Tests', function () {
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
-    listeners = {};
   });
   after(function () {});
 
@@ -106,14 +101,14 @@ describe('Checkbox Tests', function () {
 
       describe('Checkbox Label Tests', function () {
         it('should exist', function () { assert.isTrue(label.exists()); });
-        it('should match provided label prop', function () { assert.strictEqual(label.text(), propsData.label); });
+        it('should match provided label prop', function () { assert.strictEqual(label.text(), props.label); });
       });
     });
 
     describe('When a label prop is provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, label: 'My Label' };
+        props = { ...baseProps, label: 'My Label' };
         _setWrappers();
       });
 
@@ -123,7 +118,7 @@ describe('Checkbox Tests', function () {
     describe('When a description prop is provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, description: 'Description' };
+        props = { ...baseProps, description: 'Description' };
         _setWrappers();
       });
 
@@ -133,7 +128,7 @@ describe('Checkbox Tests', function () {
     describe('When neither a label prop/slot nor a description prop/slot is provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { value: baseValue };
+        props = { value: baseValue };
         slots = {};
         _setWrappers();
       });
@@ -154,7 +149,7 @@ describe('Checkbox Tests', function () {
     describe('When a validation state is provided', function () {
       // Helpers
       const _setupValidationTest = (validationState) => {
-        propsData = { ...basePropsData, description: 'Description', validationState };
+        props = { ...baseProps, description: 'Description', validationState };
         _setWrappers();
       };
 
@@ -177,7 +172,7 @@ describe('Checkbox Tests', function () {
     describe('When checked', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, checked: true };
+        props = { ...baseProps, checked: true };
         _setWrappers();
       });
 
@@ -187,7 +182,7 @@ describe('Checkbox Tests', function () {
     describe('When disabled', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, disabled: true };
+        props = { ...baseProps, disabled: true };
         _setWrappers();
       });
 
@@ -252,7 +247,7 @@ describe('Checkbox Tests', function () {
       describe('When checked', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...basePropsData, checked: true };
+          props = { ...baseProps, checked: true };
           _setWrappers();
         });
 
@@ -269,7 +264,7 @@ describe('Checkbox Tests', function () {
       describe('When disabled', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...basePropsData, disabled: true };
+          props = { ...baseProps, disabled: true };
           _setWrappers();
         });
 
@@ -286,7 +281,7 @@ describe('Checkbox Tests', function () {
 
     describe('When indeterminate', function () {
       before(function () {
-        propsData = { ...basePropsData, indeterminate: true };
+        props = { ...baseProps, indeterminate: true };
         _setWrappers();
       });
       it('shows indeterminate visual state', function () { itBehavesLikeIndeterminate(input); });
@@ -306,7 +301,7 @@ describe('Checkbox Tests', function () {
 
         // Test Setup
         beforeEach(function () {
-          listeners = { input: inputListenerSpy };
+          attrs = { onInput: inputListenerSpy };
           _setWrappers();
         });
 
@@ -335,7 +330,7 @@ describe('Checkbox Tests', function () {
             validationState: groupValidationState,
           },
         };
-        propsData = { ...basePropsData, description: 'Description' };
+        props = { ...baseProps, description: 'Description' };
         _setWrappers();
       };
 
@@ -376,7 +371,7 @@ describe('Checkbox Tests', function () {
         describe('When the checkbox has a validation state', function () {
           // Test Setup
           beforeEach(function () {
-            propsData = { ...propsData, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
+            props = { ...props, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
             _setWrappers();
           });
 
@@ -395,13 +390,13 @@ describe('Checkbox Tests', function () {
 
     // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
-      propsData[childClassName] = customClass;
+      props[childClassName] = customClass;
       _setWrappers();
       element = wrapper.find(selector);
     };
 
     const _setupChildPropsTest = (childPropsName, selector) => {
-      propsData[childPropsName] = childProps;
+      props[childPropsName] = childProps;
       _setWrappers();
       element = wrapper.find(selector);
     };
@@ -424,7 +419,7 @@ describe('Checkbox Tests', function () {
       childProps[propName] = propValue;
     });
     beforeEach(function () {
-      propsData = { ...basePropsData, label: 'Label', description: 'Description' };
+      props = { ...baseProps, label: 'Label', description: 'Description' };
     });
 
     describe('When an input class is provided', function () {

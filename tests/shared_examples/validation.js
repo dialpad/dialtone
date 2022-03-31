@@ -1,5 +1,4 @@
 import { assert } from 'chai';
-import Vue from 'vue';
 
 export function itBehavesLikePassesCustomPropValidation (prop, value) {
   it('passes custom prop validation', function () {
@@ -14,13 +13,13 @@ export function itBehavesLikeFailsCustomPropValidation (prop, value) {
 }
 
 export const itBehavesLikeDoesNotRaiseAnyVueWarnings = () => {
-  it('should not raise any warnings', function () { assert.isTrue(Vue.util.warn.notCalled); });
+  it('should not raise any warnings', function () { assert.isTrue(console.warn.notCalled); });
 };
 
 export const itBehavesLikeRaisesSingleVueWarning = (message) => {
-  it('should raise a single warning', function () { assert.isTrue(Vue.util.warn.calledOnce); });
+  it('should raise a single warning', function () { assert.isTrue(console.warn.calledOnce); });
   it('should have expected warning message', function () {
-    assert.strictEqual(Vue.util.warn.firstCall.args[0], message);
+    assert.strictEqual(console.warn.firstCall.args[0], message);
   });
 };
 

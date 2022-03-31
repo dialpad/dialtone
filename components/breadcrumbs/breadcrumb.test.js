@@ -1,10 +1,10 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtBreadcrumb from './breadcrumbs.vue';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   inverted: false,
   breadcrumbs: [{
     url: '#',
@@ -36,7 +36,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   let breadcrumbItems;
 
   // Environment
-  const propsData = basePropsData;
+  const props = baseProps;
 
   // Helpers
   const _setWrappers = () => {
@@ -46,8 +46,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtBreadcrumb, {
-      propsData,
-      localVue: createLocalVue(),
+      props,
     });
     _setWrappers();
   };
@@ -60,21 +59,21 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the breadcrumbs', function () { assert.exists(breadcrumbs.exists(), 'breadcrumbs exist'); });
-    it('should render the item breadcrumb', function () { assert.exists(breadcrumbItems.exists(), 'items exist'); });
+    it('should render the item breadcrumb', function () { assert.isNotEmpty(breadcrumbItems); });
 
     describe('When the breadcrumb has default state', function () {
       it('should has correct aria-current', function () {
         const elementWithValidAria = breadcrumbItems.filter(item => {
-          return item.find('[aria-current="location"]').constructor.name === 'VueWrapper';
+          return item.find('[aria-current="location"]').exists();
         });
         assert.equal(elementWithValidAria.length, 1);
       });
       it('should has correct rendered items', function () {
-        assert.equal(breadcrumbItems.length, basePropsData.breadcrumbs.length);
+        assert.equal(breadcrumbItems.length, baseProps.breadcrumbs.length);
       });
       it('should has correct sequence', function () {
-        assert.equal(breadcrumbItems.length, basePropsData.breadcrumbs.length);
-        basePropsData.breadcrumbs.forEach(({ label }, i) => {
+        assert.equal(breadcrumbItems.length, baseProps.breadcrumbs.length);
+        baseProps.breadcrumbs.forEach(({ label }, i) => {
           assert.equal(breadcrumbItems.at(i).text(), label);
         });
       });
@@ -82,7 +81,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
 
     describe('When a inverted is provided to breadcrumbs', function () {
       before(function () {
-        basePropsData.inverted = true;
+        baseProps.inverted = true;
       });
       it('should render label', function () {
         assert.isTrue(breadcrumbs.classes().includes(BREADCRUMBS_INVERTED_MODIFIER));
@@ -102,7 +101,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   describe('Accessibility Tests', function () {
     describe('When a new area-label is provided', function () {
       before(function () {
-        basePropsData.ariaLabel = 'newAria';
+        baseProps.ariaLabel = 'newAria';
       });
 
       it('should update area-label value', function () {

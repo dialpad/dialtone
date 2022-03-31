@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtButtonGroup from './button_group.vue';
 import { DtButton } from '../button';
 import ButtonsFixture from './buttons_decorator.vue';
@@ -9,7 +9,7 @@ import {
 } from '../../tests/shared_examples/validation';
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 
 describe('DtButtonGroup Tests', function () {
   // Wrappers
@@ -17,7 +17,7 @@ describe('DtButtonGroup Tests', function () {
   let buttonGroup;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -28,25 +28,23 @@ describe('DtButtonGroup Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtButtonGroup, {
-      propsData,
+    wrapper = mount(DtButtonGroup, {
+      props,
       attrs,
       slots,
-      provide,
-      localVue: this.localVue,
+      global: {
+        provide,
+      },
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};

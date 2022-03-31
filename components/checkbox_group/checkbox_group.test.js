@@ -1,8 +1,5 @@
-import Vue from 'vue';
 import { assert } from 'chai';
 import {
-  createLocalVue,
-  shallowMount,
   mount,
 } from '@vue/test-utils';
 import {
@@ -23,7 +20,7 @@ import CheckboxesFixture from './checkboxes_decorator.vue';
 import DtCheckboxGroup from './checkbox_group.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   name: 'test-checkbox-group',
 };
 const baseAttrs = { 'aria-label': 'Test Checkbox Group' };
@@ -36,7 +33,7 @@ describe('Checkbox Group Tests', function () {
   let checkboxGroupMessages;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = baseAttrs;
   let slots = {};
   let provide = {};
@@ -45,40 +42,27 @@ describe('Checkbox Group Tests', function () {
   const _setChildWrappers = () => {
     checkboxGroup = wrapper.find('[data-qa="checkbox-group"]');
     checkboxGroupLegend = wrapper.find('[data-qa="checkbox-group-legend"]');
-    checkboxGroupMessages = wrapper.find('[data-qa="checkbox-group-messages"]');
-  };
-
-  const _setWrappers = () => {
-    wrapper = shallowMount(DtCheckboxGroup, {
-      propsData,
-      attrs,
-      slots,
-      provide,
-      localVue: this.localVue,
-    });
-    _setChildWrappers();
+    checkboxGroupMessages = wrapper.findComponent('[data-qa="checkbox-group-messages"]');
   };
 
   const _mountWrappers = () => {
     wrapper = mount(DtCheckboxGroup, {
-      propsData,
+      props,
       slots,
       attrs,
-      provide,
-      localVue: this.localVue,
+      global: {
+        provide,
+      },
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = baseAttrs;
     slots = {};
     provide = {};
@@ -99,7 +83,7 @@ describe('Checkbox Group Tests', function () {
 
     describe('When rendered with default content', function () {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(function () { _mountWrappers(); });
 
       it('should have a checkbox group', function () { assert.strictEqual(checkboxGroup.exists(), true); });
       it('should not have a legend', function () { assert.strictEqual(checkboxGroupLegend.exists(), false); });
@@ -119,7 +103,7 @@ describe('Checkbox Group Tests', function () {
 
       describe('When the checkbox group renders', function () {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(function () { _mountWrappers(); });
 
         it('should have checkboxes', function () {
           assert.lengthOf(wrapper.findAllComponents(DtCheckbox), 3);
@@ -130,8 +114,8 @@ describe('Checkbox Group Tests', function () {
     describe('When a legend is provided via prop', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, legend };
-        _setWrappers();
+        props = { ...baseProps, legend };
+        _mountWrappers();
       });
 
       itBehavesLikeHasLegend();
@@ -145,7 +129,7 @@ describe('Checkbox Group Tests', function () {
 
       describe('When a legend is not provided via prop', function () {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(function () { _mountWrappers(); });
 
         itBehavesLikeHasLegend();
       });
@@ -153,11 +137,11 @@ describe('Checkbox Group Tests', function () {
       describe('When a legend is also provided via prop', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = {
-            ...basePropsData,
+          props = {
+            ...baseProps,
             legend: 'A legend which should not be displayed',
           };
-          _setWrappers();
+          _mountWrappers();
         });
 
         itBehavesLikeHasLegend();
@@ -168,35 +152,38 @@ describe('Checkbox Group Tests', function () {
       // Shared Examples
       const itBehavesLikeHasValidationMessages = (numMessages) => {
         it('should have validation messages', function () {
-          assert.lengthOf(checkboxGroupMessages?.props('validationMessages'), numMessages);
+          assert.lengthOf(checkboxGroupMessages?.vm.validationMessages, numMessages);
         });
       };
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, messages: ['Error'] };
+        props = { ...baseProps, messages: ['Error'] };
       });
 
       describe('When the validation messages are shown', function () {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(function () { _mountWrappers(); });
 
         itBehavesLikeHasValidationMessages(1);
         it('should show validation messages', function () {
-          assert.strictEqual(checkboxGroupMessages?.props('showMessages'), true);
+          assert.strictEqual(checkboxGroupMessages?.vm.showMessages, true);
         });
       });
 
       describe('When the validation messages are hidden', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...propsData, showMessages: false };
-          _setWrappers();
+          props = { ...props, showMessages: false };
+          _mountWrappers();
         });
 
-        itBehavesLikeHasValidationMessages(1);
+        it('should have validation messages', function () {
+          assert.lengthOf(wrapper?.props('messages'), 1);
+        });
+
         it('should hide validation messages', function () {
-          assert.strictEqual(checkboxGroupMessages?.props('showMessages'), false);
+          assert.strictEqual(wrapper?.props('showMessages'), false);
         });
       });
     });
@@ -229,7 +216,7 @@ describe('Checkbox Group Tests', function () {
     describe('When initial selected values are provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, selectedValues: [selectedValue] };
+        props = { ...baseProps, selectedValues: [selectedValue] };
         _mountWrappers();
       });
 
@@ -273,7 +260,7 @@ describe('Checkbox Group Tests', function () {
     describe('When the checkbox group is disabled', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, disabled: true };
+        props = { ...baseProps, disabled: true };
         _mountWrappers();
       });
 
@@ -287,20 +274,6 @@ describe('Checkbox Group Tests', function () {
   });
 
   describe('Validation Tests', function () {
-    // Test Environment
-    let previousVueSilentConfig;
-
-    // Test Setup
-    before(function () {
-      previousVueSilentConfig = Vue.config.silent;
-      Vue.config.silent = true;
-    });
-
-    // Test Teardown
-    after(function () {
-      Vue.config.silent = previousVueSilentConfig;
-    });
-
     describe('value', function () {
       // Test Environment
       const prop = DtCheckboxGroup.props.value;
@@ -324,14 +297,14 @@ describe('Checkbox Group Tests', function () {
 
     // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
-      propsData[childClassName] = customClass;
-      _setWrappers();
+      props[childClassName] = customClass;
+      _mountWrappers();
       element = wrapper.find(selector);
     };
 
     const _setupChildPropsTest = (childPropsName, selector) => {
-      propsData[childPropsName] = childProps;
-      _setWrappers();
+      props[childPropsName] = childProps;
+      _mountWrappers();
       element = wrapper.find(selector);
     };
 
@@ -354,8 +327,8 @@ describe('Checkbox Group Tests', function () {
     });
 
     beforeEach(function () {
-      propsData = {
-        ...basePropsData,
+      props = {
+        ...baseProps,
         legend: 'My Legend',
         messages: ['Error'],
       };
@@ -393,7 +366,7 @@ describe('Checkbox Group Tests', function () {
       // Test Setup
       beforeEach(function () {
         attrs = { ...baseAttrs, some: 'prop' };
-        _setWrappers();
+        _mountWrappers();
         element = checkboxGroup;
       });
 

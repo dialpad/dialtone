@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { assert } from 'chai';
 import sinon from 'sinon';
 import DtButton from './button.vue';
@@ -12,8 +12,8 @@ describe('Dialtone Vue Button tests', function () {
   let label;
 
   let buttonStub;
-  let listeners;
-  let propsData;
+  let attrs;
+  let props;
 
   const _setElements = function () {
     button = wrapper.find('[data-qa="dt-button"]');
@@ -26,15 +26,11 @@ describe('Dialtone Vue Button tests', function () {
     assert.isTrue(button.classes().every(function (value, index) { return value === expected[index]; }));
   };
 
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   describe('Presentation Tests', function () {
     describe('When rendered with default props', function () {
       beforeEach(function () {
-        propsData = {};
-        wrapper = shallowMount(DtButton, { propsData, localVue: this.localVue });
+        props = {};
+        wrapper = shallowMount(DtButton, { props });
         _setElements();
       });
 
@@ -153,13 +149,12 @@ describe('Dialtone Vue Button tests', function () {
 
       describe('When button only contains an icon', function () {
         beforeEach(function () {
-          propsData = {};
+          props = {};
           wrapper = shallowMount(DtButton, {
-            propsData,
+            props,
             slots: {
               icon: EmptyComponentFixture,
             },
-            localVue: this.localVue,
           });
           _setElements();
         });
@@ -172,14 +167,13 @@ describe('Dialtone Vue Button tests', function () {
 
       describe('When button contains an icon and text', function () {
         beforeEach(function () {
-          propsData = {};
+          props = {};
           wrapper = shallowMount(DtButton, {
-            propsData,
+            props,
             slots: {
               default: 'text',
               icon: EmptyComponentFixture,
             },
-            localVue: this.localVue,
           });
           _setElements();
         });
@@ -261,14 +255,13 @@ describe('Dialtone Vue Button tests', function () {
 
     describe('With icon slot populated', function () {
       beforeEach(function () {
-        propsData = {};
+        props = {};
         wrapper = shallowMount(DtButton, {
-          propsData,
+          props,
           slots: {
             default: 'text',
             icon: EmptyComponentFixture,
           },
-          localVue: this.localVue,
         });
         _setElements();
       });
@@ -302,13 +295,12 @@ describe('Dialtone Vue Button tests', function () {
 
     describe('When default slot is populated with text', function () {
       beforeEach(function () {
-        propsData = {};
+        props = {};
         wrapper = shallowMount(DtButton, {
-          propsData,
+          props,
           slots: {
             default: 'hello',
           },
-          localVue: this.localVue,
         });
         _setElements();
       });
@@ -322,15 +314,14 @@ describe('Dialtone Vue Button tests', function () {
   describe('Interactivity Tests', function () {
     beforeEach(function () {
       buttonStub = sinon.stub();
-      listeners = { click: buttonStub };
-      propsData = {};
+      attrs = { onClick: buttonStub };
+      props = {};
       wrapper = shallowMount(DtButton, {
-        listeners,
-        propsData,
+        attrs,
+        props,
         slots: {
           icon: EmptyComponentFixture,
         },
-        localVue: this.localVue,
       });
       _setElements();
     });
@@ -345,7 +336,7 @@ describe('Dialtone Vue Button tests', function () {
       });
 
       it('Should emit click event', function () {
-        assert.equal(wrapper.emitted().click);
+        assert.equal(wrapper.emitted('click').length, 1);
       });
     });
   });
@@ -355,13 +346,12 @@ describe('Dialtone Vue Button tests', function () {
 
     describe('When an label class is provided', function () {
       beforeEach(function () {
-        propsData = {
+        props = {
           labelClass: customClass,
         };
         wrapper = shallowMount(DtButton, {
-          propsData,
+          props,
           slots: { default: 'My Button Label' },
-          localVue: this.localVue,
         });
         _setElements();
       });
@@ -375,9 +365,8 @@ describe('Dialtone Vue Button tests', function () {
   describe('Accessibility Tests', function () {
     beforeEach(function () {
       wrapper = shallowMount(DtButton, {
-        listeners,
-        propsData,
-        localVue: this.localVue,
+        attrs,
+        props,
       });
       _setElements();
     });
