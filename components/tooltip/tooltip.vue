@@ -208,7 +208,10 @@ export default {
     },
   },
 
-  mounted () {
+  async mounted () {
+    // await next tick before init to set z-index properly, for example
+    // if the tooltip is within a popover.
+    await this.$nextTick();
     this.tip = createTippy(getAnchor(this.$refs.anchor), this.initOptions());
 
     // immediate watcher fires before mounted, so have this here in case
