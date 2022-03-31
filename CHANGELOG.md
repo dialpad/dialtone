@@ -1,3 +1,13 @@
+## [2.2.2](https://github.com/dialpad/dialtone-vue/compare/v2.2.1...v2.2.2) (2022-03-31)
+
+
+### Bug Fixes
+
+* **button:** change size s to sm in comment ([a6e396e](https://github.com/dialpad/dialtone-vue/commit/a6e396e9c9f1891fcee36a108e356751ef038a67))
+* **dropdown:** add y padding on list ([#297](https://github.com/dialpad/dialtone-vue/issues/297)) ([df9c177](https://github.com/dialpad/dialtone-vue/commit/df9c1774d1ea3894911ec7cf3e9068cac17762b1))
+* **popover:** dialog closing and reopening on anchor click ([b600366](https://github.com/dialpad/dialtone-vue/commit/b60036659be256cb3b051ea430c0f841e6abc9de))
+* **tooltip:** nextTick before mounting ([9009102](https://github.com/dialpad/dialtone-vue/commit/9009102e0439f0912695322cba3e80d9904e9d9c))
+
 ## [2.2.1](https://github.com/dialpad/dialtone-vue/compare/v2.2.0...v2.2.1) (2022-03-28)
 
 
