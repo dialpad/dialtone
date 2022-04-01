@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './validation_messages.vue';
 import {
@@ -12,7 +12,7 @@ import {
 } from '../../tests/shared_examples/validation';
 
 // Test Constants
-const basePropsData = {};
+const baseProps = {};
 const baseValidationMessages = [{
   message: 'Error',
   type: VALIDATION_MESSAGE_TYPES.ERROR,
@@ -24,28 +24,22 @@ describe('Validation Messages Tests', function () {
   let messages;
 
   // Test Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let validationMessages;
 
   // Helpers
   const _setWrappers = () => {
     wrapper = shallowMount(DtValidationMessages, {
-      propsData,
+      props,
       attrs,
-      localVue: this.localVue,
     });
     messages = wrapper.findAll('[data-qa="validation-message"]');
   };
 
-  // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   // Test Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
   });
 
@@ -77,7 +71,7 @@ describe('Validation Messages Tests', function () {
       describe('When the radio group renders', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...basePropsData, validationMessages };
+          props = { ...baseProps, validationMessages };
           _setWrappers();
         });
 
@@ -87,7 +81,7 @@ describe('Validation Messages Tests', function () {
       describe('When validation messages are hidden', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...basePropsData, validationMessages, showMessages: false };
+          props = { ...baseProps, validationMessages, showMessages: false };
         });
 
         describe('When the radio group renders', function () {
@@ -114,7 +108,7 @@ describe('Validation Messages Tests', function () {
         describe('When the radio group renders', function () {
           // Test Setup
           beforeEach(function () {
-            propsData = { ...basePropsData, validationMessages };
+            props = { ...baseProps, validationMessages };
             _setWrappers();
           });
 
@@ -137,7 +131,7 @@ describe('Validation Messages Tests', function () {
           describe('When the radio group renders', function () {
             // Test Setup
             beforeEach(function () {
-              propsData = { ...basePropsData, validationMessages };
+              props = { ...baseProps, validationMessages };
               _setWrappers();
             });
 
@@ -159,7 +153,7 @@ describe('Validation Messages Tests', function () {
       describe('When there is a warning validation message with an empty message', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...basePropsData, validationMessages };
+          props = { ...baseProps, validationMessages };
           _setWrappers();
         });
 
@@ -182,7 +176,7 @@ describe('Validation Messages Tests', function () {
         describe('When the validation message renders', function () {
           // Test Setup
           beforeEach(function () {
-            propsData = { ...basePropsData, validationMessages };
+            props = { ...baseProps, validationMessages };
             _setWrappers();
           });
 
@@ -206,7 +200,7 @@ describe('Validation Messages Tests', function () {
         describe('When the validation message renders', function () {
           // Test Setup
           beforeEach(function () {
-            propsData = { ...basePropsData, validationMessages };
+            props = { ...baseProps, validationMessages };
             _setWrappers();
           });
 
@@ -220,7 +214,7 @@ describe('Validation Messages Tests', function () {
     describe('When there is a validation message', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, validationMessages: baseValidationMessages };
+        props = { ...baseProps, validationMessages: baseValidationMessages };
       });
 
       describe('When validation messages are shown', function () {

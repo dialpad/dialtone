@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtTooltip from './tooltip.vue';
 import {
   TOOLTIP_KIND_MODIFIERS,
@@ -38,35 +38,23 @@ describe('Dialtone Vue Tooltip tests', function () {
   const _setChildWrappers = () => {
     tooltipContainer = wrapper.find('[data-qa="dt-tooltip-container"]');
     tooltip = wrapper.findComponent({ ref: 'content' });
-    anchor = wrapper.findComponent({ ref: 'anchor' });
+    anchor = wrapper.find('[data-qa="dt-tooltip-anchor"]');
   };
-
-  const transitionStub = () => ({
-    render: function (h) {
-      return this.$options._renderChildren;
-    },
-  });
 
   const _mountWrapper = () => {
     wrapper = mount(DtTooltip, {
-      stubs: {
-        // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
-        transition: transitionStub(),
+      global: {
+        stubs: {
+          transition: false,
+        },
       },
       slots: {
         default: 'Test message',
+        anchor: `<template #anchor="attrs"><button data-qa="dt-button" v-bind="attrs">Hover me</button></template>`,
       },
-      scopedSlots: {
-        anchor: '<button data-qa="dt-button" v-bind="props.attrs">Hover me</button>',
-      },
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
-
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   beforeEach(async function () {
     _mountWrapper();
@@ -75,7 +63,7 @@ describe('Dialtone Vue Tooltip tests', function () {
   afterEach(async function () {
     // close to unmount tippy
     await wrapper.setProps({ show: false });
-    wrapper.destroy();
+    wrapper.unmount();
     _clearChildWrappers();
   });
 
@@ -178,7 +166,7 @@ describe('Dialtone Vue Tooltip tests', function () {
           });
 
           it('should hide tooltip', function () {
-            assert.isFalse(tooltip.isVisible());
+            assert.isFalse(wrapper.vm.isShown);
           });
         });
       });

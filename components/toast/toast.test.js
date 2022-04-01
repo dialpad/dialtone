@@ -1,6 +1,9 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtToast from './toast.vue';
+import DtNoticeAction from '../notice/notice_action';
+import DtNoticeContent from '../notice/notice_content';
+import DtNoticeIcon from '../notice/notice_icon';
 import {
   itBehavesLikeDoesNotHaveClass,
   itBehavesLikeHasCorrectClass,
@@ -15,37 +18,38 @@ import {
 } from '../../tests/shared_examples/extendability';
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 const baseSlotsData = {};
 
 describe('DtToast Tests', function () {
   // Wrappers
   let wrapper;
   let toast;
-  let actionChildStub;
-  let contentChildStub;
-  let iconChildStub;
+  let actionChild;
+  let contentChild;
+  let iconChild;
+  let message;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = baseSlotsData;
 
   // Helpers
   const _setChildWrappers = () => {
     toast = wrapper.find('[data-qa="dt-toast"]');
-    actionChildStub = wrapper.find('dt-notice-action-stub');
-    contentChildStub = wrapper.find('dt-notice-content-stub');
-    iconChildStub = wrapper.find('dt-notice-icon-stub');
+    actionChild = wrapper.findComponent(DtNoticeAction);
+    contentChild = wrapper.findComponent(DtNoticeContent);
+    iconChild = wrapper.findComponent(DtNoticeIcon);
+    message = wrapper.find('[data-qa="notice-content-message"]');
   };
   let clock;
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtToast, {
-      propsData,
+    wrapper = mount(DtToast, {
+      props,
       attrs,
       slots,
-      localVue: this.localVue,
     });
   };
 
@@ -55,14 +59,9 @@ describe('DtToast Tests', function () {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   // Teardown
   afterEach(function () {
-    propsData = { ...basePropsData };
+    props = { ...baseProps };
     attrs = {};
     slots = { ...baseSlotsData };
   });
@@ -93,23 +92,23 @@ describe('DtToast Tests', function () {
       });
 
       it('action slot is passed down correctly', function () {
-        assert.strictEqual(actionChildStub.text(), slots.action);
+        assert.strictEqual(actionChild.text(), slots.action);
       });
 
       it('default slot is passed down correctly', function () {
-        assert.strictEqual(contentChildStub.text(), slots.default);
+        assert.strictEqual(contentChild.text(), slots.default);
       });
 
       it('icon slot is passed down correctly', function () {
-        assert.strictEqual(iconChildStub.text(), slots.icon);
+        assert.strictEqual(iconChild.text(), slots.icon);
       });
     });
 
     describe('When the toast renders with props', function () {
       // Test Setup
       beforeEach(async function () {
-        propsData = {
-          ...basePropsData,
+        props = {
+          ...baseProps,
           titleId: 'titleId prop content',
           contentId: 'contentId prop content',
           title: 'title prop content',
@@ -121,23 +120,23 @@ describe('DtToast Tests', function () {
       });
 
       it('titleId prop is passed down correctly', function () {
-        itBehavesLikePassesChildProp(contentChildStub, 'titleId', propsData.titleId);
+        itBehavesLikePassesChildProp(contentChild, 'titleId', props.titleId);
       });
 
       it('contentId prop is passed down correctly', function () {
-        itBehavesLikePassesChildProp(contentChildStub, 'contentId', propsData.contentId);
+        itBehavesLikePassesChildProp(contentChild, 'contentId', props.contentId);
       });
 
       it('title prop is passed down correctly', function () {
-        itBehavesLikePassesChildProp(contentChildStub, 'title', propsData.title);
+        itBehavesLikePassesChildProp(contentChild, 'title', props.title);
       });
 
       it('message prop is passed down correctly', function () {
-        assert.strictEqual(contentChildStub.text(), propsData.message);
+        assert.strictEqual(message.text(), props.message);
       });
 
       it('hideClose prop is passed down correctly', function () {
-        itBehavesLikePassesChildProp(actionChildStub, 'hideClose', propsData.hideClose);
+        itBehavesLikePassesChildProp(actionChild, 'hideClose', props.hideClose);
       });
     });
 
@@ -156,7 +155,7 @@ describe('DtToast Tests', function () {
     describe('When kind is set to error', function () {
       // Test Setup
       beforeEach(async function () {
-        propsData = { ...basePropsData, kind: 'error' };
+        props = { ...baseProps, kind: 'error' };
         _setWrappers();
         await _showToast();
       });
@@ -181,7 +180,7 @@ describe('DtToast Tests', function () {
     describe('When important is true', function () {
       // Test Setup
       beforeEach(async function () {
-        propsData = { ...basePropsData, important: true };
+        props = { ...baseProps, important: true };
         _setWrappers();
         await _showToast();
       });
@@ -224,7 +223,7 @@ describe('DtToast Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, duration };
+        props = { ...baseProps, duration };
         _setWrappers();
         clock = useFakeTimers(global);
       });
@@ -271,7 +270,7 @@ describe('DtToast Tests', function () {
       });
 
       it('shows correct default role', function () {
-        assert.strictEqual(contentChildStub.attributes('role'), role);
+        assert.strictEqual(contentChild.attributes('role'), role);
       });
 
       it('should have aria-hidden set to false when toast is shown', function () {
@@ -282,13 +281,13 @@ describe('DtToast Tests', function () {
     describe('When role is alert', function () {
       // Test Setup
       beforeEach(async function () {
-        propsData = { ...basePropsData, role: 'alert' };
+        props = { ...baseProps, role: 'alert' };
         _setWrappers();
         await _showToast();
       });
 
       it('shows correct role', function () {
-        assert.strictEqual(contentChildStub.attributes('role'), 'alert');
+        assert.strictEqual(contentChild.attributes('role'), 'alert');
       });
     });
   });
@@ -350,7 +349,7 @@ describe('DtToast Tests', function () {
 
     // Helpers
     const _setupChildPropsTest = async (childPropName) => {
-      propsData[childPropName] = propValue;
+      props[childPropName] = propValue;
       _setWrappers();
       await _showToast();
     };
@@ -358,7 +357,7 @@ describe('DtToast Tests', function () {
     // Shared Examples
     const itBehavesLikePassesChildPropLocal = () => {
       it('should pass down provided child prop', function () {
-        itBehavesLikePassesChildProp(element, propName, propValue);
+        assert.deepEqual(element.props(propName), propValue, 'has passed down child prop');
       });
     };
 
@@ -366,7 +365,7 @@ describe('DtToast Tests', function () {
       beforeEach(async function () {
         propName = 'closeButtonProps';
         await _setupChildPropsTest(propName);
-        element = actionChildStub;
+        element = actionChild;
       });
       itBehavesLikePassesChildPropLocal();
     });

@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtSkeleton from './skeleton.vue';
 
 describe('DtSkeleton Tests', function () {
@@ -17,14 +17,13 @@ describe('DtSkeleton Tests', function () {
     skeletonTextHeading = wrapper.find('[data-qa="skeleton-text-heading"]');
     skeletonParagraph = wrapper.find('[data-qa="skeleton-paragraph"]');
     skeletonParagraphRows = wrapper.findAll('[data-qa="skeleton-paragraph-row"]');
-    skeletonListItem = wrapper.findAll('[data-qa="skeleton-list-item"]');
-    skeletonShape = wrapper.findAll('[data-qa="skeleton-shape"]');
+    skeletonListItem = wrapper.find('[data-qa="skeleton-list-item"]');
+    skeletonShape = wrapper.find('[data-qa="skeleton-shape"]');
   };
 
-  const _mountWrapper = (propsData) => {
+  const _mountWrapper = (props) => {
     wrapper = mount(DtSkeleton, {
-      localVue: createLocalVue(),
-      propsData,
+      props,
     });
     _setWrappers();
   };

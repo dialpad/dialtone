@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import {
   itBehavesLikeAppliesClassToChild,
   itBehavesLikeAppliesChildProp,
@@ -8,6 +8,7 @@ import DtTabGroup from './tab_group.vue';
 import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
 import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS } from './tabs_constants';
+import { h } from 'vue';
 
 const optionTabPanel = [
   {
@@ -49,15 +50,15 @@ const optionTabs = [
 
 const tabPanelComponents = {
   functional: true,
-  render (h) {
-    return optionTabPanel.map(option => h(DtTabPanel, { props: option }, option.slot));
+  render () {
+    return optionTabPanel.map(option => h(DtTabPanel, option, () => option.slot));
   },
 };
 
 const tabComponents = {
   functional: true,
-  render (h) {
-    return optionTabs.map(option => h(DtTab, { props: option }, option.slot));
+  render () {
+    return optionTabs.map(option => h(DtTab, option, () => option.slot));
   },
 };
 
@@ -81,7 +82,6 @@ describe('Dialtone Vue Tab Group tests', function () {
   const _mountWrapper = () => {
     wrapper = mount(DtTabGroup, {
       attachTo: document.body,
-      localVue: createLocalVue(),
       propsData,
       slots: {
         default: tabPanelComponents,

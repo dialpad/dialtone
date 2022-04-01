@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtTab from './tab.vue';
 import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
 
@@ -28,14 +28,15 @@ describe('Dialtone Vue Tab tests', function () {
   };
   const changeContentPanel = sinon.spy();
   const _mountWrapper = () => {
-    wrapper = shallowMount(DtTab, {
-      localVue: createLocalVue(),
+    wrapper = mount(DtTab, {
       slots,
       propsData,
-      provide: {
-        setFocus: sinon.spy(),
-        groupContext,
-        changeContentPanel,
+      global: {
+        provide: {
+          setFocus: sinon.spy(),
+          groupContext,
+          changeContentPanel,
+        },
       },
     });
     _setWrappers();
@@ -124,7 +125,7 @@ describe('Dialtone Vue Tab tests', function () {
         });
 
         it('should be disabled', function () {
-          assert.strictEqual(tab.attributes('disabled'), 'true');
+          assert.strictEqual(tab.element.disabled, true);
         });
       });
 
@@ -138,7 +139,7 @@ describe('Dialtone Vue Tab tests', function () {
         });
 
         it('disabled attribute should be "true"', function () {
-          assert.strictEqual(tab.attributes('disabled'), 'true');
+          assert.strictEqual(tab.element.disabled, true);
         });
       });
     });

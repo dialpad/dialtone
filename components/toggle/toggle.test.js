@@ -1,15 +1,14 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { assert } from 'chai';
 import DtToggle from './toggle.vue';
 import sinon from 'sinon';
-import Vue from 'vue';
 import {
   itBehavesLikeDoesNotRaiseAnyVueWarnings,
   itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 const baseSlotData = { default: 'My Toggle Label' };
 
 describe('Toggle Tests', function () {
@@ -19,11 +18,9 @@ describe('Toggle Tests', function () {
   let label;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = baseSlotData;
-  let provide = {};
-  let listeners = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -32,30 +29,22 @@ describe('Toggle Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtToggle, {
-      propsData,
+    wrapper = mount(DtToggle, {
+      props,
       attrs,
       slots,
-      provide,
-      listeners,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = baseSlotData;
-    provide = {};
-    listeners = {};
   });
   after(function () {});
 
@@ -82,7 +71,7 @@ describe('Toggle Tests', function () {
         it('should set correct disabled attributes when disabled prop is true', async function () {
           await wrapper.setProps({ disabled: true });
           assert.strictEqual(button.attributes('aria-disabled'), 'true');
-          assert.equal(button.attributes().disabled, 'disabled');
+          assert.strictEqual(button.element.disabled, true);
           assert.isTrue(button.classes().includes('d-toggle--disabled'));
         });
       });
@@ -90,8 +79,8 @@ describe('Toggle Tests', function () {
     describe('Unchecked Toggle', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+        props = {
+          ...baseProps,
           checked: false,
         };
         _setWrappers();
@@ -115,8 +104,8 @@ describe('Toggle Tests', function () {
     describe('Checked Toggle', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+        props = {
+          ...baseProps,
           checked: true,
           disabled: false,
         };
@@ -140,21 +129,21 @@ describe('Toggle Tests', function () {
 
     describe('Accessibility Tests', function () {
       describe('aria-label validations', function () {
-        const warningMessage = 'You must provide an aria-label when there is no label passed';
+        const warningMessage = '[Vue warn]: You must provide an aria-label when there is no label passed';
 
+        // Test Setup
         before(function () {
-          Vue.config.silent = true;
-          sinon.spy(Vue.util, 'warn');
+          sinon.spy(console, 'warn');
         });
 
+        // Test Teardown
         after(function () {
-          Vue.util.warn.restore();
-          Vue.config.silent = false;
+          console.warn.restore();
         });
 
         describe('should not throw a Vue error if a label is provided', function () {
           before(function () {
-            propsData = basePropsData;
+            props = baseProps;
             slots = { default: 'My Label' };
             _setWrappers();
           });
@@ -163,7 +152,7 @@ describe('Toggle Tests', function () {
 
         describe('should not throw a Vue error if a label is not provided, but an aria-label attr exists', function () {
           before(function () {
-            propsData = { ...basePropsData };
+            props = { ...baseProps };
             attrs = { 'aria-label': 'my label' };
             slots = {};
             _setWrappers();
@@ -173,7 +162,7 @@ describe('Toggle Tests', function () {
 
         describe('When neither ariaLabel attr nor a default slot exists', function () {
           before(function () {
-            propsData = { ...basePropsData };
+            props = { ...baseProps };
             attrs = {};
             slots = {};
             _setWrappers();

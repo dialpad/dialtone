@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import DtTabPanel from './tab_panel.vue';
 
 describe('Dialtone Vue Tab Panel tests', function () {
@@ -23,11 +23,12 @@ describe('Dialtone Vue Tab Panel tests', function () {
 
   const _mountWrapper = () => {
     wrapper = shallowMount(DtTabPanel, {
-      localVue: createLocalVue(),
       slots,
       propsData,
-      provide: {
-        groupContext,
+      global: {
+        provide: {
+          groupContext,
+        },
       },
     });
     _setWrappers();
