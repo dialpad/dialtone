@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import DtRecipeTopBannerInfo from './top_banner_info.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
@@ -7,7 +7,7 @@ import {
 } from '../../../tests/shared_examples/validation';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   colorCode: 'green400',
 };
 
@@ -18,7 +18,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
   let rootElement;
 
   // Environment
-  const propsData = basePropsData;
+  const props = baseProps;
   const attrs = {};
   const slots = {
     default: 'this is the content',
@@ -33,19 +33,17 @@ describe('DtRecipeTopBannerInfo Tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtRecipeTopBannerInfo, {
-      propsData,
+      props,
       attrs,
       slots,
-      provide,
-      localVue: this.localVue,
+      global: {
+        provide,
+      },
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {
     _setWrappers();
   });

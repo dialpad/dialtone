@@ -17,7 +17,7 @@
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js",
-    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js"
+    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js"
   },
   "main": "./dist/dialtone-vue.common.js",
   "files": [

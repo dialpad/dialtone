@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeContactInfo from './contact_info.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
@@ -7,12 +7,12 @@ import {
 } from '../../../tests/shared_examples/validation';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   avatarSrc: 'avatar.png',
   userStatusColor: 'green',
 };
 
-const baseSlotsData = {
+const baseSlots = {
   header: 'Joseph Lumaban',
   subtitle: '+1 (415) 123-4567',
   bottom: 'Aerolabs Support',
@@ -29,9 +29,9 @@ describe('DtRecipeContactInfo Tests', function () {
   let bottomElement;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
-  let slots = baseSlotsData;
+  let slots = baseSlots;
   let provide = {};
 
   // Helpers
@@ -46,28 +46,26 @@ describe('DtRecipeContactInfo Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeContactInfo, {
-      propsData,
+      props,
       attrs,
       slots,
-      provide,
-      localVue: this.localVue,
+      global: {
+        provide,
+      },
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {
     _setWrappers();
   });
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
-    slots = baseSlotsData;
+    slots = baseSlots;
     provide = {};
   });
 
@@ -109,6 +107,7 @@ describe('DtRecipeContactInfo Tests', function () {
           avatarInitials: 'JL',
           avatarColor: 'orange-500',
         });
+        _setChildWrappers();
       });
       it('Avatar should display', function () {
         assert.isTrue(avatarElement.exists());
@@ -128,6 +127,7 @@ describe('DtRecipeContactInfo Tests', function () {
           avatarInitials: '',
           avatarColor: 'orange-500',
         });
+        _setChildWrappers();
       });
       it('Should not display avatar', function () {
         assert.isFalse(avatarElement.exists());
@@ -139,6 +139,7 @@ describe('DtRecipeContactInfo Tests', function () {
         await wrapper.setProps({
           userStatusColor: 'none',
         });
+        _setChildWrappers();
       });
       it('Should not display user status indicator', function () {
         assert.isFalse(wrapper.find('[data-qa="contact-info-user-status"]').exists());
