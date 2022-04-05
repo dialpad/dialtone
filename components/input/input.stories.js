@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtInput from './input';
@@ -72,6 +73,18 @@ export const argTypesData = {
     table: {
       defaultValue: {
         summary: INPUT_SIZES.DEFAULT,
+      },
+    },
+  },
+  iconSize: {
+    control: {
+      type: 'select',
+      options: [null, ...Object.values(INPUT_SIZES)],
+    },
+    defaultValue: null,
+    table: {
+      defaultValue: {
+        summary: 'null',
       },
     },
   },

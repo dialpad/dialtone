@@ -5,6 +5,7 @@
     :type="type"
     :messages="messages"
     :size="size"
+    :icon-size="iconSize"
     :label="label"
     :messages-child-props="messagesChildProps"
     :name="name"
