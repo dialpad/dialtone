@@ -10,6 +10,8 @@
     role="menu"
     :modal="modal"
     v-bind="$attrs"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
     @opened="updateInitialHighlightIndex"
     @keydown.enter="onEnterKey"
     @keydown.space="onSpaceKey"
@@ -30,7 +32,7 @@
       <ul
         :id="listId"
         ref="listWrapper"
-        :class="['d-ps-relative', 'd-px0', DROPDOWN_PADDING_CLASSES[padding]]"
+        :class="['d-ps-relative', 'd-px0', DROPDOWN_PADDING_CLASSES[padding], listClass]"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
         @mousemove.capture="onMouseHighlight"
@@ -118,6 +120,24 @@ export default {
     },
 
     /**
+     * Determines maximum height for the popover before overflow.
+     * Possible units rem|px|em
+     */
+    maxHeight: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|%|em
+     */
+    maxWidth: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Sets an ID on the list element of the component. Used by several aria attributes
      * as well as when deriving the IDs for each item.
      */
@@ -171,6 +191,14 @@ export default {
     onEndOfList: {
       type: Function,
       default: null,
+    },
+
+    /**
+     * Additional class for the wrapper list element.
+     */
+    listClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
