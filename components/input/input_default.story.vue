@@ -5,6 +5,7 @@
     :type="$attrs.type"
     :messages="$attrs.messages"
     :size="$attrs.size"
+    :icon-size="$attrs.iconSize"
     :label="$attrs.label"
     :messages-child-props="$attrs.messagesChildProps"
     :name="$attrs.name"
