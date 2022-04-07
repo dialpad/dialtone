@@ -55,7 +55,7 @@ const createAnchor = (anchorWrapper, tabIndex) => {
 };
 
 export const getAnchor = (anchorWrapper, tabIndex = '0') => {
-  const anchor = anchorWrapper.children[0];
+  const anchor = anchorWrapper?.children[0];
   if (!anchor) return createAnchor(anchorWrapper);
   if (!findFirstFocusableNode(anchor)) {
     anchor.setAttribute('tabindex', tabIndex);
