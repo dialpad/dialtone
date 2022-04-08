@@ -172,6 +172,16 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Determines whether the button should have active styling
+     * default is false.
+     * @values true, false
+     */
+    active: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['click', 'focusin', 'focusout'],
@@ -242,6 +252,7 @@ export default {
           'd-btn--loading': this.loading,
           'd-btn--icon-only': this.isIconOnly(),
           'd-btn--vertical': this.isVerticalIconLayout(),
+          'd-btn--active': this.active,
         },
       ];
     },

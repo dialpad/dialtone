@@ -151,6 +151,35 @@ describe('Dialtone Vue Button tests', function () {
         });
       });
 
+      describe('When button has active set to true', function () {
+        beforeEach(async function () {
+          // Test that main class is populated with input props
+          const props = {
+            active: true,
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('Should have active class', async function () {
+          button = wrapper.find('.base-button__button');
+          assert.isTrue(button.classes().includes('d-btn--active'));
+        });
+      });
+
+      describe('When button has active set to false', function () {
+        beforeEach(async function () {
+          // Test that main class is populated with input props
+          const props = {
+            active: false,
+          };
+          await wrapper.setProps(props);
+        });
+
+        it('Should not have active class', async function () {
+          _assertButtonDefaultClasses();
+        });
+      });
+
       describe('When button only contains an icon', function () {
         beforeEach(function () {
           propsData = {};
