@@ -32,6 +32,15 @@ export const argTypesData = {
   },
 
   // Props
+  active: {
+    control: 'boolean',
+  },
+  assertiveOnFocus: {
+    control: 'boolean',
+  },
+  circle: {
+    control: 'boolean',
+  },
   importance: {
     control: 'select',
     options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
@@ -63,6 +72,9 @@ export const argTypesData = {
   linkKind: {
     control: 'select',
     options: Object.keys(LINK_KIND_MODIFIERS),
+  },
+  loading: {
+    control: 'boolean',
   },
   iconPosition: {
     control: 'select',

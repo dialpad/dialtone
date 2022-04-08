@@ -139,6 +139,26 @@
         Link Button
       </dt-button>
     </div>
+    <div class="d-flow4">
+      <!-- Active Button -->
+      <dt-button active>
+        Active button
+      </dt-button>
+      <!-- Active Inverted Button -->
+      <dt-button
+        active
+        kind="inverted"
+      >
+        Active Inverted button
+      </dt-button>
+      <!-- Active Danger Button -->
+      <dt-button
+        active
+        kind="danger"
+      >
+        Active Danger button
+      </dt-button>
+    </div>
   </div>
 </template>
 

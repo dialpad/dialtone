@@ -13,6 +13,7 @@
     :icon-position="$attrs.iconPosition"
     :disabled="$attrs.disabled"
     :style="{ width: $attrs.width }"
+    :active="$attrs.active"
     @click="$attrs.onClick"
     @focusin="$attrs.onFocusIn"
     @focusout="$attrs.onFocusOut"
