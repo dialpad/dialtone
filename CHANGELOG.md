@@ -1,3 +1,18 @@
+# [2.3.0](https://github.com/dialpad/dialtone-vue/compare/v2.2.2...v2.3.0) (2022-04-08)
+
+
+### Bug Fixes
+
+* calculate z-index after mounted ([#318](https://github.com/dialpad/dialtone-vue/issues/318)) ([b3d6d74](https://github.com/dialpad/dialtone-vue/commit/b3d6d7466b13d498feb909c709ede9b1fee3732e))
+* dt-417 handle anchor with no children ([#316](https://github.com/dialpad/dialtone-vue/issues/316)) ([3f92a29](https://github.com/dialpad/dialtone-vue/commit/3f92a29b5b9dc9e1c01b289e3f52100af21ece9f))
+* popover within popover stuck when ESC ([#320](https://github.com/dialpad/dialtone-vue/issues/320)) ([95fc99d](https://github.com/dialpad/dialtone-vue/commit/95fc99d907dc27b4f3b97c7cdc09553f575c1ec8))
+
+
+### Features
+
+* **dropdown:** add maxWidth, maxHeight, listClass props ([#310](https://github.com/dialpad/dialtone-vue/issues/310)) ([f9f1356](https://github.com/dialpad/dialtone-vue/commit/f9f1356e39639741197a47958dc499afc5aacf00))
+* **input:** add iconSize prop ([#314](https://github.com/dialpad/dialtone-vue/issues/314)) ([a6818be](https://github.com/dialpad/dialtone-vue/commit/a6818befb2ac475826eae7b7a5b5d2ec6148ea04))
+
 ## [2.2.2](https://github.com/dialpad/dialtone-vue/compare/v2.2.1...v2.2.2) (2022-03-31)
 
 
