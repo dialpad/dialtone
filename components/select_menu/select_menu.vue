@@ -221,7 +221,6 @@ export default {
   computed: {
     selectListeners () {
       return {
-        ...this.$attrs,
         /*
          * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input
          * element which will result in the handler being called twice (once on the select element and once by the
@@ -279,6 +278,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-</style>

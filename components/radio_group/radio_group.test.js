@@ -1,13 +1,14 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount, mount } from '@vue/test-utils';
+import { config, shallowMount, mount } from '@vue/test-utils';
 import { DtValidationMessages } from '../validation_messages';
 import { DtRadio } from '../radio';
 import DtRadioGroup from './radio_group.vue';
 import RadiosFixture from '../../tests/fixtures/radios.vue';
+import { itBehavesLikeEmitsExpectedEvent } from '@/tests/shared_examples/events';
 
 // Test Constants
 const baseGroupName = 'test-radio-group';
-const basePropsData = {
+const baseProps = {
   name: baseGroupName,
   value: '',
 };
@@ -20,7 +21,7 @@ describe('Dialtone Vue Radio Group Tests', function () {
   let radioGroupLegend;
 
   // Test Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = baseAttrs;
   let slots = {};
 
@@ -32,34 +33,33 @@ describe('Dialtone Vue Radio Group Tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtRadioGroup, {
-      propsData,
+      props,
       slots,
       attrs,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   const _mountWrappers = () => {
     wrapper = mount(DtRadioGroup, {
-      propsData,
+      props,
       slots,
       attrs,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
-  // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
+  config.renderStubDefaultSlot = true;
 
   // Test Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = baseAttrs;
     slots = {};
+  });
+
+  after(function () {
+    config.renderStubDefaultSlot = false;
   });
 
   describe('Presentation Tests', function () {
@@ -125,7 +125,7 @@ describe('Dialtone Vue Radio Group Tests', function () {
       describe('When the legend is provided via prop', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...basePropsData, legend };
+          props = { ...baseProps, legend };
         });
 
         describe('When the radio group renders', function () {
@@ -159,7 +159,7 @@ describe('Dialtone Vue Radio Group Tests', function () {
 
       describe('When the radio group renders', function () {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(function () { _mountWrappers(); });
 
         itBehavesLikeHasRadios(2);
       });
@@ -168,7 +168,7 @@ describe('Dialtone Vue Radio Group Tests', function () {
     describe('When validation messages are provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, messages: ['Error'] };
+        props = { ...baseProps, messages: ['Error'] };
       });
 
       describe('When the radio group renders', function () {
@@ -200,12 +200,12 @@ describe('Dialtone Vue Radio Group Tests', function () {
     describe('When an initial value is provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, value: selectedValue };
+        props = { ...baseProps, value: selectedValue };
         _setWrappers();
       });
 
       it('updates provide object', function () {
-        assert.strictEqual(wrapper.vm.provideObj.selectedValue, selectedValue);
+        assert.strictEqual(wrapper.vm.provideObj.value, selectedValue);
       });
     });
 
@@ -217,14 +217,14 @@ describe('Dialtone Vue Radio Group Tests', function () {
       });
 
       it('emits an input event', function () {
-        assert.strictEqual(wrapper.emitted('input')[0][0], selectedValue);
+        itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue);
       });
     });
 
     describe('When the radio group is disabled', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, disabled: true };
+        props = { ...baseProps, disabled: true };
         _mountWrappers();
       });
 
@@ -248,13 +248,13 @@ describe('Dialtone Vue Radio Group Tests', function () {
 
     // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
-      propsData[childClassName] = customClass;
+      props[childClassName] = customClass;
       _setWrappers();
       element = wrapper.find(selector);
     };
 
     const _setupChildPropsTest = (childPropsName, selector) => {
-      propsData[childPropsName] = childProps;
+      props[childPropsName] = childProps;
       _setWrappers();
       element = wrapper.find(selector);
     };
@@ -278,7 +278,7 @@ describe('Dialtone Vue Radio Group Tests', function () {
     });
 
     beforeEach(function () {
-      propsData = { ...basePropsData, legend: 'My Radio Group' };
+      props = { ...baseProps, legend: 'My Radio Group' };
     });
 
     describe('When a legend class is provided', function () {

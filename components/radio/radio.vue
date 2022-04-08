@@ -75,7 +75,7 @@ export default {
     },
   },
 
-  emits: ['input', 'focus', 'focusin', 'focusout'],
+  emits: ['input', 'focus', 'focusin', 'focusout', 'click'],
 
   computed: {
     inputValidationClass () {

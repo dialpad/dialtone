@@ -1,9 +1,9 @@
 import { assert } from 'chai';
 import DtNoticeContent from './notice_content';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   title: 'this is the title',
   titleId: 'titleId555',
   contentId: 'contentId888',
@@ -15,19 +15,18 @@ const baseSlotsData = {
 
 describe('DtNoticeContent tests', function () {
   let wrapper;
-  let propsData;
+  let props;
   let slotsData;
 
   let title;
   let content;
 
   const _setWrappers = () => {
-    propsData = basePropsData;
+    props = baseProps;
     slotsData = baseSlotsData;
     wrapper = shallowMount(DtNoticeContent, {
-      propsData: propsData,
+      props: props,
       slots: slotsData,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
@@ -36,10 +35,6 @@ describe('DtNoticeContent tests', function () {
     title = wrapper.find('#titleId555');
     content = wrapper.find('#contentId888');
   };
-
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   beforeEach(function () {
     _setWrappers();
@@ -52,7 +47,7 @@ describe('DtNoticeContent tests', function () {
       });
 
       it('Should display title correctly', function () {
-        assert.strictEqual(title.text(), basePropsData.title);
+        assert.strictEqual(title.text(), baseProps.title);
       });
 
       it('Should display the content correctly', function () {

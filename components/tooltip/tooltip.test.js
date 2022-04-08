@@ -7,11 +7,6 @@ import {
   TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 
-// RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
-// Need to mock them to avoid error
-global.requestAnimationFrame = sinon.spy();
-global.cancelAnimationFrame = sinon.spy();
-
 describe('Dialtone Vue Tooltip tests', function () {
   // Wrappers
   let wrapper;
@@ -56,6 +51,13 @@ describe('Dialtone Vue Tooltip tests', function () {
     _setChildWrappers();
   };
 
+  before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
+  });
+
   beforeEach(async function () {
     _mountWrapper();
   });
@@ -65,6 +67,12 @@ describe('Dialtone Vue Tooltip tests', function () {
     await wrapper.setProps({ show: false });
     wrapper.unmount();
     _clearChildWrappers();
+  });
+
+  after(function () {
+    // Restore RequestAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
   });
 
   describe('Presentation Tests', function () {

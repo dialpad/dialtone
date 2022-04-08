@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import sinon from 'sinon';
 import {
   itBehavesLikeEmitsExpectedEvent,
@@ -19,7 +19,7 @@ import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import DtRadio from './radio.vue';
 
 const baseValue = 'Value';
-const basePropsData = {
+const baseProps = {
   label: 'My Radio Label',
   value: baseValue,
 };
@@ -31,21 +31,20 @@ describe('Dialtone Vue Radio Tests', function () {
 
   // Test Environment
   const value = baseValue;
-  let propsData = basePropsData;
+  let props = baseProps;
   let slots = {};
   let attrs = {};
   let provide = {};
-  let listeners = {};
 
   // Helpers
   const _setWrappers = () => {
     wrapper = shallowMount(DtRadio, {
-      propsData,
+      props,
       slots,
       attrs,
-      provide,
-      listeners,
-      localVue: this.localVue,
+      global: {
+        provide,
+      },
     });
     input = wrapper.find('input');
   };
@@ -61,18 +60,12 @@ describe('Dialtone Vue Radio Tests', function () {
     });
   };
 
-  // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   // Test Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     slots = {};
     attrs = {};
     provide = {};
-    listeners = {};
   });
 
   describe('Presentation Tests', function () {
@@ -99,7 +92,7 @@ describe('Dialtone Vue Radio Tests', function () {
         });
 
         it('should exist', function () { assert.exists(radioLabel); });
-        it('should match provided label prop', function () { assert.strictEqual(radioLabel.text(), propsData.label); });
+        it('should match provided label prop', function () { assert.strictEqual(radioLabel.text(), props.label); });
       });
     });
 
@@ -109,7 +102,7 @@ describe('Dialtone Vue Radio Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, description: 'Description' };
+        props = { ...baseProps, description: 'Description' };
         _setWrappers();
         radioDescription = wrapper.find('[data-qa="radio-description"]');
       });
@@ -120,7 +113,7 @@ describe('Dialtone Vue Radio Tests', function () {
     describe('When a validation state is provided', function () {
       // Helpers
       const _setupValidationTest = (validationState) => {
-        propsData = { ...basePropsData, description: 'Description', validationState };
+        props = { ...baseProps, description: 'Description', validationState };
         _setWrappers();
       };
 
@@ -143,7 +136,7 @@ describe('Dialtone Vue Radio Tests', function () {
     describe('When checked', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, checked: true };
+        props = { ...baseProps, checked: true };
         _setWrappers();
       });
 
@@ -153,7 +146,7 @@ describe('Dialtone Vue Radio Tests', function () {
     describe('When disabled', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, disabled: true };
+        props = { ...baseProps, disabled: true };
         _setWrappers();
       });
 
@@ -231,13 +224,13 @@ describe('Dialtone Vue Radio Tests', function () {
 
       // Helpers
       const _setupChildClassTest = (childClassName, selector) => {
-        propsData[childClassName] = customClass;
+        props[childClassName] = customClass;
         _setWrappers();
         element = wrapper.find(selector);
       };
 
       const _setupChildPropsTest = (childPropsName, selector) => {
-        propsData[childPropsName] = childProps;
+        props[childPropsName] = childProps;
         _setWrappers();
         element = wrapper.find(selector);
       };
@@ -260,7 +253,7 @@ describe('Dialtone Vue Radio Tests', function () {
         childProps[propName] = propValue;
       });
       beforeEach(function () {
-        propsData = { ...basePropsData, label: 'Label', description: 'Description' };
+        props = { ...baseProps, label: 'Label', description: 'Description' };
       });
 
       describe('When an input class is provided', function () {
@@ -323,7 +316,7 @@ describe('Dialtone Vue Radio Tests', function () {
 
         // Test Setup
         beforeEach(function () {
-          listeners = { input: inputListenerSpy };
+          attrs = { onInput: inputListenerSpy };
           _setWrappers();
         });
 
@@ -353,7 +346,7 @@ describe('Dialtone Vue Radio Tests', function () {
           validationState: groupValidationState,
         },
       };
-      propsData = { ...basePropsData, description: 'Description' };
+      props = { ...baseProps, description: 'Description' };
       _setWrappers();
     };
 
@@ -387,7 +380,7 @@ describe('Dialtone Vue Radio Tests', function () {
         describe('When the radio has a validation state', function () {
           // Test Setup
           beforeEach(function () {
-            propsData = { ...propsData, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
+            props = { ...props, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
             _setWrappers();
           });
 

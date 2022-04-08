@@ -1,10 +1,10 @@
 import { assert } from 'chai';
 import DtNoticeIcon from './notice_icon';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import IconCamera from '@dialpad/dialtone/lib/dist/vue/icons/IconCamera';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   kind: 'warning',
 };
 
@@ -15,30 +15,25 @@ describe('DtNoticeIcon tests', function () {
   let cameraIcon;
   let baseIcon;
   let warningIcon;
-  let propsData;
+  let props;
   let slotsData;
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtNoticeIcon, {
-      propsData: propsData,
+      props: props,
       slots: slotsData,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   const _setChildWrappers = () => {
     cameraIcon = wrapper.findComponent(IconCamera);
-    baseIcon = wrapper.find('iconlightbulb-stub');
-    warningIcon = wrapper.find('iconwarning-stub');
+    baseIcon = wrapper.findComponent('icon-lightbulb-stub');
+    warningIcon = wrapper.findComponent('icon-warning-stub');
   };
 
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   beforeEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     slotsData = baseSlotsData;
     _setWrappers();
   });

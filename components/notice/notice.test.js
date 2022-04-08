@@ -1,10 +1,12 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-
+import { mount } from '@vue/test-utils';
 import DtNotice from './notice';
+import DtNoticeAction from '../notice/notice_action';
+import DtNoticeContent from '../notice/notice_content';
+import DtNoticeIcon from '../notice/notice_icon';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   title: 'Notice Title',
   closeButtonProps: { ariaLabel: 'close' },
 };
@@ -19,29 +21,26 @@ describe('DtNotice tests', function () {
   let wrapper;
 
   let rootElement;
-  let actionChildStub;
-  let contentChildStub;
-  let iconChildStub;
+  let actionChild;
+  let contentChild;
+  let iconChild;
+  let message;
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtNotice, {
-      propsData: basePropsData,
+    wrapper = mount(DtNotice, {
+      props: baseProps,
       slots: baseSlotsData,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   const _setChildWrappers = () => {
     rootElement = wrapper.find('aside');
-    actionChildStub = wrapper.find('dt-notice-action-stub');
-    contentChildStub = wrapper.find('dt-notice-content-stub');
-    iconChildStub = wrapper.find('dt-notice-icon-stub');
+    actionChild = wrapper.findComponent(DtNoticeAction);
+    contentChild = wrapper.findComponent(DtNoticeContent);
+    iconChild = wrapper.findComponent(DtNoticeIcon);
+    message = wrapper.find('[data-qa="notice-content-message"]');
   };
-
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   beforeEach(function () {
     _setWrappers();
@@ -54,15 +53,15 @@ describe('DtNotice tests', function () {
       });
 
       it('action slot is passed down correctly', async function () {
-        assert.strictEqual(actionChildStub.text(), baseSlotsData.action);
+        assert.strictEqual(actionChild.text(), baseSlotsData.action);
       });
 
       it('default slot is passed down correctly', async function () {
-        assert.strictEqual(contentChildStub.text(), baseSlotsData.default);
+        assert.strictEqual(message.text(), baseSlotsData.default);
       });
 
       it('icon slot is passed down correctly', async function () {
-        assert.strictEqual(iconChildStub.text(), baseSlotsData.icon);
+        assert.strictEqual(iconChild.text(), baseSlotsData.icon);
       });
     });
 
@@ -100,7 +99,7 @@ describe('DtNotice tests', function () {
 
     describe('When closeButtonProps is passed', function () {
       it('Has correct class', async function () {
-        assert.deepEqual(actionChildStub.props().closeButtonProps, { ariaLabel: 'close' });
+        assert.deepEqual(actionChild.vm.closeButtonProps, { ariaLabel: 'close' });
       });
     });
   });
@@ -108,7 +107,7 @@ describe('DtNotice tests', function () {
   describe('Accessibility Tests', function () {
     describe('When rendered with default content', function () {
       it('Shows correct role', function () {
-        assert.strictEqual(contentChildStub.attributes('role'), 'status');
+        assert.strictEqual(contentChild.attributes('role'), 'status');
       });
     });
 
@@ -118,7 +117,7 @@ describe('DtNotice tests', function () {
       });
 
       it('Shows correct role', async function () {
-        assert.strictEqual(contentChildStub.attributes('role'), 'alert');
+        assert.strictEqual(contentChild.attributes('role'), 'alert');
       });
     });
   });

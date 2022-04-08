@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeTopBannerInfo from './top_banner_info.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
@@ -11,6 +11,10 @@ const baseProps = {
   colorCode: 'green400',
 };
 
+const baseSlots = {
+  default: 'this is the content',
+};
+
 describe('DtRecipeTopBannerInfo Tests', function () {
   // Wrappers
   let wrapper;
@@ -18,12 +22,10 @@ describe('DtRecipeTopBannerInfo Tests', function () {
   let rootElement;
 
   // Environment
-  const props = baseProps;
-  const attrs = {};
-  const slots = {
-    default: 'this is the content',
-  };
-  const provide = {};
+  let props = baseProps;
+  let attrs = {};
+  let slots = baseSlots;
+  let provide = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -32,7 +34,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtRecipeTopBannerInfo, {
+    wrapper = mount(DtRecipeTopBannerInfo, {
       props,
       attrs,
       slots,
@@ -46,6 +48,14 @@ describe('DtRecipeTopBannerInfo Tests', function () {
   // Setup
   beforeEach(function () {
     _setWrappers();
+  });
+
+  // Teardown
+  afterEach(function () {
+    props = baseProps;
+    attrs = {};
+    slots = baseSlots;
+    provide = {};
   });
 
   describe('Presentation Tests', function () {

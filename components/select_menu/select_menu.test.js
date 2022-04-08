@@ -1,7 +1,6 @@
 import { assert } from 'chai';
-import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import sinon from 'sinon';
-import Vue from 'vue';
 import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/events';
 import {
   itBehavesLikePassesCustomPropValidation,
@@ -32,7 +31,7 @@ const OPTIONS = [
   { value: 3, label: 'Option 3' },
 ];
 
-const basePropsData = {
+const baseProps = {
   label: LABEL,
   options: OPTIONS,
 };
@@ -50,7 +49,7 @@ describe('DtSelectMenu Tests', function () {
   let messages;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = baseAttrs;
   let slots = {};
 
@@ -63,44 +62,29 @@ describe('DtSelectMenu Tests', function () {
     messages = wrapper.find('[data-qa="dt-select-messages"]');
   };
 
-  const _setWrappers = () => {
-    wrapper = shallowMount(DtSelectMenu, {
-      propsData,
-      attrs,
-      slots,
-      localVue: this.localVue,
-    });
-    _setChildWrappers();
-  };
-
   const _mountWrappers = () => {
     wrapper = mount(DtSelectMenu, {
-      propsData,
+      props,
       attrs,
       slots,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = baseAttrs;
     slots = {};
   });
-  after(function () {});
 
   describe('Presentation Tests', function () {
     describe('When rendered with required content', function () {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(function () { _mountWrappers(); });
 
       it('should render the provided label', function () { assert.strictEqual(label.text(), LABEL); });
       it('should have no size variant classes on the label', function () {
@@ -120,15 +104,15 @@ describe('DtSelectMenu Tests', function () {
         });
       });
       it('should not render any validation messages', function () {
-        assert.strictEqual(messages?.props('validationMessages').length, 0);
+        assert.isFalse(messages.exists());
       });
     });
 
     describe('When a label is not provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { options: OPTIONS };
-        _setWrappers();
+        props = { options: OPTIONS };
+        _mountWrappers();
       });
 
       it('should not render a label', function () { assert.isFalse(label.exists()); });
@@ -143,7 +127,7 @@ describe('DtSelectMenu Tests', function () {
         slots = {
           label: slottedLabel,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should render the slotted label', function () { assert.strictEqual(label.text(), slottedLabel); });
@@ -152,11 +136,11 @@ describe('DtSelectMenu Tests', function () {
     describe('When a description is provided via prop', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+        props = {
+          ...baseProps,
           description: DESCRIPTION,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should render the provided description', function () {
@@ -176,7 +160,7 @@ describe('DtSelectMenu Tests', function () {
         slots = {
           description: slottedDescription,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should render the slotted description', function () {
@@ -193,7 +177,7 @@ describe('DtSelectMenu Tests', function () {
         slots = {
           default: slottedOptions,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should render the select menu options', function () {
@@ -207,12 +191,12 @@ describe('DtSelectMenu Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+        props = {
+          ...baseProps,
           description: DESCRIPTION,
           size,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should have size variant class on the label', function () {
@@ -232,8 +216,8 @@ describe('DtSelectMenu Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+        props = {
+          ...baseProps,
           messages: [message],
         };
       });
@@ -260,7 +244,7 @@ describe('DtSelectMenu Tests', function () {
       describe('When validation messages are hidden', function () {
         // Test Setup
         beforeEach(function () {
-          propsData.showMessages = false;
+          props.showMessages = false;
           _mountWrappers();
         });
 
@@ -276,8 +260,8 @@ describe('DtSelectMenu Tests', function () {
     describe('When a description is provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, description: DESCRIPTION };
-        _setWrappers();
+        props = { ...baseProps, description: DESCRIPTION };
+        _mountWrappers();
       });
 
       it('label aria-details should match the id of the description', function () {
@@ -289,7 +273,7 @@ describe('DtSelectMenu Tests', function () {
       describe('When aria-details are not provided', function () {
         // Test Setup
         beforeEach(function () {
-          _setWrappers();
+          _mountWrappers();
         });
 
         it('label aria-details should not exist', function () {
@@ -304,7 +288,7 @@ describe('DtSelectMenu Tests', function () {
         // Test Setup
         beforeEach(function () {
           attrs = { ...baseAttrs, 'aria-details': ariaDetails };
-          _setWrappers();
+          _mountWrappers();
         });
 
         it('label aria-details should match those provided by attrs', function () {
@@ -321,7 +305,7 @@ describe('DtSelectMenu Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        _setWrappers();
+        _mountWrappers();
         select.element.value = selectedValue;
         select.trigger('change');
       });
@@ -351,22 +335,20 @@ describe('DtSelectMenu Tests', function () {
 
     describe('Options Validation', function () {
       // Test Environment
-      const warningMessage = 'Options are expected to be provided via prop or slot';
+      const warningMessage = '[Vue warn]: Options are expected to be provided via prop or slot';
 
       // Test Setup
       before(function () {
-        Vue.config.silent = true;
-        sinon.spy(Vue.util, 'warn');
+        sinon.spy(console, 'warn');
       });
 
       // Test Teardown
       afterEach(function () {
-        Vue.util.warn.resetHistory();
+        console.warn.resetHistory();
       });
 
       after(function () {
-        Vue.util.warn.restore();
-        Vue.config.silent = false;
+        console.warn.restore();
       });
 
       describe('When options are provided via prop', function () {
@@ -390,18 +372,20 @@ describe('DtSelectMenu Tests', function () {
       describe('When options are provided via slot', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...propsData, options: undefined };
+          props = { ...props, options: undefined };
           slots = { default: '<option value="1">Option 1</option><option value="2">Option 2</option>' };
           _mountWrappers();
         });
 
-        itBehavesLikeDoesNotRaiseAnyVueWarnings();
+        it('should not have expected warning message', function () {
+          assert.notEqual(console.warn.firstCall.args[0], warningMessage);
+        });
       });
 
       describe('When options are not provided', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = { ...propsData, options: undefined };
+          props = { ...props, options: undefined };
           _mountWrappers();
         });
 
@@ -420,14 +404,14 @@ describe('DtSelectMenu Tests', function () {
 
     // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
-      propsData[childClassName] = customClass;
-      _setWrappers();
+      props[childClassName] = customClass;
+      _mountWrappers();
       element = wrapper.find(selector);
     };
 
     const _setupChildPropsTest = (childPropsName, selector) => {
-      propsData[childPropsName] = childProps;
-      _setWrappers();
+      props[childPropsName] = childProps;
+      _mountWrappers();
       element = wrapper.find(selector);
     };
 
@@ -449,7 +433,7 @@ describe('DtSelectMenu Tests', function () {
       childProps[propName] = propValue;
     });
     beforeEach(function () {
-      propsData = { ...propsData, description: DESCRIPTION };
+      props = { ...props, description: DESCRIPTION };
     });
 
     describe('When a label class is provided', function () {
@@ -473,13 +457,13 @@ describe('DtSelectMenu Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData.optionClass = customClass;
-        _setWrappers();
+        props.optionClass = customClass;
+        _mountWrappers();
         options = select.findAll('option');
       });
 
       it('should apply child class to each option', function () {
-        options.wrappers.forEach(option => {
+        options.forEach(option => {
           assert.isTrue(option.classes(customClass));
         });
       });
@@ -501,13 +485,13 @@ describe('DtSelectMenu Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData.optionChildProps = childProps;
-        _setWrappers();
+        props.optionChildProps = childProps;
+        _mountWrappers();
         options = select.findAll('option');
       });
 
       it('should apply child props to each option', function () {
-        options.wrappers.forEach(option => {
+        options.forEach(option => {
           itBehavesLikeAppliesChildProp(option, propName, propValue);
         });
       });
@@ -517,7 +501,7 @@ describe('DtSelectMenu Tests', function () {
       // Test Setup
       beforeEach(function () {
         attrs = { some: 'prop' };
-        _setWrappers();
+        _mountWrappers();
         element = select;
       });
 
