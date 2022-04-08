@@ -1,5 +1,5 @@
 import tippy from 'tippy.js';
-import { getArrowDetected, hideOnEsc } from '../tooltip/modifiers';
+import { getArrowDetected } from '../tooltip/modifiers';
 import { findFirstFocusableNode } from '@/common/utils';
 
 export const BASE_TIPPY_DIRECTIONS = [
@@ -15,7 +15,6 @@ export const createTippy = (anchorElement, options) => {
   return tippy(anchorElement, {
     ...options,
     render: () => getContentWrapper(contentElement),
-    plugins: [hideOnEsc],
   });
 };
 
