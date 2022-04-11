@@ -61,10 +61,9 @@ export default {
 
   components: {
     // little trick to render vnode objects via a render function
-    Vnodes: {
+    vnodes: {
       name: 'vnodes',
-      functional: true,
-      render: (h, ctx) => ctx.props.vnodes,
+      render: ctx => ctx.$attrs.vnodes,
     },
 
     DtButton,
@@ -131,14 +130,12 @@ export default {
     },
 
     itemCount () {
-      // eslint-disable-next-line vue/require-slots-as-functions
-      return this.$slots.default.length;
+      return this.$slots.default().length;
     },
 
     displayedItems () {
       // filtering the slot v-nodes to only display up to maxDisplayed items
-      // eslint-disable-next-line vue/require-slots-as-functions
-      return this.$slots.default.filter((item, index) => index <= this.maxDisplayed - 1);
+      return this.$slots.default().filter((item, index) => index <= this.maxDisplayed - 1);
     },
   },
 

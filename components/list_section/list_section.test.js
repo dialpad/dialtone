@@ -1,21 +1,29 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtListSection from './list_section.vue';
+import { h } from 'vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   id: 'sectionId',
 };
 
 const baseSlotsData = {
   // passing in three list items by default
-  default: '<div>first item</div><div>second item</div><div>third item</div>',
+  // TODO: use string slots once move forward from VTU 2.0.0-rc.12 as in this version
+  // string slots contain a SlotWrapper and ListSection doesn't return correct vnodes length
+  // like in this issue https://github.com/vuejs/test-utils/issues/389
+  default: () => [
+    h('div', 'first item'),
+    h('div', 'second item'),
+    h('div', 'third item'),
+  ],
 };
 
 describe('ListSection tests', function () {
   let wrapper;
 
-  const propsData = basePropsData;
+  const props = baseProps;
   const slotsData = baseSlotsData;
 
   let rootElement;
@@ -26,24 +34,19 @@ describe('ListSection tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtListSection, {
-      propsData: propsData,
+      props,
       slots: slotsData,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   const _setChildWrappers = () => {
-    rootElement = wrapper.find('#' + basePropsData.id);
-    header = wrapper.find(`#${basePropsData.id}-list-section-header`);
-    content = wrapper.find(`#${basePropsData.id}-list-section-content`);
+    rootElement = wrapper.find('#' + baseProps.id);
+    header = wrapper.find(`#${baseProps.id}-list-section-header`);
+    content = wrapper.find(`#${baseProps.id}-list-section-content`);
     contentItems = content.findAll('#sectionId-list-section-content > *');
-    showMoreLessButton = wrapper.find(`#${basePropsData.id}-list-section-show-more-less`);
+    showMoreLessButton = wrapper.find(`#${baseProps.id}-list-section-show-more-less`);
   };
-
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   beforeEach(function () {
     _setWrappers();
