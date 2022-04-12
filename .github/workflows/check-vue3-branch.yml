@@ -10,7 +10,7 @@ jobs:
   check_vue3:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Check if -vue3 branch exists
         if: "!contains( github.event.pull_request.labels.*.name, 'vue2-only')"

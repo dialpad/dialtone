@@ -2,9 +2,9 @@ name: Unit Tests
 
 on:
   pull_request:
-    branches: [ staging, production ]
+    branches: [ staging, production, staging-vue3, vue3 ]
   push:
-    branches: [ staging ]
+    branches: [ staging, staging-vue3 ]
 
 jobs:
   unit_tests:
@@ -14,16 +14,16 @@ jobs:
     env:
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       STORYBOOK_ROOT: ./storybook
-      NODE_MODULES_CACHE_VERSION: v1
+      NODE_MODULES_CACHE_VERSION: vue3-v1
 
     steps:
       - name: Check out branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: '16'
 
       - name: Use Library Cache
         id: library-cache
