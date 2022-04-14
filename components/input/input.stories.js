@@ -290,7 +290,18 @@ export const WithWarning = Template.bind({});
 WithWarning.args = {
   messages: [{ message: 'This is a warning message', type: 'warning' }],
 };
-WithWarning.parameters = {};
+WithWarning.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'color-contrast',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 
 export const WithError = Template.bind({});
 WithError.args = {

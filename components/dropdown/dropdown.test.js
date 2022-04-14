@@ -2,6 +2,8 @@ import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
 import sinon from 'sinon';
+import axe from 'axe-core';
+import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
 // Constants
 const basePropsData = {
@@ -46,12 +48,17 @@ describe('Dialtone Vue Dropdown Tests', function () {
       stubs: {
         transition: false,
       },
+      attachTo: document.body,
     });
     _setChildWrappers();
   };
 
   // Setup
   before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
     this.localVue = createLocalVue();
   });
 
@@ -61,8 +68,14 @@ describe('Dialtone Vue Dropdown Tests', function () {
     slots = baseSlots;
     scopedSlots = {};
     listeners = {};
+    wrapper.destroy();
   });
-  after(function () {});
+
+  after(function () {
+    // Restore RequestAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
+  });
 
   describe('Presentation Tests', function () {
     // Test setup
@@ -106,8 +119,16 @@ describe('Dialtone Vue Dropdown Tests', function () {
       });
 
       it('aria-expanded should be "true"', function () {
-        _setWrappers();
         assert.isTrue(anchorElement.attributes('aria-expanded') === 'true');
+      });
+
+      it('should pass axe-core accessibility rules', async function () {
+        const a11yResults = await axe.run(wrapper.element, configA11y);
+        const violations = a11yResults.violations;
+        if (violations.length) {
+          console.log('axe-core accessibility violations:', violations);
+        }
+        assert.equal(violations.length, 0);
       });
     });
   });

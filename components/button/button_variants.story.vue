@@ -79,6 +79,7 @@
       <dt-button
         importance="outlined"
         circle
+        aria-label="Icon only"
       >
         <template slot="icon">
           <icon-dialpad-glyph />
@@ -86,7 +87,7 @@
       </dt-button>
 
       <!-- Icon Only -->
-      <dt-button>
+      <dt-button aria-label="Icon only">
         <template slot="icon">
           <icon-dialpad-glyph />
         </template>
