@@ -10,7 +10,6 @@ import {
   itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
 import {
-  itBehavesLikeAppliesChildProp,
   itBehavesLikeAppliesClassToChild,
 } from '../../tests/shared_examples/extendability';
 import Vue from 'vue';
@@ -78,34 +77,6 @@ describe('DtAvatar Tests', function () {
       it('should render the avatar', function () { assert.isTrue(avatar.exists()); });
     });
 
-    describe('When the avatar renders image via attrs', function () {
-      // Test Environment
-      const src = IMAGE_ATTRS.SRC;
-      const alt = IMAGE_ATTRS.ALT;
-
-      // Test Setup
-      beforeEach(function () {
-        attrs = {
-          ...baseAttrs,
-          src,
-          alt,
-        };
-        _setWrappers();
-      });
-
-      it('image should exist', function () {
-        assert.exists(image);
-      });
-
-      it('src should match those provided by attrs', function () {
-        assert.strictEqual(image.attributes('src'), src);
-      });
-
-      it('alt should match those provided by attrs', function () {
-        assert.strictEqual(image.attributes('alt'), alt);
-      });
-    });
-
     describe('When the avatar renders image via slot', function () {
       // Test Environment
       const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
@@ -129,13 +100,13 @@ describe('DtAvatar Tests', function () {
       });
     });
 
-    describe('With kind icon', function () {
+    describe('With icon in slot', function () {
       // Test Environment
       const icon = '<svg></svg>';
 
       // Test Setup
-      beforeEach(function () {
-        propsData = { ...basePropsData, kind: 'icon' };
+      beforeEach(async function () {
+        propsData = { ...basePropsData };
         slots = { default: icon };
         _setWrappers();
       });
@@ -149,7 +120,7 @@ describe('DtAvatar Tests', function () {
       });
     });
 
-    describe('With kind initials', function () {
+    describe('With initials in slot', function () {
       // Test Environment
       const initials = 'DP';
 
@@ -225,19 +196,6 @@ describe('DtAvatar Tests', function () {
       });
     });
 
-    describe('Kind Validator', function () {
-      // Test Environment
-      const prop = DtAvatar.props.kind;
-
-      describe('When provided kind is in AVATAR_KIND_MODIFIERS', function () {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
-      });
-
-      describe('When provided kind is not in AVATAR_KIND_MODIFIERS', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_KIND`);
-      });
-    });
-
     describe('Color Validator', function () {
       // Test Environment
       const prop = DtAvatar.props.color;
@@ -288,10 +246,9 @@ describe('DtAvatar Tests', function () {
       describe('When image alt attribute is not provided', function () {
         // Test Setup
         beforeEach(function () {
-          attrs = {
-            ...baseAttrs,
-            src: IMAGE_ATTRS.SRC,
-          };
+          const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" data-qa="dt-avatar-image">`;
+
+          slots = { default: imageSlot };
           _setWrappers();
         });
 
@@ -301,10 +258,9 @@ describe('DtAvatar Tests', function () {
       describe('When image src attribute is not provided', function () {
         // Test Setup
         beforeEach(function () {
-          attrs = {
-            ...baseAttrs,
-            alt: IMAGE_ATTRS.ALT,
-          };
+          const imageSlot = `<img alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
+
+          slots = { default: imageSlot };
           _setWrappers();
         });
 
@@ -317,8 +273,6 @@ describe('DtAvatar Tests', function () {
     // Test Environment
     let element;
     const customClass = 'my-custom-class';
-    const propName = 'some';
-    const propValue = 'prop';
 
     // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
@@ -335,32 +289,11 @@ describe('DtAvatar Tests', function () {
       });
     };
 
-    const itBehavesLikeAppliesChildPropLocal = () => {
-      it('should have provided child prop', function () {
-        itBehavesLikeAppliesChildProp(element, propName, propValue);
-      });
-    };
-
     describe('When an avatar class is provided', function () {
       // Test Setup
       beforeEach(function () { _setupChildClassTest('avatarClass', '[data-qa="dt-avatar"]'); });
 
       itBehavesLikeAppliesClassToChildLocal();
-    });
-
-    describe('When attrs are provided', function () {
-      // Test Setup
-      beforeEach(function () {
-        attrs = {
-          some: 'prop',
-          src: IMAGE_ATTRS.SRC,
-          alt: IMAGE_ATTRS.ALT,
-        };
-        _setWrappers();
-        element = image;
-      });
-
-      itBehavesLikeAppliesChildPropLocal();
     });
   });
 });

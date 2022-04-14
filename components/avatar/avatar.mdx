@@ -36,23 +36,46 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 import { DtAvatar } from '@dialpad/dialtone-vue';
 ```
 
-### Image
+### Valid Slot Markup
 
-`src` and `alt` are required attributes for image avatars. They are overridden by the default slot.
+There are three valid types of markup you can pass into an avatar slot. `<img>` for custom images,
+`<svg>` for icons, and raw text for initials.
+
+#### Image
+
+`src` and `alt` are required attributes for image avatars
 
 ```jsx
-<dt-avatar
-  src=""
-  alt=""
-/>
+<dt-avatar>
+  <img src="/path/to/image" alt="image alt text">
+</dt-avatar>
 ```
 
-### With Kind
+#### Svg (with dialtone icon)
 
 ```jsx
-<dt-avatar
-  kind="default | icon | initials"
-/>
+<dt-avatar>
+  <icon-dialpad-glyph/>
+</dt-avatar>
+```
+
+#### Svg
+
+```jsx
+<dt-avatar>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 10H9V15H15V10H19L12 3L5 10Z" fill="black"/>
+    <path d="M5 20V18H19V20H5Z" fill="black"/>
+  </svg>
+</dt-avatar>
+```
+
+#### With Raw Text (initials)
+
+```jsx
+<dt-avatar>
+  DP
+</dt-avatar>
 ```
 
 ### With Color

@@ -4,18 +4,19 @@
     :size="size"
     :color="color"
   >
-    <html-fragment
-      :html="defaultSlot"
+    <component
+      :is="defaultSlot"
     />
   </dt-avatar>
 </template>
 
 <script>
 import DtAvatar from './avatar';
-import { htmlFragment } from '@/common/utils';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'DtAvatarDefault',
-  components: { DtAvatar, htmlFragment },
+  components: { DtAvatar },
+  mixins: [icon],
 };
 </script>
