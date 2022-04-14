@@ -23,6 +23,12 @@ export const itBehavesLikeRaisesSingleVueWarning = (message) => {
   });
 };
 
+export const itBehavesLikeRaisesVueWarning = (message) => {
+  it('contains expected warning message', function () {
+    assert.isTrue(console.warn.calledWith(message));
+  });
+};
+
 export default {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,

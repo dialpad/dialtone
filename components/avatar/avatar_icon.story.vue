@@ -4,16 +4,19 @@
     :size="$attrs.size"
     :color="$attrs.color"
   >
-    <v-html :html="defaultSlot" />
+    <component
+      :is="defaultSlot"
+    />
   </dt-avatar>
 </template>
 
 <script>
 import DtAvatar from './avatar';
-import VHtml from '@/common/v_html';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'DtAvatarDefault',
-  components: { DtAvatar, VHtml },
+  components: { DtAvatar },
+  mixins: [icon],
 };
 </script>
