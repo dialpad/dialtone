@@ -169,6 +169,21 @@ Default.args = {
   bottom: '<span class="d-badge d-badge--purple-100">Label</span>',
   navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
 };
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-allowed-attr',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 
 export const Custom = CustomTemplate.bind({});
 Custom.args = {};
+Custom.parameters = {
+  a11y: Default.parameters.a11y,
+};

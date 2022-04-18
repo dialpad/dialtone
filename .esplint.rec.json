@@ -13,6 +13,9 @@
     },
     "components/skeleton/skeleton-paragraph.vue": {
       "complexity": 1
+    },
+    "recipes/list_items/contact_info/contact_info.stories.js": {
+      "max-lines": 1
     }
   }
 }

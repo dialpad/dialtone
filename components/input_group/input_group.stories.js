@@ -126,4 +126,24 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  options: {
+    showPanel: false,
+  },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'color-contrast',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};

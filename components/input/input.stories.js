@@ -294,7 +294,18 @@ export const WithError = Template.bind({});
 WithError.args = {
   messages: [{ message: 'This is an error message', type: 'error' }],
 };
-WithError.parameters = {};
+WithWarning.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'color-contrast',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 
 export const WithSuccess = Template.bind({});
 WithSuccess.args = {

@@ -103,7 +103,30 @@ const VariantsTemplate = (args) => createTemplateFromVueFile(args, ToggleVariant
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'button-name',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  options: {
+    showPanel: false,
+  },
+  a11y: Default.parameters.a11y,
+};

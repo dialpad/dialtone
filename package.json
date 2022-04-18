@@ -16,6 +16,7 @@
     "storybook": "npm run --prefix storybook storybook",
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
+    "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js"
   },
@@ -38,6 +39,7 @@
     "@vue/cli-service": "~4.5.15",
     "@vue/compiler-sfc": "^3.1.0",
     "@vue/test-utils": "^2.0.0-rc.12",
+    "axe-core": "^4.4.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "chai": "^4.2.0",

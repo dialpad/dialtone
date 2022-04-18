@@ -1,5 +1,5 @@
 <template>
-  <div
+  <ul
     ref="listWrapper"
   >
     <dt-list-item
@@ -55,7 +55,7 @@
         </div>
       </div>
     </dt-list-item>
-  </div>
+  </ul>
 </template>
 
 <script>
