@@ -45,9 +45,8 @@ These requirements are enforced via peerdependencies of Dialtone Vue when possib
 If you would like to contribute to Dialtone Vue the first step is to get the project running locally. Follow the below quickstart to do so.
 
 1. Clone the repo `git clone https://github.com/dialpad/dialtone-vue.git`
-2. Install storybook dependencies `npm run storybook:install`
-3. Install dialtone-vue dependencies `npm install`
-4. Run local dev server `npm start`
-5. Visit local dev server at http://localhost:9011/
+2. Install dependencies `npm run install:all`
+3. Run local dev server `npm start`
+4. Visit local dev server at http://localhost:9011/
 
 Next read the more detailed contributor documentation in [CONTRIBUTING.md](.github/CONTRIBUTING.md).

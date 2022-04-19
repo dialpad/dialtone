@@ -23,7 +23,8 @@
     "storybook": "npm run --prefix storybook storybook",
     "storybook:install": "npm install --prefix storybook",
     "storybook:build": "npm run --prefix storybook build",
-    "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test"
+    "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
+    "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue"
   },
   "dependencies": {
     "@linusborg/vue-simple-portal": "^0.1.5",
