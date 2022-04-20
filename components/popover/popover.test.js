@@ -293,12 +293,14 @@ describe('Dialtone Vue Popover tests', function () {
       it('aria-labelledby should be set correctly on the content window', function () {
         assert.strictEqual(popoverWindow.attributes('aria-labelledby'), wrapper.vm.labelledBy);
       });
-      it('should pass axe-core accessibility rules', function (done) {
-        axe.run(wrapper.element, configA11y, function (error, result) {
-          assert.isNull(error, 'there was no error');
-          assert.lengthOf(result.violations, 0);
-          done();
-        });
+
+      it('should pass axe-core accessibility rules', async function () {
+        const a11yResults = await axe.run(wrapper.element, configA11y);
+        const violations = a11yResults.violations;
+        if (violations.length) {
+          console.log('axe-core accessibility violations:', violations);
+        }
+        assert.equal(violations.length, 0);
       });
     });
 
