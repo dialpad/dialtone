@@ -1,3 +1,12 @@
+# [2.4.0](https://github.com/dialpad/dialtone-vue/compare/v2.3.0...v2.4.0) (2022-04-20)
+
+
+### Features
+
+* automated a11y testing using axe-core ([#332](https://github.com/dialpad/dialtone-vue/issues/332)) ([a948b64](https://github.com/dialpad/dialtone-vue/commit/a948b648fd8eea22a8f045aa6e98a5867a2e8117))
+* **avatar:** change to a pure slot based pattern ([#329](https://github.com/dialpad/dialtone-vue/issues/329)) ([926dc4a](https://github.com/dialpad/dialtone-vue/commit/926dc4aab9ff2168d2db217e645d9f3fb2fedb7f))
+* **button:** add active button styles ([#322](https://github.com/dialpad/dialtone-vue/issues/322)) ([9979047](https://github.com/dialpad/dialtone-vue/commit/99790472c5e9c5730d130851db8472b5f4cec8a7))
+
 # [2.3.0](https://github.com/dialpad/dialtone-vue/compare/v2.2.2...v2.3.0) (2022-04-08)
 
 
