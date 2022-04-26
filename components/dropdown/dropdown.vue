@@ -29,6 +29,7 @@
       />
     </template>
     <template #content="{ close }">
+      <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
       <ul
         :id="listId"
         ref="listWrapper"

@@ -8,36 +8,36 @@
     "storybook-a11y-test": "NODE_PATH=./node_modules node ./scripts/storybook-a11y-test.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.5",
+    "@babel/core": "^7.17.9",
     "@shopify/storybook-a11y-test": "^0.5.0",
-    "@storybook/addon-a11y": "^6.4.19",
-    "@storybook/addon-actions": "^6.4.19",
-    "@storybook/addon-backgrounds": "^6.4.19",
-    "@storybook/addon-controls": "^6.4.19",
-    "@storybook/addon-docs": "^6.4.19",
-    "@storybook/addon-links": "^6.4.19",
+    "@storybook/addon-a11y": "^6.4.22",
+    "@storybook/addon-actions": "^6.4.22",
+    "@storybook/addon-backgrounds": "^6.4.22",
+    "@storybook/addon-controls": "^6.4.22",
+    "@storybook/addon-docs": "^6.4.22",
+    "@storybook/addon-links": "^6.4.22",
     "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addon-viewport": "^6.4.19",
-    "@storybook/addons": "^6.4.19",
-    "@storybook/source-loader": "^6.4.19",
-    "@storybook/theming": "^6.4.19",
-    "@storybook/vue": "^6.4.19",
-    "babel-loader": "^8.1.0",
+    "@storybook/addon-viewport": "^6.4.22",
+    "@storybook/addons": "^6.4.22",
+    "@storybook/source-loader": "^6.4.22",
+    "@storybook/theming": "^6.4.22",
+    "@storybook/vue": "^6.4.22",
+    "babel-loader": "^8.2.4",
     "babel-preset-vue": "^2.0.2",
     "generate-file-webpack-plugin": "^1.0.1",
-    "postcss-focus-visible": "^6.0.3",
-    "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.11"
+    "postcss-focus-visible": "^6.0.4",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14"
   },
   "dependencies": {
     "focus-visible": "^5.2.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.14"
   },
   "engineStrict": true,
   "engines": {
-    "node": ">= 14.17"
+    "node": ">= 16"
   },
   "volta": {
-    "node": "14.18.1"
+    "node": "16"
   }
 }

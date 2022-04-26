@@ -2,6 +2,7 @@
   <div
     data-qa="dt-tab-group"
   >
+    <!-- eslint-disable-next-line vuejs-accessibility/interactive-supports-focus -->
     <div
       :class="[
         'd-tablist',

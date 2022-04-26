@@ -1,10 +1,5 @@
 <template>
   <div
-    role="combobox"
-    :aria-expanded="showList.toString()"
-    :aria-controls="listId"
-    :aria-owns="listId"
-    aria-haspopup="listbox"
     @keydown.esc.stop="onEscapeKey"
     @keydown.enter.exact="onEnterKey"
     @keydown.up.stop.prevent="onUpKey"
@@ -113,6 +108,10 @@ export default {
   computed: {
     inputProps () {
       return {
+        role: 'combobox',
+        'aria-expanded': this.showList.toString(),
+        'aria-owns': this.listId,
+        'aria-haspopup': 'listbox',
         'aria-activedescendant': this.activeItemId,
         'aria-controls': this.listId,
       };

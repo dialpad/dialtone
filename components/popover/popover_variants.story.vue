@@ -399,6 +399,7 @@
       :open.sync="openPopoverWithTriggerOverride"
     >
       <template #anchor="{ attrs }">
+        <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
         <dt-button
           v-bind="attrs"
           @mouseover="onMouseOver"

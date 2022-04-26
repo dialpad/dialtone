@@ -24,6 +24,9 @@
     "components/lazy_show/lazy_show.vue": {
       "vue/no-deprecated-dollar-listeners-api": 2
     },
+    "components/lazy_show/lazy_show_default.story.vue": {
+      "vuejs-accessibility/iframe-has-title": 1
+    },
     "components/link/link.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },

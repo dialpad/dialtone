@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
   <component
     :is="elementType"
     :id="id"

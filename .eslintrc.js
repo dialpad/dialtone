@@ -45,6 +45,7 @@ module.exports = {
     'vue/new-line-between-multi-line-property': ['warn'],
     'vue/html-comment-content-spacing': ['warn'],
     'vue/no-potential-component-option-typo': ['warn'],
+    'vue/multi-word-component-names': ['off'],
     'vue/no-reserved-component-names': ['error', {
       disallowVueBuiltInComponents: true,
       disallowVue3BuiltInComponents: true,

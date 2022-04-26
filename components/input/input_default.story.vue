@@ -91,7 +91,8 @@ export default {
 
       // Adds validation message
       validateConfigData.length.message = this?.validate?.length?.message
-        ? this.validate.length.message : this.validationMessage;
+        ? this.validate.length.message
+        : this.validationMessage;
 
       return validateConfigData;
     },

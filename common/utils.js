@@ -94,6 +94,7 @@ export const htmlFragment = {
   props: ['html'],
   render (h, ctx) {
     return new Vue({
+      // eslint-disable-next-line vue/multi-word-component-names
       name: 'Inner',
       beforeCreate () { this.$createElement = h; },
       template: `<div>${ctx.props.html}</div>`,
