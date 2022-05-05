@@ -14,16 +14,19 @@
           v-if="avatarSrc"
           kind="default"
           size="lg"
-          :src="avatarSrc"
-          :alt="avatarInitials"
           avatar-class="d-bar2"
-        />
+        >
+          <img
+            data-qa="dt-contact-avatar"
+            :src="avatarSrc"
+            :alt="avatarInitials"
+          >
+        </dt-avatar>
         <dt-avatar
           v-else-if="avatarInitials"
           kind="initials"
           size="lg"
           :color="avatarColor"
-          :alt="avatarInitials"
         >
           {{ avatarInitials }}
         </dt-avatar>
