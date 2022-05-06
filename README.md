@@ -40,6 +40,24 @@ Projects using Dialtone Vue should be aware of the requirements:
 
 These requirements are enforced via peerdependencies of Dialtone Vue when possible.
 
+<!-- ## Emojis
+
+Dialtone Vue uses [JoyPixels][https://www.joypixels.com/] to render emojis. If you are using the emoji components, Dialtone Vue will use the free joypixels assets hosted on jsdelivr CDN by default. You may wish to use self hosted joypixels assets such as the SVGs only available to premium license holders. In order to do this set your custom asset URL with the following function during initialization of your app:
+
+```js
+import { setEmojiAssetUrl } from 'dialtone-vue'
+
+setEmojiAssetUrl('https://my.example.website.com/joypixels/svg/unicode/')
+```
+
+You may access the emoji.json data for all emojis Dialtone Vue supports via the following module
+
+```js
+import { EmojiJson } from 'dialtone-vue'
+```
+
+-->
+
 ## Contributing
 
 If you would like to contribute to Dialtone Vue the first step is to get the project running locally. Follow the below quickstart to do so.

@@ -4,8 +4,10 @@ import { addParameters, app } from '@storybook/vue3';
 import { version } from '../package.json';
 import theme from './theme';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
+import { setEmojiAssetUrl } from '../common/emoji.js';
 import focusVisiblePolyfill from 'focus-visible';
 
+setEmojiAssetUrl('https://storage.cloud.google.com/switch_static/joypixels/svg/unicode/')
 app.use(fixDefaultSlot);
 
 addParameters({
