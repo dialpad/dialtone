@@ -11,14 +11,15 @@
     :modal="modal"
     :max-height="maxHeight"
     :max-width="maxWidth"
+    :open-with-arrow-keys="true"
     v-on="$listeners"
     @opened="updateInitialHighlightIndex"
     @keydown.enter="onEnterKey"
     @keydown.space="onSpaceKey"
-    @keydown.up.stop.prevent="onUpKeyPress"
-    @keydown.down.prevent="onDownKeyPress"
-    @keydown.home.stop.prevent="onHomeKey"
-    @keydown.end.stop.prevent="onEndKey"
+    @keydown.up.stop.prevent="onKeyValidation($event, 'onUpKeyPress')"
+    @keydown.down.stop.prevent="onKeyValidation($event, 'onDownKeyPress')"
+    @keydown.home.stop.prevent="onKeyValidation($event, 'onHomeKeyPress')"
+    @keydown.end.stop.prevent="onKeyValidation($event, 'onEndKeyPress')"
   >
     <template #anchor="{ attrs }">
       <!-- @slot Anchor element that activates the dropdown -->
@@ -208,6 +209,7 @@ export default {
       LIST_ITEM_NAVIGATION_TYPES,
       DROPDOWN_PADDING_CLASSES,
       openedWithKeyboard: false,
+      isOpen: null,
     };
   },
 
@@ -248,6 +250,8 @@ export default {
     },
 
     updateInitialHighlightIndex (isPopoverOpen) {
+      this.isOpen = isPopoverOpen;
+
       if (isPopoverOpen) {
         if (this.openedWithKeyboard && this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
           this.setHighlightIndex(0);
@@ -273,15 +277,49 @@ export default {
     },
 
     onUpKeyPress () {
+      if (!this.isOpen) {
+        this.openedWithKeyboard = true;
+        return;
+      }
       if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
         return this.onUpKey();
       }
     },
 
     onDownKeyPress () {
+      if (!this.isOpen) {
+        this.openedWithKeyboard = true;
+        return;
+      }
       if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
         return this.onDownKey();
       }
+    },
+
+    onHomeKeyPress () {
+      if (!this.isOpen) {
+        return;
+      }
+
+      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        return this.onHomeKey();
+      }
+    },
+
+    onEndKeyPress () {
+      if (!this.isOpen) {
+        return;
+      }
+
+      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        return this.onEndKey();
+      }
+    },
+
+    onKeyValidation (e, eventHandler) {
+      if (this.open !== null) { return; }
+
+      this[eventHandler](e);
     },
   },
 };

@@ -23,6 +23,7 @@
     :footer-class="footerClass"
     :max-height="maxHeight"
     :max-width="maxWidth"
+    :open-with-arrow-keys="openWithArrowKeys"
     @opened="onOpened"
   >
     <template
