@@ -22,6 +22,7 @@
     :footer-class="$attrs.footerClass"
     :max-height="$attrs.maxHeight"
     :max-width="$attrs.maxWidth"
+    :open-with-arrow-keys="$attrs.openWithArrowKeys"
     @opened="$attrs.onOpened"
   >
     <template #anchor="{ attrs }">

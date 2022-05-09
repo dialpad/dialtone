@@ -22,6 +22,8 @@
         ref="anchor"
         data-qa="dt-popover-anchor"
         @click.capture="defaultToggleOpen"
+        @keydown.up.prevent="onArrowKeyPress"
+        @keydown.down.prevent="onArrowKeyPress"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
         @keydown.escape.capture="closePopover"
       >
@@ -362,6 +364,15 @@ export default {
           initialFocusElement.startsWith('#');
       },
     },
+
+    /**
+     * If the popover should open pressing up or down arrow key on the anchor element.
+     * This can be set when not passing open prop.
+     */
+    openWithArrowKeys: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['update:open', 'opened'],
@@ -514,6 +525,15 @@ export default {
 
     toggleOpen () {
       this.isOpen = !this.isOpen;
+    },
+
+    onArrowKeyPress (e) {
+      if (this.open !== null) { return; }
+      if (this.openWithArrowKeys && this.anchorEl.contains(e.target)) {
+        if (!this.isOpen) {
+          this.isOpen = true;
+        }
+      }
     },
 
     addClosePopoverEventListener () {
