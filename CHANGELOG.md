@@ -1,3 +1,17 @@
+# [2.5.0](https://github.com/dialpad/dialtone-vue/compare/v2.4.0...v2.5.0) (2022-05-10)
+
+
+### Bug Fixes
+
+* contact info avatar display blank image ([#347](https://github.com/dialpad/dialtone-vue/issues/347)) ([c6b9577](https://github.com/dialpad/dialtone-vue/commit/c6b957776fcbdb3a628f805a6baa2d9a821ab0d6))
+* usage of arrow-keys in the combobox and dropdown ([#346](https://github.com/dialpad/dialtone-vue/issues/346)) ([80515eb](https://github.com/dialpad/dialtone-vue/commit/80515eba10415260e497ce317ff1ff5af9bf833a))
+
+
+### Features
+
+* combobox with popover recipe ([#339](https://github.com/dialpad/dialtone-vue/issues/339)) ([79481d1](https://github.com/dialpad/dialtone-vue/commit/79481d1edc35e317e2114dcc7390ba28be0fff89))
+* dt-387 implement handling of emoji assets ([#343](https://github.com/dialpad/dialtone-vue/issues/343)) ([7f0fbac](https://github.com/dialpad/dialtone-vue/commit/7f0fbaca6e094b5ab9c653851c98270638e7b4d7))
+
 # [2.4.0](https://github.com/dialpad/dialtone-vue/compare/v2.3.0...v2.4.0) (2022-04-20)
 
 
