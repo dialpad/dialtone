@@ -1,12 +1,14 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtCombobox from './combobox';
-import DtComboboxMdx from './combobox.mdx';
-import DtComboboxDefaultTemplate from './combobox_default.story.vue';
+import DtRecipeComboboxWithPopover from './combobox_with_popover';
+import DtRecipeComboboxWithPopoverMdx from './combobox_with_popover.mdx';
+import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
+import { POPOVER_CONTENT_WIDTHS } from '@';
+import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
 
 // Default Prop Values
 export const argsData = {
-  showList: true,
+  showList: null,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
@@ -26,7 +28,27 @@ export const argTypesData = {
     },
   },
   list: {
-    description: 'Slot for the list component',
+    description: 'Slot for the list',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  header: {
+    description: 'Slot for popover header content',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  footer: {
+    description: 'Slot for popover footer content',
     control: 'text',
     table: {
       category: 'slots',
@@ -37,18 +59,11 @@ export const argTypesData = {
   },
 
   // Props
-  listAriaLabel: {
+  showList: {
     table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
       defaultValue: {
-        summary: '',
+        summary: 'null',
       },
-    },
-    control: {
-      type: 'text',
     },
   },
   listId: {
@@ -57,6 +72,28 @@ export const argTypesData = {
         summary: 'generated unique ID',
       },
     },
+  },
+  contentWidth: {
+    defaultValue: 'anchor',
+    control: {
+      type: 'select',
+      options: POPOVER_CONTENT_WIDTHS,
+    },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
+  padding: {
+    defaultValue: 'small',
+    control: {
+      type: 'select',
+      options: Object.keys(DROPDOWN_PADDING_CLASSES),
+    },
+  },
+  maxHeight: {
+    defaultValue: '300px',
   },
   onBeginningOfList: {
     table: {
@@ -79,6 +116,9 @@ export const argTypesData = {
         summary: 'null',
       },
     },
+  },
+  listAriaLabel: {
+    defaultValue: 'Example list items',
   },
 
   // Action Event Handlers
@@ -133,8 +173,8 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Components/Combobox',
-  component: DtCombobox,
+  title: 'Recipes/Comboboxes/Combobox With Popover',
+  component: DtRecipeComboboxWithPopover,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -143,7 +183,7 @@ export default {
       sort: 'requiredFirst',
     },
     docs: {
-      page: DtComboboxMdx,
+      page: DtRecipeComboboxWithPopoverMdx,
     },
     options: {
       showPanel: true,
@@ -155,9 +195,21 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtComboboxDefaultTemplate,
+  DtRecipeComboboxWithPopoverDefaultTemplate,
 );
 
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-valid-attr-value',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};

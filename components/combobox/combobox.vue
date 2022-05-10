@@ -27,6 +27,7 @@
         name="list"
         :list-props="listProps"
         :opened="onOpen"
+        :clear-highlight-index="clearHighlightIndex"
       />
     </div>
   </div>
@@ -92,9 +93,17 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * If the list is rendered outside the component, like when using popover as the list wrapper.
+     */
+    listRenderedOutside: {
+      type: Boolean,
+      default: false,
+    },
   },
 
-  emits: ['select', 'escape', 'highlight'],
+  emits: ['select', 'escape', 'highlight', 'opened'],
 
   data () {
     return {
@@ -152,7 +161,10 @@ export default {
     showList (showList) {
       // When the list's visibility changes reset the highlight index.
       this.$nextTick(function () {
-        this.setInitialHighlightIndex();
+        if (!this.listRenderedOutside) {
+          this.setInitialHighlightIndex();
+          this.$emit('opened', showList);
+        }
       });
 
       if (!showList && this.outsideRenderedListRef) {
@@ -176,7 +188,9 @@ export default {
     },
 
     clearHighlightIndex () {
-      this.setHighlightIndex(-1);
+      if (this.showList) {
+        this.setHighlightIndex(-1);
+      }
     },
 
     afterHighlight () {
@@ -196,10 +210,15 @@ export default {
     onOpen (open, contentRef) {
       this.outsideRenderedListRef = contentRef;
       this.outsideRenderedListRef?.addEventListener('mousemove', this.onMouseHighlight);
+      this.$emit('opened', open);
+
+      if (open) {
+        this.setInitialHighlightIndex();
+      }
     },
 
     onKeyValidation (e, eventHandler) {
-      if (!this.showList) { return; }
+      if (!this.showList || !this.getListElement()) { return; }
 
       this[eventHandler](e);
     },

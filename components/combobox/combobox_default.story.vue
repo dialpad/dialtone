@@ -5,6 +5,7 @@
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
+    @opened="onOpened"
   >
     <template
       slot="input"

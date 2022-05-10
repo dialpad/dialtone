@@ -1,0 +1,105 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeComboboxWithPopover from './combobox_with_popover';
+
+# Combobox With Popover
+
+<Subtitle>
+  A combobox that renders the listbox inside a popover therefore the listbox is rendered at the root of the document.
+</Subtitle>
+
+## Base Style
+
+The combobox contains the `input` and `list` slots specified in the [combobox documentation](?path=/docs/components-combobox--default).
+Since it's using the popover content to render the list, it's also possible to add a header and footer to the popover
+as it's specified in the [popover documentation](?path=/docs/components-popover--default).
+
+<Canvas>
+  <Story id="recipes-comboboxes-combobox-with-popover--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeComboboxWithPopover } from '@dialpad/dialtone-vue';
+```
+
+### Basic usage
+
+```html
+<dt-recipe-combobox-with-popover
+  ref="comboboxWithPopover"
+  list-aria-label="Example list items"
+  @escape="onEscape"
+  @highlight="onHighlight"
+  @select="onSelect"
+>
+  <template #input="{ inputProps }">
+    <dt-input v-bind="inputProps" />
+  </template>
+  <template #list="{ listProps }">
+    <ul v-bind="listProps">
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        navigation-type="arrow-keys"
+        role="option"
+        @click="onSelect(i)"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </ul>
+  </template>
+</dt-recipe-combobox-with-popover>
+```
+
+When not passing `showList` and using the default combobox trigger on input focus,
+to close the list with the `select` event or with the `click` event in the list item,
+use the `closeComboboxList` method:
+
+```jsx
+methods: {
+  onSelect (i) {
+    this.$refs.comboboxWithPopover.closeComboboxList();
+  },
+}
+```
+
+### With header and footer
+
+```html
+<dt-recipe-combobox-with-popover
+  list-aria-label="Example list items"
+  @escape="onEscape"
+  @highlight="onHighlight"
+  @select="onSelect"
+>
+  <template #input="{ inputProps }">
+    <dt-input v-bind="inputProps" />
+  </template>
+  <template #list="{ listProps }">
+    <ul v-bind="listProps">
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        navigation-type="arrow-keys"
+        role="option"
+        @click="onSelect(i)"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </ul>
+  </template>
+  <template #header>
+    <span>Header content</span>
+  </template>
+  <template #footer>
+     <span>Footer content</span>
+  </template>
+</dt-recipe-combobox-with-popover>
+```

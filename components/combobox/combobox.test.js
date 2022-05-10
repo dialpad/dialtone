@@ -26,6 +26,7 @@ describe('Dialtone Vue Combobox tests', function () {
   let selectStub;
   let escapeStub;
   let highlightStub;
+  let openedStub;
 
   // Helpers
   const _setChildWrappers = () => {
@@ -55,7 +56,8 @@ describe('Dialtone Vue Combobox tests', function () {
     selectStub = sinon.stub();
     escapeStub = sinon.stub();
     highlightStub = sinon.stub();
-    listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub };
+    openedStub = sinon.stub();
+    listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub, opened: openedStub };
     _mountWrapper();
     _setChildWrappers();
   });
@@ -132,6 +134,25 @@ describe('Dialtone Vue Combobox tests', function () {
       slots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
       _mountWrapper();
       _setChildWrappers();
+    });
+
+    describe('When the list is shown', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ showList: false });
+        await wrapper.setProps({ showList: true });
+      });
+
+      it('should call listener', function () { assert.isTrue(openedStub.called); });
+      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 2); });
+    });
+
+    describe('When the list is closed', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ showList: false });
+      });
+
+      it('should call listener', function () { assert.isTrue(openedStub.called); });
+      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 1); });
     });
 
     describe('When "Enter" key is pressed but no item is highlighted', function () {

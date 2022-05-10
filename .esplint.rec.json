@@ -51,6 +51,9 @@
     },
     "components/tooltip/tooltip.vue": {
       "vue/no-deprecated-destroyed-lifecycle": 1
+    },
+    "recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 1
     }
   }
 }
