@@ -5,6 +5,7 @@
     @escape="onComboboxEscape"
     @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
+    @opened="onOpened"
   >
     <template
       #input="{ inputProps }"

@@ -1,0 +1,113 @@
+<template>
+  <dt-recipe-combobox-with-popover
+    ref="comboboxWithPopover"
+    :list-aria-label="$attrs.listAriaLabel"
+    :max-height="$attrs.maxHeight"
+    :max-width="$attrs.maxWidth"
+    :content-width="$attrs.contentWidth"
+    :show-list="$attrs.showList"
+    :padding="$attrs.padding"
+    :list-id="$attrs.listId"
+    :list-class="$attrs.listClass"
+    :open-with-arrow-keys="$attrs.openWithArrowKeys"
+    @escape="onComboboxEscape"
+    @highlight="$attrs.onHighlight"
+    @select="onComboboxSelect"
+    @opened="$attrs.onOpened"
+  >
+    <template
+      v-if="$attrs.header"
+      #header
+    >
+      <span v-html="$attrs.header" />
+    </template>
+
+    <template #input="{ inputProps }">
+      <dt-input
+        v-model="value"
+        placeholder="Select one or start typing"
+        v-bind="inputProps"
+      />
+    </template>
+    <template #list="{ listProps }">
+      <ul
+        v-bind="listProps"
+        class="d-p0"
+      >
+        <dt-list-item
+          v-for="(item, i) in items"
+          :key="item.id"
+          role="option"
+          navigation-type="arrow-keys"
+          @click="onComboboxSelect(i)"
+        >
+          {{ item.number }}
+          <template #right>
+            {{ item.type }}
+          </template>
+        </dt-list-item>
+      </ul>
+    </template>
+    <template
+      v-if="$attrs.footer"
+      #footer
+    >
+      <span v-html="$attrs.footer" />
+    </template>
+    <template
+      v-else
+      #footer
+    >
+      <div class="d-d-flex d-ai-center d-px12">
+        <dt-checkbox label="Apply primary number to assigned Contact Centers" />
+      </div>
+    </template>
+  </dt-recipe-combobox-with-popover>
+</template>
+
+<script>
+import DtRecipeComboboxWithPopover from './combobox_with_popover';
+import { DtInput, DtListItem, DtCheckbox } from '@';
+
+export default {
+  name: 'DtRecipeComboboxWithPopoverDefault',
+  components: {
+    DtRecipeComboboxWithPopover,
+    DtInput,
+    DtListItem,
+    DtCheckbox,
+  },
+
+  data () {
+    return {
+      value: '',
+      items: [
+        { id: 'item1', number: '(732) 338-2720', type: 'MAINLINE' },
+        { id: 'item2', number: '(732) 338-2722', type: 'MAINLINE' },
+        { id: 'item3', number: '(732) 338-2725', type: 'MAINLINE' },
+        { id: 'item4', number: '(732) 338-2764', type: 'MAINLINE' },
+        { id: 'item5', number: '(732) 338-2784', type: 'MAINLINE' },
+        { id: 'item6', number: '(732) 338-2743', type: 'MAINLINE' },
+        { id: 'item7', number: '(732) 338-2728', type: 'MAINLINE' },
+        { id: 'item8', number: '(732) 338-2769', type: 'Other' },
+        { id: 'item9', number: '(732) 338-2723', type: 'MAINLINE' },
+        { id: 'item10', number: '(732) 338-2729', type: 'MAINLINE' },
+        { id: 'item11', number: '(732) 338-2489', type: 'MAINLINE' },
+        { id: 'item12', number: '(732) 338-2756', type: 'Other' },
+      ],
+    };
+  },
+
+  methods: {
+    onComboboxSelect (i) {
+      this.$attrs.onSelect(i);
+      this.value = this.items[i].number;
+      this.$refs.comboboxWithPopover.closeComboboxList();
+    },
+
+    onComboboxEscape () {
+      this.$attrs.onEscape();
+    },
+  },
+};
+</script>

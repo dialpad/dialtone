@@ -1,26 +1,26 @@
-import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
-import DtCombobox from './combobox.vue';
-import DtInput from '../input/input.vue';
+import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
+import DtInput from '@/components/input/input';
+import sinon from 'sinon';
+import DtPopover from '@/components/popover/popover';
 
 // Constants
 const baseProps = {
   listAriaLabel: '',
   listId: 'list',
-  showList: true,
 };
 
-describe('Dialtone Vue Combobox tests', function () {
+describe('DtRecipeComboboxWithPopover Tests', function () {
   // Wrappers
   let wrapper;
   let inputWrapper;
   let listWrapper;
 
-  // Test Environment
-  let props;
-  let attrs;
+  // Environment
+  let props = baseProps;
   let slots;
+  let attrs;
   let selectStub;
   let escapeStub;
   let highlightStub;
@@ -33,16 +33,27 @@ describe('Dialtone Vue Combobox tests', function () {
   };
 
   const _mountWrapper = () => {
-    wrapper = mount(DtCombobox, {
+    wrapper = mount(DtRecipeComboboxWithPopover, {
       props,
-      attrs,
       slots,
+      attrs,
+      attachTo: document.body,
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
     });
   };
 
-  // Test Setup
+  // Setup
+  before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
+  });
   beforeEach(function () {
-    props = baseProps;
     selectStub = sinon.stub();
     escapeStub = sinon.stub();
     highlightStub = sinon.stub();
@@ -52,10 +63,16 @@ describe('Dialtone Vue Combobox tests', function () {
     _setChildWrappers();
   });
 
-  // Test Teardown
+  // Teardown
   afterEach(function () {
     props = baseProps;
     slots = {};
+    wrapper.unmount();
+  });
+  after(function () {
+    // Restore RequestAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
   });
 
   describe('Presentation Tests', function () {
@@ -76,24 +93,37 @@ describe('Dialtone Vue Combobox tests', function () {
     describe('When a list is provided', function () {
       // Test Setup
       beforeEach(async function () {
-        slots = { list: '<ol id="list"></ol>' };
+        props = { ...props, showList: true };
+        slots = {
+          input: '<input id="input" />',
+          list: '<ol id="list"></ol>',
+        };
         _mountWrapper();
         _setChildWrappers();
       });
 
       it('should render the list wrapper', function () { assert.isTrue(listWrapper.exists()); });
-      it('should render the list', function () { assert.isTrue(wrapper.find('#list').exists()); });
+      it('should render the list', function () {
+        assert.isTrue(wrapper.findComponent(DtPopover).findComponent({ ref: 'content' }).find('#list').exists());
+      });
     });
   });
 
+  // TODO: Fix accessibility tests once Vue test utils v2 is released with the scoped slots bug fixed
+  /*
   describe('Accessibility Tests', function () {
-    describe('When list is not expanded', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ showList: false });
-      });
+    // Test Setup
+    beforeEach(async function () {
+      slots = {
+        input: '<template #input="inputProps""><input id="input" v-bind="inputProps" /></template>',
+      };
+      _mountWrapper();
+      _setChildWrappers();
+    });
 
+    describe('When list is not expanded', function () {
       it('aria-expanded should be "false"', function () {
-        assert.isTrue(wrapper.attributes('aria-expanded') === 'false');
+        assert.isTrue(wrapper.find('#input').attributes('aria-expanded') === 'false');
       });
     });
 
@@ -103,41 +133,46 @@ describe('Dialtone Vue Combobox tests', function () {
       });
 
       it('aria-expanded should be "true"', function () {
-        assert.isTrue(wrapper.attributes('aria-expanded') === 'true');
+        assert.isTrue(wrapper.find('#input').attributes('aria-expanded') === 'true');
       });
     });
   });
+  */
 
   describe('Interactivity Tests', function () {
     // Test Setup
     beforeEach(async function () {
-      slots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
+      slots = {
+        input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
+        list: `<template #list="{ listProps }">
+                <ol id="list" v-bind="listProps"><li role="option">item1</li><li role="option">item2</li></ol>
+               </template>`,
+      };
       _mountWrapper();
       _setChildWrappers();
     });
 
     describe('When the list is shown', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ showList: false });
         await wrapper.setProps({ showList: true });
-      });
-
-      it('should call listener', function () { assert.isTrue(openedStub.called); });
-      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 2); });
-    });
-
-    describe('When the list is closed', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ showList: false });
       });
 
       it('should call listener', function () { assert.isTrue(openedStub.called); });
       it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 1); });
     });
 
-    describe('When "Enter" key is pressed but no item is highlighted', function () {
+    describe('When the list is closed', function () {
       beforeEach(async function () {
-        await wrapper.setData({ highlightIndex: -1 });
+        await wrapper.setProps({ showList: true });
+        await wrapper.setProps({ showList: false });
+      });
+
+      it('should call listener', function () { assert.isTrue(openedStub.called); });
+      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 2); });
+    });
+
+    describe('When "Enter" key is pressed but the combobox is not open', function () {
+      beforeEach(async function () {
         await wrapper.trigger('keydown.enter');
       });
 
@@ -145,61 +180,27 @@ describe('Dialtone Vue Combobox tests', function () {
       it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
     });
 
-    describe('When "Enter" key is pressed and item is highlighted', function () {
+    describe('When "Enter" key is pressed and the first item is highlighted', function () {
       beforeEach(async function () {
-        await wrapper.setData({ highlightIndex: 1 });
+        await wrapper.setProps({ showList: true });
+        await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
+        wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
         await wrapper.trigger('keydown.enter');
       });
 
-      it('should call listener', function () { assert.isTrue(selectStub.called); });
       it('should emit select event', function () { assert.equal(wrapper.emitted().select.length, 1); });
-    });
-
-    describe('When "Enter" key is pressed with another key and item is highlighted', function () {
-      beforeEach(async function () {
-        await wrapper.setData({ highlightIndex: 1 });
-        await wrapper.trigger('keydown.shift.enter');
-      });
-
-      it('should not call listener', function () { assert.isFalse(selectStub.called); });
-      it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
     });
 
     describe('When "Esc" key is pressed', function () {
       beforeEach(async function () {
+        await wrapper.setProps({ showList: true });
+        await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
+        wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
         await wrapper.trigger('keydown.esc');
       });
 
       it('should call listener', function () { assert.isTrue(escapeStub.called); });
       it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
-    });
-
-    describe('When the highlightIndex changes', function () {
-      beforeEach(async function () {
-        wrapper.vm.setHighlightIndex(1);
-        await wrapper.vm.$nextTick();
-      });
-
-      it('should call listener', function () { assert.isTrue(highlightStub.called); });
-      it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
-    });
-
-    describe('When mouseleave is detected on the list wrapper', function () {
-      // Test Setup
-      beforeEach(async function () {
-        await listWrapper.trigger('mouseleave');
-      });
-
-      it('should reset the highlightIndex', function () { assert.equal(wrapper.vm.highlightIndex, -1); });
-    });
-
-    describe('When focusout is detected on the list wrapper', function () {
-      // Test Setup
-      beforeEach(async function () {
-        await listWrapper.trigger('focusout');
-      });
-
-      it('should reset the highlightIndex', function () { assert.equal(wrapper.vm.highlightIndex, -1); });
     });
   });
 });
