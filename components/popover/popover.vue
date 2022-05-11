@@ -537,7 +537,10 @@ export default {
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
       if (this.open === null || this.open === undefined) {
-        if (!this.anchorEl.contains(e.target) && !this.anchorEl.isEqualNode(e.target)) return;
+        if ((!this.anchorEl.contains(e.target) && !this.anchorEl.isEqualNode(e.target)) || this.anchorEl?.disabled) {
+          return;
+        }
+
         this.toggleOpen();
       }
     },

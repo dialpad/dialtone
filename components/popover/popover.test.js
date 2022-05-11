@@ -217,6 +217,22 @@ describe('Dialtone Vue Popover tests', function () {
           assert.isFalse(popoverWindow.isVisible());
         });
       });
+
+      describe('When anchor is clicked but it\'s disabled', function () {
+        beforeEach(async function () {
+          button.element.disabled = 'disabled';
+          await button.trigger('click');
+          _setChildWrappers();
+        });
+
+        afterEach(function () {
+          button.element.disabled = undefined;
+        });
+
+        it('should not open the popover', function () {
+          assert.isFalse(popoverWindow.isVisible());
+        });
+      });
     });
 
     describe('When open prop is unset (default behaviour)', function () {

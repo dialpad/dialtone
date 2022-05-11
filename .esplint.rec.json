@@ -11,6 +11,9 @@
     "components/input/input.vue": {
       "max-lines": 1
     },
+    "components/popover/popover.vue": {
+      "complexity": 1
+    },
     "components/skeleton/skeleton-paragraph.vue": {
       "complexity": 1
     },
