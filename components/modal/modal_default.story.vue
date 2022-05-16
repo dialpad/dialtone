@@ -11,6 +11,7 @@
       :dialog-class="$attrs.dialogClass"
       :hide-close="$attrs.hideClose"
       :labelled-by-id="$attrs.labelledById"
+      :fixed-header-footer="$attrs.fixedHeaderFooter"
       @update:show="close"
     >
       <template

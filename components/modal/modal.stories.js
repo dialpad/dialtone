@@ -124,6 +124,13 @@ WithFooter.args = {
   showFooter: true,
 };
 
+export const WithFixedHeaderFooter = DefaultTemplate.bind({});
+WithFixedHeaderFooter.args = {
+  showFooter: true,
+  fixedHeaderFooter: true,
+  copy: argsData.copy.repeat(4),
+};
+
 export const WithDangerStyle = DefaultTemplate.bind({});
 WithDangerStyle.args = {
   kind: 'danger',
