@@ -1,3 +1,15 @@
+# [2.6.0](https://github.com/dialpad/dialtone-vue/compare/v2.5.0...v2.6.0) (2022-05-16)
+
+
+### Bug Fixes
+
+* anchor disabled in popover ([#351](https://github.com/dialpad/dialtone-vue/issues/351)) ([05ce022](https://github.com/dialpad/dialtone-vue/commit/05ce022757715af46a9d5b040a889c62b7eb86ee))
+
+
+### Features
+
+* **modal:** add fixed header and footer variant ([#353](https://github.com/dialpad/dialtone-vue/issues/353)) ([14a613c](https://github.com/dialpad/dialtone-vue/commit/14a613cd97bbbdd5c724419fcfd60b083c64b5a3))
+
 # [2.5.0](https://github.com/dialpad/dialtone-vue/compare/v2.4.0...v2.5.0) (2022-05-10)
 
 
