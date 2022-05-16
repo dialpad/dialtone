@@ -1,3 +1,43 @@
+# [3.1.0](https://github.com/dialpad/dialtone-vue/compare/v3.0.1...v3.1.0) (2022-05-16)
+
+
+### Bug Fixes
+
+* **button:** change size s to sm in comment ([1f687aa](https://github.com/dialpad/dialtone-vue/commit/1f687aa53c4725392cfdc290b11313936059ff8a))
+* calculate z-index after mounted ([#319](https://github.com/dialpad/dialtone-vue/issues/319)) ([29b1532](https://github.com/dialpad/dialtone-vue/commit/29b1532a47fd418a1fdf61491c40a6d3ff3efe10))
+* contact info avatar display blank image ([#348](https://github.com/dialpad/dialtone-vue/issues/348)) ([9e68455](https://github.com/dialpad/dialtone-vue/commit/9e68455cc9cbb31389d2f82885311b75f9fe90c7))
+* dt-417 handle anchor with no children ([#317](https://github.com/dialpad/dialtone-vue/issues/317)) ([05d112b](https://github.com/dialpad/dialtone-vue/commit/05d112b2beaf32fec063b2ae287304e6fe868869))
+* error with number value in calculateLength ([#300](https://github.com/dialpad/dialtone-vue/issues/300)) ([3a996f0](https://github.com/dialpad/dialtone-vue/commit/3a996f0c98273064b410d4d426f203048cb8996e))
+* popover within popover stuck when ESC ([#321](https://github.com/dialpad/dialtone-vue/issues/321)) ([24f8fcc](https://github.com/dialpad/dialtone-vue/commit/24f8fcc15442f022177696d0de3c4a29f1c803de))
+* **popover:** anchor disabled in popover ([#352](https://github.com/dialpad/dialtone-vue/issues/352)) ([d990ebe](https://github.com/dialpad/dialtone-vue/commit/d990ebe05630f6ab484d01f84e86c818c0dd8f31))
+* **popover:** dialog closing and reopening on anchor click ([900efe5](https://github.com/dialpad/dialtone-vue/commit/900efe5ea55111e412920b102bd251adf34800da))
+* **popover:** transparent overlay render at the root ([#296](https://github.com/dialpad/dialtone-vue/issues/296)) ([a7eb7be](https://github.com/dialpad/dialtone-vue/commit/a7eb7bea23316e6e44fd6d93b29d6b1d33b48b38))
+* **tooltip:** nextTick before mounting ([bd2c4d5](https://github.com/dialpad/dialtone-vue/commit/bd2c4d5486589f22dbc3945757b1d5449c4ddeae))
+* update list-item padding 2 -> 4 ([#293](https://github.com/dialpad/dialtone-vue/issues/293)) ([044fc39](https://github.com/dialpad/dialtone-vue/commit/044fc3905154d40d02804a9229d1ea72804297a4))
+* update padding options ([#301](https://github.com/dialpad/dialtone-vue/issues/301)) ([a7b000f](https://github.com/dialpad/dialtone-vue/commit/a7b000fb2419d7fc87d573d2f25d192e6f0b4235))
+* **vue3:** usage of arrow-keys in the combobox and dropdown ([#345](https://github.com/dialpad/dialtone-vue/issues/345)) ([fc1f5dc](https://github.com/dialpad/dialtone-vue/commit/fc1f5dcd1a98ad41d04ce6f24d0af266b3c45fb5))
+
+
+### Features
+
+* add dropdown a11y test ([#335](https://github.com/dialpad/dialtone-vue/issues/335)) ([adc3565](https://github.com/dialpad/dialtone-vue/commit/adc3565d4641e2703aa27fbe778670041e13f571))
+* automated a11y test ([#333](https://github.com/dialpad/dialtone-vue/issues/333)) ([a54c260](https://github.com/dialpad/dialtone-vue/commit/a54c260c47fa96cbbbccfc74321e5c4af635c141))
+* **avatar:** change to a pure slot based pattern ([#331](https://github.com/dialpad/dialtone-vue/issues/331)) ([2f75d7a](https://github.com/dialpad/dialtone-vue/commit/2f75d7a1576b80a7f6662a722da39b55571f2bf2))
+* **button:** add active button styles vue 3 version ([#323](https://github.com/dialpad/dialtone-vue/issues/323)) ([c3b3f95](https://github.com/dialpad/dialtone-vue/commit/c3b3f957c46f3fa1a757c54d1768462040dd1990))
+* **dropdown:** add maxWidth, maxHeight, listClass props ([#313](https://github.com/dialpad/dialtone-vue/issues/313)) ([978d3ea](https://github.com/dialpad/dialtone-vue/commit/978d3ea9989e82bd1b0386c8f5e4996bae1d3700))
+* dt-387 implement handling of emoji assets vue3 ([#344](https://github.com/dialpad/dialtone-vue/issues/344)) ([78d20f9](https://github.com/dialpad/dialtone-vue/commit/78d20f948f40aafca3f21f3a66e13da3bf3bd773))
+* **input:** add iconSize prop ([#315](https://github.com/dialpad/dialtone-vue/issues/315)) ([a80c680](https://github.com/dialpad/dialtone-vue/commit/a80c6801ee8632026306ab3a9e3308f8ea5bea48))
+* migrate list section tests ([#328](https://github.com/dialpad/dialtone-vue/issues/328)) ([89cf9dd](https://github.com/dialpad/dialtone-vue/commit/89cf9dd81a88d5d842a1a5f468785bc7b679223e))
+* **modal:** add fixed header and footer variant ([#355](https://github.com/dialpad/dialtone-vue/issues/355)) ([934cc2a](https://github.com/dialpad/dialtone-vue/commit/934cc2a1989f6cc4f84d5adc42143ee3eb6c6eb6))
+* **vue 3:** migrate avatar to combobox tests ([#307](https://github.com/dialpad/dialtone-vue/issues/307)) ([002fc9b](https://github.com/dialpad/dialtone-vue/commit/002fc9b52aff7b195c8bc433b2cb219106777ab5))
+* **vue 3:** migrate notice to select menu tests ([#311](https://github.com/dialpad/dialtone-vue/issues/311)) ([12cbf97](https://github.com/dialpad/dialtone-vue/commit/12cbf97678e29c4fd87879f1977418ba0be7b09c))
+* **vue 3:** migrate recipes ([#298](https://github.com/dialpad/dialtone-vue/issues/298)) ([839d75b](https://github.com/dialpad/dialtone-vue/commit/839d75b556fe6c68ec72343986ce2790ced23ca8))
+* **vue 3:** migrate recipes tests ([#312](https://github.com/dialpad/dialtone-vue/issues/312)) ([8539c6a](https://github.com/dialpad/dialtone-vue/commit/8539c6a71271e28bf4166a40241534b7ac946cd1))
+* **vue3:** combobox with popover recipe ([#349](https://github.com/dialpad/dialtone-vue/issues/349)) ([0202699](https://github.com/dialpad/dialtone-vue/commit/020269972e3b9b0e8ae503bbbd98f7a1090a7366))
+* **vue3:** migrate dropdown to modal tests ([#305](https://github.com/dialpad/dialtone-vue/issues/305)) ([512788d](https://github.com/dialpad/dialtone-vue/commit/512788d12452171fe8f68a219494da3de13926e5))
+* **vue3:** migrate input and input group tests ([#306](https://github.com/dialpad/dialtone-vue/issues/306)) ([0ec27e8](https://github.com/dialpad/dialtone-vue/commit/0ec27e8bf9a3be3a9b5204a0ac552914d147a4a1))
+* **vue3:** migrate skeleton to validation messages tests ([#308](https://github.com/dialpad/dialtone-vue/issues/308)) ([3b9c391](https://github.com/dialpad/dialtone-vue/commit/3b9c391eb648a80a8f1739949d73553517755e3c))
+
 ## [3.0.1](https://github.com/dialpad/dialtone-vue/compare/v3.0.0...v3.0.1) (2022-03-24)
 
 
