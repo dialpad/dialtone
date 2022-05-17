@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/dialpad/dialtone-vue/compare/v2.6.0...v2.6.1) (2022-05-17)
+
+
+### Bug Fixes
+
+* add main back to package.json, clean before test ([#358](https://github.com/dialpad/dialtone-vue/issues/358)) ([4892e9a](https://github.com/dialpad/dialtone-vue/commit/4892e9a2af340171f7de9d10f0a87deeb1f77e67))
+
 # [2.6.0](https://github.com/dialpad/dialtone-vue/compare/v2.5.0...v2.6.0) (2022-05-16)
 
 
