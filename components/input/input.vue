@@ -80,8 +80,8 @@
           :disabled="disabled"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          v-bind="$attrs"
           data-qa="dt-input-input"
+          v-bind="$attrs"
           v-on="inputListeners"
         >
         <span
