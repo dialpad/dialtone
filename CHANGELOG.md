@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/dialpad/dialtone-vue/compare/v3.1.1...v3.1.2) (2022-05-19)
+
+
+### Bug Fixes
+
+* **input:** reorder v-bind ([#361](https://github.com/dialpad/dialtone-vue/issues/361)) ([6ef4a21](https://github.com/dialpad/dialtone-vue/commit/6ef4a21ce5c8fe5febb5c5dc04d322f019abc352))
+
 ## [3.1.1](https://github.com/dialpad/dialtone-vue/compare/v3.1.0...v3.1.1) (2022-05-17)
 
 
