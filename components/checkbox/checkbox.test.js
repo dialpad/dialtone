@@ -237,7 +237,7 @@ describe('Checkbox Tests', function () {
 
       describe('When the checkbox is clicked', function () {
         // Test Setup
-        beforeEach(function () { input.trigger('click'); });
+        beforeEach(async function () { await input.trigger('click'); await input.trigger('change'); });
 
         it('Should emit an input event', function () {
           itBehavesLikeEmitsExpectedEvent(wrapper, 'input', true);
@@ -253,7 +253,7 @@ describe('Checkbox Tests', function () {
 
         describe('When the checkbox is clicked', function () {
           // Test Setup
-          beforeEach(function () { input.trigger('click'); });
+          beforeEach(async function () { await input.trigger('click'); await input.trigger('change'); });
 
           it('Should emit an input event', function () {
             itBehavesLikeEmitsExpectedEvent(wrapper, 'input', false);
@@ -288,7 +288,7 @@ describe('Checkbox Tests', function () {
 
       describe('When clicking on an indeterminate checkbox', function () {
         beforeEach(async function () {
-          input.trigger('click');
+          await input.trigger('click'); await input.trigger('change');
         });
         it('should uncheck', function () { itBehavesLikeNotChecked(input); });
       });
@@ -307,7 +307,7 @@ describe('Checkbox Tests', function () {
 
         describe('When the checkbox is clicked', function () {
           // Test Setup
-          beforeEach(function () { input.trigger('click'); });
+          beforeEach(async function () { await input.trigger('click'); await input.trigger('change'); });
 
           it('Should call input handler once', function () {
             assert.strictEqual(inputListenerSpy.callCount, 1);

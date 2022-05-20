@@ -378,7 +378,7 @@ describe('DtSelectMenu Tests', function () {
         });
 
         it('should not have expected warning message', function () {
-          assert.notEqual(console.warn.firstCall.args[0], warningMessage);
+          assert.isFalse(console.warn.calledWith(warningMessage));
         });
       });
 

@@ -202,6 +202,7 @@ describe('Input Group Tests', function () {
     const _selectInput = (value) => {
       selectedInput = inputGroup.find(`[value="${value}"]`);
       selectedInput.trigger('click');
+      selectedInput.trigger('change');
     };
 
     // Shared Examples

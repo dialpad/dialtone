@@ -197,6 +197,7 @@ describe('Checkbox Group Tests', function () {
     const _selectCheckbox = (value) => {
       const selectedCheckbox = checkboxGroup.find(`[value="${value}"]`);
       selectedCheckbox.trigger('click');
+      selectedCheckbox.trigger('change');
     };
 
     // Shared Examples

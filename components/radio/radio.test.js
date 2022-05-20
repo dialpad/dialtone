@@ -301,7 +301,7 @@ describe('Dialtone Vue Radio Tests', function () {
 
       describe('When the radio is selected', function () {
         // Test Setup
-        beforeEach(function () { input.trigger('click'); });
+        beforeEach(function () { input.trigger('click'); input.trigger('change'); });
 
         it('should emit the input event with Value', function () {
           itBehavesLikeEmitsExpectedEvent(wrapper, 'input', value);
@@ -322,7 +322,7 @@ describe('Dialtone Vue Radio Tests', function () {
 
         describe('When the radio is clicked', function () {
           // Test Setup
-          beforeEach(function () { input.trigger('click'); });
+          beforeEach(function () { input.trigger('click'); input.trigger('change'); });
 
           it('Should call input handler once', function () {
             assert.strictEqual(inputListenerSpy.callCount, 1);

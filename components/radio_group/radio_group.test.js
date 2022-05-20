@@ -191,6 +191,7 @@ describe('Dialtone Vue Radio Group Tests', function () {
     const _selectRadio = () => {
       selectedRadio = radioGroup.find(`[value="${selectedValue}"]`);
       selectedRadio.trigger('click');
+      selectedRadio.trigger('change');
     };
 
     beforeEach(function () {

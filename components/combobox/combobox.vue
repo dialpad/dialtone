@@ -123,6 +123,10 @@ export default {
   computed: {
     inputProps () {
       return {
+        role: 'combobox',
+        'aria-expanded': this.showList.toString(),
+        'aria-owns': this.listId,
+        'aria-haspopup': 'listbox',
         'aria-activedescendant': this.activeItemId,
         'aria-controls': this.listId,
       };

@@ -55,6 +55,7 @@ import {
   getPopperOptions,
 } from '../popover/tippy_utils';
 export default {
+  // eslint-disable-next-line vue/multi-word-component-names
   name: 'Tooltip',
   components: {
     DtLazyShow,

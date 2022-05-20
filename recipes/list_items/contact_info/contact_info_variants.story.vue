@@ -31,6 +31,7 @@
             </div>
           </div>
         </template>
+        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
         <template #subtitle>
           <div
             class="d-fc-red-500"

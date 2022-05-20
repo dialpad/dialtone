@@ -377,6 +377,7 @@
       max-width="50rem"
     >
       <template #anchor="{ attrs }">
+        <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
         <dt-button
           v-bind="attrs"
           @mouseenter="onMouseEnter"

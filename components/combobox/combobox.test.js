@@ -2,7 +2,6 @@ import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtCombobox from './combobox.vue';
-import DtInput from '../input/input.vue';
 
 // Constants
 const baseProps = {
@@ -15,6 +14,7 @@ describe('Dialtone Vue Combobox tests', function () {
   // Wrappers
   let wrapper;
   let inputWrapper;
+  let input;
   let listWrapper;
 
   // Test Environment
@@ -29,6 +29,7 @@ describe('Dialtone Vue Combobox tests', function () {
   // Helpers
   const _setChildWrappers = () => {
     inputWrapper = wrapper.find('[data-qa="dt-combobox-input-wrapper"]');
+    input = wrapper.find('input');
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
   };
 
@@ -64,13 +65,13 @@ describe('Dialtone Vue Combobox tests', function () {
     describe('When a input is provided', function () {
       // Test Setup
       beforeEach(async function () {
-        slots = { input: DtInput };
+        slots = { input: '<template #input="params"><input v-bind="params.inputProps" /></template>' };
         _mountWrapper();
         _setChildWrappers();
       });
 
       it('should render the input wrapper', function () { assert.isTrue(inputWrapper.exists()); });
-      it('should render the input', function () { assert.isTrue(wrapper.findComponent(DtInput).exists()); });
+      it('should render the input', function () { assert.isTrue(wrapper.find('input').exists()); });
     });
 
     describe('When a list is provided', function () {
@@ -87,23 +88,32 @@ describe('Dialtone Vue Combobox tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    describe('When list is not expanded', function () {
+    describe('When a input is provided', function () {
+      // Test Setup
       beforeEach(async function () {
-        await wrapper.setProps({ showList: false });
+        slots = { input: '<template #input="params"><input v-bind="params.inputProps" /></template>' };
+        _mountWrapper();
+        _setChildWrappers();
       });
 
-      it('aria-expanded should be "false"', function () {
-        assert.isTrue(wrapper.attributes('aria-expanded') === 'false');
-      });
-    });
+      describe('When list is not expanded', function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ showList: false });
+        });
 
-    describe('When list is expanded', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ showList: true });
+        it('aria-expanded should be "false"', function () {
+          assert.isTrue(input.attributes('aria-expanded') === 'false');
+        });
       });
 
-      it('aria-expanded should be "true"', function () {
-        assert.isTrue(wrapper.attributes('aria-expanded') === 'true');
+      describe('When list is expanded', function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ showList: true });
+        });
+
+        it('aria-expanded should be "true"', function () {
+          assert.isTrue(input.attributes('aria-expanded') === 'true');
+        });
       });
     });
   });
