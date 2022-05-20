@@ -1,3 +1,10 @@
+## [2.6.3](https://github.com/dialpad/dialtone-vue/compare/v2.6.2...v2.6.3) (2022-05-20)
+
+
+### Bug Fixes
+
+* **dt-input:** update v-bind on dt-input input ([#362](https://github.com/dialpad/dialtone-vue/issues/362)) ([8ddc928](https://github.com/dialpad/dialtone-vue/commit/8ddc928f31fed1e092d72fb0430e15bd4d4b3356))
+
 ## [2.6.2](https://github.com/dialpad/dialtone-vue/compare/v2.6.1...v2.6.2) (2022-05-19)
 
 
