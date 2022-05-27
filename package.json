@@ -28,7 +28,8 @@
   ],
   "main": "./dist/dialtone-vue.common.js",
   "dependencies": {
-    "tippy.js": "^6.3.1"
+    "emoji-toolkit": "^6.6.0",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
@@ -45,7 +46,6 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "chai": "^4.2.0",
-    "emoji-toolkit": "^6.6.0",
     "eslint": "^8.14.0",
     "eslint-config-semistandard": "^16.0.0",
     "eslint-config-standard": "^17.0.0",

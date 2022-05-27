@@ -18,7 +18,8 @@ if [ -n "$1" ]; then
   RANGE_START=$1
 else
   # gets the sha of the commit BEFORE the first commit we want to include (you need to pass this to rebase --onto)
-  RANGE_START=$(git log staging^.."$BRANCH" --oneline | tail -1 | awk '{print $1;}')
+  BRANCH_FIRST_COMMIT=$(git log staging.."$BRANCH" --oneline | tail -1 | awk '{print $1;}')
+  RANGE_START=$(git rev-parse "$BRANCH_FIRST_COMMIT"^)
 fi
 
 # gets the sha of the commit at the end of the range
