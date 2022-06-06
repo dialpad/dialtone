@@ -1,0 +1,84 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtChip from './chip';
+
+# Chip
+
+<Subtitle>
+  A chip is a compact UI element that provides brief, descriptive information about an element.
+  It is terse, ideally one word.
+  It is important a button is identifiable, consistent, and communicates its actions clearly,
+  and is appropriately sized to its action.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="components-chip--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+Default behaviour is interactive, has hover/focus/active states.
+
+Default content text is aria-label unless overridden by passed in aria-label.
+
+```js
+import { DtChip } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-chip :close-button-props="{ ariaLabel: $i18n('close') }">
+  Chip
+</dt-chip>
+```
+
+## With Icon
+
+<Canvas>
+  <Story id="components-chip--with-icon" />
+</Canvas>
+
+```html
+import IconLock from '@dialpad/dialtone/vue/icons/IconLock';
+
+<dt-chip :close-button-props="{ ariaLabel: $i18n('close') }">
+  <template #icon>
+    <icon-lock />
+  </template>
+</dt-chip>
+```
+
+## With Avatar
+
+<Canvas>
+  <Story id="components-chip--with-avatar" />
+</Canvas>
+
+```html
+import { DtAvatar } from '@dialpad/dialtone';
+
+<dt-chip :close-button-props="{ ariaLabel: $i18n('close') }">
+  <template #avatar>
+    <dt-avatar>DP</dt-avatar>
+  </template>
+</dt-chip>
+```
+
+## Non Interactive
+
+Can't focus on the chip, can not tab through.
+
+<Canvas>
+  <Story id="components-chip--non-interactive" />
+</Canvas>
+
+```html
+<dt-chip
+  :interactive="false"
+  :hide-close="true"
+/>
+```
