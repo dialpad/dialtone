@@ -1,3 +1,11 @@
+# [2.7.0](https://github.com/dialpad/dialtone-vue/compare/v2.6.3...v2.7.0) (2022-06-06)
+
+
+### Features
+
+* **chip:** dt-420 add chip component ([#354](https://github.com/dialpad/dialtone-vue/issues/354)) ([9f0268a](https://github.com/dialpad/dialtone-vue/commit/9f0268ad40f9ea2ea15f0a3e5aee3f02349cd76f))
+* emoji component ([#356](https://github.com/dialpad/dialtone-vue/issues/356)) ([59bb0dd](https://github.com/dialpad/dialtone-vue/commit/59bb0dd9941641935c0f304d3672cc53c792a063))
+
 ## [2.6.3](https://github.com/dialpad/dialtone-vue/compare/v2.6.2...v2.6.3) (2022-05-20)
 
 
