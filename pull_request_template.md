@@ -26,15 +26,15 @@
 <!--- Tick or place an `x` in all of the checkboxes that apply -->
 <!--- Remove checkboxes that do not apply -->
 
-- [ ] I have updated library exports
 - [ ] I have reviewed my changes
 - [ ] I have added tests
 - [ ] I have added all relevant documentation
-- [ ] All tests are passing
-- [ ] All linters are passing
-- [ ] No accessibility issues reported
 - [ ] I have validated components with a screen reader
 - [ ] I have validated components keyboard navigation
+- [ ] I have considered the performance impact of my change
+- [ ] I have checked that my change did not significantly increase bundle size
+- [ ] I am exporting any new components or constants in the index.js in the component directory
+- [ ] I am exporting any new components or constants in the index.js in the root
 
 ## :crystal_ball: Next Steps
 
