@@ -92,11 +92,7 @@ export default {
 
   computed: {
     emojiDataValid () {
-      if (this.emojiData) {
-        return true;
-      } else {
-        return false;
-      }
+      return !!this.emojiData;
     },
 
     emojiSrc () {
