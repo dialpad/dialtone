@@ -58,7 +58,7 @@ module.exports = {
     'vue/block-tag-newline': ['error'],
     'vue/no-duplicate-attr-inheritance': ['error'],
     'vue/no-bare-strings-in-template': ['error'],
-    'vue/no-unregistered-components': ['error'],
+    'vue/no-undef-components': ['error'],
     'vue/no-unused-properties': ['warn'],
     'vue/v-on-event-hyphenation': ['error'],
     'vue/no-template-target-blank': ['error'],
