@@ -28,6 +28,7 @@
   ],
   "main": "./dist/dialtone-vue.common.js",
   "dependencies": {
+    "emoji-regex": "^10.1.0",
     "emoji-toolkit": "^6.6.0",
     "tippy.js": "^6.3.7"
   },

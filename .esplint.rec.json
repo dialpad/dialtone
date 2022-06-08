@@ -8,6 +8,15 @@
     "common/mixins/modal.js": {
       "complexity": 1
     },
+    "components/banner/banner.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 3
+    },
+    "components/button/button.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 2
+    },
+    "components/dropdown/dropdown.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 1
+    },
     "components/input/input.vue": {
       "max-lines": 1
     },

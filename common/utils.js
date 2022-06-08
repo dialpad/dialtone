@@ -89,7 +89,7 @@ export function findFirstFocusableNode (element) {
  * props: html
  */
 export const htmlFragment = (props) => {
-  return h('div', props.html);
+  return h('div', { innerHTML: props.html });
 };
 
 export const flushPromises = () => {
