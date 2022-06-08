@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/dialpad/dialtone-vue/compare/v2.7.0...v2.8.0) (2022-06-08)
+
+
+### Features
+
+* **emoji text wrapper:** add emoji text wrapper component ([#366](https://github.com/dialpad/dialtone-vue/issues/366)) ([2ba412d](https://github.com/dialpad/dialtone-vue/commit/2ba412ddaeb3144fed0cbaf4b43a6eb608d79514)), closes [#367](https://github.com/dialpad/dialtone-vue/issues/367)
+
 # [2.7.0](https://github.com/dialpad/dialtone-vue/compare/v2.6.3...v2.7.0) (2022-06-06)
 
 
