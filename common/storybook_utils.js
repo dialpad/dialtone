@@ -44,7 +44,7 @@ export const getComponentFilesFromDir = (requireContext) => {
     // Get PascalCase name of component
     const componentName = fileName.split('/').pop().replace(/\.\w+$/, '');
 
-    files.push({ fileName: fileName, componentName: componentName });
+    files.push({ fileName, componentName });
   });
   return files;
 };

@@ -40,8 +40,8 @@ export default ({
     return {
       [indexKey]: -1,
       [idKey]: '',
-      scrollToOnHighlight: scrollToOnHighlight,
-      focusOnKeyboardNavigation: focusOnKeyboardNavigation,
+      scrollToOnHighlight,
+      focusOnKeyboardNavigation,
     };
   },
 

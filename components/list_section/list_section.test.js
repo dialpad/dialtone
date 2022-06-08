@@ -94,7 +94,7 @@ describe('ListSection tests', function () {
     describe('When maxDisplayed is set to a number less than number of entries', function () {
       const maxDisplayed = 2;
       beforeEach(async function () {
-        await wrapper.setProps({ maxDisplayed: maxDisplayed });
+        await wrapper.setProps({ maxDisplayed });
         _setChildWrappers();
       });
 
@@ -148,7 +148,7 @@ describe('ListSection tests', function () {
     describe('When maxDisplayed is set to a number less than number of entries', function () {
       const maxDisplayed = 2;
       beforeEach(async function () {
-        await wrapper.setProps({ maxDisplayed: maxDisplayed });
+        await wrapper.setProps({ maxDisplayed });
         _setChildWrappers();
       });
 

@@ -25,7 +25,7 @@ describe('DtNoticeContent tests', function () {
     props = baseProps;
     slotsData = baseSlotsData;
     wrapper = shallowMount(DtNoticeContent, {
-      props: props,
+      props,
       slots: slotsData,
     });
     _setChildWrappers();

@@ -29,7 +29,7 @@ export const getPopperOptions = ({
       {
         name: 'flip',
         options: {
-          fallbackPlacements: fallbackPlacements,
+          fallbackPlacements,
           boundary,
         },
       },

@@ -20,7 +20,7 @@ describe('DtNoticeIcon tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtNoticeIcon, {
-      props: props,
+      props,
       slots: slotsData,
     });
     _setChildWrappers();

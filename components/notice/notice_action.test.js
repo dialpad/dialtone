@@ -24,7 +24,7 @@ describe('DtNoticeAction tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtNoticeAction, {
-      props: props,
+      props,
       slots: slotsData,
     });
     _setChildWrappers();
