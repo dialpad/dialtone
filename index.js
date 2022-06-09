@@ -23,6 +23,7 @@ export * from './components/tabs';
 export * from './components/validation_messages';
 export * from './components/checkbox';
 export * from './components/checkbox_group';
+export * from './components/chip';
 export * from './components/select_menu';
 export * from './components/toast';
 export * from './components/toggle';
