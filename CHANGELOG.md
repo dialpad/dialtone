@@ -1,3 +1,10 @@
+## [2.8.1](https://github.com/dialpad/dialtone-vue/compare/v2.8.0...v2.8.1) (2022-06-09)
+
+
+### Bug Fixes
+
+* **chip:** export chip ([#377](https://github.com/dialpad/dialtone-vue/issues/377)) ([4d09b58](https://github.com/dialpad/dialtone-vue/commit/4d09b58c6bbae1d28e362be0d33d0558e1c0f469))
+
 # [2.8.0](https://github.com/dialpad/dialtone-vue/compare/v2.7.0...v2.8.0) (2022-06-08)
 
 
