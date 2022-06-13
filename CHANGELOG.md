@@ -1,3 +1,18 @@
+# [3.2.0](https://github.com/dialpad/dialtone-vue/compare/v3.1.3...v3.2.0) (2022-06-13)
+
+
+### Bug Fixes
+
+* **chip:** export chip - vue3 ([#378](https://github.com/dialpad/dialtone-vue/issues/378)) ([55f1dc5](https://github.com/dialpad/dialtone-vue/commit/55f1dc553bd21a1c47b1f2885537bb44fbe0746f))
+
+
+### Features
+
+* **chip:** dt-420 add chip component ([#368](https://github.com/dialpad/dialtone-vue/issues/368)) ([f9edea1](https://github.com/dialpad/dialtone-vue/commit/f9edea1ef9fed5f0978fd4268f898966f94c93d2)), closes [#369](https://github.com/dialpad/dialtone-vue/issues/369)
+* emoji component ([#365](https://github.com/dialpad/dialtone-vue/issues/365)) ([2c72a62](https://github.com/dialpad/dialtone-vue/commit/2c72a6203be470710201e13319c4c28327873184))
+* **emoji text wrapper:** add emoji text wrapper component vue 3 ([#371](https://github.com/dialpad/dialtone-vue/issues/371)) ([85fef97](https://github.com/dialpad/dialtone-vue/commit/85fef97e3acb5bfde10e25801c89c7f69a4aa2a3)), closes [#367](https://github.com/dialpad/dialtone-vue/issues/367)
+* **toast:** remove wrapper (`d-toast-wrapper` class) ([#380](https://github.com/dialpad/dialtone-vue/issues/380)) ([2c76f97](https://github.com/dialpad/dialtone-vue/commit/2c76f970a2afa5872bdbd21b5b8a8a0d6bf618ec))
+
 ## [3.1.3](https://github.com/dialpad/dialtone-vue/compare/v3.1.2...v3.1.3) (2022-05-20)
 
 
