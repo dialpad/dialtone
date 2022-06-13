@@ -4,60 +4,62 @@
       Click to show!
     </dt-button>
 
-    <dt-toast
-      ref="toast"
-      :kind="$attrs.kind"
-      :title="$attrs.title"
-      :message="$attrs.message"
-      :title-id="$attrs.titleId"
-      :content-id="$attrs.contentId"
-      :important="$attrs.important"
-      :hide-close="$attrs.hideClose"
-      :duration="$attrs.duration"
-      :close-button-props="buttonCloseProps"
-      @close="closeToast(); $attrs.onClose($event)"
-    >
-      <span
-        v-if="defaultSlot"
-        v-html="defaultSlot"
-      />
-      <span v-else>
-        Message body with
-        <a
-          href="#"
-          class="d-link"
-          :class="linkClass"
-        >a link</a>.
-      </span>
-
-      <template #action>
+    <aside class="d-toast-wrapper">
+      <dt-toast
+        ref="toast"
+        :kind="$attrs.kind"
+        :title="$attrs.title"
+        :message="$attrs.message"
+        :title-id="$attrs.titleId"
+        :content-id="$attrs.contentId"
+        :important="$attrs.important"
+        :hide-close="$attrs.hideClose"
+        :duration="$attrs.duration"
+        :close-button-props="buttonCloseProps"
+        @close="closeToast(); $attrs.onClose($event)"
+      >
         <span
-          v-if="$attrs.action"
-          v-html="$attrs.action"
+          v-if="defaultSlot"
+          v-html="defaultSlot"
         />
-        <dt-button
-          v-else
-          size="sm"
-          importance="outlined"
-          :kind="buttonKind"
-          @click="$attrs.onClick"
+        <span v-else>
+          Message body with
+          <a
+            href="#"
+            class="d-link"
+            :class="linkClass"
+          >a link</a>.
+        </span>
+
+        <template #action>
+          <span
+            v-if="$attrs.action"
+            v-html="$attrs.action"
+          />
+          <dt-button
+            v-else
+            size="sm"
+            importance="outlined"
+            :kind="buttonKind"
+            @click="$attrs.onClick"
+          >
+            Action
+          </dt-button>
+        </template>
+        <template
+          v-if="$attrs.icon"
+          #icon
         >
-          Action
-        </dt-button>
-      </template>
-      <template
-        v-if="$attrs.icon"
-        #icon
-      >
-        <component :is="$attrs.icon" />
-      </template>
-      <template
-        v-if="$attrs.titleOverride"
-        #titleOverride
-      >
-        <span v-html="$attrs.titleOverride" />
-      </template>
-    </dt-toast>
+          <component :is="$attrs.icon" />
+        </template>
+        <template
+          v-if="$attrs.titleOverride"
+          #titleOverride
+        >
+          <span v-html="$attrs.titleOverride" />
+        </template>
+      </dt-toast>
+    </aside>
   </div>
 </template>
 

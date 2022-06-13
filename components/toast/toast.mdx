@@ -80,7 +80,7 @@ Instance method that closes the toast and removes it from the DOM.
 
 `close` is fired when close button is clicked.
 
-#### Example
+#### Example without self-positioning *
 
 ```html
 <template>
@@ -114,6 +114,19 @@ export default {
   },
 }
 </script>
+```
+
+* If you need to self-position the toast at the top center, use the `d-toast-wrapper` Dialtone class:
+
+```html
+<aside class="d-toast-wrapper">
+  <dt-toast
+    ref="toast"
+    :title="title"
+    :message="message"
+    @close="closeToast"
+  ></dt-toast>
+</aside>
 ```
 
 ### With duration
