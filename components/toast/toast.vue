@@ -1,51 +1,49 @@
 <template>
-  <aside class="d-toast-wrapper">
-    <div
-      v-if="!hidden"
-      :class="[
-        'd-toast',
-        kindClass,
-        { 'd-toast--important': important },
-      ]"
-      data-qa="dt-toast"
-      :aria-hidden="hidden.toString()"
-    >
-      <div class="d-toast__dialog">
-        <dt-notice-icon
-          :kind="kind"
-          v-on="$listeners"
-        >
-          <!-- @slot Use a custom icon -->
-          <slot name="icon" />
-        </dt-notice-icon>
-        <dt-notice-content
-          :title-id="titleId"
-          :content-id="contentId"
-          :title="title"
-          :role="role"
-          v-on="$listeners"
-        >
-          <template #titleOverride>
-            <!-- @slot Allows you to override the title, only use this if you need to override
+  <div
+    v-if="!hidden"
+    :class="[
+      'd-toast',
+      kindClass,
+      { 'd-toast--important': important },
+    ]"
+    data-qa="dt-toast"
+    :aria-hidden="hidden.toString()"
+  >
+    <div class="d-toast__dialog">
+      <dt-notice-icon
+        :kind="kind"
+        v-on="$listeners"
+      >
+        <!-- @slot Use a custom icon -->
+        <slot name="icon" />
+      </dt-notice-icon>
+      <dt-notice-content
+        :title-id="titleId"
+        :content-id="contentId"
+        :title="title"
+        :role="role"
+        v-on="$listeners"
+      >
+        <template #titleOverride>
+          <!-- @slot Allows you to override the title, only use this if you need to override
           with something other than text. Otherwise use the "title" prop. -->
-            <slot name="titleOverride" />
-          </template>
-          <!-- @slot the main textual content of the toast -->
-          <slot>
-            {{ message }}
-          </slot>
-        </dt-notice-content>
-        <dt-notice-action
-          :hide-close="hideClose"
-          :close-button-props="closeButtonProps"
-          v-on="$listeners"
-        >
-          <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
-          <slot name="action" />
-        </dt-notice-action>
-      </div>
+          <slot name="titleOverride" />
+        </template>
+        <!-- @slot the main textual content of the toast -->
+        <slot>
+          {{ message }}
+        </slot>
+      </dt-notice-content>
+      <dt-notice-action
+        :hide-close="hideClose"
+        :close-button-props="closeButtonProps"
+        v-on="$listeners"
+      >
+        <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
+        <slot name="action" />
+      </dt-notice-action>
     </div>
-  </aside>
+  </div>
 </template>
 
 <script>
