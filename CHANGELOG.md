@@ -1,3 +1,10 @@
+# [2.9.0](https://github.com/dialpad/dialtone-vue/compare/v2.8.1...v2.9.0) (2022-06-13)
+
+
+### Features
+
+* **toast:** remove wrapper (`d-toast-wrapper` class) ([#379](https://github.com/dialpad/dialtone-vue/issues/379)) ([f9234c6](https://github.com/dialpad/dialtone-vue/commit/f9234c64a8caaedfc072b9d58041e495164f1875))
+
 ## [2.8.1](https://github.com/dialpad/dialtone-vue/compare/v2.8.0...v2.8.1) (2022-06-09)
 
 
