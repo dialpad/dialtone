@@ -1,3 +1,10 @@
+## [2.9.1](https://github.com/dialpad/dialtone-vue/compare/v2.9.0...v2.9.1) (2022-06-15)
+
+
+### Bug Fixes
+
+* **list-item:** add v-on="$listeners" ([#383](https://github.com/dialpad/dialtone-vue/issues/383)) ([7a94427](https://github.com/dialpad/dialtone-vue/commit/7a94427be83bcde211a417568d3d7b4635189fb8))
+
 # [2.9.0](https://github.com/dialpad/dialtone-vue/compare/v2.8.1...v2.9.0) (2022-06-13)
 
 
