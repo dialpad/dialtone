@@ -1,3 +1,10 @@
+# [2.10.0](https://github.com/dialpad/dialtone-vue/compare/v2.9.1...v2.10.0) (2022-06-16)
+
+
+### Features
+
+* **toast:** make duration prop optional ([#382](https://github.com/dialpad/dialtone-vue/issues/382)) ([17622d4](https://github.com/dialpad/dialtone-vue/commit/17622d4271b9e772970d2705a36c9da227a8d342))
+
 ## [2.9.1](https://github.com/dialpad/dialtone-vue/compare/v2.9.0...v2.9.1) (2022-06-15)
 
 
