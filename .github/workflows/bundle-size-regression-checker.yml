@@ -1,0 +1,104 @@
+name: Bundle size regression checker
+
+on:
+  pull_request:
+    branches: [ staging, staging-vue3, vue3, production ]
+  push:
+    branches: [ staging, staging-vue3 ]
+
+jobs:
+  base_bundle_size:
+    if: "!contains( github.event.pull_request.labels.*.name, 'ignore-bundle-size-check')"
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      SIZE: ${{ steps.base_bundle_size.outputs.size }}
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.base_ref }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get bundle size
+        id: base_bundle_size
+        run: |
+          npm run build && echo "::set-output name=SIZE::$(gzip -c dist/*.js | wc -c)"
+          echo "gzipped bundle size: $(gzip -c dist/*.js | wc -c)"
+
+  pr_bundle_size:
+    if: "!contains( github.event.pull_request.labels.*.name, 'ignore-bundle-size-check')"
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      SIZE: ${{ steps.pr_bundle_size.outputs.SIZE }}
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get bundle size
+        id: pr_bundle_size
+        run: |
+          npm run build && echo "::set-output name=SIZE::$(gzip -c dist/*.js | wc -c)"
+          echo "gzipped bundle size: $(gzip -c dist/*.js | wc -c)"
+
+  check_increase:
+    needs: [base_bundle_size, pr_bundle_size]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Get increase
+        id: check_increase
+        run: |
+          THRESHOLD_PERCENTAGE=5
+          HAS_INCREASED="$(( ${{ needs.pr_bundle_size.outputs.SIZE }} > ${{ needs.base_bundle_size.outputs.SIZE }} ))"
+          PERCENTAGE="$(( (${{ needs.pr_bundle_size.outputs.SIZE }} - ${{ needs.base_bundle_size.outputs.SIZE }}) * 100 / ${{ needs.base_bundle_size.outputs.SIZE }} ))"
+          INCREASE_OVER_THRESHOLD="$(( ${PERCENTAGE} > ${THRESHOLD_PERCENTAGE} ))"
+          echo ::set-output name=HAS_INCREASED::"$HAS_INCREASED"
+          echo ::set-output name=PERCENTAGE::"$PERCENTAGE"
+          echo ::set-output name=INCREASE_OVER_THRESHOLD::"$INCREASE_OVER_THRESHOLD"
+
+      - name: Check bundle size increase
+        if: steps.check_increase.outputs.HAS_INCREASED == '1' && steps.check_increase.outputs.INCREASE_OVER_THRESHOLD == '1'
+        uses: actions/github-script@v3
+        with:
+          script: core.setFailed('Bundle size increase detected')
+
+      - name: Check bundle size increase
+        if: failure()
+        run: |
+          echo "There is a significant increase in the gzipped bundle size"
+          echo "Please review the changes and make sure the additions are strictly needed"
+          echo "as they will impact the performance and load times."
+          echo "${{ github.base_ref }} gzipped bundle size (in bytes) ${{ needs.base_bundle_size.outputs.SIZE }}"
+          echo "new gzipped bundle size (in bytes) ${{ needs.pr_bundle_size.outputs.SIZE }}"
+          echo "This is ~${{ steps.check_increase.outputs.PERCENTAGE }}% more!"
+          exit 1
