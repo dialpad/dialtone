@@ -1,3 +1,15 @@
+# [3.3.0](https://github.com/dialpad/dialtone-vue/compare/v3.2.0...v3.3.0) (2022-06-16)
+
+
+### Bug Fixes
+
+* **list-item:** fix event handling ([#384](https://github.com/dialpad/dialtone-vue/issues/384)) ([f2f5a1f](https://github.com/dialpad/dialtone-vue/commit/f2f5a1f1ac2927793acf5542d6bcea7aa104a1c1))
+
+
+### Features
+
+* **toast:** make duration prop optional ([#385](https://github.com/dialpad/dialtone-vue/issues/385)) ([32999d9](https://github.com/dialpad/dialtone-vue/commit/32999d9b26c394739085bd152c9155fdc1954a8e))
+
 # [3.2.0](https://github.com/dialpad/dialtone-vue/compare/v3.1.3...v3.2.0) (2022-06-13)
 
 
