@@ -7,6 +7,7 @@
     <aside class="d-toast-wrapper">
       <dt-toast
         ref="toast"
+        v-model:show="isShown"
         :kind="$attrs.kind"
         :title="$attrs.title"
         :message="$attrs.message"
@@ -16,7 +17,7 @@
         :hide-close="$attrs.hideClose"
         :duration="$attrs.duration"
         :close-button-props="buttonCloseProps"
-        @close="closeToast(); $attrs.onClose($event)"
+        @close="$attrs.onClose($event)"
       >
         <span
           v-if="defaultSlot"
@@ -75,6 +76,12 @@ export default {
 
   mixins: [icon],
 
+  data () {
+    return {
+      isShown: this.$attrs.show,
+    };
+  },
+
   computed: {
     shouldInvertButton () {
       return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
@@ -101,13 +108,15 @@ export default {
     },
   },
 
+  watch: {
+    show: function (show) {
+      this.isShown = show;
+    },
+  },
+
   methods: {
     buttonClicked () {
-      this.$refs.toast.show();
-    },
-
-    closeToast () {
-      this.$refs.toast.close();
+      this.isShown = true;
     },
   },
 };
