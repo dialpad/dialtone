@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <div>
     <dt-button @click="buttonClicked">
@@ -7,6 +8,7 @@
     <aside class="d-toast-wrapper">
       <dt-toast
         ref="toast"
+        :show.sync="isShown"
         :kind="kind"
         :title="title"
         :message="message"
@@ -16,7 +18,7 @@
         :hide-close="hideClose"
         :duration="duration"
         :close-button-props="buttonCloseProps"
-        @close="closeToast(); onClose($event)"
+        @close="onClose($event)"
       >
         <span
           v-if="defaultSlot"
@@ -75,6 +77,12 @@ export default {
 
   mixins: [icon],
 
+  data () {
+    return {
+      isShown: this.show,
+    };
+  },
+
   computed: {
     shouldInvertButton () {
       return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
@@ -101,13 +109,15 @@ export default {
     },
   },
 
+  watch: {
+    show: function (show) {
+      this.isShown = show;
+    },
+  },
+
   methods: {
     buttonClicked () {
-      this.$refs.toast.show();
-    },
-
-    closeToast () {
-      this.$refs.toast.close();
+      this.isShown = true;
     },
   },
 };

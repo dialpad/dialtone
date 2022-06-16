@@ -63,15 +63,6 @@ with `role="alert"`, screen readers could override its speech queue and causes t
 import { DtToast } from '@dialpad/dialtone-vue';
 ```
 
-### Methods
-
-Instance methods can be executed assigning a reference ID to the component using
-[ref](https://v3.vuejs.org/guide/component-template-refs.html) attribute.
-
-#### show()
-
-Instance method that shows the toast element for the default or provided duration time.
-
 #### close()
 
 Instance method that closes the toast and removes it from the DOM.
@@ -86,10 +77,9 @@ Instance method that closes the toast and removes it from the DOM.
 <template>
   <button type="button" @click="openToast">Click to show!</button>
   <dt-toast
-    ref="toast"
     :title="title"
     :message="message"
-    @close="closeToast"
+    :show.sync="isShown"
   ></dt-toast>
 </template>
 
@@ -102,15 +92,8 @@ export default {
     return {
       title: 'Title',
       message: 'Message body.'
+      isShown: false,
     }
-  },
-  methods: {
-    openToast () {
-      this.$refs.toast.open();
-    },
-    closeToast () {
-      this.$refs.toast.close();
-    },
   },
 }
 </script>
@@ -121,18 +104,18 @@ export default {
 ```html
 <aside class="d-toast-wrapper">
   <dt-toast
-    ref="toast"
     :title="title"
     :message="message"
-    @close="closeToast"
+    :show.sync="isShown"
   ></dt-toast>
 </aside>
 ```
 
 ### With duration
 
-It's recommended to use a time of at least 6000 ms (minimum duration and default value) to give users enough time
-to read the toast. Take into account that the time necessary to read and comprehend the message could vary in users.
+It's recommended to use a time of at least 6000 ms (minimum duration validated in the component) to give users enough
+time to read the toast. Take into account that the time necessary to read and comprehend the message could vary in
+users.
 For instance, users using assistive technology, or users with language barriers could potentially need more time to
 read and understand the message.
 
@@ -141,5 +124,6 @@ read and understand the message.
   title="Title"
   message="Message"
   :duration="7500"
+  :show.sync="isShown"
 />
 ```

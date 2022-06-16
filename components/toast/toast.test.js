@@ -13,6 +13,7 @@ import { useFakeTimers } from 'sinon';
 import {
   itBehavesLikePassesChildProp,
 } from '../../tests/shared_examples/extendability';
+import { TOAST_MIN_DURATION } from './toast_constants';
 
 // Constants
 const basePropsData = {};
@@ -50,7 +51,7 @@ describe('DtToast Tests', function () {
   };
 
   const _showToast = async () => {
-    wrapper.vm.show();
+    await wrapper.setProps({ show: true });
     await wrapper.vm.$nextTick();
     _setChildWrappers();
   };
@@ -193,7 +194,7 @@ describe('DtToast Tests', function () {
 
     describe('When duration is not provided', function () {
       // Test Environment
-      const duration = DtToast.props.duration.default;
+      const duration = TOAST_MIN_DURATION;
 
       // Test Setup
       beforeEach(function () {
@@ -205,7 +206,7 @@ describe('DtToast Tests', function () {
         clock.restore();
       });
 
-      it('should close the toast after default duration', async function () {
+      it('should show the toast', async function () {
         await _showToast();
 
         assert.isTrue(toast.exists());
@@ -214,7 +215,7 @@ describe('DtToast Tests', function () {
         await wrapper.vm.$nextTick();
         _setChildWrappers();
 
-        assert.isFalse(toast.exists());
+        assert.isTrue(toast.exists());
       });
     });
 
@@ -250,7 +251,7 @@ describe('DtToast Tests', function () {
 
         assert.isTrue(toast.exists());
 
-        wrapper.vm.close();
+        await wrapper.setProps({ show: false });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
 
@@ -328,7 +329,7 @@ describe('DtToast Tests', function () {
     describe('Duration Validator', function () {
       // Test Environment
       const prop = DtToast.props.duration;
-      const duration = prop.default;
+      const duration = TOAST_MIN_DURATION;
 
       describe('When provided duration is a valid duration', function () {
         itBehavesLikePassesCustomPropValidation(prop, duration);

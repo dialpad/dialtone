@@ -1,13 +1,13 @@
 <template>
   <div
-    v-if="!hidden"
+    v-if="isShown"
     :class="[
       'd-toast',
       kindClass,
       { 'd-toast--important': important },
     ]"
     data-qa="dt-toast"
-    :aria-hidden="hidden.toString()"
+    :aria-hidden="(!isShown).toString()"
   >
     <div class="d-toast__dialog">
       <dt-notice-icon
@@ -37,7 +37,7 @@
       <dt-notice-action
         :hide-close="hideClose"
         :close-button-props="closeButtonProps"
-        v-on="$listeners"
+        v-on="noticeActionListeners"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
         <slot name="action" />
@@ -52,7 +52,7 @@ import DtNoticeContent from '../notice/notice_content';
 import DtNoticeAction from '../notice/notice_action';
 import { NOTICE_KINDS } from '../notice/notice_constants';
 import util from '@/common/utils';
-import { TOAST_ROLES } from './toast_constants';
+import { TOAST_ROLES, TOAST_MIN_DURATION } from './toast_constants';
 
 export default {
   name: 'DtToast',
@@ -130,6 +130,17 @@ export default {
     },
 
     /**
+     * Controls whether the toast is shown. If a valid duration is provided, the toast will disappear
+     * after reaching the duration time, so it's convenient to use `.sync` modifier with this prop to update
+     * the data in your component.
+     * Supports .sync modifier
+     */
+    show: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Props for the toast close button.
      */
     closeButtonProps: {
@@ -147,13 +158,14 @@ export default {
 
     /**
      * The duration in ms the toast will display before disappearing.
-     * Defaults to 6000 ms and the prop validation is that provided duration is equal to or greater than 6000.
+     * The toast won't disappear if the duration is not provided.
+     * If it's provided, it should be equal to or greater than 6000.
      */
     duration: {
       type: Number,
-      default: 6000,
+      default: null,
       validator: (duration) => {
-        return duration >= 6000;
+        return duration >= TOAST_MIN_DURATION;
       },
     },
   },
@@ -162,7 +174,8 @@ export default {
 
   data () {
     return {
-      hidden: true,
+      isShown: false,
+      minDuration: TOAST_MIN_DURATION,
     };
   },
 
@@ -178,27 +191,55 @@ export default {
 
       return kindClasses[this.kind];
     },
+
+    noticeActionListeners () {
+      return {
+        // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
+        ...this.$listeners,
+
+        close: event => {
+          this.isShown = false;
+          this.$emit('update:show', false);
+          this.$emit('close', event);
+        },
+      };
+    },
+
+    shouldSetTimeout () {
+      return !!this.duration && this.duration >= this.minDuration;
+    },
   },
 
-  /* TODO Vue 3 Migration
-   * destroyed() should be updated to unmounted() when migrating to Vue 3.
-   */
+  watch: {
+    show: {
+      handler: function (show) {
+        this.isShown = show;
+        if (show) {
+          this.setTimeout();
+        } else {
+          clearTimeout(this.displayTimer);
+        }
+      },
+
+      immediate: true,
+    },
+  },
+
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   destroyed () {
-    clearTimeout(this.displayTimer);
+    if (this.shouldSetTimeout) {
+      clearTimeout(this.displayTimer);
+    }
   },
 
   methods: {
-    show () {
-      this.hidden = false;
-      this.displayTimer = setTimeout(() => {
-        this.hidden = true;
-      }, this.duration);
-    },
-
-    close () {
-      this.hidden = true;
-      clearTimeout(this.displayTimer);
+    setTimeout () {
+      if (this.shouldSetTimeout) {
+        this.displayTimer = setTimeout(() => {
+          this.isShown = false;
+          this.$emit('update:show', false);
+        }, this.duration);
+      }
     },
   },
 };
