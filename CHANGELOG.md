@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/dialpad/dialtone-vue/compare/v3.3.0...v3.4.0) (2022-06-23)
+
+
+### Features
+
+* add root layout component vue 3 ([#389](https://github.com/dialpad/dialtone-vue/issues/389)) ([f8ae5d5](https://github.com/dialpad/dialtone-vue/commit/f8ae5d560e8e1a31e6770b5a3146a91c26892085))
+
 # [3.3.0](https://github.com/dialpad/dialtone-vue/compare/v3.2.0...v3.3.0) (2022-06-16)
 
 
