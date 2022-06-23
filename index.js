@@ -30,6 +30,7 @@ export * from './components/toggle';
 export * from './components/tooltip';
 export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
+export * from './components/root_layout';
 
 /// Recipes
 export * from './recipes/comboboxes/combobox_with_popover';
