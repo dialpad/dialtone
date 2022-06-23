@@ -3,7 +3,8 @@
   "version": "2.10.0",
   "description": "Vue component library for Dialtone components",
   "scripts": {
-    "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
+    "build": "vue-cli-service build --target lib --name dialtone-vue index.js && npm run build:documentation",
+    "build:documentation": "node scripts/build-docs.js",
     "clean": "rm -rf ./dist",
     "pretest": "npm run clean",
     "lint": "run-s lint:code lint:docs",
@@ -24,7 +25,8 @@
     "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue"
   },
   "files": [
-    "dist/*.js"
+    "dist/*.js",
+    "dist/component-documentation.json"
   ],
   "main": "./dist/dialtone-vue.common.js",
   "dependencies": {
@@ -71,6 +73,7 @@
     "source-map-support": "^0.5.21",
     "vue": "^2.6.14",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
+    "vue-docgen-api": "^4.47.0",
     "vue-template-compiler": "^2.6.14",
     "yo": "^4.3.0"
   },
