@@ -1,6 +1,5 @@
 import { assert } from 'chai';
-import sinon from 'sinon';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 import DtChip from './chip.vue';
 
@@ -23,7 +22,6 @@ describe('DtChip Tests', function () {
   // Environment
   let propsData = basePropsData;
   let slots = {};
-  let chipStub;
   let listeners;
 
   // Helpers
@@ -36,7 +34,7 @@ describe('DtChip Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtChip, {
+    wrapper = mount(DtChip, {
       propsData,
       slots,
       listeners,
@@ -71,7 +69,7 @@ describe('DtChip Tests', function () {
       it('should not render icon', function () { assert.isFalse(icon.exists()); });
       it('should not render avatar', function () { assert.isFalse(avatar.exists()); });
       it('default interactive', function () {
-        assert.isTrue(chip.classes().includes('d-chip--interactive'));
+        assert.strictEqual(chip.element.tagName, 'BUTTON');
       });
       it('chip should have aria-labelledby', function () {
         assert.property(chip.attributes(), 'aria-labelledby');
@@ -82,25 +80,25 @@ describe('DtChip Tests', function () {
     });
 
     describe('When interactive is false', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           ...basePropsData,
           interactive: false,
         };
-        _setWrappers();
+        await _setWrappers();
       });
       it('should not be interactive', function () {
-        assert.isFalse(chip.classes().includes('d-chip--interactive'));
+        assert.strictEqual(chip.element.tagName, 'SPAN');
       });
     });
 
     describe('When hide close button', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           ...basePropsData,
           hideClose: true,
         };
-        _setWrappers();
+        await _setWrappers();
       });
       it('should not render remove button', function () { assert.isFalse(remove.exists()); });
     });
@@ -131,50 +129,22 @@ describe('DtChip Tests', function () {
   });
 
   describe('Interactivity Tests', function () {
-    const itBehavesLiksActive = () => {
-      it('chip should have active class', async function () {
-        assert.isTrue(chip.classes().includes('d-chip--active'));
-      });
-    };
-
     beforeEach(function () {
-      chipStub = sinon.stub();
-      listeners = {
-        click: chipStub,
-        close: chipStub,
-      };
       _setWrappers();
     });
 
-    describe('When enter is pressed', function () {
+    describe('When close button is clicked', function () {
       beforeEach(async function () {
-        await chip.trigger('keydown.enter');
+        await remove.trigger('click');
       });
-      itBehavesLiksActive();
-    });
-
-    describe('When mouse down', function () {
-      beforeEach(async function () {
-        await chip.trigger('mousedown');
-      });
-      itBehavesLiksActive();
-    });
-
-    describe('When mouse up', function () {
-      beforeEach(async function () {
-        await chip.trigger('mouseup');
-      });
-      it('chip should not have active class', async function () {
-        assert.isFalse(chip.classes().includes('d-chip--active'));
-      });
-      it('should emit click event', function () {
-        assert.property(wrapper.emitted(), 'click');
+      it('should emit close event', function () {
+        assert.property(wrapper.emitted(), 'close');
       });
     });
 
-    describe('When delete is pressed', function () {
+    describe('When delete is pressed on a chip', function () {
       beforeEach(async function () {
-        await chip.trigger('keyup.delete');
+        await chip.trigger('keyup', { code: 'DELETE' });
       });
       it('should emit close event', function () {
         assert.property(wrapper.emitted(), 'close');

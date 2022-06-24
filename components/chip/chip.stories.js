@@ -75,6 +75,11 @@ export const argTypesData = {
       disable: true,
     },
   },
+  keyup: {
+    table: {
+      disable: true,
+    },
+  },
 
   close: {
     description: 'Native chip close button event',

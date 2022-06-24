@@ -14,6 +14,9 @@
     "components/button/button.vue": {
       "vue/no-deprecated-dollar-listeners-api": 2
     },
+    "components/chip/chip.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 1
+    },
     "components/dropdown/dropdown.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },
