@@ -13,18 +13,6 @@
 # original branch
 BRANCH=$(git branch --show-current)
 
-if [ -n "$1" ]; then
-  # user manually passed in range start commit
-  RANGE_START=$1
-else
-  # gets the sha of the commit BEFORE the first commit we want to include (you need to pass this to rebase --onto)
-  BRANCH_FIRST_COMMIT=$(git log staging.."$BRANCH" --oneline | tail -1 | awk '{print $1;}')
-  RANGE_START=$(git rev-parse "$BRANCH_FIRST_COMMIT"^)
-fi
-
-# gets the sha of the commit at the end of the range
-RANGE_END=$(git log --oneline | head -n 1 | awk '{print $1;}')
-
 git checkout staging-vue3
 git pull
 
@@ -34,8 +22,10 @@ else
   git checkout -b "${BRANCH}-vue3"
 fi
 
-# gets the most recent commit on this branch
-NEW_BRANCH_COMMIT=$(git log --oneline | head -n 1 | awk '{print $1;}')
-
-git rebase --onto "$NEW_BRANCH_COMMIT" "$RANGE_START" "$RANGE_END"
-git rebase HEAD "${BRANCH}-vue3"
+if [ -n "$1" ]; then
+  # user manually passed in range start commit
+  RANGE_START=$1
+  git cherry-pick "$RANGE_START".."$BRANCH"
+else
+  git cherry-pick staging.."$BRANCH"
+fi
