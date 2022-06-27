@@ -50,7 +50,8 @@ that it should support.
 The focus will be set to the the active item on keyboard navigation. `UP` and `DOWN` arrows move the highlighted
 selection between the list items. `HOME` and `END` keys will jump straight to the first or the last item.
 Once the beginning or the end of the list is reached the selection will move to the opposite end of the list by default.
-If you want custom behavior you can pass `onBeginningOfList` and `onEndOfList` methods as props.
+If you want custom behavior you can pass `onBeginningOfList` and `onEndOfList` methods as props. `A-Z` keys will cycle
+through items that start with the corresponding letter.
 
 Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the highlight
 selection changes, a **highlight** event is emitted with the index of the currently highlighted item.

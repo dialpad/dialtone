@@ -13,21 +13,15 @@
       ref="listWrapper"
       data-qa="dt-combobox-list-wrapper"
     >
-      <ol id="list">
+      <ol
+        v-for="(item, index) in listItems"
+        id="list"
+        :key="index"
+      >
         <li
           role="option"
         >
-          item 1
-        </li>
-        <li
-          role="option"
-        >
-          item 2
-        </li>
-        <li
-          role="option"
-        >
-          item 3
+          {{ item }}
         </li>
       </ol>
     </div>
@@ -36,22 +30,32 @@
 
 <script>
 import KeyboardNavigation from './keyboard_list_navigation';
+export const KEYBOARD_LIST_NAVIGATION_TESTER_KEY = 'i';
+export const KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS = [
+  'item 1',
+  'item 2',
+  'item 3',
+];
 
 export default {
   name: 'KeyboardListNavigationTester',
 
   mixins: [
     KeyboardNavigation({
+      indexKey: 'highlightIndex',
+      idKey: 'highlightId',
       listElementKey: 'getListElement',
       afterHighlightMethod: 'afterHighlightMethod',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
+      activeItemKey: 'activeItemEl',
     }),
   ],
 
   data () {
     return {
       highlightIndex: 0,
+      listItems: KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS,
     };
   },
 
