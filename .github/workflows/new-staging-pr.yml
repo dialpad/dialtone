@@ -30,14 +30,26 @@ jobs:
 
             It is a required check for every PR to have a corresponding branch called `yourbranch-vue3` so that we do not forget to do it. In the special case that you need to make a change to vue2 without making it in vue3, you can set the label `vue2-only` on this PR.
 
-            ### What if I make more changes to my vue 2 branch after running ./copy_pr_vue3.sh?
-            You can copy these to the existing -vue3 branch by running the script with a git SHA param like so:
+            <details>
+              <summary>I got "commit SHA is a merge but no -m option was given."</summary>
 
-            `./copy_pr_vue3.sh 2a78db7`
+              This happens if there are merge commits in your branch. It's no problem, you can simply skip them with `git cherry-pick --skip`. We don't want to copy merge commits to the Vue 3 branch.
+            </details>
 
-            where 2a78db7 is the last commit from your branch that was copied to the other branch (all commits after this will be copied)
+            <details>
+              <summary>What if I make more changes to my vue 2 branch after running ./copy_pr_vue3.sh?</summary>
 
-            If it's just one or two commits, you may prefer to just manually use `git cherry-pick` which will work fine as well.
+              You can copy these to the existing -vue3 branch by running the script with a git SHA param like so:
 
-            ### What if I get a conflict?
-            Its possible to get a conflict when running `copy_pr_vue3.sh`. If this happens you can manually fix the conflict, commit it and do `git rebase --continue` and then `git rebase HEAD yourbranch-vue3`. Your other option is to do `git rebase --abort` and make the change manually.
+              `./copy_pr_vue3.sh 2a78db7`
+
+              where 2a78db7 is the last commit from your branch that was copied to the other branch (all commits after this will be copied)
+
+              If it's just one or two commits, you may prefer to just manually use `git cherry-pick` which will work fine as well.
+            </details>
+
+            <details>
+              <summary>What if I get a conflict?</summary>
+
+              It's possible to get a conflict when running `copy_pr_vue3.sh` as there are differences in Vue 2 and Vue 3 code. If this happens you can manually fix the conflict, commit it and do `git cherry-pick --continue`.
+            </details>

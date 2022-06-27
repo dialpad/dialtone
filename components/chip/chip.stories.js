@@ -75,6 +75,11 @@ export const argTypesData = {
       disable: true,
     },
   },
+  keyup: {
+    table: {
+      disable: true,
+    },
+  },
 
   close: {
     description: 'Native chip close button event',
@@ -118,7 +123,7 @@ export default {
 };
 
 // Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
+const Template = (args) => createTemplateFromVueFile(args, DtChipDefaultTemplate);
 
 // Stories
 export const Default = Template.bind({});

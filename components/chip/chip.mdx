@@ -22,7 +22,8 @@ import DtChip from './chip';
 
 ## Usage
 
-Default behaviour is interactive, has hover/focus/active states.
+Default behaviour is interactive, has hover/focus/active states. When interactive the chip will render as a `<button>`
+element.
 
 Default content text is aria-label unless overridden by passed in aria-label.
 
@@ -70,7 +71,7 @@ import { DtAvatar } from '@dialpad/dialtone';
 
 ## Non Interactive
 
-Can't focus on the chip, can not tab through.
+The chip is not focusable or clickable. If not interactive the chip will render as a `<span>` element.
 
 <Canvas>
   <Story id="components-chip--non-interactive" />

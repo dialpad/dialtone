@@ -22,9 +22,10 @@
       #avatar
     >
       <dt-avatar
-        class="d-bgc-purple-200"
-        v-html="avatar"
-      />
+        color="purple-200"
+      >
+        <v-html :html="$attrs.avatar" />
+      </dt-avatar>
     </template>
     <v-html :html="defaultSlot" />
   </dt-chip>
