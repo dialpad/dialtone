@@ -9,6 +9,11 @@
  */
 import Dom from './dom';
 
+const ERROR_INVALID_LIST_ELEMENT = (
+  'listElementKey is required or the referenced ' +
+  'element doesn\'t exist. Received listElement: '
+);
+
 export default ({
   // Role of the list items in the component. This is used to identify the list items
   // so you must update this if the role of your list items is anything other than 'option'
@@ -31,7 +36,7 @@ export default ({
   endOfListMethod = null,
   // Scroll the active element into view when highlighted by a keyboard event.
   scrollToOnHighlight = true,
-  // Focus the active element on keyboard navigation
+  // Focus the active element on keyboard navigation.
   focusOnKeyboardNavigation = false,
 } = {}) => ({
   mixins: [Dom],
@@ -40,8 +45,8 @@ export default ({
     return {
       [indexKey]: -1,
       [idKey]: '',
-      scrollToOnHighlight: scrollToOnHighlight,
-      focusOnKeyboardNavigation: focusOnKeyboardNavigation,
+      scrollToOnHighlight,
+      focusOnKeyboardNavigation,
     };
   },
 
@@ -62,16 +67,25 @@ export default ({
     // Gets the length of all the items in the list, uses the listItemRole param to determine
     // whether an element is a list item.
     _itemsLength () {
-      const listElement = this._getListElement();
+      const listItems = this._getListItemNodes();
 
-      if (!listElement) {
-        console.error(`listElementKey is required or the referenced element doesn't exist. Received
-          listElement: `, listElement);
-
+      if (listItems === null) {
         return 0;
       }
 
-      return listElement.querySelectorAll(`[role="${listItemRole}"]`).length;
+      return listItems.length;
+    },
+
+    // Gets all the list item nodes within the list element
+    _getListItemNodes () {
+      const listElement = this._getListElement();
+
+      if (!listElement) {
+        console.error(ERROR_INVALID_LIST_ELEMENT, listElement);
+        return null;
+      }
+
+      return Array.from(listElement.querySelectorAll(`[role="${listItemRole}"]`));
     },
 
     onUpKey () {
@@ -112,6 +126,37 @@ export default ({
       this.focusActiveItemIfNeeded();
     },
 
+    onNavigationKey (key) {
+      const listItems = this._getListItemNodes();
+
+      const matchingItems = listItems.filter(item => {
+        const content = item.textContent.trim().toLowerCase();
+        return content.startsWith(key.toLowerCase());
+      });
+
+      if (matchingItems.length <= 0) {
+        return;
+      }
+
+      const highlightedMatchingItemIndex = matchingItems.findIndex(item => {
+        return this[indexKey] === listItems.indexOf(item);
+      });
+
+      const nextHighlightedItemIndex = listItems.indexOf(
+        highlightedMatchingItemIndex < matchingItems.length - 1
+          ? matchingItems[highlightedMatchingItemIndex + 1]
+          : matchingItems[0],
+      );
+
+      this.setHighlightIndex(nextHighlightedItemIndex);
+      this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
+    },
+
+    isValidCharacter (key) {
+      return key.length === 1;
+    },
+
     jumpToBeginning () {
       this.setHighlightIndex(0);
     },
@@ -123,6 +168,7 @@ export default ({
     async setHighlightIndex (num) {
       this[indexKey] = num;
       this[idKey] = this._getItemId(num);
+
       if (this._itemsLength() && afterHighlightMethod) {
         await this.$nextTick();
         this[afterHighlightMethod](num);
@@ -146,8 +192,7 @@ export default ({
       }
 
       const listItems = Array.from(listElement.querySelectorAll(`[role="${listItemRole}"]`));
-      const index = listItems.indexOf(listElement.querySelector(`#${id}`));
-      return index;
+      return listItems.indexOf(listElement.querySelector(`#${id}`));
     },
 
     _getItemId (index) {

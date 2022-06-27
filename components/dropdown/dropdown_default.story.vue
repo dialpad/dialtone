@@ -56,6 +56,7 @@ import DtDropdown from './dropdown';
 import { DtListItem } from '../list_item';
 import { DtButton } from '../button';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
+import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 
 export default {
   name: 'DtDropdownDefault',
@@ -71,11 +72,7 @@ export default {
 
   computed: {
     items () {
-      return [
-        { name: '1st menu item', id: 1 },
-        { name: '2nd menu item', id: 2 },
-        { name: '3rd menu item', id: 3 },
-      ];
+      return DROPDOWN_STORY_ITEMS;
     },
   },
 
