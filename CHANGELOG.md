@@ -1,3 +1,15 @@
+# [2.12.0](https://github.com/dialpad/dialtone-vue/compare/v2.11.0...v2.12.0) (2022-06-29)
+
+
+### Bug Fixes
+
+* **Chip:** update to use semantic elements ([#391](https://github.com/dialpad/dialtone-vue/issues/391)) ([aea3b37](https://github.com/dialpad/dialtone-vue/commit/aea3b37da936780c41205504231688c74a9a94c3))
+
+
+### Features
+
+* **dropdown:** add letter key navigation ([#392](https://github.com/dialpad/dialtone-vue/issues/392)) ([4fc6791](https://github.com/dialpad/dialtone-vue/commit/4fc6791921263de04e9562aad343143acd98780b))
+
 # [2.11.0](https://github.com/dialpad/dialtone-vue/compare/v2.10.0...v2.11.0) (2022-06-23)
 
 
