@@ -15,7 +15,6 @@
         :key="direction"
         :placement="direction"
         :message="localMessage"
-        :offset="[0, 0]"
         class="d-mx64"
       >
         <template #anchor>
@@ -33,7 +32,6 @@
       <dt-tooltip
         class="d-mb64"
         :message="localMessage"
-        :offset="[0, 0]"
       >
         <template #anchor>
           <dt-button link>
@@ -47,7 +45,6 @@
       <dt-tooltip
         class="d-mb64 d-mt16"
         :message="localMessage"
-        :offset="[0, 0]"
         :show="show1"
       >
         <template #anchor>
@@ -66,7 +63,6 @@
         <dt-tooltip
           :inverted="true"
           :message="localMessage"
-          :offset="[0, 0]"
         >
           <template #anchor>
             <dt-button

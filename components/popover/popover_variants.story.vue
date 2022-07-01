@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <!-- eslint-disable max-lines -->
 <template>
   <div class="d-d-flex d-fw-wrap d-w100p d-flg12 d-fl-col4">

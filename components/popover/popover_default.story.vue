@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-popover
     :id="id"

@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <div>
     <dt-button @click="buttonClicked">

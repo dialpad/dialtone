@@ -194,7 +194,6 @@ export default {
 
     noticeActionListeners () {
       return {
-        // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
         ...this.$listeners,
 
         close: event => {
@@ -225,7 +224,6 @@ export default {
     },
   },
 
-  // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   destroyed () {
     if (this.shouldSetTimeout) {
       clearTimeout(this.displayTimer);

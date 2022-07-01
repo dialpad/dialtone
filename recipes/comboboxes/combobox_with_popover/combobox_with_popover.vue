@@ -28,7 +28,6 @@
       </div>
     </template>
     <template #list="{ opened, listProps, clearHighlightIndex }">
-      <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
       <dt-popover
         :open.sync="isListShown"
         :hide-on-click="true"

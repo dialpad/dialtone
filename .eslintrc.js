@@ -3,7 +3,6 @@ module.exports = {
     'standard',
     'semistandard',
     'plugin:vue/recommended',
-    'plugin:vue/vue3-recommended',
     'plugin:vuejs-accessibility/recommended',
   ],
   env: {
@@ -39,9 +38,6 @@ module.exports = {
         allowChildren: true,
       },
     ],
-    'vue/no-deprecated-destroyed-lifecycle': 'warn',
-    'vue/no-deprecated-dollar-listeners-api': 'warn',
-    'vue/no-deprecated-v-bind-sync': 'warn',
     'vue/new-line-between-multi-line-property': ['warn'],
     'vue/html-comment-content-spacing': ['warn'],
     'vue/no-potential-component-option-typo': ['warn'],
@@ -130,8 +126,6 @@ module.exports = {
       files: ['**/*.story.vue'],
       rules: {
         'vue/no-bare-strings-in-template': ['off'],
-        'vue/no-deprecated-slot-attribute': ['off'],
-        'vue/no-deprecated-slot-scope-attribute': ['off'],
       },
     },
   ],
