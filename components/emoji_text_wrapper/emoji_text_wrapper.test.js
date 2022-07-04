@@ -86,6 +86,20 @@ describe('DtEmojiTextWrapper Tests', function () {
             assert.strictEqual(emoji.attributes('src'), expectedSmileSrc);
           });
         });
+        describe('When default slot contains text with a colon and a valid emoji', function () {
+          beforeEach(async function () {
+            slots = { default: 'This is a smile emoji: :smile:' };
+            await _setWrappers();
+          });
+
+          it('Contains emoji component', function () {
+            assert.strictEqual(emoji.exists(), true);
+          });
+
+          it('Renders the correct emoji', function () {
+            assert.strictEqual(emoji.attributes('src'), expectedSmileSrc);
+          });
+        });
         describe('When default slot contains invalid shortcode', function () {
           beforeEach(async function () {
             slots = { default: 'Content with :invalid: emoji.' };
