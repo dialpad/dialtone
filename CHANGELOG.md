@@ -1,3 +1,11 @@
+## [2.12.1](https://github.com/dialpad/dialtone-vue/compare/v2.12.0...v2.12.1) (2022-07-06)
+
+
+### Bug Fixes
+
+* **emoji-text-wrapper:** dt-559 update shortcode parsing regex ([#400](https://github.com/dialpad/dialtone-vue/issues/400)) ([6184158](https://github.com/dialpad/dialtone-vue/commit/61841584946aded901c820f324dc4e8df794c8de))
+* tooltip spacing inconsistent ([#397](https://github.com/dialpad/dialtone-vue/issues/397)) ([e5d0c21](https://github.com/dialpad/dialtone-vue/commit/e5d0c21f63c151d82e87832970eb90cc65f98d6d))
+
 # [2.12.0](https://github.com/dialpad/dialtone-vue/compare/v2.11.0...v2.12.0) (2022-06-29)
 
 
