@@ -1,3 +1,18 @@
+# [3.5.0](https://github.com/dialpad/dialtone-vue/compare/v3.4.0...v3.5.0) (2022-07-06)
+
+
+### Bug Fixes
+
+* **Chip:** update to use semantic elements vue3 ([#393](https://github.com/dialpad/dialtone-vue/issues/393)) ([50697cc](https://github.com/dialpad/dialtone-vue/commit/50697cc0cf8cb14c5b81e3643595556b3936d976)), closes [#390](https://github.com/dialpad/dialtone-vue/issues/390)
+* **emoji-text-wrapper:** dt-559 update shortcode parsing regex ([#401](https://github.com/dialpad/dialtone-vue/issues/401)) ([8c96600](https://github.com/dialpad/dialtone-vue/commit/8c966001182ddfe5771329280458c09c91d3007f))
+* tooltip spacing inconsistent vue3 ([#399](https://github.com/dialpad/dialtone-vue/issues/399)) ([406afcf](https://github.com/dialpad/dialtone-vue/commit/406afcfd76fbf7c78411dd8c5fd0768210c679ee))
+
+
+### Features
+
+* add json documentation generator ([#388](https://github.com/dialpad/dialtone-vue/issues/388)) ([df3e012](https://github.com/dialpad/dialtone-vue/commit/df3e01239bab279f82e5de99f387e5448d52978a))
+* **dropdown:** add letter key navigation vue 3 ([#394](https://github.com/dialpad/dialtone-vue/issues/394)) ([0fddfb4](https://github.com/dialpad/dialtone-vue/commit/0fddfb4ae6210a61428d6a47c6eebb69c9d93811))
+
 # [3.4.0](https://github.com/dialpad/dialtone-vue/compare/v3.3.0...v3.4.0) (2022-06-23)
 
 
