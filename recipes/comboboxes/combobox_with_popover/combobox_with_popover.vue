@@ -54,7 +54,13 @@
         </template>
 
         <template #content>
+          <combobox-loading-list
+            v-if="loading"
+            v-bind="listProps"
+            :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+          />
           <div
+            v-else
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             @mouseleave="clearHighlightIndex"
@@ -82,6 +88,7 @@
 </template>
 
 <script>
+import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
 import { getUniqueString } from '@/common/utils';
 import {
@@ -94,6 +101,7 @@ export default {
   components: {
     DtCombobox,
     DtPopover,
+    ComboboxLoadingList,
   },
 
   props: {
@@ -196,6 +204,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Determines when to show the skeletons and also controls aria-busy attribute.
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -252,6 +268,8 @@ export default {
     },
 
     onSelect (highlightIndex) {
+      if (this.loading) return;
+
       this.$emit('select', highlightIndex);
     },
 
@@ -261,6 +279,8 @@ export default {
     },
 
     onHighlight (highlightIndex) {
+      if (this.loading) return;
+
       this.$emit('highlight', highlightIndex);
     },
 
@@ -289,7 +309,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-
-</style>

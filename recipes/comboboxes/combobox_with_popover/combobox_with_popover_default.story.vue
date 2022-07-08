@@ -1,6 +1,7 @@
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
+    :loading="loading"
     :list-aria-label="listAriaLabel"
     :max-height="maxHeight"
     :max-width="maxWidth"

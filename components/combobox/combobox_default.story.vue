@@ -1,5 +1,6 @@
 <template>
   <dt-combobox
+    :loading="loading"
     :show-list="!!value && showList"
     list-aria-label="Example list items"
     @escape="onComboboxEscape"

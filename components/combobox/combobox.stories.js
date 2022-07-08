@@ -80,6 +80,13 @@ export const argTypesData = {
       },
     },
   },
+  loading: {
+    table: {
+      defaultValue: {
+        summary: false,
+      },
+    },
+  },
 
   // Action Event Handlers
   onEscape: {
