@@ -1,3 +1,16 @@
+# [2.13.0](https://github.com/dialpad/dialtone-vue/compare/v2.12.1...v2.13.0) (2022-07-11)
+
+
+### Bug Fixes
+
+* **avatar:** default slot content ([#406](https://github.com/dialpad/dialtone-vue/issues/406)) ([60e727c](https://github.com/dialpad/dialtone-vue/commit/60e727cb79ce768b6fc523a81ec754f06dc5ac95))
+
+
+### Features
+
+* **Combobox Multi Select:** add Combobox Multi Select component  ([#396](https://github.com/dialpad/dialtone-vue/issues/396)) ([153a488](https://github.com/dialpad/dialtone-vue/commit/153a4889118fbbd79797374776b7f8b3f8dc6b90))
+* **combobox, combobox with popover:** add loading state ([#402](https://github.com/dialpad/dialtone-vue/issues/402)) ([7c9c822](https://github.com/dialpad/dialtone-vue/commit/7c9c822558477deff516ca55ae0ff18c81b9abb4))
+
 ## [2.12.1](https://github.com/dialpad/dialtone-vue/compare/v2.12.0...v2.12.1) (2022-07-06)
 
 
