@@ -70,6 +70,7 @@ export default {
      */
     closeButtonProps: {
       type: Object,
+      default: function () { return { ariaLabel: 'close' }; },
       validator: (props) => {
         return !!props.ariaLabel;
       },

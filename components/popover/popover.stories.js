@@ -113,6 +113,9 @@ const argTypesData = {
       options: ['', 'fade', 'pop', 'shake'],
     },
   },
+  offset: {
+    defaultValue: [0, 4],
+  },
 
   // Events
   onOpened: {

@@ -13,6 +13,7 @@
       <slot name="labelSlot">
         <div
           v-if="label"
+          ref="label"
           data-qa="dt-input-label"
           :class="[
             'base-input__label-text',
@@ -26,6 +27,7 @@
       <div
         v-if="$slots.description || description || shouldValidateLength"
         :id="descriptionKey"
+        ref="description"
         :class="[
           'base-input__description',
           'd-description',
