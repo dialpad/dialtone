@@ -8,7 +8,6 @@
       :element-type="$attrs.elementType"
       :type="$attrs.type"
       :navigation-type="$attrs.navigationType"
-      @click="$attrs.onClick"
     >
       <template #left>
         <component :is="$attrs.left" />
