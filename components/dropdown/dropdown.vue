@@ -4,7 +4,7 @@
     :content-width="contentWidth"
     :open="open"
     :placement="placement"
-    initial-focus-element="first"
+    :initial-focus-element="openedWithKeyboard ? 'first' : 'dialog'"
     :fallback-placements="fallbackPlacements"
     padding="none"
     role="menu"
