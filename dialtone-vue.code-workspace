@@ -55,14 +55,14 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "type": "pwa-chrome",
+        "type": "chrome",
         "request": "launch",
         "name": "Debug Local JS (storybook)",
-        "url": "http://localhost:9011",
+        "url": "http://localhost:9010",
         "webRoot": "${workspaceFolder}",
         "smartStep": true,
         "sourceMapPathOverrides": {
-          "webpack:///../*": "${webRoot}/*"
+          "webpack://*": "${webRoot}/*"
         }
       },
       {
