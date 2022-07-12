@@ -1,3 +1,10 @@
+## [2.13.1](https://github.com/dialpad/dialtone-vue/compare/v2.13.0...v2.13.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* **dropdown:** dt-570 initial focus ([#410](https://github.com/dialpad/dialtone-vue/issues/410)) ([d96fa12](https://github.com/dialpad/dialtone-vue/commit/d96fa12cf9b4280d8a4a4e41cf10c57bb05e8b84))
+
 # [2.13.0](https://github.com/dialpad/dialtone-vue/compare/v2.12.1...v2.13.0) (2022-07-11)
 
 
