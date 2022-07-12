@@ -1,3 +1,17 @@
+# [3.6.0](https://github.com/dialpad/dialtone-vue/compare/v3.5.0...v3.6.0) (2022-07-12)
+
+
+### Bug Fixes
+
+* **avatar:** default slot content vue3 ([#408](https://github.com/dialpad/dialtone-vue/issues/408)) ([fba6043](https://github.com/dialpad/dialtone-vue/commit/fba60438168d1d93103ac520ee3cd1f476895eb0))
+* **dropdown:** dt-570 initial focus ([#411](https://github.com/dialpad/dialtone-vue/issues/411)) ([2234143](https://github.com/dialpad/dialtone-vue/commit/223414389c68f49dbb57ebc75e60551275eefc90))
+* **radio-group:** dt-572 value prop vue3 ([#412](https://github.com/dialpad/dialtone-vue/issues/412)) ([0840dc7](https://github.com/dialpad/dialtone-vue/commit/0840dc75908e85385f4590c49beb661319a23104))
+
+
+### Features
+
+* **Combobox Multi Select:** add Combobox Multi Select component ([#405](https://github.com/dialpad/dialtone-vue/issues/405)) ([3314e31](https://github.com/dialpad/dialtone-vue/commit/3314e312d60172f640aa73027e3d5436738449f8))
+
 # [3.5.0](https://github.com/dialpad/dialtone-vue/compare/v3.4.0...v3.5.0) (2022-07-06)
 
 
