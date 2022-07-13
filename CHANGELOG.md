@@ -1,3 +1,10 @@
+# [2.14.0](https://github.com/dialpad/dialtone-vue/compare/v2.13.1...v2.14.0) (2022-07-13)
+
+
+### Features
+
+* **combobox multi-select:** add 'size' prop ([#413](https://github.com/dialpad/dialtone-vue/issues/413)) ([b914b06](https://github.com/dialpad/dialtone-vue/commit/b914b06e60a5a1e51af1844003b8bdeb40ff81c5))
+
 ## [2.13.1](https://github.com/dialpad/dialtone-vue/compare/v2.13.0...v2.13.1) (2022-07-12)
 
 
