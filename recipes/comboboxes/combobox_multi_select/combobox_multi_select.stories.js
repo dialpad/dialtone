@@ -3,6 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select';
 import DtRecipeComboboxMultiSelectMdx from './combobox_multi_select.mdx';
 import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
+import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -71,6 +72,18 @@ export const argTypesData = {
   },
   hasSuggestionList: {
     defaultValue: true,
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: Object.values(MULTI_SELECT_SIZES),
+    },
+    defaultValue: MULTI_SELECT_SIZES.DEFAULT,
+    table: {
+      defaultValue: {
+        summary: MULTI_SELECT_SIZES.DEFAULT,
+      },
+    },
   },
 
   // Action Event Handlers
