@@ -120,6 +120,13 @@ export const argTypesData = {
   listAriaLabel: {
     defaultValue: 'Example list items',
   },
+  loading: {
+    table: {
+      defaultValue: {
+        summary: false,
+      },
+    },
+  },
 
   // Action Event Handlers
   onEscape: {
