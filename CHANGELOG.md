@@ -1,3 +1,11 @@
+# [3.7.0](https://github.com/dialpad/dialtone-vue/compare/v3.6.0...v3.7.0) (2022-07-13)
+
+
+### Features
+
+* **combobox multi-select:** add 'size' prop ([#414](https://github.com/dialpad/dialtone-vue/issues/414)) ([90d2eb6](https://github.com/dialpad/dialtone-vue/commit/90d2eb6a8aeba0fb449f6b2ec21e9a2ff97a2d38))
+* **combobox, combobox with popover:** add loading state - vue3 ([#403](https://github.com/dialpad/dialtone-vue/issues/403)) ([53c6d34](https://github.com/dialpad/dialtone-vue/commit/53c6d34bde2e70e365660de82d71c6cf802fddf9))
+
 # [3.6.0](https://github.com/dialpad/dialtone-vue/compare/v3.5.0...v3.6.0) (2022-07-12)
 
 
