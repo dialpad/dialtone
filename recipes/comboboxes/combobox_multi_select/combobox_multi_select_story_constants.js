@@ -23,3 +23,10 @@ export const ITEMS_LIST_DATA = [
   { id: 'item21', value: 'item21', type: 'MAINLINE' },
   { id: 'item22', value: 'item22', type: 'Other' },
 ];
+
+export const MULTI_SELECT_SIZES = {
+  // Chip has no 'lg' and 'xl' size. So we don't support that in multi-select.
+  EXTRA_SMALL: 'xs',
+  SMALL: 'sm',
+  DEFAULT: 'md',
+};

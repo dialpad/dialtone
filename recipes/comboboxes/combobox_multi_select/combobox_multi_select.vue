@@ -24,6 +24,7 @@
             :key="item"
             class="d-mt4 d-mx2 d-zi-base1"
             :close-button-props="{ ariaLabel: 'close' }"
+            :size="size"
             v-on="chipListeners"
             @keyup.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
@@ -41,6 +42,7 @@
           :placeholder="inputPlaceHolder"
           :show-messages="showInputMessages"
           :messages="inputMessages"
+          :size="size"
           v-on="inputListeners"
           @input="onInput"
         />
@@ -105,6 +107,7 @@
 /* eslint-disable max-lines */
 import { DtRecipeComboboxWithPopover, DtInput, DtChip, DtValidationMessages } from '@';
 import { validationMessageValidator } from '@/common/validators';
+import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
 
 export default {
   name: 'DtRecipeComboboxMultiSelect',
@@ -235,6 +238,15 @@ export default {
     hasSuggestionList: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Size of the input and chip, one of `xs`, `sm`, `md`
+     */
+    size: {
+      type: String,
+      default: null,
+      validator: (t) => Object.values(MULTI_SELECT_SIZES).includes(t),
     },
   },
 
