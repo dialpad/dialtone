@@ -192,6 +192,8 @@ export default {
 
   methods: {
     onMouseHighlight (e) {
+      if (this.loading) return;
+
       const liElement = e.target.closest('li');
 
       if (liElement && this.highlightId !== liElement.id) {
@@ -210,10 +212,14 @@ export default {
     },
 
     afterHighlight () {
+      if (this.loading) return;
+
       this.$emit('highlight', this.highlightIndex);
     },
 
     onEnterKey () {
+      if (this.loading) return;
+
       if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
       }
@@ -234,7 +240,7 @@ export default {
     },
 
     onKeyValidation (e, eventHandler) {
-      if (!this.showList || !this.getListElement() || this.loading) { return; }
+      if (!this.showList || !this.getListElement()) { return; }
 
       this[eventHandler](e);
     },
@@ -242,7 +248,7 @@ export default {
     setInitialHighlightIndex () {
       if (this.showList) {
         // When the list's is shown, reset the highlight index.
-        // If the list is in loading state, set to -1
+        // If the list is loading, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
       }
     },

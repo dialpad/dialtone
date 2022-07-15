@@ -8,6 +8,7 @@ const basePropsData = {
   listAriaLabel: '',
   listId: 'list',
   showList: true,
+  loading: false,
 };
 
 describe('Dialtone Vue Combobox tests', function () {
@@ -16,6 +17,7 @@ describe('Dialtone Vue Combobox tests', function () {
   let inputWrapper;
   let input;
   let listWrapper;
+  let skeletons;
 
   // Test Environment
   let propsData;
@@ -33,6 +35,7 @@ describe('Dialtone Vue Combobox tests', function () {
     inputWrapper = wrapper.find('[data-qa="dt-combobox-input-wrapper"]');
     input = wrapper.find('input');
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
+    skeletons = wrapper.find('[data-qa="skeleton-text-body"]');
   };
 
   const _mountWrapper = () => {
@@ -124,6 +127,17 @@ describe('Dialtone Vue Combobox tests', function () {
         it('aria-expanded should be "true"', function () {
           assert.isTrue(input.attributes('aria-expanded') === 'true');
         });
+
+        describe('When list is loading', function () {
+          beforeEach(async function () {
+            await wrapper.setProps({ loading: true });
+            _setChildWrappers();
+          });
+
+          it('aria-busy should be "true"', function () {
+            assert.isTrue(listWrapper.find('ol').attributes('aria-busy') === 'true');
+          });
+        });
       });
     });
   });
@@ -134,6 +148,69 @@ describe('Dialtone Vue Combobox tests', function () {
       slots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
       _mountWrapper();
       _setChildWrappers();
+    });
+
+    describe('When the list is loading', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ loading: true });
+        _setChildWrappers();
+      });
+
+      it('should render loading skeletons', function () { assert.isTrue(skeletons.exists()); });
+
+      describe('When "Esc" key is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.esc');
+        });
+
+        it('should call listener', function () { assert.isTrue(escapeStub.called); });
+        it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
+      });
+
+      describe('When "Enter" key is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.enter');
+        });
+
+        it('should not call listener', function () { assert.isFalse(selectStub.called); });
+        it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
+      });
+
+      describe('When down arrow button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.down');
+        });
+
+        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
+        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
+
+      describe('When up arrow button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.up');
+        });
+
+        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
+        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
+
+      describe('When home button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.home');
+        });
+
+        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
+        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
+
+      describe('When end button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.end');
+        });
+
+        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
+        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
     });
 
     describe('When the list is shown', function () {
