@@ -212,7 +212,7 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
       await wrapper.setProps({
         maxSelected: 2,
         maxSelectedMessage: [{
-          message: 'Max 2 selected',
+          message: 'More than 2 selected',
           type: VALIDATION_MESSAGE_TYPES.WARNING,
         }],
       });
@@ -226,10 +226,10 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
       });
 
       it('should show warning if reach max', async function () {
-        await wrapper.setProps({ selectedItems: ['1', '2'] });
+        await wrapper.setProps({ selectedItems: ['item1', 'item2', 'item3'] });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
-        assert.strictEqual(validationMsg.text(), 'Max 2 selected');
+        assert.strictEqual(validationMsg.text(), 'More than 2 selected');
       });
     });
   });

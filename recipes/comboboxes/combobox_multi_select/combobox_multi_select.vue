@@ -217,7 +217,7 @@ export default {
     },
 
     /**
-     * Max select message when the max selections has been reached with the structure:
+     * Max select message when the max selections is exceeded with the structure:
      * `[{"message": string, "type": VALIDATION_MESSAGE_TYPES }]`
      */
     maxSelectedMessage: {
@@ -475,7 +475,7 @@ export default {
 
     checkMaxSelected () {
       if (this.maxSelected === 0) return;
-      if (this.selectedItems.length >= this.maxSelected) {
+      if (this.selectedItems.length > this.maxSelected) {
         this.showValidationMessages = true;
         this.$emit('max-selected');
       } else {
