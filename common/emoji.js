@@ -2,6 +2,7 @@ import emojiRegex from 'emoji-regex';
 
 export const emojiVersion = '6.6';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
+export let customEmojiAssetUrl = null;
 
 // Used for emoji 16px and smaller
 export let emojiImageUrlSmall = defaultEmojiAssetUrl;
@@ -19,6 +20,10 @@ export async function getEmojiJson () {
   emojiJson = await import('emoji-toolkit/emoji_strategy.json');
 }
 
+export function getEmojiData () {
+  return emojiJson;
+}
+
 export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
   if (!url.endsWith('/')) {
     url = url + '/';
@@ -33,6 +38,82 @@ export function setEmojiAssetUrlLarge (url, fileExtension = '.svg') {
   }
   emojiImageUrlLarge = url;
   emojiFileExtensionLarge = fileExtension;
+}
+
+export function setCustomEmojiUrl (url) {
+  customEmojiAssetUrl = url;
+}
+
+export function setCustomEmojiJson (json) {
+  validateCustomEmojiJson(json);
+}
+
+/**
+ * Validate custom emoji json
+ */
+export async function validateCustomEmojiJson (json) {
+  await getEmojiJson();
+
+  const customEmojiProps = ['extension', 'custom'];
+  const customEmojiRequiredProps = [
+    'name',
+    'category',
+    'shortname',
+    'extension',
+    'custom',
+  ];
+
+  /**
+   * Update single emoji properties.
+   * If the property exists in emojiData, it'll add the values if the property is an array, otherwise will overwrite.
+   * If not exists, will add the property to the emojiData object.
+   */
+  const _updateNativeEmojiData = (emojiData, propName, propValue) => {
+    if (emojiData[propName] === undefined) {
+      if (!customEmojiProps.includes(propName)) {
+        return;
+      }
+
+      // new property to add
+      emojiData[propName] = propValue;
+    } else {
+      if (Array.isArray(emojiData[propName])) {
+        emojiData[propName] = emojiData[propName].concat(propValue);
+      } else {
+        emojiData[propName] = propValue;
+      }
+    }
+  };
+
+  Object.entries(json).forEach((item) => {
+    const [customEmojiKey, customEmojiValue] = item;
+
+    if (customEmojiKey in emojiJson) {
+      // custom emoji exists in emoji json which means to update some data in the native emoji
+      const emojiData = emojiJson[customEmojiKey];
+
+      for (const customEmojiPropertyName in customEmojiValue) {
+        const customEmojiPropertyValue = customEmojiValue[customEmojiPropertyName];
+
+        _updateNativeEmojiData(emojiData, customEmojiPropertyName, customEmojiPropertyValue);
+      }
+    } else {
+      // new custom emoji
+      const _validateRequiredProps = () =>
+        customEmojiRequiredProps.every((val) => {
+          return customEmojiValue[val] !== undefined;
+        });
+
+      if (_validateRequiredProps()) {
+        emojiJson[customEmojiKey] = customEmojiValue;
+      } else {
+        console.error(
+          'The following custom emoji doesn\'t contain the required properties:',
+          customEmojiValue,
+        );
+      }
+    }
+  });
 }
 
 // recursively searches the emoji data object containing data for all emojis
@@ -56,7 +137,7 @@ export function shortcodeToEmojiData (shortcode) {
   }
 
   let reference;
-  f(emojiJson, null);
+  f(getEmojiData(), null);
   return reference;
 }
 
@@ -105,8 +186,12 @@ export async function codeToEmojiData (code) {
 // removes duplicates.
 // @returns {string[]}
 export function findShortCodes (textContent) {
-  const shortCodes = textContent.match(/:\w+:/g);
-  const filtered = shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(code)) : [];
+  const shortcodes = textContent.match(/:\w+:/g);
+  return filterValidShortCodes(shortcodes);
+}
+
+export function filterValidShortCodes (shortcodes) {
+  const filtered = shortcodes ? shortcodes.filter(code => shortcodeToEmojiData(code)) : [];
   return new Set(filtered);
 }
 

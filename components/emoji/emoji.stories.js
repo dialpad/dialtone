@@ -59,6 +59,11 @@ const VariantsTemplate = (args) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
+export const CustomEmoji = DefaultTemplate.bind({});
+CustomEmoji.args = {
+  code: ':shipit:',
+};
+
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
 Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

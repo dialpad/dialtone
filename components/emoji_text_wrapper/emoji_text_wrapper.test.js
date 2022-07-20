@@ -1,10 +1,12 @@
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
-import { setEmojiAssetUrlLarge } from '@/common/emoji.js';
+import { setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '@/common/emoji.js';
 import { flushPromises } from '@/common/utils.js';
+import * as customEmojiJson from '@/common/custom-emoji.json';
 
 setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
+setCustomEmojiUrl('https://mockstorage.com/emojis/');
 
 // Constants
 const baseProps = {};
@@ -21,6 +23,7 @@ describe('DtEmojiTextWrapper Tests', function () {
 
   // Expected
   const expectedSmileSrc = 'https://mockstorage.com/emojis/1f604.svg';
+  const expectedOctocatSrc = 'https://mockstorage.com/emojis/octocat.png';
 
   // Helpers
   const _setChildWrappers = async () => {
@@ -78,6 +81,24 @@ describe('DtEmojiTextWrapper Tests', function () {
 
           it('Renders the correct emoji', function () {
             assert.strictEqual(emoji.attributes('src'), expectedSmileSrc);
+          });
+        });
+        describe('When default slot contains valid custom shortcode', function () {
+          beforeEach(async function () {
+            setCustomEmojiJson(customEmojiJson);
+            slots = { default: 'Content with :octocat: emoji.' };
+            await _setWrappers();
+          });
+          after(function () {
+            setCustomEmojiJson('');
+          });
+
+          it('Contains emoji component', function () {
+            assert.strictEqual(emoji.exists(), true);
+          });
+
+          it('Renders the correct emoji', function () {
+            assert.strictEqual(emoji.attributes('src'), expectedOctocatSrc);
           });
         });
         describe('When default slot contains text with a colon and a valid emoji', function () {
