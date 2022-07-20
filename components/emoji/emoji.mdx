@@ -73,9 +73,94 @@ setEmojiAssetUrlLarge('https://my.example.website.com/joypixels/svg/unicode/', '
 Please be aware of [JoyPixels licensing requirements](https://www.joypixels.com/licenses). You may not use JoyPixels
 assets for business use without a license.
 
+## Custom Emoji
+
+It's possible to provide a custom emoji JSON file ([with this structure](#json-structure)) in order to support emojis
+that aren't part of the Unicode standard. To do so, first specify where the assets are and set the raw JSON:
+
+```js
+import { setCustomEmojiUrl } from 'dialtone-vue'
+// Your local custom emoji JSON file
+import * as customEmojiJson from './data/custom-emoji.json'
+
+// Custom Emojis
+setCustomEmojiUrl('https://my.example.website.com/images/icons/emoji/');
+setCustomEmojiJson(customEmojiJson);
+```
+
+```html
+<template>
+  <dt-emoji
+    code=":octocat:"
+  ></dt-emoji>
+</template>
+
+<script>
+import { DtEmoji } from '@dialpad/dialtone-vue';
+
+export default {
+  components: { DtEmoji },
+}
+</script>
+```
+
+In the example above, the emoji with the `:octocat:` shortcode from the custom emoji provided will be rendered.
+Take into account that a custom emoji can only be referenced by the shortcode as no Unicode character is associated
+with it.
+
+### JSON structure
+
+It follows a similar structure to the
+[standard emoji json file](https://raw.githubusercontent.com/joypixels/emoji-toolkit/master/emoji_strategy.json),
+though there are some specific properties used in the custom emoji json.
+
+```js
+{
+  "octocat": {
+    "name": "octocat",
+    "category": "",
+    "shortname": ":octocat:",
+    "shortname_alternates": [],
+    "keywords": [
+      "octo",
+      "cat",
+      "github"
+    ],
+    "extension": ".png", // .png or .svg
+    "custom": true // Boolean
+  }
+}
+```
+
+* Required properties: `name`, `category`, `shortname`, `extension`, `custom`
+
+#### Modify data in native emojis
+
+It's possible to modify or add data to a native emoji using the codepoint as the key of the object.
+
+In the following example, as the `keywords` property is an array, this will extend the keywords in the native emoji.
+
+```js
+{
+  '1f615': {
+    keywords: ['thinking', 'not sure', 'unknown'],
+  },
+}
+```
+
+In case the property is a string, it will overwrite the property of the native emoji.
+
+```js
+{
+  '1f913': {
+    shortname: ':nerdface:',
+  },
+}
+```
+
 ## Emoji Metadata
 
-You may access the full list of supported emojis and all emoji metadata by importing the following function and
+You may access the full list of supported native emojis and all emoji metadata by importing the following function and
 executing it:
 
 ```js
@@ -92,6 +177,13 @@ emojiData['1f600'].name // returns "grinning face"
 emojiData['1f482-1f3fb'].shortname // returns ":guard_tone1:"
 ```
 
+If you have setup a custom emoji json, you can get the resulting json (from the native and custom emojis)
+with:
+
+```js
+import { getEmojiData } from 'dialtone-vue'
+```
+
 ## Accessibility
 
 By default the emoji will be rendered with an aria-label attribute describing the emoji so it can be read by AT. This
@@ -100,6 +192,6 @@ ariaLabel prop. You can access the descriptions using the `getEmojiJson` functio
 
 ### References
 
-- [JoyPixels](https://www.joypixels.com/) - Our emoji assets
-- [emoji-toolkit](https://github.com/joypixels/emoji-toolkit) - Helper library we use to render joypixels
-- [emojipedia](https://emojipedia.org/) - Good for looking up details about specific emojis.
+* [JoyPixels](https://www.joypixels.com/) - Our emoji assets
+* [emoji-toolkit](https://github.com/joypixels/emoji-toolkit) - Helper library we use to render joypixels
+* [emojipedia](https://emojipedia.org/) - Good for looking up details about specific emojis.

@@ -68,3 +68,23 @@ Currently, this wrapper component **can't handle Vue components**, make sure to 
   ...
 </dt-emoji-text-wrapper>
 ```
+
+## With Custom Emoji
+
+[Set up the custom emoji](?path=/docs/components-emoji--custom-emoji#custom-emoji) in order to render with this component.
+
+```html
+<template>
+  <dt-emoji-text-wrapper>
+    custom emojis :octocat: :shipit:
+  </dt-emoji-text-wrapper>
+</template>
+
+<script>
+import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
+
+export default {
+  components: { DtEmojiTextWrapper },
+}
+</script>
+```

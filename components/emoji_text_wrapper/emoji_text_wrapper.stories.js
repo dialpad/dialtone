@@ -81,7 +81,7 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  default: 'Some text with :invalid-emoji: :smile: :cry: and 😄',
+  default: 'Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:',
 };
 
 export const Variants = VariantsTemplate.bind({});

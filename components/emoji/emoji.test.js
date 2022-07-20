@@ -1,11 +1,13 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
-import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@/common/emoji.js';
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji.js';
 import { flushPromises } from '@/common/utils.js';
+import * as customEmojiJson from '@/common/custom-emoji.json';
 
 setEmojiAssetUrlSmall('https://mockstorage.com/emojis/', '.png');
 setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
+setCustomEmojiUrl('https://mockstorage.com/emojis/');
 
 // Constants
 const basePropsData = {};
@@ -26,6 +28,7 @@ describe('DtEmoji Tests', function () {
   const expectedSmileSrcSmall = 'https://mockstorage.com/emojis/1f604.png';
   const expectedLaughingSrc = 'https://mockstorage.com/emojis/1f606.svg';
   const expectedPointUpLight = 'https://mockstorage.com/emojis/261d-1f3fb.svg';
+  const expectedShipIt = 'https://mockstorage.com/emojis/shipit.png';
 
   // Helpers
   const _setChildWrappers = async () => {
@@ -83,6 +86,21 @@ describe('DtEmoji Tests', function () {
         });
         it('should display the correct emoji with the new code', function () {
           assert.strictEqual(emoji.attributes('src'), expectedLaughingSrc);
+        });
+      });
+
+      describe('When a prop changes to a new custom emoji code', function () {
+        beforeEach(async function () {
+          setCustomEmojiJson(customEmojiJson);
+          await wrapper.setProps({ code: ':shipit:' });
+          await flushPromises();
+          await _setChildWrappers();
+        });
+        after(function () {
+          setCustomEmojiJson('');
+        });
+        it('should display the correct emoji with the new custom code', function () {
+          assert.strictEqual(emoji.attributes('src'), expectedShipIt);
         });
       });
 
