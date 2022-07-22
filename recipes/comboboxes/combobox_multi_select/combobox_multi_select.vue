@@ -276,11 +276,20 @@ export default {
         ...this.$listeners,
         input: event => {
           this.$emit('input', event);
+          if (this.hasSuggestionList) {
+            this.showComboboxList();
+          }
         },
 
         keyup: event => {
           this.onInputKeyup(event);
           this.$emit('keyup', event);
+        },
+
+        click: event => {
+          if (this.hasSuggestionList) {
+            this.showComboboxList();
+          }
         },
       };
     },
@@ -333,6 +342,16 @@ export default {
     onComboboxSelect (i) {
       this.value = '';
       this.$emit('select', i);
+    },
+
+    showComboboxList () {
+      if (this.showList != null) { return; }
+      this.$refs.comboboxWithPopover.showComboboxList();
+    },
+
+    closeComboboxList () {
+      if (this.showList != null) { return; }
+      this.$refs.comboboxWithPopover.closeComboboxList();
     },
 
     getChipButtons () {
@@ -389,13 +408,13 @@ export default {
     moveFromInputToChip () {
       this.getLastChipButton().focus();
       this.$refs.input.blur();
-      this.$refs.comboboxWithPopover.closeComboboxList();
+      this.closeComboboxList();
     },
 
     moveFromChipToInput () {
       this.getLastChipButton().blur();
       this.$refs.input.focus();
-      this.$refs.comboboxWithPopover.showComboboxList();
+      this.showComboboxList();
     },
 
     navigateBetweenChips (target, toLeft) {
@@ -406,7 +425,7 @@ export default {
       }
       this.getChipButtons()[from].blur();
       this.getChipButtons()[to].focus();
-      this.$refs.comboboxWithPopover.closeComboboxList();
+      this.closeComboboxList();
     },
 
     setChipsTopPosition () {

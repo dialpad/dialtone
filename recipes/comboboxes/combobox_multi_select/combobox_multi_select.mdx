@@ -71,6 +71,18 @@ import { DtRecipeComboboxMultiSelect } from '@dialpad/dialtone-vue';
 </dt-recipe-combobox-multi-select>
 ```
 
+When not passing `showList` and `hasSuggestionList` is `true`,
+to close the list with the `select` event,
+use the `closeComboboxList` method:
+
+```jsx
+methods: {
+  onSelect (i) {
+    this.$refs.comboboxMultiSelect.closeComboboxList();
+  },
+}
+```
+
 ### With Max Selected Validation
 
 Adds validation for max selection. Make sure to provide the following props:
