@@ -1,3 +1,10 @@
+# [2.16.0](https://github.com/dialpad/dialtone-vue/compare/v2.15.0...v2.16.0) (2022-07-22)
+
+
+### Features
+
+* **combobox multi-select:** expose closeComboboxList method ([#422](https://github.com/dialpad/dialtone-vue/issues/422)) ([d8debbb](https://github.com/dialpad/dialtone-vue/commit/d8debbb96b5784d28d7c3dc4d8a89183543b999b))
+
 # [2.15.0](https://github.com/dialpad/dialtone-vue/compare/v2.14.0...v2.15.0) (2022-07-20)
 
 
