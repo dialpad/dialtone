@@ -1,3 +1,12 @@
+# [3.8.0](https://github.com/dialpad/dialtone-vue/compare/v3.7.0...v3.8.0) (2022-07-25)
+
+
+### Features
+
+* add custom emoji ([#419](https://github.com/dialpad/dialtone-vue/issues/419)) ([b5062f8](https://github.com/dialpad/dialtone-vue/commit/b5062f804074b06028dd4863d7e58c2e54013536))
+* **combobox multi-select:** expose closeComboboxList method ([#424](https://github.com/dialpad/dialtone-vue/issues/424)) ([fe32607](https://github.com/dialpad/dialtone-vue/commit/fe32607c384bfc24445b3c187e2167dc955bacb3))
+* **combobox multi-select:** show error when exceeds the max-selected ([#417](https://github.com/dialpad/dialtone-vue/issues/417)) ([9a20673](https://github.com/dialpad/dialtone-vue/commit/9a20673ade1d100b032e2881daf56a1271ffb077))
+
 # [3.7.0](https://github.com/dialpad/dialtone-vue/compare/v3.6.0...v3.7.0) (2022-07-13)
 
 
