@@ -1,5 +1,6 @@
 <template>
   <dt-combobox
+    :empty-state-message="emptyStateMessage"
     :loading="loading"
     :show-list="!!value && showList"
     list-aria-label="Example list items"
@@ -72,20 +73,7 @@ export default {
 
   computed: {
     displayItems () {
-      return [
-        { name: 'combobox item 1', id: 1 },
-        { name: 'combobox item 2', id: 2 },
-        { name: 'combobox item 3', id: 3 },
-        { name: 'combobox item 4', id: 4 },
-        { name: 'combobox item 5', id: 5 },
-        { name: 'combobox item 6', id: 6 },
-        { name: 'combobox item 7', id: 7 },
-        { name: 'combobox item 8', id: 8 },
-        { name: 'combobox item 9', id: 9 },
-        { name: 'combobox item 10', id: 10 },
-        { name: 'combobox item 11', id: 11 },
-        { name: 'combobox item 12', id: 12 },
-      ];
+      return this.items;
     },
   },
 

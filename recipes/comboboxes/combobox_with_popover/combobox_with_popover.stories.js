@@ -8,7 +8,6 @@ import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constan
 
 // Default Prop Values
 export const argsData = {
-  showList: null,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
@@ -176,6 +175,14 @@ export const argTypesData = {
       },
     },
   },
+
+  // Hide items because its used for storybook only
+  // not a real component prop.
+  items: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
@@ -207,8 +214,40 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  items: [
+    { id: 'item1', number: '(732) 338-2720', type: 'MAINLINE' },
+    { id: 'item2', number: '(732) 338-2722', type: 'MAINLINE' },
+    { id: 'item3', number: '(732) 338-2725', type: 'MAINLINE' },
+    { id: 'item4', number: '(732) 338-2764', type: 'MAINLINE' },
+    { id: 'item5', number: '(732) 338-2784', type: 'MAINLINE' },
+    { id: 'item6', number: '(732) 338-2743', type: 'MAINLINE' },
+    { id: 'item7', number: '(732) 338-2728', type: 'MAINLINE' },
+    { id: 'item8', number: '(732) 338-2769', type: 'Other' },
+    { id: 'item9', number: '(732) 338-2723', type: 'MAINLINE' },
+    { id: 'item10', number: '(732) 338-2729', type: 'MAINLINE' },
+    { id: 'item11', number: '(732) 338-2489', type: 'MAINLINE' },
+    { id: 'item12', number: '(732) 338-2756', type: 'Other' },
+  ],
+};
 Default.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-valid-attr-value',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
+
+export const Empty = DefaultTemplate.bind({});
+Empty.args = {
+  items: [],
+};
+Empty.parameters = {
   a11y: {
     config: {
       rules: [

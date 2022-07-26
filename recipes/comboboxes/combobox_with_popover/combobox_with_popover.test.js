@@ -9,6 +9,7 @@ const basePropsData = {
   listAriaLabel: '',
   listId: 'list',
   loading: false,
+  showList: null,
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
@@ -18,6 +19,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   let inputWrapper;
   let listWrapper;
   let skeletons;
+  let comboboxEmptyList;
 
   // Environment
   let propsData = basePropsData;
@@ -35,10 +37,12 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     inputWrapper = wrapper.find('[data-qa="dt-combobox-input-wrapper"]');
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
     skeletons = wrapper.find('[data-qa="skeleton-text-body"]');
+    comboboxEmptyList = wrapper.find('[data-qa="dt-combobox-empty-list"]');
   };
 
-  const _openComboboxPopover = async () => {
+  const _openComboboxPopover = async (_emptyList = undefined) => {
     await wrapper.find('#input').trigger('focus');
+    wrapper.vm.$refs.combobox.isListEmpty = _emptyList;
     await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
     wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
   };
@@ -62,6 +66,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     global.cancelAnimationFrame = sinon.spy();
     this.localVue = createLocalVue();
   });
+
   beforeEach(function () {
     selectStub = sinon.stub();
     escapeStub = sinon.stub();
@@ -73,12 +78,15 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   });
 
   // Teardown
-  afterEach(function () {
+  afterEach(async function () {
     propsData = basePropsData;
     slots = {};
     scopedSlots = {};
+    // The destroy method is not removing the comboboxes from the document.body
+    // TODO: Check this behavior as is leads to a memory leak when test:watch
     wrapper.destroy();
   });
+
   after(function () {
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
@@ -110,9 +118,38 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       });
 
       it('should render the list wrapper', function () { assert.isTrue(listWrapper.exists()); });
-      it('should render the list', function () {
-        assert.isTrue(wrapper.find('#list').exists());
+      it('should render the list', function () { assert.isTrue(wrapper.find('#list').exists()); });
+    });
+
+    describe('When it is loading', function () {
+      // Test Setup
+      beforeEach(async function () {
+        propsData = { ...propsData, loading: true };
+        scopedSlots = {
+          input: '<input id="input" v-bind="props.inputProps" />',
+          list: '<ol id="list" v-bind="props.listProps"><li role="option">item1</li><li role="option">item2</li></ol>',
+        };
+        _mountWrapper();
+        await _openComboboxPopover();
+        _setChildWrappers();
       });
+
+      it('should render the loading skeletons', function () { assert.isTrue(skeletons.exists()); });
+    });
+
+    describe('When list is empty', function () {
+      // Test Setup
+      beforeEach(async function () {
+        scopedSlots = {
+          input: '<input id="input" v-bind="props.inputProps" />',
+          list: '<ol id="list" v-bind="props.listProps"><li role="option">item1</li><li role="option">item2</li></ol>',
+        };
+        _mountWrapper();
+        await _openComboboxPopover(true);
+        _setChildWrappers();
+      });
+
+      it('should render the empty list component', function () { assert.isTrue(comboboxEmptyList.exists()); });
     });
   });
 
@@ -173,8 +210,6 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         _setChildWrappers();
       });
 
-      it('should render loading skeletons', function () { assert.isTrue(skeletons.exists()); });
-
       describe('When "Esc" key is pressed', function () {
         beforeEach(async function () {
           await wrapper.trigger('keydown.esc');
@@ -227,6 +262,72 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
         it('should not call listener', function () { assert.isFalse(highlightStub.called); });
         it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
+    });
+
+    describe('When the list is empty', function () {
+      beforeEach(async function () {
+        scopedSlots = {
+          input: '<input id="input" v-bind="props.inputProps" />',
+          list: '<ol id="list" v-bind="props.listProps"></ol>',
+        };
+        _mountWrapper();
+        await _openComboboxPopover(true);
+        _setChildWrappers();
+      });
+
+      describe('When "Esc" key is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.esc');
+        });
+
+        it('should call listener', function () { assert.isTrue(escapeStub.called); });
+        it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
+      });
+
+      describe('When "Enter" key is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.enter');
+        });
+
+        it('should not call listener', function () { assert.isFalse(selectStub.called); });
+        it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
+      });
+
+      describe('When down arrow button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.down');
+        });
+
+        it('should call listener', function () { assert.isTrue(highlightStub.called); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
+      });
+
+      describe('When up arrow button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.up');
+        });
+
+        it('should call listener', function () { assert.isTrue(highlightStub.called); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
+      });
+
+      describe('When home button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.home');
+        });
+
+        it('should call listener', function () { assert.isTrue(highlightStub.called); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
+      });
+
+      describe('When end button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.end');
+        });
+
+        it('should call listener', function () { assert.isTrue(highlightStub.called); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
       });
     });
 

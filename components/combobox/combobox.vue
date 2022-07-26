@@ -23,8 +23,13 @@
       @mousemove.capture="onMouseHighlight"
     >
       <combobox-loading-list
-        v-if="loading"
+        v-if="isLoading && !listRenderedOutside"
         v-bind="listProps"
+      />
+      <combobox-empty-list
+        v-else-if="isListEmpty && !listRenderedOutside"
+        v-bind="listProps"
+        :message="emptyStateMessage"
       />
       <!-- @slot Slot for the combobox list element -->
       <slot
@@ -33,6 +38,8 @@
         :list-props="listProps"
         :opened="onOpen"
         :clear-highlight-index="clearHighlightIndex"
+        :is-loading="isLoading"
+        :is-list-empty="isListEmpty"
       />
     </div>
   </div>
@@ -42,11 +49,15 @@
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { getUniqueString } from '@/common/utils';
 import ComboboxLoadingList from './combobox_loading-list.vue';
+import ComboboxEmptyList from './combobox_empty-list.vue';
 
 export default {
   name: 'DtCombobox',
 
-  components: { ComboboxLoadingList },
+  components: {
+    ComboboxLoadingList,
+    ComboboxEmptyList,
+  },
 
   mixins: [
     KeyboardNavigation({
@@ -117,6 +128,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Message to show when the list is empty
+     */
+    emptyStateMessage: {
+      type: String,
+      default: 'No matches found.',
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -127,6 +146,8 @@ export default {
       // of this component, this is the ref to that dom element. Set
       // by the onOpen method.
       outsideRenderedListRef: null,
+      isListEmpty: undefined,
+      isLoading: undefined,
     };
   },
 
@@ -176,18 +197,33 @@ export default {
   watch: {
     showList (showList) {
       // When the list's visibility changes reset the highlight index.
-      this.$nextTick(function () {
-        if (!this.listRenderedOutside) {
-          this.setInitialHighlightIndex();
-          this.$emit('opened', showList);
-        }
-      });
+
+      if (!this.listRenderedOutside) {
+        this.setInitialHighlightIndex();
+        this.$emit('opened', showList);
+      }
 
       if (!showList && this.outsideRenderedListRef) {
         this.outsideRenderedListRef.removeEventListener('mousemove', this.onMouseHighlight);
         this.outsideRenderedListRef = null;
+        this.isListEmpty = undefined;
       }
     },
+
+    loading (isLoading) {
+      this.isListEmpty = undefined;
+      this.isLoading = isLoading;
+      this.$nextTick(() => {
+        this.isListEmpty = this.checkItemsLength();
+        this.setInitialHighlightIndex();
+      });
+    },
+  },
+
+  async mounted () {
+    this.isLoading = this.loading;
+    await this.$nextTick();
+    this.isListEmpty = this.checkItemsLength();
   },
 
   methods: {
@@ -202,7 +238,7 @@ export default {
     },
 
     getListElement () {
-      return this.outsideRenderedListRef ?? this.$refs.listWrapper.querySelector(`#${this.listId}`);
+      return this.outsideRenderedListRef ?? this.$refs.listWrapper?.querySelector(`#${this.listId}`);
     },
 
     clearHighlightIndex () {
@@ -213,12 +249,11 @@ export default {
 
     afterHighlight () {
       if (this.loading) return;
-
       this.$emit('highlight', this.highlightIndex);
     },
 
     onEnterKey () {
-      if (this.loading) return;
+      if (this.loading || this.isListEmpty) return;
 
       if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
@@ -235,22 +270,31 @@ export default {
       this.$emit('opened', open);
 
       if (open) {
+        this.isListEmpty = this.checkItemsLength();
         this.setInitialHighlightIndex();
       }
     },
 
     onKeyValidation (e, eventHandler) {
-      if (!this.showList || !this.getListElement()) { return; }
+      if (!this.showList || !this.getListElement()) return;
 
       this[eventHandler](e);
     },
 
     setInitialHighlightIndex () {
-      if (this.showList) {
-        // When the list's is shown, reset the highlight index.
-        // If the list is loading, set to -1
+      if (!this.showList) return;
+      this.$nextTick(() => {
+      // When the list's is shown, reset the highlight index.
+      // If the list is loading, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
-      }
+      });
+    },
+
+    checkItemsLength () {
+      if (!this.showList) return undefined;
+      const list = this.getListElement();
+      const options = list?.querySelectorAll(`[role="option"]`);
+      return options?.length === 0;
     },
   },
 };
