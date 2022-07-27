@@ -1,3 +1,11 @@
+# [2.17.0](https://github.com/dialpad/dialtone-vue/compare/v2.16.0...v2.17.0) (2022-07-27)
+
+
+### Features
+
+* **combobox and combobox with popover:** add empty state ([#409](https://github.com/dialpad/dialtone-vue/issues/409)) ([34ea471](https://github.com/dialpad/dialtone-vue/commit/34ea471553e117a5974c86124b4d129470d5567a))
+* **popover, tooltip, combobox with popover:** add sticky tippy ([#425](https://github.com/dialpad/dialtone-vue/issues/425)) ([7d2f18f](https://github.com/dialpad/dialtone-vue/commit/7d2f18f8756526ff89eeacef2c3b1f389e7355a4))
+
 # [2.16.0](https://github.com/dialpad/dialtone-vue/compare/v2.15.0...v2.16.0) (2022-07-22)
 
 
