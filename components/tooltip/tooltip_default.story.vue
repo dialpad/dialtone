@@ -15,6 +15,7 @@
         :message="message"
         :fallback-placements="fallbackPlacements"
         :offset="offset"
+        :sticky="sticky"
         :content-class="contentClass"
         :transition="transition"
         :show.sync="show"

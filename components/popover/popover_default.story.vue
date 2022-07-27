@@ -22,6 +22,7 @@
     :footer-class="footerClass"
     :max-height="maxHeight"
     :max-width="maxWidth"
+    :sticky="sticky"
     :open-with-arrow-keys="openWithArrowKeys"
     @opened="onOpened"
   >

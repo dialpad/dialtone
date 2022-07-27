@@ -1,4 +1,4 @@
-import tippy from 'tippy.js';
+import tippy, { sticky } from 'tippy.js';
 import { getArrowDetected } from '../tooltip/modifiers';
 import { findFirstFocusableNode } from '@/common/utils';
 
@@ -9,11 +9,14 @@ export const BASE_TIPPY_DIRECTIONS = [
   'top', 'top-start', 'top-end',
 ];
 
+export const TIPPY_STICKY_VALUES = [true, false, 'reference', 'popper'];
+
 export const createTippy = (anchorElement, options) => {
   const { contentElement } = { ...options };
   delete options.contentElement;
   return tippy(anchorElement, {
     ...options,
+    plugins: [sticky],
     render: () => getContentWrapper(contentElement),
   });
 };
@@ -29,7 +32,7 @@ export const getPopperOptions = ({
       {
         name: 'flip',
         options: {
-          fallbackPlacements: fallbackPlacements,
+          fallbackPlacements,
           boundary,
         },
       },

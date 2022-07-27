@@ -10,7 +10,7 @@ import PopoverVariants from './popover_variants.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
-import { POPOVER_DIRECTIONS } from './popover_constants';
+import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './popover_constants';
 
 // Default Props for all variations
 export const argsData = {
@@ -104,6 +104,18 @@ const argTypesData = {
     table: {
       defaultValue: {
         summary: 'null',
+      },
+    },
+  },
+  sticky: {
+    defaultValue: false,
+    control: {
+      type: 'select',
+      options: POPOVER_STICKY_VALUES,
+    },
+    table: {
+      defaultValue: {
+        summary: 'false',
       },
     },
   },
