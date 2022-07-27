@@ -1,3 +1,11 @@
+# [3.9.0](https://github.com/dialpad/dialtone-vue/compare/v3.8.0...v3.9.0) (2022-07-27)
+
+
+### Features
+
+* **combobox and combobox with popover:** add loading state - vue 3 ([#418](https://github.com/dialpad/dialtone-vue/issues/418)) ([8fa9962](https://github.com/dialpad/dialtone-vue/commit/8fa996275ae97532a3f38b9fba3f92fd6cbfe242))
+* **popover, tooltip, combobox with popover:** add sticky tippy ([#426](https://github.com/dialpad/dialtone-vue/issues/426)) ([80d8506](https://github.com/dialpad/dialtone-vue/commit/80d85069d51f8a5423d3c5a09dd1e0ee81d7fe41))
+
 # [3.8.0](https://github.com/dialpad/dialtone-vue/compare/v3.7.0...v3.8.0) (2022-07-25)
 
 
