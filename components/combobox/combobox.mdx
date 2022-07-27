@@ -32,6 +32,8 @@ The combobox has a role of "combobox", the list has a role "listbox" and the lis
 Depending on the use case, the user should be able to use `ESC` key to hide the list and/or empty the
 input's value, but this is not determined by the combobox.
 
+When `loading` prop is set to `true`, the list also has the aria-busy attribute set to `true`.
+
 [See W3C guidelines](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html)
 for more information.
 
@@ -67,6 +69,8 @@ Pressing `ESC` key while the input has focus will emit an **escape** event that 
 based on the use case. Commonly the `ESC` key might hide the list or empty the input. `ENTER` key will
 emit a **select** event with the index of the currently highlighted list item. When the highlight
 selection changes, a **highlight** event is emitted with the index of the currently highlighted item.
+
+When `loading` prop is set to `true`, only `ESC` key will emit an **escape** event.
 
 ### Usage
 

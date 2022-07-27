@@ -9,6 +9,7 @@ import DtPopover from '@/components/popover/popover';
 const baseProps = {
   listAriaLabel: '',
   listId: 'list',
+  loading: false,
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
@@ -16,6 +17,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   let wrapper;
   let inputWrapper;
   let listWrapper;
+  // let skeletons;
 
   // Environment
   let props = baseProps;
@@ -30,6 +32,14 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   const _setChildWrappers = () => {
     inputWrapper = wrapper.find('[data-qa="dt-combobox-input-wrapper"]');
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
+    // skeletons = wrapper.find('[data-qa="skeleton-text-body"]');
+  };
+
+  const _openComboboxPopover = async () => {
+    await wrapper.setProps({ showList: false });
+    await wrapper.setProps({ showList: true });
+    await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
+    wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
   };
 
   const _mountWrapper = () => {
@@ -135,6 +145,17 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       it('aria-expanded should be "true"', function () {
         assert.isTrue(wrapper.find('#input').attributes('aria-expanded') === 'true');
       });
+
+      describe('When list is loading', function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ loading: true });
+          _setChildWrappers();
+        });
+
+        it('aria-busy should be "true"', function () {
+          assert.isTrue(listWrapper.find('ol').attributes('aria-busy') === 'true');
+        });
+      });
     });
   });
   */
@@ -150,6 +171,72 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       };
       _mountWrapper();
       _setChildWrappers();
+    });
+
+    describe('When the list is loading', function () {
+      beforeEach(async function () {
+        props = { ...props, loading: true };
+        _mountWrapper();
+        await _openComboboxPopover();
+        _setChildWrappers();
+      });
+
+      // TODO: Fix this tests when merged with empty state changes
+      // it('should render loading skeletons', function () { assert.isTrue(skeletons.exists()); });
+
+      describe('When "Esc" key is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.esc');
+        });
+
+        it('should call listener', function () { assert.isTrue(escapeStub.called); });
+        it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
+      });
+
+      describe('When "Enter" key is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.enter');
+        });
+
+        it('should not call listener', function () { assert.isFalse(selectStub.called); });
+        it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
+      });
+
+      describe('When down arrow button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.down');
+        });
+
+        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
+        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
+
+      describe('When up arrow button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.up');
+        });
+
+        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
+        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
+
+      describe('When home button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.home');
+        });
+
+        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
+        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
+
+      describe('When end button is pressed', function () {
+        beforeEach(async function () {
+          await wrapper.trigger('keydown.end');
+        });
+
+        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
+        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+      });
     });
 
     describe('When the list is shown', function () {
@@ -182,9 +269,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When "Enter" key is pressed and the first item is highlighted', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ showList: true });
-        await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
-        wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
+        await _openComboboxPopover();
         await wrapper.trigger('keydown.enter');
       });
 
@@ -193,9 +278,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When "Esc" key is pressed', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ showList: true });
-        await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
-        wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
+        await _openComboboxPopover();
         await wrapper.trigger('keydown.esc');
       });
 

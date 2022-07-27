@@ -9,7 +9,6 @@
     "pretest": "npm run clean",
     "lint": "run-s lint:code lint:docs",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
-    "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue",
     "lint-staged:code": "eslint --fix",
     "lint-staged:docs": "markdownlint --fix",
     "lint:code": "eslint ./",
@@ -18,11 +17,12 @@
     "release": "semantic-release --no-ci --extends ./release-local.config.js",
     "start": "npm run storybook",
     "storybook": "npm run --prefix storybook storybook",
-    "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
-    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/*.test.js",
-    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/*.test.js"
+    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
+    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
+    "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
+    "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue"
   },
   "files": [
     "dist/*.js",

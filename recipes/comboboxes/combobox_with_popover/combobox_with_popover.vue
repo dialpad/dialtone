@@ -59,19 +59,19 @@
         </template>
 
         <template #content>
-          <combobox-loading-list
-            v-if="loading"
-            v-bind="listProps"
-            :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
-          />
           <div
-            v-else
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex; onFocusOut"
           >
+            <combobox-loading-list
+              v-if="loading"
+              v-bind="listProps"
+              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            />
             <slot
+              v-else
               name="list"
               :list-props="listProps"
             />

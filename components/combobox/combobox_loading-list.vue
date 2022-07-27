@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <ol
+    class="d-p0 d-mt8 d-hmx332 d-of-y-auto"
+    aria-busy="true"
+  >
     <dt-list-item
       v-for="index in 7"
       :key="index"
@@ -11,7 +14,7 @@
         :offset="0"
       />
     </dt-list-item>
-  </div>
+  </ol>
 </template>
 
 <script>
