@@ -16,6 +16,7 @@
         :message="$attrs.message"
         :fallback-placements="$attrs.fallbackPlacements"
         :offset="$attrs.offset"
+        :sticky="$attrs.sticky"
         :content-class="$attrs.contentClass"
         :transition="$attrs.transition"
         :show.sync="$attrs.show"

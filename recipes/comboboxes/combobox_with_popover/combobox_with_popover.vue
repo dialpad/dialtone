@@ -36,6 +36,7 @@
         :max-height="maxHeight"
         :max-width="maxWidth"
         :offset="popoverOffset"
+        :sticky="popoverSticky"
         placement="bottom-start"
         padding="none"
         role="listbox"
@@ -219,6 +220,14 @@ export default {
     popoverOffset: {
       type: Array,
       default: () => [0, 4],
+    },
+
+    /**
+     * If the popover sticks to the input.
+     */
+    popoverSticky: {
+      type: [Boolean, String],
+      default: false,
     },
 
     /**

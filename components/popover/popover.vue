@@ -120,6 +120,7 @@ import {
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_ROLES,
   POPOVER_INITIAL_FOCUS_STRINGS,
+  POPOVER_STICKY_VALUES,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
@@ -317,6 +318,21 @@ export default {
     },
 
     /**
+     * If the popover sticks to the anchor. This is usually not needed, but can be needed
+     * if the reference element's position is animating, or to automatically update the popover
+     * position in those cases the DOM layout changes the reference element's position.
+     * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
+     * checks the "popper" rect for changes.
+     */
+    sticky: {
+      type: [Boolean, String],
+      default: false,
+      validator: (sticky) => {
+        return POPOVER_STICKY_VALUES.includes(sticky);
+      },
+    },
+
+    /**
      * Determines maximum height for the popover before overflow.
      * Possible units rem|px|em
      */
@@ -430,14 +446,20 @@ export default {
 
     offset (offset) {
       this.tip.setProps({
-        offset: offset,
+        offset,
+      });
+    },
+
+    sticky (sticky) {
+      this.tip.setProps({
+        sticky,
       });
     },
 
     fallbackPlacements (fallbackPlacements) {
       this.tip.setProps({
         popperOptions: getPopperOptions({
-          fallbackPlacements: fallbackPlacements,
+          fallbackPlacements,
           hasHideModifierEnabled: true,
         }),
       });
@@ -488,6 +510,7 @@ export default {
       contentElement: this.popoverContentEl,
       placement: this.placement,
       offset: this.offset,
+      sticky: this.sticky,
       appendTo: document.body,
       interactive: true,
       trigger: 'manual',
