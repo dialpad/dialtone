@@ -169,22 +169,20 @@ export default ({
       this.setHighlightIndex(this._itemsLength() - 1);
     },
 
-    async setHighlightIndex (num) {
+    setHighlightIndex (num) {
       this[indexKey] = num;
       this[idKey] = this._getItemId(num);
 
       if (this._itemsLength() && afterHighlightMethod) {
-        await this.$nextTick();
         this[afterHighlightMethod](num);
       }
     },
 
-    async setHighlightId (id) {
+    setHighlightId (id) {
       this[idKey] = id;
       this[indexKey] = this._getItemIndex(id);
 
       if (this._itemsLength() && afterHighlightMethod) {
-        await this.$nextTick();
         this[afterHighlightMethod](this._getItemIndex(id));
       }
     },

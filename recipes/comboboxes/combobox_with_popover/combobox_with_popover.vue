@@ -1,6 +1,7 @@
 <template>
   <dt-combobox
     ref="combobox"
+    :loading="loading"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -28,11 +29,11 @@
         />
       </div>
     </template>
-    <template #list="{ opened, listProps, clearHighlightIndex }">
+    <template #list="{ opened, listProps, clearHighlightIndex, isLoading, isListEmpty }">
       <dt-popover
         ref="popover"
         v-model:open="isListShown"
-        :hide-on-click="true"
+        :hide-on-click="showList === null"
         :max-height="maxHeight"
         :max-width="maxWidth"
         :offset="popoverOffset"
@@ -67,9 +68,13 @@
             @focusout="clearHighlightIndex; onFocusOut"
           >
             <combobox-loading-list
-              v-if="loading"
+              v-if="isLoading"
               v-bind="listProps"
-              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            />
+            <combobox-empty-list
+              v-else-if="isListEmpty"
+              v-bind="listProps"
+              :message="emptyStateMessage"
             />
             <slot
               v-else
@@ -97,6 +102,7 @@
 
 <script>
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
+import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
 import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
 import { getUniqueString } from '@/common/utils';
 import {
@@ -110,6 +116,7 @@ export default {
     DtCombobox,
     DtPopover,
     ComboboxLoadingList,
+    ComboboxEmptyList,
   },
 
   props: {
@@ -246,6 +253,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Message to show when the list is empty
+     */
+    emptyStateMessage: {
+      type: String,
+      default: 'No matches found.',
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -291,13 +306,7 @@ export default {
   },
 
   methods: {
-    async handleDisplayList (value) {
-      if (this.isListShown) {
-        // After the list is updated, hightlight the first item
-        await this.$nextTick();
-        this.$refs.combobox.setInitialHighlightIndex();
-      }
-
+    handleDisplayList (value) {
       if (!this.hasSuggestionList) {
         if (value) {
           // Displays the list after the user has typed anything
