@@ -79,7 +79,7 @@
   },
   "peerDependencies": {
     "@dialpad/dialtone": ">=6.29",
-    "vue": "^2.6.14"
+    "vue": ">=2.6"
   },
   "engineStrict": true,
   "engines": {
