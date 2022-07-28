@@ -65,14 +65,14 @@
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex; onFocusOut;"
           >
+            <combobox-loading-list
+              v-if="isLoading"
+              v-bind="listProps"
+            />
             <combobox-empty-list
-              v-if="isListEmpty"
+              v-else-if="isListEmpty"
               v-bind="listProps"
               :message="emptyStateMessage"
-            />
-            <combobox-loading-list
-              v-else-if="isLoading"
-              v-bind="listProps"
             />
             <slot
               v-else
@@ -255,7 +255,7 @@ export default {
      */
     emptyStateMessage: {
       type: String,
-      default: 'No matches found.',
+      default: '',
     },
   },
 
