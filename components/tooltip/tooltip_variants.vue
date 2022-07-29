@@ -2,36 +2,42 @@
 <template>
   <div
     id="forms-radio--variants-container"
-    class="d-pt64 d-px64"
+    class="d-pt128 d-px64"
   >
     <!-- Arrow Description -->
     <div
       v-for="(rowDirection, i) in TOOLTIP_DIRECTIONS"
       :key="i"
-      class="d-mb64 d-d-flex d-jc-center d-ai-center"
+      class="d-mb128 d-d-flex d-jc-center d-ai-center"
     >
-      <dt-tooltip
+      <div
         v-for="direction in rowDirection"
         :key="direction"
-        :placement="direction"
-        :message="localMessage"
-        class="d-mx64"
       >
-        <template #anchor>
-          <dt-button
-            importance="outlined"
-            class="d-w128"
-          >
-            {{ direction }}
-          </dt-button>
-        </template>
-      </dt-tooltip>
+        <dt-tooltip
+          v-if="direction !== null"
+          :placement="direction"
+          :message="localMessage"
+          :show="$attrs.show"
+          class="d-mx64"
+        >
+          <template #anchor>
+            <dt-button
+              importance="outlined"
+              class="d-w128"
+            >
+              {{ direction }}
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </div>
     </div>
     <div class="d-d-flex d-jc-center d-w100p">
       <!-- Text -->
       <dt-tooltip
-        class="d-mb64"
+        class="d-mb64 d-mt64"
         :message="localMessage"
+        :show="$attrs.show"
       >
         <template #anchor>
           <dt-button link>
@@ -43,7 +49,7 @@
     <div class="d-d-flex d-jc-center d-w100p">
       <!-- Open state -->
       <dt-tooltip
-        class="d-mb64 d-mt16"
+        class="d-mb64 d-mt32"
         :message="localMessage"
         :show="show1"
       >
@@ -63,6 +69,7 @@
         <dt-tooltip
           :inverted="true"
           :message="localMessage"
+          :show="$attrs.show"
         >
           <template #anchor>
             <dt-button
@@ -97,9 +104,10 @@ export default {
   components: { DtTooltip, DtButton },
   data () {
     return {
-      TOOLTIP_DIRECTIONS: sliceIntoChunks(TOOLTIP_DIRECTIONS, 3),
+      TOOLTIP_DIRECTIONS: sliceIntoChunks(this.$attrs.customDirections || TOOLTIP_DIRECTIONS, 3),
+
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-      show1: false,
+      show1: this.$attrs.show ?? false,
     };
   },
 };

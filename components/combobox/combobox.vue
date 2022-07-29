@@ -244,7 +244,7 @@ export default {
     },
 
     getListElement () {
-      return this.outsideRenderedListRef ?? this.$refs.listWrapper.querySelector(`#${this.listId}`);
+      return this.outsideRenderedListRef ?? this.$refs.listWrapper?.querySelector(`#${this.listId}`);
     },
 
     clearHighlightIndex () {

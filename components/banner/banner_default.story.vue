@@ -1,6 +1,9 @@
 <template>
   <div>
-    <dt-button @click="displayBanner = true">
+    <dt-button
+      v-show="!displayBanner"
+      @click="displayBanner = true"
+    >
       Click to show!
     </dt-button>
 
@@ -14,6 +17,7 @@
       :pinned="$attrs.pinned"
       :hide-close="$attrs.hideClose"
       :close-button-props="buttonCloseProps"
+      :class="{ 'd-ps-sticky': $attrs.show }"
       @close="displayBanner = false; $attrs.onClose($event)"
     >
       <span
@@ -73,7 +77,7 @@ export default {
 
   data () {
     return {
-      displayBanner: false,
+      displayBanner: this.$attrs.show,
     };
   },
 

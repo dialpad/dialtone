@@ -42,7 +42,14 @@ jobs:
       run: npm run storybook:install
 
     - name: Build storybook
+      env:
+        NODE_ENV: development
       run: npm run storybook:build
+
+    - name: Visual Tests
+      env:
+        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      run: npx percy storybook --verbose storybook/compiled
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4.2.5

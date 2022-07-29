@@ -15,7 +15,6 @@
       ref="popover"
       :class="['d-popover', { 'd-popover__anchor--modal-opened': modal && isOpen }]"
       data-qa="dt-popover-container"
-      v-bind="$attrs"
     >
       <div
         :id="!ariaLabelledby && labelledBy"
@@ -54,8 +53,8 @@
           'max-height': maxHeight,
           'max-width': maxWidth,
         }"
+        :css="$attrs.css"
         :tabindex="contentTabindex"
-        v-bind="$attrs"
         @keydown.capture="onKeydown"
         @after-leave="onLeaveTransitionComplete"
         @after-enter="onEnterTransitionComplete"
@@ -144,8 +143,6 @@ export default {
   },
 
   mixins: [ModalMixin],
-
-  inheritAttrs: false,
 
   props: {
     /**
