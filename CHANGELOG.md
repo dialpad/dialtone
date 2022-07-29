@@ -1,3 +1,10 @@
+# [3.10.0](https://github.com/dialpad/dialtone-vue/compare/v3.9.0...v3.10.0) (2022-07-29)
+
+
+### Features
+
+* **combobox and combobox with popover:** add empty state - vue3 ([#420](https://github.com/dialpad/dialtone-vue/issues/420)) ([543dff8](https://github.com/dialpad/dialtone-vue/commit/543dff893bb2d2c72052de5bd27d821e702d5a6e))
+
 # [3.9.0](https://github.com/dialpad/dialtone-vue/compare/v3.8.0...v3.9.0) (2022-07-27)
 
 
