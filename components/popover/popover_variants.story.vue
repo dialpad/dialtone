@@ -1,11 +1,12 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <div class="d-d-flex d-fw-wrap d-w100p d-flg12 d-fl-col4">
+  <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-flg12 d-fl-col2">
     <dt-popover
+      :open="open"
       width-content="anchor"
       placement="bottom-start"
       initial-focus-element="first"
-      class="d-mr12"
+      class="d-mb128"
     >
       <template
         slot="anchor"
@@ -36,9 +37,10 @@
       </template>
     </dt-popover>
     <dt-popover
+      :open="open"
       width-content="anchor"
       initial-focus-element="first"
-      class="d-mr12"
+      class="d-mb128 d-jc-flex-end"
     >
       <template
         slot="anchor"
@@ -69,10 +71,11 @@
       </template>
     </dt-popover>
     <dt-popover
+      :open="open"
       padding="none"
       width-content="anchor"
       initial-focus-element="first"
-      class="d-mr12"
+      class="d-mb128"
     >
       <template
         slot="anchor"
@@ -100,9 +103,10 @@
       </template>
     </dt-popover>
     <dt-popover
+      :open="open"
       :modal="false"
       width-content="anchor"
-      class="d-mr12"
+      class="d-jc-flex-end"
     >
       <template
         slot="anchor"
@@ -133,6 +137,8 @@
       </template>
     </dt-popover>
     <dt-popover
+      :open="open"
+      class="d-mb128"
       :show-close-button="true"
       placement="bottom-start"
       header-class="d-d-flex d-ai-center d-jc-space-between"
@@ -204,6 +210,8 @@
     </dt-popover>
 
     <dt-popover
+      :open="open"
+      class="d-mb128 d-jc-flex-end"
       :show-close-button="true"
       max-height="20rem"
       max-width="50rem"
@@ -235,6 +243,8 @@
     </dt-popover>
 
     <dt-popover
+      :open="open"
+      class="d-my128"
       max-height="20rem"
       max-width="50rem"
       initial-focus-element="first"
@@ -271,9 +281,10 @@
     </dt-popover>
 
     <dt-popover
+      :open="open"
       content-class="d-pl12 d-pr16"
       initial-focus-element="first"
-      class="d-mr12"
+      class="d-my128 d-jc-flex-end"
       max-height="20rem"
       max-width="50rem"
     >
@@ -289,7 +300,7 @@
           <p>
             {{ sampleText }}
           </p>
-          <dt-dropdown>
+          <dt-dropdown :open="open">
             <template #anchor="{ attrs }">
               <dt-button
                 v-bind="attrs"
@@ -353,8 +364,9 @@
     </dt-popover>
 
     <dt-popover
+      :open="open"
       content-class="d-pl12 d-pr16"
-      class="d-mr12"
+      class="d-my128"
       initial-focus-element="first"
       max-height="20rem"
       max-width="50rem"
@@ -371,13 +383,7 @@
           <p>
             {{ sampleText }}
           </p>
-          <p>
-            {{ sampleText }}
-          </p>
-          <p>
-            {{ sampleText }}
-          </p>
-          <dt-tooltip>
+          <dt-tooltip :show="open">
             <template #anchor>
               <dt-button>
                 Hover me
@@ -391,7 +397,7 @@
 
     <dt-popover
       content-class="d-pl12 d-pr16"
-      class="d-mr12"
+      class="d-my128 d-jc-flex-end"
       :modal="false"
       max-height="20rem"
       max-width="50rem"
@@ -441,7 +447,7 @@ export default {
 
   data () {
     return {
-      openPopoverWithTriggerOverride: false,
+      openPopoverWithTriggerOverride: this.open,
       sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Consequuntur delectus distinctio id iure labore,
             maiores mollitia reprehenderit sunt tempore veritatis.

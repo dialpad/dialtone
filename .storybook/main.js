@@ -31,7 +31,7 @@ module.exports = {
     builder: {
       name: 'webpack5',
       options: {
-        lazyCompilation: true,
+        lazyCompilation: false,
       },
     },
   },
@@ -91,6 +91,7 @@ module.exports = {
     '../components/**/*.stories.@(js|mdx)',
     '../recipes/**/*.stories.@(js|mdx)',
     '../docs/**/*.stories.@(js|mdx)',
+    '../visual_testing/*.stories.@(js|mdx)',
   ],
   addons: [
     {

@@ -1,0 +1,34 @@
+import { Story, Meta } from '@storybook/addon-docs';
+
+<Meta title="Visual Testing/Combobox Recipes"/>
+
+export const CustomContainer = ({ children }) => (
+  <div
+    data-qa="custom-container"
+    style={{
+      marginBottom: '35rem',
+    }}
+  >
+    { children }
+  </div>
+);
+
+## Combobox With Popover
+
+<CustomContainer>
+  <Story id="visual-testing-combobox-with-popover--default"/>
+</CustomContainer>
+
+## Combobox Multi Select
+
+### Default
+
+<CustomContainer>
+  <Story id="visual-testing-combobox-multi-select--default"/>
+</CustomContainer>
+
+### With Max select validation
+
+<CustomContainer>
+  <Story id="visual-testing-combobox-multi-select--with-max-select-validation"/>
+</CustomContainer>

@@ -17,7 +17,7 @@ export const argsData = {
   onOpened: action('opened'),
 };
 
-const argTypesData = {
+export const argTypesData = {
   // Slots
   anchor: {
     table: {

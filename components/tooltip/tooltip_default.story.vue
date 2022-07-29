@@ -18,7 +18,7 @@
         :sticky="sticky"
         :content-class="contentClass"
         :transition="transition"
-        :show.sync="show"
+        :show="showTooltip"
         @shown="onShown"
       >
         <template
@@ -55,6 +55,14 @@ export default {
   computed: {
     buttonKind () {
       return this.inverted ? 'inverted' : 'default';
+    },
+
+    showTooltip () {
+      if (this.globalShow) {
+        return true;
+      }
+
+      return this.show;
     },
   },
 };

@@ -72,5 +72,5 @@ export const parameters = {
       // remove <template> and </template> tags
       return src.slice(10, -12);
     }
-  }
+  },
 };

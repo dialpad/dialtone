@@ -8,6 +8,7 @@
       :content-width="contentWidth"
       :padding="padding"
       :navigation-type="navigationType"
+      :open="open"
       @highlight="onHighlight"
     >
       <template slot="anchor">
