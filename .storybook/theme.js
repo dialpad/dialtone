@@ -3,7 +3,7 @@
  * https://storybook.js.org/docs/react/configure/theming
  */
 import { create } from '@storybook/theming/create';
-import dialpadLogo from '../docs/assets/dialpad_logo_blurple.svg';
+import dialpadLogo from '../docs/assets/dialpad_logo.svg';
 
 export default create({
   base: 'light',
