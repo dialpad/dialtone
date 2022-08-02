@@ -1,3 +1,15 @@
+# [2.18.0](https://github.com/dialpad/dialtone-vue/compare/v2.17.0...v2.18.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* loading, empty state order and remove emptyStateMessage value ([#428](https://github.com/dialpad/dialtone-vue/issues/428)) ([7a2fe58](https://github.com/dialpad/dialtone-vue/commit/7a2fe58274d310e81c586552565a2bb863e23d49))
+
+
+### Features
+
+* **popover:** add tether option to popover ([#437](https://github.com/dialpad/dialtone-vue/issues/437)) ([a65720b](https://github.com/dialpad/dialtone-vue/commit/a65720bb824738b8cc950f6e2363b6f0071cd498))
+
 # [2.17.0](https://github.com/dialpad/dialtone-vue/compare/v2.16.0...v2.17.0) (2022-07-27)
 
 
