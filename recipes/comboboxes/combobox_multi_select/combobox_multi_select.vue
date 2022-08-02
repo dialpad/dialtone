@@ -330,7 +330,6 @@ export default {
 
   beforeDestroy () {
     this.resizeWindowObserver?.unobserve(document.body);
-    console.log('Combobox Multi Select: Unobserve window resize before destory');
   },
 
   methods: {

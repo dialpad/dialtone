@@ -26,6 +26,9 @@ export const getPopperOptions = ({
   fallbackPlacements = [],
   onChangePlacement = () => {},
   hasHideModifierEnabled = false,
+  // If set to false the dialog will display over top of the anchor when there is insufficient space.
+  // if set to true it will never move from its position relative to the anchor and will clip instead.
+  tether = true,
 } = {}) => {
   return {
     modifiers: [
@@ -39,6 +42,13 @@ export const getPopperOptions = ({
       {
         name: 'hide',
         enabled: hasHideModifierEnabled,
+      },
+      {
+        name: 'preventOverflow',
+        options: {
+          altAxis: !tether,
+          tether,
+        },
       },
       getArrowDetected(({ state }) => {
         onChangePlacement(state.placement);
