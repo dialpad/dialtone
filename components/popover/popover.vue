@@ -315,6 +315,15 @@ export default {
     },
 
     /**
+     * If set to false the dialog will display over top of the anchor when there is insufficient space.
+     * If set to true it will never move from its position relative to the anchor and will clip instead.
+     */
+    tether: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * If the popover sticks to the anchor. This is usually not needed, but can be needed
      * if the reference element's position is animating, or to automatically update the popover
      * position in those cases the DOM layout changes the reference element's position.
@@ -453,12 +462,15 @@ export default {
       });
     },
 
-    fallbackPlacements (fallbackPlacements) {
+    fallbackPlacements () {
       this.tip.setProps({
-        popperOptions: getPopperOptions({
-          fallbackPlacements,
-          hasHideModifierEnabled: true,
-        }),
+        popperOptions: this.popperOptions(),
+      });
+    },
+
+    tether () {
+      this.tip.setProps({
+        popperOptions: this.popperOptions(),
       });
     },
 
@@ -500,10 +512,7 @@ export default {
       window.addEventListener('resize', this.onResize);
     }
     this.tip = createTippy(this.anchorEl, {
-      popperOptions: getPopperOptions({
-        fallbackPlacements: this.fallbackPlacements,
-        hasHideModifierEnabled: true,
-      }),
+      popperOptions: this.popperOptions(),
       contentElement: this.popoverContentEl,
       placement: this.placement,
       offset: this.offset,
@@ -537,6 +546,14 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    popperOptions () {
+      return getPopperOptions({
+        fallbackPlacements: this.fallbackPlacements,
+        tether: this.tether,
+        hasHideModifierEnabled: true,
+      });
+    },
+
     validateProps () {
       if (this.modal && this.initialFocusElement === 'none') {
         console.error('If the popover is modal you must set the ' +

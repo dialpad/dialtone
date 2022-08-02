@@ -22,6 +22,7 @@
     :footer-class="$attrs.footerClass"
     :max-height="$attrs.maxHeight"
     :max-width="$attrs.maxWidth"
+    :tether="$attrs.tether"
     :sticky="$attrs.sticky"
     :open-with-arrow-keys="$attrs.openWithArrowKeys"
     @opened="$attrs.onOpened"
