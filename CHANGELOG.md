@@ -1,3 +1,11 @@
+# [3.11.0](https://github.com/dialpad/dialtone-vue/compare/v3.10.0...v3.11.0) (2022-08-03)
+
+
+### Features
+
+* add pagination component vue-3 ([#430](https://github.com/dialpad/dialtone-vue/issues/430)) ([3726244](https://github.com/dialpad/dialtone-vue/commit/372624455cebf004dd4a2b7772155ce2abba97d7))
+* **popover:** add tether option to popover ([#438](https://github.com/dialpad/dialtone-vue/issues/438)) ([e69d936](https://github.com/dialpad/dialtone-vue/commit/e69d936c945fa99fc04d9b79a78a0265b41c7353))
+
 # [3.10.0](https://github.com/dialpad/dialtone-vue/compare/v3.9.0...v3.10.0) (2022-07-29)
 
 
