@@ -1,3 +1,10 @@
+# [2.19.0](https://github.com/dialpad/dialtone-vue/compare/v2.18.0...v2.19.0) (2022-08-03)
+
+
+### Features
+
+* dt-pagination ([#421](https://github.com/dialpad/dialtone-vue/issues/421)) ([dd6eaa2](https://github.com/dialpad/dialtone-vue/commit/dd6eaa2abfa62d95cf1e617be8f713e6cfcd2d28))
+
 # [2.18.0](https://github.com/dialpad/dialtone-vue/compare/v2.17.0...v2.18.0) (2022-08-02)
 
 
