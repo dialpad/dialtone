@@ -1,0 +1,82 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+# Pagination
+
+<Subtitle>
+  Pagination allows you to divide large amounts of content into smaller chunks across multiple pages.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="components-pagination--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-pagination--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtPagination } from '@dialpad/dialtone-vue';
+```
+
+### Basic
+
+```html
+<template>
+  <dt-pagination
+    :total-pages="10"
+    :aria-label="$i18n('pagination')"
+    :prev-aria-label="$i18n('previous')"
+    :next-aria-label="$i18n('next')"
+    :page-number-aria-label="getPageNumberAriaLabel"
+  />
+</template>
+<script>
+import DtPagination from './pagination';
+
+export default {
+  name: 'DtPaginationDefault',
+  components: { DtPagination },
+  methods: {
+    getPageNumberAriaLabel (page) {
+      return page === this.totalPages ? `Last page ${page}` : `Page ${page}`;
+    },
+  },
+};
+</script>
+```
+
+### With active-page
+
+```html
+<dt-pagination
+  :total-pages="10"
+  :active-page="5"
+  :prev-aria-label="$i18n('previous')"
+  :next-aria-label="$i18n('next')"
+  :page-number-aria-label="getPageNumberAriaLabel"
+/>
+```
+
+### With max-visible
+
+```html
+<dt-pagination
+  :total-pages="15"
+  :max-visible="7"
+  :prev-aria-label="$i18n('previous')"
+  :next-aria-label="$i18n('next')"
+  :page-number-aria-label="getPageNumberAriaLabel"
+/>
+```

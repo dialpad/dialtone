@@ -17,6 +17,7 @@ export * from './components/list_section';
 export * from './components/list_item';
 export * from './components/link';
 export * from './components/notice';
+export * from './components/pagination';
 export * from './components/popover';
 export * from './components/radio';
 export * from './components/radio_group';
