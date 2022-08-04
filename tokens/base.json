@@ -7,17 +7,29 @@
           "type": "color"
         },
         "foo": {
-          "value": "{color.neutral.white}",
+          "value": "#ccc",
+          "type": "color"
+        },
+        "bar": {
+          "value": "#999",
+          "type": "color"
+        },
+        "baz": {
+          "value": "#666",
+          "type": "color"
+        },
+        "zar": {
+          "value": "#333",
           "type": "color"
         }
       },
       "text": {
-        "moo": {
+        "default": {
           "value": "{color.black.900}",
           "type": "color"
         },
         "mar": {
-          "value": "{color.black.600}",
+          "value": "{color.black.400}",
           "type": "color"
         }
       },
