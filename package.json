@@ -4,7 +4,9 @@
   "description": "Design tokens for Dialtone",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run transform && style-dictionary build",
+    "transform": "token-transformer base.json tokens/tokens.json"
   },
   "repository": {
     "type": "git",
