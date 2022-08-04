@@ -25,7 +25,7 @@
       },
       "text": {
         "dark": {
-          "value": "black-900",
+          "value": "red",
           "type": "color"
         },
         "medium": {
