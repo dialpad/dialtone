@@ -17,6 +17,7 @@
   },
   "homepage": "https://dialpad.design/",
   "devDependencies": {
-    "style-dictionary": "^3.7.1"
+    "style-dictionary": "^3.7.1",
+    "token-transformer": "^0.0.24"
   }
 }
