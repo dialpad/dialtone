@@ -12,7 +12,7 @@ jobs:
     env:
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       STORYBOOK_ROOT: ./storybook
-      NODE_MODULES_CACHE_VERSION: v1
+      NODE_MODULES_CACHE_VERSION: v2
 
     steps:
       - name: Check out branch
