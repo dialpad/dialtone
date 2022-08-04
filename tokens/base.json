@@ -6,7 +6,7 @@
           "value": "{color.neutral.white}",
           "type": "color"
         },
-        "bar": {
+        "foo": {
           "value": "{color.neutral.white}",
           "type": "color"
         }
