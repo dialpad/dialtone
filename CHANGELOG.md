@@ -1,3 +1,10 @@
+## [2.19.1-alpha.4](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.3...v2.19.1-alpha.4) (2022-08-05)
+
+
+### Bug Fixes
+
+* **emoji:** change main to exports ([4f12103](https://github.com/dialpad/dialtone-vue/commit/4f121031c660f93015ea89649f03162bb659d099))
+
 ## [2.19.1-alpha.3](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.2...v2.19.1-alpha.3) (2022-08-05)
 
 
