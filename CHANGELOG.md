@@ -1,3 +1,10 @@
+## [2.19.1-alpha.2](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.1...v2.19.1-alpha.2) (2022-08-05)
+
+
+### Bug Fixes
+
+* **emoji:** modify webpack ([7826634](https://github.com/dialpad/dialtone-vue/commit/7826634abff5d125b6c9d1e73d5e5a142af23d5a))
+
 ## [2.19.1-alpha.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1-alpha.1) (2022-08-05)
 
 

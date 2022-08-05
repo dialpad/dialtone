@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.19.1-alpha.1",
+  "version": "2.19.1-alpha.2",
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "vue-cli-service build && npm run build:documentation",
