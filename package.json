@@ -30,7 +30,10 @@
     "dist/*.js",
     "dist/component-documentation.json"
   ],
-  "main": "./dist/dialtone-vue.common.js",
+  "exports": {
+    ".": "./dist/dialtone-vue.common.js",
+    "./emoji": "./dist/emoji.common.js"
+  },
   "dependencies": {
     "@linusborg/vue-simple-portal": "^0.1.5",
     "emoji-regex": "^10.1.0",
