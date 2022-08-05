@@ -1,4 +1,5 @@
 import emojiRegex from 'emoji-regex';
+import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json';
 
 export const emojiVersion = '6.6';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
@@ -12,13 +13,7 @@ export let emojiFileExtensionSmall = '.png';
 export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
-export let emojiJson = null;
-
-export async function getEmojiJson () {
-  if (emojiJson) return;
-
-  emojiJson = await import('emoji-toolkit/emoji_strategy.json');
-}
+export const emojiJson = emojiJsonLocal;
 
 export function getEmojiData () {
   return emojiJson;
@@ -52,8 +47,6 @@ export function setCustomEmojiJson (json) {
  * Validate custom emoji json
  */
 export async function validateCustomEmojiJson (json) {
-  await getEmojiJson();
-
   const customEmojiProps = ['extension', 'custom'];
   const customEmojiRequiredProps = [
     'name',
@@ -169,7 +162,6 @@ export function stringToUnicode (str) {
 
 // Takes in a code (which could be unicode or shortcode) and returns the emoji data for it.
 export async function codeToEmojiData (code) {
-  await getEmojiJson();
   if (code.startsWith(':') && code.endsWith(':')) {
     return shortcodeToEmojiData(code);
   } else {

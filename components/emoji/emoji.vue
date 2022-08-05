@@ -32,7 +32,7 @@ import {
   emojiFileExtensionLarge,
   customEmojiAssetUrl,
 } from '@/common/emoji';
-import { DtSkeleton } from '@/components/skeleton';
+import { DtSkeleton } from '../skeleton';
 
 export default {
   name: 'DtEmoji',
