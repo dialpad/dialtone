@@ -10,6 +10,10 @@
           "value": "#ccc",
           "type": "color"
         },
+        "asdfasdf": {
+          "value": "red",
+          "type": "color"
+        },
         "bar": {
           "value": "#999",
           "type": "color"
