@@ -1,3 +1,10 @@
+## [2.19.1-alpha.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1-alpha.1) (2022-08-05)
+
+
+### Bug Fixes
+
+* **emoji:** attempt codesplitting fix ([18fbaa2](https://github.com/dialpad/dialtone-vue/commit/18fbaa2c56fb5025859ca2e1238f7931d340ae68))
+
 # [2.19.0](https://github.com/dialpad/dialtone-vue/compare/v2.18.0...v2.19.0) (2022-08-03)
 
 
