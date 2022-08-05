@@ -998,13 +998,5 @@
       }
     }
   },
-  "test": {
-    "test": {
-      "foo": {
-        "value": "blue",
-        "type": "color"
-      }
-    }
-  },
   "$themes": []
 }
