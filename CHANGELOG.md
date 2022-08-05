@@ -1,3 +1,10 @@
+## [2.19.1-alpha.3](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.2...v2.19.1-alpha.3) (2022-08-05)
+
+
+### Reverts
+
+* Revert "fix(emoji): modify webpack" ([5238107](https://github.com/dialpad/dialtone-vue/commit/5238107b882fa15216245e7fb482e9afb93dfdd0))
+
 ## [2.19.1-alpha.2](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.1...v2.19.1-alpha.2) (2022-08-05)
 
 
