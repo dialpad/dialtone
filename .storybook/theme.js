@@ -7,7 +7,7 @@ import { create } from '@storybook/theming/create';
 export default create({
   base: 'light',
   brandTitle: 'Dialpad storybook',
-  brandImage: 'https://storage.googleapis.com/dialpad_static/dialtone/dialpad_logo.svg',
+  brandImage: 'https://static.dialpadcdn.com/dialtone/dialpad_logo.svg',
   fontBase: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
   colorPrimary: '#1738FA',
   colorSecondary: '#1111A1',
