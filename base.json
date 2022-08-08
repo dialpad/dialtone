@@ -307,55 +307,55 @@
         "value": "0",
         "type": "opacity"
       },
-      "5": {
+      "100": {
         "value": ".05",
         "type": "opacity"
       },
-      "10": {
+      "200": {
         "value": ".1",
         "type": "opacity"
       },
-      "20": {
+      "300": {
         "value": ".2",
         "type": "opacity"
       },
-      "25": {
+      "400": {
         "value": ".25",
         "type": "opacity"
       },
-      "30": {
+      "500": {
         "value": ".3",
         "type": "opacity"
       },
-      "40": {
+      "600": {
         "value": ".4",
         "type": "opacity"
       },
-      "50": {
+      "700": {
         "value": ".5",
         "type": "opacity"
       },
-      "60": {
+      "800": {
         "value": ".6",
         "type": "opacity"
       },
-      "70": {
+      "900": {
         "value": ".7",
         "type": "opacity"
       },
-      "75": {
+      "1000": {
         "value": ".75",
         "type": "opacity"
       },
-      "80": {
+      "1100": {
         "value": ".8",
         "type": "opacity"
       },
-      "90": {
+      "1200": {
         "value": ".9",
         "type": "opacity"
       },
-      "100": {
+      "1300": {
         "value": "1",
         "type": "opacity"
       }
@@ -823,7 +823,7 @@
           "type": "borderRadius"
         },
         "400": {
-          "value": "{size.300}",
+          "value": "{size.500}",
           "type": "borderRadius"
         },
         "500": {
