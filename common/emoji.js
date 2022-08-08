@@ -46,7 +46,7 @@ export function setCustomEmojiJson (json) {
 /**
  * Validate custom emoji json
  */
-export async function validateCustomEmojiJson (json) {
+export function validateCustomEmojiJson (json) {
   const customEmojiProps = ['extension', 'custom'];
   const customEmojiRequiredProps = [
     'name',
@@ -161,7 +161,7 @@ export function stringToUnicode (str) {
 }
 
 // Takes in a code (which could be unicode or shortcode) and returns the emoji data for it.
-export async function codeToEmojiData (code) {
+export function codeToEmojiData (code) {
   if (code.startsWith(':') && code.endsWith(':')) {
     return shortcodeToEmojiData(code);
   } else {

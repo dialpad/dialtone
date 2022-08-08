@@ -1,30 +1,9 @@
-## [2.19.1-alpha.4](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.3...v2.19.1-alpha.4) (2022-08-05)
+## [2.19.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1) (2022-08-08)
 
 
 ### Bug Fixes
 
-* **emoji:** change main to exports ([4f12103](https://github.com/dialpad/dialtone-vue/commit/4f121031c660f93015ea89649f03162bb659d099))
-
-## [2.19.1-alpha.3](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.2...v2.19.1-alpha.3) (2022-08-05)
-
-
-### Reverts
-
-* Revert "fix(emoji): modify webpack" ([5238107](https://github.com/dialpad/dialtone-vue/commit/5238107b882fa15216245e7fb482e9afb93dfdd0))
-
-## [2.19.1-alpha.2](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.1...v2.19.1-alpha.2) (2022-08-05)
-
-
-### Bug Fixes
-
-* **emoji:** modify webpack ([7826634](https://github.com/dialpad/dialtone-vue/commit/7826634abff5d125b6c9d1e73d5e5a142af23d5a))
-
-## [2.19.1-alpha.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1-alpha.1) (2022-08-05)
-
-
-### Bug Fixes
-
-* **emoji:** attempt codesplitting fix ([18fbaa2](https://github.com/dialpad/dialtone-vue/commit/18fbaa2c56fb5025859ca2e1238f7931d340ae68))
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([d92d147](https://github.com/dialpad/dialtone-vue/commit/d92d147b962830d8b7df2a214636be08f7604c34))
 
 # [2.19.0](https://github.com/dialpad/dialtone-vue/compare/v2.18.0...v2.19.0) (2022-08-03)
 

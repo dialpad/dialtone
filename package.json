@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.19.1-alpha.4",
+  "version": "2.19.1",
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "npm run clean && npm run build-main && npm run build-emoji",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
-    "@dialpad/dialtone": "^6.33.3",
+    "@dialpad/dialtone": "^7.0.0-beta.2",
     "@percy/cli": "1.6.4",
     "@percy/storybook": "4.2.1",
     "@semantic-release/changelog": "^6.0.1",
