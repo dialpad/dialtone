@@ -7,8 +7,6 @@ export * from './components/button';
 export * from './components/button_group';
 export * from './components/combobox';
 export * from './components/dropdown';
-export * from './components/emoji';
-export * from './components/emoji_text_wrapper';
 export * from './components/input';
 export * from './components/input_group';
 export * from './components/modal';
@@ -42,9 +40,6 @@ export * from './recipes/notices/top_banner_info';
 
 // Mixins
 export * from './common/mixins';
-
-// Emoji
-export * from './common/emoji';
 
 // Constants
 export {
