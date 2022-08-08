@@ -1,3 +1,10 @@
+## [2.19.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([d92d147](https://github.com/dialpad/dialtone-vue/commit/d92d147b962830d8b7df2a214636be08f7604c34))
+
 # [2.19.0](https://github.com/dialpad/dialtone-vue/compare/v2.18.0...v2.19.0) (2022-08-03)
 
 
