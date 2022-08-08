@@ -1,6 +1,6 @@
 <script>
 import { DtEmoji } from '../emoji';
-import { getEmojiJson, findEmojis, findShortCodes } from '@/common/emoji';
+import { findEmojis, findShortCodes } from '@/common/emoji';
 
 export default {
   name: 'DtEmojiTextWrapper',
@@ -28,7 +28,6 @@ export default {
   },
 
   async created () {
-    await getEmojiJson();
     this.loadingEmojiJson = false;
   },
 
