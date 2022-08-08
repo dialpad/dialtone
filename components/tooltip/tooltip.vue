@@ -46,6 +46,7 @@
 import {
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_DIRECTIONS,
+  TOOLTIP_STICKY_VALUES,
 } from './tooltip_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
@@ -94,7 +95,7 @@ export default {
      */
     offset: {
       type: Array,
-      default: () => [0, 0],
+      default: () => [0, -4],
     },
 
     /**
@@ -105,6 +106,21 @@ export default {
       default: 'top',
       validator (placement) {
         return TOOLTIP_DIRECTIONS.includes(placement);
+      },
+    },
+
+    /**
+     * If the tooltip sticks to the anchor. This is usually not needed, but can be needed
+     * if the reference element's position is animating, or to automatically update the popover
+     * position in those cases the DOM layout changes the reference element's position.
+     * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
+     * checks the "popper" rect for changes.
+     */
+    sticky: {
+      type: [Boolean, String],
+      default: false,
+      validator: (sticky) => {
+        return TOOLTIP_STICKY_VALUES.includes(sticky);
       },
     },
 
@@ -172,6 +188,7 @@ export default {
         interactive: false,
         trigger: 'manual',
         placement: this.placement,
+        sticky: this.sticky,
         popperOptions: getPopperOptions({
           fallbackPlacements: this.fallbackPlacements,
           hasHideModifierEnabled: true,
@@ -205,6 +222,12 @@ export default {
       } else {
         this.tip.hide();
       }
+    },
+
+    sticky (sticky) {
+      this.tip.setProps({
+        sticky,
+      });
     },
   },
 
@@ -282,6 +305,7 @@ export default {
       if (this.tip && this.tip.setProps) {
         this.tip.setProps({
           ...this.tippyProps,
+          zIndex: this.calculateAnchorZindex(),
         });
       }
     },

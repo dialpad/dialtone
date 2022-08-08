@@ -79,6 +79,7 @@
       <dt-button
         importance="outlined"
         circle
+        aria-label="Icon only"
       >
         <template slot="icon">
           <icon-dialpad-glyph />
@@ -86,7 +87,7 @@
       </dt-button>
 
       <!-- Icon Only -->
-      <dt-button>
+      <dt-button aria-label="Icon only">
         <template slot="icon">
           <icon-dialpad-glyph />
         </template>
@@ -107,6 +108,22 @@
         </template>
         Icon Right
       </dt-button>
+
+      <!-- Icon Top -->
+      <dt-button icon-position="top">
+        <template slot="icon">
+          <icon-dialpad-glyph />
+        </template>
+        Icon Top
+      </dt-button>
+
+      <!-- Icon Bottom -->
+      <dt-button icon-position="bottom">
+        <template slot="icon">
+          <icon-dialpad-glyph />
+        </template>
+        Icon Bottom
+      </dt-button>
     </div>
     <div class="d-mb16">
       <!-- Loading -->
@@ -118,6 +135,26 @@
       <!-- Link Button -->
       <dt-button link>
         Link Button
+      </dt-button>
+    </div>
+    <div class="d-mb16">
+      <!-- Active Button -->
+      <dt-button active>
+        Active button
+      </dt-button>
+      <!-- Active Inverted Button -->
+      <dt-button
+        active
+        kind="inverted"
+      >
+        Active Inverted button
+      </dt-button>
+      <!-- Active Danger Button -->
+      <dt-button
+        active
+        kind="danger"
+      >
+        Active Danger button
       </dt-button>
     </div>
   </div>

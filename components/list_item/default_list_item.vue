@@ -1,5 +1,5 @@
 <template>
-  <div class="dt-default-list-item d-fs14 d-lh4 d-py2 d-px12 d-d-flex d-ai-center">
+  <div class="dt-default-list-item d-fs14 d-lh4 d-py4 d-px12 d-d-flex d-ai-center">
     <section
       v-if="$slots.left"
       class="dt-default-list-item--left d-d-inline-flex d-as-flex-start d-d-flex d-ai-center d-pr8"

@@ -11,13 +11,7 @@
     data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
-    <slot>
-      <img
-        data-qa="dt-avatar-image"
-        v-bind="$attrs"
-        :alt="$attrs.alt"
-      >
-    </slot>
+    <slot />
   </div>
 </template>
 
@@ -42,15 +36,6 @@ export default {
     id: {
       type: String,
       default () { return getUniqueString(); },
-    },
-
-    /**
-     * Applies variant class to the avatar
-     */
-    kind: {
-      type: String,
-      default: 'default',
-      validator: (kind) => Object.keys(AVATAR_KIND_MODIFIERS).includes(kind),
     },
 
     /**
@@ -82,6 +67,8 @@ export default {
 
   data () {
     return {
+      // initials, image or icon
+      kind: 'initials',
       AVATAR_SIZE_MODIFIERS,
       AVATAR_COLOR_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
@@ -89,18 +76,40 @@ export default {
   },
 
   mounted () {
-    this.validateImageAttrsPresence();
+    this.init();
   },
 
-  beforeUpdate () {
-    this.validateImageAttrsPresence();
+  updated () {
+    this.init();
   },
 
   methods: {
+    init () {
+      const firstChild = this.$el.firstChild;
+      if (firstChild) {
+        this.setKind(firstChild);
+        this.validateImageAttrsPresence();
+      }
+    },
+
+    setKind (element) {
+      if (this.isSvgType(element)) { this.kind = 'icon'; return; }
+      if (this.isImageType(element)) { this.kind = 'image'; return; }
+      this.kind = 'initials';
+    },
+
+    isSvgType (element) {
+      return element?.tagName?.toUpperCase() === 'SVG';
+    },
+
+    isImageType (element) {
+      return element?.tagName?.toUpperCase() === 'IMG';
+    },
+
     validateImageAttrsPresence () {
-      if (this.kind === 'default' && !this.$slots.default) {
+      if (this.kind === 'image') {
         // Check that default slot image required attributes are provided
-        if (!this.$attrs.src || !this.$attrs.alt) {
+        if (!this.$el.firstChild.getAttribute('src') || !this.$el.firstChild.getAttribute('alt')) {
           Vue.util.warn('src and alt attributes are required for image avatars', this);
         }
       }

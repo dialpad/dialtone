@@ -2,6 +2,8 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
+import axe from 'axe-core';
+import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
 describe('Dialtone Vue Popover tests', function () {
   // Wrappers
@@ -62,11 +64,16 @@ describe('Dialtone Vue Popover tests', function () {
         // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
         transition: transitionStub(),
       },
+      attachTo: document.body,
     });
     _setChildWrappers();
   };
 
   before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
     this.localVue = createLocalVue();
   });
 
@@ -81,10 +88,16 @@ describe('Dialtone Vue Popover tests', function () {
     _clearChildWrappers();
   });
 
+  after(function () {
+    // Restore RequestAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
+  });
+
   describe('Presentation Tests', function () {
     describe('When Popover is open', function () {
       beforeEach(async function () {
-        await button.trigger('mouseup');
+        await button.trigger('click');
         _setChildWrappers();
       });
       it('should render the component', function () { assert.isTrue(wrapper.exists()); });
@@ -116,7 +129,7 @@ describe('Dialtone Vue Popover tests', function () {
 
     //   describe('When Popover is opened', function () {
     //     beforeEach(async function () {
-    //       await button.trigger('mouseup');
+    //       await button.trigger('click');
     //       _setChildWrappers();
     //     });
 
@@ -136,7 +149,7 @@ describe('Dialtone Vue Popover tests', function () {
 
     //   describe('When Popover is opened', function () {
     //     beforeEach(async function () {
-    //       await button.trigger('mouseup');
+    //       await button.trigger('click');
     //       _setChildWrappers();
     //     });
 
@@ -178,7 +191,7 @@ describe('Dialtone Vue Popover tests', function () {
 
       describe('When anchor is clicked', function () {
         beforeEach(async function () {
-          await button.trigger('mouseup');
+          await button.trigger('click');
           _setChildWrappers();
         });
 
@@ -200,8 +213,24 @@ describe('Dialtone Vue Popover tests', function () {
 
       describe('When anchor is clicked', function () {
         beforeEach(async function () {
-          await button.trigger('mouseup');
+          await button.trigger('click');
           _setChildWrappers();
+        });
+
+        it('should not open the popover', function () {
+          assert.isFalse(popoverWindow.isVisible());
+        });
+      });
+
+      describe('When anchor is clicked but it\'s disabled', function () {
+        beforeEach(async function () {
+          button.element.disabled = 'disabled';
+          await button.trigger('click');
+          _setChildWrappers();
+        });
+
+        afterEach(function () {
+          button.element.disabled = undefined;
         });
 
         it('should not open the popover', function () {
@@ -218,7 +247,7 @@ describe('Dialtone Vue Popover tests', function () {
 
       describe('When anchor is clicked', function () {
         beforeEach(async function () {
-          await button.trigger('mouseup');
+          await button.trigger('click');
           _setChildWrappers();
         });
 
@@ -283,6 +312,15 @@ describe('Dialtone Vue Popover tests', function () {
       });
       it('aria-labelledby should be set correctly on the content window', function () {
         assert.strictEqual(popoverWindow.attributes('aria-labelledby'), wrapper.vm.labelledBy);
+      });
+
+      it('should pass axe-core accessibility rules', async function () {
+        const a11yResults = await axe.run(wrapper.element, configA11y);
+        const violations = a11yResults.violations;
+        if (violations.length) {
+          console.log('axe-core accessibility violations:', violations);
+        }
+        assert.equal(violations.length, 0);
       });
     });
 

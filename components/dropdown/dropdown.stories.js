@@ -7,8 +7,10 @@ import DtDropdownVariantsTemplate from './dropdown_variants.story.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
 import {
   POPOVER_CONTENT_WIDTHS,
-  POPOVER_PADDING_CLASSES,
 } from '../popover';
+import {
+  DROPDOWN_PADDING_CLASSES,
+} from './dropdown_constants';
 import { POPOVER_DIRECTIONS } from '../popover/popover_constants';
 
 // Default Prop Values
@@ -74,9 +76,10 @@ export const argTypesData = {
     },
   },
   padding: {
+    defaultValue: 'small',
     control: {
       type: 'select',
-      options: Object.keys(POPOVER_PADDING_CLASSES),
+      options: Object.keys(DROPDOWN_PADDING_CLASSES),
     },
   },
   contentWidth: {

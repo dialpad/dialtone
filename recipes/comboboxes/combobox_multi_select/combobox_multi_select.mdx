@@ -1,0 +1,124 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeComboboxMultiSelect from './combobox_multi_select';
+
+# Combobox Multi-Select
+
+<Subtitle>
+  Select allows users to make a single selection or multiple selections from a list of options.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="recipes-comboboxes-combobox-multi-select--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Accessibility
+
+### Keyboard Support
+
+- User can navigate between chips pressing the `LEFT` and `RIGHT` key.
+- Pressing `LEFT` key when you have chips in the input and you are at the start of the text would select the last chip.
+- Pressing `RIGHT` key when you are at the last chip would focus on the start of the input.
+- Pressing `BACKSPACE` key would focus the chip.
+- When a chip is focused, pressing `BACKSPACE` or `DELETE` key would remove the chip.
+- User can navigate the popover list pressing `UP` and `DOWN` key.
+See full [Keyboard Support](?path=/docs/components-popover--default#keyboard-support) for popover list.
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeComboboxMultiSelect } from '@dialpad/dialtone-vue';
+```
+
+### Basic usage
+
+```html
+<dt-recipe-combobox-multi-select
+  ref="comboboxMultiSelect"
+  :loading-message="loadingMessage"
+  :selected-items="selectedItems"
+  @input="onInput"
+  @select="onSelect"
+  @remove="onRemove"
+  @max-selected="onMaxSelected"
+>
+  <template #list="{ listProps }">
+    <ul
+      v-bind="listProps"
+      class="d-p0"
+    >
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        role="option"
+        navigation-type="arrow-keys"
+        @click="onSelect(i)"
+      >
+        {{ item.value }}
+        <template #right>
+          {{ item.type }}
+        </template>
+      </dt-list-item>
+    </ul>
+  </template>
+</dt-recipe-combobox-multi-select>
+```
+
+When not passing `showList` and `hasSuggestionList` is `true`,
+to close the list with the `select` event,
+use the `closeComboboxList` method:
+
+```jsx
+methods: {
+  onSelect (i) {
+    this.$refs.comboboxMultiSelect.closeComboboxList();
+  },
+}
+```
+
+### With Max Selected Validation
+
+Adds validation for max selection. Make sure to provide the following props:
+
+- `maxSelected` the maximum number of selections you can make. 0 is unlimited
+- `maxSelectedMessage` should be the message that shown if max selection has been reached
+
+```html
+<dt-recipe-combobox-multi-select
+  ref="comboboxMultiSelect"
+  :selected-items="selectedItems"
+  :max-selected="maxSelected"
+  :max-selected-message="maxSelectedMessage"
+  @input="onInput"
+  @select="onSelect"
+  @remove="onRemove"
+  @max-selected="onMaxSelected"
+>
+  <template #list="{ listProps }">
+    <ul
+      v-bind="listProps"
+      class="d-p0"
+    >
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        role="option"
+        navigation-type="arrow-keys"
+        @click="onSelect(i)"
+      >
+        {{ item.value }}
+        <template #right>
+          {{ item.type }}
+        </template>
+      </dt-list-item>
+    </ul>
+  </template>
+</dt-recipe-combobox-multi-select>
+```

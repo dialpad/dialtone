@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-popover
     :id="id"
@@ -23,6 +22,9 @@
     :footer-class="footerClass"
     :max-height="maxHeight"
     :max-width="maxWidth"
+    :tether="tether"
+    :sticky="sticky"
+    :open-with-arrow-keys="openWithArrowKeys"
     @opened="onOpened"
   >
     <template

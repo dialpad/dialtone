@@ -1,16 +1,11 @@
 <template>
   <div
-    role="combobox"
-    :aria-expanded="showList.toString()"
-    :aria-controls="listId"
-    :aria-owns="listId"
-    aria-haspopup="listbox"
-    @keydown.esc.stop="onEscapeKey"
-    @keydown.enter.exact="onEnterKey"
-    @keydown.up.stop.prevent="onUpKey"
-    @keydown.down.stop.prevent="onDownKey"
-    @keydown.home.stop.prevent="onHomeKey"
-    @keydown.end.stop.prevent="onEndKey"
+    @keydown.esc.stop="onKeyValidation($event, 'onEscapeKey')"
+    @keydown.enter.exact="onKeyValidation($event, 'onEnterKey')"
+    @keydown.up.stop.prevent="onKeyValidation($event, 'onUpKey')"
+    @keydown.down.stop.prevent="onKeyValidation($event, 'onDownKey')"
+    @keydown.home.stop.prevent="onKeyValidation($event, 'onHomeKey')"
+    @keydown.end.stop.prevent="onKeyValidation($event, 'onEndKey')"
   >
     <div data-qa="dt-combobox-input-wrapper">
       <!-- @slot Slot for the combobox input element -->
@@ -27,11 +22,24 @@
       @focusout="clearHighlightIndex"
       @mousemove.capture="onMouseHighlight"
     >
+      <combobox-loading-list
+        v-if="isLoading && !listRenderedOutside"
+        v-bind="listProps"
+      />
+      <combobox-empty-list
+        v-else-if="isListEmpty && !listRenderedOutside"
+        v-bind="listProps"
+        :message="emptyStateMessage"
+      />
       <!-- @slot Slot for the combobox list element -->
       <slot
+        v-else
         name="list"
         :list-props="listProps"
         :opened="onOpen"
+        :clear-highlight-index="clearHighlightIndex"
+        :is-loading="isLoading"
+        :is-list-empty="isListEmpty"
       />
     </div>
   </div>
@@ -40,9 +48,16 @@
 <script>
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { getUniqueString } from '@/common/utils';
+import ComboboxLoadingList from './combobox_loading-list.vue';
+import ComboboxEmptyList from './combobox_empty-list.vue';
 
 export default {
   name: 'DtCombobox',
+
+  components: {
+    ComboboxLoadingList,
+    ComboboxEmptyList,
+  },
 
   mixins: [
     KeyboardNavigation({
@@ -97,9 +112,33 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * If the list is rendered outside the component, like when using popover as the list wrapper.
+     */
+    listRenderedOutside: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Determines when to show the skeletons and also controls aria-busy attribute.
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Message to show when the list is empty
+     */
+    emptyStateMessage: {
+      type: String,
+      default: '',
+    },
   },
 
-  emits: ['select', 'escape', 'highlight'],
+  emits: ['select', 'escape', 'highlight', 'opened'],
 
   data () {
     return {
@@ -107,12 +146,18 @@ export default {
       // of this component, this is the ref to that dom element. Set
       // by the onOpen method.
       outsideRenderedListRef: null,
+      isListEmpty: undefined,
+      isLoading: undefined,
     };
   },
 
   computed: {
     inputProps () {
       return {
+        role: 'combobox',
+        'aria-expanded': this.showList.toString(),
+        'aria-owns': this.listId,
+        'aria-haspopup': 'listbox',
         'aria-activedescendant': this.activeItemId,
         'aria-controls': this.listId,
       };
@@ -138,7 +183,7 @@ export default {
     },
 
     activeItemId () {
-      if (!this.showList || this.highlightIndex < 0) {
+      if (!this.showList || this.highlightIndex < 0 || this.loading) {
         return;
       }
       return this.highlightId;
@@ -152,19 +197,39 @@ export default {
   watch: {
     showList (showList) {
       // When the list's visibility changes reset the highlight index.
-      this.$nextTick(function () {
+
+      if (!this.listRenderedOutside) {
         this.setInitialHighlightIndex();
-      });
+        this.$emit('opened', showList);
+      }
 
       if (!showList && this.outsideRenderedListRef) {
         this.outsideRenderedListRef.removeEventListener('mousemove', this.onMouseHighlight);
         this.outsideRenderedListRef = null;
+        this.isListEmpty = undefined;
       }
     },
+
+    loading (isLoading) {
+      this.isListEmpty = undefined;
+      this.isLoading = isLoading;
+      this.$nextTick(() => {
+        this.isListEmpty = this.checkItemsLength();
+        this.setInitialHighlightIndex();
+      });
+    },
+  },
+
+  async mounted () {
+    this.isLoading = this.loading;
+    await this.$nextTick();
+    this.isListEmpty = this.checkItemsLength();
   },
 
   methods: {
     onMouseHighlight (e) {
+      if (this.loading) return;
+
       const liElement = e.target.closest('li');
 
       if (liElement && this.highlightId !== liElement.id) {
@@ -173,19 +238,24 @@ export default {
     },
 
     getListElement () {
-      return this.outsideRenderedListRef ?? this.$refs.listWrapper.querySelector(`#${this.listId}`);
+      return this.outsideRenderedListRef ?? this.$refs.listWrapper?.querySelector(`#${this.listId}`);
     },
 
     clearHighlightIndex () {
-      this.setHighlightIndex(-1);
+      if (this.showList) {
+        this.setHighlightIndex(-1);
+      }
     },
 
     afterHighlight () {
+      if (this.loading) return;
       this.$emit('highlight', this.highlightIndex);
     },
 
     onEnterKey () {
-      if (this.showList && this.highlightIndex >= 0) {
+      if (this.loading || this.isListEmpty) return;
+
+      if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
       }
     },
@@ -197,13 +267,34 @@ export default {
     onOpen (open, contentRef) {
       this.outsideRenderedListRef = contentRef;
       this.outsideRenderedListRef?.addEventListener('mousemove', this.onMouseHighlight);
+      this.$emit('opened', open);
+
+      if (open) {
+        this.isListEmpty = this.checkItemsLength();
+        this.setInitialHighlightIndex();
+      }
+    },
+
+    onKeyValidation (e, eventHandler) {
+      if (!this.showList || !this.getListElement()) return;
+
+      this[eventHandler](e);
     },
 
     setInitialHighlightIndex () {
-      if (this.showList) {
-        // When the list's is shown, reset the highlight index.
-        this.setHighlightIndex(0);
-      }
+      if (!this.showList) return;
+      this.$nextTick(() => {
+      // When the list's is shown, reset the highlight index.
+      // If the list is loading, set to -1
+        this.setHighlightIndex(this.loading ? -1 : 0);
+      });
+    },
+
+    checkItemsLength () {
+      if (!this.showList) return undefined;
+      const list = this.getListElement();
+      const options = list?.querySelectorAll(`[role="option"]`);
+      return options?.length === 0;
     },
   },
 };

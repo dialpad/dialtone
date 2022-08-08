@@ -85,4 +85,14 @@ Variants.parameters = {
   controls: { hideNoControlsWarning: true, disable: true },
   actions: { disable: true },
   options: { showPanel: false },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'color-contrast',
+          enabled: false,
+        },
+      ],
+    },
+  },
 };

@@ -10,14 +10,14 @@ import PopoverVariants from './popover_variants.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
-import { POPOVER_DIRECTIONS } from './popover_constants';
+import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './popover_constants';
 
 // Default Props for all variations
 export const argsData = {
   onOpened: action('opened'),
 };
 
-const argTypesData = {
+export const argTypesData = {
   // Slots
   anchor: {
     table: {
@@ -107,11 +107,26 @@ const argTypesData = {
       },
     },
   },
+  sticky: {
+    defaultValue: false,
+    control: {
+      type: 'select',
+      options: POPOVER_STICKY_VALUES,
+    },
+    table: {
+      defaultValue: {
+        summary: 'false',
+      },
+    },
+  },
   transition: {
     control: {
       type: 'select',
       options: ['', 'fade', 'pop', 'shake'],
     },
+  },
+  offset: {
+    defaultValue: [0, 4],
   },
 
   // Events
@@ -166,4 +181,24 @@ Default.parameters = {};
 
 export const Variants = TemplateVariants.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  options: {
+    showPanel: false,
+  },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-allowed-attr',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};

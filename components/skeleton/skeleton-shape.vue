@@ -54,7 +54,7 @@ export default {
     },
 
     contentClass: {
-      type: String,
+      type: [String, Object, Array],
       default: '',
     },
   },

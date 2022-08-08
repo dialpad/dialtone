@@ -1,0 +1,90 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+# DtEmojiTextWrapper
+
+<Subtitle>
+  Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
+</Subtitle>
+
+<Canvas>
+  <Story id="components-emoji-text-wrapper--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-emoji-text-wrapper--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
+```
+
+### Limitations
+
+Currently, this wrapper component **can't handle Vue components**, make sure to wrap only native HTML elements and text.
+
+### With Shortcode
+
+```html
+<dt-emoji-text-wrapper>
+  Example text with bigger :smile: emoji.
+</dt-emoji-text-wrapper>
+```
+
+### With Unicode Character
+
+```html
+<dt-emoji-text-wrapper>
+  Example text with bigger 😄 emoji.
+</dt-emoji-text-wrapper>
+```
+
+### With Nested Structure
+
+```html
+<dt-emoji-text-wrapper>
+  <div>
+    <button class="d-btn d-btn--primary">Example button :cry:</button>
+    <div>
+      <span>Another example 🧐</span>
+    </div>
+  </div>
+</dt-emoji-text-wrapper>
+```
+
+### With Emoji Size
+
+```html
+<dt-emoji-text-wrapper size="d-svg--48">
+  ...
+</dt-emoji-text-wrapper>
+```
+
+## With Custom Emoji
+
+[Set up the custom emoji](?path=/docs/components-emoji--custom-emoji#custom-emoji) in order to render with this component.
+
+```html
+<template>
+  <dt-emoji-text-wrapper>
+    custom emojis :octocat: :shipit:
+  </dt-emoji-text-wrapper>
+</template>
+
+<script>
+import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
+
+export default {
+  components: { DtEmojiTextWrapper },
+}
+</script>
+```

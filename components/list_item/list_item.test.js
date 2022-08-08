@@ -134,17 +134,9 @@ describe('Dialtone Vue ListItem tests', function () {
       });
     };
 
-    describe('When list item is clicked', function () {
-      beforeEach(async function () {
-        await wrapper.trigger('click');
-      });
-
-      itBehavesLikeHandlesClick();
-    });
-
     describe('When "Enter" key is pressed', function () {
       beforeEach(async function () {
-        await wrapper.trigger('keydown.enter');
+        await wrapper.trigger('keydown', { code: 'Enter' });
       });
 
       itBehavesLikeHandlesClick();
@@ -152,10 +144,30 @@ describe('Dialtone Vue ListItem tests', function () {
 
     describe('When "Space" key is pressed', function () {
       beforeEach(async function () {
-        await wrapper.trigger('keydown.space');
+        await wrapper.trigger('keydown', { code: 'Space' });
       });
 
       itBehavesLikeHandlesClick();
+    });
+
+    describe('When mousemove is triggered', function () {
+      beforeEach(async function () {
+        await wrapper.trigger('mousemove');
+      });
+
+      it('should emit mousemove event', function () {
+        assert.equal(wrapper.emitted().mousemove.length, 1);
+      });
+    });
+
+    describe('When mouseleave is triggered', function () {
+      beforeEach(async function () {
+        await wrapper.trigger('mouseleave');
+      });
+
+      it('should emit mouseleave event', function () {
+        assert.equal(wrapper.emitted().mouseleave.length, 1);
+      });
     });
   });
 });

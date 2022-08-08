@@ -32,6 +32,7 @@
           </div>
         </template>
         <template #subtitle>
+          <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <div
             class="d-fc-red-500"
             @click.stop="onMarkAsSpam"
@@ -48,7 +49,7 @@
       <dt-button
         importance="clear"
         kind="muted"
-        @click="onGoupContactClick"
+        @click="onGroupContactClick"
       >
         <dt-recipe-contact-info>
           <template #header>

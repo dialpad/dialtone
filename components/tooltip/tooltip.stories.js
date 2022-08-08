@@ -5,7 +5,7 @@ import DtTooltipDefault from './tooltip_default.story';
 import DtTooltipVariantsTemplate from './tooltip_variants';
 import { action } from '@storybook/addon-actions';
 
-import { TOOLTIP_DIRECTIONS } from './tooltip_constants';
+import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES } from './tooltip_constants';
 import DtTooltipMdx from './tooltip.mdx';
 
 // Default Prop Values
@@ -52,9 +52,17 @@ export const argTypesData = {
       options: TOOLTIP_DIRECTIONS,
     },
   },
-
-  offset: {
-    defaultValue: [0, 0],
+  sticky: {
+    defaultValue: false,
+    control: {
+      type: 'select',
+      options: TOOLTIP_STICKY_VALUES,
+    },
+    table: {
+      defaultValue: {
+        summary: 'false',
+      },
+    },
   },
 
   transition: {

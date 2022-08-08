@@ -1,5 +1,8 @@
 import { createLocalVue, mount } from '@vue/test-utils';
-import KeyboardListNavigation from './keyboard_list_navigation_tester';
+import KeyboardListNavigation, {
+  KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS,
+  KEYBOARD_LIST_NAVIGATION_TESTER_KEY,
+} from './keyboard_list_navigation_tester';
 import sinon from 'sinon';
 import { assert } from 'chai';
 
@@ -77,13 +80,23 @@ describe('Keyboard Navigation Mixin Tests', function () {
       });
     });
 
+    describe(`When navigation key "${KEYBOARD_LIST_NAVIGATION_TESTER_KEY}" is pressed`, function () {
+      beforeEach(function () {
+        wrapper.vm.onNavigationKey(KEYBOARD_LIST_NAVIGATION_TESTER_KEY);
+      });
+
+      it('highlight is incremented by 1', function () {
+        assert.strictEqual(wrapper.vm.highlightIndex, 1);
+      });
+    });
+
     describe('When "end" key is pressed', function () {
       beforeEach(function () {
         wrapper.vm.onEndKey();
       });
 
       it('last index is highlighted', function () {
-        assert.strictEqual(wrapper.vm.highlightIndex, 2);
+        assert.strictEqual(wrapper.vm.highlightIndex, KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS.length - 1);
       });
     });
   });
@@ -91,7 +104,7 @@ describe('Keyboard Navigation Mixin Tests', function () {
   describe('When last item is highlighted', function () {
     // Test Setup
     beforeEach(async function () {
-      wrapper.setData({ highlightIndex: 2 });
+      wrapper.setData({ highlightIndex: KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS.length - 1 });
     });
 
     describe('When arrow up is pressed', function () {
@@ -100,7 +113,11 @@ describe('Keyboard Navigation Mixin Tests', function () {
       });
 
       it('highlight is decremented by 1', function () {
-        assert.strictEqual(wrapper.vm.highlightIndex, 1);
+        assert.strictEqual(wrapper.vm.highlightIndex, KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS.length - 2);
+      });
+
+      it('calls the expected afterHighlight function', function () {
+        assert.isTrue(afterHighlightSpy.called);
       });
     });
 
@@ -111,6 +128,16 @@ describe('Keyboard Navigation Mixin Tests', function () {
 
       it('calls the expected end of list function', function () {
         assert.isTrue(endOfListSpy.called);
+      });
+    });
+
+    describe(`When navigation key "${KEYBOARD_LIST_NAVIGATION_TESTER_KEY}" is pressed`, function () {
+      beforeEach(function () {
+        wrapper.vm.onNavigationKey(KEYBOARD_LIST_NAVIGATION_TESTER_KEY);
+      });
+
+      it('first index is highlighted', function () {
+        assert.strictEqual(wrapper.vm.highlightIndex, 0);
       });
     });
 

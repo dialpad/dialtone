@@ -44,6 +44,7 @@ Any new components or updates to existing components require the following:
 - Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://vue.dialpad.design/?path=/story/docs-storybook-getting-started--page)
 - Component is navigable by keyboard.
 - Component has been tested by a screen reader.
+- Changes must be made for Vue 2 as well as Vue 3, `staging` and `staging-vue3` branches respectively
 - Unit tests are passing locally.
   - `npm run test`
 - Linters are passing locally.
@@ -63,7 +64,10 @@ After you have discussed your change with the Dialtone team, follow these steps 
 4. Make and commit your changes. Note our [commit message conventions](COMMIT_CONVENTION.md).
 5. Push your branch to remote. `git push -u origin my-change-branch`.
 6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
-7. Once your changes have been approved, you may squash merge your branch into `staging`.
+7. Run `./copy_pr_vue3.sh` in the root of the repository to copy your changes to a vue3 branch titled `my-change-branch-vue3`
+8. Create a pull request into the `staging-vue3` branch, reviewers will be automatically added and notified of your PR.
+9. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_pr_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
+10. Once your changes have been approved, you may squash merge your branch into `staging` and `staging-vue3`.
 
 Once your change is in `staging` it will go live with the next Dialtone Vue release. Releases are done on demand by the Dialtone team, and are done fairly regularly. If you need your change to be released promptly, please ask in the [#dialtone](https://dialpad.slack.com/messages/dialtone/) Slack channel.
 

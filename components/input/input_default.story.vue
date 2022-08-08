@@ -5,6 +5,7 @@
     :type="type"
     :messages="messages"
     :size="size"
+    :icon-size="iconSize"
     :label="label"
     :messages-child-props="messagesChildProps"
     :name="name"
@@ -90,7 +91,8 @@ export default {
 
       // Adds validation message
       validateConfigData.length.message = this?.validate?.length?.message
-        ? this.validate.length.message : this.validationMessage;
+        ? this.validate.length.message
+        : this.validationMessage;
 
       return validateConfigData;
     },

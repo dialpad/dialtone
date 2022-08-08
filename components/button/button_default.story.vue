@@ -13,6 +13,7 @@
     :icon-position="iconPosition"
     :disabled="disabled"
     :style="{ width: width }"
+    :active="active"
     @click="onClick"
     @focusin="onFocusIn"
     @focusout="onFocusOut"

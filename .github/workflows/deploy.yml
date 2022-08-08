@@ -6,10 +6,11 @@ on:
       - production
       - alpha
       - beta
+      - vue3
 
 jobs:
   deploy:
-
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
 
     env:
@@ -17,12 +18,12 @@ jobs:
 
     steps:
       - name: Check out branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '16'
 
       - name: parse branch from ref
         id: branch
@@ -40,13 +41,35 @@ jobs:
       - name: Run Linters
         run: npm run lint
 
+      - name: Build storybook
+        if: ${{ github.ref == 'refs/heads/production' || github.ref == 'refs/heads/vue3' }}
+        run: npm run storybook:install && npm run storybook:build
+
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
 
-      - name: Deploy prerelease
+      - name: Deploy to GitHub Pages (Production)
+        if: ${{ github.ref == 'refs/heads/production' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: storybook/compiled
+          clean-exclude: |
+            deploy-previews
+            vue3
+
+      - name: Deploy ${{ steps.branch.outputs.BRANCH }}
         if: ${{ github.ref != 'refs/heads/production' }}
         run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
+
+      - name: Deploy to GitHub Pages (Vue 3)
+        if: ${{ github.ref == 'refs/heads/vue3' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: storybook/compiled
+          target-folder: vue3
 
       - name: Github Release
         env:

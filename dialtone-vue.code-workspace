@@ -44,20 +44,25 @@
     "vetur.completion.tagCasing": "kebab",
     "vetur.format.enable": false,
     "vetur.validation.script": false,
-    "vetur.validation.template": false
+    "vetur.validation.template": false,
+    "yaml.format.enable": true,
+    "yaml.format.singleQuote": true,
+    "yaml.schemas": {
+      "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
+    },
   },
   "launch": {
     "version": "0.2.0",
     "configurations": [
       {
-        "type": "pwa-chrome",
+        "type": "chrome",
         "request": "launch",
         "name": "Debug Local JS (storybook)",
-        "url": "http://localhost:9011",
+        "url": "http://localhost:9010",
         "webRoot": "${workspaceFolder}",
         "smartStep": true,
         "sourceMapPathOverrides": {
-          "webpack:///../*": "${webRoot}/*"
+          "webpack://*": "${webRoot}/*"
         }
       },
       {

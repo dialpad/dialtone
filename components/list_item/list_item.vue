@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
   <component
     :is="elementType"
     :id="id"
@@ -9,11 +10,7 @@
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
     :aria-selected="isHighlighted"
-    @keydown.enter="onClick"
-    @keydown.space="onClick"
-    @mousemove="onMouseHover"
-    @mouseleave="onMouseLeave"
-    @click="onClick"
+    v-on="listItemListeners"
   >
     <component
       :is="listItemType"
@@ -99,7 +96,7 @@ export default {
     },
   },
 
-  emits: ['click'],
+  emits: ['click', 'keydown', 'mousemove', 'mouseleave'],
 
   data () {
     return {
@@ -116,6 +113,35 @@ export default {
         default:
           return null;
       }
+    },
+
+    listItemListeners () {
+      return {
+        ...this.$listeners,
+        keydown: event => {
+          if (['enter', 'space'].includes(event.code.toLowerCase())) {
+            this.onClick(event);
+          }
+          this.$emit('keydown', event);
+        },
+
+        mousedown: event => {
+          if (!this.isFocusable) {
+            event.preventDefault();
+          }
+          this.$emit('mousedown', event);
+        },
+
+        mousemove: event => {
+          this.onMouseHover(event);
+          this.$emit('mousemove', event);
+        },
+
+        mouseleave: event => {
+          this.onMouseLeave(event);
+          this.$emit('mouseleave', event);
+        },
+      };
     },
 
     /**
@@ -143,8 +169,8 @@ export default {
   },
 
   methods: {
-    onClick () {
-      this.$emit('click');
+    onClick (e) {
+      this.$emit('click', e);
     },
 
     onMouseHover () {

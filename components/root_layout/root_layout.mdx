@@ -1,0 +1,100 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRootLayout from './root_layout';
+
+# Root Layout
+
+<Subtitle>
+  A root layout provides a standardized group of containers to display content at the root level.
+</Subtitle>
+
+## Base Style
+
+A root layout consists of a header, body, sidebar and footer. Content can optionally be passed into the slots which
+will be displayed in the respective area. The sidebar is designed to be responsive and will reposition above the
+body when the content reaches a relative breakpoint set with the `contentWrapWidthPercent` prop.
+
+<Canvas>
+  <Story id="components-root-layout--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+Root Layout should be used as the top level component for a route. All other components on the page should be nested
+within one of the root layout's slots. The root layout should not be nested within any other elements or components.
+
+### Import
+
+```jsx
+import { DtRootLayout } from '@dialpad/dialtone-vue';
+```
+
+```html
+<template>
+  <dt-root-layout>
+    <template #header>
+      <div class="d-h100p d-bgc-purple-100">Header</div>
+    </template>
+    <template #sidebar>
+      <div class="d-h100p d-bgc-black-025">
+        <div>Sidebar item 1</div>
+        <div>Sidebar item 2</div>
+        <div>Sidebar item 3</div>
+      </div>
+    </template>
+    <template>
+      <div class="d-h100p">Content</div>
+    </template>
+    <template #footer>
+      <div class="d-h100p d-bgc-yellow-050">Footer</div>
+    </template>
+  </dt-root-layout>
+</template>
+```
+
+## Sticky
+
+Try scrolling
+<Canvas>
+  <Story id="components-root-layout--sticky" />
+</Canvas>
+
+```html
+<template>
+  <dt-root-layout headerSticky="true">
+    <template #header>
+      <div class="d-h100p d-bgc-purple-100">Header</div>
+    </template>
+    <template #sidebar>
+      <div class="d-h100p d-bgc-black-025">
+        <div>Sidebar item 1</div>
+        <div>Sidebar item 2</div>
+        <div>Sidebar item 3</div>
+      </div>
+    </template>
+    <template>
+      <div class="d-h100p">Content</div>
+    </template>
+    <template #footer>
+      <div class="d-h100p d-bgc-yellow-050">Footer</div>
+    </template>
+  </dt-root-layout>
+</template>
+```
+
+# Accessibility
+
+The RootLayout component uses
+[Content Sectioning](https://developer.mozilla.org/en-US/docs/Web/HTML/Element#content_sectioning)
+elements `<header>`, `<aside>`, `<main>`, and `<footer>` which automatically define
+[ARIA Landmark Roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#landmark_roles)
+on the page.
+
+If you have navigation links contained within any of the slots Root Layout provides these should be enclosed in a `<nav>`
+[Nav Section](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav).
+The RootLayout component will not do this for you. The sidebar will automatically wrap to be above the main content
+when it is less than 50% width of the Root Layout component by default.
+This can be changed via the "contentWrapWidthPercent" prop if desired.

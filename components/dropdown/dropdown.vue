@@ -4,19 +4,23 @@
     :content-width="contentWidth"
     :open="open"
     :placement="placement"
-    initial-focus-element="first"
+    :initial-focus-element="openedWithKeyboard ? 'first' : 'dialog'"
     :fallback-placements="fallbackPlacements"
-    :padding="padding"
+    padding="none"
     role="menu"
     :modal="modal"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
+    :open-with-arrow-keys="true"
     v-on="$listeners"
     @opened="updateInitialHighlightIndex"
     @keydown.enter="onEnterKey"
     @keydown.space="onSpaceKey"
-    @keydown.up.stop.prevent="onUpKeyPress"
-    @keydown.down.prevent="onDownKeyPress"
-    @keydown.home.stop.prevent="onHomeKey"
-    @keydown.end.stop.prevent="onEndKey"
+    @keydown.up.stop.prevent="onKeyValidation($event, 'onUpKeyPress')"
+    @keydown.down.stop.prevent="onKeyValidation($event, 'onDownKeyPress')"
+    @keydown.home.stop.prevent="onKeyValidation($event, 'onHomeKeyPress')"
+    @keydown.end.stop.prevent="onKeyValidation($event, 'onEndKeyPress')"
+    @keydown="onKeyValidation($event, 'onKeyPress')"
   >
     <template #anchor="{ attrs }">
       <!-- @slot Anchor element that activates the dropdown -->
@@ -27,10 +31,11 @@
       />
     </template>
     <template #content="{ close }">
+      <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
       <ul
         :id="listId"
         ref="listWrapper"
-        class="d-p0 d-ps-relative"
+        :class="['d-ps-relative', 'd-px0', DROPDOWN_PADDING_CLASSES[padding], listClass]"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
         @mousemove.capture="onMouseHighlight"
@@ -49,6 +54,9 @@
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { DtPopover } from '../popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
+import {
+  DROPDOWN_PADDING_CLASSES,
+} from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 
 export default {
@@ -84,11 +92,14 @@ export default {
     },
 
     /**
-     * Padding size class for the dropdown.
+     * Vertical padding size around the list element.
      */
     padding: {
       type: String,
-      default: 'none',
+      default: 'small',
+      validator: (padding) => {
+        return Object.keys(DROPDOWN_PADDING_CLASSES).some((item) => item === padding);
+      },
     },
 
     /**
@@ -107,6 +118,24 @@ export default {
     contentWidth: {
       type: String,
       default: null,
+    },
+
+    /**
+     * Determines maximum height for the popover before overflow.
+     * Possible units rem|px|em
+     */
+    maxHeight: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|%|em
+     */
+    maxWidth: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -164,6 +193,14 @@ export default {
       type: Function,
       default: null,
     },
+
+    /**
+     * Additional class for the wrapper list element.
+     */
+    listClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
   },
 
   emits: ['highlight', 'update:open', 'opened'],
@@ -171,7 +208,9 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
+      DROPDOWN_PADDING_CLASSES,
       openedWithKeyboard: false,
+      isOpen: null,
     };
   },
 
@@ -186,6 +225,10 @@ export default {
 
     activeItemEl () {
       return this.getListElement().querySelector('#' + this.highlightId);
+    },
+
+    isArrowKeyNav () {
+      return this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS;
     },
   },
 
@@ -212,6 +255,8 @@ export default {
     },
 
     updateInitialHighlightIndex (isPopoverOpen) {
+      this.isOpen = isPopoverOpen;
+
       if (isPopoverOpen) {
         if (this.openedWithKeyboard && this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
           this.setHighlightIndex(0);
@@ -237,15 +282,56 @@ export default {
     },
 
     onUpKeyPress () {
-      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+      if (!this.isOpen) {
+        this.openedWithKeyboard = true;
+        return;
+      }
+      if (this.isArrowKeyNav) {
         return this.onUpKey();
       }
     },
 
     onDownKeyPress () {
-      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+      if (!this.isOpen) {
+        this.openedWithKeyboard = true;
+        return;
+      }
+      if (this.isArrowKeyNav) {
         return this.onDownKey();
       }
+    },
+
+    onHomeKeyPress () {
+      if (!this.isOpen || !this.isArrowKeyNav) {
+        return;
+      }
+
+      return this.onHomeKey();
+    },
+
+    onEndKeyPress () {
+      if (!this.isOpen || !this.isArrowKeyNav) {
+        return;
+      }
+
+      return this.onEndKey();
+    },
+
+    onKeyPress (e) {
+      if (!this.isOpen || !this.isArrowKeyNav || !this.isValidCharacter(e.key)) {
+        return;
+      }
+
+      e.stopPropagation();
+      e.preventDefault();
+
+      return this.onNavigationKey(e.key);
+    },
+
+    onKeyValidation (e, eventHandler) {
+      if (this.open !== null) { return; }
+
+      this[eventHandler](e);
     },
   },
 };

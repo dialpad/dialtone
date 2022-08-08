@@ -174,7 +174,7 @@ Variants.args = {
   avatarInitials: 'NW',
   avatarColor: 'orange-500',
   userStatusColor: 'yellow',
-  onGoupContactClick: action('click: clickable group contact'),
+  onGroupContactClick: action('click: clickable group contact'),
   onMarkAsSpam: action('click: mark this contact as spam'),
   onConnectToARecord: action('click: connect to a record'),
 };
@@ -214,7 +214,7 @@ Variants.parameters = {
     <dt-button
       importance="clear"
       kind="muted"
-      @click="onGoupContactClick"
+      @click="onGroupContactClick"
     >
       <dt-recipe-contact-info>
         <template #header>

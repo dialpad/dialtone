@@ -24,6 +24,8 @@ export const BUTTON_TYPES = ['submit', 'reset', 'button'];
 export const ICON_POSITION_MODIFIERS = {
   left: 'd-btn__icon--left',
   right: 'd-btn__icon--right',
+  top: 'd-btn__icon--top',
+  bottom: 'd-btn__icon--bottom',
 };
 
 export const INVALID_COMBINATION = [

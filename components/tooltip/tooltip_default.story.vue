@@ -1,10 +1,9 @@
-<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <div
     :class="[
       'd-fl-center d-fd-column d-pt64',
       {
-        'd-bgc-purple-800 d-pb64': inverted,
+        'd-bgc-purple-600 d-pb64': inverted,
       },
     ]"
   >
@@ -16,9 +15,10 @@
         :message="message"
         :fallback-placements="fallbackPlacements"
         :offset="offset"
+        :sticky="sticky"
         :content-class="contentClass"
         :transition="transition"
-        :show.sync="show"
+        :show="showTooltip"
         @shown="onShown"
       >
         <template
@@ -55,6 +55,14 @@ export default {
   computed: {
     buttonKind () {
       return this.inverted ? 'inverted' : 'default';
+    },
+
+    showTooltip () {
+      if (this.globalShow) {
+        return true;
+      }
+
+      return this.show;
     },
   },
 };

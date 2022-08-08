@@ -103,7 +103,31 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args,
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        // TODO: it's possible to pass a custom aria-label but adding a built-in label can cover most of cases
+        {
+          id: 'button-name',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  options: {
+    showPanel: false,
+  },
+  a11y: Default.parameters.a11y,
+};

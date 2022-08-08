@@ -1,11 +1,12 @@
 <template>
   <div>
-    <dt-lazy-show
-      :show="modal && isOpen"
-      transition="d-zoom"
-      class="d-modal--transparent"
-      :aria-hidden="modal && isOpen ? 'false' : 'true'"
-    />
+    <portal v-if="modal && isOpen">
+      <div
+        class="d-modal--transparent"
+        :aria-hidden="modal && isOpen ? 'false' : 'true'"
+        @click.prevent.stop
+      />
+    </portal>
     <component
       :is="elementType"
       ref="popover"
@@ -17,9 +18,10 @@
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
         data-qa="dt-popover-anchor"
-        @mouseup.capture="defaultToggleOpen"
+        @click.capture="defaultToggleOpen"
+        @keydown.up.prevent="onArrowKeyPress"
+        @keydown.down.prevent="onArrowKeyPress"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
-        @keydown.enter.capture="defaultToggleOpen"
         @keydown.escape.capture="closePopover"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
@@ -48,7 +50,7 @@
           'max-height': maxHeight,
           'max-width': maxWidth,
         }"
-        tabindex="-1"
+        :tabindex="contentTabindex"
         appear
         v-on="$listeners"
         @keydown.capture="onKeydown"
@@ -115,9 +117,11 @@ import {
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_ROLES,
   POPOVER_INITIAL_FOCUS_STRINGS,
+  POPOVER_STICKY_VALUES,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
+import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal.js';
 import {
   createTippy,
@@ -135,6 +139,7 @@ export default {
   components: {
     DtLazyShow,
     PopoverHeaderFooter,
+    Portal,
   },
 
   mixins: [ModalMixin],
@@ -239,6 +244,23 @@ export default {
     },
 
     /**
+     * Tabindex value for the content. Passing null, no tabindex attribute will be set.
+     */
+    contentTabindex: {
+      type: Number || null,
+      default: -1,
+    },
+
+    /**
+     * External anchor id to use in those cases the anchor can't be provided via the slot.
+     * For instance, using the combobox's input as the anchor for the popover.
+     */
+    externalAnchor: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * The id of the tooltip
      */
     id: {
@@ -290,6 +312,30 @@ export default {
     placement: {
       type: String,
       default: 'bottom-end',
+    },
+
+    /**
+     * If set to false the dialog will display over top of the anchor when there is insufficient space.
+     * If set to true it will never move from its position relative to the anchor and will clip instead.
+     */
+    tether: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * If the popover sticks to the anchor. This is usually not needed, but can be needed
+     * if the reference element's position is animating, or to automatically update the popover
+     * position in those cases the DOM layout changes the reference element's position.
+     * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
+     * checks the "popper" rect for changes.
+     */
+    sticky: {
+      type: [Boolean, String],
+      default: false,
+      validator: (sticky) => {
+        return POPOVER_STICKY_VALUES.includes(sticky);
+      },
     },
 
     /**
@@ -358,6 +404,15 @@ export default {
           initialFocusElement.startsWith('#');
       },
     },
+
+    /**
+     * If the popover should open pressing up or down arrow key on the anchor element.
+     * This can be set when not passing open prop.
+     */
+    openWithArrowKeys: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['update:open', 'opened'],
@@ -397,16 +452,25 @@ export default {
 
     offset (offset) {
       this.tip.setProps({
-        offset: offset,
+        offset,
       });
     },
 
-    fallbackPlacements (fallbackPlacements) {
+    sticky (sticky) {
       this.tip.setProps({
-        popperOptions: getPopperOptions({
-          fallbackPlacements: fallbackPlacements,
-          hasHideModifierEnabled: true,
-        }),
+        sticky,
+      });
+    },
+
+    fallbackPlacements () {
+      this.tip.setProps({
+        popperOptions: this.popperOptions(),
+      });
+    },
+
+    tether () {
+      this.tip.setProps({
+        popperOptions: this.popperOptions(),
       });
     },
 
@@ -439,7 +503,8 @@ export default {
 
   mounted () {
     // support single anchor for popover, not multi anchor
-    this.anchorEl = this.$refs.anchor.children[0];
+    const externalAnchorEl = document.getElementById(this.externalAnchor);
+    this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
 
     // align popover content width when
@@ -447,13 +512,11 @@ export default {
       window.addEventListener('resize', this.onResize);
     }
     this.tip = createTippy(this.anchorEl, {
-      popperOptions: getPopperOptions({
-        fallbackPlacements: this.fallbackPlacements,
-        hasHideModifierEnabled: true,
-      }),
+      popperOptions: this.popperOptions(),
       contentElement: this.popoverContentEl,
       placement: this.placement,
       offset: this.offset,
+      sticky: this.sticky,
       appendTo: document.body,
       interactive: true,
       trigger: 'manual',
@@ -483,6 +546,14 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    popperOptions () {
+      return getPopperOptions({
+        fallbackPlacements: this.fallbackPlacements,
+        tether: this.tether,
+        hasHideModifierEnabled: true,
+      });
+    },
+
     validateProps () {
       if (this.modal && this.initialFocusElement === 'none') {
         console.error('If the popover is modal you must set the ' +
@@ -502,11 +573,21 @@ export default {
     defaultToggleOpen (e) {
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
-      this.open ?? (this.anchorEl.contains(e.target) && this.toggleOpen());
+      this.open ?? (this.anchorEl.contains(e.target) && !this.anchorEl?.disabled && this.toggleOpen());
     },
 
     toggleOpen () {
       this.isOpen = !this.isOpen;
+    },
+
+    onArrowKeyPress (e) {
+      if (this.open !== null) { return; }
+
+      if (this.openWithArrowKeys && this.anchorEl.contains(e.target)) {
+        if (!this.isOpen) {
+          this.isOpen = true;
+        }
+      }
     },
 
     addClosePopoverEventListener () {
@@ -594,7 +675,7 @@ export default {
     onClickOutside () {
       if (!this.hideOnClick) return;
       // If a modal popover is opened inside of this one, do not hide on click out
-      const innerModals = this.popoverContentEl.querySelector('.d-modal--transparent[aria-hidden="false"]');
+      const innerModals = this.popoverContentEl.querySelector('.d-popover__anchor--modal-opened');
       if (!innerModals) {
         this.closePopover();
       }
@@ -602,7 +683,9 @@ export default {
 
     onKeydown (e) {
       if (e.key === 'Tab') {
-        this.focusTrappedTabPress(e, this.popoverContentEl);
+        if (this.modal) {
+          this.focusTrappedTabPress(e, this.popoverContentEl);
+        }
       }
       if (e.key === 'Escape') {
         this.closePopover();
