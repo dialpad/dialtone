@@ -1,3 +1,18 @@
+## [2.19.1-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1-beta.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* add immediate for value watcher ([0244ff0](https://github.com/dialpad/dialtone-vue/commit/0244ff0203e408c406236dc96bffb98aa9894e22))
+* add validation in calculateLength ([eec8652](https://github.com/dialpad/dialtone-vue/commit/eec865242e3a9f8d61d4c2989f76cb857400144d))
+* inputstate ([3720078](https://github.com/dialpad/dialtone-vue/commit/37200786e9bf34741a503f04ebbc401710c233e6))
+* remove length validation class ([7b0ffad](https://github.com/dialpad/dialtone-vue/commit/7b0ffad20f07cc8fed7efac62b19ab0939024860))
+
+
+### Performance Improvements
+
+* move assets to GCS ([4d34c6b](https://github.com/dialpad/dialtone-vue/commit/4d34c6b5d87cf03945165c348761938e90609aad))
+
 # [2.19.0](https://github.com/dialpad/dialtone-vue/compare/v2.18.0...v2.19.0) (2022-08-03)
 
 
