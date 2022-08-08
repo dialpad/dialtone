@@ -37,7 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
-    "@dialpad/dialtone": "^6.33.3",
+    "@dialpad/dialtone": "^7.0.0-beta.2",
     "@percy/cli": "1.6.4",
     "@percy/storybook": "4.2.1",
     "@semantic-release/changelog": "^6.0.1",

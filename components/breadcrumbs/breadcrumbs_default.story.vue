@@ -2,7 +2,7 @@
   <div
     :class="[
       {
-        'd-bgc-purple-800': $attrs.inverted,
+        'd-bgc-purple-600': $attrs.inverted,
       },
     ]"
   >

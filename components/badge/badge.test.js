@@ -104,9 +104,9 @@ describe('Dialtone Vue Badge tests', function () {
 
       describe('When color is purple-300', function () { itBehavesLikeHasCorrectColorClass('purple-300'); });
 
-      describe('When color is purple-500', function () { itBehavesLikeHasCorrectColorClass('purple-500'); });
+      describe('When color is purple-400', function () { itBehavesLikeHasCorrectColorClass('purple-400'); });
 
-      describe('When color is purple-700', function () { itBehavesLikeHasCorrectColorClass('purple-700'); });
+      describe('When color is purple-500', function () { itBehavesLikeHasCorrectColorClass('purple-500'); });
 
       describe('When color is red-500', function () { itBehavesLikeHasCorrectColorClass('red-500'); });
 

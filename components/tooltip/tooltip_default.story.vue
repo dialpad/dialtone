@@ -4,7 +4,7 @@
     :class="[
       'd-fl-center d-fd-column d-pt64',
       {
-        'd-bgc-purple-800 d-pb64': $attrs.inverted,
+        'd-bgc-purple-600 d-pb64': $attrs.inverted,
       },
     ]"
   >
