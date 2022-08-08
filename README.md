@@ -45,7 +45,7 @@ These requirements are enforced via peerdependencies of Dialtone Vue when possib
 Dialtone Vue uses [JoyPixels](https://www.joypixels.com/) to render emojis. If you are using the emoji components, Dialtone Vue will use the free joypixels assets hosted on jsdelivr CDN by default. You may wish to use self hosted joypixels assets such as the SVGs only available to premium license holders. In order to do this, set your custom asset URL with the following functions for small and large emojis during initialization of your app:
 
 ```js
-import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from 'dialtone-vue'
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@dialpad/dialtone-vue/emoji'
 
 // 16px and smaller
 setEmojiAssetUrlSmall('https://my.example.website.com/joypixels/svg/unicode/32/', '.png')
@@ -56,8 +56,8 @@ setEmojiAssetUrlLarge('https://my.example.website.com/joypixels/svg/unicode/', '
 You may access the emoji.json data for all emojis Dialtone Vue supports via executing the following function
 
 ```js
-import { getEmojiJson } from 'dialtone-vue'
-const emojiData = await getEmojiJson();
+import { getEmojiData } from '@dialpad/dialtone-vue/emoji'
+const emojiData = getEmojiData();
 ```
 
 
