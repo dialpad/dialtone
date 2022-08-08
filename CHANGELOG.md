@@ -1,3 +1,21 @@
+## [2.19.1-alpha.5](https://github.com/dialpad/dialtone-vue/compare/v2.19.1-alpha.4...v2.19.1-alpha.5) (2022-08-08)
+
+
+### Bug Fixes
+
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([d44be0a](https://github.com/dialpad/dialtone-vue/commit/d44be0a6be81ce69004926008895c34cf345920f))
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([719eb84](https://github.com/dialpad/dialtone-vue/commit/719eb84dc98f0a85c9cda1ebead5309b69a7f043))
+
+
+### Performance Improvements
+
+* move assets to GCS ([4d34c6b](https://github.com/dialpad/dialtone-vue/commit/4d34c6b5d87cf03945165c348761938e90609aad))
+
+
+### Reverts
+
+* Revert fix(emoji): dynamic import fix (#443) ([aa4d827](https://github.com/dialpad/dialtone-vue/commit/aa4d827481522939a92513dc6db37fe4ed33976c)), closes [#443](https://github.com/dialpad/dialtone-vue/issues/443)
+
 ## [2.19.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1) (2022-08-08)
 
 
