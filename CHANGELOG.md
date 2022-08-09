@@ -1,3 +1,22 @@
+# [2.20.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.20.0-beta.1) (2022-08-09)
+
+
+### Bug Fixes
+
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([157b315](https://github.com/dialpad/dialtone-vue/commit/157b3153a0c97196a8a79a57539e70a715477dc1))
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([4e86e70](https://github.com/dialpad/dialtone-vue/commit/4e86e70945eec2d48054fa1619fb0f70bb334d74))
+* update dialtone peer dependency ([e21e0d5](https://github.com/dialpad/dialtone-vue/commit/e21e0d500d5e1af5043ae8ed2151d8875cb7208d))
+
+
+### Features
+
+* migration to dialtone 7 ([#439](https://github.com/dialpad/dialtone-vue/issues/439)) ([be86717](https://github.com/dialpad/dialtone-vue/commit/be86717ff7dafd54c4b2e790dbf92f75ba5d2128))
+
+
+### Reverts
+
+* Revert fix(emoji): dynamic import fix (#443) ([2269ed8](https://github.com/dialpad/dialtone-vue/commit/2269ed87f89ca683a841446aff90595dbf55d26b)), closes [#443](https://github.com/dialpad/dialtone-vue/issues/443)
+
 ## [2.19.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1) (2022-08-08)
 
 
