@@ -7,19 +7,19 @@
           "type": "color"
         },
         "foo": {
-          "value": "#ccc",
+          "value": "#F9F9F9",
           "type": "color"
         },
         "bar": {
-          "value": "#999",
+          "value": "#EDEDED",
           "type": "color"
         },
         "baz": {
-          "value": "#666",
+          "value": "#BBBBBB",
           "type": "color"
         },
         "zar": {
-          "value": "#333",
+          "value": "#555555",
           "type": "color"
         }
       },
