@@ -3,6 +3,7 @@
   "platforms": {
     "less": {
       "transformGroup": "less",
+      "prefix": "dt",
       "buildPath": "dist/less/",
       "files": [{
         "destination": "_variables.less",
