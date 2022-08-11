@@ -834,6 +834,40 @@
           "value": "{size.800}",
           "type": "borderRadius"
         }
+      },
+      "icon": {
+        "100": {
+          "value": "{size.base} * 3.5",
+          "type": "sizing"
+        },
+        "200": {
+          "value": "{size.base} * 4",
+          "type": "sizing"
+        },
+        "300": {
+          "value": "{size.base} * 4.5",
+          "type": "sizing"
+        },
+        "400": {
+          "value": "{size.base} * 5",
+          "type": "sizing"
+        },
+        "500": {
+          "value": "{size.base} * 6",
+          "type": "sizing"
+        },
+        "600": {
+          "value": "{size.base} * 8",
+          "type": "sizing"
+        },
+        "700": {
+          "value": "{size.base} * 12",
+          "type": "sizing"
+        },
+        "800": {
+          "value": "{size.base} * 16",
+          "type": "sizing"
+        }
       }
     },
     "space": {
