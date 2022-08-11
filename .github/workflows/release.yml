@@ -6,9 +6,6 @@ on:
       - production
       - alpha
       - beta
-    paths:
-      - 'base.json'
-      - 'tokens/**/*.json'
 
 jobs:
   release:
