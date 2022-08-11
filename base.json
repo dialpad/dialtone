@@ -867,6 +867,10 @@
         "800": {
           "value": "{size.base} * 16",
           "type": "sizing"
+        },
+        "000": {
+          "value": "{size.base} * 3",
+          "type": "sizing"
         }
       }
     },
@@ -1136,19 +1140,39 @@
         "size": {
           "extraSmall": {
             "value": "12px",
-            "type": "fontSize"
+            "type": "fontSizes"
           },
           "small": {
             "value": "14px",
-            "type": "fontSize"
+            "type": "fontSizes"
           },
           "medium": {
             "value": "16px",
-            "type": "fontSize"
+            "type": "fontSizes"
           },
           "large": {
             "value": "24px",
-            "type": "fontSize"
+            "type": "fontSizes"
+          }
+        }
+      },
+      "lineHeight": {
+        "size": {
+          "extraSmall": {
+            "value": "16px",
+            "type": "lineHeights"
+          },
+          "small": {
+            "value": "20px",
+            "type": "lineHeights"
+          },
+          "medium": {
+            "value": "20px",
+            "type": "lineHeights"
+          },
+          "large": {
+            "value": "32px",
+            "type": "lineHeights"
           }
         }
       }
