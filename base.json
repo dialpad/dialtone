@@ -1071,23 +1071,23 @@
       "border": {
         "radius": {
           "extraSmall": {
-            "value": "3px",
+            "value": "{size.base} - 1px",
             "type": "borderRadius"
           },
           "small": {
-            "value": "3.5px",
+            "value": "{size.base} - .5px",
             "type": "borderRadius"
           },
           "medium": {
-            "value": "4px",
+            "value": "{size.base}",
             "type": "borderRadius"
           },
           "large": {
-            "value": "5px",
+            "value": "{size.base} + 1px",
             "type": "borderRadius"
           },
           "extraLarge": {
-            "value": "6px",
+            "value": "{size.base} + 2px",
             "type": "borderRadius"
           }
         }
