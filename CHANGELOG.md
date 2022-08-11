@@ -1,3 +1,16 @@
+# [3.12.0](https://github.com/dialpad/dialtone-vue/compare/v3.11.0...v3.12.0) (2022-08-11)
+
+
+### Bug Fixes
+
+* **emoji:** dynamic import fix ([#444](https://github.com/dialpad/dialtone-vue/issues/444)) ([9706a45](https://github.com/dialpad/dialtone-vue/commit/9706a454904ae6f59b4eda7332d6d8e19320dcc8))
+* **list-section:** handle root vNode in list section component ([#453](https://github.com/dialpad/dialtone-vue/issues/453)) ([0acacbb](https://github.com/dialpad/dialtone-vue/commit/0acacbb881645452933bfc7e893c70090152a0b0))
+
+
+### Features
+
+* **modal:** add banner support ([#451](https://github.com/dialpad/dialtone-vue/issues/451)) ([ba018dc](https://github.com/dialpad/dialtone-vue/commit/ba018dc8333a90df5d815947b9213cede2c17469))
+
 # [3.11.0](https://github.com/dialpad/dialtone-vue/compare/v3.10.0...v3.11.0) (2022-08-03)
 
 
