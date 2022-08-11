@@ -9,14 +9,10 @@ const baseProps = {
 };
 
 const baseSlotsData = {
-  // passing in three list items by default
-  // TODO: use string slots once move forward from VTU 2.0.0-rc.12 as in this version
-  // string slots contain a SlotWrapper and ListSection doesn't return correct vnodes length
-  // like in this issue https://github.com/vuejs/test-utils/issues/389
-  default: () => [
-    h('div', 'first item'),
-    h('div', 'second item'),
-    h('div', 'third item'),
+  default: [
+    h('li', {}, 'first item'),
+    h('li', {}, 'second item'),
+    h('li', {}, 'third item'),
   ],
 };
 

@@ -2,7 +2,6 @@ module.exports = {
   extends: [
     'standard',
     'semistandard',
-    'plugin:vue/recommended',
     'plugin:vue/vue3-recommended',
     'plugin:vuejs-accessibility/recommended',
   ],

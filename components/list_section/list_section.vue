@@ -129,13 +129,19 @@ export default {
       return this.itemCount - this.displayedItems.length;
     },
 
+    defaultSlotItems () {
+      return Array.isArray(this.$slots.default()[0].children)
+        ? this.$slots.default()[0].children
+        : this.$slots.default();
+    },
+
     itemCount () {
-      return this.$slots.default().length;
+      return this.defaultSlotItems.length;
     },
 
     displayedItems () {
       // filtering the slot v-nodes to only display up to maxDisplayed items
-      return this.$slots.default().filter((item, index) => index <= this.maxDisplayed - 1);
+      return this.defaultSlotItems?.filter((item, index) => index <= this.maxDisplayed - 1);
     },
   },
 
