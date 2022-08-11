@@ -1101,19 +1101,19 @@
       "padding": {
         "horizontal": {
           "extraSmall": {
-            "value": "7px",
+            "value": "{space.500} - 1px",
             "type": "spacing"
           },
           "small": {
-            "value": "7px",
+            "value": "{space.500} - 1px",
             "type": "spacing"
           },
           "medium": {
-            "value": "7px",
+            "value": "{space.500} - 1px",
             "type": "spacing"
           },
           "large": {
-            "value": "15px",
+            "value": "{space.700} - 1px",
             "type": "spacing"
           },
           "extraLarge": {
@@ -1123,23 +1123,23 @@
         },
         "vertical": {
           "extraSmall": {
-            "value": "5px",
+            "value": "{space.500} - 3px",
             "type": "spacing"
           },
           "small": {
-            "value": "5px",
+            "value": "{space.500} - 3px",
             "type": "spacing"
           },
           "medium": {
-            "value": "7px",
+            "value": "{space.500} - 1px",
             "type": "spacing"
           },
           "large": {
-            "value": "11px",
+            "value": "{space.600} - 1px",
             "type": "spacing"
           },
           "extraLarge": {
-            "value": "11px",
+            "value": "{space.600} - 1px",
             "type": "spacing"
           }
         }
