@@ -1,3 +1,10 @@
+# [2.20.0](https://github.com/dialpad/dialtone-vue/compare/v2.19.1...v2.20.0) (2022-08-11)
+
+
+### Features
+
+* **modal:** add banner support ([#450](https://github.com/dialpad/dialtone-vue/issues/450)) ([2b4ecea](https://github.com/dialpad/dialtone-vue/commit/2b4eceae8512de68a96dd15eef3f4bce558a97f6))
+
 ## [2.19.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1) (2022-08-08)
 
 
