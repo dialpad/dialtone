@@ -1115,6 +1115,10 @@
           "large": {
             "value": "15px",
             "type": "spacing"
+          },
+          "extraLarge": {
+            "value": "15px",
+            "type": "spacing"
           }
         },
         "vertical": {
@@ -1131,6 +1135,10 @@
             "type": "spacing"
           },
           "large": {
+            "value": "11px",
+            "type": "spacing"
+          },
+          "extraLarge": {
             "value": "11px",
             "type": "spacing"
           }
@@ -1151,6 +1159,10 @@
             "type": "fontSizes"
           },
           "large": {
+            "value": "20px",
+            "type": "fontSizes"
+          },
+          "extraLarge": {
             "value": "24px",
             "type": "fontSizes"
           }
@@ -1171,6 +1183,10 @@
             "type": "lineHeights"
           },
           "large": {
+            "value": "32px",
+            "type": "lineHeights"
+          },
+          "extraLarge": {
             "value": "32px",
             "type": "lineHeights"
           }
