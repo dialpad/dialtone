@@ -2,18 +2,26 @@
   <div>
     <dt-modal
       :title="$attrs.title"
+      :banner-title="$attrs.bannerTitle"
       :close-button-props="buttonCloseProps"
       :show="isOpen"
       :kind="$attrs.kind"
       :size="$attrs.size"
       :copy="$attrs.copy"
       :modal-class="$attrs.modalClass"
+      :banner-class="$attrs.bannerClass"
       :dialog-class="$attrs.dialogClass"
       :hide-close="$attrs.hideClose"
       :labelled-by-id="$attrs.labelledById"
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       @update:show="close"
     >
+      <template
+        v-if="$attrs.banner"
+        #banner
+      >
+        <span v-html="$attrs.banner" />
+      </template>
       <template
         v-if="$attrs.header"
         #header

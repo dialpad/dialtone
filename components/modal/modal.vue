@@ -15,6 +15,19 @@
     @keydown.tab="trapFocus"
     @after-enter.self="setFocusAfterTransition"
   >
+    <div
+      v-if="show && ($slots.banner || bannerTitle)"
+      data-qa="dt-modal-banner"
+      :class="[
+        'd-modal__banner',
+        bannerClass,
+      ]"
+    >
+      <!-- @slot Slot for the banner, defaults to bannerTitle prop -->
+      <slot name="banner">
+        {{ bannerTitle }}
+      </slot>
+    </div>
     <transition
       appear
       name="d-modal__dialog"
@@ -167,6 +180,14 @@ export default {
     },
 
     /**
+     * Title text to display in the modal banner.
+     */
+    bannerTitle: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * The theme of the modal.
      * @values default or danger
      * kind - default or danger (https://dialpad.design/components/modal/)
@@ -204,6 +225,16 @@ export default {
      * same api as Vue's built-in handling of the class attribute.
      */
     dialogClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the banner element within the modal.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    bannerClass: {
       type: [String, Object, Array],
       default: '',
     },

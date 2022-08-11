@@ -29,6 +29,14 @@ fixed.
   <Story id="components-modal--with-fixed-header-footer" />
 </Canvas>
 
+## With banner
+
+A modal with the banner at the top.
+
+<Canvas>
+  <Story id="components-modal--with-banner" />
+</Canvas>
+
 ## Danger Style
 
 A modal style for destructive or irreversible actions.
@@ -94,6 +102,42 @@ import { DtModal } from '@dialpad/dialtone-vue';
   :show.sync="showModal"
 >
   <div>Custom content</div>
+</dt-modal>
+```
+
+### With Banner
+
+#### Using prop
+
+```html
+<dt-modal
+  title="Title for the dialog's header"
+  banner-title="text to display in the modal's banner"
+  copy="Main dialog text, such as a description of available options or actions."
+  :close-button-props="{ ariaLabel: 'Close the dialog' }"
+  :show.sync="showModal"
+>
+</dt-modal>
+```
+
+Use the `banner-title` prop if you need to pass raw text, otherwise use the slotted version, for example for adding
+an icon in the message.
+
+#### Using slot
+
+```html
+<dt-modal
+  title="Title for the dialog's header"
+  copy="Main dialog text, such as a description of available options or actions."
+  :close-button-props="{ ariaLabel: 'Close the dialog' }"
+  :show.sync="showModal"
+>
+  <template #banner>
+    <div>
+      <clock-icon />
+      <span>Time</span>
+    </div>
+  </template>
 </dt-modal>
 ```
 
