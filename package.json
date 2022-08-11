@@ -1,20 +1,12 @@
 {
-  "name": "@dialpad/dialtone-tokens",
-  "version": "0.1.0",
-  "description": "Design tokens for Dialtone.",
+  "name": "dialtone-tokens",
+  "version": "1.0.0",
+  "description": "Design tokens for Dialtone",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run transform && style-dictionary build",
-    "transform": "token-transformer base.json tokens/tokens.json",
-    "prepublishOnly": "npm run build",
-    "release": "semantic-release --no-ci --extends ./release-local.config.js"
-  },
-  "files": [
-    "dist"
-  ],
-  "publishConfig": {
-    "access": "public"
+    "transform": "token-transformer base.json tokens/tokens.json"
   },
   "repository": {
     "type": "git",
@@ -27,10 +19,6 @@
   },
   "homepage": "https://dialpad.design/",
   "devDependencies": {
-    "@commitlint/cli": "^17.0.3",
-    "@commitlint/config-conventional": "^17.0.3",
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/git": "^10.0.1",
     "style-dictionary": "^3.7.1",
     "token-transformer": "^0.0.24"
   }
