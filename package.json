@@ -43,7 +43,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
-    "@dialpad/dialtone": "^6.33.3",
+    "@dialpad/dialtone": "^6.34.2",
     "@percy/cli": "1.6.4",
     "@percy/storybook": "4.2.1",
     "@semantic-release/changelog": "^6.0.1",
@@ -85,7 +85,7 @@
     "yo": "^4.3.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=6.33",
+    "@dialpad/dialtone": ">=6.34",
     "vue": ">=2.6"
   },
   "engineStrict": true,
