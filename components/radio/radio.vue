@@ -75,7 +75,35 @@ export default {
     },
   },
 
-  emits: ['input', 'focus', 'focusin', 'focusout', 'click'],
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'input',
+
+    'focus',
+
+    /**
+     * Native input focusin event
+     *
+     * @event focusin
+     * @property {FocusEvent}
+     */
+    'focusin',
+
+    /**
+     * Native input focusout event
+     *
+     * @event focusout
+     * @property {FocusEvent}
+     */
+    'focusout',
+
+    'click',
+  ],
 
   computed: {
     inputValidationClass () {

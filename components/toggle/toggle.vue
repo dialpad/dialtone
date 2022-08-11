@@ -54,6 +54,9 @@ export default {
       default: false,
     },
 
+    /**
+     * @model checked
+     */
     checked: {
       type: Boolean,
       default: false,
@@ -70,7 +73,16 @@ export default {
     },
   },
 
-  emits: ['change'],
+  emits: [
+    /**
+     * Toggle change event
+     *
+     * @event change
+     * @type {Boolean}
+     * @model change
+     */
+    'change',
+  ],
 
   data () {
     return {

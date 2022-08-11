@@ -168,7 +168,16 @@ export default {
     },
   },
 
-  emits: ['close', 'click', 'update:show'],
+  emits: [
+    /**
+     * Close button click event
+     *
+     * @event close
+     */
+    'close',
+    'click',
+    'update:show',
+  ],
 
   data () {
     return {

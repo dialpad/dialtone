@@ -13,6 +13,10 @@
 <script>
 import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants.js';
 
+/**
+ * @property {String} href attribute
+ * @property {String} rel attribute
+ */
 export default {
   name: 'DtLink',
 

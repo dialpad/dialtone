@@ -256,7 +256,16 @@ export default {
     },
   },
 
-  emits: ['update:show'],
+  emits: [
+    /**
+     * The modal will emit a "false" boolean value for this event when the user performs a modal-closing action.
+     * Parent components can sync on this value to create a 2-way binding to control modal visibility.
+     *
+     * @event update:show
+     * @type {Boolean}
+     */
+    'update:show',
+  ],
 
   data () {
     return {
