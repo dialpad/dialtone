@@ -1183,7 +1183,7 @@
             "type": "lineHeights"
           },
           "large": {
-            "value": "32px",
+            "value": "24px",
             "type": "lineHeights"
           },
           "extraLarge": {
