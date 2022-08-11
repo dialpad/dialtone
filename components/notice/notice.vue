@@ -129,7 +129,14 @@ export default {
     },
   },
 
-  emits: ['close'],
+  emits: [
+    /**
+     * Close button click event
+     *
+     * @event close
+     */
+    'close',
+  ],
 
   computed: {
     noticeClass () {

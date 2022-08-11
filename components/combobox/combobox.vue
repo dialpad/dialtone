@@ -138,7 +138,38 @@ export default {
     },
   },
 
-  emits: ['select', 'escape', 'highlight', 'opened'],
+  emits: [
+    /**
+     * Event fired when item selected
+     *
+     * @event select
+     * @type {Number}
+     */
+    'select',
+
+    /**
+     * Event fired when pressing escape
+     *
+     * @event escape
+     */
+    'escape',
+
+    /**
+     * Event fired when the highlight changes
+     *
+     * @event highlight
+     * @type {Number}
+     */
+    'highlight',
+
+    /**
+     * Event fired when list is shown or hidden
+     *
+     * @event opened
+     * @type {Boolean}
+     */
+    'opened',
+  ],
 
   data () {
     return {
