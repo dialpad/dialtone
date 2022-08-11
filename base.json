@@ -1032,6 +1032,127 @@
       }
     }
   },
-  "test": {},
+  "button": {
+    "button": {
+      "color": {
+        "background": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
+          "primary": {
+            "value": "{color.purple.500}",
+            "type": "color"
+          },
+          "danger": {
+            "value": "{color.red.500}",
+            "type": "color"
+          }
+        },
+        "text": {
+          "default": {
+            "value": "{color.purple.500}",
+            "type": "color"
+          },
+          "primary": {
+            "value": "{color.neutral.white}",
+            "type": "color"
+          },
+          "danger": {
+            "value": "{color.neutral.white}",
+            "type": "color"
+          }
+        }
+      },
+      "border": {
+        "radius": {
+          "extraSmall": {
+            "value": "3px",
+            "type": "borderRadius"
+          },
+          "small": {
+            "value": "3.5px",
+            "type": "borderRadius"
+          },
+          "medium": {
+            "value": "4px",
+            "type": "borderRadius"
+          },
+          "large": {
+            "value": "5px",
+            "type": "borderRadius"
+          },
+          "extraLarge": {
+            "value": "6px",
+            "type": "borderRadius"
+          }
+        }
+      },
+      "space": {
+        "gap": {
+          "value": "{space.500}",
+          "type": "spacing"
+        }
+      },
+      "padding": {
+        "horizontal": {
+          "extraSmall": {
+            "value": "7px",
+            "type": "spacing"
+          },
+          "small": {
+            "value": "7px",
+            "type": "spacing"
+          },
+          "medium": {
+            "value": "7px",
+            "type": "spacing"
+          },
+          "large": {
+            "value": "15px",
+            "type": "spacing"
+          }
+        },
+        "vertical": {
+          "extraSmall": {
+            "value": "5px",
+            "type": "spacing"
+          },
+          "small": {
+            "value": "5px",
+            "type": "spacing"
+          },
+          "medium": {
+            "value": "7px",
+            "type": "spacing"
+          },
+          "large": {
+            "value": "11px",
+            "type": "spacing"
+          }
+        }
+      },
+      "font": {
+        "size": {
+          "extraSmall": {
+            "value": "12px",
+            "type": "fontSize"
+          },
+          "small": {
+            "value": "14px",
+            "type": "fontSize"
+          },
+          "medium": {
+            "value": "16px",
+            "type": "fontSize"
+          },
+          "large": {
+            "value": "24px",
+            "type": "fontSize"
+          }
+        }
+      }
+    }
+  },
   "$themes": []
 }
