@@ -1147,23 +1147,23 @@
       "font": {
         "size": {
           "extraSmall": {
-            "value": "12px",
+            "value": "{font.size.300}",
             "type": "fontSizes"
           },
           "small": {
-            "value": "14px",
+            "value": "{font.size.400}",
             "type": "fontSizes"
           },
           "medium": {
-            "value": "16px",
+            "value": "{font.size.500}",
             "type": "fontSizes"
           },
           "large": {
-            "value": "20px",
+            "value": "{font.size.700}",
             "type": "fontSizes"
           },
           "extraLarge": {
-            "value": "24px",
+            "value": "{font.size.800}",
             "type": "fontSizes"
           }
         }
@@ -1171,23 +1171,23 @@
       "lineHeight": {
         "size": {
           "extraSmall": {
-            "value": "16px",
+            "value": "{font.lineHeight.200}",
             "type": "lineHeights"
           },
           "small": {
-            "value": "20px",
+            "value": "{font.lineHeight.300}",
             "type": "lineHeights"
           },
           "medium": {
-            "value": "20px",
+            "value": "{font.lineHeight.300}",
             "type": "lineHeights"
           },
           "large": {
-            "value": "24px",
+            "value": "{font.lineHeight.400}",
             "type": "lineHeights"
           },
           "extraLarge": {
-            "value": "32px",
+            "value": "{font.lineHeight.600}",
             "type": "lineHeights"
           }
         }
