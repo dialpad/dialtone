@@ -299,6 +299,10 @@
         "black": {
           "value": "#000",
           "type": "color"
+        },
+        "redder": {
+          "value": "#f00",
+          "type": "color"
         }
       }
     },
@@ -1034,11 +1038,6 @@
         ],
         "type": "boxShadow"
       }
-    },
-    "asdfasdf": {
-      "value": "#f00",
-      "type": "color",
-      "description": "red"
     }
   },
   "button": {
@@ -1200,9 +1199,13 @@
     }
   },
   "derk": {
-    "asdfasdf": {
-      "value": "#ff8e8e",
-      "type": "color"
+    "color": {
+      "neutral": {
+        "redder": {
+          "value": "#ff9a9a",
+          "type": "color"
+        }
+      }
     }
   },
   "$themes": []
