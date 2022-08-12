@@ -299,10 +299,6 @@
         "black": {
           "value": "#000",
           "type": "color"
-        },
-        "redder": {
-          "value": "#f00",
-          "type": "color"
         }
       }
     },
@@ -1194,16 +1190,6 @@
             "value": "{font.lineHeight.600}",
             "type": "lineHeights"
           }
-        }
-      }
-    }
-  },
-  "derk": {
-    "color": {
-      "neutral": {
-        "redder": {
-          "value": "#ff9a9a",
-          "type": "color"
         }
       }
     }
