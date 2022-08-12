@@ -1034,6 +1034,11 @@
         ],
         "type": "boxShadow"
       }
+    },
+    "asdfasdf": {
+      "value": "#f00",
+      "type": "color",
+      "description": "red"
     }
   },
   "button": {
@@ -1192,6 +1197,12 @@
           }
         }
       }
+    }
+  },
+  "derk": {
+    "asdfasdf": {
+      "value": "#ff8e8e",
+      "type": "color"
     }
   },
   "$themes": []
