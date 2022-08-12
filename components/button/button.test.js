@@ -5,7 +5,7 @@ import DtButton from './button.vue';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 import { itBehavesLikeAppliesClassToChild } from '../../tests/shared_examples/extendability';
 
-describe('Dialtone Vue Button tests', function () {
+describe('DtButton Tests', function () {
   let wrapper;
   let button;
   let icon;
@@ -57,6 +57,7 @@ describe('Dialtone Vue Button tests', function () {
           // Test that main class is populated with input props
           const props = {
             circle: true,
+            importance: 'outlined',
           };
           await wrapper.setProps(props);
         });

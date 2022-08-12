@@ -9,7 +9,7 @@ const basePropsData = {
   navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
 };
 
-describe('Dialtone Vue ListItem tests', function () {
+describe('DtListItem tests', function () {
   // Wrappers
   let wrapper;
 
@@ -111,13 +111,13 @@ describe('Dialtone Vue ListItem tests', function () {
       });
 
       it('should use the provided element type on the wrapper.', function () {
-        assert.isTrue(wrapper.is('div'));
+        assert.equal(wrapper.element.tagName, 'DIV');
       });
     });
 
     describe('When element type is not provided', function () {
       it('should use the default element type on the wrapper.', function () {
-        assert.isTrue(wrapper.is('li'));
+        assert.equal(wrapper.element.tagName, 'LI');
       });
     });
   });

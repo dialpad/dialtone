@@ -3,6 +3,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
 import DtInput from '@/components/input/input';
 import sinon from 'sinon';
+import DtPopover from '@/components/popover/popover';
 
 // Constants
 const basePropsData = {
@@ -10,16 +11,14 @@ const basePropsData = {
   listId: 'list',
   loading: false,
   showList: null,
+  emptyStateMessage: 'No matches found.',
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
   // Wrappers
   let wrapper;
-  let combobox;
   let inputWrapper;
   let listWrapper;
-  let skeletons;
-  let comboboxEmptyList;
 
   // Environment
   let propsData = basePropsData;
@@ -33,18 +32,14 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    combobox = wrapper.findComponent('[data-qa="dt-combobox"]');
     inputWrapper = wrapper.find('[data-qa="dt-combobox-input-wrapper"]');
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
-    skeletons = wrapper.find('[data-qa="skeleton-text-body"]');
-    comboboxEmptyList = wrapper.find('[data-qa="dt-combobox-empty-list"]');
   };
 
-  const _openComboboxPopover = async (_emptyList = undefined) => {
-    await wrapper.find('#input').trigger('focus');
-    wrapper.vm.$refs.combobox.isListEmpty = _emptyList;
-    await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
-    wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
+  const _openComboboxPopover = async () => {
+    await wrapper.setProps({ showList: true });
+    wrapper.vm.$refs.combobox.onOpen(true, wrapper.vm.$refs.listWrapper);
+    await wrapper.vm.$nextTick();
   };
 
   const _mountWrapper = () => {
@@ -54,6 +49,11 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       scopedSlots,
       listeners,
       localVue: this.localVue,
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
       attachTo: document.body,
     });
   };
@@ -74,17 +74,15 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     openedStub = sinon.stub();
     listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub, opened: openedStub };
     _mountWrapper();
-    _setChildWrappers();
   });
 
   // Teardown
   afterEach(async function () {
     propsData = basePropsData;
     slots = {};
-    scopedSlots = {};
-    // The destroy method is not removing the comboboxes from the document.body
-    // TODO: Check this behavior as is leads to a memory leak when test:watch
+    scopedSlots = null;
     wrapper.destroy();
+    document.body.innerHTML = '';
   });
 
   after(function () {
@@ -111,14 +109,18 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     describe('When a list is provided', function () {
       // Test Setup
       beforeEach(async function () {
-        propsData = { ...propsData, showList: true };
-        scopedSlots = { list: '<ol id="list"></ol>' };
+        scopedSlots = {
+          list: '<ol id="list"></ol>',
+        };
         _mountWrapper();
+        await _openComboboxPopover();
         _setChildWrappers();
       });
 
       it('should render the list wrapper', function () { assert.isTrue(listWrapper.exists()); });
-      it('should render the list', function () { assert.isTrue(wrapper.find('#list').exists()); });
+      it('should render the list', function () {
+        assert.isTrue(wrapper.findComponent(DtPopover).findComponent({ ref: 'content' }).find('#list').exists());
+      });
     });
 
     describe('When it is loading', function () {
@@ -127,14 +129,20 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         propsData = { ...propsData, loading: true };
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
-          list: '<ol id="list" v-bind="props.listProps"><li role="option">item1</li><li role="option">item2</li></ol>',
+          list: '<ol id="list" v-bind="props.listProps"><li role="option">Item 1</li></ol>',
         };
         _mountWrapper();
         await _openComboboxPopover();
         _setChildWrappers();
       });
 
-      it('should render the loading skeletons', function () { assert.isTrue(skeletons.exists()); });
+      it('should render the loading skeletons', function () {
+        assert.isTrue(wrapper
+          .findComponent(DtPopover)
+          .findComponent({ ref: 'content' })
+          .find('[data-qa="skeleton-text-body"]')
+          .exists());
+      });
     });
 
     describe('When list is empty', function () {
@@ -142,14 +150,20 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       beforeEach(async function () {
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
-          list: '<ol id="list" v-bind="props.listProps"><li role="option">item1</li><li role="option">item2</li></ol>',
+          list: '<ol id="list" v-bind="props.listProps"></ol>',
         };
         _mountWrapper();
-        await _openComboboxPopover(true);
+        await _openComboboxPopover();
         _setChildWrappers();
       });
 
-      it('should render the empty list component', function () { assert.isTrue(comboboxEmptyList.exists()); });
+      it('should render the empty list component', function () {
+        assert.isTrue(wrapper
+          .findComponent(DtPopover)
+          .findComponent({ ref: 'content' })
+          .find('[data-qa="dt-combobox-empty-list"]')
+          .exists());
+      });
     });
   });
 
@@ -158,6 +172,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     beforeEach(async function () {
       scopedSlots = {
         input: '<input id="input" v-bind="props.inputProps" />',
+        list: '<ol id="list" v-bind="props.listProps"><li role="option">Item 1</li></ol>',
       };
       _mountWrapper();
       _setChildWrappers();
@@ -171,7 +186,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When list is expanded', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ showList: true });
+        await _openComboboxPopover();
       });
 
       it('aria-expanded should be "true"', function () {
@@ -181,11 +196,13 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       describe('When list is loading', function () {
         beforeEach(async function () {
           await wrapper.setProps({ loading: true });
-          _setChildWrappers();
         });
 
         it('aria-busy should be "true"', function () {
-          assert.isTrue(listWrapper.find('ol').attributes('aria-busy') === 'true');
+          assert.isTrue(wrapper
+            .findComponent(DtPopover)
+            .findComponent({ ref: 'content' })
+            .find('ol').attributes('aria-busy') === 'true');
         });
       });
     });
@@ -196,7 +213,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     beforeEach(async function () {
       scopedSlots = {
         input: '<input id="input" v-bind="props.inputProps" />',
-        list: '<ol id="list" v-bind="props.listProps"><li role="option">item1</li><li role="option">item2</li></ol>',
+        list: '<ol id="list" v-bind="props.listProps"><li role="option">Item 1</li></ol>',
       };
       _mountWrapper();
       _setChildWrappers();
@@ -269,10 +286,10 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       beforeEach(async function () {
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
-          list: '<ol id="list" v-bind="props.listProps"></ol>',
+          list: '<ol id="list" v-bind="props.listProps"/>',
         };
         _mountWrapper();
-        await _openComboboxPopover(true);
+        await _openComboboxPopover();
         _setChildWrappers();
       });
 
@@ -300,7 +317,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
       });
 
       describe('When up arrow button is pressed', function () {
@@ -309,7 +326,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
       });
 
       describe('When home button is pressed', function () {
@@ -318,7 +335,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
       });
 
       describe('When end button is pressed', function () {
@@ -327,13 +344,13 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
       });
     });
 
     describe('When the list is shown', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ showList: true });
+        await _openComboboxPopover();
       });
 
       it('should call listener', function () { assert.isTrue(openedStub.called); });
@@ -342,7 +359,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When the list is closed', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ showList: true });
+        await _openComboboxPopover();
         await wrapper.setProps({ showList: false });
       });
 
@@ -362,9 +379,10 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     describe('When "Enter" key is pressed and the first item is highlighted', function () {
       beforeEach(async function () {
         await _openComboboxPopover();
-        await combobox.trigger('keydown.enter');
+        await wrapper.trigger('keydown.enter');
       });
 
+      it('should call listener', function () { assert.isTrue(selectStub.called); });
       it('should emit select event', function () { assert.equal(wrapper.emitted().select.length, 1); });
     });
 

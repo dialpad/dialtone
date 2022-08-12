@@ -24,7 +24,7 @@ const basePropsData = {
   value: baseValue,
 };
 
-describe('Dialtone Vue Radio Tests', function () {
+describe('DtRadio Tests', function () {
   // Wrappers
   let wrapper;
   let input;

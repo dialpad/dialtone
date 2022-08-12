@@ -7,7 +7,7 @@ import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classe
 // Constants
 const basePropsData = {};
 
-describe('Dialtone Vue Badge tests', function () {
+describe('DtBadge Tests', function () {
   let wrapper;
   let badge;
 

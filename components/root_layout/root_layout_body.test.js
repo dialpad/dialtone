@@ -14,7 +14,7 @@ const baseSlotsData = {
   content: 'content slot content',
 };
 
-describe('Dialtone Vue Root Layout Body Tests', function () {
+describe('DtRootLayoutBody Tests', function () {
   // Wrappers
   let wrapper;
 

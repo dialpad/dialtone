@@ -56,7 +56,7 @@ export const INVALID_COMBINATION = [
 ];
 
 function _invalidCombinationMessage (circle, kind, importance) {
-  return `You cannot not have a ${circle ? 'circle ' : ''}button \
+  return `You cannot have a ${circle ? 'circle ' : ''}button \
 with kind: ${kind} and importance: ${importance} as it \
 does not exist in our design system. \
 See https://dialpad.design/components/button for a \

@@ -25,7 +25,7 @@ const basePropsData = {
   value: baseValue,
 };
 
-describe('Checkbox Tests', function () {
+describe('DtCheckbox Tests', function () {
   // Wrappers
   let wrapper;
   let input;

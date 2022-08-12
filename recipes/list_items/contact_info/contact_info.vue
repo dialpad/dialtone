@@ -12,7 +12,6 @@
       >
         <dt-avatar
           v-if="avatarSrc"
-          kind="default"
           size="lg"
           avatar-class="d-bar2"
         >

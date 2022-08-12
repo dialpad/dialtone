@@ -19,7 +19,7 @@ const baseSlots = {
   </ul>`,
 };
 
-describe('Dialtone Vue Dropdown Tests', function () {
+describe('DtDropdown Tests', function () {
   // Wrappers
   let wrapper;
   let anchorElement;
@@ -38,6 +38,12 @@ describe('Dialtone Vue Dropdown Tests', function () {
     listWrapper = wrapper.find('[data-qa="dt-dropdown-list-wrapper"]');
   };
 
+  const transitionStub = () => ({
+    render: function (h) {
+      return this.$options._renderChildren;
+    },
+  });
+
   const _setWrappers = () => {
     wrapper = mount(DtDropdown, {
       propsData,
@@ -46,7 +52,7 @@ describe('Dialtone Vue Dropdown Tests', function () {
       listeners,
       localVue: this.localVue,
       stubs: {
-        transition: false,
+        transition: transitionStub(),
       },
       attachTo: document.body,
     });

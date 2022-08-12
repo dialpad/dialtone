@@ -9,7 +9,7 @@ const basePropsData = {
   },
 };
 
-describe('Dialtone Vue Modal Tests', function () {
+describe('DtModal Tests', function () {
   let wrapper;
 
   let closeBtn;

@@ -11,7 +11,7 @@ const basePropsData = {
   loading: false,
 };
 
-describe('Dialtone Vue Combobox tests', function () {
+describe('DtCombobox Tests', function () {
   // Wrappers
   let wrapper;
   let inputWrapper;
