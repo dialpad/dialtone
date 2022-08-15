@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils';
 import DtTab from './tab.vue';
 import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
 
-describe('Dialtone Vue Tab tests', function () {
+describe('DtTab Tests', function () {
   // Wrappers
   let wrapper;
   let tab;

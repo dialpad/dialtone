@@ -19,7 +19,7 @@ const baseSlots = {
   </ul>`,
 };
 
-describe('Dialtone Vue Dropdown Tests', function () {
+describe('DtDropdown Tests', function () {
   // Wrappers
   let wrapper;
   let anchorElement;

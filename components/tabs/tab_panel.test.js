@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import DtTabPanel from './tab_panel.vue';
 
-describe('Dialtone Vue Tab Panel tests', function () {
+describe('DtTabPanel Tests', function () {
   // Wrappers
   let wrapper;
   let tabPanel;

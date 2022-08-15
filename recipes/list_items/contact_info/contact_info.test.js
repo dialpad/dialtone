@@ -9,6 +9,7 @@ import {
 // Constants
 const baseProps = {
   avatarSrc: 'avatar.png',
+  avatarInitials: 'JL',
   userStatusColor: 'green',
 };
 

@@ -1,3 +1,4 @@
+
 import { assert } from 'chai';
 import sinon from 'sinon';
 import { mount } from '@vue/test-utils';
@@ -5,7 +6,7 @@ import DtPopover from './popover.vue';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
-describe('Dialtone Vue Popover tests', function () {
+describe('DtPopover Tests', function () {
   // Wrappers
   let wrapper;
   let popoverWindow;

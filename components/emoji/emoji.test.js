@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji.js';
 import { flushPromises } from '@/common/utils.js';
-import * as customEmojiJson from '@/common/custom-emoji.json';
+import customEmojiJson from '@/common/custom-emoji.json';
 
 setEmojiAssetUrlSmall('https://mockstorage.com/emojis/', '.png');
 setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');

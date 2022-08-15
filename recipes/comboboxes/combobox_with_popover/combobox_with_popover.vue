@@ -103,7 +103,8 @@
 <script>
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
-import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
+import { DtCombobox } from '@/components/combobox';
+import { DtPopover, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
 import {
   DROPDOWN_PADDING_CLASSES,

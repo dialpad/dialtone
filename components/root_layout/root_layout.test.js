@@ -13,7 +13,7 @@ const baseSlotsData = {
   footer: 'footer slot content',
 };
 
-describe('Dialtone Vue Root Layout Tests', function () {
+describe('DtRootLayout Tests', function () {
   // Wrappers
   let wrapper;
 

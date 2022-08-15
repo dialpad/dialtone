@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtDefaultListItem from './default_list_item.vue';
 
-describe('Dialtone Vue DefaultListItem tests', function () {
+describe('DtDefaultListItem tests', function () {
   // Wrappers
   let wrapper;
   let leftWrapper;

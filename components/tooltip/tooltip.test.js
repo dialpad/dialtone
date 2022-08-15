@@ -7,7 +7,7 @@ import {
   TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 
-describe('Dialtone Vue Tooltip tests', function () {
+describe('DtTooltip tests', function () {
   // Wrappers
   let wrapper;
   let tooltipContainer;

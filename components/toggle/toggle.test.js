@@ -11,7 +11,7 @@ import {
 const baseProps = {};
 const baseSlotData = { default: 'My Toggle Label' };
 
-describe('Toggle Tests', function () {
+describe('DtToggle Tests', function () {
   // Wrappers
   let wrapper;
   let button;

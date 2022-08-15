@@ -9,7 +9,7 @@ const baseProps = {
   navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
 };
 
-describe('Dialtone Vue ListItem tests', function () {
+describe('DtListItem tests', function () {
   // Wrappers
   let wrapper;
 
