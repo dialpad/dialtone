@@ -1,3 +1,15 @@
+# [3.13.0](https://github.com/dialpad/dialtone-vue/compare/v3.12.0...v3.13.0) (2022-08-17)
+
+
+### Bug Fixes
+
+* unit tests - vue3 ([#455](https://github.com/dialpad/dialtone-vue/issues/455)) ([098c021](https://github.com/dialpad/dialtone-vue/commit/098c02195ffbbdc5fbb1190ce1d5fe5bb325d9ee))
+
+
+### Features
+
+* **emoji:** add prop to disable skeleton loader ([#459](https://github.com/dialpad/dialtone-vue/issues/459)) ([d0e24f1](https://github.com/dialpad/dialtone-vue/commit/d0e24f147f023883f673928a711c4fe562ae8e0f))
+
 # [3.12.0](https://github.com/dialpad/dialtone-vue/compare/v3.11.0...v3.12.0) (2022-08-11)
 
 
