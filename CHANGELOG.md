@@ -1,3 +1,16 @@
+# [2.21.0-alpha.1](https://github.com/dialpad/dialtone-vue/compare/v2.20.0...v2.21.0-alpha.1) (2022-08-17)
+
+
+### Bug Fixes
+
+* unit tests ([#452](https://github.com/dialpad/dialtone-vue/issues/452)) ([3760a3b](https://github.com/dialpad/dialtone-vue/commit/3760a3ba31fdb3dda7661e18238f3fe42ab22268))
+
+
+### Features
+
+* **context menu:** add context menu component ([#460](https://github.com/dialpad/dialtone-vue/issues/460)) ([4b905bb](https://github.com/dialpad/dialtone-vue/commit/4b905bb55ff49e067dd252c1b757b9d77da09a06))
+* **dropdown:** add support to headings and separator ([#457](https://github.com/dialpad/dialtone-vue/issues/457)) ([17fcde3](https://github.com/dialpad/dialtone-vue/commit/17fcde3c0e9f424e3a2bb82796dd94d3f1701d87))
+
 # [2.20.0](https://github.com/dialpad/dialtone-vue/compare/v2.19.1...v2.20.0) (2022-08-11)
 
 
