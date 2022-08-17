@@ -1,3 +1,10 @@
+# [2.22.0](https://github.com/dialpad/dialtone-vue/compare/v2.21.0...v2.22.0) (2022-08-17)
+
+
+### Features
+
+* add collapsible component ([#395](https://github.com/dialpad/dialtone-vue/issues/395)) ([886871a](https://github.com/dialpad/dialtone-vue/commit/886871a6cc6cd184a991e9716772827fbd0a132c)), closes [#392](https://github.com/dialpad/dialtone-vue/issues/392) [#392](https://github.com/dialpad/dialtone-vue/issues/392)
+
 # [2.21.0](https://github.com/dialpad/dialtone-vue/compare/v2.20.0...v2.21.0) (2022-08-17)
 
 
