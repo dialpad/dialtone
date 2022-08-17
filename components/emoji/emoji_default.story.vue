@@ -5,6 +5,7 @@
       :size="$attrs.size"
       :img-class="$attrs.imgClass"
       :aria-label="$attrs.ariaLabel"
+      :show-skeleton="$attrs.showSkeleton"
     />
   </div>
 </template>
