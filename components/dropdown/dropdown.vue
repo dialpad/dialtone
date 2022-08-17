@@ -253,7 +253,7 @@ export default {
     onMouseHighlight (e) {
       const liElement = e.target.closest('li');
 
-      if (liElement && this.highlightId !== liElement.id) {
+      if (liElement && liElement.role && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
         liElement.focus();
       }
