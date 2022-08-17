@@ -1,7 +1,7 @@
 <template>
   <span :class="skeletonSizeClass">
     <dt-skeleton
-      v-show="imgLoading"
+      v-show="imgLoading && showSkeleton"
       :offset="0"
       :class="skeletonSizeClass"
       :shape-option="{ shape: 'square', contentClass: skeletonSizeClass, size: 'auto' }"
@@ -80,6 +80,14 @@ export default {
     ariaLabel: {
       type: String,
       default: null,
+    },
+
+    /**
+     * Shows a skeleton loader while the emoji asset is loading.
+     */
+    showSkeleton: {
+      type: Boolean,
+      default: true,
     },
   },
 
