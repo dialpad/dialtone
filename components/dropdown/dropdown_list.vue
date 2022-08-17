@@ -12,9 +12,7 @@
       data-qa="dt-dropdown-list-wrapper"
     >
       <!-- @slot Slot for the list component -->
-      <slot
-        :close="close"
-      />
+      <slot />
     </ul>
   </li>
 </template>

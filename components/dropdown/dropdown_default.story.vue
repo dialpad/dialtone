@@ -10,6 +10,7 @@
     :max-width="maxWidth"
     :list-class="listClass"
     :navigation-type="navigationType"
+    :follow-cursor="followCursor"
     @highlight="onHighlight"
     @opened="onOpened"
   >

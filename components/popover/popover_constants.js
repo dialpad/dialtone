@@ -1,4 +1,4 @@
-import { BASE_TIPPY_DIRECTIONS, TIPPY_STICKY_VALUES } from './tippy_utils';
+import { BASE_TIPPY_DIRECTIONS, TIPPY_STICKY_VALUES, TIPPY_FOLLOW_CURSOR_VALUES } from './tippy_utils';
 
 export const POPOVER_PADDING_CLASSES = {
   none: undefined,
@@ -17,6 +17,9 @@ export const POPOVER_CONTENT_WIDTHS = [null, 'anchor'];
 export const POPOVER_INITIAL_FOCUS_STRINGS = ['none', 'dialog', 'first'];
 export const POPOVER_STICKY_VALUES = [
   ...TIPPY_STICKY_VALUES,
+];
+export const POPOVER_FOLLOW_CURSOR_VALUES = [
+  ...TIPPY_FOLLOW_CURSOR_VALUES,
 ];
 export const POPOVER_DIRECTIONS = [
   ...BASE_TIPPY_DIRECTIONS,

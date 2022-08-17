@@ -1,4 +1,4 @@
-import tippy, { sticky } from 'tippy.js';
+import tippy, { sticky, followCursor } from 'tippy.js';
 import { getArrowDetected } from '../tooltip/modifiers';
 import { findFirstFocusableNode } from '@/common/utils';
 
@@ -11,12 +11,14 @@ export const BASE_TIPPY_DIRECTIONS = [
 
 export const TIPPY_STICKY_VALUES = [true, false, 'reference', 'popper'];
 
+export const TIPPY_FOLLOW_CURSOR_VALUES = [true, false, 'vertical', 'horizontal', 'initial'];
+
 export const createTippy = (anchorElement, options) => {
   const { contentElement } = { ...options };
   delete options.contentElement;
   return tippy(anchorElement, {
     ...options,
-    plugins: [sticky],
+    plugins: [sticky, followCursor],
     render: () => getContentWrapper(contentElement),
   });
 };
