@@ -1,3 +1,10 @@
+# [2.21.0-alpha.2](https://github.com/dialpad/dialtone-vue/compare/v2.21.0-alpha.1...v2.21.0-alpha.2) (2022-08-18)
+
+
+### Bug Fixes
+
+* export DtDropdownList and DtDropdownSeparator ([24ff6b2](https://github.com/dialpad/dialtone-vue/commit/24ff6b23d20bf98c22fae2e2576ce08fe0cd476f))
+
 # [2.21.0-alpha.1](https://github.com/dialpad/dialtone-vue/compare/v2.20.0...v2.21.0-alpha.1) (2022-08-17)
 
 
