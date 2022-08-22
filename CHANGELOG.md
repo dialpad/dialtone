@@ -1,3 +1,10 @@
+## [2.22.1](https://github.com/dialpad/dialtone-vue/compare/v2.22.0...v2.22.1) (2022-08-22)
+
+
+### Bug Fixes
+
+* **emoji:** fixed incorrectly mapped unicode keys ([#462](https://github.com/dialpad/dialtone-vue/issues/462)) ([40d2409](https://github.com/dialpad/dialtone-vue/commit/40d24099ca73b16dad249396a34993df1438017e))
+
 # [2.22.0](https://github.com/dialpad/dialtone-vue/compare/v2.21.0...v2.22.0) (2022-08-17)
 
 
