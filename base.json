@@ -40,10 +40,6 @@
           "value": "{color.black.600}",
           "type": "color"
         },
-        "primary": {
-          "value": "{color.purple.500}",
-          "type": "color"
-        },
         "success": {
           "value": "{color.green.600}",
           "type": "color"
