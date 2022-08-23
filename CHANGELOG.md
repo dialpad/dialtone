@@ -5,6 +5,13 @@
 
 * **combobox:** fix empty state ([67b2ce6](https://github.com/dialpad/dialtone-vue/commit/67b2ce6775c379b1ddae82f10e68a045faaa2ba9))
 
+## [2.22.2-alpha.1](https://github.com/dialpad/dialtone-vue/compare/v2.22.1...v2.22.2-alpha.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* **combobox:** fix empty state ([67b2ce6](https://github.com/dialpad/dialtone-vue/commit/67b2ce6775c379b1ddae82f10e68a045faaa2ba9))
+
 ## [2.22.1](https://github.com/dialpad/dialtone-vue/compare/v2.22.0...v2.22.1) (2022-08-22)
 
 
