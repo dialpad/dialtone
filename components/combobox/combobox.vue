@@ -27,7 +27,7 @@
         v-bind="listProps"
       />
       <combobox-empty-list
-        v-else-if="isListEmpty && !listRenderedOutside"
+        v-else-if="isEmpty && emptyStateMessage && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
       />
@@ -127,6 +127,14 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * If the list has no options as result.
+     */
+    isEmpty: {
+      type: Boolean,
+      default: true,
     },
 
     /**
