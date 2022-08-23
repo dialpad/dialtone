@@ -2,7 +2,7 @@
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
     :empty-state-message="emptyStateMessage"
-    :is-loading="isLoading"
+    :loading="loading"
     :list-aria-label="listAriaLabel"
     :max-height="maxHeight"
     :max-width="maxWidth"
@@ -13,7 +13,7 @@
     :list-class="listClass"
     :open-with-arrow-keys="openWithArrowKeys"
     :has-suggestion-list="hasSuggestionList"
-    :is-list-empty="isListEmpty"
+    :empty-list="emptyList"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"

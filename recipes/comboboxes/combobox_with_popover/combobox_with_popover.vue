@@ -1,8 +1,8 @@
 <template>
   <dt-combobox
     ref="combobox"
-    :is-loading="isLoading"
-    :is-list-empty="isListEmpty"
+    :loading="loading"
+    :empty-list="emptyList"
     :empty-state-message="emptyStateMessage"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
@@ -68,11 +68,11 @@
             @focusout="clearHighlightIndex; onFocusOut;"
           >
             <combobox-loading-list
-              v-if="isLoading"
+              v-if="loading"
               v-bind="listProps"
             />
             <combobox-empty-list
-              v-else-if="isListEmpty && emptyStateMessage"
+              v-else-if="emptyList && emptyStateMessage"
               v-bind="listProps"
               :message="emptyStateMessage"
             />
@@ -248,7 +248,7 @@ export default {
     /*
      * Determines when to show the skeletons and also controls aria-busy attribute.
      */
-    isLoading: {
+    loading: {
       type: Boolean,
       default: false,
     },
@@ -256,7 +256,7 @@ export default {
     /**
      * If the list has no options as result. If set to true, pass a message to the `emptyStateMessage` prop.
      */
-    isListEmpty: {
+    emptyList: {
       type: Boolean,
       default: false,
     },
@@ -335,7 +335,7 @@ export default {
     },
 
     onSelect (highlightIndex) {
-      if (this.isLoading) return;
+      if (this.loading) return;
 
       this.$emit('select', highlightIndex);
       if (!this.hasSuggestionList) {
@@ -350,7 +350,7 @@ export default {
     },
 
     onHighlight (highlightIndex) {
-      if (this.isLoading) return;
+      if (this.loading) return;
 
       this.$emit('highlight', highlightIndex);
     },

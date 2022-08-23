@@ -23,11 +23,11 @@
       @mousemove.capture="onMouseHighlight"
     >
       <combobox-loading-list
-        v-if="isLoading && !listRenderedOutside"
+        v-if="loading && !listRenderedOutside"
         v-bind="listProps"
       />
       <combobox-empty-list
-        v-else-if="isListEmpty && emptyStateMessage && !listRenderedOutside"
+        v-else-if="emptyList && emptyStateMessage && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
       />
@@ -122,7 +122,7 @@ export default {
     /**
      * Determines when to show the skeletons and also controls aria-busy attribute.
      */
-    isLoading: {
+    loading: {
       type: Boolean,
       default: false,
     },
@@ -130,7 +130,7 @@ export default {
     /**
      * If the list has no options as result. If set to true, pass a message to the `emptyStateMessage` prop.
      */
-    isListEmpty: {
+    emptyList: {
       type: Boolean,
       default: false,
     },
@@ -218,7 +218,7 @@ export default {
     },
 
     activeItemId () {
-      if (!this.showList || this.highlightIndex < 0 || this.isLoading) {
+      if (!this.showList || this.highlightIndex < 0 || this.loading) {
         return;
       }
       return this.highlightId;
@@ -245,7 +245,7 @@ export default {
       }
     },
 
-    isLoading (isLoading) {
+    loading (loading) {
       this.$nextTick(() => {
         this.setInitialHighlightIndex();
       });
@@ -254,7 +254,7 @@ export default {
 
   methods: {
     onMouseHighlight (e) {
-      if (this.isLoading) return;
+      if (this.loading) return;
 
       const liElement = e.target.closest('li');
 
@@ -274,12 +274,12 @@ export default {
     },
 
     afterHighlight () {
-      if (this.isLoading) return;
+      if (this.loading) return;
       this.$emit('highlight', this.highlightIndex);
     },
 
     onEnterKey () {
-      if (this.isLoading || this.isListEmpty) return;
+      if (this.loading || this.emptyList) return;
 
       if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
@@ -311,7 +311,7 @@ export default {
       this.$nextTick(() => {
       // When the list's is shown, reset the highlight index.
       // If the list is loading, set to -1
-        this.setHighlightIndex(this.isLoading ? -1 : 0);
+        this.setHighlightIndex(this.loading ? -1 : 0);
       });
     },
   },

@@ -80,10 +80,10 @@ export const argTypesData = {
       },
     },
   },
-  isListEmpty: {
-    defaultValue: true,
+  emptyList: {
+    defaultValue: false,
   },
-  isLoading: {
+  loading: {
     defaultValue: false,
   },
 
@@ -195,4 +195,5 @@ export const Empty = DefaultTemplate.bind({});
 Empty.args = {
   items: [],
   emptyStateMessage: 'No matches found.',
+  emptyList: true,
 };

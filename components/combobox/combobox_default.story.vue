@@ -1,10 +1,10 @@
 <template>
   <dt-combobox
     :empty-state-message="emptyStateMessage"
-    :is-loading="isLoading"
+    :loading="loading"
     :show-list="!!value && showList"
     list-aria-label="Example list items"
-    :is-list-empty="isListEmpty"
+    :empty-list="emptyList"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
