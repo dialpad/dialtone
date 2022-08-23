@@ -1,7 +1,9 @@
 <template>
   <dt-combobox
     ref="combobox"
-    :loading="loading"
+    :is-loading="isLoading"
+    :is-list-empty="isListEmpty"
+    :empty-state-message="emptyStateMessage"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -29,7 +31,7 @@
         />
       </div>
     </template>
-    <template #list="{ opened, listProps, clearHighlightIndex, isLoading }">
+    <template #list="{ opened, listProps, clearHighlightIndex }">
       <dt-popover
         ref="popover"
         :open.sync="isListShown"
@@ -246,17 +248,17 @@ export default {
     /*
      * Determines when to show the skeletons and also controls aria-busy attribute.
      */
-    loading: {
+    isLoading: {
       type: Boolean,
       default: false,
     },
 
     /**
-     * If the list has no options as result.
+     * If the list has no options as result. If set to true, pass a message to the `emptyStateMessage` prop.
      */
     isListEmpty: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
@@ -333,7 +335,7 @@ export default {
     },
 
     onSelect (highlightIndex) {
-      if (this.loading) return;
+      if (this.isLoading) return;
 
       this.$emit('select', highlightIndex);
       if (!this.hasSuggestionList) {
@@ -348,7 +350,7 @@ export default {
     },
 
     onHighlight (highlightIndex) {
-      if (this.loading) return;
+      if (this.isLoading) return;
 
       this.$emit('highlight', highlightIndex);
     },

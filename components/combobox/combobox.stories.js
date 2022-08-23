@@ -80,12 +80,11 @@ export const argTypesData = {
       },
     },
   },
-  loading: {
-    table: {
-      defaultValue: {
-        summary: false,
-      },
-    },
+  isListEmpty: {
+    defaultValue: true,
+  },
+  isLoading: {
+    defaultValue: false,
   },
 
   // Action Event Handlers

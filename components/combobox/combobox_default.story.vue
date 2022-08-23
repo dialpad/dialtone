@@ -1,7 +1,7 @@
 <template>
   <dt-combobox
     :empty-state-message="emptyStateMessage"
-    :loading="loading"
+    :is-loading="isLoading"
     :show-list="!!value && showList"
     list-aria-label="Example list items"
     :is-list-empty="isListEmpty"

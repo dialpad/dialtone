@@ -9,9 +9,8 @@ import DtPopover from '@/components/popover/popover';
 const basePropsData = {
   listAriaLabel: '',
   listId: 'list',
-  loading: false,
+  isLoading: false,
   showList: null,
-  emptyStateMessage: 'No matches found.',
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
@@ -126,7 +125,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     describe('When it is loading', function () {
       // Test Setup
       beforeEach(async function () {
-        propsData = { ...propsData, loading: true };
+        propsData = { ...propsData, isLoading: true };
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
           list: '<ol id="list" v-bind="props.listProps"><li role="option">Item 1</li></ol>',
@@ -153,6 +152,8 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           list: '<ol id="list" v-bind="props.listProps"></ol>',
         };
         _mountWrapper();
+        await wrapper.setProps({ showList: true, isListEmpty: true, emptyStateMessage: 'empty' });
+        await wrapper.vm.$nextTick();
         await _openComboboxPopover();
         _setChildWrappers();
       });
@@ -195,7 +196,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
       describe('When list is loading', function () {
         beforeEach(async function () {
-          await wrapper.setProps({ loading: true });
+          await wrapper.setProps({ isLoading: true });
         });
 
         it('aria-busy should be "true"', function () {
@@ -221,7 +222,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When the list is loading', function () {
       beforeEach(async function () {
-        propsData = { ...propsData, loading: true };
+        propsData = { ...propsData, isLoading: true };
         _mountWrapper();
         await _openComboboxPopover();
         _setChildWrappers();
@@ -289,6 +290,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           list: '<ol id="list" v-bind="props.listProps"/>',
         };
         _mountWrapper();
+        await wrapper.setProps({ showList: true, isListEmpty: true, emptyStateMessage: 'empty' });
         await _openComboboxPopover();
         _setChildWrappers();
       });
