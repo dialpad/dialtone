@@ -13,6 +13,7 @@
     :list-class="listClass"
     :open-with-arrow-keys="openWithArrowKeys"
     :has-suggestion-list="hasSuggestionList"
+    :is-list-empty="isListEmpty"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"

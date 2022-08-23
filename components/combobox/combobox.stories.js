@@ -11,7 +11,6 @@ export const argsData = {
   onHighlight: action('highlight'),
   onSelect: action('select'),
   onOpened: action('opened'),
-  emptyStateMessage: 'No matches found.',
 };
 
 export const argTypesData = {
@@ -196,4 +195,5 @@ Default.args = {
 export const Empty = DefaultTemplate.bind({});
 Empty.args = {
   items: [],
+  emptyStateMessage: 'No matches found.',
 };

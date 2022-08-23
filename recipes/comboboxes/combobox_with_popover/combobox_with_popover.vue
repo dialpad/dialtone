@@ -29,7 +29,7 @@
         />
       </div>
     </template>
-    <template #list="{ opened, listProps, clearHighlightIndex, isLoading, isListEmpty }">
+    <template #list="{ opened, listProps, clearHighlightIndex, isLoading }">
       <dt-popover
         ref="popover"
         :open.sync="isListShown"
@@ -70,7 +70,7 @@
               v-bind="listProps"
             />
             <combobox-empty-list
-              v-else-if="isListEmpty"
+              v-else-if="isListEmpty && emptyStateMessage"
               v-bind="listProps"
               :message="emptyStateMessage"
             />
@@ -249,6 +249,14 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * If the list has no options as result.
+     */
+    isListEmpty: {
+      type: Boolean,
+      default: true,
     },
 
     /**

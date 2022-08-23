@@ -27,7 +27,7 @@
         v-bind="listProps"
       />
       <combobox-empty-list
-        v-else-if="isEmpty && emptyStateMessage && !listRenderedOutside"
+        v-else-if="isListEmpty && emptyStateMessage && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
       />
@@ -39,7 +39,6 @@
         :opened="onOpen"
         :clear-highlight-index="clearHighlightIndex"
         :is-loading="isLoading"
-        :is-list-empty="isListEmpty"
       />
     </div>
   </div>
@@ -132,7 +131,7 @@ export default {
     /**
      * If the list has no options as result.
      */
-    isEmpty: {
+    isListEmpty: {
       type: Boolean,
       default: true,
     },
@@ -185,7 +184,6 @@ export default {
       // of this component, this is the ref to that dom element. Set
       // by the onOpen method.
       outsideRenderedListRef: null,
-      isListEmpty: undefined,
       isLoading: undefined,
     };
   },
@@ -246,15 +244,12 @@ export default {
       if (!showList && this.outsideRenderedListRef) {
         this.outsideRenderedListRef.removeEventListener('mousemove', this.onMouseHighlight);
         this.outsideRenderedListRef = null;
-        this.isListEmpty = undefined;
       }
     },
 
     loading (isLoading) {
-      this.isListEmpty = undefined;
       this.isLoading = isLoading;
       this.$nextTick(() => {
-        this.isListEmpty = this.checkItemsLength();
         this.setInitialHighlightIndex();
       });
     },
@@ -262,8 +257,6 @@ export default {
 
   async mounted () {
     this.isLoading = this.loading;
-    await this.$nextTick();
-    this.isListEmpty = this.checkItemsLength();
   },
 
   methods: {
@@ -310,7 +303,6 @@ export default {
       this.$emit('opened', open);
 
       if (open) {
-        this.isListEmpty = this.checkItemsLength();
         this.setInitialHighlightIndex();
       }
     },
@@ -328,13 +320,6 @@ export default {
       // If the list is loading, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
       });
-    },
-
-    checkItemsLength () {
-      if (!this.showList) return undefined;
-      const list = this.getListElement();
-      const options = list?.querySelectorAll(`[role="option"]`);
-      return options?.length === 0;
     },
   },
 };
