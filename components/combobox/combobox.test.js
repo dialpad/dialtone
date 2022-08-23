@@ -243,7 +243,7 @@ describe('DtCombobox Tests', function () {
         _setChildWrappers();
       });
 
-      describe('When "Esc" key is pressed', function () {
+      describe('When "esc" key is pressed', function () {
         beforeEach(async function () {
           await wrapper.trigger('keydown.esc');
         });
