@@ -29,11 +29,11 @@
       @mousemove.capture="onMouseHighlight"
     >
       <combobox-loading-list
-        v-if="isLoading && !listRenderedOutside"
+        v-if="loading && !listRenderedOutside"
         v-bind="listProps"
       />
       <combobox-empty-list
-        v-else-if="isListEmpty && !listRenderedOutside"
+        v-else-if="emptyList && emptyStateMessage && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
       />
@@ -44,8 +44,6 @@
         :list-props="listProps"
         :opened="onOpen"
         :clear-highlight-index="clearHighlightIndex"
-        :is-loading="isLoading"
-        :is-list-empty="isListEmpty"
       />
     </div>
   </div>
@@ -136,6 +134,14 @@ export default {
     },
 
     /**
+     * Sets the list to an empty state, and displays the message from prop `emptyStateMessage`.
+     */
+    emptyList: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Message to show when the list is empty
      */
     emptyStateMessage: {
@@ -183,8 +189,6 @@ export default {
       // of this component, this is the ref to that dom element. Set
       // by the onOpen method.
       outsideRenderedListRef: null,
-      isListEmpty: undefined,
-      isLoading: undefined,
     };
   },
 
@@ -244,24 +248,26 @@ export default {
       if (!showList && this.outsideRenderedListRef) {
         this.outsideRenderedListRef.removeEventListener('mousemove', this.onMouseHighlight);
         this.outsideRenderedListRef = null;
-        this.isListEmpty = undefined;
       }
     },
 
-    loading (isLoading) {
-      this.isListEmpty = undefined;
-      this.isLoading = isLoading;
+    loading (loading) {
       this.$nextTick(() => {
-        this.isListEmpty = this.checkItemsLength();
         this.setInitialHighlightIndex();
       });
     },
+
+    $props: {
+      deep: true,
+      immediate: true,
+      handler () {
+        this.validateEmptyListProps();
+      },
+    },
   },
 
-  async mounted () {
-    this.isLoading = this.loading;
-    await this.$nextTick();
-    this.isListEmpty = this.checkItemsLength();
+  created () {
+    this.validateEmptyListProps();
   },
 
   methods: {
@@ -291,7 +297,7 @@ export default {
     },
 
     onEnterKey () {
-      if (this.loading || this.isListEmpty) return;
+      if (this.loading || this.emptyList) return;
 
       if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
@@ -308,7 +314,6 @@ export default {
       this.$emit('opened', open);
 
       if (open) {
-        this.isListEmpty = this.checkItemsLength();
         this.setInitialHighlightIndex();
       }
     },
@@ -328,11 +333,11 @@ export default {
       });
     },
 
-    checkItemsLength () {
-      if (!this.showList) return undefined;
-      const list = this.getListElement();
-      const options = list?.querySelectorAll(`[role="option"]`);
-      return options?.length === 0;
+    validateEmptyListProps () {
+      if ((this.emptyList && !this.emptyStateMessage) || (!this.emptyList && this.emptyStateMessage)) {
+        console.error(`Invalid props: you must pass both props emptyList and emptyStateMessage to show the
+      empty message.`);
+      }
     },
   },
 };

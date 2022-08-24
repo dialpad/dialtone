@@ -11,7 +11,6 @@ const baseProps = {
   listId: 'list',
   loading: false,
   showList: null,
-  emptyStateMessage: 'No matches found.',
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
@@ -152,6 +151,8 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps"></ol></template>',
         };
         _mountWrapper();
+        await wrapper.setProps({ showList: true, emptyList: true, emptyStateMessage: 'empty' });
+        await wrapper.vm.$nextTick();
         await _openComboboxPopover();
         _setChildWrappers();
       });
@@ -296,6 +297,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps" /></template>',
         };
         _mountWrapper();
+        await wrapper.setProps({ showList: true, emptyList: true, emptyStateMessage: 'empty' });
         await _openComboboxPopover();
         _setChildWrappers();
       });
