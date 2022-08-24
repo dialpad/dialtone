@@ -106,7 +106,7 @@ describe('DtCombobox Tests', function () {
       beforeEach(async function () {
         slots = { list: '<ol id="list"></ol>' };
         _mountWrapper();
-        await wrapper.setProps({ showList: true });
+        await wrapper.setProps({ showList: true, emptyList: true, emptyStateMessage: 'empty' });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
       });

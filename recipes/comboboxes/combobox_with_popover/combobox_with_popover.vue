@@ -2,6 +2,8 @@
   <dt-combobox
     ref="combobox"
     :loading="loading"
+    :empty-list="emptyList"
+    :empty-state-message="emptyStateMessage"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -29,7 +31,7 @@
         />
       </div>
     </template>
-    <template #list="{ opened, listProps, clearHighlightIndex, isLoading, isListEmpty }">
+    <template #list="{ opened, listProps, clearHighlightIndex }">
       <dt-popover
         ref="popover"
         :open.sync="isListShown"
@@ -66,11 +68,11 @@
             @focusout="clearHighlightIndex; onFocusOut;"
           >
             <combobox-loading-list
-              v-if="isLoading"
+              v-if="loading"
               v-bind="listProps"
             />
             <combobox-empty-list
-              v-else-if="isListEmpty"
+              v-else-if="emptyList && emptyStateMessage"
               v-bind="listProps"
               :message="emptyStateMessage"
             />
@@ -247,6 +249,14 @@ export default {
      * Determines when to show the skeletons and also controls aria-busy attribute.
      */
     loading: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Sets the list to an empty state, and displays the message from prop `emptyStateMessage`.
+     */
+    emptyList: {
       type: Boolean,
       default: false,
     },

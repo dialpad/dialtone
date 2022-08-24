@@ -12,7 +12,6 @@ export const argsData = {
   onHighlight: action('highlight'),
   onSelect: action('select'),
   onOpened: action('opened'),
-  emptyStateMessage: 'No matches found.',
 };
 
 export const argTypesData = {
@@ -120,12 +119,11 @@ export const argTypesData = {
   listAriaLabel: {
     defaultValue: 'Example list items',
   },
+  emptyList: {
+    defaultValue: false,
+  },
   loading: {
-    table: {
-      defaultValue: {
-        summary: false,
-      },
-    },
+    defaultValue: false,
   },
 
   // Action Event Handlers
@@ -247,6 +245,8 @@ Default.parameters = {
 export const Empty = DefaultTemplate.bind({});
 Empty.args = {
   items: [],
+  emptyStateMessage: 'No matches found.',
+  emptyList: true,
 };
 Empty.parameters = {
   a11y: {

@@ -4,6 +4,7 @@
     :loading="loading"
     :show-list="!!value && showList"
     list-aria-label="Example list items"
+    :empty-list="emptyList"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
