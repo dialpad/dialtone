@@ -155,13 +155,6 @@ export default {
           this.$emit('keydown', event);
         },
 
-        mousedown: event => {
-          if (!this.isFocusable) {
-            event.preventDefault();
-          }
-          this.$emit('mousedown', event);
-        },
-
         mousemove: event => {
           this.onMouseHover(event);
           this.$emit('mousemove', event);

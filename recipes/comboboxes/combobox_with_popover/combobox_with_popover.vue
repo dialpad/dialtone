@@ -374,12 +374,18 @@ export default {
 
     onFocusOut (e) {
       const comboboxRefs = ['input', 'header', 'footer', 'listWrapper'];
+      // Check if the focus change was to another target within the combobox component
       const isComboboxStillFocused = comboboxRefs.some((ref) => {
         return this.$refs[ref]?.contains(e.relatedTarget);
       });
 
+      // If outside of the combobox then close
       if (!isComboboxStillFocused) {
         this.closeComboboxList();
+      } else {
+        // if focus is anywhere within the combobox input or list,
+        // keep the focus on the input, or keyboard nav will break.
+        e.target.focus();
       }
     },
 
