@@ -1,3 +1,10 @@
+## [2.22.3](https://github.com/dialpad/dialtone-vue/compare/v2.22.2...v2.22.3) (2022-08-25)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** prevent focus of list-items by mouse ([#466](https://github.com/dialpad/dialtone-vue/issues/466)) ([d6c2d9f](https://github.com/dialpad/dialtone-vue/commit/d6c2d9f63a3f42ed00e783293aed98f3d941ca7b))
+
 ## [2.22.2](https://github.com/dialpad/dialtone-vue/compare/v2.22.1...v2.22.2) (2022-08-24)
 
 
