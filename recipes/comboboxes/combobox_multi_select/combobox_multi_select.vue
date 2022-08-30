@@ -99,7 +99,10 @@
 </template>
 
 <script>
-import { DtRecipeComboboxWithPopover, DtInput, DtChip, DtValidationMessages } from '@';
+import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover';
+import DtInput from '@/components/input/input';
+import DtChip from '@/components/chip/chip';
+import DtValidationMessages from '@/components/validation_messages/validation_messages';
 import { validationMessageValidator } from '@/common/validators';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
 
