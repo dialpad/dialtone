@@ -11,6 +11,7 @@ export default {
   args: {
     ...argsData,
     open: true,
+    modal: false,
   },
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
