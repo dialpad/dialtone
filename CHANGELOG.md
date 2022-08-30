@@ -1,3 +1,10 @@
+# [2.23.0](https://github.com/dialpad/dialtone-vue/compare/v2.22.3...v2.23.0) (2022-08-30)
+
+
+### Features
+
+* dp-46328 callbar buttons ([#436](https://github.com/dialpad/dialtone-vue/issues/436)) ([426f058](https://github.com/dialpad/dialtone-vue/commit/426f058dfcb504e9f6708284e8e4836c412b17b7))
+
 ## [2.22.3](https://github.com/dialpad/dialtone-vue/compare/v2.22.2...v2.22.3) (2022-08-25)
 
 
