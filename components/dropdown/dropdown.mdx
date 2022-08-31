@@ -128,3 +128,135 @@ rendering items:
   </template>
 </dt-dropdown>
 ```
+
+#### With sections
+
+Use the `dt-dropdown-separator` component to visually separate items in the dropdown menu.
+
+```jsx
+import { DtDropdown, DtButton, DtDropdownSeparator } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-dropdown
+  @highlight="onHighlight"
+  @update:open="updateOpen"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      role="menuitem"
+      @click="handleFirstItem();"
+    >
+      First item
+    </dt-list-item>
+    <dt-dropdown-separator />
+    <dt-list-item
+      role="menuitem"
+      @click="handleSecondItem();"
+    >
+      Second item
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```
+
+#### With sections and headings
+
+Use the `dt-dropdown-list` component to group items and the `heading` prop to add a heading
+to this group list.
+
+```jsx
+import { DtDropdown, DtButton, DtDropdownSeparator, DtDropdownList } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-dropdown
+  @highlight="onHighlight"
+  @update:open="updateOpen"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      role="menuitem"
+      :navigation-type="navigationType"
+      @click="handleFirstItem();"
+    >
+      First item
+    </dt-list-item>
+    <dt-dropdown-separator />
+    <dt-dropdown-list
+      :list-class="listClass"
+      heading="Menu Heading"
+    >
+      <dt-list-item
+        role="menuitem"
+        :navigation-type="navigationType"
+        @click="handleSecondItem();"
+      >
+        Second item
+      </dt-list-item>
+      <dt-list-item
+        role="menuitem"
+        :navigation-type="navigationType"
+        @click="handleThirdItem();"
+      >
+       Third item
+      </dt-list-item>
+    </dt-dropdown-list>
+  </template>
+</dt-dropdown>
+```
+
+#### Context menu
+
+Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger
+behavior.
+
+```jsx
+import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-dropdown
+  @highlight="onHighlight"
+  @update:open="updateOpen"
+  :openOnContext="true"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Right Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      role="menuitem"
+      :navigation-type="navigationType"
+      @click="handleFirstItem();"
+    >
+      First item
+    </dt-list-item>
+    <dt-list-item
+      role="menuitem"
+      :navigation-type="navigationType"
+      @click="handleSecondItem();"
+    >
+      Second item
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```

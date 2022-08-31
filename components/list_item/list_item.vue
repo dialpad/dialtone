@@ -6,6 +6,7 @@
     :class="['dt-list-item d-ls-none focus-visible', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
+      'dt-list-item--static': !isHoverable,
     }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
@@ -210,11 +211,14 @@ export default {
 </script>
 
 <style lang="less">
+.dt-list-item:not(.dt-list-item--static) {
+  cursor: pointer;
+}
+
 .dt-list-item--focusable:focus,
 .dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
   background-color: hsla(var(--black-400-h), var(--black-400-s), var(--black-400-l), 0.15);
-  cursor: pointer;
 }
 
 .dt-list-item:focus-visible {

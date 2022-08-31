@@ -18,7 +18,9 @@
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
         data-qa="dt-popover-anchor"
+        :tabindex="openOnContext ? 0 : undefined"
         @click.capture="defaultToggleOpen"
+        @contextmenu.prevent="onContext"
         @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
@@ -153,6 +155,15 @@ export default {
     open: {
       type: Boolean,
       default: null,
+    },
+
+    /**
+     * Opens the popover on right click (context menu). If you set this value to `true`,
+     * the default trigger behavior will be disabled.
+     */
+    openOnContext: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -580,9 +591,32 @@ export default {
     },
 
     defaultToggleOpen (e) {
+      if (this.openOnContext) { return; }
+
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
       this.open ?? (this.anchorEl.contains(e.target) && !this.anchorEl?.disabled && this.toggleOpen());
+    },
+
+    onContext (event) {
+      if (!this.openOnContext) { return; }
+
+      this.tip?.setProps({
+        placement: 'right-start',
+      });
+
+      this.tip.setProps({
+        getReferenceClientRect: () => ({
+          width: 0,
+          height: 0,
+          top: event.clientY,
+          bottom: event.clientY,
+          left: event.clientX,
+          right: event.clientX,
+        }),
+      });
+
+      this.toggleOpen();
     },
 
     toggleOpen () {
