@@ -10,6 +10,7 @@
     :max-width="$attrs.maxWidth"
     :list-class="$attrs.listClass"
     :navigation-type="$attrs.navigationType"
+    :open-on-context="$attrs.openOnContext"
     @highlight="$attrs.onHighlight"
     @opened="$attrs.onOpened"
   >

@@ -13,6 +13,7 @@
     :max-height="maxHeight"
     :max-width="maxWidth"
     :open-with-arrow-keys="true"
+    :open-on-context="openOnContext"
     @opened="updateInitialHighlightIndex"
     @keydown.enter="onEnterKey"
     @keydown.space="onSpaceKey"
@@ -35,7 +36,7 @@
       <ul
         :id="listId"
         ref="listWrapper"
-        :class="['d-ps-relative', 'd-px0', DROPDOWN_PADDING_CLASSES[padding], listClass]"
+        :class="listClasses"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
         @mousemove.capture="onMouseHighlight"
@@ -91,6 +92,15 @@ export default {
     open: {
       type: Boolean,
       default: null,
+    },
+
+    /**
+     * Opens the dropdown on right click (context menu). If you set this value to `true`,
+     * the default trigger behavior will be disabled.
+     */
+    openOnContext: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -250,13 +260,23 @@ export default {
     isArrowKeyNav () {
       return this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS;
     },
+
+    listClasses () {
+      return [
+        'd-ps-relative',
+        'd-px0',
+        DROPDOWN_PADDING_CLASSES[this.padding],
+        this.listClass,
+        { 'd-context-menu-list': this.openOnContext },
+      ];
+    },
   },
 
   methods: {
     onMouseHighlight (e) {
       const liElement = e.target.closest('li');
 
-      if (liElement && this.highlightId !== liElement.id) {
+      if (liElement && liElement.role && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
         liElement.focus();
       }
@@ -347,9 +367,15 @@ export default {
     },
 
     onKeyValidation (e, eventHandler) {
-      if (this.open !== null) { return; }
+      if (this.open !== null && !this.openOnContext) { return; }
       this[eventHandler](e);
     },
   },
 };
 </script>
+
+<style lang="less">
+.d-context-menu-list {
+  width: 24rem;
+}
+</style>
