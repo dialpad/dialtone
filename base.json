@@ -859,23 +859,23 @@
       "font": {
         "size": {
           "extraSmall": {
-            "value": "{font.size.300}",
+            "value": "{font.size.100}",
             "type": "fontSizes"
           },
           "small": {
-            "value": "{font.size.400}",
+            "value": "{font.size.100}",
             "type": "fontSizes"
           },
           "medium": {
-            "value": "{font.size.500}",
+            "value": "{font.size.200}",
             "type": "fontSizes"
           },
           "large": {
-            "value": "{font.size.700}",
+            "value": "{font.size.300}",
             "type": "fontSizes"
           },
           "extraLarge": {
-            "value": "{font.size.800}",
+            "value": "{font.size.400}",
             "type": "fontSizes"
           }
         }
