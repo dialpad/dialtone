@@ -344,23 +344,28 @@
       "size": {
         "100": {
           "value": "12px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "small"
         },
         "200": {
           "value": "15px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "medium / base"
         },
         "300": {
           "value": "19px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "large"
         },
         "400": {
           "value": "27px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "extra large / xl"
         },
         "500": {
           "value": "53px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "extra large  / xxl"
         }
       },
       "lineHeight": {
@@ -425,7 +430,8 @@
             "lineHeight": "{font.lineHeight.100}",
             "fontSize": "{font.size.100}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "small"
         },
         "200": {
           "value": {
@@ -434,7 +440,8 @@
             "lineHeight": "{font.lineHeight.200}",
             "fontSize": "{font.size.200}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "medium / base"
         },
         "300": {
           "value": {
@@ -443,7 +450,8 @@
             "lineHeight": "{font.lineHeight.200}",
             "fontSize": "{font.size.300}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "large"
         },
         "400": {
           "value": {
@@ -452,7 +460,8 @@
             "lineHeight": "{font.lineHeight.300}",
             "fontSize": "{font.size.400}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "extra large / xl"
         },
         "500": {
           "value": {
@@ -461,7 +470,8 @@
             "lineHeight": "{font.lineHeight.300}",
             "fontSize": "{font.size.500}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "extra extra large / xxl"
         }
       },
       "headline": {
@@ -472,7 +482,8 @@
             "lineHeight": "{font.lineHeight.base}",
             "fontSize": "{font.size.300}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "small"
         },
         "200": {
           "value": {
@@ -481,7 +492,8 @@
             "lineHeight": "{font.lineHeight.base}",
             "fontSize": "{font.size.400}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "medium"
         },
         "300": {
           "value": {
@@ -490,7 +502,8 @@
             "lineHeight": "{font.lineHeight.base}",
             "fontSize": "{font.size.500}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "large"
         }
       }
     },
