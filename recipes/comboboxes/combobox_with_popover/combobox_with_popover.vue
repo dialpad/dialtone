@@ -46,7 +46,7 @@
         :external-anchor="externalAnchor"
         :content-width="contentWidth"
         :content-tabindex="null"
-        :modal="false"
+        :modal="modal"
         :auto-focus="false"
         @opened="opened"
       >
@@ -238,6 +238,15 @@ export default {
     popoverSticky: {
       type: [Boolean, String],
       default: false,
+    },
+
+    /**
+     * Determines modal state. If enabled popover has a modal overlay
+     * preventing interaction with elements below it, but it is invisible.
+     */
+    modal: {
+      type: Boolean,
+      default: true,
     },
 
     /**
