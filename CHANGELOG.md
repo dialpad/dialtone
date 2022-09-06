@@ -1,3 +1,20 @@
+# [3.14.0](https://github.com/dialpad/dialtone-vue/compare/v3.13.0...v3.14.0) (2022-09-06)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** add modal prop ([#473](https://github.com/dialpad/dialtone-vue/issues/473)) ([bb64a55](https://github.com/dialpad/dialtone-vue/commit/bb64a55ce72aa1cee1b4c7f210ae0ca81b780b97))
+* **combobox-with-popover:** prevent focus of list-items by mouse ([#467](https://github.com/dialpad/dialtone-vue/issues/467)) ([8f229bf](https://github.com/dialpad/dialtone-vue/commit/8f229bfe284834cfc8cb7746e0dddf46e8e986bb))
+* **combobox, combobox-with-popover:** fix empty variant ([#465](https://github.com/dialpad/dialtone-vue/issues/465)) ([f8264c8](https://github.com/dialpad/dialtone-vue/commit/f8264c83c5558564130064de10116b4640dbc23b))
+* **emoji:** fixed incorrectly mapped unicode keys ([#463](https://github.com/dialpad/dialtone-vue/issues/463)) ([c51e313](https://github.com/dialpad/dialtone-vue/commit/c51e313b17bcbf8e64beda5677ae5f86af7985af))
+
+
+### Features
+
+* add collapsible component ([#456](https://github.com/dialpad/dialtone-vue/issues/456)) ([cce3096](https://github.com/dialpad/dialtone-vue/commit/cce3096f09b049acd3b120fea6c24f13184ad44b)), closes [#392](https://github.com/dialpad/dialtone-vue/issues/392) [#392](https://github.com/dialpad/dialtone-vue/issues/392) [#392](https://github.com/dialpad/dialtone-vue/issues/392)
+* **dropdown:** add context menu support ([#468](https://github.com/dialpad/dialtone-vue/issues/468)) ([308414e](https://github.com/dialpad/dialtone-vue/commit/308414e5f8a84ff941c101512b0bcbdba4f55d3a))
+* **root-layout:** add bodyClass prop ([#474](https://github.com/dialpad/dialtone-vue/issues/474)) ([ad5bf1a](https://github.com/dialpad/dialtone-vue/commit/ad5bf1ae42fd317152ff36989b196b6845b73592))
+
 # [3.13.0](https://github.com/dialpad/dialtone-vue/compare/v3.12.0...v3.13.0) (2022-08-17)
 
 
