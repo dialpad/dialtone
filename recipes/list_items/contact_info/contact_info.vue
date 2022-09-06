@@ -13,7 +13,6 @@
         <dt-avatar
           v-if="avatarSrc"
           size="lg"
-          avatar-class="d-bar2"
         >
           <img
             data-qa="dt-contact-avatar"
