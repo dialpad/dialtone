@@ -14,6 +14,7 @@
     :open-with-arrow-keys="openWithArrowKeys"
     :has-suggestion-list="hasSuggestionList"
     :empty-list="emptyList"
+    :modal="modal"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
