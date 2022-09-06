@@ -150,45 +150,55 @@
       "magenta": {
         "100": {
           "value": "#FF97D2",
-          "type": "color"
+          "type": "color",
+          "description": "aka pink"
         },
         "200": {
           "value": "#F756B1",
-          "type": "color"
+          "type": "color",
+          "description": "aka pink"
         },
         "300": {
           "value": "#F9008E",
-          "type": "color"
+          "type": "color",
+          "description": "aka pink"
         },
         "400": {
           "value": "#8C0E56",
-          "type": "color"
+          "type": "color",
+          "description": "aka pink"
         },
         "500": {
           "value": "#541A3B",
-          "type": "color"
+          "type": "color",
+          "description": "aka pink"
         }
       },
       "gold": {
         "100": {
           "value": "#FFE793",
-          "type": "color"
+          "type": "color",
+          "description": "aka yellow"
         },
         "200": {
           "value": "#FFD362",
-          "type": "color"
+          "type": "color",
+          "description": "aka yellow"
         },
         "300": {
           "value": "#F6AB3C",
-          "type": "color"
+          "type": "color",
+          "description": "aka yellow"
         },
         "400": {
           "value": "#D28F2B",
-          "type": "color"
+          "type": "color",
+          "description": "aka yellow"
         },
         "500": {
           "value": "#815008",
-          "type": "color"
+          "type": "color",
+          "description": "aka yellow"
         }
       },
       "green": {
