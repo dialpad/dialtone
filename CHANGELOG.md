@@ -1,3 +1,16 @@
+# [2.24.0](https://github.com/dialpad/dialtone-vue/compare/v2.23.0...v2.24.0) (2022-09-06)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** add modal prop ([#472](https://github.com/dialpad/dialtone-vue/issues/472)) ([9b79f1a](https://github.com/dialpad/dialtone-vue/commit/9b79f1ada0b8eae37323518856d35a749fec6464))
+
+
+### Features
+
+* **dropdown:** add context menu support ([#461](https://github.com/dialpad/dialtone-vue/issues/461)) ([7cf9b44](https://github.com/dialpad/dialtone-vue/commit/7cf9b444c146c9f0a955461e8987317ab4b18ba7))
+* **root-layout:** add bodyClass prop ([#475](https://github.com/dialpad/dialtone-vue/issues/475)) ([c05dfd0](https://github.com/dialpad/dialtone-vue/commit/c05dfd09fae3c8af0632c4a8780dc8a12718df2b))
+
 # [2.23.0](https://github.com/dialpad/dialtone-vue/compare/v2.22.3...v2.23.0) (2022-08-30)
 
 
