@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['root-layout__body', bodyClass]"
+    :class="['root-layout__body', bodyClasses]"
     data-qa="root-layout-body"
   >
     <aside
@@ -28,6 +28,14 @@ import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_lay
 export default {
   name: 'DtRootLayoutBody',
   props: {
+    /**
+     * Additional class name for the body
+     */
+    bodyClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
     /**
      * Additional class name for the content element
      */
@@ -75,8 +83,13 @@ export default {
   },
 
   computed: {
-    bodyClass () {
-      return { 'root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT };
+    bodyClasses () {
+      return [
+        this.bodyClass,
+        {
+          'root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT,
+        },
+      ];
     },
   },
 };

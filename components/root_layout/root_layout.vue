@@ -9,6 +9,7 @@
       <slot name="header" />
     </header>
     <dt-root-layout-body
+      :body-class="bodyClass"
       :content-class="contentClass"
       :content-wrap-width-percent="contentWrapWidthPercent"
       :sidebar-class="sidebarClass"
@@ -68,6 +69,14 @@ export default {
     headerSticky: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional class name for the body
+     */
+    bodyClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**
