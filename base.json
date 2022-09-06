@@ -566,10 +566,14 @@
           "type": "borderWidth"
         },
         "400": {
-          "value": "{size.500}",
+          "value": "{size.400}",
           "type": "borderWidth"
         },
         "500": {
+          "value": "{size.500}",
+          "type": "borderWidth"
+        },
+        "600": {
           "value": "{size.600}",
           "type": "borderWidth"
         }
