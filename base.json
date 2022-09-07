@@ -399,23 +399,19 @@
           "value": "{font.lineHeight.base}",
           "type": "lineHeights"
         },
+        "tight": {
+          "value": "100%",
+          "type": "lineHeights"
+        },
+        "compact": {
+          "value": "120%",
+          "type": "lineHeights"
+        },
         "base": {
           "value": "140%",
           "type": "lineHeights"
         },
-        "_100": {
-          "value": "100%",
-          "type": "lineHeights"
-        },
-        "_200": {
-          "value": "120%",
-          "type": "lineHeights"
-        },
-        "_300": {
-          "value": "140%",
-          "type": "lineHeights"
-        },
-        "_400": {
+        "breath": {
           "value": "160%",
           "type": "lineHeights"
         }
