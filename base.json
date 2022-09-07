@@ -942,7 +942,7 @@
             "type": "lineHeights"
           },
           "extraLarge": {
-            "value": "{font.lineHeight.600}",
+            "value": "{font.lineHeight.500}",
             "type": "lineHeights"
           }
         }
