@@ -504,7 +504,7 @@
         "100": {
           "value": {
             "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.condensedMedium}",
+            "fontWeight": "{font.weight.medium}",
             "lineHeight": "{font.lineHeight.base}",
             "fontSize": "{font.size.300}"
           },
@@ -514,7 +514,7 @@
         "200": {
           "value": {
             "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.condensedMedium}",
+            "fontWeight": "{font.weight.medium}",
             "lineHeight": "{font.lineHeight.base}",
             "fontSize": "{font.size.400}"
           },
@@ -524,7 +524,7 @@
         "300": {
           "value": {
             "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.condensedMedium}",
+            "fontWeight": "{font.weight.medium}",
             "lineHeight": "{font.lineHeight.base}",
             "fontSize": "{font.size.500}"
           },
