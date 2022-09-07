@@ -4,6 +4,8 @@
   <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-flg12 d-fl-col2">
     <dt-popover
       :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
       width-content="anchor"
       placement="bottom-start"
       initial-focus-element="first"
@@ -35,6 +37,8 @@
     </dt-popover>
     <dt-popover
       :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
       width-content="anchor"
       initial-focus-element="first"
       class="d-mb128 d-jc-flex-end"
@@ -65,6 +69,8 @@
     </dt-popover>
     <dt-popover
       :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
       padding="none"
       width-content="anchor"
       initial-focus-element="first"
@@ -93,7 +99,8 @@
     </dt-popover>
     <dt-popover
       :open="$attrs.open"
-      :modal="false"
+      :modal="modal || false"
+      :hide-on-click="hideOnClick"
       width-content="anchor"
       class="d-jc-flex-end"
     >
@@ -123,6 +130,8 @@
     </dt-popover>
     <dt-popover
       :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
       class="d-mb128"
       :show-close-button="true"
       placement="bottom-start"
@@ -193,6 +202,8 @@
 
     <dt-popover
       :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
       class="d-mb128 d-jc-flex-end"
       :show-close-button="true"
       max-height="20rem"
@@ -226,6 +237,8 @@
 
     <dt-popover
       :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
       class="d-my128"
       max-height="20rem"
       max-width="50rem"
@@ -261,6 +274,8 @@
 
     <dt-popover
       :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
       content-class="d-pl12 d-pr16"
       initial-focus-element="first"
       class="d-my128 d-jc-flex-end"
@@ -344,6 +359,8 @@
 
     <dt-popover
       :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
       content-class="d-pl12 d-pr16"
       class="d-my128"
       initial-focus-element="first"
@@ -376,9 +393,10 @@
 
     <dt-popover
       v-model:open="openPopoverWithTriggerOverride"
+      :modal="$attrs.modal || false"
+      :hide-on-click="$attrs.hideOnClick"
       content-class="d-pl12 d-pr16"
       class="d-my128 d-jc-flex-end"
-      :modal="false"
       max-height="20rem"
       max-width="50rem"
     >

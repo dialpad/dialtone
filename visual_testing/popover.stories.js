@@ -12,6 +12,7 @@ export default {
     ...argsData,
     open: true,
     modal: false,
+    hideOnClick: false,
   },
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
