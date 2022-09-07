@@ -1,3 +1,15 @@
+# [3.15.0](https://github.com/dialpad/dialtone-vue/compare/v3.14.0...v3.15.0) (2022-09-07)
+
+
+### Bug Fixes
+
+* **contact-info:** dp-55162 Circular avatar shape ([#479](https://github.com/dialpad/dialtone-vue/issues/479)) ([b1cdefb](https://github.com/dialpad/dialtone-vue/commit/b1cdefb9245ea14385c468a82bff04854b3d9d6d))
+
+
+### Features
+
+* **banner:** set background, hide the icon, custom classes - vue 3 ([#477](https://github.com/dialpad/dialtone-vue/issues/477)) ([6505ce8](https://github.com/dialpad/dialtone-vue/commit/6505ce8393648b5b69bb8286950df6ad48ddce4e))
+
 # [3.14.0](https://github.com/dialpad/dialtone-vue/compare/v3.13.0...v3.14.0) (2022-09-06)
 
 
