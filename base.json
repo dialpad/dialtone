@@ -373,7 +373,7 @@
           "description": "extra large / xl"
         },
         "500": {
-          "value": "53px",
+          "value": "38px",
           "type": "fontSizes",
           "description": "extra large  / xxl"
         }
