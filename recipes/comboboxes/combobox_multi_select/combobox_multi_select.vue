@@ -70,6 +70,7 @@
     <template #list>
       <div
         ref="list"
+        @mousedown.prevent
       >
         <slot
           v-if="!loading"

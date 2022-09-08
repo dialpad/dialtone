@@ -387,10 +387,6 @@ export default {
       // If outside of the combobox then close
       if (!isComboboxStillFocused) {
         this.closeComboboxList();
-      } else {
-        // if focus is anywhere within the combobox input or list,
-        // keep the focus on the input, or keyboard nav will break.
-        e.target.focus();
       }
     },
 
