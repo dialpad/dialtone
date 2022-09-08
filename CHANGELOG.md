@@ -1,3 +1,10 @@
+## [3.15.1](https://github.com/dialpad/dialtone-vue/compare/v3.15.0...v3.15.1) (2022-09-08)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** fix keyboard navigation ([#488](https://github.com/dialpad/dialtone-vue/issues/488)) ([485f196](https://github.com/dialpad/dialtone-vue/commit/485f196585cd815278122c23d1d3ffa9bcf0a068))
+
 # [3.15.0](https://github.com/dialpad/dialtone-vue/compare/v3.14.0...v3.15.0) (2022-09-07)
 
 
