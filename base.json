@@ -599,6 +599,26 @@
           },
           "type": "typography"
         }
+      },
+      "code": {
+        "small": {
+          "value": {
+            "fontFamily": "{font.family.mono}",
+            "fontWeight": "{font.weight.normal}",
+            "lineHeight": "{font.lineHeight.200}",
+            "fontSize": "{font.size.100}"
+          },
+          "type": "typography"
+        },
+        "base": {
+          "value": {
+            "fontFamily": "{font.family.mono}",
+            "fontWeight": "{font.weight.normal}",
+            "lineHeight": "{font.lineHeight.200}",
+            "fontSize": "{font.size.200}"
+          },
+          "type": "typography"
+        }
       }
     },
     "size": {
