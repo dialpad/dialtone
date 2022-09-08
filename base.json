@@ -425,25 +425,23 @@
     },
     "typography": {
       "body": {
-        "default": {
-          "small": {
-            "value": {
-              "fontFamily": "{font.family.body}",
-              "fontWeight": "{font.weight.normal}",
-              "lineHeight": "{font.lineHeight.300}",
-              "fontSize": "{font.size.100}"
-            },
-            "type": "typography"
+        "small": {
+          "value": {
+            "fontFamily": "{font.family.body}",
+            "fontWeight": "{font.weight.normal}",
+            "lineHeight": "{font.lineHeight.300}",
+            "fontSize": "{font.size.100}"
           },
-          "base": {
-            "value": {
-              "fontFamily": "{font.family.body}",
-              "fontWeight": "{font.weight.normal}",
-              "lineHeight": "{font.lineHeight.400}",
-              "fontSize": "{font.size.200}"
-            },
-            "type": "typography"
-          }
+          "type": "typography"
+        },
+        "base": {
+          "value": {
+            "fontFamily": "{font.family.body}",
+            "fontWeight": "{font.weight.normal}",
+            "lineHeight": "{font.lineHeight.400}",
+            "fontSize": "{font.size.200}"
+          },
+          "type": "typography"
         },
         "compact": {
           "small": {
@@ -499,25 +497,23 @@
         }
       },
       "label": {
-        "default": {
-          "small": {
-            "value": {
-              "fontFamily": "{font.family.body}",
-              "fontWeight": "{font.weight.semiBold}",
-              "lineHeight": "{font.lineHeight.300}",
-              "fontSize": "{font.size.100}"
-            },
-            "type": "typography"
+        "small": {
+          "value": {
+            "fontFamily": "{font.family.body}",
+            "fontWeight": "{font.weight.semiBold}",
+            "lineHeight": "{font.lineHeight.300}",
+            "fontSize": "{font.size.100}"
           },
-          "base": {
-            "value": {
-              "fontFamily": "{font.family.body}",
-              "fontWeight": "{font.weight.semiBold}",
-              "lineHeight": "{font.lineHeight.400}",
-              "fontSize": "{font.size.200}"
-            },
-            "type": "typography"
-          }
+          "type": "typography"
+        },
+        "base": {
+          "value": {
+            "fontFamily": "{font.family.body}",
+            "fontWeight": "{font.weight.semiBold}",
+            "lineHeight": "{font.lineHeight.400}",
+            "fontSize": "{font.size.200}"
+          },
+          "type": "typography"
         },
         "compact": {
           "small": {
