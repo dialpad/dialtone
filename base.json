@@ -397,10 +397,6 @@
         }
       },
       "weight": {
-        "light": {
-          "value": "Light",
-          "type": "fontWeights"
-        },
         "normal": {
           "value": "Regular",
           "type": "fontWeights"
@@ -415,10 +411,6 @@
         },
         "bold": {
           "value": "Bold",
-          "type": "fontWeights"
-        },
-        "condensedMedium": {
-          "value": "Condensed Medium",
           "type": "fontWeights"
         }
       },
