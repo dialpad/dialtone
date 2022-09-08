@@ -10,7 +10,7 @@ const FONT_FAMILY_IDENTIFIERS = ['fontFamilies']
 // Values
 const FALLBACK_FONTS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
 const FALLBACK_FONTS_MONO = "SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace";
-const BASE_FONT_SIZE = 15.0;
+const BASE_FONT_SIZE = 10.0;
 const WEIGHT = {
   'Light': 300,
   'Regular': 400,
@@ -45,7 +45,7 @@ StyleDictionary.registerTransform({
     return FONT_FAMILY_IDENTIFIERS.includes(token.type)
   },
   transformer: (token, options) => {
-    if (token.name === 'body' || token.value === 'expressive') {
+    if (token.name === 'body' || token.name === 'expressive') {
       return `${token.value}, ${FALLBACK_FONTS}`
     }
     else if (token.name === 'mono') {
