@@ -2,7 +2,7 @@ module.exports = {
   source: ['tokens/**/*.json'],
   platforms: {
     less: {
-      transformGroup: 'less',
+      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/fonts/weight', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'color/hex'],
       prefix: 'dt',
       buildPath: 'dist/less/',
       files: [
@@ -13,7 +13,7 @@ module.exports = {
       ],
     },
     css: {
-      transformGroup: 'css',
+      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/fonts/weight', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'size/rem', 'color/css'],
       prefix: 'dt',
       buildPath: 'dist/css/',
       files: [
@@ -60,7 +60,7 @@ module.exports = {
     json: {
       prefix: 'dt',
       buildPath: 'dist/',
-      transforms: ['name/cti/camel'],
+      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/fonts/weight', 'name/cti/camel'],
       files: [
         {
           destination: 'tokens.json',
