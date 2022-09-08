@@ -379,19 +379,19 @@
         }
       },
       "lineHeight": {
-        "tight": {
+        "100": {
           "value": "100%",
           "type": "lineHeights"
         },
-        "compact": {
+        "200": {
           "value": "120%",
           "type": "lineHeights"
         },
-        "base": {
+        "300": {
           "value": "140%",
           "type": "lineHeights"
         },
-        "open": {
+        "400": {
           "value": "160%",
           "type": "lineHeights"
         }
@@ -425,55 +425,45 @@
     },
     "typography": {
       "body": {
-        "100": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.tight}",
-            "fontSize": "{font.size.100}"
+        "default": {
+          "small": {
+            "value": {
+              "fontFamily": "{font.family.body}",
+              "fontWeight": "{font.weight.normal}",
+              "lineHeight": "{font.lineHeight.300}",
+              "fontSize": "{font.size.100}"
+            },
+            "type": "typography"
           },
-          "type": "typography",
-          "description": "small / 12"
+          "base": {
+            "value": {
+              "fontFamily": "{font.family.body}",
+              "fontWeight": "{font.weight.normal}",
+              "lineHeight": "{font.lineHeight.400}",
+              "fontSize": "{font.size.200}"
+            },
+            "type": "typography"
+          }
         },
-        "200": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.base}",
-            "fontSize": "{font.size.200}"
+        "compact": {
+          "small": {
+            "value": {
+              "fontFamily": "{font.family.body}",
+              "fontWeight": "{font.weight.normal}",
+              "lineHeight": "{font.lineHeight.200}",
+              "fontSize": "{font.size.100}"
+            },
+            "type": "typography"
           },
-          "type": "typography",
-          "description": "medium / base / 15"
-        },
-        "300": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.base}",
-            "fontSize": "{font.size.300}"
-          },
-          "type": "typography",
-          "description": "large / 19"
-        },
-        "400": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.base}",
-            "fontSize": "{font.size.400}"
-          },
-          "type": "typography",
-          "description": "extra large / xl / 27"
-        },
-        "500": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.base}",
-            "fontSize": "{font.size.500}"
-          },
-          "type": "typography",
-          "description": "extra extra large / xxl / 53"
+          "base": {
+            "value": {
+              "fontFamily": "{font.family.body}",
+              "fontWeight": "{font.weight.normal}",
+              "lineHeight": "{font.lineHeight.300}",
+              "fontSize": "{font.size.200}"
+            },
+            "type": "typography"
+          }
         }
       },
       "headline": {
@@ -481,7 +471,7 @@
           "value": {
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.medium}",
-            "lineHeight": "{font.lineHeight.base}",
+            "lineHeight": "{font.lineHeight.300}",
             "fontSize": "{font.size.300}"
           },
           "type": "typography",
@@ -491,7 +481,7 @@
           "value": {
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.medium}",
-            "lineHeight": "{font.lineHeight.base}",
+            "lineHeight": "{font.lineHeight.300}",
             "fontSize": "{font.size.400}"
           },
           "type": "typography",
@@ -501,7 +491,7 @@
           "value": {
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.medium}",
-            "lineHeight": "{font.lineHeight.base}",
+            "lineHeight": "{font.lineHeight.300}",
             "fontSize": "{font.size.500}"
           },
           "type": "typography",
