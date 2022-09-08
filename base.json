@@ -1,6 +1,54 @@
 {
   "base": {
     "color": {
+      "text": {
+        "primary": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{color.black.700}",
+          "type": "color"
+        },
+        "tertiary": {
+          "value": "{color.black.600}",
+          "type": "color"
+        },
+        "muted": {
+          "value": "rgba($color.black.800, 0.5)",
+          "type": "color"
+        },
+        "placeholder": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "disabled": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "error": {
+          "value": "{color.red.400}",
+          "type": "color"
+        },
+        "success": {
+          "value": "#00671D",
+          "type": "color"
+        },
+        "warning": {
+          "value": "#683E00",
+          "type": "color"
+        },
+        "on-dark": {
+          "primary": {
+            "value": "{color.black.100}",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "{color.black.300}",
+            "type": "color"
+          }
+        }
+      },
       "surface": {
         "primary": {
           "value": "{color.neutral.white}",
@@ -24,40 +72,6 @@
         },
         "contrast": {
           "value": "{color.black.800}",
-          "type": "color"
-        }
-      },
-      "text": {
-        "dark": {
-          "value": "{color.black.900}",
-          "type": "color"
-        },
-        "medium": {
-          "value": "{color.black.800}",
-          "type": "color"
-        },
-        "light": {
-          "value": "{color.black.600}",
-          "type": "color"
-        },
-        "lighter": {
-          "value": "{color.black.500}",
-          "type": "color"
-        },
-        "success": {
-          "value": "{color.green.400}",
-          "type": "color"
-        },
-        "error": {
-          "value": "{color.red.400}",
-          "type": "color"
-        },
-        "danger": {
-          "value": "{color.red.400}",
-          "type": "color"
-        },
-        "muted": {
-          "value": "{color.black.500}",
           "type": "color"
         }
       },
