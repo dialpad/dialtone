@@ -729,7 +729,7 @@
         "type": "sizing"
       },
       "base": {
-        "value": "8px",
+        "value": "{font.size.root} * .8",
         "type": "sizing"
       },
       "border": {
