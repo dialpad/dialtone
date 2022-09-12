@@ -1,3 +1,10 @@
+## [2.25.1](https://github.com/dialpad/dialtone-vue/compare/v2.25.0...v2.25.1) (2022-09-12)
+
+
+### Bug Fixes
+
+* **combobox-multi-select:** fix keyboard navigation ([#482](https://github.com/dialpad/dialtone-vue/issues/482)) ([37048f2](https://github.com/dialpad/dialtone-vue/commit/37048f22147646319981fbe89f043a0504cc0ec1))
+
 # [2.25.0](https://github.com/dialpad/dialtone-vue/compare/v2.24.0...v2.25.0) (2022-09-07)
 
 
