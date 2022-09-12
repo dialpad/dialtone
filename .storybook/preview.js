@@ -66,11 +66,12 @@ export const parameters = {
     },
   },
   docs: {
-    transformSource: (src) => {
-      if (typeof src === 'object') return src
-
-      // remove <template> and </template> tags
-      return src.slice(10, -12);
+    transformSource(src) {
+      const match = /^<template>(.*)<\/template>/.exec(src)
+      if(match) {
+        return match[1]
+      }
+      return src
     }
-  },
+  }
 };
