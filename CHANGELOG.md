@@ -1,3 +1,10 @@
+# [2.26.0](https://github.com/dialpad/dialtone-vue/compare/v2.25.1...v2.26.0) (2022-09-13)
+
+
+### Features
+
+* dt-card ([#489](https://github.com/dialpad/dialtone-vue/issues/489)) ([4f8a703](https://github.com/dialpad/dialtone-vue/commit/4f8a70349a8288d4cfddbdc97d9fbec493c6a710))
+
 ## [2.25.1](https://github.com/dialpad/dialtone-vue/compare/v2.25.0...v2.25.1) (2022-09-12)
 
 
