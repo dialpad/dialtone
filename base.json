@@ -682,7 +682,8 @@
             "lineHeight": "{font.lineHeight.200}",
             "fontSize": "{font.size.100}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "mono"
         },
         "base": {
           "value": {
@@ -691,7 +692,8 @@
             "lineHeight": "{font.lineHeight.200}",
             "fontSize": "{font.size.200}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "mono"
         }
       }
     },
