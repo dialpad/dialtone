@@ -400,19 +400,23 @@
       "lineHeight": {
         "100": {
           "value": "100%",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "tightest"
         },
         "200": {
           "value": "120%",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "tight"
         },
         "300": {
           "value": "140%",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "default"
         },
         "400": {
           "value": "160%",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "breath"
         }
       },
       "weight": {
