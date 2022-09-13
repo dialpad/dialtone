@@ -1106,7 +1106,7 @@
             "type": "lineHeights"
           },
           "extraLarge": {
-            "value": "{font.lineHeight.500}",
+            "value": "{font.lineHeight.400}",
             "type": "lineHeights"
           }
         }
