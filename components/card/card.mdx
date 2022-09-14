@@ -1,0 +1,143 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtCard from './card';
+
+# Card
+
+<Subtitle>
+    A card contains summary content and actions about a single subject.
+    It can be used by itself or within a list, and is generally interactive.
+</Subtitle>
+
+## Base Style
+
+Base card style with content.
+
+<Canvas>
+  <Story id="components-card--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+You can use the card with default content slot or combine header, footer for the complete look.
+
+### Import
+
+```jsx
+import { DtCard } from '@dialpad/dialtone-vue';
+```
+
+## With header
+
+A card with the header.
+
+<Canvas>
+    <Story id="components-card--with-header" />
+</Canvas>
+
+```html
+ <dt-card class="d-w264">
+    <template #header>
+      <p>Header</p>
+      <dt-button
+        size="xs"
+        importance="clear"
+        aria-label="Menu button"
+      >
+        <template #icon>
+          <icon-menu-vertical />
+        </template>
+      </dt-button>
+    </template>
+    <template #content>
+      <p class="d-fs14 d-fw-bold d-fc-black-800">Lorem ipsum</p>
+      <p class="d-fs12">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</p>
+    </template>
+</dt-card>
+```
+
+## With footer
+
+A card with the footer.
+
+<Canvas>
+    <Story id="components-card--with-footer" />
+</Canvas>
+
+```html
+ <dt-card class="d-w264">
+    <template #content>
+      <p class="d-fs14 d-fw-bold d-fc-black-800">Lorem ipsum</p>
+      <p class="d-fs12">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</p>
+    </template>
+    <template #footer>
+      <dt-button>
+        Button 1
+      </dt-button>
+      <dt-button class="d-ml8">
+        Button 2
+      </dt-button>
+    </template>
+</dt-card>
+```
+
+## With header and footer
+
+A card with the header and footer.
+
+<Canvas>
+    <Story id="components-card--with-header-and-footer" />
+</Canvas>
+
+```html
+ <dt-card class="d-w264">
+    <template #header>
+      <p>Header</p>
+      <dt-button
+        size="xs"
+        importance="clear"
+        aria-label="Menu button"
+      >
+        <template #icon>
+          <icon-menu-vertical />
+        </template>
+      </dt-button>
+    </template>
+    <template #content>
+      <p class="d-fs14 d-fw-bold d-fc-black-800">Lorem ipsum</p>
+      <p class="d-fs12">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</p>
+    </template>
+    <template #footer>
+      <dt-button>
+        Button 1
+      </dt-button>
+      <dt-button class="d-ml8">
+        Button 2
+      </dt-button>
+    </template>
+</dt-card>
+```
+
+## With scrollable content using max height
+
+A card with the scrollable content.
+
+<Canvas>
+    <Story id="components-card--with-scrollable-content" />
+</Canvas>
+
+```html
+ <dt-card class="d-w264" :max-height="50px">
+    <template #content>
+      <p class="d-fs14 d-fw-bold d-fc-black-800">Lorem ipsum</p>
+      <p class="d-fs12">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</p>
+    </template>
+</dt-card>
+```
