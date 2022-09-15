@@ -35,7 +35,7 @@
           "type": "color"
         },
         "warning": {
-          "value": "#683E00",
+          "value": "{color.gold.500}",
           "type": "color"
         },
         "on-dark": {
