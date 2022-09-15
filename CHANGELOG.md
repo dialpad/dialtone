@@ -1,3 +1,10 @@
+# [3.16.0](https://github.com/dialpad/dialtone-vue/compare/v3.15.1...v3.16.0) (2022-09-15)
+
+
+### Features
+
+* (card) vue-3 ([#494](https://github.com/dialpad/dialtone-vue/issues/494)) ([eadda5c](https://github.com/dialpad/dialtone-vue/commit/eadda5cd48e7596c88e2abafd1648b4ffb4bff95))
+
 ## [3.15.1](https://github.com/dialpad/dialtone-vue/compare/v3.15.0...v3.15.1) (2022-09-08)
 
 
