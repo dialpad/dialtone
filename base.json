@@ -400,23 +400,27 @@
       "lineHeight": {
         "100": {
           "value": "100%",
-          "type": "lineHeights",
-          "description": "tightest"
+          "type": "lineHeights"
         },
         "200": {
           "value": "120%",
-          "type": "lineHeights",
-          "description": "tight"
+          "type": "lineHeights"
         },
         "300": {
           "value": "140%",
-          "type": "lineHeights",
-          "description": "default"
+          "type": "lineHeights"
         },
         "400": {
           "value": "160%",
-          "type": "lineHeights",
-          "description": "breath"
+          "type": "lineHeights"
+        },
+        "500": {
+          "value": "180%",
+          "type": "lineHeights"
+        },
+        "600": {
+          "value": "200%",
+          "type": "lineHeights"
         }
       },
       "weight": {
