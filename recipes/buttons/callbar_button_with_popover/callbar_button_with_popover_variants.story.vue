@@ -125,23 +125,15 @@
 
 <script>
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
-import IconDialpadGlyph from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadGlyph';
 import IconMicOn from '@dialpad/dialtone/lib/dist/vue/icons/IconMicOn';
 import IconRecording from '@dialpad/dialtone/lib/dist/vue/icons/IconRecording';
-import IconPerson from '@dialpad/dialtone/lib/dist/vue/icons/IconPerson';
-import IconPlay from '@dialpad/dialtone/lib/dist/vue/icons/IconPlay';
-import IconStar from '@dialpad/dialtone/lib/dist/vue/icons/IconStar';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopoverVariants',
   components: {
     DtRecipeCallbarButtonWithPopover,
-    IconDialpadGlyph,
     IconMicOn,
     IconRecording,
-    IconPerson,
-    IconPlay,
-    IconStar,
   },
 };
 </script>

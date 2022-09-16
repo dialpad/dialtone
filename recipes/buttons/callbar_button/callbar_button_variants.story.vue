@@ -304,7 +304,6 @@ import IconRecording from '@dialpad/dialtone/lib/dist/vue/icons/IconRecording';
 import IconPerson from '@dialpad/dialtone/lib/dist/vue/icons/IconPerson';
 import IconPlay from '@dialpad/dialtone/lib/dist/vue/icons/IconPlay';
 import IconStar from '@dialpad/dialtone/lib/dist/vue/icons/IconStar';
-import IconAi from '@dialpad/dialtone/lib/dist/vue/icons/IconAiGlyph.vue';
 
 export default {
   name: 'DtRecipeCallbarButtonVariants',
@@ -316,7 +315,6 @@ export default {
     IconPerson,
     IconPlay,
     IconStar,
-    IconAi,
   },
 };
 </script>

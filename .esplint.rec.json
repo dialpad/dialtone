@@ -8,27 +8,6 @@
     "common/mixins/modal.js": {
       "complexity": 1
     },
-    "components/banner/banner.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 3
-    },
-    "components/button/button.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 2
-    },
-    "components/chip/chip.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1
-    },
-    "components/collapsible/collapsible.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 2
-    },
-    "components/collapsible/collapsible_lazy_show.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 2
-    },
-    "components/collapsible/transition_collapse_height.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1
-    },
-    "components/dropdown/dropdown.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1
-    },
     "components/input/input.vue": {
       "max-lines": 1
     },
@@ -38,17 +17,7 @@
     "components/skeleton/skeleton-paragraph.vue": {
       "complexity": 1
     },
-    "components/toast/toast.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 2
-    },
-    "components/tooltip/tooltip.vue": {
-      "vue/no-deprecated-destroyed-lifecycle": 1
-    },
-    "recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1
-    },
     "recipes/comboboxes/combobox_multi_select/combobox_multi_select.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 2,
       "max-lines": 1
     }
   }
