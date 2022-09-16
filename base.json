@@ -517,14 +517,15 @@
           },
           "type": "typography"
         },
-        "base": {
+        "medium": {
           "value": {
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.bold}",
             "lineHeight": "{font.lineHeight.400}",
             "fontSize": "{font.size.200}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "base"
         },
         "large": {
           "value": {
