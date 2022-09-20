@@ -631,7 +631,7 @@
               "value": {
                 "fontFamily": "{font.family.body}",
                 "fontWeight": "{font.weight.normal}",
-                "lineHeight": "{font.lineHeight.400}",
+                "lineHeight": "{font.lineHeight.300}",
                 "fontSize": "{font.size.200}"
               },
               "type": "typography"
