@@ -809,7 +809,7 @@
           "type": "sizing"
         },
         "300": {
-          "value": "{size.base} * 2",
+          "value": "{size.base} * 2.25",
           "type": "sizing"
         },
         "400": {
