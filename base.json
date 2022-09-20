@@ -801,35 +801,19 @@
       },
       "icon": {
         "100": {
-          "value": "{size.base} * 1.75",
+          "value": "{size.base} * 1.5",
           "type": "sizing"
         },
         "200": {
-          "value": "{size.500}",
+          "value": "{size.base} * 1.75",
           "type": "sizing"
         },
         "300": {
-          "value": "{size.base} * 2.25",
+          "value": "{size.base} * 2",
           "type": "sizing"
         },
         "400": {
-          "value": "{size.base} * 2.5",
-          "type": "sizing"
-        },
-        "500": {
           "value": "{size.base} * 3",
-          "type": "sizing"
-        },
-        "600": {
-          "value": "{size.600}",
-          "type": "sizing"
-        },
-        "700": {
-          "value": "{size.base} * 6",
-          "type": "sizing"
-        },
-        "800": {
-          "value": "{size.base} * 8",
           "type": "sizing"
         }
       }
