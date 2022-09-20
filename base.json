@@ -813,6 +813,10 @@
           "type": "sizing"
         },
         "400": {
+          "value": "{size.base} * 2.5",
+          "type": "sizing"
+        },
+        "500": {
           "value": "{size.base} * 3",
           "type": "sizing"
         }
