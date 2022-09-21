@@ -250,15 +250,16 @@ export default {
   }
 
 }
-.d-tab--selected::after, .d-tab--selected:hover::after {
+.dt-recipe--callbar-button-with-popover--button .d-tab--selected::after,
+.dt-recipe--callbar-button-with-popover--button .d-tab--selected:hover::after {
   --tab--bgc: var(--black-900);
 }
-.tab-group {
+.dt-recipe--callbar-button-with-popover--button .tab-group {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-.tab-content {
+.dt-recipe--callbar-button-with-popover--button .tab-content {
   flex: 1 1 100%;
   overflow-y: auto;
 }
