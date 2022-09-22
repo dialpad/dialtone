@@ -958,6 +958,7 @@
       }
     }
   },
+  "semantic": {},
   "components/button": {
     "button": {
       "color": {
@@ -1116,11 +1117,14 @@
       }
     }
   },
+  "components/badge": {},
   "$themes": [],
   "$metadata": {
     "tokenSetOrder": [
       "base",
-      "components/button"
+      "semantic",
+      "components/button",
+      "components/badge"
     ]
   }
 }
