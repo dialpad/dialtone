@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/dialpad/dialtone-tokens/compare/v1.1.0...v1.1.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* npm build before deploying to maven ([5abba9b](https://github.com/dialpad/dialtone-tokens/commit/5abba9bde0274f83fa0ca2ae19a5c954dc82d434))
+
 # [1.1.0](https://github.com/dialpad/dialtone-tokens/compare/v1.0.1...v1.1.0) (2022-09-22)
 
 
