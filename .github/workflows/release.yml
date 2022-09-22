@@ -8,7 +8,7 @@ on:
       - beta
 
 jobs:
-  release:
+  release-web:
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
 
@@ -44,3 +44,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release --extends ./release-ci.config.js
+
+  release-android:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Publish package
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
