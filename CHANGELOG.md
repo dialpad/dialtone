@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/dialpad/dialtone-tokens/compare/v1.1.1...v1.1.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* fix commit message syntax ([36bf269](https://github.com/dialpad/dialtone-tokens/commit/36bf269a2c8d22ce36aa7b9174d24f98479ba42e))
+
 ## [1.1.1](https://github.com/dialpad/dialtone-tokens/compare/v1.1.0...v1.1.1) (2022-09-22)
 
 
