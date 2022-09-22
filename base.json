@@ -759,6 +759,28 @@
         "300": {
           "value": "{size.300}",
           "type": "borderWidth"
+        },
+        "icon": {
+          "100": {
+            "value": "1px",
+            "type": "borderWidth"
+          },
+          "200": {
+            "value": "1.25px",
+            "type": "borderWidth"
+          },
+          "300": {
+            "value": "1.5px",
+            "type": "borderWidth"
+          },
+          "400": {
+            "value": "1.75px",
+            "type": "borderWidth"
+          },
+          "500": {
+            "value": "1.75px",
+            "type": "borderWidth"
+          }
         }
       },
       "radius": {
@@ -807,28 +829,6 @@
         "500": {
           "value": "{size.base} * 3",
           "type": "sizing"
-        },
-        "stroke": {
-          "100": {
-            "value": "1px",
-            "type": "sizing"
-          },
-          "200": {
-            "value": "1.25px",
-            "type": "sizing"
-          },
-          "300": {
-            "value": "1.5px",
-            "type": "sizing"
-          },
-          "400": {
-            "value": "1.75px",
-            "type": "sizing"
-          },
-          "500": {
-            "value": "1.75px",
-            "type": "sizing"
-          }
         }
       }
     },
