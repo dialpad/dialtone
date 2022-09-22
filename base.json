@@ -807,6 +807,28 @@
         "500": {
           "value": "{size.base} * 3",
           "type": "sizing"
+        },
+        "stroke": {
+          "100": {
+            "value": "1px",
+            "type": "sizing"
+          },
+          "200": {
+            "value": "1.25px",
+            "type": "sizing"
+          },
+          "300": {
+            "value": "1.5px",
+            "type": "sizing"
+          },
+          "400": {
+            "value": "1.75px",
+            "type": "sizing"
+          },
+          "500": {
+            "value": "1.75px",
+            "type": "sizing"
+          }
         }
       }
     },
