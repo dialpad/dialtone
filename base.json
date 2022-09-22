@@ -958,7 +958,7 @@
       }
     }
   },
-  "button": {
+  "components/button": {
     "button": {
       "color": {
         "background": {
@@ -1120,7 +1120,7 @@
   "$metadata": {
     "tokenSetOrder": [
       "base",
-      "button"
+      "components/button"
     ]
   }
 }
