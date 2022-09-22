@@ -11,6 +11,9 @@ jobs:
   release-web:
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Check out branch
@@ -20,6 +23,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
+
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
       - name: parse branch from ref
         id: branch
@@ -40,24 +48,13 @@ jobs:
         if: ${{ github.ref != 'refs/heads/production' }}
         run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
 
-      - name: Github Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release --extends ./release-ci.config.js
-
-  release-android:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Publish package
+      - name: Deploy production - Maven
         if: ${{ github.ref == 'refs/heads/production' }}
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Github Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --extends ./release-ci.config.js
