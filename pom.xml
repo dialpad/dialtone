@@ -20,6 +20,14 @@
     </license>
   </licenses>
 
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>Dialtone Tokens Maven Packages</name>
+      <url>https://maven.pkg.github.com/dialpad/dialtone-tokens</url>
+    </repository>
+  </distributionManagement>
+
   <scm>
     <developerConnection>scm:git:https://github.com/dialpad/dialtone-tokens.git</developerConnection>
   </scm>
