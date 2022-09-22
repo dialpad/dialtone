@@ -22,5 +22,8 @@ module.exports = {
       /* eslint-disable-next-line no-template-curly-in-string */
       message: 'chore(release): ${nextRelease.version} \n\n${nextRelease.notes}',
     }],
+    ["@semantic-release/exec", {
+      "prepareCmd": "mvn versions:set -DnewVersion=${nextRelease.version}"
+    }],
   ],
 };
