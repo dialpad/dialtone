@@ -1,3 +1,10 @@
+# [3.17.0](https://github.com/dialpad/dialtone-vue/compare/v3.16.0...v3.17.0) (2022-09-23)
+
+
+### Features
+
+* dt-recipe-ivr-node vue3 ([#515](https://github.com/dialpad/dialtone-vue/issues/515)) ([b446d42](https://github.com/dialpad/dialtone-vue/commit/b446d4229be46c37d9bf21d1e2198748e7cb1ed4))
+
 # [3.16.0](https://github.com/dialpad/dialtone-vue/compare/v3.15.1...v3.16.0) (2022-09-15)
 
 
