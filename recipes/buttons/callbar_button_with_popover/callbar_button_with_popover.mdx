@@ -1,0 +1,78 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
+
+# Callbar Button With Popover
+
+<Subtitle>
+  Callbar button with a small arrow that opens a popover.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="recipes-buttons-callbar-button-with-popover--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="recipes-buttons-callbar-button-with-popover--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+This component also accepts all [Popover Component](?path=/docs/components-popover--default#slots-props--events) props.
+Those will be bind to the Popover instance.
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeCallbarButtonWithPopover } from '@dialpad/dialtone-vue';
+```
+
+### Default
+
+```html
+<dt-recipe-callbar-button-with-popover
+  @click="buttonClicked"
+>
+  ButtonLabel
+  <template #icon>
+    <icon-dialpad-ai />
+  </template>
+  <template #tooltip>
+    Tooltip text
+  </template>
+  <template #content>
+    Popover Body
+  </template>
+  <template #headerContent>
+    Popover Header
+  </template>
+</dt-recipe-callbar-button-with-popover>
+```
+
+### Icon-only, active, no tooltip, no close button
+
+```html
+<dt-recipe-callbar-button-with-popover
+  @click="buttonClicked"
+  :show-close-button="false"
+  active
+>
+  <template #icon>
+    <icon-dialpad-ai />
+  </template>
+  <template #content>
+    Popover Body
+  </template>
+  <template #headerContent>
+    Popover Header
+  </template>
+</dt-recipe-callbar-button-with-popover>
+```
