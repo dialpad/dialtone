@@ -10,8 +10,8 @@
       'd-px4',
       'd-ba',
       'd-bar4',
-      'd-fs12',
-      inverted ? 'd-bc-black-400' : 'd-bc-black-100',
+      'd-fs-100',
+      inverted ? 'd-bc-black-500' : 'd-bc-black-400',
     ]"
   >
     <span
@@ -30,7 +30,7 @@
         aria-hidden="true"
         :class="[
           'dt-keyboard-shortcut__svg',
-          inverted ? 'd-fc-black-075' : 'd-fc-black-500',
+          inverted ? 'd-fc-black-300' : 'd-fc-black-600',
           'd-mr2',
         ]"
       />
@@ -39,7 +39,7 @@
         :key="`${i}-${item}`"
         aria-hidden="true"
         :class="[
-          inverted ? 'd-fc-black-075' : 'd-fc-black-500',
+          inverted ? 'd-fc-black-300' : 'd-fc-black-600',
           'd-mr2',
         ]"
         v-html="item"

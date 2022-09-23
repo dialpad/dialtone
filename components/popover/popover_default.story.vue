@@ -41,7 +41,7 @@
       slot="content"
       slot-scope="{ close }"
     >
-      <div class="d-fs14 d-m0">
+      <div class="d-fs-200 d-m0">
         <span
           v-if="content"
           v-html="content"
