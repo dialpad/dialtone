@@ -1,3 +1,15 @@
+# [3.18.0](https://github.com/dialpad/dialtone-vue/compare/v3.17.0...v3.18.0) (2022-09-23)
+
+
+### Bug Fixes
+
+* dt-631 remove primary-color from dialtone vue ([#518](https://github.com/dialpad/dialtone-vue/issues/518)) ([28d89ec](https://github.com/dialpad/dialtone-vue/commit/28d89ec552264fc127d51aca7122e3913384fcbd))
+
+
+### Features
+
+* dp-46328 callbar buttons Vue3 ([#471](https://github.com/dialpad/dialtone-vue/issues/471)) ([4861677](https://github.com/dialpad/dialtone-vue/commit/4861677ef9373054ace54d8cb869600e046aa45a))
+
 # [3.17.0](https://github.com/dialpad/dialtone-vue/compare/v3.16.0...v3.17.0) (2022-09-23)
 
 
