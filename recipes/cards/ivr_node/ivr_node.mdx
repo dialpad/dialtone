@@ -1,0 +1,206 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeIvrNode from './ivr_node';
+
+# IVR Node
+
+<Subtitle>
+  IVR Node represents a step in the IVR Workflow configuration.
+</Subtitle>
+
+## Base Style
+
+A node in IVR configuration has header and content. Header contains icon, label and three dot menu with card actions.
+The base style contains a top connector indicator.
+
+<Canvas>
+  <Story id="recipes-cards-ivr-node--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeIvrNode } from '@dialpad/dialtone-vue';
+```
+
+## Menu Node
+
+A node in IVR configuration to configure DTMF types.
+
+<Canvas>
+    <Story id="recipes-cards-ivr-node--prompt-menu" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Menu"
+  :node-type="promptmenu"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fs14 d-fw-bold">Menu prompt</p>
+  <p class="d-fs14 d-fc-purple-700">americas_office-workflow_main-menu-2022--FINAL.mp3</p>
+</dt-recipe-ivr-node>
+```
+
+## Collect Node
+
+A node in IVR configuration to collect data like input, number, etc.
+
+<Canvas>
+    <Story id="recipes-cards-ivr-node--prompt-collect" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Collect"
+  :node-type="promptcollect"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fs14 d-fw-bold">Collect prompt</p>
+  <p class="d-fs14 d-fc-purple-700">americas_office-collect-menu-2022-FINAL.mp3</p>
+</dt-recipe-ivr-node>
+```
+
+## Play Node
+
+A node in IVR configuration to play media.
+
+<Canvas>
+    <Story id="recipes-cards-ivr-node--prompt-play" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Play"
+  :node-type="promptplay"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fs14 d-fc-purple-700">2022-Greeting.mp3</p>
+</dt-recipe-ivr-node>
+```
+
+## Expert Node
+
+A node in IVR used to integration DX expert view in iFrame to create complex flows.
+
+<Canvas>
+    <Story id="recipes-cards-ivr-node--expert" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Expert"
+  :node-type="gotoexpert"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fs14 d-fw-bold">Account Issues</p>
+  <p class="d-fs14">19 Nodes</p>
+  <dt-button importance="clear" icon-position="right">
+    Launch Expert
+    <template #icon>
+      <icon-launch />
+    </template>
+  </dt-button>
+</dt-recipe-ivr-node>
+```
+
+## Go-to Node
+
+A node in IVR used to step to another workflow or step in a workflow.
+
+<Canvas>
+    <Story id="recipes-cards-ivr-node--go-to" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Go to"
+  :node-type="goto"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fs14 d-fw-bold">Go to</p>
+  <p class="d-fs14">Description</p>
+</dt-recipe-ivr-node>
+```
+
+## Branch Node
+
+A node in IVR used to step to another workflow or step in a workflow.
+
+<Canvas>
+    <Story id="recipes-cards-ivr-node--branch" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Branch"
+  :node-type="branch"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fs14 d-fw-bold">Branch</p>
+  <p class="d-fs14">Description</p>
+</dt-recipe-ivr-node>
+```
+
+## Transfer Node
+
+A node in IVR used to transfer to person, department, call center, etc.
+
+<Canvas>
+    <Story id="recipes-cards-ivr-node--transfer" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Transfer"
+  :node-type="transfer"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <div class="d-d-flex d-ai-center d-gg8">
+    <dt-avatar>
+      <img data-qa="dt-avatar-image" src="static/components/avatar/person.png" alt="Person Avatar">
+    </dt-avatar>
+    <p>Carolina Garcia Rodriguez</p>
+  </div>
+</dt-recipe-ivr-node>
+```
+
+## Hangup Node
+
+A node in IVR used to terminate the call.
+
+<Canvas>
+    <Story id="recipes-cards-ivr-node--hangup" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Hangup"
+  :node-type="hangup"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fs14 d-fw-bold">Hangup</p>
+  <p class="d-fs14">Description</p>
+</dt-recipe-ivr-node>
+```

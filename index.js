@@ -41,6 +41,7 @@ export * from './recipes/buttons/callbar_button';
 export * from './recipes/buttons/callbar_button_with_popover';
 export * from './recipes/list_items/contact_info';
 export * from './recipes/notices/top_banner_info';
+export * from './recipes/cards/ivr_node';
 
 // Mixins
 export * from './common/mixins';
