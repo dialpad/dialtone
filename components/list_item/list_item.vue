@@ -222,6 +222,6 @@ export default {
 }
 
 .dt-list-item:focus-visible {
-  outline-color: var(--primary-color);
+  outline-color: var(--purple-500);
 }
 </style>
