@@ -35,7 +35,7 @@
       </dt-button>
     </template>
     <template #content="{ close }">
-      <div class="d-fs14 d-m0">
+      <div class="d-fs-200 d-m0">
         <span
           v-if="$attrs.content"
           v-html="$attrs.content"

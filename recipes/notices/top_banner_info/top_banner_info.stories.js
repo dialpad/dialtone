@@ -8,7 +8,7 @@ import { COLOR_CODES } from './top_banner_info_constants';
 
 // Default Prop Values
 export const argsData = {
-  colorCode: 'green400',
+  colorCode: 'green300',
   onEvent: action('event'),
 };
 

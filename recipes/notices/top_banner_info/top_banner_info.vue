@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-fs11 d-d-flex d-top-banner-info d-jc-space-between d-ai-center"
+    class="d-fs-100 d-d-flex d-top-banner-info d-jc-space-between d-ai-center"
     :class="bannerInfoClass"
     data-qa="banner-info"
   >
@@ -30,7 +30,7 @@ export default {
      */
     colorCode: {
       type: String,
-      default: 'green400',
+      default: 'green300',
       validator: function (kind) {
         return COLOR_CODES.includes(kind);
       },
@@ -40,13 +40,13 @@ export default {
   computed: {
     bannerInfoClass () {
       const bgColors = {
-        green400: 'd-bgc-green-400',
-        green200: 'd-bgc-green-200',
+        green300: 'd-bgc-green-300',
+        green100: 'd-bgc-green-100',
         red200: 'd-bgc-red-200',
         red100: 'd-bgc-red-100',
-        yellow400: 'd-bgc-yellow-400',
-        yellow200: 'd-bgc-yellow-200',
-        black100: 'd-bgc-black-100',
+        gold200: 'd-bgc-gold-200',
+        gold100: 'd-bgc-gold-100',
+        black100: 'd-bgc-black-400',
         white: 'd-bgc-white',
       };
       return [bgColors[this.colorCode]];
