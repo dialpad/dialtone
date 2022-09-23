@@ -964,7 +964,7 @@
       }
     }
   },
-  "components/button": {
+  "components/foo": {
     "button": {
       "color": {
         "background": {
@@ -1122,14 +1122,14 @@
       }
     }
   },
-  "components/badge": {},
+  "components/bar": {},
   "$themes": [],
   "$metadata": {
     "tokenSetOrder": [
       "base",
       "semantic",
-      "components/button",
-      "components/badge"
+      "components/foo",
+      "components/bar"
     ]
   }
 }
