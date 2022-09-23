@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 
+var Color = require('tinycolor2');
+
 const StyleDictionary = require('style-dictionary').extend('config.js');
 
 // Identifiers
+const SPACING_IDENTIFIERS = ['spacing'];
 const SIZE_IDENTIFIERS = ['fontSizes', 'fontSize', 'sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y'];
+const LINE_HEIGHT_IDENTIFIERS = ['lineHeights', 'lineHeight'];
+const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
 const WEIGHT_IDENTIFIERS = ['fontWeights', 'fontWeight'];
 const FONT_FAMILY_IDENTIFIERS = ['fontFamilies']
 
@@ -46,14 +51,27 @@ StyleDictionary.registerTransform({
   },
   transformer: (token, options) => {
     if (token.name === 'body' || token.name === 'expressive') {
-      return `${token.value}, ${FALLBACK_FONTS}`
+      return `"${token.value}, ${FALLBACK_FONTS}"`
     }
     else if (token.name === 'mono') {
-      return `${token.value}, ${FALLBACK_FONTS_MONO}`
+      return `"${token.value}, ${FALLBACK_FONTS_MONO}"`
     }
     return token.value;
   }
 });
+
+StyleDictionary.registerTransform({
+  name: 'dt/composeColor',
+  type: 'value',
+  matcher: function(token) {
+    return ['color'].includes(token.type)
+  },
+  transformer: (token, options) => {
+    const hex8 = Color(token.value).toHex8();
+    return `Color(0x${hex8})`;
+  }
+});
+
 
 StyleDictionary.registerTransform({
   name: 'dt/size/pxToRem',
@@ -74,6 +92,83 @@ StyleDictionary.registerTransform({
     }
 
     return `${floatVal / baseFont}rem`;
+  }
+});
+
+StyleDictionary.registerTransform({
+  name: 'dt/size/pxToDp',
+  type: 'value',
+  matcher: function(token) {
+    return SIZE_IDENTIFIERS.includes(token.type)
+  },
+  transformer: (token, options) => {
+    const baseFont = 16;
+    const floatVal = parseFloat(token.value);
+
+    if (isNaN(floatVal)) {
+      throwSizeError(token.name, token.value, 'dp');
+    }
+
+    if (floatVal === 0) {
+      return '0';
+    }
+
+    return `${floatVal / baseFont}.dp`;
+  }
+});
+
+//Sp is for font sizes only
+StyleDictionary.registerTransform({
+  name: 'dt/size/pxToSp',
+  type: 'value',
+  matcher: function(token) {
+    return [...SPACING_IDENTIFIERS, ...FONT_SIZE_IDENTIFIERS].includes(token.type)
+  },
+  transformer: (token, options) => {
+    const baseFont = 16;
+    const floatVal = parseFloat(token.value);
+
+    if (isNaN(floatVal)) {
+      throwSizeError(token.name, token.value, 'sp');
+    }
+
+    if (floatVal === 0) {
+      return '0';
+    }
+
+    return `${floatVal / baseFont}.sp`;
+  }
+});
+
+StyleDictionary.registerTransform({
+  name: 'dt/lineHeight/percentToDecimal',
+  type: 'value',
+  matcher: function(token) {
+    return LINE_HEIGHT_IDENTIFIERS.includes(token.type)
+  },
+  transformer: (token, options) => {
+    const floatVal = parseFloat(token.value);
+
+    if (isNaN(floatVal)) {
+      throwSizeError(token.name, token.value, '%');
+    }
+
+    if (floatVal === 0) {
+      return '0';
+    }
+
+    return `${floatVal / 100}`;
+  }
+});
+
+StyleDictionary.registerTransform({
+  name: 'dt/stringify',
+  type: 'value',
+  matcher: function(token) {
+    return [...WEIGHT_IDENTIFIERS, 'type', 'textCase', 'fontFamily'].includes(token.type)
+  },
+  transformer: (token, options) => {
+    return `"${token.value}"`;
   }
 });
 

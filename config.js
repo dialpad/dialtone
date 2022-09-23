@@ -23,7 +23,7 @@ module.exports = {
         },
       ],
     },
-    android: {
+    android_xml: {
       transformGroup: 'android',
       prefix: 'dt',
       buildPath: 'dist/android/',
@@ -45,6 +45,22 @@ module.exports = {
           },
         },
       ],
+    },
+    android_compose: {
+      transforms: ['dt/fonts/transformToStack',  'dt/lineHeight/percentToDecimal', 'dt/size/pxToDp', 'dt/size/pxToSp', 'dt/composeColor', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
+      prefix: 'dt',
+      buildPath: 'dist/android/',
+      files: [
+        {
+          destination: 'tokens.kt',
+          format: 'compose/object',
+          packageName: 'design.dialpad',
+          className: 'DialtoneTokens',
+          filter: function(token) {
+            return token.path[0] !== 'tokenSetOrder';
+        },
+        }
+      ]
     },
     ios: {
       transformGroup: 'ios',
