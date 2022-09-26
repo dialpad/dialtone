@@ -186,6 +186,7 @@ Default.args = {
   content: 'Popover body content',
   headerContent: 'Header content',
   showCloseButton: true,
+  forceShowArrow: false,
   icon: 'IconDialpadAi',
 };
 
