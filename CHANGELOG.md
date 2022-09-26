@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/dialpad/dialtone-tokens/compare/v1.1.2...v1.2.0) (2022-09-26)
+
+
+### Bug Fixes
+
+* contents permissions to write ([fb2fa4c](https://github.com/dialpad/dialtone-tokens/commit/fb2fa4c62d93b3340694ff3e747f8e927736ead1))
+
+
+### Features
+
+* add compose to maven jar ([b1fa23c](https://github.com/dialpad/dialtone-tokens/commit/b1fa23c9c7627edccfacdabfd292f09da70566cc))
+
 ## [1.1.2](https://github.com/dialpad/dialtone-tokens/compare/v1.1.1...v1.1.2) (2022-09-22)
 
 
