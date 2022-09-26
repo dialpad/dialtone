@@ -6,7 +6,7 @@
 
   <groupId>design.dialpad.tokens</groupId>
   <artifactId>dialtone-tokens</artifactId>
-  <version>1.1.2</version>
+  <version>1.2.0</version>
 
   <name>Dialtone Tokens</name>
   <description>Design tokens for Dialpad's design system, Dialtone.</description>
