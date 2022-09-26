@@ -694,6 +694,18 @@
         "contrast": {
           "value": "{color.black.800}",
           "type": "color"
+        },
+        "error": {
+          "value": "{color.red.100}",
+          "type": "color"
+        },
+        "warning": {
+          "value": "{color.gold.100}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.green.100}",
+          "type": "color"
         }
       }
     },
