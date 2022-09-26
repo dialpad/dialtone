@@ -2,8 +2,8 @@ import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover';
 import DtRecipeComboboxWithPopoverMdx from './combobox_with_popover.mdx';
-import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
-import { POPOVER_CONTENT_WIDTHS } from '@';
+import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story';
+import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/popover_constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
 
 // Default Prop Values

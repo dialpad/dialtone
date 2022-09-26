@@ -16,7 +16,7 @@
     <dt-lazy-show
       :id="id"
       ref="content"
-      :show="isShown && (!!message.trim() || !!$slots.default)"
+      :show="isShown && (!!message.trim() || !defaultSlotIsEmpty)"
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"
@@ -196,6 +196,20 @@ export default {
           onChangePlacement: this.onChangePlacement,
         }),
       };
+    },
+
+    defaultSlotIsEmpty () {
+      const defaultSlotContents = this.$slots?.default();
+      const slotItemCount = defaultSlotContents?.length;
+
+      const slotIsEmpty = slotItemCount === 1 &&
+        (defaultSlotContents[0].type.toString() === 'Symbol(Comment)' ||
+        (
+          defaultSlotContents[0].type.toString() === 'Symbol(Fragment)' &&
+          defaultSlotContents[0].children.length === 0)
+        );
+
+      return !slotItemCount || slotIsEmpty;
     },
   },
 
