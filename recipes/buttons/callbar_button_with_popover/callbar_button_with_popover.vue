@@ -21,9 +21,8 @@
       <slot />
     </dt-recipe-callbar-button>
     <dt-popover
-      v-if="!disabled"
+      v-if="showArrowButton"
       :id="id"
-      :disabled="disabled"
       :open="open"
       :placement="placement"
       :initial-focus-element="initialFocusElement"
@@ -161,6 +160,16 @@ export default {
     },
 
     /**
+     * Forces showing the arrow, even if the button is disabled.
+     * default is false
+     * @values true, false
+     */
+    forceShowArrow: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Determines whether the button should have active styling
      * default is false.
      * @values true, false
@@ -195,6 +204,12 @@ export default {
     return {
       open: false,
     };
+  },
+
+  computed: {
+    showArrowButton () {
+      return this.forceShowArrow || !this.disabled;
+    },
   },
 
   methods: {

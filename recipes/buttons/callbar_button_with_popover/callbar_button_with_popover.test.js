@@ -94,6 +94,13 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
       assert.isFalse(arrow.exists());
     });
 
+    it('should render the arrow if disabled but the forceShowArrow prop is true', async function () {
+      await wrapper.setProps({ disabled: true, forceShowArrow: true });
+      _setChildWrappers();
+
+      assert.isTrue(arrow.exists());
+    });
+
     it('should propagate disabled, active and danger props to the button component', async function () {
       await wrapper.setProps({ disabled: true, active: true, danger: true });
       _setChildWrappers();

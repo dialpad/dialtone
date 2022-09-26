@@ -7,6 +7,7 @@
     :initial-focus-element="initialFocusElement"
     :show-close-button="showCloseButton"
     :disabled="disabled"
+    :force-show-arrow="forceShowArrow"
     :active="active"
     :danger="danger"
     @arrow-click="onClick"
