@@ -972,6 +972,18 @@
         "500": {
           "value": "{size.base} * 3",
           "type": "sizing"
+        },
+        "600": {
+          "value": "{size.base} * 4",
+          "type": "sizing"
+        },
+        "700": {
+          "value": "{size.base} * 4.75",
+          "type": "sizing"
+        },
+        "800": {
+          "value": "{size.base} * 6",
+          "type": "sizing"
         }
       }
     }
