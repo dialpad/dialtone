@@ -193,6 +193,6 @@ export default {
 }
 
 .dt-list-item:focus-visible {
-  outline-color: hsl(var(--purple-400-h) var(--purple-400-s) var(--purple-400-l));
+  outline-color: var(--purple-500);
 }
 </style>
