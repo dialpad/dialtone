@@ -1,6 +1,16 @@
 {
   "base": {
     "color": {
+      "neutral": {
+        "white": {
+          "value": "#fff",
+          "type": "color"
+        },
+        "black": {
+          "value": "{color.black.900}",
+          "type": "color"
+        }
+      },
       "black": {
         "100": {
           "value": "#F9F9F9",
@@ -204,16 +214,6 @@
         },
         "500": {
           "value": "#121212",
-          "type": "color"
-        }
-      },
-      "neutral": {
-        "white": {
-          "value": "#fff",
-          "type": "color"
-        },
-        "black": {
-          "value": "#000",
           "type": "color"
         }
       }
@@ -622,6 +622,12 @@
   },
   "semantic": {
     "color": {
+      "text-link": {
+        "primary": {
+          "value": "{color.purple.400}",
+          "type": "color"
+        }
+      },
       "text": {
         "primary": {
           "value": "{color.black.900}",
