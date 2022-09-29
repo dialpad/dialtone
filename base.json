@@ -783,7 +783,7 @@
             },
             "type": "typography"
           },
-          "base": {
+          "medium": {
             "value": {
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.bold}",
