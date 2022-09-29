@@ -810,7 +810,8 @@
               "lineHeight": "{font.lineHeight.200}",
               "fontSize": "{font.size.100}"
             },
-            "type": "typography"
+            "type": "typography",
+            "description": "subheading"
           },
           "medium": {
             "value": {
@@ -838,7 +839,8 @@
                 "lineHeight": "{font.lineHeight.200}",
                 "fontSize": "{font.size.100}"
               },
-              "type": "typography"
+              "type": "typography",
+              "description": "subhead"
             }
           }
         }
