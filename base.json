@@ -772,7 +772,8 @@
             "lineHeight": "{font.lineHeight.400}",
             "fontSize": "{font.size.300}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "section"
         },
         "extra-large": {
           "value": {
@@ -781,7 +782,8 @@
             "lineHeight": "{font.lineHeight.200}",
             "fontSize": "{font.size.400}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "display"
         },
         "extra-extra-large": {
           "value": {
@@ -790,7 +792,8 @@
             "lineHeight": "{font.lineHeight.200}",
             "fontSize": "{font.size.500}"
           },
-          "type": "typography"
+          "type": "typography",
+          "description": "page head"
         },
         "soft": {
           "small": {
