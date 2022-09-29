@@ -800,7 +800,8 @@
               "lineHeight": "{font.lineHeight.300}",
               "fontSize": "{font.size.100}"
             },
-            "type": "typography"
+            "type": "typography",
+            "description": "subhead"
           }
         },
         "compact": {
