@@ -64,7 +64,7 @@ jobs:
         uses: cpina/github-action-push-to-another-repository@v1.5.1
         continue-on-error: true
         env:
-          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_NPM_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
         with:
           user-email: 'dialtone@dialpad.com'
           source-directory: 'dist_ios'
