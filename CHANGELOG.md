@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/dialpad/dialtone-tokens/compare/v1.3.1...v1.3.2) (2022-09-29)
+
+
+### Bug Fixes
+
+* add dialtone_ci_token ([10ea3f3](https://github.com/dialpad/dialtone-tokens/commit/10ea3f357efb751e37d913cb9297851f9f6fb219))
+
 ## [1.3.1](https://github.com/dialpad/dialtone-tokens/compare/v1.3.0...v1.3.1) (2022-09-29)
 
 
