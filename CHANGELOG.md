@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/dialpad/dialtone-tokens/compare/v1.3.0...v1.3.1) (2022-09-29)
+
+
+### Bug Fixes
+
+* continue on error true ([d750fef](https://github.com/dialpad/dialtone-tokens/commit/d750fef56f343a87419787290744f4bf51549eb0))
+
 # [1.3.0](https://github.com/dialpad/dialtone-tokens/compare/v1.2.0...v1.3.0) (2022-09-29)
 
 
