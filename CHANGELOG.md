@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/dialpad/dialtone-tokens/compare/v1.2.0...v1.3.0) (2022-09-29)
+
+
+### Features
+
+* add swift deploy ([df2750f](https://github.com/dialpad/dialtone-tokens/commit/df2750faa7277db90e9d352f68ead2a9ce5ac8ec))
+
 # [1.2.0](https://github.com/dialpad/dialtone-tokens/compare/v1.1.2...v1.2.0) (2022-09-26)
 
 
