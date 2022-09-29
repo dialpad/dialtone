@@ -45,20 +45,24 @@ jobs:
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
+        continue-on-error: true
 
       - name: Deploy prerelease
         if: ${{ github.ref != 'refs/heads/production' }}
         run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
+        continue-on-error: true
 
       - name: Deploy production - Maven
         if: ${{ github.ref == 'refs/heads/production' }}
         run: mvn --batch-mode deploy
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy production - Swift
         if: ${{ github.ref == 'refs/heads/production' }}
         uses: cpina/github-action-push-to-another-repository@v1.5.1
+        continue-on-error: true
         env:
           API_TOKEN_GITHUB: ${{ secrets.DIALTONE_NPM_TOKEN }}
         with:
