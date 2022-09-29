@@ -773,6 +773,35 @@
           },
           "type": "typography"
         },
+        "extra-large": {
+          "value": {
+            "fontFamily": "{font.family.body}",
+            "fontWeight": "{font.weight.medium}",
+            "lineHeight": "{font.lineHeight.200}",
+            "fontSize": "{font.size.400}"
+          },
+          "type": "typography"
+        },
+        "extra-extra-large": {
+          "value": {
+            "fontFamily": "{font.family.body}",
+            "fontWeight": "{font.weight.medium}",
+            "lineHeight": "{font.lineHeight.200}",
+            "fontSize": "{font.size.500}"
+          },
+          "type": "typography"
+        },
+        "soft": {
+          "small": {
+            "value": {
+              "fontFamily": "{font.family.body}",
+              "fontWeight": "{font.weight.medium}",
+              "lineHeight": "{font.lineHeight.300}",
+              "fontSize": "{font.size.100}"
+            },
+            "type": "typography"
+          }
+        },
         "compact": {
           "small": {
             "value": {
@@ -800,25 +829,18 @@
               "fontSize": "{font.size.300}"
             },
             "type": "typography"
+          },
+          "soft": {
+            "small": {
+              "value": {
+                "fontFamily": "{font.family.body}",
+                "fontWeight": "{font.weight.medium}",
+                "lineHeight": "{font.lineHeight.200}",
+                "fontSize": "{font.size.100}"
+              },
+              "type": "typography"
+            }
           }
-        },
-        "extra-large": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.medium}",
-            "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.400}"
-          },
-          "type": "typography"
-        },
-        "extra-extra-large": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.medium}",
-            "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.500}"
-          },
-          "type": "typography"
         }
       },
       "label": {
