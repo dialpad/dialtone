@@ -72,6 +72,21 @@ StyleDictionary.registerTransform({
   }
 });
 
+StyleDictionary.registerTransform({
+  name: 'dt/swiftColor',
+  type: 'value',
+  matcher: function(token) {
+    return ['color'].includes(token.type)
+  },
+  transformer: (token, options) => {
+    const { r, g, b, a } = Color(token.value).toRgb();
+    const rFixed = (r / 255.0).toFixed(3);
+    const gFixed = (g / 255.0).toFixed(3);
+    const bFixed = (b / 255.0).toFixed(3);
+    return `UIColor(red: ${rFixed}, green: ${gFixed}, blue: ${bFixed}, alpha: ${a})`;
+  }
+});
+
 
 StyleDictionary.registerTransform({
   name: 'dt/size/pxToRem',
@@ -141,6 +156,24 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
+  name: 'dt/size/pxToCGFloat',
+  type: 'value',
+  matcher: function(token) {
+    return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type)
+  },
+  transformer: (token, options) => {
+    const baseFont = 16;
+    const floatVal = parseFloat(token.value);
+
+    if (isNaN(floatVal)) {
+      throwSizeError(token.name, token.value, 'dp');
+    }
+
+    return `CGFloat(${(floatVal / baseFont).toFixed(2)})`;
+  }
+});
+
+StyleDictionary.registerTransform({
   name: 'dt/lineHeight/percentToDecimal',
   type: 'value',
   matcher: function(token) {
@@ -158,6 +191,23 @@ StyleDictionary.registerTransform({
     }
 
     return `${floatVal / 100}`;
+  }
+});
+
+StyleDictionary.registerTransform({
+  name: 'dt/lineHeight/swift/percentToDecimal',
+  type: 'value',
+  matcher: function(token) {
+    return ['opacity', ...LINE_HEIGHT_IDENTIFIERS].includes(token.type)
+  },
+  transformer: (token, options) => {
+    const floatVal = parseFloat(token.value);
+
+    if (isNaN(floatVal)) {
+      throwSizeError(token.name, token.value, '%');
+    }
+
+    return `CGFloat(${(floatVal).toFixed(2)})`;
   }
 });
 

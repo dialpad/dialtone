@@ -56,6 +56,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Deploy production - Swift
+        if: ${{ github.ref == 'refs/heads/production' }}
+        uses: cpina/github-action-push-to-another-repository@v1.5.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_NPM_TOKEN }}
+        with:
+          user-email: 'dialtone@dialpad.com'
+          source-directory: 'dist_ios'
+          destination-repository-name: 'dialtone-tokens-swift'
+          destination-github-username: 'dialpad'
+          commit-message: "dialtone-tokens-swift release"
+
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

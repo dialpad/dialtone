@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run transform && ./build.js",
+    "build": "npm run transform && ./build.js && ./build-android.js && ./build-ios.js",
     "transform": "token-transformer base.json tokens/tokens.json --expandTypography=true --expandShadow=true",
     "prepublishOnly": "npm run build",
     "release": "semantic-release --no-ci --extends ./release-local.config.js"

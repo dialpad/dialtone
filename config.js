@@ -58,18 +58,22 @@ module.exports = {
           className: 'DialtoneTokens',
           filter: function(token) {
             return token.path[0] !== 'tokenSetOrder';
-        },
+          },
         }
       ]
     },
     ios: {
-      transformGroup: 'ios',
+      transforms: ['dt/fonts/transformToStack',  'attribute/cti', 'name/cti/camel', 'dt/swiftColor', 'dt/size/pxToCGFloat', 'dt/lineHeight/swift/percentToDecimal', 'dt/stringify'],
       prefix: 'dt',
       buildPath: 'dist/ios/',
       files: [
         {
-          destination: 'dialtone.swift',
+          destination: 'tokens.swift',
           format: 'ios-swift/enum.swift',
+          className: 'DialtoneTokens',
+          filter: function(token) {
+            return token.path[0] !== 'tokenSetOrder';
+          },
         },
       ],
     },
