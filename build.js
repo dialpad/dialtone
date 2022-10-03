@@ -15,7 +15,7 @@ const FONT_FAMILY_IDENTIFIERS = ['fontFamilies']
 // Values
 const FALLBACK_FONTS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
 const FALLBACK_FONTS_MONO = "SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace";
-const BASE_FONT_SIZE = 10.0;
+const BASE_FONT_SIZE = require('./base.json').base.font.size.root.value;
 const WEIGHT = {
   'Light': 300,
   'Regular': 400,
@@ -25,7 +25,7 @@ const WEIGHT = {
 }
 
 function getBasePxFontSize(options) {
-  return (options && options.basePxFontSize) || BASE_FONT_SIZE;
+  return (options && options.basePxFontSize) || Number.parseFloat(BASE_FONT_SIZE);
 }
 
 function throwSizeError(name, value, unitType) {
