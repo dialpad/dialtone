@@ -1,3 +1,10 @@
+# [2.28.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v2.28.0-beta.1...v2.28.0-beta.2) (2022-10-03)
+
+
+### Bug Fixes
+
+* remove peer dep for beta ([e4f825f](https://github.com/dialpad/dialtone-vue/commit/e4f825f7ed432ceb3f40d4263f74714a151eb9be))
+
 # [2.28.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.27.0...v2.28.0-beta.1) (2022-10-03)
 
 
