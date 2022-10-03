@@ -38,4 +38,6 @@ jobs:
           echo "The PR's title should adhere to the commit message convention."
           echo "correct format: <type>(<scope>): <subject>"
           echo "example: feat: add modal component"
-          echo ${{ github.event.pull_request.title }} | npx commitlint --verbose
+          npx commitlint --verbose << EOF
+          ${{ github.event.pull_request.title }}
+          EOF

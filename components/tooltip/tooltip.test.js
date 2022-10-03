@@ -7,7 +7,7 @@ import {
   TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 
-describe('Dialtone Vue Tooltip tests', function () {
+describe('DtTooltip tests', function () {
   // Wrappers
   let wrapper;
   let tooltipContainer;
@@ -115,7 +115,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       describe('When a placement is provided', function () {
         TOOLTIP_DIRECTIONS.forEach(placement => describe(`When direction is ${placement}`, function () {
           beforeEach(async function () {
-            await wrapper.setProps({ placement: placement });
+            await wrapper.setProps({ placement });
           });
 
           it('should have correct arrow direction class', async function () {

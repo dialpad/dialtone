@@ -16,7 +16,7 @@ const basePropsData = {
   href: '#',
 };
 
-describe('Dialtone Vue Link tests', function () {
+describe('DtLink tests', function () {
   // Wrappers
   let wrapper;
   let nativeLink;

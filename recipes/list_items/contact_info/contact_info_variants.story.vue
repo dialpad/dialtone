@@ -1,4 +1,3 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
   <div class="d-divide-y d-divide-purple-400">
     <div class="d-m32">

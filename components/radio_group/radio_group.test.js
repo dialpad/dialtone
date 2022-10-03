@@ -13,7 +13,7 @@ const basePropsData = {
 };
 const baseAttrs = { 'aria-label': 'Test Radio Group' };
 
-describe('Dialtone Vue Radio Group Tests', function () {
+describe('DtRadioGroup Tests', function () {
   // Wrappers
   let wrapper;
   let radioGroup;

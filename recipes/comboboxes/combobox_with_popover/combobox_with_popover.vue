@@ -2,6 +2,8 @@
   <dt-combobox
     ref="combobox"
     :loading="loading"
+    :empty-list="emptyList"
+    :empty-state-message="emptyStateMessage"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -29,7 +31,7 @@
         />
       </div>
     </template>
-    <template #list="{ opened, listProps, clearHighlightIndex, isLoading, isListEmpty }">
+    <template #list="{ opened, listProps, clearHighlightIndex }">
       <dt-popover
         ref="popover"
         :open.sync="isListShown"
@@ -44,7 +46,7 @@
         :external-anchor="externalAnchor"
         :content-width="contentWidth"
         :content-tabindex="null"
-        :modal="false"
+        :modal="modal"
         :auto-focus="false"
         @opened="opened($event, arguments[1]);"
       >
@@ -66,11 +68,11 @@
             @focusout="clearHighlightIndex; onFocusOut;"
           >
             <combobox-loading-list
-              v-if="isLoading"
+              v-if="loading"
               v-bind="listProps"
             />
             <combobox-empty-list
-              v-else-if="isListEmpty"
+              v-else-if="emptyList && emptyStateMessage"
               v-bind="listProps"
               :message="emptyStateMessage"
             />
@@ -99,7 +101,8 @@
 <script>
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
-import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
+import { DtCombobox } from '@/components/combobox';
+import { DtPopover, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
 import {
   DROPDOWN_PADDING_CLASSES,
@@ -234,6 +237,15 @@ export default {
     },
 
     /**
+     * Determines modal state. If enabled popover has a modal overlay
+     * preventing interaction with elements below it, but it is invisible.
+     */
+    modal: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Displays the list when the combobox is focused, before the user has typed anything.
      * When this is enabled the list will not close after selection.
      */
@@ -246,6 +258,14 @@ export default {
      * Determines when to show the skeletons and also controls aria-busy attribute.
      */
     loading: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Sets the list to an empty state, and displays the message from prop `emptyStateMessage`.
+     */
+    emptyList: {
       type: Boolean,
       default: false,
     },
@@ -359,10 +379,12 @@ export default {
 
     onFocusOut (e) {
       const comboboxRefs = ['input', 'header', 'footer', 'listWrapper'];
+      // Check if the focus change was to another target within the combobox component
       const isComboboxStillFocused = comboboxRefs.some((ref) => {
         return this.$refs[ref]?.contains(e.relatedTarget);
       });
 
+      // If outside of the combobox then close
       if (!isComboboxStillFocused) {
         this.closeComboboxList();
       }

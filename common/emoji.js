@@ -136,7 +136,8 @@ export function shortcodeToEmojiData (shortcode) {
 
 // Takes in an emoji unicode character(s) and converts it to an emoji string in the format the emoji data object expects
 // as a key. There can be multiple unicode characters in an emoji to denote the emoji itself, skin tone, gender
-// and such.
+// and such. Note that this function does NOT return variation selectors (fe0f) or zero width joiners (200d), as these
+// are not included as part of the key in the emoji.json.
 //
 // Example:
 // return value for smile emoji (no skin tone): 1f600
@@ -144,6 +145,10 @@ export function shortcodeToEmojiData (shortcode) {
 export function unicodeToString (emoji) {
   let key = '';
   for (const codePoint of emoji) {
+    const codepoint = codePoint.codePointAt(0).toString(16);
+
+    // skip 200d and fe0f as these are not included in emoji_strategy.json keys
+    if (['200d', 'fe0f'].includes(codepoint)) continue;
     if (key !== '') { key = key + '-'; }
     key = key + codePoint.codePointAt(0).toString(16);
   }

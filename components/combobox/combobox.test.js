@@ -11,7 +11,7 @@ const basePropsData = {
   loading: false,
 };
 
-describe('Dialtone Vue Combobox tests', function () {
+describe('DtCombobox Tests', function () {
   // Wrappers
   let wrapper;
   let inputWrapper;
@@ -106,7 +106,7 @@ describe('Dialtone Vue Combobox tests', function () {
       beforeEach(async function () {
         slots = { list: '<ol id="list"></ol>' };
         _mountWrapper();
-        await wrapper.setProps({ showList: true });
+        await wrapper.setProps({ showList: true, emptyList: true, emptyStateMessage: 'empty' });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
       });

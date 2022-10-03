@@ -49,6 +49,7 @@ jobs:
     - name: Visual Tests
       env:
         PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+        PERCY_TARGET_BRANCH: staging
       run: npx percy storybook --verbose storybook/compiled
 
     - name: Deploy to GitHub Pages

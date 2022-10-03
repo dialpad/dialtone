@@ -13,6 +13,8 @@
     :list-class="listClass"
     :open-with-arrow-keys="openWithArrowKeys"
     :has-suggestion-list="hasSuggestionList"
+    :empty-list="emptyList"
+    :modal="modal"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
@@ -71,7 +73,9 @@
 
 <script>
 import DtRecipeComboboxWithPopover from './combobox_with_popover';
-import { DtInput, DtListItem, DtCheckbox } from '@';
+import DtInput from '@/components/input/input';
+import DtListItem from '@/components/list_item/list_item';
+import DtCheckbox from '@/components/checkbox/checkbox';
 
 export default {
   name: 'DtRecipeComboboxWithPopoverDefault',

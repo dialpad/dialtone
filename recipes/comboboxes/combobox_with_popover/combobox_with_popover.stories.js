@@ -2,8 +2,8 @@ import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover';
 import DtRecipeComboboxWithPopoverMdx from './combobox_with_popover.mdx';
-import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
-import { POPOVER_CONTENT_WIDTHS } from '@';
+import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story';
+import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/popover_constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
 
 // Default Prop Values
@@ -12,7 +12,6 @@ export const argsData = {
   onHighlight: action('highlight'),
   onSelect: action('select'),
   onOpened: action('opened'),
-  emptyStateMessage: 'No matches found.',
 };
 
 export const argTypesData = {
@@ -120,12 +119,11 @@ export const argTypesData = {
   listAriaLabel: {
     defaultValue: 'Example list items',
   },
+  emptyList: {
+    defaultValue: false,
+  },
   loading: {
-    table: {
-      defaultValue: {
-        summary: false,
-      },
-    },
+    defaultValue: false,
   },
 
   // Action Event Handlers
@@ -247,6 +245,8 @@ Default.parameters = {
 export const Empty = DefaultTemplate.bind({});
 Empty.args = {
   items: [],
+  emptyStateMessage: 'No matches found.',
+  emptyList: true,
 };
 Empty.parameters = {
   a11y: {

@@ -1,3 +1,110 @@
+# [2.27.0](https://github.com/dialpad/dialtone-vue/compare/v2.26.1...v2.27.0) (2022-09-23)
+
+
+### Features
+
+* dt-recipe-ivr-node ([#512](https://github.com/dialpad/dialtone-vue/issues/512)) ([321715c](https://github.com/dialpad/dialtone-vue/commit/321715c26637dbf0ebe741efe7bead21a1d693b2))
+
+## [2.26.1](https://github.com/dialpad/dialtone-vue/compare/v2.26.0...v2.26.1) (2022-09-21)
+
+
+### Bug Fixes
+
+* css specificity in callbar button ([8c9f023](https://github.com/dialpad/dialtone-vue/commit/8c9f0233a6a7124836b6cf5b3f2790b4b760ae6e))
+
+# [2.26.0](https://github.com/dialpad/dialtone-vue/compare/v2.25.1...v2.26.0) (2022-09-13)
+
+
+### Features
+
+* dt-card ([#489](https://github.com/dialpad/dialtone-vue/issues/489)) ([4f8a703](https://github.com/dialpad/dialtone-vue/commit/4f8a70349a8288d4cfddbdc97d9fbec493c6a710))
+
+## [2.25.1](https://github.com/dialpad/dialtone-vue/compare/v2.25.0...v2.25.1) (2022-09-12)
+
+
+### Bug Fixes
+
+* **combobox-multi-select:** fix keyboard navigation ([#482](https://github.com/dialpad/dialtone-vue/issues/482)) ([37048f2](https://github.com/dialpad/dialtone-vue/commit/37048f22147646319981fbe89f043a0504cc0ec1))
+
+# [2.25.0](https://github.com/dialpad/dialtone-vue/compare/v2.24.0...v2.25.0) (2022-09-07)
+
+
+### Bug Fixes
+
+* **contact-info:** dp-55162 Circular avatar shape ([#478](https://github.com/dialpad/dialtone-vue/issues/478)) ([8b9f60f](https://github.com/dialpad/dialtone-vue/commit/8b9f60ff082170639f7ca7472915e3707ab94788))
+
+
+### Features
+
+* **banner:** set background, hide icon, custom classes ([#476](https://github.com/dialpad/dialtone-vue/issues/476)) ([1beab88](https://github.com/dialpad/dialtone-vue/commit/1beab88adb10c8ee4f09ce883c657d973abdccec))
+
+# [2.24.0](https://github.com/dialpad/dialtone-vue/compare/v2.23.0...v2.24.0) (2022-09-06)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** add modal prop ([#472](https://github.com/dialpad/dialtone-vue/issues/472)) ([9b79f1a](https://github.com/dialpad/dialtone-vue/commit/9b79f1ada0b8eae37323518856d35a749fec6464))
+
+
+### Features
+
+* **dropdown:** add context menu support ([#461](https://github.com/dialpad/dialtone-vue/issues/461)) ([7cf9b44](https://github.com/dialpad/dialtone-vue/commit/7cf9b444c146c9f0a955461e8987317ab4b18ba7))
+* **root-layout:** add bodyClass prop ([#475](https://github.com/dialpad/dialtone-vue/issues/475)) ([c05dfd0](https://github.com/dialpad/dialtone-vue/commit/c05dfd09fae3c8af0632c4a8780dc8a12718df2b))
+
+# [2.23.0](https://github.com/dialpad/dialtone-vue/compare/v2.22.3...v2.23.0) (2022-08-30)
+
+
+### Features
+
+* dp-46328 callbar buttons ([#436](https://github.com/dialpad/dialtone-vue/issues/436)) ([426f058](https://github.com/dialpad/dialtone-vue/commit/426f058dfcb504e9f6708284e8e4836c412b17b7))
+
+## [2.22.3](https://github.com/dialpad/dialtone-vue/compare/v2.22.2...v2.22.3) (2022-08-25)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** prevent focus of list-items by mouse ([#466](https://github.com/dialpad/dialtone-vue/issues/466)) ([d6c2d9f](https://github.com/dialpad/dialtone-vue/commit/d6c2d9f63a3f42ed00e783293aed98f3d941ca7b))
+
+## [2.22.2](https://github.com/dialpad/dialtone-vue/compare/v2.22.1...v2.22.2) (2022-08-24)
+
+
+### Bug Fixes
+
+* **combobox, combobox-with-popover:** fix empty variant ([#464](https://github.com/dialpad/dialtone-vue/issues/464)) ([70787c5](https://github.com/dialpad/dialtone-vue/commit/70787c5f69ac2b0d3a6a5a4a30e9d1ecf53abc94))
+
+## [2.22.1](https://github.com/dialpad/dialtone-vue/compare/v2.22.0...v2.22.1) (2022-08-22)
+
+
+### Bug Fixes
+
+* **emoji:** fixed incorrectly mapped unicode keys ([#462](https://github.com/dialpad/dialtone-vue/issues/462)) ([40d2409](https://github.com/dialpad/dialtone-vue/commit/40d24099ca73b16dad249396a34993df1438017e))
+
+# [2.22.0](https://github.com/dialpad/dialtone-vue/compare/v2.21.0...v2.22.0) (2022-08-17)
+
+
+### Features
+
+* add collapsible component ([#395](https://github.com/dialpad/dialtone-vue/issues/395)) ([886871a](https://github.com/dialpad/dialtone-vue/commit/886871a6cc6cd184a991e9716772827fbd0a132c)), closes [#392](https://github.com/dialpad/dialtone-vue/issues/392) [#392](https://github.com/dialpad/dialtone-vue/issues/392)
+
+# [2.21.0](https://github.com/dialpad/dialtone-vue/compare/v2.20.0...v2.21.0) (2022-08-17)
+
+
+### Bug Fixes
+
+* unit tests ([#452](https://github.com/dialpad/dialtone-vue/issues/452)) ([3760a3b](https://github.com/dialpad/dialtone-vue/commit/3760a3ba31fdb3dda7661e18238f3fe42ab22268))
+
+
+### Features
+
+* **emoji:** add prop to disable skeleton loader ([#458](https://github.com/dialpad/dialtone-vue/issues/458)) ([b20debd](https://github.com/dialpad/dialtone-vue/commit/b20debd684c3df1405dbc7f40106bbe8b08778f2))
+
+# [2.20.0](https://github.com/dialpad/dialtone-vue/compare/v2.19.1...v2.20.0) (2022-08-11)
+
+
+### Features
+
+* **modal:** add banner support ([#450](https://github.com/dialpad/dialtone-vue/issues/450)) ([2b4ecea](https://github.com/dialpad/dialtone-vue/commit/2b4eceae8512de68a96dd15eef3f4bce558a97f6))
+
 ## [2.19.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1) (2022-08-08)
 
 

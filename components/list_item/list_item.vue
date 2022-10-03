@@ -6,6 +6,7 @@
     :class="['dt-list-item d-ls-none focus-visible', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
+      'dt-list-item--static': !isHoverable,
     }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
@@ -96,7 +97,39 @@ export default {
     },
   },
 
-  emits: ['click', 'keydown', 'mousemove', 'mouseleave'],
+  emits: [
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+
+    /**
+     * Key down event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+     */
+    'keydown',
+
+    /**
+     * Native mouse move event
+     *
+     * @event mousemove
+     * @type {MouseEvent}
+     */
+    'mousemove',
+
+    /**
+     * Native mouse leave event
+     *
+     * @event mouseleave
+     * @type {MouseEvent}
+     */
+    'mouseleave',
+  ],
 
   data () {
     return {
@@ -123,13 +156,6 @@ export default {
             this.onClick(event);
           }
           this.$emit('keydown', event);
-        },
-
-        mousedown: event => {
-          if (!this.isFocusable) {
-            event.preventDefault();
-          }
-          this.$emit('mousedown', event);
         },
 
         mousemove: event => {
@@ -185,11 +211,14 @@ export default {
 </script>
 
 <style lang="less">
+.dt-list-item:not(.dt-list-item--static) {
+  cursor: pointer;
+}
+
 .dt-list-item--focusable:focus,
 .dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
   background-color: hsla(var(--black-500-h), var(--black-500-s), var(--black-500-l), 0.15);
-  cursor: pointer;
 }
 
 .dt-list-item:focus-visible {

@@ -12,9 +12,7 @@
       >
         <dt-avatar
           v-if="avatarSrc"
-          kind="default"
           size="lg"
-          avatar-class="d-bar2"
         >
           <img
             data-qa="dt-contact-avatar"
@@ -81,8 +79,10 @@
 </template>
 
 <script>
-import { DtListItem, DtAvatar, AVATAR_COLOR_MODIFIERS } from '@';
-import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants.js';
+import DtListItem from '@/components/list_item/list_item';
+import DtAvatar from '@/components/avatar/avatar';
+import { AVATAR_COLOR_MODIFIERS } from '@/components/avatar/avatar_constants';
+import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants';
 import utils from '@/common/utils';
 
 export default {

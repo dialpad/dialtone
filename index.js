@@ -7,6 +7,7 @@ export * from './components/button';
 export * from './components/button_group';
 export * from './components/card';
 export * from './components/combobox';
+export * from './components/collapsible';
 export * from './components/dropdown';
 export * from './components/input';
 export * from './components/input_group';
@@ -36,6 +37,8 @@ export * from './components/root_layout';
 /// Recipes
 export * from './recipes/comboboxes/combobox_with_popover';
 export * from './recipes/comboboxes/combobox_multi_select';
+export * from './recipes/buttons/callbar_button';
+export * from './recipes/buttons/callbar_button_with_popover';
 export * from './recipes/list_items/contact_info';
 export * from './recipes/notices/top_banner_info';
 export * from './recipes/cards/ivr_node';

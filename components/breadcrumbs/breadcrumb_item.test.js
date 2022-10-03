@@ -8,7 +8,7 @@ const breadcrumbItemOption = {
 };
 let breadcrumbItemSlot = { default: 'Slotted section' };
 
-describe('Dialtone Vue Breadcrumb tests', function () {
+describe('DtBreadcrumbItem Tests', function () {
   // Wrappers
   let wrapper;
 

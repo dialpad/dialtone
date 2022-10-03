@@ -54,9 +54,9 @@
 </template>
 
 <script>
+import DtListItem from '@/components/list_item/list_item';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select';
 import { ITEMS_LIST_DATA } from './combobox_multi_select_story_constants';
-import { DtListItem } from '@';
 
 export default {
   name: 'DtRecipeComboboxMultiSelectDefault',

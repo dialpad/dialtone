@@ -15,6 +15,19 @@
     @keydown.tab="trapFocus"
     @after-enter.self="setFocusAfterTransition"
   >
+    <div
+      v-if="show && ($slots.banner || bannerTitle)"
+      data-qa="dt-modal-banner"
+      :class="[
+        'd-modal__banner',
+        bannerClass,
+      ]"
+    >
+      <!-- @slot Slot for the banner, defaults to bannerTitle prop -->
+      <slot name="banner">
+        {{ bannerTitle }}
+      </slot>
+    </div>
     <transition
       appear
       name="d-modal__dialog"
@@ -167,6 +180,14 @@ export default {
     },
 
     /**
+     * Title text to display in the modal banner.
+     */
+    bannerTitle: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * The theme of the modal.
      * @values default or danger
      * kind - default or danger (https://dialpad.design/components/modal/)
@@ -209,6 +230,16 @@ export default {
     },
 
     /**
+     * Additional class name for the banner element within the modal.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    bannerClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
      * Hides the close button on the modal
      */
     hideClose: {
@@ -225,7 +256,16 @@ export default {
     },
   },
 
-  emits: ['update:show'],
+  emits: [
+    /**
+     * The modal will emit a "false" boolean value for this event when the user performs a modal-closing action.
+     * Parent components can sync on this value to create a 2-way binding to control modal visibility.
+     *
+     * @event update:show
+     * @type {Boolean}
+     */
+    'update:show',
+  ],
 
   data () {
     return {

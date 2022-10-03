@@ -9,6 +9,7 @@
       <slot name="header" />
     </header>
     <dt-root-layout-body
+      :body-class="bodyClass"
       :content-class="contentClass"
       :content-wrap-width-percent="contentWrapWidthPercent"
       :sidebar-class="sidebarClass"
@@ -60,6 +61,14 @@ export default {
     headerHeight: {
       type: String,
       default: '64px',
+    },
+
+    /**
+     * Additional class name for the body
+     */
+    bodyClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**

@@ -18,6 +18,10 @@
       :hide-close="hideClose"
       :close-button-props="buttonCloseProps"
       :class="{ 'd-ps-sticky': show }"
+      :hide-icon="hideIcon"
+      :background-image="backgroundImage"
+      :background-size="backgroundSize"
+      :dialog-class="dialogClass"
       @close="displayBanner = false; onClose($event)"
     >
       <span
@@ -72,6 +76,13 @@ export default {
   components: { DtBanner, DtButton },
 
   mixins: [icon],
+
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
   data () {
     return {

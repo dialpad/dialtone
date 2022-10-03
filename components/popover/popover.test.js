@@ -1,3 +1,4 @@
+
 import { assert } from 'chai';
 import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
@@ -5,7 +6,7 @@ import DtPopover from './popover.vue';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
-describe('Dialtone Vue Popover tests', function () {
+describe('DtPopover Tests', function () {
   // Wrappers
   let wrapper;
   let popoverWindow;
@@ -235,6 +236,39 @@ describe('Dialtone Vue Popover tests', function () {
 
         it('should not open the popover', function () {
           assert.isFalse(popoverWindow.isVisible());
+        });
+      });
+    });
+
+    describe('When openOnContext prop is true', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ openOnContext: true });
+        _setChildWrappers();
+      });
+
+      it('popover content should not be displayed', async function () {
+        assert.isFalse(popoverWindow.isVisible());
+      });
+
+      describe('When anchor is clicked', function () {
+        beforeEach(async function () {
+          await button.trigger('click');
+          _setChildWrappers();
+        });
+
+        it('should not open the popover', function () {
+          assert.isFalse(popoverWindow.isVisible());
+        });
+      });
+
+      describe('When anchor is right-clicked', function () {
+        beforeEach(async function () {
+          await button.trigger('contextmenu');
+          _setChildWrappers();
+        });
+
+        it('should open the popover', function () {
+          assert.isTrue(popoverWindow.isVisible());
         });
       });
     });

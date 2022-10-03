@@ -53,6 +53,8 @@ import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 /**
  * Base Vue component for Dialtone Buttons.
  * @displayName DtButton
+ * @property {Boolean} disabled attribute
+ * @property {String} width attribute
  */
 export default {
   name: 'DtButton',
@@ -184,7 +186,31 @@ export default {
     },
   },
 
-  emits: ['click', 'focusin', 'focusout'],
+  emits: [
+    /**
+     * Native button click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+
+    /**
+     * Native button focus in event
+     *
+     * @event focusin
+     * @type {FocusEvent}
+     */
+    'focusin',
+
+    /**
+     * Native button focus out event
+     *
+     * @event focusout
+     * @type {FocusEvent}
+     */
+    'focusout',
+  ],
 
   data () {
     return {

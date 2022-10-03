@@ -9,13 +9,14 @@ const basePropsData = {
   },
 };
 
-describe('Dialtone Vue Modal Tests', function () {
+describe('DtModal Tests', function () {
   let wrapper;
 
   let closeBtn;
   let copy;
   let overlay;
   let title;
+  let banner;
 
   let _setElements;
 
@@ -35,20 +36,23 @@ describe('Dialtone Vue Modal Tests', function () {
       copy = wrapper.find('[data-qa="dt-modal-copy"]');
       overlay = wrapper.find('[data-qa="dt-modal"]');
       title = wrapper.find('[data-qa="dt-modal-title"]');
+      banner = wrapper.find('[data-qa="dt-modal-banner"]');
     };
     _setElements();
   });
 
-  it('Should display title and copy text based on props', async function () {
+  it('Should display title, banner and copy text based on props', async function () {
     assert.isEmpty(copy.text());
     assert.isEmpty(title.text());
 
     const newCopy = 'test modal copy';
     const newTitle = 'test modal title';
-    await wrapper.setProps({ title: newTitle, copy: newCopy });
+    const newBanner = 'test modal banner';
+    await wrapper.setProps({ show: true, title: newTitle, bannerTitle: newBanner, copy: newCopy });
     _setElements();
     assert.equal(copy.text(), newCopy);
     assert.equal(title.text(), newTitle);
+    assert.equal(banner.text(), newBanner);
   });
 
   it('Close button is visible by default', async function () {
@@ -60,20 +64,24 @@ describe('Dialtone Vue Modal Tests', function () {
     assert.isFalse(closeBtn.exists());
   });
 
-  it('Should display slotted header and content instead of title and copy', function () {
+  it('Should display slotted header, banner and content instead of title, bannerTitle and copy', function () {
     const contentText = 'test content';
     const headerText = 'test header';
+    const bannerText = 'title';
 
     wrapper = shallowMount(DtModal, {
       localVue: this.localVue,
       propsData: {
         ...basePropsData,
+        show: true,
         copy: 'non-slot copy',
         title: 'non-slot title',
+        bannerTitle: 'non-slot banner',
       },
       slots: {
         default: `<p>${contentText}</p>`,
         header: `<h1>${headerText}</h1>`,
+        banner: `<p>${bannerText}</p>`,
       },
       stubs: { DtButton },
     });
@@ -81,6 +89,7 @@ describe('Dialtone Vue Modal Tests', function () {
 
     assert.equal(copy.text(), contentText);
     assert.equal(title.text(), headerText);
+    assert.equal(banner.text(), bannerText);
   });
 
   it('Should set the aria-label on the close button', async function () {
@@ -131,5 +140,15 @@ describe('Dialtone Vue Modal Tests', function () {
 
     await wrapper.setProps({ modalClass });
     assert.isTrue(overlay.classes(modalClass));
+  });
+
+  it('Should apply banner class', async function () {
+    const bannerClass = 'banner-class';
+    const bannerTitle = 'title';
+
+    await wrapper.setProps({ show: true, bannerTitle, bannerClass });
+
+    _setElements();
+    assert.isTrue(banner.classes(bannerClass));
   });
 });

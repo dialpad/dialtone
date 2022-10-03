@@ -164,11 +164,21 @@ Default.decorators = [() => ({
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
-Variants.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
-})];
 Variants.parameters = {
-  controls: { disabled: true },
+  controls: { disable: true },
+  actions: { disable: true },
   options: { showPanel: false },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-allowed-attr',
+          enabled: false,
+        },
+      ],
+    },
+  },
 };
+Variants.decorators = [() => ({
+  template: `<div class="d-d-flex d-jc-center d-ai-center"><story /></div>`,
+})];

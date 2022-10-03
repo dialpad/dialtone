@@ -61,7 +61,7 @@ const tabComponents = {
   },
 };
 
-describe('Dialtone Vue Tab Group tests', function () {
+describe('DtTabGroup Tests', function () {
   // Wrappers
   let wrapper;
   let tabList;

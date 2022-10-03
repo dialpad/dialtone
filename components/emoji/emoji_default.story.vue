@@ -5,6 +5,7 @@
       :size="size"
       :img-class="imgClass"
       :aria-label="ariaLabel"
+      :show-skeleton="showSkeleton"
     />
   </div>
 </template>

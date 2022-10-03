@@ -10,6 +10,7 @@
     :max-width="maxWidth"
     :list-class="listClass"
     :navigation-type="navigationType"
+    :open-on-context="openOnContext"
     @highlight="onHighlight"
     @opened="onOpened"
   >

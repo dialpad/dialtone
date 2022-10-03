@@ -47,6 +47,8 @@ export default {
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, BannerDefault);
 
+const backgroundImage = require('../../docs/assets/dialpad-gradient.png');
+
 export const Default = Template.bind({});
 Default.args = {
   title: 'Optional title',
@@ -68,3 +70,15 @@ Warning.args = { ...Default.args, kind: 'warning' };
 
 export const Pinned = Template.bind({});
 Pinned.args = { ...Default.args, pinned: true };
+
+export const CustomBackground = Template.bind({});
+CustomBackground.args = {
+  ...Default.args,
+  backgroundImage,
+  backgroundSize: 'contain',
+  title: '',
+  action: '',
+  hideIcon: true,
+  dialogClass: 'd-fc-white',
+  default: 'The power of Dialpad. On your desktop',
+};

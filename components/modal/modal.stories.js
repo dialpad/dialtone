@@ -15,6 +15,14 @@ export const argTypesData = {
       },
     },
   },
+  banner: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
   footer: {
     control: 'text',
     table: {
@@ -129,6 +137,11 @@ WithFixedHeaderFooter.args = {
   showFooter: true,
   fixedHeaderFooter: true,
   copy: argsData.copy.repeat(4),
+};
+
+export const WithBanner = DefaultTemplate.bind({});
+WithBanner.args = {
+  bannerTitle: 'Example banner',
 };
 
 export const WithDangerStyle = DefaultTemplate.bind({});

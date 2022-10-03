@@ -9,6 +9,7 @@ export default {
   props: {
     /**
      * A provided value for the radio group
+     * @model value
      */
     value: {
       type: [String, Number],
@@ -39,6 +40,16 @@ export default {
       default: 'radio-group-messages',
     },
   },
+
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'input',
+  ],
 
   data () {
     return {
