@@ -86,7 +86,6 @@
     "yo": "^4.3.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=7.0",
     "vue": ">=2.6"
   },
   "engineStrict": true,
