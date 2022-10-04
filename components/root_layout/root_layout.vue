@@ -6,6 +6,7 @@
       :style="{ 'height': headerHeight }"
       data-qa="root-layout-header"
     >
+      <!-- @slot Slot for header content -->
       <slot name="header" />
     </header>
     <dt-root-layout-body
@@ -17,9 +18,11 @@
       :sidebar-position="sidebarPosition"
     >
       <template #sidebar>
+        <!-- @slot Slot for the sidebar -->
         <slot name="sidebar" />
       </template>
       <template #content>
+        <!-- @slot Slot for main content -->
         <slot name="default" />
       </template>
     </dt-root-layout-body>
@@ -29,6 +32,7 @@
       :style="{ 'height': footerHeight }"
       data-qa="root-layout-footer"
     >
+      <!-- @slot Slot for footer content -->
       <slot name="footer" />
     </footer>
   </div>
@@ -38,6 +42,9 @@
 import DtRootLayoutBody from './root_layout_body';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
 
+/**
+ * A root layout provides a standardized group of containers to display content at the root level.
+ */
 export default {
   name: 'DtRootLayout',
 
@@ -73,6 +80,7 @@ export default {
 
     /**
      * Scroll the header with the page
+     * @values true, false
      */
     headerSticky: {
       type: Boolean,
@@ -118,6 +126,7 @@ export default {
     /**
      * Whether the sidebar is on the left or right side
      * Possible options: 'left', 'right'
+     * @values left, right
      */
     sidebarPosition: {
       type: String,

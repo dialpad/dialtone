@@ -4,7 +4,7 @@
     ref="collapsible"
     v-on="$listeners"
   >
-    <!-- Element for capturing keypresses -->
+    <!-- Element for capturing keypress events -->
     <div
       :id="!ariaLabelledBy && labelledBy"
       ref="anchor"
@@ -89,6 +89,10 @@ import { DtLazyShow } from '../lazy_show';
 import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
 import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
 
+/**
+ * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
+ * @see https://dialpad.design/components/collapsible.html
+ */
 export default {
   name: 'DtCollapsible',
 
@@ -113,8 +117,9 @@ export default {
     /**
      * Controls whether the collapsible is shown. Leaving this null will have the collapsible start
      * expanded and trigger on click by default. If you set this value, the default trigger
-     * behavior will be disabled and you can control it as you need.
+     * behavior will be disabled, and you can control it as you need.
      * Supports .sync modifier
+     * @values null, true, false
      */
     open: {
       type: Boolean,
@@ -130,7 +135,7 @@ export default {
     },
 
     /**
-     * Element type (tag name) of the root element of the component.
+     * HTML element type (tag name) of the root element of the component.
      */
     elementType: {
       type: String,
@@ -138,7 +143,7 @@ export default {
     },
 
     /**
-     * Element type (tag name) of the content wrapper element.
+     * HTML element type (tag name) of the content wrapper element.
      */
     contentElementType: {
       type: String,
@@ -197,7 +202,21 @@ export default {
     },
   },
 
-  emits: ['update:open', 'opened'],
+  emits: [
+    /**
+     * Event fired to sync the open prop with the parent component
+     * @event update:open
+     */
+    'update:open',
+
+    /**
+     * Event fired when the content is shown or hidden
+     *
+     * @event opened
+     * @type {Boolean}
+     */
+    'opened',
+  ],
 
   data () {
     return {

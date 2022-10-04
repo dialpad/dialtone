@@ -86,7 +86,7 @@
             contentClass,
           ]"
         >
-          <!-- @slot content that is displayed in the popover when it is open. -->
+          <!-- @slot Slot for the content that is displayed in the popover when it is open. -->
           <slot
             name="content"
             :close="closePopover"
@@ -100,6 +100,7 @@
           :content-class="footerClass"
         >
           <template #content>
+            <!-- @slot Slot for the footer content. -->
             <slot
               name="footerContent"
               :close="closePopover"
@@ -132,6 +133,10 @@ import {
 
 import PopoverHeaderFooter from './popover_header_footer';
 
+/**
+ * A Popover displays a content overlay when its anchor element is activated.
+ * @see https://dialpad.design/components/popover.html
+ */
 export default {
   name: 'DtPopover',
 
@@ -151,6 +156,7 @@ export default {
      * Controls whether the popover is shown. Leaving this null will have the popover trigger on click by default.
      * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
      * Supports .sync modifier
+     * @values null, true, false
      */
     open: {
       type: Boolean,
@@ -160,6 +166,7 @@ export default {
     /**
      * Opens the popover on right click (context menu). If you set this value to `true`,
      * the default trigger behavior will be disabled.
+     * @values true, false
      */
     openOnContext: {
       type: Boolean,
@@ -185,7 +192,7 @@ export default {
 
     /**
      * ARIA role for the content of the popover. Defaults to "dialog".
-     * @see https://www.w3.org/TR/wai-aria/#aria-haspopup
+     * <a href="https://www.w3.org/TR/wai-aria/#aria-haspopup" target="_blank">aria-haspopup</a>
      */
     role: {
       type: String,
@@ -227,6 +234,7 @@ export default {
 
     /**
      * Padding size class for the popover content.
+     * @values none, small, medium, large
      */
     padding: {
       type: String,
@@ -247,6 +255,7 @@ export default {
     /**
      * Width configuration for the popover content. When its value is 'anchor',
      * the popover content will have the same width as the anchor.
+     * @values null, anchor
      */
     contentWidth: {
       type: String,
@@ -281,7 +290,8 @@ export default {
 
     /**
      *  Displaces the content box from its anchor element
-     *  by the specified number of pixels.
+     *  by the specified number of pixels. See
+     *  <a href="https://atomiks.github.io/tippyjs/v6/all-props/#offset" target="_blank">Tippy.js docs</a>
      */
     offset: {
       type: Array,
@@ -291,6 +301,7 @@ export default {
     /**
      * Determines if the popover hides upon clicking the
      * anchor or outside of the content box.
+     * @values true, false
      */
     hideOnClick: {
       type: Boolean,
@@ -300,6 +311,7 @@ export default {
     /**
      * Determines modal state. If enabled popover has a modal overlay
      * preventing interaction with elements below it, but it is invisible.
+     * @values true, false
      */
     modal: {
       type: Boolean,
@@ -309,6 +321,7 @@ export default {
     /**
      * If the popover does not fit in the direction described by "placement",
      * it will attempt to change it's direction to the "fallbackPlacements".
+     * See <a href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements" target="_blank">Popper.js docs</a>
      * */
     fallbackPlacements: {
       type: Array,
@@ -319,6 +332,12 @@ export default {
 
     /**
      * The direction the popover displays relative to the anchor.
+     * See <a href="https://atomiks.github.io/tippyjs/v6/all-props/#placement" target="_blank">Tippy.js docs</a>
+     * @values top, top-start, top-end,
+     * right, right-start, right-end,
+     * left, left-start, left-end,
+     * bottom, bottom-start, bottom-end,
+     * auto, auto-start, auto-end
      */
     placement: {
       type: String,
@@ -328,6 +347,8 @@ export default {
     /**
      * If set to false the dialog will display over top of the anchor when there is insufficient space.
      * If set to true it will never move from its position relative to the anchor and will clip instead.
+     * See <a href="https://popper.js.org/docs/v2/modifiers/prevent-overflow/#tether" target="_blank">Popper.js docs</a>
+     * @values true, false
      */
     tether: {
       type: Boolean,
@@ -340,6 +361,8 @@ export default {
      * position in those cases the DOM layout changes the reference element's position.
      * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
      * checks the "popper" rect for changes.
+     * See <a href="https://atomiks.github.io/tippyjs/v6/all-props/#sticky" target="_blank">Tippy.js docs</a>
+     * @values true, false, reference, popper
      */
     sticky: {
       type: [Boolean, String],
@@ -369,6 +392,7 @@ export default {
 
     /**
      * Determines visibility for close button
+     * @values true, false
      */
     showCloseButton: {
       type: Boolean,
@@ -405,6 +429,7 @@ export default {
      * find the element by ID. 'first' which will automatically focus
      * the first element, or 'dialog' which will focus the dialog window itself.
      * If the dialog is modal this prop cannot be 'none'.
+     * @values none, dialog, first
      */
     initialFocusElement: {
       type: [String, HTMLElement],
@@ -419,6 +444,7 @@ export default {
     /**
      * If the popover should open pressing up or down arrow key on the anchor element.
      * This can be set when not passing open prop.
+     * @values true, false
      */
     openWithArrowKeys: {
       type: Boolean,
@@ -434,6 +460,13 @@ export default {
      * @type {Boolean | Array}
      */
     'opened',
+
+    /**
+     * Emitted to sync value with parent
+     *
+     * @event update:opened
+     * @type {Boolean | Array}
+     */
     'update:open',
   ],
 

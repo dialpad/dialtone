@@ -2,7 +2,7 @@
   <div
     :class="[
       'd-btn-group',
-      BUTTON_GROUP_ALIGNMENT[this.alignment],
+      BUTTON_GROUP_ALIGNMENT[alignment],
     ]"
     role="group"
   >

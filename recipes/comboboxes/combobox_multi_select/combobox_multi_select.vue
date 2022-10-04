@@ -248,7 +248,39 @@ export default {
     },
   },
 
-  emits: ['input', 'select', 'remove', 'max-selected'],
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String }
+     */
+    'input',
+
+    /**
+     * Event fired when item selected
+     *
+     * @event select
+     * @type {Number}
+     */
+    'select',
+
+    /**
+     * Event fired when item removed
+     *
+     * @event remove
+     * @type {String}
+     */
+    'remove',
+
+    /**
+     * Event fired when max selected items limit is reached
+     *
+     * @event max-selected
+     * @type {Object}
+     */
+    'max-selected',
+  ],
 
   data () {
     return {

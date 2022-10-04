@@ -13,6 +13,7 @@
         headerClass,
       ]"
     >
+      <!-- @slot slot for header content -->
       <slot name="header" />
     </div>
 
@@ -23,6 +24,7 @@
       ]"
       :style="{ 'max-height': maxHeight }"
     >
+      <!-- @slot slot for main content -->
       <slot name="content" />
     </div>
 
@@ -33,12 +35,18 @@
         footerClass,
       ]"
     >
+      <!-- @slot slot for footer content -->
       <slot name="footer" />
     </div>
   </div>
 </template>
 
 <script>
+/**
+ * A card contains summary content and actions about a single subject.
+ * It can be used by itself or within a list, and is generally interactive.
+ * @see https://dialpad.design/components/card.html
+ */
 export default {
   name: 'DtCard',
   props: {

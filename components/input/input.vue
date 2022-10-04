@@ -59,6 +59,7 @@
           data-qa="dt-input-left-icon-wrapper"
           @focusout="onBlur"
         >
+          <!-- @slot Slot for left icon -->
           <slot name="leftIcon" />
         </span>
         <textarea
@@ -92,6 +93,7 @@
           data-qa="dt-input-right-icon-wrapper"
           @focusout="onBlur"
         >
+          <!-- @slot Slot for right icon -->
           <slot name="rightIcon" />
         </span>
       </div>
@@ -117,7 +119,11 @@ import { DtValidationMessages } from '../validation_messages';
 import { MessagesMixin } from '@/common/mixins/input.js';
 
 /**
+ * An input field is an input control that allows users to enter alphanumeric information.
+ * It can have a range of options and supports single line and multi-line lengths,
+ * as well as varying formats, including numbers, masked passwords, etc.
  * @property {Boolean} placeholder attribute
+ * @see https://dialpad.design/components/input.html
  */
 export default {
   name: 'DtInput',
@@ -138,8 +144,9 @@ export default {
     },
 
     /**
-     * Type of the input, one of `text`, `password`, `email`, `number`, `textarea`.
+     * Type of the input, one of: `text`, `password`, `email`, `number`, `textarea`.
      * When `textarea` a `<textarea>` element will be rendered instead of an `<input>` element.
+     * @values text, password, email, number, textarea.
      */
     type: {
       type: String,
@@ -157,6 +164,7 @@ export default {
 
     /**
      * Disables the input
+     * @values true, false
      */
     disabled: {
       type: Boolean,
@@ -181,6 +189,7 @@ export default {
 
     /**
      * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
+     * @values null, xs, sm, md, lg, xl
      */
     size: {
       type: String,
@@ -191,6 +200,7 @@ export default {
     /**
      * Size of the icon. One of `xs`, `sm`, `md`, `lg`, `xl`. If you do not set this the icon will size relative
      * to the input size
+     * @values null, xs, sm, md, lg, xl
      */
     iconSize: {
       type: String,
@@ -200,8 +210,8 @@ export default {
 
     /**
      * Additional class name for the input element.
-     * Can accept all of String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
      */
     inputClass: {
       type: [String, Object, Array],
@@ -210,7 +220,7 @@ export default {
 
     /**
      * The current character length that the user has entered into the input.
-     * This will only need to be used if you are using validate.length and
+     * This will only need to be used if you are using `validate.length` and
      * the string contains abnormal characters.
      * For example, an emoji could take up many characters in the input, but should only count as 1 character.
      * If no number is provided, a built-in length calculation will be used for the length validation.
@@ -586,6 +596,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-</style>

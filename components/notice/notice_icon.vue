@@ -4,6 +4,7 @@
     aria-hidden="true"
     class="d-notice__icon"
   >
+    <!-- @slot Slot for the main content -->
     <slot>
       <component
         :is="defaultIcon"
@@ -40,6 +41,10 @@ export default {
   },
 
   props: {
+    /**
+     * Kind of icon
+     * @values base, error, info, success, warning
+     */
     kind: {
       type: String,
       default: 'base',

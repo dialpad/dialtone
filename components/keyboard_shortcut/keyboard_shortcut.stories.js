@@ -8,18 +8,9 @@ import DtKeyboardShortcutVariantsTemplate from './keyboard_shortcut_variants.sto
 export const argTypesData = {
   shortcut: {
     description: `Include any of these tokens in your string to render the corresponding symbol:<br>
-      ${SHORTCUTS_ALIASES_LIST.join(' ')}`,
+      ${SHORTCUTS_ALIASES_LIST.join(', ')}`,
     defaultValue: `{cmd}+Ctrl+X`,
     control: 'text',
-  },
-
-  inverted: {
-    description: 'Applies the inverted styles',
-  },
-
-  screenReaderText: {
-    description: `Text entered here will be read by assistive technology. If null this component
-    will be ignored by AT.`,
   },
 };
 

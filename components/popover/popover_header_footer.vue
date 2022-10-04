@@ -11,6 +11,7 @@
       data-qa="dt-popover-header-footer-content"
       :class="['d-to-ellipsis', 'd-w100p', contentClass]"
     >
+      <!-- @slot Slot for main content -->
       <slot name="content" />
     </div>
     <dt-button
@@ -62,6 +63,7 @@ export default {
 
     /**
      * Determines visibility for close button
+     * @values true, false
      */
     showCloseButton: {
       type: Boolean,
@@ -78,7 +80,15 @@ export default {
     },
   },
 
-  emits: ['close'],
+  emits: [
+    /**
+     * Emitted when popover is closed
+     *
+     * @event close
+     * @type { Boolean }
+     */
+    'close',
+  ],
 
   methods: {
     focusCloseButton () {

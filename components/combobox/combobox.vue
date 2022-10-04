@@ -49,6 +49,11 @@ import { getUniqueString } from '@/common/utils';
 import ComboboxLoadingList from './combobox_loading-list.vue';
 import ComboboxEmptyList from './combobox_empty-list.vue';
 
+/**
+ * A combobox is a semantic component that displays an input element combined with a listbox,
+ * which enables the user to select items from the list.
+ * @see https://dialpad.design/components/combobox.html
+ */
 export default {
   name: 'DtCombobox',
 
@@ -105,6 +110,7 @@ export default {
 
     /**
      * Determines when to show the list element and also controls the aria-expanded attribute.
+     * @values true, false
      */
     showList: {
       type: Boolean,
@@ -113,6 +119,7 @@ export default {
 
     /**
      * If the list is rendered outside the component, like when using popover as the list wrapper.
+     * @values true, false
      */
     listRenderedOutside: {
       type: Boolean,
@@ -121,6 +128,7 @@ export default {
 
     /**
      * Determines when to show the skeletons and also controls aria-busy attribute.
+     * @values true, false
      */
     loading: {
       type: Boolean,
@@ -129,6 +137,7 @@ export default {
 
     /**
      * Sets the list to an empty state, and displays the message from prop `emptyStateMessage`.
+     * @values true, false
      */
     emptyList: {
       type: Boolean,

@@ -24,6 +24,10 @@ import {
 } from './avatar_constants.js';
 import { getUniqueString } from '@/common/utils';
 
+/**
+ * An avatar is a visual representation of a user or object.
+ * @see https://dialpad.design/components/avatar.html
+ */
 export default {
   name: 'DtAvatar',
 
@@ -40,6 +44,7 @@ export default {
 
     /**
      * The size of the avatar
+     * @values sm, md, lg
      */
     size: {
       type: String,
@@ -49,6 +54,11 @@ export default {
 
     /**
      * The color of the avatar
+     * @values base
+     * orange-200, orange-300, orange-400, orange-500,
+     * pink-300, pink-400, pink-500, pink-600,
+     * purple-200, purple-300, purple-500, purple-600,
+     * yellow-200, yellow-300, yellow-400, yellow-500
      */
     color: {
       type: String,

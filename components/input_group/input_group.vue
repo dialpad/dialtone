@@ -27,6 +27,12 @@
 import { InputGroupMixin } from '@/common/mixins/input_group';
 import { DtValidationMessages } from '../validation_messages';
 
+/**
+ * Input Groups are convenience components for a grouping of related inputs.
+ * While each input within the group could be independent, the `v-model` on the group
+ * provides a convenient interface for determining the current state of the group.
+ * @see https://dialpad.design/components/input_group.html
+ */
 export default {
   name: 'DtInputGroup',
 

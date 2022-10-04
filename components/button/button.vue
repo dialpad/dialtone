@@ -6,6 +6,8 @@
     ]"
     data-qa="dt-button"
     :type="type"
+    :disabled="disabled"
+    :style="{ width: width }"
     :aria-live="computedAriaLive"
     :aria-label="loading ? 'loading' : $attrs['aria-label']"
     v-on="buttonListeners"
@@ -51,10 +53,10 @@ import {
 import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 
 /**
- * Base Vue component for Dialtone Buttons.
- * @displayName DtButton
- * @property {Boolean} disabled attribute
- * @property {String} width attribute
+ * A button is a UI element which allows users to take an action throughout the app.
+ * It is important a button is identifiable, consistent, and communicates its actions clearly,
+ * and is appropriately sized to its action.
+ * @see https://dialpad.design/components/button.html
  */
 export default {
   name: 'DtButton',
@@ -63,7 +65,6 @@ export default {
     /**
      * Whether the button is a circle or not.
      * @values true, false
-     * @see https://dialpad.design/components/button/
      */
     circle: {
       type: Boolean,
@@ -73,7 +74,6 @@ export default {
     /**
      * The position of the icon slot within the button.
      * @values left, right, top, bottom
-     * @see https://dialpad.design/components/button/
      */
     iconPosition: {
       type: String,
@@ -84,7 +84,6 @@ export default {
     /**
      * The fill and outline of the button associated with its visual importance.
      * @values clear, outlined, primary
-     * @see https://dialpad.design/components/button/
      */
     importance: {
       type: String,
@@ -95,7 +94,7 @@ export default {
     /**
      * Whether the button should be styled as a link or not.
      * @values true, false
-     * @see https://dialpad.design/components/link
+     * @see https://dialpad.design/components/link.html
      */
     link: {
       type: Boolean,
@@ -104,8 +103,8 @@ export default {
 
     /**
      * The color of the link and button if the button is styled as a link.
-     * @values danger, dark, default, success, warning
-     * @see https://dialpad.design/components/link
+     * @values default, warning, danger, success, muted, inverted
+     * @see https://dialpad.design/components/link.html
      */
     linkKind: {
       type: String,
@@ -114,9 +113,23 @@ export default {
     },
 
     /**
-     * The HTML button type attribute.
+     * HTML button disabled attribute
+     * <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
+     *   (Reference)
+     * </a>
+     * @values true, false
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * HTML button type attribute
+     * <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type" target="_blank">
+     *   (Reference)
+     * </a>
      * @values button, submit, reset
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
      */
     type: {
       type: String,
@@ -125,9 +138,20 @@ export default {
     },
 
     /**
+     * Button width, accepts
+     * <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width" target="_blank">
+     *   CSS width attribute
+     * </a>
+     * values
+     */
+    width: {
+      type: String,
+      default: 'auto',
+    },
+
+    /**
      * The size of the button.
      * @values xs, sm, md, lg, xl
-     * @see https://dialpad.design/components/button
      */
     size: {
       type: String,
@@ -146,7 +170,6 @@ export default {
     /**
      * Whether the button should display a loading animation or not.
      * @values true, false
-     * @see https://dialpad.design/components/button
      */
     loading: {
       type: Boolean,
@@ -155,8 +178,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, danger, inverted
-     * @see https://dialpad.design/components/button
+     * @values default, muted, danger, inverted
      */
     kind: {
       type: String,

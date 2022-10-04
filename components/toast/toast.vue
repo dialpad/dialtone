@@ -14,7 +14,7 @@
         :kind="kind"
         v-on="$listeners"
       >
-        <!-- @slot Use a custom icon -->
+        <!-- @slot Slot for custom icon -->
         <slot name="icon" />
       </dt-notice-icon>
       <dt-notice-content
@@ -54,6 +54,11 @@ import { NOTICE_KINDS } from '../notice/notice_constants';
 import util from '@/common/utils';
 import { TOAST_ROLES, TOAST_MIN_DURATION } from './toast_constants';
 
+/**
+ * A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions.
+ * It contains at-a-glance information about outcomes and can be paired with actions.
+ * @see https://dialpad.design/components/toast.html
+ */
 export default {
   name: 'DtToast',
 
@@ -101,6 +106,7 @@ export default {
     /**
      * Provides a role for the toast. 'status' is used by default to communicate a message. 'alert' is used to
      * communicate an important message like an error that does not contain any interactive elements.
+     * @values status, alert
      */
     role: {
       type: String,
@@ -112,6 +118,7 @@ export default {
 
     /**
      * Severity level of the toast, sets the icon and background
+     * @values base, error, info, success, warning
      */
     kind: {
       type: String,
@@ -123,6 +130,7 @@ export default {
 
     /**
      * Used in scenarios where the message needs to visually dominate the screen.
+     * @values true, false
      */
     important: {
       type: Boolean,
@@ -134,6 +142,7 @@ export default {
      * after reaching the duration time, so it's convenient to use `.sync` modifier with this prop to update
      * the data in your component.
      * Supports .sync modifier
+     * @values true, false
      */
     show: {
       type: Boolean,
@@ -150,6 +159,7 @@ export default {
 
     /**
      * Hides the close button from the toast
+     * @values true, false
      */
     hideClose: {
       type: Boolean,
@@ -177,6 +187,12 @@ export default {
      * @event close
      */
     'close',
+
+    /**
+     * Sync show value
+     *
+     * @event update:show
+     */
     'update:show',
   ],
 
