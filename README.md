@@ -1,45 +1,90 @@
 # Design Tokens for Dialtone
 
-## This repository is in development and NOT currently ready for use.
+**This repository is in development and NOT currently ready for use.**
 
 Design tokens for Dialpad's design system Dialtone and everything related to building and publishing them.
 
 Design tokens are all the defined values that are part of the design system, such as color, spacing, typography, and more. The goal is to store design tokens as JSON and output and publish them to many different formats (CSS, LESS, Android, iOS, etc) upon build.
 
-### Usage
+## Usage
 
 To use Dialtone Tokens in your project:
 
+### Web (npm)
+
+#### Install Dependency
 ```
 npm install @dialpad/dialtone-tokens
 ```
 
-#### CSS
+#### Import CSS Tokens
 
 ```
 @import "node_modules/@dialpad/dialtone/css/variables.css";
 ```
 
-#### LESS
+#### Use CSS Token
+
+```
+.my-css-class {
+  color: var(--dt-color-purple-200)
+}
+```
+
+Or
+
+#### Import LESS Tokens
 
 ```
 @import "node_modules/@dialpad/dialtone/less/variables.less";
 ```
 
-#### iOS (swift)
+#### Use LESS Token
 
 ```
-TBD
+.my-css-class {
+  color: @dt-color-purple-200
+}
 ```
 
-#### Android
+### iOS (swift)
+
+1. Within your XCode project `File > Swift Packages > Add Package Dependency`
+2. Enter repository url: `https://github.com/dialpad/dialtone-tokens-swift`
+
+
+### Android (compose/xml)
+
+#### pom.xml
+```
+<dependency>
+  <groupId>design.dialpad.tokens</groupId>
+  <artifactId>dialtone-tokens</artifactId>
+  <version>1.2.0</version>
+</dependency>
+```
+
+#### Install Dependency
 
 ```
-TBD
+mvn install
 ```
 
+<!-- #### Import Compose Tokens
 
-### Quick Start for Contributors
+```
+import design.dialpad.DialtoneTokens;
+```
+
+#### Use Compose Token
+
+```
+DialtoneTokens.dtColorPurple200
+``` -->
+
+
+
+## Quick Start for Contributors
 
 1. clone repo
 2. `npm install`
