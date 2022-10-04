@@ -162,14 +162,13 @@ StyleDictionary.registerTransform({
     return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type)
   },
   transformer: (token, options) => {
-    const baseFont = 16;
     const floatVal = parseFloat(token.value);
 
     if (isNaN(floatVal)) {
       throwSizeError(token.name, token.value, 'dp');
     }
 
-    return `CGFloat(${(floatVal / baseFont).toFixed(2)})`;
+    return `CGFloat(${(floatVal).toFixed(2)})`;
   }
 });
 
