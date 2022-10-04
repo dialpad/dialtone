@@ -1029,6 +1029,18 @@
           "500": {
             "value": "1.75px",
             "type": "borderWidth"
+          },
+          "600": {
+            "value": "2.5px",
+            "type": "borderWidth"
+          },
+          "700": {
+            "value": "2.75px",
+            "type": "borderWidth"
+          },
+          "800": {
+            "value": "3.5px",
+            "type": "borderWidth"
           }
         }
       }
