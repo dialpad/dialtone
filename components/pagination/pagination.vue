@@ -59,6 +59,10 @@ import { DtButton } from '@';
 import IconChevronLeft from '@dialpad/dialtone/lib/dist/vue/icons/IconChevronLeft';
 import IconChevronRight from '@dialpad/dialtone/lib/dist/vue/icons/IconChevronRight';
 
+/**
+ * Pagination allows you to divide large amounts of content into smaller chunks across multiple pages.
+ * @see https://dialpad.design/components/pagination.html
+ */
 export default {
   name: 'DtPagination',
 
@@ -104,7 +108,6 @@ export default {
     /**
      * A method that will be called to get the aria label of each page.
      */
-
     pageNumberAriaLabel: {
       type: Function,
       required: true,
@@ -181,8 +184,6 @@ export default {
       return [1, '...', ...this.range(left, right), '...', this.totalPages];
     },
   },
-
-  watch: {},
 
   methods: {
     range (from, to) {

@@ -9,6 +9,7 @@
       :style="{ 'flex-basis': sidebarWidth }"
       data-qa="root-layout-sidebar"
     >
+      <!-- @slot Slot for the sidebar -->
       <slot name="sidebar" />
     </aside>
     <main
@@ -17,6 +18,7 @@
       :style="{ 'min-inline-size': contentWrapWidthPercent }"
       data-qa="root-layout-content"
     >
+      <!-- @slot Slot for the main content -->
       <slot name="content" />
     </main>
   </div>

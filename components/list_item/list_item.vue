@@ -21,9 +21,11 @@
         v-for="(_, slotName) in $slots"
         #[slotName]
       >
+        <!-- @slot named slots for custom list items -->
         <slot :name="slotName" />
       </template>
     </component>
+    <!-- @slot slot for the main content -->
     <slot v-else />
   </component>
 </template>
@@ -36,6 +38,10 @@ import {
 import DtDefaultListItem from './default_list_item';
 import utils from '@/common/utils';
 
+/**
+ * A list item is an element that can be used to represent individual items in a list.
+ * @see https://dialpad.design/components/list_item.html
+ */
 export default {
   name: 'ListItem',
 
@@ -68,7 +74,7 @@ export default {
     },
 
     /**
-     * The type of element to use for the wrapper.
+     * HTML element type (tag name) of the content wrapper element.
      */
     elementType: {
       type: String,
@@ -77,6 +83,7 @@ export default {
 
     /**
      * The type of child list item to use.
+     * @values default, custom
      */
     type: {
       type: String,
@@ -89,6 +96,7 @@ export default {
      * - "arrow-keys" for items that are navigated with UP/DOWN keys.
      * - "tab" for items that are navigated using the TAB key.
      * - "none" for static items that are not interactive.
+     * @values arrow-keys, tab, none
      */
     navigationType: {
       type: String,

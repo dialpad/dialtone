@@ -40,6 +40,10 @@ import {
   TAB_LIST_SIZE_MODIFIERS,
 } from './tabs_constants.js';
 
+/**
+ * Tabs allow users to navigation between grouped content in different views while within the same page context.
+ * @see https://dialpad.design/components/tabs.html
+ */
 export default {
   name: 'DtTabGroup',
 
@@ -70,6 +74,7 @@ export default {
 
     /**
      * If true, disables the tab group
+     * @values true, false
      */
     disabled: {
       type: Boolean,
@@ -78,6 +83,7 @@ export default {
 
     /**
      * If true, applies inverted styles to the tab group
+     * @values true, false
      */
     inverted: {
       type: Boolean,
@@ -86,6 +92,7 @@ export default {
 
     /**
      * If true, applies borderless styles to the tab group
+     * @values true, false
      */
     borderless: {
       type: Boolean,
@@ -94,6 +101,7 @@ export default {
 
     /**
      * If provided, applies size styles to the tab group
+     * @values default, sm
      */
     size: {
       type: String,

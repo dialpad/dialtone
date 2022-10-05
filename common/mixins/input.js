@@ -5,6 +5,7 @@ import { formatMessages } from '@/common/utils';
 
 /**
  * This mixin provides a base set of props, watchers and data attributes that are commonly used in our input components.
+ * @displayName Input Mixin
  */
 export const InputMixin = {
   inheritAttrs: false,
@@ -147,6 +148,7 @@ export const InputMixin = {
  *
  * This includes the group context, checked model & prop, internal data attributes as well as a set common computed
  * properties and watchers. It also includes the group name warning logic.
+ * @displayName Checkable Mixin
  */
 export const CheckableMixin = {
   model: {
@@ -202,6 +204,7 @@ export const CheckableMixin = {
  *
  * This includes the group context and internal data attributes as well as a set common computed
  * properties and watchers. It also includes the group name warning logic.
+ * @displayName Groupable Mixin
  */
 export const GroupableMixin = {
   inject: {
@@ -299,10 +302,14 @@ export const GroupableMixin = {
   },
 };
 
+/**
+ * This mixin provides common logic shared amongst our validation messages inputs.
+ * @displayName Messages Mixin
+ */
 export const MessagesMixin = {
   props: {
     /**
-     * Used to customize the the validation messages component
+     * Used to customize the validation messages component
      */
     messagesClass: {
       type: [String, Array, Object],
@@ -319,6 +326,7 @@ export const MessagesMixin = {
 
     /**
      * Used to hide / show the validation messages
+     * @values true, false
      */
     showMessages: {
       type: Boolean,

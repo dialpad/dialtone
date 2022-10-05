@@ -56,6 +56,11 @@ import {
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
 
+/**
+ * Radios are control elements that allow the user to make a single selection.
+ * They are typically used in a Radio Group which allows the user to make a selection from a list of options.
+ * @see https://dialpad.design/components/radio.html
+ */
 export default {
   name: 'DtRadio',
 
@@ -84,6 +89,12 @@ export default {
      */
     'input',
 
+    /**
+     * Native input focus event
+     *
+     * @event focus
+     * @type {FocusEvent}
+     */
     'focus',
 
     /**
@@ -102,6 +113,12 @@ export default {
      */
     'focusout',
 
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
     'click',
   ],
 

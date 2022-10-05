@@ -26,6 +26,11 @@ import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants.js';
 import DtBreadcrumbItem from './breadcrumb_item';
 import util from '@/common/utils';
 
+/**
+ * Breadcrumbs are links used to provide context for the currently-viewed page
+ * and where it is located within the overall site structure.
+ * @see https://dialpad.design/components/breadcrumbs.html
+ */
 export default {
   name: 'DtBreadcrumbs',
 
@@ -49,6 +54,7 @@ export default {
 
     /**
      * Passed through to link. If true, applies inverted styles to the link.
+     * @values true, false
      */
     inverted: {
       type: Boolean,

@@ -20,6 +20,10 @@
 </template>
 
 <script>
+/**
+ * Tabs allow users to navigation between grouped content in different views while within the same page context.
+ * @see https://dialpad.design/components/tabs.html
+ */
 export default {
   name: 'DtTabPanel',
 
@@ -44,6 +48,7 @@ export default {
 
     /**
     * If true, hides the tab content
+     * @values true, false
     */
     hidden: {
       type: Boolean,

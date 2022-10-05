@@ -42,7 +42,15 @@ export default {
 
   inheritAttrs: false,
 
-  emits: ['input'],
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String}
+     */
+    'input',
+  ],
 
   computed: {
     inputValidationClass () {

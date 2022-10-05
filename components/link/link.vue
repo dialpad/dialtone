@@ -6,6 +6,7 @@
     ]"
     data-qa="dt-link"
   >
+    <!-- @slot Slot for main content -->
     <slot />
   </a>
 </template>
@@ -14,8 +15,10 @@
 import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants.js';
 
 /**
+ * A link is a navigational element that can be found on its own, within other text, or directly following content.
  * @property {String} href attribute
  * @property {String} rel attribute
+ * @see https://dialpad.design/components/link.html
  */
 export default {
   name: 'DtLink',
@@ -23,6 +26,7 @@ export default {
   props: {
     /**
      * Applies the link variant styles
+     * @values null, danger, warning, success, muted, inverted
      */
     kind: {
       type: String,

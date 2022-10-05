@@ -17,6 +17,7 @@
       v-show="show"
       v-bind="$attrs"
     >
+      <!-- @slot slot for Content within collapsible -->
       <slot v-if="initialized" />
     </component>
   </transition>
@@ -35,13 +36,22 @@ export default {
     /**
      * Whether the child slot is shown.
      */
-    show: Boolean,
+    show: {
+      type: Boolean,
+      default: null,
+    },
 
+    /**
+     * Enable/Disable transition animation
+     */
     appear: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * HTML element type (tag name) of the content wrapper element.
+     */
     elementType: {
       type: String,
       default: 'div',

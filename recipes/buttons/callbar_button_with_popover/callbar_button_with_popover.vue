@@ -206,6 +206,13 @@ export default {
      * Emitted when the arrow is clicked
      */
     'arrowClick',
+
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
     'click',
   ],
 

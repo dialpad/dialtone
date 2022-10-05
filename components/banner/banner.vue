@@ -15,7 +15,7 @@
         v-if="!hideIcon"
         :kind="kind"
       >
-        <!-- @slot Use a custom icon -->
+        <!-- @slot Slot for custom icon -->
         <slot name="icon" />
       </dt-notice-icon>
       <dt-notice-content
@@ -24,8 +24,8 @@
         :title="title"
       >
         <template #titleOverride>
-          <!-- @slot Allows you to override the title, only use this if you need to override
-          with something other than text. Otherwise use the "title" prop. -->
+          <!-- eslint-disable-next-line max-len -->
+          <!-- @slot Allows you to override the title, only use this if you need to override with something other than text. Otherwise use the "title" prop. -->
           <slot name="titleOverride" />
         </template>
         <!-- @slot the main textual content of the banner -->
@@ -51,6 +51,11 @@ import { NOTICE_KINDS } from '../notice/notice_constants';
 import Modal from '@/common/mixins/modal.js';
 import util from '@/common/utils';
 
+/**
+ * Banners are a type of notice, delivering system and engagement messaging.
+ * These are highly intrusive notices and should be used sparingly and appropriately.
+ * @see https://dialpad.design/components/banner.html
+ */
 export default {
   name: 'DtBanner',
 
@@ -91,8 +96,9 @@ export default {
 
     /**
      * Used in scenarios where the message needs to visually dominate the screen.
-     *  This will also change the aria role from status to alertdialog.
+     * This will also change the aria role from status to alertdialog.
      * and will modally trap the keyboard focus in the dialog as soon as it displays.
+     * @values true, false
      */
     important: {
       type: Boolean,
@@ -101,6 +107,7 @@ export default {
 
     /**
      * Pins the banner to the top of the window and pushes all app content down.
+     * @values true, false
      */
     pinned: {
       type: Boolean,
@@ -109,10 +116,11 @@ export default {
 
     /**
      * Severity level of the notice, sets the icon and background
+     * @values base, error, info, success, warning
      */
     kind: {
       type: String,
-      default: '',
+      default: 'base',
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
@@ -136,6 +144,7 @@ export default {
 
     /**
      * Hides the icon from the notice
+     * @values true, false
      */
     hideIcon: {
       type: Boolean,
@@ -160,7 +169,9 @@ export default {
 
     /**
      * Background image size, follows the background-size CSS property values
-     * https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+     * <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size" target="_blank">
+     *   CSS background-sizes
+     * </a>
      */
     backgroundSize: {
       type: String,

@@ -29,6 +29,11 @@ import {
   getValidationState,
 } from '@/common/utils';
 
+/**
+ * Validation messages are used to convey information to the user about the current state of the input element.
+ * These messages can have an error, warning or success type.
+ * @see https://dialpad.design/components/validation_messages.html
+ */
 export default {
   name: 'DtValidationMessages',
 
@@ -55,6 +60,7 @@ export default {
 
     /**
      * Show Validation messages
+     * @values true, false
      */
     showMessages: {
       type: Boolean,

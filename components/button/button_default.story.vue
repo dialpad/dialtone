@@ -12,7 +12,7 @@
     :link-kind="$attrs.linkKind"
     :icon-position="$attrs.iconPosition"
     :disabled="$attrs.disabled"
-    :style="{ width: $attrs.width }"
+    :width="$attrs.width"
     :active="$attrs.active"
     @click="$attrs.onClick"
     @focusin="$attrs.onFocusIn"

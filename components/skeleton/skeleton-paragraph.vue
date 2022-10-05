@@ -36,54 +36,91 @@ export default {
   },
 
   props: {
+    /**
+     * Quantity of rows to display
+     */
     rows: {
       type: [Number, String],
       default: 3,
       validator,
     },
 
+    /**
+     * This property has higher priority than "option.animate"
+     * @values true, false
+     */
     animate: {
       type: Boolean,
       default: true,
     },
 
+    /**
+     * Controls the min width of paragraphs
+     */
     minWidth: {
       type: [Number, String],
       default: 30,
       validator,
     },
 
+    /**
+     * Controls the max width of paragraphs
+     */
     maxWidth: {
       type: [Number, String],
       default: 100,
       validator,
     },
 
+    /**
+     * Controls the width of paragraphs
+     */
     width: {
       type: [String, Array],
       default: null,
     },
 
+    /**
+     * If true, row widths will be random
+     * @values true, false
+     */
     randomWidth: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * RippleDuration controls how long the delay is for the animation of a
+     * placeholder 1000 pixels from the top of the page. Each placeholder
+     * from the top down will have a delay duration from 0 to this offset.
+     * The delay of each placeholder animation is based on how far down the page
+     * the placeholder is rendered. This is a linear relationship. The unit
+     * is milliseconds.
+     */
     offset: {
       type: Number,
       default: 1,
     },
 
+    /**
+     * Duration time of the animation (ms), set -1 for an infinite animation.
+     */
     animationDuration: {
       type: Number,
       default: -1,
     },
 
+    /**
+     * Additional class name for the content.
+     */
     contentClass: {
       type: String,
       default: '',
     },
 
+    /**
+     * Additional class name for the row.
+     */
     rowClass: {
       type: String,
       default: '',

@@ -1,3 +1,10 @@
+import Dom from './dom';
+
+const ERROR_INVALID_LIST_ELEMENT = (
+  'listElementKey is required or the referenced ' +
+  'element doesn\'t exist. Received listElement: '
+);
+
 /**
  * Usage: `mixins: [keyboardNavigationMixin(options)]`
  *
@@ -6,14 +13,20 @@
  *
  * To be effective, you must bind the onUpKey and onDownKey events, usually to
  * the root element of the component.
+ *
+ * @param listItemRole
+ * @param indexKey
+ * @param idKey
+ * @param listElementKey
+ * @param activeItemKey
+ * @param openMethod
+ * @param afterHighlightMethod
+ * @param beginningOfListMethod
+ * @param endOfListMethod
+ * @param scrollToOnHighlight
+ * @param focusOnKeyboardNavigation
+ * @displayName Keyboard Navigation Mixin
  */
-import Dom from './dom';
-
-const ERROR_INVALID_LIST_ELEMENT = (
-  'listElementKey is required or the referenced ' +
-  'element doesn\'t exist. Received listElement: '
-);
-
 export default ({
   // Role of the list items in the component. This is used to identify the list items
   // so you must update this if the role of your list items is anything other than 'option'

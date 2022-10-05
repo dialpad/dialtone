@@ -6,7 +6,7 @@
     <dt-notice-icon
       :kind="kind"
     >
-      <!-- @slot Use a custom icon -->
+      <!-- @slot Slot for custom icon -->
       <slot name="icon" />
     </dt-notice-icon>
     <dt-notice-content
@@ -40,6 +40,10 @@ import DtNoticeContent from './notice_content';
 import DtNoticeAction from './notice_action';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants.js';
 
+/**
+ * A notice is an informational and assistive message that appears inline with content.
+ * @see https://dialpad.design/components/notice.html
+ */
 export default {
   name: 'DtNotice',
 
@@ -80,6 +84,7 @@ export default {
      * Provides a role for the notice. 'status' is used to communicate a message. 'alert' is used to communicate an
      * important message that does not contain any interactive elements. 'alertdialog' is used to communicate an
      * important message that does contain interactive elements.
+     * @values alert, alertdialog, status
      */
     role: {
       type: String,
@@ -92,6 +97,7 @@ export default {
     /**
      * Used in scenarios where the message needs to visually dominate the screen.
      * This will also change the aria role from status to alert.
+     * @values true, false
      */
     important: {
       type: Boolean,
@@ -100,6 +106,7 @@ export default {
 
     /**
      * Severity level of the notice, sets the icon and background
+     * @values base, error, info, success, warning
      */
     kind: {
       type: String,
@@ -119,6 +126,7 @@ export default {
 
     /**
      * Hides the close button from the notice
+     * @values true, false
      */
     hideClose: {
       type: Boolean,
@@ -133,6 +141,13 @@ export default {
      * @event close
      */
     'close',
+
+    /**
+     * Native button click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
     'click',
   ],
 

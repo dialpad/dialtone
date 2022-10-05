@@ -6,8 +6,6 @@ import DtSkeletonVariantsTemplate from './skeleton_variants.story.vue';
 
 export const argTypesData = {
   paragraphOption: {
-    description: `Set this prop to have the skeleton render as multiple lines of text.
-    Set only one option prop at a time.`,
     table: {
       type: {
         detail: `{
@@ -26,8 +24,6 @@ export const argTypesData = {
     },
   },
   listItemOption: {
-    description: `Set this prop to have the skeleton render as a list item with an avatar and wrapping text.
-    Set only one option prop at a time.`,
     table: {
       type: {
         detail: `{
@@ -43,10 +39,7 @@ export const argTypesData = {
       },
     },
   },
-
   textOption: {
-    description: `Set this prop to have the skeleton render as a single line of text.
-    Set only one option prop at a time.`,
     table: {
       type: {
         detail: `null | {
@@ -61,10 +54,7 @@ export const argTypesData = {
       },
     },
   },
-
   shapeOption: {
-    description: `Set this prop to have the skeleton render as a specific shape.
-    Set only one option prop at a time.`,
     table: {
       type: {
         detail: `{
@@ -78,19 +68,8 @@ export const argTypesData = {
       },
     },
   },
-  animate: {
-    description: 'This property has higher priority than "option.animate"',
-  },
   ariaLabel: {
     defaultValue: '',
-  },
-  offset: {
-    description: `RippleDuration controls how long the delay is for the animation of a
-    placeholder 1000 pixels from the top of the page. Each placeholder
-    from the top down will have a delay duration from 0 to this offset.
-    The delay of each placeholder animation is based on how far down the page
-    the placeholder is rendered. This is a linear relationship. The unit
-    is milliseconds.`,
   },
 };
 

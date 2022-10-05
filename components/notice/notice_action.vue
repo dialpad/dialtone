@@ -3,6 +3,7 @@
     class="d-notice__actions"
     data-qa="notice-content-actions"
   >
+    <!-- @slot Slot for main content -->
     <slot />
     <dt-button
       v-if="!hideClose"
@@ -34,18 +35,32 @@ export default {
   },
 
   props: {
+    /**
+     * Props for the notice close button.
+     */
     closeButtonProps: {
       type: Object,
       default: () => ({}),
     },
 
+    /**
+     * Hides the close button from the notice
+     * @values true, false
+     */
     hideClose: {
       type: Boolean,
       default: false,
     },
   },
 
-  emits: ['close'],
+  emits: [
+    /**
+     * Close button click event
+     *
+     * @event close
+     */
+    'close',
+  ],
 
   created () {
     if (!this.hideClose && !this.closeButtonProps.ariaLabel) {
