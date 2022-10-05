@@ -47,7 +47,7 @@ module.exports = {
       ],
     },
     android_compose: {
-      transforms: ['dt/fonts/transformToStack',  'dt/lineHeight/percentToDecimal', 'dt/size/pxToDp', 'dt/size/pxToSp', 'dt/composeColor', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
+      transforms: ['dt/fonts/transformToStack',  'dt/lineHeight/percentToDecimal', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
       prefix: 'dt',
       buildPath: 'dist/android/',
       files: [
@@ -63,7 +63,7 @@ module.exports = {
       ]
     },
     ios: {
-      transforms: ['dt/fonts/transformToStack',  'attribute/cti', 'name/cti/camel', 'dt/swiftColor', 'dt/size/pxToCGFloat', 'dt/lineHeight/swift/percentToDecimal', 'dt/stringify'],
+      transforms: ['dt/fonts/transformToStack',  'attribute/cti', 'name/cti/camel', 'dt/ios/color', 'dt/ios/size/pxToCGFloat', 'dt/ios/lineHeight/percentToDecimal', 'dt/stringify'],
       prefix: 'dt',
       buildPath: 'dist/ios/',
       files: [

@@ -61,7 +61,7 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
-  name: 'dt/composeColor',
+  name: 'dt/android/color',
   type: 'value',
   matcher: function(token) {
     return ['color'].includes(token.type)
@@ -73,7 +73,7 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
-  name: 'dt/swiftColor',
+  name: 'dt/ios/color',
   type: 'value',
   matcher: function(token) {
     return ['color'].includes(token.type)
@@ -111,13 +111,12 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
-  name: 'dt/size/pxToDp',
+  name: 'dt/android/size/pxToDp',
   type: 'value',
   matcher: function(token) {
     return SIZE_IDENTIFIERS.includes(token.type)
   },
   transformer: (token, options) => {
-    const baseFont = 16;
     const floatVal = parseFloat(token.value);
 
     if (isNaN(floatVal)) {
@@ -128,19 +127,18 @@ StyleDictionary.registerTransform({
       return '0';
     }
 
-    return `${floatVal / baseFont}.dp`;
+    return `${floatVal}.dp`;
   }
 });
 
 //Sp is for font sizes only
 StyleDictionary.registerTransform({
-  name: 'dt/size/pxToSp',
+  name: 'dt/android/size/pxToSp',
   type: 'value',
   matcher: function(token) {
     return [...SPACING_IDENTIFIERS, ...FONT_SIZE_IDENTIFIERS].includes(token.type)
   },
   transformer: (token, options) => {
-    const baseFont = 16;
     const floatVal = parseFloat(token.value);
 
     if (isNaN(floatVal)) {
@@ -151,12 +149,12 @@ StyleDictionary.registerTransform({
       return '0';
     }
 
-    return `${floatVal / baseFont}.sp`;
+    return `${floatVal}.sp`;
   }
 });
 
 StyleDictionary.registerTransform({
-  name: 'dt/size/pxToCGFloat',
+  name: 'dt/ios/size/pxToCGFloat',
   type: 'value',
   matcher: function(token) {
     return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type)
@@ -194,7 +192,7 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
-  name: 'dt/lineHeight/swift/percentToDecimal',
+  name: 'dt/ios/lineHeight/percentToDecimal',
   type: 'value',
   matcher: function(token) {
     return ['opacity', ...LINE_HEIGHT_IDENTIFIERS].includes(token.type)
