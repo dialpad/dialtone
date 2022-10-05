@@ -15,14 +15,14 @@
         data-qa="dt-chip-icon"
         class="d-chip__icon"
       >
-        <!-- @slot Chip icon -->
+        <!-- @slot slot for Chip icon -->
         <slot name="icon" />
       </span>
       <span
         v-else-if="$slots.avatar"
         data-qa="dt-chip-avatar"
       >
-        <!-- @slot Chip avatar -->
+        <!-- @slot slot for Chip avatar -->
         <slot name="avatar" />
       </span>
       <span
@@ -31,7 +31,7 @@
         data-qa="dt-chip-label"
         :class="['d-truncate', 'd-chip__text', contentClass]"
       >
-        <!-- @slot Content within chip -->
+        <!-- @slot slot for Content within chip -->
         <slot />
       </span>
     </component>
@@ -56,6 +56,12 @@ import { DtButton } from '../button';
 import { CHIP_CLOSE_BUTTON_SIZE_MODIFIERS, CHIP_SIZE_MODIFIERS } from './chip_constants';
 import { getUniqueString } from '@/common/utils';
 
+/**
+ * A chip is a compact UI element that provides brief, descriptive information about an element.
+ * It is terse, ideally one word. It is important a button is identifiable, consistent, and
+ * communicates its actions clearly, and is appropriately sized to its action.
+ * @see https://dialpad.design/components/chip.html
+ */
 export default {
   name: 'DtChip',
 
@@ -78,6 +84,7 @@ export default {
 
     /**
      * Hides the close button on the chip
+     * @values true, false
      */
     hideClose: {
       type: Boolean,
@@ -87,7 +94,6 @@ export default {
     /**
      * The size of the chip.
      * @values xs, sm, md
-     * @see https://dialpad.design/components/chip
      */
     size: {
       type: String,
@@ -98,7 +104,7 @@ export default {
     /**
      * The interactivity of the chip.
      * Makes chip clickable, apply hover/focus/active style, emit keyboard events etc.
-     * @see https://dialpad.design/components/chip
+     * @values true, false
      */
     interactive: {
       type: Boolean,

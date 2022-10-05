@@ -22,6 +22,9 @@ export default {
   components: { DtListItem },
 
   props: {
+    /**
+     * Message to display when list is empty
+     */
     message: {
       type: String,
       required: true,

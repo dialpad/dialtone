@@ -36,7 +36,7 @@ export default {
 
   props: {
     /**
-     * Applies the inverted styles to the link
+     * Passed through to link. If true, applies inverted styles to the link.
      */
     inverted: {
       type: Boolean,
@@ -53,7 +53,7 @@ export default {
 
     /**
      * Describes the breadcrumb. Overridden by default slot
-     * */
+     */
     label: {
       type: String,
       default: '',

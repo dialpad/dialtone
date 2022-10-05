@@ -112,8 +112,9 @@ import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 
 /**
- * Base Vue component for Dialtone Modal.
- * @displayName DtModal
+ * Modals focus the user’s attention exclusively on one task or piece of information
+ * via a window that sits on top of the page content.
+ * @see https://dialpad.design/components/modal.html
  */
 export default {
   name: 'DtModal',
@@ -128,7 +129,8 @@ export default {
 
   props: {
     /**
-     * A set of props to be passed into the modal's close button. Requires an 'ariaLabel' property.
+     * A set of props to be passed into the modal's close button.
+     * Requires an 'ariaLabel' property.
      */
     closeButtonProps: {
       type: Object,
@@ -153,6 +155,7 @@ export default {
      */
     describedById: {
       type: String,
+      default: '',
     },
 
     /**
@@ -164,7 +167,9 @@ export default {
     },
 
     /**
-     * Whether the modal should be shown.  Parent component can sync on this value to control the modal's visibility.
+     * Whether the modal should be shown.
+     * Parent component can sync on this value to control the modal's visibility.
+     * @values true, false
      */
     show: {
       type: Boolean,
@@ -188,9 +193,8 @@ export default {
     },
 
     /**
-     * The theme of the modal.
-     * @values default or danger
-     * kind - default or danger (https://dialpad.design/components/modal/)
+     * The theme of the modal. kind - default or danger,
+     * @values default, danger
      */
     kind: {
       type: String,
@@ -199,9 +203,8 @@ export default {
     },
 
     /**
-     * The size of the modal.
-     * @values default or full
-     * size - default or full (https://dialpad.design/components/modal/)
+     * The size of the modal. size - default or full,
+     * @values default, full
      */
     size: {
       type: String,
@@ -211,8 +214,8 @@ export default {
 
     /**
      * Additional class name for the root modal element.
-     * Can accept all of String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
      */
     modalClass: {
       type: [String, Object, Array],
@@ -221,8 +224,8 @@ export default {
 
     /**
      * Additional class name for the dialog element within the modal.
-     * Can accept all of String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
      */
     dialogClass: {
       type: [String, Object, Array],
@@ -231,8 +234,8 @@ export default {
 
     /**
      * Additional class name for the banner element within the modal.
-     * Can accept all of String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
      */
     bannerClass: {
       type: [String, Object, Array],
@@ -241,6 +244,7 @@ export default {
 
     /**
      * Hides the close button on the modal
+     * @values true, false
      */
     hideClose: {
       type: Boolean,
@@ -249,6 +253,7 @@ export default {
 
     /**
      * Scrollable modal that allows scroll the modal content keeping the header and footer fixed
+     * @values true, false
      */
     fixedHeaderFooter: {
       type: Boolean,

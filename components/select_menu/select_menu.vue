@@ -92,9 +92,11 @@ import { optionsValidator } from './select_menu_validators.js';
 import { DtValidationMessages } from '../validation_messages';
 
 /**
+ * A select menu is an input control that allows users to choose one option from a list.
  * @property {Boolean} disabled attribute
  * @property {String} name attribute
  * @property {String} value attribute
+ * @see https://dialpad.design/components/select.html
  */
 export default {
   name: 'DtSelectMenu',
@@ -138,8 +140,7 @@ export default {
 
     /**
      * Controls the size of the select
-     * @values xs, s, md, lg, xl
-     * @see https://dialpad.design/components/select
+     * @values xs, sm, md, lg, xl
      */
     size: {
       type: String,
@@ -205,6 +206,7 @@ export default {
 
     /**
      * Disabled state of the select
+     * @values true, false
      */
     disabled: {
       type: Boolean,
@@ -304,6 +306,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-</style>

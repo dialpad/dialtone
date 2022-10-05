@@ -33,6 +33,10 @@ import {
 } from '@/common/emoji';
 import { DtSkeleton } from '../skeleton';
 
+/**
+ * Renders an emoji from a shortcode such as :smile: or unicode character such as 😄
+ * @see https://dialpad.design/components/emoji.html
+ */
 export default {
   name: 'DtEmoji',
 
@@ -42,19 +46,21 @@ export default {
 
   props: {
     /**
-      * Supports shortcode ex: :smile: or unicode ex: 😄. Will display the resulting emoji.
-      * See https://emojipedia.org/joypixels/ for all supported shortcode/unicode or the docs
-      * for setting up custom emojis.
-      */
+     * Supports shortcode ex: :smile: or unicode ex: 😄. Will display the resulting emoji.
+     * See <a href="https://emojipedia.org/joypixels/" target="_blank">JoyPixels</a>
+     *  for all supported shortcode/unicode or the docs for setting up custom emojis.
+     */
     code: {
       type: String,
       default: null,
     },
 
     /**
-      * The size of the emoji. Can be any of the svg size utility
-      * classes from https://dialpad.design/utilities/svg/size
-      */
+     * The size of the emoji. Can be any of the svg size utility classes from
+     * <a href="https://dialpad.design/utilities/svg/size" target="_blank"> Dialpad SVG Size</a>
+     * @values d-svg--size14, d-svg--size16, d-svg--size18, d-svg--size20
+     * d-svg--size24, d-svg--size32, d-svg--size48, d-svg--size64, d-svg--size100p
+     */
     size: {
       type: String,
       default: EMOJI_SIZES.SIZE_20,
@@ -63,8 +69,8 @@ export default {
 
     /**
      * Additional class name for the emoji img element.
-     * Can accept all of String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
      */
     imgClass: {
       type: [String, Object, Array],
@@ -72,7 +78,7 @@ export default {
     },
 
     /**
-     * Will be read out on a screenreader for this emoji. You must use this prop if you want your emoji to be i18n
+     * Will be read out on a screen reader for this emoji. You must use this prop if you want your emoji to be i18n
      * Compatible as Dialtone Vue will not translate it by itself. If you do not set this prop the aria-label will
      * be set to the english description of the emoji. You can retrieve the description for an emoji yourself via the
      * getEmojiData() function
@@ -84,6 +90,7 @@ export default {
 
     /**
      * Shows a skeleton loader while the emoji asset is loading.
+     * @values true, false
      */
     showSkeleton: {
       type: Boolean,

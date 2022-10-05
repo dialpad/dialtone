@@ -1,6 +1,10 @@
 <script>
 import { DtInputGroup } from '../input_group';
 
+/**
+ * Radio Groups are control elements that allow the user to make a single selection from a list of options.
+ * @see https://dialpad.design/components/radio_group.html
+ */
 export default {
   name: 'DtRadioGroup',
 

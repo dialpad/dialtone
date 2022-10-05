@@ -7,6 +7,7 @@
       v-bind="labelChildProps"
       data-qa="toggle-label"
     >
+      <!-- @slot Slot for the main content -->
       <slot />
     </label>
     <button
@@ -32,6 +33,10 @@
 import Vue from 'vue';
 import utils from '@/common/utils';
 
+/**
+ * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.
+ * @see https://dialpad.design/components/toggle.html
+ */
 export default {
 
   name: 'DtToggle',
@@ -45,29 +50,44 @@ export default {
 
   props: {
 
+    /**
+     * The id of the toggle
+     */
     id: {
       type: String,
       default () { return utils.getUniqueString(); },
     },
 
+    /**
+     * Disables the toggle interactions
+     * @values true, false
+     */
     disabled: {
       type: Boolean,
       default: false,
     },
 
     /**
+     * Value of the toggle
      * @model checked
+     * @values true, false
      */
     checked: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Used to customize the label container
+     */
     labelClass: {
       type: [String, Array, Object],
       default: '',
     },
 
+    /**
+     * A set of props that are passed into the label container
+     */
     labelChildProps: {
       type: Object,
       default: () => ({}),

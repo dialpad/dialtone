@@ -2,6 +2,10 @@
 import { DtEmoji } from '../emoji';
 import { findEmojis, findShortCodes } from '@/common/emoji';
 
+/**
+ * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
+ * @see https://dialpad.design/components/emoji_text_wrapper.html
+ */
 export default {
   name: 'DtEmojiTextWrapper',
 
@@ -13,7 +17,7 @@ export default {
 
   props: {
     /**
-     * The type of element to use for the wrapper.
+     * Element type (tag name) to use for the wrapper.
      */
     elementType: {
       type: String,

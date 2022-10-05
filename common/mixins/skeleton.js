@@ -1,5 +1,8 @@
 import { SKELETON_RIPPLE_DURATION } from '@/components/skeleton/skeleton_constants';
 
+/**
+ * @displayName Skeleton Animation Mixin
+ */
 export default {
   computed: {
     skeletonOffset () {

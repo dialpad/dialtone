@@ -28,6 +28,10 @@
 import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
 import { DtButton } from '../button';
 
+/**
+ * Tabs allow users to navigation between grouped content in different views while within the same page context.
+ * @see https://dialpad.design/components/tabs.html
+ */
 export default {
   name: 'DtTab',
   components: {
@@ -65,6 +69,7 @@ export default {
 
     /**
      * Controls the state of the tab
+     * @values true, false
      */
     selected: {
       type: Boolean,
@@ -73,6 +78,7 @@ export default {
 
     /**
      * If true, disables the tab
+     * @values true, false
      */
     disabled: {
       type: Boolean,

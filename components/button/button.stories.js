@@ -49,12 +49,6 @@ export const argTypesData = {
       options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
     },
   },
-  type: {
-    control: {
-      type: 'select',
-      options: BUTTON_TYPES,
-    },
-  },
   size: {
     control: {
       type: 'select',
@@ -100,30 +94,23 @@ export const argTypesData = {
 
   // HTML attributes
   disabled: {
-    description: 'HTML button disabled attribute',
-    defaultValue: false,
-    type: {
-      summary: 'boolean',
-    },
     table: {
       category: 'html attributes',
       defaultValue: {
-        summary: 'false',
+        summary: false,
       },
     },
     control: 'boolean',
   },
-  width: {
-    description: 'HTML button width attribute',
+  type: {
     table: {
       category: 'html attributes',
       defaultValue: {
-        summary: 'auto',
+        summary: 'button',
       },
     },
-    control: {
-      type: 'text',
-    },
+    control: 'select',
+    options: BUTTON_TYPES,
   },
 
   // Action Event Handlers

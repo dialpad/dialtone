@@ -41,6 +41,12 @@ import DtSkeletonListItem from './skeleton-list-item';
 import DtSkeletonParagraph from './skeleton-paragraph';
 import DtSkeletonText from './skeleton-text';
 
+/**
+ * Skeleton loader is a non-interactive placeholder that displays a preview of the UI to visually communicate
+ * that content is in the process of loading. Skeleton is used to provide a low fidelity
+ * representation of the user interface (UI) before content appears on the page.
+ * @see https://dialpad.design/components/skeleton.html
+ */
 export default {
   name: 'DtSkeleton',
   components: {
@@ -51,41 +57,75 @@ export default {
   },
 
   props: {
+    /**
+     * Set this prop to have the skeleton render as multiple lines of text.
+     * Set only one option prop at a time.
+     */
     paragraphOption: {
       type: [Object, Boolean],
       default: null,
     },
 
+    /**
+     * Set this prop to have the skeleton render as a list item with an avatar and wrapping text.
+     * Set only one option prop at a time.
+     */
     listItemOption: {
       type: [Object, Boolean],
       default: null,
     },
 
+    /**
+     * Set this prop to have the skeleton render as a single line of text.
+     * Set only one option prop at a time.
+     */
     textOption: {
       type: Object,
       default: null,
     },
 
+    /**
+     * Set this prop to have the skeleton render as a specific shape.
+     * Set only one option prop at a time.
+     */
     shapeOption: {
       type: [Object, Boolean],
       default: null,
     },
 
+    /**
+     * Duration time of the animation (ms), set -1 for an infinite animation.
+     */
     animationDuration: {
       type: Number,
       default: -1,
     },
 
+    /**
+     * Descriptive label for the content.
+     */
     ariaLabel: {
       type: String,
       default: '',
     },
 
+    /**
+     * This property has higher priority than "option.animate"
+     * @values true, false
+     */
     animate: {
       type: Boolean,
       default: true,
     },
 
+    /**
+     * RippleDuration controls how long the delay is for the animation of a
+     * placeholder 1000 pixels from the top of the page. Each placeholder
+     * from the top down will have a delay duration from 0 to this offset.
+     * The delay of each placeholder animation is based on how far down the page
+     * the placeholder is rendered. This is a linear relationship. The unit
+     * is milliseconds.
+     */
     offset: {
       type: Number,
       default: 1,

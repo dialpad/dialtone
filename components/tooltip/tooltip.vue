@@ -9,6 +9,7 @@
       @mouseleave="onLeaveAnchor"
       @keydown.esc="onLeaveAnchor"
     >
+      <!-- @slot Slot for the anchor element -->
       <slot
         name="anchor"
       />
@@ -35,6 +36,7 @@
     >
       <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
       <!-- after-leave event can be used instead of transitionend -->
+      <!-- @slot Slot for the content, defaults to message prop -->
       <slot>
         {{ message }}
       </slot>
@@ -55,6 +57,13 @@ import {
   getAnchor,
   getPopperOptions,
 } from '../popover/tippy_utils';
+
+/**
+ * A tooltip is a floating label that briefly explains an action, function, or an element.
+ * Its content is exclusively text and shouldn't be vital information for users.
+ * If richer media is desired, consider using a popover instead.
+ * @see https://dialpad.design/components/tooltip.html
+ */
 export default {
   name: 'Tooltip',
   components: {
@@ -75,6 +84,7 @@ export default {
      * it will attempt to change it's direction to the "fallbackPlacements"
      * if defined, otherwise it will automatically position to a new location
      * as it sees best fit.
+     * See <a href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements" target="_blank">Popper.js docs</a>
      * */
     fallbackPlacements: {
       type: Array,
@@ -82,7 +92,8 @@ export default {
     },
 
     /**
-     * Add inverted class
+     * If true, applies inverted styles to the tooltip
+     * @values true, false
      */
     inverted: {
       type: Boolean,
@@ -91,7 +102,8 @@ export default {
 
     /**
      *  Displaces the tooltip from its reference element
-     *  by the specified number of pixels.
+     *  by the specified number of pixels. See
+     *  <a href="https://atomiks.github.io/tippyjs/v6/all-props/#offset" target="_blank">Tippy.js docs</a>
      */
     offset: {
       type: Array,
@@ -100,6 +112,12 @@ export default {
 
     /**
      * The direction the popover displays relative to the anchor.
+     * See <a href="https://atomiks.github.io/tippyjs/v6/all-props/#placement" target="_blank">Tippy.js docs</a>
+     * @values top, top-start, top-end,
+     * right, right-start, right-end,
+     * left, left-start, left-end,
+     * bottom, bottom-start, bottom-end,
+     * auto, auto-start, auto-end
      */
     placement: {
       type: String,
@@ -115,6 +133,8 @@ export default {
      * position in those cases the DOM layout changes the reference element's position.
      * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
      * checks the "popper" rect for changes.
+     * See <a href="https://atomiks.github.io/tippyjs/v6/all-props/#sticky" target="_blank">Tippy.js docs</a>
+     * @values true, false, reference, popper
      */
     sticky: {
       type: [Boolean, String],
@@ -146,6 +166,7 @@ export default {
      * Controls whether the tooltip is shown. Leaving this null will have the tooltip trigger on mouseover by default.
      * If you set this value, the default mouseover behavior will be disabled and you can control it as you need.
      * Supports .sync modifier
+     * @values true, false
      */
     show: {
       type: Boolean,
@@ -170,6 +191,12 @@ export default {
      * @type {Boolean}
      */
     'shown',
+
+    /**
+     * Sync show value
+     *
+     * @event update:show
+     */
     'update:show',
   ],
 

@@ -61,6 +61,10 @@ import {
   SHORTCUTS_ICON_SEPARATOR,
 } from './keyboard_shortcut_constants';
 
+/**
+ * This component displays a visual representation of a keyboard shortcut to the user.
+ * @see https://dialpad.design/components/keyboard_shortcut.html
+ */
 export default {
   name: 'DtKeyboardShortcut',
 
@@ -74,16 +78,27 @@ export default {
   },
 
   props: {
+    /**
+     * If true, applies inverted styles.
+     * @values true, false
+     */
     inverted: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Include any of these tokens in your string to render the corresponding symbol:
+     * {cmd} {win} {arrow-right} {arrow-left} {arrow-up} {arrow-down}
+     */
     shortcut: {
       type: String,
       required: true,
     },
 
+    /**
+     * Text entered here will be read by assistive technology. If null this component will be ignored by AT.
+     */
     screenReaderText: {
       type: String,
       default: null,

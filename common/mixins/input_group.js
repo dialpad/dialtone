@@ -10,6 +10,7 @@ import {
 /**
  * This mixin provides a base provide obj and set of components, props, computed, watchers and data attributes that are
  * commonly used in our input group components.
+ * @displayName Input Group Mixin
  */
 export const InputGroupMixin = {
   components: { DtValidationMessages },
@@ -59,6 +60,7 @@ export const InputGroupMixin = {
 
     /**
      * Disables the input group
+     * @values true, false
      */
     disabled: {
       type: Boolean,
@@ -76,6 +78,7 @@ export const InputGroupMixin = {
 
     /**
      * Show validation messages
+     * @values true, false
      */
     showMessages: {
       type: Boolean,

@@ -12,7 +12,7 @@
     :link-kind="linkKind"
     :icon-position="iconPosition"
     :disabled="disabled"
-    :style="{ width: width }"
+    :width="width"
     :active="active"
     @click="onClick"
     @focusin="onFocusIn"

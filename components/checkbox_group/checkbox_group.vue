@@ -2,6 +2,12 @@
 import Vue from 'vue';
 import { DtInputGroup } from '../input_group';
 
+/**
+ * Checkbox Groups are convenience components for a grouping of related Checkboxes.
+ * While each Checkbox within the group is independent, the `v-model` on the group provides
+ * a convenient interface for determining which Checkboxes within the group are checked.
+ * @see https://dialpad.design/components/checkbox_group.html
+ */
 export default {
   name: 'DtCheckboxGroup',
 
