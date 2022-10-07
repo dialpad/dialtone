@@ -11,6 +11,7 @@
         :disabled="disabled"
         :aria-label="ariaLabel"
         label-class="d-fs11"
+        width="8.4rem"
         :class="callbarButtonClass"
       >
         <slot />
@@ -98,11 +99,20 @@ export default {
         return label || this.$slots.default;
       },
     },
+
+    /**
+     * Additional class name for the button wrapper element.
+     */
+    buttonClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
   },
 
   computed: {
     callbarButtonClass () {
       return [
+        this.buttonClass,
         'dt-recipe-callbar-button',
         'd-stack4',
         {
@@ -118,8 +128,6 @@ export default {
 
 <style lang="less">
 .dt-recipe-callbar-button:not(.dt-recipe-callbar-button--circle) {
-  width: 8rem;
-  height: 6.2rem;
   letter-spacing: -0.011rem;
   line-height: 1.6rem;
 }
