@@ -1,3 +1,16 @@
+# [2.28.0](https://github.com/dialpad/dialtone-vue/compare/v2.27.0...v2.28.0) (2022-10-07)
+
+
+### Bug Fixes
+
+* dt-631 remove primary-color from dialtone vue ([#513](https://github.com/dialpad/dialtone-vue/issues/513)) ([ef227b7](https://github.com/dialpad/dialtone-vue/commit/ef227b7a9a8d4d9a2f67c228bafe85fc558743d6))
+
+
+### Features
+
+* add `buttonClass` prop to Call Bar Button component ([#534](https://github.com/dialpad/dialtone-vue/issues/534)) ([a9cd023](https://github.com/dialpad/dialtone-vue/commit/a9cd0239a2ede2a6f3ac95dde18317b9c635166f))
+* dp-57068 Adding independent control for showing the arrow ([#522](https://github.com/dialpad/dialtone-vue/issues/522)) ([5d9408e](https://github.com/dialpad/dialtone-vue/commit/5d9408e83efc2a058f884f10f51a1f01cae17ffb))
+
 # [2.27.0](https://github.com/dialpad/dialtone-vue/compare/v2.26.1...v2.27.0) (2022-09-23)
 
 
