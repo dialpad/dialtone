@@ -10,6 +10,7 @@
     :force-show-arrow="forceShowArrow"
     :active="active"
     :danger="danger"
+    :button-class="buttonClass"
     @arrow-click="onClick"
     @click="onClick"
   >
