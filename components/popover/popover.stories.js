@@ -15,6 +15,7 @@ import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './popover_constants';
 // Default Props for all variations
 export const argsData = {
   onOpened: action('opened'),
+  visuallyHiddenCloseLabel: 'Close popover',
 };
 
 export const argTypesData = {

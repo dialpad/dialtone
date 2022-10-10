@@ -25,6 +25,8 @@
     :tether="$attrs.tether"
     :sticky="$attrs.sticky"
     :open-with-arrow-keys="$attrs.openWithArrowKeys"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     @opened="$attrs.onOpened"
   >
     <template #anchor="{ attrs }">
