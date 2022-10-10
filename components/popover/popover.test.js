@@ -16,6 +16,8 @@ describe('DtPopover Tests', function () {
   let headerContent;
   let footerContent;
   let closeButton;
+  let srOnlyCloseButton;
+  const defaultSrOnlyCloseButtonLabel = 'Close popover';
   const defaultSlotMessage = 'Message';
 
   const _clearChildWrappers = () => {
@@ -26,6 +28,7 @@ describe('DtPopover Tests', function () {
     headerContent = null;
     footerContent = null;
     closeButton = null;
+    srOnlyCloseButton = null;
   };
 
   // Helpers
@@ -37,6 +40,7 @@ describe('DtPopover Tests', function () {
     headerContent = wrapper.findComponent({ ref: 'popover__header' });
     footerContent = wrapper.findComponent({ ref: 'popover__footer' });
     closeButton = wrapper.find('[data-qa="dt-popover-close"]');
+    srOnlyCloseButton = wrapper.find('[data-qa="dt-popover-sr-only-close"]');
   };
 
   const transitionStub = () => ({
@@ -51,6 +55,7 @@ describe('DtPopover Tests', function () {
         id: 'popover-id',
         showCloseButton: true,
         initialFocusElement: 'first',
+        visuallyHiddenCloseLabel: defaultSrOnlyCloseButtonLabel,
       },
       slots: {
         content: defaultSlotMessage,
@@ -115,6 +120,9 @@ describe('DtPopover Tests', function () {
       it('should render the anchor slot', async function () {
         assert.strictEqual(anchor.text(), 'Click me');
       });
+      it('should render the visually hidden close button', async function () {
+        assert.isTrue(srOnlyCloseButton.exists());
+      });
       // these tests will not observe focus changes under any circumstances?? spent too many hours on this junk.
       // it('focus should be on the first focusable element in the dialog', async function () {
       //   // initialFocusElement set to 'first' by default for these tests.
@@ -175,6 +183,35 @@ describe('DtPopover Tests', function () {
       it('should output error message', async function () {
         assert.isTrue(consoleErrorSpy.calledWith('If the popover is modal you must set the ' +
         'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement'));
+      });
+    });
+
+    describe('When visuallyHiddenCloseLabel is null', function () {
+      let consoleErrorSpy;
+      beforeEach(async function () {
+        consoleErrorSpy = sinon.spy(console, 'error');
+        await wrapper.setProps({ visuallyHiddenCloseLabel: null });
+      });
+
+      afterEach(function () {
+        consoleErrorSpy = null;
+        console.error.restore();
+      });
+
+      it('should output error message', async function () {
+        assert.isTrue(consoleErrorSpy.calledWith('If visuallyHiddenClose prop is true (default), the popover ' +
+          'includes a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.'));
+      });
+    });
+
+    describe('When visually hidden close is false', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ visuallyHiddenClose: false });
+        _setChildWrappers();
+      });
+
+      it('should NOT contain a visually hidden close button', async function () {
+        assert.isFalse(srOnlyCloseButton.exists());
       });
     });
   });
@@ -313,6 +350,17 @@ describe('DtPopover Tests', function () {
         describe('When close button is activated', function () {
           beforeEach(async function () {
             await closeButton.trigger('click');
+            _setChildWrappers();
+          });
+
+          it('should close the popover', function () {
+            assert.isFalse(popoverWindow.isVisible());
+          });
+        });
+
+        describe('When sr-only close button is activated', function () {
+          beforeEach(async function () {
+            await srOnlyCloseButton.trigger('click');
             _setChildWrappers();
           });
 

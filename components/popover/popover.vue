@@ -91,6 +91,15 @@
             name="content"
             :close="closePopover"
           />
+          <dt-button
+            v-if="visuallyHiddenClose"
+            data-qa="dt-popover-sr-only-close"
+            class="d-vi-visible-sr"
+            :aria-label="visuallyHiddenCloseLabel"
+            @click="closePopover"
+          >
+            <icon-close />
+          </dt-button>
         </div>
         <popover-header-footer
           v-if="$slots.footerContent"
@@ -130,8 +139,9 @@ import {
   createTippy,
   getPopperOptions,
 } from './tippy_utils';
-
+import { DtButton } from '../button';
 import PopoverHeaderFooter from './popover_header_footer';
+import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -147,6 +157,8 @@ export default {
     DtLazyShow,
     PopoverHeaderFooter,
     Portal,
+    DtButton,
+    IconClose,
   },
 
   mixins: [ModalMixin],
@@ -450,6 +462,24 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * If true, a visually hidden close button its included in the popover.
+     * @values true, false
+     */
+    visuallyHiddenClose: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Label for the visually hidden close button
+     * Required if visuallyHiddenClose is set to `true`
+     */
+    visuallyHiddenCloseLabel: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -611,6 +641,10 @@ export default {
       if (this.modal && this.initialFocusElement === 'none') {
         console.error('If the popover is modal you must set the ' +
         'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
+      }
+      if (this.visuallyHiddenClose && !this.visuallyHiddenCloseLabel) {
+        console.error('If visuallyHiddenClose prop is true (default), the popover includes a visually hidden ' +
+        'close button and you must set the visuallyHiddenCloseLabel prop.');
       }
     },
 

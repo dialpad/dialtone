@@ -25,6 +25,8 @@
     :tether="tether"
     :sticky="sticky"
     :open-with-arrow-keys="openWithArrowKeys"
+    :visually-hidden-close="visuallyHiddenClose"
+    :visually-hidden-close-label="visuallyHiddenCloseLabel"
     @opened="onOpened"
   >
     <template
