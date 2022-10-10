@@ -105,9 +105,11 @@ Content will be read to screen reader users, and the popover markup by is append
 There are a few important considerations to ensure popover controls are accessible.
 The popover, by default:
 
-- the popover content will have a generic role of "dialog" ( `menu`, `listbox` also possible roles as well)
+- the popover content will have a generic role of "dialog" ( `menu`, `listbox` also possible roles as well).
 - on open, focus will be transferred to the first focusable element within the popover, after close the triggering
 element will be focused.
+- the popover contains by default a close button that is screen reader visible only. If you want to include your own
+close button, this button can be disabled via `visually-hidden-close` prop.
 
 ### Anchor
 
