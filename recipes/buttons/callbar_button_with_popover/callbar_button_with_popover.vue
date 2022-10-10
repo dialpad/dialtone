@@ -7,6 +7,7 @@
       :disabled="disabled"
       :active="active"
       :danger="danger"
+      :button-class="buttonClass"
       class="dt-recipe--callbar-button-with-popover--main-button"
       @click="buttonClick"
     >
@@ -40,6 +41,7 @@
           importance="clear"
           size="lg"
           class="dt-recipe--callbar-button-with-popover--arrow"
+          width="2rem"
           :aria-label="arrowButtonLabel"
           :active="open"
           @click="arrowClick"
@@ -189,6 +191,14 @@ export default {
     danger: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional class name for the button wrapper element.
+     */
+    buttonClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
