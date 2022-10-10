@@ -6,6 +6,7 @@
     :circle="$attrs.circle"
     :disabled="$attrs.disabled"
     :danger="$attrs.danger"
+    :button-class="$attrs.buttonClass"
     @click="$attrs.onClick"
   >
     <template

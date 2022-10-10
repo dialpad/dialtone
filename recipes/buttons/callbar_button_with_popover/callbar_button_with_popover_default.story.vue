@@ -10,6 +10,7 @@
     :force-show-arrow="$attrs.forceShowArrow"
     :active="$attrs.active"
     :danger="$attrs.danger"
+    :button-class="$attrs.buttonClass"
     @arrow-click="$attrs.onClick"
     @click="$attrs.onClick"
   >

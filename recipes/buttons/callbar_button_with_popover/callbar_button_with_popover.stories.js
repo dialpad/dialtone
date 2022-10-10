@@ -60,6 +60,13 @@ export const argTypesData = {
   disabled: {
     control: 'boolean',
   },
+  buttonClass: {
+    table: {
+      type: {
+        summary: ['string', 'array', 'object'],
+      },
+    },
+  },
 
   // Popover slots
   content: {
