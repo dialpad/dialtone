@@ -4,7 +4,7 @@
     role="group"
     :aria-labelledby="`${id}-list-section-header`"
     tabindex="-1"
-    :class="['dt-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-bc-black-200',
+    :class="['dt-list-section', 'd-fs-200', 'd-lh6', 'd-py6', 'd-bc-black-400',
              { 'd-bb': separator }]"
   >
     <h3

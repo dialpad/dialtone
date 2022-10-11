@@ -1,17 +1,16 @@
 import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 import { version } from '../package.json';
 import { LogoContainer, Logo } from './components';
-import dialpadLogo from './assets/dialpad_logo_blurple.svg';
 
 <Meta title={`Version ${version}/Welcome`} id="welcome" />
 
 <LogoContainer>
-  <Logo className="example-doc__image" src={dialpadLogo} />
+  <Logo className="example-doc__image" src="https://static.dialpadcdn.com/dialtone/dialpad_logo.svg" />
 </LogoContainer>
 
 # Dialtone Vue 📞
 
-<img src={`https://img.shields.io/badge/npm-${version.replaceAll('-', '--')}-6C3DFF`} alt={`Version ${version}`} />
+<img src={`https://img.shields.io/badge/npm-${version.replaceAll('-', '--')}-7C52FF`} alt={`Version ${version}`} />
 
 <Subtitle>
   Dialtone Vue is a library of Vue components for <a class="d-link" href="https://dialpad.design/">Dialtone</a>, by Dialpad.

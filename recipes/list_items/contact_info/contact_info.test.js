@@ -91,7 +91,7 @@ describe('DtRecipeContactInfo Tests', function () {
       });
       it('Should display user status with green background color', function () {
         assert.isTrue(userStatusElement.exists());
-        assert.include(userStatusElement.classes(), 'd-bgc-green-400');
+        assert.include(userStatusElement.classes(), 'd-bgc-green-300');
       });
       it('Should render subtitle content correctly', function () {
         assert.isTrue(subtitleElement.exists());

@@ -163,7 +163,7 @@ WithCustomHeaderAndContent.args = {
       <div>[custom header]</div>
     </div>`,
   default: `
-    <div class="d-fl-center d-p32 d-bgc-yellow-300">
+    <div class="d-fl-center d-p32 d-bgc-gold-200">
       <h2>[custom body]</h2>
     </div>`,
 };

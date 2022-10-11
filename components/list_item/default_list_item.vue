@@ -1,5 +1,5 @@
 <template>
-  <div class="dt-default-list-item d-fs14 d-lh4 d-py4 d-px12 d-d-flex d-ai-center">
+  <div class="dt-default-list-item d-fs-200 d-lh4 d-py4 d-px12 d-d-flex d-ai-center">
     <section
       v-if="$slots.left"
       class="dt-default-list-item--left d-d-inline-flex d-as-flex-start d-d-flex d-ai-center d-pr8"
@@ -16,7 +16,7 @@
       <div
         v-if="$slots.subtitle"
         data-qa="dt-default-list-item-subtitle-wrapper"
-        :class="['d-fs12 d-fc-black-500', { 'd-mtn2': $slots.default }]"
+        :class="['d-fs-100 d-fc-black-600', { 'd-mtn2': $slots.default }]"
       >
         <!-- @slot Slot for the content below the main content -->
         <slot name="subtitle" />

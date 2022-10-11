@@ -6,7 +6,7 @@
   <div>
     <dt-recipe-top-banner-info
       class="d-mb6"
-      color-code="yellow400"
+      color-code="gold200"
     >
       <template slot="left">
         <span class="d-fw-bold"> Active Call </span> 3:21
@@ -38,7 +38,7 @@
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
       class="d-mb6"
-      color-code="green200"
+      color-code="green100"
     >
       <template slot="left">
         <span class="d-fw-bold"> Ringing... </span>
@@ -46,11 +46,11 @@
       <span> Your caller ID: (415) 555-1234 </span>
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
-      color-code="yellow200"
+      color-code="gold100"
     >
       <template slot="left">
         <span class="d-fw-bold">Joseph Lumaban</span>
-        <div class="d-fc-red-500 d-fw-bold">
+        <div class="d-fc-red-300 d-fw-bold">
           On hold 00:08
         </div>
       </template>
