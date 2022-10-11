@@ -1,3 +1,26 @@
+# [3.19.0](https://github.com/dialpad/dialtone-vue/compare/v3.18.0...v3.19.0) (2022-10-11)
+
+
+### Bug Fixes
+
+* dt-631 remove primary-color from dialtone vue ([#520](https://github.com/dialpad/dialtone-vue/issues/520)) ([6f58dcf](https://github.com/dialpad/dialtone-vue/commit/6f58dcf45bd28f4a10cceac0c51b054e8e918e33))
+* update dialtone peer dependency ([c9f53ef](https://github.com/dialpad/dialtone-vue/commit/c9f53efd0eca1e3a1067522420321e162adc3ec9))
+
+
+### Features
+
+* (card) vue-3 ([#494](https://github.com/dialpad/dialtone-vue/issues/494)) ([#500](https://github.com/dialpad/dialtone-vue/issues/500)) ([82a5d18](https://github.com/dialpad/dialtone-vue/commit/82a5d1859487625fa7468e6b6c14312bee582836))
+* dp-46328 callbar buttons Vue3 ([#471](https://github.com/dialpad/dialtone-vue/issues/471)) ([#521](https://github.com/dialpad/dialtone-vue/issues/521)) ([39d9f62](https://github.com/dialpad/dialtone-vue/commit/39d9f623cf0d4e4b8c900dee41a6ee56181217ec))
+* dp-57068 Adding independent control for showing the arrow ([#523](https://github.com/dialpad/dialtone-vue/issues/523)) ([104bf0f](https://github.com/dialpad/dialtone-vue/commit/104bf0f3a11e80db3d4722075800952dfb513bfb))
+* dp-57068 Adding independent control for showing the arrow ([#524](https://github.com/dialpad/dialtone-vue/issues/524)) ([66c082b](https://github.com/dialpad/dialtone-vue/commit/66c082bf2c719e59d1da2bdbc23723022b3e1899))
+* dp-57757 add `buttonClass` prop to Call Bar Button component (Vue3) ([#538](https://github.com/dialpad/dialtone-vue/issues/538)) ([b36e5c6](https://github.com/dialpad/dialtone-vue/commit/b36e5c6ee0076ad1c272aab01fa4b7f76ebe318d))
+* dp-57757 add `buttonClass` prop to Call Bar Button component (Vue3) ([#538](https://github.com/dialpad/dialtone-vue/issues/538)) ([#542](https://github.com/dialpad/dialtone-vue/issues/542)) ([d512461](https://github.com/dialpad/dialtone-vue/commit/d5124615d689138bbeb3a6f4bfa7849c03d9a0a8))
+* dt-recipe-ivr-node vue3 ([#515](https://github.com/dialpad/dialtone-vue/issues/515)) ([#517](https://github.com/dialpad/dialtone-vue/issues/517)) ([cc56623](https://github.com/dialpad/dialtone-vue/commit/cc56623e2ee87ae41587cb299b52f050e96c665c))
+* migrate to dialtone 7 ([#507](https://github.com/dialpad/dialtone-vue/issues/507)) ([ab00cd2](https://github.com/dialpad/dialtone-vue/commit/ab00cd2bb6136b1bf7fae8dd46736d506007df4c)), closes [#504](https://github.com/dialpad/dialtone-vue/issues/504) [#511](https://github.com/dialpad/dialtone-vue/issues/511) [#509](https://github.com/dialpad/dialtone-vue/issues/509)
+* migration to dialtone 7 - vue3 ([#440](https://github.com/dialpad/dialtone-vue/issues/440)) ([acdf7e9](https://github.com/dialpad/dialtone-vue/commit/acdf7e958431ebb6f3f86f48962bbd891c3fd79c))
+* **popover:** add sr-only close button - vue3 ([#540](https://github.com/dialpad/dialtone-vue/issues/540)) ([5177cdd](https://github.com/dialpad/dialtone-vue/commit/5177cdd412f4ff032b7f9bfb3a7f3ae077ace513))
+* **popover:** add sr-only close button - vue3 ([#540](https://github.com/dialpad/dialtone-vue/issues/540)) ([#544](https://github.com/dialpad/dialtone-vue/issues/544)) ([7519248](https://github.com/dialpad/dialtone-vue/commit/751924843a366fe40ff8f77f73c187340ef2a285))
+
 # [3.18.0](https://github.com/dialpad/dialtone-vue/compare/v3.17.0...v3.18.0) (2022-09-23)
 
 
