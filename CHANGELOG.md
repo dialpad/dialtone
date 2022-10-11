@@ -1,3 +1,10 @@
+## [3.19.1](https://github.com/dialpad/dialtone-vue/compare/v3.19.0...v3.19.1) (2022-10-11)
+
+
+### Bug Fixes
+
+* remove unnecessary file ([cc8a7ce](https://github.com/dialpad/dialtone-vue/commit/cc8a7cef72c0819ad394aebc3810305276d0730d))
+
 # [3.19.0](https://github.com/dialpad/dialtone-vue/compare/v3.18.0...v3.19.0) (2022-10-11)
 
 
