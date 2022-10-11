@@ -33,7 +33,7 @@
         <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
         <template #subtitle>
           <div
-            class="d-fc-red-300"
+            class="d-fc-red-400"
             @click.stop="$attrs.onMarkAsSpam"
           >
             Mark as spam
