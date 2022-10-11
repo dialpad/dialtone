@@ -22,7 +22,7 @@
       slot="avatar"
     >
       <dt-avatar
-        class="d-avatar--purple-200"
+        color="purple-200"
         v-html="avatar"
       />
     </template>
