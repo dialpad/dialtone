@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-p8">
-      <h1 class="d-fs14">
+      <h1 class="d-fs-200">
         Default shortcut
       </h1>
       <dt-keyboard-shortcut
@@ -10,7 +10,7 @@
     </div>
 
     <div class="d-p8 d-bgc-black-900">
-      <h1 class="d-fc-black-075 d-fs14">
+      <h1 class="d-fc-black-300 d-fs-200">
         Inverted style
       </h1>
       <dt-keyboard-shortcut
@@ -20,24 +20,24 @@
     </div>
 
     <div class="d-p8">
-      <h1 class="d-fs14">
+      <h1 class="d-fs-200">
         Shortcut size variation
       </h1>
       <dt-keyboard-shortcut
-        class="d-fs16"
+        class="d-fs-200"
         shortcut="{cmd}+Y"
       />
     </div>
 
     <div class="d-p8">
-      <h1 class="d-fs14">
+      <h1 class="d-fs-200">
         All available shortcut aliases
       </h1>
       <dt-keyboard-shortcut :shortcut="availableVariants" />
     </div>
 
     <div class="d-p8">
-      <h1 class="d-fs14">
+      <h1 class="d-fs-200">
         Inline with text and screen reader text
       </h1>
       <p>

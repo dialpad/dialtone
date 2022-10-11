@@ -21,7 +21,7 @@
         </dt-button>
       </template>
       <template #content="{ close }">
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <div>
             <p class="d-mb4">
               I will be displayed in the popover!
@@ -53,7 +53,7 @@
         </dt-button>
       </template>
       <template #content="{ close }">
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <div>
             <p class="d-mb4">
               I will be displayed in the popover!
@@ -86,7 +86,7 @@
         </dt-button>
       </template>
       <template #content="{ close }">
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <div>
             <dt-button
               @click="close"
@@ -114,7 +114,7 @@
         </dt-button>
       </template>
       <template #content="{ close }">
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <div>
             <p class="d-mb4">
               I will be displayed in the popover!
@@ -186,7 +186,7 @@
         </div>
       </template>
       <template #content>
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <p>
             {{ sampleText }}
           </p>
@@ -221,7 +221,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <p>
             {{ sampleText }}
           </p>
@@ -258,7 +258,7 @@
         <div>This is a footer</div>
       </template>
       <template #content>
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <p>
             {{ sampleText }}
           </p>
@@ -290,7 +290,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <p>
             {{ sampleText }}
           </p>
@@ -375,7 +375,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <p>
             {{ sampleText }}
           </p>
@@ -411,7 +411,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-fs14 d-m0">
+        <div class="d-fs-200 d-m0">
           <p>
             {{ sampleText }}
           </p>

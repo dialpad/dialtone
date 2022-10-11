@@ -84,8 +84,8 @@ Default.parameters = {
       code: `
 <dt-card class="d-w264">
   <template #content>
-    <p class="d-fs14 d-fw-bold d-fc-black-800">Lorem ipsum</p>
-    <p class="d-fs12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    <p class="d-fs-200 d-fw-bold d-fc-black-800">Lorem ipsum</p>
+    <p class="d-fs-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</p>
   </template>
 </dt-card>`,

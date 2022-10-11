@@ -172,12 +172,12 @@ describe('DtInput tests', function () {
     describe('When an inputClass prop is provided', function () {
       // Test Setup
       beforeEach(async function () {
-        await wrapper.setProps({ inputClass: 'd-fc-green' });
+        await wrapper.setProps({ inputClass: 'd-fc-success' });
         _setChildWrappers();
       });
 
       it('Should apply the class to the input element.', function () {
-        assert.isTrue(nativeInput.classes('d-fc-green'));
+        assert.isTrue(nativeInput.classes('d-fc-success'));
       });
     });
 

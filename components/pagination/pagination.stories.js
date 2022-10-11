@@ -119,7 +119,7 @@ Variants.parameters = {
       code: `
  <div class="d-divide-y d-divide-purple-400">
     <div class="d-m32">
-      <p class="d-my16 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs-200 d-fw-bold">
         Separator in the end
       </p>
       <dt-pagination
@@ -131,7 +131,7 @@ Variants.parameters = {
       />
     </div>
     <div class="d-m32">
-      <p class="d-my16 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs-200 d-fw-bold">
         Separator in the beginning
       </p>
       <dt-pagination
@@ -144,7 +144,7 @@ Variants.parameters = {
       />
     </div>
     <div class="d-m32">
-      <p class="d-my16 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs-200 d-fw-bold">
         Separator on both sides
       </p>
       <dt-pagination

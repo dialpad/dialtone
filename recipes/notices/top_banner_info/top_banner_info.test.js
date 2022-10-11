@@ -8,7 +8,7 @@ import {
 
 // Constants
 const baseProps = {
-  colorCode: 'green400',
+  colorCode: 'green300',
 };
 
 const baseSlots = {
@@ -71,7 +71,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
         assert.strictEqual(middleContent.text(), slots.default);
       });
       it('Should display with default background color', function () {
-        assert.include(rootElement.classes(), 'd-bgc-green-400');
+        assert.include(rootElement.classes(), 'd-bgc-green-300');
       });
     });
 
@@ -81,7 +81,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
       });
 
       it('Should display with passed background color', function () {
-        assert.include(rootElement.classes(), 'd-bgc-black-100');
+        assert.include(rootElement.classes(), 'd-bgc-black-400');
       });
     });
   });

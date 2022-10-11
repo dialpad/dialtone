@@ -67,7 +67,7 @@ export default {
   position: relative;
   width: 800px;
   height: 300px;
-  background-color: var(--black-025);
+  background-color: var(--black-100);
   padding: 10px;
   border-radius: 10px;
   overflow-y: scroll;

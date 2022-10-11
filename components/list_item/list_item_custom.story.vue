@@ -16,12 +16,12 @@
         class="custom-list-item d-ps-relative d-py8 d-px12 d-d-flex d-ai-center"
       >
         <time
-          class="custom-list-item--time d-fs12 d-pr12"
+          class="custom-list-item--time d-fs-100 d-pr12"
           datetime="10:00"
         >
           10:00
         </time>
-        <span class="d-fs14">
+        <span class="d-fs-200">
           Custom List Item Example
         </span>
         <div class="custom-list-item--actions d-ps-absolute d-p6 d-tn8 d-r12 d-d-flex d-bgc-white d-bar4 d-bs-md">

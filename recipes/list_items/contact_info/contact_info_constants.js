@@ -1,8 +1,8 @@
 export const USER_STATUS_COLOR_MODIFIERS = {
   none: '',
-  green: 'd-bgc-green-400',
-  yellow: 'd-bgc-yellow-400',
-  red: 'd-bgc-red-400',
+  green: 'd-bgc-green-300',
+  gold: 'd-bgc-gold-200',
+  red: 'd-bgc-red-200',
 };
 
 export default {

@@ -36,7 +36,7 @@
           <template #left>
             <dt-avatar
               kind="initials"
-              color="purple-500"
+              color="purple-400"
             >
               <span aria-hidden="true">{{ i + 1 }}</span>
             </dt-avatar>

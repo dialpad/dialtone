@@ -226,7 +226,7 @@ export default {
 .dt-list-item--focusable:focus,
 .dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
-  background-color: hsla(var(--black-400-h), var(--black-400-s), var(--black-400-l), 0.15);
+  background-color: hsla(var(--black-500-h), var(--black-500-s), var(--black-500-l), 0.15);
 }
 
 .dt-list-item:focus-visible {

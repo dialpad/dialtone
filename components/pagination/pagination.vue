@@ -33,7 +33,7 @@
         :aria-label="pageNumberAriaLabel(page)"
         :importance="currentPage === page ? 'primary' : 'clear'"
         class="d-h32 d-w32"
-        label-class="d-fs14"
+        label-class="d-fs-200"
         @click="changePage(page)"
       >
         {{ page }}
