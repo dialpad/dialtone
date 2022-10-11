@@ -216,6 +216,12 @@
           "value": "#121212",
           "type": "color"
         }
+      },
+      "gradient": {
+        "magenta-purple": {
+          "value": "linear-gradient(180deg, $color.magenta.300 10%, $color.purple.400 90%)",
+          "type": "color"
+        }
       }
     },
     "opacity": {
