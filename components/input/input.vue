@@ -52,7 +52,10 @@
           {{ validationProps.length.description }}
         </div>
       </div>
-      <div class="d-input__wrapper">
+      <div
+        :class="inputWrapperClasses()"
+        :read-only="disabled"
+      >
         <span
           v-if="$slots.leftIcon"
           :class="inputIconClasses('left')"
@@ -214,6 +217,16 @@ export default {
      * same API as Vue's built-in handling of the class attribute.
      */
     inputClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the input wrapper element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    inputWrapperClass: {
       type: [String, Object, Array],
       default: '',
     },
@@ -485,6 +498,23 @@ export default {
 
       return sizeClasses[this.inputComponent][this.size];
     },
+
+    stateClass () {
+      const inputStateClasses = {
+        input: {
+          error: 'd-input--error base-input__input--error',
+          warning: 'd-input--warning base-input__input--warning',
+          success: 'd-input--success base-input__input--success',
+        },
+
+        textarea: {
+          error: 'd-textarea--error base-input__input--error',
+          warning: 'd-textarea--warning base-input__input--warning',
+          success: 'd-textarea--success base-input__input--success',
+        },
+      };
+      return [inputStateClasses[this.inputComponent][this.inputState]];
+    },
   },
 
   watch: {
@@ -508,30 +538,24 @@ export default {
 
   methods: {
     inputClasses () {
-      const inputStateClasses = {
-        input: {
-          error: 'd-input--error base-input__input--error',
-          warning: 'd-input--warning base-input__input--warning',
-          success: 'd-input--success base-input__input--success',
-        },
-
-        textarea: {
-          error: 'd-textarea--error base-input__input--error',
-          warning: 'd-textarea--warning base-input__input--warning',
-          success: 'd-textarea--success base-input__input--success',
-        },
-      };
-
       return [
         'base-input__input',
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         {
-          [inputStateClasses[this.inputComponent][this.inputState]]: this.showInputState,
+          [this.stateClass]: this.showInputState,
           'd-input-icon--left': this.$slots.leftIcon,
           'd-input-icon--right': this.$slots.rightIcon,
         },
         this.sizeModifierClass,
         this.inputClass,
+      ];
+    },
+
+    inputWrapperClasses () {
+      return [
+        'd-input__wrapper',
+        { [this.stateClass]: this.showInputState },
+        this.inputWrapperClass,
       ];
     },
 

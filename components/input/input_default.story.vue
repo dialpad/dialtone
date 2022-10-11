@@ -14,6 +14,7 @@
     :messages-class="$attrs.messagesClass"
     :placeholder="$attrs.placeholder"
     :input-class="$attrs.inputClass"
+    :input-wrapper-class="$attrs.inputWrapperClass"
     :current-length="$attrs.currentLength"
     :validate="validationConfig"
     @blur="$attrs.onBlur"
