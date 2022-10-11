@@ -1,3 +1,11 @@
+## [2.29.2](https://github.com/dialpad/dialtone-vue/compare/v2.29.1...v2.29.2) (2022-10-11)
+
+
+### Bug Fixes
+
+* input styling and wrapper classes ([#535](https://github.com/dialpad/dialtone-vue/issues/535)) ([2efe225](https://github.com/dialpad/dialtone-vue/commit/2efe2251bb14caaeca768e34e1ec38777eba5b86))
+* migrate ivr_node to dialtone7 ([#547](https://github.com/dialpad/dialtone-vue/issues/547)) ([69a046b](https://github.com/dialpad/dialtone-vue/commit/69a046b89df0504daf6421e6f1eeae790c6fb35f))
+
 ## [2.29.1](https://github.com/dialpad/dialtone-vue/compare/v2.29.0...v2.29.1) (2022-10-11)
 
 
