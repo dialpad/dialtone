@@ -2,7 +2,7 @@
   <dt-recipe-ivr-node
     :node-label="label"
     :node-type="nodeType"
-    :is-selected="isNodeSelected"
+    :is-selected="isSelected"
     :dtmf-key="$attrs.dtmfKey"
     :menu-button-aria-label="$attrs.menuButtonAriaLabel"
     @click="$attrs.onClick($event)"
@@ -128,12 +128,6 @@ export default {
       type: String,
       default: null,
     },
-  },
-
-  data () {
-    return {
-      isNodeSelected: this.isSelected,
-    };
   },
 
   computed: {
