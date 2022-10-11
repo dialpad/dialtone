@@ -7,8 +7,8 @@
       v-if="dtmfKey"
       data-qa="dt-top-connector-dtmf"
       class="d-zi-base1 d-ai-center d-jc-center d-d-flex
-          d-w24 d-h24 d-bar-circle d-bc-purple-800 d-bgc-purple-800
-          d-mbn12 d-fc-white d-fs14"
+          d-w24 d-h24 d-bar-circle d-bc-purple-600 d-bgc-purple-600
+          d-mbn12 d-fc-white d-fs-200"
       :class="{ 'd-mbn16': isSelected }"
     >
       {{ dtmfKey }}
@@ -16,11 +16,11 @@
     <div
       v-else
       data-qa="dt-top-connector"
-      class="d-zi-base1 d-d-flex d-w8 d-h8 d-bar-circle d-bc-purple-800 d-bgc-purple-800 d-mbn4"
+      class="d-zi-base1 d-d-flex d-w8 d-h8 d-bar-circle d-bc-purple-600 d-bgc-purple-600 d-mbn4"
       :class="{ 'd-mbn8': isSelected }"
     />
     <dt-card
-      content-class="d-bt d-bc-black-075 d-px12 d-pt8 d-pb12"
+      content-class="d-bt d-bc-black-300 d-px12 d-pt8 d-pb12"
       :container-class="[
         'd-w100p',
         { 'd-ba d-bar8 d-baw4': isSelected },
@@ -51,7 +51,7 @@
             </template>
           </dt-button>
           <p
-            class="d-fs14 d-fw-bold"
+            class="d-fs-200 d-fw-bold"
             data-qa="ivr-node-label"
           >
             {{ nodeLabel }}
@@ -188,14 +188,5 @@ export default {
 <style lang="less">
 .ivr_node__width {
   width: 280px;
-}
-// TODO remove when Dialtone 7 releases.
-.prompt_node_border_color {
-  --bco: 100%;
-  border-color: #84BDFF !important;
-}
-.prompt_node_border_color__selected {
-  --bco: 100%;
-  border-color: #51A0FE !important;
 }
 </style>
