@@ -1,3 +1,10 @@
+# [2.30.0](https://github.com/dialpad/dialtone-vue/compare/v2.29.2...v2.30.0) (2022-10-11)
+
+
+### Features
+
+* dp-57015 grouped chip recipe ([#527](https://github.com/dialpad/dialtone-vue/issues/527)) ([3d7b4c5](https://github.com/dialpad/dialtone-vue/commit/3d7b4c5311d9456bebdd2de82ab6b82c8e41c615))
+
 ## [2.29.2](https://github.com/dialpad/dialtone-vue/compare/v2.29.1...v2.29.2) (2022-10-11)
 
 
