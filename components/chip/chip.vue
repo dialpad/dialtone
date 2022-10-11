@@ -1,6 +1,7 @@
 <template>
   <span class="d-chip">
     <component
+      v-bind="$attrs"
       :is="interactive ? 'button' : 'span'"
       :id="id"
       :type="interactive && 'button'"
@@ -53,7 +54,10 @@
 <script>
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import { DtButton } from '../button';
-import { CHIP_CLOSE_BUTTON_SIZE_MODIFIERS, CHIP_SIZE_MODIFIERS } from './chip_constants';
+import {
+  CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
+  CHIP_SIZE_MODIFIERS,
+} from './chip_constants';
 import { getUniqueString } from '@/common/utils';
 
 /**
@@ -69,6 +73,8 @@ export default {
     IconClose,
     DtButton,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -190,7 +196,7 @@ export default {
   methods: {
     chipClasses () {
       return [
-        'd-chip__label',
+        this.$attrs['grouped-chip'] ? 'd-chip' : 'd-chip__label',
         CHIP_SIZE_MODIFIERS[this.size],
       ];
     },

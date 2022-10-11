@@ -1,0 +1,65 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeGroupedChip from './grouped_chip';
+
+# DtRecipeGroupedChip
+
+<Subtitle>
+  Grouped Chip is a format used to present related information such as callbar timers.
+</Subtitle>
+
+## Base Style
+
+Grouped chip component has related info split in two combination chips. Common use cases represented
+are split callbar timers showing call time and hold time on the left hand and right hand side respectively.
+
+This component has 4 slots: **leftIcon**, **leftContent**, **rightIcon** and **rightContent** slot.
+
+**leftIcon** is used to display an icon that best represents the leftContent.
+
+**leftContent** is used to display content and is placed on the left hand side.
+
+**rightIcon** is used to display an icon that best represents the rightContent.
+
+**rightContent** is used to display content and is placed on the right hand side.
+
+<Canvas>
+  <Story id="recipes-chips-grouped-chips--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeGroupedChip } from '@dialpad/dialtone-vue';
+```
+
+### Split Combination Chip showing both left and right hand side content.
+
+```html
+import IconTime from '@dialpad/dialtone/lib/dist/vue/icons/IconTime';
+import IconPause from '@dialpad/dialtone/lib/dist/vue/icons/IconPause.vue';
+
+<dt-recipe-grouped-chip>
+  <template #leftIcon>
+    <icon-time />
+  </template>
+  <template #leftContent>
+    <div>
+      0.15
+    </div>
+  </template>
+  <template #rightIcon>
+    <icon-pause class="d-svg d-svg--system d-fc-purple-600" />
+  </template>
+  <template #rightContent>
+    <div>
+      0.15
+    </div>
+  </template>
+</dt-recipe-grouped-chip>
+```
