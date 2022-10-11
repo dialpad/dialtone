@@ -1,3 +1,10 @@
+## [2.29.1](https://github.com/dialpad/dialtone-vue/compare/v2.29.0...v2.29.1) (2022-10-11)
+
+
+### Bug Fixes
+
+* replace class with color prop ([1012f96](https://github.com/dialpad/dialtone-vue/commit/1012f9619e15b0f13df9e5a1eb320668b0776c8d))
+
 # [2.29.0](https://github.com/dialpad/dialtone-vue/compare/v2.28.0...v2.29.0) (2022-10-11)
 
 
