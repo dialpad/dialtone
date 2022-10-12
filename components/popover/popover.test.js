@@ -116,8 +116,8 @@ describe('DtPopover Tests', function () {
       it('should render the anchor slot', async function () {
         assert.strictEqual(anchor.text(), 'Click me');
       });
-      it('should render the visually hidden close button', async function () {
-        assert.isTrue(srOnlyCloseButton.exists());
+      it('should not render the visually hidden close button', async function () {
+        assert.isFalse(srOnlyCloseButton.exists());
       });
       // these tests will not observe focus changes under any circumstances?? spent too many hours on this junk.
       // it('focus should be on the first focusable element in the dialog', async function () {
@@ -182,10 +182,11 @@ describe('DtPopover Tests', function () {
       });
     });
 
-    describe('When visuallyHiddenCloseLabel is null', function () {
+    describe('When visuallyHiddenCloseLabel is null and visuallyHiddenClose is true', function () {
       let consoleErrorSpy;
       beforeEach(async function () {
         consoleErrorSpy = sinon.spy(console, 'error');
+        await wrapper.setProps({ visuallyHiddenClose: true });
         await wrapper.setProps({ visuallyHiddenCloseLabel: null });
       });
 
@@ -354,10 +355,12 @@ describe('DtPopover Tests', function () {
           });
         });
 
-        describe('When sr-only close button is activated', function () {
+        describe('When sr-only close button is enabled and activated', function () {
           beforeEach(async function () {
-            await srOnlyCloseButton.trigger('click');
+            await wrapper.setProps({ visuallyHiddenClose: true });
+            await wrapper.setProps({ visuallyHiddenCloseLabel: 'Close Menu' });
             _setChildWrappers();
+            await srOnlyCloseButton.trigger('click');
           });
 
           it('should close the popover', function () {

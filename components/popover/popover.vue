@@ -469,7 +469,7 @@ export default {
      */
     visuallyHiddenClose: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
