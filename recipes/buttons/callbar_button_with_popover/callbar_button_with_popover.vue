@@ -28,7 +28,7 @@
       :show-close-button="showCloseButton"
       padding="none"
       class="dt-recipe--callbar-button-with-popover--popover-wrapper"
-      dialog-class="d-h464 d-w512 dt-recipe--callbar-button-with-popover--popover"
+      :dialog-class="['dt-recipe--callbar-button-with-popover--popover', contentClass]"
       header-class="d-d-flex d-ai-center d-fw-normal d-px12"
       v-bind="$attrs"
       @opened="onModalIsOpened"
@@ -206,6 +206,14 @@ export default {
      * Additional class name for the button wrapper element.
      */
     buttonClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the popover content wrapper element.
+     */
+    contentClass: {
       type: [String, Array, Object],
       default: '',
     },
