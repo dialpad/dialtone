@@ -1,3 +1,15 @@
+# [2.31.0](https://github.com/dialpad/dialtone-vue/compare/v2.30.0...v2.31.0) (2022-10-12)
+
+
+### Bug Fixes
+
+* **popover:** default visually hidden to false ([#552](https://github.com/dialpad/dialtone-vue/issues/552)) ([fde03c9](https://github.com/dialpad/dialtone-vue/commit/fde03c9a1a7f81ad3be8749f231948afbc05d1e0))
+
+
+### Features
+
+* dp-57689 add `contentClass` to DtRecipeCallbarButtonWithPopover ([#550](https://github.com/dialpad/dialtone-vue/issues/550)) ([d2ca0b1](https://github.com/dialpad/dialtone-vue/commit/d2ca0b1ca9752e25c745a17d620f3aacf8b4b4d5))
+
 # [2.30.0](https://github.com/dialpad/dialtone-vue/compare/v2.29.2...v2.30.0) (2022-10-11)
 
 
