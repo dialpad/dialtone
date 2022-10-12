@@ -67,6 +67,13 @@ export const argTypesData = {
       },
     },
   },
+  contentClass: {
+    table: {
+      type: {
+        summary: ['string', 'array', 'object'],
+      },
+    },
+  },
 
   // Popover slots
   content: {
@@ -193,6 +200,7 @@ Default.args = {
   ariaLabel: 'Button',
   arrowButtonLabel: 'Open popover',
   content: 'Popover body content',
+  contentClass: ['d-h464', 'd-w512'],
   headerContent: 'Header content',
   showCloseButton: true,
   forceShowArrow: false,
