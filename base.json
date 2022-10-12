@@ -219,7 +219,7 @@
       },
       "gradient": {
         "magenta-purple": {
-          "value": "linear-gradient(180deg, $color.magenta.300 10%, $color.purple.400 90%)",
+          "value": "linear-gradient(180deg, {color.magenta.300} 10%, {color.purple.400} 90%)",
           "type": "color"
         }
       }
