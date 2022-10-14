@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/dialpad/dialtone-tokens/compare/v1.3.2...v1.3.3) (2022-10-14)
+
+
+### Bug Fixes
+
+* change CGFloat to not divide by base ([636a5ad](https://github.com/dialpad/dialtone-tokens/commit/636a5ada73015128c9e9c3a17f2d9b3012e312c9))
+
 ## [1.3.2](https://github.com/dialpad/dialtone-tokens/compare/v1.3.1...v1.3.2) (2022-09-29)
 
 
