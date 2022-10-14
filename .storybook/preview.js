@@ -15,6 +15,10 @@ setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 Vue.use(fixDefaultSlot);
 
+// Fixes method "toJSON" is not defined on click event in Sb 6.5.11
+// See https://github.com/storybookjs/storybook/issues/14933#issuecomment-920578274
+Vue.prototype.toJSON = () => {}
+
 addParameters({
   docs: {
     theme,
