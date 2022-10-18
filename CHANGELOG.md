@@ -1,3 +1,10 @@
+## [2.31.1](https://github.com/dialpad/dialtone-vue/compare/v2.31.0...v2.31.1) (2022-10-18)
+
+
+### Bug Fixes
+
+* **grouped-chips:** fix visual fixes ([#556](https://github.com/dialpad/dialtone-vue/issues/556)) ([437d33d](https://github.com/dialpad/dialtone-vue/commit/437d33d3a94bdde7224245ab23c18b72aa6cc8d7))
+
 # [2.31.0](https://github.com/dialpad/dialtone-vue/compare/v2.30.0...v2.31.0) (2022-10-12)
 
 
