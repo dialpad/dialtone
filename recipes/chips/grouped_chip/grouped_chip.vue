@@ -1,12 +1,15 @@
 <template>
-  <div data-qa="grouped-chip">
+  <div
+    data-qa="grouped-chip"
+    class="d-d-inline-flex d-ws-nowrap d-bgc-unset"
+  >
     <dt-chip
       :hide-close="true"
       :interactive="false"
-      content-class="d-fs12"
+      content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-blr-pill d-bgc-black-050"
+      class="d-blr-pill d-bgc-black-200 d-w100p d-wmx64"
     >
       <template
         v-if="$slots.leftIcon"
@@ -35,10 +38,10 @@
     <dt-chip
       :hide-close="true"
       :interactive="false"
-      content-class="d-fs12"
+      content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-brr-pill d-bgc-purple-200 d-mln6"
+      class="d-brr-pill d-bgc-purple-200 d-w100p d-wmx64"
     >
       <template #icon>
         <div
@@ -53,6 +56,7 @@
         <div
           v-if="$slots.rightContent"
           data-qa="right-grouped-chip-content"
+          class="d-wmx50p"
         >
           <!-- @slot Slot for right chip content information -->
           <slot name="rightContent" />
