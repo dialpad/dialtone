@@ -10,7 +10,7 @@
         icon-position="top"
         :disabled="disabled"
         :aria-label="ariaLabel"
-        label-class="d-fs11"
+        label-class="d-fs-100"
         width="8.4rem"
         :class="callbarButtonClass"
         v-on="$listeners"
@@ -127,6 +127,7 @@ export default {
         this.buttonClass,
         'dt-recipe-callbar-button',
         'd-stack4',
+        'd-px0',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'dt-recipe-callbar-button--active': this.active,
