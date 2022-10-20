@@ -1,3 +1,10 @@
+## [3.20.1](https://github.com/dialpad/dialtone-vue/compare/v3.20.0...v3.20.1) (2022-10-20)
+
+
+### Bug Fixes
+
+* **input:** fix read-only attr in the input component ([#563](https://github.com/dialpad/dialtone-vue/issues/563)) ([690b205](https://github.com/dialpad/dialtone-vue/commit/690b2053d51795b7bed7f787f309b32ad84a7a87))
+
 # [3.20.0](https://github.com/dialpad/dialtone-vue/compare/v3.19.1...v3.20.0) (2022-10-20)
 
 
