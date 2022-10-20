@@ -1,3 +1,10 @@
+# [2.32.0](https://github.com/dialpad/dialtone-vue/compare/v2.31.1...v2.32.0) (2022-10-20)
+
+
+### Features
+
+* dp-57693 remove button left and right paddings in callbar_button ([#558](https://github.com/dialpad/dialtone-vue/issues/558)) ([b20c866](https://github.com/dialpad/dialtone-vue/commit/b20c866b3871de42a26e833eda8c54e4424f097d))
+
 ## [2.31.1](https://github.com/dialpad/dialtone-vue/compare/v2.31.0...v2.31.1) (2022-10-18)
 
 
