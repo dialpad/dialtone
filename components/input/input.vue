@@ -54,7 +54,7 @@
       </div>
       <div
         :class="inputWrapperClasses()"
-        :read-only="disabled"
+        :read-only="disabled === true ? true : undefined"
       >
         <span
           v-if="$slots.leftIcon"
