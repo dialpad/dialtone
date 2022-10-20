@@ -1,3 +1,20 @@
+# [3.20.0](https://github.com/dialpad/dialtone-vue/compare/v3.19.1...v3.20.0) (2022-10-20)
+
+
+### Bug Fixes
+
+* **grouped-chips:** fix visual issues ([#557](https://github.com/dialpad/dialtone-vue/issues/557)) ([c79ccd0](https://github.com/dialpad/dialtone-vue/commit/c79ccd09da257caf92c46c1a61e914a1222685da))
+* input styling and wrapper classes ([#536](https://github.com/dialpad/dialtone-vue/issues/536)) ([c553341](https://github.com/dialpad/dialtone-vue/commit/c5533412a2264749a86e7685c08251d2e25f698c))
+* migrate ivr_node to dialtone7 ([#548](https://github.com/dialpad/dialtone-vue/issues/548)) ([09df296](https://github.com/dialpad/dialtone-vue/commit/09df29683f4a04dd27a8ced098f870bf1485dc64))
+* **popover:** default visually hidden to false ([#553](https://github.com/dialpad/dialtone-vue/issues/553)) ([20d0273](https://github.com/dialpad/dialtone-vue/commit/20d027300739d037a589a69cdbc1509296657ef4))
+
+
+### Features
+
+* dp-57015 Recipe for grouped chips ([#549](https://github.com/dialpad/dialtone-vue/issues/549)) ([ae4590c](https://github.com/dialpad/dialtone-vue/commit/ae4590cc8234ace10b5f58e52ac1203b2fddb5d7))
+* dp-57689 add `contentClass` to DtRecipeCallbarButtonWithPopover ([#551](https://github.com/dialpad/dialtone-vue/issues/551)) ([43cc312](https://github.com/dialpad/dialtone-vue/commit/43cc312348573dd540cb1f9cbf388bc7d0a01e6a))
+* dp-57693 remove button padding in callbar_button (vue3) ([#559](https://github.com/dialpad/dialtone-vue/issues/559)) ([b779f95](https://github.com/dialpad/dialtone-vue/commit/b779f95f3f03ecb0abd3d65857b71e0cafb6c8c9))
+
 ## [3.19.1](https://github.com/dialpad/dialtone-vue/compare/v3.19.0...v3.19.1) (2022-10-11)
 
 
