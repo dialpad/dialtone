@@ -1,3 +1,10 @@
+## [2.32.1](https://github.com/dialpad/dialtone-vue/compare/v2.32.0...v2.32.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* **button:** fix button width prop default value ([#564](https://github.com/dialpad/dialtone-vue/issues/564)) ([5284782](https://github.com/dialpad/dialtone-vue/commit/5284782b71cc64539e8cf3dbf2f04b694076fee8))
+
 # [2.32.0](https://github.com/dialpad/dialtone-vue/compare/v2.31.1...v2.32.0) (2022-10-20)
 
 
