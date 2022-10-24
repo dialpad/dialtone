@@ -68,7 +68,7 @@ StyleDictionary.registerTransform({
   },
   transformer: (token, options) => {
     const hex8 = Color(token.value).toHex8();
-    return `Color(0x${hex8})`;
+    return `Color(0x${hex8.slice(6) + hex8.slice(0, 6)})`;
   }
 });
 
