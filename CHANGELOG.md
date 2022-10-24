@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/dialpad/dialtone-tokens/compare/v1.3.3...v1.3.4) (2022-10-24)
+
+
+### Bug Fixes
+
+* change dt/android/color output from RGBA to ARGB ([#5](https://github.com/dialpad/dialtone-tokens/issues/5)) ([ce72695](https://github.com/dialpad/dialtone-tokens/commit/ce72695482833c425c8853c4848e3232544bf5ef))
+
 ## [1.3.3](https://github.com/dialpad/dialtone-tokens/compare/v1.3.2...v1.3.3) (2022-10-14)
 
 
