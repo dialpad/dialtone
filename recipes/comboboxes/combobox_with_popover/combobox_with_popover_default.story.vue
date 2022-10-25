@@ -15,6 +15,8 @@
     :has-suggestion-list="hasSuggestionList"
     :empty-list="emptyList"
     :modal="modal"
+    :visually-hidden-close="visuallyHiddenClose"
+    :visually-hidden-close-label="visuallyHiddenCloseLabel"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"

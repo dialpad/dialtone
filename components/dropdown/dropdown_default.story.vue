@@ -11,6 +11,8 @@
     :list-class="listClass"
     :navigation-type="navigationType"
     :open-on-context="openOnContext"
+    :visually-hidden-close="visuallyHiddenClose"
+    :visually-hidden-close-label="visuallyHiddenCloseLabel"
     @highlight="onHighlight"
     @opened="onOpened"
   >

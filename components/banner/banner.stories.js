@@ -23,6 +23,7 @@ argTypesData.contentId = {
     },
   },
 };
+argsData.visuallyHiddenCloseLabel = 'Close Banner';
 
 export { argsData, argTypesData };
 

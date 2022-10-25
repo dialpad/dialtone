@@ -98,6 +98,7 @@ Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellent
 orci ipsum et velit.`,
   title: 'Example Title',
   onClose: action('update:show'),
+  visuallyHiddenCloseLabel: 'Close Modal',
 };
 
 export default {

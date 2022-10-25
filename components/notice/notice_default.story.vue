@@ -7,6 +7,8 @@
     :important="important"
     :hide-close="hideClose"
     :close-button-props="computedCloseButtonProps"
+    :visually-hidden-close="visuallyHiddenClose"
+    :visually-hidden-close-label="visuallyHiddenCloseLabel"
     @close="onClose($event)"
   >
     <span

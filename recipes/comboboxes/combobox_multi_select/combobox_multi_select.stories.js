@@ -13,6 +13,7 @@ export const argsData = {
   onSelect: action('select'),
   onRemove: action('remove'),
   onMaxSelected: action('maxSelected'),
+  visuallyHiddenCloseLabel: 'Close Combobox',
 };
 
 export const argTypesData = {

@@ -4,10 +4,17 @@ import DtDropdown from './dropdown.vue';
 import sinon from 'sinon';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
+import {
+  itBehavesLikeVisuallyHiddenCloseButtonExists,
+  itBehavesLikeVisuallyHiddenCloseLabelIsNull,
+} from '@/tests/shared_examples/sr_only_close_button';
+import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 // Constants
 const basePropsData = {
   open: true,
+  visuallyHiddenCloseLabel: 'Close dropdown',
 };
 
 const baseSlots = {
@@ -91,10 +98,37 @@ describe('DtDropdown Tests', function () {
 
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
 
+    it('should not render the visually hidden close button', async function () {
+      itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
+    });
+
     describe('When a list is provided', function () {
       it('should render the list wrapper', function () { assert.isTrue(listWrapper.exists()); });
       it('should render the anchor', function () { assert.isTrue(anchorElement.exists()); });
       it('should render the list', function () { assert.isTrue(wrapper.find('#list').exists()); });
+    });
+
+    describe('When visuallyHiddenClose is true', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ visuallyHiddenClose: true });
+      });
+
+      it('should contain a visually hidden close button', function () {
+        itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper);
+      });
+
+      describe('When visuallyHiddenCloseLabel is null', function () {
+        beforeEach(async function () {
+          initializeSpy();
+          await wrapper.setProps({ visuallyHiddenCloseLabel: null });
+        });
+
+        afterEach(function () {
+          cleanSpy();
+        });
+
+        itBehavesLikeVisuallyHiddenCloseLabelIsNull();
+      });
     });
   });
 
@@ -164,6 +198,18 @@ describe('DtDropdown Tests', function () {
       });
 
       it('should reset the highlightIndex', function () { assert.equal(wrapper.vm.highlightIndex, -1); });
+    });
+
+    describe('When sr-only close button is enabled and activated', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ visuallyHiddenClose: true });
+        _setChildWrappers();
+        await wrapper.findComponent(SrOnlyCloseButton).trigger('click');
+      });
+
+      it('should close the dropdown', function () {
+        assert.isTrue(anchorElement.attributes('aria-expanded') === 'false');
+      });
     });
   });
 });

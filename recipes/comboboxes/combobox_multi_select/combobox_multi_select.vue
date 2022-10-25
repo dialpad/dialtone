@@ -6,6 +6,8 @@
     :max-height="listMaxHeight"
     :popover-offset="popoverOffset"
     :has-suggestion-list="hasSuggestionList"
+    :visually-hidden-close-label="visuallyHiddenCloseLabel"
+    :visually-hidden-close="visuallyHiddenClose"
     content-width="anchor"
     @select="onComboboxSelect"
   >
@@ -106,6 +108,7 @@ import DtChip from '@/components/chip/chip';
 import DtValidationMessages from '@/components/validation_messages/validation_messages';
 import { validationMessageValidator } from '@/common/validators';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxMultiSelect',
@@ -116,6 +119,8 @@ export default {
     DtChip,
     DtValidationMessages,
   },
+
+  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**

@@ -22,6 +22,8 @@
       :background-image="backgroundImage"
       :background-size="backgroundSize"
       :dialog-class="dialogClass"
+      :visually-hidden-close="visuallyHiddenClose"
+      :visually-hidden-close-label="visuallyHiddenCloseLabel"
       @close="displayBanner = false; onClose($event)"
     >
       <span

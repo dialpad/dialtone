@@ -98,6 +98,11 @@
             <icon-close />
           </template>
         </dt-button>
+        <sr-only-close-button
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          @close="close"
+        />
       </div>
     </transition>
   </dt-lazy-show>
@@ -110,6 +115,8 @@ import Modal from '@/common/mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
@@ -123,9 +130,10 @@ export default {
     DtLazyShow,
     DtButton,
     IconClose,
+    SrOnlyCloseButton,
   },
 
-  mixins: [Modal],
+  mixins: [Modal, SrOnlyCloseButtonMixin],
 
   props: {
     /**
@@ -303,6 +311,14 @@ export default {
         }
       },
     },
+
+    $props: {
+      immediate: true,
+      deep: true,
+      handler () {
+        this.validateProps();
+      },
+    },
   },
 
   methods: {
@@ -317,6 +333,13 @@ export default {
     trapFocus (e) {
       if (this.show) {
         this.focusTrappedTabPress(e);
+      }
+    },
+
+    validateProps () {
+      if (this.hideClose && !this.visuallyHiddenClose) {
+        console.error(`If hideClose prop is true, visuallyHiddenClose and visuallyHiddenCloseLabel props
+        need to be set so the component always includes a close button`);
       }
     },
   },

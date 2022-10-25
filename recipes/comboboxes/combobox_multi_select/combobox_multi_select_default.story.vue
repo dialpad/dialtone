@@ -15,6 +15,8 @@
     :list-max-height="listMaxHeight"
     :max-selected-message="maxSelectedMessage"
     :has-suggestion-list="hasSuggestionList"
+    :visually-hidden-close="visuallyHiddenClose"
+    :visually-hidden-close-label="visuallyHiddenCloseLabel"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
