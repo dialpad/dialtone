@@ -1,3 +1,15 @@
+# [2.33.0](https://github.com/dialpad/dialtone-vue/compare/v2.32.1...v2.33.0) (2022-10-26)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** update "render within" zindex logic ([#555](https://github.com/dialpad/dialtone-vue/issues/555)) ([3e9bfcc](https://github.com/dialpad/dialtone-vue/commit/3e9bfcca4cbb76dfe3d27addb4388920683d7028))
+
+
+### Features
+
+* close button on dialogs pattern ([#560](https://github.com/dialpad/dialtone-vue/issues/560)) ([8f05c13](https://github.com/dialpad/dialtone-vue/commit/8f05c1321665746f06ccc77b9f772ffee40c1517))
+
 ## [2.32.1](https://github.com/dialpad/dialtone-vue/compare/v2.32.0...v2.32.1) (2022-10-21)
 
 
