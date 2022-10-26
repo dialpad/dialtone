@@ -6,7 +6,7 @@
     <dt-list-item
       class="d-d-flex d-jc-center"
       role="option"
-      navigation-type="arrow-keys"
+      navigation-type="none"
     >
       <span>{{ message }}</span>
     </dt-list-item>

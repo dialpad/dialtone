@@ -290,7 +290,7 @@ export default {
   data () {
     return {
       value: '',
-      popoverOffset: [0, 0],
+      popoverOffset: [0, 4],
       showValidationMessages: false,
       initialInputPadding: {},
       resizeWindowObserver: null,
@@ -505,7 +505,7 @@ export default {
       // TODO: refresh the tippy.js instance in the popover
       // If the new chip goes to the next line and the input box expands,
       // move the popover down to the next line. Same when chips are removed
-      this.popoverOffset = [0, 0];
+      this.popoverOffset = [0, 4];
     },
 
     getFullWidth (el) {

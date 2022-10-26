@@ -10,7 +10,7 @@
     <component
       :is="elementType"
       ref="popover"
-      :class="['d-popover', { 'd-popover__anchor--modal-opened': modal && isOpen }]"
+      :class="['d-popover', { 'd-popover__anchor--opened': isOpen }]"
       data-qa="dt-popover-container"
       v-on="$listeners"
     >
@@ -437,7 +437,7 @@ export default {
      */
     initialFocusElement: {
       type: [String, HTMLElement],
-      default: 'none',
+      default: 'first',
       validator: initialFocusElement => {
         return POPOVER_INITIAL_FOCUS_STRINGS.includes(initialFocusElement) ||
           (initialFocusElement instanceof HTMLElement) ||
@@ -503,7 +503,7 @@ export default {
 
     modal (modal) {
       this.tip.setProps({
-        zIndex: modal ? 650 : 300,
+        zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
       });
     },
 
@@ -549,6 +549,9 @@ export default {
 
     isOpen (isOpen, isPrev) {
       if (isOpen) {
+        this.tip.setProps({
+          zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+        });
         this.tip.show();
         this.addClosePopoverEventListener();
       } else if (!isOpen && isPrev !== isOpen) {
@@ -754,8 +757,8 @@ export default {
 
     onClickOutside () {
       if (!this.hideOnClick) return;
-      // If a modal popover is opened inside of this one, do not hide on click out
-      const innerModals = this.popoverContentEl.querySelector('.d-popover__anchor--modal-opened');
+      // If a popover is opened inside of this one, do not hide on click out
+      const innerModals = this.popoverContentEl.querySelector('.d-popover__anchor--opened');
       if (!innerModals) {
         this.closePopover();
       }
