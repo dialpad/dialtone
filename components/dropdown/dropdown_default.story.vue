@@ -11,6 +11,8 @@
     :list-class="$attrs.listClass"
     :navigation-type="$attrs.navigationType"
     :open-on-context="$attrs.openOnContext"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     @highlight="$attrs.onHighlight"
     @opened="$attrs.onOpened"
   >

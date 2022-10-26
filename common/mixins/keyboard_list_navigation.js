@@ -98,7 +98,7 @@ export default ({
         return null;
       }
 
-      return Array.from(listElement.querySelectorAll(`[role="${listItemRole}"]`));
+      return Array.from(listElement.querySelectorAll(`[role="${listItemRole}"], #sr-only-close-button`));
     },
 
     onUpKey () {
@@ -206,7 +206,7 @@ export default ({
         return;
       }
 
-      const listItems = Array.from(listElement.querySelectorAll(`[role="${listItemRole}"]`));
+      const listItems = Array.from(listElement.querySelectorAll(`[role="${listItemRole}"], #sr-only-close-button`));
       return listItems.indexOf(listElement.querySelector(`#${id}`));
     },
 
@@ -216,7 +216,7 @@ export default ({
         return;
       }
 
-      return listElement.querySelectorAll(`[role="${listItemRole}"]`)[index]?.id;
+      return listElement.querySelectorAll(`[role="${listItemRole}"], #sr-only-close-button`)[index]?.id;
     },
 
     scrollActiveItemIntoViewIfNeeded () {

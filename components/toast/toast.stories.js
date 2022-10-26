@@ -9,6 +9,7 @@ import { NOTICE_KINDS } from '../notice';
 export const argsData = {
   onClose: action('close'),
   onClick: action('click'),
+  visuallyHiddenCloseLabel: 'Close Toast',
 };
 
 export const argTypesData = {

@@ -17,6 +17,8 @@
         :hide-close="$attrs.hideClose"
         :duration="$attrs.duration"
         :close-button-props="buttonCloseProps"
+        :visually-hidden-close="$attrs.visuallyHiddenClose"
+        :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
         @close="$attrs.onClose($event)"
       >
         <span

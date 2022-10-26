@@ -35,6 +35,8 @@
       <dt-notice-action
         :hide-close="hideClose"
         :close-button-props="closeButtonProps"
+        :visually-hidden-close="visuallyHiddenClose"
+        :visually-hidden-close-label="visuallyHiddenCloseLabel"
         @close="closeToast"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -51,6 +53,7 @@ import DtNoticeAction from '../notice/notice_action';
 import { NOTICE_KINDS } from '../notice/notice_constants';
 import util from '@/common/utils';
 import { TOAST_ROLES, TOAST_MIN_DURATION } from './toast_constants';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 /**
  * A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions.
@@ -65,6 +68,8 @@ export default {
     DtNoticeContent,
     DtNoticeAction,
   },
+
+  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**

@@ -9,6 +9,8 @@ import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_util
 export const argsData = {
   onClose: action('close'),
   onClick: action('click'),
+  visuallyHiddenCloseLabel: 'Close Notice',
+  show: undefined,
 };
 
 export const argTypesData = {

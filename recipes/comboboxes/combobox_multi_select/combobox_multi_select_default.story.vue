@@ -15,6 +15,8 @@
     :list-max-height="$attrs.listMaxHeight"
     :max-selected-message="$attrs.maxSelectedMessage"
     :has-suggestion-list="$attrs.hasSuggestionList"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"

@@ -14,6 +14,8 @@
       :hide-close="$attrs.hideClose"
       :labelled-by-id="$attrs.labelledById"
       :fixed-header-footer="$attrs.fixedHeaderFooter"
+      :visually-hidden-close="$attrs.visuallyHiddenClose"
+      :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
       @update:show="close"
     >
       <template

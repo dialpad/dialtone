@@ -46,6 +46,12 @@
           name="list"
           :close="close"
         />
+        <sr-only-close-button
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          :tabindex="isArrowKeyNav ? -1 : 0"
+          @close="close"
+        />
       </ul>
     </template>
   </dt-popover>
@@ -59,12 +65,15 @@ import {
   DROPDOWN_PADDING_CLASSES,
 } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 export default {
   name: 'DtDropdown',
 
   components: {
     DtPopover,
+    SrOnlyCloseButton,
   },
 
   mixins: [
@@ -79,6 +88,7 @@ export default {
       activeItemKey: 'activeItemEl',
       focusOnKeyboardNavigation: true,
     }),
+    SrOnlyCloseButtonMixin,
   ],
 
   inheritAttrs: false,
@@ -301,6 +311,10 @@ export default {
     },
 
     afterHighlight () {
+      if (this.visuallyHiddenClose && this.highlightIndex === this._itemsLength() - 1) {
+        return;
+      }
+
       this.$emit('highlight', this.highlightIndex);
     },
 
@@ -308,7 +322,7 @@ export default {
       this.isOpen = isPopoverOpen;
 
       if (isPopoverOpen) {
-        if (this.openedWithKeyboard && this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        if (this.openedWithKeyboard && this.isArrowKeyNav) {
           this.setHighlightIndex(0);
         }
         this.$emit('opened', true);

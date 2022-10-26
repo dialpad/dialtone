@@ -26,6 +26,8 @@
     <dt-notice-action
       :hide-close="hideClose"
       :close-button-props="closeButtonProps"
+      :visually-hidden-close="visuallyHiddenClose"
+      :visually-hidden-close-label="visuallyHiddenCloseLabel"
       @close="$emit('close')"
     >
       <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -39,6 +41,7 @@ import DtNoticeIcon from './notice_icon';
 import DtNoticeContent from './notice_content';
 import DtNoticeAction from './notice_action';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants.js';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 /**
  * A notice is an informational and assistive message that appears inline with content.
@@ -52,6 +55,8 @@ export default {
     DtNoticeContent,
     DtNoticeAction,
   },
+
+  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**

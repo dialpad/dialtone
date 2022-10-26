@@ -1,4 +1,16 @@
 import { assert } from 'chai';
+import sinon from 'sinon';
+
+let consoleErrorSpy;
+
+export const initializeSpy = () => {
+  consoleErrorSpy = sinon.spy(console, 'error');
+};
+
+export const cleanSpy = () => {
+  consoleErrorSpy = null;
+  console.error.restore();
+};
 
 export function itBehavesLikePassesCustomPropValidation (prop, value) {
   it('passes custom prop validation', function () {
@@ -29,9 +41,16 @@ export const itBehavesLikeRaisesVueWarning = (message) => {
   });
 };
 
+export const itBehavesLikeRaisesValidationError = (message) => {
+  it('should raise a validation error', function () { assert.isTrue(consoleErrorSpy.calledWith(message)); });
+};
+
 export default {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikeDoesNotRaiseAnyVueWarnings,
   itBehavesLikeRaisesSingleVueWarning,
+  itBehavesLikeRaisesValidationError,
+  initializeSpy,
+  cleanSpy,
 };

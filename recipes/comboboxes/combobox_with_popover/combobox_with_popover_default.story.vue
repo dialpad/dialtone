@@ -15,6 +15,8 @@
     :has-suggestion-list="$attrs.hasSuggestionList"
     :empty-list="$attrs.emptyList"
     :modal="$attrs.modal"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     @escape="onComboboxEscape"
     @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
