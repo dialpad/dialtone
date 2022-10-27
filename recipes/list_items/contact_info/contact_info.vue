@@ -118,6 +118,8 @@ export default {
 
     /**
      * Optional avatar image url.
+     * if provided, it's also required to provide a value in the `avatarInitials` prop to use
+     * in the alt attribute of the avatar.
      */
     avatarSrc: {
       type: String,
