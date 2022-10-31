@@ -15,6 +15,7 @@
           :key="getBreadcrumbItemKey(index)"
           :inverted="inverted"
           v-bind="item"
+          v-on="$listeners"
         />
       </slot>
     </ol>

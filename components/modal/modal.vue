@@ -10,10 +10,7 @@
     ]"
     data-qa="dt-modal"
     :aria-hidden="open"
-    @click.self="close"
-    @keydown.esc="close"
-    @keydown.tab="trapFocus"
-    @after-enter.self="setFocusAfterTransition"
+    v-on="modalListeners"
   >
     <div
       v-if="show && ($slots.banner || bannerTitle)"
@@ -115,6 +112,7 @@ import Modal from '@/common/mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
+import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
@@ -284,10 +282,39 @@ export default {
     return {
       MODAL_KIND_MODIFIERS,
       MODAL_SIZE_MODIFIERS,
+      EVENT_KEYNAMES,
     };
   },
 
   computed: {
+    modalListeners () {
+      return {
+        ...this.$listeners,
+
+        click: event => {
+          (event.target === event.currentTarget) && this.close();
+          this.$emit('click', event);
+        },
+
+        keydown: event => {
+          switch (event.code) {
+            case EVENT_KEYNAMES.esc:
+            case EVENT_KEYNAMES.escape:
+              this.close();
+              break;
+            case EVENT_KEYNAMES.tab:
+              this.trapFocus(event);
+              break;
+          }
+          this.$emit('keydown', event);
+        },
+
+        'after-enter': event => {
+          (event.target === event.currentTarget) && this.setFocusAfterTransition();
+        },
+      };
+    },
+
     open () {
       return `${!this.show}`;
     },

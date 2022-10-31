@@ -16,8 +16,7 @@
     :tabindex="isSelected ? '0' : '-1'"
     :disabled="groupContext.disabled || disabled"
     v-bind="$attrs"
-    @click="selectPanel()"
-    @focus="setFocus(id)"
+    v-on="tabListeners"
   >
     <!-- @slot default slot, defaults contains dt-button -->
     <slot />
@@ -103,6 +102,22 @@ export default {
   computed: {
     isSelected () {
       return this.groupContext.selected === this.panelId;
+    },
+
+    tabListeners () {
+      return {
+        ...this.$listeners,
+
+        click: event => {
+          this.selectPanel();
+          this.$emit('click', event);
+        },
+
+        focus: event => {
+          this.setFocus(this.id);
+          this.$emit('focus', event);
+        },
+      };
     },
   },
 

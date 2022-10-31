@@ -2,7 +2,6 @@
   <aside
     :class="noticeClass"
     data-qa="notice"
-    v-on="$listeners"
   >
     <dt-notice-icon
       :kind="kind"

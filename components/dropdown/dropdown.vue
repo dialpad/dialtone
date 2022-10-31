@@ -13,15 +13,7 @@
     :max-width="maxWidth"
     :open-with-arrow-keys="true"
     :open-on-context="openOnContext"
-    v-on="$listeners"
-    @opened="updateInitialHighlightIndex"
-    @keydown.enter="onEnterKey"
-    @keydown.space="onSpaceKey"
-    @keydown.up.stop.prevent="onKeyValidation($event, 'onUpKeyPress')"
-    @keydown.down.stop.prevent="onKeyValidation($event, 'onDownKeyPress')"
-    @keydown.home.stop.prevent="onKeyValidation($event, 'onHomeKeyPress')"
-    @keydown.end.stop.prevent="onKeyValidation($event, 'onEndKeyPress')"
-    @keydown="onKeyValidation($event, 'onKeyPress')"
+    v-on="dropdownListeners"
   >
     <template #anchor="{ attrs }">
       <!-- @slot Anchor element that activates the dropdown -->
@@ -65,6 +57,7 @@ import {
   DROPDOWN_PADDING_CLASSES,
 } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
+import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
@@ -251,12 +244,64 @@ export default {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
       DROPDOWN_PADDING_CLASSES,
+      EVENT_KEYNAMES,
       openedWithKeyboard: false,
       isOpen: null,
     };
   },
 
   computed: {
+    dropdownListeners () {
+      return {
+        ...this.$listeners,
+
+        opened: isPopoverOpen => {
+          this.updateInitialHighlightIndex(isPopoverOpen);
+        },
+
+        keydown: event => {
+          const eventCode = event.code;
+
+          switch (eventCode) {
+            case EVENT_KEYNAMES.up:
+            case EVENT_KEYNAMES.arrowup:
+              this.onKeyValidation(event, 'onUpKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            case EVENT_KEYNAMES.down:
+            case EVENT_KEYNAMES.arrowdown:
+              this.onKeyValidation(event, 'onDownKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            case EVENT_KEYNAMES.space:
+            case EVENT_KEYNAMES.spacebar:
+              this.onSpaceKey();
+              break;
+            case EVENT_KEYNAMES.enter:
+              this.onEnterKey();
+              break;
+            case EVENT_KEYNAMES.home:
+              this.onKeyValidation(event, 'onHomeKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            case EVENT_KEYNAMES.end:
+              this.onKeyValidation(event, 'onEndKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            default:
+              this.onKeyValidation(event, 'onKeyPress');
+              break;
+          }
+
+          this.$emit('keydown', event);
+        },
+      };
+    },
+
     beginningOfListMethod () {
       return this.onBeginningOfList || this.jumpToEnd;
     },

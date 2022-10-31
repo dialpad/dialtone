@@ -31,8 +31,7 @@
         },
         contentClass,
       ]"
-      @after-leave="onLeaveTransitionComplete"
-      @after-enter="onEnterTransitionComplete"
+      v-on="tooltipListeners"
     >
       <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
       <!-- after-leave event can be used instead of transitionend -->
@@ -217,6 +216,20 @@ export default {
   },
 
   computed: {
+    tooltipListeners () {
+      return {
+        ...this.$listeners,
+
+        'after-leave': event => {
+          this.onLeaveTransitionComplete();
+        },
+
+        'after-enter': event => {
+          this.onEnterTransitionComplete();
+        },
+      };
+    },
+
     tippyProps () {
       return {
         offset: this.offset,

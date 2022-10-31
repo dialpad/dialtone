@@ -8,6 +8,10 @@
     "common/mixins/modal.js": {
       "complexity": 1
     },
+    "components/dropdown/dropdown.vue": {
+      "max-lines": 1,
+      "complexity": 1
+    },
     "components/input/input.vue": {
       "max-lines": 1
     },

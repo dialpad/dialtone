@@ -54,10 +54,7 @@
         }"
         :tabindex="contentTabindex"
         appear
-        v-on="$listeners"
-        @keydown.capture="onKeydown"
-        @after-leave="onLeaveTransitionComplete"
-        @after-enter="onEnterTransitionComplete"
+        v-on="popoverListeners"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -485,6 +482,25 @@ export default {
   },
 
   computed: {
+    popoverListeners () {
+      return {
+        ...this.$listeners,
+
+        keydown: event => {
+          this.onKeydown(event);
+          this.$emit('keydown', event);
+        },
+
+        'after-leave': event => {
+          this.onLeaveTransitionComplete();
+        },
+
+        'after-enter': event => {
+          this.onEnterTransitionComplete();
+        },
+      };
+    },
+
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.

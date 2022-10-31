@@ -155,7 +155,7 @@ describe('DtModal Tests', function () {
     assert.equal(wrapper.emitted()[syncEvent].length, 1);
     assert.isFalse(wrapper.emitted()[syncEvent][0][0]);
 
-    await overlay.trigger('keydown', { key: 'Escape' });
+    await overlay.trigger('keydown', { code: 'Escape' });
     assert.equal(wrapper.emitted()[syncEvent].length, 2);
     assert.isFalse(wrapper.emitted()[syncEvent][1][0]);
 
