@@ -21,7 +21,10 @@
       v-bind="$attrs"
       v-on="inputListeners"
     >
-      <span class="d-toggle__inner" />
+      <span
+        v-if="showIcon"
+        class="d-toggle__inner"
+      />
     </button>
   </div>
 </template>
@@ -83,6 +86,15 @@ export default {
       type: String,
       default: 'md',
       validator: (s) => Object.keys(TOGGLE_SIZE_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Shows the icon
+     * @values true, false
+     */
+    showIcon: {
+      type: Boolean,
+      default: true,
     },
 
     /**
