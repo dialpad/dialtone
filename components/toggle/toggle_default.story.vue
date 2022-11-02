@@ -2,6 +2,7 @@
   <dt-toggle
     :checked="checked"
     :disabled="disabled"
+    :size="size"
     :label-class="labelClass"
     :label-child-props="labelChildProps"
     @change="onChange"
