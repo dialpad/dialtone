@@ -74,6 +74,11 @@ describe('DtToggle Tests', function () {
           assert.strictEqual(button.element.disabled, true);
           assert.isTrue(button.classes().includes('d-toggle--disabled'));
         });
+
+        it('should set correct size class', async function () {
+          await wrapper.setProps({ size: 'sm' });
+          assert.isTrue(button.classes().includes('d-toggle--small'));
+        });
       });
     });
     describe('Unchecked Toggle', function () {

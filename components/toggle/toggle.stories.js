@@ -4,6 +4,7 @@ import ToggleDefault from './toggle_default.story.vue';
 import ToggleVariants from './toggle_variants.story.vue';
 import ToggleMdx from './toggle.mdx';
 import DtToggle from './toggle';
+import { TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -34,6 +35,14 @@ export const argTypesData = {
       type: {
         summary: 'boolean',
       },
+    },
+  },
+
+  size: {
+    description: 'Used to set the size of the toggle',
+    control: {
+      type: 'select',
+      options: Object.keys(TOGGLE_SIZE_MODIFIERS),
     },
   },
 

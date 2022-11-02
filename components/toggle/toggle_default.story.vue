@@ -2,6 +2,7 @@
   <dt-toggle
     :checked="$attrs.checked"
     :disabled="$attrs.disabled"
+    :size="$attrs.size"
     :label-class="$attrs.labelClass"
     :label-child-props="$attrs.labelChildProps"
     @change="$attrs.onChange"
