@@ -65,6 +65,15 @@
       </div>
     </dt-toggle>
 
+    <!-- Without icon -->
+    <dt-toggle
+      class="d-mt6"
+      label-class="d-mr6"
+      :show-icon="false"
+    >
+      Without icon
+    </dt-toggle>
+
     <dt-toggle
       class="d-mt6"
       label-class="d-mr6"
