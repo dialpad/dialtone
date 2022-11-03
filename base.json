@@ -289,11 +289,11 @@
           "type": "fontFamilies"
         },
         "expressive": {
-          "value": "Archivo",
+          "value": "Archivo,{font.family.body}",
           "type": "fontFamilies"
         },
         "mono": {
-          "value": "SF Mono",
+          "value": "SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, Courier, monospace",
           "type": "fontFamilies"
         }
       },
