@@ -285,7 +285,7 @@
     "font": {
       "family": {
         "body": {
-          "value": "SF Pro",
+          "value": "-apple-system,BlinkMacSystemFont,\"SF Pro\",\"Segoe UI Adjusted\",\"Segoe UI\",SFMono,\"Helvetica Neue\",Cantarell,Ubuntu,Roboto,Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"",
           "type": "fontFamilies"
         },
         "expressive": {
