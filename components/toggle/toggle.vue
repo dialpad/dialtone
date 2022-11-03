@@ -12,7 +12,7 @@
     </label>
     <button
       :id="id"
-      role="switch"
+      :role="toggleRole"
       type="button"
       :aria-checked="internalChecked.toString()"
       :disabled="disabled"
@@ -32,7 +32,7 @@
 <script>
 import Vue from 'vue';
 import utils from '@/common/utils';
-import { TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
+import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
  * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.
@@ -71,11 +71,12 @@ export default {
     /**
      * Value of the toggle
      * @model checked
-     * @values true, false
+     * @values true, false, 'mixed'
      */
     checked: {
-      type: Boolean,
+      type: [Boolean, String],
       default: false,
+      validator: (v) => TOGGLE_CHECKED_VALUES.includes(v),
     },
 
     /**
@@ -139,14 +140,22 @@ export default {
       };
     },
 
+    isIndeterminate () {
+      return this.internalChecked === 'mixed';
+    },
+
+    toggleRole () {
+      return this.isIndeterminate ? 'checkbox' : 'switch';
+    },
+
     toggleClasses () {
       return [
         'd-toggle',
         TOGGLE_SIZE_MODIFIERS[this.size],
         {
-          'd-toggle--checked': this.internalChecked,
+          'd-toggle--checked': this.internalChecked === true,
           'd-toggle--disabled': this.disabled,
-
+          'd-toggle--indeterminate': this.isIndeterminate,
         },
       ];
     },
