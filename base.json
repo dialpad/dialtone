@@ -606,12 +606,6 @@
   },
   "semantic": {
     "color": {
-      "text-link": {
-        "primary": {
-          "value": "{color.purple.400}",
-          "type": "color"
-        }
-      },
       "text": {
         "primary": {
           "value": "{color.black.900}",
@@ -658,6 +652,12 @@
             "value": "{color.black.300}",
             "type": "color"
           }
+        }
+      },
+      "text-link": {
+        "primary": {
+          "value": "{color.purple.400}",
+          "type": "color"
         }
       },
       "surface": {
