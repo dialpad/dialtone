@@ -3,6 +3,8 @@ export const TOGGLE_SIZE_MODIFIERS = {
   md: '',
 };
 
+export const TOGGLE_CHECKED_VALUES = [false, true, 'mixed'];
+
 export default {
   TOGGLE_SIZE_MODIFIERS,
 };

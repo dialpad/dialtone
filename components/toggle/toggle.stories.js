@@ -4,7 +4,7 @@ import ToggleDefault from './toggle_default.story.vue';
 import ToggleVariants from './toggle_variants.story.vue';
 import ToggleMdx from './toggle.mdx';
 import DtToggle from './toggle';
-import { TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
+import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -28,12 +28,18 @@ export const argTypesData = {
 
   // Props
   checked: {
-    description: 'Used to set the initial state of the toggle',
-    control: 'boolean',
+    description: 'Used to set the initial state of the toggle. Setting "mixed" means it gets the indeterminate state.',
+    control: {
+      type: 'select',
+      options: TOGGLE_CHECKED_VALUES,
+    },
     table: {
       category: 'props',
       type: {
-        summary: 'boolean',
+        summary: 'boolean | "mixed"',
+      },
+      defaultValue: {
+        summary: false,
       },
     },
   },
@@ -43,6 +49,14 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: Object.keys(TOGGLE_SIZE_MODIFIERS),
+    },
+  },
+
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
     },
   },
 

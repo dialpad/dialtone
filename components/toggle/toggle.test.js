@@ -145,6 +145,25 @@ describe('DtToggle Tests', function () {
       });
     });
 
+    describe('Indeterminate Toggle', function () {
+      // Test Setup
+      beforeEach(function () {
+        props = {
+          ...baseProps,
+          checked: 'mixed',
+        };
+        _setWrappers();
+      });
+
+      it('should set indeterminate state when checked prop is mixed', function () {
+        assert.isTrue(button.classes().includes('d-toggle--indeterminate'));
+      });
+
+      it('should set the correct aria-checked attribute', function () {
+        assert.equal(button.attributes('aria-checked'), 'mixed');
+      });
+    });
+
     describe('Accessibility Tests', function () {
       describe('aria-label validations', function () {
         const warningMessage = '[Vue warn]: You must provide an aria-label when there is no label passed';
