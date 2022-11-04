@@ -1,3 +1,17 @@
+# [2.34.0](https://github.com/dialpad/dialtone-vue/compare/v2.33.0...v2.34.0) (2022-11-04)
+
+
+### Bug Fixes
+
+* dp-58864 update hover background color in Call Bar Button ([#576](https://github.com/dialpad/dialtone-vue/issues/576)) ([1b4231b](https://github.com/dialpad/dialtone-vue/commit/1b4231be4cc2a73e8d9f618b4680c9d27f2f9e31))
+
+
+### Features
+
+* **toggle:** add indeterminate state ([#579](https://github.com/dialpad/dialtone-vue/issues/579)) ([942e2ce](https://github.com/dialpad/dialtone-vue/commit/942e2cead6abf2b74e2b20c04196721ebd7dd738))
+* **toggle:** add showIcon prop ([#573](https://github.com/dialpad/dialtone-vue/issues/573)) ([62b9d35](https://github.com/dialpad/dialtone-vue/commit/62b9d3554082624678f7657a9ade7ee1722f91b3))
+* **toggle:** add size prop ([#571](https://github.com/dialpad/dialtone-vue/issues/571)) ([b7db3a8](https://github.com/dialpad/dialtone-vue/commit/b7db3a83cb1001c642eb0221cbc69e031394f66d))
+
 # [2.33.0](https://github.com/dialpad/dialtone-vue/compare/v2.32.1...v2.33.0) (2022-10-26)
 
 
