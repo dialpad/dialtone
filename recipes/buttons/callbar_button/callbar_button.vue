@@ -116,6 +116,8 @@ export default {
         'dt-recipe-callbar-button',
         'd-stack4',
         'd-px0',
+        'h:d-bgc-black-200',
+        'h:d-bgo50',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'd-btn--icon-only': this.circle,
