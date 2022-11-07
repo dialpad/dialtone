@@ -1,3 +1,20 @@
+# [3.22.0](https://github.com/dialpad/dialtone-vue/compare/v3.21.0...v3.22.0) (2022-11-07)
+
+
+### Bug Fixes
+
+* dp-58864 update hover color in Call button (Vue3) ([#577](https://github.com/dialpad/dialtone-vue/issues/577)) ([fbec9ad](https://github.com/dialpad/dialtone-vue/commit/fbec9ad4847c6be641f0585652e3f56d0bd41375))
+
+
+### Features
+
+* add `DtPresence` (vue3) ([#569](https://github.com/dialpad/dialtone-vue/issues/569)) ([427cfbe](https://github.com/dialpad/dialtone-vue/commit/427cfbeaedb69a833e06ca7e6b531dc190cc542f))
+* icon component - vue3 ([#575](https://github.com/dialpad/dialtone-vue/issues/575)) ([ba997a1](https://github.com/dialpad/dialtone-vue/commit/ba997a13ec4803685a27f0a3a606ea2110c496b9))
+* list item group component ([#584](https://github.com/dialpad/dialtone-vue/issues/584)) ([58406b0](https://github.com/dialpad/dialtone-vue/commit/58406b0b58f698157881a57c2bb415bc37aa3bb9))
+* **toggle:** add indeterminate state ([#580](https://github.com/dialpad/dialtone-vue/issues/580)) ([cabc45a](https://github.com/dialpad/dialtone-vue/commit/cabc45a2f3a4c748f09cb053fad78e3114384cda))
+* **toggle:** add showIcon prop ([#578](https://github.com/dialpad/dialtone-vue/issues/578)) ([4c271a3](https://github.com/dialpad/dialtone-vue/commit/4c271a3ace180b703393394e4f22ec40ecdc34b0))
+* **toggle:** add size prop ([#572](https://github.com/dialpad/dialtone-vue/issues/572)) ([ffd67da](https://github.com/dialpad/dialtone-vue/commit/ffd67da114230ad2ae8e3b04e42388a10b21fc10))
+
 # [3.21.0](https://github.com/dialpad/dialtone-vue/compare/v3.20.1...v3.21.0) (2022-10-26)
 
 
