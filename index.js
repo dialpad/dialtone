@@ -15,6 +15,7 @@ export * from './components/modal';
 export * from './components/lazy_show';
 export * from './components/list_section';
 export * from './components/list_item';
+export * from './components/list_item_group';
 export * from './components/link';
 export * from './components/notice';
 export * from './components/pagination';

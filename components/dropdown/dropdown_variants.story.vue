@@ -125,7 +125,8 @@
           slot="list"
           slot-scope="{ close }"
         >
-          <dt-dropdown-list
+          <dt-list-item-group
+            heading-class="d-p6 d-fw-bold"
             :list-class="listClass"
             heading="Menu Heading A"
           >
@@ -144,10 +145,11 @@
             >
               Menu Item 2
             </dt-list-item>
-          </dt-dropdown-list>
+          </dt-list-item-group>
           <dt-dropdown-separator />
-          <dt-dropdown-list
+          <dt-list-item-group
             :list-class="listClass"
+            heading-class="d-p6 d-fw-bold"
             heading="Menu Heading B"
           >
             <dt-list-item
@@ -157,7 +159,7 @@
             >
               Menu Item 3
             </dt-list-item>
-          </dt-dropdown-list>
+          </dt-list-item-group>
         </template>
       </dt-dropdown>
     </div>
@@ -183,7 +185,7 @@
           >
             <div
               v-bind="attrs"
-              class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-025"
+              class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
             >
               Right click to open
             </div>
@@ -211,6 +213,7 @@
 <script>
 import DtDropdown from './dropdown';
 import DtDropdownList from './dropdown_list';
+import DtListItemGroup from '../list_item_group/list_item_group.vue';
 import DtDropdownSeparator from './dropdown_separator';
 import { DtListItem } from '../list_item';
 import { DtButton } from '../button';
@@ -219,7 +222,7 @@ import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 export default {
   name: 'DtDropdownVariants',
 
-  components: { DtDropdown, DtListItem, DtButton, DtDropdownList, DtDropdownSeparator },
+  components: { DtDropdown, DtListItem, DtButton, DtListItemGroup, DtDropdownList, DtDropdownSeparator },
 
   data () {
     return {

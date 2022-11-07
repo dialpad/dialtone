@@ -1,7 +1,7 @@
 <template>
   <li
     aria-hidden="true"
-    class="dt-list-separator d-bgc-black-075 d-my8"
+    class="dt-list-separator d-bgc-black-300 d-my8"
   />
 </template>
 
