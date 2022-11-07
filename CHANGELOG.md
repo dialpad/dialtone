@@ -1,3 +1,11 @@
+# [2.35.0](https://github.com/dialpad/dialtone-vue/compare/v2.34.0...v2.35.0) (2022-11-07)
+
+
+### Features
+
+* add `DtPresence` ([#568](https://github.com/dialpad/dialtone-vue/issues/568)) ([578b553](https://github.com/dialpad/dialtone-vue/commit/578b553fffe8acec7d8296a65f8413b6244a0ec3))
+* list item group component ([#581](https://github.com/dialpad/dialtone-vue/issues/581)) ([a273180](https://github.com/dialpad/dialtone-vue/commit/a273180048c4097fbf6693aa1179dcccbf37f816))
+
 # [2.34.0](https://github.com/dialpad/dialtone-vue/compare/v2.33.0...v2.34.0) (2022-11-04)
 
 
