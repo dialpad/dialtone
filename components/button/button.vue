@@ -213,14 +213,6 @@ export default {
 
   emits: [
     /**
-     * Native button click event
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
-
-    /**
      * Native button focus in event
      *
      * @event focusin
@@ -249,7 +241,6 @@ export default {
 
     buttonListeners () {
       return {
-        click: (e) => this.$emit('click', e),
         focusin: (e) => {
           this.isInFocus = this.assertiveOnFocus;
           this.$emit('focusin', e);

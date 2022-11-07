@@ -118,12 +118,6 @@ export const argTypesData = {
     },
   },
 
-  click: {
-    description: 'Native button click event',
-    table: {
-      type: { summary: 'event' },
-    },
-  },
   focusin: {
     description: 'Native button focusin event',
     table: {

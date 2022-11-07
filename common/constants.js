@@ -38,6 +38,25 @@ export const LABEL_SIZE_MODIFIERS = {
   xl: 'd-label--xl',
 };
 
+export const EVENT_KEYNAMES = {
+  esc: 'Esc',
+  escape: 'Escape',
+  tab: 'Tab',
+  enter: 'Enter',
+  space: 'Space',
+  spacebar: 'Spacebar',
+  up: 'Up',
+  arrowup: 'ArrowUp',
+  left: 'Left',
+  arrowleft: 'ArrowLeft',
+  right: 'Right',
+  arrowright: 'ArrowRight',
+  down: 'Down',
+  arrowdown: 'ArrowDown',
+  home: 'Home',
+  end: 'End',
+};
+
 /*
  * Any string message or message object in the messages prop that do not specify
  * a 'type' attributes will default to 'DEFAULT_MESSAGE_TYPE'.

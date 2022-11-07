@@ -27,6 +27,8 @@
         @keydown.down.prevent="onArrowKeyPress"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
         @keydown.escape.capture="closePopover"
+        @keydown.enter="$emit('keydown', $event)"
+        @keydown.space="$emit('keydown', $event)"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -57,9 +59,7 @@
         }"
         :css="$attrs.css"
         :tabindex="contentTabindex"
-        @keydown.capture="onKeydown"
-        @after-leave="onLeaveTransitionComplete"
-        @after-enter="onEnterTransitionComplete"
+        v-on="popoverListeners"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -458,6 +458,14 @@ export default {
 
   emits: [
     /**
+     * Native keydown event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+     */
+    'keydown',
+
+    /**
      * Event fired to sync the open prop with the parent component
      * @event update:open
      */
@@ -483,6 +491,22 @@ export default {
   },
 
   computed: {
+    popoverListeners () {
+      return {
+        keydown: event => {
+          this.onKeydown(event);
+        },
+
+        'after-leave': event => {
+          this.onLeaveTransitionComplete();
+        },
+
+        'after-enter': event => {
+          this.onEnterTransitionComplete();
+        },
+      };
+    },
+
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
@@ -674,6 +698,8 @@ export default {
           this.isOpen = true;
         }
       }
+
+      this.$emit('keydown', e);
     },
 
     addClosePopoverEventListener () {
@@ -776,6 +802,8 @@ export default {
       if (e.key === 'Escape') {
         this.closePopover();
       }
+
+      this.$emit('keydown', e);
     },
 
     async setPopoverContentAnchorWidth () {
