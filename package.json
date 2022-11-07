@@ -3,9 +3,9 @@
   "version": "3.21.0",
   "description": "Vue component library for Dialtone components",
   "scripts": {
-    "build": "npm run clean && npm run build-main && npm run build-emoji",
-    "build-main": "vue-cli-service build --target lib --name dialtone-vue --no-clean index.js && npm run build:documentation",
-    "build-emoji": "vue-cli-service build --target lib --name emoji --no-clean emoji.js && npm run build:documentation",
+    "build": "npm run clean && npm run build-main && npm run build-emoji && npm run build:documentation",
+    "build-main": "vue-cli-service build --target lib --name dialtone-vue --no-clean index.js",
+    "build-emoji": "vue-cli-service build --target lib --name emoji --no-clean emoji.js",
     "build:documentation": "node scripts/build-docs.js",
     "clean": "rm -rf ./dist",
     "pretest": "npm run clean",
@@ -36,6 +36,7 @@
     "./emoji": "./dist/emoji.common.js"
   },
   "dependencies": {
+    "@dialpad/dialtone-icons": "^0.0.1-vue3",
     "emoji-regex": "^10.1.0",
     "emoji-toolkit": "^6.6.0",
     "tippy.js": "^6.3.7"

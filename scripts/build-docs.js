@@ -20,6 +20,7 @@ const componentsList = [
   'dropdown.vue',
   'emoji.vue',
   'emoji_text_wrapper.vue',
+  'icon.vue',
   'input.vue',
   'input_group.vue',
   'keyboard_shortcut.vue',
