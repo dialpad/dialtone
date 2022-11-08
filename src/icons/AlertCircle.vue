@@ -1,0 +1,3 @@
+<template>
+  <svg aria-hidden="true" focusable="false" data-name="Alert Circle" class="d-icon d-icon--alertCircle" viewBox="0 0 12 12"><g clip-path="url(#a)"><path fill="currentColor" fill-rule="evenodd" d="M6 1.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM.5 6a5.5 5.5 0 1 1 11 0 5.5 5.5 0 0 1-11 0ZM6 3.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5ZM5.5 8a.5.5 0 0 1 .5-.5h.005a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5Z" clip-rule="evenodd"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h12v12H0z"/></clipPath></defs></svg>
+</template>
