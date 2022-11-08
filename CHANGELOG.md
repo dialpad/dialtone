@@ -1,3 +1,15 @@
+# [2.36.0](https://github.com/dialpad/dialtone-vue/compare/v2.35.0...v2.36.0) (2022-11-08)
+
+
+### Bug Fixes
+
+* **list-item-group:** change role to listbox in example ([151e674](https://github.com/dialpad/dialtone-vue/commit/151e674be40b563ac3020901311a213c44e6da28))
+
+
+### Features
+
+* icon component ([#574](https://github.com/dialpad/dialtone-vue/issues/574)) ([c90e134](https://github.com/dialpad/dialtone-vue/commit/c90e13494f6df675cee50bc7ba0c3fdbc91ada3c))
+
 # [2.35.0](https://github.com/dialpad/dialtone-vue/compare/v2.34.0...v2.35.0) (2022-11-07)
 
 
