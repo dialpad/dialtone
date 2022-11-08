@@ -1,13 +1,14 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "0.0.4-vue3",
+  "version": "0.0.5-vue3",
   "description": "Dialtone icon library",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-lib": "vue-cli-service build --target lib --name dialtone-icons src/main.js",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "release": "npm install && npm run build-lib && npm publish --tag vue3"
   },
   "dependencies": {
     "vue": "^3.2.41",
