@@ -108,6 +108,19 @@ export const flushPromises = () => {
   });
 };
 
+/**
+ * Transform a string from kebab-case to pascalCase
+ * @param string
+ * @returns {string}
+ */
+export const kebabCaseToPascalCase = (string) => {
+  return string
+    .toLowerCase()
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+};
+
 export default {
   getUniqueString,
   formatMessages,
@@ -116,4 +129,5 @@ export default {
   getValidationState,
   htmlFragment,
   flushPromises,
+  kebabCaseToPascalCase,
 };
