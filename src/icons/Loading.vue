@@ -1,0 +1,3 @@
+<template>
+  <svg aria-hidden="true" focusable="false" data-name="Loading" class="d-icon d-icon--loading" viewBox="0 0 12 12"><g clip-path="url(#a)"><path fill="currentColor" fill-rule="evenodd" d="M6 1.5A4.5 4.5 0 1 0 10.5 6a.5.5 0 0 1 1 0A5.5 5.5 0 1 1 6 .5a.5.5 0 0 1 0 1Z" clip-rule="evenodd"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h12v12H0z"/></clipPath></defs></svg>
+</template>
