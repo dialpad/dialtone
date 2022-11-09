@@ -1,7 +1,32 @@
 {
   "name": "@dialpad/dialtone-vue",
   "version": "3.22.0",
-  "description": "Vue component library for Dialtone components",
+  "description": "Vue component library for Dialpad's design system Dialtone",
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "Dialtone Vue",
+    "Design System",
+    "Components",
+    "Component Library",
+    "Vue"
+  ],
+  "homepage": "https://vue.dialpad.design",
+  "bugs": {
+    "email" : "dialtone@dialpad.com"
+  },
+  "license": "MIT",
+  "contributors": [
+    {"name":"Brad Paugh","email":"brad.paugh@dialpad.com","url":"https://github.com/braddialpad"},
+    {"name":"Francis Rupert","email":"francis.rupert@dialpad.com","url":"https://github.com/francisrupert"},
+    {"name":"Julio Ortega","email":"julio.ortega@dialpad.com","url":"https://github.com/juliodialpad"},
+    {"name":"Jose Silva","email":"jose.silva@dialpad.com","url":"https://github.com/josedialpad"}
+  ],
+  "files": [
+    "dist/*.js",
+    "dist/component-documentation.json"
+  ],
+  "repository": "git@github.com:dialpad/dialtone-vue.git",
   "scripts": {
     "build": "npm run clean && npm run build-main && npm run build-emoji && npm run build:documentation",
     "build-main": "vue-cli-service build --target lib --name dialtone-vue --no-clean index.js",
@@ -27,13 +52,16 @@
     "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
     "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue"
   },
-  "files": [
-    "dist/*.js",
-    "dist/component-documentation.json"
-  ],
   "exports": {
     ".": "./dist/dialtone-vue.common.js",
     "./emoji": "./dist/emoji.common.js"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "./scripts/commit-msg"
+  },
+  "volta": {
+    "node": "16"
   },
   "dependencies": {
     "@dialpad/dialtone-icons": "^0.0.1-vue3",
@@ -90,13 +118,5 @@
   "engineStrict": true,
   "engines": {
     "node": ">= 16"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "./scripts/commit-msg"
-  },
-  "repository": "git@github.com:dialpad/dialtone-vue.git",
-  "volta": {
-    "node": "16"
   }
 }
