@@ -1,0 +1,3 @@
+<template>
+  <svg aria-hidden="true" focusable="false" data-name="Isolated Queries" class="d-icon d-icon--isolatedQueries" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M1 1.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM8.5 5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5ZM8 9.5a.5.5 0 0 1 .5-.5h.005a.5.5 0 0 1 0 1H8.5a.5.5 0 0 1-.5-.5Z" clip-rule="evenodd"/></svg>
+</template>
