@@ -99,7 +99,7 @@ export const flushPromises = () => {
 };
 
 /**
- * Transform a string from kebab-case to pascalCase
+ * Transform a string from kebab-case to PascalCase
  * @param string
  * @returns {string}
  */
@@ -109,6 +109,17 @@ export const kebabCaseToPascalCase = (string) => {
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join('');
+};
+
+/**
+ * Transform a string from PascalCase to kebab-case
+ * @param string
+ * @returns {string}
+ */
+export const pascalCaseToKebabCase = (string) => {
+  return string
+    .replace(/\.?([A-Z0-9]+)/g, (x, y) => '-' + y.toLowerCase())
+    .replace(/^-/, '');
 };
 
 export default {

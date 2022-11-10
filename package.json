@@ -64,7 +64,7 @@
     "node": "16"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "^0.0.1-vue3",
+    "@dialpad/dialtone-icons": "0.0.8-vue3",
     "emoji-regex": "^10.1.0",
     "emoji-toolkit": "^6.6.0",
     "tippy.js": "^6.3.7"
@@ -72,7 +72,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
-    "@dialpad/dialtone": "^7.4.0",
+    "@dialpad/dialtone": "^7.4.1",
     "@percy/cli": "1.10.2",
     "@percy/storybook": "4.2.1",
     "@semantic-release/changelog": "^6.0.1",

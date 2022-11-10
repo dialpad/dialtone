@@ -4,7 +4,11 @@ import {
 } from './icon_constants';
 import BaseIconMdx from './icon.mdx';
 import IconDefault from './icon_default.story.vue';
-import { createTemplateFromVueFile, getV7IconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import * as dialtoneIcons from '@dialpad/dialtone-icons';
+import { pascalCaseToKebabCase } from '@/common/utils';
+
+const iconsList = Object.keys(dialtoneIcons).map(name => pascalCaseToKebabCase(name));
 
 export const argTypesData = {
   size: {
@@ -16,7 +20,7 @@ export const argTypesData = {
   name: {
     control: {
       type: 'select',
-      options: getV7IconNames(),
+      options: iconsList,
     },
   },
 };
