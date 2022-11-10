@@ -1,3 +1,11 @@
+## [3.22.1-beta.1](https://github.com/dialpad/dialtone-vue/compare/v3.22.0...v3.22.1-beta.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* **popover:** no default context menu when openOnContext is true ([#588](https://github.com/dialpad/dialtone-vue/issues/588)) ([21f4f98](https://github.com/dialpad/dialtone-vue/commit/21f4f98493432ce77f6f524713544a84db724afe))
+* update event handling ([#570](https://github.com/dialpad/dialtone-vue/issues/570)) ([ea9c7cd](https://github.com/dialpad/dialtone-vue/commit/ea9c7cde64d856b82347098101201c3ec285977c))
+
 # [3.22.0](https://github.com/dialpad/dialtone-vue/compare/v3.21.0...v3.22.0) (2022-11-07)
 
 
