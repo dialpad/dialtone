@@ -568,6 +568,7 @@ export default {
     },
 
     isOpen (isOpen, isPrev) {
+      console.log('in isOpen watcher, isOpen: ' + isOpen);
       if (isOpen) {
         this.tip.setProps({
           zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
@@ -582,6 +583,7 @@ export default {
   },
 
   mounted () {
+    console.log('in mounted');
     // support single anchor for popover, not multi anchor
     const externalAnchorEl = document.getElementById(this.externalAnchor);
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
@@ -607,7 +609,7 @@ export default {
       onClickOutside: this.onClickOutside,
       onShow: this.onShow,
     });
-
+    console.log('in mounted - this.open:' + this.open);
     // Set internal open state on mounted since the watcher is not fired initially.
     if (this.open !== null) {
       this.isOpen = this.open;
@@ -687,6 +689,7 @@ export default {
     },
 
     toggleOpen () {
+      console.log('toggling to ' + !this.isOpen);
       this.isOpen = !this.isOpen;
     },
 
