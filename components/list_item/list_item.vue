@@ -3,7 +3,7 @@
   <component
     :is="elementType"
     :id="id"
-    :class="['dt-list-item d-ls-none focus-visible', {
+    :class="['dt-list-item d-ls-none', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
       'dt-list-item--static': !isHoverable,
@@ -230,6 +230,8 @@ export default {
 }
 
 .dt-list-item:focus-visible {
-  outline-color: var(--purple-500);
+  border-radius: var(--br4);
+  outline: none;
+  box-shadow: inset 0 0 0 var(--su2) var(--focus-ring);
 }
 </style>
