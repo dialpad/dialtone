@@ -560,8 +560,10 @@ export default {
     },
 
     open: {
-      handler: function (open) {
+      handler: async function (open) {
         if (open !== null) {
+          // Need initial DOM to be mounted or this isOpen watcher won't fire, so await nextTick.
+          await this.$nextTick();
           this.isOpen = open;
         }
       },
