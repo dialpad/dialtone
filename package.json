@@ -11,11 +11,12 @@
     "release": "npm install && npm run build-lib && npm publish --tag latest"
   },
   "dependencies": {
-    "vue": "2.7.13",
-    "core-js": "^3.8.3"
+    "core-js": "^3.8.3",
+    "vue": "2.7.13"
   },
   "files": [
-    "dist/*.js"
+    "dist/*.js",
+    "dist/svg"
   ],
   "main": "dist/dialtone-icons.common.js",
   "devDependencies": {
