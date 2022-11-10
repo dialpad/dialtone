@@ -560,25 +560,29 @@ export default {
     },
 
     open: {
-      handler: function (open) {
+      handler (open) {
         if (open !== null) {
           this.isOpen = open;
         }
       },
     },
 
-    isOpen (isOpen, isPrev) {
-      console.log('in isOpen watcher, isOpen: ' + isOpen);
-      if (isOpen) {
-        this.tip.setProps({
-          zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
-        });
-        this.tip.show();
-        this.addClosePopoverEventListener();
-      } else if (!isOpen && isPrev !== isOpen) {
-        this.removeClosePopoverEventListener();
-        this.tip.hide();
-      }
+    isOpen: {
+      handler (isOpen, isPrev) {
+        console.log('in isOpen watcher, isOpen: ' + isOpen);
+        if (isOpen) {
+          this.tip.setProps({
+            zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+          });
+          this.tip.show();
+          this.addClosePopoverEventListener();
+        } else if (!isOpen && isPrev !== isOpen) {
+          this.removeClosePopoverEventListener();
+          this.tip.hide();
+        }
+      },
+
+      flush: 'post',
     },
   },
 
