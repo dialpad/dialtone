@@ -1,3 +1,11 @@
+## [2.36.1](https://github.com/dialpad/dialtone-vue/compare/v2.36.0...v2.36.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* **list-item:** fix focus ring color ([#592](https://github.com/dialpad/dialtone-vue/issues/592)) ([7c01b57](https://github.com/dialpad/dialtone-vue/commit/7c01b577a0a59b1ce7875e498256241ac3fb5d64))
+* **popover:** no default context menu when openOnContext is true ([#587](https://github.com/dialpad/dialtone-vue/issues/587)) ([654b215](https://github.com/dialpad/dialtone-vue/commit/654b215a8fbbbc1367bcab3489646b2425396233))
+
 # [2.36.0](https://github.com/dialpad/dialtone-vue/compare/v2.35.0...v2.36.0) (2022-11-08)
 
 

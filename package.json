@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.36.0",
+  "version": "2.36.1",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "keywords": [
     "Dialpad",
@@ -13,14 +13,30 @@
   ],
   "homepage": "https://vue.dialpad.design",
   "bugs": {
-    "email" : "dialtone@dialpad.com"
+    "email": "dialtone@dialpad.com"
   },
   "license": "MIT",
   "contributors": [
-    {"name":"Brad Paugh","email":"brad.paugh@dialpad.com","url":"https://github.com/braddialpad"},
-    {"name":"Francis Rupert","email":"francis.rupert@dialpad.com","url":"https://github.com/francisrupert"},
-    {"name":"Julio Ortega","email":"julio.ortega@dialpad.com","url":"https://github.com/juliodialpad"},
-    {"name":"Jose Silva","email":"jose.silva@dialpad.com","url":"https://github.com/josedialpad"}
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Jose Silva",
+      "email": "jose.silva@dialpad.com",
+      "url": "https://github.com/josedialpad"
+    }
   ],
   "files": [
     "dist/*.js",
