@@ -20,7 +20,7 @@
         data-qa="dt-popover-anchor"
         :tabindex="openOnContext ? 0 : undefined"
         @click.capture="defaultToggleOpen"
-        @contextmenu="onContext"
+        @contextmenu.prevent="onContext"
         @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
@@ -656,8 +656,6 @@ export default {
 
     onContext (event) {
       if (!this.openOnContext) { return; }
-
-      event.preventDefault();
 
       this.tip?.setProps({
         placement: 'right-start',
