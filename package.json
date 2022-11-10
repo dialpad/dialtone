@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "0.0.8-vue3",
+  "version": "0.0.9-vue3",
   "description": "Dialtone icon library",
   "scripts": {
     "serve": "vue-cli-service serve",
