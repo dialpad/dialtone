@@ -560,15 +560,11 @@ export default {
     },
 
     open: {
-      handler: async function (open) {
+      handler: function (open) {
         if (open !== null) {
-          // Need initial DOM to be mounted or this isOpen watcher won't fire, so await nextTick.
-          await this.$nextTick();
           this.isOpen = open;
         }
       },
-
-      immediate: true,
     },
 
     isOpen (isOpen, isPrev) {
@@ -612,10 +608,9 @@ export default {
       onShow: this.onShow,
     });
 
-    // immediate watcher fires before mounted, so have this here in case
-    // show prop was initially set to true.
-    if (this.isOpen) {
-      this.tip.show();
+    // Set internal open state on mounted since the watcher is not fired initially.
+    if (this.open !== null) {
+      this.isOpen = this.open;
     }
   },
 

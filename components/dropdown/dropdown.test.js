@@ -48,7 +48,7 @@ describe('DtDropdown Tests', function () {
     listWrapper = popoverContent.find('[data-qa="dt-dropdown-list-wrapper"]');
   };
 
-  const _setWrappers = () => {
+  const _setWrappers = async () => {
     wrapper = mount(DtDropdown, {
       props,
       slots,
@@ -60,6 +60,7 @@ describe('DtDropdown Tests', function () {
       },
       attachTo: document.body,
     });
+    await wrapper.vm.$nextTick();
     _setChildWrappers();
   };
 
@@ -147,11 +148,16 @@ describe('DtDropdown Tests', function () {
 
     describe('When the dropdown is open', function () {
       // Test setup
-      beforeEach(function () {
+      beforeEach(async function () {
+        props = {
+          ...baseProps,
+          open: true,
+        };
         slots = {
           anchor: `<template #anchor="attrs"><a href="#" id="anchor" v-bind="attrs">Link</a></template>`,
         };
         _setWrappers();
+        await wrapper.vm.$nextTick();
       });
 
       it('aria-expanded should be "true"', function () {
