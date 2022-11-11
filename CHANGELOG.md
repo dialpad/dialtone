@@ -1,3 +1,10 @@
+## [3.22.1-beta.4](https://github.com/dialpad/dialtone-vue/compare/v3.22.1-beta.3...v3.22.1-beta.4) (2022-11-11)
+
+
+### Bug Fixes
+
+* more logging ([64fa62b](https://github.com/dialpad/dialtone-vue/commit/64fa62bdbdff522aad834ffa522e0714015815ab))
+
 ## [3.22.1-beta.3](https://github.com/dialpad/dialtone-vue/compare/v3.22.1-beta.2...v3.22.1-beta.3) (2022-11-10)
 
 
