@@ -1,3 +1,10 @@
+# [2.37.0](https://github.com/dialpad/dialtone-vue/compare/v2.36.1...v2.37.0) (2022-11-11)
+
+
+### Features
+
+* **Modal:** update danger style ([#582](https://github.com/dialpad/dialtone-vue/issues/582)) ([e7888b3](https://github.com/dialpad/dialtone-vue/commit/e7888b369b82a7d98f5a7bcff08c02dc2d67e5b8))
+
 ## [2.36.1](https://github.com/dialpad/dialtone-vue/compare/v2.36.0...v2.36.1) (2022-11-10)
 
 
