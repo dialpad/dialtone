@@ -616,11 +616,14 @@ export default {
     console.log('in mounted - this.open:' + this.open);
     // Set internal open state on mounted since the watcher is not fired initially.
     if (this.open !== null) {
+      console.log('in mounted - setting this.isOpen to:' + this.open);
       this.isOpen = this.open;
+      console.log('this.isOpen is:' + this.isOpen);
     }
   },
 
   beforeUnmount () {
+    console.log('unmounting');
     window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
     this.removeReferences();
@@ -701,6 +704,7 @@ export default {
       if (this.open !== null) { return; }
       if (this.openWithArrowKeys && this.anchorEl.contains(e.target)) {
         if (!this.isOpen) {
+          console.log('arrow key press setting isopen to true');
           this.isOpen = true;
         }
       }
@@ -717,6 +721,7 @@ export default {
     },
 
     closePopover () {
+      console.log('closePopover called');
       this.isOpen = false;
     },
 
