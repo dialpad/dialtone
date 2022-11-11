@@ -88,7 +88,6 @@
           importance="clear"
           :aria-label="closeButtonProps.ariaLabel"
           v-bind="closeButtonProps"
-          :kind="kind"
           @click="close"
         >
           <template #icon>
