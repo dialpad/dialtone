@@ -40,10 +40,19 @@ Must be one of the following:
 
 ### Scope:
 
-The optional scope allows to specify the place of the change. For instance, if the commit affects a specific component, use the component's name as scope:
+The optional scope allows to specify the place of the change.
+For instance, if the commit affects a specific component, use the component's name as scope:
+
+Note: use lowercase and kebab-case syntax for the scope, that means all in lowercase and separate the words with dash.
 
 ```
 feat(select-menu): add leftIcon prop
+```
+
+In case of multiple scopes, separate them with comma.
+
+```
+fix(combobox, combobox-with-popover): fix keyboard navigation 
 ```
 
 ### Subject:

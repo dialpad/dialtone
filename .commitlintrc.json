@@ -18,7 +18,8 @@
         "test"
       ]
     ],
-    "header-max-length": [2, "always", 72],
+    "scope-case": [2, "always", "kebab-case"],
+    "header-max-length": [2, "always", 120],
     "body-max-line-length": [0, "always", 100],
     "subject-full-stop": [0, "never", "."]
   },
