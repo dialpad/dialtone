@@ -1,3 +1,15 @@
+# [3.23.0](https://github.com/dialpad/dialtone-vue/compare/v3.22.1...v3.23.0) (2022-11-14)
+
+
+### Bug Fixes
+
+* **Recipe Ivr Node:** fix close sync for menu dropdown ([#596](https://github.com/dialpad/dialtone-vue/issues/596)) ([e48fad7](https://github.com/dialpad/dialtone-vue/commit/e48fad730474f2c1b020e90c1b84dc66933ffd18))
+
+
+### Features
+
+* **Modal:** update danger style ([#583](https://github.com/dialpad/dialtone-vue/issues/583)) ([70a94ce](https://github.com/dialpad/dialtone-vue/commit/70a94ce862332a2bd28cd62c14999aaaebd42b01))
+
 ## [3.22.1](https://github.com/dialpad/dialtone-vue/compare/v3.22.0...v3.22.1) (2022-11-10)
 
 
