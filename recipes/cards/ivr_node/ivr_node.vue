@@ -73,9 +73,12 @@
               </template>
             </dt-button>
           </template>
-          <template #list>
+          <template #list="{ close }">
             <div class="d-w164">
-              <slot name="menuItems" />
+              <slot
+                name="menuItems"
+                :close="close"
+              />
             </div>
           </template>
         </dt-dropdown>
