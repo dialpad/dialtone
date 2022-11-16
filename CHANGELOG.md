@@ -1,3 +1,10 @@
+## [3.23.1](https://github.com/dialpad/dialtone-vue/compare/v3.23.0...v3.23.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **Popover:** fix opening on the initial load in vue3 version ([#599](https://github.com/dialpad/dialtone-vue/issues/599)) ([edfcf27](https://github.com/dialpad/dialtone-vue/commit/edfcf270132d7a6d74c226c977a89271b0f36d71))
+
 # [3.23.0](https://github.com/dialpad/dialtone-vue/compare/v3.22.1...v3.23.0) (2022-11-14)
 
 
