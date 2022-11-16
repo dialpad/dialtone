@@ -96,7 +96,7 @@ export default {
   methods: {
     onComboboxSelect (i) {
       this.$attrs.onSelect(i);
-      this.value = this.items[i].number;
+      this.value = this.$attrs.items[i].number;
     },
 
     onComboboxEscape () {

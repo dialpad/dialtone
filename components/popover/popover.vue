@@ -51,7 +51,7 @@
         :aria-modal="`${!modal}`"
         :transition="transition"
         :show="isOpen"
-        appear
+        :appear="contentAppear"
         :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }, dialogClass]"
         :style="{
           'max-height': maxHeight,
@@ -265,6 +265,14 @@ export default {
       type: String,
       default: null,
       validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
+    },
+
+    /**
+     * Whether to apply transition on initial render in the content lazy show component.
+     */
+    contentAppear: {
+      type: Boolean,
+      default: false,
     },
 
     /**

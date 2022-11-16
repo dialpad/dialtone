@@ -46,6 +46,7 @@
         role="listbox"
         :external-anchor="externalAnchor"
         :content-width="contentWidth"
+        :content-appear="true"
         :content-tabindex="null"
         :modal="false"
         :auto-focus="false"
