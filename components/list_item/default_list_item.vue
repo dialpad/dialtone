@@ -8,7 +8,7 @@
       <!-- @slot Slot for the left content -->
       <slot name="left" />
     </section>
-    <section class="d-fl-grow1">
+    <section class="d-fl-grow1 d-of-hidden">
       <div v-if="$slots.default">
         <!-- @slot Slot for the main content -->
         <slot />
