@@ -666,15 +666,15 @@
           "type": "color"
         },
         "secondary": {
-          "value": "#F9F9F9",
+          "value": "{color.black.100}",
           "type": "color"
         },
         "moderate": {
-          "value": "#EDEDED",
+          "value": "{color.black.200}",
           "type": "color"
         },
         "bold": {
-          "value": "#BBBBBB",
+          "value": "{color.black.300}",
           "type": "color"
         },
         "strong": {
