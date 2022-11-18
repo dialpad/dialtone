@@ -184,8 +184,9 @@
             importance="outlined"
           >
             <template slot="icon">
-              <icon-launch
-                class="d-svg--size20"
+              <dt-icon
+                name="external-link"
+                size="300"
               />
             </template>
           </dt-button>
@@ -196,8 +197,9 @@
             importance="outlined"
           >
             <template slot="icon">
-              <icon-menu-vertical
-                class="d-svg--size20"
+              <dt-icon
+                name="more-vertical"
+                size="300"
               />
             </template>
           </dt-button>
@@ -444,12 +446,11 @@
 
 <script>
 import { DtPopover } from './';
-import { DtButton } from '../button';
-import { DtDropdown } from '../dropdown';
-import { DtListItem } from '../list_item';
-import { DtTooltip } from '../tooltip';
-import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
-import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
+import { DtButton } from '@/components/button';
+import { DtDropdown } from '@/components/dropdown';
+import { DtListItem } from '@/components/list_item';
+import { DtTooltip } from '@/components/tooltip';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'PopoverVariantsStory',
@@ -458,8 +459,7 @@ export default {
     DtButton,
     DtDropdown,
     DtTooltip,
-    IconMenuVertical,
-    IconLaunch,
+    DtIcon,
     DtListItem,
   },
 

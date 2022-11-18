@@ -15,7 +15,10 @@
       v-if="icon"
       slot="icon"
     >
-      <component :is="icon" />
+      <dt-icon
+        :name="icon"
+        :size="iconSize"
+      />
     </template>
     <template
       v-else-if="avatar"
@@ -35,12 +38,17 @@
 
 <script>
 import DtChip from './chip';
-import DtAvatar from '../avatar/avatar';
-import icon from '@/common/mixins/icon';
+import { DtAvatar } from '@/components/avatar';
+import { DtIcon } from '@/components/icon';
+import { CHIP_ICON_SIZES } from '@/components/chip/chip_constants';
 
 export default {
   name: 'DtChipDefault',
-  components: { DtChip, DtAvatar },
-  mixins: [icon],
+  components: { DtChip, DtAvatar, DtIcon },
+  computed: {
+    iconSize () {
+      return CHIP_ICON_SIZES[this.size];
+    },
+  },
 };
 </script>

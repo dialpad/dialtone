@@ -7,7 +7,7 @@
       <dt-recipe-callbar-button-with-popover arrow-button-label="Open popover">
         Button
         <template #icon>
-          <icon-recording />
+          <dt-icon name="record" />
         </template>
         <template #tooltip>
           Tooltip text
@@ -25,7 +25,7 @@
         aria-label="Icon only"
       >
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Icon only
@@ -44,7 +44,7 @@
       >
         Disabled
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Tooltip
@@ -68,7 +68,7 @@
       >
         Button
         <template #icon>
-          <icon-recording />
+          <dt-icon name="record" />
         </template>
         <template #tooltip>
           Tooltip text
@@ -87,7 +87,7 @@
         aria-label="Icon only"
       >
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Icon only
@@ -107,7 +107,7 @@
       >
         Disabled
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Tooltip
@@ -125,15 +125,13 @@
 
 <script>
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
-import IconMicOn from '@dialpad/dialtone/lib/dist/vue/icons/IconMicOn';
-import IconRecording from '@dialpad/dialtone/lib/dist/vue/icons/IconRecording';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopoverVariants',
   components: {
     DtRecipeCallbarButtonWithPopover,
-    IconMicOn,
-    IconRecording,
+    DtIcon,
   },
 };
 </script>

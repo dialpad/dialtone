@@ -53,7 +53,7 @@
           v-if="icon"
           slot="icon"
         >
-          <component :is="icon" />
+          <dt-icon :name="icon" />
         </template>
         <template
           v-if="titleOverride"
@@ -69,14 +69,12 @@
 <script>
 import DtToast from './toast';
 import DtButton from '../button/button';
-import icon from '@/common/mixins/icon';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'ToastDefault',
 
-  components: { DtToast, DtButton },
-
-  mixins: [icon],
+  components: { DtToast, DtButton, DtIcon },
 
   data () {
     return {

@@ -1,15 +1,15 @@
 <template>
-  <span :class="skeletonSizeClass">
+  <span :class="emojiSize">
     <dt-skeleton
       v-show="imgLoading && showSkeleton"
       :offset="0"
-      :class="skeletonSizeClass"
-      :shape-option="{ shape: 'square', contentClass: skeletonSizeClass, size: 'auto' }"
+      :class="emojiSize"
+      :shape-option="{ shape: 'square', contentClass: emojiSize, size: 'auto' }"
     />
     <img
       v-show="!imgLoading"
       ref="emojiImg"
-      :class="[size, imgClass]"
+      :class="['d-icon', emojiSize, imgClass]"
       :aria-label="emojiLabel"
       :alt="emojiAlt"
       :title="emojiLabel"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { EMOJI_SIZES } from './emoji_constants.js';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 import {
   codeToEmojiData,
   stringToUnicode,
@@ -56,15 +56,14 @@ export default {
     },
 
     /**
-     * The size of the emoji. Can be any of the svg size utility classes from
-     * <a href="https://dialpad.design/utilities/svg/size" target="_blank"> Dialpad SVG Size</a>
-     * @values d-svg--size14, d-svg--size16, d-svg--size18, d-svg--size20
-     * d-svg--size24, d-svg--size32, d-svg--size48, d-svg--size64, d-svg--size100p
+     * The size of the emoji. Can be any of the icon size utility classes from
+     * <a href="https://dialpad.design/components/icon.html" target="_blank"> Dialpad Icon Size</a>
+     * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {
       type: String,
-      default: EMOJI_SIZES.SIZE_20,
-      validator: (t) => Object.values(EMOJI_SIZES).includes(t),
+      default: '500',
+      validator: (t) => Object.keys(ICON_SIZE_MODIFIERS).includes(t),
     },
 
     /**
@@ -118,7 +117,7 @@ export default {
         return customEmojiAssetUrl + this.emojiData.key + this.emojiData.extension;
       }
 
-      if (['d-svg--size14', 'd-svg--size16'].includes(this.size)) {
+      if (['100', '200'].includes(this.size)) {
         return emojiImageUrlSmall + this.emojiData.key + emojiFileExtensionSmall;
       } else {
         return emojiImageUrlLarge + this.emojiData.key + emojiFileExtensionLarge;
@@ -135,8 +134,8 @@ export default {
       return this.ariaLabel ? this.ariaLabel : this.emojiData.name;
     },
 
-    skeletonSizeClass () {
-      return this.size === 'd-svg--size100p' ? ['d-h100p', 'd-w100p'] : this.size;
+    emojiSize () {
+      return ICON_SIZE_MODIFIERS[this.size];
     },
   },
 

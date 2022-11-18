@@ -42,7 +42,7 @@
       v-if="icon"
       slot="icon"
     >
-      <component :is="icon" />
+      <dt-icon :name="icon" />
     </template>
     <template
       v-if="titleOverride"
@@ -54,16 +54,14 @@
 </template>
 
 <script>
-import { DtButton } from '../button';
+import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/icon';
 import DtNotice from './notice';
-import icon from '@/common/mixins/icon';
 
 export default {
   name: 'NoticeDefault',
 
-  components: { DtButton, DtNotice },
-
-  mixins: [icon],
+  components: { DtButton, DtNotice, DtIcon },
 
   computed: {
     shouldInvertButton () {

@@ -23,6 +23,9 @@
     },
     "recipes/comboboxes/combobox_multi_select/combobox_multi_select.vue": {
       "max-lines": 1
+    },
+    "recipes/list_items/contact_info/contact_info.stories.js": {
+      "max-lines": 1
     }
   }
 }

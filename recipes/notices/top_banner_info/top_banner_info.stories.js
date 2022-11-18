@@ -138,6 +138,10 @@ Variants.parameters = {
           id: 'color-contrast',
           enabled: false,
         },
+        {
+          id: 'duplicate-id',
+          enabled: false,
+        },
       ],
     },
   },

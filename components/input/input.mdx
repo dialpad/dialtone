@@ -66,8 +66,7 @@ Provides left icon within the form input
 ### Usage
 
 ```js
-import IconSend from '@dialpad/dialtone/lib/dist/vue/icons/IconSend.vue';
-import { DtInput } from '@dialpad/dialtone-vue';
+import { DtInput, DtIcon } from '@dialpad/dialtone-vue';
 ```
 
 ```html
@@ -76,7 +75,7 @@ import { DtInput } from '@dialpad/dialtone-vue';
   placeholder="placeholder"
 >
   <template #leftIcon>
-    <icon-send />
+    <dt-icon name="send" />
   </template>
 </dt-input>
 ```
@@ -92,8 +91,7 @@ Provides right icon within the form input
 ### Usage
 
 ```js
-import IconLock from '@dialpad/dialtone/lib/dist/vue/icons/IconLock.vue';
-import { DtInput } from '@dialpad/dialtone-vue';
+import { DtInput, DtIcon } from '@dialpad/dialtone-vue';
 ```
 
 ```html
@@ -102,7 +100,7 @@ import { DtInput } from '@dialpad/dialtone-vue';
   placeholder="placeholder"
 >
   <template #rightIcon>
-    <icon-lock />
+    <dt-icon name="lock" />
   </template>
 </dt-input>
 ```
@@ -118,8 +116,6 @@ Provides both icons within the form input
 ### Usage
 
 ```js
-import IconSend from '@dialpad/dialtone/lib/dist/vue/icons/IconSend.vue';
-import IconLock from '@dialpad/dialtone/lib/dist/vue/icons/IconLock.vue';
 import { DtInput } from '@dialpad/dialtone-vue';
 ```
 
@@ -129,10 +125,10 @@ import { DtInput } from '@dialpad/dialtone-vue';
   placeholder="placeholder"
 >
   <template #leftIcon>
-    <icon-send />
+    <dt-icon name="send" />
   </template>
   <template #rightIcon>
-    <icon-lock />
+    <dt-icon name="lock" />
   </template>
 </dt-input>
 ```
@@ -287,7 +283,7 @@ export default {
         return `${Math.abs(remainingCharacters)} characters over limit`;
       } else {
         return `${remainingCharacters} characters left`;
-      }      
+      }
     },
 
     validate () {
@@ -298,7 +294,7 @@ export default {
           warn: 15,
           message: this.validationMessage
         },
-      }      
+      }
     },
   }
 }

@@ -5,7 +5,6 @@
   >
     <dt-notice-icon
       :kind="kind"
-      v-on="$listeners"
     >
       <!-- @slot Slot for custom icon -->
       <slot name="icon" />

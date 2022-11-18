@@ -44,8 +44,9 @@
             data-qa="dt-ivr-node-icon"
           >
             <template #icon>
-              <component
-                :is="nodeIcon"
+              <dt-icon
+                :name="nodeIcon"
+                size="200"
                 class="d-fc-black-900"
               />
             </template>
@@ -69,7 +70,11 @@
               @click.stop.prevent="openMenu"
             >
               <template #icon>
-                <icon-menu-vertical class="d-fc-black-900" />
+                <dt-icon
+                  name="more-vertical"
+                  size="200"
+                  class="d-fc-black-900"
+                />
               </template>
             </dt-button>
           </template>
@@ -91,10 +96,10 @@
 </template>
 
 <script>
-import DtCard from '@/components/card/card';
-import DtButton from '@/components/button/button';
-import DtDropdown from '@/components/dropdown/dropdown';
-import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
+import { DtCard } from '@/components/card';
+import { DtButton } from '@/components/button';
+import { DtDropdown } from '@/components/dropdown';
+import { DtIcon } from '@/components/icon';
 import {
   IVR_NODE_ICON_TYPES, IVR_NODE_COLOR_MAPPING,
 } from './ivr_node_constants.js';
@@ -106,7 +111,7 @@ export default {
     DtCard,
     DtButton,
     DtDropdown,
-    IconMenuVertical,
+    DtIcon,
   },
 
   props: {

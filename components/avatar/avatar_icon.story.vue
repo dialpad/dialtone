@@ -4,19 +4,25 @@
     :size="size"
     :color="color"
   >
-    <component
-      :is="defaultSlot"
+    <dt-icon
+      :name="defaultSlot"
+      :size="iconSize"
     />
   </dt-avatar>
 </template>
 
 <script>
 import DtAvatar from './avatar';
-import icon from '@/common/mixins/icon';
+import { DtIcon } from '@/components/icon';
+import { AVATAR_ICON_SIZES } from './avatar_constants';
 
 export default {
   name: 'DtAvatarDefault',
-  components: { DtAvatar },
-  mixins: [icon],
+  components: { DtAvatar, DtIcon },
+  computed: {
+    iconSize () {
+      return AVATAR_ICON_SIZES[this.size];
+    },
+  },
 };
 </script>

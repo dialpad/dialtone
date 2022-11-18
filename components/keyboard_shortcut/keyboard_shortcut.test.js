@@ -1,14 +1,8 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
-import DtKeyboardShortcut from './keyboard_shortcut.vue';
+import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
+import { DtIcon } from '@/components/icon';
 import { SHORTCUTS_ALIASES_LIST } from './keyboard_shortcut_constants';
-
-import IconWindows from '@dialpad/dialtone/lib/dist/vue/icons/IconWindows';
-import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd';
-import IconArrowDownward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowDownward';
-import IconArrowUpward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowUpward';
-import IconArrowForward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowForward';
-import IconArrowBackward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowBackwards';
 
 // Constants
 const basePropsData = {
@@ -18,21 +12,14 @@ const basePropsData = {
 describe('DtKeyboardShortcut Tests', function () {
   // Wrappers
   let wrapper;
-  let mountedIcons = {};
+  let iconComponents;
 
   // Environment
   const propsData = basePropsData;
 
   // Helpers
   const _setChildWrappers = () => {
-    mountedIcons = {
-      IconWindows: wrapper.findComponent(IconWindows),
-      IconAdd: wrapper.findComponent(IconAdd),
-      IconArrowDownward: wrapper.findComponent(IconArrowDownward),
-      IconArrowUpward: wrapper.findComponent(IconArrowUpward),
-      IconArrowForward: wrapper.findComponent(IconArrowForward),
-      IconArrowBackward: wrapper.findComponent(IconArrowBackward),
-    };
+    iconComponents = wrapper.findAllComponents(DtIcon);
   };
 
   const _mountWrapper = () => {
@@ -42,12 +29,6 @@ describe('DtKeyboardShortcut Tests', function () {
     });
     _setChildWrappers();
   };
-
-  function itBehavesLikeIconWasRendered (iconName, mountedIcon) {
-    it(`should render component with ${iconName}`, function () {
-      assert.isTrue(mountedIcon.exists());
-    });
-  }
 
   // Setup
   before(function () {
@@ -59,8 +40,6 @@ describe('DtKeyboardShortcut Tests', function () {
     _mountWrapper();
 
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    Object.entries(mountedIcons)
-      .forEach(([iconName, mountedIcon]) =>
-        itBehavesLikeIconWasRendered(iconName, mountedIcon));
+    it('should render 11 icons', function () { assert.isTrue(iconComponents.length === 11); });
   });
 });

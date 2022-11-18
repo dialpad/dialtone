@@ -204,7 +204,7 @@ Default.args = {
   headerContent: 'Header content',
   showCloseButton: true,
   forceShowArrow: false,
-  icon: 'IconDialpadAi',
+  icon: 'dialpad-ai',
 };
 
 export const Variants = VariantsTemplate.bind({});

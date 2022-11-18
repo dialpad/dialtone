@@ -1,3 +1,6 @@
+import * as dialtoneIcons from '@dialpad/dialtone-icons';
+import { pascalCaseToKebabCase } from '@/common/utils';
+
 /**
  * Will use a Vue SFC to render the template rather than a template string.
  * This is useful for more complex components that are hard to work with and
@@ -21,32 +24,8 @@ export const createTemplateFromVueFile = (args, argTypes, templateComponent) => 
  * @returns {string[]} icon component names
  */
 export function getIconNames () {
-  const requireContext = require.context(
-    '../node_modules/@dialpad/dialtone/lib/dist/vue/icons',
-    false,
-    /[A-Z]\w+\.(vue|js)$/,
-  );
-
-  return ['', ...getComponentFilesFromDir(requireContext).map(item => item.componentName)];
+  return Object.keys(dialtoneIcons).map(name => pascalCaseToKebabCase(name));
 }
-
-/**
- * Extracts filename and component name from all files in a directory.
- * @param {object} requireContext - a requireContext containing the path of the
- * directory you would like to read files from
- * @returns {{fileName: string, componentName: string}[]} array of objects containing both the
- * filename and component name in PascalCase.
- */
-export const getComponentFilesFromDir = (requireContext) => {
-  const files = [];
-  requireContext.keys().forEach(fileName => {
-    // Get PascalCase name of component
-    const componentName = fileName.split('/').pop().replace(/\.\w+$/, '');
-
-    files.push({ fileName, componentName });
-  });
-  return files;
-};
 
 export const generateTemplate = (component,
   { props = [], excludeProps = [], customProps = [], childTemplate } = {}) => {
@@ -72,7 +51,6 @@ export const generateTemplate = (component,
 
 export default {
   generateTemplate,
-  getComponentFilesFromDir,
   createTemplateFromVueFile,
   getIconNames,
 };

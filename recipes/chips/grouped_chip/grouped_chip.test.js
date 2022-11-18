@@ -1,15 +1,14 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeGroupedChip from './grouped_chip.vue';
-import IconTime from '@dialpad/dialtone/lib/dist/vue/icons/IconTime.vue';
-import IconPause from '@dialpad/dialtone/lib/dist/vue/icons/IconPause.vue';
+import { DtIcon } from '@/components/icon';
 
 // Constants
 const basePropsData = {};
 const baseSlotsData = {
-  leftIcon: IconTime,
+  leftIcon: '<dt-icon name="clock" />',
   leftContent: `<div>0.13</div>`,
-  rightIcon: IconPause,
+  rightIcon: '<dt-icon name="pause" />',
   rightContent: `<div>0.33</div>`,
 };
 
@@ -42,6 +41,7 @@ describe('DtRecipeGroupedChip Tests', function () {
   const _setWrappers = () => {
     wrapper = mount(DtRecipeGroupedChip, {
       propsData,
+      components: { DtIcon },
       attrs,
       slots,
       provide,
@@ -80,7 +80,7 @@ describe('DtRecipeGroupedChip Tests', function () {
       });
 
       it('Should render left side chip icon element', function () {
-        assert.isTrue(leftChipIconElement.findComponent(IconTime).exists());
+        assert.isTrue(leftChipIconElement.findComponent(DtIcon).exists());
       });
 
       it('Should render left side chip content', function () {
@@ -92,7 +92,7 @@ describe('DtRecipeGroupedChip Tests', function () {
       });
 
       it('Should render right side chip icon element', function () {
-        assert.isTrue(rightChipIconElement.findComponent(IconPause).exists());
+        assert.isTrue(rightChipIconElement.findComponent(DtIcon).exists());
       });
 
       it('Should render right side chip content', function () {

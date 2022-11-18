@@ -7,7 +7,7 @@
       <dt-recipe-callbar-button>
         Button
         <template #icon>
-          <icon-recording />
+          <dt-icon name="record" />
         </template>
         <template #tooltip>
           Tooltip
@@ -17,7 +17,7 @@
       <dt-recipe-callbar-button>
         No tooltip
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon name="accessibility" />
         </template>
       </dt-recipe-callbar-button>
 
@@ -30,7 +30,7 @@
 
       <dt-recipe-callbar-button aria-label="mic on">
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Icon only
@@ -40,7 +40,7 @@
       <dt-recipe-callbar-button disabled>
         Disabled
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Tooltip
@@ -55,7 +55,7 @@
       <dt-recipe-callbar-button active>
         Button
         <template #icon>
-          <icon-recording />
+          <dt-icon name="record" />
         </template>
         <template #tooltip>
           Tooltip
@@ -65,7 +65,7 @@
       <dt-recipe-callbar-button active>
         No tooltip
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon name="accessibility" />
         </template>
       </dt-recipe-callbar-button>
 
@@ -81,7 +81,7 @@
         aria-label="mic on"
       >
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Icon only
@@ -94,7 +94,7 @@
       >
         Disabled
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Tooltip
@@ -112,7 +112,7 @@
       <dt-recipe-callbar-button danger>
         Button
         <template #icon>
-          <icon-recording />
+          <dt-icon name="record" />
         </template>
         <template #tooltip>
           Tooltip
@@ -122,7 +122,7 @@
       <dt-recipe-callbar-button danger>
         No tooltip
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon name="accessibility" />
         </template>
       </dt-recipe-callbar-button>
 
@@ -138,7 +138,7 @@
         aria-label="mic on"
       >
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Icon only
@@ -151,7 +151,7 @@
       >
         Disabled
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Tooltip
@@ -169,7 +169,7 @@
       >
         Button
         <template #icon>
-          <icon-recording />
+          <dt-icon name="record" />
         </template>
         <template #tooltip>
           Tooltip
@@ -182,7 +182,7 @@
       >
         No tooltip
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon name="accessibility" />
         </template>
       </dt-recipe-callbar-button>
 
@@ -202,7 +202,7 @@
         aria-label="mic on"
       >
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Icon only
@@ -216,7 +216,7 @@
       >
         Disabled
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Tooltip
@@ -233,7 +233,7 @@
         aria-label="recording"
       >
         <template #icon>
-          <icon-recording />
+          <dt-icon name="record" />
         </template>
         <template #tooltip>
           Rounded button
@@ -246,7 +246,7 @@
         aria-label="person"
       >
         <template #icon>
-          <icon-person />
+          <dt-icon name="user" />
         </template>
         <template #tooltip>
           Rounded active
@@ -259,7 +259,7 @@
         aria-label="play"
       >
         <template #icon>
-          <icon-play />
+          <dt-icon name="play" />
         </template>
         <template #tooltip>
           Rounded danger
@@ -273,7 +273,7 @@
         aria-label="star"
       >
         <template #icon>
-          <icon-star />
+          <dt-icon name="star" />
         </template>
         <template #tooltip>
           Rounded danger active
@@ -286,7 +286,7 @@
         aria-label="dialpad"
       >
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon name="accessibility" />
         </template>
         <template #tooltip>
           Rounded button
@@ -298,23 +298,13 @@
 
 <script>
 import DtRecipeCallbarButton from './callbar_button';
-import IconDialpadGlyph from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadGlyph';
-import IconMicOn from '@dialpad/dialtone/lib/dist/vue/icons/IconMicOn';
-import IconRecording from '@dialpad/dialtone/lib/dist/vue/icons/IconRecording';
-import IconPerson from '@dialpad/dialtone/lib/dist/vue/icons/IconPerson';
-import IconPlay from '@dialpad/dialtone/lib/dist/vue/icons/IconPlay';
-import IconStar from '@dialpad/dialtone/lib/dist/vue/icons/IconStar';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeCallbarButtonVariants',
   components: {
     DtRecipeCallbarButton,
-    IconDialpadGlyph,
-    IconMicOn,
-    IconRecording,
-    IconPerson,
-    IconPlay,
-    IconStar,
+    DtIcon,
   },
 };
 </script>

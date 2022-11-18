@@ -91,7 +91,10 @@
           @click="close"
         >
           <template #icon>
-            <icon-close />
+            <dt-icon
+              name="close"
+              size="400"
+            />
           </template>
         </dt-button>
         <sr-only-close-button
@@ -105,12 +108,12 @@
 </template>
 
 <script>
-import DtButton from '../button/button.vue';
-import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
+import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/icon';
 import Modal from '@/common/mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '@/common/utils';
-import DtLazyShow from '../lazy_show/lazy_show';
+import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button';
@@ -126,7 +129,7 @@ export default {
   components: {
     DtLazyShow,
     DtButton,
-    IconClose,
+    DtIcon,
     SrOnlyCloseButton,
   },
 

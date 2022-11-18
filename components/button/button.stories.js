@@ -50,6 +50,7 @@ export const argTypesData = {
     },
   },
   size: {
+    defaultValue: 'md',
     control: {
       type: 'select',
       options: Object.keys(BUTTON_SIZE_MODIFIERS),

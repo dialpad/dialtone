@@ -6,7 +6,7 @@
       <dt-recipe-callbar-button class="d-mt16">
         Screenshare
         <template #icon>
-          <icon-screenshare-off />
+          <dt-icon name="share-screen" />
         </template>
         <template #tooltip>
           Share screen
@@ -16,7 +16,7 @@
       <dt-recipe-callbar-button>
         Record
         <template #icon>
-          <icon-recording />
+          <dt-icon name="record" />
         </template>
         <template #tooltip>
           Record
@@ -26,7 +26,7 @@
       <dt-recipe-callbar-button>
         Mute
         <template #icon>
-          <icon-mic-on />
+          <dt-icon name="mic" />
         </template>
         <template #tooltip>
           Mute mic
@@ -36,7 +36,7 @@
       <dt-recipe-callbar-button>
         Hold
         <template #icon>
-          <icon-pause />
+          <dt-icon name="pause" />
         </template>
         <template #tooltip>
           Place on hold
@@ -46,7 +46,7 @@
       <dt-recipe-callbar-button>
         Assist
         <template #icon>
-          <icon-dialpad-ai />
+          <dt-icon name="dialpad-ai" />
         </template>
         <template #tooltip>
           Enable Assistant
@@ -56,7 +56,7 @@
       <dt-recipe-callbar-button>
         Transcript
         <template #icon>
-          <icon-transcript />
+          <dt-icon name="ai-notes" />
         </template>
         <template #tooltip>
           View transcript
@@ -66,7 +66,7 @@
       <dt-recipe-callbar-button>
         Transfer
         <template #icon>
-          <icon-phone-transfer />
+          <dt-icon name="transfer" />
         </template>
         <template #tooltip>
           Transfer call
@@ -76,7 +76,7 @@
       <dt-recipe-callbar-button>
         Park
         <template #icon>
-          <icon-park />
+          <dt-icon name="park" />
         </template>
         <template #tooltip>
           Park call to mainline
@@ -86,7 +86,7 @@
       <dt-recipe-callbar-button>
         More
         <template #icon>
-          <icon-menu-horizontal />
+          <dt-icon name="more-horizontal" />
         </template>
         <template #tooltip>
           More options
@@ -103,7 +103,7 @@
       >
         Stop
         <template #icon>
-          <icon-screenshare />
+          <dt-icon name="screen-share-off" />
         </template>
         <template #tooltip>
           Stop sharing
@@ -116,7 +116,7 @@
       >
         Stop Rec
         <template #icon>
-          <icon-recording-off />
+          <dt-icon name="stop-circle" />
         </template>
         <template #tooltip>
           Stop recording
@@ -129,7 +129,7 @@
       >
         Unmute
         <template #icon>
-          <icon-mic-off />
+          <dt-icon name="mic-off" />
         </template>
         <template #tooltip>
           Unmute mic
@@ -142,7 +142,7 @@
       >
         Unhold
         <template #icon>
-          <icon-pause />
+          <dt-icon name="pause" />
         </template>
         <template #tooltip>
           Resume call
@@ -155,7 +155,7 @@
       >
         Assist Off
         <template #icon>
-          <icon-ai-glyph />
+          <dt-icon name="dialpad-ai" />
         </template>
         <template #tooltip>
           Disable Assistant
@@ -165,7 +165,7 @@
       <dt-recipe-callbar-button active>
         Transcript
         <template #icon>
-          <icon-transcript />
+          <dt-icon name="ai-notes" />
         </template>
         <template #tooltip>
           View transcript
@@ -175,7 +175,7 @@
       <dt-recipe-callbar-button active>
         Transfer
         <template #icon>
-          <icon-phone-transfer />
+          <dt-icon name="transfer" />
         </template>
         <template #tooltip>
           Transfer call
@@ -185,7 +185,7 @@
       <dt-recipe-callbar-button active>
         Park
         <template #icon>
-          <icon-park />
+          <dt-icon name="park" />
         </template>
         <template #tooltip>
           Park call to mainline
@@ -195,7 +195,7 @@
       <dt-recipe-callbar-button active>
         More
         <template #icon>
-          <icon-menu-horizontal />
+          <dt-icon name="more-horizontal" />
         </template>
         <template #tooltip>
           More options
@@ -207,40 +207,13 @@
 
 <script>
 import DtRecipeCallbarButton from './callbar_button';
-import icon from '@/common/mixins/icon';
-import IconAiGlyph from '@dialpad/dialtone/lib/dist/vue/icons/IconAiGlyph.vue';
-import IconDialpadAi from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadAi.vue';
-import IconScreenshareOff from '@dialpad/dialtone/lib/dist/vue/icons/IconScreenshareOff.vue';
-import IconRecording from '@dialpad/dialtone/lib/dist/vue/icons/IconRecording.vue';
-import IconMicOn from '@dialpad/dialtone/lib/dist/vue/icons/IconMicOn.vue';
-import IconPause from '@dialpad/dialtone/lib/dist/vue/icons/IconPause.vue';
-import IconTranscript from '@dialpad/dialtone/lib/dist/vue/icons/IconTranscript.vue';
-import IconPhoneTransfer from '@dialpad/dialtone/lib/dist/vue/icons/IconPhoneTransfer.vue';
-import IconPark from '@dialpad/dialtone/lib/dist/vue/icons/IconPark.vue';
-import IconMenuHorizontal from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuHorizontal.vue';
-import IconScreenshare from '@dialpad/dialtone/lib/dist/vue/icons/IconScreenshare.vue';
-import IconRecordingOff from '@dialpad/dialtone/lib/dist/vue/icons/IconRecordingOff.vue';
-import IconMicOff from '@dialpad/dialtone/lib/dist/vue/icons/IconMicOff.vue';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeCallbarButtonCallbar',
   components: {
     DtRecipeCallbarButton,
-    IconAiGlyph,
-    IconDialpadAi,
-    IconScreenshareOff,
-    IconRecording,
-    IconMicOn,
-    IconPause,
-    IconTranscript,
-    IconPhoneTransfer,
-    IconPark,
-    IconMenuHorizontal,
-    IconScreenshare,
-    IconRecordingOff,
-    IconMicOff,
+    DtIcon,
   },
-
-  mixins: [icon],
 };
 </script>

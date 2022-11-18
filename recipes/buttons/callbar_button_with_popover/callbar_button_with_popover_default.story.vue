@@ -23,7 +23,7 @@
       v-if="icon"
       slot="icon"
     >
-      <component :is="icon" />
+      <dt-icon :name="icon" />
     </template>
     <template
       v-if="tooltip"
@@ -51,12 +51,10 @@
 
 <script>
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
-import IconDialpadAi from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadAi';
-import icon from '@/common/mixins/icon';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopoverDefault',
-  components: { DtRecipeCallbarButtonWithPopover, IconDialpadAi },
-  mixins: [icon],
+  components: { DtRecipeCallbarButtonWithPopover, DtIcon },
 };
 </script>

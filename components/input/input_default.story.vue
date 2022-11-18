@@ -42,27 +42,25 @@
       v-if="leftIcon"
       slot="leftIcon"
     >
-      <component :is="leftIcon" />
+      <dt-icon :name="leftIcon" />
     </template>
     <template
       v-if="rightIcon"
       slot="rightIcon"
     >
-      <component :is="rightIcon" />
+      <dt-icon :name="rightIcon" />
     </template>
   </dt-input>
 </template>
 
 <script>
 import DtInput from './input';
-import icon from '@/common/mixins/icon';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'InputDefault',
 
-  components: { DtInput },
-
-  mixins: [icon],
+  components: { DtInput, DtIcon },
 
   data () {
     return {

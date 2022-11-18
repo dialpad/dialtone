@@ -115,18 +115,18 @@ describe('DtEmoji Tests', function () {
         });
       });
 
-      describe('When the size changes to 48', function () {
+      describe('When the size changes to 800', function () {
         beforeEach(async function () {
-          await wrapper.setProps({ size: 'd-svg--size48' });
+          await wrapper.setProps({ size: '800' });
         });
         it('the correct class is set on the element', function () {
-          assert.isTrue(emoji.classes('d-svg--size48'));
+          assert.isTrue(emoji.classes('d-icon--size-800'));
         });
       });
 
-      describe('When the size changes to 16', function () {
+      describe('When the size changes to 200', function () {
         beforeEach(async function () {
-          await wrapper.setProps({ size: 'd-svg--size16' });
+          await wrapper.setProps({ size: '200' });
           await flushPromises();
         });
         it('the emoji is rendered using the "small emoji" url', function () {

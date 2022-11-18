@@ -10,6 +10,13 @@ export const CHIP_CLOSE_BUTTON_SIZE_MODIFIERS = {
   md: '',
 };
 
+export const CHIP_ICON_SIZES = {
+  xs: '200',
+  sm: '300',
+  md: '300',
+};
+
 export default {
   CHIP_SIZE_MODIFIERS,
+  CHIP_ICON_SIZES,
 };

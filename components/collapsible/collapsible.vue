@@ -34,13 +34,9 @@
             'width': maxWidth,
           }"
         >
-          <icon-arrow-accordion-open
-            v-if="isOpen"
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
-          />
-          <icon-arrow-accordion-closed
-            v-else
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
+          <dt-icon
+            :name=" isOpen ? 'chevron-down' : 'chevron-right'"
+            class="d-icon d-icon--size-300 d-mr8 d-fl-shrink0"
           />
           <span
             class="d-mr-auto d-truncate"
@@ -84,10 +80,9 @@
 <script>
 import { getUniqueString } from '@/common/utils';
 import DtCollapsibleLazyShow from './collapsible_lazy_show';
-import { DtButton } from '../button';
-import { DtLazyShow } from '../lazy_show';
-import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
-import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
+import { DtButton } from '@/components/button';
+import { DtLazyShow } from '@/components/lazy_show';
+import { DtIcon } from '@/components/icon';
 
 /**
  * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
@@ -100,8 +95,7 @@ export default {
     DtButton,
     DtCollapsibleLazyShow,
     DtLazyShow,
-    IconArrowAccordionOpen,
-    IconArrowAccordionClosed,
+    DtIcon,
   },
 
   props: {

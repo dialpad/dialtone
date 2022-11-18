@@ -2,7 +2,7 @@ import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
 import { INPUT_SIZES } from './input_constants';
-import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd.vue';
+import { DtIcon } from '@/components/icon';
 import DtInput from './input.vue';
 
 // Constants
@@ -26,6 +26,7 @@ describe('DtInput tests', function () {
   let nativeTextarea;
   let leftIconWrapper;
   let rightIconWrapper;
+  let iconPlus;
 
   // Test Environment
   let propsData;
@@ -48,11 +49,13 @@ describe('DtInput tests', function () {
   const _mountWrapper = () => {
     wrapper = mount(DtInput, {
       propsData,
+      components: { DtIcon },
       attrs,
       slots,
       listeners,
       localVue: this.localVue,
     });
+    iconPlus = '<dt-icon name="plus" />';
   };
 
   // Test Setup
@@ -197,12 +200,12 @@ describe('DtInput tests', function () {
           assert.isTrue(leftIconWrapper.classes().includes('d-input-icon--left'));
         });
         it('should have input icon size class', function () { itBehavesLikeHasIconSizeClass(leftIconWrapper, size); });
-        it('should render the provided icon', function () { assert.isTrue(wrapper.findComponent(IconAdd).exists()); });
+        it('should render the provided icon', function () { assert.isTrue(wrapper.findComponent(DtIcon).exists()); });
       };
 
       // Test Setup
       beforeEach(async function () {
-        slots = { leftIcon: IconAdd };
+        slots = { leftIcon: iconPlus };
       });
 
       describe('When a size is not provided', function () {
@@ -238,12 +241,12 @@ describe('DtInput tests', function () {
           assert.isTrue(rightIconWrapper.classes().includes('d-input-icon--right'));
         });
         it('should have input icon size class', function () { itBehavesLikeHasIconSizeClass(rightIconWrapper, size); });
-        it('should render the provided icon', function () { assert.isTrue(wrapper.findComponent(IconAdd).exists()); });
+        it('should render the provided icon', function () { assert.isTrue(wrapper.findComponent(DtIcon).exists()); });
       };
 
       // Test Setup
       beforeEach(async function () {
-        slots = { rightIcon: IconAdd };
+        slots = { rightIcon: iconPlus };
       });
 
       describe('When a size is not provided', function () {

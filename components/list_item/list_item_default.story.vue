@@ -11,7 +11,7 @@
       @click="onClick"
     >
       <template slot="left">
-        <component :is="left" />
+        <dt-icon :name="left" />
       </template>
       <span v-html="defaultSlot" />
       <template slot="subtitle">
@@ -21,34 +21,26 @@
         <span v-html="bottom" />
       </template>
       <template slot="right">
-        <component :is="right" />
+        <dt-icon :name="right" />
       </template>
     </dt-list-item>
   </ul>
 </template>
 
 <script>
-import DtAvatar from '../avatar/avatar';
-import DtBadge from '../badge/badge';
-import DtButton from '../button/button';
 import DtListItem from './list_item';
-import IconPhone from '@dialpad/dialtone/lib/dist/vue/icons/IconPhone';
-import icon from '@/common/mixins/icon';
+import { DtIcon } from '@/components/icon';
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',
 
   components: {
-    DtAvatar,
-    DtBadge,
-    DtButton,
     DtListItem,
-    IconPhone,
+    DtIcon,
   },
 
   mixins: [
-    icon,
     KeyboardNavigation({
       indexKey: 'highlightIndex',
       idKey: 'highlightId',

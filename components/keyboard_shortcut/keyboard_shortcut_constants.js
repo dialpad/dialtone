@@ -1,19 +1,14 @@
-export const SHORTCUTS_ALIASES = {
-  cmd: '&#8984;', // ⌘ Command
-};
-
 export const SHORTCUTS_ICON_ALIASES = {
-  '{win}': 'IconWindows',
-  '{arrow-right}': 'IconArrowForward',
-  '{arrow-left}': 'IconArrowBackward',
-  '{arrow-up}': 'IconArrowUpward',
-  '{arrow-down}': 'IconArrowDownward',
+  '{win}': 'layout-grid',
+  '{arrow-right}': 'arrow-right',
+  '{arrow-left}': 'arrow-left',
+  '{arrow-up}': 'arrow-up',
+  '{arrow-down}': 'arrow-down',
+  '{cmd}': 'command',
 };
 
 export const SHORTCUTS_ICON_SEPARATOR = {
-  '{plus}': 'IconAdd',
+  '{plus}': 'plus',
 };
 
-export const SHORTCUTS_ALIASES_LIST = Object
-  .keys(SHORTCUTS_ALIASES).map(key => `{${key}}`)
-  .concat(Object.keys(SHORTCUTS_ICON_ALIASES));
+export const SHORTCUTS_ALIASES_LIST = Object.keys(SHORTCUTS_ICON_ALIASES);

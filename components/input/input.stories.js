@@ -272,18 +272,30 @@ WithDescription.args = {
 
 export const WithLeftIcon = Template.bind({});
 WithLeftIcon.args = {
-  leftIcon: 'IconSend',
+  leftIcon: 'send',
 };
 
 export const WithRightIcon = Template.bind({});
 WithRightIcon.args = {
-  rightIcon: 'IconLock',
+  rightIcon: 'lock-filled',
 };
 
 export const WithBothIcons = Template.bind({});
+WithBothIcons.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'duplicate-id',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 WithBothIcons.args = {
-  leftIcon: 'IconSend',
-  rightIcon: 'IconLock',
+  leftIcon: 'send',
+  rightIcon: 'lock-filled',
 };
 
 export const WithWarning = Template.bind({});

@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import DtNoticeIcon from './notice_icon';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import IconCamera from '@dialpad/dialtone/lib/dist/vue/icons/IconCamera';
+import { createLocalVue, mount } from '@vue/test-utils';
+import { DtIcon } from '@/components/icon';
 
 // Constants
 const basePropsData = {
@@ -12,15 +12,14 @@ const baseSlotsData = {};
 
 describe('DtNoticeIcon tests', function () {
   let wrapper;
-  let cameraIcon;
-  let baseIcon;
-  let warningIcon;
+  let icon;
   let propsData;
   let slotsData;
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtNoticeIcon, {
-      propsData: propsData,
+    wrapper = mount(DtNoticeIcon, {
+      components: { DtIcon },
+      propsData,
       slots: slotsData,
       localVue: this.localVue,
     });
@@ -28,9 +27,7 @@ describe('DtNoticeIcon tests', function () {
   };
 
   const _setChildWrappers = () => {
-    cameraIcon = wrapper.findComponent(IconCamera);
-    baseIcon = wrapper.find('iconlightbulb-stub');
-    warningIcon = wrapper.find('iconwarning-stub');
+    icon = wrapper.findComponent(DtIcon);
   };
 
   before(function () {
@@ -50,7 +47,7 @@ describe('DtNoticeIcon tests', function () {
       });
 
       it('Should render an icon', function () {
-        assert.isTrue(warningIcon.exists());
+        assert.isTrue(icon.exists());
       });
 
       it('Should have aria-hidden set to true', function () {
@@ -65,20 +62,20 @@ describe('DtNoticeIcon tests', function () {
       });
 
       it('Should render base icon', function () {
-        assert.isTrue(baseIcon.exists());
+        assert.isTrue(icon.classes().includes('d-icon--bell'));
       });
     });
 
     describe('When custom icon is passed into the slot', function () {
       beforeEach(async function () {
         slotsData = {
-          default: IconCamera,
+          default: '<dt-icon name="accessibility" />',
         };
         _setWrappers();
       });
 
       it('Should render correctly', async function () {
-        assert.isTrue(cameraIcon.exists());
+        assert.isTrue(icon.classes().includes('d-icon--accessibility'));
       });
     });
   });

@@ -1,5 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { EMOJI_SIZES } from './emoji_constants';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 import DtEmoji from './emoji';
 import DtEmojiMdx from './emoji.mdx';
 import DtEmojiDefaultTemplate from './emoji_default.story.vue';
@@ -14,13 +14,7 @@ export const argTypesData = {
   size: {
     control: {
       type: 'select',
-      options: Object.values(EMOJI_SIZES),
-    },
-    defaultValue: EMOJI_SIZES.SIZE_20,
-    table: {
-      defaultValue: {
-        summary: EMOJI_SIZES.SIZE_20,
-      },
+      options: Object.keys(ICON_SIZE_MODIFIERS),
     },
   },
 };

@@ -7,18 +7,18 @@
     @click="close"
     @keydown.space.prevent.stop="close"
   >
-    <icon-close />
+    <dt-icon name="close" />
   </dt-button>
 </template>
 
 <script>
-import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
-import { DtButton } from '../components/button';
+import { DtIcon } from '@/components/icon';
+import { DtButton } from '@/components/button';
 
 export default {
   name: 'SrOnlyCloseButton',
   components: {
-    IconClose,
+    DtIcon,
     DtButton,
   },
 

@@ -44,11 +44,11 @@ import { DtChip } from '@dialpad/dialtone-vue';
 </Canvas>
 
 ```html
-import IconLock from '@dialpad/dialtone/vue/icons/IconLock';
+import { DtChip, DtIcon } from '@dialpad/dialtone-vue';
 
 <dt-chip :close-button-props="{ ariaLabel: $i18n('close') }">
   <template #icon>
-    <icon-lock />
+    <dt-icon name="lock" />
   </template>
 </dt-chip>
 ```
