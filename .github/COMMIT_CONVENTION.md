@@ -30,13 +30,13 @@ Must be one of the following:
 * **docs**: documentation changes.
 * **feat**: a new feature (corresponding with `MINOR` in SemVer).
 * **fix**: a bug fix (corresponding with `PATCH` in SemVer).
-* **perf**: performance improvements.
-* **refactor**: changes that neither fix a bug nor add a feature.
+* **perf**: performance improvements (corresponding with `PATCH` in SemVer).
+* **refactor**: changes that neither fix a bug nor add a feature (corresponding with `PATCH` in SemVer).
 * **revert**: changes that revert a commit.
 * **style**: not relevant changes (whitespace, code formatting, semicolons, etc).
 * **test**: changes that add or modify tests.
 
-> Only `feat`, `fix` and `perf` types trigger a new release. Commits with `BREAKING CHANGE:` in the footer of the commit message, regardless of type, will generate a `MAJOR` release.
+> Only `feat`, `fix`, `perf` and `refactor` types trigger a new release. Commits with `BREAKING CHANGE:` in the footer of the commit message, regardless of type, will generate a `MAJOR` release.
 
 ### Scope:
 
