@@ -5,7 +5,10 @@
       v-if="leftIcon"
       #leftIcon
     >
-      <component :is="leftIcon" />
+      <dt-icon
+        :name="leftIcon"
+        size="200"
+      />
     </template>
     <template #leftContent>
       <span v-html="leftContent" />
@@ -15,7 +18,10 @@
       v-if="rightIcon"
       #rightIcon
     >
-      <component :is="rightIcon" />
+      <dt-icon
+        :name="rightIcon"
+        size="200"
+      />
     </template>
     <template
       v-if="rightContent"
@@ -28,14 +34,13 @@
 
 <script>
 import DtRecipeGroupedChip from './grouped_chip';
-import icon from '@/common/mixins/icon';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeGroupedChipDefault',
   components: {
     DtRecipeGroupedChip,
+    DtIcon,
   },
-
-  mixins: [icon],
 };
 </script>

@@ -283,7 +283,7 @@ folder as the corresponding stories.js file. In this case it is in the same fold
       v-if="icon"
       #icon
     >
-      <component :is="icon" />
+      <dt-icon :name="icon" />
     </template>
     <template
       v-if="titleOverride"
@@ -296,12 +296,11 @@ folder as the corresponding stories.js file. In this case it is in the same fold
 
 <script>
 import DtNotice from './notice';
-import icon from '../mixins/icon';
+import { DtIcon } from '../components/icon';
 
 export default {
   name: 'NoticeDefault',
-  components: { DtNotice },
-  mixins: [icon],
+  components: { DtNotice, DtIcon },
 };
 </script>
 ```

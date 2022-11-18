@@ -41,12 +41,9 @@ import { DtRecipeGroupedChip } from '@dialpad/dialtone-vue';
 ### Split Combination Chip showing both left and right hand side content.
 
 ```html
-import IconTime from '@dialpad/dialtone/lib/dist/vue/icons/IconTime';
-import IconPause from '@dialpad/dialtone/lib/dist/vue/icons/IconPause.vue';
-
 <dt-recipe-grouped-chip>
   <template #leftIcon>
-    <icon-time size="d-svg--size14" />
+    <dt-icon name="clock" />
   </template>
   <template #leftContent>
     <div>
@@ -54,7 +51,7 @@ import IconPause from '@dialpad/dialtone/lib/dist/vue/icons/IconPause.vue';
     </div>
   </template>
   <template #rightIcon>
-    <icon-pause size="d-svg--size14" />
+    <dt-icon name="pause" />
   </template>
   <template #rightContent>
     <div>

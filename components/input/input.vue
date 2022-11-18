@@ -118,7 +118,7 @@ import {
   getUniqueString,
   getValidationState,
 } from '@/common/utils';
-import { DtValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '@/components/validation_messages';
 import { MessagesMixin } from '@/common/mixins/input.js';
 
 /**

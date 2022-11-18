@@ -17,10 +17,10 @@
     >
       Button wrapper :smile:
     </dt-emoji-text-wrapper>
-    <dt-emoji-text-wrapper size="d-svg--size48">
+    <dt-emoji-text-wrapper size="800">
       Bigger emoji size :smile:
     </dt-emoji-text-wrapper>
-    <dt-emoji-text-wrapper size="d-svg--size14">
+    <dt-emoji-text-wrapper size="300">
       Smaller emoji size :smile:
     </dt-emoji-text-wrapper>
   </div>

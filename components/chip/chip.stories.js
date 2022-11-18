@@ -50,6 +50,7 @@ export const argTypesData = {
     },
   },
   size: {
+    defaultValue: 'md',
     control: {
       type: 'select',
       options: Object.keys(CHIP_SIZE_MODIFIERS),
@@ -137,7 +138,7 @@ Default.args = {
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   ...Default.args,
-  icon: 'IconLock',
+  icon: 'lock-filled',
 };
 
 export const WithAvatar = Template.bind({});

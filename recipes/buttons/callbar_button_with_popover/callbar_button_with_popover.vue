@@ -45,7 +45,10 @@
           @click="arrowClick"
         >
           <template #icon>
-            <icon-arrow-drop-up class="d-svg--size-16" />
+            <dt-icon
+              name="chevron-up"
+              size="200"
+            />
           </template>
         </dt-button>
       </template>
@@ -63,16 +66,16 @@
 </template>
 
 <script>
-import DtButton from '@/components/button/button';
-import DtPopover from '@/components/popover/popover';
+import { DtButton } from '@/components/button';
+import { DtPopover } from '@/components/popover';
+import { DtIcon } from '@/components/icon';
 import DtRecipeCallbarButton from '@/recipes/buttons/callbar_button/callbar_button';
-import IconArrowDropUp from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowDropUp.vue';
 import utils from '@/common/utils';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopover',
 
-  components: { DtRecipeCallbarButton, DtPopover, DtButton, IconArrowDropUp },
+  components: { DtRecipeCallbarButton, DtPopover, DtButton, DtIcon },
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized

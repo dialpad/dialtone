@@ -139,11 +139,6 @@ export default {
   border-radius: var(--br-circle);
 }
 
-.dt-recipe-callbar-button.d-btn .d-btn__icon .d-svg {
-  width: 2.4rem;
-  height: 2.4rem;
-}
-
 .dt-recipe-callbar-button.d-btn[disabled] {
   background-color: unset;
 }

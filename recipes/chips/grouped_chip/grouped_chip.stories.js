@@ -27,7 +27,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'VNode',
+        summary: 'Component',
       },
     },
     control: {
@@ -53,7 +53,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'VNode',
+        summary: 'Component',
       },
     },
     control: {
@@ -93,11 +93,11 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  leftIcon: 'IconTime',
+  leftIcon: 'clock',
   leftContent: `<div>
     0.13
 </div>`,
-  rightIcon: 'IconPause',
+  rightIcon: 'pause',
   rightContent: `<div>
     0.25
 </div>`,

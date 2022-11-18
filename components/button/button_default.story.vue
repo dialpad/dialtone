@@ -26,18 +26,26 @@
       v-if="$attrs.icon"
       #icon
     >
-      <component :is="$attrs.icon" />
+      <dt-icon
+        :name="$attrs.icon"
+        :size="iconSize"
+      />
     </template>
   </dt-button>
 </template>
 
 <script>
 import DtButton from './button';
-import icon from '@/common/mixins/icon';
+import { DtIcon } from '@/components/icon';
+import { BUTTON_ICON_SIZES } from './button_constants';
 
 export default {
   name: 'ButtonDefault',
-  components: { DtButton },
-  mixins: [icon],
+  components: { DtButton, DtIcon },
+  computed: {
+    iconSize () {
+      return BUTTON_ICON_SIZES[this.$attrs.size];
+    },
+  },
 };
 </script>

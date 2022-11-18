@@ -1,14 +1,9 @@
 import DtIcon from './icon';
-import {
-  ICON_SIZE_MODIFIERS,
-} from './icon_constants';
+import { ICON_SIZE_MODIFIERS } from './icon_constants';
 import BaseIconMdx from './icon.mdx';
-import IconDefault from './icon_default.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import * as dialtoneIcons from '@dialpad/dialtone-icons';
-import { pascalCaseToKebabCase } from '@/common/utils';
-
-const iconsList = Object.keys(dialtoneIcons).map(name => pascalCaseToKebabCase(name));
+import DtIconDefaultTemplate from './icon_default.story.vue';
+import DtIconVariantsTemplate from './icon_variants.story.vue';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
 export const argTypesData = {
   size: {
@@ -20,7 +15,7 @@ export const argTypesData = {
   name: {
     control: {
       type: 'select',
-      options: iconsList,
+      options: getIconNames(),
     },
   },
 };
@@ -46,12 +41,20 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const Template = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  IconDefault,
+  DtIconDefaultTemplate,
+);
+const VariantsTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtIconVariantsTemplate,
 );
 
-export const Default = Template.bind({});
+export const Default = DefaultTemplate.bind({});
 Default.args = {
   name: 'accessibility',
 };
+
+export const Variants = VariantsTemplate.bind({});
+Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

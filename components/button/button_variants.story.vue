@@ -85,21 +85,30 @@
         aria-label="Icon only"
       >
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon
+            name="download"
+            size="200"
+          />
         </template>
       </dt-button>
 
       <!-- Icon Only -->
       <dt-button aria-label="Icon only">
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon
+            name="download"
+            size="200"
+          />
         </template>
       </dt-button>
 
       <!-- Icon Left -->
       <dt-button>
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon
+            name="download"
+            size="200"
+          />
         </template>
         Icon Left
       </dt-button>
@@ -107,7 +116,10 @@
       <!-- Icon Right -->
       <dt-button icon-position="right">
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon
+            name="download"
+            size="200"
+          />
         </template>
         Icon Right
       </dt-button>
@@ -115,7 +127,10 @@
       <!-- Icon Top -->
       <dt-button icon-position="top">
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon
+            name="download"
+            size="200"
+          />
         </template>
         Icon Top
       </dt-button>
@@ -123,7 +138,10 @@
       <!-- Icon Bottom -->
       <dt-button icon-position="bottom">
         <template #icon>
-          <icon-dialpad-glyph />
+          <dt-icon
+            name="download"
+            size="200"
+          />
         </template>
         Icon Bottom
       </dt-button>
@@ -165,10 +183,10 @@
 
 <script>
 import DtButton from './button';
-import IconDialpadGlyph from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadGlyph';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'ButtonVariants',
-  components: { DtButton, IconDialpadGlyph },
+  components: { DtButton, DtIcon },
 };
 </script>

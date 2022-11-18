@@ -11,7 +11,7 @@ export const argTypesData = {
     control: 'text',
     table: {
       type: {
-        summary: 'VNode',
+        summary: 'VNode|String|Component',
       },
     },
   },
@@ -79,7 +79,7 @@ Image.args = {
 export const Icon = IconTemplate.bind({});
 Icon.args = {
   color: 'purple-200',
-  default: 'IconDialpadGlyph',
+  default: 'accessibility',
 };
 
 Icon.argTypes = {

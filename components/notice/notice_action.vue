@@ -17,7 +17,10 @@
       @click="close"
     >
       <template #icon>
-        <icon-close />
+        <dt-icon
+          name="close"
+          size="200"
+        />
       </template>
     </dt-button>
     <sr-only-close-button
@@ -29,8 +32,8 @@
 </template>
 
 <script>
-import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
-import DtButton from '../button/button';
+import { DtIcon } from '@/components/icon';
+import { DtButton } from '@/components/button';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
@@ -38,7 +41,7 @@ export default {
   name: 'DtNoticeAction',
 
   components: {
-    IconClose,
+    DtIcon,
     DtButton,
     SrOnlyCloseButton,
   },

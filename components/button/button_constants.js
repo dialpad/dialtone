@@ -55,6 +55,14 @@ export const INVALID_COMBINATION = [
   },
 ];
 
+export const BUTTON_ICON_SIZES = {
+  xs: '200',
+  sm: '200',
+  md: '300',
+  lg: '400',
+  xl: '500',
+};
+
 function _invalidCombinationMessage (circle, kind, importance) {
   return `You cannot have a ${circle ? 'circle ' : ''}button \
 with kind: ${kind} and importance: ${importance} as it \
@@ -70,4 +78,5 @@ export default {
   BUTTON_TYPES,
   ICON_POSITION_MODIFIERS,
   INVALID_COMBINATION,
+  BUTTON_ICON_SIZES,
 };

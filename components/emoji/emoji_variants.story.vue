@@ -2,69 +2,67 @@
   <div>
     <div>
       <dt-emoji
-        id="emoji-size14"
+        id="emoji-size100"
         code=":smile:"
-        size="d-svg--size14"
+        size="100"
       />
-      <label for="emoji-size14">d-svg--size14</label>
+      <label for="emoji-size100">size 100</label>
     </div>
     <div>
       <dt-emoji
-        id="emoji-size16"
+        id="emoji-size200"
         code=":smile:"
-        size="d-svg--size16"
+        size="200"
       />
-      <label for="emoji-size16">d-svg--size16</label>
+      <label for="emoji-size200">size 200</label>
     </div>
     <div>
       <dt-emoji
-        id="emoji-size18"
+        id="emoji-size300"
         code=":smile:"
-        size="d-svg--size18"
+        size="300"
       />
-      <label for="emoji-size18">d-svg--size18</label>
+      <label for="emoji-size300">size 300</label>
     </div>
     <div>
       <dt-emoji
-        id="emoji-size20"
+        id="emoji-size400"
         code=":smile:"
-        size="d-svg--size20"
+        size="400"
       />
-      <label for="emoji-size20">d-svg--size20</label>
+      <label for="emoji-size400">size 400</label>
     </div>
     <div>
       <dt-emoji
-        id="emoji-size24"
+        id="emoji-size500"
         code=":smile:"
-        size="d-svg--size24"
+        size="500"
       />
-      <label for="emoji-size24">d-svg--size24</label>
+      <label for="emoji-size500">size 500</label>
     </div>
     <div>
       <dt-emoji
-        id="emoji-size32"
+        id="emoji-size600"
         code=":smile:"
-        size="d-svg--size32"
+        size="600"
       />
-      <label for="emoji-size32">d-svg--size32</label>
+      <label for="emoji-size600">size 600</label>
     </div>
     <div>
       <dt-emoji
-        id="emoji-size48"
+        id="emoji-size700"
         code=":smile:"
-        size="d-svg--size48"
+        size="700"
       />
-      <label for="emoji-size48">d-svg--size48</label>
+      <label for="emoji-size700">size 700</label>
     </div>
     <div>
-      <div class="d-w264 d-h264 d-ba">
-        <dt-emoji
-          id="emoji-size100p"
-          code=":smile:"
-          size="d-svg--size100p"
-        />
-      </div>
-      <label for="emoji-size100p">d-svg--size100p, will take the size of the container it's in</label>
+      <dt-emoji
+        id="emoji-size800"
+        code=":smile:"
+        size="800"
+      />
+      <label for="emoji-size800">size 800</label>
     </div>
   </div>
 </template>

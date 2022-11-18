@@ -162,8 +162,8 @@ const CustomTemplate = (args) => createTemplateFromVueFile(args, DtListItemCusto
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  left: 'IconWorldwide',
-  right: 'IconLaunch',
+  left: 'globe-2',
+  right: 'external-link',
   default: 'Default List Item',
   subtitle: 'Description',
   bottom: '<span class="d-badge d-badge--purple-100">Label</span>',

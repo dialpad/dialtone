@@ -30,7 +30,7 @@
         >
           Launch Expert
           <template #icon>
-            <icon-launch />
+            <dt-icon name="external-link" />
           </template>
         </dt-button>
       </div>
@@ -125,16 +125,16 @@ import {
   IVR_NODE_PROMPT_MENU,
   IVR_NODE_PROMPT_PLAY, IVR_NODE_TRANSFER,
 } from './ivr_node_constants';
-import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
-import DtButton from '@/components/button/button';
-import DtAvatar from '@/components/avatar/avatar';
-import DtListItem from '@/components/list_item/list_item';
-import DtKeyboardShortcut from '@/components/keyboard_shortcut/keyboard_shortcut';
+import { DtIcon } from '@/components/icon';
+import { DtButton } from '@/components/button';
+import { DtAvatar } from '@/components/avatar';
+import { DtListItem } from '@/components/list_item';
+import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
 import avatarImage from './avatar.png';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',
-  components: { DtButton, DtRecipeIvrNode, IconLaunch, DtAvatar, DtListItem, DtKeyboardShortcut },
+  components: { DtButton, DtRecipeIvrNode, DtIcon, DtAvatar, DtListItem, DtKeyboardShortcut },
   props: {
     nodeType: {
       type: String,

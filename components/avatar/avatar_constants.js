@@ -30,8 +30,15 @@ export const AVATAR_COLOR_MODIFIERS = {
   'gold-500': 'd-avatar--gold-500',
 };
 
+export const AVATAR_ICON_SIZES = {
+  sm: '200',
+  md: '400',
+  lg: '500',
+};
+
 export default {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_COLOR_MODIFIERS,
+  AVATAR_ICON_SIZES,
 };

@@ -18,7 +18,10 @@
         aria-label="Menu button"
       >
         <template #icon>
-          <icon-menu-vertical />
+          <dt-icon
+            name="more-vertical"
+            size="100"
+          />
         </template>
       </dt-button>
     </template>
@@ -67,15 +70,15 @@
 
 <script>
 import DtCard from './card';
-import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
-import { DtButton } from '../button';
+import { DtIcon } from '@/components/icon';
+import { DtButton } from '@/components/button';
 
 export default {
   name: 'DtCardDefault',
   components: {
     DtCard,
     DtButton,
-    IconMenuVertical,
+    DtIcon,
   },
 
   props: {

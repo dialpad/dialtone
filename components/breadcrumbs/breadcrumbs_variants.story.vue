@@ -15,8 +15,8 @@
       class="d-py16 d-px12"
     >
       <dt-breadcrumb-item
-        v-for="breadcrumb in $attrs.breadcrumbs"
-        :key="breadcrumb.label"
+        v-for="(breadcrumb, idx) in $attrs.breadcrumbs"
+        :key="breadcrumb.label + idx"
         v-bind="breadcrumb"
       />
     </dt-breadcrumbs>
