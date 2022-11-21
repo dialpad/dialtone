@@ -3,20 +3,30 @@ name: Visual Tests
 on:
   push:
     branches: [ staging, staging-vue3 ]
+  pull_request:
+    types: [ labeled ]
+  pull_request_review:
+    types: [submitted]
+
+env:
+  NODE_MODULES_CACHE_VERSION: v2
+  STORYBOOK_ROOT: ./storybook
 
 jobs:
   visual_tests:
+    if: ${{ github.event_name == 'push' || github.event.label.name == 'visual-test-ready' || (github.event.review.state == 'approved' && !contains( github.event.pull_request.labels.*.name, 'no-visual-test' )) }}
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
 
     runs-on: ubuntu-latest
-
-    env:
-      NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      STORYBOOK_ROOT: ./storybook
-      NODE_MODULES_CACHE_VERSION: v2
 
     steps:
       - name: Check out branch
         uses: actions/checkout@v3
+        with:
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
 
       - name: Use Node.js
         uses: actions/setup-node@v1
@@ -54,4 +64,5 @@ jobs:
       - name: Run Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PERCY_TARGET_BRANCH: ${{ github.base_ref }}
         run: npx percy storybook --verbose storybook/compiled
