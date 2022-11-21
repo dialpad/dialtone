@@ -9,7 +9,7 @@ on:
       - vue3
 
 jobs:
-  commitlint:
+  commit_lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

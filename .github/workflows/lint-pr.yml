@@ -8,7 +8,7 @@ on:
       - staging-vue3
 
 jobs:
-  commitlint:
+  pr_lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
