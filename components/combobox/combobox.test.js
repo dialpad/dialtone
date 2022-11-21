@@ -106,12 +106,23 @@ describe('DtCombobox Tests', function () {
       beforeEach(async function () {
         slots = { list: '<ol id="list"></ol>' };
         _mountWrapper();
-        await wrapper.setProps({ showList: true, emptyList: true, emptyStateMessage: 'empty' });
+        await wrapper.setProps({
+          showList: true,
+          emptyList: true,
+          emptyStateMessage: 'empty',
+          emptyStateClass: 'class',
+        });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
       });
 
-      it('should render the empty list', function () { assert.isTrue(comboboxEmptyList.exists()); });
+      it('should render the empty list', function () {
+        assert.isTrue(comboboxEmptyList.exists());
+      });
+
+      it('should apply the class to the empty list element', function () {
+        assert.isTrue(comboboxEmptyList.find('.dt-empty-list-item').classes().includes('class'));
+      });
     });
 
     describe('When it is loading', function () {

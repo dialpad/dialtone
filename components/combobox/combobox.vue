@@ -27,10 +27,13 @@
         v-bind="listProps"
       />
       <combobox-empty-list
-        v-else-if="emptyList && emptyStateMessage && !listRenderedOutside"
+        v-else-if="emptyList && (emptyStateMessage || $slots.emptyListItem) && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
-      />
+        :item-class="emptyStateClass"
+      >
+        <slot name="emptyListItem" />
+      </combobox-empty-list>
       <!-- @slot Slot for the combobox list element -->
       <slot
         v-else
@@ -149,6 +152,16 @@ export default {
      */
     emptyStateMessage: {
       type: String,
+      default: '',
+    },
+
+    /**
+     * Additional class name for the empty list element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    emptyStateClass: {
+      type: [String, Object, Array],
       default: '',
     },
   },
@@ -337,6 +350,8 @@ export default {
     },
 
     validateEmptyListProps () {
+      if (this.$slots.emptyListItem) { return; }
+
       if ((this.emptyList && !this.emptyStateMessage) || (!this.emptyList && this.emptyStateMessage)) {
         console.error(`Invalid props: you must pass both props emptyList and emptyStateMessage to show the
       empty message.`);

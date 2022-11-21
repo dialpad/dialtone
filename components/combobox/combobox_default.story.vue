@@ -5,6 +5,7 @@
     :show-list="!!value && showList"
     list-aria-label="Example list items"
     :empty-list="emptyList"
+    :empty-state-class="emptyStateClass"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
@@ -46,6 +47,12 @@
           {{ item.name }}
         </dt-list-item>
       </ol>
+    </template>
+    <template
+      v-if="emptyListItem"
+      slot="emptyListItem"
+    >
+      <span v-html="emptyListItem" />
     </template>
   </dt-combobox>
 </template>
