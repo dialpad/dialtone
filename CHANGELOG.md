@@ -1,3 +1,10 @@
+# [2.38.0](https://github.com/dialpad/dialtone-vue/compare/v2.37.2...v2.38.0) (2022-11-21)
+
+
+### Features
+
+* **Combobox:** add prop to pass classes to the empty list item ([#601](https://github.com/dialpad/dialtone-vue/issues/601)) ([2ebe1a3](https://github.com/dialpad/dialtone-vue/commit/2ebe1a318e3ecaf0bea3555d1e2e8bff4775cae3))
+
 ## [2.37.2](https://github.com/dialpad/dialtone-vue/compare/v2.37.1...v2.37.2) (2022-11-18)
 
 ## [2.37.1](https://github.com/dialpad/dialtone-vue/compare/v2.37.0...v2.37.1) (2022-11-14)
