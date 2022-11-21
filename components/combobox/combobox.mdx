@@ -105,3 +105,83 @@ import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
 ```
 
 `onSelect` is the method event handler that receives the index of each item.
+
+#### With empty list item
+
+Combobox has a built-in empty list item you can use passing `emptyList=true` and an message to show with
+`emptyStateMessage`.
+
+```html
+<dt-combobox
+  ...
+  :empty-list="isComboboxEmpty"
+  :empty-state-message="$i18n('No matches found.')"
+>
+  <template #input="{ inputProps }">
+    <dt-input v-bind="inputProps" />
+  </template>
+  <template #list="{ listProps }">
+    <ol v-bind="listProps">
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        navigation-type="arrow-keys"
+        role="option"
+        @click="onSelect(i)"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </ol>
+  </template>
+</dt-combobox>
+<script>
+export default {
+  ...
+  data () {
+    return {
+      items: [...],
+    }
+  }
+  computed: {
+    isComboboxEmpty () {
+      return this.items.length > 0;
+    }
+  }
+}
+</script>
+```
+
+Also you can use a custom list item with the `emptyListItem` slot.
+
+```html
+<dt-combobox
+  ...
+  :empty-list="isComboboxEmpty"
+>
+  <template #input="{ inputProps }">
+    <dt-input v-bind="inputProps" />
+  </template>
+  <template #list="{ listProps }">
+    <ol v-bind="listProps">
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        navigation-type="arrow-keys"
+        role="option"
+        @click="onSelect(i)"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </ol>
+  </template>
+  <template #emptyListItem>
+    <li
+      id="empty-list-item"
+      tabindex="-1"
+      role="option"
+    >
+      {{ $i18n('No matches found.') }}
+    </li>
+  </tempalte>
+</dt-combobox>
+```

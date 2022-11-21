@@ -35,6 +35,16 @@ export const argTypesData = {
       },
     },
   },
+  emptyListItem: {
+    description: 'Slot for the empty list item. Defaults to emptyStateMessage prop. It\'s shown when `emptyList=true`',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
 
   // Props
   listAriaLabel: {
