@@ -10,11 +10,11 @@ const SIZE_IDENTIFIERS = ['fontSizes', 'fontSize', 'sizing', 'borderWidth', 'bor
 const LINE_HEIGHT_IDENTIFIERS = ['lineHeights', 'lineHeight'];
 const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
 const WEIGHT_IDENTIFIERS = ['fontWeights', 'fontWeight'];
-const FONT_FAMILY_IDENTIFIERS = ['fontFamilies']
+const FONT_FAMILY_IDENTIFIERS = ['fontFamilies', 'fontFamily']
 
 // Values
-const FALLBACK_FONTS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
-const FALLBACK_FONTS_MONO = "SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace";
+const FALLBACK_FONTS = ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'];
+const FALLBACK_FONTS_MONO = ['SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', 'monospace'];
 const BASE_FONT_SIZE = require('./base.json').base.font.size.root.value;
 const WEIGHT = {
   'Light': 300,
@@ -51,17 +51,41 @@ StyleDictionary.registerTransform({
   },
   transformer: (token, options) => {
     if (token.name === 'body' || token.name === 'expressive') {
-      return `"${token.value}, ${FALLBACK_FONTS}"`
+      return `"${token.value}, ${FALLBACK_FONTS.join(', ')}"`
     }
     else if (token.name === 'mono') {
-      return `"${token.value}, ${FALLBACK_FONTS_MONO}"`
+      return `"${token.value}, ${FALLBACK_FONTS_MONO.join(', ')}"`
     }
     return token.value;
   }
 });
 
 StyleDictionary.registerTransform({
+  name: 'dt/android/compose/fonts/transformToStack',
+  type: 'value',
+  matcher: function(token) {
+    return FONT_FAMILY_IDENTIFIERS.includes(token.type)
+  },
+  transformer: (token, options) => {
+    return `arrayOf(${token.value.split(',').map(s => `"${s.replaceAll('"', '').trim()}"`).join(', ')})`;
+  }
+});
+
+StyleDictionary.registerTransform({
   name: 'dt/android/color',
+  type: 'value',
+  matcher: function(token) {
+    return ['color'].includes(token.type)
+  },
+    transformer: function (token) {
+      if (token.value === 'transparent') { return '#00ffffff'}
+      var str = Color(token.value).toHex8();
+      return '#' + str.slice(6) + str.slice(0,6);
+    }
+});
+
+StyleDictionary.registerTransform({
+  name: 'dt/android/compose/color',
   type: 'value',
   matcher: function(token) {
     return ['color'].includes(token.type)
@@ -212,7 +236,7 @@ StyleDictionary.registerTransform({
   name: 'dt/stringify',
   type: 'value',
   matcher: function(token) {
-    return [...WEIGHT_IDENTIFIERS, 'type', 'textCase', 'fontFamily'].includes(token.type)
+    return [...WEIGHT_IDENTIFIERS, 'type', 'textCase'].includes(token.type)
   },
   transformer: (token, options) => {
     return `"${token.value}"`;

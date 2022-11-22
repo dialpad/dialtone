@@ -24,7 +24,7 @@ module.exports = {
       ],
     },
     android_xml: {
-      transformGroup: 'android',
+      transforms: ['attribute/cti', 'name/cti/snake', 'dt/android/color', 'size/remToSp', 'size/remToDp'],
       prefix: 'dt',
       buildPath: 'dist/android/res/values/',
       files: [
@@ -33,7 +33,7 @@ module.exports = {
           format: 'android/resources',
           resourceType: 'color',
           filter: function(token) {
-            return ['color', 'opacity'].includes(token.type);
+            return ['color'].includes(token.type);
           },
         },
         {
@@ -41,13 +41,13 @@ module.exports = {
           format: 'android/resources',
           resourceType: 'dimen',
           filter: function(token) {
-              return ['sizing', 'borderRadius', 'fontSizes', 'lineHeights', 'fontWeights', 'borderWidth', 'spacing'].includes(token.type);
+              return ['sizing', 'borderRadius', 'fontSizes', 'borderWidth', 'spacing'].includes(token.type);
           },
         },
       ],
     },
     android_compose: {
-      transforms: ['dt/fonts/transformToStack',  'dt/lineHeight/percentToDecimal', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
+      transforms: ['dt/android/compose/fonts/transformToStack',  'dt/lineHeight/percentToDecimal', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/compose/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
       prefix: 'dt',
       buildPath: 'dist/android/java/',
       files: [
