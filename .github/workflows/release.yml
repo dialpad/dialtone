@@ -58,6 +58,7 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER: braddialpad
 
       - name: Deploy production - Swift
         if: ${{ github.ref == 'refs/heads/production' }}
