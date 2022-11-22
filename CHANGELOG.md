@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/dialpad/dialtone-tokens/compare/v1.4.1...v1.4.2) (2022-11-22)
+
+
+### Bug Fixes
+
+* add creds ([018d241](https://github.com/dialpad/dialtone-tokens/commit/018d241990a07cfc4796e7caa29a04173cd340f3))
+
 ## [1.4.1](https://github.com/dialpad/dialtone-tokens/compare/v1.4.0...v1.4.1) (2022-11-22)
 
 
