@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/dialpad/dialtone-tokens/compare/v1.4.0...v1.4.1) (2022-11-22)
+
+
+### Bug Fixes
+
+* correct some invalid values on android ([3a4da80](https://github.com/dialpad/dialtone-tokens/commit/3a4da8052d1b1baa6b45c8752c13064ba3a8f7aa))
+
 # [1.4.0](https://github.com/dialpad/dialtone-tokens/compare/v1.3.4...v1.4.0) (2022-11-22)
 
 
