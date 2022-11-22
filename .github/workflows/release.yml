@@ -52,9 +52,9 @@ jobs:
         run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
         continue-on-error: true
 
-      - name: Deploy production - Maven
+      - name: Deploy production - Gradle
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: mvn --batch-mode deploy
+        run: ./gradlew publish
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

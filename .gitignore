@@ -2,3 +2,5 @@ node_modules
 dist*/*
 !dist_ios/Package.swift
 tokens
+.gradle
+local.properties

@@ -23,7 +23,7 @@ module.exports = {
       message: 'chore(release): ${nextRelease.version} \n\n${nextRelease.notes}',
     }],
     ["@semantic-release/exec", {
-      "prepareCmd": "mvn versions:set -DnewVersion=${nextRelease.version} && git add -A && git commit -m 'chore(release): ${nextRelease.version} maven' && git push"
+      "prepareCmd": "./gradlew setProperties -Pversion=${nextRelease.version} && git add -A && git commit -m 'chore(release): ${nextRelease.version} gradle' && git push"
     }],
   ],
 };

@@ -26,7 +26,7 @@ module.exports = {
     android_xml: {
       transformGroup: 'android',
       prefix: 'dt',
-      buildPath: 'dist/android/',
+      buildPath: 'dist/android/res/values/',
       files: [
         {
           destination: 'colors.xml',
@@ -49,7 +49,7 @@ module.exports = {
     android_compose: {
       transforms: ['dt/fonts/transformToStack',  'dt/lineHeight/percentToDecimal', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
       prefix: 'dt',
-      buildPath: 'dist/android/',
+      buildPath: 'dist/android/java/',
       files: [
         {
           destination: 'tokens.kt',
