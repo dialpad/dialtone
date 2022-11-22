@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/dialpad/dialtone-tokens/compare/v1.3.4...v1.4.0) (2022-11-22)
+
+
+### Features
+
+* add gradle for android release ([95f9090](https://github.com/dialpad/dialtone-tokens/commit/95f909059f571680f3f3acd1751c60a8c16581c4))
+
 ## [1.3.4](https://github.com/dialpad/dialtone-tokens/compare/v1.3.3...v1.3.4) (2022-10-24)
 
 
