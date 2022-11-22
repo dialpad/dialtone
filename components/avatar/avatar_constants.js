@@ -10,6 +10,11 @@ export const AVATAR_SIZE_MODIFIERS = {
   lg: 'd-avatar--lg',
 };
 
+export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
+  md: 'd-avatar__presence--md',
+  lg: 'd-avatar__presence--lg',
+};
+
 export const AVATAR_COLOR_MODIFIERS = {
   base: '',
   'orange-200': 'd-avatar--orange-200',

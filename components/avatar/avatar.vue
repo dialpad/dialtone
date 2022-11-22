@@ -12,17 +12,28 @@
   >
     <!-- @slot Slot for avatar content -->
     <slot />
+    <dt-presence
+      v-if="presence"
+      :presence="presence"
+      :class="[
+        'd-avatar__presence',
+        AVATAR_PRESENCE_SIZE_MODIFIERS[size],
+      ]"
+      v-bind="presenceProps"
+      data-qa="dt-presence"
+    />
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import {
-  AVATAR_SIZE_MODIFIERS,
-  AVATAR_COLOR_MODIFIERS,
-  AVATAR_KIND_MODIFIERS,
-} from './avatar_constants.js';
 import { getUniqueString } from '@/common/utils';
+import Vue from 'vue';
+import { DtPresence } from '../presence';
+import {
+  AVATAR_COLOR_MODIFIERS,
+  AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS,
+  AVATAR_PRESENCE_SIZE_MODIFIERS,
+} from './avatar_constants.js';
 
 /**
  * An avatar is a visual representation of a user or object.
@@ -30,6 +41,7 @@ import { getUniqueString } from '@/common/utils';
  */
 export default {
   name: 'DtAvatar',
+  components: { DtPresence },
 
   inheritAttrs: false,
 
@@ -73,6 +85,24 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Determines whether to show the presence indicator for
+     * Avatar - accepts PRESENCE_STATES values: 'busy', 'away', 'offline',
+     * or 'active'. By default, it's null and nothing is shown.
+     */
+    presence: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * A set of props to be passed into the presence component.
+     */
+    presenceProps: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 
   data () {
@@ -82,6 +112,7 @@ export default {
       AVATAR_SIZE_MODIFIERS,
       AVATAR_COLOR_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
+      AVATAR_PRESENCE_SIZE_MODIFIERS,
     };
   },
 

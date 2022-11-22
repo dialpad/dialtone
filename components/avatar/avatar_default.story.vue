@@ -3,6 +3,7 @@
     :id="id"
     :size="size"
     :color="color"
+    :presence="presence"
   >
     <html-fragment
       :html="defaultSlot"
@@ -11,8 +12,8 @@
 </template>
 
 <script>
-import DtAvatar from './avatar';
 import { htmlFragment } from '@/common/utils';
+import DtAvatar from './avatar';
 
 export default {
   name: 'DtAvatarDefault',
