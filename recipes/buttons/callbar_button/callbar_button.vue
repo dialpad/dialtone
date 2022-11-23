@@ -158,11 +158,6 @@ export default {
   border-color: unset;
 }
 
-.dt-recipe-callbar-button--active {
-  --button--fc: var(--muted-color-hover);
-  --button--bgc: hsla(var(--muted-color-hsl) ~' / ' 15%);
-}
-
 .dt-recipe-callbar-button--danger.dt-recipe-callbar-button--active {
   --button--bgc: hsla(var(--error-color-hsl) ~' / ' 10%);
   --button--fc: var(--error-color-hover);
@@ -171,5 +166,12 @@ export default {
 .dt-recipe-callbar-button--danger.dt-recipe-callbar-button--active:hover {
   --button--bgc: hsla(var(--error-color-hsl)  ~' / ' 20%);
   --button--fc: var(--error-color-hover);
+}
+
+.dt-recipe-callbar-button--active,
+.dt-recipe-callbar-button--active:hover{
+  .base-button__icon {
+    color: var(--primary-color);
+  }
 }
 </style>
