@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/dialpad/dialtone-tokens/compare/v1.4.3...v1.4.4) (2022-11-23)
+
+
+### Bug Fixes
+
+* add version to gitignore ([cc47079](https://github.com/dialpad/dialtone-tokens/commit/cc47079ccbe9f5f36082b5ea0c70c02de42caced))
+
 ## [1.4.3](https://github.com/dialpad/dialtone-tokens/compare/v1.4.2...v1.4.3) (2022-11-23)
 
 
