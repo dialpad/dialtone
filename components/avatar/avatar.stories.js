@@ -1,9 +1,11 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtAvatar from './avatar';
+import DtAvatarMdx from './avatar.mdx';
+import { AVATAR_COLOR_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarIconTemplate from './avatar_icon.story.vue';
-import { AVATAR_COLOR_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
-import DtAvatarMdx from './avatar.mdx';
+import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
+import { PRESENCE_STATES_LIST } from '../presence';
 
 export const argTypesData = {
   // Slots
@@ -22,10 +24,18 @@ export const argTypesData = {
     options: Object.keys(AVATAR_SIZE_MODIFIERS),
     control: 'select',
   },
+  presence: {
+    defaultValue: null,
+    options: PRESENCE_STATES_LIST,
+    control: 'select',
+  },
   color: {
     defaultValue: 'base',
     options: Object.keys(AVATAR_COLOR_MODIFIERS),
     control: 'select',
+  },
+  presenceProps: {
+    description: 'Pass through props. Used to customize the presence component',
   },
   avatarClass: {
     description: 'Pass through classes. Used to customize the avatar container',
@@ -69,6 +79,11 @@ const IconTemplate = (args) => createTemplateFromVueFile(
   DtAvatarIconTemplate,
 );
 
+const PresenceTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtAvatarPresenceTemplate,
+);
+
 const defaultImage = require('./person.png');
 
 // Stories
@@ -95,4 +110,12 @@ export const Initials = DefaultTemplate.bind({});
 Initials.args = {
   color: 'purple-200',
   default: 'DP',
+};
+
+export const Presence = PresenceTemplate.bind({});
+Presence.args = {};
+Presence.parameters = {
+  controls: { disable: true },
+  actions: { disable: true },
+  options: { showPanel: false },
 };

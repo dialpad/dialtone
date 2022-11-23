@@ -3,6 +3,7 @@
     :id="$attrs.id"
     :size="$attrs.size"
     :color="$attrs.color"
+    :presence="$attrs.presence"
   >
     <dt-icon
       :name="defaultSlot"
@@ -17,7 +18,7 @@ import { DtIcon } from '@/components/icon';
 import { AVATAR_ICON_SIZES } from './avatar_constants';
 
 export default {
-  name: 'DtAvatarDefault',
+  name: 'DtAvatarDefaultIcon',
   components: { DtAvatar, DtIcon },
   computed: {
     iconSize () {
