@@ -1,3 +1,11 @@
+## [1.4.3](https://github.com/dialpad/dialtone-tokens/compare/v1.4.2...v1.4.3) (2022-11-23)
+
+
+### Bug Fixes
+
+* add swift version tagging ([089d3e4](https://github.com/dialpad/dialtone-tokens/commit/089d3e40cb462cab0958a6b9974a176629ee7747))
+* rename swift package to use proper conventions ([c1d7a13](https://github.com/dialpad/dialtone-tokens/commit/c1d7a1354b1e427e2feb29f55d92713d487a4995))
+
 ## [1.4.2](https://github.com/dialpad/dialtone-tokens/compare/v1.4.1...v1.4.2) (2022-11-22)
 
 
