@@ -1,6 +1,7 @@
 node_modules
 dist*/*
 !dist_ios/Package.swift
+!dist_ios/.github
 tokens
 .gradle
 local.properties

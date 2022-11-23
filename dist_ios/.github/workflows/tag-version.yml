@@ -1,0 +1,18 @@
+name: Tag version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: tag most recent commit
+        run: git tag $(cat VERSION) HEAD
+
+      - name: push tags
+        run: git push origin $(cat VERSION)
