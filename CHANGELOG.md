@@ -1,3 +1,15 @@
+# [3.25.0](https://github.com/dialpad/dialtone-vue/compare/v3.24.0...v3.25.0) (2022-11-23)
+
+
+### Bug Fixes
+
+* update icon color to primary color in active state in DtRecipeCallbarButton ([#618](https://github.com/dialpad/dialtone-vue/issues/618)) ([997b539](https://github.com/dialpad/dialtone-vue/commit/997b539584a8a304b09a376178b2e1e70fb6f0d3))
+
+
+### Features
+
+* integrate `DtPresence` into `DtAvatar` (Vue3) ([#616](https://github.com/dialpad/dialtone-vue/issues/616)) ([b4d7a88](https://github.com/dialpad/dialtone-vue/commit/b4d7a88a7da73cc6c1bbaa8052b450f849b90f2e))
+
 # [3.24.0](https://github.com/dialpad/dialtone-vue/compare/v3.23.1...v3.24.0) (2022-11-21)
 
 
