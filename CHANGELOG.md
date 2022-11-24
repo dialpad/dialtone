@@ -1,3 +1,10 @@
+## [3.25.1](https://github.com/dialpad/dialtone-vue/compare/v3.25.0...v3.25.1) (2022-11-24)
+
+
+### Bug Fixes
+
+* **Root Layout:** slot issues ([#620](https://github.com/dialpad/dialtone-vue/issues/620)) ([161545a](https://github.com/dialpad/dialtone-vue/commit/161545a855792a15623c0252d90bed6c1f7666b1))
+
 # [3.25.0](https://github.com/dialpad/dialtone-vue/compare/v3.24.0...v3.25.0) (2022-11-23)
 
 
