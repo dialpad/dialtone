@@ -1,6 +1,6 @@
 <template>
   <dt-root-layout
-    :body-class="bodyClass"
+    :body-class="$attrs.bodyClass"
     :header-class="$attrs.headerClass"
     :header-sticky="$attrs.headerSticky"
     :header-height="$attrs.headerHeight"

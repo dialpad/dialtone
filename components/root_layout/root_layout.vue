@@ -17,11 +17,17 @@
       :sidebar-width="sidebarWidth"
       :sidebar-position="sidebarPosition"
     >
-      <template #sidebar>
+      <template
+        v-if="$slots.sidebar"
+        #sidebar
+      >
         <!-- @slot Slot for the sidebar -->
         <slot name="sidebar" />
       </template>
-      <template #content>
+      <template
+        v-if="$slots.default"
+        #content
+      >
         <!-- @slot Slot for main content -->
         <slot name="default" />
       </template>
