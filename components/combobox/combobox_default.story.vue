@@ -6,6 +6,7 @@
     list-aria-label="Example list items"
     :empty-list="emptyList"
     :empty-state-class="emptyStateClass"
+    :click-on-select="clickOnSelect"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
@@ -34,7 +35,7 @@
           :key="item.id"
           role="option"
           navigation-type="arrow-keys"
-          @click="onComboboxSelect(i)"
+          @click="onListItemSelect(i)"
         >
           <template slot="left">
             <dt-avatar
@@ -89,6 +90,11 @@ export default {
     onComboboxSelect (i) {
       this.value = '';
       this.onSelect(i);
+    },
+
+    onListItemSelect (i) {
+      this.value = '';
+      this.onItemClick(i);
     },
 
     onComboboxEscape () {
