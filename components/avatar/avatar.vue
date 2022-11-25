@@ -128,6 +128,9 @@ export default {
       const firstChild = this.$el.children[0];
       if (firstChild) {
         this.setKind(firstChild);
+        if (this.kind === 'image') {
+          firstChild.classList.add('d-avatar__image');
+        }
         this.validateImageAttrsPresence();
       }
     },
