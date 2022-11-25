@@ -1,14 +1,14 @@
 import { assert } from 'chai';
 import { config, mount } from '@vue/test-utils';
-import DtCollpasible from './collapsible.vue';
+import DtCollapsible from './collapsible.vue';
 import sinon from 'sinon';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
 const content = '<div data-qa="content-element"> Test Text </div>';
-const anchor = '<template #anchor="{ attrs }">' +
-                 '<button data-qa="anchor-element" v-bind="attrs">click me</button>' +
-               '</template>';
+const baseProps = {
+  anchorText: 'anchor text',
+};
 
 describe('Dialtone vue Collapsible Component Tests', function () {
   // Wrappers
@@ -16,29 +16,32 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   let contentElement;
   let contentWrapperElement;
   let anchorElement;
+  let anchorSlotElement;
+  let slots = { content };
 
   // Environment
-  const props = {};
   const attrs = {
     css: false, // Important attr to let test-utils fire the (after-enter and after-leave) events correctly
   };
-  const slots = { anchor, content };
-  // const scopedSlots = { anchor };
+  let props = baseProps;
 
   const _clearChildWrappers = () => {
     contentElement = undefined;
     contentWrapperElement = undefined;
     anchorElement = undefined;
+    anchorSlotElement = undefined;
+    slots = { content };
   };
 
   const _setChildWrappers = () => {
-    anchorElement = wrapper.find('[data-qa="anchor-element"]');
+    anchorElement = wrapper.find('[data-qa="dt-button"]');
+    anchorSlotElement = wrapper.find('[data-qa="anchor-element"]');
     contentElement = wrapper.find('[data-qa="content-element"]');
     contentWrapperElement = wrapper.getComponent('.d-dt-collapsible__content');
   };
 
   const _mountWrapper = () => {
-    wrapper = mount(DtCollpasible, {
+    wrapper = mount(DtCollapsible, {
       props,
       slots,
       attrs,
@@ -70,8 +73,8 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   });
 
   afterEach(async function () {
+    props = baseProps;
     _clearChildWrappers();
-    wrapper.unmount();
   });
 
   describe('Test default rendering', function () {
@@ -85,6 +88,16 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
     it('should render the content', function () {
       assert.exists(contentElement, 'content exists');
+    });
+  });
+
+  describe('When scoped slot is provided', function () {
+    beforeEach(async function () {
+      const anchor = '<button data-qa="anchor-element">click me</button>';
+      slots = { anchor };
+    });
+    it('should render the scoped slot', function () {
+      assert.exists(anchorSlotElement, 'anchor slot exists');
     });
   });
 
@@ -141,6 +154,25 @@ describe('Dialtone vue Collapsible Component Tests', function () {
         await wrapper.setProps({ open: true });
         assert.isTrue(contentElement.isVisible());
       });
+    });
+  });
+
+  describe('If anchor text and anchor slot content are falsy', function () {
+    let consoleErrorSpy;
+
+    beforeEach(async function () {
+      consoleErrorSpy = sinon.spy(console, 'error');
+      props = { ...baseProps, anchorText: undefined };
+      _mountWrapper();
+    });
+
+    afterEach(function () {
+      consoleErrorSpy = null;
+      console.error.restore();
+    });
+
+    it('should output error message', async function () {
+      assert.isTrue(consoleErrorSpy.calledWith('anchor text and anchor slot content cannot both be falsy'));
     });
   });
 

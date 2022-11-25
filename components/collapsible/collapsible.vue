@@ -11,9 +11,6 @@
         'd-dt-collapsibe__anchor',
         anchorClass,
       ]"
-      @click.capture="defaultToggleOpen"
-      @keydown.enter="defaultToggleOpen"
-      @keydown.space="defaultToggleOpen"
     >
       <!-- @slot Slot for the anchor element that toggles the collapsible content -->
       <slot
@@ -32,6 +29,7 @@
           :style="{
             'width': maxWidth,
           }"
+          @click="defaultToggleOpen"
         >
           <icon-arrow-accordion-open
             v-if="isOpen"
@@ -229,14 +227,7 @@ export default {
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor
-      return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
-    },
-
-    contentStyle () {
-      return {
-        'max-height': this.maxHeight,
-        'max-width': this.maxWidth,
-      };
+      return this.ariaLabelledBy || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
     },
   },
 
@@ -250,6 +241,10 @@ export default {
 
       immediate: true,
     },
+  },
+
+  created () {
+    this.validateProperAnchor();
   },
 
   methods: {
@@ -275,6 +270,12 @@ export default {
 
     toggleOpen () {
       this.isOpen = !this.isOpen;
+    },
+
+    validateProperAnchor () {
+      if (!this.anchorText && !this.$slots.$anchor) {
+        console.error('anchor text and anchor slot content cannot both be falsy');
+      }
     },
   },
 };
