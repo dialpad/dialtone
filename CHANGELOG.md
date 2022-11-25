@@ -1,3 +1,15 @@
+# [3.26.0](https://github.com/dialpad/dialtone-vue/compare/v3.25.1...v3.26.0) (2022-11-25)
+
+
+### Bug Fixes
+
+* **Avatar:** add new d-avatar__image class ([56df7b6](https://github.com/dialpad/dialtone-vue/commit/56df7b63a51a396a1f0daa0827608ea43a64c173))
+
+
+### Features
+
+* **Combobox:** add clickOnSelect option vue3 ([#622](https://github.com/dialpad/dialtone-vue/issues/622)) ([17b49fa](https://github.com/dialpad/dialtone-vue/commit/17b49faf55c20386500a93713c384f6cade192bf))
+
 ## [3.25.1](https://github.com/dialpad/dialtone-vue/compare/v3.25.0...v3.25.1) (2022-11-24)
 
 
