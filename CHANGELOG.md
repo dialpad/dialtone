@@ -1,3 +1,16 @@
+# [2.40.0](https://github.com/dialpad/dialtone-vue/compare/v2.39.0...v2.40.0) (2022-11-25)
+
+
+### Bug Fixes
+
+* **Avatar:** add new d-avatar__image class ([3267505](https://github.com/dialpad/dialtone-vue/commit/326750570caf11dde564723b04e9c0a11cdaa0cf))
+* **Root Layout:** slot issues ([#619](https://github.com/dialpad/dialtone-vue/issues/619)) ([04893ef](https://github.com/dialpad/dialtone-vue/commit/04893effbfb5454f06a740541cd0f06d66e735ea))
+
+
+### Features
+
+* **Combobox:** add clickOnSelect option ([#621](https://github.com/dialpad/dialtone-vue/issues/621)) ([4176eee](https://github.com/dialpad/dialtone-vue/commit/4176eee0d81279e24269517d0ec54ce1a8cd38ef))
+
 # [2.39.0](https://github.com/dialpad/dialtone-vue/compare/v2.38.0...v2.39.0) (2022-11-23)
 
 
