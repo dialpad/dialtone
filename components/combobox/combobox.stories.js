@@ -11,6 +11,7 @@ export const argsData = {
   onHighlight: action('highlight'),
   onSelect: action('select'),
   onOpened: action('opened'),
+  onItemClick: action('click'),
 };
 
 export const argTypesData = {
@@ -96,6 +97,9 @@ export const argTypesData = {
   loading: {
     defaultValue: false,
   },
+  clickOnSelect: {
+    defaultValue: false,
+  },
 
   // Action Event Handlers
   onEscape: {
@@ -114,6 +118,11 @@ export const argTypesData = {
     },
   },
   onOpened: {
+    table: {
+      disable: true,
+    },
+  },
+  onItemClick: {
     table: {
       disable: true,
     },

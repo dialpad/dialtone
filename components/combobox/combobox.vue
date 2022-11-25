@@ -170,6 +170,16 @@ export default {
       type: [String, Object, Array],
       default: '',
     },
+
+    /**
+     * Programmatically click on the active list item element when a selection
+     * comes from keyboard navigation, i.e. pressing the "Enter" key.
+     * @values true, false
+     */
+    clickOnSelect: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -323,6 +333,10 @@ export default {
 
       if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
+
+        if (this.clickOnSelect) {
+          this.activeItemEl?.click();
+        }
       }
     },
 
