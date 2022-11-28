@@ -7,7 +7,7 @@
     "build-icons": "gulp",
     "build-lib": "vue-cli-service build --target lib --name dialtone-icons --no-clean src/main.js",
     "lint": "vue-cli-service lint",
-    "release": "npm install && npm npm run build && npm publish --tag vue3"
+    "release": "npm install && npm run build && npm publish --tag vue3"
   },
   "dependencies": {
     "core-js": "^3.8.3",
