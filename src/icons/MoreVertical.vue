@@ -1,3 +1,1 @@
-<template>
-  <svg aria-hidden="true" focusable="false" data-name="More Vertical" class="d-icon d-icon--moreVertical" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M5 2.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0ZM5 6a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm0 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/></svg>
-</template>
+<template><svg aria-hidden="true" data-name="More Vertical" class="d-icon d-icon--moreVertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M5 2.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0ZM5 6a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm0 3.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/></svg></template>
