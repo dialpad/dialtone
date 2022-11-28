@@ -32,11 +32,11 @@ const replace = settings.svgs ? require('gulp-replace') : null;
 //  ================================================================================
 const paths = {
   clean: {
-    svgs: './dist/svg/*.svg',
+    svgs: './dist/svg/**/*.svg',
     vueIcons: './src/icons/*.vue',
   },
   icons: {
-    input: './src/svg/*.svg',
+    input: './src/svg/**/*.svg',
     outputSvg: './dist/svg/',
     outputVue: './src/icons/',
   },
