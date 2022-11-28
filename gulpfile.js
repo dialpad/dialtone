@@ -8,6 +8,7 @@ const settings = {
   svgs: true, // Turn on/off SVG tasks
   build: true, // Turn on/off build tasks
   exportIcons: true, // Turn on/off export icons tasks
+  iconList: true, // Turn on/off icon list tasks
 };
 
 //  ================================================================================
@@ -43,6 +44,7 @@ const paths = {
   exports: {
     vueIcons: './src/icons/',
     index: './src/icons.js',
+    iconsList: './src/icons.json',
   }
 };
 
@@ -138,6 +140,10 @@ const buildIcons = function (done) {
     .pipe(dest(paths.icons.outputVue));
 };
 
+//  ================================================================================
+// @@ Build the main.js file
+//    Read the vue icon files and export them all
+//  ================================================================================
 const exportIcons = async function (done) {
   if (!settings.exportIcons) return done();
 
@@ -150,6 +156,16 @@ const exportIcons = async function (done) {
   await fs.writeFileSync('./src/main.js', iconsList.join('\n'));
   return done();
 };
+
+//  ================================================================================
+//  @@ Copy icons.json to dist
+//  ================================================================================
+const copyFiles = function (done) {
+  src(paths.exports.iconsList)
+      .pipe(dest('./dist'));
+  return done();
+};
+
 //  ================================================================================
 //  @   EXPORT TASKS
 //  ================================================================================
@@ -163,6 +179,7 @@ exports.clean = series(
 exports.icons = series(
   buildIcons,
   exportIcons,
+  copyFiles,
 );
 
 // default build task

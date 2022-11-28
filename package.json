@@ -15,7 +15,8 @@
   },
   "files": [
     "dist/*.js",
-    "dist/svg"
+    "dist/svg",
+    "dist/icons.json"
   ],
   "main": "dist/dialtone-icons.common.js",
   "devDependencies": {
