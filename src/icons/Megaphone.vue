@@ -1,3 +1,1 @@
-<template>
-  <svg aria-hidden="true" focusable="false" data-name="Megaphone" class="d-icon d-icon--megaphone" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M10.803 2.602A.5.5 0 0 1 11 3v6a.5.5 0 0 1-.608.488L6.27 8.572a2.004 2.004 0 0 1-3.903-.867l-.976-.217A.5.5 0 0 1 1 7V5.5a.5.5 0 0 1 .366-.482l9-2.5a.5.5 0 0 1 .437.084ZM3.349 7.923a1.004 1.004 0 0 0 1.94.431l-1.94-.431ZM2 5.88v.72l8 1.778v-4.72L2 5.88Z" clip-rule="evenodd"/></svg>
-</template>
+<template><svg aria-hidden="true" data-name="Megaphone" class="d-icon d-icon--megaphone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M10.803 2.602A.5.5 0 0 1 11 3v6a.5.5 0 0 1-.608.488L6.27 8.572a2.004 2.004 0 0 1-3.903-.867l-.976-.217A.5.5 0 0 1 1 7V5.5a.5.5 0 0 1 .366-.482l9-2.5a.5.5 0 0 1 .437.084ZM3.349 7.923a1.004 1.004 0 0 0 1.94.431l-1.94-.431ZM2 5.88v.72l8 1.778v-4.72L2 5.88Z" clip-rule="evenodd"/></svg></template>

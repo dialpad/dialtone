@@ -1,3 +1,1 @@
-<template>
-  <svg aria-hidden="true" focusable="false" data-name="Axis 3d" class="d-icon d-icon--axis3d" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 1 .5.5v6.793l2.646-2.647a.5.5 0 1 1 .708.708L3.207 9.5H10a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 .5-.5Z" clip-rule="evenodd"/></svg>
-</template>
+<template><svg aria-hidden="true" data-name="Axis 3d" class="d-icon d-icon--axis3d" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 1 .5.5v6.793l2.646-2.647a.5.5 0 1 1 .708.708L3.207 9.5H10a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 .5-.5Z" clip-rule="evenodd"/></svg></template>
