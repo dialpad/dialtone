@@ -107,7 +107,8 @@ const buildIcons = function (done) {
     .pipe(replace(' fill="#000"', ' fill="currentColor"'))
     .pipe(replace(' fill="#000000"', ' fill="currentColor"'))
     .pipe(replace(' fill="black"', ' fill="currentColor"'))
-    .pipe(replace('width="12" height="12"', ''))
+    .pipe(replace(/width="[0-9]+"/g, ''))
+    .pipe(replace(/height="[0-9]+"/g, ''))
     .pipe(replace('<svg', function (match) {
       const name = path.parse(this.file.path).name;
       const converted = name.toLowerCase().replace(/-(.)/g, function (match, group1) {
@@ -120,8 +121,7 @@ const buildIcons = function (done) {
       aria-hidden="true"
       focusable="false"
       data-name="${title}"
-      class="d-icon d-icon--${converted}"
-      xmlns="http://www.w3.org/2000/svg"`;
+      class="d-icon d-icon--${converted}"`;
     }))
     .pipe(svgmin())
     .pipe(rename({ dirname: '' }))
