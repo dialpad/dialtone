@@ -64,6 +64,17 @@ describe('DtIcon Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    //
+    describe('When ariaLabel prop is set', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ ariaLabel: 'icon description' });
+        _setChildWrappers();
+      });
+      it('sets the aria-label attribute', function () {
+        assert.strictEqual(icon.attributes('aria-label'), 'icon description');
+      });
+      it('sets aria-hidden to false', function () {
+        assert.strictEqual(icon.attributes('aria-hidden'), 'false');
+      });
+    });
   });
 });

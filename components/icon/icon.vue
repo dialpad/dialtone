@@ -2,6 +2,8 @@
   <component
     :is="currentIcon"
     data-qa="dt-icon"
+    :aria-hidden="ariaLabel ? 'false' : 'true'"
+    :aria-label="ariaLabel"
     :class="iconSize"
   />
 </template>
@@ -35,6 +37,14 @@ export default {
     name: {
       type: String,
       required: true,
+    },
+
+    /**
+     * The label of the icon as read out by a screenreader. Leave this unset if your icon is purely presentational
+     */
+    ariaLabel: {
+      type: String,
+      default: undefined,
     },
   },
 

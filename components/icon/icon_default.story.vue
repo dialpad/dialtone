@@ -2,6 +2,7 @@
   <dt-icon
     :size="size"
     :name="name"
+    :aria-label="ariaLabel"
   />
 </template>
 
