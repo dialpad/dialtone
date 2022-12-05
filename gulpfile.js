@@ -120,6 +120,7 @@ const buildIcons = function (done) {
       return `${match}
       aria-hidden="true"
       focusable="false"
+      role="img"
       data-name="${title}"
       class="d-icon d-icon--${converted}"`;
     }))
