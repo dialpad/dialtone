@@ -1,3 +1,15 @@
+# [2.41.0](https://github.com/dialpad/dialtone-vue/compare/v2.40.0...v2.41.0) (2022-12-06)
+
+
+### Bug Fixes
+
+* **Collapsible:** fix keyboard events ([#609](https://github.com/dialpad/dialtone-vue/issues/609)) ([39a3f76](https://github.com/dialpad/dialtone-vue/commit/39a3f7608646d7095b3a98079c69664e978b2e3b))
+
+
+### Features
+
+* add aria-label for icon ([#627](https://github.com/dialpad/dialtone-vue/issues/627)) ([00d4048](https://github.com/dialpad/dialtone-vue/commit/00d4048c982e28c0e7c4309aa236863fd9e9ef11))
+
 # [2.40.0](https://github.com/dialpad/dialtone-vue/compare/v2.39.0...v2.40.0) (2022-11-25)
 
 
