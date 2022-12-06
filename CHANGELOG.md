@@ -1,3 +1,15 @@
+# [3.27.0](https://github.com/dialpad/dialtone-vue/compare/v3.26.0...v3.27.0) (2022-12-06)
+
+
+### Bug Fixes
+
+* **Collapsible:** fix keyboard events - Vue3 ([#615](https://github.com/dialpad/dialtone-vue/issues/615)) ([3486bc0](https://github.com/dialpad/dialtone-vue/commit/3486bc0bec3dd24d32351efbb199935222c09b9f))
+
+
+### Features
+
+* add aria-label for icon ([#628](https://github.com/dialpad/dialtone-vue/issues/628)) ([0710f59](https://github.com/dialpad/dialtone-vue/commit/0710f592756a2b1097cce1f61acfc7506c628dac))
+
 # [3.26.0](https://github.com/dialpad/dialtone-vue/compare/v3.25.1...v3.26.0) (2022-11-25)
 
 
