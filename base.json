@@ -51,11 +51,11 @@
       },
       "purple": {
         "100": {
-          "value": "#EEE5FF",
+          "value": "#F5F0FF",
           "type": "color"
         },
         "200": {
-          "value": "#D3BCFF",
+          "value": "#DAC7FF",
           "type": "color"
         },
         "300": {
@@ -77,11 +77,11 @@
       },
       "blue": {
         "100": {
-          "value": "#E3EDF9",
+          "value": "#EAF2FA",
           "type": "color"
         },
         "200": {
-          "value": "#84BDFF",
+          "value": "#99C8FF",
           "type": "color"
         },
         "300": {
@@ -99,12 +99,12 @@
       },
       "magenta": {
         "100": {
-          "value": "#FF97D2",
+          "value": "#FFE0F2",
           "type": "color",
           "description": "aka pink"
         },
         "200": {
-          "value": "#F756B1",
+          "value": "#F985C7",
           "type": "color",
           "description": "aka pink"
         },
@@ -126,12 +126,12 @@
       },
       "gold": {
         "100": {
-          "value": "#FFE793",
+          "value": "#FFF4CC",
           "type": "color",
           "description": "aka yellow"
         },
         "200": {
-          "value": "#FFD362",
+          "value": "#FFDB80",
           "type": "color",
           "description": "aka yellow"
         },
@@ -153,11 +153,11 @@
       },
       "green": {
         "100": {
-          "value": "#DDF4D9",
+          "value": "#EDF9EB",
           "type": "color"
         },
         "200": {
-          "value": "#9FFF90",
+          "value": "#B0FFA3",
           "type": "color"
         },
         "300": {
@@ -175,11 +175,11 @@
       },
       "red": {
         "100": {
-          "value": "#FFDCDC",
+          "value": "#FFE5E6",
           "type": "color"
         },
         "200": {
-          "value": "#FF7474",
+          "value": "#FF8585",
           "type": "color"
         },
         "300": {
@@ -219,7 +219,7 @@
       },
       "gradient": {
         "magenta-purple": {
-          "value": "linear-gradient(180deg, {color.magenta.300} 10%, {color.purple.400} 90%)",
+          "value": "linear-gradient(135deg, {color.magenta.300} 10%, {color.purple.400} 90%)",
           "type": "color"
         }
       }
@@ -643,7 +643,7 @@
           "value": "{color.gold.500}",
           "type": "color"
         },
-        "on-dark": {
+        "inverted": {
           "primary": {
             "value": "{color.black.100}",
             "type": "color"
