@@ -7,6 +7,8 @@ import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
 
 // Default Prop Values
 export const argsData = {
+  label: 'Label Text',
+  labelVisible: true,
   listMaxHeight: '300px',
   selectedItems: [],
   onInput: action('input'),
@@ -50,6 +52,19 @@ export const argTypesData = {
   },
 
   // Props
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
+  labelVisible: {
+    defaultValue: true,
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
   loading: {
     defaultValue: false,
   },

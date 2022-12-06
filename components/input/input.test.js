@@ -9,6 +9,7 @@ import DtInput from './input.vue';
 const basePropsData = {
   type: 'text',
   value: 'value',
+  label: 'label text',
 };
 
 const baseAttrs = {
@@ -139,9 +140,22 @@ describe('DtInput tests', function () {
       });
     });
 
+    describe('When a label visible prop is false', function () {
+      // Test Setup
+      beforeEach(async function () {
+        await wrapper.setProps({ labelVisible: false });
+        _setChildWrappers();
+      });
+
+      it('should not render a label', function () { assert.isFalse(label.exists()); });
+    });
+
     describe('When a label is not provided', function () {
       // Test Setup
-      beforeEach(async function () { _setChildWrappers(); });
+      beforeEach(async function () {
+        await wrapper.setProps({ label: undefined });
+        _setChildWrappers();
+      });
 
       it('should not render a label', function () { assert.isFalse(label.exists()); });
     });

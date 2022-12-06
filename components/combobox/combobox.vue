@@ -51,6 +51,7 @@ import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { getUniqueString } from '@/common/utils';
 import ComboboxLoadingList from './combobox_loading-list.vue';
 import ComboboxEmptyList from './combobox_empty-list.vue';
+import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 /**
  * A combobox is a semantic component that displays an input element combined with a listbox,
@@ -79,11 +80,38 @@ export default {
 
   props: {
     /**
-     * String to use for the list's aria-label.
+     * String to use for the input label.
      */
-    listAriaLabel: {
+    label: {
       type: String,
       required: true,
+    },
+
+    /**
+     * Determines visibility of input label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
+     * @values null, xs, sm, md, lg, xl
+     */
+    size: {
+      type: String,
+      default: null,
+      validator: (t) => Object.values(LABEL_SIZES).includes(t),
+    },
+
+    /**
+     * Description for the input
+     */
+    description: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -221,7 +249,12 @@ export default {
   computed: {
     inputProps () {
       return {
+        label: this.label,
+        labelVisible: this.labelVisible,
+        size: this.size,
+        description: this.description,
         role: 'combobox',
+        'aria-label': this.label,
         'aria-expanded': this.showList.toString(),
         'aria-owns': this.listId,
         'aria-haspopup': 'listbox',
@@ -237,7 +270,7 @@ export default {
         // The list has to be positioned relatively so that the auto-scroll can
         // calculate the correct offset for the list items.
         class: 'd-ps-relative',
-        'aria-label': this.listAriaLabel,
+        'aria-label': this.label,
       };
     },
 

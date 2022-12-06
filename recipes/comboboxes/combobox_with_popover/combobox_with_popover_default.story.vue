@@ -1,9 +1,12 @@
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
+    :label="label"
+    :label-visible="labelVisible"
+    :description="description"
+    :size="size"
     :empty-state-message="emptyStateMessage"
     :loading="loading"
-    :list-aria-label="listAriaLabel"
     :max-height="maxHeight"
     :max-width="maxWidth"
     :content-width="contentWidth"

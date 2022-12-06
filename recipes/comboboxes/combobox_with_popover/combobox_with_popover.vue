@@ -2,12 +2,15 @@
   <dt-combobox
     ref="combobox"
     :loading="loading"
+    :label="label"
+    :label-visible="labelVisible"
+    :size="size"
+    :description="description"
     :empty-list="emptyList"
     :empty-state-message="emptyStateMessage"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
-    :list-aria-label="listAriaLabel"
     :list-rendered-outside="true"
     :list-id="listId"
     data-qa="dt-combobox"
@@ -111,6 +114,7 @@ import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -126,11 +130,38 @@ export default {
 
   props: {
     /**
-     * String to use for the list's aria-label.
+     * String to use for the input label.
      */
-    listAriaLabel: {
+    label: {
       type: String,
       required: true,
+    },
+
+    /**
+     * Determines visibility of input label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
+     * @values null, xs, sm, md, lg, xl
+     */
+    size: {
+      type: String,
+      default: null,
+      validator: (t) => Object.values(LABEL_SIZES).includes(t),
+    },
+
+    /**
+     * Description for the input
+     */
+    description: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -351,14 +382,8 @@ export default {
 
   methods: {
     handleDisplayList (value) {
-      if (!this.hasSuggestionList) {
-        if (value) {
-          // Displays the list after the user has typed anything
-          this.showComboboxList();
-        } else {
-          this.closeComboboxList();
-        }
-      }
+      if (!this.hasSuggestionList && value) { this.showComboboxList(); }
+      if (!this.hasSuggestionList && !value) { this.closeComboboxList(); }
     },
 
     showComboboxList () {
@@ -397,8 +422,7 @@ export default {
     },
 
     onFocusIn (e) {
-      if (this.hasSuggestionList &&
-          e && this.$refs.input.querySelector('input') === e.target) {
+      if (this.hasSuggestionList && e && this.$refs.input.querySelector('input') === e.target) {
         // only trigger if we show suggestion list when focused, and
         // it's the input specifically that was focused
         this.showComboboxList();
@@ -413,15 +437,11 @@ export default {
       }) || this.visuallyHiddenClose;
 
       // If outside the combobox then close
-      if (!isComboboxStillFocused) {
-        this.closeComboboxList();
-      }
+      if (!isComboboxStillFocused) { this.closeComboboxList(); }
     },
 
-    openOnArrowKeyPress (e) {
-      if (this.showList !== null || this.isListShown || !this.openWithArrowKeys) {
-        return;
-      }
+    openOnArrowKeyPress () {
+      if (this.showList !== null || this.isListShown || !this.openWithArrowKeys) { return; }
 
       this.showComboboxList();
     },

@@ -2,6 +2,7 @@
   <dt-recipe-combobox-multi-select
     ref="comboboxMultiSelect"
     :label="label"
+    :label-visible="labelVisible"
     :description="description"
     :size="size"
     :placeholder="placeholder"

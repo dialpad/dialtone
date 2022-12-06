@@ -12,7 +12,7 @@
       <!-- @slot slot for label, defaults to label prop -->
       <slot name="labelSlot">
         <div
-          v-if="label"
+          v-if="labelVisible && label"
           ref="label"
           data-qa="dt-input-label"
           :class="[
@@ -180,6 +180,16 @@ export default {
     label: {
       type: String,
       default: '',
+      required: true,
+    },
+
+    /**
+     * Determines visibility of input label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
     },
 
     /**

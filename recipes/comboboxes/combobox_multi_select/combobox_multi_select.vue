@@ -1,7 +1,7 @@
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
-    list-aria-label="listAriaLabel"
+    :label="label"
     :show-list="showList"
     :max-height="listMaxHeight"
     :popover-offset="popoverOffset"
@@ -39,7 +39,8 @@
           ref="input"
           v-model="value"
           class="d-fl-grow1 d-mb4"
-          :label="label"
+          :aria-label="label"
+          :label="labelVisible ? label : ''"
           :description="description"
           :placeholder="inputPlaceHolder"
           :show-messages="showInputMessages"
@@ -124,19 +125,28 @@ export default {
 
   props: {
     /**
-     * Label for the combobox
+     * String to use for the input label.
      */
     label: {
       type: String,
-      default: null,
+      required: true,
     },
 
     /**
-     * Description for the combobox
+     * Determines visibility of input label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Description for the input
      */
     description: {
       type: String,
-      default: null,
+      default: '',
     },
 
     /**
@@ -244,7 +254,7 @@ export default {
     },
 
     /**
-     * Size of the input and chip, one of `xs`, `sm`, `md`
+     * Size of the chip, one of `xs`, `sm`, `md`
      */
     size: {
       type: String,

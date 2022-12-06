@@ -16,6 +16,7 @@ module.exports = {
       allow: ['^opt_'], // Allow opt_varname arguments.
     }],
     'comma-dangle': ['error', 'always-multiline'],
+    'no-console': ['warn', { allow: ['error', 'info'] }],
     'max-len': ['error', {
       code: 120,
       tabWidth: 2,
