@@ -5,9 +5,12 @@ import DtRecipeComboboxWithPopoverMdx from './combobox_with_popover.mdx';
 import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story';
 import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/popover_constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
+import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 // Default Prop Values
 export const argsData = {
+  label: 'Label Text',
+  labelVisible: true,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
@@ -59,6 +62,31 @@ export const argTypesData = {
   },
 
   // Props
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: Object.values(LABEL_SIZES),
+    },
+    defaultValue: LABEL_SIZES.DEFAULT,
+    table: {
+      defaultValue: {
+        summary: LABEL_SIZES.DEFAULT,
+      },
+    },
+  },
+  labelVisible: {
+    defaultValue: true,
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
   showList: {
     table: {
       defaultValue: {
@@ -116,9 +144,6 @@ export const argTypesData = {
         summary: 'null',
       },
     },
-  },
-  listAriaLabel: {
-    defaultValue: 'Example list items',
   },
   emptyList: {
     defaultValue: false,

@@ -3,9 +3,12 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtCombobox from './combobox';
 import DtComboboxMdx from './combobox.mdx';
 import DtComboboxDefaultTemplate from './combobox_default.story.vue';
+import { LABEL_SIZES } from './combobox_constants';
 
 // Default Prop Values
 export const argsData = {
+  label: 'Label Text',
+  labelVisible: true,
   showList: true,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
@@ -48,16 +51,27 @@ export const argTypesData = {
   },
 
   // Props
-  listAriaLabel: {
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: Object.values(LABEL_SIZES),
+    },
+    defaultValue: LABEL_SIZES.DEFAULT,
     table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
       defaultValue: {
-        summary: '',
+        summary: LABEL_SIZES.DEFAULT,
       },
     },
+  },
+  labelVisible: {
+    defaultValue: true,
+  },
+  description: {
     control: {
       type: 'text',
     },
