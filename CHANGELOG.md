@@ -1,3 +1,16 @@
+# [2.42.0](https://github.com/dialpad/dialtone-vue/compare/v2.41.0...v2.42.0) (2022-12-07)
+
+
+### Bug Fixes
+
+* fix dialtone-icons version ([#636](https://github.com/dialpad/dialtone-vue/issues/636)) ([23ea714](https://github.com/dialpad/dialtone-vue/commit/23ea714e176ba9d2184505344a9ec27b2aa792b8))
+
+
+### Features
+
+* **Collapsible:** update `DtCollapsible` to show content when collapsed ([#629](https://github.com/dialpad/dialtone-vue/issues/629)) ([82a465a](https://github.com/dialpad/dialtone-vue/commit/82a465a671ececb1d9395224d2496829440ee531))
+* **Combobox:** add label ([#626](https://github.com/dialpad/dialtone-vue/issues/626)) ([417d6a7](https://github.com/dialpad/dialtone-vue/commit/417d6a7ce2f0414698598423920fa3ec9948aa19))
+
 # [2.41.0](https://github.com/dialpad/dialtone-vue/compare/v2.40.0...v2.41.0) (2022-12-06)
 
 
