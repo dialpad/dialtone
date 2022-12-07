@@ -1,11 +1,5 @@
-<!-- eslint-disable vuejs-accessibility/interactive-supports-focus -->
 <template>
   <div
-    role="combobox"
-    :aria-expanded="showList.toString()"
-    :aria-controls="listId"
-    :aria-owns="listId"
-    aria-haspopup="listbox"
     @keydown.esc.stop="onKeyValidation($event, 'onEscapeKey')"
     @keydown.enter.exact="onKeyValidation($event, 'onEnterKey')"
     @keydown.up.stop.prevent="onKeyValidation($event, 'onUpKey')"
