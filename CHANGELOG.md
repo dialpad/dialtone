@@ -1,3 +1,15 @@
+# [3.28.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v3.27.0...v3.28.0-beta.1) (2022-12-07)
+
+
+### Bug Fixes
+
+* update dialtone-icons version ([6c3f306](https://github.com/dialpad/dialtone-vue/commit/6c3f30604844cc3ac306fca0678b3b2f8a36a2aa))
+
+
+### Features
+
+* **Combobox:** add label vue3 ([#630](https://github.com/dialpad/dialtone-vue/issues/630)) ([59bebec](https://github.com/dialpad/dialtone-vue/commit/59bebec9fbbc4295dc4aa20c3d456a942dfd26a0))
+
 # [3.27.0](https://github.com/dialpad/dialtone-vue/compare/v3.26.0...v3.27.0) (2022-12-06)
 
 
