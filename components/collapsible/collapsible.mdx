@@ -9,11 +9,13 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 
 ## Basic Style
 
-The collapsible has two components. The anchor and the content.
+The collapsible has three components. The anchor, contentOnExpanded, and contentOnCollapsed.
 
 The **anchor** will default to a basic button with some text if the slot is not filled.
 
-The **content** must be provided and is the element that can be hidden or shown when the anchor is clicked.
+The **contentOnExpanded** is the element that is shown when the anchor is expanded.
+
+The **contentOnCollapsed** is the element that is shown when the anchor is collapsed.
 
 <Canvas>
   <Story id="components-collapsible--default" />
@@ -34,7 +36,7 @@ import { DtCollapsible } from '@dialpad/dialtone-vue';
   :anchor-text="Click Me!"
   @opened="onOpen"
 >
-  <template #content>
+  <template #contentOnExpanded>
     <p>
       This will be shown in the expanded area.
     </p>
@@ -58,9 +60,39 @@ import { DtCollapsible, DtButton } from '@dialpad/dialtone-vue';
       Click Me!
     </dt-button>
   </template>
-  <template #content>
+  <template #contentOnExpanded>
     <p>
       This will be shown in the expanded area.
+    </p>
+  </template>
+</dt-collapsible>
+```
+
+### Basic Usage with `contentOnCollapsed`
+
+You can also choose to show content under the anchor when it is collapsed. To do so,
+you need to use the `contentOnCollapsed` slot and render any elements inside of it that needs to be
+shown when the content is collapsed.
+
+```js
+import { DtCollapsible, DtButton } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-collapsible @opened="onOpen">
+  <template #anchor={ attrs }>
+    <dt-button v-bind="attrs">
+      Click Me!
+    </dt-button>
+  </template>
+  <template #contentOnExpanded>
+    <p>
+      This will be shown when the anchor is expanded.
+    </p>
+  </template>
+    <template #contentOnCollapsed>
+    <p>
+      This will be shown when the anchor is collapsed.
     </p>
   </template>
 </dt-collapsible>
