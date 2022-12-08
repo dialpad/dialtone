@@ -2,6 +2,8 @@
 
 var Color = require('tinycolor2');
 
+const fs = require('fs');
+
 const StyleDictionary = require('style-dictionary').extend('config.js');
 
 // Identifiers
@@ -243,4 +245,54 @@ StyleDictionary.registerTransform({
   }
 });
 
+// Stores json object for documentation
+const docTokens = {};
+
+// Recurse through style dictionary object and pick out
+// bottom level token values.
+function buildDocs(platformName, currentObj) {
+  if (currentObj === null || typeof currentObj !== 'object') {
+    return null;
+  }
+
+  const tokenName = currentObj.name;
+  const tokenValue = currentObj.value;
+
+  if (tokenValue) {
+    const tokenPath = currentObj.path.join('/');
+    docTokens[tokenPath] = {
+      ...docTokens[tokenPath],
+      [platformName]: {
+        name: tokenName,
+        value: tokenValue,
+      }
+    }
+    return null;
+  }
+
+  for (const key in currentObj) {
+    if (!currentObj.hasOwnProperty(key))
+      continue;
+    buildDocs(platformName, currentObj[key]);
+  }
+
+}
+
+StyleDictionary.registerAction({
+  name: 'buildDocJson',
+  do: function(dictionary, config) {
+    const platformName = config.files[0].format.name;
+    buildDocs(platformName, dictionary.properties);
+  },
+});
+
 StyleDictionary.buildAllPlatforms();
+
+const DOC_OUTPUT_PATH = './dist/doc.json';
+
+fs.writeFile(DOC_OUTPUT_PATH, JSON.stringify(docTokens, null, 2), err => {
+  if (err) {
+    throw err
+  }
+  console.info(`Token documentation data written to ${DOC_OUTPUT_PATH}`)
+})

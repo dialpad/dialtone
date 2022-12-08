@@ -14,6 +14,7 @@ module.exports = {
     },
     css: {
       transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/fonts/weight', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'size/rem', 'color/css'],
+      actions: ['buildDocJson'],
       prefix: 'dt',
       buildPath: 'dist/css/',
       files: [
@@ -25,6 +26,7 @@ module.exports = {
     },
     android_xml: {
       transforms: ['attribute/cti', 'name/cti/snake', 'dt/android/color', 'size/remToSp', 'size/remToDp'],
+      actions: ['buildDocJson'],
       prefix: 'dt',
       buildPath: 'dist/android/res/values/',
       files: [
@@ -48,6 +50,7 @@ module.exports = {
     },
     android_compose: {
       transforms: ['dt/android/compose/fonts/transformToStack',  'dt/lineHeight/percentToDecimal', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/compose/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
+      actions: ['buildDocJson'],
       prefix: 'dt',
       buildPath: 'dist/android/java/',
       files: [
@@ -64,6 +67,7 @@ module.exports = {
     },
     ios: {
       transforms: ['dt/fonts/transformToStack',  'attribute/cti', 'name/cti/camel', 'dt/ios/color', 'dt/ios/size/pxToCGFloat', 'dt/ios/lineHeight/percentToDecimal', 'dt/stringify'],
+      actions: ['buildDocJson'],
       prefix: 'dt',
       buildPath: 'dist/ios/',
       files: [
