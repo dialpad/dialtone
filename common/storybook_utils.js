@@ -24,7 +24,7 @@ export const createTemplateFromVueFile = (args, argTypes, templateComponent) => 
  * @returns {string[]} icon component names
  */
 export function getIconNames () {
-  return Object.keys(dialtoneIcons).map(name => pascalCaseToKebabCase(name));
+  return ['', ...Object.keys(dialtoneIcons).map(name => pascalCaseToKebabCase(name))];
 }
 
 export const generateTemplate = (component,

@@ -1,7 +1,7 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import DtBadge from './badge.vue';
-import { BADGE_COLOR_MODIFIERS } from './badge_constants';
+import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS } from './badge_constants';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 
 // Constants
@@ -10,6 +10,8 @@ const basePropsData = {};
 describe('DtBadge Tests', function () {
   let wrapper;
   let badge;
+  let iconLeftWrapper;
+  let iconLeft;
 
   // Environment
   let propsData = basePropsData;
@@ -18,10 +20,14 @@ describe('DtBadge Tests', function () {
   // Helpers
   const _setChildWrappers = () => {
     badge = wrapper.find('[data-qa="dt-badge"]');
+    iconLeftWrapper = wrapper.find('.d-badge__icon-left');
+    if (iconLeftWrapper.exists()) {
+      iconLeft = iconLeftWrapper.findComponent({ name: 'DtIcon' });
+    }
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtBadge, {
+    wrapper = mount(DtBadge, {
       propsData,
       slots,
       localVue: this.localVue,
@@ -34,10 +40,10 @@ describe('DtBadge Tests', function () {
     this.localVue = createLocalVue();
   });
 
-  // Teardown
-  afterEach(function () {
+  beforeEach(function () {
     propsData = basePropsData;
     slots = {};
+    _setWrappers();
   });
 
   describe('Presentation Tests', function () {
@@ -47,10 +53,17 @@ describe('DtBadge Tests', function () {
       it('should display the correct text', function () { assert.strictEqual(badge.text(), text); });
     };
 
-    const itBehavesLikeHasCorrectColorClass = color => {
-      it('should have correct class', async function () {
-        await wrapper.setProps({ color });
-        itBehavesLikeHasCorrectClass(badge, BADGE_COLOR_MODIFIERS[color]);
+    const itBehavesLikeHasCorrectType = type => {
+      it('should have correct type', async function () {
+        await wrapper.setProps({ type });
+        itBehavesLikeHasCorrectClass(badge, BADGE_TYPE_MODIFIERS[type]);
+      });
+    };
+
+    const itBehavesLikeHasCorrectKind = kind => {
+      it('should have correct kind', async function () {
+        await wrapper.setProps({ kind });
+        itBehavesLikeHasCorrectClass(badge, BADGE_KIND_MODIFIERS[kind]);
       });
     };
 
@@ -87,37 +100,37 @@ describe('DtBadge Tests', function () {
       itBehavesLikeRendersText(propText);
     });
 
-    describe('When a color is provided via prop', function () {
+    describe('When a type is provided via prop', function () {
       // Test Setup
       beforeEach(function () { _setWrappers(); });
 
-      describe('When color is black-700', function () { itBehavesLikeHasCorrectColorClass('black-700'); });
+      describe('When type is info', function () { itBehavesLikeHasCorrectType('info'); });
 
-      describe('When color is green-400', function () { itBehavesLikeHasCorrectColorClass('green-400'); });
+      describe('When type is success', function () { itBehavesLikeHasCorrectType('success'); });
 
-      describe('When color is orange-400', function () { itBehavesLikeHasCorrectColorClass('orange-400'); });
+      describe('When type is warning', function () { itBehavesLikeHasCorrectType('warning'); });
 
-      describe('When color is magenta-100', function () { itBehavesLikeHasCorrectColorClass('magenta-100'); });
+      describe('When type is critical', function () { itBehavesLikeHasCorrectType('critical'); });
 
-      describe('When color is magenta-300', function () { itBehavesLikeHasCorrectColorClass('magenta-300'); });
+      describe('When type is ai', function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ type: 'ai' });
+          _setChildWrappers();
+        });
 
-      describe('When color is magenta-400', function () { itBehavesLikeHasCorrectColorClass('magenta-400'); });
+        itBehavesLikeHasCorrectType('ai');
 
-      describe('When color is magenta-500', function () { itBehavesLikeHasCorrectColorClass('magenta-500'); });
+        it('renders ai icon in iconLeft slot by default', function () {
+          assert.isTrue(iconLeft.attributes('data-name') === 'Dialpad Ai');
+        });
+      });
+    });
 
-      describe('When color is purple-100', function () { itBehavesLikeHasCorrectColorClass('purple-100'); });
+    describe('When a kind is provided via prop', function () {
+      // Test Setup
+      beforeEach(function () { _setWrappers(); });
 
-      describe('When color is purple-300', function () { itBehavesLikeHasCorrectColorClass('purple-300'); });
-
-      describe('When color is purple-400', function () { itBehavesLikeHasCorrectColorClass('purple-400'); });
-
-      describe('When color is purple-500', function () { itBehavesLikeHasCorrectColorClass('purple-500'); });
-
-      describe('When color is red-300', function () { itBehavesLikeHasCorrectColorClass('red-300'); });
-
-      describe('When color is white', function () { itBehavesLikeHasCorrectColorClass('white'); });
-
-      describe('When color is gold-200', function () { itBehavesLikeHasCorrectColorClass('gold-200'); });
+      describe('When kind is count', function () { itBehavesLikeHasCorrectKind('count'); });
     });
   });
 });

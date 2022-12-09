@@ -1,7 +1,10 @@
 <template>
   <dt-badge
     :text="text"
-    :color="color"
+    :type="type"
+    :kind="kind"
+    :icon-left="iconLeft"
+    :icon-right="iconRight"
   >
     <template v-if="defaultSlot">
       {{ defaultSlot }}
