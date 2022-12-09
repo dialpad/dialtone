@@ -6,6 +6,8 @@ import { INPUT_SIZES } from './input_constants';
 import InputMdx from './input.mdx';
 import InputDefault from './input_default.story.vue';
 
+const iconsList = getIconNames();
+
 // Controls
 export const argTypesData = {
   // Slots
@@ -19,19 +21,31 @@ export const argTypesData = {
     },
   },
   leftIcon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: 'select',
-    options: getIconNames(),
-  },
-  rightIcon: {
+    options: iconsList,
+    mapping: iconsList,
     table: {
       type: { summary: 'VNode' },
     },
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
+    },
+  },
+  rightIcon: {
+    options: iconsList,
+    mapping: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
   labelSlot: {

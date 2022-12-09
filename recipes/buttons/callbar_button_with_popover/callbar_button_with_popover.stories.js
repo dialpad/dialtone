@@ -7,6 +7,8 @@ import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_w
 
 import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '../../../components/popover/popover_constants';
 
+const iconsList = getIconNames();
+
 // Default Prop Values
 export const argsData = {
   onArrowClick: action('arrowClick'),
@@ -29,6 +31,8 @@ export const argTypesData = {
   icon: {
     name: 'icon',
     description: 'Slot for button icon',
+    options: iconsList,
+    mapping: iconsList,
     table: {
       category: 'slots',
       type: {
@@ -37,8 +41,11 @@ export const argTypesData = {
     },
     control: {
       type: 'select',
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
-    options: getIconNames(),
   },
   tooltip: {
     name: 'tooltip',

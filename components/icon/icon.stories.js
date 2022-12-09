@@ -4,7 +4,7 @@ import BaseIconMdx from './icon.mdx';
 import DtIconDefaultTemplate from './icon_default.story.vue';
 import DtIconVariantsTemplate from './icon_variants.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-
+const iconsList = getIconNames();
 export const argTypesData = {
   size: {
     control: {
@@ -13,9 +13,14 @@ export const argTypesData = {
     },
   },
   name: {
+    options: iconsList,
+    mapping: iconsList,
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
 };

@@ -5,6 +5,8 @@ import NoticeDefault from './notice_default.story.vue';
 import DtNoticeMdx from './notice.mdx';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
+const iconsList = getIconNames();
+
 // Default Prop Values
 export const argsData = {
   onClose: action('close'),
@@ -24,12 +26,17 @@ export const argTypesData = {
     },
   },
   icon: {
+    options: iconsList,
+    mapping: iconsList,
     table: {
       type: { summary: 'component' },
     },
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
   default: {

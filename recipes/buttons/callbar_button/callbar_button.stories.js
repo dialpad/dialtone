@@ -6,6 +6,8 @@ import DtRecipeCallbarButtonDefaultTemplate from './callbar_button_default.story
 import DtRecipeCallbarButtonVariantsTemplate from './callbar_button_variants.story.vue';
 import DtRecipeCallbarButtonCallbarTemplate from './callbar_button_callbar.story.vue';
 
+const iconsList = getIconNames();
+
 // Default Prop Values
 export const argsData = {
   onClick: action('click'),
@@ -54,6 +56,8 @@ export const argTypesData = {
   },
   icon: {
     name: 'icon',
+    options: iconsList,
+    mapping: iconsList,
     description: 'Slot for button icon',
     table: {
       category: 'slots',
@@ -61,9 +65,12 @@ export const argTypesData = {
         summary: 'VNode',
       },
     },
-    options: getIconNames(),
     control: {
       type: 'select',
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
   tooltip: {
