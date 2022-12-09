@@ -1,10 +1,9 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   DtCollapsible,
 } from './';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import CollapsibleMdx from './collapsible.mdx';
 import DtCollapsibleDefaultStory from './collapsible_default.story.vue';
-import DtCollapsibleVariantsStory from './collapsible_variants.story.vue';
 
 const argTypesData = {
   // Slots
@@ -16,15 +15,7 @@ const argTypesData = {
       },
     },
   },
-  contentOnCollapsed: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
-  contentOnExpanded: {
+  content: {
     control: 'text',
     table: {
       type: {
@@ -95,11 +86,3 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
   maxWidth: '512px',
 };
-
-const VariantTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCollapsibleVariantsStory,
-);
-
-export const Variants = VariantTemplate.bind({});

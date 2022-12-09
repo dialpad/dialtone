@@ -27,7 +27,6 @@
           kind="muted"
           :aria-controls="id"
           :aria-expanded="`${isOpen}`"
-          :aria-label="ariaLabel"
           :style="{
             'width': maxWidth,
           }"
@@ -49,9 +48,10 @@
     <dt-collapsible-lazy-show
       :id="id"
       ref="contentWrapper"
-      :aria-hidden="`${!isOpen && !hasContentOnCollapse}`"
+      :aria-hidden="`${!isOpen}`"
       :aria-labelledby="labelledBy"
-      :is-expanded="isOpen"
+      :aria-label="ariaLabel"
+      :show="isOpen"
       :element-type="contentElementType"
       :class="[
         'd-dt-collapsible__content',
@@ -64,19 +64,13 @@
       tabindex="-1"
       appear
       v-on="$listeners"
+      @after-leave="onLeaveTransitionComplete"
+      @after-enter="onEnterTransitionComplete"
     >
-      <template #contentOnExpanded>
-        <!-- @slot Slot for content that is shown when collapsible is expanded -->
-        <slot
-          name="contentOnExpanded"
-        />
-      </template>
-      <template #contentOnCollapsed>
-        <!-- @slot Slot for content that is shown when collapsible is collapsed -->
-        <slot
-          name="contentOnCollapsed"
-        />
-      </template>
+      <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
+      <slot
+        name="content"
+      />
     </dt-collapsible-lazy-show>
   </component>
 </template>
@@ -183,7 +177,7 @@ export default {
     },
 
     /**
-     * Label on the anchor. Should provide this or ariaLabelledBy but not both.
+     * Label on the collapsible content. Should provide this or ariaLabelledBy but not both.
      */
     ariaLabel: {
       type: String,
@@ -228,10 +222,6 @@ export default {
       // there is no aria-label and the labelledby should point to the anchor
       return this.ariaLabelledBy || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
     },
-
-    hasContentOnCollapse () {
-      return !!this.$slots.contentOnCollapsed;
-    },
   },
 
   watch: {
@@ -251,14 +241,28 @@ export default {
   },
 
   methods: {
+    onLeaveTransitionComplete () {
+      this.$emit('opened', false);
+      if (this.open !== null) {
+        this.$emit('update:open', false);
+      }
+    },
+
+    onEnterTransitionComplete () {
+      this.$emit('opened', true, this.$refs.content);
+      if (this.open !== null) {
+        this.$emit('update:open', true);
+      }
+    },
 
     defaultToggleOpen () {
-      this.$emit('opened', !this.isOpen);
       if (this.open === null) {
-        this.isOpen = !this.isOpen;
-      } else {
-        this.$emit('update:open', !this.isOpen);
+        this.toggleOpen();
       }
+    },
+
+    toggleOpen () {
+      this.isOpen = !this.isOpen;
     },
 
     validateProperAnchor () {

@@ -23,10 +23,10 @@
         v-html="anchor"
       />
     </template>
-    <template #contentOnExpanded>
+    <template slot="content">
       <div
-        v-if="contentOnExpanded"
-        v-html="contentOnExpanded"
+        v-if="content"
+        v-html="content"
       />
       <div
         v-else
@@ -55,12 +55,6 @@
           est.
         </p>
       </div>
-    </template>
-    <template #contentOnCollapsed>
-      <div
-        v-if="contentOnCollapsed"
-        v-html="contentOnCollapsed"
-      />
     </template>
   </dt-collapsible>
 </template>

@@ -5,10 +5,7 @@ import sinon from 'sinon';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
-const contentOnExpanded = '<div data-qa="content-on-expanded-element"> Expanded Test Text </div>';
-const contentOnCollapsed = '<div data-qa="content-on-collapsed-element"> Collapsed Test Text </div>';
-const anchor = '<button data-qa="anchor-element">click me</button>';
-
+const content = '<div data-qa="content-element"> Test Text </div>';
 const baseProps = {
   anchorText: 'anchor text',
 };
@@ -16,31 +13,39 @@ const baseProps = {
 describe('Dialtone vue Collapsible Component Tests', function () {
   // Wrappers
   let wrapper;
-  let contentOnExpandedElement;
-  let contentOnCollapsedElement;
+  let contentElement;
   let contentWrapperElement;
   let anchorElement;
+  let scopedSlots = {};
   let anchorSlotElement;
 
   // Environment
-  const defaultSlots = { contentOnExpanded, contentOnCollapsed };
-  const defaultPropsData = baseProps;
+  const slots = { content };
+  let propsData = baseProps;
 
-  const findAllElements = () => {
+  const _clearChildWrappers = () => {
+    contentElement = undefined;
+    contentWrapperElement = undefined;
+    anchorElement = undefined;
+    anchorSlotElement = undefined;
+    scopedSlots = {};
+  };
+
+  const _setChildWrappers = () => {
     anchorElement = wrapper.find('[data-qa="dt-button"]');
     anchorSlotElement = wrapper.find('[data-qa="anchor-element"]');
-    contentOnExpandedElement = wrapper.find('[data-qa="content-on-expanded-element"]');
-    contentOnCollapsedElement = wrapper.find('[data-qa="content-on-collapsed-element"]');
+    contentElement = wrapper.find('[data-qa="content-element"]');
     contentWrapperElement = wrapper.findComponent({ ref: 'contentWrapper' });
   };
 
-  const mountWrapper = ({ propsData = defaultPropsData, slots = defaultSlots } = {}) => {
+  const _mountWrapper = () => {
     wrapper = mount(DtCollapsible, {
       propsData,
+      scopedSlots,
       slots,
       attachTo: document.body,
     });
-    findAllElements();
+    _setChildWrappers();
   };
 
   before(function () {
@@ -50,7 +55,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   });
 
   beforeEach(function () {
-    mountWrapper();
+    _mountWrapper();
   });
 
   after(function () {
@@ -60,74 +65,47 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     config.renderStubDefaultSlot = false;
   });
 
+  afterEach(async function () {
+    propsData = baseProps;
+    _clearChildWrappers();
+  });
+
   describe('Test default rendering', function () {
     it('should render the component', function () {
-      assert.isTrue(wrapper.exists(), 'wrapper exists');
+      assert.exists(wrapper, 'wrapper exists');
     });
 
     it('should render the anchor', function () {
-      assert.isTrue(anchorElement.exists(), 'anchor exists');
+      assert.exists(anchorElement, 'anchor exists');
     });
 
-    it('should render the content on expanded element', function () {
-      assert.isTrue(contentOnExpandedElement.exists(), 'content exists');
-    });
-
-    it('should NOT render the content on collapsed element', function () {
-      assert.isFalse(contentOnCollapsedElement.exists(), 'collapsed content does not exist');
+    it('should render the content', function () {
+      assert.exists(contentElement, 'content exists');
     });
   });
 
-  describe('When scoped slot is provided for anchor', function () {
+  describe('When scoped slot is provided', function () {
     beforeEach(function () {
-      mountWrapper({
-        slots: { anchor },
-      });
+      const anchor = '<button data-qa="anchor-element">click me</button>';
+      scopedSlots = { anchor };
     });
 
-    it('should render the anchor slot', function () {
-      assert.isTrue(anchorSlotElement.exists(), 'anchor slot exists');
-    });
-  });
-
-  describe('When scoped slot is not provided for any content', function () {
-    beforeEach(function () {
-      mountWrapper({
-        slots: {},
-      });
-    });
-
-    it('should NOT render any content if no slot is passed', function () {
-      assert.isFalse(contentOnExpandedElement.exists());
-      assert.isFalse(contentOnCollapsedElement.exists());
+    it('should render the scoped slot', function () {
+      assert.exists(anchorSlotElement, 'anchor slot exists');
     });
   });
 
   describe('Test open prop undefined', function () {
     it('content should be expanded by default', function () {
-      assert.isTrue(contentOnExpandedElement.isVisible());
-      assert.isFalse(contentOnCollapsedElement.exists());
+      assert.isTrue(contentElement.isVisible());
     });
 
-    describe('when user clicks anchor when it is expanded', function () {
-      beforeEach(async function () {
-        await anchorElement.trigger('click');
-      });
-      it('should be collapsed', function () {
-        findAllElements();
-        assert.isFalse(contentOnExpandedElement.exists());
-        assert.isTrue(contentOnCollapsedElement.isVisible());
-      });
-      describe('when user clicks anchor when it is collapsed', function () {
-        beforeEach(async function () {
-          await anchorElement.trigger('click');
-        });
-        it('should be expanded', function () {
-          findAllElements();
-          assert.isTrue(contentOnExpandedElement.isVisible());
-          assert.isFalse(contentOnCollapsedElement.exists());
-        });
-      });
+    it('should toggle the content when clicked', async function () {
+      await anchorElement.trigger('click');
+      assert.isFalse(contentElement.isVisible());
+
+      await anchorElement.trigger('click');
+      assert.isTrue(contentElement.isVisible());
     });
   });
 
@@ -138,68 +116,37 @@ describe('Dialtone vue Collapsible Component Tests', function () {
       });
 
       it('content is expanded', function () {
-        assert.isTrue(contentOnExpandedElement.isVisible());
+        assert.isTrue(contentElement.isVisible());
       });
 
-      describe('clicking on anchor', function () {
-        beforeEach(async function () {
-          await anchorElement.trigger('click');
-        });
-        it('clicking does NOT collapse content', async function () {
-          findAllElements();
-          assert.isTrue(contentOnExpandedElement.isVisible());
-          assert.isFalse(contentOnCollapsedElement.exists());
-        });
+      it('clicking does not collapse content', async function () {
+        await anchorElement.trigger('click');
+        assert.isTrue(contentElement.isVisible());
       });
 
-      describe('updating open prop', function () {
-        beforeEach(async function () {
-          await wrapper.setProps({ open: false });
-        });
-        it('updating open prop does collapse content', async function () {
-          findAllElements();
-          assert.isFalse(contentOnExpandedElement.exists());
-          assert.isTrue(contentOnCollapsedElement.isVisible());
-        });
+      it('updating open prop does collapse content', async function () {
+        await wrapper.setProps({ open: false });
+        assert.isFalse(contentElement.isVisible());
       });
     });
 
     describe('Test open prop set to false', function () {
       beforeEach(async function () {
-        mountWrapper({
-          propsData: {
-            ...baseProps,
-            open: false,
-          },
-        });
+        await wrapper.setProps({ open: false });
       });
 
       it('content starts collapsed', function () {
-        findAllElements();
-        assert.isFalse(contentOnExpandedElement.exists());
-        assert.isTrue(contentOnCollapsedElement.isVisible());
+        assert.isFalse(contentElement.isVisible());
       });
 
-      describe('when user clicks anchor and collapsible is closed', function () {
-        beforeEach(async function () {
-          await anchorElement.trigger('click');
-        });
-        it('clicking does NOT expand content', async function () {
-          findAllElements();
-          assert.isFalse(contentOnExpandedElement.exists());
-          assert.isTrue(contentOnCollapsedElement.isVisible());
-        });
+      it('clicking does not expand content', async function () {
+        await anchorElement.trigger('click');
+        assert.isFalse(contentElement.isVisible());
       });
 
-      describe('when open prop is updated', function () {
-        beforeEach(async function () {
-          await wrapper.setProps({ open: true });
-        });
-        it('updating open prop does expand content', async function () {
-          findAllElements();
-          assert.isTrue(contentOnExpandedElement.isVisible());
-          assert.isFalse(contentOnCollapsedElement.exists());
-        });
+      it('updating open prop does collapse content', async function () {
+        await wrapper.setProps({ open: true });
+        assert.isTrue(contentElement.isVisible());
       });
     });
   });
@@ -209,9 +156,8 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
     beforeEach(async function () {
       consoleErrorSpy = sinon.spy(console, 'error');
-      mountWrapper({
-        propsData: { ...baseProps, anchorText: undefined },
-      });
+      propsData = { ...baseProps, anchorText: undefined };
+      _mountWrapper();
     });
 
     afterEach(function () {
@@ -225,62 +171,6 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    describe('Anchor aria-label', function () {
-      beforeEach(async function () {
-        mountWrapper({
-          propsData: {
-            ...baseProps,
-            ariaLabel: 'Anchor Aria Label',
-          },
-        });
-      });
-      it('should correctly set the aria-label attribute on anchor button', async function () {
-        assert.equal(anchorElement.attributes('aria-label'), 'Anchor Aria Label');
-      });
-    });
-
-    describe('Content wrapper `aria-hidden` property when contentOnCollapsed does not exist', function () {
-      beforeEach(function () {
-        mountWrapper({
-          slots: { contentOnExpanded },
-        });
-      });
-      it('should set aria-hidden to false when content expanded exists', function () {
-        assert.equal(contentWrapperElement.attributes('aria-hidden'), 'false');
-      });
-      describe('when user clicks anchor', function () {
-        beforeEach(async function () {
-          await anchorElement.trigger('click');
-        });
-        it(`should set aria-hidden to true if
-        content is collapsed and contentOnCollapsed slot is not provided `, async function () {
-          findAllElements();
-          assert.equal(contentWrapperElement.attributes('aria-hidden'), 'true');
-        });
-      });
-    });
-
-    describe('Content wrapper `aria-hidden` property when contentOnCollapsed exists', function () {
-      beforeEach(function () {
-        mountWrapper({
-          slots: { contentOnExpanded, contentOnCollapsed },
-        });
-      });
-      it('should set aria-hidden to false when content expanded exists', function () {
-        assert.equal(contentWrapperElement.attributes('aria-hidden'), 'false');
-      });
-      describe('when user clicks anchor', function () {
-        beforeEach(async function () {
-          await anchorElement.trigger('click');
-        });
-        it(`should set aria-hidden to false if
-        content is collapsed and and contentOnCollapsed slot is provided `, async function () {
-          findAllElements();
-          assert.equal(contentWrapperElement.attributes('aria-hidden'), 'false');
-        });
-      });
-    });
-
     describe('Content is expanded', function () {
       beforeEach(async function () {
         await wrapper.setProps({ open: true, id: 'contentId' });
