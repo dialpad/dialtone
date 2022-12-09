@@ -1,3 +1,10 @@
+# [3.29.0](https://github.com/dialpad/dialtone-vue/compare/v3.28.0...v3.29.0) (2022-12-09)
+
+
+### Features
+
+* **Badge:** component rework ([#638](https://github.com/dialpad/dialtone-vue/issues/638)) ([97711ee](https://github.com/dialpad/dialtone-vue/commit/97711ee311450e899e457f94e514e7ca6bd97079))
+
 # [3.28.0](https://github.com/dialpad/dialtone-vue/compare/v3.27.0...v3.28.0) (2022-12-07)
 
 
