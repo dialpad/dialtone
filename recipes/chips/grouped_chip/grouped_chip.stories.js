@@ -3,6 +3,8 @@ import DtRecipeGroupedChip from './grouped_chip';
 import DtRecipeGroupedChipMdx from './grouped_chip.mdx';
 import DtRecipeGroupedChipDefaultTemplate from './grouped_chip_default.story.vue';
 
+const iconsList = getIconNames();
+
 // Default Prop Values
 export const argsData = {};
 
@@ -24,6 +26,8 @@ export const argTypesData = {
   leftIcon: {
     name: 'leftIcon',
     description: 'Slot for left hand chip icon',
+    options: iconsList,
+    mapping: iconsList,
     table: {
       category: 'slots',
       type: {
@@ -32,7 +36,10 @@ export const argTypesData = {
     },
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
 
@@ -49,6 +56,8 @@ export const argTypesData = {
 
   rightIcon: {
     name: 'rightIcon',
+    options: iconsList,
+    mapping: iconsList,
     description: 'Slot for right hand chip icon',
     table: {
       category: 'slots',
@@ -58,7 +67,10 @@ export const argTypesData = {
     },
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
 };

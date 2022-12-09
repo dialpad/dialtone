@@ -6,6 +6,8 @@ import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './list_item_constan
 import DtListItemDefaultTemplate from './list_item_default.story.vue';
 import DtListItemCustomTemplate from './list_item_custom.story.vue';
 
+const iconsList = getIconNames();
+
 // Default Prop Values
 export const argsData = {
   onClick: action('click'),
@@ -24,6 +26,8 @@ export const argTypesData = {
     },
   },
   left: {
+    options: iconsList,
+    mapping: iconsList,
     description: 'Slot for the left content',
     table: {
       category: 'slots',
@@ -31,10 +35,15 @@ export const argTypesData = {
     },
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
   right: {
+    options: iconsList,
+    mapping: iconsList,
     description: 'Slot for the right content',
     table: {
       category: 'slots',
@@ -42,7 +51,10 @@ export const argTypesData = {
     },
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
   subtitle: {

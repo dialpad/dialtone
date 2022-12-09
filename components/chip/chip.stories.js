@@ -5,6 +5,8 @@ import DtChipMdx from './chip.mdx';
 import DtChipDefaultTemplate from './chip_default.story.vue';
 import { CHIP_SIZE_MODIFIERS } from './chip_constants';
 
+const iconsList = getIconNames();
+
 export const argTypesData = {
   // Slots
   default: {
@@ -17,12 +19,17 @@ export const argTypesData = {
   },
 
   icon: {
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
+    options: iconsList,
+    mapping: iconsList,
     table: {
       type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
 

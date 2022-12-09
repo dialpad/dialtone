@@ -5,6 +5,8 @@ import DtToastMdx from './toast.mdx';
 import DtToastDefaultTemplate from './toast_default.story.vue';
 import { NOTICE_KINDS } from '../notice';
 
+const iconsList = getIconNames();
+
 // Default Prop Values
 export const argsData = {
   onClose: action('close'),
@@ -23,12 +25,17 @@ export const argTypesData = {
     },
   },
   icon: {
+    options: iconsList,
+    mapping: iconsList,
     table: {
       type: { summary: 'component' },
     },
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
   default: {

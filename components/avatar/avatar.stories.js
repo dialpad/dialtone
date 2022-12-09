@@ -7,6 +7,8 @@ import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarIconTemplate from './avatar_icon.story.vue';
 import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
 
+const iconsList = getIconNames();
+
 export const argTypesData = {
   // Slots
   default: {
@@ -108,9 +110,14 @@ Icon.args = {
 
 Icon.argTypes = {
   default: {
+    options: iconsList,
+    mapping: iconsList,
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
 };

@@ -13,6 +13,8 @@ import ButtonDefault from './button_default.story.vue';
 import ButtonVariants from './button_variants.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
+const iconsList = getIconNames();
+
 export const argTypesData = {
   // Slots
   default: {
@@ -24,12 +26,17 @@ export const argTypesData = {
     },
   },
   icon: {
+    options: iconsList,
+    mapping: iconsList,
     table: {
       type: { summary: 'VNode' },
     },
     control: {
       type: 'select',
-      options: getIconNames(),
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
 
