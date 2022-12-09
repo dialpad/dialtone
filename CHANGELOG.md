@@ -1,3 +1,10 @@
+## [2.43.1](https://github.com/dialpad/dialtone-vue/compare/v2.43.0...v2.43.1) (2022-12-09)
+
+
+### Bug Fixes
+
+* revert recent collapsible changes ([#639](https://github.com/dialpad/dialtone-vue/issues/639)) ([1b80eb6](https://github.com/dialpad/dialtone-vue/commit/1b80eb61e57abbd63876e3b462177e795d0d4b61))
+
 # [2.43.0](https://github.com/dialpad/dialtone-vue/compare/v2.42.0...v2.43.0) (2022-12-09)
 
 
