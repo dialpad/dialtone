@@ -1,17 +1,14 @@
-export const BADGE_COLOR_MODIFIERS = {
-  base: '',
-  'black-700': 'd-badge--black-700',
-  'green-400': 'd-badge--green-400',
-  'orange-400': 'd-badge--orange-400',
-  'magenta-100': 'd-badge--magenta-100',
-  'magenta-300': 'd-badge--magenta-300',
-  'magenta-400': 'd-badge--magenta-400',
-  'magenta-500': 'd-badge--magenta-500',
-  'purple-100': 'd-badge--purple-100',
-  'purple-300': 'd-badge--purple-300',
-  'purple-400': 'd-badge--purple-400',
-  'purple-500': 'd-badge--purple-500',
-  'red-300': 'd-badge--red-300',
-  white: 'd-badge--white',
-  'gold-200': 'd-badge--gold-200',
+export const BADGE_TYPE_MODIFIERS = {
+  default: '',
+  info: 'd-badge--info',
+  success: 'd-badge--success',
+  warning: 'd-badge--warning',
+  critical: 'd-badge--critical',
+  bulletin: 'd-badge--bulletin',
+  ai: 'd-badge--ai',
+};
+
+export const BADGE_KIND_MODIFIERS = {
+  label: '',
+  count: 'd-badge--count',
 };
