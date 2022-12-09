@@ -2,6 +2,7 @@ import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtCombobox from './combobox.vue';
+import DtInput from '@/components/input/input';
 
 // Constants
 const baseProps = {
@@ -35,7 +36,7 @@ describe('DtCombobox Tests', function () {
   // Helpers
   const _setChildWrappers = () => {
     inputWrapper = wrapper.find('[data-qa="dt-combobox-input-wrapper"]');
-    input = wrapper.find('input');
+    input = wrapper.findComponent({ name: 'dt-input' });
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
     skeletons = wrapper.find('[data-qa="skeleton-text-body"]');
     comboboxEmptyList = wrapper.find('[data-qa="dt-combobox-empty-list"]');
@@ -46,6 +47,11 @@ describe('DtCombobox Tests', function () {
       props,
       attrs,
       slots,
+      global: {
+        components: {
+          DtInput,
+        },
+      },
     });
   };
 
@@ -73,7 +79,7 @@ describe('DtCombobox Tests', function () {
     describe('When a input is provided', function () {
       // Test Setup
       beforeEach(async function () {
-        slots = { input: '<template #input="params"><input v-bind="params.inputProps" /></template>' };
+        slots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
         _mountWrapper();
         _setChildWrappers();
       });
@@ -83,20 +89,20 @@ describe('DtCombobox Tests', function () {
     });
 
     describe('When label is provided', function () {
-      beforeEach(async function () {
-        slots = { input: '<input v-bind="props.inputProps" />' };
+      beforeEach(function () {
+        slots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
         _mountWrapper();
         _setChildWrappers();
       });
 
       it('should provide proper label prop to input element', function () {
-        assert.equal(input.attributes('label'), baseProps.label);
+        assert.equal(input.props('label'), baseProps.label);
       });
       it('should provide proper size prop to input element', function () {
-        assert.equal(input.attributes('size'), baseProps.size);
+        assert.equal(input.props('size'), baseProps.size);
       });
       it('should provide proper description prop to input element', function () {
-        assert.equal(input.attributes('description'), baseProps.description);
+        assert.equal(input.props('description'), baseProps.description);
       });
 
       describe('If label visible prop is false', function () {
@@ -104,7 +110,7 @@ describe('DtCombobox Tests', function () {
           await wrapper.setProps({ labelVisible: false });
         });
         it('should still set aria-label even if label visible is false', function () {
-          assert.equal(input.attributes('aria-label'), baseProps.label);
+          assert.equal(input.find('input').attributes('aria-label'), baseProps.label);
         });
       });
     });
@@ -161,7 +167,7 @@ describe('DtCombobox Tests', function () {
     describe('When a input is provided', function () {
       // Test Setup
       beforeEach(async function () {
-        slots = { input: '<template #input="params"><input v-bind="params.inputProps" /></template>' };
+        slots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
         _mountWrapper();
         _setChildWrappers();
       });
@@ -172,7 +178,7 @@ describe('DtCombobox Tests', function () {
         });
 
         it('aria-expanded should be "false"', function () {
-          assert.isTrue(input.attributes('aria-expanded') === 'false');
+          assert.isTrue(input.find('input').attributes('aria-expanded') === 'false');
         });
       });
 
@@ -182,7 +188,7 @@ describe('DtCombobox Tests', function () {
         });
 
         it('aria-expanded should be "true"', function () {
-          assert.isTrue(input.attributes('aria-expanded') === 'true');
+          assert.isTrue(input.find('input').attributes('aria-expanded') === 'true');
         });
 
         describe('When list is loading', function () {

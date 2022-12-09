@@ -55,6 +55,9 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         stubs: {
           transition: false,
         },
+        components: {
+          DtInput,
+        },
       },
       attachTo: document.body,
     });
@@ -106,7 +109,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     describe('When a input is provided', function () {
       // Test Setup
       beforeEach(async function () {
-        slots = { input: DtInput };
+        slots = { input: '<template #input="{ inputProps }"><dt-input v-bind="inputProps" /></template>' };
         _mountWrapper();
         _setChildWrappers();
       });
@@ -117,19 +120,19 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When label is provided', function () {
       beforeEach(async function () {
-        slots = { input: '<input v-bind="props.inputProps" />' };
+        slots = { input: '<template #input="{ inputProps }"><dt-input v-bind="inputProps" /></template>' };
         _mountWrapper();
         _setChildWrappers();
       });
 
       it('should provide proper label prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('label'), baseProps.label);
+        assert.equal(wrapper.findComponent({ name: 'dt-input' }).props('label'), baseProps.label);
       });
       it('should provide proper size prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('size'), baseProps.size);
+        assert.equal(wrapper.findComponent({ name: 'dt-input' }).props('size'), baseProps.size);
       });
       it('should provide proper description prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('description'), baseProps.description);
+        assert.equal(wrapper.findComponent({ name: 'dt-input' }).props('description'), baseProps.description);
       });
       it('should provide proper aria-label prop to input element', function () {
         assert.equal(wrapper.find('input').attributes('aria-label'), baseProps.label);
@@ -158,7 +161,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       beforeEach(async function () {
         props = { ...props, loading: true };
         slots = {
-          input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
+          input: '<template #input="{ inputProps }"><dt-input id="input" v-bind="inputProps" /></template>',
           list: `<template #list="{ listProps }">
                   <ol id="list" v-bind="listProps">
                     <li role="option">Item 1</li>
@@ -183,7 +186,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       // Test Setup
       beforeEach(async function () {
         slots = {
-          input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
+          input: '<template #input="{ inputProps }"><dt-input id="input" v-bind="inputProps" /></template>',
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps"></ol></template>',
         };
         _mountWrapper();
@@ -205,7 +208,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     describe('When visuallyHiddenClose is true', function () {
       beforeEach(async function () {
         slots = {
-          input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
+          input: '<template #input="{ inputProps }"><dt-input id="input" v-bind="inputProps" /></template>',
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps"></ol></template>',
         };
         _mountWrapper();
@@ -242,7 +245,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     // Test Setup
     beforeEach(async function () {
       slots = {
-        input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
+        input: '<template #input="{ inputProps }"><dt-input id="input" v-bind="inputProps" /></template>',
         list: `<template #list="{ listProps }">
                 <ol id="list" v-bind="listProps">
                   <li role="option">Item 1</li>
@@ -287,10 +290,10 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     // Test Setup
     beforeEach(async function () {
       slots = {
-        input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
+        input: '<template #input="{ inputProps }"><dt-input id="input" v-bind="inputProps" /></template>',
         list: `<template #list="{ listProps }">
                 <ol id="list" v-bind="listProps">
-                  <li role="option">Item 1</li>  
+                  <li role="option">Item 1</li>
                 </ol>
                </template>`,
       };
@@ -364,7 +367,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     describe('When the list is empty', function () {
       beforeEach(async function () {
         slots = {
-          input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
+          input: '<template #input="{ inputProps }"><dt-input id="input" v-bind="inputProps" /></template>',
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps" /></template>',
         };
         _mountWrapper();
