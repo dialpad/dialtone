@@ -1,3 +1,11 @@
+# [2.43.0](https://github.com/dialpad/dialtone-vue/compare/v2.42.0...v2.43.0) (2022-12-09)
+
+
+### Features
+
+* **Badge:** component rework ([#637](https://github.com/dialpad/dialtone-vue/issues/637)) ([943f03a](https://github.com/dialpad/dialtone-vue/commit/943f03a0ccd4cf67d28d5d601430a6ad13ede3ed))
+* **Collapsible:** update collapsible docs ([#633](https://github.com/dialpad/dialtone-vue/issues/633)) ([dc91104](https://github.com/dialpad/dialtone-vue/commit/dc91104920e16a4e64381243ccd17b3dea2b636f))
+
 # [2.42.0](https://github.com/dialpad/dialtone-vue/compare/v2.41.0...v2.42.0) (2022-12-07)
 
 
