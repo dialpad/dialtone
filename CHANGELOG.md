@@ -1,3 +1,10 @@
+## [3.29.1](https://github.com/dialpad/dialtone-vue/compare/v3.29.0...v3.29.1) (2022-12-10)
+
+
+### Bug Fixes
+
+* remove required label on input, fix storybook issues ([c199939](https://github.com/dialpad/dialtone-vue/commit/c199939dc778ce60e75a2bde6439b8413b9bc0c8))
+
 # [3.29.0](https://github.com/dialpad/dialtone-vue/compare/v3.28.0...v3.29.0) (2022-12-09)
 
 
