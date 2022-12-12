@@ -767,6 +767,7 @@
         "lens",
         "photo"
       ],
+      "hd": [],
       "headphones": [
         "music",
         "audio",
@@ -848,6 +849,8 @@
         "audio",
         "music"
       ],
+      "switch-to-cellular": [],
+      "switch-to-hd": [],
       "usb": [
         "universal",
         "serial",
