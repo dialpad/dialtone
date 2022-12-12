@@ -25,9 +25,8 @@ export const argTypesData = {
 
   leftIcon: {
     name: 'leftIcon',
-    description: 'Slot for left hand chip icon',
     options: iconsList,
-    mapping: iconsList,
+    description: 'Slot for left hand chip icon',
     table: {
       category: 'slots',
       type: {
@@ -37,8 +36,7 @@ export const argTypesData = {
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },
@@ -57,7 +55,6 @@ export const argTypesData = {
   rightIcon: {
     name: 'rightIcon',
     options: iconsList,
-    mapping: iconsList,
     description: 'Slot for right hand chip icon',
     table: {
       category: 'slots',
@@ -68,8 +65,7 @@ export const argTypesData = {
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },

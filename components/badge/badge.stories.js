@@ -20,23 +20,19 @@ export const argTypesData = {
   },
   iconLeft: {
     options: iconsList,
-    mapping: iconsList,
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },
   iconRight: {
     options: iconsList,
-    mapping: iconsList,
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },
