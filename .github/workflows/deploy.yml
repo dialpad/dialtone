@@ -50,7 +50,7 @@ jobs:
         run: npm publish
 
       - name: Deploy to GitHub Pages (Production)
-        if: ${{ github.ref == 'refs/heads/production' }}
+        if: ${{ github.ref == 'refs/heads/production' }} && (success() || failure())
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
@@ -64,7 +64,7 @@ jobs:
         run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
 
       - name: Deploy to GitHub Pages (Vue 3)
-        if: ${{ github.ref == 'refs/heads/vue3' }}
+        if: ${{ github.ref == 'refs/heads/vue3' }} && (success() || failure())
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
