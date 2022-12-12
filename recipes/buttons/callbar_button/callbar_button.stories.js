@@ -57,7 +57,6 @@ export const argTypesData = {
   icon: {
     name: 'icon',
     options: iconsList,
-    mapping: iconsList,
     description: 'Slot for button icon',
     table: {
       category: 'slots',
@@ -68,8 +67,7 @@ export const argTypesData = {
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },

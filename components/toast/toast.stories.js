@@ -26,15 +26,13 @@ export const argTypesData = {
   },
   icon: {
     options: iconsList,
-    mapping: iconsList,
     table: {
       type: { summary: 'component' },
     },
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },

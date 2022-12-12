@@ -14,12 +14,10 @@ export const argTypesData = {
   },
   name: {
     options: iconsList,
-    mapping: iconsList,
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },

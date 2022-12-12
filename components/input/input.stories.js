@@ -22,29 +22,25 @@ export const argTypesData = {
   },
   leftIcon: {
     options: iconsList,
-    mapping: iconsList,
     table: {
       type: { summary: 'VNode' },
     },
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },
   rightIcon: {
     options: iconsList,
-    mapping: iconsList,
     table: {
       type: { summary: 'VNode' },
     },
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },

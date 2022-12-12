@@ -27,7 +27,6 @@ export const argTypesData = {
   },
   left: {
     options: iconsList,
-    mapping: iconsList,
     description: 'Slot for the left content',
     table: {
       category: 'slots',
@@ -36,14 +35,12 @@ export const argTypesData = {
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },
   right: {
     options: iconsList,
-    mapping: iconsList,
     description: 'Slot for the right content',
     table: {
       category: 'slots',
@@ -52,8 +49,7 @@ export const argTypesData = {
     control: {
       type: 'select',
       labels: {
-        // 'labels' maps option values to string labels
-        '': '(empty)',
+        undefined: '(empty)',
       },
     },
   },
