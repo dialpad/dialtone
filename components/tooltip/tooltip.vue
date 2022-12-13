@@ -307,7 +307,7 @@ export default {
     },
 
     hasVisibleFocus () {
-      return getAnchor(this.$refs.anchor).hasAttribute('data-focus-visible-added');
+      return getAnchor(this.$refs.anchor).matches(':focus-visible');
     },
 
     onEnterAnchor (e) {
