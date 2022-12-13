@@ -80,7 +80,7 @@
     "node": "16"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "0.0.14-vue3",
+    "@dialpad/dialtone-icons": "0.0.15-vue3",
     "emoji-regex": "^10.1.0",
     "emoji-toolkit": "^6.6.0",
     "tippy.js": "^6.3.7"
