@@ -1,3 +1,15 @@
+# [2.44.0](https://github.com/dialpad/dialtone-vue/compare/v2.43.2...v2.44.0) (2022-12-14)
+
+
+### Bug Fixes
+
+* **Tooltip:** use selector for focus visible rather than attr ([#644](https://github.com/dialpad/dialtone-vue/issues/644)) ([e5da2bb](https://github.com/dialpad/dialtone-vue/commit/e5da2bb66c3f21a0c521eff81ce0df68154bcad1))
+
+
+### Features
+
+* **Collapsible:** change to cubic-bezier transition ([#646](https://github.com/dialpad/dialtone-vue/issues/646)) ([76e2989](https://github.com/dialpad/dialtone-vue/commit/76e298972bed6624d739dbd392b7e6fff2e812c0))
+
 ## [2.43.2](https://github.com/dialpad/dialtone-vue/compare/v2.43.1...v2.43.2) (2022-12-10)
 
 
