@@ -144,6 +144,6 @@ export default {
   .enter-active,
   .leave-active {
     overflow: hidden;
-    transition: height .3s linear;
+    transition: height .3s cubic-bezier(0.25, 1, 0.5, 1);
   }
 </style>
