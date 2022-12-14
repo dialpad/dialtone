@@ -1,4 +1,4 @@
-# eslint-plugin-dialtone-eslint-plugin
+# eslint-plugin-dialtone
 
 dialtone eslint plugin
 
@@ -10,20 +10,20 @@ You'll first need to install [ESLint](https://eslint.org/):
 npm i eslint --save-dev
 ```
 
-Next, install `eslint-plugin-dialtone-eslint-plugin`:
+Next, install `@dialpad/eslint-plugin-dialtone`:
 
 ```sh
-npm install eslint-plugin-dialtone-eslint-plugin --save-dev
+npm install @dialpad/eslint-plugin-dialtone --save-dev
 ```
 
 ## Usage
 
-Add `dialtone-eslint-plugin` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `@dialpad/dialtone` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
     "plugins": [
-        "dialtone-eslint-plugin"
+        "@dialpad/dialtone"
     ]
 }
 ```
@@ -34,7 +34,7 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "dialtone-eslint-plugin/rule-name": 2
+        "@dialpad/dialtone/rule-name": 2
     }
 }
 ```
