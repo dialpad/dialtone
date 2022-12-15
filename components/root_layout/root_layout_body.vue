@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['root-layout__body', bodyClasses]"
+    :class="['root-layout__body', 'd-fl-grow1', bodyClasses]"
     data-qa="root-layout-body"
   >
     <aside
