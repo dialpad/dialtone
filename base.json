@@ -645,11 +645,11 @@
         },
         "inverted": {
           "primary": {
-            "value": "{color.black.100}",
+            "value": "{color.neutral.white}",
             "type": "color"
           },
           "secondary": {
-            "value": "{color.black.300}",
+            "value": "{color.black.200}",
             "type": "color"
           }
         }
