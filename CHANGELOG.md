@@ -1,3 +1,10 @@
+## [3.30.1](https://github.com/dialpad/dialtone-vue/compare/v3.30.0...v3.30.1) (2022-12-15)
+
+
+### Bug Fixes
+
+* **Root Layout:** full height support ([#649](https://github.com/dialpad/dialtone-vue/issues/649)) ([e2aa1cb](https://github.com/dialpad/dialtone-vue/commit/e2aa1cb0424a540fbff2c2261cd2a67cde6e74e0))
+
 # [3.30.0](https://github.com/dialpad/dialtone-vue/compare/v3.29.1...v3.30.0) (2022-12-15)
 
 
