@@ -1,5 +1,5 @@
 /**
- * @fileoverview Finds and warns about old dialtone icons usage
+ * @fileoverview Finds old dialtone svg icons usage
  * @author julio ortega
  */
 "use strict";
@@ -8,7 +8,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require("../../../lib/rules/old-icons-import"), RuleTester = require("eslint").RuleTester;
+const rule = require("../../../lib/rules/old-svg-icons"), RuleTester = require("eslint").RuleTester;
 
 
 //------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ const rule = require("../../../lib/rules/old-icons-import"), RuleTester = requir
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({parserOptions: {ecmaVersion: 7, sourceType: 'module'}});
-ruleTester.run("old-dialtone-icons", rule, {
+ruleTester.run("old-svg-icons", rule, {
     valid: [
         {
             name: 'New icon import',
@@ -34,7 +34,7 @@ ruleTester.run("old-dialtone-icons", rule, {
             code: "import svgLockIcon from '../node_modules/@dialpad/dialtone/lib/build/svg/system/lock.svg';",
             errors: [
                 {
-                    messageId: "avoidImport"
+                    messageId: "avoidSVGImport"
                 }
             ],
         },
@@ -43,7 +43,7 @@ ruleTester.run("old-dialtone-icons", rule, {
             code: "import svgLockIcon from '../node_modules/@dialpad/dialtone/lib/dist/svg/system/lock.svg';",
             errors: [
                 {
-                    messageId: "avoidImport"
+                    messageId: "avoidSVGImport"
                 }
             ],
         }

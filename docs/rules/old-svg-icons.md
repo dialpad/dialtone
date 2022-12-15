@@ -1,7 +1,7 @@
-# Finds old dialtone icons usage (old-icons-import)
+# Finds old dialtone svg icons usage (old-svg-icons)
 
 We separated icons from dialtone into dialtone-icons repo, 
-so we are deprecating old icons on dialtone once the migrations are finished.
+so we are deprecating old svg icons on dialtone once the migrations are finished.
 
 ## Rule Details
 
