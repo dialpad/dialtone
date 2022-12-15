@@ -183,15 +183,15 @@
           "type": "color"
         },
         "300": {
-          "value": "#FF2E2E",
+          "value": "#EC0E0E",
           "type": "color"
         },
         "400": {
-          "value": "#A41111",
+          "value": "#B70B0B",
           "type": "color"
         },
         "500": {
-          "value": "#540000",
+          "value": "#5B0505",
           "type": "color"
         }
       },
@@ -632,7 +632,7 @@
           "type": "color"
         },
         "error": {
-          "value": "{color.red.400}",
+          "value": "{color.red.300}",
           "type": "color"
         },
         "success": {
