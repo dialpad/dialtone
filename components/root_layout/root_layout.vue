@@ -1,5 +1,5 @@
 <template>
-  <div class="root-layout">
+  <div class="root-layout d-d-flex d-fd-column d-h100vh">
     <header
       v-if="$slots.header"
       :class="['root-layout__header', headerClass, { 'root-layout__header--sticky': headerSticky }]"
