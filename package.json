@@ -3,11 +3,39 @@
   "version": "1.0.0",
   "description": "dialtone eslint plugin",
   "keywords": [
+    "Dialpad",
+    "Dialtone",
     "eslint",
     "eslintplugin",
     "eslint-plugin"
   ],
-  "author": "julio ortega",
+  "contributors": [
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Jose Silva",
+      "email": "jose.silva@dialpad.com",
+      "url": "https://github.com/josedialpad"
+    }
+  ],
+  "repository": "git@github.com:dialpad/eslint-plugin-dialtone.git",
+  "bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+  "license": "MIT",
   "main": "./lib/index.js",
   "exports": "./lib/index.js",
   "scripts": {
@@ -28,6 +56,5 @@
   },
   "peerDependencies": {
     "eslint": ">=7"
-  },
-  "license": "ISC"
+  }
 }

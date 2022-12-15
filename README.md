@@ -1,6 +1,14 @@
 # eslint-plugin-dialtone
 
-dialtone eslint plugin
+dialtone eslint plugin containing rules to help developers maintain dialtone recommended practices. 
+
+## Adding a new rule
+
+We use yeoman generator to generate new rules, simply run the command below and follow the steps.
+
+```shell
+yo eslint:rule
+```
 
 ## Installation
 
