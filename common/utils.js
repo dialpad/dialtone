@@ -22,6 +22,15 @@ export function getUniqueString (prefix = DEFAULT_PREFIX) {
   return `${prefix}${UNIQUE_ID_COUNTER++}`;
 }
 
+/**
+ * Returns a random element from array
+ * @param array
+ * @returns {*}
+ */
+export function getRandomElement (array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
 export function formatMessages (messages) {
   if (!messages) {
     return [];
@@ -134,6 +143,7 @@ export const pascalCaseToKebabCase = (string) => {
 
 export default {
   getUniqueString,
+  getRandomElement,
   formatMessages,
   filterFormattedMessages,
   hasFormattedMessageOfType,

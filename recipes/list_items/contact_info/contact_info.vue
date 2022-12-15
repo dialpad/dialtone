@@ -22,9 +22,7 @@
         </dt-avatar>
         <dt-avatar
           v-else-if="avatarInitials"
-          kind="initials"
           size="lg"
-          :color="avatarColor"
         >
           {{ avatarInitials }}
         </dt-avatar>
@@ -81,7 +79,6 @@
 <script>
 import DtListItem from '@/components/list_item/list_item';
 import DtAvatar from '@/components/avatar/avatar';
-import { AVATAR_COLOR_MODIFIERS } from '@/components/avatar/avatar_constants';
 import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants';
 import utils from '@/common/utils';
 
@@ -132,15 +129,6 @@ export default {
     avatarInitials: {
       type: String,
       default: '',
-    },
-
-    /**
-     * Background color of initials letters in avatar.
-     */
-    avatarColor: {
-      type: String,
-      default: 'base',
-      validator: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
     },
 
     /**

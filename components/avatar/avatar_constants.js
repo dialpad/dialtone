@@ -5,9 +5,11 @@ export const AVATAR_KIND_MODIFIERS = {
 };
 
 export const AVATAR_SIZE_MODIFIERS = {
+  xs: 'd-avatar--xs',
   sm: 'd-avatar--sm',
   md: 'd-avatar--md',
   lg: 'd-avatar--lg',
+  xl: 'd-avatar--xl',
 };
 
 export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
@@ -15,35 +17,27 @@ export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
   lg: 'd-avatar__presence--lg',
 };
 
-export const AVATAR_COLOR_MODIFIERS = {
-  base: '',
-  'orange-200': 'd-avatar--orange-200',
-  'orange-300': 'd-avatar--orange-300',
-  'orange-400': 'd-avatar--orange-400',
-  'orange-500': 'd-avatar--orange-500',
-  'magenta-100': 'd-avatar--magenta-100',
-  'magenta-200': 'd-avatar--magenta-200',
-  'magenta-300': 'd-avatar--magenta-300',
-  'magenta-400': 'd-avatar--magenta-400',
-  'purple-200': 'd-avatar--purple-200',
-  'purple-300': 'd-avatar--purple-300',
-  'purple-400': 'd-avatar--purple-400',
-  'purple-500': 'd-avatar--purple-500',
-  'gold-100': 'd-avatar--gold-100',
-  'gold-200': 'd-avatar--gold-200',
-  'gold-300': 'd-avatar--gold-300',
-  'gold-500': 'd-avatar--gold-500',
-};
-
 export const AVATAR_ICON_SIZES = {
+  xs: '100',
   sm: '200',
   md: '400',
   lg: '500',
+  xl: '600',
 };
+
+export const AVATAR_ANGLES = [45, -45, 90, -90, 135, -135, 180, -180];
+
+export const GRADIENT_COLORS = {
+  with100: ['purple-100', 'magenta-100', 'gold-100', 'blue-100'],
+  with200: ['purple-200', 'magenta-200', 'gold-200', 'blue-200'],
+};
+
+export const MAX_GRADIENT_COLORS = 3;
+export const MAX_GRADIENT_COLORS_100 = 2;
 
 export default {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
-  AVATAR_COLOR_MODIFIERS,
   AVATAR_ICON_SIZES,
+  AVATAR_ANGLES,
 };

@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
-import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
+import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
@@ -84,9 +84,11 @@ describe('DtAvatar Tests', function () {
       const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         slots = { default: imageSlot };
         _setWrappers();
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
       });
 
       it('image should exist', function () {
@@ -127,13 +129,14 @@ describe('DtAvatar Tests', function () {
       const initials = 'DP';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           ...basePropsData,
-          kind: 'initials',
         };
         slots = { default: initials };
         _setWrappers();
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
       });
 
       it('initial slot should exist', function () {
@@ -142,6 +145,48 @@ describe('DtAvatar Tests', function () {
 
       it('should have correct class', function () {
         itBehavesLikeHasCorrectClass(avatar, AVATAR_KIND_MODIFIERS.initials);
+      });
+    });
+
+    describe('With initials in slot and size is sm', function () {
+      // Test Environment
+      const initials = 'DP';
+
+      // Test Setup
+      beforeEach(function () {
+        propsData = {
+          ...basePropsData,
+        };
+        slots = { default: initials };
+        _setWrappers();
+      });
+
+      it(' shows a single character', async function () {
+        await wrapper.setProps({
+          size: 'sm',
+        });
+        assert.strictEqual(avatar.text(), initials[0]);
+      });
+    });
+
+    describe('With initials in slot and size is xs', function () {
+      // Test Environment
+      const initials = 'DP';
+
+      // Test Setup
+      beforeEach(function () {
+        propsData = {
+          ...basePropsData,
+        };
+        slots = { default: initials };
+        _setWrappers();
+      });
+
+      it('has no initials', async function () {
+        await wrapper.setProps({
+          size: 'xs',
+        });
+        assert.strictEqual(avatar.text(), '');
       });
     });
 
@@ -164,25 +209,6 @@ describe('DtAvatar Tests', function () {
       });
     });
 
-    describe('When a color is provided', function () {
-      // Test Environment
-      const color = 'orange-500';
-
-      // Test Setup
-      beforeEach(function () {
-        propsData = {
-          ...basePropsData,
-          color,
-        };
-        slots = { default: DEFAULT_SLOT };
-        _setWrappers();
-      });
-
-      it('should have color variant class on the avatar', function () {
-        assert.isTrue(avatar.classes(AVATAR_COLOR_MODIFIERS[color]));
-      });
-    });
-
     describe('With Presence', function () {
       const initials = 'DP';
 
@@ -190,7 +216,6 @@ describe('DtAvatar Tests', function () {
       beforeEach(function () {
         propsData = {
           ...basePropsData,
-          kind: 'initials',
         };
         slots = { default: initials };
         _setWrappers();
@@ -256,19 +281,6 @@ describe('DtAvatar Tests', function () {
       });
     });
 
-    describe('Color Validator', function () {
-      // Test Environment
-      const prop = DtAvatar.props.color;
-
-      describe('When provided color is in AVATAR_COLOR_MODIFIERS', function () {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
-      });
-
-      describe('When provided color is not in AVATAR_COLOR_MODIFIERS', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_COLOR`);
-      });
-    });
-
     describe('Image Attrs Validation', function () {
       // Test Environment
       const warningMessage = 'src and alt attributes are required for image avatars';
@@ -292,11 +304,9 @@ describe('DtAvatar Tests', function () {
       describe('When image src and alt attributes are provided', function () {
         // Test Setup
         beforeEach(function () {
-          attrs = {
-            ...baseAttrs,
-            src: IMAGE_ATTRS.SRC,
-            alt: IMAGE_ATTRS.ALT,
-          };
+          const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
+
+          slots = { default: imageSlot };
           _setWrappers();
         });
 

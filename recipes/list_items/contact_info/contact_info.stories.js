@@ -6,7 +6,6 @@ import DtRecipeContactInfoMdx from './contact_info.mdx';
 import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story';
 import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story';
 import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants';
-import { AVATAR_COLOR_MODIFIERS } from '@/components/avatar/avatar_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -24,13 +23,6 @@ export const argTypesData = {
     table: {
       type: { summary: 'string' },
     },
-  },
-
-  avatarColor: {
-    control: {
-      type: 'select',
-    },
-    options: Object.keys(AVATAR_COLOR_MODIFIERS),
   },
 
   userStatusColor: {

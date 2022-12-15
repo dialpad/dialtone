@@ -2,8 +2,8 @@
   <dt-avatar
     :id="id"
     :size="size"
-    :color="color"
     :presence="presence"
+    :initials="initials"
   >
     <html-fragment
       :html="defaultSlot"
