@@ -15,7 +15,7 @@ const rule = require("../../../lib/rules/old-vue-icons"), RuleTester = require("
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions: {ecmaVersion: 7, sourceType: 'module'}});
+const ruleTester = new RuleTester({parserOptions: {sourceType: 'module', ecmaVersion: 'latest'}});
 ruleTester.run("old-vue-icons", rule, {
   valid: [
     {

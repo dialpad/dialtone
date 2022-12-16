@@ -15,7 +15,7 @@ const rule = require("../../../lib/rules/old-svg-icons"), RuleTester = require("
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions: {ecmaVersion: 7, sourceType: 'module'}});
+const ruleTester = new RuleTester({parserOptions: {sourceType: 'module', ecmaVersion: 'latest'}});
 ruleTester.run("old-svg-icons", rule, {
     valid: [
         {

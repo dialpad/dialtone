@@ -23,8 +23,6 @@ import svgLockIcon from '@dialpad/dialtone-icons/dist/svg/lock.svg';
 
 **If you can use vue**
 ```js
-
 import { DtIcon } from '@dialpad/dialtone-vue';
 <dt-icon name="lock" />
-
 ```
