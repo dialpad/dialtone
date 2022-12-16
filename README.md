@@ -10,6 +10,11 @@ We use yeoman generator to generate new rules, simply run the command below and 
 yo eslint:rule
 ```
 
+### Writing rules
+
+You can try the code you're trying to detect here: https://astexplorer.net/ to know which function you need to call
+inside `create` function.
+
 ## Installation
 
 You'll first need to install [ESLint](https://eslint.org/):

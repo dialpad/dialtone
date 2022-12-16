@@ -7,6 +7,9 @@ module.exports = {
     "plugin:eslint-plugin/recommended",
     "plugin:node/recommended",
   ],
+  parserOptions: {
+    ecmaVersion: 'latest'
+  },
   env: {
     node: true,
   },
