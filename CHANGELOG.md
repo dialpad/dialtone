@@ -1,3 +1,11 @@
+## [2.45.1](https://github.com/dialpad/dialtone-vue/compare/v2.45.0...v2.45.1) (2022-12-16)
+
+
+### Bug Fixes
+
+* **Chip:** fix chip with avatar story ([#650](https://github.com/dialpad/dialtone-vue/issues/650)) ([0b35dc3](https://github.com/dialpad/dialtone-vue/commit/0b35dc356d27fe5d2fec45314d0aa33d74efbdc0))
+* **Root Layout:** full height support ([#648](https://github.com/dialpad/dialtone-vue/issues/648)) ([c64a211](https://github.com/dialpad/dialtone-vue/commit/c64a21103769fda63d245458a9fc824957a4c17a))
+
 # [2.45.0](https://github.com/dialpad/dialtone-vue/compare/v2.44.0...v2.45.0) (2022-12-15)
 
 
