@@ -41,10 +41,7 @@
           @click="onListItemSelect(i)"
         >
           <template slot="left">
-            <dt-avatar
-              kind="initials"
-              color="purple-400"
-            >
+            <dt-avatar>
               <span aria-hidden="true">{{ i + 1 }}</span>
             </dt-avatar>
           </template>

@@ -25,9 +25,12 @@
       slot="avatar"
     >
       <dt-avatar
-        color="purple-200"
-        v-html="avatar"
-      />
+        :size="size"
+      >
+        <html-fragment
+          :html="avatar"
+        />
+      </dt-avatar>
     </template>
     <span
       v-if="defaultSlot"
@@ -41,10 +44,11 @@ import DtChip from './chip';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { CHIP_ICON_SIZES } from '@/components/chip/chip_constants';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtChipDefault',
-  components: { DtChip, DtAvatar, DtIcon },
+  components: { DtChip, DtAvatar, DtIcon, htmlFragment },
   computed: {
     iconSize () {
       return CHIP_ICON_SIZES[this.size];
