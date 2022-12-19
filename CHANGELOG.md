@@ -1,3 +1,10 @@
+# [3.31.0](https://github.com/dialpad/dialtone-vue/compare/v3.30.1...v3.31.0) (2022-12-19)
+
+
+### Features
+
+* **Avatar:** dialtone 7 visual refresh ([#653](https://github.com/dialpad/dialtone-vue/issues/653)) ([accc6f5](https://github.com/dialpad/dialtone-vue/commit/accc6f5a545b53dad5dfa1a5f08ff4fb8c829d57))
+
 ## [3.30.1](https://github.com/dialpad/dialtone-vue/compare/v3.30.0...v3.30.1) (2022-12-15)
 
 
