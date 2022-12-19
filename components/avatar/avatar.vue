@@ -5,13 +5,16 @@
       'd-avatar',
       AVATAR_KIND_MODIFIERS[kind],
       AVATAR_SIZE_MODIFIERS[size],
-      AVATAR_COLOR_MODIFIERS[color],
       avatarClass,
     ]"
+    :style="initialKindStyle"
     data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
-    <slot />
+    <slot v-if="showDefaultSlot" />
+    <span v-else-if="showInitials">
+      {{ formattedInitials }}
+    </span>
     <dt-presence
       v-if="presence"
       :presence="presence"
@@ -27,12 +30,16 @@
 
 <script>
 import { warn } from 'vue';
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, getRandomElement } from '@/common/utils';
 import { DtPresence } from '../presence';
 import {
-  AVATAR_COLOR_MODIFIERS,
-  AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS,
+  AVATAR_KIND_MODIFIERS,
+  AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
+  AVATAR_ANGLES,
+  GRADIENT_COLORS,
+  MAX_GRADIENT_COLORS,
+  MAX_GRADIENT_COLORS_100,
 } from './avatar_constants.js';
 /**
  * An avatar is a visual representation of a user or object.
@@ -55,26 +62,12 @@ export default {
 
     /**
      * The size of the avatar
-     * @values sm, md, lg
+     * @values xs, sm, md, lg, xl
      */
     size: {
       type: String,
       default: 'md',
       validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(size),
-    },
-
-    /**
-     * The color of the avatar
-     * @values base
-     * orange-200, orange-300, orange-400, orange-500,
-     * pink-300, pink-400, pink-500, pink-600,
-     * purple-200, purple-300, purple-500, purple-600,
-     * yellow-200, yellow-300, yellow-400, yellow-500
-     */
-    color: {
-      type: String,
-      default: 'base',
-      validator: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
     },
 
     /**
@@ -102,17 +95,47 @@ export default {
       type: Object,
       default: () => ({}),
     },
+
+    /**
+     * Initials to be shown in the avatar. Used as fallback if image fails to load.
+     */
+    initials: {
+      type: String,
+      default: '',
+    },
   },
 
   data () {
     return {
       // initials, image or icon
-      kind: 'initials',
+      kind: 'image',
       AVATAR_SIZE_MODIFIERS,
-      AVATAR_COLOR_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
+      imageLoadedSuccessfully: null,
+      slottedInitials: '',
+      formattedInitials: '',
     };
+  },
+
+  computed: {
+    showDefaultSlot () {
+      return this.kind !== 'initials' && this.imageLoadedSuccessfully !== false;
+    },
+
+    showInitials () {
+      return this.kind === 'initials' || this.initials;
+    },
+
+    initialKindStyle () {
+      const randomGradientColorStops = this.randomizeGradientColorStops();
+      return {
+        '--avatar-gradient-angle': `${this.randomizeGradientAngle()}deg`,
+        '--avatar-gradient-stop-1': `var(--${randomGradientColorStops[0]})`,
+        '--avatar-gradient-stop-2': `var(--${randomGradientColorStops[1]})`,
+        '--avatar-gradient-stop-3': `var(--${randomGradientColorStops[2]})`,
+      };
+    },
   },
 
   mounted () {
@@ -120,18 +143,49 @@ export default {
   },
 
   updated () {
-    this.init();
+    if (this.kind === 'initials') {
+      this.slottedInitials = this.$el.children[0].textContent;
+      this.formatInitials(this.slottedInitials);
+    }
   },
 
   methods: {
     init () {
-      const firstChild = this.$el.children[0];
+      const firstChild = this.$el.children[0] || this.$el;
+
       if (firstChild) {
         this.setKind(firstChild);
+
         if (this.kind === 'image') {
           firstChild.classList.add('d-avatar__image');
+          this.validateImageAttrsPresence();
+
+          firstChild.addEventListener('error', () => {
+            this.formatInitials(this.initials);
+            this.imageLoadedSuccessfully = false;
+          });
+
+          firstChild.addEventListener('load', () => {
+            firstChild.classList.add('d-avatar--image-loaded');
+            this.imageLoadedSuccessfully = true;
+          });
         }
-        this.validateImageAttrsPresence();
+
+        if (this.kind === 'initials') {
+          this.slottedInitials = firstChild.textContent;
+          this.formatInitials(this.slottedInitials);
+        }
+      }
+    },
+
+    formatInitials (initials) {
+      if (!initials) return;
+      if (this.size === 'xs') {
+        this.formattedInitials = '';
+      } else if (this.size === 'sm') {
+        this.formattedInitials = initials.trim()[0];
+      } else {
+        this.formattedInitials = initials.trim().slice(0, 2);
       }
     },
 
@@ -149,14 +203,39 @@ export default {
       return element?.tagName?.toUpperCase() === 'IMG';
     },
 
-    validateImageAttrsPresence () {
-      if (this.kind === 'image') {
-        // Check that default slot image required attributes are provided
-        if (!this.$el.children[0].getAttribute('src') || !this.$el.children[0].getAttribute('alt')) {
-          warn('src and alt attributes are required for image avatars', this);
+    randomizeGradientAngle () {
+      return getRandomElement(AVATAR_ANGLES);
+    },
+
+    randomizeGradientColorStops () {
+      const colors = new Set();
+      // get 3 unique colors, 2 from colorsWith100 and one from colorsWith200
+      while (colors.size < MAX_GRADIENT_COLORS) {
+        if (colors.size === MAX_GRADIENT_COLORS_100) {
+          colors.add(getRandomElement(GRADIENT_COLORS.with200));
+        } else {
+          colors.add(getRandomElement(GRADIENT_COLORS.with100));
         }
+      }
+      const shuffledColors = Array.from(colors).sort(() => 0.5 - Math.random());
+      return shuffledColors;
+    },
+
+    validateImageAttrsPresence () {
+      const isSrcMissing = !this.$el.children[0].getAttribute('src');
+      const isAltMissing = !this.$el.children[0].getAttribute('alt');
+
+      if (isSrcMissing || isAltMissing) {
+        warn('src and alt attributes are required for image avatars', this);
       }
     },
   },
 };
 </script>
+
+<style lang="less">
+.d-avatar--image-loaded {
+  background-color: transparent;
+  background-image: unset;
+}
+</style>

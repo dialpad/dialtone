@@ -106,8 +106,9 @@ describe('DtRecipeContactInfo Tests', function () {
         await wrapper.setProps({
           avatarSrc: '',
           avatarInitials: 'JL',
-          avatarColor: 'orange-500',
         });
+        _setChildWrappers();
+        await wrapper.vm.$nextTick();
         _setChildWrappers();
       });
       it('Avatar should display', function () {
@@ -116,9 +117,6 @@ describe('DtRecipeContactInfo Tests', function () {
       it('Should display correct initials', function () {
         assert.strictEqual(avatarElement.text(), 'JL');
       });
-      it('Should have correct background color', function () {
-        assert.include(avatarElement.classes(), 'd-avatar--orange-500');
-      });
     });
 
     describe('When both `avatarSrc` and `avatarInitials` are empty', function () {
@@ -126,7 +124,6 @@ describe('DtRecipeContactInfo Tests', function () {
         await wrapper.setProps({
           avatarSrc: '',
           avatarInitials: '',
-          avatarColor: 'orange-500',
         });
         _setChildWrappers();
       });
@@ -152,19 +149,6 @@ describe('DtRecipeContactInfo Tests', function () {
     /*
      * Test(s) to ensure that custom validators are working as expected
      */
-
-    describe('avatarColor Validator', function () {
-      // Test Environment
-      const prop = DtRecipeContactInfo.props.avatarColor;
-
-      describe('When provided color code is in AVATAR_COLOR_MODIFIERS', function () {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
-      });
-
-      describe('When provided color code is not in AVATAR_COLOR_MODIFIERS', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_CODE`);
-      });
-    });
 
     describe('userStatusColor Validator', function () {
       // Test Environment

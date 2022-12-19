@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtAvatar from './avatar';
 import DtAvatarMdx from './avatar.mdx';
-import { AVATAR_COLOR_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
+import { AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarIconTemplate from './avatar_icon.story.vue';
 import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
@@ -29,11 +29,6 @@ export const argTypesData = {
   presence: {
     defaultValue: null,
     options: PRESENCE_STATES_LIST,
-    control: 'select',
-  },
-  color: {
-    defaultValue: 'base',
-    options: Object.keys(AVATAR_COLOR_MODIFIERS),
     control: 'select',
   },
   presenceProps: {
@@ -95,7 +90,6 @@ Image.args = {
 };
 export const Icon = IconTemplate.bind({});
 Icon.args = {
-  color: 'purple-200',
   default: 'accessibility',
 };
 
@@ -113,7 +107,6 @@ Icon.argTypes = {
 
 export const Initials = DefaultTemplate.bind({});
 Initials.args = {
-  color: 'purple-200',
   default: 'DP',
 };
 

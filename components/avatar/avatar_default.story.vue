@@ -2,8 +2,8 @@
   <dt-avatar
     :id="$attrs.id"
     :size="$attrs.size"
-    :color="$attrs.color"
     :presence="$attrs.presence"
+    :initials="$attrs.initials"
   >
     <v-html :html="defaultSlot" />
   </dt-avatar>

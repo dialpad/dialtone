@@ -25,7 +25,7 @@
       #avatar
     >
       <dt-avatar
-        color="purple-200"
+        :size="$attrs.size"
       >
         <v-html :html="$attrs.avatar" />
       </dt-avatar>

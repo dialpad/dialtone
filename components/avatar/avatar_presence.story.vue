@@ -2,7 +2,6 @@
   <div class="d-d-flex">
     <div class="d-p8 d-d-flex d-ai-center">
       <dt-avatar
-        color="purple-200"
         presence="busy"
         size="sm"
       >
@@ -16,7 +15,6 @@
 
     <div class="d-p8 d-d-flex d-ai-center">
       <dt-avatar
-        color="purple-200"
         presence="busy"
       >
         <img
@@ -29,7 +27,6 @@
 
     <div class="d-p8 d-d-flex d-ai-center">
       <dt-avatar
-        color="purple-200"
         presence="busy"
         size="lg"
       >
