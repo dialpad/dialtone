@@ -1,3 +1,10 @@
+# [2.46.0](https://github.com/dialpad/dialtone-vue/compare/v2.45.1...v2.46.0) (2022-12-20)
+
+
+### Features
+
+* **Modal:** add contentClass prop ([#654](https://github.com/dialpad/dialtone-vue/issues/654)) ([08d6dad](https://github.com/dialpad/dialtone-vue/commit/08d6dadf720273cedede7db92513ccf2828abeec))
+
 ## [2.45.1](https://github.com/dialpad/dialtone-vue/compare/v2.45.0...v2.45.1) (2022-12-16)
 
 
