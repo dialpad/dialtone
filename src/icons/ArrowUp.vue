@@ -1,1 +1,0 @@
-<template><svg aria-hidden="true" role="img" data-name="Arrow Up" class="d-icon d-icon--arrowUp" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M5.646 2.146a.5.5 0 0 1 .708 0l3.5 3.5a.5.5 0 0 1-.708.708L6.5 3.707V9.5a.5.5 0 0 1-1 0V3.707L2.854 6.354a.5.5 0 1 1-.708-.708l3.5-3.5Z" clip-rule="evenodd"/></svg></template>
