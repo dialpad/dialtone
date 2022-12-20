@@ -172,6 +172,16 @@ describe('DtModal Tests', function () {
     assert.isTrue(banner.classes(bannerClass));
   });
 
+  it('Should pass content class through to content modal element', async function () {
+    const contentClass = 'content-class';
+    assert.isFalse(copy.classes(contentClass));
+
+    await wrapper.setProps({ contentClass });
+    _setChildWrappers();
+
+    assert.isTrue(copy.classes(contentClass));
+  });
+
   it('Should NOT contain a visually hidden close button', function () {
     itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
   });

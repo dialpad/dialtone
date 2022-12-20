@@ -60,7 +60,10 @@
         </h2>
         <div
           v-if="$slots.default"
-          class="d-modal__content"
+          :class="[
+            'd-modal__content',
+            contentClass,
+          ]"
           data-qa="dt-modal-copy"
         >
           <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
@@ -68,7 +71,10 @@
         </div>
         <p
           v-else
-          class="d-modal__content"
+          :class="[
+            'd-modal__content',
+            contentClass,
+          ]"
           data-qa="dt-modal-copy"
         >
           {{ copy }}
@@ -236,6 +242,16 @@ export default {
      * same API as Vue's built-in handling of the class attribute.
      */
     dialogClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the content element within the modal.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
+     */
+    contentClass: {
       type: [String, Object, Array],
       default: '',
     },

@@ -11,6 +11,7 @@
       :modal-class="$attrs.modalClass"
       :banner-class="$attrs.bannerClass"
       :dialog-class="$attrs.dialogClass"
+      :content-class="$attrs.contentClass"
       :hide-close="$attrs.hideClose"
       :labelled-by-id="$attrs.labelledById"
       :fixed-header-footer="$attrs.fixedHeaderFooter"
