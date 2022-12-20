@@ -925,6 +925,8 @@
         "strong",
         "format"
       ],
+      "branch": [],
+      "call-merge": [],
       "edit": [
         "pencil",
         "change"
@@ -940,6 +942,7 @@
         "delete",
         "clear"
       ],
+      "expert-node": [],
       "image": [
         "picture",
         "photo"
