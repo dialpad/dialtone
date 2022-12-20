@@ -19,4 +19,5 @@ jobs:
         git config user.email github-actions@github.com
         git add -A
         git commit -m "deploy preview cleanup"
+        git pull
         git push
