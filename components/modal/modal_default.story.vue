@@ -11,6 +11,7 @@
       :modal-class="modalClass"
       :banner-class="bannerClass"
       :dialog-class="dialogClass"
+      :content-class="contentClass"
       :hide-close="hideClose"
       :labelled-by-id="labelledById"
       :fixed-header-footer="fixedHeaderFooter"
