@@ -65,7 +65,7 @@ describe('DtDropdown Tests', function () {
 
   // Setup
   before(function () {
-    config.renderStubDefaultSlot = true;
+    config.global.renderStubDefaultSlot = true;
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
     global.requestAnimationFrame = sinon.spy();
@@ -74,7 +74,7 @@ describe('DtDropdown Tests', function () {
 
   // Test Teardown
   after(function () {
-    config.renderStubDefaultSlot = false;
+    config.global.renderStubDefaultSlot = false;
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;

@@ -58,7 +58,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   before(function () {
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
-    config.renderStubDefaultSlot = true;
+    config.global.renderStubDefaultSlot = true;
   });
 
   beforeEach(function () {
@@ -69,7 +69,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
-    config.renderStubDefaultSlot = false;
+    config.global.renderStubDefaultSlot = false;
   });
 
   afterEach(async function () {

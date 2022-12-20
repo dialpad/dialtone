@@ -49,7 +49,7 @@ describe('DtRadioGroup Tests', function () {
     _setChildWrappers();
   };
 
-  config.renderStubDefaultSlot = true;
+  config.global.renderStubDefaultSlot = true;
 
   // Test Teardown
   afterEach(function () {
@@ -59,7 +59,7 @@ describe('DtRadioGroup Tests', function () {
   });
 
   after(function () {
-    config.renderStubDefaultSlot = false;
+    config.global.renderStubDefaultSlot = false;
   });
 
   describe('Presentation Tests', function () {
