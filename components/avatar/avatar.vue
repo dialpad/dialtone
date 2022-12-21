@@ -32,6 +32,7 @@
 import { warn } from 'vue';
 import { getUniqueString, getRandomElement } from '@/common/utils';
 import { DtPresence } from '../presence';
+import seedrandom from 'seedrandom';
 import {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
@@ -58,6 +59,15 @@ export default {
     id: {
       type: String,
       default () { return getUniqueString(); },
+    },
+
+    /**
+     * Pass in a seed to get the random color generation based on that string. For example if you pass in a
+     * user ID as the string it will return the same randomly generated colors every time for that user.
+     */
+    seed: {
+      type: String,
+      default: undefined,
     },
 
     /**
@@ -204,20 +214,28 @@ export default {
     },
 
     randomizeGradientAngle () {
-      return getRandomElement(AVATAR_ANGLES);
+      return getRandomElement(AVATAR_ANGLES, this.seed);
     },
 
     randomizeGradientColorStops () {
       const colors = new Set();
+
+      let count = 0;
       // get 3 unique colors, 2 from colorsWith100 and one from colorsWith200
       while (colors.size < MAX_GRADIENT_COLORS) {
+        // add count to the seed since we are looking for 3 unique colors. If the seed makes it always
+        // return the same color we'll get an infinite loop.
+        const seedForColor = this.seed === undefined ? undefined : this.seed + count.toString();
         if (colors.size === MAX_GRADIENT_COLORS_100) {
-          colors.add(getRandomElement(GRADIENT_COLORS.with200));
+          colors.add(getRandomElement(GRADIENT_COLORS.with200, seedForColor));
         } else {
-          colors.add(getRandomElement(GRADIENT_COLORS.with100));
+          colors.add(getRandomElement(GRADIENT_COLORS.with100, seedForColor));
         }
+        count++;
       }
-      const shuffledColors = Array.from(colors).sort(() => 0.5 - Math.random());
+      const rng = seedrandom(this.seed);
+      const shuffledColors = Array.from(colors).sort(() => 0.5 - rng());
+
       return shuffledColors;
     },
 

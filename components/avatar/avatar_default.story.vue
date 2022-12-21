@@ -4,6 +4,7 @@
     :size="$attrs.size"
     :presence="$attrs.presence"
     :initials="$attrs.initials"
+    :seed="$attrs.seed"
   >
     <v-html :html="defaultSlot" />
   </dt-avatar>

@@ -3,6 +3,7 @@
     :id="$attrs.id"
     :size="$attrs.size"
     :presence="$attrs.presence"
+    :seed="$attrs.seed"
   >
     <dt-icon
       :name="defaultSlot"

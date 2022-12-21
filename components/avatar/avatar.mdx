@@ -84,6 +84,18 @@ There are three valid types of markup you can pass into an avatar slot. `<img>` 
 </dt-avatar>
 ```
 
+### Seeded
+
+You may use a seed to make the randomly generated colors be the same every time for that seed. This is useful
+if you want users to always have the same color, just pass in their unique user ID as the seed.
+
+```jsx
+// Will always show the same colors for this seed.
+<dt-avatar
+  seed="X5G3D7D3DS3WL7"
+/>
+```
+
 ### With Size
 
 ```jsx
