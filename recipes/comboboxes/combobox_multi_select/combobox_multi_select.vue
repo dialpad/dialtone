@@ -14,7 +14,7 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="d-ps-relative"
+        class="d-ps-relative d-d-block"
       >
         <span
           ref="chipsWrapper"
@@ -24,7 +24,8 @@
             v-for="item in selectedItems"
             ref="chips"
             :key="item.id"
-            class="d-mt4 d-mx2 d-zi-base1"
+            :label-class="['d-chip__label']"
+            :class="['d-mt4', 'd-mx2', 'd-zi-base1']"
             :close-button-props="{ ariaLabel: 'close' }"
             :size="size"
             v-on="chipListeners"
@@ -38,7 +39,7 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="d-fl-grow1 d-mb4"
+          class="d-fl-grow1"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
