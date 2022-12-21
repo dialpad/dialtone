@@ -1,3 +1,15 @@
+# [3.32.0](https://github.com/dialpad/dialtone-vue/compare/v3.31.0...v3.32.0) (2022-12-21)
+
+
+### Bug Fixes
+
+* **Dt Recipe Ivr Node:** add new ivr node icons ([#663](https://github.com/dialpad/dialtone-vue/issues/663)) ([ff6b5bf](https://github.com/dialpad/dialtone-vue/commit/ff6b5bfc01dd7fd1f6cb78a0565d34b7541325f5))
+
+
+### Features
+
+* **Modal:** add contentClass prop ([#655](https://github.com/dialpad/dialtone-vue/issues/655)) ([bf725a5](https://github.com/dialpad/dialtone-vue/commit/bf725a5a523e93223f16ce09cd85b84e5f0968f0))
+
 # [3.31.0](https://github.com/dialpad/dialtone-vue/compare/v3.30.1...v3.31.0) (2022-12-19)
 
 
