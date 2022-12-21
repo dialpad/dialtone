@@ -11,9 +11,9 @@ export const IVR_NODE_ICON_TYPES = {
   [IVR_NODE_PROMPT_MENU]: 'keypad',
   [IVR_NODE_PROMPT_COLLECT]: 'dialer',
   [IVR_NODE_PROMPT_PLAY]: 'volume-2',
-  [IVR_NODE_EXPERT]: 'corner-down-right',
-  [IVR_NODE_BRANCH]: 'network',
-  [IVR_NODE_GO_TO]: 'chevrons-up',
+  [IVR_NODE_EXPERT]: 'expert-node',
+  [IVR_NODE_BRANCH]: 'branch',
+  [IVR_NODE_GO_TO]: 'call-merge',
   [IVR_NODE_TRANSFER]: 'transfer',
   [IVR_NODE_HANGUP]: 'phone-hang-up',
 };
