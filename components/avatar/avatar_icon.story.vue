@@ -3,6 +3,7 @@
     :id="id"
     :size="size"
     :presence="presence"
+    :seed="seed"
   >
     <dt-icon
       :name="defaultSlot"

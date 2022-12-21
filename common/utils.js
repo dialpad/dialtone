@@ -4,6 +4,7 @@ import {
   VALIDATION_MESSAGE_TYPES,
 } from './constants';
 import Vue from 'vue';
+const seedrandom = require('seedrandom');
 
 let UNIQUE_ID_COUNTER = 0;
 
@@ -24,11 +25,14 @@ export function getUniqueString (prefix = DEFAULT_PREFIX) {
 
 /**
  * Returns a random element from array
- * @param array
- * @returns {*}
+ * @param array - the array to return a random element from
+ * @param {string} seed - use a string to seed the randomization, so it returns the same element each time
+ * based on that string.
+ * @returns {*} - the random element
  */
-export function getRandomElement (array) {
-  return array[Math.floor(Math.random() * array.length)];
+export function getRandomElement (array, seed) {
+  const rng = seedrandom(seed);
+  return array[Math.floor(rng() * array.length)];
 }
 
 export function formatMessages (messages) {

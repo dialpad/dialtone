@@ -4,6 +4,7 @@
     :size="size"
     :presence="presence"
     :initials="initials"
+    :seed="seed"
   >
     <html-fragment
       :html="defaultSlot"
