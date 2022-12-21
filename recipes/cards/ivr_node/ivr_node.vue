@@ -47,7 +47,7 @@
               <dt-icon
                 :name="nodeIcon"
                 size="200"
-                class="d-fc-black-900"
+                :class="['d-fc-black-900', { 'ivr_node__goto_icon': isGotoNode }]"
               />
             </template>
           </dt-button>
@@ -101,7 +101,7 @@ import { DtButton } from '@/components/button';
 import { DtDropdown } from '@/components/dropdown';
 import { DtIcon } from '@/components/icon';
 import {
-  IVR_NODE_ICON_TYPES, IVR_NODE_COLOR_MAPPING,
+  IVR_NODE_ICON_TYPES, IVR_NODE_COLOR_MAPPING, IVR_NODE_GO_TO,
 } from './ivr_node_constants.js';
 
 export default {
@@ -189,6 +189,10 @@ export default {
       const { normal, selected } = IVR_NODE_COLOR_MAPPING[this.nodeType];
       return this.isSelected ? selected : normal;
     },
+
+    isGotoNode () {
+      return this.nodeType === IVR_NODE_GO_TO;
+    },
   },
 
   methods: {
@@ -202,5 +206,8 @@ export default {
 <style lang="less">
 .ivr_node__width {
   width: 280px;
+}
+.ivr_node__goto_icon {
+  transform: rotate(90deg);
 }
 </style>
