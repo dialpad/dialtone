@@ -1,3 +1,10 @@
+## [2.46.1](https://github.com/dialpad/dialtone-vue/compare/v2.46.0...v2.46.1) (2022-12-21)
+
+
+### Bug Fixes
+
+* **Dt Recipe Ivr Node:** add new ivr node icons ([#662](https://github.com/dialpad/dialtone-vue/issues/662)) ([768e8b3](https://github.com/dialpad/dialtone-vue/commit/768e8b37288a6345756715918165e119702033b9))
+
 # [2.46.0](https://github.com/dialpad/dialtone-vue/compare/v2.45.1...v2.46.0) (2022-12-20)
 
 
