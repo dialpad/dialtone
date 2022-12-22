@@ -86,12 +86,12 @@ export default {
 
   methods: {
     onComboboxSelect (i) {
-      this.value = '';
+      this.value = this.$attrs.items[i].name;
       this.$attrs.onSelect(i);
     },
 
     onListItemSelect (i) {
-      this.value = '';
+      this.value = this.$attrs.items[i].name;
       this.$attrs.onItemClick(i);
     },
 

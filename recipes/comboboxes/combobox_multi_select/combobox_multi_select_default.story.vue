@@ -3,7 +3,7 @@
     ref="comboboxMultiSelect"
     :label="$attrs.label"
     :description="$attrs.description"
-    :selected-items="$attrs.selectedItems"
+    :selected-items="selected"
     :label-visible="$attrs.labelVisible"
     :size="$attrs.size"
     :placeholder="$attrs.placeholder"
@@ -76,7 +76,7 @@ export default {
   },
 
   created () {
-    this.selected = [];
+    this.selected = this.$attrs.selected ? [...this.$attrs.selected] : [];
   },
 
   methods: {

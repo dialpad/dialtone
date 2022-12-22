@@ -172,7 +172,7 @@ export const WithMaxSelectValidation = Template.bind({});
 WithMaxSelectValidation.args = {
   description: 'Select up to 2 options.',
   maxSelected: 2,
-  selectedItems: ['item12', 'item13', 'item14'],
+  selected: ['item12', 'item13', 'item14'],
   maxSelectedMessage: [{ message: 'More than 2 selected', type: 'error' }],
 };
 WithMaxSelectValidation.parameters = {
