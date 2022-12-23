@@ -27,6 +27,7 @@
     :open-with-arrow-keys="openWithArrowKeys"
     :visually-hidden-close="visuallyHiddenClose"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
+    :append-to="appendTo"
     @opened="onOpened"
   >
     <template

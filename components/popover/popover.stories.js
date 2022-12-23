@@ -129,6 +129,14 @@ export const argTypesData = {
   offset: {
     defaultValue: [0, 4],
   },
+  appendTo: {
+    defaultValue: document.body,
+    table: {
+      defaultValue: {
+        summary: 'document.body',
+      },
+    },
+  },
 
   // Events
   onOpened: {

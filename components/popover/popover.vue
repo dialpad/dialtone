@@ -117,6 +117,7 @@
 <script>
 /* eslint-disable max-lines */
 import {
+  POPOVER_APPEND_TO_VALUES,
   POPOVER_CONTENT_WIDTHS,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_INITIAL_FOCUS_STRINGS,
@@ -451,6 +452,19 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * @values 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: () => document.body,
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
+      },
+    },
   },
 
   emits: [
@@ -593,7 +607,7 @@ export default {
       placement: this.placement,
       offset: this.offset,
       sticky: this.sticky,
-      appendTo: document.body,
+      appendTo: this.appendTo,
       interactive: true,
       trigger: 'manual',
       // We have to manage hideOnClick functionality manually to handle
