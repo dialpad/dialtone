@@ -27,6 +27,7 @@
     :open-with-arrow-keys="$attrs.openWithArrowKeys"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+    :append-to="$attrs.appendTo"
     @opened="$attrs.onOpened"
   >
     <template #anchor="{ attrs }">
