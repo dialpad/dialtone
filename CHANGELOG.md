@@ -1,3 +1,17 @@
+# [2.47.0](https://github.com/dialpad/dialtone-vue/compare/v2.46.1...v2.47.0) (2022-12-24)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** firefox fix ([#642](https://github.com/dialpad/dialtone-vue/issues/642)) ([5d92519](https://github.com/dialpad/dialtone-vue/commit/5d92519e2ec625fbe88026ed3959445049e406fb))
+* **Combobox:** combobox components issues ([#658](https://github.com/dialpad/dialtone-vue/issues/658)) ([7edb52a](https://github.com/dialpad/dialtone-vue/commit/7edb52a10ef9ad6b3304506827c800c691facb38))
+
+
+### Features
+
+* **Avatar:** seeeded random colors ([#661](https://github.com/dialpad/dialtone-vue/issues/661)) ([7ce9f35](https://github.com/dialpad/dialtone-vue/commit/7ce9f35b0658133cc1dbef5ec43d5f2f360e7dbe))
+* **Popover:** add appendTo prop. ([#665](https://github.com/dialpad/dialtone-vue/issues/665)) ([222c264](https://github.com/dialpad/dialtone-vue/commit/222c2649941a18f736bdc7d9dadcb0d822591343))
+
 ## [2.46.1](https://github.com/dialpad/dialtone-vue/compare/v2.46.0...v2.46.1) (2022-12-21)
 
 
