@@ -643,10 +643,6 @@
           "value": "{color.gold.500}",
           "type": "color"
         },
-        "test1": {
-          "value": "{color.magenta.300}",
-          "type": "color"
-        },
         "inverted": {
           "primary": {
             "value": "{color.neutral.white}",
@@ -703,10 +699,6 @@
         },
         "info": {
           "value": "{color.blue.100}",
-          "type": "color"
-        },
-        "test1": {
-          "value": "{color.blue.300}",
           "type": "color"
         }
       }
