@@ -643,6 +643,10 @@
           "value": "{color.gold.500}",
           "type": "color"
         },
+        "test1": {
+          "value": "{color.magenta.300}",
+          "type": "color"
+        },
         "inverted": {
           "primary": {
             "value": "{color.neutral.white}",
@@ -689,16 +693,16 @@
           "value": "{color.red.100}",
           "type": "color"
         },
-        "warning": {
-          "value": "{color.gold.100}",
-          "type": "color"
-        },
         "success": {
           "value": "{color.green.100}",
           "type": "color"
         },
         "info": {
           "value": "{color.blue.100}",
+          "type": "color"
+        },
+        "test1": {
+          "value": "{color.magenta.200}",
           "type": "color"
         }
       }
