@@ -696,6 +696,10 @@
         "success": {
           "value": "{color.green.100}",
           "type": "color"
+        },
+        "info": {
+          "value": "{color.blue.100}",
+          "type": "color"
         }
       }
     },
