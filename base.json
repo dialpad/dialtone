@@ -631,9 +631,10 @@
           "value": "{color.black.500}",
           "type": "color"
         },
-        "error": {
+        "critical": {
           "value": "{color.red.300}",
-          "type": "color"
+          "type": "color",
+          "description": "critical, danger, error"
         },
         "success": {
           "value": "#00671D",
@@ -685,9 +686,10 @@
           "value": "{color.black.800}",
           "type": "color"
         },
-        "error": {
+        "critical": {
           "value": "{color.red.100}",
-          "type": "color"
+          "type": "color",
+          "description": "danger, error"
         },
         "warning": {
           "value": "{color.gold.100}",
