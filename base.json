@@ -637,7 +637,7 @@
           "description": "critical, danger, error"
         },
         "success": {
-          "value": "#00671D",
+          "value": "{color.green.400}",
           "type": "color"
         },
         "warning": {
