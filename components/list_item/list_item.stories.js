@@ -174,7 +174,7 @@ Default.args = {
   right: 'external-link',
   default: 'Default List Item',
   subtitle: 'Description',
-  bottom: '<span class="d-badge d-badge--purple-100">Label</span>',
+  bottom: '<span class="d-badge">Label</span>',
   navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
 };
 Default.parameters = {
