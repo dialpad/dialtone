@@ -321,6 +321,8 @@ export default {
     listClasses () {
       return [
         'd-ps-relative',
+        'd-stack2',
+        'd-m4',
         'd-px0',
         DROPDOWN_PADDING_CLASSES[this.padding],
         this.listClass,
@@ -440,6 +442,6 @@ export default {
 
 <style lang="less">
 .d-context-menu-list {
-  width: 24rem;
+  width: calc(var(--size-300) * 48);
 }
 </style>

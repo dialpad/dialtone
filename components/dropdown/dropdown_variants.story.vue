@@ -126,7 +126,7 @@
           slot-scope="{ close }"
         >
           <dt-list-item-group
-            heading-class="d-p6 d-fw-bold"
+            heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
             :list-class="listClass"
             heading="Menu Heading A"
           >
@@ -149,7 +149,7 @@
           <dt-dropdown-separator />
           <dt-list-item-group
             :list-class="listClass"
-            heading-class="d-p6 d-fw-bold"
+            heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
             heading="Menu Heading B"
           >
             <dt-list-item

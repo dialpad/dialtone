@@ -1,7 +1,7 @@
 <template>
   <li
     aria-hidden="true"
-    class="dt-list-separator d-bgc-black-300 d-my8"
+    class="dt-list-separator d-bgc-black-300 d-my4 d-mxn4"
   />
 </template>
 
@@ -12,8 +12,11 @@ export default {
 </script>
 
 <style lang="less">
+.dt-list-item[role="menuitem"] {
+  border-radius: var(--size-300);
+}
 .dt-list-separator {
-  height: 1px;
+  height: var(--size-100);
   list-style: none;
 }
 </style>

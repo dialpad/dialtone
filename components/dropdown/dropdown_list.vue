@@ -8,7 +8,7 @@
     </div>
     <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
     <ul
-      :class="['d-ps-relative', 'd-px0', listClass]"
+      :class="['d-ps-relative', 'd-stack2', 'd-px0', listClass]"
       data-qa="dt-dropdown-list-wrapper"
     >
       <!-- @slot Slot for the list component -->
