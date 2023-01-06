@@ -21,7 +21,7 @@
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"
-      appear
+      :appear="contentAppear"
       :transition="transition"
       :class="[
         'd-tooltip',
@@ -180,6 +180,14 @@ export default {
     transition: {
       type: String,
       default: 'fade',
+    },
+
+    /**
+     * Whether to apply transition on initial render in the content lazy show component.
+     */
+    contentAppear: {
+      type: Boolean,
+      default: false,
     },
   },
 
