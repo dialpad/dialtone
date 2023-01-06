@@ -5,6 +5,7 @@
     </dt-button>
     <dt-lazy-show
       :show="isShown"
+      :appear="$attrs.appear"
       :transition="$attrs.transition"
     >
       <iframe
