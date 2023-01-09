@@ -8,6 +8,7 @@
         class="d-modal--transparent"
         :aria-hidden="modal && isOpen ? 'false' : 'true'"
         @click.prevent.stop
+        @wheel.prevent.stop
       />
     </Teleport>
     <component
@@ -25,7 +26,6 @@
         @contextmenu="onContext"
         @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
-        @wheel="(e) => (isOpen && modal) && e.preventDefault()"
         @keydown.escape.capture="closePopover"
         @keydown.enter="$emit('keydown', $event)"
         @keydown.space="$emit('keydown', $event)"
@@ -60,6 +60,7 @@
         :css="$attrs.css"
         :tabindex="contentTabindex"
         v-on="popoverListeners"
+        @wheel="(e) => (isOpen && modal) && e.preventDefault()"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
