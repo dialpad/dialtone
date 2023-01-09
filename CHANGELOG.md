@@ -1,3 +1,16 @@
+# [3.34.0](https://github.com/dialpad/dialtone-vue/compare/v3.33.0...v3.34.0) (2023-01-09)
+
+
+### Bug Fixes
+
+* **Popover:** blocking wheel event vue3 ([#685](https://github.com/dialpad/dialtone-vue/issues/685)) ([5a46eea](https://github.com/dialpad/dialtone-vue/commit/5a46eea956ed5df283ebaca7cd1d52ced1f37749))
+
+
+### Features
+
+* **Dropdown:** update style vue3 ([#675](https://github.com/dialpad/dialtone-vue/issues/675)) ([92e469e](https://github.com/dialpad/dialtone-vue/commit/92e469e6898f6f71a9a39a20741e42d4f1cf83dc))
+* **Tooltip:** add contentAppear prop ([#676](https://github.com/dialpad/dialtone-vue/issues/676)) ([031f54c](https://github.com/dialpad/dialtone-vue/commit/031f54c70bb01daeb8fa1c522fb5fd86e82acd02))
+
 # [3.33.0](https://github.com/dialpad/dialtone-vue/compare/v3.32.0...v3.33.0) (2022-12-24)
 
 
