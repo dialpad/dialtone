@@ -1,3 +1,15 @@
+# [2.48.0](https://github.com/dialpad/dialtone-vue/compare/v2.47.0...v2.48.0) (2023-01-09)
+
+
+### Bug Fixes
+
+* **Popover:** blocking wheel event ([#683](https://github.com/dialpad/dialtone-vue/issues/683)) ([d5672ef](https://github.com/dialpad/dialtone-vue/commit/d5672ef6923e69a6647e3c0cb2e87a75bee65851))
+
+
+### Features
+
+* **Dropdown:** update style ([#673](https://github.com/dialpad/dialtone-vue/issues/673)) ([19fd004](https://github.com/dialpad/dialtone-vue/commit/19fd00417e1e40b9b7c7969c41648008e10dd435))
+
 # [2.47.0](https://github.com/dialpad/dialtone-vue/compare/v2.46.1...v2.47.0) (2022-12-24)
 
 
