@@ -5,6 +5,7 @@
         class="d-modal--transparent"
         :aria-hidden="modal && isOpen ? 'false' : 'true'"
         @click.prevent.stop
+        @wheel.prevent.stop
       />
     </portal>
     <component
@@ -23,7 +24,6 @@
         @contextmenu="onContext"
         @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
-        @wheel="(e) => (isOpen && modal) && e.preventDefault()"
         @keydown.escape.capture="closePopover"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
@@ -55,6 +55,7 @@
         :tabindex="contentTabindex"
         appear
         v-on="popoverListeners"
+        @wheel="(e) => (isOpen && modal) && e.preventDefault()"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
