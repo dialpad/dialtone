@@ -5,7 +5,6 @@
         class="d-modal--transparent"
         :aria-hidden="modal && isOpen ? 'false' : 'true'"
         @click.prevent.stop
-        @wheel.prevent.stop
       />
     </portal>
     <component
@@ -55,7 +54,6 @@
         :tabindex="contentTabindex"
         appear
         v-on="popoverListeners"
-        @wheel="(e) => (isOpen && modal) && e.preventDefault()"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -580,6 +578,7 @@ export default {
 
     isOpen (isOpen, isPrev) {
       if (isOpen) {
+        window.addEventListener('wheel', this.preventScrolling, { passive: false });
         this.tip.setProps({
           zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
         });
@@ -588,6 +587,7 @@ export default {
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeClosePopoverEventListener();
         this.tip.hide();
+        window.removeEventListener('wheel', this.preventScrolling, { passive: false });
       }
     },
   },
@@ -716,6 +716,14 @@ export default {
 
     closePopover () {
       this.isOpen = false;
+    },
+
+    /*
+    * Prevents scrolling only when the popover is set to modal
+    **/
+    preventScrolling (e) {
+      if (!this.modal) return;
+      e.preventDefault();
     },
 
     removeReferences () {
