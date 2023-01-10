@@ -1,3 +1,15 @@
+# [2.49.0](https://github.com/dialpad/dialtone-vue/compare/v2.48.0...v2.49.0) (2023-01-10)
+
+
+### Bug Fixes
+
+* **Popover:** refactor wheel event ([#688](https://github.com/dialpad/dialtone-vue/issues/688)) ([8af2967](https://github.com/dialpad/dialtone-vue/commit/8af2967d71b47eeb5ecf0106d1ccb3bd8f5529c7))
+
+
+### Features
+
+* **Pagination:** update style  ([#677](https://github.com/dialpad/dialtone-vue/issues/677)) ([7b08ee9](https://github.com/dialpad/dialtone-vue/commit/7b08ee9c3c19485500a690ce5e79875c2cfcd9fd))
+
 # [2.48.0](https://github.com/dialpad/dialtone-vue/compare/v2.47.0...v2.48.0) (2023-01-09)
 
 
