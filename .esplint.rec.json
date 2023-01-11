@@ -26,6 +26,9 @@
     },
     "recipes/comboboxes/combobox_multi_select/combobox_multi_select.vue": {
       "max-lines": 1
+    },
+    "recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue": {
+      "max-lines": 1
     }
   }
 }

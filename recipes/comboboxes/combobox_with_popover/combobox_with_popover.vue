@@ -23,7 +23,6 @@
         :id="externalAnchor"
         ref="input"
         @focusin="onFocusIn"
-        @focusout="onFocusOut"
         @keydown.up="openOnArrowKeyPress($event)"
         @keydown.down="openOnArrowKeyPress($event)"
       >
@@ -38,7 +37,7 @@
       <dt-popover
         ref="popover"
         :open.sync="isListShown"
-        :hide-on-click="showList === null"
+        :hide-on-click="false"
         :max-height="maxHeight"
         :max-width="maxWidth"
         :offset="popoverOffset"
@@ -60,7 +59,6 @@
           <div
             v-if="$slots.header"
             ref="header"
-            @focusout="onFocusOut"
           >
             <slot name="header" />
           </div>
@@ -71,7 +69,7 @@
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             @mouseleave="clearHighlightIndex"
-            @focusout="clearHighlightIndex; onFocusOut;"
+            @focusout="clearHighlightIndex"
           >
             <combobox-loading-list
               v-if="loading"
@@ -94,7 +92,6 @@
           <div
             v-if="$slots.footer"
             ref="footer"
-            @focusout="onFocusOut"
           >
             <slot name="footer" />
           </div>
@@ -376,6 +373,11 @@ export default {
     },
 
     isListShown (val) {
+      if (val) {
+        window.addEventListener('mousedown', this.onFocusOut);
+      } else {
+        window.removeEventListener('mousedown', this.onFocusOut);
+      }
       this.onOpened(val);
     },
   },
@@ -430,14 +432,15 @@ export default {
     },
 
     onFocusOut (e) {
-      const comboboxRefs = ['input', 'header', 'footer', 'listWrapper'];
       // Check if the focus change was to another target within the combobox component
-      const isComboboxStillFocused = e.relatedTarget === null || comboboxRefs.some((ref) => {
-        return this.$refs[ref]?.contains(e.relatedTarget);
-      }) || this.visuallyHiddenClose;
+      const isComboboxStillFocused = Object.keys(this.$refs).some(refName => {
+        const ref = this.$refs[refName];
+        return ref.$el ? ref.$el.contains(e.target) : ref.contains(e.target);
+      });
+      if (isComboboxStillFocused) return;
 
       // If outside the combobox then close
-      if (!isComboboxStillFocused) { this.closeComboboxList(); }
+      this.closeComboboxList();
     },
 
     openOnArrowKeyPress () {

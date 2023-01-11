@@ -12,6 +12,7 @@
     :padding="padding"
     :list-id="listId"
     :empty-list="emptyList"
+    :visually-hidden-close="visuallyHiddenClose"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
     @escape="onComboboxEscape"
     @highlight="onHighlight"

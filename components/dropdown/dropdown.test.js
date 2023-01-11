@@ -26,6 +26,10 @@ const baseSlots = {
   </ul>`,
 };
 
+const baseScopedSlots = {
+  anchor: `<template #anchor="{ attrs }"><a href="#" id="anchor" v-bind="attrs">Link</a></template>`,
+};
+
 describe('DtDropdown Tests', function () {
   // Wrappers
   let wrapper;
@@ -35,7 +39,7 @@ describe('DtDropdown Tests', function () {
   // Environment
   let propsData = basePropsData;
   let slots = baseSlots;
-  let scopedSlots = {};
+  let scopedSlots = baseScopedSlots;
   let listeners;
   let highlightStub;
 
@@ -79,7 +83,7 @@ describe('DtDropdown Tests', function () {
   afterEach(function () {
     propsData = basePropsData;
     slots = baseSlots;
-    scopedSlots = {};
+    scopedSlots = baseScopedSlots;
     listeners = {};
     wrapper.destroy();
   });
@@ -151,9 +155,6 @@ describe('DtDropdown Tests', function () {
     describe('When the dropdown is open', function () {
       // Test setup
       beforeEach(function () {
-        scopedSlots = {
-          anchor: `<template #anchor="{ attrs }"><a href="#" id="anchor" v-bind="attrs">Link</a></template>`,
-        };
         _setWrappers();
         wrapper.vm.$nextTick();
       });

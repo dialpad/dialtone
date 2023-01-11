@@ -1,5 +1,5 @@
 <template>
-  <span :class="['d-chip', parentClass]">
+  <span class="d-chip">
     <component
       :is="interactive ? 'button' : 'span'"
       :id="id"
