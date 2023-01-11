@@ -18,7 +18,7 @@ const baseProps = {
 };
 
 const baseSlots = {
-  anchor: '<a href="#" id="anchor">Link</a>',
+  anchor: '<template #anchor="attrs"><a href="#" id="anchor" v-bind="attrs">Link</a></template>',
   list: `<ul id="list">
     <li role="menuitem">1</li>
     <li role="menuitem">2</li>
@@ -148,9 +148,6 @@ describe('DtDropdown Tests', function () {
     describe('When the dropdown is open', function () {
       // Test setup
       beforeEach(function () {
-        slots = {
-          anchor: `<template #anchor="attrs"><a href="#" id="anchor" v-bind="attrs">Link</a></template>`,
-        };
         _setWrappers();
       });
 

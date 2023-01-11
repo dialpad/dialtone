@@ -545,31 +545,31 @@ export default {
     },
 
     modal (modal) {
-      this.tip.setProps({
-        zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+      this.tip?.setProps({
+        zIndex: modal ? 650 : this.calculateAnchorZindex(),
       });
     },
 
     offset (offset) {
-      this.tip.setProps({
+      this.tip?.setProps({
         offset,
       });
     },
 
     sticky (sticky) {
-      this.tip.setProps({
+      this.tip?.setProps({
         sticky,
       });
     },
 
     fallbackPlacements () {
-      this.tip.setProps({
+      this.tip?.setProps({
         popperOptions: this.popperOptions(),
       });
     },
 
     tether () {
-      this.tip.setProps({
+      this.tip?.setProps({
         popperOptions: this.popperOptions(),
       });
     },
@@ -592,59 +592,28 @@ export default {
 
     isOpen (isOpen, isPrev) {
       if (isOpen) {
-        window.addEventListener('wheel', this.preventScrolling, { passive: false });
-        this.tip.setProps({
-          zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
-        });
-        this.tip.show();
-        this.addClosePopoverEventListener();
+        this.initTippyInstance();
       } else if (!isOpen && isPrev !== isOpen) {
-        this.removeClosePopoverEventListener();
+        this.removeEventListeners();
         this.tip.hide();
-        window.removeEventListener('wheel', this.preventScrolling, { passive: false });
       }
     },
   },
 
   mounted () {
-    // support single anchor for popover, not multi anchor
     const externalAnchorEl = document.getElementById(this.externalAnchor);
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
 
-    // align popover content width when
-    if (this.contentWidth === 'anchor') {
-      window.addEventListener('resize', this.onResize);
-    }
-    this.tip = createTippy(this.anchorEl, {
-      popperOptions: this.popperOptions(),
-      contentElement: this.popoverContentEl,
-      placement: this.placement,
-      offset: this.offset,
-      sticky: this.sticky,
-      appendTo: this.appendTo,
-      interactive: true,
-      trigger: 'manual',
-      // We have to manage hideOnClick functionality manually to handle
-      // popover within popover situations.
-      hideOnClick: false,
-      zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
-      onClickOutside: this.onClickOutside,
-      onShow: this.onShow,
-    });
-
-    // immediate watcher fires before mounted, so have this here in case
-    // show prop was initially set to true.
     if (this.isOpen) {
-      this.tip.show();
+      this.initTippyInstance();
     }
   },
 
   beforeUnmount () {
-    window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
     this.removeReferences();
-    this.removeClosePopoverEventListener();
+    this.removeEventListeners();
   },
 
   /******************
@@ -689,16 +658,15 @@ export default {
       }
     },
 
-    onContext (event) {
+    async onContext (event) {
       if (!this.openOnContext) { return; }
 
       event.preventDefault();
 
-      this.tip?.setProps({
-        placement: 'right-start',
-      });
-
+      this.isOpen = true;
+      await this.$nextTick();
       this.tip.setProps({
+        placement: 'right-start',
         getReferenceClientRect: () => ({
           width: 0,
           height: 0,
@@ -708,8 +676,6 @@ export default {
           right: event.clientX,
         }),
       });
-
-      this.toggleOpen();
     },
 
     toggleOpen () {
@@ -727,12 +693,21 @@ export default {
       this.$emit('keydown', e);
     },
 
-    addClosePopoverEventListener () {
+    addEventListeners () {
       window.addEventListener('dt-popover-close', this.closePopover);
+      window.addEventListener('wheel', this.preventScrolling, { passive: false });
+      // align popover content width when contentWidth is 'anchor'
+      if (this.contentWidth === 'anchor') {
+        window.addEventListener('resize', this.onResize);
+      }
     },
 
-    removeClosePopoverEventListener () {
+    removeEventListeners () {
       window.removeEventListener('dt-popover-close', this.closePopover);
+      window.removeEventListener('wheel', this.preventScrolling, { passive: false });
+      if (this.contentWidth === 'anchor') {
+        window.removeEventListener('resize', this.onResize);
+      }
     },
 
     closePopover () {
@@ -765,7 +740,7 @@ export default {
 
     async onLeaveTransitionComplete () {
       if (this.modal) {
-        this.focusFirstElement(this.$refs.anchor);
+        await this.focusFirstElement(this.$refs.anchor);
         // await next tick in case the user wants to change focus themselves.
         await this.$nextTick();
       }
@@ -855,7 +830,32 @@ export default {
         this.$refs.content.$el.focus();
       }
     },
+
+    initTippyInstance () {
+      this.tip = createTippy(this.anchorEl, {
+        popperOptions: this.popperOptions(),
+        contentElement: this.popoverContentEl,
+        placement: this.placement,
+        offset: this.offset,
+        sticky: this.sticky,
+        appendTo: this.appendTo,
+        interactive: true,
+        trigger: 'manual',
+        // We have to manage hideOnClick functionality manually to handle
+        // popover within popover situations.
+        hideOnClick: false,
+        zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+        onClickOutside: this.onClickOutside,
+        onShow: this.onShow,
+      });
+      this.tip.setProps({
+        zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+      });
+      this.tip.show();
+      this.addEventListeners();
+    },
   },
+
 };
 </script>
 
