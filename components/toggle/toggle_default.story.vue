@@ -6,6 +6,7 @@
     :show-icon="showIcon"
     :label-class="labelClass"
     :label-child-props="labelChildProps"
+    :toggle-on-click="toggleOnClick"
     @change="onChange"
   >
     <span
