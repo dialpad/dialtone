@@ -31,7 +31,7 @@
     </template>
     <template #list>
       <ul
-        class="d-p0"
+        class="d-ps-relative d-stack2 d-m4 d-px0"
       >
         <dt-list-item
           v-for="(item, i) in items"
