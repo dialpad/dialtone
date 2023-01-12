@@ -1,3 +1,11 @@
+# [3.36.0](https://github.com/dialpad/dialtone-vue/compare/v3.35.1...v3.36.0) (2023-01-12)
+
+
+### Features
+
+* **Combobox, Dropdown:** dt7 style update vue3 ([#695](https://github.com/dialpad/dialtone-vue/issues/695)) ([717abc8](https://github.com/dialpad/dialtone-vue/commit/717abc8547db22e77bf726809ac8ee64640a5ed5))
+* **Toggle:** add toggleOnClick prop ([#699](https://github.com/dialpad/dialtone-vue/issues/699)) ([096fcc1](https://github.com/dialpad/dialtone-vue/commit/096fcc14b7a98734e3955478c943d77bd460f464))
+
 ## [3.35.1](https://github.com/dialpad/dialtone-vue/compare/v3.35.0...v3.35.1) (2023-01-11)
 
 # [3.35.0](https://github.com/dialpad/dialtone-vue/compare/v3.34.0...v3.35.0) (2023-01-10)

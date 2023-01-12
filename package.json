@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.35.1",
+  "version": "3.36.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "keywords": [
     "Dialpad",
