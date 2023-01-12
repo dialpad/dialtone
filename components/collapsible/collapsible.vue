@@ -273,7 +273,6 @@ export default {
       if (!this.anchorText && !this.$scopedSlots.anchor) {
         console.error('anchor text and anchor slot content cannot both be falsy');
       }
-      debugger;
     },
   },
 };
