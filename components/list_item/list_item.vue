@@ -221,6 +221,7 @@ export default {
 <style lang="less">
 .dt-list-item:not(.dt-list-item--static) {
   cursor: pointer;
+  border-radius: var(--size-300);
 }
 
 .dt-list-item--focusable:focus,
