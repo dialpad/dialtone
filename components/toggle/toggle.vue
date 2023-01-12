@@ -79,6 +79,16 @@ export default {
     },
 
     /**
+     * Whether the component toggles on click. If you set this to false it means you will handle the toggling manually
+     * via the checked prop or v-model. Change events will still be triggered.
+     * @values true, false
+     */
+    toggleOnClick: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * The size of the toggle.
      * @values sm, md
      */
@@ -172,8 +182,11 @@ export default {
 
   methods: {
     toggleCheckedValue () {
-      this.internalChecked = !this.internalChecked;
-      this.$emit('change', this.internalChecked);
+      this.$emit('change', !this.internalChecked);
+
+      if (this.toggleOnClick) {
+        this.internalChecked = !this.internalChecked;
+      }
     },
 
     hasSlotLabel () {

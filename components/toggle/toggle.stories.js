@@ -33,6 +33,7 @@ export const argTypesData = {
       type: 'select',
       options: TOGGLE_CHECKED_VALUES,
     },
+    defaultValue: false,
     table: {
       category: 'props',
       type: {

@@ -6,6 +6,7 @@
     :show-icon="$attrs.showIcon"
     :label-class="$attrs.labelClass"
     :label-child-props="$attrs.labelChildProps"
+    :toggle-on-click="$attrs.toggleOnClick"
     @change="$attrs.onChange"
   >
     <span
