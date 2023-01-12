@@ -1,3 +1,10 @@
+## [2.49.1-alpha.1](https://github.com/dialpad/dialtone-vue/compare/v2.49.0...v2.49.1-alpha.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* test fix ([8791df7](https://github.com/dialpad/dialtone-vue/commit/8791df703fcdb23c69951e795c22562b5a1b104b))
+
 # [2.49.0](https://github.com/dialpad/dialtone-vue/compare/v2.48.0...v2.49.0) (2023-01-10)
 
 
