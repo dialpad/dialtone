@@ -1,3 +1,16 @@
+# [2.50.0](https://github.com/dialpad/dialtone-vue/compare/v2.49.1...v2.50.0) (2023-01-12)
+
+
+### Bug Fixes
+
+* **Collapsible:** fix validation of anchor-related prop and slot ([#697](https://github.com/dialpad/dialtone-vue/issues/697)) ([9384b0d](https://github.com/dialpad/dialtone-vue/commit/9384b0d79dbeebb0fd9c96f2c8bf3fec1cea309c))
+
+
+### Features
+
+* **Combobox, Dropdown:** dt7 style update ([#694](https://github.com/dialpad/dialtone-vue/issues/694)) ([eb4aa4f](https://github.com/dialpad/dialtone-vue/commit/eb4aa4f07950c4bc97a49cdeb2fc1d8da3b9d835))
+* **Toggle:** add toggleOnClick prop ([#698](https://github.com/dialpad/dialtone-vue/issues/698)) ([433c25e](https://github.com/dialpad/dialtone-vue/commit/433c25ef71f1e3a2398b4ed640b5edabf115caab))
+
 ## [2.49.1](https://github.com/dialpad/dialtone-vue/compare/v2.49.0...v2.49.1) (2023-01-11)
 
 # [2.49.0](https://github.com/dialpad/dialtone-vue/compare/v2.48.0...v2.49.0) (2023-01-10)
