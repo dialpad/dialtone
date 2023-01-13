@@ -114,10 +114,7 @@ export default {
       return [
         this.buttonClass,
         'dt-recipe-callbar-button',
-        'd-stack4',
         'd-px0',
-        'h:d-bgc-black-200',
-        'h:d-bgo50',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'd-btn--icon-only': this.circle,
@@ -131,8 +128,7 @@ export default {
 
 <style lang="less">
 .dt-recipe-callbar-button:not(.dt-recipe-callbar-button--circle) {
-  letter-spacing: -0.011rem;
-  line-height: 1.6rem;
+  line-height: var(--lh-300);
 }
 
 .dt-recipe-callbar-button--circle {
@@ -147,22 +143,12 @@ export default {
   border-color: unset;
 }
 
-.dt-recipe-callbar-button--danger.dt-recipe-callbar-button--active {
-  --button--bgc: hsla(var(--error-color-hsl) ~' / ' 10%);
-  --button--fc: var(--error-color-hover);
-}
-
-.dt-recipe-callbar-button--danger.dt-recipe-callbar-button--active:hover {
-  --button--bgc: hsla(var(--error-color-hsl)  ~' / ' 20%);
-  --button--fc: var(--error-color-hover);
-}
-
 .dt-recipe-callbar-button--circle.d-btn--icon-only .d-btn__label {
   display: none;
 }
 
 .dt-recipe-callbar-button--active,
-.dt-recipe-callbar-button--active:hover{
+.dt-recipe-callbar-button--active:hover {
   .base-button__icon {
     color: var(--primary-color);
   }
