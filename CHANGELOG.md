@@ -1,3 +1,10 @@
+# [3.37.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v3.36.0...v3.37.0-beta.1) (2023-01-13)
+
+
+### Features
+
+* enable shadowMode ([c63aee3](https://github.com/dialpad/dialtone-vue/commit/c63aee30ad6d26f81a374d92a63aaadb88775d5a))
+
 # [3.36.0](https://github.com/dialpad/dialtone-vue/compare/v3.35.1...v3.36.0) (2023-01-12)
 
 
