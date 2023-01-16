@@ -1,3 +1,10 @@
+# [2.52.0](https://github.com/dialpad/dialtone-vue/compare/v2.51.0...v2.52.0) (2023-01-16)
+
+
+### Features
+
+* revert enable shadowMode due to error ([e622436](https://github.com/dialpad/dialtone-vue/commit/e62243660921a933390c07a24e0a4a3ef0e9ddf7))
+
 # [2.51.0](https://github.com/dialpad/dialtone-vue/compare/v2.50.0...v2.51.0) (2023-01-16)
 
 
