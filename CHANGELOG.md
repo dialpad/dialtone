@@ -1,3 +1,15 @@
+# [3.37.0](https://github.com/dialpad/dialtone-vue/compare/v3.36.0...v3.37.0) (2023-01-16)
+
+
+### Bug Fixes
+
+* **Callbar:** style update to dt7 vue3 ([#701](https://github.com/dialpad/dialtone-vue/issues/701)) ([80be6c8](https://github.com/dialpad/dialtone-vue/commit/80be6c80576e82a6eb4a99812aa45c5ba461c2e3))
+
+
+### Features
+
+* enable shadowMode ([#703](https://github.com/dialpad/dialtone-vue/issues/703)) ([3e226ba](https://github.com/dialpad/dialtone-vue/commit/3e226ba2b4b36561e70be9048d9f75d8262580ca))
+
 # [3.36.0](https://github.com/dialpad/dialtone-vue/compare/v3.35.1...v3.36.0) (2023-01-12)
 
 
