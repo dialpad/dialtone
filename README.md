@@ -54,6 +54,10 @@ import { getEmojiData } from '@dialpad/dialtone-vue/emoji'
 const emojiData = getEmojiData();
 ```
 
+## Shadow DOM
+
+If you are using Dialtone Vue within a shadow DOM set the `shadowRoot: YOUR_ELEMENT` option on your vue instance and the styles will be isolated to that element rather than rendered at the root.
+
 ## Contributing
 
 If you would like to contribute to Dialtone Vue the first step is to get the project running locally. Follow the below quickstart to do so.
