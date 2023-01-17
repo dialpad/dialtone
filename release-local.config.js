@@ -25,10 +25,13 @@ module.exports = {
       config: '@dialpad/conventional-changelog-angular',
     }],
     '@semantic-release/changelog',
+    '@dialpad/semantic-release-changelog-json',
     ['@semantic-release/npm', {
       npmPublish: false,
     }],
     ['@semantic-release/git', {
+      assets: ['CHANGELOG.md', 'CHANGELOG.json', 'package.json', 'package-lock.json', 'npm-shrinkwrap.json'],
+      /* eslint-disable-next-line no-template-curly-in-string */
       message: 'chore(release): ${nextRelease.version} \n\n${nextRelease.notes}',
     }],
   ],
