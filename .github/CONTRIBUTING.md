@@ -38,6 +38,19 @@ The second is to check with the Dialtone team (in [#dialtone](https://dialpad.sl
 
 Before submitting a pull request, make sure to communicate what you wish to change to the Dialtone team. The easiest way to do this is via the [#dialtone](https://dialpad.slack.com/messages/dialtone/) Slack channel. It's possible your change is already being worked on, has already been fixed, or maybe we just need to discuss the best solution to the problem. This prevents you from having to re-write your entire change, or even having to scrap it entirely.
 
+The Dialtone library exists to serve multiple teams, so it is important to ensure that your PR does not introduce any unnecessary breaking changes. Breaking changes will require extra steps that may prolong the submission review process. If breaking changes are absolutely necessary for your use case, then you must communicate them to the Dialtone team in advance to allow for a smooth migration strategy for all dependant projects.
+
+Examples of breaking include the following:
+
+- **Changing or removing the component API**: renaming or removing props and emits, or changing their expected types
+
+Examples of non-breaking changes:
+
+- **Making new additions to the component API**: for example, adding a new prop to a component that triggers a different flow of behaviour or output, or adding a new emit event to detect specific changes.
+- **Refactoring**: changing the internal code of a component without changing any external behaviour.
+
+Some updates can unintentionally cause breaking changes, or cause changes to a component's output behaviour or functionality without necessary breaking it. This is why it is important to evaluate the change carefully and asses its impact on existing usage.
+
 Any new components or updates to existing components require the following:
 
 - Unit tests covering the entire change.
