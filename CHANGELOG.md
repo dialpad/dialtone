@@ -1,3 +1,10 @@
+# [3.38.0](https://github.com/dialpad/dialtone-vue/compare/v3.37.0...v3.38.0) (2023-01-17)
+
+
+### Features
+
+* include CHANGELOG files in the package ([#705](https://github.com/dialpad/dialtone-vue/issues/705)) ([8849584](https://github.com/dialpad/dialtone-vue/commit/884958408f2a6fa2148109337c86206dae7a125f))
+
 # [3.37.0](https://github.com/dialpad/dialtone-vue/compare/v3.36.0...v3.37.0) (2023-01-16)
 
 
