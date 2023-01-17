@@ -45,7 +45,9 @@
   ],
   "files": [
     "dist/*.js",
-    "dist/component-documentation.json"
+    "dist/component-documentation.json",
+    "CHANGELOG.md",
+    "CHANGELOG.json"
   ],
   "repository": "git@github.com:dialpad/dialtone-vue.git",
   "scripts": {
@@ -96,6 +98,7 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@dialpad/conventional-changelog-angular": "^1.0.0",
     "@dialpad/dialtone": "^7.12",
+    "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "1.16.0",
     "@percy/storybook": "4.3.4",
     "@semantic-release/changelog": "^6.0.2",
