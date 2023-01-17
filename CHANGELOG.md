@@ -1,3 +1,10 @@
+# [2.53.0](https://github.com/dialpad/dialtone-vue/compare/v2.52.0...v2.53.0) (2023-01-17)
+
+
+### Features
+
+* include CHANGELOG files in the package ([#704](https://github.com/dialpad/dialtone-vue/issues/704)) ([639dd92](https://github.com/dialpad/dialtone-vue/commit/639dd92cac24d1944be19f9c68d6c4f855cba980))
+
 # [2.52.0](https://github.com/dialpad/dialtone-vue/compare/v2.51.0...v2.52.0) (2023-01-16)
 
 
