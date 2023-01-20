@@ -1,3 +1,10 @@
+## [2.53.1](https://github.com/dialpad/dialtone-vue/compare/v2.53.0...v2.53.1) (2023-01-20)
+
+
+### Bug Fixes
+
+* **Popover:** blocking wheel event ([#708](https://github.com/dialpad/dialtone-vue/issues/708)) ([0a7f3db](https://github.com/dialpad/dialtone-vue/commit/0a7f3dbd5f298e3f130474c38ed2d2442753c9f9))
+
 # [2.53.0](https://github.com/dialpad/dialtone-vue/compare/v2.52.0...v2.53.0) (2023-01-17)
 
 
