@@ -1,7 +1,7 @@
 <template>
   <div class="root-layout d-d-flex d-fd-column d-h100vh">
     <header
-      v-if="$slots.header"
+      v-if="hasSlotContent($slots.header)"
       :class="['root-layout__header', headerClass, { 'root-layout__header--sticky': headerSticky }]"
       :style="{ 'height': headerHeight }"
       data-qa="root-layout-header"
@@ -18,14 +18,14 @@
       :sidebar-position="sidebarPosition"
     >
       <template
-        v-if="$slots.sidebar"
+        v-if="hasSlotContent($slots.sidebar)"
         #sidebar
       >
         <!-- @slot Slot for the sidebar -->
         <slot name="sidebar" />
       </template>
       <template
-        v-if="$slots.default"
+        v-if="hasSlotContent($slots.default)"
         #content
       >
         <!-- @slot Slot for main content -->
@@ -33,7 +33,7 @@
       </template>
     </dt-root-layout-body>
     <footer
-      v-if="$slots.footer"
+      v-if="hasSlotContent($slots.footer)"
       :class="['root-layout__footer', footerClass]"
       :style="{ 'height': footerHeight }"
       data-qa="root-layout-footer"
@@ -47,6 +47,7 @@
 <script>
 import DtRootLayoutBody from './root_layout_body';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
+import { hasSlotContent } from '@/common/utils';
 
 /**
  * A root layout provides a standardized group of containers to display content at the root level.
@@ -156,6 +157,12 @@ export default {
       type: String,
       default: '64px',
     },
+  },
+
+  data () {
+    return {
+      hasSlotContent,
+    };
   },
 };
 </script>

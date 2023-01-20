@@ -17,7 +17,7 @@
     <dt-lazy-show
       :id="id"
       ref="content"
-      :show="isShown && (!!message.trim() || !defaultSlotIsEmpty)"
+      :show="isShown && (!!message.trim() || hasSlotContent($slots.default))"
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"
@@ -49,7 +49,7 @@ import {
   TOOLTIP_DIRECTIONS,
   TOOLTIP_STICKY_VALUES,
 } from './tooltip_constants';
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import {
   createTippy,
@@ -210,6 +210,7 @@ export default {
   data () {
     return {
       TOOLTIP_KIND_MODIFIERS,
+      hasSlotContent,
       tip: null,
 
       // Internal state for whether the tooltip is shown. Changing the prop
@@ -250,20 +251,6 @@ export default {
           onChangePlacement: this.onChangePlacement,
         }),
       };
-    },
-
-    defaultSlotIsEmpty () {
-      const defaultSlotContents = this.$slots?.default();
-      const slotItemCount = defaultSlotContents?.length;
-
-      const slotIsEmpty = slotItemCount === 1 &&
-        (defaultSlotContents[0].type.toString() === 'Symbol(Comment)' ||
-        (
-          defaultSlotContents[0].type.toString() === 'Symbol(Fragment)' &&
-          defaultSlotContents[0].children.length === 0)
-        );
-
-      return !slotItemCount || slotIsEmpty;
     },
   },
 

@@ -3,7 +3,11 @@ import {
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
 } from './constants';
-import { h } from 'vue';
+import {
+  h,
+  Comment,
+  Text,
+} from 'vue';
 const seedrandom = require('seedrandom');
 
 let UNIQUE_ID_COUNTER = 0;
@@ -110,6 +114,27 @@ export const flushPromises = () => {
     scheduler(resolve);
   });
 };
+
+/*
+  It is very cumbersome to check if a slot is empty in vue 3. Copied this method from the following thread
+  https://github.com/vuejs/core/issues/4733. There is an RFC to fix this but not yet being worked on.
+  https://github.com/vuejs/rfcs/discussions/453
+*/
+export function hasSlotContent (slot, slotProps = {}) {
+  if (!slot) return false;
+
+  // eslint-disable-next-line complexity
+  return slot(slotProps).some((vnode) => {
+    if (vnode.type === Comment) return false;
+
+    if (Array.isArray(vnode.children) && !vnode.children.length) return false;
+
+    return (
+      vnode.type !== Text ||
+      (typeof vnode.children === 'string' && vnode.children.trim() !== '')
+    );
+  });
+}
 
 /**
  * Transform a string from kebab-case to PascalCase

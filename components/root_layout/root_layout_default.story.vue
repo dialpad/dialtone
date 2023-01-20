@@ -13,25 +13,32 @@
     :footer-height="$attrs.footerHeight"
   >
     <template
-      v-if="$attrs.header"
       #header
     >
-      <v-html :html="$attrs.header" />
+      <v-html
+        v-if="$attrs.header"
+        :html="$attrs.header"
+      />
     </template>
     <template
-      v-if="$attrs.sidebar"
       #sidebar
     >
-      <v-html :html="$attrs.sidebar" />
+      <v-html
+        v-if="$attrs.sidebar"
+        :html="$attrs.sidebar"
+      />
     </template>
-    <template v-if="defaultSlot">
-      <v-html :html="defaultSlot" />
-    </template>
+    <v-html
+      v-if="$attrs.default"
+      :html="defaultSlot"
+    />
     <template
-      v-if="$attrs.footer"
       #footer
     >
-      <v-html :html="$attrs.footer" />
+      <v-html
+        v-if="$attrs.footer"
+        :html="$attrs.footer"
+      />
     </template>
   </dt-root-layout>
 </template>
