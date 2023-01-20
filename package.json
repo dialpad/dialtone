@@ -45,6 +45,7 @@
   ],
   "files": [
     "dist/*.js",
+    "dist/*.css",
     "dist/component-documentation.json",
     "CHANGELOG.md",
     "CHANGELOG.json"
