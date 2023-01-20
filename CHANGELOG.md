@@ -1,3 +1,17 @@
+# [3.39.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v3.38.0...v3.39.0-beta.1) (2023-01-20)
+
+
+### Bug Fixes
+
+* **Combobox:** chips vertical alignment - vue 3 ([#707](https://github.com/dialpad/dialtone-vue/issues/707)) ([8f52e24](https://github.com/dialpad/dialtone-vue/commit/8f52e2429fec0a7833f81414e19bfe20fb1c0ef7))
+* **Popover:** blocking wheel event - vue 3 ([#709](https://github.com/dialpad/dialtone-vue/issues/709)) ([ddba8a8](https://github.com/dialpad/dialtone-vue/commit/ddba8a8630fafec1308e5520abdc59cba69af3d4))
+* **Root Layout:** detect empty slot ([#710](https://github.com/dialpad/dialtone-vue/issues/710)) ([6a8b831](https://github.com/dialpad/dialtone-vue/commit/6a8b83109592a4997fe4f724f48013e0f8f5c342))
+
+
+### Features
+
+* test separated css file ([c628d67](https://github.com/dialpad/dialtone-vue/commit/c628d67656e399c815a120ae168a2adf1229f3d1))
+
 # [3.38.0](https://github.com/dialpad/dialtone-vue/compare/v3.37.0...v3.38.0) (2023-01-17)
 
 
