@@ -718,7 +718,7 @@ export default {
     * Prevents scrolling only when the popover is set to modal
     **/
     preventScrolling (e) {
-      if (!this.modal) return;
+      if (!this.modal || this.$refs.content.$el.contains(e.target)) return;
       e.preventDefault();
     },
 
@@ -855,7 +855,6 @@ export default {
       this.addEventListeners();
     },
   },
-
 };
 </script>
 
