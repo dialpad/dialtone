@@ -1,3 +1,10 @@
+# [3.39.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v3.39.0-beta.1...v3.39.0-beta.2) (2023-01-20)
+
+
+### Bug Fixes
+
+* add css to files array ([32319e2](https://github.com/dialpad/dialtone-vue/commit/32319e2881ee7ceaa8a0bc477677bb5684ea088c))
+
 # [3.39.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v3.38.0...v3.39.0-beta.1) (2023-01-20)
 
 
