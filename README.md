@@ -26,6 +26,12 @@ Dialtone Vue components can be imported directly from the package. Some componen
 import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 ```
 
+If you are using the Vue 3 version of Dialtone, you must also import the css:
+
+```js
+import '@dialpad/dialtone-vue/css';
+```
+
 Projects using Dialtone Vue should be aware of the requirements:
 
 - Dialtone classes must be made available globally (to avoid duplication, Dialtone Vue does not do this for you).
@@ -47,16 +53,18 @@ setEmojiAssetUrlSmall('https://my.example.website.com/joypixels/svg/unicode/32/'
 setEmojiAssetUrlLarge('https://my.example.website.com/joypixels/svg/unicode/', '.svg')
 ```
 
+If you are using the Vue 3 version of Dialtone emoji, you must import the css:
+
+```js
+import '@dialpad/dialtone-vue/emoji/css';
+```
+
 You may access the emoji.json data for all emojis Dialtone Vue supports via executing the following function
 
 ```js
 import { getEmojiData } from '@dialpad/dialtone-vue/emoji'
 const emojiData = getEmojiData();
 ```
-
-## Shadow DOM
-
-If you are using Dialtone Vue within a shadow DOM set the `shadowRoot: YOUR_ELEMENT` option on your vue instance and the styles will be isolated to that element rather than rendered at the root.
 
 ## Contributing
 
