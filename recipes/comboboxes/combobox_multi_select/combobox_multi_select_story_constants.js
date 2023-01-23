@@ -30,3 +30,15 @@ export const MULTI_SELECT_SIZES = {
   SMALL: 'sm',
   DEFAULT: 'md',
 };
+
+export const CHIP_SIZES = {
+  xs: 'xs',
+  sm: 'xs',
+  md: 'sm',
+};
+
+export const CHIP_BOTTOM_POSITION = {
+  xs: 4,
+  sm: 5,
+  md: 5,
+};

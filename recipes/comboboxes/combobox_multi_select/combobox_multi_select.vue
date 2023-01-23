@@ -27,7 +27,7 @@
             :label-class="['d-chip__label']"
             :class="['d-mt4', 'd-mx2', 'd-zi-base1']"
             :close-button-props="{ ariaLabel: 'close' }"
-            :size="size"
+            :size="CHIP_SIZES[size]"
             v-on="chipListeners"
             @keyup.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
@@ -109,7 +109,11 @@ import DtInput from '@/components/input/input';
 import DtChip from '@/components/chip/chip';
 import DtValidationMessages from '@/components/validation_messages/validation_messages';
 import { validationMessageValidator } from '@/common/validators';
-import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
+import {
+  MULTI_SELECT_SIZES,
+  CHIP_SIZES,
+  CHIP_BOTTOM_POSITION,
+} from './combobox_multi_select_story_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
@@ -305,6 +309,8 @@ export default {
       showValidationMessages: false,
       initialInputPadding: {},
       resizeWindowObserver: null,
+      originalInputSize: null,
+      CHIP_SIZES,
     };
   },
 
@@ -353,6 +359,7 @@ export default {
       async handler () {
         await this.$nextTick();
         this.setInputPadding();
+        this.setChipsPosition();
         this.setInputMinWidth();
         this.checkMaxSelected();
       },
@@ -361,23 +368,36 @@ export default {
     async label () {
       await this.$nextTick();
       // Adjust the chips position if label changed
-      this.setChipsTopPosition();
+      this.setChipsPosition();
     },
 
     async description () {
       await this.$nextTick();
       // Adjust the chips position if description changed
-      this.setChipsTopPosition();
+      this.setChipsPosition();
+    },
+
+    size: {
+      async handler () {
+        await this.$nextTick();
+        const input = this.getInput();
+        this.revertInputPadding(input);
+        this.originalInputSize = input.getBoundingClientRect().height;
+        this.setInputPadding();
+      },
+
+      immediate: true,
     },
   },
 
   mounted () {
-    this.setChipsTopPosition();
+    this.setChipsPosition();
     // Recalculate chip position and input padding when resizing window
     this.resizeWindowObserver = new ResizeObserver(() => {
-      this.setChipsTopPosition();
+      this.setChipsPosition();
       this.setInputPadding();
-    }).observe(document.body);
+    });
+    this.resizeWindowObserver.observe(document.body);
   },
 
   beforeDestroy () {
@@ -479,55 +499,46 @@ export default {
       this.closeComboboxList();
     },
 
-    setChipsTopPosition () {
-      // To place the chips in the input box
-      // The chip "top" position should be the same line as the input box
-      if (!this.$refs.input) {
-        return;
-      }
-      const input = this.getInput();
-      if (!input) return;
-      const inputSlotWrapper = this.$refs.inputSlotWrapper;
-      const top = input.getBoundingClientRect().top -
-                  inputSlotWrapper.getBoundingClientRect().top;
+    setChipsPosition () {
       const chipsWrapper = this.$refs.chipsWrapper;
-      chipsWrapper.style.top = top + 'px';
+      chipsWrapper.style.bottom = `${CHIP_BOTTOM_POSITION[this.size]}px`;
     },
 
     setInputPadding () {
       const lastChip = this.getLastChip();
       const input = this.getInput();
+      const chipsWrapper = this.$refs.chipsWrapper;
       if (!input) return;
-      if (!lastChip) {
-        // Revert padding if no chip
-        this.revertInputPadding(input);
-        return;
-      }
+      this.revertInputPadding(input);
+      this.popoverOffset = [0, 4];
+      if (!lastChip) return;
 
       // Get the position of the last chip
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
       input.style.paddingLeft = left + 'px';
 
-      // Chip has vertical margin. We add buffer to top center the input text
-      const top = lastChip.offsetTop + 3;
-      input.style.paddingTop = top + 'px';
+      // Get the chip size minus the 4px padding
+      const chipsSize = chipsWrapper.getBoundingClientRect().height - 4;
 
-      // TODO: refresh the tippy.js instance in the popover
-      // If the new chip goes to the next line and the input box expands,
-      // move the popover down to the next line. Same when chips are removed
-      this.popoverOffset = [0, 4];
-    },
+      // Get lastChip offsetTop plus 2px of the input padding.
+      const top = lastChip.offsetTop + 2;
 
-    getFullWidth (el) {
-      const styles = window.getComputedStyle(el);
-      return el.offsetWidth + parseInt(styles.marginLeft) + parseInt(styles.marginRight);
+      // Add padding to Top only if the chips need more space
+      if (chipsSize > this.originalInputSize) {
+        input.style.paddingTop = `${top}px`;
+      }
     },
 
     revertInputPadding (input) {
       input.style.paddingLeft = '';
       input.style.paddingTop = '';
       input.style.paddingBottom = '';
+    },
+
+    getFullWidth (el) {
+      const styles = window.getComputedStyle(el);
+      return el.offsetWidth + parseInt(styles.marginLeft) + parseInt(styles.marginRight);
     },
 
     setInputMinWidth () {
