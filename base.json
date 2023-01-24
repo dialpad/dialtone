@@ -449,6 +449,10 @@
         "300": {
           "value": "{size.300}",
           "type": "borderWidth"
+        },
+        "400": {
+          "value": "{size.400}",
+          "type": "borderWidth"
         }
       },
       "radius": {
