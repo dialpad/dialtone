@@ -1,3 +1,10 @@
+# [3.40.0](https://github.com/dialpad/dialtone-vue/compare/v3.39.0...v3.40.0) (2023-01-24)
+
+
+### Features
+
+* **Semantic Release:** add vue3 releases to GitHub releases ([#712](https://github.com/dialpad/dialtone-vue/issues/712)) ([56d5d88](https://github.com/dialpad/dialtone-vue/commit/56d5d88420cb01da45631b028f0dc356c1297b2d))
+
 # [3.39.0](https://github.com/dialpad/dialtone-vue/compare/v3.38.0...v3.39.0) (2023-01-23)
 
 
