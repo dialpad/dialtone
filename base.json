@@ -477,6 +477,10 @@
           "type": "borderRadius"
         },
         "500": {
+          "value": "{size.500}",
+          "type": "borderRadius"
+        },
+        "600": {
           "value": "{size.600}",
           "type": "borderRadius"
         }
