@@ -1,3 +1,13 @@
+# [1.5.0](https://github.com/dialpad/dialtone-tokens/compare/v1.4.4...v1.5.0) (2023-01-24)
+
+
+### Features
+
+* **android:** transform fontWeight and lineHeight to correct values ([707a02f](https://github.com/dialpad/dialtone-tokens/commit/707a02f9e84248fb221b364c9cbd530a5dc734bf))
+* **border:** added `400` size ([2e065ac](https://github.com/dialpad/dialtone-tokens/commit/2e065ac253a0fdf9f9a153c37a43e2a290d737fa))
+* **radius:** corrected 16 and 32 radius sizes ([82b7c0c](https://github.com/dialpad/dialtone-tokens/commit/82b7c0c0373fbeb156c6ec7756971a780a33994c))
+* tokens json docs ([#6](https://github.com/dialpad/dialtone-tokens/issues/6)) ([923e437](https://github.com/dialpad/dialtone-tokens/commit/923e437cda19d166b4b73e2ed21ffd34b653a6f7))
+
 ## [1.4.4](https://github.com/dialpad/dialtone-tokens/compare/v1.4.3...v1.4.4) (2022-11-23)
 
 
