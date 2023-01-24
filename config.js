@@ -2,7 +2,7 @@ module.exports = {
   source: ['tokens/**/*.json'],
   platforms: {
     less: {
-      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/fonts/weight', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'color/hex'],
+      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'color/hex'],
       prefix: 'dt',
       buildPath: 'dist/less/',
       files: [
@@ -13,7 +13,7 @@ module.exports = {
       ],
     },
     css: {
-      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/fonts/weight', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'size/rem', 'color/css'],
+      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'size/rem', 'color/css'],
       actions: ['buildDocJson'],
       prefix: 'dt',
       buildPath: 'dist/css/',
@@ -49,7 +49,7 @@ module.exports = {
       ],
     },
     android_compose: {
-      transforms: ['dt/android/compose/fonts/transformToStack',  'dt/lineHeight/percentToDecimal', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/compose/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
+      transforms: ['dt/android/compose/fonts/transformToStack', 'dt/android/fonts/weight',  'dt/android/lineHeight/percentToDecimal', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/compose/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
       actions: ['buildDocJson'],
       prefix: 'dt',
       buildPath: 'dist/android/java/',
@@ -84,7 +84,7 @@ module.exports = {
     json: {
       prefix: 'dt',
       buildPath: 'dist/',
-      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/fonts/weight', 'name/cti/camel'],
+      transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'name/cti/camel'],
       files: [
         {
           destination: 'tokens.json',

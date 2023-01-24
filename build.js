@@ -18,12 +18,13 @@ const FONT_FAMILY_IDENTIFIERS = ['fontFamilies', 'fontFamily']
 const FALLBACK_FONTS = ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'];
 const FALLBACK_FONTS_MONO = ['SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', 'monospace'];
 const BASE_FONT_SIZE = require('./base.json').base.font.size.root.value;
-const WEIGHT = {
-  'Light': 300,
-  'Regular': 400,
-  'Medium': 500,
-  'Semibold': 600,
-  'Bold': 700,
+
+const ANDROID_WEIGHTS = {
+  300: 'Light',
+  400: 'Normal',
+  500: 'Medium',
+  600: 'SemiBold',
+  700: 'Bold',
 }
 
 function getBasePxFontSize(options) {
@@ -35,13 +36,13 @@ function throwSizeError(name, value, unitType) {
 }
 
 StyleDictionary.registerTransform({
-  name: 'dt/fonts/weight',
+  name: 'dt/android/fonts/weight',
   type: 'value',
   matcher: function(token) {
     return WEIGHT_IDENTIFIERS.includes(token.type)
   },
   transformer: (token, options) => {
-    return WEIGHT[token.value] ?? token.value
+    return `FontWeight.${ANDROID_WEIGHTS[token.value]}`
   }
 });
 
@@ -218,6 +219,27 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
+  name: 'dt/android/lineHeight/percentToDecimal',
+  type: 'value',
+  matcher: function(token) {
+    return LINE_HEIGHT_IDENTIFIERS.includes(token.type)
+  },
+  transformer: (token, options) => {
+    const floatVal = parseFloat(token.value);
+
+    if (isNaN(floatVal)) {
+      throwSizeError(token.name, token.value, '%');
+    }
+
+    if (floatVal === 0) {
+      return '0';
+    }
+
+    return `${floatVal / 100}.em`;
+  }
+});
+
+StyleDictionary.registerTransform({
   name: 'dt/ios/lineHeight/percentToDecimal',
   type: 'value',
   matcher: function(token) {
@@ -238,7 +260,7 @@ StyleDictionary.registerTransform({
   name: 'dt/stringify',
   type: 'value',
   matcher: function(token) {
-    return [...WEIGHT_IDENTIFIERS, 'type', 'textCase'].includes(token.type)
+    return ['type', 'textCase'].includes(token.type)
   },
   transformer: (token, options) => {
     return `"${token.value}"`;
@@ -288,6 +310,23 @@ StyleDictionary.registerAction({
 
 StyleDictionary.buildAllPlatforms();
 
+function insert(str, index, value) {
+  return str.substring(0, index) + value + str.substring(index);
+}
+
+function addImportIntoKotlinFile(path, importText) {
+  const content = fs.readFileSync(path).toString();
+  // find first import statement in file
+  const writePos = content.indexOf('import androidx') - 1;
+  // insert new import before it
+  const newContent = insert(content, writePos, importText);
+
+  fs.writeFileSync(path, newContent);
+}
+
+const KOTLIN_FILE_PATH = './dist/android/java/tokens.kt';
+addImportIntoKotlinFile(KOTLIN_FILE_PATH, 'import androidx.compose.ui.text.font.FontWeight')
+
 const DOC_OUTPUT_PATH = './dist/doc.json';
 
 fs.writeFile(DOC_OUTPUT_PATH, JSON.stringify(docTokens, null, 2), err => {
@@ -295,4 +334,4 @@ fs.writeFile(DOC_OUTPUT_PATH, JSON.stringify(docTokens, null, 2), err => {
     throw err
   }
   console.info(`Token documentation data written to ${DOC_OUTPUT_PATH}`)
-})
+});
