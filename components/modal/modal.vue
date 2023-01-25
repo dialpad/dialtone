@@ -18,6 +18,7 @@
       :class="[
         'd-modal__banner',
         bannerClass,
+        bannerKindClass,
       ]"
     >
       <!-- @slot Slot for the banner, defaults to bannerTitle prop -->
@@ -117,12 +118,13 @@
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import Modal from '@/common/mixins/modal.js';
-import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
+import { MODAL_BANNER_KINDS, MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button';
+import { NOTICE_KINDS } from '@/components/notice';
 
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
@@ -257,6 +259,18 @@ export default {
     },
 
     /**
+     * Sets the color of the banner.
+     * @values base, error, info, success, warning
+     */
+    bannerKind: {
+      type: String,
+      default: 'warning',
+      validate (kind) {
+        return NOTICE_KINDS.includes(kind);
+      },
+    },
+
+    /**
      * Additional class name for the banner element within the modal.
      * Can accept String, Object, and Array, i.e. has the
      * same API as Vue's built-in handling of the class attribute.
@@ -300,6 +314,7 @@ export default {
     return {
       MODAL_KIND_MODIFIERS,
       MODAL_SIZE_MODIFIERS,
+      MODAL_BANNER_KINDS,
       EVENT_KEYNAMES,
     };
   },
@@ -339,6 +354,10 @@ export default {
 
     hasFooterSlot () {
       return !!this.$slots.footer;
+    },
+
+    bannerKindClass () {
+      return MODAL_BANNER_KINDS[this.bannerKind];
     },
   },
 

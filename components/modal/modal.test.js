@@ -7,6 +7,7 @@ import {
   itBehavesLikeVisuallyHiddenCloseLabelIsNull,
 } from '@/tests/shared_examples/sr_only_close_button';
 import { cleanSpy, initializeSpy, itBehavesLikeRaisesValidationError } from '@/tests/shared_examples/validation';
+import { MODAL_BANNER_KINDS } from './modal_constants';
 
 const basePropsData = {
   closeButtonProps: {
@@ -185,6 +186,32 @@ describe('DtModal Tests', function () {
 
     _setChildWrappers();
     assert.isTrue(banner.classes(bannerClass));
+  });
+
+  it('Should set default banner kind when no kind is set', async function () {
+    const bannerTitle = 'title';
+
+    await wrapper.setProps({
+      show: true,
+      bannerTitle,
+    });
+
+    _setChildWrappers();
+    assert.isTrue(banner.classes(MODAL_BANNER_KINDS[DtModal.props.bannerKind.default]));
+  });
+
+  it('Should apply banner kind', async function () {
+    const bannerKind = 'info';
+    const bannerTitle = 'title';
+
+    await wrapper.setProps({
+      show: true,
+      bannerTitle,
+      bannerKind,
+    });
+
+    _setChildWrappers();
+    assert.isTrue(banner.classes(MODAL_BANNER_KINDS[bannerKind]));
   });
 
   it('Should pass content class through to content modal element', async function () {

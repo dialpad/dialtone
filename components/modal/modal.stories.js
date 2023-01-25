@@ -4,6 +4,7 @@ import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
+import { NOTICE_KINDS } from '@/components/notice';
 
 export const argTypesData = {
   // Slots
@@ -53,6 +54,13 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: Object.keys(MODAL_KIND_MODIFIERS),
+    },
+  },
+  bannerKind: {
+    defaultValue: 'warning',
+    control: {
+      type: 'select',
+      options: NOTICE_KINDS,
     },
   },
   showFooter: {

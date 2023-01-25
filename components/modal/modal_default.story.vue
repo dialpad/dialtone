@@ -10,6 +10,7 @@
       :copy="copy"
       :modal-class="modalClass"
       :banner-class="bannerClass"
+      :banner-kind="bannerKind"
       :dialog-class="dialogClass"
       :content-class="contentClass"
       :hide-close="hideClose"
