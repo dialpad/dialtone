@@ -2298,9 +2298,7 @@
       "name": "light",
       "selectedTokenSets": {
         "base": "enabled",
-        "semantic": "enabled",
-        "base/dark": "disabled",
-        "semantic/dark": "disabled"
+        "semantic": "enabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:92f5e2212b79f23c86e2527358948b6dd56ac41e,",
