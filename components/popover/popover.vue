@@ -50,7 +50,7 @@
         :aria-modal="`${!modal}`"
         :transition="transition"
         :show="isOpen"
-        :appear="contentAppear"
+        :appear="toAppear"
         :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }, dialogClass]"
         :style="{
           'max-height': maxHeight,
@@ -272,7 +272,7 @@ export default {
      */
     contentAppear: {
       type: Boolean,
-      default: false,
+      default: null,
     },
 
     /**
@@ -506,6 +506,7 @@ export default {
       POPOVER_PADDING_CLASSES,
       POPOVER_HEADER_FOOTER_PADDING_CLASSES,
       isOpen: false,
+      toAppear: false,
       anchorEl: null,
       popoverContentEl: null,
     };
@@ -585,9 +586,20 @@ export default {
         if (open !== null) {
           this.isOpen = open;
         }
+        if (open === true) {
+          this.toAppear = true;
+        }
       },
 
       immediate: true,
+    },
+
+    contentAppear: {
+      handler: function (contentAppear) {
+        if (contentAppear !== null) {
+          this.toAppear = contentAppear;
+        }
+      },
     },
 
     isOpen (isOpen, isPrev) {
