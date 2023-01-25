@@ -13,6 +13,7 @@
     :on-end-of-list="onEndOfList"
     :list-rendered-outside="true"
     :list-id="listId"
+    :append-to="appendTo"
     data-qa="dt-combobox"
     v-on="comboboxListeners"
   >
@@ -110,6 +111,7 @@ import { getUniqueString } from '@/common/utils';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
+import { POPOVER_APPEND_TO_VALUES } from '@/components/popover/popover_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
@@ -268,6 +270,19 @@ export default {
     popoverSticky: {
       type: [Boolean, String],
       default: false,
+    },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * @values 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: () => document.body,
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
+      },
     },
 
     /**
