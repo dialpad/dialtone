@@ -10,6 +10,7 @@
       :copy="$attrs.copy"
       :modal-class="$attrs.modalClass"
       :banner-class="$attrs.bannerClass"
+      :banner-kind="$attrs.bannerKind"
       :dialog-class="$attrs.dialogClass"
       :content-class="$attrs.contentClass"
       :hide-close="$attrs.hideClose"
