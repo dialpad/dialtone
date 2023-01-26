@@ -1,3 +1,10 @@
+# [3.41.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v3.41.0-beta.1...v3.41.0-beta.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* watch appendTo ([e36ca98](https://github.com/dialpad/dialtone-vue/commit/e36ca98e1460cf3f22399b03cde6882f2d6e6a7c))
+
 # [3.41.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v3.40.0...v3.41.0-beta.1) (2023-01-26)
 
 
