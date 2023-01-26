@@ -1,3 +1,10 @@
+## [2.54.2](https://github.com/dialpad/dialtone-vue/compare/v2.54.1...v2.54.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* **Popover:** fix prevent scroll logic ([#722](https://github.com/dialpad/dialtone-vue/issues/722)) ([7a1ed16](https://github.com/dialpad/dialtone-vue/commit/7a1ed16d0008a3f2c3a640fe5ac3c68b285d8ab5))
+
 ## [2.54.1](https://github.com/dialpad/dialtone-vue/compare/v2.54.0...v2.54.1) (2023-01-26)
 
 
