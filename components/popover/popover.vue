@@ -613,7 +613,9 @@ export default {
   },
 
   mounted () {
-    const externalAnchorEl = document.getElementById(this.externalAnchor);
+    const externalAnchorEl = this.externalAnchor
+      ? this.$el.getRootNode().querySelector(`#${this.externalAnchor}`)
+      : null;
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
 
@@ -649,7 +651,8 @@ export default {
 
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
-      if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+      if (this.$el.getRootNode()
+        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
         return 650;
       } else {
         return 300;
@@ -730,7 +733,7 @@ export default {
     * Prevents scrolling only when the popover is set to modal
     **/
     preventScrolling (e) {
-      if (!this.modal || this.$refs.content.$el.contains(e.target)) return;
+      if (!this.modal) return;
       e.preventDefault();
     },
 
@@ -867,6 +870,7 @@ export default {
       this.addEventListeners();
     },
   },
+
 };
 </script>
 
