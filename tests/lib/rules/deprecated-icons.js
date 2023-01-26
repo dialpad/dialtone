@@ -8,7 +8,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require("../../../lib/rules/old-svg-icons"), RuleTester = require("eslint").RuleTester;
+const rule = require("../../../lib/rules/deprecated-icons"), RuleTester = require("eslint").RuleTester;
 
 
 //------------------------------------------------------------------------------
@@ -16,11 +16,19 @@ const rule = require("../../../lib/rules/old-svg-icons"), RuleTester = require("
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({parserOptions: {sourceType: 'module', ecmaVersion: 'latest'}});
-ruleTester.run("old-svg-icons", rule, {
+ruleTester.run("deprecated-icons", rule, {
     valid: [
         {
             name: 'New icon import',
             code: "import svgLockIcon from '@dialpad/dialtone-icons/dist/svg/lock.svg';",
+        },
+        {
+            name: 'Brand icon import',
+            code: "import dialpadAiIcon from '../../node_modules/@dialpad/dialtone/lib/build/svg/brand/dialpad-ai.svg';",
+        },
+        {
+            name: 'Spot illustration import',
+            code: "import SpotBrowserTableGraph from '@dialpad/dialtone/vue/spot/SpotBrowserTableGraph';",
         },
         {
             name: 'Dialtone Styles import',
@@ -30,22 +38,31 @@ ruleTester.run("old-svg-icons", rule, {
 
     invalid: [
         {
-            name: 'Old icon import from build',
+            name: 'Old SVG icon import from build',
             code: "import svgLockIcon from '../node_modules/@dialpad/dialtone/lib/build/svg/system/lock.svg';",
             errors: [
                 {
-                    messageId: "avoidSVGImport"
+                    messageId: "avoidDeprecatedImport"
                 }
             ],
         },
         {
-            name: 'Old icon import from dist',
+            name: 'Old SVG icon import from dist',
             code: "import svgLockIcon from '../node_modules/@dialpad/dialtone/lib/dist/svg/system/lock.svg';",
             errors: [
                 {
-                    messageId: "avoidSVGImport"
+                    messageId: "avoidDeprecatedImport"
                 }
             ],
-        }
+        },
+        {
+            name: 'Old VUE icon import',
+            code: "import IconSettings from '@dialpad/dialtone/vue/icons/IconSettings';",
+            errors: [
+                {
+                    messageId: "avoidDeprecatedImport"
+                }
+            ],
+        },
     ],
 });
