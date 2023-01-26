@@ -89,16 +89,6 @@ export default {
     },
   },
 
-  watch: {
-    $props: {
-      immediate: true,
-      deep: true,
-      handler () {
-        this.validateProps();
-      },
-    },
-  },
-
   created () {
     if (!this.hideClose && !this.closeButtonProps.ariaLabel) {
       console.error('Invalid props: you must pass in closeButtonProps.ariaLabel if the close button is displayed.');
@@ -118,13 +108,6 @@ export default {
   methods: {
     close () {
       this.$emit('close');
-    },
-
-    validateProps () {
-      if (this.hideClose && !this.visuallyHiddenClose) {
-        console.error('If hideClose prop is true, visuallyHiddenClose and visuallyHiddenCloseLabel props ' +
-          'need to be set so the component always includes a close button');
-      }
     },
   },
 };
