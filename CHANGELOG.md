@@ -1,3 +1,10 @@
+# [3.41.0-beta.4](https://github.com/dialpad/dialtone-vue/compare/v3.41.0-beta.3...v3.41.0-beta.4) (2023-01-26)
+
+
+### Bug Fixes
+
+* hack [#2](https://github.com/dialpad/dialtone-vue/issues/2) ([ffde2de](https://github.com/dialpad/dialtone-vue/commit/ffde2ded6a2b12622322aed47b07fbd834adb6e6))
+
 # [3.41.0-beta.3](https://github.com/dialpad/dialtone-vue/compare/v3.41.0-beta.2...v3.41.0-beta.3) (2023-01-26)
 
 
