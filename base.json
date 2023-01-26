@@ -1707,7 +1707,7 @@
           "type": "color"
         },
         "critical": {
-          "value": "{color.red.300}",
+          "value": "{color.red.400}",
           "type": "color",
           "description": "critical, danger, error"
         },
@@ -1716,7 +1716,7 @@
           "type": "color"
         },
         "warning": {
-          "value": "{color.gold.500}",
+          "value": "{color.gold.400}",
           "type": "color"
         },
         "inverted": {
