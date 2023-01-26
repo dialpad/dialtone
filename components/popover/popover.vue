@@ -658,7 +658,8 @@ export default {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
       if (this.$el.getRootNode()
-        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
+        this.anchorEl.closest('.d-zi-drawer')) {
         return 650;
       } else {
         return 300;
@@ -859,7 +860,7 @@ export default {
         placement: this.placement,
         offset: this.offset,
         sticky: this.sticky,
-        appendTo: this.anchorEl.getRootNode().querySelector('body'),
+        appendTo: this.appendTo === document.body ? this.anchorEl?.getRootNode()?.querySelector('body') : this.appendTo,
         interactive: true,
         trigger: 'manual',
         // We have to manage hideOnClick functionality manually to handle
