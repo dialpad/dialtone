@@ -557,6 +557,12 @@ export default {
       });
     },
 
+    appendTo (appendTo) {
+      this.tip?.setProps({
+        appendTo,
+      });
+    },
+
     sticky (sticky) {
       this.tip?.setProps({
         sticky,
@@ -614,7 +620,7 @@ export default {
 
   mounted () {
     const externalAnchorEl = this.externalAnchor
-      ? this.$el.getRootNode().querySelector(`#${this.externalAnchor}`)
+      ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
       : null;
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
