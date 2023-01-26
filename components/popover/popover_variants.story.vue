@@ -302,7 +302,7 @@
       content-class="d-pl12 d-pr16"
       initial-focus-element="first"
       class="d-my128 d-jc-flex-end"
-      max-height="20rem"
+      max-height="15rem"
       max-width="50rem"
     >
       <template #anchor="{ attrs }">
@@ -317,7 +317,10 @@
           <p>
             {{ sampleText }}
           </p>
-          <dt-dropdown :open="open">
+          <dt-dropdown
+            :open="open"
+            max-height="13rem"
+          >
             <template #anchor="{ attrs }">
               <dt-button
                 v-bind="attrs"

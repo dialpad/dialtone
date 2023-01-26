@@ -579,9 +579,11 @@ export default {
     isOpen (isOpen, isPrev) {
       if (isOpen) {
         this.initTippyInstance();
+        this.preventScrolling();
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeEventListeners();
         this.tip.hide();
+        this.enableScrolling();
       }
     },
   },
@@ -674,7 +676,6 @@ export default {
 
     addEventListeners () {
       window.addEventListener('dt-popover-close', this.closePopover);
-      window.addEventListener('wheel', this.preventScrolling, { passive: false });
       // align popover content width when contentWidth is 'anchor'
       if (this.contentWidth === 'anchor') {
         window.addEventListener('resize', this.onResize);
@@ -683,7 +684,6 @@ export default {
 
     removeEventListeners () {
       window.removeEventListener('dt-popover-close', this.closePopover);
-      window.removeEventListener('wheel', this.preventScrolling, { passive: false });
       if (this.contentWidth === 'anchor') {
         window.removeEventListener('resize', this.onResize);
       }
@@ -694,11 +694,36 @@ export default {
     },
 
     /*
-    * Prevents scrolling only when the popover is set to modal
+    * Prevents scrolling outside of the currently opened modal popover by:
+    *   - when anchor is not within another popover: setting the body to overflow: hidden
+    *   - when anchor is within another popover: set the popover dialog container to it's non-modal z-index
+    *     since it is no longer the active modal. This puts it underneath the overlay and prevents scrolling.
     **/
-    preventScrolling (e) {
-      if (!this.modal || this.$refs.content.$el.contains(e.target)) return;
-      e.preventDefault();
+    async preventScrolling () {
+      await this.$nextTick();
+      if (this.modal) {
+        const element = this.anchorEl.closest('body, .tippy-box');
+        if (element.tagName.toLowerCase() === 'body') {
+          element.classList.add('d-of-hidden');
+        } else {
+          element.classList.add('d-zi-popover');
+        }
+      }
+    },
+
+    /*
+    * Resets the prevent scrolling properties set in preventScrolling() back to normal.
+    **/
+    async enableScrolling () {
+      await this.$nextTick();
+      if (this.modal) {
+        const element = this.anchorEl.closest('body, .tippy-box');
+        if (element.tagName.toLowerCase() === 'body') {
+          element.classList.remove('d-of-hidden');
+        } else {
+          element.classList.remove('d-zi-popover');
+        }
+      }
     },
 
     removeReferences () {
