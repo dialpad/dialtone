@@ -859,7 +859,7 @@ export default {
         placement: this.placement,
         offset: this.offset,
         sticky: this.sticky,
-        appendTo: this.appendTo,
+        appendTo: this.anchorEl.getRootNode().querySelector('body'),
         interactive: true,
         trigger: 'manual',
         // We have to manage hideOnClick functionality manually to handle
