@@ -1,3 +1,10 @@
+## [2.54.1](https://github.com/dialpad/dialtone-vue/compare/v2.54.0...v2.54.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* **Modal:** fix modal focusFirstElement method ([#720](https://github.com/dialpad/dialtone-vue/issues/720)) ([0bc9205](https://github.com/dialpad/dialtone-vue/commit/0bc9205b42787c7328925175348f0dd9bc39b122))
+
 # [2.54.0](https://github.com/dialpad/dialtone-vue/compare/v2.53.1...v2.54.0) (2023-01-26)
 
 
