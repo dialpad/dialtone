@@ -1,3 +1,17 @@
+# [2.54.0](https://github.com/dialpad/dialtone-vue/compare/v2.53.1...v2.54.0) (2023-01-26)
+
+
+### Bug Fixes
+
+* **Combobox:** chips vertical alignment. ([#706](https://github.com/dialpad/dialtone-vue/issues/706)) ([e552ca1](https://github.com/dialpad/dialtone-vue/commit/e552ca1e3b324f58c2dfa50305dd84f854a9a35e))
+* **Notice:** incorrect validation ([#715](https://github.com/dialpad/dialtone-vue/issues/715)) ([c1360cc](https://github.com/dialpad/dialtone-vue/commit/c1360cc6f18341d77a6794a686bf2448178455aa))
+* **Tab:** fix focus management with focusable elements inside the panel ([#717](https://github.com/dialpad/dialtone-vue/issues/717)) ([693ac9e](https://github.com/dialpad/dialtone-vue/commit/693ac9e07aaa4886a9e9a3020a0bb5a619a722c7))
+
+
+### Features
+
+* **Modal:** add style variants of banner ([#713](https://github.com/dialpad/dialtone-vue/issues/713)) ([8696828](https://github.com/dialpad/dialtone-vue/commit/86968283f0e1e855f21d659fb9f7229a6fd45aaf))
+
 ## [2.53.1](https://github.com/dialpad/dialtone-vue/compare/v2.53.0...v2.53.1) (2023-01-20)
 
 
