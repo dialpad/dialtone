@@ -36,7 +36,7 @@ export default {
      *  will default to the root node of the vue component
      */
     async focusFirstElement (el) {
-      const elToFocus = this.getFirstFocusableElement(el);
+      const elToFocus = await this.getFirstFocusableElement(el);
       elToFocus?.focus({ preventScroll: true });
     },
 
