@@ -1,3 +1,16 @@
+# [2.54.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.53.1...v2.54.0-beta.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* **Combobox:** chips vertical alignment. ([#706](https://github.com/dialpad/dialtone-vue/issues/706)) ([e552ca1](https://github.com/dialpad/dialtone-vue/commit/e552ca1e3b324f58c2dfa50305dd84f854a9a35e))
+
+
+### Features
+
+* **Modal:** add style variants of banner ([#713](https://github.com/dialpad/dialtone-vue/issues/713)) ([8696828](https://github.com/dialpad/dialtone-vue/commit/86968283f0e1e855f21d659fb9f7229a6fd45aaf))
+* use getRootNode to get root ([a868ae4](https://github.com/dialpad/dialtone-vue/commit/a868ae49206c7022ecc6d6a3a6f604fc85fac69b))
+
 ## [2.53.1](https://github.com/dialpad/dialtone-vue/compare/v2.53.0...v2.53.1) (2023-01-20)
 
 
