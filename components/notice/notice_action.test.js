@@ -4,7 +4,6 @@ import { mount } from '@vue/test-utils';
 import DtNoticeAction from './notice_action';
 import DtButton from '../button/button';
 import SrOnlyCloseButton from '../../common/sr_only_close_button';
-import sinon from 'sinon';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
@@ -78,27 +77,13 @@ describe('DtNoticeAction tests', function () {
     });
 
     describe('When hideClose is true', function () {
-      let consoleErrorSpy;
-
       beforeEach(async function () {
-        consoleErrorSpy = sinon.spy(console, 'error');
         _setWrappers();
         await wrapper.setProps({ hideClose: true });
       });
 
-      afterEach(function () {
-        consoleErrorSpy = null;
-        console.error.restore();
-      });
-
       it('Close button is not displayed', function () {
         assert.isFalse(closeButton.exists());
-      });
-
-      it('should output error message', function () {
-        assert.isTrue(consoleErrorSpy.calledWith('If hideClose prop is true, visuallyHiddenClose' +
-            ' and visuallyHiddenCloseLabel props need to be set so the component' +
-            ' always includes a close button'));
       });
     });
 

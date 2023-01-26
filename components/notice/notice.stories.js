@@ -67,6 +67,11 @@ export const argTypesData = {
       options: NOTICE_ROLES,
     },
   },
+  show: {
+    table: {
+      disable: true,
+    },
+  },
 
   // Action Event Handlers
   onClick: {
