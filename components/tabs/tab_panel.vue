@@ -3,7 +3,7 @@
     v-show="!hidden"
     :id="`dt-panel-${id}`"
     role="tabpanel"
-    tabindex="0"
+    :tabindex="isFirstElementFocusable ? -1 : 0"
     :aria-labelledby="`dt-tab-${tabId}`"
     :aria-hidden="`${hidePanel}`"
     :class="[
@@ -20,12 +20,16 @@
 </template>
 
 <script>
+import Modal from '@/common/mixins/modal.js';
+
 /**
  * Tabs allow users to navigation between grouped content in different views while within the same page context.
  * @see https://dialpad.design/components/tabs.html
  */
 export default {
   name: 'DtTabPanel',
+
+  mixins: [Modal],
 
   inject: ['groupContext'],
 
@@ -64,10 +68,20 @@ export default {
     },
   },
 
+  data () {
+    return {
+      isFirstElementFocusable: false,
+    };
+  },
+
   computed: {
     hidePanel () {
       return this.groupContext.selected !== this.id || this.hidden;
     },
+  },
+
+  async mounted () {
+    this.isFirstElementFocusable = !!(await this.getFirstFocusableElement(this.$el));
   },
 };
 </script>

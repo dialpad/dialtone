@@ -20,14 +20,23 @@ const focusableElementsList = `button,[href],input,select,textarea,details,[tabi
 export default {
   methods: {
     /**
+     * get the first focusable element in your component, includes tabindex="-1".
+     * @param {object} el - optional - ref of dom element to trap focus on.
+     *  will default to the root node of the vue component
+     */
+    async getFirstFocusableElement (el) {
+      await this.$nextTick();
+      const focusableElements = this._getFocusableElements(el, true);
+      return this._getFirstFocusElement(focusableElements);
+    },
+
+    /**
      * set focus to the first focusable element in your component, includes tabindex="-1".
      * @param {object} el - optional - ref of dom element to trap focus on.
      *  will default to the root node of the vue component
      */
     async focusFirstElement (el) {
-      await this.$nextTick();
-      const focusableElements = this._getFocusableElements(el, true);
-      const elToFocus = this._getFirstFocusElement(focusableElements);
+      const elToFocus = await this.getFirstFocusableElement(el);
       elToFocus?.focus({ preventScroll: true });
     },
 
