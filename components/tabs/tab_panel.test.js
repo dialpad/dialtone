@@ -1,12 +1,14 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import DtTabPanel from './tab_panel.vue';
+import { flushPromises } from '@/common/utils';
 
 describe('DtTabPanel Tests', function () {
   // Wrappers
   let wrapper;
   let tabPanel;
   const defaultSlot = 'Panel Slot';
+  const focusableSlot = '<button>Focusable Slot</button>';
 
   const slots = { default: defaultSlot };
   const groupContext = {
@@ -21,8 +23,8 @@ describe('DtTabPanel Tests', function () {
     tabPanel = wrapper.find('[data-qa="dt-tab-panel"]');
   };
 
-  const _mountWrapper = () => {
-    wrapper = shallowMount(DtTabPanel, {
+  const _mountWrapper = async () => {
+    wrapper = mount(DtTabPanel, {
       localVue: createLocalVue(),
       slots,
       propsData,
@@ -30,6 +32,7 @@ describe('DtTabPanel Tests', function () {
         groupContext,
       },
     });
+
     _setWrappers();
   };
 
@@ -116,8 +119,21 @@ describe('DtTabPanel Tests', function () {
         assert.strictEqual(tabPanel.attributes('role'), 'tabpanel');
       });
 
-      it('tabindex should be "0"', function () {
+      it('tabindex should be "0" if the first element is not focusable', function () {
         assert.strictEqual(tabPanel.attributes('tabindex'), '0');
+      });
+    });
+
+    describe('Focus management with tabindex', function () {
+      beforeEach(async function () {
+        slots.default = focusableSlot;
+        await _mountWrapper();
+        await flushPromises();
+        _setWrappers();
+      });
+
+      it('tabindex should be "-1" if the first element is focusable', function () {
+        assert.strictEqual(tabPanel.attributes('tabindex'), '-1');
       });
     });
   });
