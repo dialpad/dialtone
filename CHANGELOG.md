@@ -1,3 +1,19 @@
+# [3.42.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v3.41.0...v3.42.0-beta.1) (2023-01-27)
+
+
+### Bug Fixes
+
+* consolelog tests ([0d53fff](https://github.com/dialpad/dialtone-vue/commit/0d53fff3fa5b83883d1f8bec693675afeefd93b2))
+* hack [#2](https://github.com/dialpad/dialtone-vue/issues/2) ([ffde2de](https://github.com/dialpad/dialtone-vue/commit/ffde2ded6a2b12622322aed47b07fbd834adb6e6))
+* hack it up ([46df0d7](https://github.com/dialpad/dialtone-vue/commit/46df0d7327194fab77341fe96acf56a6177578f9))
+* **Popover:** fix prevent scroll logic ([#723](https://github.com/dialpad/dialtone-vue/issues/723)) ([03e1b2b](https://github.com/dialpad/dialtone-vue/commit/03e1b2b924f9e9a49bf8f563a138fa393c9c2f0f))
+* watch appendTo ([e36ca98](https://github.com/dialpad/dialtone-vue/commit/e36ca98e1460cf3f22399b03cde6882f2d6e6a7c))
+
+
+### Features
+
+* **Popover:** shadow dom external anchor logic ([b20e258](https://github.com/dialpad/dialtone-vue/commit/b20e258e5d167931f64e4e51ea6db3c5df3a1a90))
+
 # [3.41.0-beta.4](https://github.com/dialpad/dialtone-vue/compare/v3.41.0-beta.3...v3.41.0-beta.4) (2023-01-26)
 
 
