@@ -141,17 +141,13 @@ StyleDictionary.registerTransform({
   name: 'dt/android/size/pxToDp',
   type: 'value',
   matcher: function(token) {
-    return SIZE_IDENTIFIERS.includes(token.type)
+    return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type)
   },
   transformer: (token, options) => {
     const floatVal = parseFloat(token.value);
 
     if (isNaN(floatVal)) {
       throwSizeError(token.name, token.value, 'dp');
-    }
-
-    if (floatVal === 0) {
-      return '0';
     }
 
     return `${floatVal}.dp`;
@@ -163,17 +159,13 @@ StyleDictionary.registerTransform({
   name: 'dt/android/size/pxToSp',
   type: 'value',
   matcher: function(token) {
-    return [...SPACING_IDENTIFIERS, ...FONT_SIZE_IDENTIFIERS].includes(token.type)
+    return [...FONT_SIZE_IDENTIFIERS].includes(token.type)
   },
   transformer: (token, options) => {
     const floatVal = parseFloat(token.value);
 
     if (isNaN(floatVal)) {
       throwSizeError(token.name, token.value, 'sp');
-    }
-
-    if (floatVal === 0) {
-      return '0';
     }
 
     return `${floatVal}.sp`;
