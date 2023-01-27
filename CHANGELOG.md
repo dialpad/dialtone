@@ -25,12 +25,19 @@
 ### Bug Fixes
 
 * **Notice:** incorrect validation - vue 3 ([#716](https://github.com/dialpad/dialtone-vue/issues/716)) ([39aa989](https://github.com/dialpad/dialtone-vue/commit/39aa989f5b12864b4a91e7dfea52d41ba15cc316))
+<<<<<<< HEAD
+=======
+* **Tab:** fix focus management with focusable elements inside the panel ([#721](https://github.com/dialpad/dialtone-vue/issues/721)) ([b689472](https://github.com/dialpad/dialtone-vue/commit/b689472a3624eb6ea1d03ebb94ac8befe91159b5))
+>>>>>>> staging-vue3
 
 
 ### Features
 
 * **Modal:** add style variants of banner ([#714](https://github.com/dialpad/dialtone-vue/issues/714)) ([b759869](https://github.com/dialpad/dialtone-vue/commit/b759869f26cda41ee8fb1c93a43be6cf7af5ef2d))
+<<<<<<< HEAD
 * **Popover:** shadow dom external anchor logic ([b20e258](https://github.com/dialpad/dialtone-vue/commit/b20e258e5d167931f64e4e51ea6db3c5df3a1a90))
+=======
+>>>>>>> staging-vue3
 
 # [3.40.0](https://github.com/dialpad/dialtone-vue/compare/v3.39.0...v3.40.0) (2023-01-24)
 
