@@ -1,3 +1,17 @@
+# [1.6.0](https://github.com/dialpad/dialtone-tokens/compare/v1.5.0...v1.6.0) (2023-01-27)
+
+
+### Bug Fixes
+
+* correct android dp values ([3eb43ac](https://github.com/dialpad/dialtone-tokens/commit/3eb43ac1e4afc421075cc420e00e5fd384a04393))
+
+
+### Features
+
+* **color:** dark critical/success/warning text ([61e5472](https://github.com/dialpad/dialtone-tokens/commit/61e5472e1fcf53e432e953a2cc769029b1a6df5c))
+* **theme:** default to light theme ([1e768f7](https://github.com/dialpad/dialtone-tokens/commit/1e768f75091663377d429d24dfc86ad747abc994))
+* **theme:** reassigned some base values and poc dark theme ([#7](https://github.com/dialpad/dialtone-tokens/issues/7)) ([84514de](https://github.com/dialpad/dialtone-tokens/commit/84514de3ccb0c418282783891a646b0d09ded206))
+
 # [1.5.0](https://github.com/dialpad/dialtone-tokens/compare/v1.4.4...v1.5.0) (2023-01-24)
 
 
