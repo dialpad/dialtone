@@ -559,7 +559,7 @@ export default {
 
     appendTo (appendTo) {
       this.tip?.setProps({
-        appendTo,
+        appendTo: this.appendTo === document.body ? this.anchorEl?.getRootNode()?.querySelector('body') : this.appendTo,
       });
     },
 

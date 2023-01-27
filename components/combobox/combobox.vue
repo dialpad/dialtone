@@ -373,6 +373,7 @@ export default {
 
     onOpen (open, contentRef) {
       this.outsideRenderedListRef = contentRef;
+      console.log(this.outsideRenderedListRef);
       this.outsideRenderedListRef?.addEventListener('mousemove', this.onMouseHighlight);
       this.$emit('opened', open);
 

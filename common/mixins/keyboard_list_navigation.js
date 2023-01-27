@@ -183,6 +183,7 @@ export default ({
     },
 
     setHighlightIndex (num) {
+      console.log('setting highlight index to ' + num);
       this[indexKey] = num;
       this[idKey] = this._getItemId(num);
 
@@ -192,6 +193,7 @@ export default ({
     },
 
     setHighlightId (id) {
+      console.log('setting highlight id to ' + id);
       this[idKey] = id;
       this[indexKey] = this._getItemIndex(id);
 
