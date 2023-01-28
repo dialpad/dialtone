@@ -70,7 +70,7 @@ StyleDictionary.registerTransform({
     return FONT_FAMILY_IDENTIFIERS.includes(token.type)
   },
   transformer: (token, options) => {
-    return `arrayOf(${token.value.split(',').map(s => `"${s.replaceAll('"', '').trim()}"`).join(', ')})`;
+    return 'FontFamily.Default';
   }
 });
 
@@ -336,6 +336,7 @@ function addImportIntoKotlinFile(path, importText) {
 
 const KOTLIN_FILE_PATH = './dist/android/java/tokens.kt';
 addImportIntoKotlinFile(KOTLIN_FILE_PATH, 'import androidx.compose.ui.text.font.FontWeight')
+addImportIntoKotlinFile(KOTLIN_FILE_PATH, 'import androidx.compose.ui.text.font.FontFamily')
 
 const DOC_OUTPUT_PATH = './dist/doc.json';
 
