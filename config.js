@@ -49,7 +49,7 @@ module.exports = {
       ],
     },
     android_compose: {
-      transforms: ['dt/android/compose/fonts/transformToStack', 'dt/android/fonts/weight',  'dt/android/lineHeight/percentToDecimal', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/compose/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
+      transforms: ['dt/android/compose/fonts/transformToStack', 'dt/android/fonts/weight',  'dt/android/lineHeight/percentToDecimal', 'dt/android/opacity/percentToFloat', 'dt/android/size/pxToDp', 'dt/android/size/pxToSp', 'dt/android/compose/color', 'dt/stringify', 'attribute/cti', 'name/cti/camel'],
       actions: ['buildDocJson'],
       prefix: 'dt',
       buildPath: 'dist/android/java/',

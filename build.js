@@ -231,6 +231,24 @@ StyleDictionary.registerTransform({
   }
 });
 
+//Sp is for font sizes only
+StyleDictionary.registerTransform({
+  name: 'dt/android/opacity/percentToFloat',
+  type: 'value',
+  matcher: function(token) {
+    return ['opacity'].includes(token.type)
+  },
+  transformer: (token, options) => {
+    const floatVal = parseFloat(token.value);
+
+    if (isNaN(floatVal)) {
+      throwSizeError(token.name, token.value, '%');
+    }
+
+    return `${floatVal}F`;
+  }
+});
+
 StyleDictionary.registerTransform({
   name: 'dt/ios/lineHeight/percentToDecimal',
   type: 'value',
