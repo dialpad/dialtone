@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/dialpad/dialtone-tokens/compare/v1.6.0...v1.6.1) (2023-01-28)
+
+
+### Bug Fixes
+
+* **android:** add float to opacity ([9d80c15](https://github.com/dialpad/dialtone-tokens/commit/9d80c15d74726e99b1def3bd2c96872a5a4b4c97))
+
 # [1.6.0](https://github.com/dialpad/dialtone-tokens/compare/v1.5.0...v1.6.0) (2023-01-27)
 
 
