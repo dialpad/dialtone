@@ -8,7 +8,6 @@ describe('DtTabPanel Tests', function () {
   let wrapper;
   let tabPanel;
   const defaultSlot = 'Panel Slot';
-  const focusableSlot = '<button>Focusable Slot</button>';
 
   const slots = { default: defaultSlot };
   const groupContext = {
@@ -125,16 +124,29 @@ describe('DtTabPanel Tests', function () {
       });
     });
 
-    describe('Focus management with tabindex', function () {
+    describe('When the first element is focusable', function () {
       beforeEach(async function () {
-        slots.default = focusableSlot;
+        slots.default = '<div><button>Focusable Slot</button></div>';
         await _mountWrapper();
         await flushPromises();
         _setWrappers();
       });
 
-      it('tabindex should be "-1" if the first element is focusable', function () {
+      it('tabindex should be "-1"', function () {
         assert.strictEqual(tabPanel.attributes('tabindex'), '-1');
+      });
+    });
+
+    describe(`When there is a focusable element but it isn't the first element`, function () {
+      beforeEach(async function () {
+        slots.default = '<h1>Content</h1><div><button>Focusable Slot</button></div>';
+        await _mountWrapper();
+        await flushPromises();
+        _setWrappers();
+      });
+
+      it('tabindex should be "0"', function () {
+        assert.strictEqual(tabPanel.attributes('tabindex'), '0');
       });
     });
   });
