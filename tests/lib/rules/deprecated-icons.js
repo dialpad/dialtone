@@ -23,8 +23,12 @@ ruleTester.run("deprecated-icons", rule, {
             code: "import svgLockIcon from '@dialpad/dialtone-icons/dist/svg/lock.svg';",
         },
         {
-            name: 'Brand icon import',
+            name: 'Brand SVG icon import',
             code: "import dialpadAiIcon from '../../node_modules/@dialpad/dialtone/lib/build/svg/brand/dialpad-ai.svg';",
+        },
+        {
+            name: 'Brand VUE icon import',
+            code: "import IconDialpadAi from '@dialpad/dialtone/vue/icons/IconDialpadAi';",
         },
         {
             name: 'Spot illustration import',
