@@ -12,7 +12,7 @@ const SIZE_IDENTIFIERS = ['fontSizes', 'fontSize', 'sizing', 'borderWidth', 'bor
 const LINE_HEIGHT_IDENTIFIERS = ['lineHeights', 'lineHeight'];
 const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
 const WEIGHT_IDENTIFIERS = ['fontWeights', 'fontWeight'];
-const FONT_FAMILY_IDENTIFIERS = ['fontFamilies', 'fontFamily']
+const FONT_FAMILY_IDENTIFIERS = ['fontFamilies', 'fontFamily', 'typography']
 
 // Values
 const FALLBACK_FONTS = ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'];
@@ -70,18 +70,10 @@ StyleDictionary.registerTransform({
     return FONT_FAMILY_IDENTIFIERS.includes(token.type)
   },
   transformer: (token, options) => {
-    console.log(token);
-    if (token.name === 'small') {
-
-    }
-    if (token.name === 'body' || token.name === 'expressive') {
-      return 'FontFamily.Default';
-    }
-    else if (token.name === 'mono' || token.path.includes('code')) {
+    if (token.name === 'mono' || token.path.includes('code')) {
       return 'FontFamily.Monospace';
     }
-    return `"a"`;
-
+    return 'FontFamily.Default';
   }
 });
 
