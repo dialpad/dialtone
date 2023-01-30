@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/dialpad/dialtone-tokens/compare/v1.6.2...v1.6.3) (2023-01-30)
+
+
+### Bug Fixes
+
+* **android:** correct mono fonts ([e1c40c8](https://github.com/dialpad/dialtone-tokens/commit/e1c40c8fcd6954ffce82c1489d2d5ff710ef207b))
+
 ## [1.6.2](https://github.com/dialpad/dialtone-tokens/compare/v1.6.1...v1.6.2) (2023-01-28)
 
 
