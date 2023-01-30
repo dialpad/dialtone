@@ -70,7 +70,18 @@ StyleDictionary.registerTransform({
     return FONT_FAMILY_IDENTIFIERS.includes(token.type)
   },
   transformer: (token, options) => {
-    return 'FontFamily.Default';
+    console.log(token);
+    if (token.name === 'small') {
+
+    }
+    if (token.name === 'body' || token.name === 'expressive') {
+      return 'FontFamily.Default';
+    }
+    else if (token.name === 'mono' || token.path.includes('code')) {
+      return 'FontFamily.Monospace';
+    }
+    return `"a"`;
+
   }
 });
 
