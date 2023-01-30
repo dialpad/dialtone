@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/dialpad/dialtone-tokens/compare/v1.6.3...v1.6.4) (2023-01-30)
+
+
+### Bug Fixes
+
+* **android:** fix bad filtering for fontFamily ([10552b5](https://github.com/dialpad/dialtone-tokens/commit/10552b5cf0aae2fc9fca65c81f16244eeef4eb7b))
+
 ## [1.6.3](https://github.com/dialpad/dialtone-tokens/compare/v1.6.2...v1.6.3) (2023-01-30)
 
 
