@@ -1813,7 +1813,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.normal}",
             "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.100}"
+            "fontSize": "{font.size.100}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography"
         },
@@ -1822,7 +1823,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.normal}",
             "lineHeight": "{font.lineHeight.400}",
-            "fontSize": "{font.size.200}"
+            "fontSize": "{font.size.200}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography"
         },
@@ -1832,7 +1834,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.normal}",
               "lineHeight": "{font.lineHeight.200}",
-              "fontSize": "{font.size.100}"
+              "fontSize": "{font.size.100}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography"
           },
@@ -1841,7 +1844,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.normal}",
               "lineHeight": "{font.lineHeight.300}",
-              "fontSize": "{font.size.200}"
+              "fontSize": "{font.size.200}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography"
           }
@@ -1863,7 +1867,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.bold}",
             "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.100}"
+            "fontSize": "{font.size.100}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography",
           "description": "subhead"
@@ -1873,7 +1878,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.bold}",
             "lineHeight": "{font.lineHeight.400}",
-            "fontSize": "{font.size.200}"
+            "fontSize": "{font.size.200}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography",
           "description": "base"
@@ -1883,7 +1889,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.bold}",
             "lineHeight": "{font.lineHeight.400}",
-            "fontSize": "{font.size.300}"
+            "fontSize": "{font.size.300}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography",
           "description": "section"
@@ -1893,7 +1900,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.medium}",
             "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.400}"
+            "fontSize": "{font.size.400}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography",
           "description": "display"
@@ -1903,7 +1911,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.medium}",
             "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.500}"
+            "fontSize": "{font.size.500}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography",
           "description": "page head"
@@ -1914,7 +1923,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.medium}",
               "lineHeight": "{font.lineHeight.300}",
-              "fontSize": "{font.size.100}"
+              "fontSize": "{font.size.100}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography",
             "description": "subhead"
@@ -1926,7 +1936,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.bold}",
               "lineHeight": "{font.lineHeight.200}",
-              "fontSize": "{font.size.100}"
+              "fontSize": "{font.size.100}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography",
             "description": "subheading"
@@ -1936,7 +1947,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.bold}",
               "lineHeight": "{font.lineHeight.300}",
-              "fontSize": "{font.size.200}"
+              "fontSize": "{font.size.200}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography"
           },
@@ -1945,7 +1957,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.bold}",
               "lineHeight": "{font.lineHeight.200}",
-              "fontSize": "{font.size.300}"
+              "fontSize": "{font.size.300}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography"
           },
@@ -1955,7 +1968,8 @@
                 "fontFamily": "{font.family.body}",
                 "fontWeight": "{font.weight.medium}",
                 "lineHeight": "{font.lineHeight.200}",
-                "fontSize": "{font.size.100}"
+                "fontSize": "{font.size.100}",
+                "textCase": "{font.text-case.none}"
               },
               "type": "typography",
               "description": "subhead"
@@ -1969,7 +1983,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.semiBold}",
             "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.100}"
+            "fontSize": "{font.size.100}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography"
         },
@@ -1978,7 +1993,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.semiBold}",
             "lineHeight": "{font.lineHeight.400}",
-            "fontSize": "{font.size.200}"
+            "fontSize": "{font.size.200}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography"
         },
@@ -1988,7 +2004,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.semiBold}",
               "lineHeight": "{font.lineHeight.200}",
-              "fontSize": "{font.size.100}"
+              "fontSize": "{font.size.100}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography"
           },
@@ -1997,7 +2014,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.semiBold}",
               "lineHeight": "{font.lineHeight.300}",
-              "fontSize": "{font.size.200}"
+              "fontSize": "{font.size.200}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography"
           },
@@ -2007,7 +2025,8 @@
                 "fontFamily": "{font.family.body}",
                 "fontWeight": "{font.weight.normal}",
                 "lineHeight": "{font.lineHeight.200}",
-                "fontSize": "{font.size.100}"
+                "fontSize": "{font.size.100}",
+                "textCase": "{font.text-case.none}"
               },
               "type": "typography"
             },
@@ -2016,7 +2035,8 @@
                 "fontFamily": "{font.family.body}",
                 "fontWeight": "{font.weight.normal}",
                 "lineHeight": "{font.lineHeight.300}",
-                "fontSize": "{font.size.200}"
+                "fontSize": "{font.size.200}",
+                "textCase": "{font.text-case.none}"
               },
               "type": "typography"
             }
@@ -2028,7 +2048,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.normal}",
               "lineHeight": "{font.lineHeight.300}",
-              "fontSize": "{font.size.100}"
+              "fontSize": "{font.size.100}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography"
           },
@@ -2037,7 +2058,8 @@
               "fontFamily": "{font.family.body}",
               "fontWeight": "{font.weight.normal}",
               "lineHeight": "{font.lineHeight.400}",
-              "fontSize": "{font.size.200}"
+              "fontSize": "{font.size.200}",
+              "textCase": "{font.text-case.none}"
             },
             "type": "typography"
           }
@@ -2049,7 +2071,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.normal}",
             "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.100}"
+            "fontSize": "{font.size.100}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography"
         },
@@ -2058,7 +2081,8 @@
             "fontFamily": "{font.family.body}",
             "fontWeight": "{font.weight.normal}",
             "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.200}"
+            "fontSize": "{font.size.200}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography"
         }
@@ -2069,7 +2093,8 @@
             "fontFamily": "{font.family.mono}",
             "fontWeight": "{font.weight.normal}",
             "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.100}"
+            "fontSize": "{font.size.100}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography",
           "description": "mono"
@@ -2079,7 +2104,8 @@
             "fontFamily": "{font.family.mono}",
             "fontWeight": "{font.weight.normal}",
             "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.200}"
+            "fontSize": "{font.size.200}",
+            "textCase": "{font.text-case.none}"
           },
           "type": "typography",
           "description": "mono"
