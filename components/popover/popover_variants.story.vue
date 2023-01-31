@@ -21,17 +21,15 @@
         </dt-button>
       </template>
       <template #content="{ close }">
-        <div class="d-fs-200 d-m0">
-          <div>
-            <p class="d-mb4">
-              I will be displayed in the popover!
-            </p>
-            <dt-button
-              @click="close"
-            >
-              Click to close
-            </dt-button>
-          </div>
+        <div>
+          <p class="d-mb4">
+            I will be displayed in the popover!
+          </p>
+          <dt-button
+            @click="close"
+          >
+            Click to close
+          </dt-button>
         </div>
       </template>
     </dt-popover>
@@ -53,17 +51,15 @@
         </dt-button>
       </template>
       <template #content="{ close }">
-        <div class="d-fs-200 d-m0">
-          <div>
-            <p class="d-mb4">
-              I will be displayed in the popover!
-            </p>
-            <dt-button
-              @click="close"
-            >
-              Click to close
-            </dt-button>
-          </div>
+        <div>
+          <p class="d-mb4">
+            I will be displayed in the popover!
+          </p>
+          <dt-button
+            @click="close"
+          >
+            Click to close
+          </dt-button>
         </div>
       </template>
     </dt-popover>
@@ -114,17 +110,15 @@
         </dt-button>
       </template>
       <template #content="{ close }">
-        <div class="d-fs-200 d-m0">
-          <div>
-            <p class="d-mb4">
-              I will be displayed in the popover!
-            </p>
-            <dt-button
-              @click="close"
-            >
-              Click to close
-            </dt-button>
-          </div>
+        <div>
+          <p class="d-mb4">
+            I will be displayed in the popover!
+          </p>
+          <dt-button
+            @click="close"
+          >
+            Click to close
+          </dt-button>
         </div>
       </template>
     </dt-popover>
@@ -188,7 +182,7 @@
         </div>
       </template>
       <template #content>
-        <div class="d-fs-200 d-m0">
+        <div class="d-stack8">
           <p>
             {{ sampleText }}
           </p>
@@ -223,7 +217,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-fs-200 d-m0">
+        <div class="d-stack8">
           <p>
             {{ sampleText }}
           </p>
@@ -260,7 +254,7 @@
         <div>This is a footer</div>
       </template>
       <template #content>
-        <div class="d-fs-200 d-m0">
+        <div class="d-stack8">
           <p>
             {{ sampleText }}
           </p>
@@ -292,7 +286,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-fs-200 d-m0">
+        <div class="d-stack8">
           <p>
             {{ sampleText }}
           </p>
@@ -380,7 +374,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-fs-200 d-m0">
+        <div class="d-stack8">
           <p>
             {{ sampleText }}
           </p>
@@ -416,11 +410,9 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-fs-200 d-m0">
-          <p>
-            {{ sampleText }}
-          </p>
-        </div>
+        <p>
+          {{ sampleText }}
+        </p>
       </template>
     </dt-popover>
   </div>
