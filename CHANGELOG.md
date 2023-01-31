@@ -1,3 +1,11 @@
+## [1.6.5](https://github.com/dialpad/dialtone-tokens/compare/v1.6.4...v1.6.5) (2023-01-31)
+
+
+### Bug Fixes
+
+* add text case to typography tokens ([a2594cd](https://github.com/dialpad/dialtone-tokens/commit/a2594cdb3085d814e3270b02de71e3fd2dbf417b))
+* add text-case for dark typography tokens ([71a3129](https://github.com/dialpad/dialtone-tokens/commit/71a312910808147b0bf7f9d5bd5c4364369fe430))
+
 ## [1.6.4](https://github.com/dialpad/dialtone-tokens/compare/v1.6.3...v1.6.4) (2023-01-30)
 
 
