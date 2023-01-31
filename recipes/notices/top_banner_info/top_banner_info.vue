@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-fs-100 d-d-flex d-top-banner-info d-jc-space-between d-ai-center"
+    class="d-fs-100 d-d-flex d-top-banner-info d-jc-space-between d-ai-center d-fc-primary"
     :class="bannerInfoClass"
     data-qa="banner-info"
   >
@@ -40,14 +40,16 @@ export default {
   computed: {
     bannerInfoClass () {
       const bgColors = {
-        green300: 'd-bgc-green-300',
-        green100: 'd-bgc-green-100',
-        red200: 'd-bgc-red-200',
-        red100: 'd-bgc-red-100',
-        gold200: 'd-bgc-gold-200',
-        gold100: 'd-bgc-gold-100',
-        black100: 'd-bgc-black-400',
-        white: 'd-bgc-white',
+        // these are too specific, so for now I'm at least updating the resultant semantic value
+        // TODO: breaking change: update to be more abstract
+        green300: 'd-bgc-success',
+        green100: 'd-bgc-success',
+        red200: 'd-bgc-critical',
+        red100: 'd-bgc-critical',
+        gold200: 'd-bgc-warning',
+        gold100: 'd-bgc-warning',
+        black100: 'd-bgc-info',
+        white: 'd-bgc-primary',
       };
       return [bgColors[this.colorCode]];
     },
@@ -58,11 +60,20 @@ export default {
 <style lang="less">
 .d-top-banner-info {
    &__left {
-     margin: var(--su4) 0 var(--su4) var(--su8);
+     margin: var(--space-300) 0 var(--space-300) var(--space-500);
      min-width: 20%;
   }
+  &__middle {
+     display: flex;
+     align-items: center;
+     gap: var(--size-300);
+  }
   &__right {
-     margin: var(--su4) var(--su12) var(--su4) 0;
+     display: flex;
+     align-items: baseline;
+     justify-content: flex-end;
+     gap: var(--size-300);
+     margin: var(--space-300) var(--space-500) var(--space-300) 0;
      min-width: 20%;
   }
 }

@@ -3,9 +3,9 @@
     We can bind the data that the user entered into the storybook controls to props by using a property of the same name
     as the storybook control defined in the corresponding `.story.js` file.
   -->
-  <div>
+  <div class="d-stack8">
     <dt-recipe-top-banner-info
-      class="d-mb6"
+      class=""
       color-code="gold200"
     >
       <template slot="left">
@@ -16,7 +16,7 @@
         icon-position="right"
         size="xs"
         kind="muted"
-        class="d-fc-black-900 d-p0"
+        class="d-px4 d-py0"
       >
         Show 2 calls on hold
         <template #icon>
@@ -28,42 +28,52 @@
       </dt-button>
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
-      class="d-mb6"
+      class=""
       color-code="red200"
     >
       <template slot="left">
         <span class="d-fw-bold"> Active Call </span> 3:21
       </template>
-      <span> Caller ID: Aerolabs Support (415) 583-3482 </span>
+      <span>
+        <span class="d-fw-medium">Caller ID: </span>
+        Aerolabs Support (415) 583-3482
+      </span>
       <template slot="right">
         <span class="d-fw-bold"> Admin is listening in </span> 0:21
       </template>
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
-      class="d-mb6"
+      class=""
       color-code="black100"
     >
       <template slot="left">
         <span class="d-fw-bold"> Connecting Call </span>
       </template>
-      <span> Your caller ID: (415) 555-1234 </span>
+      <span>
+        <span class="d-fw-medium">Your caller ID: </span>
+        (415) 555-1234
+      </span>
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
-      class="d-mb6"
+      class=""
       color-code="green100"
     >
       <template slot="left">
         <span class="d-fw-bold"> Ringing... </span>
       </template>
-      <span> Your caller ID: (415) 555-1234 </span>
+      <span>
+        <span class="d-fw-medium">Your caller ID:</span>
+        (415) 555-1234
+      </span>
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
       color-code="gold100"
     >
       <template slot="left">
         <span class="d-fw-bold">Joseph Lumaban</span>
-        <div class="d-fc-red-300 d-fw-bold">
-          On hold 00:08
+        <div class="d-fc-red-400 d-fw-semibold">
+          On hold
+          <span class="d-fw-normal">00:08</span>
         </div>
       </template>
       <div>
@@ -74,7 +84,7 @@
           <template slot="icon">
             <dt-icon
               name="park"
-              size="200"
+              size="300"
             />
           </template>
           Park
@@ -94,6 +104,7 @@
         <dt-button
           importance="clear"
           kind="danger"
+          class="d-fc-red-400"
         >
           <template slot="icon">
             <dt-icon
