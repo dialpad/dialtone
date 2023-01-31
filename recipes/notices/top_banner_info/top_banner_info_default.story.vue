@@ -21,7 +21,10 @@
     <template v-if="defaultSlot">
       <span v-html="defaultSlot" />
     </template>
-    <span v-else> Caller ID: Aerolabs Support (415) 583-3482 </span>
+    <span v-else>
+      <span class="d-fw-medium">Caller ID: </span>
+      Aerolabs Support (415) 583-3482
+    </span>
     <template
       v-if="$attrs.right"
       #right
