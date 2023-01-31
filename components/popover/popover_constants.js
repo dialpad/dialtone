@@ -2,15 +2,15 @@ import { BASE_TIPPY_DIRECTIONS, TIPPY_STICKY_VALUES } from './tippy_utils';
 
 export const POPOVER_PADDING_CLASSES = {
   none: undefined,
-  small: 'd-p8',
-  medium: 'd-p16',
-  large: 'd-p24',
+  small: 'd-p4',
+  medium: 'd-p8',
+  large: 'd-p16',
 };
 export const POPOVER_HEADER_FOOTER_PADDING_CLASSES = {
   none: undefined,
-  small: 'd-pl8',
-  medium: 'd-pl16',
-  large: 'd-pl24',
+  small: 'd-pl4',
+  medium: 'd-pl8',
+  large: 'd-pl16',
 };
 export const POPOVER_ROLES = ['dialog', 'menu', 'listbox', 'tree', 'grid'];
 export const POPOVER_CONTENT_WIDTHS = [null, 'anchor'];
