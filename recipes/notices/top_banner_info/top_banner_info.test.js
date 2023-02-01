@@ -71,7 +71,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
         assert.strictEqual(middleContent.text(), slots.default);
       });
       it('Should display with default background color', function () {
-        assert.include(rootElement.classes(), 'd-bgc-green-300');
+        assert.include(rootElement.classes(), 'd-bgc-success');
       });
     });
 
@@ -81,7 +81,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
       });
 
       it('Should display with passed background color', function () {
-        assert.include(rootElement.classes(), 'd-bgc-black-400');
+        assert.include(rootElement.classes(), 'd-bgc-info');
       });
     });
   });
