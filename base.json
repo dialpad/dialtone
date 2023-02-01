@@ -1324,6 +1324,50 @@
           "value": "{color.blue.100}",
           "type": "color"
         }
+      },
+      "border": {
+        "base": {
+          "value": "$color.black.900",
+          "type": "color"
+        },
+        "subtle": {
+          "value": "rgba($color.border.base, 0.10)",
+          "type": "color"
+        },
+        "default": {
+          "value": "rgba($color.border.base, 0.18)",
+          "type": "color"
+        },
+        "moderate": {
+          "value": "rgba($color.border.base, 0.34)",
+          "type": "color"
+        },
+        "bold": {
+          "value": "rgba($color.border.base, 0.50)",
+          "type": "color"
+        },
+        "inverted": {
+          "base": {
+            "value": "$color.neutral.white",
+            "type": "color"
+          },
+          "subtle": {
+            "value": "rgba($color.border.inverted.base, 0.14)",
+            "type": "color"
+          },
+          "default": {
+            "value": "rgba($color.border.inverted.base, 0.22)",
+            "type": "color"
+          },
+          "moderate": {
+            "value": "rgba($color.border.inverted.base, 0.38)",
+            "type": "color"
+          },
+          "bold": {
+            "value": "rgba($color.border.inverted.base, 0.50)",
+            "type": "color"
+          }
+        }
       }
     },
     "typography": {
@@ -1803,6 +1847,50 @@
         "info": {
           "value": "{color.blue.100}",
           "type": "color"
+        }
+      },
+      "border": {
+        "base": {
+          "value": "$color.neutral.white",
+          "type": "color"
+        },
+        "subtle": {
+          "value": "rgba($color.border.base, 0.14)",
+          "type": "color"
+        },
+        "default": {
+          "value": "rgba($color.border.base, 0.22)",
+          "type": "color"
+        },
+        "moderate": {
+          "value": "rgba($color.border.base, 0.38)",
+          "type": "color"
+        },
+        "bold": {
+          "value": "rgba($color.border.base, 0.50)",
+          "type": "color"
+        },
+        "inverted": {
+          "base": {
+            "value": "$color.black.900",
+            "type": "color"
+          },
+          "subtle": {
+            "value": "rgba($color.border.inverted.base, 0.10)",
+            "type": "color"
+          },
+          "default": {
+            "value": "rgba($color.border.inverted.base, 0.18)",
+            "type": "color"
+          },
+          "moderate": {
+            "value": "rgba($color.border.inverted.base, 0.34)",
+            "type": "color"
+          },
+          "bold": {
+            "value": "rgba($color.border.inverted.base, 0.50)",
+            "type": "color"
+          }
         }
       }
     },
