@@ -3,11 +3,11 @@
     "color": {
       "neutral": {
         "white": {
-          "value": "#fff",
+          "value": "#ffffff",
           "type": "color"
         },
         "black": {
-          "value": "#000",
+          "value": "#000000",
           "type": "color"
         }
       },
@@ -616,11 +616,11 @@
     "color": {
       "neutral": {
         "white": {
-          "value": "#fff",
+          "value": "#ffffff",
           "type": "color"
         },
         "black": {
-          "value": "#000",
+          "value": "#000000",
           "type": "color"
         }
       },
@@ -1326,24 +1326,20 @@
         }
       },
       "border": {
-        "base": {
-          "value": "$color.black.900",
-          "type": "color"
-        },
         "subtle": {
-          "value": "rgba($color.border.base, 0.10)",
+          "value": "rgba(0,0,0,0.1)",
           "type": "color"
         },
         "default": {
-          "value": "rgba($color.border.base, 0.18)",
+          "value": "rgba(0,0,0,0.18)",
           "type": "color"
         },
         "moderate": {
-          "value": "rgba($color.border.base, 0.34)",
+          "value": "rgba(0,0,0,0.34)",
           "type": "color"
         },
         "bold": {
-          "value": "rgba($color.border.base, 0.50)",
+          "value": "rgba(0,0,0,0.5)",
           "type": "color"
         },
         "inverted": {
@@ -1352,19 +1348,19 @@
             "type": "color"
           },
           "subtle": {
-            "value": "rgba($color.border.inverted.base, 0.14)",
+            "value": "rgba(255,255,255,0.14)",
             "type": "color"
           },
           "default": {
-            "value": "rgba($color.border.inverted.base, 0.22)",
+            "value": "rgba(255,255,255,0.22)",
             "type": "color"
           },
           "moderate": {
-            "value": "rgba($color.border.inverted.base, 0.38)",
+            "value": "rgba(255,255,255,0.38)",
             "type": "color"
           },
           "bold": {
-            "value": "rgba($color.border.inverted.base, 0.50)",
+            "value": "rgba(255,255,255,0.5)",
             "type": "color"
           }
         }
@@ -1850,45 +1846,37 @@
         }
       },
       "border": {
-        "base": {
-          "value": "$color.neutral.white",
-          "type": "color"
-        },
         "subtle": {
-          "value": "rgba($color.border.base, 0.14)",
+          "value": "rgba(255,255,255,0.14)",
           "type": "color"
         },
         "default": {
-          "value": "rgba($color.border.base, 0.22)",
+          "value": "rgba(255,255,255,0.22)",
           "type": "color"
         },
         "moderate": {
-          "value": "rgba($color.border.base, 0.38)",
+          "value": "rgba(255,255,255,0.38)",
           "type": "color"
         },
         "bold": {
-          "value": "rgba($color.border.base, 0.50)",
+          "value": "rgba(255,255,255,0.50)",
           "type": "color"
         },
         "inverted": {
-          "base": {
-            "value": "$color.black.900",
-            "type": "color"
-          },
           "subtle": {
-            "value": "rgba($color.border.inverted.base, 0.10)",
+            "value": "rgba(0,0,0,0.10)",
             "type": "color"
           },
           "default": {
-            "value": "rgba($color.border.inverted.base, 0.18)",
+            "value": "rgba(0,0,0,0.18)",
             "type": "color"
           },
           "moderate": {
-            "value": "rgba($color.border.inverted.base, 0.34)",
+            "value": "rgba(0,0,0,0.34)",
             "type": "color"
           },
           "bold": {
-            "value": "rgba($color.border.inverted.base, 0.50)",
+            "value": "rgba(0,0,0,0.5)",
             "type": "color"
           }
         }
@@ -2552,7 +2540,86 @@
         "base/dark": "enabled",
         "semantic/dark": "enabled"
       },
-      "$figmaStyleReferences": {}
+      "$figmaStyleReferences": {
+        "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
+        "color.text.secondary": "S:c7a6132c4c0fd9e51a16b54ee4b89f49717241d9,",
+        "color.text.tertiary": "S:46c0dbd118f6da35e9ac00d7586143750f65076f,",
+        "color.text.muted": "S:a35b59ddb9ce5fdd819e79f3d7889c0497b6cf12,",
+        "color.text.placeholder": "S:a9bd80b7d060adddf03e23a7582568d86e95010f,",
+        "color.text.disabled": "S:c8f04cae8fa4f95c3f7009c3a6d4f0232cb72a81,",
+        "color.text.critical": "S:b53c3459307f62de7b6f7d994d1b8fdc1974c960,",
+        "color.text.success": "S:bcaf110e88452072b2463d853de1560f6a22892d,",
+        "color.text.warning": "S:3954b50602fa05092545e85b7a9764d4ef2396e3,",
+        "color.text.inverted.primary": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
+        "color.text.inverted.secondary": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
+        "color.text-link.primary": "S:057b17c2e38419bd6f2ec18be60d46d1e97024e5,",
+        "color.surface.primary": "S:3ea4483b47917706b709a6a2f49677d5d45d4be3,",
+        "color.surface.secondary": "S:8e8081eca3761a51e834cdc9d1c617661974386b,",
+        "color.surface.moderate": "S:069438333a76ba4f0dfac13d0c2ed2c6e3b211ed,",
+        "color.surface.bold": "S:25aa8a93a429ab9c1bf5b00e5d1d494c5c61d592,",
+        "color.surface.strong": "S:ea29278f6059f8ec69253666e169b8aae0bf0896,",
+        "color.surface.contrast": "S:b64c60323d083591395946f6133a93159a34b90c,",
+        "color.surface.critical": "S:7b55e5f93aef43169c87a9b1c6491e166ff78885,",
+        "color.surface.warning": "S:64ad0a4b584a9b8fe006774f61521f33322f212c,",
+        "color.surface.success": "S:2bfef23b53995589aa869be5b1b47e442cdad8ca,",
+        "color.surface.info": "S:6461be547756f6d7ac22443e4623c9faae3d4e7f,",
+        "color.border.subtle": "S:b45831b1e6f5e494b0962cd85f14f359db7ad9e8,",
+        "color.border.default": "S:02e48633fa61cd2e12a849ad3120fc870d0a19a6,",
+        "color.border.moderate": "S:197691e84f07b158b62ab7ac7b78ca7a9b6d5348,",
+        "color.border.bold": "S:45371ab2fd901b25e7b9e48e08f10c8a62fa2764,",
+        "color.border.inverted.subtle": "S:e2e5ed3f9c84881079aced8277f76d6b8d9862e6,",
+        "color.border.inverted.default": "S:eee0157d77f910c6e868b83ff57a9ba284d3ebbf,",
+        "color.border.inverted.moderate": "S:5766116a7cd4643fed22da05dd5fd11e1342493d,",
+        "color.border.inverted.bold": "S:f25ac2f474a5cf1bc914a83f2d701df73ad70089,",
+        "color.neutral.white": "S:7ff1c3a1ba8a48aa5f80d10d74d41881eba62bfb,",
+        "color.neutral.black": "S:89c5950adbf1367ff4a665c5e4291d3121e845e7,",
+        "color.black.100": "S:c263545cab73cd75a354053893b11020457320b2,",
+        "color.black.200": "S:031429225d4c2adf3525a0a9d84cee5dd60f91f8,",
+        "color.black.300": "S:5a9f50bfbdaf0e3cd1150275240e24df8a7c7a75,",
+        "color.black.400": "S:4fb3b5501f2f9f91fc367ae93346b986be1742aa,",
+        "color.black.500": "S:39fa21bee59daf22252143ab9b8287220d9b96bd,",
+        "color.black.600": "S:52f98b9db47ef5ae32790aacfacd9a899d68a759,",
+        "color.black.700": "S:acb20b2951f79e2a50911fb60b59b7f425fbba23,",
+        "color.black.800": "S:915003974096fdec340b4ef79d2c2e6ddb8038fa,",
+        "color.black.900": "S:cead13495ea63bfdeacf332fdf3d4da1df83d23c,",
+        "color.purple.100": "S:d0d09536277311df88f89dc6d8879476c7e1643a,",
+        "color.purple.200": "S:3efaf1a086a3c10812ee96972bd03a8cb5b5ce20,",
+        "color.purple.300": "S:d0e952a11d4e9c8b4b5474c138d071b58acc05e4,",
+        "color.purple.400": "S:ed75e5a74c337046d7840aaad9f7fbd2cdf93bdb,",
+        "color.purple.500": "S:f89a26f3e8d22a7f6d69c589c67f6b2b4900fbd0,",
+        "color.purple.600": "S:8706cee580dd0c7c0fea09bbbab8dd70fa3b712e,",
+        "color.blue.100": "S:46f6e522b26ab5723a807db989aa142bdf02d471,",
+        "color.blue.200": "S:cae9540fdbe93a8ca793e9c1ec8bdb417e55f928,",
+        "color.blue.300": "S:e133cc2a61bac9dda033122fafa40a13a9b38d8a,",
+        "color.blue.400": "S:4754a8a484087db25ed544be37283a0939ba915f,",
+        "color.blue.500": "S:fc3cc88ce07669805ce2c445de1cb923cf67e5ac,",
+        "color.magenta.100": "S:7b830469a63c4ed5ad04f6ae2d4c38e3ad9ecc42,",
+        "color.magenta.200": "S:4719f8c14743d09d04dced6b40f2a9927c413d13,",
+        "color.magenta.300": "S:7468bbd4c359ff1e4633bac90e893e704f90c2dd,",
+        "color.magenta.400": "S:c23040abb24ef1831a24c557ffc83ca69be7be36,",
+        "color.magenta.500": "S:b4a55e2b0515470841dd3e19e9d0cbfdf4a4b94e,",
+        "color.gold.100": "S:e17baaadca1c146178f58dc2d0e8d2eb8bb0481c,",
+        "color.gold.200": "S:a2fc44192ddf859487538563809a9737e9a6c564,",
+        "color.gold.300": "S:2e60b04750930ea6c83379ec5b2bcf8dfc138564,",
+        "color.gold.400": "S:2cddd754142b6a0025735a9bbd5890de5095cdb7,",
+        "color.gold.500": "S:ca3848fe627ac41ed2cabf1e0390881ad0b5f6f6,",
+        "color.green.100": "S:0a3e2fa9a6e616fcde874f7fd79e8513cfb6b608,",
+        "color.green.200": "S:8f67e648d4877df10251fc85b0727c2eaf71afa7,",
+        "color.green.300": "S:ea13d7f3728fa3e38bef184cd4fccd8ba755581d,",
+        "color.green.400": "S:f9da062af2aa3eebb867c657031994f99f938ecc,",
+        "color.green.500": "S:9fade6d62610fe84b6c016e574708c9b8f8bdf56,",
+        "color.red.100": "S:71f3ee79c5b3c8a6e0e682ce2acc5984c55fd6b1,",
+        "color.red.200": "S:ba1a48e3b67d47651bcb7dee014854a220da6bdb,",
+        "color.red.300": "S:c197f247c775568c1c357662f183e45de95e0529,",
+        "color.red.400": "S:023c5223bcd0dac5c3f6b2adb4d1d739b58edabb,",
+        "color.red.500": "S:f6ca36cfb001da639f3f32b3a2f2e89f77c57bb0,",
+        "color.tan.100": "S:92749a0d0643d76172e5815619f2c64733d0d650,",
+        "color.tan.200": "S:7ad93b6d94f2d27a258b515f234de86294ef3e14,",
+        "color.tan.300": "S:b27e15fc8bf2d9a4fcce07e96aaf9a91ef473b42,",
+        "color.tan.400": "S:e9971150b43517c0bffdd263eb546811e60515e0,",
+        "color.tan.500": "S:e3e68dbfc9354f76c7601a9fd2fe936a0815f070,",
+        "color.gradient.magenta-purple": "S:7e2b8c150be002ff38d93b346b36876d50de45cf,"
+      }
     }
   ],
   "$metadata": {
