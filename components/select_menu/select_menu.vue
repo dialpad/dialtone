@@ -2,7 +2,7 @@
   <div>
     <label>
       <div
-        v-if="$slots.label || label"
+        v-if="hasSlotContent($slots.label) || label"
         :aria-details="labelAriaDetails"
         :class="[
           'd-label',
@@ -16,7 +16,7 @@
         <slot name="label">{{ label }}</slot>
       </div>
       <div
-        v-if="$slots.description || description"
+        v-if="hasSlotContent($slots.description) || description"
         :id="descriptionKey"
         :class="[
           'd-description',
@@ -86,6 +86,7 @@ import {
 import {
   getUniqueString,
   getValidationState,
+  hasSlotContent,
 } from '@/common/utils';
 import { MessagesMixin } from '@/common/mixins/input.js';
 import { optionsValidator } from './select_menu_validators.js';
@@ -238,6 +239,7 @@ export default {
       DESCRIPTION_SIZE_MODIFIERS,
       SELECT_SIZE_MODIFIERS,
       SELECT_STATE_MODIFIERS,
+      hasSlotContent,
     };
   },
 

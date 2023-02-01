@@ -61,7 +61,7 @@
 
     <!-- @slot slot for popover header -->
     <template
-      v-if="$slots.header"
+      v-if="hasSlotContent($slots.header)"
       #header
     >
       <div
@@ -95,7 +95,7 @@
 
     <!-- @slot slot for popover footer -->
     <template
-      v-if="$slots.footer"
+      v-if="hasSlotContent($slots.footer)"
       #footer
     >
       <div
@@ -115,6 +115,7 @@ import DtInput from '@/components/input/input';
 import DtChip from '@/components/chip/chip';
 import DtValidationMessages from '@/components/validation_messages/validation_messages';
 import { validationMessageValidator } from '@/common/validators';
+import { hasSlotContent } from '@/common/utils';
 import {
   MULTI_SELECT_SIZES,
   CHIP_SIZES,
@@ -325,6 +326,7 @@ export default {
       resizeWindowObserver: null,
       originalInputSize: null,
       CHIP_SIZES,
+      hasSlotContent,
     };
   },
 

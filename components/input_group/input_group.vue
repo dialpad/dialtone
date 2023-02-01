@@ -1,7 +1,7 @@
 <template>
   <fieldset :data-qa="dataQaGroup">
     <legend
-      v-if="$slots.legend || legend"
+      v-if="hasSlotContent($slots.legend) || legend"
       :class="['d-label', legendClass]"
       v-bind="legendChildProps"
       :data-qa="dataQaGroupLegend"
@@ -26,6 +26,7 @@
 <script>
 import { InputGroupMixin } from '@/common/mixins/input_group';
 import { DtValidationMessages } from '../validation_messages';
+import { hasSlotContent } from '@/common/utils';
 
 /**
  * Input Groups are convenience components for a grouping of related inputs.
@@ -69,6 +70,7 @@ export default {
   data () {
     return {
       internalValue: this.value,
+      hasSlotContent,
     };
   },
 

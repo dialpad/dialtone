@@ -29,7 +29,7 @@
       />
     </span>
     <span
-      v-if="$slots.default"
+      v-if="hasSlotContent($slots.default)"
       data-qa="dt-button-label"
       :class="['d-w100p', 'd-btn__label', 'base-button__label', labelClass]"
     >
@@ -41,6 +41,7 @@
 
 <script>
 import { warn } from 'vue';
+import { hasSlotContent } from '@/common/utils';
 
 import {
   BUTTON_SIZE_MODIFIERS,
@@ -234,6 +235,7 @@ export default {
       ICON_POSITION_MODIFIERS,
       // whether the button is currently in focus
       isInFocus: false,
+      hasSlotContent,
     };
   },
 

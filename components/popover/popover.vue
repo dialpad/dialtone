@@ -61,7 +61,7 @@
         v-on="popoverListeners"
       >
         <popover-header-footer
-          v-if="$slots.headerContent || showCloseButton"
+          v-if="hasSlotContent($slots.headerContent) || showCloseButton"
           ref="popover__header"
           :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
           :content-class="headerClass"
@@ -94,7 +94,7 @@
           />
         </div>
         <popover-header-footer
-          v-if="$slots.footerContent"
+          v-if="hasSlotContent($slots.footerContent)"
           ref="popover__footer"
           type="footer"
           :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
@@ -129,7 +129,7 @@ import {
   POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import ModalMixin from '@/common/mixins/modal.js';
 import { createTippy, getPopperOptions } from './tippy_utils';
@@ -509,6 +509,7 @@ export default {
       toAppear: false,
       anchorEl: null,
       popoverContentEl: null,
+      hasSlotContent,
     };
   },
 

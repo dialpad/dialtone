@@ -11,7 +11,7 @@
       v-on="chipListeners"
     >
       <span
-        v-if="$slots.icon"
+        v-if="hasSlotContent($slots.icon)"
         data-qa="dt-chip-icon"
         class="d-chip__icon"
       >
@@ -19,14 +19,14 @@
         <slot name="icon" />
       </span>
       <span
-        v-else-if="$slots.avatar"
+        v-else-if="hasSlotContent($slots.avatar)"
         data-qa="dt-chip-avatar"
       >
         <!-- @slot slot for Chip avatar -->
         <slot name="avatar" />
       </span>
       <span
-        v-if="$slots.default"
+        v-if="hasSlotContent($slots.default)"
         :id="`${id}-content`"
         data-qa="dt-chip-label"
         :class="['d-truncate', 'd-chip__text', contentClass]"
@@ -61,7 +61,7 @@ import {
   CHIP_SIZE_MODIFIERS,
   CHIP_ICON_SIZES,
 } from './chip_constants';
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 
 /**
  * A chip is a compact UI element that provides brief, descriptive information about an element.
@@ -180,6 +180,7 @@ export default {
   data () {
     return {
       isActive: false,
+      hasSlotContent,
     };
   },
 

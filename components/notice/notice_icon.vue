@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="defaultIcon || $slots.default"
+    v-if="defaultIcon || hasSlotContent($slots.default)"
     aria-hidden="true"
     class="d-notice__icon"
   >
@@ -17,6 +17,7 @@
 <script>
 import { DtIcon } from '@/components/icon';
 import { NOTICE_KINDS } from './notice_constants.js';
+import { hasSlotContent } from '@/common/utils';
 
 const kindToIcon = new Map([
   ['info', 'info'],
@@ -45,6 +46,12 @@ export default {
         return NOTICE_KINDS.includes(kind);
       },
     },
+  },
+
+  data () {
+    return {
+      hasSlotContent,
+    };
   },
 
   computed: {

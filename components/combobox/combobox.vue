@@ -27,7 +27,7 @@
         v-bind="listProps"
       />
       <combobox-empty-list
-        v-else-if="emptyList && (emptyStateMessage || $slots.emptyListItem) && !listRenderedOutside"
+        v-else-if="emptyList && (emptyStateMessage || hasSlotContent($slots.emptyListItem)) && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
         :item-class="emptyStateClass"
@@ -48,7 +48,7 @@
 
 <script>
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 import ComboboxLoadingList from './combobox_loading-list.vue';
 import ComboboxEmptyList from './combobox_empty-list.vue';
 import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
@@ -243,6 +243,7 @@ export default {
       // of this component, this is the ref to that dom element. Set
       // by the onOpen method.
       outsideRenderedListRef: null,
+      hasSlotContent,
     };
   },
 

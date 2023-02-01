@@ -7,7 +7,7 @@
     }"
   >
     <div
-      v-if="$slots.content"
+      v-if="hasSlotContent($slots.content)"
       data-qa="dt-popover-header-footer-content"
       :class="['d-to-ellipsis', 'd-w100p', contentClass]"
     >
@@ -38,6 +38,7 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
+import { hasSlotContent } from '@/common/utils';
 
 export default {
   name: 'PopoverHeaderFooter',
@@ -91,6 +92,12 @@ export default {
      */
     'close',
   ],
+
+  data () {
+    return {
+      hasSlotContent,
+    };
+  },
 
   methods: {
     focusCloseButton () {

@@ -4,7 +4,7 @@
     data-qa="root-layout-body"
   >
     <aside
-      v-if="$slots.sidebar"
+      v-if="hasSlotContent($slots.sidebar)"
       :class="['root-layout__sidebar', sidebarClass]"
       :style="{ 'flex-basis': sidebarWidth }"
       data-qa="root-layout-sidebar"
@@ -13,7 +13,7 @@
       <slot name="sidebar" />
     </aside>
     <main
-      v-if="$slots.content"
+      v-if="hasSlotContent($slots.content)"
       :class="['root-layout__content', contentClass]"
       :style="{ 'min-inline-size': contentWrapWidthPercent }"
       data-qa="root-layout-content"
@@ -26,6 +26,7 @@
 
 <script>
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
+import { hasSlotContent } from '@/common/utils';
 
 export default {
   name: 'DtRootLayoutBody',
@@ -82,6 +83,12 @@ export default {
       type: String,
       default: undefined,
     },
+  },
+
+  data () {
+    return {
+      hasSlotContent,
+    };
   },
 
   computed: {

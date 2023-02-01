@@ -13,7 +13,7 @@
     v-on="modalListeners"
   >
     <div
-      v-if="show && ($slots.banner || bannerTitle)"
+      v-if="show && (hasSlotContent($slots.banner) || bannerTitle)"
       data-qa="dt-modal-banner"
       :class="[
         'd-modal__banner',
@@ -43,7 +43,7 @@
         :aria-labelledby="labelledById"
       >
         <div
-          v-if="$slots.header"
+          v-if="hasSlotContent($slots.header)"
           :id="labelledById"
           class="d-modal__header"
           data-qa="dt-modal-title"
@@ -60,7 +60,7 @@
           {{ title }}
         </h2>
         <div
-          v-if="$slots.default"
+          v-if="hasSlotContent($slots.default)"
           :class="[
             'd-modal__content',
             contentClass,
@@ -119,7 +119,7 @@ import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import Modal from '@/common/mixins/modal.js';
 import { MODAL_BANNER_KINDS, MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
@@ -332,6 +332,7 @@ export default {
       MODAL_SIZE_MODIFIERS,
       MODAL_BANNER_KINDS,
       EVENT_KEYNAMES,
+      hasSlotContent,
     };
   },
 

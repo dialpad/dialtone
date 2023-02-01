@@ -25,7 +25,7 @@
         </div>
       </slot>
       <div
-        v-if="$slots.description || description || shouldValidateLength"
+        v-if="hasSlotContent($slots.description) || description || shouldValidateLength"
         :id="descriptionKey"
         ref="description"
         :class="[
@@ -37,7 +37,7 @@
         data-qa="dt-input-description"
       >
         <div
-          v-if="$slots.description || description"
+          v-if="hasSlotContent($slots.description) || description"
         >
           <!-- @slot slot for description, defaults to description prop -->
           <slot name="description">{{ description }}</slot>
@@ -57,7 +57,7 @@
         :read-only="disabled === true ? true : undefined"
       >
         <span
-          v-if="$slots.leftIcon"
+          v-if="hasSlotContent($slots.leftIcon)"
           :class="inputIconClasses('left')"
           data-qa="dt-input-left-icon-wrapper"
           @focusout="onBlur"
@@ -91,7 +91,7 @@
           v-on="inputListeners"
         >
         <span
-          v-if="$slots.rightIcon"
+          v-if="hasSlotContent($slots.rightIcon)"
           :class="inputIconClasses('right')"
           data-qa="dt-input-right-icon-wrapper"
           @focusout="onBlur"
@@ -117,6 +117,7 @@ import { INPUT_TYPES, INPUT_SIZES } from './input_constants.js';
 import {
   getUniqueString,
   getValidationState,
+  hasSlotContent,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
 import { MessagesMixin } from '@/common/mixins/input.js';
@@ -350,10 +351,9 @@ export default {
       },
 
       isInputFocused: false,
-
       isInvalid: false,
-
       defaultLength: 0,
+      hasSlotContent,
     };
   },
 

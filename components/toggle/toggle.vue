@@ -1,7 +1,7 @@
 <template>
   <div class="d-d-flex d-ai-center">
     <label
-      v-if="$slots.default"
+      v-if="hasSlotContent($slots.default)"
       :class="labelClass"
       :for="id"
       v-bind="labelChildProps"
@@ -30,7 +30,7 @@
 
 <script>
 import { warn } from 'vue';
-import utils from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
@@ -55,7 +55,7 @@ export default {
      */
     id: {
       type: String,
-      default () { return utils.getUniqueString(); },
+      default () { return getUniqueString(); },
     },
 
     /**
@@ -138,6 +138,7 @@ export default {
   data () {
     return {
       internalChecked: this.checked,
+      hasSlotContent,
     };
   },
 

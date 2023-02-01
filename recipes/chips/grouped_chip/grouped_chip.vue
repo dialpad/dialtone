@@ -12,12 +12,12 @@
       class="d-blr-pill d-bgc-black-200 d-w100p d-wmx64"
     >
       <template
-        v-if="$slots.leftIcon"
+        v-if="hasSlotContent($slots.leftIcon)"
         #icon
       >
         <!-- @slot Slot for left chip icon information -->
         <div
-          v-if="$slots.leftIcon"
+          v-if="hasSlotContent($slots.leftIcon)"
           data-qa="left-grouped-chip-icon"
         >
           <slot name="leftIcon" />
@@ -25,7 +25,7 @@
       </template>
       <template #default>
         <div
-          v-if="$slots.leftContent"
+          v-if="hasSlotContent($slots.leftContent)"
           data-qa="left-grouped-chip-content"
         >
           <!-- @slot Slot for left chip content information -->
@@ -45,7 +45,7 @@
     >
       <template #icon>
         <div
-          v-if="$slots.rightIcon"
+          v-if="hasSlotContent($slots.rightIcon)"
           data-qa="right-grouped-chip-icon"
         >
           <!-- @slot Slot for right chip content information -->
@@ -54,7 +54,7 @@
       </template>
       <template #default>
         <div
-          v-if="$slots.rightContent"
+          v-if="hasSlotContent($slots.rightContent)"
           data-qa="right-grouped-chip-content"
           class="d-wmx50p"
         >
@@ -68,6 +68,7 @@
 
 <script>
 import { DtChip } from '@/components/chip';
+import { hasSlotContent } from '@/common/utils';
 
 export default {
   name: 'DtRecipeGroupedChip',
@@ -76,9 +77,10 @@ export default {
     DtChip,
   },
 
-  computed: {},
+  data () {
+    return {
+      hasSlotContent,
+    };
+  },
 };
 </script>
-
-<style lang="less">
-</style>

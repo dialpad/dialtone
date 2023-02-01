@@ -7,7 +7,7 @@
     data-qa="dt-card"
   >
     <div
-      v-if="$slots.header"
+      v-if="hasSlotContent($slots.header)"
       :class="[
         'd-card__header',
         headerClass,
@@ -29,7 +29,7 @@
     </div>
 
     <div
-      v-if="$slots.footer"
+      v-if="hasSlotContent($slots.footer)"
       :class="[
         'd-card__footer',
         footerClass,
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { hasSlotContent } from '@/common/utils';
+
 /**
  * A card contains summary content and actions about a single subject.
  * It can be used by itself or within a list, and is generally interactive.
@@ -90,6 +92,12 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+  },
+
+  data () {
+    return {
+      hasSlotContent,
+    };
   },
 };
 </script>

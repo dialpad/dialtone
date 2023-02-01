@@ -26,7 +26,7 @@
           <slot>{{ label }}</slot>
         </div>
         <div
-          v-if="$slots.description || description"
+          v-if="hasSlotContent($slots.description) || description"
           :class="['d-description', descriptionClass]"
           v-bind="descriptionChildProps"
           data-qa="radio-description"
@@ -55,6 +55,7 @@ import {
 } from '@/common/mixins/input.js';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
+import { hasSlotContent } from '@/common/utils';
 
 /**
  * Radios are control elements that allow the user to make a single selection.
@@ -121,6 +122,12 @@ export default {
      */
     'click',
   ],
+
+  data () {
+    return {
+      hasSlotContent,
+    };
+  },
 
   computed: {
     inputValidationClass () {

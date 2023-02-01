@@ -4,7 +4,7 @@
     data-qa="notice-content"
   >
     <p
-      v-if="title || $slots.titleOverride"
+      v-if="title || hasSlotContent($slots.titleOverride)"
       :id="titleId"
       class="d-notice__title"
       data-qa="notice-content-title"
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { hasSlotContent } from '@/common/utils';
+
 export default {
   name: 'DtNoticeContent',
 
@@ -55,6 +57,12 @@ export default {
       type: String,
       default: undefined,
     },
+  },
+
+  data () {
+    return {
+      hasSlotContent,
+    };
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="dt-default-list-item d-fs-200 d-lh-300 d-py4 d-px8 d-d-flex d-ai-center">
     <section
-      v-if="$slots.left"
+      v-if="hasSlotContent($slots.left)"
       class="dt-default-list-item--left d-d-inline-flex d-as-flex-start d-d-flex d-ai-center d-pr8"
       data-qa="dt-default-list-item-left-wrapper"
     >
@@ -9,12 +9,12 @@
       <slot name="left" />
     </section>
     <section class="d-fl-grow1 d-of-hidden">
-      <div v-if="$slots.default">
+      <div v-if="hasSlotContent($slots.default)">
         <!-- @slot Slot for the main content -->
         <slot />
       </div>
       <div
-        v-if="$slots.subtitle"
+        v-if="hasSlotContent($slots.subtitle)"
         data-qa="dt-default-list-item-subtitle-wrapper"
         :class="['d-fs-100 d-fc-black-600', { 'd-mtn2': $slots.default }]"
       >
@@ -22,7 +22,7 @@
         <slot name="subtitle" />
       </div>
       <div
-        v-if="$slots.bottom"
+        v-if="hasSlotContent($slots.bottom)"
         data-qa="dt-default-list-item-bottom-wrapper"
         class="d-mt2"
       >
@@ -31,7 +31,7 @@
       </div>
     </section>
     <section
-      v-if="$slots.right"
+      v-if="hasSlotContent($slots.right)"
       class="dt-default-list-item--right d-d-inline-flex d-as-flex-start d-d-flex d-ai-center d-pl8"
       data-qa="dt-default-list-item-right-wrapper"
     >
@@ -42,8 +42,16 @@
 </template>
 
 <script>
+import { hasSlotContent } from '@/common/utils';
+
 export default {
   name: 'DefaultListItem',
+
+  data () {
+    return {
+      hasSlotContent,
+    };
+  },
 };
 </script>
 
