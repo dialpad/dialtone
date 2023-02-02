@@ -1804,19 +1804,19 @@
       },
       "surface": {
         "primary": {
-          "value": "{color.black.100}",
-          "type": "color"
-        },
-        "secondary": {
           "value": "{color.black.200}",
           "type": "color"
         },
-        "moderate": {
+        "secondary": {
           "value": "{color.black.300}",
           "type": "color"
         },
-        "bold": {
+        "moderate": {
           "value": "{color.black.400}",
+          "type": "color"
+        },
+        "bold": {
+          "value": "{color.black.300}",
           "type": "color"
         },
         "strong": {
