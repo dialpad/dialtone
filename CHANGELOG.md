@@ -1,3 +1,5 @@
+## [2.55.1](https://github.com/dialpad/dialtone-vue/compare/v2.55.0...v2.55.1) (2023-02-02)
+
 # [2.55.0](https://github.com/dialpad/dialtone-vue/compare/v2.54.2...v2.55.0) (2023-02-01)
 
 ## [2.54.2](https://github.com/dialpad/dialtone-vue/compare/v2.54.1...v2.54.2) (2023-01-26)
