@@ -1,3 +1,17 @@
+## [3.42.1](https://github.com/dialpad/dialtone-vue/compare/v3.42.0...v3.42.1) (2023-02-02)
+
+
+### Bug Fixes
+
+* **Collapsible:** correct anchor slot check ([#739](https://github.com/dialpad/dialtone-vue/issues/739)) ([0e712d1](https://github.com/dialpad/dialtone-vue/commit/0e712d15e0feec11c2c09976e3bba968c53a4d19))
+* **Combobox Multi Select:** chips missalignment ([#737](https://github.com/dialpad/dialtone-vue/issues/737)) ([a467ede](https://github.com/dialpad/dialtone-vue/commit/a467edeab6ee9075356b2c8d6a2fad2e8bc7c5be))
+* **Top Banner Info:** updated tests ([#734](https://github.com/dialpad/dialtone-vue/issues/734)) ([b9c987c](https://github.com/dialpad/dialtone-vue/commit/b9c987cb993e9860436a0db6eff787d7773d87ff))
+
+
+### Code Refactoring
+
+* slot validation in components ([#732](https://github.com/dialpad/dialtone-vue/issues/732)) ([8e87799](https://github.com/dialpad/dialtone-vue/commit/8e877996a0d99419dd964b186d85d57cc52d39be))
+
 # [3.42.0](https://github.com/dialpad/dialtone-vue/compare/v3.41.0...v3.42.0) (2023-02-01)
 
 # [3.41.0](https://github.com/dialpad/dialtone-vue/compare/v3.40.0...v3.41.0) (2023-01-26)
