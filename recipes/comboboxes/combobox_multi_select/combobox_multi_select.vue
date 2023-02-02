@@ -119,7 +119,7 @@ import { hasSlotContent } from '@/common/utils';
 import {
   MULTI_SELECT_SIZES,
   CHIP_SIZES,
-  CHIP_BOTTOM_POSITION,
+  CHIP_TOP_POSITION,
 } from './combobox_multi_select_story_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
@@ -515,8 +515,9 @@ export default {
     },
 
     setChipsPosition () {
+      const input = this.getInput().getBoundingClientRect();
       const chipsWrapper = this.$refs.chipsWrapper;
-      chipsWrapper.style.bottom = `${CHIP_BOTTOM_POSITION[this.size]}px`;
+      chipsWrapper.style.top = (input.top - CHIP_TOP_POSITION[this.size]) + 'px';
     },
 
     setInputPadding () {
