@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 import DtCollapsibleLazyShow from './collapsible_lazy_show';
 import { DtButton } from '../button';
 import { DtLazyShow } from '../lazy_show';
@@ -273,7 +273,7 @@ export default {
     },
 
     validateProperAnchor () {
-      if (!this.anchorText && !this.$slots.$anchor) {
+      if (!this.anchorText && !hasSlotContent(this.$slots.anchor)) {
         console.error('anchor text and anchor slot content cannot both be falsy');
       }
     },
