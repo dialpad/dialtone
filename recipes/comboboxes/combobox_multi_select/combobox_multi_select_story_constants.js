@@ -37,8 +37,8 @@ export const CHIP_SIZES = {
   md: 'sm',
 };
 
-export const CHIP_BOTTOM_POSITION = {
-  xs: 4,
-  sm: 5,
-  md: 5,
+export const CHIP_TOP_POSITION = {
+  xs: 11.1,
+  sm: 10.1,
+  md: 10.1,
 };
