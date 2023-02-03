@@ -11,6 +11,7 @@
     :sidebar-width="sidebarWidth"
     :footer-class="footerClass"
     :footer-height="footerHeight"
+    :fixed="fixed"
   >
     <template
       v-if="header"
