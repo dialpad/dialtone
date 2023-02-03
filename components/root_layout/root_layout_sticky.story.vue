@@ -1,46 +1,47 @@
 <template>
-  <div
-    class="d-h332 d-of-scroll"
-    tabindex="0"
+  <dt-root-layout
+    :body-class="$attrs.bodyClass"
+    :header-class="$attrs.headerClass"
+    :header-sticky="$attrs.headerSticky"
+    :header-height="$attrs.headerHeight"
+    :content-class="$attrs.contentClass"
+    :content-wrap-width-percent="$attrs.contentWrapWidthPercent"
+    :sidebar-class="$attrs.sidebarClass"
+    :sidebar-position="$attrs.sidebarPosition"
+    :sidebar-width="$attrs.sidebarWidth"
+    :footer-class="$attrs.footerClass"
+    :footer-height="$attrs.footerHeight"
+    :fixed="$attrs.fixed"
   >
-    <dt-root-layout
-      :header-class="$attrs.headerClass"
-      :header-sticky="$attrs.headerSticky"
-      :header-height="$attrs.headerHeight"
-      :content-class="$attrs.contentClass"
-      :content-wrap-width-percent="$attrs.contentWrapWidthPercent"
-      :sidebar-class="$attrs.sidebarClass"
-      :sidebar-position="$attrs.sidebarPosition"
-      :sidebar-width="$attrs.sidebarWidth"
-      :footer-class="$attrs.footerClass"
-      :footer-height="$attrs.footerHeight"
+    <template
+      #header
     >
-      <template
+      <v-html
         v-if="$attrs.header"
-        #header
-      >
-        <v-html :html="$attrs.header" />
-      </template>
-      <template
+        :html="$attrs.header"
+      />
+    </template>
+    <template
+      #sidebar
+    >
+      <v-html
         v-if="$attrs.sidebar"
-        #sidebar
-      >
-        <v-html :html="$attrs.sidebar" />
-      </template>
-      <template v-if="defaultSlot">
-        <div
-          class="d-h512"
-          v-html="defaultSlot"
-        />
-      </template>
-      <template
+        :html="$attrs.sidebar"
+      />
+    </template>
+    <v-html
+      v-if="$attrs.default"
+      :html="$attrs.default"
+    />
+    <template
+      #footer
+    >
+      <v-html
         v-if="$attrs.footer"
-        #footer
-      >
-        <v-html :html="$attrs.footer" />
-      </template>
-    </dt-root-layout>
-  </div>
+        :html="$attrs.footer"
+      />
+    </template>
+  </dt-root-layout>
 </template>
 
 <script>

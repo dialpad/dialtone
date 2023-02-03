@@ -100,7 +100,7 @@
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/dialtone": "^7.14",
+    "@dialpad/dialtone": "^7.15.0",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "1.16.0",
     "@percy/storybook": "4.3.4",
@@ -141,7 +141,7 @@
     "yo": "^4.3.1"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=7.14",
+    "@dialpad/dialtone": ">=7.15",
     "vue": ">=3.2"
   },
   "engineStrict": true,

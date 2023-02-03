@@ -11,6 +11,7 @@
     :sidebar-width="$attrs.sidebarWidth"
     :footer-class="$attrs.footerClass"
     :footer-height="$attrs.footerHeight"
+    :fixed="$attrs.fixed"
   >
     <template
       #header
@@ -30,7 +31,7 @@
     </template>
     <v-html
       v-if="$attrs.default"
-      :html="defaultSlot"
+      :html="$attrs.default"
     />
     <template
       #footer

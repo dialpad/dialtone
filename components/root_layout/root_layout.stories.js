@@ -12,7 +12,14 @@ export const argsData = {
   header: '<div class="d-h100p d-bgc-purple-100">Header</div>',
   footer: '<div class="d-h100p d-bgc-gold-100">Footer</div>',
   sidebar: '<div class="d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
-  default: '<div class="d-h100p">Content</div>',
+  default: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim eleifend condimentum.
+  Vestibulum euismod leo at finibus mattis. Integer ut dui id ligula tincidunt pellentesque. Vestibulum a ullamcorper
+  risus. Ut tristique sapien eget magna lacinia, non interdum lacus malesuada. Proin augue lacus, finibus eget aliquam
+  eu, efficitur sit amet magna. Suspendisse a nunc volutpat, maximus enim vitae, pretium dui. Suspendisse pretium
+  faucibus posuere. Aenean consequat imperdiet laoreet. Pellentesque habitant morbi tristique senectus et netus et
+  malesuada fames ac turpis egestas. Aliquam elit lacus, venenatis ac risus at, ullamcorper tempor tortor. Ut sed
+  pulvinar mi, vitae vehicula odio. Fusce ornare vestibulum rhoncus. In vel ante arcu. Nunc pharetra libero non
+  enim dapibus efficitur. Suspendisse dolor ante, pulvinar et faucibus quis, condimentum at dui.`,
 };
 
 /**
@@ -106,6 +113,7 @@ export default {
     options: {
       showPanel: true,
     },
+    layout: 'fullscreen',
   },
 };
 
@@ -122,9 +130,13 @@ const StickyTemplate = (args) => createTemplateFromVueFile(
 
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  default: argsData.default.repeat(40),
+};
 
 export const Sticky = StickyTemplate.bind({});
 Sticky.args = {
-  headerSticky: 'true',
+  headerSticky: true,
+  fixed: false,
+  default: argsData.default.repeat(40),
 };

@@ -3,7 +3,7 @@
     <header
       v-if="hasSlotContent($slots.header)"
       :class="['root-layout__header', headerClass, { 'root-layout__header--sticky': headerSticky }]"
-      :style="{ 'height': headerHeight }"
+      :style="{ 'height': headerHeight, 'min-height': headerHeight }"
       data-qa="root-layout-header"
     >
       <!-- @slot Slot for header content -->
@@ -16,6 +16,9 @@
       :sidebar-class="sidebarClass"
       :sidebar-width="sidebarWidth"
       :sidebar-position="sidebarPosition"
+      :header-height="headerHeight"
+      :footer-height="footerHeight"
+      :fixed="fixed"
     >
       <template
         v-if="hasSlotContent($slots.sidebar)"
@@ -35,7 +38,7 @@
     <footer
       v-if="hasSlotContent($slots.footer)"
       :class="['root-layout__footer', footerClass]"
-      :style="{ 'height': footerHeight }"
+      :style="{ 'height': footerHeight, 'min-height': footerHeight }"
       data-qa="root-layout-footer"
     >
       <!-- @slot Slot for footer content -->
@@ -60,6 +63,15 @@ export default {
   },
 
   props: {
+    /**
+     * When true, the header / footer will be locked in position and the content will
+     * be scrollable. When false the header / footer will scroll out of view.
+     */
+    fixed: {
+      type: Boolean,
+      default: true,
+    },
+
     /**
      * Additional class name for the header element
      */

@@ -1,10 +1,12 @@
 <template>
   <div
+    ref="root-layout-body"
     :class="['root-layout__body', 'd-fl-grow1', bodyClasses]"
     data-qa="root-layout-body"
   >
     <aside
       v-if="hasSlotContent($slots.sidebar)"
+      ref="root-layout-sidebar"
       :class="['root-layout__sidebar', sidebarClass]"
       :style="{ 'flex-basis': sidebarWidth }"
       data-qa="root-layout-sidebar"
@@ -14,8 +16,9 @@
     </aside>
     <main
       v-if="hasSlotContent($slots.content)"
+      ref="root-layout-content"
       :class="['root-layout__content', contentClass]"
-      :style="{ 'min-inline-size': contentWrapWidthPercent }"
+      :style="{ 'min-inline-size': contentWrapWidthPercent, 'height': mainHeight }"
       data-qa="root-layout-content"
     >
       <!-- @slot Slot for the main content -->
@@ -83,11 +86,29 @@ export default {
       type: String,
       default: undefined,
     },
+
+    headerHeight: {
+      type: String,
+      default: undefined,
+    },
+
+    footerHeight: {
+      type: String,
+      default: undefined,
+    },
+
+    fixed: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   data () {
     return {
       hasSlotContent,
+      sidebarTop: null,
+      contentTop: null,
+      documentHeight: null,
     };
   },
 
@@ -99,6 +120,49 @@ export default {
           'root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT,
         },
       ];
+    },
+
+    mainHeight () {
+      if (this.fixed) {
+        return `calc(${this.documentHeight}
+          - (${this.headerHeight} + ${this.extraSidebarHeight} + ${this.footerHeight}))`;
+      }
+      return null;
+    },
+
+    // When the sidebar is above the header due to contentWrapWidthPercent, it needs to be excluded
+    // in the main content height calculation. Otherwise it is 0 since it is at equal height with the main content.
+    extraSidebarHeight () {
+      if (this.contentTop > this.sidebarTop) {
+        return this.$refs['root-layout-sidebar'].offsetHeight + 'px';
+      }
+      return '0px';
+    },
+  },
+
+  mounted () {
+    window.addEventListener('resize', this.onResize);
+    this.getDocumentHeight();
+    this.getElementTops();
+  },
+
+  beforeUnmount () {
+    window.removeEventListener('resize', this.onResize);
+  },
+
+  methods: {
+    onResize () {
+      this.getDocumentHeight();
+      this.getElementTops();
+    },
+
+    getElementTops () {
+      this.sidebarTop = this.$refs['root-layout-sidebar'].offsetTop;
+      this.contentTop = this.$refs['root-layout-content'].offsetTop;
+    },
+
+    getDocumentHeight () {
+      this.documentHeight = window.innerHeight + 'px';
     },
   },
 };
@@ -122,5 +186,6 @@ export default {
 .root-layout__content {
   flex-basis: 0;
   flex-grow: 999;
+  overflow-y: auto;
 }
 </style>
