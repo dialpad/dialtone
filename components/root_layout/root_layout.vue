@@ -16,8 +16,8 @@
       :sidebar-class="sidebarClass"
       :sidebar-width="sidebarWidth"
       :sidebar-position="sidebarPosition"
-      :header-height="headerHeight"
-      :footer-height="footerHeight"
+      :header-height="$slots.header ? headerHeight : '0px'"
+      :footer-height="$slots.footer ? footerHeight : '0px'"
       :fixed="fixed"
     >
       <template
