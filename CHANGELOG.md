@@ -1,3 +1,11 @@
+## [3.42.2](https://github.com/dialpad/dialtone-vue/compare/v3.42.1...v3.42.2) (2023-02-03)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** wrong chips position while on modal ([#743](https://github.com/dialpad/dialtone-vue/issues/743)) ([49baa71](https://github.com/dialpad/dialtone-vue/commit/49baa717da087b82d609ba3804511aee306c0fd1))
+* **Root Layout:** add fixed prop ([#744](https://github.com/dialpad/dialtone-vue/issues/744)) ([4cde38d](https://github.com/dialpad/dialtone-vue/commit/4cde38dbd780189fc7d1492e1ec992878507fa2f))
+
 ## [3.42.1](https://github.com/dialpad/dialtone-vue/compare/v3.42.0...v3.42.1) (2023-02-02)
 
 
