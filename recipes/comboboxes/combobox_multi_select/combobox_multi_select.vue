@@ -374,7 +374,7 @@ export default {
       handler: async function () {
         await this.$nextTick();
         this.setInputPadding();
-        this.setChipsPosition();
+        this.setChipsTopPosition();
         this.setInputMinWidth();
         this.checkMaxSelected();
       },
@@ -383,13 +383,13 @@ export default {
     async label () {
       await this.$nextTick();
       // Adjust the chips position if label changed
-      this.setChipsPosition();
+      this.setChipsTopPosition();
     },
 
     async description () {
       await this.$nextTick();
       // Adjust the chips position if description changed
-      this.setChipsPosition();
+      this.setChipsTopPosition();
     },
 
     size: {
@@ -399,6 +399,7 @@ export default {
         this.revertInputPadding(input);
         this.originalInputSize = input.getBoundingClientRect().height;
         this.setInputPadding();
+        this.setChipsTopPosition();
       },
 
       immediate: true,
@@ -406,10 +407,9 @@ export default {
   },
 
   mounted () {
-    this.setChipsPosition();
     // Recalculate chip position and input padding when resizing window
-    this.resizeWindowObserver = new ResizeObserver(() => {
-      this.setChipsPosition();
+    this.resizeWindowObserver = new ResizeObserver(async () => {
+      this.setChipsTopPosition();
       this.setInputPadding();
     });
     this.resizeWindowObserver.observe(document.body);
@@ -514,10 +514,16 @@ export default {
       this.closeComboboxList();
     },
 
-    setChipsPosition () {
-      const input = this.getInput().getBoundingClientRect();
+    setChipsTopPosition () {
+      // To place the chips in the input box
+      // The chip "top" position should be the same line as the input box
+      const input = this.getInput();
+      if (!input) return;
+      const inputSlotWrapper = this.$refs.inputSlotWrapper;
+      const top = input.getBoundingClientRect().top -
+                  inputSlotWrapper.getBoundingClientRect().top;
       const chipsWrapper = this.$refs.chipsWrapper;
-      chipsWrapper.style.top = (input.top - CHIP_TOP_POSITION[this.size]) + 'px';
+      chipsWrapper.style.top = (top - CHIP_TOP_POSITION[this.size]) + 'px';
     },
 
     setInputPadding () {
