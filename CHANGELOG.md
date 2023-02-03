@@ -1,3 +1,11 @@
+## [3.42.3](https://github.com/dialpad/dialtone-vue/compare/v3.42.2...v3.42.3) (2023-02-03)
+
+
+### Bug Fixes
+
+* **Root Layout:** headerHeight 0 if no slot ([a3bfbc6](https://github.com/dialpad/dialtone-vue/commit/a3bfbc66ad2c62d813dc753a7ffe1616727ee666))
+* **Root Layout:** modify to use hasSlotContent ([a3588b0](https://github.com/dialpad/dialtone-vue/commit/a3588b0b3e14b5f83b16b4dbe60e7584b99c58d6))
+
 ## [3.42.2](https://github.com/dialpad/dialtone-vue/compare/v3.42.1...v3.42.2) (2023-02-03)
 
 
