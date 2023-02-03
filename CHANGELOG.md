@@ -1,3 +1,10 @@
+## [2.55.2](https://github.com/dialpad/dialtone-vue/compare/v2.55.1...v2.55.2) (2023-02-03)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** wrong chips position while on modal ([#742](https://github.com/dialpad/dialtone-vue/issues/742)) ([6525827](https://github.com/dialpad/dialtone-vue/commit/6525827bd07a0cbebc9b0929a103329ed61f95d1))
+
 ## [2.55.1](https://github.com/dialpad/dialtone-vue/compare/v2.55.0...v2.55.1) (2023-02-02)
 
 # [2.55.0](https://github.com/dialpad/dialtone-vue/compare/v2.54.2...v2.55.0) (2023-02-01)
