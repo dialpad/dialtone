@@ -668,23 +668,23 @@
           "type": "color"
         },
         "200": {
-          "value": "#3A1D95",
+          "value": "#261362",
           "type": "color"
         },
         "300": {
-          "value": "#7C52FF",
+          "value": "#3A1D95",
           "type": "color"
         },
         "400": {
-          "value": "#AB7EFF",
+          "value": "#7C52FF",
           "type": "color"
         },
         "500": {
-          "value": "#DAC7FF",
+          "value": "#AB7EFF",
           "type": "color"
         },
         "600": {
-          "value": "#F5F0FF",
+          "value": "#DAC7FF",
           "type": "color"
         }
       },
