@@ -195,6 +195,7 @@
         "share",
         "email"
       ],
+      "hand": [],
       "mail": [
         "email",
         "message",
@@ -380,6 +381,7 @@
         "authentication",
         "secure"
       ],
+      "large-self-view": [],
       "layout": [
         "window",
         "webpage"
@@ -388,6 +390,7 @@
         "masonry",
         "brick"
       ],
+      "layout-filmstrip": [],
       "layout-grid": [
         "app",
         "home",
@@ -399,6 +402,8 @@
         "block",
         "section"
       ],
+      "lightbulb": [],
+      "lightbulb-off": [],
       "listen": [
         "ear",
         "hear"
@@ -435,12 +440,14 @@
       "minimize-alt": [
         "window"
       ],
+      "minus-circle": [],
       "multi-line-dept": [
         "selection",
         "line",
         "department",
         "fork"
       ],
+      "music-off": [],
       "object": [],
       "option": [
         "key",
@@ -461,6 +468,7 @@
         "call",
         "leave"
       ],
+      "picture-in-picture": [],
       "pin": [
         "save",
         "map",
@@ -1041,6 +1049,7 @@
         "index",
         "box"
       ],
+      "attestation": [],
       "book": [
         "read",
         "dictionary",
