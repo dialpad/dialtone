@@ -1808,15 +1808,15 @@
           "type": "color"
         },
         "secondary": {
-          "value": "{color.black.300}",
+          "value": "#2E2E2E",
           "type": "color"
         },
         "moderate": {
-          "value": "{color.black.400}",
+          "value": "{color.black.300}",
           "type": "color"
         },
         "bold": {
-          "value": "{color.black.300}",
+          "value": "{color.black.400}",
           "type": "color"
         },
         "strong": {
