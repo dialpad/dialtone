@@ -1,3 +1,10 @@
+# [3.42.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v3.42.0-beta.1...v3.42.0-beta.2) (2023-02-06)
+
+
+### Bug Fixes
+
+* preventScrolling after transition completes ([6709f3c](https://github.com/dialpad/dialtone-vue/commit/6709f3c3176bb5a38f279897b3e3c4fbb42025c3))
+
 # [3.42.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v3.41.0...v3.42.0-beta.1) (2023-01-27)
 
 
