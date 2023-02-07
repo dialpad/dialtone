@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
   <div
     @keydown.esc.stop="onKeyValidation($event, 'onEscapeKey')"
     @keydown.enter.exact="onKeyValidation($event, 'onEnterKey')"
@@ -14,6 +15,7 @@
         :input-props="inputProps"
       />
     </div>
+    <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
     <div
       v-if="showList"
       ref="listWrapper"

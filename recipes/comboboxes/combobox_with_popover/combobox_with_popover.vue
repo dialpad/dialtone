@@ -19,6 +19,7 @@
     <template
       #input="{ inputProps }"
     >
+      <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
       <div
         :id="externalAnchor"
         ref="input"
@@ -65,6 +66,7 @@
         </template>
 
         <template #content>
+          <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
           <div
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"

@@ -212,7 +212,7 @@ Variants.parameters = {
         </div>
       </template>
       <template #subtitle>
-        <div class="d-fc-red-300" @click.stop="onMarkAsSpam">Mark as spam</div>
+        <dt-link kind="danger" @click.stop="onMarkAsSpam">Mark as spam</dt-link>
       </template>
     </dt-recipe-contact-info>
   </div>

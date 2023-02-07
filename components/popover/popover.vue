@@ -14,6 +14,7 @@
       data-qa="dt-popover-container"
       v-on="$listeners"
     >
+      <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
       <div
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"

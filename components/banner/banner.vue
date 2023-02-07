@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
   <aside
     :class="bannerClass"
     :style="bannerBackgroundImage"

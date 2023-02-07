@@ -35,12 +35,12 @@
         </template>
         <template #subtitle>
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
-          <div
-            class="d-fc-red-400"
+          <dt-link
+            kind="danger"
             @click.stop="onMarkAsSpam"
           >
             Mark as spam
-          </div>
+          </dt-link>
         </template>
       </dt-recipe-contact-info>
     </div>
@@ -231,9 +231,10 @@
 import DtRecipeContactInfo from './contact_info';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
+import { DtLink } from '@/components/link';
 
 export default {
   name: 'DtRecipeContactInfoVariants',
-  components: { DtButton, DtRecipeContactInfo, DtIcon },
+  components: { DtButton, DtRecipeContactInfo, DtIcon, DtLink },
 };
 </script>

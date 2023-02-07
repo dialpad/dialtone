@@ -24,7 +24,8 @@
       />
     </template>
     <template #content="{ close }">
-      <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
+      <!-- eslint-disable max-len -->
+      <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events, vuejs-accessibility/no-static-element-interactions -->
       <ul
         :id="listId"
         ref="listWrapper"
