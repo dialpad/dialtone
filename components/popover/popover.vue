@@ -606,11 +606,9 @@ export default {
     isOpen (isOpen, isPrev) {
       if (isOpen) {
         this.initTippyInstance();
-        this.preventScrolling();
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeEventListeners();
         this.tip.hide();
-        this.enableScrolling();
       }
     },
   },
@@ -783,6 +781,7 @@ export default {
         await this.$nextTick();
       }
       this.tip?.unmount();
+      this.enableScrolling();
       this.$emit('opened', false);
       if (this.open !== null) {
         this.$emit('update:open', false);
@@ -791,6 +790,7 @@ export default {
 
     async onEnterTransitionComplete () {
       this.focusInitialElement();
+      this.preventScrolling();
       // await next tick in case the user wants to change focus themselves.
       await this.$nextTick();
       this.$emit('opened', true, this.$refs.popover__content);
