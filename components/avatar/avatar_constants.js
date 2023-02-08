@@ -1,15 +1,15 @@
-export const AVATAR_KIND_MODIFIERS = {
-  default: '',
-  icon: 'd-avatar--icon',
-  initials: 'd-avatar--initials',
-};
-
 export const AVATAR_SIZE_MODIFIERS = {
   xs: 'd-avatar--xs',
   sm: 'd-avatar--sm',
   md: 'd-avatar--md',
   lg: 'd-avatar--lg',
   xl: 'd-avatar--xl',
+};
+
+export const AVATAR_KIND_MODIFIERS = {
+  default: '',
+  icon: 'd-avatar__icon',
+  initials: 'd-avatar__initials',
 };
 
 export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
@@ -35,9 +35,12 @@ export const GRADIENT_COLORS = {
 export const MAX_GRADIENT_COLORS = 3;
 export const MAX_GRADIENT_COLORS_100 = 2;
 
+export const AVATAR_GROUP_VALIDATOR = (group) => group > 1;
+
 export default {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_ICON_SIZES,
   AVATAR_ANGLES,
+  AVATAR_GROUP_VALIDATOR,
 };

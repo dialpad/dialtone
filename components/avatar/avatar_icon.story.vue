@@ -4,6 +4,7 @@
     :size="$attrs.size"
     :presence="$attrs.presence"
     :seed="$attrs.seed"
+    :gradient="$attrs.gradient"
   >
     <dt-icon
       :name="defaultSlot"
