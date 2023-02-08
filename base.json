@@ -1885,7 +1885,7 @@
             "type": "color"
           },
           "critical": {
-            "value": "{color.red.400}",
+            "value": "{color.red.500}",
             "type": "color"
           },
           "success": {
