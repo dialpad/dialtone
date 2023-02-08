@@ -1,22 +1,30 @@
 <template>
   <div
     :id="id"
-    :class="[
-      'd-avatar',
-      AVATAR_KIND_MODIFIERS[kind],
-      AVATAR_SIZE_MODIFIERS[size],
-      avatarClass,
-    ]"
+    :class="avatarClasses"
     :style="initialKindStyle"
     data-qa="dt-avatar"
   >
-    <!-- @slot Slot for avatar content -->
-    <slot v-if="showDefaultSlot" />
-    <span v-else-if="showInitials">
-      {{ formattedInitials }}
-    </span>
+    <div
+      ref="canvas"
+      class="d-avatar__canvas"
+    >
+      <!-- @slot Slot for avatar content -->
+      <slot v-if="showDefaultSlot" />
+      <span
+        v-else-if="showInitials"
+        :class="AVATAR_KIND_MODIFIERS.initials"
+      >
+        {{ formattedInitials }}
+      </span>
+    </div>
+    <span
+      v-if="showGroup"
+      class="d-avatar__count"
+      data-qa="dt-avatar-count"
+    >{{ formattedGroup }}</span>
     <dt-presence
-      v-if="presence"
+      v-if="presence && !showGroup"
       :presence="presence"
       :class="[
         'd-avatar__presence',
@@ -41,6 +49,7 @@ import {
   GRADIENT_COLORS,
   MAX_GRADIENT_COLORS,
   MAX_GRADIENT_COLORS_100,
+  AVATAR_GROUP_VALIDATOR,
 } from './avatar_constants.js';
 
 /**
@@ -114,6 +123,25 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+     * Determines whether to show a gradient background for the avatar.
+     */
+    gradient: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Determines whether to show a group avatar.
+     * Limit to 2 digits max, more than 99 will be rendered as “99+”.
+     * if the number is 1 or less it would just show the regular avatar as if group had not been set.
+     */
+    group: {
+      type: Number,
+      default: undefined,
+      validator: (group) => AVATAR_GROUP_VALIDATOR(group),
+    },
   },
 
   data () {
@@ -130,12 +158,28 @@ export default {
   },
 
   computed: {
+    avatarClasses () {
+      return [
+        'd-avatar',
+        AVATAR_SIZE_MODIFIERS[this.size],
+        this.avatarClass,
+        {
+          'd-avatar--no-gradient': !this.gradient,
+          'd-avatar--group': this.showGroup,
+        },
+      ];
+    },
+
     showDefaultSlot () {
       return this.kind !== 'initials' && this.imageLoadedSuccessfully !== false;
     },
 
     showInitials () {
       return this.kind === 'initials' || this.initials;
+    },
+
+    showGroup () {
+      return AVATAR_GROUP_VALIDATOR(this.group);
     },
 
     initialKindStyle () {
@@ -146,6 +190,10 @@ export default {
         '--avatar-gradient-stop-2': `var(--${randomGradientColorStops[1]})`,
         '--avatar-gradient-stop-3': `var(--${randomGradientColorStops[2]})`,
       };
+    },
+
+    formattedGroup () {
+      return this.group > 99 ? '99+' : this.group;
     },
   },
 
@@ -162,31 +210,43 @@ export default {
 
   methods: {
     init () {
-      const firstChild = this.$el.firstChild;
+      const firstChild = this.$refs.canvas.firstChild;
 
-      if (firstChild) {
-        this.setKind(firstChild);
-
-        if (this.kind === 'image') {
-          firstChild.classList.add('d-avatar__image');
-          this.validateImageAttrsPresence();
-
-          firstChild.addEventListener('error', () => {
-            this.formatInitials(this.initials);
-            this.imageLoadedSuccessfully = false;
-          });
-
-          firstChild.addEventListener('load', () => {
-            firstChild.classList.add('d-avatar--image-loaded');
-            this.imageLoadedSuccessfully = true;
-          });
-        }
-
-        if (this.kind === 'initials') {
-          this.slottedInitials = firstChild.text || firstChild.textContent;
-          this.formatInitials(this.slottedInitials);
-        }
+      if (!firstChild) {
+        return;
       }
+
+      this.setKind(firstChild);
+      this.kindHandler(firstChild);
+    },
+
+    kindHandler (el) {
+      switch (this.kind) {
+        case 'image':
+          el.classList.add('d-avatar__image');
+          this.validateImageAttrsPresence();
+          this.setImageListeners(el);
+          break;
+        case 'icon':
+          el.classList.add(AVATAR_KIND_MODIFIERS.icon);
+          break;
+        case 'initials':
+          this.slottedInitials = el.text || el.textContent;
+          this.formatInitials(this.slottedInitials);
+          break;
+      }
+    },
+
+    setImageListeners (el) {
+      el.addEventListener('error', () => {
+        this.formatInitials(this.initials);
+        this.imageLoadedSuccessfully = false;
+      });
+
+      el.addEventListener('load', () => {
+        el.classList.add('d-avatar--image-loaded');
+        this.imageLoadedSuccessfully = true;
+      });
     },
 
     formatInitials (initials) {
@@ -242,8 +302,8 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      const isSrcMissing = !this.$el.firstChild.getAttribute('src');
-      const isAltMissing = !this.$el.firstChild.getAttribute('alt');
+      const isSrcMissing = !this.$refs.canvas.firstChild.getAttribute('src');
+      const isAltMissing = !this.$refs.canvas.firstChild.getAttribute('alt');
 
       if (isSrcMissing || isAltMissing) {
         Vue.util.warn('src and alt attributes are required for image avatars', this);

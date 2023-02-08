@@ -4,6 +4,7 @@
     :size="size"
     :presence="presence"
     :seed="seed"
+    :gradient="gradient"
   >
     <dt-icon
       :name="defaultSlot"

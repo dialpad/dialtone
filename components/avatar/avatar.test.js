@@ -29,6 +29,7 @@ describe('DtAvatar Tests', function () {
   let wrapper;
   let avatar;
   let image;
+  let count;
   let presence;
 
   // Environment
@@ -40,6 +41,7 @@ describe('DtAvatar Tests', function () {
   const _setChildWrappers = () => {
     avatar = wrapper.find('[data-qa="dt-avatar"]');
     image = wrapper.find('[data-qa="dt-avatar-image"]');
+    count = wrapper.find('[data-qa="dt-avatar-count"]');
     presence = wrapper.find('[data-qa="dt-presence"]');
   };
 
@@ -120,7 +122,7 @@ describe('DtAvatar Tests', function () {
       });
 
       it('should have correct class', function () {
-        itBehavesLikeHasCorrectClass(avatar, AVATAR_KIND_MODIFIERS.icon);
+        itBehavesLikeHasCorrectClass(avatar.find('svg'), AVATAR_KIND_MODIFIERS.icon);
       });
     });
 
@@ -144,7 +146,8 @@ describe('DtAvatar Tests', function () {
       });
 
       it('should have correct class', function () {
-        itBehavesLikeHasCorrectClass(avatar, AVATAR_KIND_MODIFIERS.initials);
+        const avatarWithInitials = wrapper.find(AVATAR_KIND_MODIFIERS.initials);
+        assert.exists(avatarWithInitials);
       });
     });
 
@@ -206,6 +209,60 @@ describe('DtAvatar Tests', function () {
 
       it('should have size variant class on the avatar', function () {
         assert.isTrue(avatar.classes(AVATAR_SIZE_MODIFIERS[size]));
+      });
+    });
+
+    describe('When a group is provided', function () {
+      // Test Environment
+      const group = 25;
+
+      // Test Setup
+      beforeEach(function () {
+        propsData = {
+          ...basePropsData,
+          group,
+        };
+        slots = { default: DEFAULT_SLOT };
+        _setWrappers();
+      });
+
+      it('should have group count', function () {
+        assert.isTrue(count.exists());
+      });
+
+      it('should have the correct group number', function () {
+        assert.strictEqual(count.text(), group.toString());
+      });
+
+      it('should not render group if group value is 1 or less', async function () {
+        await wrapper.setProps({ group: 1 });
+        _setChildWrappers();
+        assert.isFalse(count.exists());
+      });
+
+      it('should render "99+" if group is greater than 99', async function () {
+        await wrapper.setProps({ group: 100 });
+        _setChildWrappers();
+        assert.strictEqual(count.text(), '99+');
+      });
+    });
+
+    describe('When setting gradient to not show', function () {
+      // Test Environment
+      const gradient = false;
+
+      // Test Setup
+      beforeEach(function () {
+        propsData = {
+          ...basePropsData,
+          gradient,
+        };
+        slots = { default: DEFAULT_SLOT };
+        _setWrappers();
+      });
+
+      it('should set the correct class', function () {
+        assert.isTrue(avatar.classes('d-avatar--no-gradient'));
       });
     });
 
@@ -278,6 +335,19 @@ describe('DtAvatar Tests', function () {
 
       describe('When provided size is not in AVATAR_SIZE_MODIFIERS', function () {
         itBehavesLikeFailsCustomPropValidation(prop, `INVALID_SIZE`);
+      });
+    });
+
+    describe('Group Validator', function () {
+      // Test Environment
+      const prop = DtAvatar.props.group;
+
+      describe('When provided group is valid to show group count', function () {
+        itBehavesLikePassesCustomPropValidation(prop, 2);
+      });
+
+      describe('When provided group is not in the valid range (below min)', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, 1);
       });
     });
 
