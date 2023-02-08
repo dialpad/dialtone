@@ -1893,7 +1893,7 @@
             "type": "color"
           },
           "warning": {
-            "value": "{color.black.600}",
+            "value": "{color.gold.500}",
             "type": "color"
           },
           "muted": {
