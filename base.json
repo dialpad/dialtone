@@ -2679,7 +2679,27 @@
         "shadow.medium": "S:4ddef2a19f3bf74eb687702e80a53dfbd0dde78f,",
         "shadow.large": "S:84cd4cc3abc051d60342568cb4997dd65961adf4,",
         "shadow.extraLarge": "S:8224299329b5dfe0c5ec4c11aa727279a897d095,",
-        "shadow.card": "S:030f2786071f3a298bf53cc8199e2a0c13f4e090,"
+        "shadow.card": "S:030f2786071f3a298bf53cc8199e2a0c13f4e090,",
+        "color.text-link.critical": "S:0b39d9ea41f4f290856add63195161f9e131c2ac,",
+        "color.text-link.success": "S:adda387aceb94c0be3e1a7dd6328f86155807508,",
+        "color.text-link.warning": "S:ce9b8780a508a8ab92c63d4b4c482f4bde1ff9d1,",
+        "color.text-link.muted": "S:52e9c255d462a2f3359271c6176f1b46682846ca,",
+        "color.text-link.disabled": "S:f2209466a32a93fd48bfb90f73688ed8cd9b7d40,",
+        "color.text-link.hover.primary": "S:681adc6bbf1d796aa4760774d65ef165c636add4,",
+        "color.text-link.hover.critical": "S:6906f64ff33a162b9db2d699b7e37850848df4df,",
+        "color.text-link.hover.success": "S:f6cae84b1ee1a5c46b2cce449e893cfa235d6441,",
+        "color.text-link.hover.warning": "S:9edd7ca528e5a2d4d3ae9921d1e3a4b42cdbfaee,",
+        "color.text-link.hover.muted": "S:bd4396eb6c99a1ffd680eb41760d15908daae3ac,",
+        "color.text-link.hover.disabled": "S:3a360339bdcfe01856887094d9f4caae38ee1d38,",
+        "color.border.subtle": "S:b8fd258965df85ccf700cd5510b91e8e63a6a1ce,",
+        "color.border.default": "S:51762c4bb03a8609f7b38cd37afb34d3d3617d9b,",
+        "color.border.moderate": "S:d50a97085a217927db3e4e7b9ebb1fc72e930b9f,",
+        "color.border.bold": "S:7df377f9db11568d858321ad4e01064df0b156fe,",
+        "color.border.inverted.base": "S:1bf2f2083417e340c1543cb7a63a71b38e01ca7e,",
+        "color.border.inverted.subtle": "S:7a8ca24d2bf77bb6c37aac8466f6f7592b21031d,",
+        "color.border.inverted.default": "S:86793f0f19488aad5b417877d1a6e725ea29174f,",
+        "color.border.inverted.moderate": "S:f4c64f954989348c8a8d8eb1d3bfb13d539f76f6,",
+        "color.border.inverted.bold": "S:360555f73276fdfc06c6a92987b62ec2ab757181,"
       }
     },
     {
