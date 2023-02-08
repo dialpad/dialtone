@@ -1,3 +1,17 @@
+# [2.56.0](https://github.com/dialpad/dialtone-vue/compare/v2.55.2...v2.56.0) (2023-02-08)
+
+
+### Bug Fixes
+
+* preventScrolling after transition completes ([#749](https://github.com/dialpad/dialtone-vue/issues/749)) ([35d3b68](https://github.com/dialpad/dialtone-vue/commit/35d3b68446d975217cc747ef3a8d7cffeafaeb9e))
+* **Root Layout:** add fixed prop ([#738](https://github.com/dialpad/dialtone-vue/issues/738)) ([f2e7efe](https://github.com/dialpad/dialtone-vue/commit/f2e7efe4108d7ca95484cea796934bbf4e5286f7))
+* **Root Layout:** headerHeight 0 if no slot ([8b1c17d](https://github.com/dialpad/dialtone-vue/commit/8b1c17d3c256772b2e6423599b157707b50ff28f))
+
+
+### Features
+
+* **Avatar:** group variant ([#745](https://github.com/dialpad/dialtone-vue/issues/745)) ([98fe39e](https://github.com/dialpad/dialtone-vue/commit/98fe39e9407f2b9874314ddcdb0a7f0937b383ba))
+
 ## [2.55.2](https://github.com/dialpad/dialtone-vue/compare/v2.55.1...v2.55.2) (2023-02-03)
 
 
