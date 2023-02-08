@@ -1,3 +1,15 @@
+# [3.43.0](https://github.com/dialpad/dialtone-vue/compare/v3.42.3...v3.43.0) (2023-02-08)
+
+
+### Bug Fixes
+
+* preventScrolling after transition completes ([#750](https://github.com/dialpad/dialtone-vue/issues/750)) ([af2ac67](https://github.com/dialpad/dialtone-vue/commit/af2ac679dcf8ffe986d8e9649245f3741de78cef))
+
+
+### Features
+
+* **Avatar:** group variant ([#751](https://github.com/dialpad/dialtone-vue/issues/751)) ([a416c91](https://github.com/dialpad/dialtone-vue/commit/a416c91741800b27af0a9bf704b8ac58edd8fe12))
+
 ## [3.42.3](https://github.com/dialpad/dialtone-vue/compare/v3.42.2...v3.42.3) (2023-02-03)
 
 
