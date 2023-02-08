@@ -664,27 +664,27 @@
       },
       "purple": {
         "100": {
-          "value": "#0B011D",
-          "type": "color"
-        },
-        "200": {
           "value": "#10022C",
           "type": "color"
         },
-        "300": {
+        "200": {
           "value": "#3A1D95",
           "type": "color"
         },
-        "400": {
+        "300": {
           "value": "#7C52FF",
           "type": "color"
         },
-        "500": {
+        "400": {
           "value": "#AB7EFF",
           "type": "color"
         },
-        "600": {
+        "500": {
           "value": "#DAC7FF",
+          "type": "color"
+        },
+        "600": {
+          "value": "#F5F0FF",
           "type": "color"
         }
       },
@@ -1798,7 +1798,7 @@
       },
       "text-link": {
         "primary": {
-          "value": "{color.purple.500}",
+          "value": "{color.purple.400}",
           "type": "color"
         }
       },
@@ -1808,15 +1808,15 @@
           "type": "color"
         },
         "secondary": {
-          "value": "#2E2E2E",
-          "type": "color"
-        },
-        "moderate": {
           "value": "{color.black.300}",
           "type": "color"
         },
-        "bold": {
+        "moderate": {
           "value": "{color.black.400}",
+          "type": "color"
+        },
+        "bold": {
+          "value": "{color.black.300}",
           "type": "color"
         },
         "strong": {
@@ -2419,7 +2419,52 @@
       }
     }
   },
-  "components/bar": {},
+  "components/badge": {
+    "badge": {
+      "color": {
+        "background": {
+          "default": {
+            "value": "{color.black.200}",
+            "type": "color"
+          },
+          "info": {
+            "value": "{color.surface.info}",
+            "type": "color"
+          },
+          "success": {
+            "value": "{color.surface.success}",
+            "type": "color"
+          },
+          "warning": {
+            "value": "{color.surface.warning}",
+            "type": "color"
+          },
+          "critical": {
+            "value": "{color.surface.critical}",
+            "type": "color"
+          },
+          "bulletin": {
+            "value": "{color.purple.400}",
+            "type": "color"
+          },
+          "ai": {
+            "value": "{color.gradient.magenta-purple}",
+            "type": "color"
+          }
+        },
+        "text": {
+          "default": {
+            "value": "{color.text.primary}",
+            "type": "color"
+          },
+          "bulleting": {
+            "value": "{color.text.inverted.primary}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
   "$themes": [
     {
       "id": "025593f9f8f0cc2511035095197b6266f41e0855",
@@ -2629,7 +2674,7 @@
       "semantic",
       "semantic/dark",
       "components/foo",
-      "components/bar"
+      "components/badge"
     ]
   }
 }
