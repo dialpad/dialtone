@@ -1710,35 +1710,35 @@
       "border": {
         "icon": {
           "100": {
-            "value": "1px",
+            "value": "{size.border.100}",
             "type": "borderWidth"
           },
           "200": {
-            "value": "1.25px",
+            "value": "{size.border.icon.100} * 1.25",
             "type": "borderWidth"
           },
           "300": {
-            "value": "1.5px",
+            "value": "{size.border.icon.100} * 1.5",
             "type": "borderWidth"
           },
           "400": {
-            "value": "1.75px",
+            "value": "{size.border.icon.100} * 1.75",
             "type": "borderWidth"
           },
           "500": {
-            "value": "1.75px",
+            "value": "{size.border.icon.400}",
             "type": "borderWidth"
           },
           "600": {
-            "value": "2.5px",
+            "value": "{size.border.icon.100} * 2.5",
             "type": "borderWidth"
           },
           "700": {
-            "value": "2.75px",
+            "value": "{size.border.icon.100} * 2.75",
             "type": "borderWidth"
           },
           "800": {
-            "value": "3.5px",
+            "value": "{size.border.icon.100} * 3.5",
             "type": "borderWidth"
           }
         }
