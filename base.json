@@ -1832,6 +1832,12 @@
             "type": "borderWidth"
           }
         }
+      },
+      "lineHeight": {
+        "default": {
+          "value": "{font.lineHeight.200}",
+          "type": "lineHeights"
+        }
       }
     }
   },
@@ -2434,6 +2440,12 @@
             "type": "borderWidth"
           }
         }
+      },
+      "lineHeight": {
+        "default": {
+          "value": "{font.lineHeight.200}",
+          "type": "lineHeights"
+        }
       }
     }
   },
@@ -2720,38 +2732,38 @@
         "color.tan.400": "S:47270974b53fececb693221bbda625fdb84f7b69,",
         "color.tan.500": "S:902956d7f75aa496b8fc09a1ac9b26ff0db5debe,",
         "color.gradient.magenta-purple": "S:0b681c2cfbb37bc69e98b48e388ab661ef126d4d,",
-        "typography.body.small": "S:5dc1bb92d712fb46a1bc57298ff5deb1bf3f78b9,",
-        "typography.body.base": "S:81afccf092d47d17ef0b3610ad2439eb28f38ab8,",
-        "typography.body.compact.small": "S:e82f4e55d53a61d50861b9ee9fc668da2d62e145,",
-        "typography.body.compact.base": "S:7482f88327ac693b70d52596b9edff6c62d9e5a0,",
-        "typography.headline.eyebrow": "S:8013687dba9e83a9afa64ebe31369db3057b3482,",
-        "typography.headline.small": "S:a8316e31be6a4c673467be898c4f5d69029e6dbe,",
-        "typography.headline.medium": "S:abc243aa82eaac4f1dc8c7282fd6472c9852b097,",
-        "typography.headline.large": "S:ba477d88fff1c80584e226257d48b6cf34efea5c,",
-        "typography.headline.extra-large": "S:7e881677c8e4d58908bc05be2529960a9ae173fe,",
-        "typography.headline.extra-extra-large": "S:4a72a4fcf85f640b0c20c4d4854844e06ee81ea8,",
-        "typography.headline.soft.small": "S:46cf3a1ea4dd706cf2d0a5fb818ae2b279f361bd,",
-        "typography.headline.compact.small": "S:868021dd867f7cc773c7cf9bda3637b62953b4bc,",
-        "typography.headline.compact.medium": "S:057bbd45d192789c25e9053be46343c4d7da1cab,",
-        "typography.headline.compact.large": "S:3467faf12634f0b682e07171d6d906b0e88e4782,",
-        "typography.headline.compact.soft.small": "S:1bc500a356d648e3724f7a4a8356de4b8c1016db,",
-        "typography.label.small": "S:f15876468abcbd17e8d7736d434210cbd2150252,",
-        "typography.label.base": "S:440553b90b45300ab325cadb81774f189e03ab7c,",
-        "typography.label.compact.small": "S:22c33f2322f24890db1a432e3b69825119e253a5,",
-        "typography.label.compact.base": "S:421da52e956d2a1f1d6e512ca445fb60f9635859,",
-        "typography.label.compact.plain.small": "S:877902aa775aeb0a86b9f9d85923ffe0d986c3cf,",
-        "typography.label.compact.plain.base": "S:3d8c12f69a1ff37b2f38f94f84fb25d647bde114,",
-        "typography.label.plain.small": "S:0b47be6f1106cd14de7e74805e29b28693913b05,",
-        "typography.label.plain.base": "S:d8ab09ca433613e186973503289a113c0a1d4116,",
-        "typography.helper.small": "S:43d765f92ebcdac7e2fc32a60ae753307fd1d726,",
-        "typography.helper.base": "S:c2110e6820a338dd7b6bcad069e4b359c1a55d93,",
-        "typography.code.small": "S:91002f32d5aa05df9ce643857ca0e989a131309b,",
-        "typography.code.base": "S:b9b3825ffb648c89e1734065689dd3e35d4534a7,",
-        "shadow.small": "S:c58a94ab472ecca3a6bc7536fbf7c3325c4ebbfb,",
-        "shadow.medium": "S:2350c80d53b93a443a91331487cdc8f6c17a9a76,",
-        "shadow.large": "S:249ef86d80b355bd2a61bd9f3b1b61b24f088f13,",
-        "shadow.extraLarge": "S:6870ede962a5e8648cfa2a7eee718d452c79ea55,",
-        "shadow.card": "S:350cd50a0cbf2e55887b71975b1f11040e3e1438,",
+        "typography.body.small": "S:faaa0a21bc145b59d2192c523f57b830d43385c2,",
+        "typography.body.base": "S:a7dfb13c8b30535b9acdfddc0351ad9f0175e29a,",
+        "typography.body.compact.small": "S:5f2ddbbb4925a95459d278e0d60da440ec8185a1,",
+        "typography.body.compact.base": "S:36e6345f00c372e1562c2bbeaab7b4f42c18fef2,",
+        "typography.headline.eyebrow": "S:cffd0e141cc45e8ea8ca1e1d4958ac0f19bc500b,",
+        "typography.headline.small": "S:654d4157ac17171ffeca2a6eb2e8de8ddf23ddf0,",
+        "typography.headline.medium": "S:9fc456d697bab8d220fb71219cdce2c91cf812e1,",
+        "typography.headline.large": "S:eae42a3ce58e548a50270f07fbab99e3996602ab,",
+        "typography.headline.extra-large": "S:857cc6fde52a503bcbde18ef998894d1dadbc2c8,",
+        "typography.headline.extra-extra-large": "S:999bdf65670ffbba63bcef5b40a7254b02c6f9f7,",
+        "typography.headline.soft.small": "S:289ead07cb44077113b0b7d4fbb17ee4a377bced,",
+        "typography.headline.compact.small": "S:1999396e25fc0e33e7dd066c800c7a43627b46b7,",
+        "typography.headline.compact.medium": "S:1bd63076148ef2290eabb345a92ae84832767a26,",
+        "typography.headline.compact.large": "S:afbcf79d6275fab57e0ab77ba8deb31edeb0ea56,",
+        "typography.headline.compact.soft.small": "S:495f89c39752aa675197b1ed61e08318d5320a76,",
+        "typography.label.small": "S:4084cc118a884b430269adb5e0b84b24c2b3ac9d,",
+        "typography.label.base": "S:46648765f746e81f9f3a32830da198f06aa6d9a4,",
+        "typography.label.compact.small": "S:f7ac245a375e5dea98680b036d25ea43b3a8306e,",
+        "typography.label.compact.base": "S:3693e9af1c5d86e2c3f46d2cb73e5f0b9a35f798,",
+        "typography.label.compact.plain.small": "S:ca9c6d846e7ed02a249fe984cbe88b55bebe7017,",
+        "typography.label.compact.plain.base": "S:4242e52d207799e6096e91f321b99dc2fb49c1e6,",
+        "typography.label.plain.small": "S:16a9202ce3e9c5f17fcdadcc7ca0706a2b755136,",
+        "typography.label.plain.base": "S:e96da91d9885ac5134775dcfddb4f74ae55bb776,",
+        "typography.helper.small": "S:6dcf585780ee317be52afa4db35129aa7407ca79,",
+        "typography.helper.base": "S:bd6d8bf50cf823d4f18c64d7db264d04299009ab,",
+        "typography.code.small": "S:6b0167223c738182dad01f5e271d3f1ed25ce608,",
+        "typography.code.base": "S:b1e0a27050abaa49f6d79f6ff12391f95970c33f,",
+        "shadow.small": "S:90d2fd0b7e7bb45102a160e8774e4d5bcb2fda03,",
+        "shadow.medium": "S:4ddef2a19f3bf74eb687702e80a53dfbd0dde78f,",
+        "shadow.large": "S:84cd4cc3abc051d60342568cb4997dd65961adf4,",
+        "shadow.extraLarge": "S:8224299329b5dfe0c5ec4c11aa727279a897d095,",
+        "shadow.card": "S:030f2786071f3a298bf53cc8199e2a0c13f4e090,",
         "color.text-link.critical": "S:0b39d9ea41f4f290856add63195161f9e131c2ac,",
         "color.text-link.success": "S:adda387aceb94c0be3e1a7dd6328f86155807508,",
         "color.text-link.warning": "S:ce9b8780a508a8ab92c63d4b4c482f4bde1ff9d1,",
