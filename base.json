@@ -3012,7 +3012,8 @@
         "semantic/dark": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "semantic": "enabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
@@ -3146,7 +3147,20 @@
         "color.border.critical": "S:596b60284df51fe92dcc1e6a16a1374b5c2f3824,",
         "color.border.success": "S:051f329df222b3ad58317bbeeb9ad58cc0238615,",
         "color.border.warning": "S:3f3e987e6522d70e7a33bf580b4b0263056ed350,",
-        "color.neutral.transparent": "S:ecdc357056d1a049b43160f4cf098e6f9c4b9278,"
+        "color.neutral.transparent": "S:ecdc357056d1a049b43160f4cf098e6f9c4b9278,",
+        "color.border.inverted.base": "S:c8cfc22ccddba4f878dc5011133564a7fc70ee05,",
+        "inputs.color.text.default": "S:d6e7874175cd0c297dc2a90b82369417581d88f5,",
+        "inputs.color.text.placeholder": "S:c895809280d946e194e683c2f287919802d4c3c5,",
+        "inputs.color.text.disabled": "S:5850cc09d2e8f36baf53c1cc8afda070f898c362,",
+        "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
+        "inputs.color.border.focus": "S:fa04a078de2efd25d134d58afa88b5aae08e4490,",
+        "inputs.color.border.critical": "S:cd32e20a14d569696b9deec01dd68b4c3cedb60f,",
+        "inputs.color.border.sucess": "S:22da337b8b256b1ea387e7daec8dd9b1a1025606,",
+        "inputs.color.border.warning": "S:a61ba4e58db89699549293ded34c3265b07c07f9,",
+        "inputs.color.border.disabled": "S:c3f95ca261811da42f7f0ef3906b741ab9ccaf43,",
+        "inputs.color.background.default": "S:a3a877887fba8a8aa1ea5c6cf60bdfca1fa2630e,",
+        "inputs.color.background.focus": "S:15c63c1089d6caa0a997cffe698308cee8bcfce3,",
+        "inputs.color.background.disabled": "S:67bed431fedfe92974b53a55cf2c811cd7295054,"
       }
     }
   ],
