@@ -2821,8 +2821,8 @@
           "type": "sizing"
         },
         "radius": {
-          "value": "{inputs.size.radius.xs}",
-          "type": "50%"
+          "value": "50%",
+          "type": "borderRadius"
         }
       },
       "color": {
