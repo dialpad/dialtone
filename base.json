@@ -1885,6 +1885,32 @@
             "value": "{color.text.disabled}",
             "type": "color"
           }
+        },
+        "border": {
+          "default": {
+            "value": "rgba($color.black.900, 0.09)",
+            "type": "color"
+          },
+          "focus": {
+            "value": "{color.border.focus}",
+            "type": "color"
+          },
+          "critical": {
+            "value": "{color.border.critical}",
+            "type": "color"
+          },
+          "sucess": {
+            "value": "{color.border.success}",
+            "type": "color"
+          },
+          "warning": {
+            "value": "{color.border.warning}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.neutral.transparent}",
+            "type": "color"
+          }
         }
       }
     }
