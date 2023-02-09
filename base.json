@@ -9,6 +9,10 @@
         "black": {
           "value": "#000000",
           "type": "color"
+        },
+        "transparent": {
+          "value": "transparent",
+          "type": "color"
         }
       },
       "black": {
