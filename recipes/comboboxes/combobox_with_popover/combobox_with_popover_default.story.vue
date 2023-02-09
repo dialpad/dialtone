@@ -8,6 +8,7 @@
     :loading="loading"
     :max-height="maxHeight"
     :content-width="contentWidth"
+    :has-suggestion-list="hasSuggestionList"
     :show-list="showList"
     :padding="padding"
     :list-id="listId"
