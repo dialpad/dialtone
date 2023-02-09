@@ -1,3 +1,10 @@
+## [2.56.1](https://github.com/dialpad/dialtone-vue/compare/v2.56.0...v2.56.1) (2023-02-09)
+
+
+### Bug Fixes
+
+* **Combobox With Popover:** add hasSuggestionList to sb ([2275074](https://github.com/dialpad/dialtone-vue/commit/22750748b36ee7912ea699d0b24ba779e90473f9))
+
 # [2.56.0](https://github.com/dialpad/dialtone-vue/compare/v2.55.2...v2.56.0) (2023-02-08)
 
 
