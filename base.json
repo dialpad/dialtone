@@ -1398,6 +1398,22 @@
           "value": "rgba(0,0,0,0.5)",
           "type": "color"
         },
+        "focus": {
+          "value": "{color.blue.300}",
+          "type": "color"
+        },
+        "critical": {
+          "value": "{color.red.300}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.green.400}",
+          "type": "color"
+        },
+        "warning": {
+          "value": "{color.gold.400}",
+          "type": "color"
+        },
         "inverted": {
           "base": {
             "value": "$color.neutral.white",
@@ -1972,6 +1988,22 @@
         },
         "bold": {
           "value": "rgba(255,255,255,0.50)",
+          "type": "color"
+        },
+        "focus": {
+          "value": "{color.blue.300}",
+          "type": "color"
+        },
+        "critical": {
+          "value": "{color.red.300}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.green.400}",
+          "type": "color"
+        },
+        "warning": {
+          "value": "{color.gold.400}",
           "type": "color"
         },
         "inverted": {
