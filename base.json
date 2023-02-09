@@ -1819,6 +1819,20 @@
           }
         }
       }
+    },
+    "field": {
+      "size": {
+        "border": {
+          "default": {
+            "value": "{size.border.50}",
+            "type": "borderWidth"
+          },
+          "status": {
+            "value": "{size.border.200}",
+            "type": "borderWidth"
+          }
+        }
+      }
     }
   },
   "semantic/dark": {
@@ -2403,6 +2417,20 @@
           },
           "800": {
             "value": "{size.border.icon.100} * 3.5",
+            "type": "borderWidth"
+          }
+        }
+      }
+    },
+    "field": {
+      "size": {
+        "border": {
+          "default": {
+            "value": "{size.border.50}",
+            "type": "borderWidth"
+          },
+          "status": {
+            "value": "{size.border.200}",
             "type": "borderWidth"
           }
         }
