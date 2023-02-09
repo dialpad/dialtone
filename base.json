@@ -1951,22 +1951,6 @@
           }
         }
       }
-    },
-    "checkbox": {
-      "size": {
-        "width": {
-          "value": "{size.500}",
-          "type": "sizing"
-        },
-        "height": {
-          "value": "{checkbox.size.width}",
-          "type": "sizing"
-        },
-        "radius": {
-          "value": "{inputs.size.radius.xs}",
-          "type": "borderRadius"
-        }
-      }
     }
   },
   "semantic/dark": {
@@ -2787,13 +2771,50 @@
       }
     }
   },
+  "components/checkbox": {
+    "checkbox": {
+      "size": {
+        "width": {
+          "value": "{size.500}",
+          "type": "sizing"
+        },
+        "height": {
+          "value": "{checkbox.size.width}",
+          "type": "sizing"
+        },
+        "radius": {
+          "value": "{inputs.size.radius.xs}",
+          "type": "borderRadius"
+        }
+      },
+      "color": {
+        "border": {
+          "unchecked": {
+            "value": "{color.black.400}",
+            "type": "color"
+          },
+          "checked": {
+            "value": "{color.purple.400}",
+            "type": "color"
+          }
+        },
+        "background": {
+          "checked": {
+            "value": "{color.purple.400}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
   "$themes": [
     {
       "id": "025593f9f8f0cc2511035095197b6266f41e0855",
       "name": "light",
       "selectedTokenSets": {
         "base": "enabled",
-        "semantic": "enabled"
+        "semantic": "enabled",
+        "components/checkbox": "disabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:92f5e2212b79f23c86e2527358948b6dd56ac41e,",
@@ -2942,7 +2963,8 @@
       "name": "dark",
       "selectedTokenSets": {
         "base/dark": "enabled",
-        "semantic/dark": "enabled"
+        "semantic/dark": "enabled",
+        "components/checkbox": "disabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
@@ -3076,7 +3098,8 @@
       "semantic",
       "semantic/dark",
       "components/foo",
-      "components/badge"
+      "components/badge",
+      "components/checkbox"
     ]
   }
 }
