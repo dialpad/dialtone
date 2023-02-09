@@ -1846,6 +1846,46 @@
           "value": "{font.lineHeight.200}",
           "type": "lineHeights"
         }
+      },
+      "font": {
+        "size": {
+          "xs": {
+            "value": "{font.size.100}",
+            "type": "fontSizes"
+          },
+          "sm": {
+            "value": "{font.size.100}",
+            "type": "fontSizes"
+          },
+          "md": {
+            "value": "{font.size.200}",
+            "type": "fontSizes"
+          },
+          "lg": {
+            "value": "{font.size.300}",
+            "type": "fontSizes"
+          },
+          "xl": {
+            "value": "{font.size.400}",
+            "type": "fontSizes"
+          }
+        }
+      },
+      "color": {
+        "text": {
+          "default": {
+            "value": "{color.text.primary}",
+            "type": "color"
+          },
+          "placeholder": {
+            "value": "{color.text.placeholder}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.text.disabled}",
+            "type": "color"
+          }
+        }
       }
     }
   },
