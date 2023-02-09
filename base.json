@@ -1951,6 +1951,22 @@
           }
         }
       }
+    },
+    "checkbox": {
+      "size": {
+        "width": {
+          "value": "{size.500}",
+          "type": "sizing"
+        },
+        "height": {
+          "value": "{checkbox.size.width}",
+          "type": "sizing"
+        },
+        "radius": {
+          "value": "{inputs.size.radius.xs}",
+          "type": "borderRadius"
+        }
+      }
     }
   },
   "semantic/dark": {
