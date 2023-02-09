@@ -2813,8 +2813,7 @@
       "name": "light",
       "selectedTokenSets": {
         "base": "enabled",
-        "semantic": "enabled",
-        "components/checkbox": "disabled"
+        "semantic": "enabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:92f5e2212b79f23c86e2527358948b6dd56ac41e,",
@@ -2963,8 +2962,7 @@
       "name": "dark",
       "selectedTokenSets": {
         "base/dark": "enabled",
-        "semantic/dark": "enabled",
-        "components/checkbox": "disabled"
+        "semantic/dark": "enabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
