@@ -3129,7 +3129,10 @@
         "inputs.color.background.disabled": "S:327d78b20ed74f5665a37172398ec6b9c8382d64,",
         "checkbox.color.border.unchecked": "S:b9230993e329526b16516ac9883e62a7fe62d332,",
         "checkbox.color.border.checked": "S:cd090609739e389fd46d4f34a93b2685511ee424,",
-        "checkbox.color.background.checked": "S:75eef9ccafd9c5bda59d899717a041ff140762ae,"
+        "checkbox.color.background.checked": "S:75eef9ccafd9c5bda59d899717a041ff140762ae,",
+        "radio.color.border.unchecked": "S:b0038fd89e24810f8950ff0c9cf8c9b017843826,",
+        "radio.color.border.checked": "S:075f5e708124105c4e3784ba213b9b55f47c7798,",
+        "radio.color.background.checked": "S:6747dcf6f3576ca3bb662367fa02bb3ddbae42ab,"
       }
     }
   ],
