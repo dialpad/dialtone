@@ -1828,7 +1828,7 @@
         }
       }
     },
-    "field": {
+    "inputs": {
       "size": {
         "border": {
           "default": {
@@ -2436,7 +2436,7 @@
         }
       }
     },
-    "field": {
+    "inputs": {
       "size": {
         "border": {
           "default": {
@@ -2613,6 +2613,12 @@
           }
         }
       }
+    },
+    "bar": {
+      "color": {
+        "value": "#e69706",
+        "type": "color"
+      }
     }
   },
   "components/badge": {
@@ -2653,7 +2659,7 @@
             "value": "{color.text.primary}",
             "type": "color"
           },
-          "bulleting": {
+          "bulletin": {
             "value": "{color.text.inverted.primary}",
             "type": "color"
           }
