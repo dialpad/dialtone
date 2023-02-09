@@ -2851,8 +2851,7 @@
       "name": "dark",
       "selectedTokenSets": {
         "base/dark": "enabled",
-        "semantic/dark": "enabled",
-        "components/radio": "disabled"
+        "semantic/dark": "enabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
