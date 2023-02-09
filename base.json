@@ -1841,6 +1841,28 @@
             "value": "{size.border.200}",
             "type": "borderWidth"
           }
+        },
+        "radius": {
+          "xs": {
+            "value": "{size.radius.300}",
+            "type": "borderRadius"
+          },
+          "sm": {
+            "value": "{size.radius.400}",
+            "type": "borderRadius"
+          },
+          "md": {
+            "value": "{size.radius.400}",
+            "type": "borderRadius"
+          },
+          "lg": {
+            "value": "{size.radius.300} * 3",
+            "type": "borderRadius"
+          },
+          "xl": {
+            "value": "{size.radius.500}",
+            "type": "borderRadius"
+          }
         }
       },
       "lineHeight": {
@@ -2884,7 +2906,19 @@
         "color.border.critical": "S:03e0a6593a4c978f6e06a4d18a1ae805e31490da,",
         "color.border.success": "S:4cb312425feaf3d0d1eaa365ea3a0f463be4f2a1,",
         "color.border.warning": "S:7afde1f5bfc14c7d8c62a8a87fae8294eb9c164c,",
-        "color.neutral.transparent": "S:1b852fc3771264f954feb28c32f7b60783706618,"
+        "color.neutral.transparent": "S:1b852fc3771264f954feb28c32f7b60783706618,",
+        "inputs.color.text.default": "S:a9c8652b5b71e3259fc4d6508aa0d0f4ecb29ee7,",
+        "inputs.color.text.placeholder": "S:407378bb601f9c74cc663ef5a492793ae4e3aaa1,",
+        "inputs.color.text.disabled": "S:c937620bb3d50d4f1eca074bd1a2883326896062,",
+        "inputs.color.border.default": "S:25440e2377fbae8791308fb1e8e47fc6eef13b4e,",
+        "inputs.color.border.focus": "S:4a6f4c6aa93192fd20bfad18c0d7246a7c1ef328,",
+        "inputs.color.border.critical": "S:b369a9b1a0819b35261a983d51a77f97a6bc1b58,",
+        "inputs.color.border.sucess": "S:eac5a05581c4d82fedae85dcab5734b20b7cbdcb,",
+        "inputs.color.border.warning": "S:bdc3465c3c1b3ec5a2d3ea3e9457bef65feb8330,",
+        "inputs.color.border.disabled": "S:596cd4fb9f56a889e6c89f182967be8549028749,",
+        "inputs.color.background.default": "S:2e2a34cd6629214a7fd8cc13b5531e92e51b0848,",
+        "inputs.color.background.focus": "S:3b44d4836e26b3c200b6882ec4d11a8220bcb318,",
+        "inputs.color.background.disabled": "S:d7218c57925453b12ef04214c3cee00a4b2aef17,"
       }
     },
     {
