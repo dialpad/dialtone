@@ -1764,6 +1764,10 @@
         }
       },
       "border": {
+        "focus": {
+          "value": "{size.border.200} + {size.border.100}",
+          "type": "borderWidth"
+        },
         "icon": {
           "100": {
             "value": "{size.border.100}",
@@ -2332,6 +2336,10 @@
         }
       },
       "border": {
+        "focus": {
+          "value": "{size.border.200} + {size.border.100}",
+          "type": "borderWidth"
+        },
         "icon": {
           "100": {
             "value": "{size.border.100}",
