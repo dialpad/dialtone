@@ -3086,7 +3086,10 @@
         "inputs.color.border.disabled": "S:21b360ffd4168a5c804df8ab50eae95b61b8d62e,",
         "inputs.color.background.default": "S:8d3cc918025367adb97ae451183ec26e33703409,",
         "inputs.color.background.focus": "S:5d269cd096b2c709fc7c38ff2f1b94a1c8c393fb,",
-        "inputs.color.background.disabled": "S:327d78b20ed74f5665a37172398ec6b9c8382d64,"
+        "inputs.color.background.disabled": "S:327d78b20ed74f5665a37172398ec6b9c8382d64,",
+        "checkbox.color.border.unchecked": "S:b9230993e329526b16516ac9883e62a7fe62d332,",
+        "checkbox.color.border.checked": "S:cd090609739e389fd46d4f34a93b2685511ee424,",
+        "checkbox.color.background.checked": "S:75eef9ccafd9c5bda59d899717a041ff140762ae,"
       }
     }
   ],
