@@ -630,6 +630,10 @@
         "black": {
           "value": "#000000",
           "type": "color"
+        },
+        "transparent": {
+          "value": "transparent",
+          "type": "color"
         }
       },
       "black": {
@@ -2791,7 +2795,8 @@
         "color.border.focus": "S:c0f8a69a3d1c80698767bf5e8af34f06c3a2fff3,",
         "color.border.critical": "S:03e0a6593a4c978f6e06a4d18a1ae805e31490da,",
         "color.border.success": "S:4cb312425feaf3d0d1eaa365ea3a0f463be4f2a1,",
-        "color.border.warning": "S:7afde1f5bfc14c7d8c62a8a87fae8294eb9c164c,"
+        "color.border.warning": "S:7afde1f5bfc14c7d8c62a8a87fae8294eb9c164c,",
+        "color.neutral.transparent": "S:1b852fc3771264f954feb28c32f7b60783706618,"
       }
     },
     {
