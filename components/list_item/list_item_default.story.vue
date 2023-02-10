@@ -8,6 +8,7 @@
       :element-type="elementType"
       :type="type"
       :navigation-type="navigationType"
+      :selected="selected"
       @click="onClick"
     >
       <template slot="left">

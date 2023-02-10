@@ -24,6 +24,16 @@
         <!-- @slot named slots for custom list items -->
         <slot :name="slotName" />
       </template>
+      <template
+        v-if="selected"
+        #selected
+      >
+        <dt-icon
+          name="check"
+          size="400"
+          class="d-ml8"
+        />
+      </template>
     </component>
     <!-- @slot slot for the main content -->
     <slot v-else />
@@ -37,6 +47,7 @@ import {
 } from './list_item_constants.js';
 import DtDefaultListItem from './default_list_item';
 import utils from '@/common/utils';
+import { DtIcon } from '@/components/icon';
 
 /**
  * A list item is an element that can be used to represent individual items in a list.
@@ -47,6 +58,7 @@ export default {
 
   components: {
     DtDefaultListItem,
+    DtIcon,
   },
 
   /**
@@ -102,6 +114,14 @@ export default {
       type: String,
       default: LIST_ITEM_NAVIGATION_TYPES.NONE,
       validator: (t) => Object.values(LIST_ITEM_NAVIGATION_TYPES).includes(t),
+    },
+
+    /**
+     * Applies selected styles to the list item
+     */
+    selected: {
+      type: Boolean,
+      default: false,
     },
   },
 
