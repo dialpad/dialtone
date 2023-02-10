@@ -2545,6 +2545,7 @@
       }
     }
   },
+  "components/input": {},
   "$themes": [
     {
       "id": "025593f9f8f0cc2511035095197b6266f41e0855",
@@ -2554,7 +2555,8 @@
         "semantic": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "components/input": "disabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:92f5e2212b79f23c86e2527358948b6dd56ac41e,",
@@ -2715,7 +2717,8 @@
         "components/radio": "enabled",
         "semantic": "enabled",
         "components/checkbox/dark": "enabled",
-        "components/radio/dark": "enabled"
+        "components/radio/dark": "enabled",
+        "components/input": "disabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
@@ -2878,7 +2881,8 @@
       "components/checkbox/dark",
       "components/icon",
       "components/radio",
-      "components/radio/dark"
+      "components/radio/dark",
+      "components/input"
     ]
   }
 }
