@@ -1828,7 +1828,7 @@
       "color": {
         "text": {
           "default": {
-            "value": "{color.text.primary}",
+            "value": "{color.text.secondary}",
             "type": "color"
           },
           "placeholder": {
