@@ -25,7 +25,7 @@ import { Accessibility } from '@dialpad/dialtone-icons';
 
 If you need to add icons, follow the next steps to get your icons published.
 
-1. Place the `.svg` files into `src/svg` folder.
+1. Place the `.svg` files into `src/svg` inside the category folder.
 2. Commit your changes.
 3. Update the version on [package file](./package.json).
 4. Run `npm install`

@@ -21,6 +21,7 @@ const del = require('del');
 const rename = require('gulp-rename');
 const through2 = require('through2');
 const fs = require("fs");
+const jsonFormat = require('gulp-json-format');
 
 //  @@ SVGS
 const path = settings.svgs ? require('path') : null;
@@ -47,6 +48,22 @@ const paths = {
     iconsList: './src/icons.json',
   }
 };
+
+// ====
+// Util Functions
+// ====
+const _getAllFiles = (dirPath, arrayOfFiles = []) => {
+  const files = fs.readdirSync(dirPath)
+  files.forEach(function(file) {
+    if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+      arrayOfFiles = _getAllFiles(dirPath + "/" + file, arrayOfFiles)
+    } else {
+      arrayOfFiles.push(path.join(__dirname, dirPath, "/", file))
+    }
+  })
+
+  return arrayOfFiles
+}
 
 //  ================================================================================
 //  @   TASKS
@@ -168,23 +185,45 @@ const copyFiles = function (done) {
 };
 
 //  ================================================================================
+//  @@ Updates icons.json file with any newly added icons
+//  Reads previous icons.json file to extract keywords and add any new icon
+//  into the respective category.
+//  ================================================================================
+const updateIconsJSON = function (done) {
+  const rawData = fs.readFileSync(paths.exports.iconsList)
+  const iconsJSON = JSON.parse(rawData).categories;
+
+  const result = _getAllFiles('./src/svg')
+      .filter(file => file.endsWith('.svg'))
+      .reduce((acc, file) => {
+        const [category, fileName] = file.split('/').slice(-2);
+        const iconName = fileName.replace('.svg', '');
+        const keywords = iconsJSON[category][iconName] || [];
+        acc[category] = {...acc[category], [iconName]: keywords}
+        return acc;
+      }, {});
+
+  fs.writeFileSync(paths.exports.iconsList, JSON.stringify({ categories: {...result}}));
+
+  // Prettifies the JSON to improve readability and easier keyword adding.
+  src(paths.exports.iconsList)
+    .pipe(jsonFormat(2))
+    .pipe(dest('./src/'));
+
+  return done();
+};
+
+//  ================================================================================
 //  @   EXPORT TASKS
 //  ================================================================================
-//  --  BUILD OUT THE SITE BUT DON'T START THE SERVER
-
-exports.clean = series(
-  cleanSVGs,
-  cleanVueIcons,
-);
-
-exports.icons = series(
-  buildIcons,
-  exportIcons,
-  copyFiles,
-);
+//  --  CLEAN, BUILD, EXPORT THE ICONS AND COPY THE FILES
 
 // default build task
 exports.default = series(
-  exports.clean,
-  exports.icons,
+  cleanSVGs,
+  cleanVueIcons,
+  buildIcons,
+  exportIcons,
+  updateIconsJSON,
+  copyFiles,
 );
