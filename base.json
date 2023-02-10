@@ -2894,7 +2894,16 @@
         "checkbox.color.background.checked": "S:511211a13ccf85e09fbd63262acbafd2263f8820,",
         "radio.color.border.unchecked": "S:de83d8d227d8b7a0bad941f829b94a79b12ce8d1,",
         "radio.color.border.checked": "S:cb12373107e5794b17c567ee30bec5b2599e8eb8,",
-        "radio.color.background.checked": "S:e9b5f2c6666378b7f7327b5727e22d41cc6875f8,"
+        "radio.color.background.checked": "S:e9b5f2c6666378b7f7327b5727e22d41cc6875f8,",
+        "badge.color.background.default": "S:342a944560a5573b72602f85d68b4e87ecbae41b,",
+        "badge.color.background.info": "S:b25a3ed9b2fdb560186d372d914e84c0031365b6,",
+        "badge.color.background.success": "S:41f18f17ea2a8088f05819b0da1c85557765b7c9,",
+        "badge.color.background.warning": "S:7b435fe899399d4497c69d667717bb86cb5c1a84,",
+        "badge.color.background.critical": "S:9c54607fe87efa622be41fc676f4bd462021bf88,",
+        "badge.color.background.bulletin": "S:aab541dcb7eab26e6e463c9e79a6bb7c8b6ca128,",
+        "badge.color.background.ai": "S:42847080385d96c2fd2573541dffb88a7e481109,",
+        "badge.color.text.default": "S:e41c50825cbf9fcec7dbcf8612c8a0567351096b,",
+        "badge.color.text.bulletin": "S:5f679364768061abbe1213eeeaba563026a16172,"
       }
     }
   ],
