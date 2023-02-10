@@ -2737,6 +2737,28 @@
       }
     }
   },
+  "components/checkbox/dark": {
+    "checkbox": {
+      "color": {
+        "border": {
+          "unchecked": {
+            "value": "{color.black.500}",
+            "type": "color"
+          },
+          "checked": {
+            "value": "{color.purple.300}",
+            "type": "color"
+          }
+        },
+        "background": {
+          "checked": {
+            "value": "{color.purple.300}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
   "components/icon": {
     "icon": {
       "size": {
@@ -2845,6 +2867,28 @@
       }
     }
   },
+  "components/radio/dark": {
+    "radio": {
+      "color": {
+        "border": {
+          "unchecked": {
+            "value": "{color.black.500}",
+            "type": "color"
+          },
+          "checked": {
+            "value": "{color.purple.300}",
+            "type": "color"
+          }
+        },
+        "background": {
+          "checked": {
+            "value": "{color.purple.300}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
   "$themes": [
     {
       "id": "025593f9f8f0cc2511035095197b6266f41e0855",
@@ -2854,7 +2898,9 @@
         "semantic": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "components/checkbox/dark": "disabled",
+        "components/radio/dark": "disabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:69c01c23384540586f544e2b02c2a87367e26ad1,",
@@ -3013,7 +3059,9 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic": "enabled"
+        "semantic": "enabled",
+        "components/checkbox/dark": "disabled",
+        "components/radio/dark": "disabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
@@ -3173,8 +3221,10 @@
       "components/foo",
       "components/badge",
       "components/checkbox",
+      "components/checkbox/dark",
       "components/icon",
-      "components/radio"
+      "components/radio",
+      "components/radio/dark"
     ]
   }
 }
