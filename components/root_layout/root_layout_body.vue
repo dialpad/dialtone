@@ -20,6 +20,7 @@
       :class="['root-layout__content', contentClass]"
       :style="{ 'min-inline-size': contentWrapWidthPercent, 'height': mainHeight }"
       data-qa="root-layout-content"
+      tabindex="0"
     >
       <!-- @slot Slot for the main content -->
       <slot name="content" />
