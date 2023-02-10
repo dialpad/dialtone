@@ -2087,6 +2087,64 @@
           }
         }
       }
+    },
+    "inputs": {
+      "color": {
+        "text": {
+          "default": {
+            "value": "{color.text.primary}",
+            "type": "color"
+          },
+          "placeholder": {
+            "value": "{color.text.placeholder}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.text.disabled}",
+            "type": "color"
+          }
+        },
+        "border": {
+          "default": {
+            "value": "rgba($color.black.900, 0.09)",
+            "type": "color"
+          },
+          "focus": {
+            "value": "{color.border.focus}",
+            "type": "color"
+          },
+          "critical": {
+            "value": "{color.border.critical}",
+            "type": "color"
+          },
+          "sucess": {
+            "value": "{color.border.success}",
+            "type": "color"
+          },
+          "warning": {
+            "value": "{color.border.warning}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.neutral.transparent}",
+            "type": "color"
+          }
+        },
+        "background": {
+          "default": {
+            "value": "rgba($color.black.900, 0.06)",
+            "type": "color"
+          },
+          "focus": {
+            "value": "rgba($color.black.900, 0.03)",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "rgba($color.black.900, 0.15)",
+            "type": "color"
+          }
+        }
+      }
     }
   },
   "components/foo": {
