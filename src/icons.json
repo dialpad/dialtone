@@ -3,29 +3,26 @@
     "alerts": {
       "alert-circle": [],
       "alert-triangle": [],
-      "bell": [],
       "bell-minus": [],
       "bell-off": [],
       "bell-plus": [],
       "bell-ring": [],
+      "bell": [],
       "concierge-bell": [],
       "flame": [],
-      "megaphone": [],
       "megaphone-off": [],
+      "megaphone": [],
       "newspaper": [],
       "siren": []
     },
     "arrows": {
-      "arrow-down": [
-        "direction"
-      ],
       "arrow-down-left": [
         "direction"
       ],
       "arrow-down-right": [
         "direction"
       ],
-      "arrow-left": [
+      "arrow-down": [
         "direction"
       ],
       "arrow-left-right": [
@@ -37,10 +34,10 @@
         "reorder",
         "move"
       ],
-      "arrow-right": [
+      "arrow-left": [
         "direction"
       ],
-      "arrow-up": [
+      "arrow-right": [
         "direction"
       ],
       "arrow-up-down": [
@@ -58,6 +55,9 @@
         "direction"
       ],
       "arrow-up-right": [
+        "direction"
+      ],
+      "arrow-up": [
         "direction"
       ],
       "chevron-down": [
@@ -83,16 +83,13 @@
       "chevron-up": [
         "arrow"
       ],
-      "chevrons-down": [
-        "arrow"
-      ],
       "chevrons-down-up": [
         "arrow",
         "collapse",
         "fold",
         "vertical"
       ],
-      "chevrons-left": [
+      "chevrons-down": [
         "arrow"
       ],
       "chevrons-left-right": [
@@ -101,7 +98,7 @@
         "horizontal",
         "unfold"
       ],
-      "chevrons-right": [
+      "chevrons-left": [
         "arrow"
       ],
       "chevrons-right-left": [
@@ -110,7 +107,7 @@
         "fold",
         "horizontal"
       ],
-      "chevrons-up": [
+      "chevrons-right": [
         "arrow"
       ],
       "chevrons-up-down": [
@@ -118,6 +115,9 @@
         "expand",
         "unfold",
         "vertical"
+      ],
+      "chevrons-up": [
+        "arrow"
       ],
       "corner-down-left": [
         "arrow",
@@ -196,17 +196,17 @@
         "email"
       ],
       "hand": [],
-      "mail": [
-        "email",
-        "message",
-        "letter",
-        "unread"
-      ],
       "mail-open": [
         "email",
         "message",
         "letter",
         "read"
+      ],
+      "mail": [
+        "email",
+        "message",
+        "letter",
+        "unread"
       ],
       "mails": [
         "emails",
@@ -234,9 +234,6 @@
         "previous",
         "history"
       ],
-      "phone": [
-        "call"
-      ],
       "phone-call": [
         "ring"
       ],
@@ -244,6 +241,7 @@
         "call",
         "forward"
       ],
+      "phone-hang-up": [],
       "phone-hold": [
         "phone",
         "pause",
@@ -260,6 +258,9 @@
         "mute"
       ],
       "phone-outgoing": [
+        "call"
+      ],
+      "phone": [
         "call"
       ],
       "reply-all": [
@@ -279,11 +280,11 @@
         "message",
         "reply"
       ],
+      "voicemail-drop": [],
       "voicemail": [
         "phone",
         "cassette"
       ],
-      "voicemail-drop": [],
       "webchat": [
         "message",
         "chat"
@@ -321,15 +322,15 @@
         "scale",
         "fullscreen"
       ],
-      "eye": [
-        "view",
-        "watch"
-      ],
       "eye-off": [
         "view",
         "watch",
         "hide",
         "hidden"
+      ],
+      "eye": [
+        "view",
+        "watch"
       ],
       "fast-forward": [
         "music"
@@ -375,6 +376,7 @@
         "timeline",
         "version"
       ],
+      "hold": [],
       "key": [
         "password",
         "login",
@@ -382,10 +384,6 @@
         "secure"
       ],
       "large-self-view": [],
-      "layout": [
-        "window",
-        "webpage"
-      ],
       "layout-dashboard": [
         "masonry",
         "brick"
@@ -402,25 +400,29 @@
         "block",
         "section"
       ],
-      "lightbulb": [],
+      "layout": [
+        "window",
+        "webpage"
+      ],
       "lightbulb-off": [],
+      "lightbulb": [],
       "listen": [
         "ear",
         "hear"
       ],
       "living-thing": [],
-      "lock": [
-        "security",
-        "password",
-        "secure",
-        "admin"
-      ],
       "lock-filled": [
         "security",
         "password",
         "secure",
         "admin",
         "locked"
+      ],
+      "lock": [
+        "security",
+        "password",
+        "secure",
+        "admin"
       ],
       "maximize": [
         "fullscreen",
@@ -432,13 +434,13 @@
         "hamburger",
         "options"
       ],
+      "minimize-alt": [
+        "window"
+      ],
       "minimize": [
         "exit fullscreen",
         "close",
         "shrink"
-      ],
-      "minimize-alt": [
-        "window"
       ],
       "minus-circle": [],
       "multi-line-dept": [
@@ -457,24 +459,18 @@
       "park": [
         "call"
       ],
-      "pause": [],
       "pause-circle": [
         "music",
         "audio",
         "stop"
       ],
+      "pause": [],
       "phone-hang-up": [
         "end",
         "call",
         "leave"
       ],
       "picture-in-picture": [],
-      "pin": [
-        "save",
-        "map",
-        "lock",
-        "fix"
-      ],
       "pin-off": [
         "unpin",
         "unsave",
@@ -482,28 +478,34 @@
         "remove",
         "unfix"
       ],
-      "play": [
-        "music",
-        "start"
+      "pin": [
+        "save",
+        "map",
+        "lock",
+        "fix"
       ],
       "play-circle": [
         "music",
         "start"
       ],
-      "plus": [
-        "add",
-        "new",
-        "maths"
+      "play": [
+        "music",
+        "start"
       ],
       "plus-circle": [
         "add",
         "new",
         "maths"
       ],
-      "record": [
-        "circle"
+      "plus": [
+        "add",
+        "new",
+        "maths"
       ],
       "record-filled": [
+        "circle"
+      ],
+      "record": [
         "circle"
       ],
       "refresh": [
@@ -532,23 +534,28 @@
       "shuffle": [
         "music"
       ],
-      "sidebar": [
-        "menu"
-      ],
       "sidebar-close": [
         "menu"
       ],
       "sidebar-open": [
         "menu"
       ],
+      "sidebar": [
+        "menu"
+      ],
+      "skip-back-ten": [
+        "rewind",
+        "back",
+        "jump"
+      ],
       "skip-back": [
         "arrow",
         "previous",
         "music"
       ],
-      "skip-back-ten": [
-        "rewind",
-        "back",
+      "skip-forward-ten": [
+        "fast",
+        "forward",
         "jump"
       ],
       "skip-forward": [
@@ -557,18 +564,13 @@
         "next",
         "music"
       ],
-      "skip-forward-ten": [
-        "fast",
-        "forward",
-        "jump"
-      ],
-      "sliders": [
-        "settings",
-        "controls"
-      ],
       "sliders-horizontal": [
         "settings",
         "filters",
+        "controls"
+      ],
+      "sliders": [
+        "settings",
         "controls"
       ],
       "sort-asc": [
@@ -594,14 +596,14 @@
         "phone",
         "call"
       ],
+      "transfer-webchat": [
+        "discussion",
+        "message"
+      ],
       "transfer": [
         "phone",
         "arrows",
         "call"
-      ],
-      "transfer-webchat": [
-        "discussion",
-        "message"
       ],
       "trash": [
         "garbage",
@@ -609,10 +611,10 @@
         "remove",
         "bin"
       ],
-      "unlock": [
+      "unlock-filled": [
         "security"
       ],
-      "unlock-filled": [
+      "unlock": [
         "security"
       ],
       "x-circle": [
@@ -644,11 +646,6 @@
         "gizmo",
         "coordinates"
       ],
-      "bar-chart": [
-        "statistics",
-        "diagram",
-        "graph"
-      ],
       "bar-chart-2": [
         "statistics",
         "diagram",
@@ -665,6 +662,11 @@
         "graph"
       ],
       "bar-chart-horizontal": [
+        "statistics",
+        "diagram",
+        "graph"
+      ],
+      "bar-chart": [
         "statistics",
         "diagram",
         "graph"
@@ -702,10 +704,6 @@
         "cast",
         "mirroring"
       ],
-      "battery": [
-        "power",
-        "electricity"
-      ],
       "battery-charging": [
         "power",
         "electricity"
@@ -722,8 +720,9 @@
         "power",
         "electricity"
       ],
-      "bluetooth": [
-        "wireless"
+      "battery": [
+        "power",
+        "electricity"
       ],
       "bluetooth-connected": [
         "paired"
@@ -734,14 +733,12 @@
       "bluetooth-searching": [
         "pairing"
       ],
+      "bluetooth": [
+        "wireless"
+      ],
       "calculator": [
         "count",
         "calculating machine"
-      ],
-      "camera": [
-        "photo",
-        "webcam",
-        "video"
       ],
       "camera-off": [
         "photo",
@@ -751,6 +748,11 @@
       "camera-tracking": [
         "focus",
         "lens",
+        "video"
+      ],
+      "camera": [
+        "photo",
+        "webcam",
         "video"
       ],
       "cast": [
@@ -790,6 +792,12 @@
         "electricity",
         "electric"
       ],
+      "mic-off": [
+        "record",
+        "sound",
+        "mute",
+        "microphone"
+      ],
       "mic": [
         "record",
         "sound",
@@ -798,17 +806,6 @@
         "podcast",
         "microphone"
       ],
-      "mic-off": [
-        "record",
-        "sound",
-        "mute",
-        "microphone"
-      ],
-      "monitor": [
-        "tv",
-        "screen",
-        "display"
-      ],
       "monitor-off": [
         "share"
       ],
@@ -816,6 +813,11 @@
         "devices",
         "connect",
         "cast"
+      ],
+      "monitor": [
+        "tv",
+        "screen",
+        "display"
       ],
       "mouse": [
         "device",
@@ -842,16 +844,16 @@
       "share-screen": [
         "screenshare"
       ],
-      "smartphone": [
-        "phone",
-        "cellphone",
-        "device"
-      ],
       "smartphone-charging": [
         "phone",
         "cellphone",
         "device",
         "power"
+      ],
+      "smartphone": [
+        "phone",
+        "cellphone",
+        "device"
       ],
       "speaker": [
         "audio",
@@ -867,20 +869,15 @@
         "connector",
         "interface"
       ],
-      "video": [
-        "camera",
-        "movie",
-        "film"
-      ],
       "video-off": [
         "camera",
         "movie",
         "film"
       ],
-      "volume": [
-        "music",
-        "sound",
-        "mute"
+      "video": [
+        "camera",
+        "movie",
+        "film"
       ],
       "volume-1": [
         "music",
@@ -895,17 +892,22 @@
         "sound",
         "mute"
       ],
+      "volume": [
+        "music",
+        "sound",
+        "mute"
+      ],
       "webcam": [
         "camera",
         "security"
+      ],
+      "wifi-off": [
+        "disabled"
       ],
       "wifi": [
         "connection",
         "signal",
         "wireless"
-      ],
-      "wifi-off": [
-        "disabled"
       ],
       "zap-off": [
         "flash",
@@ -935,11 +937,11 @@
       ],
       "branch": [],
       "call-merge": [],
-      "edit": [
+      "edit-2": [
         "pencil",
         "change"
       ],
-      "edit-2": [
+      "edit": [
         "pencil",
         "change"
       ],
@@ -978,13 +980,13 @@
         "settings",
         "mouse"
       ],
-      "link-2": [
-        "chain",
-        "url"
-      ],
       "link-2-off": [
         "unchain",
         "chain"
+      ],
+      "link-2": [
+        "chain",
+        "url"
       ],
       "list-bullet": [
         "options"
@@ -1038,10 +1040,6 @@
         "photo",
         "book"
       ],
-      "archive": [
-        "index",
-        "box"
-      ],
       "archive-restore": [
         "archive",
         "unarchive",
@@ -1049,23 +1047,21 @@
         "index",
         "box"
       ],
+      "archive": [
+        "index",
+        "box"
+      ],
       "attestation": [],
+      "book-open": [
+        "read",
+        "library"
+      ],
       "book": [
         "read",
         "dictionary",
         "booklet",
         "magazine",
         "library"
-      ],
-      "book-open": [
-        "read",
-        "library"
-      ],
-      "bookmark": [
-        "read",
-        "clip",
-        "marker",
-        "tag"
       ],
       "bookmark-minus": [
         "delete",
@@ -1074,9 +1070,11 @@
       "bookmark-plus": [
         "add"
       ],
-      "box": [
-        "cube",
-        "package"
+      "bookmark": [
+        "read",
+        "clip",
+        "marker",
+        "tag"
       ],
       "box-select": [
         "selection",
@@ -1084,6 +1082,10 @@
         "rectangular",
         "marquee",
         "tool"
+      ],
+      "box": [
+        "cube",
+        "package"
       ],
       "boxes": [
         "cubes",
@@ -1094,10 +1096,10 @@
         "collection",
         "cluster"
       ],
-      "check": [
+      "check-circle": [
         "done"
       ],
-      "check-circle": [
+      "check": [
         "done"
       ],
       "close": [
@@ -1129,11 +1131,11 @@
         "cc"
       ],
       "dissatisfied": [],
-      "flag": [
-        "report"
-      ],
       "flag-off": [
         "unflag"
+      ],
+      "flag": [
+        "report"
       ],
       "form-input": [
         "2fa",
@@ -1145,16 +1147,16 @@
       "gauge": [
         "dashboard"
       ],
-      "hash": [
-        "hashtag",
-        "number",
-        "pound"
-      ],
       "hash-bold": [
         "number",
         "pound",
         "hashtag",
         "number"
+      ],
+      "hash": [
+        "hashtag",
+        "number",
+        "pound"
       ],
       "help-circle": [
         "question mark"
@@ -1265,10 +1267,6 @@
         "gear",
         "preferences"
       ],
-      "shield": [
-        "security",
-        "secure"
-      ],
       "shield-alert": [
         "security",
         "secure",
@@ -1295,6 +1293,10 @@
         "security",
         "insecure"
       ],
+      "shield": [
+        "security",
+        "secure"
+      ],
       "somewhat-dissatisfied": [
         "face"
       ],
@@ -1310,14 +1312,14 @@
         "magic",
         "help"
       ],
-      "star": [
+      "star-filled": [
         "bookmark",
         "favorite",
         "like",
         "review",
         "rating"
       ],
-      "star-filled": [
+      "star": [
         "bookmark",
         "favorite",
         "like",
@@ -1351,14 +1353,14 @@
         "good",
         "emotion"
       ],
-      "tools": [
-        "wrench"
-      ],
       "too-many-queries": [
         "list",
         "minus",
         "query",
         "queries"
+      ],
+      "tools": [
+        "wrench"
       ],
       "triangle": [
         "delta",
@@ -1382,10 +1384,6 @@
       ]
     },
     "os": {
-      "clipboard": [
-        "copy",
-        "paste"
-      ],
       "clipboard-check": [
         "copied",
         "pasted"
@@ -1418,6 +1416,10 @@
         "paste",
         "discard",
         "remove"
+      ],
+      "clipboard": [
+        "copy",
+        "paste"
       ],
       "cloud-off": [
         "disconnect"
@@ -1452,13 +1454,13 @@
         "identity",
         "security"
       ],
-      "folder": [
-        "directory"
-      ],
       "folder-tree": [
         "directory",
         "tree",
         "browser"
+      ],
+      "folder": [
+        "directory"
       ],
       "folders": [
         "multiple",
@@ -1493,14 +1495,14 @@
       "save": [
         "floppy disk"
       ],
-      "scan": [
-        "qr-code"
-      ],
       "scan-face": [
         "face",
         "biometric",
         "authentication",
         "2fa"
+      ],
+      "scan": [
+        "qr-code"
       ],
       "share-2": [
         "network",
@@ -1573,19 +1575,14 @@
         "plugin",
         "integration"
       ],
-      "upload": [
+      "upload-cloud": [
         "file"
       ],
-      "upload-cloud": [
+      "upload": [
         "file"
       ]
     },
     "people": {
-      "user": [
-        "person",
-        "account",
-        "contact"
-      ],
       "user-check": [
         "followed",
         "subscribed",
@@ -1611,6 +1608,11 @@
         "unsubscribe",
         "unavailable"
       ],
+      "user": [
+        "person",
+        "account",
+        "contact"
+      ],
       "users": [
         "group",
         "people"
@@ -1623,15 +1625,15 @@
         "baggage",
         "folder"
       ],
-      "building": [
-        "organisation",
-        "organization"
-      ],
       "building-2": [
         "business",
         "company",
         "enterprise",
         "skyscraper",
+        "organisation",
+        "organization"
+      ],
+      "building": [
         "organisation",
         "organization"
       ],
@@ -1653,16 +1655,16 @@
         "house",
         "living"
       ],
-      "map": [
-        "location",
-        "navigation",
-        "travel"
-      ],
       "map-pin": [
         "location",
         "navigation",
         "travel",
         "marker"
+      ],
+      "map": [
+        "location",
+        "navigation",
+        "travel"
       ]
     },
     "time": {
@@ -1679,21 +1681,14 @@
       "alarm-plus": [
         "add"
       ],
-      "calendar": [
-        "date",
-        "time",
-        "event",
-        "birthdate",
-        "birthday"
-      ],
-      "calendar-check": [
+      "calendar-check-2": [
         "date",
         "time",
         "event",
         "confirm",
         "subscribe"
       ],
-      "calendar-check-2": [
+      "calendar-check": [
         "date",
         "time",
         "event",
@@ -1762,10 +1757,12 @@
         "remove",
         "busy"
       ],
-      "clock": [
+      "calendar": [
+        "date",
         "time",
-        "watch",
-        "alarm"
+        "event",
+        "birthdate",
+        "birthday"
       ],
       "clock-1": [
         "time",
@@ -1827,6 +1824,11 @@
         "watch",
         "alarm"
       ],
+      "clock": [
+        "time",
+        "watch",
+        "alarm"
+      ],
       "hourglass": [
         "timer",
         "time",
@@ -1839,11 +1841,6 @@
         "maths"
       ],
       "loading": [],
-      "timer": [
-        "time",
-        "timer",
-        "stopwatch"
-      ],
       "timer-off": [
         "time",
         "timer",
@@ -1853,12 +1850,14 @@
         "time",
         "timer",
         "stopwatch"
+      ],
+      "timer": [
+        "time",
+        "timer",
+        "stopwatch"
       ]
     },
     "weather": {
-      "cloud": [
-        "weather"
-      ],
       "cloud-cog": [
         "computing",
         "ai",
@@ -1881,21 +1880,21 @@
         "weather",
         "bolt"
       ],
-      "cloud-moon": [
-        "weather",
-        "night"
-      ],
       "cloud-moon-rain": [
         "weather",
         "partly",
         "night",
         "rainfall"
       ],
-      "cloud-rain": [
+      "cloud-moon": [
+        "weather",
+        "night"
+      ],
+      "cloud-rain-wind": [
         "weather",
         "rainfall"
       ],
-      "cloud-rain-wind": [
+      "cloud-rain": [
         "weather",
         "rainfall"
       ],
@@ -1903,14 +1902,17 @@
         "weather",
         "blizzard"
       ],
-      "cloud-sun": [
-        "weather",
-        "partly"
-      ],
       "cloud-sun-rain": [
         "weather",
         "partly",
         "rainfall"
+      ],
+      "cloud-sun": [
+        "weather",
+        "partly"
+      ],
+      "cloud": [
+        "weather"
       ],
       "cloudy": [
         "clouds"
@@ -1930,12 +1932,6 @@
         "snow",
         "winter"
       ],
-      "sun": [
-        "brightness",
-        "weather",
-        "light",
-        "summer"
-      ],
       "sun-dim": [
         "brightness",
         "dim",
@@ -1945,6 +1941,12 @@
       "sun-medium": [
         "brightness",
         "medium"
+      ],
+      "sun": [
+        "brightness",
+        "weather",
+        "light",
+        "summer"
       ],
       "sunrise": [
         "weather",
@@ -1957,12 +1959,6 @@
         "time",
         "evening",
         "night"
-      ],
-      "thermometer": [
-        "temperature",
-        "celsius",
-        "fahrenheit",
-        "weather"
       ],
       "thermometer-snowflake": [
         "temperature",
@@ -1980,6 +1976,12 @@
         "weather",
         "warm",
         "hot"
+      ],
+      "thermometer": [
+        "temperature",
+        "celsius",
+        "fahrenheit",
+        "weather"
       ],
       "umbrella": [
         "rain",
