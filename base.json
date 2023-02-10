@@ -2905,7 +2905,16 @@
         "inputs.color.border.disabled": "S:c3f95ca261811da42f7f0ef3906b741ab9ccaf43,",
         "inputs.color.background.default": "S:a3a877887fba8a8aa1ea5c6cf60bdfca1fa2630e,",
         "inputs.color.background.focus": "S:15c63c1089d6caa0a997cffe698308cee8bcfce3,",
-        "inputs.color.background.disabled": "S:67bed431fedfe92974b53a55cf2c811cd7295054,"
+        "inputs.color.background.disabled": "S:67bed431fedfe92974b53a55cf2c811cd7295054,",
+        "badge.color.background.default": "S:46515656b0f57d4ba86fd6167cbbaf94f1dc6d65,",
+        "badge.color.background.bulletin": "S:52bd49ba86213b54c683bc0c0a0a35d637c2973a,",
+        "badge.color.background.ai": "S:c4ac3a5ae3e2d8273ce2053c7b5666574e57276f,",
+        "badge.color.text.default": "S:435110adbd6717ac61d470d910672f0bf8002f64,",
+        "badge.color.text.bulletin": "S:3c32047a4e1eb7aae5dc489f4154d8625f25a8f5,",
+        "badge.color.background.info": "S:454972a85bc70fc2c80ae704cddba7515c6d75b3,",
+        "badge.color.background.success": "S:0f07ce5084d51434d22e8036e0fdc1766a6cd796,",
+        "badge.color.background.warning": "S:1f5f8909e02f8af5626fab2193dda0b3794012fc,",
+        "badge.color.background.critical": "S:16cf2754556ebc3f1b99d500f0680ec0a5538850,"
       }
     }
   ],
