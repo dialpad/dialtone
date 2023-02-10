@@ -102,6 +102,19 @@ describe('DtListItem tests', function () {
       });
     });
 
+    describe('When item is selected', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ selected: true });
+      });
+
+      it('should render checkmark icon', function () {
+        const icon = wrapper.find('[data-qa="dt-icon"]');
+
+        assert.isTrue(icon.exists());
+        assert.isTrue(icon.classes('d-icon--check'));
+      });
+    });
+
     describe('When element type is provided', function () {
       // Test Setup
       beforeEach(async function () {

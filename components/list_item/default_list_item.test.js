@@ -98,5 +98,16 @@ describe('DtDefaultListItem tests', function () {
       it('should render the slot wrapper', function () { assert.isTrue(bottomWrapper.exists()); });
       it('should render the provided content', function () { assert.isTrue(wrapper.text().includes('bottom')); });
     });
+
+    describe('When selected content is provided', function () {
+      // Test Setup
+      beforeEach(async function () {
+        slots = { selected: 'selected' };
+        _mountWrapper();
+        _setChildWrappers();
+      });
+
+      it('should render the provided content', function () { assert.isTrue(wrapper.text().includes('selected')); });
+    });
   });
 });

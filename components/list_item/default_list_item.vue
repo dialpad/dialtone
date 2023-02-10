@@ -38,6 +38,7 @@
       <!-- @slot Slot for the right content -->
       <slot name="right" />
     </section>
+    <slot name="selected" />
   </div>
 </template>
 
