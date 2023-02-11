@@ -1899,15 +1899,15 @@
           "type": "color"
         },
         "muted": {
-          "value": "rgba($color.black.800, 0.5)",
+          "value": "rgba($color.black.800, 0.6)",
           "type": "color"
         },
         "placeholder": {
-          "value": "{color.black.500}",
+          "value": "{color.black.600}",
           "type": "color"
         },
         "disabled": {
-          "value": "{color.black.500}",
+          "value": "{color.black.600}",
           "type": "color"
         },
         "critical": {
