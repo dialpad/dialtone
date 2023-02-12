@@ -1884,7 +1884,7 @@
     },
     "action": {
       "color": {
-        "text": {
+        "foreground": {
           "base": {
             "default": {
               "value": "{color.purple.400}",
@@ -1895,8 +1895,14 @@
               "type": "color"
             },
             "active": {
-              "value": "{action.color.text.base.hover}",
+              "value": "{action.color.foreground.base.hover}",
               "type": "color"
+            },
+            "primary": {
+              "default": {
+                "value": "{color.text.inverted.primary}",
+                "type": "color"
+              }
             }
           },
           "critical": {
@@ -1909,8 +1915,14 @@
               "type": "color"
             },
             "active": {
-              "value": "{action.color.text.critical.hover}",
+              "value": "{action.color.foreground.critical.hover}",
               "type": "color"
+            },
+            "primary": {
+              "default": {
+                "value": "{color.text.inverted.primary}",
+                "type": "color"
+              }
             }
           },
           "inverted": {
@@ -1919,12 +1931,26 @@
               "type": "color"
             },
             "hover": {
-              "value": "{action.color.text.inverted.default}",
+              "value": "{action.color.foreground.inverted.default}",
               "type": "color"
             },
             "active": {
-              "value": "{action.color.text.inverted.hover}",
+              "value": "{action.color.foreground.inverted.hover}",
               "type": "color"
+            },
+            "primary": {
+              "default": {
+                "value": "{color.purple.400}",
+                "type": "color"
+              },
+              "hover": {
+                "value": "{color.purple.500}",
+                "type": "color"
+              },
+              "active": {
+                "value": "{action.color.foreground.inverted.primary.hover}",
+                "type": "color"
+              }
             }
           },
           "muted": {
@@ -1933,11 +1959,11 @@
               "type": "color"
             },
             "hover": {
-              "value": "{action.color.text.muted.default}",
+              "value": "{action.color.foreground.muted.default}",
               "type": "color"
             },
             "active": {
-              "value": "{action.color.text.muted.hover}",
+              "value": "{action.color.foreground.muted.hover}",
               "type": "color"
             }
           },
@@ -1961,6 +1987,20 @@
             "active": {
               "value": "rgba($color.purple.400, 0.14)",
               "type": "color"
+            },
+            "primary": {
+              "default": {
+                "value": "{color.purple.400}",
+                "type": "color"
+              },
+              "hover": {
+                "value": "#6533FF",
+                "type": "color"
+              },
+              "active": {
+                "value": "#4D14FF",
+                "type": "color"
+              }
             }
           },
           "critical": {
@@ -1975,6 +2015,20 @@
             "active": {
               "value": "rgba($color.red.300, 0.09)",
               "type": "color"
+            },
+            "primary": {
+              "default": {
+                "value": "{color.red.300}",
+                "type": "color"
+              },
+              "hover": {
+                "value": "#D90D0D",
+                "type": "color"
+              },
+              "active": {
+                "value": "#C50C0C",
+                "type": "color"
+              }
             }
           },
           "inverted": {
@@ -1989,6 +2043,20 @@
             "active": {
               "value": "rgba($color.surface.primary, 0.30)",
               "type": "color"
+            },
+            "primary": {
+              "default": {
+                "value": "{color.surface.primary}",
+                "type": "color"
+              },
+              "hover": {
+                "value": "{color.purple.100}",
+                "type": "color"
+              },
+              "active": {
+                "value": "#E1D1FF",
+                "type": "color"
+              }
             }
           },
           "muted": {
@@ -2014,65 +2082,35 @@
         },
         "border": {
           "base": {
-            "default": {
-              "value": "#bbbbbb",
-              "type": "color"
-            },
-            "hover": {
-              "value": "#999999",
-              "type": "color"
-            },
-            "active": {
-              "value": "#777777",
-              "type": "color"
+            "outlined": {
+              "default": {
+                "value": "{color.purple.400}",
+                "type": "color"
+              }
             }
           },
           "critical": {
-            "default": {
-              "value": "#007aff",
-              "type": "color"
-            },
-            "hover": {
-              "value": "#0055cc",
-              "type": "color"
-            },
-            "active": {
-              "value": "#0044bb",
-              "type": "color"
+            "outlined": {
+              "default": {
+                "value": "{color.red.300}",
+                "type": "color"
+              }
             }
           },
           "inverted": {
-            "default": {
-              "value": "#dddddd",
-              "type": "color"
-            },
-            "hover": {
-              "value": "#cccccc",
-              "type": "color"
-            },
-            "active": {
-              "value": "#bbbbbb",
-              "type": "color"
+            "outlined": {
+              "default": {
+                "value": "{color.neutral.white}",
+                "type": "color"
+              }
             }
           },
           "muted": {
-            "default": {
-              "value": "#dddddd",
-              "type": "color"
-            },
-            "hover": {
-              "value": "#dddddd",
-              "type": "color"
-            },
-            "active": {
-              "value": "#dddddd",
-              "type": "color"
-            }
-          },
-          "disabled": {
-            "default": {
-              "value": "#ccc",
-              "type": "color"
+            "outlined": {
+              "default": {
+                "value": "{color.black.800}",
+                "type": "color"
+              }
             }
           }
         }
