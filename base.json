@@ -854,7 +854,17 @@
       },
       "gradient": {
         "magenta-purple": {
-          "value": "linear-gradient(135deg, {color.magenta.300} 10%, {color.purple.300} 90%)",
+          "value": "linear-gradient(135deg, {color.brand.magenta} 10%, {color.brand.purple} 90%)",
+          "type": "color"
+        }
+      },
+      "brand": {
+        "purple": {
+          "value": "#7C52FF",
+          "type": "color"
+        },
+        "magenta": {
+          "value": "#F9008E",
           "type": "color"
         }
       }
