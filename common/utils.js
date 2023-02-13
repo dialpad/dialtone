@@ -160,6 +160,12 @@ export const pascalCaseToKebabCase = (string) => {
     .replace(/^-/, '');
 };
 
+export const extractVueListeners = (attrs) => {
+  const listeners = Object.entries(attrs)
+    .filter(([key]) => key.startsWith('on'));
+  return Object.fromEntries(listeners);
+};
+
 export default {
   getUniqueString,
   getRandomElement,
@@ -170,4 +176,5 @@ export default {
   htmlFragment,
   flushPromises,
   kebabCaseToPascalCase,
+  extractVueListeners,
 };

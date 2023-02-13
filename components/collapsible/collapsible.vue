@@ -2,6 +2,7 @@
   <component
     :is="elementType"
     ref="collapsible"
+    v-on="collapsibleListeners"
   >
     <!-- Element for capturing keypress events -->
     <div
@@ -31,13 +32,9 @@
           }"
           @click="defaultToggleOpen"
         >
-          <icon-arrow-accordion-open
-            v-if="isOpen"
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
-          />
-          <icon-arrow-accordion-closed
-            v-else
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
+          <dt-icon
+            :name=" isOpen ? 'chevron-down' : 'chevron-right'"
+            class="d-icon d-icon--size-300 d-mr8 d-fl-shrink0"
           />
           <span
             class="d-mr-auto d-truncate"
@@ -66,7 +63,7 @@
       }"
       tabindex="-1"
       appear
-      v-bind="$attrs"
+      v-on="collapsibleListeners"
       @after-leave="onLeaveTransitionComplete"
       @after-enter="onEnterTransitionComplete"
     >
@@ -79,12 +76,11 @@
 </template>
 
 <script>
-import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { extractVueListeners, getUniqueString, hasSlotContent } from '@/common/utils';
 import DtCollapsibleLazyShow from './collapsible_lazy_show';
-import { DtButton } from '../button';
-import { DtLazyShow } from '../lazy_show';
-import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
-import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
+import { DtButton } from '@/components/button';
+import { DtLazyShow } from '@/components/lazy_show';
+import { DtIcon } from '@/components/icon';
 
 /**
  * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
@@ -97,11 +93,8 @@ export default {
     DtButton,
     DtCollapsibleLazyShow,
     DtLazyShow,
-    IconArrowAccordionOpen,
-    IconArrowAccordionClosed,
+    DtIcon,
   },
-
-  inheritAttrs: false,
 
   props: {
     /**
@@ -228,6 +221,10 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor
       return this.ariaLabelledBy || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
+    },
+
+    collapsibleListeners () {
+      return extractVueListeners(this.$attrs);
     },
   },
 

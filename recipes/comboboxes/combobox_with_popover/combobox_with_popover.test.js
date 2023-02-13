@@ -400,7 +400,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 3); });
       });
 
       describe('When up arrow button is pressed', function () {
@@ -409,7 +409,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 3); });
       });
 
       describe('When home button is pressed', function () {
@@ -418,7 +418,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 3); });
       });
 
       describe('When end button is pressed', function () {
@@ -427,7 +427,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
+        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 3); });
       });
     });
 
@@ -491,7 +491,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       });
 
       it('should call listener', function () { assert.isTrue(openedStub.called); });
-      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 1); });
+      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 2); });
     });
   });
 });

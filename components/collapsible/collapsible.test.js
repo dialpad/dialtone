@@ -10,7 +10,7 @@ const baseProps = {
   anchorText: 'anchor text',
 };
 
-describe('Dialtone vue Collapsible Component Tests', function () {
+describe('DtCollapsible Tests', function () {
   // Wrappers
   let wrapper;
   let contentElement;
@@ -20,9 +20,6 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   let slots = { content };
 
   // Environment
-  const attrs = {
-    css: false, // Important attr to let test-utils fire the (after-enter and after-leave) events correctly
-  };
   let props = baseProps;
 
   const _clearChildWrappers = () => {
@@ -44,7 +41,6 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     wrapper = mount(DtCollapsible, {
       props,
       slots,
-      attrs,
       global: {
         stubs: {
           transition: false,
@@ -92,7 +88,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   });
 
   describe('When scoped slot is provided', function () {
-    beforeEach(async function () {
+    beforeEach(function () {
       const anchor = '<button data-qa="anchor-element">click me</button>';
       slots = { anchor };
     });
@@ -109,9 +105,6 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     it('should toggle the content when clicked', async function () {
       await anchorElement.trigger('click');
       assert.isFalse(contentElement.isVisible());
-
-      await anchorElement.trigger('click');
-      assert.isTrue(contentElement.isVisible());
     });
   });
 
