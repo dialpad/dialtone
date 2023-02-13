@@ -1442,6 +1442,10 @@
           "value": "{color.gold.400}",
           "type": "color"
         },
+        "brand": {
+          "value": "{color.brand.purple}",
+          "type": "color"
+        },
         "inverted": {
           "base": {
             "value": "$color.neutral.white",
@@ -1907,7 +1911,7 @@
         "foreground": {
           "base": {
             "default": {
-              "value": "{color.purple.400}",
+              "value": "{color.brand.purple}",
               "type": "color"
             },
             "hover": {
@@ -1960,7 +1964,7 @@
             },
             "primary": {
               "default": {
-                "value": "{color.purple.400}",
+                "value": "{color.brand.purple}",
                 "type": "color"
               },
               "hover": {
@@ -2104,7 +2108,7 @@
           "base": {
             "outlined": {
               "default": {
-                "value": "{color.purple.400}",
+                "value": "{color.border.brand}",
                 "type": "color"
               }
             }
@@ -2112,7 +2116,7 @@
           "critical": {
             "outlined": {
               "default": {
-                "value": "{color.red.300}",
+                "value": "{color.border.critical}",
                 "type": "color"
               }
             }
@@ -2646,7 +2650,7 @@
             "type": "color"
           },
           "checked": {
-            "value": "{color.brand.purple}",
+            "value": "{color.border.brand}",
             "type": "color"
           }
         },
@@ -2766,7 +2770,7 @@
             "type": "color"
           },
           "checked": {
-            "value": "{color.brand.purple}",
+            "value": "{color.border.brand}",
             "type": "color"
           }
         },
