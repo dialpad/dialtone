@@ -2085,11 +2085,11 @@
               "type": "color"
             },
             "hover": {
-              "value": "#dddddd",
+              "value": "rgba($color.black.800, 0.05)",
               "type": "color"
             },
             "active": {
-              "value": "#dddddd",
+              "value": "rgba($color.black.800, 0.10)",
               "type": "color"
             }
           },
