@@ -3011,7 +3011,8 @@
         "action.color.border.inverted.outlined.default": "S:557c7edfa294e64489c0db2753d07f464fc40411,",
         "action.color.border.muted.outlined.default": "S:765412445a81771b2ac6eb8f22e9028d2c614026,",
         "color.brand.purple": "S:03b4843c34b27750c04e4a6c238ae460aaf0d49a,",
-        "color.brand.magenta": "S:26aa56ce7d7f269b98eb1f4f98f0d26e247f8324,"
+        "color.brand.magenta": "S:26aa56ce7d7f269b98eb1f4f98f0d26e247f8324,",
+        "color.border.brand": "S:ce9585ab90b222c89d40341c9bd9bedb315b8052,"
       }
     },
     {
