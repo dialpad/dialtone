@@ -1,14 +1,15 @@
 <template>
   <div
     ref="root-layout-body"
-    :class="['root-layout__body', 'd-fl-grow1', bodyClasses]"
+    :class="['root-layout__body', { 'd-of-y-auto': isInMobileMode }, 'd-fl-grow1', bodyClasses]"
+    :style="{ 'height': isInMobileMode ? mainHeight : null }"
     data-qa="root-layout-body"
   >
     <aside
       v-if="hasSlotContent($slots.sidebar)"
       ref="root-layout-sidebar"
-      :class="['root-layout__sidebar', sidebarClass]"
-      :style="{ 'flex-basis': sidebarWidth }"
+      :class="['root-layout__sidebar', { 'd-of-y-auto': !isInMobileMode }, sidebarClass]"
+      :style="{ 'flex-basis': sidebarWidth, 'height': !isInMobileMode ? mainHeight : null }"
       data-qa="root-layout-sidebar"
     >
       <!-- @slot Slot for the sidebar -->
@@ -17,8 +18,8 @@
     <main
       v-if="hasSlotContent($slots.content)"
       ref="root-layout-content"
-      :class="['root-layout__content', contentClass]"
-      :style="{ 'min-inline-size': contentWrapWidthPercent, 'height': mainHeight }"
+      :class="['root-layout__content', { 'd-of-y-auto': !isInMobileMode }, contentClass]"
+      :style="{ 'min-inline-size': contentWrapWidthPercent, 'height': !isInMobileMode ? mainHeight : null }"
       data-qa="root-layout-content"
       tabindex="0"
     >
@@ -125,20 +126,19 @@ export default {
 
     mainHeight () {
       if (this.fixed) {
-        return `calc(${this.documentHeight}
-          - (${this.headerHeight} + ${this.extraSidebarHeight} + ${this.footerHeight}))`;
+        return `calc(${this.documentHeight} - (${this.headerHeight} + ${this.footerHeight}))`;
       }
       return null;
     },
 
-    // When the sidebar is above the header due to contentWrapWidthPercent, it needs to be excluded
-    // in the main content height calculation. Otherwise it is 0 since it is at equal height with the main content.
-    extraSidebarHeight () {
+    // When the sidebar is above the header due to contentWrapWidthPercent it is considered to be in mobile mode.
+    isInMobileMode () {
       if (this.contentTop > this.sidebarTop) {
-        return this.$refs['root-layout-sidebar'].offsetHeight + 'px';
+        return true;
       }
-      return '0px';
+      return false;
     },
+
   },
 
   mounted () {
@@ -187,6 +187,5 @@ export default {
 .root-layout__content {
   flex-basis: 0;
   flex-grow: 999;
-  overflow-y: auto;
 }
 </style>
