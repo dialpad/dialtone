@@ -1,3 +1,17 @@
+# [3.44.0](https://github.com/dialpad/dialtone-vue/compare/v3.43.0...v3.44.0) (2023-02-13)
+
+
+### Bug Fixes
+
+* **Collapsible:** pass only listeners to lazy show ([#756](https://github.com/dialpad/dialtone-vue/issues/756)) ([771e9d3](https://github.com/dialpad/dialtone-vue/commit/771e9d3638c124d7c33f4bbfea1c83c1f7e203ec))
+* **Root Layout Body:** fix a11y keyboard access to main content ([#752](https://github.com/dialpad/dialtone-vue/issues/752)) ([e897b5d](https://github.com/dialpad/dialtone-vue/commit/e897b5df6265c4fea8e8737b16d17c74c3f8711f))
+* **Root Layout:** sidebar independently scrollable ([#759](https://github.com/dialpad/dialtone-vue/issues/759)) ([6a58681](https://github.com/dialpad/dialtone-vue/commit/6a58681286efd7be9d5be11376e5c842164f7100))
+
+
+### Features
+
+* **List Item:** add selected prop ([#754](https://github.com/dialpad/dialtone-vue/issues/754)) ([63237db](https://github.com/dialpad/dialtone-vue/commit/63237dbf9734f8b0cd6f097dd1851c3a1b7024b3))
+
 # [3.43.0](https://github.com/dialpad/dialtone-vue/compare/v3.42.3...v3.43.0) (2023-02-08)
 
 
