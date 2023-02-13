@@ -1911,7 +1911,7 @@
         "foreground": {
           "base": {
             "default": {
-              "value": "{color.brand.purple}",
+              "value": "{color.purple.400}",
               "type": "color"
             },
             "hover": {
@@ -1964,7 +1964,7 @@
             },
             "primary": {
               "default": {
-                "value": "{color.brand.purple}",
+                "value": "{color.purple.400}",
                 "type": "color"
               },
               "hover": {
@@ -2108,7 +2108,7 @@
           "base": {
             "outlined": {
               "default": {
-                "value": "{color.border.brand}",
+                "value": "{color.purple.400}",
                 "type": "color"
               }
             }
