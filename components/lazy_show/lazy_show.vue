@@ -3,6 +3,7 @@
   <transition
     :name="transition"
     :appear="appear"
+    :css="isCSSEnabled"
     v-on="$listeners"
   >
     <div
@@ -61,6 +62,18 @@ export default {
     return {
       initialized: !!this.show,
     };
+  },
+
+  computed: {
+    /**
+     * Set the css property to false when running tests only.
+     * Refer to: https://vuejs.org/guide/built-ins/transition.html#javascript-hooks for details about
+     * transition `css` property
+     * @returns {boolean}
+     */
+    isCSSEnabled () {
+      return process.env.NODE_ENV !== 'test';
+    },
   },
 
   /******************

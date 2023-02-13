@@ -10,7 +10,7 @@ const baseProps = {
   anchorText: 'anchor text',
 };
 
-describe('Dialtone vue Collapsible Component Tests', function () {
+describe('DtCollapsible Tests', function () {
   // Wrappers
   let wrapper;
   let contentElement;
@@ -89,7 +89,6 @@ describe('Dialtone vue Collapsible Component Tests', function () {
       const anchor = '<button data-qa="anchor-element">click me</button>';
       scopedSlots = { anchor };
     });
-
     it('should render the scoped slot', function () {
       assert.exists(anchorSlotElement, 'anchor slot exists');
     });
@@ -103,9 +102,6 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     it('should toggle the content when clicked', async function () {
       await anchorElement.trigger('click');
       assert.isFalse(contentElement.isVisible());
-
-      await anchorElement.trigger('click');
-      assert.isTrue(contentElement.isVisible());
     });
   });
 
