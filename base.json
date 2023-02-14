@@ -1944,7 +1944,7 @@
             },
             "primary": {
               "default": {
-                "value": "{color.text.inverted.primary}",
+                "value": "{color.neutral.white}",
                 "type": "color"
               }
             }
