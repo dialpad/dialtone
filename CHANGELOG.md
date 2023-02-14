@@ -1,3 +1,10 @@
+## [3.44.1](https://github.com/dialpad/dialtone-vue/compare/v3.44.0...v3.44.1) (2023-02-14)
+
+
+### Bug Fixes
+
+* **Root Layout:** null protection on getElementTops ([#763](https://github.com/dialpad/dialtone-vue/issues/763)) ([58db83e](https://github.com/dialpad/dialtone-vue/commit/58db83ec6352446c3c4a10d2a4f520b8d4a7db5c))
+
 # [3.44.0](https://github.com/dialpad/dialtone-vue/compare/v3.43.0...v3.44.0) (2023-02-13)
 
 
