@@ -128,9 +128,6 @@ const buildIcons = function (done) {
     .pipe(replace(/height="[0-9]+"/g, ''))
     .pipe(replace('<svg', function (match) {
       const name = path.parse(this.file.path).name;
-      const converted = name.toLowerCase().replace(/-(.)/g, function (match, group1) {
-        return group1.toUpperCase();
-      });
       const title = name
         .replace(/\b\S/g, t => t.toUpperCase())
         .replace(/-+/g, ' ');
@@ -139,9 +136,27 @@ const buildIcons = function (done) {
       focusable="false"
       role="img"
       data-name="${title}"
-      class="d-icon d-icon--${converted}"`;
+      class="d-icon d-icon--${name}"`;
     }))
-    .pipe(svgmin())
+    .pipe(svgmin(function getOptions (file) {
+      const name = path.parse(file.path).name
+      return {
+        multipass: true,
+        plugins: [
+          {
+            removeUnknownsAndDefaults: {
+              keepRoleAttr: true,
+            },
+          },
+          {
+            cleanupIDs: {
+              minify: true,
+              prefix: `${name}__`,
+            },
+          }
+        ],
+      }
+    }))
     .pipe(rename({ dirname: '' }))
     .pipe(dest(paths.icons.outputSvg))
     .pipe(replace('<svg', '<template><svg'))
