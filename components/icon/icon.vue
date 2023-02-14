@@ -9,9 +9,8 @@
 </template>
 
 <script>
-import { ICON_SIZE_MODIFIERS } from './icon_constants';
+import { ICON_SIZE_MODIFIERS, DIALTONE_ICONS } from './icon_constants';
 import { kebabCaseToPascalCase } from '@/common/utils';
-import * as dialtoneIcons from '@dialpad/dialtone-icons';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -48,12 +47,6 @@ export default {
     },
   },
 
-  data () {
-    return {
-      dialtoneIcons,
-    };
-  },
-
   computed: {
     iconSize () {
       return ICON_SIZE_MODIFIERS[this.size];
@@ -64,7 +57,7 @@ export default {
     },
 
     currentIcon () {
-      return this.dialtoneIcons[this.iconName];
+      return DIALTONE_ICONS[this.iconName];
     },
   },
 };
