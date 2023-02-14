@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "0.0.18-vue3",
+  "version": "0.0.20-vue3",
   "description": "Dialtone icon library",
   "scripts": {
     "build": "npm run build-icons && npm run build-lib",
@@ -8,10 +8,6 @@
     "build-lib": "vue-cli-service build --target lib --name dialtone-icons --no-clean src/main.js",
     "lint": "vue-cli-service lint",
     "release": "npm install && npm run build && npm publish --tag vue3"
-  },
-  "dependencies": {
-    "core-js": "^3.8.3",
-    "vue": ">=3.2"
   },
   "files": [
     "dist/*.js",
@@ -38,7 +34,7 @@
     "through2": "^4.0.2"
   },
   "peerDependencies": {
-    "vue": ">=3.2"
+    "vue": "latest"
   },
   "repository": "git@github.com:dialpad/dialtone-icons.git"
 }
