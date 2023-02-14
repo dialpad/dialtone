@@ -1,3 +1,17 @@
+# [2.57.0](https://github.com/dialpad/dialtone-vue/compare/v2.56.1...v2.57.0) (2023-02-14)
+
+
+### Bug Fixes
+
+* **Root Layout Body:** fix a11y keyboard access to main content ([#753](https://github.com/dialpad/dialtone-vue/issues/753)) ([f93ac26](https://github.com/dialpad/dialtone-vue/commit/f93ac26e9ce0b94e6ad858ef5afa1a93e5cfb266))
+* **Root Layout:** null protection on getElementTops ([#762](https://github.com/dialpad/dialtone-vue/issues/762)) ([01754a3](https://github.com/dialpad/dialtone-vue/commit/01754a3484c54dde2feb653b092abe80784398d8))
+* **Root Layout:** sidebar independently scrollable ([#755](https://github.com/dialpad/dialtone-vue/issues/755)) ([a6d3dcb](https://github.com/dialpad/dialtone-vue/commit/a6d3dcb872774092ab1aa5b7dffc4dba32dd31c5))
+
+
+### Features
+
+* **List Item:** add selected prop ([#746](https://github.com/dialpad/dialtone-vue/issues/746)) ([9936198](https://github.com/dialpad/dialtone-vue/commit/9936198fdbdaafc60174767d198430e0f05c42d1))
+
 ## [2.56.1](https://github.com/dialpad/dialtone-vue/compare/v2.56.0...v2.56.1) (2023-02-09)
 
 
