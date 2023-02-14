@@ -158,8 +158,8 @@ export default {
     },
 
     getElementTops () {
-      this.sidebarTop = this.$refs['root-layout-sidebar'].offsetTop;
-      this.contentTop = this.$refs['root-layout-content'].offsetTop;
+      this.sidebarTop = this.$refs['root-layout-sidebar']?.offsetTop;
+      this.contentTop = this.$refs['root-layout-content']?.offsetTop;
     },
 
     getDocumentHeight () {
