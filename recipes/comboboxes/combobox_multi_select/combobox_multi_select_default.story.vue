@@ -18,6 +18,7 @@
     :has-suggestion-list="$attrs.hasSuggestionList"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+    :append-to="$attrs.appendTo"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"

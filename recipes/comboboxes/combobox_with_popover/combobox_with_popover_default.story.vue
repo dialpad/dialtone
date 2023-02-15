@@ -17,6 +17,7 @@
     :open-with-arrow-keys="$attrs.openWithArrowKeys"
     :has-suggestion-list="$attrs.hasSuggestionList"
     :empty-list="$attrs.emptyList"
+    :append-to="$attrs.appendTo"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     @escape="onComboboxEscape"

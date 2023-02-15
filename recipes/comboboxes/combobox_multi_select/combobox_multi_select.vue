@@ -10,6 +10,7 @@
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
     :visually-hidden-close="visuallyHiddenClose"
     content-width="anchor"
+    :append-to="appendTo"
     @select="onComboboxSelect"
   >
     <template #input="{ onInput }">
@@ -116,6 +117,9 @@ import DtChip from '@/components/chip/chip';
 import DtValidationMessages from '@/components/validation_messages/validation_messages';
 import { validationMessageValidator } from '@/common/validators';
 import { hasSlotContent } from '@/common/utils';
+import {
+  POPOVER_APPEND_TO_VALUES,
+} from '@/components/popover/popover_constants';
 import {
   MULTI_SELECT_SIZES,
   CHIP_SIZES,
@@ -272,6 +276,19 @@ export default {
       type: String,
       default: null,
       validator: (t) => Object.values(MULTI_SELECT_SIZES).includes(t),
+    },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * @values 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: () => document.body,
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
+      },
     },
   },
 

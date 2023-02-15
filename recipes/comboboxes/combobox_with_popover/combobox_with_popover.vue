@@ -19,6 +19,7 @@
     <template
       #input="{ inputProps }"
     >
+      <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
       <div
         :id="externalAnchor"
         ref="input"
@@ -52,6 +53,7 @@
         :content-tabindex="null"
         :modal="false"
         :auto-focus="false"
+        :append-to="appendTo"
         :visually-hidden-close-label="visuallyHiddenCloseLabel"
         :visually-hidden-close="visuallyHiddenClose"
         @opened="opened"
@@ -68,6 +70,7 @@
         </template>
 
         <template #content>
+          <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
           <div
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
@@ -107,11 +110,15 @@
 </template>
 
 <script>
+/* eslint-disable vuejs-accessibility/no-static-element-interactions */
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
 import { DtCombobox } from '@/components/combobox';
 import { DtPopover, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
+import {
+  POPOVER_APPEND_TO_VALUES,
+} from '@/components/popover/popover_constants';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
@@ -306,6 +313,19 @@ export default {
     emptyStateMessage: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * @values 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: () => document.body,
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
+      },
     },
   },
 
