@@ -1,3 +1,11 @@
+## [3.44.2](https://github.com/dialpad/dialtone-vue/compare/v3.44.1...v3.44.2) (2023-02-15)
+
+
+### Bug Fixes
+
+* add appendTo prop on all popover based components ([#766](https://github.com/dialpad/dialtone-vue/issues/766)) ([01c3a89](https://github.com/dialpad/dialtone-vue/commit/01c3a893c777da025adca6207c3def42896e16dd))
+* **Dropdown:** remove deprecated DropdownList ([#767](https://github.com/dialpad/dialtone-vue/issues/767)) ([006444d](https://github.com/dialpad/dialtone-vue/commit/006444dfb5afd3a76359906b27b47d247f3f5e29))
+
 ## [3.44.1](https://github.com/dialpad/dialtone-vue/compare/v3.44.0...v3.44.1) (2023-02-14)
 
 
