@@ -14,6 +14,7 @@
     :max-selected-message="maxSelectedMessage"
     :has-suggestion-list="hasSuggestionList"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
+    :append-to="appendTo"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"

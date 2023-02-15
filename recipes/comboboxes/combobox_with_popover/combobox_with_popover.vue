@@ -52,6 +52,7 @@
         :content-tabindex="null"
         :modal="false"
         :auto-focus="false"
+        :append-to="appendTo"
         :visually-hidden-close-label="visuallyHiddenCloseLabel"
         :visually-hidden-close="visuallyHiddenClose"
         @opened="opened($event, arguments[1]);"
@@ -109,6 +110,9 @@ import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
 import { DtCombobox } from '@/components/combobox';
 import { DtPopover, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
+import {
+  POPOVER_APPEND_TO_VALUES,
+} from '@/components/popover/popover_constants';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
@@ -303,6 +307,19 @@ export default {
     emptyStateMessage: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * @values 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: () => document.body,
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
+      },
     },
   },
 

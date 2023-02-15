@@ -13,6 +13,7 @@
     :padding="padding"
     :list-id="listId"
     :empty-list="emptyList"
+    :append-to="appendTo"
     :visually-hidden-close="visuallyHiddenClose"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
     @escape="onComboboxEscape"
