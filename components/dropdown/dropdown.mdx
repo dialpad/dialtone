@@ -175,7 +175,7 @@ Use the `dt-dropdown-list` component to group items and the `heading` prop to ad
 to this group list.
 
 ```jsx
-import { DtDropdown, DtButton, DtDropdownSeparator, DtDropdownList } from '@dialpad/dialtone-vue';
+import { DtDropdown, DtButton, DtDropdownSeparator, DtListItemGroup } from '@dialpad/dialtone-vue';
 ```
 
 ```html
@@ -199,7 +199,7 @@ import { DtDropdown, DtButton, DtDropdownSeparator, DtDropdownList } from '@dial
       First item
     </dt-list-item>
     <dt-dropdown-separator />
-    <dt-dropdown-list
+    <dt-list-item-group
       :list-class="listClass"
       heading="Menu Heading"
     >
@@ -217,7 +217,7 @@ import { DtDropdown, DtButton, DtDropdownSeparator, DtDropdownList } from '@dial
       >
        Third item
       </dt-list-item>
-    </dt-dropdown-list>
+    </dt-list-item-group>
   </template>
 </dt-dropdown>
 ```

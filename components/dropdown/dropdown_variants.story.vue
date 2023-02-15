@@ -60,7 +60,7 @@
         <template
           #list="{ close }"
         >
-          <dt-dropdown-list
+          <dt-list-item-group
             :list-class="$attrs.listClass"
           >
             <dt-list-item
@@ -77,7 +77,7 @@
             >
               Menu Item 2
             </dt-list-item>
-          </dt-dropdown-list>
+          </dt-list-item-group>
           <dt-dropdown-separator />
           <dt-list-item
             role="menuitem"
@@ -204,7 +204,6 @@
 
 <script>
 import DtDropdown from './dropdown';
-import DtDropdownList from './dropdown_list';
 import DtListItemGroup from '../list_item_group/list_item_group.vue';
 import DtDropdownSeparator from './dropdown_separator';
 import { DtListItem } from '../list_item';
@@ -214,7 +213,7 @@ import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 export default {
   name: 'DtDropdownVariants',
 
-  components: { DtDropdown, DtListItem, DtButton, DtListItemGroup, DtDropdownList, DtDropdownSeparator },
+  components: { DtDropdown, DtListItem, DtButton, DtListItemGroup, DtDropdownSeparator },
 
   data () {
     return {
