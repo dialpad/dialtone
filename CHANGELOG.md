@@ -5,6 +5,13 @@
 
 * **Stack:** new stack component ([#758](https://github.com/dialpad/dialtone-vue/issues/758)) ([7e8e78a](https://github.com/dialpad/dialtone-vue/commit/7e8e78ae5e884ce0d1bb79a61ee5417f04ec4086))
 
+# [2.58.0](https://github.com/dialpad/dialtone-vue/compare/v2.57.1...v2.58.0) (2023-02-17)
+
+
+### Features
+
+* **Stack:** new stack component ([#758](https://github.com/dialpad/dialtone-vue/issues/758)) ([7e8e78a](https://github.com/dialpad/dialtone-vue/commit/7e8e78ae5e884ce0d1bb79a61ee5417f04ec4086))
+
 ## [2.57.1](https://github.com/dialpad/dialtone-vue/compare/v2.57.0...v2.57.1) (2023-02-15)
 
 
