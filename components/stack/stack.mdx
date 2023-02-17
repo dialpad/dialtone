@@ -1,0 +1,101 @@
+import { Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtStack from './stack';
+
+# Stack
+
+<Subtitle>
+  Stack is a layout component used to group elements together and apply a space between them.
+</Subtitle>
+
+## Base Style
+
+Stack base style starts without spacing between elements, on column direction and `div` as HTML element.
+
+## Slots & Props
+
+<ArgsTable of={DtStack} />
+
+## Usage
+
+### Available Gap
+
+```js
+[0, 100, 200, 300, 400, 500, 600]
+```
+
+### Available Directions
+
+```js
+['column', 'column-reverse', 'row', 'row-reverse']
+```
+
+### Available Breakpoints
+
+| Prefix | Max Width |
+| -- | ------ |
+| sm | 480px  |
+| md | 640px  |
+| lg | 980px  |
+| xl | 1264px |
+
+### Direction Object Structure
+
+```js
+{
+  default: string,
+  sm: string,
+  md: string,
+  lg: string,
+  xl: string,
+}
+```
+
+### Examples
+
+#### Stacks column at small screen size and column reverse at large screen
+
+```html
+<dt-stack :direction="{'default': 'row', 'sm': 'column', 'lg': 'column-reverse'}" as="article" gap="100">
+  <div>Stack item 1</div>
+  <div>Stack item 2</div>
+</dt-stack>
+```
+
+#### Stacks row with gap 300 in a section HTML element
+
+```html
+<dt-stack direction="row" as="section" gap="300">
+  <div>Stack item 1</div>
+  <div>Stack item 2</div>
+</dt-stack>
+```
+
+#### Stacks row with gap 300 and stacks in row reverse the second element with gap 600
+
+```html
+<dt-stack direction="row" as="section" gap="300">
+  <div>Stack item 1</div>
+  <div>
+    <div>Stack item 2</div>
+      <dt-stack direction="row-reverse" gap="600">
+          <div>Stack item 3</div>
+          <div>Stack item 4</div>
+      </dt-stack>
+  </div>
+</dt-stack>
+```
+
+### Import
+
+```jsx
+import { DtStack } from '@dialpad/dialtone-vue';
+```
+
+### Default
+
+```html
+<dt-stack direction="column" as="div" gap="0">
+  <div>Stack item 1</div>
+  <div>Stack item 2</div>
+</dt-stack>
+```
