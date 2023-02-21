@@ -76,6 +76,14 @@ export const argTypesData = {
       },
     },
   },
+  appendTo: {
+    defaultValue: 'body',
+    table: {
+      defaultValue: {
+        summary: 'body',
+      },
+    },
+  },
   padding: {
     defaultValue: 'none',
     control: {

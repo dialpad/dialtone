@@ -114,10 +114,10 @@ export const argTypesData = {
     },
   },
   appendTo: {
-    defaultValue: document.body,
+    defaultValue: 'body',
     table: {
       defaultValue: {
-        summary: 'document.body',
+        summary: 'body',
       },
     },
   },

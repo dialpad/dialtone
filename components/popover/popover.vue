@@ -465,11 +465,12 @@ export default {
 
     /**
      * Sets the element to which the popover is going to append to.
-     * @values 'parent', HTMLElement,
+     * 'body' will append to the nearest body (supports shadow DOM).
+     * @values 'body', 'parent', HTMLElement,
      */
     appendTo: {
       type: [HTMLElement, String],
-      default: () => document.body,
+      default: 'body',
       validator: appendTo => {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
             (appendTo instanceof HTMLElement);
@@ -614,7 +615,9 @@ export default {
   },
 
   mounted () {
-    const externalAnchorEl = document.getElementById(this.externalAnchor);
+    const externalAnchorEl = this.externalAnchor
+      ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
+      : null;
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
 
@@ -650,7 +653,11 @@ export default {
 
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
-      if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+      if (this.$el.getRootNode()
+        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
+        // Special case because we don't have any dialtone drawer component yet. Render at 650 when
+        // anchor of popover is within a drawer.
+        this.anchorEl.closest('.d-zi-drawer')) {
         return 650;
       } else {
         return 300;
@@ -876,7 +883,7 @@ export default {
         placement: this.placement,
         offset: this.offset,
         sticky: this.sticky,
-        appendTo: this.appendTo,
+        appendTo: this.appendTo === 'body' ? this.anchorEl?.getRootNode()?.querySelector('body') : this.appendTo,
         interactive: true,
         trigger: 'manual',
         // We have to manage hideOnClick functionality manually to handle

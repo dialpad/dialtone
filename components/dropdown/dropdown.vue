@@ -8,6 +8,7 @@
     :fallback-placements="fallbackPlacements"
     padding="none"
     role="menu"
+    :append-to="appendTo"
     :modal="modal"
     :max-height="maxHeight"
     :max-width="maxWidth"
@@ -57,6 +58,9 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from './dropdown_constants';
+import {
+  POPOVER_APPEND_TO_VALUES,
+} from '@/components/popover/popover_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
@@ -216,6 +220,20 @@ export default {
     listClass: {
       type: [String, Array, Object],
       default: '',
+    },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * 'body' will append to the nearest body (supports shadow DOM).
+     * @values 'body', 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: 'body',
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
+      },
     },
   },
 

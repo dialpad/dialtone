@@ -280,11 +280,12 @@ export default {
 
     /**
      * Sets the element to which the popover is going to append to.
-     * @values 'parent', HTMLElement,
+     * 'body' will append to the nearest body (supports shadow DOM).
+     * @values 'body', 'parent', HTMLElement,
      */
     appendTo: {
       type: [HTMLElement, String],
-      default: () => document.body,
+      default: 'body',
       validator: appendTo => {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
             (appendTo instanceof HTMLElement);
