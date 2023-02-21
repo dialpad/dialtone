@@ -1,3 +1,15 @@
+# [3.45.0](https://github.com/dialpad/dialtone-vue/compare/v3.44.2...v3.45.0) (2023-02-21)
+
+
+### Bug Fixes
+
+* **Popover, Tooltip:** support shadow dom ([#773](https://github.com/dialpad/dialtone-vue/issues/773)) ([9f65475](https://github.com/dialpad/dialtone-vue/commit/9f65475b3890c0dc5f666d3c97505ef0efde076e))
+
+
+### Features
+
+* **Stack:** new stack component - Vue3 ([#768](https://github.com/dialpad/dialtone-vue/issues/768)) ([4b3e222](https://github.com/dialpad/dialtone-vue/commit/4b3e22288eb4d07e4fc1cf96fa46bce4f51750ed))
+
 ## [3.44.2](https://github.com/dialpad/dialtone-vue/compare/v3.44.1...v3.44.2) (2023-02-15)
 
 
