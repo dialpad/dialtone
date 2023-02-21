@@ -234,7 +234,7 @@ export default {
     tippyProps () {
       return {
         offset: this.offset,
-        appendTo: document.body,
+        appendTo: this.anchorEl?.getRootNode()?.querySelector('body'),
         interactive: false,
         trigger: 'manual',
         placement: this.placement,
@@ -300,7 +300,11 @@ export default {
   methods: {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
-      if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+      if (this.$el.getRootNode()
+        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
+        // Special case because we don't have any dialtone drawer component yet. Render at 651 when
+        // anchor of popover is within a drawer.
+        this.$el.closest('.d-zi-drawer')) {
         return 651;
       } else {
         return 400;

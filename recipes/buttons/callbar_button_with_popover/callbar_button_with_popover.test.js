@@ -46,6 +46,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
       slots,
       provide,
       listeners,
+      attachTo: document.body,
       localVue: this.localVue,
     });
     _setChildWrappers();
