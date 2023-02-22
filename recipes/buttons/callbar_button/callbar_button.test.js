@@ -4,16 +4,6 @@ import DtRecipeCallbarButton from './callbar_button.vue';
 import DtTooltip from '@/components/tooltip/tooltip';
 import sinon from 'sinon';
 
-class ResizeObserverMock {
-  observe () {
-    // do nothing
-  }
-
-  unobserve () {
-    // do nothing
-  }
-}
-
 // Constants
 const baseProps = {};
 
@@ -52,7 +42,6 @@ describe('DtRecipeCallbarButton Tests', function () {
     // Need to mock them to avoid error
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
-    global.ResizeObserver = ResizeObserverMock;
   });
   beforeEach(function () {
     _setWrappers();
@@ -65,9 +54,6 @@ describe('DtRecipeCallbarButton Tests', function () {
     slots = {};
     provide = {};
     wrapper.unmount();
-  });
-  after(function () {
-    global.ResizeObserver = null;
   });
 
   describe('Presentation Tests', function () {

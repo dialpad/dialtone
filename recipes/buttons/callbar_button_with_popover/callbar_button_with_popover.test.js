@@ -5,16 +5,6 @@ import DtRecipeCallbarButton from '../callbar_button/callbar_button';
 import DtPopover from '@/components/popover/popover';
 import sinon from 'sinon';
 
-class ResizeObserverMock {
-  observe () {
-    // do nothing
-  }
-
-  unobserve () {
-    // do nothing
-  }
-}
-
 // Constants
 const baseProps = {
   arrowButtonLabel: 'arrowButton',
@@ -57,7 +47,6 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
     // Need to mock them to avoid error
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
-    global.ResizeObserver = ResizeObserverMock;
   });
   beforeEach(function () {
     _setWrappers();
@@ -70,9 +59,6 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
     slots = {};
     provide = {};
     wrapper.unmount();
-  });
-  after(function () {
-    global.ResizeObserver = null;
   });
 
   describe('Presentation Tests', function () {

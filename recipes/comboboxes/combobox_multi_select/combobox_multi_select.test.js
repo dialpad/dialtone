@@ -9,16 +9,6 @@ import { itBehavesLikeDoesNotHaveClass } from '@/tests/shared_examples/classes';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
-class ResizeObserverMock {
-  observe () {
-    // do nothing
-  }
-
-  unobserve () {
-    // do nothing
-  }
-}
-
 // Constants
 const basePropsData = {
   showList: true,
@@ -67,7 +57,6 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
     // Need to mock them to avoid error
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
-    global.ResizeObserver = ResizeObserverMock;
   });
   beforeEach(function () {
     _setWrappers();
@@ -80,9 +69,6 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
     slots = {};
     provide = {};
     wrapper.unmount();
-  });
-  after(function () {
-    global.ResizeObserver = null;
   });
 
   describe('Presentation Tests', function () {
