@@ -69,7 +69,7 @@
     "storybook": "npm run --prefix storybook storybook",
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
-    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
+    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors tests/globals.js components/**/*.test.js recipes/**/**/*.test.js",
     "test:one": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
     "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",

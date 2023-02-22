@@ -49,7 +49,7 @@
         :show="isOpen"
         :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }, dialogClass]"
         :style="{
-          'max-height': maxHeight,
+          'max-height': calculatedMaxHeight,
           'max-width': maxWidth,
         }"
         :tabindex="contentTabindex"
@@ -490,6 +490,8 @@ export default {
     return {
       POPOVER_PADDING_CLASSES,
       POPOVER_HEADER_FOOTER_PADDING_CLASSES,
+      intersectionObserver: null,
+      isOutsideViewport: false,
       isOpen: false,
       anchorEl: null,
       popoverContentEl: null,
@@ -514,6 +516,13 @@ export default {
           this.onEnterTransitionComplete();
         },
       };
+    },
+
+    calculatedMaxHeight () {
+      if (this.isOutsideViewport && this.modal) {
+        return `calc(100vh - var(--space-300))`;
+      }
+      return this.maxHeight;
     },
 
     labelledBy () {
@@ -598,10 +607,22 @@ export default {
     if (this.isOpen) {
       this.initTippyInstance();
     }
+
+    // rootMargin here must be greater than the margin of the height we are setting in calculatedMaxHeight which
+    // currently is var(--space-300) (4px). If not the intersectionObserver will continually trigger in an infinite
+    // loop.
+
+    // threshold 1.0 makes this trigger every time the dialog "touches" the edge of the viewport.
+    this.intersectionObserver = new IntersectionObserver(
+      this.hasIntersectedViewport,
+      { rootMargin: '-8px', threshold: 1.0 },
+    );
+    this.intersectionObserver.observe(this.popoverContentEl);
   },
 
   beforeDestroy () {
     this.tip?.destroy();
+    this.intersectionObserver.disconnect();
     this.removeReferences();
     this.removeEventListeners();
   },
@@ -610,6 +631,12 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+
+    hasIntersectedViewport (entries) {
+      const dialog = entries?.[0];
+      this.isOutsideViewport = !dialog?.isIntersecting;
+    },
+
     popperOptions () {
       return getPopperOptions({
         fallbackPlacements: this.fallbackPlacements,
