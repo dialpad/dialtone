@@ -1,3 +1,10 @@
+## [3.46.1](https://github.com/dialpad/dialtone-vue/compare/v3.46.0...v3.46.1) (2023-02-23)
+
+
+### Bug Fixes
+
+* export presence ([c6ccdc4](https://github.com/dialpad/dialtone-vue/commit/c6ccdc4fe907de6bf48c581beb6191815fad0eec))
+
 # [3.46.0](https://github.com/dialpad/dialtone-vue/compare/v3.45.0...v3.46.0) (2023-02-23)
 
 
