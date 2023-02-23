@@ -54,7 +54,7 @@ import { DtIcon } from '@/components/icon';
  * @see https://dialpad.design/components/list_item.html
  */
 export default {
-  name: 'ListItem',
+  name: 'DtListItem',
 
   components: {
     DtDefaultListItem,

@@ -46,7 +46,7 @@
 import { hasSlotContent } from '@/common/utils';
 
 export default {
-  name: 'DefaultListItem',
+  name: 'DtDefaultListItem',
 
   data () {
     return {

@@ -35,6 +35,7 @@ export default {
     /**
      * Determines the color of the inner presence circle, indicating status.
      * Accepts one of 4 values: 'busy', 'away', 'active', 'offline'
+     * @values busy, away, active, offline
      */
     presence: {
       type: String,
