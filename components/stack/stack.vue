@@ -43,6 +43,7 @@ export default {
 
     /**
      * Set this prop to have the space between each stack item
+     * @values 0, 100, 200, 300, 400, 500, 600
      */
     gap: {
       type: String,

@@ -111,6 +111,7 @@ export default {
 
     /**
      * Vertical padding size around the list element.
+     * @values none, small, large
      */
     padding: {
       type: String,
@@ -132,6 +133,7 @@ export default {
     /**
      * Width configuration for the popover content. When its value is 'anchor',
      * the popover content will have the same width as the anchor.
+     * @values null, anchor
      */
     contentWidth: {
       type: String,
@@ -170,6 +172,7 @@ export default {
      * - "arrow-keys" for items that are navigated with UP/DOWN keys.
      * - "tab" for items that are navigated using the TAB key.
      * - "none" for static items that are not interactive.
+     * @values arrow-keys, tab, none
      */
     navigationType: {
       type: String,
@@ -180,6 +183,12 @@ export default {
     /**
      * If the dropdown does not fit in the direction described by "placement",
      * it will attempt to change it's direction to the "fallbackPlacements".
+     *
+     * @values top, top-start, top-end,
+     * right, right-start, right-end,
+     * left, left-start, left-end,
+     * bottom, bottom-start, bottom-end,
+     * auto, auto-start, auto-end
      * */
     fallbackPlacements: {
       type: Array,

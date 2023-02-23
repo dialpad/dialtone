@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  name: 'DefaultListItem',
+  name: 'DtDefaultListItem',
 };
 </script>
 

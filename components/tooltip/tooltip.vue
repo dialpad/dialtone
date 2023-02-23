@@ -65,7 +65,7 @@ import {
  * @see https://dialpad.design/components/tooltip.html
  */
 export default {
-  name: 'Tooltip',
+  name: 'DtTooltip',
   components: {
     DtLazyShow,
   },

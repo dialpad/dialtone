@@ -29,12 +29,13 @@ import { PRESENCE_STATES, PRESENCE_STATES_LIST } from './presence_constants';
  * @see https://dialpad.design/components/presence.html
  */
 export default {
-  name: 'Presence',
+  name: 'DtPresence',
   props: {
 
     /**
      * Determines the color of the inner presence circle, indicating status.
      * Accepts one of 4 values: 'busy', 'away', 'active', 'offline'
+     * @values busy, away, active, offline
      */
     presence: {
       type: String,
