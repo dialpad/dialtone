@@ -20,6 +20,7 @@ export * from './components/link';
 export * from './components/notice';
 export * from './components/pagination';
 export * from './components/popover';
+export * from './components/presence';
 export * from './components/radio';
 export * from './components/radio_group';
 export * from './components/tabs';

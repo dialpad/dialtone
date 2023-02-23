@@ -31,6 +31,7 @@ const componentsList = [
   'modal.vue',
   'notice.vue',
   'pagination.vue',
+  'presence.vue',
   'popover.vue',
   'radio.vue',
   'radio_group.vue',
