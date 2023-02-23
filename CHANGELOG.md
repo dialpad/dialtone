@@ -1,3 +1,16 @@
+# [3.46.0](https://github.com/dialpad/dialtone-vue/compare/v3.45.0...v3.46.0) (2023-02-23)
+
+
+### Bug Fixes
+
+* **Popover:** prevent viewport from cutting off modal popover ([#774](https://github.com/dialpad/dialtone-vue/issues/774)) ([e160de7](https://github.com/dialpad/dialtone-vue/commit/e160de74fa7b40e05b3534b09f9896923fff8952))
+* vue api doc issues ([#777](https://github.com/dialpad/dialtone-vue/issues/777)) ([e302c14](https://github.com/dialpad/dialtone-vue/commit/e302c1479169dc507ca0abc79b06c3b076fbc16d))
+
+
+### Features
+
+* **Leftbar:** add general row recipe ([#775](https://github.com/dialpad/dialtone-vue/issues/775)) ([433747d](https://github.com/dialpad/dialtone-vue/commit/433747d81873c16c19c3b93fd3df131b36f80e6a))
+
 # [3.45.0](https://github.com/dialpad/dialtone-vue/compare/v3.44.2...v3.45.0) (2023-02-21)
 
 
