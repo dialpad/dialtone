@@ -1,0 +1,212 @@
+.dt-leftbar-row {
+
+  // TODO: reconcile Theme colors, which probably means use them but
+  //       update https://dialpad.design/design/colors/#theme in dialtone.css
+  //       to reflect the new design
+
+  //  ============================================================================
+  //  $   CSS CUSTOM PROPERTIES
+  //  ----------------------------------------------------------------------------
+  --leftbar-row-color-foreground: var(--fc-primary);
+  --leftbar-row-color-background: transparent;
+  --leftbar-row-radius: 100em;
+  --leftbar-row-alpha-color-foreground: var(--fc-secondary);
+  --leftbar-row-alpha-width: calc(var(--size-300) * 10);
+  --leftbar-row-alpha-height: calc(var(--size-300) * 9);
+  --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
+  --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
+  --leftbar-row-omega-visibility: visible;
+  --leftbar-row-description-font-weight: var(--fw-normal);
+  --leftbar-row-description-font-size: var(--fs-200);
+  --leftbar-row-description-line-height: var(--lh-200);
+  --leftbar-row-status-color-foreground: var(--fc-secondary);
+  --leftbar-row-status-font-size: var(--fs-100);
+  --leftbar-row-status-line-height: var(--lh-100);
+  --leftbar-row-action-position-right: var(--size-400);
+  --leftbar-row-action-position-bottom: 50%;
+  --leftbar-row-action-width: calc(var(--size-300) * 6);
+  --leftbar-row-action-height: var(--leftbar-row-action-width);
+
+  //  ============================================================================
+  //  $   BASE STYLE
+  //  ----------------------------------------------------------------------------
+  position: relative;
+
+  //  ============================================================================
+  //  $   VARIANTS
+  //  ----------------------------------------------------------------------------
+  //
+  //  <div class="dt-leftbar-row dt-leftbar-row--{$VARIANT}">
+  //    ...
+  //  </div>
+  //
+  &--has-unread {
+    --leftbar-row-description-font-weight: var(--fw-bold);
+    --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foreground);
+
+    &:not(.dt-leftbar-row--no-action):hover {
+      --leftbar-row-omega-visibility: hidden;
+    }
+  }
+
+  &--selected {
+    --leftbar-row-color-background: var(--black-200);
+  }
+
+  &--action-focused {
+    --leftbar-row-omega-visibility: hidden;
+  }
+
+  //  ============================================================================
+  //  $   ACTIONABLE ELEMENTS
+  //  ----------------------------------------------------------------------------
+  //
+  // <el class="dt-leftbar-row__primary" ...>
+  //   ...
+  // </el>
+  // <div class="dt-leftbar-row__action">
+  //   <button class="dt-leftbar-row__action-button d-btn ..." ...>...</button>
+  // </div>
+  //
+  &__primary {
+    // contains extra style properties to support both <button> and <a>
+    display: flex;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+    text-align: left;
+    color: var(--leftbar-row-color-foreground);
+    text-decoration: none;
+    background-color: var(--leftbar-row-color-background);
+    border-radius: var(--leftbar-row-radius);
+    transition-duration: var(--td200);
+    transition-property: background-color,border,box-shadow;
+    transition-timing-function: var(--ttf-out-quint);
+    appearance: none;
+    font-size: inhert;
+    line-height: inherit;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover {
+      --leftbar-row-color-background: var(--black-200);
+    }
+
+    &:active {
+      --leftbar-row-color-background: var(--black-300);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--bs-focus-ring-inset);
+    }
+  }
+
+  &__action {
+    position: absolute;
+    right: var(--leftbar-row-action-position-right);
+    top: var(--leftbar-row-action-position-bottom);
+    transform: translateY(calc(var(--leftbar-row-action-position-bottom) * -1));
+    opacity: 0;
+
+    .dt-leftbar-row:hover &,
+    &:focus,
+    &:focus-within {
+      opacity: 1;
+    }
+  }
+
+  &__action-button {
+    width: var(--leftbar-row-action-width);
+    height: var(--leftbar-row-action-height);
+  }
+
+  //  ============================================================================
+  //  $   PRIMARY'S MAIN ELEMENTS
+  //  ----------------------------------------------------------------------------
+  //
+  //  <div class="dt-leftbar-row__alpha">...</div>
+  //  <div class="dt-leftbar-row__label">...</div>
+  //  <div class="dt-leftbar-row__omega">...</div>
+
+  &__alpha {
+    color: var(--leftbar-row-alpha-color-foreground);
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding-left: var(--space-400);
+    padding-right: var(--space-400);
+    width: var(--leftbar-row-alpha-width);
+    height: var(--leftbar-row-alpha-height);
+  }
+
+  &__label {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__omega {
+    display: flex;
+    gap: var(--space-300);
+    justify-content: end;
+    align-items: center;
+    box-sizing: border-box;
+    min-width: var(--leftbar-row-omega-min-width);
+    height: var(--leftbar-row-omega-height);
+    padding-left: var(--space-400);
+    padding-right: var(--space-400);
+    visibility: var(--leftbar-row-omega-visibility);
+  }
+
+  //  ============================================================================
+  //  $   LABEL'S ELEMENTS
+  //  ----------------------------------------------------------------------------
+  //
+  //  <div class="dt-leftbar-row__description">
+  //    ...
+  //  </div>
+  //  <div class="dt-leftbar-row__status">
+  //    <span class="dt-leftbar-row__meta-context ...">...</span>
+  //    <span class="dt-leftbar-row__meta-custom">...</span>
+  //  </div>
+  //
+  &__description {
+    display: block;
+    font-weight: var(--leftbar-row-description-font-weight);
+    font-size: var(--leftbar-row-description-font-size);
+    line-height: var(--leftbar-row-description-line-height);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__status {
+    display: block;
+    color: var(--leftbar-row-status-color-foreground);
+    font-size: var(--leftbar-row-status-font-size);
+    line-height: var(--leftbar-row-status-line-height);
+    padding-bottom: var(--space-100);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__meta-context {
+    //
+  }
+
+  &__meta-custom:not(:empty) {
+    .dt-leftbar-row__meta-context ~ &:before {
+      content: ' • ';
+      color: var(--fc-tertiary);
+    }
+  }
+
+  &__icon-cc {
+    border-radius: var(--size-200);
+    width: calc(var(--size-300) * 3.5);
+    height: calc(var(--size-300) * 3.5);
+  }
+}

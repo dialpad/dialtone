@@ -1,0 +1,48 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeGeneralRow from './general_row';
+
+# Leftbar General Row
+
+<Subtitle>
+  This component covers all the leftbar rows that are simple icons with text.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="recipes-leftbar-general-row--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="recipes-leftbar-general-row--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeGeneralRow } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-recipe-general-row
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-recipe-general-row
+  some-other="variant"
+/>
+```
