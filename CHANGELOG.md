@@ -1,3 +1,10 @@
+## [2.59.1](https://github.com/dialpad/dialtone-vue/compare/v2.59.0...v2.59.1) (2023-02-24)
+
+
+### Bug Fixes
+
+* export presence ([ea7feb1](https://github.com/dialpad/dialtone-vue/commit/ea7feb1c24f306fcfcc005fd9d3cb945c294cc0f))
+
 # [2.59.0](https://github.com/dialpad/dialtone-vue/compare/v2.58.0...v2.59.0) (2023-02-23)
 
 
