@@ -318,6 +318,7 @@
         "import",
         "export"
       ],
+      "end-chat": [],
       "expand": [
         "scale",
         "fullscreen"
@@ -678,6 +679,7 @@
         "zero",
         "one"
       ],
+      "dash": [],
       "equal": [
         "calculate",
         "maths"
@@ -687,6 +689,7 @@
         "diagram",
         "graph"
       ],
+      "live-queue": [],
       "pie-chart": [
         "statistics",
         "diagram"
