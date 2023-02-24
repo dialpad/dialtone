@@ -1,3 +1,10 @@
+## [3.46.2](https://github.com/dialpad/dialtone-vue/compare/v3.46.1...v3.46.2) (2023-02-24)
+
+
+### Bug Fixes
+
+* export leftbar general row ([54280bd](https://github.com/dialpad/dialtone-vue/commit/54280bdb196b827a94c01093d572f91e3b0aff05))
+
 ## [3.46.1](https://github.com/dialpad/dialtone-vue/compare/v3.46.0...v3.46.1) (2023-02-23)
 
 
