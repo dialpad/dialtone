@@ -1,3 +1,10 @@
+# [2.60.0](https://github.com/dialpad/dialtone-vue/compare/v2.59.2...v2.60.0) (2023-02-28)
+
+
+### Features
+
+* **Leftbar:** add group row recipe ([#778](https://github.com/dialpad/dialtone-vue/issues/778)) ([ce1e487](https://github.com/dialpad/dialtone-vue/commit/ce1e487c8624e48a36cf85b9ed856a41e2c7d861))
+
 ## [2.59.2](https://github.com/dialpad/dialtone-vue/compare/v2.59.1...v2.59.2) (2023-02-24)
 
 
