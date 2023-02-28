@@ -1,13 +1,10 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
-import DtRecipeGeneralRow from './general_row';
-import DtRecipeGeneralRowMdx from './general_row.mdx';
-import DtRecipeGeneralRowDefaultTemplate from './general_row_default.story.vue';
-import DtRecipeGeneralRowVariantsTemplate from './general_row_variants.story.vue';
-import {
-  LEFTBAR_GENERAL_ROW_TYPES,
-  LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
-} from '@/recipes/leftbar/general_row/general_row_constants';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import DtRecipeGroupRow from './group_row';
+import DtRecipeGroupRowMdx from './group_row.mdx';
+import DtRecipeGroupRowDefaultTemplate from './group_row_default.story.vue';
+import DtRecipeGroupRowVariantsTemplate from './group_row_variants.story.vue';
+const defaultImage = require('./../../../components/avatar/person.png');
 
 // Default Prop Values
 export const argsData = {
@@ -16,34 +13,23 @@ export const argsData = {
 
 export const argTypesData = {
   // Props
-  type: {
-    defaultValue: 'inbox',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'select',
-      options: Object.values(LEFTBAR_GENERAL_ROW_TYPES),
-    },
+  groupCount: {
+    defaultValue: 8,
   },
-  color: {
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'select',
-      options: Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS),
-    },
+
+  names: {
+    defaultValue: 'Jaqueline Nackos, Lori Smith',
   },
-  description: {
-    defaultValue: 'Description',
+
+  avatarInitials: {
+    defaultValue: 'JN',
   },
+
+  avatarSrc: {
+    defaultValue: defaultImage,
+  },
+
+  // Slots
 
   // Action Event Handlers
   onClick: {
@@ -66,8 +52,8 @@ const decorator = () => ({
 
 // Story Collection
 export default {
-  title: 'Recipes/Leftbar/General Row',
-  component: DtRecipeGeneralRow,
+  title: 'Recipes/Leftbar/Group Row',
+  component: DtRecipeGroupRow,
   args: argsData,
   argTypes: argTypesData,
   decorators: [decorator],
@@ -77,7 +63,7 @@ export default {
       sort: 'requiredFirst',
     },
     docs: {
-      page: DtRecipeGeneralRowMdx,
+      page: DtRecipeGroupRowMdx,
     },
     options: {
       showPanel: true,
@@ -89,12 +75,12 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeGeneralRowDefaultTemplate,
+  DtRecipeGroupRowDefaultTemplate,
 );
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeGeneralRowVariantsTemplate,
+  DtRecipeGroupRowVariantsTemplate,
 );
 
 // Stories

@@ -1,0 +1,67 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeGroupRow from './group_row';
+
+# Leftbar Group Row
+
+<Subtitle>
+  This component covers the group leftbar rows.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="recipes-leftbar-group-row--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="recipes-leftbar-group-row--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeGroupRow } from '@dialpad/dialtone-vue';
+```
+
+### Default behavior
+
+```vue
+<dt-recipe-group-row
+  avatar-initials="JN"
+  :group-count="2"
+  names="Jaqueline Nackos, Lori Smith"
+  avatar-src="/static/media/../components/avatar/person.png"
+/>
+```
+
+### Selected
+
+```vue
+<dt-recipe-group-row
+  avatar-initials="JN"
+  :group-count="2"
+  names="Jaqueline Nackos, Lori Smith"
+  avatar-src="/static/media/../components/avatar/person.png"
+  :selected="true"
+/>
+```
+
+### With Unread Count
+
+```vue
+<dt-recipe-group-row
+  avatar-initials="JN"
+  :group-count="2"
+  names="Jaqueline Nackos, Lori Smith"
+  avatar-src="/static/media/../components/avatar/person.png"
+  :unread-count="10"
+/>
+```

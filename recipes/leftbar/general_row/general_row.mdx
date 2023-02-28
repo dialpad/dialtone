@@ -31,18 +31,31 @@ import DtRecipeGeneralRow from './general_row';
 import { DtRecipeGeneralRow } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### Channel With Unread Messages
 
 ```vue
 <dt-recipe-general-row
-  some="variant"
+  type="channels"
+  description="Channel name"
+  unread-count="29"
 />
 ```
 
-### With Some Other Variant
+### Contact Center
 
 ```vue
 <dt-recipe-general-row
-  some-other="variant"
+  type="contact center"
+  description="Contact Center name"
+  color="magenta"
+/>
+```
+
+### Dialbot
+
+```vue
+<dt-recipe-general-row
+  type="dialbot"
+  description="Dialbot"
 />
 ```

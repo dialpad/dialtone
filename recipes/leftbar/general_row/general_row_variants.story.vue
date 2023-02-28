@@ -1,5 +1,5 @@
 <template>
-  <div class="d-stack16">
+  <dt-stack gap="600">
     <div>
       <h3 class="d-mb8">
         Channel with unread messages
@@ -33,14 +33,15 @@
         description="Dialbot"
       />
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtRecipeGeneralRow from './general_row';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeGeneralRowVariants',
-  components: { DtRecipeGeneralRow },
+  components: { DtRecipeGeneralRow, DtStack },
 };
 </script>
