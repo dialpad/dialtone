@@ -43,7 +43,11 @@
 </template>
 
 <script>
-import { LEFTBAR_GENERAL_ROW_TYPES, LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS } from './general_row_constants.js';
+import {
+  LEFTBAR_GENERAL_ROW_TYPES,
+  LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
+  LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
+} from './general_row_constants.js';
 import { DtBadge } from '@/components/badge';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
@@ -151,8 +155,7 @@ export default {
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&
           !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {
-        console.error('If type is contact center, color must be one of the following: ' +
-          Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).join(', '));
+        console.error(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR);
       }
     },
   },
