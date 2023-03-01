@@ -7,7 +7,6 @@
     :disabled="$attrs.disabled"
     :danger="$attrs.danger"
     :button-class="$attrs.buttonClass"
-    :button-width-size="$attrs.buttonWidthSize"
     @click="$attrs.onClick"
   >
     <template
