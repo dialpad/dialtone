@@ -2,37 +2,32 @@
   <div class="d-w464">
     <dt-stack gap="600">
       <div>
-        <p class="d-fw-bold">
+        <h3>
           Default behavior
-        </p>
+        </h3>
         <dt-recipe-group-row
-          class="d-pt8"
           avatar-initials="JN"
           :group-count="2"
           names="Jaqueline Nackos, Lori Smith"
           :avatar-src="avatarSrc"
         />
       </div>
-
       <div>
-        <p class="d-fw-bold">
+        <h3>
           Ellipsed names
-        </p>
+        </h3>
         <dt-recipe-group-row
-          class="d-pt8"
           avatar-initials="JN"
           :group-count="4"
           names="Jaqueline Nackos, Lori Smith, Jaqueline Nackos, Lori Smith"
           :avatar-src="avatarSrc"
         />
       </div>
-
       <div>
-        <p class="d-fw-bold">
+        <h3>
           With unread count
-        </p>
+        </h3>
         <dt-recipe-group-row
-          class="d-pt8"
           avatar-initials="JN"
           :group-count="2"
           names="Jaqueline Nackos, Lori Smith"
@@ -40,13 +35,11 @@
           unread-count="1"
         />
       </div>
-
       <div>
-        <p class="d-fw-bold">
+        <h3>
           Selected
-        </p>
+        </h3>
         <dt-recipe-group-row
-          class="d-pt8"
           avatar-initials="JN"
           :group-count="2"
           names="Jaqueline Nackos, Lori Smith"
@@ -54,13 +47,11 @@
           selected
         />
       </div>
-
       <div>
-        <p class="d-fw-bold">
+        <h3>
           With Initial as fallback when avatar image src cannot be found.
-        </p>
+        </h3>
         <dt-recipe-group-row
-          class="d-pt8"
           avatar-initials="JN"
           :group-count="2"
           names="Jaqueline Nackos, Lori Smith"
