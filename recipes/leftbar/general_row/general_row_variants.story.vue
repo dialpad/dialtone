@@ -21,7 +21,7 @@
       <dt-recipe-general-row
         type="contact center"
         description="Contact Center name"
-        color="magenta"
+        color="magenta-200"
       />
     </div>
     <div>
