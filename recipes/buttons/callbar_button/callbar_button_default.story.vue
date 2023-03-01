@@ -7,7 +7,6 @@
     :disabled="disabled"
     :danger="danger"
     :button-class="buttonClass"
-    :button-width-size="buttonWidthSize"
     @click="onClick"
   >
     <template
