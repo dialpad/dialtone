@@ -29,8 +29,23 @@
         </dt-emoji-text-wrapper>
       </div>
       <div class="dt-leftbar-row__omega">
+        <div
+          v-if="dndText"
+          class="dt-leftbar-row__dnd"
+        >
+          {{ dndText }}
+        </div>
+        <div
+          v-else-if="activeVoiceChat"
+          class="dt-leftbar-row__active-voice"
+        >
+          <dt-icon
+            size="300"
+            name="activity"
+          />
+        </div>
         <dt-badge
-          v-if="hasUnreadMessages"
+          v-else-if="hasUnreadMessages"
           kind="count"
           type="bulletin"
           data-qa="dt-leftbar-row-unread-badge"
@@ -49,6 +64,7 @@ import {
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
 } from './general_row_constants.js';
 import { DtBadge } from '@/components/badge';
+import { DtIcon } from '@/components/icon';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 
@@ -58,6 +74,7 @@ export default {
   components: {
     DtEmojiTextWrapper,
     DtBadge,
+    DtIcon,
     DtRecipeLeftbarGeneralRowIcon,
   },
 
@@ -110,6 +127,31 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Gives a faded style to be used when muted
+     */
+    muted: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Shows styling to represent an active voice chat. This will display over unreadCount.
+     */
+    activeVoiceChat: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Acronym used to represent "Do not Disturb" state. If entered will display the entered text over
+     * unreadCount and activeVoiceChat.
+     */
+    dndText: {
+      type: String,
+      default: '',
+    },
   },
 
   computed: {
@@ -120,6 +162,7 @@ export default {
         {
           'dt-leftbar-row--has-unread': this.hasUnreadMessages,
           'dt-leftbar-row--selected': this.selected,
+          'dt-leftbar-row--muted': this.muted,
         },
       ];
     },

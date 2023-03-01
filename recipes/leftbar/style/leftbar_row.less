@@ -13,12 +13,14 @@
   --leftbar-row-alpha-color-foreground: var(--theme-sidebar-icon-color);
   --leftbar-row-alpha-width: calc(var(--size-300) * 10);
   --leftbar-row-alpha-height: calc(var(--size-300) * 9);
+  --leftbar-row-alpha-opacity: 100%;
   --leftbar-row-omega-min-width: 0;
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
   --leftbar-row-omega-visibility: visible;
   --leftbar-row-description-font-weight: var(--fw-normal);
   --leftbar-row-description-font-size: var(--fs-200);
   --leftbar-row-description-line-height: var(--lh-200);
+  --leftbar-row-description-opacity: 100%;
   --leftbar-row-status-color-foreground: var(--theme-sidebar-status-color);
   --leftbar-row-status-font-size: var(--fs-100);
   --leftbar-row-status-line-height: var(--lh-100);
@@ -26,6 +28,7 @@
   --leftbar-row-action-position-bottom: 50%;
   --leftbar-row-action-width: calc(var(--size-300) * 6);
   --leftbar-row-action-height: var(--leftbar-row-action-width);
+
 
   //  ============================================================================
   //  $   BASE STYLE
@@ -51,6 +54,11 @@
     &:not(.dt-leftbar-row--no-action):hover {
       --leftbar-row-omega-visibility: hidden;
     }
+  }
+
+  &--muted {
+    --leftbar-row-alpha-opacity: 50%;
+    --leftbar-row-description-opacity: 60%;
   }
 
   &--selected {
@@ -148,6 +156,7 @@
     padding-right: var(--space-400);
     width: var(--leftbar-row-alpha-width);
     height: var(--leftbar-row-alpha-height);
+    opacity: var(--leftbar-row-alpha-opacity);
   }
 
   &__label {
@@ -168,6 +177,17 @@
     visibility: var(--leftbar-row-omega-visibility);
   }
 
+  &__active-voice {
+    color: var(--fc-success);
+    .opacity-pulsate();
+  }
+
+  &__dnd {
+    color: var(--black-600);
+    font-size: var(--fs-100);
+    font-weight: var(--fw-bold);
+  }
+
   //  ============================================================================
   //  $   LABEL'S ELEMENTS
   //  ----------------------------------------------------------------------------
@@ -185,6 +205,7 @@
     font-weight: var(--leftbar-row-description-font-weight);
     font-size: var(--leftbar-row-description-font-size);
     line-height: var(--leftbar-row-description-line-height);
+    opacity: var(--leftbar-row-description-opacity);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -217,4 +238,36 @@
     width: calc(var(--size-300) * 3.5);
     height: calc(var(--size-300) * 3.5);
   }
+}
+
+.opacity-pulsate {
+  -webkit-animation-name: opacity-pulsate;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-fill-mode: both;
+
+  -moz-animation-name: opacity-pulsate;
+  -moz-animation-duration: 1s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-fill-mode: both;
+
+  animation-name: opacity-pulsate;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes opacity-pulsate {
+  0%, 100%   {opacity: 0.2;}
+  50%  {opacity: 1;}
+}
+
+@-moz-keyframes opacity-pulsate {
+  0%, 100%   {opacity: 0.2;}
+  50%  {opacity: 1;}
+}
+
+@keyframes opacity-pulsate {
+  0%, 100%   {opacity: 0.2;}
+  50%  {opacity: 1;}
 }
