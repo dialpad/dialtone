@@ -11,6 +11,7 @@
     :active="active"
     :danger="danger"
     :button-class="buttonClass"
+    :button-width-size="buttonWidthSize"
     :content-class="contentClass"
     @arrow-click="onClick"
     @click="onClick"
