@@ -1,3 +1,10 @@
+# [2.62.0](https://github.com/dialpad/dialtone-vue/compare/v2.61.0...v2.62.0) (2023-03-01)
+
+
+### Features
+
+* DP-59900 Add `buttonWidthSize` prop ([167b08c](https://github.com/dialpad/dialtone-vue/commit/167b08c081f3a5f73d8d2bad733f323a3b6c0ff7))
+
 # [2.61.0](https://github.com/dialpad/dialtone-vue/compare/v2.60.0...v2.61.0) (2023-03-01)
 
 
