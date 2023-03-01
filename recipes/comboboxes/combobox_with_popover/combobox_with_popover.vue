@@ -460,11 +460,10 @@ export default {
 
     onFocusOut (e) {
       // Check if the focus change was to another target within the combobox component
-      const isComboboxStillFocused = Object.keys(this.$refs).some(refName => {
-        const ref = this.$refs[refName];
-        return ref.$el ? ref.$el.contains(e.target) : ref.contains(e.target);
-      });
-      if (isComboboxStillFocused) return;
+      const popoverEl = this.$refs.popover.tip?.popper;
+      const comboboxEl = this.$refs.input;
+
+      if (e.composedPath()?.some(el => [popoverEl, comboboxEl].includes(el))) return;
 
       // If outside the combobox then close
       this.closeComboboxList();
