@@ -1,3 +1,17 @@
+# [2.61.0](https://github.com/dialpad/dialtone-vue/compare/v2.60.0...v2.61.0) (2023-03-01)
+
+
+### Bug Fixes
+
+* **Combobox:** popover close on scroll ([#779](https://github.com/dialpad/dialtone-vue/issues/779)) ([7cbb916](https://github.com/dialpad/dialtone-vue/commit/7cbb91607346fed731f122738eb4e3e4633afa9f))
+
+
+### Features
+
+* **Leftbar General Row:** additional styles ([#786](https://github.com/dialpad/dialtone-vue/issues/786)) ([c803bc0](https://github.com/dialpad/dialtone-vue/commit/c803bc0ddfd6d42394f9543d1a059651fa58ea46))
+* **Leftbar:** update text-overflow style ([#789](https://github.com/dialpad/dialtone-vue/issues/789)) ([d6873a8](https://github.com/dialpad/dialtone-vue/commit/d6873a83684c822ea696d65c9a46acbbc29ea495))
+* **Theme:** update sidebar theme vars ([#782](https://github.com/dialpad/dialtone-vue/issues/782)) ([1c0584f](https://github.com/dialpad/dialtone-vue/commit/1c0584f3c865180573ab5194bc5833f77bee5686))
+
 # [2.60.0](https://github.com/dialpad/dialtone-vue/compare/v2.59.2...v2.60.0) (2023-02-28)
 
 
