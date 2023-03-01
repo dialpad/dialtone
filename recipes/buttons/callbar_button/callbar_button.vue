@@ -11,7 +11,7 @@
         :disabled="disabled"
         :aria-label="ariaLabel"
         label-class="d-fs-100"
-        width="8.4rem"
+        :width="buttonWidth"
         :class="callbarButtonClass"
       >
         <slot />
@@ -28,6 +28,8 @@
 import DtButton from '@/components/button/button';
 import DtTooltip from '@/components/tooltip/tooltip';
 import utils from '@/common/utils';
+
+export const VALID_WIDTH_SIZE = ['sm', 'md', 'lg', 'xl'];
 
 export default {
   name: 'DtRecipeCallbarButton',
@@ -107,6 +109,15 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /*
+     * Width size. Valid values are: 'xl', 'lg', 'md' and 'sm'.
+     */
+    buttonWidthSize: {
+      type: String,
+      default: 'xl',
+      validator: size => VALID_WIDTH_SIZE.includes(size),
+    },
   },
 
   computed: {
@@ -121,6 +132,18 @@ export default {
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
         }];
+    },
+
+    buttonWidth () {
+      switch (this.buttonWidthSize) {
+        case 'sm':
+        case 'md':
+          return '4.5rem';
+        case 'lg':
+          return '6rem';
+        default:
+          return '8.4rem';
+      }
     },
   },
 };

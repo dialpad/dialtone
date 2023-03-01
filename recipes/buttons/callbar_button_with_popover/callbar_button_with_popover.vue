@@ -1,6 +1,6 @@
 <template>
   <div
-    class="dt-recipe--callbar-button-with-popover--button"
+    class="d-d-flex d-ai-center"
   >
     <dt-recipe-callbar-button
       :aria-label="ariaLabel"
@@ -8,6 +8,7 @@
       :active="active"
       :danger="danger"
       :button-class="buttonClass"
+      :button-width-size="buttonWidthSize"
       class="dt-recipe--callbar-button-with-popover--main-button"
       @click="buttonClick"
     >
@@ -38,7 +39,7 @@
           circle
           importance="clear"
           size="lg"
-          class="dt-recipe--callbar-button-with-popover--arrow"
+          :class="['dt-recipe--callbar-button-with-popover--arrow', isCompactMode ? 'd-mln16' : 'd-mln24']"
           width="2rem"
           :aria-label="arrowButtonLabel"
           :active="open"
@@ -69,7 +70,7 @@
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtIcon } from '@/components/icon';
-import DtRecipeCallbarButton from '@/recipes/buttons/callbar_button/callbar_button';
+import DtRecipeCallbarButton, { VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button';
 import utils from '@/common/utils';
 
 export default {
@@ -213,6 +214,15 @@ export default {
       default: '',
     },
 
+    /*
+     * Width size. Valid values are: 'xl', 'lg', 'md' and 'sm'.
+     */
+    buttonWidthSize: {
+      type: String,
+      default: 'xl',
+      validator: size => VALID_WIDTH_SIZE.includes(size),
+    },
+
     /**
      * Additional class name for the popover content wrapper element.
      */
@@ -247,6 +257,10 @@ export default {
     showArrowButton () {
       return this.forceShowArrow || !this.disabled;
     },
+
+    isCompactMode () {
+      return this.buttonWidthSize === 'sm' || this.buttonWidthSize === 'md';
+    },
   },
 
   methods: {
@@ -274,14 +288,8 @@ export default {
 </script>
 
 <style lang="less">
-.dt-recipe--callbar-button-with-popover--button {
-  position: relative;
-  display: inline-block;
-}
 .dt-recipe--callbar-button-with-popover--arrow.d-btn--circle {
-  position: absolute;
-  top: 2rem;
-  right: 0;
+  margin-top: -1.2rem;
   width: var(--su16);
   height: var(--su16);
   padding: var(--su8);
