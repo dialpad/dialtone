@@ -73,8 +73,14 @@ export default {
   decorators: [decorator],
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtRecipeGeneralRowMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };
@@ -87,3 +93,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

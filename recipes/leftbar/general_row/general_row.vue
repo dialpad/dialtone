@@ -11,11 +11,13 @@
       <div
         class="dt-leftbar-row__alpha"
       >
-        <dt-recipe-leftbar-general-row-icon
-          :type="getIcon"
-          :color="color"
-          data-qa="dt-leftbar-row-icon"
-        />
+        <slot name="left">
+          <dt-recipe-leftbar-general-row-icon
+            :type="getIcon"
+            :color="color"
+            data-qa="dt-leftbar-row-icon"
+          />
+        </slot>
       </div>
       <div class="dt-leftbar-row__label">
         <dt-emoji-text-wrapper
