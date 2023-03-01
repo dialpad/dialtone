@@ -5,7 +5,8 @@ import DtRecipeCallbarButtonWithPopoverMdx from './callbar_button_with_popover.m
 import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './callbar_button_with_popover_default.story.vue';
 import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_with_popover_variants.story.vue';
 
-import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '../../../components/popover/popover_constants';
+import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '@/components/popover/popover_constants';
+import { VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button';
 
 const iconsList = getIconNames();
 
@@ -70,6 +71,13 @@ export const argTypesData = {
       type: {
         summary: ['string', 'array', 'object'],
       },
+    },
+  },
+  buttonWidthSize: {
+    defaultValue: 'xl',
+    control: {
+      type: 'select',
+      options: VALID_WIDTH_SIZE,
     },
   },
   contentClass: {

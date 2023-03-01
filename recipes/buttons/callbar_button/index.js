@@ -1,1 +1,1 @@
-export { default as DtRecipeCallbarButton } from './callbar_button.vue';
+export { default as DtRecipeCallbarButton, VALID_WIDTH_SIZE } from './callbar_button.vue';
