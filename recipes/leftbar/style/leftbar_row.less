@@ -13,7 +13,7 @@
   --leftbar-row-alpha-color-foreground: var(--fc-secondary);
   --leftbar-row-alpha-width: calc(var(--size-300) * 10);
   --leftbar-row-alpha-height: calc(var(--size-300) * 9);
-  --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
+  --leftbar-row-omega-min-width: 0;
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
   --leftbar-row-omega-visibility: visible;
   --leftbar-row-description-font-weight: var(--fw-normal);
@@ -40,6 +40,10 @@
   //    ...
   //  </div>
   //
+  &:not(.dt-leftbar-row--no-action):hover {
+    --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
+  }
+
   &--has-unread {
     --leftbar-row-description-font-weight: var(--fw-bold);
     --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foreground);
