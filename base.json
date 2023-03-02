@@ -452,12 +452,12 @@
           "value": "{size.0}",
           "type": "borderWidth"
         },
-        "50": {
-          "value": "{size.border.100} * 1.5",
-          "type": "borderWidth"
-        },
         "100": {
           "value": "{size.100}",
+          "type": "borderWidth"
+        },
+        "150": {
+          "value": "{size.border.100} * 1.5",
           "type": "borderWidth"
         },
         "200": {
@@ -1788,7 +1788,7 @@
       "size": {
         "border": {
           "default": {
-            "value": "{size.border.50}",
+            "value": "{size.border.150}",
             "type": "borderWidth"
           },
           "status": {
