@@ -5,6 +5,7 @@
     :names="$attrs.names"
     :avatar-src="$attrs.avatarSrc"
     :unread-count="$attrs.unreadCount"
+    :has-unreads="$attrs.hasUnreads"
     :selected="$attrs.selected"
     @click="$attrs.onClick"
   />

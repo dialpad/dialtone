@@ -2,6 +2,7 @@
   <dt-recipe-general-row
     :description="names"
     :unread-count="unreadCount"
+    :has-unreads="hasUnreads"
     :selected="selected"
   >
     <template #left>
@@ -74,6 +75,14 @@ export default {
     unreadCount: {
       type: String,
       default: null,
+    },
+
+    /**
+     * Styles the row with an increased font weight to convey it has unreads
+     */
+    hasUnreads: {
+      type: Boolean,
+      default: false,
     },
 
     /**

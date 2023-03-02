@@ -4,6 +4,7 @@
     :color="$attrs.color"
     :description="$attrs.description"
     :unread-count="$attrs.unreadCount"
+    :has-unreads="$attrs.hasUnreads"
     :selected="$attrs.selected"
     :muted="$attrs.muted"
     :active-voice-chat="$attrs.activeVoiceChat"
