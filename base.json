@@ -2139,6 +2139,90 @@
           }
         }
       }
+    },
+    "theme": {
+      "sidebar": {
+        "color": {
+          "foreground": {
+            "value": "{color.text.primary}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{color.surface.secondary}",
+            "type": "color"
+          }
+        },
+        "icon": {
+          "color": {
+            "foreground": {
+              "value": "{color.text.secondary}",
+              "type": "color"
+            }
+          }
+        },
+        "status": {
+          "color": {
+            "foreground": {
+              "value": "{color.text.tertiary}",
+              "type": "color"
+            }
+          }
+        },
+        "row": {
+          "color": {
+            "background": {
+              "value": "{color.neutral.transparent}",
+              "type": "color"
+            },
+            "background-hover": {
+              "value": "{color.black.300}",
+              "type": "color"
+            }
+          }
+        },
+        "active-row": {
+          "color": {
+            "foreground": {
+              "value": "{color.text.primary}",
+              "type": "color"
+            },
+            "background": {
+              "value": "{color.black.200}",
+              "type": "color"
+            }
+          }
+        }
+      },
+      "presence": {
+        "color": {
+          "background": {
+            "available": {
+              "value": "{color.green.400}",
+              "type": "color"
+            },
+            "busy-unavailable": {
+              "value": "{color.red.300}",
+              "type": "color"
+            },
+            "busy": {
+              "value": "{color.gold.300}",
+              "type": "color"
+            }
+          }
+        }
+      },
+      "mention": {
+        "color": {
+          "foreground": {
+            "value": "{color.neutral.white}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{color.brand.purple}",
+            "type": "color"
+          }
+        }
+      }
     }
   },
   "semantic/dark": {
