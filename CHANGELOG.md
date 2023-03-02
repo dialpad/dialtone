@@ -1,3 +1,10 @@
+# [2.63.0](https://github.com/dialpad/dialtone-vue/compare/v2.62.0...v2.63.0) (2023-03-02)
+
+
+### Features
+
+* **Leftbar General Row:** add hasUnreads prop ([5da9dd7](https://github.com/dialpad/dialtone-vue/commit/5da9dd75c0d2e521018b8767d1e8beb012a4da75))
+
 # [2.62.0](https://github.com/dialpad/dialtone-vue/compare/v2.61.0...v2.62.0) (2023-03-01)
 
 
