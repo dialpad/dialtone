@@ -5,6 +5,7 @@
     :names="names"
     :avatar-src="avatarSrc"
     :unread-count="unreadCount"
+    :has-unreads="hasUnreads"
     :selected="selected"
     @click="onClick"
   />

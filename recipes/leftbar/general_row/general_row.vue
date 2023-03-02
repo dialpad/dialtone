@@ -45,7 +45,7 @@
           />
         </div>
         <dt-badge
-          v-else-if="hasUnreadMessages"
+          v-else-if="!!unreadCount && hasUnreads"
           kind="count"
           type="bulletin"
           data-qa="dt-leftbar-row-unread-badge"
@@ -113,6 +113,14 @@ export default {
     },
 
     /**
+     * Styles the row with an increased font weight to convey it has unreads
+     */
+    hasUnreads: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Number of unread messages
      */
     unreadCount: {
@@ -160,7 +168,7 @@ export default {
         'dt-leftbar-row',
         'dt-leftbar-row--no-action',
         {
-          'dt-leftbar-row--has-unread': this.hasUnreadMessages,
+          'dt-leftbar-row--has-unread': this.hasUnreads,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,
         },
@@ -170,17 +178,13 @@ export default {
     getIcon () {
       switch (this.type) {
         case LEFTBAR_GENERAL_ROW_TYPES.CHANNELS:
-          if (this.hasUnreadMessages) return 'channel unread';
+          if (this.hasUnreads) return 'channel unread';
           break;
         case LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL:
-          if (this.hasUnreadMessages) return 'locked channel unread';
+          if (this.hasUnreads) return 'locked channel unread';
           break;
       }
       return this.type;
-    },
-
-    hasUnreadMessages () {
-      return isNaN(Number(this.unreadCount)) ? !!this.unreadCount : Number(this.unreadCount) > 0;
     },
   },
 

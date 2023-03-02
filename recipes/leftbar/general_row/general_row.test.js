@@ -85,10 +85,11 @@ describe('DtRecipeGeneralRow Tests', function () {
     describe('When a unreadCount is provided', function () {
       // Test Environment
       const unreadCount = '25';
+      const hasUnreads = true;
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...propsData, unreadCount };
+        propsData = { ...propsData, hasUnreads, unreadCount };
         _setWrappers();
       });
 

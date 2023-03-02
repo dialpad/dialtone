@@ -4,6 +4,7 @@
     :color="color"
     :description="description"
     :unread-count="unreadCount"
+    :has-unreads="hasUnreads"
     :selected="selected"
     :muted="muted"
     :active-voice-chat="activeVoiceChat"
