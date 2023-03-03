@@ -3160,7 +3160,21 @@
         "action.color.border.muted.outlined.default": "S:1040091916e197aab971ccf9cff7848962756a6e,",
         "color.brand.purple": "S:3bc3a8f02525a93e4db57f75ced98300523daf41,",
         "color.brand.magenta": "S:67e1d4774b94b1ad4efe5661d86e536f4f7bef3d,",
-        "color.border.brand": "S:16c62165aac581ff664b5da97921cef463fa02bf,"
+        "color.border.brand": "S:16c62165aac581ff664b5da97921cef463fa02bf,",
+        "theme.sidebar.color.foreground": "S:17dda68b1797b2f3927741e429b3d7834fb81b89,",
+        "theme.sidebar.color.background": "S:a0c22c623f3232dbe5ec1c931856a44562f5439e,",
+        "theme.sidebar.icon.color.foreground": "S:46f09d48da5c365d80f1979377de0ed588f5acaa,",
+        "theme.sidebar.status.color.foreground": "S:30db5fff403ff1c3c30d57ec958c60efaf3ea063,",
+        "theme.sidebar.row.color.background": "S:7a637d609f3567fbb7f8119c0245c767af13d509,",
+        "theme.sidebar.row.color.background-hover": "S:2bd5fc3fdb35fe88dd0cc7ab024857d3ec1fd912,",
+        "theme.sidebar.row.color.background-active": "S:e5344c27bc7e7825886f356cea0b5905abcad3d7,",
+        "theme.sidebar.selected-row.color.foreground": "S:2afff8bf9c153f9589a40d3ed85b28ee803abd1e,",
+        "theme.sidebar.selected-row.color.background": "S:12c825d6d08629ac83622ef208d4e1c1ccabfe93,",
+        "theme.presence.color.background.available": "S:4e1fbc849f271cfbd855255e4edf1fcfe0a7cc11,",
+        "theme.presence.color.background.busy-unavailable": "S:376ebc7fe1c6d7ce82d9ee7cac49388c37a4dae6,",
+        "theme.presence.color.background.busy": "S:77459b06523349c688cb2680076590e8561b39ba,",
+        "theme.mention.color.foreground": "S:10e463b34d13982f11ef5c519d28a79713f8a6c0,",
+        "theme.mention.color.background": "S:df52dd0ba4340ab7651658162f5278e951f1b4a1,"
       }
     }
   ],
