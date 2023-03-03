@@ -2175,6 +2175,10 @@
               "type": "color"
             },
             "background-hover": {
+              "value": "{color.black.200}",
+              "type": "color"
+            },
+            "background-active": {
               "value": "{color.black.300}",
               "type": "color"
             }
