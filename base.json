@@ -2175,8 +2175,17 @@
               "type": "color"
             },
             "background-hover": {
-              "value": "{color.black.200}",
-              "type": "color"
+              "value": "{color.black.900}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": "0.12",
+                    "space": "hsl"
+                  }
+                }
+              }
             },
             "background-active": {
               "value": "{color.black.300}",
