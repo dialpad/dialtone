@@ -2184,7 +2184,7 @@
             }
           }
         },
-        "active-row": {
+        "selected-row": {
           "color": {
             "foreground": {
               "value": "{color.text.primary}",
