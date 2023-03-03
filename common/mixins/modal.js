@@ -69,6 +69,7 @@ export default {
      * @param {bool} includeNegativeTabIndex - will include tabindex="-1" in the list of focusable elements.
      */
     _getFocusableElements (el = this.$el, includeNegativeTabIndex = false) {
+      if (!el) return [];
       const focusableContent = [...el.querySelectorAll(focusableElementsList)];
       return focusableContent.filter((fc) => {
         const style = window.getComputedStyle(fc);
