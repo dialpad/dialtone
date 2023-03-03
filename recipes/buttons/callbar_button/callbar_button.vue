@@ -137,9 +137,8 @@ export default {
     buttonWidth () {
       switch (this.buttonWidthSize) {
         case 'sm':
-        case 'md':
           return '4.5rem';
-        case 'lg':
+        case 'md':
           return '6rem';
         default:
           return '8.4rem';

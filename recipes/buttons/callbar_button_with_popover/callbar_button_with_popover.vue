@@ -259,7 +259,7 @@ export default {
     },
 
     isCompactMode () {
-      return this.buttonWidthSize === 'sm' || this.buttonWidthSize === 'md';
+      return this.buttonWidthSize === 'sm';
     },
   },
 
