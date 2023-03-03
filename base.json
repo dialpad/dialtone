@@ -2220,6 +2220,10 @@
             "busy": {
               "value": "{color.gold.300}",
               "type": "color"
+            },
+            "offline": {
+              "value": "{color.neutral.white}",
+              "type": "color"
             }
           }
         }
