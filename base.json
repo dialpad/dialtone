@@ -3178,7 +3178,8 @@
         "theme.presence.color.background.busy-unavailable": "S:376ebc7fe1c6d7ce82d9ee7cac49388c37a4dae6,",
         "theme.presence.color.background.busy": "S:77459b06523349c688cb2680076590e8561b39ba,",
         "theme.mention.color.foreground": "S:10e463b34d13982f11ef5c519d28a79713f8a6c0,",
-        "theme.mention.color.background": "S:df52dd0ba4340ab7651658162f5278e951f1b4a1,"
+        "theme.mention.color.background": "S:df52dd0ba4340ab7651658162f5278e951f1b4a1,",
+        "theme.presence.color.background.offline": "S:483870a3444c0387e3f59f0ff3da9e433d511248,"
       }
     }
   ],
