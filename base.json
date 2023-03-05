@@ -2124,7 +2124,7 @@
           "inverted": {
             "outlined": {
               "default": {
-                "value": "{color.neutral.white}",
+                "value": "{color.black.900}",
                 "type": "color"
               }
             }
