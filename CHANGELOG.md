@@ -1,3 +1,17 @@
+# [2.64.0](https://github.com/dialpad/dialtone-vue/compare/v2.63.0...v2.64.0) (2023-03-06)
+
+
+### Bug Fixes
+
+* adjust callbar button width for size ([#794](https://github.com/dialpad/dialtone-vue/issues/794)) ([c04c1a7](https://github.com/dialpad/dialtone-vue/commit/c04c1a7ad09b753a38568ce5dc2b5dcc619ddc25))
+* **Leftbar:** dnd style ([#792](https://github.com/dialpad/dialtone-vue/issues/792)) ([c30f4b9](https://github.com/dialpad/dialtone-vue/commit/c30f4b9c4c8cfad4bb62c69344bedd5c99678c4e))
+* **Popover:** protect against an undefined focus element ([#797](https://github.com/dialpad/dialtone-vue/issues/797)) ([f880e76](https://github.com/dialpad/dialtone-vue/commit/f880e76fe007b781532c0b81886203dc82f2f929))
+
+
+### Features
+
+* **Leftbar Contact Row:** add contact row ([#796](https://github.com/dialpad/dialtone-vue/issues/796)) ([4c2e292](https://github.com/dialpad/dialtone-vue/commit/4c2e2923e83cc96d1f0ba7acb627d275d2a1c941))
+
 # [2.63.0](https://github.com/dialpad/dialtone-vue/compare/v2.62.0...v2.63.0) (2023-03-02)
 
 
