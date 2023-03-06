@@ -1866,7 +1866,7 @@
         },
         "border": {
           "default": {
-            "value": "rgba($color.black.900, 0.09)",
+            "value": "rgba($color.black.900, 0.1)",
             "type": "color"
           },
           "focus": {
