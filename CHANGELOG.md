@@ -1,3 +1,24 @@
+# [3.47.0](https://github.com/dialpad/dialtone-vue/compare/v3.46.2...v3.47.0) (2023-03-06)
+
+
+### Bug Fixes
+
+* adjust callbar button width for size ([#795](https://github.com/dialpad/dialtone-vue/issues/795)) ([89f0d0a](https://github.com/dialpad/dialtone-vue/commit/89f0d0a7482523a375b68f684a0352d66a2f7c8b))
+* **Combobox:** popover close on scroll ([#788](https://github.com/dialpad/dialtone-vue/issues/788)) ([4cbd355](https://github.com/dialpad/dialtone-vue/commit/4cbd355832d0945169c5bd2bd9dec5475abd18c2))
+* **Popover:** protect against an undefined focus element ([#798](https://github.com/dialpad/dialtone-vue/issues/798)) ([0a6c223](https://github.com/dialpad/dialtone-vue/commit/0a6c223dea7241d2bfc0b38000b239a3ff7f04ac))
+
+
+### Features
+
+* DP-59900 Add `buttonWidthSize` prop ([0bc6d6a](https://github.com/dialpad/dialtone-vue/commit/0bc6d6ac6fdd57f824a63cb5ebdb1746d0c2f10d))
+* **Leftbar Contact Row:** add contact row ([#799](https://github.com/dialpad/dialtone-vue/issues/799)) ([29ba4b6](https://github.com/dialpad/dialtone-vue/commit/29ba4b6aee7062552e81873f0996f0262b305b62))
+* **Leftbar General Row:** add hasUnreads prop ([de6c2da](https://github.com/dialpad/dialtone-vue/commit/de6c2da31e859b22c9a61fde0c525490c6c7c8c7))
+* **Leftbar General Row:** additional styles ([#791](https://github.com/dialpad/dialtone-vue/issues/791)) ([b48a651](https://github.com/dialpad/dialtone-vue/commit/b48a6519657dcb9522f146d02e20c0443e9737d6))
+* **Leftbar:** add group row recipe ([#781](https://github.com/dialpad/dialtone-vue/issues/781)) ([b10ea96](https://github.com/dialpad/dialtone-vue/commit/b10ea96f5ee973473897739281a4fbefaa0e4d9d))
+* **Leftbar:** dnd style vue3 ([#793](https://github.com/dialpad/dialtone-vue/issues/793)) ([a1146cf](https://github.com/dialpad/dialtone-vue/commit/a1146cf5c13051c701188b6495b4b13d732fdb1e))
+* **Leftbar:** update text-overflow style ([#790](https://github.com/dialpad/dialtone-vue/issues/790)) ([90d25d7](https://github.com/dialpad/dialtone-vue/commit/90d25d791689ea9b02bee5fa419a9aa2bd90f0aa))
+* **Theme:** update sidebar theme vars vue3 ([#783](https://github.com/dialpad/dialtone-vue/issues/783)) ([476adf3](https://github.com/dialpad/dialtone-vue/commit/476adf3998ae9041f989179609a10e279b01754c))
+
 ## [3.46.2](https://github.com/dialpad/dialtone-vue/compare/v3.46.1...v3.46.2) (2023-02-24)
 
 
