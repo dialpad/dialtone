@@ -2,6 +2,7 @@
 import { DtEmoji } from '../emoji';
 import { findEmojis, findShortCodes } from '@/common/emoji';
 import { h } from 'vue';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 
 /**
  * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
@@ -23,6 +24,15 @@ export default {
     elementType: {
       type: String,
       default: 'div',
+    },
+
+    /**
+     * The icon size to render the emojis at: 100 to 800
+     */
+    size: {
+      type: String,
+      default: '500',
+      validator: (t) => Object.keys(ICON_SIZE_MODIFIERS).includes(t),
     },
   },
 
@@ -46,7 +56,7 @@ export default {
       const split = textContent.split(regexp);
       return split.map((item) => {
         if (replaceList.includes(item)) {
-          return h(DtEmoji, { ...this.$attrs, class: 'd-mx4 d-d-inline-block', code: item });
+          return h(DtEmoji, { ...this.$attrs, class: 'd-mx4 d-d-inline-block', size: this.size, code: item });
         }
         return item;
       });

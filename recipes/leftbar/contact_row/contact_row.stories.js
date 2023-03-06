@@ -1,35 +1,35 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeGroupRow from './group_row';
-import DtRecipeGroupRowMdx from './group_row.mdx';
-import DtRecipeGroupRowDefaultTemplate from './group_row_default.story.vue';
-import DtRecipeGroupRowVariantsTemplate from './group_row_variants.story.vue';
+import DtRecipeContactRow from './contact_row';
+import DtRecipeContactRowMdx from './contact_row.mdx';
+import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
+import DtRecipeContactRowVariantsTemplate from './contact_row_variants.story.vue';
+import { PRESENCE_STATES_LIST } from '@/components/presence/presence_constants';
 const defaultImage = require('@/components/avatar/person.png');
 
 // Default Prop Values
 export const argsData = {
   onClick: action('click'),
+  onCall: action('call'),
 };
 
 export const argTypesData = {
   // Props
-  groupCount: {
-    defaultValue: 8,
-  },
 
-  names: {
-    defaultValue: 'Jaqueline Nackos, Lori Smith',
-  },
-
-  avatarInitials: {
-    defaultValue: 'JN',
+  name: {
+    defaultValue: 'Jaqueline Nackos',
   },
 
   avatarSrc: {
     defaultValue: defaultImage,
   },
 
-  // Slots
+  avatarPresence: {
+    control: {
+      type: 'select',
+      options: [...PRESENCE_STATES_LIST],
+    },
+  },
 
   // Action Event Handlers
   onClick: {
@@ -38,7 +38,21 @@ export const argTypesData = {
     },
   },
 
+  onCall: {
+    table: {
+      disable: true,
+    },
+  },
+
   click: {
+    description: 'Native click event for the entire row',
+    table: {
+      type: { summary: 'event' },
+      category: 'events',
+    },
+  },
+
+  call: {
     table: {
       type: { summary: 'event' },
     },
@@ -51,8 +65,8 @@ const decorator = () => ({
 
 // Story Collection
 export default {
-  title: 'Recipes/Leftbar/Group Row',
-  component: DtRecipeGroupRow,
+  title: 'Recipes/Leftbar/Contact Row',
+  component: DtRecipeContactRow,
   args: argsData,
   argTypes: argTypesData,
   decorators: [decorator],
@@ -62,7 +76,7 @@ export default {
       sort: 'requiredFirst',
     },
     docs: {
-      page: DtRecipeGroupRowMdx,
+      page: DtRecipeContactRowMdx,
     },
     options: {
       showPanel: true,
@@ -71,12 +85,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtRecipeGroupRowDefaultTemplate);
-const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtRecipeGroupRowVariantsTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtRecipeContactRowDefaultTemplate);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtRecipeContactRowVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};

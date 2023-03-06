@@ -20,14 +20,18 @@
         </slot>
       </div>
       <div class="dt-leftbar-row__label">
-        <dt-emoji-text-wrapper
-          class="dt-leftbar-row__description"
-          data-qa="dt-leftbar-row-description"
-        >
-          {{ description }}
-        </dt-emoji-text-wrapper>
+        <slot name="label">
+          <dt-emoji-text-wrapper
+            class="dt-leftbar-row__description"
+            data-qa="dt-leftbar-row-description"
+          >
+            {{ description }}
+          </dt-emoji-text-wrapper>
+        </slot>
       </div>
-      <div class="dt-leftbar-row__omega">
+      <div
+        class="dt-leftbar-row__omega"
+      >
         <div
           v-if="dndText"
           class="dt-leftbar-row__dnd"
@@ -53,6 +57,30 @@
         </dt-badge>
       </div>
     </button>
+    <div
+      v-if="hasCallButton"
+      class="dt-leftbar-row__action"
+      data-qa="dt-leftbar-row-action"
+    >
+      <dt-button
+        class="dt-leftbar-row__action-button"
+        data-qa="dt-leftbar-row-action-call-button"
+        circle
+        size="xs"
+        kind="inverted"
+        @focus="actionFocused = true"
+        @blur="actionFocused = false"
+        @mouseout="actionFocused = false"
+        @click.stop="$emit('call', $event)"
+      >
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="200"
+          />
+        </template>
+      </dt-button>
+    </div>
   </div>
 </template>
 
@@ -64,8 +92,10 @@ import {
 } from './general_row_constants.js';
 import { DtBadge } from '@/components/badge';
 import { DtIcon } from '@/components/icon';
+import { DtButton } from '@/components/button';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
+import { extractVueListeners } from '@/common/utils';
 
 export default {
   name: 'DtRecipeGeneralRow',
@@ -74,6 +104,7 @@ export default {
     DtEmojiTextWrapper,
     DtBadge,
     DtIcon,
+    DtButton,
     DtRecipeLeftbarGeneralRowIcon,
   },
 
@@ -112,7 +143,8 @@ export default {
     },
 
     /**
-     * Styles the row with an increased font weight to convey it has unreads
+     * Styles the row with an increased font weight to convey it has unreads. This must be true to see
+     * the unread count badge.
      */
     hasUnreads: {
       type: Boolean,
@@ -159,17 +191,42 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+     * Whether the row should have a call button. Usually only applicable to individual contact rows.
+     */
+    hasCallButton: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  emits: [
+    /**
+     * Call button clicked
+     *
+     * @event call
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'call',
+  ],
+
+  data () {
+    return {
+      actionFocused: false,
+    };
   },
 
   computed: {
     leftbarGeneralRowClasses () {
       return [
         'dt-leftbar-row',
-        'dt-leftbar-row--no-action',
         {
+          'dt-leftbar-row--no-action': !this.hasCallButton,
           'dt-leftbar-row--has-unread': this.hasUnreads,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,
+          'dt-leftbar-row--action-focused': this.actionFocused,
         },
       ];
     },
@@ -184,6 +241,10 @@ export default {
           break;
       }
       return this.type;
+    },
+
+    generalRowListeners () {
+      return extractVueListeners(this.$attrs);
     },
   },
 
