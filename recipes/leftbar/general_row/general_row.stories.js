@@ -12,6 +12,7 @@ import {
 // Default Prop Values
 export const argsData = {
   onClick: action('click'),
+  onCall: action('call'),
 };
 
 export const argTypesData = {
@@ -52,8 +53,19 @@ export const argTypesData = {
     },
   },
 
+  onCall: {
+    table: {
+      disable: true,
+    },
+  },
+
   click: {
-    description: 'Native click event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  call: {
     table: {
       type: { summary: 'event' },
     },

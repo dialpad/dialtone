@@ -9,7 +9,7 @@
           avatar-initials="JN"
           :group-count="2"
           names="Jaqueline Nackos, Lori Smith"
-          :avatar-src="avatarSrc"
+          :avatar-src="defaultImage"
         />
       </div>
       <div>
@@ -20,7 +20,7 @@
           avatar-initials="JN"
           :group-count="4"
           names="Jaqueline Nackos, Lori Smith, Jaqueline Nackos, Lori Smith"
-          :avatar-src="avatarSrc"
+          :avatar-src="defaultImage"
         />
       </div>
       <div>
@@ -31,7 +31,7 @@
           avatar-initials="JN"
           :group-count="2"
           names="Jaqueline Nackos, Lori Smith"
-          :avatar-src="avatarSrc"
+          :avatar-src="defaultImage"
           unread-count="1"
         />
       </div>
@@ -43,7 +43,7 @@
           avatar-initials="JN"
           :group-count="2"
           names="Jaqueline Nackos, Lori Smith"
-          :avatar-src="avatarSrc"
+          :avatar-src="defaultImage"
           selected
         />
       </div>
@@ -65,9 +65,15 @@
 <script>
 import DtRecipeGroupRow from './group_row';
 import { DtStack } from '@/components/stack';
+const defaultImage = require('@/components/avatar/person.png');
 
 export default {
   name: 'DtRecipeGroupRowVariants',
   components: { DtRecipeGroupRow, DtStack },
+  data () {
+    return {
+      defaultImage,
+    };
+  },
 };
 </script>

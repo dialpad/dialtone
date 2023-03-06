@@ -1,6 +1,7 @@
 <script>
 import { DtEmoji } from '../emoji';
 import { findEmojis, findShortCodes } from '@/common/emoji';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 
 /**
  * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
@@ -22,6 +23,15 @@ export default {
     elementType: {
       type: String,
       default: 'div',
+    },
+
+    /**
+     * The icon size to render the emojis at: 100 to 800
+     */
+    size: {
+      type: String,
+      default: '500',
+      validator: (t) => Object.keys(ICON_SIZE_MODIFIERS).includes(t),
     },
   },
 
@@ -47,7 +57,7 @@ export default {
         if (replaceList.includes(item)) {
           return this.$createElement(DtEmoji, {
             attrs: { class: 'd-mx4 d-d-inline-block' },
-            props: { code: item, ...this.$attrs },
+            props: { code: item, size: this.size, ...this.$attrs },
           });
         }
         return item;

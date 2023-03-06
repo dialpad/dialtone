@@ -10,6 +10,7 @@
     :active-voice-chat="activeVoiceChat"
     :dnd-text="dndText"
     @click="onClick"
+    @call="onCall"
   />
 </template>
 
