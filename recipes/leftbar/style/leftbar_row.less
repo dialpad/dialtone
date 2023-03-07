@@ -8,7 +8,7 @@
   //  $   CSS CUSTOM PROPERTIES
   //  ----------------------------------------------------------------------------
   --leftbar-row-color-foreground: var(--theme-sidebar-color);
-  --leftbar-row-color-background: transparent;
+  --leftbar-row-color-background: var(--theme-sidebar-row-color-background);
   --leftbar-row-radius: 100em;
   --leftbar-row-opacity: 100%;
   --leftbar-row-alpha-color-foreground: var(--theme-sidebar-icon-color);
@@ -47,6 +47,15 @@
     --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
   }
 
+  &:hover {
+    .d-presence {
+      --presence-color-border-base: var(--theme-sidebar-selected-row-color-background);
+    }
+    .d-avatar__count {
+      --avatar-count-color-shadow: var(--theme-sidebar-selected-row-color-background);
+    }
+  }
+
   &--has-unread {
     --leftbar-row-description-font-weight: var(--fw-bold);
     --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foreground);
@@ -61,10 +70,10 @@
   }
 
   &--selected {
-    --leftbar-row-color-background: var(--theme-sidebar-active-row-color-background);
-    --leftbar-row-color-foreground: var(--theme-sidebar-active-row-color);
+    --leftbar-row-color-background: var(--theme-sidebar-selected-row-color-background);
+    --leftbar-row-color-foreground: var(--theme-sidebar-selected-row-color);
     .d-avatar__count {
-      --avatar-count-color-shadow: var(--theme-sidebar-active-row-color-background);
+      --avatar-count-color-shadow: var(--theme-sidebar-selected-row-color-background);
     }
   }
 
@@ -111,7 +120,7 @@
     }
 
     &:active {
-      --leftbar-row-color-background: var(--theme-sidebar-active-row-color-background);
+      --leftbar-row-color-background: var(--theme-sidebar-row-color-background-active);
     }
 
     &:focus-visible {
