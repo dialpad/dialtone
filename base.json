@@ -3220,7 +3220,9 @@
         "color.border.warning-subtle": "S:0842807439a33a0aa94c7bf93c1b603c3bd2a762,",
         "color.border.warning-strong": "S:4028347a1c92140afe59df77c102a08914a94e66,",
         "color.border.brand-subtle": "S:c8d412f2f80888f03dfca1526eb07fed80350975,",
-        "color.border.brand-strong": "S:b7e238f4853270c8f129eb062aaf67a4de42dc84,"
+        "color.border.brand-strong": "S:b7e238f4853270c8f129eb062aaf67a4de42dc84,",
+        "color.text.critical-strong": "S:10b9ebd49873a5371a8a90ea101c3b346ea7e6d1,",
+        "color.text.success-strong": "S:e76a14e3ba907c5a3fb24618a50c839fcce19cfc,"
       }
     },
     {
