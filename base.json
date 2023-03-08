@@ -3440,7 +3440,15 @@
         "color.surface.success-subtle": "S:5a3e0730f750203da318b654b4a19af8aba1e013,",
         "color.surface.success-strong": "S:3ca1675d875002e4d51c4572a4b3959a291932fd,",
         "color.surface.info-subtle": "S:b366a1b092c79ab8c7daad8fb26e1fbb3adbfe5b,",
-        "color.surface.info-strong": "S:6683f5b5fdf3c18c27aa140a382796371f5c709b,"
+        "color.surface.info-strong": "S:6683f5b5fdf3c18c27aa140a382796371f5c709b,",
+        "color.border.critical-subtle": "S:05c27de245d8cd2eccab6752e4bb0745d3a53169,",
+        "color.border.critical-strong": "S:3890217d52dbf7e3937a2792d7b9c625a29846f8,",
+        "color.border.success-subtle": "S:675dd144f259fb5457eb1e185c93fbbc01408565,",
+        "color.border.success-strong": "S:e3bbad342ab72f1925df7f1158b132aa4b954f86,",
+        "color.border.warning-subtle": "S:004851474985c6d0cd3965590a0cd11538effdf4,",
+        "color.border.warning-strong": "S:d9d3a7ff5d369d8fa2dd0241a108d3b501ea2d63,",
+        "color.border.brand-subtle": "S:f7c664055b7c36e87a2dcd4c3cca6c042dde1593,",
+        "color.border.brand-strong": "S:0a5cdcdcf2eb9ba076294b36e4cfa3635f2b5999,"
       }
     }
   ],
