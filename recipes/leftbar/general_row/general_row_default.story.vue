@@ -10,6 +10,7 @@
     :active-voice-chat="activeVoiceChat"
     :dnd-text="dndText"
     :is-typing="isTyping"
+    :call-button-tooltip="callButtonTooltip"
     @click="onClick"
     @call="onCall"
   />

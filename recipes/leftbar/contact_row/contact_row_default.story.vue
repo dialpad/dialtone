@@ -12,6 +12,7 @@
     :selected="selected"
     :no-initials="noInitials"
     :is-typing="isTyping"
+    :call-button-tooltip="callButtonTooltip"
     @click="onClick"
     @call="onCall"
   />

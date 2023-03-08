@@ -7,6 +7,7 @@
     :has-call-button="true"
     :muted="muted"
     :is-typing="isTyping"
+    :call-button-tooltip="callButtonTooltip"
     v-on="$listeners"
   >
     <template #left>
@@ -182,6 +183,14 @@ export default {
     isTyping: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Text shown when the call button is hovered.
+     */
+    callButtonTooltip: {
+      type: String,
+      default: '',
     },
   },
 

@@ -74,24 +74,31 @@
       class="dt-leftbar-row__action"
       data-qa="dt-leftbar-row-action"
     >
-      <dt-button
-        class="dt-leftbar-row__action-button"
-        data-qa="dt-leftbar-row-action-call-button"
-        circle
-        size="xs"
-        kind="inverted"
-        @focus="actionFocused = true"
-        @blur="actionFocused = false"
-        @mouseleave="actionFocused = false"
-        @click.stop="$emit('call', $event)"
+      <dt-tooltip
+        :message="callButtonTooltip"
+        placement="top"
       >
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="200"
-          />
+        <template #anchor>
+          <dt-button
+            class="dt-leftbar-row__action-button"
+            data-qa="dt-leftbar-row-action-call-button"
+            circle
+            size="xs"
+            kind="inverted"
+            @focus="actionFocused = true"
+            @blur="actionFocused = false"
+            @mouseleave="actionFocused = false"
+            @click.stop="$emit('call', $event)"
+          >
+            <template #icon>
+              <dt-icon
+                name="phone"
+                size="200"
+              />
+            </template>
+          </dt-button>
         </template>
-      </dt-button>
+      </dt-tooltip>
     </div>
   </div>
 </template>
@@ -105,6 +112,7 @@ import {
 import { DtBadge } from '@/components/badge';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
+import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 
@@ -116,6 +124,7 @@ export default {
     DtBadge,
     DtIcon,
     DtButton,
+    DtTooltip,
     DtRecipeLeftbarGeneralRowIcon,
   },
 
@@ -172,6 +181,14 @@ export default {
     },
 
     /**
+     * Text shown when the unread count is hovered.
+     */
+    unreadCountTooltip: {
+      type: String,
+      default: null,
+    },
+
+    /**
      * Determines if the row is selected
      */
     selected: {
@@ -205,11 +222,27 @@ export default {
     },
 
     /**
+     * Text shown in tooltip when you hover the dndText
+     */
+    dndTextTooltip: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Whether the row should have a call button. Usually only applicable to individual contact rows.
      */
     hasCallButton: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Text shown when the call button is hovered.
+     */
+    callButtonTooltip: {
+      type: String,
+      default: '',
     },
 
     /**
