@@ -1396,16 +1396,86 @@
           "type": "color",
           "description": "danger, error"
         },
+        "critical-subtle": {
+          "value": "{color.red.100}",
+          "type": "color",
+          "description": "danger, error",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "critical-strong": {
+          "value": "{color.red.400}",
+          "type": "color",
+          "description": "danger, error"
+        },
         "warning": {
           "value": "{color.gold.100}",
+          "type": "color"
+        },
+        "warning-subtle": {
+          "value": "{color.gold.100}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "warning-strong": {
+          "value": "{color.gold.500}",
           "type": "color"
         },
         "success": {
           "value": "{color.green.100}",
           "type": "color"
         },
+        "success-subtle": {
+          "value": "{color.green.100}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "success-strong": {
+          "value": "{color.green.400}",
+          "type": "color"
+        },
         "info": {
           "value": "{color.blue.100}",
+          "type": "color"
+        },
+        "info-subtle": {
+          "value": "{color.blue.100}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".4",
+                "space": "lch"
+              }
+            }
+          }
+        },
+        "info-strong": {
+          "value": "{color.blue.400}",
           "type": "color"
         }
       },
