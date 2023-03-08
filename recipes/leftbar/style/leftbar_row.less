@@ -82,6 +82,40 @@
     --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
   }
 
+  &--typing {
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: var(--br-pill);
+    opacity: 0.75;
+  }
+
+  &--typing span {
+    transition: all 500ms ease;
+    background: var(--white);
+    height: 4px;
+    width: 4px;
+    display: inline-block;
+    padding: 0;
+    opacity: 0.3;
+    border-radius: var(--br-pill);
+    animation: wave 1.5s ease  infinite;
+  }
+
+  &--typing span:nth-child(1){
+      animation-delay: 0;
+  }
+  &--typing span:nth-child(2){
+    animation-delay: 100ms;
+  }
+  &--typing span:nth-child(3){
+    animation-delay: 200ms;
+  }
+
   //  ============================================================================
   //  $   ACTIONABLE ELEMENTS
   //  ----------------------------------------------------------------------------
@@ -280,4 +314,18 @@
 @keyframes opacity-pulsate {
   0%, 100%   {opacity: 0.2;}
   50%  {opacity: 1;}
+}
+
+
+
+
+
+@keyframes wave{
+  0%, 50%, 100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(0, -5px);
+    opacity:90%;
+  }
 }

@@ -14,11 +14,18 @@
       >
         <slot name="left">
           <dt-recipe-leftbar-general-row-icon
+            :class="{ 'd-o50': isTyping }"
             :type="getIcon"
             :color="color"
             data-qa="dt-leftbar-row-icon"
           />
         </slot>
+        <div
+          v-if="isTyping"
+          class="dt-leftbar-row--typing d-bgc-black-600"
+        >
+          <span /><span /><span />
+        </div>
       </div>
       <div class="dt-leftbar-row__label">
         <slot name="label">
@@ -196,6 +203,14 @@ export default {
      * Whether the row should have a call button. Usually only applicable to individual contact rows.
      */
     hasCallButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Shows an "is typing" animation over the avatar when true.
+     */
+    isTyping: {
       type: Boolean,
       default: false,
     },

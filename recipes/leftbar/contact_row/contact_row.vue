@@ -5,6 +5,7 @@
     :selected="selected"
     :has-call-button="true"
     :muted="muted"
+    :is-typing="isTyping"
     v-on="$listeners"
   >
     <template #left>
@@ -170,6 +171,14 @@ export default {
      * Initials will never be shown. Instead it will show a "User" icon.
      */
     noInitials: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Shows an "is typing" animation over the avatar when true.
+     */
+    isTyping: {
       type: Boolean,
       default: false,
     },

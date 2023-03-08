@@ -9,6 +9,7 @@
     :muted="muted"
     :active-voice-chat="activeVoiceChat"
     :dnd-text="dndText"
+    :is-typing="isTyping"
     @click="onClick"
     @call="onCall"
   />

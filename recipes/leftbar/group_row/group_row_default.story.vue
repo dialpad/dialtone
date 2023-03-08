@@ -7,6 +7,7 @@
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
     :selected="selected"
+    :is-typing="isTyping"
     @click="onClick"
   />
 </template>

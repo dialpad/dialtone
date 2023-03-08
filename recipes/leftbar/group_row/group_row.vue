@@ -4,6 +4,7 @@
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
     :selected="selected"
+    :is-typing="isTyping"
     v-on="$listeners"
   >
     <template #left>
@@ -91,6 +92,14 @@ export default {
      * Determines if the row is selected
      */
     selected: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Shows an "is typing" animation over the avatar when true.
+     */
+    isTyping: {
       type: Boolean,
       default: false,
     },

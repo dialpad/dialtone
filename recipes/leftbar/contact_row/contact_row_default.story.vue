@@ -11,6 +11,7 @@
     :muted="muted"
     :selected="selected"
     :no-initials="noInitials"
+    :is-typing="isTyping"
     @click="onClick"
     @call="onCall"
   />
