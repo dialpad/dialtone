@@ -28,7 +28,6 @@
   --leftbar-row-action-width: calc(var(--size-300) * 6);
   --leftbar-row-action-height: var(--leftbar-row-action-width);
 
-
   //  ============================================================================
   //  $   BASE STYLE
   //  ----------------------------------------------------------------------------
@@ -82,9 +81,11 @@
     --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
   }
 
-  &--typing {
-    height: 24px;
-    width: 24px;
+  &__is-typing {
+    --is-typing-size-shape: calc(var(--size-300) * 6);
+
+    height: var(--is-typing-size-shape);
+    width: var(--is-typing-size-shape);
     position: absolute;
     display: flex;
     align-items: center;
@@ -94,7 +95,7 @@
     opacity: 0.75;
   }
 
-  &--typing span {
+  &__is-typing span {
     transition: all 500ms ease;
     background: var(--white);
     height: 4px;
@@ -106,13 +107,13 @@
     animation: wave 1.5s ease  infinite;
   }
 
-  &--typing span:nth-child(1){
+  &__is-typing span:nth-child(1){
       animation-delay: 0;
   }
-  &--typing span:nth-child(2){
+  &__is-typing span:nth-child(2){
     animation-delay: 100ms;
   }
-  &--typing span:nth-child(3){
+  &__is-typing span:nth-child(3){
     animation-delay: 200ms;
   }
 

@@ -22,7 +22,7 @@
         </slot>
         <div
           v-if="isTyping"
-          class="dt-leftbar-row--typing d-bgc-black-600"
+          class="dt-leftbar-row__is-typing d-bgc-black-600"
         >
           <span /><span /><span />
         </div>
