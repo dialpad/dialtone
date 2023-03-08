@@ -12,7 +12,16 @@
       <div
         class="dt-leftbar-row__alpha"
       >
-        <slot name="left">
+        <div
+          v-if="isTyping"
+          class="dt-leftbar-row__is-typing"
+        >
+          <span /><span /><span />
+        </div>
+        <slot
+          v-else
+          name="left"
+        >
           <dt-recipe-leftbar-general-row-icon
             :class="{ 'd-o50': isTyping }"
             :type="getIcon"
@@ -20,12 +29,6 @@
             data-qa="dt-leftbar-row-icon"
           />
         </slot>
-        <div
-          v-if="isTyping"
-          class="dt-leftbar-row__is-typing d-bgc-black-600"
-        >
-          <span /><span /><span />
-        </div>
       </div>
       <div class="dt-leftbar-row__label">
         <slot name="label">
