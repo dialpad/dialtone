@@ -9,8 +9,8 @@
         description="Channel name"
         unread-count="29"
       />
-      <div class="d-mt8">
-        Note: the unread count is not limited to 99 or any number so make sure to add the necessary
+      <div class="d-mt8 d-fc-secondary d-fs-100">
+        <strong>Note:</strong> the unread count is not limited to 99 or any number so make sure to add the necessary
         logic to limit the number of unread messages if needed.
       </div>
     </div>
