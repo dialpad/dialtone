@@ -2504,6 +2504,72 @@
           }
         }
       }
+    },
+    "action": {
+      "color": {
+        "foreground": {
+          "base": {
+            "hover": {
+              "value": "{action.color.foreground.base.default}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "lighten",
+                    "value": ".2",
+                    "space": "lch"
+                  }
+                }
+              }
+            }
+          },
+          "critical": {
+            "hover": {
+              "value": "{color.text.critical}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "lighten",
+                    "value": ".25",
+                    "space": "lch"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "background": {
+          "base": {
+            "hover": {
+              "value": "rgba($color.purple.400, 0.10)",
+              "type": "color"
+            },
+            "active": {
+              "value": "rgba($color.purple.400, 0.20)",
+              "type": "color"
+            }
+          },
+          "critical": {
+            "hover": {
+              "value": "rgba($color.red.300, 0.20)",
+              "type": "color"
+            },
+            "active": {
+              "value": "rgba($color.red.300, 0.30)",
+              "type": "color"
+            }
+          },
+          "inverted": {
+            "primary": {
+              "active": {
+                "value": "{color.purple.200}",
+                "type": "color"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components/badge": {
@@ -2904,7 +2970,6 @@
         "badge.color.text.default": "S:435110adbd6717ac61d470d910672f0bf8002f64,",
         "badge.color.text.bulletin": "S:3c32047a4e1eb7aae5dc489f4154d8625f25a8f5,",
         "action.color.foreground.base.default": "S:5cb20ec006c6c8261486d03fe51c2f16056141b0,",
-        "action.color.foreground.base.hover": "S:a206eb0176da3a9f39f857ebea637e3fe23c7844,",
         "action.color.foreground.base.active": "S:eb5ee09c8c0e1c4032dbe78efba6e933667726cc,",
         "action.color.foreground.base.primary.default": "S:19791d27d67d86ba48260dd38d9de2df4fe1864f,",
         "action.color.foreground.critical.default": "S:115f3ac3b3043a254377ea08c5c7486785671467,",
@@ -2916,7 +2981,6 @@
         "action.color.foreground.inverted.active": "S:55781d003da9f19c5347922afdf684b09c702927,",
         "action.color.foreground.inverted.primary.default": "S:72c088b74af509cbc472d9141d6d7c6fb0e3beaa,",
         "action.color.foreground.inverted.primary.hover": "S:bb82903589ee44ac69cb27202a8e676f45cd3705,",
-        "action.color.foreground.inverted.primary.active": "S:c69b0c5c7889f0623fcff11f75cbbe98b4cefa3d,",
         "action.color.foreground.muted.default": "S:9debb0285efc2a331ca8d297e9df0dfb2ba59cc5,",
         "action.color.foreground.muted.hover": "S:a14632321096630c375853c96877f917b8b02e25,",
         "action.color.foreground.muted.active": "S:6fbcb12c9470ae145585e057d45cf2156130ff5b,",
@@ -2964,7 +3028,9 @@
         "theme.presence.color.background.busy": "S:5ea5da0c7b0b7243a85a8a495aa49534d3ce692c,",
         "theme.presence.color.background.offline": "S:17207d636fa99db4d14512ff4fd064a43eca1db2,",
         "theme.mention.color.foreground": "S:75a3b15da839cd90325547cb6a656aed3e6edb1d,",
-        "theme.mention.color.background": "S:f008aeb9fa3a70d5a46d9177bab6aac450f6b6ad,"
+        "theme.mention.color.background": "S:f008aeb9fa3a70d5a46d9177bab6aac450f6b6ad,",
+        "action.color.foreground.base.hover": "S:a206eb0176da3a9f39f857ebea637e3fe23c7844,",
+        "action.color.foreground.inverted.primary.active": "S:c69b0c5c7889f0623fcff11f75cbbe98b4cefa3d,"
       }
     },
     {
