@@ -1433,7 +1433,7 @@
           }
         },
         "warning-strong": {
-          "value": "{color.gold.500}",
+          "value": "{color.gold.200}",
           "type": "color"
         },
         "success": {
