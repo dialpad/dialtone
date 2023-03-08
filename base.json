@@ -3202,7 +3202,15 @@
         "color.surface.success-subtle": "S:105fc6888eb6268cfeaca36f3342b5967073c475,",
         "color.surface.success-strong": "S:fd90566ade3dd2a7ffac512c20c0defcc475571e,",
         "color.surface.info-subtle": "S:ac50bb9c2e412edab245ba0e5c74465baab437b5,",
-        "color.surface.info-strong": "S:0998a9f36b15705bf2583f4c07458ee7d0f02044,"
+        "color.surface.info-strong": "S:0998a9f36b15705bf2583f4c07458ee7d0f02044,",
+        "color.border.critical-subtle": "S:d130efab620d153b2236d97d07552f6cdd0ec4ae,",
+        "color.border.critical-strong": "S:eff161747bccff73f6766edff0ca5b09c7f8b666,",
+        "color.border.success-subtle": "S:e993d31a016753a47c9910f794a70c1c10115092,",
+        "color.border.success-strong": "S:0894e1bdc3268bde8124672b52831770455b8ec1,",
+        "color.border.warning-subtle": "S:0842807439a33a0aa94c7bf93c1b603c3bd2a762,",
+        "color.border.warning-strong": "S:4028347a1c92140afe59df77c102a08914a94e66,",
+        "color.border.brand-subtle": "S:c8d412f2f80888f03dfca1526eb07fed80350975,",
+        "color.border.brand-strong": "S:b7e238f4853270c8f129eb062aaf67a4de42dc84,"
       }
     },
     {
