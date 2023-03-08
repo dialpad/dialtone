@@ -2451,17 +2451,70 @@
           "type": "color",
           "description": "danger, error"
         },
+        "critical-subtle": {
+          "value": "{color.red.100}",
+          "type": "color",
+          "description": "danger, error",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
+        },
         "warning": {
           "value": "{color.gold.100}",
           "type": "color"
+        },
+        "warning-subtle": {
+          "value": "{color.gold.100}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "success": {
           "value": "{color.green.100}",
           "type": "color"
         },
+        "success-subtle": {
+          "value": "{color.green.100}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
+        },
         "info": {
           "value": "{color.blue.100}",
           "type": "color"
+        },
+        "info-subtle": {
+          "value": "{color.blue.100}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".4",
+                "space": "hsl"
+              }
+            }
+          }
         }
       },
       "border": {
