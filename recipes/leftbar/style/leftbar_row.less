@@ -167,18 +167,17 @@
     right: var(--leftbar-row-action-position-right);
     top: var(--leftbar-row-action-position-bottom);
     transform: translateY(calc(var(--leftbar-row-action-position-bottom) * -1));
-    opacity: 0;
-
-    .dt-leftbar-row:hover &,
-    &:focus,
-    &:focus-within {
-      opacity: 1;
-    }
   }
 
   &__action-button {
+    opacity: 0;
     width: var(--leftbar-row-action-width);
     height: var(--leftbar-row-action-height);
+
+    .dt-leftbar-row:hover &,
+    &:focus-visible {
+      opacity: 1;
+    }
   }
 
   //  ============================================================================
