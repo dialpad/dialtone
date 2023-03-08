@@ -1289,8 +1289,18 @@
           "type": "color",
           "description": "critical, danger, error, alert"
         },
+        "critical-strong": {
+          "value": "{color.red.400}",
+          "type": "color",
+          "description": "critical, danger, error, alert"
+        },
         "success": {
-          "value": "{color.green.400}",
+          "value": "{color.green.500}",
+          "type": "color",
+          "description": "positive"
+        },
+        "success-strong": {
+          "value": "{color.green.500}",
           "type": "color",
           "description": "positive"
         },
@@ -3456,7 +3466,9 @@
         "color.border.warning-subtle": "S:004851474985c6d0cd3965590a0cd11538effdf4,",
         "color.border.warning-strong": "S:d9d3a7ff5d369d8fa2dd0241a108d3b501ea2d63,",
         "color.border.brand-subtle": "S:f7c664055b7c36e87a2dcd4c3cca6c042dde1593,",
-        "color.border.brand-strong": "S:0a5cdcdcf2eb9ba076294b36e4cfa3635f2b5999,"
+        "color.border.brand-strong": "S:0a5cdcdcf2eb9ba076294b36e4cfa3635f2b5999,",
+        "color.text.critical-strong": "S:adedc93b5dc4b0b9f251f245774313d1af648c82,",
+        "color.text.success-strong": "S:476216ba4d41203d071fa31b08b9b8595cca5f4b,"
       }
     }
   ],
