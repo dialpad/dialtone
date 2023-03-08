@@ -68,7 +68,7 @@ export default {
      */
     names: {
       type: String,
-      default: '',
+      required: true,
     },
 
     /**

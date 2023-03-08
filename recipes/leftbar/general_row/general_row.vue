@@ -6,6 +6,7 @@
     <button
       class="dt-leftbar-row__primary"
       data-qa="dt-leftbar-row-link"
+      :title="description"
       v-bind="$attrs"
       v-on="$listeners"
     >
@@ -134,11 +135,12 @@ export default {
     },
 
     /**
-     * Text displayed next to the icon
+     * Text displayed next to the icon. Required. Even if you are overriding this field using the label slot
+     * you still must input this as it will be displayed as the "title" attribute for the row.
      */
     description: {
       type: String,
-      default: '',
+      required: true,
     },
 
     /**

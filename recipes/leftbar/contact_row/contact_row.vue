@@ -1,6 +1,7 @@
 <template>
   <dt-recipe-general-row
     :unread-count="unreadCount"
+    :description="name"
     :has-unreads="hasUnreads"
     :selected="selected"
     :has-call-button="true"
