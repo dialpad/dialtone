@@ -1295,7 +1295,7 @@
           "description": "critical, danger, error, alert"
         },
         "success": {
-          "value": "{color.text.success-strong}",
+          "value": "{color.green.400}",
           "type": "color",
           "description": "positive"
         },
