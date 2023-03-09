@@ -2598,7 +2598,7 @@
           "type": "color"
         },
         "critical-strong": {
-          "value": "{color.red.100}",
+          "value": "{color.red.500}",
           "type": "color"
         },
         "success": {
@@ -2610,7 +2610,7 @@
           "type": "color"
         },
         "warning-strong": {
-          "value": "{color.gold.100}",
+          "value": "{color.gold.500}",
           "type": "color"
         },
         "inverted": {
