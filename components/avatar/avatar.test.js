@@ -50,7 +50,6 @@ describe('DtAvatar Tests', function () {
     });
     await wrapper.vm.$nextTick();
     _setChildWrappers();
-    await wrapper.vm.$nextTick();
   };
 
   // Setup
@@ -67,9 +66,9 @@ describe('DtAvatar Tests', function () {
   describe('Presentation Tests', function () {
     describe('When the avatar renders', function () {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         slots = { default: DEFAULT_SLOT };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should exists', function () { assert.exists(wrapper); });
@@ -83,9 +82,7 @@ describe('DtAvatar Tests', function () {
       // Test Setup
       beforeEach(async function () {
         slots = { default: imageSlot };
-        _setWrappers();
-        await wrapper.vm.$nextTick();
-        _setChildWrappers();
+        await _setWrappers();
       });
 
       it('image should exist', function () {
@@ -106,9 +103,9 @@ describe('DtAvatar Tests', function () {
       const icon = '<svg></svg>';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         slots = { default: icon };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('icon slot should exist', function () {
@@ -127,9 +124,7 @@ describe('DtAvatar Tests', function () {
       // Test Setup
       beforeEach(async function () {
         slots = { default: initials };
-        _setWrappers();
-        await wrapper.vm.$nextTick();
-        _setChildWrappers();
+        await _setWrappers();
       });
 
       it('should display initials', function () {
@@ -147,18 +142,16 @@ describe('DtAvatar Tests', function () {
       const initials = 'DP';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         props = {
           ...baseProps,
+          size: 'sm',
         };
         slots = { default: initials };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('shows a single character', async function () {
-        await wrapper.setProps({
-          size: 'sm',
-        });
         assert.strictEqual(wrapper.text(), initials[0]);
       });
     });
@@ -168,18 +161,16 @@ describe('DtAvatar Tests', function () {
       const initials = 'DP';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         props = {
           ...baseProps,
+          size: 'xs',
         };
         slots = { default: initials };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('has no initials', async function () {
-        await wrapper.setProps({
-          size: 'xs',
-        });
         assert.strictEqual(wrapper.text(), '');
       });
     });
@@ -189,13 +180,13 @@ describe('DtAvatar Tests', function () {
       const size = 'lg';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         props = {
           ...baseProps,
           size,
         };
         slots = { default: DEFAULT_SLOT };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should have size variant class on the avatar', function () {
@@ -243,13 +234,13 @@ describe('DtAvatar Tests', function () {
       const gradient = false;
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         props = {
           ...baseProps,
           gradient,
         };
         slots = { default: DEFAULT_SLOT };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should set the correct class', function () {
@@ -261,12 +252,12 @@ describe('DtAvatar Tests', function () {
       const initials = 'DP';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         props = {
           ...baseProps,
         };
         slots = { default: initials };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should not render presence if presence prop is not defined', async function () {
@@ -362,11 +353,11 @@ describe('DtAvatar Tests', function () {
 
       describe('When image src and alt attributes are provided', function () {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(async function () {
           const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
 
           slots = { default: imageSlot };
-          _setWrappers();
+          await _setWrappers();
         });
 
         itBehavesLikeDoesNotRaiseAnyVueWarnings();
@@ -374,11 +365,11 @@ describe('DtAvatar Tests', function () {
 
       describe('When image alt attribute is not provided', function () {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(async function () {
           const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" data-qa="dt-avatar-image">`;
 
           slots = { default: imageSlot };
-          _setWrappers();
+          await _setWrappers();
         });
 
         itBehavesLikeRaisesVueWarning(warningMessage);
@@ -386,11 +377,11 @@ describe('DtAvatar Tests', function () {
 
       describe('When image src attribute is not provided', function () {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(async function () {
           const imageSlot = `<img alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
 
           slots = { default: imageSlot };
-          _setWrappers();
+          await _setWrappers();
         });
 
         itBehavesLikeRaisesVueWarning(warningMessage);
@@ -404,10 +395,10 @@ describe('DtAvatar Tests', function () {
     const customClass = 'my-custom-class';
 
     // Helpers
-    const _setupChildClassTest = (childClassName, selector) => {
+    const _setupChildClassTest = async (childClassName, selector) => {
       props[childClassName] = customClass;
       slots = { default: DEFAULT_SLOT };
-      _setWrappers();
+      await _setWrappers();
       element = wrapper.find(selector);
     };
 
@@ -420,7 +411,9 @@ describe('DtAvatar Tests', function () {
 
     describe('When an avatar class is provided', function () {
       // Test Setup
-      beforeEach(function () { _setupChildClassTest('avatarClass', '[data-qa="dt-avatar"]'); });
+      beforeEach(async function () {
+        await _setupChildClassTest('avatarClass', '[data-qa="dt-avatar"]');
+      });
 
       itBehavesLikeAppliesClassToChildLocal();
     });

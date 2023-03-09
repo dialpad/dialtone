@@ -11,6 +11,7 @@ import {
 const seedrandom = require('seedrandom');
 
 let UNIQUE_ID_COUNTER = 0;
+let TIMER;
 
 // selector to find focusable not hidden inputs
 const FOCUSABLE_SELECTOR_NOT_HIDDEN = 'input:not([type=hidden]):not(:disabled)';
@@ -142,8 +143,7 @@ export function hasSlotContent (slot, slotProps = {}) {
  * @returns {string}
  */
 export const kebabCaseToPascalCase = (string) => {
-  return string
-    .toLowerCase()
+  return string?.toLowerCase()
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join('');
@@ -166,6 +166,16 @@ export const extractVueListeners = (attrs) => {
   return Object.fromEntries(listeners);
 };
 
+/*
+* Set's a global timer to debounce the execution of a function.
+* @param { object } func - the function that is going to be called after timeout
+* @param { number } [timeout=300] timeout
+* */
+export function debounce (func, timeout = 300) {
+  clearTimeout(TIMER);
+  TIMER = setTimeout(func, timeout);
+}
+
 export default {
   getUniqueString,
   getRandomElement,
@@ -177,4 +187,5 @@ export default {
   flushPromises,
   kebabCaseToPascalCase,
   extractVueListeners,
+  debounce,
 };

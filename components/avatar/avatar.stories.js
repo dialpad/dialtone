@@ -87,6 +87,7 @@ const defaultImage = require('./person.png');
 export const Image = DefaultTemplate.bind({});
 Image.args = {
   default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
+  initials: 'PS',
 };
 export const Icon = IconTemplate.bind({});
 Icon.args = {
