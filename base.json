@@ -2801,7 +2801,7 @@
       "color": {
         "background": {
           "default": {
-            "value": "{color.neutral.black}",
+            "value": "{color.black.400}",
             "type": "color"
           }
         }
