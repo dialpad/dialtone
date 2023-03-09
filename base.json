@@ -2597,12 +2597,20 @@
           "value": "{color.red.400}",
           "type": "color"
         },
+        "critical-strong": {
+          "value": "{color.red.100}",
+          "type": "color"
+        },
         "success": {
           "value": "{color.green.400}",
           "type": "color"
         },
         "warning": {
           "value": "{color.gold.400}",
+          "type": "color"
+        },
+        "warning-strong": {
+          "value": "{color.gold.100}",
           "type": "color"
         },
         "inverted": {
