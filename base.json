@@ -2002,7 +2002,7 @@
             "value": "{color.border.critical}",
             "type": "color"
           },
-          "sucess": {
+          "success": {
             "value": "{color.border.success}",
             "type": "color"
           },
@@ -2662,7 +2662,7 @@
             "value": "{color.border.critical}",
             "type": "color"
           },
-          "sucess": {
+          "success": {
             "value": "{color.border.success}",
             "type": "color"
           },
@@ -3136,7 +3136,6 @@
         "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
         "inputs.color.border.focus": "S:fa04a078de2efd25d134d58afa88b5aae08e4490,",
         "inputs.color.border.critical": "S:cd32e20a14d569696b9deec01dd68b4c3cedb60f,",
-        "inputs.color.border.sucess": "S:22da337b8b256b1ea387e7daec8dd9b1a1025606,",
         "inputs.color.border.warning": "S:a61ba4e58db89699549293ded34c3265b07c07f9,",
         "inputs.color.border.disabled": "S:c3f95ca261811da42f7f0ef3906b741ab9ccaf43,",
         "inputs.color.background.default": "S:a3a877887fba8a8aa1ea5c6cf60bdfca1fa2630e,",
@@ -3235,7 +3234,8 @@
         "color.border.brand-strong": "S:b7e238f4853270c8f129eb062aaf67a4de42dc84,",
         "color.text.critical-strong": "S:10b9ebd49873a5371a8a90ea101c3b346ea7e6d1,",
         "color.text.success-strong": "S:e76a14e3ba907c5a3fb24618a50c839fcce19cfc,",
-        "color.text.inverted.tertiary": "S:45457c63afd11989a87c8274785cb3db117ee0b2,"
+        "color.text.inverted.tertiary": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
+        "inputs.color.border.success": "S:22da337b8b256b1ea387e7daec8dd9b1a1025606,"
       }
     },
     {
@@ -3383,7 +3383,6 @@
         "inputs.color.border.default": "S:b0f8cd6a417a226d49a32825eb576009fd30fe2f,",
         "inputs.color.border.focus": "S:9eb6ff960c65210b3c9cc769e31fea1749e764a8,",
         "inputs.color.border.critical": "S:51d925168049d35ad23cbdce6f3eb895fe419623,",
-        "inputs.color.border.sucess": "S:eb0a10557f0ac90ff041e4c3a54113a2feb2e1a6,",
         "inputs.color.border.warning": "S:176dcea0c6448c5ebcc76c0d973397e87ebfc7e9,",
         "inputs.color.border.disabled": "S:21b360ffd4168a5c804df8ab50eae95b61b8d62e,",
         "inputs.color.background.default": "S:8d3cc918025367adb97ae451183ec26e33703409,",
