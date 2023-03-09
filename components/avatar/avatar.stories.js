@@ -94,6 +94,7 @@ const defaultImage = require('./person.png');
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
+  initials: 'PS',
 };
 
 // TO DO: figure out why Icon.argTypes is causing the controls to not show up in the Initials story when
