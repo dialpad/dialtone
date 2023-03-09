@@ -1,3 +1,10 @@
+# [2.65.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.64.0...v2.65.0-beta.1) (2023-03-09)
+
+
+### Features
+
+* **Theme:** update leftbar theme vars ([#800](https://github.com/dialpad/dialtone-vue/issues/800)) ([62898a6](https://github.com/dialpad/dialtone-vue/commit/62898a67d96ad0d56f254fdbc9607d71f8a453ea))
+
 # [2.64.0](https://github.com/dialpad/dialtone-vue/compare/v2.63.0...v2.64.0) (2023-03-06)
 
 
