@@ -1,6 +1,7 @@
 <template>
   <dt-recipe-general-row
     :description="names"
+    :aria-label="`${groupCountText} ${names}`"
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
     :unread-count-tooltip="unreadCountTooltip"
@@ -62,6 +63,14 @@ export default {
     groupCount: {
       type: Number,
       required: true,
+    },
+
+    /**
+     * Screen reader will read out the number of users in the group using this text. Ex: "2 users"
+     */
+    groupCountText: {
+      type: String,
+      default: '',
     },
 
     /**

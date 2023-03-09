@@ -45,6 +45,7 @@
         name="Jaqueline Nackos"
         :avatar-src="defaultImage"
         unread-count="5"
+        unread-count-tooltip="55 unread messages"
         :has-unreads="true"
         call-button-tooltip="Call"
       />

@@ -1,13 +1,14 @@
 <template>
   <dt-recipe-general-row
     :unread-count="unreadCount"
-    :description="name"
+    :description="`${name} ${presenceText} ${userStatus}`"
     :has-unreads="hasUnreads"
     :selected="selected"
     :has-call-button="true"
     :muted="muted"
     :is-typing="isTyping"
     :call-button-tooltip="callButtonTooltip"
+    :unread-count-tooltip="unreadCountTooltip"
     v-on="$listeners"
   >
     <template #left>
@@ -189,6 +190,14 @@ export default {
      * Text shown when the call button is hovered.
      */
     callButtonTooltip: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Text shown when the unread count is hovered.
+     */
+    unreadCountTooltip: {
       type: String,
       default: '',
     },

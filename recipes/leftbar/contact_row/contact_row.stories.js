@@ -9,6 +9,10 @@ const defaultImage = require('@/components/avatar/person.png');
 
 // Default Prop Values
 export const argsData = {
+  callButtonTooltip: 'Call',
+  hasUnreads: true,
+  unreadCount: '55',
+  unreadCountTooltip: '55 unread messages',
   onClick: action('click'),
   onCall: action('call'),
 };

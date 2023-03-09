@@ -2,6 +2,7 @@
   <dt-recipe-group-row
     :avatar-initials="avatarInitials"
     :group-count="groupCount"
+    :group-count-text="groupCountText"
     :names="names"
     :avatar-src="avatarSrc"
     :unread-count="unreadCount"

@@ -5,6 +5,7 @@
     :description="description"
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
+    :aria-label="ariaLabel"
     :unread-count-tooltip="unreadCountTooltip"
     :selected="selected"
     :has-call-button="hasCallButton"

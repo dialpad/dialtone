@@ -11,6 +11,8 @@ import {
 
 // Default Prop Values
 export const argsData = {
+  callButtonTooltip: 'Call',
+  dndTextTooltip: 'Do not Disturb',
   onClick: action('click'),
   onCall: action('call'),
 };

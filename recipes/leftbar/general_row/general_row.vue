@@ -6,6 +6,7 @@
     <button
       class="dt-leftbar-row__primary"
       data-qa="dt-leftbar-row-link"
+      :aria-label="getAriaLabel"
       :title="description"
       v-bind="$attrs"
       v-on="$listeners"
@@ -158,6 +159,14 @@ export default {
     },
 
     /**
+     * Will be read out by a screen reader upon focus of this row. If not defined "description" will be read.
+     */
+    ariaLabel: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Text displayed next to the icon. Required. Even if you are overriding this field using the label slot
      * you still must input this as it will be displayed as the "title" attribute for the row.
      */
@@ -199,7 +208,7 @@ export default {
      */
     unreadCountTooltip: {
       type: String,
-      default: null,
+      default: '',
     },
 
     /**
@@ -316,6 +325,10 @@ export default {
           break;
       }
       return this.type;
+    },
+
+    getAriaLabel () {
+      return this.ariaLabel ? this.ariaLabel : `${this.description} ${this.unreadCountTooltip} ${this.dndTextTooltip}`;
     },
   },
 
