@@ -5,6 +5,7 @@
     :names="names"
     :avatar-src="avatarSrc"
     :unread-count="unreadCount"
+    :unread-count-tooltip="unreadCountTooltip"
     :has-unreads="hasUnreads"
     :selected="selected"
     :is-typing="isTyping"

@@ -3,6 +3,7 @@
     :description="names"
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
+    :unread-count-tooltip="unreadCountTooltip"
     :selected="selected"
     :is-typing="isTyping"
     v-on="$listeners"
@@ -75,6 +76,14 @@ export default {
      * Number of unread messages
      */
     unreadCount: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Text shown when the unread count is hovered.
+     */
+    unreadCountTooltip: {
       type: String,
       default: null,
     },

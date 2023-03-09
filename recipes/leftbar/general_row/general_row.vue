@@ -44,12 +44,19 @@
       <div
         class="dt-leftbar-row__omega"
       >
-        <div
+        <dt-tooltip
           v-if="dndText"
-          class="dt-leftbar-row__dnd"
+          placement="top"
+          :message="dndTextTooltip"
         >
-          {{ dndText }}
-        </div>
+          <template #anchor>
+            <div
+              class="dt-leftbar-row__dnd"
+            >
+              {{ dndText }}
+            </div>
+          </template>
+        </dt-tooltip>
         <div
           v-else-if="activeVoiceChat"
           class="dt-leftbar-row__active-voice"
@@ -59,14 +66,21 @@
             name="activity"
           />
         </div>
-        <dt-badge
+        <dt-tooltip
           v-else-if="!!unreadCount && hasUnreads"
-          kind="count"
-          type="bulletin"
-          data-qa="dt-leftbar-row-unread-badge"
+          :message="unreadCountTooltip"
+          placement="top"
         >
-          {{ unreadCount }}
-        </dt-badge>
+          <template #anchor>
+            <dt-badge
+              kind="count"
+              type="bulletin"
+              data-qa="dt-leftbar-row-unread-badge"
+            >
+              {{ unreadCount }}
+            </dt-badge>
+          </template>
+        </dt-tooltip>
       </div>
     </button>
     <div
