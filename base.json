@@ -1381,6 +1381,60 @@
         }
       },
       "surface": {
+        "opaque": {
+          "secondary": {
+            "value": "{color.surface.moderate}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".25",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "moderate": {
+            "value": "{color.surface.bold}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".48",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "bold": {
+            "value": "{color.surface.strong}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".26",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "strong": {
+            "value": "{color.surface.contrast}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".77",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
         "primary": {
           "value": "{color.neutral.white}",
           "type": "color"
