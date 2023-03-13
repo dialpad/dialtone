@@ -1420,19 +1420,6 @@
                 }
               }
             }
-          },
-          "strong": {
-            "value": "{color.surface.contrast}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".77",
-                  "space": "hsl"
-                }
-              }
-            }
           }
         },
         "primary": {
@@ -3537,7 +3524,11 @@
         "color.border.brand-strong": "S:0a5cdcdcf2eb9ba076294b36e4cfa3635f2b5999,",
         "color.text.critical-strong": "S:adedc93b5dc4b0b9f251f245774313d1af648c82,",
         "color.text.success-strong": "S:476216ba4d41203d071fa31b08b9b8595cca5f4b,",
-        "color.text.inverted.tertiary": "S:81a07c36f42ad40124f832aee38042c2ce3bd0b0,"
+        "color.text.inverted.tertiary": "S:81a07c36f42ad40124f832aee38042c2ce3bd0b0,",
+        "color.surface.opaque.secondary": "S:f22117fdb46ac8d41198474f2b1ca9012b14b0ec,",
+        "color.surface.opaque.moderate": "S:2a30d51c54b5a5fbebd3f9a35e168ed1ffac569d,",
+        "color.surface.opaque.bold": "S:bd63c58bfcda7df310e5b87e479c78d2aa3a923c,",
+        "inputs.color.border.success": "S:eb0a10557f0ac90ff041e4c3a54113a2feb2e1a6,"
       }
     }
   ],
