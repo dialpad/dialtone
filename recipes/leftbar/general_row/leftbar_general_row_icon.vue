@@ -13,7 +13,7 @@
     :class="dialbotClasses"
   >
     <icon-dialbot
-      class="d-svg--size18"
+      class="d-svg--size24"
     />
   </div>
 </template>
