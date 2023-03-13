@@ -1,3 +1,16 @@
+# [2.65.0](https://github.com/dialpad/dialtone-vue/compare/v2.64.0...v2.65.0) (2023-03-13)
+
+
+### Bug Fixes
+
+* **Avatar:** initials are not available until image loads ([#803](https://github.com/dialpad/dialtone-vue/issues/803)) ([1fbedd3](https://github.com/dialpad/dialtone-vue/commit/1fbedd3c20b610d5744d41b4fe3ddc7197267b44))
+
+
+### Features
+
+* **Leftbar:** fixes and additions to leftbar row components ([#804](https://github.com/dialpad/dialtone-vue/issues/804)) ([0bb19a5](https://github.com/dialpad/dialtone-vue/commit/0bb19a547554781c5a7a7db388ef705e21a5cdd8))
+* **Theme:** update leftbar theme vars ([#800](https://github.com/dialpad/dialtone-vue/issues/800)) ([62898a6](https://github.com/dialpad/dialtone-vue/commit/62898a67d96ad0d56f254fdbc9607d71f8a453ea))
+
 # [2.64.0](https://github.com/dialpad/dialtone-vue/compare/v2.63.0...v2.64.0) (2023-03-06)
 
 
