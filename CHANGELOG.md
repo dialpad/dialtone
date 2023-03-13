@@ -1,3 +1,10 @@
+## [2.65.2](https://github.com/dialpad/dialtone-vue/compare/v2.65.1...v2.65.2) (2023-03-13)
+
+
+### Bug Fixes
+
+* dialbot size ([57a81ab](https://github.com/dialpad/dialtone-vue/commit/57a81ab5cc03c06689041d5c4e7135b9d2403ead))
+
 ## [2.65.1](https://github.com/dialpad/dialtone-vue/compare/v2.65.0...v2.65.1) (2023-03-13)
 
 
