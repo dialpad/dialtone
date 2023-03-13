@@ -1,3 +1,10 @@
+## [2.65.1](https://github.com/dialpad/dialtone-vue/compare/v2.65.0...v2.65.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* **Popover:** ignore role=presentation ([92bc480](https://github.com/dialpad/dialtone-vue/commit/92bc4803a28752cbbd361b201801b8618536c862))
+
 # [2.65.0](https://github.com/dialpad/dialtone-vue/compare/v2.64.0...v2.65.0) (2023-03-13)
 
 
