@@ -1,4 +1,4 @@
-const focusableAttrs = ':not(:disabled):not([aria-disabled="true"])';
+const focusableAttrs = ':not(:disabled):not([aria-disabled="true"]):not([role="presentation"])';
 const tabbableAttrs = `${focusableAttrs}:not([tabindex="-1"])`;
 const focusableElementsList = `button,[href],input,select,textarea,details,[tabindex]`;
 
