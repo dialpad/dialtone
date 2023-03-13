@@ -1,3 +1,16 @@
+# [3.48.0](https://github.com/dialpad/dialtone-vue/compare/v3.47.0...v3.48.0) (2023-03-13)
+
+
+### Bug Fixes
+
+* **Avatar:** initials are not available until image loads - vue3 ([#805](https://github.com/dialpad/dialtone-vue/issues/805)) ([46155f3](https://github.com/dialpad/dialtone-vue/commit/46155f3f271aed8cad62f6bfd0237d0cd2cf3cb4))
+
+
+### Features
+
+* **Theme:** update leftbar theme vars vue3 ([#801](https://github.com/dialpad/dialtone-vue/issues/801)) ([eaf3fab](https://github.com/dialpad/dialtone-vue/commit/eaf3fab3daa0200ee3709914f278a6ef53522570))
+* **Theme:** update leftbar theme vars vue3 (redo) ([#802](https://github.com/dialpad/dialtone-vue/issues/802)) ([d34b1f4](https://github.com/dialpad/dialtone-vue/commit/d34b1f442fded72b2fb66cf1d824c813a2d5bee6))
+
 # [3.47.0](https://github.com/dialpad/dialtone-vue/compare/v3.46.2...v3.47.0) (2023-03-06)
 
 
