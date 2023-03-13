@@ -1,9 +1,12 @@
 <template>
   <dt-recipe-general-row
     :description="names"
+    :aria-label="`${groupCountText} ${names}`"
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
+    :unread-count-tooltip="unreadCountTooltip"
     :selected="selected"
+    :is-typing="isTyping"
     v-on="$listeners"
   >
     <template #left>
@@ -63,17 +66,33 @@ export default {
     },
 
     /**
+     * Screen reader will read out the number of users in the group using this text. Ex: "2 users"
+     */
+    groupCountText: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Names of the group members
      */
     names: {
       type: String,
-      default: '',
+      required: true,
     },
 
     /**
      * Number of unread messages
      */
     unreadCount: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Text shown when the unread count is hovered.
+     */
+    unreadCountTooltip: {
       type: String,
       default: null,
     },
@@ -91,6 +110,14 @@ export default {
      * Determines if the row is selected
      */
     selected: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Shows an "is typing" animation over the avatar when true.
+     */
+    isTyping: {
       type: Boolean,
       default: false,
     },

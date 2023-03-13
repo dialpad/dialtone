@@ -3,6 +3,7 @@
     :id="id"
     :size="size"
     :presence="presence"
+    :avatar-class="avatarClass"
     :initials="initials"
     :seed="seed"
     :gradient="gradient"

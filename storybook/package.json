@@ -27,12 +27,10 @@
     "babel-loader": "^8.3.0",
     "babel-preset-vue": "^2.0.2",
     "generate-file-webpack-plugin": "^1.0.1",
-    "postcss-focus-visible": "^7.1.0",
     "vue-template-compiler": "^2.7.14",
     "webpack": "^5.75.0"
   },
   "dependencies": {
-    "focus-visible": "^5.2.0",
     "vue": "^2.7.14"
   },
   "resolutions": {

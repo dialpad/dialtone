@@ -8,6 +8,7 @@
         name="Jaqueline Nackos"
         :avatar-src="defaultImage"
         user-status="Good Morning! :smile:"
+        call-button-tooltip="Call"
       />
     </div>
     <div>
@@ -20,6 +21,7 @@
         presence-text="Away"
         user-status="Out for a bit"
         :avatar-src="defaultImage"
+        call-button-tooltip="Call"
       />
     </div>
     <div>
@@ -32,6 +34,7 @@
         presence-text="In a meeting"
         user-status="Meetings all day"
         :avatar-src="defaultImage"
+        call-button-tooltip="Call"
       />
     </div>
     <div>
@@ -42,7 +45,9 @@
         name="Jaqueline Nackos"
         :avatar-src="defaultImage"
         unread-count="5"
+        unread-count-tooltip="55 unread messages"
         :has-unreads="true"
+        call-button-tooltip="Call"
       />
     </div>
     <div>
@@ -53,6 +58,7 @@
         name="Jaqueline Nackos"
         :avatar-src="defaultImage"
         :selected="true"
+        call-button-tooltip="Call"
       />
     </div>
     <div>
@@ -61,6 +67,7 @@
       </h3>
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
+        call-button-tooltip="Call"
       />
     </div>
   </dt-stack>

@@ -9,6 +9,10 @@ const defaultImage = require('@/components/avatar/person.png');
 
 // Default Prop Values
 export const argsData = {
+  callButtonTooltip: 'Call',
+  hasUnreads: true,
+  unreadCount: '55',
+  unreadCountTooltip: '55 unread messages',
   onClick: action('click'),
   onCall: action('call'),
 };
@@ -28,6 +32,11 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: [...PRESENCE_STATES_LIST],
+    },
+    table: {
+      defaultValue: {
+        summary: 'active',
+      },
     },
   },
 

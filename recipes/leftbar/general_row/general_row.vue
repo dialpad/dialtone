@@ -6,14 +6,26 @@
     <button
       class="dt-leftbar-row__primary"
       data-qa="dt-leftbar-row-link"
+      :aria-label="getAriaLabel"
+      :title="description"
       v-bind="$attrs"
       v-on="$listeners"
     >
       <div
         class="dt-leftbar-row__alpha"
       >
-        <slot name="left">
+        <div
+          v-if="isTyping"
+          class="dt-leftbar-row__is-typing"
+        >
+          <span /><span /><span />
+        </div>
+        <slot
+          v-else
+          name="left"
+        >
           <dt-recipe-leftbar-general-row-icon
+            :class="{ 'd-o50': isTyping }"
             :type="getIcon"
             :color="color"
             data-qa="dt-leftbar-row-icon"
@@ -33,12 +45,19 @@
       <div
         class="dt-leftbar-row__omega"
       >
-        <div
+        <dt-tooltip
           v-if="dndText"
-          class="dt-leftbar-row__dnd"
+          placement="top"
+          :message="dndTextTooltip"
         >
-          {{ dndText }}
-        </div>
+          <template #anchor>
+            <div
+              class="dt-leftbar-row__dnd"
+            >
+              {{ dndText }}
+            </div>
+          </template>
+        </dt-tooltip>
         <div
           v-else-if="activeVoiceChat"
           class="dt-leftbar-row__active-voice"
@@ -48,14 +67,21 @@
             name="activity"
           />
         </div>
-        <dt-badge
+        <dt-tooltip
           v-else-if="!!unreadCount && hasUnreads"
-          kind="count"
-          type="bulletin"
-          data-qa="dt-leftbar-row-unread-badge"
+          :message="unreadCountTooltip"
+          placement="top"
         >
-          {{ unreadCount }}
-        </dt-badge>
+          <template #anchor>
+            <dt-badge
+              kind="count"
+              type="bulletin"
+              data-qa="dt-leftbar-row-unread-badge"
+            >
+              {{ unreadCount }}
+            </dt-badge>
+          </template>
+        </dt-tooltip>
       </div>
     </button>
     <div
@@ -63,24 +89,32 @@
       class="dt-leftbar-row__action"
       data-qa="dt-leftbar-row-action"
     >
-      <dt-button
-        class="dt-leftbar-row__action-button"
-        data-qa="dt-leftbar-row-action-call-button"
-        circle
-        size="xs"
-        kind="inverted"
-        @focus="actionFocused = true"
-        @blur="actionFocused = false"
-        @mouseout="actionFocused = false"
-        @click.stop="$emit('call', $event)"
+      <dt-tooltip
+        :message="callButtonTooltip"
+        placement="top"
       >
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="200"
-          />
+        <template #anchor>
+          <dt-button
+            class="dt-leftbar-row__action-button"
+            data-qa="dt-leftbar-row-action-call-button"
+            circle
+            size="xs"
+            kind="inverted"
+            :aria-label="callButtonTooltip"
+            @focus="actionFocused = true"
+            @blur="actionFocused = false"
+            @mouseleave="actionFocused = false"
+            @click.stop="$emit('call', $event)"
+          >
+            <template #icon>
+              <dt-icon
+                name="phone"
+                size="200"
+              />
+            </template>
+          </dt-button>
         </template>
-      </dt-button>
+      </dt-tooltip>
     </div>
   </div>
 </template>
@@ -94,6 +128,7 @@ import {
 import { DtBadge } from '@/components/badge';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
+import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 
@@ -105,6 +140,7 @@ export default {
     DtBadge,
     DtIcon,
     DtButton,
+    DtTooltip,
     DtRecipeLeftbarGeneralRowIcon,
   },
 
@@ -124,11 +160,20 @@ export default {
     },
 
     /**
-     * Text displayed next to the icon
+     * Will be read out by a screen reader upon focus of this row. If not defined "description" will be read.
+     */
+    ariaLabel: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Text displayed next to the icon. Required. Even if you are overriding this field using the label slot
+     * you still must input this as it will be displayed as the "title" attribute for the row.
      */
     description: {
       type: String,
-      default: '',
+      required: true,
     },
 
     /**
@@ -157,6 +202,14 @@ export default {
     unreadCount: {
       type: String,
       default: null,
+    },
+
+    /**
+     * Text shown when the unread count is hovered.
+     */
+    unreadCountTooltip: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -193,9 +246,33 @@ export default {
     },
 
     /**
+     * Text shown in tooltip when you hover the dndText
+     */
+    dndTextTooltip: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Whether the row should have a call button. Usually only applicable to individual contact rows.
      */
     hasCallButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Text shown when the call button is hovered.
+     */
+    callButtonTooltip: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Shows an "is typing" animation over the avatar when true.
+     */
+    isTyping: {
       type: Boolean,
       default: false,
     },
@@ -249,6 +326,10 @@ export default {
           break;
       }
       return this.type;
+    },
+
+    getAriaLabel () {
+      return this.ariaLabel ? this.ariaLabel : `${this.description} ${this.unreadCountTooltip} ${this.dndTextTooltip}`;
     },
   },
 

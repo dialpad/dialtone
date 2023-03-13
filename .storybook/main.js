@@ -8,7 +8,6 @@ const cssLoaders = [
   { loader: 'css-loader', options: { sourceMap: true }},
   {
     loader: "postcss-loader",
-    options: { postcssOptions: { plugins: [["postcss-focus-visible"]] }},
   }
 ];
 
