@@ -1718,6 +1718,10 @@
           "value": "{color.purple.500}",
           "type": "color"
         },
+        "ai": {
+          "value": "{color.gradient.magenta-purple}",
+          "type": "color"
+        },
         "inverted": {
           "base": {
             "value": "$color.neutral.white",
