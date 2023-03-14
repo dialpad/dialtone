@@ -2,8 +2,9 @@
   <dt-recipe-contact-info
     :avatar-src="$attrs.avatarSrc"
     :avatar-initials="$attrs.avatarInitials"
+    :avatar-size="$attrs.avatarSize"
     :avatar-color="$attrs.avatarColor"
-    :user-status-color="$attrs.userStatusColor"
+    :presence="$attrs.presence"
   >
     <template
       v-if="$attrs.header"
