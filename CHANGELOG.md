@@ -1,3 +1,19 @@
+# [3.49.0](https://github.com/dialpad/dialtone-vue/compare/v3.48.0...v3.49.0) (2023-03-14)
+
+
+### Bug Fixes
+
+* dialbot size ([2e1a224](https://github.com/dialpad/dialtone-vue/commit/2e1a2240e4522abfc53416dba90c211fdf75322d))
+* **Leftbar Group Row:** add conditional img render ([#816](https://github.com/dialpad/dialtone-vue/issues/816)) ([2f79293](https://github.com/dialpad/dialtone-vue/commit/2f79293575c92b7d3eba95746daa776aa504c10e))
+* **Popover:** ignore role=presentation ([bc5071c](https://github.com/dialpad/dialtone-vue/commit/bc5071c8620b1008504e660ae6880d6a87b59f27))
+
+
+### Features
+
+* **Leftbar Contact Row:** support "no presence" ([#815](https://github.com/dialpad/dialtone-vue/issues/815)) ([543bc17](https://github.com/dialpad/dialtone-vue/commit/543bc1732873845ab090692ddee4b3f1b43f53e4))
+* **Leftbar:** fixes and additions to leftbar row components ([#806](https://github.com/dialpad/dialtone-vue/issues/806)) ([c5dc843](https://github.com/dialpad/dialtone-vue/commit/c5dc8432bba9d232f8262bdf9739bd32fad06046))
+* **Scroller:** initial mvp ([#780](https://github.com/dialpad/dialtone-vue/issues/780)) ([59fe820](https://github.com/dialpad/dialtone-vue/commit/59fe820f4aec3012b4047368a379aa90b249f767))
+
 # [3.48.0](https://github.com/dialpad/dialtone-vue/compare/v3.47.0...v3.48.0) (2023-03-13)
 
 
