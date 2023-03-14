@@ -3382,7 +3382,18 @@
         "color.text.critical-strong": "S:10b9ebd49873a5371a8a90ea101c3b346ea7e6d1,",
         "color.text.success-strong": "S:e76a14e3ba907c5a3fb24618a50c839fcce19cfc,",
         "color.text.inverted.tertiary": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
-        "inputs.color.border.success": "S:3e6fdf080f15e6deaa3ee9a268179190d6e496b1,"
+        "inputs.color.border.success": "S:3e6fdf080f15e6deaa3ee9a268179190d6e496b1,",
+        "color.surface.opaque.secondary": "S:fcac5ac71509870b22c60aae84e3f9e9adef4909,",
+        "color.surface.opaque.moderate": "S:e1f5b70620515fcf8029fef3d8ac0441cfc7e639,",
+        "color.surface.opaque.bold": "S:b54df26a8089849e5afdf59b1ae6f0279ca9e2ab,",
+        "color.surface.opaque.critical": "S:36a96a2d7cf015fae0b45c2118e69fda62235410,",
+        "color.surface.opaque.critical-subtle": "S:b711891ae99af36529c18240ac17af7ca449f5ab,",
+        "color.surface.opaque.warning": "S:bb24ca7c14234ffe6479dfc67cc50bdce7c1c895,",
+        "color.surface.opaque.warning-subtle": "S:e4848c855ac175d71d066ac6f83c74c633c96e24,",
+        "color.surface.opaque.success": "S:41e7f77e7a70597da21e74ac592c4284359a1b05,",
+        "color.surface.opaque.success-subtle": "S:2882458967905a2ac5444d4ada1c9eb5052df4d5,",
+        "color.surface.opaque.info": "S:2c9082f617333999e117cb3d4dd63876ad2cf4bd,",
+        "color.surface.opaque.info-subtle": "S:3fec5783d87698de39f5619bc69048fc5adf0cc6,"
       }
     },
     {
