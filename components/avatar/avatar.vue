@@ -47,6 +47,7 @@ import {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
+  AVATAR_PRESENCE_STATES,
   AVATAR_ANGLES,
   GRADIENT_COLORS,
   MAX_GRADIENT_COLORS,
@@ -108,7 +109,10 @@ export default {
      */
     presence: {
       type: String,
-      default: null,
+      default: AVATAR_PRESENCE_STATES.NONE,
+      validator: (state) => {
+        return Object.values(AVATAR_PRESENCE_STATES).includes(state);
+      },
     },
 
     /**

@@ -17,6 +17,14 @@ export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
   lg: 'd-avatar__presence--lg',
 };
 
+export const AVATAR_PRESENCE_STATES = {
+  NONE: null,
+  BUSY: 'busy',
+  AWAY: 'away',
+  OFFLINE: 'offline',
+  ACTIVE: 'active',
+};
+
 export const AVATAR_ICON_SIZES = {
   xs: '100',
   sm: '200',

@@ -4,7 +4,7 @@ import DtRecipeContactRow from './contact_row';
 import DtRecipeContactRowMdx from './contact_row.mdx';
 import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
 import DtRecipeContactRowVariantsTemplate from './contact_row_variants.story.vue';
-import { PRESENCE_STATES_LIST } from '@/components/presence/presence_constants';
+import { AVATAR_PRESENCE_STATES } from '@/components/avatar/avatar_constants';
 const defaultImage = require('@/components/avatar/person.png');
 
 // Default Prop Values
@@ -12,6 +12,7 @@ export const argsData = {
   callButtonTooltip: 'Call',
   hasUnreads: true,
   unreadCount: '55',
+  avatarPresence: 'active',
   unreadCountTooltip: '55 unread messages',
   onClick: action('click'),
   onCall: action('call'),
@@ -31,11 +32,11 @@ export const argTypesData = {
   avatarPresence: {
     control: {
       type: 'select',
-      options: [...PRESENCE_STATES_LIST],
+      options: Object.values(AVATAR_PRESENCE_STATES),
     },
     table: {
       defaultValue: {
-        summary: 'active',
+        summary: 'null',
       },
     },
   },
