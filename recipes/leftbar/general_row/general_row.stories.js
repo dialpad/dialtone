@@ -11,6 +11,8 @@ import {
 
 // Default Prop Values
 export const argsData = {
+  callButtonTooltip: 'Call',
+  dndTextTooltip: 'Do not Disturb',
   onClick: action('click'),
   onCall: action('call'),
 };
@@ -60,7 +62,9 @@ export const argTypesData = {
   },
 
   click: {
+    description: 'Native click event on the row itself',
     table: {
+      category: 'events',
       type: { summary: 'event' },
     },
   },

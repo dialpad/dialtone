@@ -8,6 +8,7 @@
         type="channels"
         description="Channel name"
         unread-count="29"
+        unread-count-tooltip="29 unread messages"
       />
       <div class="d-mt8 d-fc-secondary d-fs-100">
         <strong>Note:</strong> the unread count is not limited to 99 or any number so make sure to add the necessary

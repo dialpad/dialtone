@@ -12,16 +12,15 @@
     v-else-if="isDialbotType"
     :class="dialbotClasses"
   >
-    <icon-dialpad-glyph
+    <icon-dialbot
       class="d-svg--size18"
-      color="white"
     />
   </div>
 </template>
 
 <script>
 import { DtIcon } from '@/components/icon';
-import IconDialpadGlyph from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadGlyph';
+import IconDialbot from '@dialpad/dialtone/lib/dist/vue/icons/IconDialbot';
 import {
   LEFTBAR_GENERAL_ROW_ICON_MAPPING as ICON_MAPPING,
   LEFTBAR_GENERAL_ROW_TYPES as TYPES,
@@ -30,7 +29,7 @@ import {
 
 export default {
   name: 'DtRecipeLeftbarGeneralRowIcon',
-  components: { DtIcon, IconDialpadGlyph },
+  components: { DtIcon, IconDialbot },
   props: {
     type: {
       type: String,
@@ -69,8 +68,6 @@ export default {
 
     dialbotClasses () {
       return [
-        'd-bar-circle',
-        'd-bgc-purple-400',
         'd-w24',
         'd-h24',
         'd-d-flex',

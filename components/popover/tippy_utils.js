@@ -1,6 +1,5 @@
 import tippy, { sticky } from 'tippy.js';
 import { getArrowDetected } from '../tooltip/modifiers';
-import { findFirstFocusableNode } from '@/common/utils';
 
 export const BASE_TIPPY_DIRECTIONS = [
   'bottom', 'bottom-start', 'bottom-end',
@@ -57,21 +56,17 @@ export const getPopperOptions = ({
   };
 };
 
-const createAnchor = (anchorWrapper, tabIndex) => {
+const createAnchor = (anchorWrapper) => {
   const span = document.createElement('span');
-  span.setAttribute('tabindex', tabIndex);
   span.innerText = anchorWrapper.innerText || '';
   anchorWrapper.innerText = '';
   anchorWrapper.appendChild(span);
   return span;
 };
 
-export const getAnchor = (anchorWrapper, tabIndex = '0') => {
+export const getAnchor = (anchorWrapper) => {
   const anchor = anchorWrapper?.children[0];
   if (!anchor) return createAnchor(anchorWrapper);
-  if (!findFirstFocusableNode(anchor)) {
-    anchor.setAttribute('tabindex', tabIndex);
-  }
   return anchor;
 };
 

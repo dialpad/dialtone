@@ -7,6 +7,7 @@
       <dt-recipe-group-row
         avatar-initials="JN"
         :group-count="2"
+        group-count-text="2 users"
         names="Jaqueline Nackos, Lori Smith"
         :avatar-src="defaultImage"
       />
@@ -18,6 +19,7 @@
       <dt-recipe-group-row
         avatar-initials="JN"
         :group-count="4"
+        group-count-text="4 users"
         names="Jaqueline Nackos, Lori Smith, Jaqueline Nackos, Lori Smith"
         :avatar-src="defaultImage"
       />
@@ -29,9 +31,12 @@
       <dt-recipe-group-row
         avatar-initials="JN"
         :group-count="2"
+        group-count-text="2 users"
         names="Jaqueline Nackos, Lori Smith"
         :avatar-src="defaultImage"
+        :has-unreads="true"
         unread-count="1"
+        unread-count-tooltip="1 unread message"
       />
     </div>
     <div>
@@ -41,6 +46,7 @@
       <dt-recipe-group-row
         avatar-initials="JN"
         :group-count="2"
+        group-count-text="2 users"
         names="Jaqueline Nackos, Lori Smith"
         :avatar-src="defaultImage"
         selected
@@ -53,6 +59,7 @@
       <dt-recipe-group-row
         avatar-initials="JN"
         :group-count="2"
+        group-count-text="2 users"
         names="Jaqueline Nackos, Lori Smith"
         avatar-src="/static/media/../components/avatar/404"
       />

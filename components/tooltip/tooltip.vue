@@ -2,6 +2,7 @@
   <div data-qa="dt-tooltip-container">
     <a
       ref="anchor"
+      tabindex="-1"
       role="presentation"
       data-qa="dt-tooltip-anchor"
       @focusin="onEnterAnchor"
