@@ -2955,7 +2955,6 @@
       }
     }
   },
-  "components/badge/dark": {},
   "components/checkbox": {
     "checkbox": {
       "size": {
@@ -3137,8 +3136,7 @@
         "semantic": "enabled",
         "components/checkbox/dark": "enabled",
         "components/radio/dark": "enabled",
-        "components/badge": "enabled",
-        "components/badge/dark": "enabled"
+        "components/badge": "enabled"
       },
       "$figmaStyleReferences": {
         "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
@@ -3386,7 +3384,8 @@
         "color.surface.opaque.success-subtle": "S:2882458967905a2ac5444d4ada1c9eb5052df4d5,",
         "color.surface.opaque.info": "S:2c9082f617333999e117cb3d4dd63876ad2cf4bd,",
         "color.surface.opaque.info-subtle": "S:3fec5783d87698de39f5619bc69048fc5adf0cc6,",
-        "color.border.ai": "S:ff752e9ad7d5ac5acfa216a7b5165468624c0380,"
+        "color.border.ai": "S:ff752e9ad7d5ac5acfa216a7b5165468624c0380,",
+        "badge.color.background.default": "S:46515656b0f57d4ba86fd6167cbbaf94f1dc6d65,"
       }
     },
     {
@@ -3658,7 +3657,6 @@
       "semantic",
       "semantic/dark",
       "components/badge",
-      "components/badge/dark",
       "components/checkbox",
       "components/checkbox/dark",
       "components/icon",
