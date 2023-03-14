@@ -15,6 +15,7 @@
         :group="groupCount"
       >
         <img
+          v-if="avatarSrc"
           data-qa="dt-avatar-image"
           :src="avatarSrc"
           :alt="avatarInitials"
