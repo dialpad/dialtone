@@ -6,6 +6,7 @@
       </h3>
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
+        avatar-presence="active"
         :avatar-src="defaultImage"
         user-status="Good Morning! :smile:"
         call-button-tooltip="Call"
@@ -43,6 +44,7 @@
       </h3>
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
+        avatar-presence="active"
         :avatar-src="defaultImage"
         unread-count="5"
         unread-count-tooltip="55 unread messages"
@@ -56,6 +58,7 @@
       </h3>
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
+        avatar-presence="active"
         :avatar-src="defaultImage"
         :selected="true"
         call-button-tooltip="Call"
@@ -67,6 +70,7 @@
       </h3>
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
+        avatar-presence="active"
         call-button-tooltip="Call"
       />
     </div>

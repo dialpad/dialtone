@@ -70,8 +70,6 @@ import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapp
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtIcon from '@/components/icon/icon.vue';
 
-import { PRESENCE_STATES, PRESENCE_STATES_LIST } from '@/components/presence/presence_constants';
-
 export default {
   name: 'DtRecipeGroupRow',
 
@@ -94,16 +92,14 @@ export default {
 
     /**
      * Determines whether to show the presence indicator for
-     * Avatar - accepts PRESENCE_STATES values: 'active', 'busy', 'away', 'offline'. defaults to active.
-     * @values active, busy, away, offline
-     * @default active
+     * Avatar - accepts PRESENCE_STATES values: 'busy', 'away', 'offline',
+     * or 'active'. By default, it's null and nothing is shown.
+     * defer validation to avatar component.
+     * @values null, busy, away, offline, active
      */
     avatarPresence: {
       type: String,
-      default: PRESENCE_STATES.ACTIVE,
-      validator: (role) => {
-        return PRESENCE_STATES_LIST.includes(role);
-      },
+      default: null,
     },
 
     /**

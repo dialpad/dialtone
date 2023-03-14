@@ -1,8 +1,7 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import { PRESENCE_STATES_LIST } from '../presence/presence_constants';
 import DtAvatar from './avatar';
 import DtAvatarMdx from './avatar.mdx';
-import { AVATAR_SIZE_MODIFIERS } from './avatar_constants';
+import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarIconTemplate from './avatar_icon.story.vue';
 import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
@@ -32,7 +31,12 @@ export const argTypesData = {
     defaultValue: null,
     control: {
       type: 'select',
-      options: [...PRESENCE_STATES_LIST],
+      options: Object.values(AVATAR_PRESENCE_STATES),
+    },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
     },
   },
   presenceProps: {
