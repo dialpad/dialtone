@@ -12,7 +12,8 @@
       >
         <dt-avatar
           v-if="avatarSrc"
-          size="lg"
+          :size="avatarSize"
+          :presence="presence"
         >
           <img
             data-qa="dt-contact-avatar"
@@ -22,28 +23,11 @@
         </dt-avatar>
         <dt-avatar
           v-else-if="avatarInitials"
-          size="lg"
+          :size="avatarSize"
+          :presence="presence"
         >
           {{ avatarInitials }}
         </dt-avatar>
-        <div
-          v-if="showUserStatus"
-          :class="[
-            'd-ba',
-            'd-bc-white',
-            'd-baw2',
-            'd-bar2',
-            'd-ps-absolute',
-            'd-bn1',
-            'd-rn1',
-            'd-w20p',
-            'd-h20p',
-            USER_STATUS_COLOR_MODIFIERS[userStatusColor],
-          ]"
-          data-qa="contact-info-user-status"
-        >
-          &nbsp;
-        </div>
       </div>
     </template>
     <template #default>
@@ -79,7 +63,6 @@
 <script>
 import DtListItem from '@/components/list_item/list_item';
 import DtAvatar from '@/components/avatar/avatar';
-import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants';
 import utils from '@/common/utils';
 
 export default {
@@ -132,24 +115,23 @@ export default {
     },
 
     /**
-     * Status color of user from contact.
+     * The size of the avatar
+     * @values xs, sm, md, lg, xl
      */
-    userStatusColor: {
+    avatarSize: {
       type: String,
-      default: 'none',
-      validator: (color) => Object.keys(USER_STATUS_COLOR_MODIFIERS).includes(color),
+      default: 'lg',
     },
-  },
 
-  data () {
-    return {
-      USER_STATUS_COLOR_MODIFIERS,
-    };
-  },
-
-  computed: {
-    showUserStatus () {
-      return this.userStatusColor !== 'none';
+    /**
+     * Determines whether to show the presence indicator for
+     * Avatar - accepts PRESENCE_STATES values: 'busy', 'away', 'offline',
+     * or 'active'. By default, it's null and nothing is shown.
+     * @values null, busy, away, offline, active
+     */
+    presence: {
+      type: String,
+      default: null,
     },
   },
 };

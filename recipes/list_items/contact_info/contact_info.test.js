@@ -1,16 +1,12 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeContactInfo from './contact_info.vue';
-import {
-  itBehavesLikeFailsCustomPropValidation,
-  itBehavesLikePassesCustomPropValidation,
-} from '../../../tests/shared_examples/validation';
 
 // Constants
 const basePropsData = {
   avatarSrc: 'avatar.png',
   avatarInitials: 'JL',
-  userStatusColor: 'green',
+  presence: 'active',
 };
 
 const baseSlotsData = {
@@ -25,7 +21,6 @@ describe('DtRecipeContactInfo Tests', function () {
   let rootElement;
   let headerElement;
   let avatarElement;
-  let userStatusElement;
   let subtitleElement;
   let bottomElement;
 
@@ -40,7 +35,6 @@ describe('DtRecipeContactInfo Tests', function () {
     rootElement = wrapper.find('[data-qa="contact-info"]');
     headerElement = wrapper.find('[data-qa="contact-info-header"]');
     avatarElement = wrapper.find('[data-qa="dt-avatar"]');
-    userStatusElement = wrapper.find('[data-qa="contact-info-user-status"]');
     subtitleElement = wrapper.find('[data-qa="contact-info-subtitle"]');
     bottomElement = wrapper.find('[data-qa="contact-info-bottom"]');
   };
@@ -89,10 +83,6 @@ describe('DtRecipeContactInfo Tests', function () {
       it('Should render avatar component', function () {
         assert.isTrue(avatarElement.exists());
       });
-      it('Should display user status with green background color', function () {
-        assert.isTrue(userStatusElement.exists());
-        assert.include(userStatusElement.classes(), 'd-bgc-green-300');
-      });
       it('Should render subtitle content correctly', function () {
         assert.isTrue(subtitleElement.exists());
         assert.strictEqual(subtitleElement.text(), '+1 (415) 123-4567');
@@ -129,36 +119,6 @@ describe('DtRecipeContactInfo Tests', function () {
       });
       it('Should not display avatar', function () {
         assert.isFalse(avatarElement.exists());
-      });
-    });
-
-    describe('Hide user status indicator', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({
-          userStatusColor: 'none',
-        });
-      });
-      it('Should not display user status indicator', function () {
-        assert.isFalse(wrapper.find('[data-qa="contact-info-user-status"]').exists());
-      });
-    });
-  });
-
-  describe('Validation Tests', function () {
-    /*
-     * Test(s) to ensure that custom validators are working as expected
-     */
-
-    describe('userStatusColor Validator', function () {
-      // Test Environment
-      const prop = DtRecipeContactInfo.props.userStatusColor;
-
-      describe('When provided color code is in USER_STATUS_COLOR_MODIFIERS', function () {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
-      });
-
-      describe('When provided color code is not in USER_STATUS_COLOR_MODIFIERS', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_CODE`);
       });
     });
   });
