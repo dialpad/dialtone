@@ -2914,7 +2914,7 @@
       "color": {
         "background": {
           "default": {
-            "value": "{color.black.200}",
+            "value": "{color.surface.opaque.moderate}",
             "type": "color"
           },
           "info": {
@@ -2955,18 +2955,7 @@
       }
     }
   },
-  "components/badge/dark": {
-    "badge": {
-      "color": {
-        "background": {
-          "default": {
-            "value": "{color.black.400}",
-            "type": "color"
-          }
-        }
-      }
-    }
-  },
+  "components/badge/dark": {},
   "components/checkbox": {
     "checkbox": {
       "size": {
@@ -3292,7 +3281,6 @@
         "inputs.color.background.default": "S:a3a877887fba8a8aa1ea5c6cf60bdfca1fa2630e,",
         "inputs.color.background.focus": "S:15c63c1089d6caa0a997cffe698308cee8bcfce3,",
         "inputs.color.background.disabled": "S:67bed431fedfe92974b53a55cf2c811cd7295054,",
-        "badge.color.background.default": "S:46515656b0f57d4ba86fd6167cbbaf94f1dc6d65,",
         "badge.color.background.info": "S:454972a85bc70fc2c80ae704cddba7515c6d75b3,",
         "badge.color.background.success": "S:0f07ce5084d51434d22e8036e0fdc1766a6cd796,",
         "badge.color.background.warning": "S:1f5f8909e02f8af5626fab2193dda0b3794012fc,",
