@@ -1,3 +1,15 @@
+# [2.66.0](https://github.com/dialpad/dialtone-vue/compare/v2.65.2...v2.66.0) (2023-03-14)
+
+
+### Bug Fixes
+
+* **Leftbar Group Row:** add conditional img render ([#814](https://github.com/dialpad/dialtone-vue/issues/814)) ([4eb8782](https://github.com/dialpad/dialtone-vue/commit/4eb87825ec4b08a4670e807adf0556affed48e9a))
+
+
+### Features
+
+* **Leftbar Contact Row:** support "no presence" ([#813](https://github.com/dialpad/dialtone-vue/issues/813)) ([2364fcf](https://github.com/dialpad/dialtone-vue/commit/2364fcf4a9b801f01bbf1a50af90cec619d3e105))
+
 ## [2.65.2](https://github.com/dialpad/dialtone-vue/compare/v2.65.1...v2.65.2) (2023-03-13)
 
 
