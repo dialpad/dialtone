@@ -1420,6 +1420,86 @@
                 }
               }
             }
+          },
+          "critical": {
+            "value": "{color.red.300}",
+            "type": "color",
+            "description": "danger, error",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".05",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "critical-subtle": {
+            "value": "{color.red.300}",
+            "type": "color",
+            "description": "danger, error",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".11",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "warning": {
+            "value": "{color.gold.200}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".38",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "warning-subtle": {
+            "value": "{color.gold.200}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".18",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "success": {
+            "value": "{color.green.400}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".08",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "success-subtle": {
+            "value": "{color.green.400}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".03",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         },
         "primary": {
@@ -3528,7 +3608,13 @@
         "color.surface.opaque.secondary": "S:f22117fdb46ac8d41198474f2b1ca9012b14b0ec,",
         "color.surface.opaque.moderate": "S:2a30d51c54b5a5fbebd3f9a35e168ed1ffac569d,",
         "color.surface.opaque.bold": "S:bd63c58bfcda7df310e5b87e479c78d2aa3a923c,",
-        "inputs.color.border.success": "S:eb0a10557f0ac90ff041e4c3a54113a2feb2e1a6,"
+        "inputs.color.border.success": "S:eb0a10557f0ac90ff041e4c3a54113a2feb2e1a6,",
+        "color.surface.opaque.critical": "S:02b38d5f9da343154adfef46e0d1f574b8f2f8a5,",
+        "color.surface.opaque.critical-subtle": "S:06b2d55f4812eebcc8ba5e455a7bad4f1a0e492d,",
+        "color.surface.opaque.warning": "S:d079189ac6cdc8aaab8bec258f1c699c88af1ee8,",
+        "color.surface.opaque.warning-subtle": "S:6d054da472332ba8d2924406dcc1e23359e996c1,",
+        "color.surface.opaque.success": "S:b05f1396ab7194d81eaba1d184e9d5ab28976e9b,",
+        "color.surface.opaque.success-subtle": "S:7a27a99d67bc7cd92610e08049e5f3f7ea43f498,"
       }
     }
   ],
