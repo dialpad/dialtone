@@ -37,6 +37,7 @@ export * from './components/keyboard_shortcut';
 export * from './components/root_layout';
 export * from './components/icon';
 export * from './components/stack';
+export * from './components/scroller';
 
 /// Recipes
 export * from './recipes/comboboxes/combobox_with_popover';
