@@ -16,6 +16,7 @@
       :class="['d-popover', { 'd-popover__anchor--opened': isOpen }]"
       data-qa="dt-popover-container"
     >
+      <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
       <div
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
@@ -129,7 +130,7 @@ import {
   POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
-import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { getUniqueString, hasSlotContent, isOutOfViewPort } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import ModalMixin from '@/common/mixins/modal.js';
 import { createTippy, getPopperOptions } from './tippy_utils';
@@ -616,6 +617,7 @@ export default {
     isOpen (isOpen, isPrev) {
       if (isOpen) {
         this.initTippyInstance();
+        this.tip.show();
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeEventListeners();
         this.tip.hide();
@@ -632,17 +634,14 @@ export default {
 
     if (this.isOpen) {
       this.initTippyInstance();
+      this.tip.show();
     }
 
     // rootMargin here must be greater than the margin of the height we are setting in calculatedMaxHeight which
     // currently is var(--space-300) (4px). If not the intersectionObserver will continually trigger in an infinite
     // loop.
-
     // threshold 1.0 makes this trigger every time the dialog "touches" the edge of the viewport.
-    this.intersectionObserver = new IntersectionObserver(
-      this.hasIntersectedViewport,
-      { rootMargin: '-8px', threshold: 1.0 },
-    );
+    this.intersectionObserver = new IntersectionObserver(this.hasIntersectedViewport);
     this.intersectionObserver.observe(this.popoverContentEl);
   },
 
@@ -659,8 +658,10 @@ export default {
   methods: {
 
     hasIntersectedViewport (entries) {
-      const dialog = entries?.[0];
-      this.isOutsideViewport = !dialog?.isIntersecting;
+      const dialog = entries?.[0]?.target;
+      if (!dialog) return;
+      const isOut = isOutOfViewPort(dialog);
+      this.isOutsideViewport = isOut.bottom || isOut.top;
     },
 
     popperOptions () {
@@ -771,6 +772,7 @@ export default {
         const element = this.anchorEl.closest('body, .tippy-box');
         if (element.tagName.toLowerCase() === 'body') {
           element.classList.add('d-of-hidden');
+          this.tip.setProps({ offset: this.offset });
         } else {
           element.classList.add('d-zi-popover');
         }
@@ -786,6 +788,7 @@ export default {
         const element = this.anchorEl.closest('body, .tippy-box');
         if (element.tagName.toLowerCase() === 'body') {
           element.classList.remove('d-of-hidden');
+          this.tip.setProps({ offset: this.offset });
         } else {
           element.classList.remove('d-zi-popover');
         }
@@ -806,6 +809,8 @@ export default {
       if (this.contentWidth === null) {
         this.popoverContentEl.style.width = 'auto';
       }
+
+      this.addEventListeners();
     },
 
     async onLeaveTransitionComplete () {
@@ -815,7 +820,7 @@ export default {
         await this.$nextTick();
       }
       this.tip?.unmount();
-      this.enableScrolling();
+      await this.enableScrolling();
       this.$emit('opened', false);
       if (this.open !== null) {
         this.$emit('update:open', false);
@@ -824,7 +829,7 @@ export default {
 
     async onEnterTransitionComplete () {
       this.focusInitialElement();
-      this.preventScrolling();
+      await this.preventScrolling();
       // await next tick in case the user wants to change focus themselves.
       await this.$nextTick();
       this.$emit('opened', true, this.$refs.popover__content);
@@ -920,11 +925,6 @@ export default {
         onClickOutside: this.onClickOutside,
         onShow: this.onShow,
       });
-      this.tip.setProps({
-        zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
-      });
-      this.tip.show();
-      this.addEventListeners();
     },
   },
 };
