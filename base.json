@@ -2761,6 +2761,110 @@
                 }
               }
             }
+          },
+          "critical": {
+            "value": "{color.red.200}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".32",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "critical-subtle": {
+            "value": "{color.surface.critical-subtle}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".5",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "warning": {
+            "value": "{color.gold.200}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".48",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "warning-subtle": {
+            "value": "{color.surface.warning-subtle}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".5",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "success": {
+            "value": "{color.green.200}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".26",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "success-subtle": {
+            "value": "{color.surface.success-subtle}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".5",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "info": {
+            "value": "{color.blue.200}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".29",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "info-subtle": {
+            "value": "{color.surface.info-subtle}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".5",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         }
       },
