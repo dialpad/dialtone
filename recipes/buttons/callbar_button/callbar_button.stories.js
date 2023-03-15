@@ -40,6 +40,15 @@ export const argTypesData = {
         summary: ['string', 'array', 'object'],
       },
     },
+    control: 'text',
+  },
+  textClass: {
+    table: {
+      type: {
+        summary: ['string', 'array', 'object'],
+      },
+    },
+    control: 'text',
   },
   buttonWidthSize: {
     defaultValue: 'xl',

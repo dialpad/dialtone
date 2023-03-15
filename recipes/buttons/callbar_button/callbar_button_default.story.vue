@@ -7,6 +7,7 @@
     :disabled="$attrs.disabled"
     :danger="$attrs.danger"
     :button-class="$attrs.buttonClass"
+    :text-class="$attrs.textClass"
     :button-width-size="$attrs.buttonWidthSize"
     @click="$attrs.onClick"
   >

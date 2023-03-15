@@ -72,6 +72,7 @@ export const argTypesData = {
         summary: ['string', 'array', 'object'],
       },
     },
+    control: 'text',
   },
   buttonWidthSize: {
     defaultValue: 'xl',
@@ -80,12 +81,21 @@ export const argTypesData = {
       options: VALID_WIDTH_SIZE,
     },
   },
+  textClass: {
+    table: {
+      type: {
+        summary: ['string', 'array', 'object'],
+      },
+    },
+    control: 'text',
+  },
   contentClass: {
     table: {
       type: {
         summary: ['string', 'array', 'object'],
       },
     },
+    control: 'text',
   },
 
   // Popover slots

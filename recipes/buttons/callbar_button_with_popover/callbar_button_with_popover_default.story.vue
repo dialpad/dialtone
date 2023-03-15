@@ -12,6 +12,7 @@
     :danger="$attrs.danger"
     :button-class="$attrs.buttonClass"
     :button-width-size="$attrs.buttonWidthSize"
+    :text-class="$attrs.textClass"
     :content-class="$attrs.contentClass"
     @arrow-click="$attrs.onClick"
     @click="$attrs.onClick"
