@@ -1,3 +1,15 @@
+# [2.68.0](https://github.com/dialpad/dialtone-vue/compare/v2.67.0...v2.68.0) (2023-03-15)
+
+
+### Code Refactoring
+
+* modify dt-recipe-callbar component to have common styles baked in ([#811](https://github.com/dialpad/dialtone-vue/issues/811)) ([4bebf71](https://github.com/dialpad/dialtone-vue/commit/4bebf71f8836ff83db0fa36336480195283629ca))
+
+
+### Features
+
+* **Dt Recipe Ivr Node:** add new ivr top connector slot ([#819](https://github.com/dialpad/dialtone-vue/issues/819)) ([d45a305](https://github.com/dialpad/dialtone-vue/commit/d45a3050bd1fa5ad6dc5fc198c49ea4bc6b55c61))
+
 # [2.67.0](https://github.com/dialpad/dialtone-vue/compare/v2.66.0...v2.67.0) (2023-03-15)
 
 
