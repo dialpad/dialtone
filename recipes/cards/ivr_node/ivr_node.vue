@@ -6,17 +6,19 @@
     <div
       v-if="dtmfKey"
       data-qa="dt-top-connector-dtmf"
-      class="d-zi-base1 d-ai-center d-jc-center d-d-flex
-          d-w24 d-h24 d-bar-circle d-bc-purple-600 d-bgc-purple-600
-          d-mbn12 d-fc-white d-fs-200"
+      class="ivr-connector d-w24 d-h24 d-bar-circle d-mbn12 d-fc-white d-fs-200"
       :class="{ 'd-mbn16': isSelected }"
     >
       {{ dtmfKey }}
     </div>
+    <slot
+      v-if="$slots.connector"
+      name="connector"
+    />
     <div
-      v-else
+      v-if="!dtmfKey && !$slots.connector"
       data-qa="dt-top-connector"
-      class="d-zi-base1 d-d-flex d-w8 d-h8 d-bar-circle d-bc-purple-600 d-bgc-purple-600 d-mbn4"
+      class="ivr-connector d-w8 d-h8 d-bar-circle d-mbn4"
       :class="{ 'd-mbn8': isSelected }"
     />
     <dt-card
@@ -203,5 +205,13 @@ export default {
 }
 .ivr_node__goto_icon {
   transform: rotate(90deg);
+}
+.ivr-connector{
+  z-index: var(--zi-base1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: var(--purple-600);
+  background-color: var(--purple-600);
 }
 </style>

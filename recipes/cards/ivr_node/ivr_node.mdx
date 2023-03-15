@@ -204,3 +204,22 @@ A node in IVR used to terminate the call.
   <p class="d-fs14">Description</p>
 </dt-recipe-ivr-node>
 ```
+
+## Node with a different top connector
+
+A node in IVR like branch that has a condition instead of dtmf connector.
+
+<Canvas>
+  <Story id="recipes-cards-ivr-node--node-with-top-connector" />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Branch"
+  :node-type="branch"
+>
+  <template #connector>
+    <div class="ivr-connector d-px8 d-h24 d-bar-pill d-mbn12 d-fc-white d-fs-100">Add branch</div>
+  </template>
+</dt-recipe-ivr-node>
+```
