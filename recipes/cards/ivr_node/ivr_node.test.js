@@ -17,6 +17,8 @@ const baseSlots = {
   menuItems: '<ul><li>edit</li><li>copy</li><li>delete</li></ul>',
 };
 
+const connector = '<div data-qa="dt-connector-element"> connector content </div>';
+
 describe('DtPagination Tests', function () {
   // Wrappers
   let wrapper;
@@ -72,6 +74,20 @@ describe('DtPagination Tests', function () {
         const dtmfDot = wrapper.find('[data-qa="dt-top-connector-dtmf"]');
         assert.exists(dtmfDot, 'dtmf dot exists');
         assert.equal(dtmfDot.text(), '2');
+      });
+    });
+
+    describe('When top connector has different template', function () {
+      beforeEach(async function () {
+        propsData = {
+          ...basePropsData,
+          connector,
+        };
+        await _setWrappers();
+      });
+      it('should render connector', function () {
+        const dtmfDot = wrapper.find('[data-qa="dt-connector-element"]');
+        assert.exists(dtmfDot, 'connector exists');
       });
     });
 

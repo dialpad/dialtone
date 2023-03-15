@@ -8,6 +8,16 @@
     @click="$attrs.onClick($event)"
   >
     <template
+      v-if="$attrs.connector"
+      #connector
+    >
+      <div
+        class="ivr-connector d-px8 d-h24 d-bar-pill d-mbn12 d-fc-white d-fs-100"
+      >
+        Add branch
+      </div>
+    </template>
+    <template
       v-if="$attrs.content"
       #content
     >

@@ -34,6 +34,16 @@ export const argTypesData = {
     },
   },
 
+  connector: {
+    description: 'Slot for top connector',
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   // Props
   nodeLabel: {
     control: {
@@ -172,4 +182,10 @@ export const NodeWithDtmf = DefaultTemplate.bind({});
 NodeWithDtmf.args = {
   nodeType: 'transfer',
   dtmfKey: '1',
+};
+
+export const NodeWithTopConnector = DefaultTemplate.bind({});
+NodeWithTopConnector.args = {
+  nodeType: 'branch',
+  connector: 'text',
 };
