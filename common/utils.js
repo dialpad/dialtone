@@ -155,6 +155,26 @@ export function debounce (func, timeout = 300) {
   TIMER = setTimeout(func, timeout);
 }
 
+/**
+ * Checks if the element is out of the viewport
+ * https://gomakethings.com/how-to-check-if-any-part-of-an-element-is-out-of-the-viewport-with-vanilla-js/
+ * @param  {HTMLElement} element The element to check
+ * @return {Object} A set of booleans for each side of the element
+ */
+
+export function isOutOfViewPort (element) {
+  const bounding = element.getBoundingClientRect();
+
+  const isOut = {
+    top: bounding.top < 0,
+    left: bounding.left < 0,
+    bottom: bounding.bottom > (window.innerHeight || document.documentElement.clientHeight),
+    right: bounding.right > (window.innerWidth || document.documentElement.clientWidth),
+  };
+  isOut.any = Object.values(isOut).some(val => val);
+  isOut.all = Object.values(isOut).every(val => val);
+  return isOut;
+}
 export default {
   getUniqueString,
   getRandomElement,
@@ -166,4 +186,5 @@ export default {
   flushPromises,
   kebabCaseToPascalCase,
   debounce,
+  isOutOfViewPort,
 };
