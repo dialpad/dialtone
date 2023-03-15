@@ -7,6 +7,7 @@
     :disabled="disabled"
     :danger="danger"
     :button-class="buttonClass"
+    :text-class="textClass"
     :button-width-size="buttonWidthSize"
     @click="onClick"
   >

@@ -9,6 +9,7 @@
       :danger="danger"
       :button-class="buttonClass"
       :button-width-size="buttonWidthSize"
+      :text-class="textClass"
       class="dt-recipe--callbar-button-with-popover--main-button"
       @click="buttonClick"
     >
@@ -201,6 +202,14 @@ export default {
      * Additional class name for the button wrapper element.
      */
     buttonClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the button text.
+     */
+    textClass: {
       type: [String, Array, Object],
       default: '',
     },
