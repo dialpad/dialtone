@@ -2,7 +2,6 @@ import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtScroller from './DtScroller.vue';
 
-global.requestAnimationFrame = cb => cb();
 // Constants
 const items = Array.from({ length: 20 }, (_, i) => ({
   id: i,
@@ -51,7 +50,10 @@ describe('DtScroller Tests', function () {
     slots = baseSlotsData;
   });
 
-  beforeEach(function () { _setWrappers(); });
+  beforeEach(function () {
+    _setWrappers();
+    global.requestAnimationFrame = cb => cb();
+  });
 
   describe('Presentation Tests', function () {
     describe('When scroller renders', function () {
@@ -71,7 +73,7 @@ describe('DtScroller Tests', function () {
         assert.isTrue(!!wrapper.emitted()['scroll-start']);
       });
       it('`scroll-end` event when scroll reach the bottom of the component', function () {
-        defaultContent.element.scrollTop = 500;
+        wrapper.vm.scrollToItem(20);
         wrapper.trigger('scroll');
 
         assert.isTrue(!!wrapper.emitted()['scroll-end']);
