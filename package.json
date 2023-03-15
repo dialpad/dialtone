@@ -82,7 +82,7 @@
     "node": "16"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "latest",
+    "@dialpad/dialtone-icons": "0.0.21",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
