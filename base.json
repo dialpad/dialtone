@@ -2641,7 +2641,7 @@
           "type": "color"
         },
         "bold": {
-          "value": "{color.black.300}",
+          "value": "{color.black.500}",
           "type": "color"
         },
         "strong": {
@@ -2718,6 +2718,47 @@
                 "type": "darken",
                 "value": ".4",
                 "space": "hsl"
+              }
+            }
+          }
+        },
+        "opaque": {
+          "secondary": {
+            "value": "{color.black.900}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".11",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "moderate": {
+            "value": "{color.black.900}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".23",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "bold": {
+            "value": "{color.black.900}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".43",
+                  "space": "hsl"
+                }
               }
             }
           }
@@ -3373,7 +3414,6 @@
         "color.text.success-strong": "S:e76a14e3ba907c5a3fb24618a50c839fcce19cfc,",
         "color.text.inverted.tertiary": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
         "inputs.color.border.success": "S:3e6fdf080f15e6deaa3ee9a268179190d6e496b1,",
-        "color.surface.opaque.secondary": "S:fcac5ac71509870b22c60aae84e3f9e9adef4909,",
         "color.surface.opaque.moderate": "S:e1f5b70620515fcf8029fef3d8ac0441cfc7e639,",
         "color.surface.opaque.bold": "S:b54df26a8089849e5afdf59b1ae6f0279ca9e2ab,",
         "color.surface.opaque.critical": "S:36a96a2d7cf015fae0b45c2118e69fda62235410,",
