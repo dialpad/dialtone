@@ -1,3 +1,16 @@
+# [3.50.0](https://github.com/dialpad/dialtone-vue/compare/v3.49.0...v3.50.0) (2023-03-15)
+
+
+### Code Refactoring
+
+* modify dt-recipe-callbar component to have common styles baked in (vue3) ([#818](https://github.com/dialpad/dialtone-vue/issues/818)) ([cbb65ff](https://github.com/dialpad/dialtone-vue/commit/cbb65ff622494d656df1845b489e84a6e349b766))
+
+
+### Features
+
+* add avatar-size prop to contact info (vue3) ([#810](https://github.com/dialpad/dialtone-vue/issues/810)) ([19bb97e](https://github.com/dialpad/dialtone-vue/commit/19bb97eaa21b055a336a93b6dbf96f88f157f536))
+* **Dt Recipe Ivr Node:** add connector slot ([#820](https://github.com/dialpad/dialtone-vue/issues/820)) ([e688d19](https://github.com/dialpad/dialtone-vue/commit/e688d1998274d536dec2cef550561d13ef83a671))
+
 # [3.49.0](https://github.com/dialpad/dialtone-vue/compare/v3.48.0...v3.49.0) (2023-03-14)
 
 
