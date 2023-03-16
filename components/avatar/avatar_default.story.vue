@@ -4,6 +4,7 @@
     :size="$attrs.size"
     :presence="$attrs.presence"
     :avatar-class="$attrs.avatarClass"
+    :canvas-class="$attrs.canvasClass"
     :initials="$attrs.initials"
     :seed="$attrs.seed"
     :gradient="$attrs.gradient"
