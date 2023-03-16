@@ -1,3 +1,10 @@
+# [2.70.0](https://github.com/dialpad/dialtone-vue/compare/v2.69.0...v2.70.0) (2023-03-16)
+
+
+### Features
+
+* **Avatar:** add canvasClass prop ([#830](https://github.com/dialpad/dialtone-vue/issues/830)) ([62437c2](https://github.com/dialpad/dialtone-vue/commit/62437c2a17ca5f9287d69ead6d5357afd9f6c45a))
+
 # [2.69.0](https://github.com/dialpad/dialtone-vue/compare/v2.68.0...v2.69.0) (2023-03-16)
 
 
