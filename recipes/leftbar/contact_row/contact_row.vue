@@ -4,7 +4,7 @@
     :description="`${name} ${presenceText} ${userStatus}`"
     :has-unreads="hasUnreads"
     :selected="selected"
-    :has-call-button="true"
+    :has-call-button="hasCallButton"
     :muted="muted"
     :is-typing="isTyping"
     :call-button-tooltip="callButtonTooltip"
@@ -181,6 +181,14 @@ export default {
     isTyping: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Whether the contact row should display a call button when hovered.
+     */
+    hasCallButton: {
+      type: Boolean,
+      default: true,
     },
 
     /**
