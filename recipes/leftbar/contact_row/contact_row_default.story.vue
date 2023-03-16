@@ -13,6 +13,7 @@
     :selected="$attrs.selected"
     :no-initials="$attrs.noInitials"
     :is-typing="$attrs.isTyping"
+    :has-call-button="$attrs.hasCallButton"
     :call-button-tooltip="$attrs.callButtonTooltip"
     @click="$attrs.onClick"
     @call="$attrs.onCall"
