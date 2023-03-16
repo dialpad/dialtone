@@ -1,3 +1,17 @@
+# [3.51.0](https://github.com/dialpad/dialtone-vue/compare/v3.50.0...v3.51.0) (2023-03-16)
+
+
+### Bug Fixes
+
+* dialtone icons version - vue3 ([#824](https://github.com/dialpad/dialtone-vue/issues/824)) ([4456e36](https://github.com/dialpad/dialtone-vue/commit/4456e36eb0fb4391c3ba98e6b0b628150cb1c664))
+* popover fallback placements ([#822](https://github.com/dialpad/dialtone-vue/issues/822)) ([418bc81](https://github.com/dialpad/dialtone-vue/commit/418bc81200348f924f7be21facce7cc0210df886))
+
+
+### Features
+
+* **Avatar:** add canvasClass prop ([#831](https://github.com/dialpad/dialtone-vue/issues/831)) ([0977222](https://github.com/dialpad/dialtone-vue/commit/0977222ec0903c6247dc0adde31430ed412f8ad6))
+* **Leftbar Contact Row:** add hasCallButton ([#827](https://github.com/dialpad/dialtone-vue/issues/827)) ([cafb0a2](https://github.com/dialpad/dialtone-vue/commit/cafb0a25b967447e302f8e042a2863d9bb7ea681))
+
 # [3.50.0](https://github.com/dialpad/dialtone-vue/compare/v3.49.0...v3.50.0) (2023-03-15)
 
 
