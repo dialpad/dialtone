@@ -4,6 +4,7 @@
     :size="size"
     :presence="presence"
     :avatar-class="avatarClass"
+    :canvas-class="canvasClass"
     :initials="initials"
     :seed="seed"
     :gradient="gradient"

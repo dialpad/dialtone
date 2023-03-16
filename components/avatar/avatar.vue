@@ -7,7 +7,7 @@
   >
     <div
       ref="canvas"
-      class="d-avatar__canvas"
+      :class="[canvasClass, 'd-avatar__canvas']"
     >
       <!-- @slot Slot for avatar content -->
       <slot v-if="showDefaultSlot" />
@@ -97,6 +97,14 @@ export default {
      * Used to customize the avatar container
      */
     avatarClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Set classes on the avatar canvas. Wrapper around the core avatar image.
+     */
+    canvasClass: {
       type: [String, Array, Object],
       default: '',
     },
