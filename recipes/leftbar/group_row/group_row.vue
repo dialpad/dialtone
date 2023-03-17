@@ -11,6 +11,7 @@
     <template #left>
       <dt-avatar
         :initials="avatarInitials"
+        :seed="avatarSeed"
         :group="groupCount"
       >
         <img
@@ -55,6 +56,14 @@ export default {
       type: String,
       default: '',
       required: true,
+    },
+
+    /**
+     * Avatar seed, set this to the user's ID to get the same avatar background gradient each time it is displayed.
+     */
+    avatarSeed: {
+      type: String,
+      default: null,
     },
 
     /**
