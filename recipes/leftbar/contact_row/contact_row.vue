@@ -18,11 +18,13 @@
         :seed="avatarSeed"
         :presence="avatarPresence"
       >
+        <!-- No alt needed as the name is already mentioned in the description
+          https://dequeuniversity.com/rules/axe/4.4/image-redundant-alt?application=axe-puppeteer -->
         <img
           v-if="avatarSrc"
           data-qa="dt-avatar-image"
           :src="avatarSrc"
-          :alt="name"
+          alt=""
         >
         <template v-else-if="noInitials">
           <dt-icon
