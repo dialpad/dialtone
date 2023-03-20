@@ -3,7 +3,7 @@ import DtBadge from './badge';
 import DtBadgeDefaultTemplate from './badge_default.story.vue';
 import DtBadgeVariantsTemplate from './badge_variants.story.vue';
 import DtBadgeExamplesTemplate from './badge_examples.story.vue';
-import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS } from './badge_constants';
+import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
 import DtBadgeMdx from './badge.mdx';
 
 const iconsList = getIconNames();
@@ -53,6 +53,18 @@ export const argTypesData = {
       options: Object.keys(BADGE_KIND_MODIFIERS),
     },
     if: { arg: 'type', neq: 'ai' },
+  },
+
+  decoration: {
+    defaultValue: undefined,
+    control: {
+      type: 'select',
+      options: [undefined, ...Object.keys(BADGE_DECORATION_MODIFIERS)],
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+    // TODO: Find a way to add conditions on more than one argument
   },
 };
 

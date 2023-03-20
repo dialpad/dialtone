@@ -23,6 +23,22 @@
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
+        text="Label"
+        decoration="black-900"
+      />
+      <dt-badge
+        text="Support"
+        decoration="blue-400"
+      />
+      <dt-badge
+        text="Complaint"
+        decoration="red-400"
+      />
+    </div>
+    <div
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
         text="In progress"
         type="info"
       />

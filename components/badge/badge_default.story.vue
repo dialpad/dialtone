@@ -3,6 +3,7 @@
     :text="$attrs.text"
     :type="$attrs.type"
     :kind="$attrs.kind"
+    :decoration="$attrs.decoration"
     :icon-left="$attrs.iconLeft"
     :icon-right="$attrs.iconRight"
   >
