@@ -11,7 +11,7 @@
       'd-ba',
       'd-bar4',
       'd-fs-100',
-      inverted ? 'd-bc-black-500' : 'd-bc-black-400',
+      inverted ? 'd-bc-inverted-moderate' : 'd-bc-default',
     ]"
   >
     <span
@@ -30,7 +30,7 @@
         size="100"
         aria-hidden="true"
         :class="[
-          inverted ? 'd-fc-black-300' : 'd-fc-black-600',
+          inverted ? 'd-fc-secondary-inverted' : 'd-fc-tertiary',
           'd-mr2',
         ]"
       />
@@ -39,7 +39,7 @@
         :key="`${i}-${item}`"
         aria-hidden="true"
         :class="[
-          inverted ? 'd-fc-black-300' : 'd-fc-black-600',
+          inverted ? 'd-fc-secondary-inverted' : 'd-fc-tertiary',
           'd-mr2',
         ]"
         v-html="item"

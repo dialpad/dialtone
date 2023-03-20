@@ -44,8 +44,8 @@ A node in IVR configuration to configure DTMF types.
   :is-selected="false"
   :menu-button-label="'Node menu'"
 >
-  <p class="d-fs14 d-fw-bold">Menu prompt</p>
-  <p class="d-fs14 d-fc-purple-700">americas_office-workflow_main-menu-2022--FINAL.mp3</p>
+  <p class="d-fw-bold">Menu prompt</p>
+  <p class="d-fc-purple-700">americas_office-workflow_main-menu-2022--FINAL.mp3</p>
 </dt-recipe-ivr-node>
 ```
 
@@ -65,8 +65,8 @@ A node in IVR configuration to collect data like input, number, etc.
   :is-selected="false"
   :menu-button-label="'Node menu'"
 >
-  <p class="d-fs14 d-fw-bold">Collect prompt</p>
-  <p class="d-fs14 d-fc-purple-700">americas_office-collect-menu-2022-FINAL.mp3</p>
+  <p class="d-fw-bold">Collect prompt</p>
+  <p class="d-fc-purple-700">americas_office-collect-menu-2022-FINAL.mp3</p>
 </dt-recipe-ivr-node>
 ```
 
@@ -86,7 +86,7 @@ A node in IVR configuration to play media.
   :is-selected="false"
   :menu-button-label="'Node menu'"
 >
-  <p class="d-fs14 d-fc-purple-700">2022-Greeting.mp3</p>
+  <p class="d-fc-purple-700">2022-Greeting.mp3</p>
 </dt-recipe-ivr-node>
 ```
 
@@ -106,12 +106,19 @@ A node in IVR used to integration DX expert view in iFrame to create complex flo
   :is-selected="false"
   :menu-button-label="'Node menu'"
 >
-  <p class="d-fs14 d-fw-bold">Account Issues</p>
-  <p class="d-fs14">19 Nodes</p>
-  <dt-button importance="clear" icon-position="right">
+  <p class="d-fw-bold">Account Issues</p>
+  <p>19 Nodes</p>
+  <dt-button
+    importance="clear"
+    kind="muted"
+    icon-position="right"
+  >
     Launch Expert
     <template #icon>
-      <dt-icon name="external-link" />
+      <dt-icon
+        size="300"
+        name="external-link"
+      />
     </template>
   </dt-button>
 </dt-recipe-ivr-node>
@@ -133,8 +140,8 @@ A node in IVR used to step to another workflow or step in a workflow.
   :is-selected="false"
   :menu-button-label="'Node menu'"
 >
-  <p class="d-fs14 d-fw-bold">Go to</p>
-  <p class="d-fs14">Description</p>
+  <p class="d-fw-bold">Go to</p>
+  <p>Description</p>
 </dt-recipe-ivr-node>
 ```
 
@@ -154,8 +161,8 @@ A node in IVR used to step to another workflow or step in a workflow.
   :is-selected="false"
   :menu-button-label="'Node menu'"
 >
-  <p class="d-fs14 d-fw-bold">Branch</p>
-  <p class="d-fs14">Description</p>
+  <p class="d-fw-bold">Branch</p>
+  <p>Description</p>
 </dt-recipe-ivr-node>
 ```
 
@@ -200,8 +207,8 @@ A node in IVR used to terminate the call.
   :is-selected="false"
   :menu-button-label="'Node menu'"
 >
-  <p class="d-fs14 d-fw-bold">Hangup</p>
-  <p class="d-fs14">Description</p>
+  <p class="d-fw-bold">Hangup</p>
+  <p>Description</p>
 </dt-recipe-ivr-node>
 ```
 

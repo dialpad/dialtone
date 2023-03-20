@@ -170,6 +170,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 0;
+  box-shadow: none
 }
 
 .root-layout__body--invert {
@@ -178,10 +179,12 @@ export default {
 
 .root-layout__sidebar {
   flex-grow: 1;
+  box-shadow: none
 }
 
 .root-layout__content {
   flex-basis: 0;
   flex-grow: 999;
+  box-shadow: none
 }
 </style>

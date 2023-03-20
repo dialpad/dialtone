@@ -43,13 +43,14 @@
           <dt-button
             :aria-label="nodeType"
             importance="clear"
+            kind="muted"
             data-qa="dt-ivr-node-icon"
           >
             <template #icon>
               <dt-icon
                 :name="nodeIcon"
                 size="200"
-                :class="['d-fc-black-900', { 'ivr_node__goto_icon': isGotoNode }]"
+                :class="['', { 'ivr_node__goto_icon': isGotoNode }]"
               />
             </template>
           </dt-button>
@@ -68,6 +69,7 @@
           <template #anchor>
             <dt-button
               importance="clear"
+              kind="muted"
               :aria-label="menuButtonAriaLabel"
               @click.stop.prevent="openMenu"
             >
@@ -75,7 +77,6 @@
                 <dt-icon
                   name="more-vertical"
                   size="200"
-                  class="d-fc-black-900"
                 />
               </template>
             </dt-button>

@@ -247,15 +247,15 @@ export default {
 .dt-list-item--focusable:focus,
 .dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
-  background-color: hsla(var(--black-900-h), var(--black-900-s), var(--black-900-l), 0.05);
+  background-color: var(--bgc-moderate-opaque);
 }
 
 .dt-list-item--highlighted:active {
-  background-color: hsla(var(--black-900-h), var(--black-900-s), var(--black-900-l), 0.1);
+  background-color: var(--bgc-bold-opaque);
 }
 
 .dt-list-item:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 var(--su2) var(--focus-ring); // TODO: update with new focus state once done in `dialtone`
+  box-shadow: var(--bs-focus-ring);
 }
 </style>

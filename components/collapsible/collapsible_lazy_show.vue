@@ -160,6 +160,6 @@ export default {
   .enter-active,
   .leave-active {
     overflow: hidden;
-    transition: height .3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: height var(--td300) var(--ttf-quint);
   }
 </style>

@@ -53,6 +53,6 @@ export default {
   justify-content: center;
   font-size: var(--fs-200);
   line-height: var(--lh4);
-  padding: var(--su4) var(--su12);
+  padding: var(--space-300) calc(var(--space-300) * 3);
 }
 </style>

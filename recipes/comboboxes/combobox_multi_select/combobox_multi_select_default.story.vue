@@ -39,7 +39,7 @@
         >
           {{ item.value }}
           <template #right>
-            {{ item.type }}
+            <span class="d-fc-secondary">{{ item.type }}</span>
           </template>
         </dt-list-item>
       </ul>
