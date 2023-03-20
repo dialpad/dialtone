@@ -34,7 +34,7 @@
     "through2": "^4.0.2"
   },
   "peerDependencies": {
-    "vue": "latest"
+    "vue": ">=3.2"
   },
   "repository": "git@github.com:dialpad/dialtone-icons.git"
 }
