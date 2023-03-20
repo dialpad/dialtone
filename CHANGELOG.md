@@ -1,3 +1,10 @@
+## [2.72.2](https://github.com/dialpad/dialtone-vue/compare/v2.72.1...v2.72.2) (2023-03-20)
+
+
+### Bug Fixes
+
+* **Badge:** export decoration modifiers ([#846](https://github.com/dialpad/dialtone-vue/issues/846)) ([8fa4614](https://github.com/dialpad/dialtone-vue/commit/8fa4614644135965d97e6c494349909ad214aaf4))
+
 ## [2.72.1](https://github.com/dialpad/dialtone-vue/compare/v2.72.0...v2.72.1) (2023-03-20)
 
 
