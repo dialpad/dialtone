@@ -16,12 +16,17 @@
         :seed="avatarSeed"
         :group="groupCount"
       >
+        <!-- No alt needed as the name is already mentioned in the description
+          https://dequeuniversity.com/rules/axe/4.4/image-redundant-alt?application=axe-puppeteer -->
         <img
           v-if="avatarSrc"
           data-qa="dt-avatar-image"
           :src="avatarSrc"
-          :alt="avatarInitials"
+          alt=""
         >
+        <template v-else>
+          {{ avatarInitials }}
+        </template>
       </dt-avatar>
     </template>
   </dt-recipe-general-row>
