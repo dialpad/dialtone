@@ -134,7 +134,7 @@ export default {
         this.buttonClass,
         'dt-recipe-callbar-button',
         'd-px0',
-        'd-fc-black-900',
+        'd-fc-primary',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'd-btn--icon-only': this.circle,
@@ -175,6 +175,7 @@ export default {
 
 .dt-recipe-callbar-button.d-btn[disabled] {
   background-color: unset;
+  opacity: .5;
 }
 
 .dt-recipe-callbar-button--circle.d-btn[disabled] {

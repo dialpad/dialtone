@@ -209,7 +209,7 @@ Variants.parameters = {
       <template #header>
         <div class="d-d-flex d-ai-center d-mb2">
           <div class="d-fs-200 d-fw-bold d-mr4">+1 (415) 123-4567</div>
-          <dt-icon name="check-circle" size="200" class="d-fc-black-500" />
+          <dt-icon name="check-circle" size="200" class="d-fc-tertiary" />
         </div>
       </template>
       <template #subtitle>San Francisco, California</template>
@@ -242,7 +242,7 @@ Variants.parameters = {
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
             <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-            <dt-icon name="check-circle" size="200" class="d-fc-black-500 d-va-text-bottom" />
+            <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </div>
         </template>
         <template #bottom>
@@ -261,7 +261,7 @@ Variants.parameters = {
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
           <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-          <dt-icon name="check-circle" size="200" class="d-fc-black-500 d-va-text-bottom" />
+          <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
         </div>
       </template>
       <template #bottom>
@@ -285,7 +285,7 @@ Variants.parameters = {
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
           <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-          <dt-icon name="check-circle" size="200" class="d-fc-black-500 d-va-text-bottom" />
+          <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
         </div>
       </template>
       <template #bottom>

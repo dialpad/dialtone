@@ -9,7 +9,7 @@
       content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-blr-pill d-bgc-black-200 d-w100p d-wmx64"
+      class="d-blr-pill d-bgc-moderate-opaque d-w100p d-wmx64"
     >
       <template
         v-if="hasSlotContent($slots.leftIcon)"

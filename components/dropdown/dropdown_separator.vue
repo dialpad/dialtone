@@ -1,7 +1,7 @@
 <template>
   <li
     aria-hidden="true"
-    class="dt-list-separator d-bgc-black-300 d-my4 d-mxn4"
+    class="dt-list-separator d-my4 d-mxn4"
   />
 </template>
 
@@ -16,7 +16,7 @@ export default {
   border-radius: var(--size-300);
 }
 .dt-list-separator {
-  height: var(--size-100);
+  border-top: var(--size-100) solid var(--bc-default);
   list-style: none;
 }
 </style>

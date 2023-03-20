@@ -28,19 +28,23 @@
       #content
     >
       <div v-if="expert">
-        <p class="d-fs14 d-fw-bold">
+        <p class="d-fw-bold">
           Account Issues
         </p>
-        <p class="d-fs14">
+        <p>
           19 Nodes
         </p>
         <dt-button
           importance="clear"
+          kind="muted"
           icon-position="right"
         >
           Launch Expert
           <template #icon>
-            <dt-icon name="external-link" />
+            <dt-icon
+              size="300"
+              name="external-link"
+            />
           </template>
         </dt-button>
       </div>
@@ -57,23 +61,23 @@
         </div>
       </div>
       <div v-if="hangup || branch || goTo">
-        <p class="d-fs14 d-fw-bold">
+        <p class="d-fw-bold">
           Name
         </p>
-        <p class="d-fs14">
+        <p>
           Description
         </p>
       </div>
       <div v-if="play">
-        <p class="d-fs14 d-fc-purple-700">
+        <p class="d-fc-purple-700">
           2022-Greeting.mp3
         </p>
       </div>
       <div v-if="collect || menu">
-        <p class="d-fs14 d-fw-bold">
+        <p class="d-fw-bold">
           {{ label }} prompt
         </p>
-        <p class="d-fs14 d-fc-purple-700">
+        <p class="d-fc-purple-700">
           {{ fileName }}
         </p>
       </div>

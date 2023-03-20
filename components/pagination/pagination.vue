@@ -3,7 +3,6 @@
     :aria-label="ariaLabel"
     class="d-d-flex d-fd-row d-gg4 d-ai-center"
   >
-    <!-- TODO: remove `h:d-fc-black-300` once DT-871 is completed -->
     <dt-button
       class="d-px8"
       data-qa="dt-pagination-prev"
@@ -11,7 +10,7 @@
       kind="muted"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
-      :class="isFirstPage ? 'd-fc-black-300 h:d-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
+      :class="isFirstPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage - 1)"
     >
       <template #icon>
@@ -50,7 +49,6 @@
         {{ page }}
       </dt-button>
     </div>
-    <!-- TODO: remove `h:d-fc-black-300` once DT-871 is completed -->
     <dt-button
       class="d-px8"
       data-qa="dt-pagination-next"
@@ -58,7 +56,7 @@
       :disabled="isLastPage"
       kind="muted"
       :importance="isLastPage ? 'primary' : 'clear'"
-      :class="isLastPage ? 'd-fc-black-300 h:d-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
+      :class="isLastPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage + 1)"
     >
       <template #icon>

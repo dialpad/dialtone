@@ -39,7 +39,7 @@
         v-else
         tabindex="0"
       >
-        <p class="d-fs-200 d-fw-bold d-fc-black-800">
+        <p class="d-fs-200 d-fw-bold">
           Lorem ipsum
         </p>
         <p class="d-fs-100">

@@ -298,30 +298,31 @@ export default {
 
 <style lang="less">
 .dt-recipe--callbar-button-with-popover--arrow.d-btn--circle {
-  margin-top: -1.2rem;
-  width: var(--su16);
-  height: var(--su16);
-  padding: var(--su8);
-  border-radius: var(--su4);
+  margin-top: calc(calc(var(--space-300) * 3) * -1);
+  width: var(--size-500);
+  height: var(--size-500);
+  padding: var(--space-400);
+  border-radius: var(--size-300);
 
   &.d-btn--active {
-    background: var(--black-025);
+    background: var(--bgc-moderate-opaque);
   }
 }
 .dt-recipe--callbar-button-with-popover--popover {
   .d-popover__header {
-    background: var(--black-900);
-    color: var(--white);
+    background: var(--bgc-contrast);
+    color: var(--fc-primary-inverted);
 
+    // This is awfully specific, TODO: wth is going on here?
     button {
-      color: var(--white);
+      color: var(--fc-primary-inverted);
     }
   }
 
 }
 .dt-recipe--callbar-button-with-popover--button .d-tab--selected::after,
 .dt-recipe--callbar-button-with-popover--button .d-tab--selected:hover::after {
-  --tab--bgc: var(--black-900);
+  --tab--bgc: var(--bgc-contrast);
 }
 .dt-recipe--callbar-button-with-popover--button .tab-group {
   display: flex;

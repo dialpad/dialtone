@@ -20,7 +20,7 @@
       >
         <span
           ref="chipsWrapper"
-          class="d-ps-absolute d-mx2"
+          class="d-ps-absolute d-mx2 d-pl1"
         >
           <dt-chip
             v-for="item in selectedItems"
