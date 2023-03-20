@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtBadge from './badge.vue';
-import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS } from './badge_constants';
+import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 
 // Constants
@@ -64,6 +64,15 @@ describe('DtBadge Tests', function () {
       it('should have correct kind', async function () {
         await wrapper.setProps({ kind });
         itBehavesLikeHasCorrectClass(badge, BADGE_KIND_MODIFIERS[kind]);
+      });
+    };
+
+    const itBehavesLikeHasCorrectDecoration = decoration => {
+      it('should have correct decoration', async function () {
+        await wrapper.setProps({ decoration });
+        const decorativeSpan = wrapper.find('.d-badge__decorative');
+        assert(decorativeSpan.exists());
+        itBehavesLikeHasCorrectClass(badge, BADGE_DECORATION_MODIFIERS[decoration]);
       });
     };
 
@@ -131,6 +140,19 @@ describe('DtBadge Tests', function () {
       beforeEach(function () { _setWrappers(); });
 
       describe('When kind is count', function () { itBehavesLikeHasCorrectKind('count'); });
+    });
+
+    describe('When a decoration is provided via prop', function () {
+      // Test Setup
+      beforeEach(function () { _setWrappers(); });
+
+      describe('When decoration is black-900', function () { itBehavesLikeHasCorrectDecoration('black-900'); });
+
+      describe('When decoration is red-400', function () { itBehavesLikeHasCorrectDecoration('red-400'); });
+
+      describe('When decoration is purple-400', function () { itBehavesLikeHasCorrectDecoration('purple-400'); });
+
+      describe('When decoration is gold-300', function () { itBehavesLikeHasCorrectDecoration('gold-300'); });
     });
   });
 });

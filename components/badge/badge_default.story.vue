@@ -3,6 +3,7 @@
     :text="text"
     :type="type"
     :kind="kind"
+    :decoration="decoration"
     :icon-left="iconLeft"
     :icon-right="iconRight"
   >

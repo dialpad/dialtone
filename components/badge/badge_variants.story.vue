@@ -1,8 +1,8 @@
 <template>
-  <div class="d-fd-column d-p24 d-w100p d-of-auto d-stack8">
+  <div class="d-fd-column d-p24 d-of-auto d-stack8">
     <div
       id="components-badge--variants-container"
-      class="d-d-flex d-gg8 d-ai-center"
+      class="d-d-flex d-gg8 d-ai-center d-ff-row-wrap"
     >
       <dt-badge
         v-for="type in types"
@@ -17,13 +17,21 @@
         :type="type.value"
         kind="count"
       />
+      <dt-badge
+        v-for="decoration in Object.keys(BADGE_DECORATION_MODIFIERS)"
+        :key="decoration"
+        :decoration="decoration"
+        :text="getDecorationText(decoration)"
+        type="default"
+        kind="label"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import DtBadge from './badge';
-import { BADGE_TYPE_MODIFIERS } from './badge_constants';
+import { BADGE_TYPE_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
 
 export default {
   name: 'DtBadgeVariants',
@@ -33,6 +41,7 @@ export default {
   data () {
     return {
       BADGE_TYPE_MODIFIERS,
+      BADGE_DECORATION_MODIFIERS,
     };
   },
 
@@ -43,6 +52,12 @@ export default {
         typeList.push({ display: key[0].toUpperCase() + key.slice(1), value: key });
       }
       return typeList;
+    },
+  },
+
+  methods: {
+    getDecorationText (val) {
+      return val.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
     },
   },
 };
