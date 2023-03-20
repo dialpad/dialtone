@@ -1,3 +1,10 @@
+## [2.71.1](https://github.com/dialpad/dialtone-vue/compare/v2.71.0...v2.71.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* configure passthrough attrs in leftbar components ([#842](https://github.com/dialpad/dialtone-vue/issues/842)) ([0f31156](https://github.com/dialpad/dialtone-vue/commit/0f311561fc06df44468c9ed9a033f47ade7441c2))
+
 # [2.71.0](https://github.com/dialpad/dialtone-vue/compare/v2.70.0...v2.71.0) (2023-03-20)
 
 
