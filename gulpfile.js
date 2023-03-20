@@ -46,6 +46,9 @@ const paths = {
     vueIcons: './src/icons/',
     index: './src/icons.js',
     iconsList: './src/icons.json',
+  },
+  templates: {
+    baseIcon: './src/baseIconTemplate.vue',
   }
 };
 
@@ -97,16 +100,30 @@ const cleanVueIcons = () => {
 //      Lint, minify, and concatenate style files
 //  ================================================================================
 const moveStyleTagsToEOF = function (file, enc, cb) {
-  if (file.isBuffer()) {
-    const styleTagsRegex = /<style[\s\S]*<\/style>/gmi;
-    let code = file.contents.toString();
-    const result = styleTagsRegex.exec(code);
-    if (!result) return cb(null, file);
-    const matchedText = result[0];
-    code = code.replace(styleTagsRegex, '');
-    code = code + matchedText;
-    file.contents = Buffer.from(code);
-  }
+  if (!file.isBuffer()) return cb(null, file);
+
+  const styleTagsRegex = /<style[\s\S]*<\/style>/gmi;
+  let content = file.contents.toString();
+  const result = styleTagsRegex.exec(content);
+
+  if (!result) return cb(null, file);
+
+  const matchedText = result[0];
+  content = content.replace(styleTagsRegex, '');
+  content = content + matchedText;
+  file.contents = Buffer.from(content);
+
+  return cb(null, file);
+};
+
+const replaceTemplateContent = function (file, enc, cb) {
+  if (!file.isBuffer()) return cb(null, file);
+
+  const template = fs.readFileSync(paths.templates.baseIcon).toString();
+  let content = file.contents.toString();
+  content = template.replace('/*SVG-CONTENT*/', content);
+  file.contents = Buffer.from(content);
+
   return cb(null, file);
 };
 
@@ -141,8 +158,7 @@ const buildIcons = function (done) {
       data-name="${title}"
       class="d-icon d-icon--${name}"`;
     }))
-    .pipe(svgmin(function getOptions (file) {
-      const name = path.parse(file.path).name
+    .pipe(svgmin(function getOptions () {
       return {
         multipass: true,
         plugins: [
@@ -154,7 +170,6 @@ const buildIcons = function (done) {
           {
             cleanupIDs: {
               minify: true,
-              prefix: `${name}__`,
             },
           }
         ],
@@ -162,9 +177,18 @@ const buildIcons = function (done) {
     }))
     .pipe(rename({ dirname: '' }))
     .pipe(dest(paths.icons.outputSvg))
-    .pipe(replace('<svg', '<template><svg'))
-    .pipe(replace('</svg>', '</svg></template>'))
-  // move any style tags within the svg into style tags of the vue component
+    .pipe(replace(/(clip-path|fill|mask|filter)="url\(#[a-z]\)"/g, (match) => {
+      return ':'+ match
+          .replace(/url\(#[a-z]\)/, (match) => `\`${match}\``)
+          .replace(/#[a-z]/, (id) => '#${uniqueID}__' + id.charAt(1))
+    }))
+    .pipe(replace(/id="[a-z]"/g, (match) => {
+      const oldID = /"[a-z]"/.exec(match)[0].charAt(1);
+      return `:id="\`\${uniqueID}__${oldID}\`"`;
+    }))
+    // replace the SVG content into the vue template
+    .pipe(through2.obj(replaceTemplateContent))
+    // move any style tags within the svg into style tags of the vue component
     .pipe(through2.obj(moveStyleTagsToEOF))
     .pipe(replace('<style>', '<style scoped>'))
     .pipe(rename(function (file) {
