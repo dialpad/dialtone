@@ -9,6 +9,7 @@
     :is-typing="isTyping"
     :call-button-tooltip="callButtonTooltip"
     :unread-count-tooltip="unreadCountTooltip"
+    v-bind="$attrs"
     v-on="contactRowListeners"
     @call="$emit('call', $event)"
   >
@@ -83,6 +84,8 @@ export default {
     DtRecipeGeneralRow,
     DtEmojiTextWrapper,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**

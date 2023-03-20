@@ -7,6 +7,7 @@
     :unread-count-tooltip="unreadCountTooltip"
     :selected="selected"
     :is-typing="isTyping"
+    v-bind="$attrs"
   >
     <template #left>
       <dt-avatar
@@ -36,6 +37,8 @@ export default {
     DtAvatar,
     DtRecipeGeneralRow,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
