@@ -320,7 +320,11 @@ export default {
 
     validateImageAttrsPresence () {
       const isSrcMissing = !this.$refs.canvas.children[0].getAttribute('src');
-      const isAltMissing = !this.$refs.canvas.children[0].getAttribute('alt');
+
+      // If alt set to empty string consider it valid, as this is a valid case if the
+      // image is already described by something else (ex: visible description)
+      // eslint-disable-next-line no-unneeded-ternary
+      const isAltMissing = this.$refs.canvas.children[0].getAttribute('alt') === null ? true : false;
 
       if (isSrcMissing || isAltMissing) {
         warn('src and alt attributes are required for image avatars', this);
