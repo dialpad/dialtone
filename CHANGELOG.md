@@ -1,3 +1,15 @@
+# [2.71.0](https://github.com/dialpad/dialtone-vue/compare/v2.70.0...v2.71.0) (2023-03-20)
+
+
+### Bug Fixes
+
+* **Leftbar Group Row:** add missing avatarSeed prop ([#840](https://github.com/dialpad/dialtone-vue/issues/840)) ([ef90afa](https://github.com/dialpad/dialtone-vue/commit/ef90afa86cd29e99fa034cf0d6d199fbe8172a48))
+
+
+### Features
+
+* **Badge:** add decoration prop ([#828](https://github.com/dialpad/dialtone-vue/issues/828)) ([a3183f0](https://github.com/dialpad/dialtone-vue/commit/a3183f05181c4c33f74011ee89906743d7305071))
+
 # [2.70.0](https://github.com/dialpad/dialtone-vue/compare/v2.69.0...v2.70.0) (2023-03-16)
 
 
