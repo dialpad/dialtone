@@ -9,6 +9,7 @@
     :is-typing="isTyping"
     :call-button-tooltip="callButtonTooltip"
     :unread-count-tooltip="unreadCountTooltip"
+    v-bind="$attrs"
     v-on="$listeners"
   >
     <template #left>
@@ -81,6 +82,8 @@ export default {
     DtRecipeGeneralRow,
     DtEmojiTextWrapper,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
