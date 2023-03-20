@@ -1,3 +1,10 @@
+## [2.72.1](https://github.com/dialpad/dialtone-vue/compare/v2.72.0...v2.72.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* **Avatar:** allow empty alt if explicitly set ([1e4623f](https://github.com/dialpad/dialtone-vue/commit/1e4623fb28cb73c2044fbfab7793596addabae35))
+
 ## [2.71.1](https://github.com/dialpad/dialtone-vue/compare/v2.71.0...v2.71.1) (2023-03-20)
 
 
