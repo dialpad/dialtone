@@ -2946,10 +2946,6 @@
           }
         },
         "border": {
-          "default": {
-            "value": "rgba($color.black.900, 0.13)",
-            "type": "color"
-          },
           "focus": {
             "value": "{color.border.focus}",
             "type": "color"
@@ -3416,7 +3412,6 @@
         "inputs.color.text.default": "S:d6e7874175cd0c297dc2a90b82369417581d88f5,",
         "inputs.color.text.placeholder": "S:c895809280d946e194e683c2f287919802d4c3c5,",
         "inputs.color.text.disabled": "S:5850cc09d2e8f36baf53c1cc8afda070f898c362,",
-        "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
         "inputs.color.border.focus": "S:fa04a078de2efd25d134d58afa88b5aae08e4490,",
         "inputs.color.border.critical": "S:cd32e20a14d569696b9deec01dd68b4c3cedb60f,",
         "inputs.color.border.warning": "S:a61ba4e58db89699549293ded34c3265b07c07f9,",
