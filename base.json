@@ -3525,7 +3525,8 @@
         "color.surface.opaque.info-subtle": "S:3fec5783d87698de39f5619bc69048fc5adf0cc6,",
         "color.border.ai": "S:ff752e9ad7d5ac5acfa216a7b5165468624c0380,",
         "badge.color.background.default": "S:46515656b0f57d4ba86fd6167cbbaf94f1dc6d65,",
-        "color.surface.opaque.secondary": "S:fcac5ac71509870b22c60aae84e3f9e9adef4909,"
+        "color.surface.opaque.secondary": "S:fcac5ac71509870b22c60aae84e3f9e9adef4909,",
+        "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,"
       }
     },
     {
