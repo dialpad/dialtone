@@ -14,10 +14,11 @@ jobs:
       with:
         ref: gh-pages
     - run: |
-        rm -rf deploy-previews/pr-${{ github.event.pull_request.number }}
         git config user.name github-actions
         git config user.email github-actions@github.com
+        git config pull.rebase true
+        git pull
+        rm -rf deploy-previews/pr-${{ github.event.pull_request.number }}
         git add -A
         git commit -m "deploy preview cleanup"
-        git pull
         git push
