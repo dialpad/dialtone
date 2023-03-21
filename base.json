@@ -2142,7 +2142,7 @@
         },
         "border": {
           "default": {
-            "value": "rgba($color.black.900, 0.1)",
+            "value": "{color.border.subtle}",
             "type": "color"
           },
           "focus": {
