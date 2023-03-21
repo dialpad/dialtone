@@ -90,7 +90,7 @@
     "node": "16"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "0.0.21-vue3",
+    "@dialpad/dialtone-icons": "0.2.0-vue3",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
     "seedrandom": "^3.0.5",
