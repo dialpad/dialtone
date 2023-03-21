@@ -1,6 +1,5 @@
 import '../css/dialtone-globals.less';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { addParameters } from '@storybook/vue';
 import { version } from '../package.json';
 import theme from './theme';
 import Vue from 'vue';
@@ -17,12 +16,6 @@ Vue.use(fixDefaultSlot);
 // Fixes method "toJSON" is not defined on click event in Sb 6.5.11
 // See https://github.com/storybookjs/storybook/issues/14933#issuecomment-920578274
 Vue.prototype.toJSON = () => {}
-
-addParameters({
-  docs: {
-    theme,
-  },
-});
 
 
 export const parameters = {
@@ -85,6 +78,7 @@ export const parameters = {
         return match[1]
       }
       return src
-    }
-  }
+    },
+  },
+  theme,
 };

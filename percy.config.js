@@ -21,7 +21,9 @@ module.exports = {
     waitForTimeout: 250,
   },
   snapshot: {
-    widths: [2000],
-    minHeight: 2000,
+    enableJavaScript: true,
+  },
+  discovery: {
+    disableCache: true,
   },
 };
