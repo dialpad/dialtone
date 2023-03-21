@@ -1,6 +1,7 @@
 <template>
   <component
     :is="currentIcon"
+    v-if="currentIcon"
     data-qa="dt-icon"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
     :aria-label="ariaLabel"

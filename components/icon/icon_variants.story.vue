@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="d-flow4">
     <dt-icon
       v-for="size in sizes"
       :key="size"
       :size="size"
-      name="accessibility"
+      name="alert-circle"
     />
   </div>
 </template>
