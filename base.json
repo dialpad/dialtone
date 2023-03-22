@@ -2550,6 +2550,11 @@
           "type": "color",
           "description": "critical, danger, error, alert"
         },
+        "critical-strong": {
+          "value": "{color.red.500}",
+          "type": "color",
+          "description": "critical, danger, error, alert"
+        },
         "success": {
           "value": "{color.green.400}",
           "type": "color",
@@ -2629,23 +2634,23 @@
       },
       "surface": {
         "primary": {
-          "value": "{color.black.200}",
+          "value": "{color.black.100}",
           "type": "color"
         },
         "secondary": {
-          "value": "{color.black.300}",
+          "value": "{color.black.200}",
           "type": "color"
         },
         "moderate": {
-          "value": "{color.black.400}",
+          "value": "{color.black.300}",
           "type": "color"
         },
         "bold": {
-          "value": "{color.black.500}",
+          "value": "{color.black.400}",
           "type": "color"
         },
         "strong": {
-          "value": "{color.black.700}",
+          "value": "{color.black.600}",
           "type": "color"
         },
         "contrast": {
@@ -2730,7 +2735,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".11",
+                  "value": ".06",
                   "space": "hsl"
                 }
               }
@@ -2743,7 +2748,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".23",
+                  "value": ".16",
                   "space": "hsl"
                 }
               }
@@ -2756,7 +2761,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".43",
+                  "value": ".28",
                   "space": "hsl"
                 }
               }
