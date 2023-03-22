@@ -3053,6 +3053,18 @@
           }
         }
       }
+    },
+    "theme": {
+      "sidebar": {
+        "selected-row": {
+          "color": {
+            "background": {
+              "value": "{color.black.300}",
+              "type": "color"
+            }
+          }
+        }
+      }
     }
   },
   "components/badge": {
