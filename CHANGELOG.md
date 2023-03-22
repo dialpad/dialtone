@@ -1,3 +1,17 @@
+# [3.53.0](https://github.com/dialpad/dialtone-vue/compare/v3.52.0...v3.53.0) (2023-03-22)
+
+
+### Bug Fixes
+
+* **Avatar:** allow empty alt if explicitly set ([b1c0c53](https://github.com/dialpad/dialtone-vue/commit/b1c0c53f4c28344bd0dfa57cd7850c3fdb9c1c0e))
+* **Badge:** export decoration modifiers ([#847](https://github.com/dialpad/dialtone-vue/issues/847)) ([4e3cb20](https://github.com/dialpad/dialtone-vue/commit/4e3cb2056d96ae763851a61e9d886c059b287838))
+* configure passthrough attrs in leftbar components ([#843](https://github.com/dialpad/dialtone-vue/issues/843)) ([c24bd47](https://github.com/dialpad/dialtone-vue/commit/c24bd472e4a1c0c0cd2d11882748dcdb7453c665))
+
+
+### Features
+
+* **Style:** apply semantic colors and other style housekeeping vue3 ([#836](https://github.com/dialpad/dialtone-vue/issues/836)) ([deae1d8](https://github.com/dialpad/dialtone-vue/commit/deae1d866f06be7f310f3e6f442b5cf40f36347f))
+
 # [3.52.0](https://github.com/dialpad/dialtone-vue/compare/v3.51.0...v3.52.0) (2023-03-20)
 
 
