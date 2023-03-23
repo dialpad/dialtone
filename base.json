@@ -2551,14 +2551,37 @@
           "description": "critical, danger, error, alert"
         },
         "critical-strong": {
-          "value": "{color.red.500}",
+          "value": "{color.text.critical}",
           "type": "color",
-          "description": "critical, danger, error, alert"
+          "description": "critical, danger, error, alert",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".25",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "success": {
           "value": "{color.green.400}",
           "type": "color",
           "description": "positive"
+        },
+        "success-strong": {
+          "value": "{color.text.success}",
+          "type": "color",
+          "description": "positive",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".35",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "warning": {
           "value": "{color.gold.400}",
