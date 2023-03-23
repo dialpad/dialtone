@@ -838,6 +838,89 @@
           "type": "color"
         }
       }
+    },
+    "shadow": {
+      "small": {
+        "value": [
+          {
+            "x": "{size.0}",
+            "y": "{size.200}",
+            "blur": "{size.300}",
+            "spread": "{size.0}",
+            "color": "rgba({color.neutral.black}, 0.15)",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow"
+      },
+      "medium": {
+        "value": [
+          {
+            "x": "{size.0}",
+            "y": "{size.200}",
+            "blur": "{size.400}",
+            "spread": "{size.0}",
+            "color": "rgba({color.neutral.black}, 0.25)",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow"
+      },
+      "large": {
+        "value": [
+          {
+            "x": "{size.0}",
+            "y": "{size.200}",
+            "blur": "{size.500}",
+            "spread": "{size.0}",
+            "color": "rgba({color.neutral.black}, 0.3)",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow"
+      },
+      "extraLarge": {
+        "value": [
+          {
+            "x": "{size.0}",
+            "y": "{size.200}",
+            "blur": "{size.600}",
+            "spread": "{size.0}",
+            "color": "rgba({color.neutral.black}, 0.3)",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow"
+      },
+      "card": {
+        "value": [
+          {
+            "x": "{size.0}",
+            "y": "{size.100}",
+            "blur": "{size.200}",
+            "spread": "{size.0}",
+            "color": "rgba({color.neutral.black}, 0.03)",
+            "type": "dropShadow"
+          },
+          {
+            "x": "{size.0}",
+            "y": "{size.200}",
+            "blur": "{size.300}",
+            "spread": "{size.0}",
+            "color": "rgba({color.neutral.black}, 0.04)",
+            "type": "dropShadow"
+          },
+          {
+            "x": "{size.0}",
+            "y": "{size.200}",
+            "blur": "{size.500}",
+            "spread": "{size.0}",
+            "color": "rgba({color.neutral.black}, 0.08)",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow"
+      }
     }
   },
   "semantic": {
