@@ -1,3 +1,10 @@
+## [3.53.3](https://github.com/dialpad/dialtone-vue/compare/v3.53.2...v3.53.3) (2023-03-24)
+
+
+### Bug Fixes
+
+* **Input:** length validation improvement ([#859](https://github.com/dialpad/dialtone-vue/issues/859)) ([657dbda](https://github.com/dialpad/dialtone-vue/commit/657dbda7ebc150326bb6e6e97e3ad7385f2e132b))
+
 ## [3.53.2](https://github.com/dialpad/dialtone-vue/compare/v3.53.1...v3.53.2) (2023-03-24)
 
 
