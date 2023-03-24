@@ -1,3 +1,10 @@
+## [2.72.6](https://github.com/dialpad/dialtone-vue/compare/v2.72.5...v2.72.6) (2023-03-24)
+
+
+### Bug Fixes
+
+* **Input:** length validation improvement ([#858](https://github.com/dialpad/dialtone-vue/issues/858)) ([34bc349](https://github.com/dialpad/dialtone-vue/commit/34bc34931e60debee8e6a17052aaf6d6612a3961))
+
 ## [2.72.5](https://github.com/dialpad/dialtone-vue/compare/v2.72.4...v2.72.5) (2023-03-24)
 
 
