@@ -2484,7 +2484,16 @@
       "surface": {
         "primary": {
           "value": "{color.black.100}",
-          "type": "color"
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".03",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "secondary": {
           "value": "{color.black.200}",
