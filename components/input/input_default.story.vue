@@ -14,6 +14,7 @@
     :messages-class="messagesClass"
     :placeholder="placeholder"
     :input-class="inputClass"
+    :retain-warning="retainWarning"
     :input-wrapper-class="inputWrapperClass"
     :current-length="currentLength"
     :validate="validationConfig"
