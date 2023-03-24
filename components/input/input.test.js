@@ -472,17 +472,17 @@ describe('DtInput tests', function () {
         });
       });
 
-      describe('When the input length reaches the maximum length and the input is focused', function () {
+      describe('When the input length reaches exactly maximum length and the input is focused', function () {
         // Test Setup
         before(function () {
           currentLength = 20;
         });
 
-        it('should show an error validation message', async function () {
+        it('should show a warning validation message', async function () {
           await nativeInput.trigger('focus');
 
           const inputMessages = wrapper.findAll('.d-validation-message');
-          const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+          const inputErrorMessages = wrapper.findAll('.d-validation-message--warning');
           assert.equal(inputMessages.length, 1);
           assert.equal(inputErrorMessages.length, 1);
         });
