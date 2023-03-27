@@ -1,3 +1,17 @@
+# [2.73.0](https://github.com/dialpad/dialtone-vue/compare/v2.72.6...v2.73.0) (2023-03-27)
+
+
+### Bug Fixes
+
+* **Group Row:** change group row avatar to 'users' icon ([#862](https://github.com/dialpad/dialtone-vue/issues/862)) ([525137a](https://github.com/dialpad/dialtone-vue/commit/525137af0117495bbf3e6b88cc760b6b3c485355))
+
+
+### Features
+
+* adds codeblock component to dialtone vue ([#852](https://github.com/dialpad/dialtone-vue/issues/852)) ([43d3f28](https://github.com/dialpad/dialtone-vue/commit/43d3f2800ff835d76f10756cd82f38d30e3bc45e))
+* **Dropdown:** add tether prop ([#861](https://github.com/dialpad/dialtone-vue/issues/861)) ([273cef1](https://github.com/dialpad/dialtone-vue/commit/273cef17177820e48fa6205bf1c7b2e0707c6cf4))
+* **Image Viewer:** create dtImageViewer ([#834](https://github.com/dialpad/dialtone-vue/issues/834)) ([396dbb3](https://github.com/dialpad/dialtone-vue/commit/396dbb3bf8d671b3ccee4b1e43eed5a51dedda98))
+
 ## [2.72.6](https://github.com/dialpad/dialtone-vue/compare/v2.72.5...v2.72.6) (2023-03-24)
 
 
