@@ -13,6 +13,7 @@
     :open-on-context="openOnContext"
     :visually-hidden-close="visuallyHiddenClose"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
+    :tether="tether"
     @highlight="onHighlight"
     @opened="onOpened"
   >
