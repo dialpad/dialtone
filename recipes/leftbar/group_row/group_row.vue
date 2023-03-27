@@ -10,77 +10,29 @@
     v-bind="$attrs"
   >
     <template #left>
-      <dt-avatar
-        :initials="avatarInitials"
-        :seed="avatarSeed"
-        :group="groupCount"
-      >
-        <!-- No alt needed as the name is already mentioned in the description
-          https://dequeuniversity.com/rules/axe/4.4/image-redundant-alt?application=axe-puppeteer -->
-        <img
-          v-if="avatarSrc"
-          data-qa="dt-avatar-image"
-          :src="avatarSrc"
-          alt=""
-        >
-        <template v-else>
-          {{ avatarInitials }}
-        </template>
-      </dt-avatar>
+      <dt-icon
+        name="users"
+        size="300"
+      />
     </template>
   </dt-recipe-general-row>
 </template>
 
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
-import DtAvatar from '@/components/avatar/avatar.vue';
+import DtIcon from '@/components/icon/icon.vue';
 
 export default {
   name: 'DtRecipeGroupRow',
 
   components: {
-    DtAvatar,
+    DtIcon,
     DtRecipeGeneralRow,
   },
 
   inheritAttrs: false,
 
   props: {
-    /**
-     * Optional avatar image url.
-     * if provided, it's also required to provide a value in the `avatarInitials` prop to use
-     * in the alt attribute of the avatar.
-     */
-    avatarSrc: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Initials to display on the avatar if avatarSrc is not provided or
-     * alt attr if avatarSrc is provided.
-     */
-    avatarInitials: {
-      type: String,
-      default: '',
-      required: true,
-    },
-
-    /**
-     * Avatar seed, set this to the user's ID to get the same avatar background gradient each time it is displayed.
-     */
-    avatarSeed: {
-      type: String,
-      default: null,
-    },
-
-    /**
-     * Number displayed in avatar to count group members
-     */
-    groupCount: {
-      type: Number,
-      required: true,
-    },
 
     /**
      * Screen reader will read out the number of users in the group using this text. Ex: "2 users"

@@ -4,7 +4,6 @@ import DtRecipeGroupRow from './group_row';
 import DtRecipeGroupRowMdx from './group_row.mdx';
 import DtRecipeGroupRowDefaultTemplate from './group_row_default.story.vue';
 import DtRecipeGroupRowVariantsTemplate from './group_row_variants.story.vue';
-const defaultImage = require('@/components/avatar/person.png');
 
 // Default Prop Values
 export const argsData = {
@@ -12,21 +11,8 @@ export const argsData = {
 };
 
 export const argTypesData = {
-  // Props
-  groupCount: {
-    defaultValue: 8,
-  },
-
   names: {
     defaultValue: 'Jaqueline Nackos, Lori Smith',
-  },
-
-  avatarInitials: {
-    defaultValue: 'JN',
-  },
-
-  avatarSrc: {
-    defaultValue: defaultImage,
   },
 
   // Slots
