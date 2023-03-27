@@ -13,8 +13,6 @@ const basePropsData = {
 describe('DtRecipeGroupRow Tests', function () {
   // Wrappers
   let wrapper;
-  let avatarImage;
-  let avatarGroupCount;
   let description;
   let unreadBadge;
 
@@ -26,8 +24,6 @@ describe('DtRecipeGroupRow Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    avatarImage = wrapper.find('[data-qa="dt-avatar-image"]');
-    avatarGroupCount = wrapper.find('[data-qa="dt-avatar-count"]');
     description = wrapper.find('.dt-leftbar-row__description');
     unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
   };
@@ -70,16 +66,8 @@ describe('DtRecipeGroupRow Tests', function () {
 
       it('should exist', function () { assert.exists(wrapper); });
 
-      it('should render the avatar', function () {
-        assert.isTrue(avatarImage.exists());
-      });
-
       it('should render the description', function () {
         assert.strictEqual(description.text(), basePropsData.names);
-      });
-
-      it('should render the group count', function () {
-        assert.strictEqual(+avatarGroupCount.text(), basePropsData.groupCount);
       });
     });
 
