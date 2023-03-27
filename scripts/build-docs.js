@@ -15,6 +15,7 @@ const componentsList = [
   'checkbox.vue',
   'checkbox_group.vue',
   'chip.vue',
+  'codeblock.vue',
   'collapsible.vue',
   'combobox.vue',
   'dropdown.vue',
