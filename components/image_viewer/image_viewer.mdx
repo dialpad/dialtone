@@ -1,0 +1,44 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtImageViewer from './image_viewer';
+
+# Image Viewer
+
+<Subtitle>
+  Image Viewer lets the user click on an image to see it in a full screen modal.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="components-image-viewer--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-image-viewer--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtImageViewer } from '@dialpad/dialtone-vue';
+```
+
+### With Props
+
+```jsx
+<dt-image-viewer
+  image-src="imageSrc"
+  image-alt="imageAlt"
+  image-button-class="imageButtonClass"
+  aria-label="ariaLabel"
+  close-aria-label="closeAriaLabel"
+/>
+```
