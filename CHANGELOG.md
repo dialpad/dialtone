@@ -1,3 +1,10 @@
+# [3.55.0](https://github.com/dialpad/dialtone-vue/compare/v3.54.0...v3.55.0) (2023-03-28)
+
+
+### Features
+
+* **Image Viewer:** create dtImageViewer ([#860](https://github.com/dialpad/dialtone-vue/issues/860)) ([20bfd61](https://github.com/dialpad/dialtone-vue/commit/20bfd619a1a9749b658ac35c7e5cd6fee8391875))
+
 # [3.54.0](https://github.com/dialpad/dialtone-vue/compare/v3.53.3...v3.54.0) (2023-03-27)
 
 
