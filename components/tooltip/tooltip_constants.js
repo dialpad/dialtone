@@ -7,6 +7,8 @@ export const TOOLTIP_DIRECTIONS = [
   ...BASE_TIPPY_DIRECTIONS,
 ];
 
+export const TOOLTIP_DELAY_MS = 300;
+
 export const TOOLTIP_KIND_MODIFIERS = {
   hover: `d-tooltip--hover`,
   show: `d-tooltip--show`,

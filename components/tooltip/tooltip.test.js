@@ -43,6 +43,9 @@ describe('DtTooltip tests', function () {
           transition: false,
         },
       },
+      propsData: {
+        delay: false,
+      },
       slots: {
         default: 'Test message',
         anchor: `<template #anchor="attrs"><button data-qa="dt-button" v-bind="attrs">Hover me</button></template>`,
@@ -149,6 +152,7 @@ describe('DtTooltip tests', function () {
 
       describe('When mouseenter tooltip', function () {
         beforeEach(async function () {
+          await wrapper.setProps({ delay: false });
           await anchor.trigger('mouseenter');
         });
 

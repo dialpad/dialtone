@@ -21,6 +21,7 @@
         :content-appear="$attrs.contentAppear"
         :transition="$attrs.transition"
         :show.sync="$attrs.show"
+        :delay="delay"
         @shown="$attrs.onShown"
       >
         <template #anchor>
