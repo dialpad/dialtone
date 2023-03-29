@@ -48,6 +48,9 @@ describe('DtTooltip tests', function () {
         // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
         transition: transitionStub(),
       },
+      propsData: {
+        delay: false,
+      },
       slots: {
         default: 'Test message',
       },
@@ -158,6 +161,7 @@ describe('DtTooltip tests', function () {
 
       describe('When mouseenter tooltip', function () {
         beforeEach(async function () {
+          await wrapper.setProps({ delay: false });
           await anchor.trigger('mouseenter');
         });
 

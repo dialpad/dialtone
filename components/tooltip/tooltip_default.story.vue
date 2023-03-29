@@ -19,6 +19,7 @@
         :content-class="contentClass"
         :transition="transition"
         :show="showTooltip"
+        :delay="delay"
         @shown="onShown"
       >
         <template

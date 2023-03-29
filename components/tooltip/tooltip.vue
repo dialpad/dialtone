@@ -50,6 +50,7 @@ import {
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_DIRECTIONS,
   TOOLTIP_STICKY_VALUES,
+  TOOLTIP_DELAY_MS,
 } from './tooltip_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
@@ -182,6 +183,15 @@ export default {
       type: String,
       default: 'fade',
     },
+
+    /**
+     * Whether the tooltip will have a delay when being focused or moused over.
+     * @values true, false
+     */
+    delay: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   emits: [
@@ -205,6 +215,8 @@ export default {
     return {
       TOOLTIP_KIND_MODIFIERS,
       tip: null,
+
+      inTimer: null,
 
       // Internal state for whether the tooltip is shown. Changing the prop
       // will update this.
@@ -317,6 +329,16 @@ export default {
     },
 
     onEnterAnchor (e) {
+      if (this.delay) {
+        this.inTimer = setTimeout(function (event) {
+          return this.triggerShow(event);
+        }.bind(this, e), TOOLTIP_DELAY_MS);
+      } else {
+        return this.triggerShow(e);
+      }
+    },
+
+    triggerShow (e) {
       if (e.type === 'focusin') {
         // only show tooltips on visible focus when triggered via focus.
         // when the user is using the mouse they only want tooltips to display
@@ -334,6 +356,11 @@ export default {
     },
 
     onLeaveAnchor () {
+      clearTimeout(this.inTimer);
+      return this.triggerHide();
+    },
+
+    triggerHide () {
       if (this.show === null) this.isShown = false;
     },
 
