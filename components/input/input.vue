@@ -148,9 +148,9 @@ export default {
     },
 
     /**
-     * Type of the input, one of: `text`, `password`, `email`, `number`, `textarea`.
+     * Type of the input, one of: `text`, `password`, `email`, `number`, `textarea`, 'date', 'time'.
      * When `textarea` a `<textarea>` element will be rendered instead of an `<input>` element.
-     * @values text, password, email, number, textarea.
+     * @values text, password, email, number, textarea, date, time
      */
     type: {
       type: String,
