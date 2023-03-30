@@ -1,3 +1,11 @@
+# [3.56.0](https://github.com/dialpad/dialtone-vue/compare/v3.55.0...v3.56.0) (2023-03-30)
+
+
+### Features
+
+* **Input:** add date and time types for input ([#871](https://github.com/dialpad/dialtone-vue/issues/871)) ([8c3bb83](https://github.com/dialpad/dialtone-vue/commit/8c3bb8351d2a3968265075e346c42ae0f210fcd4))
+* **Tooltip:** add 300ms default delay ([#870](https://github.com/dialpad/dialtone-vue/issues/870)) ([d1d9fa5](https://github.com/dialpad/dialtone-vue/commit/d1d9fa55cd0db8ebd680438795104c732a6b0580))
+
 # [3.55.0](https://github.com/dialpad/dialtone-vue/compare/v3.54.0...v3.55.0) (2023-03-28)
 
 
