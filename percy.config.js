@@ -17,6 +17,7 @@ module.exports = {
       'Visual Testing/Modal: With Danger Style',
       'Visual Testing/Modal: With Full Size',
       'Visual Testing/Modal: With Custom Header And Content',
+      'Visual Testing/Image Viewer: Default',
     ],
     waitForTimeout: 250,
   },

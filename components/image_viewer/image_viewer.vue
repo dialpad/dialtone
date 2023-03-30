@@ -4,7 +4,7 @@
       data-qa="dt-image-viewer-preview"
       :aria-label="ariaLabel"
       importance="clear"
-      @click="open"
+      @click="openModal"
     >
       <img
         :class="imageButtonClass"
@@ -13,11 +13,11 @@
       >
     </dt-button>
     <Teleport
-      v-if="show"
+      v-if="isOpen"
       to="body"
     >
       <div
-        :aria-hidden="isOpen"
+        :aria-hidden="!isOpen ? 'true' : 'false'"
         class="d-modal"
         data-qa="dt-modal"
         v-on="modalListeners"
@@ -82,6 +82,18 @@ export default {
 
   props: {
     /**
+     * Controls whether the image modal is shown. Leaving this null will have the image modal
+     * trigger on click by default.
+     * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
+     * Supports .sync modifier
+     * @values null, true, false
+     */
+    open: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
      * URL of the image to be shown
      */
     imageSrc: {
@@ -123,18 +135,30 @@ export default {
     },
   },
 
+  emits: [
+    /**
+     * Emitted when popover is shown or hidden
+     *
+     * @event opened
+     * @type {Boolean}
+     */
+    'opened',
+
+    /**
+     * Event fired to sync the open prop with the parent component
+     * @event update:open
+     */
+    'update:open',
+  ],
+
   data () {
     return {
-      show: false,
       showCloseButton: true,
+      isOpen: false,
     };
   },
 
   computed: {
-    isOpen () {
-      return `${!this.show}`;
-    },
-
     modalListeners () {
       return {
         click: event => {
@@ -157,7 +181,7 @@ export default {
   },
 
   watch: {
-    show: {
+    isOpen: {
       immediate: true,
       handler (isShowing) {
         if (isShowing) {
@@ -170,19 +194,40 @@ export default {
         }
       },
     },
+
+    open: {
+      handler: function (open) {
+        if (open !== null) {
+          this.isOpen = open;
+        }
+      },
+
+      immediate: true,
+    },
   },
 
   methods: {
-    open () {
-      this.show = true;
+    openModal () {
+      // Has custom control passed in
+      if (this.open !== null) {
+        return;
+      }
+      this.isOpen = true;
       this.showCloseButton = true;
+      this.$emit('opened', true);
+
       setTimeout(() => {
         this.focusAfterOpen();
       });
     },
 
     close () {
-      this.show = false;
+      this.isOpen = false;
+      this.$emit('opened', false);
+
+      if (this.open !== null) {
+        this.$emit('update:open', false);
+      }
     },
 
     focusAfterOpen () {
@@ -190,7 +235,7 @@ export default {
     },
 
     trapFocus (e) {
-      if (this.show) {
+      if (this.isOpen) {
         this.focusTrappedTabPress(e);
       }
     },
