@@ -3,14 +3,18 @@ import DtImageViewer from './image_viewer';
 import DtImageViewerMdx from './image_viewer.mdx';
 import DtImageViewerDefaultTemplate from './image_viewer_default.story.vue';
 import DtImageViewerVariantsTemplate from './image_viewer_variants.story.vue';
+import { action } from '@storybook/addon-actions';
 
 const defaultImage = require('./test.jpg');
 
 // Default Prop Values
 export const argsData = {
+  onOpened: action('opened'),
   imageSrc: defaultImage,
   imageAlt: 'Image Alt Text',
   closeAriaLabel: 'Close',
+  imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+  ariaLabel: 'Click to open image',
 };
 
 /**
@@ -59,7 +63,7 @@ export const argTypesData = {
     },
   },
 
-  iamgeClass: {
+  imageButtonClass: {
     description: 'Image button class',
     table: {
       category: 'props',
@@ -97,6 +101,28 @@ export const argTypesData = {
       type: 'text',
     },
   },
+
+  // Events
+  onOpened: {
+    table: {
+      disable: true,
+    },
+  },
+
+  'update:open': {
+    table: {
+      disable: true,
+    },
+  },
+
+  opened: {
+    description: `emitted when popover is shown or hidden.`,
+    table: {
+      type: {
+        summary: 'event',
+      },
+    },
+  },
 };
 
 // Story Collection
@@ -107,8 +133,14 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtImageViewerMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };
@@ -137,3 +169,24 @@ Default.args = {
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  options: {
+    showPanel: false,
+  },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-allowed-attr',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
