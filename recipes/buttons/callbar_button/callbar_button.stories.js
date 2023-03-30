@@ -33,6 +33,7 @@ export const argTypesData = {
   },
   disabled: {
     control: 'boolean',
+    description: 'Button is disabled, shows the tooltip',
   },
   buttonClass: {
     table: {
