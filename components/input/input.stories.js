@@ -2,7 +2,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtInput from './input';
-import { INPUT_SIZES } from './input_constants';
+import { INPUT_SIZES, INPUT_TYPES } from './input_constants';
 import InputMdx from './input.mdx';
 import InputDefault from './input_default.story.vue';
 
@@ -61,7 +61,7 @@ export const argTypesData = {
     defaultValue: DtInput.props.type.default,
     control: {
       type: 'select',
-      options: ['text', 'textarea', 'password', 'email', 'number'],
+      options: [null, ...Object.values(INPUT_TYPES)],
     },
     table: {
       defaultValue: {

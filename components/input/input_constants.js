@@ -6,6 +6,8 @@ export const INPUT_TYPES = {
   PASSWORD: 'password',
   EMAIL: 'email',
   NUMBER: 'number',
+  DATE: 'date',
+  TIME: 'time',
 };
 
 export const INPUT_SIZES = {
