@@ -1,3 +1,10 @@
+## [3.56.1](https://github.com/dialpad/dialtone-vue/compare/v3.56.0...v3.56.1) (2023-03-30)
+
+
+### Bug Fixes
+
+* **Recipe Callbar Btn:** show tooltip when the callbar button is disa… ([#873](https://github.com/dialpad/dialtone-vue/issues/873)) ([c77a90b](https://github.com/dialpad/dialtone-vue/commit/c77a90b4f16d4b6a5fdc3361f6dd6a05d5ccb673))
+
 # [3.56.0](https://github.com/dialpad/dialtone-vue/compare/v3.55.0...v3.56.0) (2023-03-30)
 
 
