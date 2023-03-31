@@ -1,3 +1,10 @@
+## [2.74.4-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.74.3...v2.74.4-beta.1) (2023-03-31)
+
+
+### Bug Fixes
+
+* tempfix ([ecdab8f](https://github.com/dialpad/dialtone-vue/commit/ecdab8f56451fb9578bacac85b170cdd9ff949e6))
+
 ## [2.74.3](https://github.com/dialpad/dialtone-vue/compare/v2.74.2...v2.74.3) (2023-03-31)
 
 
