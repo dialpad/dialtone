@@ -132,17 +132,6 @@ export default {
       default: 'xl',
       validator: size => VALID_WIDTH_SIZE.includes(size),
     },
-
-    /**
-     * Whether to show the tooltip text. Sometimes we want to show it when the button is disabled.
-     * @values true, false
-     * @see https://dialpad.design/components/button.html#disabled
-     */
-    showTooltip: {
-      type: Boolean,
-      default: false,
-    },
-
   },
 
   emits: [
@@ -165,7 +154,7 @@ export default {
           'dt-recipe-callbar-button--circle': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
-          'd-btn--disabled': this.disabled,
+          'd-btn--disabled d-bgc-transparent': this.disabled,
           'd-fc-primary': !this.disabled,
         }];
     },

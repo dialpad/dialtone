@@ -98,6 +98,7 @@ describe('DtRecipeCallbarButton Tests', function () {
       it('Should display a disabled button when "disabled"', async function () {
         await wrapper.setProps({ disabled: true });
         assert.isTrue(button.classes().includes('d-btn--disabled'));
+        assert.isTrue(button.classes().includes('d-bgc-transparent'));
       });
     });
   });
