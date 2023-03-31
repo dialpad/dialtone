@@ -143,7 +143,7 @@ export default {
           'd-btn--icon-only': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
-          'd-btn--disabled': this.disabled,
+          'd-btn--disabled d-bgc-transparent': this.disabled,
           'd-fc-primary': !this.disabled,
         }];
     },
