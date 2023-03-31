@@ -1,3 +1,11 @@
+## [3.56.2](https://github.com/dialpad/dialtone-vue/compare/v3.56.1...v3.56.2) (2023-03-31)
+
+
+### Bug Fixes
+
+* **Image Viewer:** dt image viewer visual testing ([#874](https://github.com/dialpad/dialtone-vue/issues/874)) ([5400412](https://github.com/dialpad/dialtone-vue/commit/5400412963d2d3408e1556f6ca0f986a8bdc4c3d))
+* **Recipe Callbar Btn:** transparent background when btn is in disabled state ([#876](https://github.com/dialpad/dialtone-vue/issues/876)) ([1031e72](https://github.com/dialpad/dialtone-vue/commit/1031e72bcb8ee1d441a4b205bfbbca91536cd74b))
+
 ## [3.56.1](https://github.com/dialpad/dialtone-vue/compare/v3.56.0...v3.56.1) (2023-03-30)
 
 
