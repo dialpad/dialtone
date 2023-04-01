@@ -1,3 +1,10 @@
+## [2.74.4](https://github.com/dialpad/dialtone-vue/compare/v2.74.3...v2.74.4) (2023-04-01)
+
+
+### Bug Fixes
+
+* **Avatar:** additional null protection ([4f169d1](https://github.com/dialpad/dialtone-vue/commit/4f169d1433f838aa272ccc718567964830a744ba))
+
 ## [2.74.3](https://github.com/dialpad/dialtone-vue/compare/v2.74.2...v2.74.3) (2023-03-31)
 
 
