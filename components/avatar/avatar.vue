@@ -233,8 +233,10 @@ export default {
       await this.$nextTick();
       const firstChild = this.$refs.canvas?.children[0] || this.$refs.canvas;
       this.formatInitials(this.initials);
-      this.setKind(firstChild);
-      this.kindHandler(firstChild);
+      if (firstChild) {
+        this.setKind(firstChild);
+        this.kindHandler(firstChild);
+      }
       this.initializing = true;
       await this.$nextTick();
       this.initializing = false;
