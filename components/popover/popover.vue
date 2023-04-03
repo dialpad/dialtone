@@ -752,7 +752,8 @@ export default {
       await this.$nextTick();
       if (this.modal) {
         const element = this.anchorEl.closest('body, .tippy-box');
-        if (element.tagName.toLowerCase() === 'body') {
+        if (!element) return;
+        if (element.tagName?.toLowerCase() === 'body') {
           element.classList.remove('d-of-hidden');
           this.tip.setProps({ offset: this.offset });
         } else {
@@ -821,7 +822,7 @@ export default {
     },
 
     focusInitialElementById () {
-      const result = this.$refs.content.$el.querySelector(this.initialFocusElement);
+      const result = this.$refs.content?.$el?.querySelector(this.initialFocusElement);
       if (result) {
         result.focus();
       } else {
