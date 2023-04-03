@@ -209,8 +209,9 @@ export default {
   methods: {
     chipClasses () {
       return [
-        this.$attrs['grouped-chip'] ? ['d-chip', ...this.labelClass] : 'd-chip__label',
+        this.$attrs['grouped-chip'] ? 'd-chip' : 'd-chip__label',
         CHIP_SIZE_MODIFIERS[this.size],
+        this.labelClass,
       ];
     },
 
