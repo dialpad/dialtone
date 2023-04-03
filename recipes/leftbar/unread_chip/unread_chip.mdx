@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeUnreadChip from './unread_chip.vue';
+
+# Leftbar Unread Chip
+
+<Subtitle>
+  This component covers the leftbar unread messages and mentions
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="recipes-leftbar-unread-chip--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="recipes-leftbar-unread-chip--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeUnreadChip } from '@dialpad/dialtone-vue';
+```
+
+### With kind mentions and arrow up
+
+```html
+<dt-recipe-unread-badge
+  kind="mentions"
+  direction="up"
+/>
+```
+
+### With kind messages and arrow down
+
+```html
+<dt-recipe-unread-badge
+  kind="messages"
+  direction="down"
+/>
+```

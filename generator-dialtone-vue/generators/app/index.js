@@ -24,7 +24,7 @@ module.exports = class extends Generator {
             name: 'category',
             message: 'Does your component belong in one of these categories?',
             choices: ['No', 'Avatars', 'Badges', 'Buttons', 'Checkboxes', 'Comboboxes', 'Dropdowns',
-              'Inputs', 'List Items', 'Modals', 'Notices', 'Popovers', 'Radios', 'Skeletons', 'Tabs',
+              'Inputs', 'Leftbar', 'List Items', 'Modals', 'Notices', 'Popovers', 'Radios', 'Skeletons', 'Tabs',
               'Toasts', 'Toggles', 'Tooltips'],
           },
         ]);
@@ -120,14 +120,14 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('story.ejs'),
       `${this.destinationFolder}/${this.fileName}_${_.snakeCase(storyName)}.story.vue`,
-      { ...params, storyName: storyName },
+      { ...params, storyName },
     );
 
     storyName = 'Variants';
     this.fs.copyTpl(
       this.templatePath('story.ejs'),
       `${this.destinationFolder}/${this.fileName}_${_.snakeCase(storyName)}.story.vue`,
-      { ...params, storyName: storyName },
+      { ...params, storyName },
     );
   }
 };
