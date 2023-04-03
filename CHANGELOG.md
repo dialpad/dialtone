@@ -1,3 +1,10 @@
+## [3.57.1](https://github.com/dialpad/dialtone-vue/compare/v3.57.0...v3.57.1) (2023-04-03)
+
+
+### Bug Fixes
+
+* **Recipe Leftbar Unread Chip:** background-color ([3331f3c](https://github.com/dialpad/dialtone-vue/commit/3331f3c6a235d88f082583e08c6533d3f3d5ba2c))
+
 # [3.57.0](https://github.com/dialpad/dialtone-vue/compare/v3.56.2...v3.57.0) (2023-04-03)
 
 
