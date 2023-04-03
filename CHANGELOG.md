@@ -1,3 +1,16 @@
+# [3.57.0](https://github.com/dialpad/dialtone-vue/compare/v3.56.2...v3.57.0) (2023-04-03)
+
+
+### Bug Fixes
+
+* **Avatar:** additional null protection ([4545721](https://github.com/dialpad/dialtone-vue/commit/4545721f1ea6ac16ae6430102b0865b1d5ab2d75))
+* **Avatar:** null protect firstElementChild ([1b2b949](https://github.com/dialpad/dialtone-vue/commit/1b2b9497ea951fff41bfb7d2fe6b067120dc6c49))
+
+
+### Features
+
+* **Recipe Leftbar Unread Chip:** add leftbar unread chip recipe - vue3 ([#878](https://github.com/dialpad/dialtone-vue/issues/878)) ([03b0b0c](https://github.com/dialpad/dialtone-vue/commit/03b0b0c690ffec643c45e6016a2a60d2bdf75e78))
+
 ## [3.56.2](https://github.com/dialpad/dialtone-vue/compare/v3.56.1...v3.56.2) (2023-03-31)
 
 
