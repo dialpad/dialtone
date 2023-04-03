@@ -84,7 +84,7 @@ export default {
 
   &__messages {
     .d-chip__label {
-      background-color: var(--bgc-white);
+      background-color: var(--bgc-primary);
     }
   }
 
