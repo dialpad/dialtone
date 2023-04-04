@@ -4,6 +4,7 @@
     :active="$attrs.active"
     :aria-label="$attrs.ariaLabel"
     :circle="$attrs.circle"
+    :importance="$attrs.importance"
     :disabled="$attrs.disabled"
     :danger="$attrs.danger"
     :button-class="$attrs.buttonClass"
