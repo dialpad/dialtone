@@ -8,7 +8,7 @@
         :class="{ 'd-c-not-allowed': disabled }"
       >
         <dt-button
-          :importance="circle ? 'outlined' : 'clear'"
+          :importance="buttonImportance"
           kind="muted"
           icon-position="top"
           :aria-disabled="disabled"
@@ -132,6 +132,16 @@ export default {
       default: 'xl',
       validator: size => VALID_WIDTH_SIZE.includes(size),
     },
+
+    /**
+     * The fill and outline of the button associated with its visual importance.
+     * @values clear, outlined, primary
+     */
+    importance: {
+      type: String,
+      default: '',
+    },
+
   },
 
   emits: [
@@ -175,6 +185,13 @@ export default {
         default:
           return '8.4rem';
       }
+    },
+
+    buttonImportance () {
+      if (this.importance) {
+        return this.importance;
+      }
+      return this.circle ? 'outlined' : 'clear';
     },
   },
 };

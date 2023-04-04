@@ -4,6 +4,7 @@
     :active="active"
     :aria-label="ariaLabel"
     :circle="circle"
+    :importance="importance"
     :disabled="disabled"
     :danger="danger"
     :button-class="buttonClass"

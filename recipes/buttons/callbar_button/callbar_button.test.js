@@ -100,6 +100,12 @@ describe('DtRecipeCallbarButton Tests', function () {
         assert.isTrue(button.classes().includes('d-btn--disabled'));
         assert.isTrue(button.classes().includes('d-bgc-transparent'));
       });
+
+      it('Should add appropriate class to circle button when "importance"', async function () {
+        await wrapper.setProps({ importance: 'clear', circle: 'true' });
+        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--circle'));
+        assert.equal(button.props().importance, 'clear');
+      });
     });
   });
 
