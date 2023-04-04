@@ -18,6 +18,7 @@
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       :visually-hidden-close="$attrs.visuallyHiddenClose"
       :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+      :close-on-click="$attrs.closeOnClick"
       @update:show="close"
     >
       <template
