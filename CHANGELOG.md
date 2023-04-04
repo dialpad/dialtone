@@ -1,3 +1,16 @@
+# [3.58.0](https://github.com/dialpad/dialtone-vue/compare/v3.57.1...v3.58.0) (2023-04-04)
+
+
+### Bug Fixes
+
+* **Popover:** null protection ([#884](https://github.com/dialpad/dialtone-vue/issues/884)) ([cbd9691](https://github.com/dialpad/dialtone-vue/commit/cbd96910c953a4e870f26d7c1ca14c659fc43bf2))
+* **Recipe Contact Info:** remove d-of-hidden ([#891](https://github.com/dialpad/dialtone-vue/issues/891)) ([aeb6124](https://github.com/dialpad/dialtone-vue/commit/aeb6124f1e71b86640c885154c954b8a53b5c636))
+
+
+### Features
+
+* **Modal:** add closeOnClick prop ([#890](https://github.com/dialpad/dialtone-vue/issues/890)) ([9d53447](https://github.com/dialpad/dialtone-vue/commit/9d53447177170f53e2515655494d8dbfd10fe38a))
+
 ## [3.57.1](https://github.com/dialpad/dialtone-vue/compare/v3.57.0...v3.57.1) (2023-04-03)
 
 
