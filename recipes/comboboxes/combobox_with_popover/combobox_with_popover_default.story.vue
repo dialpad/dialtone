@@ -16,6 +16,7 @@
     :append-to="appendTo"
     :visually-hidden-close="visuallyHiddenClose"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
+    :transition="transition"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"

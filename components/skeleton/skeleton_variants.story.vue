@@ -194,9 +194,7 @@
         <dt-skeleton
           :paragraph-option="{
             rows: 5,
-            randomWidth: true,
-            maxWidth: 100,
-            minWidth: 80,
+            randomWidth: false,
           }"
           :aria-label="ariaLabel"
           :offset="0.5"

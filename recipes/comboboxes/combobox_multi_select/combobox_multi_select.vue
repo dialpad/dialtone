@@ -10,6 +10,7 @@
     :visually-hidden-close="visuallyHiddenClose"
     content-width="anchor"
     :append-to="appendTo"
+    :transition="transition"
     @select="onComboboxSelect"
   >
     <template #input="{ onInput }">
@@ -283,6 +284,15 @@ export default {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
             (appendTo instanceof HTMLElement);
       },
+    },
+
+    /**
+     * Named transition when the content display is toggled.
+     * @see DtLazyShow
+     */
+    transition: {
+      type: String,
+      default: 'fade',
     },
   },
 

@@ -41,7 +41,7 @@
           @click="onListItemSelect(i)"
         >
           <template slot="left">
-            <dt-avatar>
+            <dt-avatar :seed="i.toString()">
               <span aria-hidden="true">{{ i + 1 }}</span>
             </dt-avatar>
           </template>

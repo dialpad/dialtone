@@ -15,6 +15,7 @@
     :has-suggestion-list="hasSuggestionList"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
     :append-to="appendTo"
+    :transition="transition"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"

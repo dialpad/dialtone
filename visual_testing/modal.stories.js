@@ -9,8 +9,11 @@ import {
   WithCustomHeaderAndContent,
 } from '@/components/modal/modal.stories';
 
+import DtModal from '@/components/modal/modal';
+
 export default {
   title: 'Visual Testing/Modal',
+  component: DtModal,
   parameters: {
     options: { showPanel: false },
     percy: {
