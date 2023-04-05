@@ -23,9 +23,9 @@ module.exports = class extends Generator {
             type: 'list',
             name: 'category',
             message: 'Does your component belong in one of these categories?',
-            choices: ['No', 'Avatars', 'Badges', 'Buttons', 'Checkboxes', 'Comboboxes', 'Dropdowns',
-              'Inputs', 'Leftbar', 'List Items', 'Modals', 'Notices', 'Popovers', 'Radios', 'Skeletons', 'Tabs',
-              'Toasts', 'Toggles', 'Tooltips'],
+            choices: ['No', 'Avatars', 'Badges', 'Buttons', 'Checkboxes', 'Comboboxes', 'Conversation View',
+              'Dropdowns', 'Inputs', 'Leftbar', 'List Items', 'Modals', 'Notices', 'Popovers', 'Radios', 'Skeletons',
+              'Tabs', 'Toasts', 'Toggles', 'Tooltips'],
           },
         ]);
         if (this.inputValues.category === 'No') {
