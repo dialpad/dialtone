@@ -25,6 +25,7 @@
       #avatar
     >
       <dt-avatar
+        seed="seed"
         :size="$attrs.size"
       >
         <v-html :html="$attrs.avatar" />

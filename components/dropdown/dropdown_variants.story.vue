@@ -9,6 +9,7 @@
         :content-width="$attrs.contentWidth"
         :padding="$attrs.padding"
         :navigation-type="$attrs.navigationType"
+        :transition="$attrs.transition"
         :open="$attrs.open"
         @highlight="$attrs.onHighlight"
       >
@@ -41,6 +42,7 @@
         :max-height="$attrs.maxHeight"
         :max-width="$attrs.maxWidth"
         :navigation-type="$attrs.navigationType"
+        :transition="$attrs.transition"
         @opened="$attrs.onOpened"
       >
         <template
@@ -100,6 +102,7 @@
         :max-height="$attrs.maxHeight"
         :max-width="$attrs.maxWidth"
         :navigation-type="$attrs.navigationType"
+        :transition="$attrs.transition"
         @opened="$attrs.onOpened"
       >
         <template
@@ -172,6 +175,7 @@
           :navigation-type="$attrs.navigationType"
           :open="$attrs.open"
           :open-on-context="true"
+          :transition="transition"
         >
           <template
             #anchor="{ attrs }"
