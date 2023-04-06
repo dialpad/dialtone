@@ -1147,6 +1147,10 @@
           "tertiary": {
             "value": "{color.black.300}",
             "type": "color"
+          },
+          "test": {
+            "value": "orangered",
+            "type": "color"
           }
         }
       },
@@ -3398,7 +3402,8 @@
         "color.surface.opaque.success-subtle": "S:7a27a99d67bc7cd92610e08049e5f3f7ea43f498,",
         "color.surface.opaque.info": "S:c979a9319cf927e381a0e24ed09e30b732f33c56,",
         "color.surface.opaque.info-subtle": "S:beeb8a3ce8c09c4f61e8942fb01444a934076ae7,",
-        "color.border.ai": "S:1716fa4a9185144a74525e09e6421f0e34c78908,"
+        "color.border.ai": "S:1716fa4a9185144a74525e09e6421f0e34c78908,",
+        "color.text.inverted.test": "S:125097fe8648148a78e63ffc7ce4cdfbe169f255,"
       }
     },
     {
