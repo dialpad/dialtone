@@ -2766,23 +2766,21 @@
           "value": "{color.gold.500}",
           "type": "color"
         },
-        "inverted": {
-          "subtle": {
-            "value": "rgba(0,0,0,0.10)",
-            "type": "color"
-          },
-          "default": {
-            "value": "rgba(0,0,0,0.18)",
-            "type": "color"
-          },
-          "moderate": {
-            "value": "rgba(0,0,0,0.34)",
-            "type": "color"
-          },
-          "bold": {
-            "value": "rgba(0,0,0,0.5)",
-            "type": "color"
-          }
+        "subtle-inverted": {
+          "value": "rgba(0,0,0,0.10)",
+          "type": "color"
+        },
+        "default-inverted": {
+          "value": "rgba(0,0,0,0.18)",
+          "type": "color"
+        },
+        "moderate-inverted": {
+          "value": "rgba(0,0,0,0.34)",
+          "type": "color"
+        },
+        "bold-inverted": {
+          "value": "rgba(0,0,0,0.5)",
+          "type": "color"
         }
       }
     },
@@ -3645,14 +3643,6 @@
         "badge.color.background.default": "S:46515656b0f57d4ba86fd6167cbbaf94f1dc6d65,",
         "color.surface.opaque.secondary": "S:fcac5ac71509870b22c60aae84e3f9e9adef4909,",
         "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
-        "color.border.subtle-inverted": "S:6bc0a3da4d337817850b6838415a11213c23f62b,",
-        "color.border.default-inverted": "S:ec25774c9c6ebbbb06aafc620d13debe49a4961d,",
-        "color.border.moderate-inverted": "S:149056d70f3390c65fd3ae2d94485f1062a6f37e,",
-        "color.border.bold-inverted": "S:7d4c43657701b1558df78e202242a5ae6688af14,",
-        "color.border.inverted.subtle": "S:e2e5ed3f9c84881079aced8277f76d6b8d9862e6,",
-        "color.border.inverted.default": "S:eee0157d77f910c6e868b83ff57a9ba284d3ebbf,",
-        "color.border.inverted.moderate": "S:5766116a7cd4643fed22da05dd5fd11e1342493d,",
-        "color.border.inverted.bold": "S:f25ac2f474a5cf1bc914a83f2d701df73ad70089,",
         "color.text.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
         "color.text.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
         "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,"
