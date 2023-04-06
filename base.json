@@ -1090,20 +1090,20 @@
           "value": "{color.black.900}",
           "type": "color"
         },
-        "primary-inverted": {
-          "value": "{color.neutral.white}",
-          "type": "color"
-        },
         "secondary": {
           "value": "{color.black.700}",
           "type": "color"
         },
-        "secondary-inverted": {
-          "value": "{color.black.200}",
-          "type": "color"
-        },
         "tertiary": {
           "value": "{color.black.600}",
+          "type": "color"
+        },
+        "primary-inverted": {
+          "value": "{color.neutral.white}",
+          "type": "color"
+        },
+        "secondary-inverted": {
+          "value": "{color.black.200}",
           "type": "color"
         },
         "tertiary-inverted": {
