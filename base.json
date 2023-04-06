@@ -1114,11 +1114,23 @@
           "value": "rgba($color.black.800, 0.5)",
           "type": "color"
         },
+        "muted-inverted": {
+          "value": "rgba($color.black.200, 0.6)",
+          "type": "color"
+        },
         "placeholder": {
           "value": "{color.black.500}",
           "type": "color"
         },
+        "placeholder-inverted": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
         "disabled": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "disabled-inverted": {
           "value": "{color.black.500}",
           "type": "color"
         },
