@@ -4,8 +4,11 @@ import {
   Default,
 } from '@/components/image_viewer/image_viewer.stories';
 
+import DtImageViewer from '@/components/image_viewer/image_viewer';
+
 export default {
   title: 'Visual Testing/Image Viewer',
+  component: DtImageViewer,
   parameters: {
     percy: {
       queryParams: {

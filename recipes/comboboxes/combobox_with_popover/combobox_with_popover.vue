@@ -54,6 +54,7 @@
         :modal="false"
         :auto-focus="false"
         :append-to="appendTo"
+        :transition="transition"
         :visually-hidden-close-label="visuallyHiddenCloseLabel"
         :visually-hidden-close="visuallyHiddenClose"
         @opened="opened"
@@ -327,6 +328,15 @@ export default {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
             (appendTo instanceof HTMLElement);
       },
+    },
+
+    /**
+     * Named transition when the content display is toggled.
+     * @see DtLazyShow
+     */
+    transition: {
+      type: String,
+      default: 'fade',
     },
   },
 

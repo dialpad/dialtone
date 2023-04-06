@@ -19,6 +19,7 @@
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :append-to="$attrs.appendTo"
+    :transition="$attrs.transition"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"

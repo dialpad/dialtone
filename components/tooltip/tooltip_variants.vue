@@ -16,6 +16,7 @@
       >
         <dt-tooltip
           v-if="direction !== null"
+          :transition="$attrs.transition"
           :placement="direction"
           :message="localMessage"
           :show="$attrs.show"
@@ -36,6 +37,7 @@
       <!-- Text -->
       <dt-tooltip
         class="d-mb64 d-mt64"
+        :transition="$attrs.transition"
         :message="localMessage"
         :show="$attrs.show"
       >
@@ -50,6 +52,7 @@
       <!-- Open state -->
       <dt-tooltip
         class="d-mb64 d-mt32"
+        :transition="$attrs.transition"
         :message="localMessage"
         :show="show1"
       >
@@ -68,6 +71,7 @@
         <!-- Inverted state -->
         <dt-tooltip
           :inverted="true"
+          :transition="$attrs.transition"
           :message="localMessage"
           :show="$attrs.show"
         >

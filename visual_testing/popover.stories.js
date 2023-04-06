@@ -6,8 +6,11 @@ import {
 } from '@/components/popover/popover.stories';
 import PopoverMdx from '@/visual_testing/popover.mdx';
 
+import DtPopover from '@/components/popover/popover';
+
 export default {
   title: 'Visual Testing/Popover',
+  component: DtPopover,
   args: {
     ...argsData,
     open: true,

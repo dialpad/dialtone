@@ -88,8 +88,8 @@ const PresenceTemplate = (args) => createTemplateFromVueFile(
 const defaultImage = require('./person.png');
 
 // Stories
-export const Image = DefaultTemplate.bind({});
-Image.args = {
+export const Default = DefaultTemplate.bind({});
+Default.args = {
   default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
   initials: 'PS',
 };
