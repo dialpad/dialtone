@@ -19,6 +19,23 @@
         {{ formattedInitials }}
       </span>
     </div>
+    <div
+      v-if="overlayIcon || overlayText"
+      class="d-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p d-mn4
+      d-ba d-baw4 d-bc-white d-bar-pill d-d-flex d-ai-center d-zi-base"
+    >
+      <dt-icon
+        v-if="overlayIcon"
+        class="d-fc-white d-w100p"
+        :name="overlayIcon"
+      />
+      <p
+        v-else-if="overlayText"
+        class="d-fs-200 d-fw-bold d-fc-white d-w100p d-ta-center"
+      >
+        {{ overlayText }}
+      </p>
+    </div>
     <span
       v-if="showGroup"
       class="d-avatar__count d-zi-base1"
@@ -42,6 +59,7 @@
 import { getUniqueString, getRandomElement } from '@/common/utils';
 import Vue from 'vue';
 import { DtPresence } from '../presence';
+import DtIcon from '@/components/icon/icon';
 import seedrandom from 'seedrandom';
 import {
   AVATAR_KIND_MODIFIERS,
@@ -61,7 +79,7 @@ import {
  */
 export default {
   name: 'DtAvatar',
-  components: { DtPresence },
+  components: { DtPresence, DtIcon },
 
   inheritAttrs: false,
 
@@ -157,6 +175,22 @@ export default {
       default: undefined,
       validator: (group) => AVATAR_GROUP_VALIDATOR(group),
     },
+
+    /**
+     * The icon that overlays the avatar
+     */
+    overlayIcon: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * The text that overlays the avatar
+     */
+    overlayText: {
+      type: String,
+      default: '',
+    },
   },
 
   data () {
@@ -245,7 +279,6 @@ export default {
     kindHandler (el) {
       switch (this.kind) {
         case 'image':
-          el.classList.add('d-avatar__image', 'd-zi-base1');
           this.validateImageAttrsPresence();
           this.setImageListeners(el);
           break;

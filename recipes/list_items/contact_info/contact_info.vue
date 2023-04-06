@@ -10,8 +10,40 @@
         class="d-ps-relative"
         data-qa="contact-info-left"
       >
+        <div
+          v-if="avatarList"
+          class="d-mrn4 d-d-flex d-fd-row"
+        >
+          <div
+            v-for="(avatar, index) in avatarList"
+            :key="index"
+          >
+            <dt-avatar
+              v-if="avatar.src"
+              :size="avatarSize"
+              :overlay-icon="avatar.icon"
+              :overlay-text="avatar.text"
+              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
+            >
+              <img
+                data-qa="dt-contact-avatar"
+                :src="avatar.src"
+                :alt="avatar.initials"
+              >
+            </dt-avatar>
+            <dt-avatar
+              v-else-if="avatar.initials"
+              :size="avatarSize"
+              :overlay-icon="avatar.icon"
+              :overlay-text="avatar.text"
+              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
+            >
+              {{ avatar.initials }}
+            </dt-avatar>
+          </div>
+        </div>
         <dt-avatar
-          v-if="avatarSrc"
+          v-else-if="avatarSrc"
           :size="avatarSize"
           :presence="presence"
         >
@@ -131,6 +163,19 @@ export default {
      */
     presence: {
       type: String,
+      default: null,
+    },
+
+    /**
+     * Showing multiple avatars in contact info.
+     * The props of array items are: <br>
+     * `src` - avatar image url (optional) <br>
+     * `initials` - Initial letters to display in avatar (required if src is empty)<br>
+     * `text` - text that overlays the avatar (optional) <br>
+     * `icon` - icon that overlays the avatar (optional)
+     */
+    avatarList: {
+      type: Array,
       default: null,
     },
   },

@@ -129,7 +129,7 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Admin view / listening in
       </p>
-      <dt-recipe-contact-info>
+      <dt-recipe-contact-info :avatar-list="adminListenInAvatars">
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div class="d-fw-bold d-fs-200">
@@ -142,7 +142,7 @@
         </template>
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
-            <div class="d-fs-100 d-mt2 d-mr4">
+            <div class="d-fs-100 d-mr4">
               +1 (415) 123-4567
             </div>
             <dt-icon
@@ -153,7 +153,7 @@
           </div>
         </template>
         <template #bottom>
-          <div class="d-d-flex d-ai-center d-mtn6">
+          <div class="d-d-flex d-ai-center d-mtn4">
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
               &nbsp;
             </div>
@@ -224,6 +224,27 @@
         </template>
       </dt-recipe-contact-info>
     </div>
+    <div class="d-m32">
+      <p class="d-my16 d-fs-200 d-fw-bold">
+        Group call
+      </p>
+      <dt-recipe-contact-info :avatar-list="groupCallAvatars">
+        <template #header>
+          <div class="d-d-flex d-ai-center d-mb2">
+            <div class="d-fw-bold d-fs-200">
+              Group Call
+            </div>
+          </div>
+        </template>
+        <template #subtitle>
+          <div class="d-d-flex d-ai-center">
+            <div class="d-fs-100 d-mr4">
+              Manage participants
+            </div>
+          </div>
+        </template>
+      </dt-recipe-contact-info>
+    </div>
   </div>
 </template>
 
@@ -236,5 +257,19 @@ import { DtLink } from '@/components/link';
 export default {
   name: 'DtRecipeContactInfoVariants',
   components: { DtButton, DtRecipeContactInfo, DtIcon, DtLink },
+  data () {
+    return {
+      adminListenInAvatars: [
+        { src: 'static/recipes/list_items/contact_info/avatar.png' },
+        { src: 'static/recipes/list_items/contact_info/avatar2.png', icon: 'hear' },
+      ],
+
+      groupCallAvatars: [
+        { initials: 'JL' },
+        { src: 'static/recipes/list_items/contact_info/avatar.png' },
+        { src: 'static/recipes/list_items/contact_info/avatar2.png', text: '+3' },
+      ],
+    };
+  },
 };
 </script>
