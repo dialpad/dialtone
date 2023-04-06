@@ -1,3 +1,10 @@
+## [2.77.1](https://github.com/dialpad/dialtone-vue/compare/v2.77.0...v2.77.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **Popover:** losing focus ([#896](https://github.com/dialpad/dialtone-vue/issues/896)) ([28f6ccd](https://github.com/dialpad/dialtone-vue/commit/28f6ccd82a6b4ed904227baceb395dbd115b4d36))
+
 # [2.77.0](https://github.com/dialpad/dialtone-vue/compare/v2.76.0...v2.77.0) (2023-04-06)
 
 
