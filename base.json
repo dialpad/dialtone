@@ -2446,31 +2446,29 @@
           "type": "color",
           "description": "positive"
         },
-        "hover": {
-          "primary": {
-            "value": "{color.purple.500}",
-            "type": "color"
-          },
-          "critical": {
-            "value": "{color.red.500}",
-            "type": "color"
-          },
-          "success": {
-            "value": "{color.green.500}",
-            "type": "color"
-          },
-          "warning": {
-            "value": "{color.gold.500}",
-            "type": "color"
-          },
-          "muted": {
-            "value": "{color.text.primary}",
-            "type": "color"
-          },
-          "disabled": {
-            "value": "{color.text-link.disabled}",
-            "type": "color"
-          }
+        "primary-hover": {
+          "value": "{color.purple.500}",
+          "type": "color"
+        },
+        "critical-hover": {
+          "value": "{color.red.500}",
+          "type": "color"
+        },
+        "success-hover": {
+          "value": "{color.green.500}",
+          "type": "color"
+        },
+        "warning-hover": {
+          "value": "{color.gold.500}",
+          "type": "color"
+        },
+        "muted-hover": {
+          "value": "{color.text.primary}",
+          "type": "color"
+        },
+        "disabled-hover": {
+          "value": "{color.text-link.disabled}",
+          "type": "color"
         }
       },
       "surface": {
@@ -3631,13 +3629,7 @@
         "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
         "color.text.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
         "color.text.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
-        "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
-        "color.text-link.primary-hover": "S:ed1ce458fd996f5fd0bd82e14c2f44ee2287d148,",
-        "color.text-link.critical-hover": "S:1ce305f0f8dc74a04d0237b0cb2bfa8e7fda118b,",
-        "color.text-link.success-hover": "S:e191e8ce86122c9de08e3dadc942a8918eb80183,",
-        "color.text-link.warning-hover": "S:ed89c368512502fb3c12299bb4a693e1e4487f55,",
-        "color.text-link.muted-hover": "S:8010dd42885459ae9e2eed1f79e29f97b754f54b,",
-        "color.text-link.disabled-hover": "S:d2544983fd70a29a2c4b469c3a9741c707054d29,"
+        "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,"
       }
     }
   ],
