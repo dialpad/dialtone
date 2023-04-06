@@ -1,3 +1,16 @@
+# [2.77.0](https://github.com/dialpad/dialtone-vue/compare/v2.76.0...v2.77.0) (2023-04-06)
+
+
+### Documentation
+
+* add rich text editor tech spec ([#893](https://github.com/dialpad/dialtone-vue/issues/893)) ([960bc92](https://github.com/dialpad/dialtone-vue/commit/960bc927d112102f7e7c0fe9903ed146f761134e))
+
+
+### Features
+
+* **Callbar Button:** add importance prop ([#886](https://github.com/dialpad/dialtone-vue/issues/886)) ([6e24d74](https://github.com/dialpad/dialtone-vue/commit/6e24d746dd2601c8dd3e40063e56cc7088fb5900))
+* **Feed Items:** create feed item time pill ([#885](https://github.com/dialpad/dialtone-vue/issues/885)) ([fe388a4](https://github.com/dialpad/dialtone-vue/commit/fe388a48a64fd007f840e728122f339b49ba6e1f))
+
 # [2.76.0](https://github.com/dialpad/dialtone-vue/compare/v2.75.1...v2.76.0) (2023-04-04)
 
 
