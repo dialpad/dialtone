@@ -1,3 +1,11 @@
+# [3.59.0](https://github.com/dialpad/dialtone-vue/compare/v3.58.0...v3.59.0) (2023-04-06)
+
+
+### Features
+
+* **Callbar Button:** add importance prop ([#887](https://github.com/dialpad/dialtone-vue/issues/887)) ([eb052e1](https://github.com/dialpad/dialtone-vue/commit/eb052e14642f886283a256fa58ae37a16af10330))
+* **Feed Items:** create feed item time pill (vue3) ([#895](https://github.com/dialpad/dialtone-vue/issues/895)) ([7b0558e](https://github.com/dialpad/dialtone-vue/commit/7b0558ee8403183e0c1d7cdc0d8bc3559e8b803c))
+
 # [3.58.0](https://github.com/dialpad/dialtone-vue/compare/v3.57.1...v3.58.0) (2023-04-04)
 
 
