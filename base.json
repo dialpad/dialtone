@@ -1610,6 +1610,26 @@
           "value": "{color.red.300}",
           "type": "color"
         },
+        "success": {
+          "value": "{color.green.400}",
+          "type": "color"
+        },
+        "warning": {
+          "value": "{color.gold.400}",
+          "type": "color"
+        },
+        "brand": {
+          "value": "{color.brand.purple}",
+          "type": "color"
+        },
+        "ai": {
+          "value": "{color.gradient.magenta-purple}",
+          "type": "color"
+        },
+        "accent": {
+          "value": "{color.magenta.300}",
+          "type": "color"
+        },
         "critical-subtle": {
           "value": "{color.red.200}",
           "type": "color"
@@ -1618,20 +1638,12 @@
           "value": "{color.red.400}",
           "type": "color"
         },
-        "success": {
-          "value": "{color.green.400}",
-          "type": "color"
-        },
         "success-subtle": {
           "value": "{color.green.200}",
           "type": "color"
         },
         "success-strong": {
           "value": "{color.green.500}",
-          "type": "color"
-        },
-        "warning": {
-          "value": "{color.gold.400}",
           "type": "color"
         },
         "warning-subtle": {
@@ -1651,10 +1663,6 @@
             }
           }
         },
-        "brand": {
-          "value": "{color.brand.purple}",
-          "type": "color"
-        },
         "brand-subtle": {
           "value": "{color.purple.200}",
           "type": "color"
@@ -1663,8 +1671,52 @@
           "value": "{color.purple.500}",
           "type": "color"
         },
-        "ai": {
-          "value": "{color.gradient.magenta-purple}",
+        "critical-inverted": {
+          "value": "{color.red.200}",
+          "type": "color"
+        },
+        "success-inverted": {
+          "value": "{color.green.200}",
+          "type": "color"
+        },
+        "warning-inverted": {
+          "value": "{color.gold.200}",
+          "type": "color"
+        },
+        "brand-inverted": {
+          "value": "{color.brand.purple}",
+          "type": "color"
+        },
+        "critical-subtle-inverted": {
+          "value": "{color.red.400}",
+          "type": "color"
+        },
+        "critical-strong-inverted": {
+          "value": "{color.red.100}",
+          "type": "color"
+        },
+        "success-subtle-inverted": {
+          "value": "{color.green.400}",
+          "type": "color"
+        },
+        "success-strong-inverted": {
+          "value": "{color.green.100}",
+          "type": "color"
+        },
+        "warning-subtle-inverted": {
+          "value": "{color.gold.400}",
+          "type": "color"
+        },
+        "warning-strong-inverted": {
+          "value": "{color.gold.100}",
+          "type": "color"
+        },
+        "brand-subtle-inverted": {
+          "value": "{color.purple.500}",
+          "type": "color"
+        },
+        "brand-strong-inverted": {
+          "value": "{color.purple.200}",
           "type": "color"
         }
       }
@@ -3512,7 +3564,20 @@
         "color.text-link.success-inverted-hover": "S:2e32f50fdf7adb070c5f12ee8cca2f22987adeb6,",
         "color.text-link.warning-inverted-hover": "S:eb36c5fae3c4f7999663ad9a30280e844331b079,",
         "color.text-link.muted-inverted-hover": "S:dfbf0d8783020077482f926200a9fdfd12333952,",
-        "color.text-link.disabled-inverted-hover": "S:74c15afeed7bcb3f0c005296a23be0ee5db7cfa1,"
+        "color.text-link.disabled-inverted-hover": "S:74c15afeed7bcb3f0c005296a23be0ee5db7cfa1,",
+        "color.border.critical-inverted": "S:9b61d1453db029466b7473d0e282041459f56cd7,",
+        "color.border.critical-subtle-inverted": "S:4838d720ee37f6519cbd3c9c0b3c17dabfd8c203,",
+        "color.border.critical-strong-inverted": "S:944637f09b10d17bdb9d954e206a18c48ee7ffd2,",
+        "color.border.success-inverted": "S:2902906175aff094691700a59241b5074f798ecf,",
+        "color.border.success-subtle-inverted": "S:0db388db526f672fbbc9aef02c3806574ee54909,",
+        "color.border.success-strong-inverted": "S:cc8a644e113fb3ae9b10dcf8f41b8b00ca476f88,",
+        "color.border.warning-inverted": "S:7e7142c4774c05830870933d77eea8f20d5770d0,",
+        "color.border.warning-subtle-inverted": "S:7d5fdbdde29e69a0901bdcee62697549c56801d2,",
+        "color.border.warning-strong-inverted": "S:87b4692223c53d1931374e1e4c9b4ae877ca587e,",
+        "color.border.brand-inverted": "S:a43fa5e367c709189c74a6ba27c82d08d5f86139,",
+        "color.border.brand-subtle-inverted": "S:86252ae204e3ef798fce804edf5940c451a3b5a9,",
+        "color.border.brand-strong-inverted": "S:87384cbb6d70bf634dd86d11b7e28b86fe473345,",
+        "color.border.accent": "S:18e3f8bed4d6efe4bd7888c12b97b7262153494b,"
       }
     },
     {
