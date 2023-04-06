@@ -13,7 +13,8 @@
       "megaphone-off": [],
       "megaphone": [],
       "newspaper": [],
-      "siren": []
+      "siren": [],
+      "snooze": []
     },
     "arrows": {
       "arrow-down-left": [
@@ -1057,6 +1058,7 @@
         "chain",
         "url"
       ],
+      "list-add": [],
       "list-bullet": [
         "options"
       ],
