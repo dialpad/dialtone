@@ -1098,39 +1098,15 @@
           "value": "{color.black.600}",
           "type": "color"
         },
-        "primary-inverted": {
-          "value": "{color.neutral.white}",
-          "type": "color"
-        },
-        "secondary-inverted": {
-          "value": "{color.black.200}",
-          "type": "color"
-        },
-        "tertiary-inverted": {
-          "value": "{color.black.300}",
-          "type": "color"
-        },
         "muted": {
           "value": "rgba($color.black.800, 0.5)",
-          "type": "color"
-        },
-        "muted-inverted": {
-          "value": "rgba($color.black.200, 0.6)",
           "type": "color"
         },
         "placeholder": {
           "value": "{color.black.500}",
           "type": "color"
         },
-        "placeholder-inverted": {
-          "value": "{color.black.500}",
-          "type": "color"
-        },
         "disabled": {
-          "value": "{color.black.500}",
-          "type": "color"
-        },
-        "disabled-inverted": {
           "value": "{color.black.500}",
           "type": "color"
         },
@@ -1156,6 +1132,73 @@
         },
         "warning": {
           "value": "{color.gold.500}",
+          "type": "color",
+          "description": "alert"
+        },
+        "primary-inverted": {
+          "value": "{color.neutral.white}",
+          "type": "color"
+        },
+        "secondary-inverted": {
+          "value": "{color.black.200}",
+          "type": "color"
+        },
+        "tertiary-inverted": {
+          "value": "{color.black.300}",
+          "type": "color"
+        },
+        "muted-inverted": {
+          "value": "rgba($color.black.200, 0.6)",
+          "type": "color"
+        },
+        "placeholder-inverted": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "disabled-inverted": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "critical-inverted": {
+          "value": "{color.red.200}",
+          "type": "color",
+          "description": "critical, danger, error, alert"
+        },
+        "critical-strong-inverted": {
+          "value": "{color.text.critical-inverted}",
+          "type": "color",
+          "description": "critical, danger, error, alert",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".25",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "success-inverted": {
+          "value": "{color.green.200}",
+          "type": "color",
+          "description": "positive"
+        },
+        "success-strong-inverted": {
+          "value": "{color.text.success-inverted}",
+          "type": "color",
+          "description": "positive",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".45",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "warning-inverted": {
+          "value": "{color.gold.100}",
           "type": "color",
           "description": "alert"
         }
@@ -3400,7 +3443,12 @@
         "color.border.subtle-inverted": "S:7a8ca24d2bf77bb6c37aac8466f6f7592b21031d,",
         "color.border.default-inverted": "S:86793f0f19488aad5b417877d1a6e725ea29174f,",
         "color.border.moderate-inverted": "S:f4c64f954989348c8a8d8eb1d3bfb13d539f76f6,",
-        "color.border.bold-inverted": "S:360555f73276fdfc06c6a92987b62ec2ab757181,"
+        "color.border.bold-inverted": "S:360555f73276fdfc06c6a92987b62ec2ab757181,",
+        "color.text.critical-inverted": "S:3214dc5ccfa31404a1625162625ccec316c2ffbd,",
+        "color.text.critical-strong-inverted": "S:49aecd334835260d85357949b43355863c163308,",
+        "color.text.success-inverted": "S:1e668b89290e66d63e2216c94aab64df3ea03a7b,",
+        "color.text.success-strong-inverted": "S:82c595344523f82c6818e25966285d95175199f5,",
+        "color.text.warning-inverted": "S:e850bd2829c9c753d6867bc445107b6ced3e2824,"
       }
     },
     {
