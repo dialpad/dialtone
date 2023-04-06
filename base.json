@@ -1135,10 +1135,6 @@
           "type": "color",
           "description": "alert"
         },
-        "test-inverted": {
-          "value": "orangered",
-          "type": "color"
-        },
         "inverted": {
           "primary": {
             "value": "{color.neutral.white}",
