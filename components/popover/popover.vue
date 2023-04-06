@@ -732,8 +732,7 @@ export default {
     *   - when anchor is within another popover: set the popover dialog container to it's non-modal z-index
     *     since it is no longer the active modal. This puts it underneath the overlay and prevents scrolling.
     **/
-    async preventScrolling () {
-      await this.$nextTick();
+    preventScrolling () {
       if (this.modal) {
         const element = this.anchorEl.closest('body, .tippy-box');
         if (element.tagName.toLowerCase() === 'body') {
@@ -748,17 +747,14 @@ export default {
     /*
     * Resets the prevent scrolling properties set in preventScrolling() back to normal.
     **/
-    async enableScrolling () {
-      await this.$nextTick();
-      if (this.modal) {
-        const element = this.anchorEl.closest('body, .tippy-box');
-        if (!element) return;
-        if (element.tagName?.toLowerCase() === 'body') {
-          element.classList.remove('d-of-hidden');
-          this.tip.setProps({ offset: this.offset });
-        } else {
-          element.classList.remove('d-zi-popover');
-        }
+    enableScrolling () {
+      const element = this.anchorEl.closest('body, .tippy-box');
+      if (!element) return;
+      if (element.tagName?.toLowerCase() === 'body') {
+        element.classList.remove('d-of-hidden');
+        this.tip.setProps({ offset: this.offset });
+      } else {
+        element.classList.remove('d-zi-popover');
       }
     },
 
@@ -785,9 +781,9 @@ export default {
         await this.focusFirstElement(this.$refs.anchor);
         // await next tick in case the user wants to change focus themselves.
         await this.$nextTick();
+        this.enableScrolling();
       }
       this.tip?.unmount();
-      await this.enableScrolling();
       this.$emit('opened', false);
       if (this.open !== null) {
         this.$emit('update:open', false);
@@ -796,9 +792,9 @@ export default {
 
     async onEnterTransitionComplete () {
       this.focusInitialElement();
-      await this.preventScrolling();
       // await next tick in case the user wants to change focus themselves.
       await this.$nextTick();
+      this.preventScrolling();
       this.$emit('opened', true, this.$refs.popover__content);
       if (this.open !== null) {
         this.$emit('update:open', true);
