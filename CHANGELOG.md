@@ -1,3 +1,10 @@
+# [3.60.0](https://github.com/dialpad/dialtone-vue/compare/v3.59.2...v3.60.0) (2023-04-06)
+
+
+### Features
+
+* support multiple avatars for `DtRecipeContactInfo` Component (vue3) ([#882](https://github.com/dialpad/dialtone-vue/issues/882)) ([d864683](https://github.com/dialpad/dialtone-vue/commit/d864683070b64400b4038e762065b942985088fd))
+
 ## [3.59.2](https://github.com/dialpad/dialtone-vue/compare/v3.59.1...v3.59.2) (2023-04-06)
 
 
