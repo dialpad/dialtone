@@ -1232,6 +1232,34 @@
           "type": "color",
           "description": "positive"
         },
+        "primary-inverted": {
+          "value": "{color.purple.300}",
+          "type": "color"
+        },
+        "critical-inverted": {
+          "value": "{color.text.critical-inverted}",
+          "type": "color"
+        },
+        "success-inverted": {
+          "value": "{color.text.success-inverted}",
+          "type": "color",
+          "description": "positive"
+        },
+        "warning-inverted": {
+          "value": "{color.text.warning-inverted}",
+          "type": "color",
+          "description": "positive"
+        },
+        "muted-inverted": {
+          "value": "{color.text.muted-inverted}",
+          "type": "color",
+          "description": "positive"
+        },
+        "disabled-inverted": {
+          "value": "{color.text.disabled-inverted}",
+          "type": "color",
+          "description": "positive"
+        },
         "primary-hover": {
           "value": "{color.purple.500}",
           "type": "color"
@@ -1253,6 +1281,30 @@
           "type": "color"
         },
         "disabled-hover": {
+          "value": "{color.text-link.disabled}",
+          "type": "color"
+        },
+        "primary-inverted-hover": {
+          "value": "{color.purple.200}",
+          "type": "color"
+        },
+        "critical-inverted-hover": {
+          "value": "{color.text.critical-strong-inverted}",
+          "type": "color"
+        },
+        "success-inverted-hover": {
+          "value": "{color.text.success-strong-inverted}",
+          "type": "color"
+        },
+        "warning-inverted-hover": {
+          "value": "{color.black.100}",
+          "type": "color"
+        },
+        "muted-inverted-hover": {
+          "value": "{color.black.100}",
+          "type": "color"
+        },
+        "disabled-inverted-hover": {
           "value": "{color.text-link.disabled}",
           "type": "color"
         }
@@ -3448,7 +3500,19 @@
         "color.text.critical-strong-inverted": "S:49aecd334835260d85357949b43355863c163308,",
         "color.text.success-inverted": "S:1e668b89290e66d63e2216c94aab64df3ea03a7b,",
         "color.text.success-strong-inverted": "S:82c595344523f82c6818e25966285d95175199f5,",
-        "color.text.warning-inverted": "S:e850bd2829c9c753d6867bc445107b6ced3e2824,"
+        "color.text.warning-inverted": "S:e850bd2829c9c753d6867bc445107b6ced3e2824,",
+        "color.text-link.primary-inverted": "S:2a692321c2e7b2b8cfe296a943c8a2a4188ddd32,",
+        "color.text-link.critical-inverted": "S:12645cdd0d2d79c0da0b6d809746522eed9e15ab,",
+        "color.text-link.success-inverted": "S:06fe84b1680b35c168184fe023db6bbe407b0808,",
+        "color.text-link.warning-inverted": "S:826a8d7ba67c6619014303a57bf5e17810d9e923,",
+        "color.text-link.muted-inverted": "S:1179e93e87db38b497c0934360fe2f6b8943a8b3,",
+        "color.text-link.disabled-inverted": "S:b2ae2fd39490f22cfe94079abc2b9b667e50f64f,",
+        "color.text-link.primary-inverted-hover": "S:cc19b75cbdd14ee82651757150a0478aeb488290,",
+        "color.text-link.critical-inverted-hover": "S:89d7e96515d0a20c07b85071268701894afa351f,",
+        "color.text-link.success-inverted-hover": "S:2e32f50fdf7adb070c5f12ee8cca2f22987adeb6,",
+        "color.text-link.warning-inverted-hover": "S:eb36c5fae3c4f7999663ad9a30280e844331b079,",
+        "color.text-link.muted-inverted-hover": "S:dfbf0d8783020077482f926200a9fdfd12333952,",
+        "color.text-link.disabled-inverted-hover": "S:74c15afeed7bcb3f0c005296a23be0ee5db7cfa1,"
       }
     },
     {
