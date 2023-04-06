@@ -9,6 +9,7 @@
         :content-width="contentWidth"
         :padding="padding"
         :navigation-type="navigationType"
+        :transition="transition"
         :open="open"
       >
         <template slot="anchor">
@@ -43,6 +44,7 @@
         :max-height="maxHeight"
         :max-width="maxWidth"
         :navigation-type="navigationType"
+        :transition="transition"
         @opened="onOpened"
       >
         <template
@@ -104,6 +106,7 @@
         :max-height="maxHeight"
         :max-width="maxWidth"
         :navigation-type="navigationType"
+        :transition="transition"
         @opened="onOpened"
       >
         <template
@@ -178,6 +181,7 @@
           :navigation-type="navigationType"
           :open="open"
           :open-on-context="true"
+          :transition="transition"
         >
           <template
             slot="anchor"

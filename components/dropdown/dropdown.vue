@@ -15,6 +15,7 @@
     :open-with-arrow-keys="shouldOpenWithArrowKeys"
     :open-on-context="openOnContext"
     :tether="tether"
+    :transition="transition"
     v-on="dropdownListeners"
   >
     <template #anchor="{ attrs }">
@@ -253,6 +254,15 @@ export default {
     tether: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Named transition when the content display is toggled.
+     * @see DtLazyShow
+     */
+    transition: {
+      type: String,
+      default: 'fade',
     },
   },
 

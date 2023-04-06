@@ -25,6 +25,7 @@
       slot="avatar"
     >
       <dt-avatar
+        seed="seed"
         :size="size"
       >
         <html-fragment

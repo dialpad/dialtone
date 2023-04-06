@@ -13,6 +13,7 @@ export default {
   component: DtDropdown,
   args: {
     ...argsData,
+    transition: '',
     open: true,
   },
   argTypes: argTypesData,

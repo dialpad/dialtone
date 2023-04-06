@@ -15,6 +15,7 @@ export default {
     ...argsData,
     open: true,
     modal: false,
+    transition: '',
     hideOnClick: false,
   },
   argTypes: argTypesData,
@@ -27,6 +28,7 @@ export default {
     a11y: {
       disable: true,
     },
+    percy: { waitForTimeout: 5000 },
   },
 };
 export { Default, Variants };

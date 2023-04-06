@@ -3,6 +3,7 @@
     <div class="d-p8 d-d-flex d-ai-center">
       <dt-avatar
         presence="busy"
+        seed="seed"
         size="sm"
       >
         <img
@@ -16,6 +17,7 @@
     <div class="d-p8 d-d-flex d-ai-center">
       <dt-avatar
         presence="busy"
+        seed="seed"
       >
         <img
           data-qa="dt-avatar-image"
@@ -28,6 +30,7 @@
     <div class="d-p8 d-d-flex d-ai-center">
       <dt-avatar
         presence="busy"
+        seed="seed"
         size="lg"
       >
         <img

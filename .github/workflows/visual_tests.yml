@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ labeled, synchronize ]
   pull_request_review:
-    types: [submitted]
+    types: [ submitted ]
 
 env:
   NODE_MODULES_CACHE_VERSION: v2
@@ -15,7 +15,7 @@ env:
 jobs:
 
   label_when_approved:
-    if: github.event_name == 'pull_request_review'
+    if: github.event_name == 'pull_request_review' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')
     runs-on: ubuntu-latest
     steps:
       - name: Set Label When Approved

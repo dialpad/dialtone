@@ -14,6 +14,7 @@
     :visually-hidden-close="visuallyHiddenClose"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
     :tether="tether"
+    :transition="transition"
     @highlight="onHighlight"
     @opened="onOpened"
   >
