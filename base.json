@@ -1177,31 +1177,29 @@
           "type": "color",
           "description": "positive"
         },
-        "hover": {
-          "primary": {
-            "value": "{color.purple.500}",
-            "type": "color"
-          },
-          "critical": {
-            "value": "{color.red.400}",
-            "type": "color"
-          },
-          "success": {
-            "value": "{color.green.500}",
-            "type": "color"
-          },
-          "warning": {
-            "value": "{color.black.600}",
-            "type": "color"
-          },
-          "muted": {
-            "value": "{color.text.primary}",
-            "type": "color"
-          },
-          "disabled": {
-            "value": "{color.text-link.disabled}",
-            "type": "color"
-          }
+        "primary-hover": {
+          "value": "{color.purple.500}",
+          "type": "color"
+        },
+        "critical-hover": {
+          "value": "{color.red.400}",
+          "type": "color"
+        },
+        "success-hover": {
+          "value": "{color.green.500}",
+          "type": "color"
+        },
+        "warning-hover": {
+          "value": "{color.black.600}",
+          "type": "color"
+        },
+        "muted-hover": {
+          "value": "{color.text.primary}",
+          "type": "color"
+        },
+        "disabled-hover": {
+          "value": "{color.text-link.disabled}",
+          "type": "color"
         }
       },
       "surface": {
@@ -3249,12 +3247,6 @@
         "color.text-link.warning": "S:ce9b8780a508a8ab92c63d4b4c482f4bde1ff9d1,",
         "color.text-link.muted": "S:52e9c255d462a2f3359271c6176f1b46682846ca,",
         "color.text-link.disabled": "S:f2209466a32a93fd48bfb90f73688ed8cd9b7d40,",
-        "color.text-link.hover.primary": "S:681adc6bbf1d796aa4760774d65ef165c636add4,",
-        "color.text-link.hover.critical": "S:6906f64ff33a162b9db2d699b7e37850848df4df,",
-        "color.text-link.hover.success": "S:f6cae84b1ee1a5c46b2cce449e893cfa235d6441,",
-        "color.text-link.hover.warning": "S:9edd7ca528e5a2d4d3ae9921d1e3a4b42cdbfaee,",
-        "color.text-link.hover.muted": "S:bd4396eb6c99a1ffd680eb41760d15908daae3ac,",
-        "color.text-link.hover.disabled": "S:3a360339bdcfe01856887094d9f4caae38ee1d38,",
         "color.border.subtle": "S:b8fd258965df85ccf700cd5510b91e8e63a6a1ce,",
         "color.border.default": "S:51762c4bb03a8609f7b38cd37afb34d3d3617d9b,",
         "color.border.moderate": "S:d50a97085a217927db3e4e7b9ebb1fc72e930b9f,",
@@ -3481,12 +3473,6 @@
         "color.text-link.warning": "S:8afe636906a929e2e4ed765589acfc9f165f6fb7,",
         "color.text-link.muted": "S:32b6f1f0cdbbcdd8160141026045e9f6d54abb25,",
         "color.text-link.disabled": "S:16f9f3c9a7a17403a4763c65dda5622dc32436e5,",
-        "color.text-link.hover.primary": "S:ed1ce458fd996f5fd0bd82e14c2f44ee2287d148,",
-        "color.text-link.hover.critical": "S:1ce305f0f8dc74a04d0237b0cb2bfa8e7fda118b,",
-        "color.text-link.hover.success": "S:e191e8ce86122c9de08e3dadc942a8918eb80183,",
-        "color.text-link.hover.warning": "S:ed89c368512502fb3c12299bb4a693e1e4487f55,",
-        "color.text-link.hover.muted": "S:8010dd42885459ae9e2eed1f79e29f97b754f54b,",
-        "color.text-link.hover.disabled": "S:d2544983fd70a29a2c4b469c3a9741c707054d29,",
         "typography.body.small": "S:b91b9ae7ce0af15a3a2a09ace09965db66404f70,",
         "typography.body.base": "S:7522aa25b37b2a6c6f14c63f22d7300a7b7782f9,",
         "typography.body.compact.small": "S:2f7b297a1297adb676a1b1974b872fd250b55adf,",
@@ -3645,7 +3631,13 @@
         "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
         "color.text.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
         "color.text.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
-        "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,"
+        "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
+        "color.text-link.primary-hover": "S:ed1ce458fd996f5fd0bd82e14c2f44ee2287d148,",
+        "color.text-link.critical-hover": "S:1ce305f0f8dc74a04d0237b0cb2bfa8e7fda118b,",
+        "color.text-link.success-hover": "S:e191e8ce86122c9de08e3dadc942a8918eb80183,",
+        "color.text-link.warning-hover": "S:ed89c368512502fb3c12299bb4a693e1e4487f55,",
+        "color.text-link.muted-hover": "S:8010dd42885459ae9e2eed1f79e29f97b754f54b,",
+        "color.text-link.disabled-hover": "S:d2544983fd70a29a2c4b469c3a9741c707054d29,"
       }
     }
   ],
