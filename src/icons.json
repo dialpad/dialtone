@@ -431,6 +431,7 @@
         "move",
         "drag"
       ],
+      "hear": [],
       "heart": [
         "like",
         "love",
@@ -475,8 +476,7 @@
       "lightbulb-off": [],
       "lightbulb": [],
       "listen": [
-        "ear",
-        "hear"
+        "ear"
       ],
       "living-thing": [],
       "lock-filled": [
