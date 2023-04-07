@@ -2508,18 +2508,6 @@
           "value": "{color.black.600}",
           "type": "color"
         },
-        "primary-inverted": {
-          "value": "{color.neutral.black}",
-          "type": "color"
-        },
-        "secondary-inverted": {
-          "value": "{color.black.300}",
-          "type": "color"
-        },
-        "tertiary-inverted": {
-          "value": "{color.black.400}",
-          "type": "color"
-        },
         "muted": {
           "value": "rgba($color.black.800, 0.6)",
           "type": "color"
@@ -2574,6 +2562,18 @@
           "value": "{color.gold.400}",
           "type": "color",
           "description": "alert"
+        },
+        "primary-inverted": {
+          "value": "{color.neutral.black}",
+          "type": "color"
+        },
+        "secondary-inverted": {
+          "value": "{color.black.300}",
+          "type": "color"
+        },
+        "tertiary-inverted": {
+          "value": "{color.black.400}",
+          "type": "color"
         }
       },
       "text-link": {
