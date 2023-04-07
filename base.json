@@ -3001,6 +3001,10 @@
           "value": "{color.red.400}",
           "type": "color"
         },
+        "critical-inverted": {
+          "value": "{color.red.300}",
+          "type": "color"
+        },
         "critical-strong": {
           "value": "{color.red.500}",
           "type": "color"
@@ -3009,12 +3013,56 @@
           "value": "{color.green.400}",
           "type": "color"
         },
+        "success-inverted": {
+          "value": "{color.green.200}",
+          "type": "color"
+        },
         "warning": {
           "value": "{color.gold.400}",
           "type": "color"
         },
+        "warning-inverted": {
+          "value": "{color.gold.200}",
+          "type": "color"
+        },
         "warning-strong": {
           "value": "{color.gold.500}",
+          "type": "color"
+        },
+        "brand-inverted": {
+          "value": "{color.brand.purple}",
+          "type": "color"
+        },
+        "critical-subtle-inverted": {
+          "value": "{color.red.400}",
+          "type": "color"
+        },
+        "success-subtle-inverted": {
+          "value": "{color.green.400}",
+          "type": "color"
+        },
+        "warning-subtle-inverted": {
+          "value": "{color.gold.400}",
+          "type": "color"
+        },
+        "brand-subtle-inverted": {
+          "value": "{color.purple.500}",
+          "type": "color"
+        },
+        "critical-strong-inverted": {
+          "value": "{color.red.200}",
+          "type": "color"
+        },
+        "success-strong-inverted": {
+          "value": "{color.green.100}",
+          "type": "color"
+        },
+        "warning-strong-inverted": {
+          "value": "{color.gold.100}",
+          "type": "color"
+        },
+        "brand-strong-inverted": {
+          "value": "{color.purple.200}",
           "type": "color"
         }
       }
@@ -3911,7 +3959,7 @@
         "color.text.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
         "color.text.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
         "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
-        "color.text.tertiary-muted-inverted": "S:bee1fdb2d56e6de9f5dae64432180bb9b458e6f1,",
+        "color.text.tertiary-muted-inverted": "S:1829304ef188b3e0824eabff883c1249f6083013,",
         "color.text-link.primary-hover": "S:ed1ce458fd996f5fd0bd82e14c2f44ee2287d148,",
         "color.text-link.critical-hover": "S:1ce305f0f8dc74a04d0237b0cb2bfa8e7fda118b,",
         "color.text-link.success-hover": "S:e191e8ce86122c9de08e3dadc942a8918eb80183,",
@@ -3922,38 +3970,41 @@
         "color.border.default-inverted": "S:eee0157d77f910c6e868b83ff57a9ba284d3ebbf,",
         "color.border.moderate-inverted": "S:5766116a7cd4643fed22da05dd5fd11e1342493d,",
         "color.border.bold-inverted": "S:f25ac2f474a5cf1bc914a83f2d701df73ad70089,",
-        "color.text.muted-inverted": "S:0bf95ed9b2e8c83a028121fbc029acd7ba0928fb,",
-        "color.text.placeholder-inverted": "S:9599971da13fe2a51236a399d8acaa6986fef5f5,",
-        "color.text.disabled-inverted": "S:b1a98b0def5a4e07bdd78cc96d7775d2b0ea6b41,",
-        "color.text.critical-inverted": "S:25600ae8671d0551290c5ddedfbab2c688e3c7fa,",
-        "color.text.critical-strong-inverted": "S:622f902037bd608218df9b7af4a71528b44ab90c,",
-        "color.text.success-inverted": "S:fba3a6bd5552f1c3050b7874c29088d0c742221f,",
-        "color.text.success-strong-inverted": "S:b623205c8f167bac648200fc789448b2d50c0bb5,",
-        "color.text.warning-inverted": "S:f59513d53acf4e6fe637a41845a854498b2c18f5,",
-        "color.text-link.primary-inverted": "S:29981573110bf983643a0f149f7de268b5987225,",
-        "color.text-link.critical-inverted": "S:82563db5031a43da354fb6a3b81e7b3840ad3ea5,",
-        "color.text-link.success-inverted": "S:1647fe0bc8b44ed854f355ef726bd690fbbfe0bc,",
-        "color.text-link.warning-inverted": "S:33cd4b09d195725e0160647a24a7608c64318c39,",
-        "color.text-link.muted-inverted": "S:4d64a8649e36102e11a4ff94af511cd32e2579d4,",
-        "color.text-link.disabled-inverted": "S:3ac30f376b8962bcb25e2b117b08e6fc0e07efdd,",
-        "color.text-link.primary-inverted-hover": "S:1f364ebc03b281f11f4eda409ef96ec9aa71d2c2,",
-        "color.text-link.success-inverted-hover": "S:3ff14165a28c18605a0fb2f58176212fa0c1e057,",
-        "color.text-link.warning-inverted-hover": "S:55a3abb073b28eac53f6ed009a5da1eee490aee2,",
-        "color.text-link.muted-inverted-hover": "S:4e15f825153426f4c18d27221fb827ac19089b85,",
-        "color.text-link.disabled-inverted-hover": "S:d73e77597ae31415791f9335a2b603e85b591ae2,",
-        "color.border.accent": "S:ee2fed864aa758e4d2473a53447b6977629811ac,",
-        "color.border.critical-inverted": "S:939fafeb2e08e18b884153dedebc95103908a9cb,",
-        "color.border.success-inverted": "S:0de6880df507c208ec40cb22dc44a1fe2f9bc44c,",
-        "color.border.warning-inverted": "S:a0a6800a85be4109dfe9dd909b903793431b23fb,",
-        "color.border.brand-inverted": "S:67e74fd509a0f4e828633d3af5a3f484cbe7b07a,",
-        "color.border.critical-subtle-inverted": "S:0b0dd39759b36f3ec63554313199aabb9e9892fd,",
-        "color.border.critical-strong-inverted": "S:5f02d81898e0d6cde5bf2637e7bb898a56ecd2b8,",
-        "color.border.success-subtle-inverted": "S:b29151357c6ce123bcb2e2e8644b18de1e6b06a9,",
-        "color.border.success-strong-inverted": "S:54a46fa4120cf06132e96c683d453898769c87e0,",
-        "color.border.warning-subtle-inverted": "S:43d5a29a62e22244894ca21d686b6e623e27612f,",
-        "color.border.warning-strong-inverted": "S:86bf61a4d860cc2d1791a75af7a95292859d8b54,",
-        "color.border.brand-subtle-inverted": "S:23b19f051c495ec50d7bb553f53543076a08118c,",
-        "color.border.brand-strong-inverted": "S:2894c0c124ee4dd527bb42b17a7d2082fd224877,"
+        "color.text.muted-inverted": "S:8bc90da703f0c90d4db625a6f3da79ddce6485ba,",
+        "color.text.placeholder-inverted": "S:3038611471ed301b902eae7876ca0dbddd56ca0c,",
+        "color.text.disabled-inverted": "S:be28c4a632b601363693433e70c6faee3cfcdf95,",
+        "color.text.critical-inverted": "S:88940a823c4c6d65fd1c9c208931c52723c8f89d,",
+        "color.text.critical-strong-inverted": "S:bb82131f956368f46a9ce52580a8945dc7066f63,",
+        "color.text.success-inverted": "S:9d363176413f411b523c1a5b3048c652a6d0f146,",
+        "color.text.success-strong-inverted": "S:6fa4d3cac5832ffb7a6baeb6719235e35577b4bf,",
+        "color.text.warning-inverted": "S:767b3e470b328de8fed5b85b07a8c0cee22b4a6f,",
+        "color.text-link.primary-inverted": "S:0180a3dd209f7d4c35dff9b014ceb8db9ca3f4b2,",
+        "color.text-link.critical-inverted": "S:f345bcf6aed5b56b530c2f933c84b7b87d7667a5,",
+        "color.text-link.success-inverted": "S:ac1745b42b8e51f7e079a3863d6bd5135c3651d9,",
+        "color.text-link.warning-inverted": "S:6acfa0ef190b2c622da03f5c31b84fbb4b72ad0f,",
+        "color.text-link.muted-inverted": "S:80d31511872bb411a88900e438f0e2552df1db43,",
+        "color.text-link.disabled-inverted": "S:e08eea1c9ead005b8858479a3d4875fc00f923c4,",
+        "color.text-link.primary-inverted-hover": "S:c3c2880110d12b897db3389eea702cab6ce5ed30,",
+        "color.text-link.success-inverted-hover": "S:4f2d9e88c658c78b4435b7899cb529bf762824b0,",
+        "color.text-link.warning-inverted-hover": "S:0c72b4c40e8627b492bbef6c70bb2011fb73bff9,",
+        "color.text-link.muted-inverted-hover": "S:fe035677f33caa66ecd342117c48d488ff8cf4db,",
+        "color.text-link.disabled-inverted-hover": "S:d3b16e26333d7934ed660d320612f81a78675780,",
+        "color.border.accent": "S:286715bcd6e1b5d5d08e26427a0216a5f2cb716f,",
+        "color.border.critical-inverted": "S:7591b833a94d4a7ec9a29c21af4d1f8f9cc2e025,",
+        "color.border.success-inverted": "S:249af218b88f7f68c32ca33f410b074a47211c6a,",
+        "color.border.warning-inverted": "S:8737f1dbcbc9437fa860bc0d61774d4f6d8c30cb,",
+        "color.border.brand-inverted": "S:a2e8580121f26b9897c160c44852cccf7e89de3b,",
+        "color.border.critical-subtle-inverted": "S:fec0256329c0d903e622b687e1604f859b72757b,",
+        "color.border.critical-strong-inverted": "S:c1bba2fbcf42bd1722018b4ea0816bc16dce1a42,",
+        "color.border.success-subtle-inverted": "S:5ba9c8e839c9702da2346f0a3fe2a4248399dd89,",
+        "color.border.success-strong-inverted": "S:a745fd838466684898e87a316f1c20d5fd4014f2,",
+        "color.border.warning-subtle-inverted": "S:c336cf9a4acde846307219928cd7b99413bf428f,",
+        "color.border.warning-strong-inverted": "S:333395921917be55bba1a3381c2b0493743c90b8,",
+        "color.border.brand-subtle-inverted": "S:2a4ba6f3524f9ef234e97f4b8032c0b2803c5a64,",
+        "color.border.brand-strong-inverted": "S:36f1c7b3608d39e5dfdfdef1cc59f98233994f55,",
+        "color.text.tertiary-placeholder-inverted": "S:814aadad3091706612ac09d64509fe57ba5be581,",
+        "color.text.tertiary-disabled-inverted": "S:26ff86c2640c87f01c66fc225ac043ccafa65acd,",
+        "color.text-link.critical-inverted-hover": "S:0a9ce696b16879b15dd7a272332b15b508a7039d,"
       }
     }
   ],
