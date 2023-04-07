@@ -1627,7 +1627,7 @@
           "type": "color"
         },
         "accent": {
-          "value": "{color.magenta.300}",
+          "value": "{color.brand.magenta}",
           "type": "color"
         },
         "critical-subtle": {
