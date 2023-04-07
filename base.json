@@ -2574,6 +2574,38 @@
         "tertiary-inverted": {
           "value": "{color.black.400}",
           "type": "color"
+        },
+        "tertiary-muted-inverted": {
+          "value": "rgba($color.black.200, 0.6)",
+          "type": "color"
+        },
+        "tertiary-placeholder-inverted": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "tertiary-disabled-inverted": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "critical-inverted": {
+          "value": "{color.red.300}",
+          "type": "color"
+        },
+        "critical-strong-inverted": {
+          "value": "{color.red.200}",
+          "type": "color"
+        },
+        "success-inverted": {
+          "value": "{color.green.200}",
+          "type": "color"
+        },
+        "success-strong-inverted": {
+          "value": "{color.green.100}",
+          "type": "color"
+        },
+        "warning-inverted": {
+          "value": "{color.gold.100}",
+          "type": "color"
         }
       },
       "text-link": {
@@ -2627,6 +2659,54 @@
         },
         "disabled-hover": {
           "value": "{color.text-link.disabled}",
+          "type": "color"
+        },
+        "primary-inverted": {
+          "value": "{color.purple.300}",
+          "type": "color"
+        },
+        "primary-inverted-hover": {
+          "value": "{color.purple.200}",
+          "type": "color"
+        },
+        "critical-inverted": {
+          "value": "{color.text.critical-inverted}",
+          "type": "color"
+        },
+        "critical-inverted-hover": {
+          "value": "{color.red.200}",
+          "type": "color"
+        },
+        "success-inverted": {
+          "value": "{color.text.success-inverted}",
+          "type": "color"
+        },
+        "success-inverted-hover": {
+          "value": "{color.text.success-strong-inverted}",
+          "type": "color"
+        },
+        "warning-inverted": {
+          "value": "{color.text.warning-inverted}",
+          "type": "color"
+        },
+        "warning-inverted-hover": {
+          "value": "{color.black.200}",
+          "type": "color"
+        },
+        "muted-inverted": {
+          "value": "{color.text.muted-inverted}",
+          "type": "color"
+        },
+        "muted-inverted-hover": {
+          "value": "{color.text.primary-inverted}",
+          "type": "color"
+        },
+        "disabled-inverted": {
+          "value": "{color.text.disabled-inverted}",
+          "type": "color"
+        },
+        "disabled-inverted-hover": {
+          "value": "{color.text-link.disabled-inverted}",
           "type": "color"
         }
       },
@@ -3554,13 +3634,12 @@
         "color.text.success-strong-inverted": "S:82c595344523f82c6818e25966285d95175199f5,",
         "color.text.warning-inverted": "S:e850bd2829c9c753d6867bc445107b6ced3e2824,",
         "color.text-link.primary-inverted": "S:2a692321c2e7b2b8cfe296a943c8a2a4188ddd32,",
-        "color.text-link.critical-inverted": "S:12645cdd0d2d79c0da0b6d809746522eed9e15ab,",
+        "color.text-link.critical-inverted": "S:89d7e96515d0a20c07b85071268701894afa351f,",
         "color.text-link.success-inverted": "S:06fe84b1680b35c168184fe023db6bbe407b0808,",
         "color.text-link.warning-inverted": "S:826a8d7ba67c6619014303a57bf5e17810d9e923,",
         "color.text-link.muted-inverted": "S:1179e93e87db38b497c0934360fe2f6b8943a8b3,",
         "color.text-link.disabled-inverted": "S:b2ae2fd39490f22cfe94079abc2b9b667e50f64f,",
         "color.text-link.primary-inverted-hover": "S:cc19b75cbdd14ee82651757150a0478aeb488290,",
-        "color.text-link.critical-inverted-hover": "S:89d7e96515d0a20c07b85071268701894afa351f,",
         "color.text-link.success-inverted-hover": "S:2e32f50fdf7adb070c5f12ee8cca2f22987adeb6,",
         "color.text-link.warning-inverted-hover": "S:eb36c5fae3c4f7999663ad9a30280e844331b079,",
         "color.text-link.muted-inverted-hover": "S:dfbf0d8783020077482f926200a9fdfd12333952,",
@@ -3831,7 +3910,50 @@
         "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
         "color.text.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
         "color.text.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
-        "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,"
+        "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
+        "color.text.tertiary-muted-inverted": "S:bee1fdb2d56e6de9f5dae64432180bb9b458e6f1,",
+        "color.text-link.primary-hover": "S:ed1ce458fd996f5fd0bd82e14c2f44ee2287d148,",
+        "color.text-link.critical-hover": "S:1ce305f0f8dc74a04d0237b0cb2bfa8e7fda118b,",
+        "color.text-link.success-hover": "S:e191e8ce86122c9de08e3dadc942a8918eb80183,",
+        "color.text-link.warning-hover": "S:ed89c368512502fb3c12299bb4a693e1e4487f55,",
+        "color.text-link.muted-hover": "S:8010dd42885459ae9e2eed1f79e29f97b754f54b,",
+        "color.text-link.disabled-hover": "S:d2544983fd70a29a2c4b469c3a9741c707054d29,",
+        "color.border.subtle-inverted": "S:e2e5ed3f9c84881079aced8277f76d6b8d9862e6,",
+        "color.border.default-inverted": "S:eee0157d77f910c6e868b83ff57a9ba284d3ebbf,",
+        "color.border.moderate-inverted": "S:5766116a7cd4643fed22da05dd5fd11e1342493d,",
+        "color.border.bold-inverted": "S:f25ac2f474a5cf1bc914a83f2d701df73ad70089,",
+        "color.text.muted-inverted": "S:0bf95ed9b2e8c83a028121fbc029acd7ba0928fb,",
+        "color.text.placeholder-inverted": "S:9599971da13fe2a51236a399d8acaa6986fef5f5,",
+        "color.text.disabled-inverted": "S:b1a98b0def5a4e07bdd78cc96d7775d2b0ea6b41,",
+        "color.text.critical-inverted": "S:25600ae8671d0551290c5ddedfbab2c688e3c7fa,",
+        "color.text.critical-strong-inverted": "S:622f902037bd608218df9b7af4a71528b44ab90c,",
+        "color.text.success-inverted": "S:fba3a6bd5552f1c3050b7874c29088d0c742221f,",
+        "color.text.success-strong-inverted": "S:b623205c8f167bac648200fc789448b2d50c0bb5,",
+        "color.text.warning-inverted": "S:f59513d53acf4e6fe637a41845a854498b2c18f5,",
+        "color.text-link.primary-inverted": "S:29981573110bf983643a0f149f7de268b5987225,",
+        "color.text-link.critical-inverted": "S:82563db5031a43da354fb6a3b81e7b3840ad3ea5,",
+        "color.text-link.success-inverted": "S:1647fe0bc8b44ed854f355ef726bd690fbbfe0bc,",
+        "color.text-link.warning-inverted": "S:33cd4b09d195725e0160647a24a7608c64318c39,",
+        "color.text-link.muted-inverted": "S:4d64a8649e36102e11a4ff94af511cd32e2579d4,",
+        "color.text-link.disabled-inverted": "S:3ac30f376b8962bcb25e2b117b08e6fc0e07efdd,",
+        "color.text-link.primary-inverted-hover": "S:1f364ebc03b281f11f4eda409ef96ec9aa71d2c2,",
+        "color.text-link.success-inverted-hover": "S:3ff14165a28c18605a0fb2f58176212fa0c1e057,",
+        "color.text-link.warning-inverted-hover": "S:55a3abb073b28eac53f6ed009a5da1eee490aee2,",
+        "color.text-link.muted-inverted-hover": "S:4e15f825153426f4c18d27221fb827ac19089b85,",
+        "color.text-link.disabled-inverted-hover": "S:d73e77597ae31415791f9335a2b603e85b591ae2,",
+        "color.border.accent": "S:ee2fed864aa758e4d2473a53447b6977629811ac,",
+        "color.border.critical-inverted": "S:939fafeb2e08e18b884153dedebc95103908a9cb,",
+        "color.border.success-inverted": "S:0de6880df507c208ec40cb22dc44a1fe2f9bc44c,",
+        "color.border.warning-inverted": "S:a0a6800a85be4109dfe9dd909b903793431b23fb,",
+        "color.border.brand-inverted": "S:67e74fd509a0f4e828633d3af5a3f484cbe7b07a,",
+        "color.border.critical-subtle-inverted": "S:0b0dd39759b36f3ec63554313199aabb9e9892fd,",
+        "color.border.critical-strong-inverted": "S:5f02d81898e0d6cde5bf2637e7bb898a56ecd2b8,",
+        "color.border.success-subtle-inverted": "S:b29151357c6ce123bcb2e2e8644b18de1e6b06a9,",
+        "color.border.success-strong-inverted": "S:54a46fa4120cf06132e96c683d453898769c87e0,",
+        "color.border.warning-subtle-inverted": "S:43d5a29a62e22244894ca21d686b6e623e27612f,",
+        "color.border.warning-strong-inverted": "S:86bf61a4d860cc2d1791a75af7a95292859d8b54,",
+        "color.border.brand-subtle-inverted": "S:23b19f051c495ec50d7bb553f53543076a08118c,",
+        "color.border.brand-strong-inverted": "S:2894c0c124ee4dd527bb42b17a7d2082fd224877,"
       }
     }
   ],
