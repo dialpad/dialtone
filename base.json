@@ -1310,149 +1310,147 @@
         }
       },
       "surface": {
-        "opaque": {
-          "secondary": {
-            "value": "{color.black.900}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".02",
-                  "space": "hsl"
-                }
+        "secondary-opaque": {
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".02",
+                "space": "hsl"
               }
             }
-          },
-          "moderate": {
-            "value": "{color.black.900}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".09",
-                  "space": "hsl"
-                }
+          }
+        },
+        "moderate-opaque": {
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".09",
+                "space": "hsl"
               }
             }
-          },
-          "bold": {
-            "value": "{color.black.900}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".18",
-                  "space": "hsl"
-                }
+          }
+        },
+        "bold-opaque": {
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".18",
+                "space": "hsl"
               }
             }
-          },
-          "critical": {
-            "value": "{color.red.300}",
-            "type": "color",
-            "description": "danger, error",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".11",
-                  "space": "hsl"
-                }
+          }
+        },
+        "critical-opaque": {
+          "value": "{color.red.300}",
+          "type": "color",
+          "description": "danger, error",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".11",
+                "space": "hsl"
               }
             }
-          },
-          "critical-subtle": {
-            "value": "{color.red.300}",
-            "type": "color",
-            "description": "danger, error",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".05",
-                  "space": "hsl"
-                }
+          }
+        },
+        "critical-subtle-opaque": {
+          "value": "{color.red.300}",
+          "type": "color",
+          "description": "danger, error",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".05",
+                "space": "hsl"
               }
             }
-          },
-          "warning": {
-            "value": "{color.gold.200}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".38",
-                  "space": "hsl"
-                }
+          }
+        },
+        "warning-opaque": {
+          "value": "{color.gold.200}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".38",
+                "space": "hsl"
               }
             }
-          },
-          "warning-subtle": {
-            "value": "{color.gold.200}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".18",
-                  "space": "hsl"
-                }
+          }
+        },
+        "warning-subtle-opaque": {
+          "value": "{color.gold.200}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".18",
+                "space": "hsl"
               }
             }
-          },
-          "success": {
-            "value": "{color.green.400}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".08",
-                  "space": "hsl"
-                }
+          }
+        },
+        "success-opaque": {
+          "value": "{color.green.400}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".08",
+                "space": "hsl"
               }
             }
-          },
-          "success-subtle": {
-            "value": "{color.green.400}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".03",
-                  "space": "hsl"
-                }
+          }
+        },
+        "success-subtle-opaque": {
+          "value": "{color.green.400}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".03",
+                "space": "hsl"
               }
             }
-          },
-          "info": {
-            "value": "{color.blue.400}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".09",
-                  "space": "hsl"
-                }
+          }
+        },
+        "info-opaque": {
+          "value": "{color.blue.400}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".09",
+                "space": "hsl"
               }
             }
-          },
-          "info-subtle": {
-            "value": "{color.blue.400}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".04",
-                  "space": "hsl"
-                }
+          }
+        },
+        "info-subtle-opaque": {
+          "value": "{color.blue.400}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".04",
+                "space": "hsl"
               }
             }
           }
@@ -3205,7 +3203,7 @@
       "color": {
         "background": {
           "default": {
-            "value": "{color.surface.opaque.moderate}",
+            "value": "{color.surface.moderate-opaque}",
             "type": "color"
           },
           "info": {
@@ -3647,18 +3645,7 @@
         "color.border.brand-strong": "S:0a5cdcdcf2eb9ba076294b36e4cfa3635f2b5999,",
         "color.text.critical-strong": "S:adedc93b5dc4b0b9f251f245774313d1af648c82,",
         "color.text.success-strong": "S:476216ba4d41203d071fa31b08b9b8595cca5f4b,",
-        "color.surface.opaque.secondary": "S:f22117fdb46ac8d41198474f2b1ca9012b14b0ec,",
-        "color.surface.opaque.moderate": "S:2a30d51c54b5a5fbebd3f9a35e168ed1ffac569d,",
-        "color.surface.opaque.bold": "S:bd63c58bfcda7df310e5b87e479c78d2aa3a923c,",
         "inputs.color.border.success": "S:eb0a10557f0ac90ff041e4c3a54113a2feb2e1a6,",
-        "color.surface.opaque.critical": "S:02b38d5f9da343154adfef46e0d1f574b8f2f8a5,",
-        "color.surface.opaque.critical-subtle": "S:06b2d55f4812eebcc8ba5e455a7bad4f1a0e492d,",
-        "color.surface.opaque.warning": "S:d079189ac6cdc8aaab8bec258f1c699c88af1ee8,",
-        "color.surface.opaque.warning-subtle": "S:6d054da472332ba8d2924406dcc1e23359e996c1,",
-        "color.surface.opaque.success": "S:b05f1396ab7194d81eaba1d184e9d5ab28976e9b,",
-        "color.surface.opaque.success-subtle": "S:7a27a99d67bc7cd92610e08049e5f3f7ea43f498,",
-        "color.surface.opaque.info": "S:c979a9319cf927e381a0e24ed09e30b732f33c56,",
-        "color.surface.opaque.info-subtle": "S:beeb8a3ce8c09c4f61e8942fb01444a934076ae7,",
         "color.border.ai": "S:1716fa4a9185144a74525e09e6421f0e34c78908,",
         "color.text.primary-inverted": "S:27feac6050082ca82b6d9c8a57de90fdd4d6f2d6,",
         "color.text.secondary-inverted": "S:e501f50d78561840e7521320a6f2e36536d15ebb,",
@@ -3942,19 +3929,8 @@
         "color.text.critical-strong": "S:10b9ebd49873a5371a8a90ea101c3b346ea7e6d1,",
         "color.text.success-strong": "S:e76a14e3ba907c5a3fb24618a50c839fcce19cfc,",
         "inputs.color.border.success": "S:3e6fdf080f15e6deaa3ee9a268179190d6e496b1,",
-        "color.surface.opaque.moderate": "S:e1f5b70620515fcf8029fef3d8ac0441cfc7e639,",
-        "color.surface.opaque.bold": "S:b54df26a8089849e5afdf59b1ae6f0279ca9e2ab,",
-        "color.surface.opaque.critical": "S:36a96a2d7cf015fae0b45c2118e69fda62235410,",
-        "color.surface.opaque.critical-subtle": "S:b711891ae99af36529c18240ac17af7ca449f5ab,",
-        "color.surface.opaque.warning": "S:bb24ca7c14234ffe6479dfc67cc50bdce7c1c895,",
-        "color.surface.opaque.warning-subtle": "S:e4848c855ac175d71d066ac6f83c74c633c96e24,",
-        "color.surface.opaque.success": "S:41e7f77e7a70597da21e74ac592c4284359a1b05,",
-        "color.surface.opaque.success-subtle": "S:2882458967905a2ac5444d4ada1c9eb5052df4d5,",
-        "color.surface.opaque.info": "S:2c9082f617333999e117cb3d4dd63876ad2cf4bd,",
-        "color.surface.opaque.info-subtle": "S:3fec5783d87698de39f5619bc69048fc5adf0cc6,",
         "color.border.ai": "S:ff752e9ad7d5ac5acfa216a7b5165468624c0380,",
         "badge.color.background.default": "S:46515656b0f57d4ba86fd6167cbbaf94f1dc6d65,",
-        "color.surface.opaque.secondary": "S:fcac5ac71509870b22c60aae84e3f9e9adef4909,",
         "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
         "color.text.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
         "color.text.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
@@ -4001,7 +3977,18 @@
         "color.text-link.critical-inverted-hover": "S:53bf6dc5436dbad2b659dbc2eefbe3a7629c9b51,",
         "color.text.muted-inverted": "S:6c7fa4f28d68f175a1dc994109c8769acb805825,",
         "color.text.placeholder-inverted": "S:9a5db8f3d994d6430cfd3dca0d10366b254aa6bd,",
-        "color.text.disabled-inverted": "S:06d03c239fb54a632eb3189f966af42706b83a68,"
+        "color.text.disabled-inverted": "S:06d03c239fb54a632eb3189f966af42706b83a68,",
+        "color.surface.secondary-opaque": "S:fcac5ac71509870b22c60aae84e3f9e9adef4909,",
+        "color.surface.moderate-opaque": "S:e1f5b70620515fcf8029fef3d8ac0441cfc7e639,",
+        "color.surface.bold-opaque": "S:b54df26a8089849e5afdf59b1ae6f0279ca9e2ab,",
+        "color.surface.critical-opaque": "S:36a96a2d7cf015fae0b45c2118e69fda62235410,",
+        "color.surface.critical-subtle-opaque": "S:b711891ae99af36529c18240ac17af7ca449f5ab,",
+        "color.surface.warning-opaque": "S:bb24ca7c14234ffe6479dfc67cc50bdce7c1c895,",
+        "color.surface.warning-subtle-opaque": "S:e4848c855ac175d71d066ac6f83c74c633c96e24,",
+        "color.surface.success-opaque": "S:41e7f77e7a70597da21e74ac592c4284359a1b05,",
+        "color.surface.success-subtle-opaque": "S:2882458967905a2ac5444d4ada1c9eb5052df4d5,",
+        "color.surface.info-opaque": "S:2c9082f617333999e117cb3d4dd63876ad2cf4bd,",
+        "color.surface.info-subtle-opaque": "S:3fec5783d87698de39f5619bc69048fc5adf0cc6,"
       }
     }
   ],
