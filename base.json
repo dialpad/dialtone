@@ -3229,7 +3229,7 @@
             "type": "color"
           }
         },
-        "text": {
+        "foreground": {
           "default": {
             "value": "{color.foreground.primary}",
             "type": "color"
@@ -3543,8 +3543,6 @@
         "badge.color.background.critical": "S:c1c5adc286309f878216c57ac9c4337b650cfd00,",
         "badge.color.background.bulletin": "S:223af3c218497fc73bce48984ff78fc745f58268,",
         "badge.color.background.ai": "S:2fa5a072b4e746dd1dc4993327b331ad37122af7,",
-        "badge.color.text.default": "S:1e2b1bdf52f5a2c1b92225d44e5d975d58be9932,",
-        "badge.color.text.bulletin": "S:4d92bc89d97f49650664e6db4be7f96047553fa5,",
         "action.color.foreground.base.default": "S:969440296fe448196a72d9829704c379f132e8a1,",
         "action.color.foreground.base.hover": "S:337c340c75812b23fbbfadd32d9fa64b5689acf7,",
         "action.color.foreground.base.active": "S:204f160c760241db933336ae413d45f26f42876e,",
@@ -3779,8 +3777,6 @@
         "checkbox.color.background.checked": "S:7abb912c4c81dcc953d2912f2973ffe4b0996b3e,",
         "badge.color.background.bulletin": "S:52bd49ba86213b54c683bc0c0a0a35d637c2973a,",
         "badge.color.background.ai": "S:c4ac3a5ae3e2d8273ce2053c7b5666574e57276f,",
-        "badge.color.text.default": "S:435110adbd6717ac61d470d910672f0bf8002f64,",
-        "badge.color.text.bulletin": "S:3c32047a4e1eb7aae5dc489f4154d8625f25a8f5,",
         "action.color.foreground.base.default": "S:5cb20ec006c6c8261486d03fe51c2f16056141b0,",
         "action.color.foreground.base.active": "S:eb5ee09c8c0e1c4032dbe78efba6e933667726cc,",
         "action.color.foreground.base.primary.default": "S:19791d27d67d86ba48260dd38d9de2df4fe1864f,",
@@ -3879,7 +3875,9 @@
         "color.border.warning-subtle-inverted": "S:f9fc20bc58fc614a514747c1523b608c6af89190,",
         "color.border.warning-strong-inverted": "S:ebc85bbbd8264c7ecbab9d436311d36b4c499f11,",
         "color.border.brand-subtle-inverted": "S:7d007762fe82640f39f8dd7b7285cf5b18c77d8e,",
-        "color.border.brand-strong-inverted": "S:b16332a64fcfbac2be41de59958de325eb48f4d0,"
+        "color.border.brand-strong-inverted": "S:b16332a64fcfbac2be41de59958de325eb48f4d0,",
+        "badge.color.foreground.default": "S:435110adbd6717ac61d470d910672f0bf8002f64,",
+        "badge.color.foreground.bulletin": "S:3c32047a4e1eb7aae5dc489f4154d8625f25a8f5,"
       }
     }
   ],
