@@ -1085,7 +1085,7 @@
   },
   "semantic": {
     "color": {
-      "text": {
+      "foreground": {
         "primary": {
           "value": "{color.black.900}",
           "type": "color"
@@ -1165,7 +1165,7 @@
           "description": "critical, danger, error, alert"
         },
         "critical-strong-inverted": {
-          "value": "{color.text.critical-inverted}",
+          "value": "{color.foreground.critical-inverted}",
           "type": "color",
           "description": "critical, danger, error, alert",
           "$extensions": {
@@ -1184,7 +1184,7 @@
           "description": "positive"
         },
         "success-strong-inverted": {
-          "value": "{color.text.success-inverted}",
+          "value": "{color.foreground.success-inverted}",
           "type": "color",
           "description": "positive",
           "$extensions": {
@@ -1209,26 +1209,26 @@
           "type": "color"
         },
         "critical": {
-          "value": "{color.text.critical}",
+          "value": "{color.foreground.critical}",
           "type": "color"
         },
         "success": {
-          "value": "{color.text.success}",
+          "value": "{color.foreground.success}",
           "type": "color",
           "description": "positive"
         },
         "warning": {
-          "value": "{color.text.warning}",
+          "value": "{color.foreground.warning}",
           "type": "color",
           "description": "positive"
         },
         "muted": {
-          "value": "{color.text.muted}",
+          "value": "{color.foreground.muted}",
           "type": "color",
           "description": "positive"
         },
         "disabled": {
-          "value": "{color.text.disabled}",
+          "value": "{color.foreground.disabled}",
           "type": "color",
           "description": "positive"
         },
@@ -1237,26 +1237,26 @@
           "type": "color"
         },
         "critical-inverted": {
-          "value": "{color.text.critical-inverted}",
+          "value": "{color.foreground.critical-inverted}",
           "type": "color"
         },
         "success-inverted": {
-          "value": "{color.text.success-inverted}",
+          "value": "{color.foreground.success-inverted}",
           "type": "color",
           "description": "positive"
         },
         "warning-inverted": {
-          "value": "{color.text.warning-inverted}",
+          "value": "{color.foreground.warning-inverted}",
           "type": "color",
           "description": "positive"
         },
         "muted-inverted": {
-          "value": "{color.text.muted-inverted}",
+          "value": "{color.foreground.muted-inverted}",
           "type": "color",
           "description": "positive"
         },
         "disabled-inverted": {
-          "value": "{color.text.disabled-inverted}",
+          "value": "{color.foreground.disabled-inverted}",
           "type": "color",
           "description": "positive"
         },
@@ -1277,7 +1277,7 @@
           "type": "color"
         },
         "muted-hover": {
-          "value": "{color.text.primary}",
+          "value": "{color.foreground.primary}",
           "type": "color"
         },
         "disabled-hover": {
@@ -1289,11 +1289,11 @@
           "type": "color"
         },
         "critical-inverted-hover": {
-          "value": "{color.text.critical-strong-inverted}",
+          "value": "{color.foreground.critical-strong-inverted}",
           "type": "color"
         },
         "success-inverted-hover": {
-          "value": "{color.text.success-strong-inverted}",
+          "value": "{color.foreground.success-strong-inverted}",
           "type": "color"
         },
         "warning-inverted-hover": {
@@ -2099,17 +2099,17 @@
         }
       },
       "color": {
-        "text": {
+        "foreground": {
           "default": {
-            "value": "{color.text.secondary}",
+            "value": "{color.foreground.secondary}",
             "type": "color"
           },
           "placeholder": {
-            "value": "{color.text.placeholder}",
+            "value": "{color.foreground.placeholder}",
             "type": "color"
           },
           "disabled": {
-            "value": "{color.text.disabled}",
+            "value": "{color.foreground.disabled}",
             "type": "color"
           }
         },
@@ -2180,7 +2180,7 @@
           },
           "critical": {
             "default": {
-              "value": "{color.text.critical}",
+              "value": "{color.foreground.critical}",
               "type": "color"
             },
             "hover": {
@@ -2200,7 +2200,7 @@
           },
           "inverted": {
             "default": {
-              "value": "{color.text.primary-inverted}",
+              "value": "{color.foreground.primary-inverted}",
               "type": "color"
             },
             "hover": {
@@ -2228,7 +2228,7 @@
           },
           "muted": {
             "default": {
-              "value": "{color.text.secondary}",
+              "value": "{color.foreground.secondary}",
               "type": "color"
             },
             "hover": {
@@ -2242,7 +2242,7 @@
           },
           "disabled": {
             "default": {
-              "value": "{color.text.disabled}",
+              "value": "{color.foreground.disabled}",
               "type": "color"
             }
           }
@@ -2393,7 +2393,7 @@
       "sidebar": {
         "color": {
           "foreground": {
-            "value": "{color.text.primary}",
+            "value": "{color.foreground.primary}",
             "type": "color"
           },
           "background": {
@@ -2404,7 +2404,7 @@
         "icon": {
           "color": {
             "foreground": {
-              "value": "{color.text.secondary}",
+              "value": "{color.foreground.secondary}",
               "type": "color"
             }
           }
@@ -2412,7 +2412,7 @@
         "status": {
           "color": {
             "foreground": {
-              "value": "{color.text.tertiary}",
+              "value": "{color.foreground.tertiary}",
               "type": "color"
             }
           }
@@ -2445,7 +2445,7 @@
         "selected-row": {
           "color": {
             "foreground": {
-              "value": "{color.text.primary}",
+              "value": "{color.foreground.primary}",
               "type": "color"
             },
             "background": {
@@ -2524,7 +2524,7 @@
           "description": "critical, danger, error, alert"
         },
         "critical-strong": {
-          "value": "{color.text.critical}",
+          "value": "{color.foreground.critical}",
           "type": "color",
           "description": "critical, danger, error, alert",
           "$extensions": {
@@ -2543,7 +2543,7 @@
           "description": "positive"
         },
         "success-strong": {
-          "value": "{color.text.success}",
+          "value": "{color.foreground.success}",
           "type": "color",
           "description": "positive",
           "$extensions": {
@@ -2612,26 +2612,26 @@
           "type": "color"
         },
         "critical": {
-          "value": "{color.text.critical}",
+          "value": "{color.foreground.critical}",
           "type": "color"
         },
         "success": {
-          "value": "{color.text.success}",
+          "value": "{color.foreground.success}",
           "type": "color",
           "description": "positive"
         },
         "warning": {
-          "value": "{color.text.warning}",
+          "value": "{color.foreground.warning}",
           "type": "color",
           "description": "positive"
         },
         "muted": {
-          "value": "{color.text.muted}",
+          "value": "{color.foreground.muted}",
           "type": "color",
           "description": "positive"
         },
         "disabled": {
-          "value": "{color.text.disabled}",
+          "value": "{color.foreground.disabled}",
           "type": "color",
           "description": "positive"
         },
@@ -2652,7 +2652,7 @@
           "type": "color"
         },
         "muted-hover": {
-          "value": "{color.text.primary}",
+          "value": "{color.foreground.primary}",
           "type": "color"
         },
         "disabled-hover": {
@@ -2668,7 +2668,7 @@
           "type": "color"
         },
         "critical-inverted": {
-          "value": "{color.text.critical-inverted}",
+          "value": "{color.foreground.critical-inverted}",
           "type": "color"
         },
         "critical-inverted-hover": {
@@ -2676,15 +2676,15 @@
           "type": "color"
         },
         "success-inverted": {
-          "value": "{color.text.success-inverted}",
+          "value": "{color.foreground.success-inverted}",
           "type": "color"
         },
         "success-inverted-hover": {
-          "value": "{color.text.success-strong-inverted}",
+          "value": "{color.foreground.success-strong-inverted}",
           "type": "color"
         },
         "warning-inverted": {
-          "value": "{color.text.warning-inverted}",
+          "value": "{color.foreground.warning-inverted}",
           "type": "color"
         },
         "warning-inverted-hover": {
@@ -2692,15 +2692,15 @@
           "type": "color"
         },
         "muted-inverted": {
-          "value": "{color.text.muted-inverted}",
+          "value": "{color.foreground.muted-inverted}",
           "type": "color"
         },
         "muted-inverted-hover": {
-          "value": "{color.text.primary-inverted}",
+          "value": "{color.foreground.primary-inverted}",
           "type": "color"
         },
         "disabled-inverted": {
-          "value": "{color.text.disabled-inverted}",
+          "value": "{color.foreground.disabled-inverted}",
           "type": "color"
         },
         "disabled-inverted-hover": {
@@ -3067,15 +3067,15 @@
       "color": {
         "text": {
           "default": {
-            "value": "{color.text.primary}",
+            "value": "{color.foreground.primary}",
             "type": "color"
           },
           "placeholder": {
-            "value": "{color.text.placeholder}",
+            "value": "{color.foreground.placeholder}",
             "type": "color"
           },
           "disabled": {
-            "value": "{color.text.disabled}",
+            "value": "{color.foreground.disabled}",
             "type": "color"
           }
         },
@@ -3137,7 +3137,7 @@
           },
           "critical": {
             "hover": {
-              "value": "{color.text.critical}",
+              "value": "{color.foreground.critical}",
               "type": "color",
               "$extensions": {
                 "studio.tokens": {
@@ -3231,7 +3231,7 @@
         },
         "text": {
           "default": {
-            "value": "{color.text.primary}",
+            "value": "{color.foreground.primary}",
             "type": "color"
           },
           "bulletin": {
@@ -3423,15 +3423,6 @@
         "components/badge": "enabled"
       },
       "$figmaStyleReferences": {
-        "color.text.primary": "S:92f5e2212b79f23c86e2527358948b6dd56ac41e,",
-        "color.text.secondary": "S:ed59a70338364bbe62bf9b34653838b0f9f58dc5,",
-        "color.text.tertiary": "S:b5ca39f3bf057979fee258841379b1a0966f8ee1,",
-        "color.text.muted": "S:3768df85812ca3f28f512e918454a7afa035957d,",
-        "color.text.placeholder": "S:fb67aa8f90b49375dbf5f743144068da7fc6475b,",
-        "color.text.disabled": "S:59407b12f76937b33981e260068313cf586e6049,",
-        "color.text.critical": "S:0e066a702553a2b33ab74a678d7c38b23c853d50,",
-        "color.text.success": "S:aa0b2ca6e8f1e5d78ede2141a23edaad26989135,",
-        "color.text.warning": "S:b50008a28dd92cf88aca40a3a75e190f8d98d9b4,",
         "color.surface.primary": "S:6c392f95efb12c1bc91df5b9e08e628e0f641be4,",
         "color.surface.secondary": "S:d9d1b205a90fbfd87834e143756aeefd708999a0,",
         "color.surface.moderate": "S:49cbaa1885201ceff3da844c5d27dc591e37995d,",
@@ -3531,9 +3522,6 @@
         "color.border.success": "S:4cb312425feaf3d0d1eaa365ea3a0f463be4f2a1,",
         "color.border.warning": "S:7afde1f5bfc14c7d8c62a8a87fae8294eb9c164c,",
         "color.neutral.transparent": "S:1b852fc3771264f954feb28c32f7b60783706618,",
-        "inputs.color.text.default": "S:d0013f24723fb5bfed99e397af5580e764629abe,",
-        "inputs.color.text.placeholder": "S:dd0c344c46ff9d02c63a4e213fb85ee6ccb57d6a,",
-        "inputs.color.text.disabled": "S:a6d8f7527376f5e4d54818e7c893d4f1c0973561,",
         "inputs.color.border.default": "S:b0f8cd6a417a226d49a32825eb576009fd30fe2f,",
         "inputs.color.border.focus": "S:9eb6ff960c65210b3c9cc769e31fea1749e764a8,",
         "inputs.color.border.critical": "S:51d925168049d35ad23cbdce6f3eb895fe419623,",
@@ -3635,25 +3623,12 @@
         "color.border.warning-strong": "S:d9d3a7ff5d369d8fa2dd0241a108d3b501ea2d63,",
         "color.border.brand-subtle": "S:f7c664055b7c36e87a2dcd4c3cca6c042dde1593,",
         "color.border.brand-strong": "S:0a5cdcdcf2eb9ba076294b36e4cfa3635f2b5999,",
-        "color.text.critical-strong": "S:adedc93b5dc4b0b9f251f245774313d1af648c82,",
-        "color.text.success-strong": "S:476216ba4d41203d071fa31b08b9b8595cca5f4b,",
         "inputs.color.border.success": "S:eb0a10557f0ac90ff041e4c3a54113a2feb2e1a6,",
         "color.border.ai": "S:1716fa4a9185144a74525e09e6421f0e34c78908,",
-        "color.text.primary-inverted": "S:27feac6050082ca82b6d9c8a57de90fdd4d6f2d6,",
-        "color.text.secondary-inverted": "S:e501f50d78561840e7521320a6f2e36536d15ebb,",
-        "color.text.tertiary-inverted": "S:81a07c36f42ad40124f832aee38042c2ce3bd0b0,",
-        "color.text.muted-inverted": "S:9ef3176f3d235c850e0d9840491bf0faa7080c67,",
-        "color.text.placeholder-inverted": "S:500866bd695473c1e1e07c57c62fc3f4b9687334,",
-        "color.text.disabled-inverted": "S:0b442326285b95053427cbb1cc4b00a762505053,",
         "color.border.subtle-inverted": "S:7a8ca24d2bf77bb6c37aac8466f6f7592b21031d,",
         "color.border.default-inverted": "S:86793f0f19488aad5b417877d1a6e725ea29174f,",
         "color.border.moderate-inverted": "S:f4c64f954989348c8a8d8eb1d3bfb13d539f76f6,",
         "color.border.bold-inverted": "S:360555f73276fdfc06c6a92987b62ec2ab757181,",
-        "color.text.critical-inverted": "S:3214dc5ccfa31404a1625162625ccec316c2ffbd,",
-        "color.text.critical-strong-inverted": "S:49aecd334835260d85357949b43355863c163308,",
-        "color.text.success-inverted": "S:1e668b89290e66d63e2216c94aab64df3ea03a7b,",
-        "color.text.success-strong-inverted": "S:82c595344523f82c6818e25966285d95175199f5,",
-        "color.text.warning-inverted": "S:e850bd2829c9c753d6867bc445107b6ced3e2824,",
         "color.border.critical-inverted": "S:9b61d1453db029466b7473d0e282041459f56cd7,",
         "color.border.critical-subtle-inverted": "S:4838d720ee37f6519cbd3c9c0b3c17dabfd8c203,",
         "color.border.critical-strong-inverted": "S:944637f09b10d17bdb9d954e206a18c48ee7ffd2,",
@@ -3686,15 +3661,6 @@
         "base": "enabled"
       },
       "$figmaStyleReferences": {
-        "color.text.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
-        "color.text.secondary": "S:c7a6132c4c0fd9e51a16b54ee4b89f49717241d9,",
-        "color.text.tertiary": "S:46c0dbd118f6da35e9ac00d7586143750f65076f,",
-        "color.text.muted": "S:a35b59ddb9ce5fdd819e79f3d7889c0497b6cf12,",
-        "color.text.placeholder": "S:a9bd80b7d060adddf03e23a7582568d86e95010f,",
-        "color.text.disabled": "S:c8f04cae8fa4f95c3f7009c3a6d4f0232cb72a81,",
-        "color.text.critical": "S:b53c3459307f62de7b6f7d994d1b8fdc1974c960,",
-        "color.text.success": "S:bcaf110e88452072b2463d853de1560f6a22892d,",
-        "color.text.warning": "S:3954b50602fa05092545e85b7a9764d4ef2396e3,",
         "color.surface.primary": "S:3ea4483b47917706b709a6a2f49677d5d45d4be3,",
         "color.surface.secondary": "S:8e8081eca3761a51e834cdc9d1c617661974386b,",
         "color.surface.moderate": "S:069438333a76ba4f0dfac13d0c2ed2c6e3b211ed,",
@@ -3796,9 +3762,6 @@
         "color.border.success": "S:051f329df222b3ad58317bbeeb9ad58cc0238615,",
         "color.border.warning": "S:3f3e987e6522d70e7a33bf580b4b0263056ed350,",
         "color.neutral.transparent": "S:ecdc357056d1a049b43160f4cf098e6f9c4b9278,",
-        "inputs.color.text.default": "S:d6e7874175cd0c297dc2a90b82369417581d88f5,",
-        "inputs.color.text.placeholder": "S:c895809280d946e194e683c2f287919802d4c3c5,",
-        "inputs.color.text.disabled": "S:5850cc09d2e8f36baf53c1cc8afda070f898c362,",
         "inputs.color.border.focus": "S:fa04a078de2efd25d134d58afa88b5aae08e4490,",
         "inputs.color.border.critical": "S:cd32e20a14d569696b9deec01dd68b4c3cedb60f,",
         "inputs.color.border.warning": "S:a61ba4e58db89699549293ded34c3265b07c07f9,",
@@ -3896,24 +3859,14 @@
         "color.border.warning-strong": "S:4028347a1c92140afe59df77c102a08914a94e66,",
         "color.border.brand-subtle": "S:c8d412f2f80888f03dfca1526eb07fed80350975,",
         "color.border.brand-strong": "S:b7e238f4853270c8f129eb062aaf67a4de42dc84,",
-        "color.text.critical-strong": "S:10b9ebd49873a5371a8a90ea101c3b346ea7e6d1,",
-        "color.text.success-strong": "S:e76a14e3ba907c5a3fb24618a50c839fcce19cfc,",
         "inputs.color.border.success": "S:3e6fdf080f15e6deaa3ee9a268179190d6e496b1,",
         "color.border.ai": "S:ff752e9ad7d5ac5acfa216a7b5165468624c0380,",
         "badge.color.background.default": "S:46515656b0f57d4ba86fd6167cbbaf94f1dc6d65,",
         "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
-        "color.text.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
-        "color.text.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
-        "color.text.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
         "color.border.subtle-inverted": "S:e2e5ed3f9c84881079aced8277f76d6b8d9862e6,",
         "color.border.default-inverted": "S:eee0157d77f910c6e868b83ff57a9ba284d3ebbf,",
         "color.border.moderate-inverted": "S:5766116a7cd4643fed22da05dd5fd11e1342493d,",
         "color.border.bold-inverted": "S:f25ac2f474a5cf1bc914a83f2d701df73ad70089,",
-        "color.text.critical-inverted": "S:ad74bd8da90ec23f089d989ed8c97f5f4e43961b,",
-        "color.text.critical-strong-inverted": "S:a0bd7a28dc43109b6de40c910465d96c882a2f7a,",
-        "color.text.success-inverted": "S:6171597abc6afe242cd5b10dc67bf455c645cbd5,",
-        "color.text.success-strong-inverted": "S:250cb466ec58060848dd1b17d32bf3db7db22614,",
-        "color.text.warning-inverted": "S:7a4bbb3198bdb6ccd303d5366aeb65913cf4148e,",
         "color.border.accent": "S:286715bcd6e1b5d5d08e26427a0216a5f2cb716f,",
         "color.border.critical-inverted": "S:7fbada5aedd9dad14db402c2f15376afd6c43a33,",
         "color.border.success-inverted": "S:c619d73dac28e8cab92f09460e69420f3baba686,",
@@ -3927,9 +3880,31 @@
         "color.border.warning-strong-inverted": "S:ebc85bbbd8264c7ecbab9d436311d36b4c499f11,",
         "color.border.brand-subtle-inverted": "S:7d007762fe82640f39f8dd7b7285cf5b18c77d8e,",
         "color.border.brand-strong-inverted": "S:b16332a64fcfbac2be41de59958de325eb48f4d0,",
-        "color.text.muted-inverted": "S:6c7fa4f28d68f175a1dc994109c8769acb805825,",
-        "color.text.placeholder-inverted": "S:9a5db8f3d994d6430cfd3dca0d10366b254aa6bd,",
-        "color.text.disabled-inverted": "S:06d03c239fb54a632eb3189f966af42706b83a68,"
+        "color.foreground.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
+        "color.foreground.secondary": "S:c7a6132c4c0fd9e51a16b54ee4b89f49717241d9,",
+        "color.foreground.tertiary": "S:46c0dbd118f6da35e9ac00d7586143750f65076f,",
+        "color.foreground.muted": "S:a35b59ddb9ce5fdd819e79f3d7889c0497b6cf12,",
+        "color.foreground.placeholder": "S:a9bd80b7d060adddf03e23a7582568d86e95010f,",
+        "color.foreground.disabled": "S:c8f04cae8fa4f95c3f7009c3a6d4f0232cb72a81,",
+        "color.foreground.critical": "S:b53c3459307f62de7b6f7d994d1b8fdc1974c960,",
+        "color.foreground.critical-strong": "S:10b9ebd49873a5371a8a90ea101c3b346ea7e6d1,",
+        "color.foreground.success": "S:bcaf110e88452072b2463d853de1560f6a22892d,",
+        "color.foreground.success-strong": "S:e76a14e3ba907c5a3fb24618a50c839fcce19cfc,",
+        "color.foreground.warning": "S:3954b50602fa05092545e85b7a9764d4ef2396e3,",
+        "color.foreground.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
+        "color.foreground.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
+        "color.foreground.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
+        "color.foreground.muted-inverted": "S:6c7fa4f28d68f175a1dc994109c8769acb805825,",
+        "color.foreground.placeholder-inverted": "S:9a5db8f3d994d6430cfd3dca0d10366b254aa6bd,",
+        "color.foreground.disabled-inverted": "S:06d03c239fb54a632eb3189f966af42706b83a68,",
+        "color.foreground.critical-inverted": "S:ad74bd8da90ec23f089d989ed8c97f5f4e43961b,",
+        "color.foreground.critical-strong-inverted": "S:a0bd7a28dc43109b6de40c910465d96c882a2f7a,",
+        "color.foreground.success-inverted": "S:6171597abc6afe242cd5b10dc67bf455c645cbd5,",
+        "color.foreground.success-strong-inverted": "S:250cb466ec58060848dd1b17d32bf3db7db22614,",
+        "color.foreground.warning-inverted": "S:7a4bbb3198bdb6ccd303d5366aeb65913cf4148e,",
+        "inputs.color.foreground.default": "S:d6e7874175cd0c297dc2a90b82369417581d88f5,",
+        "inputs.color.foreground.placeholder": "S:c895809280d946e194e683c2f287919802d4c3c5,",
+        "inputs.color.foreground.disabled": "S:5850cc09d2e8f36baf53c1cc8afda070f898c362,"
       }
     }
   ],
