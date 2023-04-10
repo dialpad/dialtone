@@ -1,3 +1,10 @@
+## [3.60.1](https://github.com/dialpad/dialtone-vue/compare/v3.60.0...v3.60.1) (2023-04-10)
+
+
+### Bug Fixes
+
+* showing both image and initials issue ([#902](https://github.com/dialpad/dialtone-vue/issues/902)) ([2ff0b1b](https://github.com/dialpad/dialtone-vue/commit/2ff0b1b3d22d61902ea3fa7b362bcdd79c3137d5))
+
 # [3.60.0](https://github.com/dialpad/dialtone-vue/compare/v3.59.2...v3.60.0) (2023-04-06)
 
 
