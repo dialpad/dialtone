@@ -150,7 +150,7 @@ export default {
      */
     width: {
       type: String,
-      default: 'auto',
+      default: null,
     },
 
     /**
