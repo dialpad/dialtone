@@ -2877,6 +2877,32 @@
             }
           }
         },
+        "strong-opaque": {
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".67",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "contrast-opaque": {
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".98",
+                "space": "hsl"
+              }
+            }
+          }
+        },
         "critical-opaque": {
           "value": "{color.red.200}",
           "type": "color",
@@ -3965,8 +3991,8 @@
         "color.border.warning-strong-inverted": "S:ebc85bbbd8264c7ecbab9d436311d36b4c499f11,",
         "color.border.brand-subtle-inverted": "S:7d007762fe82640f39f8dd7b7285cf5b18c77d8e,",
         "color.border.brand-strong-inverted": "S:b16332a64fcfbac2be41de59958de325eb48f4d0,",
-        "badge.color.foreground.default": "S:82b4785362d109fbf751afa64ff8d92393aaac4a,",
-        "badge.color.foreground.bulletin": "S:0e6badb00d904e0103cf0a4eadd320cd3f0f40bc,",
+        "badge.color.foreground.default": "S:435110adbd6717ac61d470d910672f0bf8002f64,",
+        "badge.color.foreground.bulletin": "S:3c32047a4e1eb7aae5dc489f4154d8625f25a8f5,",
         "color.foreground.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
         "color.foreground.secondary": "S:c7a6132c4c0fd9e51a16b54ee4b89f49717241d9,",
         "color.foreground.tertiary": "S:46c0dbd118f6da35e9ac00d7586143750f65076f,",
@@ -4026,7 +4052,9 @@
         "color.surface.info-subtle-opaque": "S:3fec5783d87698de39f5619bc69048fc5adf0cc6,",
         "inputs.color.foreground.default": "S:d6e7874175cd0c297dc2a90b82369417581d88f5,",
         "inputs.color.foreground.placeholder": "S:c895809280d946e194e683c2f287919802d4c3c5,",
-        "inputs.color.foreground.disabled": "S:5850cc09d2e8f36baf53c1cc8afda070f898c362,"
+        "inputs.color.foreground.disabled": "S:5850cc09d2e8f36baf53c1cc8afda070f898c362,",
+        "color.surface.strong-opaque": "S:87a5dc31bfee05b0898a6751806513a56bef92dd,",
+        "color.surface.contrast-opaque": "S:72b6a02b928305c715288e25edabe33071a71dae,"
       }
     }
   ],
