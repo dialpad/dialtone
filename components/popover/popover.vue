@@ -859,7 +859,7 @@ export default {
         console.warn('Could not find the element specified in dt-popover prop "initialFocusElement". ' +
           'Defaulting to focusing the dialog.');
       }
-      result ? result.focus() : this.$refs.content.$el.focus();
+      result ? result.focus() : this.$refs.content?.$el.focus();
     },
 
     onResize () {
@@ -901,7 +901,7 @@ export default {
         this.$refs.popover__header?.focusCloseButton();
       } else {
         // if there are no focusable elements at all focus the dialog itself
-        this.$refs.content.$el.focus();
+        this.$refs.content?.$el.focus();
       }
     },
 

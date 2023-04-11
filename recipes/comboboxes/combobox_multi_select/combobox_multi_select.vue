@@ -450,7 +450,7 @@ export default {
   methods: {
     onChipRemove (item) {
       this.$emit('remove', item);
-      this.$refs.input.focus();
+      this.$refs.input?.focus();
     },
 
     onComboboxSelect (i) {
@@ -460,12 +460,12 @@ export default {
 
     showComboboxList () {
       if (this.showList != null) { return; }
-      this.$refs.comboboxWithPopover.showComboboxList();
+      this.$refs.comboboxWithPopover?.showComboboxList();
     },
 
     closeComboboxList () {
       if (this.showList != null) { return; }
-      this.$refs.comboboxWithPopover.closeComboboxList();
+      this.$refs.comboboxWithPopover?.closeComboboxList();
     },
 
     getChipButtons () {
@@ -521,20 +521,20 @@ export default {
 
     moveFromInputToChip () {
       this.getLastChipButton().focus();
-      this.$refs.input.blur();
+      this.$refs.input?.blur();
       this.closeComboboxList();
     },
 
     moveFromChipToInput () {
       this.getLastChipButton().blur();
-      this.$refs.input.focus();
+      this.$refs.input?.focus();
       this.showComboboxList();
     },
 
     navigateBetweenChips (target, toLeft) {
       const from = this.getChipButtons().indexOf(target);
       const to = toLeft ? from - 1 : from + 1;
-      if (to < 0 || to >= this.$refs.chips.length) {
+      if (to < 0 || to >= this.$refs.chips?.length) {
         return;
       }
       this.getChipButtons()[from].blur();
