@@ -1,3 +1,10 @@
+## [2.78.2](https://github.com/dialpad/dialtone-vue/compare/v2.78.1...v2.78.2) (2023-04-11)
+
+
+### Bug Fixes
+
+* null protection on some refs ([#903](https://github.com/dialpad/dialtone-vue/issues/903)) ([e1addd3](https://github.com/dialpad/dialtone-vue/commit/e1addd30be47f3d0bef1b0fba33822c0423bcc23))
+
 ## [2.78.1](https://github.com/dialpad/dialtone-vue/compare/v2.78.0...v2.78.1) (2023-04-10)
 
 
