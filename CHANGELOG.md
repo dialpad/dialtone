@@ -1,3 +1,11 @@
+## [3.60.2](https://github.com/dialpad/dialtone-vue/compare/v3.60.1...v3.60.2) (2023-04-11)
+
+
+### Bug Fixes
+
+* null protection on some refs ([#904](https://github.com/dialpad/dialtone-vue/issues/904)) ([0fb4d2a](https://github.com/dialpad/dialtone-vue/commit/0fb4d2a50df5b3c451ab135c8172b9114b0cee2d))
+* **Tooltip:** arrow not displaying - vue3 ([#900](https://github.com/dialpad/dialtone-vue/issues/900)) ([0d02815](https://github.com/dialpad/dialtone-vue/commit/0d02815a9a6d38ed55e11388c30f9728d4f83e2a))
+
 ## [3.60.1](https://github.com/dialpad/dialtone-vue/compare/v3.60.0...v3.60.1) (2023-04-10)
 
 
