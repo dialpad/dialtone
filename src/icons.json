@@ -257,12 +257,15 @@
       "dialer": [
         "phone"
       ],
+      "digital-whisper": [],
       "forward": [
         "send",
         "share",
         "email"
       ],
       "hand": [],
+      "listen": [],
+      "listening": [],
       "mail-open": [
         "email",
         "message",
@@ -355,7 +358,8 @@
       "webchat": [
         "message",
         "chat"
-      ]
+      ],
+      "whisper": []
     },
     "controls": {
       "barge": [
