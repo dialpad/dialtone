@@ -1,3 +1,10 @@
+## [3.61.1](https://github.com/dialpad/dialtone-vue/compare/v3.61.0...v3.61.1) (2023-04-11)
+
+
+### Bug Fixes
+
+* lock to exact dialtone-icons version ([38da5f7](https://github.com/dialpad/dialtone-vue/commit/38da5f7cea2b30c8f9631ce9f44bde557271c2f3))
+
 # [3.61.0](https://github.com/dialpad/dialtone-vue/compare/v3.60.2...v3.61.0) (2023-04-11)
 
 
