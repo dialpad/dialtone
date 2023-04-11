@@ -1,3 +1,10 @@
+# [2.79.0](https://github.com/dialpad/dialtone-vue/compare/v2.78.2...v2.79.0) (2023-04-11)
+
+
+### Features
+
+* update dialtone-icons ([01b8f90](https://github.com/dialpad/dialtone-vue/commit/01b8f9066e64ed6c15fb1ef5175f95408d919aac))
+
 ## [2.78.2](https://github.com/dialpad/dialtone-vue/compare/v2.78.1...v2.78.2) (2023-04-11)
 
 
