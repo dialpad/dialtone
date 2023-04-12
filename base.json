@@ -411,6 +411,10 @@
         "value": "{size.base} * 0",
         "type": "sizing"
       },
+      "50": {
+        "value": "{size.100} / 2",
+        "type": "sizing"
+      },
       "100": {
         "value": "{size.200} / 2",
         "type": "sizing"
@@ -473,7 +477,7 @@
           "type": "borderWidth"
         },
         "50": {
-          "value": "{size.border.100} / 2",
+          "value": "{size.50}",
           "type": "borderWidth"
         },
         "100": {
@@ -531,6 +535,10 @@
     "space": {
       "0": {
         "value": "{space.base} * 0",
+        "type": "spacing"
+      },
+      "50": {
+        "value": "{space.100} / 2",
         "type": "spacing"
       },
       "100": {
