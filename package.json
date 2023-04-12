@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run transform && ./build.js && cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version && ./build-ios.js",
-    "transform": "token-transformer base.json tokens/tokens.json --expandTypography=true --expandShadow=true",
+    "transform": "token-transformer base.json tokens/tokens.json base,semantic --expandTypography=true --expandShadow=true",
     "prepublishOnly": "npm run build",
     "release": "semantic-release --no-ci --extends ./release-local.config.js"
   },
@@ -33,7 +33,7 @@
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "maven": "^5.0.0",
-    "style-dictionary": "^3.7.1",
-    "token-transformer": "^0.0.24"
+    "style-dictionary": "^3.7.2",
+    "token-transformer": "^0.0.32"
   }
 }
