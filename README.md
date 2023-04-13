@@ -26,12 +26,14 @@ import { Accessibility } from '@dialpad/dialtone-icons';
 If you need to add icons, follow the next steps to get your icons published.
 
 1. Place the `.svg` files into `src/svg` inside the category folder.
-2. Commit your changes.
-3. Update the version on [package file](./package.json).
-4. Run `npm install`
-5. Commit the `package.json and package-lock.json` changes with message: 'chore: release ${version}'
-6. Push your changes.
-7. Run `npm run release`
+2. Run `npm run build`
+3. Commit your changes.
+4. Update the version on [package file](./package.json).
+5. Run `npm install`
+6. Commit the `package.json and package-lock.json` changes with message: 'chore: release ${version}'
+7. Push your changes.
+8. Run `npm run release`
+9. `git cherry-pick` your commit(s) (not release commit) to `vue3` branch. Repeat the process from step 4.
 
 ## Questions?
 
