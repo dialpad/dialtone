@@ -585,6 +585,14 @@
         "600": {
           "value": "{size.600}",
           "type": "borderRadius"
+        },
+        "pill": {
+          "value": "100em",
+          "type": "borderRadius"
+        },
+        "circle": {
+          "value": "50%",
+          "type": "borderRadius"
         }
       }
     },
