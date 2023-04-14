@@ -1,3 +1,18 @@
+# [1.8.0](https://github.com/dialpad/dialtone-tokens/compare/v1.7.0...v1.8.0) (2023-04-14)
+
+
+### Bug Fixes
+
+* add var(--) usage to documentation file for css ([2ca25f2](https://github.com/dialpad/dialtone-tokens/commit/2ca25f2c76190db6ae7127061a40412567014eae))
+
+
+### Features
+
+* **border:** added .5px border width ([304e131](https://github.com/dialpad/dialtone-tokens/commit/304e131326dfd50958ac44d8a3e428c1ab169edb))
+* **radius:** added circle and pill ([954567b](https://github.com/dialpad/dialtone-tokens/commit/954567b285759a92986f1319a13591f6d015787f))
+* **size-and-space:** added negative equivalents ([9ad7e2b](https://github.com/dialpad/dialtone-tokens/commit/9ad7e2b603cf5ea1f25963b12def95b981decf85))
+* **size-and-space:** provide between stops, e.g. 350 ([321b2f7](https://github.com/dialpad/dialtone-tokens/commit/321b2f7ace5fb32499a15df0b94e2b12e2f7abe7))
+
 # [1.7.0](https://github.com/dialpad/dialtone-tokens/compare/v1.6.5...v1.7.0) (2023-04-12)
 
 
