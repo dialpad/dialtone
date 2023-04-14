@@ -292,6 +292,7 @@ function buildDocs(platformName, currentObj) {
 
   const tokenName = currentObj.name;
   const tokenValue = currentObj.value;
+  const tokenDescription = currentObj?.description
 
   if (tokenValue) {
     const tokenPath = currentObj.path.join('/');
@@ -300,6 +301,7 @@ function buildDocs(platformName, currentObj) {
       [platformName]: {
         name: formatTokenName(platformName, tokenName),
         value: tokenValue,
+        description: tokenDescription,
       }
     }
     return null;
