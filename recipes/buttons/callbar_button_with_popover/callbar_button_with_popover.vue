@@ -30,6 +30,7 @@
       :placement="placement"
       :initial-focus-element="initialFocusElement"
       :show-close-button="showCloseButton"
+      :offset="[0, 16]"
       padding="none"
       class="dt-recipe--callbar-button-with-popover--popover-wrapper"
       :dialog-class="['dt-recipe--callbar-button-with-popover--popover', contentClass]"
