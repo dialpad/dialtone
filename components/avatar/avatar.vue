@@ -38,13 +38,13 @@
     </div>
     <span
       v-if="showGroup"
-      class="d-avatar__count d-zi-base1"
+      class="d-avatar__count d-zi-base"
       data-qa="dt-avatar-count"
     >{{ formattedGroup }}</span>
     <dt-presence
       v-if="presence && !showGroup"
       :presence="presence"
-      class="d-zi-base1"
+      class="d-zi-base"
       :class="[
         'd-avatar__presence',
         AVATAR_PRESENCE_SIZE_MODIFIERS[size],
@@ -221,11 +221,13 @@ export default {
     },
 
     showDefaultSlot () {
-      return this.kind !== 'initials' || (this.kind === 'image' && this.imageLoadedSuccessfully === true);
+      return this.kind !== 'initials' ||
+      (this.kind === 'image' && this.imageLoadedSuccessfully === true);
     },
 
     showInitials () {
-      return this.kind === 'initials' || (this.kind === 'image' && this.initials);
+      return this.kind === 'initials' ||
+      (this.kind === 'image' && this.initials && this.imageLoadedSuccessfully !== true);
     },
 
     showGroup () {
@@ -276,12 +278,11 @@ export default {
       this.initializing = false;
     },
 
+    // eslint-disable-next-line complexity
     kindHandler (el) {
       switch (this.kind) {
         case 'image':
-          if (this.showInitials) {
-            el.classList.add('d-avatar__image', 'd-zi-base1');
-          }
+          el.classList.add('d-avatar__image');
           this.validateImageAttrsPresence();
           this.setImageListeners(el);
           break;
