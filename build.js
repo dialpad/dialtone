@@ -298,7 +298,7 @@ function buildDocs(platformName, currentObj) {
     docTokens[tokenPath] = {
       ...docTokens[tokenPath],
       [platformName]: {
-        name: tokenName,
+        name: formatTokenName(platformName, tokenName),
         value: tokenValue,
       }
     }
@@ -311,6 +311,13 @@ function buildDocs(platformName, currentObj) {
     buildDocs(platformName, currentObj[key]);
   }
 
+}
+
+function formatTokenName(platformName, tokenName) {
+  if (platformName === 'css/variables') {
+    return `var(--${tokenName})`;
+  }
+  return tokenName;
 }
 
 StyleDictionary.registerAction({
