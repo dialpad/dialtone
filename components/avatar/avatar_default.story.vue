@@ -9,6 +9,9 @@
     :seed="$attrs.seed"
     :gradient="$attrs.gradient"
     :group="$attrs.group"
+    :overlay-icon="$attrs.overlayIcon"
+    :overlay-text="$attrs.overlayText"
+    :overlay-class="$attrs.overlayClass"
   >
     <v-html :html="defaultSlot" />
   </dt-avatar>

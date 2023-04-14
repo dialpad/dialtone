@@ -23,6 +23,7 @@
               :size="avatarSize"
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
+              overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
               :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
             >
               <img
@@ -36,6 +37,7 @@
               :size="avatarSize"
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
+              overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
               :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
             >
               {{ avatar.initials }}

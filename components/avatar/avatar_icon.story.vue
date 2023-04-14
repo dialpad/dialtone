@@ -5,6 +5,9 @@
     :presence="$attrs.presence"
     :seed="$attrs.seed"
     :gradient="$attrs.gradient"
+    :overlay-icon="$attrs.overlayIcon"
+    :overlay-text="$attrs.overlayText"
+    :overlay-class="$attrs.overlayClass"
   >
     <dt-icon
       :name="defaultSlot"
