@@ -5,6 +5,9 @@
     :presence="presence"
     :seed="seed"
     :gradient="gradient"
+    :overlay-icon="overlayIcon"
+    :overlay-text="overlayText"
+    :overlay-class="overlayClass"
   >
     <dt-icon
       :name="defaultSlot"

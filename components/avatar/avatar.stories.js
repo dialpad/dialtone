@@ -52,6 +52,21 @@ export const argTypesData = {
       },
     },
   },
+  overlayIcon: {
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  overlayText: {
+    description: 'The text that overlays the avatar',
+  },
+  overlayClass: {
+    description: 'Pass through classes. Used to customize the avatar overlay',
+  },
 };
 
 // Story Collection

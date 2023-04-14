@@ -9,6 +9,9 @@
     :seed="seed"
     :gradient="gradient"
     :group="group"
+    :overlay-icon="overlayIcon"
+    :overlay-text="overlayText"
+    :overlay-class="overlayClass"
   >
     <html-fragment
       :html="defaultSlot"

@@ -260,14 +260,14 @@ export default {
   data () {
     return {
       adminListenInAvatars: [
-        { src: 'static/recipes/list_items/contact_info/avatar.png' },
-        { src: 'static/recipes/list_items/contact_info/avatar2.png', icon: 'hear' },
+        { src: require('./avatar.png'), initials: 'KK' },
+        { src: require('./avatar2.png'), initials: 'LL', icon: 'hear' },
       ],
 
       groupCallAvatars: [
         { initials: 'JL' },
-        { src: 'static/recipes/list_items/contact_info/avatar.png' },
-        { src: 'static/recipes/list_items/contact_info/avatar2.png', text: '+3' },
+        { src: require('./avatar.png'), initials: 'KK' },
+        { src: require('./avatar2.png'), initials: 'LL', text: '+3' },
       ],
     };
   },
