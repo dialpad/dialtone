@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/dialpad/dialtone-tokens/compare/v1.8.0...v1.9.0) (2023-04-14)
+
+
+### Features
+
+* add descriptions to doc.json ([50e54df](https://github.com/dialpad/dialtone-tokens/commit/50e54dff313ddf7341c9a5955dad0a81d11d8b9a))
+
 # [1.8.0](https://github.com/dialpad/dialtone-tokens/compare/v1.7.0...v1.8.0) (2023-04-14)
 
 
