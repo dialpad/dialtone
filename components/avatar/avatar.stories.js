@@ -89,6 +89,9 @@ const defaultImage = require('./person.png');
 
 // Stories
 export const Default = DefaultTemplate.bind({});
+Default.decorators = [() => ({
+  template: `<div class="d-d-flex"><story /></div>`,
+})];
 Default.args = {
   default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
   initials: 'PS',
