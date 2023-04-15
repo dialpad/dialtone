@@ -1,3 +1,13 @@
+## [3.61.4](https://github.com/dialpad/dialtone-vue/compare/v3.61.3...v3.61.4) (2023-04-15)
+
+
+### Bug Fixes
+
+* **Avatar:** image size and z-index issues ([#909](https://github.com/dialpad/dialtone-vue/issues/909)) ([32d0442](https://github.com/dialpad/dialtone-vue/commit/32d04429e25cb0b7d15aed396cb8cdb296d9dd8a))
+* **Avatar:** remove box sizing for overlay text/icon (vue3) ([#907](https://github.com/dialpad/dialtone-vue/issues/907)) ([5f20caa](https://github.com/dialpad/dialtone-vue/commit/5f20caafb57aab8b88680910c6adcd2c0cbb3b81))
+* **Recipe Callbar Ai Popover:** fixed popover positioning in the callbar ([#913](https://github.com/dialpad/dialtone-vue/issues/913)) ([5000d72](https://github.com/dialpad/dialtone-vue/commit/5000d723e03595d940c85094bb83d9c690f68be0))
+* **Recipe Callbar Tooltip:** fixed tooltip positioning in the callbar ([#911](https://github.com/dialpad/dialtone-vue/issues/911)) ([0241810](https://github.com/dialpad/dialtone-vue/commit/02418105c101187e5a6a22a96e6cbf649297462e))
+
 ## [3.61.3](https://github.com/dialpad/dialtone-vue/compare/v3.61.2...v3.61.3) (2023-04-14)
 
 
