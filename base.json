@@ -1819,20 +1819,56 @@
           }
         },
         "subtle-inverted": {
-          "value": "rgba(255,255,255,0.14)",
-          "type": "color"
+          "value": "{color.neutral.white}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".14",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "default-inverted": {
-          "value": "rgba(255,255,255,0.22)",
-          "type": "color"
+          "value": "{color.neutral.white}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".22",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "moderate-inverted": {
-          "value": "rgba(255,255,255,0.38)",
-          "type": "color"
+          "value": "{color.neutral.white}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".38",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "bold-inverted": {
-          "value": "rgba(255,255,255,0.5)",
-          "type": "color"
+          "value": "{color.neutral.white}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "focus": {
           "value": "{color.blue.300}",
