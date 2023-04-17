@@ -3293,8 +3293,17 @@
           }
         },
         "bold": {
-          "value": "rgba(255,255,255,0.50)",
-          "type": "color"
+          "value": "{color.neutral.white}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "subtle-inverted": {
           "value": "{color.neutral.black}",
