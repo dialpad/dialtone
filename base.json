@@ -1767,20 +1767,56 @@
       },
       "border": {
         "subtle": {
-          "value": "rgba(0,0,0,0.1)",
-          "type": "color"
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "default": {
-          "value": "rgba(0,0,0,0.18)",
-          "type": "color"
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".18",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "moderate": {
-          "value": "rgba(0,0,0,0.34)",
-          "type": "color"
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".34",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "bold": {
-          "value": "rgba(0,0,0,0.5)",
-          "type": "color"
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "subtle-inverted": {
           "value": "rgba(255,255,255,0.14)",
