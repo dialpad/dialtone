@@ -11,7 +11,6 @@ module.exports = defineConfig({
     },
     externals: [
       '@dialpad/dialtone',
-      '@dialpad/dialtone-icons',
     ],
     externalsType: 'commonjs',
   },
