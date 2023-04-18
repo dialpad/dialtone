@@ -37,6 +37,7 @@
           <dt-emoji-text-wrapper
             class="dt-leftbar-row__description"
             data-qa="dt-leftbar-row-description"
+            size="200"
           >
             {{ description }}
           </dt-emoji-text-wrapper>
