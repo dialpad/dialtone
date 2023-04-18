@@ -1,3 +1,17 @@
+# [1.10.0](https://github.com/dialpad/dialtone-tokens/compare/v1.9.0...v1.10.0) (2023-04-18)
+
+
+### Bug Fixes
+
+* specify additional token sets ([8358e07](https://github.com/dialpad/dialtone-tokens/commit/8358e07153284466136c566a354119b7f5689944))
+
+
+### Features
+
+* **color:** dark theme borders reference base color and adjust opacity ([efe5083](https://github.com/dialpad/dialtone-tokens/commit/efe5083dddfd568c68bcaf40ab12ca3fb003ab7b))
+* **color:** inverted border colors reference base color and modify opacity ([dbe5e89](https://github.com/dialpad/dialtone-tokens/commit/dbe5e89f63270876038275558d4d85822bdec7b7))
+* **color:** reference black 900 and modify opacity for border color ([d04dea5](https://github.com/dialpad/dialtone-tokens/commit/d04dea5b1731e9562d0119513d1c95721d8fbd56))
+
 # [1.9.0](https://github.com/dialpad/dialtone-tokens/compare/v1.8.0...v1.9.0) (2023-04-14)
 
 
