@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run transform && ./build.js && cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version && ./build-ios.js",
-    "transform": "token-transformer base.json tokens/tokens.json base,semantic --expandTypography=true --expandShadow=true",
+    "transform": "token-transformer base.json tokens/tokens.json base,semantic,components/badge,components/checkbox,components/icon,components/radio --expandTypography=true --expandShadow=true",
     "prepublishOnly": "npm run build",
     "release": "semantic-release --no-ci --extends ./release-local.config.js"
   },
