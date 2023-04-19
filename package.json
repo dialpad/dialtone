@@ -84,6 +84,11 @@
   "dependencies": {
     "@dialpad/dialtone-icons": "^0.6.1",
     "@linusborg/vue-simple-portal": "^0.1.5",
+    "@tiptap/extension-document": "^2.0.2",
+    "@tiptap/extension-paragraph": "^2.0.2",
+    "@tiptap/extension-text": "^2.0.2",
+    "@tiptap/pm": "^2.0.2",
+    "@tiptap/vue-2": "^2.0.2",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
     "seedrandom": "^3.0.5",

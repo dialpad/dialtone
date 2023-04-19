@@ -205,7 +205,7 @@ for the initial implementation:
     selected output format. Examples of all formats are provided below.
 - `editable` (Boolean)
   - Default: `true`
-- `autofocus` (String|Number|Boolean)
+- `autoFocus` (String|Number|Boolean)
   - Disabled by default
   - `"start"` sets the focus to the beginning of the input
   - `"end"` sets the focus to the end of the input
@@ -265,14 +265,11 @@ for the initial implementation:
 ### Emits
 
 - `input`
+- `update:value/modelValue`
   - payload: current value in the chosen format
 - `blur`
   - payload: event
 - `focus`
-  - payload: event
-- `focusin`
-  - payload: event
-- `focusout`
   - payload: event
 
 ## Extensions

@@ -1,0 +1,42 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+# Rich Text Editor
+
+<Subtitle>
+  A rich text editor is a component that allows users to format text with a
+  variety of styles. It enables also mixing text with custom components built as
+  extensions, such as links and user mentions.
+</Subtitle>
+
+<div class="d-notice d-notice--info d-wmx100p">
+<b>NOTICE:</b> This component is not a part of Dialtone-Vue core package and can
+only be used by other Dialtone components. To keep this code out of the
+Dialtone-vue core any Dialtone component that uses this should be built into
+their separate build targets.
+</div>
+
+## Base Style
+
+The editor itself is without any styling and the intention is to wrap it with
+another component, such as Message Input, that provides the UI.
+
+<Canvas>
+  <Story id="components-rich-text-editor--default" />
+</Canvas>
+
+## Slots, Props and Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+### Usage (internal only)
+
+```js
+import { DtRichTextEditor } from '@components/rich_text_editor';
+```
+
+```jsx
+<dt-rich-text-editor
+  :v-model="text"
+  :input-aria-label="ariaLabel"
+/>
+```
