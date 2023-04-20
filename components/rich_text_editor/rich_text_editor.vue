@@ -159,7 +159,7 @@ export default {
   watch: {
     editable (isEditable) {
       this.editor.setEditable(isEditable);
-      this.updateEditorAttributes({ 'aria-readonly': isEditable });
+      this.updateEditorAttributes({ 'aria-readonly': !isEditable });
     },
 
     inputClass (newClass) {
