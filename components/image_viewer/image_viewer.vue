@@ -2,6 +2,7 @@
   <div>
     <dt-button
       data-qa="dt-image-viewer-preview"
+      class="d-p0 d-c-zoom-in"
       :aria-label="ariaLabel"
       importance="clear"
       @click="openModal"
