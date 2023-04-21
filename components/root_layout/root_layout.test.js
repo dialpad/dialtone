@@ -26,8 +26,8 @@ describe('DtRootLayout Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    header = wrapper.find('[data-qa="root-layout-header"]');
-    footer = wrapper.find('[data-qa="root-layout-footer"]');
+    header = wrapper.find('[data-qa="dt-root-layout-header"]');
+    footer = wrapper.find('[data-qa="dt-root-layout-footer"]');
   };
 
   const _setWrappers = () => {
@@ -77,7 +77,7 @@ describe('DtRootLayout Tests', function () {
 
     describe('When headerSticky is set to default', function () {
       it('Has correct class', async function () {
-        assert.strictEqual(header.classes('root-layout__header--sticky'), false);
+        assert.strictEqual(header.classes('d-root-layout__header--sticky'), false);
       });
     });
 
@@ -87,7 +87,7 @@ describe('DtRootLayout Tests', function () {
       });
 
       it('Has correct class', async function () {
-        assert.strictEqual(header.classes('root-layout__header--sticky'), true);
+        assert.strictEqual(header.classes('d-root-layout__header--sticky'), true);
       });
     });
   });

@@ -12,6 +12,7 @@
     :footer-class="$attrs.footerClass"
     :footer-height="$attrs.footerHeight"
     :fixed="$attrs.fixed"
+    :responsive-breakpoint="$attrs.responsiveBreakpoint"
   >
     <template
       #header
