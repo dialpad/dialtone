@@ -77,7 +77,7 @@
 
 <script>
 import { getUniqueString } from '@/common/utils';
-import DtCollapsibleLazyShow from './collapsible_lazy_show';
+import DtCollapsibleLazyShow from './collapsible_lazy_show.vue';
 import { DtButton } from '@/components/button';
 import { DtLazyShow } from '@/components/lazy_show';
 import { DtIcon } from '@/components/icon';

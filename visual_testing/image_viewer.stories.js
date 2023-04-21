@@ -2,9 +2,9 @@ import {
   argsData,
   argTypesData,
   Default,
-} from '@/components/image_viewer/image_viewer.stories';
+} from '@/components/image_viewer/image_viewer.stories.js';
 
-import DtImageViewer from '@/components/image_viewer/image_viewer';
+import DtImageViewer from '@/components/image_viewer/image_viewer.vue';
 
 export default {
   title: 'Visual Testing/Image Viewer',

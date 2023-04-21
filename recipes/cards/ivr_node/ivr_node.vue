@@ -105,7 +105,7 @@ import { DtDropdown } from '@/components/dropdown';
 import { DtIcon } from '@/components/icon';
 import {
   IVR_NODE_ICON_TYPES, IVR_NODE_COLOR_MAPPING, IVR_NODE_GO_TO,
-} from './ivr_node_constants.js';
+} from './ivr_node_constants';
 
 export default {
   name: 'DtRecipeIvrNode',

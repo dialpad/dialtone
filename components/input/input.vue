@@ -113,7 +113,7 @@
 
 <script>
 import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '@/common/constants.js';
-import { INPUT_TYPES, INPUT_SIZES } from './input_constants.js';
+import { INPUT_TYPES, INPUT_SIZES } from './input_constants';
 import {
   getUniqueString,
   getValidationState,

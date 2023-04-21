@@ -82,7 +82,7 @@ import {
 import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
-} from './select_menu_constants.js';
+} from './select_menu_constants';
 import {
   getUniqueString,
   getValidationState,

@@ -1,6 +1,6 @@
-import '../css/dialtone-globals.less';
+//import '../css/dialtone-globals.less';
 import { addons } from '@storybook/addons';
-import theme from './theme';
+import theme from '../storybook/theme/theme';
 
 const CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR = `
 #visual-testing,
@@ -10,7 +10,7 @@ const CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR = `
 }
 `;
 
-if (process.env.NODE_ENV === 'production') {
+if (import.meta.env.NODE_ENV === 'production') {
   const head = document.head || document.getElementsByTagName('head')[0];
   const style = document.createElement('style');
   head.appendChild(style);

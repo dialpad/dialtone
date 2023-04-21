@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { COLOR_CODES } from './top_banner_info_constants.js';
+import { COLOR_CODES } from './top_banner_info_constants';
 
 export default {
   name: 'DtRecipeTopBannerInfo',

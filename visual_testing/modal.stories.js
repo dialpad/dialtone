@@ -7,9 +7,9 @@ import {
   WithDangerStyle,
   WithFullSize,
   WithCustomHeaderAndContent,
-} from '@/components/modal/modal.stories';
+} from '@/components/modal/modal.stories.js';
 
-import DtModal from '@/components/modal/modal';
+import DtModal from '@/components/modal/modal.vue';
 
 export default {
   title: 'Visual Testing/Modal',

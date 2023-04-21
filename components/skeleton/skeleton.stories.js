@@ -4,6 +4,9 @@ import DtSkeletonMdx from './skeleton.mdx';
 import DtSkeletonDefaultTemplate from './skeleton_default.story.vue';
 import DtSkeletonVariantsTemplate from './skeleton_variants.story.vue';
 
+export const argsData = {
+};
+
 export const argTypesData = {
   paragraphOption: {
     table: {

@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import DtButton from '@/components/button/button';
-import DtTooltip from '@/components/tooltip/tooltip';
+import DtButton from '@/components/button/button.vue';
+import DtTooltip from '@/components/tooltip/tooltip.vue';
 import utils from '@/common/utils';
 
 export const VALID_WIDTH_SIZE = ['sm', 'md', 'lg', 'xl'];

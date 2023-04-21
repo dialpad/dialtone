@@ -106,10 +106,10 @@
 </template>
 
 <script>
-import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover';
-import DtInput from '@/components/input/input';
-import DtChip from '@/components/chip/chip';
-import DtValidationMessages from '@/components/validation_messages/validation_messages';
+import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue';
+import DtInput from '@/components/input/input.vue';
+import DtChip from '@/components/chip/chip.vue';
+import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
 import { validationMessageValidator } from '@/common/validators';
 import {
   POPOVER_APPEND_TO_VALUES,

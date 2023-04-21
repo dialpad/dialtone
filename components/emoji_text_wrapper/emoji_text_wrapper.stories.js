@@ -1,6 +1,6 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
-import DtEmojiTextWrapper from './emoji_text_wrapper';
+import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
 import DtEmojiTextWrapperMdx from './emoji_text_wrapper.mdx';
 import DtEmojiTextWrapperDefaultTemplate from './emoji_text_wrapper_default.story.vue';
 import DtEmojiTextWrapperVariantsTemplate from './emoji_text_wrapper_variants.story.vue';

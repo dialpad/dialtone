@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtTab from './tab.vue';
-import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
+import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants';
 
 describe('DtTab Tests', function () {
   // Wrappers

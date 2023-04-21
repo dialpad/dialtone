@@ -49,9 +49,9 @@
 </template>
 
 <script>
-import DtNoticeIcon from '../notice/notice_icon';
-import DtNoticeContent from '../notice/notice_content';
-import DtNoticeAction from '../notice/notice_action';
+import DtNoticeIcon from '../notice/notice_icon.vue';
+import DtNoticeContent from '../notice/notice_content.vue';
+import DtNoticeAction from '../notice/notice_action.vue';
 import { NOTICE_KINDS } from '../notice/notice_constants';
 import util from '@/common/utils';
 import { TOAST_ROLES, TOAST_MIN_DURATION } from './toast_constants';

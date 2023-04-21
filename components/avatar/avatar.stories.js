@@ -8,6 +8,9 @@ import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
 
 const iconsList = getIconNames();
 
+export const argsData = {
+};
+
 export const argTypesData = {
   // Slots
   default: {

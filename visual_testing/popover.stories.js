@@ -3,10 +3,10 @@ import {
   argTypesData,
   Default,
   Variants,
-} from '@/components/popover/popover.stories';
+} from '@/components/popover/popover.stories.js';
 import PopoverMdx from '@/visual_testing/popover.mdx';
 
-import DtPopover from '@/components/popover/popover';
+import DtPopover from '@/components/popover/popover.vue';
 
 export default {
   title: 'Visual Testing/Popover',

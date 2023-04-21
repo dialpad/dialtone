@@ -13,7 +13,7 @@ export const argTypesData = {
       type: {
         summary: 'VNode',
         detail: `
-        Example: 
+        Example:
 <dt-stack>
   <dt-card />
   <dt-card />
@@ -32,7 +32,7 @@ export const argTypesData = {
         detail: `
         Directions: "${Object.keys(DT_STACK_DIRECTION)}"
 Breakpoints: "${DT_STACK_RESPONSIVE_BREAKPOINTS}"
-String: "column" 
+String: "column"
 Object: { "default": "row", "sm": "column", "lg": "column-reverse" }`,
       },
     },

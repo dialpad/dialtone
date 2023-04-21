@@ -44,8 +44,8 @@
 import {
   LIST_ITEM_TYPES,
   LIST_ITEM_NAVIGATION_TYPES,
-} from './list_item_constants.js';
-import DtDefaultListItem from './default_list_item';
+} from './list_item_constants';
+import DtDefaultListItem from './default_list_item.vue';
 import utils from '@/common/utils';
 import { DtIcon } from '@/components/icon';
 

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import DtRootLayoutBody from './root_layout_body';
+import DtRootLayoutBody from './root_layout_body.vue';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
 
 /**

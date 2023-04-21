@@ -2,10 +2,10 @@ import {
   argsData,
   argTypesData,
   Default,
-} from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.stories';
+} from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.stories.js';
 import ComboboxWithPopover from './combobox_with_popover.mdx';
 
-import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover';
+import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue';
 
 export default {
   title: 'Visual Testing/Combobox With Popover',

@@ -37,7 +37,7 @@ import {
   TAB_LIST_KIND_MODIFIERS,
   TAB_LIST_IMPORTANCE_MODIFIERS,
   TAB_LIST_SIZE_MODIFIERS,
-} from './tabs_constants.js';
+} from './tabs_constants';
 
 /**
  * Tabs allow users to navigation between grouped content in different views while within the same page context.

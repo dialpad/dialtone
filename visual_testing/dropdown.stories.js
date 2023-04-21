@@ -6,7 +6,7 @@ import {
 } from '@/components/dropdown/dropdown.stories';
 import DropdownMdx from './dropdown.mdx';
 
-import DtDropdown from '@/components/dropdown/dropdown';
+import DtDropdown from '@/components/dropdown/dropdown.vue';
 
 export default {
   title: 'Visual Testing/Dropdown',
