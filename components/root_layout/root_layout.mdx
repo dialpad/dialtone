@@ -11,7 +11,7 @@ import DtRootLayout from './root_layout';
 
 A root layout consists of a header, body, sidebar and footer. Content can optionally be passed into the slots which
 will be displayed in the respective area. The sidebar is designed to be responsive and will reposition above the
-body when the content reaches a relative breakpoint set with the `contentWrapWidthPercent` prop.
+body according to the `responsiveBreakpoint` prop.
 
 <Canvas>
   <Story id="components-root-layout--default" />
@@ -36,10 +36,10 @@ import { DtRootLayout } from '@dialpad/dialtone-vue';
 <template>
   <dt-root-layout>
     <template #header>
-      <div class="d-h100p d-bgc-purple-100">Header</div>
+      <div class="d-h100p d-bgc-purple-200">Header</div>
     </template>
     <template #sidebar>
-      <div class="d-h100p d-bgc-black-100">
+      <div class="d-hmn100p d-bgc-black-200">
         <div>Sidebar item 1</div>
         <div>Sidebar item 2</div>
         <div>Sidebar item 3</div>
@@ -49,7 +49,7 @@ import { DtRootLayout } from '@dialpad/dialtone-vue';
       <div class="d-h100p">Content</div>
     </template>
     <template #footer>
-      <div class="d-h100p d-bgc-gold-100">Footer</div>
+      <div class="d-h100p d-bgc-gold-200">Footer</div>
     </template>
   </dt-root-layout>
 </template>
@@ -59,17 +59,17 @@ import { DtRootLayout } from '@dialpad/dialtone-vue';
 
 Try scrolling
 <Canvas>
-  <Story id="components-root-layout--sticky" />
+  <Story id="components-root-layout--sticky-header" />
 </Canvas>
 
 ```html
 <template>
-  <dt-root-layout headerSticky="true">
+  <dt-root-layout header-sticky="true">
     <template #header>
-      <div class="d-h100p d-bgc-purple-100">Header</div>
+      <div class="d-h100p d-bgc-purple-200">Header</div>
     </template>
     <template #sidebar>
-      <div class="d-h100p d-bgc-black-100">
+      <div class="d-hmn100p d-bgc-black-200">
         <div>Sidebar item 1</div>
         <div>Sidebar item 2</div>
         <div>Sidebar item 3</div>
@@ -79,7 +79,7 @@ Try scrolling
       <div class="d-h100p">Content</div>
     </template>
     <template #footer>
-      <div class="d-h100p d-bgc-gold-100">Footer</div>
+      <div class="d-h100p d-bgc-gold-200">Footer</div>
     </template>
   </dt-root-layout>
 </template>
@@ -95,6 +95,7 @@ on the page.
 
 If you have navigation links contained within any of the slots Root Layout provides these should be enclosed in a `<nav>`
 [Nav Section](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav).
-The RootLayout component will not do this for you. The sidebar will automatically wrap to be above the main content
-when it is less than 50% width of the Root Layout component by default.
-This can be changed via the "contentWrapWidthPercent" prop if desired.
+The RootLayout component will not do this for you.
+
+The sidebar will not automatically wrap to be above the main content by default.
+This can be changed via the `responsiveBreakpoint` prop if desired.

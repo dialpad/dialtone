@@ -6,7 +6,6 @@ import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_lay
 // Constants
 const basePropsData = {
   sidebarWidth: '256px',
-  contentWrapWidthPercent: '50%',
 };
 
 const baseSlotsData = {
@@ -28,9 +27,9 @@ describe('DtRootLayoutBody Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    body = wrapper.find('[data-qa="root-layout-body"]');
-    sidebar = wrapper.find('[data-qa="root-layout-sidebar"]');
-    content = wrapper.find('[data-qa="root-layout-content"]');
+    body = wrapper.find('[data-qa="dt-root-layout-body"]');
+    sidebar = wrapper.find('[data-qa="dt-root-layout-sidebar"]');
+    content = wrapper.find('[data-qa="dt-root-layout-content"]');
   };
 
   const _setWrappers = () => {
@@ -79,18 +78,11 @@ describe('DtRootLayoutBody Tests', function () {
       it('should set the sidebar width', function () {
         assert.strictEqual(sidebar.element.style.getPropertyValue('flex-basis'), propsData.sidebarWidth);
       });
-
-      it('should set the body content wrap percent', function () {
-        assert.strictEqual(
-          content.element.style.getPropertyValue('min-inline-size'),
-          propsData.contentWrapWidthPercent,
-        );
-      });
     });
 
     const itBehavesLikeExcludesBodyInvertClass = () => {
       it('Has correct class', async function () {
-        assert.strictEqual(body.classes('root-layout__body--invert'), false);
+        assert.strictEqual(body.classes('d-root-layout__body--invert'), false);
       });
     };
 
@@ -112,7 +104,7 @@ describe('DtRootLayoutBody Tests', function () {
       });
 
       it('Has correct class', async function () {
-        assert.strictEqual(body.classes('root-layout__body--invert'), true);
+        assert.strictEqual(body.classes('d-root-layout__body--invert'), true);
       });
     });
   });

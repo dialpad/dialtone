@@ -1,10 +1,13 @@
 <template>
-  <div class="root-layout d-root-layout">
+  <div
+    :class="['root-layout d-root-layout', { 'd-root-layout--fixed': fixed }, responsiveClass]"
+    data-qa="dt-root-layout"
+  >
     <header
       v-if="$slots.header"
-      :class="['root-layout__header', headerClass, { 'root-layout__header--sticky': headerSticky }]"
+      :class="['d-root-layout__header', { 'd-root-layout__header--sticky': headerSticky }, headerClass]"
       :style="{ 'height': headerHeight, 'min-height': headerHeight }"
-      data-qa="root-layout-header"
+      data-qa="dt-root-layout-header"
     >
       <!-- @slot Slot for header content -->
       <slot name="header" />
@@ -12,7 +15,6 @@
     <dt-root-layout-body
       :body-class="bodyClass"
       :content-class="contentClass"
-      :content-wrap-width-percent="contentWrapWidthPercent"
       :sidebar-class="sidebarClass"
       :sidebar-width="sidebarWidth"
       :sidebar-position="sidebarPosition"
@@ -37,9 +39,9 @@
     </dt-root-layout-body>
     <footer
       v-if="$slots.footer"
-      :class="['root-layout__footer', footerClass]"
+      :class="['d-root-layout__footer', footerClass]"
       :style="{ 'height': footerHeight, 'min-height': footerHeight }"
-      data-qa="root-layout-footer"
+      data-qa="dt-root-layout-footer"
     >
       <!-- @slot Slot for footer content -->
       <slot name="footer" />
@@ -49,7 +51,7 @@
 
 <script>
 import DtRootLayoutBody from './root_layout_body';
-import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS, ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS } from './root_layout_constants';
 
 /**
  * A root layout provides a standardized group of containers to display content at the root level.
@@ -63,8 +65,9 @@ export default {
 
   props: {
     /**
-     * When true, the header / footer will be locked in position and the content will
-     * be scrollable. When false the header / footer will scroll out of view.
+     * When true, the header, footer and sidebar will be locked in position and the content will
+     * be scrollable. When false the header, footer and sidebar  will scroll out of view.
+     * @values true, false
      */
     fixed: {
       type: Boolean,
@@ -114,17 +117,6 @@ export default {
     },
 
     /**
-     * For responsive layouts. When the main content is at the specified width percentage,
-     * the sidebar will display above the content rather than beside it. Please enter a percentage string value
-     *
-     * ex: '50%', '30%'
-     */
-    contentWrapWidthPercent: {
-      type: String,
-      default: '50%',
-    },
-
-    /**
      * Additional class name for the sidebar element
      */
     sidebarClass: {
@@ -168,13 +160,23 @@ export default {
       type: String,
       default: '64px',
     },
+
+    /**
+     * Defines the breakpoint when the root layout will change to responsive version
+     * @values 'sm', 'md', 'lg', null
+     */
+    responsiveBreakpoint: {
+      type: String,
+      default: null,
+      validator: (bp) => ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS.includes(bp),
+    },
+  },
+
+  computed: {
+    responsiveClass () {
+      if (!this.responsiveBreakpoint) return;
+      return `d-root-layout__responsive--${this.responsiveBreakpoint}`;
+    },
   },
 };
 </script>
-
-<style lang="less">
-.root-layout__header--sticky {
-  position: sticky;
-  top: 0;
-}
-</style>
