@@ -91,6 +91,7 @@
     "@tiptap/vue-2": "^2.0.2",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
+    "jest": "^29.5.0",
     "seedrandom": "^3.0.5",
     "tippy.js": "^6.3.7"
   },
