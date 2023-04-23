@@ -483,6 +483,22 @@
         "value": "{size.700} * 2",
         "type": "sizing"
       },
+      "900": {
+        "value": "{size.800} * 2",
+        "type": "sizing"
+      },
+      "1000": {
+        "value": "{size.900} * 2",
+        "type": "sizing"
+      },
+      "1100": {
+        "value": "{size.1000} * 2",
+        "type": "sizing"
+      },
+      "1200": {
+        "value": "{size.1100} * 2",
+        "type": "sizing"
+      },
       "50-negative": {
         "value": "{size.50} * -1",
         "type": "sizing"
@@ -553,6 +569,22 @@
       },
       "800-negative": {
         "value": "{size.800} * -1",
+        "type": "sizing"
+      },
+      "900-negative": {
+        "value": "{size.900} * -1",
+        "type": "sizing"
+      },
+      "1000-negative": {
+        "value": "{size.1000} * -1",
+        "type": "sizing"
+      },
+      "1100-negative": {
+        "value": "{size.1100} * -1",
+        "type": "sizing"
+      },
+      "1200-negative": {
+        "value": "{size.1200} * -1",
         "type": "sizing"
       },
       "base": {
@@ -709,6 +741,22 @@
         "value": "{space.700} * 2",
         "type": "spacing"
       },
+      "900": {
+        "value": "{space.800} * 2",
+        "type": "spacing"
+      },
+      "1000": {
+        "value": "{space.900} * 2",
+        "type": "spacing"
+      },
+      "1100": {
+        "value": "{space.1000} * 2",
+        "type": "spacing"
+      },
+      "1200": {
+        "value": "{space.1100} * 2",
+        "type": "spacing"
+      },
       "50-negative": {
         "value": "{space.50} * -1",
         "type": "spacing"
@@ -779,6 +827,22 @@
       },
       "800-negative": {
         "value": "{space.800} * -1",
+        "type": "spacing"
+      },
+      "900-negative": {
+        "value": "{space.900} * -1",
+        "type": "spacing"
+      },
+      "1000-negative": {
+        "value": "{space.1000} * -1",
+        "type": "spacing"
+      },
+      "1100-negative": {
+        "value": "{space.1100} * -1",
+        "type": "spacing"
+      },
+      "1200-negative": {
+        "value": "{space.1200} * -1",
         "type": "spacing"
       },
       "base": {
