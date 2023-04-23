@@ -873,6 +873,18 @@
         "value": "{space.800} * 2",
         "type": "spacing"
       },
+      "925": {
+        "value": "(({space.900} + {space.950}) / 2) + {space.450}",
+        "type": "spacing"
+      },
+      "950": {
+        "value": "({space.900} + {space.1000}) / 2",
+        "type": "spacing"
+      },
+      "975": {
+        "value": "((({space.950} + {space.1000}) / 2)) + {space.500}",
+        "type": "spacing"
+      },
       "1000": {
         "value": "{space.900} * 2",
         "type": "spacing"
@@ -971,6 +983,18 @@
       },
       "900-negative": {
         "value": "{space.900} * -1",
+        "type": "spacing"
+      },
+      "925-negative": {
+        "value": "{space.925} * -1",
+        "type": "spacing"
+      },
+      "950-negative": {
+        "value": "{space.950} * -1",
+        "type": "spacing"
+      },
+      "975-negative": {
+        "value": "{space.975} * -1",
         "type": "spacing"
       },
       "1000-negative": {
