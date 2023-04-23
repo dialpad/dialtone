@@ -483,6 +483,18 @@
         "value": "{size.700} * 2",
         "type": "sizing"
       },
+      "825": {
+        "value": "(({size.800} + {size.850}) / 2) + {size.300}",
+        "type": "sizing"
+      },
+      "850": {
+        "value": "({size.800} + {size.900}) / 2",
+        "type": "sizing"
+      },
+      "875": {
+        "value": "(({size.850} + {size.900}) / 2) - {size.400}",
+        "type": "sizing"
+      },
       "900": {
         "value": "{size.800} * 2",
         "type": "sizing"
@@ -569,6 +581,18 @@
       },
       "800-negative": {
         "value": "{size.800} * -1",
+        "type": "sizing"
+      },
+      "825-negative": {
+        "value": "{size.825} * -1",
+        "type": "sizing"
+      },
+      "850-negative": {
+        "value": "{size.850} * -1",
+        "type": "sizing"
+      },
+      "875-negative": {
+        "value": "{size.875} * -1",
         "type": "sizing"
       },
       "900-negative": {
@@ -809,6 +833,18 @@
         "value": "{space.700} * 2",
         "type": "spacing"
       },
+      "825": {
+        "value": "(({space.800} + {space.850}) / 2) + {space.300}",
+        "type": "spacing"
+      },
+      "850": {
+        "value": "({space.800} + {space.900}) / 2",
+        "type": "spacing"
+      },
+      "875": {
+        "value": "(({space.850} + {space.900}) / 2) - {space.400}",
+        "type": "spacing"
+      },
       "900": {
         "value": "{space.800} * 2",
         "type": "spacing"
@@ -895,6 +931,18 @@
       },
       "800-negative": {
         "value": "{space.800} * -1",
+        "type": "spacing"
+      },
+      "825-negative": {
+        "value": "{space.825} * -1",
+        "type": "spacing"
+      },
+      "850-negative": {
+        "value": "{space.850} * -1",
+        "type": "spacing"
+      },
+      "875-negative": {
+        "value": "{space.875} * -1",
         "type": "spacing"
       },
       "900-negative": {
