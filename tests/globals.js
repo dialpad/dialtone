@@ -13,12 +13,12 @@ class ObserverMock {
   }
 }
 
-before(function () {
+beforeAll(() => {
   global.IntersectionObserver = ObserverMock;
   global.ResizeObserver = ObserverMock;
 });
 
-after(function () {
+afterAll(() => {
   global.IntersectionObserver = null;
   global.ResizeObserver = null;
 });

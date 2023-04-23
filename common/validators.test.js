@@ -1,52 +1,69 @@
-import { assert } from 'chai';
 import { VALIDATION_MESSAGE_TYPES } from './constants';
 import { validationMessageValidator } from './validators';
 
-describe('Validator Tests', function () {
-  describe('validationMessageValidator', function () {
+describe('Validator Tests', () => {
+  describe('validationMessageValidator', () => {
     // Test Environment
     let rawMessages;
 
-    describe('when no message list is provided', function () {
-      it('should return true', function () { assert.strictEqual(validationMessageValidator(), true); });
+    describe('when no message list is provided', () => {
+      it(
+        'should return true',
+        () => { expect(validationMessageValidator()).toBe(true); }
+      );
     });
 
-    describe('when message list is undefined', function () {
-      it('should return true', function () { assert.strictEqual(validationMessageValidator(undefined), true); });
+    describe('when message list is undefined', () => {
+      it(
+        'should return true',
+        () => { expect(validationMessageValidator(undefined)).toBe(true); }
+      );
     });
 
-    describe('when message list is null', function () {
-      it('should return true', function () { assert.strictEqual(validationMessageValidator(null), true); });
+    describe('when message list is null', () => {
+      it(
+        'should return true',
+        () => { expect(validationMessageValidator(null)).toBe(true); }
+      );
     });
 
-    describe('when message list is empty', function () {
-      it('should return true', function () { assert.strictEqual(validationMessageValidator([]), true); });
+    describe('when message list is empty', () => {
+      it(
+        'should return true',
+        () => { expect(validationMessageValidator([])).toBe(true); }
+      );
     });
 
-    describe('when message list contains strings', function () {
+    describe('when message list contains strings', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         rawMessages = ['message 1', 'message 2'];
       });
 
-      it('should return true', function () { assert.strictEqual(validationMessageValidator(rawMessages), true); });
+      it(
+        'should return true',
+        () => { expect(validationMessageValidator(rawMessages)).toBe(true); }
+      );
     });
 
-    describe('when message list contains valid objects', function () {
+    describe('when message list contains valid objects', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         rawMessages = [{
           message: 'message',
           type: VALIDATION_MESSAGE_TYPES.SUCCESS,
         }];
       });
 
-      it('should return true', function () { assert.strictEqual(validationMessageValidator(rawMessages), true); });
+      it(
+        'should return true',
+        () => { expect(validationMessageValidator(rawMessages)).toBe(true); }
+      );
     });
 
-    describe('when message list contains strings and valid objects', function () {
+    describe('when message list contains strings and valid objects', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         rawMessages = [
           'message 1',
           {
@@ -56,25 +73,34 @@ describe('Validator Tests', function () {
         ];
       });
 
-      it('should return true', function () { assert.strictEqual(validationMessageValidator(rawMessages), true); });
+      it(
+        'should return true',
+        () => { expect(validationMessageValidator(rawMessages)).toBe(true); }
+      );
     });
 
-    describe('when message list contains an invalid object', function () {
+    describe('when message list contains an invalid object', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         rawMessages = [{ message: 'message' }];
       });
 
-      it('should return false', function () { assert.strictEqual(validationMessageValidator(rawMessages), false); });
+      it(
+        'should return false',
+        () => { expect(validationMessageValidator(rawMessages)).toBe(false); }
+      );
     });
 
-    describe('when message list contains an invalid type', function () {
+    describe('when message list contains an invalid type', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         rawMessages = [123];
       });
 
-      it('should return false', function () { assert.strictEqual(validationMessageValidator(rawMessages), false); });
+      it(
+        'should return false',
+        () => { expect(validationMessageValidator(rawMessages)).toBe(false); }
+      );
     });
   });
 });

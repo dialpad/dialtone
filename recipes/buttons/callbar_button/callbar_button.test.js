@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeCallbarButton from './callbar_button.vue';
 import DtTooltip from '@/components/tooltip/tooltip';
@@ -6,7 +5,13 @@ import DtTooltip from '@/components/tooltip/tooltip';
 // Constants
 const basePropsData = {};
 
-describe('DtRecipeCallbarButton Tests', function () {
+describe('DtRecipeCallbarButton Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let button;
@@ -39,19 +44,19 @@ describe('DtRecipeCallbarButton Tests', function () {
   };
 
   // Setup
-  before(function () {
+  beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
     global.requestAnimationFrame = jest.fn();
     global.cancelAnimationFrame = jest.fn();
-    this.localVue = createLocalVue();
+    testContext.localVue = createLocalVue();
   });
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = basePropsData;
     attrs = {};
     slots = {};
@@ -60,57 +65,60 @@ describe('DtRecipeCallbarButton Tests', function () {
     wrapper.destroy();
   });
 
-  describe('Presentation Tests', function () {
-    describe('Default render', function () {
-      it('should render the component', function () {
+  describe('Presentation Tests', () => {
+    describe('Default render', () => {
+      it('should render the component', () => {
         assert.exists(wrapper);
       });
 
-      it('should render a tooltip component', function () {
+      it('should render a tooltip component', () => {
         assert.exists(tooltip);
       });
 
-      it('should render a muted button', function () {
+      it('should render a muted button', () => {
         const buttonProps = button.props();
         assert.exists(button);
-        assert.equal(buttonProps.kind, 'muted');
+        expect(buttonProps.kind).toEqual('muted');
       });
     });
 
-    describe('Button variants', function () {
-      it('Should add appropriate class to icon when "active"', async function () {
+    describe('Button variants', () => {
+      it('Should add appropriate class to icon when "active"', async () => {
         await wrapper.setProps({ active: true });
-        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--active'));
+        expect(button.classes().includes('dt-recipe-callbar-button--active')).toBe(true);
       });
 
-      it('Should add appropriate class to icon when "circle"', async function () {
+      it('Should add appropriate class to icon when "circle"', async () => {
         await wrapper.setProps({ circle: true });
-        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--circle'));
-        assert.equal(button.props().importance, 'outlined');
+        expect(button.classes().includes('dt-recipe-callbar-button--circle')).toBe(true);
+        expect(button.props().importance).toEqual('outlined');
       });
 
-      it('Should add appropriate class to icon when "danger"', async function () {
+      it('Should add appropriate class to icon when "danger"', async () => {
         await wrapper.setProps({ danger: true });
-        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--danger'));
+        expect(button.classes().includes('dt-recipe-callbar-button--danger')).toBe(true);
       });
 
-      it('Should display a disabled button when "disabled"', async function () {
+      it('Should display a disabled button when "disabled"', async () => {
         await wrapper.setProps({ disabled: true });
-        assert.isTrue(button.classes().includes('d-btn--disabled'));
-        assert.isTrue(button.classes().includes('d-bgc-transparent'));
+        expect(button.classes().includes('d-btn--disabled')).toBe(true);
+        expect(button.classes().includes('d-bgc-transparent')).toBe(true);
       });
 
-      it('Should add appropriate class to circle button when "importance"', async function () {
-        await wrapper.setProps({ importance: 'clear', circle: 'true' });
-        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--circle'));
-        assert.equal(button.props().importance, 'clear');
-      });
+      it(
+        'Should add appropriate class to circle button when "importance"',
+        async () => {
+          await wrapper.setProps({ importance: 'clear', circle: 'true' });
+          expect(button.classes().includes('dt-recipe-callbar-button--circle')).toBe(true);
+          expect(button.props().importance).toEqual('clear');
+        }
+      );
     });
   });
 
-  describe('Interactivity Tests', function () {
-    describe('When clicking on the button', function () {
-      it('should call the click event listener', async function () {
+  describe('Interactivity Tests', () => {
+    describe('When clicking on the button', () => {
+      it('should call the click event listener', async () => {
         const clickStub = jest.fn();
         listeners = { click: clickStub };
         _setWrappers();
@@ -118,7 +126,7 @@ describe('DtRecipeCallbarButton Tests', function () {
         await button.find('button').trigger('click');
         await wrapper.vm.$nextTick();
 
-        assert.isTrue(clickStub.called);
+        expect(clickStub.called).toBe(true);
       });
     });
   });

@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import { itBehavesLikeHasCorrectClass } from '@/tests/shared_examples/classes';
 import DtRecipeUnreadChip from './unread_chip.vue';
@@ -17,7 +16,13 @@ const baseSlots = {
   default: 'Unread mentions',
 };
 
-describe('DtRecipeUnreadChip Tests', function () {
+describe('DtRecipeUnreadChip Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let unreadChipLabel;
@@ -49,115 +54,115 @@ describe('DtRecipeUnreadChip Tests', function () {
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = baseProps;
     attrs = {};
     slots = baseSlots;
     provide = {};
     listeners = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
-    describe('When the unread chip renders', function () {
-      it('should exist', function () { assert.exists(wrapper); });
-      it('should render the text', function () {
-        assert.strictEqual(unreadChipLabel.text(), baseSlots.default);
+  describe('Presentation Tests', () => {
+    describe('When the unread chip renders', () => {
+      it('should exist', () => { assert.exists(wrapper); });
+      it('should render the text', () => {
+        expect(unreadChipLabel.text()).toBe(baseSlots.default);
       });
-      it('should render the icon', function () {
+      it('should render the icon', () => {
         assert.exists(unreadChipIcon);
       });
     });
 
-    describe('When the kind is messages', function () {
-      beforeEach(async function () {
+    describe('When the kind is messages', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ kind: 'messages' });
       });
 
-      it('should contain the correct class', function () {
+      it('should contain the correct class', () => {
         itBehavesLikeHasCorrectClass(wrapper, 'dt-leftbar-unread-chip__messages');
       });
     });
 
-    describe('When the kind is mentions', function () {
-      beforeEach(async function () {
+    describe('When the kind is mentions', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ kind: 'mentions' });
       });
 
-      it('should contain the correct class', function () {
+      it('should contain the correct class', () => {
         itBehavesLikeHasCorrectClass(wrapper, 'dt-leftbar-unread-chip__mentions');
       });
     });
 
-    describe('When the direction is up', function () {
-      beforeEach(async function () {
+    describe('When the direction is up', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ direction: 'up' });
       });
 
-      it('should contain the correct class', function () {
+      it('should contain the correct class', () => {
         itBehavesLikeHasCorrectClass(unreadChipIcon, 'd-icon--arrow-up');
       });
     });
 
-    describe('When the direction is down', function () {
-      beforeEach(async function () {
+    describe('When the direction is down', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ direction: 'down' });
       });
 
-      it('should contain the correct class', function () {
+      it('should contain the correct class', () => {
         itBehavesLikeHasCorrectClass(unreadChipIcon, 'd-icon--arrow-down');
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     const clickListenerSpy = jest.fn();
 
-    beforeEach(function () {
+    beforeEach(() => {
       listeners = { click: clickListenerSpy };
       _setWrappers();
     });
 
-    describe('When the unread chip is clicked', function () {
-      beforeEach(function () {
+    describe('When the unread chip is clicked', () => {
+      beforeEach(() => {
         wrapper.find('[data-qa="dt-chip"]').trigger('click');
       });
 
-      it('should emit click', function () {
-        assert.strictEqual(clickListenerSpy.callCount, 1);
+      it('should emit click', () => {
+        expect(clickListenerSpy.callCount).toBe(1);
       });
     });
   });
 
-  describe('Validation Tests', function () {
-    describe('Kind validator', function () {
+  describe('Validation Tests', () => {
+    describe('Kind validator', () => {
       const prop = DtRecipeUnreadChip.props.kind;
 
-      describe('When provided kind is in UNREAD_BADGE_KINDS', function () {
+      describe('When provided kind is in UNREAD_BADGE_KINDS', () => {
         itBehavesLikePassesCustomPropValidation(prop, UNREAD_BADGE_KINDS[0]);
       });
 
-      describe('When provided kind is not in UNREAD_BADGE_KINDS', function () {
+      describe('When provided kind is not in UNREAD_BADGE_KINDS', () => {
         itBehavesLikeFailsCustomPropValidation(prop, 'other_value');
       });
     });
 
-    describe('Direction validator', function () {
+    describe('Direction validator', () => {
       const prop = DtRecipeUnreadChip.props.direction;
 
-      describe('When provided direction is in UNREAD_BADGE_DIRECTIONS', function () {
+      describe('When provided direction is in UNREAD_BADGE_DIRECTIONS', () => {
         itBehavesLikePassesCustomPropValidation(prop, UNREAD_BADGE_DIRECTIONS[0]);
       });
 
-      describe('When provided kind is not in UNREAD_BADGE_DIRECTIONS', function () {
+      describe('When provided kind is not in UNREAD_BADGE_DIRECTIONS', () => {
         itBehavesLikeFailsCustomPropValidation(prop, 'other_value');
       });
     });

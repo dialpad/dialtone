@@ -104,16 +104,10 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.test.js'],
-      plugins: [
-        'mocha',
-      ],
-      extends: [
-        'plugin:mocha/recommended',
-      ],
       env: {
         browser: true,
         node: true,
-        mocha: true,
+        jest: true,
       },
       rules: {
         'max-lines': 'off',

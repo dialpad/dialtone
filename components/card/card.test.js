@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtCard from './card.vue';
 
@@ -7,7 +6,7 @@ const content = '<div data-qa="content-element"> card content </div>';
 const header = '<div data-qa="header-element"> card header </div>';
 const footer = '<div data-qa="footer-element"> card footer </div>';
 
-describe('DtCard Tests', function () {
+describe('DtCard Tests', () => {
   // Wrappers
   let wrapper;
   let contentElement;
@@ -37,28 +36,28 @@ describe('DtCard Tests', function () {
     _setChildWrappers();
   };
 
-  beforeEach(function () {
+  beforeEach(() => {
     _mountWrapper();
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     _clearChildWrappers();
   });
 
-  describe('Test default rendering', function () {
-    it('should render the component', function () {
+  describe('Test default rendering', () => {
+    it('should render the component', () => {
       assert.exists(wrapper, 'wrapper exists');
     });
 
-    it('should render the header', function () {
+    it('should render the header', () => {
       assert.exists(headerElement, 'header exists');
     });
 
-    it('should render the content', function () {
+    it('should render the content', () => {
       assert.exists(contentElement, 'content exists');
     });
 
-    it('should render the footer', function () {
+    it('should render the footer', () => {
       assert.exists(footerElement, 'footer exists');
     });
   });

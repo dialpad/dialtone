@@ -1,68 +1,67 @@
 import { getEmojiData, validateCustomEmojiJson } from '@/common/emoji';
 import { withValidCustomEmojis, withNotAllRequiredProps, withValidUnicodeEmojis } from './custom-emoji-test.js';
-import { assert } from 'chai';
 
-describe('Emoji Tests', function () {
-  describe('Validation Tests', function () {
-    describe('When a custom emoji json is provided with valid emojis', function () {
-      beforeEach(async function () {
+describe('Emoji Tests', () => {
+  describe('Validation Tests', () => {
+    describe('When a custom emoji json is provided with valid emojis', () => {
+      beforeEach(async () => {
         await validateCustomEmojiJson(withValidCustomEmojis);
       });
-      after(function () {
+      afterAll(() => {
         validateCustomEmojiJson('');
       });
 
-      it('sets the custom emoji', async function () {
+      it('sets the custom emoji', async () => {
         const emojiData = getEmojiData();
-        assert.isObject(emojiData.octocat);
+        expect(typeof emojiData.octocat).toBe('object');
       });
     });
 
-    describe('When a custom emoji json is provided with invalid emojis', function () {
+    describe('When a custom emoji json is provided with invalid emojis', () => {
       let consoleErrorSpy;
-      before(async function () {
+      beforeAll(async () => {
         consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
         await validateCustomEmojiJson(withNotAllRequiredProps);
       });
-      after(function () {
+      afterAll(() => {
         consoleErrorSpy = null;
         console.error.mockRestore();
         validateCustomEmojiJson('');
       });
 
-      it('doesn\'t set the malformed custom emoji', function () {
+      it('doesn\'t set the malformed custom emoji', () => {
         const emojiData = getEmojiData();
-        assert.isUndefined(emojiData.notallrequiredprops);
+        expect(emojiData.notallrequiredprops).not.toBeDefined();
       });
 
-      it('should log error message', async function () {
-        assert.isTrue(consoleErrorSpy.calledOnce);
+      it('should log error message', async () => {
+        expect(consoleErrorSpy.calledOnce).toBe(true);
       });
     });
 
-    describe('When a custom emoji json is provided with valid Unicode emojis', function () {
-      before(async function () {
+    describe('When a custom emoji json is provided with valid Unicode emojis', () => {
+      beforeAll(async () => {
         await validateCustomEmojiJson(withValidUnicodeEmojis);
       });
-      after(function () {
+      afterAll(() => {
         validateCustomEmojiJson('');
       });
 
-      it('overwrites the property in case is a string', function () {
+      it('overwrites the property in case is a string', () => {
         // Test Setup
         const expectedShortname = ':nerdface:';
         const emojiData = getEmojiData();
 
-        assert.strictEqual(emojiData['1f913'].shortname, expectedShortname);
+        expect(emojiData['1f913'].shortname).toBe(expectedShortname);
       });
 
-      it('extends the property in case is an array', function () {
+      it('extends the property in case is an array', () => {
         // Test Setup
         const expectedKeywords = ['confused', 'face', 'uc6', 'thinking', 'not sure', 'unknown'];
         const emojiData = getEmojiData();
 
-        assert.lengthOf(emojiData['1f615'].keywords, 6);
-        assert.deepEqual(emojiData['1f615'].keywords, expectedKeywords);
+        expect(emojiData['1f615'].keywords.length).toBe(6);
+        expect(emojiData['1f615'].keywords).toEqual(expectedKeywords);
       });
     });
   });
