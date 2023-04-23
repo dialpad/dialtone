@@ -1,15 +1,18 @@
 /* eslint-disable max-lines */
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeContactInfo from './contact_info';
-import DtRecipeContactInfoMdx from './contact_info.mdx';
-import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story';
-import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story';
+import DtRecipeContactInfo from './contact_info.vue';
+
+import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story.vue';
+import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story.vue';
 import { AVATAR_SIZE_MODIFIERS } from '@/components/avatar';
 import { PRESENCE_STATES_LIST } from '@/components/presence';
 
+import avatarImage from './avatar.png';
+
 // Default Prop Values
 export const argsData = {
+  presence: null,
 };
 
 export const argTypesData = {
@@ -34,10 +37,9 @@ export const argTypesData = {
   },
 
   presence: {
-    defaultValue: null,
+    options: [...PRESENCE_STATES_LIST],
     control: {
       type: 'select',
-      options: [...PRESENCE_STATES_LIST],
     },
   },
 
@@ -94,15 +96,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtRecipeContactInfoMdx,
-    },
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: { showPanel: true },
-  },
 };
 
 // Templates
@@ -116,8 +109,6 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   argTypes,
   DtRecipeContactInfoVariantsTemplate,
 );
-
-const avatarImage = require('./avatar.png');
 
 // Stories
 export const Default = DefaultTemplate.bind({});

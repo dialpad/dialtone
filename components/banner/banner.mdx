@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as BannerStories from './banner.stories';
+
+<Meta of={BannerStories}/>
 
 # Banner
 
@@ -23,7 +27,7 @@ area of the product (e.g. when the user is in Do Not Disturb mode).
 The typical banner will have a title, description and an action button
 
 <Canvas>
-  <Story id="components-banner--default" />
+  <Story of={BannerStories.Default} />
 </Canvas>
 
 ## Variants
@@ -77,7 +81,7 @@ and set the background size with `backgroundSize` prop.
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

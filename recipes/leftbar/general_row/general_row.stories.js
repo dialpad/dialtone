@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
-import DtRecipeGeneralRow from './general_row';
-import DtRecipeGeneralRowMdx from './general_row.mdx';
+import DtRecipeGeneralRow from './general_row.vue';
+
 import DtRecipeGeneralRowDefaultTemplate from './general_row_default.story.vue';
 import DtRecipeGeneralRowVariantsTemplate from './general_row_variants.story.vue';
 import {
@@ -11,8 +11,10 @@ import {
 
 // Default Prop Values
 export const argsData = {
+  type: 'inbox',
   callButtonTooltip: 'Call',
   dndTextTooltip: 'Do not Disturb',
+  description: 'Description',
   onClick: action('click'),
   onCall: action('call'),
 };
@@ -20,16 +22,15 @@ export const argsData = {
 export const argTypesData = {
   // Props
   type: {
-    defaultValue: 'inbox',
     table: {
       category: 'props',
       type: {
         summary: 'string',
       },
     },
+    options: Object.values(LEFTBAR_GENERAL_ROW_TYPES),
     control: {
       type: 'select',
-      options: Object.values(LEFTBAR_GENERAL_ROW_TYPES),
     },
   },
   color: {
@@ -39,13 +40,10 @@ export const argTypesData = {
         summary: 'string',
       },
     },
+    options: Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS),
     control: {
       type: 'select',
-      options: Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS),
     },
-  },
-  description: {
-    defaultValue: 'Description',
   },
 
   // Action Event Handlers
@@ -86,17 +84,6 @@ export default {
   argTypes: argTypesData,
   decorators: [decorator],
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeGeneralRowMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -117,4 +104,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

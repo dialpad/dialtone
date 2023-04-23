@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeCallbarButton from './callbar_button.vue';
-import DtTooltip from '@/components/tooltip/tooltip';
+import DtTooltip from '@/components/tooltip/tooltip.vue';
 import sinon from 'sinon';
 
 // Constants

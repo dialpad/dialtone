@@ -130,7 +130,7 @@
 </template>
 
 <script>
-import DtRecipeIvrNode from './ivr_node';
+import DtRecipeIvrNode from './ivr_node.vue';
 import {
   IVR_NODE_BRANCH,
   IVR_NODE_EXPERT, IVR_NODE_GO_TO, IVR_NODE_HANGUP,

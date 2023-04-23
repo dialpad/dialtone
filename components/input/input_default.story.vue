@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import DtInput from './input';
+import DtInput from './input.vue';
 import { DtIcon } from '@/components/icon';
 
 export default {

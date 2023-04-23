@@ -1,9 +1,9 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
-import DtInput from '@/components/input/input';
+import DtInput from '@/components/input/input.vue';
 import sinon from 'sinon';
-import DtPopover from '@/components/popover/popover';
+import DtPopover from '@/components/popover/popover.vue';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 

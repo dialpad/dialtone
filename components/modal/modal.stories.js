@@ -1,10 +1,28 @@
 import DtModal from './modal.vue';
-import ModalMdx from './modal.mdx';
+
 import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 import { NOTICE_KINDS } from '@/components/notice';
+
+// Default Props for all variations
+export const argsData = {
+  size: 'default',
+  kind: 'default',
+  bannerKind: 'warning',
+  closeButtonProps: {
+    ariaLabel: 'Close',
+  },
+  copy: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lacus quis velit \
+viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum \
+maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
+Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
+orci ipsum et velit.`,
+  title: 'Example Title',
+  onClose: action('update:show'),
+  visuallyHiddenCloseLabel: 'Close Modal',
+};
 
 export const argTypesData = {
   // Slots
@@ -43,24 +61,21 @@ export const argTypesData = {
 
   // Props
   size: {
-    defaultValue: 'default',
+    options: Object.keys(MODAL_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(MODAL_SIZE_MODIFIERS),
     },
   },
   kind: {
-    defaultValue: 'default',
+    options: Object.keys(MODAL_KIND_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(MODAL_KIND_MODIFIERS),
     },
   },
   bannerKind: {
-    defaultValue: 'warning',
+    options: NOTICE_KINDS,
     control: {
       type: 'select',
-      options: NOTICE_KINDS,
     },
   },
   showFooter: {
@@ -94,35 +109,9 @@ a 2-way binding to control modal visibility.`,
   },
 };
 
-// Default Props for all variations
-export const argsData = {
-  closeButtonProps: {
-    ariaLabel: 'Close',
-  },
-  copy: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lacus quis velit \
-viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum \
-maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
-Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
-orci ipsum et velit.`,
-  title: 'Example Title',
-  onClose: action('update:show'),
-  visuallyHiddenCloseLabel: 'Close Modal',
-};
-
 export default {
   title: 'Components/Modal',
   component: DtModal,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: ModalMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

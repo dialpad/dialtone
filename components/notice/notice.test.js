@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 
-import DtNotice from './notice';
+import DtNotice from './notice.vue';
 
 // Constants
 const basePropsData = {

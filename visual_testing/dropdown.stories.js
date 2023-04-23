@@ -4,7 +4,7 @@ import {
   Default,
   Variants,
 } from '@/components/dropdown/dropdown.stories';
-import DropdownMdx from './dropdown.mdx';
+
 
 import DtDropdown from '@/components/dropdown/dropdown.vue';
 
@@ -14,13 +14,14 @@ export default {
   args: {
     ...argsData,
     transition: '',
+    modal: false,
     open: true,
   },
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
     docs: {
-      page: DropdownMdx,
+      inlineStories: false,
     },
     options: { showPanel: false },
     a11y: {

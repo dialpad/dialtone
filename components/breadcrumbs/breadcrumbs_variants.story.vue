@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import DtBreadcrumbs from './breadcrumbs';
-import DtBreadcrumbItem from './breadcrumb_item';
+import DtBreadcrumbs from './breadcrumbs.vue';
+import DtBreadcrumbItem from './breadcrumb_item.vue';
 
 export default {
   name: 'DtBreadcrumbsVariants',

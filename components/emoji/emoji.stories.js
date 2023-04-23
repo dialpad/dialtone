@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
-import DtEmoji from './emoji';
-import DtEmojiMdx from './emoji.mdx';
+import DtEmoji from './emoji.vue';
+
 import DtEmojiDefaultTemplate from './emoji_default.story.vue';
 import DtEmojiVariantsTemplate from './emoji_variants.story.vue';
 
@@ -12,9 +12,9 @@ export const argsData = {
 
 export const argTypesData = {
   size: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(ICON_SIZE_MODIFIERS),
     },
   },
 };
@@ -26,17 +26,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtEmojiMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -62,4 +51,4 @@ CustomEmoji.args = {
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

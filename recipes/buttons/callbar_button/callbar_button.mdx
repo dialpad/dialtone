@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeCallbarButton from './callbar_button';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as CallbarButtonStories from './callbar_button.stories';
+
+<Meta of={CallbarButtonStories}/>
 
 # Callbar Button
 
@@ -27,7 +30,7 @@ import DtRecipeCallbarButton from './callbar_button';
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

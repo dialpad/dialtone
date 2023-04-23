@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import DtNoticeContent from './notice_content';
+import DtNoticeContent from './notice_content.vue';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 
 // Constants
@@ -25,7 +25,7 @@ describe('DtNoticeContent tests', function () {
     propsData = basePropsData;
     slotsData = baseSlotsData;
     wrapper = shallowMount(DtNoticeContent, {
-      propsData: propsData,
+      propsData,
       slots: slotsData,
       localVue: this.localVue,
     });

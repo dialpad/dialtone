@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import DtRootLayout from './root_layout';
+import DtRootLayout from './root_layout.vue';
 
 export default {
   name: 'DtRootLayoutDefault',

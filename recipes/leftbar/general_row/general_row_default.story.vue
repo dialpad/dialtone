@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import DtRecipeGeneralRow from './general_row';
+import DtRecipeGeneralRow from './general_row.vue';
 
 export default {
   name: 'DtRecipeGeneralRowDefault',

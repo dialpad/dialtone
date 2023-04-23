@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import Presence from './presence.vue';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as PresesnceStories from './presence.stories';
+
+<Meta of={PresesnceStories}/>
 
 # Presence
 
@@ -24,7 +27,7 @@ By default, it's set to 'active'.
 
 ## Props, Slots & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

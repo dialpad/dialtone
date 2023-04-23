@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import DtAvatar from './avatar';
+import DtAvatar from './avatar.vue';
 
 export default {
   name: 'DtAvatarWithPresence',

@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import DtRecipeTopBannerInfo from './top_banner_info';
+import DtRecipeTopBannerInfo from './top_banner_info.vue';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 

@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeUnreadChip from './unread_chip.vue';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as UnreadChipStories from './unread_chip.stories';
+
+<Meta of={UnreadChipStories}/>
 
 # Leftbar Unread Chip
 
@@ -21,7 +24,7 @@ import DtRecipeUnreadChip from './unread_chip.vue';
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

@@ -1,5 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import PresenceMdx from './presence.mdx';
+
 import Presence from './presence.vue';
 import { PRESENCE_STATES_LIST } from './presence_constants';
 import PresenceDefaultTemplate from './presence_default.story.vue';
@@ -12,9 +12,9 @@ export const argTypesData = {
         summary: 'string',
       },
     },
+    options: [...PRESENCE_STATES_LIST],
     control: {
       type: 'select',
-      options: [...PRESENCE_STATES_LIST],
     },
   },
   srText: {
@@ -30,17 +30,6 @@ export default {
   component: Presence,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: PresenceMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -61,4 +50,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

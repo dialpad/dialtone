@@ -74,10 +74,10 @@
 </template>
 
 <script>
-import DtRecipeComboboxWithPopover from './combobox_with_popover';
-import DtInput from '@/components/input/input';
-import DtListItem from '@/components/list_item/list_item';
-import DtCheckbox from '@/components/checkbox/checkbox';
+import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
+import DtInput from '@/components/input/input.vue';
+import DtListItem from '@/components/list_item/list_item.vue';
+import DtCheckbox from '@/components/checkbox/checkbox.vue';
 
 export default {
   name: 'DtRecipeComboboxWithPopoverDefault',

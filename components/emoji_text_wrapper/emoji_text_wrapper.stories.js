@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
-import DtEmojiTextWrapperMdx from './emoji_text_wrapper.mdx';
+
 import DtEmojiTextWrapperDefaultTemplate from './emoji_text_wrapper_default.story.vue';
 import DtEmojiTextWrapperVariantsTemplate from './emoji_text_wrapper_variants.story.vue';
 
@@ -24,9 +24,9 @@ export const argTypesData = {
 
   // Props
   size: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(ICON_SIZE_MODIFIERS),
     },
   },
   elementType: {
@@ -47,17 +47,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtEmojiTextWrapperMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -80,4 +69,4 @@ Default.args = {
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

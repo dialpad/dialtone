@@ -1,14 +1,16 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeContactRow from './contact_row';
-import DtRecipeContactRowMdx from './contact_row.mdx';
+import DtRecipeContactRow from './contact_row.vue';
+
 import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
 import DtRecipeContactRowVariantsTemplate from './contact_row_variants.story.vue';
 import { AVATAR_PRESENCE_STATES } from '@/components/avatar/avatar_constants';
-const defaultImage = require('@/components/avatar/person.png');
+import defaultImage from '@/components/avatar/person.png';
 
 // Default Prop Values
 export const argsData = {
+  name: 'Jaqueline Nackos',
+  avatarSrc: defaultImage,
   callButtonTooltip: 'Call',
   hasUnreads: true,
   unreadCount: '55',
@@ -19,20 +21,10 @@ export const argsData = {
 };
 
 export const argTypesData = {
-  // Props
-
-  name: {
-    defaultValue: 'Jaqueline Nackos',
-  },
-
-  avatarSrc: {
-    defaultValue: defaultImage,
-  },
-
   avatarPresence: {
+    options: Object.values(AVATAR_PRESENCE_STATES),
     control: {
       type: 'select',
-      options: Object.values(AVATAR_PRESENCE_STATES),
     },
     table: {
       defaultValue: {
@@ -83,9 +75,6 @@ export default {
     controls: {
       sort: 'requiredFirst',
     },
-    docs: {
-      page: DtRecipeContactRowMdx,
-    },
     options: {
       showPanel: true,
     },
@@ -109,4 +98,4 @@ export const Default = DefaultTemplate.bind({});
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

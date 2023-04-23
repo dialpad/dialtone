@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import InputDecorator from './input';
+import InputDecorator from './input.vue';
 
 export default {
   name: 'InputsDecorator',

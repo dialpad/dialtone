@@ -1,13 +1,9 @@
-import { Meta, Subtitle, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Subtitle, Story, Canvas } from '@storybook/blocks';
 import { DocImg } from '../components'
 
 <Meta title="Docs/Storybook/File Structure" />
 
 # File Structure
-
-<Subtitle>
-  Best Practices For Locating Stories
-</Subtitle>
 
 ## File Naming
 
@@ -17,7 +13,7 @@ All files that end with `*.story.vue` will get parsed as single file component s
 
 All files that end with `*.stories.js` will get parsed as stories.
 
-All files that end with `*.stories.mdx` will get parsed as documentation.
+All files that end with `*.mdx` will get parsed as documentation.
 
 For your stories to be registered, they must adhere to the naming scheme just described.
 
@@ -37,12 +33,12 @@ Individual component stories should be colocated in their respective subdirector
 
 docs/
   component_driven_development/
-    writing_component_tests.stories.mdx
+    writing_component_tests.mdx
     ...
   storybook/
-    getting_started.stories.mdx
+    getting_started.mdx
     ...
-  welcome.stories.mdx
+  welcome.mdx
   ...
 components/
   input

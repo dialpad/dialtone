@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtCheckboxGroup from './checkbox_group';
-import CheckboxGroupMdx from './checkbox_group.mdx';
+import DtCheckboxGroup from './checkbox_group.vue';
+
 import CheckboxGroupDefaultTemplate from './checkbox_group_default.story.vue';
 import CheckboxGroupVariantsTemplate from './checkbox_group_variants.story.vue';
 
@@ -128,17 +128,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: CheckboxGroupMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -156,12 +145,6 @@ Default.args = {};
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
 Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
   options: {
     showPanel: false,
   },

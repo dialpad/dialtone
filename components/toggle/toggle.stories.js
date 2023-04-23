@@ -2,12 +2,14 @@ import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import ToggleDefault from './toggle_default.story.vue';
 import ToggleVariants from './toggle_variants.story.vue';
-import ToggleMdx from './toggle.mdx';
-import DtToggle from './toggle';
+
+import DtToggle from './toggle.vue';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 // Default Prop Values
 export const argsData = {
+  default: 'Toggle Default',
+  checked: false,
   onChange: action('change'),
   labelClass: 'd-mr6',
 };
@@ -18,7 +20,6 @@ export const argTypesData = {
   default: {
     control: 'text',
     description: 'Used as a way to set either a label or a label element for the toggle',
-    defaultValue: 'Toggle Default',
     table: {
       type: {
         summary: 'VNode',
@@ -29,11 +30,10 @@ export const argTypesData = {
   // Props
   checked: {
     description: 'Used to set the initial state of the toggle. Setting "mixed" means it gets the indeterminate state.',
+    options: TOGGLE_CHECKED_VALUES,
     control: {
       type: 'select',
-      options: TOGGLE_CHECKED_VALUES,
     },
-    defaultValue: false,
     table: {
       category: 'props',
       type: {
@@ -47,9 +47,9 @@ export const argTypesData = {
 
   size: {
     description: 'Used to set the size of the toggle',
+    options: Object.keys(TOGGLE_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(TOGGLE_SIZE_MODIFIERS),
     },
   },
 
@@ -111,9 +111,6 @@ export default {
     controls: {
       sort: 'requiredFirst',
     },
-    docs: {
-      page: ToggleMdx,
-    },
     options: {
       showPanel: true,
     },
@@ -144,12 +141,6 @@ Default.parameters = {
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
 Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
   options: {
     showPanel: false,
   },

@@ -1,6 +1,7 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtCard from './card';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as CardStories from './card.stories';
 
+<Meta of={CardStories}/>
 # Card
 
 <Subtitle>
@@ -18,7 +19,7 @@ Base card style with content.
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

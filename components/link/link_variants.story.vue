@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import DtLink from './link';
+import DtLink from './link.vue';
 import { LINK_VARIANTS, INVERTED } from './link_constants';
 
 export default {

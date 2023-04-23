@@ -179,7 +179,7 @@
 </template>
 
 <script>
-import DtButton from './button';
+import DtButton from './button.vue';
 import { DtIcon } from '@/components/icon';
 
 export default {

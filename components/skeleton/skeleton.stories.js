@@ -1,10 +1,11 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtSkeleton from './skeleton';
-import DtSkeletonMdx from './skeleton.mdx';
+import DtSkeleton from './skeleton.vue';
+
 import DtSkeletonDefaultTemplate from './skeleton_default.story.vue';
 import DtSkeletonVariantsTemplate from './skeleton_variants.story.vue';
 
 export const argsData = {
+  ariaLabel: '',
 };
 
 export const argTypesData = {
@@ -71,9 +72,6 @@ export const argTypesData = {
       },
     },
   },
-  ariaLabel: {
-    defaultValue: '',
-  },
 };
 
 // Story Collection
@@ -81,15 +79,8 @@ export default {
   title: 'Components/Skeleton',
   component: DtSkeleton,
   argTypes: argTypesData,
+  args: argsData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtSkeletonMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -113,4 +104,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

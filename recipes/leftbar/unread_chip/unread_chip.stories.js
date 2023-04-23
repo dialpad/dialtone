@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeUnreadChip from './unread_chip.vue';
-import DtRecipeUnreadChipMdx from './unread_chip.mdx';
+
 import DtRecipeUnreadChipDefaultTemplate from './unread_chip_default.story.vue';
 import DtRecipeUnreadChipVariantsTemplate from './unread_chip_variants.story.vue';
 import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
@@ -14,16 +14,16 @@ export const argsData = {
 export const argTypesData = {
   // Props
   kind: {
+    options: UNREAD_BADGE_KINDS,
     control: {
       type: 'select',
-      options: UNREAD_BADGE_KINDS,
     },
   },
 
   direction: {
+    options: UNREAD_BADGE_DIRECTIONS,
     control: {
       type: 'select',
-      options: UNREAD_BADGE_DIRECTIONS,
     },
   },
 
@@ -63,17 +63,6 @@ export default {
   argTypes: argTypesData,
   decorators: [decorator],
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeUnreadChipMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -98,4 +87,4 @@ Default.args = {
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

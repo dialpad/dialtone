@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtCombobox from './combobox';
-import DtComboboxMdx from './combobox.mdx';
+import DtCombobox from './combobox.vue';
+
 import DtComboboxDefaultTemplate from './combobox_default.story.vue';
 import { LABEL_SIZES } from './combobox_constants';
 
@@ -10,6 +10,11 @@ export const argsData = {
   label: 'Label Text',
   labelVisible: true,
   showList: true,
+  size: LABEL_SIZES.DEFAULT,
+  labelVisible: true,
+  emptyList: false,
+  loading: false,
+  clickOnSelect: false,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
@@ -57,19 +62,15 @@ export const argTypesData = {
     },
   },
   size: {
+    options: Object.values(LABEL_SIZES),
     control: {
       type: 'select',
-      options: Object.values(LABEL_SIZES),
     },
-    defaultValue: LABEL_SIZES.DEFAULT,
     table: {
       defaultValue: {
         summary: LABEL_SIZES.DEFAULT,
       },
     },
-  },
-  labelVisible: {
-    defaultValue: true,
   },
   description: {
     control: {
@@ -104,15 +105,6 @@ export const argTypesData = {
         summary: 'null',
       },
     },
-  },
-  emptyList: {
-    defaultValue: false,
-  },
-  loading: {
-    defaultValue: false,
-  },
-  clickOnSelect: {
-    defaultValue: false,
   },
 
   // Action Event Handlers
@@ -188,9 +180,6 @@ export default {
   parameters: {
     controls: {
       sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtComboboxMdx,
     },
     options: {
       showPanel: true,

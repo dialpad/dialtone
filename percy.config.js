@@ -1,9 +1,6 @@
 module.exports = {
   version: 2,
   storybook: {
-    queryParams: {
-      viewMode: 'docs',
-    },
     include: [
       'Visual Testing/Combobox With Popover: Default',
       'Visual Testing/Combobox Multi-Select: Default',

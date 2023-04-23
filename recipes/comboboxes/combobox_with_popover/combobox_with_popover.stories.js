@@ -1,8 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeComboboxWithPopover from './combobox_with_popover';
-import DtRecipeComboboxWithPopoverMdx from './combobox_with_popover.mdx';
-import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story';
+import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
+
+import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
 import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/popover_constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
 import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
@@ -11,6 +11,13 @@ import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 export const argsData = {
   label: 'Label Text',
   labelVisible: true,
+  size: LABEL_SIZES.DEFAULT,
+  contentWidth: 'anchor',
+  appendTo: 'body',
+  padding: 'small',
+  maxHeight: '300px',
+  emptyList: false,
+  loading: false,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
@@ -68,19 +75,15 @@ export const argTypesData = {
     },
   },
   size: {
+    options: Object.values(LABEL_SIZES),
     control: {
       type: 'select',
-      options: Object.values(LABEL_SIZES),
     },
-    defaultValue: LABEL_SIZES.DEFAULT,
     table: {
       defaultValue: {
         summary: LABEL_SIZES.DEFAULT,
       },
     },
-  },
-  labelVisible: {
-    defaultValue: true,
   },
   description: {
     control: {
@@ -102,10 +105,9 @@ export const argTypesData = {
     },
   },
   contentWidth: {
-    defaultValue: 'anchor',
+    options: POPOVER_CONTENT_WIDTHS,
     control: {
       type: 'select',
-      options: POPOVER_CONTENT_WIDTHS,
     },
     table: {
       defaultValue: {
@@ -114,7 +116,6 @@ export const argTypesData = {
     },
   },
   appendTo: {
-    defaultValue: 'body',
     table: {
       defaultValue: {
         summary: 'body',
@@ -122,14 +123,10 @@ export const argTypesData = {
     },
   },
   padding: {
-    defaultValue: 'small',
+    options: Object.keys(DROPDOWN_PADDING_CLASSES),
     control: {
       type: 'select',
-      options: Object.keys(DROPDOWN_PADDING_CLASSES),
     },
-  },
-  maxHeight: {
-    defaultValue: '300px',
   },
   onBeginningOfList: {
     table: {
@@ -152,12 +149,6 @@ export const argTypesData = {
         summary: 'null',
       },
     },
-  },
-  emptyList: {
-    defaultValue: false,
-  },
-  loading: {
-    defaultValue: false,
   },
 
   // Action Event Handlers
@@ -225,17 +216,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeComboboxWithPopoverMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates

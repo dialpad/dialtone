@@ -1,6 +1,6 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeTimePill from './time_pill';
-import DtRecipeTimePillMdx from './time_pill.mdx';
+import DtRecipeTimePill from './time_pill.vue';
+
 import DtRecipeTimePillDefaultTemplate from './time_pill_default.story.vue';
 
 // Default Prop Values
@@ -35,11 +35,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtRecipeTimePillMdx,
-    },
-  },
 };
 
 // Templates

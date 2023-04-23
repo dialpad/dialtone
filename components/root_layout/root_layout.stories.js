@@ -2,13 +2,14 @@
 // import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
-import DtRootLayout from './root_layout';
-import DtRootLayoutMdx from './root_layout.mdx';
+import DtRootLayout from './root_layout.vue';
+
 import DtRootLayoutDefaultTemplate from './root_layout_default.story.vue';
 import DtRootLayoutStickyTemplate from './root_layout_sticky.story.vue';
 
 // Default Prop Values
 export const argsData = {
+  sidebarPosition: 'left',
   header: '<div class="d-h100p d-bgc-purple-100">Header</div>',
   footer: '<div class="d-h100p d-bgc-gold-100">Footer</div>',
   sidebar: '<div class="d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
@@ -88,10 +89,9 @@ export const argTypesData = {
 
   // Props
   sidebarPosition: {
-    defaultValue: 'left',
+    options: Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS),
     control: {
       type: 'select',
-      options: Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS),
     },
   },
 };
@@ -103,18 +103,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRootLayoutMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-    layout: 'fullscreen',
-  },
 };
 
 // Templates

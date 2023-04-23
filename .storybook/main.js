@@ -1,31 +1,27 @@
-import { mergeConfig } from 'vite';
-import { fileURLToPath } from 'url';
-
-export default {
-  stories: ['../components/**/*.stories.@(js|mdx)', '../recipes/**/*.stories.@(js|mdx)', '../docs/**/*.stories.@(js|mdx)', '../visual_testing/*.stories.@(js|mdx)'],
-  addons: ['@storybook/addon-docs', '@storybook/addon-controls', '@storybook/addon-actions', '@storybook/addon-links', '@storybook/addon-a11y', '@storybook/addon-viewport', '@storybook/addon-backgrounds', '@storybook/addon-styling', '@storybook/addon-mdx-gfm'],
+/** @type { import('@storybook/vue-vite').StorybookConfig } */
+const config = {
+  stories: [
+    '../components/**/*.stories.@(js|jsx|ts|tsx)',
+    '../components/**/*.mdx',
+    '../recipes/**/*.stories.@(js|jsx|ts|tsx)',
+    '../recipes/**/*.mdx',
+    '../docs/**/*.mdx',
+    '../visual_testing/*.stories.@(js|jsx|ts|tsx)',
+    '../visual_testing/*.mdx',
+  ],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "@storybook/addon-a11y",
+    "@storybook/addon-styling",
+  ],
   framework: {
-    name: '@storybook/vue-vite',
-    options: {}
-  },
-  core: {
-    builder: '@storybook/builder-vite',
+    name: "@storybook/vue-vite",
+    options: {},
   },
   docs: {
-    autodocs: true
+    autodocs: "tag",
   },
-  async viteFinal(config, { configType }) {
-    return mergeConfig(config, {
-      server: {
-        fs: {
-          strict: false
-        }
-      },
-      resolve: {
-        alias: {
-          '@': fileURLToPath(new URL('../', import.meta.url)),
-        },
-      },
-    });
-  }
 };
+export default config;

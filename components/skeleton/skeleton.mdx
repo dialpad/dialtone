@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtSkeleton from './skeleton';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as SkeletonStories from './skeleton.stories';
+
+<Meta of={SkeletonStories}/>
 
 # Skeleton
 
@@ -27,7 +30,7 @@ indicate they are loading. Use 2px rounded corners apart from circles. For text,
 
 ## Props
 
-<ArgsTable of={DtSkeleton} />
+<Controls />
 
 ## Usage
 

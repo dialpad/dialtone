@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtEmoji from './emoji';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as EmojiStories from './emoji.stories';
+
+<Meta of={EmojiStories}/>
 
 # Emoji
 
@@ -19,7 +22,7 @@ import DtEmoji from './emoji';
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

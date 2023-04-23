@@ -1,17 +1,20 @@
-import InlineComponentsMdx from './inline_components.mdx';
+
 
 export default {
   title: 'Visual Testing/Inline Components',
   args: {
     show: true,
   },
+
   parameters: {
-    docs: {
-      page: InlineComponentsMdx,
-    },
     options: { showPanel: false },
     a11y: {
       disable: true,
+    },
+    percy: {
+      queryParams: {
+        viewMode: 'docs',
+      },
     },
   },
 };

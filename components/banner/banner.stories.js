@@ -1,8 +1,10 @@
-import DtBanner from './banner';
-import BaseBannerMdx from './banner.mdx';
+import DtBanner from './banner.vue';
+
 import BannerDefault from './banner_default.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { argsData, argTypesData } from '../notice/notice.stories.js';
+
+import backgroundImage from '../../docs/assets/dialpad-gradient.png';
 
 argTypesData.role = {
   table: {
@@ -30,25 +32,12 @@ export { argsData, argTypesData };
 export default {
   title: 'Components/Banner',
   component: DtBanner,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: BaseBannerMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.Data$/,
 };
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, BannerDefault);
-
-const backgroundImage = require('../../docs/assets/dialpad-gradient.png');
 
 export const Default = Template.bind({});
 Default.args = {

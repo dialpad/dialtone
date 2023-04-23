@@ -1,6 +1,6 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtCard from './card';
-import DtCardMdx from './card.mdx';
+import DtCard from './card.vue';
+
 import DtCardDefaultTemplate from './card_default.story.vue';
 
 // Default Prop Values
@@ -61,15 +61,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtCardMdx,
-    },
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: { showPanel: true },
-  },
 };
 
 // Templates

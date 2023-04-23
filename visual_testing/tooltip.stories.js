@@ -5,7 +5,7 @@ import {
   Variants,
   Flip,
 } from '@/components/tooltip/tooltip.stories.js';
-import TooltipMdx from '@/visual_testing/tooltip.mdx';
+
 
 import DtTooltip from '@/components/tooltip/tooltip.vue';
 
@@ -27,9 +27,6 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
-    docs: {
-      page: TooltipMdx,
-    },
     options: { showPanel: false },
     a11y: {
       disable: true,

@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtListItem from './list_item';
-import DtListItemMdx from './list_item.mdx';
+import DtListItem from './list_item.vue';
+
 import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './list_item_constants';
 import DtListItemDefaultTemplate from './list_item_default.story.vue';
 import DtListItemCustomTemplate from './list_item_custom.story.vue';
@@ -107,9 +107,9 @@ export const argTypesData = {
       type: { summary: 'string' },
       defaultValue: { summary: LIST_ITEM_TYPES.DEFAULT },
     },
+    options: Object.values(LIST_ITEM_TYPES),
     control: {
       type: 'select',
-      options: Object.values(LIST_ITEM_TYPES),
     },
   },
   navigationType: {
@@ -150,17 +150,6 @@ export default {
   argTypes: argTypesData,
   decorators: [decorator],
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtListItemMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates

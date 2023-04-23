@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as RadioGroupStories from './radio_group.stories';
+
+<Meta of={RadioGroupStories}/>
 
 # Radio Groups
 
@@ -24,7 +28,7 @@ contain one or more Radios which users will make a selection from.
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

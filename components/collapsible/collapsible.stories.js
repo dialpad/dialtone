@@ -2,8 +2,12 @@ import {
   DtCollapsible,
 } from './';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import CollapsibleMdx from './collapsible.mdx';
+
 import DtCollapsibleDefaultStory from './collapsible_default.story.vue';
+
+export const argsData = {
+  anchorText: 'Click me to toggle Content',
+};
 
 const argTypesData = {
   // Slots
@@ -27,7 +31,6 @@ const argTypesData = {
   // Props
   anchorText: {
     description: 'Text on the anchor if slot is unused.',
-    defaultValue: 'Click me to toggle Content',
     table: {
       type: { summary: 'string' },
     },
@@ -60,18 +63,8 @@ export default {
   title: 'Components/Collapsible',
   component: DtCollapsible,
   argTypes: argTypesData,
+  args: argsData,
   excludeStories: /.Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: CollapsibleMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import DtRecipeTimePill from './time_pill';
+import DtRecipeTimePill from './time_pill.vue';
 
 export default {
   name: 'DtRecipeTimePillDefault',

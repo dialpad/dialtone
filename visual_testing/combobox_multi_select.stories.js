@@ -4,7 +4,7 @@ import {
   Default,
   WithMaxSelectValidation,
 } from '@/recipes/comboboxes/combobox_multi_select/combobox_multi_select.stories.js';
-import ComboboxMultiSelect from './combobox_multi_select.mdx';
+
 
 import DtRecipeComboboxMultiSelect from '@/recipes/comboboxes/combobox_multi_select/combobox_multi_select.vue';
 
@@ -12,9 +12,6 @@ export default {
   title: 'Visual Testing/Combobox Multi-Select',
   component: DtRecipeComboboxMultiSelect,
   parameters: {
-    docs: {
-      page: ComboboxMultiSelect,
-    },
     options: { showPanel: false },
     a11y: {
       disable: true,

@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeGroupRow from './group_row';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as GroupRowStories from './group_row.stories';
+
+<Meta of={GroupRowStories}/>
 
 # Leftbar Group Row
 
@@ -21,7 +24,7 @@ import DtRecipeGroupRow from './group_row';
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

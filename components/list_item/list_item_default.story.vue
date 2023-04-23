@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import DtListItem from './list_item';
+import DtListItem from './list_item.vue';
 import { DtIcon } from '@/components/icon';
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 

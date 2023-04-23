@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import DtNoticeIcon from './notice_icon';
+import DtNoticeIcon from './notice_icon.vue';
 import { createLocalVue, mount } from '@vue/test-utils';
 import { DtIcon } from '@/components/icon';
 

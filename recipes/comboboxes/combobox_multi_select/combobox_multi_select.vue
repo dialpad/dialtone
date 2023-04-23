@@ -268,7 +268,7 @@ export default {
      */
     size: {
       type: String,
-      default: null,
+      default: 'md',
       validator: (t) => Object.values(MULTI_SELECT_SIZES).includes(t),
     },
 

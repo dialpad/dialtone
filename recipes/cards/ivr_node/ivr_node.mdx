@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeIvrNode from './ivr_node';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as IvrNodeStories from './ivr_node.stories';
+
+<Meta of={IvrNodeStories}/>
 
 # IVR Node
 
@@ -18,7 +21,7 @@ The base style contains a top connector indicator.
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

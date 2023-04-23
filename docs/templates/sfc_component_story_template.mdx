@@ -1,3 +1,5 @@
+import { Meta, Subtitle } from '@storybook/blocks';
+
 <Meta title="Docs/Templates/SFC Component Story Template" />
 
 # SFC Component Story Template
@@ -15,9 +17,9 @@
     <!--
       We can also bind any slot data that the user has entered into the storybook controls. In this example we
       conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-      
+
       The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-      
+
       We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
       same name.
     -->
@@ -34,7 +36,7 @@
 </template>
 
 <script>
-import DtMyComponent from './my_component';
+import DtMyComponent from './my_component.vue';
 
 export default {
   name: 'MyComponentDefault',

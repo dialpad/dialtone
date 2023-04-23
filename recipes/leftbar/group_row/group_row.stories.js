@@ -1,19 +1,17 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeGroupRow from './group_row';
-import DtRecipeGroupRowMdx from './group_row.mdx';
+import DtRecipeGroupRow from './group_row.vue';
+
 import DtRecipeGroupRowDefaultTemplate from './group_row_default.story.vue';
 import DtRecipeGroupRowVariantsTemplate from './group_row_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
   onClick: action('click'),
+  names: 'Jaqueline Nackos, Lori Smith',
 };
 
 export const argTypesData = {
-  names: {
-    defaultValue: 'Jaqueline Nackos, Lori Smith',
-  },
 
   // Slots
 
@@ -43,17 +41,6 @@ export default {
   argTypes: argTypesData,
   decorators: [decorator],
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeGroupRowMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -74,4 +61,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

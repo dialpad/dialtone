@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtRecipeCallbarButton, { VALID_WIDTH_SIZE } from './callbar_button';
-import DtRecipeCallbarButtonMdx from './callbar_button.mdx';
+import DtRecipeCallbarButton, { VALID_WIDTH_SIZE } from './callbar_button.vue';
+
 import DtRecipeCallbarButtonDefaultTemplate from './callbar_button_default.story.vue';
 import DtRecipeCallbarButtonVariantsTemplate from './callbar_button_variants.story.vue';
 import DtRecipeCallbarButtonCallbarTemplate from './callbar_button_callbar.story.vue';
@@ -10,6 +10,7 @@ const iconsList = getIconNames();
 
 // Default Prop Values
 export const argsData = {
+  buttonWidthSize: 'xl',
   onClick: action('click'),
 };
 
@@ -52,10 +53,9 @@ export const argTypesData = {
     control: 'text',
   },
   buttonWidthSize: {
-    defaultValue: 'xl',
+    options: VALID_WIDTH_SIZE,
     control: {
       type: 'select',
-      options: VALID_WIDTH_SIZE,
     },
   },
 
@@ -124,17 +124,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeCallbarButtonMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -164,7 +153,7 @@ Default.args = {
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };
 
 export const Callbar = CallbarTemplate.bind({});
 Callbar.args = {};
@@ -179,7 +168,5 @@ Callbar.parameters = {
       ],
     },
   },
-  controls: { disable: true },
-  actions: { disable: true },
   options: { showPanel: false },
 };

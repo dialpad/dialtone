@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ContactInfoStories from './contact_info.stories';
+
+<Meta of={ContactInfoStories}/>
 
 # DtRecipeContactInfo
 
@@ -37,7 +41,7 @@ in avatar.
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

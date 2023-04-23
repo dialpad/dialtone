@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtKeyboardShortcut from './keyboard_shortcut.vue';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as KeyboardShortcutStories from './keyboard_shortcut.stories';
+
+<Meta of={KeyboardShortcutStories}/>
 
 # Keyboard Shortcut
 
@@ -25,7 +28,7 @@ prop, see the [Props, Slots & Events section](#props-slots--events).
 
 ## Props, Slots & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

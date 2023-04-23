@@ -1,7 +1,7 @@
 import { generateTemplate } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import DtValidationMessages from './validation_messages';
-import BaseValidationMessagesMdx from './validation_messages.mdx';
+import DtValidationMessages from './validation_messages.vue';
+
 
 // Constants
 const VALIDATION_MESSAGES = [{
@@ -29,17 +29,6 @@ export const argTypesData = {
 export default {
   title: 'Components/Validation Messages',
   component: DtValidationMessages,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: BaseValidationMessagesMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -82,8 +71,6 @@ const VariantsTemplate = () => {
 };
 export const Variants = VariantsTemplate.bind({});
 Variants.parameters = {
-  controls: { hideNoControlsWarning: true, disable: true },
-  actions: { disable: true },
   options: { showPanel: false },
   a11y: {
     config: {

@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeIvrNode from './ivr_node';
-import DtRecipeIvrNodeMdx from './ivr_node.mdx';
+import DtRecipeIvrNode from './ivr_node.vue';
+
 import DtRecipeIvrNodeDefaultTemplate from './ivr_node_default.story.vue';
 import { IVR_NODE_ICON_TYPES } from './ivr_node_constants';
 
@@ -56,13 +56,12 @@ export const argTypesData = {
     },
   },
   nodeType: {
+    options: Object.keys(IVR_NODE_ICON_TYPES),
     control: {
       type: 'select',
-      options: Object.keys(IVR_NODE_ICON_TYPES),
     },
   },
   isSelected: {
-    defaultValue: false,
     control: {
       type: 'boolean',
     },
@@ -90,15 +89,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtRecipeIvrNodeMdx,
-    },
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: { showPanel: true },
-  },
 };
 
 // Templates

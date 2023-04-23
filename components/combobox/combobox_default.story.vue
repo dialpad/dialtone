@@ -59,10 +59,10 @@
 </template>
 
 <script>
-import DtAvatar from '../avatar/avatar';
-import DtCombobox from './combobox';
-import DtInput from '../input/input';
-import DtListItem from '../list_item/list_item';
+import DtAvatar from '../avatar/avatar.vue';
+import DtCombobox from './combobox.vue';
+import DtInput from '../input/input.vue';
+import DtListItem from '../list_item/list_item.vue';
 
 export default {
   name: 'DtComboboxDefault',

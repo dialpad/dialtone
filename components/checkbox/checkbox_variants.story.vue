@@ -216,7 +216,7 @@
 </template>
 
 <script>
-import DtCheckbox from './checkbox';
+import DtCheckbox from './checkbox.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {

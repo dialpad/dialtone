@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtToast from './toast';
-import DtToastMdx from './toast.mdx';
+import DtToast from './toast.vue';
+
 import DtToastDefaultTemplate from './toast_default.story.vue';
 import { NOTICE_KINDS } from '../notice';
 
@@ -9,6 +9,7 @@ const iconsList = getIconNames();
 
 // Default Prop Values
 export const argsData = {
+  duration: 6000,
   onClose: action('close'),
   onClick: action('click'),
   visuallyHiddenCloseLabel: 'Close Toast',
@@ -69,9 +70,9 @@ export const argTypesData = {
     },
   },
   kind: {
+    options: NOTICE_KINDS,
     control: {
       type: 'select',
-      options: NOTICE_KINDS,
     },
   },
   show: {
@@ -82,7 +83,6 @@ export const argTypesData = {
     },
   },
   duration: {
-    defaultValue: 6000,
     table: {
       defaultValue: {
         summary: 'null',
@@ -117,17 +117,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtToastMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates

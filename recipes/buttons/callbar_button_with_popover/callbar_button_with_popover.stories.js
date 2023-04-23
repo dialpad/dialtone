@@ -1,17 +1,18 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
-import DtRecipeCallbarButtonWithPopoverMdx from './callbar_button_with_popover.mdx';
+import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue';
+
 import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './callbar_button_with_popover_default.story.vue';
 import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_with_popover_variants.story.vue';
 
 import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '@/components/popover/popover_constants';
-import { VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button';
+import { VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button.vue';
 
 const iconsList = getIconNames();
 
 // Default Prop Values
 export const argsData = {
+  buttonWidthSize: 'xl',
   onArrowClick: action('arrowClick'),
   onClick: action('click'),
 };
@@ -75,10 +76,9 @@ export const argTypesData = {
     control: 'text',
   },
   buttonWidthSize: {
-    defaultValue: 'xl',
+    options: VALID_WIDTH_SIZE,
     control: {
       type: 'select',
-      options: VALID_WIDTH_SIZE,
     },
   },
   textClass: {
@@ -159,15 +159,15 @@ export const argTypesData = {
 
   // Popover props
   initialFocusElement: {
+    options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
     control: {
       type: 'select',
-      options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
     },
   },
   placement: {
+    options: POPOVER_DIRECTIONS,
     control: {
       type: 'select',
-      options: POPOVER_DIRECTIONS,
     },
   },
 
@@ -191,17 +191,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeCallbarButtonWithPopoverMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -232,4 +221,4 @@ Default.args = {
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false } };

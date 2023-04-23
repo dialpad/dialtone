@@ -1,52 +1,47 @@
 module.exports = {
-  extends: [
-    'standard',
-    'semistandard',
-    'plugin:vue/recommended',
-    'plugin:vuejs-accessibility/recommended',
-  ],
+  extends: ['standard', 'semistandard', 'plugin:vue/recommended', 'plugin:vuejs-accessibility/recommended', 'plugin:storybook/recommended'],
   env: {
     browser: true,
     node: true,
     es2022: true,
-    amd: true,
+    amd: true
   },
   rules: {
     camelcase: ['error', {
-      properties: 'never', // Ignore snake_case in JSON properties, which are often params.
-      allow: ['^opt_'], // Allow opt_varname arguments.
+      properties: 'never',
+      // Ignore snake_case in JSON properties, which are often params.
+      allow: ['^opt_'] // Allow opt_varname arguments.
     }],
+
     'comma-dangle': ['error', 'always-multiline'],
-    'no-console': ['warn', { allow: ['error', 'info'] }],
+    'no-console': ['warn', {
+      allow: ['error', 'info']
+    }],
     'max-len': ['error', {
       code: 120,
-      tabWidth: 2,
+      tabWidth: 2
     }],
     'prefer-promise-reject-errors': ['error', {
-      allowEmptyReject: true,
+      allowEmptyReject: true
     }],
     'vue/comma-dangle': ['error', 'always-multiline'],
     'vue/component-name-in-template-casing': ['error', 'kebab-case', {
-      registeredComponentsOnly: true,
+      registeredComponentsOnly: true
     }],
-
     // TODO remove these as the errors are fixed.
-    'vuejs-accessibility/label-has-for': [
-      'error',
-      {
-        required: {
-          some: ['nesting', 'id'],
-        },
-        allowChildren: true,
+    'vuejs-accessibility/label-has-for': ['error', {
+      required: {
+        some: ['nesting', 'id']
       },
-    ],
+      allowChildren: true
+    }],
     'vue/new-line-between-multi-line-property': ['warn'],
     'vue/html-comment-content-spacing': ['warn'],
     'vue/no-potential-component-option-typo': ['warn'],
     'vue/multi-word-component-names': ['off'],
     'vue/no-reserved-component-names': ['error', {
       disallowVueBuiltInComponents: true,
-      disallowVue3BuiltInComponents: true,
+      disallowVue3BuiltInComponents: true
     }],
     'vue/no-v-model-argument': ['warn'],
     'vue/padding-line-between-blocks': ['warn'],
@@ -63,72 +58,105 @@ module.exports = {
     'vue/no-static-inline-styles': ['error'],
     'vuejs-accessibility/iframe-has-title': 'warn',
     'vuejs-accessibility/aria-props': 'warn',
-
-    'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
-    quotes: ['error', 'single', { allowTemplateLiterals: true }],
+    'max-lines': ['warn', {
+      max: 300,
+      skipBlankLines: true,
+      skipComments: true
+    }],
+    quotes: ['error', 'single', {
+      allowTemplateLiterals: true
+    }],
     complexity: ['warn', 5],
-
     //             Vue core extensions
     // these all match regular non-vue ESLint rules,
     // but makes them apply to js within the vue template.
     'vue/array-bracket-spacing': ['error', 'never'],
-    'vue/arrow-spacing': ['error', { before: true, after: true }],
-    'vue/block-spacing': ['error', 'always'],
-    'vue/brace-style': ['error', '1tbs', { allowSingleLine: true }],
-    'vue/camelcase': ['error', {
-      properties: 'never', // Ignore snake_case in JSON properties, which are often params.
-      allow: ['^opt_'], // Allow opt_varname arguments.
+    'vue/arrow-spacing': ['error', {
+      before: true,
+      after: true
     }],
-    'vue/comma-spacing': ['error', { before: false, after: true }],
+    'vue/block-spacing': ['error', 'always'],
+    'vue/brace-style': ['error', '1tbs', {
+      allowSingleLine: true
+    }],
+    'vue/camelcase': ['error', {
+      properties: 'never',
+      // Ignore snake_case in JSON properties, which are often params.
+      allow: ['^opt_'] // Allow opt_varname arguments.
+    }],
+
+    'vue/comma-spacing': ['error', {
+      before: false,
+      after: true
+    }],
     'vue/comma-style': ['error', 'last'],
     'vue/dot-location': ['error', 'property'],
-    'vue/dot-notation': ['error', { allowKeywords: true }],
-    'vue/eqeqeq': ['error', 'always', { null: 'ignore' }],
+    'vue/dot-notation': ['error', {
+      allowKeywords: true
+    }],
+    'vue/eqeqeq': ['error', 'always', {
+      null: 'ignore'
+    }],
     'vue/func-call-spacing': ['error', 'never'],
-    'vue/key-spacing': ['error', { beforeColon: false, afterColon: true }],
-    'vue/keyword-spacing': ['error', { before: true, after: true }],
-    'vue/no-constant-condition': ['error', { checkLoops: false }],
+    'vue/key-spacing': ['error', {
+      beforeColon: false,
+      afterColon: true
+    }],
+    'vue/keyword-spacing': ['error', {
+      before: true,
+      after: true
+    }],
+    'vue/no-constant-condition': ['error', {
+      checkLoops: false
+    }],
     'vue/no-empty-pattern': 'error',
     'vue/no-extra-parens': ['error', 'functions'],
     'vue/no-irregular-whitespace': 'error',
     'vue/no-sparse-arrays': 'error',
-    'vue/object-curly-newline': ['error', { multiline: true, consistent: true }],
+    'vue/object-curly-newline': ['error', {
+      multiline: true,
+      consistent: true
+    }],
     'vue/object-curly-spacing': ['error', 'always'],
-    'vue/object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
-    'vue/operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before', '|>': 'before' } }],
+    'vue/object-property-newline': ['error', {
+      allowMultiplePropertiesPerLine: true
+    }],
+    'vue/operator-linebreak': ['error', 'after', {
+      overrides: {
+        '?': 'before',
+        ':': 'before',
+        '|>': 'before'
+      }
+    }],
     'vue/prefer-template': ['error'],
     'vue/space-in-parens': ['error', 'never'],
     'vue/space-infix-ops': 'error',
-    'vue/space-unary-ops': ['error', { words: true, nonwords: false }],
-    'vue/template-curly-spacing': ['error', 'never'],
+    'vue/space-unary-ops': ['error', {
+      words: true,
+      nonwords: false
+    }],
+    'vue/template-curly-spacing': ['error', 'never']
   },
-  overrides: [
-    {
-      files: ['**/*.test.js'],
-      plugins: [
-        'mocha',
-      ],
-      extends: [
-        'plugin:mocha/recommended',
-      ],
-      env: {
-        browser: true,
-        node: true,
-        mocha: true,
-      },
-      rules: {
-        'max-lines': 'off',
-        // disabled to allow the use of shared example closures
-        'mocha/no-setup-in-describe': 'off',
-        'mocha/no-exclusive-tests': 'error',
-        'mocha/no-hooks-for-single-case': 'off',
-      },
+  overrides: [{
+    files: ['**/*.test.js'],
+    plugins: ['mocha'],
+    extends: ['plugin:mocha/recommended'],
+    env: {
+      browser: true,
+      node: true,
+      mocha: true
     },
-    {
-      files: ['**/*.story.vue'],
-      rules: {
-        'vue/no-bare-strings-in-template': ['off'],
-      },
-    },
-  ],
+    rules: {
+      'max-lines': 'off',
+      // disabled to allow the use of shared example closures
+      'mocha/no-setup-in-describe': 'off',
+      'mocha/no-exclusive-tests': 'error',
+      'mocha/no-hooks-for-single-case': 'off'
+    }
+  }, {
+    files: ['**/*.story.vue'],
+    rules: {
+      'vue/no-bare-strings-in-template': ['off']
+    }
+  }]
 };

@@ -1,8 +1,8 @@
 import { action } from '@storybook/addon-actions';
-import DtNotice from './notice';
+import DtNotice from './notice.vue';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
 import NoticeDefault from './notice_default.story.vue';
-import DtNoticeMdx from './notice.mdx';
+
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
 const iconsList = getIconNames();
@@ -56,15 +56,15 @@ export const argTypesData = {
 
   // Props
   kind: {
+    options: NOTICE_KINDS,
     control: {
       type: 'select',
-      options: NOTICE_KINDS,
     },
   },
   role: {
+    options: NOTICE_ROLES,
     control: {
       type: 'select',
-      options: NOTICE_ROLES,
     },
   },
   show: {
@@ -103,9 +103,6 @@ export default {
   parameters: {
     controls: {
       sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtNoticeMdx,
     },
     options: {
       showPanel: true,

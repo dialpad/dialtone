@@ -4,7 +4,7 @@ import {
   Default,
   Variants,
 } from '@/components/popover/popover.stories.js';
-import PopoverMdx from '@/visual_testing/popover.mdx';
+
 
 import DtPopover from '@/components/popover/popover.vue';
 
@@ -21,9 +21,6 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
-    docs: {
-      page: PopoverMdx,
-    },
     options: { showPanel: false },
     a11y: {
       disable: true,

@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as PopoverStories from './popover.stories';
+
+<Meta of={PopoverStories}/>
 
 # Popovers
 
@@ -43,7 +47,7 @@ the look of the popover content between usages. To remove the padding from the c
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Basic Usage
 

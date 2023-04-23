@@ -215,9 +215,9 @@
 </template>
 
 <script>
-import DtDropdown from './dropdown';
+import DtDropdown from './dropdown.vue';
 import DtListItemGroup from '../list_item_group/list_item_group.vue';
-import DtDropdownSeparator from './dropdown_separator';
+import DtDropdownSeparator from './dropdown_separator.vue';
 import { DtListItem } from '../list_item';
 import { DtButton } from '../button';
 import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';

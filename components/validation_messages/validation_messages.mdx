@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ValidationMessagesStories from './validation_messages.stories';
+
+<Meta of={ValidationMessagesStories}/>
 
 # Validation Messages
 
@@ -35,7 +39,7 @@ our shared input components such as `dt-input`, `dt-radio-group`.
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

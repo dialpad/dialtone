@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import DtRadio from './radio';
+import DtRadio from './radio.vue';
 
 export default {
   name: 'RadioDefault',

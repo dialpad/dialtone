@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRadioGroup from './radio_group';
-import RadioGroupMdx from './radio_group.mdx';
+import DtRadioGroup from './radio_group.vue';
+
 import RadioGroupDefaultTemplate from './radio_group_default.story.vue';
 import RadioGroupVariantsTemplate from './radio_group_variants.story.vue';
 
@@ -120,17 +120,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: RadioGroupMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -144,12 +133,6 @@ Default.args = {};
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
 Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
   options: {
     showPanel: false,
   },

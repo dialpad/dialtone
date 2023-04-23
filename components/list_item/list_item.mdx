@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs';
+
+import * as ListItemStories from './list_item.stories';
+
+<Meta of={ListItemStories}/>
 
 # List Item
 
@@ -44,7 +48,7 @@ used when the list item has to support content that does not work with the defau
 
 ## Slots, Props and Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

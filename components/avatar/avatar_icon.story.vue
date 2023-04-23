@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import DtAvatar from './avatar';
+import DtAvatar from './avatar.vue';
 import { DtIcon } from '@/components/icon';
 import { AVATAR_ICON_SIZES } from './avatar_constants';
 

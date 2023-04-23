@@ -1,11 +1,11 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtImageViewer from './image_viewer';
-import DtImageViewerMdx from './image_viewer.mdx';
+import DtImageViewer from './image_viewer.vue';
+
 import DtImageViewerDefaultTemplate from './image_viewer_default.story.vue';
 import DtImageViewerVariantsTemplate from './image_viewer_variants.story.vue';
 import { action } from '@storybook/addon-actions';
 
-const defaultImage = require('./test.jpg');
+import defaultImage from './test.jpg';
 
 // Default Prop Values
 export const argsData = {
@@ -132,17 +132,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtImageViewerMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -170,12 +159,6 @@ Default.args = {
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
 Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
   options: {
     showPanel: false,
   },

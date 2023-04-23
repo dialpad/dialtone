@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import DtSkeleton from './skeleton';
+import DtSkeleton from './skeleton.vue';
 import { getUniqueString } from '@/common/utils';
 
 export default {

@@ -1,49 +1,49 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtPagination from './pagination';
-import DtPaginationMdx from './pagination.mdx';
+import DtPagination from './pagination.vue';
+
 import DtPaginationDefaultTemplate from './pagination_default.story.vue';
 import DtPaginationVariantsTemplate from './pagination_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
+  totalPages: 5,
+  activePage: 1,
+  maxVisible: 5,
+  ariaLabel: 'pagination',
+  prevAriaLabel: 'previous',
+  nextAriaLabel: 'next',
   onChange: action('change'),
 };
 
 export const argTypesData = {
 // Props
   totalPages: {
-    defaultValue: 5,
     control: {
       type: 'number',
     },
   },
   activePage: {
-    defaultValue: 1,
     control: {
       type: 'number',
     },
   },
   maxVisible: {
-    defaultValue: 5,
     control: {
       type: 'number',
     },
   },
   ariaLabel: {
-    defaultValue: 'pagination',
     control: {
       type: 'text',
     },
   },
   prevAriaLabel: {
-    defaultValue: 'previous',
     control: {
       type: 'text',
     },
   },
   nextAriaLabel: {
-    defaultValue: 'next',
     control: {
       type: 'text',
     },
@@ -71,11 +71,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtPaginationMdx,
-    },
-  },
 };
 
 // Templates

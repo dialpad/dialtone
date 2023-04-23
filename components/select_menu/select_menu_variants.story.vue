@@ -158,7 +158,7 @@
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import DtSelectMenu from './select_menu';
+import DtSelectMenu from './select_menu.vue';
 
 export default {
   name: 'DtSelectMenuVariants',
