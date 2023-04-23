@@ -2,7 +2,6 @@ import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
 import DtInput from '@/components/input/input';
-import sinon from 'sinon';
 import DtPopover from '@/components/popover/popover';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
@@ -67,16 +66,16 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   before(function () {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
     this.localVue = createLocalVue();
   });
 
   beforeEach(function () {
-    selectStub = sinon.stub();
-    escapeStub = sinon.stub();
-    highlightStub = sinon.stub();
-    openedStub = sinon.stub();
+    selectStub = jest.fn();
+    escapeStub = jest.fn();
+    highlightStub = jest.fn();
+    openedStub = jest.fn();
     listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub, opened: openedStub };
     _mountWrapper();
   });

@@ -2,7 +2,6 @@ import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeCallbarButton from './callbar_button.vue';
 import DtTooltip from '@/components/tooltip/tooltip';
-import sinon from 'sinon';
 
 // Constants
 const basePropsData = {};
@@ -43,8 +42,8 @@ describe('DtRecipeCallbarButton Tests', function () {
   before(function () {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
     this.localVue = createLocalVue();
   });
   beforeEach(function () {
@@ -112,7 +111,7 @@ describe('DtRecipeCallbarButton Tests', function () {
   describe('Interactivity Tests', function () {
     describe('When clicking on the button', function () {
       it('should call the click event listener', async function () {
-        const clickStub = sinon.stub();
+        const clickStub = jest.fn();
         listeners = { click: clickStub };
         _setWrappers();
 

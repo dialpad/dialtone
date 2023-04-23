@@ -1,6 +1,5 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { assert } from 'chai';
-import sinon from 'sinon';
 import {
   itBehavesLikeDoesNotEmitEvents,
   itBehavesLikeEmitsExpectedEvent,
@@ -302,7 +301,7 @@ describe('DtCheckbox Tests', function () {
     describe('Listener Tests', function () {
       describe('When there is a provided input listener', function () {
         // Test Env
-        const inputListenerSpy = sinon.spy();
+        const inputListenerSpy = jest.fn();
 
         // Test Setup
         beforeEach(function () {

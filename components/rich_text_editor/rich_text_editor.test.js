@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
 import DtRichTextEditor from './rich_text_editor.vue';
@@ -42,7 +41,7 @@ describe('DtRichTextEditor tests', function () {
   // Test Setup
   beforeEach(async function () {
     propsData = baseProps;
-    inputStub = sinon.stub();
+    inputStub = jest.fn();
     listeners = {
       input: inputStub,
     };

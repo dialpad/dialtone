@@ -1,6 +1,5 @@
 
 import { assert } from 'chai';
-import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
 import SrOnlyCloseButton from '../../common/sr_only_close_button';
@@ -81,8 +80,8 @@ describe('DtPopover Tests', function () {
   before(function () {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
     this.localVue = createLocalVue();
   });
 
@@ -174,13 +173,13 @@ describe('DtPopover Tests', function () {
     describe('When initialFocusElement is none', function () {
       let consoleErrorSpy;
       beforeEach(async function () {
-        consoleErrorSpy = sinon.spy(console, 'error');
+        consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
         await wrapper.setProps({ initialFocusElement: 'none' });
       });
 
       afterEach(function () {
         consoleErrorSpy = null;
-        console.error.restore();
+        console.error.mockRestore();
       });
 
       it('should output error message', async function () {

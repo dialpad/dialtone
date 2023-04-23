@@ -1,7 +1,6 @@
 import { getEmojiData, validateCustomEmojiJson } from '@/common/emoji';
 import { withValidCustomEmojis, withNotAllRequiredProps, withValidUnicodeEmojis } from './custom-emoji-test.js';
 import { assert } from 'chai';
-import sinon from 'sinon';
 
 describe('Emoji Tests', function () {
   describe('Validation Tests', function () {
@@ -22,12 +21,12 @@ describe('Emoji Tests', function () {
     describe('When a custom emoji json is provided with invalid emojis', function () {
       let consoleErrorSpy;
       before(async function () {
-        consoleErrorSpy = sinon.spy(console, 'error');
+        consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
         await validateCustomEmojiJson(withNotAllRequiredProps);
       });
       after(function () {
         consoleErrorSpy = null;
-        console.error.restore();
+        console.error.mockRestore();
         validateCustomEmojiJson('');
       });
 

@@ -13,7 +13,6 @@ import {
   itBehavesLikeAppliesClassToChild,
 } from '../../tests/shared_examples/extendability';
 import Vue from 'vue';
-import sinon from 'sinon';
 
 // Constants
 const DEFAULT_SLOT = 'DP';
@@ -345,16 +344,16 @@ describe('DtAvatar Tests', function () {
       // Test Setup
       before(function () {
         Vue.config.silent = true;
-        sinon.spy(Vue.util, 'warn');
+        jest.spyOn(Vue.util, 'warn').mockClear();
       });
 
       // Test Teardown
       afterEach(function () {
-        Vue.util.warn.resetHistory();
+        Vue.util.warn.mockReset();
       });
 
       after(function () {
-        Vue.util.warn.restore();
+        Vue.util.warn.mockRestore();
         Vue.config.silent = false;
       });
 

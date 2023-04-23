@@ -1,5 +1,4 @@
 import { assert } from 'chai';
-import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtTooltip from './tooltip.vue';
 import {
@@ -16,11 +15,11 @@ describe('DtTooltip tests', function () {
   let onMount;
 
   const restoreSpy = function () {
-    onMount.restore();
+    onMount.mockRestore();
   };
 
   const setOnMount = function () {
-    onMount = sinon.spy(DtTooltip.methods, 'onMount');
+    onMount = jest.spyOn(DtTooltip.methods, 'onMount').mockClear();
   };
 
   const _clearChildWrappers = () => {
@@ -65,8 +64,8 @@ describe('DtTooltip tests', function () {
   before(function () {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
     this.localVue = createLocalVue();
   });
 

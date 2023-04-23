@@ -1,7 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { assert } from 'chai';
 import DtToggle from './toggle.vue';
-import sinon from 'sinon';
 import Vue from 'vue';
 import {
   itBehavesLikeDoesNotRaiseAnyVueWarnings,
@@ -181,11 +180,11 @@ describe('DtToggle Tests', function () {
 
         before(function () {
           Vue.config.silent = true;
-          sinon.spy(Vue.util, 'warn');
+          jest.spyOn(Vue.util, 'warn').mockClear();
         });
 
         after(function () {
-          Vue.util.warn.restore();
+          Vue.util.warn.mockRestore();
           Vue.config.silent = false;
         });
 

@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
 import { INPUT_SIZES } from './input_constants';
@@ -67,7 +66,7 @@ describe('DtInput tests', function () {
   beforeEach(function () {
     propsData = basePropsData;
     attrs = baseAttrs;
-    inputStub = sinon.stub();
+    inputStub = jest.fn();
     listeners = { input: inputStub };
     _mountWrapper();
   });

@@ -1,6 +1,5 @@
 import { assert } from 'chai';
 import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
-import sinon from 'sinon';
 import Vue from 'vue';
 import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/events';
 import {
@@ -356,16 +355,16 @@ describe('DtSelectMenu Tests', function () {
       // Test Setup
       before(function () {
         Vue.config.silent = true;
-        sinon.spy(Vue.util, 'warn');
+        jest.spyOn(Vue.util, 'warn').mockClear();
       });
 
       // Test Teardown
       afterEach(function () {
-        Vue.util.warn.resetHistory();
+        Vue.util.warn.mockReset();
       });
 
       after(function () {
-        Vue.util.warn.restore();
+        Vue.util.warn.mockRestore();
         Vue.config.silent = false;
       });
 

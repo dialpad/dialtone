@@ -1,6 +1,5 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import sinon from 'sinon';
 import {
   itBehavesLikeEmitsExpectedEvent,
   itBehavesLikeDoesNotEmitEvents,
@@ -319,7 +318,7 @@ describe('DtRadio Tests', function () {
     describe('Listener Tests', function () {
       describe('When there is a provided input listener', function () {
         // Test Env
-        const inputListenerSpy = sinon.spy();
+        const inputListenerSpy = jest.fn();
 
         // Test Setup
         beforeEach(function () {

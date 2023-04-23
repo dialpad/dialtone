@@ -6,7 +6,6 @@ import {
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
 } from '@/recipes/leftbar/general_row/general_row_constants';
-import sinon from 'sinon';
 
 // Constants
 const basePropsData = {
@@ -139,14 +138,14 @@ describe('DtRecipeGeneralRow Tests', function () {
       const type = LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER;
 
       beforeEach(async function () {
-        consoleErrorSpy = sinon.spy(console, 'error');
+        consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
         propsData = { ...propsData, type };
         _setWrappers();
       });
 
       afterEach(function () {
         consoleErrorSpy = null;
-        console.error.restore();
+        console.error.mockRestore();
       });
 
       it('should output error message', function () {

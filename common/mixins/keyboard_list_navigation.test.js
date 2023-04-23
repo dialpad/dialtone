@@ -3,7 +3,6 @@ import KeyboardListNavigation, {
   KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS,
   KEYBOARD_LIST_NAVIGATION_TESTER_KEY,
 } from './keyboard_list_navigation_tester';
-import sinon from 'sinon';
 import { assert } from 'chai';
 
 // Since we are testing a mixin here we use a mock vue tester component to
@@ -34,9 +33,9 @@ describe('Keyboard Navigation Mixin Tests', function () {
 
   // Test Setup
   before(function () {
-    afterHighlightSpy = sinon.spy(KeyboardListNavigation.methods, 'afterHighlightMethod');
-    beginningOfListSpy = sinon.spy(KeyboardListNavigation.methods, 'beginningOfListMethod');
-    endOfListSpy = sinon.spy(KeyboardListNavigation.methods, 'endOfListMethod');
+    afterHighlightSpy = jest.spyOn(KeyboardListNavigation.methods, 'afterHighlightMethod').mockClear();
+    beginningOfListSpy = jest.spyOn(KeyboardListNavigation.methods, 'beginningOfListMethod').mockClear();
+    endOfListSpy = jest.spyOn(KeyboardListNavigation.methods, 'endOfListMethod').mockClear();
     this.localVue = createLocalVue();
   });
 
@@ -46,7 +45,7 @@ describe('Keyboard Navigation Mixin Tests', function () {
 
   // Test Teardown
   afterEach(function () {
-    beginningOfListSpy.resetHistory();
+    beginningOfListSpy.mockReset();
     slots = {};
   });
 

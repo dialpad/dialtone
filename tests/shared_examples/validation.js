@@ -1,16 +1,15 @@
 import { assert } from 'chai';
 import Vue from 'vue';
-import sinon from 'sinon';
 
 let consoleErrorSpy;
 
 export const initializeSpy = () => {
-  consoleErrorSpy = sinon.spy(console, 'error');
+  consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
 };
 
 export const cleanSpy = () => {
   consoleErrorSpy = null;
-  console.error.restore();
+  console.error.mockRestore();
 };
 
 export function itBehavesLikePassesCustomPropValidation (prop, value) {
@@ -32,7 +31,7 @@ export const itBehavesLikeDoesNotRaiseAnyVueWarnings = () => {
 export const itBehavesLikeRaisesSingleVueWarning = (message) => {
   it('should raise a single warning', function () { assert.isTrue(Vue.util.warn.calledOnce); });
   it('should have expected warning message', function () {
-    assert.strictEqual(Vue.util.warn.firstCall.args[0], message);
+    assert.strictEqual(Vue.util.warn.mock.calls[0][0], message);
   });
 };
 

@@ -1,7 +1,6 @@
 import { assert } from 'chai';
 import { config, mount } from '@vue/test-utils';
 import DtCollapsible from './collapsible.vue';
-import sinon from 'sinon';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
@@ -49,8 +48,8 @@ describe('DtCollapsible Tests', function () {
   };
 
   before(function () {
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
     config.renderStubDefaultSlot = true;
   });
 
@@ -151,14 +150,14 @@ describe('DtCollapsible Tests', function () {
     let consoleErrorSpy;
 
     beforeEach(async function () {
-      consoleErrorSpy = sinon.spy(console, 'error');
+      consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
       propsData = { ...baseProps, anchorText: undefined };
       _mountWrapper();
     });
 
     afterEach(function () {
       consoleErrorSpy = null;
-      console.error.restore();
+      console.error.mockRestore();
     });
 
     it('should output error message', async function () {

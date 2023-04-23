@@ -3,7 +3,6 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 import DtRecipeCallbarButton from '../callbar_button/callbar_button';
 import DtPopover from '@/components/popover/popover';
-import sinon from 'sinon';
 
 // Constants
 const basePropsData = {};
@@ -46,8 +45,8 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
   before(function () {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
     this.localVue = createLocalVue();
   });
   beforeEach(function () {
@@ -126,7 +125,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
       });
 
       it('should trigger the "click" event when at least one listener is attached', async function () {
-        const clickStub = sinon.stub();
+        const clickStub = jest.fn();
         listeners = { click: clickStub };
         _setWrappers();
 
