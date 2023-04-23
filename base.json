@@ -587,6 +587,74 @@
         "value": "{size.1200} * -1",
         "type": "sizing"
       },
+      "0-percent": {
+        "value": "0%",
+        "type": "sizing"
+      },
+      "5-percent": {
+        "value": "5%",
+        "type": "sizing"
+      },
+      "10-percent": {
+        "value": "10%",
+        "type": "sizing"
+      },
+      "20-percent": {
+        "value": "20%",
+        "type": "sizing"
+      },
+      "25-percent": {
+        "value": "25%",
+        "type": "sizing"
+      },
+      "30-percent": {
+        "value": "30%",
+        "type": "sizing"
+      },
+      "33-percent": {
+        "value": "33.333%",
+        "type": "sizing"
+      },
+      "40-percent": {
+        "value": "40%",
+        "type": "sizing"
+      },
+      "50-percent": {
+        "value": "50%",
+        "type": "sizing"
+      },
+      "60-percent": {
+        "value": "60%",
+        "type": "sizing"
+      },
+      "66-percent": {
+        "value": "66.7%",
+        "type": "sizing"
+      },
+      "70-percent": {
+        "value": "70%",
+        "type": "sizing"
+      },
+      "75-percent": {
+        "value": "75%",
+        "type": "sizing"
+      },
+      "80-percent": {
+        "value": "80%",
+        "type": "sizing"
+      },
+      "90-percent": {
+        "value": "90%",
+        "type": "sizing"
+      },
+      "95-percent": {
+        "value": "95%",
+        "type": "sizing"
+      },
+      "100-percent": {
+        "value": "100%",
+        "type": "sizing"
+      },
       "base": {
         "value": "{font.size.root} * .8",
         "type": "sizing"
@@ -843,6 +911,74 @@
       },
       "1200-negative": {
         "value": "{space.1200} * -1",
+        "type": "spacing"
+      },
+      "0-percent": {
+        "value": "0%",
+        "type": "spacing"
+      },
+      "5-percent": {
+        "value": "5%",
+        "type": "spacing"
+      },
+      "10-percent": {
+        "value": "10%",
+        "type": "spacing"
+      },
+      "20-percent": {
+        "value": "20%",
+        "type": "spacing"
+      },
+      "25-percent": {
+        "value": "25%",
+        "type": "spacing"
+      },
+      "30-percent": {
+        "value": "30%",
+        "type": "spacing"
+      },
+      "33-percent": {
+        "value": "33.333%",
+        "type": "spacing"
+      },
+      "40-percent": {
+        "value": "40%",
+        "type": "spacing"
+      },
+      "50-percent": {
+        "value": "50%",
+        "type": "spacing"
+      },
+      "60-percent": {
+        "value": "60%",
+        "type": "spacing"
+      },
+      "66-percent": {
+        "value": "66.7%",
+        "type": "spacing"
+      },
+      "70-percent": {
+        "value": "70%",
+        "type": "spacing"
+      },
+      "75-percent": {
+        "value": "75%",
+        "type": "spacing"
+      },
+      "80-percent": {
+        "value": "80%",
+        "type": "spacing"
+      },
+      "90-percent": {
+        "value": "90%",
+        "type": "spacing"
+      },
+      "95-percent": {
+        "value": "95%",
+        "type": "spacing"
+      },
+      "100-percent": {
+        "value": "100%",
         "type": "spacing"
       },
       "base": {
