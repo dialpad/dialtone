@@ -35,7 +35,7 @@ describe('DtListItemGroup Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -71,7 +71,7 @@ describe('DtListItemGroup Tests', () => {
         'the root ul is aria-labelledby the id of the header element',
         () => {
           expect(wrapper.attributes('aria-labelledby')).toBe(basePropsData.id + '-heading');
-        }
+        },
       );
     });
   });

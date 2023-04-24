@@ -29,7 +29,7 @@ describe('DtPresence Tests', () => {
     wrapper = shallowMount(DtPresence, {
       propsData,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -88,7 +88,7 @@ describe('DtPresence Tests', () => {
         () => {
           const srSpan = presence.find('span');
           expect(srSpan.exists()).toBe(true);
-        }
+        },
       );
       it('should have the `sr-only` class', () => {
         const srSpan = presence.find('span');

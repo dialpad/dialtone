@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
@@ -48,11 +48,11 @@ describe('DtAvatar Tests', () => {
   };
 
   const _setWrappers = async () => {
-    wrapper = shallowMount(DtAvatar, {
+    wrapper = mount(DtAvatar, {
       propsData,
       attrs,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     await wrapper.vm.$nextTick();
     _setChildWrappers();
@@ -80,10 +80,10 @@ describe('DtAvatar Tests', () => {
         await _setWrappers();
       });
 
-      it('should exists', () => { assert.exists(wrapper); });
+      it('should exists', () => { expect(wrapper.exists()).toBeTruthy(); });
       it(
         'should render the avatar',
-        () => { expect(wrapper.exists()).toBe(true); }
+        () => { expect(wrapper.exists()).toBe(true); },
       );
     });
 
@@ -98,7 +98,7 @@ describe('DtAvatar Tests', () => {
       });
 
       it('image should exist', () => {
-        assert.exists(image);
+        expect(image).toBeTruthy();
       });
 
       it('src should match those provided by attrs', () => {
@@ -121,7 +121,7 @@ describe('DtAvatar Tests', () => {
       });
 
       it('icon slot should exist', () => {
-        assert.exists(wrapper.find('svg'));
+        expect(wrapper.find('svg').exists()).toBeTruthy();
       });
 
       it('should have correct class', () => {
@@ -144,8 +144,8 @@ describe('DtAvatar Tests', () => {
       });
 
       it('should have correct class', () => {
-        const avatarWithInitials = wrapper.find(AVATAR_KIND_MODIFIERS.initials);
-        assert.exists(avatarWithInitials);
+        const avatarWithInitials = wrapper.find('.' + AVATAR_KIND_MODIFIERS.initials);
+        expect(avatarWithInitials.exists()).toBeTruthy();
       });
     });
 
@@ -221,7 +221,7 @@ describe('DtAvatar Tests', () => {
       });
 
       it('should have group count', () => {
-        assert.exists(count);
+        expect(count).toBeTruthy();
       });
 
       it('should have the correct group number', () => {
@@ -278,7 +278,7 @@ describe('DtAvatar Tests', () => {
           await wrapper.setProps({ presence: null });
           presence = wrapper.find('[data-qa="dt-presence"]');
           expect(presence.exists()).toBe(false);
-        }
+        },
       );
 
       it(
@@ -288,7 +288,7 @@ describe('DtAvatar Tests', () => {
           presence = wrapper.find('[data-qa="dt-presence"]');
           expect(presence.exists()).toBe(true);
           expect(presence.classes('d-avatar__presence')).toBe(true);
-        }
+        },
       );
 
       it(
@@ -306,7 +306,7 @@ describe('DtAvatar Tests', () => {
           expect(presence.exists()).toBe(true);
           expect(presence.attributes('aria-live')).toEqual('assertive');
           expect(presence.attributes('random-attribute')).toEqual('value');
-        }
+        },
       );
 
       it('should update presence styles based on Avatar size', async () => {

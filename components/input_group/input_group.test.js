@@ -54,7 +54,7 @@ describe('Input Group Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -65,7 +65,7 @@ describe('Input Group Tests', () => {
       slots,
       attrs,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -93,7 +93,7 @@ describe('Input Group Tests', () => {
     const itBehavesLikeHasLegend = () => {
       it(
         'should have a legend',
-        () => { expect(inputGroupLegend.exists()).toBe(true); }
+        () => { expect(inputGroupLegend.exists()).toBe(true); },
       );
       it('should have text matching the provided legend', () => {
         expect(inputGroupLegend.text()).toBe(legend);
@@ -106,18 +106,18 @@ describe('Input Group Tests', () => {
 
       it(
         'should have a input group',
-        () => { expect(inputGroup.exists()).toBe(true); }
+        () => { expect(inputGroup.exists()).toBe(true); },
       );
       it(
         'should not have a legend',
-        () => { expect(inputGroupLegend.exists()).toBe(false); }
+        () => { expect(inputGroupLegend.exists()).toBe(false); },
       );
       it('should not have inputs', () => {
         expect(wrapper.findAllComponents(InputFixture).length).toBe(0);
       });
       it('should not have validation messages', () => {
         expect(
-          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length
+          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
         ).toBe(0);
       });
     });
@@ -223,7 +223,7 @@ describe('Input Group Tests', () => {
     // Helpers
     const _selectInput = (value) => {
       selectedInput = inputGroup.find(`[value="${value}"]`);
-      selectedInput.trigger('click');
+      selectedInput.trigger('change');
     };
 
     // Shared Examples
@@ -299,7 +299,7 @@ describe('Input Group Tests', () => {
 
         it(
           'does not emit an input event',
-          () => { itBehavesLikeDoesNotEmitEvents(wrapper); }
+          () => { itBehavesLikeDoesNotEmitEvents(wrapper); },
         );
       });
     });
@@ -354,7 +354,7 @@ describe('Input Group Tests', () => {
     describe('When a legend class is provided', () => {
       // Test Setup
       beforeEach(
-        () => { _setupChildClassTest('legendClass', '[data-qa="input-group-legend"]'); }
+        () => { _setupChildClassTest('legendClass', '[data-qa="input-group-legend"]'); },
       );
 
       itBehavesLikeAppliesClassToChildLocal();
@@ -363,7 +363,7 @@ describe('Input Group Tests', () => {
     describe('When a messages class is provided', () => {
       // Test Setup
       beforeEach(
-        () => { _setupChildClassTest('messagesClass', '[data-qa="input-group-messages"]'); }
+        () => { _setupChildClassTest('messagesClass', '[data-qa="input-group-messages"]'); },
       );
 
       itBehavesLikeAppliesClassToChildLocal();
@@ -372,7 +372,7 @@ describe('Input Group Tests', () => {
     describe('When legend child props are provided', () => {
       // Test Setup
       beforeEach(
-        () => { _setupChildPropsTest('legendChildProps', '[data-qa="input-group-legend"]'); }
+        () => { _setupChildPropsTest('legendChildProps', '[data-qa="input-group-legend"]'); },
       );
 
       itBehavesLikeAppliesChildPropLocal();
@@ -381,7 +381,7 @@ describe('Input Group Tests', () => {
     describe('When messages child props are provided', () => {
       // Test Setup
       beforeEach(
-        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="input-group-messages"]'); }
+        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="input-group-messages"]'); },
       );
 
       itBehavesLikeAppliesChildPropLocal();

@@ -43,7 +43,7 @@ describe('DtChip Tests', () => {
       propsData,
       slots,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -68,22 +68,22 @@ describe('DtChip Tests', () => {
       });
       it(
         'should render the component',
-        () => { assert.exists(wrapper, 'wrapper exists'); }
+        () => { expect(wrapper.exists()).toBe(true); },
       );
-      it('should render chip', () => { assert.exists(chip, 'chip exists'); });
+      it('should render chip', () => { expect(chip.exists()).toBeTruthy(); });
       it(
         'should render remove button',
-        () => { assert.exists(remove, 'close button exists'); }
+        () => { expect(remove.exists()).toBeTruthy(); },
       );
-      it('should render label', () => { assert.exists(label); });
+      it('should render label', () => { expect(label.exists()).toBeTruthy(); });
       it(
         'should display the correct text',
-        () => { expect(label.text()).toBe(defaultText); }
+        () => { expect(label.text()).toBe(defaultText); },
       );
       it('should not render icon', () => { expect(icon.exists()).toBe(false); });
       it(
         'should not render avatar',
-        () => { expect(avatar.exists()).toBe(false); }
+        () => { expect(avatar.exists()).toBe(false); },
       );
       it('default interactive', () => {
         expect(chip.element.tagName).toBe('BUTTON');
@@ -119,22 +119,18 @@ describe('DtChip Tests', () => {
       });
       it(
         'should not render remove button',
-        () => { expect(remove.exists()).toBe(false); }
+        () => { expect(remove.exists()).toBe(false); },
       );
     });
 
     describe('When show avatar', () => {
       beforeEach(() => {
-        propsData = {
-          ...basePropsData,
-          avatarProps: {
-            SRC: 'image.png',
-            ALT: 'Avatar image',
-          },
+        slots = {
+          avatar: EmptyComponentFixture,
         };
         _setWrappers();
       });
-      it('should render avatar', () => { assert.exists(avatar); });
+      it('should render avatar', () => { expect(avatar.exists()).toBeTruthy(); });
     });
 
     describe('With icon slot', () => {
@@ -144,7 +140,7 @@ describe('DtChip Tests', () => {
         };
         _setWrappers();
       });
-      it('should render icon', () => { assert.exists(icon); });
+      it('should render icon', () => { expect(icon.exists()).toBeTruthy(); });
     });
   });
 

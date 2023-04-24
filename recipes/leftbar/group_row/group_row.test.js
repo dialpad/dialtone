@@ -39,7 +39,7 @@ describe('DtRecipeGroupRow Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -69,7 +69,7 @@ describe('DtRecipeGroupRow Tests', () => {
       // Test Setup
       beforeEach(() => { _setWrappers(); });
 
-      it('should exist', () => { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
 
       it('should render the description', () => {
         expect(description.text()).toBe(basePropsData.names);

@@ -42,7 +42,7 @@ describe('DtRootLayoutBody Tests', () => {
     wrapper = shallowMount(DtRootLayoutBody, {
       propsData,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };

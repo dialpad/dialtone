@@ -61,7 +61,7 @@ describe('DtTooltip tests', () => {
       scopedSlots: {
         anchor: '<button data-qa="dt-button" v-bind="props.attrs">Hover me</button>',
       },
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -100,19 +100,19 @@ describe('DtTooltip tests', () => {
 
       it(
         'should render the component',
-        () => { assert.exists(wrapper, 'wrapper exists'); }
+        () => { expect(wrapper.exists()).toBe(true); },
       );
       it(
         'should render the container',
-        () => { expect(tooltipContainer.exists()).toBe(true); }
+        () => { expect(tooltipContainer.exists()).toBe(true); },
       );
       it(
         'should render the tooltip',
-        () => { expect(tooltip.exists()).toBe(true); }
+        () => { expect(tooltip.exists()).toBe(true); },
       );
       it(
         'should render the anchor',
-        () => { expect(anchor.text()).toBe('Hover me'); }
+        () => { expect(anchor.text()).toBe('Hover me'); },
       );
       it('should set default classes', () => {
         expect(tooltip.classes('d-tooltip__arrow-tippy--top')).toBe(true);

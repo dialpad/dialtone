@@ -44,7 +44,7 @@ describe('DtToggle Tests', () => {
       slots,
       provide,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -77,11 +77,11 @@ describe('DtToggle Tests', () => {
       });
       it(
         'should have type button',
-        () => { expect(button.attributes('type')).toBe('button'); }
+        () => { expect(button.attributes('type')).toBe('button'); },
       );
       it(
         'should have role switch',
-        () => { expect(button.attributes('role')).toBe('switch'); }
+        () => { expect(button.attributes('role')).toBe('switch'); },
       );
 
       it('should show the icon', () => {
@@ -102,7 +102,7 @@ describe('DtToggle Tests', () => {
             expect(button.attributes('aria-disabled')).toBe('false');
             expect(button.attributes().disabled).not.toBeDefined();
             expect(button.classes().includes('d-toggle--disabled')).toBe(false);
-          }
+          },
         );
 
         it(
@@ -112,7 +112,7 @@ describe('DtToggle Tests', () => {
             expect(button.attributes('aria-disabled')).toBe('true');
             expect(button.attributes().disabled).toEqual('disabled');
             expect(button.classes().includes('d-toggle--disabled')).toBe(true);
-          }
+          },
         );
 
         it('should set correct size class', async () => {
@@ -139,7 +139,7 @@ describe('DtToggle Tests', () => {
           () => {
             expect(button.attributes('aria-checked')).toBe('false');
             expect(button.classes().includes('d-toggle--checked')).toBe(false);
-          }
+          },
         );
       });
 
@@ -147,7 +147,7 @@ describe('DtToggle Tests', () => {
         it('should exist', () => { expect(label.exists()).toBe(true); });
         it(
           'should match provided label prop',
-          () => { expect(label.text()).toBe(slots.default); }
+          () => { expect(label.text()).toBe(slots.default); },
         );
       });
     });
@@ -171,7 +171,7 @@ describe('DtToggle Tests', () => {
           () => {
             expect(button.attributes('aria-checked')).toBe('true');
             expect(button.classes().includes('d-toggle--checked')).toBe(true);
-          }
+          },
         );
       });
 
@@ -179,7 +179,7 @@ describe('DtToggle Tests', () => {
         it('should exist', () => { expect(label.exists()).toBe(true); });
         it(
           'should match provided label prop',
-          () => { expect(label.text()).toBe(slots.default); }
+          () => { expect(label.text()).toBe(slots.default); },
         );
       });
     });

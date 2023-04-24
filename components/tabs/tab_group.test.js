@@ -97,7 +97,7 @@ describe('DtTabGroup Tests', () => {
     });
 
     it('should render the component', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     it('should not emitted on mount', () => {
@@ -336,7 +336,7 @@ describe('DtTabGroup Tests', () => {
             const tabPanelAttrs = tabPanels.at(1).attributes();
             expect(tabAttrs.id).toBe(tabPanelAttrs['aria-labelledby']);
             expect(tabAttrs['aria-controls']).toBe(tabPanelAttrs.id);
-          }
+          },
         );
       });
 
@@ -354,7 +354,7 @@ describe('DtTabGroup Tests', () => {
             const tabPanelAttrs = tabPanels.at(0).attributes();
             expect(tabAttrs.id).toBe(tabPanelAttrs['aria-labelledby']);
             expect(tabAttrs['aria-controls']).toBe(tabPanelAttrs.id);
-          }
+          },
         );
       });
 
@@ -372,7 +372,7 @@ describe('DtTabGroup Tests', () => {
             const tabPanelAttrs = tabPanels.at(2).attributes();
             expect(tabAttrs.id).toBe(tabPanelAttrs['aria-labelledby']);
             expect(tabAttrs['aria-controls']).toBe(tabPanelAttrs.id);
-          }
+          },
         );
       });
     });

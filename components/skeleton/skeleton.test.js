@@ -31,7 +31,7 @@ describe('DtSkeleton Tests', () => {
   describe('Presentation Tests', () => {
     it('should render the component', () => {
       _mountWrapper();
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     describe('Skeleton text', () => {

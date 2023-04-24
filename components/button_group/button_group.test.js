@@ -38,7 +38,7 @@ describe('DtButtonGroup Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -65,7 +65,7 @@ describe('DtButtonGroup Tests', () => {
 
       it(
         'should have a button group',
-        () => { expect(buttonGroup.exists()).toBe(true); }
+        () => { expect(buttonGroup.exists()).toBe(true); },
       );
       it('should not have buttons', () => {
         expect(wrapper.findAllComponents(DtButton).length).toBe(0);

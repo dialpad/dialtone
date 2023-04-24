@@ -15,4 +15,5 @@ export const itBehavesLikeVisuallyHiddenCloseLabelIsNull = () => {
 
 export default {
   itBehavesLikeVisuallyHiddenCloseButtonExists,
+  itBehavesLikeVisuallyHiddenCloseLabelIsNull,
 };

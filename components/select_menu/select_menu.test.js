@@ -72,7 +72,7 @@ describe('DtSelectMenu Tests', () => {
       propsData,
       attrs,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -82,7 +82,7 @@ describe('DtSelectMenu Tests', () => {
       propsData,
       attrs,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -108,18 +108,18 @@ describe('DtSelectMenu Tests', () => {
 
       it(
         'should render the provided label',
-        () => { expect(label.text()).toBe(LABEL); }
+        () => { expect(label.text()).toBe(LABEL); },
       );
       it('should have no size variant classes on the label', () => {
         expect(label.classes().length).toBe(1);
       });
       it(
         'should not render a description',
-        () => { expect(description.exists()).toBe(false); }
+        () => { expect(description.exists()).toBe(false); },
       );
       it(
         'should render the select menu',
-        () => { expect(select.exists()).toBe(true); }
+        () => { expect(select.exists()).toBe(true); },
       );
       it('should have no size variant classes on select menu', () => {
         expect(selectWrapper.classes().length).toBe(1);
@@ -129,7 +129,7 @@ describe('DtSelectMenu Tests', () => {
       });
       it('should render the select menu options', () => {
         OPTIONS.forEach(option => {
-          assert.exists(select.find(`[value="${option.value}"]`));
+          expect(select.find(`[value="${option.value}"]`).exists()).toBeTruthy();
         });
       });
       it('should not render any validation messages', () => {
@@ -146,7 +146,7 @@ describe('DtSelectMenu Tests', () => {
 
       it(
         'should not render a label',
-        () => { expect(label.exists()).toBe(false); }
+        () => { expect(label.exists()).toBe(false); },
       );
     });
 
@@ -164,7 +164,7 @@ describe('DtSelectMenu Tests', () => {
 
       it(
         'should render the slotted label',
-        () => { expect(label.text()).toBe(slottedLabel); }
+        () => { expect(label.text()).toBe(slottedLabel); },
       );
     });
 
@@ -216,7 +216,7 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should render the select menu options', () => {
-        assert.exists(select.findAll('option').length, 2);
+        expect(select.findAll('option').length).toBe(2);
       });
     });
 
@@ -312,7 +312,7 @@ describe('DtSelectMenu Tests', () => {
         });
 
         it('label aria-details should not exist', () => {
-          assert.notExists(label.attributes('aria-details'));
+          expect(label.attributes('aria-details')).toBeFalsy();
         });
       });
 
@@ -473,21 +473,21 @@ describe('DtSelectMenu Tests', () => {
 
     describe('When a label class is provided', () => {
       beforeEach(
-        () => { _setupChildClassTest('labelClass', '[data-qa="dt-select-label"]'); }
+        () => { _setupChildClassTest('labelClass', '[data-qa="dt-select-label"]'); },
       );
       itBehavesLikeAppliesClassToChildLocal();
     });
 
     describe('When a description class is provided', () => {
       beforeEach(
-        () => { _setupChildClassTest('descriptionClass', '[data-qa="dt-select-description"]'); }
+        () => { _setupChildClassTest('descriptionClass', '[data-qa="dt-select-description"]'); },
       );
       itBehavesLikeAppliesClassToChildLocal();
     });
 
     describe('When a select class is provided', () => {
       beforeEach(
-        () => { _setupChildClassTest('selectClass', '[data-qa="dt-select-wrapper"]'); }
+        () => { _setupChildClassTest('selectClass', '[data-qa="dt-select-wrapper"]'); },
       );
       itBehavesLikeAppliesClassToChildLocal();
     });
@@ -512,14 +512,14 @@ describe('DtSelectMenu Tests', () => {
 
     describe('When label child props are provided', () => {
       beforeEach(
-        () => { _setupChildPropsTest('labelChildProps', '[data-qa="dt-select-label"]'); }
+        () => { _setupChildPropsTest('labelChildProps', '[data-qa="dt-select-label"]'); },
       );
       itBehavesLikeAppliesChildPropLocal();
     });
 
     describe('When description child props are provided', () => {
       beforeEach(
-        () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="dt-select-description"]'); }
+        () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="dt-select-description"]'); },
       );
       itBehavesLikeAppliesChildPropLocal();
     });

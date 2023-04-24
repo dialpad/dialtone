@@ -41,7 +41,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
       provide,
       listeners,
       attachTo: document.body,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -75,15 +75,15 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
 
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); }
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it(
       'should render the button',
-      () => { expect(button.exists()).toBe(true); }
+      () => { expect(button.exists()).toBe(true); },
     );
     it(
       'should render the popover',
-      () => { expect(popover.exists()).toBe(true); }
+      () => { expect(popover.exists()).toBe(true); },
     );
     it('should render the arrow', () => { expect(arrow.exists()).toBe(true); });
 
@@ -101,7 +101,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
         _setChildWrappers();
 
         expect(arrow.exists()).toBe(true);
-      }
+      },
     );
 
     it(
@@ -115,7 +115,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
         expect(buttonProps.disabled).toBe(true);
         expect(buttonProps.active).toBe(true);
         expect(buttonProps.danger).toBe(true);
-      }
+      },
     );
 
     it(
@@ -134,7 +134,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
         expect(popoverProps.showCloseButton).toBe(true);
         expect(popoverProps.placement).toEqual('mock');
         expect(popoverProps.initialFocusElement).toEqual('#mock');
-      }
+      },
     );
   });
 
@@ -146,7 +146,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
           await button.find('button').trigger('click');
           const arrowClickEvents = wrapper.emitted().arrowClick;
           expect(arrowClickEvents.length).toEqual(1);
-        }
+        },
       );
 
       it(
@@ -161,8 +161,8 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
 
           const clickEvents = wrapper.emitted().click;
           expect(clickEvents.length).toEqual(1);
-          expect(clickStub.called).toBe(true);
-        }
+          expect(clickStub).toHaveBeenCalled();
+        },
       );
     });
 

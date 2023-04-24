@@ -38,7 +38,7 @@ describe('Validation Messages Tests', () => {
     wrapper = shallowMount(DtValidationMessages, {
       propsData,
       attrs,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     messages = wrapper.findAll('[data-qa="validation-message"]');
   };
@@ -59,7 +59,7 @@ describe('Validation Messages Tests', () => {
     const itBehavesLikeHasNoVisibleValidationMessages = () => {
       it(
         'should not have any visible validation messages',
-        () => { expect(messages.length).toBe(0); }
+        () => { expect(messages.length).toBe(0); },
       );
     };
 
@@ -68,7 +68,7 @@ describe('Validation Messages Tests', () => {
         'should have expected number of visible validation messages',
         () => {
           expect(messages.length).toBe(validationMessagesVisible);
-        }
+        },
       );
 
       it('should have matching first validation message', () => {
@@ -240,7 +240,7 @@ describe('Validation Messages Tests', () => {
 
         it(
           'has a status role',
-          () => { expect(messages.at(0).attributes('role')).toBe('status'); }
+          () => { expect(messages.at(0).attributes('role')).toBe('status'); },
         );
         it('has aria-live set to polite', () => {
           expect(messages.at(0).attributes('aria-live')).toBe('polite');

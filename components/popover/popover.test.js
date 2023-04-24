@@ -72,7 +72,7 @@ describe('DtPopover Tests', () => {
       scopedSlots: {
         anchor: '<button data-qa="dt-button" v-bind="props.attrs">Click me</button>',
       },
-      localVue: this.localVue,
+      localVue: testContext.localVue,
       stubs: {
         // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
         transition: transitionStub(),
@@ -115,11 +115,11 @@ describe('DtPopover Tests', () => {
       });
       it(
         'should render the component',
-        () => { expect(wrapper.exists()).toBe(true); }
+        () => { expect(wrapper.exists()).toBe(true); },
       );
       it(
         'should render the popover',
-        () => { expect(popoverWindow.exists()).toBe(true); }
+        () => { expect(popoverWindow.exists()).toBe(true); },
       );
       it('should render the main content', () => {
         expect(mainContent.text()).toBe(defaultSlotMessage);
@@ -194,8 +194,8 @@ describe('DtPopover Tests', () => {
       });
 
       it('should output error message', async () => {
-        expect(consoleErrorSpy.calledWith('If the popover is modal you must set the ' +
-        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement')).toBe(true);
+        expect(consoleErrorSpy).toBeCalledWith('If the popover is modal you must set the ' +
+        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
       });
     });
 
@@ -406,7 +406,7 @@ describe('DtPopover Tests', () => {
         'aria-labelledby should be set correctly on the content window',
         () => {
           expect(popoverWindow.attributes('aria-labelledby')).toBe(wrapper.vm.labelledBy);
-        }
+        },
       );
 
       it('should pass axe-core accessibility rules', async () => {
@@ -433,7 +433,7 @@ describe('DtPopover Tests', () => {
         'should have correct aria attributes on the content window',
         async () => {
           expect(popoverWindow.attributes('aria-hidden')).toBe('true');
-        }
+        },
       );
     });
   });

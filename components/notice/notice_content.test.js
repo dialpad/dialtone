@@ -30,9 +30,9 @@ describe('DtNoticeContent tests', () => {
     propsData = basePropsData;
     slotsData = baseSlotsData;
     wrapper = shallowMount(DtNoticeContent, {
-      propsData: propsData,
+      propsData,
       slots: slotsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };

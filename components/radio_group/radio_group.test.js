@@ -40,7 +40,7 @@ describe('DtRadioGroup Tests', () => {
       propsData,
       slots,
       attrs,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -50,7 +50,7 @@ describe('DtRadioGroup Tests', () => {
       propsData,
       slots,
       attrs,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -75,21 +75,21 @@ describe('DtRadioGroup Tests', () => {
     const itBehavesLikeHasRadioGroup = () => {
       it(
         'should have a radio group',
-        () => { expect(radioGroup.exists()).toBe(true); }
+        () => { expect(radioGroup.exists()).toBe(true); },
       );
     };
 
     const itBehavesLikeDoesNotHaveLegend = () => {
       it(
         'should not have a legend',
-        () => { expect(radioGroupLegend.exists()).toBe(false); }
+        () => { expect(radioGroupLegend.exists()).toBe(false); },
       );
     };
 
     const itBehavesLikeHasLegend = () => {
       it(
         'should have a legend',
-        () => { expect(radioGroupLegend.exists()).toBe(true); }
+        () => { expect(radioGroupLegend.exists()).toBe(true); },
       );
       it('should have text matching the provided legend', () => {
         expect(radioGroupLegend.text()).toBe(legend);
@@ -111,7 +111,7 @@ describe('DtRadioGroup Tests', () => {
     const itBehavesLikeDoesNotHaveValidationMessages = () => {
       it('should not have validation messages', () => {
         expect(
-          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length
+          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
         ).toBe(0);
       });
     };
@@ -119,7 +119,7 @@ describe('DtRadioGroup Tests', () => {
     const itBehavesLikeHasValidationMessages = (numMessages) => {
       it('should have validation messages', () => {
         expect(
-          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length
+          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
         ).toBe(numMessages);
       });
     };
@@ -206,9 +206,9 @@ describe('DtRadioGroup Tests', () => {
     const selectedValue = 'kiwi';
 
     // Helpers
-    const _selectRadio = () => {
+    const _selectRadio = async () => {
       selectedRadio = radioGroup.find(`[value="${selectedValue}"]`);
-      selectedRadio.trigger('click');
+      await selectedRadio.trigger('change');
     };
 
     beforeEach(() => {
@@ -229,9 +229,9 @@ describe('DtRadioGroup Tests', () => {
 
     describe('When a radio is selected', () => {
       // Test Setup
-      beforeEach(() => {
+      beforeEach(async () => {
         _mountWrappers();
-        _selectRadio();
+        await _selectRadio();
       });
 
       it('emits an input event', () => {
@@ -251,7 +251,7 @@ describe('DtRadioGroup Tests', () => {
         beforeEach(() => { _selectRadio(); });
 
         it('does not emit an input event', () => {
-          assert.notExists(wrapper.emitted('input'));
+          expect(wrapper.emitted('input')).toBeFalsy();
         });
       });
     });
@@ -301,28 +301,28 @@ describe('DtRadioGroup Tests', () => {
 
     describe('When a legend class is provided', () => {
       beforeEach(
-        () => { _setupChildClassTest('legendClass', '[data-qa="radio-group-legend"]'); }
+        () => { _setupChildClassTest('legendClass', '[data-qa="radio-group-legend"]'); },
       );
       itBehavesLikeAppliesClassToChild();
     });
 
     describe('When a messages class is provided', () => {
       beforeEach(
-        () => { _setupChildClassTest('messagesClass', '[data-qa="radio-group-messages"]'); }
+        () => { _setupChildClassTest('messagesClass', '[data-qa="radio-group-messages"]'); },
       );
       itBehavesLikeAppliesClassToChild();
     });
 
     describe('When legendChildProps are provided', () => {
       beforeEach(
-        () => { _setupChildPropsTest('legendChildProps', '[data-qa="radio-group-legend"]'); }
+        () => { _setupChildPropsTest('legendChildProps', '[data-qa="radio-group-legend"]'); },
       );
       itBehavesLikeAppliesChildProp();
     });
 
     describe('When messagesChildProps are provided', () => {
       beforeEach(
-        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="radio-group-messages"]'); }
+        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="radio-group-messages"]'); },
       );
       itBehavesLikeAppliesChildProp();
     });

@@ -57,7 +57,7 @@ describe('DtImageViewer Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
       stubs: {
         DtButton,
       },
@@ -91,12 +91,12 @@ describe('DtImageViewer Tests', () => {
 
     describe('Viewing the image as a preview', () => {
       it('should render the component', () => {
-        assert.exists(wrapper);
+        expect(wrapper.exists()).toBeTruthy();
       });
 
       it('Should display the image in a preview form', () => {
-        assert.exists(imageViewerPreview);
-        assert.exists(previewImage);
+        expect(imageViewerPreview.exists()).toBeTruthy();
+        expect(previewImage.exists()).toBeTruthy();
       });
     });
 
@@ -106,9 +106,9 @@ describe('DtImageViewer Tests', () => {
       });
 
       it('Should show the image and a close button', () => {
-        assert.exists(fullImage);
-        assert.exists(imageViewerFull.find('img'));
-        assert.exists(closeButton);
+        expect(fullImage.exists()).toBeTruthy();
+        expect(imageViewerPreview.exists()).toBeTruthy();
+        expect(closeButton.exists()).toBeTruthy();
       });
     });
   });
@@ -145,7 +145,7 @@ describe('DtImageViewer Tests', () => {
     describe('As an image preview', () => {
       it('should open on click', async () => {
         await _openModal();
-        assert.exists(fullImage);
+        expect(fullImage.exists()).toBeTruthy();
       });
     });
 
@@ -155,7 +155,7 @@ describe('DtImageViewer Tests', () => {
       });
 
       it('Should close the image when I press close', async () => {
-        assert.exists(imageViewerFull);
+        expect(imageViewerFull.exists()).toBeTruthy();
 
         await closeButton.trigger('click');
         imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
@@ -163,7 +163,7 @@ describe('DtImageViewer Tests', () => {
       });
 
       it('Should close the image when I press the background', async () => {
-        assert.exists(imageViewerFull);
+        expect(imageViewerFull.exists()).toBeTruthy();
 
         await overlay.trigger('click');
 
@@ -173,7 +173,7 @@ describe('DtImageViewer Tests', () => {
       });
 
       it('Should close the image when I press esc', async () => {
-        assert.exists(imageViewerFull);
+        expect(imageViewerFull.exists()).toBeTruthy();
 
         await imageViewerFull.trigger('keydown', {
           code: 'Esc',

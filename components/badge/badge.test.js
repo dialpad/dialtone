@@ -35,7 +35,7 @@ describe('DtBadge Tests', () => {
     wrapper = mount(DtBadge, {
       propsData,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -57,7 +57,7 @@ describe('DtBadge Tests', () => {
       it('should render the badge', () => { expect(badge.exists()).toBe(true); });
       it(
         'should display the correct text',
-        () => { expect(badge.text()).toBe(text); }
+        () => { expect(badge.text()).toBe(text); },
       );
     };
 
@@ -88,7 +88,7 @@ describe('DtBadge Tests', () => {
       // Test Setup
       beforeEach(() => { _setWrappers(); });
 
-      it('should exist', () => { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
     });
 
     describe('When a text is provided via slot', () => {

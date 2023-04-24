@@ -65,7 +65,7 @@ describe('DtDropdown Tests', () => {
       slots,
       scopedSlots,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
       stubs: {
         transition: transitionStub(),
       },
@@ -106,7 +106,7 @@ describe('DtDropdown Tests', () => {
 
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); }
+      () => { expect(wrapper.exists()).toBe(true); },
     );
 
     it('should not render the visually hidden close button', async () => {
@@ -116,15 +116,15 @@ describe('DtDropdown Tests', () => {
     describe('When a list is provided', () => {
       it(
         'should render the list wrapper',
-        () => { expect(listWrapper.exists()).toBe(true); }
+        () => { expect(listWrapper.exists()).toBe(true); },
       );
       it(
         'should render the anchor',
-        () => { expect(anchorElement.exists()).toBe(true); }
+        () => { expect(anchorElement.exists()).toBe(true); },
       );
       it(
         'should render the list',
-        () => { expect(wrapper.find('#list').exists()).toBe(true); }
+        () => { expect(wrapper.find('#list').exists()).toBe(true); },
       );
     });
 
@@ -206,11 +206,11 @@ describe('DtDropdown Tests', () => {
 
       it(
         'should call listener',
-        () => { expect(highlightStub.called).toBe(true); }
+        () => { expect(highlightStub).toHaveBeenCalled(); },
       );
       it(
         'should emit highlight event',
-        () => { expect(wrapper.emitted().highlight.length).toEqual(1); }
+        () => { expect(wrapper.emitted().highlight.length).toEqual(1); },
       );
     });
 
@@ -222,7 +222,7 @@ describe('DtDropdown Tests', () => {
 
       it(
         'should reset the highlightIndex',
-        () => { expect(wrapper.vm.highlightIndex).toEqual(-1); }
+        () => { expect(wrapper.vm.highlightIndex).toEqual(-1); },
       );
     });
 

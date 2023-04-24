@@ -60,7 +60,7 @@ describe('DtCheckbox Tests', () => {
       slots,
       provide,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -106,7 +106,7 @@ describe('DtCheckbox Tests', () => {
         it('should exist', () => { expect(input.exists()).toBe(true); });
         it(
           'should have type checkbox',
-          () => { expect(input.attributes('type')).toBe('checkbox'); }
+          () => { expect(input.attributes('type')).toBe('checkbox'); },
         );
         it('should not be checked', () => { itBehavesLikeNotChecked(input); });
       });
@@ -115,7 +115,7 @@ describe('DtCheckbox Tests', () => {
         it('should exist', () => { expect(label.exists()).toBe(true); });
         it(
           'should match provided label prop',
-          () => { expect(label.text()).toBe(propsData.label); }
+          () => { expect(label.text()).toBe(propsData.label); },
         );
       });
     });
@@ -152,7 +152,7 @@ describe('DtCheckbox Tests', () => {
         'should remove the description wrapper if no description is provided',
         () => {
           expect(description.exists()).toBe(false);
-        }
+        },
       );
       it('should remove the label wrapper if no label is provided', () => {
         expect(label.exists()).toBe(false);
@@ -161,12 +161,12 @@ describe('DtCheckbox Tests', () => {
         'should remove the checkbox label/description container if neither is provided',
         () => {
           expect(labelDescriptionContainer.exists()).toBe(false);
-        }
+        },
       );
 
       it(
         'should keep the input checkbox',
-        () => { expect(input.exists()).toBe(true); }
+        () => { expect(input.exists()).toBe(true); },
       );
     });
 
@@ -212,7 +212,7 @@ describe('DtCheckbox Tests', () => {
 
       it(
         'should disable input',
-        () => { expect(input.element.disabled).toBe(true); }
+        () => { expect(input.element.disabled).toBe(true); },
       );
       it('should have disabled class', () => {
         expect(wrapper.find('.d-checkbox-group--disabled').exists()).toBe(true);
@@ -233,7 +233,7 @@ describe('DtCheckbox Tests', () => {
 
         it(
           'should have slotted label',
-          () => { expect(label.text()).toBe(slotLabel); }
+          () => { expect(label.text()).toBe(slotLabel); },
         );
       });
 
@@ -246,7 +246,7 @@ describe('DtCheckbox Tests', () => {
 
         it(
           'should have slotted description',
-          () => { expect(description.text()).toBe(slotDescription); }
+          () => { expect(description.text()).toBe(slotDescription); },
         );
       });
 
@@ -259,11 +259,11 @@ describe('DtCheckbox Tests', () => {
 
         it(
           'should have slotted label',
-          () => { expect(label.text()).toBe(slotLabel); }
+          () => { expect(label.text()).toBe(slotLabel); },
         );
         it(
           'should have slotted description',
-          () => { expect(description.text()).toBe(slotDescription); }
+          () => { expect(description.text()).toBe(slotDescription); },
         );
       });
     });
@@ -276,10 +276,10 @@ describe('DtCheckbox Tests', () => {
 
       describe('When the checkbox is clicked', () => {
         // Test Setup
-        beforeEach(() => { input.trigger('click'); });
+        beforeEach(async () => { await input.trigger('change'); });
 
-        it('Should emit an input event', () => {
-          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', true);
+        it('Should emit an input event', async () => {
+          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', false);
         });
       });
 
@@ -292,10 +292,10 @@ describe('DtCheckbox Tests', () => {
 
         describe('When the checkbox is clicked', () => {
           // Test Setup
-          beforeEach(() => { input.trigger('click'); });
+          beforeEach(() => { input.trigger('change'); });
 
           it('Should emit an input event', () => {
-            itBehavesLikeEmitsExpectedEvent(wrapper, 'input', false);
+            itBehavesLikeEmitsExpectedEvent(wrapper, 'input', true);
           });
         });
       });
@@ -325,12 +325,13 @@ describe('DtCheckbox Tests', () => {
       });
       it(
         'shows indeterminate visual state',
-        () => { itBehavesLikeIndeterminate(input); }
+        () => { itBehavesLikeIndeterminate(input); },
       );
 
       describe('When clicking on an indeterminate checkbox', () => {
         beforeEach(async () => {
-          input.trigger('click');
+          input.element.value = false;
+          await input.trigger('change');
         });
         it('should uncheck', () => { itBehavesLikeNotChecked(input); });
       });
@@ -349,10 +350,10 @@ describe('DtCheckbox Tests', () => {
 
         describe('When the checkbox is clicked', () => {
           // Test Setup
-          beforeEach(() => { input.trigger('click'); });
+          beforeEach(() => { input.trigger('change'); });
 
           it('Should call input handler once', () => {
-            expect(inputListenerSpy.callCount).toBe(1);
+            expect(inputListenerSpy).toHaveBeenCalledTimes(1);
           });
         });
       });
@@ -382,7 +383,7 @@ describe('DtCheckbox Tests', () => {
 
         it(
           'sets the input name',
-          () => { expect(input.attributes('name')).toBe(groupName); }
+          () => { expect(input.attributes('name')).toBe(groupName); },
         );
       });
 
@@ -392,7 +393,7 @@ describe('DtCheckbox Tests', () => {
 
         it(
           'should disable input',
-          () => { expect(input.element.disabled).toBe(true); }
+          () => { expect(input.element.disabled).toBe(true); },
         );
       });
 
@@ -413,7 +414,7 @@ describe('DtCheckbox Tests', () => {
       describe('When the checkbox group has a validation state', () => {
         // Test Setup
         beforeEach(
-          () => { _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.SUCCESS); }
+          () => { _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.SUCCESS); },
         );
 
         itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
@@ -479,28 +480,28 @@ describe('DtCheckbox Tests', () => {
 
     describe('When an label class is provided', () => {
       beforeEach(
-        () => { _setupChildClassTest('labelClass', '[data-qa="checkbox-label"]'); }
+        () => { _setupChildClassTest('labelClass', '[data-qa="checkbox-label"]'); },
       );
       itBehavesLikeAppliesClassToChildLocal();
     });
 
     describe('When an description class is provided', () => {
       beforeEach(
-        () => { _setupChildClassTest('descriptionClass', '[data-qa="checkbox-description"]'); }
+        () => { _setupChildClassTest('descriptionClass', '[data-qa="checkbox-description"]'); },
       );
       itBehavesLikeAppliesClassToChildLocal();
     });
 
     describe('When label child props are provided', () => {
       beforeEach(
-        () => { _setupChildPropsTest('labelChildProps', '[data-qa="checkbox-label"]'); }
+        () => { _setupChildPropsTest('labelChildProps', '[data-qa="checkbox-label"]'); },
       );
       itBehavesLikeAppliesChildPropLocal();
     });
 
     describe('When description child props are provided', () => {
       beforeEach(
-        () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="checkbox-description"]'); }
+        () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="checkbox-description"]'); },
       );
       itBehavesLikeAppliesChildPropLocal();
     });

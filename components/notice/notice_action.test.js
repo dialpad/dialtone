@@ -36,7 +36,7 @@ describe('DtNoticeAction tests', () => {
     wrapper = mount(DtNoticeAction, {
       propsData,
       slots: slotsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };

@@ -32,7 +32,7 @@ describe('Keyboard Navigation Mixin Tests', () => {
       attrs,
       slots,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
   };
 

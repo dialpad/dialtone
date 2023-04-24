@@ -22,7 +22,7 @@ describe('DtCodeblock Tests', () => {
   const _setWrappers = () => {
     wrapper = shallowMount(DtCodeblock, {
       propsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
   };
 

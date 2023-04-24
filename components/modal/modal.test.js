@@ -40,7 +40,7 @@ describe('DtModal Tests', () => {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtModal, {
-      localVue: this.localVue,
+      localVue: testContext.localVue,
       propsData: basePropsData,
       stubs: {
         DtButton,
@@ -61,8 +61,8 @@ describe('DtModal Tests', () => {
   it(
     'Should display title, banner and copy text based on props',
     async () => {
-      assert.isEmpty(copy.text());
-      assert.isEmpty(title.text());
+      expect(copy.exists()).toBeTruthy();
+      expect(title.exists()).toBeTruthy();
 
       const newCopy = 'test modal copy';
       const newTitle = 'test modal title';
@@ -77,7 +77,7 @@ describe('DtModal Tests', () => {
       expect(copy.text()).toEqual(newCopy);
       expect(title.text()).toEqual(newTitle);
       expect(banner.text()).toEqual(newBanner);
-    }
+    },
   );
 
   it('Close button is visible by default', async () => {
@@ -132,7 +132,7 @@ describe('DtModal Tests', () => {
       expect(copy.text()).toEqual(contentText);
       expect(title.text()).toEqual(headerText);
       expect(banner.text()).toEqual(bannerText);
-    }
+    },
   );
 
   it('Should set the aria-label on the close button', async () => {
@@ -163,7 +163,7 @@ describe('DtModal Tests', () => {
       _setChildWrappers();
 
       const syncEvent = 'update:show';
-      assert.isEmpty(wrapper.emitted());
+      expect(wrapper.emitted()).toEqual({});
 
       await overlay.trigger('click');
       expect(wrapper.emitted()[syncEvent].length).toEqual(1);
@@ -176,7 +176,7 @@ describe('DtModal Tests', () => {
       await closeBtn.trigger('click');
       expect(wrapper.emitted()[syncEvent].length).toEqual(3);
       expect(wrapper.emitted()[syncEvent][2][0]).toBe(false);
-    }
+    },
   );
 
   it(
@@ -188,7 +188,7 @@ describe('DtModal Tests', () => {
 
       await wrapper.setProps({ modalClass });
       expect(overlay.classes(modalClass)).toBe(true);
-    }
+    },
   );
 
   it('Should apply banner class', async () => {
@@ -239,7 +239,7 @@ describe('DtModal Tests', () => {
 
       await wrapper.setProps({ contentClass });
       expect(copy.classes(contentClass)).toBe(true);
-    }
+    },
   );
 
   it('Should NOT contain a visually hidden close button', () => {

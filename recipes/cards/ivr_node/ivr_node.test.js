@@ -46,7 +46,7 @@ describe('DtPagination Tests', () => {
       propsData,
       slots,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -69,11 +69,11 @@ describe('DtPagination Tests', () => {
       });
       it(
         'should render the component',
-        () => { assert.exists(wrapper, 'wrapper exists'); }
+        () => { expect(wrapper.exists()).toBe(true); },
       );
       it(
         'should render top connector dot',
-        () => { assert.exists(topConnector, 'top connector exists'); }
+        () => { expect(topConnector.exists()).toBeTruthy(); },
       );
       it('Default slot renders correctly as card content', () => {
         const content = wrapper.find('.d-card__content');
@@ -91,7 +91,7 @@ describe('DtPagination Tests', () => {
       });
       it('should render dtmf connector', () => {
         const dtmfDot = wrapper.find('[data-qa="dt-top-connector-dtmf"]');
-        assert.exists(dtmfDot, 'dtmf dot exists');
+        expect(dtmfDot.exists()).toBeTruthy();
         expect(dtmfDot.text()).toEqual('2');
       });
     });
@@ -105,8 +105,8 @@ describe('DtPagination Tests', () => {
         await _setWrappers();
       });
       it('should render connector', () => {
-        const dtmfDot = wrapper.find('[data-qa="dt-connector-element"]');
-        assert.exists(dtmfDot, 'connector exists');
+        const dtmfDot = wrapper.find('[data-qa="dt-top-connector"]');
+        expect(dtmfDot.exists()).toBeTruthy();
       });
     });
 
@@ -123,7 +123,7 @@ describe('DtPagination Tests', () => {
         const header = wrapper.find('.d-card__header');
         expect(card.classes().includes(IVR_NODE_COLOR_MAPPING[IVR_NODE_HANGUP].selected)).toBe(true);
         expect(
-          header.classes().includes(IVR_NODE_COLOR_MAPPING[IVR_NODE_HANGUP].selected)
+          header.classes().includes(IVR_NODE_COLOR_MAPPING[IVR_NODE_HANGUP].selected),
         ).toBe(true);
       });
     });

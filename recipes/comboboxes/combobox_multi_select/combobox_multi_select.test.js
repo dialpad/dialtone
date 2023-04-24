@@ -48,7 +48,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
       attachTo: document.body,
     });
     _setChildWrappers();
@@ -78,7 +78,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); }
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it('should render the input', () => { expect(input.exists()).toBe(true); });
     it('should render the input label', () => {
@@ -118,7 +118,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
         'should still set aria-label even if label visible is false',
         async () => {
           expect(input.attributes('aria-label')).toEqual(basePropsData.label);
-        }
+        },
       );
     });
 
@@ -275,9 +275,9 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       () => {
         const chip = chips.at(0);
         chip.trigger('keyup', { code: 'delete' });
-        expect(wrapper.emitted().remove).toEqual('1');
+        expect(wrapper.emitted().remove[0][0]).toEqual('1');
         expect(document.activeElement).toBe(input.element);
-      }
+      },
     );
 
     describe('When sr-only close button is enabled and activated', () => {

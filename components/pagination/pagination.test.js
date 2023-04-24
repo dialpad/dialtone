@@ -1,6 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPagination from './pagination.vue';
-import { DtButton } from '@';
+import { DtButton } from '@/components/button';
 
 // Constants
 const getPageNumberAriaLabel = (page) => {
@@ -47,7 +47,7 @@ describe('DtPagination Tests', () => {
       propsData,
       slots,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -70,27 +70,27 @@ describe('DtPagination Tests', () => {
       });
       it(
         'should not render separator',
-        () => { expect(separators.length).toBe(0); }
+        () => { expect(separators.length).toBe(0); },
       );
       it(
         'should render the component',
-        () => { assert.exists(wrapper, 'wrapper exists'); }
+        () => { expect(wrapper.exists()).toBe(true); },
       );
       it(
         'should render prev button',
-        () => { assert.exists(prev, 'previous button exists'); }
+        () => { expect(prev.exists()).toBeTruthy(); },
       );
       it(
         'should disable prev button',
-        () => { expect(prev.element.disabled).toBe(true); }
+        () => { expect(prev.element.disabled).toBe(true); },
       );
       it(
         'should render next button',
-        () => { assert.exists(next, 'next button exists'); }
+        () => { expect(next.exists()).toBeTruthy(); },
       );
       it(
         'should enable next button',
-        () => { expect(next.element.disabled).toBe(false); }
+        () => { expect(next.element.disabled).toBe(false); },
       );
       it('prev button should have aria-label', () => {
         expect(prev.attributes('aria-label')).toEqual('previous');
@@ -113,7 +113,6 @@ describe('DtPagination Tests', () => {
         await _setWrappers();
       });
       it('should render one separators', () => {
-        assert.exists(separators, 'separators exists');
         expect(separators.length).toBe(1);
       });
     });
@@ -130,7 +129,6 @@ describe('DtPagination Tests', () => {
         await _setWrappers();
       });
       it('should render two separators', () => {
-        assert.exists(separators, 'separators exists');
         expect(separators.length).toBe(2);
         // case when maxVisible is even - we round to the nearest odd when active page is in the mid-range
         expect(pages.length).toBe(9);
@@ -151,7 +149,7 @@ describe('DtPagination Tests', () => {
         'should render less than maxVisible when active page is in mid range',
         () => {
           expect(pages.length).toBe(7);
-        }
+        },
       );
     });
   });
@@ -170,11 +168,11 @@ describe('DtPagination Tests', () => {
       });
       it(
         'should enable prev button',
-        () => { expect(prev.element.disabled).toBe(false); }
+        () => { expect(prev.element.disabled).toBe(false); },
       );
       it(
         'should update page value',
-        () => { expect(wrapper.vm.currentPage).toEqual(2); }
+        () => { expect(wrapper.vm.currentPage).toEqual(2); },
       );
       it('should disable prev button and update page', async () => {
         await prev.trigger('click');

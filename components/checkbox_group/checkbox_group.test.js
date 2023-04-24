@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { flushPromises } from '@/common/utils';
 import {
   createLocalVue,
   shallowMount,
@@ -59,7 +60,7 @@ describe('Checkbox Group Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -70,7 +71,7 @@ describe('Checkbox Group Tests', () => {
       slots,
       attrs,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -98,7 +99,7 @@ describe('Checkbox Group Tests', () => {
     const itBehavesLikeHasLegend = () => {
       it(
         'should have a legend',
-        () => { expect(checkboxGroupLegend.exists()).toBe(true); }
+        () => { expect(checkboxGroupLegend.exists()).toBe(true); },
       );
       it('should have text matching the provided legend', () => {
         expect(checkboxGroupLegend.text()).toBe(legend);
@@ -111,18 +112,18 @@ describe('Checkbox Group Tests', () => {
 
       it(
         'should have a checkbox group',
-        () => { expect(checkboxGroup.exists()).toBe(true); }
+        () => { expect(checkboxGroup.exists()).toBe(true); },
       );
       it(
         'should not have a legend',
-        () => { expect(checkboxGroupLegend.exists()).toBe(false); }
+        () => { expect(checkboxGroupLegend.exists()).toBe(false); },
       );
       it('should not have checkboxes', () => {
         expect(wrapper.findAllComponents(DtCheckbox).length).toBe(0);
       });
       it('should not have validation messages', () => {
         expect(
-          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length
+          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
         ).toBe(0);
       });
     });
@@ -223,9 +224,11 @@ describe('Checkbox Group Tests', () => {
     const selectedValue = 'apple';
 
     // Helpers
-    const _selectCheckbox = (value) => {
+    const _selectCheckbox = async (value) => {
       const selectedCheckbox = checkboxGroup.find(`[value="${value}"]`);
-      selectedCheckbox.trigger('click');
+      selectedCheckbox.element.checked = true;
+      await selectedCheckbox.trigger('change');
+      await flushPromises();
     };
 
     // Shared Examples
@@ -259,8 +262,8 @@ describe('Checkbox Group Tests', () => {
         const selectedValues = [selectedValue, selectedValue2];
 
         // Test Setup
-        beforeEach(() => {
-          _selectCheckbox(selectedValue2);
+        beforeEach(async () => {
+          await _selectCheckbox(selectedValue2);
         });
 
         itBehavesLikeUpdatesProvideObj(selectedValues);
@@ -299,7 +302,7 @@ describe('Checkbox Group Tests', () => {
 
         it(
           'does not emit an input event',
-          () => { itBehavesLikeDoesNotEmitEvents(wrapper); }
+          () => { itBehavesLikeDoesNotEmitEvents(wrapper); },
         );
       });
     });
@@ -383,7 +386,7 @@ describe('Checkbox Group Tests', () => {
     describe('When a legend class is provided', () => {
       // Test Setup
       beforeEach(
-        () => { _setupChildClassTest('legendClass', '[data-qa="checkbox-group-legend"]'); }
+        () => { _setupChildClassTest('legendClass', '[data-qa="checkbox-group-legend"]'); },
       );
 
       itBehavesLikeAppliesClassToChildLocal();
@@ -392,7 +395,7 @@ describe('Checkbox Group Tests', () => {
     describe('When a messages class is provided', () => {
       // Test Setup
       beforeEach(
-        () => { _setupChildClassTest('messagesClass', '[data-qa="checkbox-group-messages"]'); }
+        () => { _setupChildClassTest('messagesClass', '[data-qa="checkbox-group-messages"]'); },
       );
 
       itBehavesLikeAppliesClassToChildLocal();
@@ -401,7 +404,7 @@ describe('Checkbox Group Tests', () => {
     describe('When legend child props are provided', () => {
       // Test Setup
       beforeEach(
-        () => { _setupChildPropsTest('legendChildProps', '[data-qa="checkbox-group-legend"]'); }
+        () => { _setupChildPropsTest('legendChildProps', '[data-qa="checkbox-group-legend"]'); },
       );
 
       itBehavesLikeAppliesChildPropLocal();
@@ -410,7 +413,7 @@ describe('Checkbox Group Tests', () => {
     describe('When messages child props are provided', () => {
       // Test Setup
       beforeEach(
-        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="checkbox-group-messages"]'); }
+        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="checkbox-group-messages"]'); },
       );
 
       itBehavesLikeAppliesChildPropLocal();

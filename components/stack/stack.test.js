@@ -29,7 +29,7 @@ describe('DtStack Tests', () => {
   const _setWrappers = () => {
     wrapper = shallowMount(DtStack, {
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -68,7 +68,7 @@ describe('DtStack Tests', () => {
         'should set the proper class and override the default value',
         () => {
           expect(wrapper.classes('d-stack', 'd-stack--row')).toBe(true);
-        }
+        },
       );
     });
 

@@ -26,7 +26,7 @@ describe('DtNoticeIcon tests', () => {
       components: { DtIcon },
       propsData,
       slots: slotsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };

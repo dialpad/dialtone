@@ -46,19 +46,19 @@ describe('DtCard Tests', () => {
 
   describe('Test default rendering', () => {
     it('should render the component', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     it('should render the header', () => {
-      assert.exists(headerElement, 'header exists');
+      expect(headerElement.exists()).toBeTruthy();
     });
 
     it('should render the content', () => {
-      assert.exists(contentElement, 'content exists');
+      expect(contentElement.exists()).toBeTruthy();
     });
 
     it('should render the footer', () => {
-      assert.exists(footerElement, 'footer exists');
+      expect(footerElement.exists()).toBeTruthy();
     });
   });
 });

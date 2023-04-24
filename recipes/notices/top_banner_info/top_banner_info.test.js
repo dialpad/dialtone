@@ -42,7 +42,7 @@ describe('DtRecipeTopBannerInfo Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };

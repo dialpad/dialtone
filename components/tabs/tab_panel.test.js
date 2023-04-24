@@ -39,7 +39,7 @@ describe('DtTabPanel Tests', () => {
     _mountWrapper();
 
     it('should render the component', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     it('should render the default slot', () => {
@@ -121,7 +121,7 @@ describe('DtTabPanel Tests', () => {
         'tabindex should be "0" if the first element is not focusable',
         () => {
           expect(tabPanel.attributes('tabindex')).toBe('0');
-        }
+        },
       );
     });
 

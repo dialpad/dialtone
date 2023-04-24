@@ -59,15 +59,15 @@ describe('DtBreadcrumb Tests', () => {
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); }
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it(
       'should render the breadcrumbs',
-      () => { assert.exists(breadcrumbs.exists(), 'breadcrumbs exist'); }
+      () => { expect(breadcrumbs.exists()).toBeTruthy(); },
     );
     it(
       'should render the item breadcrumb',
-      () => { assert.exists(breadcrumbItems.exists(), 'items exist'); }
+      () => { expect(breadcrumbItems.exists()).toBeTruthy(); },
     );
 
     describe('When the breadcrumb has default state', () => {

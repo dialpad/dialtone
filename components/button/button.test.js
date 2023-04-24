@@ -28,7 +28,7 @@ describe('DtButton Tests', () => {
   const _assertButtonDefaultClasses = function () {
     const expected = ['base-button__button', 'd-btn', 'd-btn--primary'];
     expect(
-      button.classes().every(function (value, index) { return value === expected[index]; })
+      button.classes().every(function (value, index) { return value === expected[index]; }),
     ).toBe(true);
   };
 
@@ -45,7 +45,7 @@ describe('DtButton Tests', () => {
       });
 
       it('Should render the native button', () => {
-        assert.exists(wrapper, 'wrapper exists');
+        expect(wrapper.exists()).toBe(true);
         expect(button.exists()).toBe(true);
       });
 
@@ -277,7 +277,7 @@ describe('DtButton Tests', () => {
             button = wrapper.find('.base-button__button');
             const expected = ['base-button__button', 'd-link'];
             expect(
-              button.classes().every(function (value, index) { return value === expected[index]; })
+              button.classes().every(function (value, index) { return value === expected[index]; }),
             ).toBe(true);
           });
         });
@@ -317,7 +317,7 @@ describe('DtButton Tests', () => {
           await wrapper.setProps({ iconPosition: 'left' });
           icon = wrapper.find('.base-button__icon');
           expect(icon.classes().includes('d-btn__icon--left')).toBe(true);
-        }
+        },
       );
 
       it(
@@ -326,7 +326,7 @@ describe('DtButton Tests', () => {
           await wrapper.setProps({ iconPosition: 'right' });
           icon = wrapper.find('.base-button__icon');
           expect(icon.classes().includes('d-btn__icon--right')).toBe(true);
-        }
+        },
       );
 
       it(
@@ -336,7 +336,7 @@ describe('DtButton Tests', () => {
           icon = wrapper.find('.base-button__icon');
           expect(icon.classes().includes('d-btn__icon--top')).toBe(true);
           expect(button.classes().includes('d-btn--vertical')).toBe(true);
-        }
+        },
       );
 
       it(
@@ -346,7 +346,7 @@ describe('DtButton Tests', () => {
           icon = wrapper.find('.base-button__icon');
           expect(icon.classes().includes('d-btn__icon--bottom')).toBe(true);
           expect(button.classes().includes('d-btn--vertical')).toBe(true);
-        }
+        },
       );
     });
 
@@ -391,7 +391,7 @@ describe('DtButton Tests', () => {
       });
 
       it('Should call listener', async () => {
-        expect(buttonStub.called).toBe(true);
+        expect(buttonStub).toHaveBeenCalled();
       });
 
       it('Should emit click event', () => {

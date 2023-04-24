@@ -46,7 +46,7 @@ describe('DtEmoji Tests', () => {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     await flushPromises();
     await _setChildWrappers();

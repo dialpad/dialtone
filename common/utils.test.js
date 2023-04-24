@@ -35,7 +35,7 @@ describe('Util Tests', () => {
   const itBehavesLikeReturnsEmptyMessageList = (messageList) => {
     it(
       'should return an empty message list',
-      () => { expect(messageList).toEqual([]); }
+      () => { expect(messageList).toEqual([]); },
     );
   };
 
@@ -45,11 +45,11 @@ describe('Util Tests', () => {
 
     it(
       'should return a string',
-      () => { assert.exists(getUniqueString()); }
+      () => { expect(getUniqueString()).toBeTruthy(); },
     );
     it(
       'should return a unique string',
-      () => { expect(getUniqueString()).not.toBe(getUniqueString()); }
+      () => { expect(getUniqueString()).not.toBe(getUniqueString()); },
     );
     it('should have default prefix', () => {
       expect(getUniqueString().includes(DEFAULT_PREFIX)).toBe(true);
@@ -239,7 +239,7 @@ describe('Util Tests', () => {
     describe('when no formatted message list is provided', () => {
       it(
         'should return false',
-        () => { expect(hasFormattedMessageOfType()).toBe(false); }
+        () => { expect(hasFormattedMessageOfType()).toBe(false); },
       );
     });
 
@@ -294,7 +294,7 @@ describe('Util Tests', () => {
       describe('when there is no formatted message of the given type', () => {
         it('should return false', () => {
           expect(
-            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.ERROR)
+            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.ERROR),
           ).toBe(false);
         });
       });
@@ -302,7 +302,7 @@ describe('Util Tests', () => {
       describe('when there is a formatted message of the given type', () => {
         it('should return true', () => {
           expect(
-            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.SUCCESS)
+            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.SUCCESS),
           ).toBe(true);
         });
       });

@@ -57,7 +57,7 @@ describe('DtRichTextEditor tests', () => {
 
   describe('Presentation Tests', () => {
     it('should render the component', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     it('should contain the initial value', () => {
@@ -77,7 +77,7 @@ describe('DtRichTextEditor tests', () => {
             // emitted will be the initial value from mount.
             await wrapper.vm.editor.emit('update');
             expect(wrapper.emitted().input[0][0]).toEqual(value);
-            expect(inputStub.called).toBe(true);
+            expect(inputStub).toHaveBeenCalled();
           });
         };
 

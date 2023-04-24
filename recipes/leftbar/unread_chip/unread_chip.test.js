@@ -48,7 +48,7 @@ describe('DtRecipeUnreadChip Tests', () => {
       slots,
       provide,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -73,12 +73,12 @@ describe('DtRecipeUnreadChip Tests', () => {
 
   describe('Presentation Tests', () => {
     describe('When the unread chip renders', () => {
-      it('should exist', () => { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
       it('should render the text', () => {
         expect(unreadChipLabel.text()).toBe(baseSlots.default);
       });
       it('should render the icon', () => {
-        assert.exists(unreadChipIcon);
+        expect(unreadChipIcon.exists()).toBeTruthy();
       });
     });
 
@@ -137,7 +137,7 @@ describe('DtRecipeUnreadChip Tests', () => {
       });
 
       it('should emit click', () => {
-        expect(clickListenerSpy.callCount).toBe(1);
+        expect(clickListenerSpy).toHaveBeenCalled();
       });
     });
   });

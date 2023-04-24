@@ -70,15 +70,15 @@ describe('DtCollapsible Tests', () => {
 
   describe('Test default rendering', () => {
     it('should render the component', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     it('should render the anchor', () => {
-      assert.exists(anchorElement, 'anchor exists');
+      expect(anchorElement.exists()).toBeTruthy();
     });
 
     it('should render the content', () => {
-      assert.exists(contentElement, 'content exists');
+      expect(contentElement.exists()).toBeTruthy();
     });
   });
 
@@ -86,9 +86,10 @@ describe('DtCollapsible Tests', () => {
     beforeEach(() => {
       const anchor = '<button data-qa="anchor-element">click me</button>';
       scopedSlots = { anchor };
+      _mountWrapper();
     });
     it('should render the scoped slot', () => {
-      assert.exists(anchorSlotElement, 'anchor slot exists');
+      expect(anchorSlotElement.exists()).toBeTruthy();
     });
   });
 
@@ -160,9 +161,7 @@ describe('DtCollapsible Tests', () => {
     });
 
     it('should output error message', async () => {
-      expect(
-        consoleErrorSpy.calledWith('anchor text and anchor slot content cannot both be falsy')
-      ).toBe(true);
+      expect(consoleErrorSpy).toHaveBeenCalledWith('anchor text and anchor slot content cannot both be falsy');
     });
   });
 
@@ -186,7 +185,7 @@ describe('DtCollapsible Tests', () => {
         () => {
           expect(anchorElement.attributes('aria-controls')).toEqual('contentId');
           expect(contentWrapperElement.attributes('id')).toEqual('contentId');
-        }
+        },
       );
 
       it('aria-expanded should be true', () => {

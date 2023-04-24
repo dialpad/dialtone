@@ -9,10 +9,14 @@ const basePropsData = {
 };
 
 describe('DtKeyboardShortcut Tests', () => {
-  let testContext;
+  let testContext = {
+    localVue: null,
+  };
 
+  // Setup
   beforeAll(() => {
     testContext = {};
+    testContext.localVue = createLocalVue();
   });
 
   // Wrappers
@@ -30,27 +34,22 @@ describe('DtKeyboardShortcut Tests', () => {
   const _mountWrapper = () => {
     wrapper = mount(DtKeyboardShortcut, {
       propsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
 
-  // Setup
-  beforeAll(() => {
-    testContext.localVue = createLocalVue();
-  });
-
   describe('Presentation Tests', () => {
     // Setup
-    _mountWrapper();
+    beforeEach(() => {
+      _mountWrapper();
+    });
 
-    it(
-      'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); }
-    );
-    it(
-      'should render 11 icons',
-      () => { expect(iconComponents.length === 11).toBe(true); }
-    );
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
+    it('should render 11 icons', () => {
+      expect(iconComponents.length === 11).toBe(true);
+    });
   });
 });

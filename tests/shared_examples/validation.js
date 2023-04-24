@@ -26,14 +26,14 @@ export function itBehavesLikeFailsCustomPropValidation (prop, value) {
 export const itBehavesLikeDoesNotRaiseAnyVueWarnings = () => {
   it(
     'should not raise any warnings',
-    () => { expect(Vue.util.warn.notCalled).toBe(true); }
+    () => { expect(Vue.util.warn).toHaveBeenCalledTimes(0); },
   );
 };
 
 export const itBehavesLikeRaisesSingleVueWarning = (message) => {
   it(
     'should raise a single warning',
-    () => { expect(Vue.util.warn.calledOnce).toBe(true); }
+    () => { expect(Vue.util.warn).toHaveBeenCalledTimes(1); },
   );
   it('should have expected warning message', () => {
     expect(Vue.util.warn.mock.calls[0][0]).toBe(message);
@@ -43,7 +43,7 @@ export const itBehavesLikeRaisesSingleVueWarning = (message) => {
 export const itBehavesLikeRaisesValidationError = (message) => {
   it(
     'should raise a validation error',
-    () => { expect(consoleErrorSpy.calledWith(message)).toBe(true); }
+    () => { expect(consoleErrorSpy).toHaveBeenCalledWith(message); },
   );
 };
 

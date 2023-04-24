@@ -53,17 +53,17 @@ describe('DtLink tests', () => {
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); }
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it(
       'should render the native anchor',
-      () => { expect(nativeLink.exists()).toBe(true); }
+      () => { expect(nativeLink.exists()).toBe(true); },
     );
 
     describe('When a default slot is provided', () => {
       it(
         'should render the provided data',
-        () => { expect(nativeLink.text()).toEqual(slots.default); }
+        () => { expect(nativeLink.text()).toEqual(slots.default); },
       );
     });
 

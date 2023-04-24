@@ -38,7 +38,7 @@ describe('DtRecipeCallbarButton Tests', () => {
       provide,
       listeners,
       attachTo: document.body,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -68,16 +68,16 @@ describe('DtRecipeCallbarButton Tests', () => {
   describe('Presentation Tests', () => {
     describe('Default render', () => {
       it('should render the component', () => {
-        assert.exists(wrapper);
+        expect(wrapper.exists()).toBeTruthy();
       });
 
       it('should render a tooltip component', () => {
-        assert.exists(tooltip);
+        expect(tooltip.exists()).toBeTruthy();
       });
 
       it('should render a muted button', () => {
         const buttonProps = button.props();
-        assert.exists(button);
+        expect(button.exists()).toBeTruthy();
         expect(buttonProps.kind).toEqual('muted');
       });
     });
@@ -111,7 +111,7 @@ describe('DtRecipeCallbarButton Tests', () => {
           await wrapper.setProps({ importance: 'clear', circle: 'true' });
           expect(button.classes().includes('dt-recipe-callbar-button--circle')).toBe(true);
           expect(button.props().importance).toEqual('clear');
-        }
+        },
       );
     });
   });
@@ -126,7 +126,7 @@ describe('DtRecipeCallbarButton Tests', () => {
         await button.find('button').trigger('click');
         await wrapper.vm.$nextTick();
 
-        expect(clickStub.called).toBe(true);
+        expect(clickStub).toHaveBeenCalled();
       });
     });
   });

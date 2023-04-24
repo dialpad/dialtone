@@ -20,10 +20,6 @@ const basePropsData = {
 describe('DtRecipeComboboxWithPopover Tests', () => {
   let testContext;
 
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let inputWrapper;
@@ -57,7 +53,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
       slots,
       scopedSlots,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
       global: {
         stubs: {
           transition: false,
@@ -73,6 +69,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
     // Need to mock them to avoid error
     global.requestAnimationFrame = jest.fn();
     global.cancelAnimationFrame = jest.fn();
+    testContext = {};
     testContext.localVue = createLocalVue();
   });
 
@@ -103,7 +100,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); }
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it('should not render the visually hidden close button', async () => {
       await _openComboboxPopover();
@@ -124,11 +121,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
       it(
         'should render the input wrapper',
-        () => { expect(inputWrapper.exists()).toBe(true); }
+        () => { expect(inputWrapper.exists()).toBe(true); },
       );
       it(
         'should render the input',
-        () => { expect(wrapper.findComponent(DtInput).exists()).toBe(true); }
+        () => { expect(wrapper.findComponent(DtInput).exists()).toBe(true); },
       );
     });
 
@@ -166,11 +163,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
       it(
         'should render the list wrapper',
-        () => { expect(listWrapper.exists()).toBe(true); }
+        () => { expect(listWrapper.exists()).toBe(true); },
       );
       it('should render the list', () => {
         expect(
-          wrapper.findComponent(DtPopover).findComponent({ ref: 'content' }).find('#list').exists()
+          wrapper.findComponent(DtPopover).findComponent({ ref: 'content' }).find('#list').exists(),
         ).toBe(true);
       });
     });
@@ -321,10 +318,10 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
         it(
           'should emit escape event',
-          () => { expect(wrapper.emitted().escape.length).toEqual(1); }
+          () => { expect(wrapper.emitted().escape.length).toEqual(1); },
         );
       });
 
@@ -335,11 +332,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(selectStub.called).toBe(false); }
+          () => { expect(selectStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit select event',
-          () => { expect(wrapper.emitted().select).not.toBeDefined(); }
+          () => { expect(wrapper.emitted().select).not.toBeDefined(); },
         );
       });
 
@@ -350,11 +347,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); }
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); }
+          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
         );
       });
 
@@ -365,11 +362,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); }
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); }
+          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
         );
       });
 
@@ -380,11 +377,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); }
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); }
+          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
         );
       });
 
@@ -395,11 +392,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); }
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); }
+          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
         );
       });
     });
@@ -421,10 +418,10 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
         it(
           'should emit escape event',
-          () => { expect(wrapper.emitted().escape.length).toEqual(1); }
+          () => { expect(wrapper.emitted().escape.length).toEqual(1); },
         );
       });
 
@@ -435,11 +432,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(selectStub.called).toBe(false); }
+          () => { expect(selectStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit select event',
-          () => { expect(wrapper.emitted().select).not.toBeDefined(); }
+          () => { expect(wrapper.emitted().select).not.toBeDefined(); },
         );
       });
 
@@ -450,11 +447,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); }
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(2); }
+          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
         );
       });
 
@@ -465,11 +462,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); }
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(2); }
+          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
         );
       });
 
@@ -480,11 +477,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); }
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(2); }
+          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
         );
       });
 
@@ -495,11 +492,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); }
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(2); }
+          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
         );
       });
     });
@@ -509,10 +506,10 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         await _openComboboxPopover();
       });
 
-      it('should call listener', () => { expect(openedStub.called).toBe(true); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toEqual(1); }
+        () => { expect(wrapper.emitted().opened.length).toEqual(1); },
       );
     });
 
@@ -522,10 +519,10 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         await wrapper.setProps({ showList: false });
       });
 
-      it('should call listener', () => { expect(openedStub.called).toBe(true); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toEqual(2); }
+        () => { expect(wrapper.emitted().opened.length).toEqual(2); },
       );
     });
 
@@ -536,11 +533,11 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
       it(
         'should not call listener',
-        () => { expect(selectStub.called).toBe(false); }
+        () => { expect(selectStub).not.toHaveBeenCalled(); },
       );
       it(
         'should not emit select event',
-        () => { expect(wrapper.emitted().select).not.toBeDefined(); }
+        () => { expect(wrapper.emitted().select).not.toBeDefined(); },
       );
     });
 
@@ -550,10 +547,10 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         await wrapper.trigger('keydown.enter');
       });
 
-      it('should call listener', () => { expect(selectStub.called).toBe(true); });
+      it('should call listener', () => { expect(selectStub).toHaveBeenCalled(); });
       it(
         'should emit select event',
-        () => { expect(wrapper.emitted().select.length).toEqual(1); }
+        () => { expect(wrapper.emitted().select.length).toEqual(1); },
       );
     });
 
@@ -563,10 +560,10 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         await wrapper.trigger('keydown.esc');
       });
 
-      it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+      it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
       it(
         'should emit escape event',
-        () => { expect(wrapper.emitted().escape.length).toEqual(1); }
+        () => { expect(wrapper.emitted().escape.length).toEqual(1); },
       );
     });
 
@@ -581,10 +578,10 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
           .trigger('click');
       });
 
-      it('should call listener', () => { expect(openedStub.called).toBe(true); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toEqual(1); }
+        () => { expect(wrapper.emitted().opened.length).toEqual(1); },
       );
     });
   });
