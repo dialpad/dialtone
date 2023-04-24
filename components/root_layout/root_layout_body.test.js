@@ -5,7 +5,6 @@ import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_lay
 // Constants
 const basePropsData = {
   sidebarWidth: '256px',
-  contentWrapWidthPercent: '50%',
 };
 
 const baseSlotsData = {
@@ -33,9 +32,9 @@ describe('DtRootLayoutBody Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    body = wrapper.find('[data-qa="root-layout-body"]');
-    sidebar = wrapper.find('[data-qa="root-layout-sidebar"]');
-    content = wrapper.find('[data-qa="root-layout-content"]');
+    body = wrapper.find('[data-qa="dt-root-layout-body"]');
+    sidebar = wrapper.find('[data-qa="dt-root-layout-sidebar"]');
+    content = wrapper.find('[data-qa="dt-root-layout-content"]');
   };
 
   const _setWrappers = () => {
@@ -84,15 +83,11 @@ describe('DtRootLayoutBody Tests', () => {
       it('should set the sidebar width', () => {
         expect(sidebar.element.style.getPropertyValue('flex-basis')).toBe(propsData.sidebarWidth);
       });
-
-      it('should set the body content wrap percent', () => {
-        expect(content.element.style.getPropertyValue('min-inline-size')).toBe(propsData.contentWrapWidthPercent);
-      });
     });
 
     const itBehavesLikeExcludesBodyInvertClass = () => {
       it('Has correct class', async () => {
-        expect(body.classes('root-layout__body--invert')).toBe(false);
+        expect(body.classes('d-root-layout__body--invert')).toBe(false);
       });
     };
 
@@ -114,7 +109,7 @@ describe('DtRootLayoutBody Tests', () => {
       });
 
       it('Has correct class', async () => {
-        expect(body.classes('root-layout__body--invert')).toBe(true);
+        expect(body.classes('d-root-layout__body--invert')).toBe(true);
       });
     });
   });
