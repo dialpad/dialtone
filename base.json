@@ -515,6 +515,26 @@
         "value": "{size.900} * 2",
         "type": "sizing"
       },
+      "1020": {
+        "value": "(({size.1000} + {size.1040}) / 2) - ({size.450} - {size.200})",
+        "type": "sizing"
+      },
+      "1040": {
+        "value": "(({size.1000} + {size.1100}) / 2) - {size.300}",
+        "type": "sizing"
+      },
+      "1050": {
+        "value": "({size.1000} + {size.1100}) / 2",
+        "type": "sizing"
+      },
+      "1060": {
+        "value": "{size.1050} + ({size.700} - {size.300})",
+        "type": "sizing"
+      },
+      "1080": {
+        "value": "({size.1060} + {size.1100})/2 - ({size.500} - {size.200})",
+        "type": "sizing"
+      },
       "1100": {
         "value": "{size.1000} * 2",
         "type": "sizing"
@@ -625,6 +645,26 @@
       },
       "1000-negative": {
         "value": "{size.1000} * -1",
+        "type": "sizing"
+      },
+      "1020-negative": {
+        "value": "{size.1020} * -1",
+        "type": "sizing"
+      },
+      "1040-negative": {
+        "value": "{size.1040} * -1",
+        "type": "sizing"
+      },
+      "1050-negative": {
+        "value": "{size.1050} * -1",
+        "type": "sizing"
+      },
+      "1060-negative": {
+        "value": "{size.1060} * -1",
+        "type": "sizing"
+      },
+      "1080-negative": {
+        "value": "{size.1080} * -1",
         "type": "sizing"
       },
       "1100-negative": {
@@ -889,6 +929,26 @@
         "value": "{space.900} * 2",
         "type": "spacing"
       },
+      "1020": {
+        "value": "(({space.1000} + {space.1040}) / 2) - ({space.450} - {space.200})",
+        "type": "spacing"
+      },
+      "1040": {
+        "value": "(({space.1000} + {space.1100}) / 2) - {space.300}",
+        "type": "spacing"
+      },
+      "1050": {
+        "value": "({space.1000} + {space.1100}) / 2",
+        "type": "spacing"
+      },
+      "1060": {
+        "value": "{space.1050} + ({space.700} - {space.300})",
+        "type": "spacing"
+      },
+      "1080": {
+        "value": "({space.1060} + {space.1100})/2 - ({space.500} - {space.200})",
+        "type": "spacing"
+      },
       "1100": {
         "value": "{space.1000} * 2",
         "type": "spacing"
@@ -999,6 +1059,26 @@
       },
       "1000-negative": {
         "value": "{space.1000} * -1",
+        "type": "spacing"
+      },
+      "1020-negative": {
+        "value": "{space.1020} * -1",
+        "type": "spacing"
+      },
+      "1040-negative": {
+        "value": "{space.1040} * -1",
+        "type": "spacing"
+      },
+      "1050-negative": {
+        "value": "{space.1050} * -1",
+        "type": "spacing"
+      },
+      "1060-negative": {
+        "value": "{space.1060} * -1",
+        "type": "spacing"
+      },
+      "1080-negative": {
+        "value": "{space.1080} * -1",
         "type": "spacing"
       },
       "1100-negative": {
