@@ -543,6 +543,26 @@
         "value": "{size.1000} * 2",
         "type": "sizing"
       },
+      "1115": {
+        "value": "(({size.1100} + {size.1125}) / 2) - ({size.400} + {size.300})",
+        "type": "sizing"
+      },
+      "1120": {
+        "value": "{size.1125} - {size.450}",
+        "type": "sizing"
+      },
+      "1125": {
+        "value": "({size.1100} + {size.1150}) / 2",
+        "type": "sizing"
+      },
+      "1130": {
+        "value": "{size.1125} + ({size.700} - {size.300})",
+        "type": "sizing"
+      },
+      "1150": {
+        "value": "({size.1100} + {size.1200}) / 2",
+        "type": "sizing"
+      },
       "1200": {
         "value": "{size.1100} * 2",
         "type": "sizing"
@@ -677,6 +697,26 @@
       },
       "1100-negative": {
         "value": "{size.1100} * -1",
+        "type": "sizing"
+      },
+      "1115-negative": {
+        "value": "{size.1115} * -1",
+        "type": "sizing"
+      },
+      "1120-negative": {
+        "value": "{size.1120} * -1",
+        "type": "sizing"
+      },
+      "1125-negative": {
+        "value": "{size.1125} * -1",
+        "type": "sizing"
+      },
+      "1130-negative": {
+        "value": "{size.1130} * -1",
+        "type": "sizing"
+      },
+      "1150-negative": {
+        "value": "{size.1150} * -1",
         "type": "sizing"
       },
       "1200-negative": {
@@ -965,6 +1005,26 @@
         "value": "{space.1000} * 2",
         "type": "spacing"
       },
+      "1115": {
+        "value": "(({space.1100} + {space.1125}) / 2) - ({space.400} + {space.300})",
+        "type": "spacing"
+      },
+      "1120": {
+        "value": "{space.1125} - {space.450}",
+        "type": "spacing"
+      },
+      "1125": {
+        "value": "({space.1100} + {space.1150}) / 2",
+        "type": "spacing"
+      },
+      "1130": {
+        "value": "{space.1125} + ({space.700} - {space.300})",
+        "type": "spacing"
+      },
+      "1150": {
+        "value": "({space.1100} + {space.1200}) / 2",
+        "type": "spacing"
+      },
       "1200": {
         "value": "{space.1100} * 2",
         "type": "spacing"
@@ -1099,6 +1159,26 @@
       },
       "1100-negative": {
         "value": "{space.1100} * -1",
+        "type": "spacing"
+      },
+      "1115-negative": {
+        "value": "{size.1115} * -1",
+        "type": "spacing"
+      },
+      "1120-negative": {
+        "value": "{size.1120} * -1",
+        "type": "spacing"
+      },
+      "1125-negative": {
+        "value": "{size.1125} * -1",
+        "type": "spacing"
+      },
+      "1130-negative": {
+        "value": "{size.1130} * -1",
+        "type": "spacing"
+      },
+      "1150-negative": {
+        "value": "{size.1150} * -1",
         "type": "spacing"
       },
       "1200-negative": {
