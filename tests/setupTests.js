@@ -1,9 +1,14 @@
 // Mock IntersectionObserver
-const MockObserver = {
-  observe: jest.fn(),
-  disconnect: jest.fn(),
-  unobserve: jest.fn(),
-};
+class MockObserver {
+  observe () {
+  }
+
+  disconnect () {
+  }
+
+  unobserve () {
+  }
+}
 
 beforeAll(() => {
   global.IntersectionObserver = MockObserver;
