@@ -9,28 +9,28 @@ describe('Validator Tests', () => {
     describe('when no message list is provided', () => {
       it(
         'should return true',
-        () => { expect(validationMessageValidator()).toBe(true); }
+        () => { expect(validationMessageValidator()).toBe(true); },
       );
     });
 
     describe('when message list is undefined', () => {
       it(
         'should return true',
-        () => { expect(validationMessageValidator(undefined)).toBe(true); }
+        () => { expect(validationMessageValidator(undefined)).toBe(true); },
       );
     });
 
     describe('when message list is null', () => {
       it(
         'should return true',
-        () => { expect(validationMessageValidator(null)).toBe(true); }
+        () => { expect(validationMessageValidator(null)).toBe(true); },
       );
     });
 
     describe('when message list is empty', () => {
       it(
         'should return true',
-        () => { expect(validationMessageValidator([])).toBe(true); }
+        () => { expect(validationMessageValidator([])).toBe(true); },
       );
     });
 
@@ -42,7 +42,7 @@ describe('Validator Tests', () => {
 
       it(
         'should return true',
-        () => { expect(validationMessageValidator(rawMessages)).toBe(true); }
+        () => { expect(validationMessageValidator(rawMessages)).toBe(true); },
       );
     });
 
@@ -57,7 +57,7 @@ describe('Validator Tests', () => {
 
       it(
         'should return true',
-        () => { expect(validationMessageValidator(rawMessages)).toBe(true); }
+        () => { expect(validationMessageValidator(rawMessages)).toBe(true); },
       );
     });
 
@@ -75,7 +75,7 @@ describe('Validator Tests', () => {
 
       it(
         'should return true',
-        () => { expect(validationMessageValidator(rawMessages)).toBe(true); }
+        () => { expect(validationMessageValidator(rawMessages)).toBe(true); },
       );
     });
 
@@ -87,7 +87,7 @@ describe('Validator Tests', () => {
 
       it(
         'should return false',
-        () => { expect(validationMessageValidator(rawMessages)).toBe(false); }
+        () => { expect(validationMessageValidator(rawMessages)).toBe(false); },
       );
     });
 
@@ -99,7 +99,7 @@ describe('Validator Tests', () => {
 
       it(
         'should return false',
-        () => { expect(validationMessageValidator(rawMessages)).toBe(false); }
+        () => { expect(validationMessageValidator(rawMessages)).toBe(false); },
       );
     });
   });

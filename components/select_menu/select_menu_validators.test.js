@@ -8,28 +8,28 @@ describe('DtSelectMenuValidator Tests', () => {
     describe('when no option list is provided', () => {
       it(
         'should return true',
-        () => { expect(optionsValidator()).toBe(true); }
+        () => { expect(optionsValidator()).toBe(true); },
       );
     });
 
     describe('when option list is undefined', () => {
       it(
         'should return true',
-        () => { expect(optionsValidator(undefined)).toBe(true); }
+        () => { expect(optionsValidator(undefined)).toBe(true); },
       );
     });
 
     describe('when option list is null', () => {
       it(
         'should return true',
-        () => { expect(optionsValidator(null)).toBe(true); }
+        () => { expect(optionsValidator(null)).toBe(true); },
       );
     });
 
     describe('when option list is empty', () => {
       it(
         'should return true',
-        () => { expect(optionsValidator([])).toBe(true); }
+        () => { expect(optionsValidator([])).toBe(true); },
       );
     });
 
@@ -42,7 +42,7 @@ describe('DtSelectMenuValidator Tests', () => {
 
         it(
           'should return true',
-          () => { expect(optionsValidator(options)).toBe(true); }
+          () => { expect(optionsValidator(options)).toBe(true); },
         );
       });
 
@@ -54,7 +54,7 @@ describe('DtSelectMenuValidator Tests', () => {
 
         it(
           'should return true',
-          () => { expect(optionsValidator(options)).toBe(true); }
+          () => { expect(optionsValidator(options)).toBe(true); },
         );
       });
 
@@ -66,7 +66,7 @@ describe('DtSelectMenuValidator Tests', () => {
 
         it(
           'should return true',
-          () => { expect(optionsValidator(options)).toBe(true); }
+          () => { expect(optionsValidator(options)).toBe(true); },
         );
       });
     });
@@ -80,7 +80,7 @@ describe('DtSelectMenuValidator Tests', () => {
 
         it(
           'should return false',
-          () => { expect(optionsValidator(options)).toBe(false); }
+          () => { expect(optionsValidator(options)).toBe(false); },
         );
       });
 
@@ -92,7 +92,7 @@ describe('DtSelectMenuValidator Tests', () => {
 
         it(
           'should return false',
-          () => { expect(optionsValidator(options)).toBe(false); }
+          () => { expect(optionsValidator(options)).toBe(false); },
         );
       });
 
@@ -104,7 +104,7 @@ describe('DtSelectMenuValidator Tests', () => {
 
         it(
           'should return false',
-          () => { expect(optionsValidator(options)).toBe(false); }
+          () => { expect(optionsValidator(options)).toBe(false); },
         );
       });
 
@@ -116,7 +116,7 @@ describe('DtSelectMenuValidator Tests', () => {
 
         it(
           'should return false',
-          () => { expect(optionsValidator(options)).toBe(false); }
+          () => { expect(optionsValidator(options)).toBe(false); },
         );
       });
     });

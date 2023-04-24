@@ -56,19 +56,19 @@ describe('DtDefaultListItem tests', () => {
 
       it(
         'should not render the left slot wrapper',
-        () => { expect(leftWrapper.exists()).toBe(false); }
+        () => { expect(leftWrapper.exists()).toBe(false); },
       );
       it(
         'should not render the right slot wrapper',
-        () => { expect(rightWrapper.exists()).toBe(false); }
+        () => { expect(rightWrapper.exists()).toBe(false); },
       );
       it(
         'should not render the subtitle slot wrapper',
-        () => { expect(subtitleWrapper.exists()).toBe(false); }
+        () => { expect(subtitleWrapper.exists()).toBe(false); },
       );
       it(
         'should not render the bottom slot wrapper',
-        () => { expect(bottomWrapper.exists()).toBe(false); }
+        () => { expect(bottomWrapper.exists()).toBe(false); },
       );
     });
 
@@ -82,11 +82,11 @@ describe('DtDefaultListItem tests', () => {
 
       it(
         'should render the slot wrapper',
-        () => { expect(leftWrapper.exists()).toBe(true); }
+        () => { expect(leftWrapper.exists()).toBe(true); },
       );
       it(
         'should render the provided content',
-        () => { expect(wrapper.text().includes('left')).toBe(true); }
+        () => { expect(wrapper.text().includes('left')).toBe(true); },
       );
     });
 
@@ -100,11 +100,11 @@ describe('DtDefaultListItem tests', () => {
 
       it(
         'should render the slot wrapper',
-        () => { expect(rightWrapper.exists()).toBe(true); }
+        () => { expect(rightWrapper.exists()).toBe(true); },
       );
       it(
         'should render the provided content',
-        () => { expect(wrapper.text().includes('right')).toBe(true); }
+        () => { expect(wrapper.text().includes('right')).toBe(true); },
       );
     });
 
@@ -118,11 +118,11 @@ describe('DtDefaultListItem tests', () => {
 
       it(
         'should render the slot wrapper',
-        () => { expect(subtitleWrapper.exists()).toBe(true); }
+        () => { expect(subtitleWrapper.exists()).toBe(true); },
       );
       it(
         'should render the provided content',
-        () => { expect(wrapper.text().includes('subtitle')).toBe(true); }
+        () => { expect(wrapper.text().includes('subtitle')).toBe(true); },
       );
     });
 
@@ -136,11 +136,11 @@ describe('DtDefaultListItem tests', () => {
 
       it(
         'should render the slot wrapper',
-        () => { expect(bottomWrapper.exists()).toBe(true); }
+        () => { expect(bottomWrapper.exists()).toBe(true); },
       );
       it(
         'should render the provided content',
-        () => { expect(wrapper.text().includes('bottom')).toBe(true); }
+        () => { expect(wrapper.text().includes('bottom')).toBe(true); },
       );
     });
 
@@ -154,7 +154,7 @@ describe('DtDefaultListItem tests', () => {
 
       it(
         'should render the provided content',
-        () => { expect(wrapper.text().includes('selected')).toBe(true); }
+        () => { expect(wrapper.text().includes('selected')).toBe(true); },
       );
     });
   });

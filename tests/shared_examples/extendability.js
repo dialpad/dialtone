@@ -1,4 +1,4 @@
-export function itBehavesLikeAppliesClassToChild(wrapper, className, element) {
+export function itBehavesLikeAppliesClassToChild (wrapper, className, element) {
   expect(wrapper.find(className).html()).toBe(element.html());
 }
 
