@@ -43,7 +43,7 @@
           circle
           importance="clear"
           size="lg"
-          :class="['dt-recipe--callbar-button-with-popover--arrow', isCompactMode ? 'd-mln16' : 'd-mln24']"
+          :class="['dt-recipe--callbar-button-with-popover--arrow', { 'd-mln24': !isCompactMode }]"
           width="2rem"
           :aria-label="arrowButtonLabel"
           :active="open"
@@ -260,7 +260,7 @@ export default {
     },
 
     isCompactMode () {
-      return this.buttonWidthSize === 'sm';
+      return this.buttonWidthSize === 'sm' || this.buttonWidthSize === 'md';
     },
   },
 
@@ -291,6 +291,7 @@ export default {
 <style lang="less">
 .dt-recipe--callbar-button-with-popover--arrow.d-btn--circle {
   margin-top: calc(calc(var(--space-300) * 3) * -1);
+  margin-left: calc(var(--space-300) * -5);
   width: var(--size-500);
   height: var(--size-500);
   padding: var(--space-400);
