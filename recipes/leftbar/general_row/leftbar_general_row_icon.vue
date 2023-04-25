@@ -2,7 +2,7 @@
   <dt-icon
     v-if="isIconType"
     :name="getIconName"
-    size="300"
+    :size="iconSize"
   />
   <div
     v-else-if="isContactCenterType"
@@ -39,6 +39,11 @@ export default {
     color: {
       type: String,
       default: null,
+    },
+
+    iconSize: {
+      type: String,
+      default: '300',
     },
   },
 

@@ -15,6 +15,7 @@
     :dnd-text="$attrs.dndText"
     :dnd-text-tooltip="$attrs.dndTextTooltip"
     :is-typing="$attrs.isTyping"
+    :icon-size="iconSize"
     @click="$attrs.onClick"
     @call="$attrs.onCall"
   />
