@@ -8,11 +8,13 @@ import {
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
 } from '@/recipes/leftbar/general_row/general_row_constants';
+import { LEFTBAR_GENERAL_ROW_ICON_SIZES } from './general_row_constants';
 
 // Default Prop Values
 export const argsData = {
   callButtonTooltip: 'Call',
   dndTextTooltip: 'Do not Disturb',
+  iconSize: '300',
   onClick: action('click'),
   onCall: action('call'),
 };
@@ -30,6 +32,12 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: Object.values(LEFTBAR_GENERAL_ROW_TYPES),
+    },
+  },
+  iconSize: {
+    control: {
+      type: 'select',
+      options: Object.values(LEFTBAR_GENERAL_ROW_ICON_SIZES),
     },
   },
   color: {

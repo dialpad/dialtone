@@ -57,7 +57,7 @@ const decorator = () => ({
 
 // Story Collection
 export default {
-  title: 'Recipes/leftbar/Unread Chip',
+  title: 'Recipes/Leftbar/Unread Chip',
   component: DtRecipeUnreadChip,
   args: argsData,
   argTypes: argTypesData,

@@ -25,9 +25,9 @@
           name="left"
         >
           <dt-recipe-leftbar-general-row-icon
-            :class="{ 'd-o50': isTyping }"
             :type="getIcon"
             :color="color"
+            :icon-size="iconSize"
             data-qa="dt-leftbar-row-icon"
           />
         </slot>
@@ -125,6 +125,7 @@ import {
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
+  LEFTBAR_GENERAL_ROW_ICON_SIZES,
 } from './general_row_constants.js';
 import { DtBadge } from '@/components/badge';
 import { DtIcon } from '@/components/icon';
@@ -276,6 +277,17 @@ export default {
     isTyping: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Sets the size of the icon.
+     */
+    iconSize: {
+      type: String,
+      default: '300',
+      validator: (size) => {
+        return LEFTBAR_GENERAL_ROW_ICON_SIZES.includes(size);
+      },
     },
   },
 

@@ -15,6 +15,7 @@
     :dnd-text="dndText"
     :dnd-text-tooltip="dndTextTooltip"
     :is-typing="isTyping"
+    :icon-size="iconSize"
     @click="onClick"
     @call="onCall"
   />
