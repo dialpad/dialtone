@@ -21,6 +21,8 @@
             <dt-avatar
               v-if="avatar.src"
               :size="avatarSize"
+              :seed="avatar.seed"
+              :initials="avatar.initials"
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
               overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
@@ -35,6 +37,8 @@
             <dt-avatar
               v-else-if="avatar.initials"
               :size="avatarSize"
+              :seed="avatar.seed"
+              :initials="avatar.initials"
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
               overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
@@ -47,17 +51,23 @@
         <dt-avatar
           v-else-if="avatarSrc"
           :size="avatarSize"
+          :initials="avatarInitials"
+          :seed="avatarSeed"
           :presence="presence"
         >
           <img
             data-qa="dt-contact-avatar"
             :src="avatarSrc"
+            :initials="avatarInitials"
+            :seed="avatarSeed"
             :alt="avatarInitials"
           >
         </dt-avatar>
         <dt-avatar
           v-else-if="avatarInitials"
           :size="avatarSize"
+          :initials="avatarInitials"
+          :seed="avatarSeed"
           :presence="presence"
         >
           {{ avatarInitials }}
@@ -141,6 +151,14 @@ export default {
     },
 
     /**
+     * Avatar seed, set this to the user's ID to get the same avatar background gradient each time it is displayed.
+     */
+    avatarSeed: {
+      type: String,
+      default: null,
+    },
+
+    /**
      * Initial letters to display in avatar if `avatarSrc` is empty.
      */
     avatarInitials: {
@@ -173,6 +191,7 @@ export default {
      * The props of array items are: <br>
      * `src` - avatar image url (optional) <br>
      * `initials` - Initial letters to display in avatar (required if src is empty)<br>
+     * `seed` - determines uniqueness of avatar background <br>
      * `text` - text that overlays the avatar (optional) <br>
      * `icon` - icon that overlays the avatar (optional)
      */

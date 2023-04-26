@@ -4,6 +4,7 @@
     :avatar-initials="avatarInitials"
     :avatar-size="avatarSize"
     :avatar-color="avatarColor"
+    :avatar-seed="avatarSeed"
     :presence="presence"
   >
     <template

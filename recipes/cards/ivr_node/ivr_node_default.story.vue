@@ -50,7 +50,7 @@
       </div>
       <div v-if="transfer">
         <div class="d-d-flex d-ai-center d-gg8">
-          <dt-avatar>
+          <dt-avatar seed="seed">
             <img
               data-qa="dt-avatar-image"
               :src="avatarSrc"
