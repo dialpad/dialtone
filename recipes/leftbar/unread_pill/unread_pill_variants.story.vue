@@ -1,37 +1,37 @@
 <template>
   <div class="d-stack16">
-    <dt-recipe-unread-chip
+    <dt-recipe-unread-pill
       direction="up"
       kind="mentions"
     >
       Unread mentions
-    </dt-recipe-unread-chip>
-    <dt-recipe-unread-chip
+    </dt-recipe-unread-pill>
+    <dt-recipe-unread-pill
       direction="down"
       kind="mentions"
     >
       Unread mentions
-    </dt-recipe-unread-chip>
-    <dt-recipe-unread-chip
+    </dt-recipe-unread-pill>
+    <dt-recipe-unread-pill
       direction="up"
       kind="messages"
     >
       Unread messages
-    </dt-recipe-unread-chip>
-    <dt-recipe-unread-chip
+    </dt-recipe-unread-pill>
+    <dt-recipe-unread-pill
       direction="down"
       kind="messages"
     >
       Unread messages
-    </dt-recipe-unread-chip>
+    </dt-recipe-unread-pill>
   </div>
 </template>
 
 <script>
-import DtRecipeUnreadChip from './unread_chip.vue';
+import DtRecipeUnreadPill from './unread_pill.vue';
 
 export default {
-  name: 'DtRecipeUnreadChipVariants',
-  components: { DtRecipeUnreadChip },
+  name: 'DtRecipeUnreadPillVariants',
+  components: { DtRecipeUnreadPill },
 };
 </script>

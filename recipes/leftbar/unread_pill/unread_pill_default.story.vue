@@ -1,5 +1,5 @@
 <template>
-  <dt-recipe-unread-chip
+  <dt-recipe-unread-pill
     :direction="direction"
     :kind="kind"
     @click="onClick"
@@ -7,14 +7,14 @@
     <template v-if="defaultSlot">
       <span v-html="defaultSlot" />
     </template>
-  </dt-recipe-unread-chip>
+  </dt-recipe-unread-pill>
 </template>
 
 <script>
-import DtRecipeUnreadChip from './unread_chip.vue';
+import DtRecipeUnreadPill from './unread_pill.vue';
 
 export default {
-  name: 'DtRecipeUnreadChipDefault',
-  components: { DtRecipeUnreadChip },
+  name: 'DtRecipeUnreadPillDefault',
+  components: { DtRecipeUnreadPill },
 };
 </script>
