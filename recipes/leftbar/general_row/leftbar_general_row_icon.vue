@@ -11,6 +11,7 @@
   <div
     v-else-if="isDialbotType"
     :class="dialbotClasses"
+    data-qa="general-row-dialbot"
   >
     <icon-dialbot
       class="d-svg--size24"

@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, shallowMount, mount } from '@vue/test-utils';
 import { DtValidationMessages } from '../validation_messages';
 import { DtRadio } from '../radio';
@@ -13,7 +12,13 @@ const basePropsData = {
 };
 const baseAttrs = { 'aria-label': 'Test Radio Group' };
 
-describe('DtRadioGroup Tests', function () {
+describe('DtRadioGroup Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let radioGroup;
@@ -35,7 +40,7 @@ describe('DtRadioGroup Tests', function () {
       propsData,
       slots,
       attrs,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -45,70 +50,83 @@ describe('DtRadioGroup Tests', function () {
       propsData,
       slots,
       attrs,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
 
   // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
 
   // Test Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = basePropsData;
     attrs = baseAttrs;
     slots = {};
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Test Environment
     let legend;
 
     // Shared Examples
     const itBehavesLikeHasRadioGroup = () => {
-      it('should have a radio group', function () { assert.strictEqual(radioGroup.exists(), true); });
+      it(
+        'should have a radio group',
+        () => { expect(radioGroup.exists()).toBe(true); },
+      );
     };
 
     const itBehavesLikeDoesNotHaveLegend = () => {
-      it('should not have a legend', function () { assert.strictEqual(radioGroupLegend.exists(), false); });
+      it(
+        'should not have a legend',
+        () => { expect(radioGroupLegend.exists()).toBe(false); },
+      );
     };
 
     const itBehavesLikeHasLegend = () => {
-      it('should have a legend', function () { assert.strictEqual(radioGroupLegend.exists(), true); });
-      it('should have text matching the provided legend', function () {
-        assert.strictEqual(radioGroupLegend.text(), legend);
+      it(
+        'should have a legend',
+        () => { expect(radioGroupLegend.exists()).toBe(true); },
+      );
+      it('should have text matching the provided legend', () => {
+        expect(radioGroupLegend.text()).toBe(legend);
       });
     };
 
     const itBehavesLikeDoesNotHaveRadios = () => {
-      it('should not have radios', function () {
-        assert.lengthOf(wrapper.findAllComponents(DtRadio), 0);
+      it('should not have radios', () => {
+        expect(wrapper.findAllComponents(DtRadio).length).toBe(0);
       });
     };
 
     const itBehavesLikeHasRadios = (numRadios) => {
-      it('should have radios', function () {
-        assert.lengthOf(wrapper.findAllComponents(DtRadio), numRadios);
+      it('should have radios', () => {
+        expect(wrapper.findAllComponents(DtRadio).length).toBe(numRadios);
       });
     };
 
     const itBehavesLikeDoesNotHaveValidationMessages = () => {
-      it('should not have validation messages', function () {
-        assert.lengthOf(wrapper.findComponent(DtValidationMessages)?.props('validationMessages'), 0);
+      it('should not have validation messages', () => {
+        expect(
+          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
+        ).toBe(0);
       });
     };
 
     const itBehavesLikeHasValidationMessages = (numMessages) => {
-      it('should have validation messages', function () {
-        assert.lengthOf(wrapper.findComponent(DtValidationMessages)?.props('validationMessages'), numMessages);
+      it('should have validation messages', () => {
+        expect(
+          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
+        ).toBe(numMessages);
       });
     };
 
-    describe('When the radio group renders', function () {
+    describe('When the radio group renders', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
       itBehavesLikeHasRadioGroup();
       itBehavesLikeDoesNotHaveLegend();
@@ -116,71 +134,71 @@ describe('DtRadioGroup Tests', function () {
       itBehavesLikeDoesNotHaveValidationMessages();
     });
 
-    describe('When a legend is provided', function () {
+    describe('When a legend is provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         legend = 'My Legend';
       });
 
-      describe('When the legend is provided via prop', function () {
+      describe('When the legend is provided via prop', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData = { ...basePropsData, legend };
         });
 
-        describe('When the radio group renders', function () {
+        describe('When the radio group renders', () => {
           // Test Setup
-          beforeEach(function () { _setWrappers(); });
+          beforeEach(() => { _setWrappers(); });
 
           itBehavesLikeHasLegend();
         });
       });
 
-      describe('When the legend is provided via slot', function () {
+      describe('When the legend is provided via slot', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           slots = { legend };
         });
 
-        describe('When the radio group renders', function () {
+        describe('When the radio group renders', () => {
           // Test Setup
-          beforeEach(function () { _setWrappers(); });
+          beforeEach(() => { _setWrappers(); });
 
           itBehavesLikeHasLegend();
         });
       });
     });
 
-    describe('When radios are provided', function () {
+    describe('When radios are provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         slots = { default: RadiosFixture };
       });
 
-      describe('When the radio group renders', function () {
+      describe('When the radio group renders', () => {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(() => { _setWrappers(); });
 
         itBehavesLikeHasRadios(2);
       });
     });
 
-    describe('When validation messages are provided', function () {
+    describe('When validation messages are provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, messages: ['Error'] };
       });
 
-      describe('When the radio group renders', function () {
+      describe('When the radio group renders', () => {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(() => { _setWrappers(); });
 
         itBehavesLikeHasValidationMessages(1);
       });
     });
   });
 
-  describe('Reactivity Tests', function () {
+  describe('Reactivity Tests', () => {
     // Wrappers
     let selectedRadio;
 
@@ -188,58 +206,58 @@ describe('DtRadioGroup Tests', function () {
     const selectedValue = 'kiwi';
 
     // Helpers
-    const _selectRadio = () => {
+    const _selectRadio = async () => {
       selectedRadio = radioGroup.find(`[value="${selectedValue}"]`);
-      selectedRadio.trigger('click');
+      await selectedRadio.trigger('change');
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
       slots = { default: RadiosFixture };
     });
 
-    describe('When an initial value is provided', function () {
+    describe('When an initial value is provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, value: selectedValue };
         _setWrappers();
       });
 
-      it('updates provide object', function () {
-        assert.strictEqual(wrapper.vm.provideObj.selectedValue, selectedValue);
+      it('updates provide object', () => {
+        expect(wrapper.vm.provideObj.selectedValue).toBe(selectedValue);
       });
     });
 
-    describe('When a radio is selected', function () {
+    describe('When a radio is selected', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async () => {
         _mountWrappers();
-        _selectRadio();
+        await _selectRadio();
       });
 
-      it('emits an input event', function () {
-        assert.strictEqual(wrapper.emitted('input')[0][0], selectedValue);
+      it('emits an input event', () => {
+        expect(wrapper.emitted('input')[0][0]).toBe(selectedValue);
       });
     });
 
-    describe('When the radio group is disabled', function () {
+    describe('When the radio group is disabled', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, disabled: true };
         _mountWrappers();
       });
 
-      describe('When a radio is selected', function () {
+      describe('When a radio is selected', () => {
         // Test Setup
-        beforeEach(function () { _selectRadio(); });
+        beforeEach(() => { _selectRadio(); });
 
-        it('does not emit an input event', function () {
-          assert.notExists(wrapper.emitted('input'));
+        it('does not emit an input event', () => {
+          expect(wrapper.emitted('input')).toBeFalsy();
         });
       });
     });
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     let element;
     const customClass = 'my-custom-class';
     const propName = 'some';
@@ -261,49 +279,57 @@ describe('DtRadioGroup Tests', function () {
 
     // Shared Examples
     const itBehavesLikeAppliesClassToChild = () => {
-      it('should apply custom class to child', function () {
-        assert.strictEqual(wrapper.find(`.${customClass}`).html(), element.html());
+      it('should apply custom class to child', () => {
+        expect(wrapper.find(`.${customClass}`).html()).toBe(element.html());
       });
     };
 
     const itBehavesLikeAppliesChildProp = () => {
-      it('should have provided child prop', function () {
-        assert.strictEqual(element.attributes(propName), propValue);
+      it('should have provided child prop', () => {
+        expect(element.attributes(propName)).toBe(propValue);
       });
     };
 
     // Test Setup
-    before(function () {
+    beforeAll(() => {
       childProps[propName] = propValue;
     });
 
-    beforeEach(function () {
+    beforeEach(() => {
       propsData = { ...basePropsData, legend: 'My Radio Group' };
     });
 
-    describe('When a legend class is provided', function () {
-      beforeEach(function () { _setupChildClassTest('legendClass', '[data-qa="radio-group-legend"]'); });
+    describe('When a legend class is provided', () => {
+      beforeEach(
+        () => { _setupChildClassTest('legendClass', '[data-qa="radio-group-legend"]'); },
+      );
       itBehavesLikeAppliesClassToChild();
     });
 
-    describe('When a messages class is provided', function () {
-      beforeEach(function () { _setupChildClassTest('messagesClass', '[data-qa="radio-group-messages"]'); });
+    describe('When a messages class is provided', () => {
+      beforeEach(
+        () => { _setupChildClassTest('messagesClass', '[data-qa="radio-group-messages"]'); },
+      );
       itBehavesLikeAppliesClassToChild();
     });
 
-    describe('When legendChildProps are provided', function () {
-      beforeEach(function () { _setupChildPropsTest('legendChildProps', '[data-qa="radio-group-legend"]'); });
+    describe('When legendChildProps are provided', () => {
+      beforeEach(
+        () => { _setupChildPropsTest('legendChildProps', '[data-qa="radio-group-legend"]'); },
+      );
       itBehavesLikeAppliesChildProp();
     });
 
-    describe('When messagesChildProps are provided', function () {
-      beforeEach(function () { _setupChildPropsTest('messagesChildProps', '[data-qa="radio-group-messages"]'); });
+    describe('When messagesChildProps are provided', () => {
+      beforeEach(
+        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="radio-group-messages"]'); },
+      );
       itBehavesLikeAppliesChildProp();
     });
 
-    describe('When attrs are provided', function () {
+    describe('When attrs are provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         attrs = { ...baseAttrs, some: 'prop' };
         _setWrappers();
         element = radioGroup;

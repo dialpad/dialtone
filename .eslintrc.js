@@ -137,26 +137,33 @@ module.exports = {
     }],
     'vue/template-curly-spacing': ['error', 'never']
   },
-  overrides: [{
-    files: ['**/*.test.js'],
-    plugins: ['mocha'],
-    extends: ['plugin:mocha/recommended'],
-    env: {
-      browser: true,
-      node: true,
-      mocha: true
+  overrides: [
+    {
+      files: [
+        '**/*.test.js',
+        'tests/shared_examples/*.js',
+        'tests/setupTests.js',
+      ],
+      plugins: ['jest'],
+      env: {
+        browser: true,
+        node: true,
+        jest: true,
+      },
+      rules: {
+        'max-lines': 'off',
+        'no-console': 'off',
+      },
     },
-    rules: {
-      'max-lines': 'off',
-      // disabled to allow the use of shared example closures
-      'mocha/no-setup-in-describe': 'off',
-      'mocha/no-exclusive-tests': 'error',
-      'mocha/no-hooks-for-single-case': 'off'
-    }
-  }, {
-    files: ['**/*.story.vue'],
-    rules: {
-      'vue/no-bare-strings-in-template': ['off']
-    }
-  }]
+    {
+      files: [
+        '**/*.story.vue',
+      ],
+      rules: {
+        'vue/no-bare-strings-in-template': [
+          'off',
+        ],
+      },
+    },
+  ],
 };

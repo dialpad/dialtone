@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
@@ -16,7 +15,7 @@ const basePropsData = {
   href: '#',
 };
 
-describe('DtLink tests', function () {
+describe('DtLink tests', () => {
   // Wrappers
   let wrapper;
   let nativeLink;
@@ -40,33 +39,42 @@ describe('DtLink tests', function () {
   };
 
   const itBehavesLikeHasCorrectKindClass = kind => {
-    it('should have correct class', async function () {
+    it('should have correct class', async () => {
       await wrapper.setProps({ kind });
       itBehavesLikeHasCorrectClass(nativeLink, LINK_KIND_MODIFIERS[kind]);
     });
   };
 
   // Setup
-  beforeEach(function () {
+  beforeEach(() => {
     _mountWrapper();
   });
 
-  describe('Presentation Tests', function () {
-    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    it('should render the native anchor', function () { assert.isTrue(nativeLink.exists()); });
+  describe('Presentation Tests', () => {
+    it(
+      'should render the component',
+      () => { expect(wrapper.exists()).toBe(true); },
+    );
+    it(
+      'should render the native anchor',
+      () => { expect(nativeLink.exists()).toBe(true); },
+    );
 
-    describe('When a default slot is provided', function () {
-      it('should render the provided data', function () { assert.equal(nativeLink.text(), slots.default); });
+    describe('When a default slot is provided', () => {
+      it(
+        'should render the provided data',
+        () => { expect(nativeLink.text()).toEqual(slots.default); },
+      );
     });
 
-    describe('When kind is danger', function () { itBehavesLikeHasCorrectKindClass(DANGER); });
+    describe('When kind is danger', () => { itBehavesLikeHasCorrectKindClass(DANGER); });
 
-    describe('When kind is inverted', function () { itBehavesLikeHasCorrectKindClass(INVERTED); });
+    describe('When kind is inverted', () => { itBehavesLikeHasCorrectKindClass(INVERTED); });
 
-    describe('When kind is success', function () { itBehavesLikeHasCorrectKindClass(SUCCESS); });
+    describe('When kind is success', () => { itBehavesLikeHasCorrectKindClass(SUCCESS); });
 
-    describe('When kind is warning', function () { itBehavesLikeHasCorrectKindClass(WARNING); });
+    describe('When kind is warning', () => { itBehavesLikeHasCorrectKindClass(WARNING); });
 
-    describe('When kind is muted', function () { itBehavesLikeHasCorrectKindClass(MUTED); });
+    describe('When kind is muted', () => { itBehavesLikeHasCorrectKindClass(MUTED); });
   });
 });

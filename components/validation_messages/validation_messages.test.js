@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './validation_messages.vue';
@@ -18,7 +17,13 @@ const baseValidationMessages = [{
   type: VALIDATION_MESSAGE_TYPES.ERROR,
 }];
 
-describe('Validation Messages Tests', function () {
+describe('Validation Messages Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let messages;
@@ -33,50 +38,56 @@ describe('Validation Messages Tests', function () {
     wrapper = shallowMount(DtValidationMessages, {
       propsData,
       attrs,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     messages = wrapper.findAll('[data-qa="validation-message"]');
   };
 
   // Test Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
 
   // Test Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = basePropsData;
     attrs = {};
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Shared Examples
     const itBehavesLikeHasNoVisibleValidationMessages = () => {
-      it('should not have any visible validation messages', function () { assert.lengthOf(messages, 0); });
+      it(
+        'should not have any visible validation messages',
+        () => { expect(messages.length).toBe(0); },
+      );
     };
 
     const itBehavesLikeHasValidationMessages = (validationMessagesVisible, firstVisibleValidationMessage) => {
-      it('should have expected number of visible validation messages', function () {
-        assert.lengthOf(messages, validationMessagesVisible);
-      });
+      it(
+        'should have expected number of visible validation messages',
+        () => {
+          expect(messages.length).toBe(validationMessagesVisible);
+        },
+      );
 
-      it('should have matching first validation message', function () {
-        assert.strictEqual(messages.at(0).text(), firstVisibleValidationMessage);
+      it('should have matching first validation message', () => {
+        expect(messages.at(0).text()).toBe(firstVisibleValidationMessage);
       });
     };
 
-    describe('When there is a success validation message', function () {
+    describe('When there is a success validation message', () => {
       // Test Environment
       const successValidationMessage = 'Success';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         validationMessages = setFormattedValidationMessages(VALIDATION_MESSAGE_TYPES.SUCCESS, successValidationMessage);
       });
 
-      describe('When the radio group renders', function () {
+      describe('When the radio group renders', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData = { ...basePropsData, validationMessages };
           _setWrappers();
         });
@@ -84,26 +95,26 @@ describe('Validation Messages Tests', function () {
         itBehavesLikeHasValidationMessages(1, successValidationMessage);
       });
 
-      describe('When validation messages are hidden', function () {
+      describe('When validation messages are hidden', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData = { ...basePropsData, validationMessages, showMessages: false };
         });
 
-        describe('When the radio group renders', function () {
+        describe('When the radio group renders', () => {
           // Test Setup
-          beforeEach(function () { _setWrappers(); });
+          beforeEach(() => { _setWrappers(); });
 
           itBehavesLikeHasNoVisibleValidationMessages();
         });
       });
 
-      describe('When there is also a warning validation message', function () {
+      describe('When there is also a warning validation message', () => {
         // Test Environment
         const warningValidationMessage = 'Warning';
 
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           validationMessages = addFormattedValidationMessage(
             validationMessages,
             VALIDATION_MESSAGE_TYPES.WARNING,
@@ -111,9 +122,9 @@ describe('Validation Messages Tests', function () {
           );
         });
 
-        describe('When the radio group renders', function () {
+        describe('When the radio group renders', () => {
           // Test Setup
-          beforeEach(function () {
+          beforeEach(() => {
             propsData = { ...basePropsData, validationMessages };
             _setWrappers();
           });
@@ -121,12 +132,12 @@ describe('Validation Messages Tests', function () {
           itBehavesLikeHasValidationMessages(1, warningValidationMessage);
         });
 
-        describe('When there is also an error validation message', function () {
+        describe('When there is also an error validation message', () => {
           // Test Environment
           const errorValidationMessage = 'Error';
 
           // Test Setup
-          beforeEach(function () {
+          beforeEach(() => {
             validationMessages = addFormattedValidationMessage(
               validationMessages,
               VALIDATION_MESSAGE_TYPES.ERROR,
@@ -134,9 +145,9 @@ describe('Validation Messages Tests', function () {
             );
           });
 
-          describe('When the radio group renders', function () {
+          describe('When the radio group renders', () => {
             // Test Setup
-            beforeEach(function () {
+            beforeEach(() => {
               propsData = { ...basePropsData, validationMessages };
               _setWrappers();
             });
@@ -147,18 +158,18 @@ describe('Validation Messages Tests', function () {
       });
     });
 
-    describe('When there are malformed validation messages', function () {
+    describe('When there are malformed validation messages', () => {
       // Test Environment
       const emptyValidationMessage = '';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         validationMessages = setFormattedValidationMessages(VALIDATION_MESSAGE_TYPES.WARNING, emptyValidationMessage);
       });
 
-      describe('When there is a warning validation message with an empty message', function () {
+      describe('When there is a warning validation message with an empty message', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData = { ...basePropsData, validationMessages };
           _setWrappers();
         });
@@ -166,12 +177,12 @@ describe('Validation Messages Tests', function () {
         itBehavesLikeHasNoVisibleValidationMessages();
       });
 
-      describe('When there is also a correct success validation message', function () {
+      describe('When there is also a correct success validation message', () => {
         // Test Environment
         const successValidationMessage = 'Success';
 
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           validationMessages = addFormattedValidationMessage(
             validationMessages,
             VALIDATION_MESSAGE_TYPES.SUCCESS,
@@ -179,9 +190,9 @@ describe('Validation Messages Tests', function () {
           );
         });
 
-        describe('When the validation message renders', function () {
+        describe('When the validation message renders', () => {
           // Test Setup
-          beforeEach(function () {
+          beforeEach(() => {
             propsData = { ...basePropsData, validationMessages };
             _setWrappers();
           });
@@ -190,12 +201,12 @@ describe('Validation Messages Tests', function () {
         });
       });
 
-      describe('When there is also a correct warning validation message', function () {
+      describe('When there is also a correct warning validation message', () => {
         // Test Environment
         const warningValidationMessage = 'Warning';
 
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           validationMessages = addFormattedValidationMessage(
             validationMessages,
             VALIDATION_MESSAGE_TYPES.WARNING,
@@ -203,9 +214,9 @@ describe('Validation Messages Tests', function () {
           );
         });
 
-        describe('When the validation message renders', function () {
+        describe('When the validation message renders', () => {
           // Test Setup
-          beforeEach(function () {
+          beforeEach(() => {
             propsData = { ...basePropsData, validationMessages };
             _setWrappers();
           });
@@ -216,33 +227,36 @@ describe('Validation Messages Tests', function () {
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When there is a validation message', function () {
+  describe('Accessibility Tests', () => {
+    describe('When there is a validation message', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, validationMessages: baseValidationMessages };
       });
 
-      describe('When validation messages are shown', function () {
+      describe('When validation messages are shown', () => {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(() => { _setWrappers(); });
 
-        it('has a status role', function () { assert.strictEqual(messages.at(0).attributes('role'), 'status'); });
-        it('has aria-live set to polite', function () {
-          assert.strictEqual(messages.at(0).attributes('aria-live'), 'polite');
+        it(
+          'has a status role',
+          () => { expect(messages.at(0).attributes('role')).toBe('status'); },
+        );
+        it('has aria-live set to polite', () => {
+          expect(messages.at(0).attributes('aria-live')).toBe('polite');
         });
       });
     });
   });
 
-  describe('Validation Tests', function () {
-    describe('When there are validation messages', function () {
+  describe('Validation Tests', () => {
+    describe('When there are validation messages', () => {
       // Test Environment
       const prop = DtValidationMessages.props.validationMessages;
 
       itBehavesLikePassesCustomPropValidation(prop, ['Error']);
 
-      describe('When the provided messages are numeric', function () {
+      describe('When the provided messages are numeric', () => {
         itBehavesLikeFailsCustomPropValidation(prop, [123]);
       });
     });

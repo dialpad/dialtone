@@ -37,6 +37,7 @@
           <dt-emoji-text-wrapper
             class="dt-leftbar-row__description"
             data-qa="dt-leftbar-row-description"
+            size="200"
           >
             {{ description }}
           </dt-emoji-text-wrapper>
@@ -59,7 +60,7 @@
           </template>
         </dt-tooltip>
         <div
-          v-else-if="activeVoiceChat"
+          v-if="activeVoiceChat"
           class="dt-leftbar-row__active-voice"
         >
           <dt-icon
@@ -237,8 +238,8 @@ export default {
     },
 
     /**
-     * Acronym used to represent "Do not Disturb" state. If entered will display the entered text over
-     * unreadCount and activeVoiceChat.
+     * Acronym used to represent "Do not Disturb" state. If entered will display the entered text alongside
+     * unreadCount.
      */
     dndText: {
       type: String,

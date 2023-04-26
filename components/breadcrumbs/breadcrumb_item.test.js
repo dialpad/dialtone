@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
 
@@ -8,7 +7,7 @@ const breadcrumbItemOption = {
 };
 let breadcrumbItemSlot = { default: 'Slotted section' };
 
-describe('DtBreadcrumbItem Tests', function () {
+describe('DtBreadcrumbItem Tests', () => {
   // Wrappers
   let wrapper;
 
@@ -21,27 +20,27 @@ describe('DtBreadcrumbItem Tests', function () {
   };
 
   // Setup
-  beforeEach(function () {
+  beforeEach(() => {
     _mountWrapper();
   });
 
-  describe('Presentation Tests', function () {
-    it('should render the breadcrumbItem', function () {
-      assert.exists(wrapper.exists(), 'breadcrumbItem exist');
+  describe('Presentation Tests', () => {
+    it('should render the breadcrumbItem', () => {
+      expect(wrapper.exists()).toBeTruthy();
     });
 
-    describe('When a default slot is provided to breadcrumb item', function () {
-      it('should render default slot label', function () {
-        assert.equal(wrapper.text(), 'Slotted section');
+    describe('When a default slot is provided to breadcrumb item', () => {
+      it('should render default slot label', () => {
+        expect(wrapper.text()).toEqual('Slotted section');
       });
     });
 
-    describe('When a label is provided to breadcrumb item', function () {
-      before(function () {
+    describe('When a label is provided to breadcrumb item', () => {
+      beforeAll(() => {
         breadcrumbItemSlot = {};
       });
-      it('should render label', function () {
-        assert.equal(wrapper.text(), 'Section');
+      it('should render label', () => {
+        expect(wrapper.text()).toEqual('Section');
       });
     });
   });

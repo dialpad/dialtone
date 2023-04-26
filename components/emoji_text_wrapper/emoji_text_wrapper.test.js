@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
 import { setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '@/common/emoji.js';
@@ -11,7 +10,13 @@ setCustomEmojiUrl('https://mockstorage.com/emojis/');
 // Constants
 const basePropsData = {};
 
-describe('DtEmojiTextWrapper Tests', function () {
+describe('DtEmojiTextWrapper Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let emoji;
@@ -37,143 +42,143 @@ describe('DtEmojiTextWrapper Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     await flushPromises();
     await _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
-  beforeEach(function () {});
+  beforeEach(() => {});
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = basePropsData;
     attrs = {};
     slots = {};
     provide = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
-    describe('When default slot is provided', function () {
-      describe('When default slot does not contains shortcode or unicode emoji', function () {
-        beforeEach(async function () {
+  describe('Presentation Tests', () => {
+    describe('When default slot is provided', () => {
+      describe('When default slot does not contains shortcode or unicode emoji', () => {
+        beforeEach(async () => {
           slots = { default: 'Content without emoji.' };
           await _setWrappers();
         });
 
-        it('Renders the text correctly', function () {
-          assert.strictEqual(wrapper.text(), slots.default);
+        it('Renders the text correctly', () => {
+          expect(wrapper.text()).toBe(slots.default);
         });
 
-        it('Does not contain emoji component', function () {
-          assert.strictEqual(emoji.exists(), false);
+        it('Does not contain emoji component', () => {
+          expect(emoji.exists()).toBe(false);
         });
       });
-      describe('When default slot contains shortcodes', function () {
-        describe('When default slot contains valid shortcode', function () {
-          beforeEach(async function () {
+      describe('When default slot contains shortcodes', () => {
+        describe('When default slot contains valid shortcode', () => {
+          beforeEach(async () => {
             slots = { default: 'Content with :smile: emoji.' };
             await _setWrappers();
           });
 
-          it('Contains emoji component', function () {
-            assert.strictEqual(emoji.exists(), true);
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
           });
 
-          it('Renders the correct emoji', function () {
-            assert.strictEqual(emoji.attributes('src'), expectedSmileSrc);
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(expectedSmileSrc);
           });
         });
-        describe('When default slot contains valid custom shortcode', function () {
-          beforeEach(async function () {
+        describe('When default slot contains valid custom shortcode', () => {
+          beforeEach(async () => {
             setCustomEmojiJson(customEmojiJson);
             slots = { default: 'Content with :octocat: emoji.' };
             await _setWrappers();
           });
-          after(function () {
+          afterAll(() => {
             setCustomEmojiJson('');
           });
 
-          it('Contains emoji component', function () {
-            assert.strictEqual(emoji.exists(), true);
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
           });
 
-          it('Renders the correct emoji', function () {
-            assert.strictEqual(emoji.attributes('src'), expectedOctocatSrc);
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(expectedOctocatSrc);
           });
         });
-        describe('When default slot contains text with a colon and a valid emoji', function () {
-          beforeEach(async function () {
+        describe('When default slot contains text with a colon and a valid emoji', () => {
+          beforeEach(async () => {
             slots = { default: 'This is a smile emoji: :smile:' };
             await _setWrappers();
           });
 
-          it('Contains emoji component', function () {
-            assert.strictEqual(emoji.exists(), true);
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
           });
 
-          it('Renders the correct emoji', function () {
-            assert.strictEqual(emoji.attributes('src'), expectedSmileSrc);
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(expectedSmileSrc);
           });
         });
-        describe('When default slot contains invalid shortcode', function () {
-          beforeEach(async function () {
+        describe('When default slot contains invalid shortcode', () => {
+          beforeEach(async () => {
             slots = { default: 'Content with :invalid: emoji.' };
             await _setWrappers();
           });
 
-          it('Renders text only', function () {
-            assert.strictEqual(wrapper.text(), slots.default);
+          it('Renders text only', () => {
+            expect(wrapper.text()).toBe(slots.default);
           });
 
-          it('Does not contain emoji component', function () {
-            assert.strictEqual(emoji.exists(), false);
+          it('Does not contain emoji component', () => {
+            expect(emoji.exists()).toBe(false);
           });
         });
       });
-      describe('When default slot contains unicode emoji', function () {
-        describe('When default slot contains valid unicode emoji', function () {
-          beforeEach(async function () {
+      describe('When default slot contains unicode emoji', () => {
+        describe('When default slot contains valid unicode emoji', () => {
+          beforeEach(async () => {
             slots = { default: 'Content with valid 😄 emoji.' };
             await _setWrappers();
           });
 
-          it('Contains emoji component', function () {
-            assert.strictEqual(emoji.exists(), true);
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
           });
 
-          it('Renders the correct emoji', function () {
-            assert.strictEqual(emoji.attributes('src'), expectedSmileSrc);
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(expectedSmileSrc);
           });
         });
-        describe('When default slot contains invalid unicode emoji', function () {
-          beforeEach(async function () {
+        describe('When default slot contains invalid unicode emoji', () => {
+          beforeEach(async () => {
             slots = { default: 'Content with invalid 🫡 emoji.' };
             await _setWrappers();
           });
 
-          it('Contains emoji component', function () {
-            assert.strictEqual(emoji.exists(), true);
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
           });
 
-          it('Renders the invalid emoji image', function () {
-            assert.strictEqual(emoji.attributes('src'), 'invalid');
+          it('Renders the invalid emoji image', () => {
+            expect(emoji.attributes('src')).toBe('invalid');
           });
         });
       });
     });
-    describe('When default slot is not provided', function () {
-      beforeEach(async function () {
+    describe('When default slot is not provided', () => {
+      beforeEach(async () => {
         await _setWrappers();
       });
 
-      it('Is empty', function () {
-        assert.strictEqual(wrapper.text(), '');
+      it('Is empty', () => {
+        expect(wrapper.text()).toBe('');
       });
     });
   });

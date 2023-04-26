@@ -1,6 +1,4 @@
-import { assert } from 'chai';
 import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
-import sinon from 'sinon';
 import Vue from 'vue';
 import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/events';
 import {
@@ -40,7 +38,13 @@ const baseAttrs = {
   name: 'select-menu',
 };
 
-describe('DtSelectMenu Tests', function () {
+describe('DtSelectMenu Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let selectWrapper;
@@ -68,7 +72,7 @@ describe('DtSelectMenu Tests', function () {
       propsData,
       attrs,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -78,80 +82,95 @@ describe('DtSelectMenu Tests', function () {
       propsData,
       attrs,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
-  beforeEach(function () {});
+  beforeEach(() => {});
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = basePropsData;
     attrs = baseAttrs;
     slots = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with required content', function () {
+  describe('Presentation Tests', () => {
+    describe('When rendered with required content', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should render the provided label', function () { assert.strictEqual(label.text(), LABEL); });
-      it('should have no size variant classes on the label', function () {
-        assert.strictEqual(label.classes().length, 1);
+      it(
+        'should render the provided label',
+        () => { expect(label.text()).toBe(LABEL); },
+      );
+      it('should have no size variant classes on the label', () => {
+        expect(label.classes().length).toBe(1);
       });
-      it('should not render a description', function () { assert.isFalse(description.exists()); });
-      it('should render the select menu', function () { assert.isTrue(select.exists()); });
-      it('should have no size variant classes on select menu', function () {
-        assert.strictEqual(selectWrapper.classes().length, 1);
+      it(
+        'should not render a description',
+        () => { expect(description.exists()).toBe(false); },
+      );
+      it(
+        'should render the select menu',
+        () => { expect(select.exists()).toBe(true); },
+      );
+      it('should have no size variant classes on select menu', () => {
+        expect(selectWrapper.classes().length).toBe(1);
       });
-      it('should have no kind variant classes on select menu input', function () {
-        assert.strictEqual(select.classes().length, 1);
+      it('should have no kind variant classes on select menu input', () => {
+        expect(select.classes().length).toBe(1);
       });
-      it('should render the select menu options', function () {
+      it('should render the select menu options', () => {
         OPTIONS.forEach(option => {
-          assert.exists(select.find(`[value="${option.value}"]`));
+          expect(select.find(`[value="${option.value}"]`).exists()).toBeTruthy();
         });
       });
-      it('should not render any validation messages', function () {
-        assert.strictEqual(messages?.props('validationMessages').length, 0);
+      it('should not render any validation messages', () => {
+        expect(messages?.props('validationMessages').length).toBe(0);
       });
     });
 
-    describe('When a label is not provided', function () {
+    describe('When a label is not provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { options: OPTIONS };
         _setWrappers();
       });
 
-      it('should not render a label', function () { assert.isFalse(label.exists()); });
+      it(
+        'should not render a label',
+        () => { expect(label.exists()).toBe(false); },
+      );
     });
 
-    describe('When a label is provided via slot', function () {
+    describe('When a label is provided via slot', () => {
       // Test Environment
       const slottedLabel = 'Slotted Label';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         slots = {
           label: slottedLabel,
         };
         _setWrappers();
       });
 
-      it('should render the slotted label', function () { assert.strictEqual(label.text(), slottedLabel); });
+      it(
+        'should render the slotted label',
+        () => { expect(label.text()).toBe(slottedLabel); },
+      );
     });
 
-    describe('When a description is provided via prop', function () {
+    describe('When a description is provided via prop', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = {
           ...basePropsData,
           description: DESCRIPTION,
@@ -159,54 +178,54 @@ describe('DtSelectMenu Tests', function () {
         _setWrappers();
       });
 
-      it('should render the provided description', function () {
-        assert.strictEqual(description.text(), DESCRIPTION);
+      it('should render the provided description', () => {
+        expect(description.text()).toBe(DESCRIPTION);
       });
-      it('should have no size variant classes on the description', function () {
-        assert.strictEqual(description.classes().length, 1);
+      it('should have no size variant classes on the description', () => {
+        expect(description.classes().length).toBe(1);
       });
     });
 
-    describe('When a description is provided via slot', function () {
+    describe('When a description is provided via slot', () => {
       // Test Environment
       const slottedDescription = 'Slotted Description';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         slots = {
           description: slottedDescription,
         };
         _setWrappers();
       });
 
-      it('should render the slotted description', function () {
-        assert.strictEqual(description.text(), slottedDescription);
+      it('should render the slotted description', () => {
+        expect(description.text()).toBe(slottedDescription);
       });
     });
 
-    describe('When options are provided via slot', function () {
+    describe('When options are provided via slot', () => {
       // Test Environment
       const slottedOptions = '<option value="1">Option 1</option><option value="2">Option 2</option>';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         slots = {
           default: slottedOptions,
         };
         _setWrappers();
       });
 
-      it('should render the select menu options', function () {
-        assert.exists(select.findAll('option').length, 2);
+      it('should render the select menu options', () => {
+        expect(select.findAll('option').length).toBe(2);
       });
     });
 
-    describe('When a size is provided', function () {
+    describe('When a size is provided', () => {
       // Test Environment
       const size = 'lg';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = {
           ...basePropsData,
           description: DESCRIPTION,
@@ -215,23 +234,23 @@ describe('DtSelectMenu Tests', function () {
         _setWrappers();
       });
 
-      it('should have size variant class on the label', function () {
-        assert.isTrue(label.classes(LABEL_SIZE_MODIFIERS[size]));
+      it('should have size variant class on the label', () => {
+        expect(label.classes(LABEL_SIZE_MODIFIERS[size])).toBe(true);
       });
-      it('should have size variant class on the description', function () {
-        assert.isTrue(description.classes(DESCRIPTION_SIZE_MODIFIERS[size]));
+      it('should have size variant class on the description', () => {
+        expect(description.classes(DESCRIPTION_SIZE_MODIFIERS[size])).toBe(true);
       });
-      it('should have size variant class on select menu', function () {
-        assert.isTrue(selectWrapper.classes(SELECT_SIZE_MODIFIERS[size]));
+      it('should have size variant class on select menu', () => {
+        expect(selectWrapper.classes(SELECT_SIZE_MODIFIERS[size])).toBe(true);
       });
     });
 
-    describe('When validation messages are provided', function () {
+    describe('When validation messages are provided', () => {
       // Test Environment
       const message = 'Validation Message';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = {
           ...basePropsData,
           messages: [message],
@@ -240,146 +259,146 @@ describe('DtSelectMenu Tests', function () {
 
       // Shared Examples
       const itBehavesLikeHasSelectInputStateClass = () => {
-        it('should have error state class on select menu', function () {
-          assert.isTrue(select.classes(SELECT_STATE_MODIFIERS.error));
+        it('should have error state class on select menu', () => {
+          expect(select.classes(SELECT_STATE_MODIFIERS.error)).toBe(true);
         });
       };
 
-      describe('When validation messages are shown', function () {
+      describe('When validation messages are shown', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           _mountWrappers();
         });
 
         itBehavesLikeHasSelectInputStateClass();
-        it('should render validation message', function () {
-          assert.strictEqual(messages?.findAll('[data-qa="validation-message"]').length, 1);
+        it('should render validation message', () => {
+          expect(messages?.findAll('[data-qa="validation-message"]').length).toBe(1);
         });
       });
 
-      describe('When validation messages are hidden', function () {
+      describe('When validation messages are hidden', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData.showMessages = false;
           _mountWrappers();
         });
 
         itBehavesLikeHasSelectInputStateClass();
-        it('should not render any validation messages', function () {
-          assert.isFalse(messages.exists());
+        it('should not render any validation messages', () => {
+          expect(messages.exists()).toBe(false);
         });
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When a description is provided', function () {
+  describe('Accessibility Tests', () => {
+    describe('When a description is provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, description: DESCRIPTION };
         _setWrappers();
       });
 
-      it('label aria-details should match the id of the description', function () {
-        assert.strictEqual(label.attributes('aria-details'), description.attributes('id'));
+      it('label aria-details should match the id of the description', () => {
+        expect(label.attributes('aria-details')).toBe(description.attributes('id'));
       });
     });
 
-    describe('When a description is not provided', function () {
-      describe('When aria-details are not provided', function () {
+    describe('When a description is not provided', () => {
+      describe('When aria-details are not provided', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           _setWrappers();
         });
 
-        it('label aria-details should not exist', function () {
-          assert.notExists(label.attributes('aria-details'));
+        it('label aria-details should not exist', () => {
+          expect(label.attributes('aria-details')).toBeFalsy();
         });
       });
 
-      describe('When aria-details are provided', function () {
+      describe('When aria-details are provided', () => {
         // Test Environment
         const ariaDetails = 'some-id';
 
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           attrs = { ...baseAttrs, 'aria-details': ariaDetails };
           _setWrappers();
         });
 
-        it('label aria-details should match those provided by attrs', function () {
-          assert.strictEqual(label.attributes('aria-details'), ariaDetails);
+        it('label aria-details should match those provided by attrs', () => {
+          expect(label.attributes('aria-details')).toBe(ariaDetails);
         });
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    describe('When select menu value has changed', function () {
+  describe('Interactivity Tests', () => {
+    describe('When select menu value has changed', () => {
       // Test Environment
       const selectedValue = OPTIONS[1].value;
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         _setWrappers();
         select.element.value = selectedValue;
         select.trigger('change');
       });
 
-      it('should emit input event', function () {
+      it('should emit input event', () => {
         itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue.toString());
       });
-      it('should emit change event', function () {
+      it('should emit change event', () => {
         itBehavesLikeEmitsExpectedEvent(wrapper, 'change', selectedValue.toString());
       });
     });
   });
 
-  describe('Validation Tests', function () {
-    describe('Size Validator', function () {
+  describe('Validation Tests', () => {
+    describe('Size Validator', () => {
       // Test Environment
       const prop = DtSelectMenu.props.size;
 
-      describe('When provided size is in SELECT_SIZE_MODIFIERS', function () {
+      describe('When provided size is in SELECT_SIZE_MODIFIERS', () => {
         itBehavesLikePassesCustomPropValidation(prop, prop.default);
       });
 
-      describe('when provided size is not in SELECT_SIZE_MODIFIERS', function () {
+      describe('when provided size is not in SELECT_SIZE_MODIFIERS', () => {
         itBehavesLikeFailsCustomPropValidation(prop, `NOT${SELECT_SIZE_MODIFIERS.md}`);
       });
     });
 
-    describe('Options Validation', function () {
+    describe('Options Validation', () => {
       // Test Environment
       const warningMessage = 'Options are expected to be provided via prop or slot';
 
       // Test Setup
-      before(function () {
+      beforeAll(() => {
         Vue.config.silent = true;
-        sinon.spy(Vue.util, 'warn');
+        jest.spyOn(Vue.util, 'warn').mockClear();
       });
 
       // Test Teardown
-      afterEach(function () {
-        Vue.util.warn.resetHistory();
+      afterEach(() => {
+        Vue.util.warn.mockReset();
       });
 
-      after(function () {
-        Vue.util.warn.restore();
+      afterAll(() => {
+        Vue.util.warn.mockRestore();
         Vue.config.silent = false;
       });
 
-      describe('When options are provided via prop', function () {
+      describe('When options are provided via prop', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           _mountWrappers();
         });
 
         itBehavesLikeDoesNotRaiseAnyVueWarnings();
 
-        describe('When updated options are empty', function () {
+        describe('When updated options are empty', () => {
           // Test Setup
-          beforeEach(async function () {
+          beforeEach(async () => {
             await wrapper.setProps({ options: [] });
           });
 
@@ -387,9 +406,9 @@ describe('DtSelectMenu Tests', function () {
         });
       });
 
-      describe('When options are provided via slot', function () {
+      describe('When options are provided via slot', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData = { ...propsData, options: undefined };
           slots = { default: '<option value="1">Option 1</option><option value="2">Option 2</option>' };
           _mountWrappers();
@@ -398,9 +417,9 @@ describe('DtSelectMenu Tests', function () {
         itBehavesLikeDoesNotRaiseAnyVueWarnings();
       });
 
-      describe('When options are not provided', function () {
+      describe('When options are not provided', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData = { ...propsData, options: undefined };
           _mountWrappers();
         });
@@ -410,7 +429,7 @@ describe('DtSelectMenu Tests', function () {
     });
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     // Test Environment
     let element;
     const customClass = 'my-custom-class';
@@ -433,89 +452,99 @@ describe('DtSelectMenu Tests', function () {
 
     // Shared Examples
     const itBehavesLikeAppliesClassToChildLocal = () => {
-      it('should apply custom class to child', function () {
+      it('should apply custom class to child', () => {
         itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
       });
     };
 
     const itBehavesLikeAppliesChildPropLocal = () => {
-      it('should have provided child prop', function () {
+      it('should have provided child prop', () => {
         itBehavesLikeAppliesChildProp(element, propName, propValue);
       });
     };
 
     // Test Setup
-    before(function () {
+    beforeAll(() => {
       childProps[propName] = propValue;
     });
-    beforeEach(function () {
+    beforeEach(() => {
       propsData = { ...propsData, description: DESCRIPTION };
     });
 
-    describe('When a label class is provided', function () {
-      beforeEach(function () { _setupChildClassTest('labelClass', '[data-qa="dt-select-label"]'); });
+    describe('When a label class is provided', () => {
+      beforeEach(
+        () => { _setupChildClassTest('labelClass', '[data-qa="dt-select-label"]'); },
+      );
       itBehavesLikeAppliesClassToChildLocal();
     });
 
-    describe('When a description class is provided', function () {
-      beforeEach(function () { _setupChildClassTest('descriptionClass', '[data-qa="dt-select-description"]'); });
+    describe('When a description class is provided', () => {
+      beforeEach(
+        () => { _setupChildClassTest('descriptionClass', '[data-qa="dt-select-description"]'); },
+      );
       itBehavesLikeAppliesClassToChildLocal();
     });
 
-    describe('When a select class is provided', function () {
-      beforeEach(function () { _setupChildClassTest('selectClass', '[data-qa="dt-select-wrapper"]'); });
+    describe('When a select class is provided', () => {
+      beforeEach(
+        () => { _setupChildClassTest('selectClass', '[data-qa="dt-select-wrapper"]'); },
+      );
       itBehavesLikeAppliesClassToChildLocal();
     });
 
-    describe('When an option class is provided', function () {
+    describe('When an option class is provided', () => {
       // Test Environment
       let options;
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData.optionClass = customClass;
         _setWrappers();
         options = select.findAll('option');
       });
 
-      it('should apply child class to each option', function () {
+      it('should apply child class to each option', () => {
         options.wrappers.forEach(option => {
-          assert.isTrue(option.classes(customClass));
+          expect(option.classes(customClass)).toBe(true);
         });
       });
     });
 
-    describe('When label child props are provided', function () {
-      beforeEach(function () { _setupChildPropsTest('labelChildProps', '[data-qa="dt-select-label"]'); });
+    describe('When label child props are provided', () => {
+      beforeEach(
+        () => { _setupChildPropsTest('labelChildProps', '[data-qa="dt-select-label"]'); },
+      );
       itBehavesLikeAppliesChildPropLocal();
     });
 
-    describe('When description child props are provided', function () {
-      beforeEach(function () { _setupChildPropsTest('descriptionChildProps', '[data-qa="dt-select-description"]'); });
+    describe('When description child props are provided', () => {
+      beforeEach(
+        () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="dt-select-description"]'); },
+      );
       itBehavesLikeAppliesChildPropLocal();
     });
 
-    describe('When option child props are provided', function () {
+    describe('When option child props are provided', () => {
       // Test Environment
       let options;
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData.optionChildProps = childProps;
         _setWrappers();
         options = select.findAll('option');
       });
 
-      it('should apply child props to each option', function () {
+      it('should apply child props to each option', () => {
         options.wrappers.forEach(option => {
           itBehavesLikeAppliesChildProp(option, propName, propValue);
         });
       });
     });
 
-    describe('When attrs are provided', function () {
+    describe('When attrs are provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         attrs = { some: 'prop' };
         _setWrappers();
         element = select;

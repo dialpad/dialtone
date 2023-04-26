@@ -104,14 +104,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates

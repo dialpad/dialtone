@@ -8,9 +8,6 @@
     "common/mixins/modal.js": {
       "complexity": 1
     },
-    "components/avatar/avatar.vue": {
-      "complexity": 1
-    },
     "components/combobox/combobox.vue": {
       "complexity": 1
     },
