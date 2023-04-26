@@ -1,43 +1,50 @@
-import { assert } from 'chai';
 import Vue from 'vue';
-import sinon from 'sinon';
 
 let consoleErrorSpy;
 
 export const initializeSpy = () => {
-  consoleErrorSpy = sinon.spy(console, 'error');
+  consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
 };
 
 export const cleanSpy = () => {
   consoleErrorSpy = null;
-  console.error.restore();
+  console.error.mockRestore();
 };
 
 export function itBehavesLikePassesCustomPropValidation (prop, value) {
-  it('passes custom prop validation', function () {
-    assert.strictEqual(prop.validator(value), true);
+  it('passes custom prop validation', () => {
+    expect(prop.validator(value)).toBe(true);
   });
 }
 
 export function itBehavesLikeFailsCustomPropValidation (prop, value) {
-  it('fails custom prop validation', function () {
-    assert.strictEqual(prop.validator(value), false);
+  it('fails custom prop validation', () => {
+    expect(prop.validator(value)).toBe(false);
   });
 }
 
 export const itBehavesLikeDoesNotRaiseAnyVueWarnings = () => {
-  it('should not raise any warnings', function () { assert.isTrue(Vue.util.warn.notCalled); });
+  it(
+    'should not raise any warnings',
+    () => { expect(Vue.util.warn).toHaveBeenCalledTimes(0); },
+  );
 };
 
 export const itBehavesLikeRaisesSingleVueWarning = (message) => {
-  it('should raise a single warning', function () { assert.isTrue(Vue.util.warn.calledOnce); });
-  it('should have expected warning message', function () {
-    assert.strictEqual(Vue.util.warn.firstCall.args[0], message);
+  it(
+    'should raise a single warning',
+    () => { expect(Vue.util.warn).toHaveBeenCalledTimes(1); },
+  );
+  it('should have expected warning message', () => {
+    expect(Vue.util.warn.mock.calls[0][0]).toBe(message);
   });
 };
 
 export const itBehavesLikeRaisesValidationError = (message) => {
-  it('should raise a validation error', function () { assert.isTrue(consoleErrorSpy.calledWith(message)); });
+  it(
+    'should raise a validation error',
+    () => { expect(consoleErrorSpy).toHaveBeenCalledWith(message); },
+  );
 };
 
 export default {

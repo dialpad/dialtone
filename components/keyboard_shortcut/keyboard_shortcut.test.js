@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
 import { DtIcon } from '@/components/icon';
@@ -9,7 +8,17 @@ const basePropsData = {
   shortcut: SHORTCUTS_ALIASES_LIST.join('+').trim(),
 };
 
-describe('DtKeyboardShortcut Tests', function () {
+describe('DtKeyboardShortcut Tests', () => {
+  let testContext = {
+    localVue: null,
+  };
+
+  // Setup
+  beforeAll(() => {
+    testContext = {};
+    testContext.localVue = createLocalVue();
+  });
+
   // Wrappers
   let wrapper;
   let iconComponents;
@@ -25,21 +34,22 @@ describe('DtKeyboardShortcut Tests', function () {
   const _mountWrapper = () => {
     wrapper = mount(DtKeyboardShortcut, {
       propsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Setup
-    _mountWrapper();
+    beforeEach(() => {
+      _mountWrapper();
+    });
 
-    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    it('should render 11 icons', function () { assert.isTrue(iconComponents.length === 11); });
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
+    it('should render 11 icons', () => {
+      expect(iconComponents.length === 11).toBe(true);
+    });
   });
 });

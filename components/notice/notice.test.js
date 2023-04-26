@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 
 import DtNotice from './notice';
@@ -15,7 +14,13 @@ const baseSlotsData = {
   icon: 'icon slot content',
 };
 
-describe('DtNotice tests', function () {
+describe('DtNotice tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   let wrapper;
 
   let rootElement;
@@ -27,7 +32,7 @@ describe('DtNotice tests', function () {
     wrapper = shallowMount(DtNotice, {
       propsData: basePropsData,
       slots: baseSlotsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -39,86 +44,86 @@ describe('DtNotice tests', function () {
     iconChildStub = wrapper.find('dt-notice-icon-stub');
   };
 
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default content', function () {
-      it('Should render notice component', function () {
-        assert.isTrue(wrapper.exists());
+  describe('Presentation Tests', () => {
+    describe('When rendered with default content', () => {
+      it('Should render notice component', () => {
+        expect(wrapper.exists()).toBe(true);
       });
 
-      it('action slot is passed down correctly', async function () {
-        assert.strictEqual(actionChildStub.text(), baseSlotsData.action);
+      it('action slot is passed down correctly', async () => {
+        expect(actionChildStub.text()).toBe(baseSlotsData.action);
       });
 
-      it('default slot is passed down correctly', async function () {
-        assert.strictEqual(contentChildStub.text(), baseSlotsData.default);
+      it('default slot is passed down correctly', async () => {
+        expect(contentChildStub.text()).toBe(baseSlotsData.default);
       });
 
-      it('icon slot is passed down correctly', async function () {
-        assert.strictEqual(iconChildStub.text(), baseSlotsData.icon);
-      });
-    });
-
-    describe('When important is false', function () {
-      it('Has correct class', function () {
-        assert.strictEqual(rootElement.classes('d-notice--important'), false);
+      it('icon slot is passed down correctly', async () => {
+        expect(iconChildStub.text()).toBe(baseSlotsData.icon);
       });
     });
 
-    describe('When important is true', function () {
-      beforeEach(async function () {
+    describe('When important is false', () => {
+      it('Has correct class', () => {
+        expect(rootElement.classes('d-notice--important')).toBe(false);
+      });
+    });
+
+    describe('When important is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ important: true });
       });
 
-      it('Has correct class', async function () {
-        assert.strictEqual(rootElement.classes('d-notice--important'), true);
+      it('Has correct class', async () => {
+        expect(rootElement.classes('d-notice--important')).toBe(true);
       });
     });
 
-    describe('When kind is not specified', function () {
-      it('Does not add notice kind class', async function () {
-        assert.strictEqual(rootElement.classes('d-notice--'), false);
+    describe('When kind is not specified', () => {
+      it('Does not add notice kind class', async () => {
+        expect(rootElement.classes('d-notice--')).toBe(false);
       });
     });
 
-    describe('When kind is set to error', function () {
-      beforeEach(async function () {
+    describe('When kind is set to error', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ kind: 'error' });
       });
 
-      it('Has correct class', async function () {
-        assert.strictEqual(rootElement.classes('d-notice--error'), true);
+      it('Has correct class', async () => {
+        expect(rootElement.classes('d-notice--error')).toBe(true);
       });
     });
 
-    describe('When closeButtonProps is passed', function () {
-      it('Has correct class', async function () {
-        assert.deepEqual(actionChildStub.props().closeButtonProps, { ariaLabel: 'close' });
+    describe('When closeButtonProps is passed', () => {
+      it('Has correct class', async () => {
+        expect(actionChildStub.props().closeButtonProps).toEqual({ ariaLabel: 'close' });
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When rendered with default content', function () {
-      it('Shows correct role', function () {
-        assert.strictEqual(contentChildStub.attributes('role'), 'status');
+  describe('Accessibility Tests', () => {
+    describe('When rendered with default content', () => {
+      it('Shows correct role', () => {
+        expect(contentChildStub.attributes('role')).toBe('status');
       });
     });
 
-    describe('When role is alert', function () {
-      beforeEach(async function () {
+    describe('When role is alert', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ role: 'alert' });
       });
 
-      it('Shows correct role', async function () {
-        assert.strictEqual(contentChildStub.attributes('role'), 'alert');
+      it('Shows correct role', async () => {
+        expect(contentChildStub.attributes('role')).toBe('alert');
       });
     });
   });

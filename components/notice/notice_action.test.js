@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 
 import DtNoticeAction from './notice_action';
@@ -18,7 +17,13 @@ const baseSlotsData = {
   default: 'this is the action slot content',
 };
 
-describe('DtNoticeAction tests', function () {
+describe('DtNoticeAction tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   let wrapper;
 
   const propsData = basePropsData;
@@ -31,7 +36,7 @@ describe('DtNoticeAction tests', function () {
     wrapper = mount(DtNoticeAction, {
       propsData,
       slots: slotsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -41,71 +46,71 @@ describe('DtNoticeAction tests', function () {
     srOnlyCloseButton = wrapper.findComponent(SrOnlyCloseButton);
   };
 
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default slot content', function () {
-      it('Should render notice action', function () {
-        assert.isTrue(wrapper.exists());
+  describe('Presentation Tests', () => {
+    describe('When rendered with default slot content', () => {
+      it('Should render notice action', () => {
+        expect(wrapper.exists()).toBe(true);
       });
 
-      it('Default slot renders correctly as action text/html', function () {
+      it('Default slot renders correctly as action text/html', () => {
         const root = wrapper.find('.d-notice__actions');
-        assert.strictEqual(root.text(), slotsData.default);
+        expect(root.text()).toBe(slotsData.default);
       });
 
-      it('Should not render sr-only close button', function () {
-        assert.isFalse(srOnlyCloseButton.exists());
-      });
-    });
-
-    describe('When hideClose is false', function () {
-      it('Close button is displayed', function () {
-        assert.isTrue(closeButton.exists());
+      it('Should not render sr-only close button', () => {
+        expect(srOnlyCloseButton.exists()).toBe(false);
       });
     });
 
-    describe('When closeButtonProps is passed', function () {
-      it('Adds props to button', function () {
-        assert.strictEqual(closeButton.attributes()['aria-label'], 'Close');
+    describe('When hideClose is false', () => {
+      it('Close button is displayed', () => {
+        expect(closeButton.exists()).toBe(true);
       });
     });
 
-    describe('When hideClose is true', function () {
-      beforeEach(async function () {
+    describe('When closeButtonProps is passed', () => {
+      it('Adds props to button', () => {
+        expect(closeButton.attributes()['aria-label']).toBe('Close');
+      });
+    });
+
+    describe('When hideClose is true', () => {
+      beforeEach(async () => {
         _setWrappers();
         await wrapper.setProps({ hideClose: true });
         _setChildWrappers();
       });
 
-      it('Close button is not displayed', function () {
-        assert.isFalse(closeButton.exists());
+      it('Close button is not displayed', () => {
+        expect(closeButton.exists()).toBe(false);
       });
     });
 
-    describe('When visuallyHiddenClose is true', function () {
-      beforeEach(async function () {
+    describe('When visuallyHiddenClose is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ visuallyHiddenClose: true });
         _setChildWrappers();
       });
 
-      it('should contain a visually hidden close button', async function () {
-        assert.isTrue(srOnlyCloseButton.exists());
+      it('should contain a visually hidden close button', async () => {
+        expect(srOnlyCloseButton.exists()).toBe(true);
       });
 
-      describe('When visuallyHiddenCloseLabel is null', function () {
-        beforeEach(async function () {
+      describe('When visuallyHiddenCloseLabel is null', () => {
+        beforeEach(async () => {
           initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
-        afterEach(function () {
+        afterEach(() => {
           cleanSpy();
         });
 
@@ -114,27 +119,27 @@ describe('DtNoticeAction tests', function () {
     });
   });
 
-  describe('Interactivity Tests', function () {
-    describe('When hideClose is false', function () {
-      describe('When close button is clicked', function () {
-        beforeEach(async function () {
+  describe('Interactivity Tests', () => {
+    describe('When hideClose is false', () => {
+      describe('When close button is clicked', () => {
+        beforeEach(async () => {
           closeButton.vm.$emit('click');
         });
-        it('emits event', function () {
-          assert.isOk(wrapper.emitted('close'));
+        it('emits event', () => {
+          expect(wrapper.emitted('close')).toBeTruthy();
         });
       });
     });
 
-    describe('When sr-only close button is enabled and activated', function () {
-      beforeEach(async function () {
+    describe('When sr-only close button is enabled and activated', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ visuallyHiddenClose: true });
         _setChildWrappers();
         await srOnlyCloseButton.trigger('click');
       });
 
-      it('emits event', function () {
-        assert.isOk(wrapper.emitted('close'));
+      it('emits event', () => {
+        expect(wrapper.emitted('close')).toBeTruthy();
       });
     });
   });

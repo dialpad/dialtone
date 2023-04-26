@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import {
   createLocalVue,
   shallowMount,
@@ -23,7 +22,13 @@ const basePropsData = {
 };
 const baseAttrs = { 'aria-label': 'Test Input Group' };
 
-describe('Input Group Tests', function () {
+describe('Input Group Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let inputGroup;
@@ -49,7 +54,7 @@ describe('Input Group Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -60,71 +65,82 @@ describe('Input Group Tests', function () {
       slots,
       attrs,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
-  beforeEach(function () {});
+  beforeEach(() => {});
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = basePropsData;
     attrs = baseAttrs;
     slots = {};
     provide = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Test Environment
     const legend = 'My Legend';
 
     // Shared Examples
     const itBehavesLikeHasLegend = () => {
-      it('should have a legend', function () { assert.strictEqual(inputGroupLegend.exists(), true); });
-      it('should have text matching the provided legend', function () {
-        assert.strictEqual(inputGroupLegend.text(), legend);
+      it(
+        'should have a legend',
+        () => { expect(inputGroupLegend.exists()).toBe(true); },
+      );
+      it('should have text matching the provided legend', () => {
+        expect(inputGroupLegend.text()).toBe(legend);
       });
     };
 
-    describe('When rendered with default content', function () {
+    describe('When rendered with default content', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should have a input group', function () { assert.strictEqual(inputGroup.exists(), true); });
-      it('should not have a legend', function () { assert.strictEqual(inputGroupLegend.exists(), false); });
-      it('should not have inputs', function () {
-        assert.lengthOf(wrapper.findAllComponents(InputFixture), 0);
+      it(
+        'should have a input group',
+        () => { expect(inputGroup.exists()).toBe(true); },
+      );
+      it(
+        'should not have a legend',
+        () => { expect(inputGroupLegend.exists()).toBe(false); },
+      );
+      it('should not have inputs', () => {
+        expect(wrapper.findAllComponents(InputFixture).length).toBe(0);
       });
-      it('should not have validation messages', function () {
-        assert.lengthOf(wrapper.findComponent(DtValidationMessages)?.props('validationMessages'), 0);
+      it('should not have validation messages', () => {
+        expect(
+          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
+        ).toBe(0);
       });
     });
 
-    describe('When inputs are provided', function () {
+    describe('When inputs are provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         slots = { default: InputsFixture };
       });
 
-      describe('When the input group renders', function () {
+      describe('When the input group renders', () => {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(() => { _setWrappers(); });
 
-        it('should have inputs', function () {
-          assert.lengthOf(wrapper.findAllComponents(InputFixture), 3);
+        it('should have inputs', () => {
+          expect(wrapper.findAllComponents(InputFixture).length).toBe(3);
         });
       });
     });
 
-    describe('When a legend is provided via prop', function () {
+    describe('When a legend is provided via prop', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, legend };
         _setWrappers();
       });
@@ -132,22 +148,22 @@ describe('Input Group Tests', function () {
       itBehavesLikeHasLegend();
     });
 
-    describe('When a legend is provided via slot', function () {
+    describe('When a legend is provided via slot', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         slots = { legend };
       });
 
-      describe('When a legend is not provided via prop', function () {
+      describe('When a legend is not provided via prop', () => {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(() => { _setWrappers(); });
 
         itBehavesLikeHasLegend();
       });
 
-      describe('When a legend is also provided via prop', function () {
+      describe('When a legend is also provided via prop', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData = {
             ...basePropsData,
             legend: 'A legend which should not be displayed',
@@ -159,45 +175,45 @@ describe('Input Group Tests', function () {
       });
     });
 
-    describe('When validation messages are provided', function () {
+    describe('When validation messages are provided', () => {
       // Shared Examples
       const itBehavesLikeHasValidationMessages = (numMessages) => {
-        it('should have validation messages', function () {
-          assert.lengthOf(inputGroupMessages?.props('validationMessages'), numMessages);
+        it('should have validation messages', () => {
+          expect(inputGroupMessages?.props('validationMessages').length).toBe(numMessages);
         });
       };
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, messages: ['Error'] };
       });
 
-      describe('When the validation messages are shown', function () {
+      describe('When the validation messages are shown', () => {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(() => { _setWrappers(); });
 
         itBehavesLikeHasValidationMessages(1);
-        it('should show validation messages', function () {
-          assert.strictEqual(inputGroupMessages?.props('showMessages'), true);
+        it('should show validation messages', () => {
+          expect(inputGroupMessages?.props('showMessages')).toBe(true);
         });
       });
 
-      describe('When the validation messages are hidden', function () {
+      describe('When the validation messages are hidden', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           propsData = { ...propsData, showMessages: false };
           _setWrappers();
         });
 
         itBehavesLikeHasValidationMessages(1);
-        it('should hide validation messages', function () {
-          assert.strictEqual(inputGroupMessages?.props('showMessages'), false);
+        it('should hide validation messages', () => {
+          expect(inputGroupMessages?.props('showMessages')).toBe(false);
         });
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     // Wrappers
     let selectedInput;
 
@@ -207,86 +223,89 @@ describe('Input Group Tests', function () {
     // Helpers
     const _selectInput = (value) => {
       selectedInput = inputGroup.find(`[value="${value}"]`);
-      selectedInput.trigger('click');
+      selectedInput.trigger('change');
     };
 
     // Shared Examples
     const itBehavesLikeUpdatesProvideObj = (value) => {
-      it('updates provide object value', async function () {
+      it('updates provide object value', async () => {
         await wrapper.vm.$nextTick();
-        assert.strictEqual(wrapper.vm.provideObj?.value, value);
+        expect(wrapper.vm.provideObj?.value).toBe(value);
       });
     };
 
     // Test Setup
-    beforeEach(function () {
+    beforeEach(() => {
       slots = { default: InputsFixture };
     });
 
-    describe('When an initial value is provided', function () {
+    describe('When an initial value is provided', () => {
       // Test Environment
       const initialValue = 'other';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, value: initialValue };
       });
 
-      describe('When an input is not selected', function () {
+      describe('When an input is not selected', () => {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(() => { _setWrappers(); });
 
         itBehavesLikeUpdatesProvideObj(initialValue);
       });
 
-      describe('When an input is selected', function () {
+      describe('When an input is selected', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           _mountWrappers();
           _selectInput(selectedValue);
         });
 
         itBehavesLikeUpdatesProvideObj(selectedValue);
-        it('should emit input event', function () {
+        it('should emit input event', () => {
           itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue);
         });
       });
     });
 
-    describe('When an input is selected', function () {
+    describe('When an input is selected', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         _mountWrappers();
         _selectInput(selectedValue);
       });
 
       itBehavesLikeUpdatesProvideObj(selectedValue);
-      it('should emit input event', function () {
+      it('should emit input event', () => {
         itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue);
       });
     });
 
-    describe('When the input group is disabled', function () {
+    describe('When the input group is disabled', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         propsData = { ...basePropsData, disabled: true };
         _mountWrappers();
       });
 
-      it('updates provide object disabled', function () {
-        assert.strictEqual(wrapper.vm.provideObj?.disabled, true);
+      it('updates provide object disabled', () => {
+        expect(wrapper.vm.provideObj?.disabled).toBe(true);
       });
 
-      describe('When an input is selected', function () {
+      describe('When an input is selected', () => {
         // Test Setup
-        beforeEach(function () { _selectInput(selectedValue); });
+        beforeEach(() => { _selectInput(selectedValue); });
 
-        it('does not emit an input event', function () { itBehavesLikeDoesNotEmitEvents(wrapper); });
+        it(
+          'does not emit an input event',
+          () => { itBehavesLikeDoesNotEmitEvents(wrapper); },
+        );
       });
     });
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     let element;
     const customClass = 'my-custom-class';
     const propName = 'some';
@@ -308,23 +327,23 @@ describe('Input Group Tests', function () {
 
     // Shared Examples
     const itBehavesLikeAppliesClassToChildLocal = () => {
-      it('should apply custom class to child', function () {
+      it('should apply custom class to child', () => {
         itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
       });
     };
 
     const itBehavesLikeAppliesChildPropLocal = () => {
-      it('should have provided child prop', function () {
+      it('should have provided child prop', () => {
         itBehavesLikeAppliesChildProp(element, propName, propValue);
       });
     };
 
     // Test Setup
-    before(function () {
+    beforeAll(() => {
       childProps[propName] = propValue;
     });
 
-    beforeEach(function () {
+    beforeEach(() => {
       propsData = {
         ...basePropsData,
         legend: 'My Legend',
@@ -332,37 +351,45 @@ describe('Input Group Tests', function () {
       };
     });
 
-    describe('When a legend class is provided', function () {
+    describe('When a legend class is provided', () => {
       // Test Setup
-      beforeEach(function () { _setupChildClassTest('legendClass', '[data-qa="input-group-legend"]'); });
+      beforeEach(
+        () => { _setupChildClassTest('legendClass', '[data-qa="input-group-legend"]'); },
+      );
 
       itBehavesLikeAppliesClassToChildLocal();
     });
 
-    describe('When a messages class is provided', function () {
+    describe('When a messages class is provided', () => {
       // Test Setup
-      beforeEach(function () { _setupChildClassTest('messagesClass', '[data-qa="input-group-messages"]'); });
+      beforeEach(
+        () => { _setupChildClassTest('messagesClass', '[data-qa="input-group-messages"]'); },
+      );
 
       itBehavesLikeAppliesClassToChildLocal();
     });
 
-    describe('When legend child props are provided', function () {
+    describe('When legend child props are provided', () => {
       // Test Setup
-      beforeEach(function () { _setupChildPropsTest('legendChildProps', '[data-qa="input-group-legend"]'); });
+      beforeEach(
+        () => { _setupChildPropsTest('legendChildProps', '[data-qa="input-group-legend"]'); },
+      );
 
       itBehavesLikeAppliesChildPropLocal();
     });
 
-    describe('When messages child props are provided', function () {
+    describe('When messages child props are provided', () => {
       // Test Setup
-      beforeEach(function () { _setupChildPropsTest('messagesChildProps', '[data-qa="input-group-messages"]'); });
+      beforeEach(
+        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="input-group-messages"]'); },
+      );
 
       itBehavesLikeAppliesChildPropLocal();
     });
 
-    describe('When attrs are provided', function () {
+    describe('When attrs are provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         attrs = { ...baseAttrs, some: 'prop' };
         _setWrappers();
         element = inputGroup;
@@ -371,7 +398,7 @@ describe('Input Group Tests', function () {
       itBehavesLikeAppliesChildPropLocal();
     });
 
-    describe('QA Label Tests', function () {
+    describe('QA Label Tests', () => {
       // Test Environment
       const customQaLabel = 'custom-data-qa-label';
 
@@ -383,28 +410,28 @@ describe('Input Group Tests', function () {
 
       // Shared Examples
       const itBehavesLikeAppliesCustomQaLabel = () => {
-        it('should have applied custom qa label', function () {
-          assert.strictEqual(wrapper.find(`[data-qa="${customQaLabel}"]`).exists(), true);
+        it('should have applied custom qa label', () => {
+          expect(wrapper.find(`[data-qa="${customQaLabel}"]`).exists()).toBe(true);
         });
       };
 
-      describe('When a custom data-qa group label is provided', function () {
+      describe('When a custom data-qa group label is provided', () => {
         // Test Setup
-        beforeEach(function () { _setupQaLabelTest('dataQaGroup'); });
+        beforeEach(() => { _setupQaLabelTest('dataQaGroup'); });
 
         itBehavesLikeAppliesCustomQaLabel();
       });
 
-      describe('When a custom data-qa group legend label is provided', function () {
+      describe('When a custom data-qa group legend label is provided', () => {
         // Test Setup
-        beforeEach(function () { _setupQaLabelTest('dataQaGroupLegend'); });
+        beforeEach(() => { _setupQaLabelTest('dataQaGroupLegend'); });
 
         itBehavesLikeAppliesCustomQaLabel();
       });
 
-      describe('When a custom data-qa group messages label is provided', function () {
+      describe('When a custom data-qa group messages label is provided', () => {
         // Test Setup
-        beforeEach(function () { _setupQaLabelTest('dataQaGroupMessages'); });
+        beforeEach(() => { _setupQaLabelTest('dataQaGroupMessages'); });
 
         itBehavesLikeAppliesCustomQaLabel();
       });

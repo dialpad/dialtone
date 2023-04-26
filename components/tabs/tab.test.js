@@ -1,10 +1,8 @@
-import { assert } from 'chai';
-import sinon from 'sinon';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtTab from './tab.vue';
 import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
 
-describe('DtTab Tests', function () {
+describe('DtTab Tests', () => {
   // Wrappers
   let wrapper;
   let tab;
@@ -26,14 +24,14 @@ describe('DtTab Tests', function () {
   const _setWrappers = () => {
     tab = wrapper.find('[data-qa="dt-tab"]');
   };
-  const changeContentPanel = sinon.spy();
+  const changeContentPanel = jest.fn();
   const _mountWrapper = () => {
     wrapper = shallowMount(DtTab, {
       localVue: createLocalVue(),
       slots,
       propsData,
       provide: {
-        setFocus: sinon.spy(),
+        setFocus: jest.fn(),
         groupContext,
         changeContentPanel,
       },
@@ -41,155 +39,155 @@ describe('DtTab Tests', function () {
     _setWrappers();
   };
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Setup
     _mountWrapper();
 
-    it('should render the component', function () {
-      assert.exists(wrapper, 'wrapper exists');
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
     });
 
-    it('should have default class', function () {
-      assert.isTrue(tab.classes('d-tab'));
+    it('should have default class', () => {
+      expect(tab.classes('d-tab')).toBe(true);
     });
 
-    it('should render the slot', function () {
-      assert.strictEqual(tab.text(), defaultSlot);
+    it('should render the slot', () => {
+      expect(tab.text()).toBe(defaultSlot);
     });
 
-    describe('Selected by default', function () {
-      beforeEach(function () {
+    describe('Selected by default', () => {
+      beforeEach(() => {
         propsData.selected = true;
         _mountWrapper();
       });
 
-      it('changeContentPanel should be called with valid data', function () {
-        assert.isTrue(changeContentPanel.calledWith({
+      it('changeContentPanel should be called with valid data', () => {
+        expect(changeContentPanel).toHaveBeenCalledWith({
           selected: propsData.panelId,
           selectOverride: true,
-        }));
+        });
       });
     });
 
-    describe('Attributes', function () {
-      it('id should match the provided id', function () {
-        assert.strictEqual(tab.attributes('id'), `dt-tab-${id}`);
+    describe('Attributes', () => {
+      it('id should match the provided id', () => {
+        expect(tab.attributes('id')).toBe(`dt-tab-${id}`);
       });
 
-      it('tabindex should be -1 ', function () {
-        assert.strictEqual(tab.attributes('tabindex'), '-1');
+      it('tabindex should be -1 ', () => {
+        expect(tab.attributes('tabindex')).toBe('-1');
       });
 
-      it('should not be disabled', function () {
-        assert.strictEqual(tab.attributes('disabled'), undefined);
+      it('should not be disabled', () => {
+        expect(tab.attributes('disabled')).toBe(undefined);
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    describe('Selected state', function () {
-      beforeEach(function () {
+  describe('Interactivity Tests', () => {
+    describe('Selected state', () => {
+      beforeEach(() => {
         groupContext.selected = panelId;
         _mountWrapper();
       });
 
-      it('tab classes should content selected class', function () {
-        assert.isTrue(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected));
+      it('tab classes should content selected class', () => {
+        expect(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected)).toBe(true);
       });
     });
 
-    describe('Unselected state', function () {
-      beforeEach(function () {
+    describe('Unselected state', () => {
+      beforeEach(() => {
         groupContext.selected = '';
         _mountWrapper();
       });
 
-      it('tab classes should not content selected class', function () {
-        assert.isFalse(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected));
+      it('tab classes should not content selected class', () => {
+        expect(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected)).toBe(false);
       });
     });
 
-    describe('Disabled state', function () {
-      beforeEach(function () {
+    describe('Disabled state', () => {
+      beforeEach(() => {
         _mountWrapper();
       });
 
-      describe('Disabled by inject', function () {
-        before(function () {
+      describe('Disabled by inject', () => {
+        beforeAll(() => {
           groupContext.disabled = true;
         });
 
-        after(function () {
+        afterAll(() => {
           groupContext.disabled = false;
         });
 
-        it('should be disabled', function () {
-          assert.strictEqual(tab.attributes('disabled'), 'true');
+        it('should be disabled', () => {
+          expect(tab.attributes('disabled')).toBe('true');
         });
       });
 
-      describe('Disabled by prop', function () {
-        before(function () {
+      describe('Disabled by prop', () => {
+        beforeAll(() => {
           propsData.disabled = true;
         });
 
-        after(function () {
+        afterAll(() => {
           propsData.disabled = false;
         });
 
-        it('disabled attribute should be "true"', function () {
-          assert.strictEqual(tab.attributes('disabled'), 'true');
+        it('disabled attribute should be "true"', () => {
+          expect(tab.attributes('disabled')).toBe('true');
         });
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('Default A11y Attrs', function () {
-      it('aria-selected should be "false"', function () {
-        assert.strictEqual(tab.attributes('aria-selected'), 'false');
+  describe('Accessibility Tests', () => {
+    describe('Default A11y Attrs', () => {
+      it('aria-selected should be "false"', () => {
+        expect(tab.attributes('aria-selected')).toBe('false');
       });
 
-      it('aria-controls should content the panel id', function () {
-        assert.strictEqual(tab.attributes('aria-controls'), `dt-panel-${panelId}`);
+      it('aria-controls should content the panel id', () => {
+        expect(tab.attributes('aria-controls')).toBe(`dt-panel-${panelId}`);
       });
 
-      it('aria-label should match the provided label', function () {
-        assert.strictEqual(tab.attributes('aria-label'), label);
+      it('aria-label should match the provided label', () => {
+        expect(tab.attributes('aria-label')).toBe(label);
       });
 
-      it('role should be tab', function () {
-        assert.strictEqual(tab.attributes('role'), 'tab');
+      it('role should be tab', () => {
+        expect(tab.attributes('role')).toBe('tab');
       });
     });
 
-    describe('When panel is selected', function () {
-      beforeEach(function () {
+    describe('When panel is selected', () => {
+      beforeEach(() => {
         groupContext.selected = panelId;
         _mountWrapper();
       });
 
-      it('aria-selected should be "true"', function () {
-        assert.strictEqual(tab.attributes('aria-selected'), 'true');
+      it('aria-selected should be "true"', () => {
+        expect(tab.attributes('aria-selected')).toBe('true');
       });
 
-      it('tabindex should be 0', function () {
-        assert.strictEqual(tab.attributes('tabindex'), '0');
+      it('tabindex should be 0', () => {
+        expect(tab.attributes('tabindex')).toBe('0');
       });
     });
 
-    describe('When panel is unselected', function () {
-      beforeEach(function () {
+    describe('When panel is unselected', () => {
+      beforeEach(() => {
         groupContext.selected = '';
         _mountWrapper();
       });
 
-      it('aria-selected should be "false"', function () {
-        assert.strictEqual(tab.attributes('aria-selected'), 'false');
+      it('aria-selected should be "false"', () => {
+        expect(tab.attributes('aria-selected')).toBe('false');
       });
 
-      it('tabindex should be -1', function () {
-        assert.strictEqual(tab.attributes('tabindex'), '-1');
+      it('tabindex should be -1', () => {
+        expect(tab.attributes('tabindex')).toBe('-1');
       });
     });
   });

@@ -1,8 +1,6 @@
-import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
 import DtInput from '@/components/input/input';
-import sinon from 'sinon';
 import DtPopover from '@/components/popover/popover';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
@@ -19,7 +17,9 @@ const basePropsData = {
   visuallyHiddenCloseLabel: 'Close combobox',
 };
 
-describe('DtRecipeComboboxWithPopover Tests', function () {
+describe('DtRecipeComboboxWithPopover Tests', () => {
+  let testContext;
+
   // Wrappers
   let wrapper;
   let inputWrapper;
@@ -53,7 +53,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       slots,
       scopedSlots,
       listeners,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
       global: {
         stubs: {
           transition: false,
@@ -64,25 +64,26 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   };
 
   // Setup
-  before(function () {
+  beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
-    this.localVue = createLocalVue();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
+    testContext = {};
+    testContext.localVue = createLocalVue();
   });
 
-  beforeEach(function () {
-    selectStub = sinon.stub();
-    escapeStub = sinon.stub();
-    highlightStub = sinon.stub();
-    openedStub = sinon.stub();
+  beforeEach(() => {
+    selectStub = jest.fn();
+    escapeStub = jest.fn();
+    highlightStub = jest.fn();
+    openedStub = jest.fn();
     listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub, opened: openedStub };
     _mountWrapper();
   });
 
   // Teardown
-  afterEach(async function () {
+  afterEach(async () => {
     propsData = basePropsData;
     slots = {};
     scopedSlots = null;
@@ -90,60 +91,68 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     document.body.innerHTML = '';
   });
 
-  after(function () {
+  afterAll(() => {
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
   });
 
-  describe('Presentation Tests', function () {
-    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    it('should not render the visually hidden close button', async function () {
+  describe('Presentation Tests', () => {
+    it(
+      'should render the component',
+      () => { expect(wrapper.exists()).toBe(true); },
+    );
+    it('should not render the visually hidden close button', async () => {
       await _openComboboxPopover();
-      assert.isFalse(wrapper
+      expect(wrapper
         .findComponent(DtPopover)
         .findComponent({ ref: 'content' })
         .find('[data-qa="dt-sr-only-close-button"]')
-        .exists(),
-      );
+        .exists()).toBe(false);
     });
 
-    describe('When a input is provided', function () {
+    describe('When a input is provided', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         slots = { input: DtInput };
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should render the input wrapper', function () { assert.isTrue(inputWrapper.exists()); });
-      it('should render the input', function () { assert.isTrue(wrapper.findComponent(DtInput).exists()); });
+      it(
+        'should render the input wrapper',
+        () => { expect(inputWrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render the input',
+        () => { expect(wrapper.findComponent(DtInput).exists()).toBe(true); },
+      );
     });
 
-    describe('When label is provided', function () {
-      beforeEach(async function () {
+    describe('When label is provided', () => {
+      beforeEach(async () => {
         scopedSlots = { input: '<input v-bind="props.inputProps" />' };
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should provide proper label prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('label'), basePropsData.label);
+      it('should provide proper label prop to input element', () => {
+        expect(wrapper.find('input').attributes('label')).toEqual(basePropsData.label);
       });
-      it('should provide proper size prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('size'), basePropsData.size);
+      it('should provide proper size prop to input element', () => {
+        expect(wrapper.find('input').attributes('size')).toEqual(basePropsData.size);
       });
-      it('should provide proper description prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('description'), basePropsData.description);
+      it('should provide proper description prop to input element', () => {
+        expect(wrapper.find('input').attributes('description')).toEqual(basePropsData.description);
       });
-      it('should provide proper aria-label prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('aria-label'), basePropsData.label);
+      it('should provide proper aria-label prop to input element', () => {
+        expect(wrapper.find('input').attributes('aria-label')).toEqual(basePropsData.label);
       });
     });
 
-    describe('When a list is provided', function () {
+    describe('When a list is provided', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         scopedSlots = {
           list: '<ol id="list"></ol>',
         };
@@ -152,15 +161,20 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         _setChildWrappers();
       });
 
-      it('should render the list wrapper', function () { assert.isTrue(listWrapper.exists()); });
-      it('should render the list', function () {
-        assert.isTrue(wrapper.findComponent(DtPopover).findComponent({ ref: 'content' }).find('#list').exists());
+      it(
+        'should render the list wrapper',
+        () => { expect(listWrapper.exists()).toBe(true); },
+      );
+      it('should render the list', () => {
+        expect(
+          wrapper.findComponent(DtPopover).findComponent({ ref: 'content' }).find('#list').exists(),
+        ).toBe(true);
       });
     });
 
-    describe('When it is loading', function () {
+    describe('When it is loading', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         propsData = { ...propsData, loading: true };
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
@@ -171,18 +185,18 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         _setChildWrappers();
       });
 
-      it('should render the loading skeletons', function () {
-        assert.isTrue(wrapper
+      it('should render the loading skeletons', () => {
+        expect(wrapper
           .findComponent(DtPopover)
           .findComponent({ ref: 'content' })
           .find('[data-qa="skeleton-text-body"]')
-          .exists());
+          .exists()).toBe(true);
       });
     });
 
-    describe('When list is empty', function () {
+    describe('When list is empty', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
           list: '<ol id="list" v-bind="props.listProps"></ol>',
@@ -194,17 +208,17 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         _setChildWrappers();
       });
 
-      it('should render the empty list component', function () {
-        assert.isTrue(wrapper
+      it('should render the empty list component', () => {
+        expect(wrapper
           .findComponent(DtPopover)
           .findComponent({ ref: 'content' })
           .find('[data-qa="dt-combobox-empty-list"]')
-          .exists());
+          .exists()).toBe(true);
       });
     });
 
-    describe('When visuallyHiddenClose is true', function () {
-      beforeEach(async function () {
+    describe('When visuallyHiddenClose is true', () => {
+      beforeEach(async () => {
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
           list: '<ol id="list" v-bind="props.listProps"><li role="option">Item 1</li></ol>',
@@ -215,22 +229,22 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         _setChildWrappers();
       });
 
-      it('should contain a visually hidden close button', async function () {
-        assert.isTrue(wrapper
+      it('should contain a visually hidden close button', async () => {
+        expect(wrapper
           .findComponent(DtPopover)
           .findComponent({ ref: 'content' })
           .find('[data-qa="dt-sr-only-close-button"]')
-          .exists())
+          .exists()).toBe(true)
         ;
       });
 
-      describe('When visuallyHiddenCloseLabel is null', function () {
-        beforeEach(async function () {
+      describe('When visuallyHiddenCloseLabel is null', () => {
+        beforeEach(async () => {
           initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
-        afterEach(function () {
+        afterEach(() => {
           cleanSpy();
         });
 
@@ -239,9 +253,9 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     // Test Setup
-    beforeEach(async function () {
+    beforeEach(async () => {
       scopedSlots = {
         input: '<input id="input" v-bind="props.inputProps" />',
         list: '<ol id="list" v-bind="props.listProps"><li role="option">Item 1</li></ol>',
@@ -250,39 +264,39 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       _setChildWrappers();
     });
 
-    describe('When list is not expanded', function () {
-      it('aria-expanded should be "false"', function () {
-        assert.isTrue(wrapper.find('#input').attributes('aria-expanded') === 'false');
+    describe('When list is not expanded', () => {
+      it('aria-expanded should be "false"', () => {
+        expect(wrapper.find('#input').attributes('aria-expanded') === 'false').toBe(true);
       });
     });
 
-    describe('When list is expanded', function () {
-      beforeEach(async function () {
+    describe('When list is expanded', () => {
+      beforeEach(async () => {
         await _openComboboxPopover();
       });
 
-      it('aria-expanded should be "true"', function () {
-        assert.isTrue(wrapper.find('#input').attributes('aria-expanded') === 'true');
+      it('aria-expanded should be "true"', () => {
+        expect(wrapper.find('#input').attributes('aria-expanded') === 'true').toBe(true);
       });
 
-      describe('When list is loading', function () {
-        beforeEach(async function () {
+      describe('When list is loading', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ loading: true });
         });
 
-        it('aria-busy should be "true"', function () {
-          assert.isTrue(wrapper
+        it('aria-busy should be "true"', () => {
+          expect(wrapper
             .findComponent(DtPopover)
             .findComponent({ ref: 'content' })
-            .find('ol').attributes('aria-busy') === 'true');
+            .find('ol').attributes('aria-busy') === 'true').toBe(true);
         });
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     // Test Setup
-    beforeEach(async function () {
+    beforeEach(async () => {
       scopedSlots = {
         input: '<input id="input" v-bind="props.inputProps" />',
         list: '<ol id="list" v-bind="props.listProps"><li role="option">Item 1</li></ol>',
@@ -291,71 +305,104 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       _setChildWrappers();
     });
 
-    describe('When the list is loading', function () {
-      beforeEach(async function () {
+    describe('When the list is loading', () => {
+      beforeEach(async () => {
         propsData = { ...propsData, loading: true };
         _mountWrapper();
         await _openComboboxPopover();
         _setChildWrappers();
       });
 
-      describe('When "Esc" key is pressed', function () {
-        beforeEach(async function () {
+      describe('When "Esc" key is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', function () { assert.isTrue(escapeStub.called); });
-        it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
+        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
+        it(
+          'should emit escape event',
+          () => { expect(wrapper.emitted().escape.length).toEqual(1); },
+        );
       });
 
-      describe('When "Enter" key is pressed', function () {
-        beforeEach(async function () {
+      describe('When "Enter" key is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.enter');
         });
 
-        it('should not call listener', function () { assert.isFalse(selectStub.called); });
-        it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
+        it(
+          'should not call listener',
+          () => { expect(selectStub).not.toHaveBeenCalled(); },
+        );
+        it(
+          'should not emit select event',
+          () => { expect(wrapper.emitted().select).not.toBeDefined(); },
+        );
       });
 
-      describe('When down arrow button is pressed', function () {
-        beforeEach(async function () {
+      describe('When down arrow button is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.down');
         });
 
-        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
-        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+        it(
+          'should not call listener',
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
+        );
+        it(
+          'should not emit highlight event',
+          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
+        );
       });
 
-      describe('When up arrow button is pressed', function () {
-        beforeEach(async function () {
+      describe('When up arrow button is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.up');
         });
 
-        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
-        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+        it(
+          'should not call listener',
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
+        );
+        it(
+          'should not emit highlight event',
+          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
+        );
       });
 
-      describe('When home button is pressed', function () {
-        beforeEach(async function () {
+      describe('When home button is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.home');
         });
 
-        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
-        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+        it(
+          'should not call listener',
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
+        );
+        it(
+          'should not emit highlight event',
+          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
+        );
       });
 
-      describe('When end button is pressed', function () {
-        beforeEach(async function () {
+      describe('When end button is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.end');
         });
 
-        it('should not call listener', function () { assert.isFalse(highlightStub.called); });
-        it('should not emit highlight event', function () { assert.isUndefined(wrapper.emitted().highlight); });
+        it(
+          'should not call listener',
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
+        );
+        it(
+          'should not emit highlight event',
+          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
+        );
       });
     });
 
-    describe('When the list is empty', function () {
-      beforeEach(async function () {
+    describe('When the list is empty', () => {
+      beforeEach(async () => {
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
           list: '<ol id="list" v-bind="props.listProps"/>',
@@ -366,111 +413,162 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         _setChildWrappers();
       });
 
-      describe('When "Esc" key is pressed', function () {
-        beforeEach(async function () {
+      describe('When "Esc" key is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', function () { assert.isTrue(escapeStub.called); });
-        it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
+        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
+        it(
+          'should emit escape event',
+          () => { expect(wrapper.emitted().escape.length).toEqual(1); },
+        );
       });
 
-      describe('When "Enter" key is pressed', function () {
-        beforeEach(async function () {
+      describe('When "Enter" key is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.enter');
         });
 
-        it('should not call listener', function () { assert.isFalse(selectStub.called); });
-        it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
+        it(
+          'should not call listener',
+          () => { expect(selectStub).not.toHaveBeenCalled(); },
+        );
+        it(
+          'should not emit select event',
+          () => { expect(wrapper.emitted().select).not.toBeDefined(); },
+        );
       });
 
-      describe('When down arrow button is pressed', function () {
-        beforeEach(async function () {
+      describe('When down arrow button is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.down');
         });
 
-        it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
+        it(
+          'should call listener',
+          () => { expect(highlightStub).toHaveBeenCalled(); },
+        );
+        it(
+          'should emit highlight event',
+          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
+        );
       });
 
-      describe('When up arrow button is pressed', function () {
-        beforeEach(async function () {
+      describe('When up arrow button is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.up');
         });
 
-        it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
+        it(
+          'should call listener',
+          () => { expect(highlightStub).toHaveBeenCalled(); },
+        );
+        it(
+          'should emit highlight event',
+          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
+        );
       });
 
-      describe('When home button is pressed', function () {
-        beforeEach(async function () {
+      describe('When home button is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.home');
         });
 
-        it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
+        it(
+          'should call listener',
+          () => { expect(highlightStub).toHaveBeenCalled(); },
+        );
+        it(
+          'should emit highlight event',
+          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
+        );
       });
 
-      describe('When end button is pressed', function () {
-        beforeEach(async function () {
+      describe('When end button is pressed', () => {
+        beforeEach(async () => {
           await wrapper.trigger('keydown.end');
         });
 
-        it('should call listener', function () { assert.isTrue(highlightStub.called); });
-        it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 2); });
+        it(
+          'should call listener',
+          () => { expect(highlightStub).toHaveBeenCalled(); },
+        );
+        it(
+          'should emit highlight event',
+          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
+        );
       });
     });
 
-    describe('When the list is shown', function () {
-      beforeEach(async function () {
+    describe('When the list is shown', () => {
+      beforeEach(async () => {
         await _openComboboxPopover();
       });
 
-      it('should call listener', function () { assert.isTrue(openedStub.called); });
-      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 1); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
+      it(
+        'should emit open event',
+        () => { expect(wrapper.emitted().opened.length).toEqual(1); },
+      );
     });
 
-    describe('When the list is closed', function () {
-      beforeEach(async function () {
+    describe('When the list is closed', () => {
+      beforeEach(async () => {
         await _openComboboxPopover();
         await wrapper.setProps({ showList: false });
       });
 
-      it('should call listener', function () { assert.isTrue(openedStub.called); });
-      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 2); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
+      it(
+        'should emit open event',
+        () => { expect(wrapper.emitted().opened.length).toEqual(2); },
+      );
     });
 
-    describe('When "Enter" key is pressed but the combobox is not open', function () {
-      beforeEach(async function () {
+    describe('When "Enter" key is pressed but the combobox is not open', () => {
+      beforeEach(async () => {
         await wrapper.trigger('keydown.enter');
       });
 
-      it('should not call listener', function () { assert.isFalse(selectStub.called); });
-      it('should not emit select event', function () { assert.isUndefined(wrapper.emitted().select); });
+      it(
+        'should not call listener',
+        () => { expect(selectStub).not.toHaveBeenCalled(); },
+      );
+      it(
+        'should not emit select event',
+        () => { expect(wrapper.emitted().select).not.toBeDefined(); },
+      );
     });
 
-    describe('When "Enter" key is pressed and the first item is highlighted', function () {
-      beforeEach(async function () {
+    describe('When "Enter" key is pressed and the first item is highlighted', () => {
+      beforeEach(async () => {
         await _openComboboxPopover();
         await wrapper.trigger('keydown.enter');
       });
 
-      it('should call listener', function () { assert.isTrue(selectStub.called); });
-      it('should emit select event', function () { assert.equal(wrapper.emitted().select.length, 1); });
+      it('should call listener', () => { expect(selectStub).toHaveBeenCalled(); });
+      it(
+        'should emit select event',
+        () => { expect(wrapper.emitted().select.length).toEqual(1); },
+      );
     });
 
-    describe('When "Esc" key is pressed', function () {
-      beforeEach(async function () {
+    describe('When "Esc" key is pressed', () => {
+      beforeEach(async () => {
         await _openComboboxPopover();
         await wrapper.trigger('keydown.esc');
       });
 
-      it('should call listener', function () { assert.isTrue(escapeStub.called); });
-      it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
+      it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
+      it(
+        'should emit escape event',
+        () => { expect(wrapper.emitted().escape.length).toEqual(1); },
+      );
     });
 
-    describe('When sr-only close button is enabled and activated', function () {
-      beforeEach(async function () {
+    describe('When sr-only close button is enabled and activated', () => {
+      beforeEach(async () => {
         await _openComboboxPopover();
         await wrapper.setProps({ visuallyHiddenClose: true });
         await wrapper
@@ -480,8 +578,11 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           .trigger('click');
       });
 
-      it('should call listener', function () { assert.isTrue(openedStub.called); });
-      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 1); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
+      it(
+        'should emit open event',
+        () => { expect(wrapper.emitted().opened.length).toEqual(1); },
+      );
     });
   });
 });

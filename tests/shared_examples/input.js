@@ -1,27 +1,21 @@
-import { assert } from 'chai';
-
 export function itBehavesLikeHasValidationClasses (
   wrapper,
   inputValidationClasses,
   validationState,
 ) {
-  assert.strictEqual(
-    wrapper.find(`.${inputValidationClasses[validationState]}`).exists(),
-    true,
-    'has input validation class',
-  );
+  expect(wrapper.find(`.${inputValidationClasses[validationState]}`).exists()).toBe(true);
 }
 
 export function itBehavesLikeChecked (input) {
-  assert.strictEqual(input.element.checked, true, 'should be checked');
+  expect(input.element.checked).toBe(true);
 }
 
 export function itBehavesLikeNotChecked (input) {
-  assert.strictEqual(input.element.checked, false, 'should not be checked');
+  expect(input.element.checked).toBe(false);
 }
 
 export function itBehavesLikeIndeterminate (input) {
-  assert.strictEqual(input.element.indeterminate, true, 'visually should be indeterminate');
+  expect(input.element.indeterminate).toBe(true);
 }
 
 export default {

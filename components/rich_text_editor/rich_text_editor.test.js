@@ -1,5 +1,3 @@
-import sinon from 'sinon';
-import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
 import DtRichTextEditor from './rich_text_editor.vue';
 import { EditorContent } from '@tiptap/vue-2';
@@ -38,11 +36,11 @@ const _mountWrapper = () => {
   });
 };
 
-describe('DtRichTextEditor tests', function () {
+describe('DtRichTextEditor tests', () => {
   // Test Setup
-  beforeEach(async function () {
+  beforeEach(async () => {
     propsData = baseProps;
-    inputStub = sinon.stub();
+    inputStub = jest.fn();
     listeners = {
       input: inputStub,
     };
@@ -52,47 +50,47 @@ describe('DtRichTextEditor tests', function () {
   });
 
   // Test Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = baseProps;
     slots = {};
   });
 
-  describe('Presentation Tests', function () {
-    it('should render the component', function () {
-      assert.exists(wrapper, 'wrapper exists');
+  describe('Presentation Tests', () => {
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
     });
 
-    it('should contain the initial value', function () {
-      assert.equal(editor.text(), 'initial value');
+    it('should contain the initial value', () => {
+      expect(editor.text()).toEqual('initial value');
     });
   });
 
-  describe('Reactivity Tests', function () {
-    describe('User Input Tests', function () {
-      describe('When user inputs a value', function () {
+  describe('Reactivity Tests', () => {
+    describe('User Input Tests', () => {
+      describe('When user inputs a value', () => {
         // Shared Examples
         const itBehavesLikeOutputsCorrectly = (value) => {
-          it('should emit the output value', async function () {
+          it('should emit the output value', async () => {
             // The "input" is an editable div and Vue test utils doesn't provide
             // a setValue() equivalent for non-input elements, so cheat a little
             // and emit an update directly from the editor component. The value
             // emitted will be the initial value from mount.
             await wrapper.vm.editor.emit('update');
-            assert.deepEqual(wrapper.emitted().input[0][0], value);
-            assert.isTrue(inputStub.called);
+            expect(wrapper.emitted().input[0][0]).toEqual(value);
+            expect(inputStub).toHaveBeenCalled();
           });
         };
 
-        describe('When using text output', function () {
+        describe('When using text output', () => {
           // Test Setup
-          beforeEach(async function () {
+          beforeEach(async () => {
             await wrapper.setProps({ outputFormat: 'text' });
           });
 
           itBehavesLikeOutputsCorrectly(baseProps.value);
         });
 
-        describe('When using json output', function () {
+        describe('When using json output', () => {
           // Test Environment
           const jsonOutput = {
             type: 'doc',
@@ -106,16 +104,16 @@ describe('DtRichTextEditor tests', function () {
           };
 
           // Test Setup
-          beforeEach(async function () {
+          beforeEach(async () => {
             await wrapper.setProps({ outputFormat: 'json' });
           });
 
           itBehavesLikeOutputsCorrectly(jsonOutput);
         });
 
-        describe('When using html output', function () {
+        describe('When using html output', () => {
           // Test Setup
-          beforeEach(async function () {
+          beforeEach(async () => {
             await wrapper.setProps({ outputFormat: 'html' });
           });
 
@@ -125,64 +123,64 @@ describe('DtRichTextEditor tests', function () {
     });
   });
 
-  describe('Accessibility Tests', function () {
-    it('should have aria-multiline attribute', function () {
-      assert.equal(editor.attributes('aria-multiline'), 'true');
+  describe('Accessibility Tests', () => {
+    it('should have aria-multiline attribute', () => {
+      expect(editor.attributes('aria-multiline')).toEqual('true');
     });
 
-    it('should have role attribute', function () {
-      assert.equal(editor.attributes('role'), 'textbox');
+    it('should have role attribute', () => {
+      expect(editor.attributes('role')).toEqual('textbox');
     });
 
-    describe('When not editable', function () {
-      beforeEach(async function () {
+    describe('When not editable', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ editable: false });
       });
 
-      it('should have aria-readonly attribute', function () {
-        assert.equal(editor.attributes('aria-readonly'), 'true');
+      it('should have aria-readonly attribute', () => {
+        expect(editor.attributes('aria-readonly')).toEqual('true');
       });
     });
   });
 
-  describe('Extendability Tests', function () {
-    describe('When an inputAriaLabel prop is provided', function () {
-      beforeEach(async function () {
+  describe('Extendability Tests', () => {
+    describe('When an inputAriaLabel prop is provided', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ inputAriaLabel: 'new aria-label' });
       });
 
-      it('should pass through the prop to the editor', function () {
-        assert.equal(editor.attributes('aria-label'), 'new aria-label');
+      it('should pass through the prop to the editor', () => {
+        expect(editor.attributes('aria-label')).toEqual('new aria-label');
       });
     });
 
-    describe('When an inputClass prop is provided', function () {
-      beforeEach(async function () {
+    describe('When an inputClass prop is provided', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ inputClass: 'input-class' });
       });
 
-      it('should pass through the prop to the editor', function () {
-        assert.isTrue(editor.classes('input-class'));
+      it('should pass through the prop to the editor', () => {
+        expect(editor.classes('input-class')).toBe(true);
       });
     });
 
-    describe('When an editable prop is provided', function () {
-      beforeEach(async function () {
+    describe('When an editable prop is provided', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ editable: false });
       });
 
-      it('should pass through the prop to the editor', function () {
-        assert.equal(editor.attributes('contenteditable'), 'false');
+      it('should pass through the prop to the editor', () => {
+        expect(editor.attributes('contenteditable')).toEqual('false');
       });
     });
   });
 
-  describe('Build Tests', function () {
-    it('should not be included in the core build', async function () {
+  describe('Build Tests', () => {
+    it('should not be included in the core build', async () => {
       // Ok this one is a bit goofy, but it's a naive attempt to make sure no
       // one exports this component at the root level.
       const DialtoneVue = await import('../../index.js');
-      assert.isFalse(Object.hasOwnProperty.call(DialtoneVue, 'DtRichTextEditor'));
+      expect(Object.hasOwnProperty.call(DialtoneVue, 'DtRichTextEditor')).toBe(false);
     });
   });
 });

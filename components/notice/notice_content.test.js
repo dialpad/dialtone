@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import DtNoticeContent from './notice_content';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 
@@ -13,7 +12,13 @@ const baseSlotsData = {
   default: 'this is the content',
 };
 
-describe('DtNoticeContent tests', function () {
+describe('DtNoticeContent tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   let wrapper;
   let propsData;
   let slotsData;
@@ -25,9 +30,9 @@ describe('DtNoticeContent tests', function () {
     propsData = basePropsData;
     slotsData = baseSlotsData;
     wrapper = shallowMount(DtNoticeContent, {
-      propsData: propsData,
+      propsData,
       slots: slotsData,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -37,37 +42,37 @@ describe('DtNoticeContent tests', function () {
     content = wrapper.find('#contentId888');
   };
 
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default content', function () {
-      it('Should render notice content component', function () {
-        assert.isTrue(wrapper.exists());
+  describe('Presentation Tests', () => {
+    describe('When rendered with default content', () => {
+      it('Should render notice content component', () => {
+        expect(wrapper.exists()).toBe(true);
       });
 
-      it('Should display title correctly', function () {
-        assert.strictEqual(title.text(), basePropsData.title);
+      it('Should display title correctly', () => {
+        expect(title.text()).toBe(basePropsData.title);
       });
 
-      it('Should display the content correctly', function () {
-        assert.strictEqual(content.text(), baseSlotsData.default);
+      it('Should display the content correctly', () => {
+        expect(content.text()).toBe(baseSlotsData.default);
       });
     });
 
-    describe('When title override is true', function () {
-      beforeEach(function () {
+    describe('When title override is true', () => {
+      beforeEach(() => {
         slotsData.titleOverride = 'this is an override title';
         _setWrappers();
       });
 
-      it('displays the correct text', function () {
-        assert.strictEqual(title.text(), slotsData.titleOverride);
+      it('displays the correct text', () => {
+        expect(title.text()).toBe(slotsData.titleOverride);
       });
     });
   });

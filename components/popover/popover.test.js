@@ -1,6 +1,4 @@
 
-import { assert } from 'chai';
-import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
 import SrOnlyCloseButton from '../../common/sr_only_close_button';
@@ -12,7 +10,13 @@ import {
 } from '@/tests/shared_examples/sr_only_close_button';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 
-describe('DtPopover Tests', function () {
+describe('DtPopover Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let popoverWindow;
@@ -68,7 +72,7 @@ describe('DtPopover Tests', function () {
       scopedSlots: {
         anchor: '<button data-qa="dt-button" v-bind="props.attrs">Click me</button>',
       },
-      localVue: this.localVue,
+      localVue: testContext.localVue,
       stubs: {
         // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
         transition: transitionStub(),
@@ -78,52 +82,58 @@ describe('DtPopover Tests', function () {
     _setChildWrappers();
   };
 
-  before(function () {
+  beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
-    this.localVue = createLocalVue();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
+    testContext.localVue = createLocalVue();
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     _mountWrapper();
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     // close to unmount tippy
     await wrapper.setProps({ open: false });
     wrapper.destroy();
     _clearChildWrappers();
   });
 
-  after(function () {
+  afterAll(() => {
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
   });
 
-  describe('Presentation Tests', function () {
-    describe('When Popover is open', function () {
-      beforeEach(async function () {
+  describe('Presentation Tests', () => {
+    describe('When Popover is open', () => {
+      beforeEach(async () => {
         await button.trigger('click');
         _setChildWrappers();
       });
-      it('should render the component', function () { assert.isTrue(wrapper.exists()); });
-      it('should render the popover', function () { assert.isTrue(popoverWindow.exists()); });
-      it('should render the main content', function () {
-        assert.strictEqual(mainContent.text(), defaultSlotMessage);
+      it(
+        'should render the component',
+        () => { expect(wrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render the popover',
+        () => { expect(popoverWindow.exists()).toBe(true); },
+      );
+      it('should render the main content', () => {
+        expect(mainContent.text()).toBe(defaultSlotMessage);
       });
-      it('should render the header content', function () {
-        assert.strictEqual(headerContent.text(), 'Popover Title');
+      it('should render the header content', () => {
+        expect(headerContent.text()).toBe('Popover Title');
       });
-      it('should render the footer content', function () {
-        assert.strictEqual(footerContent.text(), 'Popover Footer');
+      it('should render the footer content', () => {
+        expect(footerContent.text()).toBe('Popover Footer');
       });
-      it('should render the anchor slot', function () {
-        assert.strictEqual(anchor.text(), 'Click me');
+      it('should render the anchor slot', () => {
+        expect(anchor.text()).toBe('Click me');
       });
-      it('should not render the visually hidden close button', function () {
+      it('should not render the visually hidden close button', () => {
         itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
       });
       // these tests will not observe focus changes under any circumstances?? spent too many hours on this junk.
@@ -171,42 +181,42 @@ describe('DtPopover Tests', function () {
     //   });
     // });
 
-    describe('When initialFocusElement is none', function () {
+    describe('When initialFocusElement is none', () => {
       let consoleErrorSpy;
-      beforeEach(async function () {
-        consoleErrorSpy = sinon.spy(console, 'error');
+      beforeEach(async () => {
+        consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
         await wrapper.setProps({ initialFocusElement: 'none' });
       });
 
-      afterEach(function () {
+      afterEach(() => {
         consoleErrorSpy = null;
-        console.error.restore();
+        console.error.mockRestore();
       });
 
-      it('should output error message', async function () {
-        assert.isTrue(consoleErrorSpy.calledWith('If the popover is modal you must set the ' +
-        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement'));
+      it('should output error message', async () => {
+        expect(consoleErrorSpy).toBeCalledWith('If the popover is modal you must set the ' +
+        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
       });
     });
 
-    describe('When visuallyHiddenClose is true', function () {
-      beforeEach(async function () {
+    describe('When visuallyHiddenClose is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ visuallyHiddenClose: true });
         await button.trigger('click');
         _setChildWrappers();
       });
 
-      it('should contain a visually hidden close button', function () {
+      it('should contain a visually hidden close button', () => {
         itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper);
       });
 
-      describe('When visuallyHiddenCloseLabel is null', function () {
-        beforeEach(async function () {
+      describe('When visuallyHiddenCloseLabel is null', () => {
+        beforeEach(async () => {
           initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
-        afterEach(function () {
+        afterEach(() => {
           cleanSpy();
         });
 
@@ -215,210 +225,216 @@ describe('DtPopover Tests', function () {
     });
   });
 
-  describe('Interactivity Tests', function () {
-    describe('When open prop is true', function () {
-      beforeEach(async function () {
+  describe('Interactivity Tests', () => {
+    describe('When open prop is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ open: true });
         _setChildWrappers();
       });
 
-      it('popover content is displayed', function () {
-        assert.isTrue(popoverWindow.isVisible());
+      it('popover content is displayed', () => {
+        expect(popoverWindow.isVisible()).toBe(true);
       });
 
-      describe('When anchor is clicked', function () {
-        beforeEach(async function () {
+      describe('When anchor is clicked', () => {
+        beforeEach(async () => {
           await button.trigger('click');
           _setChildWrappers();
         });
 
-        it('should not close the popover', function () {
-          assert.isTrue(popoverWindow.isVisible());
+        it('should not close the popover', () => {
+          expect(popoverWindow.isVisible()).toBe(true);
         });
       });
     });
 
-    describe('When open prop is false', function () {
-      beforeEach(async function () {
+    describe('When open prop is false', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ open: false });
         _setChildWrappers();
       });
 
-      it('popover content should not be displayed', async function () {
-        assert.isFalse(popoverWindow.isVisible());
+      it('popover content should not be displayed', async () => {
+        expect(popoverWindow.isVisible()).toBe(false);
       });
 
-      describe('When anchor is clicked', function () {
-        beforeEach(async function () {
+      describe('When anchor is clicked', () => {
+        beforeEach(async () => {
           await button.trigger('click');
           _setChildWrappers();
         });
 
-        it('should not open the popover', function () {
-          assert.isFalse(popoverWindow.isVisible());
+        it('should not open the popover', () => {
+          expect(popoverWindow.isVisible()).toBe(false);
         });
       });
 
-      describe('When anchor is clicked but it\'s disabled', function () {
-        beforeEach(async function () {
+      describe('When anchor is clicked but it\'s disabled', () => {
+        beforeEach(async () => {
           button.element.disabled = 'disabled';
           await button.trigger('click');
           _setChildWrappers();
         });
 
-        afterEach(function () {
+        afterEach(() => {
           button.element.disabled = undefined;
         });
 
-        it('should not open the popover', function () {
-          assert.isFalse(popoverWindow.isVisible());
+        it('should not open the popover', () => {
+          expect(popoverWindow.isVisible()).toBe(false);
         });
       });
     });
 
-    describe('When openOnContext prop is true', function () {
-      beforeEach(async function () {
+    describe('When openOnContext prop is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ openOnContext: true });
         _setChildWrappers();
       });
 
-      it('popover content should not be displayed', async function () {
-        assert.isFalse(popoverWindow.isVisible());
+      it('popover content should not be displayed', async () => {
+        expect(popoverWindow.isVisible()).toBe(false);
       });
 
-      describe('When anchor is clicked', function () {
-        beforeEach(async function () {
+      describe('When anchor is clicked', () => {
+        beforeEach(async () => {
           await button.trigger('click');
           _setChildWrappers();
         });
 
-        it('should not open the popover', function () {
-          assert.isFalse(popoverWindow.isVisible());
+        it('should not open the popover', () => {
+          expect(popoverWindow.isVisible()).toBe(false);
         });
       });
 
-      describe('When anchor is right-clicked', function () {
-        beforeEach(async function () {
+      describe('When anchor is right-clicked', () => {
+        beforeEach(async () => {
           await button.trigger('contextmenu');
           _setChildWrappers();
         });
 
-        it('should open the popover', function () {
-          assert.isTrue(popoverWindow.isVisible());
+        it('should open the popover', () => {
+          expect(popoverWindow.isVisible()).toBe(true);
         });
       });
     });
 
-    describe('When open prop is unset (default behaviour)', function () {
-      beforeEach(async function () {
+    describe('When open prop is unset (default behaviour)', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ open: null });
         _setChildWrappers();
       });
 
-      describe('When anchor is clicked', function () {
-        beforeEach(async function () {
+      describe('When anchor is clicked', () => {
+        beforeEach(async () => {
           await button.trigger('click');
           _setChildWrappers();
         });
 
-        it('should open the popover', function () {
-          assert.isTrue(popoverWindow.isVisible());
+        it('should open the popover', () => {
+          expect(popoverWindow.isVisible()).toBe(true);
         });
 
-        describe('When a "dt-popover-close" event is emitted in the window object', function () {
-          beforeEach(async function () {
+        describe('When a "dt-popover-close" event is emitted in the window object', () => {
+          beforeEach(async () => {
             window.dispatchEvent(new window.Event('dt-popover-close'));
           });
 
-          it('should close opened popover', async function () {
-            assert.isFalse(popoverWindow.isVisible());
+          it('should close opened popover', async () => {
+            expect(popoverWindow.isVisible()).toBe(false);
           });
         });
 
-        describe('When esc is pressed', function () {
-          beforeEach(async function () {
+        describe('When esc is pressed', () => {
+          beforeEach(async () => {
             await popoverWindow.trigger('keydown', { key: 'Escape' });
             _setChildWrappers();
           });
 
-          it('should close the popover', function () {
-            assert.isFalse(popoverWindow.isVisible());
+          it('should close the popover', () => {
+            expect(popoverWindow.isVisible()).toBe(false);
           });
         });
 
-        describe('When close button is activated', function () {
-          beforeEach(async function () {
+        describe('When close button is activated', () => {
+          beforeEach(async () => {
             await closeButton.trigger('click');
             _setChildWrappers();
           });
 
-          it('should close the popover', function () {
-            assert.isFalse(popoverWindow.isVisible());
+          it('should close the popover', () => {
+            expect(popoverWindow.isVisible()).toBe(false);
           });
         });
 
-        describe('When sr-only close button is enabled and activated', function () {
-          beforeEach(async function () {
+        describe('When sr-only close button is enabled and activated', () => {
+          beforeEach(async () => {
             await wrapper.setProps({ visuallyHiddenClose: true });
             _setChildWrappers();
             await wrapper.findComponent(SrOnlyCloseButton).trigger('click');
           });
 
-          it('should close the popover', function () {
-            assert.isFalse(popoverWindow.isVisible());
+          it('should close the popover', () => {
+            expect(popoverWindow.isVisible()).toBe(false);
           });
         });
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When popover is open', function () {
-      beforeEach(async function () {
+  describe('Accessibility Tests', () => {
+    describe('When popover is open', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ open: true });
         _setChildWrappers();
       });
 
-      it('aria-expanded should be set correctly on the anchor', function () {
-        assert.strictEqual(button.attributes('aria-expanded'), 'true');
+      it('aria-expanded should be set correctly on the anchor', () => {
+        expect(button.attributes('aria-expanded')).toBe('true');
       });
-      it('aria-controls should be set correctly on the anchor', function () {
-        assert.strictEqual(button.attributes('aria-controls'), 'popover-id');
+      it('aria-controls should be set correctly on the anchor', () => {
+        expect(button.attributes('aria-controls')).toBe('popover-id');
       });
-      it('aria-haspopup should be set correctly on the anchor', function () {
-        assert.strictEqual(button.attributes('aria-haspopup'), 'dialog');
-      });
-
-      it('aria-hidden should be set correctly on the content window', function () {
-        assert.strictEqual(popoverWindow.attributes('aria-hidden'), 'false');
-      });
-      it('aria-labelledby should be set correctly on the content window', function () {
-        assert.strictEqual(popoverWindow.attributes('aria-labelledby'), wrapper.vm.labelledBy);
+      it('aria-haspopup should be set correctly on the anchor', () => {
+        expect(button.attributes('aria-haspopup')).toBe('dialog');
       });
 
-      it('should pass axe-core accessibility rules', async function () {
+      it('aria-hidden should be set correctly on the content window', () => {
+        expect(popoverWindow.attributes('aria-hidden')).toBe('false');
+      });
+      it(
+        'aria-labelledby should be set correctly on the content window',
+        () => {
+          expect(popoverWindow.attributes('aria-labelledby')).toBe(wrapper.vm.labelledBy);
+        },
+      );
+
+      it('should pass axe-core accessibility rules', async () => {
         const a11yResults = await axe.run(wrapper.element, configA11y);
         const violations = a11yResults.violations;
         if (violations.length) {
           console.log('axe-core accessibility violations:', violations);
         }
-        assert.equal(violations.length, 0);
+        expect(violations.length).toEqual(0);
       });
     });
 
-    describe('When popover is closed', function () {
-      beforeEach(async function () {
+    describe('When popover is closed', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ open: false });
         _setChildWrappers();
       });
 
-      it('should have correct aria attributes on the anchor', async function () {
-        assert.strictEqual(button.attributes('aria-expanded'), 'false');
+      it('should have correct aria attributes on the anchor', async () => {
+        expect(button.attributes('aria-expanded')).toBe('false');
       });
 
-      it('should have correct aria attributes on the content window', async function () {
-        assert.strictEqual(popoverWindow.attributes('aria-hidden'), 'true');
-      });
+      it(
+        'should have correct aria attributes on the content window',
+        async () => {
+          expect(popoverWindow.attributes('aria-hidden')).toBe('true');
+        },
+      );
     });
   });
 });

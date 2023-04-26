@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtStack from './stack.vue';
 
@@ -7,7 +6,13 @@ const baseSlotsData = {
   default: `<div data-qa="default-content">Test 1</div> <div>Test 2</div>`,
 };
 
-describe('DtStack Tests', function () {
+describe('DtStack Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
 
@@ -24,58 +29,61 @@ describe('DtStack Tests', function () {
   const _setWrappers = () => {
     wrapper = shallowMount(DtStack, {
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     slots = baseSlotsData;
   });
 
-  beforeEach(function () { _setWrappers(); });
+  beforeEach(() => { _setWrappers(); });
 
-  describe('Presentation Tests', function () {
-    describe('When stack renders', function () {
-      it('stack exist', function () {
-        assert.isTrue(wrapper.exists());
+  describe('Presentation Tests', () => {
+    describe('When stack renders', () => {
+      it('stack exist', () => {
+        expect(wrapper.exists()).toBe(true);
       });
 
-      it('content should exist', function () {
-        assert.isTrue(defaultContent.exists());
+      it('content should exist', () => {
+        expect(defaultContent.exists()).toBe(true);
       });
     });
   });
 
-  describe('When `direction` prop is provided with', function () {
-    describe('expected string value', function () {
-      beforeEach(async function () {
+  describe('When `direction` prop is provided with', () => {
+    describe('expected string value', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ direction: 'row' });
       });
 
-      it('should set the proper class and override the default value', function () {
-        assert.isTrue(wrapper.classes('d-stack', 'd-stack--row'));
-      });
+      it(
+        'should set the proper class and override the default value',
+        () => {
+          expect(wrapper.classes('d-stack', 'd-stack--row')).toBe(true);
+        },
+      );
     });
 
-    describe('non expected string value', function () {
-      beforeEach(async function () {
+    describe('non expected string value', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ direction: 'invalid' });
       });
 
-      it('should do not add inexistent class', function () {
-        assert.isFalse(wrapper.classes().includes('d-stack--invalid'));
+      it('should do not add inexistent class', () => {
+        expect(wrapper.classes().includes('d-stack--invalid')).toBe(false);
       });
     });
 
-    describe('expected object value', function () {
-      beforeEach(async function () {
+    describe('expected object value', () => {
+      beforeEach(async () => {
         await wrapper.setProps({
           direction: {
             sm: 'column',
@@ -86,77 +94,77 @@ describe('DtStack Tests', function () {
         });
       });
 
-      it('should set proper responsive classes', function () {
-        assert.isTrue(wrapper.classes(
+      it('should set proper responsive classes', () => {
+        expect(wrapper.classes(
           'd-stack--sm--column',
           'd-stack--md--row-reverse',
           'd-stack--lg--column-reverse',
           'd-stack--xl--row',
-        ));
+        )).toBe(true);
       });
 
-      describe('When `default` is provided', function () {
-        beforeEach(async function () {
+      describe('When `default` is provided', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ direction: { default: 'row-reverse' } });
         });
 
-        it('should override the default value', function () {
-          assert.isTrue(wrapper.classes('d-stack', 'd-stack--row'));
+        it('should override the default value', () => {
+          expect(wrapper.classes('d-stack', 'd-stack--row')).toBe(true);
         });
       });
     });
 
-    describe('non expected object value', function () {
-      describe('When is provided with non expected breakpoint value', function () {
-        beforeEach(async function () {
+    describe('non expected object value', () => {
+      describe('When is provided with non expected breakpoint value', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ direction: { invalid: 'column' } });
         });
 
-        it('should do not add inexistent breakpoint class', function () {
-          assert.isFalse(wrapper.classes().includes('d-stack--invalid--column'));
+        it('should do not add inexistent breakpoint class', () => {
+          expect(wrapper.classes().includes('d-stack--invalid--column')).toBe(false);
         });
       });
 
-      describe('When `default` is provided with non expected direction value', function () {
-        beforeEach(async function () {
+      describe('When `default` is provided with non expected direction value', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ direction: { default: 'roww' } });
         });
 
-        it('should do not add inexistent direction class', function () {
-          assert.isFalse(wrapper.classes().includes('d-stack--roww'));
+        it('should do not add inexistent direction class', () => {
+          expect(wrapper.classes().includes('d-stack--roww')).toBe(false);
         });
       });
     });
   });
 
-  describe('When `as` prop is provided', function () {
-    beforeEach(async function () {
+  describe('When `as` prop is provided', () => {
+    beforeEach(async () => {
       await wrapper.setProps({ as: 'section' });
     });
 
-    it('should use it as the HTML element of stack', function () {
-      assert.strictEqual(wrapper.element.tagName, 'SECTION');
+    it('should use it as the HTML element of stack', () => {
+      expect(wrapper.element.tagName).toBe('SECTION');
     });
   });
 
-  describe('When `gap` prop is provided as', function () {
-    describe('valid value', function () {
-      beforeEach(async function () {
+  describe('When `gap` prop is provided as', () => {
+    describe('valid value', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ gap: '300' });
       });
 
-      it('should set proper gap class', function () {
-        assert.isTrue(wrapper.classes().includes('d-stack--gap-300'));
+      it('should set proper gap class', () => {
+        expect(wrapper.classes().includes('d-stack--gap-300')).toBe(true);
       });
     });
 
-    describe('non valid value', function () {
-      beforeEach(async function () {
+    describe('non valid value', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ gap: '123' });
       });
 
-      it('should not set gap class', function () {
-        assert.isFalse(wrapper.classes().includes('d-stack--gap-123'));
+      it('should not set gap class', () => {
+        expect(wrapper.classes().includes('d-stack--gap-123')).toBe(false);
       });
     });
   });

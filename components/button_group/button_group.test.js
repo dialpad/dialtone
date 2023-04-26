@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtButtonGroup from './button_group.vue';
 import { DtButton } from '../button';
@@ -11,7 +10,13 @@ import {
 // Constants
 const basePropsData = {};
 
-describe('DtButtonGroup Tests', function () {
+describe('DtButtonGroup Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let buttonGroup;
@@ -33,82 +38,85 @@ describe('DtButtonGroup Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
-  beforeEach(function () {});
+  beforeEach(() => {});
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = basePropsData;
     attrs = {};
     slots = {};
     provide = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default content', function () {
+  describe('Presentation Tests', () => {
+    describe('When rendered with default content', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should have a button group', function () { assert.strictEqual(buttonGroup.exists(), true); });
-      it('should not have buttons', function () {
-        assert.lengthOf(wrapper.findAllComponents(DtButton), 0);
+      it(
+        'should have a button group',
+        () => { expect(buttonGroup.exists()).toBe(true); },
+      );
+      it('should not have buttons', () => {
+        expect(wrapper.findAllComponents(DtButton).length).toBe(0);
       });
     });
 
-    describe('When buttons are provided', function () {
+    describe('When buttons are provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         slots = { default: ButtonsFixture };
       });
 
-      describe('When the button group renders', function () {
+      describe('When the button group renders', () => {
         // Test Setup
-        beforeEach(function () { _setWrappers(); });
+        beforeEach(() => { _setWrappers(); });
 
-        it('should have buttons', function () {
-          assert.lengthOf(wrapper.findAllComponents(DtButton), 2);
+        it('should have buttons', () => {
+          expect(wrapper.findAllComponents(DtButton).length).toBe(2);
         });
       });
     });
 
-    describe('When alignment is set to end', function () {
-      beforeEach(async function () {
+    describe('When alignment is set to end', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ alignment: 'end' });
       });
 
-      it('should have correct class', async function () {
-        assert.isTrue(buttonGroup.classes().includes('d-btn-group--end'));
+      it('should have correct class', async () => {
+        expect(buttonGroup.classes().includes('d-btn-group--end')).toBe(true);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When rendered with default content', function () {
-      it('shows correct role', function () {
-        assert.strictEqual(buttonGroup.attributes('role'), 'group');
+  describe('Accessibility Tests', () => {
+    describe('When rendered with default content', () => {
+      it('shows correct role', () => {
+        expect(buttonGroup.attributes('role')).toBe('group');
       });
     });
   });
 
-  describe('Validation Tests', function () {
-    describe('Alignment Validator', function () {
+  describe('Validation Tests', () => {
+    describe('Alignment Validator', () => {
       // Test Environment
       const prop = DtButtonGroup.props.alignment;
 
-      describe('When provided alignment is in BUTTON_GROUP_ALIGNMENT', function () {
+      describe('When provided alignment is in BUTTON_GROUP_ALIGNMENT', () => {
         itBehavesLikePassesCustomPropValidation(prop, prop.default);
       });
 
-      describe('When provided alignment is not in BUTTON_GROUP_ALIGNMENT', function () {
+      describe('When provided alignment is not in BUTTON_GROUP_ALIGNMENT', () => {
         itBehavesLikeFailsCustomPropValidation(prop, `INVALID_ALIGNMENT`);
       });
     });

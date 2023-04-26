@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtRootLayout from './root_layout.vue';
 
@@ -13,7 +12,13 @@ const baseSlotsData = {
   footer: 'footer slot content',
 };
 
-describe('DtRootLayout Tests', function () {
+describe('DtRootLayout Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
 
@@ -34,78 +39,78 @@ describe('DtRootLayout Tests', function () {
     wrapper = shallowMount(DtRootLayout, {
       propsData,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     propsData = basePropsData;
     slots = baseSlotsData;
   });
 
-  beforeEach(function () { _setWrappers(); });
+  beforeEach(() => { _setWrappers(); });
 
-  describe('Presentation Tests', function () {
-    describe('When root layout renders', function () {
-      it('root should exist', function () { assert.isTrue(wrapper.exists()); });
-      it('header should exist', function () { assert.isTrue(header.exists()); });
-      it('footer should exist', function () { assert.isTrue(footer.exists()); });
+  describe('Presentation Tests', () => {
+    describe('When root layout renders', () => {
+      it('root should exist', () => { expect(wrapper.exists()).toBe(true); });
+      it('header should exist', () => { expect(header.exists()).toBe(true); });
+      it('footer should exist', () => { expect(footer.exists()).toBe(true); });
     });
 
-    describe('When slot content renders', function () {
-      it('header slot is passed down correctly', async function () {
-        assert.strictEqual(header.text(), slots.header);
+    describe('When slot content renders', () => {
+      it('header slot is passed down correctly', async () => {
+        expect(header.text()).toBe(slots.header);
       });
 
-      it('footer slot is passed down correctly', async function () {
-        assert.strictEqual(footer.text(), slots.footer);
-      });
-    });
-
-    describe('When dynamic inline styles are set', function () {
-      it('should set the header height', function () {
-        assert.strictEqual(header.element.style.getPropertyValue('height'), propsData.headerHeight);
-      });
-
-      it('should set the footer height', function () {
-        assert.strictEqual(footer.element.style.getPropertyValue('height'), propsData.footerHeight);
+      it('footer slot is passed down correctly', async () => {
+        expect(footer.text()).toBe(slots.footer);
       });
     });
 
-    describe('When headerSticky is set to default', function () {
-      it('Has correct class', async function () {
-        assert.strictEqual(header.classes('d-root-layout__header--sticky'), false);
+    describe('When dynamic inline styles are set', () => {
+      it('should set the header height', () => {
+        expect(header.element.style.getPropertyValue('height')).toBe(propsData.headerHeight);
+      });
+
+      it('should set the footer height', () => {
+        expect(footer.element.style.getPropertyValue('height')).toBe(propsData.footerHeight);
       });
     });
 
-    describe('When headerSticky is set to true', function () {
-      beforeEach(async function () {
+    describe('When headerSticky is set to default', () => {
+      it('Has correct class', async () => {
+        expect(header.classes('d-root-layout__header--sticky')).toBe(false);
+      });
+    });
+
+    describe('When headerSticky is set to true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ headerSticky: true });
       });
 
-      it('Has correct class', async function () {
-        assert.strictEqual(header.classes('d-root-layout__header--sticky'), true);
+      it('Has correct class', async () => {
+        expect(header.classes('d-root-layout__header--sticky')).toBe(true);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When header is rendered', function () {
-      it('Uses `header` tag', async function () {
-        assert.strictEqual(header.element.tagName, 'HEADER');
+  describe('Accessibility Tests', () => {
+    describe('When header is rendered', () => {
+      it('Uses `header` tag', async () => {
+        expect(header.element.tagName).toBe('HEADER');
       });
     });
 
-    describe('When footer is rendered', function () {
-      it('Uses `footer` tag', async function () {
-        assert.strictEqual(footer.element.tagName, 'FOOTER');
+    describe('When footer is rendered', () => {
+      it('Uses `footer` tag', async () => {
+        expect(footer.element.tagName).toBe('FOOTER');
       });
     });
   });

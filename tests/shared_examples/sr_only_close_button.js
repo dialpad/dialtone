@@ -1,10 +1,9 @@
-import { assert } from 'chai';
 import SrOnlyCloseButton from '@/common/sr_only_close_button';
 import { itBehavesLikeRaisesValidationError } from '@/tests/shared_examples/validation';
 
 export const itBehavesLikeVisuallyHiddenCloseButtonExists = (wrapper, state = true) => {
   const buttonExists = wrapper.findComponent(SrOnlyCloseButton).exists();
-  assert.isTrue(state ? buttonExists : !buttonExists);
+  expect(state ? buttonExists : !buttonExists).toBe(true);
 };
 
 export const itBehavesLikeVisuallyHiddenCloseLabelIsNull = () => {
@@ -16,4 +15,5 @@ export const itBehavesLikeVisuallyHiddenCloseLabelIsNull = () => {
 
 export default {
   itBehavesLikeVisuallyHiddenCloseButtonExists,
+  itBehavesLikeVisuallyHiddenCloseLabelIsNull,
 };

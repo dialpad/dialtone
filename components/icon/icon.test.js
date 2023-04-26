@@ -1,12 +1,17 @@
 import { createLocalVue, mount } from '@vue/test-utils';
-import { assert } from 'chai';
 import DtIcon from './icon.vue';
 
 const basePropsData = {
   name: 'accessibility',
 };
 
-describe('DtIcon Tests', function () {
+describe('DtIcon Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   let wrapper;
   let icon;
 
@@ -14,7 +19,7 @@ describe('DtIcon Tests', function () {
     wrapper = mount(DtIcon,
       {
         propsData: basePropsData,
-        localVue: this.localVue,
+        localVue: testContext.localVue,
       });
     _setChildWrappers();
   };
@@ -23,57 +28,57 @@ describe('DtIcon Tests', function () {
     icon = wrapper.findComponent(DtIcon);
   };
 
-  before(function () {
-    this.localVue = createLocalVue();
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
-  describe('Presentation Tests', function () {
-    it('Should render the accessibility icon', function () {
-      assert.exists(wrapper, 'wrapper exists');
-      assert.isTrue(icon.exists());
-      assert.isTrue(icon.classes('d-icon--accessibility'));
+  describe('Presentation Tests', () => {
+    it('Should render the accessibility icon', () => {
+      expect(wrapper.exists()).toBe(true);
+      expect(icon.exists()).toBe(true);
+      expect(icon.classes('d-icon--accessibility')).toBe(true);
     });
 
-    describe('When size prop is not set', function () {
-      it('Should have default class', function () {
-        assert.isTrue(icon.classes('d-icon--size-500'));
+    describe('When size prop is not set', () => {
+      it('Should have default class', () => {
+        expect(icon.classes('d-icon--size-500')).toBe(true);
       });
     });
 
-    describe('When size prop is set', function () {
-      beforeEach(async function () {
+    describe('When size prop is set', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ size: '800' });
       });
 
-      it('Should have correct class', function () {
-        assert.isTrue(icon.classes('d-icon--size-800'));
+      it('Should have correct class', () => {
+        expect(icon.classes('d-icon--size-800')).toBe(true);
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     //
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     //
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When ariaLabel prop is set', function () {
-      beforeEach(async function () {
+  describe('Accessibility Tests', () => {
+    describe('When ariaLabel prop is set', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ ariaLabel: 'icon description' });
         _setChildWrappers();
       });
-      it('sets the aria-label attribute', function () {
-        assert.strictEqual(icon.attributes('aria-label'), 'icon description');
+      it('sets the aria-label attribute', () => {
+        expect(icon.attributes('aria-label')).toBe('icon description');
       });
-      it('sets aria-hidden to false', function () {
-        assert.strictEqual(icon.attributes('aria-hidden'), 'false');
+      it('sets aria-hidden to false', () => {
+        expect(icon.attributes('aria-hidden')).toBe('false');
       });
     });
   });

@@ -103,30 +103,30 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.test.js'],
-      plugins: [
-        'mocha',
+      files: [
+        '**/*.test.js',
+        'tests/shared_examples/*.js',
+        'tests/setupTests.js',
       ],
-      extends: [
-        'plugin:mocha/recommended',
-      ],
+      plugins: ['jest'],
       env: {
         browser: true,
         node: true,
-        mocha: true,
+        jest: true,
       },
       rules: {
         'max-lines': 'off',
-        // disabled to allow the use of shared example closures
-        'mocha/no-setup-in-describe': 'off',
-        'mocha/no-exclusive-tests': 'error',
-        'mocha/no-hooks-for-single-case': 'off',
+        'no-console': 'off',
       },
     },
     {
-      files: ['**/*.story.vue'],
+      files: [
+        '**/*.story.vue',
+      ],
       rules: {
-        'vue/no-bare-strings-in-template': ['off'],
+        'vue/no-bare-strings-in-template': [
+          'off',
+        ],
       },
     },
   ],
