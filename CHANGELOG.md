@@ -1,3 +1,27 @@
+# [3.62.0](https://github.com/dialpad/dialtone-vue/compare/v3.61.5...v3.62.0) (2023-04-26)
+
+
+### Bug Fixes
+
+* emoji size in leftbar item descriptions ([#919](https://github.com/dialpad/dialtone-vue/issues/919)) ([918774f](https://github.com/dialpad/dialtone-vue/commit/918774fdf80d66f3a3ed47d5e19d6da60d023766))
+* **General Row:** show dnd alongside unreadCount ([#936](https://github.com/dialpad/dialtone-vue/issues/936)) ([5c0d0ca](https://github.com/dialpad/dialtone-vue/commit/5c0d0ca44e9a20e75fb248072a9e4833a865f9e8))
+* image viewer improvements ([#927](https://github.com/dialpad/dialtone-vue/issues/927)) ([27b130f](https://github.com/dialpad/dialtone-vue/commit/27b130f594d6d9b5adb8645a5bf30aef6a5986c5))
+* **Leftbar Row:** animation speed to 1.5s ([#917](https://github.com/dialpad/dialtone-vue/issues/917)) ([3507ad3](https://github.com/dialpad/dialtone-vue/commit/3507ad371ca471d55ebe2894236f04e127e4f143))
+* **Recipe Callbar Button With Popover:** update margin for callbutton with popover when in compact mode ([#932](https://github.com/dialpad/dialtone-vue/issues/932)) ([f232761](https://github.com/dialpad/dialtone-vue/commit/f23276140227d94a7448d5ef7e5475b54e4859da))
+* **Unread Chip:** styling - vue3 ([#921](https://github.com/dialpad/dialtone-vue/issues/921)) ([1bf9908](https://github.com/dialpad/dialtone-vue/commit/1bf99089cfa4547f9192375ce75ea58696fb2152))
+* visual tests not triggering on approval ([#934](https://github.com/dialpad/dialtone-vue/issues/934)) ([f78762e](https://github.com/dialpad/dialtone-vue/commit/f78762ef614b973b3c305e02ff0fa71b4307f47a))
+
+
+### Code Refactoring
+
+* **Root Layout:** remove javascript - vue3 ([#923](https://github.com/dialpad/dialtone-vue/issues/923)) ([bece1dd](https://github.com/dialpad/dialtone-vue/commit/bece1dd29379f762ac4fb35c5ed63780f860a8a2))
+
+
+### Features
+
+* **Leftbar General Row:** add iconSize prop ([#930](https://github.com/dialpad/dialtone-vue/issues/930)) ([8f6a35b](https://github.com/dialpad/dialtone-vue/commit/8f6a35b7fc3210f368cbf01d2eb38e722695f5e3))
+* **Rich Text Editor:** add rich text editor component - vue3 ([#928](https://github.com/dialpad/dialtone-vue/issues/928)) ([dd483ab](https://github.com/dialpad/dialtone-vue/commit/dd483abc1261c85d5291ff2a0ee7a5ec84d0b3e6))
+
 ## [3.61.5](https://github.com/dialpad/dialtone-vue/compare/v3.61.4...v3.61.5) (2023-04-17)
 
 
