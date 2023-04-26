@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeUnreadChip from './unread_chip.vue';
-import DtRecipeUnreadChipMdx from './unread_chip.mdx';
-import DtRecipeUnreadChipDefaultTemplate from './unread_chip_default.story.vue';
-import DtRecipeUnreadChipVariantsTemplate from './unread_chip_variants.story.vue';
-import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
+import DtRecipeUnreadPill from './unread_pill.vue';
+import DtRecipeUnreadPillMdx from './unread_pill.mdx';
+import DtRecipeUnreadPillDefaultTemplate from './unread_pill_default.story.vue';
+import DtRecipeUnreadPillVariantsTemplate from './unread_pill_variants.story.vue';
+import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from '@/recipes/leftbar/unread_pill/unread_pill_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -16,14 +16,14 @@ export const argTypesData = {
   kind: {
     control: {
       type: 'select',
-      options: UNREAD_BADGE_KINDS,
+      options: UNREAD_PILL_KINDS,
     },
   },
 
   direction: {
     control: {
       type: 'select',
-      options: UNREAD_BADGE_DIRECTIONS,
+      options: UNREAD_PILL_DIRECTIONS,
     },
   },
 
@@ -57,8 +57,8 @@ const decorator = () => ({
 
 // Story Collection
 export default {
-  title: 'Recipes/Leftbar/Unread Chip',
-  component: DtRecipeUnreadChip,
+  title: 'Recipes/leftbar/Unread Pill',
+  component: DtRecipeUnreadPill,
   args: argsData,
   argTypes: argTypesData,
   decorators: [decorator],
@@ -68,7 +68,7 @@ export default {
       sort: 'requiredFirst',
     },
     docs: {
-      page: DtRecipeUnreadChipMdx,
+      page: DtRecipeUnreadPillMdx,
     },
     options: {
       showPanel: true,
@@ -79,11 +79,11 @@ export default {
 // Templates
 const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  DtRecipeUnreadChipDefaultTemplate,
+  DtRecipeUnreadPillDefaultTemplate,
 );
 const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  DtRecipeUnreadChipVariantsTemplate,
+  DtRecipeUnreadPillVariantsTemplate,
 );
 
 // Stories
