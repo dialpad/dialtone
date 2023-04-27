@@ -7,7 +7,6 @@ import { action } from '@storybook/addon-actions';
 
 import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES } from './tooltip_constants';
 
-
 // Default Prop Values
 export const argsData = {
   message: 'This is a Tooltip',
@@ -114,10 +113,10 @@ Default.args = {};
 
 export const Variants = TooltipVariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
 
 export const Flip = TooltipFlipTemplate.bind({});
 Flip.args = {
   default: 'Scroll down to see how the tooltip changes based on the available space.',
 };
-Flip.parameters = { options: { showPanel: false } };
+Flip.parameters = { options: { showPanel: false }, controls: { disable: true } };

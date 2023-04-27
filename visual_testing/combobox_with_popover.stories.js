@@ -4,7 +4,6 @@ import {
   Default,
 } from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.stories.js';
 
-
 import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue';
 
 export default {
@@ -12,6 +11,7 @@ export default {
   component: DtRecipeComboboxWithPopover,
   parameters: {
     options: { showPanel: false },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },

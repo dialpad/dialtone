@@ -5,7 +5,6 @@ import DtKeyboardShortcut from './keyboard_shortcut.vue';
 import DtKeyboardShortcutDefaultTemplate from './keyboard_shortcut_default.story.vue';
 import DtKeyboardShortcutVariantsTemplate from './keyboard_shortcut_variants.story.vue';
 
-
 // Default Prop Values
 export const argsData = {
   shortcut: '{cmd}+Ctrl+X',
@@ -46,4 +45,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };

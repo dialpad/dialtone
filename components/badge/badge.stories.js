@@ -5,7 +5,6 @@ import DtBadgeVariantsTemplate from './badge_variants.story.vue';
 import DtBadgeExamplesTemplate from './badge_examples.story.vue';
 import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
 
-
 const iconsList = getIconNames();
 
 export const argsData = {
@@ -98,9 +97,9 @@ Count.args = {
 };
 
 export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
 Variants.args = {};
 
 export const Examples = ExamplesTemplate.bind({});
-Examples.parameters = { options: { showPanel: false } };
+Examples.parameters = { options: { showPanel: false }, controls: { disable: true } };
 Examples.args = {};

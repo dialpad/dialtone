@@ -21,6 +21,7 @@ export default {
   excludeStories: /.*Data$/,
   parameters: {
     options: { showPanel: false },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },

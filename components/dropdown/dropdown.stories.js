@@ -166,6 +166,7 @@ export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
 Variants.parameters = {
   options: { showPanel: false },
+  controls: { disable: true },
   a11y: {
     config: {
       rules: [

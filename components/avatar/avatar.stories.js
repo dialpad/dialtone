@@ -102,8 +102,6 @@ const PresenceTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtAvatarPresenceTemplate,
 );
 
-
-
 // Stories
 export const Default = {
   render: DefaultTemplate,
@@ -112,8 +110,8 @@ export const Default = {
   })],
   args: {
     default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
-  initials: 'PS',
-  }
+    initials: 'PS',
+  },
 };
 
 // TO DO: figure out why Icon.argTypes is causing the controls to not show up in the Initials story when
@@ -122,7 +120,7 @@ export const Initials = {
   ...Default,
   args: {
     default: 'DP',
-  }
+  },
 };
 
 export const Icon = {
@@ -140,12 +138,13 @@ export const Icon = {
         },
       },
     },
-  }
-}
+  },
+};
 
 export const Presence = {
   render: PresenceTemplate,
   parameters: {
     options: { showPanel: false },
-  }
+    controls: { disable: true },
+  },
 };

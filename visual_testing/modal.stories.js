@@ -16,6 +16,7 @@ export default {
   component: DtModal,
   parameters: {
     options: { showPanel: false },
+    controls: { disable: true },
     percy: {
       queryParams: {
         viewMode: 'story',

@@ -9,7 +9,6 @@ import {
   Important,
 } from '@/components/toast/toast.stories';
 
-
 import DtToast from '@/components/toast/toast.vue';
 
 export default {
@@ -17,6 +16,7 @@ export default {
   component: DtToast,
   parameters: {
     options: { showPanel: false },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },

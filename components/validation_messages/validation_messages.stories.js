@@ -2,7 +2,6 @@ import { generateTemplate } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './validation_messages.vue';
 
-
 // Constants
 const VALIDATION_MESSAGES = [{
   message: 'Validation Message',
@@ -72,6 +71,7 @@ const VariantsTemplate = () => {
 export const Variants = VariantsTemplate.bind({});
 Variants.parameters = {
   options: { showPanel: false },
+  controls: { disable: true },
   a11y: {
     config: {
       rules: [

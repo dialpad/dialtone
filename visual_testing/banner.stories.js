@@ -16,6 +16,7 @@ export default {
   component: DtBanner,
   parameters: {
     options: { showPanel: false },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },

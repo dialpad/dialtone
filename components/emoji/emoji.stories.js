@@ -51,4 +51,4 @@ CustomEmoji.args = {
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-Variants.parameters = { options: { showPanel: false } };
+Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
