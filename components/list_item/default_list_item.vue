@@ -2,7 +2,7 @@
   <div class="dt-default-list-item d-fs-200 d-lh-300 d-py4 d-px8 d-d-flex d-ai-center">
     <section
       v-if="hasSlotContent($slots.left)"
-      class="dt-default-list-item--left d-d-inline-flex d-as-flex-start d-d-flex d-ai-center d-pr8"
+      class="dt-default-list-item--left d-d-inline-flex d-as-flex-start d-d-flex d-ai-center d-pr8 d-jc-flex-end"
       data-qa="dt-default-list-item-left-wrapper"
     >
       <!-- @slot Slot for the left content -->
@@ -61,8 +61,9 @@ export default {
   &,
   &--left,
   &--right {
-    // TODO: probably not necessary, but maybe there's a reason...?
+    // align things like time that have smaller width/height compared to avatar
     min-height: 28px;
+    min-width: 32px;
   }
 }
 </style>
