@@ -49,6 +49,24 @@ jobs:
         if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
 
+      - name: Deploy ${{ steps.branch.outputs.BRANCH }}
+        if: ${{ github.ref != 'refs/heads/production' }}
+        run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
+
+      - name: Set registry to github packages
+        run: npm config set @dialpad:registry https://npm.pkg.github.com
+
+      - name: Set github auth token
+        run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy production to github packages
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: npm publish
+
+      - name: Deploy ${{ steps.branch.outputs.BRANCH }} to github packages
+        if: ${{ github.ref != 'refs/heads/production' }}
+        run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
+
       - name: Deploy to GitHub Pages (Production)
         if: ${{ github.ref == 'refs/heads/production' && always() }}
         uses: JamesIves/github-pages-deploy-action@v4.2.5
@@ -58,10 +76,6 @@ jobs:
           clean-exclude: |
             deploy-previews
             vue3
-
-      - name: Deploy ${{ steps.branch.outputs.BRANCH }}
-        if: ${{ github.ref != 'refs/heads/production' }}
-        run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
 
       - name: Deploy to GitHub Pages (Vue 3)
         if: ${{ github.ref == 'refs/heads/vue3' && always() }}
