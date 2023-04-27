@@ -1,3 +1,10 @@
+# [2.81.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.80.0...v2.81.0-beta.1) (2023-04-27)
+
+
+### Features
+
+* migrate from mocha to jest ([#939](https://github.com/dialpad/dialtone-vue/issues/939)) ([dd16249](https://github.com/dialpad/dialtone-vue/commit/dd16249dbf57b52f8606111e0d8ca2666510d78b))
+
 # [2.80.0](https://github.com/dialpad/dialtone-vue/compare/v2.79.4...v2.80.0) (2023-04-26)
 
 
