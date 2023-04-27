@@ -1,3 +1,13 @@
+# [2.81.0](https://github.com/dialpad/dialtone-vue/compare/v2.80.0...v2.81.0) (2023-04-27)
+
+
+### Features
+
+* deploy to GitHub packages ([#942](https://github.com/dialpad/dialtone-vue/issues/942)) ([6fb1939](https://github.com/dialpad/dialtone-vue/commit/6fb19393ceec41191fd96628391a90d94674ebb8))
+* **Feed Item Row:** recipe for feed item row ([#925](https://github.com/dialpad/dialtone-vue/issues/925)) ([8c745e9](https://github.com/dialpad/dialtone-vue/commit/8c745e90a630554e636176f84b0c32c6161c2a13))
+* **Header:** add setting menu button with update option ([#937](https://github.com/dialpad/dialtone-vue/issues/937)) ([c5e0241](https://github.com/dialpad/dialtone-vue/commit/c5e0241f23208adb91b4301d13bd04d765c51405))
+* migrate from mocha to jest ([#939](https://github.com/dialpad/dialtone-vue/issues/939)) ([dd16249](https://github.com/dialpad/dialtone-vue/commit/dd16249dbf57b52f8606111e0d8ca2666510d78b))
+
 # [2.80.0](https://github.com/dialpad/dialtone-vue/compare/v2.79.4...v2.80.0) (2023-04-26)
 
 
