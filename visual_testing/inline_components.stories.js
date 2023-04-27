@@ -13,6 +13,7 @@ export default {
     a11y: {
       disable: true,
     },
+    percy: { waitForTimeout: 5000 },
   },
 };
 

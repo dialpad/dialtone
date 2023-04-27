@@ -121,6 +121,7 @@ const avatarImage = require('./avatar.png');
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   avatarSrc: avatarImage,
+  avatarSeed: 'seed',
   avatarInitials: 'JL',
   avatarColor: 'base',
   avatarSize: 'lg',
