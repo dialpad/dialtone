@@ -1,3 +1,10 @@
+# [2.81.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v2.81.0-beta.1...v2.81.0-beta.2) (2023-04-27)
+
+
+### Bug Fixes
+
+* bad filename ([3f58058](https://github.com/dialpad/dialtone-vue/commit/3f580584d6d9f2fe3f06f2e66c8f5a893923a02d))
+
 # [2.81.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.80.0...v2.81.0-beta.1) (2023-04-27)
 
 
