@@ -18,6 +18,7 @@
     "release": "semantic-release --no-ci --extends ./release-local.config.js",
     "start": "STORYBOOK_ENV=development npm run storybook",
     "storybook": "storybook dev -p 9010",
+    "storybook:build": "storybook build",
     "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
     "test": "jest",
     "test:one": "jest -t",

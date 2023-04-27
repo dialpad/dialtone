@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Build storybook
-        run: npm run storybook:install && npm run storybook:build
+        run: npm run storybook:build
 
       - name: Run accessibility tests
         run: npm run storybook:a11y-test

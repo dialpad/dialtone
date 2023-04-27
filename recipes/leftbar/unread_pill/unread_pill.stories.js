@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeUnreadPill from './unread_chip.vue';
+import DtRecipeUnreadPill from './unread_pill.vue';
 
 import DtRecipeUnreadPillDefaultTemplate from './unread_pill_default.story.vue';
 import DtRecipeUnreadPillVariantsTemplate from './unread_pill_variants.story.vue';

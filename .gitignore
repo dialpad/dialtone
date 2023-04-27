@@ -3,7 +3,7 @@ node_modules
 
 # Builds
 /dist
-/storybook/compiled
+/storybook-static
 
 # local env files
 .DS_Store
