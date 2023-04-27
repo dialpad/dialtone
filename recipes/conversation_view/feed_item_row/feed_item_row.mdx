@@ -1,0 +1,76 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeFeedItemRow from './feed_item_row';
+
+# Feed Item Row
+
+<Subtitle>
+  Feed Item Row Recipe represent individual feed row in a feed list.
+</Subtitle>
+
+## Base Style
+
+A feed item row provides slots for avatar, action menu, threads and reactions as well as header (display name & time)
+and the content which can be either a message or a rich media.
+
+The default feed item row contains 4 slots:
+
+- **default** slot - the content whether it be text or the rich media card
+- **threading** slot - the threading row component which is below the reactions slot
+- **menu** slot - the actions menu for current feed row. Floats towards the right and shows when isActive is true.
+- **reactions** slot - the emoji reactions list component below the content slot.
+
+<Canvas>
+  <Story id="recipes-conversation-view-feed-item-row--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="recipes-conversation-view-feed-item-row--variants" />
+</Canvas>
+
+<!-- TODO: Different states for feed row -->
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeFeedItemRow } from '@dialpad/dialtone-vue';
+```
+
+### Default Feed Item row
+
+```vue
+<dt-recipe-feed-item-row
+  :show-header="showHeader"
+  :avatar-image-url="avatarImageUrl"
+  :display-name="displayName"
+  :time="time"
+  :is-active="isActive"
+  :state="state"
+  @on-hover="onHover"
+  @on-focus="onFocus"
+>
+  <!-- default content / Rich media -->
+  <template
+    #threading
+  >
+    <!-- threads component -->
+  </template>
+  <template
+    #reactions
+  >
+    <!-- reactions component -->
+  </template>
+  <template
+    #menu
+  >
+    <!-- Menu component which appears when isActive is true -->
+  </template>
+</dt-recipe-feed-item-row>
+```

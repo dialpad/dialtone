@@ -5,7 +5,7 @@ import DtRecipeContactRowMdx from './contact_row.mdx';
 import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
 import DtRecipeContactRowVariantsTemplate from './contact_row_variants.story.vue';
 import { AVATAR_PRESENCE_STATES } from '@/components/avatar/avatar_constants';
-const defaultImage = require('@/components/avatar/person.png');
+const defaultImage = require('@/common/assets/person.png');
 
 // Default Prop Values
 export const argsData = {

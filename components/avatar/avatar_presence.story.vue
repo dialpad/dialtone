@@ -8,7 +8,7 @@
       >
         <img
           data-qa="dt-avatar-image"
-          src="./person.png"
+          src="@/common/assets/person.png"
           alt="Person Avatar"
         >
       </dt-avatar>
@@ -21,7 +21,7 @@
       >
         <img
           data-qa="dt-avatar-image"
-          src="./person.png"
+          src="@/common/assets/person.png"
           alt="Person Avatar"
         >
       </dt-avatar>
@@ -35,7 +35,7 @@
       >
         <img
           data-qa="dt-avatar-image"
-          src="./person.png"
+          src="@/common/assets/person.png"
           alt="Person Avatar"
         >
       </dt-avatar>

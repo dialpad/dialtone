@@ -80,7 +80,7 @@
 <script>
 import DtRecipeContactRow from './contact_row';
 import { DtStack } from '@/components/stack';
-const defaultImage = require('@/components/avatar/person.png');
+const defaultImage = require('@/common/assets/person.png');
 
 export default {
   name: 'DtRecipeContactRowVariants',

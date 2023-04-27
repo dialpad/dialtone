@@ -107,7 +107,7 @@ const PresenceTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtAvatarPresenceTemplate,
 );
 
-const defaultImage = require('./person.png');
+const defaultImage = require('@/common/assets/person.png');
 
 // Stories
 export const Default = DefaultTemplate.bind({});

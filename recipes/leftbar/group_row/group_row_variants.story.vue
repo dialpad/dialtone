@@ -45,7 +45,7 @@
 <script>
 import DtRecipeGroupRow from './group_row';
 import { DtStack } from '@/components/stack';
-const defaultImage = require('@/components/avatar/person.png');
+const defaultImage = require('@/common/assets/person.png');
 
 export default {
   name: 'DtRecipeGroupRowVariants',

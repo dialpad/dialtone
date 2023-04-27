@@ -1,0 +1,97 @@
+<template>
+  <ul>
+    <dt-recipe-feed-item-row
+      :show-header="showHeader"
+      :avatar-image-url="avatarImageUrl"
+      :display-name="displayName"
+      :time="time"
+      :short-time="shortTime"
+      :is-active="isActive"
+      @hover="onHover"
+      @focus="onFocus"
+    >
+      <template v-if="defaultSlot">
+        <span v-html="defaultSlot" />
+      </template>
+      <template
+        v-if="threading"
+        #threading
+      >
+        <div class="d-d-flex d-flow1 d-my6">
+          <dt-avatar
+            presence="busy"
+            seed="seed"
+            size="sm"
+          >
+            <img
+              data-qa="dt-avatar-image"
+              src="@/common/assets/person.png"
+              alt="Person Avatar"
+            >
+          </dt-avatar>
+          <dt-avatar
+            presence="active"
+            seed="seed"
+            size="sm"
+          >
+            <img
+              data-qa="dt-avatar-image"
+              src="@/common/assets/person.png"
+              alt="Person Avatar"
+            >
+          </dt-avatar>
+          <dt-avatar
+            seed="seed"
+            size="sm"
+          >
+            <img
+              data-qa="dt-avatar-image"
+              src="@/common/assets/person.png"
+              alt="Person Avatar"
+            >
+          </dt-avatar>
+          <div
+            class="d-mx4 d-my-auto d-fs-100"
+          >
+            3 replies
+          </div>
+        </div>
+      </template>
+      <template
+        v-if="reactions"
+        #reactions
+      >
+        <dt-emoji-text-wrapper
+          class="d-btn d-btn--outlined d-btn--xs"
+          element-type="button"
+          size="200"
+        >
+          <span v-html="reactions" /> :smile:
+        </dt-emoji-text-wrapper>
+      </template>
+      <template
+        v-if="menu"
+        #menu
+      >
+        <dt-icon :name="menu" />
+      </template>
+    </dt-recipe-feed-item-row>
+  </ul>
+</template>
+
+<script>
+import DtRecipeFeedItemRow from './feed_item_row';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtAvatar } from '@/components/avatar';
+import { DtIcon } from '@/components/icon';
+
+export default {
+  name: 'DtRecipeFeedItemRowDefault',
+  components: {
+    DtAvatar,
+    DtRecipeFeedItemRow,
+    DtEmojiTextWrapper,
+    DtIcon,
+  },
+};
+</script>

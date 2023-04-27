@@ -10,7 +10,7 @@
     />
 
     <dt-image-viewer
-      :image-src="require('./fry.gif')"
+      :image-src="require('@/common/assets/fry.gif')"
       image-alt="Alt Text"
       close-aria-label="Close"
       image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
