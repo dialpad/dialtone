@@ -3,7 +3,7 @@
   "version": "2.80.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
-    "build": "npm run clean && npm run build-main && npm run build-emoji && npm run build:documentation",
+    "build": "npm run clean && npm run build:main && npm run build:documentation",
     "build:main": "vite build",
     "lint": "run-s lint:code lint:docs",
     "build:documentation": "node scripts/build-docs.js",
