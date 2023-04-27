@@ -1,3 +1,25 @@
+# [2.80.0](https://github.com/dialpad/dialtone-vue/compare/v2.79.4...v2.80.0) (2023-04-26)
+
+
+### Bug Fixes
+
+* **General Row:** show dnd alongside unreadCount ([#935](https://github.com/dialpad/dialtone-vue/issues/935)) ([6d47cef](https://github.com/dialpad/dialtone-vue/commit/6d47cef75bd8aa2b800e9c46ad5ae5351426cda3))
+* image viewer improvements ([#926](https://github.com/dialpad/dialtone-vue/issues/926)) ([b2e3d44](https://github.com/dialpad/dialtone-vue/commit/b2e3d44f7731d2d12b3c0d592b7c6798b861ae5c))
+* **Recipe Callbar Button With Popover:** update margin for callbutton with popover when in compact mode ([#931](https://github.com/dialpad/dialtone-vue/issues/931)) ([3d4a0f1](https://github.com/dialpad/dialtone-vue/commit/3d4a0f1c17c33fe21662728ee16def3f292fc528))
+* **Unread Chip:** styling ([#920](https://github.com/dialpad/dialtone-vue/issues/920)) ([8772379](https://github.com/dialpad/dialtone-vue/commit/8772379b3800c3e7ede7f7be2da2215cc15a3786))
+* visual tests not triggering on approval ([#933](https://github.com/dialpad/dialtone-vue/issues/933)) ([8a0b82b](https://github.com/dialpad/dialtone-vue/commit/8a0b82b3b6a1bb442b5cdac4d840c56df328e520))
+
+
+### Code Refactoring
+
+* **Root Layout:** remove javascript ([#922](https://github.com/dialpad/dialtone-vue/issues/922)) ([35d515a](https://github.com/dialpad/dialtone-vue/commit/35d515ac7c0c5e290727930da3a2a7ee2c6c8cf4))
+
+
+### Features
+
+* **Leftbar General Row:** add iconSize prop ([#929](https://github.com/dialpad/dialtone-vue/issues/929)) ([5ba87cd](https://github.com/dialpad/dialtone-vue/commit/5ba87cd1a467e6ace19a1fdcff36814921153221))
+* **Rich Text Editor:** add rich text editor component ([#905](https://github.com/dialpad/dialtone-vue/issues/905)) ([a19a3a9](https://github.com/dialpad/dialtone-vue/commit/a19a3a92b2d6ce6beedf423a96b10d56d3f02964))
+
 ## [2.79.4](https://github.com/dialpad/dialtone-vue/compare/v2.79.3...v2.79.4) (2023-04-18)
 
 

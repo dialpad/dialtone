@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeUnreadChip from './unread_chip.vue';
+import DtRecipeUnreadPill from './unread_chip.vue';
 
-import DtRecipeUnreadChipDefaultTemplate from './unread_chip_default.story.vue';
-import DtRecipeUnreadChipVariantsTemplate from './unread_chip_variants.story.vue';
-import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
+import DtRecipeUnreadPillDefaultTemplate from './unread_pill_default.story.vue';
+import DtRecipeUnreadPillVariantsTemplate from './unread_pill_variants.story.vue';
+import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from '@/recipes/leftbar/unread_pill/unread_pill_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -14,14 +14,14 @@ export const argsData = {
 export const argTypesData = {
   // Props
   kind: {
-    options: UNREAD_BADGE_KINDS,
+    options: UNREAD_PILL_KINDS,
     control: {
       type: 'select',
     },
   },
 
   direction: {
-    options: UNREAD_BADGE_DIRECTIONS,
+    options: UNREAD_PILL_DIRECTIONS,
     control: {
       type: 'select',
     },
@@ -57,8 +57,8 @@ const decorator = () => ({
 
 // Story Collection
 export default {
-  title: 'Recipes/leftbar/Unread Chip',
-  component: DtRecipeUnreadChip,
+  title: 'Recipes/leftbar/Unread Pill',
+  component: DtRecipeUnreadPill,
   args: argsData,
   argTypes: argTypesData,
   decorators: [decorator],
@@ -69,12 +69,12 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeUnreadChipDefaultTemplate,
+  DtRecipeUnreadPillDefaultTemplate,
 );
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeUnreadChipVariantsTemplate,
+  DtRecipeUnreadPillVariantsTemplate,
 );
 
 // Stories

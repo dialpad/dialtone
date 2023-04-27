@@ -23,6 +23,7 @@
       <dt-recipe-callbar-button-with-popover
         arrow-button-label="Open popover"
         aria-label="Icon only"
+        button-width-size="md"
       >
         <template #icon>
           <dt-icon name="mic" />
@@ -85,6 +86,7 @@
         active
         arrow-button-label="Open popover"
         aria-label="Icon only"
+        button-width-size="md"
       >
         <template #icon>
           <dt-icon name="mic" />

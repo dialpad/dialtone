@@ -1,5 +1,4 @@
 
-
 export default {
   title: 'Visual Testing/Inline Components',
   args: {
@@ -15,6 +14,7 @@ export default {
       queryParams: {
         viewMode: 'docs',
       },
+      waitForTimeout: 5000,
     },
   },
 };
