@@ -48,7 +48,6 @@ jobs:
         branch: gh-pages
         folder: storybook-static
         target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
-        clean: true
 
 
     - name: Add Message
