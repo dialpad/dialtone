@@ -8,7 +8,7 @@ module.exports = {
       // 'Visual Testing/Popover: Default',
       // 'Visual Testing/Toast: Default',
       // 'Visual Testing/Tooltip: Default',
-      'Visual Testing/Inline Components: Default',
+      'Visual Testing/Inline Components: Docs',
       // 'Visual Testing/Modal: Default',
       // 'Visual Testing/Modal: With Footer',
       // 'Visual Testing/Modal: With Fixed Header Footer',
