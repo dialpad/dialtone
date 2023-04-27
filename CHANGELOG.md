@@ -1,3 +1,11 @@
+# [3.63.0](https://github.com/dialpad/dialtone-vue/compare/v3.62.0...v3.63.0) (2023-04-27)
+
+
+### Features
+
+* deploy to GitHub packages ([#943](https://github.com/dialpad/dialtone-vue/issues/943)) ([0163305](https://github.com/dialpad/dialtone-vue/commit/0163305b846d2da05f6f850d4500004a529094f1))
+* **Feed Item Row:** recipe for feed item row - vue3 ([#938](https://github.com/dialpad/dialtone-vue/issues/938)) ([a3ae4a6](https://github.com/dialpad/dialtone-vue/commit/a3ae4a6327d161dc6cfe620df79193ff7c57e49d))
+
 # [3.62.0](https://github.com/dialpad/dialtone-vue/compare/v3.61.5...v3.62.0) (2023-04-26)
 
 
