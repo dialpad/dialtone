@@ -25,8 +25,7 @@
     "test:watch": "jest --watch"
   },
   "files": [
-    "dist/*.js",
-    "dist/component-documentation.json",
+    "dist",
     "CHANGELOG.md",
     "CHANGELOG.json"
   ],
@@ -141,11 +140,19 @@
   "engines": {
     "node": ">= 16"
   },
-  "exports": {
-    ".": "./dist/dialtone-vue.common.js",
-    "./emoji": "./dist/emoji.common.js"
-  },
   "type": "module",
+  "main": "./dist/dialtone-vue.cjs",
+  "module": "./dist/dialtone-vue.js",
+  "exports": {
+    ".": {
+      "import": "./dist/dialtone-vue.js",
+      "require": "./dist/dialtone-vue.cjs"
+    },
+    "./emoji": {
+      "import": "./dist/emoji.js",
+      "require": "./dist/emoji.cjs"
+    }
+  },
   "gitHooks": {
     "pre-commit": "lint-staged",
     "commit-msg": "./scripts/commit-msg"

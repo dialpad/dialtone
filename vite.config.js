@@ -10,9 +10,10 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   build: {
     lib: {
-      entry: [resolve(__dirname, './index.js'), resolve(__dirname, './emoji.js')],
-      name: 'dialtone-vue',
-      fileName: 'dialtone-vue',
+      entry: {
+        'dialtone-vue': resolve(__dirname, './index.js'),
+        emoji: resolve(__dirname, './emoji.js'),
+      },
     },
     rollupOptions: {
       external: ['vue', '@dialpad/dialtone'],
