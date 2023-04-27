@@ -18,7 +18,7 @@
     "release": "semantic-release --no-ci --extends ./release-local.config.cjs",
     "start": "STORYBOOK_ENV=development npm run storybook",
     "storybook": "storybook dev -p 9010",
-    "storybook:build": "storybook build",
+    "storybook:build": "storybook build && touch ./storybook-static/.nojekyll",
     "storybook:a11y-test": "node ./.storybook/storybook-a11y-test.cjs",
     "test": "jest",
     "test:one": "jest -t",
