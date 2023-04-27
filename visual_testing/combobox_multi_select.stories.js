@@ -5,7 +5,6 @@ import {
   WithMaxSelectValidation,
 } from '@/recipes/comboboxes/combobox_multi_select/combobox_multi_select.stories.js';
 
-
 import DtRecipeComboboxMultiSelect from '@/recipes/comboboxes/combobox_multi_select/combobox_multi_select.vue';
 
 export default {

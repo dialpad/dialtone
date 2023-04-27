@@ -6,7 +6,6 @@ import {
   Flip,
 } from '@/components/tooltip/tooltip.stories.js';
 
-
 import DtTooltip from '@/components/tooltip/tooltip.vue';
 
 export default {

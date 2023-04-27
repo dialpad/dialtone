@@ -5,7 +5,6 @@ import {
   Variants,
 } from '@/components/dropdown/dropdown.stories';
 
-
 import DtDropdown from '@/components/dropdown/dropdown.vue';
 
 export default {

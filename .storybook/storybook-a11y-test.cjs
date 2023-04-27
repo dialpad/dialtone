@@ -3,7 +3,7 @@ const path = require('path');
 
 (async () => {
   // Full path to your static storybook build
-  const buildDir = path.join(__dirname, '../compiled');
+  const buildDir = path.join(__dirname, '../storybook-static');
 
   const testRunner = new A11yTestRunner(buildDir);
 

@@ -19,7 +19,7 @@
     "start": "STORYBOOK_ENV=development npm run storybook",
     "storybook": "storybook dev -p 9010",
     "storybook:build": "storybook build",
-    "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
+    "storybook:a11y-test": "node ./.storybook/storybook-a11y-test.cjs",
     "test": "jest",
     "test:one": "jest -t",
     "test:watch": "jest --watch"
@@ -57,6 +57,7 @@
     "@percy/storybook": "^4.3.5",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
+    "@shopify/storybook-a11y-test": "^1.1.2",
     "@storybook/addon-a11y": "^7.0.6",
     "@storybook/addon-essentials": "^7.0.6",
     "@storybook/addon-interactions": "^7.0.6",

@@ -5,7 +5,6 @@ import {
   Variants,
 } from '@/components/popover/popover.stories.js';
 
-
 import DtPopover from '@/components/popover/popover.vue';
 
 export default {
