@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import DtNoticeIcon from './notice_icon';
 import { mount } from '@vue/test-utils';
 import { DtIcon } from '@/components/icon';
@@ -10,7 +9,7 @@ const baseProps = {
 
 const baseSlotsData = {};
 
-describe('DtNoticeIcon tests', function () {
+describe('DtNoticeIcon tests', () => {
   let wrapper;
   let icon;
   let props;
@@ -35,42 +34,42 @@ describe('DtNoticeIcon tests', function () {
     _setWrappers();
   });
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default content', function () {
-      it('Should render notice icon component', function () {
-        assert.isTrue(wrapper.exists());
+  describe('Presentation Tests', () => {
+    describe('When rendered with default content', () => {
+      it('Should render notice icon component', () => {
+        expect(wrapper.exists()).toBe(true);
       });
 
-      it('Should render an icon', function () {
-        assert.isTrue(icon.exists());
+      it('Should render an icon', () => {
+        expect(icon.exists()).toBe(true);
       });
 
-      it('Should have aria-hidden set to true', function () {
-        assert.strictEqual(wrapper.attributes('aria-hidden'), 'true');
+      it('Should have aria-hidden set to true', () => {
+        expect(wrapper.attributes('aria-hidden')).toBe('true');
       });
     });
 
-    describe('When kind is base', function () {
-      beforeEach(async function () {
+    describe('When kind is base', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ kind: 'base' });
         _setChildWrappers();
       });
 
-      it('Should render base icon', function () {
-        assert.isTrue(icon.classes().includes('d-icon--bell'));
+      it('Should render base icon', () => {
+        expect(icon.classes().includes('d-icon--bell')).toBe(true);
       });
     });
 
-    describe('When custom icon is passed into the slot', function () {
-      beforeEach(async function () {
+    describe('When custom icon is passed into the slot', () => {
+      beforeEach(async () => {
         slotsData = {
           default: '<dt-icon name="accessibility" />',
         };
         _setWrappers();
       });
 
-      it('Should render correctly', async function () {
-        assert.isTrue(icon.classes().includes('d-icon--accessibility'));
+      it('Should render correctly', async () => {
+        expect(icon.classes().includes('d-icon--accessibility')).toBe(true);
       });
     });
   });

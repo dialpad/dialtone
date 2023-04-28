@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import DtCodeblock from './codeblock.vue';
 
@@ -7,7 +6,7 @@ const baseProps = {
   text: '',
 };
 
-describe('DtCodeblock Tests', function () {
+describe('DtCodeblock Tests', () => {
   // Wrappers
   let wrapper;
 
@@ -23,28 +22,28 @@ describe('DtCodeblock Tests', function () {
     props = baseProps;
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     /*
      * Test(s) to ensure that the component is correctly rendering
      */
-    beforeEach(function () { _setWrappers(); });
+    beforeEach(() => { _setWrappers(); });
 
-    it('should exist', function () { assert.isTrue(wrapper.exists()); });
-    it('should render preformatted code block', function () {
+    it('should exist', () => { expect(wrapper.exists()).toBe(true); });
+    it('should render preformatted code block', () => {
       const preElement = wrapper.find('pre');
-      assert.isTrue(preElement.exists());
+      expect(preElement.exists()).toBe(true);
       const codeElement = preElement.find('code');
-      assert.isTrue(codeElement.exists());
+      expect(codeElement.exists()).toBe(true);
     });
 
-    describe('When text prop is set', function () {
+    describe('When text prop is set', () => {
       const text = 'function someFunction() {\n  return 1;\n}';
-      beforeEach(async function () {
+      beforeEach(async () => {
         await wrapper.setProps({ text });
       });
-      it('should render preformatted text in codeblock', function () {
+      it('should render preformatted text in codeblock', () => {
         const codeElement = wrapper.find('code');
-        assert.equal(codeElement.text(), text);
+        expect(codeElement.text()).toEqual(text);
       });
     });
   });

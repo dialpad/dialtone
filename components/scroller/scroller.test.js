@@ -14,7 +14,7 @@ const baseSlotsData = {
         </div>`,
 };
 
-const basePropsData = {
+const baseProps = {
   items,
   itemSize: 30,
   scrollerHeight: 60,
@@ -28,7 +28,7 @@ describe('DtScroller Tests', function () {
   let defaultContent;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let slots = baseSlotsData;
 
   // Helpers
@@ -38,7 +38,7 @@ describe('DtScroller Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtScroller, {
-      propsData,
+      props,
       slots,
     });
     _setChildWrappers();
@@ -46,7 +46,7 @@ describe('DtScroller Tests', function () {
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     slots = baseSlotsData;
   });
 

@@ -1,16 +1,13 @@
-import { assert } from 'chai';
-
-// Assumes that the element is unique
 export function itBehavesLikeAppliesClassToChild (wrapper, className, element) {
-  assert.strictEqual(wrapper.find(className).html(), element.html(), 'applies custom class to child');
+  expect(wrapper.find(className).html()).toBe(element.html());
 }
 
 export function itBehavesLikeAppliesChildProp (element, propName, propValue) {
-  assert.strictEqual(element.attributes(propName), propValue, 'has provided child prop');
+  expect(element.attributes(propName)).toBe(propValue);
 }
 
 export function itBehavesLikePassesChildProp (element, propName, propValue) {
-  assert.strictEqual(element.props(propName), propValue, 'has passed down child prop');
+  expect(element.props(propName)).toEqual(propValue);
 }
 
 export default {

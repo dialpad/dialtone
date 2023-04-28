@@ -1,17 +1,16 @@
 import { shallowMount } from '@vue/test-utils';
-import { assert } from 'chai';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 import DtPresence from './presence.vue';
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 
-describe('DtPresence Tests', function () {
+describe('DtPresence Tests', () => {
   let wrapper;
   let presence;
   let innerPresence;
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let slots = {};
 
   // Helpers
@@ -22,90 +21,93 @@ describe('DtPresence Tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtPresence, {
-      propsData,
+      props,
       slots,
     });
     _setChildWrappers();
   };
 
   // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    props = baseProps;
     slots = {};
   });
 
-  describe('Presentation Tests', function () {
-    describe('When presence renders', function () {
+  describe('Presentation Tests', () => {
+    describe('When presence renders', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should exist', function () {
-        assert.isTrue(presence.exists());
+      it('should exist', () => {
+        expect(presence.exists()).toBe(true);
       });
     });
 
-    describe('Presence attributes', function () {
+    describe('Presence attributes', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should have role=status', function () {
-        assert.strictEqual(presence.attributes('role'), 'status');
+      it('should have role=status', () => {
+        expect(presence.attributes('role')).toBe('status');
       });
 
-      it('should have aria-live=off by default', function () {
-        assert.strictEqual(presence.attributes('aria-live'), 'off');
+      it('should have aria-live=off by default', () => {
+        expect(presence.attributes('aria-live')).toBe('off');
       });
 
-      it('should be able to set aria-live attribute', async function () {
+      it('should be able to set aria-live attribute', async () => {
         await wrapper.setProps({ ariaLive: 'assertive' });
-        assert.strictEqual(presence.attributes('aria-live'), 'assertive');
+        expect(presence.attributes('aria-live')).toBe('assertive');
       });
     });
 
-    describe('SR Text', function () {
+    describe('SR Text', () => {
       const srText = 'SR Presence Text';
-      beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+      beforeEach(() => {
+        props = {
+          ...baseProps,
           srText,
         };
         _setWrappers();
       });
 
-      it('should correctly render the screen-reader <span/> when an srText prop is passed', function () {
+      it(
+        'should correctly render the screen-reader <span/> when an srText prop is passed',
+        () => {
+          const srSpan = presence.find('span');
+          expect(srSpan.exists()).toBe(true);
+        },
+      );
+      it('should have the `sr-only` class', () => {
         const srSpan = presence.find('span');
-        assert.isTrue(srSpan.exists());
+        expect(srSpan.classes().includes('sr-only')).toBe(true);
       });
-      it('should have the `sr-only` class', function () {
+      it('should contain the content of the srText prop', () => {
         const srSpan = presence.find('span');
-        assert.isTrue(srSpan.classes().includes('sr-only'));
-      });
-      it('should contain the content of the srText prop', function () {
-        const srSpan = presence.find('span');
-        assert.strictEqual(srSpan.text(), srText);
+        expect(srSpan.text()).toBe(srText);
       });
     });
 
-    describe('Presence color when presence is passed through a prop', function () {
-      beforeEach(function () { _setWrappers(); });
+    describe('Presence color when presence is passed through a prop', () => {
+      beforeEach(() => { _setWrappers(); });
 
       const itBehavesLikeHasCorrectColorClassForPresence = (presence, color) => {
-        it('should have correct color class based on presence', async function () {
+        it('should have correct color class based on presence', async () => {
           await wrapper.setProps({ presence });
           itBehavesLikeHasCorrectClass(innerPresence, color);
         });
       };
 
-      describe('When presence is active', function () {
+      describe('When presence is active', () => {
         itBehavesLikeHasCorrectColorClassForPresence('active', 'd-presence__inner--active');
       });
-      describe('When presence is away', function () {
+      describe('When presence is away', () => {
         itBehavesLikeHasCorrectColorClassForPresence('away', 'd-presence__inner--away');
       });
-      describe('When presence is busy', function () {
+      describe('When presence is busy', () => {
         itBehavesLikeHasCorrectColorClassForPresence('busy', 'd-presence__inner--busy');
       });
-      describe('When presence is offline', function () {
+      describe('When presence is offline', () => {
         itBehavesLikeHasCorrectColorClassForPresence('offline', 'd-presence__inner--offline');
       });
     });

@@ -1,10 +1,9 @@
-import { assert } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import DtRootLayoutBody from './root_layout_body.vue';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   sidebarWidth: '256px',
 };
 
@@ -13,7 +12,7 @@ const baseSlotsData = {
   content: 'content slot content',
 };
 
-describe('DtRootLayoutBody Tests', function () {
+describe('DtRootLayoutBody Tests', () => {
   // Wrappers
   let wrapper;
 
@@ -22,7 +21,7 @@ describe('DtRootLayoutBody Tests', function () {
   let content;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let slots = baseSlotsData;
 
   // Helpers
@@ -34,7 +33,7 @@ describe('DtRootLayoutBody Tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtRootLayoutBody, {
-      propsData,
+      props,
       slots,
     });
     _setChildWrappers();
@@ -43,78 +42,78 @@ describe('DtRootLayoutBody Tests', function () {
   // Setup
 
   // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    props = baseProps;
     slots = baseSlotsData;
   });
 
-  describe('Presentation Tests', function () {
-    describe('When root layout body renders', function () {
-      beforeEach(function () { _setWrappers(); });
+  describe('Presentation Tests', () => {
+    describe('When root layout body renders', () => {
+      beforeEach(() => { _setWrappers(); });
 
-      it('root should exist', function () { assert.isTrue(wrapper.exists()); });
-      it('body should exist', function () { assert.isTrue(body.exists()); });
-      it('sidebar should exist', function () { assert.isTrue(sidebar.exists()); });
-      it('content should exist', function () { assert.isTrue(content.exists()); });
+      it('root should exist', () => { expect(wrapper.exists()).toBe(true); });
+      it('body should exist', () => { expect(body.exists()).toBe(true); });
+      it('sidebar should exist', () => { expect(sidebar.exists()).toBe(true); });
+      it('content should exist', () => { expect(content.exists()).toBe(true); });
     });
 
-    describe('When slot content renders', function () {
-      it('sidebar slot is passed down correctly', async function () {
-        assert.strictEqual(sidebar.text(), slots.sidebar);
+    describe('When slot content renders', () => {
+      it('sidebar slot is passed down correctly', async () => {
+        expect(sidebar.text()).toBe(slots.sidebar);
       });
 
-      it('content slot is passed down correctly', async function () {
-        assert.strictEqual(content.text(), slots.content);
+      it('content slot is passed down correctly', async () => {
+        expect(content.text()).toBe(slots.content);
       });
     });
 
-    describe('When dynamic inline styles are set', function () {
-      beforeEach(function () { _setWrappers(); });
+    describe('When dynamic inline styles are set', () => {
+      beforeEach(() => { _setWrappers(); });
 
-      it('should set the sidebar width', function () {
-        assert.strictEqual(sidebar.element.style.getPropertyValue('flex-basis'), propsData.sidebarWidth);
+      it('should set the sidebar width', () => {
+        expect(sidebar.element.style.getPropertyValue('flex-basis')).toBe(props.sidebarWidth);
       });
     });
 
     const itBehavesLikeExcludesBodyInvertClass = () => {
-      it('Has correct class', async function () {
-        assert.strictEqual(body.classes('d-root-layout__body--invert'), false);
+      it('Has correct class', async () => {
+        expect(body.classes('d-root-layout__body--invert')).toBe(false);
       });
     };
 
-    describe('When sidebarPosition is set to default', function () {
+    describe('When sidebarPosition is set to default', () => {
       itBehavesLikeExcludesBodyInvertClass();
     });
 
-    describe('When sidebarPosition is set to left', function () {
-      beforeEach(async function () {
+    describe('When sidebarPosition is set to left', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
       });
 
       itBehavesLikeExcludesBodyInvertClass();
     });
 
-    describe('When sidebarPosition is set to right', function () {
-      beforeEach(async function () {
+    describe('When sidebarPosition is set to right', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT });
       });
 
-      it('Has correct class', async function () {
-        assert.strictEqual(body.classes('d-root-layout__body--invert'), true);
+      it('Has correct class', async () => {
+        expect(body.classes('d-root-layout__body--invert')).toBe(true);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When sidebar is rendered', function () {
-      it('Uses `aside` tag', async function () {
-        assert.strictEqual(sidebar.element.tagName, 'ASIDE');
+  describe('Accessibility Tests', () => {
+    describe('When sidebar is rendered', () => {
+      it('Uses `aside` tag', async () => {
+        expect(sidebar.element.tagName).toBe('ASIDE');
       });
     });
 
-    describe('When content is rendered', function () {
-      it('Uses `main` tag', async function () {
-        assert.strictEqual(content.element.tagName, 'MAIN');
+    describe('When content is rendered', () => {
+      it('Uses `main` tag', async () => {
+        expect(content.element.tagName).toBe('MAIN');
       });
     });
   });

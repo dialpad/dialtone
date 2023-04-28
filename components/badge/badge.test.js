@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtBadge from './badge.vue';
 import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
@@ -7,7 +6,7 @@ import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classe
 // Constants
 const baseProps = {};
 
-describe('DtBadge Tests', function () {
+describe('DtBadge Tests', () => {
   let wrapper;
   let badge;
   let iconLeftWrapper;
@@ -30,60 +29,63 @@ describe('DtBadge Tests', function () {
     wrapper = mount(DtBadge, {
       props,
       slots,
-      localVue: this.localVue,
+
     });
     _setChildWrappers();
   };
 
-  beforeEach(function () {
+  beforeEach(() => {
     props = baseProps;
     slots = {};
     _setWrappers();
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Shared Examples
     const itBehavesLikeRendersText = text => {
-      it('should render the badge', function () { assert.isTrue(badge.exists()); });
-      it('should display the correct text', function () { assert.strictEqual(badge.text(), text); });
+      it('should render the badge', () => { expect(badge.exists()).toBe(true); });
+      it(
+        'should display the correct text',
+        () => { expect(badge.text()).toBe(text); },
+      );
     };
 
     const itBehavesLikeHasCorrectType = type => {
-      it('should have correct type', async function () {
+      it('should have correct type', async () => {
         await wrapper.setProps({ type });
         itBehavesLikeHasCorrectClass(badge, BADGE_TYPE_MODIFIERS[type]);
       });
     };
 
     const itBehavesLikeHasCorrectKind = kind => {
-      it('should have correct kind', async function () {
+      it('should have correct kind', async () => {
         await wrapper.setProps({ kind });
         itBehavesLikeHasCorrectClass(badge, BADGE_KIND_MODIFIERS[kind]);
       });
     };
 
     const itBehavesLikeHasCorrectDecoration = decoration => {
-      it('should have correct decoration', async function () {
+      it('should have correct decoration', async () => {
         await wrapper.setProps({ decoration });
         const decorativeSpan = wrapper.find('.d-badge__decorative');
-        assert(decorativeSpan.exists());
+        expect(decorativeSpan.exists()).toBeTruthy();
         itBehavesLikeHasCorrectClass(badge, BADGE_DECORATION_MODIFIERS[decoration]);
       });
     };
 
-    describe('When the badge renders', function () {
+    describe('When the badge renders', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should exist', function () { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
     });
 
-    describe('When a text is provided via slot', function () {
+    describe('When a text is provided via slot', () => {
       // Test Environment
       const slotText = 'Default slot text';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         slots = { default: slotText };
         _setWrappers();
       });
@@ -91,7 +93,7 @@ describe('DtBadge Tests', function () {
       itBehavesLikeRendersText(slotText);
     });
 
-    describe('When a text is provided via prop', function () {
+    describe('When a text is provided via prop', () => {
       // Test Environment
       const propText = 'Prop text';
 
@@ -104,50 +106,50 @@ describe('DtBadge Tests', function () {
       itBehavesLikeRendersText(propText);
     });
 
-    describe('When a type is provided via prop', function () {
+    describe('When a type is provided via prop', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      describe('When type is info', function () { itBehavesLikeHasCorrectType('info'); });
+      describe('When type is info', () => { itBehavesLikeHasCorrectType('info'); });
 
-      describe('When type is success', function () { itBehavesLikeHasCorrectType('success'); });
+      describe('When type is success', () => { itBehavesLikeHasCorrectType('success'); });
 
-      describe('When type is warning', function () { itBehavesLikeHasCorrectType('warning'); });
+      describe('When type is warning', () => { itBehavesLikeHasCorrectType('warning'); });
 
-      describe('When type is critical', function () { itBehavesLikeHasCorrectType('critical'); });
+      describe('When type is critical', () => { itBehavesLikeHasCorrectType('critical'); });
 
-      describe('When type is ai', function () {
-        beforeEach(async function () {
+      describe('When type is ai', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ type: 'ai' });
           _setChildWrappers();
         });
 
         itBehavesLikeHasCorrectType('ai');
 
-        it('renders ai icon in iconLeft slot by default', function () {
-          assert.isTrue(iconLeft.attributes('data-name') === 'Dialpad Ai');
+        it('renders ai icon in iconLeft slot by default', () => {
+          expect(iconLeft.attributes('data-name') === 'Dialpad Ai').toBe(true);
         });
       });
     });
 
-    describe('When a kind is provided via prop', function () {
+    describe('When a kind is provided via prop', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      describe('When kind is count', function () { itBehavesLikeHasCorrectKind('count'); });
+      describe('When kind is count', () => { itBehavesLikeHasCorrectKind('count'); });
     });
 
-    describe('When a decoration is provided via prop', function () {
+    describe('When a decoration is provided via prop', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      describe('When decoration is black-900', function () { itBehavesLikeHasCorrectDecoration('black-900'); });
+      describe('When decoration is black-900', () => { itBehavesLikeHasCorrectDecoration('black-900'); });
 
-      describe('When decoration is red-400', function () { itBehavesLikeHasCorrectDecoration('red-400'); });
+      describe('When decoration is red-400', () => { itBehavesLikeHasCorrectDecoration('red-400'); });
 
-      describe('When decoration is purple-400', function () { itBehavesLikeHasCorrectDecoration('purple-400'); });
+      describe('When decoration is purple-400', () => { itBehavesLikeHasCorrectDecoration('purple-400'); });
 
-      describe('When decoration is gold-300', function () { itBehavesLikeHasCorrectDecoration('gold-300'); });
+      describe('When decoration is gold-300', () => { itBehavesLikeHasCorrectDecoration('gold-300'); });
     });
   });
 });

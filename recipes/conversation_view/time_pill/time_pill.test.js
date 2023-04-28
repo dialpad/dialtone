@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import DtRecipeTimePill from './time_pill.vue';
 import {
@@ -8,18 +7,18 @@ import {
 
 // Constants
 const today = new Date();
-const basePropsData = {
+const baseProps = {
   dateTime: today.toISOString().split('T')[0],
   dateTimeDisplay: 'Today',
 };
 
-describe('DtRecipeTimePill Tests', function () {
+describe('DtRecipeTimePill Tests', () => {
   // Wrappers
   let wrapper;
   let timePill;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -31,7 +30,7 @@ describe('DtRecipeTimePill Tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtRecipeTimePill, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
@@ -45,52 +44,52 @@ describe('DtRecipeTimePill Tests', function () {
   });
 
   // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
-    describe('When some description of the current environment', function () {
-      it('Should display date time display', function () {
-        assert.strictEqual(timePill.text(), basePropsData.dateTimeDisplay);
+  describe('Presentation Tests', () => {
+    describe('When some description of the current environment', () => {
+      it('Should display date time display', () => {
+        expect(timePill.text()).toBe(props.dateTimeDisplay);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When some description of the current environment', function () {
-      it('Should have a datetime attribute', function () {
-        assert.strictEqual(timePill.attributes('datetime'), basePropsData.dateTime);
+  describe('Accessibility Tests', () => {
+    describe('When some description of the current environment', () => {
+      it('Should have a datetime attribute', () => {
+        expect(timePill.attributes('datetime')).toBe(props.dateTime);
       });
     });
   });
 
-  describe('Validation Tests', function () {
-    describe('dateTime Validator', function () {
+  describe('Validation Tests', () => {
+    describe('dateTime Validator', () => {
       // Test Environment
       const prop = DtRecipeTimePill.props.dateTime;
 
-      describe('When provided datetime is YYYY-MM-DD', function () {
+      describe('When provided datetime is YYYY-MM-DD', () => {
         itBehavesLikePassesCustomPropValidation(prop, '1914-12-20');
       });
 
-      describe('When provided datetime is YYYY-MM-DD HH:MM:SS', function () {
+      describe('When provided datetime is YYYY-MM-DD HH:MM:SS', () => {
         itBehavesLikePassesCustomPropValidation(prop, '1914-12-20 08:30:45');
       });
 
-      describe('When provided datetime is duration in days', function () {
+      describe('When provided datetime is duration in days', () => {
         itBehavesLikeFailsCustomPropValidation(prop, 'P2D');
       });
 
-      describe('When provided datetime is duration in time', function () {
+      describe('When provided datetime is duration in time', () => {
         itBehavesLikeFailsCustomPropValidation(prop, 'PT15H10M');
       });
 
-      describe('When provided datetime is abcdef', function () {
+      describe('When provided datetime is abcdef', () => {
         itBehavesLikeFailsCustomPropValidation(prop, `abcdef`);
       });
     });

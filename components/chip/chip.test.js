@@ -1,16 +1,15 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 import DtChip from './chip.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   closeButtonProps: {
     ariaLabel: 'close',
   },
 };
 
-describe('DtChip Tests', function () {
+describe('DtChip Tests', () => {
   // Wrappers
   let wrapper;
   let chip;
@@ -20,7 +19,7 @@ describe('DtChip Tests', function () {
   let remove;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let slots = {};
   let listeners;
 
@@ -35,7 +34,7 @@ describe('DtChip Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtChip, {
-      propsData,
+      props,
       slots,
       listeners,
     });
@@ -43,105 +42,116 @@ describe('DtChip Tests', function () {
   };
 
   // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    props = baseProps;
     slots = {};
   });
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default props', function () {
+  describe('Presentation Tests', () => {
+    describe('When rendered with default props', () => {
       const defaultText = 'TEXT';
-      beforeEach(function () {
+      beforeEach(() => {
         slots = { default: defaultText };
         _setWrappers();
       });
-      it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-      it('should render chip', function () { assert.exists(chip, 'chip exists'); });
-      it('should render remove button', function () { assert.exists(remove, 'close button exists'); });
-      it('should render label', function () { assert.exists(label); });
-      it('should display the correct text', function () { assert.strictEqual(label.text(), defaultText); });
-      it('should not render icon', function () { assert.isFalse(icon.exists()); });
-      it('should not render avatar', function () { assert.isFalse(avatar.exists()); });
-      it('default interactive', function () {
-        assert.strictEqual(chip.element.tagName, 'BUTTON');
+      it(
+        'should render the component',
+        () => { expect(wrapper.exists()).toBe(true); },
+      );
+      it('should render chip', () => { expect(chip.exists()).toBeTruthy(); });
+      it(
+        'should render remove button',
+        () => { expect(remove.exists()).toBeTruthy(); },
+      );
+      it('should render label', () => { expect(label.exists()).toBeTruthy(); });
+      it(
+        'should display the correct text',
+        () => { expect(label.text()).toBe(defaultText); },
+      );
+      it('should not render icon', () => { expect(icon.exists()).toBe(false); });
+      it(
+        'should not render avatar',
+        () => { expect(avatar.exists()).toBe(false); },
+      );
+      it('default interactive', () => {
+        expect(chip.element.tagName).toBe('BUTTON');
       });
-      it('chip should have aria-labelledby', function () {
-        assert.property(chip.attributes(), 'aria-labelledby');
+      it('chip should have aria-labelledby', () => {
+        expect('aria-labelledby' in chip.attributes()).toBeTruthy();
       });
-      it('button should have aria-label', function () {
-        assert.equal(remove.attributes('aria-label'), 'close');
+      it('button should have aria-label', () => {
+        expect(remove.attributes('aria-label')).toEqual('close');
       });
     });
 
-    describe('When interactive is false', function () {
-      beforeEach(async function () {
-        propsData = {
-          ...basePropsData,
+    describe('When interactive is false', () => {
+      beforeEach(async () => {
+        props = {
+          ...baseProps,
           interactive: false,
         };
         await _setWrappers();
       });
-      it('should not be interactive', function () {
-        assert.strictEqual(chip.element.tagName, 'SPAN');
+      it('should not be interactive', () => {
+        expect(chip.element.tagName).toBe('SPAN');
       });
     });
 
-    describe('When hide close button', function () {
-      beforeEach(async function () {
-        propsData = {
-          ...basePropsData,
+    describe('When hide close button', () => {
+      beforeEach(async () => {
+        props = {
+          ...baseProps,
           hideClose: true,
         };
         await _setWrappers();
       });
-      it('should not render remove button', function () { assert.isFalse(remove.exists()); });
+      it(
+        'should not render remove button',
+        () => { expect(remove.exists()).toBe(false); },
+      );
     });
 
-    describe('When show avatar', function () {
-      beforeEach(function () {
-        propsData = {
-          ...basePropsData,
-          avatarProps: {
-            SRC: 'image.png',
-            ALT: 'Avatar image',
-          },
+    describe('When show avatar', () => {
+      beforeEach(() => {
+        slots = {
+          avatar: EmptyComponentFixture,
         };
         _setWrappers();
       });
-      it('should render avatar', function () { assert.exists(avatar); });
+      it('should render avatar', () => { expect(avatar.exists()).toBeTruthy(); });
     });
 
-    describe('With icon slot', function () {
-      beforeEach(function () {
+    describe('With icon slot', () => {
+      beforeEach(() => {
         slots = {
           icon: EmptyComponentFixture,
         };
         _setWrappers();
       });
-      it('should render icon', function () { assert.exists(icon); });
+      it('should render icon', () => { expect(icon.exists()).toBeTruthy(); });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    beforeEach(function () {
+  describe('Interactivity Tests', () => {
+    beforeEach(() => {
       _setWrappers();
     });
 
-    describe('When close button is clicked', function () {
-      beforeEach(async function () {
+    describe('When close button is clicked', () => {
+      beforeEach(async () => {
         await remove.trigger('click');
       });
-      it('should emit close event', function () {
-        assert.property(wrapper.emitted(), 'close');
+      it('should emit close event', () => {
+        expect('close' in wrapper.emitted()).toBeTruthy();
       });
     });
 
-    describe('When delete is pressed on a chip', function () {
-      beforeEach(async function () {
+    describe('When delete is pressed on a chip', () => {
+      beforeEach(async () => {
         await chip.trigger('keyup', { code: 'DELETE' });
       });
-      it('should emit close event', function () {
-        assert.property(wrapper.emitted(), 'close');
+      it('should emit close event', () => {
+        expect('close' in wrapper.emitted()).toBeTruthy();
       });
     });
   });

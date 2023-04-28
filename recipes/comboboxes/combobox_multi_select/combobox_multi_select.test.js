@@ -1,22 +1,20 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
-import sinon from 'sinon';
 import DtPopover from '@/components/popover/popover';
 import { itBehavesLikeDoesNotHaveClass } from '@/tests/shared_examples/classes';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   showList: true,
   label: 'Label Text',
   visuallyHiddenCloseLabel: 'Close combobox',
 };
 
-describe('DtRecipeComboboxMultiSelect Tests', function () {
+describe('DtRecipeComboboxMultiSelect Tests', () => {
   // Wrappers
   let wrapper;
   let chips;
@@ -26,7 +24,7 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
   let validationMsg;
 
   // Environment
-  let props = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -52,105 +50,111 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
   };
 
   // Setup
-  before(function () {
+  beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
   });
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
   // Teardown
-  afterEach(function () {
-    props = basePropsData;
+  afterEach(() => {
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
     wrapper.unmount();
   });
 
-  describe('Presentation Tests', function () {
-    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    it('should render the input', function () { assert.isTrue(input.exists()); });
-    it('should render the input label', function () {
-      assert.isTrue(inputLabel.exists());
+  describe('Presentation Tests', () => {
+    it(
+      'should render the component',
+      () => { expect(wrapper.exists()).toBe(true); },
+    );
+    it('should render the input', () => { expect(input.exists()).toBe(true); });
+    it('should render the input label', () => {
+      expect(inputLabel.exists()).toBe(true);
     });
-    it('should not render the chip if no selection', function () {
-      assert.isTrue(chips.length === 0);
+    it('should not render the chip if no selection', () => {
+      expect(chips.length).toBe(0);
     });
-    it('should not render the visually hidden close button', async function () {
-      assert.isFalse(wrapper
+    it('should not render the visually hidden close button', async () => {
+      await input.trigger('focus');
+      expect(wrapper
         .findComponent(DtPopover)
         .findComponent({ ref: 'content' })
         .find('[data-qa="dt-sr-only-close-button"]')
-        .exists(),
-      );
+        .exists()).toBe(false);
     });
 
-    describe('When description is provided', function () {
-      beforeEach(async function () {
+    describe('When description is provided', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ description: 'Description Text' });
         _setChildWrappers();
       });
-      it('should render description', async function () {
-        assert.isTrue(inputDescription.exists());
+      it('should render description', async () => {
+        expect(inputDescription.exists()).toBe(true);
       });
     });
 
-    describe('When labelVisible prop is false', function () {
-      beforeEach(async function () {
+    describe('When labelVisible prop is false', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ labelVisible: false });
         _setChildWrappers();
       });
-      it('should not render label', async function () {
-        assert.isFalse(inputLabel.exists());
+      it('should not render label', async () => {
+        expect(inputLabel.exists()).toBe(false);
       });
-      it('should still set aria-label even if label visible is false', async function () {
-        assert.equal(input.attributes('aria-label'), basePropsData.label);
-      });
+      it(
+        'should still set aria-label even if label visible is false',
+        async () => {
+          expect(input.attributes('aria-label')).toEqual(baseProps.label);
+        },
+      );
     });
 
-    describe('Should render the chips if any selection', function () {
+    describe('Should render the chips if any selection', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         await wrapper.setProps({ selectedItems: ['1', '2'] });
         _setChildWrappers();
       });
 
-      it('should render the chip component', function () {
-        assert.isTrue(chips.length > 0);
+      it('should render the chip component', () => {
+        expect(chips.length).toBeGreaterThan(0);
       });
 
-      it('should be two chip components', function () {
-        assert.equal(chips.length, 2);
+      it('should be two chip components', () => {
+        expect(chips.length).toEqual(2);
       });
     });
 
-    describe('When visuallyHiddenClose is true', function () {
-      beforeEach(async function () {
+    describe('When visuallyHiddenClose is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ visuallyHiddenClose: true });
         await input.trigger('focus');
         _setChildWrappers();
       });
 
-      it('should contain a visually hidden close button', async function () {
-        assert.isTrue(wrapper
+      it('should contain a visually hidden close button', async () => {
+        expect(wrapper
           .findComponent(DtPopover)
           .findComponent({ ref: 'content' })
           .find('[data-qa="dt-sr-only-close-button"]')
-          .exists())
+          .exists()).toBe(true)
         ;
       });
 
-      describe('When visuallyHiddenCloseLabel is null', function () {
-        beforeEach(async function () {
+      describe('When visuallyHiddenCloseLabel is null', () => {
+        beforeEach(async () => {
           initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
-        afterEach(function () {
+        afterEach(() => {
           cleanSpy();
         });
 
@@ -159,118 +163,121 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
     });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     let firstChip;
     let secondChip;
-    beforeEach(async function () {
+    beforeEach(async () => {
       await wrapper.setProps({ selectedItems: ['1', '2'] });
       _setChildWrappers();
       firstChip = chips.at(0);
       secondChip = chips.at(1);
     });
 
-    describe('Should navigate between chips', function () {
-      describe('When second chip is focused', function () {
-        beforeEach(async function () {
+    describe('Should navigate between chips', () => {
+      describe('When second chip is focused', () => {
+        beforeEach(async () => {
           await secondChip.trigger('focus');
         });
 
-        describe('When LEFT key is pressed', function () {
-          beforeEach(async function () {
+        describe('When LEFT key is pressed', () => {
+          beforeEach(async () => {
             await secondChip.trigger('keyup', { code: 'arrowleft' });
           });
 
-          it('should focus the first chip', function () {
-            assert.strictEqual(document.activeElement, firstChip.element);
+          it('should focus the first chip', () => {
+            expect(document.activeElement).toBe(firstChip.element);
           });
         });
       });
 
-      describe('When first chip is focused', function () {
-        beforeEach(async function () {
+      describe('When first chip is focused', () => {
+        beforeEach(async () => {
           await firstChip.trigger('focus');
         });
 
-        describe('When RIGHT key is pressed', function () {
-          beforeEach(async function () {
+        describe('When RIGHT key is pressed', () => {
+          beforeEach(async () => {
             await firstChip.trigger('keyup', { code: 'arrowright' });
           });
 
-          it('should focus the second chip', function () {
-            assert.strictEqual(document.activeElement, secondChip.element);
+          it('should focus the second chip', () => {
+            expect(document.activeElement).toBe(secondChip.element);
           });
         });
       });
     });
 
-    describe('Should navigate between last chip and input', function () {
+    describe('Should navigate between last chip and input', () => {
       let lastChip;
-      beforeEach(async function () {
+      beforeEach(async () => {
         await wrapper.setProps({ selectedItems: ['1'] });
         lastChip = chips.at(0);
       });
 
-      describe('When input is focused', function () {
-        beforeEach(async function () {
+      describe('When input is focused', () => {
+        beforeEach(async () => {
           input.trigger('focus');
         });
 
-        describe('When LEFT key is pressed', function () {
-          beforeEach(async function () {
+        describe('When LEFT key is pressed', () => {
+          beforeEach(async () => {
             input.trigger('keyup', { code: 'arrowleft' });
           });
 
-          it('should focus the last chip', function () {
-            assert.strictEqual(document.activeElement, lastChip.element);
+          it('should focus the last chip', () => {
+            expect(document.activeElement).toBe(lastChip.element);
           });
         });
 
-        describe('When BACKSPACE key is pressed', function () {
-          beforeEach(async function () {
+        describe('When BACKSPACE key is pressed', () => {
+          beforeEach(async () => {
             input.trigger('keyup', { code: 'backspace' });
           });
 
-          it('should focus the last chip', function () {
-            assert.strictEqual(document.activeElement, lastChip.element);
+          it('should focus the last chip', () => {
+            expect(document.activeElement).toBe(lastChip.element);
           });
         });
       });
 
-      describe('When the last chip is focused', function () {
-        beforeEach(async function () {
+      describe('When the last chip is focused', () => {
+        beforeEach(async () => {
           lastChip.trigger('focus');
         });
 
-        describe('When RIGHT key is pressed', function () {
-          beforeEach(async function () {
+        describe('When RIGHT key is pressed', () => {
+          beforeEach(async () => {
             lastChip.trigger('keyup', { code: 'arrowright' });
           });
 
-          it('should focus the input', function () {
-            assert.strictEqual(document.activeElement, input.element);
+          it('should focus the input', () => {
+            expect(document.activeElement).toBe(input.element);
           });
         });
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    beforeEach(async function () {
+  describe('Interactivity Tests', () => {
+    beforeEach(async () => {
       await wrapper.setProps({ selectedItems: ['1'] });
       _setChildWrappers();
     });
 
-    it('Should emit "remove" event when close the chip and focus back to input', function () {
-      const chip = chips.at(0);
-      chip.trigger('keyup', { code: 'delete' });
-      assert.equal(wrapper.emitted().remove, '1');
-      assert.strictEqual(document.activeElement, input.element);
-    });
+    it(
+      'Should emit "remove" event when close the chip and focus back to input',
+      () => {
+        const chip = chips.at(0);
+        chip.trigger('keyup', { code: 'delete' });
+        expect(wrapper.emitted().remove[0][0]).toEqual('1');
+        expect(document.activeElement).toBe(input.element);
+      },
+    );
 
-    describe('When sr-only close button is enabled and activated', function () {
+    describe('When sr-only close button is enabled and activated', () => {
       let popoverContainer;
 
-      beforeEach(async function () {
+      beforeEach(async () => {
         await wrapper.setProps({ visuallyHiddenClose: true });
         await input.trigger('focus');
         popoverContainer = wrapper.find('[data-qa="dt-popover-container"]');
@@ -281,14 +288,14 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
           .trigger('click');
       });
 
-      it('Does not contain modal-opened class', function () {
+      it('Does not contain modal-opened class', () => {
         itBehavesLikeDoesNotHaveClass(popoverContainer, 'd-popover__anchor--modal-opened');
       });
     });
   });
 
-  describe('Validation Tests', function () {
-    beforeEach(async function () {
+  describe('Validation Tests', () => {
+    beforeEach(async () => {
       await wrapper.setProps({
         maxSelected: 2,
         maxSelectedMessage: [{
@@ -299,17 +306,17 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
       _setChildWrappers();
     });
 
-    describe('"max-selected" validation', function () {
-      it('should not show warning if not reach max', async function () {
+    describe('"max-selected" validation', () => {
+      it('should not show warning if not reach max', async () => {
         await wrapper.setProps({ selectedItems: ['1'] });
-        assert.isFalse(validationMsg.exists());
+        expect(validationMsg.exists()).toBe(false);
       });
 
-      it('should show warning if reach max', async function () {
+      it('should show warning if reach max', async () => {
         await wrapper.setProps({ selectedItems: ['item1', 'item2', 'item3'] });
         await flushPromises();
         _setChildWrappers();
-        assert.strictEqual(validationMsg.text(), 'More than 2 selected');
+        expect(validationMsg.text()).toBe('More than 2 selected');
       });
     });
   });

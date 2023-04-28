@@ -4,15 +4,15 @@ import {
   itBehavesLikeFailsCustomPropValidation,
 } from '../../tests/shared_examples/validation';
 
-describe('Input Group Mixin Tests', function () {
-  describe('Validation Tests', function () {
-    describe('messages', function () {
+describe('Input Group Mixin Tests', () => {
+  describe('Validation Tests', () => {
+    describe('messages', () => {
       // Test Environment
       const prop = InputGroupMixin.props.messages;
 
       itBehavesLikePassesCustomPropValidation(prop, ['Error']);
 
-      describe('When the provided messages are numeric', function () {
+      describe('When the provided messages are numeric', () => {
         itBehavesLikeFailsCustomPropValidation(prop, [123]);
       });
     });

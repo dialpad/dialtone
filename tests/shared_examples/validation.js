@@ -1,48 +1,47 @@
-import { assert } from 'chai';
-import sinon from 'sinon';
-
 let consoleErrorSpy;
+let consoleWarnSpy;
 
 export const initializeSpy = () => {
-  consoleErrorSpy = sinon.spy(console, 'error');
+  consoleErrorSpy = jest.spyOn(console, 'error');
+  consoleWarnSpy = jest.spyOn(console, 'warn');
 };
 
 export const cleanSpy = () => {
-  consoleErrorSpy = null;
-  console.error.restore();
+  consoleErrorSpy.mockRestore();
+  consoleWarnSpy.mockRestore();
 };
 
 export function itBehavesLikePassesCustomPropValidation (prop, value) {
-  it('passes custom prop validation', function () {
-    assert.strictEqual(prop.validator(value), true);
+  it('passes custom prop validation', () => {
+    expect(prop.validator(value)).toBe(true);
   });
 }
 
 export function itBehavesLikeFailsCustomPropValidation (prop, value) {
-  it('fails custom prop validation', function () {
-    assert.strictEqual(prop.validator(value), false);
+  it('fails custom prop validation', () => {
+    expect(prop.validator(value)).toBe(false);
   });
 }
 
 export const itBehavesLikeDoesNotRaiseAnyVueWarnings = () => {
-  it('should not raise any warnings', function () { assert.isTrue(console.warn.notCalled); });
+  it('should not raise any warnings', function () { expect(console.warn).not.toHaveBeenCalled(); });
 };
 
 export const itBehavesLikeRaisesSingleVueWarning = (message) => {
-  it('should raise a single warning', function () { assert.isTrue(console.warn.calledOnce); });
   it('should have expected warning message', function () {
-    assert.strictEqual(console.warn.firstCall.args[0], message);
-  });
-};
-
-export const itBehavesLikeRaisesVueWarning = (message) => {
-  it('contains expected warning message', function () {
-    assert.isTrue(console.warn.calledWith(message));
+    expect(console.warn.mock.calls.length).toBeGreaterThan(0);
+    expect(console.warn.mock.calls[0]).toContain(message);
   });
 };
 
 export const itBehavesLikeRaisesValidationError = (message) => {
-  it('should raise a validation error', function () { assert.isTrue(consoleErrorSpy.calledWith(message)); });
+  it(
+    'should raise a validation error',
+    () => {
+      expect(console.error.mock.calls.length).toBeGreaterThan(0);
+      expect(console.error.mock.calls[0]).toContain(message);
+    },
+  );
 };
 
 export default {

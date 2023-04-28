@@ -1,20 +1,19 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtListItemGroup from './list_item_group.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   heading: 'Heading',
   id: 'list-item-group',
 };
 
-describe('DtListItemGroup Tests', function () {
+describe('DtListItemGroup Tests', () => {
   // Wrappers
   let wrapper;
   let heading;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -26,7 +25,7 @@ describe('DtListItemGroup Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtListItemGroup, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
@@ -34,35 +33,35 @@ describe('DtListItemGroup Tests', function () {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {
-  });
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
   // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
-    describe('List Group has a heading set', function () {
-      it('displays the heading correctly', function () {
-        assert.strictEqual(heading.text(), basePropsData.heading);
+  describe('Presentation Tests', () => {
+    describe('List Group has a heading set', () => {
+      it('displays the heading correctly', () => {
+        expect(heading.text()).toBe(props.heading);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('List Group has a heading set', function () {
-      it('the root ul is aria-labelledby the id of the header element', function () {
-        assert.strictEqual(wrapper.attributes('aria-labelledby'), basePropsData.id + '-heading');
-      });
+  describe('Accessibility Tests', () => {
+    describe('List Group has a heading set', () => {
+      it(
+        'the root ul is aria-labelledby the id of the header element',
+        () => {
+          expect(wrapper.attributes('aria-labelledby')).toBe(baseProps.id + '-heading');
+        },
+      );
     });
   });
 });

@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtListSection from './list_section.vue';
 import { h } from 'vue';
@@ -16,7 +15,7 @@ const baseSlotsData = {
   ],
 };
 
-describe('ListSection tests', function () {
+describe('ListSection tests', () => {
   let wrapper;
 
   const props = baseProps;
@@ -48,119 +47,119 @@ describe('ListSection tests', function () {
     _setWrappers();
   });
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default slot content', function () {
-      it('Should render the component', function () {
-        assert.isTrue(wrapper.exists());
+  describe('Presentation Tests', () => {
+    describe('When rendered with default slot content', () => {
+      it('Should render the component', () => {
+        expect(wrapper.exists()).toBe(true);
       });
 
-      it('Id should be set correctly on the root element', function () {
-        assert.isTrue(rootElement.exists());
+      it('Id should be set correctly on the root element', () => {
+        expect(rootElement.exists()).toBe(true);
       });
 
-      it('Slot content should be displayed', function () {
-        assert.strictEqual(content.text(), 'first itemsecond itemthird item');
+      it('Slot content should be displayed', () => {
+        expect(content.text()).toBe('first itemsecond itemthird item');
       });
 
-      it('Header should not be displayed', function () {
-        assert.isFalse(header.exists());
+      it('Header should not be displayed', () => {
+        expect(header.exists()).toBe(false);
       });
     });
 
-    describe('When header is passed in as a prop', function () {
+    describe('When header is passed in as a prop', () => {
       const headerText = 'I am a header';
-      beforeEach(async function () {
+      beforeEach(async () => {
         await wrapper.setProps({ header: headerText });
         _setChildWrappers();
       });
-      it('Header text is displayed correctly', function () {
-        assert.strictEqual(header.text(), headerText);
+      it('Header text is displayed correctly', () => {
+        expect(header.text()).toBe(headerText);
       });
     });
 
-    describe('When separator is set to true', function () {
-      beforeEach(async function () {
+    describe('When separator is set to true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ separator: true });
       });
-      it('separator is displayed correctly', function () {
-        assert.isTrue(rootElement.classes('d-bb'));
+      it('separator is displayed correctly', () => {
+        expect(rootElement.classes('d-bb')).toBe(true);
       });
     });
 
-    describe('When maxDisplayed is set to a number less than number of entries', function () {
+    describe('When maxDisplayed is set to a number less than number of entries', () => {
       const maxDisplayed = 2;
-      beforeEach(async function () {
+      beforeEach(async () => {
         await wrapper.setProps({ maxDisplayed });
         _setChildWrappers();
       });
 
-      it('show more button is displayed', async function () {
-        assert.isTrue(showMoreLessButton.isVisible());
+      it('show more button is displayed', async () => {
+        expect(showMoreLessButton.isVisible()).toBe(true);
       });
 
-      it('the correct number of entries is shown', async function () {
-        assert.strictEqual(contentItems.length, maxDisplayed);
+      it('the correct number of entries is shown', async () => {
+        expect(contentItems.length).toBe(maxDisplayed);
       });
 
-      describe('Show more was clicked', function () {
-        beforeEach(async function () {
+      describe('Show more was clicked', () => {
+        beforeEach(async () => {
           await showMoreLessButton.trigger('click');
         });
 
-        it('show less button is displayed', function () {
-          assert.strictEqual(showMoreLessButton.text(), 'Show less');
+        it('show less button is displayed', () => {
+          expect(showMoreLessButton.text()).toBe('Show less');
         });
       });
     });
 
-    describe('When maxDisplayed is set to a number greater than number of entries', function () {
-      beforeEach(async function () {
+    describe('When maxDisplayed is set to a number greater than number of entries', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ maxDisplayed: 5 });
         _setChildWrappers();
       });
-      it('show more button is not displayed', function () {
-        assert.isFalse(showMoreLessButton.exists());
+      it('show more button is not displayed', () => {
+        expect(showMoreLessButton.exists()).toBe(false);
       });
-      it('all entries are shown', function () {
-        assert.strictEqual(contentItems.length, 3);
+      it('all entries are shown', () => {
+        expect(contentItems.length).toBe(3);
       });
     });
 
-    describe('When maxDisplayed is set to 0', function () {
-      beforeEach(async function () {
+    describe('When maxDisplayed is set to 0', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ maxDisplayed: 0 });
         _setChildWrappers();
       });
-      it('show more button is not displayed', function () {
-        assert.isFalse(showMoreLessButton.exists());
+      it('show more button is not displayed', () => {
+        expect(showMoreLessButton.exists()).toBe(false);
       });
-      it('all entries are shown', function () {
-        assert.strictEqual(contentItems.length, 3);
+      it('all entries are shown', () => {
+        expect(contentItems.length).toBe(3);
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    describe('When maxDisplayed is set to a number less than number of entries', function () {
+  describe('Interactivity Tests', () => {
+    describe('When maxDisplayed is set to a number less than number of entries', () => {
       const maxDisplayed = 2;
-      beforeEach(async function () {
+      beforeEach(async () => {
         await wrapper.setProps({ maxDisplayed });
         _setChildWrappers();
       });
 
-      describe('When show more button is clicked', function () {
-        beforeEach(async function () {
+      describe('When show more button is clicked', () => {
+        beforeEach(async () => {
           await showMoreLessButton.trigger('click');
           _setChildWrappers();
         });
 
-        it('displays all entries if show more button is clicked', async function () {
-          assert.strictEqual(contentItems.length, 3);
+        it('displays all entries if show more button is clicked', async () => {
+          expect(contentItems.length).toBe(3);
         });
       });
 
-      describe('When show less button is clicked', function () {
-        beforeEach(async function () {
+      describe('When show less button is clicked', () => {
+        beforeEach(async () => {
           // click show more button to change to a "show less" button
           await showMoreLessButton.trigger('click');
           // cick again to change back to show more
@@ -168,9 +167,12 @@ describe('ListSection tests', function () {
           _setChildWrappers();
         });
 
-        it('displays maxDisplayed number of entries if show less button is clicked', async function () {
-          assert.strictEqual(contentItems.length, maxDisplayed);
-        });
+        it(
+          'displays maxDisplayed number of entries if show less button is clicked',
+          async () => {
+            expect(contentItems.length).toBe(maxDisplayed);
+          },
+        );
       });
     });
   });

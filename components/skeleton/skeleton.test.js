@@ -1,8 +1,7 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtSkeleton from './skeleton.vue';
 
-describe('DtSkeleton Tests', function () {
+describe('DtSkeleton Tests', () => {
   // Wrappers
   let wrapper;
   let skeletonTextBody;
@@ -28,82 +27,82 @@ describe('DtSkeleton Tests', function () {
     _setWrappers();
   };
 
-  describe('Presentation Tests', function () {
-    it('should render the component', function () {
+  describe('Presentation Tests', () => {
+    it('should render the component', () => {
       _mountWrapper();
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
-    describe('Skeleton text', function () {
-      it('should render the skeleton body', function () {
-        assert.isTrue(skeletonTextBody.exists());
+    describe('Skeleton text', () => {
+      it('should render the skeleton body', () => {
+        expect(skeletonTextBody.exists()).toBe(true);
       });
 
-      it('should render the skeleton heading', async function () {
+      it('should render the skeleton heading', async () => {
         _mountWrapper({
           textOption: {
             type: 'heading',
           },
         });
-        assert.isTrue(skeletonTextHeading.exists());
+        expect(skeletonTextHeading.exists()).toBe(true);
       });
     });
 
-    describe('Skeleton paragraph', function () {
-      before(function () {
+    describe('Skeleton paragraph', () => {
+      beforeAll(() => {
         _mountWrapper({
           paragraphOption: true,
         });
       });
 
-      it('should render the skeleton paragraph', async function () {
-        assert.isTrue(skeletonParagraph.exists());
+      it('should render the skeleton paragraph', async () => {
+        expect(skeletonParagraph.exists()).toBe(true);
       });
 
-      it('should render rows', async function () {
-        assert.equal(skeletonParagraphRows.length, 3);
+      it('should render rows', async () => {
+        expect(skeletonParagraphRows.length).toEqual(3);
       });
     });
 
-    describe('Skeleton list item', function () {
-      before(function () {
+    describe('Skeleton list item', () => {
+      beforeAll(() => {
         _mountWrapper({
           listItemOption: true,
         });
       });
 
-      it('should render the skeleton list item', async function () {
-        assert.isTrue(skeletonListItem.exists());
+      it('should render the skeleton list item', async () => {
+        expect(skeletonListItem.exists()).toBe(true);
       });
 
-      it('should render skeleton paragraph', async function () {
-        assert.isTrue(skeletonParagraph.exists());
+      it('should render skeleton paragraph', async () => {
+        expect(skeletonParagraph.exists()).toBe(true);
       });
     });
 
-    describe('Skeleton shape', function () {
-      before(function () {
+    describe('Skeleton shape', () => {
+      beforeAll(() => {
         _mountWrapper({
           shapeOption: true,
         });
       });
 
-      it('should render skeleton shape', async function () {
-        assert.isTrue(skeletonShape.exists());
+      it('should render skeleton shape', async () => {
+        expect(skeletonShape.exists()).toBe(true);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When an aria-label is provided', function () {
-      before(function () {
+  describe('Accessibility Tests', () => {
+    describe('When an aria-label is provided', () => {
+      beforeAll(() => {
         _mountWrapper({
           ariaLabel: 'ariaLabel',
         });
       });
 
-      it('should be set aria-label value', function () {
-        assert.strictEqual(wrapper.attributes('aria-label'), 'ariaLabel');
+      it('should be set aria-label value', () => {
+        expect(wrapper.attributes('aria-label')).toBe('ariaLabel');
       });
     });
   });

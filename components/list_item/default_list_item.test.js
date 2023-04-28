@@ -1,8 +1,7 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtDefaultListItem from './default_list_item.vue';
 
-describe('DtDefaultListItem tests', function () {
+describe('DtDefaultListItem tests', () => {
   // Wrappers
   let wrapper;
   let leftWrapper;
@@ -33,81 +32,120 @@ describe('DtDefaultListItem tests', function () {
   });
 
   // Test Teardown
-  afterEach(function () {
+  afterEach(() => {
     slots = {};
   });
 
-  describe('Presentation Tests', function () {
-    describe('When none of the slot contents are provided', function () {
+  describe('Presentation Tests', () => {
+    describe('When none of the slot contents are provided', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should not render the left slot wrapper', function () { assert.isFalse(leftWrapper.exists()); });
-      it('should not render the right slot wrapper', function () { assert.isFalse(rightWrapper.exists()); });
-      it('should not render the subtitle slot wrapper', function () { assert.isFalse(subtitleWrapper.exists()); });
-      it('should not render the bottom slot wrapper', function () { assert.isFalse(bottomWrapper.exists()); });
+      it(
+        'should not render the left slot wrapper',
+        () => { expect(leftWrapper.exists()).toBe(false); },
+      );
+      it(
+        'should not render the right slot wrapper',
+        () => { expect(rightWrapper.exists()).toBe(false); },
+      );
+      it(
+        'should not render the subtitle slot wrapper',
+        () => { expect(subtitleWrapper.exists()).toBe(false); },
+      );
+      it(
+        'should not render the bottom slot wrapper',
+        () => { expect(bottomWrapper.exists()).toBe(false); },
+      );
     });
 
-    describe('When left content is provided', function () {
+    describe('When left content is provided', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         slots = { left: 'left' };
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should render the slot wrapper', function () { assert.isTrue(leftWrapper.exists()); });
-      it('should render the provided content', function () { assert.isTrue(wrapper.text().includes('left')); });
+      it(
+        'should render the slot wrapper',
+        () => { expect(leftWrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render the provided content',
+        () => { expect(wrapper.text().includes('left')).toBe(true); },
+      );
     });
 
-    describe('When right content is provided', function () {
+    describe('When right content is provided', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         slots = { right: 'right' };
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should render the slot wrapper', function () { assert.isTrue(rightWrapper.exists()); });
-      it('should render the provided content', function () { assert.isTrue(wrapper.text().includes('right')); });
+      it(
+        'should render the slot wrapper',
+        () => { expect(rightWrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render the provided content',
+        () => { expect(wrapper.text().includes('right')).toBe(true); },
+      );
     });
 
-    describe('When subtitle content is provided', function () {
+    describe('When subtitle content is provided', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         slots = { subtitle: 'subtitle' };
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should render the slot wrapper', function () { assert.isTrue(subtitleWrapper.exists()); });
-      it('should render the provided content', function () { assert.isTrue(wrapper.text().includes('subtitle')); });
+      it(
+        'should render the slot wrapper',
+        () => { expect(subtitleWrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render the provided content',
+        () => { expect(wrapper.text().includes('subtitle')).toBe(true); },
+      );
     });
 
-    describe('When bottom content is provided', function () {
+    describe('When bottom content is provided', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         slots = { bottom: 'bottom' };
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should render the slot wrapper', function () { assert.isTrue(bottomWrapper.exists()); });
-      it('should render the provided content', function () { assert.isTrue(wrapper.text().includes('bottom')); });
+      it(
+        'should render the slot wrapper',
+        () => { expect(bottomWrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render the provided content',
+        () => { expect(wrapper.text().includes('bottom')).toBe(true); },
+      );
     });
 
-    describe('When selected content is provided', function () {
+    describe('When selected content is provided', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         slots = { selected: 'selected' };
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should render the provided content', function () { assert.isTrue(wrapper.text().includes('selected')); });
+      it(
+        'should render the provided content',
+        () => { expect(wrapper.text().includes('selected')).toBe(true); },
+      );
     });
   });
 });

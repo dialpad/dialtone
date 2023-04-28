@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtRecipeGroupRow from './group_row.vue';
 
@@ -10,7 +9,7 @@ const baseProps = {
   avatarSrc: 'person.png',
 };
 
-describe('DtRecipeGroupRow Tests', function () {
+describe('DtRecipeGroupRow Tests', () => {
   // Wrappers
   let wrapper;
   let description;
@@ -38,9 +37,6 @@ describe('DtRecipeGroupRow Tests', function () {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {});
-
   beforeEach(function () {
     props = baseProps;
     slots = {};
@@ -48,51 +44,51 @@ describe('DtRecipeGroupRow Tests', function () {
   });
 
   // Teardown
-  afterEach(function () {
+  afterEach(() => {
     props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
-    describe('When the group row renders', function () {
+  describe('Presentation Tests', () => {
+    describe('When the group row renders', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should exist', function () { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
 
-      it('should render the description', function () {
-        assert.strictEqual(description.text(), baseProps.names);
+      it('should render the description', () => {
+        expect(description.text()).toBe(props.names);
       });
     });
 
-    describe('When a unreadCount is provided', function () {
+    describe('When a unreadCount is provided', () => {
       // Test Environment
       const unreadCount = '25';
       const hasUnreads = true;
 
       // Test Setup
-      beforeEach(function () {
-        props = { ...props, hasUnreads, unreadCount };
+      beforeEach(() => {
+        props = { ...baseProps, hasUnreads, unreadCount };
         _setWrappers();
       });
 
-      it('should render the unreadCount', function () {
-        assert.strictEqual(unreadBadge.text(), unreadCount);
+      it('should render the unreadCount', () => {
+        expect(unreadBadge.text()).toBe(unreadCount);
       });
     });
 
-    describe('When selected is provided', function () {
+    describe('When selected is provided', () => {
       // Test Setup
-      beforeEach(function () {
-        props = { ...props, selected: true };
+      beforeEach(() => {
+        props = { ...baseProps, selected: true };
         _setWrappers();
       });
 
-      it('should render the selected group row', function () {
-        assert.isTrue(wrapper.classes().includes('dt-leftbar-row--selected'));
+      it('should render the selected group row', () => {
+        expect(wrapper.classes().includes('dt-leftbar-row--selected')).toBe(true);
       });
     });
   });

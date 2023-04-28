@@ -1,14 +1,13 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtPagination from './pagination.vue';
-import { DtButton } from '@';
+import { DtButton } from '@/components/button';
 
 // Constants
 const getPageNumberAriaLabel = (page) => {
   return `Page number ${page}`;
 };
 
-const basePropsData = {
+const baseProps = {
   totalPages: 5,
   prevAriaLabel: 'previous',
   nextAriaLabel: 'next',
@@ -16,7 +15,7 @@ const basePropsData = {
   pageNumberAriaLabel: getPageNumberAriaLabel,
 };
 
-describe('DtPagination Tests', function () {
+describe('DtPagination Tests', () => {
   // Wrappers
   let wrapper;
   let prev;
@@ -25,7 +24,7 @@ describe('DtPagination Tests', function () {
   let pages;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let slots = {};
   let listeners;
 
@@ -39,7 +38,7 @@ describe('DtPagination Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtPagination, {
-      propsData,
+      props,
       slots,
       listeners,
     });
@@ -47,52 +46,69 @@ describe('DtPagination Tests', function () {
   };
 
   // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    props = baseProps;
     slots = {};
   });
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default props', function () {
-      beforeEach(function () {
+  describe('Presentation Tests', () => {
+    describe('When rendered with default props', () => {
+      beforeEach(() => {
         _setWrappers();
       });
-      it('should not render separator', function () { assert.lengthOf(separators, 0); });
-      it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-      it('should render prev button', function () { assert.exists(prev, 'previous button exists'); });
-      it('should disable prev button', function () { assert.strictEqual(prev.element.disabled, true); });
-      it('should render next button', function () { assert.exists(next, 'next button exists'); });
-      it('should enable next button', function () { assert.strictEqual(next.element.disabled, false); });
-      it('prev button should have aria-label', function () {
-        assert.equal(prev.attributes('aria-label'), 'previous');
+      it(
+        'should not render separator',
+        () => { expect(separators.length).toBe(0); },
+      );
+      it(
+        'should render the component',
+        () => { expect(wrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render prev button',
+        () => { expect(prev.exists()).toBeTruthy(); },
+      );
+      it(
+        'should disable prev button',
+        () => { expect(prev.element.disabled).toBe(true); },
+      );
+      it(
+        'should render next button',
+        () => { expect(next.exists()).toBeTruthy(); },
+      );
+      it(
+        'should enable next button',
+        () => { expect(next.element.disabled).toBe(false); },
+      );
+      it('prev button should have aria-label', () => {
+        expect(prev.attributes('aria-label')).toEqual('previous');
       });
-      it('next button should have aria-label', function () {
-        assert.equal(next.attributes('aria-label'), 'next');
+      it('next button should have aria-label', () => {
+        expect(next.attributes('aria-label')).toEqual('next');
       });
-      it('first page should have aria-label', function () {
-        assert.equal(pages.at(1).attributes('aria-label'), 'Page number 1');
+      it('first page should have aria-label', () => {
+        expect(pages.at(1).attributes('aria-label')).toEqual('Page number 1');
       });
     });
 
-    describe('When rendered with active page', function () {
-      beforeEach(async function () {
-        propsData = {
-          ...basePropsData,
+    describe('When rendered with active page', () => {
+      beforeEach(async () => {
+        props = {
+          ...baseProps,
           totalPages: 10,
           activePage: 9,
         };
         await _setWrappers();
       });
-      it('should render one separators', function () {
-        assert.exists(separators, 'separators exists');
-        assert.strictEqual(separators.length, 1);
+      it('should render one separators', () => {
+        expect(separators.length).toBe(1);
       });
     });
 
-    describe('When rendered with more pages', function () {
-      beforeEach(async function () {
-        propsData = {
-          ...basePropsData,
+    describe('When rendered with more pages', () => {
+      beforeEach(async () => {
+        props = {
+          ...baseProps,
           totalPages: 15,
           activePage: 7,
           maxVisible: 7,
@@ -100,49 +116,57 @@ describe('DtPagination Tests', function () {
         };
         await _setWrappers();
       });
-      it('should render two separators', function () {
-        assert.exists(separators, 'separators exists');
-        assert.lengthOf(separators, 2);
+      it('should render two separators', () => {
+        expect(separators.length).toBe(2);
         // case when maxVisible is even - we round to the nearest odd when active page is in the mid-range
-        assert.lengthOf(pages, 9);
+        expect(pages.length).toBe(9);
       });
     });
 
-    describe('When maxVisible is even', function () {
-      beforeEach(async function () {
-        propsData = {
-          ...basePropsData,
+    describe('When maxVisible is even', () => {
+      beforeEach(async () => {
+        props = {
+          ...baseProps,
           totalPages: 15,
           activePage: 7,
           maxVisible: 6,
         };
         await _setWrappers();
       });
-      it('should render less than maxVisible when active page is in mid range', function () {
-        assert.lengthOf(pages, 7);
-      });
+      it(
+        'should render less than maxVisible when active page is in mid range',
+        () => {
+          expect(pages.length).toBe(7);
+        },
+      );
     });
   });
 
-  describe('Interactivity Tests', function () {
-    beforeEach(function () {
+  describe('Interactivity Tests', () => {
+    beforeEach(() => {
       _setWrappers();
     });
 
-    describe('When next button is clicked', function () {
-      beforeEach(async function () {
+    describe('When next button is clicked', () => {
+      beforeEach(async () => {
         await next.trigger('click');
       });
-      it('should emit change event', function () {
-        assert.property(wrapper.emitted(), 'change');
+      it('should emit change event', () => {
+        expect('change' in wrapper.emitted()).toBeTruthy();
       });
-      it('should enable prev button', function () { assert.strictEqual(prev.element.disabled, false); });
-      it('should update page value', function () { assert.equal(wrapper.vm.currentPage, 2); });
-      it('should disable prev button and update page', async function () {
+      it(
+        'should enable prev button',
+        () => { expect(prev.element.disabled).toBe(false); },
+      );
+      it(
+        'should update page value',
+        () => { expect(wrapper.vm.currentPage).toEqual(2); },
+      );
+      it('should disable prev button and update page', async () => {
         await prev.trigger('click');
-        assert.property(wrapper.emitted(), 'change');
-        assert.strictEqual(prev.element.disabled, true);
-        assert.equal(wrapper.vm.currentPage, 1);
+        expect('change' in wrapper.emitted()).toBeTruthy();
+        expect(prev.element.disabled).toBe(true);
+        expect(wrapper.vm.currentPage).toEqual(1);
       });
     });
   });

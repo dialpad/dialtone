@@ -1,10 +1,9 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtRecipeGroupedChip from './grouped_chip.vue';
 import { DtIcon } from '@/components/icon';
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 const baseSlotsData = {
   leftIcon: '<dt-icon name="clock" />',
   leftContent: `<div>0.13</div>`,
@@ -12,7 +11,7 @@ const baseSlotsData = {
   rightContent: `<div>0.33</div>`,
 };
 
-describe('DtRecipeGroupedChip Tests', function () {
+describe('DtRecipeGroupedChip Tests', () => {
   // Wrappers
   let wrapper;
   let rootElement;
@@ -22,7 +21,7 @@ describe('DtRecipeGroupedChip Tests', function () {
   let rightChipContentElement;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -40,7 +39,7 @@ describe('DtRecipeGroupedChip Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeGroupedChip, {
-      propsData,
+      props,
       global: { components: { 'dt-icon': DtIcon } },
       attrs,
       slots,
@@ -49,52 +48,48 @@ describe('DtRecipeGroupedChip Tests', function () {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {
-  });
-
   // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     /*
      * Test(s) to ensure that the component is correctly rendering
      */
 
-    describe('Split chip state render', function () {
-      beforeEach(async function () {
+    describe('Split chip state render', () => {
+      beforeEach(async () => {
         slots = baseSlotsData;
         _setWrappers();
       });
 
-      it('Should render grouped chip component', function () {
-        assert.isTrue(wrapper.exists());
-        assert.isTrue(rootElement.exists());
+      it('Should render grouped chip component', () => {
+        expect(wrapper.exists()).toBe(true);
+        expect(rootElement.exists()).toBe(true);
       });
 
-      it('Should render left side chip icon element', function () {
-        assert.isTrue(leftChipIconElement.findComponent(DtIcon).exists());
+      it('Should render left side chip icon element', () => {
+        expect(leftChipIconElement.findComponent(DtIcon).exists()).toBe(true);
       });
 
-      it('Should render left side chip content', function () {
-        assert.strictEqual(leftChipContentElement.text(), '0.13');
+      it('Should render left side chip content', () => {
+        expect(leftChipContentElement.text()).toBe('0.13');
       });
 
-      it('Should not render right side chip component', function () {
-        assert.isTrue(rightChipIconElement.exists());
+      it('Should not render right side chip component', () => {
+        expect(rightChipIconElement.exists()).toBe(true);
       });
 
-      it('Should render right side chip icon element', function () {
-        assert.isTrue(rightChipIconElement.findComponent(DtIcon).exists());
+      it('Should render right side chip icon element', () => {
+        expect(rightChipIconElement.findComponent(DtIcon).exists()).toBe(true);
       });
 
-      it('Should render right side chip content', function () {
-        assert.strictEqual(rightChipContentElement.text(), '0.33');
+      it('Should render right side chip content', () => {
+        expect(rightChipContentElement.text()).toBe('0.33');
       });
     });
   });

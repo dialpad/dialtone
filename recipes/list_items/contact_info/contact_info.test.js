@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtRecipeContactInfo from './contact_info.vue';
 
@@ -15,7 +14,7 @@ const baseSlots = {
   bottom: 'Aerolabs Support',
 };
 
-describe('DtRecipeContactInfo Tests', function () {
+describe('DtRecipeContactInfo Tests', () => {
   // Wrappers
   let wrapper;
   let rootElement;
@@ -64,35 +63,35 @@ describe('DtRecipeContactInfo Tests', function () {
     provide = {};
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     /*
      * Test(s) to ensure that the component is correctly rendering
      */
 
-    describe('When pass default content', function () {
-      it('Should render contact info component', function () {
-        assert.isTrue(wrapper.exists());
-        assert.isTrue(rootElement.exists());
+    describe('When pass default content', () => {
+      it('Should render contact info component', () => {
+        expect(wrapper.exists()).toBe(true);
+        expect(rootElement.exists()).toBe(true);
       });
-      it('Should display header content correctly', function () {
-        assert.isTrue(headerElement.exists());
-        assert.strictEqual(headerElement.text(), 'Joseph Lumaban');
+      it('Should display header content correctly', () => {
+        expect(headerElement.exists()).toBe(true);
+        expect(headerElement.text()).toBe('Joseph Lumaban');
       });
-      it('Should render avatar component', function () {
-        assert.isTrue(avatarElement.exists());
+      it('Should render avatar component', () => {
+        expect(avatarElement.exists()).toBe(true);
       });
-      it('Should render subtitle content correctly', function () {
-        assert.isTrue(subtitleElement.exists());
-        assert.strictEqual(subtitleElement.text(), '+1 (415) 123-4567');
+      it('Should render subtitle content correctly', () => {
+        expect(subtitleElement.exists()).toBe(true);
+        expect(subtitleElement.text()).toBe('+1 (415) 123-4567');
       });
-      it('Should render bottom content correctly', function () {
-        assert.isTrue(bottomElement.exists());
-        assert.strictEqual(bottomElement.text(), 'Aerolabs Support');
+      it('Should render bottom content correctly', () => {
+        expect(bottomElement.exists()).toBe(true);
+        expect(bottomElement.text()).toBe('Aerolabs Support');
       });
     });
 
-    describe('When `avatarSrc` is empty and `avatarInitials` is passed', function () {
-      beforeEach(async function () {
+    describe('When `avatarSrc` is empty and `avatarInitials` is passed', () => {
+      beforeEach(async () => {
         await wrapper.setProps({
           avatarSrc: '',
           avatarInitials: 'JL',
@@ -101,24 +100,24 @@ describe('DtRecipeContactInfo Tests', function () {
         await wrapper.vm.$nextTick();
         _setChildWrappers();
       });
-      it('Avatar should display', function () {
-        assert.isTrue(avatarElement.exists());
+      it('Avatar should display', () => {
+        expect(avatarElement.exists()).toBe(true);
       });
-      it('Should display correct initials', function () {
-        assert.strictEqual(avatarElement.text(), 'JL');
+      it('Should display correct initials', () => {
+        expect(avatarElement.text()).toBe('JL');
       });
     });
 
-    describe('When both `avatarSrc` and `avatarInitials` are empty', function () {
-      beforeEach(async function () {
+    describe('When both `avatarSrc` and `avatarInitials` are empty', () => {
+      beforeEach(async () => {
         await wrapper.setProps({
           avatarSrc: '',
           avatarInitials: '',
         });
         _setChildWrappers();
       });
-      it('Should not display avatar', function () {
-        assert.isFalse(avatarElement.exists());
+      it('Should not display avatar', () => {
+        expect(avatarElement.exists()).toBe(false);
       });
     });
   });

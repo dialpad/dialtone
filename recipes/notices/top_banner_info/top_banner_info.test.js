@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtRecipeTopBannerInfo from './top_banner_info.vue';
 import {
@@ -63,42 +62,42 @@ describe('DtRecipeTopBannerInfo Tests', function () {
      * Test(s) to ensure that the component is correctly rendering
      */
 
-    describe('When pass default content', function () {
-      it('Should render info banner component', function () {
-        assert.isTrue(wrapper.exists());
+    describe('When pass default content', () => {
+      it('Should render info banner component', () => {
+        expect(wrapper.exists()).toBe(true);
       });
-      it('Should display content correctly', function () {
-        assert.strictEqual(middleContent.text(), slots.default);
+      it('Should display content correctly', () => {
+        expect(middleContent.text()).toBe(slots.default);
       });
-      it('Should display with default background color', function () {
-        assert.include(rootElement.classes(), 'd-bgc-success');
+      it('Should display with default background color', () => {
+        expect(rootElement.classes()).toContain('d-bgc-success');
       });
     });
 
-    describe('When colorCode is passed', function () {
-      beforeEach(async function () {
+    describe('When colorCode is passed', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ colorCode: 'black100' });
       });
 
-      it('Should display with passed background color', function () {
-        assert.include(rootElement.classes(), 'd-bgc-info');
+      it('Should display with passed background color', () => {
+        expect(rootElement.classes()).toContain('d-bgc-info');
       });
     });
   });
 
-  describe('Validation Tests', function () {
+  describe('Validation Tests', () => {
     /*
      * Test(s) to ensure that custom validators are working as expected
      */
-    describe('ColorCode Validator', function () {
+    describe('ColorCode Validator', () => {
       // Test Environment
       const prop = DtRecipeTopBannerInfo.props.colorCode;
 
-      describe('When provided color code is in COLOR_CODES', function () {
+      describe('When provided color code is in COLOR_CODES', () => {
         itBehavesLikePassesCustomPropValidation(prop, prop.default);
       });
 
-      describe('When provided color code is not in COLOR_CODES', function () {
+      describe('When provided color code is not in COLOR_CODES', () => {
         itBehavesLikeFailsCustomPropValidation(prop, `INVALID_CODE`);
       });
     });

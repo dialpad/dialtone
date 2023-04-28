@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji.js';
@@ -12,7 +11,7 @@ setCustomEmojiUrl('https://mockstorage.com/emojis/');
 // Constants
 const baseProps = {};
 
-describe('DtEmoji Tests', function () {
+describe('DtEmoji Tests', () => {
   // Wrappers
   let wrapper;
   let emoji;
@@ -45,8 +44,6 @@ describe('DtEmoji Tests', function () {
   };
 
   // Setup
-  before(function () {});
-  beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
@@ -54,120 +51,120 @@ describe('DtEmoji Tests', function () {
     attrs = {};
     slots = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     /*
      * Test(s) to ensure that the component is correctly rendering
      */
 
-    describe('When a code string is passed in', function () {
-      beforeEach(async function () {
+    describe('When a code string is passed in', () => {
+      beforeEach(async () => {
         props = {
           code: ':smile:',
         };
         await _setWrappers();
       });
 
-      it('renders the correct emoji', async function () {
-        assert.strictEqual(emoji.attributes('src'), expectedSmileSrc);
+      it('renders the correct emoji', async () => {
+        expect(emoji.attributes('src')).toBe(expectedSmileSrc);
       });
-      describe('When a prop changes to a new code', function () {
-        beforeEach(async function () {
+      describe('When a prop changes to a new code', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ code: ':laughing:' });
           await flushPromises();
           await _setChildWrappers();
         });
-        it('should display the correct emoji with the new code', function () {
-          assert.strictEqual(emoji.attributes('src'), expectedLaughingSrc);
+        it('should display the correct emoji with the new code', () => {
+          expect(emoji.attributes('src')).toBe(expectedLaughingSrc);
         });
       });
 
-      describe('When a prop changes to a new custom emoji code', function () {
-        beforeEach(async function () {
+      describe('When a prop changes to a new custom emoji code', () => {
+        beforeEach(async () => {
           setCustomEmojiJson(customEmojiJson);
           await wrapper.setProps({ code: ':shipit:' });
           await flushPromises();
           await _setChildWrappers();
         });
-        after(function () {
+        afterAll(() => {
           setCustomEmojiJson('');
         });
-        it('should display the correct emoji with the new custom code', function () {
-          assert.strictEqual(emoji.attributes('src'), expectedShipIt);
+        it('should display the correct emoji with the new custom code', () => {
+          expect(emoji.attributes('src')).toBe(expectedShipIt);
         });
       });
 
-      describe('When a prop changes to an invalid code', function () {
-        beforeEach(async function () {
+      describe('When a prop changes to an invalid code', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ code: ':invalidcode:' });
           await flushPromises();
           await _setChildWrappers();
         });
-        it('should display a "not found" image', function () {
-          assert.strictEqual(emoji.attributes('title'), 'Invalid Emoji');
+        it('should display a "not found" image', () => {
+          expect(emoji.attributes('title')).toBe('Invalid Emoji');
         });
       });
 
-      describe('When the size changes to 800', function () {
-        beforeEach(async function () {
+      describe('When the size changes to 800', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ size: '800' });
         });
-        it('the correct class is set on the element', function () {
-          assert.isTrue(emoji.classes('d-icon--size-800'));
+        it('the correct class is set on the element', () => {
+          expect(emoji.classes('d-icon--size-800')).toBe(true);
         });
       });
 
-      describe('When the size changes to 200', function () {
-        beforeEach(async function () {
+      describe('When the size changes to 200', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ size: '200' });
           await flushPromises();
         });
-        it('the emoji is rendered using the "small emoji" url', function () {
-          assert.strictEqual(emoji.attributes('src'), expectedSmileSrcSmall);
+        it('the emoji is rendered using the "small emoji" url', () => {
+          expect(emoji.attributes('src')).toBe(expectedSmileSrcSmall);
         });
       });
     });
 
-    describe('When a skin tone emoji is passed in', function () {
-      beforeEach(async function () {
+    describe('When a skin tone emoji is passed in', () => {
+      beforeEach(async () => {
         props = {
           code: ':point_up_tone1:',
         };
         await _setWrappers();
       });
-      it('renders the correct emoji', function () {
-        assert.strictEqual(emoji.attributes('src'), expectedPointUpLight);
+      it('renders the correct emoji', () => {
+        expect(emoji.attributes('src')).toBe(expectedPointUpLight);
       });
     });
 
-    describe('When an emoji unicode is passed in', function () {
-      beforeEach(async function () {
+    describe('When an emoji unicode is passed in', () => {
+      beforeEach(async () => {
         props = {
           code: '☝🏻',
         };
         await _setWrappers();
       });
-      it('renders the correct emoji', function () {
-        assert.strictEqual(emoji.attributes('src'), expectedPointUpLight);
+      it('renders the correct emoji', () => {
+        expect(emoji.attributes('src')).toBe(expectedPointUpLight);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     /*
      * Test(s) to ensure that the component is accessible
      */
 
-    describe('When an emoji is rendered', function () {
-      beforeEach(async function () {
+    describe('When an emoji is rendered', () => {
+      beforeEach(async () => {
         props = {
           code: ':smile:',
         };
         await _setWrappers();
       });
-      it('should have aria-label describing the emoji', function () {
-        assert.strictEqual(emoji.attributes('aria-label'), 'grinning face with smiling eyes');
+      it('should have aria-label describing the emoji', () => {
+        expect(emoji.attributes('aria-label')).toBe('grinning face with smiling eyes');
       });
     });
   });

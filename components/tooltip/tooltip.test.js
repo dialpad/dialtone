@@ -1,5 +1,3 @@
-import { assert } from 'chai';
-import sinon from 'sinon';
 import { mount } from '@vue/test-utils';
 import DtTooltip from './tooltip.vue';
 import {
@@ -7,7 +5,7 @@ import {
   TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 
-describe('DtTooltip tests', function () {
+describe('DtTooltip tests', () => {
   // Wrappers
   let wrapper;
   let tooltipContainer;
@@ -16,11 +14,11 @@ describe('DtTooltip tests', function () {
   let onMount;
 
   const restoreSpy = function () {
-    onMount.restore();
+    onMount.mockRestore();
   };
 
   const setOnMount = function () {
-    onMount = sinon.spy(DtTooltip.methods, 'onMount');
+    onMount = jest.spyOn(DtTooltip.methods, 'onMount').mockClear();
   };
 
   const _clearChildWrappers = () => {
@@ -43,7 +41,7 @@ describe('DtTooltip tests', function () {
           transition: false,
         },
       },
-      propsData: {
+      props: {
         delay: false,
       },
       slots: {
@@ -54,110 +52,122 @@ describe('DtTooltip tests', function () {
     _setChildWrappers();
   };
 
-  before(function () {
+  beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
   });
 
-  beforeEach(async function () {
+  beforeEach(async () => {
     _mountWrapper();
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     // close to unmount tippy
     await wrapper.setProps({ show: false });
     wrapper.unmount();
     _clearChildWrappers();
   });
 
-  after(function () {
+  afterAll(() => {
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
   });
 
-  describe('Presentation Tests', function () {
-    describe('when tooltip is open', function () {
-      beforeEach(async function () {
+  describe('Presentation Tests', () => {
+    describe('when tooltip is open', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ show: true });
         _setChildWrappers();
       });
 
-      it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-      it('should render the container', function () { assert.isTrue(tooltipContainer.exists()); });
-      it('should render the tooltip', function () { assert.isTrue(tooltip.exists()); });
-      it('should render the anchor', function () { assert.strictEqual(anchor.text(), 'Hover me'); });
-      it('should set default classes', function () {
-        assert.isTrue(tooltip.classes('d-tooltip__arrow-tippy--top'));
+      it(
+        'should render the component',
+        () => { expect(wrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render the container',
+        () => { expect(tooltipContainer.exists()).toBe(true); },
+      );
+      it(
+        'should render the tooltip',
+        () => { expect(tooltip.exists()).toBe(true); },
+      );
+      it(
+        'should render the anchor',
+        () => { expect(anchor.text()).toBe('Hover me'); },
+      );
+      it('should set default classes', () => {
+        expect(tooltip.classes('d-tooltip__arrow-tippy--top')).toBe(true);
       });
-      it('should render the message', async function () {
-        assert.strictEqual(tooltip.text(), 'Test message');
+      it('should render the message', async () => {
+        expect(tooltip.text()).toBe('Test message');
       });
 
-      describe('When inverted is true', function () {
-        beforeEach(async function () {
+      describe('When inverted is true', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ inverted: true });
           _setChildWrappers();
         });
-        it('should have the inverted class set', function () {
-          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.inverted));
+        it('should have the inverted class set', () => {
+          expect(tooltip.classes(TOOLTIP_KIND_MODIFIERS.inverted)).toBe(true);
         });
       });
 
-      describe('When a placement is provided', function () {
-        TOOLTIP_DIRECTIONS.forEach(placement => describe(`When direction is ${placement}`, function () {
-          beforeEach(async function () {
+      describe('When a placement is provided', () => {
+        TOOLTIP_DIRECTIONS.forEach(placement => describe(`When direction is ${placement}`, () => {
+          beforeEach(async () => {
             await wrapper.setProps({ placement });
           });
 
-          it('should have correct arrow direction class', async function () {
-            assert.isTrue(tooltip.classes(`d-tooltip__arrow-tippy--${placement}`));
+          it('should have correct arrow direction class', async () => {
+            expect(tooltip.classes(`d-tooltip__arrow-tippy--${placement}`)).toBe(true);
           });
         }));
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     beforeEach(setOnMount);
     afterEach(restoreSpy);
 
-    describe('When show prop is true', function () {
-      beforeEach(async function () {
+    describe('When show prop is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ show: true });
       });
 
-      it('should display tooltip', async function () {
-        assert.isTrue(tooltip.isVisible());
+      it('should display tooltip', async () => {
+        expect(tooltip.isVisible()).toBe(true);
       });
     });
 
-    describe('When show prop is false', function () {
-      beforeEach(async function () {
+    describe('When show prop is false', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ show: false });
       });
 
-      it('should display tooltip', async function () {
-        assert.isFalse(tooltip.isVisible());
+      it('should display tooltip', async () => {
+        expect(tooltip.isVisible()).toBe(false);
       });
     });
 
-    describe('When show prop is unset (default behaviour)', function () {
-      beforeEach(async function () {
+    describe('When show prop is unset (default behaviour)', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ show: null });
         _setChildWrappers();
       });
 
-      describe('When mouseenter tooltip', function () {
-        beforeEach(async function () {
+      describe('When mouseenter tooltip', () => {
+        beforeEach(async () => {
           await wrapper.setProps({ delay: false });
           await anchor.trigger('mouseenter');
         });
 
-        it('should display tooltip', function () {
-          assert.isTrue(tooltip.isVisible());
+        it('should display tooltip', () => {
+          expect(tooltip.isVisible()).toBe(true);
         });
       });
 
@@ -182,23 +192,23 @@ describe('DtTooltip tests', function () {
       //   });
       // });
 
-      describe('When mouseleave tooltip', function () {
-        beforeEach(async function () {
+      describe('When mouseleave tooltip', () => {
+        beforeEach(async () => {
           await anchor.trigger('mouseleave');
         });
 
-        it('should hide tooltip', function () {
-          assert.isFalse(tooltip.isVisible());
+        it('should hide tooltip', () => {
+          expect(tooltip.isVisible()).toBe(false);
         });
       });
 
-      describe('When focusout tooltip', function () {
-        beforeEach(async function () {
+      describe('When focusout tooltip', () => {
+        beforeEach(async () => {
           await anchor.trigger('focusout');
         });
 
-        it('should display tooltip', function () {
-          assert.isFalse(tooltip.isVisible());
+        it('should display tooltip', () => {
+          expect(tooltip.isVisible()).toBe(false);
         });
       });
     });

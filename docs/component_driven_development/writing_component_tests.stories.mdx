@@ -10,9 +10,8 @@ import { Meta, Subtitle } from '@storybook/addon-docs';
 
 ## How do we write unit tests
 
-We use the [mocha](https://mochajs.org/) unit testing framework and [@vue/test-utils](https://vue-test-utils.vuejs.org/)
-to test our components. [chai](https://www.chaijs.com/) is used for assertions and if we require a spy, stub or mock
-then we make use of [sinon](https://sinonjs.org/).
+We use the [jest](https://jestjs.io/) unit testing framework and [@vue/test-utils](https://vue-test-utils.vuejs.org/)
+to test our components.
 
 ## Where to add unit tests
 
@@ -59,7 +58,7 @@ describe('MyComponent Tests', () => {
   it('Updates the button text', () => {
     button.trigger('click');
 
-    assert.strictEqual(button.text(), 'Updated Text');
+    expect(button.text()).toBe('Button text');
   });
 });
 ```
@@ -85,7 +84,7 @@ describe('MyComponent Tests', () => {
   it('Emits myCustomEvent', () => {
     wrapper.vm.$emit('myCustomEvent');
 
-    assert.strictEqual(wrapper.emitted().myCustomEvent.length, 1);
+    expect(wrapper.emitted().myCustomEvent.length).toBe(1);
   });
 });
 ```
@@ -122,7 +121,7 @@ describe('MyComponent Tests', () => {
     button.trigger('click');
 
     const firstMenuItem = wrapper.find('#first-menu-item-id');
-    assert.strictEqual(document.activeElement, firstMenuItem.element);
+    expect(document.activeElement).toBe(firstMenuItem.element);
   });
 });
 ```
@@ -154,6 +153,7 @@ describe('MyComponent Tests', () => {
 
   it('Has an appropriate alt attribute', () => {
     assert.strictEqual(img.attributes('alt'), 'Some description of the image');
+    expect(img.attributes('alt')).toBe('Some description of the image');
   });
 });
 ```
@@ -195,8 +195,8 @@ a test, these cases should be considered to be exceptions to the guideline.
 
 ```js
 it('1 equals 1 and 2 equals 2', () => {
-  assert.strictEqual(1, 1);
-  assert.strictEqual(2, 2);
+  expect(1).toBe(1);
+  expect(2).toBe(2);
 });
 ```
 
@@ -204,11 +204,11 @@ it('1 equals 1 and 2 equals 2', () => {
 
 ```js
 it('1 equals 1', () => {
-  assert.strictEqual(1, 1);
+  expect(1).toBe(1);
 });
 
 it('2 equals 2', () => {
-  assert.strictEqual(2, 2);
+  expect(2).toBe(2);
 });
 ```
 
@@ -229,7 +229,7 @@ describe('My Tests', () => {
     num = 1;
 
     it('equals itself', () => {
-      assert.strictEqual(num, num);
+      expect(num).toBe(num);
     });
   });
 
@@ -237,7 +237,7 @@ describe('My Tests', () => {
     num = 2;
 
     it('equals itself', () => {
-      assert.strictEqual(num, num);
+      expect(num).toBe(num);
     });
   });
 });
@@ -250,7 +250,7 @@ describe('My Tests', () => {
 ```js
 const itBehavesLikeEqualsItself = (num) => {
   it('equals itself', () => {
-    assert.strictEqual(num, num);
+    expect(num).toBe(num);
   });
 };
 
@@ -276,7 +276,7 @@ describe('My Tests', () => {
 ```js
 const itBehavesLikeEquals = (num) => ({
   itself: expectation => {
-    assert.equal(num, expectation);
+    expect(num).toBe(expectation);
   },
 });
 

@@ -1,11 +1,9 @@
-import { assert } from 'chai';
-
 export function itBehavesLikeHasCorrectClass (element, className) {
-  assert.isTrue(element.classes(className));
+  expect(element.classes(className)).toBe(true);
 }
 
 export function itBehavesLikeDoesNotHaveClass (element, className) {
-  assert.isFalse(element.classes(className));
+  expect(element.classes(className)).toBe(false);
 }
 
 export default {

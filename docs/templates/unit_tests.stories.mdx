@@ -4,13 +4,14 @@
 
 ```js
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import DtMyComponent from './my_component.vue';
 
 // Constants
 const basePropsData = {};
 
 describe('DtMyComponent Tests', function () {
+  let testContext;
   // Wrappers
   let wrapper;
   let childContainer;
@@ -32,7 +33,7 @@ describe('DtMyComponent Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
+
     });
     _setChildWrappers();
   };
@@ -44,7 +45,8 @@ describe('DtMyComponent Tests', function () {
 
   // Setup
   before(function () {
-    this.localVue = createLocalVue();
+    testContext = {};
+
   });
   beforeEach(function () {});
 

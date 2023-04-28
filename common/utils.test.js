@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import {
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
@@ -13,7 +12,7 @@ import {
   getValidationState,
 } from './utils';
 
-describe('Util Tests', function () {
+describe('Util Tests', () => {
   // Test Environment
   let formattedMessages;
 
@@ -34,53 +33,62 @@ describe('Util Tests', function () {
 
   // Shared Examples
   const itBehavesLikeReturnsEmptyMessageList = (messageList) => {
-    it('should return an empty message list', function () { assert.deepEqual(messageList, []); });
+    it(
+      'should return an empty message list',
+      () => { expect(messageList).toEqual([]); },
+    );
   };
 
-  describe('getUniqueString', function () {
+  describe('getUniqueString', () => {
     // Test Environment
     const prefix = 'provided_prefix';
 
-    it('should return a string', function () { assert.exists(getUniqueString()); });
-    it('should return a unique string', function () { assert.notStrictEqual(getUniqueString(), getUniqueString()); });
-    it('should have default prefix', function () {
-      assert.strictEqual(getUniqueString().includes(DEFAULT_PREFIX), true);
+    it(
+      'should return a string',
+      () => { expect(getUniqueString()).toBeTruthy(); },
+    );
+    it(
+      'should return a unique string',
+      () => { expect(getUniqueString()).not.toBe(getUniqueString()); },
+    );
+    it('should have default prefix', () => {
+      expect(getUniqueString().includes(DEFAULT_PREFIX)).toBe(true);
     });
-    it('should use provided prefix', function () {
-      assert.strictEqual(getUniqueString(prefix).includes(prefix), true);
+    it('should use provided prefix', () => {
+      expect(getUniqueString(prefix).includes(prefix)).toBe(true);
     });
   });
 
-  describe('formatMessages', function () {
+  describe('formatMessages', () => {
     // Test Environment
     let messageList;
     let expectedFormattedMessages;
 
     // Shared Examples
     const itBehavesLikeReturnsFormattedMessageList = () => {
-      it('should return formatted message list', function () {
-        assert.deepEqual(formatMessages(messageList), expectedFormattedMessages);
+      it('should return formatted message list', () => {
+        expect(formatMessages(messageList)).toEqual(expectedFormattedMessages);
       });
     };
 
-    describe('when no message list is provided', function () {
+    describe('when no message list is provided', () => {
       itBehavesLikeReturnsEmptyMessageList(formatMessages());
     });
 
-    describe('when an undefined message list is provided', function () {
+    describe('when an undefined message list is provided', () => {
       itBehavesLikeReturnsEmptyMessageList(formatMessages(undefined));
     });
 
-    describe('when a null message list is provided', function () {
+    describe('when a null message list is provided', () => {
       itBehavesLikeReturnsEmptyMessageList(formatMessages(null));
     });
 
-    describe('when an empty message list is provided', function () {
+    describe('when an empty message list is provided', () => {
       itBehavesLikeReturnsEmptyMessageList(formatMessages([]));
     });
 
-    describe('when a message list containing strings is provided', function () {
-      beforeEach(function () {
+    describe('when a message list containing strings is provided', () => {
+      beforeEach(() => {
         messageList = ['message 1', 'message 2'];
         expectedFormattedMessages = [
           {
@@ -97,9 +105,9 @@ describe('Util Tests', function () {
       itBehavesLikeReturnsFormattedMessageList();
     });
 
-    describe('when a message list containing objects is provided', function () {
+    describe('when a message list containing objects is provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         messageList = [
           {
             message: 'message 1',
@@ -116,9 +124,9 @@ describe('Util Tests', function () {
       itBehavesLikeReturnsFormattedMessageList();
     });
 
-    describe('when a message list containing strings and objects is provided', function () {
+    describe('when a message list containing strings and objects is provided', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         messageList = [
           'message 1',
           {
@@ -142,36 +150,36 @@ describe('Util Tests', function () {
     });
   });
 
-  describe('filterFormattedMessages', function () {
+  describe('filterFormattedMessages', () => {
     // Test Environment
     let expectedFilteredFormattedMessages;
 
     // Shared Examples
     const itBehavesLikeReturnsFilteredFormattedMessageList = () => {
-      it('should return filtered formatted message list', function () {
-        assert.deepEqual(filterFormattedMessages(formattedMessages), expectedFilteredFormattedMessages);
+      it('should return filtered formatted message list', () => {
+        expect(filterFormattedMessages(formattedMessages)).toEqual(expectedFilteredFormattedMessages);
       });
     };
 
-    describe('when no formatted message list is provided', function () {
+    describe('when no formatted message list is provided', () => {
       itBehavesLikeReturnsEmptyMessageList(filterFormattedMessages());
     });
 
-    describe('when an undefined formatted message list is provided', function () {
+    describe('when an undefined formatted message list is provided', () => {
       itBehavesLikeReturnsEmptyMessageList(filterFormattedMessages(undefined));
     });
 
-    describe('when a null formatted message list is provided', function () {
+    describe('when a null formatted message list is provided', () => {
       itBehavesLikeReturnsEmptyMessageList(filterFormattedMessages(null));
     });
 
-    describe('when an empty formatted message list is provided', function () {
+    describe('when an empty formatted message list is provided', () => {
       itBehavesLikeReturnsEmptyMessageList(filterFormattedMessages([]));
     });
 
-    describe('when there is only SUCCESS messages', function () {
+    describe('when there is only SUCCESS messages', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         _setFormattedMessages(VALIDATION_MESSAGE_TYPES.SUCCESS);
         expectedFilteredFormattedMessages = formattedMessages;
       });
@@ -179,18 +187,18 @@ describe('Util Tests', function () {
       itBehavesLikeReturnsFilteredFormattedMessageList();
     });
 
-    describe('when there is a WARNING message', function () {
+    describe('when there is a WARNING message', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         _setFormattedMessages(VALIDATION_MESSAGE_TYPES.WARNING);
         expectedFilteredFormattedMessages = formattedMessages;
       });
 
       itBehavesLikeReturnsFilteredFormattedMessageList();
 
-      describe('when there is also a SUCCESS message', function () {
+      describe('when there is also a SUCCESS message', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           _addFormattedMessage(VALIDATION_MESSAGE_TYPES.SUCCESS);
         });
 
@@ -198,27 +206,27 @@ describe('Util Tests', function () {
       });
     });
 
-    describe('when there is an ERROR message', function () {
+    describe('when there is an ERROR message', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         _setFormattedMessages(VALIDATION_MESSAGE_TYPES.ERROR);
         expectedFilteredFormattedMessages = formattedMessages;
       });
 
       itBehavesLikeReturnsFilteredFormattedMessageList();
 
-      describe('when there is also a SUCCESS message', function () {
+      describe('when there is also a SUCCESS message', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           _addFormattedMessage(VALIDATION_MESSAGE_TYPES.SUCCESS);
         });
 
         itBehavesLikeReturnsFilteredFormattedMessageList();
       });
 
-      describe('when there is also a WARNING message', function () {
+      describe('when there is also a WARNING message', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           _addFormattedMessage(VALIDATION_MESSAGE_TYPES.WARNING);
         });
 
@@ -227,105 +235,112 @@ describe('Util Tests', function () {
     });
   });
 
-  describe('hasFormattedMessageOfType', function () {
-    describe('when no formatted message list is provided', function () {
-      it('should return false', function () { assert.strictEqual(hasFormattedMessageOfType(), false); });
+  describe('hasFormattedMessageOfType', () => {
+    describe('when no formatted message list is provided', () => {
+      it(
+        'should return false',
+        () => { expect(hasFormattedMessageOfType()).toBe(false); },
+      );
     });
 
-    describe('when formatted message list is undefined', function () {
-      it('should return false', function () {
-        assert.strictEqual(hasFormattedMessageOfType(undefined, VALIDATION_MESSAGE_TYPES.ERROR), false);
+    describe('when formatted message list is undefined', () => {
+      it('should return false', () => {
+        expect(hasFormattedMessageOfType(undefined, VALIDATION_MESSAGE_TYPES.ERROR)).toBe(false);
       });
     });
 
-    describe('when formatted message list is null', function () {
-      it('should return false', function () {
-        assert.strictEqual(hasFormattedMessageOfType(null, VALIDATION_MESSAGE_TYPES.ERROR), false);
+    describe('when formatted message list is null', () => {
+      it('should return false', () => {
+        expect(hasFormattedMessageOfType(null, VALIDATION_MESSAGE_TYPES.ERROR)).toBe(false);
       });
     });
 
-    describe('when the formatted message list is empty', function () {
-      it('should return false', function () {
-        assert.strictEqual(hasFormattedMessageOfType([], VALIDATION_MESSAGE_TYPES.ERROR), false);
+    describe('when the formatted message list is empty', () => {
+      it('should return false', () => {
+        expect(hasFormattedMessageOfType([], VALIDATION_MESSAGE_TYPES.ERROR)).toBe(false);
       });
     });
 
-    describe('when there is a formatted message list', function () {
+    describe('when there is a formatted message list', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         _setFormattedMessages(VALIDATION_MESSAGE_TYPES.SUCCESS);
       });
 
-      describe('when there is no given type', function () {
-        it('should return false', function () {
-          assert.strictEqual(hasFormattedMessageOfType(formattedMessages), false);
+      describe('when there is no given type', () => {
+        it('should return false', () => {
+          expect(hasFormattedMessageOfType(formattedMessages)).toBe(false);
         });
       });
 
-      describe('when there is an undefined given type', function () {
-        it('should return false', function () {
-          assert.strictEqual(hasFormattedMessageOfType(formattedMessages, undefined), false);
+      describe('when there is an undefined given type', () => {
+        it('should return false', () => {
+          expect(hasFormattedMessageOfType(formattedMessages, undefined)).toBe(false);
         });
       });
 
-      describe('when there is a null given type', function () {
-        it('should return false', function () {
-          assert.strictEqual(hasFormattedMessageOfType(formattedMessages, null), false);
+      describe('when there is a null given type', () => {
+        it('should return false', () => {
+          expect(hasFormattedMessageOfType(formattedMessages, null)).toBe(false);
         });
       });
 
-      describe('when there is an empty given type', function () {
-        it('should return false', function () {
-          assert.strictEqual(hasFormattedMessageOfType(formattedMessages, ''), false);
+      describe('when there is an empty given type', () => {
+        it('should return false', () => {
+          expect(hasFormattedMessageOfType(formattedMessages, '')).toBe(false);
         });
       });
 
-      describe('when there is no formatted message of the given type', function () {
-        it('should return false', function () {
-          assert.strictEqual(hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.ERROR), false);
+      describe('when there is no formatted message of the given type', () => {
+        it('should return false', () => {
+          expect(
+            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.ERROR),
+          ).toBe(false);
         });
       });
 
-      describe('when there is a formatted message of the given type', function () {
-        it('should return true', function () {
-          assert.strictEqual(hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.SUCCESS), true);
+      describe('when there is a formatted message of the given type', () => {
+        it('should return true', () => {
+          expect(
+            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.SUCCESS),
+          ).toBe(true);
         });
       });
     });
   });
 
-  describe('getValidationState', function () {
+  describe('getValidationState', () => {
     // Test Setup
-    beforeEach(function () {
+    beforeEach(() => {
       _setFormattedMessages(VALIDATION_MESSAGE_TYPES.SUCCESS);
     });
 
-    describe('when all message types are SUCCESS', function () {
-      it('should return SUCCESS', function () {
-        assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.SUCCESS);
+    describe('when all message types are SUCCESS', () => {
+      it('should return SUCCESS', () => {
+        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.SUCCESS);
       });
     });
 
-    describe('when there is a WARNING message type', function () {
+    describe('when there is a WARNING message type', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         _addFormattedMessage(VALIDATION_MESSAGE_TYPES.WARNING);
       });
 
-      it('should return WARNING', function () {
-        assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.WARNING);
+      it('should return WARNING', () => {
+        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.WARNING);
       });
     });
 
-    describe('when there is an ERROR message type', function () {
+    describe('when there is an ERROR message type', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         _addFormattedMessage(VALIDATION_MESSAGE_TYPES.WARNING);
         _addFormattedMessage(VALIDATION_MESSAGE_TYPES.ERROR);
       });
 
-      it('should return ERROR', function () {
-        assert.strictEqual(getValidationState(formattedMessages), VALIDATION_MESSAGE_TYPES.ERROR);
+      it('should return ERROR', () => {
+        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.ERROR);
       });
     });
   });

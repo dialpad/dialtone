@@ -50,6 +50,10 @@
     "yaml.schemas": {
       "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
     },
+    "jest.autoRun": {
+      "watch": false,
+      "onSave": "test-file"
+    },
   },
   "launch": {
     "version": "0.2.0",
@@ -68,20 +72,11 @@
       {
         "type": "node",
         "request": "launch",
-        "name": "Debug JS unit tests",
+        "name": "vscode-jest-tests",
         "program": "${workspaceFolder}/node_modules/@vue/cli-service/bin/vue-cli-service",
         "args": [
           "test:unit",
-          "--timeout",
-          "0",
-          "--colors",
-          "--require",
-          "source-map-support/register",
-          "--require",
-          "jsdom-global/register",
-          "-R",
-          "min",
-          "${workspaceFolder}/components/**/*.test.js"
+          "--runInBand",
         ],
         "smartStep": true,
         "console": "integratedTerminal",

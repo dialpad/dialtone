@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import {
   itBehavesLikeAppliesClassToChild,
@@ -62,14 +61,14 @@ const tabComponents = {
   },
 };
 
-describe('DtTabGroup Tests', function () {
+describe('DtTabGroup Tests', () => {
   // Wrappers
   let wrapper;
   let tabList;
   let tabs;
   let tabPanels;
 
-  const propsData = {
+  const props = {
     label: 'area-label',
   };
 
@@ -82,7 +81,7 @@ describe('DtTabGroup Tests', function () {
   const _mountWrapper = () => {
     wrapper = mount(DtTabGroup, {
       attachTo: document.body,
-      propsData,
+      props,
       slots: {
         default: tabPanelComponents,
         tabs: tabComponents,
@@ -91,225 +90,225 @@ describe('DtTabGroup Tests', function () {
     _setWrappers();
   };
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Setup
-    before(async function () {
+    beforeAll(async () => {
       _mountWrapper();
     });
 
-    it('should render the component', function () {
-      assert.exists(wrapper, 'wrapper exists');
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
     });
 
-    it('should not emitted on mount', function () {
-      assert.strictEqual(wrapper.emitted('change'), undefined);
+    it('should not emitted on mount', () => {
+      expect(wrapper.emitted('change')).toBe(undefined);
     });
 
-    describe('Correct size modifiers', function () {
-      beforeEach(function () {
-        propsData.size = 'sm';
+    describe('Correct size modifiers', () => {
+      beforeEach(() => {
+        props.size = 'sm';
         _mountWrapper();
       });
 
-      it('should have correct class modifier', function () {
-        assert.isTrue(tabList.classes(TAB_LIST_SIZE_MODIFIERS.sm));
+      it('should have correct class modifier', () => {
+        expect(tabList.classes(TAB_LIST_SIZE_MODIFIERS.sm)).toBe(true);
       });
     });
 
-    describe('Correct kind modifiers', function () {
-      beforeEach(function () {
-        propsData.inverted = true;
+    describe('Correct kind modifiers', () => {
+      beforeEach(() => {
+        props.inverted = true;
         _mountWrapper();
       });
 
-      it('should have correct kind modifier', function () {
-        assert.isTrue(tabList.classes(TAB_LIST_KIND_MODIFIERS.inverted));
+      it('should have correct kind modifier', () => {
+        expect(tabList.classes(TAB_LIST_KIND_MODIFIERS.inverted)).toBe(true);
       });
     });
 
-    describe('Correct importance modifiers', function () {
-      beforeEach(function () {
-        propsData.borderless = true;
+    describe('Correct importance modifiers', () => {
+      beforeEach(() => {
+        props.borderless = true;
         _mountWrapper();
       });
 
-      it('should have correct importance modifier', function () {
-        assert.isTrue(tabList.classes(TAB_LIST_IMPORTANCE_MODIFIERS.borderless));
+      it('should have correct importance modifier', () => {
+        expect(tabList.classes(TAB_LIST_IMPORTANCE_MODIFIERS.borderless)).toBe(true);
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    describe('When selected is provided', function () {
-      beforeEach(function () {
-        propsData.selected = optionTabs[1].panelId;
+  describe('Interactivity Tests', () => {
+    describe('When selected is provided', () => {
+      beforeEach(() => {
+        props.selected = optionTabs[1].panelId;
         _mountWrapper();
       });
 
-      it('should set initially selected tab', function () {
-        assert.strictEqual(wrapper.vm.provideObj.selected, optionTabs[1].panelId);
-        assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'true');
+      it('should set initially selected tab', () => {
+        expect(wrapper.vm.provideObj.selected).toBe(optionTabs[1].panelId);
+        expect(tabs.at(1).attributes('aria-selected')).toBe('true');
       });
     });
 
-    describe('When selected is updated', function () {
-      beforeEach(async function () {
+    describe('When selected is updated', () => {
+      beforeEach(async () => {
         _mountWrapper();
         // Simulating the third tab being set programmatically after the second tab was selected by a user.
         tabs.at(1).vm.$el.click();
-        propsData.selected = optionTabs[2].panelId;
-        await wrapper.setProps(propsData);
+        props.selected = optionTabs[2].panelId;
+        await wrapper.setProps(props);
       });
 
-      it('should override currently selected tab', async function () {
-        assert.strictEqual(wrapper.vm.provideObj.selected, optionTabs[2].panelId);
-        assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
+      it('should override currently selected tab', async () => {
+        expect(wrapper.vm.provideObj.selected).toBe(optionTabs[2].panelId);
+        expect(tabs.at(2).attributes('aria-selected')).toBe('true');
       });
     });
 
-    describe('Correct selected state', function () {
-      beforeEach(async function () {
+    describe('Correct selected state', () => {
+      beforeEach(async () => {
         optionTabs[0].selected = true;
         optionTabs[1].selected = false;
         _mountWrapper();
       });
 
-      it('selected element should be correct', function () {
-        assert.strictEqual(tabs.at(0).attributes('aria-selected'), 'true');
-        assert.strictEqual(tabPanels.at(0).attributes('aria-hidden'), 'false');
-        assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'false');
-        assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'true');
+      it('selected element should be correct', () => {
+        expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+        expect(tabPanels.at(0).attributes('aria-hidden')).toBe('false');
+        expect(tabs.at(1).attributes('aria-selected')).toBe('false');
+        expect(tabPanels.at(1).attributes('aria-hidden')).toBe('true');
       });
     });
 
-    describe('Correct change event', function () {
-      beforeEach(function () {
+    describe('Correct change event', () => {
+      beforeEach(() => {
         tabs.at(1).vm.$el.click();
       });
 
-      it('should emitted on click', function () {
-        assert.strictEqual(wrapper.emitted('change').length, 1);
+      it('should emitted on click', () => {
+        expect(wrapper.emitted('change').length).toBe(1);
       });
     });
 
-    describe('Correct key navigation', function () {
-      describe('On keyup left', function () {
-        beforeEach(async function () {
+    describe('Correct key navigation', () => {
+      describe('On keyup left', () => {
+        beforeEach(async () => {
           tabs.at(0).vm.$el.focus();
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.space');
         });
 
-        it('selected element should be correct', function () {
-          assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
-          assert.strictEqual(tabPanels.at(2).attributes('aria-hidden'), 'false');
+        it('selected element should be correct', () => {
+          expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+          expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
         });
 
-        describe('On double keyup left and space', function () {
-          beforeEach(async function () {
+        describe('On double keyup left and space', () => {
+          beforeEach(async () => {
             tabs.at(0).vm.$el.focus();
             await tabList.trigger('keyup.left');
             await tabList.trigger('keyup.left');
             await tabList.trigger('keyup.space');
           });
 
-          it('aria-selected should be "true"', function () {
-            assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'true');
+          it('aria-selected should be "true"', () => {
+            expect(tabs.at(1).attributes('aria-selected')).toBe('true');
           });
 
-          it('aria-hidden should be "false"', function () {
-            assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'false');
+          it('aria-hidden should be "false"', () => {
+            expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
           });
         });
       });
 
-      describe('On right and enter', function () {
-        beforeEach(async function () {
+      describe('On right and enter', () => {
+        beforeEach(async () => {
           tabs.at(0).vm.$el.focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', function () {
-          assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'true');
+        it('aria-selected should be "true"', () => {
+          expect(tabs.at(1).attributes('aria-selected')).toBe('true');
         });
 
-        it('aria-hidden should be "false"', function () {
-          assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'false');
+        it('aria-hidden should be "false"', () => {
+          expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
         });
 
-        describe('On double keyup right and enter', function () {
-          beforeEach(async function () {
+        describe('On double keyup right and enter', () => {
+          beforeEach(async () => {
             tabs.at(0).vm.$el.focus();
             await tabList.trigger('keyup.right');
             await tabList.trigger('keyup.right');
             await tabList.trigger('keyup.enter');
           });
 
-          it('aria-selected should be "true"', function () {
-            assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
+          it('aria-selected should be "true"', () => {
+            expect(tabs.at(2).attributes('aria-selected')).toBe('true');
           });
 
-          it('aria-hidden should be "false"', function () {
-            assert.strictEqual(tabPanels.at(2).attributes('aria-hidden'), 'false');
+          it('aria-hidden should be "false"', () => {
+            expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
           });
         });
       });
 
-      describe('On keydown home and enter', function () {
-        beforeEach(async function () {
+      describe('On keydown home and enter', () => {
+        beforeEach(async () => {
           tabs.at(2).vm.$el.focus();
           await tabList.trigger('keydown.home');
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', function () {
-          assert.strictEqual(tabs.at(0).attributes('aria-selected'), 'true');
+        it('aria-selected should be "true"', () => {
+          expect(tabs.at(0).attributes('aria-selected')).toBe('true');
         });
 
-        it('aria-hidden should be "false"', function () {
-          assert.strictEqual(tabPanels.at(0).attributes('aria-hidden'), 'false');
+        it('aria-hidden should be "false"', () => {
+          expect(tabPanels.at(0).attributes('aria-hidden')).toBe('false');
         });
       });
 
-      describe('On keydown end and enter', function () {
-        beforeEach(async function () {
+      describe('On keydown end and enter', () => {
+        beforeEach(async () => {
           tabs.at(0).vm.$el.focus();
           await tabList.trigger('keydown.end');
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', function () {
-          assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
+        it('aria-selected should be "true"', () => {
+          expect(tabs.at(2).attributes('aria-selected')).toBe('true');
         });
 
-        it('aria-hidden should be "false"', function () {
-          assert.strictEqual(tabPanels.at(2).attributes('aria-hidden'), 'false');
+        it('aria-hidden should be "false"', () => {
+          expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
         });
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    beforeEach(async function () {
+  describe('Accessibility Tests', () => {
+    beforeEach(async () => {
       tabs.at(0).vm.$el.focus();
       await tabList.trigger('keyup.enter');
     });
 
-    it('should render correct attributes', function () {
-      assert.strictEqual(tabList.attributes('role'), 'tablist');
-      assert.strictEqual(tabList.attributes('aria-label'), propsData.label);
+    it('should render correct attributes', () => {
+      expect(tabList.attributes('role')).toBe('tablist');
+      expect(tabList.attributes('aria-label')).toBe(props.label);
     });
 
-    it('should have selected element', function () {
-      assert.strictEqual(tabs.at(0).attributes('aria-selected'), 'true');
+    it('should have selected element', () => {
+      expect(tabs.at(0).attributes('aria-selected')).toBe('true');
     });
 
-    describe('Correct aria attributes', function () {
-      describe('Attributes after keyup left', function () {
+    describe('Correct aria attributes', () => {
+      describe('Attributes after keyup left', () => {
         let lastTab;
         let lastPanel;
-        beforeEach(async function () {
+        beforeEach(async () => {
           tabs.at(0).vm.$el.focus();
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.space');
@@ -317,78 +316,87 @@ describe('DtTabGroup Tests', function () {
           lastPanel = tabPanels.at(2).attributes();
         });
 
-        it('has correct attributes', function () {
-          assert.strictEqual(lastTab.id, lastPanel['aria-labelledby']);
-          assert.strictEqual(lastTab['aria-controls'], lastPanel.id);
+        it('has correct attributes', () => {
+          expect(lastTab.id).toBe(lastPanel['aria-labelledby']);
+          expect(lastTab['aria-controls']).toBe(lastPanel.id);
         });
       });
 
-      describe('attributes after keyup right', function () {
-        beforeEach(async function () {
+      describe('attributes after keyup right', () => {
+        beforeEach(async () => {
           tabs.at(0).vm.$el.focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
         });
 
-        it('should have correct id for aria-labelledby and aria-controls', function () {
-          const tabAttrs = tabs.at(1).attributes();
-          const tabPanelAttrs = tabPanels.at(1).attributes();
-          assert.strictEqual(tabAttrs.id, tabPanelAttrs['aria-labelledby']);
-          assert.strictEqual(tabAttrs['aria-controls'], tabPanelAttrs.id);
-        });
+        it(
+          'should have correct id for aria-labelledby and aria-controls',
+          () => {
+            const tabAttrs = tabs.at(1).attributes();
+            const tabPanelAttrs = tabPanels.at(1).attributes();
+            expect(tabAttrs.id).toBe(tabPanelAttrs['aria-labelledby']);
+            expect(tabAttrs['aria-controls']).toBe(tabPanelAttrs.id);
+          },
+        );
       });
 
-      describe('attributes after keydown home', function () {
-        beforeEach(async function () {
+      describe('attributes after keydown home', () => {
+        beforeEach(async () => {
           tabs.at(2).vm.$el.focus();
           await tabList.trigger('keydown.home');
           await tabList.trigger('keyup.enter');
         });
 
-        it('should have correct id for aria-labelledby and aria-controls', function () {
-          const tabAttrs = tabs.at(0).attributes();
-          const tabPanelAttrs = tabPanels.at(0).attributes();
-          assert.strictEqual(tabAttrs.id, tabPanelAttrs['aria-labelledby']);
-          assert.strictEqual(tabAttrs['aria-controls'], tabPanelAttrs.id);
-        });
+        it(
+          'should have correct id for aria-labelledby and aria-controls',
+          () => {
+            const tabAttrs = tabs.at(0).attributes();
+            const tabPanelAttrs = tabPanels.at(0).attributes();
+            expect(tabAttrs.id).toBe(tabPanelAttrs['aria-labelledby']);
+            expect(tabAttrs['aria-controls']).toBe(tabPanelAttrs.id);
+          },
+        );
       });
 
-      describe('attributes after keydown end', function () {
-        beforeEach(async function () {
+      describe('attributes after keydown end', () => {
+        beforeEach(async () => {
           tabs.at(0).vm.$el.focus();
           await tabList.trigger('keydown.end');
           await tabList.trigger('keyup.enter');
         });
 
-        it('should have correct id for aria-labelledby and aria-controls', function () {
-          const tabAttrs = tabs.at(2).attributes();
-          const tabPanelAttrs = tabPanels.at(2).attributes();
-          assert.strictEqual(tabAttrs.id, tabPanelAttrs['aria-labelledby']);
-          assert.strictEqual(tabAttrs['aria-controls'], tabPanelAttrs.id);
-        });
+        it(
+          'should have correct id for aria-labelledby and aria-controls',
+          () => {
+            const tabAttrs = tabs.at(2).attributes();
+            const tabPanelAttrs = tabPanels.at(2).attributes();
+            expect(tabAttrs.id).toBe(tabPanelAttrs['aria-labelledby']);
+            expect(tabAttrs['aria-controls']).toBe(tabPanelAttrs.id);
+          },
+        );
       });
     });
   });
 
-  describe('Extendability Tests', function () {
-    describe('When tab list class is provided', function () {
-      beforeEach(function () {
-        propsData.tabListClass = 'my-custom-class';
+  describe('Extendability Tests', () => {
+    describe('When tab list class is provided', () => {
+      beforeEach(() => {
+        props.tabListClass = 'my-custom-class';
         _mountWrapper();
       });
 
-      it('should apply custom class to tab list', function () {
+      it('should apply custom class to tab list', () => {
         itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', tabList);
       });
     });
 
-    describe('When tab list child props are provided', function () {
-      beforeEach(function () {
-        propsData.tabListChildProps = { some: 'prop' };
+    describe('When tab list child props are provided', () => {
+      beforeEach(() => {
+        props.tabListChildProps = { some: 'prop' };
         _mountWrapper();
       });
 
-      it('tab list should have provided child prop', function () {
+      it('tab list should have provided child prop', () => {
         itBehavesLikeAppliesChildProp(tabList, 'some', 'prop');
       });
     });

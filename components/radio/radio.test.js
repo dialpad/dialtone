@@ -1,6 +1,4 @@
-import { assert } from 'chai';
 import { shallowMount } from '@vue/test-utils';
-import sinon from 'sinon';
 import {
   itBehavesLikeEmitsExpectedEvent,
   itBehavesLikeDoesNotEmitEvents,
@@ -24,7 +22,7 @@ const baseProps = {
   value: baseValue,
 };
 
-describe('DtRadio Tests', function () {
+describe('DtRadio Tests', () => {
   // Wrappers
   let wrapper;
   let input;
@@ -51,7 +49,7 @@ describe('DtRadio Tests', function () {
 
   // Shared Examples
   const itBehavesLikeHasValidationClassesLocal = (checkboxValidationState) => {
-    it('has validation classes', function () {
+    it('has validation classes', () => {
       itBehavesLikeHasValidationClasses(
         wrapper,
         RADIO_INPUT_VALIDATION_CLASSES,
@@ -68,100 +66,118 @@ describe('DtRadio Tests', function () {
     provide = {};
   });
 
-  describe('Presentation Tests', function () {
-    describe('When the radio renders', function () {
+  describe('Presentation Tests', () => {
+    describe('When the radio renders', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should exist', function () { assert.exists(wrapper); });
-      it('should have radio group class', function () { assert.exists(wrapper.find('.d-radio-group')); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
+      it(
+        'should have radio group class',
+        () => { expect(wrapper.find('.d-radio-group').exists()).toBeTruthy(); },
+      );
 
-      describe('Radio Input Tests', function () {
-        it('should exist', function () { assert.exists(input); });
-        it('should have type radio', function () { assert.strictEqual(input.attributes('type'), 'radio'); });
-        it('should not be checked', function () { itBehavesLikeNotChecked(input); });
+      describe('Radio Input Tests', () => {
+        it('should exist', () => { expect(input.exists()).toBeTruthy(); });
+        it(
+          'should have type radio',
+          () => { expect(input.attributes('type')).toBe('radio'); },
+        );
+        it('should not be checked', () => { itBehavesLikeNotChecked(input); });
       });
 
-      describe('Radio Label Tests', function () {
+      describe('Radio Label Tests', () => {
         // Wrappers
         let radioLabel;
 
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           radioLabel = wrapper.find('[data-qa="radio-label"]');
         });
 
-        it('should exist', function () { assert.exists(radioLabel); });
-        it('should match provided label prop', function () { assert.strictEqual(radioLabel.text(), props.label); });
+        it('should exist', () => { expect(radioLabel.exists()).toBeTruthy(); });
+        it(
+          'should match provided label prop',
+          () => { expect(radioLabel.text()).toBe(props.label); },
+        );
       });
     });
 
-    describe('When a description is provided', function () {
+    describe('When a description is provided', () => {
       // wrappers
       let radioDescription;
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         props = { ...baseProps, description: 'Description' };
         _setWrappers();
         radioDescription = wrapper.find('[data-qa="radio-description"]');
       });
 
-      it('should exist', function () { assert.exists(radioDescription); });
+      it('should exist', () => { expect(radioDescription.exists()).toBeTruthy(); });
     });
 
-    describe('When a validation state is provided', function () {
+    describe('When a validation state is provided', () => {
       // Helpers
       const _setupValidationTest = (validationState) => {
         props = { ...baseProps, description: 'Description', validationState };
         _setWrappers();
       };
 
-      describe('When warning', function () {
-        beforeEach(function () { _setupValidationTest(VALIDATION_MESSAGE_TYPES.WARNING); });
+      describe('When warning', () => {
+        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.WARNING); });
         itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.WARNING);
       });
 
-      describe('When error', function () {
-        beforeEach(function () { _setupValidationTest(VALIDATION_MESSAGE_TYPES.ERROR); });
+      describe('When error', () => {
+        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.ERROR); });
         itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.ERROR);
       });
 
-      describe('When success', function () {
-        beforeEach(function () { _setupValidationTest(VALIDATION_MESSAGE_TYPES.SUCCESS); });
+      describe('When success', () => {
+        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.SUCCESS); });
         itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
       });
     });
 
-    describe('When checked', function () {
+    describe('When checked', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         props = { ...baseProps, checked: true };
         _setWrappers();
       });
 
-      it('should be checked', function () { itBehavesLikeChecked(input); });
+      it('should be checked', () => { itBehavesLikeChecked(input); });
     });
 
-    describe('When disabled', function () {
+    describe('When disabled', () => {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(() => {
         props = { ...baseProps, disabled: true };
         _setWrappers();
       });
 
-      it('should disable input', function () { assert.strictEqual(input.element.disabled, true); });
-      it('should have disabled class', function () { assert.exists(wrapper.find('.d-radio-group--disabled')); });
+      it(
+        'should disable input',
+        () => { expect(input.element.disabled).toBe(true); },
+      );
+      it(
+        'should have disabled class',
+        () => { expect(wrapper.find('.d-radio-group--disabled').exists()).toBeTruthy(); },
+      );
 
-      describe('When clicked', function () {
+      describe('When clicked', () => {
         // Test Setup
-        beforeEach(function () { wrapper.trigger('click'); });
+        beforeEach(() => { wrapper.trigger('click'); });
 
-        it('no events are emitted', function () { itBehavesLikeDoesNotEmitEvents(wrapper); });
+        it(
+          'no events are emitted',
+          () => { itBehavesLikeDoesNotEmitEvents(wrapper); },
+        );
       });
     });
 
-    describe('When slot(s) are provided', function () {
+    describe('When slot(s) are provided', () => {
       // Wrappers
       let labelSlotContainer;
       let descriptionSlotContainer;
@@ -176,46 +192,52 @@ describe('DtRadio Tests', function () {
         descriptionSlotContainer = wrapper.find('[data-qa="radio-description"]');
       };
 
-      describe('When a slotted label is provided', function () {
+      describe('When a slotted label is provided', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           slots = { default: slotLabel };
           _setWrappers();
           _setSlotContainers();
         });
 
-        it('should have slotted label', function () { assert.strictEqual(labelSlotContainer.text(), slotLabel); });
+        it(
+          'should have slotted label',
+          () => { expect(labelSlotContainer.text()).toBe(slotLabel); },
+        );
       });
 
-      describe('When a slotted description is provided', function () {
+      describe('When a slotted description is provided', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           slots = { description: slotDescription };
           _setWrappers();
           _setSlotContainers();
         });
 
-        it('should have slotted description', function () {
-          assert.strictEqual(descriptionSlotContainer.text(), slotDescription);
+        it('should have slotted description', () => {
+          expect(descriptionSlotContainer.text()).toBe(slotDescription);
         });
       });
 
-      describe('When slotted label and description are provided', function () {
+      describe('When slotted label and description are provided', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           slots = { default: slotLabel, description: slotDescription };
           _setWrappers();
           _setSlotContainers();
         });
 
-        it('should have slotted label', function () { assert.strictEqual(labelSlotContainer.text(), slotLabel); });
-        it('should have slotted description', function () {
-          assert.strictEqual(descriptionSlotContainer.text(), slotDescription);
+        it(
+          'should have slotted label',
+          () => { expect(labelSlotContainer.text()).toBe(slotLabel); },
+        );
+        it('should have slotted description', () => {
+          expect(descriptionSlotContainer.text()).toBe(slotDescription);
         });
       });
     });
 
-    describe('Extendability Tests', function () {
+    describe('Extendability Tests', () => {
       let element;
       const customClass = 'my-custom-class';
       const propName = 'some';
@@ -237,53 +259,61 @@ describe('DtRadio Tests', function () {
 
       // Shared Examples
       const itBehavesLikeAppliesClassToChildLocal = () => {
-        it('should apply custom class to child', function () {
+        it('should apply custom class to child', () => {
           itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
         });
       };
 
       const itBehavesLikeAppliesChildPropLocal = () => {
-        it('should have provided child prop', function () {
+        it('should have provided child prop', () => {
           itBehavesLikeAppliesChildProp(element, propName, propValue);
         });
       };
 
       // Test Setup
-      before(function () {
+      beforeAll(() => {
         childProps[propName] = propValue;
       });
-      beforeEach(function () {
+      beforeEach(() => {
         props = { ...baseProps, label: 'Label', description: 'Description' };
       });
 
-      describe('When an input class is provided', function () {
-        beforeEach(function () { _setupChildClassTest('inputClass', 'input'); });
+      describe('When an input class is provided', () => {
+        beforeEach(() => { _setupChildClassTest('inputClass', 'input'); });
         itBehavesLikeAppliesClassToChildLocal();
       });
 
-      describe('When an label class is provided', function () {
-        beforeEach(function () { _setupChildClassTest('labelClass', '[data-qa="radio-label"]'); });
+      describe('When an label class is provided', () => {
+        beforeEach(
+          () => { _setupChildClassTest('labelClass', '[data-qa="radio-label"]'); },
+        );
         itBehavesLikeAppliesClassToChildLocal();
       });
 
-      describe('When an description class is provided', function () {
-        beforeEach(function () { _setupChildClassTest('descriptionClass', '[data-qa="radio-description"]'); });
+      describe('When an description class is provided', () => {
+        beforeEach(
+          () => { _setupChildClassTest('descriptionClass', '[data-qa="radio-description"]'); },
+        );
         itBehavesLikeAppliesClassToChildLocal();
       });
 
-      describe('When label child props are provided', function () {
-        beforeEach(function () { _setupChildPropsTest('labelChildProps', '[data-qa="radio-label"]'); });
+      describe('When label child props are provided', () => {
+        beforeEach(
+          () => { _setupChildPropsTest('labelChildProps', '[data-qa="radio-label"]'); },
+        );
         itBehavesLikeAppliesChildPropLocal();
       });
 
-      describe('When description child props are provided', function () {
-        beforeEach(function () { _setupChildPropsTest('descriptionChildProps', '[data-qa="radio-description"]'); });
+      describe('When description child props are provided', () => {
+        beforeEach(
+          () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="radio-description"]'); },
+        );
         itBehavesLikeAppliesChildPropLocal();
       });
 
-      describe('When attrs are provided', function () {
+      describe('When attrs are provided', () => {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           attrs = { some: 'prop' };
           _setWrappers();
           element = input;
@@ -294,45 +324,45 @@ describe('DtRadio Tests', function () {
     });
   });
 
-  describe('Reactivity Tests', function () {
-    describe('Custom Event Tests', function () {
+  describe('Reactivity Tests', () => {
+    describe('Custom Event Tests', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      describe('When the radio is selected', function () {
+      describe('When the radio is selected', () => {
         // Test Setup
-        beforeEach(function () { input.trigger('click'); input.trigger('change'); });
+        beforeEach(() => { input.trigger('change'); });
 
-        it('should emit the input event with Value', function () {
+        it('should emit the input event with Value', () => {
           itBehavesLikeEmitsExpectedEvent(wrapper, 'input', value);
         });
       });
     });
 
-    describe('Listener Tests', function () {
-      describe('When there is a provided input listener', function () {
+    describe('Listener Tests', () => {
+      describe('When there is a provided input listener', () => {
         // Test Env
-        const inputListenerSpy = sinon.spy();
+        const inputListenerSpy = jest.fn();
 
         // Test Setup
-        beforeEach(function () {
+        beforeEach(() => {
           attrs = { onInput: inputListenerSpy };
           _setWrappers();
         });
 
-        describe('When the radio is clicked', function () {
+        describe('When the radio is clicked', () => {
           // Test Setup
-          beforeEach(function () { input.trigger('click'); input.trigger('change'); });
+          beforeEach(async () => { await input.trigger('change'); });
 
-          it('Should call input handler once', function () {
-            assert.strictEqual(inputListenerSpy.callCount, 1);
+          it('Should call input handler once', () => {
+            expect(inputListenerSpy).toHaveBeenCalledTimes(1);
           });
         });
       });
     });
   });
 
-  describe('When there is a Radio Group Context', function () {
+  describe('When there is a Radio Group Context', () => {
     // Test Environment
     const groupName = 'radioGroup';
 
@@ -352,35 +382,43 @@ describe('DtRadio Tests', function () {
 
     // Shared Examples
     const itBehavesLikeSetsInputName = () => {
-      it('sets the input name', function () { assert.strictEqual(input.attributes('name'), groupName); });
+      it(
+        'sets the input name',
+        () => { expect(input.attributes('name')).toBe(groupName); },
+      );
     };
 
-    describe('When the value matches the Radio', function () {
-      beforeEach(function () { _setGroupContext(value); });
+    describe('When the value matches the Radio', () => {
+      beforeEach(() => { _setGroupContext(value); });
 
       itBehavesLikeSetsInputName();
-      it('should be checked', function () { itBehavesLikeChecked(input); });
+      it('should be checked', () => { itBehavesLikeChecked(input); });
 
-      describe('When the radio group is disabled', function () {
+      describe('When the radio group is disabled', () => {
         // Test Setup
-        beforeEach(function () { _setGroupContext(value, true); });
+        beforeEach(() => { _setGroupContext(value, true); });
 
-        describe('When the radio is clicked', function () {
+        describe('When the radio is clicked', () => {
           // Test Setup
-          beforeEach(function () { wrapper.trigger('click'); });
+          beforeEach(() => { wrapper.trigger('click'); });
 
-          it('no events are emitted', function () { itBehavesLikeDoesNotEmitEvents(wrapper); });
+          it(
+            'no events are emitted',
+            () => { itBehavesLikeDoesNotEmitEvents(wrapper); },
+          );
         });
       });
 
-      describe('When the radio group has a validation state', function () {
-        beforeEach(function () { _setGroupContext(value, false, VALIDATION_MESSAGE_TYPES.SUCCESS); });
+      describe('When the radio group has a validation state', () => {
+        beforeEach(
+          () => { _setGroupContext(value, false, VALIDATION_MESSAGE_TYPES.SUCCESS); },
+        );
         itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
 
-        describe('When the radio has a validation state', function () {
+        describe('When the radio has a validation state', () => {
           // Test Setup
-          beforeEach(function () {
-            props = { ...props, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
+          beforeEach(() => {
+            props = { ...baseProps, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
             _setWrappers();
           });
 
@@ -389,11 +427,11 @@ describe('DtRadio Tests', function () {
       });
     });
 
-    describe('When the value does not match the Radio', function () {
-      beforeEach(function () { _setGroupContext(`not${value}`); });
+    describe('When the value does not match the Radio', () => {
+      beforeEach(() => { _setGroupContext(`not${value}`); });
 
       itBehavesLikeSetsInputName();
-      it('should not be checked', function () { itBehavesLikeNotChecked(input); });
+      it('should not be checked', () => { itBehavesLikeNotChecked(input); });
     });
   });
 });

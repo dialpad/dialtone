@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import DtButton from '../button/button.vue';
 import DtModal from './modal.vue';
 import { mount } from '@vue/test-utils';
@@ -17,7 +16,7 @@ const baseProps = {
   visuallyHiddenCloseLabel: 'Close modal',
 };
 
-describe('DtModal Tests', function () {
+describe('DtModal Tests', () => {
   let wrapper;
 
   let closeBtn;
@@ -47,82 +46,87 @@ describe('DtModal Tests', function () {
     _setWrappers();
   });
 
-  it('Should display title, banner and copy text based on props', async function () {
-    assert.isEmpty(copy.text());
-    assert.isEmpty(title.text());
+  it(
+    'Should display title, banner and copy text based on props',
+    async () => {
+      expect(copy.exists()).toBeTruthy();
+      expect(title.exists()).toBeTruthy();
 
-    const newCopy = 'test modal copy';
-    const newTitle = 'test modal title';
-    const newBanner = 'test modal banner';
-    await wrapper.setProps({
-      title: newTitle,
-      bannerTitle: newBanner,
-      copy: newCopy,
-    });
-    _setChildWrappers();
-    assert.equal(copy.text(), newCopy);
-    assert.equal(title.text(), newTitle);
-    assert.equal(banner.text(), newBanner);
+      const newCopy = 'test modal copy';
+      const newTitle = 'test modal title';
+      const newBanner = 'test modal banner';
+      await wrapper.setProps({
+        title: newTitle,
+        bannerTitle: newBanner,
+        copy: newCopy,
+      });
+      _setChildWrappers();
+      expect(copy.text()).toEqual(newCopy);
+      expect(title.text()).toEqual(newTitle);
+      expect(banner.text()).toEqual(newBanner);
+    },
+  );
+
+  it('Close button is visible by default', async () => {
+    expect(closeBtn.exists()).toBe(true);
   });
 
-  it('Close button is visible by default', async function () {
-    assert.isTrue(closeBtn.exists());
-  });
-
-  describe('When hideClose prop is true', function () {
+  describe('When hideClose prop is true', () => {
     const message = `If hideClose prop is true, visuallyHiddenClose and visuallyHiddenCloseLabel props
         need to be set so the component always includes a close button`;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       initializeSpy();
       await wrapper.setProps({ hideClose: true });
     });
 
-    afterEach(function () {
+    afterEach(() => {
       cleanSpy();
     });
 
-    it('Should hide close button', function () {
-      _setChildWrappers();
-      assert.isFalse(closeBtn.exists());
+    it('Should hide close button', () => {
+      expect(closeBtn.exists()).toBe(false);
     });
 
     itBehavesLikeRaisesValidationError(message);
   });
 
-  it('Should display slotted header, banner and content instead of title, bannerTitle and copy', function () {
-    const contentText = 'test content';
-    const headerText = 'test header';
-    const bannerText = 'title';
+  it(
+    'Should display slotted header, banner and content instead of title, bannerTitle and copy',
+    () => {
+      const contentText = 'test content';
+      const headerText = 'test header';
+      const bannerText = 'title';
 
-    wrapper = mount(DtModal, {
-      props: {
-        ...baseProps,
-        copy: 'non-slot copy',
-        title: 'non-slot title',
-        bannerTitle: 'non-slot banner',
-      },
-      slots: {
-        default: `<p>${contentText}</p>`,
-        header: `<h1>${headerText}</h1>`,
-        banner: `<p>${bannerText}</p>`,
-      },
-    });
-    _setChildWrappers();
+      wrapper = mount(DtModal, {
+        props: {
+          ...baseProps,
+          copy: 'non-slot copy',
+          title: 'non-slot title',
+          bannerTitle: 'non-slot banner',
+        },
+        slots: {
+          default: `<p>${contentText}</p>`,
+          header: `<h1>${headerText}</h1>`,
+          banner: `<p>${bannerText}</p>`,
+        },
+      });
+      _setChildWrappers();
 
-    assert.equal(copy.text(), contentText);
-    assert.equal(title.text(), headerText);
-    assert.equal(banner.text(), bannerText);
-  });
+      expect(copy.text()).toEqual(contentText);
+      expect(title.text()).toEqual(headerText);
+      expect(banner.text()).toEqual(bannerText);
+    },
+  );
 
-  it('Should set the aria-label on the close button', async function () {
+  it('Should set the aria-label on the close button', async () => {
     const labelProp = 'aria-label';
     const newAriaLabel = 'NEW test close aria label';
 
-    assert.equal(closeBtn.attributes(labelProp), baseProps.closeButtonProps.ariaLabel);
+    expect(closeBtn.attributes(labelProp)).toEqual(baseProps.closeButtonProps.ariaLabel);
     await wrapper.setProps({ closeButtonProps: { ariaLabel: newAriaLabel } });
     _setChildWrappers();
-    assert.equal(closeBtn.attributes(labelProp), newAriaLabel);
+    expect(closeBtn.attributes(labelProp)).toEqual(newAriaLabel);
   });
 
   it('Should emit a sync-able update event when overlay / close-icon are clicked' +
@@ -135,32 +139,35 @@ describe('DtModal Tests', function () {
     _setChildWrappers();
 
     const syncEvent = 'update:show';
-    assert.isEmpty(wrapper.emitted());
+    expect(wrapper.emitted()).toEqual({});
 
     await overlay.trigger('click');
-    assert.equal(wrapper.emitted()[syncEvent].length, 1);
-    assert.isFalse(wrapper.emitted()[syncEvent][0][0]);
+    expect(wrapper.emitted()[syncEvent].length).toEqual(1);
+    expect(wrapper.emitted()[syncEvent][0][0]).toBe(false);
 
     await overlay.trigger('keydown', { code: 'Escape' });
-    assert.equal(wrapper.emitted()[syncEvent].length, 2);
-    assert.isFalse(wrapper.emitted()[syncEvent][1][0]);
+    expect(wrapper.emitted()[syncEvent].length).toEqual(2);
+    expect(wrapper.emitted()[syncEvent][1][0]).toBe(false);
 
     await closeBtn.trigger('click');
-    assert.equal(wrapper.emitted()[syncEvent].length, 3);
-    assert.isFalse(wrapper.emitted()[syncEvent][2][0]);
-  });
+    expect(wrapper.emitted()[syncEvent].length).toEqual(3);
+    expect(wrapper.emitted()[syncEvent][2][0]).toBe(false);
+  },
+  );
 
-  it('Should pass content class through to root modal element', async function () {
-    // TODO: Use a shared test case for this
-    const modalClass = 'modal-class';
-    assert.isFalse(overlay.classes(modalClass));
+  it(
+    'Should pass content class through to root modal element',
+    async () => {
+      // TODO: Use a shared test case for this
+      const modalClass = 'modal-class';
+      expect(overlay.classes(modalClass)).toBe(false);
 
-    await wrapper.setProps({ modalClass });
-    _setChildWrappers();
-    assert.isTrue(overlay.classes(modalClass));
-  });
+      await wrapper.setProps({ modalClass });
+      expect(overlay.classes(modalClass)).toBe(true);
+    },
+  );
 
-  it('Should apply banner class', async function () {
+  it('Should apply banner class', async () => {
     const bannerClass = 'banner-class';
     const bannerTitle = 'title';
 
@@ -170,10 +177,10 @@ describe('DtModal Tests', function () {
     });
 
     _setChildWrappers();
-    assert.isTrue(banner.classes(bannerClass));
+    expect(banner.classes(bannerClass)).toBe(true);
   });
 
-  it('Should set default banner kind when no kind is set', async function () {
+  it('Should set default banner kind when no kind is set', async () => {
     const bannerTitle = 'title';
 
     await wrapper.setProps({
@@ -182,10 +189,10 @@ describe('DtModal Tests', function () {
     });
 
     _setChildWrappers();
-    assert.isTrue(banner.classes(MODAL_BANNER_KINDS[DtModal.props.bannerKind.default]));
+    expect(banner.classes(MODAL_BANNER_KINDS[DtModal.props.bannerKind.default])).toBe(true);
   });
 
-  it('Should apply banner kind', async function () {
+  it('Should apply banner kind', async () => {
     const bannerKind = 'info';
     const bannerTitle = 'title';
 
@@ -196,39 +203,41 @@ describe('DtModal Tests', function () {
     });
 
     _setChildWrappers();
-    assert.isTrue(banner.classes(MODAL_BANNER_KINDS[bannerKind]));
+    expect(banner.classes(MODAL_BANNER_KINDS[bannerKind])).toBe(true);
   });
 
-  it('Should pass content class through to content modal element', async function () {
-    const contentClass = 'content-class';
-    assert.isFalse(copy.classes(contentClass));
+  it(
+    'Should pass content class through to content modal element',
+    async () => {
+      const contentClass = 'content-class';
+      expect(copy.classes(contentClass)).toBe(false);
 
-    await wrapper.setProps({ contentClass });
-    _setChildWrappers();
+      await wrapper.setProps({ contentClass });
+      _setChildWrappers();
+      expect(copy.classes(contentClass)).toBe(true);
+    },
+  );
 
-    assert.isTrue(copy.classes(contentClass));
-  });
-
-  it('Should NOT contain a visually hidden close button', function () {
+  it('Should NOT contain a visually hidden close button', () => {
     itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
   });
 
-  describe('When visuallyHiddenClose is true', function () {
-    beforeEach(async function () {
+  describe('When visuallyHiddenClose is true', () => {
+    beforeEach(async () => {
       await wrapper.setProps({ visuallyHiddenClose: true });
     });
 
-    it('should contain a visually hidden close button', function () {
+    it('should contain a visually hidden close button', () => {
       itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper);
     });
 
-    describe('When visuallyHiddenCloseLabel is null', function () {
-      beforeEach(async function () {
+    describe('When visuallyHiddenCloseLabel is null', () => {
+      beforeEach(async () => {
         initializeSpy();
         await wrapper.setProps({ visuallyHiddenCloseLabel: null });
       });
 
-      afterEach(function () {
+      afterEach(() => {
         cleanSpy();
       });
 
