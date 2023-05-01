@@ -39,7 +39,7 @@ import DtButton from '@/components/button/button';
 import { DtIcon } from '@/components/icon';
 
 export default {
-  name: 'SettingsMenuButton',
+  name: 'DtRecipeSettingsMenuButton',
 
   components: {
     DtButton,
