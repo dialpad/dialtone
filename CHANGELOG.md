@@ -1,3 +1,10 @@
+## [2.81.3](https://github.com/dialpad/dialtone-vue/compare/v2.81.2...v2.81.3) (2023-05-01)
+
+
+### Bug Fixes
+
+* **Recipe Grouped Chip:** grouped chip width and content style fixes. ([#949](https://github.com/dialpad/dialtone-vue/issues/949)) ([6bd84ec](https://github.com/dialpad/dialtone-vue/commit/6bd84ec5a4678949f058d102d4f966814e05c835))
+
 ## [2.81.2](https://github.com/dialpad/dialtone-vue/compare/v2.81.1...v2.81.2) (2023-05-01)
 
 
