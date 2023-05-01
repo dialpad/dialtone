@@ -1,3 +1,12 @@
+# [3.64.0](https://github.com/dialpad/dialtone-vue/compare/v3.63.0...v3.64.0) (2023-05-01)
+
+
+### Features
+
+* **Emoji Picker:** implement initial mvp ([#839](https://github.com/dialpad/dialtone-vue/issues/839)) ([983661c](https://github.com/dialpad/dialtone-vue/commit/983661c4877f2933917c05be745880b119c96a36))
+* **Header:** add setting menu button with update option ([#947](https://github.com/dialpad/dialtone-vue/issues/947)) ([e58daa5](https://github.com/dialpad/dialtone-vue/commit/e58daa53a5b3740511b2621e5fac6b05bb76d3b4))
+* migrate from mocha to jest ([#941](https://github.com/dialpad/dialtone-vue/issues/941)) ([b6b19af](https://github.com/dialpad/dialtone-vue/commit/b6b19af3aa5a59c234a4b9bccac6abbdeaba054e))
+
 # [3.63.0](https://github.com/dialpad/dialtone-vue/compare/v3.62.0...v3.63.0) (2023-04-27)
 
 
