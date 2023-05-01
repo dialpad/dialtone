@@ -1,3 +1,10 @@
+## [2.81.2](https://github.com/dialpad/dialtone-vue/compare/v2.81.1...v2.81.2) (2023-05-01)
+
+
+### Bug Fixes
+
+* **Header:** fix exports ([#950](https://github.com/dialpad/dialtone-vue/issues/950)) ([1e96b68](https://github.com/dialpad/dialtone-vue/commit/1e96b683e1b7358960e70522a2b6ab270f3e5dfc))
+
 ## [2.81.1](https://github.com/dialpad/dialtone-vue/compare/v2.81.0...v2.81.1) (2023-04-27)
 
 
