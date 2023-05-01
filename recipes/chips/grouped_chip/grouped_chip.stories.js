@@ -103,7 +103,7 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
   leftIcon: 'clock',
   leftContent: `<div>
-    0.13
+    2:50:13
 </div>`,
   rightIcon: 'pause',
   rightContent: `<div>
