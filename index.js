@@ -49,7 +49,7 @@ export * from './recipes/list_items/contact_info';
 export * from './recipes/notices/top_banner_info';
 export * from './recipes/cards/ivr_node';
 export * from './recipes/chips/grouped_chip';
-export * from './recipes/header/settings_menu_button/settings_menu_button';
+export * from './recipes/header/settings_menu_button';
 export * from './recipes/leftbar/general_row';
 export * from './recipes/leftbar/group_row';
 export * from './recipes/leftbar/contact_row';
