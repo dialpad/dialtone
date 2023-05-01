@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import DtEmojiPicker from './emoji_picker';
+
+# DtEmojiPicker
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="<GROUP>-dt-emoji-picker--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="<GROUP>-dt-emoji-picker--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtEmojiPicker } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-emoji-picker
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-emoji-picker
+  some-other="variant"
+/>
+```

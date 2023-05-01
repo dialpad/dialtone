@@ -1,5 +1,5 @@
 import emojiRegex from 'emoji-regex';
-import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json';
+import { emojisIndexed } from '@/components/emoji_picker/emojis';
 
 export const emojiVersion = '6.6';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
@@ -13,7 +13,7 @@ export let emojiFileExtensionSmall = '.png';
 export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
-export const emojiJson = emojiJsonLocal;
+export const emojiJson = emojisIndexed;
 
 export function getEmojiData () {
   return emojiJson;
