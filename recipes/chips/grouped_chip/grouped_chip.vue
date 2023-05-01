@@ -9,7 +9,7 @@
       content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-blr-pill d-bgc-moderate-opaque d-w100p d-wmx64"
+      class="d-blr-pill d-bgc-moderate-opaque d-wmx84 dt-chip-content"
     >
       <template
         v-if="hasSlotContent($slots.leftIcon)"
@@ -41,7 +41,7 @@
       content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-brr-pill d-bgc-purple-200 d-w100p d-wmx64"
+      class="d-brr-pill d-bgc-purple-200 d-wmx84 dt-chip-content"
     >
       <template #icon>
         <div
@@ -56,7 +56,6 @@
         <div
           v-if="hasSlotContent($slots.rightContent)"
           data-qa="right-grouped-chip-content"
-          class="d-wmx50p"
         >
           <!-- @slot Slot for right chip content information -->
           <slot name="rightContent" />
@@ -84,3 +83,9 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+.dt-chip-content {
+  font-variant-numeric: tabular-nums;
+}
+</style>
