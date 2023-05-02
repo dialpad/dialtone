@@ -1,3 +1,17 @@
+# [1.11.0](https://github.com/dialpad/dialtone-tokens/compare/v1.10.0...v1.11.0) (2023-05-02)
+
+
+### Features
+
+* **color:** theme-dark surface ([8bd0e4d](https://github.com/dialpad/dialtone-tokens/commit/8bd0e4dbcd31ddd938e67a2c22f10f123f154315))
+* **size-and-sapce:** added between 800/900 stops ([230d354](https://github.com/dialpad/dialtone-tokens/commit/230d354e142c6f41ccd0a843bde14df45d2e3a09))
+* **size-and-space:** added 775 stop ([cda44fb](https://github.com/dialpad/dialtone-tokens/commit/cda44fbed75685556bda0d704de5acd1b36e130b))
+* **size-and-space:** added between stops, e.g. 625 ([000ae83](https://github.com/dialpad/dialtone-tokens/commit/000ae83e4b199910263a390a88186a2fa6ff8138))
+* **size-and-space:** increment size tokens up to 1200 ([154936c](https://github.com/dialpad/dialtone-tokens/commit/154936c2d68f8ebf1ab408e7677d6772121e24be))
+* **size-and-space:** percentage-based tokens ([de3ed3e](https://github.com/dialpad/dialtone-tokens/commit/de3ed3e23becfef106108f0ec847222e68652391))
+* **size-and-space:** size/space stops between 1000/1100 ([cc961fa](https://github.com/dialpad/dialtone-tokens/commit/cc961fa7f57393d14ebb44363cc8befda62e99ea))
+* **size-and-space:** stops between 1100/1200 ([18b496d](https://github.com/dialpad/dialtone-tokens/commit/18b496ded08279673f356c6b9277533a0af0f14d))
+
 # [1.10.0](https://github.com/dialpad/dialtone-tokens/compare/v1.9.0...v1.10.0) (2023-04-18)
 
 
