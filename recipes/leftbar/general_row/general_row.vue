@@ -3,7 +3,7 @@
     :class="leftbarGeneralRowClasses"
     data-qa="dt-leftbar-row"
   >
-    <button
+    <a
       class="dt-leftbar-row__primary"
       :data-qa="'data-qa' in $attrs ? $attrs['data-qa'] : 'dt-leftbar-row-link'"
       :aria-label="getAriaLabel"
@@ -84,7 +84,7 @@
           </template>
         </dt-tooltip>
       </div>
-    </button>
+    </a>
     <div
       v-if="hasCallButton"
       class="dt-leftbar-row__action"
