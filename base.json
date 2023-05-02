@@ -307,7 +307,7 @@
           "type": "fontFamilies"
         },
         "mono": {
-          "value": "SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, Courier, monospace",
+          "value": "SFMono-Regular, \"SF Mono\", Consolas, \"Liberation Mono\", Menlo, Courier, monospace",
           "type": "fontFamilies"
         }
       },
