@@ -1,3 +1,13 @@
+## [3.64.1](https://github.com/dialpad/dialtone-vue/compare/v3.64.0...v3.64.1) (2023-05-02)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** storybook cleanup ([9f86caf](https://github.com/dialpad/dialtone-vue/commit/9f86caf63c1d4f1edbd2b18a457d003d84a75dde))
+* **Header:** fix exports ([#951](https://github.com/dialpad/dialtone-vue/issues/951)) ([3075726](https://github.com/dialpad/dialtone-vue/commit/30757262771def8962f9432f1ed64c481011bc16))
+* **Leftbar General Row:** button to a ([255cbb5](https://github.com/dialpad/dialtone-vue/commit/255cbb5864428a4c6f3ecf550b674c709e94ff95))
+* **Recipe Grouped Chip:** grouped chip width and content style fixes. ([#952](https://github.com/dialpad/dialtone-vue/issues/952)) ([6491905](https://github.com/dialpad/dialtone-vue/commit/64919055cef26e046cac5182da71f4f6cd517fe8))
+
 # [3.64.0](https://github.com/dialpad/dialtone-vue/compare/v3.63.0...v3.64.0) (2023-05-01)
 
 
