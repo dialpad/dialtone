@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.81.3",
+  "version": "2.81.4",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "build": "npm run clean && npm run build-main && npm run build-emoji && npm run build:documentation",

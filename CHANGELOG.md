@@ -1,3 +1,10 @@
+## [2.81.4](https://github.com/dialpad/dialtone-vue/compare/v2.81.3...v2.81.4) (2023-05-02)
+
+
+### Bug Fixes
+
+* **Leftbar General Row:** button to a ([d26667a](https://github.com/dialpad/dialtone-vue/commit/d26667a76c073f8d2172862ac6bf53a9883bc634))
+
 ## [2.81.3](https://github.com/dialpad/dialtone-vue/compare/v2.81.2...v2.81.3) (2023-05-01)
 
 
