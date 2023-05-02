@@ -104,9 +104,11 @@ const props = defineProps({
    * The list of tabsets to show, it is necessary to be updated with the correct language
    * It must respect the provided order.
    * @type {Array}
-   * @default ['Most recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']
+   * @required
    * @example
-   * <dt-emoji-picker :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+   * <dt-emoji-picker
+   *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
+   *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
    */
   tabSetLabels: {
     type: Array,
@@ -127,11 +129,19 @@ const props = defineProps({
     default: 'Default',
   },
 
+  /**
+   * Tooltip shown when skin selector button is hovered.
+   * @type {String}
+   * @required
+   * @example
+   * <dt-emoji-picker :skin-selector-button-tooltip-label="'Change default skin tone'" />
+   */
   skinSelectorButtonTooltipLabel: {
     type: String,
     required: true,
   },
 });
+
 const emits = defineEmits(
   [
     /**
@@ -163,7 +173,8 @@ const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
  * Handle the selected tabset event
  * We're creating a new object with the same value as selectedTabset and assigning it back to selectedTabset.
  * Vue will see this as a new object and trigger the watcher in the child component.
- * Using this method, we are able to trigger the watcher in the child component even if the value being passed is the same as the previous value.
+ * Using this method, we are able to trigger the watcher in the child component even if the value being passed is the
+ * same as the previous value.
  * @event selectedTabset
  * @param tabName {String} - The name of the tab that was selected
  */
