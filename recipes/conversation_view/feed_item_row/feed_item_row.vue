@@ -16,7 +16,7 @@
       >
         <img
           v-if="avatarImageUrl"
-          data-qa="feed-item-row-avatar"
+          data-qa="feed-item-row-avatar-img"
           alt=""
           :src="avatarImageUrl"
         >
@@ -26,7 +26,7 @@
         v-if="!showHeader"
         v-show="isActive"
         class="d-fs-100 d-fw-normal d-ws-nowrap d-lh-100 d-fc-tertiary d-mb6"
-        data-qa="feed-item-row-time-left"
+        data-qa="feed-item-row-left-time"
       >
         {{ shortTime }}
       </div>
@@ -36,6 +36,7 @@
       <!-- Feed Item -->
       <div
         v-if="showHeader"
+        data-qa="feed-item-row-header"
         class="d-d-flex d-ai-center"
       >
         <p class="d-fs-200 d-lh-300 d-fw-bold d-to-ellipsis d-of-hidden d-ws-nowrap">
@@ -48,13 +49,19 @@
         </time>
       </div>
       <!-- @slot Default content slot for feed item row -->
-      <span class="content-text-wrapper-class">
+      <span
+        class="content-text-wrapper-class"
+        data-qa="feed-item-row-content"
+      >
         <slot />
       </span>
     </article>
 
     <template #bottom>
-      <div class="d-d-flex d-fw-wrap">
+      <div
+        class="d-d-flex d-fw-wrap"
+        data-qa="feed-item-row-reactions"
+      >
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
       </div>
@@ -66,6 +73,7 @@
     <template #right>
       <div
         v-show="isActive"
+        data-qa="feed-item-row-menu"
         class="d-ps-absolute d-tn16 d-r12"
       >
         <dt-lazy-show
@@ -183,7 +191,6 @@ export default {
 
     feedListeners () {
       return {
-        ...this.$listeners,
         mouseenter: () => this.setHover(true),
         mouseleave: () => this.setHover(false),
         focusin: () => this.setFocus(true),
