@@ -54,10 +54,10 @@ StyleDictionary.registerTransform({
   },
   transformer: (token, options) => {
     if (token.name === 'body' || token.name === 'expressive') {
-      return `"${token.value}, ${FALLBACK_FONTS.join(', ')}"`
+      return `${token.value}, ${FALLBACK_FONTS.join(', ')}`
     }
     else if (token.name === 'mono') {
-      return `"${token.value}, ${FALLBACK_FONTS_MONO.join(', ')}"`
+      return `${token.value}, ${FALLBACK_FONTS_MONO.join(', ')}`
     }
     return token.value;
   }
@@ -74,6 +74,20 @@ StyleDictionary.registerTransform({
       return 'FontFamily.Monospace';
     }
     return 'FontFamily.Default';
+  }
+});
+
+StyleDictionary.registerTransform({
+  name: 'dt/ios/fonts/transformToStack',
+  type: 'value',
+  matcher: function(token) {
+    return FONT_FAMILY_IDENTIFIERS.includes(token.type)
+  },
+  transformer: (token, options) => {
+    if (token.name === 'mono' || token.path.includes('code')) {
+      return 'UIFont.monospacedSystemFont(ofSize: 15)';
+    }
+    return 'UIFont.systemFont(ofSize: 15)';
   }
 });
 

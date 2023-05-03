@@ -66,7 +66,7 @@ module.exports = {
       ]
     },
     ios: {
-      transforms: ['dt/fonts/transformToStack',  'attribute/cti', 'name/cti/camel', 'dt/ios/color', 'dt/ios/size/pxToCGFloat', 'dt/ios/lineHeight/percentToDecimal', 'dt/stringify'],
+      transforms: ['dt/ios/fonts/transformToStack',  'attribute/cti', 'name/cti/camel', 'dt/ios/color', 'dt/ios/size/pxToCGFloat', 'dt/ios/lineHeight/percentToDecimal', 'dt/stringify'],
       actions: ['buildDocJson'],
       prefix: 'dt',
       buildPath: 'dist/ios/',
