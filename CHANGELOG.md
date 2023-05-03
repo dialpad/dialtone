@@ -1,3 +1,15 @@
+# [1.12.0](https://github.com/dialpad/dialtone-tokens/compare/v1.11.0...v1.12.0) (2023-05-03)
+
+
+### Bug Fixes
+
+* stringified font family ([ae391ff](https://github.com/dialpad/dialtone-tokens/commit/ae391fffa61e4635c112e896f3898fa5fe2ced1a))
+
+
+### Features
+
+* **size-and-space:** fixed 112 to 114 ([95676f9](https://github.com/dialpad/dialtone-tokens/commit/95676f91894838f0c1dd634c7c4feb6b0bbb7f3e))
+
 # [1.11.0](https://github.com/dialpad/dialtone-tokens/compare/v1.10.0...v1.11.0) (2023-05-02)
 
 
