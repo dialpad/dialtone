@@ -480,7 +480,7 @@
         "type": "sizing"
       },
       "775": {
-        "value": "({size.750} + {size.800}) / 2",
+        "value": "(({size.750} + {size.800}) / 2) + {size.200}",
         "type": "sizing"
       },
       "800": {
@@ -942,7 +942,7 @@
         "type": "spacing"
       },
       "775": {
-        "value": "({space.750} + {space.800}) / 2",
+        "value": "(({space.750} + {space.800}) / 2) + {size.200}",
         "type": "spacing"
       },
       "800": {
