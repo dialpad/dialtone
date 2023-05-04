@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as PaginationStories from './pagination.stories';
+
+<Meta of={PaginationStories}/>
 
 # Pagination
 
@@ -9,18 +13,18 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 ## Base Style
 
 <Canvas>
-  <Story id="components-pagination--default" />
+  <Story of={PaginationStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-pagination--variants" />
+  <Story of={PaginationStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 
@@ -43,7 +47,7 @@ import { DtPagination } from '@dialpad/dialtone-vue';
   />
 </template>
 <script>
-import DtPagination from './pagination';
+import DtPagination from './pagination.vue';
 
 export default {
   name: 'DtPaginationDefault',

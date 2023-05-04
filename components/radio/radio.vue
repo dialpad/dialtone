@@ -52,7 +52,7 @@ import {
   CheckableMixin,
   GroupableMixin,
   MessagesMixin,
-} from '@/common/mixins/input.js';
+} from '../../common/mixins/input.js';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
 

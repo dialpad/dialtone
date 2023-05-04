@@ -1,6 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import LinkTo from '@storybook/addon-links/react';
-import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as CallbarButtonWithPopoverStories from './callbar_button_with_popover.stories';
+
+<Meta of={CallbarButtonWithPopoverStories}/>
 
 # Callbar Button With Popover
 
@@ -11,13 +13,13 @@ import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 ## Base Style
 
 <Canvas>
-  <Story id="recipes-buttons-callbar-button-with-popover--default" />
+  <Story of={CallbarButtonWithPopoverStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="recipes-buttons-callbar-button-with-popover--variants" />
+  <Story of={CallbarButtonWithPopoverStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
@@ -25,7 +27,7 @@ import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 This component also accepts all [Popover Component](?path=/docs/components-popover--default#slots-props--events) props.
 Those will be bind to the Popover instance.
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

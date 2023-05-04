@@ -82,12 +82,12 @@ import {
 import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
-} from './select_menu_constants.js';
+} from './select_menu_constants';
 import {
   getUniqueString,
   getValidationState,
 } from '@/common/utils';
-import { MessagesMixin } from '@/common/mixins/input.js';
+import { MessagesMixin } from '../../common/mixins/input.js';
 import { optionsValidator } from './select_menu_validators.js';
 import { DtValidationMessages } from '../validation_messages';
 

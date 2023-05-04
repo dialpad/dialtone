@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeSettingsMenuButton from './settings_menu_button';
-import DtRecipeSettingsMenuButtonMdx from './settings_menu_button.mdx';
+import DtRecipeSettingsMenuButton from './settings_menu_button.vue';
 import DtRecipeSettingsMenuButtonDefaultTemplate from './settings_menu_button_default.story.vue';
 
 // Default Prop Values
@@ -52,29 +51,17 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeSettingsMenuButtonMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeSettingsMenuButtonDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeSettingsMenuButtonDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Update',
-  ariaLabel: 'Update app',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Update',
+    ariaLabel: 'Update app',
+  },
 };

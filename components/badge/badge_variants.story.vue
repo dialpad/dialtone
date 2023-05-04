@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import DtBadge from './badge';
+import DtBadge from './badge.vue';
 import { BADGE_TYPE_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
 
 export default {

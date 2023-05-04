@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es6",
     "target": "esnext",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     },
   },
-  "include": ["*.{js,vue}"],
-  "exclude": ["**/node_modules", "**/compiled", "**/.cache", "**/compressed"],
+  "include": ["**/*"],
+  "exclude": ["**/node_modules", "**/compiled", "**/.cache", "**/compressed", "**/dist", "**/storybook-static"],
 }

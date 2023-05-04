@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import KeyboardNavigation from '../../common/mixins/keyboard_list_navigation';
 import { getUniqueString } from '@/common/utils';
 import ComboboxLoadingList from './combobox_loading-list.vue';
 import ComboboxEmptyList from './combobox_empty-list.vue';

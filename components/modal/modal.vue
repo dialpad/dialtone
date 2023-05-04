@@ -118,13 +118,13 @@
 /* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
-import Modal from '@/common/mixins/modal.js';
+import Modal from '../../common/mixins/modal';
 import { MODAL_BANNER_KINDS, MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import SrOnlyCloseButton from '@/common/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';
 
 /**

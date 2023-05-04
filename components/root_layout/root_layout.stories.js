@@ -1,16 +1,21 @@
 /* eslint-disable max-len */
 // import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS, ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
-import DtRootLayout from './root_layout';
-import DtRootLayoutMdx from './root_layout.mdx';
+import {
+  ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS,
+  ROOT_LAYOUT_SIDEBAR_POSITIONS,
+} from './root_layout_constants';
+import DtRootLayout from './root_layout.vue';
+
 import DtRootLayoutDefaultTemplate from './root_layout_default.story.vue';
 
 // Default Prop Values
 export const argsData = {
+  sidebarPosition: 'left',
   header: '<div class="d-bgc-purple-200 d-h100p">Header</div>',
   footer: '<div class="d-bgc-gold-200 d-h100p">Footer</div>',
-  sidebar: '<div class="d-bgc-black-200 d-hmn100p"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
+  sidebar:
+    '<div class="d-bgc-black-200 d-hmn100p"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
   default: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim eleifend condimentum.
   Vestibulum euismod leo at finibus mattis. Integer ut dui id ligula tincidunt pellentesque. Vestibulum a ullamcorper
   risus. Ut tristique sapien eget magna lacinia, non interdum lacus malesuada. Proin augue lacus, finibus eget aliquam
@@ -40,7 +45,6 @@ export const argsData = {
   <!-- @slot example slot decorator -->
 */
 export const argTypesData = {
-
   // Slots
   default: {
     control: 'text',
@@ -87,10 +91,9 @@ export const argTypesData = {
 
   // Props
   sidebarPosition: {
-    defaultValue: 'left',
+    options: Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS),
     control: {
       type: 'select',
-      options: Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS),
     },
   },
 
@@ -110,36 +113,26 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRootLayoutMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-    layout: 'fullscreen',
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRootLayoutDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRootLayoutDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: argsData.default.repeat(40),
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: argsData.default.repeat(40),
+  },
 };
 
-export const StickyHeader = DefaultTemplate.bind({});
-StickyHeader.args = {
-  headerSticky: true,
-  fixed: false,
-  default: argsData.default.repeat(40),
+export const StickyHeader = {
+  render: DefaultTemplate,
+
+  args: {
+    headerSticky: true,
+    fixed: false,
+    default: argsData.default.repeat(40),
+  },
 };

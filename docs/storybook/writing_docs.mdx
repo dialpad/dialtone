@@ -1,11 +1,8 @@
-import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
+import { Meta, Subtitle, Controls } from '@storybook/blocks';
 
 <Meta title="Docs/Storybook/Writing Documentation" />
 
 # Writing Documentation
-<Subtitle>
-  Writing documentation for Storybook using MDX
-</Subtitle>
 
 ## How to write MDX documentation
 
@@ -59,13 +56,13 @@ Each component should have a section which lists all of the props which the comp
 the props, we also need to provide documentation on the default value for the prop and a brief description about the
 prop which includes accepted types.
 
-You can either manually provide this documentation or use the `ArgsTable` component to provide some auto generated
+You can either manually provide this documentation or use the `Controls` component to provide some auto generated
 documentation.
 
-#### ArgsTable Example
+#### Controls Example
 
 ```jsx
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 ```
 
 Note: `PRIMARY_STORY` is imported from `@storybook/addon-docs/blocks`.

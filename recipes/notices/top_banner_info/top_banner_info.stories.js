@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeTopBannerInfo from './top_banner_info';
-import DtRecipeTopBannerInfoMdx from './top_banner_info.mdx';
+import DtRecipeTopBannerInfo from './top_banner_info.vue';
+
 import DtRecipeTopBannerInfoDefaultTemplate from './top_banner_info_default.story.vue';
 import DtRecipeTopBannerInfoVariantsTemplate from './top_banner_info_variants.story.vue';
 import { COLOR_CODES } from './top_banner_info_constants';
@@ -34,9 +34,9 @@ export const argTypesData = {
   // Props
   colorCode: {
     description: 'Background color of the banner',
+    options: COLOR_CODES,
     control: {
       type: 'select',
-      options: COLOR_CODES,
     },
   },
 
@@ -90,59 +90,40 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeTopBannerInfoMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeTopBannerInfoDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeTopBannerInfoVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeTopBannerInfoDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeTopBannerInfoVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-        {
-          id: 'duplicate-id',
-          enabled: false,
-        },
-      ],
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+          {
+            id: 'duplicate-id',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

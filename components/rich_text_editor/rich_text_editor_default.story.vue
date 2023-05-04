@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import DtRichTextEditor from './rich_text_editor';
+import DtRichTextEditor from './rich_text_editor.vue';
 
 export default {
   name: 'DtRichTextEditorDefault',

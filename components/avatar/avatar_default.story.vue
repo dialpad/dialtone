@@ -21,7 +21,7 @@
 
 <script>
 import { htmlFragment } from '@/common/utils';
-import DtAvatar from './avatar';
+import DtAvatar from './avatar.vue';
 
 export default {
   name: 'DtAvatarDefault',

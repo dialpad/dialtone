@@ -1,4 +1,7 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as CheckboxGroupStories from './checkbox_group.stories';
+
+<Meta of={CheckboxGroupStories}/>
 
 # Checkbox Group
 
@@ -15,18 +18,18 @@ expected that an `aria-label` will be given in order to provide an invisible lab
 Group should contain one or more Checkboxes which users can make selection(s) from.
 
 <Canvas>
-  <Story id="components-checkbox-group--default" />
+  <Story of={CheckboxGroupStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-checkbox-group--variants" />
+  <Story of={CheckboxGroupStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Model
 

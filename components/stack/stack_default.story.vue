@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import DtStack from './stack';
+import DtStack from './stack.vue';
 
 export default {
   name: 'StackDefault',

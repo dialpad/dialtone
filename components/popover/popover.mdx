@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as PopoverStories from './popover.stories';
+
+<Meta of={PopoverStories}/>
 
 # Popovers
 
@@ -17,7 +21,7 @@ the main content is scrolled.
 content
 
 <Canvas>
-  <Story id="components-popover--default" />
+  <Story of={PopoverStories.Default} />
 </Canvas>
 
 ## Variants
@@ -38,12 +42,12 @@ the look of the popover content between usages. To remove the padding from the c
 ### Variants
 
 <Canvas>
-  <Story id="components-popover--variants" />
+  <Story of={PopoverStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Basic Usage
 

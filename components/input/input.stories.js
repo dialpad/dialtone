@@ -1,12 +1,28 @@
 /* eslint-disable max-lines */
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtInput from './input';
+import DtInput from './input.vue';
 import { INPUT_SIZES, INPUT_TYPES } from './input_constants';
-import InputMdx from './input.mdx';
+
 import InputDefault from './input_default.story.vue';
 
 const iconsList = getIconNames();
+
+export const argsData = {
+  type: DtInput.props.type.default,
+  size: INPUT_SIZES.DEFAULT,
+  placeholder: 'placeholder',
+  label: 'Label',
+  iconSize: null,
+  onBlur: action('blur'),
+  onInput: action('input'),
+  onClear: action('clear'),
+  onFocus: action('focus'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
+  onUpdateLength: action('update:length'),
+  onUpdateIsInvalid: action('update:invalid'),
+};
 
 // Controls
 export const argTypesData = {
@@ -58,10 +74,9 @@ export const argTypesData = {
     control: 'text',
   },
   type: {
-    defaultValue: DtInput.props.type.default,
+    options: [null, ...Object.values(INPUT_TYPES)],
     control: {
       type: 'select',
-      options: [null, ...Object.values(INPUT_TYPES)],
     },
     table: {
       defaultValue: {
@@ -73,11 +88,10 @@ export const argTypesData = {
     control: 'object',
   },
   size: {
+    options: Object.values(INPUT_SIZES),
     control: {
       type: 'select',
-      options: Object.values(INPUT_SIZES),
     },
-    defaultValue: INPUT_SIZES.DEFAULT,
     table: {
       defaultValue: {
         summary: INPUT_SIZES.DEFAULT,
@@ -85,11 +99,10 @@ export const argTypesData = {
     },
   },
   iconSize: {
+    options: [null, ...Object.values(INPUT_SIZES)],
     control: {
       type: 'select',
-      options: [null, ...Object.values(INPUT_SIZES)],
     },
-    defaultValue: null,
     table: {
       defaultValue: {
         summary: 'null',
@@ -230,19 +243,6 @@ export const argTypesData = {
   },
 };
 
-export const argsData = {
-  placeholder: 'placeholder',
-  label: 'Label',
-  onBlur: action('blur'),
-  onInput: action('input'),
-  onClear: action('clear'),
-  onFocus: action('focus'),
-  onFocusIn: action('focusin'),
-  onFocusOut: action('focusout'),
-  onUpdateLength: action('update:length'),
-  onUpdateIsInvalid: action('update:invalid'),
-};
-
 const decorator = () => ({
   template: '<div style="width: 500px"><story /></div>',
 });
@@ -250,120 +250,142 @@ const decorator = () => ({
 export default {
   title: 'Components/Input',
   component: DtInput,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: InputMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   decorators: [decorator],
   excludeStories: /.*Data$/,
   argTypes: argTypesData,
   args: argsData,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, InputDefault);
-
-export const Default = Template.bind({});
-Default.parameters = {};
-
-export const WithDescription = Template.bind({});
-WithDescription.args = {
-  label: 'Label',
-  description: 'Description',
-};
-
-export const WithLeftIcon = Template.bind({});
-WithLeftIcon.args = {
-  leftIcon: 'send',
-};
-
-export const WithRightIcon = Template.bind({});
-WithRightIcon.args = {
-  rightIcon: 'lock-filled',
-};
-
-export const WithBothIcons = Template.bind({});
-WithBothIcons.parameters = {
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'duplicate-id',
-          enabled: false,
-        },
-      ],
-    },
+export const Default = {
+  render: (args, { argTypes }) => {
+    return createTemplateFromVueFile(args, argTypes, InputDefault);
   },
 };
-WithBothIcons.args = {
-  leftIcon: 'send',
-  rightIcon: 'lock-filled',
+
+export const WithDescription = {
+  ...Default,
+  args: {
+    label: 'Label',
+    description: 'Description',
+  },
 };
 
-export const WithWarning = Template.bind({});
-WithWarning.args = {
-  messages: [{ message: 'This is a warning message', type: 'warning' }],
+export const WithLeftIcon = {
+  ...Default,
+  args: {
+    leftIcon: 'send',
+  },
 };
-WithWarning.parameters = {
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-      ],
+
+export const WithRightIcon = {
+  ...Default,
+  args: {
+    rightIcon: 'lock-filled',
+  },
+};
+
+export const WithBothIcons = {
+  ...Default,
+  args: {
+    leftIcon: 'send',
+    rightIcon: 'lock-filled',
+  },
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'duplicate-id',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };
 
-export const WithError = Template.bind({});
-WithError.args = {
-  messages: [{ message: 'This is an error message', type: 'error' }],
-};
-WithError.parameters = {};
-
-export const WithSuccess = Template.bind({});
-WithSuccess.args = {
-  messages: [{ message: 'This is a success message', type: 'success' }],
-};
-WithSuccess.parameters = {};
-
-export const WithMultipleMessages = Template.bind({});
-WithMultipleMessages.args = {
-  messages: [
-    { message: 'This is the first message', type: 'error' },
-    { message: 'This is the second message', type: 'error' },
-    { message: 'This is the third message', type: 'error' },
-  ],
+export const WithWarning = {
+  ...Default,
+  args: {
+    messages: [{ message: 'This is a warning message', type: 'warning' }],
+  },
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
+    },
+  },
 };
 
-export const ExtraSmall = Template.bind({});
-ExtraSmall.args = { size: 'xs' };
+export const WithError = {
+  ...Default,
+  args: {
+    messages: [{ message: 'This is an error message', type: 'error' }],
+  },
+};
 
-export const Small = Template.bind({});
-Small.args = { size: 'sm' };
+export const WithSuccess = {
+  ...Default,
+  args: {
+    messages: [{ message: 'This is a success message', type: 'success' }],
+  },
+};
 
-export const Large = Template.bind({});
-Large.args = { size: 'lg' };
+export const WithMultipleMessages = {
+  ...Default,
+  args: {
+    messages: [
+      { message: 'This is the first message', type: 'error' },
+      { message: 'This is the second message', type: 'error' },
+      { message: 'This is the third message', type: 'error' },
+    ],
+  },
+};
 
-export const ExtraLarge = Template.bind({});
-ExtraLarge.args = { size: 'xl' };
+export const ExtraSmall = {
+  ...Default,
+  args: {
+    size: 'xs',
+  },
+};
 
-export const WithLengthValidation = Template.bind({});
-WithLengthValidation.args = {
-  validate: {
-    length: {
-      description: 'Max 25 characters.',
-      max: 25,
-      warn: 15,
-      limitMaxLength: false,
+export const Small = {
+  ...Default,
+  args: {
+    size: 'sm',
+  },
+};
+
+export const Large = {
+  ...Default,
+  args: {
+    size: 'lg',
+  },
+};
+
+export const ExtraLarge = {
+  ...Default,
+  args: {
+    size: 'xl',
+  },
+};
+
+export const WithLengthValidation = {
+  ...Default,
+  args: {
+    validate: {
+      length: {
+        description: 'Max 25 characters.',
+        max: 25,
+        warn: 15,
+        limitMaxLength: false,
+      },
     },
   },
 };

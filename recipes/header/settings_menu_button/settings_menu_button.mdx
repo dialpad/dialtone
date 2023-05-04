@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeSettingsMenuButton from './settings_menu_button'
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as SettingsMenuButtonStories from './settings_menu_button.stories';
+
+<Meta of={SettingsMenuButtonStories}/>
 
 # Settings Menu Button
 
@@ -10,12 +13,12 @@ import DtRecipeSettingsMenuButton from './settings_menu_button'
 ## Base Style
 
 <Canvas>
-  <Story id="recipes-header-settings-menu-button--default" />
+  <Story of={SettingsMenuButtonStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

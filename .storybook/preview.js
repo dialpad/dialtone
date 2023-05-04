@@ -1,11 +1,11 @@
 import '../css/dialtone-globals.less';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { version } from '../package.json';
-import theme from './theme';
 import Vue from 'vue';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '../common/emoji.js';
 import customEmojiJson from '@/common/custom-emoji.json';
+import dialtoneTheme from './dialtone-theme.js';
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
@@ -17,68 +17,61 @@ Vue.use(fixDefaultSlot);
 // See https://github.com/storybookjs/storybook/issues/14933#issuecomment-920578274
 Vue.prototype.toJSON = () => {}
 
-
-export const parameters = {
-  a11y: {
-    config: {
-      // This is a legitimate color contrast issue that needs to be fixed by the design team in the future.
-      rules: [{
-        id: 'color-contrast',
-        reviewOnFail: true,
-      }],
+export default {
+  parameters: {
+    a11y: {
+      config: {
+        // This is a legitimate color contrast issue that needs to be fixed by the design team in the future.
+        rules: [{
+          id: 'color-contrast',
+          reviewOnFail: true,
+        }],
+      },
     },
-  },
-  controls: {
-    expanded: true,
-  },
-  viewport: {
-    viewports: MINIMAL_VIEWPORTS,
-  },
-  options: {
-    storySort: {
-      method: 'alphabetical',
-      // Make sure the docs come first
-      order: [
-        `Version ${version}`,
-        [
+    controls: {
+      expanded: true,
+      sort: 'requiredFirst',
+    },
+    viewport: {
+      viewports: MINIMAL_VIEWPORTS,
+    },
+    options: {
+      showPanel: 'bottom',
+      storySort: {
+        method: 'alphabetical',
+        // Make sure the docs come first
+        order: [
           'Welcome',
+          'Docs',
+          [
+            'Component Driven Development',
+            [
+              'Yeoman Generator',
+              'Unit Tests',
+            ],
+            'Storybook',
+            [
+              'Getting Started',
+              'File Structure',
+              'Writing Stories',
+              'Addons',
+              'Writing Documentation',
+            ],
+            'Templates',
+            [
+              'Component',
+              'SFC Component Story Template',
+              'Stories',
+              'MDX Documentation',
+              'Unit Tests',
+              'Pull Request',
+            ],
+          ],
         ],
-        'Docs',
-        [
-          'Component Driven Development',
-          [
-            'Yeoman Generator',
-            'Unit Tests',
-          ],
-          'Storybook',
-          [
-            'Getting Started',
-            'File Structure',
-            'Writing Stories',
-            'Addons',
-            'Writing Documentation',
-          ],
-          'Templates',
-          [
-            'Component',
-            'SFC Component Story Template',
-            'Stories',
-            'MDX Documentation',
-            'Unit Tests',
-            'Pull Request',
-          ],
-        ],
-      ],
+      },
+    },
+    docs: {
+      theme: dialtoneTheme
     },
   },
-  docs: {
-    transformSource(src) {
-      const match = /^<template>(.*)<\/template>/.exec(src)
-      if(match) {
-        return match[1]
-      }
-      return src
-    },
-  },
-  theme,
-};
+}

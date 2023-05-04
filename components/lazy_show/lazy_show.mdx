@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as LazyShowStories from './lazy_show.stories';
+
+<Meta of={LazyShowStories}/>
 
 # Lazy Show
 
@@ -32,9 +36,9 @@ import { DtLazyShow } from '@dialpad/dialtone-vue';
 ```
 
 <Canvas>
-  <Story id="utilities-lazy-show--default" />
+  <Story of={ShowStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />

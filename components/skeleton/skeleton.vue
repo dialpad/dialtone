@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import DtSkeletonShape from './skeleton-shape';
-import DtSkeletonListItem from './skeleton-list-item';
-import DtSkeletonParagraph from './skeleton-paragraph';
-import DtSkeletonText from './skeleton-text';
+import DtSkeletonShape from './skeleton-shape.vue';
+import DtSkeletonListItem from './skeleton-list-item.vue';
+import DtSkeletonParagraph from './skeleton-paragraph.vue';
+import DtSkeletonText from './skeleton-text.vue';
 
 /**
  * Skeleton loader is a non-interactive placeholder that displays a preview of the UI to visually communicate

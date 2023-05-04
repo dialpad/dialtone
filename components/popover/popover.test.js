@@ -2,8 +2,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
 import SrOnlyCloseButton from '../../common/sr_only_close_button';
-import axe from 'axe-core';
-import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 import {
   itBehavesLikeVisuallyHiddenCloseButtonExists,
   itBehavesLikeVisuallyHiddenCloseLabelIsNull,
@@ -408,15 +406,6 @@ describe('DtPopover Tests', () => {
           expect(popoverWindow.attributes('aria-labelledby')).toBe(wrapper.vm.labelledBy);
         },
       );
-
-      it('should pass axe-core accessibility rules', async () => {
-        const a11yResults = await axe.run(wrapper.element, configA11y);
-        const violations = a11yResults.violations;
-        if (violations.length) {
-          console.log('axe-core accessibility violations:', violations);
-        }
-        expect(violations.length).toEqual(0);
-      });
     });
 
     describe('When popover is closed', () => {

@@ -1,8 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { SELECT_SIZE_MODIFIERS } from './select_menu_constants';
-import DtSelectMenu from './select_menu';
-import DtSelectMenuMdx from './select_menu.mdx';
+import DtSelectMenu from './select_menu.vue';
+
 import DtSelectMenuDefaultTemplate from './select_menu_default.story.vue';
 import DtSelectMenuVariantsTemplate from './select_menu_variants.story.vue';
 
@@ -16,6 +16,10 @@ const SELECT_OPTIONS = [
 // Default Prop Values
 export const argsData = {
   label: 'Label',
+  size: 'md',
+  name: '',
+  disabled: false,
+  value: SELECT_OPTIONS[0].value,
   options: SELECT_OPTIONS,
   onInput: action('input'),
   onChange: action('change'),
@@ -90,7 +94,6 @@ export const argTypesData = {
     control: {
       type: 'object',
     },
-    defaultValue: SELECT_OPTIONS,
     table: {
       category: 'props',
       type: {
@@ -103,18 +106,14 @@ export const argTypesData = {
   },
   size: {
     description: 'Controls the size of the select',
+    options: Object.keys(SELECT_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(SELECT_SIZE_MODIFIERS),
     },
-    defaultValue: 'md',
     table: {
       category: 'props',
       type: {
         summary: 'string',
-      },
-      defaultValue: {
-        summary: 'md',
       },
     },
   },
@@ -128,7 +127,8 @@ export const argTypesData = {
     description: 'Pass through classes. Used to customize the select',
   },
   optionClass: {
-    description: 'Pass through classes. Used to customize each option, should options be provided via prop',
+    description:
+      'Pass through classes. Used to customize each option, should options be provided via prop',
   },
   messagesClass: {
     description: 'Pass through classes. Used to customize the the validation messages component',
@@ -137,24 +137,25 @@ export const argTypesData = {
     description: 'Pass through props. A set of props that are passed into the label container',
   },
   descriptionChildProps: {
-    description: 'Pass through props. A set of props that are passed into the description container',
+    description:
+      'Pass through props. A set of props that are passed into the description container',
   },
   optionChildProps: {
     description: `Pass through props. A set of props that are passed into each option,
      should options be provided via prop`,
   },
   messagesChildProps: {
-    description: 'Pass through props. A set of props that are passed into the validation messages component',
+    description:
+      'Pass through props. A set of props that are passed into the validation messages component',
   },
 
   // HTML attributes
   value: {
     description: 'HTML select value attribute. Provides a value for the select',
+    options: SELECT_OPTIONS.map((option) => option.value),
     control: {
       type: 'select',
-      options: SELECT_OPTIONS.map(option => option.value),
     },
-    defaultValue: SELECT_OPTIONS[0].value,
     table: {
       category: 'html attributes',
       type: {
@@ -170,7 +171,6 @@ export const argTypesData = {
     control: {
       type: 'text',
     },
-    defaultValue: '',
     table: {
       category: 'html attributes',
       type: {
@@ -186,7 +186,6 @@ export const argTypesData = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
     table: {
       category: 'html attributes',
       type: {
@@ -228,55 +227,36 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtSelectMenuMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtSelectMenuDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtSelectMenuVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtSelectMenuDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtSelectMenuVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-      ],
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRootLayout from './root_layout';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as RootLayoutStories from './root_layout.stories';
+
+<Meta of={RootLayoutStories}/>
 
 # Root Layout
 
@@ -14,12 +17,12 @@ will be displayed in the respective area. The sidebar is designed to be responsi
 body according to the `responsiveBreakpoint` prop.
 
 <Canvas>
-  <Story id="components-root-layout--default" />
+  <Story of={RootLayoutStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 
@@ -59,7 +62,7 @@ import { DtRootLayout } from '@dialpad/dialtone-vue';
 
 Try scrolling
 <Canvas>
-  <Story id="components-root-layout--sticky-header" />
+  <Story of={RootLayoutStories.StickyHeader} />
 </Canvas>
 
 ```html

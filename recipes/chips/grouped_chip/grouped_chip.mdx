@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeGroupedChip from './grouped_chip';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as GroupedChipStories from './grouped_chip.stories';
+
+<Meta of={GroupedChipStories}/>
 
 # DtRecipeGroupedChip
 
@@ -23,12 +26,12 @@ This component has 4 slots: **leftIcon**, **leftContent**, **rightIcon** and **r
 **rightContent** is used to display content and is placed on the right hand side.
 
 <Canvas>
-  <Story id="recipes-chips-grouped-chips--default" />
+  <Story of={GroupedChipStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

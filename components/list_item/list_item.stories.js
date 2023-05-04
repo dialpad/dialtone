@@ -1,8 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtListItem from './list_item';
-import DtListItemMdx from './list_item.mdx';
-import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './list_item_constants.js';
+import DtListItem from './list_item.vue';
+
+import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './list_item_constants';
 import DtListItemDefaultTemplate from './list_item_default.story.vue';
 import DtListItemCustomTemplate from './list_item_custom.story.vue';
 
@@ -107,9 +107,9 @@ export const argTypesData = {
       type: { summary: 'string' },
       defaultValue: { summary: LIST_ITEM_TYPES.DEFAULT },
     },
+    options: Object.values(LIST_ITEM_TYPES),
     control: {
       type: 'select',
-      options: Object.values(LIST_ITEM_TYPES),
     },
   },
   navigationType: {
@@ -150,33 +150,28 @@ export default {
   argTypes: argTypesData,
   decorators: [decorator],
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtListItemMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemDefaultTemplate);
-const CustomTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemCustomTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtListItemDefaultTemplate);
+const CustomTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtListItemCustomTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  left: 'globe-2',
-  right: 'external-link',
-  default: 'Default List Item',
-  subtitle: 'Description',
-  bottom: '<span class="d-badge">Label</span>',
-  navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    left: 'globe-2',
+    right: 'external-link',
+    default: 'Default List Item',
+    subtitle: 'Description',
+    bottom: '<span class="d-badge">Label</span>',
+    navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
+  },
 };
 
-export const Custom = CustomTemplate.bind({});
-Custom.args = {};
+export const Custom = {
+  render: CustomTemplate,
+  args: {},
+};

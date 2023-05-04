@@ -1,6 +1,6 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtRecipeGroupedChip from './grouped_chip';
-import DtRecipeGroupedChipMdx from './grouped_chip.mdx';
+import DtRecipeGroupedChip from './grouped_chip.vue';
+
 import DtRecipeGroupedChipDefaultTemplate from './grouped_chip_default.story.vue';
 
 const iconsList = getIconNames();
@@ -78,37 +78,25 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeGroupedChipMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeGroupedChipDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeGroupedChipDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  leftIcon: 'clock',
-  leftContent: `<div>
-    2:50:13
-</div>`,
-  rightIcon: 'pause',
-  rightContent: `<div>
-    0.25
-</div>`,
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    leftIcon: 'clock',
+    leftContent: `<div>
+      2:50:13
+  </div>`,
+    rightIcon: 'pause',
+    rightContent: `<div>
+      0.25
+  </div>`,
+  },
+
+  parameters: {},
 };
-
-Default.parameters = {};

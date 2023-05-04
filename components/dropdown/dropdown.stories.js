@@ -1,16 +1,12 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtDropdown from './dropdown';
-import DtDropdownMdx from './dropdown.mdx';
+import DtDropdown from './dropdown.vue';
+
 import DtDropdownDefaultTemplate from './dropdown_default.story.vue';
 import DtDropdownVariantsTemplate from './dropdown_variants.story.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
-import {
-  POPOVER_CONTENT_WIDTHS,
-} from '../popover';
-import {
-  DROPDOWN_PADDING_CLASSES,
-} from './dropdown_constants';
+import { POPOVER_CONTENT_WIDTHS } from '../popover';
+import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { POPOVER_DIRECTIONS } from '../popover/popover_constants';
 
 // Default Prop Values
@@ -18,6 +14,11 @@ export const argsData = {
   onHighlight: action('highlight'),
   onOpened: action('opened'),
   visuallyHiddenCloseLabel: 'Close Dropdown',
+  navigationType: 'arrow-keys',
+  placement: 'bottom',
+  appendTo: 'body',
+  padding: 'none',
+  contentWidth: 'null',
 };
 
 export const argTypesData = {
@@ -51,10 +52,9 @@ export const argTypesData = {
       type: { summary: 'string' },
       defaultValue: { summary: 'arrow-keys' },
     },
-    defaultValue: 'arrow-keys',
+    options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
     control: {
       type: 'select',
-      options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
     },
   },
   listId: {
@@ -65,10 +65,9 @@ export const argTypesData = {
     },
   },
   placement: {
-    defaultValue: 'bottom',
+    options: POPOVER_DIRECTIONS,
     control: {
       type: 'select',
-      options: POPOVER_DIRECTIONS,
     },
     table: {
       defaultValue: {
@@ -77,7 +76,6 @@ export const argTypesData = {
     },
   },
   appendTo: {
-    defaultValue: 'body',
     table: {
       defaultValue: {
         summary: 'body',
@@ -85,10 +83,9 @@ export const argTypesData = {
     },
   },
   padding: {
-    defaultValue: 'none',
+    options: Object.keys(DROPDOWN_PADDING_CLASSES),
     control: {
       type: 'select',
-      options: Object.keys(DROPDOWN_PADDING_CLASSES),
     },
   },
   contentWidth: {
@@ -96,10 +93,9 @@ export const argTypesData = {
       type: { summary: 'string' },
       defaultValue: { summary: 'null' },
     },
-    defaultValue: null,
+    options: POPOVER_CONTENT_WIDTHS,
     control: {
       type: 'select',
-      options: POPOVER_CONTENT_WIDTHS,
     },
   },
 
@@ -141,53 +137,47 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: { showPanel: true },
-    docs: {
-      page: DtDropdownMdx,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDropdownDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDropdownVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtDropdownDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtDropdownVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-Default.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
-})];
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  controls: { disable: true },
-  actions: { disable: true },
-  options: { showPanel: false },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'aria-allowed-attr',
-          enabled: false,
-        },
-      ],
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+    }),
+  ],
+};
+
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-allowed-attr',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
+
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex d-jc-center d-ai-center"><story /></div>`,
+    }),
+  ],
 };
-Variants.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center"><story /></div>`,
-})];

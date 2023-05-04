@@ -13,7 +13,7 @@ export const POPOVER_HEADER_FOOTER_PADDING_CLASSES = {
   large: 'd-pl16',
 };
 export const POPOVER_ROLES = ['dialog', 'menu', 'listbox', 'tree', 'grid'];
-export const POPOVER_CONTENT_WIDTHS = [null, 'anchor'];
+export const POPOVER_CONTENT_WIDTHS = ['', 'anchor'];
 export const POPOVER_INITIAL_FOCUS_STRINGS = ['none', 'dialog', 'first'];
 export const POPOVER_APPEND_TO_VALUES = ['parent', 'body'];
 export const POPOVER_STICKY_VALUES = [

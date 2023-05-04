@@ -1,5 +1,7 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtCodeblock from './codeblock';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as CodeBlockStories from './codeblock.stories';
+
+<Meta of={CodeBlockStories}/>
 
 # Codeblock
 
@@ -28,12 +30,12 @@ You'll have to do:
 ```
 
 <Canvas>
-  <Story id="components-codeblock--default" />
+  <Story of={CodeBlockStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

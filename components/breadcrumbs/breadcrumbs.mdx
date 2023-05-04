@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtBreadcrumbItem from './breadcrumb_item';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as BreadcrumbsStories from './breadcrumbs.stories';
+
+<Meta of={BreadcrumbsStories}/>
 
 # Breadcrumbs
 
@@ -32,26 +35,26 @@ These breadcrumbs styles are provided in two visual styles:
 2. **Inverted**: For scenarios when you want to place the breadcrumbs on a non-white.
 
 <Canvas>
-  <Story id="components-breadcrumbs--default" />
+  <Story of={BreadcrumbsStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-breadcrumbs--variants" />
+  <Story of={BreadcrumbsStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
 ### Breadcrumbs Props
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ### Breadcrumb Item Props
 
 Breadcrumb items include [Link component](?path=/story/components-link--default).
 
-<ArgsTable of={DtBreadcrumbItem} />
+<Controls of={BreadcrumbsStories.BreadcrumbItem} />
 
 ## Accessibility
 

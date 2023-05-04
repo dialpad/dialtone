@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import DtBreadcrumbs from './breadcrumbs';
+import DtBreadcrumbs from './breadcrumbs.vue';
 import { htmlFragment } from '@/common/utils';
 
 export default {

@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtToast from './toast';
-import DtToastMdx from './toast.mdx';
+import DtToast from './toast.vue';
+
 import DtToastDefaultTemplate from './toast_default.story.vue';
 import { NOTICE_KINDS } from '../notice';
 
@@ -9,6 +9,7 @@ const iconsList = getIconNames();
 
 // Default Prop Values
 export const argsData = {
+  duration: 6000,
   onClose: action('close'),
   onClick: action('click'),
   visuallyHiddenCloseLabel: 'Close Toast',
@@ -69,9 +70,9 @@ export const argTypesData = {
     },
   },
   kind: {
+    options: NOTICE_KINDS,
     control: {
       type: 'select',
-      options: NOTICE_KINDS,
     },
   },
   show: {
@@ -82,7 +83,6 @@ export const argTypesData = {
     },
   },
   duration: {
-    defaultValue: 6000,
     table: {
       defaultValue: {
         summary: 'null',
@@ -117,63 +117,66 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtToastMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtToastDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtToastDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  title: 'Base title (optional)',
-  kind: 'base',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    title: 'Base title (optional)',
+    kind: 'base',
+  },
 };
 
-export const Error = DefaultTemplate.bind({});
-Error.args = {
-  ...Default.args,
-  title: 'Error title (optional)',
-  kind: 'error',
+export const Error = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    title: 'Error title (optional)',
+    kind: 'error',
+  },
 };
 
-export const Info = DefaultTemplate.bind({});
-Info.args = {
-  ...Default.args,
-  title: 'Info title (optional)',
-  kind: 'info',
+export const Info = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    title: 'Info title (optional)',
+    kind: 'info',
+  },
 };
 
-export const Success = DefaultTemplate.bind({});
-Success.args = {
-  ...Default.args,
-  title: 'Success title (optional)',
-  kind: 'success',
+export const Success = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    title: 'Success title (optional)',
+    kind: 'success',
+  },
 };
 
-export const Warning = DefaultTemplate.bind({});
-Warning.args = {
-  ...Default.args,
-  title: 'Warning title (optional)',
-  kind: 'warning',
+export const Warning = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    title: 'Warning title (optional)',
+    kind: 'warning',
+  },
 };
 
-export const Important = DefaultTemplate.bind({});
-Important.args = {
-  ...Default.args,
-  important: true,
+export const Important = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    important: true,
+  },
 };

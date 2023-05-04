@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtSkeleton from './skeleton';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as SkeletonStories from './skeleton.stories';
+
+<Meta of={SkeletonStories}/>
 
 # Skeleton
 
@@ -16,18 +19,18 @@ indicate they are loading. Use 2px rounded corners apart from circles. For text,
 8px. For images, match the actual image size. Skeleton's default variant is `body`.
 
 <Canvas>
-  <Story id="components-skeleton--default" />
+  <Story of={SkeletonStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-skeleton--variants" />
+  <Story of={SkeletonStories.Variants} />
 </Canvas>
 
 ## Props
 
-<ArgsTable of={DtSkeleton} />
+<Controls />
 
 ## Usage
 

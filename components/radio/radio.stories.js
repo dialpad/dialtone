@@ -3,8 +3,8 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import RadioDefault from './radio_default.story.vue';
 import RadioVariants from './radio_variants.story.vue';
-import RadioMdx from './radio.mdx';
-import DtRadio from './radio';
+
+import DtRadio from './radio.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -70,9 +70,9 @@ export const argTypesData = {
         summary: 'string',
       },
     },
+    options: ['', ...Object.values(VALIDATION_MESSAGE_TYPES)],
     control: {
       type: 'select',
-      options: ['', ...Object.values(VALIDATION_MESSAGE_TYPES)],
     },
   },
   labelChildProps: {
@@ -135,27 +135,21 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: RadioMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Radio Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioDefault);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioVariants);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, RadioDefault);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, RadioVariants);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

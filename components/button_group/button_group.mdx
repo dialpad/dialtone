@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtButtonGroup from './button_group';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ButtonGroupStories from './button_group.stories';
+
+<Meta of={ButtonGroupStories}/>
 
 # Button Group
 
@@ -12,12 +15,12 @@ import DtButtonGroup from './button_group';
 Buttons are surrounded by a parent that handles the layout of the buttons.
 
 <Canvas>
-  <Story id="components-button-group--default" />
+  <Story of={ButtonGroupStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

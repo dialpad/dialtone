@@ -1,12 +1,18 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtAvatar from './avatar';
-import DtAvatarMdx from './avatar.mdx';
+import DtAvatar from './avatar.vue';
 import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarIconTemplate from './avatar_icon.story.vue';
 import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
 
+import defaultImage from '@/common/assets/person.png';
+
 const iconsList = getIconNames();
+
+export const argsData = {
+  size: 'md',
+  presence: null,
+};
 
 export const argTypesData = {
   // Slots
@@ -75,78 +81,63 @@ export default {
   component: DtAvatar,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtAvatarMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtAvatarDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtAvatarDefaultTemplate);
 
-const IconTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtAvatarIconTemplate,
-);
+const IconTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtAvatarIconTemplate);
 
-const PresenceTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtAvatarPresenceTemplate,
-);
-
-const defaultImage = require('@/common/assets/person.png');
+const PresenceTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtAvatarPresenceTemplate);
 
 // Stories
-export const Default = DefaultTemplate.bind({});
-Default.decorators = [() => ({
-  template: `<div class="d-d-flex"><story /></div>`,
-})];
-Default.args = {
-  default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
-  initials: 'PS',
+export const Default = {
+  render: DefaultTemplate,
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex"><story /></div>`,
+    }),
+  ],
+  args: {
+    default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
+    initials: 'PS',
+  },
 };
 
 // TO DO: figure out why Icon.argTypes is causing the controls to not show up in the Initials story when
 // it's below the Icon story
-export const Initials = DefaultTemplate.bind({});
-Initials.args = {
-  default: 'DP',
+export const Initials = {
+  ...Default,
+  args: {
+    default: 'DP',
+  },
 };
 
-export const Icon = IconTemplate.bind({});
-Icon.args = {
-  default: 'accessibility',
-};
-
-Icon.argTypes = {
-  default: {
-    options: iconsList,
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
+export const Icon = {
+  render: IconTemplate,
+  args: {
+    default: 'accessibility',
+  },
+  argTypes: {
+    default: {
+      options: iconsList,
+      control: {
+        type: 'select',
+        labels: {
+          undefined: '(empty)',
+        },
       },
     },
   },
 };
 
-export const Presence = PresenceTemplate.bind({});
-Presence.args = {};
-Presence.parameters = {
-  controls: { disable: true },
-  actions: { disable: true },
-  options: { showPanel: false },
+export const Presence = {
+  render: PresenceTemplate,
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+  },
 };

@@ -1,22 +1,23 @@
-import InlineComponentsMdx from './inline_components.mdx';
-
+// eslint-disable-next-line storybook/story-exports
 export default {
   title: 'Visual Testing/Inline Components',
   args: {
     show: true,
   },
+
   parameters: {
-    docs: {
-      page: InlineComponentsMdx,
-    },
     options: { showPanel: false },
+    viewMode: 'docs',
+    previewTabs: { canvas: { hidden: true } },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },
-    percy: { waitForTimeout: 5000 },
+    percy: {
+      queryParams: {
+        path: '/docs/visual-testing-inline-components--docs',
+        viewMode: 'docs',
+      },
+    },
   },
 };
-
-export const Default = () => ({
-  template: '<h1>Only visible in Docs mode</h1>',
-});

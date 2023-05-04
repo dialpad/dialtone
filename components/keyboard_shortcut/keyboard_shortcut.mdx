@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtKeyboardShortcut from './keyboard_shortcut.vue';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as KeyboardShortcutStories from './keyboard_shortcut.stories';
+
+<Meta of={KeyboardShortcutStories}/>
 
 # Keyboard Shortcut
 
@@ -14,18 +17,18 @@ will be rendered as an icon rather than text. Supported symbol tags can be used 
 prop, see the [Props, Slots & Events section](#props-slots--events).
 
 <Canvas>
-  <Story id="components-keyboard-shortcut--default" />
+  <Story of={KeyboardShortcutStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-keyboard-shortcut--variants" />
+  <Story of={KeyboardShortcutStories.Variants} />
 </Canvas>
 
 ## Props, Slots & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

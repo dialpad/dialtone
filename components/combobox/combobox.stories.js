@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtCombobox from './combobox';
-import DtComboboxMdx from './combobox.mdx';
+import DtCombobox from './combobox.vue';
+
 import DtComboboxDefaultTemplate from './combobox_default.story.vue';
 import { LABEL_SIZES } from './combobox_constants';
 
@@ -10,6 +10,10 @@ export const argsData = {
   label: 'Label Text',
   labelVisible: true,
   showList: true,
+  size: LABEL_SIZES.DEFAULT,
+  emptyList: false,
+  loading: false,
+  clickOnSelect: false,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
@@ -40,7 +44,8 @@ export const argTypesData = {
     },
   },
   emptyListItem: {
-    description: 'Slot for the empty list item. Defaults to emptyStateMessage prop. It\'s shown when `emptyList=true`',
+    description:
+      'Slot for the empty list item. Defaults to emptyStateMessage prop. It\'s shown when `emptyList=true`',
     control: 'text',
     table: {
       category: 'slots',
@@ -57,19 +62,15 @@ export const argTypesData = {
     },
   },
   size: {
+    options: Object.values(LABEL_SIZES),
     control: {
       type: 'select',
-      options: Object.values(LABEL_SIZES),
     },
-    defaultValue: LABEL_SIZES.DEFAULT,
     table: {
       defaultValue: {
         summary: LABEL_SIZES.DEFAULT,
       },
     },
-  },
-  labelVisible: {
-    defaultValue: true,
   },
   description: {
     control: {
@@ -104,15 +105,6 @@ export const argTypesData = {
         summary: 'null',
       },
     },
-  },
-  emptyList: {
-    defaultValue: false,
-  },
-  loading: {
-    defaultValue: false,
-  },
-  clickOnSelect: {
-    defaultValue: false,
   },
 
   // Action Event Handlers
@@ -185,48 +177,39 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtComboboxMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtComboboxDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtComboboxDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  items: [
-    { name: 'combobox item 1', id: 1 },
-    { name: 'combobox item 2', id: 2 },
-    { name: 'combobox item 3', id: 3 },
-    { name: 'combobox item 4', id: 4 },
-    { name: 'combobox item 5', id: 5 },
-    { name: 'combobox item 6', id: 6 },
-    { name: 'combobox item 7', id: 7 },
-    { name: 'combobox item 8', id: 8 },
-    { name: 'combobox item 9', id: 9 },
-    { name: 'combobox item 10', id: 10 },
-    { name: 'combobox item 11', id: 11 },
-    { name: 'combobox item 12', id: 12 },
-  ],
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    items: [
+      { name: 'combobox item 1', id: 1 },
+      { name: 'combobox item 2', id: 2 },
+      { name: 'combobox item 3', id: 3 },
+      { name: 'combobox item 4', id: 4 },
+      { name: 'combobox item 5', id: 5 },
+      { name: 'combobox item 6', id: 6 },
+      { name: 'combobox item 7', id: 7 },
+      { name: 'combobox item 8', id: 8 },
+      { name: 'combobox item 9', id: 9 },
+      { name: 'combobox item 10', id: 10 },
+      { name: 'combobox item 11', id: 11 },
+      { name: 'combobox item 12', id: 12 },
+    ],
+  },
 };
 
-export const Empty = DefaultTemplate.bind({});
-Empty.args = {
-  items: [],
-  emptyStateMessage: 'No matches found.',
-  emptyList: true,
+export const Empty = {
+  render: DefaultTemplate,
+
+  args: {
+    items: [],
+    emptyStateMessage: 'No matches found.',
+    emptyList: true,
+  },
 };

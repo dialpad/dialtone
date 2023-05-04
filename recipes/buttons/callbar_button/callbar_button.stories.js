@@ -1,7 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtRecipeCallbarButton, { VALID_WIDTH_SIZE } from './callbar_button';
-import DtRecipeCallbarButtonMdx from './callbar_button.mdx';
+import DtRecipeCallbarButton from './callbar_button.vue';
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
+
 import DtRecipeCallbarButtonDefaultTemplate from './callbar_button_default.story.vue';
 import DtRecipeCallbarButtonVariantsTemplate from './callbar_button_variants.story.vue';
 import DtRecipeCallbarButtonCallbarTemplate from './callbar_button_callbar.story.vue';
@@ -10,6 +11,7 @@ const iconsList = getIconNames();
 
 // Default Prop Values
 export const argsData = {
+  buttonWidthSize: 'xl',
   onClick: action('click'),
 };
 
@@ -52,10 +54,9 @@ export const argTypesData = {
     control: 'text',
   },
   buttonWidthSize: {
-    defaultValue: 'xl',
+    options: CALLBAR_BUTTON_VALID_WIDTH_SIZE,
     control: {
       type: 'select',
-      options: VALID_WIDTH_SIZE,
     },
   },
 
@@ -124,62 +125,49 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeCallbarButtonMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonVariantsTemplate,
-);
-const CallbarTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonCallbarTemplate,
-);
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Button',
-  tooltip: 'Tooltip Text',
-  ariaLabel: 'Button',
-  icon: 'accessibility',
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeCallbarButtonDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeCallbarButtonVariantsTemplate);
+const CallbarTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeCallbarButtonCallbarTemplate);
+
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Button',
+    tooltip: 'Tooltip Text',
+    ariaLabel: 'Button',
+    icon: 'accessibility',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
 
-export const Callbar = CallbarTemplate.bind({});
-Callbar.args = {};
-Callbar.parameters = {
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'duplicate-id',
-          enabled: false,
-        },
-      ],
+export const Callbar = {
+  render: CallbarTemplate,
+  args: {},
+
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'duplicate-id',
+            enabled: false,
+          },
+        ],
+      },
     },
+    options: { showPanel: false },
+    controls: { disable: true },
   },
-  controls: { disable: true },
-  actions: { disable: true },
-  options: { showPanel: false },
 };

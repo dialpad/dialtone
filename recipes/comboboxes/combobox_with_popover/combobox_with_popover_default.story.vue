@@ -13,6 +13,7 @@
     :padding="padding"
     :list-id="listId"
     :empty-list="emptyList"
+    :empty-state-message="emptyStateMessage"
     :append-to="appendTo"
     :visually-hidden-close="visuallyHiddenClose"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
@@ -63,7 +64,7 @@
       <span v-html="footer" />
     </template>
     <template
-      v-else
+      v-else-if="!emptyList"
       #footer
     >
       <div class="d-d-flex d-ai-center d-px12">
@@ -74,10 +75,10 @@
 </template>
 
 <script>
-import DtRecipeComboboxWithPopover from './combobox_with_popover';
-import DtInput from '@/components/input/input';
-import DtListItem from '@/components/list_item/list_item';
-import DtCheckbox from '@/components/checkbox/checkbox';
+import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
+import DtInput from '@/components/input/input.vue';
+import DtListItem from '@/components/list_item/list_item.vue';
+import DtCheckbox from '@/components/checkbox/checkbox.vue';
 
 export default {
   name: 'DtRecipeComboboxWithPopoverDefault',

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import {} from './list_item_group_constants.js';
+import {} from './list_item_group_constants';
 import { getUniqueString } from '@/common/utils';
 
 export default {

@@ -1,6 +1,9 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtTabPanel from './tab_panel';
-import DtTab from './tab';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import *as TabsStories from './tabs.stories';
+import* as TabStories from './tab.stories';
+import * as TabPanelStories from './tab_panel.stories';
+
+<Meta of={TabsStories}/>
 
 # Tabs
 
@@ -16,28 +19,27 @@ Tabs have two slots:
 2. **Default** slot for tab panel
 
 <Canvas>
-  <Story id="components-tabs--default" />
+  <Story of={TabsStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-    <Story id="components-tabs--variants" />
+    <Story of={TabsStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
 ### TabGroup
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ### TabPanel
 
-<ArgsTable of={DtTabPanel} />
-
+<Controls of={TabPanelStories.TabPanel} />
 ### Tab
 
-<ArgsTable of={DtTab} />
+<Controls of={TabStories.Tab} />
 
 ## Accessibility
 

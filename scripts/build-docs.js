@@ -1,6 +1,10 @@
-const { parse } = require('vue-docgen-api');
-const { join } = require('path');
-const { readdirSync, writeFile } = require('fs');
+import { parse } from 'vue-docgen-api';
+import path, { join } from 'path';
+import { fileURLToPath } from 'url';
+import { readdirSync, writeFile } from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const componentsRootFolder = join(__dirname, '../components');
 const outputPath = join(__dirname, '../dist/component-documentation.json');
@@ -48,8 +52,10 @@ const componentsList = [
   'tooltip.vue',
   'validation_messages.vue',
 ];
-const vueDocsConfig = {
-  ...require('../vue.config').configureWebpack.resolve, // inform vue-docgen-api of your webpack aliases
+
+const getConfig = async () => {
+  const config = await import('../vite.config.js');
+  return config.default;
 };
 
 const getFileList = (folder) => {
@@ -74,12 +80,13 @@ const writeDocumentationFile = (data) => {
     console.info('Documentation created successfully');
   });
 };
-const parseDocumentation = (componentsPath) => {
+const parseDocumentation = async (componentsPath) => {
+  const config = await getConfig();
   const fileList = getFileList(componentsPath);
   const parsedDocumentationPromises = [];
 
   fileList.forEach(filePath => {
-    parsedDocumentationPromises.push(parse(filePath, vueDocsConfig));
+    parsedDocumentationPromises.push(parse(filePath, config.resolve));
   });
 
   Promise.all(parsedDocumentationPromises).then(result => {

@@ -1,12 +1,23 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRichTextEditor from './rich_text_editor';
-import DtRichTextEditorMdx from './rich_text_editor.mdx';
+import DtRichTextEditor from './rich_text_editor.vue';
 import DtRichTextEditorDefaultTemplate from './rich_text_editor_default.story.vue';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from './rich_text_editor_constants';
+
+// Default Prop Values
+export const argsData = {
+  value: `I’m not a standalone component, please use Message Input instead 🙏!`,
+  editable: true,
+  inputAriaLabel: 'This is a descriptive label',
+  outputFormat: 'text',
+  autoFocus: false,
+  onBlur: action('blur'),
+  onInput: action('input'),
+  onFocus: action('focus'),
+};
 
 export const argTypesData = {
   editable: {
@@ -20,7 +31,6 @@ export const argTypesData = {
   autoFocus: {
     control: 'select',
     options: [...Object.values(RICH_TEXT_EDITOR_AUTOFOCUS_TYPES), false, true],
-    defaultValue: false,
     table: {
       defaultValue: {
         summary: false,
@@ -31,7 +41,6 @@ export const argTypesData = {
   outputFormat: {
     control: 'select',
     options: Object.values(RICH_TEXT_EDITOR_OUTPUT_FORMATS),
-    defaultValue: 'text',
     table: {
       defaultValue: {
         summary: 'text',
@@ -70,17 +79,6 @@ export const argTypesData = {
   },
 };
 
-// Default Prop Values
-export const argsData = {
-  value: `I’m not a standalone component, please use Message Input instead 🙏!`,
-  editable: true,
-  inputAriaLabel: 'This is a descriptive label',
-  autoFocus: false,
-  onBlur: action('blur'),
-  onInput: action('input'),
-  onFocus: action('focus'),
-};
-
 // Story Collection
 export default {
   title: 'Components/Rich Text Editor',
@@ -88,25 +86,12 @@ export default {
   argTypes: argTypesData,
   args: argsData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRichTextEditorMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRichTextEditorDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRichTextEditorDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
+export const Default = {
+  render: DefaultTemplate,
+};

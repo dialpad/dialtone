@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeTopBannerInfo from './top_banner_info';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as TopBannerInfoStories from './top_banner_info.stories';
+
+<Meta of={TopBannerInfoStories}/>
 
 # Top Banner Info
 
@@ -10,18 +13,18 @@ import DtRecipeTopBannerInfo from './top_banner_info';
 ## Base Style
 
 <Canvas>
-  <Story id="recipes-notices-top-banner-info--default" />
+  <Story of={TopBannerInfoStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="recipes-notices-top-banner-info--variants" />
+  <Story of={TopBannerInfoStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

@@ -1,4 +1,7 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as BadgeStories from './badge.stories';
+
+<Meta of={BadgeStories}/>
 
 # Badge
 
@@ -10,30 +13,30 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 ## Base Style
 
 <Canvas>
-  <Story id="components-badge--default" />
+  <Story of={BadgeStories.Default} />
 </Canvas>
 
 ## Count
 
 <Canvas>
-  <Story id="components-badge--count" />
+  <Story of={BadgeStories.Count}/>
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-badge--variants" />
+  <Story of={BadgeStories.Variants} />
 </Canvas>
 
 ## Examples
 
 <Canvas>
-  <Story id="components-badge--examples" />
+  <Story of={BadgeStories.Examples} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

@@ -6,7 +6,7 @@ env:
   # It is impossible to manually delete the cache, so if you are ever in a
   # situation where you need to remove a previous cache just increment
   # the version number
-  DIALTONE_VUE_DEPLOY_PREVIEW_CACHE_VERSION: v1
+  DIALTONE_VUE_DEPLOY_PREVIEW_CACHE_VERSION: v3
 
 jobs:
 
@@ -37,10 +37,6 @@ jobs:
       if: steps.npm-cache.outputs.cache-hit != 'true'
       run: npm ci
 
-    - name: Install storybook dependencies
-      if: steps.npm-cache.outputs.cache-hit != 'true'
-      run: npm run storybook:install
-
     - name: Build storybook
       env:
         NODE_ENV: development
@@ -50,8 +46,9 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
         branch: gh-pages
-        folder: storybook/compiled
+        folder: storybook-static
         target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
+
 
     - name: Add Message
       uses: mshick/add-pr-comment@v1

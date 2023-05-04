@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtChip from './chip';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ChipStories from './chip.stories';
+
+<Meta of={ChipStories}/>
 
 # Chip
 
@@ -13,12 +16,12 @@ import DtChip from './chip';
 ## Base Style
 
 <Canvas>
-  <Story id="components-chip--default" />
+  <Story of={ChipStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 
@@ -40,7 +43,7 @@ import { DtChip } from '@dialpad/dialtone-vue';
 ## With Icon
 
 <Canvas>
-  <Story id="components-chip--with-icon" />
+  <Story of={ChipStories.WithIcon} />
 </Canvas>
 
 ```html
@@ -56,7 +59,7 @@ import { DtChip, DtIcon } from '@dialpad/dialtone-vue';
 ## With Avatar
 
 <Canvas>
-  <Story id="components-chip--with-avatar" />
+  <Story of={ChipStories.WithAvatar} />
 </Canvas>
 
 ```html
@@ -74,7 +77,7 @@ import { DtAvatar } from '@dialpad/dialtone';
 The chip is not focusable or clickable. If not interactive the chip will render as a `<span>` element.
 
 <Canvas>
-  <Story id="components-chip--non-interactive" />
+  <Story of={ChipStories.NonInteractive} />
 </Canvas>
 
 ```jsx

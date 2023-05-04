@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
-import DtEmoji from './emoji';
-import DtEmojiMdx from './emoji.mdx';
+import DtEmoji from './emoji.vue';
+
 import DtEmojiDefaultTemplate from './emoji_default.story.vue';
 import DtEmojiVariantsTemplate from './emoji_variants.story.vue';
 
@@ -12,9 +12,9 @@ export const argsData = {
 
 export const argTypesData = {
   size: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(ICON_SIZE_MODIFIERS),
     },
   },
 };
@@ -26,40 +26,29 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtEmojiMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtEmojiDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtEmojiVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-
-export const CustomEmoji = DefaultTemplate.bind({});
-CustomEmoji.args = {
-  code: ':shipit:',
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+export const CustomEmoji = {
+  render: DefaultTemplate,
+
+  args: {
+    code: ':shipit:',
+  },
+};
+
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

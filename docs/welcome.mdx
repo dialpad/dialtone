@@ -1,8 +1,8 @@
-import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 import { version } from '../package.json';
 import { LogoContainer, Logo } from './components';
 
-<Meta title={`Version ${version}/Welcome`} id="welcome" />
+<Meta title="Welcome" id="welcome" />
 
 <LogoContainer>
   <Logo className="example-doc__image" src="https://static.dialpadcdn.com/dialtone/dialpad_logo.svg" />
@@ -12,9 +12,7 @@ import { LogoContainer, Logo } from './components';
 
 <img src={`https://img.shields.io/badge/npm-${version.replaceAll('-', '--')}-7C52FF`} alt={`Version ${version}`} />
 
-<Subtitle>
-  Dialtone Vue is a library of Vue components for <a class="d-link" href="https://dialpad.design/">Dialtone</a>, by Dialpad.
-</Subtitle>
+Dialtone Vue is a library of Vue components for <a class="d-link" href="https://dialpad.design/">Dialtone</a>, by Dialpad.
 
 ## Goals
 
@@ -36,4 +34,4 @@ Dialpad projects.
 - **Ignacio Ropolo** - Engineering
 
 [//]: # (TODO: Replace this with the overview link once is created on dialtone.)
-[dt-components]: https://dialpad.design/components/avatar.html
+[dt-components]: https://dialpad.design/components

@@ -126,13 +126,13 @@ import {
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
 import { getUniqueString, isOutOfViewPort } from '@/common/utils';
-import DtLazyShow from '../lazy_show/lazy_show';
+import DtLazyShow from '../lazy_show/lazy_show.vue';
 import { Portal } from '@linusborg/vue-simple-portal';
-import ModalMixin from '@/common/mixins/modal.js';
+import ModalMixin from '../../common/mixins/modal.js';
 import { createTippy, getPopperOptions } from './tippy_utils';
-import PopoverHeaderFooter from './popover_header_footer';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import SrOnlyCloseButton from '@/common/sr_only_close_button';
+import PopoverHeaderFooter from './popover_header_footer.vue';
+import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -261,7 +261,7 @@ export default {
      */
     contentWidth: {
       type: String,
-      default: null,
+      default: '',
       validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
     },
 

@@ -1,4 +1,7 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as AvatarStories from './avatar.stories.js';
+
+<Meta of={AvatarStories}/>
 
 # Avatar
 
@@ -9,30 +12,30 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 ## Default
 
 <Canvas>
-  <Story id="components-avatar--default" />
+  <Story of={AvatarStories.Default} />
 </Canvas>
 
 ## Icon
 
 <Canvas>
-  <Story id="components-avatar--icon" />
+  <Story of={AvatarStories.Icon} />
 </Canvas>
 
 ## Initials
 
 <Canvas>
-  <Story id="components-avatar--initials" />
+  <Story of={AvatarStories.Initials} />
 </Canvas>
 
 ## Presence
 
 <Canvas>
-  <Story id="components-avatar--presence" />
+  <Story of={AvatarStories.Presence} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

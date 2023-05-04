@@ -1,4 +1,4 @@
-import { InputMixin } from '@/common/mixins/input';
+import { InputMixin } from './input';
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,

@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import DtListItem from './list_item.vue';
-import { LIST_ITEM_NAVIGATION_TYPES } from './list_item_constants.js';
+import { LIST_ITEM_NAVIGATION_TYPES } from './list_item_constants';
 
 const basePropsData = {
   id: 'dt-item',

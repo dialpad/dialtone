@@ -16,7 +16,7 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { NOTICE_KINDS } from './notice_constants.js';
+import { NOTICE_KINDS } from './notice_constants';
 
 const kindToIcon = new Map([
   ['info', 'info'],

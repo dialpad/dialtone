@@ -1,10 +1,12 @@
+import { Meta, Subtitle } from '@storybook/blocks';
+
 <Meta title="Docs/Templates/MDX Documentation" />
 
 # MDX Documentation Template
 
 ```jsx
     // MDX Documentation Template
-    import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+    import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
 
     # My Component
 
@@ -17,18 +19,18 @@
     Some description of how to use the base component, potential gotchas and limitations.
 
     <Canvas>
-      <Story id="<GROUP>-my-component--default" />
+      <Story of={ComponentStories.Default} />
     </Canvas>
 
     ## Variants
 
     <Canvas>
-      <Story id="<GROUP>-my-component--variants" />
+      <Story of={ComponentStories.Variants} />
     </Canvas>
 
     ## Slots, Props & Events
 
-    <ArgsTable story={PRIMARY_STORY} />
+    <Controls />
 
     ## Usage
 

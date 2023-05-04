@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ToggleStories from './toggle.stories';
+
+<Meta of={ToggleStories}/>
 
 # Toggle
 
@@ -12,7 +16,7 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 Toggles are typically paired with a label which identifies the option.
 
 <Canvas>
-  <Story id="components-toggle--default" />
+  <Story of={ToggleStories.Default} />
 </Canvas>
 
 ## Accessibility
@@ -38,12 +42,12 @@ emit a **change** event with the current value of the toggle and will change its
 ## Variants
 
 <Canvas>
-  <Story id="components-toggle--variants" />
+  <Story of={ToggleStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

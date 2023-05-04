@@ -166,7 +166,7 @@
 </template>
 
 <script>
-import DtRecipeFeedItemRow from './feed_item_row';
+import DtRecipeFeedItemRow from './feed_item_row.vue';
 
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtStack } from '@/components/stack';

@@ -1,6 +1,7 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtCard from './card';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as CardStories from './card.stories';
 
+<Meta of={CardStories}/>
 # Card
 
 <Subtitle>
@@ -13,12 +14,12 @@ import DtCard from './card';
 Base card style with content.
 
 <Canvas>
-  <Story id="components-card--default" />
+  <Story of={CardStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 
@@ -35,7 +36,7 @@ import { DtCard } from '@dialpad/dialtone-vue';
 A card with the header.
 
 <Canvas>
-    <Story id="components-card--with-header" />
+    <Story of={CardStories.WithHeader} />
 </Canvas>
 
 ```html
@@ -65,7 +66,7 @@ A card with the header.
 A card with the footer.
 
 <Canvas>
-    <Story id="components-card--with-footer" />
+    <Story of={CardStories.WithFooter} />
 </Canvas>
 
 ```html
@@ -91,7 +92,7 @@ A card with the footer.
 A card with the header and footer.
 
 <Canvas>
-    <Story id="components-card--with-header-and-footer" />
+    <Story of={CardStories.WithHeaderAndFooter} />
 </Canvas>
 
 ```html
@@ -129,7 +130,7 @@ A card with the header and footer.
 A card with the scrollable content.
 
 <Canvas>
-    <Story id="components-card--with-scrollable-content" />
+    <Story of={CardStories.WithScrollableContent} />
 </Canvas>
 
 ```html

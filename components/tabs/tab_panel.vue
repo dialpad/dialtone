@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Modal from '@/common/mixins/modal.js';
+import Modal from '../../common/mixins/modal.js';
 
 /**
  * Tabs allow users to navigation between grouped content in different views while within the same page context.

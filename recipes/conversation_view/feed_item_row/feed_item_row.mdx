@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeFeedItemRow from './feed_item_row';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as FeedItemRowStories from './feed_item_row.stories';
+
+<Meta of={FeedItemRowStories}/>
 
 # Feed Item Row
 
@@ -20,20 +23,20 @@ The default feed item row contains 4 slots:
 - **reactions** slot - the emoji reactions list component below the content slot.
 
 <Canvas>
-  <Story id="recipes-conversation-view-feed-item-row--default" />
+  <Story of={FeedItemRowStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="recipes-conversation-view-feed-item-row--variants" />
+  <Story of={FeedItemRowStories.Variants} />
 </Canvas>
 
-<!-- TODO: Different states for feed row -->
+{/*TODO: Different states for feed row*/}
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

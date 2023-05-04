@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import DtLink from './link';
+import DtLink from './link.vue';
 
 export default {
   name: 'DtLinkDefault',

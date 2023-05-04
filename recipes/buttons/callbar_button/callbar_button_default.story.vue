@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import DtRecipeCallbarButton from './callbar_button';
+import DtRecipeCallbarButton from './callbar_button.vue';
 import { DtIcon } from '@/components/icon';
 
 export default {

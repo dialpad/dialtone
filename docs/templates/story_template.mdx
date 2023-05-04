@@ -1,3 +1,5 @@
+import { Meta, Subtitle } from '@storybook/blocks';
+
 <Meta title="Docs/Templates/Stories" />
 
 # Stories Template
@@ -5,7 +7,7 @@
 ```jsx
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtMyComponent from './my_component';
+import DtMyComponent from './my_component.vue';
 import MyComponentMdx from './my_component.mdx';
 import MyComponentDefaultTemplate from './my_component_default.story.vue';
 import MyComponentVariantsTemplate from './my_component_variants.story.vue';

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import DtPagination from './pagination';
+import DtPagination from './pagination.vue';
 
 export default {
   name: 'DtPaginationDefault',

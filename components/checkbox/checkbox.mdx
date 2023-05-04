@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as CheckboxStories from './checkbox.stories';
+
+<Meta of={CheckboxStories}/>
 
 # Checkbox
 
@@ -13,18 +17,18 @@ Checkboxes are typically paired with a label which identifies the option. In add
 used with a description which describes the option.
 
 <Canvas>
-  <Story id="components-checkbox--default" />
+  <Story of={CheckboxStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-checkbox--variants" />
+  <Story of={CheckboxStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

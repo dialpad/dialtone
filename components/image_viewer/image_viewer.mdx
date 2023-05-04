@@ -1,5 +1,9 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtImageViewer from './image_viewer';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import DtImageViewer from './image_viewer.vue';
+
+import * as ImageViewerStories from './image_viewer.stories';
+
+<Meta of={ImageViewerStories}/>
 
 # Image Viewer
 
@@ -10,18 +14,18 @@ import DtImageViewer from './image_viewer';
 ## Base Style
 
 <Canvas>
-  <Story id="components-image-viewer--default" />
+  <Story of={ImageViewerStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-image-viewer--variants" />
+  <Story of={ImageViewerStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

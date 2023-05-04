@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeTimePill from './time_pill';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as TimePillStories from './time_pill.stories';
+
+<Meta of={TimePillStories}/>
 
 # Time Pill
 
@@ -18,12 +21,12 @@ Pass in a display value as dateTimeDisplay, and the actual date into dateTime.
 - dateTime: '2022-09-13'
 
 <Canvas>
-  <Story id="recipes-conversation-view-time-pill--default" />
+  <Story of={TimePillStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

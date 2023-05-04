@@ -154,7 +154,7 @@
 </template>
 
 <script>
-import DtBadge from './badge';
+import DtBadge from './badge.vue';
 
 export default {
   name: 'DtBadgeExamples',

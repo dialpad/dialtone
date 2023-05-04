@@ -7,15 +7,16 @@ import {
   Pinned,
   Warning,
   Success,
-} from '@/components/banner/banner.stories';
+} from '@/components/banner/banner.stories.js';
 
-import DtBanner from '@/components/banner/banner';
+import DtBanner from '@/components/banner/banner.vue';
 
 export default {
   title: 'Visual Testing/Banner',
   component: DtBanner,
   parameters: {
     options: { showPanel: false },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },

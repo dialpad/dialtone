@@ -1,12 +1,6 @@
-import {
-  argsData,
-  argTypesData,
-  Default,
-  Variants,
-} from '@/components/dropdown/dropdown.stories';
-import DropdownMdx from './dropdown.mdx';
+import { argsData, argTypesData, Default, Variants } from '@/components/dropdown/dropdown.stories';
 
-import DtDropdown from '@/components/dropdown/dropdown';
+import DtDropdown from '@/components/dropdown/dropdown.vue';
 
 export default {
   title: 'Visual Testing/Dropdown',
@@ -14,15 +8,17 @@ export default {
   args: {
     ...argsData,
     transition: '',
+    modal: false,
     open: true,
   },
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
     docs: {
-      page: DropdownMdx,
+      inlineStories: false,
     },
     options: { showPanel: false },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },

@@ -1,6 +1,6 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtCodeblock from './codeblock';
-import DtCodeblockMdx from './codeblock.mdx';
+import DtCodeblock from './codeblock.vue';
+
 import DtCodeblockDefaultTemplate from './codeblock_default.story.vue';
 
 export const argTypesData = {
@@ -19,22 +19,17 @@ export default {
   component: DtCodeblock,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtCodeblockMdx,
-    },
-  },
+  parameters: {},
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCodeblockDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtCodeblockDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  text: 'function someFunction() {\n  return "some result";\n}',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    text: 'function someFunction() {\n  return "some result";\n}',
+  },
 };

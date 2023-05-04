@@ -1,18 +1,18 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtTooltip from './tooltip';
+import DtTooltip from './tooltip.vue';
 import DtTooltipFlipTemplate from './tooltip_flip.story.vue';
-import DtTooltipDefault from './tooltip_default.story';
-import DtTooltipVariantsTemplate from './tooltip_variants';
+import DtTooltipDefault from './tooltip_default.story.vue';
+import DtTooltipVariantsTemplate from './tooltip_variants.vue';
 import { action } from '@storybook/addon-actions';
 
 import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES } from './tooltip_constants';
-import DtTooltipMdx from './tooltip.mdx';
 
 // Default Prop Values
 export const argsData = {
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. You can set the position of the tooltip using the placement prop!`,
+  sticky: false,
   onShown: action('shown'),
 };
 
@@ -47,16 +47,15 @@ export const argTypesData = {
     },
   },
   placement: {
+    options: TOOLTIP_DIRECTIONS,
     control: {
       type: 'select',
-      options: TOOLTIP_DIRECTIONS,
     },
   },
   sticky: {
-    defaultValue: false,
+    options: TOOLTIP_STICKY_VALUES,
     control: {
       type: 'select',
-      options: TOOLTIP_STICKY_VALUES,
     },
     table: {
       defaultValue: {
@@ -66,9 +65,9 @@ export const argTypesData = {
   },
 
   transition: {
+    options: ['', 'fade', 'pop', 'shake'],
     control: {
       type: 'select',
-      options: ['', 'fade', 'pop', 'shake'],
     },
   },
   // Events
@@ -99,34 +98,33 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: { showPanel: true },
-    docs: {
-      page: DtTooltipMdx,
-    },
-  },
 };
 
 // Templates
 const TooltipFlipTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTooltipFlipTemplate);
-const TooltipDefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefault);
+const TooltipDefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTooltipDefault);
 const TooltipVariantsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
-// Stories
 
-export const Default = TooltipDefaultTemplate.bind({});
-Default.args = {};
-
-export const Variants = TooltipVariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
-
-export const Flip = TooltipFlipTemplate.bind({});
-Flip.args = {
-  default: 'Scroll down to see how the tooltip changes based on the available space.',
+export const Default = {
+  render: TooltipDefaultTemplate,
+  args: {},
 };
-Flip.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+
+export const Variants = {
+  render: TooltipVariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
+
+export const Flip = {
+  render: TooltipFlipTemplate,
+
+  args: {
+    default: 'Scroll down to see how the tooltip changes based on the available space.',
+  },
+
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

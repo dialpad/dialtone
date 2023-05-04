@@ -1,11 +1,11 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtImageViewer from './image_viewer';
-import DtImageViewerMdx from './image_viewer.mdx';
+import DtImageViewer from './image_viewer.vue';
+
 import DtImageViewerDefaultTemplate from './image_viewer_default.story.vue';
 import DtImageViewerVariantsTemplate from './image_viewer_variants.story.vue';
 import { action } from '@storybook/addon-actions';
 
-const defaultImage = require('./test.jpg');
+import defaultImage from './test.jpg';
 
 // Default Prop Values
 export const argsData = {
@@ -36,7 +36,6 @@ export const argsData = {
   <!-- @slot example slot decorator -->
 */
 export const argTypesData = {
-
   imageSrc: {
     description: 'Url for the image',
     table: {
@@ -132,61 +131,43 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtImageViewerMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtImageViewerDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtImageViewerVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtImageViewerDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtImageViewerVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  imageSrc: defaultImage,
-  imageAlt: 'Image Alt Text',
-  closeAriaLabel: 'Close',
-  imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
-  ariaLabel: 'Click to open image',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    imageSrc: defaultImage,
+    imageAlt: 'Image Alt Text',
+    closeAriaLabel: 'Close',
+    imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+    ariaLabel: 'Click to open image',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'aria-allowed-attr',
-          enabled: false,
-        },
-      ],
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-allowed-attr',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

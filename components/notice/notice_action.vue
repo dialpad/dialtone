@@ -34,8 +34,8 @@
 <script>
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import SrOnlyCloseButton from '@/common/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 export default {
   name: 'DtNoticeAction',

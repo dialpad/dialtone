@@ -1,8 +1,12 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtSkeleton from './skeleton';
-import DtSkeletonMdx from './skeleton.mdx';
+import DtSkeleton from './skeleton.vue';
+
 import DtSkeletonDefaultTemplate from './skeleton_default.story.vue';
 import DtSkeletonVariantsTemplate from './skeleton_variants.story.vue';
+
+export const argsData = {
+  ariaLabel: '',
+};
 
 export const argTypesData = {
   paragraphOption: {
@@ -68,9 +72,6 @@ export const argTypesData = {
       },
     },
   },
-  ariaLabel: {
-    defaultValue: '',
-  },
 };
 
 // Story Collection
@@ -78,36 +79,30 @@ export default {
   title: 'Components/Skeleton',
   component: DtSkeleton,
   argTypes: argTypesData,
+  args: argsData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtSkeletonMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtSkeletonDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtSkeletonVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtSkeletonDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtSkeletonVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.decorators = [() => ({
-  template: '<div style="width: 500px"><story /></div>',
-})];
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+  decorators: [
+    () => ({
+      template: '<div style="width: 500px"><story /></div>',
+    }),
+  ],
+
+  args: {},
+};
+
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

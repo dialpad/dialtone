@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import DtButton from './button';
+import DtButton from './button.vue';
 import {
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
@@ -8,10 +8,18 @@ import {
   ICON_POSITION_MODIFIERS,
 } from './button_constants';
 import { LINK_KIND_MODIFIERS } from '../link/link_constants';
-import BaseButtonMdx from './button.mdx';
+
 import ButtonDefault from './button_default.story.vue';
 import ButtonVariants from './button_variants.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+
+export const argsData = {
+  onClick: action('click'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
+  size: 'md',
+  link: false,
+};
 
 const iconsList = getIconNames();
 
@@ -49,26 +57,24 @@ export const argTypesData = {
     control: 'boolean',
   },
   importance: {
+    options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
     },
   },
   size: {
-    defaultValue: 'md',
+    options: Object.keys(BUTTON_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(BUTTON_SIZE_MODIFIERS),
     },
   },
   kind: {
+    options: Object.keys(BUTTON_KIND_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(BUTTON_KIND_MODIFIERS),
     },
   },
   link: {
-    defaultValue: false,
     type: {
       summary: 'boolean',
     },
@@ -80,18 +86,18 @@ export const argTypesData = {
     control: 'boolean',
   },
   linkKind: {
+    options: Object.keys(LINK_KIND_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(LINK_KIND_MODIFIERS),
     },
   },
   loading: {
     control: 'boolean',
   },
   iconPosition: {
+    options: Object.keys(ICON_POSITION_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(ICON_POSITION_MODIFIERS),
     },
   },
   labelClass: {
@@ -156,26 +162,9 @@ export const argTypesData = {
   },
 };
 
-export const argsData = {
-  onClick: action('click'),
-  onFocusIn: action('focusin'),
-  onFocusOut: action('focusout'),
-};
-
 export default {
   title: 'Components/Button',
   component: DtButton,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: BaseButtonMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -183,13 +172,19 @@ export default {
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ButtonDefault);
 
-export const Default = Template.bind({});
-Default.args = {
-  default: 'Button',
+export const Default = {
+  render: Template,
+
+  args: {
+    default: 'Button',
+  },
 };
 
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ButtonVariants);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ButtonVariants);
 
-export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
-Variants.args = {};
+export const Variants = {
+  render: VariantsTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: {},
+};

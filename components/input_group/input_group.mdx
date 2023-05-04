@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as InputGroupStories from './input_group.stories';
+
+<Meta of={InputGroupStories}/>
 
 # Input Group
 
@@ -15,18 +19,18 @@ expected that an `aria-label` will be given in order to provide an invisible lab
 Group should contain one or more inputs which users can interact with.
 
 <Canvas>
-  <Story id="components-input-group--default" />
+  <Story of={InputGroupStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-input-group--variants" />
+  <Story of={InputGroupStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Model
 

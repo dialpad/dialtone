@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import DtRecipeSettingsMenuButton from './settings_menu_button';
+import DtRecipeSettingsMenuButton from './settings_menu_button.vue';
 
 export default {
   name: 'DtRecipeSettingsMenuButtonDefault',

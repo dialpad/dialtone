@@ -1,13 +1,14 @@
 import { generateTemplate } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import DtValidationMessages from './validation_messages';
-import BaseValidationMessagesMdx from './validation_messages.mdx';
+import DtValidationMessages from './validation_messages.vue';
 
 // Constants
-const VALIDATION_MESSAGES = [{
-  message: 'Validation Message',
-  type: VALIDATION_MESSAGE_TYPES.SUCCESS,
-}];
+const VALIDATION_MESSAGES = [
+  {
+    message: 'Validation Message',
+    type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+  },
+];
 
 // Default Prop Values
 export const argsData = {
@@ -29,17 +30,6 @@ export const argTypesData = {
 export default {
   title: 'Components/Validation Messages',
   component: DtValidationMessages,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: BaseValidationMessagesMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -55,8 +45,9 @@ const Template = (_args, { argTypes }) => {
   };
 };
 
-// Stories
-export const Default = Template.bind({});
+export const Default = {
+  render: Template,
+};
 
 // Variants Story
 const VariantsTemplate = () => {
@@ -80,19 +71,22 @@ const VariantsTemplate = () => {
     `,
   };
 };
-export const Variants = VariantsTemplate.bind({});
-Variants.parameters = {
-  controls: { hideNoControlsWarning: true, disable: true },
-  actions: { disable: true },
-  options: { showPanel: false },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-      ],
+
+export const Variants = {
+  render: VariantsTemplate,
+
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

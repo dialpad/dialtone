@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as IconStories from './icon.stories';
+
+<Meta of={IconStories}/>
 
 # Icon
 
@@ -25,12 +29,12 @@ a height the icon is going to have:
 ## Base Style
 
 <Canvas>
-  <Story id="components-icon--default" />
+  <Story of={IconStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

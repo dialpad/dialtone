@@ -2,24 +2,22 @@ import {
   argsData,
   argTypesData,
   Default,
-} from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.stories';
-import ComboboxWithPopover from './combobox_with_popover.mdx';
+} from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.stories.js';
 
-import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover';
+import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue';
 
 export default {
   title: 'Visual Testing/Combobox With Popover',
   component: DtRecipeComboboxWithPopover,
   parameters: {
-    docs: {
-      page: ComboboxWithPopover,
-    },
     options: { showPanel: false },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },
   },
-  args: { ...argsData, transition: '', showList: true },
+  // set appendTo 'parent' or sometimes the dialog stays open even after switching page
+  args: { ...argsData, transition: '', showList: true, appendTo: 'parent' },
   argTypes: argTypesData,
 };
 

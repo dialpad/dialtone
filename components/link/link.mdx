@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as LinkStories from './link.stories';
+
+<Meta of={LinkStories}/>
 
 # Links
 
@@ -11,13 +15,13 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 Links allow users to click their way from page to page.
 
 <Canvas>
-  <Story id="components-link--default" />
+  <Story of={LinkStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-link--variants" />
+  <Story of={LinkStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
@@ -25,7 +29,7 @@ Links allow users to click their way from page to page.
 This element's attributes include [The Anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a)
 attributes.
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

@@ -3,8 +3,8 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import CheckboxDefault from './checkbox_default.story.vue';
 import CheckboxVariants from './checkbox_variants.story.vue';
-import BaseCheckboxMdx from './checkbox.mdx';
-import DtCheckbox from './checkbox';
+
+import DtCheckbox from './checkbox.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -69,9 +69,9 @@ export const argTypesData = {
         summary: 'string',
       },
     },
+    options: ['', ...Object.values(VALIDATION_MESSAGE_TYPES)],
     control: {
       type: 'select',
-      options: ['', ...Object.values(VALIDATION_MESSAGE_TYPES)],
     },
   },
   labelChildProps: {
@@ -134,27 +134,21 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: BaseCheckboxMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Checkbox Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, CheckboxDefault);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, CheckboxVariants);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, CheckboxDefault);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, CheckboxVariants);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

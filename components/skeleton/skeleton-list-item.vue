@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import { SKELETON_SHAPES } from './skeleton_constants.js';
-import DtSkeletonShape from './skeleton-shape';
-import DtSkeletonParagraph from './skeleton-paragraph';
+import { SKELETON_SHAPES } from './skeleton_constants';
+import DtSkeletonShape from './skeleton-shape.vue';
+import DtSkeletonParagraph from './skeleton-paragraph.vue';
 
 export default {
   name: 'DtSkeletonListItem',
