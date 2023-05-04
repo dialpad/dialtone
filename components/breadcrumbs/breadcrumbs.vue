@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants.js';
-import DtBreadcrumbItem from './breadcrumb_item';
+import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
+import DtBreadcrumbItem from './breadcrumb_item.vue';
 import util from '@/common/utils';
 
 /**

@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import DtRootLayout from './root_layout';
+import DtRootLayout from './root_layout.vue';
 import VHtml from '@/common/v_html';
 
 export default {

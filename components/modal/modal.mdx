@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ModalStories from './modal.stories';
+
+<Meta of={ModalStories}/>
 
 # Modals
 
@@ -17,7 +21,7 @@ The typical modal will have a title and copy text to provide context to the user
 available actions.
 
 <Canvas>
-  <Story id="components-modal--with-footer" />
+  <Story of={ModalStories.WithFooter} />
 </Canvas>
 
 ## With fixed header and footer
@@ -26,7 +30,7 @@ This is the default behavior that adds the scroll automatically in the modal con
 fixed.
 
 <Canvas>
-  <Story id="components-modal--with-fixed-header-footer" />
+  <Story of={ModalStories.WithFixedHeaderFooter} />
 </Canvas>
 
 ## With banner
@@ -34,7 +38,7 @@ fixed.
 A modal with the banner at the top.
 
 <Canvas>
-  <Story id="components-modal--with-banner" />
+  <Story of={ModalStories.WithBanner} />
 </Canvas>
 
 ## Danger Style
@@ -42,7 +46,7 @@ A modal with the banner at the top.
 A modal style for destructive or irreversible actions.
 
 <Canvas>
-  <Story id="components-modal--with-danger-style" />
+  <Story of={ModalStories.WithDangerStyle} />
 </Canvas>
 
 ## Full Size
@@ -50,7 +54,7 @@ A modal style for destructive or irreversible actions.
 To make this modal take up as much of the screen as possible.
 
 <Canvas>
-  <Story id="components-modal--with-full-size" />
+  <Story of={ModalStories.WithFullSize} />
 </Canvas>
 
 ## Custom Header and Body Content
@@ -62,12 +66,12 @@ In addition to the footer, custom elements can be inserted into the header and b
 > **Please note:** supplied header or body slots will take the place of any provided "title" or "copy" text, respectively.
 
 <Canvas>
-  <Story id="components-modal--with-custom-header-and-content" />
+  <Story of={ModalStories.WithCustomHeaderAndContent} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

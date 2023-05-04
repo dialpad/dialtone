@@ -255,9 +255,9 @@ Dialtone Vue follows [SemVer](https://semver.org/) for versioning and the commit
 
 ## Tooling
 
-### Vue-CLI
+### Vite
 
-We use [Vue CLI](https://cli.vuejs.org/) for standard tooling within Dialtone Vue. The configuration for Vue CLI is in [vue.config.js](../vue.config.js). All common Vue CLI commands we use are encapsulated in npm scripts ex: `npm run build`, `npm test`, `npm start`.
+We use [Vite](https://vitejs.dev/) to run our local server and bundle our build.
 
 ### Storybook
 
@@ -267,7 +267,7 @@ Storybook has it's own build process and dependencies separate from our project.
 
 ### ESLint
 
-We use ESLint to promote best practices throughout our codebase. ESLint will check any of our javascript or vue code for styling or syntax errors. The configuration can be found in [.eslintrc.js](../eslintrc.js). Any changes code changes you make will be automatically linted upon commit (configuration in [lint-staged.config.js](../lint-staged.config.js)). You can manually run ESLint via `npm run lint`.
+We use ESLint to promote best practices throughout our codebase. ESLint will check any of our javascript or vue code for styling or syntax errors. The configuration can be found in [.eslintrc.cjs](../eslintrc.cjs). Any changes code changes you make will be automatically linted upon commit (configuration in [lint-staged.config.cjs](../lint-staged.config.cjs)). You can manually run ESLint via `npm run lint`.
 
 ### Yeoman
 

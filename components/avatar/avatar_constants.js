@@ -18,7 +18,7 @@ export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
 };
 
 export const AVATAR_PRESENCE_STATES = {
-  NONE: null,
+  NONE: '',
   BUSY: 'busy',
   AWAY: 'away',
   OFFLINE: 'offline',

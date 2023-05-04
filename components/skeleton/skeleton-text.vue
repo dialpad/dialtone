@@ -39,7 +39,7 @@
 
 <script>
 import { SKELETON_HEADING_HEIGHTS, SKELETON_TEXT_TYPES } from './skeleton_constants';
-import SkeletonAnimation from '@/common/mixins/skeleton.js';
+import SkeletonAnimation from '../../common/mixins/skeleton.js';
 
 export default {
   name: 'DtSkeletonText',

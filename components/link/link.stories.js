@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
-import DtLink from './link';
-import DtLinkMdx from './link.mdx';
+import DtLink from './link.vue';
+
 import DtLinkDefaultTemplate from './link_default.story.vue';
 import DtLinkVariantsTemplate from './link_variants.story.vue';
 import { LINK_VARIANTS } from './link_constants';
@@ -10,6 +10,8 @@ import { LINK_VARIANTS } from './link_constants';
 export const argsData = {
   default: 'Default link',
   href: '#',
+  kind: '',
+  rel: undefined,
   onClick: action('click'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
@@ -29,17 +31,15 @@ export const argTypesData = {
 
   // Props
   kind: {
-    defaultValue: '',
+    options: LINK_VARIANTS,
     control: {
       type: 'select',
-      options: LINK_VARIANTS,
     },
   },
 
   // HTML attributes
   href: {
     description: 'HTML a href attribute',
-    defaultValue: undefined,
     type: {
       summary: 'string',
     },
@@ -51,7 +51,6 @@ export const argTypesData = {
   rel: {
     description: `HTML a rel attribute. Relationship between the location in the document containing the hyperlink
         and the destination resource.`,
-    defaultValue: undefined,
     type: {
       summary: 'string',
     },
@@ -105,47 +104,34 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtLinkMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
 const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtLinkDefaultTemplate);
 const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtLinkVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-      ],
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

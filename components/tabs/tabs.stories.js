@@ -1,13 +1,14 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtTabGroup from './tab_group';
-import DtTabsMdx from './tabs.mdx';
+import DtTabGroup from './tab_group.vue';
+
 import DtTabsDefaultTemplate from './tabs_default.story.vue';
 import DtTabsVariantsTemplate from './tabs_variants.story.vue';
 import { TAB_LIST_SIZES } from './tabs_constants';
 
 // Default Prop Values
 export const argsData = {
+  size: 'default',
   onChange: action('change'),
 };
 
@@ -32,10 +33,9 @@ export const argTypesData = {
 
   // Props
   size: {
-    defaultValue: 'default',
+    options: TAB_LIST_SIZES,
     control: {
       type: 'select',
-      options: TAB_LIST_SIZES,
     },
   },
 
@@ -47,7 +47,8 @@ export const argTypesData = {
   },
 
   change: {
-    description: 'Change tab event with the arguments: `selected` id of the current tab and `disabled` value',
+    description:
+      'Change tab event with the arguments: `selected` id of the current tab and `disabled` value',
     table: {
       type: { summary: 'event' },
     },
@@ -61,17 +62,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtTabsMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -84,10 +74,13 @@ const VariantsTemplate = (args) => createTemplateFromVueFile(
   DtTabsVariantsTemplate,
 );
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

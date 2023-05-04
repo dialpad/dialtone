@@ -94,7 +94,7 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath('constants.ejs'),
-      `${this.destinationFolder}/${this.fileName}_constants.js`,
+      `${this.destinationFolder}/${this.fileName}_constants`,
       params,
     );
 

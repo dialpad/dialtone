@@ -33,7 +33,7 @@
 
 <script>
 import { DtRadio } from '../radio';
-import DtRadioGroup from './radio_group';
+import DtRadioGroup from './radio_group.vue';
 
 export default {
   name: 'RadioGroupDefault',

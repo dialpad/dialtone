@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import DtRecipeContactRow from './contact_row';
+import DtRecipeContactRow from './contact_row.vue';
 
 export default {
   name: 'DtRecipeContactRowDefault',

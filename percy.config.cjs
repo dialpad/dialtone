@@ -1,9 +1,6 @@
 module.exports = {
   version: 2,
   storybook: {
-    queryParams: {
-      viewMode: 'docs',
-    },
     include: [
       // 'Visual Testing/Combobox With Popover: Default',
       // 'Visual Testing/Combobox Multi-Select: Default',
@@ -11,7 +8,7 @@ module.exports = {
       // 'Visual Testing/Popover: Default',
       // 'Visual Testing/Toast: Default',
       // 'Visual Testing/Tooltip: Default',
-      'Visual Testing/Inline Components: Default',
+      'Visual Testing/Inline Components',
       // 'Visual Testing/Modal: Default',
       // 'Visual Testing/Modal: With Footer',
       // 'Visual Testing/Modal: With Fixed Header Footer',

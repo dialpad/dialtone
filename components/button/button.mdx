@@ -1,5 +1,7 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as ButtonStories from './button.stories';
 
+<Meta of={ButtonStories}/>
 # Button
 
 <Subtitle>
@@ -37,18 +39,18 @@ aren't buttons (or can't use the disabled attribute).
 ## Base Style
 
 <Canvas>
-  <Story id="components-button--default" />
+  <Story of={ButtonStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-button--variants" />
+  <Story of={ButtonStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 
@@ -68,6 +70,6 @@ import { DtButton } from '@dialpad/dialtone-vue';
 
 ```html
 <dt-button>
- Button 
+ Button
 </dt-button>
 ```

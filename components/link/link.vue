@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants.js';
+import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants';
 
 /**
  * A link is a navigational element that can be found on its own, within other text, or directly following content.

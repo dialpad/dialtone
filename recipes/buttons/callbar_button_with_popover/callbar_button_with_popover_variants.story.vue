@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
+import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue';
 import { DtIcon } from '@/components/icon';
 
 export default {

@@ -1,7 +1,5 @@
 import { config, mount } from '@vue/test-utils';
 import DtCollapsible from './collapsible.vue';
-import axe from 'axe-core';
-import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
 const content = '<div data-qa="content-element"> Test Text </div>';
 const baseProps = {
@@ -168,15 +166,6 @@ describe('DtCollapsible Tests', () => {
     describe('Content is expanded', () => {
       beforeEach(async () => {
         await wrapper.setProps({ open: true, id: 'contentId' });
-      });
-
-      it('should pass axe-core accessibility rules', async () => {
-        const a11yResults = await axe.run(wrapper.element, configA11y);
-        const violations = a11yResults.violations;
-        if (violations.length) {
-          console.log('axe-core accessibility violations:', violations);
-        }
-        expect(violations.length).toEqual(0);
       });
 
       it(

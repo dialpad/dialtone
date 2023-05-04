@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import DtChip from './chip';
+import DtChip from './chip.vue';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { CHIP_ICON_SIZES } from '@/components/chip/chip_constants';
@@ -47,7 +47,7 @@ export default {
   components: { DtChip, VHtml, DtAvatar, DtIcon },
   computed: {
     iconSize () {
-      return CHIP_ICON_SIZES[this.$attrs.size];
+      return CHIP_ICON_SIZES[this.$attrs.size ?? 'md'];
     },
   },
 };

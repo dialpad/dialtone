@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeContactRow from './contact_row';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ContactRowStories from './contact_row.stories';
+
+<Meta of={ContactRowStories}/>
 
 # Leftbar Contact Row
 
@@ -10,18 +13,18 @@ import DtRecipeContactRow from './contact_row';
 ## Base Style
 
 <Canvas>
-  <Story id="recipes-leftbar-contact-row--default" />
+  <Story of={ContactRowStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="recipes-leftbar-contact-row--variants" />
+  <Story of={ContactRowStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

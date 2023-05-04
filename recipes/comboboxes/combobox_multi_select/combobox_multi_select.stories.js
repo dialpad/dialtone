@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeComboboxMultiSelect from './combobox_multi_select';
-import DtRecipeComboboxMultiSelectMdx from './combobox_multi_select.mdx';
+import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
+
 import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
 
@@ -10,6 +10,14 @@ export const argsData = {
   label: 'Label Text',
   labelVisible: true,
   listMaxHeight: '300px',
+  loading: false,
+  loadingMessage: 'loading...',
+  selectedItems: [],
+  maxSelected: 0,
+  maxSelectedMessage: [],
+  hasSuggestionList: true,
+  appendTo: 'body',
+  showList: null,
   onInput: action('input'),
   onSelect: action('select'),
   onRemove: action('remove'),
@@ -56,37 +64,12 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  labelVisible: {
-    defaultValue: true,
-  },
   description: {
     control: {
       type: 'text',
     },
   },
-  loading: {
-    defaultValue: false,
-  },
-  loadingMessage: {
-    defaultValue: 'loading...',
-  },
-  showList: {
-    defaultValue: null,
-  },
-  listMaxHeight: {
-    defaultValue: '300px',
-  },
-  maxSelected: {
-    defaultValue: 0,
-  },
-  maxSelectedMessage: {
-    defaultValue: [],
-  },
-  hasSuggestionList: {
-    defaultValue: true,
-  },
   appendTo: {
-    defaultValue: 'body',
     table: {
       defaultValue: {
         summary: 'body',
@@ -96,14 +79,8 @@ export const argTypesData = {
   size: {
     control: {
       type: 'select',
-      options: Object.values(MULTI_SELECT_SIZES),
     },
-    defaultValue: MULTI_SELECT_SIZES.DEFAULT,
-    table: {
-      defaultValue: {
-        summary: MULTI_SELECT_SIZES.DEFAULT,
-      },
-    },
+    options: Object.values(MULTI_SELECT_SIZES),
   },
 
   // Action Event Handlers
@@ -154,17 +131,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeComboboxMultiSelectMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -173,29 +139,34 @@ const Template = (args) => createTemplateFromVueFile(
   DtRecipeComboboxMultiSelectDefaultTemplate,
 );
 
-// Stories
-export const Default = Template.bind({});
-
-export const WithMaxSelectValidation = Template.bind({});
-WithMaxSelectValidation.args = {
-  description: 'Select up to 2 options.',
-  maxSelected: 2,
-  selected: ['item12', 'item13', 'item14'],
-  maxSelectedMessage: [{ message: 'More than 2 selected', type: 'error' }],
+export const Default = {
+  render: Template,
 };
-WithMaxSelectValidation.parameters = {
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-        {
-          id: 'label',
-          enabled: false,
-        },
-      ],
+
+export const WithMaxSelectValidation = {
+  render: Template,
+
+  args: {
+    description: 'Select up to 2 options.',
+    maxSelected: 2,
+    selectedItems: ['item12', 'item13', 'item14'],
+    maxSelectedMessage: [{ message: 'More than 2 selected', type: 'error' }],
+  },
+
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+          {
+            id: 'label',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

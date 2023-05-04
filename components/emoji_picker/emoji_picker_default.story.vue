@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import DtEmojiPicker from './emoji_picker';
+import DtEmojiPicker from './emoji_picker.vue';
 import { ref } from 'vue';
 
 const skinTone = ref('Light');

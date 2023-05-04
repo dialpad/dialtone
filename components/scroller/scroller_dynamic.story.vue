@@ -33,10 +33,10 @@
 </template>
 
 <script setup>
-import DtScroller from './DtScroller';
+import DtScroller from './DtScroller.vue';
 import { ref } from 'vue';
 
-const defaultAvatar = require('./person.png');
+import defaultAvatar from './person.png';
 
 /* eslint-disable max-len */
 const messages = [

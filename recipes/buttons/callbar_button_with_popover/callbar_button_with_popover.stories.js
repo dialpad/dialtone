@@ -1,17 +1,21 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
-import DtRecipeCallbarButtonWithPopoverMdx from './callbar_button_with_popover.mdx';
+import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue';
+
 import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './callbar_button_with_popover_default.story.vue';
 import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_with_popover_variants.story.vue';
 
-import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '@/components/popover/popover_constants';
-import { VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button';
+import {
+  POPOVER_DIRECTIONS,
+  POPOVER_INITIAL_FOCUS_STRINGS,
+} from '@/components/popover/popover_constants';
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button_constants';
 
 const iconsList = getIconNames();
 
 // Default Prop Values
 export const argsData = {
+  buttonWidthSize: 'xl',
   onArrowClick: action('arrowClick'),
   onClick: action('click'),
 };
@@ -75,10 +79,9 @@ export const argTypesData = {
     control: 'text',
   },
   buttonWidthSize: {
-    defaultValue: 'xl',
+    options: CALLBAR_BUTTON_VALID_WIDTH_SIZE,
     control: {
       type: 'select',
-      options: VALID_WIDTH_SIZE,
     },
   },
   textClass: {
@@ -159,16 +162,16 @@ export const argTypesData = {
 
   // Popover props
   initialFocusElement: {
+    options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
     control: {
       type: 'select',
     },
-    options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
   },
   placement: {
+    options: POPOVER_DIRECTIONS,
     control: {
       type: 'select',
     },
-    options: POPOVER_DIRECTIONS,
   },
 
   // Action Event Handlers
@@ -191,17 +194,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeCallbarButtonWithPopoverMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -213,21 +205,26 @@ const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
   DtRecipeCallbarButtonWithPopoverVariantsTemplate,
 );
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Button',
-  tooltip: 'Tooltip Text',
-  ariaLabel: 'Button',
-  arrowButtonLabel: 'Open popover',
-  content: 'Popover body content',
-  contentClass: ['d-h464', 'd-w512'],
-  headerContent: 'Header content',
-  showCloseButton: true,
-  forceShowArrow: false,
-  icon: 'dialpad-ai',
+
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Button',
+    tooltip: 'Tooltip Text',
+    ariaLabel: 'Button',
+    arrowButtonLabel: 'Open popover',
+    content: 'Popover body content',
+    contentClass: ['d-h464', 'd-w512'],
+    headerContent: 'Header content',
+    showCloseButton: true,
+    forceShowArrow: false,
+    icon: 'dialpad-ai',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

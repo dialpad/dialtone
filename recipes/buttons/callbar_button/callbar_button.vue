@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import DtButton from '@/components/button/button';
-import DtTooltip from '@/components/tooltip/tooltip';
+import DtButton from '@/components/button/button.vue';
+import DtTooltip from '@/components/tooltip/tooltip.vue';
 import utils from '@/common/utils';
 
-export const VALID_WIDTH_SIZE = ['sm', 'md', 'lg', 'xl'];
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 
 export default {
   name: 'DtRecipeCallbarButton',
@@ -128,7 +128,7 @@ export default {
     buttonWidthSize: {
       type: String,
       default: 'xl',
-      validator: size => VALID_WIDTH_SIZE.includes(size),
+      validator: size => CALLBAR_BUTTON_VALID_WIDTH_SIZE.includes(size),
     },
 
     /**

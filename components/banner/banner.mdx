@@ -1,4 +1,7 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as BannerStories from './banner.stories';
+
+<Meta of={BannerStories}/>
 
 # Banner
 
@@ -23,7 +26,7 @@ area of the product (e.g. when the user is in Do Not Disturb mode).
 The typical banner will have a title, description and an action button
 
 <Canvas>
-  <Story id="components-banner--default" />
+  <Story of={BannerStories.Default} />
 </Canvas>
 
 ## Variants
@@ -35,7 +38,7 @@ Provides different styles of banners
 Applies error visual style.
 
 <Canvas>
-  <Story id="components-banner--error" />
+  <Story of={BannerStories.Error} />
 </Canvas>
 
 ### Info
@@ -43,7 +46,7 @@ Applies error visual style.
 Applies info visual style.
 
 <Canvas>
-  <Story id="components-banner--info" />
+  <Story of={BannerStories.Info} />
 </Canvas>
 
 ### Success
@@ -51,7 +54,7 @@ Applies info visual style.
 Success visual style.
 
 <Canvas>
-  <Story id="components-banner--success" />
+  <Story of={BannerStories.Success} />
 </Canvas>
 
 ### Pinned
@@ -59,7 +62,7 @@ Success visual style.
 Pins the banner to the top of the window
 
 <Canvas>
-  <Story id="components-banner--pinned" />
+  <Story of={BannerStories.Pinned} />
 </Canvas>
 
 ### Warning
@@ -67,7 +70,7 @@ Pins the banner to the top of the window
 Warning visual style.
 
 <Canvas>
-  <Story id="components-banner--warning" />
+  <Story of={BannerStories.Warning} />
 </Canvas>
 
 ### Custom Background
@@ -77,7 +80,7 @@ and set the background size with `backgroundSize` prop.
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

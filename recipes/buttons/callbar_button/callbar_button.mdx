@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeCallbarButton from './callbar_button';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as CallbarButtonStories from './callbar_button.stories';
+
+<Meta of={CallbarButtonStories}/>
 
 # Callbar Button
 
@@ -10,24 +13,24 @@ import DtRecipeCallbarButton from './callbar_button';
 ## Base Style
 
 <Canvas>
-  <Story id="recipes-buttons-callbar-button--default" />
+  <Story of={CallbarButtonStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="recipes-buttons-callbar-button--variants" />
+  <Story of={CallbarButtonStories.Variants} />
 </Canvas>
 
 ## All call bar buttons from the spec
 
 <Canvas>
-  <Story id="recipes-buttons-callbar-button--callbar" />
+  <Story of={CallbarButtonStories.Callbar} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

@@ -53,7 +53,7 @@ import {
   TOOLTIP_DELAY_MS,
 } from './tooltip_constants';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
-import DtLazyShow from '../lazy_show/lazy_show';
+import DtLazyShow from '../lazy_show/lazy_show.vue';
 import {
   createTippy,
   getAnchor,

@@ -16,6 +16,7 @@
             size: 'sm',
             shape: 'circle',
           }"
+          :animate="$attrs.animate"
           class="d-mb24"
           :aria-label="$attrs.ariaLabel"
         />
@@ -24,6 +25,7 @@
           :shape-option="{
             shape: 'circle',
           }"
+          :animate="$attrs.animate"
           class="d-mb24"
           :aria-label="$attrs.ariaLabel"
         />
@@ -33,6 +35,7 @@
             size: 'lg',
             shape: 'circle',
           }"
+          :animate="$attrs.animate"
           :aria-label="$attrs.ariaLabel"
         />
       </div>
@@ -45,6 +48,7 @@
           :shape-option="{
             shape: 'square',
           }"
+          :animate="$attrs.animate"
           class="d-mb24"
           :aria-label="$attrs.ariaLabel"
         />
@@ -54,6 +58,7 @@
         <p class="d-mb24" />
         <dt-skeleton
           :aria-label="$attrs.ariaLabel"
+          :animate="$attrs.animate"
           :text-option="{
             width: '120px',
           }"
@@ -72,6 +77,7 @@
             width: '160px',
             headingHeight: 'sm',
           }"
+          :animate="$attrs.animate"
           class="d-mb24"
           :aria-label="$attrs.ariaLabel"
         />
@@ -82,6 +88,7 @@
             headingHeight: 'md',
             width: '240px',
           }"
+          :animate="$attrs.animate"
           class="d-mb24"
           :aria-label="$attrs.ariaLabel"
         />
@@ -92,6 +99,7 @@
             headingHeight: 'lg',
             width: '320px',
           }"
+          :animate="$attrs.animate"
           :aria-label="$attrs.ariaLabel"
         />
       </div>
@@ -108,6 +116,7 @@
           :text-option="{
             width: '120px',
           }"
+          :animate="$attrs.animate"
           :offset="0.5"
           class="d-mb16"
         />
@@ -116,6 +125,7 @@
           :text-option="{
             width: '120px',
           }"
+          :animate="$attrs.animate"
           :offset="0.5"
           class="d-mb16"
         />
@@ -124,6 +134,7 @@
           :text-option="{
             width: '120px',
           }"
+          :animate="$attrs.animate"
           :offset="0.5"
           class="d-mb16"
         />
@@ -132,6 +143,7 @@
           :text-option="{
             width: '120px',
           }"
+          :animate="$attrs.animate"
           :offset="0.5"
           class="d-mb16"
         />
@@ -149,6 +161,7 @@
               rows: 1,
             },
           }"
+          :animate="$attrs.animate"
           :aria-label="$attrs.ariaLabel"
         />
 
@@ -166,6 +179,7 @@
               rows: 1,
             },
           }"
+          :animate="$attrs.animate"
           :aria-label="$attrs.ariaLabel"
         />
         <h3 class="d-pt16">
@@ -183,6 +197,7 @@
               ],
             },
           }"
+          :animate="$attrs.animate"
           :aria-label="$attrs.ariaLabel"
         />
       </div>
@@ -196,6 +211,7 @@
             rows: 5,
             randomWidth: false,
           }"
+          :animate="$attrs.animate"
           :aria-label="$attrs.ariaLabel"
           :offset="0.5"
         />
@@ -205,7 +221,7 @@
 </template>
 
 <script>
-import DtSkeleton from './skeleton';
+import DtSkeleton from './skeleton.vue';
 
 import { SKELETON_HEADING_HEIGHTS } from './skeleton_constants';
 

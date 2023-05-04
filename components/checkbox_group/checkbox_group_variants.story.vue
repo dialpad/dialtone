@@ -92,8 +92,8 @@
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import DtCheckboxesDecorator from './checkboxes_decorator';
-import DtCheckboxGroup from './checkbox_group';
+import DtCheckboxesDecorator from './checkboxes_decorator.vue';
+import DtCheckboxGroup from './checkbox_group.vue';
 
 export default {
   name: 'CheckboxGroupVariants',

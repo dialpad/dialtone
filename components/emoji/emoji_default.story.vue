@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import DtEmoji from './emoji';
+import DtEmoji from './emoji.vue';
 
 export default {
   name: 'DtEmojiDefault',

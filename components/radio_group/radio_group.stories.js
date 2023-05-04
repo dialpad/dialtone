@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRadioGroup from './radio_group';
-import RadioGroupMdx from './radio_group.mdx';
+import DtRadioGroup from './radio_group.vue';
+
 import RadioGroupDefaultTemplate from './radio_group_default.story.vue';
 import RadioGroupVariantsTemplate from './radio_group_variants.story.vue';
 
@@ -120,47 +120,34 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: RadioGroupMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
 const DefaultTemplate = (args) => createTemplateFromVueFile(args, RadioGroupDefaultTemplate);
 const VariantsTemplate = (args) => createTemplateFromVueFile(args, RadioGroupVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-      ],
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import DtButton from './button';
+import DtButton from './button.vue';
 import {
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
@@ -8,10 +8,18 @@ import {
   ICON_POSITION_MODIFIERS,
 } from './button_constants';
 import { LINK_KIND_MODIFIERS } from '../link/link_constants';
-import BaseButtonMdx from './button.mdx';
+
 import ButtonDefault from './button_default.story.vue';
 import ButtonVariants from './button_variants.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+
+export const argsData = {
+  onClick: action('click'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
+  size: 'md',
+  link: false,
+};
 
 const iconsList = getIconNames();
 
@@ -53,7 +61,6 @@ export const argTypesData = {
     options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
   },
   size: {
-    defaultValue: 'md',
     control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
   },
@@ -62,7 +69,6 @@ export const argTypesData = {
     options: Object.keys(BUTTON_KIND_MODIFIERS),
   },
   link: {
-    defaultValue: false,
     type: {
       summary: 'boolean',
     },
@@ -140,26 +146,9 @@ export const argTypesData = {
   },
 };
 
-export const argsData = {
-  onClick: action('click'),
-  onFocusIn: action('focusin'),
-  onFocusOut: action('focusout'),
-};
-
 export default {
   title: 'Components/Button',
   component: DtButton,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: BaseButtonMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -167,13 +156,18 @@ export default {
 
 const Template = (args) => createTemplateFromVueFile(args, ButtonDefault);
 
-export const Default = Template.bind({});
-Default.args = {
-  default: 'Button',
+export const Default = {
+  render: Template,
+
+  args: {
+    default: 'Button',
+  },
 };
 
 const VariantsTemplate = (args) => createTemplateFromVueFile(args, ButtonVariants);
 
-export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
-Variants.args = {};
+export const Variants = {
+  render: VariantsTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: {},
+};

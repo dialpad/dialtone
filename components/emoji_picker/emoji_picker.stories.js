@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtEmojiPicker from './emoji_picker.vue';
-import DtEmojiPickerMdx from './emoji_picker.mdx';
 import DtEmojiPickerDefaultTemplate from './emoji_picker_default.story.vue';
 
 const recentlyUsedEmojis = [
@@ -100,14 +99,8 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtEmojiPickerMdx,
-    },
-    options: {
-      showPanel: true,
+    a11y: {
+      disable: true,
     },
   },
 };
@@ -119,5 +112,7 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
 );
 
 // Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};

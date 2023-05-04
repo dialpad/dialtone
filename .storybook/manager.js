@@ -1,6 +1,5 @@
-import '../css/dialtone-globals.less';
 import { addons } from '@storybook/addons';
-import theme from './theme';
+import dialtoneTheme from './dialtone-theme.js';
 
 const CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR = `
 #visual-testing,
@@ -10,7 +9,7 @@ const CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR = `
 }
 `;
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.STORYBOOK_ENV === 'production') {
   const head = document.head || document.getElementsByTagName('head')[0];
   const style = document.createElement('style');
   head.appendChild(style);
@@ -20,8 +19,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 addons.setConfig({
-  sidebar: {
-    showRoots: true
-  },
-  theme,
+  showRoots: true,
+  theme: dialtoneTheme,
 });

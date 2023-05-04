@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import DtListItemGroup from './list_item_group';
-import DtListItem from '../list_item/list_item';
+import DtListItemGroup from './list_item_group.vue';
+import DtListItem from '../list_item/list_item.vue';
 
 export default {
   name: 'DtListItemGroupDefault',

@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as RichTextEditorStories from './rich_text_editor.stories';
+
+<Meta of={ RichTextEditorStories }/>
 
 # Rich Text Editor
 
@@ -21,12 +25,12 @@ The editor itself is without any styling and the intention is to wrap it with
 another component, such as Message Input, that provides the UI.
 
 <Canvas>
-  <Story id="components-rich-text-editor--default" />
+  <Story of={RichTextEditorStories.Default} />
 </Canvas>
 
 ## Slots, Props and Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ### Usage (internal only)
 

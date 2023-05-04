@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ComboboxStories from './combobox.stories';
+
+<Meta of={ComboboxStories}/>
 
 # Combobox
 
@@ -19,12 +23,12 @@ The **input** slot contains the input element that controls the items in the lis
 The **list** contains a list of items to show in the context of the input's value. Almost always this will be a list of dt-list-item.
 
 <Canvas>
-  <Story id="components-combobox--default" />
+  <Story of={ComboboxStories.Default} />
 </Canvas>
 
 ## Slots, Props and Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

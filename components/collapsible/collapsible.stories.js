@@ -1,11 +1,13 @@
-import {
-  DtCollapsible,
-} from './';
+import { DtCollapsible } from './';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import CollapsibleMdx from './collapsible.mdx';
-import DtCollapsibleDefaultStory from './collapsible_default.story';
 
-const argsTypesData = {
+import DtCollapsibleDefaultStory from './collapsible_default.story.vue';
+
+export const argsData = {
+  anchorText: 'Click me to toggle Content',
+};
+
+const argTypesData = {
   // Slots
   anchor: {
     control: 'text',
@@ -27,7 +29,6 @@ const argsTypesData = {
   // Props
   anchorText: {
     description: 'Text on the anchor if slot is unused.',
-    defaultValue: 'Click me to toggle Content',
     table: {
       type: { summary: 'string' },
     },
@@ -59,19 +60,9 @@ const argsTypesData = {
 export default {
   title: 'Components/Collapsible',
   component: DtCollapsible,
-  argTypes: argsTypesData,
+  argTypes: argTypesData,
+  args: argsData,
   excludeStories: /.Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: CollapsibleMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -80,8 +71,10 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtCollapsibleDefaultStory,
 );
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  maxWidth: '512px',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    maxWidth: '512px',
+  },
 };

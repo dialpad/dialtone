@@ -21,7 +21,7 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import IconDialbot from '@dialpad/dialtone/lib/dist/vue/icons/IconDialbot';
+import IconDialbot from '@dialpad/dialtone/lib/dist/vue/icons/IconDialbot.vue';
 import {
   LEFTBAR_GENERAL_ROW_ICON_MAPPING as ICON_MAPPING,
   LEFTBAR_GENERAL_ROW_TYPES as TYPES,

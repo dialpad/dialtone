@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as NoticeStories from './notice.stories';
+
+<Meta of={NoticeStories}/>
 
 # Notice
 
@@ -9,7 +13,7 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 ## Base Style
 
 <Canvas>
-  <Story id="components-notice--default" />
+  <Story of={NoticeStories.Default} />
 </Canvas>
 
 ## Variants
@@ -17,36 +21,36 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 ### Error
 
 <Canvas>
-  <Story id="components-notice--error" />
+  <Story of={NoticeStories.Error} />
 </Canvas>
 
 ### Info
 
 <Canvas>
-  <Story id="components-notice--info" />
+  <Story of={NoticeStories.Info} />
 </Canvas>
 
 ### Success
 
 <Canvas>
-  <Story id="components-notice--success" />
+  <Story of={NoticeStories.Success} />
 </Canvas>
 
 ### Warning
 
 <Canvas>
-  <Story id="components-notice--warning" />
+  <Story of={NoticeStories.Warning} />
 </Canvas>
 
 ### Important
 
 <Canvas>
-  <Story id="components-notice--important" />
+  <Story of={NoticeStories.Important} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

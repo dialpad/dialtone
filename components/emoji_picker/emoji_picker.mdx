@@ -1,6 +1,10 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
 
-# DtEmojiPicker
+import * as EmojiPickerStories from './emoji_picker.stories';
+
+<Meta of={EmojiPickerStories}/>
+
+# Emoji Picker
 
 <Subtitle>
   Allows you to view and select an emoji from a list.
@@ -11,12 +15,12 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 Some description of how to use the base component, potential gotchas and limitations.
 
 <Canvas>
-  <Story id="components-emoji-picker--default" />
+  <Story of={EmojiPickerStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

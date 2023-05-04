@@ -8,7 +8,7 @@ import {
   Comment,
   Text,
 } from 'vue';
-const seedrandom = require('seedrandom');
+import seedrandom from 'seedrandom';
 
 let UNIQUE_ID_COUNTER = 0;
 let TIMER;

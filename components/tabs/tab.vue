@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
+import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants';
 import { DtButton } from '../button';
 
 /**

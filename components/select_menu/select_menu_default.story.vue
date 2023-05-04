@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import DtSelectMenu from './select_menu';
+import DtSelectMenu from './select_menu.vue';
 import { htmlFragment } from '@/common/utils';
 
 export default {

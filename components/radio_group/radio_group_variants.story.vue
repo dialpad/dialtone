@@ -92,8 +92,8 @@
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import RadiosDecorator from './radios_decorator';
-import DtRadioGroup from './radio_group';
+import RadiosDecorator from './radios_decorator.vue';
+import DtRadioGroup from './radio_group.vue';
 
 export default {
   name: 'RadioGroupVariants',

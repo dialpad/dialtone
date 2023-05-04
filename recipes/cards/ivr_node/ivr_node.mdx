@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeIvrNode from './ivr_node';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as IvrNodeStories from './ivr_node.stories';
+
+<Meta of={IvrNodeStories}/>
 
 # IVR Node
 
@@ -13,12 +16,12 @@ A node in IVR configuration has header and content. Header contains icon, label 
 The base style contains a top connector indicator.
 
 <Canvas>
-  <Story id="recipes-cards-ivr-node--default" />
+  <Story of={IvrNodeStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 
@@ -33,7 +36,7 @@ import { DtRecipeIvrNode } from '@dialpad/dialtone-vue';
 A node in IVR configuration to configure DTMF types.
 
 <Canvas>
-    <Story id="recipes-cards-ivr-node--prompt-menu" />
+    <Story of={IvrNodeStories.PromptMenu} />
 </Canvas>
 
 ```html
@@ -54,7 +57,7 @@ A node in IVR configuration to configure DTMF types.
 A node in IVR configuration to collect data like input, number, etc.
 
 <Canvas>
-    <Story id="recipes-cards-ivr-node--prompt-collect" />
+    <Story of={IvrNodeStories.PromptCollect} />
 </Canvas>
 
 ```html
@@ -75,7 +78,7 @@ A node in IVR configuration to collect data like input, number, etc.
 A node in IVR configuration to play media.
 
 <Canvas>
-    <Story id="recipes-cards-ivr-node--prompt-play" />
+    <Story of={IvrNodeStories.PromptPlay} />
 </Canvas>
 
 ```html
@@ -95,7 +98,7 @@ A node in IVR configuration to play media.
 A node in IVR used to integration DX expert view in iFrame to create complex flows.
 
 <Canvas>
-    <Story id="recipes-cards-ivr-node--expert" />
+    <Story of={IvrNodeStories.Expert} />
 </Canvas>
 
 ```html
@@ -129,7 +132,7 @@ A node in IVR used to integration DX expert view in iFrame to create complex flo
 A node in IVR used to step to another workflow or step in a workflow.
 
 <Canvas>
-    <Story id="recipes-cards-ivr-node--go-to" />
+    <Story of={IvrNodeStories.GoTo} />
 </Canvas>
 
 ```html
@@ -150,7 +153,7 @@ A node in IVR used to step to another workflow or step in a workflow.
 A node in IVR used to step to another workflow or step in a workflow.
 
 <Canvas>
-    <Story id="recipes-cards-ivr-node--branch" />
+    <Story of={NodeStories.Branch} />
 </Canvas>
 
 ```html
@@ -171,7 +174,7 @@ A node in IVR used to step to another workflow or step in a workflow.
 A node in IVR used to transfer to person, department, call center, etc.
 
 <Canvas>
-    <Story id="recipes-cards-ivr-node--transfer" />
+    <Story of={IvrNodeStories.Transfer} />
 </Canvas>
 
 ```html
@@ -196,7 +199,7 @@ A node in IVR used to transfer to person, department, call center, etc.
 A node in IVR used to terminate the call.
 
 <Canvas>
-    <Story id="recipes-cards-ivr-node--hangup" />
+    <Story of={IvrNodeStories.Hangup} />
 </Canvas>
 
 ```html
@@ -217,7 +220,7 @@ A node in IVR used to terminate the call.
 A node in IVR like branch that has a condition instead of dtmf connector.
 
 <Canvas>
-  <Story id="recipes-cards-ivr-node--node-with-top-connector" />
+  <Story of={IvrNodeStories.NodeWithTopConnector} />
 </Canvas>
 
 ```html

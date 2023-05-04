@@ -186,7 +186,7 @@
 </template>
 
 <script>
-import DtRadio from './radio';
+import DtRadio from './radio.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {

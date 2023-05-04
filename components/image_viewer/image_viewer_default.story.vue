@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import DtImageViewer from './image_viewer';
+import DtImageViewer from './image_viewer.vue';
 
 export default {
   name: 'DtImageViewerDefault',

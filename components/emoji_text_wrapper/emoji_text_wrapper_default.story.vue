@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import DtEmojiTextWrapper from './emoji_text_wrapper';
+import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
 
 export default {
   name: 'DtEmojiTextWrapperDefault',

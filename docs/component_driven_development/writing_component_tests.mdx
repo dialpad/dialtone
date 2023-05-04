@@ -1,12 +1,8 @@
-import { Meta, Subtitle } from '@storybook/addon-docs';
+import { Meta, Subtitle } from '@storybook/blocks';
 
 <Meta title="Docs/Component Driven Development/Unit Tests" />
 
 # Component Unit Tests
-
-<Subtitle>
-  Writing Unit Tests For Components
-</Subtitle>
 
 ## How do we write unit tests
 
@@ -212,7 +208,6 @@ it('2 equals 2', () => {
 });
 ```
 
-<!-- markdownlint-disable header-increment -->
 ### DRY
 
 We should ensure that repeated assertions are moved into a shared example in order to reduce repeated code. Shared
@@ -245,7 +240,7 @@ describe('My Tests', () => {
 
 <h4 style={{ color: 'green' }}>Good</h4>
 
-##### Closure Example
+#### Closure Example
 
 ```js
 const itBehavesLikeEqualsItself = (num) => {
@@ -271,7 +266,7 @@ describe('My Tests', () => {
 });
 ```
 
-##### One By One Example
+#### One By One Example
 
 ```js
 const itBehavesLikeEquals = (num) => ({
@@ -300,7 +295,6 @@ describe('My Tests', () => {
   });
 });
 ```
-<!-- markdownlint-enable header-increment -->
 
 ### Test Isolation
 

@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeComboboxMultiSelect from './combobox_multi_select';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ComboboxMultiSelectStories from './combobox_multi_select.stories';
+
+<Meta of={ComboboxMultiSelectStories}/>
 
 # Combobox Multi-Select
 
@@ -10,12 +13,12 @@ import DtRecipeComboboxMultiSelect from './combobox_multi_select';
 ## Base Style
 
 <Canvas>
-  <Story id="recipes-comboboxes-combobox-multi-select--default" />
+  <Story of={ComboboxMultiSelectStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

@@ -78,9 +78,9 @@
 </template>
 
 <script>
-import DtRecipeContactRow from './contact_row';
+import DtRecipeContactRow from './contact_row.vue';
 import { DtStack } from '@/components/stack';
-const defaultImage = require('@/common/assets/person.png');
+import defaultImage from '@/common/assets/person.png';
 
 export default {
   name: 'DtRecipeContactRowVariants',

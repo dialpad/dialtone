@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtRecipeFeedItemRow from './feed_item_row';
-import DtRecipeFeedItemRowMdx from './feed_item_row.mdx';
+import DtRecipeFeedItemRow from './feed_item_row.vue';
 import DtRecipeFeedItemRowDefaultTemplate from './feed_item_row_default.story.vue';
 import DtRecipeFeedItemRowVariantsTemplate from './feed_item_row_variants.story.vue';
 
@@ -107,15 +106,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtRecipeFeedItemRowMdx,
-    },
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: { showPanel: true },
-  },
 };
 
 // Templates
@@ -128,12 +118,14 @@ const VariantsTemplate = (args) => createTemplateFromVueFile(
   DtRecipeFeedItemRowVariantsTemplate,
 );
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  showHeader: true,
-  reactions: 'emoji reactions',
-  threading: 'threading',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    showHeader: true,
+    reactions: 'emoji reactions',
+    threading: 'threading',
+  },
 };
 Default.parameters = {
   a11y: {
@@ -152,8 +144,10 @@ Default.parameters = {
   },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {
+export const Variants = {
+  render: VariantsTemplate,
+
+  args: {},
 };
 Variants.parameters = {
   a11y: Default.parameters.a11y,

@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeUnreadPill from './unread_pill.vue';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as UnreadPillStories from './unread_pill.stories';
+
+<Meta of={UnreadPillStories}/>
 
 # Leftbar Unread Pill
 
@@ -10,18 +13,18 @@ import DtRecipeUnreadPill from './unread_pill.vue';
 ## Base Style
 
 <Canvas>
-  <Story id="recipes-leftbar-unread-pill--default" />
+  <Story of={UnreadPillStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="recipes-leftbar-unread-pill--variants" />
+  <Story of={UnreadPillStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

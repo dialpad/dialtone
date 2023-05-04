@@ -244,7 +244,7 @@ export default {
     },
 
     avatarInitial () {
-      return this.name[0] ?? '';
+      return this.name?.[0] ?? '';
     },
   },
 };

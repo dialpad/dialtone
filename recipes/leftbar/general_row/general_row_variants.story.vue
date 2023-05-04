@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import DtRecipeGeneralRow from './general_row';
+import DtRecipeGeneralRow from './general_row.vue';
 import { DtStack } from '@/components/stack';
 
 export default {

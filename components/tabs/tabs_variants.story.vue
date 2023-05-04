@@ -70,9 +70,9 @@
 </template>
 
 <script>
-import DtTabGroup from './tab_group';
-import DtTab from './tab';
-import DtTabPanel from './tab_panel';
+import DtTabGroup from './tab_group.vue';
+import DtTab from './tab.vue';
+import DtTabPanel from './tab_panel.vue';
 
 export default {
   name: 'DtTabsVariants',

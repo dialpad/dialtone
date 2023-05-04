@@ -2,7 +2,7 @@
 <template>
   <div class="d-stack16">
     <dt-image-viewer
-      :image-src="require('./test.jpg')"
+      :image-src="test"
       image-alt="Alt Text"
       close-aria-label="Close"
       image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
@@ -10,7 +10,7 @@
     />
 
     <dt-image-viewer
-      :image-src="require('@/common/assets/fry.gif')"
+      :image-src="fry"
       image-alt="Alt Text"
       close-aria-label="Close"
       image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
@@ -20,10 +20,18 @@
 </template>
 
 <script>
-import DtImageViewer from './image_viewer';
+import DtImageViewer from './image_viewer.vue';
+import test from './test.jpg';
+import fry from '@/common/assets/fry.gif';
 
 export default {
   name: 'DtImageViewerVariants',
   components: { DtImageViewer },
+  data () {
+    return {
+      test,
+      fry,
+    };
+  },
 };
 </script>

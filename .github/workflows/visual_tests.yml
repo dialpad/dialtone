@@ -9,8 +9,7 @@ on:
     types: [ submitted ]
 
 env:
-  NODE_MODULES_CACHE_VERSION: v2
-  STORYBOOK_ROOT: ./storybook
+  NODE_MODULES_CACHE_VERSION: v3
 
 jobs:
 
@@ -53,21 +52,9 @@ jobs:
             ~/.npm
           key: ${{ format('{0}-dialtone-vue-library-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('package-lock.json'))) }}
 
-      - name: Use Documentation Cache
-        id: doc-cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ${{ env.STORYBOOK_ROOT }}/node_modules/
-          key: ${{ format('{0}-dialtone-vue-documentation-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('{0}/package-lock.json', env.STORYBOOK_ROOT))) }}
-
       - name: Install Library Dependencies
         if: steps.library-cache.outputs.cache-hit != 'true'
         run: npm ci
-
-      - name: Install Docs Dependencies
-        if: steps.doc-cache.outputs.cache-hit != 'true'
-        run: npm run storybook:install
 
       - name: Build Storybook
         run: npm run storybook:build
@@ -76,4 +63,4 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: npx percy storybook --config percy.config.js --verbose storybook/compiled
+        run: npx percy storybook --config percy.config.cjs --verbose storybook-static

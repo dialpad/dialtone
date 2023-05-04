@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import DtCheckbox from './checkbox';
+import DtCheckbox from './checkbox.vue';
 
 export default {
   name: 'CheckboxDefault',

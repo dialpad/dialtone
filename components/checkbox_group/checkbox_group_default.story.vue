@@ -33,7 +33,7 @@
 
 <script>
 import { DtCheckbox } from '../checkbox';
-import DtCheckboxGroup from './checkbox_group';
+import DtCheckboxGroup from './checkbox_group.vue';
 
 export default {
   name: 'CheckboxGroupDefault',

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import DtCodeblock from './codeblock';
+import DtCodeblock from './codeblock.vue';
 
 export default {
   name: 'DtCodeblockDefault',

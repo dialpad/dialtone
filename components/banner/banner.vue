@@ -1,13 +1,14 @@
+<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 <template>
   <aside
     :class="bannerClass"
     :style="bannerBackgroundImage"
-    :role="role"
     @keydown.tab="trapFocus"
   >
     <div
       class="d-banner__dialog"
       :class="dialogClass"
+      :role="role"
       :aria-labelledby="titleId"
       :aria-describedby="contentId"
     >
@@ -46,13 +47,13 @@
 </template>
 
 <script>
-import DtNoticeIcon from '../notice/notice_icon';
-import DtNoticeContent from '../notice/notice_content';
-import DtNoticeAction from '../notice/notice_action';
+import DtNoticeIcon from '../notice/notice_icon.vue';
+import DtNoticeContent from '../notice/notice_content.vue';
+import DtNoticeAction from '../notice/notice_action.vue';
 import { NOTICE_KINDS } from '../notice/notice_constants';
-import Modal from '@/common/mixins/modal.js';
+import Modal from '../../common/mixins/modal';
 import util from '@/common/utils';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button';
 
 /**
  * Banners are a type of notice, delivering system and engagement messaging.

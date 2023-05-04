@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import DtRecipeTopBannerInfo from './top_banner_info';
+import DtRecipeTopBannerInfo from './top_banner_info.vue';
 
 export default {
   name: 'DtRecipeTopBannerInfoDefault',

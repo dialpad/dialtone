@@ -1,11 +1,17 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtChip from './chip';
-import DtChipMdx from './chip.mdx';
+import DtChip from './chip.vue';
+
 import DtChipDefaultTemplate from './chip_default.story.vue';
 import { CHIP_SIZE_MODIFIERS } from './chip_constants';
 
 const iconsList = getIconNames();
+
+export const argsData = {
+  onClose: action('close'),
+  onClick: action('click'),
+  size: 'md',
+};
 
 export const argTypesData = {
   // Slots
@@ -55,10 +61,9 @@ export const argTypesData = {
     },
   },
   size: {
-    defaultValue: 'md',
+    options: Object.keys(CHIP_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(CHIP_SIZE_MODIFIERS),
     },
   },
   ariaLabel: {
@@ -102,12 +107,6 @@ export const argTypesData = {
   },
 };
 
-// Default Props for all variations
-export const argsData = {
-  onClose: action('close'),
-  onClick: action('click'),
-};
-
 // Story Collection
 export default {
   title: 'Components/Chip',
@@ -115,46 +114,46 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtChipMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
 const Template = (args) => createTemplateFromVueFile(args, DtChipDefaultTemplate);
 
-// Stories
-export const Default = Template.bind({});
-Default.args = {
-  default: 'Chip',
-  closeButtonProps: {
-    ariaLabel: 'close',
+export const Default = {
+  render: Template,
+
+  args: {
+    default: 'Chip',
+    closeButtonProps: {
+      ariaLabel: 'close',
+    },
   },
 };
 
-export const WithIcon = Template.bind({});
-WithIcon.args = {
-  ...Default.args,
-  icon: 'lock-filled',
+export const WithIcon = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    icon: 'lock-filled',
+  },
 };
 
-export const WithAvatar = Template.bind({});
-WithAvatar.args = {
-  ...Default.args,
-  avatar: 'DP',
+export const WithAvatar = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    avatar: 'DP',
+  },
 };
 
-export const NonInteractive = Template.bind({});
-NonInteractive.args = {
-  ...Default.args,
-  interactive: false,
-  hideClose: true,
+export const NonInteractive = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    interactive: false,
+    hideClose: true,
+  },
 };

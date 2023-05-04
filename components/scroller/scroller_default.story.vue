@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import DtScroller from './DtScroller';
+import DtScroller from './DtScroller.vue';
 import { ref } from 'vue';
 
 const items = Array.from({ length: 1000 }, (_, i) => ({

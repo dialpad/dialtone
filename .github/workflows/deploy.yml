@@ -43,7 +43,7 @@ jobs:
 
       - name: Build storybook
         if: ${{ github.ref == 'refs/heads/production' || github.ref == 'refs/heads/vue3' }}
-        run: npm run storybook:install && npm run storybook:build
+        run: npm run storybook:build
 
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
@@ -88,4 +88,4 @@ jobs:
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release --extends ./release-ci.config.js
+        run: npx semantic-release --extends ./release-ci.config.cjs

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import DtButtonGroup from './button_group';
+import DtButtonGroup from './button_group.vue';
 import { DtButton } from '../button';
 import { htmlFragment } from '@/common/utils';
 

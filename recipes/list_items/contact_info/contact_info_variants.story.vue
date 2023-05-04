@@ -249,9 +249,12 @@
 </template>
 
 <script>
-import DtRecipeContactInfo from './contact_info';
+import DtRecipeContactInfo from './contact_info.vue';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
+
+import avatar1 from './avatar.png';
+import avatar2 from './avatar2.png';
 
 export default {
   name: 'DtRecipeContactInfoVariants',
@@ -259,14 +262,14 @@ export default {
   data () {
     return {
       adminListenInAvatars: [
-        { src: require('./avatar.png'), initials: 'KK' },
-        { src: require('./avatar2.png'), initials: 'LL', icon: 'hear' },
+        { src: avatar1, initials: 'KK' },
+        { src: avatar2, initials: 'LL', icon: 'hear' },
       ],
 
       groupCallAvatars: [
         { initials: 'JL' },
-        { src: require('./avatar.png'), initials: 'KK' },
-        { src: require('./avatar2.png'), initials: 'LL', text: '+3' },
+        { src: avatar1, initials: 'KK' },
+        { src: avatar2, initials: 'LL', text: '+3' },
       ],
     };
   },

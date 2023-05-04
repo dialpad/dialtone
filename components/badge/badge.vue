@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants.js';
+import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
 import { DtIcon } from '@/components/icon';
 
 /**

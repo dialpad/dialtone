@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ValidationMessagesStories from './validation_messages.stories';
+
+<Meta of={ValidationMessagesStories}/>
 
 # Validation Messages
 
@@ -24,18 +28,18 @@ Validation messages are typically paired with an input element. They are current
 our shared input components such as `dt-input`, `dt-radio-group`.
 
 <Canvas>
-  <Story id="components-validation-messages--default" />
+  <Story of={ValidationMessagesStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-validation-messages--variants" />
+  <Story of={ValidationMessagesStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

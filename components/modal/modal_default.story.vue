@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import DtModal from './modal';
+import DtModal from './modal.vue';
 import { DtButton } from '../button';
 
 export default {

@@ -92,8 +92,8 @@
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import InputsDecorator from './decorators/inputs';
-import DtInputGroup from './input_group';
+import InputsDecorator from './decorators/inputs.vue';
+import DtInputGroup from './input_group.vue';
 
 export default {
   name: 'InputGroupVariants',

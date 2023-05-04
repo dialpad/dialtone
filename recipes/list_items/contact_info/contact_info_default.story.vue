@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import DtRecipeContactInfo from './contact_info';
+import DtRecipeContactInfo from './contact_info.vue';
 
 export default {
   name: 'DtRecipeContactInfoDefault',

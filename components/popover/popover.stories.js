@@ -8,12 +8,17 @@ import {
 import PopoverDefault from './popover_default.story.vue';
 import PopoverVariants from './popover_variants.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import PopoverMdx from './popover.mdx';
+
 import { action } from '@storybook/addon-actions';
 import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './popover_constants';
 
 // Default Props for all variations
 export const argsData = {
+  placement: 'bottom-end',
+  contentWidth: null,
+  sticky: false,
+  offset: [0, 4],
+  appendTo: 'body',
   onOpened: action('opened'),
   visuallyHiddenCloseLabel: 'Close popover',
 };
@@ -67,28 +72,27 @@ export const argTypesData = {
     },
   },
   padding: {
+    options: Object.keys(POPOVER_PADDING_CLASSES),
     control: {
       type: 'select',
-      options: Object.keys(POPOVER_PADDING_CLASSES),
     },
   },
   initialFocusElement: {
+    options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
     control: {
       type: 'select',
-      options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
     },
   },
   role: {
+    options: POPOVER_ROLES,
     control: {
       type: 'select',
-      options: POPOVER_ROLES,
     },
   },
   placement: {
-    defaultValue: 'bottom-end',
+    options: POPOVER_DIRECTIONS,
     control: {
       type: 'select',
-      options: POPOVER_DIRECTIONS,
     },
     table: {
       defaultValue: {
@@ -97,22 +101,15 @@ export const argTypesData = {
     },
   },
   contentWidth: {
-    defaultValue: null,
+    options: POPOVER_CONTENT_WIDTHS,
     control: {
       type: 'select',
-      options: POPOVER_CONTENT_WIDTHS,
-    },
-    table: {
-      defaultValue: {
-        summary: 'null',
-      },
     },
   },
   sticky: {
-    defaultValue: false,
+    options: POPOVER_STICKY_VALUES,
     control: {
       type: 'select',
-      options: POPOVER_STICKY_VALUES,
     },
     table: {
       defaultValue: {
@@ -121,16 +118,12 @@ export const argTypesData = {
     },
   },
   transition: {
+    options: ['', 'fade', 'pop', 'shake'],
     control: {
       type: 'select',
-      options: ['', 'fade', 'pop', 'shake'],
     },
   },
-  offset: {
-    defaultValue: [0, 4],
-  },
   appendTo: {
-    defaultValue: 'body',
     table: {
       defaultValue: {
         summary: 'body',
@@ -166,48 +159,42 @@ export default {
   component: DtPopover,
   args: argsData,
   argTypes: argTypesData,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: { showPanel: true },
-    docs: {
-      page: PopoverMdx,
-    },
-  },
   excludeStories: /.Data$/,
 };
 
 const Template = (args) => createTemplateFromVueFile(args, PopoverDefault);
 const TemplateVariants = (args) => createTemplateFromVueFile(args, PopoverVariants);
 
-export const Default = Template.bind({});
-Default.args = {};
-Default.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
-})];
-Default.parameters = {};
+export const Default = {
+  render: Template,
+  args: {},
 
-export const Variants = TemplateVariants.bind({});
-Variants.args = {};
-Variants.parameters = {
-  controls: {
-    disable: true,
-  },
-  actions: {
-    disable: true,
-  },
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'aria-allowed-attr',
-          enabled: false,
-        },
-      ],
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
+    }),
+  ],
+
+  parameters: {},
+};
+
+export const Variants = {
+  render: TemplateVariants,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-allowed-attr',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

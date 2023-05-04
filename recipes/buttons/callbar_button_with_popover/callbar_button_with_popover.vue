@@ -72,7 +72,7 @@
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtIcon } from '@/components/icon';
-import DtRecipeCallbarButton, { VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button';
+import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils from '@/common/utils';
 
 export default {
@@ -230,7 +230,7 @@ export default {
     buttonWidthSize: {
       type: String,
       default: 'xl',
-      validator: size => VALID_WIDTH_SIZE.includes(size),
+      validator: size => CALLBAR_BUTTON_VALID_WIDTH_SIZE.includes(size),
     },
 
     /**

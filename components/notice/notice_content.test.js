@@ -1,4 +1,4 @@
-import DtNoticeContent from './notice_content';
+import DtNoticeContent from './notice_content.vue';
 import { shallowMount } from '@vue/test-utils';
 
 // Constants

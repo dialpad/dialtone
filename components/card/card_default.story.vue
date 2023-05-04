@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import DtCard from './card';
+import DtCard from './card.vue';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 

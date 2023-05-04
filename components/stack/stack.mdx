@@ -1,5 +1,9 @@
-import { Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtStack from './stack';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import DtStack from './stack.vue';
+
+import * as StackStories from './stack.stories';
+
+<Meta of={StackStories}/>
 
 # Stack
 
@@ -13,7 +17,7 @@ Stack base style starts without spacing between elements, on column direction an
 
 ## Slots & Props
 
-<ArgsTable of={DtStack} />
+<Controls />
 
 ## Usage
 

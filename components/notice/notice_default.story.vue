@@ -56,7 +56,7 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
-import DtNotice from './notice';
+import DtNotice from './notice.vue';
 
 export default {
   name: 'NoticeDefault',

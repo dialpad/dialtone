@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import InputDecorator from './decorators/input';
-import DtInputGroup from './input_group';
+import InputDecorator from './decorators/input.vue';
+import DtInputGroup from './input_group.vue';
 
 export default {
   name: 'InputGroupDefault',

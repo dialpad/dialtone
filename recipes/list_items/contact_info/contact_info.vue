@@ -105,8 +105,8 @@
 </template>
 
 <script>
-import DtListItem from '@/components/list_item/list_item';
-import DtAvatar from '@/components/avatar/avatar';
+import DtListItem from '@/components/list_item/list_item.vue';
+import DtAvatar from '@/components/avatar/avatar.vue';
 import utils from '@/common/utils';
 
 export default {

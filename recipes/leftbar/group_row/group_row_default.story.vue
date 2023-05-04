@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import DtRecipeGroupRow from './group_row';
+import DtRecipeGroupRow from './group_row.vue';
 
 export default {
   name: 'DtRecipeGroupRowDefault',

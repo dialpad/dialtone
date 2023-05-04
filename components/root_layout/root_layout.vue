@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import DtRootLayoutBody from './root_layout_body';
+import DtRootLayoutBody from './root_layout_body.vue';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS, ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS } from './root_layout_constants';
 import { hasSlotContent } from '@/common/utils';
 

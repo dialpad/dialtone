@@ -68,8 +68,8 @@
 </template>
 
 <script>
-import DtBanner from '../banner/banner';
-import DtButton from '../button/button';
+import DtBanner from '../banner/banner.vue';
+import DtButton from '../button/button.vue';
 import { DtIcon } from '@/components/icon';
 
 export default {

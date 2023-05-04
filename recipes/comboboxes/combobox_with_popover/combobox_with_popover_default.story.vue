@@ -1,22 +1,22 @@
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
-    :empty-state-message="$attrs.emptyStateMessage"
-    :loading="$attrs.loading"
     :label="$attrs.label"
     :label-visible="$attrs.labelVisible"
-    :size="$attrs.size"
     :description="$attrs.description"
+    :size="$attrs.size"
+    :loading="$attrs.loading"
     :max-height="$attrs.maxHeight"
-    :max-width="$attrs.maxWidth"
     :content-width="$attrs.contentWidth"
+    :has-suggestion-list="$attrs.hasSuggestionList"
+    :max-width="$attrs.maxWidth"
     :show-list="$attrs.showList"
     :padding="$attrs.padding"
     :list-id="$attrs.listId"
     :list-class="$attrs.listClass"
     :open-with-arrow-keys="$attrs.openWithArrowKeys"
-    :has-suggestion-list="$attrs.hasSuggestionList"
     :empty-list="$attrs.emptyList"
+    :empty-state-message="$attrs.emptyStateMessage"
     :append-to="$attrs.appendTo"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
@@ -67,7 +67,7 @@
       <span v-html="$attrs.footer" />
     </template>
     <template
-      v-else
+      v-else-if="!emptyList"
       #footer
     >
       <div class="d-d-flex d-ai-center d-px12">
@@ -78,10 +78,10 @@
 </template>
 
 <script>
-import DtRecipeComboboxWithPopover from './combobox_with_popover';
-import DtInput from '@/components/input/input';
-import DtListItem from '@/components/list_item/list_item';
-import DtCheckbox from '@/components/checkbox/checkbox';
+import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
+import DtInput from '@/components/input/input.vue';
+import DtListItem from '@/components/list_item/list_item.vue';
+import DtCheckbox from '@/components/checkbox/checkbox.vue';
 
 export default {
   name: 'DtRecipeComboboxWithPopoverDefault',

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { InputGroupMixin } from '@/common/mixins/input_group';
+import { InputGroupMixin } from '../../common/mixins/input_group';
 import { DtValidationMessages } from '../validation_messages';
 import { hasSlotContent } from '@/common/utils';
 

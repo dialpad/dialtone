@@ -1,4 +1,8 @@
-import { Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ScrollerStories from './scroller.stories';
+
+<Meta of={ScrollerStories} />
 
 # Scroller
 
@@ -8,7 +12,7 @@ import { Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks
 
 On this file you will find the documentation for our current MVP functionality.
 
-If you need more information about the component, we are using a Fork of Akryum/vue-virtual-scroller -> <https://github.com/Akryum/vue-virtual-scroller>
+If you need more information about the component, we are using a Fork of [Akryum/vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller)
 
 ## Usage
 
@@ -32,7 +36,7 @@ the virtual scroller can't display more than ~500k items depending on the browse
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ### Import
 

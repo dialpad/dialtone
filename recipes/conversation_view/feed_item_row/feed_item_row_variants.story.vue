@@ -93,7 +93,7 @@
           @focus="$attrs.onFocus"
         >
           <dt-image-viewer
-            :image-src="require('@/common/assets/fry.gif')"
+            :image-src="image"
             image-alt="Alt Text"
             close-aria-label="Close"
             image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
@@ -166,7 +166,7 @@
 </template>
 
 <script>
-import DtRecipeFeedItemRow from './feed_item_row';
+import DtRecipeFeedItemRow from './feed_item_row.vue';
 
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtStack } from '@/components/stack';
@@ -174,8 +174,11 @@ import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
 
+import image from '@/common/assets/fry.gif';
+
 export default {
   name: 'DtRecipeFeedItemRowVariants',
+
   components: {
     DtEmojiTextWrapper,
     DtRecipeFeedItemRow,
@@ -183,6 +186,12 @@ export default {
     DtAvatar,
     DtIcon,
     DtImageViewer,
+  },
+
+  data () {
+    return {
+      image,
+    };
   },
 };
 </script>

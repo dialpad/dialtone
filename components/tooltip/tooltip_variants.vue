@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import DtTooltip from './tooltip';
+import DtTooltip from './tooltip.vue';
 import { DtButton } from './../button';
 import { TOOLTIP_DIRECTIONS } from './tooltip_constants';
 

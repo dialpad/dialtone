@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import SkeletonAnimation from '@/common/mixins/skeleton.js';
+import SkeletonAnimation from '../../common/mixins/skeleton.js';
 import {
   SKELETON_SHAPES,
   SKELETON_SHAPE_SIZES,

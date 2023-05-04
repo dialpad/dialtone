@@ -58,7 +58,7 @@
 import { warn } from 'vue';
 import { getUniqueString, getRandomElement } from '@/common/utils';
 import { DtPresence } from '../presence';
-import DtIcon from '@/components/icon/icon';
+import { DtIcon } from '@/components/icon';
 import seedrandom from 'seedrandom';
 import {
   AVATAR_KIND_MODIFIERS,
@@ -70,7 +70,7 @@ import {
   MAX_GRADIENT_COLORS,
   MAX_GRADIENT_COLORS_100,
   AVATAR_GROUP_VALIDATOR,
-} from './avatar_constants.js';
+} from './avatar_constants';
 
 /**
  * An avatar is a visual representation of a user or object.

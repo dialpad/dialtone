@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtListItemGroup from './list_item_group';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ListItemGroupStories from './list_item_group.stories';
+
+<Meta of={ListItemGroupStories}/>
 
 # List Item Group
 
@@ -16,12 +19,12 @@ The heading is unstyled by default. You will likely have to pass utility classes
 heading look how you wish.
 
 <Canvas>
-  <Story id="components-list-item-group--default" />
+  <Story of={ListItemGroupStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

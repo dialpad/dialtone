@@ -37,11 +37,11 @@
 </template>
 
 <script>
-import DtNoticeIcon from './notice_icon';
-import DtNoticeContent from './notice_content';
-import DtNoticeAction from './notice_action';
-import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants.js';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import DtNoticeIcon from './notice_icon.vue';
+import DtNoticeContent from './notice_content.vue';
+import DtNoticeAction from './notice_action.vue';
+import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
+import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button';
 
 /**
  * A notice is an informational and assistive message that appears inline with content.

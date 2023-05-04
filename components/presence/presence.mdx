@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import Presence from './presence.vue';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as PresenceStories from './presence.stories';
+
+<Meta of={PresenceStories}/>
 
 # Presence
 
@@ -13,18 +16,18 @@ Presence can be initialized by passing `presence` prop that can take one of 4 va
 By default, it's set to 'active'.
 
 <Canvas>
-  <Story id="components-presence--default" />
+  <Story of={PresenceStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-presence--variants" />
+  <Story of={PresenceStories.Variants} />
 </Canvas>
 
 ## Props, Slots & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

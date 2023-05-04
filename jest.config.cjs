@@ -2,9 +2,20 @@
 const esModules = ['@dialpad/dialtone', '@tiptap/vue-3'].join('|');
 
 module.exports = {
-  preset: '@vue/cli-plugin-unit-jest',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
+  },
+  moduleFileExtensions: [
+    'js',
+    'vue',
+  ],
+  testEnvironment: 'jsdom',
+  testEnvironmentOptions: {
+    customExportConditions: ['node', 'node-addons'],
+  },
+  transform: {
+    '.*\\.(vue)$': '@vue/vue3-jest',
+    '.*\\.(js)$': 'babel-jest',
   },
   setupFilesAfterEnv: [
     '<rootDir>/tests/setupTests.js',

@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 <template>
   <div
     @keydown.esc.stop="onKeyValidation($event, 'onEscapeKey')"
@@ -14,6 +15,7 @@
         :input-props="inputProps"
       />
     </div>
+
     <div
       v-if="showList"
       ref="listWrapper"
@@ -47,7 +49,7 @@
 </template>
 
 <script>
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import KeyboardNavigation from '../../common/mixins/keyboard_list_navigation';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import ComboboxLoadingList from './combobox_loading-list.vue';
 import ComboboxEmptyList from './combobox_empty-list.vue';

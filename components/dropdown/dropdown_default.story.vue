@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import DtDropdown from './dropdown';
+import DtDropdown from './dropdown.vue';
 import { DtListItem } from '../list_item';
 import { DtButton } from '../button';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';

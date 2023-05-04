@@ -1,10 +1,13 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeUnreadPill from './unread_pill.vue';
-import DtRecipeUnreadPillMdx from './unread_pill.mdx';
+
 import DtRecipeUnreadPillDefaultTemplate from './unread_pill_default.story.vue';
 import DtRecipeUnreadPillVariantsTemplate from './unread_pill_variants.story.vue';
-import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from '@/recipes/leftbar/unread_pill/unread_pill_constants';
+import {
+  UNREAD_PILL_DIRECTIONS,
+  UNREAD_PILL_KINDS,
+} from '@/recipes/leftbar/unread_pill/unread_pill_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -14,16 +17,16 @@ export const argsData = {
 export const argTypesData = {
   // Props
   kind: {
+    options: UNREAD_PILL_KINDS,
     control: {
       type: 'select',
-      options: UNREAD_PILL_KINDS,
     },
   },
 
   direction: {
+    options: UNREAD_PILL_DIRECTIONS,
     control: {
       type: 'select',
-      options: UNREAD_PILL_DIRECTIONS,
     },
   },
 
@@ -63,17 +66,6 @@ export default {
   argTypes: argTypesData,
   decorators: [decorator],
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeUnreadPillMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -86,14 +78,18 @@ const VariantsTemplate = (args) => createTemplateFromVueFile(
   DtRecipeUnreadPillVariantsTemplate,
 );
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Unread mentions',
-  kind: 'mentions',
-  direction: 'up',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Unread mentions',
+    kind: 'mentions',
+    direction: 'up',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

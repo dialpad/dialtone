@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeComboboxWithPopover from './combobox_with_popover';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ComboboxWithPopoverStories from './combobox_with_popover.stories';
+
+<Meta of={ComboboxWithPopoverStories}/>
 
 # Combobox With Popover
 
@@ -14,12 +17,12 @@ Since it's using the popover content to render the list, it's also possible to a
 as it's specified in the [popover documentation](?path=/docs/components-popover--default).
 
 <Canvas>
-  <Story id="recipes-comboboxes-combobox-with-popover--default" />
+  <Story of={ComboboxWithPopoverStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

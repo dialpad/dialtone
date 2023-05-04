@@ -8,18 +8,15 @@ import {
   Warning,
   Important,
 } from '@/components/toast/toast.stories';
-import ToastMdx from './toast.mdx';
 
-import DtToast from '@/components/toast/toast';
+import DtToast from '@/components/toast/toast.vue';
 
 export default {
   title: 'Visual Testing/Toast',
   component: DtToast,
   parameters: {
-    docs: {
-      page: ToastMdx,
-    },
     options: { showPanel: false },
+    controls: { disable: true },
     a11y: {
       disable: true,
     },

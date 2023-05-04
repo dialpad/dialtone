@@ -1,8 +1,12 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtButtonGroup from './button_group';
-import DtButtonGroupMdx from './button_group.mdx';
+import DtButtonGroup from './button_group.vue';
+
 import DtButtonGroupDefaultTemplate from './button_group_default.story.vue';
 import { BUTTON_GROUP_ALIGNMENT } from './button_group_constants';
+
+export const argsData = {
+  alignment: 'start',
+};
 
 export const argTypesData = {
   // Slots
@@ -29,14 +33,6 @@ export default {
   component: DtButtonGroup,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtButtonGroupMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -45,6 +41,7 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtButtonGroupDefaultTemplate,
 );
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};

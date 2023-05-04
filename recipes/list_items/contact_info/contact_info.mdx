@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ContactInfoStories from './contact_info.stories';
+
+<Meta of={ContactInfoStories}/>
 
 # DtRecipeContactInfo
 
@@ -26,18 +30,18 @@ If `avatarSrc` is empty, it will fallback to `avatarInitials`, and user initials
 in avatar.
 
 <Canvas>
-  <Story id="recipes-list-items-contact-info--default" />
+  <Story of={ContactInfoStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="recipes-list-items-contact-info--variants" />
+  <Story of={ContactInfoStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

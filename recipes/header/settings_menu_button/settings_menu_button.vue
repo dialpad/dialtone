@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import DtButton from '@/components/button/button';
+import DtButton from '@/components/button/button.vue';
 import { DtIcon } from '@/components/icon';
 
 export default {

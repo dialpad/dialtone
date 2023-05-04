@@ -1,4 +1,4 @@
-import { InputGroupMixin } from '@/common/mixins/input_group';
+import { InputGroupMixin } from './input_group';
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,

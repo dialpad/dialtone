@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ToastStories from './toast.stories';
+
+<Meta of={ToastStories}/>
 
 # Toast
 
@@ -10,7 +14,7 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 ## Base Style
 
 <Canvas>
-  <Story id="components-toast--default" />
+  <Story of={ToastStories.Default} />
 </Canvas>
 
 ## Variants
@@ -18,36 +22,36 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 ### Error
 
 <Canvas>
-  <Story id="components-toast--error" />
+  <Story of={ToastStories.Error} />
 </Canvas>
 
 ### Info
 
 <Canvas>
-  <Story id="components-toast--info" />
+  <Story of={ToastStories.Info} />
 </Canvas>
 
 ### Success
 
 <Canvas>
-  <Story id="components-toast--success" />
+  <Story of={ToastStories.Success} />
 </Canvas>
 
 ### Warning
 
 <Canvas>
-  <Story id="components-toast--warning" />
+  <Story of={ToastStories.Warning} />
 </Canvas>
 
 ### Important
 
 <Canvas>
-  <Story id="components-toast--important" />
+  <Story of={ToastStories.Important} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Accessibility
 

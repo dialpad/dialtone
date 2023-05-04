@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import DtToggle from './toggle';
+import DtToggle from './toggle.vue';
 
 export default {
   name: 'ToggleDefault',

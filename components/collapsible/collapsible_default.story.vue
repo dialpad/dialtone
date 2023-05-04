@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import DtCollapsible from './collapsible';
+import DtCollapsible from './collapsible.vue';
 
 export default {
   name: 'DtCollapsibleDefaultStory',

@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
-import DtEmojiTextWrapper from './emoji_text_wrapper';
-import DtEmojiTextWrapperMdx from './emoji_text_wrapper.mdx';
+import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
+
 import DtEmojiTextWrapperDefaultTemplate from './emoji_text_wrapper_default.story.vue';
 import DtEmojiTextWrapperVariantsTemplate from './emoji_text_wrapper_variants.story.vue';
 
@@ -24,9 +24,9 @@ export const argTypesData = {
 
   // Props
   size: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
     control: {
       type: 'select',
-      options: Object.keys(ICON_SIZE_MODIFIERS),
     },
   },
   elementType: {
@@ -47,17 +47,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtEmojiTextWrapperMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -70,12 +59,17 @@ const VariantsTemplate = (args) => createTemplateFromVueFile(
   DtEmojiTextWrapperVariantsTemplate,
 );
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default:
+      'Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

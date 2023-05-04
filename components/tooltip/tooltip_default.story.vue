@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import DtTooltip from './tooltip';
+import DtTooltip from './tooltip.vue';
 import { DtButton } from '../button';
 
 export default {

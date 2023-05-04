@@ -6,7 +6,6 @@
         :key="i"
         class="d-mr8"
         :placement="variant"
-        :content-width="$attrs.contentWidth"
         :padding="$attrs.padding"
         :navigation-type="$attrs.navigationType"
         :transition="$attrs.transition"
@@ -36,7 +35,6 @@
         class="d-mr8"
         :placement="$attrs.placement"
         :fallback-placements="$attrs.fallbackPlacements"
-        :content-width="$attrs.contentWidth"
         :padding="$attrs.padding"
         :modal="$attrs.modal"
         :max-height="$attrs.maxHeight"
@@ -96,7 +94,6 @@
         :open="$attrs.open"
         :placement="$attrs.placement"
         :fallback-placements="$attrs.fallbackPlacements"
-        :content-width="$attrs.contentWidth"
         :padding="$attrs.padding"
         :modal="$attrs.modal"
         :max-height="$attrs.maxHeight"
@@ -170,7 +167,6 @@
       <div class="d-d-flex">
         <dt-dropdown
           class="d-mr8"
-          :content-width="$attrs.contentWidth"
           :padding="$attrs.padding"
           :navigation-type="$attrs.navigationType"
           :open="$attrs.open"
@@ -207,9 +203,9 @@
 </template>
 
 <script>
-import DtDropdown from './dropdown';
+import DtDropdown from './dropdown.vue';
 import DtListItemGroup from '../list_item_group/list_item_group.vue';
-import DtDropdownSeparator from './dropdown_separator';
+import DtDropdownSeparator from './dropdown_separator.vue';
 import { DtListItem } from '../list_item';
 import { DtButton } from '../button';
 import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';

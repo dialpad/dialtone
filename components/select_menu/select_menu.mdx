@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as SelectMenuStories from './select_menu.stories';
+
+<Meta of={SelectMenuStories}/>
 
 # Select Menu
 
@@ -12,18 +16,18 @@ A select is normally paired with a label, but there are times when it can be use
 placeholder text as a label.
 
 <Canvas>
-  <Story id="components-select-menu--default" />
+  <Story of={SelectMenuStories.Default} />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-select-menu--variants" />
+  <Story of={SelectMenuStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

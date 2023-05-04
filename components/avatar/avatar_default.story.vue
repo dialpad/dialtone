@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import DtAvatar from './avatar';
+import DtAvatar from './avatar.vue';
 import VHtml from '@/common/v_html';
 
 export default {

@@ -1,14 +1,14 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import DtValidationMessages from './validation_messages';
-import BaseValidationMessagesMdx from './validation_messages.mdx';
-import DtValidationMessagesDefaultTemplate from './validation_messages_default.story.vue';
+import DtValidationMessages from './validation_messages.vue';
 
 // Constants
-const VALIDATION_MESSAGES = [{
-  message: 'Validation Message',
-  type: VALIDATION_MESSAGE_TYPES.SUCCESS,
-}];
+const VALIDATION_MESSAGES = [
+  {
+    message: 'Validation Message',
+    type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+  },
+];
 
 // Default Prop Values
 export const argsData = {
@@ -30,28 +30,17 @@ export const argTypesData = {
 export default {
   title: 'Components/Validation Messages',
   component: DtValidationMessages,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: BaseValidationMessagesMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
 };
 
 // Validation Messages Template
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtValidationMessagesDefaultTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtValidationMessages);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+};
 
 // Variants Story
 const VariantsTemplate = () => {
@@ -75,19 +64,22 @@ const VariantsTemplate = () => {
     `,
   };
 };
-export const Variants = VariantsTemplate.bind({});
-Variants.parameters = {
-  controls: { hideNoControlsWarning: true, disable: true },
-  actions: { disable: true },
-  options: { showPanel: false },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-      ],
+
+export const Variants = {
+  render: VariantsTemplate,
+
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

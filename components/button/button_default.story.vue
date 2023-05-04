@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import DtButton from './button';
+import DtButton from './button.vue';
 import { DtIcon } from '@/components/icon';
 import { BUTTON_ICON_SIZES } from './button_constants';
 

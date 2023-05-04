@@ -1,4 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as InputStories from './input.stories';
+
+<Meta of={InputStories}/>
 
 # Inputs
 
@@ -13,12 +17,12 @@ Inputs are normally paired with a label, but there are times when they can be us
 Placeholder text should primarily be used as a content prompt and only provided when needed.
 
 <Canvas>
-  <Story id="components-input--default" />
+  <Story of={InputStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 
@@ -38,7 +42,7 @@ import { DtInput } from '@dialpad/dialtone-vue';
 Provides additional information to the user regarding the input element.
 
 <Canvas>
-  <Story id="components-input--with-description" />
+  <Story of={InputStories.WithDescription} />
 </Canvas>
 
 ### Usage
@@ -60,7 +64,7 @@ import { DtInput } from '@dialpad/dialtone-vue';
 Provides left icon within the form input
 
 <Canvas>
-  <Story id="components-input--with-left-icon" />
+  <Story of={InputStories.WithLeftIcon} />
 </Canvas>
 
 ### Usage
@@ -85,7 +89,7 @@ import { DtInput, DtIcon } from '@dialpad/dialtone-vue';
 Provides right icon within the form input
 
 <Canvas>
-  <Story id="components-input--with-right-icon" />
+  <Story of={InputStories.WithRightIcon} />
 </Canvas>
 
 ### Usage
@@ -110,7 +114,7 @@ import { DtInput, DtIcon } from '@dialpad/dialtone-vue';
 Provides both icons within the form input
 
 <Canvas>
-  <Story id="components-input--with-both-icons" />
+  <Story of={InputStories.WithBothIcons} />
 </Canvas>
 
 ### Usage
@@ -143,7 +147,7 @@ Warns the user that the value(s) they've entered has a potential problem,
 but it doesn't block them from proceeding with input submission.
 
 <Canvas>
-  <Story id="components-input--with-warning" />
+  <Story of={InputStories.WithWarning} />
 </Canvas>
 
 #### Usage
@@ -169,7 +173,7 @@ Alerts the user that the value(s) they've entered is incorrect,
 not provided, or has some issue that will block them from proceeding with input submission.
 
 <Canvas>
-  <Story id="components-input--with-error" />
+  <Story of={InputStories.WithError} />
 </Canvas>
 
 #### Usage
@@ -194,7 +198,7 @@ import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 Notifies the user that the value(s) they've entered is correct.
 
 <Canvas>
-  <Story id="components-input--with-success" />
+  <Story of={InputStories.WithSuccess} />
 </Canvas>
 
 #### Usage
@@ -247,7 +251,7 @@ If the input is invalid due to the validation, the validation message will be sh
 focus, otherwise the validation message will be hidden when the user unfocuses the input.
 
 <Canvas>
-  <Story id="components-input--with-length-validation" />
+  <Story of={InputStories.WithLengthValidation} />
 </Canvas>
 
 ### Usage
@@ -304,11 +308,11 @@ export default {
 
 |name           |prop value                     |size|Example                                |
 |---            |---                            |--- |---                                    |
-|**Extra Small**|INPUT_SIZES.EXTRA_SMALL   |12px|<Story id="components-input--extra-small" />|
-|**Small**      |INPUT_SIZES.SMALL         |14px|<Story id="components-input--small" />      |
-|**Default**    |-                              |16px|<Story id="components-input--default" />    |
-|**Large**      |INPUT_SIZES.LARGE         |20px|<Story id="components-input--large" />      |
-|**Extra Large**|INPUT_SIZES.EXTRA_LARGE   |24px|<Story id="components-input--extra-large" />|
+|**Extra Small**|INPUT_SIZES.EXTRA_SMALL   |12px|<Story of={InputStories.ExtraSmall} />|
+|**Small**      |INPUT_SIZES.SMALL         |14px|<Story of={InputStories.Small} />     |
+|**Default**    |-                              |16px|<Story of={InputStories.Default} />    |
+|**Large**      |INPUT_SIZES.LARGE         |20px|<Story of={InputStories.Large} />      |
+|**Extra Large**|INPUT_SIZES.EXTRA_LARGE   |24px|<Story of={InputStories.ExtraLarge} />|
 
 ### Usage
 

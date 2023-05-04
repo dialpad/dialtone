@@ -1,6 +1,6 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtListItemGroup from './list_item_group';
-import DtListItemGroupMdx from './list_item_group.mdx';
+import DtListItemGroup from './list_item_group.vue';
+
 import DtListItemGroupDefaultTemplate from './list_item_group_default.story.vue';
 
 // Default Prop Values
@@ -35,11 +35,7 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtListItemGroupMdx,
-    },
-  },
+  parameters: {},
 };
 
 // Templates
@@ -48,6 +44,7 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtListItemGroupDefaultTemplate,
 );
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
