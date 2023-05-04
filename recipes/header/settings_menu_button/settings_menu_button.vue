@@ -12,7 +12,7 @@
     <template #icon>
       <dt-icon
         name="more-vertical"
-        size="400"
+        size="300"
         class="d-fc-blue-500"
       />
     </template>
@@ -28,7 +28,7 @@
     <template #icon>
       <dt-icon
         name="more-vertical"
-        size="400"
+        size="300"
       />
     </template>
   </dt-button>
