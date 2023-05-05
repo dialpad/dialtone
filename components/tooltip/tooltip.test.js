@@ -18,7 +18,7 @@ describe('DtTooltip tests', () => {
   };
 
   const setOnMount = function () {
-    onMount = jest.spyOn(DtTooltip.methods, 'onMount').mockClear();
+    onMount = vi.spyOn(DtTooltip.methods, 'onMount').mockClear();
   };
 
   const _clearChildWrappers = () => {
@@ -55,8 +55,8 @@ describe('DtTooltip tests', () => {
   beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
   });
 
   beforeEach(async () => {

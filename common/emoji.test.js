@@ -20,7 +20,7 @@ describe('Emoji Tests', () => {
     describe('When a custom emoji json is provided with invalid emojis', () => {
       let consoleErrorSpy;
       beforeAll(async () => {
-        consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
+        consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
         await validateCustomEmojiJson(withNotAllRequiredProps);
       });
       afterAll(() => {
@@ -31,11 +31,11 @@ describe('Emoji Tests', () => {
 
       it('doesn\'t set the malformed custom emoji', () => {
         const emojiData = getEmojiData();
-        expect(emojiData.notallrequiredprops).not.toBeDefined();
+        expect(emojiData.notallrequiredprops).toBeUndefined();
       });
 
       it('should log error message', async () => {
-        expect(consoleErrorSpy.calledOnce).toBe(true);
+        expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
       });
     });
 

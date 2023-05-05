@@ -357,7 +357,7 @@ describe('DtButton Tests', () => {
 
   describe('Interactivity Tests', () => {
     beforeEach(() => {
-      buttonStub = jest.fn();
+      buttonStub = vi.fn();
       attrs = { onClick: buttonStub };
       props = {};
       wrapper = shallowMount(DtButton, {

@@ -38,8 +38,8 @@ describe('DtRecipeCallbarButton Tests', () => {
   beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
   });
   beforeEach(() => {
     _setWrappers();
@@ -67,7 +67,7 @@ describe('DtRecipeCallbarButton Tests', () => {
       it('should render a muted button', () => {
         const buttonProps = button.props();
         expect(button.exists()).toBeTruthy();
-        expect(buttonProps.kind).toEqual('muted');
+        expect(buttonProps.kind).toBe('muted');
       });
     });
 
@@ -80,7 +80,7 @@ describe('DtRecipeCallbarButton Tests', () => {
       it('Should add appropriate class to icon when "circle"', async () => {
         await wrapper.setProps({ circle: true });
         expect(button.classes().includes('dt-recipe-callbar-button--circle')).toBe(true);
-        expect(button.props().importance).toEqual('outlined');
+        expect(button.props().importance).toBe('outlined');
       });
 
       it('Should add appropriate class to icon when "danger"', async () => {
@@ -99,7 +99,7 @@ describe('DtRecipeCallbarButton Tests', () => {
         async () => {
           await wrapper.setProps({ importance: 'clear', circle: 'true' });
           expect(button.classes().includes('dt-recipe-callbar-button--circle')).toBe(true);
-          expect(button.props().importance).toEqual('clear');
+          expect(button.props().importance).toBe('clear');
         },
       );
     });
@@ -108,7 +108,7 @@ describe('DtRecipeCallbarButton Tests', () => {
   describe('Interactivity Tests', () => {
     describe('When clicking on the button', () => {
       it('should call the click event listener', async () => {
-        const clickStub = jest.fn();
+        const clickStub = vi.fn();
         attrs = { onClick: clickStub };
         _setWrappers();
 

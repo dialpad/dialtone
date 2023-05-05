@@ -118,7 +118,7 @@ describe('DtRecipeGeneralRow Tests', () => {
       const type = LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER;
 
       beforeEach(async () => {
-        consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
+        consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
         props = { ...baseProps, type };
         _setWrappers();
       });

@@ -329,7 +329,7 @@ describe('DtCheckbox Tests', () => {
     describe('Listener Tests', () => {
       describe('When there is a provided input listener', () => {
         // Test Env
-        const inputListenerSpy = jest.fn();
+        const inputListenerSpy = vi.fn();
 
         // Test Setup
         beforeEach(function () {

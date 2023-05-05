@@ -2,8 +2,8 @@ let consoleErrorSpy;
 let consoleWarnSpy;
 
 export const initializeSpy = () => {
-  consoleErrorSpy = jest.spyOn(console, 'error');
-  consoleWarnSpy = jest.spyOn(console, 'warn');
+  consoleErrorSpy = vi.spyOn(console, 'error');
+  consoleWarnSpy = vi.spyOn(console, 'warn');
 };
 
 export const cleanSpy = () => {

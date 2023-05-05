@@ -43,8 +43,8 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
   beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
   });
   beforeEach(() => {
     _setWrappers();
@@ -122,8 +122,8 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
         const popoverProps = popover.props();
 
         expect(popoverProps.showCloseButton).toBe(true);
-        expect(popoverProps.placement).toEqual('mock');
-        expect(popoverProps.initialFocusElement).toEqual('#mock');
+        expect(popoverProps.placement).toBe('mock');
+        expect(popoverProps.initialFocusElement).toBe('#mock');
       },
     );
   });
@@ -135,19 +135,19 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
         async () => {
           await button.trigger('click');
           const arrowClickEvents = wrapper.emitted().arrowClick;
-          expect(arrowClickEvents.length).toEqual(1);
+          expect(arrowClickEvents.length).toBe(1);
         },
       );
 
       it('should trigger the "click" event when at least one listener is attached', async function () {
-        const clickStub = jest.fn();
+        const clickStub = vi.fn();
         attrs = { onClick: clickStub };
         _setWrappers();
 
         await button.trigger('click');
 
         const clickEvents = wrapper.emitted().click;
-        expect(clickEvents.length).toEqual(1);
+        expect(clickEvents.length).toBe(1);
         expect(clickStub).toHaveBeenCalled();
       },
       );
@@ -156,7 +156,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
     describe('When clicking on the arrow', function () {
       let clickStub;
       beforeEach(async function () {
-        clickStub = jest.fn();
+        clickStub = vi.fn();
         attrs = { onArrowClick: clickStub };
         _setWrappers();
 
@@ -169,7 +169,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
 
       it('should trigger the "arrowClick" event', () => {
         const arrowClickEvents = wrapper.emitted().arrowClick;
-        expect(arrowClickEvents.length).toEqual(1);
+        expect(arrowClickEvents.length).toBe(1);
       });
     });
   });

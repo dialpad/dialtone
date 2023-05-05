@@ -85,7 +85,7 @@ describe('DtToggle Tests', () => {
           'should set correct disabled attributes when disabled prop is false',
           () => {
             expect(button.attributes('aria-disabled')).toBe('false');
-            expect(button.attributes().disabled).not.toBeDefined();
+            expect(button.attributes().disabled).toBeUndefined();
             expect(button.classes().includes('d-toggle--disabled')).toBe(false);
           },
         );
@@ -184,7 +184,7 @@ describe('DtToggle Tests', () => {
       });
 
       it('should set the correct aria-checked attribute', () => {
-        expect(button.attributes('aria-checked')).toEqual('mixed');
+        expect(button.attributes('aria-checked')).toBe('mixed');
       });
     });
 

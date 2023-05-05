@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 
 import DtNoticeAction from './notice_action.vue';
 import DtButton from '../button/button.vue';
-import SrOnlyCloseButton from '../../common/sr_only_close_button';
+import SrOnlyCloseButton from '../../common/sr_only_close_button.vue';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 

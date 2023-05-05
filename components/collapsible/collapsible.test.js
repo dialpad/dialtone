@@ -45,8 +45,8 @@ describe('DtCollapsible Tests', () => {
   };
 
   beforeAll(() => {
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
     config.global.renderStubDefaultSlot = true;
   });
 
@@ -147,7 +147,7 @@ describe('DtCollapsible Tests', () => {
     let consoleErrorSpy;
 
     beforeEach(async () => {
-      consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
+      consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
       props = { ...baseProps, anchorText: undefined };
       _mountWrapper();
     });
@@ -171,13 +171,13 @@ describe('DtCollapsible Tests', () => {
       it(
         'aria-controls on anchor should be set to the id of the contentWrapper',
         () => {
-          expect(anchorElement.attributes('aria-controls')).toEqual('contentId');
-          expect(contentWrapperElement.attributes('id')).toEqual('contentId');
+          expect(anchorElement.attributes('aria-controls')).toBe('contentId');
+          expect(contentWrapperElement.attributes('id')).toBe('contentId');
         },
       );
 
       it('aria-expanded should be true', () => {
-        expect(anchorElement.attributes('aria-expanded')).toEqual('true');
+        expect(anchorElement.attributes('aria-expanded')).toBe('true');
       });
     });
 
@@ -187,7 +187,7 @@ describe('DtCollapsible Tests', () => {
       });
 
       it('aria-expanded should be "false"', () => {
-        expect(anchorElement.attributes('aria-expanded')).toEqual('false');
+        expect(anchorElement.attributes('aria-expanded')).toBe('false');
       });
     });
   });

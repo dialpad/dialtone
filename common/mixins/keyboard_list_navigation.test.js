@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import KeyboardListNavigation, {
   KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS,
   KEYBOARD_LIST_NAVIGATION_TESTER_KEY,
-} from './keyboard_list_navigation_tester';
+} from './keyboard_list_navigation_tester.vue';
 
 // Since we are testing a mixin here we use a mock vue tester component to
 // render what we need to test.
@@ -32,9 +32,9 @@ describe('Keyboard Navigation Mixin Tests', () => {
 
   // Test Setup
   beforeAll(() => {
-    afterHighlightSpy = jest.spyOn(KeyboardListNavigation.methods, 'afterHighlightMethod').mockClear();
-    beginningOfListSpy = jest.spyOn(KeyboardListNavigation.methods, 'beginningOfListMethod').mockClear();
-    endOfListSpy = jest.spyOn(KeyboardListNavigation.methods, 'endOfListMethod').mockClear();
+    afterHighlightSpy = vi.spyOn(KeyboardListNavigation.methods, 'afterHighlightMethod').mockClear();
+    beginningOfListSpy = vi.spyOn(KeyboardListNavigation.methods, 'beginningOfListMethod').mockClear();
+    endOfListSpy = vi.spyOn(KeyboardListNavigation.methods, 'endOfListMethod').mockClear();
   });
 
   beforeEach(() => {
@@ -59,7 +59,7 @@ describe('Keyboard Navigation Mixin Tests', () => {
       });
 
       it('calls the expected beginning of list function', () => {
-        expect(beginningOfListSpy.called).toBe(true);
+        expect(beginningOfListSpy).toHaveBeenCalled();
       });
     });
 
@@ -73,7 +73,7 @@ describe('Keyboard Navigation Mixin Tests', () => {
       });
 
       it('calls the expected afterHighlight function', () => {
-        expect(afterHighlightSpy.called).toBe(true);
+        expect(afterHighlightSpy).toHaveBeenCalled();
       });
     });
 
@@ -114,7 +114,7 @@ describe('Keyboard Navigation Mixin Tests', () => {
       });
 
       it('calls the expected afterHighlight function', () => {
-        expect(afterHighlightSpy.called).toBe(true);
+        expect(afterHighlightSpy).toHaveBeenCalled();
       });
     });
 
@@ -124,7 +124,7 @@ describe('Keyboard Navigation Mixin Tests', () => {
       });
 
       it('calls the expected end of list function', () => {
-        expect(endOfListSpy.called).toBe(true);
+        expect(endOfListSpy).toHaveBeenCalled();
       });
     });
 

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
-import SrOnlyCloseButton from '../../common/sr_only_close_button';
+import SrOnlyCloseButton from '../../common/sr_only_close_button.vue';
 import {
   itBehavesLikeVisuallyHiddenCloseButtonExists,
   itBehavesLikeVisuallyHiddenCloseLabelIsNull,
@@ -73,8 +73,8 @@ describe.skip('DtPopover Tests', () => {
   beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
   });
 
   beforeEach(() => {
@@ -168,7 +168,7 @@ describe.skip('DtPopover Tests', () => {
     // describe('When initialFocusElement is none', () => {
     //   let consoleErrorSpy;
     //   beforeEach(async () => {
-    //     consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
+    //     consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
     //     await wrapper.setProps({ initialFocusElement: 'none' });
     //   });
 

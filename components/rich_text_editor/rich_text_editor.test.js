@@ -38,14 +38,14 @@ const _mountWrapper = () => {
 describe.skip('DtRichTextEditor tests', function () {
   beforeAll(function () {
     // These are undefined in the scope. Need to mock them to avoid error.
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
   });
 
   // Test Setup
   beforeEach(async function () {
     props = baseProps;
-    inputStub = jest.fn();
+    inputStub = vi.fn();
     attrs = {
       onInput: inputStub,
     };
