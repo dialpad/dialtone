@@ -1,3 +1,10 @@
+## [3.65.1](https://github.com/dialpad/dialtone-vue/compare/v3.65.0...v3.65.1) (2023-05-05)
+
+
+### Bug Fixes
+
+* storybook-static references ([8340caa](https://github.com/dialpad/dialtone-vue/commit/8340caae47c52d598a2b921b6d435c77004d65ec))
+
 # [3.65.0](https://github.com/dialpad/dialtone-vue/compare/v3.64.1...v3.65.0) (2023-05-05)
 
 
