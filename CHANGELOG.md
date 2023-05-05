@@ -1,3 +1,16 @@
+# [2.82.0](https://github.com/dialpad/dialtone-vue/compare/v2.81.4...v2.82.0) (2023-05-05)
+
+
+### Bug Fixes
+
+* **Header:** use smaller icon size for settings menu button ([#959](https://github.com/dialpad/dialtone-vue/issues/959)) ([b356e8b](https://github.com/dialpad/dialtone-vue/commit/b356e8b0a7079bcf969296d8e655da175f854bec))
+
+
+### Features
+
+* add tests for feed row ([#954](https://github.com/dialpad/dialtone-vue/issues/954)) ([ca95fc6](https://github.com/dialpad/dialtone-vue/commit/ca95fc65e887a2bb358a513a8ba000d761953230))
+* migrate to vite and storybook 7.0 ([#946](https://github.com/dialpad/dialtone-vue/issues/946)) ([bdecf0f](https://github.com/dialpad/dialtone-vue/commit/bdecf0f4c0141f43269e374af3f2e447467e605e))
+
 ## [2.81.4](https://github.com/dialpad/dialtone-vue/compare/v2.81.3...v2.81.4) (2023-05-02)
 
 
