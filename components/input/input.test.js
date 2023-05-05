@@ -71,7 +71,7 @@ describe('DtInput tests', () => {
   beforeEach(() => {
     propsData = basePropsData;
     attrs = baseAttrs;
-    inputStub = jest.fn();
+    inputStub = vi.fn();
     listeners = { input: inputStub };
     _mountWrapper();
   });
@@ -156,11 +156,11 @@ describe('DtInput tests', () => {
       );
       it(
         'should not have a type prop',
-        () => { expect(nativeTextarea.attributes().type).not.toBeDefined(); },
+        () => { expect(nativeTextarea.attributes().type).toBeUndefined(); },
       );
       it(
         'should not have a bound value prop',
-        () => { expect(nativeTextarea.attributes().value).not.toBeDefined(); },
+        () => { expect(nativeTextarea.attributes().value).toBeUndefined(); },
       );
       it(
         'should have textarea class',
@@ -345,7 +345,7 @@ describe('DtInput tests', () => {
 
     describe('When no validation message(s) are provided', () => {
       it('should not render any validation messages', () => {
-        expect(wrapper.findAll('.d-validation-message').length).toEqual(0);
+        expect(wrapper.findAll('.d-validation-message').length).toBe(0);
       });
       it(
         'should not have an input state',
@@ -365,13 +365,13 @@ describe('DtInput tests', () => {
             { message: errorMessage2, type: 'error' },
           ],
         });
-        expect(wrapper.findAll('.d-validation-message').length).toEqual(0);
-        expect(wrapper.vm.inputState).toEqual('error');
+        expect(wrapper.findAll('.d-validation-message').length).toBe(0);
+        expect(wrapper.vm.inputState).toBe('error');
 
         await wrapper.setProps({ showMessages: true });
 
         const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
-        expect(inputErrorMessages.length).toEqual(2);
+        expect(inputErrorMessages.length).toBe(2);
         expect(inputErrorMessages.at(0).text()).toEqual(errorMessage1);
         expect(inputErrorMessages.at(1).text()).toEqual(errorMessage2);
       });
@@ -388,12 +388,12 @@ describe('DtInput tests', () => {
               { message: 'formatted success message', type: 'success' },
             ],
           });
-          expect(wrapper.vm.inputState).toEqual('error');
+          expect(wrapper.vm.inputState).toBe('error');
 
           const inputMessages = wrapper.findAll('.d-validation-message');
           const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
-          expect(inputMessages.length).toEqual(1);
-          expect(inputErrorMessages.length).toEqual(1);
+          expect(inputMessages.length).toBe(1);
+          expect(inputErrorMessages.length).toBe(1);
           expect(inputErrorMessages.at(0).text()).toEqual(strErrorMessage);
         },
       );
@@ -409,12 +409,12 @@ describe('DtInput tests', () => {
               { message: 'formatted success message', type: 'success' },
             ],
           });
-          expect(wrapper.vm.inputState).toEqual('warning');
+          expect(wrapper.vm.inputState).toBe('warning');
 
           const inputMessages = wrapper.findAll('.d-validation-message');
           const inputWarningMessages = wrapper.findAll('.d-validation-message--warning');
-          expect(inputMessages.length).toEqual(1);
-          expect(inputWarningMessages.length).toEqual(1);
+          expect(inputMessages.length).toBe(1);
+          expect(inputWarningMessages.length).toBe(1);
           expect(inputWarningMessages.at(0).text()).toEqual(warningMessage);
         },
       );
@@ -431,12 +431,12 @@ describe('DtInput tests', () => {
               { message: successMessage2, type: 'success' },
             ],
           });
-          expect(wrapper.vm.inputState).toEqual('success');
+          expect(wrapper.vm.inputState).toBe('success');
 
           const inputMessages = wrapper.findAll('.d-validation-message');
           const inputSuccessMessages = wrapper.findAll('.d-validation-message--success');
-          expect(inputMessages.length).toEqual(2);
-          expect(inputSuccessMessages.length).toEqual(2);
+          expect(inputMessages.length).toBe(2);
+          expect(inputSuccessMessages.length).toBe(2);
           expect(inputSuccessMessages.at(0).text()).toEqual(successMessage1);
           expect(inputSuccessMessages.at(1).text()).toEqual(successMessage2);
         },
@@ -520,7 +520,7 @@ describe('DtInput tests', () => {
         });
 
         it('should not show the length validation message', () => {
-          expect(wrapper.findAll('.d-validation-message').length).toEqual(0);
+          expect(wrapper.findAll('.d-validation-message').length).toBe(0);
         });
 
         it('should show the length description', () => {
@@ -571,7 +571,7 @@ describe('DtInput tests', () => {
         it('should not show an error validation message', () => {
           expect(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists()).toBe(false);
           const inputWarningMessages = wrapper.findAll('.d-validation-message--error');
-          expect(inputWarningMessages.length).toEqual(0);
+          expect(inputWarningMessages.length).toBe(0);
         });
       });
 
@@ -586,8 +586,8 @@ describe('DtInput tests', () => {
 
           const inputMessages = wrapper.findAll('.d-validation-message');
           const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
-          expect(inputMessages.length).toEqual(1);
-          expect(inputErrorMessages.length).toEqual(1);
+          expect(inputMessages.length).toBe(1);
+          expect(inputErrorMessages.length).toBe(1);
         });
       });
     });
@@ -638,7 +638,7 @@ describe('DtInput tests', () => {
         describe('When a new value exceeds the maximum length', () => {
           it('should emit an "update:invalid" event with true', async () => {
             await wrapper.setProps({ value: newValue });
-            expect(wrapper.emitted()['update:invalid'][0][0]).toEqual(true);
+            expect(wrapper.emitted()['update:invalid'][0][0]).toBe(true);
           });
         });
 
@@ -646,7 +646,7 @@ describe('DtInput tests', () => {
           it('should emit an "update:invalid" event with false', async () => {
             await wrapper.setProps({ value: newValue });
             await wrapper.setProps({ value: userTextInputVal });
-            expect(wrapper.emitted()['update:invalid'][1][0]).toEqual(false);
+            expect(wrapper.emitted()['update:invalid'][1][0]).toBe(false);
           });
         });
       });
@@ -674,7 +674,7 @@ describe('DtInput tests', () => {
         describe('When a new value exceeds the maximum length', () => {
           it('should emit an "update:invalid" event with true', async () => {
             await wrapper.setProps({ value: newValue });
-            expect(wrapper.emitted()['update:invalid'][0][0]).toEqual(true);
+            expect(wrapper.emitted()['update:invalid'][0][0]).toBe(true);
           });
         });
 
@@ -682,7 +682,7 @@ describe('DtInput tests', () => {
           it('should emit an "update:invalid" event with false', async () => {
             await wrapper.setProps({ value: newValue });
             await wrapper.setProps({ value: userTextInputVal });
-            expect(wrapper.emitted()['update:invalid'][1][0]).toEqual(false);
+            expect(wrapper.emitted()['update:invalid'][1][0]).toBe(false);
           });
         });
       });
@@ -698,10 +698,10 @@ describe('DtInput tests', () => {
     it('should handle pass through props/attrs', async () => {
       // Validating all attrs from base-input get passed down to the native input.
       expect(nativeInput.attributes()).toMatchObject(attrs);
-      expect(nativeInput.attributes().disabled).not.toBeDefined();
+      expect(nativeInput.attributes().disabled).toBeUndefined();
 
       await wrapper.setProps({ disabled: true });
-      expect(nativeInput.attributes().disabled).toEqual('disabled');
+      expect(nativeInput.attributes().disabled).toBe('disabled');
     });
   });
 });

@@ -1,5 +1,5 @@
 import { createLocalVue, mount } from '@vue/test-utils';
-import DtFeedItemRow from './feed_item_row';
+import DtFeedItemRow from './feed_item_row.vue';
 
 const basePropsData = {
   displayName: 'Dwight Schrute',

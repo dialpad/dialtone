@@ -60,14 +60,6 @@ describe('DtIcon Tests', () => {
     });
   });
 
-  describe('Interactivity Tests', () => {
-    //
-  });
-
-  describe('Extendability Tests', () => {
-    //
-  });
-
   describe('Accessibility Tests', () => {
     describe('When ariaLabel prop is set', () => {
       beforeEach(async () => {

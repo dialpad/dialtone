@@ -1,4 +1,4 @@
-import SrOnlyCloseButton from '@/common/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { itBehavesLikeRaisesValidationError } from '@/tests/shared_examples/validation';
 
 export const itBehavesLikeVisuallyHiddenCloseButtonExists = (wrapper, state = true) => {

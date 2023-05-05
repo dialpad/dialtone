@@ -40,7 +40,7 @@ describe('DtRichTextEditor tests', () => {
   // Test Setup
   beforeEach(async () => {
     propsData = baseProps;
-    inputStub = jest.fn();
+    inputStub = vi.fn();
     listeners = {
       input: inputStub,
     };
@@ -61,7 +61,7 @@ describe('DtRichTextEditor tests', () => {
     });
 
     it('should contain the initial value', () => {
-      expect(editor.text()).toEqual('initial value');
+      expect(editor.text()).toBe('initial value');
     });
   });
 
@@ -125,11 +125,11 @@ describe('DtRichTextEditor tests', () => {
 
   describe('Accessibility Tests', () => {
     it('should have aria-multiline attribute', () => {
-      expect(editor.attributes('aria-multiline')).toEqual('true');
+      expect(editor.attributes('aria-multiline')).toBe('true');
     });
 
     it('should have role attribute', () => {
-      expect(editor.attributes('role')).toEqual('textbox');
+      expect(editor.attributes('role')).toBe('textbox');
     });
 
     describe('When not editable', () => {
@@ -138,7 +138,7 @@ describe('DtRichTextEditor tests', () => {
       });
 
       it('should have aria-readonly attribute', () => {
-        expect(editor.attributes('aria-readonly')).toEqual('true');
+        expect(editor.attributes('aria-readonly')).toBe('true');
       });
     });
   });
@@ -150,7 +150,7 @@ describe('DtRichTextEditor tests', () => {
       });
 
       it('should pass through the prop to the editor', () => {
-        expect(editor.attributes('aria-label')).toEqual('new aria-label');
+        expect(editor.attributes('aria-label')).toBe('new aria-label');
       });
     });
 
@@ -170,7 +170,7 @@ describe('DtRichTextEditor tests', () => {
       });
 
       it('should pass through the prop to the editor', () => {
-        expect(editor.attributes('contenteditable')).toEqual('false');
+        expect(editor.attributes('contenteditable')).toBe('false');
       });
     });
   });

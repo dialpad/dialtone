@@ -40,7 +40,7 @@ describe('DtListItem tests', () => {
   });
 
   beforeEach(() => {
-    clickStub = jest.fn();
+    clickStub = vi.fn();
     listeners = { click: clickStub };
     provide = { highlightId: () => 'dt-item2' };
     _mountWrapper();
@@ -93,7 +93,7 @@ describe('DtListItem tests', () => {
         expect(wrapper.classes('dt-list-item--highlighted')).toBe(false);
       });
       it('aria-selected should not be set', () => {
-        expect(wrapper.attributes('aria-selected')).not.toBeDefined();
+        expect(wrapper.attributes('aria-selected')).toBeUndefined();
       });
     });
 
@@ -131,13 +131,13 @@ describe('DtListItem tests', () => {
       });
 
       it('should use the provided element type on the wrapper.', () => {
-        expect(wrapper.element.tagName).toEqual('DIV');
+        expect(wrapper.element.tagName).toBe('DIV');
       });
     });
 
     describe('When element type is not provided', () => {
       it('should use the default element type on the wrapper.', () => {
-        expect(wrapper.element.tagName).toEqual('LI');
+        expect(wrapper.element.tagName).toBe('LI');
       });
     });
   });
@@ -150,7 +150,7 @@ describe('DtListItem tests', () => {
       });
 
       it('should emit click event', () => {
-        expect(wrapper.emitted().click.length).toEqual(1);
+        expect(wrapper.emitted().click.length).toBe(1);
       });
     };
 
@@ -176,7 +176,7 @@ describe('DtListItem tests', () => {
       });
 
       it('should emit mousemove event', () => {
-        expect(wrapper.emitted().mousemove.length).toEqual(1);
+        expect(wrapper.emitted().mousemove.length).toBe(1);
       });
     });
 
@@ -186,7 +186,7 @@ describe('DtListItem tests', () => {
       });
 
       it('should emit mouseleave event', () => {
-        expect(wrapper.emitted().mouseleave.length).toEqual(1);
+        expect(wrapper.emitted().mouseleave.length).toBe(1);
       });
     });
   });

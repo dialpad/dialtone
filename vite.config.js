@@ -30,4 +30,16 @@ export default defineConfig({
       '@': fileURLToPath(new URL('.', import.meta.url)),
     },
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './tests/setupTests.js',
+    coverage: {
+      reporter: ['text', 'html'],
+      exclude: [
+        'node_modules/',
+        'tests/setupTests.js',
+      ],
+    },
+  },
 });

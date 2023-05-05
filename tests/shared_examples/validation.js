@@ -3,7 +3,7 @@ import Vue from 'vue';
 let consoleErrorSpy;
 
 export const initializeSpy = () => {
-  consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
+  consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
 };
 
 export const cleanSpy = () => {

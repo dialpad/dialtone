@@ -58,8 +58,8 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
     testContext.localVue = createLocalVue();
   });
   beforeEach(() => {
@@ -134,7 +134,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       });
 
       it('should be two chip components', () => {
-        expect(chips.length).toEqual(2);
+        expect(chips.length).toBe(2);
       });
     });
 
@@ -275,7 +275,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       () => {
         const chip = chips.at(0);
         chip.trigger('keyup', { code: 'delete' });
-        expect(wrapper.emitted().remove[0][0]).toEqual('1');
+        expect(wrapper.emitted().remove[0][0]).toBe('1');
         expect(document.activeElement).toBe(input.element);
       },
     );

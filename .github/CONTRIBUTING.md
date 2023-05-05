@@ -225,7 +225,7 @@ export {
 
 ### Unit Testing
 
-Our unit tests are written with [Jest](https://jestjs.io/) and can be found alongside any javascript/vue code files existing in Dialtone Vue. Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex: `link.vue` is tested by `link.test.js`. All code in Dialtone Vue should have tests written for it. You can see more details on writing tests in the following [documentation](https://vue.dialpad.design/?path=/story/docs-component-driven-development-unit-tests--page).
+Our unit tests are written with [Vitest](https://vitest.dev/) and can be found alongside any javascript/vue code files existing in Dialtone Vue. Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex: `link.vue` is tested by `link.test.js`. All code in Dialtone Vue should have tests written for it. You can see more details on writing tests in the following [documentation](https://vue.dialpad.design/?path=/story/docs-component-driven-development-unit-tests--page).
 
 ### Dialtone Usage
 

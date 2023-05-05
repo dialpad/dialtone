@@ -24,14 +24,14 @@ describe('DtTab Tests', () => {
   const _setWrappers = () => {
     tab = wrapper.find('[data-qa="dt-tab"]');
   };
-  const changeContentPanel = jest.fn();
+  const changeContentPanel = vi.fn();
   const _mountWrapper = () => {
     wrapper = shallowMount(DtTab, {
       localVue: createLocalVue(),
       slots,
       propsData,
       provide: {
-        setFocus: jest.fn(),
+        setFocus: vi.fn(),
         groupContext,
         changeContentPanel,
       },
@@ -74,12 +74,12 @@ describe('DtTab Tests', () => {
         expect(tab.attributes('id')).toBe(`dt-tab-${id}`);
       });
 
-      it('tabindex should be -1 ', () => {
+      it('tabindex should be -1', () => {
         expect(tab.attributes('tabindex')).toBe('-1');
       });
 
       it('should not be disabled', () => {
-        expect(tab.attributes('disabled')).toBe(undefined);
+        expect(tab.attributes('disabled')).toBeUndefined();
       });
     });
   });

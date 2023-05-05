@@ -124,7 +124,7 @@ describe('DtRecipeUnreadPill Tests', () => {
   });
 
   describe('Interactivity Tests', () => {
-    const clickListenerSpy = jest.fn();
+    const clickListenerSpy = vi.fn();
 
     beforeEach(() => {
       listeners = { click: clickListenerSpy };

@@ -292,7 +292,7 @@ describe('DtAvatar Tests', () => {
       );
 
       it(
-        'should pass through data in presenceProps to the presence component ',
+        'should pass through data in presenceProps to the presence component',
         async () => {
           await wrapper.setProps({
             presence: 'active',
@@ -304,8 +304,8 @@ describe('DtAvatar Tests', () => {
           });
           presence = wrapper.find('[data-qa="dt-presence"]');
           expect(presence.exists()).toBe(true);
-          expect(presence.attributes('aria-live')).toEqual('assertive');
-          expect(presence.attributes('random-attribute')).toEqual('value');
+          expect(presence.attributes('aria-live')).toBe('assertive');
+          expect(presence.attributes('random-attribute')).toBe('value');
         },
       );
 
@@ -361,7 +361,7 @@ describe('DtAvatar Tests', () => {
       // Test Setup
       beforeAll(() => {
         Vue.config.silent = true;
-        jest.spyOn(Vue.util, 'warn').mockClear();
+        vi.spyOn(Vue.util, 'warn').mockClear();
       });
 
       // Test Teardown

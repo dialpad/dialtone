@@ -375,7 +375,7 @@ describe('DtSelectMenu Tests', () => {
       // Test Setup
       beforeAll(() => {
         Vue.config.silent = true;
-        jest.spyOn(Vue.util, 'warn').mockClear();
+        vi.spyOn(Vue.util, 'warn').mockClear();
       });
 
       // Test Teardown
