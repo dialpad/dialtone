@@ -4192,6 +4192,10 @@
           "1800": {
             "value": "#f1dab7",
             "type": "color"
+          },
+          "000": {
+            "value": "#e0e0e0",
+            "type": "color"
           }
         }
       }
@@ -5023,7 +5027,8 @@
         "avatar.color.background.1500": "S:7da5b00554b0b3a4b3fdca553c96b60d2529fc02,",
         "avatar.color.background.1600": "S:db31ee85e4455bc463e57284753abacd59f078b7,",
         "avatar.color.background.1700": "S:b985779a2fe50c9934729f670250ce87e82c6f47,",
-        "avatar.color.background.1800": "S:2c21517640de996b74c6eea0a157631ae6267d69,"
+        "avatar.color.background.1800": "S:2c21517640de996b74c6eea0a157631ae6267d69,",
+        "avatar.color.background.000": "S:6a48521c914f058de3e6dcdd03149c9a24e9ee0a,"
       }
     }
   ],
