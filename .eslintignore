@@ -3,7 +3,7 @@ node_modules
 storybook/node_modules
 
 # storybook
-storybook/compiled
+storybook-static
 
 # tests
 tests/.cache
