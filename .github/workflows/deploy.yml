@@ -72,7 +72,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
-          folder: storybook/compiled
+          folder: storybook-static
           clean-exclude: |
             deploy-previews
             vue3
@@ -82,7 +82,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
-          folder: storybook/compiled
+          folder: storybook-static
           target-folder: vue3
 
       - name: Github Release

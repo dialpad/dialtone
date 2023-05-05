@@ -235,7 +235,6 @@ Dialtone Vue is a dependency of other projects so you must always be aware of ma
 - **`docs`:** Any storybook documentation not directly related to a component.
 - **`generator-dialtone-vue`:** - Yeoman generator config.
 - **`scripts`:** - Contains shell scripts.
-- **`storybook`:** - Contains the storybook dependencies and package.json. When storybook is built it is output to `storybook/compiled`.
 - **`tools`:** - Any additional tooling related to Dialtone Vue. Right now contains files related to the migration from Dialtone 5 to Dialtone 6.
 
 ## Commit Message Convention
