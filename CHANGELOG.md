@@ -1,3 +1,10 @@
+## [3.65.2](https://github.com/dialpad/dialtone-vue/compare/v3.65.1...v3.65.2) (2023-05-05)
+
+
+### Bug Fixes
+
+* add missing plugin to vite config ([d15347a](https://github.com/dialpad/dialtone-vue/commit/d15347a23b5fb67c05b8f1f717ccc105d38ee1c5))
+
 ## [3.65.1](https://github.com/dialpad/dialtone-vue/compare/v3.65.0...v3.65.1) (2023-05-05)
 
 
