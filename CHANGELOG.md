@@ -1,3 +1,17 @@
+# [1.13.0](https://github.com/dialpad/dialtone-tokens/compare/v1.12.0...v1.13.0) (2023-05-08)
+
+
+### Bug Fixes
+
+* correct spacing 770 ([9458ef6](https://github.com/dialpad/dialtone-tokens/commit/9458ef61c5bc4a630c3c6ae91845653989fe267b))
+
+
+### Features
+
+* **color:** avatar base bg color ([1e4d676](https://github.com/dialpad/dialtone-tokens/commit/1e4d67685d016a3c75a6746e9b8a55e3a4826f97))
+* **color:** avatar colors ([0f63b27](https://github.com/dialpad/dialtone-tokens/commit/0f63b2750776cc36027a8bf3fe458bee68f44dda))
+* **size-and-space:** remove 770 stop ([6cdd6d1](https://github.com/dialpad/dialtone-tokens/commit/6cdd6d1a2b9b4e4232b8bc76f2d6d45848bae25b))
+
 # [1.12.0](https://github.com/dialpad/dialtone-tokens/compare/v1.11.0...v1.12.0) (2023-05-03)
 
 
