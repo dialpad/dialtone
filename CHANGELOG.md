@@ -1,3 +1,14 @@
+# [1.14.0](https://github.com/dialpad/dialtone-tokens/compare/v1.13.0...v1.14.0) (2023-05-08)
+
+
+### Features
+
+* **shadow:** added dark version of focus shadow ([a60ef87](https://github.com/dialpad/dialtone-tokens/commit/a60ef87c72b2f01a2103a4c966c321ddc0be3bd2))
+* **shadow:** added focus shadow ([8acfe4e](https://github.com/dialpad/dialtone-tokens/commit/8acfe4ee0b065852284267a46e30ec46d4ea74f3))
+* **shadow:** added inset focus ([07b618f](https://github.com/dialpad/dialtone-tokens/commit/07b618f66b447a4cae7f6bdc2371eb13967e90c3))
+* **shadow:** dark focus inset ([d4f8fe0](https://github.com/dialpad/dialtone-tokens/commit/d4f8fe05f433c2f2c333230b01b552e48d5985a2))
+* **size-and-space:** added 905 stop ([6ef59c9](https://github.com/dialpad/dialtone-tokens/commit/6ef59c943b63c7800cd91ab0477e83971571bed6))
+
 # [1.13.0](https://github.com/dialpad/dialtone-tokens/compare/v1.12.0...v1.13.0) (2023-05-08)
 
 
