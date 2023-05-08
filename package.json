@@ -149,8 +149,7 @@
       "require": "./dist/emoji.cjs"
     },
     "./css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+      "style": "./dist/style.css"
     }
   },
   "gitHooks": {
