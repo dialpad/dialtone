@@ -937,10 +937,6 @@
         "value": "{space.750} + {space.350}",
         "type": "spacing"
       },
-      "770": {
-        "value": "({space.750} + {space.800}) / 2",
-        "type": "spacing"
-      },
       "775": {
         "value": "(({space.750} + {space.800}) / 2) + {size.200}",
         "type": "spacing"
@@ -1095,10 +1091,6 @@
       },
       "760-negative": {
         "value": "{space.760} * -1",
-        "type": "spacing"
-      },
-      "770-negative": {
-        "value": "{space.770} * -1",
         "type": "spacing"
       },
       "775-negative": {
