@@ -1,3 +1,10 @@
+## [3.65.3](https://github.com/dialpad/dialtone-vue/compare/v3.65.2...v3.65.3) (2023-05-08)
+
+
+### Bug Fixes
+
+* correct style export in package.json ([ccde40b](https://github.com/dialpad/dialtone-vue/commit/ccde40b0ada474068168141e5c1cbd3f632f5340))
+
 ## [3.65.2](https://github.com/dialpad/dialtone-vue/compare/v3.65.1...v3.65.2) (2023-05-05)
 
 
