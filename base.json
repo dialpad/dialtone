@@ -5098,7 +5098,8 @@
         "avatar.color.background.1700": "S:bd19d104b54754052b0802d6c96ff156bea02777,",
         "avatar.color.background.1800": "S:2b564ccec734506e6322e41369b9dedd80784553,",
         "avatar.color.background.000": "S:660eebae026ad61ac42e98e1bc9661f4cfcffcb1,",
-        "shadow.focus": "S:3c9953cf526f74c6d4b248fb350d2270320cff06,"
+        "shadow.focus": "S:3c9953cf526f74c6d4b248fb350d2270320cff06,",
+        "shadow.focus-inset": "S:523c44305d23cf69c7273669569fd7f982366f0c,"
       }
     }
   ],
