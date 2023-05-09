@@ -291,8 +291,8 @@ export default {
 
 <style lang="less">
 .dt-recipe--callbar-button-with-popover--arrow.d-btn--circle {
-  margin-top: calc(calc(var(--space-300) * 3) * -1);
-  margin-left: calc(var(--space-300) * -5);
+  margin-top: var(--space-350-negative);
+  margin-left: calc(var(--space-300-negative) * 5);
   width: var(--size-500);
   height: var(--size-500);
   padding: var(--space-400);
@@ -307,8 +307,7 @@ export default {
     background: var(--bgc-contrast);
     color: var(--fc-primary-inverted);
 
-    // This is awfully specific, TODO: wth is going on here?
-    button {
+    .d-btn {
       color: var(--fc-primary-inverted);
     }
   }
