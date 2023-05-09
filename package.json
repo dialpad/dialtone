@@ -65,7 +65,6 @@
     "@storybook/vue3-vite": "^7.0.8",
     "@vitejs/plugin-vue": "^4.2.1",
     "@vue/test-utils": "^2.2.9",
-    "@vue/vue3-jest": "^29.2.4",
     "axe-core": "^4.6.3",
     "axe-playwright": "^1.2.3",
     "c8": "^7.13.0",
@@ -134,7 +133,7 @@
   ],
   "engineStrict": true,
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   },
   "type": "module",
   "main": "./dist/dialtone-vue.cjs",
@@ -167,8 +166,5 @@
     "Vue"
   ],
   "license": "MIT",
-  "repository": "git@github.com:dialpad/dialtone-vue.git",
-  "volta": {
-    "node": "16"
-  }
+  "repository": "git@github.com:dialpad/dialtone-vue.git"
 }
