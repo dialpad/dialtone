@@ -5,14 +5,24 @@
     <button @click="updateItem(0)">
       Update Element Message
     </button>
+    <br>
+    <br>
+    <button
+      class="autoscrolling"
+      @click="switchAutoScrolling"
+    >
+      Auto scrolling <div :class="{ 'enabled': autoScrolling }" />
+    </button>
 
     <dt-scroller
+      ref="scroller"
       :items="dynamicItems"
       :min-item-size="54"
       :scroller-height="300"
       :scroller-width="500"
       class="scroller"
       :dynamic="true"
+      @user-position="userPosition = $event"
     >
       <template #default="{ item }">
         <div class="avatar">
@@ -33,8 +43,8 @@
 </template>
 
 <script setup>
-import DtScroller from './DtScroller.vue';
-import { ref } from 'vue';
+import DtScroller from './scroller.vue';
+import { nextTick, ref } from 'vue';
 
 import defaultAvatar from './person.png';
 
@@ -59,9 +69,38 @@ const dynamicItems = ref(Array.from({ length: 37 }, (_, index) => ({
 function updateItem (index) {
   dynamicItems.value[index].message = messages[Math.floor(Math.random() * 8)];
 }
+
+const scroller = ref('scroller');
+const autoScrolling = ref(false);
+const userPosition = ref(null);
+let intervalId;
+
+function addItem () {
+  dynamicItems.value.push({
+    id: dynamicItems.value.length,
+    avatar: defaultAvatar,
+    message: messages[Math.floor(Math.random() * 8)],
+  });
+}
+
+function switchAutoScrolling () {
+  autoScrolling.value = !autoScrolling.value;
+  scroller.value.scrollToBottom();
+
+  clearInterval(intervalId);
+  intervalId = setInterval(function () {
+    if (!autoScrolling.value) return;
+    addItem();
+    nextTick(() => {
+      if (userPosition.value === 'bottom') {
+        scroller.value.scrollToBottom();
+      }
+    });
+  }, 1000);
+}
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .scroller {
   margin: 20px 0;
   border: 1px solid red;
@@ -73,5 +112,21 @@ function updateItem (index) {
   border-radius: 50%;
   margin-right: 10px;
   object-fit: cover;
+}
+
+.autoscrolling{
+  display: flex;
+  align-items: center;
+  div {
+    background-color: red;
+    width: 5px;
+    height: 5px;
+    border-radius: 25px;
+    margin-left: 5px;
+
+    &.enabled{
+      background-color: #00ff00;
+    }
+  }
 }
 </style>

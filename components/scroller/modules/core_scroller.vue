@@ -155,16 +155,17 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['scroll-start', 'scroll-end']);
+const emit = defineEmits(['user-position']);
 
 const views = reactive(new Map());
-const reactiveItems = reactive(props.items);
+// const reactiveItems = reactive(props.items);
 const unusedViews = reactive(new Map());
 const updateTimeout = null;
 const pool = ref([]);
 const hoverKey = ref(null);
 const ready = ref(false);
 const scroller = ref(null);
+const userPosition = ref('top');
 
 let startIndex = 0;
 let endIndex = 0;
@@ -213,9 +214,12 @@ const itemIndexByKey = computed(() => {
   return result;
 });
 
-watch(reactiveItems, () => {
-  _updateVisibleItems(true);
-});
+// watch(reactiveItems, () => {
+//   // if add to the top
+//   // _updateVisibleItems(true);
+//   // if autoscrolling  if add to the bottom
+//   // _updateVisibleItems(false, true);
+// });
 
 watch(sizes, () => {
   _updateVisibleItems(false);
@@ -456,7 +460,7 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     type = item.type;
 
     let unusedPool = _unusedViews.get(type);
-    let newlyUsedView = false;
+    // let newlyUsedView = false;
 
     // No view assigned to item
     if (!view) {
@@ -491,12 +495,12 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
       view.nr.type = type;
       _views.set(key, view);
 
-      newlyUsedView = true;
+      // newlyUsedView = true;
     } else {
       // View already assigned to item
       if (!view.nr.used) {
         view.nr.used = true;
-        newlyUsedView = true;
+        // newlyUsedView = true;
         if (unusedPool) {
           const index = unusedPool.indexOf(view);
           if (index !== -1) unusedPool.splice(index, 1);
@@ -507,10 +511,11 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     // Always set item in case it's a new object with the same key
     view.item = item;
 
-    if (newlyUsedView) {
-      if (i === items.length - 1) emit('scroll-end');
-      if (i === 0) emit('scroll-start');
-    }
+    // if (newlyUsedView) {
+    //   if (items.length === 0) return;
+    //   if (i === items.length - 1) emit('scroll-end');
+    //   if (i === 0) emit('scroll-start');
+    // }
 
     // Update position
     if (itemSize === null) {
@@ -557,6 +562,25 @@ const scrollToItem = (index) => {
 };
 
 const handleScroll = () => {
+  const container = scroller.value;
+
+  if (userPosition.value !== 'middle') {
+    userPosition.value = 'middle';
+    emit('user-position', 'middle');
+  }
+
+  // Check if the scroll is at the top of the container
+  if (container.scrollTop === 0) {
+    userPosition.value = 'top';
+    emit('user-position', 'top');
+  }
+
+  // Check if the scroll is at the bottom of the container
+  if (container.scrollTop + container.clientHeight === container.scrollHeight) {
+    userPosition.value = 'bottom';
+    emit('user-position', 'bottom');
+  }
+
   if (!scrollDirty) {
     scrollDirty = true;
     if (updateTimeout) return;
@@ -572,6 +596,7 @@ const handleScroll = () => {
 
 defineExpose({
   scrollToItem,
+  _updateVisibleItems,
 });
 </script>
 

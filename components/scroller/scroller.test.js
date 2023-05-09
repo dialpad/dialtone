@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
-import DtScroller from './DtScroller.vue';
+import DtScroller from './scroller.vue';
 
 // Constants
 const items = Array.from({ length: 20 }, (_, i) => ({
@@ -69,14 +69,27 @@ describe('DtScroller Tests', function () {
 
   describe('Interactivity Tests', function () {
     describe('Should emit', function () {
-      it('`scroll-start` event immediately the component renders', function () {
-        assert.isTrue(!!wrapper.emitted()['scroll-start']);
-      });
-      it('`scroll-end` event when scroll reach the bottom of the component', function () {
-        wrapper.vm.scrollToItem(20);
+      it('`top` event when scroll reach the top of the component', function () {
+        defaultContent.element.scrollTop = 25;
+        wrapper.trigger('scroll');
+        defaultContent.element.scrollTop = 0;
         wrapper.trigger('scroll');
 
-        assert.isTrue(!!wrapper.emitted()['scroll-end']);
+        assert.equal(wrapper.emitted()['user-position'][1], 'top');
+      });
+
+      it('`middle` on scroll', function () {
+        defaultContent.element.scrollTop = 25;
+        wrapper.trigger('scroll');
+
+        assert.equal(wrapper.emitted()['user-position'][0], 'middle');
+      });
+
+      it('`bottom` event when scroll reach the bottom of the component', function () {
+        defaultContent.element.scrollTop = defaultContent.element.scrollHeight - defaultContent.element.clientHeight;
+        wrapper.trigger('scroll');
+
+        assert.equal(wrapper.emitted()['user-position'][2], 'bottom');
       });
     });
 

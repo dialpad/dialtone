@@ -1,6 +1,6 @@
-import DtScroller from './DtScroller.vue';
+import DtScroller from './scroller.vue';
 import ScrollerDefault from './scroller_default.story.vue';
-import ScrollerDynamic from '@/components/scroller/scroller_dynamic.story.vue';
+import ScrollerDynamic from './scroller_dynamic.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 
@@ -13,6 +13,7 @@ export const argsData = {
   scrollerHeight: 200,
   onScrollStart: action('scroll-start'),
   onScrollEnd: action('scroll-end'),
+  onUserPosition: action('user-position'),
 };
 
 export const argTypesData = {
@@ -91,15 +92,14 @@ export const argTypesData = {
     },
   },
 
-  'scroll-start': {
-    description: 'Emitted when the first item is rendered.',
+  onUserPosition: {
     table: {
-      type: { summary: 'event' },
+      disable: true,
     },
   },
 
-  'scroll-end': {
-    description: 'Emitted when the last item is rendered.',
+  'user-position': {
+    description: 'Emit the last user position.',
     table: {
       type: { summary: 'event' },
     },

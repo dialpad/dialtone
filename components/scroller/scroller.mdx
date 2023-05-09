@@ -26,7 +26,24 @@ the keyField prop if you are using another field name.
 
 We are exposing `scrollToItem` method to navigate to a specific item in the list.
 
-Scroller component will fire an event when it reach the top or bottom of the list.
+Scroller component will fire an event when it reach the top or bottom of the list, also when is in the middle.
+
+We are also exposing:
+`scrollToBottom()` (only accessible by the dynamic component)
+This function will scroll to the bottom of the scroller, this is necessary because the dynamic component has variable size.
+
+`updateItems()` This function is necessary to call when the user do some update to the list
+(add elements from the top with unshift or update some item).
+
+`updateItemsFromBottom()` This function is necessary to call when the user push some element to the array list.
+
+### Important
+
+Due the flexibility of the component IT WILL NOT UPDATE AUTOMATICALLY.
+
+You MUST use `updateItems()` when use `unshift` or update some item data.
+
+You MUST use `updateItemsFromBottom()` if you use `push` to add some element to the array list.
 
 The list item components must be reactive to the item prop being updated without
 being re-created (use computed props or watchers to properly react to props changes!).

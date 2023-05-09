@@ -4,7 +4,7 @@
     :items="itemsWithSize"
     :min-item-size="minItemSize"
     :direction="direction"
-    key-field="id"
+    :key-field="keyField"
     :list-tag="listTag"
     :item-tag="itemTag"
     v-bind="$attrs"
@@ -38,8 +38,8 @@ This is a code from external library (https://github.com/Akryum/vue-virtual-scro
 We have modified it for our own specific use.
 -->
 <script>
-import CoreScroller from './core-scroller.vue';
-import DtScrollerItem from './scroller-item.vue';
+import CoreScroller from './core_scroller.vue';
+import DtScrollerItem from './scroller_item.vue';
 
 export default {
   name: 'DynamicScroller',
@@ -240,6 +240,29 @@ export default {
     scrollToItem (index) {
       const scroller = this.$refs.scroller;
       if (scroller) scroller.scrollToItem(index);
+    },
+
+    scrollToBottom () {
+      if (this.$_scrollingToBottom) return;
+      this.$_scrollingToBottom = true;
+      const el = this.$el;
+      // Item is inserted to the DOM
+      this.$nextTick(() => {
+        el.scrollTop = el.scrollHeight + 5000;
+        // Item sizes are computed
+        const cb = () => {
+          el.scrollTop = el.scrollHeight + 5000;
+          requestAnimationFrame(() => {
+            el.scrollTop = el.scrollHeight + 5000;
+            if (this.$_undefinedSizes === 0) {
+              this.$_scrollingToBottom = false;
+            } else {
+              requestAnimationFrame(cb);
+            }
+          });
+        };
+        requestAnimationFrame(cb);
+      });
     },
   },
 };
