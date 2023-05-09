@@ -134,7 +134,7 @@
   ],
   "engineStrict": true,
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   },
   "type": "module",
   "main": "./dist/dialtone-vue.cjs",
@@ -167,8 +167,5 @@
     "Vue"
   ],
   "license": "MIT",
-  "repository": "git@github.com:dialpad/dialtone-vue.git",
-  "volta": {
-    "node": "16"
-  }
+  "repository": "git@github.com:dialpad/dialtone-vue.git"
 }

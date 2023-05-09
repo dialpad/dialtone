@@ -54,57 +54,6 @@
   "launch": {
     "version": "0.2.0",
     "configurations": [
-      {
-        "type": "chrome",
-        "request": "launch",
-        "name": "Debug Local JS (storybook)",
-        "url": "http://localhost:9010",
-        "webRoot": "${workspaceFolder}",
-        "smartStep": true,
-        "sourceMapPathOverrides": {
-          "webpack://*": "${webRoot}/*"
-        }
-      },
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "vscode-jest-tests",
-        "program": "${workspaceFolder}/node_modules/@vue/cli-service/bin/vue-cli-service",
-        "args": [
-          "test:unit",
-          "--runInBand",
-        ],
-        "smartStep": true,
-        "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen",
-        "skipFiles": ["<node_internals>/**/*.js", "**/node_modules/**/*"]
-      }
-      // for some reason when adding grep this just skips the breakpoints?
-      // {
-      //   "type": "node",
-      //   "request": "launch",
-      //   "name": "Debug single JS unit test",
-      //   "program": "${workspaceFolder}/node_modules/@vue/cli-service/bin/vue-cli-service",
-      //   "args": [
-      // 		"test:unit",
-      // 		"--timeout",
-      // 		"0",
-      //     "--colors",
-      //     "--require",
-      //     "source-map-support/register",
-      //     "--require",
-      //     "jsdom-global/register",
-      //     "-R",
-      //     "min",
-      // 		"--fgrep",
-      //     "${input:testname}",
-      //     "${workspaceFolder}/components/**/*.test.js"
-      //   ],
-      //   "smartStep": true,
-      //   "console": "integratedTerminal",
-      //   "internalConsoleOptions": "neverOpen",
-      //   "skipFiles": ["<node_internals>/**/*.js", "**/node_modules/**/*"]
-      // },
     ],
     "inputs": [
       {
