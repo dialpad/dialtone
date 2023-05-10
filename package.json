@@ -147,9 +147,7 @@
       "import": "./dist/emoji.js",
       "require": "./dist/emoji.cjs"
     },
-    "./css": {
-      "style": "./dist/style.css"
-    }
+    "./css": "./dist/style.css"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
