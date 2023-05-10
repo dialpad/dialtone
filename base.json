@@ -1846,15 +1846,18 @@
       "foreground": {
         "primary": {
           "value": "{color.black.900}",
-          "type": "color"
+          "type": "color",
+          "description": "Default text color throughout the UI."
         },
         "secondary": {
           "value": "{color.black.700}",
-          "type": "color"
+          "type": "color",
+          "description": "Example uses include introduction paragraphs, labels, and descriptions paired with form elements."
         },
         "tertiary": {
           "value": "{color.black.600}",
-          "type": "color"
+          "type": "color",
+          "description": "Used to imply visual hierarchy relative to primary and secondary text colors, e.g. headlines and labels."
         },
         "muted": {
           "value": "rgba($color.black.800, 0.5)",
@@ -1862,70 +1865,78 @@
         },
         "placeholder": {
           "value": "{color.black.500}",
-          "type": "color"
+          "type": "color",
+          "description": "Text color for placeholder text within form elements."
         },
         "disabled": {
           "value": "{color.black.500}",
-          "type": "color"
+          "type": "color",
+          "description": "Used for text paired with disabled content or components, like the form elements."
         },
         "critical": {
           "value": "{color.red.300}",
           "type": "color",
-          "description": "critical, danger, error, alert"
+          "description": "Expresses an error, danger, or otherwise critical state."
         },
         "critical-strong": {
           "value": "{color.red.400}",
           "type": "color",
-          "description": "critical, danger, error, alert"
+          "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
         },
         "success": {
           "value": "{color.green.400}",
           "type": "color",
-          "description": "positive"
+          "description": "Indicates a positive state."
         },
         "success-strong": {
           "value": "{color.green.500}",
           "type": "color",
-          "description": "positive"
+          "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
         },
         "warning": {
           "value": "{color.gold.500}",
           "type": "color",
-          "description": "alert"
+          "description": "Indicates information that requires user’s attention and further action may be necessary."
         },
         "primary-inverted": {
           "value": "{color.neutral.white}",
-          "type": "color"
+          "type": "color",
+          "description": "Primary text that sits on high-contrast surfaces or backgrounds."
         },
         "secondary-inverted": {
           "value": "{color.black.200}",
-          "type": "color"
+          "type": "color",
+          "description": "Secondary text color that sits on high-contrast surfaces or backgrounds."
         },
         "tertiary-inverted": {
           "value": "{color.black.300}",
-          "type": "color"
+          "type": "color",
+          "description": "Tertiary text color that sits on high-contrast surfaces or backgrounds."
         },
         "muted-inverted": {
           "value": "rgba($color.black.200, 0.6)",
-          "type": "color"
+          "type": "color",
+          "description": "Muted text color that sits on high-contrast surfaces or backgrounds."
         },
         "placeholder-inverted": {
           "value": "{color.black.500}",
-          "type": "color"
+          "type": "color",
+          "description": "Placeholder text color that sits on high-contrast surfaces or backgrounds."
         },
         "disabled-inverted": {
           "value": "{color.black.500}",
-          "type": "color"
+          "type": "color",
+          "description": "Disabled text color that sits on high-contrast surfaces or backgrounds."
         },
         "critical-inverted": {
           "value": "{color.red.200}",
           "type": "color",
-          "description": "critical, danger, error, alert"
+          "description": "Critical text that sits on high-contrast surfaces or backgrounds"
         },
         "critical-strong-inverted": {
           "value": "{color.foreground.critical-inverted}",
           "type": "color",
-          "description": "critical, danger, error, alert",
+          "description": "Critical strong text that sits on high-contrast surfaces or backgrounds",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -1939,12 +1950,12 @@
         "success-inverted": {
           "value": "{color.green.200}",
           "type": "color",
-          "description": "positive"
+          "description": "Success text that sits on high-contrast surfaces or backgrounds"
         },
         "success-strong-inverted": {
           "value": "{color.foreground.success-inverted}",
           "type": "color",
-          "description": "positive",
+          "description": "Success strong text that sits on high-contrast surfaces or backgrounds",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -1958,7 +1969,7 @@
         "warning-inverted": {
           "value": "{color.gold.100}",
           "type": "color",
-          "description": "alert"
+          "description": "Warning text that sits on high-contrast surfaces or backgrounds"
         }
       },
       "link": {
@@ -2071,6 +2082,7 @@
         "secondary-opaque": {
           "value": "{color.black.900}",
           "type": "color",
+          "description": "Secondary surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2084,6 +2096,7 @@
         "moderate-opaque": {
           "value": "{color.black.900}",
           "type": "color",
+          "description": "Moderate surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2097,6 +2110,7 @@
         "bold-opaque": {
           "value": "{color.black.900}",
           "type": "color",
+          "description": "Bold surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2110,6 +2124,7 @@
         "strong-opaque": {
           "value": "{color.black.900}",
           "type": "color",
+          "description": "Strong surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2123,6 +2138,7 @@
         "contrast-opaque": {
           "value": "{color.black.900}",
           "type": "color",
+          "description": "Contrast surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2136,7 +2152,7 @@
         "critical-opaque": {
           "value": "{color.red.300}",
           "type": "color",
-          "description": "danger, error",
+          "description": "Critical surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2150,7 +2166,7 @@
         "critical-subtle-opaque": {
           "value": "{color.red.300}",
           "type": "color",
-          "description": "danger, error",
+          "description": "Critical subtle surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2164,6 +2180,7 @@
         "warning-opaque": {
           "value": "{color.gold.200}",
           "type": "color",
+          "description": "Warning surface as opaque background color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2177,6 +2194,7 @@
         "warning-subtle-opaque": {
           "value": "{color.gold.200}",
           "type": "color",
+          "description": "Warning subtle surface as opaque background color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2190,6 +2208,7 @@
         "success-opaque": {
           "value": "{color.green.400}",
           "type": "color",
+          "description": "Success surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2203,6 +2222,7 @@
         "success-subtle-opaque": {
           "value": "{color.green.400}",
           "type": "color",
+          "description": "Success subtle surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2216,6 +2236,7 @@
         "info-opaque": {
           "value": "{color.blue.400}",
           "type": "color",
+          "description": "Info surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2229,6 +2250,7 @@
         "info-subtle-opaque": {
           "value": "{color.blue.400}",
           "type": "color",
+          "description": "Info surface as opaque background color.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2241,37 +2263,43 @@
         },
         "primary": {
           "value": "{color.neutral.white}",
-          "type": "color"
+          "type": "color",
+          "description": "Default surface color for the majority of surfaces."
         },
         "secondary": {
           "value": "{color.black.100}",
-          "type": "color"
+          "type": "color",
+          "description": "For adjacent or complementary regions."
         },
         "moderate": {
           "value": "{color.black.200}",
-          "type": "color"
+          "type": "color",
+          "description": "A tertiary surface level, prominent without being too overpowering."
         },
         "bold": {
           "value": "{color.black.300}",
-          "type": "color"
+          "type": "color",
+          "description": "Highlight or call attention to specific areas of the interface."
         },
         "strong": {
           "value": "{color.black.600}",
-          "type": "color"
+          "type": "color",
+          "description": "Use sparingly to draw the eye to a relatively important region."
         },
         "contrast": {
           "value": "{color.black.800}",
-          "type": "color"
+          "type": "color",
+          "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
         },
         "critical": {
           "value": "{color.red.100}",
           "type": "color",
-          "description": "danger, error"
+          "description": "Background surface color containing error, danger, or otherwise critical messaging or elements."
         },
         "critical-subtle": {
           "value": "{color.red.100}",
           "type": "color",
-          "description": "danger, error",
+          "description": "A softer version of the Critical surface.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2285,15 +2313,17 @@
         "critical-strong": {
           "value": "{color.red.400}",
           "type": "color",
-          "description": "danger, error"
+          "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
         },
         "warning": {
           "value": "{color.gold.100}",
-          "type": "color"
+          "type": "color",
+          "description": "Background surface color highlighting messaging or elements that may require user's attention."
         },
         "warning-subtle": {
           "value": "{color.gold.100}",
           "type": "color",
+          "description": "A softer version of the default warning surface.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2306,15 +2336,18 @@
         },
         "warning-strong": {
           "value": "{color.gold.200}",
-          "type": "color"
+          "type": "color",
+          "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
         },
         "success": {
           "value": "{color.green.100}",
-          "type": "color"
+          "type": "color",
+          "description": "Background surface color containing messaging or elements expressing a positive or successful state."
         },
         "success-subtle": {
           "value": "{color.green.100}",
           "type": "color",
+          "description": "A softer version of the default success surface.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2327,15 +2360,18 @@
         },
         "success-strong": {
           "value": "{color.green.400}",
-          "type": "color"
+          "type": "color",
+          "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
         },
         "info": {
           "value": "{color.blue.100}",
-          "type": "color"
+          "type": "color",
+          "description": "Background surface color containing messaging or elements communicated as generally informational."
         },
         "info-subtle": {
           "value": "{color.blue.100}",
           "type": "color",
+          "description": "A softer version of the default informational surface.",
           "$extensions": {
             "studio.tokens": {
               "modify": {
@@ -2348,7 +2384,8 @@
         },
         "info-strong": {
           "value": "{color.blue.400}",
-          "type": "color"
+          "type": "color",
+          "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
         }
       },
       "border": {
