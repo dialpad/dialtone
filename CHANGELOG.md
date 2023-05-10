@@ -1,3 +1,17 @@
+# [3.66.0](https://github.com/dialpad/dialtone-vue/compare/v3.65.3...v3.66.0) (2023-05-10)
+
+
+### Bug Fixes
+
+* bundle in vue ([#973](https://github.com/dialpad/dialtone-vue/issues/973)) ([366722f](https://github.com/dialpad/dialtone-vue/commit/366722f13010d72f7fa7b7949f411612a38df120))
+* **Scroller:** name refactor, events behaviour and hardcoded attribute ([#958](https://github.com/dialpad/dialtone-vue/issues/958)) ([7674920](https://github.com/dialpad/dialtone-vue/commit/76749203182ec000c75cceba1ca046d6e43bac89))
+* visual test stories showing up in prod ([#969](https://github.com/dialpad/dialtone-vue/issues/969)) ([f979a28](https://github.com/dialpad/dialtone-vue/commit/f979a28a639c5f2b837c4ffc93ea060bacad9185))
+
+
+### Features
+
+* **Size And Space:** apply between stops and negative variables vue3 ([#965](https://github.com/dialpad/dialtone-vue/issues/965)) ([f3a681a](https://github.com/dialpad/dialtone-vue/commit/f3a681a5e217bbfc6f3a1487f22a0bf09d23f6a8))
+
 ## [3.65.3](https://github.com/dialpad/dialtone-vue/compare/v3.65.2...v3.65.3) (2023-05-08)
 
 
