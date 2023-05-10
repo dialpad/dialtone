@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/dialpad/dialtone-tokens/compare/v1.14.0...v1.15.0) (2023-05-10)
+
+
+### Features
+
+* **semantic-colors:** added descriptions ([5c1622d](https://github.com/dialpad/dialtone-tokens/commit/5c1622dbe53fa3813fdcf11882919497583062b3))
+
 # [1.14.0](https://github.com/dialpad/dialtone-tokens/compare/v1.13.0...v1.14.0) (2023-05-08)
 
 
