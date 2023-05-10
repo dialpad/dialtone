@@ -33,7 +33,7 @@
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "maven": "^5.0.0",
-    "style-dictionary": "^3.7.2",
+    "style-dictionary": "^3.8.0",
     "token-transformer": "^0.0.32"
   }
 }
