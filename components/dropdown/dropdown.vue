@@ -502,6 +502,6 @@ export default {
 
 <style lang="less">
 .d-context-menu-list {
-  width: calc(var(--size-300) * 48);
+  width: var(--size-850);
 }
 </style>
