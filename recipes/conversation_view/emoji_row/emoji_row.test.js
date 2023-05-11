@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import {
   itBehavesLikeEmitsExpectedEvent,
 } from '../../../tests/shared_examples/events';
@@ -25,8 +25,6 @@ const basePropsData = {
 };
 
 describe('DtRecipeEmojiRow Tests', function () {
-  let testContext = {};
-
   // Wrappers
   let wrapper;
   let emojiReactionButton;
@@ -60,7 +58,6 @@ describe('DtRecipeEmojiRow Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: testContext.localVue,
       attachTo: document.body,
     });
     _setChildWrappers();
@@ -72,11 +69,9 @@ describe('DtRecipeEmojiRow Tests', function () {
     // Need to mock them to avoid error
     global.requestAnimationFrame = vi.fn();
     global.cancelAnimationFrame = vi.fn();
-    testContext.localVue = createLocalVue();
   });
 
   beforeEach(function () {
-    testContext = {};
     _setWrappers();
   });
 
