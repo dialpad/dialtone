@@ -1,0 +1,47 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as EmojiRowStories from './emoji_row.stories';
+
+<Meta of={EmojiRowStories}/>
+
+# Emoji Row
+
+<Subtitle>
+  Display a number of emojis in a row
+</Subtitle>
+
+## Base Style
+
+Pass in an array of reactions to be shown
+
+<Canvas>
+  <Story of={EmojiRowStories.Default} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeEmojiRow } from '@dialpad/dialtone-vue';
+```
+
+### Example
+
+```vue
+<dt-recipe-emoji-row
+  :reactions="[
+    {
+      emojiUnicodeOrShortname: '🙃',
+      isSelected: false,
+      ariaLabel: 'Emoji aria label',
+      tooltip: 'You reacted with 🙃',
+      num: 99,
+    },
+  ]"
+/>
+```

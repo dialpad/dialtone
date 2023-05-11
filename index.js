@@ -57,6 +57,7 @@ export * from './recipes/leftbar/contact_row';
 export * from './recipes/leftbar/unread_pill';
 export * from './recipes/conversation_view/feed_item_row';
 export * from './recipes/conversation_view/time_pill';
+export * from './recipes/conversation_view/emoji_row';
 
 // Mixins
 export * from './common/mixins';
