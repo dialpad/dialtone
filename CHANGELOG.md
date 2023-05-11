@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/dialpad/dialtone-tokens/compare/v1.15.0...v1.16.0) (2023-05-11)
+
+
+### Features
+
+* add theming ([204be4e](https://github.com/dialpad/dialtone-tokens/commit/204be4ea4cfbfd9ecae5a964bb359ea906afeabb))
+
 # [1.15.0](https://github.com/dialpad/dialtone-tokens/compare/v1.14.0...v1.15.0) (2023-05-10)
 
 
