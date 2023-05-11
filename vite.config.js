@@ -16,7 +16,12 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ['@dialpad/dialtone'],
+      external: ['vue', '@dialpad/dialtone'],
+      output: {
+        globals: {
+          vue: 'Vue',
+        },
+      },
     },
   },
   plugins: [vue()],
