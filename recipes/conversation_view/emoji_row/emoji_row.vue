@@ -80,8 +80,8 @@ export default {
   },
 
   emits: [
-    'emojiClicked',
-    'emojiHovered',
+    'emoji-clicked',
+    'emoji-hovered',
   ],
 
   methods: {
