@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run transform && ./build.js && cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version && ./build-ios.js",
-    "transform": "token-transformer base.json tokens/tokens.json base,semantic,components/badge,components/checkbox,components/icon,components/radio --expandTypography=true --expandShadow=true",
+    "build": "npm run transform && npm run transform-dark && ./build.js && cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version && ./build-ios.js",
+    "transform": "token-transformer base.json tokens/tokens-light.json base,semantic,components/checkbox,components/icon,components/radio,components/badge,components/avatar --expandTypography=true --expandShadow=true",
+    "transform-dark": "token-transformer base.json tokens/tokens-dark.json base,base/dark,semantic,semantic/dark,components/avatar,components/badge,components/checkbox,components/checkbox/dark,components/icon,components/radio,components/radio/dark --expandTypography=true --expandShadow=true",
     "prepublishOnly": "npm run build",
     "release": "semantic-release --no-ci --extends ./release-local.config.js"
   },
@@ -34,6 +35,6 @@
     "@semantic-release/git": "^10.0.1",
     "maven": "^5.0.0",
     "style-dictionary": "^3.8.0",
-    "token-transformer": "^0.0.32"
+    "token-transformer": "^0.0.31"
   }
 }

@@ -4,7 +4,9 @@ var Color = require('tinycolor2');
 
 const fs = require('fs');
 
-const StyleDictionary = require('style-dictionary').extend('config.js');
+const StyleDictionary = require('style-dictionary');
+
+const getStyleDictionaryConfig = require('./config.js').getStyleDictionaryConfig;
 
 // Identifiers
 const SPACING_IDENTIFIERS = ['spacing'];
@@ -12,7 +14,10 @@ const SIZE_IDENTIFIERS = ['fontSizes', 'fontSize', 'sizing', 'borderWidth', 'bor
 const LINE_HEIGHT_IDENTIFIERS = ['lineHeights', 'lineHeight'];
 const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
 const WEIGHT_IDENTIFIERS = ['fontWeights', 'fontWeight'];
-const FONT_FAMILY_IDENTIFIERS = ['fontFamilies', 'fontFamily', 'typography']
+const FONT_FAMILY_IDENTIFIERS = ['fontFamilies', 'fontFamily', 'typography'];
+
+const THEMES = ['light', 'dark'];
+exports.THEMES = THEMES;
 
 // Values
 const FALLBACK_FONTS = ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'];
@@ -344,7 +349,11 @@ StyleDictionary.registerAction({
   },
 });
 
-StyleDictionary.buildAllPlatforms();
+
+THEMES.forEach(theme => {
+  const sd = StyleDictionary.extend(getStyleDictionaryConfig(theme));
+  sd.buildAllPlatforms();
+});
 
 function insert(str, index, value) {
   return str.substring(0, index) + value + str.substring(index);
@@ -360,9 +369,12 @@ function addImportIntoKotlinFile(path, importText) {
   fs.writeFileSync(path, newContent);
 }
 
-const KOTLIN_FILE_PATH = './dist/android/java/tokens.kt';
-addImportIntoKotlinFile(KOTLIN_FILE_PATH, 'import androidx.compose.ui.text.font.FontWeight')
-addImportIntoKotlinFile(KOTLIN_FILE_PATH, 'import androidx.compose.ui.text.font.FontFamily')
+THEMES.forEach(theme => {
+  const KOTLIN_FILE_PATH = `./dist/android/java/tokens-${theme}.kt`;
+  addImportIntoKotlinFile(KOTLIN_FILE_PATH, 'import androidx.compose.ui.text.font.FontWeight');
+  addImportIntoKotlinFile(KOTLIN_FILE_PATH, 'import androidx.compose.ui.text.font.FontFamily');
+});
+
 
 const DOC_OUTPUT_PATH = './dist/doc.json';
 
