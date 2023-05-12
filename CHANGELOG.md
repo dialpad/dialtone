@@ -1,3 +1,17 @@
+# [3.67.0](https://github.com/dialpad/dialtone-vue/compare/v3.66.1...v3.67.0) (2023-05-12)
+
+
+### Bug Fixes
+
+* **Feed Items:** fix test failure for emoji row ([#975](https://github.com/dialpad/dialtone-vue/issues/975)) ([96697b0](https://github.com/dialpad/dialtone-vue/commit/96697b01c141f7c40fddc1c60c645972b7074a1f))
+* Revert bundle in vue ([#973](https://github.com/dialpad/dialtone-vue/issues/973)) ([e8035b4](https://github.com/dialpad/dialtone-vue/commit/e8035b4777c9030230bf3bbeae0f10390674d3a2))
+
+
+### Features
+
+* **Feed Items:** create feed item emoji row (vue3) ([#974](https://github.com/dialpad/dialtone-vue/issues/974)) ([b925e0d](https://github.com/dialpad/dialtone-vue/commit/b925e0d558e282710820bdbbc4a4ba644a81a3e1))
+* update dialtone-icons ([3eb61a8](https://github.com/dialpad/dialtone-vue/commit/3eb61a878765f59e6f6933379887ed956ad6dc5d))
+
 ## [3.66.1](https://github.com/dialpad/dialtone-vue/compare/v3.66.0...v3.66.1) (2023-05-10)
 
 
