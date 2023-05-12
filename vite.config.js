@@ -8,12 +8,10 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   build: {
+    emptyOutDir: false,
     lib: {
       entry: resolve(__dirname, './src/main.js'),
       name: 'dialtone-icons',
-    },
-    build: {
-      emptyOutDir: false,
     },
     rollupOptions: {
       external: ['vue'],
