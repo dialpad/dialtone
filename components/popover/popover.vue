@@ -685,7 +685,7 @@ export default {
         .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
         // Special case because we don't have any dialtone drawer component yet. Render at 650 when
         // anchor of popover is within a drawer.
-        this.anchorEl.closest('.d-zi-drawer')) {
+        this.anchorEl?.closest('.d-zi-drawer')) {
         return 650;
       } else {
         return 300;
@@ -698,7 +698,7 @@ export default {
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
       if (this.open === null || this.open === undefined) {
-        if ((!this.anchorEl.contains(e.target) && !this.anchorEl.isEqualNode(e.target)) || this.anchorEl?.disabled) {
+        if ((!this.anchorEl?.contains(e.target) && !this.anchorEl?.isEqualNode(e.target)) || this.anchorEl?.disabled) {
           return;
         }
 
@@ -732,7 +732,7 @@ export default {
 
     onArrowKeyPress (e) {
       if (this.open !== null) { return; }
-      if (this.openWithArrowKeys && this.anchorEl.contains(e.target)) {
+      if (this.openWithArrowKeys && this.anchorEl?.contains(e.target)) {
         if (!this.isOpen) {
           this.isOpen = true;
         }
@@ -768,7 +768,7 @@ export default {
     **/
     preventScrolling () {
       if (this.modal) {
-        const element = this.anchorEl.closest('body, .tippy-box');
+        const element = this.anchorEl?.closest('body, .tippy-box');
         if (element.tagName.toLowerCase() === 'body') {
           element.classList.add('d-of-hidden');
           this.tip.setProps({ offset: this.offset });
@@ -782,7 +782,7 @@ export default {
     * Resets the prevent scrolling properties set in preventScrolling() back to normal.
     **/
     enableScrolling () {
-      const element = this.anchorEl.closest('body, .tippy-box');
+      const element = this.anchorEl?.closest('body, .tippy-box');
       if (!element) return;
       if (element.tagName?.toLowerCase() === 'body') {
         element.classList.remove('d-of-hidden');
@@ -890,7 +890,7 @@ export default {
 
     async setPopoverContentAnchorWidth () {
       await this.$nextTick();
-      this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
+      this.popoverContentEl.style.width = `${this.anchorEl?.clientWidth}px`;
     },
 
     focusFirstElementIfNeeded (domEl) {
