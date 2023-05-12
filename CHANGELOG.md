@@ -1,3 +1,11 @@
+## [2.83.1](https://github.com/dialpad/dialtone-vue/compare/v2.83.0...v2.83.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* **Leftbar:** muted opacity to 60% ([d626b00](https://github.com/dialpad/dialtone-vue/commit/d626b00a59ace9f99f54e1d756b1745375c3c171))
+* **Popover:** anchorEl null protection ([456e8ef](https://github.com/dialpad/dialtone-vue/commit/456e8ef734afea6a9709f42e7d0090e78d671363))
+
 # [2.83.0](https://github.com/dialpad/dialtone-vue/compare/v2.82.1...v2.83.0) (2023-05-12)
 
 
