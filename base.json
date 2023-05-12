@@ -3371,6 +3371,147 @@
             "type": "color"
           }
         }
+      },
+      "topbar": {
+        "color": {
+          "base": {
+            "value": "{color.foreground.primary}",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "{theme.topbar.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".75",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background": {
+            "value": "{theme.topbar.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": ".98",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
+        "search": {
+          "color": {
+            "foreground": {
+              "value": "{theme.topbar.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".5",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "foreground-hover": {
+              "value": "{theme.topbar.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".75",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "background": {
+              "value": "{theme.topbar.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".05",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "background-hover": {
+              "value": "{theme.topbar.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "lighten",
+                    "value": "1",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "border": {
+              "value": "{theme.topbar.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".1",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "button": {
+          "color": {
+            "foreground": {
+              "value": "{theme.topbar.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".65",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "foreground-hover": {
+              "value": "{theme.topbar.color.base}",
+              "type": "color"
+            },
+            "background": {
+              "value": "transparent",
+              "type": "color"
+            },
+            "background-hover": {
+              "value": "{theme.topbar.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".05",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -4669,7 +4810,6 @@
         "color.brand.purple": "S:3bc3a8f02525a93e4db57f75ced98300523daf41,",
         "color.brand.magenta": "S:67e1d4774b94b1ad4efe5661d86e536f4f7bef3d,",
         "color.border.brand": "S:16c62165aac581ff664b5da97921cef463fa02bf,",
-        "theme.sidebar.color.foreground": "S:17dda68b1797b2f3927741e429b3d7834fb81b89,",
         "theme.sidebar.color.background": "S:a0c22c623f3232dbe5ec1c931856a44562f5439e,",
         "theme.sidebar.icon.color.foreground": "S:46f09d48da5c365d80f1979377de0ed588f5acaa,",
         "theme.sidebar.status.color.foreground": "S:30db5fff403ff1c3c30d57ec958c60efaf3ea063,",
@@ -4804,7 +4944,8 @@
         "avatar.color.background.1800": "S:2c21517640de996b74c6eea0a157631ae6267d69,",
         "avatar.color.background.000": "S:6a48521c914f058de3e6dcdd03149c9a24e9ee0a,",
         "shadow.focus": "S:fd63f8b0336107dd7b8f79c886df3096542f372b,",
-        "shadow.focus-inset": "S:29366c536f593d4cb9a786bd443db72cde44cc73,"
+        "shadow.focus-inset": "S:29366c536f593d4cb9a786bd443db72cde44cc73,",
+        "theme.sidebar.color.foreground": "S:17dda68b1797b2f3927741e429b3d7834fb81b89,"
       }
     },
     {
@@ -4987,7 +5128,6 @@
         "color.brand.purple": "S:03b4843c34b27750c04e4a6c238ae460aaf0d49a,",
         "color.brand.magenta": "S:26aa56ce7d7f269b98eb1f4f98f0d26e247f8324,",
         "color.border.brand": "S:ce9585ab90b222c89d40341c9bd9bedb315b8052,",
-        "theme.sidebar.color.foreground": "S:3ddcd27604d02a7ca68d6a02321c023743f7eaeb,",
         "theme.sidebar.color.background": "S:8274f9f84ea6a8afa021f2a234b5b71a631ec6d8,",
         "theme.sidebar.icon.color.foreground": "S:44c289b4150cae0b216cba4dd0e287d851c27549,",
         "theme.sidebar.status.color.foreground": "S:3666a8f3bb0d9035c33f0f0311ca9506afb06b92,",
@@ -5126,7 +5266,8 @@
         "avatar.color.background.1800": "S:2b564ccec734506e6322e41369b9dedd80784553,",
         "avatar.color.background.000": "S:660eebae026ad61ac42e98e1bc9661f4cfcffcb1,",
         "shadow.focus": "S:3c9953cf526f74c6d4b248fb350d2270320cff06,",
-        "shadow.focus-inset": "S:523c44305d23cf69c7273669569fd7f982366f0c,"
+        "shadow.focus-inset": "S:523c44305d23cf69c7273669569fd7f982366f0c,",
+        "theme.sidebar.color.foreground": "S:3ddcd27604d02a7ca68d6a02321c023743f7eaeb,"
       }
     }
   ],
