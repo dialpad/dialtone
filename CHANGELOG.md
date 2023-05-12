@@ -1,3 +1,24 @@
+# [2.83.0](https://github.com/dialpad/dialtone-vue/compare/v2.82.1...v2.83.0) (2023-05-12)
+
+
+### Bug Fixes
+
+* correct style export in package.json ([f00cb19](https://github.com/dialpad/dialtone-vue/commit/f00cb198518e9c7f72d0af226d15c8737ada7a71))
+* **Feed Items:** emoji row emits naming fix ([#976](https://github.com/dialpad/dialtone-vue/issues/976)) ([a4c7b86](https://github.com/dialpad/dialtone-vue/commit/a4c7b8645543230c669e2cc3e7993fe8f874e67d))
+* update dialtone-icons ([983b178](https://github.com/dialpad/dialtone-vue/commit/983b1786d62f09f11b49e03b6a585c6648a43764))
+* visual test stories showing up in prod ([#968](https://github.com/dialpad/dialtone-vue/issues/968)) ([7135cc2](https://github.com/dialpad/dialtone-vue/commit/7135cc21cd5e9755f2a301d04d655acd20c70f9f))
+
+
+### Documentation
+
+* **Rich Text Editor:** link extension tech spec ([#953](https://github.com/dialpad/dialtone-vue/issues/953)) ([d48af5c](https://github.com/dialpad/dialtone-vue/commit/d48af5c73a4bebcc4aeed840c23f67905422c470))
+
+
+### Features
+
+* **Feed Items:** create feed item emoji row ([#972](https://github.com/dialpad/dialtone-vue/issues/972)) ([265b504](https://github.com/dialpad/dialtone-vue/commit/265b504aff507cdbfd24edf4f218ce8a5b4caa51))
+* **Size And Space:** apply between stops and negative variables ([#964](https://github.com/dialpad/dialtone-vue/issues/964)) ([d2aab13](https://github.com/dialpad/dialtone-vue/commit/d2aab1323a8301da5780a57089a0b8d7c1152c52))
+
 ## [2.82.1](https://github.com/dialpad/dialtone-vue/compare/v2.82.0...v2.82.1) (2023-05-05)
 
 
