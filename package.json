@@ -15,18 +15,16 @@
     "dist/icons.json"
   ],
   "type": "module",
-  "main": "./dist/dialtone-icons.cjs",
+  "main": "./dist/dialtone-icons.umd.cjs",
   "module": "./dist/dialtone-icons.js",
   "exports": {
     ".": {
       "import": "./dist/dialtone-icons.js",
-      "require": "./dist/dialtone-icons.cjs"
+      "require": "./dist/dialtone-icons.umd.cjs"
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vitejs/plugin-vue2": "^2.2.0",
+    "@vitejs/plugin-vue": "^4.2.2",
     "del": "^6.1.1",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
