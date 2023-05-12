@@ -8,7 +8,6 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   build: {
-    root: '.',
     lib: {
       entry: resolve(__dirname, './src/main.js'),
       name: 'dialtone-icons',
