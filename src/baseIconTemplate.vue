@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { getUniqueString } from "@/utils";
+import { getUniqueString } from "@/utils.js";
 
 export default {
   created () {
