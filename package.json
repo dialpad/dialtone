@@ -11,7 +11,6 @@
   },
   "files": [
     "dist/*.js",
-    "dist/*.cjs",
     "dist/svg",
     "dist/icons.json"
   ],
@@ -22,7 +21,8 @@
     ".": {
       "import": "./dist/dialtone-icons.js",
       "require": "./dist/dialtone-icons.umd.cjs"
-    }
+    },
+    "./dist/icons.json": "./dist/icons.json"
   },
   "devDependencies": {
     "@vitejs/plugin-vue2": "^2.2.0",
