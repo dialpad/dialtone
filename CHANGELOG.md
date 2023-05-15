@@ -1,3 +1,13 @@
+## [3.67.2](https://github.com/dialpad/dialtone-vue/compare/v3.67.1...v3.67.2) (2023-05-15)
+
+
+### Bug Fixes
+
+* **Leftbar Row:** css typo ([#978](https://github.com/dialpad/dialtone-vue/issues/978)) ([cce5175](https://github.com/dialpad/dialtone-vue/commit/cce5175a15a6ec1d550dca9c566c9274e58547a6))
+* **Leftbar:** muted opacity to 60% ([774e6e1](https://github.com/dialpad/dialtone-vue/commit/774e6e1aeac4ca82502b806a9bc1fc396af8d13e))
+* **Popover:** anchorEl null protection ([597e9b1](https://github.com/dialpad/dialtone-vue/commit/597e9b1e2a20942a06973987ae5cf17eb365e821))
+* update dialtone-icons ([d1743eb](https://github.com/dialpad/dialtone-vue/commit/d1743eb931b4c3bd0c7a4a3ebe46ae6e2b374d25))
+
 ## [3.67.1](https://github.com/dialpad/dialtone-vue/compare/v3.67.0...v3.67.1) (2023-05-12)
 
 
