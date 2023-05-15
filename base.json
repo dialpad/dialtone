@@ -3369,7 +3369,33 @@
                 "studio.tokens": {
                   "modify": {
                     "type": "alpha",
+                    "value": "0",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "border-hover": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
                     "value": ".1",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "border-active": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".2",
                     "space": "hsl"
                   }
                 }
@@ -3417,6 +3443,19 @@
                   "modify": {
                     "type": "alpha",
                     "value": ".05",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "background-active": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".1",
                     "space": "hsl"
                   }
                 }
@@ -5022,7 +5061,10 @@
         "theme.topbar.button.color.foreground": "S:c33210b5fcdea02b3f2b07bbcda580ef1ba4b911,",
         "theme.topbar.button.color.foreground-hover": "S:d812ce3e7e8f78732372ef1a0230502612706686,",
         "theme.topbar.button.color.background": "S:822e9c44a8e5ad148f428cc6918d34a73679cb42,",
-        "theme.topbar.button.color.background-hover": "S:bfbb11cecc334664f31b0529e73f7267d4c1fd2e,"
+        "theme.topbar.button.color.background-hover": "S:bfbb11cecc334664f31b0529e73f7267d4c1fd2e,",
+        "theme.topbar.field.color.border-hover": "S:bd975516b40bf134d494ed6f2d5cce0c8cf74ceb,",
+        "theme.topbar.field.color.border-active": "S:1b1e8365b6ef26a236112572a448ff991132b9a7,",
+        "theme.topbar.button.color.background-active": "S:0080b6430ebd8ca0445729279c46df06dcf6c93f,"
       }
     },
     {
