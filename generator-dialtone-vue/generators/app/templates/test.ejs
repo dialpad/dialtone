@@ -2,16 +2,15 @@ import { shallowMount } from '@vue/test-utils';
 import <%= componentName %> from './<%= fileName %>.vue';
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 
 describe('<%= componentName %> Tests', function () {
-  let testContext;
   // Wrappers
   let wrapper;
   let childContainer;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -23,11 +22,10 @@ describe('<%= componentName %> Tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(<%= componentName %>, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
-
     });
     _setChildWrappers();
   };
@@ -38,15 +36,12 @@ describe('<%= componentName %> Tests', function () {
   };
 
   // Setup
-  beforAll(function () {
-    testContext = {};
-
-  });
+  beforeAll(function () {});
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};

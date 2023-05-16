@@ -1,5 +1,20 @@
 <template>
-  <!-- template -->
+  <div>
+    <div>
+      {{ genericProp }}
+    </div>
+    <div>
+      <!-- @slot description of the default slot -->
+      <slot>
+        The default slot
+      </slot>
+    </div>
+    <div>
+      <!-- @slot description of the named slot -->
+      <slot name="namedSlot" />
+    </div>
+    <button @click="$emit('generic-event')">Click to fire generic-event</button>
+  </div>
 </template>
 
 <script>
@@ -18,7 +33,25 @@ export default {
     more info: https://vuejs.org/v2/api/#inheritAttrs */
   // inheritAttrs: false,
 
-  props: {},
+  props: {
+    /**
+     * description of this generic prop
+     */
+    genericProp: {
+      type: String,
+      default: 'a generic prop'
+    }
+  },
+
+  emits: [
+    /**
+     * Event fired when something happens
+     *
+     * @event generic-event
+     * @type {Boolean}
+     */
+    'generic-event'
+  ],
 
   data () {
     return {};

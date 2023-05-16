@@ -50,23 +50,36 @@ module.exports = class extends Generator {
           default: `${prefix}Component`,
         },
       ]);
+
+      this.componentName = this.inputValues.componentName;
+
+      this.inputValues = await this.prompt([
+        {
+          type: 'input',
+          name: 'readableComponentName',
+          message: `What is the human readable name of your component? (ex: DtSelectMenu would be "Select Menu"):`,
+        },
+      ]);
+
+      this.readableComponentName = this.inputValues.readableComponentName;
+
       valid = true;
       // validate starts with prefix
-      if (!_.startsWith(this.inputValues.componentName, prefix)) {
+      if (!_.startsWith(this.componentName, prefix)) {
         valid = false;
         this.log(`Error: name must start with ${prefix}`);
       }
       // validate pascal case
-      if (!this.inputValues.componentName.match(/^([A-Z][a-z]+)+$/)) {
+      if (!this.componentName.match(/^([A-Z][a-z]+)+$/)) {
         valid = false;
         this.log('Error: name must be in PascalCase');
       }
     } while (!valid);
 
     // convert to snake case and remove the 'dt' as we don't use it in the filename
-    this.fileName = _.snakeCase(this.inputValues.componentName.slice(this.isRecipe ? 8 : 2));
-    this.componentNameKebab = _.kebabCase(this.inputValues.componentName);
-    this.componentName = this.inputValues.componentName;
+    this.fileName = _.snakeCase(this.componentName.slice(this.isRecipe ? 8 : 2));
+    this.componentNameKebab = _.kebabCase(this.componentName);
+
     this.destinationFolder = this.isRecipe
       ? `./recipes/${this.subfolder}${this.subfolder ? '/' : ''}${this.fileName}`
       : `./components/${this.fileName}`;
@@ -75,6 +88,7 @@ module.exports = class extends Generator {
   writing () {
     const params = {
       componentName: this.componentName,
+      readableComponentName: this.readableComponentName,
       componentNameKebab: this.componentNameKebab,
       fileName: this.fileName,
       isRecipe: this.isRecipe,
@@ -94,7 +108,7 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath('constants.ejs'),
-      `${this.destinationFolder}/${this.fileName}_constants`,
+      `${this.destinationFolder}/${this.fileName}_constants.js`,
       params,
     );
 

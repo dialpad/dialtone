@@ -1,5 +1,7 @@
 import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
-import <%= componentName %> from './<%= fileName %>';
+import * as <%= componentName %>Stories from './<%= fileName %>.stories.js';
+
+<Meta of={<%= componentName %>Stories}/>
 
 # <%= componentName %>
 
@@ -11,15 +13,11 @@ import <%= componentName %> from './<%= fileName %>';
 
 Some description of how to use the base component, potential gotchas and limitations.
 
-<Canvas>
-  <Story of={<%= componentNameKebab %>Stories.Default} />
-</Canvas>
+<Canvas of={<%= componentName %>Stories.Default} />
 
 ## Variants
 
-<Canvas>
-  <Story of={<%= componentNameKebab %>Stories.Variants} />
-</Canvas>
+<Canvas of={<%= componentName %>Stories.Variants} />
 
 ## Slots, Props & Events
 
@@ -35,7 +33,7 @@ import { <%= componentName %> } from '@dialpad/dialtone-vue';
 
 ### With Some Variant
 
-```vue
+```jsx
 <<%= componentNameKebab %>
   some="variant"
 />
@@ -43,7 +41,7 @@ import { <%= componentName %> } from '@dialpad/dialtone-vue';
 
 ### With Some Other Variant
 
-```vue
+```jsx
 <<%= componentNameKebab %>
   some-other="variant"
 />
