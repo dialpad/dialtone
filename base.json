@@ -4417,6 +4417,42 @@
           }
         }
       }
+    },
+    "theme": {
+      "topbar": {
+        "color": {
+          "background": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".89",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
+        "field": {
+          "color": {
+            "background-hover": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": "1",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components/avatar": {
@@ -5374,7 +5410,6 @@
         "shadow.focus": "S:3c9953cf526f74c6d4b248fb350d2270320cff06,",
         "shadow.focus-inset": "S:523c44305d23cf69c7273669569fd7f982366f0c,",
         "theme.sidebar.color.foreground": "S:3ddcd27604d02a7ca68d6a02321c023743f7eaeb,",
-        "theme.color.base": "S:7af3c5c800e38fa4223a74926cec6bdb8a5c84a3,",
         "theme.topbar.color.foreground": "S:f95264b6d07a9a81043dc13b527e1462bc14661f,",
         "theme.topbar.color.background": "S:f55cf2418893c9d9a7d5679db91885e36c6b6c1d,",
         "theme.topbar.field.color.foreground": "S:737034eb611f9ef669d6591db8c2e22b217cc6c6,",
@@ -5389,7 +5424,8 @@
         "theme.topbar.button.color.background": "S:4505230aaaeab942abc11ef3ba7bb97060527f1a,",
         "theme.topbar.button.color.background-hover": "S:65f55880bf8eb3c7c1dadec77d3e282c18960e6a,",
         "theme.topbar.button.color.background-active": "S:f01aaf01433a55fd20508bae1e5bf4759ca42910,",
-        "theme.sidebar.selected-row.color.background": "S:aee8f59aacb83658caf581a8f0bd3e7a40adf0a2,"
+        "theme.sidebar.selected-row.color.background": "S:aee8f59aacb83658caf581a8f0bd3e7a40adf0a2,",
+        "theme.color.base": "S:7af3c5c800e38fa4223a74926cec6bdb8a5c84a3,"
       }
     }
   ],
