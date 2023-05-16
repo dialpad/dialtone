@@ -3275,7 +3275,7 @@
     "theme": {
       "color": {
         "base": {
-          "value": "{color.foreground.primary}",
+          "value": "{color.black.900}",
           "type": "color"
         }
       },
