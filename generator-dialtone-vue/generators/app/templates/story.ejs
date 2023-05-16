@@ -5,7 +5,8 @@
     as the storybook control defined in the corresponding `.story.js` file.
   -->
   <<%= componentNameKebab %>
-    :some="some"
+    :generic-prop="genericProp"
+    @generic-event="onGenericEvent"
   >
     <!--
       We can also bind any slot data that the user has entered into the storybook controls. In this example we
@@ -20,16 +21,16 @@
       <span v-html="defaultSlot" />
     </template>
     <template
-      #some
-      v-if="someSlot"
+      v-if="namedSlot"
+      #namedSlot
     >
-      <span v-html="someSlot" />
+      <span v-html="namedSlot" />
     </template>
   </<%= componentNameKebab %>>
 </template>
 
 <script>
-import <%= componentName %> from './<%= fileName %>';
+import <%= componentName %> from './<%= fileName %>.vue';
 
 export default {
   name: '<%= componentName %><%= storyName %>',
