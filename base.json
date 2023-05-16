@@ -3581,6 +3581,23 @@
               }
             }
           }
+        },
+        "section": {
+          "color": {
+            "foreground": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "lighten",
+                    "value": ".33",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "presence": {
@@ -4534,6 +4551,23 @@
           }
         },
         "status": {
+          "color": {
+            "foreground": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": ".33",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "section": {
           "color": {
             "foreground": {
               "value": "{theme.color.base}",
@@ -5523,7 +5557,8 @@
         "theme.topbar.button.color.background-hover": "S:bfbb11cecc334664f31b0529e73f7267d4c1fd2e,",
         "theme.topbar.field.color.border-hover": "S:bd975516b40bf134d494ed6f2d5cce0c8cf74ceb,",
         "theme.topbar.field.color.border-active": "S:1b1e8365b6ef26a236112572a448ff991132b9a7,",
-        "theme.topbar.button.color.background-active": "S:0080b6430ebd8ca0445729279c46df06dcf6c93f,"
+        "theme.topbar.button.color.background-active": "S:0080b6430ebd8ca0445729279c46df06dcf6c93f,",
+        "theme.sidebar.section.color.foreground": "S:73e60d3086a1c3d9a333074c3e2daeff87fc4d2d,"
       }
     }
   ],
