@@ -1,3 +1,10 @@
+## [2.83.5](https://github.com/dialpad/dialtone-vue/compare/v2.83.4...v2.83.5) (2023-05-17)
+
+
+### Bug Fixes
+
+* component documentation link class ([#985](https://github.com/dialpad/dialtone-vue/issues/985)) ([a565285](https://github.com/dialpad/dialtone-vue/commit/a565285cac178cb30339e81853d5e3b445444bdc))
+
 ## [2.83.4](https://github.com/dialpad/dialtone-vue/compare/v2.83.3...v2.83.4) (2023-05-17)
 
 
