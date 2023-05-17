@@ -248,7 +248,13 @@ export default {
     /**
      * If set to false the dialog will display over top of the anchor when there is insufficient space.
      * If set to true it will never move from its position relative to the anchor and will clip instead.
-     * See <a href="https://popper.js.org/docs/v2/modifiers/prevent-overflow/#tether" target="_blank">Popper.js docs</a>
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/modifiers/prevent-overflow/#tether"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
      * @values true, false
      */
     tether: {

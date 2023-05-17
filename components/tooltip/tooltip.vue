@@ -83,10 +83,16 @@ export default {
 
     /**
      * If the popover does not fit in the direction described by "placement",
-     * it will attempt to change it's direction to the "fallbackPlacements"
+     * it will attempt to change its direction to the "fallbackPlacements"
      * if defined, otherwise it will automatically position to a new location
-     * as it sees best fit.
-     * See <a href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements" target="_blank">Popper.js docs</a>
+     * as it sees best fit. See
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
      * */
     fallbackPlacements: {
       type: Array,
@@ -105,7 +111,13 @@ export default {
     /**
      *  Displaces the tooltip from its reference element
      *  by the specified number of pixels. See
-     *  <a href="https://atomiks.github.io/tippyjs/v6/all-props/#offset" target="_blank">Tippy.js docs</a>
+     *  <a
+     *    class="d-link"
+     *    href="https://atomiks.github.io/tippyjs/v6/all-props/#offset"
+     *    target="_blank"
+     *  >
+     *    Tippy.js docs
+     *  </a>
      */
     offset: {
       type: Array,
@@ -113,8 +125,14 @@ export default {
     },
 
     /**
-     * The direction the popover displays relative to the anchor.
-     * See <a href="https://atomiks.github.io/tippyjs/v6/all-props/#placement" target="_blank">Tippy.js docs</a>
+     * The direction the popover displays relative to the anchor. See
+     * <a
+     *   class="d-link"
+     *   href="https://atomiks.github.io/tippyjs/v6/all-props/#placement"
+     *   target="_blank"
+     * >
+     *   Tippy.js docs
+     * </a>
      * @values top, top-start, top-end,
      * right, right-start, right-end,
      * left, left-start, left-end,
@@ -134,8 +152,14 @@ export default {
      * if the reference element's position is animating, or to automatically update the popover
      * position in those cases the DOM layout changes the reference element's position.
      * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
-     * checks the "popper" rect for changes.
-     * See <a href="https://atomiks.github.io/tippyjs/v6/all-props/#sticky" target="_blank">Tippy.js docs</a>
+     * checks the "popper" rect for changes. See
+     * <a
+     *   class="d-link"
+     *   href="https://atomiks.github.io/tippyjs/v6/all-props/#sticky"
+     *   target="_blank"
+     * >
+     *   Tippy.js docs
+     * </a>
      * @values true, false, reference, popper
      */
     sticky: {
