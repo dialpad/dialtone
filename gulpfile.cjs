@@ -141,6 +141,9 @@ const buildIcons = function (done) {
     .pipe(replace(' fill="#000"', ' fill="currentColor"'))
     .pipe(replace(' fill="#000000"', ' fill="currentColor"'))
     .pipe(replace(' fill="black"', ' fill="currentColor"'))
+    .pipe(replace(' fill="#0D0C0F"', ' fill="currentColor"'))
+    .pipe(replace(' fill="#222"', ' fill="currentColor"'))
+    .pipe(replace(' fill="#222222"', ' fill="currentColor"'))
     .pipe(replace(/<svg.*(width="[0-9]+|height="[0-9]+)"/g, (match) => {
       return match
           .replace(/width="[0-9]+"/, '')
