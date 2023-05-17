@@ -194,7 +194,7 @@ export default {
 
     /**
      * ARIA role for the content of the popover. Defaults to "dialog".
-     * <a href="https://www.w3.org/TR/wai-aria/#aria-haspopup" target="_blank">aria-haspopup</a>
+     * <a class="d-link" href="https://www.w3.org/TR/wai-aria/#aria-haspopup" target="_blank">aria-haspopup</a>
      */
     role: {
       type: String,
@@ -292,8 +292,14 @@ export default {
 
     /**
      *  Displaces the content box from its anchor element
-     *  by the specified number of pixels. See
-     *  <a href="https://atomiks.github.io/tippyjs/v6/all-props/#offset" target="_blank">Tippy.js docs</a>
+     *  by the specified number of pixels.
+     *  <a
+     *    class="d-link"
+     *    href="https://atomiks.github.io/tippyjs/v6/all-props/#offset"
+     *    target="_blank"
+     *  >
+     *    Tippy.js docs
+     *  </a>
      */
     offset: {
       type: Array,
@@ -302,7 +308,7 @@ export default {
 
     /**
      * Determines if the popover hides upon clicking the
-     * anchor or outside of the content box.
+     * anchor or outside the content box.
      * @values true, false
      */
     hideOnClick: {
@@ -322,8 +328,14 @@ export default {
 
     /**
      * If the popover does not fit in the direction described by "placement",
-     * it will attempt to change it's direction to the "fallbackPlacements".
-     * See <a href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements" target="_blank">Popper.js docs</a>
+     * it will attempt to change its direction to the "fallbackPlacements".
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
      * */
     fallbackPlacements: {
       type: Array,
@@ -334,7 +346,13 @@ export default {
 
     /**
      * The direction the popover displays relative to the anchor.
-     * See <a href="https://atomiks.github.io/tippyjs/v6/all-props/#placement" target="_blank">Tippy.js docs</a>
+     * <a
+     *   class="d-link"
+     *   href="https://atomiks.github.io/tippyjs/v6/all-props/#placement"
+     *   target="_blank"
+     * >
+     *   Tippy.js docs
+     * </a>
      * @values top, top-start, top-end,
      * right, right-start, right-end,
      * left, left-start, left-end,
@@ -349,7 +367,13 @@ export default {
     /**
      * If set to false the dialog will display over top of the anchor when there is insufficient space.
      * If set to true it will never move from its position relative to the anchor and will clip instead.
-     * See <a href="https://popper.js.org/docs/v2/modifiers/prevent-overflow/#tether" target="_blank">Popper.js docs</a>
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/modifiers/prevent-overflow/#tether"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
      * @values true, false
      */
     tether: {
@@ -363,7 +387,13 @@ export default {
      * position in those cases the DOM layout changes the reference element's position.
      * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
      * checks the "popper" rect for changes.
-     * See <a href="https://atomiks.github.io/tippyjs/v6/all-props/#sticky" target="_blank">Tippy.js docs</a>
+     * <a
+     *   class="d-link"
+     *   href="https://atomiks.github.io/tippyjs/v6/all-props/#sticky"
+     *   target="_blank"
+     * >
+     *   Tippy.js docs
+     * </a>
      * @values true, false, reference, popper
      */
     sticky: {
