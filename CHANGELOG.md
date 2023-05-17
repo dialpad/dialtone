@@ -1,3 +1,10 @@
+## [3.67.3](https://github.com/dialpad/dialtone-vue/compare/v3.67.2...v3.67.3) (2023-05-17)
+
+
+### Bug Fixes
+
+* update dialtone-icons ([ed96c11](https://github.com/dialpad/dialtone-vue/commit/ed96c11fea713cf100e9e71f1a325820ae9d3902))
+
 ## [3.67.2](https://github.com/dialpad/dialtone-vue/compare/v3.67.1...v3.67.2) (2023-05-15)
 
 
