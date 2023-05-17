@@ -98,7 +98,7 @@ export default {
     /**
      * Whether the button should be styled as a link or not.
      * @values true, false
-     * @see https://dialpad.design/components/link.html
+     * @see DtLink
      */
     link: {
       type: Boolean,
@@ -108,7 +108,7 @@ export default {
     /**
      * The color of the link and button if the button is styled as a link.
      * @values default, warning, danger, success, muted, inverted
-     * @see https://dialpad.design/components/link.html
+     * @see DtLink
      */
     linkKind: {
       type: String,
@@ -118,7 +118,11 @@ export default {
 
     /**
      * HTML button disabled attribute
-     * <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
+     * <a
+     *   class="d-link"
+     *   href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled"
+     *   target="_blank"
+     * >
      *   (Reference)
      * </a>
      * @values true, false
@@ -130,7 +134,11 @@ export default {
 
     /**
      * HTML button type attribute
-     * <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type" target="_blank">
+     * <a
+     *   class="d-link"
+     *   href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
+     *   target="_blank"
+     * >
      *   (Reference)
      * </a>
      * @values button, submit, reset
@@ -143,7 +151,7 @@ export default {
 
     /**
      * Button width, accepts
-     * <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width" target="_blank">
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/width" target="_blank">
      *   CSS width attribute
      * </a>
      * values

@@ -173,7 +173,7 @@ export default {
 
     /**
      * Background image size, follows the background-size CSS property values
-     * <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size" target="_blank">
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size" target="_blank">
      *   CSS background-sizes
      * </a>
      */

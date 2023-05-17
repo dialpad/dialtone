@@ -47,8 +47,8 @@ export default {
   props: {
     /**
      * Supports shortcode ex: :smile: or unicode ex: 😄. Will display the resulting emoji.
-     * See <a href="https://emojipedia.org/joypixels/" target="_blank">JoyPixels</a>
-     *  for all supported shortcode/unicode or the docs for setting up custom emojis.
+     * <a class="d-link" href="https://emojipedia.org/joypixels/" target="_blank">JoyPixels</a>
+     * for all supported shortcode/unicode or the docs for setting up custom emojis.
      */
     code: {
       type: String,
@@ -57,7 +57,7 @@ export default {
 
     /**
      * The size of the emoji. Can be any of the icon size utility classes from
-     * <a href="https://dialpad.design/components/icon.html" target="_blank"> Dialpad Icon Size</a>
+     * <a class="d-link" href="https://dialpad.design/components/icon.html" target="_blank"> Dialpad Icon Size</a>
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {
