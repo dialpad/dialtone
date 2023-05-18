@@ -3,13 +3,14 @@
     :id="$attrs.id"
     :size="$attrs.size"
     :presence="$attrs.presence"
+    :color="color"
     :seed="$attrs.seed"
-    :gradient="$attrs.gradient"
     :overlay-icon="$attrs.overlayIcon"
     :overlay-text="$attrs.overlayText"
     :overlay-class="$attrs.overlayClass"
   >
     <dt-icon
+      v-show="iconSize"
       :name="defaultSlot"
       :size="iconSize"
     />
@@ -26,7 +27,7 @@ export default {
   components: { DtAvatar, DtIcon },
   computed: {
     iconSize () {
-      return AVATAR_ICON_SIZES[this.$attrs.size];
+      return AVATAR_ICON_SIZES[this.$attrs.size ?? 'md'];
     },
   },
 };

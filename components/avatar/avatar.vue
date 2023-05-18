@@ -2,7 +2,6 @@
   <div
     :id="id"
     :class="avatarClasses"
-    :style="initialKindStyle"
     data-qa="dt-avatar"
   >
     <div
@@ -59,16 +58,12 @@ import { warn } from 'vue';
 import { getUniqueString, getRandomElement } from '@/common/utils';
 import { DtPresence } from '../presence';
 import { DtIcon } from '@/components/icon';
-import seedrandom from 'seedrandom';
 import {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
   AVATAR_PRESENCE_STATES,
-  AVATAR_ANGLES,
-  GRADIENT_COLORS,
-  MAX_GRADIENT_COLORS,
-  MAX_GRADIENT_COLORS_100,
+  AVATAR_COLORS,
   AVATAR_GROUP_VALIDATOR,
 } from './avatar_constants';
 
@@ -96,6 +91,15 @@ export default {
      * user ID as the string it will return the same randomly generated colors every time for that user.
      */
     seed: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * Set the avatar background to a specific color. If undefined will randomize the color which can be deterministic
+     * if the seed prop is set.
+     */
+    color: {
       type: String,
       default: undefined,
     },
@@ -157,14 +161,6 @@ export default {
     },
 
     /**
-     * Determines whether to show a gradient background for the avatar.
-     */
-    gradient: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
      * Determines whether to show a group avatar.
      * Limit to 2 digits max, more than 99 will be rendered as “99+”.
      * if the number is 1 or less it would just show the regular avatar as if group had not been set.
@@ -211,6 +207,7 @@ export default {
       slottedInitials: '',
       formattedInitials: '',
       initializing: false,
+      internalColor: '',
     };
   },
 
@@ -221,8 +218,8 @@ export default {
         AVATAR_SIZE_MODIFIERS[this.validatedSize],
         this.avatarClass,
         {
-          'd-avatar--no-gradient': !this.gradient,
           'd-avatar--group': this.showGroup,
+          [`d-avatar--color-${this.internalColor}`]: this.kind !== 'icon' && this.internalColor,
         },
       ];
     },
@@ -248,16 +245,6 @@ export default {
       return AVATAR_GROUP_VALIDATOR(this.group);
     },
 
-    initialKindStyle () {
-      const randomGradientColorStops = this.randomizeGradientColorStops();
-      return {
-        '--avatar-gradient-angle': `${this.randomizeGradientAngle()}deg`,
-        '--avatar-gradient-stop-1': `var(--${randomGradientColorStops[0]})`,
-        '--avatar-gradient-stop-2': `var(--${randomGradientColorStops[1]})`,
-        '--avatar-gradient-stop-3': `var(--${randomGradientColorStops[2]})`,
-      };
-    },
-
     formattedGroup () {
       return this.group > 99 ? '99+' : this.group;
     },
@@ -265,6 +252,24 @@ export default {
     validatedSize () {
       // TODO: Group only supports xs size for now. Remove this when we support other sizes.
       return this.group ? 'xs' : this.size;
+    },
+  },
+
+  watch: {
+    color: {
+      handler: function () {
+        this.getColor();
+      },
+
+      immediate: true,
+    },
+
+    seed: {
+      handler: function () {
+        this.getColor();
+      },
+
+      immediate: true,
     },
   },
 
@@ -340,28 +345,9 @@ export default {
       return element?.tagName?.toUpperCase() === 'IMG';
     },
 
-    randomizeGradientAngle () {
-      return getRandomElement(AVATAR_ANGLES, this.seed);
-    },
-
-    randomizeGradientColorStops () {
-      const colors = new Set();
-
-      let count = 0;
-      // get 3 unique colors, 2 from colorsWith100 and one from colorsWith200
-      while (colors.size < MAX_GRADIENT_COLORS) {
-        // add count to the seed since we are looking for 3 unique colors. If the seed makes it always
-        // return the same color we'll get an infinite loop.
-        const seedForColor = this.seed === undefined ? undefined : this.seed + count.toString();
-        if (colors.size === MAX_GRADIENT_COLORS_100) {
-          colors.add(getRandomElement(GRADIENT_COLORS.with200, seedForColor));
-        } else {
-          colors.add(getRandomElement(GRADIENT_COLORS.with100, seedForColor));
-        }
-        count++;
-      }
-      const rng = seedrandom(this.seed);
-      return Array.from(colors).sort(() => 0.5 - rng()); // shuffle colors
+    async getColor () {
+      const color = this.color ?? await getRandomElement(AVATAR_COLORS, this.seed);
+      this.internalColor = color;
     },
 
     validateImageAttrsPresence () {

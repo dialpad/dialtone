@@ -9,6 +9,7 @@
     :seed="$attrs.seed"
     :gradient="$attrs.gradient"
     :group="$attrs.group"
+    :color="$attrs.color"
     :overlay-icon="$attrs.overlayIcon"
     :overlay-text="$attrs.overlayText"
     :overlay-class="$attrs.overlayClass"
