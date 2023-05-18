@@ -1,3 +1,16 @@
+# [3.68.0](https://github.com/dialpad/dialtone-vue/compare/v3.67.4...v3.68.0) (2023-05-18)
+
+
+### Bug Fixes
+
+* set node engine minimum ([#989](https://github.com/dialpad/dialtone-vue/issues/989)) ([31daed2](https://github.com/dialpad/dialtone-vue/commit/31daed2de3f34d55dbf58195d626125e0d575940))
+
+
+### Features
+
+* **Avatar:** update to flat colors ([#990](https://github.com/dialpad/dialtone-vue/issues/990)) ([12774ea](https://github.com/dialpad/dialtone-vue/commit/12774ea2f8dadc8806aac4dd7c4d762746f800f9))
+* **Confact Info:** add `showAvatar` and `avatarIcon` props (Vue3) ([#983](https://github.com/dialpad/dialtone-vue/issues/983)) ([86fed3b](https://github.com/dialpad/dialtone-vue/commit/86fed3bb7a5ba032c43e1c0ae93ab43175ba01b9))
+
 ## [3.67.4](https://github.com/dialpad/dialtone-vue/compare/v3.67.3...v3.67.4) (2023-05-17)
 
 
