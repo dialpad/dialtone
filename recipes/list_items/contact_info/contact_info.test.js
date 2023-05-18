@@ -108,11 +108,10 @@ describe('DtRecipeContactInfo Tests', () => {
       });
     });
 
-    describe('When both `avatarSrc` and `avatarInitials` are empty', () => {
+    describe('When `showAvatar` is false', () => {
       beforeEach(async () => {
         await wrapper.setProps({
-          avatarSrc: '',
-          avatarInitials: '',
+          showAvatar: false,
         });
         _setChildWrappers();
       });
