@@ -7,6 +7,7 @@
   >
     <template #left>
       <div
+        v-if="showAvatar"
         class="d-ps-relative"
         data-qa="contact-info-left"
       >
@@ -19,7 +20,6 @@
             :key="index"
           >
             <dt-avatar
-              v-if="avatar.src"
               :size="avatarSize"
               :seed="avatar.seed"
               :initials="avatar.initials"
@@ -29,48 +29,43 @@
               :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
             >
               <img
+                v-if="avatar.src"
                 data-qa="dt-contact-avatar"
                 :src="avatar.src"
                 :alt="avatar.initials"
               >
-            </dt-avatar>
-            <dt-avatar
-              v-else-if="avatar.initials"
-              :size="avatarSize"
-              :seed="avatar.seed"
-              :initials="avatar.initials"
-              :overlay-icon="avatar.icon"
-              :overlay-text="avatar.text"
-              overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
-              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
-            >
-              {{ avatar.initials }}
+              <div v-else-if="avatar.initials">
+                {{ avatar.initials }}
+              </div>
+              <dt-icon
+                v-else
+                :name="avatarIcon"
+              />
             </dt-avatar>
           </div>
         </div>
         <dt-avatar
-          v-else-if="avatarSrc"
+          v-else
           :size="avatarSize"
           :initials="avatarInitials"
           :seed="avatarSeed"
           :presence="presence"
         >
           <img
+            v-if="avatarSrc"
             data-qa="dt-contact-avatar"
             :src="avatarSrc"
             :initials="avatarInitials"
             :seed="avatarSeed"
             :alt="avatarInitials"
           >
-        </dt-avatar>
-        <dt-avatar
-          v-else-if="avatarInitials"
-          :size="avatarSize"
-          :initials="avatarInitials"
-          :seed="avatarSeed"
-          :presence="presence"
-        >
-          {{ avatarInitials }}
+          <div v-else-if="avatarInitials">
+            {{ avatarInitials }}
+          </div>
+          <dt-icon
+            v-else
+            :name="avatarIcon"
+          />
         </dt-avatar>
       </div>
     </template>
@@ -107,6 +102,7 @@
 <script>
 import DtListItem from '@/components/list_item/list_item.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
+import DtIcon from '@/components/icon/icon.vue';
 import utils from '@/common/utils';
 
 export default {
@@ -114,6 +110,7 @@ export default {
 
   components: {
     DtAvatar,
+    DtIcon,
     DtListItem,
   },
 
@@ -141,6 +138,14 @@ export default {
     },
 
     /**
+     * Display avatar if `showAvatar` property is true.
+     */
+    showAvatar: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Optional avatar image url.
      * if provided, it's also required to provide a value in the `avatarInitials` prop to use
      * in the alt attribute of the avatar.
@@ -164,6 +169,14 @@ export default {
     avatarInitials: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Avatar icon to display if `avatarSrc` and `avatarInitials` are empty.
+     */
+    avatarIcon: {
+      type: String,
+      default: 'user',
     },
 
     /**

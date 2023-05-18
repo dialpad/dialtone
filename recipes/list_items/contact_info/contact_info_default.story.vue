@@ -1,7 +1,9 @@
 <template>
   <dt-recipe-contact-info
+    :show-avatar="showAvatar"
     :avatar-src="avatarSrc"
     :avatar-initials="avatarInitials"
+    :avatar-icon="avatarIcon"
     :avatar-size="avatarSize"
     :avatar-color="avatarColor"
     :avatar-seed="avatarSeed"
