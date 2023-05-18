@@ -1,2 +1,10 @@
 export { default as DtAvatar } from './avatar.vue';
-export { AVATAR_SIZE_MODIFIERS, AVATAR_KIND_MODIFIERS } from './avatar_constants';
+export {
+  AVATAR_SIZE_MODIFIERS,
+  AVATAR_KIND_MODIFIERS,
+  AVATAR_PRESENCE_SIZE_MODIFIERS,
+  AVATAR_PRESENCE_STATES,
+  AVATAR_ICON_SIZES,
+  AVATAR_COLORS,
+  AVATAR_GROUP_VALIDATOR,
+} from './avatar_constants';

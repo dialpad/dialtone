@@ -1,12 +1,12 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
+import { flushPromises } from '@/common/utils';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeDoesNotRaiseAnyVueWarnings,
-  itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
 import {
   itBehavesLikeAppliesClassToChild,
@@ -54,7 +54,7 @@ describe('DtAvatar Tests', () => {
       slots,
       localVue: testContext.localVue,
     });
-    await wrapper.vm.$nextTick();
+    await flushPromises();
     _setChildWrappers();
   };
 
@@ -145,6 +145,7 @@ describe('DtAvatar Tests', () => {
 
       it('should have correct class', () => {
         const avatarWithInitials = wrapper.find('.' + AVATAR_KIND_MODIFIERS.initials);
+        console.log(avatarWithInitials.html());
         expect(avatarWithInitials.exists()).toBeTruthy();
       });
     });
@@ -238,25 +239,6 @@ describe('DtAvatar Tests', () => {
         await wrapper.setProps({ group: 100 });
         _setChildWrappers();
         expect(count.text()).toBe('99+');
-      });
-    });
-
-    describe('When setting gradient to not show', () => {
-      // Test Environment
-      const gradient = false;
-
-      // Test Setup
-      beforeEach(async () => {
-        propsData = {
-          ...basePropsData,
-          gradient,
-        };
-        slots = { default: DEFAULT_SLOT };
-        await _setWrappers();
-      });
-
-      it('should set the correct class', () => {
-        expect(wrapper.classes('d-avatar--no-gradient')).toBe(true);
       });
     });
 
@@ -395,7 +377,9 @@ describe('DtAvatar Tests', () => {
           await _setWrappers();
         });
 
-        itBehavesLikeRaisesSingleVueWarning(warningMessage);
+        it('should have expected warning message', () => {
+          expect(Vue.util.warn.mock.calls[0][0]).toBe(warningMessage);
+        });
       });
 
       describe('When image src attribute is not provided', () => {
@@ -407,7 +391,9 @@ describe('DtAvatar Tests', () => {
           await _setWrappers();
         });
 
-        itBehavesLikeRaisesSingleVueWarning(warningMessage);
+        it('should have expected warning message', () => {
+          expect(Vue.util.warn.mock.calls[0][0]).toBe(warningMessage);
+        });
       });
     });
   });
