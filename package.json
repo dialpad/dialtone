@@ -134,7 +134,7 @@
   ],
   "engineStrict": true,
   "engines": {
-    "node": ">= 18"
+    "node": ">= 12.20"
   },
   "type": "module",
   "main": "./dist/dialtone-vue.cjs",
