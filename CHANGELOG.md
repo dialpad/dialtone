@@ -1,3 +1,10 @@
+## [2.84.1](https://github.com/dialpad/dialtone-vue/compare/v2.84.0...v2.84.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* change to fnv algo ([ff2bc21](https://github.com/dialpad/dialtone-vue/commit/ff2bc21422e84c7322eb405485aec6fa310899e7))
+
 # [2.84.0](https://github.com/dialpad/dialtone-vue/compare/v2.83.5...v2.84.0) (2023-05-18)
 
 
