@@ -8,6 +8,7 @@ import {
   Comment,
   Text,
 } from 'vue';
+import fnv from 'fnv-plus';
 
 let UNIQUE_ID_COUNTER = 0;
 let TIMER;
@@ -34,10 +35,10 @@ export function getUniqueString (prefix = DEFAULT_PREFIX) {
  * based on that string.
  * @returns {*} - the random element
  */
-export async function getRandomElement (array, seed) {
+export function getRandomElement (array, seed) {
   if (seed) {
-    const hash = await hashSha256(seed);
-    return array[hash % array.length];
+    const hash = fnv.hash(seed);
+    return array[hash.value % array.length];
   } else {
     return array[getRandomInt(array.length)];
   }
@@ -177,22 +178,6 @@ export const extractVueListeners = (attrs) => {
     .filter(([key]) => key.startsWith('on'));
   return Object.fromEntries(listeners);
 };
-/**
- * Hash a string using SHA-256
- * @param {string} the string to hash
- * @returns {Number} the number that was hashed from the string
- */
-export function hashSha256 (string) {
-  const utf8 = new TextEncoder().encode(string);
-  return crypto.subtle.digest('SHA-256', utf8).then((hashBuffer) => {
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray
-      .map((bytes) => bytes.toString(16).padStart(2, '0'))
-      .join('');
-
-    return Number('0x' + hashHex);
-  });
-}
 
 /*
 * Set's a global timer to debounce the execution of a function.
@@ -236,7 +221,6 @@ export default {
   flushPromises,
   kebabCaseToPascalCase,
   extractVueListeners,
-  hashSha256,
   debounce,
   isOutOfViewPort,
 };
