@@ -1,3 +1,15 @@
+# [3.69.0](https://github.com/dialpad/dialtone-vue/compare/v3.68.0...v3.69.0) (2023-05-23)
+
+
+### Bug Fixes
+
+* change to fnv algo ([1177a06](https://github.com/dialpad/dialtone-vue/commit/1177a0647fa315f9dbdc4c8d8522e47774c946ed))
+
+
+### Features
+
+* update dialtone icons ([bfffabb](https://github.com/dialpad/dialtone-vue/commit/bfffabba29f5fd48c2cfffdbb017ea0a18f2d62c))
+
 # [3.68.0](https://github.com/dialpad/dialtone-vue/compare/v3.67.4...v3.68.0) (2023-05-18)
 
 
