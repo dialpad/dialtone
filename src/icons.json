@@ -834,6 +834,7 @@
         "chromecast",
         "airplay"
       ],
+      "deskphone": [],
       "download-cloud": [
         "import"
       ],
@@ -1208,6 +1209,7 @@
         "cc"
       ],
       "dissatisfied": [],
+      "double-check": [],
       "flag-off": [
         "unflag"
       ],
