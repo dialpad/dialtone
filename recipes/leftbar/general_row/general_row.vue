@@ -8,6 +8,7 @@
       :data-qa="'data-qa' in $attrs ? $attrs['data-qa'] : 'dt-leftbar-row-link'"
       :aria-label="getAriaLabel"
       :title="description"
+      :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
       v-bind="$attrs"
     >
       <div
