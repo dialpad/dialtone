@@ -202,7 +202,7 @@ export default {
 }
 
 .dt-recipe-callbar-button--circle {
-  border-radius: var(--br-circle);
+  border-radius: var(--dt-size-radius-circle);
 }
 
 .dt-recipe-callbar-button.d-btn[disabled] {

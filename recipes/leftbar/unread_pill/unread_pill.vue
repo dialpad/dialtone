@@ -64,17 +64,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-200) var(--space-500) var(--space-200) var(--space-400);
-  gap: var(--space-300);
-  font-size: var(--fs-100);
-  box-shadow: var(--bs-md);
-  border-radius: var(--br-pill);
+  padding: var(--dt-space-200) var(--dt-space-500) var(--dt-space-200) var(--dt-space-400);
+  gap: var(--dt-space-300);
+  font-size: var(--dt-font-size-100);
+  box-shadow: var(--dt-shadow-medium);
+  border-radius: var(--dt-size-radius-pill);
   border: none;
   line-height: var(--lh-600);
   cursor: pointer;
 
   &--mentions {
-    font-weight: var(--fw-bold);
+    font-weight: var(--dt-font-weight-bold);
     background-color: var(--theme-mention-color-background);
     color: var(--theme-mention-color-foreground);
   }

@@ -91,7 +91,7 @@ export default {
 
   &:focus-visible {
     color: var(--theme-topbar-color-hsl);
-    box-shadow: 0 0 0 var(--size-200) hsla(var(--theme-sidebar-color-hsl) / .15);
+    box-shadow: 0 0 0 var(--dt-size-200) hsla(var(--theme-sidebar-color-hsl) / .15);
   }
 }
 </style>

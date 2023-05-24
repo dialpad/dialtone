@@ -1,5 +1,4 @@
 import { addons } from '@storybook/addons';
-import dialtoneTheme from './dialtone-theme.js';
 
 const CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR = `
 #visual-testing,
@@ -20,5 +19,4 @@ if (process.env.STORYBOOK_ENV === 'production') {
 
 addons.setConfig({
   showRoots: true,
-  theme: dialtoneTheme,
 });

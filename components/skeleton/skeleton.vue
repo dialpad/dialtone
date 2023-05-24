@@ -170,8 +170,8 @@ export default {
 .skeleton-placeholder {
   display: flex;
   stroke: none;
-  fill: var(--placeholder-from-color, var(--black-300));
-  background: var(--placeholder-from-color, var(--black-300));
+  fill: var(--placeholder-from-color, var(--dt-color-black-300));
+  background: var(--placeholder-from-color, var(--dt-color-black-300));
 
   &--animate {
     animation-name: placeholder-throb;
@@ -182,16 +182,16 @@ export default {
 // the animation is used by the skeleton component
 @keyframes placeholder-throb {
   10% {
-    fill: var(--placeholder-from-color, var(--black-300));
-    background: var(--placeholder-from-color, var(--black-300));
+    fill: var(--placeholder-from-color, var(--dt-color-black-300));
+    background: var(--placeholder-from-color, var(--dt-color-black-300));
   }
   50% {
-    fill: var(--placeholder-to-color, var(--black-100));
-    background: var(--placeholder-to-color, var(--black-100));
+    fill: var(--placeholder-to-color, var(--dt-color-black-100));
+    background: var(--placeholder-to-color, var(--dt-color-black-100));
   }
   90% {
-    fill: var(--placeholder-from-color, var(--black-300));
-    background: var(--placeholder-from-color, var(--black-300));
+    fill: var(--placeholder-from-color, var(--dt-color-black-300));
+    background: var(--placeholder-from-color, var(--dt-color-black-300));
   }
 }
 </style>

@@ -291,31 +291,31 @@ export default {
 
 <style lang="less">
 .dt-recipe--callbar-button-with-popover--arrow.d-btn--circle {
-  margin-top: var(--space-350-negative);
-  margin-left: calc(var(--space-300-negative) * 5);
-  width: var(--size-500);
-  height: var(--size-500);
-  padding: var(--space-400);
-  border-radius: var(--size-300);
+  margin-top: var(--dt-space-350-negative);
+  margin-left: calc(var(--dt-space-300-negative) * 5);
+  width: var(--dt-size-500);
+  height: var(--dt-size-500);
+  padding: var(--dt-space-400);
+  border-radius: var(--dt-size-300);
 
   &.d-btn--active {
-    background: var(--bgc-moderate-opaque);
+    background: var(--dt-color-surface-moderate-opaque);
   }
 }
 .dt-recipe--callbar-button-with-popover--popover {
   .d-popover__header {
-    background: var(--bgc-contrast);
-    color: var(--fc-primary-inverted);
+    background: var(--dt-color-surface-contrast);
+    color: var(--dt-color-foreground-primary-inverted);
 
     .d-btn {
-      color: var(--fc-primary-inverted);
+      color: var(--dt-color-foreground-primary-inverted);
     }
   }
 
 }
 .dt-recipe--callbar-button-with-popover--button .d-tab--selected::after,
 .dt-recipe--callbar-button-with-popover--button .d-tab--selected:hover::after {
-  --tab--bgc: var(--bgc-contrast);
+  --tab--bgc: var(--dt-color-surface-contrast);
 }
 .dt-recipe--callbar-button-with-popover--button .tab-group {
   display: flex;

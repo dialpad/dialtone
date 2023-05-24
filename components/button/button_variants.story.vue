@@ -1,6 +1,9 @@
 <template>
-  <div id="components-button--variants-container">
-    <div class="d-mb16">
+  <div
+    id="components-button--variants-container"
+    class="d-stack16"
+  >
+    <div class="d-flow8">
       <!-- Default -->
       <dt-button>
         Primary
@@ -16,7 +19,7 @@
         Clear
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow8">
       <!-- Danger -->
       <dt-button kind="danger">
         Danger
@@ -32,7 +35,7 @@
         Disabled
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow8">
       <!-- Muted clear -->
       <dt-button
         kind="muted"
@@ -48,7 +51,7 @@
         Muted Outlined
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow8">
       <!-- Extra Small -->
       <dt-button size="xs">
         Extra Small
@@ -74,7 +77,7 @@
         Extra Large
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow8">
       <!-- Circle -->
       <dt-button
         importance="outlined"
@@ -143,19 +146,19 @@
         Icon Bottom
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow8">
       <!-- Loading -->
       <dt-button loading>
         Button
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow8">
       <!-- Link Button -->
       <dt-button link>
         Link Button
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow8">
       <!-- Active Button -->
       <dt-button active>
         Active button

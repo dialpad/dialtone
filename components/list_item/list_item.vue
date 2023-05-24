@@ -241,21 +241,21 @@ export default {
 <style lang="less">
 .dt-list-item:not(.dt-list-item--static) {
   cursor: pointer;
-  border-radius: var(--size-300);
+  border-radius: var(--dt-size-300);
 }
 
 .dt-list-item--focusable:focus,
 .dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
-  background-color: var(--bgc-moderate-opaque);
+  background-color: var(--dt-color-surface-moderate-opaque);
 }
 
 .dt-list-item--highlighted:active {
-  background-color: var(--bgc-bold-opaque);
+  background-color: var(--dt-color-surface-bold-opaque);
 }
 
 .dt-list-item:focus-visible {
   outline: none;
-  box-shadow: var(--bs-focus-ring);
+  box-shadow: var(--dt-shadow-focus);
 }
 </style>

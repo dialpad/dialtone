@@ -47,7 +47,7 @@
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/dialtone": "^7.27.0",
+    "@dialpad/dialtone": "^8.1.0-version8.1",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "^1.24.0",
     "@percy/storybook": "^4.3.6",
@@ -95,6 +95,7 @@
     "sinon": "^15.0.1",
     "source-map-support": "^0.5.21",
     "storybook": "^7.0.8",
+    "storybook-dark-mode": "^3.0.0",
     "vite": "^4.2.1",
     "vitest": "^0.31.0",
     "vue": "^2.7.14",
@@ -104,7 +105,7 @@
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=7.27",
+    "@dialpad/dialtone": ">=8.1",
     "vue": ">=2.6"
   },
   "bugs": {
