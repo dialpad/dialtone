@@ -1,3 +1,11 @@
+## [3.69.1](https://github.com/dialpad/dialtone-vue/compare/v3.69.0...v3.69.1) (2023-05-24)
+
+
+### Bug Fixes
+
+* **Dt Scroller:** fix dynamic scroller not passing fieldKey properly ([#992](https://github.com/dialpad/dialtone-vue/issues/992)) ([6859a5d](https://github.com/dialpad/dialtone-vue/commit/6859a5d558423c394dce790ea531523aaa1f9de0))
+* **Leftbar General Row:** add href for focusability ([#995](https://github.com/dialpad/dialtone-vue/issues/995)) ([0ddfc2d](https://github.com/dialpad/dialtone-vue/commit/0ddfc2d0e409141a3af92ee532c5577fb2cd7198))
+
 # [3.69.0](https://github.com/dialpad/dialtone-vue/compare/v3.68.0...v3.69.0) (2023-05-23)
 
 
