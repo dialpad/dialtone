@@ -1,16 +1,10 @@
 // Import dialtone style definitions as references globally so they can be used in
 // mixins. See: https://dialpad.design
-@import '@dialpad/dialtone/lib/build/less/dialtone.less';
-
-// Fonts path override
-#d-internal-config {
-  // @dialpad/dialtone/lib/dist/fonts/
-  @define-font-path: "../../../dist/fonts/";
-}
+@import '@dialpad/dialtone/lib/build/less/components/modal';
 
 // Reset base font size to 12px.
 :root {
-  --base--font-size: var(--fs-100);
+  --base--font-size: var(--dt-font-size-100);
 }
 
 // Vue transition classes for code samples.
@@ -140,4 +134,15 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+// Component preview background and foreground colors need to be set apart from global theme
+.sb-show-main {
+   background: var(--dt-color-surface-primary) !important;
+   color: var(--dt-color-foreground-primary) !important;
+}
+
+// CSS override to avoid header links to move while changing theme on Docs mode
+.css-1ofkq6d {
+  margin-left: -24px !important;
 }

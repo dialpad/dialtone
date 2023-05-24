@@ -24,12 +24,12 @@
     >
       <dt-icon
         v-if="overlayIcon"
-        class="d-fc-white d-w100p"
+        class="d-fc-neutral-white d-w100p"
         :name="overlayIcon"
       />
       <p
         v-else-if="overlayText"
-        class="d-fs-200 d-fw-bold d-fc-white d-w100p d-ta-center"
+        class="d-fs-200 d-fw-bold d-fc-neutral-white d-w100p d-ta-center"
       >
         {{ overlayText }}
       </p>

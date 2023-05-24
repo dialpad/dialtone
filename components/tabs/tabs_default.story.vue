@@ -56,7 +56,7 @@
 
       <div
         :class="{
-          'd-fc-white': $attrs.inverted,
+          'd-fc-neutral-white': $attrs.inverted,
         }"
       >
         <dt-tab-panel

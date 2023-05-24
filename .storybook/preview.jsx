@@ -1,10 +1,14 @@
 import '../css/dialtone-globals.less';
+import '@dialpad/dialtone/lib/dist/css/dialtone.min.css';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { setup } from '@storybook/vue3';
+import React from 'react';
+import { DocsContainer } from '@storybook/addon-docs';
+import { useDarkMode } from "storybook-dark-mode";
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '../common/emoji.js';
 import customEmojiJson from '@/common/custom-emoji.json';
-import dialtoneTheme from './dialtone-theme.js';
+import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
@@ -66,8 +70,19 @@ export default {
         ],
       },
     },
-    docs: {
-      theme: dialtoneTheme
+    backgrounds: { disable: true },
+    darkMode: {
+      darkClass: 'dialtone-theme-dark',
+      lightClass: 'dialtone-theme-light',
+      dark: dialtoneDarkTheme,
+      light: dialtoneLightTheme,
+      stylePreview: true,
     },
+    docs: {
+      container: ({ children, ...props }) => {
+        const isDark = useDarkMode();
+        return <DocsContainer context={props.context} theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}>{children}</DocsContainer>;
+      }
+    }
   },
 }
