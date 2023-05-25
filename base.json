@@ -3137,11 +3137,11 @@
               "type": "color"
             },
             "hover": {
-              "value": "rgba($color.purple.400, 0.04)",
+              "value": "rgba($color.purple.400, 0.14)",
               "type": "color"
             },
             "active": {
-              "value": "rgba($color.purple.400, 0.14)",
+              "value": "rgba($color.purple.400, 0.18)",
               "type": "color"
             },
             "primary": {
@@ -3221,11 +3221,11 @@
               "type": "color"
             },
             "hover": {
-              "value": "rgba($color.black.800, 0.05)",
+              "value": "rgba($color.black.800, 0.10)",
               "type": "color"
             },
             "active": {
-              "value": "rgba($color.black.800, 0.10)",
+              "value": "rgba($color.black.800, 0.16)",
               "type": "color"
             }
           },
