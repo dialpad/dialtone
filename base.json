@@ -3462,23 +3462,14 @@
             "type": "color"
           },
           "background": {
-            "value": "{theme.color.base}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "lighten",
-                  "value": ".98",
-                  "space": "hsl"
-                }
-              }
-            }
+            "value": "{color.surface.secondary}",
+            "type": "color"
           }
         },
         "icon": {
           "color": {
             "foreground": {
-              "value": "{theme.color.base}",
+              "value": "{theme.sidebar.color.foreground}",
               "type": "color",
               "$extensions": {
                 "studio.tokens": {
@@ -3495,7 +3486,7 @@
         "status": {
           "color": {
             "foreground": {
-              "value": "{theme.color.base}",
+              "value": "{theme.sidebar.color.foreground}",
               "type": "color",
               "$extensions": {
                 "studio.tokens": {
@@ -3555,7 +3546,7 @@
         "selected-row": {
           "color": {
             "foreground": {
-              "value": "{theme.color.base}",
+              "value": "{theme.sidebar.color.foreground}",
               "type": "color"
             },
             "background": {
@@ -3576,7 +3567,7 @@
         "section": {
           "color": {
             "foreground": {
-              "value": "{theme.color.base}",
+              "value": "{theme.sidebar.color.foreground}",
               "type": "color",
               "$extensions": {
                 "studio.tokens": {
