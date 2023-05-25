@@ -11,7 +11,7 @@
       'd-ba',
       'd-bar4',
       'd-fs-100',
-      inverted ? 'd-bc-inverted-moderate' : 'd-bc-default',
+      inverted ? 'd-bc-moderate-inverted' : 'd-bc-default',
     ]"
   >
     <span
