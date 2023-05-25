@@ -1,3 +1,11 @@
+## [2.85.1](https://github.com/dialpad/dialtone-vue/compare/v2.85.0...v2.85.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* **Keyboard Shortcut:** inverted border color ([75b0de2](https://github.com/dialpad/dialtone-vue/commit/75b0de235bf762805384f7c1eefaf2891dc31268))
+* **Leftbar General Row:** add href for focusability ([#994](https://github.com/dialpad/dialtone-vue/issues/994)) ([d7954a7](https://github.com/dialpad/dialtone-vue/commit/d7954a709a9b3ce10d4aefb3aed9e726d717cab3))
+
 # [2.85.0](https://github.com/dialpad/dialtone-vue/compare/v2.84.1...v2.85.0) (2023-05-23)
 
 
