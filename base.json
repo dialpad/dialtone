@@ -4419,21 +4419,6 @@
     },
     "theme": {
       "topbar": {
-        "color": {
-          "background": {
-            "value": "{theme.color.base}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": ".89",
-                  "space": "hsl"
-                }
-              }
-            }
-          }
-        },
         "field": {
           "color": {
             "background-hover": {
@@ -4453,21 +4438,6 @@
         }
       },
       "sidebar": {
-        "color": {
-          "background": {
-            "value": "{theme.color.base}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": ".89",
-                  "space": "hsl"
-                }
-              }
-            }
-          }
-        },
         "row": {
           "color": {
             "background-active": {
@@ -4477,20 +4447,7 @@
                 "studio.tokens": {
                   "modify": {
                     "type": "darken",
-                    "value": ".78",
-                    "space": "hsl"
-                  }
-                }
-              }
-            },
-            "background-hover": {
-              "value": "{theme.color.base}",
-              "type": "color",
-              "$extensions": {
-                "studio.tokens": {
-                  "modify": {
-                    "type": "darken",
-                    "value": ".80",
+                    "value": ".82",
                     "space": "hsl"
                   }
                 }
@@ -4507,41 +4464,7 @@
                 "studio.tokens": {
                   "modify": {
                     "type": "darken",
-                    "value": ".82",
-                    "space": "hsl"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "icon": {
-          "color": {
-            "foreground": {
-              "value": "{theme.color.base}",
-              "type": "color",
-              "$extensions": {
-                "studio.tokens": {
-                  "modify": {
-                    "type": "darken",
-                    "value": ".23",
-                    "space": "hsl"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "status": {
-          "color": {
-            "foreground": {
-              "value": "{theme.color.base}",
-              "type": "color",
-              "$extensions": {
-                "studio.tokens": {
-                  "modify": {
-                    "type": "darken",
-                    "value": ".33",
+                    "value": ".91",
                     "space": "hsl"
                   }
                 }
@@ -4552,7 +4475,7 @@
         "section": {
           "color": {
             "foreground": {
-              "value": "{theme.color.base}",
+              "value": "{theme.sidebar.color.foreground}",
               "type": "color",
               "$extensions": {
                 "studio.tokens": {
