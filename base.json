@@ -3295,17 +3295,8 @@
             }
           },
           "background": {
-            "value": "{theme.color.base}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "lighten",
-                  "value": ".98",
-                  "space": "hsl"
-                }
-              }
-            }
+            "value": "{color.surface.secondary}",
+            "type": "color"
           }
         },
         "field": {
