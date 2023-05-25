@@ -5558,7 +5558,8 @@
         "theme.topbar.button.color.background-hover": "S:65f55880bf8eb3c7c1dadec77d3e282c18960e6a,",
         "theme.topbar.button.color.background-active": "S:f01aaf01433a55fd20508bae1e5bf4759ca42910,",
         "theme.sidebar.selected-row.color.background": "S:aee8f59aacb83658caf581a8f0bd3e7a40adf0a2,",
-        "theme.color.base": "S:7af3c5c800e38fa4223a74926cec6bdb8a5c84a3,"
+        "theme.color.base": "S:7af3c5c800e38fa4223a74926cec6bdb8a5c84a3,",
+        "theme.sidebar.section.color.foreground": "S:ec936c4901079ce6bf7e58c68d1c0706f0867779,"
       }
     }
   ],
