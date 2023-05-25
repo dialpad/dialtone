@@ -31,7 +31,7 @@
     "CHANGELOG.json"
   ],
   "dependencies": {
-    "@dialpad/dialtone-icons": "^0.7.0",
+    "@dialpad/dialtone-icons": "^0.7.1",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "@tiptap/extension-document": "^2.0.2",
     "@tiptap/extension-paragraph": "^2.0.2",
@@ -47,7 +47,7 @@
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/dialtone": "^7.27.0",
+    "@dialpad/dialtone": "^7.27.1",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "^1.24.0",
     "@percy/storybook": "^4.3.6",
