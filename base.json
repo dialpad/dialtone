@@ -4575,7 +4575,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "mix",
-                  "value": ".05",
+                  "value": ".03",
                   "space": "hsl",
                   "color": "{theme.color.base} "
                 }
