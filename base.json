@@ -3458,7 +3458,7 @@
       "sidebar": {
         "color": {
           "foreground": {
-            "value": "{theme.color.base}",
+            "value": "{color.foreground.primary}",
             "type": "color"
           },
           "background": {
@@ -4492,6 +4492,24 @@
       }
     }
   },
+  "semantic/tmo": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#E20074",
+          "type": "color"
+        }
+      },
+      "mention": {
+        "color": {
+          "background": {
+            "value": "{theme.color.base}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
   "components/avatar": {
     "avatar": {
       "color": {
@@ -5466,6 +5484,22 @@
         "theme.color.base": "S:7af3c5c800e38fa4223a74926cec6bdb8a5c84a3,",
         "theme.sidebar.section.color.foreground": "S:ec936c4901079ce6bf7e58c68d1c0706f0867779,"
       }
+    },
+    {
+      "id": "a3f41485d9f2741501d9cf6da774d2948ddbc3c0",
+      "name": "light",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "semantic": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "semantic/tmo": "enabled"
+      },
+      "group": "tmo"
     }
   ],
   "$metadata": {
@@ -5474,6 +5508,7 @@
       "base/dark",
       "semantic",
       "semantic/dark",
+      "semantic/tmo",
       "components/avatar",
       "components/badge",
       "components/checkbox",
