@@ -4488,6 +4488,23 @@
               }
             }
           }
+        },
+        "icon": {
+          "color": {
+            "foreground": {
+              "value": "{theme.sidebar.color.foreground}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": ".23",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
