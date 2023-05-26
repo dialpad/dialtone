@@ -4540,7 +4540,7 @@
       }
     }
   },
-  "semantic/tmo-dark": {
+  "semantic/tmo/dark": {
     "theme": {
       "color": {
         "base": {
@@ -4586,11 +4586,103 @@
       }
     }
   },
-  "semantic/cox-dark": {
+  "semantic/cox/dark": {
     "theme": {
       "color": {
         "base": {
           "value": "#00ADFA",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "semantic/cherry": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#b91414",
+          "type": "color"
+        }
+      },
+      "topbar": {
+        "color": {
+          "background": {
+            "value": "{color.surface.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "mix",
+                  "value": ".03",
+                  "space": "hsl",
+                  "color": "{theme.color.base} "
+                }
+              }
+            }
+          }
+        }
+      },
+      "mention": {
+        "color": {
+          "background": {
+            "value": "#b91414",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
+  "semantic/cherry/dark": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#ff9e9e",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "semantic/blueberry": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#04c",
+          "type": "color"
+        }
+      },
+      "topbar": {
+        "color": {
+          "background": {
+            "value": "{color.surface.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "mix",
+                  "value": ".03",
+                  "space": "hsl",
+                  "color": "{theme.color.base} "
+                }
+              }
+            }
+          }
+        }
+      },
+      "mention": {
+        "color": {
+          "background": {
+            "value": "#04c",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
+  "semantic/blueberry/dark": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#8fb4ff",
           "type": "color"
         }
       }
@@ -4909,7 +5001,13 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/badge": "enabled",
-        "components/avatar": "enabled"
+        "components/avatar": "enabled",
+        "semantic/cherry": "disabled",
+        "semantic/blueberry": "disabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "disabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:6c392f95efb12c1bc91df5b9e08e628e0f641be4,",
@@ -5247,7 +5345,13 @@
         "components/radio/dark": "enabled",
         "components/badge": "enabled",
         "base": "enabled",
-        "components/avatar": "enabled"
+        "components/avatar": "enabled",
+        "semantic/cherry": "disabled",
+        "semantic/blueberry": "disabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "disabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:3ea4483b47917706b709a6a2f49677d5d45d4be3,",
@@ -5583,7 +5687,13 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/tmo": "enabled"
+        "semantic/tmo": "enabled",
+        "semantic/cherry": "disabled",
+        "semantic/blueberry": "disabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "disabled"
       },
       "group": "tmo"
     },
@@ -5597,14 +5707,19 @@
         "semantic": "enabled",
         "semantic/dark": "enabled",
         "semantic/tmo": "enabled",
-        "semantic/tmo-dark": "enabled",
         "components/avatar": "enabled",
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/checkbox/dark": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "components/radio/dark": "enabled"
+        "components/radio/dark": "enabled",
+        "semantic/cherry": "disabled",
+        "semantic/blueberry": "disabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "enabled"
       },
       "group": "tmo"
     },
@@ -5620,7 +5735,13 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "semantic/cherry": "disabled",
+        "semantic/blueberry": "disabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "disabled"
       },
       "group": "cox"
     },
@@ -5637,13 +5758,108 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/cox-dark": "enabled",
         "base/dark": "enabled",
         "semantic/dark": "source",
         "components/checkbox/dark": "enabled",
-        "components/radio/dark": "enabled"
+        "components/radio/dark": "enabled",
+        "semantic/cherry": "disabled",
+        "semantic/blueberry": "disabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "enabled",
+        "semantic/tmo/dark": "disabled"
       },
       "group": "cox"
+    },
+    {
+      "id": "c825361565f2a5e37297441d459d12b9f8c69fd3",
+      "name": "strawberry",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "semantic": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "semantic/cherry": "enabled",
+        "semantic/blueberry": "disabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "disabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "cb4a390ff3ccbe8f6486edc30bf04cd63d3fe981",
+      "name": "cherry-dark",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "base/dark": "enabled",
+        "semantic": "enabled",
+        "semantic/dark": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/checkbox/dark": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "components/radio/dark": "enabled",
+        "semantic/cherry": "enabled",
+        "semantic/blueberry": "disabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "enabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "disabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "d39e37c6a75caaae2384316e7564e27e70792906",
+      "name": "blueberry",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "semantic": "enabled",
+        "semantic/blueberry": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "semantic/blueberry/dark": "disabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "disabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "02c74b9bfb8732ea394bf79f69b4df49bbf048f1",
+      "name": "blueberry-dark",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "base/dark": "enabled",
+        "semantic": "enabled",
+        "semantic/dark": "enabled",
+        "semantic/blueberry": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/checkbox/dark": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "components/radio/dark": "enabled",
+        "semantic/blueberry/dark": "enabled",
+        "semantic/cherry/dark": "disabled",
+        "semantic/cox/dark": "disabled",
+        "semantic/tmo/dark": "disabled"
+      },
+      "group": "dp"
     }
   ],
   "$metadata": {
@@ -5653,9 +5869,13 @@
       "semantic",
       "semantic/dark",
       "semantic/tmo",
-      "semantic/tmo-dark",
+      "semantic/tmo/dark",
       "semantic/cox",
-      "semantic/cox-dark",
+      "semantic/cox/dark",
+      "semantic/cherry",
+      "semantic/cherry/dark",
+      "semantic/blueberry",
+      "semantic/blueberry/dark",
       "components/avatar",
       "components/badge",
       "components/checkbox",
