@@ -3462,7 +3462,7 @@
             "type": "color"
           },
           "background": {
-            "value": "{color.surface.secondary}",
+            "value": "{theme.topbar.color.background}",
             "type": "color"
           }
         },
@@ -4549,6 +4549,32 @@
         "color": {
           "background": {
             "value": "#285A93",
+            "type": "color"
+          }
+        }
+      },
+      "topbar": {
+        "color": {
+          "background": {
+            "value": "{color.surface.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "mix",
+                  "value": ".05",
+                  "space": "hsl",
+                  "color": "{theme.color.base} "
+                }
+              }
+            }
+          }
+        }
+      },
+      "sidebar": {
+        "color": {
+          "background": {
+            "value": "{theme.topbar.color.background}",
             "type": "color"
           }
         }
