@@ -5093,11 +5093,7 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/badge": "enabled",
-        "components/avatar": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "components/avatar": "enabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:6c392f95efb12c1bc91df5b9e08e628e0f641be4,",
@@ -5435,11 +5431,7 @@
         "components/radio/dark": "enabled",
         "components/badge": "enabled",
         "base": "enabled",
-        "components/avatar": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "components/avatar": "enabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:3ea4483b47917706b709a6a2f49677d5d45d4be3,",
@@ -5775,11 +5767,7 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/tmo": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "semantic/tmo": "enabled"
       },
       "group": "tmo"
     },
@@ -5800,11 +5788,7 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/tmo/dark": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "semantic/tmo/dark": "enabled"
       },
       "group": "tmo"
     },
@@ -5820,11 +5804,7 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "components/radio": "enabled"
       },
       "group": "cox"
     },
@@ -5845,11 +5825,7 @@
         "semantic/dark": "source",
         "components/checkbox/dark": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/cox/dark": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "semantic/cox/dark": "enabled"
       },
       "group": "cox"
     },
@@ -5870,11 +5846,7 @@
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
         "semantic/cherry": "enabled",
-        "semantic/cherry/dark": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "semantic/cherry/dark": "enabled"
       },
       "group": "dp"
     },
@@ -5890,11 +5862,7 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "components/radio": "enabled"
       },
       "group": "dp"
     },
@@ -5915,11 +5883,7 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/blueberry/dark": "enabled",
-        "semantic/peach": "disabled",
-        "semantic/peach/dark": "disabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "semantic/blueberry/dark": "enabled"
       },
       "group": "dp"
     },
@@ -5935,9 +5899,7 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "components/radio": "enabled"
       },
       "group": "dp"
     },
@@ -5958,9 +5920,7 @@
         "components/checkbox/dark": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "components/radio/dark": "enabled",
-        "semantic/kiwi": "disabled",
-        "semantic/kiwi/dark": "disabled"
+        "components/radio/dark": "enabled"
       },
       "group": "dp"
     },
