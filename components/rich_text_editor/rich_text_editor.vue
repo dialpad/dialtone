@@ -10,6 +10,7 @@ import { Editor, EditorContent } from '@tiptap/vue-2';
 import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
+import Link from './extensions/link';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
@@ -24,10 +25,11 @@ export default {
 
   props: {
     /**
-     * Value of the input
+     * Value of the input. The object format should match TipTap's JSON
+     * document structure: https://tiptap.dev/guide/output#option-1-json
      */
     value: {
-      type: String,
+      type: [Object, String],
       default: '',
     },
 
@@ -92,6 +94,14 @@ export default {
         return RICH_TEXT_EDITOR_OUTPUT_FORMATS.includes(outputFormat);
       },
     },
+
+    /**
+     * Enables the Link extension and optionally passes configurations to it
+     */
+    link: {
+      type: [Boolean, Object],
+      default: false,
+    },
   },
 
   emits: [
@@ -132,9 +142,11 @@ export default {
 
   computed: {
     extensions () {
-      // These are the default extensions needed jsut for plain text.
+      // These are the default extensions needed just for plain text.
       const extensions = [Document, Paragraph, Text];
-      // TODO: Add logic for extensions passed as props.
+      if (this.link) {
+        extensions.push(this.getExtension(Link, this.link));
+      }
       return extensions;
     },
 
@@ -170,8 +182,20 @@ export default {
       this.updateEditorAttributes({ 'aria-label': newLabel });
     },
 
+    extensions () {
+      // Extensions can't be registered on the fly, so just recreate the editor.
+      // https://github.com/ueberdosis/tiptap/issues/1044
+      this.destroyEditor();
+      this.createEditor();
+    },
+
     value (newValue) {
-      if (newValue === this.getOutput()) {
+      let currentValue = this.getOutput();
+      if (this.outputFormat === 'json') {
+        newValue = JSON.stringify(newValue);
+        currentValue = JSON.stringify(currentValue);
+      }
+      if (newValue === currentValue) {
         // The new value came from this component and was passed back down
         // through the parent, so don't do anything here.
         return;
@@ -183,11 +207,10 @@ export default {
 
   created () {
     this.createEditor();
-    this.addEditorListeners();
   },
 
   beforeUnmount () {
-    this.editor.destroy();
+    this.destroyEditor();
   },
 
   methods: {
@@ -205,6 +228,11 @@ export default {
           },
         },
       });
+      this.addEditorListeners();
+    },
+
+    destroyEditor () {
+      this.editor.destroy();
     },
 
     /**
@@ -240,6 +268,13 @@ export default {
         default:
           return this.editor.getText();
       }
+    },
+
+    getExtension (extension, options) {
+      if (typeof options === 'boolean') {
+        return extension;
+      }
+      return extension.configure?.(options);
     },
 
     updateEditorAttributes (attributes) {
