@@ -3522,7 +3522,7 @@
                 "studio.tokens": {
                   "modify": {
                     "type": "alpha",
-                    "value": "0.10",
+                    "value": "0.12",
                     "space": "hsl"
                   }
                 }
@@ -3534,8 +3534,8 @@
               "$extensions": {
                 "studio.tokens": {
                   "modify": {
-                    "type": "lighten",
-                    "value": ".82",
+                    "type": "alpha",
+                    "value": ".16",
                     "space": "hsl"
                   }
                 }
@@ -3555,8 +3555,8 @@
               "$extensions": {
                 "studio.tokens": {
                   "modify": {
-                    "type": "lighten",
-                    "value": ".91",
+                    "type": "alpha",
+                    "value": ".10",
                     "space": "hsl"
                   }
                 }
