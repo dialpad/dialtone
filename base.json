@@ -4688,6 +4688,98 @@
       }
     }
   },
+  "semantic/peach": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#D14700",
+          "type": "color"
+        }
+      },
+      "topbar": {
+        "color": {
+          "background": {
+            "value": "{color.surface.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "mix",
+                  "value": ".03",
+                  "space": "hsl",
+                  "color": "{theme.color.base} "
+                }
+              }
+            }
+          }
+        }
+      },
+      "mention": {
+        "color": {
+          "background": {
+            "value": "#D14700",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
+  "semantic/peach/dark": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#ffaa80",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "semantic/kiwi": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#097575",
+          "type": "color"
+        }
+      },
+      "topbar": {
+        "color": {
+          "background": {
+            "value": "{color.surface.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "mix",
+                  "value": ".03",
+                  "space": "hsl",
+                  "color": "{theme.color.base} "
+                }
+              }
+            }
+          }
+        }
+      },
+      "mention": {
+        "color": {
+          "background": {
+            "value": "#097575",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
+  "semantic/kiwi/dark": {
+    "theme": {
+      "color": {
+        "base": {
+          "value": "#4bf1f1",
+          "type": "color"
+        }
+      }
+    }
+  },
   "components/avatar": {
     "avatar": {
       "color": {
@@ -5001,7 +5093,11 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/badge": "enabled",
-        "components/avatar": "enabled"
+        "components/avatar": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:6c392f95efb12c1bc91df5b9e08e628e0f641be4,",
@@ -5339,7 +5435,11 @@
         "components/radio/dark": "enabled",
         "components/badge": "enabled",
         "base": "enabled",
-        "components/avatar": "enabled"
+        "components/avatar": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:3ea4483b47917706b709a6a2f49677d5d45d4be3,",
@@ -5675,7 +5775,11 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/tmo": "enabled"
+        "semantic/tmo": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
       },
       "group": "tmo"
     },
@@ -5696,7 +5800,11 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/tmo/dark": "enabled"
+        "semantic/tmo/dark": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
       },
       "group": "tmo"
     },
@@ -5712,7 +5820,11 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
       },
       "group": "cox"
     },
@@ -5733,25 +5845,13 @@
         "semantic/dark": "source",
         "components/checkbox/dark": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/cox/dark": "enabled"
+        "semantic/cox/dark": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
       },
       "group": "cox"
-    },
-    {
-      "id": "c825361565f2a5e37297441d459d12b9f8c69fd3",
-      "name": "strawberry",
-      "$figmaStyleReferences": {},
-      "selectedTokenSets": {
-        "base": "enabled",
-        "semantic": "enabled",
-        "components/avatar": "enabled",
-        "components/badge": "enabled",
-        "components/checkbox": "enabled",
-        "components/icon": "enabled",
-        "components/radio": "enabled",
-        "semantic/cherry": "enabled"
-      },
-      "group": "dp"
     },
     {
       "id": "cb4a390ff3ccbe8f6486edc30bf04cd63d3fe981",
@@ -5770,7 +5870,11 @@
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
         "semantic/cherry": "enabled",
-        "semantic/cherry/dark": "enabled"
+        "semantic/cherry/dark": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
       },
       "group": "dp"
     },
@@ -5786,7 +5890,11 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
       },
       "group": "dp"
     },
@@ -5807,7 +5915,89 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/blueberry/dark": "enabled"
+        "semantic/blueberry/dark": "enabled",
+        "semantic/peach": "disabled",
+        "semantic/peach/dark": "disabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "95335078e5d191da78892293f07484222c3fb150",
+      "name": "peach",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "semantic": "enabled",
+        "semantic/peach": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "4318b0bf90fe1ec7bd4d48dd5ec972b1c4399646",
+      "name": "peach-dark",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "base/dark": "enabled",
+        "semantic": "enabled",
+        "semantic/dark": "enabled",
+        "semantic/peach": "enabled",
+        "semantic/peach/dark": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/checkbox/dark": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "components/radio/dark": "enabled",
+        "semantic/kiwi": "disabled",
+        "semantic/kiwi/dark": "disabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "b6e6d56cdab81542a1295a6fbdc7516421a3395a",
+      "name": "kiwi",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "semantic": "enabled",
+        "semantic/kiwi": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "a2b53557df30a4d94776bdf8981735f82d574c63",
+      "name": "kiwi-dark",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "base/dark": "enabled",
+        "semantic": "enabled",
+        "semantic/dark": "enabled",
+        "semantic/kiwi": "enabled",
+        "semantic/kiwi/dark": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/checkbox/dark": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "components/radio/dark": "enabled"
       },
       "group": "dp"
     }
@@ -5826,6 +6016,10 @@
       "semantic/cherry/dark",
       "semantic/blueberry",
       "semantic/blueberry/dark",
+      "semantic/peach",
+      "semantic/peach/dark",
+      "semantic/kiwi",
+      "semantic/kiwi/dark",
       "components/avatar",
       "components/badge",
       "components/checkbox",
