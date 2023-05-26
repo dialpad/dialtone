@@ -4833,8 +4833,7 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/badge": "enabled",
-        "components/avatar": "enabled",
-        "semantic/tmo-dark": "disabled"
+        "components/avatar": "enabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:6c392f95efb12c1bc91df5b9e08e628e0f641be4,",
@@ -5172,8 +5171,7 @@
         "components/radio/dark": "enabled",
         "components/badge": "enabled",
         "base": "enabled",
-        "components/avatar": "enabled",
-        "semantic/tmo-dark": "disabled"
+        "components/avatar": "enabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:3ea4483b47917706b709a6a2f49677d5d45d4be3,",
@@ -5509,8 +5507,7 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/tmo": "enabled",
-        "semantic/tmo-dark": "disabled"
+        "semantic/tmo": "enabled"
       },
       "group": "tmo"
     },
