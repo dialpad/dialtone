@@ -4471,6 +4471,53 @@
               }
             }
           }
+        },
+        "row": {
+          "color": {
+            "background-hover": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".18",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "background-active": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".24",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "selected-row": {
+          "color": {
+            "background": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".2",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
