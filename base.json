@@ -4561,7 +4561,11 @@
       "mention": {
         "color": {
           "background": {
-            "value": "#285A93",
+            "value": "#00D258",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "{color.neutral.black}",
             "type": "color"
           }
         }
