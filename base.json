@@ -2006,6 +2006,16 @@
           "value": "#4A241C",
           "type": "color"
         }
+      },
+      "brand": {
+        "purple": {
+          "value": "#7F71D5",
+          "type": "color"
+        },
+        "magenta": {
+          "value": "#CC6BAA",
+          "type": "color"
+        }
       }
     }
   },
