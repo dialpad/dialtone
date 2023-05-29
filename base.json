@@ -4562,7 +4562,16 @@
         "color": {
           "background": {
             "value": "#00D258",
-            "type": "color"
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": ".15",
+                  "space": "lch"
+                }
+              }
+            }
           },
           "foreground": {
             "value": "{color.neutral.black}",
