@@ -7,7 +7,7 @@
       class="d-px8"
       data-qa="dt-pagination-prev"
       :aria-label="prevAriaLabel"
-      kind="muted"
+      :kind="isFirstPage ? 'default' : 'muted'"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
       :class="isFirstPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
