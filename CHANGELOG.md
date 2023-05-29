@@ -1,3 +1,35 @@
+# [1.17.0](https://github.com/dialpad/dialtone-tokens/compare/v1.16.0...v1.17.0) (2023-05-29)
+
+
+### Bug Fixes
+
+* line-heights unitless instead of % ([8b44e04](https://github.com/dialpad/dialtone-tokens/commit/8b44e0418cab55f4f95837f6a3121b789cfc7dae))
+* pxToRem for spacing ([366b81d](https://github.com/dialpad/dialtone-tokens/commit/366b81dad70b04ba88689f21910ec9514b911a6b))
+
+
+### Features
+
+* **color:** muted button bg color, dark theme ([31156ba](https://github.com/dialpad/dialtone-tokens/commit/31156ba9f4332acf5ab67788679689099bf0fdec))
+* **theme-topbar:** initial exploration ([59c3fd0](https://github.com/dialpad/dialtone-tokens/commit/59c3fd01ba0c4b425d0ea3b927fb678448cdce54))
+* **theme-topbar:** initial exploration ([c34b538](https://github.com/dialpad/dialtone-tokens/commit/c34b538940c9d0d39ae568a7e09fb9e5da563daa))
+* **theme:** added sidebar section foreground color ([561c046](https://github.com/dialpad/dialtone-tokens/commit/561c04683911e0ef97e47420cdef562607fdb32d))
+* **theme:** align topbar and sidebar theme colors ([31be80b](https://github.com/dialpad/dialtone-tokens/commit/31be80b60c7748e030d106f0393d76988a4b6493))
+* **theme:** experimental bubblegumm theme ([beb2fda](https://github.com/dialpad/dialtone-tokens/commit/beb2fdac33b0df1ad8db9ba4406d8fded0e0c952))
+* **theme:** experimental DP flavor color themes ([9d6318c](https://github.com/dialpad/dialtone-tokens/commit/9d6318c563d3e8b46fb55fb0b09e2b7ee581d475))
+* **theme:** exploratory cox light and dark themes ([f39daf8](https://github.com/dialpad/dialtone-tokens/commit/f39daf86c0d9ff0aa34d2d4e8b31a88c963ac2b6))
+* **theme:** exploring cox theming ([7c95e6c](https://github.com/dialpad/dialtone-tokens/commit/7c95e6c9ea149167ba3f35abbefe987c72bd4ba1))
+* **theme:** leftbar row's states' dark theme opacity ([ed46084](https://github.com/dialpad/dialtone-tokens/commit/ed46084d92160895d22857f428b22e30221864c7))
+* **theme:** more fruity exploratory themes ([c812c12](https://github.com/dialpad/dialtone-tokens/commit/c812c120cbaa00473892ea835fd9325f4af91447))
+* **theme:** reconcile background colors across all themes ([e42bcb1](https://github.com/dialpad/dialtone-tokens/commit/e42bcb144c32ac61db564b0c0ad40605262350f7))
+* **theme:** sidebar housekeeping ([0a6b5e4](https://github.com/dialpad/dialtone-tokens/commit/0a6b5e469bd52e36f58df98ed1c94d6cd500fa5e))
+* **theme:** sidebar row background states ([3dcf978](https://github.com/dialpad/dialtone-tokens/commit/3dcf978429428592ecc8895e65776a11c2d18e28))
+* **theme:** speculative light and dark tmo theme ([725fa58](https://github.com/dialpad/dialtone-tokens/commit/725fa589b5acc59fde23d23f78bd16671a4581f8))
+* **theme:** tmo light init ([068754c](https://github.com/dialpad/dialtone-tokens/commit/068754c5ea565fd75d6a759da9f5608063e5a9d0))
+* **theme:** topbar dark versions ([e1e5088](https://github.com/dialpad/dialtone-tokens/commit/e1e508800969b48091874b1ca8fb999862eb058f))
+* **theme:** topbar general ([f624c72](https://github.com/dialpad/dialtone-tokens/commit/f624c722c301aa63b957c01b218fcb17f2fdfc70))
+* **theme:** topbar housekeeping ([916ec5f](https://github.com/dialpad/dialtone-tokens/commit/916ec5f8c7c57c8ff42e0b69709a744f0c7fd627))
+* **theme:** tweaks to dark version of top and leftbar theme colors ([a3a1fa5](https://github.com/dialpad/dialtone-tokens/commit/a3a1fa56db79058be7d9606d50c17610705f7e32))
+
 # [1.16.0](https://github.com/dialpad/dialtone-tokens/compare/v1.15.0...v1.16.0) (2023-05-11)
 
 
