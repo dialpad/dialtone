@@ -5391,9 +5391,7 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/badge": "enabled",
-        "components/avatar": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/avatar": "enabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:6c392f95efb12c1bc91df5b9e08e628e0f641be4,",
@@ -5732,9 +5730,7 @@
         "components/radio/dark": "enabled",
         "components/badge": "enabled",
         "base": "enabled",
-        "components/avatar": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/avatar": "enabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:3ea4483b47917706b709a6a2f49677d5d45d4be3,",
@@ -6071,9 +6067,7 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/tmo": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "semantic/tmo": "enabled"
       },
       "group": "tmo"
     },
@@ -6094,9 +6088,7 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/tmo/dark": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "semantic/tmo/dark": "enabled"
       },
       "group": "tmo"
     },
@@ -6112,9 +6104,7 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio": "enabled"
       },
       "group": "cox"
     },
@@ -6135,9 +6125,7 @@
         "semantic/dark": "source",
         "components/checkbox/dark": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/cox/dark": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "semantic/cox/dark": "enabled"
       },
       "group": "cox"
     },
@@ -6153,9 +6141,7 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio": "enabled"
       },
       "group": "dp"
     },
@@ -6176,9 +6162,7 @@
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
         "semantic/cherry": "enabled",
-        "semantic/cherry/dark": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "semantic/cherry/dark": "enabled"
       },
       "group": "dp"
     },
@@ -6194,9 +6178,7 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio": "enabled"
       },
       "group": "dp"
     },
@@ -6217,9 +6199,7 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/blueberry/dark": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "semantic/blueberry/dark": "enabled"
       },
       "group": "dp"
     },
@@ -6235,9 +6215,7 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio": "enabled"
       },
       "group": "dp"
     },
@@ -6258,9 +6236,7 @@
         "components/checkbox/dark": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "components/radio/dark": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio/dark": "enabled"
       },
       "group": "dp"
     },
@@ -6276,9 +6252,7 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio": "enabled"
       },
       "group": "dp"
     },
@@ -6299,9 +6273,7 @@
         "components/checkbox/dark": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "components/radio/dark": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio/dark": "enabled"
       },
       "group": "dp"
     },
@@ -6317,9 +6289,7 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/bubblegum": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "semantic/bubblegum": "enabled"
       },
       "group": "dp"
     },
@@ -6340,9 +6310,7 @@
         "components/checkbox/dark": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "components/radio/dark": "enabled",
-        "knockoff-atlas": "disabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio/dark": "enabled"
       },
       "group": "dp"
     },
@@ -6358,8 +6326,28 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
+        "components/radio": "enabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "9efc3c7ba937493363a02db5076b0083255e1359",
+      "name": "knockoff-altlas-dark",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "base/dark": "enabled",
+        "knockoff-atlas": "enabled",
+        "knockoff-atlas/dark": "enabled",
+        "semantic": "enabled",
+        "semantic/dark": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/checkbox/dark": "enabled",
+        "components/icon": "enabled",
         "components/radio": "enabled",
-        "knockoff-atlas/dark": "disabled"
+        "components/radio/dark": "enabled"
       },
       "group": "dp"
     }
