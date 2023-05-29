@@ -1831,6 +1831,226 @@
       }
     }
   },
+  "knockoff-atlas": {
+    "color": {
+      "black": {
+        "100": {
+          "value": "#F9FAFB",
+          "type": "color"
+        },
+        "200": {
+          "value": "#E5E8EB",
+          "type": "color"
+        },
+        "300": {
+          "value": "#CFD2D9",
+          "type": "color"
+        },
+        "400": {
+          "value": "#A4AAB6",
+          "type": "color"
+        },
+        "500": {
+          "value": "#778193",
+          "type": "color"
+        },
+        "600": {
+          "value": "#48566F",
+          "type": "color"
+        },
+        "700": {
+          "value": "#2E3B57",
+          "type": "color"
+        },
+        "800": {
+          "value": "#16223B",
+          "type": "color"
+        },
+        "900": {
+          "value": "#050A15",
+          "type": "color"
+        }
+      },
+      "purple": {
+        "100": {
+          "value": "#131023",
+          "type": "color"
+        },
+        "200": {
+          "value": "#3F3573",
+          "type": "color"
+        },
+        "300": {
+          "value": "#7F71D5",
+          "type": "color"
+        },
+        "400": {
+          "value": "#9D90E9",
+          "type": "color"
+        },
+        "500": {
+          "value": "#D5CDF9",
+          "type": "color"
+        },
+        "600": {
+          "value": "#F4F1FE",
+          "type": "color"
+        }
+      },
+      "blue": {
+        "100": {
+          "value": "#163269",
+          "type": "color"
+        },
+        "200": {
+          "value": "#255EDA",
+          "type": "color"
+        },
+        "300": {
+          "value": "#689CF8",
+          "type": "color"
+        },
+        "400": {
+          "value": "#A8C7FA",
+          "type": "color"
+        },
+        "500": {
+          "value": "#ECF2FE",
+          "type": "color"
+        }
+      },
+      "magenta": {
+        "100": {
+          "value": "#4A263D",
+          "type": "color"
+        },
+        "200": {
+          "value": "#753860",
+          "type": "color"
+        },
+        "300": {
+          "value": "#CC6BAA",
+          "type": "color"
+        },
+        "400": {
+          "value": "#E996CC",
+          "type": "color"
+        },
+        "500": {
+          "value": "#FBE5F3",
+          "type": "color"
+        }
+      },
+      "gold": {
+        "100": {
+          "value": "#735B1B",
+          "type": "color"
+        },
+        "200": {
+          "value": "#C19B34",
+          "type": "color"
+        },
+        "300": {
+          "value": "#DEBB4F",
+          "type": "color"
+        },
+        "400": {
+          "value": "#F3E296",
+          "type": "color"
+        },
+        "500": {
+          "value": "#FEF5D2",
+          "type": "color"
+        }
+      },
+      "green": {
+        "100": {
+          "value": "#244233",
+          "type": "color"
+        },
+        "200": {
+          "value": "#4A966A",
+          "type": "color"
+        },
+        "300": {
+          "value": "#95DFBA",
+          "type": "color"
+        },
+        "400": {
+          "value": "#C1F1DA",
+          "type": "color"
+        },
+        "500": {
+          "value": "#E4FBF1",
+          "type": "color"
+        }
+      },
+      "red": {
+        "100": {
+          "value": "#4A241C",
+          "type": "color"
+        },
+        "200": {
+          "value": "#A23725",
+          "type": "color"
+        },
+        "300": {
+          "value": "#D1523D",
+          "type": "color"
+        },
+        "400": {
+          "value": "#EF9585",
+          "type": "color"
+        },
+        "500": {
+          "value": "#FBE7E5",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "knockoff-atlas/dark": {
+    "color": {
+      "black": {
+        "100": {
+          "value": "#070808",
+          "type": "color"
+        },
+        "200": {
+          "value": "#202327",
+          "type": "color"
+        },
+        "300": {
+          "value": "#333A42",
+          "type": "color"
+        },
+        "400": {
+          "value": "#4D5660",
+          "type": "color"
+        },
+        "500": {
+          "value": "#707E8F",
+          "type": "color"
+        },
+        "600": {
+          "value": "#A1ACBA",
+          "type": "color"
+        },
+        "700": {
+          "value": "#CCD3DC",
+          "type": "color"
+        },
+        "800": {
+          "value": "#E6EAEF",
+          "type": "color"
+        },
+        "900": {
+          "value": "#F9FAFB",
+          "type": "color"
+        }
+      }
+    }
+  },
   "semantic": {
     "color": {
       "foreground": {
@@ -5171,7 +5391,9 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/badge": "enabled",
-        "components/avatar": "enabled"
+        "components/avatar": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:6c392f95efb12c1bc91df5b9e08e628e0f641be4,",
@@ -5510,7 +5732,9 @@
         "components/radio/dark": "enabled",
         "components/badge": "enabled",
         "base": "enabled",
-        "components/avatar": "enabled"
+        "components/avatar": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "$figmaStyleReferences": {
         "color.surface.primary": "S:3ea4483b47917706b709a6a2f49677d5d45d4be3,",
@@ -5847,7 +6071,9 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/tmo": "enabled"
+        "semantic/tmo": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "tmo"
     },
@@ -5868,7 +6094,9 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/tmo/dark": "enabled"
+        "semantic/tmo/dark": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "tmo"
     },
@@ -5884,7 +6112,9 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "cox"
     },
@@ -5905,7 +6135,9 @@
         "semantic/dark": "source",
         "components/checkbox/dark": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/cox/dark": "enabled"
+        "semantic/cox/dark": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "cox"
     },
@@ -5921,7 +6153,9 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -5942,7 +6176,9 @@
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
         "semantic/cherry": "enabled",
-        "semantic/cherry/dark": "enabled"
+        "semantic/cherry/dark": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -5958,7 +6194,9 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -5979,7 +6217,9 @@
         "components/icon": "enabled",
         "components/radio": "enabled",
         "components/radio/dark": "enabled",
-        "semantic/blueberry/dark": "enabled"
+        "semantic/blueberry/dark": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -5995,7 +6235,9 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -6016,7 +6258,9 @@
         "components/checkbox/dark": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "components/radio/dark": "enabled"
+        "components/radio/dark": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -6032,7 +6276,9 @@
         "components/badge": "enabled",
         "components/checkbox": "enabled",
         "components/icon": "enabled",
-        "components/radio": "enabled"
+        "components/radio": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -6053,7 +6299,9 @@
         "components/checkbox/dark": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "components/radio/dark": "enabled"
+        "components/radio/dark": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -6069,7 +6317,9 @@
         "components/checkbox": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "semantic/bubblegum": "enabled"
+        "semantic/bubblegum": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     },
@@ -6090,7 +6340,26 @@
         "components/checkbox/dark": "enabled",
         "components/icon": "enabled",
         "components/radio": "enabled",
-        "components/radio/dark": "enabled"
+        "components/radio/dark": "enabled",
+        "knockoff-atlas": "disabled",
+        "knockoff-atlas/dark": "disabled"
+      },
+      "group": "dp"
+    },
+    {
+      "id": "1d785d9414a324cbd8bbef0af5f5c0affe54ddfd",
+      "name": "knockoff-atlas",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "base": "enabled",
+        "knockoff-atlas": "enabled",
+        "semantic": "enabled",
+        "components/avatar": "enabled",
+        "components/badge": "enabled",
+        "components/checkbox": "enabled",
+        "components/icon": "enabled",
+        "components/radio": "enabled",
+        "knockoff-atlas/dark": "disabled"
       },
       "group": "dp"
     }
@@ -6099,6 +6368,8 @@
     "tokenSetOrder": [
       "base",
       "base/dark",
+      "knockoff-atlas",
+      "knockoff-atlas/dark",
       "semantic",
       "semantic/dark",
       "semantic/tmo",
