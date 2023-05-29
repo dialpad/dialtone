@@ -4435,6 +4435,23 @@
               }
             }
           }
+        },
+        "button": {
+          "color": {
+            "background-hover": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".15",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "sidebar": {
