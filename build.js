@@ -160,6 +160,28 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
+  name: 'dt/space/pxToRem',
+  type: 'value',
+  matcher: function(token) {
+    return SPACING_IDENTIFIERS.includes(token.type) && !token.name.includes('percent');
+  },
+  transformer: (token, options) => {
+    const baseFont = getBasePxFontSize(options);
+    const floatVal = parseFloat(token.value);
+
+    if (isNaN(floatVal)) {
+      throwSizeError(token.name, token.value, 'rem');
+    }
+
+    if (floatVal === 0) {
+      return '0';
+    }
+
+    return `${floatVal / baseFont}rem`;
+  }
+});
+
+StyleDictionary.registerTransform({
   name: 'dt/android/size/pxToDp',
   type: 'value',
   matcher: function(token) {

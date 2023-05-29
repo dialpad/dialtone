@@ -3,7 +3,7 @@ const getStyleDictionaryConfig = (theme) => {
     source: [`tokens/tokens-${theme}.json`],
     platforms: {
       less: {
-        transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/lineHeight/percentToDecimal', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'color/hex'],
+        transforms: ['dt/size/pxToRem', 'dt/space/pxToRem', 'dt/fonts/transformToStack', 'dt/lineHeight/percentToDecimal', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'color/hex'],
         prefix: 'dt',
         buildPath: 'dist/less/',
         files: [
@@ -14,7 +14,7 @@ const getStyleDictionaryConfig = (theme) => {
         ],
       },
       css: {
-        transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/lineHeight/percentToDecimal', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'size/rem', 'color/css'],
+        transforms: ['dt/size/pxToRem', 'dt/space/pxToRem', 'dt/fonts/transformToStack', 'dt/lineHeight/percentToDecimal', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'size/rem', 'color/css'],
         actions: ['buildDocJson'],
         prefix: 'dt',
         buildPath: 'dist/css/',
@@ -82,7 +82,7 @@ const getStyleDictionaryConfig = (theme) => {
       json: {
         prefix: 'dt',
         buildPath: 'dist/',
-        transforms: ['dt/size/pxToRem', 'dt/fonts/transformToStack', 'dt/lineHeight/percentToDecimal', 'name/cti/camel'],
+        transforms: ['dt/size/pxToRem', 'dt/space/pxToRem', 'dt/fonts/transformToStack', 'dt/lineHeight/percentToDecimal', 'name/cti/camel'],
         files: [
           {
             destination: `tokens-${theme}.json`,
