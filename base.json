@@ -3835,6 +3835,53 @@
               }
             }
           }
+        },
+        "profile": {
+          "color": {
+            "foreground": {
+              "value": "{theme.topbar.color.foreground}",
+              "type": "color"
+            },
+            "background": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".05",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "background-hover": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".10",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "background-active": {
+              "value": "{theme.color.base}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": ".14",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "sidebar": {
@@ -5865,7 +5912,11 @@
         "theme.topbar.field.color.border-hover": "S:bd975516b40bf134d494ed6f2d5cce0c8cf74ceb,",
         "theme.topbar.field.color.border-active": "S:1b1e8365b6ef26a236112572a448ff991132b9a7,",
         "theme.topbar.button.color.background-active": "S:0080b6430ebd8ca0445729279c46df06dcf6c93f,",
-        "theme.sidebar.section.color.foreground": "S:73e60d3086a1c3d9a333074c3e2daeff87fc4d2d,"
+        "theme.sidebar.section.color.foreground": "S:73e60d3086a1c3d9a333074c3e2daeff87fc4d2d,",
+        "theme.topbar.profile.color.foreground": "S:18111cf3515dd12e3d9d6b4df9b69e83e2ea2bbc,",
+        "theme.topbar.profile.color.background": "S:745ebc78e550b9ed54cc59beda9a5705d2dc836b,",
+        "theme.topbar.profile.color.background-hover": "S:5710cb5aa2440822aa3d5ca18ab18dabaddf1c95,",
+        "theme.topbar.profile.color.background-active": "S:8083e18e9da1737f1471240b4c23ed554f8c2dfe,"
       },
       "selectedTokenSets": {
         "base": "enabled",
