@@ -6293,7 +6293,7 @@
     },
     {
       "id": "f8fb17906f869a7d0fbf3de1f31e8325e0f85b2d",
-      "name": "cherry",
+      "name": "cherry-light",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "base": "enabled",
@@ -6330,7 +6330,7 @@
     },
     {
       "id": "d39e37c6a75caaae2384316e7564e27e70792906",
-      "name": "blueberry",
+      "name": "blueberry-light",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "base": "enabled",
@@ -6367,7 +6367,7 @@
     },
     {
       "id": "95335078e5d191da78892293f07484222c3fb150",
-      "name": "peach",
+      "name": "peach-light",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "base": "enabled",
@@ -6404,7 +6404,7 @@
     },
     {
       "id": "b6e6d56cdab81542a1295a6fbdc7516421a3395a",
-      "name": "kiwi",
+      "name": "kiwi-light",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "base": "enabled",
@@ -6441,7 +6441,7 @@
     },
     {
       "id": "d34e620ed991a770d13683791e8dffce8ee30f8a",
-      "name": "bubblegum",
+      "name": "bubblegum-light",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "base": "enabled",
@@ -6478,7 +6478,7 @@
     },
     {
       "id": "1d785d9414a324cbd8bbef0af5f5c0affe54ddfd",
-      "name": "knockoff-atlas",
+      "name": "knockoff-atlas-light",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "base": "enabled",
@@ -6494,7 +6494,7 @@
     },
     {
       "id": "9efc3c7ba937493363a02db5076b0083255e1359",
-      "name": "knockoff-altlas-dark",
+      "name": "knockoff-atlas-dark",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "base": "enabled",
