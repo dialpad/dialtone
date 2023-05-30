@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-qa="skin-selector">
     <div
       v-show="isOpen"
       class="d-emoji-picker__skin-list"
