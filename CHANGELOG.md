@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/dialpad/dialtone-tokens/compare/v1.17.0...v1.18.0) (2023-05-30)
+
+
+### Features
+
+* **theme:** profile menu ([dea487f](https://github.com/dialpad/dialtone-tokens/commit/dea487f7916cb563dc2cdb87178bac311dda3b52))
+
 # [1.17.0](https://github.com/dialpad/dialtone-tokens/compare/v1.16.0...v1.17.0) (2023-05-29)
 
 

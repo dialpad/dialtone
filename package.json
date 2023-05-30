@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "description": "Design tokens for Dialtone.",
   "main": "index.js",
   "scripts": {
