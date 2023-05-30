@@ -1,21 +1,32 @@
 <template>
-  <div class="d-emoji-picker">
+  <div
+    class="d-emoji-picker"
+  >
     <div class="d-emoji-picker--header">
       <emoji-tabset
+        ref="tabsetRef"
         :emoji-filter="searchQuery"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tabset-labels="tabSetLabels"
         :is-scrolling="isScrolling"
+        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
         @selected-tabset="scrollToSelectedTabset"
+        @keydown.esc="emits('close')"
       />
     </div>
     <div class="d-emoji-picker--body">
       <emoji-search
+        ref="searchInputRef"
         v-model="searchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
+        @select-first-emoji="emits('selected-emoji', highlightedEmoji)"
+        @focus-tabset="$refs.tabsetRef.focusTabset()"
+        @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"
+        @keydown.esc="emits('close')"
       />
       <emoji-selector
+        ref="emojiSelectorRef"
         :emoji-filter="searchQuery"
         :skin-tone="skinTone"
         :tabset-labels="tabSetLabels"
@@ -27,15 +38,21 @@
         @is-scrolling="updateIsScrolling"
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
+        @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
+        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
+        @keydown.esc="emits('close')"
       />
     </div>
     <div class="d-emoji-picker--footer">
       <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
+        ref="skinSelectorRef"
         :is-hovering="!!highlightedEmoji"
         :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
         :skin-tone="skinTone"
         @skin-tone="emits('skin-tone', $event)"
+        @focus-tabset="$refs.tabsetRef.focusTabset()"
+        @keydown.esc="emits('close')"
       />
     </div>
   </div>
@@ -157,6 +174,12 @@ const emits = defineEmits(
      * @param {String} skin - The selected skin tone from the skin selector
      */
     'skin-tone',
+
+    /**
+     * Since they keyboard events are encapsulated, we emit this event to close the picker
+     * @event close
+     */
+    'close',
   ],
 );
 
@@ -198,8 +221,9 @@ function updateHighlightedEmoji (emoji) {
 
 <style lang="less">
 .d-emoji-picker{
-  width: auto;
-  max-width: 372px;
+  // fixed with to achieve accessibility in keyboard
+  // with this width we have 9 emoji per row
+  width: 372px;
   height: 100%;
   display: inline-flex;
   flex-direction: column;

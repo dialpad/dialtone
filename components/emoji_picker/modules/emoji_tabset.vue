@@ -6,13 +6,16 @@
     >
       <template #tabs>
         <dt-tab
-          v-for="tab in tabs"
+          v-for="(tab, index) in tabs"
           :id="tab.id"
+          :ref="el => { if (el) setTabsetRef(el) }"
           :key="tab.id"
           :panel-id="tab.panelId"
           :label="tab.label"
           aria-controls="d-emoji-picker-list"
+          :tabindex="index + 1"
           @click.capture.stop="selectTabset(tab.id)"
+          @keydown="handleKeyDown($event, tab.id)"
         >
           <dt-icon
             size="400"
@@ -74,6 +77,8 @@ const emits = defineEmits([
    * @param {String} tabId - The name of the tab that was selected
    */
   'selected-tabset',
+
+  'focus-search-input',
 ]);
 
 const TABS_DATA = [
@@ -105,6 +110,8 @@ const selectedTab = ref('1');
 
 const { isScrolling } = toRefs(props);
 
+const tabsetRef = ref([]);
+
 watch(() => props.scrollIntoTab,
   () => {
     if (!isScrolling.value && !isSearching.value) {
@@ -130,6 +137,38 @@ function selectTabset (id) {
   }
   emits('selected-tabset', id);
 }
+
+function setTabsetRef (ref) {
+  // We push the $el, because $el is the button inside the dt-tab component
+  // and we need the button to focus it
+  tabsetRef.value.push(ref.$el);
+}
+
+function focusTabset () {
+  tabsetRef.value[0].focus();
+}
+
+function handleKeyDown (event, tabId) {
+  if (event.key === 'Enter') {
+    selectTabset(tabId);
+    // We blur because seems like the tab component override the selected prop, and it removes the selected style
+    tabsetRef.value[tabId - 1].blur();
+  }
+
+  if (event.key === 'Tab') {
+    event.preventDefault();
+    emits('focus-search-input');
+  }
+
+  if (event.key === 'ArrowDown') {
+    // Jump to search input
+    emits('focus-search-input');
+  }
+}
+
+defineExpose({
+  focusTabset,
+});
 </script>
 
 <style lang="less">

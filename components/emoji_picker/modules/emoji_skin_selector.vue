@@ -5,11 +5,13 @@
       class="d-emoji-picker__skin-list"
     >
       <button
-        v-for="skin in skinList"
+        v-for="(skin, index) in skinList"
+        :ref="el => { if (el) setSkinsRef(el) }"
         :key="skin.name"
         :class="{
           'selected': skinSelected.skinCode === skin.skinCode,
         }"
+        @keydown="event => handleKeyDown(event, skin, index)"
         @click="selectSkin(skin)"
       >
         <img
@@ -29,7 +31,10 @@
         {{ skinSelectorButtonTooltipLabel }}
         <template #anchor>
           <button
-            @click="isOpen = true"
+            ref="skinSelectorRef"
+            :aria-label="skinSelectorButtonTooltipLabel"
+            @click="toggleSkinList"
+            @keydown="event => handleKeyDown(event)"
           >
             <img
               class="d-icon d-icon--size-500"
@@ -46,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { nextTick, ref, watchEffect } from 'vue';
 import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 import DtTooltip from '@/components/tooltip/tooltip.vue';
 
@@ -79,6 +84,7 @@ const emits = defineEmits([
    * @type {Number}
    */
   'skin-tone',
+  'focus-tabset',
 ]);
 
 const skinList = [
@@ -124,6 +130,10 @@ const skinSelected = ref(skinList.find((skin) => skin.skinTone === props.skinTon
 
 const isOpen = ref(false);
 
+const skinSelectorRef = ref(null);
+
+const skinsRef = ref([]);
+
 /**
  * It will close the skin selector if the user is hovering over the emoji list
  */
@@ -131,11 +141,51 @@ watchEffect(
   () => props.isHovering && (isOpen.value = false),
 );
 
+function setSkinsRef (ref) {
+  skinsRef.value.push(ref);
+}
+function focusSkinSelector () {
+  skinSelectorRef.value.focus();
+}
+
 function selectSkin (skin) {
   skinSelected.value = skin;
   isOpen.value = false;
   emits('skin-tone', skin.skinTone);
+  nextTick(() => focusSkinSelector());
 }
+
+const handleKeyDown = (event, skin, index) => {
+  event.preventDefault();
+
+  if (event.key === 'ArrowLeft') {
+    if (index === 0) skinsRef.value[skinsRef.value.length - 1]?.focus();
+    skinsRef.value[index - 1]?.focus();
+  }
+
+  if (event.key === 'ArrowRight') {
+    skinsRef.value[index + 1]?.focus();
+  }
+
+  if (event.key === 'Enter') {
+    if (skin) { selectSkin(skin); } else {
+      toggleSkinList();
+    }
+  }
+
+  if (event.key === 'Tab') {
+    emits('focus-tabset');
+  }
+};
+
+function toggleSkinList () {
+  isOpen.value = !isOpen.value;
+  nextTick(() => skinsRef.value[0].focus());
+}
+
+defineExpose({
+  focusSkinSelector,
+});
 </script>
 
 <style lang="less" scoped>
@@ -156,6 +206,7 @@ function selectSkin (skin) {
       margin: 0;
       padding: 0;
       outline: none;
+      border-radius: 28px;
       width: 34px;
       height: 34px;
 

@@ -55,6 +55,7 @@ const recentlyUsedEmojis = [
 export const argsData = {
   onSkinTone: action('skin-tone'),
   onSelectedEmoji: action('selected-emoji'),
+  onClose: action('close'),
   tabSetLabels: [
     'Most recently used',
     'Smileys and people',
@@ -85,6 +86,11 @@ export const argTypesData = {
     },
   },
   onSelectedEmoji: {
+    table: {
+      disable: true,
+    },
+  },
+  onClose: {
     table: {
       disable: true,
     },
