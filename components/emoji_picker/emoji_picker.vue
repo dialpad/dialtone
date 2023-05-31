@@ -176,7 +176,7 @@ const emits = defineEmits(
     'skin-tone',
 
     /**
-     * Since they keyboard events are encapsulated, we emit this event to close the picker
+     * Since the keyboard events are encapsulated, we emit this event to close the picker
      * @event close
      */
     'close',

@@ -67,7 +67,6 @@ export const argsData = {
     'Symbols',
     'Flags',
   ],
-  skinTone: 'Light',
   recentlyUsedEmojis,
   skinSelectorButtonTooltipLabel: 'Change default skin tone',
   searchNoResultsLabel: 'No results',

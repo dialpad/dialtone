@@ -16,5 +16,5 @@
 import DtEmojiPicker from './emoji_picker.vue';
 import { ref } from 'vue';
 
-const skinTone = ref('Light');
+const skinTone = ref('Default');
 </script>
