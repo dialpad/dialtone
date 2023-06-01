@@ -46,8 +46,8 @@ export const argTypesData = {
   direction: {
     control: {
       type: 'select',
-      options: ['horizontal', 'vertical'],
     },
+    options: ['horizontal', 'vertical'],
   },
 
   listTag: {

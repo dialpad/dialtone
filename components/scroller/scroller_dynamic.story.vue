@@ -7,6 +7,11 @@
     </button>
     <br>
     <br>
+    <button @click="replaceItems()">
+      Replace Items
+    </button>
+    <br>
+    <br>
     <button
       class="autoscrolling"
       @click="switchAutoScrolling"
@@ -97,6 +102,11 @@ function switchAutoScrolling () {
       }
     });
   }, 1000);
+}
+
+function replaceItems () {
+  dynamicItems.value = [...dynamicItems.value].reverse();
+  scroller.value.updateItems();
 }
 </script>
 

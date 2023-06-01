@@ -236,6 +236,16 @@ export default {
   },
 
   methods: {
+    dynamicScrollerUpdateItems () {
+      const scroller = this.$refs.scroller;
+      if (scroller) scroller._updateVisibleItems(true);
+    },
+
+    dynamicScrollerUpdateItemsFromBottom () {
+      const scroller = this.$refs.scroller;
+      if (scroller) scroller._updateVisibleItems(false, true);
+    },
+
     scrollToItem (index) {
       const scroller = this.$refs.scroller;
       if (scroller) scroller.scrollToItem(index);

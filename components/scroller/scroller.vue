@@ -166,11 +166,21 @@ function scrollToItem (index) {
 }
 
 function updateItems () {
-  if (scroller.value) scroller.value._updateVisibleItems(true);
+  if (!scroller.value) return;
+  if (props.dynamic) {
+    scroller.value.dynamicScrollerUpdateItems();
+  } else {
+    scroller.value._updateVisibleItems(true);
+  }
 }
 
 function updateItemsFromBottom () {
-  if (scroller.value) scroller.value._updateVisibleItems(false, true);
+  if (!scroller.value) return;
+  if (props.dynamic) {
+    scroller.value.dynamicScrollerUpdateItemsFromBottom();
+  } else {
+    scroller.value._updateVisibleItems(false, true);
+  }
 }
 
 function validateProps () {
