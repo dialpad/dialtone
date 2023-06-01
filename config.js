@@ -14,7 +14,7 @@ const getStyleDictionaryConfig = (theme) => {
         ],
       },
       css: {
-        transforms: ['dt/size/pxToRem', 'dt/space/pxToRem', 'dt/fonts/transformToStack', 'dt/lineHeight/percentToDecimal', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'size/rem', 'color/css'],
+        transforms: ['dt/size/pxToRem', 'dt/space/pxToRem', 'dt/fonts/transformToStack', 'dt/lineHeight/percentToDecimal', 'attribute/cti', 'name/cti/kebab', 'time/seconds', 'content/icon', 'color/css'],
         actions: ['buildDocJson'],
         prefix: 'dt',
         buildPath: 'dist/css/',

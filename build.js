@@ -145,6 +145,7 @@ StyleDictionary.registerTransform({
   },
   transformer: (token, options) => {
     const baseFont = getBasePxFontSize(options);
+    if (token.value.toString().endsWith('%')) { return token.value };
     const floatVal = parseFloat(token.value);
 
     if (isNaN(floatVal)) {
