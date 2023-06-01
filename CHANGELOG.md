@@ -1,3 +1,15 @@
+# [1.19.0](https://github.com/dialpad/dialtone-tokens/compare/v1.18.0...v1.19.0) (2023-06-01)
+
+
+### Bug Fixes
+
+* radius percent output in % ([52057f0](https://github.com/dialpad/dialtone-tokens/commit/52057f03310c66910fd5d4a91298137945403414))
+
+
+### Features
+
+* **theme:** dnd profile ([33dd53a](https://github.com/dialpad/dialtone-tokens/commit/33dd53a5b4035f6418a1c036615783e2dd18077f))
+
 # [1.18.0](https://github.com/dialpad/dialtone-tokens/compare/v1.17.0...v1.18.0) (2023-05-30)
 
 
