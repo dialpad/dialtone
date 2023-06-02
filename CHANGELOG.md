@@ -1,3 +1,18 @@
+# [3.70.0](https://github.com/dialpad/dialtone-vue/compare/v3.69.3...v3.70.0) (2023-06-02)
+
+
+### Bug Fixes
+
+* **Pagination:** [DIALTONE-1089] muted clear button error vue3 ([#999](https://github.com/dialpad/dialtone-vue/issues/999)) ([8f3aaac](https://github.com/dialpad/dialtone-vue/commit/8f3aaac6bcbc3b3e67c06921285067a770ec6d75))
+
+
+### Features
+
+* **Emoji Picker:**  keyboard navigation ([#987](https://github.com/dialpad/dialtone-vue/issues/987)) ([437adc9](https://github.com/dialpad/dialtone-vue/commit/437adc950e451776839a210ee3e333b5d3d92772))
+* **Emoji Picker:** documentation ([#1000](https://github.com/dialpad/dialtone-vue/issues/1000)) ([b4cef11](https://github.com/dialpad/dialtone-vue/commit/b4cef11e952614ba366f683c376988acc957b5df))
+* **Emoji Picker:** tests ([#996](https://github.com/dialpad/dialtone-vue/issues/996)) ([5a13ccf](https://github.com/dialpad/dialtone-vue/commit/5a13ccf28287dee4116ce323d528ff5a99889089))
+* **Scroller:** updates in dynamic scroller ([#1003](https://github.com/dialpad/dialtone-vue/issues/1003)) ([c3519ef](https://github.com/dialpad/dialtone-vue/commit/c3519ef75ef7f136012638a81a4b3011aa099f72))
+
 ## [3.69.3](https://github.com/dialpad/dialtone-vue/compare/v3.69.2...v3.69.3) (2023-05-25)
 
 
