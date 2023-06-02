@@ -15,6 +15,7 @@ export const argsData = {
   outputFormat: 'text',
   autoFocus: false,
   link: true,
+  placeholder: 'Type here...',
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
