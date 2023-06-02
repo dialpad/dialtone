@@ -9,6 +9,7 @@
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
+import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
@@ -92,6 +93,14 @@ export default {
         return RICH_TEXT_EDITOR_OUTPUT_FORMATS.includes(outputFormat);
       },
     },
+
+    /**
+     * Placeholder text
+     */
+    placeholder: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -134,7 +143,10 @@ export default {
     extensions () {
       // These are the default extensions needed jsut for plain text.
       const extensions = [Document, Paragraph, Text];
-      // TODO: Add logic for extensions passed as props.
+      // Enable placeholderText
+      extensions.push(
+        Placeholder.configure({ placeholder: this.placeholder }),
+      );
       return extensions;
     },
 
@@ -248,3 +260,13 @@ export default {
   },
 };
 </script>
+
+<style>
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: var(--fc-placeholder);
+    pointer-events: none;
+    height: 0;
+  }
+</style>

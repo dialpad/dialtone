@@ -34,6 +34,7 @@
     "@dialpad/dialtone-icons": "0.7.1-vue3",
     "@tiptap/extension-document": "^2.0.2",
     "@tiptap/extension-paragraph": "^2.0.2",
+    "@tiptap/extension-placeholder": "^2.0.3",
     "@tiptap/extension-text": "^2.0.2",
     "@tiptap/pm": "^2.0.2",
     "@tiptap/vue-3": "^2.0.2",

@@ -14,6 +14,7 @@ export const argsData = {
   inputAriaLabel: 'This is a descriptive label',
   outputFormat: 'text',
   autoFocus: false,
+  placeholder: 'Type here...',
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
