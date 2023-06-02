@@ -9,6 +9,7 @@
 import { Editor, EditorContent } from '@tiptap/vue-2';
 import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
+import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
 import Link from './extensions/link';
 import {
@@ -102,6 +103,14 @@ export default {
       type: [Boolean, Object],
       default: false,
     },
+
+    /**
+     * Placeholder text
+     */
+    placeholder: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -147,6 +156,10 @@ export default {
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
+      // Enable placeholder text
+      extensions.push(
+        Placeholder.configure({ placeholder: this.placeholder }),
+      );
       return extensions;
     },
 
@@ -283,3 +296,13 @@ export default {
   },
 };
 </script>
+
+<style>
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: var(--fc-placeholder);
+    pointer-events: none;
+    height: 0;
+  }
+</style>

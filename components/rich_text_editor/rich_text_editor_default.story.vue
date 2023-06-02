@@ -7,6 +7,7 @@
     :output-format="outputFormat"
     :auto-focus="autoFocus"
     :link="link"
+    :placeholder="placeholder"
     @blur="onBlur"
     @input="onInput"
     @focus="onFocus"
