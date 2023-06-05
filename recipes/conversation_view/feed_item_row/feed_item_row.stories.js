@@ -4,6 +4,8 @@ import DtRecipeFeedItemRow from './feed_item_row.vue';
 import DtRecipeFeedItemRowDefaultTemplate from './feed_item_row_default.story.vue';
 import DtRecipeFeedItemRowVariantsTemplate from './feed_item_row_variants.story.vue';
 
+import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_item_row_constants';
+
 const iconsList = getIconNames();
 
 export const argsData = {
@@ -82,6 +84,22 @@ export const argTypesData = {
       type: 'select',
       labels: {
         undefined: '(empty)',
+      },
+    },
+  },
+
+  state: {
+    defaultValue: DEFAULT_FEED_ROW_STATE,
+    options: Object.keys(FEED_ROW_STATE_BACKGROUND_COLOR),
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+    table: {
+      defaultValue: {
+        summary: DEFAULT_FEED_ROW_STATE,
       },
     },
   },
