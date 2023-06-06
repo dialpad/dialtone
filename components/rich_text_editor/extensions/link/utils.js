@@ -5,9 +5,10 @@ import {
 } from '@/common/utils';
 
 /**
- * Get matches in a string and return the ones that pass the extra validation.
+ * Get matches in a string and return the ones that pass the optional extra
+ * validation or if no validator is provided return all matches.
  */
-export function getRegexMatches (text, regex, validator) {
+export function getRegexMatches (text, regex, validator = () => true) {
   const matches = [];
 
   // Reset the lastIndex since the last time this was run.
@@ -87,6 +88,9 @@ export function getWordAt (text, index) {
  */
 export function getWordAtUntil (text, index, direction, regex) {
   const word = getWordAt(text, index);
+
+  // Reset the lastIndex since the last time this was run.
+  regex.lastIndex = 0;
 
   // If the word doesn't match the regex we can just return it.
   if (!regex.test(word.text)) {
