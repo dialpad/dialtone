@@ -284,30 +284,34 @@ export const linkRegex = new RegExp(
 
 /**
  * Check if a string is a phone number. Validates only exact matches.
- * @param {string} string
+ * @param {string|number} input
  * @returns {boolean}
  */
-export function isPhoneNumber (string) {
-  return phoneNumberRegex.exec(string)?.[0] === string;
+export function isPhoneNumber (input) {
+  if (!input || (!['string', 'number'].includes(typeof input))) return false;
+  input = input.toString();
+  return phoneNumberRegex.exec(input)?.[0] === input;
 }
 
 /**
  * Check if a string is an URL. Validates only exact matches.
- * @param {string} string
+ * @param {string} input
  * @returns {boolean}
  */
-export function isURL (string) {
-  return urlWithoutProtocolRegex.exec(string)?.[0] === string ||
-    urlWithProtocolRegex.exec(string)?.[0] === string;
+export function isURL (input) {
+  if (!input || typeof input !== 'string') return false;
+  return urlWithoutProtocolRegex.exec(input)?.[0] === input ||
+    urlWithProtocolRegex.exec(input)?.[0] === input;
 }
 
 /**
  * Check if a string is an email address. Validates only exact matches.
- * @param {string} string
+ * @param {string} input
  * @returns {boolean}
  */
-export function isEmailAddress (string) {
-  return emailAddressRegex.exec(string)?.[0] === string;
+export function isEmailAddress (input) {
+  if (!input || typeof input !== 'string') return false;
+  return emailAddressRegex.exec(input)?.[0] === input;
 }
 
 export default {
