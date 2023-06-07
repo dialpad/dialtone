@@ -1,14 +1,15 @@
 <template>
   <ul>
     <dt-recipe-feed-item-row
-      :show-header="$attrs.showHeader"
-      :avatar-image-url="$attrs.avatarImageUrl"
-      :display-name="$attrs.displayName"
-      :time="$attrs.time"
-      :short-time="$attrs.shortTime"
-      :is-active="$attrs.isActive"
-      @hover="$attrs.onHover"
-      @focus="$attrs.onFocus"
+      :show-header="showHeader"
+      :avatar-image-url="avatarImageUrl"
+      :display-name="displayName"
+      :time="time"
+      :short-time="shortTime"
+      :is-active="isActive"
+      :state="state"
+      @hover="onHover"
+      @focus="onFocus"
     >
       <template v-if="$attrs.default">
         <span v-html="$attrs.default" />
