@@ -15,6 +15,7 @@ export const argsData = {
   outputFormat: 'text',
   autoFocus: false,
   placeholder: 'Type here...',
+  link: true,
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
@@ -51,6 +52,10 @@ export const argTypesData = {
 
   modelValue: {
     control: 'text',
+  },
+
+  link: {
+    control: 'boolean',
   },
 
   // Directives
@@ -97,4 +102,13 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
 
 export const Default = {
   render: DefaultTemplate,
+};
+
+export const WithLinks = {
+  ...Default,
+  args: {
+    link: true,
+    modelValue: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
+    'IP addresses: 192.158.1.38, email addresses: noreply@dialpad.com and phone numbers: (778) 765-8813, +17787658813!',
+  },
 };

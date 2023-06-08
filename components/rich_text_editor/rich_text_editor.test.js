@@ -5,6 +5,7 @@ import { EditorContent } from '@tiptap/vue-3';
 // Wrappers
 let wrapper;
 let editor;
+let editorEl;
 
 // Test Environment
 let props;
@@ -17,33 +18,43 @@ let inputStub;
 const baseProps = {
   modelValue: 'initial value',
   inputAriaLabel: 'aria-label text',
+  inputClass: 'qa-editor',
 };
 
 // Helpers
 const _setChildWrappers = () => {
   editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+  editorEl = document.getElementsByClassName('qa-editor')[0];
 };
 
 const _mountWrapper = () => {
+  // remove the previous element if it exists or otherwise we'll end up with
+  // multiple elements when re-mounting.
+  editorEl?.remove();
   wrapper = mount(DtRichTextEditor, {
     props,
     components: { EditorContent },
     listeners,
     attrs,
     slots,
+    attachTo: document.body,
   });
 };
 
-// todo: fix
-describe.skip('DtRichTextEditor tests', function () {
-  beforeAll(function () {
-    // These are undefined in the scope. Need to mock them to avoid error.
-    global.requestAnimationFrame = vi.fn();
-    global.cancelAnimationFrame = vi.fn();
+const _setValue = async (value) => {
+  editorEl.innerHTML = value;
+  await wrapper.vm.$nextTick();
+};
+
+describe('DtRichTextEditor tests', () => {
+  // Test Setup
+  beforeAll(() => {
+    global.Range.prototype.getClientRects = vi.fn(() => [{}]);
+    global.Range.prototype.getBoundingClientRect = vi.fn(() => [{}]);
+    global.scrollBy = vi.fn();
   });
 
-  // Test Setup
-  beforeEach(async function () {
+  beforeEach(async () => {
     props = baseProps;
     inputStub = vi.fn();
     attrs = {
@@ -74,14 +85,10 @@ describe.skip('DtRichTextEditor tests', function () {
     describe('User Input Tests', function () {
       describe('When user inputs a value', function () {
         // Shared Examples
-        const itBehavesLikeOutputsCorrectly = (value) => {
-          it('should emit the output value', async function () {
-            // The "input" is an editable div and Vue test utils doesn't provide
-            // a setValue() equivalent for non-input elements, so cheat a little
-            // and emit an update directly from the editor component. The value
-            // emitted will be the initial value from mount.
-            await wrapper.vm.editor.emit('update');
-            expect(wrapper.emitted().input[0][0]).toEqual(value);
+        const itBehavesLikeOutputsCorrectly = (value, output) => {
+          it('should emit the output value', async () => {
+            await _setValue(value);
+            expect(wrapper.emitted().input[0][0]).toEqual(output);
             expect(inputStub).toHaveBeenCalled();
           });
         };
@@ -92,7 +99,7 @@ describe.skip('DtRichTextEditor tests', function () {
             await wrapper.setProps({ outputFormat: 'text' });
           });
 
-          itBehavesLikeOutputsCorrectly(baseProps.modelValue);
+          itBehavesLikeOutputsCorrectly('new value', 'new value');
         });
 
         describe('When using json output', function () {
@@ -102,7 +109,7 @@ describe.skip('DtRichTextEditor tests', function () {
             content: [{
               type: 'paragraph',
               content: [{
-                text: baseProps.modelValue,
+                text: 'new value',
                 type: 'text',
               }],
             }],
@@ -113,7 +120,7 @@ describe.skip('DtRichTextEditor tests', function () {
             await wrapper.setProps({ outputFormat: 'json' });
           });
 
-          itBehavesLikeOutputsCorrectly(jsonOutput);
+          itBehavesLikeOutputsCorrectly('new value', jsonOutput);
         });
 
         describe('When using html output', function () {
@@ -122,7 +129,7 @@ describe.skip('DtRichTextEditor tests', function () {
             await wrapper.setProps({ outputFormat: 'html' });
           });
 
-          itBehavesLikeOutputsCorrectly(`<p>${baseProps.modelValue}</p>`);
+          itBehavesLikeOutputsCorrectly('new value', '<p>new value</p>');
         });
       });
     });
