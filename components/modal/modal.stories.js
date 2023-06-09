@@ -20,7 +20,7 @@ maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
   title: 'Example Title',
-  onClose: action('update:show'),
+  toggleOpen: action('update:show'),
   visuallyHiddenCloseLabel: 'Close Modal',
 };
 
@@ -93,16 +93,16 @@ export const argTypesData = {
 
   // Events
   'update:show': {
-    description: `The modal will emit a "false" boolean value for this event when the \
-user performs a modal-closing action.  Parent components can sync on this value to create \
-a 2-way binding to control modal visibility.`,
+    description: `The modal will emit a "false" boolean value when the user performs a modal-closing action \
+     and a "true" boolean value after the modal is fully-shown.\
+     Parent components can sync on this value to create a 2-way binding to control modal visibility.`,
     table: {
       type: {
         summary: 'boolean',
       },
     },
   },
-  onClose: {
+  toggleOpen: {
     table: {
       disable: true,
     },
