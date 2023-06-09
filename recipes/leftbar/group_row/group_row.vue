@@ -1,7 +1,7 @@
 <template>
   <dt-recipe-general-row
     :description="names"
-    :aria-label="`${groupCountText} ${names}`"
+    :aria-label="ariaLabel"
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
     :unread-count-tooltip="unreadCountTooltip"
@@ -21,6 +21,7 @@
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtIcon from '@/components/icon/icon.vue';
+import { safeConcatStrings } from '@/common/utils.js';
 
 export default {
   name: 'DtRecipeGroupRow',
@@ -101,5 +102,11 @@ export default {
      */
     'click',
   ],
+
+  computed: {
+    ariaLabel () {
+      return safeConcatStrings([this.groupCountText, this.names]);
+    },
+  },
 };
 </script>
