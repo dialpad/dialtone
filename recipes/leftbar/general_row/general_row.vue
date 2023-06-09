@@ -134,6 +134,7 @@ import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
+import { safeConcatStrings } from '@/common/utils.js';
 
 export default {
   name: 'DtRecipeGeneralRow',
@@ -343,7 +344,9 @@ export default {
     },
 
     getAriaLabel () {
-      return this.ariaLabel ? this.ariaLabel : `${this.description} ${this.unreadCountTooltip} ${this.dndTextTooltip}`;
+      return this.ariaLabel
+        ? this.ariaLabel
+        : safeConcatStrings([this.description, this.unreadCountTooltip, this.dndTextTooltip]);
     },
   },
 

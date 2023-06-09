@@ -314,6 +314,16 @@ export function isEmailAddress (input) {
   return emailAddressRegex.exec(input)?.[0] === input;
 }
 
+/**
+ * Concatenate a string removing null or undefined elements
+ * avoiding parsing them as string with template strings
+ * @param {Array} elements
+ * @returns {String}
+ */
+export function safeConcatStrings (elements) {
+  return elements.filter(str => !!str).join(' ');
+}
+
 export default {
   getUniqueString,
   getRandomElement,
@@ -332,4 +342,5 @@ export default {
   isEmailAddress,
   isPhoneNumber,
   isURL,
+  safeConcatStrings,
 };
