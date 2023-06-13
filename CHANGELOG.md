@@ -1,3 +1,27 @@
+# [2.86.0](https://github.com/dialpad/dialtone-vue/compare/v2.85.1...v2.86.0) (2023-06-13)
+
+
+### Bug Fixes
+
+* add placeholder text for richtexteditor ([#1004](https://github.com/dialpad/dialtone-vue/issues/1004)) ([8f7b50d](https://github.com/dialpad/dialtone-vue/commit/8f7b50db8481bf586b8da498ceeacfd4ee66c370))
+* **Contact Row, Group Row, General Row:** null on description ([#1013](https://github.com/dialpad/dialtone-vue/issues/1013)) ([39fdd11](https://github.com/dialpad/dialtone-vue/commit/39fdd117ffdd2f7f7a55bfc6332fc5dec1e06366))
+* DIALTONE-1089 pagination muted clear button error ([f2c79ac](https://github.com/dialpad/dialtone-vue/commit/f2c79aca2fd7f4baea9061211bc29c0c799488e3))
+* **Modal:** secondary action button kind ([#1011](https://github.com/dialpad/dialtone-vue/issues/1011)) ([3f0717d](https://github.com/dialpad/dialtone-vue/commit/3f0717d9e4cb121dac004d69af98d8ad873289c6))
+* revert [DIALTONE-1089] fix: pagination muted clear button error ([b234496](https://github.com/dialpad/dialtone-vue/commit/b234496106fba1ae2f3894f4f24fd77e223a6759))
+
+
+### Documentation
+
+* fix broken story ([bfcd04b](https://github.com/dialpad/dialtone-vue/commit/bfcd04bc74872ff41d29de76e5fea5da45a05a39))
+
+
+### Features
+
+* **Modal:** show event and initial-focus-element ([#1009](https://github.com/dialpad/dialtone-vue/issues/1009)) ([f4109a7](https://github.com/dialpad/dialtone-vue/commit/f4109a7969b2d035102bc7c4b94875cba8a31595))
+* **Rich Text Editor:** link extension ([#991](https://github.com/dialpad/dialtone-vue/issues/991)) ([9612c7c](https://github.com/dialpad/dialtone-vue/commit/9612c7cb1581c24fb2d20c5d156aaf45dd0b0263))
+* **Rich Text Editor:** tests for rich text editor link extension and utils ([#1001](https://github.com/dialpad/dialtone-vue/issues/1001)) ([203fda4](https://github.com/dialpad/dialtone-vue/commit/203fda48f1ed99d10d3f7bb4a74ba412a43d15b0))
+* state changes for feed item row ([#1002](https://github.com/dialpad/dialtone-vue/issues/1002)) ([5838862](https://github.com/dialpad/dialtone-vue/commit/583886255d8e692a79b4233ca8005e7ee48b79bc))
+
 ## [2.85.1](https://github.com/dialpad/dialtone-vue/compare/v2.85.0...v2.85.1) (2023-05-25)
 
 
