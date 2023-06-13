@@ -1,3 +1,24 @@
+# [3.71.0](https://github.com/dialpad/dialtone-vue/compare/v3.70.0...v3.71.0) (2023-06-13)
+
+
+### Bug Fixes
+
+* add placeholder text for richtexteditor - vue3 ([#1005](https://github.com/dialpad/dialtone-vue/issues/1005)) ([ae5d586](https://github.com/dialpad/dialtone-vue/commit/ae5d586e2ec368fc283d4fb609769bb8c62c3037))
+* **Contact Row, Group Row, General Row:** null on description - vue3 ([#1014](https://github.com/dialpad/dialtone-vue/issues/1014)) ([ac6d084](https://github.com/dialpad/dialtone-vue/commit/ac6d08462184f2324b033c129a2c853264125044))
+* **Modal:** secondary action button kind ([#1012](https://github.com/dialpad/dialtone-vue/issues/1012)) ([0f51007](https://github.com/dialpad/dialtone-vue/commit/0f510075861bf3b61c0e67117c2fc914f5ef58a0))
+* **Modal:** show event and initial-focus-element - vue3 ([#1010](https://github.com/dialpad/dialtone-vue/issues/1010)) ([00a4553](https://github.com/dialpad/dialtone-vue/commit/00a4553e498f0cbebc499b7a1d299f5831fa0ff3))
+
+
+### Documentation
+
+* fix broken story ([318974c](https://github.com/dialpad/dialtone-vue/commit/318974cfe7b8a757f319bb8f78e2b473186d8fda))
+
+
+### Features
+
+* **Feed Item Row:** state changes - vue3 ([#1006](https://github.com/dialpad/dialtone-vue/issues/1006)) ([13e4edf](https://github.com/dialpad/dialtone-vue/commit/13e4edf304f250140db1208b2be84fe2b3616ee8))
+* **Rich Text Editor:** link extension vue3 ([#1008](https://github.com/dialpad/dialtone-vue/issues/1008)) ([b4c1397](https://github.com/dialpad/dialtone-vue/commit/b4c13970db9ad6e88bb8ce316c50ee430e46d872))
+
 # [3.70.0](https://github.com/dialpad/dialtone-vue/compare/v3.69.3...v3.70.0) (2023-06-02)
 
 
