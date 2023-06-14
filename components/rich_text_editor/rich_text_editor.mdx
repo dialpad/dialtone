@@ -32,15 +32,27 @@ another component, such as Message Input, that provides the UI.
 
 <Controls />
 
-### Usage (internal only)
+## Usage (internal only)
 
 ```js
 import { DtRichTextEditor } from '@components/rich_text_editor';
 ```
 
+### Default
+
 ```jsx
 <dt-rich-text-editor
   :v-model="text"
   :input-aria-label="ariaLabel"
+/>
+```
+
+### With Links
+
+```jsx
+<dt-rich-text-editor
+  :v-model="text"
+  :input-aria-label="ariaLabel"
+  link
 />
 ```

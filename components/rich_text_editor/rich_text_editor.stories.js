@@ -14,6 +14,8 @@ export const argsData = {
   inputAriaLabel: 'This is a descriptive label',
   outputFormat: 'text',
   autoFocus: false,
+  link: true,
+  placeholder: 'Type here...',
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
@@ -50,6 +52,10 @@ export const argTypesData = {
 
   value: {
     control: 'text',
+  },
+
+  link: {
+    control: 'boolean',
   },
 
   // Directives
@@ -94,4 +100,13 @@ const DefaultTemplate = (args, { argTypes }) =>
 
 export const Default = {
   render: DefaultTemplate,
+};
+
+export const WithLinks = {
+  ...Default,
+  args: {
+    link: true,
+    value: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
+    'IP addresses: 192.158.1.38, email addresses: noreply@dialpad.com and phone numbers: (778) 765-8813, +17787658813!',
+  },
 };

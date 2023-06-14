@@ -1,0 +1,48 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtDatepickerStories from './datepicker.stories.js';
+
+<Meta of={DtDatepickerStories}/>
+
+# DtDatepicker
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas of={DtDatepickerStories.Default} />
+
+## Variants
+
+<Canvas of={DtDatepickerStories.Variants} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtDatepicker } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```jsx
+<dt-datepicker
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```jsx
+<dt-datepicker
+  some-other="variant"
+/>
+```

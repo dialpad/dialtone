@@ -11,6 +11,7 @@
           :time="time"
           :short-time="shortTime"
           :is-active="true"
+          :state="state"
           @hover="onHover"
           @focus="onFocus"
         >
@@ -162,6 +163,52 @@
         </dt-recipe-feed-item-row>
       </ul>
     </div>
+    <div>
+      <h3>Feed item state "error"</h3>
+      <ul>
+        <dt-recipe-feed-item-row
+          :show-header="false"
+          :avatar-image-url="avatarImageUrl"
+          :display-name="displayName"
+          :time="time"
+          :short-time="shortTime"
+          :is-active="true"
+          state="ERROR"
+          @hover="onHover"
+          @focus="onFocus"
+        >
+          <template v-if="defaultSlot">
+            <span v-html="defaultSlot" />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div>
+      <h3>Feed item state "searched"</h3>
+      <dt-button
+        @click="$refs.feedItemRowFade.fade()"
+      >
+        Click to fade
+      </dt-button>
+      <ul>
+        <dt-recipe-feed-item-row
+          ref="feedItemRowFade"
+          :show-header="false"
+          :avatar-image-url="avatarImageUrl"
+          :display-name="displayName"
+          :time="time"
+          :short-time="shortTime"
+          :is-active="true"
+          state="SEARCHED"
+          @hover="onHover"
+          @focus="onFocus"
+        >
+          <template v-if="defaultSlot">
+            <span v-html="defaultSlot" />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
   </dt-stack>
 </template>
 
@@ -173,6 +220,7 @@ import { DtStack } from '@/components/stack';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
+import { DtButton } from '@/components/button';
 
 export default {
   name: 'DtRecipeFeedItemRowVariants',
@@ -183,6 +231,7 @@ export default {
     DtAvatar,
     DtIcon,
     DtImageViewer,
+    DtButton,
   },
 };
 </script>
