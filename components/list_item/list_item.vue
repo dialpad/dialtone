@@ -3,7 +3,7 @@
   <component
     :is="elementType"
     :id="id"
-    :class="['dt-list-item d-ls-none', {
+    :class="['dt-list-item', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
       'dt-list-item--static': !isHoverable,
@@ -31,7 +31,7 @@
         <dt-icon
           name="check"
           size="400"
-          class="d-ml8"
+          class="dt-list-item--selected-icon"
         />
       </template>
     </component>
@@ -239,23 +239,31 @@ export default {
 </script>
 
 <style lang="less">
-.dt-list-item:not(.dt-list-item--static) {
-  cursor: pointer;
-  border-radius: var(--size-300);
-}
+.dt-list-item {
+  list-style: none;
 
-.dt-list-item--focusable:focus,
-.dt-list-item--focusable:focus-within,
-.dt-list-item--highlighted {
-  background-color: var(--bgc-moderate-opaque);
-}
+  :not(.dt-list-item--static) {
+    cursor: pointer;
+    border-radius: var(--size-300);
+  }
 
-.dt-list-item--highlighted:active {
-  background-color: var(--bgc-bold-opaque);
-}
+  &--focusable:focus,
+  &--focusable:focus-within,
+  &--highlighted {
+    background-color: var(--bgc-moderate-opaque);
+  }
 
-.dt-list-item:focus-visible {
-  outline: none;
-  box-shadow: var(--bs-focus-ring);
+  &--highlighted:active {
+    background-color: var(--bgc-bold-opaque);
+  }
+
+  &--selected-icon {
+    margin-left: var(--space-400);
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--bs-focus-ring);
+  }
 }
 </style>
