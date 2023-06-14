@@ -25,8 +25,8 @@
               :initials="avatar.initials"
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
-              overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
-              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
+              overlay-class="d-mn4 d-ba d-baw4 d-bc-neutral-white d-box-unset"
+              :avatar-class="['d-ba d-baw4 d-bc-neutral-white d-bar-pill', { 'd-mln24': index > 0 }]"
             >
               <img
                 v-if="avatar.src"

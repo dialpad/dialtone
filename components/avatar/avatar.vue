@@ -225,7 +225,7 @@ export default {
 
     overlayClasses () {
       return [
-        'd-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p d-d-flex d-ai-center d-bar-circle d-zi-base',
+        'd-bgc-neutral-black d-o70 d-ps-absolute d-w100p d-h100p d-d-flex d-ai-center d-bar-circle d-zi-base',
         this.overlayClass,
       ];
     },

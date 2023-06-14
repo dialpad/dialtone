@@ -80,8 +80,8 @@ export default {
   }
 
   &--messages {
-    background-color: var(--bgc-primary);
-    color: var(--fc-primary);
+    background-color: var(--dt-color-surface-primary);
+    color: var(--dt-color-foreground-primary);
   }
 }
 </style>
