@@ -1,3 +1,15 @@
+# [3.72.0](https://github.com/dialpad/dialtone-vue/compare/v3.71.0...v3.72.0) (2023-06-15)
+
+
+### Code Refactoring
+
+* **List Item:** remove utility classes ([#1018](https://github.com/dialpad/dialtone-vue/issues/1018)) ([a59e8cb](https://github.com/dialpad/dialtone-vue/commit/a59e8cbf3a959790515df1f69473e160e83a0abe))
+
+
+### Features
+
+* **Emoji Picker:** with popover variant and code improvement ([#1020](https://github.com/dialpad/dialtone-vue/issues/1020)) ([2c0a82b](https://github.com/dialpad/dialtone-vue/commit/2c0a82b2db26c84760e80b4bb716f6ea6e1af978))
+
 # [3.71.0](https://github.com/dialpad/dialtone-vue/compare/v3.70.0...v3.71.0) (2023-06-13)
 
 
