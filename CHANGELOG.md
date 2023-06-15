@@ -1,3 +1,16 @@
+# [1.20.0](https://github.com/dialpad/dialtone-tokens/compare/v1.19.0...v1.20.0) (2023-06-15)
+
+
+### Bug Fixes
+
+* add platform, weight to monospace font ([4b1670e](https://github.com/dialpad/dialtone-tokens/commit/4b1670e1e5946d142fdd64ed98c4ec55dc5386b5))
+* updated iOS source destination ([#8](https://github.com/dialpad/dialtone-tokens/issues/8)) ([38f8a5c](https://github.com/dialpad/dialtone-tokens/commit/38f8a5c1e393798896c5d5fe067cab409cdada84))
+
+
+### Features
+
+* **shadows:** updated shadow sizes to a reference size token ([0301b44](https://github.com/dialpad/dialtone-tokens/commit/0301b44851bf010f5eef2fcc8b66e23b9c4d892b))
+
 # [1.19.0](https://github.com/dialpad/dialtone-tokens/compare/v1.18.0...v1.19.0) (2023-06-01)
 
 
