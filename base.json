@@ -1402,7 +1402,7 @@
           "type": "color"
         },
         "200": {
-          "value": "#222222",
+          "value": "#262626",
           "type": "color"
         },
         "300": {
@@ -4298,7 +4298,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "lighten",
-                "value": ".03",
+                "value": ".1",
                 "space": "hsl"
               }
             }
@@ -4307,15 +4307,7 @@
         "secondary": {
           "value": "{color.black.200}",
           "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "darken",
-                "value": ".2",
-                "space": "hsl"
-              }
-            }
-          }
+          "$extensions": {}
         },
         "moderate": {
           "value": "{color.black.300}",
