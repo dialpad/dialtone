@@ -12,11 +12,71 @@ import * as EmojiPickerStories from './emoji_picker.stories';
 
 ## Base Style
 
-Some description of how to use the base component, potential gotchas and limitations.
-
 <Canvas>
   <Story of={EmojiPickerStories.Default} />
 </Canvas>
+
+```html
+<template>
+  <dt-emoji-picker
+    :skin-tone="Default"
+    :skin-selector-button-tooltip-label="'Change default skin tone'"
+    :tab-set-labels="tabSetLabels[]"
+    :recently-used-emojis="recentlyUsedEmojis[]"
+    :search-results-label="'Search results'"
+    :search-no-results-label="'Search results'"
+    :search-placeholder-label="'Search...'"
+    @skin-tone="skinTone = $event"
+    @selected-emoji="selectedEmoji"
+  />
+</template>
+```
+
+# Emoji Picker with Popover
+
+<Canvas>
+  <Story of={EmojiPickerStories.WithPopover} />
+</Canvas>
+
+```html
+<template>
+  <dt-popover
+      :open="emojiPickerOpened"
+      initial-focus-element="#searchInput"
+      padding="none"
+      @opened="(open) => { emojiPickerOpened = open }"
+    >
+      <template #anchor>
+        <dt-button
+          size="sm"
+          circle
+          importance="clear"
+          @click="toggleEmojiPicker"
+        >
+          <template #icon>
+            <dt-icon
+              name="satisfied"
+              size="300"
+            />
+          </template>
+        </dt-button>
+      </template>
+      <template #content>
+        <dt-emoji-picker
+          :skin-tone="Default"
+          :skin-selector-button-tooltip-label="'Change default skin tone'"
+          :tab-set-labels="tabSetLabels[]"
+          :recently-used-emojis="recentlyUsedEmojis[]"
+          :search-results-label="'Search results'"
+          :search-no-results-label="'Search results'"
+          :search-placeholder-label="'Search...'"
+          @skin-tone="skinTone = $event"
+          @selected-emoji="selectedEmoji"
+        />
+      </template>
+    </dt-popover>
+</template>
+```
 
 ## Slots, Props & Events
 
@@ -37,6 +97,10 @@ The `skin-tone` prop provided to the component should listen to
 the `skin-tone` event emitted by the skin selector button to be updated instantly.
 
 You must listen to the `close` event to close the emoji picker. This event is emitted by the keyboard navigation on `ESC`.
+
+For the `withPopover` variant it is necessary to provide the `initial-focus-element="#searchInput"` prop
+to the `dt-popover` component.
+With this we accomplish the requirement to have the search input focused when the emoji picker is opened.
 
 ## Accessibility
 

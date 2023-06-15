@@ -681,7 +681,6 @@ defineExpose({
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    top: -20px;
     padding-bottom: 5px;
 
     div:not(:first-child){

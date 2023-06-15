@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtEmojiPicker from './emoji_picker.vue';
 import DtEmojiPickerDefaultTemplate from './emoji_picker_default.story.vue';
+import DtEmojiPickerWithPopoverTemplate from './emoji_picker_popover.story.vue';
 
 const recentlyUsedEmojis = [
   {
@@ -116,8 +117,19 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtEmojiPickerDefaultTemplate,
 );
 
+const WithPopoverTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtEmojiPickerWithPopoverTemplate,
+);
+
 // Stories
 export const Default = {
   render: DefaultTemplate,
   args: {},
+};
+
+export const WithPopover = {
+  render: WithPopoverTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

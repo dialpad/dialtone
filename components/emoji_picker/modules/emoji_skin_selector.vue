@@ -33,6 +33,7 @@
           <button
             ref="skinSelectorRef"
             :aria-label="skinSelectorButtonTooltipLabel"
+            tabindex="-1"
             @click="toggleSkinList"
             @keydown="event => handleKeyDown(event)"
           >

@@ -1,6 +1,7 @@
 <template>
   <div class="d-emoji-picker__search d-emoji-picker__alignment">
     <dt-input
+      id="searchInput"
       ref="searchInput"
       :placeholder="searchPlaceholderLabel"
       :model-value="modelValue"
@@ -71,7 +72,7 @@ defineExpose({
 .d-emoji-picker__search {
   position: relative;
   z-index: 1;
-  margin: var(--su16) var(--su24) var(--su16) var(--su16);
+  margin: var(--su16) var(--su24) 0 var(--su16);
   background-color: #FFFFFF;
 }
 .d-emoji-picker__search-button{

@@ -225,9 +225,9 @@ function updateHighlightedEmoji (emoji) {
   // with this width we have 9 emoji per row
   width: 372px;
   height: 100%;
-  display: inline-flex;
   flex-direction: column;
   border-radius: 4px;
+  background-color: #FFFFFF;
 
   &--header{
     padding: var(--su4) var(--su4) 0 var(--su8);
@@ -252,7 +252,6 @@ function updateHighlightedEmoji (emoji) {
   &--footer{
     position: relative;
     height: 58px;
-    top: -20px;
     background: #F9F9F9;
     border-top: 1px solid var(--bc-subtle);
     display: flex;
