@@ -117,7 +117,7 @@ export default {
 
 <style lang="less">
 .d-datepicker{
-  max-width: 308px;
+  width: 308px;
   padding: 16px;
 
   p{

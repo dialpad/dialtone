@@ -2,6 +2,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 import DtDatepicker from './datepicker.vue';
 import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
+import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
 
 export const argsData = {
   prevMonthLabel: 'Previous month',
@@ -80,8 +81,20 @@ const Template = (args, { argTypes }) => createTemplateFromVueFile(
   DtDatepickerDefaultTemplate,
 );
 
+const WithPopoverTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtDatepickerWithPopoverTemplate,
+);
+
 // Stories
 export const Default = {
   render: Template,
   args: {},
+};
+
+export const WithPopover = {
+  render: WithPopoverTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
 };
