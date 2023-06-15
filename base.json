@@ -4402,7 +4402,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".08",
+                "value": ".06",
                 "space": "hsl"
               }
             }
@@ -4415,7 +4415,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".21",
+                "value": ".15",
                 "space": "hsl"
               }
             }
@@ -4428,7 +4428,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".32",
+                "value": ".27",
                 "space": "hsl"
               }
             }
@@ -4441,7 +4441,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".67",
+                "value": ".65",
                 "space": "hsl"
               }
             }
@@ -4454,7 +4454,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".98",
+                "value": ".96",
                 "space": "hsl"
               }
             }
