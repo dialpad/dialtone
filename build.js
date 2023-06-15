@@ -90,7 +90,7 @@ StyleDictionary.registerTransform({
   },
   transformer: (token, options) => {
     if (token.name === 'mono' || token.path.includes('code')) {
-      return 'UIFont.monospacedSystemFont(ofSize: 15)';
+      return 'UIFont.monospacedSystemFont(ofSize: 15, weight: .regular)';
     }
     return 'UIFont.systemFont(ofSize: 15)';
   }
