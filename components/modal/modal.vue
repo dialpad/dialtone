@@ -119,11 +119,7 @@
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import Modal from '../../common/mixins/modal';
-import {
-  MODAL_BANNER_KINDS,
-  MODAL_KIND_MODIFIERS,
-  MODAL_SIZE_MODIFIERS,
-} from './modal_constants';
+import { MODAL_BANNER_KINDS, MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
@@ -311,23 +307,6 @@ export default {
       type: Boolean,
       default: true,
     },
-
-    /**
-     * The element that is focused when the modal is opened. This can be an
-     * HTMLElement within the modal, a string starting with '#' which will
-     * find the element by ID. 'first' which will automatically focus
-     * the first element, or 'dialog' which will focus the dialog window itself.
-     * If the dialog is modal this prop cannot be 'none'.
-     */
-    initialFocusElement: {
-      type: [String, HTMLElement],
-      default: 'first',
-      validator: initialFocusElement => {
-        return initialFocusElement === 'first' ||
-          (initialFocusElement instanceof HTMLElement) ||
-          initialFocusElement.startsWith('#');
-      },
-    },
   },
 
   emits: [
@@ -375,7 +354,6 @@ export default {
         },
 
         'after-enter': event => {
-          this.$emit('update:show', true);
           (event.target === event.currentTarget) && this.setFocusAfterTransition();
         },
       };
@@ -424,13 +402,7 @@ export default {
     },
 
     setFocusAfterTransition () {
-      if (this.initialFocusElement === 'first') {
-        this.focusFirstElement();
-      } else if (this.initialFocusElement.startsWith('#')) {
-        this.focusElementById(this.initialFocusElement);
-      } else if (this.initialFocusElement instanceof HTMLElement) {
-        this.initialFocusElement.focus();
-      }
+      this.focusFirstElement();
     },
 
     trapFocus (e) {

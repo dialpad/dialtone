@@ -19,8 +19,7 @@
       :visually-hidden-close="visuallyHiddenClose"
       :visually-hidden-close-label="visuallyHiddenCloseLabel"
       :close-on-click="closeOnClick"
-      :initial-focus-element="initialFocusElement"
-      @update:show="updateShow"
+      @update:show="close"
     >
       <template
         v-if="banner"
@@ -50,14 +49,12 @@
         />
         <div v-else>
           <dt-button
-            id="cancel-button"
             :kind="secondaryButtonKind"
             importance="clear"
           >
             Cancel
           </dt-button>
           <dt-button
-            id="confirm-button"
             :kind="kind"
             importance="primary"
             class="d-ml6"
@@ -122,9 +119,9 @@ export default {
   },
 
   methods: {
-    updateShow (open) {
-      this.isOpen = open;
-      this.toggleOpen(open);
+    close (event) {
+      this.isOpen = !this.isOpen;
+      this.onClose(event);
     },
   },
 
