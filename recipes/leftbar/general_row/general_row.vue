@@ -44,79 +44,80 @@
           </dt-emoji-text-wrapper>
         </slot>
       </div>
-      <div
-        class="dt-leftbar-row__omega"
-      >
-        <dt-tooltip
-          v-if="dndText"
-          placement="top"
-          :message="dndTextTooltip"
-        >
-          <template #anchor>
-            <div
-              class="dt-leftbar-row__dnd"
-            >
-              {{ dndText }}
-            </div>
-          </template>
-        </dt-tooltip>
-        <div
-          v-if="activeVoiceChat"
-          class="dt-leftbar-row__active-voice"
-        >
-          <dt-icon
-            size="300"
-            name="activity"
-          />
-        </div>
-        <dt-tooltip
-          v-else-if="!!unreadCount && hasUnreads"
-          :message="unreadCountTooltip"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-badge
-              kind="count"
-              type="bulletin"
-              data-qa="dt-leftbar-row-unread-badge"
-            >
-              {{ unreadCount }}
-            </dt-badge>
-          </template>
-        </dt-tooltip>
-      </div>
     </a>
     <div
-      v-if="hasCallButton"
-      class="dt-leftbar-row__action"
-      data-qa="dt-leftbar-row-action"
+      v-if="hasActions"
+      class="dt-leftbar-row__omega"
     >
       <dt-tooltip
-        :message="callButtonTooltip"
+        v-if="dndText"
+        placement="top"
+        :message="dndTextTooltip"
+      >
+        <template #anchor>
+          <div
+            class="dt-leftbar-row__dnd"
+          >
+            {{ dndText }}
+          </div>
+        </template>
+      </dt-tooltip>
+      <div
+        v-if="activeVoiceChat"
+        class="dt-leftbar-row__active-voice"
+      >
+        <dt-icon
+          size="300"
+          name="activity"
+        />
+      </div>
+      <dt-tooltip
+        v-else-if="showUnreadCount"
+        :message="unreadCountTooltip"
         placement="top"
       >
         <template #anchor>
-          <dt-button
-            class="dt-leftbar-row__action-button"
-            data-qa="dt-leftbar-row-action-call-button"
-            circle
-            size="xs"
-            kind="inverted"
-            :aria-label="callButtonTooltip"
-            @focus="actionFocused = true"
-            @blur="actionFocused = false"
-            @mouseleave="actionFocused = false"
-            @click.stop="$emit('call', $event)"
+          <dt-badge
+            kind="count"
+            type="bulletin"
+            data-qa="dt-leftbar-row-unread-badge"
+            class="dt-leftbar-row__unread-badge"
           >
-            <template #icon>
-              <dt-icon
-                name="phone"
-                size="200"
-              />
-            </template>
-          </dt-button>
+            {{ unreadCount }}
+          </dt-badge>
         </template>
       </dt-tooltip>
+      <div
+        v-if="hasCallButton"
+        class="dt-leftbar-row__action"
+        data-qa="dt-leftbar-row-action"
+      >
+        <dt-tooltip
+          :message="callButtonTooltip"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              class="dt-leftbar-row__action-button"
+              data-qa="dt-leftbar-row-action-call-button"
+              :circle="true"
+              size="xs"
+              kind="inverted"
+              :aria-label="callButtonTooltip"
+              @focus="actionFocused = true"
+              @blur="actionFocused = false"
+              @click.stop="$emit('call', $event)"
+            >
+              <template #icon>
+                <dt-icon
+                  name="phone"
+                  size="200"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </div>
     </div>
   </div>
 </template>
@@ -347,6 +348,14 @@ export default {
       return this.ariaLabel
         ? this.ariaLabel
         : safeConcatStrings([this.description, this.unreadCountTooltip, this.dndTextTooltip]);
+    },
+
+    hasActions () {
+      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton;
+    },
+
+    showUnreadCount () {
+      return !!this.unreadCount && this.hasUnreads;
     },
   },
 
