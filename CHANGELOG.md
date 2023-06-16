@@ -1,3 +1,10 @@
+# [2.84.0-beta.4](https://github.com/dialpad/dialtone-vue/compare/v2.84.0-beta.3...v2.84.0-beta.4) (2023-06-16)
+
+
+### Bug Fixes
+
+* revert feat(modal): show event and initial-focus-element ([#1009](https://github.com/dialpad/dialtone-vue/issues/1009)) ([18cf9ab](https://github.com/dialpad/dialtone-vue/commit/18cf9ab44ea6de55a875e81851d6f05b210a6e9c))
+
 # [2.84.0-beta.3](https://github.com/dialpad/dialtone-vue/compare/v2.84.0-beta.2...v2.84.0-beta.3) (2023-06-14)
 
 
