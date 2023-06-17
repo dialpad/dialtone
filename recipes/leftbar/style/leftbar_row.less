@@ -16,7 +16,7 @@
   --leftbar-row-alpha-height: calc(var(--size-300) * 9);
   --leftbar-row-omega-min-width: 0;
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
-  --leftbar-row-omega-visibility: visible;
+  --leftbar-row-omega-display: block;
   --leftbar-row-description-font-weight: var(--fw-normal);
   --leftbar-row-description-font-size: var(--fs-200);
   --leftbar-row-description-line-height: var(--lh-200);
@@ -33,6 +33,13 @@
   //  ----------------------------------------------------------------------------
   position: relative;
   opacity: var(--leftbar-row-opacity);
+  display: flex;
+  background-color: var(--theme-sidebar-row-color-background);
+  border-radius: var(--leftbar-row-radius);
+  transition-duration: var(--td200);
+  transition-property: background-color,border,box-shadow;
+  transition-timing-function: var(--ttf-out-quint);
+  cursor: pointer;
 
   //  ============================================================================
   //  $   VARIANTS
@@ -43,10 +50,12 @@
   //  </div>
   //
   &:not(.dt-leftbar-row--no-action):hover {
+    --leftbar-row-omega-display: none;
     --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
   }
 
   &:hover {
+      --leftbar-row-color-background: var(--theme-sidebar-row-color-background-hover);
     .d-presence {
       --presence-color-border-base: var(--theme-sidebar-selected-row-color-background);
     }
@@ -58,10 +67,6 @@
   &--has-unread {
     --leftbar-row-description-font-weight: var(--fw-bold);
     --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foreground);
-
-    &:not(.dt-leftbar-row--no-action):hover {
-      --leftbar-row-omega-visibility: hidden;
-    }
   }
 
   &--muted {
@@ -77,7 +82,7 @@
   }
 
   &--action-focused {
-    --leftbar-row-omega-visibility: hidden;
+    --leftbar-row-omega-display: none;
     --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
   }
 
@@ -135,24 +140,16 @@
     flex: 1;
     width: 100%;
     text-align: left;
+    background-color: var(--leftbar-row-color-background);
     color: var(--leftbar-row-color-foreground);
     text-decoration: none;
-    background-color: var(--leftbar-row-color-background);
-    border-radius: var(--leftbar-row-radius);
-    transition-duration: var(--td200);
-    transition-property: background-color,border,box-shadow;
-    transition-timing-function: var(--ttf-out-quint);
     appearance: none;
     font-size: inherit;
     line-height: inherit;
     margin: 0;
     border: 0;
     padding: 0;
-    cursor: pointer;
-
-    &:hover {
-      --leftbar-row-color-background: var(--theme-sidebar-row-color-background-hover);
-    }
+    border-radius: var(--leftbar-row-radius);
 
     &:active {
       --leftbar-row-color-background: var(--theme-sidebar-row-color-background-active);
@@ -165,7 +162,7 @@
 
   &__action {
     position: absolute;
-    right: var(--leftbar-row-action-position-right);
+    right: 0;
     top: var(--leftbar-row-action-position-bottom);
     transform: translateY(calc(var(--leftbar-row-action-position-bottom) * -1));
   }
@@ -199,6 +196,7 @@
     padding-right: var(--space-400);
     width: var(--leftbar-row-alpha-width);
     height: var(--leftbar-row-alpha-height);
+    border-radius: var(--leftbar-row-radius) 0 0 var(--leftbar-row-radius);;
   }
 
   &__label {
@@ -207,16 +205,20 @@
   }
 
   &__omega {
+    position: absolute;
     display: flex;
+    right: var(--leftbar-row-action-position-right);
+    top: var(--leftbar-row-action-position-bottom);
+    transform: translateY(calc(var(--leftbar-row-action-position-bottom) * -1));
     gap: var(--space-300);
     justify-content: end;
     align-items: center;
     box-sizing: border-box;
-    min-width: var(--leftbar-row-omega-min-width);
-    height: var(--leftbar-row-omega-height);
-    padding-left: var(--space-400);
-    padding-right: var(--space-400);
-    visibility: var(--leftbar-row-omega-visibility);
+    border-radius: var(--leftbar-row-radius);
+  }
+
+  &__unread-badge {
+    display: var(--leftbar-row-omega-display);
   }
 
   &__active-voice {
