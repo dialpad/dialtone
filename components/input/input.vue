@@ -1,7 +1,7 @@
 <template>
   <div
     ref="container"
-    class="base-input"
+    :class="['base-input', { 'd-vi-hidden': hidden }]"
     data-qa="dt-input"
   >
     <label
@@ -270,6 +270,14 @@ export default {
       type: Object,
       default: null,
     },
+
+    /**
+     * hidden allows to use input without the element visually present in DOM
+     */
+    hidden: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -401,9 +409,14 @@ export default {
 
     inputListeners () {
       return {
-        input: event => {
-          this.$emit('input', event.target.value);
-          this.$emit('update:modelValue', event.target.value);
+        input: async event => {
+          let val = event.target.value;
+          if (this.type === INPUT_TYPES.FILE) {
+            const files = Array.from(event.target.files);
+            val = files.map(file => file.name);
+          }
+          this.$emit('input', val);
+          this.$emit('update:modelValue', val);
         },
 
         blur: event => {
@@ -570,6 +583,9 @@ export default {
     },
 
     inputWrapperClasses () {
+      if (this.hidden) {
+        return [];
+      }
       return [
         'd-input__wrapper',
         { [this.stateClass]: this.showInputState },

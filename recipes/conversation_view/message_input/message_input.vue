@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div
+    role="presentation"
+    @drag-enter="onDrag"
+    @drag-over="onDrag"
+    @drop="onDrop"
+  >
     <!-- TODO: A purpose-built place to display validation errors using DtBanner -->
     <div
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
@@ -32,6 +37,7 @@
             circle
             importance="clear"
             :aria-label="imageButtonAriaLabel"
+            @click="onSelectImage"
           >
             <template #icon>
               <dt-icon
@@ -40,6 +46,14 @@
               />
             </template>
           </dt-button>
+          <dt-input
+            ref="messageInputImageUpload"
+            type="file"
+            class="d-ps-absolute"
+            multiple
+            hidden
+            @input="onImageUpload"
+          />
           <dt-popover
             :open="emojiPickerOpened"
             initial-focus-element="#searchInput"
@@ -131,6 +145,7 @@ import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover/index';
+import { DtInput } from '@/components/input/index';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -139,6 +154,7 @@ export default {
     DtButton,
     DtEmojiPicker,
     DtIcon,
+    DtInput,
     DtPopover,
     DtRichTextEditor,
   },
@@ -340,6 +356,22 @@ export default {
      * @type {String}
      */
     'submit',
+
+    /**
+     * Fires when media is selected from image button
+     *
+     * @event select-media
+     * @type {Array}
+     */
+    'select-media',
+
+    /**
+     * Fires when media is dropped into the message input
+     *
+     * @event add-media
+     * @type {Array}
+     */
+    'add-media',
   ],
 
   data () {
@@ -369,6 +401,21 @@ export default {
   },
 
   methods: {
+    onDrag (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    },
+
+    onDrop (e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      const dt = e.dataTransfer;
+      const files = Array.from(dt.files);
+      const fileNames = files.map(file => file.name);
+      this.$emit('add-media', fileNames);
+    },
+
     onSelectEmoji (emoji) {
       if (!emoji) {
         this.emojiPickerOpened = false;
@@ -377,6 +424,14 @@ export default {
 
       this.inputValue = this.inputValue + emoji.shortname;
       this.emojiPickerOpened = false;
+    },
+
+    onSelectImage () {
+      this.$refs.messageInputImageUpload.$refs.input.click();
+    },
+
+    onImageUpload (val) {
+      this.$emit('select-media', val);
     },
 
     toggleEmojiPicker () {
