@@ -1,3 +1,17 @@
+# [3.73.0](https://github.com/dialpad/dialtone-vue/compare/v3.72.0...v3.73.0) (2023-06-19)
+
+
+### Bug Fixes
+
+* **General Row:** nested a tags - vue3 ([#1024](https://github.com/dialpad/dialtone-vue/issues/1024)) ([88cae54](https://github.com/dialpad/dialtone-vue/commit/88cae540cf268300298a4e6fcf40d0af672c928b))
+* **Message Input:** image picker ([#1023](https://github.com/dialpad/dialtone-vue/issues/1023)) ([d98fc68](https://github.com/dialpad/dialtone-vue/commit/d98fc68b1d8a1c6da5328849cf937108e3ad78d5))
+* revert fix(modal): show event and initial-focus-element - vue3 ([#1010](https://github.com/dialpad/dialtone-vue/issues/1010)) ([c8c911c](https://github.com/dialpad/dialtone-vue/commit/c8c911c635ef5cb81db583e0fe19ede9745da469))
+
+
+### Features
+
+* **Message Input:** dt-1092 message input vue 3 ([#1015](https://github.com/dialpad/dialtone-vue/issues/1015)) ([1fc96fb](https://github.com/dialpad/dialtone-vue/commit/1fc96fb29ad0572c94af6c82fa94054beb539427))
+
 # [3.72.0](https://github.com/dialpad/dialtone-vue/compare/v3.71.0...v3.72.0) (2023-06-15)
 
 
