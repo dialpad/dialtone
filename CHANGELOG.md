@@ -1,3 +1,10 @@
+## [3.73.2](https://github.com/dialpad/dialtone-vue/compare/v3.73.1...v3.73.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** add a check and workaround for phone regex vue 3 ([#1030](https://github.com/dialpad/dialtone-vue/issues/1030)) ([70e28d2](https://github.com/dialpad/dialtone-vue/commit/70e28d295e88126cc893fc316cf85cea5bfbd453))
+
 ## [3.73.1](https://github.com/dialpad/dialtone-vue/compare/v3.73.0...v3.73.1) (2023-06-20)
 
 
