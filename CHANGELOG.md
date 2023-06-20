@@ -1,3 +1,11 @@
+## [3.73.1](https://github.com/dialpad/dialtone-vue/compare/v3.73.0...v3.73.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* **Colors:** "call bar button" popover arrow icon color for dark mode (vue3) ([#1027](https://github.com/dialpad/dialtone-vue/issues/1027)) ([6f3a3c5](https://github.com/dialpad/dialtone-vue/commit/6f3a3c54f4ba359dee5b2d060d1d973621604b99))
+* **Message Input:** add component to root export ([#1028](https://github.com/dialpad/dialtone-vue/issues/1028)) ([ae9ab08](https://github.com/dialpad/dialtone-vue/commit/ae9ab08b5136edabe7475c3eeea0392adb31b417))
+
 # [3.73.0](https://github.com/dialpad/dialtone-vue/compare/v3.72.0...v3.73.0) (2023-06-19)
 
 
