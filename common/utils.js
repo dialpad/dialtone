@@ -283,8 +283,19 @@ const emailAddressRegex = new RegExp(
  * @returns {RegExp}
  */
 export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
+  // Some older browser versions don't support lookbehind, so provide a RegExp
+  // version without it. It fails just one test case, so IMO it's still good
+  // enough to use. https://caniuse.com/js-regexp-lookbehind
+  let canUseLookBehind = true;
+  try {
+    // eslint-disable-next-line prefer-regex-literals
+    RegExp('(?<=\\W)');
+  } catch (e) {
+    canUseLookBehind = false;
+  }
   return new RegExp(
-    '(?:^|(?<=\\W))(?![\\s\\-])\\+?(?:[0-9()\\- \\t]' +
+    `${canUseLookBehind ? '(?:^|(?<=\\W))' : ''}` +
+    '(?![\\s\\-])\\+?(?:[0-9()\\- \\t]' +
     `{${minLength},${maxLength}}` +
     ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
   );
