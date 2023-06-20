@@ -50,6 +50,7 @@
           <template #icon>
             <dt-icon
               name="chevron-up"
+              class="d-fc-black-800"
               size="200"
             />
           </template>
