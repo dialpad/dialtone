@@ -148,6 +148,10 @@
       "import": "./dist/emoji.js",
       "require": "./dist/emoji.cjs"
     },
+    "./message_input": {
+      "import": "./dist/message_input.js",
+      "require": "./dist/message_input.cjs"
+    },
     "./css": "./dist/style.css"
   },
   "gitHooks": {
