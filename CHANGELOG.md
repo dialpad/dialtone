@@ -1,3 +1,10 @@
+## [3.73.3](https://github.com/dialpad/dialtone-vue/compare/v3.73.2...v3.73.3) (2023-06-22)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** show popover on demand and emit modal opened event vue3 ([#1031](https://github.com/dialpad/dialtone-vue/issues/1031)) ([eadd131](https://github.com/dialpad/dialtone-vue/commit/eadd131dd0a80c1978cb41f36dd23ada628ad9ad))
+
 ## [3.73.2](https://github.com/dialpad/dialtone-vue/compare/v3.73.1...v3.73.2) (2023-06-20)
 
 
