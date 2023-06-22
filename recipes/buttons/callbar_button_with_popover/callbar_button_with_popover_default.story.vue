@@ -14,8 +14,10 @@
     :button-width-size="buttonWidthSize"
     :text-class="textClass"
     :content-class="contentClass"
+    :open-popover="openPopover"
     @arrow-click="onClick"
     @click="onClick"
+    @opened="onOpened"
   >
     <span
       v-if="defaultSlot"
