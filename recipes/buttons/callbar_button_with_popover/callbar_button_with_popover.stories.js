@@ -16,8 +16,10 @@ const iconsList = getIconNames();
 // Default Prop Values
 export const argsData = {
   buttonWidthSize: 'xl',
+  openPopover: false,
   onArrowClick: action('arrowClick'),
   onClick: action('click'),
+  onOpened: action('opened'),
 };
 
 export const argTypesData = {
@@ -100,6 +102,9 @@ export const argTypesData = {
     },
     control: 'text',
   },
+  openPopover: {
+    control: 'boolean',
+  },
 
   // Popover slots
   content: {
@@ -151,6 +156,24 @@ export const argTypesData = {
       },
     },
   },
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+  opened: {
+    table: {
+      disable: false,
+      type: {
+        summary: 'event',
+      },
+    },
+  },
+  onOpened: {
+    table: {
+      disable: true,
+    },
+  },
 
   id: {
     table: {
@@ -171,18 +194,6 @@ export const argTypesData = {
     options: POPOVER_DIRECTIONS,
     control: {
       type: 'select',
-    },
-  },
-
-  // Action Event Handlers
-  onArrowClick: {
-    table: {
-      disable: true,
-    },
-  },
-  onClick: {
-    table: {
-      disable: true,
     },
   },
 };
@@ -215,6 +226,7 @@ export const Default = {
     headerContent: 'Header content',
     showCloseButton: true,
     forceShowArrow: false,
+    openPopover: false,
     icon: 'dialpad-ai',
   },
 };
