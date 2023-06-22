@@ -1,3 +1,26 @@
+# [2.87.0](https://github.com/dialpad/dialtone-vue/compare/v2.86.0...v2.87.0) (2023-06-22)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** show popover on demand and emit mod… ([#1016](https://github.com/dialpad/dialtone-vue/issues/1016)) ([0789bf2](https://github.com/dialpad/dialtone-vue/commit/0789bf271324a2cb682fb1ed9d5aa5580094e398))
+* **Colors:** "call bar button" popover arrow icon color for dark mode ([#1026](https://github.com/dialpad/dialtone-vue/issues/1026)) ([5998250](https://github.com/dialpad/dialtone-vue/commit/599825072fb8fee4676860a53fcb61c9e065bea1))
+* **General Row:** nested a tags ([#1022](https://github.com/dialpad/dialtone-vue/issues/1022)) ([c73cdfb](https://github.com/dialpad/dialtone-vue/commit/c73cdfb9b30f2e0d90e10c3c69d581ae80f90c1f))
+* revert feat(modal): show event and initial-focus-element ([#1009](https://github.com/dialpad/dialtone-vue/issues/1009)) ([893b25f](https://github.com/dialpad/dialtone-vue/commit/893b25fc1f8011280720c65dbc865d3e0ee44a1c))
+* **Rich Text Editor:** add a check and workaround for phone regex ([9719dd2](https://github.com/dialpad/dialtone-vue/commit/9719dd295d27e4325e5f4c167cdcd57bcc16f911))
+
+
+### Code Refactoring
+
+* **List Item:** remove utility classes ([#1017](https://github.com/dialpad/dialtone-vue/issues/1017)) ([2a18c5a](https://github.com/dialpad/dialtone-vue/commit/2a18c5abf6d71abb01a8fc5d8f7183e9663fb4c8))
+
+
+### Features
+
+* **Datepicker:** datepicker component ([#1007](https://github.com/dialpad/dialtone-vue/issues/1007)) ([2d96fe8](https://github.com/dialpad/dialtone-vue/commit/2d96fe8e85b19dbd6e37fe6b993af744807761a1))
+* **Datepicker:** with popover variant ([#1021](https://github.com/dialpad/dialtone-vue/issues/1021)) ([98ff1fa](https://github.com/dialpad/dialtone-vue/commit/98ff1fae7cefc52bf4b21a0f199e38684a4938dd))
+* **Modal:** show event and initial-focus-element ([#1009](https://github.com/dialpad/dialtone-vue/issues/1009)) ([2468bec](https://github.com/dialpad/dialtone-vue/commit/2468bec41e2f82ce447a6bcbcc2e3f583c116034))
+
 # [2.86.0](https://github.com/dialpad/dialtone-vue/compare/v2.85.1...v2.86.0) (2023-06-13)
 
 
