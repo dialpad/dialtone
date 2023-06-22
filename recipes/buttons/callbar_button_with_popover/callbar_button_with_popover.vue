@@ -34,6 +34,7 @@
       :dialog-class="['dt-recipe--callbar-button-with-popover--popover', contentClass]"
       header-class="d-d-flex d-ai-center d-fw-normal d-px12"
       v-bind="$attrs"
+      :open-popover="showPopover"
       @opened="onModalIsOpened"
     >
       <template #anchor>
@@ -241,6 +242,14 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * To auto open the modal popover.
+     */
+    openPopover: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -256,6 +265,11 @@ export default {
      * @type {PointerEvent | KeyboardEvent}
      */
     'click',
+
+    /**
+     * Emitted when modal popover is opened or closed.
+     */
+    'opened',
   ],
 
   data () {
@@ -271,6 +285,14 @@ export default {
 
     isCompactMode () {
       return this.buttonWidthSize === 'sm' || this.buttonWidthSize === 'md';
+    },
+
+    showPopover () {
+      if (!this.openPopover || this.open) {
+        return false;
+      }
+
+      return this.arrowClick();
     },
   },
 
@@ -292,6 +314,7 @@ export default {
 
     onModalIsOpened (isOpened) {
       this.open = isOpened;
+      this.$emit('opened', isOpened);
     },
   },
 
