@@ -1,3 +1,41 @@
+# [2.89.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.88.0...v2.89.0-beta.1) (2023-06-23)
+
+
+### Bug Fixes
+
+* add placeholder text for richtexteditor ([#1004](https://github.com/dialpad/dialtone-vue/issues/1004)) ([19e1ef9](https://github.com/dialpad/dialtone-vue/commit/19e1ef92401ad3b1b43513eaf8582f7dadb61ee9))
+* change to fnv algo ([f6e01a1](https://github.com/dialpad/dialtone-vue/commit/f6e01a1cbef354c8cfa16a8642a29c4425f79634))
+* component documentation link class ([#985](https://github.com/dialpad/dialtone-vue/issues/985)) ([95c178c](https://github.com/dialpad/dialtone-vue/commit/95c178c29c3b9b8b4891d19f7a9cb87304400286))
+* **Contact Row, Group Row, General Row:** null on description ([#1013](https://github.com/dialpad/dialtone-vue/issues/1013)) ([8092faf](https://github.com/dialpad/dialtone-vue/commit/8092faf55a9927d641180ed13cad87720305869e))
+* DIALTONE-1089 pagination muted clear button error ([4bd3170](https://github.com/dialpad/dialtone-vue/commit/4bd3170bf68e67673fabebd7bcd5963b70066136))
+* **Keyboard Shortcut:** inverted border color ([b68387c](https://github.com/dialpad/dialtone-vue/commit/b68387cff880ab244c42ab5ce50a107c7fd678f7))
+* **Leftbar General Row:** add href for focusability ([#994](https://github.com/dialpad/dialtone-vue/issues/994)) ([73bc4e0](https://github.com/dialpad/dialtone-vue/commit/73bc4e0de90950421f2ae6347090954334dac976))
+* missing migrations ([7483e16](https://github.com/dialpad/dialtone-vue/commit/7483e167d4689375fbc11a340f1c57cb8efeb2e5))
+* **Modal:** secondary action button kind ([#1011](https://github.com/dialpad/dialtone-vue/issues/1011)) ([f899cb8](https://github.com/dialpad/dialtone-vue/commit/f899cb8677015b4ad0081604964c7497d9ce0a94))
+* remove peer dep ([b5be026](https://github.com/dialpad/dialtone-vue/commit/b5be0265b786ce0858157b6d04e8224b3a264104))
+* revert [DIALTONE-1089] fix: pagination muted clear button error ([f43066c](https://github.com/dialpad/dialtone-vue/commit/f43066c1cd393f5a28ad775534056c2123c50766))
+* revert feat(modal): show event and initial-focus-element ([#1009](https://github.com/dialpad/dialtone-vue/issues/1009)) ([18cf9ab](https://github.com/dialpad/dialtone-vue/commit/18cf9ab44ea6de55a875e81851d6f05b210a6e9c))
+* set node engine minimum to 12.20 ([#988](https://github.com/dialpad/dialtone-vue/issues/988)) ([a53db3c](https://github.com/dialpad/dialtone-vue/commit/a53db3c475f6c62f7fd5ec6573beb605d94272e3))
+* update dialtone-icons ([9a8c31a](https://github.com/dialpad/dialtone-vue/commit/9a8c31ac8c14086fd1d94271b98123cc9431e7c8))
+
+
+### Documentation
+
+* fix broken story ([8097ff2](https://github.com/dialpad/dialtone-vue/commit/8097ff294dec240fddbd5030c454a444053e847e))
+
+
+### Features
+
+* **Avatar:** update to flat colors ([#982](https://github.com/dialpad/dialtone-vue/issues/982)) ([469fe05](https://github.com/dialpad/dialtone-vue/commit/469fe0522189247fc5c0a3f62ed92110617ec78c))
+* **Confact Info:** add `showAvatar` and `avatarIcon` props ([#981](https://github.com/dialpad/dialtone-vue/issues/981)) ([4a7a674](https://github.com/dialpad/dialtone-vue/commit/4a7a674b80ae50c7fe4d2f8bf1d6f35de54c4ab3))
+* **Datepicker:** datepicker component ([#1007](https://github.com/dialpad/dialtone-vue/issues/1007)) ([335af23](https://github.com/dialpad/dialtone-vue/commit/335af2385b8a89fa34d3c480c6cbffb303e228f3))
+* migration to dialtone 8 ([#979](https://github.com/dialpad/dialtone-vue/issues/979)) ([defcb77](https://github.com/dialpad/dialtone-vue/commit/defcb77301f7b8bfb41c14e4a23aedf544ddacad)), closes [#993](https://github.com/dialpad/dialtone-vue/issues/993)
+* **Modal:** show event and initial-focus-element ([#1009](https://github.com/dialpad/dialtone-vue/issues/1009)) ([935d6da](https://github.com/dialpad/dialtone-vue/commit/935d6da21d3b996178fc6985e08f221b92bacb68))
+* **Rich Text Editor:** link extension ([#991](https://github.com/dialpad/dialtone-vue/issues/991)) ([d88e704](https://github.com/dialpad/dialtone-vue/commit/d88e704141be76be088da731ddf751400fbff4bd))
+* **Rich Text Editor:** tests for rich text editor link extension and utils ([#1001](https://github.com/dialpad/dialtone-vue/issues/1001)) ([b947270](https://github.com/dialpad/dialtone-vue/commit/b94727049c0ad7ce18380939cb65360bb48869ee))
+* state changes for feed item row ([#1002](https://github.com/dialpad/dialtone-vue/issues/1002)) ([9aeefc6](https://github.com/dialpad/dialtone-vue/commit/9aeefc60daee0ff8f37db518756238471ec15d7c))
+* update dialtone-icons ([1fb19be](https://github.com/dialpad/dialtone-vue/commit/1fb19beca6145d4f8625653847525aba1c2283a2))
+
 # [2.88.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.87.0...v2.88.0-beta.1) (2023-06-22)
 
 
