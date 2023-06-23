@@ -39,7 +39,7 @@
 
 <script>
 import { getWeekDayNames } from '@/components/datepicker/utils.js';
-import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
+import { WEEK_START, MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
 import { format, getYear } from 'date-fns';
 
 export default {
@@ -98,7 +98,7 @@ export default {
 
   methods: {
     dayAriaLabel (day) {
-      return `${this.selectDayLabel} ${day.text} ${format(day.value, 'MMMM')} ${getYear(day.value)}`;
+      return `${this.selectDayLabel} ${day.text} ${format(day.value, MONTH_FORMAT)} ${getYear(day.value)}`;
     },
 
     setDayRef (el, currentMonth) {

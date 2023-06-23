@@ -15,9 +15,10 @@
         />
       </button>
       <button
+        id="prevMonthButton"
         :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="`${changeToLabel} ${prevMonthLabel} ${formatMonth(selectMonth - 1, 'MMMM')}`"
+        :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, MONTH_FORMAT)}`"
         @click="changeMonth(-1)"
         @keydown="handleKeyDown($event)"
       >
@@ -29,15 +30,17 @@
     </div>
     <div>
       <p>
-        {{ formattedMonth }}
+        {{ formattedMonth(selectMonth, MONTH_FORMAT) }}
+
         {{ selectYear }}
       </p>
     </div>
     <div>
       <button
+        id="nextMonthButton"
         :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="`${changeToLabel} ${nextMonthLabel} ${formatMonth(selectMonth + 1, 'MMMM')}`"
+        :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, MONTH_FORMAT)}`"
         @click="changeMonth(1)"
         @keydown="handleKeyDown($event)"
       >
@@ -47,6 +50,7 @@
         />
       </button>
       <button
+        id="nextYearButton"
         :ref="el => { if (el) setDayRef(el) }"
         type="button"
         :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
@@ -64,8 +68,9 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { getYear, addMonths, format, getMonth, set, subMonths, getDate } from 'date-fns';
-import { getCalendarDays } from '../utils';
+import { getYear, addMonths, getMonth, set, subMonths, getDate } from 'date-fns';
+import { getCalendarDays, formatMonth } from '../utils';
+import { MONTH_FORMAT } from '../datepicker_constants';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
@@ -131,7 +136,11 @@ export default {
     },
 
     formattedMonth () {
-      return this.formatMonth(this.selectMonth, 'MMMM');
+      return (month, format) => formatMonth(month, format);
+    },
+
+    MONTH_FORMAT () {
+      return MONTH_FORMAT;
     },
   },
 
@@ -164,7 +173,7 @@ export default {
     formatMonth (month, monthFormat) {
       return format(new Date(2000, month, 1), monthFormat);
     },
-
+    
     setDayRef (el) {
       if (!this.focusRefs.includes(el)) {
         this.focusRefs.push(el);
