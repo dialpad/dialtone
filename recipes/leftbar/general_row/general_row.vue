@@ -32,7 +32,10 @@
           />
         </slot>
       </div>
-      <div class="dt-leftbar-row__label">
+      <div
+        class="dt-leftbar-row__label"
+        :style="`flex-basis: ${labelWidth}`"
+      >
         <slot name="label">
           <dt-emoji-text-wrapper
             class="dt-leftbar-row__description"
@@ -55,7 +58,9 @@
       >
         <template #anchor>
           <div
+            ref="dt-leftbar-row-dnd"
             class="dt-leftbar-row__dnd"
+            data-qa="dt-leftbar-row-dnd"
           >
             {{ dndText }}
           </div>
@@ -122,6 +127,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import {
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
@@ -306,6 +312,7 @@ export default {
   data () {
     return {
       actionFocused: false,
+      labelWidth: '100%',
     };
   },
 
@@ -364,12 +371,33 @@ export default {
     },
   },
 
+  beforeUpdate () {
+    this.handleResize();
+  },
+
+  mounted: function () {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  beforeUnmount: function () {
+    window.removeEventListener('resize', this.handleResize);
+  },
+
   methods: {
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&
           !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {
         console.error(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR);
       }
+    },
+
+    async handleResize () {
+      const labelWidth = this.$el?.querySelector('.dt-leftbar-row__primary')?.clientWidth || 0;
+      const omegaWidth = this.$el?.querySelector('.dt-leftbar-row__omega')?.clientWidth || 0;
+      const alphaWidth = this.$el?.querySelector('.dt-leftbar-row__alpha')?.clientWidth || 0;
+      const paddings = 16;
+      this.labelWidth = labelWidth - (omegaWidth + alphaWidth + paddings) + 'px';
     },
   },
 };
