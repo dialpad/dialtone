@@ -2,9 +2,12 @@
   <div class="d-datepicker__month-year-picker">
     <div>
       <button
+        id="prevYearButton"
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="prevYearLabel"
+        :aria-label="`${changeToLabel} ${prevYearLabel} ${selectYear - 1}`"
         @click="changeYear(-1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevrons-left"
@@ -12,9 +15,11 @@
         />
       </button>
       <button
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="prevMonthLabel"
+        :aria-label="`${changeToLabel} ${prevMonthLabel} ${formatMonth(selectMonth - 1, 'MMMM')}`"
         @click="changeMonth(-1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevron-left"
@@ -24,15 +29,17 @@
     </div>
     <div>
       <p>
-        {{ getMonth }}
+        {{ formattedMonth }}
         {{ selectYear }}
       </p>
     </div>
     <div>
       <button
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="nextMonthLabel"
+        :aria-label="`${changeToLabel} ${nextMonthLabel} ${formatMonth(selectMonth + 1, 'MMMM')}`"
         @click="changeMonth(1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevron-right"
@@ -40,9 +47,11 @@
         />
       </button>
       <button
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="nextYearLabel"
+        :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
         @click="changeYear(1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevrons-right"
@@ -84,6 +93,11 @@ export default {
       required: true,
     },
 
+    changeToLabel: {
+      type: String,
+      required: true,
+    },
+
     selectedDate: {
       type: Date,
       required: true,
@@ -105,6 +119,8 @@ export default {
       selectMonth: getMonth(this.selectedDate),
       selectYear: getYear(this.selectedDate),
       highlightedDay: null,
+      focusPicker: 0,
+      focusRefs: [],
     };
   },
 
@@ -114,8 +130,8 @@ export default {
       return getCalendarDays(this.selectMonth, this.selectYear, this.highlightedDay);
     },
 
-    getMonth () {
-      return format(new Date(2000, this.selectMonth, 1), 'MMMM');
+    formattedMonth () {
+      return this.formatMonth(this.selectMonth, 'MMMM');
     },
   },
 
@@ -140,7 +156,64 @@ export default {
 
   },
 
+  mounted () {
+    this.focusMonthYearPicker();
+  },
+
   methods: {
+    formatMonth (month, monthFormat) {
+      return format(new Date(2000, month, 1), monthFormat);
+    },
+
+    setDayRef (el) {
+      if (!this.focusRefs.includes(el)) {
+        this.focusRefs.push(el);
+      }
+    },
+
+    focusMonthYearPicker () {
+      this.focusRefs[0].focus();
+    },
+
+    handleKeyDown (event) {
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          if (this.focusPicker === 0) {
+            this.focusPicker = 3;
+            this.focusRefs[this.focusPicker].focus();
+          } else {
+            this.focusPicker--;
+            this.focusRefs[this.focusPicker].focus();
+          }
+          break;
+
+        case 'ArrowRight':
+          event.preventDefault();
+          if (this.focusPicker === 3) {
+            this.focusPicker = 0;
+            this.focusRefs[this.focusPicker].focus();
+          } else {
+            this.focusPicker++;
+            this.focusRefs[this.focusPicker].focus();
+          }
+          break;
+
+        case 'ArrowDown':
+          event.preventDefault();
+          this.$emit('focus-day');
+          break;
+
+        case 'Tab':
+          this.$emit('focus-day');
+          break;
+
+        case 'Escape':
+          this.$emit('close-datepicker');
+          break;
+      }
+    },
+
     highlightDay () {
       const year = getYear(this.selectedDate);
       const month = getMonth(this.selectedDate);

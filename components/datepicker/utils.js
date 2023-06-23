@@ -19,6 +19,7 @@ const getWeekDays = (startDay, month, selectedDay) => {
       text: next.getDate(),
       value: next,
       currentMonth: !isNext,
+      isFirstDayOfMonth: next.getDate() === 1 && !isNext,
       // will be selected if the date is the same as the selected day and is from the current month
       selected: selectedDay ? (next.getDate() === selectedDay && !isNext) : false,
     });

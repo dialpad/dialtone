@@ -2,19 +2,27 @@
   <div class="d-datepicker">
     <div class="d-datepicker--header">
       <month-year-picker
+        ref="monthYearPicker"
         :prev-month-label="prevMonthLabel"
         :next-month-label="nextMonthLabel"
         :prev-year-label="prevYearLabel"
         :next-year-label="nextYearLabel"
+        :change-to-label="changeToLabel"
         :selected-date="selectedDate"
         @calendar-days="updateCalendarDays"
+        @focus-day="$refs.calendar.focusFirstDay()"
+        @close-datepicker="$emit('close-datepicker')"
       />
     </div>
     <div class="d-datepicker--body">
       <calendar
+        ref="calendar"
         :locale="locale"
         :calendar-days="calendarDays"
+        :select-day-label="selectDayLabel"
         @select-date="$emit('selected-date', $event)"
+        @focus-month-year-picker="$refs.monthYearPicker.focusMonthYearPicker()"
+        @close-datepicker="$emit('close-datepicker')"
       />
     </div>
   </div>
@@ -34,6 +42,7 @@ export default {
      * Label for the previous month button
      *
      * @type {String}
+     * @example 'Previous month'
      */
     prevMonthLabel: {
       type: String,
@@ -44,6 +53,7 @@ export default {
      * Label for the next month button
      *
      * @type {String}
+     * @example 'Next month'
      */
     nextMonthLabel: {
       type: String,
@@ -54,6 +64,7 @@ export default {
      * Label for the previous year button
      *
      * @type {String}
+     * @example 'Previous year'
      */
     prevYearLabel: {
       type: String,
@@ -64,8 +75,31 @@ export default {
      * Label for the next year button
      *
      * @type {String}
+     * @example 'Next year'
      */
     nextYearLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * Label for the select day button
+     *
+     * @type {String}
+     * @example 'Select day'
+     */
+    selectDayLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * Label for the change to button
+     *
+     * @type {String}
+     * @example 'Change to'
+     */
+    changeToLabel: {
       type: String,
       required: true,
     },
@@ -99,6 +133,13 @@ export default {
      * @type {Date}
      */
     'selected-date',
+
+    /**
+     * Event fired when user presses the esc key
+     *
+     * @event close-datepicker
+     */
+    'close-datepicker',
   ],
 
   data () {
