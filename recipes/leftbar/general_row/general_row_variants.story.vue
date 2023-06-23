@@ -34,6 +34,19 @@
         description="Dialbot"
       />
     </div>
+    <div>
+      <h3>
+        Contact Center with DND and unread count
+      </h3>
+      <dt-recipe-general-row
+        type="contact center"
+        dnd-text="DND"
+        unread-count="1"
+        :has-unreads="true"
+        description="Long contact center name"
+        color="magenta-200"
+      />
+    </div>
   </dt-stack>
 </template>
 

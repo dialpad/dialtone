@@ -115,8 +115,8 @@ export function getWordAtUntil (text, index, direction, regex) {
  * Remove marks from a range.
  */
 export function removeMarks (range, doc, tr, type) {
-  const from = range.from - 1;
-  const to = range.to + 1;
+  const from = Math.max(range.from - 1, 0);
+  const to = Math.min(range.to + 1, doc.content.size);
   const marksInRange = getMarksBetween(from, to, doc);
 
   for (const mark of marksInRange) {

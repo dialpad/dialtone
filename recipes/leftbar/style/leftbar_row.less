@@ -17,7 +17,7 @@
   --leftbar-row-omega-min-width: 0;
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
   --leftbar-row-omega-visibility: visible;
-  --leftbar-row-omega-display: block;
+  --leftbar-row-omega-display: inline-flex;
   --leftbar-row-description-font-weight: var(--dt-font-weight-normal);
   --leftbar-row-description-font-size: var(--dt-font-size-200);
   --leftbar-row-description-line-height: var(--lh-200);
@@ -51,8 +51,12 @@
   //  </div>
   //
   &:not(.dt-leftbar-row--no-action):hover {
-    --leftbar-row-omega-display: none;
-    --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
+      --leftbar-row-omega-display: none;
+      --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
+
+      .dt-leftbar-row__action {
+        display: inline-flex;
+      }
   }
 
   &:hover {
@@ -68,6 +72,10 @@
   &--has-unread {
     --leftbar-row-description-font-weight: var(--dt-font-weight-bold);
     --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foreground);
+
+    .dt-leftbar-row__action {
+      display: none;
+    }
   }
 
   &--muted {
@@ -161,13 +169,6 @@
     }
   }
 
-  &__action {
-    position: absolute;
-    right: 0;
-    top: var(--leftbar-row-action-position-bottom);
-    transform: translateY(calc(var(--leftbar-row-action-position-bottom) * -1));
-  }
-
   &__action-button {
     opacity: 0;
     width: var(--leftbar-row-action-width);
@@ -201,7 +202,7 @@
   }
 
   &__label {
-    flex: 1;
+    flex: 0 1;
     min-width: 0;
   }
 

@@ -1,5 +1,5 @@
 import {
-  startOfWeek, addDays, getMonth, isEqual,
+  startOfWeek, addDays, getMonth, isEqual, format,
 } from 'date-fns';
 import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
 
@@ -19,6 +19,7 @@ const getWeekDays = (startDay, month, selectedDay) => {
       text: next.getDate(),
       value: next,
       currentMonth: !isNext,
+      isFirstDayOfMonth: next.getDate() === 1 && !isNext,
       // will be selected if the date is the same as the selected day and is from the current month
       selected: selectedDay ? (next.getDate() === selectedDay && !isNext) : false,
     });
@@ -83,4 +84,8 @@ export const getWeekDayNames = (locale, weekStart) => {
 
   // return them in correct order
   return [days[weekStart]].concat(...afterWeekStart).concat(...beforeWeekStart);
+};
+
+export const formatMonth = (month, monthFormat) => {
+  return format(new Date(2000, month, 1), monthFormat);
 };

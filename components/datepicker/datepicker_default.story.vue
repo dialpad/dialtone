@@ -9,8 +9,11 @@
       :next-month-label="nextMonthLabel"
       :prev-year-label="prevYearLabel"
       :next-year-label="nextYearLabel"
+      :select-day-label="selectDayLabel"
+      :change-to-label="changeToLabel"
       :selected-date="date"
       @selected-date="date = $event; onSelectedDate($event)"
+      @close-datepicker="onCloseDatepicker"
     />
   </div>
 </template>
