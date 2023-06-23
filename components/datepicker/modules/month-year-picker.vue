@@ -2,9 +2,12 @@
   <div class="d-datepicker__month-year-picker">
     <div>
       <button
+        id="prevYearButton"
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="prevYearLabel"
+        :aria-label="`${changeToLabel} ${prevYearLabel} ${selectYear - 1}`"
         @click="changeYear(-1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevrons-left"
@@ -12,9 +15,12 @@
         />
       </button>
       <button
+        id="prevMonthButton"
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="prevMonthLabel"
+        :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, MONTH_FORMAT)}`"
         @click="changeMonth(-1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevron-left"
@@ -24,15 +30,19 @@
     </div>
     <div>
       <p>
-        {{ getMonth }}
+        {{ formattedMonth(selectMonth, MONTH_FORMAT) }}
+
         {{ selectYear }}
       </p>
     </div>
     <div>
       <button
+        id="nextMonthButton"
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="nextMonthLabel"
+        :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, MONTH_FORMAT)}`"
         @click="changeMonth(1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevron-right"
@@ -40,9 +50,12 @@
         />
       </button>
       <button
+        id="nextYearButton"
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="nextYearLabel"
+        :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
         @click="changeYear(1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevrons-right"
@@ -55,8 +68,9 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { getYear, addMonths, format, getMonth, set, subMonths, getDate } from 'date-fns';
-import { getCalendarDays } from '../utils';
+import { getYear, addMonths, getMonth, set, subMonths, getDate } from 'date-fns';
+import { getCalendarDays, formatMonth } from '../utils';
+import { MONTH_FORMAT } from '../datepicker_constants';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
@@ -84,6 +98,11 @@ export default {
       required: true,
     },
 
+    changeToLabel: {
+      type: String,
+      required: true,
+    },
+
     selectedDate: {
       type: Date,
       required: true,
@@ -105,6 +124,8 @@ export default {
       selectMonth: getMonth(this.selectedDate),
       selectYear: getYear(this.selectedDate),
       highlightedDay: null,
+      focusPicker: 0,
+      focusRefs: [],
     };
   },
 
@@ -114,8 +135,12 @@ export default {
       return getCalendarDays(this.selectMonth, this.selectYear, this.highlightedDay);
     },
 
-    getMonth () {
-      return format(new Date(2000, this.selectMonth, 1), 'MMMM');
+    formattedMonth () {
+      return (month, format) => formatMonth(month, format);
+    },
+
+    MONTH_FORMAT () {
+      return MONTH_FORMAT;
     },
   },
 
@@ -140,7 +165,64 @@ export default {
 
   },
 
+  mounted () {
+    this.focusMonthYearPicker();
+  },
+
   methods: {
+    formatMonth (month, monthFormat) {
+      return format(new Date(2000, month, 1), monthFormat);
+    },
+    
+    setDayRef (el) {
+      if (!this.focusRefs.includes(el)) {
+        this.focusRefs.push(el);
+      }
+    },
+
+    focusMonthYearPicker () {
+      this.focusRefs[0].focus();
+    },
+
+    handleKeyDown (event) {
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          if (this.focusPicker === 0) {
+            this.focusPicker = 3;
+            this.focusRefs[this.focusPicker].focus();
+          } else {
+            this.focusPicker--;
+            this.focusRefs[this.focusPicker].focus();
+          }
+          break;
+
+        case 'ArrowRight':
+          event.preventDefault();
+          if (this.focusPicker === 3) {
+            this.focusPicker = 0;
+            this.focusRefs[this.focusPicker].focus();
+          } else {
+            this.focusPicker++;
+            this.focusRefs[this.focusPicker].focus();
+          }
+          break;
+
+        case 'ArrowDown':
+          event.preventDefault();
+          this.$emit('focus-day');
+          break;
+
+        case 'Tab':
+          this.$emit('focus-day');
+          break;
+
+        case 'Escape':
+          this.$emit('close-datepicker');
+          break;
+      }
+    },
+
     highlightDay () {
       const year = getYear(this.selectedDate);
       const month = getMonth(this.selectedDate);

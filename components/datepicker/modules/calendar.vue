@@ -20,16 +20,16 @@
       <button
         v-for="(day, indexDays) in week.days"
         :key="indexWeek + indexDays"
+        :ref="el => { if (el) setDayRef(el, day.currentMonth) }"
         class="d-datepicker__day"
         :class="{
           'd-datepicker__day--disabled': !day.currentMonth,
-          'd-datepicker__day--selected': highlightDay ? ((day.text === highlightDay) && day.currentMonth) : day.selected,
+          'd-datepicker__day--selected': selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected,
         }"
         type="button"
-        :aria-label="day.text"
+        :aria-label="dayAriaLabel(day)"
         @click="selectDay(day)"
-        @keydown.enter="selectDay(day)"
-        @keydown.space="selectDay(day)"
+        @keydown="handleKeyDown($event)"
       >
         {{ day.text }}
       </button>
@@ -39,7 +39,8 @@
 
 <script>
 import { getWeekDayNames } from '@/components/datepicker/utils.js';
-import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
+import { WEEK_START, MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
+import { format, getYear } from 'date-fns';
 
 export default {
   name: 'DtDatepickerCalendar',
@@ -51,6 +52,11 @@ export default {
     },
 
     locale: {
+      type: String,
+      required: true,
+    },
+
+    selectDayLabel: {
       type: String,
       required: true,
     },
@@ -68,8 +74,10 @@ export default {
 
   data () {
     return {
-      // local highlightDay to override the received by props calendarDays
-      highlightDay: null,
+      // local selectedDay to override the received by props calendarDays
+      selectedDay: null,
+      focusDay: 0,
+      daysRef: [],
     };
   },
 
@@ -81,17 +89,83 @@ export default {
 
   watch: {
     calendarDays () {
-      // local highlightDay is reset when calendarDays is updated
-      this.highlightDay = null;
+      // on calendarDays update, reset our local variables
+      this.focusDay = 0;
+      this.daysRef = [];
+      this.selectedDay = null;
     },
   },
 
   methods: {
+    dayAriaLabel (day) {
+      return `${this.selectDayLabel} ${day.text} ${format(day.value, MONTH_FORMAT)} ${getYear(day.value)}`;
+    },
+
+    setDayRef (el, currentMonth) {
+      if (!this.daysRef.includes(el) && currentMonth) {
+        this.daysRef.push(el);
+      }
+    },
+
+    handleKeyDown (event) {
+      switch (event.key) {
+        case 'ArrowUp':
+          event.preventDefault();
+          this.focusDay -= 7;
+          try {
+            this.daysRef[this.focusDay].focus();
+          } catch (error) {
+            this.$emit('focus-month-year-picker');
+          }
+          break;
+
+        case 'ArrowDown':
+          event.preventDefault();
+          this.focusDay += 7;
+          try {
+            this.daysRef[this.focusDay].focus();
+          } catch (error) {
+            this.$emit('focus-month-year-picker');
+          }
+          break;
+
+        case 'ArrowLeft':
+          event.preventDefault();
+          if (this.focusDay > 0) {
+            this.focusDay -= 1;
+            this.daysRef[this.focusDay].focus();
+          }
+          break;
+
+        case 'ArrowRight':
+          event.preventDefault();
+          if (this.focusDay < this.daysRef.length - 1) {
+            this.focusDay += 1;
+            this.daysRef[this.focusDay].focus();
+          }
+          break;
+
+        case 'Tab':
+          event.preventDefault();
+          this.$emit('focus-month-year-picker');
+          break;
+
+        case 'Escape':
+          this.$emit('close-datepicker');
+          break;
+      }
+    },
+
+    focusFirstDay () {
+      this.focusDay = 0;
+      this.daysRef[this.focusDay].focus();
+    },
+
     selectDay (day) {
       if (!day.currentMonth) { return; }
 
-      // local highlightDay is updated when a day is selected
-      this.highlightDay = day.text;
+      // local selectedDay is updated when a day is selected
+      this.selectedDay = day.text;
       this.$emit('select-date', day.value);
     },
   },
@@ -134,6 +208,7 @@ export default {
     width: 24px;
     height: 24px;
     font-size: 12px;
+    border-radius: 50px;
 
     &--disabled{
       color: var(--black-300);
@@ -141,7 +216,10 @@ export default {
     &--selected{
      color: #ffffff;
      background: #7C52FF;
-     border-radius: 50px;
+    }
+
+    &:focus{
+     box-shadow: var(--bs-focus-ring);
     }
   }
 }
