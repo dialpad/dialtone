@@ -1,3 +1,19 @@
+# [2.88.0](https://github.com/dialpad/dialtone-vue/compare/v2.87.0...v2.88.0) (2023-06-23)
+
+
+### Bug Fixes
+
+* **General Row:** overlapping text ([#1036](https://github.com/dialpad/dialtone-vue/issues/1036)) ([79a6e3a](https://github.com/dialpad/dialtone-vue/commit/79a6e3a6d1e0d29616a9952d4b8aa0db5733f31f))
+* **List Item:** border radius ([#1038](https://github.com/dialpad/dialtone-vue/issues/1038)) ([cebc536](https://github.com/dialpad/dialtone-vue/commit/cebc536503757a54ede8ac8768f5c1bc069a3ab2))
+* **Rich Text Editor:** fix v-model not working ([#1033](https://github.com/dialpad/dialtone-vue/issues/1033)) ([a7b0904](https://github.com/dialpad/dialtone-vue/commit/a7b090469fd9f5a3a09b2446f276b869d6c6a2c7))
+
+
+### Features
+
+* **Datepicker:** documentation ([#1035](https://github.com/dialpad/dialtone-vue/issues/1035)) ([e77a12c](https://github.com/dialpad/dialtone-vue/commit/e77a12c53be4e4fd79ae1f64f1243ffa58d6992e))
+* **Datepicker:** keyboard navigation ([#1025](https://github.com/dialpad/dialtone-vue/issues/1025)) ([498bff1](https://github.com/dialpad/dialtone-vue/commit/498bff17822da79205ced0d03ddb807923dcc3bd))
+* **Datepicker:** tests ([#1032](https://github.com/dialpad/dialtone-vue/issues/1032)) ([a037c09](https://github.com/dialpad/dialtone-vue/commit/a037c09f9e8a00476e9e7506ac4bba24dc22a672))
+
 # [2.87.0](https://github.com/dialpad/dialtone-vue/compare/v2.86.0...v2.87.0) (2023-06-22)
 
 
