@@ -242,7 +242,7 @@ export default {
 .dt-list-item {
   list-style: none;
 
-  :not(.dt-list-item--static) {
+  &:not(.dt-list-item--static) {
     cursor: pointer;
     border-radius: var(--size-300);
   }
