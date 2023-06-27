@@ -1,0 +1,27 @@
+<template>
+  <div>
+    <p>
+      Selected date: {{ date }}
+    </p>
+
+    <dt-datepicker
+      :locale="$attrs.locale"
+      :prev-month-label="$attrs.prevMonthLabel"
+      :next-month-label="$attrs.nextMonthLabel"
+      :prev-year-label="$attrs.prevYearLabel"
+      :next-year-label="$attrs.nextYearLabel"
+      :select-day-label="$attrs.selectDayLabel"
+      :change-to-label="$attrs.changeToLabel"
+      :selected-date="date"
+      @selected-date="date = $event; $attrs.onSelectedDate($event)"
+      @close-datepicker="$attrs.onCloseDatepicker"
+    />
+  </div>
+</template>
+
+<script setup>
+import DtDatepicker from './datepicker.vue';
+import { ref } from 'vue';
+
+const date = ref(new Date());
+</script>

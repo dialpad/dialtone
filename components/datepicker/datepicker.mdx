@@ -1,0 +1,136 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtDatepickerStories from './datepicker.stories.js';
+
+<Meta of={DtDatepickerStories}/>
+
+# Datepicker
+
+<Subtitle>
+  Datepicker component will provide a calendar to select a date.
+</Subtitle>
+
+## Base Style
+
+<Canvas of={DtDatepickerStories.Default} />
+
+## Variants
+
+<Canvas of={DtDatepickerStories.WithPopover} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+We recommend to wrap the datepicker in a `dt-popover` component.
+
+It is required to provide the component with proper labels for i18n and accessibility.
+
+The component will return a [Date object](https://www.w3schools.com/js/js_dates.asp) object when a date is selected.
+
+For the `withPopover` variant it is necessary to provide the `initial-focus-element="#prevYearButton"` prop
+to the `dt-popover` component.
+
+With this we accomplish the requirement to have the previous year button focused when the datepicker is opened.
+
+## Accessibility
+
+Keyboard navigation with arrow and tab keys for datepicker component.
+
+It will switch between `month-year-picker` and `calendar` with `TAB`.
+
+It will move around all calendar days with `arrow-keys`.
+
+It will jump from `month-year-picker` to `calendar` with `DOWN` arrow key.
+
+It will jump to `month-year-picker` when there is no more days at the bottom or top of the calendar.
+
+It will change year or month with `ENTER` or `SPACE` (native event)
+
+It will select day with `ENTER` or `SPACE` (native event)
+
+It will start with focus on previous-year on mounted
+
+Screen reader will say
+
+In `month-year-picker`:
+
+- Change to previous year, 2022
+- Change to previous month, july
+- Change to next month, september
+- Change to next year, 2024
+
+In `calendar`:
+
+- Select day 20 July 2023
+
+### Import
+
+```jsx
+import { DtDatepicker } from '@dialpad/dialtone-vue';
+```
+
+### Example usage
+
+```jsx
+const prevMonthLabel = 'Previous month';
+const nextMonthLabel = 'Next month';
+const prevYearLabel = 'Previous year';
+const nextYearLabel = 'Next year';
+const date: new Date();
+
+<dt-datepicker
+  :prev-month-label="prevMonthLabel"
+  :next-month-label="nextMonthLabel"
+  :prev-year-label="prevYearLabel"
+  :next-year-label="nextYearLabel"
+  :selected-date="date"
+  @selected-date="selectedDateHandler()"
+/>
+```
+
+### Example usage with Popover
+
+```jsx
+const prevMonthLabel = 'Previous month';
+const nextMonthLabel = 'Next month';
+const prevYearLabel = 'Previous year';
+const nextYearLabel = 'Next year';
+const date = new Date();
+const datepickerOpened = false;
+
+<dt-popover
+  :open="datepickerOpened"
+  initial-focus-element="#prevYearButton"
+  padding="none"
+  @opened="(open) => { datepickerOpened = open }"
+>
+  <template #anchor>
+    <dt-button
+      size="sm"
+      circle
+      importance="clear"
+      aria-label="Open datepicker"
+      @click="toggleDatepicker"
+    >
+      <template #icon>
+        <dt-icon
+          name="calendar"
+          size="300"
+        />
+      </template>
+    </dt-button>
+  </template>
+  <template #content>
+    <dt-datepicker
+      :prev-month-label="prevMonthLabel"
+      :next-month-label="nextMonthLabel"
+      :prev-year-label="prevYearLabel"
+      :next-year-label="nextYearLabel"
+      :selected-date="date"
+      @selected-date="selectedDateHandler()"
+    />
+  </template>
+</dt-popover>
+```
