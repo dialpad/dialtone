@@ -5,6 +5,7 @@ import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
 import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
 
 export const argsData = {
+  locale: 'en-US',
   changeToLabel: 'Change to',
   prevMonthLabel: 'Previous month',
   nextMonthLabel: 'Next month',

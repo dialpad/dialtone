@@ -117,6 +117,20 @@ export default {
      * @type {Array}
      */
     'calendar-days',
+
+    /**
+     * Will focus the day picker
+     *
+     * @event focus-day
+     */
+    'focus-day',
+
+    /**
+     * Will close the datepicker
+     *
+     * @event close-datepicker
+     */
+    'close-datepicker',
   ],
 
   data () {
