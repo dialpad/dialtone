@@ -4191,7 +4191,16 @@
       "link": {
         "primary": {
           "value": "{color.purple.400}",
-          "type": "color"
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".14",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "critical": {
           "value": "{color.foreground.critical}",
