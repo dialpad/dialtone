@@ -70,6 +70,20 @@ export default {
      * @type {Date}
      */
     'select-date',
+
+    /**
+     * Will focus the month and year picker
+     *
+     * @event focus-month-year-picker
+     */
+    'focus-month-year-picker',
+
+    /**
+     * Will close the datepicker
+     *
+     * @event close-datepicker
+     */
+    'close-datepicker',
   ],
 
   data () {

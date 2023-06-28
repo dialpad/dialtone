@@ -68,7 +68,7 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { getYear, addMonths, getMonth, set, subMonths, getDate, format } from 'date-fns';
+import { getYear, addMonths, getMonth, set, subMonths, getDate } from 'date-fns';
 import { getCalendarDays, formatMonth } from '../utils';
 import { MONTH_FORMAT } from '../datepicker_constants';
 
@@ -117,6 +117,20 @@ export default {
      * @type {Array}
      */
     'calendar-days',
+
+    /**
+     * Will focus the day picker
+     *
+     * @event focus-day
+     */
+    'focus-day',
+
+    /**
+     * Will close the datepicker
+     *
+     * @event close-datepicker
+     */
+    'close-datepicker',
   ],
 
   data () {
@@ -170,10 +184,6 @@ export default {
   },
 
   methods: {
-    formatMonth (month, monthFormat) {
-      return format(new Date(2000, month, 1), monthFormat);
-    },
-
     setDayRef (el) {
       if (!this.focusRefs.includes(el)) {
         this.focusRefs.push(el);
