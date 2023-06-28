@@ -2521,6 +2521,20 @@
             }
           }
         },
+        "backdrop": {
+          "value": "{color.neutral.black}",
+          "type": "color",
+          "description": "Background color for a modal-like backdrop.",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".7",
+                "space": "hsl"
+              }
+            }
+          }
+        },
         "critical-opaque": {
           "value": "{color.red.300}",
           "type": "color",
@@ -5945,7 +5959,8 @@
         "theme.topbar.profile.color.background-hover": "S:5710cb5aa2440822aa3d5ca18ab18dabaddf1c95,",
         "theme.topbar.profile.color.background-active": "S:8083e18e9da1737f1471240b4c23ed554f8c2dfe,",
         "theme.topbar.profile.color.foreground-inverted": "S:5589aee53c122f9808c3374bbdee185865c306e9,",
-        "theme.topbar.profile.color.background-inverted": "S:85aa64c0515a5c75b47c54a5fcd6a998b56a9b86,"
+        "theme.topbar.profile.color.background-inverted": "S:85aa64c0515a5c75b47c54a5fcd6a998b56a9b86,",
+        "color.surface.backdrop": "S:b2afb933d0e0d727c809a18a30ca718b03765265,"
       },
       "selectedTokenSets": {
         "base": "enabled",
