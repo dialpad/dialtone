@@ -203,6 +203,8 @@
       "google-docs": [],
       "google-drive": [],
       "google-glyph": [],
+      "google-sheets": [],
+      "google-slides": [],
       "greenhouse": [],
       "highfive": [],
       "hubspot": [],
@@ -560,6 +562,7 @@
         "music",
         "start"
       ],
+      "play-filled": [],
       "play": [
         "music",
         "start"
