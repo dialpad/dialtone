@@ -117,6 +117,20 @@ export default {
      * @type {Array}
      */
     'calendar-days',
+
+    /**
+     * Will focus the day picker
+     *
+     * @event focus-day
+     */
+    'focus-day',
+
+    /**
+     * Will close the datepicker
+     *
+     * @event close-datepicker
+     */
+    'close-datepicker',
   ],
 
   data () {
@@ -170,10 +184,6 @@ export default {
   },
 
   methods: {
-    formatMonth (month, monthFormat) {
-      return format(new Date(2000, month, 1), monthFormat);
-    },
-    
     setDayRef (el) {
       if (!this.focusRefs.includes(el)) {
         this.focusRefs.push(el);
