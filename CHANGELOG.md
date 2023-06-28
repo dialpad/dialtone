@@ -1,3 +1,17 @@
+# [2.89.0](https://github.com/dialpad/dialtone-vue/compare/v2.88.0...v2.89.0) (2023-06-28)
+
+
+### Bug Fixes
+
+* **Datepicker:** fix lint ([#1040](https://github.com/dialpad/dialtone-vue/issues/1040)) ([66d3f70](https://github.com/dialpad/dialtone-vue/commit/66d3f7069672d4b879dc31d205d9164656728be6))
+
+
+### Features
+
+* **Datepicker:** added missing events ([#1043](https://github.com/dialpad/dialtone-vue/issues/1043)) ([6f334cf](https://github.com/dialpad/dialtone-vue/commit/6f334cf3ab5dfbb325b7a336304b5ce7105196d2))
+* **Emoji Picker, Scroller, Datepicker:** build registration component and sort  ([#1046](https://github.com/dialpad/dialtone-vue/issues/1046)) ([240fc23](https://github.com/dialpad/dialtone-vue/commit/240fc23920ea566f9aaea26bc47f7cff48bb720c))
+* update dialtone-icons ([1fbd629](https://github.com/dialpad/dialtone-vue/commit/1fbd62948ef365227f0ca1849195c6b4ff3028c8))
+
 # [2.88.0](https://github.com/dialpad/dialtone-vue/compare/v2.87.0...v2.88.0) (2023-06-23)
 
 
