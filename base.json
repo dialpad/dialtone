@@ -6841,7 +6841,8 @@
         "theme.topbar.profile.color.background-hover": "S:520d943fa832f1cd8864a29d52a57ff5d3713348,",
         "theme.topbar.profile.color.background-active": "S:67e80858ab775c367891b09c1aa2a5d279c74f85,",
         "theme.topbar.profile.color.foreground-inverted": "S:50473698de304f4c9be1d0814a154c1f5e4a20d1,",
-        "theme.topbar.profile.color.background-inverted": "S:fc71096252e7e4c90fc496e2642efe4c48bb3bb8,"
+        "theme.topbar.profile.color.background-inverted": "S:fc71096252e7e4c90fc496e2642efe4c48bb3bb8,",
+        "color.surface.backdrop": "S:ad08f34b65eca4b025355ea9961ea6fb42d8014f,"
       },
       "selectedTokenSets": {
         "base/dark": "enabled",
