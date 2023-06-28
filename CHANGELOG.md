@@ -1,3 +1,18 @@
+# [3.74.0](https://github.com/dialpad/dialtone-vue/compare/v3.73.3...v3.74.0) (2023-06-28)
+
+
+### Bug Fixes
+
+* **General Row:** overlapping text - vue 3 ([#1037](https://github.com/dialpad/dialtone-vue/issues/1037)) ([4d38b3c](https://github.com/dialpad/dialtone-vue/commit/4d38b3c6d3543bb825b41327875660bba0324f06))
+* **List Item:** border radius ([#1039](https://github.com/dialpad/dialtone-vue/issues/1039)) ([f522667](https://github.com/dialpad/dialtone-vue/commit/f5226670b726d3c5fadebf523b73d52fac5943f5))
+* **Rich Text Editor:** fix v-model not working ([#1034](https://github.com/dialpad/dialtone-vue/issues/1034)) ([99b0729](https://github.com/dialpad/dialtone-vue/commit/99b0729e3a7b7d7fc97de4ea047e9ac4ed47b53d))
+
+
+### Features
+
+* **Datepicker:** datepicker vue3 component ([#1042](https://github.com/dialpad/dialtone-vue/issues/1042)) ([62310da](https://github.com/dialpad/dialtone-vue/commit/62310da0eba8a8c86b3fd959ad4dc75c40b2bb94))
+* **Emoji Picker, Scroller, Datepicker:** build registration component and sort vue3 ([#1045](https://github.com/dialpad/dialtone-vue/issues/1045)) ([32028b7](https://github.com/dialpad/dialtone-vue/commit/32028b7dad569281994f34016f44cbc69052bf4a))
+
 ## [3.73.3](https://github.com/dialpad/dialtone-vue/compare/v3.73.2...v3.73.3) (2023-06-22)
 
 
