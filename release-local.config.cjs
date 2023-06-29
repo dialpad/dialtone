@@ -1,17 +1,19 @@
 /* eslint-disable no-template-curly-in-string */
 module.exports = {
   branches: [
-    {
-      name: 'vue3',
-      channel: 'vue3',
-    },
     'staging-vue3',
+    'vue3',
+    'next-vue3',
     {
       name: 'beta',
       prerelease: true,
     },
     {
       name: 'alpha',
+      prerelease: true,
+    },
+    {
+      name: 'dialtone8-vue3',
       prerelease: true,
     },
   ],
