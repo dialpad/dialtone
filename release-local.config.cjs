@@ -3,10 +3,7 @@ module.exports = {
   branches: [
     'production',
     'staging',
-    'staging-vue3',
-    'vue3',
     'next',
-    'next-vue3',
     {
       name: 'beta',
       prerelease: true,
@@ -17,10 +14,6 @@ module.exports = {
     },
     {
       name: 'dialtone8',
-      prerelease: true,
-    },
-    {
-      name: 'dialtone8-vue3',
       prerelease: true,
     },
   ],
