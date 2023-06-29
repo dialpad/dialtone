@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import DtDatepicker from './datepicker.vue';
+import DtDatepicker from './DtDatepicker.vue';
 
 export default {
   name: 'DtDatepickerDefault',
