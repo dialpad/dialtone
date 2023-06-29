@@ -1,3 +1,10 @@
+# [2.90.0-dialtone8.2](https://github.com/dialpad/dialtone-vue/compare/v2.90.0-dialtone8.1...v2.90.0-dialtone8.2) (2023-06-29)
+
+
+### Bug Fixes
+
+* package-lock ([48f3120](https://github.com/dialpad/dialtone-vue/commit/48f3120ce19da51bf5617638393a8a3acfecbb1b))
+
 # [2.90.0-dialtone8.1](https://github.com/dialpad/dialtone-vue/compare/v2.89.0...v2.90.0-dialtone8.1) (2023-06-29)
 
 
