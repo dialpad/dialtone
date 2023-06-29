@@ -1,3 +1,10 @@
+## [3.75.1](https://github.com/dialpad/dialtone-vue/compare/v3.75.0...v3.75.1) (2023-06-29)
+
+
+### Code Refactoring
+
+* **Emoji Picker, Datepicker, Scroller:** name refactoring vue3 ([#1048](https://github.com/dialpad/dialtone-vue/issues/1048)) ([4e198d8](https://github.com/dialpad/dialtone-vue/commit/4e198d878341008a9ad6e103cea62541e32c793a))
+
 # [3.75.0](https://github.com/dialpad/dialtone-vue/compare/v3.74.0...v3.75.0) (2023-06-28)
 
 
