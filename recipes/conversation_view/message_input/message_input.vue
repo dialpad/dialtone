@@ -1,18 +1,37 @@
 <template>
-  <div
-    role="presentation"
-    @drag-enter="onDrag"
-    @drag-over="onDrag"
-    @drop="onDrop"
+  <dt-notice
+    v-if="showNotice"
+    :class="noticeClasses"
+    :kind="noticeKind"
+    :close-button-props="computedCloseButtonProps"
+    @close="noticeClose"
   >
-    <!-- TODO: A purpose-built place to display validation errors using DtBanner -->
+    {{ noticeMessage }}
+    <template #icon>
+      <dt-icon
+        size="300"
+        name="alert-circle"
+      />
+    </template>
+  </dt-notice>
+  <div
+    class="d-ps-relative d-bar8 d-bgc-white"
+  >
     <div
+      role="presentation"
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
       :class="{ 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }"
+      @click="$refs.richTextEditor.focusEditor()"
+      @drag-enter="onDrag"
+      @drag-over="onDrag"
+      @drop="onDrop"
+      @focusin="hasFocus = true"
+      @focusout="hasFocus = false"
     >
       <!-- Some wrapper to restrict the height and show the scrollbar -->
       <div class="d-of-auto d-mx16 d-mt8 d-mb4 d-hmx40p">
         <dt-rich-text-editor
+          ref="richTextEditor"
           v-model="inputValue"
           :editable="editable"
           :input-aria-label="inputAriaLabel"
@@ -32,28 +51,41 @@
       <section class="d-d-flex d-jc-space-between d-mx8 d-my4">
         <!-- Left content -->
         <div class="d-d-flex">
-          <dt-button
-            size="sm"
-            circle
-            importance="clear"
-            :aria-label="imageButtonAriaLabel"
-            @click="onSelectImage"
+          <dt-tooltip
+            placement="top-start"
+            :message="imageTooltipLabel"
+            :offset="[-4, -4]"
           >
-            <template #icon>
-              <dt-icon
-                name="image"
-                size="300"
+            <template #anchor>
+              <dt-button
+                size="sm"
+                circle
+                :kind="imagePickerFocus ? 'default' : 'muted'"
+                importance="clear"
+                :aria-label="imageButtonAriaLabel"
+                @click="onSelectImage"
+                @input="onImageUpload"
+                @mouseenter="imagePickerFocus = true"
+                @mouseleave="imagePickerFocus = false"
+                @focusin="imagePickerFocus = true"
+                @focusout="imagePickerFocus = false"
+              >
+                <template #icon>
+                  <dt-icon
+                    name="image"
+                    size="300"
+                  />
+                </template>
+              </dt-button>
+              <dt-input
+                ref="messageInputImageUpload"
+                type="file"
+                class="d-ps-absolute"
+                multiple
+                hidden
               />
             </template>
-          </dt-button>
-          <dt-input
-            ref="messageInputImageUpload"
-            type="file"
-            class="d-ps-absolute"
-            multiple
-            hidden
-            @input="onImageUpload"
-          />
+          </dt-tooltip>
           <dt-popover
             :open="emojiPickerOpened"
             initial-focus-element="#searchInput"
@@ -61,20 +93,33 @@
             @opened="(open) => { emojiPickerOpened = open }"
           >
             <template #anchor>
-              <dt-button
-                size="sm"
-                circle
-                importance="clear"
-                :aria-label="emojiButtonAriaLabel"
-                @click="toggleEmojiPicker"
+              <dt-tooltip
+                :message="emojiTooltipMessage"
+                :offset="[0, -4]"
               >
-                <template #icon>
-                  <dt-icon
-                    name="satisfied"
-                    size="300"
-                  />
+                <template #anchor>
+                  <dt-button
+                    size="sm"
+                    circle
+                    :kind="emojiPickerHovered ? 'default' : 'muted'"
+                    importance="clear"
+                    :aria-label="emojiButtonAriaLabel"
+                    :offset="[0, 0]"
+                    @click="toggleEmojiPicker"
+                    @mouseenter="emojiPickerFocus = true"
+                    @mouseleave="emojiPickerFocus = false"
+                    @focusin="emojiPickerFocus = true"
+                    @focusout="emojiPickerFocus = false"
+                  >
+                    <template #icon>
+                      <dt-icon
+                        :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
+                        size="300"
+                      />
+                    </template>
+                  </dt-button>
                 </template>
-              </dt-button>
+              </dt-tooltip>
             </template>
             <template #content>
               <dt-emoji-picker
@@ -99,26 +144,39 @@
           >
             {{ characterLimitCount - inputLength }}
           </p>
-          <!-- Right positioned UI - send button -->
-          <dt-button
-            size="sm"
-            circle
-            importance="clear"
-            :class="{
-              'message-input-button__disabled': isSendDisabled,
-              'd-bgc-purple-400 d-fc-primary-inverted': !isSendDisabled,
-            }"
-            :aria-label="sendButtonAriaLabel"
-            :aria-disabled="isSendDisabled"
-            @click="onSend"
+          <dt-tooltip
+            placement="top-end"
+            :message="sendTooltipLabel"
+            :show="!isSendDisabled && sendButtonFocus"
+            :offset="[6, -4]"
           >
-            <template #icon>
-              <dt-icon
-                name="send"
-                size="300"
-              />
+            <template #anchor>
+              <!-- Right positioned UI - send button -->
+              <dt-button
+                size="sm"
+                :kind="!isSendDisabled ? 'default' : 'muted'"
+                circle
+                importance="primary"
+                :class="{
+                  'message-input-button__disabled d-fc-muted': isSendDisabled,
+                }"
+                :aria-label="sendButtonAriaLabel"
+                :aria-disabled="isSendDisabled"
+                @click="onSend"
+                @mouseenter="sendButtonFocus = true"
+                @mouseleave="sendButtonFocus = false"
+                @focusin="sendButtonFocus = true"
+                @focusout="sendButtonFocus = false"
+              >
+                <template #icon>
+                  <dt-icon
+                    name="send"
+                    size="300"
+                  />
+                </template>
+              </dt-button>
             </template>
-          </dt-button>
+          </dt-tooltip>
         </div>
       </section>
     </div>
@@ -146,6 +204,9 @@ import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover/index';
 import { DtInput } from '@/components/input/index';
+import { DtNotice } from '@/components/notice/index';
+import { NOTICE_KINDS } from '@/components/notice/notice_constants';
+import { DtTooltip } from '@/components/tooltip/index';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -155,8 +216,10 @@ export default {
     DtEmojiPicker,
     DtIcon,
     DtInput,
+    DtNotice,
     DtPopover,
     DtRichTextEditor,
+    DtTooltip,
   },
 
   mixins: [],
@@ -286,6 +349,37 @@ export default {
       default: 500,
     },
 
+    // Error related props
+
+    /**
+     * Show error notice
+     * This should be turned to false after notice-close event is fired.
+     */
+    showNotice: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * message in the notice
+     */
+    noticeMessage: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * kind of notice to manage color
+     * @values base, error, info, success, warning
+     */
+    noticeKind: {
+      type: String,
+      default: 'error',
+      validate (kind) {
+        return NOTICE_KINDS.includes(kind);
+      },
+    },
+
     // Emoji picker props
 
     /**
@@ -326,6 +420,14 @@ export default {
       default: 'Search...',
     },
 
+    /**
+     * Emoji button tooltip label
+     */
+    emojiTooltipMessage: {
+      type: String,
+      default: 'Emoji',
+    },
+
     // Aria label for buttons
 
     /**
@@ -341,11 +443,26 @@ export default {
       default: 'image button',
     },
 
+    /**
+     * Image button tooltip label
+     */
+    imageTooltipLabel: {
+      type: String,
+      default: 'Attach Image',
+    },
+
     sendButtonAriaLabel: {
       type: String,
       default: 'send button',
     },
 
+    /**
+     * Send button tooltip label
+     */
+    sendTooltipLabel: {
+      type: String,
+      default: 'Send',
+    },
   },
 
   emits: [
@@ -372,6 +489,15 @@ export default {
      * @type {Array}
      */
     'add-media',
+
+    /**
+     * Fires when notice is closed by user.
+     * Listen to this event to toggle showNotice on usage.
+     *
+     * @event notice-close
+     * @type {Boolean}
+     */
+    'notice-close',
   ],
 
   data () {
@@ -379,6 +505,9 @@ export default {
       skinTone: 'Default',
       inputValue: this.value,
       hasFocus: false,
+      imagePickerFocus: false,
+      emojiPickerFocus: false,
+      sendButtonFocus: false,
       emojiPickerOpened: false,
     };
   },
@@ -397,6 +526,31 @@ export default {
       return this.inputLength === 0 ||
       this.disableSend ||
       (this.hasCharacterLimit && this.inputLength > this.characterLimitCount);
+    },
+
+    computedCloseButtonProps () {
+      return {
+        ariaLabel: 'Close',
+      };
+    },
+
+    noticeClasses () {
+      return [
+        'd-ps-relative',
+        'd-t8',
+        'd-bbr0',
+        'd-pt4',
+        'd-pb8',
+        'd-pr12',
+        'd-pl16',
+        'd-bs-none',
+        'd-fs-100',
+        'd-wmx-unset',
+      ];
+    },
+
+    emojiPickerHovered () {
+      return this.emojiPickerFocus || this.emojiPickerOpened;
     },
   },
 
@@ -445,6 +599,10 @@ export default {
       this.$emit('submit', this.inputValue);
       this.inputValue = '';
     },
+
+    noticeClose () {
+      this.$emit('notice-close', true);
+    },
   },
 };
 </script>
@@ -458,5 +616,9 @@ export default {
   background-color: unset;
   color: var(--theme-sidebar-icon-color);
   cursor: default;
+}
+
+.d-notice__icon {
+  margin-right: 8px;
 }
 </style>

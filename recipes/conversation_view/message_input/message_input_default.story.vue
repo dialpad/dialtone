@@ -1,6 +1,7 @@
 <template>
   <div class="d-h264">
     <dt-recipe-message-input
+      v-model:show-notice="$attrs.showNotice"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
@@ -13,6 +14,8 @@
       :has-character-limit="$attrs.hasCharacterLimit"
       :character-limit-count="$attrs.characterLimitCount"
       :character-limit-warning="$attrs.characterLimitWarning"
+      :notice-kind="$attrs.noticeKind"
+      :notice-message="$attrs.noticeMessage"
       :emoji-tab-set-labels="$attrs.emojiTabSetLabels"
       :emoji-skin-selector-button-tooltip-label="$attrs.emojiSkinSelectorButtonTooltipLabel"
       :emoji-search-no-results-label="$attrs.emojiSearchNoResultsLabel"
@@ -27,18 +30,19 @@
       @input="$attrs.onInput"
       @select-media="$attrs.onSelectMedia"
       @add-media="$attrs.onAddMedia"
+      @notice-close="$attrs.onNoticeClose"
     >
       <template
         #footerLeft
       >
-        <div class="d-fc-100 d-fc-muted">
+        <div class="d-body-small d-fc-muted">
           <b>Dwight</b> is typing...
         </div>
       </template>
       <template
         #footerRight
       >
-        <div class="d-fc-100 d-fc-tertiary">
+        <div class="d-body-small d-fc-tertiary">
           <b>Shift</b> + <b>Return</b> to add a new line
         </div>
       </template>

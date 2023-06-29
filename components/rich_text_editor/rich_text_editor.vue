@@ -293,6 +293,10 @@ export default {
     updateEditorAttributes (attributes) {
       this.editor.setOptions({ editorProps: { attributes } });
     },
+
+    focusEditor () {
+      this.editor.commands.focus();
+    },
   },
 };
 </script>

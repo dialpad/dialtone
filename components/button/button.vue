@@ -311,7 +311,7 @@ export default {
     isInvalidPropCombination (circle, kind, importance) {
       for (const row of INVALID_COMBINATION) {
         if (circle === row.circle && kind === row.kind && importance === row.importance) {
-          console.error(row.message);
+          console.warn(row.message);
           return false;
         }
       }

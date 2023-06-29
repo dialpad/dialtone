@@ -3,6 +3,8 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 
+import { NOTICE_KINDS } from '@/components/notice/notice_constants';
+
 /*
   Controls
   ========
@@ -20,6 +22,13 @@ import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.v
 */
 
 export const argTypesData = {
+  // Props
+  noticeKind: {
+    options: NOTICE_KINDS,
+    control: {
+      type: 'select',
+    },
+  },
   // Events
   onSubmit: {
     table: {
@@ -44,18 +53,38 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onAddMedia: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onNoticeClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onSelectMedia: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
 export const argsData = {
-  placeholder: 'New Message',
-  inputAriaLabel: 'input text field',
+  placeholder: 'New message',
+  inputAriaLabel: 'Input text field',
+  noticeMessage: 'Files must be less than 32 MB to be sent as Dialpad messages.',
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),
   onInput: action('input'),
   onSelectMedia: action('select-media'),
-  onAddMedia: action('addd-media'),
+  onAddMedia: action('add-media'),
+  onNoticeClose: action('notice-close'),
 };
 
 // Story Collection
