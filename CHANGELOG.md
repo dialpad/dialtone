@@ -1,3 +1,15 @@
+# [3.76.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0-dialtone8-vue3.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* **Message Input:** error notice message ([#1041](https://github.com/dialpad/dialtone-vue/issues/1041)) ([617382b](https://github.com/dialpad/dialtone-vue/commit/617382b534cae05221a81a1809334393c3e0f894))
+
+
+### Features
+
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+
 ## [3.75.2](https://github.com/dialpad/dialtone-vue/compare/v3.75.1...v3.75.2) (2023-06-29)
 
 
