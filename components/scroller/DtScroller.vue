@@ -185,11 +185,11 @@ function updateItemsFromBottom () {
 
 function validateProps () {
   if (props.dynamic && !props.minItemSize) {
-    console.error('DtScroller error: \'minItemSize\' is required on \'dynamic\' mode.');
+    console.error('scroller error: \'minItemSize\' is required on \'dynamic\' mode.');
   }
 
   if (!props.dynamic && !props.itemSize) {
-    console.error('DtScroller error: \'itemSize\' is required.');
+    console.error('scroller error: \'itemSize\' is required.');
   }
 }
 

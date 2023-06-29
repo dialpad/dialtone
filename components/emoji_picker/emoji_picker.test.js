@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtEmojiPicker from './emoji_picker.vue';
+import DtEmojiPicker from './DtEmojiPicker.vue';
 
 // Constants
 const recentlyUsedEmojis = [

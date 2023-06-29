@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import DtDatepicker from './datepicker.vue';
+import DtDatepicker from './DtDatepicker.vue';
 import { ref } from 'vue';
 
 const date = ref(new Date());

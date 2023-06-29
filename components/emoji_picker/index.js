@@ -1,2 +1,2 @@
-export { default as DtEmojiPicker } from './emoji_picker.vue';
+export { default as DtEmojiPicker } from './DtEmojiPicker.vue';
 export {} from './emoji_picker_constants';

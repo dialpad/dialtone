@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import DtEmojiPicker from './emoji_picker.vue';
+import DtEmojiPicker from './DtEmojiPicker.vue';
 import { ref } from 'vue';
 import DtButton from '@/components/button/button.vue';
 import DtIcon from '@/components/icon/icon.vue';

@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import DtDatepicker from './datepicker.vue';
+import DtDatepicker from './DtDatepicker.vue';
 import DtPopover from '@/components/popover/popover.vue';
 import DtButton from '@/components/button/button.vue';
 import DtIcon from '@/components/icon/icon.vue';

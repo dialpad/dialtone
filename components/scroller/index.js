@@ -1,1 +1,1 @@
-export { default as DtScroller } from './scroller.vue';
+export { default as DtScroller } from './DtScroller.vue';

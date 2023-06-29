@@ -1,4 +1,4 @@
-import DtScroller from './scroller.vue';
+import DtScroller from './DtScroller.vue';
 import ScrollerDefault from './scroller_default.story.vue';
 import ScrollerDynamic from './scroller_dynamic.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';

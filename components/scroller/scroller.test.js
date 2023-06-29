@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
-import DtScroller from './scroller.vue';
+import DtScroller from './DtScroller.vue';
 
 // Constants
 const items = Array.from({ length: 20 }, (_, i) => ({

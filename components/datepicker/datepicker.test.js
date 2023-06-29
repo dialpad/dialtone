@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { formatMonth } from '@/components/datepicker/utils.js';
-import DtDatepicker from './datepicker.vue';
+import DtDatepicker from './DtDatepicker.vue';
 import { MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
 
 const day = 21;
