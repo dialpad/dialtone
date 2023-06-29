@@ -9,6 +9,9 @@ const __dirname = path.dirname(__filename);
 const componentsRootFolder = join(__dirname, '../components');
 const outputPath = join(__dirname, '../dist/component-documentation.json');
 const componentsList = [
+  'DtDatepicker.vue',
+  'DtEmojiPicker.vue',
+  'DtScroller.vue',
   'avatar.vue',
   'badge.vue',
   'banner.vue',
@@ -22,10 +25,8 @@ const componentsList = [
   'codeblock.vue',
   'collapsible.vue',
   'combobox.vue',
-  'datepicker.vue',
   'dropdown.vue',
   'emoji.vue',
-  'emoji_picker.vue',
   'emoji_text_wrapper.vue',
   'icon.vue',
   'input.vue',
@@ -43,7 +44,6 @@ const componentsList = [
   'radio.vue',
   'radio_group.vue',
   'root_layout.vue',
-  'scroller.vue',
   'select_menu.vue',
   'skeleton.vue',
   'stack.vue',
