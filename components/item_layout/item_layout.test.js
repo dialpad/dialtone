@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
-import DtDefaultListItem from './default_list_item.vue';
+import DtItemLayout from './item_layout.vue';
 
-describe('DtDefaultListItem tests', () => {
+describe('DtItemLayout tests', () => {
   // Wrappers
   let wrapper;
   let leftWrapper;
@@ -11,17 +11,17 @@ describe('DtDefaultListItem tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    leftWrapper = wrapper.find('[data-qa="dt-default-list-item-left-wrapper"]');
-    rightWrapper = wrapper.find('[data-qa="dt-default-list-item-right-wrapper"]');
-    subtitleWrapper = wrapper.find('[data-qa="dt-default-list-item-subtitle-wrapper"]');
-    bottomWrapper = wrapper.find('[data-qa="dt-default-list-item-bottom-wrapper"]');
+    leftWrapper = wrapper.find('[data-qa="dt-item-layout-left-wrapper"]');
+    rightWrapper = wrapper.find('[data-qa="dt-item-layout-right-wrapper"]');
+    subtitleWrapper = wrapper.find('[data-qa="dt-item-layout-subtitle-wrapper"]');
+    bottomWrapper = wrapper.find('[data-qa="dt-item-layout-bottom-wrapper"]');
   };
 
   // Test Environment
   let slots;
 
   const _mountWrapper = () => {
-    wrapper = mount(DtDefaultListItem, {
+    wrapper = mount(DtItemLayout, {
       slots,
     });
   };
