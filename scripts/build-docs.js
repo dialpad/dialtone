@@ -30,6 +30,7 @@ const componentsList = [
   'icon.vue',
   'input.vue',
   'input_group.vue',
+  'item_layout.vue',
   'keyboard_shortcut.vue',
   'lazy_show.vue',
   'link.vue',
