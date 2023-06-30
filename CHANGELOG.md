@@ -1,3 +1,15 @@
+# [3.76.0](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0) (2023-06-30)
+
+
+### Bug Fixes
+
+* **Message Input:** error notice message ([#1041](https://github.com/dialpad/dialtone-vue/issues/1041)) ([617382b](https://github.com/dialpad/dialtone-vue/commit/617382b534cae05221a81a1809334393c3e0f894))
+
+
+### Features
+
+* **Item Layout:** add component - vue3 ([#1054](https://github.com/dialpad/dialtone-vue/issues/1054)) ([3d825cd](https://github.com/dialpad/dialtone-vue/commit/3d825cd3848fc684e9e978c3f350844a137ded14))
+
 ## [3.75.2](https://github.com/dialpad/dialtone-vue/compare/v3.75.1...v3.75.2) (2023-06-29)
 
 
