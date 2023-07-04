@@ -67,21 +67,3 @@ defineExpose({
   focusSearchInput,
 });
 </script>
-
-<style scoped>
-.d-emoji-picker__search {
-  position: relative;
-  z-index: 1;
-  margin: var(--su16) var(--su24) 0 var(--su16);
-  background-color: #FFFFFF;
-}
-.d-emoji-picker__search-button{
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    outline: none;
-    line-height: 0;
-}
-</style>

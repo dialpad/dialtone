@@ -171,24 +171,3 @@ defineExpose({
 });
 </script>
 
-<style lang="less">
-.d-emoji-picker{
-  &__tabset-list{
-      gap: 4px;
-
-      &::after{
-        background-color: var(--black-200) !important;
-      }
-
-      button{
-        padding: var(--space-400);
-
-        &.d-tab--selected{
-          &::after{
-            height: var(--size-200);
-          }
-        }
-    }
-  }
-}
-</style>
