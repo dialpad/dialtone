@@ -155,24 +155,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.d-datepicker{
-  width: 308px;
-  padding: 16px;
-
-  p{
-    font-family: inherit;
-    margin: 0;
-    display: flex;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    text-transform: uppercase;
-  }
-
-  &--body{
-    padding: 0 8px;
-  }
-}
-</style>

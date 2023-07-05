@@ -1,0 +1,27 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtItemLayoutStories from './item_layout.stories.js';
+
+<Meta of={DtItemLayoutStories}/>
+
+# DtItemLayout
+
+<Subtitle>
+  Custom layout to enable developer to use list-item like stack.
+  It is used as base for `dt-list-item` component
+</Subtitle>
+
+## Base Style
+
+<Canvas of={DtItemLayoutStories.Default} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtItemLayout } from '@dialpad/dialtone-vue';
+```
