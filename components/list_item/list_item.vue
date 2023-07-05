@@ -45,9 +45,9 @@ import {
   LIST_ITEM_TYPES,
   LIST_ITEM_NAVIGATION_TYPES,
 } from './list_item_constants';
-import DtDefaultListItem from './default_list_item.vue';
 import utils from '@/common/utils';
 import { DtIcon } from '@/components/icon';
+import { DtItemLayout } from '@/components/item_layout';
 
 /**
  * A list item is an element that can be used to represent individual items in a list.
@@ -57,7 +57,7 @@ export default {
   name: 'DtListItem',
 
   components: {
-    DtDefaultListItem,
+    DtItemLayout,
     DtIcon,
   },
 
@@ -169,7 +169,7 @@ export default {
     listItemType () {
       switch (this.type) {
         case LIST_ITEM_TYPES.DEFAULT:
-          return DtDefaultListItem;
+          return DtItemLayout;
         default:
           return null;
       }
@@ -197,7 +197,7 @@ export default {
     },
 
     /**
-     * For keyboard navigation, whether or not this item is currently highlighted.
+     * For keyboard navigation, whether this item is currently highlighted.
      * An injected highlightId will override the default mouseover highlight.
      */
     isHighlighted () {
@@ -213,7 +213,7 @@ export default {
     },
 
     /**
-     * Whether or not to apply hover styles.
+     * Whether to apply hover styles.
      */
     isHoverable () {
       return this.navigationType !== LIST_ITEM_NAVIGATION_TYPES.NONE;

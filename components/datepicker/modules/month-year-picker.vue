@@ -146,29 +146,3 @@ defineExpose({
   focusMonthYearPicker,
 });
 </script>
-
-<style lang="less">
-.d-datepicker__month-year-picker{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
-  margin-bottom: 20px;
-
-  > div {
-      display: inline-flex;
-    }
-
-  button {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    color: var(--primary-color);
-    display: inline-flex;
-    align-items: center;
-    padding: 0;
-  }
-
-}
-</style>

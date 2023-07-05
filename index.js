@@ -42,6 +42,7 @@ export * from './components/stack';
 export * from './components/scroller';
 export * from './components/emoji_picker';
 export * from './components/datepicker';
+export * from './components/item_layout';
 
 /// Recipes
 export * from './recipes/comboboxes/combobox_with_popover';
