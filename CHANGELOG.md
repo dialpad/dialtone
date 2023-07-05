@@ -1,3 +1,23 @@
+# [2.91.0-dialtone8.1](https://github.com/dialpad/dialtone-vue/compare/v2.90.0...v2.91.0-dialtone8.1) (2023-07-05)
+
+
+### Code Refactoring
+
+* **Datepicker:** migrate styles to dialtone ([#1052](https://github.com/dialpad/dialtone-vue/issues/1052)) ([0cbc447](https://github.com/dialpad/dialtone-vue/commit/0cbc4474ca723b7fd655eb6553f87e272d16c5be))
+
+
+### Features
+
+* dialtone-vue dependency updates ([#1056](https://github.com/dialpad/dialtone-vue/issues/1056)) ([95f7419](https://github.com/dialpad/dialtone-vue/commit/95f741968ee9a0c444d8e8f6d8f88b8df6329291))
+* **Item Layout:** add component ([#1053](https://github.com/dialpad/dialtone-vue/issues/1053)) ([23536b5](https://github.com/dialpad/dialtone-vue/commit/23536b553ca7e96869e87e3c7b6ec37b6feb6e6e))
+* merge branch 'staging' into dialtone8 ([cf8d810](https://github.com/dialpad/dialtone-vue/commit/cf8d8103fd864f10b7b102a7c9cc4ffcdff2c4ff))
+* update item-layout to use tokens ([c9151aa](https://github.com/dialpad/dialtone-vue/commit/c9151aa03852aaf561f82549ab1d6ec620201fd4))
+
+
+### Reverts
+
+* Revert "chore: increment version manually to fix semantic release issue" ([896ac83](https://github.com/dialpad/dialtone-vue/commit/896ac835a1ae74abb1d0fde9b6cdae6c48279ff8))
+
 # [2.90.0-dialtone8.2](https://github.com/dialpad/dialtone-vue/compare/v2.90.0-dialtone8.1...v2.90.0-dialtone8.2) (2023-06-29)
 
 
