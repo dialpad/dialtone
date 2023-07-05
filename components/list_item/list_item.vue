@@ -258,7 +258,7 @@ export default {
   }
 
   &--selected-icon {
-    margin-left: var(--space-400);
+    margin-left: var(--dt-space-400);
   }
 
   :focus-visible {

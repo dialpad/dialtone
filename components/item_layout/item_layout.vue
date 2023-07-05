@@ -75,18 +75,18 @@ export default {
 
 <style lang="less">
 .dt-item-layout {
-  min-height: calc(var(--size-550) + var(--size-300));
-  padding: var(--space-300) var(--space-400);
-  font-size: var(--fs-200);
-  line-height: var(--lh-300);
+  min-height: calc(var(--dt-size-550) + var(--dt-size-300));
+  padding: var(--dt-space-300) var(--dt-space-400);
+  font-size: var(--dt-font-size-200);
+  line-height: var(--dt-font-line-height-300);
 
   &--content {
     flex-grow: 1;
   }
 
   &--subtitle {
-    color: var(--fc-tertiary);
-    font-size: var(--fs-100);
+    color: var(--dt-color-foreground-tertiary);
+    font-size: var(--dt-font-size-100);
   }
 
   &,
@@ -94,22 +94,22 @@ export default {
   &--left {
     display: flex;
     align-items: center;
-    min-width: var(--size-600);
+    min-width: var(--dt-size-600);
   }
 
   &--right {
     align-self: flex-start;
-    padding-left: var(--space-400);
+    padding-left: var(--dt-space-400);
   }
 
   &--left {
     align-self: flex-start;
     justify-content: flex-end;
-    padding-right: var(--space-400);
+    padding-right: var(--dt-space-400);
   }
 
   &--bottom {
-    margin-top: var(--space-200);
+    margin-top: var(--dt-space-200);
   }
 }
 </style>
