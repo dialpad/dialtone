@@ -98,12 +98,10 @@ export default {
   }
 
   &--right {
-    align-self: flex-start;
     padding-left: var(--space-400);
   }
 
   &--left {
-    align-self: flex-start;
     justify-content: flex-end;
     padding-right: var(--space-400);
   }
