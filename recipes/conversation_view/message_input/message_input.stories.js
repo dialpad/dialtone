@@ -75,6 +75,7 @@ export const argTypesData = {
 
 // Set default values at the story level here.
 export const argsData = {
+  modelValue: 'Always the Padawan, never the Jedi.',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
   noticeMessage: 'Files must be less than 32 MB to be sent as Dialpad messages.',

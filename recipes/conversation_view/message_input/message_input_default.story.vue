@@ -2,6 +2,7 @@
   <div class="d-h264">
     <dt-recipe-message-input
       v-model:show-notice="$attrs.showNotice"
+      v-model="$attrs.modelValue"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
@@ -9,7 +10,6 @@
       :link="$attrs.link"
       :output-format="$attrs.outputFormat"
       :placeholder="$attrs.placeholder"
-      :value="$attrs.value"
       :disable-send="$attrs.disableSend"
       :has-character-limit="$attrs.hasCharacterLimit"
       :character-limit-count="$attrs.characterLimitCount"
