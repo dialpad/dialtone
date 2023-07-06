@@ -1,3 +1,19 @@
+# [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.0...v3.77.0-dialtone8-vue3.1) (2023-07-06)
+
+
+### Code Refactoring
+
+* **Datepicker:** migrate styles to dialtone vue3 ([#1051](https://github.com/dialpad/dialtone-vue/issues/1051)) ([c2f3b2c](https://github.com/dialpad/dialtone-vue/commit/c2f3b2cd49ab8689d2cc178e8f7f3605363c3aa3))
+* **Emoji Picker:** migrate styles to dialtone ([#1047](https://github.com/dialpad/dialtone-vue/issues/1047)) ([dbdb568](https://github.com/dialpad/dialtone-vue/commit/dbdb5680e22ef0b59cb7fc472259e2ce0e1bb014))
+
+
+### Features
+
+* dialtone-vue3 dependency updates ([#1057](https://github.com/dialpad/dialtone-vue/issues/1057)) ([5a35e4d](https://github.com/dialpad/dialtone-vue/commit/5a35e4da020901c49784e25981e277b81501c0c6))
+* **Item Layout:** add component - vue3 ([#1054](https://github.com/dialpad/dialtone-vue/issues/1054)) ([3d825cd](https://github.com/dialpad/dialtone-vue/commit/3d825cd3848fc684e9e978c3f350844a137ded14))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
 # [3.76.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0-dialtone8-vue3.1) (2023-06-29)
 
 
