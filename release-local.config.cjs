@@ -4,11 +4,6 @@ module.exports = {
     'staging-vue3',
     'vue3',
     {
-      name: 'next-vue3',
-      channel: 'next3',
-      prerelease: 'next3',
-    },
-    {
       name: 'beta',
       prerelease: true,
     },

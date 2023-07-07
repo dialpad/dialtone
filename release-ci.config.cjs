@@ -15,11 +15,6 @@ module.exports = {
       name: 'alpha',
       prerelease: true,
     },
-    {
-      name: 'dialtone8-vue3',
-      prerelease: 'next3',
-      channel: 'next3',
-    },
   ],
   plugins: [
     ['@semantic-release/commit-analyzer', {
