@@ -13,7 +13,7 @@ module.exports = {
     },
     {
       name: 'dialtone8',
-      prerelease: 'next',
+      prerelease: 'dialtone8',
       channel: 'next',
     },
   ],
