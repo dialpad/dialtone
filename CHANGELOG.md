@@ -48,6 +48,31 @@
 
 * Revert "chore: increment version manually to fix semantic release issue" ([896ac83](https://github.com/dialpad/dialtone-vue/commit/896ac835a1ae74abb1d0fde9b6cdae6c48279ff8))
 
+# [2.90.0](https://github.com/dialpad/dialtone-vue/compare/v2.89.0...v2.90.0) (2023-07-07)
+
+
+### Bug Fixes
+
+* correct release config ([7b903b8](https://github.com/dialpad/dialtone-vue/commit/7b903b8fe6ef83c4a4155242bca9d446219c427c))
+* **Item Layout:** remove align-self from item layout ([2596cf9](https://github.com/dialpad/dialtone-vue/commit/2596cf9c80845dd21c3b517d6a85d174f45d188f))
+
+
+### Code Refactoring
+
+* **Datepicker:** migrate styles to dialtone ([#1052](https://github.com/dialpad/dialtone-vue/issues/1052)) ([0cbc447](https://github.com/dialpad/dialtone-vue/commit/0cbc4474ca723b7fd655eb6553f87e272d16c5be))
+* **Datepicker:** name refactoring ([#1049](https://github.com/dialpad/dialtone-vue/issues/1049)) ([75f7146](https://github.com/dialpad/dialtone-vue/commit/75f714615e5273c09aa62e0ad3f1a9f279e6cca1))
+
+
+### Features
+
+* dialtone-vue dependency updates ([#1056](https://github.com/dialpad/dialtone-vue/issues/1056)) ([95f7419](https://github.com/dialpad/dialtone-vue/commit/95f741968ee9a0c444d8e8f6d8f88b8df6329291))
+* **Item Layout:** add component ([#1053](https://github.com/dialpad/dialtone-vue/issues/1053)) ([23536b5](https://github.com/dialpad/dialtone-vue/commit/23536b553ca7e96869e87e3c7b6ec37b6feb6e6e))
+
+
+### Reverts
+
+* Revert "chore: increment version manually to fix semantic release issue" ([896ac83](https://github.com/dialpad/dialtone-vue/commit/896ac835a1ae74abb1d0fde9b6cdae6c48279ff8))
+
 # [2.89.0](https://github.com/dialpad/dialtone-vue/compare/v2.88.0...v2.89.0) (2023-06-28)
 
 
