@@ -3,7 +3,6 @@ module.exports = {
   branches: [
     'production',
     'staging',
-    'next',
     {
       name: 'beta',
       prerelease: true,
@@ -14,7 +13,8 @@ module.exports = {
     },
     {
       name: 'dialtone8',
-      prerelease: true,
+      prerelease: 'next',
+      channel: 'next',
     },
   ],
   plugins: [
