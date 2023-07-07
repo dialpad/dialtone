@@ -1,3 +1,10 @@
+## [3.76.2](https://github.com/dialpad/dialtone-vue/compare/v3.76.1...v3.76.2) (2023-07-07)
+
+
+### Bug Fixes
+
+* correct ci config ([47fed67](https://github.com/dialpad/dialtone-vue/commit/47fed678cd4f64315cd95f0c8acd605503a088c2))
+
 ## [3.76.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.0...v3.76.1) (2023-07-07)
 
 
