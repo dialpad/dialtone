@@ -1,3 +1,12 @@
+## [2.91.2-next.1](https://github.com/dialpad/dialtone-vue/compare/v2.91.1...v2.91.2-next.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* correct release config ([7b903b8](https://github.com/dialpad/dialtone-vue/commit/7b903b8fe6ef83c4a4155242bca9d446219c427c))
+* **Item Layout:** remove align-self from item layout ([2596cf9](https://github.com/dialpad/dialtone-vue/commit/2596cf9c80845dd21c3b517d6a85d174f45d188f))
+* merge branch 'staging' into dialtone8 ([2dec412](https://github.com/dialpad/dialtone-vue/commit/2dec412c8a5e1d754e1c58f627968233f0099146))
+
 ## [2.91.1-dialtone8.1](https://github.com/dialpad/dialtone-vue/compare/v2.91.0...v2.91.1-dialtone8.1) (2023-07-06)
 
 
