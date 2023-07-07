@@ -1,3 +1,10 @@
+## [3.76.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.0...v3.76.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* channel name ([ecfdf6a](https://github.com/dialpad/dialtone-vue/commit/ecfdf6a680b744f506485f5ac1e012a0a21969ff))
+
 # [3.76.0](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0) (2023-07-07)
 
 
