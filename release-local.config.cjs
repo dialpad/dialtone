@@ -13,7 +13,7 @@ module.exports = {
     },
     {
       name: 'dialtone8-vue3',
-      prerelease: 'next3',
+      prerelease: 'dialtone8-vue3',
       channel: 'next-vue3',
     },
   ],
