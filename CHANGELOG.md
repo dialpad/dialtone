@@ -1,3 +1,17 @@
+# [3.77.0-next3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.1...v3.77.0-next3.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+
+
+### Features
+
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
 # [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.0...v3.77.0-dialtone8-vue3.1) (2023-07-06)
 
 
