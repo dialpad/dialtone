@@ -4,7 +4,7 @@ module.exports = {
     'vue3',
     {
       name: 'next-vue3',
-      channel: 'next3',
+      channel: 'next3-vue3',
       prerelease: 'next3',
     },
     {
