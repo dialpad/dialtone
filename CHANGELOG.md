@@ -1,3 +1,10 @@
+## [2.90.1](https://github.com/dialpad/dialtone-vue/compare/v2.90.0...v2.90.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* make prerelease branches different ([f8ab9a9](https://github.com/dialpad/dialtone-vue/commit/f8ab9a92f623f7f24d359275b3a14d27ccdf5fc5))
+
 # [2.90.0](https://github.com/dialpad/dialtone-vue/compare/v2.89.0...v2.90.0) (2023-07-07)
 
 
