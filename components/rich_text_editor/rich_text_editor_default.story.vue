@@ -1,6 +1,6 @@
 <template>
   <dt-rich-text-editor
-    v-model:value="inputValue"
+    v-model="inputValue"
     :editable="editable"
     :input-aria-label="inputAriaLabel"
     :input-class="inputClass"
@@ -22,18 +22,6 @@ export default {
 
   components: {
     DtRichTextEditor,
-  },
-
-  data () {
-    return {
-      inputValue: this.modelValue,
-    };
-  },
-
-  watch: {
-    value (val) {
-      this.inputValue = val;
-    },
   },
 };
 </script>

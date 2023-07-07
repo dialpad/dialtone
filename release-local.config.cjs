@@ -3,7 +3,6 @@ module.exports = {
   branches: [
     'staging-vue3',
     'vue3',
-    'next-vue3',
     {
       name: 'beta',
       prerelease: true,
@@ -14,7 +13,8 @@ module.exports = {
     },
     {
       name: 'dialtone8-vue3',
-      prerelease: true,
+      prerelease: 'next3',
+      channel: 'next-vue3',
     },
   ],
   plugins: [
