@@ -106,7 +106,6 @@
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=8.1",
     "vue": ">=3.2"
   },
   "bugs": {
