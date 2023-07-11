@@ -1,3 +1,10 @@
+# [3.77.0-dialtone8-vue3.3](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.2...v3.77.0-dialtone8-vue3.3) (2023-07-11)
+
+
+### Bug Fixes
+
+* change prerelease name ([f8f9771](https://github.com/dialpad/dialtone-vue/commit/f8f977146d0fdaf2d4ade8f1f49b13f93a286e3b))
+
 # [3.77.0-dialtone8-vue3.2](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.1...v3.77.0-dialtone8-vue3.2) (2023-07-11)
 
 
