@@ -1,3 +1,16 @@
+# [2.91.0](https://github.com/dialpad/dialtone-vue/compare/v2.90.1...v2.91.0) (2023-07-11)
+
+
+### Bug Fixes
+
+* **Contact Info Avatar:** show avatar halo as required ([#1059](https://github.com/dialpad/dialtone-vue/issues/1059)) ([901e7cd](https://github.com/dialpad/dialtone-vue/commit/901e7cdb8a0d128ce2c0397fabe04890cbcdaa9b))
+* update dialtone to 7.29.0 ([b9eaba6](https://github.com/dialpad/dialtone-vue/commit/b9eaba611a9ae7844918b1db2d49eccef5daf11c))
+
+
+### Features
+
+* **Datepicker:** date format utils ([#1060](https://github.com/dialpad/dialtone-vue/issues/1060)) ([00464f4](https://github.com/dialpad/dialtone-vue/commit/00464f4a96b4294401c9f0f1c495bc6443397991))
+
 ## [2.90.1](https://github.com/dialpad/dialtone-vue/compare/v2.90.0...v2.90.1) (2023-07-07)
 
 
