@@ -12,6 +12,7 @@
     :content-class="contentClass"
     :aria-label="ariaLabel"
     :aria-labelledby="ariaLabelledBy"
+    @opened="onOpened"
   >
     <template
       v-if="anchor"
