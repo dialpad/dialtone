@@ -12,6 +12,7 @@
     :content-class="$attrs.contentClass"
     :aria-label="$attrs.ariaLabel"
     :aria-labelledby="$attrs.ariaLabelledBy"
+    @opened="$attrs.onOpened"
   >
     <template
       v-if="$attrs.anchor"
