@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { DtCollapsible } from './';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
@@ -5,6 +6,7 @@ import DtCollapsibleDefaultStory from './collapsible_default.story.vue';
 
 export const argsData = {
   anchorText: 'Click me to toggle Content',
+  onOpened: action('opened'),
 };
 
 const argTypesData = {
