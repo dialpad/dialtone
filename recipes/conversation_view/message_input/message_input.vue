@@ -25,6 +25,7 @@
       @drag-enter="onDrag"
       @drag-over="onDrag"
       @drop="onDrop"
+      @keydown.enter.exact="onSend"
       @focusin="hasFocus = true"
       @focusout="hasFocus = false"
     >

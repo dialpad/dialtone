@@ -28,6 +28,46 @@ another component, such as Message Input, that provides the UI.
   <Story of={RichTextEditorStories.Default} />
 </Canvas>
 
+## Output format
+
+There are 3 defined output formats currently for the input text.
+
+### Text
+
+Provide prop `outputFormat: 'text'`
+
+Plain text format as output without taking into consideration any marks (italics, bold) / html tags/ codeblocks
+that may be included in the input text user provides.
+
+### Json
+
+Provide prop `outputFormat: 'json'`
+
+the input will be formated as a json document that can then be consumed by product.
+The type of the each node in the input will be present for example: `codeblock`, `image`
+along with other meta data pertaining to the text node.
+
+### HTML
+
+Provide prop `outputFormat: 'html'`
+
+the input will be formated as native html that can then be consumed by product.
+
+## Tiptap Plugins Used
+
+### [HardBreak](https://tiptap.dev/api/nodes/hard-break)
+
+HardBreak plugin is used to add support for `<br>` tags in the rich text editor.
+
+### [CodeBlocks](https://tiptap.dev/api/nodes/code-block)
+
+Codeblock plugin is used to enaable the support for code and also specify the language. Type ``` followed by space
+or ~~~ with space to enable a codeblock in the rich text editor.
+
+### [Placeholder](https://tiptap.dev/api/extensions/placeholder)
+
+Provides support to enable placeholder support
+
 ## Slots, Props and Events
 
 <Controls />
