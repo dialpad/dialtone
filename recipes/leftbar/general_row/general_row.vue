@@ -408,6 +408,6 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import "../style/leftbar_row.less";
 </style>
