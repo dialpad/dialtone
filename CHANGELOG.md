@@ -1,3 +1,15 @@
+# [2.92.0](https://github.com/dialpad/dialtone-vue/compare/v2.91.0...v2.92.0) (2023-07-14)
+
+
+### Features
+
+* **General Row:** overridden display property ([#1069](https://github.com/dialpad/dialtone-vue/issues/1069)) ([28cbb92](https://github.com/dialpad/dialtone-vue/commit/28cbb9291d843e0af2a53cfd4910b8ba4135ff35))
+
+
+### Reverts
+
+* Revert "feat(general-row): overridden display property (#1069)" ([9ca8ffc](https://github.com/dialpad/dialtone-vue/commit/9ca8ffcb1c2053d5cfd01bc258eae5ae9ed89b12)), closes [#1069](https://github.com/dialpad/dialtone-vue/issues/1069)
+
 # [2.91.0](https://github.com/dialpad/dialtone-vue/compare/v2.90.1...v2.91.0) (2023-07-14)
 
 
