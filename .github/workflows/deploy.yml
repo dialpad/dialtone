@@ -44,7 +44,7 @@ jobs:
         run: npm run lint
 
       - name: Build storybook
-        if: ${{ github.ref == 'refs/heads/production' || github.ref == 'refs/heads/vue3' }}
+        if: ${{ github.ref == 'refs/heads/production' || github.ref == 'refs/heads/vue3' || github.ref == 'refs/heads/next' }}
         run: npm run storybook:build
 
       - name: Deploy production
@@ -78,6 +78,7 @@ jobs:
           clean-exclude: |
             deploy-previews
             vue3
+            dialtone8
 
       - name: Deploy to GitHub Pages (Vue 3)
         if: ${{ github.ref == 'refs/heads/vue3' && always() }}
@@ -86,6 +87,14 @@ jobs:
           branch: gh-pages
           folder: storybook-static
           target-folder: vue3
+
+      - name: Deploy to GitHub Pages (Dialtone 8)
+        if: ${{ github.ref == 'refs/heads/next' && always() }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: storybook-static
+          target-folder: dialtone8
 
       - name: Github Release
         env:
