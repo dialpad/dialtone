@@ -7,7 +7,9 @@
 
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-3';
+import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
+import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
@@ -152,7 +154,7 @@ export default {
   computed: {
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text];
+      const extensions = [CodeBlock, Document, Paragraph, Text];
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
@@ -160,6 +162,23 @@ export default {
       extensions.push(
         Placeholder.configure({ placeholder: this.placeholder }),
       );
+
+      extensions.push(
+        HardBreak.extend({
+          addKeyboardShortcuts () {
+            return {
+              Enter: () => true,
+              'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
+                () => commands.newlineInCode(),
+                () => commands.createParagraphNear(),
+                () => commands.liftEmptyBlock(),
+                () => commands.splitBlock(),
+              ]),
+            };
+          },
+        }),
+      );
+
       return extensions;
     },
 
