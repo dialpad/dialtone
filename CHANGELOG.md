@@ -1,3 +1,21 @@
+# [3.77.0-dialtone8-vue3.4](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.3...v3.77.0-dialtone8-vue3.4) (2023-07-14)
+
+
+### Bug Fixes
+
+* **Contact Info Avatar:** show avatar halo as required vue3 ([#1062](https://github.com/dialpad/dialtone-vue/issues/1062)) ([53a882c](https://github.com/dialpad/dialtone-vue/commit/53a882c3657ef9157e1967ec3978a1bd7bc4a789))
+* **General Row:** overridden display property - vue3 ([#1070](https://github.com/dialpad/dialtone-vue/issues/1070)) ([fd1703b](https://github.com/dialpad/dialtone-vue/commit/fd1703bbd725397df498f32b4fbc7e0b27e6cc36))
+
+
+### Documentation
+
+* **Collapsible:** fix opened event not displayed on panel ([#1065](https://github.com/dialpad/dialtone-vue/issues/1065)) ([a7c19c5](https://github.com/dialpad/dialtone-vue/commit/a7c19c5fbd68e1236e91abe64340695d2e669ce9))
+
+
+### Features
+
+* **Datepicker:** date format utils vue3 ([#1061](https://github.com/dialpad/dialtone-vue/issues/1061)) ([c0b4570](https://github.com/dialpad/dialtone-vue/commit/c0b45701cded29f0e480e21b6237d27de1271c0e))
+
 # [3.77.0-dialtone8-vue3.3](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.2...v3.77.0-dialtone8-vue3.3) (2023-07-11)
 
 
