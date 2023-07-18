@@ -47,6 +47,16 @@
         color="magenta-200"
       />
     </div>
+    <div>
+      <h3>
+        Contact Center with active voice chat
+      </h3>
+      <dt-recipe-general-row
+        :active-voice-chat="true"
+        description="Long contact center name"
+        color="magenta-200"
+      />
+    </div>
   </dt-stack>
 </template>
 

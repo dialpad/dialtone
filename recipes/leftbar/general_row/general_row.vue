@@ -376,17 +376,13 @@ export default {
     },
   },
 
-  beforeUpdate () {
-    this.handleResize();
-  },
-
-  mounted: function () {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize);
+  mounted () {
+    this.resizeObserver = new ResizeObserver(this.handleResize);
+    this.resizeObserver.observe(this.$el);
   },
 
   beforeDestroy: function () {
-    window.removeEventListener('resize', this.handleResize);
+    this.resizeObserver.disconnect();
   },
 
   methods: {
