@@ -72,6 +72,10 @@ export const argTypesData = {
     options: [undefined, ...Object.keys(BADGE_DECORATION_MODIFIERS)],
     // TODO: Find a way to add conditions on more than one argument
   },
+
+  labelClass: {
+    description: 'Pass through classes. Used to customize the label container',
+  },
 };
 
 // Story Collection
