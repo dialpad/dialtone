@@ -21,7 +21,7 @@
         size="200"
       />
     </span>
-    <span class="d-badge__label">
+    <span :class="['d-badge__label', labelClass]">
       <!-- @slot Slot for badge content, defaults to text prop -->
       <slot>
         {{ text }}
@@ -114,6 +114,14 @@ export default {
       type: String,
       default: undefined,
       validator: (type) => Object.keys(BADGE_DECORATION_MODIFIERS).includes(type),
+    },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

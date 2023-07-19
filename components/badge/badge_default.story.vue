@@ -6,6 +6,7 @@
     :decoration="decoration"
     :icon-left="iconLeft"
     :icon-right="iconRight"
+    :label-class="labelClass"
   >
     <template v-if="defaultSlot">
       {{ defaultSlot }}
