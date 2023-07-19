@@ -15,7 +15,7 @@
   --leftbar-row-alpha-width: calc(var(--size-300) * 10);
   --leftbar-row-alpha-height: calc(var(--size-300) * 9);
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
-  --leftbar-row-omega-display: inline-flex;
+  --leftbar-row-unread-badge-display: inline-flex;
   --leftbar-row-description-font-weight: var(--fw-normal);
   --leftbar-row-description-font-size: var(--fs-200);
   --leftbar-row-description-line-height: var(--lh-200);
@@ -48,15 +48,20 @@
   //    ...
   //  </div>
   //
-  &:not(.dt-leftbar-row--no-action):hover {
-    --leftbar-row-omega-display: none;
+  &:not(.dt-leftbar-row--no-action):hover,
+  &:not(.dt-leftbar-row--no-action):focus-within {
+    --leftbar-row-unread-badge-display: none;
 
     &:deep(.dt-leftbar-row__action) {
       display: inline-flex;
     }
+
+    &:deep(.dt-leftbar-row__action-button) {
+      opacity: 1;
+    }
   }
 
-  &:hover {
+  &:hover, &:focus-within {
     --leftbar-row-color-background: var(--theme-sidebar-row-color-background-hover);
 
     &:deep(.d-presence) {
@@ -88,10 +93,6 @@
     &:deep(.d-avatar__count) {
       --avatar-count-color-shadow: var(--theme-sidebar-selected-row-color-background);
     }
-  }
-
-  &--action-focused {
-    --leftbar-row-omega-display: none;
   }
 
   &__is-typing {
@@ -174,11 +175,6 @@
     opacity: 0;
     width: var(--leftbar-row-action-width);
     height: var(--leftbar-row-action-height);
-
-    .dt-leftbar-row:hover &,
-    &:focus-visible {
-      opacity: 1;
-    }
   }
 
   //  ============================================================================
@@ -221,11 +217,13 @@
   }
 
   &__unread-badge {
-    display: var(--leftbar-row-omega-display);
+    display: var(--leftbar-row-unread-badge-display);
   }
 
   &__active-voice {
     color: var(--fc-success);
+    display: inline-flex;
+
     .opacity-pulsate();
   }
 
@@ -250,7 +248,7 @@
   //    <span class="dt-leftbar-row__meta-custom">...</span>
   //  </div>
   //
-  &__description {
+  &:deep(&__description) {
     display: block;
     font-weight: var(--leftbar-row-description-font-weight);
     font-size: var(--leftbar-row-description-font-size);
@@ -260,7 +258,7 @@
     white-space: nowrap;
   }
 
-  &__status {
+  &:deep(&__status) {
     display: block;
     color: var(--leftbar-row-status-color-foreground);
     font-size: var(--leftbar-row-status-font-size);
