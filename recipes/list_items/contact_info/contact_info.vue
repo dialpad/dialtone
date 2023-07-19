@@ -222,20 +222,20 @@ export default {
 </script>
 
 <style scoped>
-.dt-contact-info .dt-item-layout--content {
+.dt-contact-info :deep(.dt-item-layout--content) {
   /*
   DP-74536: Add `min-width` to make the width of "contact info" adjustable.
   */
   min-width: var(--space-825);
 }
-.dt-contact-info .dt-item-layout--left {
+.dt-contact-info :deep(.dt-item-layout--left) {
   /*
   DP-74536: To make 'Avatar' in fixed position when resizing the window.
   */
   min-width: var(--space-650);
   justify-content: flex-start;
 }
-.dt-contact-info .dt-item-layout--right {
+.dt-contact-info :deep(.dt-item-layout--right) {
   /*
   DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
   */
