@@ -10,6 +10,7 @@
       :title="description"
       :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
       v-bind="$attrs"
+      v-on="generalRowListeners"
     >
       <div
         class="dt-leftbar-row__alpha"
@@ -371,17 +372,13 @@ export default {
     },
   },
 
-  beforeUpdate () {
-    this.handleResize();
-  },
-
-  mounted: function () {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize);
+  mounted () {
+    this.resizeObserver = new ResizeObserver(this.handleResize);
+    this.resizeObserver.observe(this.$el);
   },
 
   beforeUnmount: function () {
-    window.removeEventListener('resize', this.handleResize);
+    this.resizeObserver.disconnect();
   },
 
   methods: {
