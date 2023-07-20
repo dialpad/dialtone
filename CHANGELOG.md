@@ -1,3 +1,12 @@
+## [2.92.1](https://github.com/dialpad/dialtone-vue/compare/v2.92.0...v2.92.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* `contact_info` style override issue ([#1078](https://github.com/dialpad/dialtone-vue/issues/1078)) ([d5d0951](https://github.com/dialpad/dialtone-vue/commit/d5d09511dc90823458894cf030e4c261b918a38e))
+* add customized css to badge label and contact info ([#1076](https://github.com/dialpad/dialtone-vue/issues/1076)) ([0e779d8](https://github.com/dialpad/dialtone-vue/commit/0e779d84e6bc6422a0682864e1e6f4d8a61658e7))
+* **General Row:** resize observer ([#1074](https://github.com/dialpad/dialtone-vue/issues/1074)) ([4afd4aa](https://github.com/dialpad/dialtone-vue/commit/4afd4aa0cdff7b3ac6e1f1a91ea895ae587b863f))
+
 # [2.92.0](https://github.com/dialpad/dialtone-vue/compare/v2.91.0...v2.92.0) (2023-07-14)
 
 
