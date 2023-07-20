@@ -1,3 +1,24 @@
+# [2.92.0-dialtone8.2](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.1...v2.92.0-dialtone8.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* `contact_info` style override issue ([#1078](https://github.com/dialpad/dialtone-vue/issues/1078)) ([2090704](https://github.com/dialpad/dialtone-vue/commit/2090704d49f80356c7b384caf3c6957c6b84a744))
+* add customized css to badge label and contact info ([#1076](https://github.com/dialpad/dialtone-vue/issues/1076)) ([6e8b374](https://github.com/dialpad/dialtone-vue/commit/6e8b3748f4164b9a3f294180ce818b4d7fe893f9))
+* **General Row:** resize observer ([#1074](https://github.com/dialpad/dialtone-vue/issues/1074)) ([7e27e9c](https://github.com/dialpad/dialtone-vue/commit/7e27e9c1b5ef5a7c77a9957d09b26c4fde9d38b3))
+
+
+### Features
+
+* **General Row:** overridden display property ([#1069](https://github.com/dialpad/dialtone-vue/issues/1069)) ([d6fd5ac](https://github.com/dialpad/dialtone-vue/commit/d6fd5ac947595ffbdb66d722eeb970fab350fc76))
+* **General Row:** overridden display property ([#1069](https://github.com/dialpad/dialtone-vue/issues/1069)) ([080afc0](https://github.com/dialpad/dialtone-vue/commit/080afc002edb9bea8c84f396dddc81f7aecee11a))
+
+
+### Reverts
+
+* Revert "feat(general-row): overridden display property (#1069)" ([3e619ba](https://github.com/dialpad/dialtone-vue/commit/3e619ba9608fb2c2453d9d0b0cb1b6ba9b0f7a8a)), closes [#1069](https://github.com/dialpad/dialtone-vue/issues/1069)
+* revert fix(general-row): overridden display property (#1069) ([5355902](https://github.com/dialpad/dialtone-vue/commit/5355902c6b419e2c04ad9db366651637a6ae91fd)), closes [#1069](https://github.com/dialpad/dialtone-vue/issues/1069)
+
 # [2.92.0-dialtone8.1](https://github.com/dialpad/dialtone-vue/compare/v2.91.2-dialtone8.1...v2.92.0-dialtone8.1) (2023-07-14)
 
 
