@@ -4,6 +4,8 @@ import DtDatepicker from './DtDatepicker.vue';
 import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
 import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
 
+const defaultDate = new Date('2023-01-01T00:00:00');
+
 export const argsData = {
   locale: 'en-US',
   changeToLabel: 'Change to',
@@ -14,6 +16,8 @@ export const argsData = {
   selectDayLabel: 'Select day',
   onSelectedDate: action('selected-date'),
   onCloseDatepicker: action('close-datepicker'),
+  date: new Date(),
+  opened: false,
 };
 
 export const argTypesData = {
@@ -121,10 +125,26 @@ const WithPopoverTemplate = (args) => createTemplateFromVueFile(
 export const Default = {
   render: Template,
   args: {},
+  parameters: {
+    percy: {
+      args: {
+        date: defaultDate,
+      },
+    },
+  },
 };
 
 export const WithPopover = {
   render: WithPopoverTemplate,
   args: {},
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    percy: {
+      args: {
+        opened: true,
+        date: defaultDate,
+      },
+    },
+  },
 };

@@ -196,5 +196,11 @@ export const Variants = {
         ],
       },
     },
+
+    percy: {
+      args: {
+        open: true,
+      },
+    },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>
-      Selected date: {{ date }}
+      Selected date: {{ currentSelectedDate }}
     </p>
 
     <dt-popover
@@ -35,8 +35,8 @@
           :next-year-label="$attrs.nextYearLabel"
           :select-day-label="$attrs.selectDayLabel"
           :change-to-label="$attrs.changeToLabel"
-          :selected-date="date"
-          @selected-date="date = $event; $attrs.onSelectedDate($event)"
+          :selected-date="currentSelectedDate"
+          @selected-date="currentSelectedDate = $event; $attrs.onSelectedDate($event)"
           @close-datepicker="$attrs.onCloseDatepicker"
         />
       </template>
@@ -51,8 +51,20 @@ import DtButton from '@/components/button/button.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import { ref } from 'vue';
 
-const date = ref(new Date());
-const datepickerOpened = ref(false);
+const props = defineProps({
+  date: {
+    type: Date,
+    default: () => (new Date()),
+  },
+
+  opened: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const currentSelectedDate = ref(props.date);
+const datepickerOpened = ref(props.opened);
 
 function toggleDatepicker () {
   datepickerOpened.value = !datepickerOpened.value;

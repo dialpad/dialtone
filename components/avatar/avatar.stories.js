@@ -111,6 +111,13 @@ export const Default = {
     default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
     initials: 'PS',
   },
+  parameters: {
+    percy: {
+      args: {
+        seed: 'seed',
+      },
+    },
+  },
 };
 
 // TO DO: figure out why Icon.argTypes is causing the controls to not show up in the Initials story when
