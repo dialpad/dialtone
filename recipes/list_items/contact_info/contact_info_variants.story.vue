@@ -170,7 +170,7 @@
       </p>
       <dt-recipe-contact-info
         :avatar-initials="avatarInitials"
-        :avatar-color="avatarColor"
+        :avatar-seed="avatarSeed"
       >
         <template #header>
           <div class="d-fw-bold d-fs-200">
@@ -263,14 +263,14 @@ export default {
   data () {
     return {
       adminListenInAvatars: [
-        { src: avatar1, initials: 'KK' },
-        { src: avatar2, initials: 'LL', icon: 'hear' },
+        { src: avatar1, initials: 'KK', seed: 'KK' },
+        { src: avatar2, initials: 'LL', icon: 'hear', seed: 'LL' },
       ],
 
       groupCallAvatars: [
-        { initials: 'JL' },
-        { src: avatar1, initials: 'KK' },
-        { src: avatar2, initials: 'LL', text: '+3' },
+        { initials: 'JL', seed: 'JL' },
+        { src: avatar1, initials: 'KK', seed: 'KK' },
+        { src: avatar2, initials: 'LL', text: '+3', seed: 'LL' },
       ],
     };
   },

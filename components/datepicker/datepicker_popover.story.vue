@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>
-      Selected date: {{ date }}
+      Selected date: {{ currentSelectedDate }}
     </p>
 
     <dt-popover
@@ -35,8 +35,8 @@
           :next-year-label="nextYearLabel"
           :select-day-label="selectDayLabel"
           :change-to-label="changeToLabel"
-          :selected-date="date"
-          @selected-date="date = $event; onSelectedDate($event)"
+          :selected-date="currentSelectedDate"
+          @selected-date="currentSelectedDate = $event; onSelectedDate($event)"
           @close-datepicker="onCloseDatepicker"
         />
       </template>
@@ -56,8 +56,8 @@ export default {
 
   data () {
     return {
-      date: new Date(),
-      datepickerOpened: false,
+      currentSelectedDate: this.date,
+      datepickerOpened: this.opened,
     };
   },
 

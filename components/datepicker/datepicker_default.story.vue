@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>
-      Selected date: {{ date }}
+      Selected date: {{ currentSelectedDate }}
     </p>
     <br>
     <br>
@@ -12,31 +12,31 @@
       </tr>
       <tr>
         <td>formatLong</td>
-        <td>{{ formatLong(date) }}</td>
+        <td>{{ formatLong(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <td>formatMedium</td>
-        <td>{{ formatMedium(date) }}</td>
+        <td>{{ formatMedium(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <td>formatShort</td>
-        <td>{{ formatShort(date) }}</td>
+        <td>{{ formatShort(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <td>formatShort (no weekday)</td>
-        <td>{{ formatShort(date, false) }}</td>
+        <td>{{ formatShort(currentSelectedDate, false) }}</td>
       </tr>
       <tr>
         <td>formatNoYear</td>
-        <td>{{ formatNoYear(date) }}</td>
+        <td>{{ formatNoYear(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <td>formatNoYear (abbreviated)</td>
-        <td>{{ formatNoYear(date, true) }}</td>
+        <td>{{ formatNoYear(currentSelectedDate, true) }}</td>
       </tr>
       <tr>
         <td>formatNumerical</td>
-        <td>{{ formatNumerical(date) }}</td>
+        <td>{{ formatNumerical(currentSelectedDate) }}</td>
       </tr>
     </table>
     <br>
@@ -50,8 +50,8 @@
       :next-year-label="nextYearLabel"
       :select-day-label="selectDayLabel"
       :change-to-label="changeToLabel"
-      :selected-date="date"
-      @selected-date="date = $event; onSelectedDate($event)"
+      :selected-date="currentSelectedDate"
+      @selected-date="currentSelectedDate = $event; onSelectedDate($event)"
       @close-datepicker="onCloseDatepicker"
     />
   </div>
@@ -63,11 +63,12 @@ import { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } 
 
 export default {
   name: 'DtDatepickerDefault',
+
   components: { DtDatepicker },
 
   data () {
     return {
-      date: new Date(),
+      currentSelectedDate: this.date,
     };
   },
 

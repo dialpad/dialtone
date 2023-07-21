@@ -234,5 +234,13 @@ export const Default = {
 export const Variants = {
   render: VariantsTemplate,
   args: {},
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    percy: {
+      args: {
+        openPopover: true,
+      },
+    },
+  },
 };
