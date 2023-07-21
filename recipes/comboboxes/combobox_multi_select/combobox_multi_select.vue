@@ -398,13 +398,8 @@ export default {
   watch: {
     selectedItems: {
       deep: true,
-      immediate: true,
       handler: async function () {
-        await this.$nextTick();
-        this.setInputPadding();
-        this.setChipsTopPosition();
-        this.setInputMinWidth();
-        this.checkMaxSelected();
+        this.initSelectedItems();
       },
     },
 
@@ -429,8 +424,6 @@ export default {
         this.setInputPadding();
         this.setChipsTopPosition();
       },
-
-      immediate: true,
     },
   },
 
@@ -441,6 +434,8 @@ export default {
       this.setInputPadding();
     });
     this.resizeWindowObserver.observe(document.body);
+
+    this.initSelectedItems();
   },
 
   beforeUnmount () {
@@ -448,6 +443,14 @@ export default {
   },
 
   methods: {
+    async initSelectedItems () {
+      await this.$nextTick();
+      this.setInputPadding();
+      this.setChipsTopPosition();
+      this.setInputMinWidth();
+      this.checkMaxSelected();
+    },
+
     onChipRemove (item) {
       this.$emit('remove', item);
       this.$refs.input?.focus();
