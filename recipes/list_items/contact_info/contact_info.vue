@@ -26,8 +26,8 @@
               :initials="avatar.initials"
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
-              overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
-              :avatar-class="['d-baw4 d-bc-white d-bar-pill d-ba d-bc-transparent', {
+              overlay-class="d-mn4 d-ba d-baw4 d-bc-black-100 d-box-unset"
+              :avatar-class="['d-baw4 d-bar-pill d-ba d-bc-black-100', {
                 'd-mln24': index > 0,
                 'd-bc-brand': !!avatar.halo,
               }]"
