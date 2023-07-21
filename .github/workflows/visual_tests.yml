@@ -43,17 +43,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Use Library Cache
-        id: library-cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./node_modules/
-            ~/.npm
-          key: ${{ format('{0}-dialtone-vue-library-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('package-lock.json'))) }}
-
       - name: Install Library Dependencies
-        if: steps.library-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Build Storybook
@@ -63,4 +53,4 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: npx percy storybook --config percy.config.cjs --verbose storybook-static
+        run: npx percy storybook --config percy.config.cjs --verbose ./storybook-static

@@ -5,7 +5,6 @@
     :avatar-initials="avatarInitials"
     :avatar-icon="avatarIcon"
     :avatar-size="avatarSize"
-    :avatar-color="avatarColor"
     :avatar-seed="avatarSeed"
     :presence="presence"
   >

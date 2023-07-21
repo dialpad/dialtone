@@ -13,6 +13,7 @@
         v-if="showHeader"
         avatar-class="d-mt4"
         :initials="avatarInitials"
+        :seed="avatarInitials"
       >
         <img
           v-if="avatarImageUrl"
