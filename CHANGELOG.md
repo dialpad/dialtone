@@ -1,3 +1,19 @@
+# [3.77.0-dialtone8-vue3.5](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.4...v3.77.0-dialtone8-vue3.5) (2023-07-21)
+
+
+### Bug Fixes
+
+* `contact_info` style override issue (Vue3) ([#1079](https://github.com/dialpad/dialtone-vue/issues/1079)) ([1826f1c](https://github.com/dialpad/dialtone-vue/commit/1826f1c95c714ea14beda43e0ffc5c9553c07964))
+* add customized css to badge label and contact info (vue3) ([#1077](https://github.com/dialpad/dialtone-vue/issues/1077)) ([b1c3821](https://github.com/dialpad/dialtone-vue/commit/b1c3821886b2c0713077e6e1e41ece5e43398317))
+* **Contact Info, Leftbar Row:** stylings - vue3 ([#1086](https://github.com/dialpad/dialtone-vue/issues/1086)) ([594fdca](https://github.com/dialpad/dialtone-vue/commit/594fdca87aa5eab7a14c22f543517bc4c3784179)), closes [#1062](https://github.com/dialpad/dialtone-vue/issues/1062) [#1061](https://github.com/dialpad/dialtone-vue/issues/1061)
+* **General Row:** resize observer - vue3 ([#1075](https://github.com/dialpad/dialtone-vue/issues/1075)) ([a39b917](https://github.com/dialpad/dialtone-vue/commit/a39b917ac5fd02cc7b46595617450a892172b7d9))
+* **Message Input:** message input recipe tests ([#1073](https://github.com/dialpad/dialtone-vue/issues/1073)) ([bab14a5](https://github.com/dialpad/dialtone-vue/commit/bab14a5fe094e7a653e47d606b3132d387942137))
+
+
+### Features
+
+* **Rich Text Editor:** add hardbreak and codeblocks ([#1068](https://github.com/dialpad/dialtone-vue/issues/1068)) ([bbf24db](https://github.com/dialpad/dialtone-vue/commit/bbf24db5e7be1fa284a5dc7ecc3d86221e0640b3))
+
 # [3.77.0-dialtone8-vue3.4](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.3...v3.77.0-dialtone8-vue3.4) (2023-07-14)
 
 
