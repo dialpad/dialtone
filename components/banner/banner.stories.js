@@ -47,31 +47,44 @@ export const Default = {
     action: 'Action',
     kind: 'base',
   },
+
+  parameters: {
+    percy: {
+      args: {
+        show: true,
+      },
+    },
+  },
 };
 
 export const Error = {
   render: Template,
   args: { ...Default.args, kind: 'error' },
+  parameters: Default.parameters,
 };
 
 export const Info = {
   render: Template,
   args: { ...Default.args, kind: 'info' },
+  parameters: Default.parameters,
 };
 
 export const Success = {
   render: Template,
   args: { ...Default.args, kind: 'success' },
+  parameters: Default.parameters,
 };
 
 export const Warning = {
   render: Template,
   args: { ...Default.args, kind: 'warning' },
+  parameters: Default.parameters,
 };
 
 export const Pinned = {
   render: Template,
   args: { ...Default.args, pinned: true },
+  parameters: Default.parameters,
 };
 
 export const CustomBackground = {
@@ -87,4 +100,5 @@ export const CustomBackground = {
     dialogClass: 'd-fc-white',
     default: 'The power of Dialpad. On your desktop',
   },
+  parameters: Default.parameters,
 };

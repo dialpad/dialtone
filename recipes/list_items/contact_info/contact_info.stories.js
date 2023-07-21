@@ -124,9 +124,8 @@ export const Default = {
 
   args: {
     avatarSrc: avatarImage,
-    avatarSeed: 'seed',
+    avatarSeed: 'JL',
     avatarInitials: 'JL',
-    avatarColor: 'base',
     avatarSize: 'lg',
     presence: 'active',
     header: `<div class="d-fs-200 d-fw-bold">
@@ -152,7 +151,7 @@ export const Default = {
   <dt-recipe-contact-info
     :avatar-src="avatarSrc"
     :avatar-initials="avatarInitials"
-    :avatar-color="avatarColor"
+    :avatar-seed="avatarSeed"
     :avatar-size="avatarSize"
     :presence="presence"
   >
@@ -195,7 +194,7 @@ export const Variants = {
 
   args: {
     avatarInitials: 'NW',
-    avatarColor: 'orange-500',
+    avatarSeed: 'NW',
     avatarSize: 'lg',
     presence: 'busy',
     onGroupContactClick: action('click: clickable group contact'),
@@ -305,7 +304,7 @@ export const Variants = {
       <p class="d-my16 d-fs-200 d-fw-bold">Contact with items in right slot</p>
       <dt-recipe-contact-info
         :avatar-initials="avatarInitials"
-        :avatar-color="avatarColor"
+        :avatar-seed="avatarSeed"
       >
         <template #header><div class="d-fw-bold d-fs-200">Natalie Woods</div></template>
         <template #subtitle>+1 (415) 123-4567</template>

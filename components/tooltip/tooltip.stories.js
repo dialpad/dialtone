@@ -111,12 +111,23 @@ const TooltipVariantsTemplate = (args) =>
 export const Default = {
   render: TooltipDefaultTemplate,
   args: {},
+  parameters: {
+    percy: {
+      args: {
+        show: true,
+      },
+    },
+  },
 };
 
 export const Variants = {
   render: TooltipVariantsTemplate,
   args: {},
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  parameters: {
+    ...Default.parameters,
+    options: { showPanel: false },
+    controls: { disable: true },
+  },
 };
 
 export const Flip = {
@@ -126,5 +137,9 @@ export const Flip = {
     default: 'Scroll down to see how the tooltip changes based on the available space.',
   },
 
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  parameters: {
+    ...Default.parameters,
+    options: { showPanel: false },
+    controls: { disable: true },
+  },
 };

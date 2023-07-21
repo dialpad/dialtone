@@ -132,6 +132,14 @@ export const Default = {
     title: 'Base title (optional)',
     kind: 'base',
   },
+
+  parameters: {
+    percy: {
+      args: {
+        show: true,
+      },
+    },
+  },
 };
 
 export const Error = {
@@ -141,6 +149,10 @@ export const Error = {
     ...Default.args,
     title: 'Error title (optional)',
     kind: 'error',
+  },
+
+  parameters: {
+    ...Default.parameters,
   },
 };
 
@@ -152,6 +164,10 @@ export const Info = {
     title: 'Info title (optional)',
     kind: 'info',
   },
+
+  parameters: {
+    ...Default.parameters,
+  },
 };
 
 export const Success = {
@@ -161,6 +177,10 @@ export const Success = {
     ...Default.args,
     title: 'Success title (optional)',
     kind: 'success',
+  },
+
+  parameters: {
+    ...Default.parameters,
   },
 };
 
@@ -172,6 +192,10 @@ export const Warning = {
     title: 'Warning title (optional)',
     kind: 'warning',
   },
+
+  parameters: {
+    ...Default.parameters,
+  },
 };
 
 export const Important = {
@@ -180,5 +204,9 @@ export const Important = {
   args: {
     ...Default.args,
     important: true,
+  },
+
+  parameters: {
+    ...Default.parameters,
   },
 };

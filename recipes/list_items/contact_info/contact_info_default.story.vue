@@ -5,7 +5,6 @@
     :avatar-initials="$attrs.avatarInitials"
     :avatar-icon="$attrs.avatarIcon"
     :avatar-size="$attrs.avatarSize"
-    :avatar-color="$attrs.avatarColor"
     :avatar-seed="$attrs.avatarSeed"
     :presence="$attrs.presence"
   >

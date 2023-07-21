@@ -153,6 +153,14 @@ export const Default = {
   render: DefaultTemplate,
   args: {},
 
+  parameters: {
+    percy: {
+      args: {
+        open: true,
+      },
+    },
+  },
+
   decorators: [
     () => ({
       template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
@@ -165,6 +173,7 @@ export const Variants = {
   args: {},
 
   parameters: {
+    ...Default.parameters,
     options: { showPanel: false },
     controls: { disable: true },
     a11y: {

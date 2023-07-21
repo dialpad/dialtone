@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>
-      Selected date: {{ date }}
+      Selected date: {{ currentSelectedDate }}
     </p>
     <br>
     <br>
@@ -12,31 +12,31 @@
       </tr>
       <tr>
         <td>formatLong</td>
-        <td>{{ formatLong(date) }}</td>
+        <td>{{ formatLong(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <td>formatMedium</td>
-        <td>{{ formatMedium(date) }}</td>
+        <td>{{ formatMedium(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <td>formatShort</td>
-        <td>{{ formatShort(date) }}</td>
+        <td>{{ formatShort(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <td>formatShort (no weekday)</td>
-        <td>{{ formatShort(date, false) }}</td>
+        <td>{{ formatShort(currentSelectedDate, false) }}</td>
       </tr>
       <tr>
         <td>formatNoYear</td>
-        <td>{{ formatNoYear(date) }}</td>
+        <td>{{ formatNoYear(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <td>formatNoYear (abbreviated)</td>
-        <td>{{ formatNoYear(date, true) }}</td>
+        <td>{{ formatNoYear(currentSelectedDate, true) }}</td>
       </tr>
       <tr>
         <td>formatNumerical</td>
-        <td>{{ formatNumerical(date) }}</td>
+        <td>{{ formatNumerical(currentSelectedDate) }}</td>
       </tr>
     </table>
     <br>
@@ -49,8 +49,8 @@
       :next-year-label="$attrs.nextYearLabel"
       :select-day-label="$attrs.selectDayLabel"
       :change-to-label="$attrs.changeToLabel"
-      :selected-date="date"
-      @selected-date="date = $event; $attrs.onSelectedDate($event)"
+      :selected-date="currentSelectedDate"
+      @selected-date="currentSelectedDate = $event; $attrs.onSelectedDate($event)"
       @close-datepicker="$attrs.onCloseDatepicker"
     />
   </div>
@@ -61,7 +61,14 @@ import DtDatepicker from './DtDatepicker.vue';
 import { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } from './formatUtils.js';
 import { ref } from 'vue';
 
-const date = ref(new Date());
+const props = defineProps({
+  date: {
+    type: Date,
+    default: () => (new Date()),
+  },
+});
+
+const currentSelectedDate = ref(props.date);
 </script>
 
 <style scoped>

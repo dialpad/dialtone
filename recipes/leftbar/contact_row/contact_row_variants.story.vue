@@ -7,6 +7,7 @@
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
         avatar-presence="active"
+        avatar-seed="JN"
         :avatar-src="defaultImage"
         user-status="Good Morning! :smile:"
         call-button-tooltip="Call"
@@ -19,6 +20,7 @@
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
         avatar-presence="away"
+        avatar-seed="JN"
         presence-text="Away"
         user-status="Out for a bit"
         :avatar-src="defaultImage"
@@ -32,6 +34,7 @@
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
         avatar-presence="busy"
+        avatar-seed="JN"
         presence-text="In a meeting"
         user-status="Meetings all day"
         :avatar-src="defaultImage"
@@ -45,6 +48,7 @@
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
         avatar-presence="active"
+        avatar-seed="JN"
         :avatar-src="defaultImage"
         unread-count="5"
         unread-count-tooltip="55 unread messages"
@@ -59,6 +63,7 @@
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
         avatar-presence="active"
+        avatar-seed="JN"
         :avatar-src="defaultImage"
         :selected="true"
         call-button-tooltip="Call"
@@ -71,6 +76,7 @@
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
         avatar-presence="active"
+        avatar-seed="JN"
         call-button-tooltip="Call"
       />
     </div>

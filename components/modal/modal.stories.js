@@ -124,6 +124,13 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {},
+  parameters: {
+    percy: {
+      args: {
+        show: true,
+      },
+    },
+  },
 };
 
 export const WithFooter = {
@@ -132,6 +139,8 @@ export const WithFooter = {
   args: {
     showFooter: true,
   },
+
+  parameters: { ...Default.parameters },
 };
 
 export const WithFixedHeaderFooter = {
@@ -142,6 +151,8 @@ export const WithFixedHeaderFooter = {
     fixedHeaderFooter: true,
     copy: argsData.copy.repeat(4),
   },
+
+  parameters: { ...Default.parameters },
 };
 
 export const WithBanner = {
@@ -150,6 +161,8 @@ export const WithBanner = {
   args: {
     bannerTitle: 'Example banner',
   },
+
+  parameters: { ...Default.parameters },
 };
 
 export const WithDangerStyle = {
@@ -159,6 +172,8 @@ export const WithDangerStyle = {
     kind: 'danger',
     showFooter: true,
   },
+
+  parameters: { ...Default.parameters },
 };
 
 export const WithFullSize = {
@@ -168,6 +183,8 @@ export const WithFullSize = {
     size: 'full',
     showFooter: true,
   },
+
+  parameters: { ...Default.parameters },
 };
 
 export const WithCustomHeaderAndContent = {
@@ -183,4 +200,6 @@ export const WithCustomHeaderAndContent = {
         <h2>[custom body]</h2>
       </div>`,
   },
+
+  parameters: { ...Default.parameters },
 };
