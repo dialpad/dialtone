@@ -1,3 +1,10 @@
+# [2.92.0-dialtone8.3](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.2...v2.92.0-dialtone8.3) (2023-07-21)
+
+
+### Bug Fixes
+
+* **Contact Info, Leftbar Row:** stylings ([#1085](https://github.com/dialpad/dialtone-vue/issues/1085)) ([34c27e8](https://github.com/dialpad/dialtone-vue/commit/34c27e8b687e4e72aac33cb7f96a34f38ad37b5a))
+
 # [2.92.0-dialtone8.2](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.1...v2.92.0-dialtone8.2) (2023-07-20)
 
 
