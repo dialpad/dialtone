@@ -1,3 +1,10 @@
+## [2.92.2](https://github.com/dialpad/dialtone-vue/compare/v2.92.1...v2.92.2) (2023-07-21)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** fix ref not existing error ([#1083](https://github.com/dialpad/dialtone-vue/issues/1083)) ([f5d8874](https://github.com/dialpad/dialtone-vue/commit/f5d88746d81e2f61edf39862d9264f5a5970fc66))
+
 ## [2.92.1](https://github.com/dialpad/dialtone-vue/compare/v2.92.0...v2.92.1) (2023-07-20)
 
 
