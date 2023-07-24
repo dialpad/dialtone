@@ -1,3 +1,12 @@
+# [1.21.0](https://github.com/dialpad/dialtone-tokens/compare/v1.20.0...v1.21.0) (2023-07-24)
+
+
+### Features
+
+* **color:** backdrop background color ([794d5d2](https://github.com/dialpad/dialtone-tokens/commit/794d5d28497f1d7ced0560e7c9c1362446348c4d))
+* **color:** dark primary link color ([79490dd](https://github.com/dialpad/dialtone-tokens/commit/79490ddbd50c0f9736725de7d20dfc544ebe2e53))
+* **shadow:** dark shadows on dark surfaces ([5514d9f](https://github.com/dialpad/dialtone-tokens/commit/5514d9f99659f9b3c88b2f6f101f4f5450c8b4d5))
+
 # [1.20.0](https://github.com/dialpad/dialtone-tokens/compare/v1.19.0...v1.20.0) (2023-06-15)
 
 

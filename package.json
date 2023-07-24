@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.20.0",
+  "version": "1.21.0",
   "description": "Design tokens for Dialtone.",
   "main": "index.js",
   "scripts": {
@@ -17,10 +17,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dialpad/dialtone-tokens.git"
-  },
+  "repository": "git@github.com:dialpad/dialtone-tokens.git",
   "author": "Dialpad",
   "license": "ISC",
   "bugs": {
