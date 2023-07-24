@@ -1,3 +1,17 @@
+# [3.77.0-dialtone8-vue3.6](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.5...v3.77.0-dialtone8-vue3.6) (2023-07-24)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** fix ref not existing error ([#1084](https://github.com/dialpad/dialtone-vue/issues/1084)) ([c72d796](https://github.com/dialpad/dialtone-vue/commit/c72d796a8f3d730e9e2cc0f0a4853a3d9d27f5bc))
+* fix emoji skin tone not updating when skinTone prop updates ([#1087](https://github.com/dialpad/dialtone-vue/issues/1087)) ([d27d870](https://github.com/dialpad/dialtone-vue/commit/d27d8702e803b42da75f52a5a2819a8a597d782d))
+* **Tooltip:** change anchor tag to span ([#1089](https://github.com/dialpad/dialtone-vue/issues/1089)) ([3c8e855](https://github.com/dialpad/dialtone-vue/commit/3c8e855225a93aad9bda09ec7be57ce2cc09775d))
+
+
+### Documentation
+
+* **Multiple Components:** missing migrations - vue3 ([#1090](https://github.com/dialpad/dialtone-vue/issues/1090)) ([614ab18](https://github.com/dialpad/dialtone-vue/commit/614ab187d7a73b0cbde3aefe46cf265a0301a2f6))
+
 # [3.77.0-dialtone8-vue3.5](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.4...v3.77.0-dialtone8-vue3.5) (2023-07-21)
 
 
