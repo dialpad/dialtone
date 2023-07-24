@@ -1,38 +1,38 @@
 <template>
   <dt-root-layout
-    :body-class="bodyClass"
-    :header-class="headerClass"
-    :header-sticky="headerSticky"
-    :header-height="headerHeight"
-    :content-class="contentClass"
-    :content-wrap-width-percent="contentWrapWidthPercent"
-    :sidebar-class="sidebarClass"
-    :sidebar-position="sidebarPosition"
-    :sidebar-width="sidebarWidth"
-    :footer-class="footerClass"
-    :footer-height="footerHeight"
-    :fixed="fixed"
+    :body-class="$attrs.bodyClass"
+    :header-class="$attrs.headerClass"
+    :header-sticky="$attrs.headerSticky"
+    :header-height="$attrs.headerHeight"
+    :content-class="$attrs.contentClass"
+    :content-wrap-width-percent="$attrs.contentWrapWidthPercent"
+    :sidebar-class="$attrs.sidebarClass"
+    :sidebar-position="$attrs.sidebarPosition"
+    :sidebar-width="$attrs.sidebarWidth"
+    :footer-class="$attrs.footerClass"
+    :footer-height="$attrs.footerHeight"
+    :fixed="$attrs.fixed"
   >
     <template
-      v-if="header"
+      v-if="$attrs.header"
       #header
     >
-      <span v-html="header" />
+      <span v-html="$attrs.header" />
     </template>
     <template
-      v-if="sidebar"
+      v-if="$attrs.sidebar"
       #sidebar
     >
-      <span v-html="sidebar" />
+      <span v-html="$attrs.sidebar" />
     </template>
     <template v-if="defaultSlot">
       <div v-html="defaultSlot" />
     </template>
     <template
-      v-if="footer"
+      v-if="$attrs.footer"
       #footer
     >
-      <span v-html="footer" />
+      <span v-html="$attrs.footer" />
     </template>
   </dt-root-layout>
 </template>

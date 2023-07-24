@@ -11,9 +11,9 @@
           :time="$attrs.time"
           :short-time="$attrs.shortTime"
           :is-active="true"
-          :state="state"
-          @hover="onHover"
-          @focus="onFocus"
+          :state="$attrs.state"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
           <template v-if="$attrs.default">
             <span v-html="$attrs.default" />
@@ -168,14 +168,14 @@
       <ul>
         <dt-recipe-feed-item-row
           :show-header="false"
-          :avatar-image-url="avatarImageUrl"
-          :display-name="displayName"
-          :time="time"
-          :short-time="shortTime"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
           :is-active="true"
           state="ERROR"
-          @hover="onHover"
-          @focus="onFocus"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
           <template v-if="defaultSlot">
             <span v-html="defaultSlot" />
@@ -194,14 +194,14 @@
         <dt-recipe-feed-item-row
           ref="feedItemRowFade"
           :show-header="false"
-          :avatar-image-url="avatarImageUrl"
-          :display-name="displayName"
-          :time="time"
-          :short-time="shortTime"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
           :is-active="true"
           state="SEARCHED"
-          @hover="onHover"
-          @focus="onFocus"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
           <template v-if="defaultSlot">
             <span v-html="defaultSlot" />

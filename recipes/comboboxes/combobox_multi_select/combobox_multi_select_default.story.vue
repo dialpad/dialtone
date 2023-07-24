@@ -2,9 +2,8 @@
   <dt-recipe-combobox-multi-select
     ref="comboboxMultiSelect"
     :label="$attrs.label"
-    :description="$attrs.description"
-    :selected-items="selected"
     :label-visible="$attrs.labelVisible"
+    :description="$attrs.description"
     :size="$attrs.size"
     :placeholder="$attrs.placeholder"
     :input-messages="$attrs.inputMessages"
@@ -12,6 +11,7 @@
     :loading="$attrs.loading"
     :loading-message="$attrs.loadingMessage"
     :show-list="$attrs.showList"
+    :selected-items="$attrs.selectedItems"
     :max-selected="$attrs.maxSelected"
     :list-max-height="$attrs.listMaxHeight"
     :max-selected-message="$attrs.maxSelectedMessage"
@@ -73,12 +73,7 @@ export default {
   data () {
     return {
       items: ITEMS_LIST_DATA,
-      selected: null,
     };
-  },
-
-  created () {
-    this.selected = this.$attrs.selected ? [...this.$attrs.selected] : [];
   },
 
   methods: {
@@ -93,10 +88,10 @@ export default {
         this.$attrs.onSelect(i);
 
         const item = this.items[i].value;
-        if (this.selected.includes(item)) {
+        if (this.$attrs.selectedItems.includes(item)) {
           return;
         }
-        this.selected.push(item);
+        this.$attrs.selectedItems.push(item);
 
         // Clear input box and unfilter list
         this.$refs.comboboxMultiSelect.$data.value = '';
@@ -110,11 +105,11 @@ export default {
 
     onComboboxRemove (item) {
       this.$attrs.onRemove(item);
-      const index = this.selected.indexOf(item);
+      const index = this.$attrs.selectedItems.indexOf(item);
       if (index < 0) {
         return;
       }
-      this.selected.splice(index, 1);
+      this.$attrs.selectedItems.splice(index, 1);
     },
   },
 };
