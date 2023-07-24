@@ -6,3 +6,4 @@ dist*/*
 tokens
 .gradle
 local.properties
+.idea
