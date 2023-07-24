@@ -1,3 +1,28 @@
+# [3.78.0](https://github.com/dialpad/dialtone-vue/compare/v3.77.0...v3.78.0) (2023-07-24)
+
+
+### Bug Fixes
+
+* `contact_info` style override issue (Vue3) ([#1079](https://github.com/dialpad/dialtone-vue/issues/1079)) ([16235b7](https://github.com/dialpad/dialtone-vue/commit/16235b7e5dc5cc63b749d4ee9f4d3ad91d5c7bf6))
+* add customized css to badge label and contact info (vue3) ([#1077](https://github.com/dialpad/dialtone-vue/issues/1077)) ([a749778](https://github.com/dialpad/dialtone-vue/commit/a749778a2a7842e86bd244b2937bbd703c1a8d8a))
+* **Combobox Multi Select:** fix ref not existing error ([#1084](https://github.com/dialpad/dialtone-vue/issues/1084)) ([560e6ae](https://github.com/dialpad/dialtone-vue/commit/560e6ae991bab3805f52ea1ce42e4ab07f64f705))
+* fix emoji skin tone not updating when skinTone prop updates ([#1087](https://github.com/dialpad/dialtone-vue/issues/1087)) ([e1b5631](https://github.com/dialpad/dialtone-vue/commit/e1b563196a535acdf27ca2d3b21faac03803887c))
+* **General Row:** overridden display property - vue3 ([#1070](https://github.com/dialpad/dialtone-vue/issues/1070)) ([d0c6595](https://github.com/dialpad/dialtone-vue/commit/d0c6595ff0fbb277e4a74635332f190ed2f5d34c))
+* **General Row:** resize observer - vue3 ([#1075](https://github.com/dialpad/dialtone-vue/issues/1075)) ([dee506c](https://github.com/dialpad/dialtone-vue/commit/dee506c1c385f0eec62b35b8d64e6f41ccfe9041))
+* **Message Input:** message input recipe tests ([#1073](https://github.com/dialpad/dialtone-vue/issues/1073)) ([7936bd5](https://github.com/dialpad/dialtone-vue/commit/7936bd542041b1f10183b4c757e7f8e4bc17a1ef))
+* **Tooltip:** change anchor tag to span ([#1089](https://github.com/dialpad/dialtone-vue/issues/1089)) ([f346741](https://github.com/dialpad/dialtone-vue/commit/f346741239f886a7ef1158f4f43a9906047e8a49))
+
+
+### Documentation
+
+* **Collapsible:** fix opened event not displayed on panel ([#1065](https://github.com/dialpad/dialtone-vue/issues/1065)) ([b325dff](https://github.com/dialpad/dialtone-vue/commit/b325dff364ee3d479a3f77f606c6120c357d6db9))
+* **Multiple Components:** missing migrations - vue3 ([#1090](https://github.com/dialpad/dialtone-vue/issues/1090)) ([8627284](https://github.com/dialpad/dialtone-vue/commit/8627284a45deb49faacbe540a85bfb305762fab3))
+
+
+### Features
+
+* **Rich Text Editor:** add hardbreak and codeblocks ([#1068](https://github.com/dialpad/dialtone-vue/issues/1068)) ([e788ab9](https://github.com/dialpad/dialtone-vue/commit/e788ab9af2bdd9c7891dbe69e5828f41ae30b974))
+
 # [3.77.0](https://github.com/dialpad/dialtone-vue/compare/v3.76.2...v3.77.0) (2023-07-11)
 
 
