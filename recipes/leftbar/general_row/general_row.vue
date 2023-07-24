@@ -379,6 +379,7 @@ export default {
   mounted () {
     this.resizeObserver = new ResizeObserver(this.handleResize);
     this.resizeObserver.observe(this.$el);
+    this.handleResize();
   },
 
   beforeDestroy: function () {
@@ -393,7 +394,7 @@ export default {
       }
     },
 
-    async handleResize () {
+    handleResize () {
       const labelWidth = this.$el?.querySelector('.dt-leftbar-row__primary')?.clientWidth || 0;
       const omegaWidth = this.$el?.querySelector('.dt-leftbar-row__omega')?.clientWidth || 0;
       const alphaWidth = this.$el?.querySelector('.dt-leftbar-row__alpha')?.clientWidth || 0;
