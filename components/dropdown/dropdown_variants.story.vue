@@ -171,7 +171,7 @@
           :navigation-type="$attrs.navigationType"
           :open="$attrs.open"
           :open-on-context="true"
-          :transition="transition"
+          :transition="$attrs.transition"
         >
           <template
             #anchor="{ attrs }"

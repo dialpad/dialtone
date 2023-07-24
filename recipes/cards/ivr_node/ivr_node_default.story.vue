@@ -1,8 +1,8 @@
 <template>
   <dt-recipe-ivr-node
     :node-label="label"
-    :node-type="nodeType"
-    :is-selected="isSelected"
+    :node-type="$attrs.nodeType"
+    :is-selected="$attrs.isSelected"
     :dtmf-key="$attrs.dtmfKey"
     :menu-button-aria-label="$attrs.menuButtonAriaLabel"
     @click="$attrs.onClick($event)"
@@ -149,12 +149,6 @@ import avatarImage from './avatar.png';
 export default {
   name: 'DtRecipeIvrNodeDefault',
   components: { DtButton, DtRecipeIvrNode, DtIcon, DtAvatar, DtListItem, DtKeyboardShortcut },
-  props: {
-    nodeType: {
-      type: String,
-      default: null,
-    },
-  },
 
   computed: {
     avatarSrc () {
@@ -170,39 +164,39 @@ export default {
     },
 
     expert () {
-      return this.nodeType === IVR_NODE_EXPERT;
+      return this.$attrs.nodeType === IVR_NODE_EXPERT;
     },
 
     menu () {
-      return this.nodeType === IVR_NODE_PROMPT_MENU;
+      return this.$attrs.nodeType === IVR_NODE_PROMPT_MENU;
     },
 
     collect () {
-      return this.nodeType === IVR_NODE_PROMPT_COLLECT;
+      return this.$attrs.nodeType === IVR_NODE_PROMPT_COLLECT;
     },
 
     play () {
-      return this.nodeType === IVR_NODE_PROMPT_PLAY;
+      return this.$attrs.nodeType === IVR_NODE_PROMPT_PLAY;
     },
 
     goTo () {
-      return this.nodeType === IVR_NODE_GO_TO;
+      return this.$attrs.nodeType === IVR_NODE_GO_TO;
     },
 
     branch () {
-      return this.nodeType === IVR_NODE_BRANCH;
+      return this.$attrs.nodeType === IVR_NODE_BRANCH;
     },
 
     transfer () {
-      return this.nodeType === IVR_NODE_TRANSFER;
+      return this.$attrs.nodeType === IVR_NODE_TRANSFER;
     },
 
     hangup () {
-      return this.nodeType === IVR_NODE_HANGUP;
+      return this.$attrs.nodeType === IVR_NODE_HANGUP;
     },
 
     label () {
-      return this.nodeLabel || IVR_NODE_LABELS[this.nodeType];
+      return this.$attrs.nodeLabel || IVR_NODE_LABELS[this.$attrs.nodeType];
     },
 
     fileName () {

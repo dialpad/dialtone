@@ -98,9 +98,9 @@
     </dt-popover>
     <dt-popover
       :open="$attrs.open"
-      :modal="modal || false"
-      :hide-on-click="hideOnClick"
-      :transition="transition"
+      :modal="$attrs.modal || false"
+      :hide-on-click="$attrs.hideOnClick"
+      :transition="$attrs.transition"
       width-content="anchor"
       class="d-jc-flex-end"
     >

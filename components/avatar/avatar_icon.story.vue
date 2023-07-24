@@ -3,7 +3,7 @@
     :id="$attrs.id"
     :size="$attrs.size"
     :presence="$attrs.presence"
-    :color="color"
+    :color="$attrs.color"
     :seed="$attrs.seed"
     :overlay-icon="$attrs.overlayIcon"
     :overlay-text="$attrs.overlayText"
