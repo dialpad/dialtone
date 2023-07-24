@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { nextTick, ref, watchEffect } from 'vue';
+import { computed, nextTick, ref, watchEffect } from 'vue';
 import { CDN_URL, EMOJI_SKIN_TONE_MODIFIERS } from '@/components/emoji_picker/emoji_picker_constants';
 import DtTooltip from '@/components/tooltip/tooltip.vue';
 
@@ -127,8 +127,6 @@ const skinList = [
   },
 ];
 
-const skinSelected = ref(skinList.find((skin) => skin.skinTone === props.skinTone));
-
 const isOpen = ref(false);
 
 const skinSelectorRef = ref(null);
@@ -141,6 +139,14 @@ const skinsRef = ref([]);
 watchEffect(
   () => props.isHovering && (isOpen.value = false),
 );
+
+/**
+ * It will initially display props.skinTone. If a new skin tone is selected,
+ * it will display that until props.skinTone changes.
+ */
+const skinPassedIn = computed(() => skinList.find((skin) => skin.skinTone === props.skinTone));
+const skinSelected = ref(skinPassedIn.value);
+watchEffect(() => skinPassedIn.value && (skinSelected.value = skinPassedIn.value));
 
 function setSkinsRef (ref) {
   skinsRef.value.push(ref);
