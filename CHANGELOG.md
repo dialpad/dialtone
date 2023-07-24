@@ -1,3 +1,10 @@
+# [2.92.0-dialtone8.5](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.4...v2.92.0-dialtone8.5) (2023-07-24)
+
+
+### Bug Fixes
+
+* **General Row:** call resize handler on mounted ([#1093](https://github.com/dialpad/dialtone-vue/issues/1093)) ([53768c1](https://github.com/dialpad/dialtone-vue/commit/53768c1742298b70a4ac8ec1e7da10c50f6d53a9))
+
 # [2.92.0-dialtone8.4](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.3...v2.92.0-dialtone8.4) (2023-07-24)
 
 
