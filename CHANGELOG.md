@@ -1,3 +1,11 @@
+# [2.92.0-dialtone8.4](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.3...v2.92.0-dialtone8.4) (2023-07-24)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** fix ref not existing error ([#1083](https://github.com/dialpad/dialtone-vue/issues/1083)) ([de054f4](https://github.com/dialpad/dialtone-vue/commit/de054f4415285386f7722e985e8f7a6b60d5efc2))
+* **Tooltip:** change anchor tag to span ([#1088](https://github.com/dialpad/dialtone-vue/issues/1088)) ([0735fc8](https://github.com/dialpad/dialtone-vue/commit/0735fc81840115e79d796ba5e2ca99c8e5b1e5c6))
+
 # [2.92.0-dialtone8.3](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.2...v2.92.0-dialtone8.3) (2023-07-21)
 
 
