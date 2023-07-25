@@ -6250,7 +6250,10 @@
         "theme.topbar.profile.color.background-active": "S:67e80858ab775c367891b09c1aa2a5d279c74f85,",
         "theme.topbar.profile.color.foreground-inverted": "S:50473698de304f4c9be1d0814a154c1f5e4a20d1,",
         "theme.topbar.profile.color.background-inverted": "S:fc71096252e7e4c90fc496e2642efe4c48bb3bb8,",
-        "color.surface.backdrop": "S:ad08f34b65eca4b025355ea9961ea6fb42d8014f,"
+        "color.surface.backdrop": "S:ad08f34b65eca4b025355ea9961ea6fb42d8014f,",
+        "theme.sidebar.color.foreground-unread": "S:d4aee11c40223a500ce20f55431a008b1faf0d21,",
+        "theme.sidebar.icon.color.foreground": "S:44c289b4150cae0b216cba4dd0e287d851c27549,",
+        "theme.sidebar.section.color.foreground": "S:ec936c4901079ce6bf7e58c68d1c0706f0867779,"
       },
       "selectedTokenSets": {
         "base/dark": "enabled",
