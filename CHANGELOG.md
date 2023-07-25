@@ -1,3 +1,11 @@
+## [3.78.1](https://github.com/dialpad/dialtone-vue/compare/v3.78.0...v3.78.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* **General Row:** adjust label width on prop change ([#1096](https://github.com/dialpad/dialtone-vue/issues/1096)) ([a7209a8](https://github.com/dialpad/dialtone-vue/commit/a7209a823ba6d573a97b735ee4f6778bf1e4543a))
+* **General Row:** call resize handler on mounted ([#1094](https://github.com/dialpad/dialtone-vue/issues/1094)) ([6604a1b](https://github.com/dialpad/dialtone-vue/commit/6604a1b9364ae22d1adc42910b9d014ffce54437))
+
 # [3.78.0](https://github.com/dialpad/dialtone-vue/compare/v3.77.0...v3.78.0) (2023-07-24)
 
 
