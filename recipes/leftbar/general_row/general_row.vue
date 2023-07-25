@@ -332,6 +332,7 @@ export default {
         {
           'dt-leftbar-row--no-action': !this.hasCallButton,
           'dt-leftbar-row--has-unread': this.hasUnreads,
+          'dt-leftbar-row--unread-count': this.showUnreadCount,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,
           'dt-leftbar-row--action-focused': this.actionFocused,
@@ -370,16 +371,18 @@ export default {
     $props: {
       immediate: true,
       deep: true,
-      handler () {
+      async handler () {
         this.validateProps();
+        await this.$nextTick();
+        this.adjustLabelWidth();
       },
     },
   },
 
   mounted () {
-    this.resizeObserver = new ResizeObserver(this.handleResize);
+    this.resizeObserver = new ResizeObserver(this.adjustLabelWidth);
     this.resizeObserver.observe(this.$el);
-    this.handleResize();
+    this.adjustLabelWidth();
   },
 
   beforeDestroy: function () {
@@ -389,12 +392,12 @@ export default {
   methods: {
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&
-          !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {
+        !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {
         console.error(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR);
       }
     },
 
-    handleResize () {
+    adjustLabelWidth () {
       const labelWidth = this.$el?.querySelector('.dt-leftbar-row__primary')?.clientWidth || 0;
       const omegaWidth = this.$el?.querySelector('.dt-leftbar-row__omega')?.clientWidth || 0;
       const alphaWidth = this.$el?.querySelector('.dt-leftbar-row__alpha')?.clientWidth || 0;
