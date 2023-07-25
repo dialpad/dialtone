@@ -1,3 +1,10 @@
+# [2.92.0-dialtone8.6](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.5...v2.92.0-dialtone8.6) (2023-07-25)
+
+
+### Bug Fixes
+
+* **General Row:** adjust label width on prop change ([#1095](https://github.com/dialpad/dialtone-vue/issues/1095)) ([01ed220](https://github.com/dialpad/dialtone-vue/commit/01ed220e23020920f97a16de883972322b0e031e))
+
 # [2.92.0-dialtone8.5](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.4...v2.92.0-dialtone8.5) (2023-07-24)
 
 
