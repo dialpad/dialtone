@@ -1,3 +1,12 @@
+## [2.92.3](https://github.com/dialpad/dialtone-vue/compare/v2.92.2...v2.92.3) (2023-07-25)
+
+
+### Bug Fixes
+
+* **General Row:** adjust label width on prop change ([#1095](https://github.com/dialpad/dialtone-vue/issues/1095)) ([be00936](https://github.com/dialpad/dialtone-vue/commit/be00936c30297e4db91531959fec9e5e22bec829))
+* **General Row:** call resize handler on mounted ([#1093](https://github.com/dialpad/dialtone-vue/issues/1093)) ([25791d7](https://github.com/dialpad/dialtone-vue/commit/25791d7d0cfe57b050a84c155d7a67b0dbdf3340))
+* **Tooltip:** change anchor tag to span ([#1088](https://github.com/dialpad/dialtone-vue/issues/1088)) ([2bd0be2](https://github.com/dialpad/dialtone-vue/commit/2bd0be2f2d6885870e2e22de225f350ad7e89525))
+
 ## [2.92.2](https://github.com/dialpad/dialtone-vue/compare/v2.92.1...v2.92.2) (2023-07-21)
 
 
