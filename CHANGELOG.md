@@ -1,3 +1,10 @@
+# [3.79.0](https://github.com/dialpad/dialtone-vue/compare/v3.78.1...v3.79.0) (2023-07-26)
+
+
+### Features
+
+* **Message Input:** emoji extension ([#1080](https://github.com/dialpad/dialtone-vue/issues/1080)) ([091354d](https://github.com/dialpad/dialtone-vue/commit/091354d1207b37f873c39e4abb8f45802f993dd0))
+
 ## [3.78.1](https://github.com/dialpad/dialtone-vue/compare/v3.78.0...v3.78.1) (2023-07-25)
 
 
