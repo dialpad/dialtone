@@ -13,6 +13,7 @@ import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
+import Emoji from './extensions/emoji';
 import Link from './extensions/link';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
@@ -154,7 +155,7 @@ export default {
   computed: {
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [CodeBlock, Document, Paragraph, Text];
+      const extensions = [CodeBlock, Document, Paragraph, Text, Emoji];
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
