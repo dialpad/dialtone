@@ -1,3 +1,11 @@
+# [2.92.0-dialtone8.7](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.6...v2.92.0-dialtone8.7) (2023-07-26)
+
+
+### Bug Fixes
+
+* **Avatar:** thin border behind image ([#1098](https://github.com/dialpad/dialtone-vue/issues/1098)) ([c942386](https://github.com/dialpad/dialtone-vue/commit/c9423869fc1fd1630722df481d51abab327c8814))
+* **Contact Info:** avatar's border color ([#1097](https://github.com/dialpad/dialtone-vue/issues/1097)) ([1639989](https://github.com/dialpad/dialtone-vue/commit/16399897543c7b1df8de001a8f0297e12b7063b2))
+
 # [2.92.0-dialtone8.6](https://github.com/dialpad/dialtone-vue/compare/v2.92.0-dialtone8.5...v2.92.0-dialtone8.6) (2023-07-25)
 
 
