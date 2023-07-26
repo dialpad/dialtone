@@ -26,11 +26,7 @@
               :initials="avatar.initials"
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
-              overlay-class="d-mn4 d-ba d-baw4 d-bc-black-100 d-box-unset"
-              :avatar-class="['d-baw4 d-bar-pill d-ba d-bc-black-100', {
-                'd-mln24': index > 0,
-                'd-bc-brand': !!avatar.halo,
-              }]"
+              :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
             >
               <img
                 v-if="avatar.src"
@@ -221,24 +217,34 @@ export default {
 };
 </script>
 
-<style scoped>
-.dt-contact-info :deep(.dt-item-layout--content) {
-  /*
-  DP-74536: Add `min-width` to make the width of "contact info" adjustable.
-  */
-  min-width: var(--space-825);
-}
-.dt-contact-info :deep(.dt-item-layout--left) {
-  /*
-  DP-74536: To make 'Avatar' in fixed position when resizing the window.
-  */
-  min-width: var(--space-650);
-  justify-content: flex-start;
-}
-.dt-contact-info :deep(.dt-item-layout--right) {
-  /*
-  DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
-  */
-  min-width: 0;
+<style lang="less" scoped>
+.dt-contact-info {
+  &:deep(.dt-item-layout--content) {
+    /*
+    DP-74536: Add `min-width` to make the width of "contact info" adjustable.
+    */
+    min-width: var(--space-825);
+  }
+
+  &:deep(.dt-item-layout--left) {
+    /*
+    DP-74536: To make 'Avatar' in fixed position when resizing the window.
+    */
+    min-width: var(--space-650);
+    justify-content: flex-start;
+  }
+
+  &:deep(.dt-item-layout--right) {
+    /*
+    DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
+    */
+    min-width: 0;
+  }
+
+  &:deep(.d-avatar) {
+    border-radius: var(--dt-size-radius-pill);
+    border: var(--dt-size-300) solid var(--dt-color-surface-primary);
+    box-sizing: unset;
+  }
 }
 </style>
