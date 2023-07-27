@@ -1,3 +1,10 @@
+## [2.92.4](https://github.com/dialpad/dialtone-vue/compare/v2.92.3...v2.92.4) (2023-07-27)
+
+
+### Bug Fixes
+
+* **Tooltip:** anchor display property issue ([#1101](https://github.com/dialpad/dialtone-vue/issues/1101)) ([a6e5709](https://github.com/dialpad/dialtone-vue/commit/a6e57096a9642f8d04be907c6392989252822326))
+
 ## [2.92.3](https://github.com/dialpad/dialtone-vue/compare/v2.92.2...v2.92.3) (2023-07-25)
 
 
