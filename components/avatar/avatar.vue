@@ -24,25 +24,24 @@
     >
       <dt-icon
         v-if="overlayIcon"
-        class="d-fc-neutral-white d-w100p"
+        class="d-avatar__overlay-icon"
         :name="overlayIcon"
       />
       <p
         v-else-if="overlayText"
-        class="d-fs-200 d-fw-bold d-fc-neutral-white d-w100p d-ta-center"
+        class="d-avatar__overlay-text"
       >
         {{ overlayText }}
       </p>
     </div>
     <span
       v-if="showGroup"
-      class="d-avatar__count d-zi-base"
+      class="d-avatar__count"
       data-qa="dt-avatar-count"
     >{{ formattedGroup }}</span>
     <dt-presence
       v-if="presence && !showGroup"
       :presence="presence"
-      class="d-zi-base"
       :class="[
         'd-avatar__presence',
         AVATAR_PRESENCE_SIZE_MODIFIERS[size],
@@ -225,7 +224,7 @@ export default {
 
     overlayClasses () {
       return [
-        'd-bgc-neutral-black d-o70 d-ps-absolute d-w100p d-h100p d-d-flex d-ai-center d-bar-circle d-zi-base',
+        'd-avatar__overlay',
         this.overlayClass,
       ];
     },
@@ -356,8 +355,43 @@ export default {
 </script>
 
 <style lang="less">
+//TODO: Move these classes to dialtone and document.
+
 .d-avatar--image-loaded {
   background-color: transparent;
   background-image: unset;
+}
+
+.d-avatar__count {
+  z-index: var(--zi-base);
+}
+
+.d-avatar__presence {
+  z-index: var(--zi-base);
+}
+
+.d-avatar__overlay {
+  background-color: var(--dt-color-surface-contrast-opaque);
+  opacity: var(--dt-opacity-900);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: var(--dt-size-radius-circle);
+  z-index: var(--zi-base);
+}
+
+.d-avatar__overlay-icon {
+  color: var(--dt-color-foreground-primary-inverted);
+  width: 100%;
+}
+
+.d-avatar__overlay-text {
+  color: var(--dt-color-foreground-primary-inverted);
+  font-weight: var(--dt-font-weight-bold);
+  font-size: var(--dt-font-size-200);
+  width: 100%;
+  text-align: center;
 }
 </style>
