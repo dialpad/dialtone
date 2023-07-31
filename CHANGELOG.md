@@ -1,3 +1,10 @@
+# [2.93.0-dialtone8.2](https://github.com/dialpad/dialtone-vue/compare/v2.93.0-dialtone8.1...v2.93.0-dialtone8.2) (2023-07-31)
+
+
+### Bug Fixes
+
+* **Avatar:** remove util classes, set tokens ([#1106](https://github.com/dialpad/dialtone-vue/issues/1106)) ([3a24d2c](https://github.com/dialpad/dialtone-vue/commit/3a24d2c2e567b748ff30090c9bf615b571e74084))
+
 # [2.93.0-dialtone8.1](https://github.com/dialpad/dialtone-vue/compare/v2.92.4...v2.93.0-dialtone8.1) (2023-07-27)
 
 
