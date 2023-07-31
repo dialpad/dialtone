@@ -2,7 +2,7 @@
   <dt-recipe-contact-info
     :show-avatar="showAvatar"
     :avatar-src="avatarSrc"
-    :avatar-initials="avatarInitials"
+    :avatar-full-name="avatarFullName"
     :avatar-icon="avatarIcon"
     :avatar-size="avatarSize"
     :avatar-seed="avatarSeed"

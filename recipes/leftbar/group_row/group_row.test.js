@@ -5,7 +5,7 @@ import DtRecipeGroupRow from './group_row.vue';
 const basePropsData = {
   groupCount: 2,
   names: 'Jaqueline Nackos, Lori Smith',
-  avatarInitials: 'JN',
+  avatarFullName: 'Jaqueline Nackos',
   avatarSrc: 'person.png',
 };
 

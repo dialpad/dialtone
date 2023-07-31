@@ -50,13 +50,11 @@
       </div>
       <div v-if="transfer">
         <div class="d-d-flex d-ai-center d-gg8">
-          <dt-avatar seed="seed">
-            <img
-              data-qa="dt-avatar-image"
-              :src="avatarSrc"
-              alt="Person Avatar"
-            >
-          </dt-avatar>
+          <dt-avatar
+            full-name="Person Avatar"
+            image-src="/common/assets/person.png"
+            seed="seed"
+          />
           <p>Carolina Garcia Rodriguez</p>
         </div>
       </div>
@@ -144,7 +142,6 @@ import { DtButton } from '@/components/button';
 import { DtAvatar } from '@/components/avatar';
 import { DtListItem } from '@/components/list_item';
 import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
-import avatarImage from './avatar.png';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',
@@ -157,10 +154,6 @@ export default {
   },
 
   computed: {
-    avatarSrc () {
-      return avatarImage;
-    },
-
     items () {
       return [
         { name: 'Edit', id: 1 },

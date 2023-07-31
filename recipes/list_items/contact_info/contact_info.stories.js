@@ -121,15 +121,11 @@ export const Default = {
   args: {
     avatarSrc: avatarImage,
     avatarSeed: 'JL',
-    avatarInitials: 'JL',
+    avatarFullName: 'Joseph Lumaban',
     avatarSize: 'lg',
     presence: 'active',
-    header: `<div class="d-fs-200 d-fw-bold">
-    Joseph Lumaban
-  </div>`,
-    subtitle: `<div class="d-fs-100 d-mt2">
-    +1 (415) 123-4567
-  </div>`,
+    header: `<div class="d-fs-200 d-fw-bold"> Joseph Lumaban </div>`,
+    subtitle: `<div class="d-fs-100 d-mt2"> +1 (415) 123-4567 </div>`,
     bottom: `<div class="d-d-flex d-ai-center d-mtn6">
     <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
       &nbsp;
@@ -146,7 +142,7 @@ export const Default = {
         code: `
   <dt-recipe-contact-info
     :avatar-src="avatarSrc"
-    :avatar-initials="avatarInitials"
+    :avatar-full-name="avatarFullName"
     :avatar-seed="avatarSeed"
     :avatar-size="avatarSize"
     :presence="presence"
@@ -189,7 +185,7 @@ export const Variants = {
   render: VariantsTemplate,
 
   args: {
-    avatarInitials: 'NW',
+    avatarFullName: 'Natalie Woods',
     avatarSeed: 'NW',
     avatarSize: 'lg',
     presence: 'busy',
@@ -299,7 +295,7 @@ export const Variants = {
     <div class="d-m32">
       <p class="d-my16 d-fs-200 d-fw-bold">Contact with items in right slot</p>
       <dt-recipe-contact-info
-        :avatar-initials="avatarInitials"
+        :avatar-full-name="avatarFullName"
         :avatar-seed="avatarSeed"
       >
         <template #header><div class="d-fw-bold d-fs-200">Natalie Woods</div></template>
@@ -329,15 +325,9 @@ export const Variants = {
   `,
       },
     },
-    controls: {
-      disable: true,
-    },
-    actions: {
-      disable: true,
-    },
-    options: {
-      showPanel: false,
-    },
     a11y: Default.parameters.a11y,
+    controls: { disable: true },
+    actions: { disable: true },
+    options: { showPanel: false },
   },
 };
