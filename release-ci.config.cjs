@@ -1,10 +1,7 @@
 module.exports = {
   branches: [
     'main',
-    {
-      name: 'vue3',
-      prerelease: true,
-    },
+    'vue3',
     {
       name: 'beta',
       prerelease: true,
