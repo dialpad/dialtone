@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/dialpad/dialtone-icons/compare/v2.0.0...v2.0.1) (2023-07-31)
+
+
+### Bug Fixes
+
+* force-release ([f02e430](https://github.com/dialpad/dialtone-icons/commit/f02e4306c390cef690b3beb42c38b66dc49c00ce))
+
 # 2.0.0 (2023-07-31)
 
 
