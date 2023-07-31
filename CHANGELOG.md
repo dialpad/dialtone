@@ -1,89 +1,43 @@
-# 1.0.0 (2023-07-31)
+# 2.0.0 (2023-07-31)
 
 
 ### Bug Fixes
 
-* add cjs ([bad4ca7](https://github.com/dialpad/dialtone-icons/commit/bad4ca7426a05191131c920f516dcaa428b943b4))
-* add icons.json export ([0ef8126](https://github.com/dialpad/dialtone-icons/commit/0ef81264e323175fa541696ddaeb835d14cabedb))
-* add missing icons and exports ([30a2e5f](https://github.com/dialpad/dialtone-icons/commit/30a2e5f31ca187122496ebcf840681b2cc36b6d4))
-* add role="img" to svgs for better compatibility ([3eb5c58](https://github.com/dialpad/dialtone-icons/commit/3eb5c5820c00a84f4e63f2df55b2c339164f175f))
-* add role="img" to svgs for better compatibility ([62a9327](https://github.com/dialpad/dialtone-icons/commit/62a932789b5711727a017368c964f52538ec9f4a))
-* commit json ([2810319](https://github.com/dialpad/dialtone-icons/commit/2810319ed045ec32a2b6397b93e36a3a4f8ce8a6))
-* dialbot icon ([754f621](https://github.com/dialpad/dialtone-icons/commit/754f6217972eb7e3a6cc4ef35520613d1db3efff))
-* duplicated clip-path id ([#10](https://github.com/dialpad/dialtone-icons/issues/10)) ([d6bdc0e](https://github.com/dialpad/dialtone-icons/commit/d6bdc0e025b5b046b467a2db6de259cf3fc69715))
-* missing icons ([7fd466c](https://github.com/dialpad/dialtone-icons/commit/7fd466c6905fab180ff564e8557e0fb48c7a614c))
-* missing icons ([5ab7037](https://github.com/dialpad/dialtone-icons/commit/5ab7037ceec817860f4aef9c0b22a468e2d8f11e))
-* missing json file ([d77b3c7](https://github.com/dialpad/dialtone-icons/commit/d77b3c7d1e4b99aa53d86446c21e5205022c667a))
-* phone-hold icon facing wrong way ([8030b0d](https://github.com/dialpad/dialtone-icons/commit/8030b0de80006265c155e5ff780ea08ffca8ca55))
-* rename dialpad-ai.svg -> dialpad-ai-color.svg ([f7f9755](https://github.com/dialpad/dialtone-icons/commit/f7f9755f97a26dbc1d96610f39c5592399d900dc))
-* some additional cleanup ([ea8af52](https://github.com/dialpad/dialtone-icons/commit/ea8af52a6f2bdf5263f9740d0ff072f790b9a13a))
-* update dialpad-ai ([5e5e132](https://github.com/dialpad/dialtone-icons/commit/5e5e132adac68fbbfabf93c75d729718cd79d21f))
+* add cjs ([b99ad92](https://github.com/dialpad/dialtone-icons/commit/b99ad925235f3cd6c790079e3b38c780a5ee4b01))
+* add icons.json export ([7628f26](https://github.com/dialpad/dialtone-icons/commit/7628f265484411c5bc6e6abb185a357a8cdfe118))
+* add missing icons and exports ([7cdfd59](https://github.com/dialpad/dialtone-icons/commit/7cdfd59e9c676ef64bc0e484eb13059695756a6c))
+* add role="img" to svgs for better compatibility ([e8090f2](https://github.com/dialpad/dialtone-icons/commit/e8090f208f162eb39e993ee938debb7d902aef21))
+* commit json ([7acced5](https://github.com/dialpad/dialtone-icons/commit/7acced5ddc77a6942ae9edfca4685c342a36bd5e))
+* dialbot icon ([e224650](https://github.com/dialpad/dialtone-icons/commit/e224650fadee6b66a0cd3ce9c53126641734c965))
+* duplicated clip-path id ([#11](https://github.com/dialpad/dialtone-icons/issues/11)) ([789804b](https://github.com/dialpad/dialtone-icons/commit/789804ba3877e6bf60d80c4c17049cebb1d5fcb5))
+* missing icons ([0c5ed97](https://github.com/dialpad/dialtone-icons/commit/0c5ed973917e5b47d2db100e4744848b3527c1f7))
+* missing icons ([631031e](https://github.com/dialpad/dialtone-icons/commit/631031ea7b79c4606970e7598bb501bd9591eff2))
+* missing json file ([b890042](https://github.com/dialpad/dialtone-icons/commit/b8900429c8f94eb9d22ca5c42e0c88d131ee4774))
+* phone-hold icon facing wrong way ([28d0fbb](https://github.com/dialpad/dialtone-icons/commit/28d0fbb47da8717b9639fcc126fce5a97a71598c))
+* rename dialpad-ai.svg -> dialpad-ai-color.svg ([66dc633](https://github.com/dialpad/dialtone-icons/commit/66dc633ee9e8dcd50ac5c19a8251206f09831921))
+* update dialpad-ai ([900f46f](https://github.com/dialpad/dialtone-icons/commit/900f46f59cd441d07859078dfd311e894ccad219))
+* vue3 fixes ([999342c](https://github.com/dialpad/dialtone-icons/commit/999342cac6a026d994f83a9d0ce423aaf5458bc7))
 
 
 ### Code Refactoring
 
-* improve icons contributing process ([#8](https://github.com/dialpad/dialtone-icons/issues/8)) ([8ac2109](https://github.com/dialpad/dialtone-icons/commit/8ac210924fe9976e8d73886251f618b8ebc057cd))
+* improve icons contributing process ([#9](https://github.com/dialpad/dialtone-icons/issues/9)) ([4b6d07e](https://github.com/dialpad/dialtone-icons/commit/4b6d07e2263fce260d41665e5988931b86880b5b))
 
 
 ### Features
 
-* add attestation, hand, lightbulb, lightbulb-off, picture-in-picture, phone-hang-up + other icons ([#6](https://github.com/dialpad/dialtone-icons/issues/6)) ([86ad919](https://github.com/dialpad/dialtone-icons/commit/86ad91967c0d1ec5bdeb5560a6745409e309dc6f))
-* add brand-full-color icons ([#14](https://github.com/dialpad/dialtone-icons/issues/14)) ([325cbee](https://github.com/dialpad/dialtone-icons/commit/325cbee3f9b9181e64d9f8020d84c128b3f9db5e))
-* add coaching-hub icon ([00e117b](https://github.com/dialpad/dialtone-icons/commit/00e117ba27d860662d094ff6ed326f64812eb1e6))
-* add deskphone / double check icons ([#20](https://github.com/dialpad/dialtone-icons/issues/20)) ([a87f43a](https://github.com/dialpad/dialtone-icons/commit/a87f43a9992212631be80990aa944fc4090d6879))
-* add google icons and filled play ([db2e381](https://github.com/dialpad/dialtone-icons/commit/db2e3818c2136eec26898c1650f82030ba312d57))
-* add icons ([8c34d03](https://github.com/dialpad/dialtone-icons/commit/8c34d03d1c8270b080d7eaafa9160ada767b1b51))
-* add icons ([#12](https://github.com/dialpad/dialtone-icons/issues/12)) ([6db7c30](https://github.com/dialpad/dialtone-icons/commit/6db7c30e00da4218f08d99fbce024ca5db536f9b))
-* add new communication icons ([ba1350b](https://github.com/dialpad/dialtone-icons/commit/ba1350b5116e11fed4eea0cf25a0322c370c6eb1))
-* add new icons ([f4c2c91](https://github.com/dialpad/dialtone-icons/commit/f4c2c9157a80ef0dc7c678d9957754d6645aba5f))
-* add svg files ([2afa73b](https://github.com/dialpad/dialtone-icons/commit/2afa73b85a1989e5fb24a2c1d69209ff4bf089cd))
-* add transportation and check-circle-filled icons ([a4a78e8](https://github.com/dialpad/dialtone-icons/commit/a4a78e8af960e633aea62e1d21aef055e755a809))
-* branch, call-merge and expert-node icons ([2e49862](https://github.com/dialpad/dialtone-icons/commit/2e4986206b32ab3a0088111ca32e21ff48c08697))
-* generate unique ids ([#16](https://github.com/dialpad/dialtone-icons/issues/16)) ([fecf8f0](https://github.com/dialpad/dialtone-icons/commit/fecf8f06032e5744eafbb3d5875524a8cd7c222b))
-* snooze and list-add icons ([77e0d92](https://github.com/dialpad/dialtone-icons/commit/77e0d9227aa942407aed9a72055c53f484794127))
-* upgrade to vite ([722bab2](https://github.com/dialpad/dialtone-icons/commit/722bab286db97e2f99da0633c3c1d813ca990828))
-
-# 1.0.0 (2023-07-31)
-
-
-### Bug Fixes
-
-* add cjs ([bad4ca7](https://github.com/dialpad/dialtone-icons/commit/bad4ca7426a05191131c920f516dcaa428b943b4))
-* add icons.json export ([0ef8126](https://github.com/dialpad/dialtone-icons/commit/0ef81264e323175fa541696ddaeb835d14cabedb))
-* add missing icons and exports ([30a2e5f](https://github.com/dialpad/dialtone-icons/commit/30a2e5f31ca187122496ebcf840681b2cc36b6d4))
-* add role="img" to svgs for better compatibility ([3eb5c58](https://github.com/dialpad/dialtone-icons/commit/3eb5c5820c00a84f4e63f2df55b2c339164f175f))
-* add role="img" to svgs for better compatibility ([62a9327](https://github.com/dialpad/dialtone-icons/commit/62a932789b5711727a017368c964f52538ec9f4a))
-* commit json ([2810319](https://github.com/dialpad/dialtone-icons/commit/2810319ed045ec32a2b6397b93e36a3a4f8ce8a6))
-* dialbot icon ([754f621](https://github.com/dialpad/dialtone-icons/commit/754f6217972eb7e3a6cc4ef35520613d1db3efff))
-* duplicated clip-path id ([#10](https://github.com/dialpad/dialtone-icons/issues/10)) ([d6bdc0e](https://github.com/dialpad/dialtone-icons/commit/d6bdc0e025b5b046b467a2db6de259cf3fc69715))
-* missing icons ([7fd466c](https://github.com/dialpad/dialtone-icons/commit/7fd466c6905fab180ff564e8557e0fb48c7a614c))
-* missing icons ([5ab7037](https://github.com/dialpad/dialtone-icons/commit/5ab7037ceec817860f4aef9c0b22a468e2d8f11e))
-* missing json file ([d77b3c7](https://github.com/dialpad/dialtone-icons/commit/d77b3c7d1e4b99aa53d86446c21e5205022c667a))
-* phone-hold icon facing wrong way ([8030b0d](https://github.com/dialpad/dialtone-icons/commit/8030b0de80006265c155e5ff780ea08ffca8ca55))
-* rename dialpad-ai.svg -> dialpad-ai-color.svg ([f7f9755](https://github.com/dialpad/dialtone-icons/commit/f7f9755f97a26dbc1d96610f39c5592399d900dc))
-* some additional cleanup ([ea8af52](https://github.com/dialpad/dialtone-icons/commit/ea8af52a6f2bdf5263f9740d0ff072f790b9a13a))
-* update dialpad-ai ([5e5e132](https://github.com/dialpad/dialtone-icons/commit/5e5e132adac68fbbfabf93c75d729718cd79d21f))
-
-
-### Code Refactoring
-
-* improve icons contributing process ([#8](https://github.com/dialpad/dialtone-icons/issues/8)) ([8ac2109](https://github.com/dialpad/dialtone-icons/commit/8ac210924fe9976e8d73886251f618b8ebc057cd))
-
-
-### Features
-
-* add attestation, hand, lightbulb, lightbulb-off, picture-in-picture, phone-hang-up + other icons ([#6](https://github.com/dialpad/dialtone-icons/issues/6)) ([86ad919](https://github.com/dialpad/dialtone-icons/commit/86ad91967c0d1ec5bdeb5560a6745409e309dc6f))
-* add brand-full-color icons ([#14](https://github.com/dialpad/dialtone-icons/issues/14)) ([325cbee](https://github.com/dialpad/dialtone-icons/commit/325cbee3f9b9181e64d9f8020d84c128b3f9db5e))
-* add coaching-hub icon ([00e117b](https://github.com/dialpad/dialtone-icons/commit/00e117ba27d860662d094ff6ed326f64812eb1e6))
-* add deskphone / double check icons ([#20](https://github.com/dialpad/dialtone-icons/issues/20)) ([a87f43a](https://github.com/dialpad/dialtone-icons/commit/a87f43a9992212631be80990aa944fc4090d6879))
-* add google icons and filled play ([db2e381](https://github.com/dialpad/dialtone-icons/commit/db2e3818c2136eec26898c1650f82030ba312d57))
-* add icons ([8c34d03](https://github.com/dialpad/dialtone-icons/commit/8c34d03d1c8270b080d7eaafa9160ada767b1b51))
-* add icons ([#12](https://github.com/dialpad/dialtone-icons/issues/12)) ([6db7c30](https://github.com/dialpad/dialtone-icons/commit/6db7c30e00da4218f08d99fbce024ca5db536f9b))
-* add new communication icons ([ba1350b](https://github.com/dialpad/dialtone-icons/commit/ba1350b5116e11fed4eea0cf25a0322c370c6eb1))
-* add new icons ([f4c2c91](https://github.com/dialpad/dialtone-icons/commit/f4c2c9157a80ef0dc7c678d9957754d6645aba5f))
-* add svg files ([2afa73b](https://github.com/dialpad/dialtone-icons/commit/2afa73b85a1989e5fb24a2c1d69209ff4bf089cd))
-* add transportation and check-circle-filled icons ([a4a78e8](https://github.com/dialpad/dialtone-icons/commit/a4a78e8af960e633aea62e1d21aef055e755a809))
-* branch, call-merge and expert-node icons ([2e49862](https://github.com/dialpad/dialtone-icons/commit/2e4986206b32ab3a0088111ca32e21ff48c08697))
-* generate unique ids ([#16](https://github.com/dialpad/dialtone-icons/issues/16)) ([fecf8f0](https://github.com/dialpad/dialtone-icons/commit/fecf8f06032e5744eafbb3d5875524a8cd7c222b))
-* snooze and list-add icons ([77e0d92](https://github.com/dialpad/dialtone-icons/commit/77e0d9227aa942407aed9a72055c53f484794127))
-* upgrade to vite ([722bab2](https://github.com/dialpad/dialtone-icons/commit/722bab286db97e2f99da0633c3c1d813ca990828))
+* add attestation, hand, lightbulb, lightbulb-off, picture-in-picture, phone-hang-up + other icons ([#7](https://github.com/dialpad/dialtone-icons/issues/7)) ([9d9688c](https://github.com/dialpad/dialtone-icons/commit/9d9688ce9dd4700cde7b6ffd2f794d364bac8e3b))
+* add brand-full-color icons - vue3 ([#15](https://github.com/dialpad/dialtone-icons/issues/15)) ([9af7a01](https://github.com/dialpad/dialtone-icons/commit/9af7a012246b4a7636c4f0399462e68c768df9cf))
+* add coaching-hub icon ([ec80c0d](https://github.com/dialpad/dialtone-icons/commit/ec80c0dc4108a78c68a6dc5fddef7ec6d2f6c765))
+* add deskphone / double check icons ([#20](https://github.com/dialpad/dialtone-icons/issues/20)) ([59d55bb](https://github.com/dialpad/dialtone-icons/commit/59d55bb8d181650f4a75057c2a653d4afc53a988))
+* add google icons and filled play ([5a4466b](https://github.com/dialpad/dialtone-icons/commit/5a4466bcc6e48009cf01d5bfce953eaaa0917650))
+* add icons ([3af6a2d](https://github.com/dialpad/dialtone-icons/commit/3af6a2dffd41b2b78d6b84e0a5c6f9f682f9086f))
+* add icons ([#13](https://github.com/dialpad/dialtone-icons/issues/13)) ([444e1ec](https://github.com/dialpad/dialtone-icons/commit/444e1eccb0f30e045394a9fd6c7649bdbd935f2a))
+* add new communication icons ([32b147a](https://github.com/dialpad/dialtone-icons/commit/32b147a1fe8df193d77e14465f3a38a101213371))
+* add new icons ([dc7b07f](https://github.com/dialpad/dialtone-icons/commit/dc7b07f3a7e897696b5e9cbc8f0b0315af8f2cf3))
+* add svg files ([bc22d89](https://github.com/dialpad/dialtone-icons/commit/bc22d8961e76e51e601e24953076bd7d4b0ad52f))
+* add transportation and check-circle-filled icons ([054a881](https://github.com/dialpad/dialtone-icons/commit/054a881a7a2bea08d3ce46b9d2fbca335ea523b8))
+* branch, call-merge and expert-node icons ([f8514d1](https://github.com/dialpad/dialtone-icons/commit/f8514d11c76fe119593c3b2292a5b44ab32918dd))
+* generate unique ids ([#17](https://github.com/dialpad/dialtone-icons/issues/17)) ([a47a93a](https://github.com/dialpad/dialtone-icons/commit/a47a93a7c3b3a5d6499954ff17f33af31d623c6d))
+* snooze and list-add icons ([d2eff99](https://github.com/dialpad/dialtone-icons/commit/d2eff994c16e8336a28a7e62f958d9fd21969b10))
+* upgrade to vite ([25389cf](https://github.com/dialpad/dialtone-icons/commit/25389cf5316c696493fa63d9f6611f2d3a95f3c7))
