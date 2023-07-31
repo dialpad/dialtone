@@ -11,26 +11,26 @@ import * as AvatarStories from './avatar.stories.js';
 
 ## Image
 
+The Avatar component is designed to prioritize different sources for content display.
+It will sequentially check for the availability of an image source `image-src` or an icon name `icon-name`.
+If both properties are not provided, the avatar will extract and display initials from the full name `full-name`,
+the resulting initials are extracted using the following logic:
+
+- If the string contains two or more words, the result will be the first character of every word capitalized e.g.:
+  - `full-name: "Jaqueline Nackos"` will result in: `JN`.
+- If the string contains only one word, the result will be the first two characters capitalized e.g:
+  - `full-name: "Jaqueline"` will result in: `JA`.
+  - `full-name: "10"` will result in: `10`.
+- If full-name is not provided, the result will be an empty string.
+
 <Canvas>
   <Story of={AvatarStories.Default} />
 </Canvas>
 
-## Icon
+## Variants
 
 <Canvas>
-  <Story of={AvatarStories.Icon} />
-</Canvas>
-
-## Initials
-
-<Canvas>
-  <Story of={AvatarStories.Initials} />
-</Canvas>
-
-## Presence
-
-<Canvas>
-  <Story of={AvatarStories.Presence} />
+  <Story of={AvatarStories.Variants} />
 </Canvas>
 
 ## Slots, Props & Events
@@ -45,46 +45,33 @@ import * as AvatarStories from './avatar.stories.js';
 import { DtAvatar } from '@dialpad/dialtone-vue';
 ```
 
-### Valid Slot Markup
+### Image
 
-There are three valid types of markup you can pass into an avatar slot. `<img>` for custom images,
-`<svg>` for icons, and raw text for initials.
-
-#### Image
-
-`src` and `alt` are required attributes for image avatars
+If image-src is not provided, or if image fails to load, the avatar will fall back to the initials extracted from the full-name.
+By default, alt attribute of the image will be the full-name, this can be overridden via image-alt prop.
 
 ```jsx
-<dt-avatar>
-  <img src="/path/to/image" alt="image alt text">
-</dt-avatar>
+<dt-avatar
+  full-name="Jaqueline Nackos"
+  image-src="/common/assets/person.png"
+  image-alt="Person avatar"
+/>
 ```
 
-#### Svg (with dialtone icon)
+### Icon
 
 ```jsx
-<dt-avatar>
-  <icon-dialpad-glyph/>
-</dt-avatar>
+<dt-avatar
+  icon-name="person"
+/>
 ```
 
-#### Svg
+### Initials
 
 ```jsx
-<dt-avatar>
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M5 10H9V15H15V10H19L12 3L5 10Z" fill="black"/>
-    <path d="M5 20V18H19V20H5Z" fill="black"/>
-  </svg>
-</dt-avatar>
-```
-
-#### With Raw Text (initials)
-
-```jsx
-<dt-avatar>
-  DP
-</dt-avatar>
+<dt-avatar
+  full-name="person"
+/>
 ```
 
 ### Seeded

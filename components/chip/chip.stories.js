@@ -144,7 +144,7 @@ export const WithAvatar = {
 
   args: {
     ...Default.args,
-    avatar: 'DP',
+    avatar: 'Jaqueline Nackos',
   },
 };
 

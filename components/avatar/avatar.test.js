@@ -1,24 +1,22 @@
 import { mount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
 import { flushPromises } from '@/common/utils';
-import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
+import { itBehavesLikeHasCorrectClass } from '@/tests/shared_examples/classes';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-  itBehavesLikeDoesNotRaiseAnyVueWarnings,
-} from '../../tests/shared_examples/validation';
+} from '@/tests/shared_examples/validation';
 import {
   itBehavesLikeAppliesClassToChild,
-} from '../../tests/shared_examples/extendability';
+} from '@/tests/shared_examples/extendability';
 
 // Constants
-const DEFAULT_SLOT = 'DP';
-const IMAGE_ATTRS = {
-  SRC: 'image.png',
-  ALT: 'Avatar image',
+const imageSource = 'image.png';
+const initials = 'JN';
+const baseProps = {
+  fullName: 'Jaqueline Nackos',
 };
-const baseProps = {};
 const baseAttrs = {};
 
 describe('DtAvatar Tests', () => {
@@ -64,7 +62,6 @@ describe('DtAvatar Tests', () => {
     describe('When the avatar renders', () => {
       // Test Setup
       beforeEach(async () => {
-        slots = { default: DEFAULT_SLOT };
         await _setWrappers();
       });
 
@@ -75,13 +72,13 @@ describe('DtAvatar Tests', () => {
       );
     });
 
-    describe('When the avatar renders image via slot', () => {
-      // Test Environment
-      const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
-
+    describe('When the imageSrc is provided', () => {
       // Test Setup
       beforeEach(async () => {
-        slots = { default: imageSlot };
+        props = {
+          ...baseProps,
+          imageSrc: imageSource,
+        };
         await _setWrappers();
       });
 
@@ -90,40 +87,36 @@ describe('DtAvatar Tests', () => {
       });
 
       it('src should match those provided by attrs', () => {
-        expect(image.attributes('src')).toBe(IMAGE_ATTRS.SRC);
+        expect(image.attributes('src')).toBe(imageSource);
       });
 
       it('alt should match those provided by attrs', () => {
-        expect(image.attributes('alt')).toBe(IMAGE_ATTRS.ALT);
+        expect(image.attributes('alt')).toBe(baseProps.fullName);
       });
     });
 
-    describe('With icon in slot', () => {
-      // Test Environment
-      const icon = '<svg></svg>';
-
+    describe('When the iconName is provided', () => {
       // Test Setup
       beforeEach(async () => {
-        slots = { default: icon };
+        props = {
+          ...baseProps,
+          iconName: 'accessibility',
+        };
         await _setWrappers();
       });
 
-      it('icon slot should exist', () => {
+      it('icon should exist', () => {
         expect(wrapper.find('svg').exists()).toBeTruthy();
       });
 
+      // eslint-disable-next-line vitest/expect-expect
       it('should have correct class', () => {
         itBehavesLikeHasCorrectClass(wrapper.find('svg'), AVATAR_KIND_MODIFIERS.icon);
       });
     });
 
-    describe('With initials in slot', () => {
-      // Test Environment
-      const initials = 'DP';
-
-      // Test Setup
+    describe('With no imageSrc or iconName is provided', () => {
       beforeEach(async () => {
-        slots = { default: initials };
         await _setWrappers();
       });
 
@@ -133,50 +126,39 @@ describe('DtAvatar Tests', () => {
 
       it('should have correct class', () => {
         const avatarWithInitials = wrapper.find('.' + AVATAR_KIND_MODIFIERS.initials);
-        console.log(avatarWithInitials.html());
         expect(avatarWithInitials.exists()).toBeTruthy();
       });
-    });
 
-    describe('With initials in slot and size is sm', () => {
-      // Test Environment
-      const initials = 'DP';
+      describe('When size is sm', () => {
+        beforeEach(async () => {
+          props = {
+            ...baseProps,
+            size: 'sm',
+          };
+          await _setWrappers();
+        });
 
-      // Test Setup
-      beforeEach(async () => {
-        props = {
-          ...baseProps,
-          size: 'sm',
-        };
-        slots = { default: initials };
-        await _setWrappers();
+        it('shows a single character', async () => {
+          expect(wrapper.text()).toBe(initials[0]);
+        });
       });
 
-      it('shows a single character', async () => {
-        expect(wrapper.text()).toBe(initials[0]);
-      });
-    });
+      describe('When size is xs', () => {
+        beforeEach(async () => {
+          props = {
+            ...baseProps,
+            size: 'xs',
+          };
+          await _setWrappers();
+        });
 
-    describe('With initials in slot and size is xs', () => {
-      // Test Environment
-      const initials = 'DP';
-
-      // Test Setup
-      beforeEach(async () => {
-        props = {
-          ...baseProps,
-          size: 'xs',
-        };
-        slots = { default: initials };
-        await _setWrappers();
-      });
-
-      it('has no initials', () => {
-        expect(wrapper.text()).toBe('');
+        it('has no initials', () => {
+          expect(wrapper.text()).toBe('');
+        });
       });
     });
 
-    describe('When a size is provided', () => {
+    describe('When size is provided', () => {
       // Test Environment
       const size = 'lg';
 
@@ -186,7 +168,6 @@ describe('DtAvatar Tests', () => {
           ...baseProps,
           size,
         };
-        slots = { default: DEFAULT_SLOT };
         await _setWrappers();
       });
 
@@ -195,7 +176,7 @@ describe('DtAvatar Tests', () => {
       });
     });
 
-    describe('When a group is provided', () => {
+    describe('When group is provided', () => {
       // Test Environment
       const group = 25;
 
@@ -205,7 +186,6 @@ describe('DtAvatar Tests', () => {
           ...baseProps,
           group,
         };
-        slots = { default: DEFAULT_SLOT };
         await _setWrappers();
       });
 
@@ -231,14 +211,11 @@ describe('DtAvatar Tests', () => {
     });
 
     describe('With Presence', () => {
-      const initials = 'DP';
-
       // Test Setup
       beforeEach(async () => {
         props = {
           ...baseProps,
         };
-        slots = { default: initials };
         await _setWrappers();
       });
 
@@ -323,65 +300,6 @@ describe('DtAvatar Tests', () => {
         itBehavesLikeFailsCustomPropValidation(prop, 1);
       });
     });
-
-    describe('Image Attrs Validation', () => {
-      // Test Environment
-      const warningMessage = '[Vue warn]: src and alt attributes are required for image avatars';
-
-      // Test Setup
-      beforeAll(() => {
-        vi.spyOn(console, 'warn').mockClear();
-      });
-
-      // Test Teardown
-      afterEach(() => {
-        console.warn.mockReset();
-      });
-
-      afterAll(() => {
-        console.warn.mockRestore();
-      });
-
-      describe('When image src and alt attributes are provided', () => {
-        // Test Setup
-        beforeEach(async () => {
-          const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
-
-          slots = { default: imageSlot };
-          await _setWrappers();
-        });
-
-        itBehavesLikeDoesNotRaiseAnyVueWarnings();
-      });
-
-      describe('When image alt attribute is not provided', () => {
-        // Test Setup
-        beforeEach(async () => {
-          const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" data-qa="dt-avatar-image">`;
-
-          slots = { default: imageSlot };
-          await _setWrappers();
-        });
-
-        it('should have expected warning message', () => {
-          expect(console.warn.mock.calls[0][0]).toBe(warningMessage);
-        });
-      });
-
-      describe('When image src attribute is not provided', () => {
-        // Test Setup
-        beforeEach(async () => {
-          const imageSlot = `<img alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
-
-          slots = { default: imageSlot };
-          await _setWrappers();
-        });
-
-        it('should have expected warning message', () => {
-          expect(console.warn.mock.calls[0][0]).toBe(warningMessage);
-        });
-      });
-    });
   });
 
   describe('Extendability Tests', () => {
@@ -392,13 +310,13 @@ describe('DtAvatar Tests', () => {
     // Helpers
     const _setupChildClassTest = async (childClassName, selector) => {
       props[childClassName] = customClass;
-      slots = { default: DEFAULT_SLOT };
       await _setWrappers();
       element = wrapper.find(selector);
     };
 
     // Shared Examples
     const itBehavesLikeAppliesClassToChildLocal = () => {
+      // eslint-disable-next-line vitest/expect-expect
       it('should apply custom class to child', () => {
         itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
       });

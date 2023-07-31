@@ -25,11 +25,8 @@
       #avatar
     >
       <dt-avatar
-        seed="seed"
-        :size="$attrs.size"
-      >
-        <v-html :html="$attrs.avatar" />
-      </dt-avatar>
+        :full-name="$attrs.avatar"
+      />
     </template>
     <v-html :html="defaultSlot" />
   </dt-chip>
@@ -37,14 +34,14 @@
 
 <script>
 import DtChip from './chip.vue';
-import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { CHIP_ICON_SIZES } from '@/components/chip/chip_constants';
+import DtAvatar from '@/components/avatar/avatar.vue';
 import VHtml from '@/common/v_html';
 
 export default {
   name: 'DtChipDefault',
-  components: { DtChip, VHtml, DtAvatar, DtIcon },
+  components: { DtAvatar, DtChip, DtIcon, VHtml },
   computed: {
     iconSize () {
       return CHIP_ICON_SIZES[this.$attrs.size ?? 'md'];

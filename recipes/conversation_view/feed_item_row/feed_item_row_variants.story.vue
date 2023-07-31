@@ -23,37 +23,25 @@
           >
             <div class="d-d-flex d-d-flow1 d-my6">
               <dt-avatar
+                image-src="/common/assets/person.png"
+                full-name="Person Avatar"
                 presence="busy"
                 seed="seed"
                 size="sm"
-              >
-                <img
-                  data-qa="dt-avatar-image"
-                  src="@/common/assets/person.png"
-                  alt="Person Avatar"
-                >
-              </dt-avatar>
+              />
               <dt-avatar
+                image-src="/common/assets/person.png"
+                full-name="Person Avatar"
                 presence="active"
                 seed="seed"
                 size="sm"
-              >
-                <img
-                  data-qa="dt-avatar-image"
-                  src="@/common/assets/person.png"
-                  alt="Person Avatar"
-                >
-              </dt-avatar>
+              />
               <dt-avatar
+                image-src="/common/assets/person.png"
+                full-name="Person Avatar"
                 seed="seed"
                 size="sm"
-              >
-                <img
-                  data-qa="dt-avatar-image"
-                  src="@/common/assets/person.png"
-                  alt="Person Avatar"
-                >
-              </dt-avatar>
+              />
               <div
                 class="d-mx4 d-my-auto d-fs-100"
               >
@@ -105,37 +93,25 @@
           >
             <div class="d-d-flex d-d-flow1 d-my6">
               <dt-avatar
+                image-src="/common/assets/person.png"
+                full-name="Person Avatar"
                 presence="busy"
                 seed="seed"
                 size="sm"
-              >
-                <img
-                  data-qa="dt-avatar-image"
-                  src="@/common/assets/person.png"
-                  alt="Person Avatar"
-                >
-              </dt-avatar>
+              />
               <dt-avatar
+                image-src="/common/assets/person.png"
+                full-name="Person Avatar"
                 presence="active"
                 seed="seed"
                 size="sm"
-              >
-                <img
-                  data-qa="dt-avatar-image"
-                  src="@/common/assets/person.png"
-                  alt="Person Avatar"
-                >
-              </dt-avatar>
+              />
               <dt-avatar
+                image-src="/common/assets/person.png"
+                full-name="Person Avatar"
                 seed="seed"
                 size="sm"
-              >
-                <img
-                  data-qa="dt-avatar-image"
-                  src="@/common/assets/person.png"
-                  alt="Person Avatar"
-                >
-              </dt-avatar>
+              />
               <div
                 class="d-mx4 d-my-auto d-fs-100"
               >

@@ -2,35 +2,25 @@ import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_util
 import DtAvatar from './avatar.vue';
 import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES, AVATAR_COLORS } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
-import DtAvatarIconTemplate from './avatar_icon.story.vue';
-import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
+import DtAvatarVariantsTemplate from './avatar_variants.story.vue';
 
-import defaultImage from '@/common/assets/person.png';
-
-const iconsList = getIconNames();
+const ICONS_LIST = getIconNames();
 
 export const argsData = {
   size: 'md',
   presence: null,
+  fullName: 'Jaqueline Nackos',
+  imageAlt: 'image-alt',
+  seed: '',
+  iconName: 'accessibility',
+  iconSize: '500',
 };
 
 export const argTypesData = {
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'VNode|String|Component',
-      },
-    },
-  },
-
   // Props
-  size: {
-    control: 'select',
-    options: Object.keys(AVATAR_SIZE_MODIFIERS),
+  avatarClass: {
+    description: 'Pass through classes. Used to customize the avatar container',
   },
-
   color: {
     control: {
       type: 'select',
@@ -40,7 +30,42 @@ export const argTypesData = {
     },
     options: AVATAR_COLORS,
   },
+  iconName: {
+    options: ICONS_LIST,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  iconSize: {
+    defaultValue: null,
+  },
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  overlayClass: {
+    description: 'Pass through classes. Used to customize the avatar overlay',
+  },
+  overlayIcon: {
+    options: ICONS_LIST,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  overlayText: {
+    description: 'The text that overlays the avatar',
+  },
   presence: {
+    defaultValue: null,
     control: {
       type: 'select',
     },
@@ -54,30 +79,11 @@ export const argTypesData = {
   presenceProps: {
     description: 'Pass through props. Used to customize the presence component',
   },
-  avatarClass: {
-    description: 'Pass through classes. Used to customize the avatar container',
-  },
-  id: {
-    table: {
-      defaultValue: {
-        summary: 'generated unique ID',
-      },
-    },
-  },
-  overlayIcon: {
-    options: iconsList,
+  size: {
     control: {
       type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
     },
-  },
-  overlayText: {
-    description: 'The text that overlays the avatar',
-  },
-  overlayClass: {
-    description: 'Pass through classes. Used to customize the avatar overlay',
+    options: Object.keys(AVATAR_SIZE_MODIFIERS),
   },
 };
 
@@ -85,6 +91,7 @@ export const argTypesData = {
 export default {
   title: 'Components/Avatar',
   component: DtAvatar,
+  args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
 };
@@ -93,11 +100,8 @@ export default {
 const DefaultTemplate = (args) =>
   createTemplateFromVueFile(args, DtAvatarDefaultTemplate);
 
-const IconTemplate = (args) =>
-  createTemplateFromVueFile(args, DtAvatarIconTemplate);
-
-const PresenceTemplate = (args) =>
-  createTemplateFromVueFile(args, DtAvatarPresenceTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, DtAvatarVariantsTemplate);
 
 // Stories
 export const Default = {
@@ -107,49 +111,17 @@ export const Default = {
       template: `<div class="d-d-flex"><story /></div>`,
     }),
   ],
-  args: {
-    default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
-    initials: 'PS',
-  },
+  args: { imageSrc: '/common/assets/person.png' },
+};
+
+export const Variants = {
+  render: VariantsTemplate,
   parameters: {
     percy: {
       args: {
         seed: 'seed',
       },
     },
-  },
-};
-
-// TO DO: figure out why Icon.argTypes is causing the controls to not show up in the Initials story when
-// it's below the Icon story
-export const Initials = {
-  ...Default,
-  args: {
-    default: 'DP',
-  },
-};
-
-export const Icon = {
-  render: IconTemplate,
-  args: {
-    default: 'user',
-  },
-  argTypes: {
-    default: {
-      options: iconsList,
-      control: {
-        type: 'select',
-        labels: {
-          undefined: '(empty)',
-        },
-      },
-    },
-  },
-};
-
-export const Presence = {
-  render: PresenceTemplate,
-  parameters: {
     options: { showPanel: false },
     controls: { disable: true },
   },

@@ -24,9 +24,9 @@ The **right** slot works the same way, but its contents are placed to the right 
 
 The **bottom** slot can be used to display content below the subtitle slot.
 
-Avatar is optional. When `avatarSrc` is specified, the avatar image will be displayed on the left and
-it is required to provide a value in `avatarInitials` to use in the alt attribute of the avatar image.
-If `avatarSrc` is empty, it will fallback to `avatarInitials`, and user initials will be displayed
+Avatar is optional. When `avatarSrc` is specified, the avatar image will be displayed on the left and,
+it is required to provide a value in `avatarFullName` to use in the alt attribute of the avatar image.
+If `avatarSrc` is empty, it will fall back to `avatarFullName`, and user initials will be displayed
 in avatar.
 
 <Canvas>
@@ -246,7 +246,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
 
 ```html
 <dt-recipe-contact-info
-  :avatar-initials="avatarInitials"
+  :avatar-full-name="avatarFullName"
   :avatar-seed="avatarSeed"
 >
   <template #header>
