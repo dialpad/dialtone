@@ -1,9 +1,10 @@
 module.exports = {
   branches: [
-    'staging',
     'main',
-    'staging-vue3',
-    'vue3',
+    {
+      name: 'vue3',
+      prerelease: true,
+    },
     {
       name: 'beta',
       prerelease: true,
@@ -17,7 +18,7 @@ module.exports = {
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
       releaseRules: [
-        { type: 'refactor', release: 'patch' },
+        {type: 'refactor', release: 'patch'},
       ],
     }],
     ['@semantic-release/release-notes-generator', {
