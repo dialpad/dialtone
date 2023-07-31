@@ -15,28 +15,15 @@
   >
     <template #left>
       <dt-avatar
+        :full-name="name"
+        :image-src="avatarSrc"
+        :image-alt="avatarAlt"
+        :icon-name="iconName"
+        icon-size="200"
         size="sm"
         :seed="avatarSeed"
         :presence="avatarPresence"
-      >
-        <!-- No alt needed as the name is already mentioned in the description
-          https://dequeuniversity.com/rules/axe/4.4/image-redundant-alt?application=axe-puppeteer -->
-        <img
-          v-if="avatarSrc"
-          data-qa="dt-avatar-image"
-          :src="avatarSrc"
-          alt=""
-        >
-        <template v-else-if="noInitials">
-          <dt-icon
-            name="user"
-            size="200"
-          />
-        </template>
-        <template v-else>
-          {{ avatarInitial }}
-        </template>
-      </dt-avatar>
+      />
     </template>
     <template #label>
       <dt-emoji-text-wrapper
@@ -72,7 +59,6 @@
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
-import DtIcon from '@/components/icon/icon.vue';
 import { extractVueListeners, safeConcatStrings } from '@/common/utils';
 
 export default {
@@ -80,7 +66,6 @@ export default {
 
   components: {
     DtAvatar,
-    DtIcon,
     DtRecipeGeneralRow,
     DtEmojiTextWrapper,
   },
@@ -93,6 +78,15 @@ export default {
      * If not provided it will use the initial of the name.
      */
     avatarSrc: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Optional avatar image alt text.
+     * If not provided it will use the name.
+     */
+    avatarAlt: {
       type: String,
       default: '',
     },
@@ -243,12 +237,12 @@ export default {
       return extractVueListeners(this.$attrs);
     },
 
-    avatarInitial () {
-      return this.name?.[0] ?? '';
-    },
-
     contactDescription () {
       return safeConcatStrings([this.name, this.presenceText, this.userStatus]);
+    },
+
+    iconName () {
+      return this.noInitials ? 'user' : null;
     },
   },
 };

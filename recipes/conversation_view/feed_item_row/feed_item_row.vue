@@ -11,17 +11,11 @@
     <template #left>
       <dt-avatar
         v-if="showHeader"
+        :full-name="displayName"
+        :image-src="avatarImageUrl"
         avatar-class="d-mt4"
-        :initials="avatarInitials"
-        :seed="avatarInitials"
-      >
-        <img
-          v-if="avatarImageUrl"
-          data-qa="feed-item-row-avatar-img"
-          alt=""
-          :src="avatarImageUrl"
-        >
-      </dt-avatar>
+        :seed="avatarSeed"
+      />
       <!-- show time instead of avatar when headers not present -->
       <div
         v-if="!showHeader"
@@ -194,7 +188,7 @@ export default {
 
   computed: {
 
-    avatarInitials () {
+    avatarSeed () {
       const name = (this.displayName || '').split(' ');
       const initials = name.map(word => word.charAt(0)).join('');
       return initials.slice(0, 2).toUpperCase();

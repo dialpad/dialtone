@@ -78,7 +78,7 @@ export default {
   box-shadow: var(--dt-shadow-medium);
   border-radius: var(--dt-size-radius-pill);
   border: none;
-  line-height: var(--lh-600);
+  line-height: var(--dt-font-line-height-600);
   cursor: pointer;
 
   &--mentions {
@@ -88,8 +88,8 @@ export default {
   }
 
   &--messages {
-    background-color: var(--bgc-primary);
-    color: var(--fc-primary);
+    background-color: var(--dt-color-surface-primary);
+    color: var(--dt-color-foreground-primary);
   }
 }
 </style>

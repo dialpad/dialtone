@@ -2,6 +2,7 @@ module.exports = {
   version: 2,
   storybook: {
     exclude: [
+      'Components/Avatar: Default',
       'Components/Badge: Default',
       'Components/Badge: Count',
       'Components/Badge: Examples',

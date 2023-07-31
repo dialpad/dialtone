@@ -4,7 +4,7 @@ import DtRecipeContactInfo from './contact_info.vue';
 // Constants
 const baseProps = {
   avatarSrc: 'avatar.png',
-  avatarInitials: 'JL',
+  avatarFullName: 'Joseph Lumaban',
   presence: 'active',
 };
 
@@ -90,11 +90,11 @@ describe('DtRecipeContactInfo Tests', () => {
       });
     });
 
-    describe('When `avatarSrc` is empty and `avatarInitials` is passed', () => {
+    describe('When `avatarSrc` is empty and `avatarFullName` is passed', () => {
       beforeEach(async () => {
         await wrapper.setProps({
           avatarSrc: '',
-          avatarInitials: 'JL',
+          avatarFullName: 'JL',
         });
         _setChildWrappers();
         await wrapper.vm.$nextTick();

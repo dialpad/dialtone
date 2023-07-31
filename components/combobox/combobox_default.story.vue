@@ -39,9 +39,10 @@
           @click="onListItemSelect(i)"
         >
           <template #left>
-            <dt-avatar :seed="i.toString()">
-              <span aria-hidden="true">{{ i + 1 }}</span>
-            </dt-avatar>
+            <dt-avatar
+              :full-name="(i + 1).toString()"
+              :seed="i.toString()"
+            />
           </template>
           {{ item.name }}
         </dt-list-item>

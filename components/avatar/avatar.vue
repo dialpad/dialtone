@@ -8,10 +8,23 @@
       ref="canvas"
       :class="[canvasClass, 'd-avatar__canvas', { 'd-avatar--image-loaded': imageLoadedSuccessfully }]"
     >
-      <!-- @slot Slot for avatar content -->
-      <slot v-if="showDefaultSlot" />
+      <img
+        v-if="showImage"
+        ref="avatarImage"
+        class="d-avatar__image"
+        data-qa="dt-avatar-image"
+        :src="imageSrc"
+        :alt="imageAlt || fullName"
+      >
+      <dt-icon
+        v-else-if="iconName"
+        :name="iconName"
+        :size="iconSize"
+        :class="AVATAR_KIND_MODIFIERS.icon"
+        data-qa="dt-avatar-icon"
+      />
       <span
-        v-if="showInitials"
+        v-else
         class="d-ps-absolute d-zi-base"
         :class="AVATAR_KIND_MODIFIERS.initials"
       >
@@ -53,7 +66,6 @@
 </template>
 
 <script>
-import { warn } from 'vue';
 import { getUniqueString, getRandomElement } from '@/common/utils';
 import { DtPresence } from '../presence';
 import { DtIcon } from '@/components/icon';
@@ -65,6 +77,11 @@ import {
   AVATAR_COLORS,
   AVATAR_GROUP_VALIDATOR,
 } from './avatar_constants';
+import { getIconNames } from '@/common/storybook_utils.js';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
+import { extractInitialsFromName } from './utils';
+
+const ICONS_LIST = getIconNames();
 
 /**
  * An avatar is a visual representation of a user or object.
@@ -152,14 +169,6 @@ export default {
     },
 
     /**
-     * Initials to be shown in the avatar. Used as fallback if image fails to load.
-     */
-    initials: {
-      type: String,
-      default: '',
-    },
-
-    /**
      * Determines whether to show a group avatar.
      * Limit to 2 digits max, more than 99 will be rendered as “99+”.
      * if the number is 1 or less it would just show the regular avatar as if group had not been set.
@@ -193,23 +202,68 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Source of the image
+     */
+    imageSrc: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Alt attribute of the image, by default
+     * it'd be the full name
+     */
+    imageAlt: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Icon name to be displayed on the avatar
+     */
+    iconName: {
+      type: String,
+      default: undefined,
+      validator: (name) => ICONS_LIST.includes(name),
+    },
+
+    /**
+     * Icon size to be displayed on the avatar
+     * @values 100, 200, 300, 400, 500, 600, 700, 800
+     */
+    iconSize: {
+      type: String,
+      default: '500',
+      validator: (size) => Object.keys(ICON_SIZE_MODIFIERS).includes(size),
+    },
+
+    /**
+     * Full name used to extract initials and set alt attribute.
+     */
+    fullName: {
+      type: String,
+      default: '',
+    },
   },
 
   data () {
     return {
-      // initials, image or icon
-      kind: null,
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
       imageLoadedSuccessfully: null,
-      slottedInitials: '',
       formattedInitials: '',
       initializing: false,
     };
   },
 
   computed: {
+    isNotIconType () {
+      return !this.iconName;
+    },
+
     avatarClasses () {
       return [
         'd-avatar',
@@ -217,7 +271,7 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          [`d-avatar--color-${this.getColor()}`]: this.kind !== 'icon',
+          [`d-avatar--color-${this.getColor()}`]: this.isNotIconType,
         },
       ];
     },
@@ -227,16 +281,6 @@ export default {
         'd-avatar__overlay',
         this.overlayClass,
       ];
-    },
-
-    showDefaultSlot () {
-      return this.kind !== 'initials' ||
-      (this.kind === 'image' && this.imageLoadedSuccessfully === true);
-    },
-
-    showInitials () {
-      return this.kind === 'initials' ||
-      (this.kind === 'image' && this.initials && this.imageLoadedSuccessfully !== true);
     },
 
     showGroup () {
@@ -251,95 +295,60 @@ export default {
       // TODO: Group only supports xs size for now. Remove this when we support other sizes.
       return this.group ? 'xs' : this.size;
     },
+
+    showImage () {
+      return this.imageLoadedSuccessfully !== false && this.imageSrc;
+    },
+  },
+
+  watch: {
+    fullName: {
+      immediate: true,
+      handler (newName) {
+        this.formatInitials(newName);
+      },
+    },
+
+    imageSrc (newSrc) {
+      if (!newSrc) return;
+
+      this.imageLoadedSuccessfully = null;
+      this.validateProps();
+      this.setImageListeners();
+    },
   },
 
   mounted () {
-    this.init();
-  },
-
-  updated () {
-    this.init();
+    this.validateProps();
+    this.setImageListeners();
   },
 
   methods: {
-    async init () {
-      if (this.initializing) return;
-      this.kind = null;
-      await this.$nextTick();
-      const firstChild = this.$refs.canvas?.children[0] || this.$refs.canvas;
-      this.formatInitials(this.initials);
-      if (firstChild) {
-        this.setKind(firstChild);
-        this.kindHandler(firstChild);
-      }
-      this.initializing = true;
-      await this.$nextTick();
-      this.initializing = false;
-    },
+    setImageListeners () {
+      const el = this.$refs.avatarImage;
 
-    // eslint-disable-next-line complexity
-    kindHandler (el) {
-      switch (this.kind) {
-        case 'image':
-          el.classList.add('d-avatar__image');
-          this.validateImageAttrsPresence();
-          this.setImageListeners(el);
-          break;
-        case 'icon':
-          el.classList.add(AVATAR_KIND_MODIFIERS.icon);
-          break;
-        case 'initials':
-          if (!el.textContent) return;
-          this.slottedInitials = el.textContent;
-          this.formatInitials(this.slottedInitials.trim() || this.initials);
-          break;
-      }
-    },
+      if (!el) return;
 
-    setImageListeners (el) {
       el.addEventListener('load', () => this._loadedImageEventHandler(el), { once: true });
+
+      if (this.imageLoadedSuccessfully === false) return;
       el.addEventListener('error', () => this._erroredImageEventHandler(el), { once: true });
     },
 
-    formatInitials (initials) {
-      if (!initials || this.validatedSize === 'xs') {
+    formatInitials (string) {
+      const initials = extractInitialsFromName(string);
+
+      if (this.validatedSize === 'xs') {
         this.formattedInitials = '';
       } else if (this.validatedSize === 'sm') {
-        this.formattedInitials = initials.trim()[0];
+        this.formattedInitials = initials[0];
       } else {
-        this.formattedInitials = initials.trim().slice(0, 2);
+        this.formattedInitials = initials;
       }
-    },
-
-    setKind (element) {
-      if (this.isIconType(element)) { this.kind = 'icon'; return; }
-      if (this.isImageType(element)) { this.kind = 'image'; return; }
-      this.kind = 'initials';
-    },
-
-    isIconType (element) {
-      return element?.tagName?.toUpperCase() === 'SVG';
-    },
-
-    isImageType (element) {
-      return element?.tagName?.toUpperCase() === 'IMG';
     },
 
     getColor () {
       return this.color ?? getRandomElement(AVATAR_COLORS, this.seed);
-    },
-
-    validateImageAttrsPresence () {
-      const isSrcMissing = !this.$refs.canvas.children[0].getAttribute('src');
-
-      // If alt set to empty string consider it valid, as this is a valid case if the
-      // image is already described by something else (ex: visible description)
-      // eslint-disable-next-line no-unneeded-ternary
-      const isAltMissing = this.$refs.canvas.children[0].getAttribute('alt') === null;
-
-      if (isSrcMissing || isAltMissing) {
-        warn('src and alt attributes are required for image avatars', this);
-      }
     },
 
     _loadedImageEventHandler (el) {
@@ -350,6 +359,12 @@ export default {
     _erroredImageEventHandler (el) {
       this.imageLoadedSuccessfully = false;
       el.classList.add('d-d-none');
+    },
+
+    validateProps () {
+      if (this.imageSrc && !(this.fullName || this.imageAlt)) {
+        throw new Error('full-name or image-alt must be set if image-src is provided');
+      }
     },
   },
 };

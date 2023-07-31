@@ -32,7 +32,7 @@ describe('DtFeedItemRow tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    avatarImgWrapper = wrapper.find('[data-qa="feed-item-row-avatar-img"]');
+    avatarImgWrapper = wrapper.find('[data-qa="dt-avatar-image"]');
     headerWrapper = wrapper.find('[data-qa="feed-item-row-header"]');
     leftTimeWrapper = wrapper.find('[data-qa="feed-item-row-left-time"]');
     contentWrapper = wrapper.find('[data-qa="feed-item-row-content"]');

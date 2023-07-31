@@ -4,7 +4,7 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Unknown contact (phone number only) with attestation
       </p>
-      <dt-recipe-contact-info>
+      <dt-recipe-contact-info avatar-icon="user">
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div class="d-fs-200 d-fw-bold d-mr4">
@@ -25,7 +25,7 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Unknown contact with "marked as spam" button
       </p>
-      <dt-recipe-contact-info>
+      <dt-recipe-contact-info avatar-icon="user">
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div class="d-fs-200 d-fw-bold d-mr4">
@@ -53,7 +53,7 @@
         kind="muted"
         @click="$attrs.onGroupContactClick"
       >
-        <dt-recipe-contact-info>
+        <dt-recipe-contact-info avatar-icon="user">
           <template #header>
             <div class="d-d-flex d-ai-center d-mb2">
               <div class="d-fs-200 d-fw-bold d-mr4">
@@ -90,7 +90,7 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Group contact with transfer info
       </p>
-      <dt-recipe-contact-info>
+      <dt-recipe-contact-info avatar-icon="user">
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div class="d-fs-200 d-fw-bold d-mr4">
@@ -169,7 +169,7 @@
         Contact with items in right slot
       </p>
       <dt-recipe-contact-info
-        :avatar-initials="$attrs.avatarInitials"
+        :avatar-full-name="$attrs.avatarFullName"
         :avatar-seed="$attrs.avatarSeed"
       >
         <template #header>
@@ -262,14 +262,14 @@ export default {
   data () {
     return {
       adminListenInAvatars: [
-        { src: avatar1, initials: 'KK', seed: 'KK' },
-        { src: avatar2, initials: 'LL', icon: 'hear', seed: 'LL' },
+        { src: avatar1, fullName: 'Jaqueline Nackos', seed: 'JN' },
+        { src: avatar2, fullName: 'Joseph Lumaban', icon: 'hear', seed: 'JL' },
       ],
 
       groupCallAvatars: [
-        { initials: 'JL', seed: 'JL' },
-        { src: avatar1, initials: 'KK', seed: 'KK' },
-        { src: avatar2, initials: 'LL', text: '+3', seed: 'LL' },
+        { fullName: 'Joseph Lumaban', seed: 'JL' },
+        { src: avatar1, fullName: 'Jaqueline Nackos', seed: 'JN' },
+        { src: avatar2, fullName: 'Natalie Woods', text: '+3', seed: 'NW' },
       ],
     };
   },
