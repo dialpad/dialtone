@@ -25,13 +25,8 @@
       slot="avatar"
     >
       <dt-avatar
-        seed="seed"
-        :size="size"
-      >
-        <html-fragment
-          :html="avatar"
-        />
-      </dt-avatar>
+        :full-name="avatar"
+      />
     </template>
     <span
       v-if="defaultSlot"
@@ -42,14 +37,13 @@
 
 <script>
 import DtChip from './chip.vue';
-import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { CHIP_ICON_SIZES } from '@/components/chip/chip_constants';
-import { htmlFragment } from '@/common/utils';
+import DtAvatar from '@/components/avatar/avatar.vue';
 
 export default {
   name: 'DtChipDefault',
-  components: { DtChip, DtAvatar, DtIcon, htmlFragment },
+  components: { DtAvatar, DtChip, DtIcon },
   computed: {
     iconSize () {
       return CHIP_ICON_SIZES[this.size ?? 'md'];

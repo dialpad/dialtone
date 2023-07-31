@@ -4,6 +4,7 @@
     :avatar-src="avatarSrc"
     :avatar-presence="avatarPresence"
     :avatar-seed="avatarSeed"
+    :avatar-alt="avatarAlt"
     :presence-text="presenceText"
     :unread-count="unreadCount"
     :unread-count-tooltip="unreadCountTooltip"

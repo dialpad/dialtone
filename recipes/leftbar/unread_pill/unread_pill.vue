@@ -70,7 +70,7 @@ export default {
   box-shadow: var(--dt-shadow-medium);
   border-radius: var(--dt-size-radius-pill);
   border: none;
-  line-height: var(--lh-600);
+  line-height: var(--dt-font-line-height-600);
   cursor: pointer;
 
   &--mentions {
