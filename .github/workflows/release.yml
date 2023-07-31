@@ -5,9 +5,9 @@ on:
   push:
     branches:
       - main
+      - vue3
       - alpha
       - beta
-      - vue3
 
 jobs:
   release:
@@ -39,7 +39,7 @@ jobs:
         run: npm ci
 
       - name: Set npm token
-        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
+        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
 
       # note that npm run build is executed before publishing via prepublishOnly
       - name: Deploy main
