@@ -1,10 +1,8 @@
 /* eslint-disable no-template-curly-in-string */
 module.exports = {
   branches: [
-    'staging',
-    'main',
-    'staging-vue3',
     'vue3',
+    'staging-vue3',
     {
       name: 'beta',
       prerelease: true,
