@@ -31,7 +31,7 @@
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@vitejs/plugin-vue": "^4.2.2",
+    "@vitejs/plugin-vue": "^4.2.3",
     "del": "^6.1.1",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
@@ -44,7 +44,7 @@
     "gulp-svgmin": "^4.1.0",
     "semantic-release": "^21.0.6",
     "through2": "^4.0.2",
-    "vite": "^4.3.5"
+    "vite": "^4.4.7"
   },
   "peerDependencies": {
     "vue": ">=3.2"
