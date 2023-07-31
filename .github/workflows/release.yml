@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - alpha
+      - beta
+      - vue3
+
+jobs:
+  release:
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+
+      - name: parse branch from ref
+        id: branch
+        run: echo ::set-output name=BRANCH::${GITHUB_REF/refs\/heads\//}
+
+      # Will prevent the rest of the steps from running on fail
+      - name: Check if user is a dialpad member
+        uses: octokit/request-action@v2.1.0
+        with:
+          route: GET /orgs/dialpad/members/${{ github.actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set npm token
+        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
+
+      # note that npm run build is executed before publishing via prepublishOnly
+      - name: Deploy main
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: npm publish
+
+      - name: Deploy prerelease
+        if: ${{ github.ref != 'refs/heads/main' }}
+        run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
+
+      - name: Github Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --extends ./release-ci.config.js
+
+      - name: Set registry to github packages
+        run: npm config set @dialpad:registry https://npm.pkg.github.com
+
+      - name: Set github auth token
+        run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+
+      # note that npm run build is executed before publishing via prepublishOnly
+      - name: Deploy main to github packages
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: npm publish
