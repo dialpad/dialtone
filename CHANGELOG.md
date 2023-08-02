@@ -1,3 +1,10 @@
+# [2.93.0-dialtone8.3](https://github.com/dialpad/dialtone-vue/compare/v2.93.0-dialtone8.2...v2.93.0-dialtone8.3) (2023-08-02)
+
+
+### Features
+
+* **Avatar:** extract initials from full name ([6c80963](https://github.com/dialpad/dialtone-vue/commit/6c8096323e286d77b42ea487ce08983ba431821b))
+
 # [2.93.0-dialtone8.2](https://github.com/dialpad/dialtone-vue/compare/v2.93.0-dialtone8.1...v2.93.0-dialtone8.2) (2023-07-31)
 
 
