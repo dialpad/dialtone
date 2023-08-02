@@ -1,3 +1,10 @@
+# [2.93.0-dialtone8.4](https://github.com/dialpad/dialtone-vue/compare/v2.93.0-dialtone8.3...v2.93.0-dialtone8.4) (2023-08-02)
+
+
+### Bug Fixes
+
+* **Leftbar Row:** presence border color on selected row ([#1110](https://github.com/dialpad/dialtone-vue/issues/1110)) ([05c9b15](https://github.com/dialpad/dialtone-vue/commit/05c9b15e752135d1c5d249bcf38ed0b0093dfaa5))
+
 # [2.93.0-dialtone8.3](https://github.com/dialpad/dialtone-vue/compare/v2.93.0-dialtone8.2...v2.93.0-dialtone8.3) (2023-08-02)
 
 
