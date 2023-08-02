@@ -8,6 +8,16 @@
 * **Leftbar Row:** presence border color on selected row ([#1110](https://github.com/dialpad/dialtone-vue/issues/1110)) ([021b37c](https://github.com/dialpad/dialtone-vue/commit/021b37caff014295a63761772a3fc9e8953d935b))
 * **Tooltip:** anchor display property issue ([#1104](https://github.com/dialpad/dialtone-vue/issues/1104)) ([f9447ec](https://github.com/dialpad/dialtone-vue/commit/f9447ece3e684e59d9228e143059a7683da5aa5b))
 
+# [3.80.0-dialtone8-vue3.2](https://github.com/dialpad/dialtone-vue/compare/v3.80.0-dialtone8-vue3.1...v3.80.0-dialtone8-vue3.2) (2023-08-02)
+
+
+### Bug Fixes
+
+* **Avatar:** extract initials from full name - vue 3 ([b8bb929](https://github.com/dialpad/dialtone-vue/commit/b8bb929849f7fbaa3180d6a46fb49743d3cac455))
+* **Avatar:** remove util classes, set tokens ([#1107](https://github.com/dialpad/dialtone-vue/issues/1107)) ([7c02be8](https://github.com/dialpad/dialtone-vue/commit/7c02be827fff24c4b9f1ad859b554fa186be7700))
+* **Leftbar Row:** presence border color on selected row ([#1110](https://github.com/dialpad/dialtone-vue/issues/1110)) ([021b37c](https://github.com/dialpad/dialtone-vue/commit/021b37caff014295a63761772a3fc9e8953d935b))
+* **Tooltip:** anchor display property issue ([#1104](https://github.com/dialpad/dialtone-vue/issues/1104)) ([f9447ec](https://github.com/dialpad/dialtone-vue/commit/f9447ece3e684e59d9228e143059a7683da5aa5b))
+
 # [3.80.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.79.0...v3.80.0-dialtone8-vue3.1) (2023-07-26)
 
 
