@@ -1422,15 +1422,15 @@
           "type": "color"
         },
         "700": {
-          "value": "#D2D2D2",
+          "value": "#C2C2C2",
           "type": "color"
         },
         "800": {
-          "value": "#E9E9E9",
+          "value": "#D4D4D4",
           "type": "color"
         },
         "900": {
-          "value": "#F9F9F9",
+          "value": "#E6E6E6",
           "type": "color"
         }
       },
