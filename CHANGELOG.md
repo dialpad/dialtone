@@ -1,3 +1,16 @@
+# [1.22.0](https://github.com/dialpad/dialtone-tokens/compare/v1.21.0...v1.22.0) (2023-08-04)
+
+
+### Bug Fixes
+
+* **link:** correctedly map muted link to secondary foreground color" ([e7ba1ce](https://github.com/dialpad/dialtone-tokens/commit/e7ba1ceab487db3216d0ac7952216b878c096ccb))
+
+
+### Features
+
+* **color:** adjusted black 700, 800, 900 to soften stark contrast in dark theme. ([99b23e1](https://github.com/dialpad/dialtone-tokens/commit/99b23e186c4b287d88c8ae80b256a6ffed0c1f56))
+* **color:** stronger contrast between unread and read sidebar labels ([0f1ed60](https://github.com/dialpad/dialtone-tokens/commit/0f1ed60cb305d9e5afb6615da761f5c8e5bc6c04))
+
 # [1.21.0](https://github.com/dialpad/dialtone-tokens/compare/v1.20.0...v1.21.0) (2023-07-24)
 
 
