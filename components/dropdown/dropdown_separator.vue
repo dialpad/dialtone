@@ -13,10 +13,10 @@ export default {
 
 <style lang="less">
 .dt-list-item[role="menuitem"] {
-  border-radius: var(--size-300);
+  border-radius: var(--dt-size-300);
 }
 .dt-list-separator {
-  border-top: var(--size-100) solid var(--bc-default);
+  border-top: var(--dt-size-100) solid var(--dt-color-border-default);
   list-style: none;
 }
 </style>

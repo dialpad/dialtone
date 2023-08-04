@@ -1,9 +1,8 @@
 <template>
-  <div>
+  <div class="d-stack32">
     <div
       v-for="(variant, i) in variantsTabs"
       :key="i"
-      class="d-mb64"
     >
       <p class="d-fw-bold d-mb8">
         {{ variant.description }}
@@ -42,7 +41,7 @@
 
         <div
           :class="{
-            'd-fc-white': variant.propsToBind.inverted,
+            'd-fc-neutral-white': variant.propsToBind.inverted,
           }"
         >
           <dt-tab-panel

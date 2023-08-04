@@ -60,20 +60,20 @@ export default {
 <style lang="less">
 .d-top-banner-info {
    &__left {
-     margin: var(--space-300) 0 var(--space-300) var(--space-500);
+     margin: var(--dt-space-300) 0 var(--dt-space-300) var(--dt-space-500);
      min-width: 20%;
   }
   &__middle {
      display: flex;
      align-items: center;
-     gap: var(--size-300);
+     gap: var(--dt-size-300);
   }
   &__right {
      display: flex;
      align-items: baseline;
      justify-content: flex-end;
-     gap: var(--size-300);
-     margin: var(--space-300) var(--space-500) var(--space-300) 0;
+     gap: var(--dt-size-300);
+     margin: var(--dt-space-300) var(--dt-space-500) var(--dt-space-300) 0;
      min-width: 20%;
   }
 }

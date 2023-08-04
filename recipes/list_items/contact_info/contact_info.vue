@@ -195,14 +195,14 @@ export default {
     /*
     DP-74536: Add `min-width` to make the width of "contact info" adjustable.
     */
-    min-width: var(--space-825);
+    min-width: var(--dt-space-825);
   }
 
   &:deep(.dt-item-layout--left) {
     /*
     DP-74536: To make 'Avatar' in fixed position when resizing the window.
     */
-    min-width: var(--space-650);
+    min-width: var(--dt-space-650);
     justify-content: flex-start;
   }
 
@@ -214,8 +214,8 @@ export default {
   }
 
   &:deep(.d-avatar) {
-    border-radius: var(--br-pill);
-    border: var(--size-300) solid var(--bgc-primary);
+    border-radius: var(--dt-size-radius-pill);
+    border: var(--dt-size-300) solid var(--dt-color-surface-primary);
     box-sizing: unset;
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     id="components-select-menu--variants-container"
-    class="d-d-flex d-fd-column d-stack32 d-p32"
+    class="d-d-flex d-fd-column d-stack32"
   >
     <!-- Default -->
     <dt-select-menu
