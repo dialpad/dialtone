@@ -1,3 +1,10 @@
+## [3.80.1](https://github.com/dialpad/dialtone-vue/compare/v3.80.0...v3.80.1) (2023-08-04)
+
+
+### Bug Fixes
+
+* remove dialtone from peerDependencies ([b84c4fe](https://github.com/dialpad/dialtone-vue/commit/b84c4fea5011e55e31c5dad5a02d8e294592ac3f))
+
 # [3.80.0](https://github.com/dialpad/dialtone-vue/compare/v3.79.0...v3.80.0) (2023-08-04)
 
 
