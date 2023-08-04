@@ -2364,7 +2364,7 @@
           "description": "positive"
         },
         "muted": {
-          "value": "{color.foreground.secondary}",
+          "value": "{color.foreground.muted}",
           "type": "color",
           "description": "positive"
         },
@@ -2392,7 +2392,7 @@
           "description": "positive"
         },
         "muted-inverted": {
-          "value": "{color.foreground.secondary-inverted}",
+          "value": "{color.foreground.muted-inverted}",
           "type": "color",
           "description": "positive"
         },
@@ -4179,6 +4179,117 @@
         },
         "warning-inverted": {
           "value": "{color.gold.100}",
+          "type": "color"
+        }
+      },
+      "link": {
+        "primary": {
+          "value": "{color.purple.400}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".14",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "critical": {
+          "value": "{color.foreground.critical}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.foreground.success}",
+          "type": "color",
+          "description": "positive"
+        },
+        "warning": {
+          "value": "{color.foreground.warning}",
+          "type": "color",
+          "description": "positive"
+        },
+        "muted": {
+          "value": "{color.foreground.muted}",
+          "type": "color",
+          "description": "positive"
+        },
+        "disabled": {
+          "value": "{color.foreground.disabled}",
+          "type": "color",
+          "description": "positive"
+        },
+        "primary-hover": {
+          "value": "{color.purple.500}",
+          "type": "color"
+        },
+        "critical-hover": {
+          "value": "{color.red.500}",
+          "type": "color"
+        },
+        "success-hover": {
+          "value": "{color.green.500}",
+          "type": "color"
+        },
+        "warning-hover": {
+          "value": "{color.gold.500}",
+          "type": "color"
+        },
+        "muted-hover": {
+          "value": "{color.foreground.primary}",
+          "type": "color"
+        },
+        "disabled-hover": {
+          "value": "{color.link.disabled}",
+          "type": "color"
+        },
+        "primary-inverted": {
+          "value": "{color.purple.300}",
+          "type": "color"
+        },
+        "primary-inverted-hover": {
+          "value": "{color.purple.200}",
+          "type": "color"
+        },
+        "critical-inverted": {
+          "value": "{color.foreground.critical-inverted}",
+          "type": "color"
+        },
+        "critical-inverted-hover": {
+          "value": "{color.red.200}",
+          "type": "color"
+        },
+        "success-inverted": {
+          "value": "{color.foreground.success-inverted}",
+          "type": "color"
+        },
+        "success-inverted-hover": {
+          "value": "{color.foreground.success-strong-inverted}",
+          "type": "color"
+        },
+        "warning-inverted": {
+          "value": "{color.foreground.warning-inverted}",
+          "type": "color"
+        },
+        "warning-inverted-hover": {
+          "value": "{color.black.200}",
+          "type": "color"
+        },
+        "muted-inverted": {
+          "value": "{color.foreground.muted-inverted}",
+          "type": "color"
+        },
+        "muted-inverted-hover": {
+          "value": "{color.foreground.primary-inverted}",
+          "type": "color"
+        },
+        "disabled-inverted": {
+          "value": "{color.foreground.disabled-inverted}",
+          "type": "color"
+        },
+        "disabled-inverted-hover": {
+          "value": "{color.link.disabled-inverted}",
           "type": "color"
         }
       },
