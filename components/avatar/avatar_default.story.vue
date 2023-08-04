@@ -10,6 +10,7 @@
     :presence="presence"
     :avatar-class="avatarClass"
     :canvas-class="canvasClass"
+    :icon-class="iconClass"
     :seed="seed"
     :group="group"
     :color="color"
