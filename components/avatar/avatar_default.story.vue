@@ -10,6 +10,7 @@
     :presence="$attrs.presence"
     :avatar-class="$attrs.avatarClass"
     :canvas-class="$attrs.canvasClass"
+    :icon-class="$attrs.iconClass"
     :seed="$attrs.seed"
     :group="$attrs.group"
     :color="$attrs.color"

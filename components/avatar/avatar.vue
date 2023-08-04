@@ -20,7 +20,7 @@
         v-else-if="iconName"
         :name="iconName"
         :size="iconSize"
-        :class="AVATAR_KIND_MODIFIERS.icon"
+        :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
         data-qa="dt-avatar-icon"
       />
       <span
@@ -143,6 +143,14 @@ export default {
      * Set classes on the avatar canvas. Wrapper around the core avatar image.
      */
     canvasClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Pass through classes. Used to customize the avatar icon
+     */
+    iconClass: {
       type: [String, Array, Object],
       default: '',
     },
