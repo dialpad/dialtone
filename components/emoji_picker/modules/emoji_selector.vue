@@ -38,7 +38,8 @@
           class="d-emoji-picker__tab"
         >
           <button
-            v-for="(emoji, indexEmoji) in (emojis[tabs[indexTab] + skinTone] ? emojis[tabs[indexTab] + skinTone] : emojis[tabs[indexTab]])"
+            v-for="(emoji, indexEmoji) in
+            (emojis[tabs[indexTab] + skinTone] ? emojis[tabs[indexTab] + skinTone] : emojis[tabs[indexTab]])"
             :key="emoji.shortname"
             :ref="el => { if (el) setEmojiRef(el, indexTab, indexEmoji) }"
             type="button"
@@ -100,6 +101,7 @@
 </template>
 
 <script setup>
+// eslint-disable max-len
 import { emojisGrouped as emojis } from '@/components/emoji_picker/emojis';
 import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
 import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
@@ -405,7 +407,8 @@ function scrollToTab (tabIndex, focusFirstEmoji = true) {
     /**
      * This variable is used to check if the user is scrolling inside the emoji picker
      * This is used to check if the user is scrolling using the scrollTo function
-     * This is useful because this flag will prevent to update the fixed label when the user is scrolling using the scrollTo function
+     * This is useful because this flag will prevent to update the fixed label when the user is scrolling
+     * using the scrollTo function
      */
     let isScrolling = true;
 
@@ -413,10 +416,10 @@ function scrollToTab (tabIndex, focusFirstEmoji = true) {
     emits('is-scrolling', true);
 
     /**
-     * This event listener checks whether the user is scrolling up or down by comparing the current scrollTop to prevScrollTop.
-     * If the scrollToTab function is scrolling from bottom to top and has reached the desired position (scrollTop <= offsetTop),
-     * or if the scrollToTab function is scrolling from top to bottom and has passed the desired position (scrollTop >= offsetTop),
-     * then isScrolling is set to false.
+     * This event listener checks whether the user is scrolling up or down by comparing the current scrollTop
+     * to prevScrollTop. If the scrollToTab function is scrolling from bottom to top and has reached the desired
+     * position (scrollTop <= offsetTop),or if the scrollToTab function is scrolling from top to bottom and has
+     * passed the desired position(scrollTop >= offsetTop), then isScrolling is set to false.
      */
     container.addEventListener('scroll', () => {
       if (isScrolling) {
@@ -463,8 +466,9 @@ function setTabLabelObserver () {
 
       /**
        * If the target is positioned above the root,
-       * the code updates the value of the fixed label to the label of the previous tab, or the first tab if the current tab is the first one.
-       * If the target is positioned below the root, the code updates the value of the fixed label to the label of the current tab.
+       * the code updates the value of the fixed label to the label of the previous tab,
+       * or the first tab if the current tab is the first one. If the target is positioned below the root, the code
+       * updates the value of the fixed label to the label of the current tab.
        * If the target stops intersecting with the root and its index is 1 (the second tab),
        * the code updates the value of the fixed label to the label of the first tab.
        * NOTES:
@@ -506,7 +510,8 @@ const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
     const position = indexEmoji % EMOJIS_PER_ROW;
 
     if (!focusEmoji(0, indexEmoji - EMOJIS_PER_ROW)) {
-      const lastEmojiPosition = emojiFilteredRefs.value.length - (emojiFilteredRefs.value.length % EMOJIS_PER_ROW) + position;
+      const lastEmojiPosition =
+        emojiFilteredRefs.value.length - (emojiFilteredRefs.value.length % EMOJIS_PER_ROW) + position;
 
       focusEmoji(0, lastEmojiPosition);
 
@@ -553,9 +558,11 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
 
     if (indexTab === 0) {
       // we are on the first emoji tab, then we should jump to the last row of the last emoji tab
-      const numberOfMissingEmojis = EMOJIS_PER_ROW - (emojiRefs.value[emojiRefs.value.length - 1].length % EMOJIS_PER_ROW);
+      const numberOfMissingEmojis =
+        EMOJIS_PER_ROW - (emojiRefs.value[emojiRefs.value.length - 1].length % EMOJIS_PER_ROW);
 
-      const emojiToJump = emojiRefs.value[emojiRefs.value.length - 1].length + numberOfMissingEmojis - (EMOJIS_PER_ROW - position);
+      const emojiToJump =
+        emojiRefs.value[emojiRefs.value.length - 1].length + numberOfMissingEmojis - (EMOJIS_PER_ROW - position);
 
       if (!focusEmoji(emojiRefs.value.length - 1, emojiToJump)) {
         // if there is no emoji in this position, jump to the last emoji of the row
@@ -652,4 +659,3 @@ defineExpose({
   focusEmojiSelector,
 });
 </script>
-

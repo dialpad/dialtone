@@ -1,5 +1,5 @@
 <template>
-  <div class="d-fd-column d-p24 d-of-auto d-stack8">
+  <div class="d-fd-column d-of-auto d-stack8">
     <div
       id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center d-ff-row-wrap"

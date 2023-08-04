@@ -5,7 +5,7 @@ module.exports = {
     {
       name: 'next-vue3',
       channel: 'next3-vue3',
-      prerelease: 'next3-vue3',
+      prerelease: 'dialtone8-vue3',
     },
     {
       name: 'beta',

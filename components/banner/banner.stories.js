@@ -97,7 +97,7 @@ export const CustomBackground = {
     title: '',
     action: '',
     hideIcon: true,
-    dialogClass: 'd-fc-white',
+    dialogClass: 'd-fc-neutral-white',
     default: 'The power of Dialpad. On your desktop',
   },
   parameters: Default.parameters,

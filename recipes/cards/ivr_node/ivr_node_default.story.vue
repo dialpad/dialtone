@@ -12,7 +12,7 @@
       #connector
     >
       <div
-        class="ivr-connector d-px8 d-h24 d-bar-pill d-mbn12 d-fc-white d-fs-100"
+        class="ivr-connector d-px8 d-h24 d-bar-pill d-mbn12 d-fc-neutral-white d-fs-100"
       >
         Add branch
       </div>

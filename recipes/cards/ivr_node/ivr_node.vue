@@ -6,7 +6,7 @@
     <div
       v-if="dtmfKey"
       data-qa="dt-top-connector-dtmf"
-      class="ivr-connector d-w24 d-h24 d-bar-circle d-mbn12 d-fc-white d-fs-200"
+      class="ivr-connector d-w24 d-h24 d-bar-circle d-mbn12 d-fc-neutral-white d-fs-200"
       :class="{ 'd-mbn16': isSelected }"
     >
       {{ dtmfKey }}
@@ -218,7 +218,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-color: var(--purple-600);
-  background-color: var(--purple-600);
+  border-color: var(--dt-color-purple-600);
+  background-color: var(--dt-color-purple-600);
 }
 </style>

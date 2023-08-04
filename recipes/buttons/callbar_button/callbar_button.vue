@@ -188,11 +188,11 @@ export default {
 
 <style lang="less">
 .dt-recipe-callbar-button:not(.dt-recipe-callbar-button--circle) {
-  line-height: var(--lh-300);
+  line-height: var(--dt-font-line-height-300);
 }
 
 .dt-recipe-callbar-button--circle {
-  border-radius: var(--br-circle);
+  border-radius: var(--dt-size-radius-circle);
 }
 
 .dt-recipe-callbar-button.d-btn[disabled] {

@@ -244,26 +244,26 @@ export default {
 
   &:not(.dt-list-item--static) {
     cursor: pointer;
-    border-radius: var(--size-300);
+    border-radius: var(--dt-size-300);
   }
 
   &--focusable:focus,
   &--focusable:focus-within,
   &--highlighted {
-    background-color: var(--bgc-moderate-opaque);
+    background-color: var(--dt-color-surface-moderate-opaque);
   }
 
   &--highlighted:active {
-    background-color: var(--bgc-bold-opaque);
+    background-color: var(--dt-color-surface-bold-opaque);
   }
 
   &--selected-icon {
-    margin-left: var(--space-400);
+    margin-left: var(--dt-space-400);
   }
 
   :focus-visible {
     outline: none;
-    box-shadow: var(--bs-focus-ring);
+    box-shadow: var(--dt-shadow-focus);
   }
 }
 </style>

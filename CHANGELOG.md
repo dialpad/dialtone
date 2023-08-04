@@ -1,80 +1,289 @@
-# [3.79.0](https://github.com/dialpad/dialtone-vue/compare/v3.78.1...v3.79.0) (2023-07-26)
-
-
-### Features
-
-* **Message Input:** emoji extension ([#1080](https://github.com/dialpad/dialtone-vue/issues/1080)) ([091354d](https://github.com/dialpad/dialtone-vue/commit/091354d1207b37f873c39e4abb8f45802f993dd0))
-
-## [3.78.1](https://github.com/dialpad/dialtone-vue/compare/v3.78.0...v3.78.1) (2023-07-25)
+# [3.80.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.79.0...v3.80.0-dialtone8-vue3.1) (2023-08-02)
 
 
 ### Bug Fixes
 
-* **General Row:** adjust label width on prop change ([#1096](https://github.com/dialpad/dialtone-vue/issues/1096)) ([a7209a8](https://github.com/dialpad/dialtone-vue/commit/a7209a823ba6d573a97b735ee4f6778bf1e4543a))
-* **General Row:** call resize handler on mounted ([#1094](https://github.com/dialpad/dialtone-vue/issues/1094)) ([6604a1b](https://github.com/dialpad/dialtone-vue/commit/6604a1b9364ae22d1adc42910b9d014ffce54437))
-
-# [3.78.0](https://github.com/dialpad/dialtone-vue/compare/v3.77.0...v3.78.0) (2023-07-24)
-
-
-### Bug Fixes
-
-* `contact_info` style override issue (Vue3) ([#1079](https://github.com/dialpad/dialtone-vue/issues/1079)) ([16235b7](https://github.com/dialpad/dialtone-vue/commit/16235b7e5dc5cc63b749d4ee9f4d3ad91d5c7bf6))
-* add customized css to badge label and contact info (vue3) ([#1077](https://github.com/dialpad/dialtone-vue/issues/1077)) ([a749778](https://github.com/dialpad/dialtone-vue/commit/a749778a2a7842e86bd244b2937bbd703c1a8d8a))
-* **Combobox Multi Select:** fix ref not existing error ([#1084](https://github.com/dialpad/dialtone-vue/issues/1084)) ([560e6ae](https://github.com/dialpad/dialtone-vue/commit/560e6ae991bab3805f52ea1ce42e4ab07f64f705))
-* fix emoji skin tone not updating when skinTone prop updates ([#1087](https://github.com/dialpad/dialtone-vue/issues/1087)) ([e1b5631](https://github.com/dialpad/dialtone-vue/commit/e1b563196a535acdf27ca2d3b21faac03803887c))
-* **General Row:** overridden display property - vue3 ([#1070](https://github.com/dialpad/dialtone-vue/issues/1070)) ([d0c6595](https://github.com/dialpad/dialtone-vue/commit/d0c6595ff0fbb277e4a74635332f190ed2f5d34c))
-* **General Row:** resize observer - vue3 ([#1075](https://github.com/dialpad/dialtone-vue/issues/1075)) ([dee506c](https://github.com/dialpad/dialtone-vue/commit/dee506c1c385f0eec62b35b8d64e6f41ccfe9041))
-* **Message Input:** message input recipe tests ([#1073](https://github.com/dialpad/dialtone-vue/issues/1073)) ([7936bd5](https://github.com/dialpad/dialtone-vue/commit/7936bd542041b1f10183b4c757e7f8e4bc17a1ef))
-* **Tooltip:** change anchor tag to span ([#1089](https://github.com/dialpad/dialtone-vue/issues/1089)) ([f346741](https://github.com/dialpad/dialtone-vue/commit/f346741239f886a7ef1158f4f43a9906047e8a49))
+* `contact_info` style override issue (Vue3) ([#1079](https://github.com/dialpad/dialtone-vue/issues/1079)) ([1826f1c](https://github.com/dialpad/dialtone-vue/commit/1826f1c95c714ea14beda43e0ffc5c9553c07964))
+* add customized css to badge label and contact info (vue3) ([#1077](https://github.com/dialpad/dialtone-vue/issues/1077)) ([b1c3821](https://github.com/dialpad/dialtone-vue/commit/b1c3821886b2c0713077e6e1e41ece5e43398317))
+* **Avatar:** extract initials from full name - vue 3 ([b8bb929](https://github.com/dialpad/dialtone-vue/commit/b8bb929849f7fbaa3180d6a46fb49743d3cac455))
+* **Avatar:** remove util classes, set tokens ([#1107](https://github.com/dialpad/dialtone-vue/issues/1107)) ([7c02be8](https://github.com/dialpad/dialtone-vue/commit/7c02be827fff24c4b9f1ad859b554fa186be7700))
+* **Avatar:** thin border behind image ([#1099](https://github.com/dialpad/dialtone-vue/issues/1099)) ([e66fc86](https://github.com/dialpad/dialtone-vue/commit/e66fc86fec2a06ca6f8574d0459994cad1f516ac))
+* change prerelease name ([f8f9771](https://github.com/dialpad/dialtone-vue/commit/f8f977146d0fdaf2d4ade8f1f49b13f93a286e3b))
+* **Combobox Multi Select:** fix ref not existing error ([#1084](https://github.com/dialpad/dialtone-vue/issues/1084)) ([c72d796](https://github.com/dialpad/dialtone-vue/commit/c72d796a8f3d730e9e2cc0f0a4853a3d9d27f5bc))
+* **Contact Info Avatar:** show avatar halo as required vue3 ([#1062](https://github.com/dialpad/dialtone-vue/issues/1062)) ([53a882c](https://github.com/dialpad/dialtone-vue/commit/53a882c3657ef9157e1967ec3978a1bd7bc4a789))
+* **Contact Info, Leftbar Row:** stylings - vue3 ([#1086](https://github.com/dialpad/dialtone-vue/issues/1086)) ([594fdca](https://github.com/dialpad/dialtone-vue/commit/594fdca87aa5eab7a14c22f543517bc4c3784179)), closes [#1062](https://github.com/dialpad/dialtone-vue/issues/1062) [#1061](https://github.com/dialpad/dialtone-vue/issues/1061)
+* **Contact Info:** avatar's border color ([#1100](https://github.com/dialpad/dialtone-vue/issues/1100)) ([917de63](https://github.com/dialpad/dialtone-vue/commit/917de63cf3cc3a59cc6dd4e091dec14b126e35b4))
+* fix emoji skin tone not updating when skinTone prop updates ([#1087](https://github.com/dialpad/dialtone-vue/issues/1087)) ([d27d870](https://github.com/dialpad/dialtone-vue/commit/d27d8702e803b42da75f52a5a2819a8a597d782d))
+* **General Row:** adjust label width on prop change ([#1096](https://github.com/dialpad/dialtone-vue/issues/1096)) ([d4868cf](https://github.com/dialpad/dialtone-vue/commit/d4868cff3ae6bbd4e1b007b1488659cc69b1cd7e))
+* **General Row:** call resize handler on mounted ([#1094](https://github.com/dialpad/dialtone-vue/issues/1094)) ([51de1c0](https://github.com/dialpad/dialtone-vue/commit/51de1c023982403fd222126d44b529d3f2056611))
+* **General Row:** overridden display property - vue3 ([#1070](https://github.com/dialpad/dialtone-vue/issues/1070)) ([fd1703b](https://github.com/dialpad/dialtone-vue/commit/fd1703bbd725397df498f32b4fbc7e0b27e6cc36))
+* **General Row:** resize observer - vue3 ([#1075](https://github.com/dialpad/dialtone-vue/issues/1075)) ([a39b917](https://github.com/dialpad/dialtone-vue/commit/a39b917ac5fd02cc7b46595617450a892172b7d9))
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+* **Leftbar Row:** presence border color on selected row ([#1110](https://github.com/dialpad/dialtone-vue/issues/1110)) ([021b37c](https://github.com/dialpad/dialtone-vue/commit/021b37caff014295a63761772a3fc9e8953d935b))
+* local config? ([6f6c27b](https://github.com/dialpad/dialtone-vue/commit/6f6c27b7f63f9a9d2a196f2fae0897287a9839ef))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([64d097f](https://github.com/dialpad/dialtone-vue/commit/64d097fcae57a4f37ab55b4cf64739b9fa58b3cd))
+* **Message Input:** message input recipe tests ([#1073](https://github.com/dialpad/dialtone-vue/issues/1073)) ([bab14a5](https://github.com/dialpad/dialtone-vue/commit/bab14a5fe094e7a653e47d606b3132d387942137))
+* remove peer dep for dt8 branch ([267a773](https://github.com/dialpad/dialtone-vue/commit/267a7730cdde04a000bcb7b0c7c6101648ad576b))
+* **Tooltip:** anchor display property issue ([#1104](https://github.com/dialpad/dialtone-vue/issues/1104)) ([f9447ec](https://github.com/dialpad/dialtone-vue/commit/f9447ece3e684e59d9228e143059a7683da5aa5b))
+* **Tooltip:** change anchor tag to span ([#1089](https://github.com/dialpad/dialtone-vue/issues/1089)) ([3c8e855](https://github.com/dialpad/dialtone-vue/commit/3c8e855225a93aad9bda09ec7be57ce2cc09775d))
 
 
 ### Documentation
 
-* **Collapsible:** fix opened event not displayed on panel ([#1065](https://github.com/dialpad/dialtone-vue/issues/1065)) ([b325dff](https://github.com/dialpad/dialtone-vue/commit/b325dff364ee3d479a3f77f606c6120c357d6db9))
-* **Multiple Components:** missing migrations - vue3 ([#1090](https://github.com/dialpad/dialtone-vue/issues/1090)) ([8627284](https://github.com/dialpad/dialtone-vue/commit/8627284a45deb49faacbe540a85bfb305762fab3))
+* **Collapsible:** fix opened event not displayed on panel ([#1065](https://github.com/dialpad/dialtone-vue/issues/1065)) ([a7c19c5](https://github.com/dialpad/dialtone-vue/commit/a7c19c5fbd68e1236e91abe64340695d2e669ce9))
+* **Multiple Components:** missing migrations - vue3 ([#1090](https://github.com/dialpad/dialtone-vue/issues/1090)) ([614ab18](https://github.com/dialpad/dialtone-vue/commit/614ab187d7a73b0cbde3aefe46cf265a0301a2f6))
 
 
 ### Features
 
-* **Rich Text Editor:** add hardbreak and codeblocks ([#1068](https://github.com/dialpad/dialtone-vue/issues/1068)) ([e788ab9](https://github.com/dialpad/dialtone-vue/commit/e788ab9af2bdd9c7891dbe69e5828f41ae30b974))
+* **Datepicker:** date format utils vue3 ([#1061](https://github.com/dialpad/dialtone-vue/issues/1061)) ([c0b4570](https://github.com/dialpad/dialtone-vue/commit/c0b45701cded29f0e480e21b6237d27de1271c0e))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* **Rich Text Editor:** add hardbreak and codeblocks ([#1068](https://github.com/dialpad/dialtone-vue/issues/1068)) ([bbf24db](https://github.com/dialpad/dialtone-vue/commit/bbf24db5e7be1fa284a5dc7ecc3d86221e0640b3))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
 
-# [3.77.0](https://github.com/dialpad/dialtone-vue/compare/v3.76.2...v3.77.0) (2023-07-11)
+# [3.80.0-dialtone8-vue3.2](https://github.com/dialpad/dialtone-vue/compare/v3.80.0-dialtone8-vue3.1...v3.80.0-dialtone8-vue3.2) (2023-08-02)
 
 
 ### Bug Fixes
 
-* **Contact Info Avatar:** show avatar halo as required vue3 ([#1062](https://github.com/dialpad/dialtone-vue/issues/1062)) ([763a951](https://github.com/dialpad/dialtone-vue/commit/763a951afe87588c479cd3c7ccd4d9e05af27ed2))
-* update dialtone 7.29 ([6b8ac8c](https://github.com/dialpad/dialtone-vue/commit/6b8ac8c922d99b89f59f41174b4490c70e8be23f))
+* **Avatar:** extract initials from full name - vue 3 ([b8bb929](https://github.com/dialpad/dialtone-vue/commit/b8bb929849f7fbaa3180d6a46fb49743d3cac455))
+* **Avatar:** remove util classes, set tokens ([#1107](https://github.com/dialpad/dialtone-vue/issues/1107)) ([7c02be8](https://github.com/dialpad/dialtone-vue/commit/7c02be827fff24c4b9f1ad859b554fa186be7700))
+* **Leftbar Row:** presence border color on selected row ([#1110](https://github.com/dialpad/dialtone-vue/issues/1110)) ([021b37c](https://github.com/dialpad/dialtone-vue/commit/021b37caff014295a63761772a3fc9e8953d935b))
+* **Tooltip:** anchor display property issue ([#1104](https://github.com/dialpad/dialtone-vue/issues/1104)) ([f9447ec](https://github.com/dialpad/dialtone-vue/commit/f9447ece3e684e59d9228e143059a7683da5aa5b))
+
+# [3.80.0-dialtone8-vue3.2](https://github.com/dialpad/dialtone-vue/compare/v3.80.0-dialtone8-vue3.1...v3.80.0-dialtone8-vue3.2) (2023-08-02)
+
+
+### Bug Fixes
+
+* **Avatar:** extract initials from full name - vue 3 ([b8bb929](https://github.com/dialpad/dialtone-vue/commit/b8bb929849f7fbaa3180d6a46fb49743d3cac455))
+* **Avatar:** remove util classes, set tokens ([#1107](https://github.com/dialpad/dialtone-vue/issues/1107)) ([7c02be8](https://github.com/dialpad/dialtone-vue/commit/7c02be827fff24c4b9f1ad859b554fa186be7700))
+* **Leftbar Row:** presence border color on selected row ([#1110](https://github.com/dialpad/dialtone-vue/issues/1110)) ([021b37c](https://github.com/dialpad/dialtone-vue/commit/021b37caff014295a63761772a3fc9e8953d935b))
+* **Tooltip:** anchor display property issue ([#1104](https://github.com/dialpad/dialtone-vue/issues/1104)) ([f9447ec](https://github.com/dialpad/dialtone-vue/commit/f9447ece3e684e59d9228e143059a7683da5aa5b))
+
+# [3.80.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.79.0...v3.80.0-dialtone8-vue3.1) (2023-07-26)
+
+
+### Bug Fixes
+
+* `contact_info` style override issue (Vue3) ([#1079](https://github.com/dialpad/dialtone-vue/issues/1079)) ([1826f1c](https://github.com/dialpad/dialtone-vue/commit/1826f1c95c714ea14beda43e0ffc5c9553c07964))
+* add customized css to badge label and contact info (vue3) ([#1077](https://github.com/dialpad/dialtone-vue/issues/1077)) ([b1c3821](https://github.com/dialpad/dialtone-vue/commit/b1c3821886b2c0713077e6e1e41ece5e43398317))
+* **Avatar:** thin border behind image ([#1099](https://github.com/dialpad/dialtone-vue/issues/1099)) ([e66fc86](https://github.com/dialpad/dialtone-vue/commit/e66fc86fec2a06ca6f8574d0459994cad1f516ac))
+* change prerelease name ([f8f9771](https://github.com/dialpad/dialtone-vue/commit/f8f977146d0fdaf2d4ade8f1f49b13f93a286e3b))
+* **Combobox Multi Select:** fix ref not existing error ([#1084](https://github.com/dialpad/dialtone-vue/issues/1084)) ([c72d796](https://github.com/dialpad/dialtone-vue/commit/c72d796a8f3d730e9e2cc0f0a4853a3d9d27f5bc))
+* **Contact Info Avatar:** show avatar halo as required vue3 ([#1062](https://github.com/dialpad/dialtone-vue/issues/1062)) ([53a882c](https://github.com/dialpad/dialtone-vue/commit/53a882c3657ef9157e1967ec3978a1bd7bc4a789))
+* **Contact Info, Leftbar Row:** stylings - vue3 ([#1086](https://github.com/dialpad/dialtone-vue/issues/1086)) ([594fdca](https://github.com/dialpad/dialtone-vue/commit/594fdca87aa5eab7a14c22f543517bc4c3784179)), closes [#1062](https://github.com/dialpad/dialtone-vue/issues/1062) [#1061](https://github.com/dialpad/dialtone-vue/issues/1061)
+* **Contact Info:** avatar's border color ([#1100](https://github.com/dialpad/dialtone-vue/issues/1100)) ([917de63](https://github.com/dialpad/dialtone-vue/commit/917de63cf3cc3a59cc6dd4e091dec14b126e35b4))
+* fix emoji skin tone not updating when skinTone prop updates ([#1087](https://github.com/dialpad/dialtone-vue/issues/1087)) ([d27d870](https://github.com/dialpad/dialtone-vue/commit/d27d8702e803b42da75f52a5a2819a8a597d782d))
+* **General Row:** adjust label width on prop change ([#1096](https://github.com/dialpad/dialtone-vue/issues/1096)) ([d4868cf](https://github.com/dialpad/dialtone-vue/commit/d4868cff3ae6bbd4e1b007b1488659cc69b1cd7e))
+* **General Row:** call resize handler on mounted ([#1094](https://github.com/dialpad/dialtone-vue/issues/1094)) ([51de1c0](https://github.com/dialpad/dialtone-vue/commit/51de1c023982403fd222126d44b529d3f2056611))
+* **General Row:** overridden display property - vue3 ([#1070](https://github.com/dialpad/dialtone-vue/issues/1070)) ([fd1703b](https://github.com/dialpad/dialtone-vue/commit/fd1703bbd725397df498f32b4fbc7e0b27e6cc36))
+* **General Row:** resize observer - vue3 ([#1075](https://github.com/dialpad/dialtone-vue/issues/1075)) ([a39b917](https://github.com/dialpad/dialtone-vue/commit/a39b917ac5fd02cc7b46595617450a892172b7d9))
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+* local config? ([6f6c27b](https://github.com/dialpad/dialtone-vue/commit/6f6c27b7f63f9a9d2a196f2fae0897287a9839ef))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([64d097f](https://github.com/dialpad/dialtone-vue/commit/64d097fcae57a4f37ab55b4cf64739b9fa58b3cd))
+* **Message Input:** message input recipe tests ([#1073](https://github.com/dialpad/dialtone-vue/issues/1073)) ([bab14a5](https://github.com/dialpad/dialtone-vue/commit/bab14a5fe094e7a653e47d606b3132d387942137))
+* remove peer dep for dt8 branch ([267a773](https://github.com/dialpad/dialtone-vue/commit/267a7730cdde04a000bcb7b0c7c6101648ad576b))
+* **Tooltip:** change anchor tag to span ([#1089](https://github.com/dialpad/dialtone-vue/issues/1089)) ([3c8e855](https://github.com/dialpad/dialtone-vue/commit/3c8e855225a93aad9bda09ec7be57ce2cc09775d))
+
+
+### Documentation
+
+* **Collapsible:** fix opened event not displayed on panel ([#1065](https://github.com/dialpad/dialtone-vue/issues/1065)) ([a7c19c5](https://github.com/dialpad/dialtone-vue/commit/a7c19c5fbd68e1236e91abe64340695d2e669ce9))
+* **Multiple Components:** missing migrations - vue3 ([#1090](https://github.com/dialpad/dialtone-vue/issues/1090)) ([614ab18](https://github.com/dialpad/dialtone-vue/commit/614ab187d7a73b0cbde3aefe46cf265a0301a2f6))
 
 
 ### Features
 
-* **Datepicker:** date format utils vue3 ([#1061](https://github.com/dialpad/dialtone-vue/issues/1061)) ([bb1a441](https://github.com/dialpad/dialtone-vue/commit/bb1a441bc00cf72ef27beb3ca1884c85e4ae0ebc))
+* **Datepicker:** date format utils vue3 ([#1061](https://github.com/dialpad/dialtone-vue/issues/1061)) ([c0b4570](https://github.com/dialpad/dialtone-vue/commit/c0b45701cded29f0e480e21b6237d27de1271c0e))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* **Rich Text Editor:** add hardbreak and codeblocks ([#1068](https://github.com/dialpad/dialtone-vue/issues/1068)) ([bbf24db](https://github.com/dialpad/dialtone-vue/commit/bbf24db5e7be1fa284a5dc7ecc3d86221e0640b3))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
 
-## [3.76.2](https://github.com/dialpad/dialtone-vue/compare/v3.76.1...v3.76.2) (2023-07-07)
-
-
-### Bug Fixes
-
-* correct ci config ([47fed67](https://github.com/dialpad/dialtone-vue/commit/47fed678cd4f64315cd95f0c8acd605503a088c2))
-
-## [3.76.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.0...v3.76.1) (2023-07-07)
+# [3.77.0-dialtone8-vue3.7](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.6...v3.77.0-dialtone8-vue3.7) (2023-07-25)
 
 
 ### Bug Fixes
 
-* channel name ([ecfdf6a](https://github.com/dialpad/dialtone-vue/commit/ecfdf6a680b744f506485f5ac1e012a0a21969ff))
+* **General Row:** adjust label width on prop change ([#1096](https://github.com/dialpad/dialtone-vue/issues/1096)) ([d4868cf](https://github.com/dialpad/dialtone-vue/commit/d4868cff3ae6bbd4e1b007b1488659cc69b1cd7e))
+* **General Row:** call resize handler on mounted ([#1094](https://github.com/dialpad/dialtone-vue/issues/1094)) ([51de1c0](https://github.com/dialpad/dialtone-vue/commit/51de1c023982403fd222126d44b529d3f2056611))
 
-# [3.76.0](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0) (2023-07-07)
+# [3.77.0-dialtone8-vue3.6](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.5...v3.77.0-dialtone8-vue3.6) (2023-07-24)
 
 
 ### Bug Fixes
 
-* **Item Layout:** remove align-self from item layout ([f673bc8](https://github.com/dialpad/dialtone-vue/commit/f673bc8ccc725dffec13d08b5e3e8d811f0358ed))
-* **Message Input:** error notice message ([#1041](https://github.com/dialpad/dialtone-vue/issues/1041)) ([617382b](https://github.com/dialpad/dialtone-vue/commit/617382b534cae05221a81a1809334393c3e0f894))
-* **Message Input:** two way binding for message input value ([#1058](https://github.com/dialpad/dialtone-vue/issues/1058)) ([2b808ee](https://github.com/dialpad/dialtone-vue/commit/2b808eeedde2f00ee55a9f11d3d59dae605a5825))
-* modify release branch method ([3ced6c8](https://github.com/dialpad/dialtone-vue/commit/3ced6c8a89e750032cdf6ffaec6c4a1e122628e6))
-* remove unneeded branch ([6320d3a](https://github.com/dialpad/dialtone-vue/commit/6320d3a92ae5ff80cdb98eb1e58842dea3a49387))
+* **Combobox Multi Select:** fix ref not existing error ([#1084](https://github.com/dialpad/dialtone-vue/issues/1084)) ([c72d796](https://github.com/dialpad/dialtone-vue/commit/c72d796a8f3d730e9e2cc0f0a4853a3d9d27f5bc))
+* fix emoji skin tone not updating when skinTone prop updates ([#1087](https://github.com/dialpad/dialtone-vue/issues/1087)) ([d27d870](https://github.com/dialpad/dialtone-vue/commit/d27d8702e803b42da75f52a5a2819a8a597d782d))
+* **Tooltip:** change anchor tag to span ([#1089](https://github.com/dialpad/dialtone-vue/issues/1089)) ([3c8e855](https://github.com/dialpad/dialtone-vue/commit/3c8e855225a93aad9bda09ec7be57ce2cc09775d))
+
+
+### Documentation
+
+* **Multiple Components:** missing migrations - vue3 ([#1090](https://github.com/dialpad/dialtone-vue/issues/1090)) ([614ab18](https://github.com/dialpad/dialtone-vue/commit/614ab187d7a73b0cbde3aefe46cf265a0301a2f6))
+
+# [3.77.0-dialtone8-vue3.5](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.4...v3.77.0-dialtone8-vue3.5) (2023-07-21)
+
+
+### Bug Fixes
+
+* `contact_info` style override issue (Vue3) ([#1079](https://github.com/dialpad/dialtone-vue/issues/1079)) ([1826f1c](https://github.com/dialpad/dialtone-vue/commit/1826f1c95c714ea14beda43e0ffc5c9553c07964))
+* add customized css to badge label and contact info (vue3) ([#1077](https://github.com/dialpad/dialtone-vue/issues/1077)) ([b1c3821](https://github.com/dialpad/dialtone-vue/commit/b1c3821886b2c0713077e6e1e41ece5e43398317))
+* **Contact Info, Leftbar Row:** stylings - vue3 ([#1086](https://github.com/dialpad/dialtone-vue/issues/1086)) ([594fdca](https://github.com/dialpad/dialtone-vue/commit/594fdca87aa5eab7a14c22f543517bc4c3784179)), closes [#1062](https://github.com/dialpad/dialtone-vue/issues/1062) [#1061](https://github.com/dialpad/dialtone-vue/issues/1061)
+* **General Row:** resize observer - vue3 ([#1075](https://github.com/dialpad/dialtone-vue/issues/1075)) ([a39b917](https://github.com/dialpad/dialtone-vue/commit/a39b917ac5fd02cc7b46595617450a892172b7d9))
+* **Message Input:** message input recipe tests ([#1073](https://github.com/dialpad/dialtone-vue/issues/1073)) ([bab14a5](https://github.com/dialpad/dialtone-vue/commit/bab14a5fe094e7a653e47d606b3132d387942137))
+
+
+### Features
+
+* **Rich Text Editor:** add hardbreak and codeblocks ([#1068](https://github.com/dialpad/dialtone-vue/issues/1068)) ([bbf24db](https://github.com/dialpad/dialtone-vue/commit/bbf24db5e7be1fa284a5dc7ecc3d86221e0640b3))
+
+# [3.77.0-dialtone8-vue3.4](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.3...v3.77.0-dialtone8-vue3.4) (2023-07-14)
+
+
+### Bug Fixes
+
+* **Contact Info Avatar:** show avatar halo as required vue3 ([#1062](https://github.com/dialpad/dialtone-vue/issues/1062)) ([53a882c](https://github.com/dialpad/dialtone-vue/commit/53a882c3657ef9157e1967ec3978a1bd7bc4a789))
+* **General Row:** overridden display property - vue3 ([#1070](https://github.com/dialpad/dialtone-vue/issues/1070)) ([fd1703b](https://github.com/dialpad/dialtone-vue/commit/fd1703bbd725397df498f32b4fbc7e0b27e6cc36))
+
+
+### Documentation
+
+* **Collapsible:** fix opened event not displayed on panel ([#1065](https://github.com/dialpad/dialtone-vue/issues/1065)) ([a7c19c5](https://github.com/dialpad/dialtone-vue/commit/a7c19c5fbd68e1236e91abe64340695d2e669ce9))
+
+
+### Features
+
+* **Datepicker:** date format utils vue3 ([#1061](https://github.com/dialpad/dialtone-vue/issues/1061)) ([c0b4570](https://github.com/dialpad/dialtone-vue/commit/c0b45701cded29f0e480e21b6237d27de1271c0e))
+
+# [3.77.0-dialtone8-vue3.3](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.2...v3.77.0-dialtone8-vue3.3) (2023-07-11)
+
+
+### Bug Fixes
+
+* change prerelease name ([f8f9771](https://github.com/dialpad/dialtone-vue/commit/f8f977146d0fdaf2d4ade8f1f49b13f93a286e3b))
+
+# [3.77.0-dialtone8-vue3.2](https://github.com/dialpad/dialtone-vue/compare/v3.77.0-dialtone8-vue3.1...v3.77.0-dialtone8-vue3.2) (2023-07-11)
+
+
+### Bug Fixes
+
+* local config? ([6f6c27b](https://github.com/dialpad/dialtone-vue/commit/6f6c27b7f63f9a9d2a196f2fae0897287a9839ef))
+* remove peer dep for dt8 branch ([267a773](https://github.com/dialpad/dialtone-vue/commit/267a7730cdde04a000bcb7b0c7c6101648ad576b))
+
+# [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.2...v3.77.0-dialtone8-vue3.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+* local config? ([6f6c27b](https://github.com/dialpad/dialtone-vue/commit/6f6c27b7f63f9a9d2a196f2fae0897287a9839ef))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([64d097f](https://github.com/dialpad/dialtone-vue/commit/64d097fcae57a4f37ab55b4cf64739b9fa58b3cd))
+* remove peer dep for dt8 branch ([267a773](https://github.com/dialpad/dialtone-vue/commit/267a7730cdde04a000bcb7b0c7c6101648ad576b))
+
+
+### Features
+
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
+# [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.2...v3.77.0-dialtone8-vue3.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+* local config? ([6f6c27b](https://github.com/dialpad/dialtone-vue/commit/6f6c27b7f63f9a9d2a196f2fae0897287a9839ef))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([64d097f](https://github.com/dialpad/dialtone-vue/commit/64d097fcae57a4f37ab55b4cf64739b9fa58b3cd))
+* remove peer dep for dt8 branch ([267a773](https://github.com/dialpad/dialtone-vue/commit/267a7730cdde04a000bcb7b0c7c6101648ad576b))
+
+
+### Features
+
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
+# [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.2...v3.77.0-dialtone8-vue3.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([64d097f](https://github.com/dialpad/dialtone-vue/commit/64d097fcae57a4f37ab55b4cf64739b9fa58b3cd))
+* remove peer dep for dt8 branch ([267a773](https://github.com/dialpad/dialtone-vue/commit/267a7730cdde04a000bcb7b0c7c6101648ad576b))
+
+
+### Features
+
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
+# [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.2...v3.77.0-dialtone8-vue3.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([64d097f](https://github.com/dialpad/dialtone-vue/commit/64d097fcae57a4f37ab55b4cf64739b9fa58b3cd))
+* remove peer dep for dt8 branch ([72844a3](https://github.com/dialpad/dialtone-vue/commit/72844a3a38ac87de3aa186611690ee54ad2c6117))
+
+
+### Features
+
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
+# [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.2...v3.77.0-dialtone8-vue3.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([64d097f](https://github.com/dialpad/dialtone-vue/commit/64d097fcae57a4f37ab55b4cf64739b9fa58b3cd))
+
+
+### Features
+
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
+# [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.2...v3.77.0-dialtone8-vue3.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([64d097f](https://github.com/dialpad/dialtone-vue/commit/64d097fcae57a4f37ab55b4cf64739b9fa58b3cd))
+
+
+### Features
+
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
+# [3.77.0-next3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.1...v3.77.0-next3.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* **Item Layout:** remove align-self from item layout ([408032f](https://github.com/dialpad/dialtone-vue/commit/408032f2917d9c813810b68a917e6ee718b522ab))
+
+
+### Features
+
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
+
+# [3.77.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.76.0...v3.77.0-dialtone8-vue3.1) (2023-07-06)
 
 
 ### Code Refactoring
@@ -86,79 +295,11 @@
 ### Features
 
 * dialtone-vue3 dependency updates ([#1057](https://github.com/dialpad/dialtone-vue/issues/1057)) ([5a35e4d](https://github.com/dialpad/dialtone-vue/commit/5a35e4da020901c49784e25981e277b81501c0c6))
-* **Emoji Picker:** exported skin tones and categories ([#1063](https://github.com/dialpad/dialtone-vue/issues/1063)) ([6aafede](https://github.com/dialpad/dialtone-vue/commit/6aafedeaaa847ec8397279a882717c255468074a))
 * **Item Layout:** add component - vue3 ([#1054](https://github.com/dialpad/dialtone-vue/issues/1054)) ([3d825cd](https://github.com/dialpad/dialtone-vue/commit/3d825cd3848fc684e9e978c3f350844a137ded14))
+* merge branch 'staging-vue3' into dialtone8-vue3 ([317ade0](https://github.com/dialpad/dialtone-vue/commit/317ade0189bcd4096396e2af35bdd47fba03e6b5))
+* update item-layout to use tokens ([14cfa99](https://github.com/dialpad/dialtone-vue/commit/14cfa99a7f6317b52a052c3fe7471621b2d330ee))
 
-# [3.76.0](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0) (2023-07-07)
-
-
-### Bug Fixes
-
-* **Item Layout:** remove align-self from item layout ([f673bc8](https://github.com/dialpad/dialtone-vue/commit/f673bc8ccc725dffec13d08b5e3e8d811f0358ed))
-* **Message Input:** error notice message ([#1041](https://github.com/dialpad/dialtone-vue/issues/1041)) ([617382b](https://github.com/dialpad/dialtone-vue/commit/617382b534cae05221a81a1809334393c3e0f894))
-* **Message Input:** two way binding for message input value ([#1058](https://github.com/dialpad/dialtone-vue/issues/1058)) ([2b808ee](https://github.com/dialpad/dialtone-vue/commit/2b808eeedde2f00ee55a9f11d3d59dae605a5825))
-* modify release branch method ([3ced6c8](https://github.com/dialpad/dialtone-vue/commit/3ced6c8a89e750032cdf6ffaec6c4a1e122628e6))
-* remove unneeded branch ([6320d3a](https://github.com/dialpad/dialtone-vue/commit/6320d3a92ae5ff80cdb98eb1e58842dea3a49387))
-
-
-### Code Refactoring
-
-* **Datepicker:** migrate styles to dialtone vue3 ([#1051](https://github.com/dialpad/dialtone-vue/issues/1051)) ([c2f3b2c](https://github.com/dialpad/dialtone-vue/commit/c2f3b2cd49ab8689d2cc178e8f7f3605363c3aa3))
-* **Emoji Picker:** migrate styles to dialtone ([#1047](https://github.com/dialpad/dialtone-vue/issues/1047)) ([dbdb568](https://github.com/dialpad/dialtone-vue/commit/dbdb5680e22ef0b59cb7fc472259e2ce0e1bb014))
-
-
-### Features
-
-* dialtone-vue3 dependency updates ([#1057](https://github.com/dialpad/dialtone-vue/issues/1057)) ([5a35e4d](https://github.com/dialpad/dialtone-vue/commit/5a35e4da020901c49784e25981e277b81501c0c6))
-* **Emoji Picker:** exported skin tones and categories ([#1063](https://github.com/dialpad/dialtone-vue/issues/1063)) ([6aafede](https://github.com/dialpad/dialtone-vue/commit/6aafedeaaa847ec8397279a882717c255468074a))
-* **Item Layout:** add component - vue3 ([#1054](https://github.com/dialpad/dialtone-vue/issues/1054)) ([3d825cd](https://github.com/dialpad/dialtone-vue/commit/3d825cd3848fc684e9e978c3f350844a137ded14))
-
-# [3.76.0](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0) (2023-07-07)
-
-
-### Bug Fixes
-
-* **Item Layout:** remove align-self from item layout ([f673bc8](https://github.com/dialpad/dialtone-vue/commit/f673bc8ccc725dffec13d08b5e3e8d811f0358ed))
-* **Message Input:** error notice message ([#1041](https://github.com/dialpad/dialtone-vue/issues/1041)) ([617382b](https://github.com/dialpad/dialtone-vue/commit/617382b534cae05221a81a1809334393c3e0f894))
-* **Message Input:** two way binding for message input value ([#1058](https://github.com/dialpad/dialtone-vue/issues/1058)) ([2b808ee](https://github.com/dialpad/dialtone-vue/commit/2b808eeedde2f00ee55a9f11d3d59dae605a5825))
-* modify release branch method ([3ced6c8](https://github.com/dialpad/dialtone-vue/commit/3ced6c8a89e750032cdf6ffaec6c4a1e122628e6))
-* remove unneeded branch ([6320d3a](https://github.com/dialpad/dialtone-vue/commit/6320d3a92ae5ff80cdb98eb1e58842dea3a49387))
-
-
-### Code Refactoring
-
-* **Datepicker:** migrate styles to dialtone vue3 ([#1051](https://github.com/dialpad/dialtone-vue/issues/1051)) ([c2f3b2c](https://github.com/dialpad/dialtone-vue/commit/c2f3b2cd49ab8689d2cc178e8f7f3605363c3aa3))
-* **Emoji Picker:** migrate styles to dialtone ([#1047](https://github.com/dialpad/dialtone-vue/issues/1047)) ([dbdb568](https://github.com/dialpad/dialtone-vue/commit/dbdb5680e22ef0b59cb7fc472259e2ce0e1bb014))
-
-
-### Features
-
-* dialtone-vue3 dependency updates ([#1057](https://github.com/dialpad/dialtone-vue/issues/1057)) ([5a35e4d](https://github.com/dialpad/dialtone-vue/commit/5a35e4da020901c49784e25981e277b81501c0c6))
-* **Emoji Picker:** exported skin tones and categories ([#1063](https://github.com/dialpad/dialtone-vue/issues/1063)) ([6aafede](https://github.com/dialpad/dialtone-vue/commit/6aafedeaaa847ec8397279a882717c255468074a))
-* **Item Layout:** add component - vue3 ([#1054](https://github.com/dialpad/dialtone-vue/issues/1054)) ([3d825cd](https://github.com/dialpad/dialtone-vue/commit/3d825cd3848fc684e9e978c3f350844a137ded14))
-
-# [3.76.0](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0) (2023-07-07)
-
-
-### Bug Fixes
-
-* **Item Layout:** remove align-self from item layout ([f673bc8](https://github.com/dialpad/dialtone-vue/commit/f673bc8ccc725dffec13d08b5e3e8d811f0358ed))
-* **Message Input:** error notice message ([#1041](https://github.com/dialpad/dialtone-vue/issues/1041)) ([617382b](https://github.com/dialpad/dialtone-vue/commit/617382b534cae05221a81a1809334393c3e0f894))
-* **Message Input:** two way binding for message input value ([#1058](https://github.com/dialpad/dialtone-vue/issues/1058)) ([2b808ee](https://github.com/dialpad/dialtone-vue/commit/2b808eeedde2f00ee55a9f11d3d59dae605a5825))
-
-
-### Code Refactoring
-
-* **Datepicker:** migrate styles to dialtone vue3 ([#1051](https://github.com/dialpad/dialtone-vue/issues/1051)) ([c2f3b2c](https://github.com/dialpad/dialtone-vue/commit/c2f3b2cd49ab8689d2cc178e8f7f3605363c3aa3))
-* **Emoji Picker:** migrate styles to dialtone ([#1047](https://github.com/dialpad/dialtone-vue/issues/1047)) ([dbdb568](https://github.com/dialpad/dialtone-vue/commit/dbdb5680e22ef0b59cb7fc472259e2ce0e1bb014))
-
-
-### Features
-
-* dialtone-vue3 dependency updates ([#1057](https://github.com/dialpad/dialtone-vue/issues/1057)) ([5a35e4d](https://github.com/dialpad/dialtone-vue/commit/5a35e4da020901c49784e25981e277b81501c0c6))
-* **Item Layout:** add component - vue3 ([#1054](https://github.com/dialpad/dialtone-vue/issues/1054)) ([3d825cd](https://github.com/dialpad/dialtone-vue/commit/3d825cd3848fc684e9e978c3f350844a137ded14))
-
-# [3.76.0](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0) (2023-06-30)
+# [3.76.0-dialtone8-vue3.1](https://github.com/dialpad/dialtone-vue/compare/v3.75.2...v3.76.0-dialtone8-vue3.1) (2023-06-29)
 
 
 ### Bug Fixes
@@ -168,7 +309,7 @@
 
 ### Features
 
-* **Item Layout:** add component - vue3 ([#1054](https://github.com/dialpad/dialtone-vue/issues/1054)) ([3d825cd](https://github.com/dialpad/dialtone-vue/commit/3d825cd3848fc684e9e978c3f350844a137ded14))
+* migration to dialtone 8 ([eed043d](https://github.com/dialpad/dialtone-vue/commit/eed043d129757cef36c9a2e94646f16f9f81fe7d))
 
 ## [3.75.2](https://github.com/dialpad/dialtone-vue/compare/v3.75.1...v3.75.2) (2023-06-29)
 

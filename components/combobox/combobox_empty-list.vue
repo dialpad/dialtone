@@ -51,8 +51,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--fs-200);
+  font-size: var(--dt-font-size-200);
   line-height: var(--lh4);
-  padding: var(--space-300) var(--space-450);
+  padding: var(--dt-space-300) var(--dt-space-450);
 }
 </style>
