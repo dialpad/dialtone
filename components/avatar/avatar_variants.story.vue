@@ -5,7 +5,7 @@
       <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
           v-for="size in avatarSizes"
-          :key="`default-${size}`"
+          :key="`image-${size}`"
           :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Image"
@@ -18,7 +18,7 @@
       <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
           v-for="size in avatarSizes"
-          :key="`default-${size}`"
+          :key="`initials-${size}`"
           :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Icon"
@@ -30,7 +30,7 @@
       <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
           v-for="size in avatarSizes"
-          :key="`default-${size}`"
+          :key="`icon-${size}`"
           :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Icon"
@@ -41,19 +41,34 @@
     <div>
       <h2>Presence</h2>
       <div class="d-flow16 d-d-flex d-ai-center">
-        <div
+        <dt-avatar
           v-for="size in avatarSizes"
-          :key="`default-${size}`"
-          class="d-d-inline-flex"
-        >
-          <dt-avatar
-            :seed="$attrs.seed"
-            :size="size"
-            full-name="Person avatar"
-            presence="busy"
-            image-src="/common/assets/person.png"
-          />
-        </div>
+          :key="`presence-${size}`"
+          :seed="$attrs.seed"
+          :size="size"
+          full-name="Person avatar"
+          presence="busy"
+          image-src="/common/assets/person.png"
+        />
+      </div>
+    </div>
+    <div>
+      <h2>Overlay</h2>
+      <div class="d-flow16 d-d-flex">
+        <dt-avatar
+          :seed="$attrs.seed"
+          size="xl"
+          full-name="Person avatar"
+          image-src="/common/assets/person.png"
+          overlay-icon="hear"
+        />
+        <dt-avatar
+          :seed="$attrs.seed"
+          size="xl"
+          full-name="Person avatar"
+          image-src="/common/assets/person.png"
+          overlay-text="+3"
+        />
       </div>
     </div>
   </div>

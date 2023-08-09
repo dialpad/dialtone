@@ -142,6 +142,13 @@ export const WithIcon = {
 export const WithAvatar = {
   render: Template,
 
+  parameters: {
+    percy: {
+      args: {
+        avatarSeed: 'seed',
+      },
+    },
+  },
   args: {
     ...Default.args,
     avatar: 'Jaqueline Nackos',

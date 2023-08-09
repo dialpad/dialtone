@@ -26,6 +26,7 @@
     >
       <dt-avatar
         :full-name="$attrs.avatar"
+        :seed="$attrs.avatarSeed"
       />
     </template>
     <v-html :html="defaultSlot" />
