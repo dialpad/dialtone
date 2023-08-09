@@ -26,6 +26,7 @@
     >
       <dt-avatar
         :full-name="avatar"
+        :seed="avatarSeed"
       />
     </template>
     <span
