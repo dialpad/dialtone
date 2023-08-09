@@ -1,3 +1,10 @@
+## [3.80.2](https://github.com/dialpad/dialtone-vue/compare/v3.80.1...v3.80.2) (2023-08-09)
+
+
+### Bug Fixes
+
+* **Avatar:** overlay icon alignment - vue3 ([#1116](https://github.com/dialpad/dialtone-vue/issues/1116)) ([15f9903](https://github.com/dialpad/dialtone-vue/commit/15f990325c0e1286ca9668e3e7cacfaf4e91e2c2))
+
 ## [3.80.1](https://github.com/dialpad/dialtone-vue/compare/v3.80.0...v3.80.1) (2023-08-04)
 
 
