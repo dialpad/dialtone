@@ -1,17 +1,12 @@
 .dt-leftbar-row {
-
-  // TODO: reconcile Theme colors, which probably means use them but
-  //       update https://dialpad.design/design/colors/#theme in dialtone.css
-  //       to reflect the new design
-
   //  ============================================================================
   //  $   CSS CUSTOM PROPERTIES
   //  ----------------------------------------------------------------------------
-  --leftbar-row-color-foreground: var(--theme-sidebar-color);
-  --leftbar-row-color-background: var(--theme-sidebar-row-color-background);
+  --leftbar-row-color-foreground: var(--dt-theme-sidebar-color-foreground);
+  --leftbar-row-color-background: var(--dt-theme-sidebar-row-color-background);
   --leftbar-row-radius: 100em;
   --leftbar-row-opacity: 100%;
-  --leftbar-row-alpha-color-foreground: var(--theme-sidebar-icon-color);
+  --leftbar-row-alpha-color-foreground: var(--dt-theme-sidebar-icon-color-foreground);
   --leftbar-row-alpha-width: calc(var(--dt-size-300) * 10);
   --leftbar-row-alpha-height: calc(var(--dt-size-300) * 9);
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
@@ -19,7 +14,7 @@
   --leftbar-row-description-font-weight: var(--dt-font-weight-normal);
   --leftbar-row-description-font-size: var(--dt-font-size-200);
   --leftbar-row-description-line-height: var(--dt-font-line-height-200);
-  --leftbar-row-status-color-foreground: var(--theme-sidebar-status-color);
+  --leftbar-row-status-color-foreground: var(--dt-theme-sidebar-status-color-foreground);
   --leftbar-row-status-font-size: var(--dt-font-size-100);
   --leftbar-row-status-line-height: var(--dt-font-line-height-100);
   --leftbar-row-action-position-right: var(--dt-size-400);
@@ -33,7 +28,7 @@
   position: relative;
   opacity: var(--leftbar-row-opacity);
   display: flex;
-  background-color: var(--theme-sidebar-row-color-background);
+  background-color: var(--dt-theme-sidebar-row-color-background);
   border-radius: var(--leftbar-row-radius);
   transition-duration: var(--td200);
   transition-property: background-color, border, box-shadow;
@@ -62,14 +57,14 @@
   }
 
   &:hover, &:focus-within {
-    --leftbar-row-color-background: var(--theme-sidebar-row-color-background-hover);
+    --leftbar-row-color-background: var(--dt-theme-sidebar-row-color-background-hover);
 
     &:deep(.d-presence) {
       --presence-color-border-base: var(--dt-color-black-200);
     }
 
     &:deep(.d-avatar__count) {
-      --avatar-count-color-shadow: var(--theme-sidebar-selected-row-color-background);
+      --avatar-count-color-shadow: var(--dt-theme-sidebar-selected-row-color-background);
     }
   }
 
@@ -89,15 +84,15 @@
   }
 
   &--selected {
-    --leftbar-row-color-background: var(--theme-sidebar-selected-row-color-background);
-    --leftbar-row-color-foreground: var(--theme-sidebar-selected-row-color);
+    --leftbar-row-color-background: var(--dt-theme-sidebar-selected-row-color-background);
+    --leftbar-row-color-foreground: var(--dt-theme-sidebar-selected-row-color-foreground);
 
     &:deep(.d-presence) {
       --presence-color-border-base: var(--dt-color-black-200);
     }
 
     &:deep(.d-avatar__count) {
-      --avatar-count-color-shadow: var(--theme-sidebar-selected-row-color-background);
+      --avatar-count-color-shadow: var(--dt-theme-sidebar-selected-row-color-background);
     }
   }
 
@@ -169,7 +164,7 @@
     border-radius: var(--leftbar-row-radius);
 
     &:active {
-      --leftbar-row-color-background: var(--theme-sidebar-row-color-background-active);
+      --leftbar-row-color-background: var(--dt-theme-sidebar-row-color-background-active);
     }
 
     &:focus-visible {
@@ -201,7 +196,7 @@
     padding-right: var(--dt-space-400);
     width: var(--leftbar-row-alpha-width);
     height: var(--leftbar-row-alpha-height);
-    border-radius: var(--leftbar-row-radius) 0 0 var(--leftbar-row-radius);;
+    border-radius: var(--leftbar-row-radius) 0 0 var(--leftbar-row-radius);
   }
 
   &__label {
@@ -281,7 +276,7 @@
   &__meta-custom:not(:empty) {
     &:deep(.dt-leftbar-row__meta-context ~ &:before) {
       content: ' • ';
-      color: var(--theme-sidebar-status-color);
+      color: var(--dt-theme-sidebar-status-color-foreground);
     }
   }
 
