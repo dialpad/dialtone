@@ -1,3 +1,10 @@
+# [2.94.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v2.94.0-beta.1...v2.94.0-beta.2) (2023-08-15)
+
+
+### Bug Fixes
+
+* apply unread color to description ([8efadc0](https://github.com/dialpad/dialtone-vue/commit/8efadc06f588ca243e32663157c75c98d383bec6))
+
 # [2.94.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.93.2...v2.94.0-beta.1) (2023-08-15)
 
 
