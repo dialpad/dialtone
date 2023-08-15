@@ -11,6 +11,7 @@
   --leftbar-row-alpha-height: calc(var(--dt-size-300) * 9);
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
   --leftbar-row-unread-badge-display: inline-flex;
+  --leftbar-row-description-color-foreground: var(--dt-theme-sidebar-color-foreground)
   --leftbar-row-description-font-weight: var(--dt-font-weight-normal);
   --leftbar-row-description-font-size: var(--dt-font-size-200);
   --leftbar-row-description-line-height: var(--dt-font-line-height-200);
@@ -70,7 +71,8 @@
 
   &--has-unread {
     --leftbar-row-description-font-weight: var(--dt-font-weight-bold);
-    --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foreground);
+    --leftbar-row-description-color-foreground: var(--dt-theme-sidebar-color-foreground-unread);
+    --leftbar-row-alpha-color-foreground: var(--dt-theme-sidebar-color-foreground-unread);
   }
 
   &--unread-count {
@@ -253,6 +255,7 @@
     font-weight: var(--leftbar-row-description-font-weight);
     font-size: var(--leftbar-row-description-font-size);
     line-height: var(--leftbar-row-description-line-height);
+    color: var(--leftbar-row-description-color-foreground);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
