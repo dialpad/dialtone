@@ -1,3 +1,10 @@
+# [2.94.0](https://github.com/dialpad/dialtone-vue/compare/v2.93.2...v2.94.0) (2023-08-16)
+
+
+### Features
+
+* update theme variables in dt-vue ([#1121](https://github.com/dialpad/dialtone-vue/issues/1121)) ([ce7319d](https://github.com/dialpad/dialtone-vue/commit/ce7319d71f4a1f7dbbda4a896404b1d838bb3f57))
+
 ## [2.93.2](https://github.com/dialpad/dialtone-vue/compare/v2.93.1...v2.93.2) (2023-08-09)
 
 
