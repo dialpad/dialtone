@@ -1994,18 +1994,15 @@
         },
         "warning": {
           "value": "{color.foreground.warning}",
-          "type": "color",
-          "description": "positive"
+          "type": "color"
         },
         "muted": {
           "value": "{color.foreground.secondary}",
-          "type": "color",
-          "description": "positive"
+          "type": "color"
         },
         "disabled": {
           "value": "{color.foreground.disabled}",
-          "type": "color",
-          "description": "positive"
+          "type": "color"
         },
         "primary-inverted": {
           "value": "{color.purple.300}",
@@ -2017,23 +2014,19 @@
         },
         "success-inverted": {
           "value": "{color.foreground.success-inverted}",
-          "type": "color",
-          "description": "positive"
+          "type": "color"
         },
         "warning-inverted": {
           "value": "{color.foreground.warning-inverted}",
-          "type": "color",
-          "description": "positive"
+          "type": "color"
         },
         "muted-inverted": {
           "value": "{color.foreground.secondary-inverted}",
-          "type": "color",
-          "description": "positive"
+          "type": "color"
         },
         "disabled-inverted": {
           "value": "{color.foreground.disabled-inverted}",
-          "type": "color",
-          "description": "positive"
+          "type": "color"
         },
         "primary-hover": {
           "value": "{color.purple.500}",
@@ -3704,18 +3697,6 @@
   "semantic/dark": {
     "color": {
       "foreground": {
-        "primary": {
-          "value": "{color.black.900}",
-          "type": "color"
-        },
-        "secondary": {
-          "value": "{color.black.700}",
-          "type": "color"
-        },
-        "tertiary": {
-          "value": "{color.black.600}",
-          "type": "color"
-        },
         "muted": {
           "value": "rgba($color.black.800, 0.6)",
           "type": "color"
@@ -3746,11 +3727,6 @@
               }
             }
           }
-        },
-        "success": {
-          "value": "{color.green.400}",
-          "type": "color",
-          "description": "positive"
         },
         "success-strong": {
           "value": "{color.foreground.success}",
@@ -3783,18 +3759,6 @@
           "value": "{color.black.400}",
           "type": "color"
         },
-        "muted-inverted": {
-          "value": "rgba($color.black.200, 0.6)",
-          "type": "color"
-        },
-        "placeholder-inverted": {
-          "value": "{color.black.500}",
-          "type": "color"
-        },
-        "disabled-inverted": {
-          "value": "{color.black.500}",
-          "type": "color"
-        },
         "critical-inverted": {
           "value": "{color.red.300}",
           "type": "color"
@@ -3803,16 +3767,8 @@
           "value": "{color.red.200}",
           "type": "color"
         },
-        "success-inverted": {
-          "value": "{color.green.200}",
-          "type": "color"
-        },
         "success-strong-inverted": {
           "value": "{color.green.100}",
-          "type": "color"
-        },
-        "warning-inverted": {
-          "value": "{color.gold.100}",
           "type": "color"
         }
       },
@@ -3830,79 +3786,20 @@
             }
           }
         },
-        "critical": {
-          "value": "{color.foreground.critical}",
-          "type": "color"
-        },
-        "success": {
-          "value": "{color.foreground.success}",
-          "type": "color",
-          "description": "positive"
-        },
-        "warning": {
-          "value": "{color.foreground.warning}",
-          "type": "color",
-          "description": "positive"
-        },
-        "disabled": {
-          "value": "{color.foreground.disabled}",
-          "type": "color",
-          "description": "positive"
-        },
-        "primary-hover": {
-          "value": "{color.purple.500}",
-          "type": "color"
-        },
         "critical-hover": {
           "value": "{color.red.500}",
-          "type": "color"
-        },
-        "success-hover": {
-          "value": "{color.green.500}",
           "type": "color"
         },
         "warning-hover": {
           "value": "{color.gold.500}",
           "type": "color"
         },
-        "disabled-hover": {
-          "value": "{color.link.disabled}",
-          "type": "color"
-        },
-        "primary-inverted": {
-          "value": "{color.purple.300}",
-          "type": "color"
-        },
-        "primary-inverted-hover": {
-          "value": "{color.purple.200}",
-          "type": "color"
-        },
-        "critical-inverted": {
-          "value": "{color.foreground.critical-inverted}",
-          "type": "color"
-        },
         "critical-inverted-hover": {
           "value": "{color.red.200}",
           "type": "color"
         },
-        "success-inverted": {
-          "value": "{color.foreground.success-inverted}",
-          "type": "color"
-        },
-        "success-inverted-hover": {
-          "value": "{color.foreground.success-strong-inverted}",
-          "type": "color"
-        },
-        "warning-inverted": {
-          "value": "{color.foreground.warning-inverted}",
-          "type": "color"
-        },
         "warning-inverted-hover": {
           "value": "{color.black.200}",
-          "type": "color"
-        },
-        "disabled-inverted": {
-          "value": "{color.foreground.disabled-inverted}",
           "type": "color"
         },
         "disabled-inverted-hover": {
@@ -5527,47 +5424,24 @@
         "color.border.brand-strong-inverted": "S:b16332a64fcfbac2be41de59958de325eb48f4d0,",
         "badge.color.foreground.default": "S:435110adbd6717ac61d470d910672f0bf8002f64,",
         "badge.color.foreground.bulletin": "S:3c32047a4e1eb7aae5dc489f4154d8625f25a8f5,",
-        "color.foreground.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
-        "color.foreground.secondary": "S:c7a6132c4c0fd9e51a16b54ee4b89f49717241d9,",
-        "color.foreground.tertiary": "S:46c0dbd118f6da35e9ac00d7586143750f65076f,",
         "color.foreground.muted": "S:a35b59ddb9ce5fdd819e79f3d7889c0497b6cf12,",
         "color.foreground.placeholder": "S:a9bd80b7d060adddf03e23a7582568d86e95010f,",
         "color.foreground.disabled": "S:c8f04cae8fa4f95c3f7009c3a6d4f0232cb72a81,",
         "color.foreground.critical": "S:b53c3459307f62de7b6f7d994d1b8fdc1974c960,",
         "color.foreground.critical-strong": "S:10b9ebd49873a5371a8a90ea101c3b346ea7e6d1,",
-        "color.foreground.success": "S:bcaf110e88452072b2463d853de1560f6a22892d,",
         "color.foreground.success-strong": "S:e76a14e3ba907c5a3fb24618a50c839fcce19cfc,",
         "color.foreground.warning": "S:3954b50602fa05092545e85b7a9764d4ef2396e3,",
         "color.foreground.primary-inverted": "S:01bd99dd2eb1e89a9890f1b89063631a046a263c,",
         "color.foreground.secondary-inverted": "S:f2f2c38dd7f0a81b61c206d86c6e2bc6b7448e65,",
         "color.foreground.tertiary-inverted": "S:45457c63afd11989a87c8274785cb3db117ee0b2,",
-        "color.foreground.muted-inverted": "S:6c7fa4f28d68f175a1dc994109c8769acb805825,",
-        "color.foreground.placeholder-inverted": "S:9a5db8f3d994d6430cfd3dca0d10366b254aa6bd,",
-        "color.foreground.disabled-inverted": "S:06d03c239fb54a632eb3189f966af42706b83a68,",
         "color.foreground.critical-inverted": "S:ad74bd8da90ec23f089d989ed8c97f5f4e43961b,",
         "color.foreground.critical-strong-inverted": "S:a0bd7a28dc43109b6de40c910465d96c882a2f7a,",
-        "color.foreground.success-inverted": "S:6171597abc6afe242cd5b10dc67bf455c645cbd5,",
         "color.foreground.success-strong-inverted": "S:250cb466ec58060848dd1b17d32bf3db7db22614,",
-        "color.foreground.warning-inverted": "S:7a4bbb3198bdb6ccd303d5366aeb65913cf4148e,",
         "color.link.primary": "S:057b17c2e38419bd6f2ec18be60d46d1e97024e5,",
-        "color.link.critical": "S:c1d16856a3b72348242afacadd882fde120e8e13,",
-        "color.link.success": "S:cca86e31ae79804be6ebd728f0b5d88bdc39c32e,",
-        "color.link.warning": "S:8afe636906a929e2e4ed765589acfc9f165f6fb7,",
-        "color.link.disabled": "S:16f9f3c9a7a17403a4763c65dda5622dc32436e5,",
-        "color.link.primary-hover": "S:a4dce5fc2031d4f08e678be72f876d5baca4e6a8,",
         "color.link.critical-hover": "S:b295dea2b5a518f5e2f9bb1fc80f85dc73c52f6b,",
-        "color.link.success-hover": "S:f4ba588ae76c568a6fb770302cd13e3c17fd1603,",
         "color.link.warning-hover": "S:139ded8af98183844714d63ed7db66974758b39f,",
-        "color.link.disabled-hover": "S:24c31c35126f3356deba8941571cda06040ecf9a,",
-        "color.link.primary-inverted": "S:98c388e2020c1e93c24c003dd635b822839fbbbf,",
-        "color.link.primary-inverted-hover": "S:3978ae24d728ed82cecc092de19c99844a2e0da6,",
-        "color.link.critical-inverted": "S:a4738a475ca3ccf9d493fa0e781c2a1583399877,",
         "color.link.critical-inverted-hover": "S:53bf6dc5436dbad2b659dbc2eefbe3a7629c9b51,",
-        "color.link.success-inverted": "S:7d666b8b4df052d6fde78213622f39a562b8da4d,",
-        "color.link.success-inverted-hover": "S:b8dfda3615460631631ccb79c1511e1682ac0184,",
-        "color.link.warning-inverted": "S:23004d82c69edc28588b74fbc31fa6ba58f05666,",
         "color.link.warning-inverted-hover": "S:58e8d185fd45eb649459b810b5804c1c4b41e785,",
-        "color.link.disabled-inverted": "S:f6e16920ac744b508ae53be035bc0f5307910df1,",
         "color.link.disabled-inverted-hover": "S:6dca69cc931b6cfc5881b3d5a907e08265c6a253,",
         "color.surface.secondary-opaque": "S:fcac5ac71509870b22c60aae84e3f9e9adef4909,",
         "color.surface.moderate-opaque": "S:e1f5b70620515fcf8029fef3d8ac0441cfc7e639,",
@@ -5638,7 +5512,30 @@
         "color.link.muted": "S:32b6f1f0cdbbcdd8160141026045e9f6d54abb25,",
         "color.link.muted-inverted": "S:26edafc7e5e1546896d979aa2c5ec8bc72ab4412,",
         "color.link.muted-hover": "S:eebc473319ba2768ca743aa16d66c89c2bb99b11,",
-        "color.link.muted-inverted-hover": "S:6defaf5afcb3a06fdbe24e5d63ea6ff5f64eb99c,"
+        "color.link.muted-inverted-hover": "S:6defaf5afcb3a06fdbe24e5d63ea6ff5f64eb99c,",
+        "color.foreground.warning-inverted": "S:7a4bbb3198bdb6ccd303d5366aeb65913cf4148e,",
+        "color.foreground.success-inverted": "S:6171597abc6afe242cd5b10dc67bf455c645cbd5,",
+        "color.foreground.disabled-inverted": "S:06d03c239fb54a632eb3189f966af42706b83a68,",
+        "color.foreground.placeholder-inverted": "S:9a5db8f3d994d6430cfd3dca0d10366b254aa6bd,",
+        "color.foreground.muted-inverted": "S:6c7fa4f28d68f175a1dc994109c8769acb805825,",
+        "color.foreground.success": "S:bcaf110e88452072b2463d853de1560f6a22892d,",
+        "color.foreground.tertiary": "S:46c0dbd118f6da35e9ac00d7586143750f65076f,",
+        "color.foreground.primary": "S:9d57bb12374da844fa57401cd99965a9997c26ee,",
+        "color.foreground.secondary": "S:c7a6132c4c0fd9e51a16b54ee4b89f49717241d9,",
+        "color.link.success-inverted-hover": "S:b8dfda3615460631631ccb79c1511e1682ac0184,",
+        "color.link.primary-inverted-hover": "S:3978ae24d728ed82cecc092de19c99844a2e0da6,",
+        "color.link.disabled-hover": "S:24c31c35126f3356deba8941571cda06040ecf9a,",
+        "color.link.success-hover": "S:f4ba588ae76c568a6fb770302cd13e3c17fd1603,",
+        "color.link.primary-hover": "S:a4dce5fc2031d4f08e678be72f876d5baca4e6a8,",
+        "color.link.disabled-inverted": "S:f6e16920ac744b508ae53be035bc0f5307910df1,",
+        "color.link.warning-inverted": "S:23004d82c69edc28588b74fbc31fa6ba58f05666,",
+        "color.link.critical-inverted": "S:a4738a475ca3ccf9d493fa0e781c2a1583399877,",
+        "color.link.success-inverted": "S:7d666b8b4df052d6fde78213622f39a562b8da4d,",
+        "color.link.primary-inverted": "S:98c388e2020c1e93c24c003dd635b822839fbbbf,",
+        "color.link.disabled": "S:16f9f3c9a7a17403a4763c65dda5622dc32436e5,",
+        "color.link.warning": "S:8afe636906a929e2e4ed765589acfc9f165f6fb7,",
+        "color.link.success": "S:cca86e31ae79804be6ebd728f0b5d88bdc39c32e,",
+        "color.link.critical": "S:c1d16856a3b72348242afacadd882fde120e8e13,"
       },
       "selectedTokenSets": {
         "base/dark": "enabled",
