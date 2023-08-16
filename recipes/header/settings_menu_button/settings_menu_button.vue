@@ -4,7 +4,7 @@
     importance="outlined"
     size="xs"
     icon-position="right"
-    class="d-h32 d-bar-pill d-bgc-blue-200 d-bgo25 h:d-bgo50 d-bc-blue-500 d-bco25 d-fc-blue-500"
+    class="settings-menu-button-update"
     :aria-label="ariaLabel"
     v-on="$listeners"
   >
@@ -13,7 +13,6 @@
       <dt-icon
         name="more-vertical"
         size="300"
-        class="d-fc-blue-500"
       />
     </template>
   </dt-button>
@@ -21,7 +20,7 @@
     v-else
     importance="clear"
     kind="inverted"
-    class="settings-menu-button d-p0 d-bar24 d-h32 d-w24 d-theme-topbar-fc"
+    class="settings-menu-button"
     :aria-label="ariaLabel"
     v-on="$listeners"
   >
@@ -80,18 +79,34 @@ export default {
 </script>
 
 <style scoped lang="less">
-.d-btn:active {
-  --bgo: 85% !important;
-}
-
 .settings-menu-button {
+  padding: var(--dt-space-0);
+  border-radius: var(--dt-size-550);
+  height: var(--dt-size-600);
+  width: var(--dt-size-550);
+  color: var(--dt-theme-topbar-button-color-foreground);
+  background-color: var(--dt-theme-topbar-button-color-background);
+
   &:hover {
-    background-color: hsla(var(--theme-topbar-color-hsl) / .05);
+    background-color: var(--dt-theme-topbar-button-color-background-hover);
+    color: var(--dt-theme-topbar-button-color-foreground-hover);
   }
 
-  &:focus-visible {
-    color: var(--theme-topbar-color-hsl);
-    box-shadow: 0 0 0 var(--dt-size-200) hsla(var(--theme-sidebar-color-hsl) / .15);
+  &:active {
+    background-color: var(--dt-theme-topbar-button-color-background-active);
+  }
+}
+
+.settings-menu-button-update {
+  background-color: hsla(var(--dt-color-blue-200-hsl) / 25%);
+  color: var(--dt-color-blue-500);
+  border-color: hsla(var(--dt-color-blue-200-hsl) / 25%);
+  border-radius: var(--dt-size-radius-pill);
+  height: var(--dt-size-600);
+
+  &:hover {
+    background-color: hsla(var(--dt-color-blue-200-hsl) / 50%);
+    color: var(--dt-theme-topbar-button-color-foreground-hover);
   }
 }
 </style>
