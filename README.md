@@ -15,21 +15,21 @@ Dialtone Vue is available in Vue 2 as well as Vue 3:
 
 You can install the Dialtone Vue library into your project via the following commands:
 
-- Vue 2: `npm install @dialpad/dialtone-vue`
-- Vue 3: `npm install @dialpad/dialtone-vue@vue3`
+- Vue 2: `npm install @dialpad/dialtone @dialpad/dialtone-vue`
+- Vue 3: `npm install @dialpad/dialtone @dialpad/dialtone-vue@vue3`
 
 ## Usage
 
-First you must globally import the css:
+First you must globally import Dialtone's css:
 
 ```js
-import '@dialpad/dialtone-vue/css';
+import '@dialpad/dialtone/lib/dist/css/dialtone.min.css';
 ```
 
 or
 
 ```css
-@import 'node_modules/@dialpad/dialtone-vue/dist/style.css';
+@import 'node_modules/@dialpad/dialtone/lib/dist/css/dialtone.min.css';
 ```
 
 Dialtone Vue components can be imported directly from the package. Some components also export named constants, which can be imported as well:
@@ -44,11 +44,13 @@ Projects using Dialtone Vue should be aware of the requirements:
 - A tool like Webpack must be used to package the SFC components from Dialtone Vue.
 - LESS preprocessor support for Vue SFC `<style>` blocks.
 
-These requirements are enforced via peerdependencies of Dialtone Vue when possible.
+These requirements are enforced via peer dependencies of Dialtone Vue when possible.
 
 ## Emojis
 
-Dialtone Vue uses [JoyPixels](https://www.joypixels.com/) to render emojis. If you are using the emoji components, Dialtone Vue will use the free joypixels assets hosted on jsdelivr CDN by default. You may wish to use self hosted joypixels assets such as the SVGs only available to premium license holders. In order to do this, set your custom asset URL with the following functions for small and large emojis during initialization of your app:
+Dialtone Vue uses [JoyPixels](https://www.joypixels.com/) to render emojis. If you are using the emoji components, Dialtone Vue will use the free JoyPixels assets hosted on JSDelivr CDN by default. 
+You may wish to use self-hosted JoyPixels assets such as the SVGs only available to premium license holders. 
+In order to do this, set your custom asset URL with the following functions for small and large emojis during initialization of your app:
 
 ```js
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@dialpad/dialtone-vue/emoji'
@@ -92,4 +94,4 @@ Requesting a feature or reporting a bug? Please do so at the below links:
 - [Request Feature](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428)
 - [Report Bug](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428)
 
-Please also feel free to contact us via the [#dialtone slack channel](https://dialpad.slack.com/messages/dialtone/) with any questions
+Please also feel free to contact us via the [#dialtone Slack channel](https://dialpad.slack.com/messages/dialtone/) with any questions
