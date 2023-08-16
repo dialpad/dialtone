@@ -5425,7 +5425,14 @@
         "color.border.success": "S:051f329df222b3ad58317bbeeb9ad58cc0238615,",
         "color.border.warning": "S:3f3e987e6522d70e7a33bf580b4b0263056ed350,",
         "color.border.success-inverted": "S:c619d73dac28e8cab92f09460e69420f3baba686,",
-        "color.border.warning-inverted": "S:1729a7047ad82873c5a25f680e95d9eca0a92bda,"
+        "color.border.warning-inverted": "S:1729a7047ad82873c5a25f680e95d9eca0a92bda,",
+        "inputs.color.foreground.placeholder": "S:c895809280d946e194e683c2f287919802d4c3c5,",
+        "inputs.color.foreground.disabled": "S:5850cc09d2e8f36baf53c1cc8afda070f898c362,",
+        "inputs.color.border.focus": "S:fa04a078de2efd25d134d58afa88b5aae08e4490,",
+        "inputs.color.border.critical": "S:cd32e20a14d569696b9deec01dd68b4c3cedb60f,",
+        "inputs.color.border.success": "S:3e6fdf080f15e6deaa3ee9a268179190d6e496b1,",
+        "inputs.color.border.warning": "S:a61ba4e58db89699549293ded34c3265b07c07f9,",
+        "inputs.color.border.disabled": "S:c3f95ca261811da42f7f0ef3906b741ab9ccaf43,"
       },
       "selectedTokenSets": {
         "base/dark": "enabled",
