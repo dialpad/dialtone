@@ -4194,36 +4194,6 @@
           "default": {
             "value": "{color.foreground.primary}",
             "type": "color"
-          },
-          "placeholder": {
-            "value": "{color.foreground.placeholder}",
-            "type": "color"
-          },
-          "disabled": {
-            "value": "{color.foreground.disabled}",
-            "type": "color"
-          }
-        },
-        "border": {
-          "focus": {
-            "value": "{color.border.focus}",
-            "type": "color"
-          },
-          "critical": {
-            "value": "{color.border.critical}",
-            "type": "color"
-          },
-          "success": {
-            "value": "{color.border.success}",
-            "type": "color"
-          },
-          "warning": {
-            "value": "{color.border.warning}",
-            "type": "color"
-          },
-          "disabled": {
-            "value": "{color.neutral.transparent}",
-            "type": "color"
           }
         },
         "background": {
@@ -5229,10 +5199,6 @@
         "checkbox.color.border.unchecked": "S:5e87b940b902d4b12658f4827837ea6ac98a63e3,",
         "color.border.critical": "S:596b60284df51fe92dcc1e6a16a1374b5c2f3824,",
         "color.neutral.transparent": "S:ecdc357056d1a049b43160f4cf098e6f9c4b9278,",
-        "inputs.color.border.focus": "S:fa04a078de2efd25d134d58afa88b5aae08e4490,",
-        "inputs.color.border.critical": "S:cd32e20a14d569696b9deec01dd68b4c3cedb60f,",
-        "inputs.color.border.warning": "S:a61ba4e58db89699549293ded34c3265b07c07f9,",
-        "inputs.color.border.disabled": "S:c3f95ca261811da42f7f0ef3906b741ab9ccaf43,",
         "inputs.color.background.default": "S:a3a877887fba8a8aa1ea5c6cf60bdfca1fa2630e,",
         "inputs.color.background.focus": "S:15c63c1089d6caa0a997cffe698308cee8bcfce3,",
         "inputs.color.background.disabled": "S:67bed431fedfe92974b53a55cf2c811cd7295054,",
@@ -5320,7 +5286,6 @@
         "color.border.warning-strong": "S:4028347a1c92140afe59df77c102a08914a94e66,",
         "color.border.brand-subtle": "S:c8d412f2f80888f03dfca1526eb07fed80350975,",
         "color.border.brand-strong": "S:b7e238f4853270c8f129eb062aaf67a4de42dc84,",
-        "inputs.color.border.success": "S:3e6fdf080f15e6deaa3ee9a268179190d6e496b1,",
         "color.border.ai": "S:ff752e9ad7d5ac5acfa216a7b5165468624c0380,",
         "badge.color.background.default": "S:46515656b0f57d4ba86fd6167cbbaf94f1dc6d65,",
         "inputs.color.border.default": "S:c255ccccc6f25bfee995005d54d8967b0e6f16e0,",
@@ -5364,8 +5329,6 @@
         "color.surface.info-opaque": "S:2c9082f617333999e117cb3d4dd63876ad2cf4bd,",
         "color.surface.info-subtle-opaque": "S:3fec5783d87698de39f5619bc69048fc5adf0cc6,",
         "inputs.color.foreground.default": "S:d6e7874175cd0c297dc2a90b82369417581d88f5,",
-        "inputs.color.foreground.placeholder": "S:c895809280d946e194e683c2f287919802d4c3c5,",
-        "inputs.color.foreground.disabled": "S:5850cc09d2e8f36baf53c1cc8afda070f898c362,",
         "color.surface.strong-opaque": "S:87a5dc31bfee05b0898a6751806513a56bef92dd,",
         "color.surface.contrast-opaque": "S:72b6a02b928305c715288e25edabe33071a71dae,",
         "avatar.color.foreground": "S:0f83a36f1f9c7c774a33de74558097f76f806db9,",
