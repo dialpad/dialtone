@@ -4166,10 +4166,6 @@
             }
           }
         },
-        "focus": {
-          "value": "{color.blue.300}",
-          "type": "color"
-        },
         "critical": {
           "value": "{color.red.400}",
           "type": "color"
@@ -4182,60 +4178,12 @@
           "value": "{color.red.500}",
           "type": "color"
         },
-        "success": {
-          "value": "{color.green.400}",
-          "type": "color"
-        },
-        "success-inverted": {
-          "value": "{color.green.200}",
-          "type": "color"
-        },
-        "warning": {
-          "value": "{color.gold.400}",
-          "type": "color"
-        },
-        "warning-inverted": {
-          "value": "{color.gold.200}",
-          "type": "color"
-        },
         "warning-strong": {
           "value": "{color.gold.500}",
           "type": "color"
         },
-        "brand-inverted": {
-          "value": "{color.brand.purple}",
-          "type": "color"
-        },
-        "critical-subtle-inverted": {
-          "value": "{color.red.400}",
-          "type": "color"
-        },
-        "success-subtle-inverted": {
-          "value": "{color.green.400}",
-          "type": "color"
-        },
-        "warning-subtle-inverted": {
-          "value": "{color.gold.400}",
-          "type": "color"
-        },
-        "brand-subtle-inverted": {
-          "value": "{color.purple.500}",
-          "type": "color"
-        },
         "critical-strong-inverted": {
           "value": "{color.red.200}",
-          "type": "color"
-        },
-        "success-strong-inverted": {
-          "value": "{color.green.100}",
-          "type": "color"
-        },
-        "warning-strong-inverted": {
-          "value": "{color.gold.100}",
-          "type": "color"
-        },
-        "brand-strong-inverted": {
-          "value": "{color.purple.200}",
           "type": "color"
         }
       }
@@ -5279,10 +5227,7 @@
         "shadow.card": "S:7bda260e3652bc9b871f352fc7875e84bca3e3f6,",
         "radio.color.border.unchecked": "S:044f83eeac094fd2ed5bca26be767e53cd3b862c,",
         "checkbox.color.border.unchecked": "S:5e87b940b902d4b12658f4827837ea6ac98a63e3,",
-        "color.border.focus": "S:056e9c62917e65e17253d1560797cc0cf0030086,",
         "color.border.critical": "S:596b60284df51fe92dcc1e6a16a1374b5c2f3824,",
-        "color.border.success": "S:051f329df222b3ad58317bbeeb9ad58cc0238615,",
-        "color.border.warning": "S:3f3e987e6522d70e7a33bf580b4b0263056ed350,",
         "color.neutral.transparent": "S:ecdc357056d1a049b43160f4cf098e6f9c4b9278,",
         "inputs.color.border.focus": "S:fa04a078de2efd25d134d58afa88b5aae08e4490,",
         "inputs.color.border.critical": "S:cd32e20a14d569696b9deec01dd68b4c3cedb60f,",
@@ -5385,17 +5330,7 @@
         "color.border.bold-inverted": "S:f25ac2f474a5cf1bc914a83f2d701df73ad70089,",
         "color.border.accent": "S:286715bcd6e1b5d5d08e26427a0216a5f2cb716f,",
         "color.border.critical-inverted": "S:7fbada5aedd9dad14db402c2f15376afd6c43a33,",
-        "color.border.success-inverted": "S:c619d73dac28e8cab92f09460e69420f3baba686,",
-        "color.border.warning-inverted": "S:1729a7047ad82873c5a25f680e95d9eca0a92bda,",
-        "color.border.brand-inverted": "S:e4c4b24c9c9400aca082d7452e4b829807c6d697,",
-        "color.border.critical-subtle-inverted": "S:3544796603a4a26f3aef59321dfa9671c95bf1e5,",
         "color.border.critical-strong-inverted": "S:535b8382028cc70484b37f4ee4e1d4ed6de73228,",
-        "color.border.success-subtle-inverted": "S:80f4cc5a15970dd7f227f74ba7ad4c01aadfef7d,",
-        "color.border.success-strong-inverted": "S:7993e28cbd468a6b3a272f697ec74d706680d170,",
-        "color.border.warning-subtle-inverted": "S:f9fc20bc58fc614a514747c1523b608c6af89190,",
-        "color.border.warning-strong-inverted": "S:ebc85bbbd8264c7ecbab9d436311d36b4c499f11,",
-        "color.border.brand-subtle-inverted": "S:7d007762fe82640f39f8dd7b7285cf5b18c77d8e,",
-        "color.border.brand-strong-inverted": "S:b16332a64fcfbac2be41de59958de325eb48f4d0,",
         "badge.color.foreground.default": "S:435110adbd6717ac61d470d910672f0bf8002f64,",
         "badge.color.foreground.bulletin": "S:3c32047a4e1eb7aae5dc489f4154d8625f25a8f5,",
         "color.foreground.muted": "S:a35b59ddb9ce5fdd819e79f3d7889c0497b6cf12,",
@@ -5514,7 +5449,20 @@
         "color.surface.success": "S:2bfef23b53995589aa869be5b1b47e442cdad8ca,",
         "color.surface.critical": "S:7b55e5f93aef43169c87a9b1c6491e166ff78885,",
         "color.surface.warning": "S:64ad0a4b584a9b8fe006774f61521f33322f212c,",
-        "color.surface.strong": "S:ea29278f6059f8ec69253666e169b8aae0bf0896,"
+        "color.surface.strong": "S:ea29278f6059f8ec69253666e169b8aae0bf0896,",
+        "color.border.brand-inverted": "S:e4c4b24c9c9400aca082d7452e4b829807c6d697,",
+        "color.border.critical-subtle-inverted": "S:3544796603a4a26f3aef59321dfa9671c95bf1e5,",
+        "color.border.success-subtle-inverted": "S:80f4cc5a15970dd7f227f74ba7ad4c01aadfef7d,",
+        "color.border.success-strong-inverted": "S:7993e28cbd468a6b3a272f697ec74d706680d170,",
+        "color.border.warning-subtle-inverted": "S:f9fc20bc58fc614a514747c1523b608c6af89190,",
+        "color.border.warning-strong-inverted": "S:ebc85bbbd8264c7ecbab9d436311d36b4c499f11,",
+        "color.border.brand-subtle-inverted": "S:7d007762fe82640f39f8dd7b7285cf5b18c77d8e,",
+        "color.border.brand-strong-inverted": "S:b16332a64fcfbac2be41de59958de325eb48f4d0,",
+        "color.border.focus": "S:056e9c62917e65e17253d1560797cc0cf0030086,",
+        "color.border.success": "S:051f329df222b3ad58317bbeeb9ad58cc0238615,",
+        "color.border.warning": "S:3f3e987e6522d70e7a33bf580b4b0263056ed350,",
+        "color.border.success-inverted": "S:c619d73dac28e8cab92f09460e69420f3baba686,",
+        "color.border.warning-inverted": "S:1729a7047ad82873c5a25f680e95d9eca0a92bda,"
       },
       "selectedTokenSets": {
         "base/dark": "enabled",
