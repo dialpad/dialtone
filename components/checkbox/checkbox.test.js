@@ -1,307 +1,311 @@
 import { mount } from '@vue/test-utils';
-import {
-  itBehavesLikeDoesNotEmitEvents,
-  itBehavesLikeEmitsExpectedEvent,
-} from '../../tests/shared_examples/events';
-import {
-  itBehavesLikeAppliesChildProp,
-  itBehavesLikeAppliesClassToChild,
-} from '../../tests/shared_examples/extendability';
-import {
-  itBehavesLikeChecked,
-  itBehavesLikeHasValidationClasses, itBehavesLikeIndeterminate,
-  itBehavesLikeNotChecked,
-} from '../../tests/shared_examples/input';
-import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtCheckbox from './checkbox.vue';
-import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants.js';
+import { CHECKBOX_INPUT_VALIDATION_CLASSES } from '@/components/checkbox/checkbox_constants.js';
 
-// Constants
-const baseValue = 'Value';
+const MOCK_SLOT_LABEL = 'My Slotted Label';
+const MOCK_SLOT_DESCRIPTION = 'My Slotted Description';
+const MOCK_INPUT_LISTENER_SPY = vi.fn();
+const MOCK_GROUP_NAME = 'checkboxGroup';
+
+let MOCK_ELEMENT = null;
+const MOCK_CUSTOM_CLASS = 'my-custom-class';
+const MOCK_PROP_NAME = 'some';
+const MOCK_PROP_VALUE = 'prop';
+const MOCK_CHILD_PROPS = {};
+
 const baseProps = {
   label: 'My Checkbox Label',
-  value: baseValue,
+  value: 'Value',
 };
+const baseAttrs = {};
+const baseSlots = {};
+const baseProvide = {};
+
+let mockProps = {};
+let mockAttrs = {};
+let mockSlots = {};
+let mockProvide = {};
 
 describe('DtCheckbox Tests', () => {
-  // Wrappers
   let wrapper;
+  let checkbox;
   let input;
   let label;
   let description;
   let labelDescriptionContainer;
 
-  // Environment
-  const value = baseValue;
-  let props = baseProps;
-  let attrs = {};
-  let slots = {};
-  let provide = {};
+  const updateWrapper = () => {
+    wrapper = mount(DtCheckbox, {
+      props: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
+      global: {
+        provide: { ...baseProvide, ...mockProvide },
+      },
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
+    checkbox = wrapper.findComponent(DtCheckbox);
     input = wrapper.find('input');
     label = wrapper.find('[data-qa="checkbox-label"]');
     description = wrapper.find('[data-qa="checkbox-description"]');
     labelDescriptionContainer = wrapper.find('[data-qa="checkbox-label-description-container"]');
   };
 
-  const _setWrappers = () => {
-    wrapper = mount(DtCheckbox, {
-      props,
-      attrs,
-      slots,
-      global: {
-        provide,
-      },
-    });
-    _setChildWrappers();
-  };
-
-  // Shared Examples
-  const itBehavesLikeHasValidationClassesLocal = (checkboxValidationState) => {
-    it('has validation classes', () => {
-      itBehavesLikeHasValidationClasses(
-        wrapper,
-        CHECKBOX_INPUT_VALIDATION_CLASSES,
-        checkboxValidationState,
-      );
-    });
-  };
-
-  // Setup
-  beforeEach(function () {});
-
-  // Teardown
-  afterEach(function () {
-    props = baseProps;
-    attrs = {};
-    slots = {};
-    provide = {};
+  beforeEach(() => {
+    updateWrapper();
   });
-  afterAll(() => {});
+
+  afterEach(() => {
+    mockProps = {};
+    mockAttrs = {};
+    mockSlots = {};
+    mockProvide = {};
+  });
 
   describe('Presentation Tests', () => {
-    describe('When the checkbox renders', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
+    it('Should render the component', () => {
+      expect(wrapper).toBeDefined();
+      expect(checkbox).toBeDefined();
+    });
 
-      it('should exist', () => { expect(wrapper.exists()).toBe(true); });
-      it('should have checkbox group class', () => {
-        expect(wrapper.find('.d-checkbox-group').exists()).toBe(true);
+    it('should have checkbox group class', () => {
+      expect(wrapper.find('.d-checkbox-group').exists()).toBe(true);
+    });
+
+    describe('Checkbox Input Tests', () => {
+      it('should exist', () => {
+        expect(input.exists()).toBe(true);
       });
 
-      describe('Checkbox Input Tests', () => {
-        it('should exist', () => { expect(input.exists()).toBe(true); });
-        it(
-          'should have type checkbox',
-          () => { expect(input.attributes('type')).toBe('checkbox'); },
-        );
-        it('should not be checked', () => { itBehavesLikeNotChecked(input); });
+      it('should have type checkbox', () => {
+        expect(input.attributes('type')).toBe('checkbox');
       });
 
-      describe('Checkbox Label Tests', () => {
-        it('should exist', () => { expect(label.exists()).toBe(true); });
-        it(
-          'should match provided label prop',
-          () => { expect(label.text()).toBe(props.label); },
-        );
+      it('should not be checked', () => {
+        expect(input.element.checked).toBe(false);
+      });
+    });
+
+    describe('Checkbox Label Tests', () => {
+      it('should exist', () => {
+        expect(label.exists()).toBe(true);
+      });
+
+      it('should match provided label prop', () => {
+        expect(label.text()).toBe(baseProps.label);
       });
     });
 
     describe('When a label prop is provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, label: 'My Label' };
-        _setWrappers();
-      });
+      it('should exist', () => {
+        mockProps = { label: 'My Label' };
 
-      it('should exist', () => { expect(label.exists()).toBe(true); });
+        updateWrapper();
+
+        expect(label.exists()).toBe(true);
+      });
     });
 
     describe('When a description prop is provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, description: 'Description' };
-        _setWrappers();
-      });
+      it('should exist', () => {
+        mockProps = { description: 'Description' };
 
-      it('should exist', () => { expect(description.exists()).toBe(true); });
+        updateWrapper();
+
+        expect(description.exists()).toBe(true);
+      });
     });
 
     describe('When neither a label prop/slot nor a description prop/slot is provided', () => {
-      // Test Setup
       beforeEach(() => {
-        props = { value: baseValue };
-        slots = {};
-        _setWrappers();
+        mockProps = { label: undefined };
+
+        updateWrapper();
       });
 
-      it(
-        'should remove the description wrapper if no description is provided',
-        () => {
-          expect(description.exists()).toBe(false);
-        },
-      );
+      it('should remove the description wrapper if no description is provided', () => {
+        expect(description.exists()).toBe(false);
+      });
+
       it('should remove the label wrapper if no label is provided', () => {
         expect(label.exists()).toBe(false);
       });
-      it(
-        'should remove the checkbox label/description container if neither is provided',
-        () => {
-          expect(labelDescriptionContainer.exists()).toBe(false);
-        },
-      );
 
-      it(
-        'should keep the input checkbox',
-        () => { expect(input.exists()).toBe(true); },
-      );
+      it('should remove the checkbox label/description container if neither is provided', () => {
+        expect(labelDescriptionContainer.exists()).toBe(false);
+      });
+
+      it('should keep the input checkbox', () => {
+        expect(input.exists()).toBe(true);
+      });
     });
 
     describe('When a validation state is provided', () => {
-      // Helpers
-      const _setupValidationTest = (validationState) => {
-        props = { ...baseProps, description: 'Description', validationState };
-        _setWrappers();
-      };
+      it('applies validation classes for success state', () => {
+        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.SUCCESS };
 
-      describe('When success', () => {
-        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.SUCCESS); });
-        itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
+        updateWrapper();
+
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
       });
 
-      describe('When warning', () => {
-        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.WARNING); });
-        itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.WARNING);
+      it('applies validation classes for warning state', () => {
+        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.WARNING };
+
+        updateWrapper();
+
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists()).toBe(true);
       });
 
-      describe('When error', () => {
-        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.ERROR); });
-        itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.ERROR);
+      it('applies validation classes for error state', () => {
+        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.ERROR };
+
+        updateWrapper();
+
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists()).toBe(true);
       });
     });
 
     describe('When checked', () => {
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, checked: true };
-        _setWrappers();
-      });
+      it('should be checked', () => {
+        mockProps = { checked: true };
 
-      it('should be checked', () => { itBehavesLikeChecked(input); });
+        updateWrapper();
+
+        expect(input.element.checked).toBe(true);
+      });
     });
 
     describe('When disabled', () => {
-      // Test Setup
       beforeEach(() => {
-        props = { ...baseProps, disabled: true };
-        _setWrappers();
+        mockProps = { disabled: true };
+
+        updateWrapper();
       });
 
-      it(
-        'should disable input',
-        () => { expect(input.element.disabled).toBe(true); },
-      );
+      it('should disable input', () => {
+        expect(input.element.disabled).toBe(true);
+      });
+
       it('should have disabled class', () => {
         expect(wrapper.find('.d-checkbox-group--disabled').exists()).toBe(true);
       });
     });
 
     describe('When slot(s) are provided', () => {
-      // Test Environment
-      const slotLabel = 'My Slotted Label';
-      const slotDescription = 'My Slotted Description';
-
       describe('When a slotted label is provided', () => {
-        // Test Setup
-        beforeEach(() => {
-          slots = { default: slotLabel };
-          _setWrappers();
-        });
+        it('should have slotted label', () => {
+          mockSlots = { default: MOCK_SLOT_LABEL };
 
-        it(
-          'should have slotted label',
-          () => { expect(label.text()).toBe(slotLabel); },
-        );
+          updateWrapper();
+
+          expect(label.text()).toBe(MOCK_SLOT_LABEL);
+        });
       });
 
       describe('When a slotted description is provided', () => {
-        // Test Setup
-        beforeEach(() => {
-          slots = { description: slotDescription };
-          _setWrappers();
-        });
+        it('should have slotted description', () => {
+          mockSlots = { description: MOCK_SLOT_DESCRIPTION };
 
-        it(
-          'should have slotted description',
-          () => { expect(description.text()).toBe(slotDescription); },
-        );
+          updateWrapper();
+
+          expect(description.text()).toBe(MOCK_SLOT_DESCRIPTION);
+        });
       });
 
       describe('When slotted label and description are provided', () => {
-        // Test Setup
         beforeEach(() => {
-          slots = { default: slotLabel, description: slotDescription };
-          _setWrappers();
+          mockSlots = { default: MOCK_SLOT_LABEL, description: MOCK_SLOT_DESCRIPTION };
+
+          updateWrapper();
         });
 
-        it(
-          'should have slotted label',
-          () => { expect(label.text()).toBe(slotLabel); },
-        );
-        it(
-          'should have slotted description',
-          () => { expect(description.text()).toBe(slotDescription); },
-        );
+        it('should have slotted label', () => {
+          expect(label.text()).toBe(MOCK_SLOT_LABEL);
+        });
+
+        it('should have slotted description', () => {
+          expect(description.text()).toBe(MOCK_SLOT_DESCRIPTION);
+        });
+      });
+    });
+  });
+
+  describe('Accessibility Tests', () => {
+    describe('Custom Event Tests', () => {
+      describe('When the checkbox is clicked', () => {
+        it('Should emit an input event', async () => {
+          await input.trigger('change');
+
+          expect(wrapper.emitted('input')).toBeTruthy();
+        });
+      });
+
+      describe('When checked', () => {
+        describe('When the checkbox is clicked', () => {
+          it('Should emit an input event', async () => {
+            mockProps = { checked: true };
+
+            updateWrapper();
+
+            await input.trigger('change');
+
+            expect(wrapper.emitted('input')).toBeTruthy();
+          });
+        });
+      });
+
+      describe('When disabled', () => {
+        describe('When the checkbox is clicked', () => {
+          it('Should not emit an input event', async () => {
+            mockProps = { disabled: true };
+
+            updateWrapper();
+
+            await input.trigger('click');
+
+            expect(wrapper.emitted('input')).toBeFalsy();
+          });
+        });
       });
     });
   });
 
   describe('Interactivity Tests', () => {
     describe('Custom Event Tests', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
-
       describe('When the checkbox is clicked', () => {
-        // Test Setup
-        beforeEach(async () => { await input.trigger('change'); });
-
         it('Should emit an input event', async () => {
-          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', false);
+          await input.trigger('change');
+
+          expect(wrapper.emitted('input')).toBeTruthy();
         });
       });
 
       describe('When checked', () => {
-        // Test Setup
-        beforeEach(() => {
-          props = { ...baseProps, checked: true };
-          _setWrappers();
-        });
-
         describe('When the checkbox is clicked', () => {
-          // Test Setup
-          beforeEach(() => { input.trigger('change'); });
+          it('Should emit an input event', async () => {
+            mockProps = { checked: true };
 
-          it('Should emit an input event', () => {
-            itBehavesLikeEmitsExpectedEvent(wrapper, 'input', true);
+            updateWrapper();
+
+            await input.trigger('change');
+
+            expect(wrapper.emitted('input')).toBeTruthy();
           });
         });
       });
 
       describe('When disabled', () => {
-        // Test Setup
-        beforeEach(() => {
-          props = { ...baseProps, disabled: true };
-          _setWrappers();
-        });
-
         describe('When the checkbox is clicked', () => {
-          // Test Setup
-          beforeEach(() => { input.trigger('click'); });
+          it('Should not emit an input event', async () => {
+            mockProps = { disabled: true };
 
-          it('Should not emit an input event', () => {
-            itBehavesLikeDoesNotEmitEvents(wrapper);
+            updateWrapper();
+
+            await input.trigger('click');
+
+            expect(wrapper.emitted()).toEqual({});
           });
         });
       });
@@ -309,201 +313,188 @@ describe('DtCheckbox Tests', () => {
 
     describe('When indeterminate', () => {
       beforeAll(() => {
-        props = { ...baseProps, indeterminate: true };
-        _setWrappers();
+        mockProps = { indeterminate: true };
+
+        updateWrapper();
       });
-      it(
-        'shows indeterminate visual state',
-        () => { itBehavesLikeIndeterminate(input); },
-      );
+
+      it('shows indeterminate visual state', () => {
+        expect(input.element.indeterminate).toBe(true);
+      });
 
       describe('When clicking on an indeterminate checkbox', () => {
-        beforeEach(async () => {
+        it('should uncheck', async () => {
           input.element.value = false;
+
           await input.trigger('change');
+
+          expect(input.element.checked).toBe(false);
         });
-        it('should uncheck', () => { itBehavesLikeNotChecked(input); });
       });
     });
 
     describe('Listener Tests', () => {
       describe('When there is a provided input listener', () => {
-        // Test Env
-        const inputListenerSpy = vi.fn();
-
-        // Test Setup
-        beforeEach(function () {
-          attrs = { onInput: inputListenerSpy };
-          _setWrappers();
-        });
-
         describe('When the checkbox is clicked', () => {
-          // Test Setup
-          beforeEach(() => { input.trigger('change'); });
+          it('Should call input handler once', async () => {
+            mockAttrs = { onInput: MOCK_INPUT_LISTENER_SPY };
 
-          it('Should call input handler once', () => {
-            expect(inputListenerSpy).toHaveBeenCalledTimes(1);
+            updateWrapper();
+
+            await input.trigger('change');
+
+            expect(MOCK_INPUT_LISTENER_SPY).toHaveBeenCalledTimes(1);
           });
         });
       });
     });
 
     describe('Group Context Tests', () => {
-      // Test Environment
-      const groupName = 'checkboxGroup';
-
-      // Helpers
       const _setGroupContext = (selectedValues, groupDisabled = false, groupValidationState = null) => {
-        provide = {
+        mockProvide = {
           groupContext: {
-            name: groupName,
+            name: MOCK_GROUP_NAME,
             selectedValues,
             disabled: groupDisabled,
             validationState: groupValidationState,
           },
         };
-        props = { ...baseProps, description: 'Description' };
-        _setWrappers();
+        mockProps = { description: 'Description' };
+
+        updateWrapper();
       };
 
       describe('When a group name is provided', () => {
-        // Test Setup
-        beforeEach(() => { _setGroupContext([]); });
+        it('sets the input name', () => {
+          _setGroupContext([]);
 
-        it(
-          'sets the input name',
-          () => { expect(input.attributes('name')).toBe(groupName); },
-        );
+          expect(input.attributes('name')).toBe(MOCK_GROUP_NAME);
+        });
       });
 
       describe('When the group is disabled', () => {
-        // Test Setup
-        beforeEach(() => { _setGroupContext([], true); });
+        it('should disable input', () => {
+          _setGroupContext([], true);
 
-        it(
-          'should disable input',
-          () => { expect(input.element.disabled).toBe(true); },
-        );
+          expect(input.element.disabled).toBe(true);
+        });
       });
 
       describe('When the Checkbox value is in checked', () => {
-        // Test Setup
-        beforeEach(() => { _setGroupContext([value]); });
+        it('should be checked', () => {
+          _setGroupContext([baseProps.value]);
 
-        it('should be checked', () => { itBehavesLikeChecked(input); });
+          expect(input.element.checked).toBe(true);
+        });
       });
 
       describe('When the Checkbox value is not in checked', () => {
-        // Test Setup
-        beforeEach(() => { _setGroupContext([]); });
+        it('should not be checked', () => {
+          _setGroupContext([]);
 
-        it('should not be checked', () => { itBehavesLikeNotChecked(input); });
+          expect(input.element.checked).toBe(false);
+        });
       });
 
       describe('When the checkbox group has a validation state', () => {
-        // Test Setup
-        beforeEach(
-          () => { _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.SUCCESS); },
-        );
+        beforeEach(() => {
+          _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.SUCCESS);
+        });
 
-        itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
+        it('has validation classes', () => {
+          expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+        });
 
         describe('When the checkbox has a validation state', () => {
-          // Test Setup
-          beforeEach(() => {
-            props = { ...baseProps, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
-            _setWrappers();
-          });
+          it('has validation classes', () => {
+            mockProps = { validationState: VALIDATION_MESSAGE_TYPES.WARNING };
 
-          itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
+            updateWrapper();
+
+            expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+          });
         });
       });
     });
   });
 
   describe('Extendability Tests', () => {
-    let element;
-    const customClass = 'my-custom-class';
-    const propName = 'some';
-    const propValue = 'prop';
-    const childProps = {};
-
-    // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
-      props[childClassName] = customClass;
-      _setWrappers();
-      element = wrapper.find(selector);
+      mockProps[childClassName] = MOCK_CUSTOM_CLASS;
+
+      updateWrapper();
+
+      MOCK_ELEMENT = wrapper.find(selector);
     };
 
     const _setupChildPropsTest = (childPropsName, selector) => {
-      props[childPropsName] = childProps;
-      _setWrappers();
-      element = wrapper.find(selector);
+      mockProps[childPropsName] = MOCK_CHILD_PROPS;
+
+      updateWrapper();
+
+      MOCK_ELEMENT = wrapper.find(selector);
     };
 
-    // Shared Examples
-    const itBehavesLikeAppliesClassToChildLocal = () => {
-      it('should apply custom class to child', () => {
-        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
-      });
-    };
-
-    const itBehavesLikeAppliesChildPropLocal = () => {
-      it('should have provided child prop', () => {
-        itBehavesLikeAppliesChildProp(element, propName, propValue);
-      });
-    };
-
-    // Test Setup
     beforeAll(() => {
-      childProps[propName] = propValue;
+      MOCK_CHILD_PROPS[MOCK_PROP_NAME] = MOCK_PROP_VALUE;
     });
+
     beforeEach(() => {
-      props = { ...baseProps, label: 'Label', description: 'Description' };
+      mockProps = { label: 'Label', description: 'Description' };
+
+      updateWrapper();
     });
 
     describe('When an input class is provided', () => {
-      beforeEach(() => { _setupChildClassTest('inputClass', 'input'); });
-      itBehavesLikeAppliesClassToChildLocal();
+      it('should apply custom class to child', () => {
+        _setupChildClassTest('inputClass', 'input');
+
+        expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+      });
     });
 
     describe('When an label class is provided', () => {
-      beforeEach(
-        () => { _setupChildClassTest('labelClass', '[data-qa="checkbox-label"]'); },
-      );
-      itBehavesLikeAppliesClassToChildLocal();
+      it('should apply custom class to child', () => {
+        _setupChildClassTest('labelClass', '[data-qa="checkbox-label"]');
+
+        expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+      });
     });
 
     describe('When an description class is provided', () => {
-      beforeEach(
-        () => { _setupChildClassTest('descriptionClass', '[data-qa="checkbox-description"]'); },
-      );
-      itBehavesLikeAppliesClassToChildLocal();
+      it('should apply custom class to child', () => {
+        _setupChildClassTest('descriptionClass', '[data-qa="checkbox-description"]');
+
+        expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+      });
     });
 
     describe('When label child props are provided', () => {
-      beforeEach(
-        () => { _setupChildPropsTest('labelChildProps', '[data-qa="checkbox-label"]'); },
-      );
-      itBehavesLikeAppliesChildPropLocal();
+      it('should have provided child prop', () => {
+        _setupChildPropsTest('labelChildProps', '[data-qa="checkbox-label"]');
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
 
     describe('When description child props are provided', () => {
-      beforeEach(
-        () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="checkbox-description"]'); },
-      );
-      itBehavesLikeAppliesChildPropLocal();
+      it('should have provided child prop', () => {
+        _setupChildPropsTest('descriptionChildProps', '[data-qa="checkbox-description"]');
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
 
     describe('When attrs are provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        attrs = { some: 'prop' };
-        _setWrappers();
-        element = input;
-      });
+      it('should have provided child prop', () => {
+        mockAttrs = { some: 'prop' };
 
-      itBehavesLikeAppliesChildPropLocal();
+        updateWrapper();
+
+        MOCK_ELEMENT = input;
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
   });
 });
