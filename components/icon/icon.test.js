@@ -1,76 +1,64 @@
-import { createLocalVue, mount } from '@vue/test-utils';
 import DtIcon from './icon.vue';
+import { mount } from '@vue/test-utils';
 
-const basePropsData = {
-  name: 'accessibility',
-};
+const baseProps = { name: 'accessibility' };
+
+let mockProps = {};
 
 describe('DtIcon Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
-  let icon;
 
-  const _setWrappers = () => {
-    wrapper = mount(DtIcon,
-      {
-        propsData: basePropsData,
-        localVue: testContext.localVue,
-      });
-    _setChildWrappers();
+  const updateWrapper = () => {
+    wrapper = mount(DtIcon, {
+      propsData: { ...baseProps, ...mockProps },
+    });
   };
-
-  const _setChildWrappers = () => {
-    icon = wrapper.findComponent(DtIcon);
-  };
-
-  beforeAll(() => {
-    testContext.localVue = createLocalVue();
-  });
 
   beforeEach(() => {
-    _setWrappers();
+    updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
   });
 
   describe('Presentation Tests', () => {
     it('Should render the accessibility icon', () => {
-      expect(wrapper.exists()).toBe(true);
-      expect(icon.exists()).toBe(true);
-      expect(icon.classes('d-icon--accessibility')).toBe(true);
+      expect(wrapper).toBeDefined();
+      expect(wrapper.classes().includes('d-icon--accessibility')).toBe(true);
     });
 
     describe('When size prop is not set', () => {
       it('Should have default class', () => {
-        expect(icon.classes('d-icon--size-500')).toBe(true);
+        expect(wrapper.classes().includes('d-icon--size-500')).toBe(true);
       });
     });
 
     describe('When size prop is set', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({ size: '800' });
-      });
-
       it('Should have correct class', () => {
-        expect(icon.classes('d-icon--size-800')).toBe(true);
+        mockProps = { size: '800' };
+
+        updateWrapper();
+
+        expect(wrapper.classes().includes('d-icon--size-800')).toBe(true);
       });
     });
   });
 
   describe('Accessibility Tests', () => {
     describe('When ariaLabel prop is set', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({ ariaLabel: 'icon description' });
-        _setChildWrappers();
+      beforeEach(() => {
+        mockProps = { ariaLabel: 'icon description' };
+
+        updateWrapper();
       });
+
       it('sets the aria-label attribute', () => {
-        expect(icon.attributes('aria-label')).toBe('icon description');
+        expect(wrapper.attributes()['aria-label']).toBe('icon description');
       });
+
       it('sets aria-hidden to false', () => {
-        expect(icon.attributes('aria-hidden')).toBe('false');
+        expect(wrapper.attributes()['aria-hidden']).toBe('false');
       });
     });
   });
