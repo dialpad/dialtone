@@ -1,10 +1,15 @@
 import { mount } from '@vue/test-utils';
 import DtBadge from './badge.vue';
 import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
-import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 
-// Constants
+const MOCK_SLOT_TEXT = 'Default slot text';
+const MOCK_PROP_TEXT = 'Prop text';
+
 const baseProps = {};
+const baseSlots = {};
+
+let mockProps = {};
+let mockSlots = {};
 
 describe('DtBadge Tests', () => {
   let wrapper;
@@ -12,144 +17,172 @@ describe('DtBadge Tests', () => {
   let iconLeftWrapper;
   let iconLeft;
 
-  // Environment
-  let props = baseProps;
-  let slots = {};
+  const updateWrapper = () => {
+    wrapper = mount(DtBadge, {
+      props: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     badge = wrapper.find('[data-qa="dt-badge"]');
     iconLeftWrapper = wrapper.find('.d-badge__icon-left');
-    if (iconLeftWrapper.exists()) {
-      iconLeft = iconLeftWrapper.findComponent({ name: 'DtIcon' });
-    }
-  };
-
-  const _setWrappers = () => {
-    wrapper = mount(DtBadge, {
-      props,
-      slots,
-
-    });
-    _setChildWrappers();
   };
 
   beforeEach(() => {
-    props = baseProps;
-    slots = {};
-    _setWrappers();
+    updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
-    // Shared Examples
-    const itBehavesLikeRendersText = text => {
-      it('should render the badge', () => { expect(badge.exists()).toBe(true); });
-      it(
-        'should display the correct text',
-        () => { expect(badge.text()).toBe(text); },
-      );
-    };
-
-    const itBehavesLikeHasCorrectType = type => {
-      it('should have correct type', async () => {
-        await wrapper.setProps({ type });
-        itBehavesLikeHasCorrectClass(badge, BADGE_TYPE_MODIFIERS[type]);
-      });
-    };
-
-    const itBehavesLikeHasCorrectKind = kind => {
-      it('should have correct kind', async () => {
-        await wrapper.setProps({ kind });
-        itBehavesLikeHasCorrectClass(badge, BADGE_KIND_MODIFIERS[kind]);
-      });
-    };
-
-    const itBehavesLikeHasCorrectDecoration = decoration => {
-      it('should have correct decoration', async () => {
-        await wrapper.setProps({ decoration });
-        const decorativeSpan = wrapper.find('.d-badge__decorative');
-        expect(decorativeSpan.exists()).toBeTruthy();
-        itBehavesLikeHasCorrectClass(badge, BADGE_DECORATION_MODIFIERS[decoration]);
-      });
-    };
-
     describe('When the badge renders', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
-
-      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
+      it('should exist', () => {
+        expect(wrapper.exists()).toBeTruthy();
+      });
     });
 
     describe('When a text is provided via slot', () => {
-      // Test Environment
-      const slotText = 'Default slot text';
+      beforeEach(async () => {
+        mockSlots = { default: MOCK_SLOT_TEXT };
 
-      // Test Setup
-      beforeEach(() => {
-        slots = { default: slotText };
-        _setWrappers();
+        updateWrapper();
       });
 
-      itBehavesLikeRendersText(slotText);
+      it('should render the badge', () => {
+        expect(badge.exists()).toBe(true);
+      });
+
+      it('should display the correct text', () => {
+        expect(badge.text()).toBe(MOCK_SLOT_TEXT);
+      });
     });
 
     describe('When a text is provided via prop', () => {
-      // Test Environment
-      const propText = 'Prop text';
+      beforeEach(async () => {
+        mockProps = { text: MOCK_PROP_TEXT };
 
-      // Test Setup
-      beforeEach(function () {
-        props = { ...baseProps, text: propText };
-        _setWrappers();
+        updateWrapper();
       });
 
-      itBehavesLikeRendersText(propText);
+      it('should render the badge', () => {
+        expect(badge.exists()).toBe(true);
+      });
+
+      it('should display the correct text', () => {
+        expect(badge.text()).toBe(MOCK_PROP_TEXT);
+      });
     });
 
     describe('When a type is provided via prop', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
+      describe('When type is info', () => {
+        it('should have correct type', async () => {
+          await wrapper.setProps({ type: 'info' });
 
-      describe('When type is info', () => { itBehavesLikeHasCorrectType('info'); });
+          expect(badge.classes(BADGE_TYPE_MODIFIERS.info)).toBe(true);
+        });
+      });
 
-      describe('When type is success', () => { itBehavesLikeHasCorrectType('success'); });
+      describe('When type is success', () => {
+        it('should have correct type', async () => {
+          await wrapper.setProps({ type: 'success' });
 
-      describe('When type is warning', () => { itBehavesLikeHasCorrectType('warning'); });
+          expect(badge.classes(BADGE_TYPE_MODIFIERS.success)).toBe(true);
+        });
+      });
 
-      describe('When type is critical', () => { itBehavesLikeHasCorrectType('critical'); });
+      describe('When type is warning', () => {
+        it('should have correct type', async () => {
+          await wrapper.setProps({ type: 'warning' });
+
+          expect(badge.classes(BADGE_TYPE_MODIFIERS.warning)).toBe(true);
+        });
+      });
+
+      describe('When type is critical', () => {
+        it('should have correct type', async () => {
+          await wrapper.setProps({ type: 'critical' });
+
+          expect(badge.classes(BADGE_TYPE_MODIFIERS.critical)).toBe(true);
+        });
+      });
 
       describe('When type is ai', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ type: 'ai' });
-          _setChildWrappers();
+          mockProps = { type: 'ai' };
+
+          updateWrapper();
         });
 
-        itBehavesLikeHasCorrectType('ai');
+        it('should have correct type', async () => {
+          await wrapper.setProps({ type: 'ai' });
+
+          expect(badge.classes(BADGE_TYPE_MODIFIERS.ai)).toBe(true);
+        });
 
         it('renders ai icon in iconLeft slot by default', () => {
+          iconLeft = iconLeftWrapper.findComponent({ name: 'DtIcon' });
+
           expect(iconLeft.attributes('data-name') === 'Dialpad Ai').toBe(true);
         });
       });
     });
 
     describe('When a kind is provided via prop', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
+      describe('When kind is count', () => {
+        it('should have correct kind', async () => {
+          await wrapper.setProps({ kind: 'count' });
 
-      describe('When kind is count', () => { itBehavesLikeHasCorrectKind('count'); });
+          expect(badge.classes(BADGE_KIND_MODIFIERS.count)).toBe(true);
+        });
+      });
     });
 
     describe('When a decoration is provided via prop', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
+      describe('When decoration is black-900', () => {
+        it('should have correct decoration', async () => {
+          await wrapper.setProps({ decoration: 'black-900' });
 
-      describe('When decoration is black-900', () => { itBehavesLikeHasCorrectDecoration('black-900'); });
+          const decorativeSpan = wrapper.find('.d-badge__decorative');
 
-      describe('When decoration is red-400', () => { itBehavesLikeHasCorrectDecoration('red-400'); });
+          expect(decorativeSpan.exists()).toBeTruthy();
+          expect(badge.classes(BADGE_DECORATION_MODIFIERS['black-900'])).toBe(true);
+        });
+      });
 
-      describe('When decoration is purple-400', () => { itBehavesLikeHasCorrectDecoration('purple-400'); });
+      describe('When decoration is red-400', () => {
+        it('should have correct decoration', async () => {
+          await wrapper.setProps({ decoration: 'red-400' });
 
-      describe('When decoration is gold-300', () => { itBehavesLikeHasCorrectDecoration('gold-300'); });
+          const decorativeSpan = wrapper.find('.d-badge__decorative');
+
+          expect(decorativeSpan.exists()).toBeTruthy();
+          expect(badge.classes(BADGE_DECORATION_MODIFIERS['red-400'])).toBe(true);
+        });
+      });
+
+      describe('When decoration is purple-400', () => {
+        it('should have correct decoration', async () => {
+          await wrapper.setProps({ decoration: 'purple-400' });
+
+          const decorativeSpan = wrapper.find('.d-badge__decorative');
+
+          expect(decorativeSpan.exists()).toBeTruthy();
+          expect(badge.classes(BADGE_DECORATION_MODIFIERS['purple-400'])).toBe(true);
+        });
+      });
+
+      describe('When decoration is gold-300', () => {
+        it('should have correct decoration', async () => {
+          await wrapper.setProps({ decoration: 'gold-300' });
+
+          const decorativeSpan = wrapper.find('.d-badge__decorative');
+
+          expect(decorativeSpan.exists()).toBeTruthy();
+          expect(badge.classes(BADGE_DECORATION_MODIFIERS['gold-300'])).toBe(true);
+        });
+      });
     });
   });
 });
