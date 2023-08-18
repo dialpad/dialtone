@@ -129,7 +129,6 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
         _setChildWrappers();
 
         const popoverProps = popover.props();
-        console.log(popoverProps);
 
         expect(popoverProps.showCloseButton).toBe(true);
         expect(popoverProps.placement).toBe('mock');
