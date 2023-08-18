@@ -8,10 +8,6 @@ import {
   cleanSpy,
 } from '../../tests/shared_examples/validation';
 import {
-  itBehavesLikeAppliesClassToChild,
-  itBehavesLikeAppliesChildProp,
-} from '../../tests/shared_examples/extendability';
-import {
   LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
 } from '@/common/constants';
@@ -325,7 +321,6 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should emit input event', () => {
-        console.log(wrapper.emitted('input'));
         expect(wrapper.emitted('input')[0][1]).toBe(selectedValue.toString());
       });
       it('should emit change event', () => {
@@ -425,19 +420,6 @@ describe('DtSelectMenu Tests', () => {
       element = wrapper.find(selector);
     };
 
-    // Shared Examples
-    const itBehavesLikeAppliesClassToChildLocal = () => {
-      it('should apply custom class to child', () => {
-        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
-      });
-    };
-
-    const itBehavesLikeAppliesChildPropLocal = () => {
-      it('should have provided child prop', () => {
-        itBehavesLikeAppliesChildProp(element, propName, propValue);
-      });
-    };
-
     // Test Setup
     beforeAll(() => {
       childProps[propName] = propValue;
@@ -450,21 +432,27 @@ describe('DtSelectMenu Tests', () => {
       beforeEach(
         () => { _setupChildClassTest('labelClass', '[data-qa="dt-select-label"]'); },
       );
-      itBehavesLikeAppliesClassToChildLocal();
+      it('should apply custom class to child', () => {
+        expect(wrapper.find('.my-custom-class').html()).toBe(element.html());
+      });
     });
 
     describe('When a description class is provided', () => {
       beforeEach(
         () => { _setupChildClassTest('descriptionClass', '[data-qa="dt-select-description"]'); },
       );
-      itBehavesLikeAppliesClassToChildLocal();
+      it('should apply custom class to child', () => {
+        expect(wrapper.find('.my-custom-class').html()).toBe(element.html());
+      });
     });
 
     describe('When a select class is provided', () => {
       beforeEach(
         () => { _setupChildClassTest('selectClass', '[data-qa="dt-select-wrapper"]'); },
       );
-      itBehavesLikeAppliesClassToChildLocal();
+      it('should apply custom class to child', () => {
+        expect(wrapper.find('.my-custom-class').html()).toBe(element.html());
+      });
     });
 
     describe('When an option class is provided', () => {
@@ -489,14 +477,19 @@ describe('DtSelectMenu Tests', () => {
       beforeEach(
         () => { _setupChildPropsTest('labelChildProps', '[data-qa="dt-select-label"]'); },
       );
-      itBehavesLikeAppliesChildPropLocal();
+
+      it('should have provided child prop', () => {
+        expect(element.attributes(propName)).toBe(propValue);
+      });
     });
 
     describe('When description child props are provided', () => {
       beforeEach(
         () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="dt-select-description"]'); },
       );
-      itBehavesLikeAppliesChildPropLocal();
+      it('should have provided child prop', () => {
+        expect(element.attributes(propName)).toBe(propValue);
+      });
     });
 
     describe('When option child props are provided', () => {
@@ -512,7 +505,7 @@ describe('DtSelectMenu Tests', () => {
 
       it('should apply child props to each option', () => {
         options.forEach(option => {
-          itBehavesLikeAppliesChildProp(option, propName, propValue);
+          expect(option.attributes(propName)).toBe(propValue);
         });
       });
     });
@@ -525,7 +518,9 @@ describe('DtSelectMenu Tests', () => {
         element = select;
       });
 
-      itBehavesLikeAppliesChildPropLocal();
+      it('attr should be set on element', () => {
+        expect(element.attributes(propName)).toBe(propValue);
+      });
     });
   });
 });
