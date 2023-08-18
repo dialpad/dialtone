@@ -1,3 +1,15 @@
+## [2.94.1](https://github.com/dialpad/dialtone-vue/compare/v2.94.0...v2.94.1) (2023-08-18)
+
+
+### Bug Fixes
+
+* **Select Menu:** pass event object onChange ([#1125](https://github.com/dialpad/dialtone-vue/issues/1125)) ([5a1d261](https://github.com/dialpad/dialtone-vue/commit/5a1d26193106485f30112bc4ea1e002be8503b26))
+
+
+### Documentation
+
+* update documentation ([#1119](https://github.com/dialpad/dialtone-vue/issues/1119)) ([4d4e57b](https://github.com/dialpad/dialtone-vue/commit/4d4e57b3b703a081acd0778983e0eed93da994b0))
+
 # [2.94.0](https://github.com/dialpad/dialtone-vue/compare/v2.93.2...v2.94.0) (2023-08-16)
 
 
