@@ -1,6 +1,5 @@
 import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
-import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/events';
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,
@@ -346,10 +345,11 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should emit input event', () => {
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue.toString());
+        console.log(wrapper.emitted('input'));
+        expect(wrapper.emitted('input')[0][1]).toBe(selectedValue.toString());
       });
       it('should emit change event', () => {
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'change', selectedValue.toString());
+        expect(wrapper.emitted('change')[0][1]).toBe(selectedValue.toString());
       });
     });
   });

@@ -255,7 +255,7 @@ export default {
          * emitted input event by the change listener).
         */
         input: () => {},
-        change: event => this.emitValue(event.target.value),
+        change: event => this.emitValue(event, event.target.value),
       };
     },
 
@@ -289,9 +289,9 @@ export default {
   },
 
   methods: {
-    emitValue (value) {
-      this.$emit('input', value);
-      this.$emit('change', value);
+    emitValue (event, value) {
+      this.$emit('input', event, value);
+      this.$emit('change', event, value);
     },
 
     getOptionKey (value) {
