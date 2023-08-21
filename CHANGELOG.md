@@ -1,3 +1,10 @@
+## [2.94.2](https://github.com/dialpad/dialtone-vue/compare/v2.94.1...v2.94.2) (2023-08-21)
+
+
+### Bug Fixes
+
+* end -> flex-end ([4006257](https://github.com/dialpad/dialtone-vue/commit/40062576e3675d29dbe7a6c46688004b42b4e324))
+
 ## [2.94.1](https://github.com/dialpad/dialtone-vue/compare/v2.94.0...v2.94.1) (2023-08-18)
 
 
