@@ -1,26 +1,34 @@
 import { mount } from '@vue/test-utils';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
 
-const breadcrumbItemOption = {
+const baseProps = {
   url: '#',
   label: 'Section',
 };
-let breadcrumbItemSlot = { default: 'Slotted section' };
+const baseSlots = {};
+
+let mockProps = {};
+let mockSlots = {};
+const testContext = {};
 
 describe('DtBreadcrumbItem Tests', () => {
-  // Wrappers
   let wrapper;
 
-  const _mountWrapper = () => {
+  const updateWrapper = () => {
     wrapper = mount(DtBreadcrumbItem, {
-      props: breadcrumbItemOption,
-      slots: breadcrumbItemSlot,
+      props: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+      localVue: testContext.localVue,
     });
   };
 
-  // Setup
   beforeEach(() => {
-    _mountWrapper();
+    updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
@@ -30,16 +38,17 @@ describe('DtBreadcrumbItem Tests', () => {
 
     describe('When a default slot is provided to breadcrumb item', () => {
       it('should render default slot label', () => {
-        expect(wrapper.text()).toEqual('Slotted section');
+        mockSlots = { default: 'Slotted section' };
+
+        updateWrapper();
+
+        expect(wrapper.text()).toBe('Slotted section');
       });
     });
 
     describe('When a label is provided to breadcrumb item', () => {
-      beforeAll(() => {
-        breadcrumbItemSlot = {};
-      });
       it('should render label', () => {
-        expect(wrapper.text()).toEqual('Section');
+        expect(wrapper.text()).toBe('Section');
       });
     });
   });
