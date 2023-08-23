@@ -24,13 +24,11 @@
       },
       "critical": {
         "value": "{color.red.400}",
-        "type": "color",
-        "description": "critical, danger, error, alert"
+        "type": "color"
       },
       "critical-strong": {
         "value": "{color.foreground.critical}",
         "type": "color",
-        "description": "critical, danger, error, alert",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -44,7 +42,6 @@
       "success-strong": {
         "value": "{color.foreground.success}",
         "type": "color",
-        "description": "positive",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -57,8 +54,7 @@
       },
       "warning": {
         "value": "{color.gold.400}",
-        "type": "color",
-        "description": "alert"
+        "type": "color"
       },
       "primary-inverted": {
         "value": "{color.neutral.black}",
