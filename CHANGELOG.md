@@ -1,3 +1,10 @@
+## [2.94.3](https://github.com/dialpad/dialtone-vue/compare/v2.94.2...v2.94.3) (2023-08-23)
+
+
+### Bug Fixes
+
+* **Recipe Callbar Button With Popover:** do not autofocus on the popover ([#1131](https://github.com/dialpad/dialtone-vue/issues/1131)) ([b5213a7](https://github.com/dialpad/dialtone-vue/commit/b5213a7665e003e5a746587742db87bd0caf29c4))
+
 ## [2.94.2](https://github.com/dialpad/dialtone-vue/compare/v2.94.1...v2.94.2) (2023-08-21)
 
 
