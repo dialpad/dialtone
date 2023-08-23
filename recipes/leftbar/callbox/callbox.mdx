@@ -1,0 +1,48 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtRecipeCallboxStories from './callbox.stories.js';
+
+<Meta of={DtRecipeCallboxStories}/>
+
+# DtRecipeCallbox
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas of={DtRecipeCallboxStories.Default} />
+
+## Variants
+
+<Canvas of={DtRecipeCallboxStories.Variants} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeCallbox } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```jsx
+<dt-recipe-callbox
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```jsx
+<dt-recipe-callbox
+  some-other="variant"
+/>
+```
