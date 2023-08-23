@@ -3,7 +3,6 @@ dist*/*
 !dist_ios/Package.swift
 !dist_ios/.github
 !dist_ios/VERSION
-tokens
 .gradle
 local.properties
 .idea
