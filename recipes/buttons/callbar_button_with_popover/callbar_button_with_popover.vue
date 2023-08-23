@@ -26,6 +26,7 @@
     <dt-popover
       v-if="showArrowButton"
       :id="id"
+      :modal="false"
       :open="open"
       :placement="placement"
       :initial-focus-element="initialFocusElement"
