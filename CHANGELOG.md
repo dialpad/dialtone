@@ -1,3 +1,15 @@
+# [2.95.0](https://github.com/dialpad/dialtone-vue/compare/v2.94.3...v2.95.0) (2023-08-23)
+
+
+### Bug Fixes
+
+* **Select Menu:** emit value first ([#1133](https://github.com/dialpad/dialtone-vue/issues/1133)) ([c523990](https://github.com/dialpad/dialtone-vue/commit/c523990259b8d4cc8030820390545eb2fbabf146))
+
+
+### Features
+
+* **Callbox:** scaffold component ([#1129](https://github.com/dialpad/dialtone-vue/issues/1129)) ([e4f5040](https://github.com/dialpad/dialtone-vue/commit/e4f50401d1ac158b11bbcd995f7d3e1e383df365))
+
 ## [2.94.3](https://github.com/dialpad/dialtone-vue/compare/v2.94.2...v2.94.3) (2023-08-23)
 
 
