@@ -341,10 +341,10 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should emit input event', () => {
-        expect(wrapper.emitted('input')[0][1]).toBe(selectedValue.toString());
+        expect(wrapper.emitted('input')[0][0]).toBe(selectedValue.toString());
       });
       it('should emit change event', () => {
-        expect(wrapper.emitted('change')[0][1]).toBe(selectedValue.toString());
+        expect(wrapper.emitted('change')[0][0]).toBe(selectedValue.toString());
       });
     });
   });
