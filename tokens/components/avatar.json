@@ -1,0 +1,88 @@
+{
+  "avatar": {
+    "color": {
+      "foreground": {
+        "value": "{color.neutral.black}",
+        "type": "color"
+      },
+      "background": {
+        "100": {
+          "value": "#1aa340",
+          "type": "color"
+        },
+        "200": {
+          "value": "#aaff83",
+          "type": "color"
+        },
+        "300": {
+          "value": "#adea88",
+          "type": "color"
+        },
+        "400": {
+          "value": "#77eca6",
+          "type": "color"
+        },
+        "500": {
+          "value": "#7aedbd",
+          "type": "color"
+        },
+        "600": {
+          "value": "#77deec",
+          "type": "color"
+        },
+        "700": {
+          "value": "#5ed8ff",
+          "type": "color"
+        },
+        "800": {
+          "value": "#99e7ff",
+          "type": "color"
+        },
+        "900": {
+          "value": "#51a0fe",
+          "type": "color"
+        },
+        "1000": {
+          "value": "#b6cfff",
+          "type": "color"
+        },
+        "1100": {
+          "value": "#f1b7e8",
+          "type": "color"
+        },
+        "1200": {
+          "value": "#ec77bd",
+          "type": "color"
+        },
+        "1300": {
+          "value": "#ff67be",
+          "type": "color"
+        },
+        "1400": {
+          "value": "#f87e7e",
+          "type": "color"
+        },
+        "1500": {
+          "value": "#eca877",
+          "type": "color"
+        },
+        "1600": {
+          "value": "#ffbe41",
+          "type": "color"
+        },
+        "1700": {
+          "value": "#ffd646",
+          "type": "color"
+        },
+        "1800": {
+          "value": "#f1dab7",
+          "type": "color"
+        },
+        "000": {
+          "value": "#e0e0e0",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

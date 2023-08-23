@@ -1,0 +1,49 @@
+{
+  "theme": {
+    "color": {
+      "base": {
+        "value": "#285A93",
+        "type": "color"
+      }
+    },
+    "mention": {
+      "color": {
+        "background": {
+          "value": "#00D258",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".15",
+                "space": "lch"
+              }
+            }
+          }
+        },
+        "foreground": {
+          "value": "{color.neutral.black}",
+          "type": "color"
+        }
+      }
+    },
+    "topbar": {
+      "color": {
+        "background": {
+          "value": "{color.surface.secondary}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".03",
+                "space": "hsl",
+                "color": "{theme.color.base} "
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

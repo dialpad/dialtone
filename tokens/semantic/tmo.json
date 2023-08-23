@@ -1,0 +1,18 @@
+{
+  "theme": {
+    "color": {
+      "base": {
+        "value": "#E20074",
+        "type": "color"
+      }
+    },
+    "mention": {
+      "color": {
+        "background": {
+          "value": "#E20074",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

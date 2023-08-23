@@ -1,0 +1,19 @@
+{
+  "tokenSetOrder": [
+    "base",
+    "base/dark",
+    "semantic",
+    "semantic/dark",
+    "semantic/tmo",
+    "semantic/tmo/dark",
+    "semantic/cox",
+    "semantic/cox/dark",
+    "components/avatar",
+    "components/badge",
+    "components/checkbox",
+    "components/checkbox/dark",
+    "components/icon",
+    "components/radio",
+    "components/radio/dark"
+  ]
+}
