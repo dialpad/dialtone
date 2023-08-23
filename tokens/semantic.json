@@ -17,8 +17,17 @@
         "description": "Used to imply visual hierarchy relative to primary and secondary text colors, e.g. headlines and labels."
       },
       "muted": {
-        "value": "rgba($color.black.800, 0.5)",
-        "type": "color"
+        "value": "{color.black.800}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".5",
+              "space": "hsl"
+            }
+          }
+        }
       },
       "placeholder": {
         "value": "{color.black.500}",
@@ -71,9 +80,18 @@
         "description": "Tertiary text color that sits on high-contrast surfaces or backgrounds."
       },
       "muted-inverted": {
-        "value": "rgba($color.black.200, 0.6)",
+        "value": "{color.black.200}",
         "type": "color",
-        "description": "Muted text color that sits on high-contrast surfaces or backgrounds."
+        "description": "Muted text color that sits on high-contrast surfaces or backgrounds.",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".6",
+              "space": "hsl"
+            }
+          }
+        }
       },
       "placeholder-inverted": {
         "value": "{color.black.500}",
@@ -1198,16 +1216,43 @@
       },
       "background": {
         "default": {
-          "value": "rgba($color.black.900, 0.03)",
-          "type": "color"
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".03",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "focus": {
-          "value": "rgba($color.black.900, 0.01)",
-          "type": "color"
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".01",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "disabled": {
-          "value": "rgba($color.black.900, 0.12)",
-          "type": "color"
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".12",
+                "space": "hsl"
+              }
+            }
+          }
         }
       }
     }
@@ -1311,12 +1356,30 @@
             "type": "color"
           },
           "hover": {
-            "value": "rgba($color.purple.400, 0.14)",
-            "type": "color"
+            "value": "{color.purple.400}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".14",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "active": {
-            "value": "rgba($color.purple.400, 0.18)",
-            "type": "color"
+            "value": "{color.purple.400}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".18",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "primary": {
             "default": {
@@ -1339,12 +1402,30 @@
             "type": "color"
           },
           "hover": {
-            "value": "rgba($color.red.300, 0.03)",
-            "type": "color"
+            "value": "{color.red.300}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".03",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "active": {
-            "value": "rgba($color.red.300, 0.09)",
-            "type": "color"
+            "value": "{color.red.300}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".09",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "primary": {
             "default": {
@@ -1367,12 +1448,30 @@
             "type": "color"
           },
           "hover": {
-            "value": "rgba($color.surface.primary, 0.15)",
-            "type": "color"
+            "value": "{color.surface.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".15",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "active": {
-            "value": "rgba($color.surface.primary, 0.30)",
-            "type": "color"
+            "value": "{color.surface.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".3",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "primary": {
             "default": {
@@ -1395,12 +1494,30 @@
             "type": "color"
           },
           "hover": {
-            "value": "rgba($color.black.800, 0.10)",
-            "type": "color"
+            "value": "{color.black.800}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".10",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "active": {
-            "value": "rgba($color.black.800, 0.16)",
-            "type": "color"
+            "value": "{color.black.800}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".16",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         },
         "disabled": {
