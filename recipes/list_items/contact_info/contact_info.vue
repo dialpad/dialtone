@@ -14,23 +14,20 @@
       >
         <div
           v-if="avatarList"
-          class="d-mrn4 d-d-flex d-fd-row"
+          class="dt-contact-info--avatars d-mrn4 d-d-flex d-fd-row"
         >
-          <div
+          <dt-avatar
             v-for="(avatar, index) in avatarList"
             :key="index"
-          >
-            <dt-avatar
-              :size="avatarSize"
-              :seed="avatar.seed"
-              :full-name="avatar.fullName"
-              :image-src="avatar.src"
-              :icon-name="avatarIcon"
-              :overlay-icon="avatar.icon"
-              :overlay-text="avatar.text"
-              :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
-            />
-          </div>
+            :size="avatarSize"
+            :seed="avatar.seed"
+            :full-name="avatar.fullName"
+            :image-src="avatar.src"
+            :icon-name="avatarIcon"
+            :overlay-icon="avatar.icon"
+            :overlay-text="avatar.text"
+            :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
+          />
         </div>
         <dt-avatar
           v-else
@@ -191,6 +188,8 @@ export default {
 
 <style lang="less" scoped>
 .dt-contact-info {
+  --contact-info-avatar-border-color: var(--dt-color-surface-primary);
+
   &:deep(.dt-item-layout--content) {
     /*
     DP-74536: Add `min-width` to make the width of "contact info" adjustable.
@@ -213,9 +212,9 @@ export default {
     min-width: 0;
   }
 
-  &:deep(.d-avatar) {
+  &--avatars .d-avatar {
     border-radius: var(--dt-size-radius-pill);
-    border: var(--dt-size-300) solid var(--dt-color-surface-primary);
+    border: var(--dt-size-300) solid var(--contact-info-avatar-border-color);
     box-sizing: unset;
   }
 }
