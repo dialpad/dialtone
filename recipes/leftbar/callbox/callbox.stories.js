@@ -1,7 +1,6 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeCallbox from './callbox.vue';
 import DtRecipeCallboxDefaultTemplate from './callbox_default.story.vue';
-import DtRecipeCallboxVariantsTemplate from './callbox_variants.story.vue';
 
 export const argTypesData = {
   // Props: only define things here that cannot be set by jsdoc comments on the component itself.
@@ -24,8 +23,9 @@ const decorator = () => ({
 
 // Set default values at the story level here.
 export const argsData = {
-  title: 'Somebody',
-  avatarFullName: 'Somebody',
+  title: 'Title',
+  avatarFullName: 'Title',
+  borderColor: 'ai',
 };
 
 // Story Collection
@@ -47,15 +47,19 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  args: {},
-};
+  args: {
+    video: 'Video slot',
+    badge: 'Badge slot',
+    subtitle: 'Subtitle slot',
+    right: 'Right slot',
+    bottom: 'Bottom slot',
+  },
 
-const VariantsTemplate = (args) => createTemplateFromVueFile(
-  args,
-  DtRecipeCallboxVariantsTemplate,
-);
-
-export const Variants = {
-  render: VariantsTemplate,
-  args: {},
+  parameters: {
+    percy: {
+      args: {
+        avatarSeed: 'seed',
+      },
+    },
+  },
 };
