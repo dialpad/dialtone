@@ -1,47 +1,36 @@
 import { config, mount } from '@vue/test-utils';
 import DtCollapsible from './collapsible.vue';
 
-const content = '<div data-qa="content-element"> Test Text </div>';
+const MOCK_CONTENT_SLOT = '<div data-qa="content-element"> Test Text </div>';
+
 const baseProps = {
   anchorText: 'anchor text',
 };
+const baseSlots = {
+  content: MOCK_CONTENT_SLOT,
+};
+
+let mockProps = {};
+let mockSlots = {};
 
 describe('DtCollapsible Tests', () => {
-  // Wrappers
   let wrapper;
   let contentElement;
   let contentWrapperElement;
   let anchorElement;
-  let scopedSlots = {};
   let anchorSlotElement;
 
-  // Environment
-  const slots = { content };
-  let propsData = baseProps;
+  const updateWrapper = () => {
+    wrapper = mount(DtCollapsible, {
+      propsData: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+      attachTo: document.body,
+    });
 
-  const _clearChildWrappers = () => {
-    contentElement = undefined;
-    contentWrapperElement = undefined;
-    anchorElement = undefined;
-    anchorSlotElement = undefined;
-    scopedSlots = {};
-  };
-
-  const _setChildWrappers = () => {
     anchorElement = wrapper.find('[data-qa="dt-button"]');
     anchorSlotElement = wrapper.find('[data-qa="anchor-element"]');
     contentElement = wrapper.find('[data-qa="content-element"]');
     contentWrapperElement = wrapper.findComponent({ ref: 'contentWrapper' });
-  };
-
-  const _mountWrapper = () => {
-    wrapper = mount(DtCollapsible, {
-      propsData,
-      scopedSlots,
-      slots,
-      attachTo: document.body,
-    });
-    _setChildWrappers();
   };
 
   beforeAll(() => {
@@ -50,20 +39,19 @@ describe('DtCollapsible Tests', () => {
     config.renderStubDefaultSlot = true;
   });
 
-  beforeEach(() => {
-    _mountWrapper();
-  });
-
   afterAll(() => {
-    // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
     config.renderStubDefaultSlot = false;
   });
 
-  afterEach(async () => {
-    propsData = baseProps;
-    _clearChildWrappers();
+  beforeEach(() => {
+    updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
   });
 
   describe('Test default rendering', () => {
@@ -81,12 +69,13 @@ describe('DtCollapsible Tests', () => {
   });
 
   describe('When scoped slot is provided', () => {
-    beforeEach(() => {
-      const anchor = '<button data-qa="anchor-element">click me</button>';
-      scopedSlots = { anchor };
-      _mountWrapper();
-    });
     it('should render the scoped slot', () => {
+      const anchor = '<button data-qa="anchor-element">click me</button>';
+
+      mockSlots = { anchor };
+
+      updateWrapper();
+
       expect(anchorSlotElement.exists()).toBeTruthy();
     });
   });
@@ -98,6 +87,7 @@ describe('DtCollapsible Tests', () => {
 
     it('should toggle the content when clicked', async () => {
       await anchorElement.trigger('click');
+
       expect(contentElement.isVisible()).toBe(false);
     });
   });
@@ -114,11 +104,13 @@ describe('DtCollapsible Tests', () => {
 
       it('clicking does not collapse content', async () => {
         await anchorElement.trigger('click');
+
         expect(contentElement.isVisible()).toBe(true);
       });
 
       it('updating open prop does collapse content', async () => {
         await wrapper.setProps({ open: false });
+
         expect(contentElement.isVisible()).toBe(false);
       });
     });
@@ -134,32 +126,31 @@ describe('DtCollapsible Tests', () => {
 
       it('clicking does not expand content', async () => {
         await anchorElement.trigger('click');
+
         expect(contentElement.isVisible()).toBe(false);
       });
 
       it('updating open prop does collapse content', async () => {
         await wrapper.setProps({ open: true });
+
         expect(contentElement.isVisible()).toBe(true);
       });
     });
   });
 
   describe('If anchor text and anchor slot content are falsy', () => {
-    let consoleErrorSpy;
-
-    beforeEach(async () => {
-      consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
-      propsData = { ...baseProps, anchorText: undefined };
-      _mountWrapper();
-    });
-
-    afterEach(() => {
-      consoleErrorSpy = null;
-      console.error.mockRestore();
-    });
-
     it('should output error message', async () => {
+      let consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
+
+      mockProps = { anchorText: undefined };
+
+      updateWrapper();
+
       expect(consoleErrorSpy).toHaveBeenCalledWith('anchor text and anchor slot content cannot both be falsy');
+
+      consoleErrorSpy = null;
+
+      console.error.mockRestore();
     });
   });
 
@@ -169,13 +160,10 @@ describe('DtCollapsible Tests', () => {
         await wrapper.setProps({ open: true, id: 'contentId' });
       });
 
-      it(
-        'aria-controls on anchor should be set to the id of the contentWrapper',
-        () => {
-          expect(anchorElement.attributes('aria-controls')).toBe('contentId');
-          expect(contentWrapperElement.attributes('id')).toBe('contentId');
-        },
-      );
+      it('aria-controls on anchor should be set to the id of the contentWrapper', () => {
+        expect(anchorElement.attributes('aria-controls')).toBe('contentId');
+        expect(contentWrapperElement.attributes('id')).toBe('contentId');
+      });
 
       it('aria-expanded should be true', () => {
         expect(anchorElement.attributes('aria-expanded')).toBe('true');
