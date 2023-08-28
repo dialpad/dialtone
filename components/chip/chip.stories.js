@@ -3,6 +3,7 @@ import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_util
 import DtChip from './chip.vue';
 
 import DtChipDefaultTemplate from './chip_default.story.vue';
+import DtChipVariantsTemplate from './chip_variants.story.vue';
 import { CHIP_SIZE_MODIFIERS } from './chip_constants';
 
 const iconsList = getIconNames();
@@ -11,6 +12,8 @@ export const argsData = {
   onClose: action('close'),
   onClick: action('click'),
   size: 'md',
+  closeButtonProps: { ariaLabel: 'close' },
+  avatarSeed: '',
 };
 
 export const argTypesData = {
@@ -117,31 +120,19 @@ export default {
 };
 
 // Templates
-const Template = (args, { argTypes }) =>
+const DefaultTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
 
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtChipVariantsTemplate);
+
 export const Default = {
-  render: Template,
-
-  args: {
-    default: 'Chip',
-    closeButtonProps: {
-      ariaLabel: 'close',
-    },
-  },
+  render: DefaultTemplate,
+  args: { default: 'Chip' },
 };
 
-export const WithIcon = {
-  render: Template,
-
-  args: {
-    ...Default.args,
-    icon: 'lock-filled',
-  },
-};
-
-export const WithAvatar = {
-  render: Template,
+export const Variants = {
+  render: VariantsTemplate,
 
   parameters: {
     percy: {
@@ -149,19 +140,7 @@ export const WithAvatar = {
         avatarSeed: 'seed',
       },
     },
-  },
-  args: {
-    ...Default.args,
-    avatar: 'Jaqueline Nackos',
-  },
-};
-
-export const NonInteractive = {
-  render: Template,
-
-  args: {
-    ...Default.args,
-    interactive: false,
-    hideClose: true,
+    options: { showPanel: false },
+    controls: { disable: true },
   },
 };

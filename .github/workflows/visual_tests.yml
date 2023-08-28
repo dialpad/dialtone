@@ -26,7 +26,7 @@ jobs:
 
   visual_tests:
     needs: label_when_approved
-    if: always() && (github.event_name == 'push' || github.event_name == 'pull_request_review' || contains(github.event.pull_request.labels.*.name, 'visual-test-ready'))
+    if: always() && ((github.event_name == 'push' || github.event_name == 'pull_request_review') && contains(github.event.pull_request.labels.*.name, 'visual-test-ready'))
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}

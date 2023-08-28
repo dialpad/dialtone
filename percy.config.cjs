@@ -11,6 +11,7 @@ module.exports = {
       'Components/Button: Default',
       'Components/Checkbox: Default',
       'Components/Checkbox Group: Default',
+      'Components/Chip: Default',
       'Components/Combobox: Empty',
       'Components/Datepicker',
       'Components/Dropdown: Default',
