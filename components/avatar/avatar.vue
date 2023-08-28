@@ -318,9 +318,9 @@ export default {
     },
 
     imageSrc (newSrc) {
+      this.imageLoadedSuccessfully = null;
       if (!newSrc) return;
 
-      this.imageLoadedSuccessfully = null;
       this.validateProps();
       this.setImageListeners();
     },
@@ -332,14 +332,12 @@ export default {
   },
 
   methods: {
-    setImageListeners () {
+    async setImageListeners () {
+      await this.$nextTick();
       const el = this.$refs.avatarImage;
-
       if (!el) return;
 
       el.addEventListener('load', () => this._loadedImageEventHandler(el), { once: true });
-
-      if (this.imageLoadedSuccessfully === false) return;
       el.addEventListener('error', () => this._erroredImageEventHandler(el), { once: true });
     },
 
