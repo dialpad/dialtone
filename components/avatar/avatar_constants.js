@@ -26,7 +26,7 @@ export const AVATAR_PRESENCE_STATES = {
 };
 
 export const AVATAR_ICON_SIZES = {
-  xs: undefined,
+  xs: '100',
   sm: '200',
   md: '300',
   lg: '500',
