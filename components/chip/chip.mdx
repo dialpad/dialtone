@@ -19,6 +19,12 @@ import * as ChipStories from './chip.stories';
   <Story of={ChipStories.Default} />
 </Canvas>
 
+## Variants
+
+<Canvas>
+  <Story of={ChipStories.Variants} />
+</Canvas>
+
 ## Slots, Props & Events
 
 <Controls />
@@ -42,10 +48,6 @@ import { DtChip } from '@dialpad/dialtone-vue';
 
 ## With Icon
 
-<Canvas>
-  <Story of={ChipStories.WithIcon} />
-</Canvas>
-
 ```html
 import { DtChip, DtIcon } from '@dialpad/dialtone-vue';
 
@@ -58,16 +60,12 @@ import { DtChip, DtIcon } from '@dialpad/dialtone-vue';
 
 ## With Avatar
 
-<Canvas>
-  <Story of={ChipStories.WithAvatar} />
-</Canvas>
-
 ```html
 import { DtAvatar } from '@dialpad/dialtone';
 
 <dt-chip :close-button-props="{ ariaLabel: $i18n('close') }">
   <template #avatar>
-    <dt-avatar>DP</dt-avatar>
+    <dt-avatar full-name="Dialpad" />
   </template>
 </dt-chip>
 ```
@@ -75,10 +73,6 @@ import { DtAvatar } from '@dialpad/dialtone';
 ## Non Interactive
 
 The chip is not focusable or clickable. If not interactive the chip will render as a `<span>` element.
-
-<Canvas>
-  <Story of={ChipStories.NonInteractive} />
-</Canvas>
 
 ```html
 <dt-chip
