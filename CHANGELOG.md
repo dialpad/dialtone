@@ -1,3 +1,22 @@
+## [3.82.1](https://github.com/dialpad/dialtone-vue/compare/v3.82.0...v3.82.1) (2023-08-28)
+
+
+### Bug Fixes
+
+* **Avatar:** dynamic icon sizes ([#1147](https://github.com/dialpad/dialtone-vue/issues/1147)) ([1c1b390](https://github.com/dialpad/dialtone-vue/commit/1c1b390f74ab9070db51112c7138ff308e72d5af))
+* **Avatar:** image events ([#1144](https://github.com/dialpad/dialtone-vue/issues/1144)) ([a03c3b9](https://github.com/dialpad/dialtone-vue/commit/a03c3b95823e72c3857c2b3cbcf2ab825e58ed66))
+* **Contact Info:** avatar's border color ([#1138](https://github.com/dialpad/dialtone-vue/issues/1138)) ([3c8e6fb](https://github.com/dialpad/dialtone-vue/commit/3c8e6fb21eafcacbb4b5ebdf4503d22a47f1fedb))
+
+
+### Code Refactoring
+
+* **Callbox:** visuals - vue3 ([#1140](https://github.com/dialpad/dialtone-vue/issues/1140)) ([5db9860](https://github.com/dialpad/dialtone-vue/commit/5db98605520b4a3696bb570fce5bd0ab1c0519ad))
+
+
+### Documentation
+
+* **Chip:** variants story - vue3 ([#1149](https://github.com/dialpad/dialtone-vue/issues/1149)) ([d8fe2a9](https://github.com/dialpad/dialtone-vue/commit/d8fe2a9da0f45cfe2c1fe2766c50802803776038))
+
 # [3.82.0](https://github.com/dialpad/dialtone-vue/compare/v3.81.0...v3.82.0) (2023-08-23)
 
 
