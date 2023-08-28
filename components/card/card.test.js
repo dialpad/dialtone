@@ -1,47 +1,40 @@
 import { mount } from '@vue/test-utils';
 import DtCard from './card.vue';
 
-// Constants
-const content = '<div data-qa="content-element"> card content </div>';
-const header = '<div data-qa="header-element"> card header </div>';
-const footer = '<div data-qa="footer-element"> card footer </div>';
+const MOCK_CONTENT = '<div data-qa="content-element"> card content </div>';
+const MOCK_HEADER = '<div data-qa="header-element"> card header </div>';
+const MOCK_FOOTER = '<div data-qa="footer-element"> card footer </div>';
 
+const baseSlots = {
+  content: MOCK_CONTENT,
+  header: MOCK_HEADER,
+  footer: MOCK_FOOTER,
+};
+
+let mockSlots = {};
 describe('DtCard Tests', () => {
-  // Wrappers
   let wrapper;
   let contentElement;
   let headerElement;
   let footerElement;
 
-  // Environment
-  const slots = { content, header, footer };
+  const updateWrapper = () => {
+    wrapper = mount(DtCard, {
+      slots: { ...baseSlots, ...mockSlots },
+      attachTo: document.body,
+    });
 
-  const _clearChildWrappers = () => {
-    contentElement = undefined;
-    headerElement = undefined;
-    footerElement = undefined;
-  };
-
-  const _setChildWrappers = () => {
     contentElement = wrapper.find('[data-qa="content-element"]');
     headerElement = wrapper.find('[data-qa="header-element"]');
     footerElement = wrapper.find('[data-qa="footer-element"]');
   };
 
-  const _mountWrapper = () => {
-    wrapper = mount(DtCard, {
-      slots,
-      attachTo: document.body,
-    });
-    _setChildWrappers();
-  };
-
   beforeEach(() => {
-    _mountWrapper();
+    updateWrapper();
   });
 
-  afterEach(async () => {
-    _clearChildWrappers();
+  afterEach(() => {
+    mockSlots = {};
   });
 
   describe('Test default rendering', () => {

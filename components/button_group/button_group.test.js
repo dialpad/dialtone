@@ -2,92 +2,60 @@ import { mount } from '@vue/test-utils';
 import DtButtonGroup from './button_group.vue';
 import { DtButton } from '../button';
 import ButtonsFixture from './buttons_decorator.vue';
-import {
-  itBehavesLikeFailsCustomPropValidation,
-  itBehavesLikePassesCustomPropValidation,
-} from '../../tests/shared_examples/validation';
 
-// Constants
-const baseProps = {};
+const MOCK_DEFAULT_PROP = DtButtonGroup.props.alignment;
+
+const baseSlots = {};
+
+let mockSlots = {};
 
 describe('DtButtonGroup Tests', () => {
-  // Wrappers
   let wrapper;
   let buttonGroup;
 
-  // Environment
-  let props = baseProps;
-  let attrs = {};
-  let slots = {};
-  let provide = {};
+  const updateWrapper = () => {
+    wrapper = mount(DtButtonGroup, {
+      slots: { ...baseSlots, ...mockSlots },
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     buttonGroup = wrapper.find('.d-btn-group');
   };
 
-  const _setWrappers = () => {
-    wrapper = mount(DtButtonGroup, {
-      props,
-      attrs,
-      slots,
-      global: {
-        provide,
-      },
-    });
-    _setChildWrappers();
-  };
-
-  // Setup
-  beforeAll(() => {
+  beforeEach(() => {
+    updateWrapper();
   });
-  beforeEach(() => {});
 
-  // Teardown
   afterEach(() => {
-    props = baseProps;
-    attrs = {};
-    slots = {};
-    provide = {};
+    mockSlots = {};
   });
-  afterAll(() => {});
 
   describe('Presentation Tests', () => {
     describe('When rendered with default content', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
+      it('should have a button group', () => {
+        expect(buttonGroup.exists()).toBe(true);
+      });
 
-      it(
-        'should have a button group',
-        () => { expect(buttonGroup.exists()).toBe(true); },
-      );
       it('should not have buttons', () => {
         expect(wrapper.findAllComponents(DtButton).length).toBe(0);
       });
     });
 
     describe('When buttons are provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        slots = { default: ButtonsFixture };
-      });
-
       describe('When the button group renders', () => {
-        // Test Setup
-        beforeEach(() => { _setWrappers(); });
-
         it('should have buttons', () => {
+          mockSlots = { default: ButtonsFixture };
+
+          updateWrapper();
+
           expect(wrapper.findAllComponents(DtButton).length).toBe(2);
         });
       });
     });
 
     describe('When alignment is set to end', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({ alignment: 'end' });
-      });
-
       it('should have correct class', async () => {
+        await wrapper.setProps({ alignment: 'end' });
+
         expect(buttonGroup.classes().includes('d-btn-group--end')).toBe(true);
       });
     });
@@ -103,15 +71,16 @@ describe('DtButtonGroup Tests', () => {
 
   describe('Validation Tests', () => {
     describe('Alignment Validator', () => {
-      // Test Environment
-      const prop = DtButtonGroup.props.alignment;
-
       describe('When provided alignment is in BUTTON_GROUP_ALIGNMENT', () => {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+        it('passes custom prop validation', () => {
+          expect(MOCK_DEFAULT_PROP.validator(MOCK_DEFAULT_PROP.default)).toBe(true);
+        });
       });
 
       describe('When provided alignment is not in BUTTON_GROUP_ALIGNMENT', () => {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_ALIGNMENT`);
+        it('fails custom prop validation', () => {
+          expect(MOCK_DEFAULT_PROP.validator(`INVALID_ALIGNMENT`)).toBe(false);
+        });
       });
     });
   });
