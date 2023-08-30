@@ -88,8 +88,8 @@ export default {
   }
 
   &--messages {
-    background-color: var(--dt-color-surface-primary);
-    color: var(--dt-color-foreground-primary);
+    background-color: var(--dt-color-surface-contrast);
+    color: var(--dt-color-foreground-secondary-inverted);
   }
 }
 </style>
