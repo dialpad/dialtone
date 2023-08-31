@@ -4,7 +4,7 @@
   //  ----------------------------------------------------------------------------
   --leftbar-row-color-foreground: var(--dt-theme-sidebar-color-foreground);
   --leftbar-row-color-background: var(--dt-theme-sidebar-row-color-background);
-  --leftbar-row-radius: 100em;
+  --leftbar-row-radius: var(--dt-size-radius-pill);
   --leftbar-row-opacity: 100%;
   --leftbar-row-alpha-color-foreground: var(--dt-theme-sidebar-icon-color-foreground);
   --leftbar-row-alpha-width: calc(var(--dt-size-300) * 10);
@@ -87,7 +87,7 @@
 
   &--selected {
     --leftbar-row-color-background: var(--dt-theme-sidebar-selected-row-color-background);
-    --leftbar-row-color-foreground: var(--dt-theme-sidebar-selected-row-color-foreground);
+    --leftbar-row-description-color-foreground: var(--dt-theme-sidebar-selected-row-color-foreground);
 
     &:deep(.d-presence) {
       --presence-color-border-base: var(--dt-color-black-200);
