@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { BADGE_COLORS, BORDER_COLORS } from './callbox_constants';
+import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from './callbox_constants';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtBadge from '@/components/badge/badge.vue';
@@ -106,7 +106,7 @@ export default {
     badgeColor: {
       type: String,
       default: null,
-      validator: (color) => !!color || Object.keys(BADGE_COLORS).includes(color),
+      validator: (color) => !!color || Object.keys(CALLBOX_BADGE_COLORS).includes(color),
     },
 
     /**
@@ -150,7 +150,7 @@ export default {
     borderColor: {
       type: String,
       default: 'default',
-      validator: (color) => Object.keys(BORDER_COLORS).includes(color),
+      validator: (color) => Object.keys(CALLBOX_BORDER_COLORS).includes(color),
     },
   },
 
@@ -160,11 +160,11 @@ export default {
     },
 
     badgeClass () {
-      return BADGE_COLORS[this.badgeColor];
+      return CALLBOX_BADGE_COLORS[this.badgeColor];
     },
 
     borderClass () {
-      return BORDER_COLORS[this.borderColor];
+      return CALLBOX_BORDER_COLORS[this.borderColor];
     },
   },
 };
