@@ -6,14 +6,16 @@ import * as DtRecipeCallboxStories from './callbox.stories.js';
 # DtRecipeCallbox
 
 <Subtitle>
-  Some description of the component functionality.
+  Provides the layout for the callbox
 </Subtitle>
 
 ## Base Style
 
-Some description of how to use the base component, potential gotchas and limitations.
-
 <Canvas of={DtRecipeCallboxStories.Default} />
+
+## Variants
+
+<Canvas of={DtRecipeCallboxStories.Variants} />
 
 ## Slots, Props & Events
 
@@ -27,18 +29,91 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtRecipeCallbox } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### Call
 
-```jsx
-<dt-recipe-callbox
-  some="variant"
-/>
+```html
+<dt-recipe-callbox avatar-full-name="Some name" title="Some title" border-color="ai">
+  <template #subtitle>
+    <span>06:01</span>
+  </template>
+  <template #right>
+    <dt-button
+      aria-label="toggle dialpad ai"
+      circle
+      importance="clear"
+    >
+      <template #icon>
+        <dt-icon
+          name="dialpad-ai-color"
+          size="400"
+        />
+      </template>
+    </dt-button>
+    <dt-button
+      aria-label="hang call"
+      circle
+      importance="clear"
+    >
+      <template #icon>
+        <dt-icon
+          name="phone-hang-up"
+          class="d-fc-critical"
+          size="400"
+        />
+      </template>
+    </dt-button>
+  </template>
+</dt-recipe-callbox>
 ```
 
-### With Some Other Variant
+### Active video
 
-```jsx
-<dt-recipe-callbox
-  some-other="variant"
-/>
+```html
+<dt-recipe-callbox title="1 Participant">
+  <template #video>
+    <!-- Media stream -->
+  </template>
+  <template #subtitle>
+    <span>06:01</span>
+  </template>
+  <template #right>
+    <dt-button
+      aria-label="toggle mic"
+      circle
+      importance="clear"
+    >
+      <template #icon>
+        <dt-icon
+          name="mic"
+          size="400"
+        />
+      </template>
+    </dt-button>
+    <dt-button
+      aria-label="toggle video"
+      circle
+      importance="clear"
+    >
+      <template #icon>
+        <dt-icon
+          name="video"
+          size="400"
+        />
+      </template>
+    </dt-button>
+    <dt-button
+      aria-label="hang call"
+      circle
+      importance="clear"
+    >
+      <template #icon>
+        <dt-icon
+          name="phone-hang-up"
+          class="d-fc-critical"
+          size="400"
+        />
+      </template>
+    </dt-button>
+  </template>
+</dt-recipe-callbox>
 ```

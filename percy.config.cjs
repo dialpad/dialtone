@@ -46,6 +46,7 @@ module.exports = {
       'Recipes/Comboboxes/Combobox Multi-Select: With Max Validation',
       'Recipes/Comboboxes/Combobox With Popover: Empty',
       'Recipes/Conversation View/Feed Item Row: Default',
+      'Recipes/Leftbar/Callbox: Default',
       'Recipes/Leftbar/Contact Row: Default',
       'Recipes/Leftbar/General Row: Default',
       'Recipes/Leftbar/Group Row: Default',
