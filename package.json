@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Dialtone icon library",
   "scripts": {
     "build": "npm run build-icons && npm run build-lib",
