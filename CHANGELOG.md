@@ -1,3 +1,15 @@
+## [3.82.2](https://github.com/dialpad/dialtone-vue/compare/v3.82.1...v3.82.2) (2023-09-04)
+
+
+### Bug Fixes
+
+* **Leftbar Row:** corrected selected row's foreground color - vue3 ([#1155](https://github.com/dialpad/dialtone-vue/issues/1155)) ([f8edb15](https://github.com/dialpad/dialtone-vue/commit/f8edb1557c23e1205badb7195617ede10c93d175))
+
+
+### Documentation
+
+* **Callbox:** variants and docs - vue3 ([#1151](https://github.com/dialpad/dialtone-vue/issues/1151)) ([ecc21ff](https://github.com/dialpad/dialtone-vue/commit/ecc21ff707ffe4fec7171e9a56dea2fb19cc9f44))
+
 ## [3.82.1](https://github.com/dialpad/dialtone-vue/compare/v3.82.0...v3.82.1) (2023-08-28)
 
 
