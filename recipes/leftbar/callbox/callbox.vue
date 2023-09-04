@@ -1,16 +1,25 @@
 <template>
-  <dt-item-layout class="dt-recipe-callbox">
+  <dt-item-layout
+    data-qa="dt-recipe-callbox"
+    class="dt-recipe-callbox"
+  >
     <template
       v-if="$slots.video"
       #default
     >
-      <div class="dt-recipe-callbox--video">
+      <div
+        data-qa="dt-recipe-callbox--video-wrapper"
+        class="dt-recipe-callbox--video"
+      >
         <!-- @slot Slot for video stream -->
         <slot name="video" />
       </div>
     </template>
     <template #bottom>
-      <dt-item-layout :class="['dt-recipe-callbox--main-content', borderClass]">
+      <dt-item-layout
+        data-qa="dt-recipe-callbox--main-content"
+        :class="['dt-recipe-callbox--main-content', borderClass]"
+      >
         <template #default>
           <dt-item-layout class="dt-recipe-callbox--top-content">
             <template
@@ -26,6 +35,7 @@
             </template>
             <template #default>
               <span
+                data-qa="dt-recipe-callbox--title"
                 class="dt-recipe-callbox--title"
                 v-text="title"
               />
@@ -33,7 +43,10 @@
             <template #subtitle>
               <dt-item-layout class="dt-recipe-callbox--subtitle">
                 <template #default>
-                  <div class="dt-recipe-callbox--subtitle-badge">
+                  <div
+                    data-qa="dt-recipe-callbox--badge-wrapper"
+                    class="dt-recipe-callbox--subtitle-badge"
+                  >
                     <!-- @slot Slot for call center badge -->
                     <slot name="badge">
                       <dt-badge
@@ -48,7 +61,10 @@
                   v-if="$slots.subtitle"
                   #bottom
                 >
-                  <div class="dt-recipe-callbox--subtitle-content">
+                  <div
+                    data-qa="dt-recipe-callbox--subtitle-wrapper"
+                    class="dt-recipe-callbox--subtitle-content"
+                  >
                     <!-- @slot Slot for subtitle -->
                     <slot name="subtitle" />
                   </div>
@@ -59,7 +75,10 @@
               v-if="$slots.right"
               #right
             >
-              <div class="dt-recipe-callbox--right">
+              <div
+                data-qa="dt-recipe-callbox--right-wrapper"
+                class="dt-recipe-callbox--right"
+              >
                 <!-- @slot Slot for right icons -->
                 <slot name="right" />
               </div>
@@ -70,7 +89,10 @@
           v-if="$slots.bottom"
           #bottom
         >
-          <div class="dt-recipe-callbox--bottom-content">
+          <div
+            data-qa="dt-recipe-callbox--bottom-wrapper"
+            class="dt-recipe-callbox--bottom-content"
+          >
             <slot name="bottom" />
           </div>
         </template>
@@ -106,7 +128,7 @@ export default {
     badgeColor: {
       type: String,
       default: null,
-      validator: (color) => !!color || Object.keys(CALLBOX_BADGE_COLORS).includes(color),
+      validator: (color) => color === null || Object.keys(CALLBOX_BADGE_COLORS).includes(color),
     },
 
     /**
