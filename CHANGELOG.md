@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/dialpad/dialtone-icons/compare/v2.1.0...v2.1.1) (2023-09-04)
+
+
+### Bug Fixes
+
+* add prepublish script ([dc1bca8](https://github.com/dialpad/dialtone-icons/commit/dc1bca8ca3ac0e071d2b5d2f5bd21ae4805431cd))
+
 # [2.1.0](https://github.com/dialpad/dialtone-icons/compare/v2.0.2...v2.1.0) (2023-09-04)
 
 
