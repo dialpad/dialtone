@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/dialpad/dialtone-icons/compare/v3.0.2...v3.1.0) (2023-09-04)
+
+
+### Features
+
+* add dialpad-logomark ([67c5889](https://github.com/dialpad/dialtone-icons/commit/67c588921575254a075cc3c5c26acbfc7817b4a0))
+
 ## [3.0.2](https://github.com/dialpad/dialtone-icons/compare/v3.0.1...v3.0.2) (2023-07-31)
 
 
