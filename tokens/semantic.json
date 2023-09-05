@@ -1387,12 +1387,30 @@
               "type": "color"
             },
             "hover": {
-              "value": "#6533FF",
-              "type": "color"
+              "value": "{action.color.background.base.primary.default}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": ".04",
+                    "space": "hsl"
+                  }
+                }
+              }
             },
             "active": {
-              "value": "#4D14FF",
-              "type": "color"
+              "value": "{action.color.background.base.primary.default}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": ".08",
+                    "space": "hsl"
+                  }
+                }
+              }
             }
           }
         },
