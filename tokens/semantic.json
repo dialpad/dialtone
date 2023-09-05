@@ -1537,8 +1537,17 @@
               "type": "color"
             },
             "active": {
-              "value": "#E1D1FF",
-              "type": "color"
+              "value": "{action.color.background.inverted.primary.hover}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": "0.04",
+                    "space": "hsl"
+                  }
+                }
+              }
             }
           }
         },
