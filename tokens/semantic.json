@@ -1295,8 +1295,17 @@
             "type": "color"
           },
           "hover": {
-            "value": "#D90D0D",
-            "type": "color"
+            "value": "{action.color.foreground.critical.default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".08",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "active": {
             "value": "{action.color.foreground.critical.hover}",
