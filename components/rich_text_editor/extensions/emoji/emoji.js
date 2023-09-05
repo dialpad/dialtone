@@ -2,6 +2,12 @@ import { mergeAttributes, Node, nodeInputRule, nodePasteRule } from '@tiptap/cor
 import { VueNodeViewRenderer } from '@tiptap/vue-3';
 import EmojiComponent from './EmojiComponent.vue';
 import { shortcodeToEmojiData, codeToEmojiData } from '@/common/emoji';
+import { PluginKey } from '@tiptap/pm/state';
+
+import Suggestion from '@tiptap/suggestion';
+import suggestionOptions from './suggestion';
+
+export const EmojiPluginKey = new PluginKey('emoji');
 
 const inputShortCodeRegex = /:\w+:$/;
 const pasteShortCodeRegex = /:\w+:/g;
@@ -36,6 +42,15 @@ const shortCodePasteMatch = (text) => {
 };
 
 export const Emoji = Node.create({
+  addOptions () {
+    return {
+      HTMLAttributes: {},
+      suggestion: {
+        char: ':',
+        pluginKey: EmojiPluginKey,
+      },
+    };
+  },
   name: 'emoji',
   group: 'inline',
   inline: true,
@@ -50,12 +65,6 @@ export const Emoji = Node.create({
       code: {
         default: null,
       },
-    };
-  },
-
-  addOptions () {
-    return {
-      HTMLAttributes: {},
     };
   },
 
@@ -128,6 +137,16 @@ export const Emoji = Node.create({
             code: attrs[0],
           };
         },
+      }),
+    ];
+  },
+
+  addProseMirrorPlugins () {
+    return [
+      Suggestion({
+        editor: this.editor,
+        ...this.options.suggestion,
+        ...suggestionOptions,
       }),
     ];
   },

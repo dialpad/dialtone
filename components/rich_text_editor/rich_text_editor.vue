@@ -149,13 +149,14 @@ export default {
   data () {
     return {
       editor: null,
+      popoverOpened: false,
     };
   },
 
   computed: {
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [CodeBlock, Document, Paragraph, Text, Emoji];
+      const extensions = [CodeBlock, Document, Paragraph, Text];
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
@@ -164,6 +165,8 @@ export default {
         Placeholder.configure({ placeholder: this.placeholder }),
       );
 
+      // make sure that this is defined before any other extensions
+      // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
       extensions.push(
         HardBreak.extend({
           addKeyboardShortcuts () {
@@ -179,6 +182,10 @@ export default {
           },
         }),
       );
+
+      // Emoji has some interactions with Enter key
+      // hence this should be done last otherwise the enter wont add a emoji.
+      extensions.push(Emoji);
 
       return extensions;
     },
