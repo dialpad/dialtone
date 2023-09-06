@@ -3,30 +3,29 @@ import { formatMonth } from '@/components/datepicker/utils.js';
 import DtDatepicker from './DtDatepicker.vue';
 import { MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
 
-const day = 21;
-const month = 6; // Note: month is zero-based, so 6 represents July
-const year = 2023;
+const MOCK_DAY = 21;
+const MOCK_MONTH = 6; // Note: month is zero-based, so 6 represents July
+const MOCK_YEAR = 2023;
+const MOCK_TEST_DATE = new Date(MOCK_YEAR, MOCK_MONTH, MOCK_DAY);
 
-const testDate = new Date(year, month, day);
+const MOCK_TODAY_YEAR = MOCK_TEST_DATE.getFullYear();
+const MOCK_TODAY_MONTH = MOCK_TEST_DATE.getMonth();
+const MOCK_FORMATTED_TODAY_MONTH = formatMonth(MOCK_TODAY_MONTH, MONTH_FORMAT);
+const MOCK_HEADER_SELECTED_DATE = `${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR}`;
 
-// Constants
-const basePropsData = {
+const baseProps = {
   changeToLabel: 'Change to',
   prevMonthLabel: 'Previous month',
   nextMonthLabel: 'Next month',
   prevYearLabel: 'Previous year',
   nextYearLabel: 'Next year',
   selectDayLabel: 'Select day',
-  selectedDate: testDate,
+  selectedDate: MOCK_TEST_DATE,
 };
 
-const todayYear = testDate.getFullYear();
-const todayMonth = testDate.getMonth();
-const formattedTodayMonth = formatMonth(todayMonth, MONTH_FORMAT);
-const headerSelectedDate = `${formattedTodayMonth} ${todayYear}`;
+let mockProps = {};
 
-describe('DtDatepicker Tests', function () {
-  // Wrappers
+describe('DtDatepicker Tests', () => {
   let wrapper;
   let datepickerHeader;
   let prevYearButton;
@@ -34,11 +33,12 @@ describe('DtDatepicker Tests', function () {
   let nextMonthButton;
   let nextYearButton;
 
-  // Environment
-  let propsData = basePropsData;
+  const updateWrapper = () => {
+    wrapper = mount(DtDatepicker, {
+      propsData: { ...baseProps, ...mockProps },
+      attachTo: document.body,
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     datepickerHeader = wrapper.find('.d-datepicker--header');
     prevYearButton = wrapper.find('#prevYearButton');
     prevMonthButton = wrapper.find('#prevMonthButton');
@@ -46,24 +46,12 @@ describe('DtDatepicker Tests', function () {
     nextYearButton = wrapper.find('#nextYearButton');
   };
 
-  const _mountWrapper = async () => {
-    wrapper = mount(DtDatepicker, {
-      propsData,
-      attachTo: document.body,
-    });
-    await wrapper.vm.$nextTick();
-  };
-
-  // Setup
-  beforeEach(function () {
-    propsData = basePropsData;
-    _mountWrapper();
-    _setChildWrappers();
+  beforeEach(() => {
+    updateWrapper();
   });
 
-  // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    mockProps = {};
   });
 
   describe('Presentation Tests', () => {
@@ -93,7 +81,7 @@ describe('DtDatepicker Tests', function () {
       });
 
       it('should render month and year of selected date', () => {
-        expect(wrapper.find('.d-datepicker--header p').text()).toBe(headerSelectedDate);
+        expect(wrapper.find('.d-datepicker--header p').text()).toBe(MOCK_HEADER_SELECTED_DATE);
       });
     });
 
@@ -134,46 +122,46 @@ describe('DtDatepicker Tests', function () {
     });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     describe('On the header', () => {
-      it('previous year button should has correct aria label', function () {
-        // eslint-disable-next-line max-len
-        expect(prevYearButton.attributes('aria-label')).toContain(`${basePropsData.changeToLabel} ${basePropsData.prevYearLabel} ${todayYear - 1}`);
+      it('previous year button should has correct aria label', () => {
+        expect(prevYearButton.attributes('aria-label'))
+          .toContain(`${baseProps.changeToLabel} ${baseProps.prevYearLabel} ${MOCK_TODAY_YEAR - 1}`);
       });
 
-      it('previous month button should has correct aria label', function () {
-        // eslint-disable-next-line max-len
-        expect(prevMonthButton.attributes('aria-label')).toContain(`${basePropsData.changeToLabel} ${basePropsData.prevMonthLabel} ${formatMonth(todayMonth - 1, MONTH_FORMAT)}`);
+      it('previous month button should has correct aria label', () => {
+        expect(prevMonthButton.attributes('aria-label'))
+          .toContain(`${baseProps.changeToLabel} ${baseProps.prevMonthLabel} ${formatMonth(MOCK_TODAY_MONTH - 1, MONTH_FORMAT)}`);
       });
 
-      it('next month button should has correct aria label', function () {
-        // eslint-disable-next-line max-len
-        expect(nextMonthButton.attributes('aria-label')).toContain(`${basePropsData.changeToLabel} ${basePropsData.nextMonthLabel} ${formatMonth(todayMonth + 1, MONTH_FORMAT)}`);
+      it('next month button should has correct aria label', () => {
+        expect(nextMonthButton.attributes('aria-label'))
+          .toContain(`${baseProps.changeToLabel} ${baseProps.nextMonthLabel} ${formatMonth(MOCK_TODAY_MONTH + 1, MONTH_FORMAT)}`);
       });
 
-      it('next year button should has correct aria label', function () {
-        // eslint-disable-next-line max-len
-        expect(nextYearButton.attributes('aria-label')).toContain(`${basePropsData.changeToLabel} ${basePropsData.nextYearLabel} ${todayYear + 1}`);
+      it('next year button should has correct aria label', () => {
+        expect(nextYearButton.attributes('aria-label'))
+          .toContain(`${baseProps.changeToLabel} ${baseProps.nextYearLabel} ${MOCK_TODAY_YEAR + 1}`);
       });
     });
 
-    describe('On calendar', function () {
-      it('day should has correct aria label', function () {
+    describe('On calendar', () => {
+      it('day should has correct aria label', () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
 
-        // eslint-disable-next-line max-len
-        expect(days.at(26).attributes('aria-label')).toContain(`${basePropsData.selectDayLabel} ${day} ${formattedTodayMonth} ${todayYear}`);
+        expect(days.at(26).attributes('aria-label'))
+          .toContain(`${baseProps.selectDayLabel} ${MOCK_DAY} ${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR}`);
       });
     });
 
-    describe('On mount', function () {
-      it('should focus previous year button', function () {
+    describe('On mount', () => {
+      it('should focus previous year button', () => {
         expect(prevYearButton.element).toBe(document.activeElement);
       });
     });
 
-    describe('On keyboard navigation', function () {
-      it('should focus first available day of the week when tab', async function () {
+    describe('On keyboard navigation', () => {
+      it('should focus first available day of the week when tab', async () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
 
         await prevYearButton.trigger('keydown.Tab');
@@ -181,89 +169,106 @@ describe('DtDatepicker Tests', function () {
         expect(days.at(6).element).toBe(document.activeElement);
       });
 
-      it('should focus prev year button on tab from calendar', async function () {
+      it('should focus prev year button on tab from calendar', async () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
 
         await prevYearButton.trigger('keydown.Tab');
+
         expect(days.at(6).element).toBe(document.activeElement);
 
         await days.at(6).trigger('keydown.Tab');
+
         expect(prevYearButton.element).toBe(document.activeElement);
       });
 
-      it('should focus next day on arrow right', async function () {
+      it('should focus next day on arrow right', async () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
 
         await days.at(6).trigger('keydown.ArrowRight');
+
         expect(days.at(7).element).toBe(document.activeElement);
       });
 
-      it('should focus previous day on arrow left', async function () {
+      it('should focus previous day on arrow left', async () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
 
         await days.at(6).trigger('keydown.ArrowRight');
+
         expect(days.at(7).element).toBe(document.activeElement);
 
         await days.at(7).trigger('keydown.ArrowLeft');
+
         expect(days.at(6).element).toBe(document.activeElement);
       });
 
-      it('should focus the day below on down arrow', async function () {
+      it('should focus the day below on down arrow', async () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
 
         await days.at(6).trigger('keydown.ArrowRight');
+
         expect(days.at(7).element).toBe(document.activeElement);
 
         await days.at(7).trigger('keydown.ArrowDown');
+
         expect(days.at(14).element).toBe(document.activeElement);
       });
 
-      it('should focus the day above on up arrow', async function () {
+      it('should focus the day above on up arrow', async () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
 
         await days.at(6).trigger('keydown.ArrowRight');
+
         expect(days.at(7).element).toBe(document.activeElement);
 
         await days.at(7).trigger('keydown.ArrowDown');
+
         expect(days.at(14).element).toBe(document.activeElement);
 
         await days.at(14).trigger('keydown.ArrowUp');
+
         expect(days.at(7).element).toBe(document.activeElement);
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    it('should update year when previous year button is clicked', async function () {
+  describe('Interactivity Tests', () => {
+    it('should update year when previous year button is clicked', async () => {
       await prevYearButton.trigger('click');
 
-      expect(wrapper.find('.d-datepicker--header p').text()).toBe(`${formattedTodayMonth} ${todayYear - 1}`);
+      expect(wrapper.find('.d-datepicker--header p')
+        .text())
+        .toBe(`${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR - 1}`);
     });
 
-    it('should update year when next year button is clicked', async function () {
+    it('should update year when next year button is clicked', async () => {
       await nextYearButton.trigger('click');
 
-      expect(wrapper.find('.d-datepicker--header p').text()).toBe(`${formattedTodayMonth} ${todayYear + 1}`);
+      expect(wrapper.find('.d-datepicker--header p')
+        .text())
+        .toBe(`${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR + 1}`);
     });
 
-    it('should update month when previous month button is clicked', async function () {
+    it('should update month when previous month button is clicked', async () => {
       await prevMonthButton.trigger('click');
 
-      // eslint-disable-next-line max-len
-      expect(wrapper.find('.d-datepicker--header p').text()).toBe(`${formatMonth(todayMonth - 1, MONTH_FORMAT)} ${todayYear}`);
+      expect(wrapper.find('.d-datepicker--header p')
+        .text())
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
     });
 
-    it('should update month when next month button is clicked', async function () {
+    it('should update month when next month button is clicked', async () => {
       await nextMonthButton.trigger('click');
 
-      // eslint-disable-next-line max-len
-      expect(wrapper.find('.d-datepicker--header p').text()).toBe(`${formatMonth(todayMonth + 1, MONTH_FORMAT)} ${todayYear}`);
+      expect(wrapper.find('.d-datepicker--header p')
+        .text())
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH + 1, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
     });
 
-    it('should emit selected-date event when a day is clicked', async function () {
+    it('should emit selected-date event when a day is clicked', async () => {
       const days = wrapper.findAll('.d-datepicker__calendar button');
 
       await days.at(6).trigger('click');
+
       expect(wrapper.emitted('selected-date')).toBeTruthy();
     });
   });

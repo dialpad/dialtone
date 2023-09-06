@@ -2,7 +2,11 @@ import { mount } from '@vue/test-utils';
 import DtCombobox from './combobox.vue';
 import DtInput from '@/components/input/input.vue';
 
-// Constants
+const MOCK_SELECT_STUB = vi.fn();
+const MOCK_ESCAPE_STUB = vi.fn();
+const MOCK_HIGHLIGHT_STUB = vi.fn();
+const MOCK_OPENED_STUB = vi.fn();
+
 const baseProps = {
   label: 'Label Text',
   labelVisible: true,
@@ -12,9 +16,19 @@ const baseProps = {
   showList: true,
   loading: false,
 };
+const baseAttrs = {
+  onSelect: MOCK_SELECT_STUB,
+  onEscape: MOCK_ESCAPE_STUB,
+  onHighlight: MOCK_HIGHLIGHT_STUB,
+  onOpened: MOCK_OPENED_STUB,
+};
+const baseSlots = {};
+
+let mockProps = {};
+let mockSlots = {};
+let mockAttrs = {};
 
 describe('DtCombobox Tests', () => {
-  // Wrappers
   let wrapper;
   let inputWrapper;
   let input;
@@ -22,17 +36,18 @@ describe('DtCombobox Tests', () => {
   let skeletons;
   let comboboxEmptyList;
 
-  // Test Environment
-  let props;
-  let attrs;
-  let slots;
-  let selectStub;
-  let escapeStub;
-  let highlightStub;
-  let openedStub;
+  const updateWrapper = () => {
+    wrapper = mount(DtCombobox, {
+      props: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
+      global: {
+        components: {
+          DtInput,
+        },
+      },
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     inputWrapper = wrapper.find('[data-qa="dt-combobox-input-wrapper"]');
     input = wrapper.findComponent({ name: 'dt-input' });
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
@@ -40,119 +55,93 @@ describe('DtCombobox Tests', () => {
     comboboxEmptyList = wrapper.find('[data-qa="dt-combobox-empty-list"]');
   };
 
-  const _mountWrapper = () => {
-    wrapper = mount(DtCombobox, {
-      props,
-      attrs,
-      slots,
-      global: {
-        components: {
-          DtInput,
-        },
-      },
-    });
-  };
-
-  // Test Setup
   beforeEach(() => {
-    props = baseProps;
-    selectStub = vi.fn();
-    escapeStub = vi.fn();
-    highlightStub = vi.fn();
-    openedStub = vi.fn();
-    attrs = { onSelect: selectStub, onEscape: escapeStub, onHighlight: highlightStub, onOpened: openedStub };
-    _mountWrapper();
-    _setChildWrappers();
+    updateWrapper();
   });
 
-  // Test Teardown
   afterEach(() => {
-    props = baseProps;
-    slots = {};
+    mockAttrs = {};
+    mockProps = {};
+    mockSlots = {};
+    vi.restoreAllMocks();
   });
 
   describe('Presentation Tests', () => {
-    it(
-      'should render the component',
-      () => { expect(wrapper.exists()).toBe(true); },
-    );
-
-    describe('When a input is provided', () => {
-      // Test Setup
-      beforeEach(async () => {
-        slots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
-        _mountWrapper();
-        _setChildWrappers();
-      });
-
-      it(
-        'should render the input wrapper',
-        () => { expect(inputWrapper.exists()).toBe(true); },
-      );
-      it('should render the input', () => { expect(input.exists()).toBe(true); });
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
     });
 
-    describe('When label is provided', function () {
-      beforeEach(function () {
-        slots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
-        _mountWrapper();
-        _setChildWrappers();
+    describe('When a input is provided', () => {
+      beforeEach(() => {
+        mockSlots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
+
+        updateWrapper();
+      });
+
+      it('should render the input wrapper', () => {
+        expect(inputWrapper.exists()).toBe(true);
+      });
+
+      it('should render the input', () => {
+        expect(input.exists()).toBe(true);
+      });
+    });
+
+    describe('When label is provided', () => {
+      beforeEach(() => {
+        mockSlots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
+
+        updateWrapper();
       });
 
       it('should provide proper label prop to input element', () => {
         expect(input.props('label')).toEqual(baseProps.label);
       });
+
       it('should provide proper size prop to input element', () => {
         expect(input.props('size')).toEqual(baseProps.size);
       });
+
       it('should provide proper description prop to input element', () => {
         expect(input.props('description')).toEqual(baseProps.description);
       });
 
       describe('If label visible prop is false', () => {
-        beforeEach(async () => {
+        it('should still set aria-label even if label visible is false', async () => {
           await wrapper.setProps({ labelVisible: false });
+
+          expect(input.find('input').attributes('aria-label')).toEqual(baseProps.label);
         });
-        it(
-          'should still set aria-label even if label visible is false',
-          () => {
-            expect(input.find('input').attributes('aria-label')).toEqual(baseProps.label);
-          },
-        );
       });
     });
 
     describe('When a list is provided', () => {
-      // Test Setup
-      beforeEach(async function () {
-        slots = { list: '<ol id="list"></ol>' };
-        _mountWrapper();
-        _setChildWrappers();
+      beforeEach(() => {
+        mockSlots = { list: '<ol id="list"></ol>' };
+
+        updateWrapper();
       });
 
-      it(
-        'should render the list wrapper',
-        () => { expect(listWrapper.exists()).toBe(true); },
-      );
-      it(
-        'should render the list',
-        () => { expect(wrapper.find('#list').exists()).toBe(true); },
-      );
+      it('should render the list wrapper', () => {
+        expect(listWrapper.exists()).toBe(true);
+      });
+
+      it('should render the list', () => {
+        expect(wrapper.find('#list').exists()).toBe(true);
+      });
     });
 
     describe('When the list is empty', () => {
-      // Test Setup
-      beforeEach(async () => {
-        slots = { list: '<ol id="list"></ol>' };
-        _mountWrapper();
-        await wrapper.setProps({
+      beforeEach(() => {
+        mockSlots = { list: '<ol id="list"></ol>' };
+        mockProps = {
           showList: true,
           emptyList: true,
           emptyStateMessage: 'empty',
           emptyStateClass: 'class',
-        });
-        await wrapper.vm.$nextTick();
-        _setChildWrappers();
+        };
+
+        updateWrapper();
       });
 
       it('should render the empty list', () => {
@@ -165,55 +154,48 @@ describe('DtCombobox Tests', () => {
     });
 
     describe('When it is loading', () => {
-      // Test Setup
-      beforeEach(async () => {
-        slots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
-        await wrapper.setProps({ loading: true });
-        _setChildWrappers();
-      });
+      it('should render the loading skeletons', () => {
+        mockSlots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
+        mockProps = { loading: true };
 
-      it(
-        'should render the loading skeletons',
-        () => { expect(skeletons.exists()).toBe(true); },
-      );
+        updateWrapper();
+
+        expect(skeletons.exists()).toBe(true);
+      });
     });
   });
 
   describe('Accessibility Tests', () => {
     describe('When a input is provided', () => {
-      // Test Setup
-      beforeEach(async function () {
-        slots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
-        _mountWrapper();
-        _setChildWrappers();
+      beforeEach(() => {
+        mockSlots = { input: '<template #input="params"><dt-input v-bind="params.inputProps" /></template>' };
+
+        updateWrapper();
       });
 
       describe('When list is not expanded', () => {
-        beforeEach(async () => {
+        it('aria-expanded should be "false"', async () => {
           await wrapper.setProps({ showList: false });
-        });
 
-        it('aria-expanded should be "false"', () => {
           expect(input.find('input').attributes('aria-expanded') === 'false').toBe(true);
         });
       });
 
       describe('When list is expanded', () => {
-        beforeEach(async () => {
-          await wrapper.setProps({ showList: true });
-        });
-
         it('aria-expanded should be "true"', () => {
+          mockProps = { showList: true };
+
+          updateWrapper();
+
           expect(input.find('input').attributes('aria-expanded') === 'true').toBe(true);
         });
 
         describe('When list is loading', () => {
-          beforeEach(async () => {
+          it('aria-busy should be "true"', async () => {
             await wrapper.setProps({ loading: true });
-            _setChildWrappers();
-          });
 
-          it('aria-busy should be "true"', () => {
+            listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
+
             expect(listWrapper.find('ol').attributes('aria-busy') === 'true').toBe(true);
           });
         });
@@ -222,30 +204,31 @@ describe('DtCombobox Tests', () => {
   });
 
   describe('Interactivity Tests', () => {
-    // Test Setup
-    beforeEach(async () => {
-      slots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
-      _mountWrapper();
-      _setChildWrappers();
+    beforeEach(() => {
+      mockSlots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
+
+      updateWrapper();
     });
 
     describe('When the list is empty', () => {
-      beforeEach(async () => {
-        slots = { list: '<ol id="list"></ol>' };
-        _setChildWrappers();
+      beforeEach(() => {
+        mockSlots = { list: '<ol id="list"></ol>' };
+
+        updateWrapper();
       });
 
       describe('When "Esc" key is pressed', () => {
         beforeEach(async () => {
-          console.log(wrapper.html());
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
-        it(
-          'should emit escape event',
-          () => { expect(wrapper.emitted().escape.length).toBe(1); },
-        );
+        it('should call listener', () => {
+          expect(MOCK_ESCAPE_STUB).toHaveBeenCalled();
+        });
+
+        it('should emit escape event', () => {
+          expect(wrapper.emitted().escape.length).toBe(1);
+        });
       });
 
       describe('When "Enter" key is pressed', () => {
@@ -253,14 +236,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.enter');
         });
 
-        it(
-          'should not call listener',
-          () => { expect(selectStub).toHaveBeenCalledTimes(0); },
-        );
-        it(
-          'should not emit select event',
-          () => { expect(wrapper.emitted().select).toBeUndefined(); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_SELECT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit select event', () => {
+          expect(wrapper.emitted().select).toBeUndefined();
+        });
       });
 
       describe('When down arrow button is pressed', () => {
@@ -268,14 +250,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.down');
         });
 
-        it(
-          'should call listener',
-          () => { expect(highlightStub).toHaveBeenCalled(); },
-        );
-        it(
-          'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toBe(1); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit highlight event', () => {
+          expect(wrapper.emitted().highlight).toBeUndefined();
+        });
       });
 
       describe('When up arrow button is pressed', () => {
@@ -283,14 +264,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.up');
         });
 
-        it(
-          'should call listener',
-          () => { expect(highlightStub).toHaveBeenCalled(); },
-        );
-        it(
-          'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toBe(1); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit highlight event', () => {
+          expect(wrapper.emitted().highlight).toBeUndefined();
+        });
       });
 
       describe('When home button is pressed', () => {
@@ -298,14 +278,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.home');
         });
 
-        it(
-          'should call listener',
-          () => { expect(highlightStub).toHaveBeenCalled(); },
-        );
-        it(
-          'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toBe(1); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit highlight event', () => {
+          expect(wrapper.emitted().highlight).toBeUndefined();
+        });
       });
 
       describe('When end button is pressed', () => {
@@ -313,21 +292,21 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.end');
         });
 
-        it(
-          'should call listener',
-          () => { expect(highlightStub).toHaveBeenCalled(); },
-        );
-        it(
-          'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toBe(1); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit highlight event', () => {
+          expect(wrapper.emitted().highlight).toBeUndefined();
+        });
       });
     });
 
     describe('When the list is loading', () => {
       beforeEach(async () => {
-        await wrapper.setProps({ loading: true });
-        _setChildWrappers();
+        mockProps = { loading: true };
+
+        updateWrapper();
       });
 
       describe('When "Esc" key is pressed', () => {
@@ -335,11 +314,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
-        it(
-          'should emit escape event',
-          () => { expect(wrapper.emitted().escape.length).toBe(1); },
-        );
+        it('should call listener', () => {
+          expect(MOCK_ESCAPE_STUB).toHaveBeenCalled();
+        });
+
+        it('should emit escape event', () => {
+          expect(wrapper.emitted().escape.length).toBe(1);
+        });
       });
 
       describe('When "Enter" key is pressed', () => {
@@ -347,14 +328,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.enter');
         });
 
-        it(
-          'should not call listener',
-          () => { expect(selectStub).toHaveBeenCalledTimes(0); },
-        );
-        it(
-          'should not emit select event',
-          () => { expect(wrapper.emitted().select).toBeUndefined(); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_SELECT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit select event', () => {
+          expect(wrapper.emitted().select).toBeUndefined();
+        });
       });
 
       describe('When down arrow button is pressed', () => {
@@ -362,14 +342,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.down');
         });
 
-        it(
-          'should not call listener',
-          () => { expect(highlightStub).toHaveBeenCalledTimes(0); },
-        );
-        it(
-          'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).toBeUndefined(); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit highlight event', () => {
+          expect(wrapper.emitted().highlight).toBeUndefined();
+        });
       });
 
       describe('When up arrow button is pressed', () => {
@@ -377,14 +356,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.up');
         });
 
-        it(
-          'should not call listener',
-          () => { expect(highlightStub).toHaveBeenCalledTimes(0); },
-        );
-        it(
-          'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).toBeUndefined(); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit highlight event', () => {
+          expect(wrapper.emitted().highlight).toBeUndefined();
+        });
       });
 
       describe('When home button is pressed', () => {
@@ -392,14 +370,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.home');
         });
 
-        it(
-          'should not call listener',
-          () => { expect(highlightStub).toHaveBeenCalledTimes(0); },
-        );
-        it(
-          'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).toBeUndefined(); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit highlight event', () => {
+          expect(wrapper.emitted().highlight).toBeUndefined();
+        });
       });
 
       describe('When end button is pressed', () => {
@@ -407,14 +384,13 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.end');
         });
 
-        it(
-          'should not call listener',
-          () => { expect(highlightStub).toHaveBeenCalledTimes(0); },
-        );
-        it(
-          'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).toBeUndefined(); },
-        );
+        it('should not call listener', () => {
+          expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('should not emit highlight event', () => {
+          expect(wrapper.emitted().highlight).toBeUndefined();
+        });
       });
     });
 
@@ -424,11 +400,13 @@ describe('DtCombobox Tests', () => {
         await wrapper.setProps({ showList: true });
       });
 
-      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
-      it(
-        'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toBe(2); },
-      );
+      it('should call listener', () => {
+        expect(MOCK_OPENED_STUB).toHaveBeenCalled();
+      });
+
+      it('should emit open event', () => {
+        expect(wrapper.emitted().opened.length).toBe(2);
+      });
     });
 
     describe('When the list is closed', () => {
@@ -436,11 +414,13 @@ describe('DtCombobox Tests', () => {
         await wrapper.setProps({ showList: false });
       });
 
-      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
-      it(
-        'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toBe(1); },
-      );
+      it('should call listener', () => {
+        expect(MOCK_OPENED_STUB).toHaveBeenCalled();
+      });
+
+      it('should emit open event', () => {
+        expect(wrapper.emitted().opened.length).toBe(1);
+      });
     });
 
     describe('When "Enter" key is pressed but no item is highlighted', () => {
@@ -449,14 +429,13 @@ describe('DtCombobox Tests', () => {
         await wrapper.trigger('keydown.enter');
       });
 
-      it(
-        'should not call listener',
-        () => { expect(selectStub).toHaveBeenCalledTimes(0); },
-      );
-      it(
-        'should not emit select event',
-        () => { expect(wrapper.emitted().select).toBeUndefined(); },
-      );
+      it('should not call listener', () => {
+        expect(MOCK_SELECT_STUB).toHaveBeenCalledTimes(0);
+      });
+
+      it('should not emit select event', () => {
+        expect(wrapper.emitted().select).toBeUndefined();
+      });
     });
 
     describe('When "Enter" key is pressed and item is highlighted', () => {
@@ -465,11 +444,13 @@ describe('DtCombobox Tests', () => {
         await wrapper.trigger('keydown.enter');
       });
 
-      it('should call listener', () => { expect(selectStub).toHaveBeenCalled(); });
-      it(
-        'should emit select event',
-        () => { expect(wrapper.emitted().select.length).toBe(1); },
-      );
+      it('should call listener', () => {
+        expect(MOCK_SELECT_STUB).toHaveBeenCalled();
+      });
+
+      it('should emit select event', () => {
+        expect(wrapper.emitted().select.length).toBe(1);
+      });
     });
 
     describe('When "Enter" key is pressed with another key and item is highlighted', () => {
@@ -478,14 +459,13 @@ describe('DtCombobox Tests', () => {
         await wrapper.trigger('keydown.shift.enter');
       });
 
-      it(
-        'should not call listener',
-        () => { expect(selectStub).toHaveBeenCalledTimes(0); },
-      );
-      it(
-        'should not emit select event',
-        () => { expect(wrapper.emitted().select).toBeUndefined(); },
-      );
+      it('should not call listener', () => {
+        expect(MOCK_SELECT_STUB).toHaveBeenCalledTimes(0);
+      });
+
+      it('should not emit select event', () => {
+        expect(wrapper.emitted().select).toBeUndefined();
+      });
     });
 
     describe('When "Esc" key is pressed', () => {
@@ -493,11 +473,13 @@ describe('DtCombobox Tests', () => {
         await wrapper.trigger('keydown.esc');
       });
 
-      it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
-      it(
-        'should emit escape event',
-        () => { expect(wrapper.emitted().escape.length).toBe(1); },
-      );
+      it('should call listener', () => {
+        expect(MOCK_ESCAPE_STUB).toHaveBeenCalled();
+      });
+
+      it('should emit escape event', () => {
+        expect(wrapper.emitted().escape.length).toBe(1);
+      });
     });
 
     describe('When the highlightIndex changes', () => {
@@ -506,38 +488,31 @@ describe('DtCombobox Tests', () => {
         await wrapper.vm.$nextTick();
       });
 
-      it(
-        'should call listener',
-        () => { expect(highlightStub).toHaveBeenCalled(); },
-      );
-      it(
-        'should emit highlight event',
-        () => { expect(wrapper.emitted().highlight.length).toBe(1); },
-      );
+      it('should call listener', () => {
+        expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalled();
+      });
+
+      it('should emit highlight event', () => {
+        expect(wrapper.emitted().highlight.length).toBe(1);
+      });
     });
 
     describe('When mouseleave is detected on the list wrapper', () => {
-      // Test Setup
       beforeEach(async () => {
         await listWrapper.trigger('mouseleave');
       });
 
-      it(
-        'should reset the highlightIndex',
-        () => { expect(wrapper.vm.highlightIndex).toBe(-1); },
-      );
+      it('should reset the highlightIndex', () => {
+        expect(wrapper.vm.highlightIndex).toBe(-1);
+      });
     });
 
     describe('When focusout is detected on the list wrapper', () => {
-      // Test Setup
-      beforeEach(async () => {
+      it('should reset the highlightIndex', async () => {
         await listWrapper.trigger('focusout');
-      });
 
-      it(
-        'should reset the highlightIndex',
-        () => { expect(wrapper.vm.highlightIndex).toBe(-1); },
-      );
+        expect(wrapper.vm.highlightIndex).toBe(-1);
+      });
     });
   });
 });
