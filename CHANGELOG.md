@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/dialpad/dialtone-tokens/compare/v1.23.0...v1.23.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* run token-transformer on npm run build ([0cb84fa](https://github.com/dialpad/dialtone-tokens/commit/0cb84fa2f09f13df84d2f6958549b9e1665ecf7f))
+
 # [1.23.0](https://github.com/dialpad/dialtone-tokens/compare/v1.22.0...v1.23.0) (2023-09-08)
 
 
