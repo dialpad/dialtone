@@ -1,3 +1,22 @@
+# [1.23.0](https://github.com/dialpad/dialtone-tokens/compare/v1.22.0...v1.23.0) (2023-09-08)
+
+
+### Bug Fixes
+
+* **color:** corrected mixed reference for clear critical button ([4e8854f](https://github.com/dialpad/dialtone-tokens/commit/4e8854f9b1b57e81fd916cb6e8f8fbf8478e61fb))
+* **color:** corrected mixed reference for inverted primary button ([4ffd699](https://github.com/dialpad/dialtone-tokens/commit/4ffd69948961c39cb32ded742100c07518c1eec4))
+* **color:** corrected mixed reference for primary base button ([432f859](https://github.com/dialpad/dialtone-tokens/commit/432f85971560eb15bbbde08982b617edef878893))
+* **color:** corrected mixed reference for primary button ([9999caf](https://github.com/dialpad/dialtone-tokens/commit/9999cafb2fd76376d28d4ad27b8f734a309d8cb7))
+* **color:** corrected mixed reference for primary critical button ([03916f7](https://github.com/dialpad/dialtone-tokens/commit/03916f7c3c4acfee19716a3533f469cbcde0f6fa))
+* **color:** corrected mixed reference for primary critical button ([21419ac](https://github.com/dialpad/dialtone-tokens/commit/21419acfae7be732c55013d975d80763827a143c))
+
+
+### Features
+
+* changed file path to enable Multi-file Sync, in the service of newer SD Transforms ([bade45a](https://github.com/dialpad/dialtone-tokens/commit/bade45afc8e9c8da870f277f24fcd09b9dbbaa7f))
+* **color:** changed modification technique from rgba() to Tokens Studio Pro's modify ([fa1ab61](https://github.com/dialpad/dialtone-tokens/commit/fa1ab6179f90653a51c5be44bad2fcb6ab90332f))
+* convert css tokens to sd-transforms ([#10](https://github.com/dialpad/dialtone-tokens/issues/10)) ([04dee6d](https://github.com/dialpad/dialtone-tokens/commit/04dee6d703a45df1adc7fd043db4271512c7567e))
+
 # [1.22.0](https://github.com/dialpad/dialtone-tokens/compare/v1.21.0...v1.22.0) (2023-08-04)
 
 
