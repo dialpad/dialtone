@@ -1,183 +1,135 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji.js';
-import { flushPromises } from '@/common/utils.js';
 import customEmojiJson from '@/common/custom-emoji.json';
 
 setEmojiAssetUrlSmall('https://mockstorage.com/emojis/', '.png');
 setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
 setCustomEmojiUrl('https://mockstorage.com/emojis/');
 
-// Constants
-const basePropsData = {};
+const MOCK_EXPECTED_SMILE_SRC = 'https://mockstorage.com/emojis/1f604.svg';
+const MOCK_EXPECTED_SMILE_SRC_SMALL = 'https://mockstorage.com/emojis/1f604.png';
+const MOCK_EXPECTED_LAUGHING_SRC = 'https://mockstorage.com/emojis/1f606.svg';
+const MOCK_EXPECTED_POINT_UP_LIGHT = 'https://mockstorage.com/emojis/261d-1f3fb.svg';
+const MOCK_EXPECTED_SHIP_IT = 'https://mockstorage.com/emojis/shipit.png';
+
+const baseProps = { code: '' };
+
+let mockProps = {};
+const testContext = {};
 
 describe('DtEmoji Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
-  // Wrappers
   let wrapper;
   let emoji;
 
-  // Environment
-  let propsData = basePropsData;
-  let attrs = {};
-  let slots = {};
-  let provide = {};
-
-  // Expected
-  const expectedSmileSrc = 'https://mockstorage.com/emojis/1f604.svg';
-  const expectedSmileSrcSmall = 'https://mockstorage.com/emojis/1f604.png';
-  const expectedLaughingSrc = 'https://mockstorage.com/emojis/1f606.svg';
-  const expectedPointUpLight = 'https://mockstorage.com/emojis/261d-1f3fb.svg';
-  const expectedShipIt = 'https://mockstorage.com/emojis/shipit.png';
-
-  // Helpers
-  const _setChildWrappers = async () => {
-    emoji = await wrapper.find('img');
-  };
-
-  const _setWrappers = async () => {
+  const updateWrapper = () => {
     wrapper = mount(DtEmoji, {
-      propsData,
-      attrs,
-      slots,
-      provide,
+      propsData: { ...baseProps, ...mockProps },
       localVue: testContext.localVue,
     });
-    await flushPromises();
-    await _setChildWrappers();
+
+    emoji = wrapper.find('img');
   };
 
-  // Setup
   beforeAll(() => {
     testContext.localVue = createLocalVue();
   });
-  beforeEach(() => {});
 
-  // Teardown
-  afterEach(() => {
-    propsData = basePropsData;
-    attrs = {};
-    slots = {};
-    provide = {};
+  beforeEach(() => {
+    updateWrapper();
   });
-  afterAll(() => {});
+
+  afterEach(() => {
+    mockProps = {};
+  });
 
   describe('Presentation Tests', () => {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
-
     describe('When a code string is passed in', () => {
-      beforeEach(async () => {
-        propsData = {
-          code: ':smile:',
-        };
-        await _setWrappers();
+      beforeEach(() => {
+        mockProps = { code: ':smile:' };
+
+        updateWrapper();
       });
 
-      it('renders the correct emoji', async () => {
-        expect(emoji.attributes('src')).toBe(expectedSmileSrc);
+      it('renders the correct emoji', () => {
+        expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC);
       });
+
       describe('When a prop changes to a new code', () => {
-        beforeEach(async () => {
-          await wrapper.setProps({ code: ':laughing:' });
-          await flushPromises();
-          await _setChildWrappers();
-        });
         it('should display the correct emoji with the new code', () => {
-          expect(emoji.attributes('src')).toBe(expectedLaughingSrc);
+          mockProps = { code: ':laughing:' };
+
+          updateWrapper();
+
+          expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_LAUGHING_SRC);
         });
       });
 
       describe('When a prop changes to a new custom emoji code', () => {
-        beforeEach(async () => {
+        it('should display the correct emoji with the new custom code', async () => {
           setCustomEmojiJson(customEmojiJson);
+
           await wrapper.setProps({ code: ':shipit:' });
-          await flushPromises();
-          await _setChildWrappers();
-        });
-        afterAll(() => {
+
+          expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SHIP_IT);
+
           setCustomEmojiJson('');
-        });
-        it('should display the correct emoji with the new custom code', () => {
-          expect(emoji.attributes('src')).toBe(expectedShipIt);
         });
       });
 
       describe('When a prop changes to an invalid code', () => {
-        beforeEach(async () => {
+        it('should display a "not found" image', async () => {
           await wrapper.setProps({ code: ':invalidcode:' });
-          await flushPromises();
-          await _setChildWrappers();
-        });
-        it('should display a "not found" image', () => {
+
           expect(emoji.attributes('title')).toBe('Invalid Emoji');
         });
       });
 
       describe('When the size changes to 800', () => {
-        beforeEach(async () => {
+        it('the correct class is set on the element', async () => {
           await wrapper.setProps({ size: '800' });
-        });
-        it('the correct class is set on the element', () => {
+
           expect(emoji.classes('d-icon--size-800')).toBe(true);
         });
       });
 
       describe('When the size changes to 200', () => {
-        beforeEach(async () => {
+        it('the emoji is rendered using the "small emoji" url', async () => {
           await wrapper.setProps({ size: '200' });
-          await flushPromises();
-        });
-        it('the emoji is rendered using the "small emoji" url', () => {
-          expect(emoji.attributes('src')).toBe(expectedSmileSrcSmall);
+
+          expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC_SMALL);
         });
       });
     });
 
     describe('When a skin tone emoji is passed in', () => {
-      beforeEach(async () => {
-        propsData = {
-          code: ':point_up_tone1:',
-        };
-        await _setWrappers();
-      });
       it('renders the correct emoji', () => {
-        expect(emoji.attributes('src')).toBe(expectedPointUpLight);
+        mockProps = { code: ':point_up_tone1:' };
+
+        updateWrapper();
+
+        expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_POINT_UP_LIGHT);
       });
     });
 
     describe('When an emoji unicode is passed in', () => {
-      beforeEach(async () => {
-        propsData = {
-          code: '☝🏻',
-        };
-        await _setWrappers();
-      });
       it('renders the correct emoji', () => {
-        expect(emoji.attributes('src')).toBe(expectedPointUpLight);
+        mockProps = { code: '☝🏻' };
+
+        updateWrapper();
+
+        expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_POINT_UP_LIGHT);
       });
     });
   });
 
   describe('Accessibility Tests', () => {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
-
     describe('When an emoji is rendered', () => {
-      beforeEach(async () => {
-        propsData = {
-          code: ':smile:',
-        };
-        await _setWrappers();
-      });
       it('should have aria-label describing the emoji', () => {
+        mockProps = { code: ':smile:' };
+
+        updateWrapper();
+
         expect(emoji.attributes('aria-label')).toBe('grinning face with smiling eyes');
       });
     });
