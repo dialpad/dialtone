@@ -3,11 +3,12 @@
   "version": "1.22.0",
   "description": "Design tokens for Dialtone.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run transform && npm run transform-dark && ./build.js && cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version && ./build-ios.js",
-    "transform": "token-transformer base.json tokens/tokens-light.json base,semantic,components/checkbox,components/icon,components/radio,components/badge,components/avatar --expandTypography=true --expandShadow=true",
-    "transform-dark": "token-transformer base.json tokens/tokens-dark.json base,base/dark,semantic,semantic/dark,components/avatar,components/badge,components/checkbox,components/checkbox/dark,components/icon,components/radio,components/radio/dark --expandTypography=true --expandShadow=true",
+    "build": "node ./build.js && cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version && ./build-ios.js",
+    "build:token-transformer": "npm run build:token-transformer:light && npm run build:token-transformer:dark",
+    "build:token-transformer:light": "token-transformer tokens token_transformer/tokens-light.json base/default,semantic/dp/default,components/checkbox,components/avatar/default,components/badge/default,components/checkbox/default,components/icon/default,components/radio/default --expandTypography=true --expandShadow=true",
+    "build:token-transformer:dark": "token-transformer tokens token_transformer/tokens-dark.json base/default,base/dark,semantic/dp/default,semantic/dp/dark,components/avatar/default,components/badge/default,components/checkbox/default,components/checkbox/dark,components/icon/default,components/radio/default,components/radio/dark --expandTypography=true --expandShadow=true",
     "prepublishOnly": "npm run build",
     "release": "semantic-release --no-ci --extends ./release-local.config.js"
   },
@@ -19,7 +20,7 @@
   },
   "repository": "git@github.com:dialpad/dialtone-tokens.git",
   "author": "Dialpad",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dialpad/dialtone-tokens/issues"
   },
@@ -30,6 +31,7 @@
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@tokens-studio/sd-transforms": "^0.11.0",
     "maven": "^5.0.0",
     "style-dictionary": "^3.8.0",
     "token-transformer": "^0.0.31"

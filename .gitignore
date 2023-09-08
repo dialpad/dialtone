@@ -1,5 +1,7 @@
 node_modules
+token_transformer
 dist*/*
+dist_legacy
 !dist_ios/Package.swift
 !dist_ios/.github
 !dist_ios/VERSION

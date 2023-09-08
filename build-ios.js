@@ -1,7 +1,11 @@
 #!/usr/bin/env node
-const fs = require('fs');
 
-const THEMES = require('./build').THEMES;
+/**
+ * Builds the ios tokens to the correct final package format (output to dist_ios)
+ */
+import fs from 'fs';
+
+import { THEMES } from './build-token-transformer.js';
 
 if (!fs.existsSync('dist_ios/Sources/DialtoneTokens')) {
   fs.mkdirSync( 'dist_ios/Sources/DialtoneTokens', { recursive: true })

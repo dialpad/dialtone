@@ -654,13 +654,13 @@
       "field": {
         "color": {
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{theme.topbar.color.background}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": "1",
+                  "value": ".32",
                   "space": "hsl"
                 }
               }
