@@ -1,8 +1,7 @@
 import { mount } from '@vue/test-utils';
 import DtEmojiPicker from './DtEmojiPicker.vue';
 
-// Constants
-const recentlyUsedEmojis = [
+const MOCK_RECENTLY_USED_EMOJIS = [
   {
     name: 'thumbs up',
     category: 'people',
@@ -49,7 +48,7 @@ const recentlyUsedEmojis = [
     unicode_character: '1f470-1f3ff-2640',
   },
 ];
-const tabSetLabels = [
+const MOCK_TAB_SET_LABELS = [
   'Most recently used',
   'Smileys and people',
   'Nature',
@@ -60,50 +59,44 @@ const tabSetLabels = [
   'Symbols',
   'Flags',
 ];
-const skinSelectorButtonTooltipLabel = 'Change default skin tone';
-const searchResultsLabel = 'Search results';
-const searchNoResultsLabel = 'No results';
-const searchPlaceholderLabel = 'Search...';
+const MOCK_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL = 'Change default skin tone';
+const MOCK_SEARCH_RESULTS_LABEL = 'Search results';
+const MOCK_SEARCH_NO_RESULTS_LABEL = 'No results';
+const MOCK_SEARCH_PLACEHOLDER_LABEL = 'Search...';
 
 const baseProps = {
   skinTone: 'Light',
-  skinSelectorButtonTooltipLabel,
-  tabSetLabels,
-  recentlyUsedEmojis,
-  searchResultsLabel,
-  searchNoResultsLabel,
-  searchPlaceholderLabel,
+  skinSelectorButtonTooltipLabel: MOCK_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL,
+  tabSetLabels: MOCK_TAB_SET_LABELS,
+  recentlyUsedEmojis: MOCK_RECENTLY_USED_EMOJIS,
+  searchResultsLabel: MOCK_SEARCH_RESULTS_LABEL,
+  searchNoResultsLabel: MOCK_SEARCH_NO_RESULTS_LABEL,
+  searchPlaceholderLabel: MOCK_SEARCH_PLACEHOLDER_LABEL,
 };
 
+let mockProps = {};
+
 describe('DtEmojiPicker Tests', () => {
-  // Wrappers
   let wrapper;
   let skinToneSelectorButton, skinToneSelectorImg, skinToneMediumLightButton;
 
-  // Environment
-  let props = baseProps;
-
-  const _setWrappers = async () => {
+  const updateWrapper = () => {
     wrapper = mount(DtEmojiPicker, {
-      props,
+      props: { ...baseProps, ...mockProps },
       attachTo: document.body,
     });
-    await wrapper.vm.$nextTick();
-    _setChildWrappers();
-  };
 
-  const _setChildWrappers = () => {
     skinToneSelectorButton = wrapper.find('.d-emoji-picker__skin-selected button');
     skinToneSelectorImg = wrapper.find('.d-emoji-picker__skin-selected button img');
     skinToneMediumLightButton = wrapper.find('.d-emoji-picker__skin-list').findAll('button').at(1);
   };
 
-  afterEach(() => {
-    props = baseProps;
+  beforeEach(() => {
+    updateWrapper();
   });
 
-  beforeEach(() => {
-    _setWrappers();
+  afterEach(() => {
+    mockProps = {};
   });
 
   describe('Presentation Tests', () => {
@@ -135,40 +128,40 @@ describe('DtEmojiPicker Tests', () => {
       const firstButton = wrapper.find('.d-tablist').findAll('button').at(0);
 
       expect(firstButton.exists()).toBe(true);
-      expect(firstButton.attributes('aria-label')).toBe(tabSetLabels[0]);
+      expect(firstButton.attributes('aria-label')).toBe(MOCK_TAB_SET_LABELS[0]);
     });
 
     it('Should render provided search placeholder label', () => {
       const searchInput = wrapper.find('.d-emoji-picker__search input');
 
       expect(searchInput.exists()).toBe(true);
-      expect(searchInput.attributes('placeholder')).toBe(searchPlaceholderLabel);
+      expect(searchInput.attributes('placeholder')).toBe(MOCK_SEARCH_PLACEHOLDER_LABEL);
     });
 
     it('Should render correct labels in emojis tabset', () => {
       const firstButton = wrapper.find('.d-tablist').findAll('button').at(3);
 
       expect(firstButton.exists()).toBe(true);
-      expect(firstButton.attributes('aria-label')).toBe(tabSetLabels[3]);
+      expect(firstButton.attributes('aria-label')).toBe(MOCK_TAB_SET_LABELS[3]);
     });
 
     it('Should render correct amount of tabs in emoji tabset', () => {
       const TabsCount = wrapper.find('.d-tablist').findAll('button').length;
 
-      expect(TabsCount).toBe(tabSetLabels.length);
+      expect(TabsCount).toBe(MOCK_TAB_SET_LABELS.length);
     });
 
-    it('Fixed label should be the first tabset label', async () => {
+    it('Fixed label should be the first tabset label', () => {
       const fixedLabel = wrapper.find('.d-emoji-picker__alignment p');
 
       expect(fixedLabel.exists()).toBe(true);
-      expect(fixedLabel.text()).toEqual(tabSetLabels[0]);
+      expect(fixedLabel.text()).toEqual(MOCK_TAB_SET_LABELS[0]);
     });
 
     describe('Skin tone selector tests', () => {
       it('Should render provided skin selector button tooltip label', () => {
         expect(skinToneSelectorButton.exists()).toBe(true);
-        expect(skinToneSelectorButton.attributes('aria-label')).toBe(skinSelectorButtonTooltipLabel);
+        expect(skinToneSelectorButton.attributes('aria-label')).toBe(MOCK_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL);
       });
 
       it('Should render provided skin tone in skin tone selector', () => {
@@ -202,14 +195,15 @@ describe('DtEmojiPicker Tests', () => {
         expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone2:');
 
         await wrapper.setProps({ skinTone: 'Dark' });
+
         expect(skinToneSelectorImg.exists()).toBe(true);
         expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone5:');
       });
     });
 
     describe('When recently emojis is not provided', () => {
-      beforeEach(async () => {
-        props = {
+      it('Should not render recently emojis tabset', () => {
+        mockProps = {
           ...baseProps,
           recentlyUsedEmojis: [],
           tabSetLabels: [
@@ -223,15 +217,14 @@ describe('DtEmojiPicker Tests', () => {
             'Flags',
           ],
         };
-        await _setWrappers();
-      });
 
-      it('Should not render recently emojis tabset', async () => {
+        updateWrapper();
+
         const firstButton = wrapper.find('.d-tablist').findAll('button').at(0);
 
         expect(firstButton.exists()).toBe(true);
-        expect(firstButton.attributes('aria-label')).not.toBe(tabSetLabels[0]);
-        expect(firstButton.attributes('aria-label')).toBe(tabSetLabels[1]);
+        expect(firstButton.attributes('aria-label')).not.toBe(MOCK_TAB_SET_LABELS[0]);
+        expect(firstButton.attributes('aria-label')).toBe(MOCK_TAB_SET_LABELS[1]);
       });
     });
   });
@@ -241,8 +234,10 @@ describe('DtEmojiPicker Tests', () => {
       const emoji = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__tab button');
 
       expect(emoji.exists()).toBe(true);
+
       await emoji.trigger('click');
       await wrapper.vm.$nextTick();
+
       expect(wrapper.emitted('selected-emoji')).toBeTruthy();
     });
 
@@ -251,16 +246,18 @@ describe('DtEmojiPicker Tests', () => {
         const searchInput = wrapper.find('.d-emoji-picker__search input');
 
         searchInput.setValue('tube');
-        await searchInput.trigger('input');
 
+        await searchInput.trigger('input');
         await wrapper.vm.$nextTick();
 
         const fixedLabel = wrapper.find('.d-emoji-picker__search-label');
-        expect(fixedLabel.text()).toBe(searchResultsLabel);
+
+        expect(fixedLabel.text()).toBe(MOCK_SEARCH_RESULTS_LABEL);
       });
 
       it('Input search should filter emojis', async () => {
         const searchInput = wrapper.find('.d-emoji-picker__search input');
+
         expect(wrapper.find('[data-qa="filtered-emojis"]').exists()).toBe(false);
 
         searchInput.setValue('tube');
@@ -276,6 +273,7 @@ describe('DtEmojiPicker Tests', () => {
       const emojiData = wrapper.find('.d-emoji-picker__data');
 
       expect(emoji.exists()).toBe(true);
+
       await emoji.trigger('mouseover');
       await wrapper.vm.$nextTick();
 
@@ -398,7 +396,7 @@ describe('DtEmojiPicker Tests', () => {
       expect(document.activeElement).toBe(firstTab.element);
     });
 
-    it('Should jump to search input from tabset', async() => {
+    it('Should jump to search input from tabset', async () => {
       const firstTab = wrapper.find('.d-tablist button');
       const searchInput = wrapper.find('.d-emoji-picker__search input');
 

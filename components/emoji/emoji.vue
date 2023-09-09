@@ -52,7 +52,7 @@ export default {
      */
     code: {
       type: String,
-      default: null,
+      required: true,
     },
 
     /**

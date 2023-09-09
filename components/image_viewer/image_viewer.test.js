@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtImageViewer from './image_viewer.vue';
 
-// Constants
 const baseProps = {
   imageSrc: 'test.png',
   imageAlt: 'imageAltText',
@@ -10,8 +9,9 @@ const baseProps = {
   ariaLabel: 'Click to open image',
 };
 
+let mockProps = {};
+
 describe('DtImageViewer Tests', () => {
-  // Wrappers
   let wrapper;
   let imageViewerPreview;
   let imageViewerFull;
@@ -20,36 +20,9 @@ describe('DtImageViewer Tests', () => {
   let fullImage;
   let overlay;
 
-  // Environment
-  let props = baseProps;
-  let attrs = {};
-  let slots = {};
-  let provide = {};
-
-  // Helpers
-  const _setChildWrappers = () => {
-    imageViewerPreview = wrapper.find('[data-qa="dt-image-viewer-preview"]');
-    previewImage = imageViewerPreview.find('img');
-  };
-
-  const _openModal = async () => {
-    await imageViewerPreview.trigger('click');
-    _setFullImageChildWrappers();
-  };
-
-  const _setFullImageChildWrappers = () => {
-    imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
-    fullImage = imageViewerFull.find('img');
-    closeButton = wrapper.find('[data-qa="dt-image-viewer-close-btn"');
-    overlay = wrapper.find('[data-qa="dt-modal"]');
-  };
-
-  const _setWrappers = () => {
+  const updateWrapper = () => {
     wrapper = mount(DtImageViewer, {
-      props,
-      attrs,
-      slots,
-      provide,
+      props: { ...baseProps, ...mockProps },
       global: {
         stubs: {
           teleport: true,
@@ -57,29 +30,29 @@ describe('DtImageViewer Tests', () => {
       },
       attachTo: document.body,
     });
-    _setChildWrappers();
+
+    imageViewerPreview = wrapper.find('[data-qa="dt-image-viewer-preview"]');
+    previewImage = imageViewerPreview.find('img');
   };
 
-  // Setup
-  beforeEach(function () {
-    _setWrappers();
+  beforeEach(() => {
+    updateWrapper();
   });
 
-  // Teardown
   afterEach(() => {
-    props = baseProps;
-    attrs = {};
-    slots = {};
-    provide = {};
+    mockProps = {};
   });
-  afterAll(() => {
-  });
+
+  const _openModal = async () => {
+    await imageViewerPreview.trigger('click');
+
+    imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
+    fullImage = imageViewerFull.find('img');
+    closeButton = wrapper.find('[data-qa="dt-image-viewer-close-btn"');
+    overlay = wrapper.find('[data-qa="dt-modal"]');
+  };
 
   describe('Presentation Tests', () => {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
-
     describe('Viewing the image as a preview', () => {
       it('should render the component', () => {
         expect(wrapper.exists()).toBeTruthy();
@@ -105,37 +78,28 @@ describe('DtImageViewer Tests', () => {
   });
 
   describe('Accessibility Tests', () => {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
-
     describe('When image has not been clicked', () => {
       it('should have an aria labels', () => {
-        expect(previewImage.attributes('alt')).toBe(props.imageAlt);
-        expect(imageViewerPreview.attributes('aria-label')).toBe(props.ariaLabel);
+        expect(previewImage.attributes('alt')).toBe(baseProps.imageAlt);
+        expect(imageViewerPreview.attributes('aria-label')).toBe(baseProps.ariaLabel);
       });
     });
 
     describe('After the image is open', () => {
-      beforeEach(async () => {
+      it('should have an aria labels', async () => {
         await _openModal();
-      });
 
-      it('should have an aria labels', () => {
-        expect(fullImage.attributes('alt')).toBe(props.imageAlt);
-        expect(closeButton.attributes('aria-label')).toBe(props.closeAriaLabel);
+        expect(fullImage.attributes('alt')).toBe(baseProps.imageAlt);
+        expect(closeButton.attributes('aria-label')).toBe(baseProps.closeAriaLabel);
       });
     });
   });
 
   describe('Interactivity Tests', () => {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
-
     describe('As an image preview', () => {
       it('should open on click', async () => {
         await _openModal();
+
         expect(fullImage.exists()).toBeTruthy();
       });
     });
@@ -149,7 +113,9 @@ describe('DtImageViewer Tests', () => {
         expect(imageViewerFull.exists()).toBeTruthy();
 
         await closeButton.trigger('click');
+
         imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
+
         expect(imageViewerFull.exists()).toBe(false);
       });
 
@@ -176,7 +142,4 @@ describe('DtImageViewer Tests', () => {
       });
     });
   });
-
-  // No Validation tests
-  // No Extendability tests
 });
