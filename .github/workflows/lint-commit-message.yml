@@ -3,7 +3,7 @@ name: Lint commit message
 on:
   push:
     branches:
-      - main
+      - production
       - vue3
 
 jobs:

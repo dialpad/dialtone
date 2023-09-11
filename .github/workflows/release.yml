@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - production
       - vue3
       - alpha
       - beta
@@ -42,12 +42,12 @@ jobs:
         run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
 
       # note that npm run build is executed before publishing via prepublishOnly
-      - name: Deploy main
-        if: ${{ github.ref == 'refs/heads/main' }}
+      - name: Deploy production
+        if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
 
       - name: Deploy prerelease
-        if: ${{ github.ref != 'refs/heads/main' }}
+        if: ${{ github.ref != 'refs/heads/production' }}
         run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
 
       - name: Github Release
@@ -62,6 +62,6 @@ jobs:
         run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
       # note that npm run build is executed before publishing via prepublishOnly
-      - name: Deploy main to github packages
-        if: ${{ github.ref == 'refs/heads/main' }}
+      - name: Deploy production to github packages
+        if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
