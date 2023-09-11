@@ -1,211 +1,162 @@
-import {
-  createLocalVue,
-  shallowMount,
-  mount,
-} from '@vue/test-utils';
-import {
-  itBehavesLikeEmitsExpectedEvent,
-  itBehavesLikeDoesNotEmitEvents,
-} from '../../tests/shared_examples/events';
-import {
-  itBehavesLikeAppliesClassToChild,
-  itBehavesLikeAppliesChildProp,
-} from '../../tests/shared_examples/extendability';
+import { createLocalVue, mount } from '@vue/test-utils';
 import { DtValidationMessages } from '../validation_messages';
 import InputFixture from './decorators/input.vue';
 import InputsFixture from './decorators/inputs.vue';
 import DtInputGroup from './input_group.vue';
 
-// Constants
-const basePropsData = {
+const baseProps = {
   name: 'my-input-group',
 };
-const baseAttrs = { 'aria-label': 'Test Input Group' };
+const baseAttrs = {
+  'aria-label': 'Test Input Group',
+};
+const baseSlots = {};
+
+let mockProps = {};
+let mockAttrs = {};
+let mockSlots = {};
+const testContext = {};
 
 describe('Input Group Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
-  // Wrappers
   let wrapper;
   let inputGroup;
   let inputGroupLegend;
   let inputGroupMessages;
 
-  // Environment
-  let propsData = basePropsData;
-  let attrs = baseAttrs;
-  let slots = {};
-  let provide = {};
+  const updateWrapper = () => {
+    wrapper = mount(DtInputGroup, {
+      propsData: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
+      localVue: testContext.localVue,
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     inputGroup = wrapper.find('[data-qa="input-group"]');
     inputGroupLegend = wrapper.find('[data-qa="input-group-legend"]');
     inputGroupMessages = wrapper.find('[data-qa="input-group-messages"]');
   };
 
-  const _setWrappers = () => {
-    wrapper = shallowMount(DtInputGroup, {
-      propsData,
-      attrs,
-      slots,
-      provide,
-      localVue: testContext.localVue,
-    });
-    _setChildWrappers();
-  };
-
-  const _mountWrappers = () => {
-    wrapper = mount(DtInputGroup, {
-      propsData,
-      slots,
-      attrs,
-      provide,
-      localVue: testContext.localVue,
-    });
-    _setChildWrappers();
-  };
-
-  // Setup
   beforeAll(() => {
     testContext.localVue = createLocalVue();
   });
-  beforeEach(() => {});
 
-  // Teardown
-  afterEach(() => {
-    propsData = basePropsData;
-    attrs = baseAttrs;
-    slots = {};
-    provide = {};
+  beforeEach(() => {
+    updateWrapper();
   });
-  afterAll(() => {});
+
+  afterEach(() => {
+    mockProps = {};
+    mockAttrs = {};
+    mockSlots = {};
+  });
 
   describe('Presentation Tests', () => {
-    // Test Environment
-    const legend = 'My Legend';
-
-    // Shared Examples
-    const itBehavesLikeHasLegend = () => {
-      it(
-        'should have a legend',
-        () => { expect(inputGroupLegend.exists()).toBe(true); },
-      );
-      it('should have text matching the provided legend', () => {
-        expect(inputGroupLegend.text()).toBe(legend);
-      });
-    };
-
     describe('When rendered with default content', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
+      it('should have a input group', () => {
+        expect(inputGroup.exists()).toBe(true);
+      });
 
-      it(
-        'should have a input group',
-        () => { expect(inputGroup.exists()).toBe(true); },
-      );
-      it(
-        'should not have a legend',
-        () => { expect(inputGroupLegend.exists()).toBe(false); },
-      );
+      it('should not have a legend', () => {
+        expect(inputGroupLegend.exists()).toBe(false);
+      });
+
       it('should not have inputs', () => {
         expect(wrapper.findAllComponents(InputFixture).length).toBe(0);
       });
+
       it('should not have validation messages', () => {
-        expect(
-          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
-        ).toBe(0);
+        expect(wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length).toBe(0);
       });
     });
 
     describe('When inputs are provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        slots = { default: InputsFixture };
-      });
-
       describe('When the input group renders', () => {
-        // Test Setup
-        beforeEach(() => { _setWrappers(); });
-
         it('should have inputs', () => {
+          mockSlots = { default: InputsFixture };
+
+          updateWrapper();
+
           expect(wrapper.findAllComponents(InputFixture).length).toBe(3);
         });
       });
     });
 
     describe('When a legend is provided via prop', () => {
-      // Test Setup
       beforeEach(() => {
-        propsData = { ...basePropsData, legend };
-        _setWrappers();
+        mockProps = { legend: 'My Legend' };
+
+        updateWrapper();
       });
 
-      itBehavesLikeHasLegend();
+      it('should have a legend', () => {
+        expect(inputGroupLegend.exists()).toBe(true);
+      });
+
+      it('should have text matching the provided legend', () => {
+        expect(inputGroupLegend.text()).toBe('My Legend');
+      });
     });
 
     describe('When a legend is provided via slot', () => {
-      // Test Setup
-      beforeEach(() => {
-        slots = { legend };
-      });
-
       describe('When a legend is not provided via prop', () => {
-        // Test Setup
-        beforeEach(() => { _setWrappers(); });
+        beforeEach(() => {
+          mockProps = { legend: 'My Legend' };
 
-        itBehavesLikeHasLegend();
+          updateWrapper();
+        });
+
+        it('should have a legend', () => {
+          expect(inputGroupLegend.exists()).toBe(true);
+        });
+
+        it('should have text matching the provided legend', () => {
+          expect(inputGroupLegend.text()).toBe('My Legend');
+        });
       });
 
       describe('When a legend is also provided via prop', () => {
-        // Test Setup
         beforeEach(() => {
-          propsData = {
-            ...basePropsData,
-            legend: 'A legend which should not be displayed',
-          };
-          _setWrappers();
+          mockProps = { legend: 'A legend which should not be displayed' };
+
+          updateWrapper();
         });
 
-        itBehavesLikeHasLegend();
+        it('should have a legend', () => {
+          expect(inputGroupLegend.exists()).toBe(true);
+        });
+
+        it('should have text matching the provided legend', () => {
+          expect(inputGroupLegend.text()).toBe('A legend which should not be displayed');
+        });
       });
     });
 
     describe('When validation messages are provided', () => {
-      // Shared Examples
-      const itBehavesLikeHasValidationMessages = (numMessages) => {
-        it('should have validation messages', () => {
-          expect(inputGroupMessages?.props('validationMessages').length).toBe(numMessages);
-        });
-      };
-
-      // Test Setup
       beforeEach(() => {
-        propsData = { ...basePropsData, messages: ['Error'] };
+        mockProps = { messages: ['Error'] };
+
+        updateWrapper();
       });
 
       describe('When the validation messages are shown', () => {
-        // Test Setup
-        beforeEach(() => { _setWrappers(); });
+        it('should have validation messages', () => {
+          expect(inputGroupMessages?.props('validationMessages').length).toBe(1);
+        });
 
-        itBehavesLikeHasValidationMessages(1);
         it('should show validation messages', () => {
           expect(inputGroupMessages?.props('showMessages')).toBe(true);
         });
       });
 
       describe('When the validation messages are hidden', () => {
-        // Test Setup
-        beforeEach(() => {
-          propsData = { ...propsData, showMessages: false };
-          _setWrappers();
+        beforeEach(async () => {
+          await wrapper.setProps({ showMessages: false });
         });
 
-        itBehavesLikeHasValidationMessages(1);
+        it('should have validation messages', () => {
+          expect(inputGroupMessages?.props('validationMessages').length).toBe(1);
+        });
+
         it('should hide validation messages', () => {
           expect(inputGroupMessages?.props('showMessages')).toBe(false);
         });
@@ -214,79 +165,63 @@ describe('Input Group Tests', () => {
   });
 
   describe('Interactivity Tests', () => {
-    // Wrappers
-    let selectedInput;
+    const MOCK_SELECTED_VALUE = 'apple';
 
-    // Test Environment
-    const selectedValue = 'apple';
-
-    // Helpers
-    const _selectInput = (value) => {
-      selectedInput = inputGroup.find(`[value="${value}"]`);
-      selectedInput.trigger('change');
+    const _selectInput = async (value) => {
+      await inputGroup.find(`[value="${value}"]`).trigger('change');
     };
 
-    // Shared Examples
-    const itBehavesLikeUpdatesProvideObj = (value) => {
-      it('updates provide object value', async () => {
-        await wrapper.vm.$nextTick();
-        expect(wrapper.vm.provideObj?.value).toBe(value);
-      });
-    };
-
-    // Test Setup
     beforeEach(() => {
-      slots = { default: InputsFixture };
+      mockSlots = { default: InputsFixture };
+
+      updateWrapper();
     });
 
     describe('When an initial value is provided', () => {
-      // Test Environment
-      const initialValue = 'other';
-
-      // Test Setup
-      beforeEach(() => {
-        propsData = { ...basePropsData, value: initialValue };
-      });
-
       describe('When an input is not selected', () => {
-        // Test Setup
-        beforeEach(() => { _setWrappers(); });
+        it('updates provide object value', () => {
+          mockProps = { value: 'other' };
 
-        itBehavesLikeUpdatesProvideObj(initialValue);
+          updateWrapper();
+
+          expect(wrapper.vm.provideObj?.value).toBe('other');
+        });
       });
 
       describe('When an input is selected', () => {
-        // Test Setup
-        beforeEach(() => {
-          _mountWrappers();
-          _selectInput(selectedValue);
+        beforeEach(async () => {
+          await _selectInput(MOCK_SELECTED_VALUE);
         });
 
-        itBehavesLikeUpdatesProvideObj(selectedValue);
+        it('updates provide object value', () => {
+          expect(wrapper.vm.provideObj?.value).toBe(MOCK_SELECTED_VALUE);
+        });
+
         it('should emit input event', () => {
-          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue);
+          expect(wrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE);
         });
       });
     });
 
     describe('When an input is selected', () => {
-      // Test Setup
-      beforeEach(() => {
-        _mountWrappers();
-        _selectInput(selectedValue);
+      beforeEach(async () => {
+        await _selectInput(MOCK_SELECTED_VALUE);
       });
 
-      itBehavesLikeUpdatesProvideObj(selectedValue);
+      it('updates provide object value', () => {
+        expect(wrapper.vm.provideObj?.value).toBe(MOCK_SELECTED_VALUE);
+      });
+
       it('should emit input event', () => {
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue);
+        expect(wrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE);
       });
     });
 
     describe('When the input group is disabled', () => {
-      // Test Setup
       beforeEach(() => {
-        propsData = { ...basePropsData, disabled: true };
-        _mountWrappers();
+        mockProps = { disabled: true };
+
+        updateWrapper();
       });
 
       it('updates provide object disabled', () => {
@@ -294,146 +229,120 @@ describe('Input Group Tests', () => {
       });
 
       describe('When an input is selected', () => {
-        // Test Setup
-        beforeEach(() => { _selectInput(selectedValue); });
+        it('does not emit an input event', async () => {
+          await _selectInput(MOCK_SELECTED_VALUE);
 
-        it(
-          'does not emit an input event',
-          () => { itBehavesLikeDoesNotEmitEvents(wrapper); },
-        );
+          expect(wrapper.emitted()).toEqual({});
+        });
       });
     });
   });
 
   describe('Extendability Tests', () => {
-    let element;
-    const customClass = 'my-custom-class';
-    const propName = 'some';
-    const propValue = 'prop';
-    const childProps = {};
+    let MOCK_ELEMENT;
+    const MOCK_CUSTOM_CLASS = 'my-custom-class';
+    const MOCK_PROP_NAME = 'some';
+    const MOCK_PROP_VALUE = 'prop';
+    const MOCK_CHILD_PROPS = {};
 
-    // Helpers
-    const _setupChildClassTest = (childClassName, selector) => {
-      propsData[childClassName] = customClass;
-      _setWrappers();
-      element = wrapper.find(selector);
-    };
-
-    const _setupChildPropsTest = (childPropsName, selector) => {
-      propsData[childPropsName] = childProps;
-      _setWrappers();
-      element = wrapper.find(selector);
-    };
-
-    // Shared Examples
-    const itBehavesLikeAppliesClassToChildLocal = () => {
-      it('should apply custom class to child', () => {
-        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
-      });
-    };
-
-    const itBehavesLikeAppliesChildPropLocal = () => {
-      it('should have provided child prop', () => {
-        itBehavesLikeAppliesChildProp(element, propName, propValue);
-      });
-    };
-
-    // Test Setup
     beforeAll(() => {
-      childProps[propName] = propValue;
+      MOCK_CHILD_PROPS[MOCK_PROP_NAME] = MOCK_PROP_VALUE;
     });
 
     beforeEach(() => {
-      propsData = {
-        ...basePropsData,
+      mockProps = {
         legend: 'My Legend',
         messages: ['Error'],
       };
+
+      updateWrapper();
     });
 
     describe('When a legend class is provided', () => {
-      // Test Setup
-      beforeEach(
-        () => { _setupChildClassTest('legendClass', '[data-qa="input-group-legend"]'); },
-      );
+      it('should apply custom class to child', () => {
+        mockProps = { ...mockProps, legendClass: MOCK_CUSTOM_CLASS };
 
-      itBehavesLikeAppliesClassToChildLocal();
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="input-group-legend"]');
+
+        expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+      });
     });
 
     describe('When a messages class is provided', () => {
-      // Test Setup
-      beforeEach(
-        () => { _setupChildClassTest('messagesClass', '[data-qa="input-group-messages"]'); },
-      );
+      it('should apply custom class to child', () => {
+        mockProps = { ...mockProps, messagesClass: MOCK_CUSTOM_CLASS };
 
-      itBehavesLikeAppliesClassToChildLocal();
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="input-group-messages"]');
+
+        expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+      });
     });
 
     describe('When legend child props are provided', () => {
-      // Test Setup
-      beforeEach(
-        () => { _setupChildPropsTest('legendChildProps', '[data-qa="input-group-legend"]'); },
-      );
+      it('should have provided child prop', () => {
+        mockProps = { ...mockProps, legendChildProps: MOCK_CHILD_PROPS };
 
-      itBehavesLikeAppliesChildPropLocal();
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="input-group-legend"]');
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
 
     describe('When messages child props are provided', () => {
-      // Test Setup
-      beforeEach(
-        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="input-group-messages"]'); },
-      );
+      it('should have provided child prop', () => {
+        mockProps = { ...mockProps, messagesChildProps: MOCK_CHILD_PROPS };
 
-      itBehavesLikeAppliesChildPropLocal();
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="input-group-messages"]');
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
 
     describe('When attrs are provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        attrs = { ...baseAttrs, some: 'prop' };
-        _setWrappers();
-        element = inputGroup;
-      });
+      it('should have provided child prop', () => {
+        mockAttrs = { some: 'prop' };
 
-      itBehavesLikeAppliesChildPropLocal();
+        updateWrapper();
+
+        MOCK_ELEMENT = inputGroup;
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
 
     describe('QA Label Tests', () => {
-      // Test Environment
-      const customQaLabel = 'custom-data-qa-label';
-
-      // Helpers
-      const _setupQaLabelTest = (qaLabelPropName) => {
-        propsData[qaLabelPropName] = customQaLabel;
-        _setWrappers();
-      };
-
-      // Shared Examples
-      const itBehavesLikeAppliesCustomQaLabel = () => {
-        it('should have applied custom qa label', () => {
-          expect(wrapper.find(`[data-qa="${customQaLabel}"]`).exists()).toBe(true);
-        });
-      };
+      const MOCK_CUSTOM_QA_LABEL = 'custom-data-qa-label';
 
       describe('When a custom data-qa group label is provided', () => {
-        // Test Setup
-        beforeEach(() => { _setupQaLabelTest('dataQaGroup'); });
+        it('should have applied custom qa label', async () => {
+          await wrapper.setProps({ dataQaGroup: MOCK_CUSTOM_QA_LABEL });
 
-        itBehavesLikeAppliesCustomQaLabel();
+          expect(wrapper.find(`[data-qa="${MOCK_CUSTOM_QA_LABEL}"]`).exists()).toBe(true);
+        });
       });
 
       describe('When a custom data-qa group legend label is provided', () => {
-        // Test Setup
-        beforeEach(() => { _setupQaLabelTest('dataQaGroupLegend'); });
+        it('should have applied custom qa label', async () => {
+          await wrapper.setProps({ dataQaGroupLegend: MOCK_CUSTOM_QA_LABEL });
 
-        itBehavesLikeAppliesCustomQaLabel();
+          expect(wrapper.find(`[data-qa="${MOCK_CUSTOM_QA_LABEL}"]`).exists()).toBe(true);
+        });
       });
 
       describe('When a custom data-qa group messages label is provided', () => {
-        // Test Setup
-        beforeEach(() => { _setupQaLabelTest('dataQaGroupMessages'); });
+        it('should have applied custom qa label', async () => {
+          await wrapper.setProps({ dataQaGroupMessages: MOCK_CUSTOM_QA_LABEL });
 
-        itBehavesLikeAppliesCustomQaLabel();
+          expect(wrapper.find(`[data-qa="${MOCK_CUSTOM_QA_LABEL}"]`).exists()).toBe(true);
+        });
       });
     });
   });
