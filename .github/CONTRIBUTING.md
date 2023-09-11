@@ -165,7 +165,7 @@ If you do so make sure to link to the existing Dialtone ticket and update the st
 [GitHub Actions] is what we use for our CI/CD solution. 
 All GHA workflows are in the `.github/workflows` directory. Currently, we use GitHub Actions for the following:
 
-- Deploying to `main` `.github/workflows/deploy.yml`, See [RELEASING.md] for instructions on how to do this.
+- Deploying to `production` `.github/workflows/deploy.yml`, See [RELEASING.md] for instructions on how to do this.
 - Linting our LESS files on pull request `.github/workflows/lint-pr.yml`.
 - Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION.md] for our commit message conventions.
 
