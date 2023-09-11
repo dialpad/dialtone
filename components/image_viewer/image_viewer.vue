@@ -51,6 +51,7 @@
           >
             <template #icon>
               <dt-icon
+                class="d-fc-neutral-white"
                 name="close"
                 size="400"
               />
