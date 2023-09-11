@@ -3,20 +3,24 @@ import { INPUT_SIZES } from './input_constants';
 import { DtIcon } from '@/components/icon';
 import DtInput from './input.vue';
 
-// Constants
+const MOCK_INPUT_STUB = vi.fn();
+
 const baseProps = {
   type: 'text',
   modelValue: 'value',
   label: 'label text',
 };
-
 const baseAttrs = {
   placeholder: 'input-placeholder',
   name: 'input-name',
 };
+const baseSlots = {};
+
+let mockAttrs = {};
+let mockProps = {};
+let mockSlots = {};
 
 describe('DtInput tests', () => {
-  // Wrappers
   let wrapper;
   let labelWrapper;
   let label;
@@ -27,14 +31,19 @@ describe('DtInput tests', () => {
   let rightIconWrapper;
   let iconPlus;
 
-  // Test Environment
-  let props;
-  let attrs;
-  let slots;
-  let inputStub;
+  const updateWrapper = () => {
+    wrapper = mount(DtInput, {
+      propsData: { ...baseProps, ...mockProps },
+      global: {
+        components: {
+          'dt-icon': DtIcon,
+        },
+      },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
+    iconPlus = '<dt-icon name="plus" />';
     labelWrapper = wrapper.find('[data-qa="dt-input-label-wrapper"]');
     label = wrapper.find('[data-qa="dt-input-label"]');
     description = wrapper.find('[data-qa="dt-input-description"]');
@@ -44,295 +53,280 @@ describe('DtInput tests', () => {
     rightIconWrapper = wrapper.find('[data-qa="dt-input-right-icon-wrapper"]');
   };
 
-  const _mountWrapper = () => {
-    wrapper = mount(DtInput, {
-      global: {
-        components: {
-          'dt-icon': DtIcon,
-        },
-      },
-      props,
-      attrs,
-      slots,
-    });
-    iconPlus = '<dt-icon name="plus" />';
-  };
-
-  // Test Setup
-  beforeEach(function () {
-    props = baseProps;
-    inputStub = vi.fn();
-    attrs = {
-      ...baseAttrs,
-      onInput: inputStub,
-    };
-    _mountWrapper();
+  beforeEach(() => {
+    updateWrapper();
   });
 
-  // Test Teardown
   afterEach(() => {
-    props = baseProps;
-    attrs = baseAttrs;
-    slots = {};
+    mockProps = {};
+    mockAttrs = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
-    // Shared Examples
-    function itBehavesLikeHasIconSizeClass (iconWrapper, size) {
-      if (size !== INPUT_SIZES.DEFAULT) {
-        expect(iconWrapper.classes().includes(`d-input-icon--${size}`)).toBe(true);
-      } else {
-        expect(iconWrapper.classes().includes(`d-input-icon--${size}`)).toBe(false);
-      }
-    }
-
-    const itBehavesLikeRendersDescription = (descriptionText) => {
-      it(
-        'should render the description',
-        () => { expect(description.exists()).toBe(true); },
-      );
-      it('should have description class', () => {
-        expect(description.classes().includes('d-description')).toBe(true);
-      });
-      it(
-        'should have a generated id',
-        () => { expect(description.attributes('id')).toBeTruthy(); },
-      );
-      it('should display the correct description', () => {
-        expect(description.text()).toBe(descriptionText);
-      });
-      it('should have aria details defined on label wrapper', () => {
-        expect(description.attributes('id')).toBe(labelWrapper.attributes('aria-details'));
-      });
-    };
-
-    it(
-      'should render the component',
-      () => { expect(wrapper.exists()).toBe(true); },
-    );
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
 
     describe('When type is not textarea', () => {
-      // Test Setup
-      beforeEach(() => {
-        _setChildWrappers();
+      it('should render the native input', () => {
+        expect(nativeInput.exists()).toBe(true);
       });
 
-      it(
-        'should render the native input',
-        () => { expect(nativeInput.exists()).toBe(true); },
-      );
       it('should have a type prop', () => {
-        expect(nativeInput.attributes('type')).toBe(props.type);
+        expect(nativeInput.attributes('type')).toBe(baseProps.type);
       });
+
       it('should have a bound value prop', () => {
-        expect(nativeInput.element.value).toBe(props.modelValue);
+        expect(nativeInput.element.value).toBe(baseProps.modelValue);
       });
-      it(
-        'should have input class',
-        () => { expect(nativeInput.classes().includes('d-input')).toBe(true); },
-      );
+
+      it('should have input class', () => {
+        expect(nativeInput.classes().includes('d-input')).toBe(true);
+      });
+
       it('should display the initial value prop', () => {
         expect(nativeInput.element.value).toBe(wrapper.vm.modelValue);
       });
     });
 
     describe('When type is textarea', () => {
-      // Test Setup
-      beforeEach(async () => {
-        await wrapper.setProps({ type: 'textarea' });
-        _setChildWrappers();
+      beforeEach(() => {
+        mockProps = { type: 'textarea' };
+
+        updateWrapper();
       });
 
-      it(
-        'should render the native textarea',
-        () => { expect(nativeTextarea.exists()).toBe(true); },
-      );
-      it(
-        'should not have a type prop',
-        () => { expect(nativeTextarea.attributes().type).toBeUndefined(); },
-      );
-      it(
-        'should not have a bound value prop',
-        () => { expect(nativeTextarea.attributes().value).toBeUndefined(); },
-      );
-      it(
-        'should have textarea class',
-        () => { expect(nativeTextarea.classes().includes('d-textarea')).toBe(true); },
-      );
+      it('should render the native textarea', () => {
+        expect(nativeTextarea.exists()).toBe(true);
+      });
+
+      it('should not have a type prop', () => {
+        expect(nativeTextarea.attributes().type).toBeUndefined();
+      });
+
+      it('should not have a bound value prop', () => {
+        expect(nativeTextarea.attributes().value).toBeUndefined();
+      });
+
+      it('should have textarea class', () => {
+        expect(nativeTextarea.classes().includes('d-textarea')).toBe(true);
+      });
+
       it('should display the initial value prop', () => {
         expect(nativeTextarea.element.value).toBe(wrapper.vm.modelValue);
       });
     });
 
     describe('When a label visible prop is false', () => {
-      // Test Setup
-      beforeEach(async () => {
-        await wrapper.setProps({ labelVisible: false });
-        _setChildWrappers();
-      });
+      it('should not render a label', () => {
+        mockProps = { labelVisible: false };
 
-      it(
-        'should not render a label',
-        () => { expect(label.exists()).toBe(false); },
-      );
+        updateWrapper();
+
+        expect(label.exists()).toBe(false);
+      });
     });
 
     describe('When a label is not provided', () => {
-      // Test Setup
-      beforeEach(async () => {
-        await wrapper.setProps({ label: undefined });
-        _setChildWrappers();
-      });
+      it('should not render a label', () => {
+        mockProps = { label: undefined };
 
-      it(
-        'should not render a label',
-        () => { expect(label.exists()).toBe(false); },
-      );
+        updateWrapper();
+
+        expect(label.exists()).toBe(false);
+      });
     });
 
     describe('When a description is not provided', () => {
-      // Test Setup
-      beforeEach(async () => { _setChildWrappers(); });
+      it('should not render a description', () => {
+        expect(description.exists()).toBe(false);
+      });
 
-      it(
-        'should not render a description',
-        () => { expect(description.exists()).toBe(false); },
-      );
       it('should not have aria details defined on label wrapper', () => {
         expect(labelWrapper.attributes('aria-details')).toBeFalsy();
       });
     });
 
     describe('When a description is provided via prop', () => {
-      // Test Setup
-      beforeEach(async () => {
-        await wrapper.setProps({ description: 'Description' });
-        _setChildWrappers();
+      beforeEach(() => {
+        mockProps = { description: 'Description' };
+
+        updateWrapper();
       });
 
-      itBehavesLikeRendersDescription('Description');
+      it('should render the description', () => {
+        expect(description.exists()).toBe(true);
+      });
+
+      it('should have description class', () => {
+        expect(description.classes().includes('d-description')).toBe(true);
+      });
+
+      it('should have a generated id', () => {
+        expect(description.attributes('id')).toBeTruthy();
+      });
+
+      it('should display the correct description', () => {
+        expect(description.text()).toBe('Description');
+      });
+
+      it('should have aria details defined on label wrapper', () => {
+        expect(description.attributes('id')).toBe(labelWrapper.attributes('aria-details'));
+      });
     });
 
     describe('When a description is provided via slot', () => {
-      // Test Setup
-      beforeEach(async () => {
-        slots = { description: 'Description' };
-        _mountWrapper();
-        _setChildWrappers();
+      beforeEach(() => {
+        mockSlots = { description: 'Description' };
+
+        updateWrapper();
       });
 
-      itBehavesLikeRendersDescription('Description');
+      it('should render the description', () => {
+        expect(description.exists()).toBe(true);
+      });
+
+      it('should have description class', () => {
+        expect(description.classes().includes('d-description')).toBe(true);
+      });
+
+      it('should have a generated id', () => {
+        expect(description.attributes('id')).toBeTruthy();
+      });
+
+      it('should display the correct description', () => {
+        expect(description.text()).toBe('Description');
+      });
+
+      it('should have aria details defined on label wrapper', () => {
+        expect(description.attributes('id')).toBe(labelWrapper.attributes('aria-details'));
+      });
     });
 
     describe('When an inputClass prop is provided', () => {
-      // Test Setup
-      beforeEach(async () => {
-        await wrapper.setProps({ inputClass: 'd-fc-success' });
-        _setChildWrappers();
-      });
-
       it('Should apply the class to the input element.', () => {
+        mockProps = { inputClass: 'd-fc-success' };
+
+        updateWrapper();
+
         expect(nativeInput.classes('d-fc-success')).toBe(true);
       });
     });
 
     describe('When a left icon is provided', () => {
-      // Shared Examples
-      const itBehavesLikeRendersLeftInputIcon = (size = INPUT_SIZES.DEFAULT) => {
-        it(
-          'should render the icon wrapper',
-          () => { expect(leftIconWrapper.exists()).toBe(true); },
-        );
-        it('should have input icon class', () => {
-          expect(leftIconWrapper.classes().includes('d-input-icon')).toBe(true);
-        });
-        it('should have input icon side class', () => {
-          expect(leftIconWrapper.classes().includes('d-input-icon--left')).toBe(true);
-        });
-        it(
-          'should have input icon size class',
-          () => { itBehavesLikeHasIconSizeClass(leftIconWrapper, size); },
-        );
-        it(
-          'should render the provided icon',
-          () => { expect(wrapper.findComponent(DtIcon).exists()).toBe(true); },
-        );
-      };
+      beforeEach(() => {
+        mockSlots = { leftIcon: iconPlus };
 
-      // Test Setup
-      beforeEach(async () => {
-        slots = { leftIcon: iconPlus };
+        updateWrapper();
       });
 
       describe('When a size is not provided', () => {
-        // Test Setup
-        beforeEach(async () => {
-          _mountWrapper();
-          _setChildWrappers();
+        it('should render the icon wrapper', () => {
+          expect(leftIconWrapper.exists()).toBe(true);
         });
 
-        itBehavesLikeRendersLeftInputIcon();
+        it('should have input icon class', () => {
+          expect(leftIconWrapper.classes().includes('d-input-icon')).toBe(true);
+        });
+
+        it('should have input icon side class', () => {
+          expect(leftIconWrapper.classes().includes('d-input-icon--left')).toBe(true);
+        });
+
+        it('should have input icon size class', () => {
+          expect(leftIconWrapper.classes().includes(`d-input-icon--${INPUT_SIZES.DEFAULT}`)).toBe(false);
+        });
+
+        it('should render the provided icon', () => {
+          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
+        });
       });
 
       describe('When a size is provided', () => {
-        // Test Setup
-        beforeEach(async () => {
-          props = { size: INPUT_SIZES.EXTRA_LARGE };
-          _mountWrapper();
-          _setChildWrappers();
+        beforeEach(() => {
+          mockProps = { size: INPUT_SIZES.EXTRA_LARGE };
+
+          updateWrapper();
         });
 
-        itBehavesLikeRendersLeftInputIcon(INPUT_SIZES.EXTRA_LARGE);
+        it('should render the icon wrapper', () => {
+          expect(leftIconWrapper.exists()).toBe(true);
+        });
+
+        it('should have input icon class', () => {
+          expect(leftIconWrapper.classes().includes('d-input-icon')).toBe(true);
+        });
+
+        it('should have input icon side class', () => {
+          expect(leftIconWrapper.classes().includes('d-input-icon--left')).toBe(true);
+        });
+
+        it('should have input icon size class', () => {
+          expect(leftIconWrapper.classes().includes(`d-input-icon--${INPUT_SIZES.EXTRA_LARGE}`)).toBe(true);
+        });
+
+        it('should render the provided icon', () => {
+          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
+        });
       });
     });
 
     describe('When a right icon is provided', () => {
-      // Shared Examples
-      const itBehavesLikeRendersRightInputIcon = (size = INPUT_SIZES.DEFAULT) => {
-        it(
-          'should render the icon wrapper',
-          () => { expect(rightIconWrapper.exists()).toBe(true); },
-        );
-        it('should have input icon class', () => {
-          expect(rightIconWrapper.classes().includes('d-input-icon')).toBe(true);
-        });
-        it('should have input icon side class', () => {
-          expect(rightIconWrapper.classes().includes('d-input-icon--right')).toBe(true);
-        });
-        it(
-          'should have input icon size class',
-          () => { itBehavesLikeHasIconSizeClass(rightIconWrapper, size); },
-        );
-        it(
-          'should render the provided icon',
-          () => { expect(wrapper.findComponent(DtIcon).exists()).toBe(true); },
-        );
-      };
+      beforeEach(() => {
+        mockSlots = { rightIcon: iconPlus };
 
-      // Test Setup
-      beforeEach(async () => {
-        slots = { rightIcon: iconPlus };
+        updateWrapper();
       });
 
       describe('When a size is not provided', () => {
-        // Test Setup
-        beforeEach(async () => {
-          _mountWrapper();
-          _setChildWrappers();
+        it('should render the icon wrapper', () => {
+          expect(rightIconWrapper.exists()).toBe(true);
         });
 
-        itBehavesLikeRendersRightInputIcon();
+        it('should have input icon class', () => {
+          expect(rightIconWrapper.classes().includes('d-input-icon')).toBe(true);
+        });
+
+        it('should have input icon side class', () => {
+          expect(rightIconWrapper.classes().includes('d-input-icon--right')).toBe(true);
+        });
+
+        it('should have input icon size class', () => {
+          expect(rightIconWrapper.classes().includes(`d-input-icon--${INPUT_SIZES.DEFAULT}`)).toBe(false);
+        });
+
+        it('should render the provided icon', () => {
+          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
+        });
       });
 
       describe('When a size is provided', () => {
-        // Test Setup
-        beforeEach(async () => {
-          props = { size: INPUT_SIZES.EXTRA_LARGE };
-          _mountWrapper();
-          _setChildWrappers();
+        beforeEach(() => {
+          mockProps = { size: INPUT_SIZES.EXTRA_LARGE };
+
+          updateWrapper();
         });
 
-        itBehavesLikeRendersRightInputIcon(INPUT_SIZES.EXTRA_LARGE);
+        it('should render the icon wrapper', () => {
+          expect(rightIconWrapper.exists()).toBe(true);
+        });
+
+        it('should have input icon class', () => {
+          expect(rightIconWrapper.classes().includes('d-input-icon')).toBe(true);
+        });
+
+        it('should have input icon side class', () => {
+          expect(rightIconWrapper.classes().includes('d-input-icon--right')).toBe(true);
+        });
+
+        it('should have input icon size class', () => {
+          expect(rightIconWrapper.classes().includes(`d-input-icon--${INPUT_SIZES.EXTRA_LARGE}`)).toBe(true);
+        });
+
+        it('should render the provided icon', () => {
+          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
+        });
       });
     });
 
@@ -340,10 +334,10 @@ describe('DtInput tests', () => {
       it('should not render any validation messages', () => {
         expect(wrapper.findAll('.d-validation-message').length).toBe(0);
       });
-      it(
-        'should not have an input state',
-        () => { expect(wrapper.vm.inputState).toBeNull(); },
-      );
+
+      it('should not have an input state', () => {
+        expect(wrapper.vm.inputState).toBeNull();
+      });
     });
 
     describe('When validation message(s) are provided', () => {
@@ -358,135 +352,131 @@ describe('DtInput tests', () => {
             { message: errorMessage2, type: 'error' },
           ],
         });
+
         expect(wrapper.findAll('.d-validation-message').length).toBe(0);
         expect(wrapper.vm.inputState).toBe('error');
 
         await wrapper.setProps({ showMessages: true });
 
         const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+
         expect(inputErrorMessages.length).toBe(2);
         expect(inputErrorMessages.at(0).text()).toEqual(errorMessage1);
         expect(inputErrorMessages.at(1).text()).toEqual(errorMessage2);
       });
 
-      it(
-        'should ignore all other message types if at least 1 error message is present',
-        async () => {
-          const strErrorMessage = 'string error message';
+      it('should ignore all other message types if at least 1 error message is present', async () => {
+        const strErrorMessage = 'string error message';
 
-          await wrapper.setProps({
-            messages: [
-              strErrorMessage,
-              { message: 'formatted warning message', type: 'warning' },
-              { message: 'formatted success message', type: 'success' },
-            ],
-          });
-          expect(wrapper.vm.inputState).toBe('error');
+        await wrapper.setProps({
+          messages: [
+            strErrorMessage,
+            { message: 'formatted warning message', type: 'warning' },
+            { message: 'formatted success message', type: 'success' },
+          ],
+        });
 
-          const inputMessages = wrapper.findAll('.d-validation-message');
-          const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
-          expect(inputMessages.length).toBe(1);
-          expect(inputErrorMessages.length).toBe(1);
-          expect(inputErrorMessages.at(0).text()).toEqual(strErrorMessage);
-        },
-      );
+        expect(wrapper.vm.inputState).toBe('error');
 
-      it(
-        'should display warning messages only if no error messages are present',
-        async () => {
-          const warningMessage = 'formatted warning message';
+        const inputMessages = wrapper.findAll('.d-validation-message');
+        const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
 
-          await wrapper.setProps({
-            messages: [
-              { message: warningMessage, type: 'warning' },
-              { message: 'formatted success message', type: 'success' },
-            ],
-          });
-          expect(wrapper.vm.inputState).toBe('warning');
+        expect(inputMessages.length).toBe(1);
+        expect(inputErrorMessages.length).toBe(1);
+        expect(inputErrorMessages.at(0).text()).toEqual(strErrorMessage);
+      });
 
-          const inputMessages = wrapper.findAll('.d-validation-message');
-          const inputWarningMessages = wrapper.findAll('.d-validation-message--warning');
-          expect(inputMessages.length).toBe(1);
-          expect(inputWarningMessages.length).toBe(1);
-          expect(inputWarningMessages.at(0).text()).toEqual(warningMessage);
-        },
-      );
+      it('should display warning messages only if no error messages are present', async () => {
+        const warningMessage = 'formatted warning message';
 
-      it(
-        'should display success messages only if no other types are present',
-        async () => {
-          const successMessage1 = 'formatted success message 1';
-          const successMessage2 = 'formatted success message 2';
+        await wrapper.setProps({
+          messages: [
+            { message: warningMessage, type: 'warning' },
+            { message: 'formatted success message', type: 'success' },
+          ],
+        });
 
-          await wrapper.setProps({
-            messages: [
-              { message: successMessage1, type: 'success' },
-              { message: successMessage2, type: 'success' },
-            ],
-          });
-          expect(wrapper.vm.inputState).toBe('success');
+        expect(wrapper.vm.inputState).toBe('warning');
 
-          const inputMessages = wrapper.findAll('.d-validation-message');
-          const inputSuccessMessages = wrapper.findAll('.d-validation-message--success');
-          expect(inputMessages.length).toBe(2);
-          expect(inputSuccessMessages.length).toBe(2);
-          expect(inputSuccessMessages.at(0).text()).toEqual(successMessage1);
-          expect(inputSuccessMessages.at(1).text()).toEqual(successMessage2);
-        },
-      );
+        const inputMessages = wrapper.findAll('.d-validation-message');
+        const inputWarningMessages = wrapper.findAll('.d-validation-message--warning');
+
+        expect(inputMessages.length).toBe(1);
+        expect(inputWarningMessages.length).toBe(1);
+        expect(inputWarningMessages.at(0).text()).toEqual(warningMessage);
+      });
+
+      it('should display success messages only if no other types are present', async () => {
+        const successMessage1 = 'formatted success message 1';
+        const successMessage2 = 'formatted success message 2';
+
+        await wrapper.setProps({
+          messages: [
+            { message: successMessage1, type: 'success' },
+            { message: successMessage2, type: 'success' },
+          ],
+        });
+
+        expect(wrapper.vm.inputState).toBe('success');
+
+        const inputMessages = wrapper.findAll('.d-validation-message');
+        const inputSuccessMessages = wrapper.findAll('.d-validation-message--success');
+
+        expect(inputMessages.length).toBe(2);
+        expect(inputSuccessMessages.length).toBe(2);
+        expect(inputSuccessMessages.at(0).text()).toEqual(successMessage1);
+        expect(inputSuccessMessages.at(1).text()).toEqual(successMessage2);
+      });
     });
 
     describe('When a size is provided', () => {
-      // Test Environment
-      let size;
-
-      // Shared Examples
-      const itBehavesLikeAddsInputAndLabelSizeClasses = () => {
-        it('should add input size class', () => {
-          expect(nativeInput.classes().includes(`d-input--${size}`)).toBe(true);
-        });
-        it(
-          'should add label size class',
-          () => { expect(label.classes().includes(`d-label--${size}`)).toBe(true); },
-        );
-      };
-
-      // Test Setup
-      beforeEach(async () => {
-        props = { size, label: 'Label', description: 'Description' };
-        _mountWrapper();
-        _setChildWrappers();
-      });
-
       describe('When size is EXTRA_SMALL', () => {
-        // Test Setup
-        beforeAll(() => {
-          size = INPUT_SIZES.EXTRA_SMALL;
+        const MOCK_INPUT_SIZE_EXTRA_SMALL = INPUT_SIZES.EXTRA_SMALL;
+
+        beforeEach(() => {
+          mockProps = { size: MOCK_INPUT_SIZE_EXTRA_SMALL, label: 'Label', description: 'Description' };
+
+          updateWrapper();
         });
 
-        itBehavesLikeAddsInputAndLabelSizeClasses();
+        it('should add input size class', () => {
+          expect(nativeInput.classes().includes(`d-input--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
+        });
+
+        it('should add label size class', () => {
+          expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
+        });
+
         it('should not add description size class', () => {
-          expect(description.classes().includes(`d-description--${size}`)).toBe(false);
+          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(false);
         });
       });
 
       describe('When size is EXTRA_LARGE', () => {
-        // Test Setup
-        beforeAll(() => {
-          size = INPUT_SIZES.EXTRA_LARGE;
+        const MOCK_INPUT_SIZE_EXTRA_LARGE = INPUT_SIZES.EXTRA_LARGE;
+
+        beforeEach(() => {
+          mockProps = { size: MOCK_INPUT_SIZE_EXTRA_LARGE, label: 'Label', description: 'Description' };
+
+          updateWrapper();
         });
 
-        itBehavesLikeAddsInputAndLabelSizeClasses();
+        it('should add input size class', () => {
+          expect(nativeInput.classes().includes(`d-input--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
+        });
+
+        it('should add label size class', () => {
+          expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
+        });
+
         it('should add description size class', () => {
-          expect(description.classes().includes(`d-description--${size}`)).toBe(true);
+          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
         });
       });
     });
 
     describe('When the length validation props are provided', () => {
-      // Test Environment
-      let currentLength;
-      const validate = {
+      const MOCK_VALIDATE = {
         length: {
           description: 'Max. 20 characters.',
           max: 20,
@@ -495,20 +485,15 @@ describe('DtInput tests', () => {
         },
       };
 
-      // Test Setup
-      beforeEach(async () => {
-        props = {
-          currentLength,
-          validate,
-        };
-        _mountWrapper();
-        _setChildWrappers();
-      });
-
       describe('When the input length is below warning threshold and the input is focused', () => {
-        // Test Setup
-        beforeAll(() => {
-          currentLength = 8;
+        beforeEach(() => {
+          mockProps = {
+            currentLength: 8,
+            validate: MOCK_VALIDATE,
+          };
+
+          updateWrapper();
+
           nativeInput.trigger('focus');
         });
 
@@ -517,68 +502,45 @@ describe('DtInput tests', () => {
         });
 
         it('should show the length description', () => {
-          expect(wrapper.find('[data-qa="dt-input-length-description"]').text()).toBe(validate.length.description);
+          expect(wrapper.find('[data-qa="dt-input-length-description"]').text()).toBe(MOCK_VALIDATE.length.description);
         });
       });
 
-      // todo: this test seems actually broken
-      // describe('When the input length is above warning threshold and the input is focused', () => {
-      //   // Test Setup
-      //   beforeAll(() => {
-      //     currentLength = 12;
-      //   });
-
-      //   it('should show a warning validation message', async () => {
-      //     await nativeInput.trigger('focus');
-
-      //     const inputMessages = wrapper.findAll('.d-validation-message');
-      //     const inputWarningMessages = wrapper.findAll('.d-validation-message--warning');
-      //     expect(inputMessages.length).toEqual(1);
-      //     expect(inputWarningMessages.length).toEqual(1);
-      //   });
-      // });
-
-      // todo: this test seems actually broken
-      // describe('When the input length reaches exactly maximum length and the input is focused', () => {
-      //   // Test Setup
-      //   beforeAll(() => {
-      //     currentLength = 20;
-      //   });
-
-      //   it('should show a warning validation message', async () => {
-      //     await nativeInput.trigger('focus');
-
-      //     const inputMessages = wrapper.findAll('.d-validation-message');
-      //     const inputErrorMessages = wrapper.findAll('.d-validation-message--warning');
-      //     expect(inputMessages.length).toEqual(1);
-      //     expect(inputErrorMessages.length).toEqual(1);
-      //   });
-      // });
-
       describe('When the input length reaches the maximum length and the input is not focused', () => {
-        // Test Setup
-        beforeAll(() => {
-          currentLength = 20;
+        beforeEach(() => {
+          mockProps = {
+            currentLength: 20,
+            validate: MOCK_VALIDATE,
+          };
+
+          updateWrapper();
         });
 
         it('should not show an error validation message', () => {
           expect(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists()).toBe(false);
+
           const inputWarningMessages = wrapper.findAll('.d-validation-message--error');
+
           expect(inputWarningMessages.length).toBe(0);
         });
       });
 
       describe('When the input has a invalid state', () => {
-        // Test Setup
-        beforeAll(() => {
-          currentLength = 28;
+        beforeEach(() => {
+          mockProps = {
+            currentLength: 28,
+            validate: MOCK_VALIDATE,
+          };
+
+          updateWrapper();
         });
 
         it('should show an error validation message', async () => {
-          await wrapper.setProps({ value: 'new value with 28 characters' });
+          await wrapper.setProps({ modelValue: 'new value with 28 characters' });
 
           const inputMessages = wrapper.findAll('.d-validation-message');
           const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+
           expect(inputMessages.length).toBe(1);
           expect(inputErrorMessages.length).toBe(1);
         });
@@ -588,10 +550,9 @@ describe('DtInput tests', () => {
 
   describe('Reactivity Tests', () => {
     describe('User Input Tests', () => {
-      // Test Environment
-      const userTextInputVal = 'new user input';
-      const newValue = 'new value with more than 20 characters';
-      const validate = {
+      const MOCK_USER_TEXT_INPUT_VAL = 'new user input';
+      const MOCK_NEW_VALUE = 'new value with more than 20 characters';
+      const MOCK_VALIDATE = {
         length: {
           description: 'Max. 20 characters.',
           max: 20,
@@ -600,81 +561,82 @@ describe('DtInput tests', () => {
         },
       };
 
-      // Shared Examples
-      const itBehavesLikeHandlesUserInput = () => {
-        it('should handle input value', () => {
-          expect(wrapper.emitted().input[0][0]).toEqual(userTextInputVal);
-          expect(inputStub).toHaveBeenCalled();
-        });
-      };
-
       describe('When type is not a textarea', () => {
-        // Test Setup
-        beforeEach(async () => {
-          await wrapper.setProps({ currentLength: null, validate });
-          _setChildWrappers();
-          nativeInput.setValue(userTextInputVal);
+        beforeEach(() => {
+          mockProps = { currentLength: null, validate: MOCK_VALIDATE };
+          mockAttrs = { onInput: MOCK_INPUT_STUB };
+
+          updateWrapper();
+
+          nativeInput.setValue(MOCK_USER_TEXT_INPUT_VAL);
         });
 
-        itBehavesLikeHandlesUserInput();
+        it('should handle input value', () => {
+          expect(wrapper.emitted().input[0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
+          expect(MOCK_INPUT_STUB).toHaveBeenCalled();
+        });
 
         describe('When a new value is provided', () => {
-          // Test Setup
-          beforeEach(async () => { await wrapper.setProps({ modelValue: newValue }); });
+          it('should update input value', async () => {
+            await wrapper.setProps({ modelValue: MOCK_NEW_VALUE });
 
-          it(
-            'should update input value',
-            () => { expect(nativeInput.element.value).toEqual(newValue); },
-          );
+            expect(nativeInput.element.value).toEqual(MOCK_NEW_VALUE);
+          });
         });
 
         describe('When a new value exceeds the maximum length', () => {
           it('should emit an "update:invalid" event with true', async () => {
-            await wrapper.setProps({ modelValue: newValue });
+            await wrapper.setProps({ modelValue: MOCK_NEW_VALUE });
+
             expect(wrapper.emitted()['update:invalid'][0][0]).toBe(true);
           });
         });
 
         describe('When a new value is within the maximum length after exceeding it', () => {
           it('should emit an "update:invalid" event with false', async () => {
-            await wrapper.setProps({ modelValue: newValue });
-            await wrapper.setProps({ modelValue: userTextInputVal });
+            await wrapper.setProps({ modelValue: MOCK_NEW_VALUE });
+            await wrapper.setProps({ modelValue: MOCK_USER_TEXT_INPUT_VAL });
+
             expect(wrapper.emitted()['update:invalid'][1][0]).toBe(false);
           });
         });
       });
 
       describe('When type is a textarea', () => {
-        // Test Setup
-        beforeEach(async () => {
-          await wrapper.setProps({ type: 'textarea', currentLength: null, validate });
-          _setChildWrappers();
-          nativeTextarea.setValue(userTextInputVal);
+        beforeEach(() => {
+          mockProps = { type: 'textarea', currentLength: null, validate: MOCK_VALIDATE };
+
+          updateWrapper();
+
+          nativeTextarea.setValue(MOCK_USER_TEXT_INPUT_VAL);
         });
 
-        itBehavesLikeHandlesUserInput();
+        it('should handle input value', () => {
+          expect(wrapper.emitted().input[0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
+          expect(MOCK_INPUT_STUB).toHaveBeenCalled();
+        });
 
         describe('When a new value is provided', () => {
-          // Test Setup
-          beforeEach(async () => { await wrapper.setProps({ modelValue: newValue }); });
+          it('should update input value', async () => {
+            await wrapper.setProps({ modelValue: MOCK_NEW_VALUE });
 
-          it(
-            'should update input value',
-            () => { expect(nativeTextarea.element.value).toEqual(newValue); },
-          );
+            expect(nativeTextarea.element.value).toEqual(MOCK_NEW_VALUE);
+          });
         });
 
         describe('When a new value exceeds the maximum length', () => {
           it('should emit an "update:invalid" event with true', async () => {
-            await wrapper.setProps({ modelValue: newValue });
+            await wrapper.setProps({ modelValue: MOCK_NEW_VALUE });
+
             expect(wrapper.emitted()['update:invalid'][0][0]).toBe(true);
           });
         });
 
         describe('When a new value is within the maximum length after exceeding it', () => {
           it('should emit an "update:invalid" event with false', async () => {
-            await wrapper.setProps({ modelValue: newValue });
-            await wrapper.setProps({ modelValue: userTextInputVal });
+            await wrapper.setProps({ modelValue: MOCK_NEW_VALUE });
+            await wrapper.setProps({ modelValue: MOCK_USER_TEXT_INPUT_VAL });
+
             expect(wrapper.emitted()['update:invalid'][1][0]).toBe(false);
           });
         });
@@ -683,17 +645,12 @@ describe('DtInput tests', () => {
   });
 
   describe('Extendability Tests', () => {
-    // Test Setup
-    beforeEach(() => {
-      _setChildWrappers();
-    });
-
     it('should handle pass through props/attrs', async () => {
-      // Validating all attrs from base-input get passed down to the native input.
       expect(nativeInput.attributes()).toMatchObject(baseAttrs);
       expect(nativeInput.attributes().disabled).toBeUndefined();
 
       await wrapper.setProps({ disabled: true });
+
       expect(nativeInput.element.disabled).toBe(true);
     });
   });
