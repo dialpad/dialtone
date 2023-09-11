@@ -1,6 +1,6 @@
 ## Git Commit Message Convention
 
-Dialtone icons uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) for the commit messages in the release branches: `main`, `staging`, `alpha` and `beta`. 
+Dialtone icons uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) for the commit messages in the release branches: `production`, `staging`, `alpha` and `beta`. 
 Make sure every commit you want to include in the [semantic release process](RELEASING.md) is meeting this specification. 
 When opening a PR, ensure the PR's title also complies with the Conventional Commits specification. 
 This way, if your PR is merged using squash strategy, the PR's title will be used as the commit message except when your PR contains a single commit, in this case GitHub will use this commit for the commit message when your PR is merged, so in this case to meet the convention on the single commit of your PR is required.

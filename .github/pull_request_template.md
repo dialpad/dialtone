@@ -6,7 +6,7 @@ If this request is addressing an issue, please link to that issue.
 
  - [ ] Ask the contributors if a similar effort is already in process or has been solved.
  - [ ] Review the [contribution guidelines](https://github.com/dialpad/dialtone-icons/blob/staging/.github/CONTRIBUTING.md).
- - [ ] Use `staging` as your pull request's base branch. (All PRs using `main` as its base branch will be declined).
+ - [ ] Use `staging` as your pull request's base branch. (All PRs using `production` as its base branch will be declined).
  - [ ] Ensure all `gulp` scripts successfully compile.
 
 ## Obligatory GIF (super important!)
