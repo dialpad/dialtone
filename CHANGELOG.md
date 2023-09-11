@@ -1,3 +1,11 @@
+# [3.83.0](https://github.com/dialpad/dialtone-vue/compare/v3.82.2...v3.83.0) (2023-09-11)
+
+
+### Features
+
+* feed item pill recipe vue3 ([#1160](https://github.com/dialpad/dialtone-vue/issues/1160)) ([1baa335](https://github.com/dialpad/dialtone-vue/commit/1baa3352d3a916f75e252d42d15abb3b4bbafcd6))
+* **Message Input:** emoji suggestion ([#1136](https://github.com/dialpad/dialtone-vue/issues/1136)) ([8260745](https://github.com/dialpad/dialtone-vue/commit/8260745af6ec3589b8909f74bd8915d7988091e3))
+
 ## [3.82.2](https://github.com/dialpad/dialtone-vue/compare/v3.82.1...v3.82.2) (2023-09-04)
 
 
