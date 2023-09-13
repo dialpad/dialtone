@@ -13,7 +13,7 @@
         v-if="showHeader"
         :full-name="displayName"
         :image-src="avatarImageUrl"
-        avatar-class="d-mt4"
+        avatar-class="d-mt8 d-ps-absolute d-t0"
         :seed="avatarSeed"
       />
       <!-- show time instead of avatar when headers not present -->
