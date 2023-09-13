@@ -1,6 +1,7 @@
 <template>
   <div class="d-h264">
     <dt-recipe-message-input
+      ref="input"
       v-model:show-notice="$attrs.showNotice"
       v-model="$attrs.modelValue"
       :input-aria-label="$attrs.inputAriaLabel"
@@ -48,6 +49,9 @@
       </template>
     </dt-recipe-message-input>
   </div>
+  <button @click="$refs.input.focus()">
+    focus test
+  </button>
 </template>
 
 <script>

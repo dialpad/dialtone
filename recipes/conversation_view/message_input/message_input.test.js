@@ -138,6 +138,12 @@ describe('DtMessage tests', () => {
         await messageInputEl.trigger('focusin');
         expect(messageInputEl.classes('d-bc-black-500')).toBe(true);
       });
+
+      it('should programmatically focus to input', async () => {
+        wrapper.vm.focus();
+        await wrapper.vm.$nextTick();
+        expect(messageInputEl.classes('d-bc-black-500')).toBe(true);
+      });
     });
 
     describe('When character Limit is disabled', () => {

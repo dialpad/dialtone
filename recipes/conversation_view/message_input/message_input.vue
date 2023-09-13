@@ -623,6 +623,11 @@ export default {
     noticeClose () {
       this.$emit('notice-close', true);
     },
+
+    focus () {
+      this.$refs.richTextEditor.focusEditor();
+      this.hasFocus = true;
+    },
   },
 };
 </script>
