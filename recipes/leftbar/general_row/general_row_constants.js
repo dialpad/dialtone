@@ -39,6 +39,7 @@ export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS = {
   'purple-100': 'd-bgc-purple-100',
   'magenta-400': 'd-bgc-magenta-400',
   'magenta-100': 'd-bgc-magenta-100',
+  'black-300': 'd-bgc-black-300',
 };
 
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR = 'If type is contact center, color must be one' +
