@@ -7,6 +7,7 @@
     :avatar-size="avatarSize"
     :avatar-seed="avatarSeed"
     :presence="presence"
+    @avatar-click="onAvatarClick"
   >
     <template
       v-if="header"
