@@ -2,79 +2,79 @@ import { mount } from '@vue/test-utils';
 import DtListItem from './list_item.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from './list_item_constants';
 
+const MOCK_CLICK_STUB = vi.fn();
+
 const baseProps = {
   id: 'dt-item',
   navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
 };
+const baseAttrs = {
+  onClick: MOCK_CLICK_STUB,
+};
+const baseProvide = {
+  highlightId: () => 'dt-item2',
+};
+
+let mockProps = {};
+let mockAttrs = {};
+let mockProvide = {};
 
 describe('DtListItem tests', () => {
-  // Wrappers
   let wrapper;
 
-  // Test Environment
-  let props = baseProps;
-  let slots;
-  let attrs;
-  let provide;
-  let clickStub;
-
-  const _mountWrapper = () => {
+  const updateWrapper = () => {
     wrapper = mount(DtListItem, {
-      props,
-      slots,
-      attrs,
+      props: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
       global: {
-        provide,
+        provide: { ...baseProvide, ...mockProvide },
       },
     });
   };
 
-  // Test Setup
-  beforeEach(function () {
-    clickStub = vi.fn();
-    attrs = { onClick: clickStub };
-    provide = { highlightId: () => 'dt-item2' };
-    _mountWrapper();
+  beforeEach(() => {
+    updateWrapper();
   });
 
-  // Test Teardown
   afterEach(() => {
-    props = baseProps;
-    slots = {};
-    attrs = {};
-    provide = {};
+    mockProps = {};
+    mockAttrs = {};
+    mockProvide = {};
   });
 
   describe('Presentation Tests', () => {
-    it(
-      'should render the component',
-      () => { expect(wrapper.exists()).toBe(true); },
-    );
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
 
     describe('When navigation type is set to tab', () => {
-      // Test Setup
       beforeEach(async () => {
-        await wrapper.setProps({ navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB });
+        await wrapper.setProps({
+          navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
+        });
       });
 
       it('should apply the focusable class to the wrapper.', () => {
         expect(wrapper.classes('dt-list-item--focusable')).toBe(true);
       });
+
       it('should add tabindex 0 to the wrapper.', () => {
         expect(wrapper.attributes('tabindex') === '0').toBe(true);
       });
     });
 
     describe('When navigation type is set to none', () => {
-      // Test Setup
       beforeEach(async () => {
-        await wrapper.setProps({ navigationType: LIST_ITEM_NAVIGATION_TYPES.NONE });
+        await wrapper.setProps({
+          navigationType: LIST_ITEM_NAVIGATION_TYPES.NONE,
+        });
       });
 
       it('should not apply the classes to the wrapper.', () => {
         expect(wrapper.classes('dt-list-item--focusable')).toBe(false);
         expect(wrapper.classes('dt-list-item--highlighted')).toBe(false);
       });
+
       it('should add tabindex -1 to the wrapper.', () => {
         expect(wrapper.attributes('tabindex') === '-1').toBe(true);
       });
@@ -84,31 +84,32 @@ describe('DtListItem tests', () => {
       it('should not apply the class to the wrapper.', () => {
         expect(wrapper.classes('dt-list-item--highlighted')).toBe(false);
       });
+
       it('aria-selected should not be set', () => {
         expect(wrapper.attributes('aria-selected')).toBe('false');
       });
     });
 
     describe('When item is highlighted', () => {
-      // Test Setup
       beforeEach(async () => {
-        await wrapper.setProps({ id: 'dt-item2' });
+        await wrapper.setProps({
+          id: 'dt-item2',
+        });
       });
 
       it('should apply the class to the wrapper.', () => {
         expect(wrapper.classes('dt-list-item--highlighted')).toBe(true);
       });
+
       it('aria-selected should be set to "true"', () => {
         expect(wrapper.attributes('aria-selected') === 'true').toBe(true);
       });
     });
 
     describe('When item is selected', () => {
-      beforeEach(async () => {
+      it('should render checkmark icon', async () => {
         await wrapper.setProps({ selected: true });
-      });
 
-      it('should render checkmark icon', () => {
         const icon = wrapper.find('[data-qa="dt-icon"]');
 
         expect(icon.exists()).toBe(true);
@@ -117,12 +118,9 @@ describe('DtListItem tests', () => {
     });
 
     describe('When element type is provided', () => {
-      // Test Setup
-      beforeEach(async () => {
+      it('should use the provided element type on the wrapper.', async () => {
         await wrapper.setProps({ elementType: 'div' });
-      });
 
-      it('should use the provided element type on the wrapper.', () => {
         expect(wrapper.element.tagName).toBe('DIV');
       });
     });
@@ -135,23 +133,18 @@ describe('DtListItem tests', () => {
   });
 
   describe('Interactivity Tests', () => {
-    // Shared Examples
-    const itBehavesLikeHandlesClick = () => {
-      it('should call listener', async () => {
-        expect(clickStub).toHaveBeenCalled();
-      });
-
-      it('should emit click event', () => {
-        expect(wrapper.emitted().click.length).toBe(1);
-      });
-    };
-
     describe('When "Enter" key is pressed', () => {
       beforeEach(async () => {
         await wrapper.trigger('keydown', { code: 'Enter' });
       });
 
-      itBehavesLikeHandlesClick();
+      it('should call listener', async () => {
+        expect(MOCK_CLICK_STUB).toHaveBeenCalled();
+      });
+
+      it('should emit click event', () => {
+        expect(wrapper.emitted().click.length).toBe(1);
+      });
     });
 
     describe('When "Space" key is pressed', () => {
@@ -159,25 +152,27 @@ describe('DtListItem tests', () => {
         await wrapper.trigger('keydown', { code: 'Space' });
       });
 
-      itBehavesLikeHandlesClick();
+      it('should call listener', async () => {
+        expect(MOCK_CLICK_STUB).toHaveBeenCalled();
+      });
+
+      it('should emit click event', () => {
+        expect(wrapper.emitted().click.length).toBe(1);
+      });
     });
 
     describe('When mousemove is triggered', () => {
-      beforeEach(async () => {
+      it('should emit mousemove event', async () => {
         await wrapper.trigger('mousemove');
-      });
 
-      it('should emit mousemove event', () => {
         expect(wrapper.emitted().mousemove.length).toBe(1);
       });
     });
 
     describe('When mouseleave is triggered', () => {
-      beforeEach(async () => {
+      it('should emit mouseleave event', async () => {
         await wrapper.trigger('mouseleave');
-      });
 
-      it('should emit mouseleave event', () => {
         expect(wrapper.emitted().mouseleave.length).toBe(1);
       });
     });
