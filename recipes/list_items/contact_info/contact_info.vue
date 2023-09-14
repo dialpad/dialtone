@@ -7,12 +7,14 @@
     class="dt-contact-info"
   >
     <template #left>
-      <div
+      <button
         v-if="showAvatar"
-        class="d-ps-relative"
+        class="d-ps-relative d-bgc-transparent d-baw0 d-c-pointer"
         data-qa="contact-info-left"
+        :aria-labelledby="avatarAriaLabel"
+        @click="avatarClick"
       >
-        <div
+        <span
           v-if="avatarList"
           class="dt-contact-info--avatars d-mrn4 d-d-flex d-fd-row"
         >
@@ -28,7 +30,7 @@
             :overlay-text="avatar.text"
             :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
           />
-        </div>
+        </span>
         <dt-avatar
           v-else
           :size="avatarSize"
@@ -38,7 +40,7 @@
           :seed="avatarSeed"
           :presence="presence"
         />
-      </div>
+      </button>
     </template>
     <template #default>
       <div data-qa="contact-info-header">
@@ -157,6 +159,14 @@ export default {
     },
 
     /**
+     * The aria label of the avatar
+     */
+    avatarAriaLabel: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Determines whether to show the presence indicator for
      * Avatar - accepts PRESENCE_STATES values: 'busy', 'away', 'offline',
      * or 'active'. By default, it's null and nothing is shown.
@@ -181,6 +191,14 @@ export default {
     avatarList: {
       type: Array,
       default: null,
+    },
+  },
+
+  emits: ['avatar-click'],
+
+  methods: {
+    avatarClick () {
+      this.$emit('avatar-click');
     },
   },
 };

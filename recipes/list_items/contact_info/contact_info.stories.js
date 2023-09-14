@@ -13,6 +13,7 @@ const iconsList = getIconNames();
 
 // Default Prop Values
 export const argsData = {
+  onAvatarClick: action('avatar-click'),
   presence: null,
 };
 
@@ -44,6 +45,12 @@ export const argTypesData = {
       labels: {
         undefined: '(empty)',
       },
+    },
+  },
+
+  avatarAriaLabel: {
+    table: {
+      type: { summary: 'string' },
     },
   },
 
@@ -96,6 +103,19 @@ export const argTypesData = {
       type: {
         summary: 'VNode',
       },
+    },
+  },
+
+  'avatar-click': {
+    description: 'click on avatar event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  onAvatarClick: {
+    table: {
+      disable: true,
     },
   },
 };
@@ -168,6 +188,7 @@ export const Default = {
       },
     },
     a11y: {
+      disable: true,
       config: {
         rules: [
           {

@@ -57,6 +57,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
 <dt-recipe-contact-info
   :avatar-src="avatarSrc"
   presence="active"
+  @avatar-click="onAvatarClick"
 >
   <template #header>
     <div class="d-fs-200 d-fw-bold d-mr4">

@@ -7,6 +7,7 @@
     :avatar-size="$attrs.avatarSize"
     :avatar-seed="$attrs.avatarSeed"
     :presence="$attrs.presence"
+    @avatar-click="$attrs.onAvatarClick"
   >
     <template
       v-if="$attrs.header"
