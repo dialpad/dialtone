@@ -1,3 +1,17 @@
+# [3.84.0](https://github.com/dialpad/dialtone-vue/compare/v3.83.0...v3.84.0) (2023-09-14)
+
+
+### Bug Fixes
+
+* **Feed Item,feed Item Row:** fix avatar alignment ([#1171](https://github.com/dialpad/dialtone-vue/issues/1171)) ([2f84a6e](https://github.com/dialpad/dialtone-vue/commit/2f84a6e26def47c4419abfb1bdb173a7c35e22d8))
+* **Image Viewer:** fix close icon not visible on dark mode ([#1169](https://github.com/dialpad/dialtone-vue/issues/1169)) ([7b45537](https://github.com/dialpad/dialtone-vue/commit/7b45537711ffdfaa77ca65d362e4f789de2afd3e))
+
+
+### Features
+
+* **Leftbar Row:** add new icon color for contact center type ([#1175](https://github.com/dialpad/dialtone-vue/issues/1175)) ([2401063](https://github.com/dialpad/dialtone-vue/commit/240106382b3fb31ccf8e90a217dbc5fb3098bf15))
+* **Message Input:** add focus method ([#1177](https://github.com/dialpad/dialtone-vue/issues/1177)) ([1e113a4](https://github.com/dialpad/dialtone-vue/commit/1e113a46a46b582d9b0ee88f4823fe037b6d9e95))
+
 # [3.83.0](https://github.com/dialpad/dialtone-vue/compare/v3.82.2...v3.83.0) (2023-09-11)
 
 
