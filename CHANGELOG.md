@@ -1,3 +1,15 @@
+# [3.85.0](https://github.com/dialpad/dialtone-vue/compare/v3.84.0...v3.85.0) (2023-09-14)
+
+
+### Bug Fixes
+
+* feed pill not exported ([#1181](https://github.com/dialpad/dialtone-vue/issues/1181)) ([c18fc09](https://github.com/dialpad/dialtone-vue/commit/c18fc09484f937cb4ad4e431c2cc93c35f47e0bb))
+
+
+### Features
+
+* add avatar click event in contact info (vue3) ([#1165](https://github.com/dialpad/dialtone-vue/issues/1165)) ([7d4f645](https://github.com/dialpad/dialtone-vue/commit/7d4f645265f691c856842efa963cf8f0e9714431))
+
 # [3.84.0](https://github.com/dialpad/dialtone-vue/compare/v3.83.0...v3.84.0) (2023-09-14)
 
 
