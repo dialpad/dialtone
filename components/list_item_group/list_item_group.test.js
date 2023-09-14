@@ -1,78 +1,52 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtListItemGroup from './list_item_group.vue';
 
-// Constants
-const basePropsData = {
+const baseProps = {
   heading: 'Heading',
   id: 'list-item-group',
 };
 
+let mockProps = {};
+const testContext = {};
+
 describe('DtListItemGroup Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
-  // Wrappers
   let wrapper;
   let heading;
 
-  // Environment
-  let propsData = basePropsData;
-  let attrs = {};
-  let slots = {};
-  let provide = {};
+  const updateWrapper = () => {
+    wrapper = mount(DtListItemGroup, {
+      propsData: { ...baseProps, ...mockProps },
+      localVue: testContext.localVue,
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     heading = wrapper.find('[data-qa="dt-dropdown-list-heading"]');
   };
 
-  const _setWrappers = () => {
-    wrapper = mount(DtListItemGroup, {
-      propsData,
-      attrs,
-      slots,
-      provide,
-      localVue: testContext.localVue,
-    });
-    _setChildWrappers();
-  };
-
-  // Setup
   beforeAll(() => {
     testContext.localVue = createLocalVue();
   });
+
   beforeEach(() => {
-    _setWrappers();
+    updateWrapper();
   });
 
-  // Teardown
   afterEach(() => {
-    propsData = basePropsData;
-    attrs = {};
-    slots = {};
-    provide = {};
+    mockProps = {};
   });
-  afterAll(() => {});
 
   describe('Presentation Tests', () => {
     describe('List Group has a heading set', () => {
       it('displays the heading correctly', () => {
-        expect(heading.text()).toBe(basePropsData.heading);
+        expect(heading.text()).toBe(baseProps.heading);
       });
     });
   });
 
   describe('Accessibility Tests', () => {
     describe('List Group has a heading set', () => {
-      it(
-        'the root ul is aria-labelledby the id of the header element',
-        () => {
-          expect(wrapper.attributes('aria-labelledby')).toBe(basePropsData.id + '-heading');
-        },
-      );
+      it('the root ul is aria-labelledby the id of the header element', () => {
+        expect(wrapper.attributes('aria-labelledby')).toBe(baseProps.id + '-heading');
+      });
     });
   });
 });
