@@ -1,3 +1,18 @@
+# [2.96.0](https://github.com/dialpad/dialtone-vue/compare/v2.95.2...v2.96.0) (2023-09-14)
+
+
+### Bug Fixes
+
+* **Feed Item,feed Item Row:** fix avatar alignment ([#1170](https://github.com/dialpad/dialtone-vue/issues/1170)) ([9c1ca39](https://github.com/dialpad/dialtone-vue/commit/9c1ca399a478bda14712800143ad276cfec5191f))
+* **Image Viewer:** fix close icon not visible on dark mode ([#1168](https://github.com/dialpad/dialtone-vue/issues/1168)) ([f703a16](https://github.com/dialpad/dialtone-vue/commit/f703a16e45e0fb84e8c04a20567c91099e8e7ac9))
+
+
+### Features
+
+* add `avatar-click` event in contact info ([#1164](https://github.com/dialpad/dialtone-vue/issues/1164)) ([9c9e74b](https://github.com/dialpad/dialtone-vue/commit/9c9e74b604972ef1a9deb80ed9006dfeeaaddf91))
+* feed item pill recipe ([#1135](https://github.com/dialpad/dialtone-vue/issues/1135)) ([e05fdfd](https://github.com/dialpad/dialtone-vue/commit/e05fdfd5eb0ce1a7ed7e7481db66ac7248bedd26))
+* **Leftbar Row:** add new icon color for contact center type ([#1172](https://github.com/dialpad/dialtone-vue/issues/1172)) ([7a74ad4](https://github.com/dialpad/dialtone-vue/commit/7a74ad409a66f1ed1652782aed2dc843870aae25))
+
 ## [2.95.2](https://github.com/dialpad/dialtone-vue/compare/v2.95.1...v2.95.2) (2023-09-04)
 
 
