@@ -34,7 +34,6 @@ export const AVATAR_ICON_SIZES = {
 };
 
 export const AVATAR_COLORS = [
-  undefined,
   '100',
   '200',
   '300',
