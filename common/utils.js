@@ -8,7 +8,6 @@ import {
   Comment,
   Text,
 } from 'vue';
-import fnv from 'fnv-plus';
 
 let UNIQUE_ID_COUNTER = 0;
 let TIMER;
@@ -37,11 +36,35 @@ export function getUniqueString (prefix = DEFAULT_PREFIX) {
  */
 export function getRandomElement (array, seed) {
   if (seed) {
-    const hash = fnv.hash(seed);
-    return array[hash.value % array.length];
+    const hash = javaHashCode(seed);
+    return array[Math.abs(hash) % array.length];
   } else {
     return array[getRandomInt(array.length)];
   }
+}
+
+/**
+ * Returns a hash code for a string.
+ * (Compatible to Java's String.hashCode())
+ * We use this algo to be in sync with android.
+ *
+ * The hash code for a string object is computed as
+ *     s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
+ * using number arithmetic, where s[i] is the i th character
+ * of the given string, n is the length of the string,
+ * and ^ indicates exponentiation.
+ * (The hash value of the empty string is zero.)
+ *
+ * @param {string} str a string
+ * @return {number} a hash code value for the given string.
+ */
+export function javaHashCode (str) {
+  let h;
+  for (let i = 0; i < str.length; i++) {
+    h = Math.imul(31, h) + str.charCodeAt(i) | 0;
+  }
+
+  return h;
 }
 
 /**

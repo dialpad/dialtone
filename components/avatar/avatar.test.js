@@ -162,6 +162,21 @@ describe('DtAvatar Tests', () => {
       });
     });
 
+    describe('When seed is set', () => {
+      // note we keep these tests in sync with the android team, so do not change without communicating with them.
+      it.each([
+        ['a', 'd-avatar--color-800'],
+        ['aaa', 'd-avatar--color-400'],
+        ['bbbbb', 'd-avatar--color-1100'],
+      ])('when seed is set to: %s color class: %s should be set on avatar', (seed, expectedClass) => {
+        mockProps = { seed };
+
+        updateWrapper();
+
+        expect(wrapper.classes(expectedClass)).toBe(true);
+      });
+    });
+
     describe('With Presence', () => {
       it('should not render presence if presence prop is not defined', async () => {
         await wrapper.setProps({ presence: null });
