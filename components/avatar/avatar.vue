@@ -1,12 +1,19 @@
 <template>
-  <div
+  <component
+    :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
     data-qa="dt-avatar"
+    :aria-label="buttonAriaLabel"
+    @click="handleClick"
   >
     <div
       ref="canvas"
-      :class="[canvasClass, 'd-avatar__canvas', { 'd-avatar--image-loaded': imageLoadedSuccessfully }]"
+      :class="[
+        canvasClass,
+        'd-avatar__canvas',
+        { 'd-avatar--image-loaded': imageLoadedSuccessfully },
+      ]"
     >
       <img
         v-if="showImage"
@@ -25,8 +32,7 @@
       />
       <span
         v-else
-        class="d-ps-absolute d-zi-base"
-        :class="AVATAR_KIND_MODIFIERS.initials"
+        :class="[AVATAR_KIND_MODIFIERS.initials, 'd-ps-absolute d-zi-base d-us-none']"
       >
         {{ formattedInitials }}
       </span>
@@ -62,7 +68,7 @@
       v-bind="presenceProps"
       data-qa="dt-presence"
     />
-  </div>
+  </component>
 </template>
 
 <script>
@@ -255,7 +261,26 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+     * Makes the avatar focusable and clickable,
+     * emits a click event when clicked.
+     */
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
   },
+
+  emits: [
+    /**
+     * Avatar click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
 
   data () {
     return {
@@ -282,6 +307,7 @@ export default {
         {
           'd-avatar--group': this.showGroup,
           [`d-avatar--color-${this.getColor()}`]: this.isNotIconType,
+          'd-avatar--clickable': this.clickable,
         },
       ];
     },
@@ -308,6 +334,12 @@ export default {
 
     showImage () {
       return this.imageLoadedSuccessfully !== false && this.imageSrc;
+    },
+
+    buttonAriaLabel () {
+      if (!this.clickable) return undefined;
+
+      return this.fullName || this.imageAlt || this.$attrs['aria-label'];
     },
   },
 
@@ -374,13 +406,17 @@ export default {
         throw new Error('full-name or image-alt must be set if image-src is provided');
       }
     },
+
+    handleClick (e) {
+      if (!this.clickable) return;
+      this.$emit('click', e);
+    },
   },
 };
 </script>
 
 <style lang="less">
 //TODO: Move these classes to dialtone and document.
-
 .d-avatar--image-loaded {
   background-color: transparent;
   background-image: unset;
@@ -418,5 +454,31 @@ export default {
   font-size: var(--dt-font-size-200);
   width: 100%;
   text-align: center;
+}
+
+.d-avatar--clickable {
+  --avatar-color-border: transparent;
+
+  cursor: pointer;
+  padding: 0;
+  background-color: transparent;
+
+  border-radius: var(--dt-size-radius-circle);
+  border: var(--dt-size-border-100) solid var(--avatar-color-border);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--dt-shadow-focus);
+  }
+
+  &:hover {
+    --avatar-color-border: var(--dt-color-border-default);
+  }
+
+  &:active {
+    --avatar-color-border: var(--dt-color-border-moderate);
+
+    transform: scale(0.98);
+  }
 }
 </style>

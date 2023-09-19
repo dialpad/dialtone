@@ -93,3 +93,18 @@ if you want users to always have the same color, just pass in their unique user 
   size="xs | sm | md | lg | xl"
 />
 ```
+
+### Clickable
+
+If you need to create a clickable avatar you can set the `clickable` prop.
+This will make the avatar a <button /> component, set some styling and will be navigable by keyboard.
+In order for the clickable avatar to be accessible, you need to
+either set `full-name`, `image-alt` or `aria-label` attributes.
+
+```jsx
+<dt-avatar
+  aria-label="some aria label"
+  icon="user"
+  clickable
+</
+```

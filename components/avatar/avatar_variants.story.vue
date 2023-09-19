@@ -71,6 +71,31 @@
         />
       </div>
     </div>
+    <div>
+      <h2>Clickable</h2>
+      <div class="d-flow16 d-d-flex">
+        <dt-avatar
+          :seed="seed"
+          full-name="Person avatar"
+          image-src="/common/assets/person.png"
+          clickable
+          @click="onClick"
+        />
+        <dt-avatar
+          :seed="seed"
+          full-name="Person avatar"
+          clickable
+          @click="onClick"
+        />
+        <dt-avatar
+          :seed="seed"
+          icon-name="user"
+          aria-label="user icon avatar"
+          clickable
+          @click="onClick"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
