@@ -48,8 +48,14 @@
       <!-- @slot Slot for right content -->
       <slot name="right" />
     </section>
-    <!-- @slot Slot for selected icon -->
-    <slot name="selected" />
+    <section
+      v-if="$slots.selected"
+      data-qa="dt-item-layout-selected-wrapper"
+      class="dt-item-layout--selected"
+    >
+      <!-- @slot Slot for selected icon -->
+      <slot name="selected" />
+    </section>
   </component>
 </template>
 
@@ -82,6 +88,11 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  &--selected {
+    display: flex;
+    align-items: center;
   }
 }
 </style>
