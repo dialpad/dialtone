@@ -4,7 +4,7 @@
     navigation-type="none"
     v-bind="$attrs"
     :class="listItemClasses"
-    data-qa="feed-item-row"
+    data-qa="dt-feed-item-row"
     v-on="feedListeners"
   >
     <!-- Avatar or time -->
@@ -13,7 +13,6 @@
         v-if="showHeader"
         :full-name="displayName"
         :image-src="avatarImageUrl"
-        avatar-class="d-mt8 d-ps-absolute d-t0"
         :seed="avatarSeed"
       />
       <!-- show time instead of avatar when headers not present -->
@@ -21,7 +20,7 @@
         v-if="!showHeader"
         v-show="isActive"
         class="d-fs-100 d-fw-normal d-ws-nowrap d-lh-100 d-fc-tertiary d-mb6"
-        data-qa="feed-item-row-left-time"
+        data-qa="dt-feed-item-row--left-time"
       >
         {{ shortTime }}
       </div>
@@ -31,7 +30,7 @@
       <!-- Feed Item -->
       <div
         v-if="showHeader"
-        data-qa="feed-item-row-header"
+        data-qa="dt-feed-item-row--header"
         class="d-d-flex d-ai-center"
       >
         <p class="d-fs-200 d-lh-300 d-fw-bold d-to-ellipsis d-of-hidden d-ws-nowrap">
@@ -46,7 +45,7 @@
       <!-- @slot Default content slot for feed item row -->
       <span
         class="content-text-wrapper-class"
-        data-qa="feed-item-row-content"
+        data-qa="dt-feed-item-row--content"
       >
         <slot />
       </span>
@@ -55,7 +54,7 @@
     <template #bottom>
       <div
         class="d-d-flex d-fw-wrap"
-        data-qa="feed-item-row-reactions"
+        data-qa="dt-feed-item-row--reactions"
       >
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
@@ -68,7 +67,7 @@
     <template #right>
       <div
         v-show="isActive"
-        data-qa="feed-item-row-menu"
+        data-qa="dt-feed-item-row--menu"
         class="d-ps-absolute d-tn16 d-r12"
       >
         <dt-lazy-show
@@ -211,7 +210,7 @@ export default {
         'd-px8',
         { 'd-bgc-secondary-opaque': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
         FEED_ROW_STATE_BACKGROUND_COLOR[this.state],
-        'feed-item-row',
+        'dt-feed-item-row',
         'd-t',
         'd-tp-bgc',
       ];
@@ -240,12 +239,19 @@ export default {
 };
 </script>
 
-<style lang="less">
-content-text-wrapper-class:not(img) {
-  line-height: 1.6rem;
-}
-
-.feed-item-row {
+<style lang="less" scoped>
+.dt-feed-item-row {
   transition-duration: 2s !important;
+
+  .content-text-wrapper-class:not(img) {
+    line-height: 1.6rem;
+  }
+
+  &:deep(.dt-item-layout--left) {
+    .d-avatar {
+      align-self: flex-start;
+      margin-top: var(--dt-space-300);
+    }
+  }
 }
 </style>

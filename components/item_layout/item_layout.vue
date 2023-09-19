@@ -72,3 +72,16 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+// Move this to dialtone
+.dt-item-layout {
+  align-items: stretch;
+
+  &--content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+</style>

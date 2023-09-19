@@ -208,6 +208,12 @@ export default {
 .dt-contact-info {
   --contact-info-avatar-border-color: var(--dt-color-surface-primary);
 
+  display: flex;
+
+  &:deep(.dt-item-layout) {
+    flex: 1 1 0;
+  }
+
   &:deep(.dt-item-layout--content) {
     /*
     DP-74536: Add `min-width` to make the width of "contact info" adjustable.
@@ -221,6 +227,7 @@ export default {
     */
     min-width: var(--dt-space-650);
     justify-content: flex-start;
+    align-items: center;
   }
 
   &:deep(.dt-item-layout--right) {
@@ -228,6 +235,7 @@ export default {
     DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
     */
     min-width: 0;
+    align-items: center;
   }
 
   &--avatars .d-avatar {
