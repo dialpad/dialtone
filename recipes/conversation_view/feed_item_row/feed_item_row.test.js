@@ -36,11 +36,11 @@ describe('DtFeedItemRow tests', () => {
   // Helpers
   const _setChildWrappers = () => {
     avatarImgWrapper = wrapper.find('[data-qa="dt-avatar-image"]');
-    headerWrapper = wrapper.find('[data-qa="feed-item-row-header"]');
-    leftTimeWrapper = wrapper.find('[data-qa="feed-item-row-left-time"]');
-    contentWrapper = wrapper.find('[data-qa="feed-item-row-content"]');
-    reactionsWrapper = wrapper.find('[data-qa="feed-item-row-reactions"]');
-    menuWrapper = wrapper.find('[data-qa="feed-item-row-menu"]');
+    headerWrapper = wrapper.find('[data-qa="dt-feed-item-row--header"]');
+    leftTimeWrapper = wrapper.find('[data-qa="dt-feed-item-row--left-time"]');
+    contentWrapper = wrapper.find('[data-qa="dt-feed-item-row--content"]');
+    reactionsWrapper = wrapper.find('[data-qa="dt-feed-item-row--reactions"]');
+    menuWrapper = wrapper.find('[data-qa="dt-feed-item-row--menu"]');
   };
 
   const _mountWrapper = () => {
