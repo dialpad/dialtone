@@ -17,6 +17,8 @@
     :overlay-icon="$attrs.overlayIcon"
     :overlay-text="$attrs.overlayText"
     :overlay-class="$attrs.overlayClass"
+    :clickable="$attrs.clickable"
+    @click="$attrs.onClick"
   />
 </template>
 

@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 
+const MOCK_AVATAR_STUB = vi.fn();
 const MOCK_IMAGE_SOURCE = 'image.png';
 const MOCK_INITIALS = 'JN';
 const MOCK_SIZE = 'lg';
@@ -12,8 +13,10 @@ let MOCK_ELEMENT = null;
 const baseProps = {
   fullName: 'Jaqueline Nackos',
 };
+const baseAttrs = {};
 
 let mockProps = {};
+let mockAttrs = {};
 const testContext = {};
 
 describe('DtAvatar Tests', () => {
@@ -24,7 +27,8 @@ describe('DtAvatar Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
-      props: { ...baseProps, ...mockProps },
+      propsData: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
       localVue: testContext.localVue,
     });
 
@@ -39,6 +43,7 @@ describe('DtAvatar Tests', () => {
 
   afterEach(() => {
     mockProps = {};
+    mockAttrs = {};
   });
 
   describe('Presentation Tests', () => {
@@ -230,6 +235,48 @@ describe('DtAvatar Tests', () => {
         presence = wrapper.find('[data-qa="dt-presence"]');
 
         expect(presence.classes('d-avatar__presence--lg')).toBe(true);
+      });
+    });
+  });
+
+  describe('Interactivity Tests', () => {
+    describe('When clickable is false (default)', () => {
+      describe('When avatar is clicked', () => {
+        beforeEach(async () => {
+          mockAttrs = { onClick: MOCK_AVATAR_STUB };
+
+          updateWrapper();
+
+          await wrapper.trigger('click');
+        });
+
+        it('Should not call listener', async () => {
+          expect(MOCK_AVATAR_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('Should not emit click event', () => {
+          expect(wrapper.emitted()).not.toHaveProperty('click');
+        });
+      });
+    });
+    describe('When clickable is true', () => {
+      describe('When avatar is clicked', () => {
+        beforeEach(async () => {
+          mockProps = { clickable: true };
+          mockAttrs = { onClick: MOCK_AVATAR_STUB };
+
+          updateWrapper();
+
+          await wrapper.trigger('click');
+        });
+
+        it('Should call listener', async () => {
+          expect(MOCK_AVATAR_STUB).toBeCalledTimes(1);
+        });
+
+        it('Should emit click event', () => {
+          expect(wrapper.emitted()).toHaveProperty('click');
+        });
       });
     });
   });
