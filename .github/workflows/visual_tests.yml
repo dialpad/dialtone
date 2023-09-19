@@ -4,29 +4,26 @@ on:
   push:
     branches: [ staging, staging-vue3 ]
   pull_request:
-    types: [ labeled, synchronize ]
-  pull_request_review:
-    types: [ submitted ]
+    types: [ labeled, synchronize, opened ]
 
 env:
   NODE_MODULES_CACHE_VERSION: v3
 
 jobs:
 
-  label_when_approved:
-    if: github.event_name == 'pull_request_review' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')
+  prompt_for_label:
+    if: (!contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready'))
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set Label When Approved
-        uses: TobKed/label-when-approved-action@v1.3
+      - uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          label: 'visual-test-ready'
+          script: |
+            throw "Please add either the visual-test-ready or no-visual-test label to this PR depending on whether you want to run visual tests or not. It is recommended to run visual tests if your PR changes any UI.";
 
 
   visual_tests:
-    needs: label_when_approved
-    if: always() && ((github.event_name == 'push' || github.event_name == 'pull_request_review') && contains(github.event.pull_request.labels.*.name, 'visual-test-ready'))
+    if: contains(github.event.pull_request.labels.*.name, 'visual-test-ready')
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
