@@ -140,10 +140,10 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
   describe('Interactivity Tests', () => {
     describe('When clicking on the button', () => {
       it(
-        'should trigger the "arrowClick" event when no listener attached',
+        'should trigger the "arrow-click" event when no listener attached',
         async () => {
           await button.find('button').trigger('click');
-          const arrowClickEvents = wrapper.emitted().arrowClick;
+          const arrowClickEvents = wrapper.emitted()['arrow-click'];
           expect(arrowClickEvents.length).toBe(1);
         },
       );
@@ -174,8 +174,8 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
         expect(wrapper.vm.open).toBe(true);
       });
 
-      it('should trigger the "arrowClick" event', () => {
-        const arrowClickEvents = wrapper.emitted().arrowClick;
+      it('should trigger the "arrow-click" event', () => {
+        const arrowClickEvents = wrapper.emitted()['arrow-click'];
         expect(arrowClickEvents.length).toBe(1);
       });
     });

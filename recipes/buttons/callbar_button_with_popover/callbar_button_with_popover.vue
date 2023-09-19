@@ -249,7 +249,7 @@ export default {
     /**
      * Emitted when the arrow is clicked
      */
-    'arrowClick',
+    'arrow-click',
 
     /**
      * Native click event
@@ -282,17 +282,26 @@ export default {
 
     showPopover () {
       if (!this.openPopover || this.open) {
+        this.syncOpenState();
         return false;
       }
 
-      return this.arrowClick();
+      return this.toggleOpen();
     },
   },
 
   methods: {
     arrowClick (ev) {
-      this.$emit('arrowClick', ev);
+      this.$emit('arrow-click', ev);
+      return this.toggleOpen();
+    },
+
+    toggleOpen () {
       return (this.open = !this.open);
+    },
+
+    syncOpenState () {
+      this.open = this.openPopover;
     },
 
     buttonClick (ev) {

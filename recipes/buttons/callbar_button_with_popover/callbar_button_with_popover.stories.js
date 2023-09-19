@@ -17,7 +17,7 @@ const iconsList = getIconNames();
 export const argsData = {
   buttonWidthSize: 'xl',
   openPopover: false,
-  onArrowClick: action('arrowClick'),
+  onArrowClick: action('arrow-click'),
   onClick: action('click'),
   onOpened: action('opened'),
 };
@@ -138,13 +138,18 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  arrowClick: {
+  'arrow-click': {
     description: 'Triggered when the arrow is clicked',
     table: {
       disable: false,
       type: {
         summary: 'event',
       },
+    },
+  },
+  onArrowClick: {
+    table: {
+      disable: true,
     },
   },
   click: {

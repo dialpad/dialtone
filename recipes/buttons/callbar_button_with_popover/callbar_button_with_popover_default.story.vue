@@ -15,7 +15,7 @@
     :text-class="textClass"
     :content-class="contentClass"
     :open-popover="openPopover"
-    @arrow-click="onClick"
+    @arrow-click="onArrowClick"
     @click="onClick"
     @opened="onOpened"
   >
