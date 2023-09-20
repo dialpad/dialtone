@@ -7,6 +7,8 @@
     :avatar-seed="$attrs.avatarSeed"
     :title="$attrs.title"
     :border-color="$attrs.borderColor"
+    :clickable="$attrs.clickable"
+    @click="$attrs.onClick"
   >
     <template
       v-if="$attrs.video"

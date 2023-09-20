@@ -263,25 +263,30 @@
       avatar-full-name="design-product-lt-so"
       title="design-product-lt-so"
       border-color="critical"
+      clickable
     >
       <template #subtitle>
-        <div class="d-d-flex d-flow4">
+        <div class="d-d-flex d-flow4 d-ai-center">
           <div class="d-d-flex d-ai-center">
             <dt-icon
               name="users"
               size="100"
               class="d-mr2"
             />
-            <span>3</span>
+            <p>3</p>
           </div>
-          <span class="d-fs-300">•</span>
+          <p class="d-fs-300">
+            •
+          </p>
           <div class="d-d-flex d-ai-center">
             <dt-icon
               name="activity"
               size="100"
             />
-            <span>Jaqueline Nackos</span>
           </div>
+          <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
+            Jaqueline Nackos Jaqueline Nackos
+          </p>
         </div>
       </template>
       <template #right>
@@ -357,14 +362,15 @@
       </template>
       <template #bottom>
         <dt-item-layout>
-          <template #left>
-            <dt-icon
-              name="share-screen"
-              size="400"
-            />
-          </template>
           <template #default>
-            <span class="d-fs-100">Sharing screen</span>
+            <div class="d-d-flex d-ai-center">
+              <dt-icon
+                class="d-mr8"
+                name="share-screen"
+                size="400"
+              />
+              <span class="d-fs-100">Sharing screen</span>
+            </div>
           </template>
           <template #right>
             <dt-button

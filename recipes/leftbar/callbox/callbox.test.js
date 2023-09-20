@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtRecipeCallbox from './callbox.vue';
 import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from '@/recipes/leftbar/callbox/callbox_constants.js';
 
+const MOCK_CALLBOX_STUB = vi.fn();
 const MOCK_AVATAR_IMAGE_SOURCE = 'image.png';
 const MOCK_AVATAR_FULL_NAME = 'Jaqueline Nackos';
 const MOCK_AVATAR_INITIALS = 'J';
@@ -21,9 +22,11 @@ const baseProps = {
   borderColor: MOCK_BORDER_COLOR,
   title: MOCK_TITLE,
 };
+const baseAttrs = {};
 const baseSlots = {};
 
 let mockProps = {};
+let mockAttrs = {};
 let mockSlots = {};
 
 describe('DtRecipeCallbox Tests', () => {
@@ -41,7 +44,8 @@ describe('DtRecipeCallbox Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtRecipeCallbox, {
-      props: { ...baseProps, ...mockProps },
+      propsData: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
     });
 
@@ -63,7 +67,9 @@ describe('DtRecipeCallbox Tests', () => {
 
   afterEach(() => {
     mockProps = {};
+    mockAttrs = {};
     mockSlots = {};
+    vi.resetAllMocks();
   });
 
   describe('Presentation Tests', () => {
@@ -180,6 +186,93 @@ describe('DtRecipeCallbox Tests', () => {
           updateWrapper();
 
           expect(videoSlot.text()).toBe(MOCK_VIDEO_SLOT_CONTENT);
+        });
+      });
+    });
+  });
+
+  describe('Interactivity Tests', () => {
+    describe('When clickable is false (default)', () => {
+      describe('When avatar is clicked', () => {
+        beforeEach(async () => {
+          mockProps = {
+            avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
+            avatarFullName: MOCK_AVATAR_FULL_NAME,
+          };
+          mockAttrs = { onClick: MOCK_CALLBOX_STUB };
+
+          updateWrapper();
+
+          await avatar.trigger('click');
+        });
+
+        it('Should not call listener', async () => {
+          expect(MOCK_CALLBOX_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('Should not emit click event', () => {
+          expect(wrapper.emitted()).not.toHaveProperty('click');
+        });
+      });
+
+      describe('When title is clicked', () => {
+        beforeEach(async () => {
+          mockAttrs = { onClick: MOCK_CALLBOX_STUB };
+
+          updateWrapper();
+
+          await title.trigger('click');
+        });
+
+        it('Should not call listener', async () => {
+          expect(MOCK_CALLBOX_STUB).toHaveBeenCalledTimes(0);
+        });
+
+        it('Should not emit click event', () => {
+          expect(wrapper.emitted()).not.toHaveProperty('click');
+        });
+      });
+    });
+    describe('When clickable is true', () => {
+      describe('When avatar is clicked', () => {
+        beforeEach(async () => {
+          mockProps = {
+            avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
+            avatarFullName: MOCK_AVATAR_FULL_NAME,
+            clickable: true,
+          };
+          mockAttrs = { onClick: MOCK_CALLBOX_STUB };
+
+          updateWrapper();
+
+          await avatar.trigger('click');
+        });
+
+        it('Should call listener', async () => {
+          expect(MOCK_CALLBOX_STUB).toBeCalledTimes(1);
+        });
+
+        it('Should emit click event', () => {
+          expect(wrapper.emitted()).toHaveProperty('click');
+        });
+      });
+
+      describe('When title is clicked', () => {
+        beforeEach(async () => {
+          mockProps = { clickable: true };
+          mockAttrs = { onClick: MOCK_CALLBOX_STUB };
+
+          updateWrapper();
+
+          await title.trigger('click');
+        });
+
+        it('Should call listener', async () => {
+          expect(MOCK_CALLBOX_STUB).toBeCalledTimes(1);
+        });
+
+        it('Should emit click event', () => {
+          expect(wrapper.emitted()).toHaveProperty('click');
         });
       });
     });

@@ -2,8 +2,16 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeCallbox from './callbox.vue';
 import DtRecipeCallboxDefaultTemplate from './callbox_default.story.vue';
 import DtRecipeCallboxVariantsTemplate from './callbox_variants.story.vue';
+import { action } from '@storybook/addon-actions';
 
-export const argTypesData = {};
+export const argTypesData = {
+  // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+};
 
 const decorator = () => ({
   template: `<div style="background-color: var(--dt-theme-sidebar-color-background)" class="d-wmx264 d-p8"><story />
@@ -11,9 +19,11 @@ const decorator = () => ({
 });
 
 export const argsData = {
+  onClick: action('click'),
   title: 'Title',
   avatarFullName: 'Title',
   borderColor: 'ai',
+  clickable: true,
 };
 
 export default {

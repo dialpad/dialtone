@@ -109,7 +109,7 @@ export default {
 const DefaultTemplate = (args) =>
   createTemplateFromVueFile(args, DtAvatarDefaultTemplate);
 
-const VariantsTemplate = (args, { argTypes }) =>
+const VariantsTemplate = (args) =>
   createTemplateFromVueFile(args, DtAvatarVariantsTemplate);
 
 // Stories
