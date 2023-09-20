@@ -1,12 +1,10 @@
 import DtButton from '../button/button.vue';
 import DtModal from './modal.vue';
 import { mount } from '@vue/test-utils';
-import {
-  itBehavesLikeVisuallyHiddenCloseButtonExists,
-  itBehavesLikeVisuallyHiddenCloseLabelIsNull,
-} from '@/tests/shared_examples/sr_only_close_button';
-import { cleanSpy, initializeSpy, itBehavesLikeRaisesValidationError } from '@/tests/shared_examples/validation';
 import { MODAL_BANNER_KINDS } from './modal_constants';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+
+let MOCK_CONSOLE_ERROR_SPY;
 
 const baseProps = {
   show: true,
@@ -16,16 +14,25 @@ const baseProps = {
   visuallyHiddenCloseLabel: 'Close modal',
 };
 
+const baseSlots = {};
+
+let mockSlots = {};
+let mockProps = {};
+
 describe('DtModal Tests', () => {
   let wrapper;
-
   let closeBtn;
   let copy;
   let overlay;
   let title;
   let banner;
 
-  const _setChildWrappers = function () {
+  const updateWrapper = () => {
+    wrapper = mount(DtModal, {
+      props: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+    });
+
     closeBtn = wrapper.findComponent(DtButton);
     copy = wrapper.find('[data-qa="dt-modal-copy"]');
     overlay = wrapper.find('[data-qa="dt-modal"]');
@@ -33,215 +40,218 @@ describe('DtModal Tests', () => {
     banner = wrapper.find('[data-qa="dt-modal-banner"]');
   };
 
-  const _setWrappers = () => {
-    wrapper = mount(DtModal, {
-      props: {
-        ...baseProps,
-      },
-    });
-    _setChildWrappers();
-  };
-
-  beforeEach(function () {
-    _setWrappers();
+  beforeEach(() => {
+    updateWrapper();
   });
 
-  it(
-    'Should display title, banner and copy text based on props',
-    async () => {
-      expect(copy.exists()).toBeTruthy();
-      expect(title.exists()).toBeTruthy();
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
+  });
 
-      const newCopy = 'test modal copy';
-      const newTitle = 'test modal title';
-      const newBanner = 'test modal banner';
-      await wrapper.setProps({
-        title: newTitle,
-        bannerTitle: newBanner,
-        copy: newCopy,
-      });
-      _setChildWrappers();
-      expect(copy.text()).toEqual(newCopy);
-      expect(title.text()).toEqual(newTitle);
-      expect(banner.text()).toEqual(newBanner);
-    },
-  );
+  it('Should display title, banner and copy text based on props', async () => {
+    expect(copy.exists()).toBeTruthy();
+    expect(title.exists()).toBeTruthy();
 
-  it('Close button is visible by default', async () => {
+    const newCopy = 'test modal copy';
+    const newTitle = 'test modal title';
+    const newBanner = 'test modal banner';
+
+    await wrapper.setProps({
+      show: true,
+      title: newTitle,
+      bannerTitle: newBanner,
+      copy: newCopy,
+    });
+
+    overlay = wrapper.find('[data-qa="dt-modal"]');
+    title = wrapper.find('[data-qa="dt-modal-title"]');
+    banner = wrapper.find('[data-qa="dt-modal-banner"]');
+
+    expect(copy.text()).toEqual(newCopy);
+    expect(title.text()).toEqual(newTitle);
+    expect(banner.text()).toEqual(newBanner);
+  });
+
+  it('Close button is visible by default', () => {
     expect(closeBtn.exists()).toBe(true);
   });
 
   describe('When hideClose prop is true', () => {
-    const message = `If hideClose prop is true, visuallyHiddenClose and visuallyHiddenCloseLabel props
-        need to be set so the component always includes a close button`;
-
     beforeEach(async () => {
-      initializeSpy();
+      MOCK_CONSOLE_ERROR_SPY = vi.spyOn(console, 'error').mockClear();
+
       await wrapper.setProps({ hideClose: true });
     });
 
     afterEach(() => {
-      cleanSpy();
+      MOCK_CONSOLE_ERROR_SPY = null;
+
+      console.error.mockRestore();
     });
 
     it('Should hide close button', () => {
       expect(closeBtn.exists()).toBe(false);
     });
 
-    itBehavesLikeRaisesValidationError(message);
+    it('should raise a validation error', () => {
+      const message = `If hideClose prop is true, visuallyHiddenClose and visuallyHiddenCloseLabel props
+        need to be set so the component always includes a close button`;
+
+      expect(MOCK_CONSOLE_ERROR_SPY).toHaveBeenCalledWith(message);
+    });
   });
 
-  it(
-    'Should display slotted header, banner and content instead of title, bannerTitle and copy',
-    () => {
-      const contentText = 'test content';
-      const headerText = 'test header';
-      const bannerText = 'title';
+  it('Should display slotted header, banner and content instead of title, bannerTitle and copy', () => {
+    const contentText = 'test content';
+    const headerText = 'test header';
+    const bannerText = 'title';
 
-      wrapper = mount(DtModal, {
-        props: {
-          ...baseProps,
-          copy: 'non-slot copy',
-          title: 'non-slot title',
-          bannerTitle: 'non-slot banner',
-        },
-        slots: {
-          default: `<p>${contentText}</p>`,
-          header: `<h1>${headerText}</h1>`,
-          banner: `<p>${bannerText}</p>`,
-        },
-      });
-      _setChildWrappers();
+    mockProps = {
+      copy: 'non-slot copy',
+      title: 'non-slot title',
+      bannerTitle: 'non-slot banner',
+    };
 
-      expect(copy.text()).toEqual(contentText);
-      expect(title.text()).toEqual(headerText);
-      expect(banner.text()).toEqual(bannerText);
-    },
-  );
+    mockSlots = {
+      default: `<p>${contentText}</p>`,
+      header: `<h1>${headerText}</h1>`,
+      banner: `<p>${bannerText}</p>`,
+    };
+
+    updateWrapper();
+
+    copy = wrapper.find('[data-qa="dt-modal-copy"]');
+    title = wrapper.find('[data-qa="dt-modal-title"]');
+    banner = wrapper.find('[data-qa="dt-modal-banner"]');
+
+    expect(copy.text()).toEqual(contentText);
+    expect(title.text()).toEqual(headerText);
+    expect(banner.text()).toEqual(bannerText);
+  });
 
   it('Should set the aria-label on the close button', async () => {
     const labelProp = 'aria-label';
     const newAriaLabel = 'NEW test close aria label';
 
     expect(closeBtn.attributes(labelProp)).toEqual(baseProps.closeButtonProps.ariaLabel);
+
     await wrapper.setProps({ closeButtonProps: { ariaLabel: newAriaLabel } });
-    _setChildWrappers();
+
+    closeBtn = wrapper.findComponent(DtButton);
+
     expect(closeBtn.attributes(labelProp)).toEqual(newAriaLabel);
   });
 
-  it('Should emit a sync-able update event when overlay / close-icon are clicked' +
-    ', or escape key is pressed', async function () {
-    wrapper = mount(DtModal, {
-      props: {
-        ...baseProps,
-      },
-    });
-    _setChildWrappers();
-
+  it('Should emit a sync-able update event when overlay / close-icon are clicked, or escape key is pressed', async () => {
     const syncEvent = 'update:show';
     expect(wrapper.emitted()).toEqual({});
 
     await overlay.trigger('click');
-    expect(wrapper.emitted()[syncEvent].length).toEqual(1);
+
+    expect(wrapper.emitted()[syncEvent].length).toBe(1);
     expect(wrapper.emitted()[syncEvent][0][0]).toBe(false);
 
     await overlay.trigger('keydown', { code: 'Escape' });
-    expect(wrapper.emitted()[syncEvent].length).toEqual(2);
+
+    expect(wrapper.emitted()[syncEvent].length).toBe(2);
     expect(wrapper.emitted()[syncEvent][1][0]).toBe(false);
 
     await closeBtn.trigger('click');
-    expect(wrapper.emitted()[syncEvent].length).toEqual(3);
+
+    expect(wrapper.emitted()[syncEvent].length).toBe(3);
     expect(wrapper.emitted()[syncEvent][2][0]).toBe(false);
-  },
-  );
+  });
 
-  it(
-    'Should pass content class through to root modal element',
-    async () => {
-      // TODO: Use a shared test case for this
-      const modalClass = 'modal-class';
-      expect(overlay.classes(modalClass)).toBe(false);
+  it('Should pass content class through to root modal element', async () => {
+    const modalClass = 'modal-class';
 
-      await wrapper.setProps({ modalClass });
-      expect(overlay.classes(modalClass)).toBe(true);
-    },
-  );
+    expect(overlay.classes(modalClass)).toBe(false);
+
+    await wrapper.setProps({ modalClass });
+
+    expect(overlay.classes(modalClass)).toBe(true);
+  });
 
   it('Should apply banner class', async () => {
     const bannerClass = 'banner-class';
     const bannerTitle = 'title';
 
     await wrapper.setProps({
+      show: true,
       bannerTitle,
       bannerClass,
     });
 
-    _setChildWrappers();
+    banner = wrapper.find('[data-qa="dt-modal-banner"]');
+
     expect(banner.classes(bannerClass)).toBe(true);
   });
 
   it('Should set default banner kind when no kind is set', async () => {
-    const bannerTitle = 'title';
-
     await wrapper.setProps({
       show: true,
-      bannerTitle,
+      bannerTitle: 'title',
     });
 
-    _setChildWrappers();
+    banner = wrapper.find('[data-qa="dt-modal-banner"]');
+
     expect(banner.classes(MODAL_BANNER_KINDS[DtModal.props.bannerKind.default])).toBe(true);
   });
 
   it('Should apply banner kind', async () => {
-    const bannerKind = 'info';
-    const bannerTitle = 'title';
-
     await wrapper.setProps({
       show: true,
-      bannerTitle,
-      bannerKind,
+      bannerKind: 'info',
+      bannerTitle: 'title',
     });
 
-    _setChildWrappers();
-    expect(banner.classes(MODAL_BANNER_KINDS[bannerKind])).toBe(true);
+    banner = wrapper.find('[data-qa="dt-modal-banner"]');
+
+    expect(banner.classes(MODAL_BANNER_KINDS.info)).toBe(true);
   });
 
-  it(
-    'Should pass content class through to content modal element',
-    async () => {
-      const contentClass = 'content-class';
-      expect(copy.classes(contentClass)).toBe(false);
+  it('Should pass content class through to content modal element', async () => {
+    const contentClass = 'content-class';
 
-      await wrapper.setProps({ contentClass });
-      _setChildWrappers();
-      expect(copy.classes(contentClass)).toBe(true);
-    },
-  );
+    expect(copy.classes(contentClass)).toBe(false);
+
+    await wrapper.setProps({ contentClass });
+
+    expect(copy.classes(contentClass)).toBe(true);
+  });
 
   it('Should NOT contain a visually hidden close button', () => {
-    itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
+    const buttonExists = wrapper.findComponent(SrOnlyCloseButton).exists();
+
+    expect(!buttonExists).toBe(true);
   });
 
   describe('When visuallyHiddenClose is true', () => {
-    beforeEach(async () => {
+    it('should contain a visually hidden close button', async () => {
       await wrapper.setProps({ visuallyHiddenClose: true });
+
+      const buttonExists = wrapper.findComponent(SrOnlyCloseButton).exists();
+
+      expect(buttonExists).toBe(true);
     });
 
-    it('should contain a visually hidden close button', () => {
-      itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper);
-    });
+    describe('When visuallyHiddenCloseLabel is null and hideClose is true', () => {
+      it('should raise a validation error', async () => {
+        const message = `If hideClose prop is true, visuallyHiddenClose and visuallyHiddenCloseLabel props
+        need to be set so the component always includes a close button`;
 
-    describe('When visuallyHiddenCloseLabel is null', () => {
-      beforeEach(async () => {
-        initializeSpy();
+        MOCK_CONSOLE_ERROR_SPY = vi.spyOn(console, 'error').mockClear();
+
+        await wrapper.setProps({ hideClose: true });
         await wrapper.setProps({ visuallyHiddenCloseLabel: null });
-      });
 
-      afterEach(() => {
-        cleanSpy();
-      });
+        expect(MOCK_CONSOLE_ERROR_SPY).toHaveBeenCalledWith(message);
 
-      itBehavesLikeVisuallyHiddenCloseLabelIsNull();
+        MOCK_CONSOLE_ERROR_SPY = null;
+
+        console.error.mockRestore();
+      });
     });
   });
 });

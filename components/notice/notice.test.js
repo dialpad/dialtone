@@ -1,46 +1,50 @@
 import { mount } from '@vue/test-utils';
+
 import DtNotice from './notice.vue';
 import DtNoticeAction from '../notice/notice_action.vue';
 import DtNoticeContent from '../notice/notice_content.vue';
 import DtNoticeIcon from '../notice/notice_icon.vue';
 
-// Constants
 const baseProps = {
   title: '',
   closeButtonProps: { ariaLabel: 'close' },
 };
 
-const baseSlotsData = {
+const baseSlots = {
   default: 'default slot content',
   action: 'action slot content',
   icon: 'icon slot content',
 };
 
+let mockProps = {};
+let mockSlots = {};
+
 describe('DtNotice tests', () => {
   let wrapper;
-
   let rootElement;
   let actionChild;
   let contentChild;
   let iconChild;
 
-  const _setWrappers = () => {
+  const updateWrapper = () => {
     wrapper = mount(DtNotice, {
-      props: baseProps,
-      slots: baseSlotsData,
+      props: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
     });
-    _setChildWrappers();
-  };
 
-  const _setChildWrappers = () => {
     rootElement = wrapper.find('aside');
     actionChild = wrapper.findComponent(DtNoticeAction);
     contentChild = wrapper.findComponent(DtNoticeContent);
     iconChild = wrapper.findComponent(DtNoticeIcon);
   };
 
-  beforeEach(function () {
-    _setWrappers();
+  beforeEach(() => {
+    updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
@@ -49,16 +53,16 @@ describe('DtNotice tests', () => {
         expect(wrapper.exists()).toBe(true);
       });
 
-      it('action slot is passed down correctly', async () => {
-        expect(actionChild.text()).toBe(baseSlotsData.action);
+      it('action slot is passed down correctly', () => {
+        expect(actionChild.text()).toBe(baseSlots.action);
       });
 
-      it('default slot is passed down correctly', async () => {
-        expect(contentChild.text()).toBe(baseSlotsData.default);
+      it('default slot is passed down correctly', () => {
+        expect(contentChild.text()).toBe(baseSlots.default);
       });
 
-      it('icon slot is passed down correctly', async () => {
-        expect(iconChild.text()).toBe(baseSlotsData.icon);
+      it('icon slot is passed down correctly', () => {
+        expect(iconChild.text()).toBe(baseSlots.icon);
       });
     });
 
@@ -69,33 +73,29 @@ describe('DtNotice tests', () => {
     });
 
     describe('When important is true', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({ important: true });
-      });
-
       it('Has correct class', async () => {
+        await wrapper.setProps({ important: true });
+
         expect(rootElement.classes('d-notice--important')).toBe(true);
       });
     });
 
     describe('When kind is not specified', () => {
-      it('Does not add notice kind class', async () => {
+      it('Does not add notice kind class', () => {
         expect(rootElement.classes('d-notice--')).toBe(false);
       });
     });
 
     describe('When kind is set to error', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({ kind: 'error' });
-      });
-
       it('Has correct class', async () => {
+        await wrapper.setProps({ kind: 'error' });
+
         expect(rootElement.classes('d-notice--error')).toBe(true);
       });
     });
 
     describe('When closeButtonProps is passed', () => {
-      it('Has correct class', async () => {
+      it('Has correct class', () => {
         expect(actionChild.props().closeButtonProps).toEqual({ ariaLabel: 'close' });
       });
     });
@@ -109,11 +109,9 @@ describe('DtNotice tests', () => {
     });
 
     describe('When role is alert', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({ role: 'alert' });
-      });
-
       it('Shows correct role', async () => {
+        await wrapper.setProps({ role: 'alert' });
+
         expect(contentChild.attributes('role')).toBe('alert');
       });
     });
