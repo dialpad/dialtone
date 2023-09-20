@@ -12,7 +12,7 @@ env:
 jobs:
 
   prompt_for_label:
-    if: (!contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready'))
+    if: (github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready'))
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,7 @@ jobs:
 
 
   visual_tests:
-    if: contains(github.event.pull_request.labels.*.name, 'visual-test-ready')
+    if: contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
