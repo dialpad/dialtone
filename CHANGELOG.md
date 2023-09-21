@@ -1,3 +1,16 @@
+# [3.2.0](https://github.com/dialpad/dialtone-icons/compare/v3.1.1...v3.2.0) (2023-09-21)
+
+
+### Documentation
+
+* rename main branch to production ([8e5511f](https://github.com/dialpad/dialtone-icons/commit/8e5511f295860a7c552bc6adec2b4ba361ca29de))
+
+
+### Features
+
+* add circle half filled icon ([#26](https://github.com/dialpad/dialtone-icons/issues/26)) ([8622483](https://github.com/dialpad/dialtone-icons/commit/862248369d96f715773740a06072e0744b48c3e9))
+* add x and threads icons ([#25](https://github.com/dialpad/dialtone-icons/issues/25)) ([f417682](https://github.com/dialpad/dialtone-icons/commit/f4176821fa22b30fe4fd44e6193837271259292c))
+
 ## [3.1.1](https://github.com/dialpad/dialtone-icons/compare/v3.1.0...v3.1.1) (2023-09-04)
 
 
