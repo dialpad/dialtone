@@ -34,7 +34,7 @@
     "CHANGELOG.json"
   ],
   "dependencies": {
-    "@dialpad/dialtone-icons": "^2.1.1",
+    "@dialpad/dialtone-icons": "^2.2.0",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "@tiptap/extension-document": "^2.0.3",
     "@tiptap/extension-paragraph": "^2.0.3",
