@@ -1,7 +1,9 @@
+<!-- eslint-disable max-lines -->
 <template>
   <div class="d-stack16">
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >
@@ -38,6 +40,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       title="1 Participant"
+      avatar-seed="1 Participant"
     >
       <template #subtitle>
         <span>06:01</span>
@@ -84,6 +87,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       title="1 Participant"
+      avatar-seed="1 Participant"
     >
       <template #video>
         <img
@@ -136,6 +140,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       badge-text="Test_Call_Center"
       badge-color="warning"
@@ -174,6 +179,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >
@@ -231,6 +237,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       title="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
@@ -261,6 +268,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="design-product-lt-so"
+      avatar-seed="design-product-lt-so"
       title="design-product-lt-so"
       border-color="critical"
       clickable
@@ -320,6 +328,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >

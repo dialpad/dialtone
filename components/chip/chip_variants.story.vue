@@ -21,7 +21,7 @@
         <template #avatar>
           <dt-avatar
             full-name="Jaqueline Nackos"
-            :seed="avatarSeed"
+            seed="Jaqueline Nackos"
           />
         </template>
         <template #default>
