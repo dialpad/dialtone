@@ -1,3 +1,10 @@
+## [3.86.1](https://github.com/dialpad/dialtone-vue/compare/v3.86.0...v3.86.1) (2023-09-22)
+
+
+### Bug Fixes
+
+* **Contact Row:** add space between presence and status text ([#1198](https://github.com/dialpad/dialtone-vue/issues/1198)) ([5ad6215](https://github.com/dialpad/dialtone-vue/commit/5ad62157af30becf443d2bab8d63ea7ab48782cf))
+
 # [3.86.0](https://github.com/dialpad/dialtone-vue/compare/v3.85.0...v3.86.0) (2023-09-21)
 
 
