@@ -61,7 +61,7 @@ import DtAvatar from '@/components/avatar/avatar.vue';
 import { safeConcatStrings } from '@/common/utils.js';
 
 export default {
-  name: 'DtRecipeGroupRow',
+  name: 'DtRecipeContactRow',
 
   components: {
     DtAvatar,
