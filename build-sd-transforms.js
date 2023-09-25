@@ -8,10 +8,10 @@ import { promises } from 'fs';
 
 import { registerDialtoneTransforms } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
-import Base from './tokens/base/default.json' assert {
+import Root from './tokens/root.json' assert {
   type: 'json',
 };
-const BASE_FONT_SIZE = Base.font.size.root.value;
+const BASE_FONT_SIZE = Root.font.size.root.value;
 
 registerTransforms(StyleDictionary, {
   expand: {

@@ -338,7 +338,8 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:408:5",
     "$figmaModeId": "408:0",
@@ -688,7 +689,8 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:408:5",
     "$figmaModeId": "408:1",
@@ -707,7 +709,8 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:408:542",
     "$figmaModeId": "408:2",
@@ -731,7 +734,8 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:408:542",
     "$figmaModeId": "408:3",
@@ -750,7 +754,8 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:408:1079",
     "$figmaModeId": "408:4",
@@ -774,7 +779,8 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:408:1079",
     "$figmaModeId": "408:5",
