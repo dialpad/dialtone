@@ -37,15 +37,13 @@ export const argTypesData = {
     },
   },
   emojiClicked: {
-    description: 'Emoji clicked event',
     table: {
-      type: { summary: 'event' },
+      disable: true,
     },
   },
   emojiHovered: {
-    description: 'Emoji hovered event',
     table: {
-      type: { summary: 'event' },
+      disable: true,
     },
   },
 };
