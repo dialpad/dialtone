@@ -195,16 +195,10 @@ export default {
   border-radius: var(--dt-size-radius-300);
 
   &--video {
+    display: flex;
     border-radius: var(--dt-size-radius-200) var(--dt-size-radius-200) 0 0;
     overflow: clip;
-    height: calc(var(--dt-size-760) + var(--dt-size-650));
-    margin-bottom: var(--dt-size-300-negative);
-
-    :deep(img) {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
+    margin-bottom: var(--dt-space-300-negative);
   }
 
   &--main-content {
