@@ -93,6 +93,7 @@
         <img
           src="/common/assets/chatting-person-example.png"
           alt="person avatar"
+          class="callbox-image"
         >
       </template>
       <template #subtitle>
@@ -413,3 +414,11 @@ export default {
   components: { DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
 };
 </script>
+
+<style lang="less" scoped>
+.callbox-image {
+  height: 140px;
+  object-fit: cover;
+  width: 100%;
+}
+</style>
