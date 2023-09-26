@@ -1,5 +1,5 @@
 <template>
-  <span class="d-d-flex d-fw-wrap">
+  <span class="dt-emoji-row">
     <span
       v-for="reaction in reactions"
       :key="reaction.unicodeOutput"
@@ -21,13 +21,7 @@
             importance="clear"
             size="sm"
             data-qa="feed-item-reaction-button"
-            :class="[
-              'd-h24 d-bar16 d-py0 d-fs-200 d-mb0 d-t',
-              !!reaction.isSelected
-                ? `d-fc-purple-500 d-bgc-purple-400 d-bgo10 d-bc-purple-400 d-bco50 ' +
-                  'h:d-bgc-purple-400 h:d-bco25 a:d-bgc-purple-400 a:d-bco25`
-                : 'd-fc-black-600 d-bgc-black-100 h:d-bgc-white h:d-bc-black-600 a:d-bgc-white a:d-bc-black-600',
-            ]"
+            :class="['dt-emoji-row__reaction', reaction.isSelected ? 'dt-emoji-row__reaction--selected' : '']"
             :aria-label="reaction.ariaLabel"
             :attrs="attrs"
             @click="emojiClicked(reaction)"
@@ -100,5 +94,36 @@ export default {
 </script>
 
 <style lang="less">
+.dt-emoji-row {
+  display: flex;
+  flex-wrap: wrap;
 
+  &__reaction {
+    padding: var(--dt-space-300) var(--dt-space-400); // 4px 8px
+    gap: var(--dt-space-300);
+    border-radius: var(--dt-size-radius-500);
+    font-size: var(--dt-font-size-200);
+    margin-bottom: 0;
+    transition-delay: 0s;
+    transition-duration: var(--td50);
+    transition-property: all;
+    transition-timing-function: var(--ttf-in-out);
+
+    color: var(--dt-color-foreground-secondary);
+    background-color: var(--dt-color-surface-moderate-opaque);
+
+    &:hover, &:focus{
+      border-color: hsla(var(--dt-color-black-600-hsl)/100%)!important;
+    }
+
+    &--selected {
+      color: var(--dt-color-link-primary);
+      background-color: var(--dt-color-purple-100) !important;
+      border-color: var(--dt-color-brand-purple) !important;
+      &:hover {
+        color: var(--dt-color-link-primary);
+      }
+    }
+  }
+}
 </style>
