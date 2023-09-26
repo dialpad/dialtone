@@ -1,3 +1,10 @@
+## [3.86.3](https://github.com/dialpad/dialtone-vue/compare/v3.86.2...v3.86.3) (2023-09-26)
+
+
+### Bug Fixes
+
+* **Callbox:** video height ([#1211](https://github.com/dialpad/dialtone-vue/issues/1211)) ([ceaf1f4](https://github.com/dialpad/dialtone-vue/commit/ceaf1f445a2dfa06e239453a3159a1569819246e))
+
 ## [3.86.2](https://github.com/dialpad/dialtone-vue/compare/v3.86.1...v3.86.2) (2023-09-25)
 
 
