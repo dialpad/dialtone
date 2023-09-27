@@ -132,8 +132,7 @@
       },
       "secondary": {
         "value": "{color.black.200}",
-        "type": "color",
-        "$extensions": {}
+        "type": "color"
       },
       "moderate": {
         "value": "{color.black.300}",

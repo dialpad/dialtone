@@ -1444,7 +1444,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".03",
+                  "value": ".07",
                   "space": "hsl"
                 }
               }
@@ -1457,7 +1457,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".09",
+                  "value": ".12",
                   "space": "hsl"
                 }
               }
@@ -1901,8 +1901,7 @@
         "color": {
           "foreground": {
             "value": "{theme.sidebar.color.foreground}",
-            "type": "color",
-            "$extensions": {}
+            "type": "color"
           }
         }
       },
@@ -1910,8 +1909,7 @@
         "color": {
           "foreground": {
             "value": "{color.foreground.tertiary}",
-            "type": "color",
-            "$extensions": {}
+            "type": "color"
           }
         }
       },
@@ -1983,8 +1981,7 @@
         "color": {
           "foreground": {
             "value": "{color.foreground.tertiary}",
-            "type": "color",
-            "$extensions": {}
+            "type": "color"
           }
         }
       }
