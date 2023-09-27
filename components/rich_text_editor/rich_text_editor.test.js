@@ -2,75 +2,56 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import DtRichTextEditor from './rich_text_editor.vue';
 import { EditorContent } from '@tiptap/vue-2';
 
-// Wrappers
-let wrapper;
-let editor;
-let editorEl;
+const MOCK_INPUT_STUB = vi.fn();
 
-// Test Environment
-let propsData;
-let attrs;
-let slots;
-let listeners;
-let inputStub;
-const localVue = createLocalVue();
-
-// Constants
 const baseProps = {
   value: 'initial value',
   inputAriaLabel: 'aria-label text',
   inputClass: 'qa-editor',
 };
-
-// Helpers
-const _setChildWrappers = () => {
-  editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
-  editorEl = document.getElementsByClassName('qa-editor')[0];
+const baseListeners = {
+  input: MOCK_INPUT_STUB,
 };
 
-const _mountWrapper = () => {
-  // remove the previous element if it exists or otherwise we'll end up with
-  // multiple elements when re-mounting.
-  editorEl?.remove();
-  wrapper = mount(DtRichTextEditor, {
-    propsData,
-    components: { EditorContent },
-    listeners,
-    attrs,
-    slots,
-    localVue,
-    attachTo: document.body,
-  });
-};
-
-const _setValue = async (value) => {
-  editorEl.innerHTML = value;
-  await wrapper.vm.$nextTick();
-};
+let mockProps = {};
+let mockListeners = {};
+const testContext = {};
 
 describe('DtRichTextEditor tests', () => {
-  // Test Setup
+  let wrapper;
+  let editor;
+  let editorEl;
+
+  const updateWrapper = async () => {
+    editorEl?.remove();
+    wrapper = mount(DtRichTextEditor, {
+      components: { EditorContent },
+      propsData: { ...baseProps, ...mockProps },
+      listeners: { ...baseListeners, ...mockListeners },
+      localVue: testContext.localVue,
+      attachTo: document.body,
+    });
+
+    await wrapper.vm.$nextTick();
+
+    editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+    editorEl = document.getElementsByClassName('qa-editor')[0];
+  };
+
   beforeAll(() => {
+    testContext.localVue = createLocalVue();
     global.Range.prototype.getClientRects = vi.fn(() => [{}]);
     global.Range.prototype.getBoundingClientRect = vi.fn(() => [{}]);
     global.scrollBy = vi.fn();
   });
 
   beforeEach(async () => {
-    propsData = baseProps;
-    inputStub = vi.fn();
-    listeners = {
-      input: inputStub,
-    };
-    _mountWrapper();
-    await wrapper.vm.$nextTick();
-    _setChildWrappers();
+    await updateWrapper();
   });
 
-  // Test Teardown
   afterEach(() => {
-    propsData = baseProps;
-    slots = {};
+    mockProps = {};
+    mockListeners = {};
   });
 
   describe('Presentation Tests', () => {
@@ -86,27 +67,23 @@ describe('DtRichTextEditor tests', () => {
   describe('Reactivity Tests', () => {
     describe('User Input Tests', () => {
       describe('When user inputs a value', () => {
-        // Shared Examples
-        const itBehavesLikeOutputsCorrectly = (value, output) => {
-          it('should emit the output value', async () => {
-            await _setValue(value);
-            expect(wrapper.emitted().input[0][0]).toEqual(output);
-            expect(inputStub).toHaveBeenCalled();
-          });
-        };
-
         describe('When using text output', () => {
-          // Test Setup
-          beforeEach(async () => {
+          it('should emit the output value', async () => {
             await wrapper.setProps({ outputFormat: 'text' });
-          });
 
-          itBehavesLikeOutputsCorrectly('new value', 'new value');
+            editorEl = document.getElementsByClassName('qa-editor')[0];
+
+            editorEl.innerHTML = 'new value';
+
+            await wrapper.vm.$nextTick();
+
+            expect(wrapper.emitted().input[0][0]).toBe('new value');
+            expect(MOCK_INPUT_STUB).toHaveBeenCalled();
+          });
         });
 
         describe('When using json output', () => {
-          // Test Environment
-          const jsonOutput = {
+          const MOCK_JSON_OUTPUT = {
             type: 'doc',
             content: [{
               type: 'paragraph',
@@ -117,21 +94,31 @@ describe('DtRichTextEditor tests', () => {
             }],
           };
 
-          // Test Setup
-          beforeEach(async () => {
+          it('should emit the output value', async () => {
             await wrapper.setProps({ outputFormat: 'json' });
-          });
 
-          itBehavesLikeOutputsCorrectly('new value', jsonOutput);
+            editorEl = document.getElementsByClassName('qa-editor')[0];
+            editorEl.innerHTML = 'new value';
+
+            await wrapper.vm.$nextTick();
+
+            expect(wrapper.emitted().input[0][0]).toEqual(MOCK_JSON_OUTPUT);
+            expect(MOCK_INPUT_STUB).toHaveBeenCalled();
+          });
         });
 
         describe('When using html output', () => {
-          // Test Setup
-          beforeEach(async () => {
+          it('should emit the output value', async () => {
             await wrapper.setProps({ outputFormat: 'html' });
-          });
 
-          itBehavesLikeOutputsCorrectly('new value', '<p>new value</p>');
+            editorEl = document.getElementsByClassName('qa-editor')[0];
+            editorEl.innerHTML = 'new value';
+
+            await wrapper.vm.$nextTick();
+
+            expect(wrapper.emitted().input[0][0]).toBe('<p>new value</p>');
+            expect(MOCK_INPUT_STUB).toHaveBeenCalled();
+          });
         });
       });
     });
@@ -147,11 +134,9 @@ describe('DtRichTextEditor tests', () => {
     });
 
     describe('When not editable', () => {
-      beforeEach(async () => {
+      it('should have aria-readonly attribute', async () => {
         await wrapper.setProps({ editable: false });
-      });
 
-      it('should have aria-readonly attribute', () => {
         expect(editor.attributes('aria-readonly')).toBe('true');
       });
     });
@@ -159,31 +144,25 @@ describe('DtRichTextEditor tests', () => {
 
   describe('Extendability Tests', () => {
     describe('When an inputAriaLabel prop is provided', () => {
-      beforeEach(async () => {
+      it('should pass through the prop to the editor', async () => {
         await wrapper.setProps({ inputAriaLabel: 'new aria-label' });
-      });
 
-      it('should pass through the prop to the editor', () => {
         expect(editor.attributes('aria-label')).toBe('new aria-label');
       });
     });
 
     describe('When an inputClass prop is provided', () => {
-      beforeEach(async () => {
+      it('should pass through the prop to the editor', async () => {
         await wrapper.setProps({ inputClass: 'input-class' });
-      });
 
-      it('should pass through the prop to the editor', () => {
         expect(editor.classes('input-class')).toBe(true);
       });
     });
 
     describe('When an editable prop is provided', () => {
-      beforeEach(async () => {
+      it('should pass through the prop to the editor', async () => {
         await wrapper.setProps({ editable: false });
-      });
 
-      it('should pass through the prop to the editor', () => {
         expect(editor.attributes('contenteditable')).toBe('false');
       });
     });
@@ -194,6 +173,7 @@ describe('DtRichTextEditor tests', () => {
       // Ok this one is a bit goofy, but it's a naive attempt to make sure no
       // one exports this component at the root level.
       const DialtoneVue = await import('../../index.js');
+
       expect(Object.hasOwnProperty.call(DialtoneVue, 'DtRichTextEditor')).toBe(false);
     });
   });
