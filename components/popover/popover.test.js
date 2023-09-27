@@ -1,21 +1,43 @@
-
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
 import SrOnlyCloseButton from '../../common/sr_only_close_button.vue';
-import {
-  itBehavesLikeVisuallyHiddenCloseButtonExists,
-  itBehavesLikeVisuallyHiddenCloseLabelIsNull,
-} from '@/tests/shared_examples/sr_only_close_button';
-import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
+
+const MOCK_TRANSITION_STUB = () => ({
+  render: function (h) {
+    return this.$options._renderChildren;
+  },
+});
+const defaultSrOnlyCloseButtonLabel = 'Close popover';
+const MOCK_DEFAULT_SLOT_MESSAGE = 'Message';
+const MOCK_HEADER_CONTENT = 'Popover Title';
+const MOCK_FOOTER_CONTENT = 'Popover Footer';
+
+const baseProps = {
+  id: 'popover-id',
+  showCloseButton: true,
+  initialFocusElement: 'first',
+  visuallyHiddenCloseLabel: defaultSrOnlyCloseButtonLabel,
+};
+const baseSlots = {
+  content: MOCK_DEFAULT_SLOT_MESSAGE,
+  headerContent: MOCK_HEADER_CONTENT,
+  footerContent: MOCK_FOOTER_CONTENT,
+};
+const baseScopedSlots = {
+  anchor: '<button data-qa="dt-button" v-bind="props.attrs">Click me</button>',
+};
+const baseStubs = {
+  // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
+  transition: MOCK_TRANSITION_STUB(),
+};
+
+let mockProps = {};
+let mockSlots = {};
+let mockScopedSlots = {};
+let mockStubs = {};
+const testContext = {};
 
 describe('DtPopover Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
-  // Wrappers
   let wrapper;
   let popoverWindow;
   let anchor;
@@ -24,21 +46,17 @@ describe('DtPopover Tests', () => {
   let headerContent;
   let footerContent;
   let closeButton;
-  const defaultSrOnlyCloseButtonLabel = 'Close popover';
-  const defaultSlotMessage = 'Message';
 
-  const _clearChildWrappers = () => {
-    popoverWindow = null;
-    anchor = null;
-    button = null;
-    mainContent = null;
-    headerContent = null;
-    footerContent = null;
-    closeButton = null;
-  };
+  const updateWrapper = () => {
+    wrapper = mount(DtPopover, {
+      propsData: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+      scopedSlots: { ...baseScopedSlots, ...mockScopedSlots },
+      stubs: { ...baseStubs, ...mockStubs },
+      localVue: testContext.localVue,
+      attachTo: document.body,
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     popoverWindow = wrapper.findComponent({ ref: 'content' });
     anchor = wrapper.findComponent({ ref: 'anchor' });
     button = wrapper.find('[data-qa="dt-button"]');
@@ -46,38 +64,6 @@ describe('DtPopover Tests', () => {
     headerContent = wrapper.findComponent({ ref: 'popover__header' });
     footerContent = wrapper.findComponent({ ref: 'popover__footer' });
     closeButton = wrapper.find('[data-qa="dt-popover-close"]');
-  };
-
-  const transitionStub = () => ({
-    render: function (h) {
-      return this.$options._renderChildren;
-    },
-  });
-
-  const _mountWrapper = () => {
-    wrapper = mount(DtPopover, {
-      propsData: {
-        id: 'popover-id',
-        showCloseButton: true,
-        initialFocusElement: 'first',
-        visuallyHiddenCloseLabel: defaultSrOnlyCloseButtonLabel,
-      },
-      slots: {
-        content: defaultSlotMessage,
-        headerContent: 'Popover Title',
-        footerContent: 'Popover Footer',
-      },
-      scopedSlots: {
-        anchor: '<button data-qa="dt-button" v-bind="props.attrs">Click me</button>',
-      },
-      localVue: testContext.localVue,
-      stubs: {
-        // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
-        transition: transitionStub(),
-      },
-      attachTo: document.body,
-    });
-    _setChildWrappers();
   };
 
   beforeAll(() => {
@@ -89,14 +75,14 @@ describe('DtPopover Tests', () => {
   });
 
   beforeEach(() => {
-    _mountWrapper();
+    updateWrapper();
   });
 
-  afterEach(async () => {
-    // close to unmount tippy
-    await wrapper.setProps({ open: false });
-    wrapper.destroy();
-    _clearChildWrappers();
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
+    mockScopedSlots = {};
+    mockStubs = {};
   });
 
   afterAll(() => {
@@ -109,138 +95,106 @@ describe('DtPopover Tests', () => {
     describe('When Popover is open', () => {
       beforeEach(async () => {
         await button.trigger('click');
-        _setChildWrappers();
       });
-      it(
-        'should render the component',
-        () => { expect(wrapper.exists()).toBe(true); },
-      );
-      it(
-        'should render the popover',
-        () => { expect(popoverWindow.exists()).toBe(true); },
-      );
+
+      it('should render the component', () => {
+        expect(wrapper.exists()).toBe(true);
+      });
+
+      it('should render the popover', () => {
+        expect(popoverWindow.exists()).toBe(true);
+      });
+
       it('should render the main content', () => {
-        expect(mainContent.text()).toBe(defaultSlotMessage);
+        mainContent = wrapper.findComponent({ ref: 'popover__content' });
+
+        expect(mainContent.text()).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
       });
+
       it('should render the header content', () => {
-        expect(headerContent.text()).toBe('Popover Title');
+        headerContent = wrapper.findComponent({ ref: 'popover__header' });
+
+        expect(headerContent.text()).toBe(MOCK_HEADER_CONTENT);
       });
+
       it('should render the footer content', () => {
-        expect(footerContent.text()).toBe('Popover Footer');
+        footerContent = wrapper.findComponent({ ref: 'popover__footer' });
+
+        expect(footerContent.text()).toBe(MOCK_FOOTER_CONTENT);
       });
+
       it('should render the anchor slot', () => {
         expect(anchor.text()).toBe('Click me');
       });
+
       it('should not render the visually hidden close button', () => {
-        itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
+        const buttonExists = wrapper.findComponent(SrOnlyCloseButton).exists();
+
+        expect(!buttonExists).toBe(true);
       });
-      // these tests will not observe focus changes under any circumstances?? spent too many hours on this junk.
-      // it('focus should be on the first focusable element in the dialog', async function () {
-      //   // initialFocusElement set to 'first' by default for these tests.
-      //   assert.strictEqual(document.activeElement.id, 'innerButton1');
-      // });
     });
 
-    // describe('When initialFocusElement is "dialog"', function () {
-    //   beforeEach(async function () {
-    //     await wrapper.setProps({ initialFocusElement: 'dialog' });
-    //     _setChildWrappers();
-    //   });
-
-    //   describe('When Popover is opened', function () {
-    //     beforeEach(async function () {
-    //       await button.trigger('click');
-    //       _setChildWrappers();
-    //     });
-
-    //     it('focus should be on the dialog itself', async function () {
-    //       // assert.strictEqual(document.activeElement, popoverWindow.$el);
-    //     });
-    //   });
-    // });
-
-    // describe('When initialFocusElement is set to the innerButton2 HTMLElement', function () {
-    //   let innerButton2;
-    //   beforeEach(async function () {
-    //     const innerButton2 = wrapper.find('#innerButton2');
-    //     await wrapper.setProps({ initialFocusElement: innerButton2 });
-    //     _setChildWrappers();
-    //   });
-
-    //   describe('When Popover is opened', function () {
-    //     beforeEach(async function () {
-    //       await button.trigger('click');
-    //       _setChildWrappers();
-    //     });
-
-    //     it('the focus should be on innerButton2', async function () {
-    //       assert.strictEqual(document.activeElement.id, innerButton2.id);
-    //     });
-    //   });
-    // });
-
     describe('When initialFocusElement is none', () => {
-      let consoleErrorSpy;
-      beforeEach(async () => {
-        consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
-        await wrapper.setProps({ initialFocusElement: 'none' });
-      });
-
-      afterEach(() => {
-        consoleErrorSpy = null;
-        console.error.mockRestore();
-      });
-
       it('should output error message', async () => {
+        let consoleErrorSpy;
+
+        consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
+
+        await wrapper.setProps({ initialFocusElement: 'none' });
+
         expect(consoleErrorSpy).toBeCalledWith('If the popover is modal you must set the ' +
         'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
+
+        consoleErrorSpy = null;
+        console.error.mockRestore();
       });
     });
 
     describe('When visuallyHiddenClose is true', () => {
       beforeEach(async () => {
         await wrapper.setProps({ visuallyHiddenClose: true });
+
         await button.trigger('click');
-        _setChildWrappers();
       });
 
       it('should contain a visually hidden close button', () => {
-        itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper);
+        const buttonExists = wrapper.findComponent(SrOnlyCloseButton).exists();
+
+        expect(buttonExists).toBe(true);
       });
 
       describe('When visuallyHiddenCloseLabel is null', () => {
-        beforeEach(async () => {
-          initializeSpy();
+        it('should raise a validation error', async () => {
+          let consoleErrorSpy;
+
+          consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
+
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
-        });
 
-        afterEach(() => {
-          cleanSpy();
-        });
+          const message = `If visuallyHiddenClose prop is true, the component includes
+           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`;
 
-        itBehavesLikeVisuallyHiddenCloseLabelIsNull();
+          expect(consoleErrorSpy).toHaveBeenCalledWith(message);
+
+          consoleErrorSpy = null;
+          console.error.mockRestore();
+        });
       });
     });
   });
 
   describe('Interactivity Tests', () => {
     describe('When open prop is true', () => {
-      beforeEach(async () => {
+      it('popover content is displayed', async () => {
         await wrapper.setProps({ open: true });
-        _setChildWrappers();
-      });
 
-      it('popover content is displayed', () => {
         expect(popoverWindow.isVisible()).toBe(true);
       });
 
       describe('When anchor is clicked', () => {
-        beforeEach(async () => {
+        it('should not close the popover', async () => {
           await button.trigger('click');
-          _setChildWrappers();
-        });
 
-        it('should not close the popover', () => {
           expect(popoverWindow.isVisible()).toBe(true);
         });
       });
@@ -249,7 +203,6 @@ describe('DtPopover Tests', () => {
     describe('When open prop is false', () => {
       beforeEach(async () => {
         await wrapper.setProps({ open: false });
-        _setChildWrappers();
       });
 
       it('popover content should not be displayed', async () => {
@@ -257,29 +210,21 @@ describe('DtPopover Tests', () => {
       });
 
       describe('When anchor is clicked', () => {
-        beforeEach(async () => {
+        it('should not open the popover', async () => {
           await button.trigger('click');
-          _setChildWrappers();
-        });
 
-        it('should not open the popover', () => {
           expect(popoverWindow.isVisible()).toBe(false);
         });
       });
 
       describe('When anchor is clicked but it\'s disabled', () => {
-        beforeEach(async () => {
+        it('should not open the popover', async () => {
           button.element.disabled = 'disabled';
           await button.trigger('click');
-          _setChildWrappers();
-        });
 
-        afterEach(() => {
-          button.element.disabled = undefined;
-        });
-
-        it('should not open the popover', () => {
           expect(popoverWindow.isVisible()).toBe(false);
+
+          button.element.disabled = undefined;
         });
       });
     });
@@ -287,7 +232,6 @@ describe('DtPopover Tests', () => {
     describe('When openOnContext prop is true', () => {
       beforeEach(async () => {
         await wrapper.setProps({ openOnContext: true });
-        _setChildWrappers();
       });
 
       it('popover content should not be displayed', async () => {
@@ -297,7 +241,6 @@ describe('DtPopover Tests', () => {
       describe('When anchor is clicked', () => {
         beforeEach(async () => {
           await button.trigger('click');
-          _setChildWrappers();
         });
 
         it('should not open the popover', () => {
@@ -306,12 +249,9 @@ describe('DtPopover Tests', () => {
       });
 
       describe('When anchor is right-clicked', () => {
-        beforeEach(async () => {
+        it('should open the popover', async () => {
           await button.trigger('contextmenu');
-          _setChildWrappers();
-        });
 
-        it('should open the popover', () => {
           expect(popoverWindow.isVisible()).toBe(true);
         });
       });
@@ -319,60 +259,53 @@ describe('DtPopover Tests', () => {
 
     describe('When open prop is unset (default behaviour)', () => {
       beforeEach(async () => {
-        await wrapper.setProps({ open: null });
-        _setChildWrappers();
+        mockProps = { open: null };
+
+        updateWrapper();
       });
 
       describe('When anchor is clicked', () => {
         beforeEach(async () => {
           await button.trigger('click');
-          _setChildWrappers();
         });
 
-        it('should open the popover', () => {
+        it('should open the popover', async () => {
           expect(popoverWindow.isVisible()).toBe(true);
         });
 
         describe('When a "dt-popover-close" event is emitted in the window object', () => {
-          beforeEach(async () => {
-            window.dispatchEvent(new window.Event('dt-popover-close'));
-          });
-
           it('should close opened popover', async () => {
+            await button.trigger('click');
+
+            window.dispatchEvent(new window.Event('dt-popover-close'));
+
             expect(popoverWindow.isVisible()).toBe(false);
           });
         });
 
         describe('When esc is pressed', () => {
-          beforeEach(async () => {
+          it('should close the popover', async () => {
             await popoverWindow.trigger('keydown', { key: 'Escape' });
-            _setChildWrappers();
-          });
 
-          it('should close the popover', () => {
             expect(popoverWindow.isVisible()).toBe(false);
           });
         });
 
         describe('When close button is activated', () => {
-          beforeEach(async () => {
-            await closeButton.trigger('click');
-            _setChildWrappers();
-          });
+          it('should close the popover', async () => {
+            closeButton = wrapper.find('[data-qa="dt-popover-close"]');
 
-          it('should close the popover', () => {
+            await closeButton.trigger('click');
+
             expect(popoverWindow.isVisible()).toBe(false);
           });
         });
 
         describe('When sr-only close button is enabled and activated', () => {
-          beforeEach(async () => {
+          it('should close the popover', async () => {
             await wrapper.setProps({ visuallyHiddenClose: true });
-            _setChildWrappers();
             await wrapper.findComponent(SrOnlyCloseButton).trigger('click');
-          });
 
-          it('should close the popover', () => {
             expect(popoverWindow.isVisible()).toBe(false);
           });
         });
@@ -384,15 +317,16 @@ describe('DtPopover Tests', () => {
     describe('When popover is open', () => {
       beforeEach(async () => {
         await wrapper.setProps({ open: true });
-        _setChildWrappers();
       });
 
       it('aria-expanded should be set correctly on the anchor', () => {
         expect(button.attributes('aria-expanded')).toBe('true');
       });
+
       it('aria-controls should be set correctly on the anchor', () => {
         expect(button.attributes('aria-controls')).toBe('popover-id');
       });
+
       it('aria-haspopup should be set correctly on the anchor', () => {
         expect(button.attributes('aria-haspopup')).toBe('dialog');
       });
@@ -400,30 +334,24 @@ describe('DtPopover Tests', () => {
       it('aria-hidden should be set correctly on the content window', () => {
         expect(popoverWindow.attributes('aria-hidden')).toBe('false');
       });
-      it(
-        'aria-labelledby should be set correctly on the content window',
-        () => {
-          expect(popoverWindow.attributes('aria-labelledby')).toBe(wrapper.vm.labelledBy);
-        },
-      );
+
+      it('aria-labelledby should be set correctly on the content window', () => {
+        expect(popoverWindow.attributes('aria-labelledby')).toBe(wrapper.vm.labelledBy);
+      });
     });
 
     describe('When popover is closed', () => {
       beforeEach(async () => {
         await wrapper.setProps({ open: false });
-        _setChildWrappers();
       });
 
       it('should have correct aria attributes on the anchor', async () => {
         expect(button.attributes('aria-expanded')).toBe('false');
       });
 
-      it(
-        'should have correct aria attributes on the content window',
-        async () => {
-          expect(popoverWindow.attributes('aria-hidden')).toBe('true');
-        },
-      );
+      it('should have correct aria attributes on the content window', async () => {
+        expect(popoverWindow.attributes('aria-hidden')).toBe('true');
+      });
     });
   });
 });
