@@ -1,3 +1,11 @@
+## [1.23.2](https://github.com/dialpad/dialtone-tokens/compare/v1.23.1...v1.23.2) (2023-09-27)
+
+
+### Bug Fixes
+
+* **color:** critical action bgcolor ([00902eb](https://github.com/dialpad/dialtone-tokens/commit/00902ebc7a0d2fe57d847906c635cfe26ee21f46))
+* **size-and-space:** treat root values as source ([#11](https://github.com/dialpad/dialtone-tokens/issues/11)) ([5cfbbf1](https://github.com/dialpad/dialtone-tokens/commit/5cfbbf18d4818a3fde7216e1503cfd37d834b1f9))
+
 ## [1.23.1](https://github.com/dialpad/dialtone-tokens/compare/v1.23.0...v1.23.1) (2023-09-08)
 
 
