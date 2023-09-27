@@ -1,253 +1,199 @@
-import { config, shallowMount, mount } from '@vue/test-utils';
+import { config, mount, shallowMount } from '@vue/test-utils';
 import { DtValidationMessages } from '../validation_messages';
 import { DtRadio } from '../radio';
 import DtRadioGroup from './radio_group.vue';
 import RadiosFixture from '../../tests/fixtures/radios.vue';
-import { itBehavesLikeEmitsExpectedEvent } from '@/tests/shared_examples/events';
 
-// Test Constants
-const baseGroupName = 'test-radio-group';
+const MOCK_LEGEND = 'My Legend';
+const MOCK_SELECTED_VALUE = 'kiwi';
+let MOCK_ELEMENT;
+const MOCK_CUSTOM_CLASS = 'my-custom-class';
+const MOCK_PROP_NAME = 'some';
+const MOCK_PROP_VALUE = 'prop';
+
 const baseProps = {
-  name: baseGroupName,
+  name: 'test-radio-group',
   value: '',
 };
 const baseAttrs = { 'aria-label': 'Test Radio Group' };
+const baseSlots = {};
+
+let mockProps = {};
+let mockSlots = {};
+let mockAttrs = {};
 
 describe('DtRadioGroup Tests', () => {
-  // Wrappers
   let wrapper;
   let radioGroup;
   let radioGroupLegend;
 
-  // Test Environment
-  let props = baseProps;
-  let attrs = baseAttrs;
-  let slots = {};
+  const updateWrapper = () => {
+    wrapper = shallowMount(DtRadioGroup, {
+      props: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     radioGroup = wrapper.find('[data-qa="radio-group"]');
     radioGroupLegend = wrapper.find('[data-qa="radio-group-legend"]');
-  };
-
-  const _setWrappers = () => {
-    wrapper = shallowMount(DtRadioGroup, {
-      props,
-      slots,
-      attrs,
-    });
-    _setChildWrappers();
-  };
-
-  const _mountWrappers = () => {
-    wrapper = mount(DtRadioGroup, {
-      props,
-      slots,
-      attrs,
-    });
-    _setChildWrappers();
   };
 
   beforeAll(() => {
     config.global.renderStubDefaultSlot = true;
   });
 
-  // Test Teardown
-  afterEach(function () {
-    props = baseProps;
-    attrs = baseAttrs;
-    slots = {};
+  beforeEach(() => {
+    updateWrapper();
   });
 
-  afterAll(function () {
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
+    mockAttrs = {};
+  });
+
+  afterAll(() => {
     config.global.renderStubDefaultSlot = false;
   });
 
-  describe('Presentation Tests', function () {
-    // Test Environment
-    let legend;
-
-    // Shared Examples
-    const itBehavesLikeHasRadioGroup = () => {
-      it(
-        'should have a radio group',
-        () => { expect(radioGroup.exists()).toBe(true); },
-      );
-    };
-
-    const itBehavesLikeDoesNotHaveLegend = () => {
-      it(
-        'should not have a legend',
-        () => { expect(radioGroupLegend.exists()).toBe(false); },
-      );
-    };
-
-    const itBehavesLikeHasLegend = () => {
-      it(
-        'should have a legend',
-        () => { expect(radioGroupLegend.exists()).toBe(true); },
-      );
-      it('should have text matching the provided legend', () => {
-        expect(radioGroupLegend.text()).toBe(legend);
+  describe('Presentation Tests', () => {
+    describe('When the radio group renders', () => {
+      it('should have a radio group', () => {
+        expect(radioGroup.exists()).toBe(true);
       });
-    };
 
-    const itBehavesLikeDoesNotHaveRadios = () => {
+      it('should not have a legend', () => {
+        expect(radioGroupLegend.exists()).toBe(false);
+      });
+
       it('should not have radios', () => {
         expect(wrapper.findAllComponents(DtRadio).length).toBe(0);
       });
-    };
 
-    const itBehavesLikeHasRadios = (numRadios) => {
-      it('should have radios', () => {
-        expect(wrapper.findAllComponents(DtRadio).length).toBe(numRadios);
-      });
-    };
-
-    const itBehavesLikeDoesNotHaveValidationMessages = () => {
       it('should not have validation messages', () => {
-        expect(
-          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
-        ).toBe(0);
+        expect(wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length).toBe(0);
       });
-    };
-
-    const itBehavesLikeHasValidationMessages = (numMessages) => {
-      it('should have validation messages', () => {
-        expect(
-          wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length,
-        ).toBe(numMessages);
-      });
-    };
-
-    describe('When the radio group renders', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
-
-      itBehavesLikeHasRadioGroup();
-      itBehavesLikeDoesNotHaveLegend();
-      itBehavesLikeDoesNotHaveRadios();
-      itBehavesLikeDoesNotHaveValidationMessages();
     });
 
     describe('When a legend is provided', () => {
-      // Test Setup
       beforeEach(() => {
-        legend = 'My Legend';
+        mockProps = { legend: MOCK_LEGEND };
+
+        updateWrapper();
       });
 
       describe('When the legend is provided via prop', () => {
-        // Test Setup
-        beforeEach(() => {
-          props = { ...baseProps, legend };
-        });
-
         describe('When the radio group renders', () => {
-          // Test Setup
-          beforeEach(() => { _setWrappers(); });
+          it('should have a legend', () => {
+            radioGroupLegend = wrapper.find('[data-qa="radio-group-legend"]');
 
-          itBehavesLikeHasLegend();
+            expect(radioGroupLegend.exists()).toBe(true);
+          });
+
+          it('should have text matching the provided legend', () => {
+            radioGroupLegend = wrapper.find('[data-qa="radio-group-legend"]');
+
+            expect(radioGroupLegend.text()).toBe(MOCK_LEGEND);
+          });
         });
       });
 
       describe('When the legend is provided via slot', () => {
-        // Test Setup
         beforeEach(() => {
-          slots = { legend };
+          mockSlots = { legend: MOCK_LEGEND };
         });
 
         describe('When the radio group renders', () => {
-          // Test Setup
-          beforeEach(() => { _setWrappers(); });
+          it('should have a legend', () => {
+            expect(radioGroupLegend.exists()).toBe(true);
+          });
 
-          itBehavesLikeHasLegend();
+          it('should have text matching the provided legend', () => {
+            expect(radioGroupLegend.text()).toBe(MOCK_LEGEND);
+          });
         });
       });
     });
 
     describe('When radios are provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        slots = { default: RadiosFixture };
-      });
-
       describe('When the radio group renders', () => {
-        // Test Setup
-        beforeEach(() => { _mountWrappers(); });
+        it('should have radios', () => {
+          mockSlots = { default: RadiosFixture };
 
-        itBehavesLikeHasRadios(2);
+          updateWrapper();
+
+          const mountWrapper = mount(DtRadioGroup, {
+            propsData: { ...baseProps, ...mockProps },
+            attrs: { ...baseAttrs, ...mockAttrs },
+            slots: { ...baseSlots, ...mockSlots },
+          });
+
+          expect(mountWrapper.findAllComponents(DtRadio).length).toBe(2);
+        });
       });
     });
 
     describe('When validation messages are provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, messages: ['Error'] };
-      });
-
       describe('When the radio group renders', () => {
-        // Test Setup
-        beforeEach(() => { _setWrappers(); });
+        it('should have validation messages', () => {
+          mockProps = { messages: ['Error'] };
 
-        itBehavesLikeHasValidationMessages(1);
+          updateWrapper();
+
+          expect(wrapper.findComponent(DtValidationMessages)?.props('validationMessages').length).toBe(1);
+        });
       });
     });
   });
 
   describe('Reactivity Tests', () => {
-    // Wrappers
-    let selectedRadio;
-
-    // Test Environment
-    const selectedValue = 'kiwi';
-
-    // Helpers
-    const _selectRadio = async () => {
-      selectedRadio = radioGroup.find(`[value="${selectedValue}"]`);
-      selectedRadio.trigger('click');
-      selectedRadio.trigger('change');
-    };
-
     beforeEach(() => {
-      slots = { default: RadiosFixture };
+      mockSlots = { default: RadiosFixture };
+
+      updateWrapper();
     });
 
     describe('When an initial value is provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, value: selectedValue };
-        _setWrappers();
-      });
-
       it('updates provide object', () => {
-        expect(wrapper.vm.provideObj.value).toBe(selectedValue);
+        mockProps = { value: MOCK_SELECTED_VALUE };
+
+        updateWrapper();
+
+        expect(wrapper.vm.provideObj.selectedValue).toBe(MOCK_SELECTED_VALUE);
       });
     });
 
     describe('When a radio is selected', () => {
-      // Test Setup
-      beforeEach(async () => {
-        _mountWrappers();
-        await _selectRadio();
-      });
+      it('emits an input event', async () => {
+        const mountWrapper = mount(DtRadioGroup, {
+          propsData: { ...baseProps, ...mockProps },
+          attrs: { ...baseAttrs, ...mockAttrs },
+          slots: { ...baseSlots, ...mockSlots },
+        });
 
-      it('emits an input event', function () {
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue);
+        const mountedRadioGroup = mountWrapper.find('[data-qa="radio-group"]');
+
+        await mountedRadioGroup.find(`[value="${MOCK_SELECTED_VALUE}"]`).trigger('change');
+
+        expect(mountWrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE);
       });
     });
 
     describe('When the radio group is disabled', () => {
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, disabled: true };
-        _mountWrappers();
-      });
-
       describe('When a radio is selected', () => {
-        // Test Setup
-        beforeEach(() => { _selectRadio(); });
+        it('does not emit an input event', async () => {
+          mockProps = { disabled: true };
 
-        it('does not emit an input event', () => {
+          const mountWrapper = mount(DtRadioGroup, {
+            propsData: { ...baseProps, ...mockProps },
+            attrs: { ...baseAttrs, ...mockAttrs },
+            slots: { ...baseSlots, ...mockSlots },
+          });
+
+          const mountedRadioGroup = mountWrapper.find('[data-qa="radio-group"]');
+
+          await mountedRadioGroup.find(`[value="${MOCK_SELECTED_VALUE}"]`).trigger('change');
+
           expect(wrapper.emitted('input')).toBeFalsy();
         });
       });
@@ -255,84 +201,70 @@ describe('DtRadioGroup Tests', () => {
   });
 
   describe('Extendability Tests', () => {
-    let element;
-    const customClass = 'my-custom-class';
-    const propName = 'some';
-    const propValue = 'prop';
-    const childProps = {};
-
-    // Helpers
-    const _setupChildClassTest = (childClassName, selector) => {
-      props[childClassName] = customClass;
-      _setWrappers();
-      element = wrapper.find(selector);
-    };
-
-    const _setupChildPropsTest = (childPropsName, selector) => {
-      props[childPropsName] = childProps;
-      _setWrappers();
-      element = wrapper.find(selector);
-    };
-
-    // Shared Examples
-    const itBehavesLikeAppliesClassToChild = () => {
-      it('should apply custom class to child', () => {
-        expect(wrapper.find(`.${customClass}`).html()).toBe(element.html());
-      });
-    };
-
-    const itBehavesLikeAppliesChildProp = () => {
-      it('should have provided child prop', () => {
-        expect(element.attributes(propName)).toBe(propValue);
-      });
-    };
-
-    // Test Setup
-    beforeAll(() => {
-      childProps[propName] = propValue;
-    });
-
-    beforeEach(() => {
-      props = { ...baseProps, legend: 'My Radio Group' };
-    });
-
     describe('When a legend class is provided', () => {
-      beforeEach(
-        () => { _setupChildClassTest('legendClass', '[data-qa="radio-group-legend"]'); },
-      );
-      itBehavesLikeAppliesClassToChild();
+      it('should apply custom class to child', () => {
+        mockProps = { legend: 'My Radio Group', legendClass: MOCK_CUSTOM_CLASS };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="radio-group-legend"]');
+
+        expect(wrapper.find(`.${MOCK_CUSTOM_CLASS}`).html()).toBe(MOCK_ELEMENT.html());
+      });
     });
 
     describe('When a messages class is provided', () => {
-      beforeEach(
-        () => { _setupChildClassTest('messagesClass', '[data-qa="radio-group-messages"]'); },
-      );
-      itBehavesLikeAppliesClassToChild();
+      it('should apply custom class to child', () => {
+        mockProps = { legend: 'My Radio Group', messagesClass: MOCK_CUSTOM_CLASS };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="radio-group-messages"]');
+
+        expect(wrapper.find(`.${MOCK_CUSTOM_CLASS}`).html()).toBe(MOCK_ELEMENT.html());
+      });
     });
 
     describe('When legendChildProps are provided', () => {
-      beforeEach(
-        () => { _setupChildPropsTest('legendChildProps', '[data-qa="radio-group-legend"]'); },
-      );
-      itBehavesLikeAppliesChildProp();
+      it('should have provided child prop', () => {
+        mockProps = {
+          legend: 'My Radio Group',
+          legendChildProps: { [MOCK_PROP_NAME]: MOCK_PROP_VALUE },
+        };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="radio-group-legend"]');
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
 
     describe('When messagesChildProps are provided', () => {
-      beforeEach(
-        () => { _setupChildPropsTest('messagesChildProps', '[data-qa="radio-group-messages"]'); },
-      );
-      itBehavesLikeAppliesChildProp();
+      it('should have provided child prop', () => {
+        mockProps = {
+          legend: 'My Radio Group',
+          messagesChildProps: { [MOCK_PROP_NAME]: MOCK_PROP_VALUE },
+        };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="radio-group-messages"]');
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
 
     describe('When attrs are provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        attrs = { ...baseAttrs, some: 'prop' };
-        _setWrappers();
-        element = radioGroup;
-      });
+      it('should have provided child prop', () => {
+        mockAttrs = { [MOCK_PROP_NAME]: MOCK_PROP_VALUE };
 
-      itBehavesLikeAppliesChildProp();
+        updateWrapper();
+
+        MOCK_ELEMENT = radioGroup;
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
     });
   });
 });

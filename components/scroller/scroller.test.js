@@ -1,104 +1,93 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtScroller from './DtScroller.vue';
 
-// Constants
-const items = Array.from({ length: 20 }, (_, i) => ({
+const MOCK_ITEMS = Array.from({ length: 20 }, (_, i) => ({
   id: i,
   name: `User ${i}`,
 }));
 
-const baseSlotsData = {
+const baseProps = {
+  items: MOCK_ITEMS,
+  itemSize: 30,
+  scrollerHeight: 60,
+  scrollerWidth: 60,
+};
+const baseSlots = {
   default: ` <div class="user">
           {{ item.name }}
         </div>`,
 };
 
-const baseProps = {
-  items,
-  itemSize: 30,
-  scrollerHeight: 60,
-  scrollerWidth: 60,
-};
+let mockProps = {};
+let mockSlots = {};
 
-describe('DtScroller Tests', function () {
-  // Wrappers
+describe('DtScroller Tests', () => {
   let wrapper;
-
   let defaultContent;
 
-  // Environment
-  let props = baseProps;
-  let slots = baseSlotsData;
+  const updateWrapper = () => {
+    wrapper = mount(DtScroller, {
+      props: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     defaultContent = wrapper.find('[data-qa="dt-scroller"]');
   };
 
-  const _setWrappers = () => {
-    wrapper = mount(DtScroller, {
-      props,
-      slots,
-    });
-    _setChildWrappers();
-  };
-
-  // Teardown
-  afterEach(function () {
-    props = baseProps;
-    slots = baseSlotsData;
-  });
-
-  beforeEach(function () {
-    _setWrappers();
+  beforeEach(() => {
     global.requestAnimationFrame = cb => cb();
+    updateWrapper();
   });
 
-  describe('Presentation Tests', function () {
-    describe('When scroller renders', function () {
-      it('scroller exist', function () {
-        assert.isTrue(wrapper.exists());
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
+  });
+
+  describe('Presentation Tests', () => {
+    describe('When scroller renders', () => {
+      it('scroller exist', () => {
+        expect(wrapper.exists()).toBe(true);
       });
 
-      it('scroller content should render correctly', function () {
-        assert.isTrue(defaultContent.exists());
+      it('scroller content should render correctly', () => {
+        expect(defaultContent.exists()).toBe(true);
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    describe('Should emit', function () {
-      it('`top` event when scroll reach the top of the component', function () {
+  describe('Interactivity Tests', () => {
+    describe('Should emit', () => {
+      it('`top` event when scroll reach the top of the component', () => {
         defaultContent.element.scrollTop = 25;
         wrapper.trigger('scroll');
         defaultContent.element.scrollTop = 0;
         wrapper.trigger('scroll');
 
-        assert.equal(wrapper.emitted()['user-position'][1], 'top');
+        expect(wrapper.emitted()['user-position'][1]).toEqual(['top']);
       });
 
-      it('`middle` on scroll', function () {
+      it('`middle` on scroll', () => {
         defaultContent.element.scrollTop = 25;
         wrapper.trigger('scroll');
 
-        assert.equal(wrapper.emitted()['user-position'][0], 'middle');
+        expect(wrapper.emitted()['user-position'][0]).toEqual(['middle']);
       });
 
-      it('`bottom` event when scroll reach the bottom of the component', function () {
+      it('`bottom` event when scroll reach the bottom of the component', () => {
         defaultContent.element.scrollTop = defaultContent.element.scrollHeight - defaultContent.element.clientHeight;
         wrapper.trigger('scroll');
 
-        assert.equal(wrapper.emitted()['user-position'][2], 'bottom');
+        expect(wrapper.emitted()['user-position'][2]).toEqual(['bottom']);
       });
     });
 
-    describe('On `scrollToItem` event', function () {
-      it('should scroll to the item', function () {
+    describe('On `scrollToItem` event', () => {
+      it('should scroll to the item', () => {
         wrapper.vm.scrollToItem(15);
         wrapper.trigger('scroll');
 
-        assert.equal(defaultContent.element.scrollTop, 450);
+        expect(defaultContent.element.scrollTop).toBe(450);
       });
     });
   });
