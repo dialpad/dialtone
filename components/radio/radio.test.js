@@ -1,361 +1,349 @@
-import { shallowMount } from '@vue/test-utils';
-import {
-  itBehavesLikeEmitsExpectedEvent,
-  itBehavesLikeDoesNotEmitEvents,
-} from '../../tests/shared_examples/events';
-import {
-  itBehavesLikeHasValidationClasses,
-  itBehavesLikeChecked,
-  itBehavesLikeNotChecked,
-} from '../../tests/shared_examples/input';
-import {
-  itBehavesLikeAppliesClassToChild,
-  itBehavesLikeAppliesChildProp,
-} from '../../tests/shared_examples/extendability';
+import { mount } from '@vue/test-utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import DtRadio from './radio.vue';
 
-const baseValue = 'Value';
+const MOCK_VALUE = 'Value';
+const MOCK_GROUP_NAME = 'radioGroup';
+
 const baseProps = {
   label: 'My Radio Label',
-  value: baseValue,
+  value: MOCK_VALUE,
 };
+const baseSlots = {};
+const baseAttrs = {};
+const baseProvide = {};
+
+let mockProps = {};
+let mockSlots = {};
+let mockAttrs = {};
+let mockProvide = {};
 
 describe('DtRadio Tests', () => {
-  // Wrappers
   let wrapper;
   let input;
 
-  // Test Environment
-  const value = baseValue;
-  let props = baseProps;
-  let slots = {};
-  let attrs = {};
-  let provide = {};
-
-  // Helpers
-  const _setWrappers = () => {
-    wrapper = shallowMount(DtRadio, {
-      props,
-      slots,
-      attrs,
+  const updateWrapper = () => {
+    wrapper = mount(DtRadio, {
+      propsData: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+      attrs: { ...baseAttrs, ...mockAttrs },
       global: {
-        provide,
+        provide: { ...baseProvide, ...mockProvide },
       },
     });
+
     input = wrapper.find('input');
   };
 
-  // Shared Examples
-  const itBehavesLikeHasValidationClassesLocal = (checkboxValidationState) => {
-    it('has validation classes', () => {
-      itBehavesLikeHasValidationClasses(
-        wrapper,
-        RADIO_INPUT_VALIDATION_CLASSES,
-        checkboxValidationState,
-      );
-    });
-  };
+  beforeEach(() => {
+    updateWrapper();
+  });
 
-  // Test Teardown
-  afterEach(function () {
-    props = baseProps;
-    slots = {};
-    attrs = {};
-    provide = {};
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
+    mockAttrs = {};
+    mockProvide = {};
   });
 
   describe('Presentation Tests', () => {
     describe('When the radio renders', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
+      it('should exist', () => {
+        expect(wrapper.exists()).toBeTruthy();
+      });
 
-      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
-      it(
-        'should have radio group class',
-        () => { expect(wrapper.find('.d-radio-group').exists()).toBeTruthy(); },
-      );
+      it('should have radio group class', () => {
+        expect(wrapper.find('.d-radio-group').exists()).toBeTruthy();
+      });
 
       describe('Radio Input Tests', () => {
-        it('should exist', () => { expect(input.exists()).toBeTruthy(); });
-        it(
-          'should have type radio',
-          () => { expect(input.attributes('type')).toBe('radio'); },
-        );
-        it('should not be checked', () => { itBehavesLikeNotChecked(input); });
+        it('should exist', () => {
+          expect(input.exists()).toBeTruthy();
+        });
+
+        it('should have type radio', () => {
+          expect(input.attributes('type')).toBe('radio');
+        });
+
+        it('should not be checked', () => {
+          expect(input.element.checked).toBe(false);
+        });
       });
 
       describe('Radio Label Tests', () => {
-        // Wrappers
         let radioLabel;
 
-        // Test Setup
         beforeEach(() => {
           radioLabel = wrapper.find('[data-qa="radio-label"]');
         });
 
-        it('should exist', () => { expect(radioLabel.exists()).toBeTruthy(); });
-        it(
-          'should match provided label prop',
-          () => { expect(radioLabel.text()).toBe(props.label); },
-        );
+        it('should exist', () => {
+          expect(radioLabel.exists()).toBeTruthy();
+        });
+
+        it('should match provided label prop', () => {
+          expect(radioLabel.text()).toBe(baseProps.label);
+        });
       });
     });
 
     describe('When a description is provided', () => {
-      // wrappers
-      let radioDescription;
+      it('should exist', () => {
+        mockProps = { description: 'Description' };
 
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, description: 'Description' };
-        _setWrappers();
-        radioDescription = wrapper.find('[data-qa="radio-description"]');
+        updateWrapper();
+
+        const radioDescription = wrapper.find('[data-qa="radio-description"]');
+
+        expect(radioDescription.exists()).toBeTruthy();
       });
-
-      it('should exist', () => { expect(radioDescription.exists()).toBeTruthy(); });
     });
 
     describe('When a validation state is provided', () => {
-      // Helpers
-      const _setupValidationTest = (validationState) => {
-        props = { ...baseProps, description: 'Description', validationState };
-        _setWrappers();
-      };
-
       describe('When warning', () => {
-        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.WARNING); });
-        itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.WARNING);
+        it('has validation classes', () => {
+          mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.WARNING };
+
+          updateWrapper();
+
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists()).toBe(true);
+        });
       });
 
       describe('When error', () => {
-        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.ERROR); });
-        itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.ERROR);
+        it('has validation classes', () => {
+          mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.ERROR };
+
+          updateWrapper();
+
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists()).toBe(true);
+        });
       });
 
       describe('When success', () => {
-        beforeEach(() => { _setupValidationTest(VALIDATION_MESSAGE_TYPES.SUCCESS); });
-        itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
+        it('has validation classes', () => {
+          mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.SUCCESS };
+
+          updateWrapper();
+
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+        });
       });
     });
 
     describe('When checked', () => {
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, checked: true };
-        _setWrappers();
-      });
+      it('should be checked', () => {
+        mockProps = { checked: true };
 
-      it('should be checked', () => { itBehavesLikeChecked(input); });
+        updateWrapper();
+
+        expect(input.element.checked).toBe(true);
+      });
     });
 
     describe('When disabled', () => {
-      // Test Setup
       beforeEach(() => {
-        props = { ...baseProps, disabled: true };
-        _setWrappers();
+        mockProps = { disabled: true };
+
+        updateWrapper();
       });
 
-      it(
-        'should disable input',
-        () => { expect(input.element.disabled).toBe(true); },
-      );
-      it(
-        'should have disabled class',
-        () => { expect(wrapper.find('.d-radio-group--disabled').exists()).toBeTruthy(); },
-      );
+      it('should disable input', () => {
+        expect(input.element.disabled).toBe(true);
+      });
+
+      it('should have disabled class', () => {
+        expect(wrapper.find('.d-radio-group--disabled').exists()).toBeTruthy();
+      });
 
       describe('When clicked', () => {
-        // Test Setup
-        beforeEach(() => { wrapper.trigger('click'); });
+        it('no events are emitted', async () => {
+          await wrapper.trigger('click');
 
-        it(
-          'no events are emitted',
-          () => { itBehavesLikeDoesNotEmitEvents(wrapper); },
-        );
+          expect(wrapper.emitted()).toEqual({});
+        });
       });
     });
 
     describe('When slot(s) are provided', () => {
-      // Wrappers
-      let labelSlotContainer;
-      let descriptionSlotContainer;
-
-      // Test Environment
-      const slotLabel = 'My Slotted Label';
-      const slotDescription = 'My Slotted Description';
-
-      // Helpers
-      const _setSlotContainers = () => {
-        labelSlotContainer = wrapper.find('[data-qa="radio-label"]');
-        descriptionSlotContainer = wrapper.find('[data-qa="radio-description"]');
-      };
+      const MOCK_SLOT_LABEL = 'My Slotted Label';
+      const MOCK_SLOT_DESCRIPTION = 'My Slotted Description';
 
       describe('When a slotted label is provided', () => {
-        // Test Setup
-        beforeEach(() => {
-          slots = { default: slotLabel };
-          _setWrappers();
-          _setSlotContainers();
-        });
+        it('should have slotted label', () => {
+          mockSlots = { default: MOCK_SLOT_LABEL };
 
-        it(
-          'should have slotted label',
-          () => { expect(labelSlotContainer.text()).toBe(slotLabel); },
-        );
+          updateWrapper();
+
+          const labelSlotContainer = wrapper.find('[data-qa="radio-label"]');
+
+          expect(labelSlotContainer.text()).toBe(MOCK_SLOT_LABEL);
+        });
       });
 
       describe('When a slotted description is provided', () => {
-        // Test Setup
-        beforeEach(() => {
-          slots = { description: slotDescription };
-          _setWrappers();
-          _setSlotContainers();
-        });
-
         it('should have slotted description', () => {
-          expect(descriptionSlotContainer.text()).toBe(slotDescription);
+          mockSlots = { description: MOCK_SLOT_DESCRIPTION };
+
+          updateWrapper();
+
+          const descriptionSlotContainer = wrapper.find('[data-qa="radio-description"]');
+
+          expect(descriptionSlotContainer.text()).toBe(MOCK_SLOT_DESCRIPTION);
         });
       });
 
       describe('When slotted label and description are provided', () => {
-        // Test Setup
-        beforeEach(() => {
-          slots = { default: slotLabel, description: slotDescription };
-          _setWrappers();
-          _setSlotContainers();
+        it('should have slotted label', () => {
+          mockSlots = { default: MOCK_SLOT_LABEL };
+
+          updateWrapper();
+
+          const labelSlotContainer = wrapper.find('[data-qa="radio-label"]');
+
+          expect(labelSlotContainer.text()).toBe(MOCK_SLOT_LABEL);
         });
 
-        it(
-          'should have slotted label',
-          () => { expect(labelSlotContainer.text()).toBe(slotLabel); },
-        );
         it('should have slotted description', () => {
-          expect(descriptionSlotContainer.text()).toBe(slotDescription);
+          mockSlots = { description: MOCK_SLOT_DESCRIPTION };
+
+          updateWrapper();
+
+          const descriptionSlotContainer = wrapper.find('[data-qa="radio-description"]');
+
+          expect(descriptionSlotContainer.text()).toBe(MOCK_SLOT_DESCRIPTION);
         });
       });
     });
 
     describe('Extendability Tests', () => {
-      let element;
-      const customClass = 'my-custom-class';
-      const propName = 'some';
-      const propValue = 'prop';
-      const childProps = {};
-
-      // Helpers
-      const _setupChildClassTest = (childClassName, selector) => {
-        props[childClassName] = customClass;
-        _setWrappers();
-        element = wrapper.find(selector);
-      };
-
-      const _setupChildPropsTest = (childPropsName, selector) => {
-        props[childPropsName] = childProps;
-        _setWrappers();
-        element = wrapper.find(selector);
-      };
-
-      // Shared Examples
-      const itBehavesLikeAppliesClassToChildLocal = () => {
-        it('should apply custom class to child', () => {
-          itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
-        });
-      };
-
-      const itBehavesLikeAppliesChildPropLocal = () => {
-        it('should have provided child prop', () => {
-          itBehavesLikeAppliesChildProp(element, propName, propValue);
-        });
-      };
-
-      // Test Setup
-      beforeAll(() => {
-        childProps[propName] = propValue;
-      });
-      beforeEach(() => {
-        props = { ...baseProps, label: 'Label', description: 'Description' };
-      });
+      let MOCK_ELEMENT;
+      const MOCK_PROP_NAME = 'some';
+      const MOCK_PROP_VALUE = 'prop';
 
       describe('When an input class is provided', () => {
-        beforeEach(() => { _setupChildClassTest('inputClass', 'input'); });
-        itBehavesLikeAppliesClassToChildLocal();
+        it('should apply custom class to child', () => {
+          mockProps = {
+            label: 'Label',
+            description: 'Description',
+            inputClass: 'my-custom-class',
+          };
+
+          updateWrapper();
+
+          MOCK_ELEMENT = wrapper.find('input');
+
+          expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+        });
       });
 
       describe('When an label class is provided', () => {
-        beforeEach(
-          () => { _setupChildClassTest('labelClass', '[data-qa="radio-label"]'); },
-        );
-        itBehavesLikeAppliesClassToChildLocal();
+        it('should apply custom class to child', () => {
+          mockProps = {
+            label: 'Label',
+            description: 'Description',
+            labelClass: 'my-custom-class',
+          };
+
+          updateWrapper();
+
+          MOCK_ELEMENT = wrapper.find('[data-qa="radio-label"]');
+
+          expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+        });
       });
 
       describe('When an description class is provided', () => {
-        beforeEach(
-          () => { _setupChildClassTest('descriptionClass', '[data-qa="radio-description"]'); },
-        );
-        itBehavesLikeAppliesClassToChildLocal();
+        it('should apply custom class to child', () => {
+          mockProps = {
+            label: 'Label',
+            description: 'Description',
+            descriptionClass: 'my-custom-class',
+          };
+
+          updateWrapper();
+
+          MOCK_ELEMENT = wrapper.find('[data-qa="radio-description"]');
+
+          expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+        });
       });
 
       describe('When label child props are provided', () => {
-        beforeEach(
-          () => { _setupChildPropsTest('labelChildProps', '[data-qa="radio-label"]'); },
-        );
-        itBehavesLikeAppliesChildPropLocal();
+        it('should have provided child prop', () => {
+          mockProps = {
+            label: 'Label',
+            description: 'Description',
+            labelChildProps: {
+              some: 'prop',
+            },
+          };
+
+          updateWrapper();
+
+          MOCK_ELEMENT = wrapper.find('[data-qa="radio-label"]');
+
+          expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+        });
       });
 
       describe('When description child props are provided', () => {
-        beforeEach(
-          () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="radio-description"]'); },
-        );
-        itBehavesLikeAppliesChildPropLocal();
+        it('should have provided child prop', () => {
+          mockProps = {
+            label: 'Label',
+            description: 'Description',
+            descriptionChildProps: {
+              some: 'prop',
+            },
+          };
+
+          updateWrapper();
+
+          MOCK_ELEMENT = wrapper.find('[data-qa="radio-description"]');
+
+          expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+        });
       });
 
       describe('When attrs are provided', () => {
-        // Test Setup
-        beforeEach(() => {
-          attrs = { some: 'prop' };
-          _setWrappers();
-          element = input;
-        });
+        it('should have provided child prop', () => {
+          mockAttrs = { some: 'prop' };
 
-        itBehavesLikeAppliesChildPropLocal();
+          updateWrapper();
+
+          MOCK_ELEMENT = input;
+
+          expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+        });
       });
     });
   });
 
   describe('Reactivity Tests', () => {
     describe('Custom Event Tests', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
-
       describe('When the radio is selected', () => {
-        // Test Setup
-        beforeEach(() => { input.trigger('change'); });
+        it('should emit the input event with Value', async () => {
+          await input.trigger('change');
 
-        it('should emit the input event with Value', () => {
-          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', value);
+          expect(wrapper.emitted('input')[0][0]).toBe(MOCK_VALUE);
         });
       });
     });
 
     describe('Listener Tests', () => {
       describe('When there is a provided input listener', () => {
-        // Test Env
-        const inputListenerSpy = vi.fn();
-
-        // Test Setup
-        beforeEach(() => {
-          attrs = { onInput: inputListenerSpy };
-          _setWrappers();
-        });
-
         describe('When the radio is clicked', () => {
-          // Test Setup
-          beforeEach(async () => { await input.trigger('change'); });
+          it('Should call input handler once', async () => {
+            const MOCK_INPUT_LISTENER_SPY = vi.fn();
 
-          it('Should call input handler once', () => {
-            expect(inputListenerSpy).toHaveBeenCalledTimes(1);
+            mockAttrs = { onInput: MOCK_INPUT_LISTENER_SPY };
+
+            updateWrapper();
+
+            await input.trigger('change');
+
+            expect(MOCK_INPUT_LISTENER_SPY).toHaveBeenCalledTimes(1);
           });
         });
       });
@@ -363,75 +351,125 @@ describe('DtRadio Tests', () => {
   });
 
   describe('When there is a Radio Group Context', () => {
-    // Test Environment
-    const groupName = 'radioGroup';
-
-    // Helpers
-    const _setGroupContext = (radioGroupValue, groupDisabled = false, groupValidationState = null) => {
-      provide = {
-        groupContext: {
-          name: groupName,
-          selectedValue: radioGroupValue,
-          disabled: groupDisabled,
-          validationState: groupValidationState,
-        },
-      };
-      props = { ...baseProps, description: 'Description' };
-      _setWrappers();
-    };
-
-    // Shared Examples
-    const itBehavesLikeSetsInputName = () => {
-      it(
-        'sets the input name',
-        () => { expect(input.attributes('name')).toBe(groupName); },
-      );
-    };
-
     describe('When the value matches the Radio', () => {
-      beforeEach(() => { _setGroupContext(value); });
+      beforeEach(() => {
+        mockProvide = {
+          groupContext: {
+            name: MOCK_GROUP_NAME,
+            selectedValue: MOCK_VALUE,
+            disabled: false,
+            validationState: null,
+          },
+        };
 
-      itBehavesLikeSetsInputName();
-      it('should be checked', () => { itBehavesLikeChecked(input); });
+        mockProps = {
+          description: 'Description',
+        };
+
+        updateWrapper();
+      });
+
+      it('sets the input name', () => {
+        expect(input.attributes('name')).toBe(MOCK_GROUP_NAME);
+      });
+
+      it('should be checked', () => {
+        expect(input.element.checked).toBe(true);
+      });
 
       describe('When the radio group is disabled', () => {
-        // Test Setup
-        beforeEach(() => { _setGroupContext(value, true); });
-
         describe('When the radio is clicked', () => {
-          // Test Setup
-          beforeEach(() => { wrapper.trigger('click'); });
+          it('no events are emitted', async () => {
+            mockProvide = {
+              groupContext: {
+                name: MOCK_GROUP_NAME,
+                selectedValue: MOCK_VALUE,
+                disabled: true,
+                validationState: null,
+              },
+            };
 
-          it(
-            'no events are emitted',
-            () => { itBehavesLikeDoesNotEmitEvents(wrapper); },
-          );
+            mockProps = {
+              description: 'Description',
+            };
+
+            updateWrapper();
+
+            await wrapper.trigger('click');
+
+            expect(wrapper.emitted()).toEqual({});
+          });
         });
       });
 
       describe('When the radio group has a validation state', () => {
-        beforeEach(
-          () => { _setGroupContext(value, false, VALIDATION_MESSAGE_TYPES.SUCCESS); },
-        );
-        itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
+        it('has validation classes', () => {
+          mockProvide = {
+            groupContext: {
+              name: MOCK_GROUP_NAME,
+              selectedValue: MOCK_VALUE,
+              disabled: false,
+              validationState: VALIDATION_MESSAGE_TYPES.SUCCESS,
+            },
+          };
+
+          mockProps = {
+            description: 'Description',
+          };
+
+          updateWrapper();
+
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+        });
 
         describe('When the radio has a validation state', () => {
-          // Test Setup
-          beforeEach(() => {
-            props = { ...baseProps, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
-            _setWrappers();
-          });
+          it('has validation classes', () => {
+            mockProvide = {
+              groupContext: {
+                name: MOCK_GROUP_NAME,
+                selectedValue: MOCK_VALUE,
+                disabled: false,
+                validationState: VALIDATION_MESSAGE_TYPES.WARNING,
+              },
+            };
 
-          itBehavesLikeHasValidationClassesLocal(VALIDATION_MESSAGE_TYPES.SUCCESS);
+            mockProps = {
+              description: 'Description',
+            };
+
+            updateWrapper();
+
+            expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists()).toBe(true);
+          });
         });
       });
     });
 
     describe('When the value does not match the Radio', () => {
-      beforeEach(() => { _setGroupContext(`not${value}`); });
+      beforeEach(() => {
+        mockProvide = {
+          groupContext: {
+            name: MOCK_GROUP_NAME,
+            selectedValue: `not${MOCK_VALUE}`,
+            disabled: false,
+            validationState: null,
+          },
+        };
 
-      itBehavesLikeSetsInputName();
-      it('should not be checked', () => { itBehavesLikeNotChecked(input); });
+        mockProps = {
+          description: 'Description',
+        };
+
+        updateWrapper();
+      });
+
+      it('sets the input name', () => {
+        expect(input.attributes('name')).toBe(MOCK_GROUP_NAME);
+      });
+
+      it('should not be checked', () => {
+        expect(input.element.checked).toBe(false);
+      });
     });
   });
 });
