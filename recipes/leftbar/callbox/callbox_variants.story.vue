@@ -27,11 +27,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -74,11 +74,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -128,11 +128,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -167,11 +167,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -185,14 +185,17 @@
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
           <span>06:01</span>
-        </div>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -224,11 +227,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -242,20 +245,23 @@
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
-          <span>Screenshare</span>
-        </div>
+          <p>Screenshare</p>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
           aria-label="stop call"
           importance="clear"
-          class="d-fc-critical"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
@@ -275,28 +281,37 @@
       clickable
     >
       <template #subtitle>
-        <div class="d-d-flex d-flow4 d-ai-center">
-          <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+        >
+          <dt-stack
+            direction="row"
+            class="d-ai-center"
+          >
             <dt-icon
               name="users"
               size="100"
               class="d-mr2"
             />
-            <p>3</p>
-          </div>
-          <p class="d-fs-300">
+            <span>3</span>
+          </dt-stack>
+          <span class="d-fs-300">
             •
-          </p>
-          <div class="d-d-flex d-ai-center">
+          </span>
+          <dt-stack
+            direction="row"
+            class="d-ai-center d-of-x-hidden"
+          >
             <dt-icon
               name="activity"
               size="100"
             />
-          </div>
-          <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
-            Jaqueline Nackos Jaqueline Nackos
-          </p>
-        </div>
+            <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
+              Jaqueline Nackos Jaqueline Nackos
+            </p>
+          </dt-stack>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -316,11 +331,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -334,14 +349,17 @@
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
           <span>06:01</span>
-        </div>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -360,11 +378,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -386,7 +404,7 @@
             <dt-button
               aria-label="stop call"
               importance="clear"
-              class="d-fc-critical"
+              kind="danger"
             >
               <template #icon>
                 <dt-icon
@@ -408,10 +426,11 @@ import DtRecipeCallbox from './callbox.vue';
 import DtButton from '@/components/button/button.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
+import DtStack from '@/components/stack/stack.vue';
 
 export default {
   name: 'DtRecipeCallboxVariants',
-  components: { DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
+  components: { DtStack, DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
 };
 </script>
 

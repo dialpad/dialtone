@@ -26,14 +26,14 @@
           :seed="avatarSeed"
           :clickable="clickable"
           size="sm"
-          @click.stop="handleClick"
+          @click="handleClick"
         />
         <div class="dt-recipe-callbox--content">
           <component
             :is="clickable ? 'button' : 'span'"
             data-qa="dt-recipe-callbox--title"
             class="dt-recipe-callbox--content-title"
-            @click.stop="handleClick"
+            @click="handleClick"
           >
             {{ title }}
           </component>
@@ -164,6 +164,16 @@ export default {
     },
   },
 
+  emits: [
+    /**
+     * Callbox click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
+
   computed: {
     shouldShowAvatar () {
       return this.avatarFullName || this.avatarSrc;
@@ -291,12 +301,8 @@ export default {
         box-shadow: var(--dt-shadow-focus);
       }
 
-      &:hover {
-        background-color: var(--dt-action-color-background-muted-hover)
-      }
-
-      &:active {
-        background-color: var(--dt-action-color-background-muted-active)
+      &:hover, &:active {
+        text-decoration: underline;
       }
     }
   }
