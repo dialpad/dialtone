@@ -597,7 +597,13 @@ export default {
         return;
       }
 
-      this.internalInputValue = this.internalInputValue + emoji.shortname;
+      // Insert emoji into the editor
+      this.$refs.richTextEditor.editor.commands.insertContent({
+        type: 'emoji',
+        attrs: {
+          code: emoji.shortname,
+        },
+      });
       this.emojiPickerOpened = false;
     },
 
