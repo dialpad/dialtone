@@ -8,6 +8,7 @@
     :title="title"
     :border-color="borderColor"
     :clickable="clickable"
+    :is-on-hold="isOnHold"
     @click="onClick"
   >
     <template
