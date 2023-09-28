@@ -1365,6 +1365,35 @@
             "value": "{color.foreground.disabled}",
             "type": "color"
           }
+        },
+        "positive": {
+          "default": {
+            "value": "{color.foreground.success}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{action.color.foreground.positive.default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".18",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "active": {
+            "value": "{action.color.foreground.positive.hover}",
+            "type": "color"
+          },
+          "primary": {
+            "default": {
+              "value": "{color.neutral.white}",
+              "type": "color"
+            }
+          }
         }
       },
       "background": {
@@ -1587,6 +1616,70 @@
           "default": {
             "value": "{color.black.300}",
             "type": "color"
+          }
+        },
+        "positive": {
+          "default": {
+            "value": "{color.neutral.transparent}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.green.100}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": ".6",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "active": {
+            "value": "{color.green.400}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".08",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary": {
+            "default": {
+              "value": "{color.green.400}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{action.color.background.positive.primary.default}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": ".10",
+                    "space": "hsl"
+                  }
+                }
+              }
+            },
+            "active": {
+              "value": "{action.color.background.positive.primary.default}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": ".16",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
           }
         }
       },

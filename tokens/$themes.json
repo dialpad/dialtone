@@ -329,7 +329,17 @@
       "theme.topbar.profile.color.foreground-inverted": "S:5589aee53c122f9808c3374bbdee185865c306e9,",
       "theme.topbar.profile.color.background-inverted": "S:85aa64c0515a5c75b47c54a5fcd6a998b56a9b86,",
       "color.surface.backdrop": "S:b2afb933d0e0d727c809a18a30ca718b03765265,",
-      "theme.sidebar.color.foreground-unread": "S:52b74df89d06a10ce14cc1296c09435c28ef1ccd,"
+      "theme.sidebar.color.foreground-unread": "S:52b74df89d06a10ce14cc1296c09435c28ef1ccd,",
+      "action.color.background.positive.default": "S:e7d0a7f87ddd490fba1e17db5322b7cee2ced05f,",
+      "action.color.background.positive.hover": "S:b9b0a32e1c7f1da117e1cf82d0c101f9860be69f,",
+      "action.color.background.positive.active": "S:9bef5579f26bac76f74ae4becc385cb5e26d3476,",
+      "action.color.background.positive.primary.default": "S:19ecf551ceeb3970c367dfca2990482b210b2cc8,",
+      "action.color.background.positive.primary.hover": "S:aa6ce598345a55c560b2ecb5add5d1c4619ec82e,",
+      "action.color.background.positive.primary.active": "S:1a49a64d33f9fd960cddef617c229090098388e5,",
+      "action.color.foreground.positive.default": "S:cfff22b7dc7799c94377c7b78610a3f8f516c540,",
+      "action.color.foreground.positive.hover": "S:df36fc123a50e3efa40922ff5be0e730a5c3b2d2,",
+      "action.color.foreground.positive.active": "S:7de97736439fcf0927a8622f5bbbefba044c74d4,",
+      "action.color.foreground.positive.primary.default": "S:919377e896c7c8ba0c069fbfdd3d025223fe6c9e,"
     },
     "selectedTokenSets": {
       "base/default": "enabled",
