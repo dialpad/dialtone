@@ -5,7 +5,7 @@
     :class="avatarClasses"
     data-qa="dt-avatar"
     :aria-label="buttonAriaLabel"
-    @click.stop="handleClick"
+    @click="handleClick"
   >
     <div
       ref="canvas"
