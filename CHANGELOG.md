@@ -1,3 +1,12 @@
+## [2.98.3](https://github.com/dialpad/dialtone-vue/compare/v2.98.2...v2.98.3) (2023-09-28)
+
+
+### Bug Fixes
+
+* **Callbox, Avatar:** events and styling ([#1218](https://github.com/dialpad/dialtone-vue/issues/1218)) ([e17fd36](https://github.com/dialpad/dialtone-vue/commit/e17fd36dec8fd039c5509351ff1d27fbcaf77228))
+* emoji row css ([#1190](https://github.com/dialpad/dialtone-vue/issues/1190)) ([a11147a](https://github.com/dialpad/dialtone-vue/commit/a11147a2adb204da21d397a405c25ede59eba40c))
+* **List Item:** apply correct color design tokens ([#1221](https://github.com/dialpad/dialtone-vue/issues/1221)) ([e1f5e32](https://github.com/dialpad/dialtone-vue/commit/e1f5e32a1fce39ffb709cbdffbfbbdfa0d4f350e))
+
 ## [2.98.2](https://github.com/dialpad/dialtone-vue/compare/v2.98.1...v2.98.2) (2023-09-26)
 
 
