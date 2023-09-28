@@ -8,6 +8,7 @@
     :title="$attrs.title"
     :border-color="$attrs.borderColor"
     :clickable="$attrs.clickable"
+    :is-on-hold="$attrs.isOnHold"
     @click="$attrs.onClick"
   >
     <template

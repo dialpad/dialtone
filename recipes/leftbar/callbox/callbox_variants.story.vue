@@ -418,6 +418,41 @@
         </dt-item-layout>
       </template>
     </dt-recipe-callbox>
+    <dt-recipe-callbox
+      avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
+      title="Jaqueline Nackos"
+      is-on-hold
+    >
+      <template #subtitle>
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
+          <dt-icon
+            name="share-screen"
+            size="100"
+          />
+          <span>06:01</span>
+        </dt-stack>
+      </template>
+      <template #right>
+        <dt-button
+          aria-label="hang call"
+          circle
+          importance="clear"
+          kind="danger"
+        >
+          <template #icon>
+            <dt-icon
+              name="phone-hang-up"
+              size="400"
+            />
+          </template>
+        </dt-button>
+      </template>
+    </dt-recipe-callbox>
   </div>
 </template>
 
