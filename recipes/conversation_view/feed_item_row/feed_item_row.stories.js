@@ -1,12 +1,10 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 import DtRecipeFeedItemRowDefaultTemplate from './feed_item_row_default.story.vue';
 import DtRecipeFeedItemRowVariantsTemplate from './feed_item_row_variants.story.vue';
 
 import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_item_row_constants';
-
-const iconsList = getIconNames();
 
 export const argsData = {
   avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
@@ -18,7 +16,6 @@ export const argsData = {
   default: `<p>Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
-  menu: 'menu',
 };
 
 /*
@@ -63,29 +60,11 @@ export const argTypesData = {
   },
 
   reactions: {
-    name: 'reactions',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
-    },
+    control: false,
   },
 
   menu: {
-    name: 'menu',
-    options: iconsList,
-    table: {
-      category: 'slots',
-      type: { summary: 'component' },
-    },
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
-    },
+    control: false,
   },
 
   state: {
@@ -137,7 +116,6 @@ export const Default = {
 
   args: {
     showHeader: true,
-    reactions: 'emoji reactions',
     threading: 'threading',
   },
 };
@@ -145,5 +123,6 @@ export const Default = {
 export const Variants = {
   render: VariantsTemplate,
 
-  args: {},
+  args: {
+  },
 };

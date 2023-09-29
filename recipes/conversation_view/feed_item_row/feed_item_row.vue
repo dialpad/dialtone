@@ -19,7 +19,7 @@
       <div
         v-if="!showHeader"
         v-show="isActive"
-        class="d-fs-100 d-fw-normal d-ws-nowrap d-lh-100 d-fc-tertiary d-mb6"
+        class="d-fs-100 d-fw-normal d-ws-nowrap d-lh-100 d-fc-tertiary d-mb6 d-h100p d-mt16"
         data-qa="dt-feed-item-row--left-time"
       >
         {{ shortTime }}
@@ -68,7 +68,7 @@
       <div
         v-show="isActive"
         data-qa="dt-feed-item-row--menu"
-        class="d-ps-absolute d-tn16 d-r12"
+        class="d-ps-absolute d-tn24 d-r12"
       >
         <dt-lazy-show
           :appear="true"
@@ -101,6 +101,14 @@ export default {
   inheritAttrs: false,
 
   props: {
+    /**
+     * Avatar seed, set this to the user's ID to get the same avatar background gradient each time it is displayed.
+     */
+    avatarSeed: {
+      type: String,
+      default: null,
+    },
+
     /**
      * Show avatar, show header text or dont show left time and vice versa
      */
@@ -186,13 +194,6 @@ export default {
   },
 
   computed: {
-
-    avatarSeed () {
-      const name = (this.displayName || '').split(' ');
-      const initials = name.map(word => word.charAt(0)).join('');
-      return initials.slice(0, 2).toUpperCase();
-    },
-
     feedListeners () {
       return {
         ...this.$listeners,
