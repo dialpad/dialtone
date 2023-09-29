@@ -1,3 +1,10 @@
+# [2.99.0](https://github.com/dialpad/dialtone-vue/compare/v2.98.3...v2.99.0) (2023-09-29)
+
+
+### Features
+
+* **Callbox:** on hold status ([#1225](https://github.com/dialpad/dialtone-vue/issues/1225)) ([fd5963a](https://github.com/dialpad/dialtone-vue/commit/fd5963a98e95630c20d75a35d1d0e81058ea8088))
+
 ## [2.98.3](https://github.com/dialpad/dialtone-vue/compare/v2.98.2...v2.98.3) (2023-09-28)
 
 
