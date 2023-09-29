@@ -14,7 +14,7 @@
             @click="onClick"
           >
             <dt-item-layout class="d-w100p d-p8">
-              {{ title }}
+              <span class="d-fw-bold">{{ title }}</span>
               <template #left>
                 <dt-icon
                   size="300"
