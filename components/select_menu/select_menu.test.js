@@ -1,12 +1,6 @@
 import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
 import {
-  itBehavesLikePassesCustomPropValidation,
-  itBehavesLikeFailsCustomPropValidation,
-  itBehavesLikeDoesNotRaiseAnyVueWarnings,
-  itBehavesLikeRaisesSingleVueWarning,
-} from '../../tests/shared_examples/validation';
-import {
   LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
 } from '@/common/constants';
@@ -16,31 +10,29 @@ import {
 } from './select_menu_constants';
 import DtSelectMenu from './select_menu.vue';
 
-// Constants
-const LABEL = 'Label';
-const DESCRIPTION = 'Description';
-const OPTIONS = [
+const MOCK_LABEL = 'Label';
+const MOCK_DESCRIPTION = 'Description';
+const MOCK_OPTIONS = [
   { value: 1, label: 'Option 1' },
   { value: 2, label: 'Option 2' },
   { value: 3, label: 'Option 3' },
 ];
 
-const basePropsData = {
-  label: LABEL,
-  options: OPTIONS,
+const baseProps = {
+  label: MOCK_LABEL,
+  options: MOCK_OPTIONS,
 };
 const baseAttrs = {
   name: 'select-menu',
 };
+const baseSlots = {};
+
+let mockProps = {};
+let mockAttrs = {};
+let mockSlots = {};
+const testContext = {};
 
 describe('DtSelectMenu Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
-  // Wrappers
   let wrapper;
   let selectWrapper;
   let select;
@@ -48,13 +40,14 @@ describe('DtSelectMenu Tests', () => {
   let description;
   let messages;
 
-  // Environment
-  let propsData = basePropsData;
-  let attrs = baseAttrs;
-  let slots = {};
+  const mountUpdateWrapper = () => {
+    wrapper = mount(DtSelectMenu, {
+      propsData: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
+      localVue: testContext.localVue,
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     select = wrapper.find('[data-qa="dt-select"]');
     selectWrapper = wrapper.find('[data-qa="dt-select-wrapper"]');
     label = wrapper.find('[data-qa="dt-select-label"]');
@@ -62,68 +55,63 @@ describe('DtSelectMenu Tests', () => {
     messages = wrapper.find('[data-qa="dt-select-messages"]');
   };
 
-  const _setWrappers = () => {
+  const updateWrapper = () => {
     wrapper = shallowMount(DtSelectMenu, {
-      propsData,
-      attrs,
-      slots,
+      propsData: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
       localVue: testContext.localVue,
     });
-    _setChildWrappers();
+
+    select = wrapper.find('[data-qa="dt-select"]');
+    selectWrapper = wrapper.find('[data-qa="dt-select-wrapper"]');
+    label = wrapper.find('[data-qa="dt-select-label"]');
+    description = wrapper.find('[data-qa="dt-select-description"]');
+    messages = wrapper.find('[data-qa="dt-select-messages"]');
   };
 
-  const _mountWrappers = () => {
-    wrapper = mount(DtSelectMenu, {
-      propsData,
-      attrs,
-      slots,
-      localVue: testContext.localVue,
-    });
-    _setChildWrappers();
-  };
-
-  // Setup
   beforeAll(() => {
     testContext.localVue = createLocalVue();
   });
-  beforeEach(() => {});
 
-  // Teardown
-  afterEach(() => {
-    propsData = basePropsData;
-    attrs = baseAttrs;
-    slots = {};
+  beforeEach(() => {
+    updateWrapper();
   });
-  afterAll(() => {});
+
+  afterEach(() => {
+    mockProps = {};
+    mockAttrs = {};
+    mockSlots = {};
+  });
 
   describe('Presentation Tests', () => {
     describe('When rendered with required content', () => {
-      // Test Setup
-      beforeEach(() => { _setWrappers(); });
+      it('should render the provided label', () => {
+        expect(label.text()).toBe(MOCK_LABEL);
+      });
 
-      it(
-        'should render the provided label',
-        () => { expect(label.text()).toBe(LABEL); },
-      );
       it('should have no size variant classes on the label', () => {
         expect(label.classes().length).toBe(1);
       });
-      it(
-        'should not render a description',
-        () => { expect(description.exists()).toBe(false); },
-      );
-      it(
-        'should render the select menu',
-        () => { expect(select.exists()).toBe(true); },
-      );
+
+      it('should not render a description', () => {
+        expect(description.exists()).toBe(false);
+      });
+
+      it('should render the select menu', () => {
+        expect(select.exists()).toBe(true);
+      });
+
       it('should have no size variant classes on select menu', () => {
         expect(selectWrapper.classes().length).toBe(1);
       });
+
       it('should have no kind variant classes on select menu input', () => {
         expect(select.classes().length).toBe(1);
       });
+
       it('should render the select menu options', () => {
-        OPTIONS.forEach(option => {
+        MOCK_OPTIONS.forEach(option => {
           expect(select.find(`[value="${option.value}"]`).exists()).toBeTruthy();
         });
       });
@@ -133,152 +121,116 @@ describe('DtSelectMenu Tests', () => {
     });
 
     describe('When a label is not provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        propsData = { options: OPTIONS };
-        _setWrappers();
-      });
+      it('should not render a label', () => {
+        mockProps = { label: '', options: MOCK_OPTIONS };
 
-      it(
-        'should not render a label',
-        () => { expect(label.exists()).toBe(false); },
-      );
+        updateWrapper();
+
+        label = wrapper.find('[data-qa="dt-select-label"]');
+
+        expect(label.exists()).toBe(false);
+      });
     });
 
     describe('When a label is provided via slot', () => {
-      // Test Environment
-      const slottedLabel = 'Slotted Label';
+      it('should render the slotted label', () => {
+        mockSlots = { label: 'Slotted Label' };
 
-      // Test Setup
-      beforeEach(() => {
-        slots = {
-          label: slottedLabel,
-        };
-        _setWrappers();
+        updateWrapper();
+
+        expect(label.text()).toBe('Slotted Label');
       });
-
-      it(
-        'should render the slotted label',
-        () => { expect(label.text()).toBe(slottedLabel); },
-      );
     });
 
     describe('When a description is provided via prop', () => {
-      // Test Setup
       beforeEach(() => {
-        propsData = {
-          ...basePropsData,
-          description: DESCRIPTION,
-        };
-        _setWrappers();
+        mockProps = { description: MOCK_DESCRIPTION };
+
+        updateWrapper();
       });
 
       it('should render the provided description', () => {
-        expect(description.text()).toBe(DESCRIPTION);
+        expect(description.text()).toBe(MOCK_DESCRIPTION);
       });
+
       it('should have no size variant classes on the description', () => {
         expect(description.classes().length).toBe(1);
       });
     });
 
     describe('When a description is provided via slot', () => {
-      // Test Environment
-      const slottedDescription = 'Slotted Description';
-
-      // Test Setup
-      beforeEach(() => {
-        slots = {
-          description: slottedDescription,
-        };
-        _setWrappers();
-      });
-
       it('should render the slotted description', () => {
-        expect(description.text()).toBe(slottedDescription);
+        mockSlots = { description: 'Slotted Description' };
+
+        updateWrapper();
+
+        expect(description.text()).toBe('Slotted Description');
       });
     });
 
     describe('When options are provided via slot', () => {
-      // Test Environment
-      const slottedOptions = '<option value="1">Option 1</option><option value="2">Option 2</option>';
-
-      // Test Setup
-      beforeEach(() => {
-        slots = {
-          default: slottedOptions,
-        };
-        _setWrappers();
-      });
-
       it('should render the select menu options', () => {
+        mockSlots = { default: '<option value="1">Option 1</option><option value="2">Option 2</option>' };
+
+        updateWrapper();
+
         expect(select.findAll('option').length).toBe(2);
       });
     });
 
     describe('When a size is provided', () => {
-      // Test Environment
-      const size = 'lg';
+      const MOCK_SIZE = 'lg';
 
-      // Test Setup
       beforeEach(() => {
-        propsData = {
-          ...basePropsData,
-          description: DESCRIPTION,
-          size,
+        mockProps = {
+          description: MOCK_DESCRIPTION,
+          size: MOCK_SIZE,
         };
-        _setWrappers();
+
+        updateWrapper();
       });
 
       it('should have size variant class on the label', () => {
-        expect(label.classes(LABEL_SIZE_MODIFIERS[size])).toBe(true);
+        expect(label.classes(LABEL_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
       });
+
       it('should have size variant class on the description', () => {
-        expect(description.classes(DESCRIPTION_SIZE_MODIFIERS[size])).toBe(true);
+        expect(description.classes(DESCRIPTION_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
       });
+
       it('should have size variant class on select menu', () => {
-        expect(selectWrapper.classes(SELECT_SIZE_MODIFIERS[size])).toBe(true);
+        expect(selectWrapper.classes(SELECT_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
       });
     });
 
     describe('When validation messages are provided', () => {
-      // Test Environment
-      const message = 'Validation Message';
-
-      // Test Setup
       beforeEach(() => {
-        propsData = {
-          ...basePropsData,
-          messages: [message],
-        };
+        mockProps = { messages: ['Validation Message'] };
+
+        mountUpdateWrapper();
       });
 
-      // Shared Examples
-      const itBehavesLikeHasSelectInputStateClass = () => {
+      describe('When validation messages are shown', () => {
         it('should have error state class on select menu', () => {
           expect(select.classes(SELECT_STATE_MODIFIERS.error)).toBe(true);
         });
-      };
 
-      describe('When validation messages are shown', () => {
-        // Test Setup
-        beforeEach(() => {
-          _mountWrappers();
-        });
-
-        itBehavesLikeHasSelectInputStateClass();
         it('should render validation message', () => {
           expect(messages?.findAll('[data-qa="validation-message"]').length).toBe(1);
         });
       });
 
       describe('When validation messages are hidden', () => {
-        // Test Setup
         beforeEach(() => {
-          propsData.showMessages = false;
-          _mountWrappers();
+          mockProps = { ...mockProps, showMessages: false };
+
+          mountUpdateWrapper();
         });
 
-        itBehavesLikeHasSelectInputStateClass();
+        it('should have error state class on select menu', () => {
+          expect(select.classes(SELECT_STATE_MODIFIERS.error)).toBe(true);
+        });
+
         it('should not render any validation messages', () => {
           expect(messages.exists()).toBe(false);
         });
@@ -288,41 +240,29 @@ describe('DtSelectMenu Tests', () => {
 
   describe('Accessibility Tests', () => {
     describe('When a description is provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        propsData = { ...basePropsData, description: DESCRIPTION };
-        _setWrappers();
-      });
-
       it('label aria-details should match the id of the description', () => {
+        mockProps = { description: MOCK_DESCRIPTION };
+
+        updateWrapper();
+
         expect(label.attributes('aria-details')).toBe(description.attributes('id'));
       });
     });
 
     describe('When a description is not provided', () => {
       describe('When aria-details are not provided', () => {
-        // Test Setup
-        beforeEach(() => {
-          _setWrappers();
-        });
-
         it('label aria-details should not exist', () => {
           expect(label.attributes('aria-details')).toBeFalsy();
         });
       });
 
       describe('When aria-details are provided', () => {
-        // Test Environment
-        const ariaDetails = 'some-id';
-
-        // Test Setup
-        beforeEach(() => {
-          attrs = { ...baseAttrs, 'aria-details': ariaDetails };
-          _setWrappers();
-        });
-
         it('label aria-details should match those provided by attrs', () => {
-          expect(label.attributes('aria-details')).toBe(ariaDetails);
+          mockAttrs = { 'aria-details': 'some-id' };
+
+          updateWrapper();
+
+          expect(label.attributes('aria-details')).toBe('some-id');
         });
       });
     });
@@ -330,50 +270,47 @@ describe('DtSelectMenu Tests', () => {
 
   describe('Interactivity Tests', () => {
     describe('When select menu value has changed', () => {
-      // Test Environment
-      const selectedValue = OPTIONS[1].value;
+      const MOCK_SELECTED_VALUE = MOCK_OPTIONS[1].value;
 
-      // Test Setup
       beforeEach(() => {
-        _setWrappers();
-        select.element.value = selectedValue;
+        select.element.value = MOCK_SELECTED_VALUE;
         select.trigger('change');
       });
 
       it('should emit input event', () => {
-        expect(wrapper.emitted('input')[0][0]).toBe(selectedValue.toString());
+        expect(wrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
       });
       it('should emit change event', () => {
-        expect(wrapper.emitted('change')[0][0]).toBe(selectedValue.toString());
+        expect(wrapper.emitted('change')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
       });
     });
   });
 
   describe('Validation Tests', () => {
     describe('Size Validator', () => {
-      // Test Environment
-      const prop = DtSelectMenu.props.size;
+      const MOCK_PROP = DtSelectMenu.props.size;
 
       describe('When provided size is in SELECT_SIZE_MODIFIERS', () => {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+        it('passes custom prop validation', () => {
+          expect(MOCK_PROP.validator(MOCK_PROP.default)).toBe(true);
+        });
       });
 
       describe('when provided size is not in SELECT_SIZE_MODIFIERS', () => {
-        itBehavesLikeFailsCustomPropValidation(prop, `NOT${SELECT_SIZE_MODIFIERS.md}`);
+        it('fails custom prop validation', () => {
+          expect(MOCK_PROP.validator(`NOT${SELECT_SIZE_MODIFIERS.md}`)).toBe(false);
+        });
       });
     });
 
     describe('Options Validation', () => {
-      // Test Environment
-      const warningMessage = 'Options are expected to be provided via prop or slot';
+      const MOCK_WARNING_MESSAGE = 'Options are expected to be provided via prop or slot';
 
-      // Test Setup
       beforeAll(() => {
         Vue.config.silent = true;
         vi.spyOn(Vue.util, 'warn').mockClear();
       });
 
-      // Test Teardown
       afterEach(() => {
         Vue.util.warn.mockReset();
       });
@@ -384,167 +321,159 @@ describe('DtSelectMenu Tests', () => {
       });
 
       describe('When options are provided via prop', () => {
-        // Test Setup
-        beforeEach(() => {
-          _mountWrappers();
+        it('should not raise any warnings', () => {
+          mountUpdateWrapper();
+
+          expect(Vue.util.warn).toHaveBeenCalledTimes(0);
         });
 
-        itBehavesLikeDoesNotRaiseAnyVueWarnings();
-
         describe('When updated options are empty', () => {
-          // Test Setup
           beforeEach(async () => {
             await wrapper.setProps({ options: [] });
           });
 
-          itBehavesLikeRaisesSingleVueWarning(warningMessage);
+          it('should raise a single warning', () => {
+            expect(Vue.util.warn).toHaveBeenCalledTimes(1);
+          });
+
+          it('should have expected warning message', () => {
+            expect(Vue.util.warn.mock.calls[0][0]).toBe(MOCK_WARNING_MESSAGE);
+          });
         });
       });
 
       describe('When options are provided via slot', () => {
-        // Test Setup
-        beforeEach(() => {
-          propsData = { ...propsData, options: undefined };
-          slots = { default: '<option value="1">Option 1</option><option value="2">Option 2</option>' };
-          _mountWrappers();
-        });
+        it('should not raise any warnings', () => {
+          mockProps = { options: undefined };
+          mockSlots = { default: '<option value="1">Option 1</option><option value="2">Option 2</option>' };
 
-        itBehavesLikeDoesNotRaiseAnyVueWarnings();
+          mountUpdateWrapper();
+
+          expect(Vue.util.warn).toHaveBeenCalledTimes(0);
+        });
       });
 
       describe('When options are not provided', () => {
-        // Test Setup
         beforeEach(() => {
-          propsData = { ...propsData, options: undefined };
-          _mountWrappers();
+          mockProps = { options: undefined };
+
+          mountUpdateWrapper();
         });
 
-        itBehavesLikeRaisesSingleVueWarning(warningMessage);
+        it('should raise a single warning', () => {
+          expect(Vue.util.warn).toHaveBeenCalledTimes(1);
+        });
+
+        it('should have expected warning message', () => {
+          expect(Vue.util.warn.mock.calls[0][0]).toBe(MOCK_WARNING_MESSAGE);
+        });
       });
     });
   });
 
   describe('Extendability Tests', () => {
-    // Test Environment
-    let element;
-    const customClass = 'my-custom-class';
-    const propName = 'some';
-    const propValue = 'prop';
-    const childProps = {};
-
-    // Helpers
-    const _setupChildClassTest = (childClassName, selector) => {
-      propsData[childClassName] = customClass;
-      _setWrappers();
-      element = wrapper.find(selector);
-    };
-
-    const _setupChildPropsTest = (childPropsName, selector) => {
-      propsData[childPropsName] = childProps;
-      _setWrappers();
-      element = wrapper.find(selector);
-    };
-
-    // Test Setup
-    beforeAll(() => {
-      childProps[propName] = propValue;
-    });
-    beforeEach(() => {
-      propsData = { ...propsData, description: DESCRIPTION };
-    });
+    let MOCK_ELEMENT;
+    const MOCK_CUSTOM_CLASS = 'my-custom-class';
+    const MOCK_PROP_NAME = 'some';
+    const MOCK_PROP_VALUE = 'prop';
 
     describe('When a label class is provided', () => {
-      beforeEach(
-        () => { _setupChildClassTest('labelClass', '[data-qa="dt-select-label"]'); },
-      );
       it('should apply custom class to child', () => {
-        expect(wrapper.find('.my-custom-class').html()).toBe(element.html());
+        mockProps = { description: MOCK_DESCRIPTION, labelClass: MOCK_CUSTOM_CLASS };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="dt-select-label"]');
+
+        expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
       });
     });
 
     describe('When a description class is provided', () => {
-      beforeEach(
-        () => { _setupChildClassTest('descriptionClass', '[data-qa="dt-select-description"]'); },
-      );
       it('should apply custom class to child', () => {
-        expect(wrapper.find('.my-custom-class').html()).toBe(element.html());
+        mockProps = { description: MOCK_DESCRIPTION, descriptionClass: MOCK_CUSTOM_CLASS };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="dt-select-description"]');
+
+        expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
       });
     });
 
     describe('When a select class is provided', () => {
-      beforeEach(
-        () => { _setupChildClassTest('selectClass', '[data-qa="dt-select-wrapper"]'); },
-      );
       it('should apply custom class to child', () => {
-        expect(wrapper.find('.my-custom-class').html()).toBe(element.html());
+        mockProps = { description: MOCK_DESCRIPTION, selectClass: MOCK_CUSTOM_CLASS };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="dt-select-wrapper"]');
+
+        expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
       });
     });
 
     describe('When an option class is provided', () => {
-      // Test Environment
-      let options;
-
-      // Test Setup
-      beforeEach(() => {
-        propsData.optionClass = customClass;
-        _setWrappers();
-        options = select.findAll('option');
-      });
-
       it('should apply child class to each option', () => {
+        mockProps = { optionClass: MOCK_CUSTOM_CLASS };
+
+        updateWrapper();
+
+        const options = select.findAll('option');
+
         options.wrappers.forEach(option => {
-          expect(option.classes(customClass)).toBe(true);
+          expect(option.classes(MOCK_CUSTOM_CLASS)).toBe(true);
         });
       });
     });
 
     describe('When label child props are provided', () => {
-      beforeEach(
-        () => { _setupChildPropsTest('labelChildProps', '[data-qa="dt-select-label"]'); },
-      );
-
       it('should have provided child prop', () => {
-        expect(element.attributes(propName)).toBe(propValue);
+        mockProps = { description: MOCK_DESCRIPTION, labelChildProps: { some: 'prop' } };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="dt-select-label"]');
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
       });
     });
 
     describe('When description child props are provided', () => {
-      beforeEach(
-        () => { _setupChildPropsTest('descriptionChildProps', '[data-qa="dt-select-description"]'); },
-      );
       it('should have provided child prop', () => {
-        expect(element.attributes(propName)).toBe(propValue);
+        mockProps = { description: MOCK_DESCRIPTION, descriptionChildProps: { some: 'prop' } };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = wrapper.find('[data-qa="dt-select-description"]');
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
       });
     });
 
     describe('When option child props are provided', () => {
-      // Test Environment
-      let options;
-
-      // Test Setup
-      beforeEach(() => {
-        propsData.optionChildProps = childProps;
-        _setWrappers();
-        options = select.findAll('option');
-      });
-
       it('should apply child props to each option', () => {
+        mockProps = { optionChildProps: { some: 'prop' } };
+
+        updateWrapper();
+
+        const options = select.findAll('option');
+
         options.wrappers.forEach(option => {
-          expect(option.attributes(propName)).toBe(propValue);
+          expect(option.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
         });
       });
     });
 
     describe('When attrs are provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        attrs = { some: 'prop' };
-        _setWrappers();
-        element = select;
-      });
-
       it('attr should be set on element', () => {
-        expect(element.attributes(propName)).toBe(propValue);
+        mockAttrs = { some: 'prop' };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = select;
+
+        expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
       });
     });
   });

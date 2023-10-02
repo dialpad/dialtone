@@ -1,8 +1,12 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtSkeleton from './skeleton.vue';
 
+const baseProps = {};
+
+let mockProps = {};
+const testContext = {};
+
 describe('DtSkeleton Tests', () => {
-  // Wrappers
   let wrapper;
   let skeletonTextBody;
   let skeletonTextHeading;
@@ -11,7 +15,13 @@ describe('DtSkeleton Tests', () => {
   let skeletonListItem;
   let skeletonShape;
 
-  const _setWrappers = () => {
+  const updateWrapper = () => {
+    wrapper = mount(DtSkeleton, {
+      propsData: { ...baseProps, ...mockProps },
+
+      localVue: testContext.localVue,
+    });
+
     skeletonTextBody = wrapper.find('[data-qa="skeleton-text-body"]');
     skeletonTextHeading = wrapper.find('[data-qa="skeleton-text-heading"]');
     skeletonParagraph = wrapper.find('[data-qa="skeleton-paragraph"]');
@@ -20,17 +30,20 @@ describe('DtSkeleton Tests', () => {
     skeletonShape = wrapper.findAll('[data-qa="skeleton-shape"]');
   };
 
-  const _mountWrapper = (propsData) => {
-    wrapper = mount(DtSkeleton, {
-      localVue: createLocalVue(),
-      propsData,
-    });
-    _setWrappers();
-  };
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
+  });
+
+  beforeEach(() => {
+    updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
+  });
 
   describe('Presentation Tests', () => {
     it('should render the component', () => {
-      _mountWrapper();
       expect(wrapper.exists()).toBe(true);
     });
 
@@ -40,20 +53,25 @@ describe('DtSkeleton Tests', () => {
       });
 
       it('should render the skeleton heading', async () => {
-        _mountWrapper({
+        mockProps = {
           textOption: {
             type: 'heading',
           },
-        });
+        };
+
+        updateWrapper();
+
         expect(skeletonTextHeading.exists()).toBe(true);
       });
     });
 
     describe('Skeleton paragraph', () => {
-      beforeAll(() => {
-        _mountWrapper({
+      beforeEach(() => {
+        mockProps = {
           paragraphOption: true,
-        });
+        };
+
+        updateWrapper();
       });
 
       it('should render the skeleton paragraph', async () => {
@@ -61,15 +79,17 @@ describe('DtSkeleton Tests', () => {
       });
 
       it('should render rows', async () => {
-        expect(skeletonParagraphRows.length).toEqual(3);
+        expect(skeletonParagraphRows.length).toBe(3);
       });
     });
 
     describe('Skeleton list item', () => {
-      beforeAll(() => {
-        _mountWrapper({
+      beforeEach(() => {
+        mockProps = {
           listItemOption: true,
-        });
+        };
+
+        updateWrapper();
       });
 
       it('should render the skeleton list item', async () => {
@@ -82,13 +102,13 @@ describe('DtSkeleton Tests', () => {
     });
 
     describe('Skeleton shape', () => {
-      beforeAll(() => {
-        _mountWrapper({
-          shapeOption: true,
-        });
-      });
-
       it('should render skeleton shape', async () => {
+        mockProps = {
+          shapeOption: true,
+        };
+
+        updateWrapper();
+
         expect(skeletonShape.exists()).toBe(true);
       });
     });
@@ -96,13 +116,13 @@ describe('DtSkeleton Tests', () => {
 
   describe('Accessibility Tests', () => {
     describe('When an aria-label is provided', () => {
-      beforeAll(() => {
-        _mountWrapper({
-          ariaLabel: 'ariaLabel',
-        });
-      });
-
       it('should be set aria-label value', () => {
+        mockProps = {
+          ariaLabel: 'ariaLabel',
+        };
+
+        updateWrapper();
+
         expect(wrapper.attributes('aria-label')).toBe('ariaLabel');
       });
     });
