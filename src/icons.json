@@ -174,6 +174,7 @@
         "call",
         "dialpad"
       ],
+      "waveform": [],
       "zoom-logo": [
         "video",
         "competitor"
@@ -259,6 +260,7 @@
         "missed",
         "escape"
       ],
+      "call-rejected": [],
       "contacts": [
         "address",
         "people",
@@ -1139,6 +1141,7 @@
         "index",
         "box"
       ],
+      "attestation-outline": [],
       "attestation": [],
       "book-open": [
         "read",
@@ -1222,6 +1225,7 @@
       ],
       "dissatisfied": [],
       "double-check": [],
+      "empty": [],
       "flag-off": [
         "unflag"
       ],
@@ -1472,7 +1476,8 @@
         "great",
         "pleased",
         "good"
-      ]
+      ],
+      "video-settings": []
     },
     "os": {
       "clipboard-check": [
