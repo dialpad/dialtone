@@ -4,56 +4,65 @@
     data-qa="dt-root-layout"
   >
     <header
+      v-if="hasSlotContent($slots.header)"
       :class="['d-root-layout__header', { 'd-root-layout__header--sticky': headerSticky }, headerClass]"
+      :style="{ 'height': headerHeight, 'min-height': headerHeight }"
       data-qa="dt-root-layout-header"
     >
-      <!-- @slot Slot for header content be sure to set a height on the element inside this
-        if you want a fixed height. -->
+      <!-- @slot Slot for header content -->
       <slot name="header" />
     </header>
-    <div
-      ref="root-layout-body"
-      :class="['d-root-layout__body', bodyClasses]"
-      data-qa="dt-root-layout-body"
+    <dt-root-layout-body
+      :body-class="bodyClass"
+      :content-class="contentClass"
+      :sidebar-class="sidebarClass"
+      :sidebar-width="sidebarWidth"
+      :sidebar-position="sidebarPosition"
+      :header-height="hasSlotContent($slots.header) ? headerHeight : '0px'"
+      :footer-height="hasSlotContent($slots.footer) ? footerHeight : '0px'"
+      :fixed="fixed"
     >
-      <aside
-        ref="root-layout-sidebar"
-        :class="['d-root-layout__sidebar', { 'd-root-layout__sidebar--sticky': fixed }, sidebarClass]"
-        :style="{ 'flex-basis': sidebarWidth }"
-        data-qa="dt-root-layout-sidebar"
+      <template
+        v-if="hasSlotContent($slots.sidebar)"
+        #sidebar
       >
         <!-- @slot Slot for the sidebar -->
         <slot name="sidebar" />
-      </aside>
-      <main
-        ref="root-layout-content"
-        :class="['d-root-layout__content', contentClass]"
-        data-qa="dt-root-layout-content"
-        tabindex="0"
+      </template>
+      <template
+        v-if="hasSlotContent($slots.default)"
+        #content
       >
-        <!-- @slot Slot for the main content -->
+        <!-- @slot Slot for main content -->
         <slot name="default" />
-      </main>
-    </div>
+      </template>
+    </dt-root-layout-body>
     <footer
+      v-if="hasSlotContent($slots.footer)"
       :class="['d-root-layout__footer', footerClass]"
+      :style="{ 'height': footerHeight, 'min-height': footerHeight }"
       data-qa="dt-root-layout-footer"
     >
-      <!-- @slot Slot for footer content be sure to set a height on the element inside this
-        if you want a fixed height. -->
+      <!-- @slot Slot for footer content -->
       <slot name="footer" />
     </footer>
   </div>
 </template>
 
 <script>
+import DtRootLayoutBody from './root_layout_body.vue';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS, ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS } from './root_layout_constants';
+import { hasSlotContent } from '@/common/utils';
 
 /**
  * A root layout provides a standardized group of containers to display content at the root level.
  */
 export default {
   name: 'DtRootLayout',
+
+  components: {
+    DtRootLayoutBody,
+  },
 
   props: {
     /**
@@ -75,7 +84,8 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the height of the inner element instead.
+     * The height of the header
+     * Possible units rem|px|%|em
      */
     headerHeight: {
       type: String,
@@ -144,7 +154,8 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the height of the inner element instead.
+     * The height of the footer
+     * Possible units rem|px|%|em
      */
     footerHeight: {
       type: String,
@@ -162,17 +173,16 @@ export default {
     },
   },
 
+  data () {
+    return {
+      hasSlotContent,
+    };
+  },
+
   computed: {
     responsiveClass () {
       if (!this.responsiveBreakpoint) return;
       return `d-root-layout__responsive--${this.responsiveBreakpoint}`;
-    },
-
-    bodyClasses () {
-      return [
-        this.bodyClass,
-        { 'd-root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT },
-      ];
     },
   },
 };
