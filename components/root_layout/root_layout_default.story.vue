@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-static-inline-styles -->
 <template>
   <dt-root-layout
     :body-class="$attrs.bodyClass"
@@ -18,7 +19,6 @@
       #header
     >
       <v-html
-        v-if="$attrs.header"
         :html="$attrs.header"
       />
     </template>
@@ -26,19 +26,16 @@
       #sidebar
     >
       <v-html
-        v-if="$attrs.sidebar"
         :html="$attrs.sidebar"
       />
     </template>
     <v-html
-      v-if="$attrs.default"
       :html="$attrs.default"
     />
     <template
       #footer
     >
       <v-html
-        v-if="$attrs.footer"
         :html="$attrs.footer"
       />
     </template>
