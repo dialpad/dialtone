@@ -1,14 +1,15 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRootLayout from './root_layout.vue';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
 
 const baseProps = {
-  headerHeight: '32px',
-  footerHeight: '64px',
 };
 
 const baseSlots = {
   header: 'header slot content',
   footer: 'footer slot content',
+  sidebar: 'sidebar slot content',
+  default: 'content slot content',
 };
 
 let mockProps = {};
@@ -19,6 +20,9 @@ describe('DtRootLayout Tests', () => {
   let wrapper;
   let header;
   let footer;
+  let body;
+  let sidebar;
+  let content;
 
   const updateWrapper = () => {
     wrapper = mount(DtRootLayout, {
@@ -29,6 +33,9 @@ describe('DtRootLayout Tests', () => {
 
     header = wrapper.find('[data-qa="dt-root-layout-header"]');
     footer = wrapper.find('[data-qa="dt-root-layout-footer"]');
+    body = wrapper.find('[data-qa="dt-root-layout-body"]');
+    sidebar = wrapper.find('[data-qa="dt-root-layout-sidebar"]');
+    content = wrapper.find('[data-qa="dt-root-layout-content"]');
   };
 
   beforeAll(() => {
@@ -57,6 +64,14 @@ describe('DtRootLayout Tests', () => {
       it('footer should exist', () => {
         expect(footer.exists()).toBe(true);
       });
+
+      it('sidebar should exist', () => {
+        expect(sidebar.exists()).toBe(true);
+      });
+
+      it('content should exist', () => {
+        expect(content.exists()).toBe(true);
+      });
     });
 
     describe('When slot content renders', () => {
@@ -67,15 +82,13 @@ describe('DtRootLayout Tests', () => {
       it('footer slot is passed down correctly', () => {
         expect(footer.text()).toBe(baseSlots.footer);
       });
-    });
 
-    describe('When dynamic inline styles are set', () => {
-      it('should set the header height', () => {
-        expect(header.element.style.getPropertyValue('height')).toBe(baseProps.headerHeight);
+      it('sidebar slot is passed down correctly', () => {
+        expect(sidebar.text()).toBe(baseSlots.sidebar);
       });
 
-      it('should set the footer height', () => {
-        expect(footer.element.style.getPropertyValue('height')).toBe(baseProps.footerHeight);
+      it('content slot is passed down correctly', () => {
+        expect(content.text()).toBe(baseSlots.default);
       });
     });
 
@@ -92,6 +105,21 @@ describe('DtRootLayout Tests', () => {
         expect(header.classes('d-root-layout__header--sticky')).toBe(true);
       });
     });
+
+    describe('When sidebarPosition is set to left', () => {
+      it('Has correct class', async () => {
+        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
+
+        expect(body.classes('d-root-layout__body--invert')).toBe(false);
+      });
+    });
+    describe('When sidebarPosition is set to right', () => {
+      it('Has correct class', async () => {
+        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
+
+        expect(body.classes('d-root-layout__body--invert')).toBe(false);
+      });
+    });
   });
 
   describe('Accessibility Tests', () => {
@@ -104,6 +132,18 @@ describe('DtRootLayout Tests', () => {
     describe('When footer is rendered', () => {
       it('Uses `footer` tag', () => {
         expect(footer.element.tagName).toBe('FOOTER');
+      });
+    });
+
+    describe('When sidebar is rendered', () => {
+      it('Uses `aside` tag', () => {
+        expect(sidebar.element.tagName).toBe('ASIDE');
+      });
+    });
+
+    describe('When content is rendered', () => {
+      it('Uses `main` tag', () => {
+        expect(content.element.tagName).toBe('MAIN');
       });
     });
   });
