@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/dialpad/dialtone-icons/compare/v3.2.0...v3.3.0) (2023-10-04)
+
+
+### Features
+
+* add attestation-outline, empty, video-settings, call-rejected, waveform icons ([#27](https://github.com/dialpad/dialtone-icons/issues/27)) ([195093f](https://github.com/dialpad/dialtone-icons/commit/195093f8e57d1e9351b2c750040afad2fa0e961a))
+
 # [3.2.0](https://github.com/dialpad/dialtone-icons/compare/v3.1.1...v3.2.0) (2023-09-21)
 
 
