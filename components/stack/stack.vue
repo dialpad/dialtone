@@ -25,7 +25,10 @@ export default {
     /**
      * Set this prop to the direction to stack the items.
      * You can override the default direction with 'default' key.
-     * All the undefined breakpoints will have 'default' value
+     * All the undefined breakpoints will have 'default' value.
+     * By default, for the column direction it will have `justify-content: flex-start`
+     * and for the row direction `align-items: center`. This can be overriden
+     * by utility classes.
      */
     direction: {
       type: [String, Object],
