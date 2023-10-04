@@ -1,3 +1,16 @@
+## [3.87.1](https://github.com/dialpad/dialtone-vue/compare/v3.87.0...v3.87.1) (2023-10-04)
+
+
+### Bug Fixes
+
+* address feedItemRow and feedItemPill css issues vue3 ([#1224](https://github.com/dialpad/dialtone-vue/issues/1224)) ([aa08b34](https://github.com/dialpad/dialtone-vue/commit/aa08b34210c49bfbedba4c8885e593ba40f521f3))
+* **Root Layout:** remove fixed height on header/footer ([#1231](https://github.com/dialpad/dialtone-vue/issues/1231)) ([3a6d9af](https://github.com/dialpad/dialtone-vue/commit/3a6d9af27f3dede8520be48473667447f6b7fd04))
+
+
+### Documentation
+
+* **Stack:** add new defaults for alignment - vue3 ([#1230](https://github.com/dialpad/dialtone-vue/issues/1230)) ([beb8baf](https://github.com/dialpad/dialtone-vue/commit/beb8baf7e95e8915130bd386fb227d4a2327c4f1))
+
 # [3.87.0](https://github.com/dialpad/dialtone-vue/compare/v3.86.4...v3.87.0) (2023-09-29)
 
 
