@@ -16,7 +16,7 @@
     "lint:docs": "markdownlint '**/*.mdx'",
     "prepublishOnly": "npm run build",
     "pretest": "npm run clean",
-    "release": "semantic-release --no-ci --extends ./release-local.config.cjs",
+    "release": "./scripts/release.sh",
     "start": "npm run storybook",
     "storybook": "STORYBOOK_ENV=development storybook dev -p 9010",
     "storybook:clean": "rm -rf ./storybook-static",
