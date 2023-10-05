@@ -6,7 +6,7 @@ const baseProps = {
   groupCount: 2,
   names: 'Jaqueline Nackos, Lori Smith',
   avatarFullName: 'Jaqueline Nackos',
-  avatarSrc: 'person.png',
+  avatarSrc: 'avatar1.png',
 };
 
 describe('DtRecipeGroupRow Tests', () => {

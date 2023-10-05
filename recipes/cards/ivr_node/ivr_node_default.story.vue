@@ -52,7 +52,7 @@
         <div class="d-d-flex d-ai-center d-gg8">
           <dt-avatar
             full-name="Person Avatar"
-            image-src="/common/assets/person.png"
+            :image-src="$attrs.defaultImage"
             seed="seed"
           />
           <p>Carolina Garcia Rodriguez</p>

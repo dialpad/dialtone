@@ -91,7 +91,7 @@
     >
       <template #video>
         <img
-          src="/common/assets/chatting-person-example.png"
+          :src="chattingPersonImage"
           alt="person avatar"
           class="callbox-image"
         >
@@ -462,6 +462,7 @@ import DtButton from '@/components/button/button.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtStack from '@/components/stack/stack.vue';
+import chattingPersonImage from '@/common/assets/chatting-person-example.png';
 
 export default {
   name: 'DtRecipeCallboxVariants',
@@ -472,6 +473,12 @@ export default {
      */
     'click',
   ],
+
+  data () {
+    return {
+      chattingPersonImage,
+    };
+  },
 };
 </script>
 

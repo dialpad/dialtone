@@ -4,7 +4,7 @@ import BannerDefault from './banner_default.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { argsData, argTypesData } from '../notice/notice.stories.js';
 
-import backgroundImage from '../../docs/assets/dialpad-gradient.png';
+import backgroundImage from '@/common/assets/dialpad-gradient.png';
 
 argTypesData.role = {
   table: {

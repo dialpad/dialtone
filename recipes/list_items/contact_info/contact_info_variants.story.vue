@@ -253,8 +253,8 @@ import DtRecipeContactInfo from './contact_info.vue';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 
-import avatar1 from './avatar.png';
-import avatar2 from './avatar2.png';
+import avatar1 from '@/common/assets/avatar1.png';
+import avatar2 from '@/common/assets/avatar2.png';
 
 export default {
   name: 'DtRecipeContactInfoVariants',

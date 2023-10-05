@@ -5,6 +5,8 @@ import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarVariantsTemplate from './avatar_variants.story.vue';
 import { action } from '@storybook/addon-actions';
 
+import defaultImage from '@/common/assets/avatar2.png';
+
 const ICONS_LIST = getIconNames();
 
 export const argsData = {
@@ -13,6 +15,7 @@ export const argsData = {
   presence: null,
   fullName: 'Jaqueline Nackos',
   imageAlt: 'image-alt',
+  imageSrc: defaultImage,
   seed: '',
   iconName: 'accessibility',
   iconSize: '500',
@@ -120,7 +123,6 @@ export const Default = {
       template: `<div class="d-d-flex"><story /></div>`,
     }),
   ],
-  args: { imageSrc: '/common/assets/person.png' },
 };
 
 export const Variants = {

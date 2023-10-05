@@ -5,7 +5,7 @@ import DtImageViewerDefaultTemplate from './image_viewer_default.story.vue';
 import DtImageViewerVariantsTemplate from './image_viewer_variants.story.vue';
 import { action } from '@storybook/addon-actions';
 
-import defaultImage from './test.jpg';
+import defaultImage from '@/common/assets/test.jpg';
 
 // Default Prop Values
 export const argsData = {
