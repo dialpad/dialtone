@@ -26,7 +26,7 @@
             :attrs="attrs"
             @click="emojiClicked(reaction)"
           >
-            <span class="d-mr4">
+            <span class="d-mr4 d-d-inline-flex">
               <dt-emoji
                 size="200"
                 :code="reaction.emojiUnicodeOrShortname"
@@ -102,7 +102,6 @@ export default {
     padding: var(--dt-space-300) var(--dt-space-400); // 4px 8px
     gap: var(--dt-space-300);
     border-radius: var(--dt-size-radius-500);
-    font-size: var(--dt-font-size-200);
     margin-bottom: 0;
     transition-delay: 0s;
     transition-duration: var(--td50);
