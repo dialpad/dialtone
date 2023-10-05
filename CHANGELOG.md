@@ -1,3 +1,15 @@
+# [2.100.0](https://github.com/dialpad/dialtone-vue/compare/v2.99.1...v2.100.0) (2023-10-05)
+
+
+### Bug Fixes
+
+* alignment for emoji and emoji row ([#1232](https://github.com/dialpad/dialtone-vue/issues/1232)) ([8a9afad](https://github.com/dialpad/dialtone-vue/commit/8a9afadb024b4aa3a58dc47a24b5250eee9fd3ba))
+
+
+### Features
+
+* update dialtone-icons ([92d5498](https://github.com/dialpad/dialtone-vue/commit/92d549847cabb8a4cbdd560f92cbe8c6baed89e0))
+
 ## [2.99.1](https://github.com/dialpad/dialtone-vue/compare/v2.99.0...v2.99.1) (2023-10-04)
 
 
