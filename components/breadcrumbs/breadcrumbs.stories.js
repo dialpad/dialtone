@@ -1,6 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtBreadcrumbs from './breadcrumbs.vue';
-import DtBreadcrumbItem from './breadcrumb_item.vue';
 
 import DtBreadcrumbsDefaultTemplate from './breadcrumbs_default.story.vue';
 import DtBreadcrumbsVariantsTemplate from './breadcrumbs_variants.story.vue';
@@ -48,7 +47,7 @@ export const argTypesData = {
     control: 'object',
     table: {
       defaultValue: {
-        summary: '{ url: string, label: string }[]',
+        summary: '{ href: string, label: string }[]',
       },
     },
   },
@@ -69,9 +68,6 @@ const DefaultTemplate = (args) =>
 const VariantsTemplate = (args) =>
   createTemplateFromVueFile(args, DtBreadcrumbsVariantsTemplate);
 
-const BreadcrumbItemTemplate = (args) =>
-  createTemplateFromVueFile(args, DtBreadcrumbItem);
-
 export const Default = {
   render: DefaultTemplate,
   args: {},
@@ -90,23 +86,6 @@ export const Variants = {
         rules: [
           {
             id: 'landmark-unique',
-            enabled: false,
-          },
-        ],
-      },
-    },
-  },
-};
-
-export const BreadcrumbItem = {
-  render: BreadcrumbItemTemplate,
-  args: {},
-  parameters: {
-    a11y: {
-      config: {
-        rules: [
-          {
-            id: 'listitem',
             enabled: false,
           },
         ],
