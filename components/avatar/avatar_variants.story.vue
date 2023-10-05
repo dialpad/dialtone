@@ -9,7 +9,7 @@
           :seed="seed"
           :size="size"
           full-name="Avatar Image"
-          image-src="/common/assets/person.png"
+          :image-src="imageSrc"
         />
       </div>
     </div>
@@ -48,7 +48,7 @@
           :size="size"
           full-name="Person avatar"
           presence="busy"
-          image-src="/common/assets/person.png"
+          :image-src="imageSrc"
         />
       </div>
     </div>
@@ -59,14 +59,14 @@
           :seed="seed"
           size="xl"
           full-name="Person avatar"
-          image-src="/common/assets/person.png"
+          :image-src="imageSrc"
           overlay-icon="hear"
         />
         <dt-avatar
           :seed="seed"
           size="xl"
           full-name="Person avatar"
-          image-src="/common/assets/person.png"
+          :image-src="imageSrc"
           overlay-text="+3"
         />
       </div>
@@ -77,7 +77,7 @@
         <dt-avatar
           :seed="seed"
           full-name="Person avatar"
-          image-src="/common/assets/person.png"
+          :image-src="imageSrc"
           clickable
         />
         <dt-avatar

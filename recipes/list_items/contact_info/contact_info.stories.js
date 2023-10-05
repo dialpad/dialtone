@@ -8,7 +8,7 @@ import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story.v
 import { AVATAR_SIZE_MODIFIERS } from '@/components/avatar';
 import { PRESENCE_STATES_LIST } from '@/components/presence';
 
-import avatarImage from './avatar.png';
+import avatarImage from '@/common/assets/avatar1.png';
 const iconsList = getIconNames();
 
 // Default Prop Values

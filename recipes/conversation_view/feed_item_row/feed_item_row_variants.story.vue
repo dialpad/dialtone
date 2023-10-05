@@ -100,7 +100,7 @@
           @focus="onFocus"
         >
           <dt-image-viewer
-            :image-src="require('@/common/assets/fry.gif')"
+            :image-src="fryImage"
             image-alt="Alt Text"
             close-aria-label="Close"
             image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
@@ -206,6 +206,8 @@ import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
 
+import fryImage from '@/common/assets/fry.gif';
+
 export default {
   name: 'DtRecipeFeedItemRowVariants',
   components: {
@@ -245,8 +247,8 @@ export default {
       ],
 
       hoverButtons: ['bell', 'living-thing', 'map-pin'],
-
       persons: ['Jim Halpert', 'Michael Scott', 'Pam'],
+      fryImage,
     };
   },
 };

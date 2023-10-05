@@ -5,11 +5,14 @@ import DtRecipeIvrNode from './ivr_node.vue';
 import DtRecipeIvrNodeDefaultTemplate from './ivr_node_default.story.vue';
 import { IVR_NODE_ICON_TYPES } from './ivr_node_constants';
 
+import defaultImage from '@/common/assets/avatar2.png';
+
 // Default Prop Values
 export const argsData = {
   onClick: action('click'),
   menuButtonAriaLabel: 'Node menu',
   isSelected: false,
+  defaultImage,
 };
 
 export const argTypesData = {
