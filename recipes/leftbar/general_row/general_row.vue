@@ -73,7 +73,7 @@
       >
         <dt-icon
           size="300"
-          name="activity"
+          name="waveform"
         />
       </div>
       <dt-tooltip
