@@ -47,5 +47,77 @@ ruleTester.run("deprecated-component", rule, {
                 }
             ],
         },
+        {
+            name: 'Deprecated DropdownMenu',
+            code: "import DropdownMenu from '../components/dropdown_menu';",
+            errors: [
+                {
+                    messageId: "deprecatedComponent"
+                }
+            ],
+        },
+        {
+            name: 'Deprecated DropdownMenu .vue',
+            code: "import DropdownMenu from '../components/dropdown_menu.vue';",
+            errors: [
+                {
+                    messageId: "deprecatedComponent"
+                }
+            ],
+        },
+        {
+            name: 'Deprecated BaseToggle',
+            code: "import BaseToggle from '../components/base_toggle';",
+            errors: [
+                {
+                    messageId: "deprecatedComponent"
+                }
+            ],
+        },
+        {
+            name: 'Deprecated BaseToggle .vue',
+            code: "import BaseToggle from '../components/base_toggle.vue';",
+            errors: [
+                {
+                    messageId: "deprecatedComponent"
+                }
+            ],
+        },
+        {
+            name: 'Deprecated BaseDatePicker',
+            code: "import BaseDatePicker from '../components/base_date_picker';",
+            errors: [
+                {
+                    messageId: "deprecatedComponent"
+                }
+            ],
+        },
+        {
+            name: 'Deprecated BaseDatePicker .vue',
+            code: "import BaseDatePicker from '../components/base_date_picker.vue';",
+            errors: [
+                {
+                    messageId: "deprecatedComponent"
+                }
+            ],
+        },
+        {
+            name: 'Deprecated Checkbox',
+            code: "import Checkbox from '../components/checkbox';",
+            errors: [
+                {
+                    messageId: "deprecatedComponent"
+                }
+            ],
+        },
+        {
+            name: 'Deprecated Checkbox .vue',
+            code: "import Checkbox from '../components/checkbox.vue';",
+            errors: [
+                {
+                    messageId: "deprecatedComponent"
+                }
+            ],
+        },
     ],
 });
