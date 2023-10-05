@@ -34,7 +34,7 @@
     "CHANGELOG.json"
   ],
   "dependencies": {
-    "@dialpad/dialtone-icons": "^3.2.0",
+    "@dialpad/dialtone-icons": "^3.3.0",
     "@tiptap/extension-code-block": "^2.0.3",
     "@tiptap/extension-document": "^2.0.3",
     "@tiptap/extension-hard-break": "^2.0.3",
