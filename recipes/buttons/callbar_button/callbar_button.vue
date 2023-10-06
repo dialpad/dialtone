@@ -16,13 +16,13 @@
           :label-class="callbarButtonTextClass"
           :width="buttonWidth"
           :class="callbarButtonClass"
-          v-on="$listeners"
+          v-bind="$attrs"
+          v-on="callbarButtonListeners"
         >
           <slot />
-          <slot
-            slot="icon"
-            name="icon"
-          />
+          <template #icon>
+            <slot name="icon" />
+          </template>
         </dt-button>
       </span>
     </template>
@@ -41,7 +41,7 @@ export default {
 
   components: { DtButton, DtTooltip },
 
-  inheritAttrs: true,
+  inheritAttrs: false,
 
   props: {
     /**
@@ -191,6 +191,13 @@ export default {
         return this.importance;
       }
       return this.circle ? 'outlined' : 'clear';
+    },
+
+    callbarButtonListeners () {
+      return {
+        ...this.$listeners,
+        click: (event) => this.$emit('click', event),
+      };
     },
   },
 };

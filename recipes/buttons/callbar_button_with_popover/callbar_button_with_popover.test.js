@@ -4,7 +4,9 @@ import DtRecipeCallbarButton from '../callbar_button/callbar_button.vue';
 import DtPopover from '@/components/popover/popover.vue';
 
 // Constants
-const basePropsData = {};
+const basePropsData = {
+  arrowButtonLabel: 'arrowButton',
+};
 
 describe('DtRecipeCallbarButtonWithPopover Tests', () => {
   let testContext;
@@ -156,7 +158,6 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
           _setWrappers();
 
           await button.find('button').trigger('click');
-          await wrapper.vm.$nextTick();
 
           const clickEvents = wrapper.emitted().click;
           expect(clickEvents.length).toBe(1);
