@@ -16,11 +16,13 @@
           :label-class="callbarButtonTextClass"
           :width="buttonWidth"
           :class="callbarButtonClass"
+          v-bind="$attrs"
+          v-on="callbarButtonListeners"
         >
           <slot />
-          <slot
-            name="icon"
-          />
+          <template #icon>
+            <slot name="icon" />
+          </template>
         </dt-button>
       </span>
     </template>
@@ -29,18 +31,17 @@
 </template>
 
 <script>
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 import DtButton from '@/components/button/button.vue';
 import DtTooltip from '@/components/tooltip/tooltip.vue';
-import utils from '@/common/utils';
-
-import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
+import utils, { extractVueListeners } from '@/common/utils';
 
 export default {
   name: 'DtRecipeCallbarButton',
 
   components: { DtButton, DtTooltip },
 
-  inheritAttrs: true,
+  inheritAttrs: false,
 
   props: {
     /**
@@ -142,6 +143,16 @@ export default {
 
   },
 
+  emits: [
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
+
   computed: {
     callbarButtonClass () {
       return [
@@ -150,7 +161,6 @@ export default {
         'd-px0',
         {
           'dt-recipe-callbar-button--circle': this.circle,
-          'd-btn--icon-only': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
           'd-btn--disabled d-bgc-transparent': this.disabled,
@@ -182,6 +192,13 @@ export default {
       }
       return this.circle ? 'outlined' : 'clear';
     },
+
+    callbarButtonListeners () {
+      return {
+        ...extractVueListeners(this.$attrs),
+        click: (event) => this.$emit('click', event),
+      };
+    },
   },
 };
 </script>
@@ -202,10 +219,6 @@ export default {
 
 .dt-recipe-callbar-button--circle.d-btn[disabled] {
   border-color: unset;
-}
-
-.dt-recipe-callbar-button--circle.d-btn--icon-only .d-btn__label {
-  display: none;
 }
 
 .dt-recipe-callbar-button--active,

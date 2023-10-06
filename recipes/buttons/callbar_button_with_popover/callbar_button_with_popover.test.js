@@ -133,7 +133,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
       it(
         'should trigger the "arrow-click" event when no listener attached',
         async () => {
-          await button.trigger('click');
+          await button.find('button').trigger('click');
           const arrowClickEvents = wrapper.emitted()['arrow-click'];
           expect(arrowClickEvents.length).toBe(1);
         },
@@ -144,7 +144,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
         attrs = { onClick: clickStub };
         _setWrappers();
 
-        await button.trigger('click');
+        await button.find('button').trigger('click');
 
         const clickEvents = wrapper.emitted().click;
         expect(clickEvents.length).toBe(1);
