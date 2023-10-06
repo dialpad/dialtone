@@ -1,255 +1,178 @@
 import { mount } from '@vue/test-utils';
 import DtToast from './toast.vue';
+import { TOAST_MIN_DURATION } from './toast_constants';
 import DtNoticeAction from '../notice/notice_action.vue';
 import DtNoticeContent from '../notice/notice_content.vue';
 import DtNoticeIcon from '../notice/notice_icon.vue';
-import {
-  itBehavesLikeDoesNotHaveClass,
-  itBehavesLikeHasCorrectClass,
-} from '../../tests/shared_examples/classes';
-import {
-  itBehavesLikeFailsCustomPropValidation,
-  itBehavesLikePassesCustomPropValidation,
-} from '../../tests/shared_examples/validation';
-import {
-  itBehavesLikePassesChildProp,
-} from '../../tests/shared_examples/extendability';
-import { TOAST_MIN_DURATION } from './toast_constants';
 
-// Constants
-const baseProps = {
-  title: '',
-};
-const baseSlotsData = {};
+const baseProps = { title: '', show: true };
+const baseSlots = {};
+
+let mockProps = {};
+let mockSlots = {};
 
 describe('DtToast Tests', () => {
-  // Wrappers
   let wrapper;
   let toast;
   let actionChild;
   let contentChild;
   let iconChild;
 
-  // Environment
-  let props = baseProps;
-  let attrs = {};
-  let slots = baseSlotsData;
+  const updateWrapper = () => {
+    wrapper = mount(DtToast, {
+      props: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+    });
 
-  // Helpers
-  const _setChildWrappers = () => {
     toast = wrapper.find('[data-qa="dt-toast"]');
     actionChild = wrapper.findComponent(DtNoticeAction);
     contentChild = wrapper.findComponent(DtNoticeContent);
     iconChild = wrapper.findComponent(DtNoticeIcon);
   };
 
-  const _setWrappers = () => {
-    wrapper = mount(DtToast, {
-      props,
-      attrs,
-      slots,
-    });
-  };
+  beforeEach(() => {
+    updateWrapper();
+  });
 
-  const _showToast = async () => {
-    await wrapper.setProps({ show: true });
-    await wrapper.vm.$nextTick();
-    _setChildWrappers();
-  };
-
-  // Teardown
-  afterEach(function () {
-    props = { ...baseProps };
-    attrs = {};
-    slots = { ...baseSlotsData };
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
     describe('When the toast renders', () => {
-      // Test Setup
-      beforeEach(async () => {
-        _setWrappers();
-        await _showToast();
+      it('should exist', () => {
+        expect(wrapper.exists()).toBeTruthy();
       });
 
-      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
-      it('should render the toast', () => { expect(toast.exists()).toBe(true); });
+      it('should render the toast', () => {
+        expect(toast.exists()).toBe(true);
+      });
     });
 
     describe('When the toast renders with slots', () => {
-      // Test Setup
-      beforeEach(async () => {
-        slots = {
-          ...baseSlotsData,
+      beforeEach(() => {
+        mockSlots = {
           default: 'default slot content',
           action: 'action slot content',
           icon: 'icon slot content',
         };
-        _setWrappers();
-        await _showToast();
+
+        updateWrapper();
       });
 
       it('action slot is passed down correctly', () => {
-        expect(actionChild.text()).toBe(slots.action);
+        expect(actionChild.text()).toBe(mockSlots.action);
       });
 
       it('default slot is passed down correctly', () => {
-        expect(contentChild.text()).toBe(slots.default);
+        expect(contentChild.text()).toBe(mockSlots.default);
       });
 
       it('icon slot is passed down correctly', () => {
-        expect(iconChild.text()).toBe(slots.icon);
+        expect(iconChild.text()).toBe(mockSlots.icon);
       });
     });
 
     describe('When the toast renders with props', () => {
-      // Test Setup
-      beforeEach(async () => {
-        props = {
-          ...baseProps,
+      beforeEach(() => {
+        mockProps = {
           titleId: 'titleId prop content',
           contentId: 'contentId prop content',
           title: '',
           message: 'message prop content',
           hideClose: true,
         };
-        _setWrappers();
-        await _showToast();
+
+        updateWrapper();
       });
 
       it('titleId prop is passed down correctly', () => {
-        itBehavesLikePassesChildProp(contentChild, 'titleId', props.titleId);
+        expect(contentChild.props('titleId')).toBe(mockProps.titleId);
       });
 
       it('contentId prop is passed down correctly', () => {
-        itBehavesLikePassesChildProp(contentChild, 'contentId', props.contentId);
+        expect(contentChild.props('contentId')).toBe(mockProps.contentId);
       });
 
       it('title prop is passed down correctly', () => {
-        itBehavesLikePassesChildProp(contentChild, 'title', props.title);
+        expect(contentChild.props('title')).toBe(mockProps.title);
       });
 
       it('message prop is passed down correctly', () => {
-        expect(contentChild.text()).toBe(props.message);
+        expect(contentChild.text()).toBe(mockProps.message);
       });
 
       it('hideClose prop is passed down correctly', () => {
-        itBehavesLikePassesChildProp(actionChild, 'hideClose', props.hideClose);
+        expect(actionChild.props('hideClose')).toBe(mockProps.hideClose);
       });
     });
 
     describe('When kind is not specified', () => {
-      // Test Setup
-      beforeEach(async () => {
-        _setWrappers();
-        await _showToast();
-      });
-
       it('should use the default kind', () => {
-        itBehavesLikeHasCorrectClass(toast, 'd-toast--base');
+        expect(toast.classes('d-toast--base')).toBe(true);
       });
     });
 
     describe('When kind is set to error', () => {
-      // Test Setup
-      beforeEach(async () => {
-        props = { ...baseProps, kind: 'error' };
-        _setWrappers();
-        await _showToast();
-      });
-
       it('has correct class', () => {
-        itBehavesLikeHasCorrectClass(toast, 'd-toast--error');
+        mockProps = { kind: 'error' };
+
+        updateWrapper();
+
+        expect(toast.classes('d-toast--error')).toBe(true);
       });
     });
 
     describe('When important is not provided', () => {
-      // Test Setup
-      beforeEach(async () => {
-        _setWrappers();
-        await _showToast();
-      });
-
       it('doesnt have important class', () => {
-        itBehavesLikeDoesNotHaveClass(toast, 'd-toast--important');
+        expect(toast.classes('d-toast--important')).toBe(false);
       });
     });
 
     describe('When important is true', () => {
-      // Test Setup
-      beforeEach(async () => {
-        props = { ...baseProps, important: true };
-        _setWrappers();
-        await _showToast();
-      });
-
       it('has correct class', () => {
-        itBehavesLikeHasCorrectClass(toast, 'd-toast--important');
+        mockProps = { important: true };
+
+        updateWrapper();
+
+        expect(toast.classes('d-toast--important')).toBe(true);
       });
     });
 
     describe('When duration is not provided', () => {
-      // Test Setup
-      beforeEach(() => {
-        _setWrappers();
-        vi.useFakeTimers();
-      });
-
-      afterEach(() => {
-        vi.useRealTimers();
-      });
-
-      it('should show the toast', async () => {
-        await _showToast();
-
-        expect(toast.exists()).toBe(true);
-
-        vi.runAllTimers();
-        await wrapper.vm.$nextTick();
-        _setChildWrappers();
-
+      it('should show the toast', () => {
         expect(toast.exists()).toBe(true);
       });
     });
 
     describe('When duration is provided', () => {
-      // Test Environment
-      const duration = 6500;
-
-      // Test Setup
-      beforeEach(() => {
-        props = { ...baseProps, duration };
-        _setWrappers();
+      it('should close the toast after duration time is finished', async () => {
         vi.useFakeTimers();
-      });
-
-      afterEach(() => {
-        vi.useRealTimers();
-      });
-
-      it(
-        'should close the toast after duration time is finished',
-        async () => {
-          await _showToast();
-
-          expect(toast.exists()).toBe(true);
-
-          vi.runAllTimers();
-          await wrapper.vm.$nextTick();
-          _setChildWrappers();
-
-          expect(toast.exists()).toBe(false);
-        },
-      );
-
-      it('should close the toast with close method', async () => {
-        await _showToast();
 
         expect(toast.exists()).toBe(true);
 
-        await wrapper.setProps({ show: false });
+        mockProps = { show: true, duration: 6500 };
+
+        updateWrapper();
+
+        vi.runAllTimers();
+
         await wrapper.vm.$nextTick();
-        _setChildWrappers();
+
+        toast = wrapper.find('[data-qa="dt-toast"]');
+
+        expect(toast.exists()).toBe(false);
+
+        vi.useRealTimers();
+      });
+
+      it('should close the toast with close method', async () => {
+        expect(toast.exists()).toBe(true);
+
+        await wrapper.setProps({ show: false });
+
+        toast = wrapper.find('[data-qa="dt-toast"]');
 
         expect(toast.exists()).toBe(false);
       });
@@ -258,17 +181,10 @@ describe('DtToast Tests', () => {
 
   describe('Accessibility Tests', () => {
     describe('When rendered with default content', () => {
-      // Test Environment
-      const role = DtToast.props.role.default;
-
-      // Test Setup
-      beforeEach(async () => {
-        _setWrappers();
-        await _showToast();
-      });
+      const MOCK_ROLE = DtToast.props.role.default;
 
       it('shows correct default role', () => {
-        expect(contentChild.attributes('role')).toBe(role);
+        expect(contentChild.attributes('role')).toBe(MOCK_ROLE);
       });
 
       it('should have aria-hidden set to false when toast is shown', () => {
@@ -277,95 +193,86 @@ describe('DtToast Tests', () => {
     });
 
     describe('When role is alert', () => {
-      // Test Setup
-      beforeEach(async () => {
-        props = { ...baseProps, role: 'alert' };
-        _setWrappers();
-        await _showToast();
-      });
-
       it('shows correct role', () => {
+        mockProps = { role: 'alert' };
+
+        updateWrapper();
+
         expect(contentChild.attributes('role')).toBe('alert');
       });
     });
   });
 
   describe('Validation Tests', () => {
-    // Test Setup
-    beforeEach(() => {
-      _setWrappers();
-    });
-
     describe('Role Validator', () => {
-      // Test Environment
-      const prop = DtToast.props.role;
+      const MOCK_PROP = DtToast.props.role;
 
       describe('When provided role is in TOAST_ROLES', () => {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+        it('passes custom prop validation', () => {
+          expect(MOCK_PROP.validator(MOCK_PROP.default)).toBe(true);
+        });
       });
 
       describe('When provided role is not in TOAST_ROLES', () => {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_ROLE`);
+        it('fails custom prop validation', () => {
+          expect(MOCK_PROP.validator(`INVALID_ROLE`)).toBe(false);
+        });
       });
     });
 
     describe('Kind Validator', () => {
-      // Test Environment
-      const prop = DtToast.props.kind;
+      const MOCK_PROP = DtToast.props.kind;
 
       describe('When provided kind is in NOTICE_KINDS', () => {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+        it('passes custom prop validation', () => {
+          expect(MOCK_PROP.validator(MOCK_PROP.default)).toBe(true);
+        });
       });
 
       describe('When provided kind is not in NOTICE_KINDS', () => {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_KIND`);
+        it('fails custom prop validation', () => {
+          expect(MOCK_PROP.validator(`INVALID_KIND`)).toBe(false);
+        });
       });
     });
 
     describe('Duration Validator', () => {
-      // Test Environment
-      const prop = DtToast.props.duration;
-      const duration = TOAST_MIN_DURATION;
+      const MOCK_PROP = DtToast.props.duration;
+      const MOCK_DURATION = TOAST_MIN_DURATION;
 
       describe('When provided duration is a valid duration', () => {
-        itBehavesLikePassesCustomPropValidation(prop, duration);
+        it('passes custom prop validation', () => {
+          expect(MOCK_PROP.validator(MOCK_DURATION)).toBe(true);
+        });
       });
 
       describe('When provided duration is not a valid duration', () => {
-        itBehavesLikeFailsCustomPropValidation(prop, duration - 1);
+        it('fails custom prop validation', () => {
+          expect(MOCK_PROP.validator(MOCK_DURATION - 1)).toBe(false);
+        });
       });
     });
   });
 
   describe('Extendability Tests', () => {
-    // Test Environment
-    let element;
-    let propName;
-    const propValue = {
+    let MOCK_ELEMENT;
+    let MOCK_PROP_NAME;
+    const MOCK_PROP_VALUE = {
       ariaLabel: 'close',
     };
 
-    // Helpers
-    const _setupChildPropsTest = async (childPropName) => {
-      props[childPropName] = propValue;
-      _setWrappers();
-      await _showToast();
-    };
-
-    // Shared Examples
-    const itBehavesLikePassesChildPropLocal = () => {
-      it('should pass down provided child prop', () => {
-        itBehavesLikePassesChildProp(element, propName, propValue);
-      });
-    };
-
     describe('When close button child props are provided', () => {
-      beforeEach(async () => {
-        propName = 'closeButtonProps';
-        await _setupChildPropsTest(propName);
-        element = actionChild;
+      it('should pass down provided child prop', () => {
+        MOCK_PROP_NAME = 'closeButtonProps';
+
+        mockProps = { closeButtonProps: MOCK_PROP_VALUE };
+
+        updateWrapper();
+
+        MOCK_ELEMENT = actionChild;
+
+        expect(MOCK_ELEMENT.props(MOCK_PROP_NAME)).toStrictEqual(MOCK_PROP_VALUE);
       });
-      itBehavesLikePassesChildPropLocal();
     });
   });
 });
