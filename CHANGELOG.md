@@ -1,3 +1,20 @@
+## [2.100.1](https://github.com/dialpad/dialtone-vue/compare/v2.100.0...v2.100.1) (2023-10-06)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix story configuration of BreadcrumbItem ([#1246](https://github.com/dialpad/dialtone-vue/issues/1246)) ([3ce325d](https://github.com/dialpad/dialtone-vue/commit/3ce325d2357962cf185d75119257070eaf5c144a))
+* **Callbar Button:** slot not working ([#1242](https://github.com/dialpad/dialtone-vue/issues/1242)) ([0b5d67f](https://github.com/dialpad/dialtone-vue/commit/0b5d67f12e4b55ac1b1ca6f8ec0f78cfdff5357e))
+* **General Row:** set voice chat icon to waveform ([3812434](https://github.com/dialpad/dialtone-vue/commit/3812434a6a820de4522030f0f6e3f2e8ed27bda1))
+* href on link ([#1244](https://github.com/dialpad/dialtone-vue/issues/1244)) ([9245081](https://github.com/dialpad/dialtone-vue/commit/9245081521cf9ceadfe5756113d683911c610213))
+* **Root Layout:** use inner child width for sidebar ([#1251](https://github.com/dialpad/dialtone-vue/issues/1251)) ([9e55f6f](https://github.com/dialpad/dialtone-vue/commit/9e55f6f8679182cd7c11e7ae695b451bf61d204d))
+
+
+### Documentation
+
+* **Avatar:** missing examples ([#1238](https://github.com/dialpad/dialtone-vue/issues/1238)) ([163ab02](https://github.com/dialpad/dialtone-vue/commit/163ab022d7c56749c73af735f98a952bf982dcb2))
+* fix avatar images broken ([#1234](https://github.com/dialpad/dialtone-vue/issues/1234)) ([d90d890](https://github.com/dialpad/dialtone-vue/commit/d90d8905ef1dfe625140825c42e707fc1f4724e8))
+
 # [2.100.0](https://github.com/dialpad/dialtone-vue/compare/v2.99.1...v2.100.0) (2023-10-05)
 
 
