@@ -4,13 +4,10 @@
     :body-class="bodyClass"
     :header-class="headerClass"
     :header-sticky="headerSticky"
-    :header-height="headerHeight"
     :content-class="contentClass"
     :sidebar-class="sidebarClass"
     :sidebar-position="sidebarPosition"
-    :sidebar-width="sidebarWidth"
     :footer-class="footerClass"
-    :footer-height="footerHeight"
     :fixed="fixed"
     :responsive-breakpoint="responsiveBreakpoint"
   >
