@@ -42,13 +42,13 @@
       <h2>Presence</h2>
       <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
-          v-for="size in avatarSizes"
-          :key="`presence-${size}`"
+          v-for="state in AVATAR_PRESENCE_STATES"
+          :key="`presence-${state}`"
           :seed="seed"
-          :size="size"
+          size="md"
           full-name="Person avatar"
-          presence="busy"
           :image-src="imageSrc"
+          :presence="state"
         />
       </div>
     </div>
@@ -77,12 +77,6 @@
         <dt-avatar
           :seed="seed"
           full-name="Person avatar"
-          :image-src="imageSrc"
-          clickable
-        />
-        <dt-avatar
-          :seed="seed"
-          full-name="Person avatar"
           clickable
         />
         <dt-avatar
@@ -91,6 +85,33 @@
           aria-label="user icon avatar"
           clickable
         />
+        <dt-avatar
+          :seed="seed"
+          full-name="Person avatar"
+          :image-src="imageSrc"
+          clickable
+        />
+      </div>
+    </div>
+    <div>
+      <h2>Group</h2>
+      <div class="d-flow16 d-d-flex">
+        <dt-avatar
+          :seed="seed"
+          full-name="Person avatar"
+          group="3"
+        />
+        <dt-avatar
+          :seed="seed"
+          icon-name="user"
+          group="10"
+        />
+        <dt-avatar
+          :seed="seed"
+          full-name="Person avatar"
+          :image-src="imageSrc"
+          group="100"
+        />
       </div>
     </div>
   </div>
@@ -98,7 +119,7 @@
 
 <script>
 import DtAvatar from './avatar.vue';
-import { AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
+import { AVATAR_PRESENCE_STATES, AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
 
 export default {
   name: 'DtAvatarVariants',
@@ -107,6 +128,12 @@ export default {
     return {
       avatarSizes: Object.keys(AVATAR_SIZE_MODIFIERS),
     };
+  },
+
+  computed: {
+    AVATAR_PRESENCE_STATES () {
+      return AVATAR_PRESENCE_STATES;
+    },
   },
 };
 </script>
