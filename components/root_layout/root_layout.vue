@@ -7,7 +7,7 @@
       :class="['d-root-layout__header', { 'd-root-layout__header--sticky': headerSticky }, headerClass]"
       data-qa="dt-root-layout-header"
     >
-      <!-- @slot Slot for header content be sure to set a height on the element inside this
+      <!-- @slot Slot for header content, be sure to set a height on the element inside this
         if you want a fixed height. -->
       <slot name="header" />
     </header>
@@ -19,10 +19,9 @@
       <aside
         ref="root-layout-sidebar"
         :class="['d-root-layout__sidebar', { 'd-root-layout__sidebar--sticky': fixed }, sidebarClass]"
-        :style="{ 'flex-basis': sidebarWidth }"
         data-qa="dt-root-layout-sidebar"
       >
-        <!-- @slot Slot for the sidebar -->
+        <!-- @slot Slot for sidebar content, be sure to set a width on the element within this. -->
         <slot name="sidebar" />
       </aside>
       <main
@@ -39,7 +38,7 @@
       :class="['d-root-layout__footer', footerClass]"
       data-qa="dt-root-layout-footer"
     >
-      <!-- @slot Slot for footer content be sure to set a height on the element inside this
+      <!-- @slot Slot for footer content, be sure to set a height on the element inside this
         if you want a fixed height. -->
       <slot name="footer" />
     </footer>
@@ -116,8 +115,7 @@ export default {
     },
 
     /**
-     * The width of the sidebar
-     * Possible units rem|px|%|em
+     * DEPRECATED: set the height of the inner element instead.
      */
     sidebarWidth: {
       type: String,
