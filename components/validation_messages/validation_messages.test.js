@@ -1,215 +1,199 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './validation_messages.vue';
 import {
   setFormattedValidationMessages,
   addFormattedValidationMessage,
 } from '../../tests/helpers/validation_messages';
-import {
-  itBehavesLikePassesCustomPropValidation,
-  itBehavesLikeFailsCustomPropValidation,
-} from '../../tests/shared_examples/validation';
 
-// Test Constants
-const baseProps = {};
-const baseValidationMessages = [{
+const MOCK_BASE_VALIDATION_MESSAGES = [{
   message: 'Error',
   type: VALIDATION_MESSAGE_TYPES.ERROR,
 }];
 
+let MOCK_VALIDATION_MESSAGES;
+
+const baseProps = {};
+
+let mockProps = {};
+
 describe('Validation Messages Tests', () => {
-  // Wrappers
   let wrapper;
   let messages;
 
-  // Test Environment
-  let props = baseProps;
-  let attrs = {};
-  let validationMessages;
-
-  // Helpers
-  const _setWrappers = () => {
-    wrapper = shallowMount(DtValidationMessages, {
-      props,
-      attrs,
+  const updateWrapper = () => {
+    wrapper = mount(DtValidationMessages, {
+      props: { ...baseProps, ...mockProps },
     });
+
     messages = wrapper.findAll('[data-qa="validation-message"]');
   };
 
-  // Test Teardown
-  afterEach(function () {
-    props = baseProps;
-    attrs = {};
+  beforeEach(() => {
+    updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
   });
 
   describe('Presentation Tests', () => {
-    // Shared Examples
-    const itBehavesLikeHasNoVisibleValidationMessages = () => {
-      it(
-        'should not have any visible validation messages',
-        () => { expect(messages.length).toBe(0); },
-      );
-    };
-
-    const itBehavesLikeHasValidationMessages = (validationMessagesVisible, firstVisibleValidationMessage) => {
-      it(
-        'should have expected number of visible validation messages',
-        () => {
-          expect(messages.length).toBe(validationMessagesVisible);
-        },
-      );
-
-      it('should have matching first validation message', () => {
-        expect(messages.at(0).text()).toBe(firstVisibleValidationMessage);
-      });
-    };
-
     describe('When there is a success validation message', () => {
-      // Test Environment
-      const successValidationMessage = 'Success';
+      const MOCK_SUCCESS_VALIDATION_MESSAGE = 'Success';
 
-      // Test Setup
       beforeEach(() => {
-        validationMessages = setFormattedValidationMessages(VALIDATION_MESSAGE_TYPES.SUCCESS, successValidationMessage);
+        MOCK_VALIDATION_MESSAGES = setFormattedValidationMessages(
+          VALIDATION_MESSAGE_TYPES.SUCCESS,
+          MOCK_SUCCESS_VALIDATION_MESSAGE);
       });
 
       describe('When the radio group renders', () => {
-        // Test Setup
         beforeEach(() => {
-          props = { ...baseProps, validationMessages };
-          _setWrappers();
+          mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES };
+
+          updateWrapper();
         });
 
-        itBehavesLikeHasValidationMessages(1, successValidationMessage);
+        it('should have expected number of visible validation messages', () => {
+          expect(messages.length).toBe(1);
+        });
+
+        it('should have matching first validation message', () => {
+          expect(messages.at(0).text()).toBe(MOCK_SUCCESS_VALIDATION_MESSAGE);
+        });
       });
 
       describe('When validation messages are hidden', () => {
-        // Test Setup
-        beforeEach(() => {
-          props = { ...baseProps, validationMessages, showMessages: false };
-        });
-
         describe('When the radio group renders', () => {
-          // Test Setup
-          beforeEach(() => { _setWrappers(); });
+          it('should not have any visible validation messages', () => {
+            mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES, showMessages: false };
 
-          itBehavesLikeHasNoVisibleValidationMessages();
+            updateWrapper();
+
+            expect(messages.length).toBe(0);
+          });
         });
       });
 
       describe('When there is also a warning validation message', () => {
-        // Test Environment
-        const warningValidationMessage = 'Warning';
+        const MOCK_WARNING_VALIDATION_MESSAGE = 'Warning';
 
-        // Test Setup
         beforeEach(() => {
-          validationMessages = addFormattedValidationMessage(
-            validationMessages,
+          MOCK_VALIDATION_MESSAGES = addFormattedValidationMessage(
+            MOCK_VALIDATION_MESSAGES,
             VALIDATION_MESSAGE_TYPES.WARNING,
-            warningValidationMessage,
+            MOCK_WARNING_VALIDATION_MESSAGE,
           );
         });
 
         describe('When the radio group renders', () => {
-          // Test Setup
           beforeEach(() => {
-            props = { ...baseProps, validationMessages };
-            _setWrappers();
+            mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES };
+
+            updateWrapper();
           });
 
-          itBehavesLikeHasValidationMessages(1, warningValidationMessage);
+          it('should have expected number of visible validation messages', () => {
+            expect(messages.length).toBe(1);
+          });
+
+          it('should have matching first validation message', () => {
+            expect(messages.at(0).text()).toBe(MOCK_WARNING_VALIDATION_MESSAGE);
+          });
         });
 
         describe('When there is also an error validation message', () => {
-          // Test Environment
-          const errorValidationMessage = 'Error';
+          const MOCK_ERROR_VALIDATION_MESSAGE = 'Error';
 
-          // Test Setup
           beforeEach(() => {
-            validationMessages = addFormattedValidationMessage(
-              validationMessages,
+            MOCK_VALIDATION_MESSAGES = addFormattedValidationMessage(
+              MOCK_VALIDATION_MESSAGES,
               VALIDATION_MESSAGE_TYPES.ERROR,
-              errorValidationMessage,
+              MOCK_ERROR_VALIDATION_MESSAGE,
             );
           });
 
           describe('When the radio group renders', () => {
-            // Test Setup
             beforeEach(() => {
-              props = { ...baseProps, validationMessages };
-              _setWrappers();
+              mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES };
+
+              updateWrapper();
             });
 
-            itBehavesLikeHasValidationMessages(1, errorValidationMessage);
+            it('should have expected number of visible validation messages', () => {
+              expect(messages.length).toBe(1);
+            });
+
+            it('should have matching first validation message', () => {
+              expect(messages.at(0).text()).toBe(MOCK_ERROR_VALIDATION_MESSAGE);
+            });
           });
         });
       });
     });
 
     describe('When there are malformed validation messages', () => {
-      // Test Environment
-      const emptyValidationMessage = '';
+      const MOCK_EMPTY_VALIDATION_MESSAGE = '';
 
-      // Test Setup
       beforeEach(() => {
-        validationMessages = setFormattedValidationMessages(VALIDATION_MESSAGE_TYPES.WARNING, emptyValidationMessage);
+        MOCK_VALIDATION_MESSAGES = setFormattedValidationMessages(
+          VALIDATION_MESSAGE_TYPES.WARNING,
+          MOCK_EMPTY_VALIDATION_MESSAGE);
       });
 
       describe('When there is a warning validation message with an empty message', () => {
-        // Test Setup
-        beforeEach(() => {
-          props = { ...baseProps, validationMessages };
-          _setWrappers();
-        });
+        it('should not have any visible validation messages', () => {
+          mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES };
 
-        itBehavesLikeHasNoVisibleValidationMessages();
+          updateWrapper();
+
+          expect(messages.length).toBe(0);
+        });
       });
 
       describe('When there is also a correct success validation message', () => {
-        // Test Environment
-        const successValidationMessage = 'Success';
-
-        // Test Setup
-        beforeEach(() => {
-          validationMessages = addFormattedValidationMessage(
-            validationMessages,
-            VALIDATION_MESSAGE_TYPES.SUCCESS,
-            successValidationMessage,
-          );
-        });
-
         describe('When the validation message renders', () => {
-          // Test Setup
-          beforeEach(() => {
-            props = { ...baseProps, validationMessages };
-            _setWrappers();
-          });
+          it('should not have any visible validation messages', () => {
+            const MOCK_SUCCESS_VALIDATION_MESSAGE = 'Success';
 
-          itBehavesLikeHasNoVisibleValidationMessages();
+            MOCK_VALIDATION_MESSAGES = addFormattedValidationMessage(
+              MOCK_VALIDATION_MESSAGES,
+              VALIDATION_MESSAGE_TYPES.SUCCESS,
+              MOCK_SUCCESS_VALIDATION_MESSAGE,
+            );
+
+            mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES };
+
+            updateWrapper();
+
+            expect(messages.length).toBe(0);
+          });
         });
       });
 
       describe('When there is also a correct warning validation message', () => {
-        // Test Environment
-        const warningValidationMessage = 'Warning';
-
-        // Test Setup
-        beforeEach(() => {
-          validationMessages = addFormattedValidationMessage(
-            validationMessages,
-            VALIDATION_MESSAGE_TYPES.WARNING,
-            warningValidationMessage,
-          );
-        });
-
         describe('When the validation message renders', () => {
-          // Test Setup
+          const MOCK_WARNING_VALIDATION_MESSAGE = 'Warning';
+
           beforeEach(() => {
-            props = { ...baseProps, validationMessages };
-            _setWrappers();
+            MOCK_VALIDATION_MESSAGES = addFormattedValidationMessage(
+              MOCK_VALIDATION_MESSAGES,
+              VALIDATION_MESSAGE_TYPES.WARNING,
+              MOCK_WARNING_VALIDATION_MESSAGE,
+            );
+
+            mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES };
+
+            updateWrapper();
           });
 
-          itBehavesLikeHasValidationMessages(1, warningValidationMessage);
+          it('should have expected number of visible validation messages', () => {
+            expect(messages.length).toBe(1);
+          });
+
+          it('should have matching first validation message', () => {
+            expect(messages.at(0).text()).toBe(MOCK_WARNING_VALIDATION_MESSAGE);
+          });
         });
       });
     });
@@ -217,19 +201,17 @@ describe('Validation Messages Tests', () => {
 
   describe('Accessibility Tests', () => {
     describe('When there is a validation message', () => {
-      // Test Setup
       beforeEach(() => {
-        props = { ...baseProps, validationMessages: baseValidationMessages };
+        mockProps = { validationMessages: MOCK_BASE_VALIDATION_MESSAGES };
+
+        updateWrapper();
       });
 
       describe('When validation messages are shown', () => {
-        // Test Setup
-        beforeEach(() => { _setWrappers(); });
+        it('has a status role', () => {
+          expect(messages.at(0).attributes('role')).toBe('status');
+        });
 
-        it(
-          'has a status role',
-          () => { expect(messages.at(0).attributes('role')).toBe('status'); },
-        );
         it('has aria-live set to polite', () => {
           expect(messages.at(0).attributes('aria-live')).toBe('polite');
         });
@@ -239,13 +221,16 @@ describe('Validation Messages Tests', () => {
 
   describe('Validation Tests', () => {
     describe('When there are validation messages', () => {
-      // Test Environment
-      const prop = DtValidationMessages.props.validationMessages;
+      const MOCK_PROP = DtValidationMessages.props.validationMessages;
 
-      itBehavesLikePassesCustomPropValidation(prop, ['Error']);
+      it('passes custom prop validation', () => {
+        expect(MOCK_PROP.validator(['Error'])).toBe(true);
+      });
 
       describe('When the provided messages are numeric', () => {
-        itBehavesLikeFailsCustomPropValidation(prop, [123]);
+        it('fails custom prop validation', () => {
+          expect(MOCK_PROP.validator([123])).toBe(false);
+        });
       });
     });
   });
