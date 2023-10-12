@@ -1,38 +1,35 @@
 <template>
-  <div
-    v-show="items.length"
-    class="dt-emoji-suggestion-list"
-  >
-    <dt-list-item
-      v-for="(item, index) in items"
-      :key="index"
-      :class="[
-        'dt-emoji-suggestion-list-item',
-        { 'is-selected': index === selectedIndex },
-      ]"
-      navigation-type="arrow-keys"
-      @click="selectItem(index)"
-      @keydown.prevent.stop="onKeyDown"
+  <div class="d-popover__dialog">
+    <ul
+      v-show="items.length"
+      class="dt-suggestion-list"
     >
-      <dt-emoji
-        size="200"
-        :code="item"
-      />
-      <div class="dt-emoji-suggestion-list-text">
-        {{ item }}
-      </div>
-    </dt-list-item>
+      <dt-list-item
+        v-for="(item, index) in items"
+        :key="index"
+        :class="[
+          'dt-suggestion-list--item',
+          { 'is-selected dt-list-item--highlighted': index === selectedIndex },
+        ]"
+        navigation-type="arrow-keys"
+        @click="selectItem(index)"
+        @keydown.prevent.stop="onKeyDown"
+      >
+        <component
+          :is="itemComponent"
+          :item="item"
+        />
+      </dt-list-item>
+    </ul>
   </div>
 </template>
 
 <script>
-import { DtEmoji } from '@/emoji';
 import { DtListItem } from '@/components/list_item';
 
 export default {
-  name: 'EmojiList',
+  name: 'SuggestionList',
   components: {
-    DtEmoji,
     DtListItem,
   },
 
@@ -44,6 +41,16 @@ export default {
 
     command: {
       type: Function,
+      required: true,
+    },
+
+    itemComponent: {
+      type: Object,
+      required: true,
+    },
+
+    itemType: {
+      type: String,
       required: true,
     },
   },
@@ -95,8 +102,13 @@ export default {
     selectItem (index) {
       const item = this.items[index];
 
-      if (item) {
-        this.command({ code: item });
+      switch (this.itemType) {
+        case 'emoji':
+          this.command({ code: item });
+          return;
+        case 'mention':
+          this.command({ name: item.name, contactId: item.contactId, avatarSrc: item.avatarSrc });
+          break;
       }
     },
   },
@@ -104,28 +116,17 @@ export default {
 </script>
 
 <style>
-.dt-emoji-suggestion-list {
-  background-color: var(--dt-color-surface-secondary) !important;
-  border-color: var(--dt-color-border-subtle) !important;
+.dt-suggestion-list {
+  position: relative;
+  padding: var(--dt-size-300);
   max-height: var(--dt-size-875) !important;
-  overflow: hidden !important;
-  overflow-y: scroll !important;
 }
-.dt-emoji-suggestion-list .dt-item-layout--title {
-  display: flex;
-}
-.dt-emoji-suggestion-list-item {
-  display: flex !important;
+
+.dt-suggestion-list--item {
   border: var(--dt-size-100) solid transparent;
-  min-width: var(--dt-size-850);
-  width: var(--dt-size-100-percent) !important;
 
   &.is-selected {
-    border-color: var(--bc-bold);
+    border-color: var(--dt-color-border-bold);
   }
-}
-
-.dt-emoji-suggestion-list-text {
-  margin-left: var(--dt-size-350);
 }
 </style>

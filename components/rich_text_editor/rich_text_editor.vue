@@ -15,10 +15,13 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
 import Emoji from './extensions/emoji';
 import Link from './extensions/link';
+import { MentionPlugin } from './extensions/mentions/mention';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from './rich_text_editor_constants';
+
+import suggestion from './extensions/mentions/suggestion';
 
 export default {
   name: 'DtRichTextEditor',
@@ -114,6 +117,22 @@ export default {
       type: [Boolean, Object],
       default: false,
     },
+
+    /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the contacts for suggestion.
+     * items({ query }) => { return [<ContactObj>]; }
+     * ContactObj format:
+     * { name: string, avatarSrc: string, contactId: string }
+     *
+     * When null, it does not add the plugin.
+     */
+    mentionSuggestion: {
+      type: Object,
+      default: null,
+    },
   },
 
   emits: [
@@ -160,6 +179,7 @@ export default {
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
+
       // Enable placeholderText
       extensions.push(
         Placeholder.configure({ placeholder: this.placeholder }),
@@ -182,6 +202,12 @@ export default {
           },
         }),
       );
+
+      if (this.mentionSuggestion) {
+        // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
+        const suggestionObject = { ...this.mentionSuggestion, ...suggestion };
+        extensions.push(MentionPlugin.configure({ suggestion: suggestionObject }));
+      }
 
       // Emoji has some interactions with Enter key
       // hence this should be done last otherwise the enter wont add a emoji.
