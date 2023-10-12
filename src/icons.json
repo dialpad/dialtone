@@ -596,6 +596,7 @@
       "refresh": [
         "reload"
       ],
+      "rewind-15-sec": [],
       "rewind": [
         "music"
       ],
@@ -628,6 +629,7 @@
       "sidebar": [
         "menu"
       ],
+      "skip-15-sec": [],
       "skip-back-ten": [
         "rewind",
         "back",
@@ -1085,6 +1087,7 @@
         "todo",
         "done"
       ],
+      "list-ordered": [],
       "paperclip": [
         "attachment",
         "file"
