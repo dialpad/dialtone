@@ -19,7 +19,6 @@ describe('DtRootLayout Tests', () => {
   let wrapper;
   let header;
   let footer;
-  let body;
   let sidebar;
   let content;
 
@@ -31,7 +30,6 @@ describe('DtRootLayout Tests', () => {
 
     header = wrapper.find('[data-qa="dt-root-layout-header"]');
     footer = wrapper.find('[data-qa="dt-root-layout-footer"]');
-    body = wrapper.find('[data-qa="dt-root-layout-body"]');
     sidebar = wrapper.find('[data-qa="dt-root-layout-sidebar"]');
     content = wrapper.find('[data-qa="dt-root-layout-content"]');
   };
@@ -104,14 +102,14 @@ describe('DtRootLayout Tests', () => {
       it('Has correct class', async () => {
         await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
 
-        expect(body.classes('d-root-layout__body--invert')).toBe(false);
+        expect(wrapper.classes('d-root-layout--inverted')).toBe(false);
       });
     });
     describe('When sidebarPosition is set to right', () => {
       it('Has correct class', async () => {
-        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
+        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT });
 
-        expect(body.classes('d-root-layout__body--invert')).toBe(false);
+        expect(wrapper.classes('d-root-layout--inverted')).toBe(true);
       });
     });
   });

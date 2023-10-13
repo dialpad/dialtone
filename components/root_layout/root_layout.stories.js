@@ -8,14 +8,15 @@ import {
 import DtRootLayout from './root_layout.vue';
 
 import DtRootLayoutDefaultTemplate from './root_layout_default.story.vue';
+import DtRootLayoutStickyTemplate from './root_layout_sticky.story.vue';
 
 // Default Prop Values
 export const argsData = {
   sidebarPosition: 'left',
-  header: '<div class="d-bgc-purple-200 d-h64 d-h100p">Header</div>',
-  footer: '<div class="d-bgc-gold-200 d-h64 d-h100p">Footer</div>',
+  header: '<div class="d-bgc-purple-200 d-h64">Header</div>',
+  footer: '<div class="d-bgc-gold-200 d-h64">Footer</div>',
   sidebar:
-    '<div class="d-bgc-black-200 d-h100p d-w264"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
+    '<div class="d-bgc-black-200 d-wmn264 d-h100p"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
   default: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim eleifend condimentum.
   Vestibulum euismod leo at finibus mattis. Integer ut dui id ligula tincidunt pellentesque. Vestibulum a ullamcorper
   risus. Ut tristique sapien eget magna lacinia, non interdum lacus malesuada. Proin augue lacus, finibus eget aliquam
@@ -95,10 +96,18 @@ export const argTypesData = {
 
   responsiveBreakpoint: {
     defaultValue: null,
+    options: ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS,
     control: {
       type: 'select',
-      options: ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS,
     },
+  },
+
+  headerSticky: {
+    control: 'boolean',
+  },
+
+  fixed: {
+    control: 'boolean',
   },
 };
 
@@ -109,12 +118,19 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 // Templates
 const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
   DtRootLayoutDefaultTemplate,
+);
+const StickyTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtRootLayoutStickyTemplate,
 );
 
 export const Default = {
@@ -126,7 +142,7 @@ export const Default = {
 };
 
 export const StickyHeader = {
-  render: DefaultTemplate,
+  render: StickyTemplate,
 
   args: {
     headerSticky: true,

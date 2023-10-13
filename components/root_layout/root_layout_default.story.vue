@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/no-static-inline-styles -->
 <template>
   <dt-root-layout
-    :body-class="$attrs.bodyClass"
     :header-class="$attrs.headerClass"
     :header-sticky="$attrs.headerSticky"
     :content-class="$attrs.contentClass"
