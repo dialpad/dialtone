@@ -1,3 +1,15 @@
+# [3.89.0](https://github.com/dialpad/dialtone-vue/compare/v3.88.1...v3.89.0) (2023-10-13)
+
+
+### Bug Fixes
+
+* **Root Layout:** convert to pure CSS grid method ([#1254](https://github.com/dialpad/dialtone-vue/issues/1254)) ([3dbd0be](https://github.com/dialpad/dialtone-vue/commit/3dbd0be47fdf4717fa226bfda1485a8ca54f4fe9))
+
+
+### Features
+
+* **Rich Text Editor:** contact mentions ([#1248](https://github.com/dialpad/dialtone-vue/issues/1248)) ([19a99fb](https://github.com/dialpad/dialtone-vue/commit/19a99fb2f8de554b83997b232b1e0a2c0f726e24))
+
 ## [3.88.1](https://github.com/dialpad/dialtone-vue/compare/v3.88.0...v3.88.1) (2023-10-06)
 
 
