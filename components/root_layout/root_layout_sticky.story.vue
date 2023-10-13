@@ -1,35 +1,26 @@
 <template>
   <dt-root-layout
-    :body-class="bodyClass"
     :header-class="headerClass"
     :header-sticky="headerSticky"
-    :header-height="headerHeight"
     :content-class="contentClass"
-    :content-wrap-width-percent="contentWrapWidthPercent"
     :sidebar-class="sidebarClass"
     :sidebar-position="sidebarPosition"
-    :sidebar-width="sidebarWidth"
     :footer-class="footerClass"
-    :footer-height="footerHeight"
     :fixed="fixed"
+    :responsive-breakpoint="responsiveBreakpoint"
   >
     <template
-      v-if="header"
       #header
     >
       <span v-html="header" />
     </template>
     <template
-      v-if="sidebar"
       #sidebar
     >
       <span v-html="sidebar" />
     </template>
-    <template v-if="defaultSlot">
-      <div v-html="defaultSlot" />
-    </template>
+    <span v-html="defaultSlot" />
     <template
-      v-if="footer"
       #footer
     >
       <span v-html="footer" />

@@ -1,6 +1,14 @@
 <template>
   <div
-    :class="['root-layout d-root-layout', { 'd-root-layout--fixed': fixed }, responsiveClass]"
+    :class="[
+      'root-layout',
+      'd-root-layout',
+      {
+        'd-root-layout--fixed': fixed,
+        'd-root-layout--inverted': isInverted,
+        [`d-root-layout__responsive--${responsiveBreakpoint}`]: !!responsiveBreakpoint,
+      },
+    ]"
     data-qa="dt-root-layout"
   >
     <header
@@ -11,29 +19,23 @@
         if you want a fixed height. -->
       <slot name="header" />
     </header>
-    <div
-      ref="root-layout-body"
-      :class="['d-root-layout__body', bodyClasses]"
-      data-qa="dt-root-layout-body"
+    <aside
+      ref="root-layout-sidebar"
+      :class="['d-root-layout__sidebar', sidebarClass]"
+      data-qa="dt-root-layout-sidebar"
     >
-      <aside
-        ref="root-layout-sidebar"
-        :class="['d-root-layout__sidebar', { 'd-root-layout__sidebar--sticky': fixed }, sidebarClass]"
-        data-qa="dt-root-layout-sidebar"
-      >
-        <!-- @slot Slot for sidebar content, be sure to set a width on the element within this. -->
-        <slot name="sidebar" />
-      </aside>
-      <main
-        ref="root-layout-content"
-        :class="['d-root-layout__content', contentClass]"
-        data-qa="dt-root-layout-content"
-        tabindex="0"
-      >
-        <!-- @slot Slot for the main content -->
-        <slot />
-      </main>
-    </div>
+      <!-- @slot Slot for sidebar content, be sure to set a width on the element within this. -->
+      <slot name="sidebar" />
+    </aside>
+    <main
+      ref="root-layout-content"
+      :class="['d-root-layout__content', contentClass]"
+      data-qa="dt-root-layout-content"
+      tabindex="0"
+    >
+      <!-- @slot Slot for the main content -->
+      <slot />
+    </main>
     <footer
       :class="['d-root-layout__footer', footerClass]"
       data-qa="dt-root-layout-footer"
@@ -82,14 +84,6 @@ export default {
     },
 
     /**
-     * Additional class name for the body
-     */
-    bodyClass: {
-      type: [String, Array, Object],
-      default: '',
-    },
-
-    /**
      * Scroll the header with the page
      * @values true, false
      */
@@ -115,7 +109,7 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the height of the inner element instead.
+     * DEPRECATED: set the min-width of the inner element instead.
      */
     sidebarWidth: {
       type: String,
@@ -161,17 +155,97 @@ export default {
   },
 
   computed: {
-    responsiveClass () {
-      if (!this.responsiveBreakpoint) return;
-      return `d-root-layout__responsive--${this.responsiveBreakpoint}`;
-    },
-
-    bodyClasses () {
-      return [
-        this.bodyClass,
-        { 'd-root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT },
-      ];
+    isInverted () {
+      return this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT;
     },
   },
 };
 </script>
+
+<style lang="less">
+.d-root-layout {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'sidebar body'
+    'footer footer';
+  grid-template-columns: min-content 1fr;
+  min-height: 100vh;
+
+  &--inverted {
+    grid-template-areas:
+      'header header'
+      'body sidebar'
+      'footer footer';
+    grid-template-columns: 1fr min-content;
+  }
+
+  &--fixed {
+    height: 100vh;
+  }
+
+  &__header {
+    grid-area: header;
+
+    &--sticky {
+      position: sticky;
+      top: 0;
+      z-index: var(--zi-base1);
+    }
+  }
+
+  &__sidebar {
+    grid-area: sidebar;
+    height: 100%;
+    box-shadow: none;
+  }
+
+  &__content {
+    grid-area: body;
+    box-shadow: none;
+    overflow-y: auto;
+
+    &:focus-visible {
+      box-shadow: none;
+    }
+  }
+
+  &__footer {
+    grid-area: footer;
+  }
+}
+
+@media (max-width: 480px) {
+  .d-root-layout__responsive--sm {
+    grid-template-areas:
+    'header'
+    'sidebar'
+    'body'
+    'footer';
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .d-root-layout__responsive--md {
+    grid-template-areas:
+    'header'
+    'sidebar'
+    'body'
+    'footer';
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 980px) {
+  .d-root-layout__responsive--lg {
+    grid-template-areas:
+    'header'
+    'sidebar'
+    'body'
+    'footer';
+    grid-template-columns: 1fr;
+  }
+}
+</style>
