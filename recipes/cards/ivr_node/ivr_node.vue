@@ -208,7 +208,7 @@ export default {
   transform: rotate(90deg);
 }
 .ivr-connector{
-  z-index: var(--zi-base1);
+  z-index: var(--zi-base);
   display: flex;
   justify-content: center;
   align-items: center;
