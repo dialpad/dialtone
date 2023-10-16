@@ -1,3 +1,10 @@
+# [3.90.0](https://github.com/dialpad/dialtone-vue/compare/v3.89.0...v3.90.0) (2023-10-16)
+
+
+### Features
+
+* **Dt Recipe Ivr Node:** change z-index and docs ([#1258](https://github.com/dialpad/dialtone-vue/issues/1258)) ([d9b4559](https://github.com/dialpad/dialtone-vue/commit/d9b45594b3dc27629febc6ea487b8b9e0cef33f6))
+
 # [3.89.0](https://github.com/dialpad/dialtone-vue/compare/v3.88.1...v3.89.0) (2023-10-13)
 
 
