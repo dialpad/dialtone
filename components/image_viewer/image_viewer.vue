@@ -241,7 +241,6 @@ export default {
         this.focusTrappedTabPress(e);
       }
     },
-
   },
 };
 </script>
