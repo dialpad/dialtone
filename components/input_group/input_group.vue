@@ -1,5 +1,8 @@
 <template>
-  <fieldset :data-qa="dataQaGroup">
+  <fieldset
+    class="d-input-group__fieldset"
+    :data-qa="dataQaGroup"
+  >
     <legend
       v-if="$slots.legend || legend"
       :class="['d-label', legendClass]"

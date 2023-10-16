@@ -2,30 +2,32 @@
   Decorator used for storybook documentation and unit tests.
 -->
 <template>
-  <label>
-    <div class="d-radio-group">
-      <input
-        type="radio"
-        class="d-radio"
-        :checked="internalChecked"
-        :name="internalName"
-        :value="value"
-        :disabled="internalDisabled"
-        :class="[inputValidationClass, inputClass]"
-        v-bind="$attrs"
-        v-on="inputListeners"
-      >
-      <span
-        class="d-radio__copy d-radio__label"
-        :class="labelClass"
-        v-bind="labelChildProps"
-        data-qa="input-decorator-label"
-      >
-        <!-- @slot slot for Input Decorator Label -->
-        <slot>{{ label }}</slot>
-      </span>
-    </div>
-  </label>
+  <div>
+    <label>
+      <div class="d-radio-group">
+        <input
+          type="radio"
+          class="d-radio"
+          :checked="internalChecked"
+          :name="internalName"
+          :value="value"
+          :disabled="internalDisabled"
+          :class="[inputValidationClass, inputClass]"
+          v-bind="$attrs"
+          v-on="inputListeners"
+        >
+        <span
+          class="d-radio__copy d-radio__label"
+          :class="labelClass"
+          v-bind="labelChildProps"
+          data-qa="input-decorator-label"
+        >
+          <!-- @slot slot for Input Decorator Label -->
+          <slot>{{ label }}</slot>
+        </span>
+      </div>
+    </label>
+  </div>
 </template>
 
 <script>
