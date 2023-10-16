@@ -1,49 +1,51 @@
 <template>
-  <label>
-    <div :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
-      <div class="d-radio__input">
-        <input
-          :checked="internalChecked"
-          :name="internalName"
-          :value="value"
-          :disabled="internalDisabled"
-          type="radio"
-          :class="['d-radio', inputValidationClass, inputClass]"
-          v-bind="$attrs"
-          v-on="inputListeners"
-        >
-      </div>
-      <div
-        class="d-radio__copy d-radio__label"
-        data-qa="radio-label-description-container"
-      >
-        <div
-          :class="labelClass"
-          v-bind="labelChildProps"
-          data-qa="radio-label"
-        >
-          <!-- @slot slot for Radio Label -->
-          <slot>{{ label }}</slot>
+  <div>
+    <label>
+      <div :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
+        <div class="d-radio__input">
+          <input
+            :checked="internalChecked"
+            :name="internalName"
+            :value="value"
+            :disabled="internalDisabled"
+            type="radio"
+            :class="['d-radio', inputValidationClass, inputClass]"
+            v-bind="$attrs"
+            v-on="inputListeners"
+          >
         </div>
         <div
-          v-if="hasSlotContent($slots.description) || description"
-          :class="['d-description', descriptionClass]"
-          v-bind="descriptionChildProps"
-          data-qa="radio-description"
+          class="d-radio__copy d-radio__label"
+          data-qa="radio-label-description-container"
         >
-          <!-- @slot slot for Radio Description -->
-          <slot name="description">{{ description }}</slot>
+          <div
+            :class="labelClass"
+            v-bind="labelChildProps"
+            data-qa="radio-label"
+          >
+            <!-- @slot slot for Radio Label -->
+            <slot>{{ label }}</slot>
+          </div>
+          <div
+            v-if="$slots.description || description"
+            :class="['d-description', descriptionClass]"
+            v-bind="descriptionChildProps"
+            data-qa="radio-description"
+          >
+            <!-- @slot slot for Radio Description -->
+            <slot name="description">{{ description }}</slot>
+          </div>
+          <dt-validation-messages
+            :validation-messages="formattedMessages"
+            :show-messages="showMessages"
+            :class="messagesClass"
+            v-bind="messagesChildProps"
+            data-qa="dt-radio-validation-messages"
+          />
         </div>
-        <dt-validation-messages
-          :validation-messages="formattedMessages"
-          :show-messages="showMessages"
-          :class="messagesClass"
-          v-bind="messagesChildProps"
-          data-qa="dt-radio-validation-messages"
-        />
       </div>
-    </div>
-  </label>
+    </label>
+  </div>
 </template>
 
 <script>
