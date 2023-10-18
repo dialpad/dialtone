@@ -8,6 +8,7 @@
     :selected="selected"
     :is-typing="isTyping"
     v-bind="$attrs"
+    v-on="contactRowListeners"
   >
     <template #left>
       <dt-icon
@@ -21,7 +22,7 @@
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtIcon from '@/components/icon/icon.vue';
-import { safeConcatStrings } from '@/common/utils.js';
+import { safeConcatStrings, extractVueListeners } from '@/common/utils.js';
 
 export default {
   name: 'DtRecipeGroupRow',
@@ -94,18 +95,15 @@ export default {
   },
 
   emits: [
-    /**
-     * Native click event on the row itself
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
   ],
 
   computed: {
     ariaLabel () {
       return safeConcatStrings([this.groupCountText, this.names]);
+    },
+
+    contactRowListeners () {
+      return extractVueListeners(this.$attrs);
     },
   },
 };
