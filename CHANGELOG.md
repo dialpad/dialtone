@@ -1,3 +1,16 @@
+# [3.91.0](https://github.com/dialpad/dialtone-vue/compare/v3.90.0...v3.91.0) (2023-10-19)
+
+
+### Bug Fixes
+
+* click event on leftbar group row ([#1265](https://github.com/dialpad/dialtone-vue/issues/1265)) ([d31bf5d](https://github.com/dialpad/dialtone-vue/commit/d31bf5d3d2257a9eb1547e2c911893cb9de373c0))
+* **Radio, Checkbox:** apply fieldset class ([#1260](https://github.com/dialpad/dialtone-vue/issues/1260)) ([7e2f0f6](https://github.com/dialpad/dialtone-vue/commit/7e2f0f6c25312d0d2d40318efb8771b8f6d7eacf))
+
+
+### Features
+
+* attachment carousel for generic media files ([#1209](https://github.com/dialpad/dialtone-vue/issues/1209)) ([ef195ae](https://github.com/dialpad/dialtone-vue/commit/ef195aef72eee49c22a73f4c5b832897df869e94))
+
 # [3.90.0](https://github.com/dialpad/dialtone-vue/compare/v3.89.0...v3.90.0) (2023-10-16)
 
 
