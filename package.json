@@ -53,8 +53,8 @@
     "@dialpad/conventional-changelog-angular": "^1.1.1",
     "@dialpad/dialtone": "^8.20.1",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
-    "@percy/cli": "^1.26.2",
-    "@percy/storybook": "^4.3.6",
+    "@percy/cli": "^1.27.3",
+    "@percy/storybook": "^4.3.7",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@storybook/addon-a11y": "^7.4.6",
@@ -170,6 +170,16 @@
       "require": {
         "types": "./dist/types/emoji.d.ts",
         "default": "./dist/emoji.cjs"
+      }
+    },
+    "./directives": {
+      "import": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.js"
+      },
+      "require": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.cjs"
       }
     },
     "./css": {

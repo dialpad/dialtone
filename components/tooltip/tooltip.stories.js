@@ -63,6 +63,18 @@ export const argTypesData = {
       },
     },
   },
+  show: {
+    options: [null, true, false],
+    type: 'select',
+  },
+
+  inverted: {
+    type: 'boolean',
+  },
+
+  delay: {
+    type: 'boolean',
+  },
 
   transition: {
     options: ['', 'fade', 'pop', 'shake'],
@@ -111,20 +123,12 @@ const TooltipVariantsTemplate = (args, { argTypes }) =>
 export const Default = {
   render: TooltipDefaultTemplate,
   args: {},
-  parameters: {
-    percy: {
-      args: {
-        show: true,
-      },
-    },
-  },
 };
 
 export const Variants = {
   render: TooltipVariantsTemplate,
   args: {},
   parameters: {
-    ...Default.parameters,
     options: { showPanel: false },
     controls: { disable: true },
   },
@@ -138,7 +142,6 @@ export const Flip = {
   },
 
   parameters: {
-    ...Default.parameters,
     options: { showPanel: false },
     controls: { disable: true },
   },

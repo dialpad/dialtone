@@ -4,6 +4,19 @@
     id="forms-radio--variants-container"
     class="d-pt128 d-px64"
   >
+    <div class="d-d-flex d-jc-center d-w100p d-mb64 d-mt32">
+      <dt-button
+        id="external-tooltip-anchor"
+        importance="outlined"
+        @focusin="externalAnchorShow = true"
+        @mouseenter="externalAnchorShow = true"
+        @focusout="externalAnchorShow = false"
+        @mouseleave="externalAnchorShow = false"
+        @keydown.esc="externalAnchorShow = false"
+      >
+        External anchor
+      </dt-button>
+    </div>
     <!-- Arrow Description -->
     <div
       v-for="(rowDirection, i) in TOOLTIP_DIRECTIONS"
@@ -47,6 +60,7 @@
           <dt-button
             aria-labelledby="circle-button-tooltip-label"
             circle
+            importance="outlined"
           >
             <template #icon>
               <dt-icon
@@ -111,6 +125,14 @@
         </dt-tooltip>
       </div>
     </div>
+    <dt-tooltip
+      :transition="transition"
+      :show="externalAnchorShow"
+      external-anchor="#external-tooltip-anchor"
+    >
+      This is a tooltip with external anchor, the actual dt-tooltip component
+      is at the end of this page
+    </dt-tooltip>
   </div>
 </template>
 
@@ -138,6 +160,7 @@ export default {
 
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       show1: this.show ?? false,
+      externalAnchorShow: false,
     };
   },
 };

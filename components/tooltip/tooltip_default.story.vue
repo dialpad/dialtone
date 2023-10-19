@@ -20,6 +20,8 @@
         :transition="transition"
         :show="showTooltip"
         :delay="delay"
+        :external-anchor="externalAnchor"
+        v-bind="$attrs"
         @shown="onShown"
       >
         <template
@@ -59,11 +61,7 @@ export default {
     },
 
     showTooltip () {
-      if (this.globalShow) {
-        return true;
-      }
-
-      return this.show;
+      return this.globalShow ?? this.show;
     },
   },
 };
