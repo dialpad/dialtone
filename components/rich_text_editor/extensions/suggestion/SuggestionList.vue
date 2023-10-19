@@ -2,14 +2,15 @@
   <div class="d-popover__dialog">
     <ul
       v-show="items.length"
+      ref="suggestionList"
       class="dt-suggestion-list"
     >
       <dt-list-item
         v-for="(item, index) in items"
-        :key="index"
+        :key="item.id"
         :class="[
           'dt-suggestion-list--item',
-          { 'is-selected dt-list-item--highlighted': index === selectedIndex },
+          { 'dt-list-item--highlighted': index === selectedIndex },
         ]"
         navigation-type="arrow-keys"
         @click="selectItem(index)"
@@ -89,10 +90,24 @@ export default {
 
     upHandler () {
       this.selectedIndex = ((this.selectedIndex + this.items.length) - 1) % this.items.length;
+
+      this.scrollActiveElementIntoView();
     },
 
     downHandler () {
       this.selectedIndex = (this.selectedIndex + 1) % this.items.length;
+
+      this.scrollActiveElementIntoView();
+    },
+
+    scrollActiveElementIntoView () {
+      const activeElement = this.$refs.suggestionList.querySelector('.dt-list-item--highlighted');
+      if (activeElement) {
+        activeElement.scrollIntoView({
+          behaviour: 'smooth',
+          block: 'center',
+        });
+      }
     },
 
     enterHandler () {
@@ -104,10 +119,10 @@ export default {
 
       switch (this.itemType) {
         case 'emoji':
-          this.command({ code: item });
+          this.command(item);
           return;
         case 'mention':
-          this.command({ name: item.name, contactId: item.contactId, avatarSrc: item.avatarSrc });
+          this.command({ name: item.name, id: item.contactId, avatarSrc: item.avatarSrc });
           break;
       }
     },
@@ -120,13 +135,11 @@ export default {
   position: relative;
   padding: var(--dt-size-300);
   max-height: var(--dt-size-875) !important;
+  min-width: var(--dt-size-925);
+  max-width: var(--dt-size-975);
 }
 
 .dt-suggestion-list--item {
   border: var(--dt-size-100) solid transparent;
-
-  &.is-selected {
-    border-color: var(--dt-color-border-bold);
-  }
 }
 </style>

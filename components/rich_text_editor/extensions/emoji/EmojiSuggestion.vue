@@ -5,9 +5,9 @@
   >
     <dt-emoji
       size="200"
-      :code="item"
+      :code="item.code"
     />
-    {{ item }}
+    {{ item.code }}
   </dt-stack>
 </template>
 
@@ -24,7 +24,7 @@ export default {
 
   props: {
     item: {
-      type: String,
+      type: Object,
       required: true,
     },
   },

@@ -27,7 +27,7 @@ export const MentionPlugin = Mention.extend({
       avatarSrc: {
         default: '',
       },
-      contactId: {
+      id: {
         default: '',
       },
     };
