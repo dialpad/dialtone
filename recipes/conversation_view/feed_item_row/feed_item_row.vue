@@ -9,12 +9,17 @@
   >
     <!-- Avatar or time -->
     <template #left>
-      <dt-avatar
+      <!-- @slot Slot to contain the avatar, overrides avatar props. -->
+      <slot
         v-if="showHeader"
-        :full-name="displayName"
-        :image-src="avatarImageUrl"
-        :seed="avatarSeed"
-      />
+        name="avatar"
+      >
+        <dt-avatar
+          :full-name="displayName"
+          :image-src="avatarImageUrl"
+          :seed="avatarSeed"
+        />
+      </slot>
       <!-- show time instead of avatar when headers not present -->
       <div
         v-if="!showHeader"
