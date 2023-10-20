@@ -48,6 +48,15 @@ export const argTypesData = {
     },
   },
 
+  avatar: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   threading: {
     name: 'threading',
     control: 'text',

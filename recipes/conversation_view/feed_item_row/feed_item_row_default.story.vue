@@ -14,6 +14,14 @@
       <template v-if="defaultSlot">
         <span v-html="defaultSlot" />
       </template>
+      <template 
+        v-if="avatar"
+        #avatar
+      >
+        <span
+          v-html="avatar"
+        />
+      </template>
       <template
         v-if="threading"
         #threading
