@@ -14,6 +14,7 @@ export default defineConfig({
         'dialtone-vue': resolve(__dirname, './index.js'),
         emoji: resolve(__dirname, './emoji.js'),
         message_input: resolve(__dirname, './message_input.js'),
+        directives: resolve(__dirname, './directives.js'),
       },
     },
     rollupOptions: {
