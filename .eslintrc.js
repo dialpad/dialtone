@@ -8,7 +8,8 @@ module.exports = {
     "plugin:node/recommended",
   ],
   parserOptions: {
-    ecmaVersion: 'latest'
+    ecmaVersion: 'latest',
+    parser: "vue-eslint-parser"
   },
   env: {
     node: true,
