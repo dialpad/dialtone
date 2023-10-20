@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/dialpad/dialtone-icons/compare/v3.3.0...v3.4.0) (2023-10-20)
+
+
+### Features
+
+* add skip-15-sec, rewind-15-sec, list-ordered icons ([#28](https://github.com/dialpad/dialtone-icons/issues/28)) ([d13dd30](https://github.com/dialpad/dialtone-icons/commit/d13dd3018a7e12710dae9bcd78ae59d00dd5affa))
+
 # [3.3.0](https://github.com/dialpad/dialtone-icons/compare/v3.2.0...v3.3.0) (2023-10-04)
 
 
