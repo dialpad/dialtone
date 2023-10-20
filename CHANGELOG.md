@@ -1,3 +1,17 @@
+# [3.92.0](https://github.com/dialpad/dialtone-vue/compare/v3.91.0...v3.92.0) (2023-10-20)
+
+
+### Bug Fixes
+
+* suggestion list CSS changes ([#1255](https://github.com/dialpad/dialtone-vue/issues/1255)) ([abd4735](https://github.com/dialpad/dialtone-vue/commit/abd4735a399a9681b89391611cabba65fea1a8c4))
+
+
+### Features
+
+* add avatar slot to feed-item-row ([#1267](https://github.com/dialpad/dialtone-vue/issues/1267)) ([1cc8b71](https://github.com/dialpad/dialtone-vue/commit/1cc8b71837669bb0cfa7fde4635f9efdee454cae))
+* **Dt Tooltip Directive:** add dt-tooltip directive  ([#1264](https://github.com/dialpad/dialtone-vue/issues/1264)) ([6a67cae](https://github.com/dialpad/dialtone-vue/commit/6a67caee52ef2017391cc6ef6a7f27e14b1e1978))
+* update dialtone-icons ([11a4714](https://github.com/dialpad/dialtone-vue/commit/11a47140ad1d4c655bd9cf0c11d06e93126739f4))
+
 # [3.91.0](https://github.com/dialpad/dialtone-vue/compare/v3.90.0...v3.91.0) (2023-10-19)
 
 
