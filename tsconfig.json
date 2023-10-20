@@ -9,6 +9,7 @@
     "recipes/**/*.vue",
     "index.js",
     "emoji.js",
+    "directives.js",
     "message_input.js"
   ],
   "exclude": [
