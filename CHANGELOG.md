@@ -1,3 +1,10 @@
+## [3.92.1](https://github.com/dialpad/dialtone-vue/compare/v3.92.0...v3.92.1) (2023-10-20)
+
+
+### Bug Fixes
+
+* export directives in production build ([#1271](https://github.com/dialpad/dialtone-vue/issues/1271)) ([b34febb](https://github.com/dialpad/dialtone-vue/commit/b34febb20488e23f98b07b8ce4d19a561f73cfad))
+
 # [3.92.0](https://github.com/dialpad/dialtone-vue/compare/v3.91.0...v3.92.0) (2023-10-20)
 
 
