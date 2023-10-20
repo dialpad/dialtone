@@ -4,6 +4,7 @@
          elements within the span rather than on the span itself -->
     <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
     <span
+      v-if="!externalAnchor"
       ref="anchor"
       data-qa="dt-tooltip-anchor"
       @focusin="onEnterAnchor"
@@ -194,7 +195,7 @@ export default {
      * Controls whether the tooltip is shown. Leaving this null will have the tooltip trigger on mouseover by default.
      * If you set this value, the default mouseover behavior will be disabled and you can control it as you need.
      * Supports .sync modifier
-     * @values true, false
+     * @values null, true, false
      */
     show: {
       type: Boolean,
@@ -226,6 +227,15 @@ export default {
     delay: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * External anchor id to use in those cases the anchor can't be provided via the slot.
+     * For instance, using the combobox's input as the anchor for the popover.
+     */
+    externalAnchor: {
+      type: String,
+      default: null,
     },
   },
 
@@ -280,7 +290,6 @@ export default {
     tippyProps () {
       return {
         offset: this.offset,
-        appendTo: this.anchorEl?.getRootNode()?.querySelector('body'),
         interactive: false,
         trigger: 'manual',
         placement: this.placement,
@@ -291,6 +300,10 @@ export default {
           onChangePlacement: this.onChangePlacement,
         }),
       };
+    },
+
+    anchor () {
+      return this.externalAnchor ? document.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     },
   },
 
@@ -328,7 +341,7 @@ export default {
   },
 
   mounted () {
-    this.tip = createTippy(getAnchor(this.$refs.anchor), this.initOptions());
+    this.tip = createTippy(this.anchor, this.initOptions());
 
     // immediate watcher fires before mounted, so have this here in case
     // show prop was initially set to true.
@@ -358,7 +371,7 @@ export default {
     },
 
     hasVisibleFocus () {
-      return getAnchor(this.$refs.anchor).matches(':focus-visible');
+      return this.anchor.matches(':focus-visible');
     },
 
     onEnterAnchor (e) {

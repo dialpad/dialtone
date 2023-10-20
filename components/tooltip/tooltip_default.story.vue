@@ -22,6 +22,8 @@
         :transition="$attrs.transition"
         :show.sync="$attrs.show"
         :delay="$attrs.delay"
+        :external-anchor="$attrs.externalAnchor"
+        v-bind="$attrs"
         @shown="$attrs.onShown"
       >
         <template #anchor>
@@ -56,6 +58,10 @@ export default {
   computed: {
     buttonKind () {
       return this.$attrs.inverted ? 'inverted' : 'default';
+    },
+
+    showTooltip () {
+      return this.$attrs.globalShow ?? this.$attrs.show;
     },
   },
 };

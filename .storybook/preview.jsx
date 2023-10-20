@@ -9,13 +9,17 @@ import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '../common/emoji.js';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
+import { DtTooltipDirective } from "@/directives/tooltip";
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
 setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 
-setup((app) => { app.use(fixDefaultSlot) });
+setup((app) => {
+  app.use(fixDefaultSlot)
+  app.use(DtTooltipDirective);
+});
 
 export default {
   parameters: {
@@ -83,6 +87,7 @@ export default {
         const isDark = useDarkMode();
         return <DocsContainer context={props.context} theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}>{children}</DocsContainer>;
       }
-    }
+    },
+    percy: { globalShow: true }
   },
 }
