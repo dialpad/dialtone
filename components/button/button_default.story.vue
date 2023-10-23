@@ -24,7 +24,7 @@
     />
     <template
       v-if="$attrs.icon"
-      #icon
+      #icon="{ iconSize }"
     >
       <dt-icon
         :name="$attrs.icon"
@@ -37,15 +37,9 @@
 <script>
 import DtButton from './button.vue';
 import { DtIcon } from '@/components/icon';
-import { BUTTON_ICON_SIZES } from './button_constants';
 
 export default {
   name: 'ButtonDefault',
   components: { DtButton, DtIcon },
-  computed: {
-    iconSize () {
-      return BUTTON_ICON_SIZES[this.$attrs.size];
-    },
-  },
 };
 </script>

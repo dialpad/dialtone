@@ -84,30 +84,30 @@
         circle
         aria-label="Icon only"
       >
-        <template #icon>
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
-            size="200"
+            :size="iconSize"
           />
         </template>
       </dt-button>
 
       <!-- Icon Only -->
       <dt-button aria-label="Icon only">
-        <template #icon>
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
-            size="200"
+            :size="iconSize"
           />
         </template>
       </dt-button>
 
       <!-- Icon Left -->
       <dt-button>
-        <template #icon>
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
-            size="200"
+            :size="iconSize"
           />
         </template>
         Icon Left
@@ -115,10 +115,10 @@
 
       <!-- Icon Right -->
       <dt-button icon-position="right">
-        <template #icon>
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
-            size="200"
+            :size="iconSize"
           />
         </template>
         Icon Right
@@ -126,10 +126,10 @@
 
       <!-- Icon Top -->
       <dt-button icon-position="top">
-        <template #icon>
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
-            size="200"
+            :size="iconSize"
           />
         </template>
         Icon Top
@@ -137,10 +137,10 @@
 
       <!-- Icon Bottom -->
       <dt-button icon-position="bottom">
-        <template #icon>
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
-            size="200"
+            :size="iconSize"
           />
         </template>
         Icon Bottom

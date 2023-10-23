@@ -73,3 +73,27 @@ import { DtButton } from '@dialpad/dialtone-vue';
  Button
 </dt-button>
 ```
+
+### With icon
+
+#### Automatic icon resizing
+
+```html
+<dt-button>
+ Button
+  <template #icon="{ iconSize }">
+    <dt-icon :size="iconSize" name="user" />
+  </template>
+</dt-button>
+```
+
+#### Fixed icon size
+
+```html
+<dt-button>
+ Button
+  <template #icon>
+    <dt-icon size="300" name="user" />
+  </template>
+</dt-button>
+```
