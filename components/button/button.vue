@@ -25,6 +25,7 @@
       <!-- @slot Button icon -->
       <slot
         name="icon"
+        :icon-size="iconSize"
       />
     </span>
     <span
@@ -45,6 +46,7 @@ import {
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
   BUTTON_IMPORTANCE_MODIFIERS,
+  BUTTON_ICON_SIZES,
   BUTTON_TYPES,
   ICON_POSITION_MODIFIERS,
   INVALID_COMBINATION,
@@ -271,6 +273,10 @@ export default {
     computedAriaLive () {
       return this.assertiveOnFocus && this.isInFocus ? 'assertive' : this.$attrs.ariaLive;
     },
+
+    iconSize () {
+      return BUTTON_ICON_SIZES[this.size];
+    },
   },
 
   watch: {
@@ -324,7 +330,7 @@ export default {
     },
 
     shouldRenderIcon () {
-      return this.$slots.icon && !this.link;
+      return this.$scopedSlots.icon && !this.link;
     },
 
     isIconOnly () {
@@ -332,7 +338,7 @@ export default {
     },
 
     isVerticalIconLayout () {
-      return this.shouldRenderIcon() && !this.isIconOnly() && ['top', 'bottom'].includes(this.iconPosition);
+      return !this.isIconOnly() && ['top', 'bottom'].includes(this.iconPosition);
     },
   },
 };
