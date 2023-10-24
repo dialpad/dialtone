@@ -8,11 +8,6 @@
       <dt-button
         id="external-tooltip-anchor"
         importance="outlined"
-        @focusin="externalAnchorShow = true"
-        @mouseenter="externalAnchorShow = true"
-        @focusout="externalAnchorShow = false"
-        @mouseleave="externalAnchorShow = false"
-        @keydown.esc="externalAnchorShow = false"
       >
         External anchor
       </dt-button>
@@ -127,7 +122,6 @@
     </div>
     <dt-tooltip
       :transition="transition"
-      :show="externalAnchorShow"
       external-anchor="#external-tooltip-anchor"
     >
       This is a tooltip with external anchor, the actual dt-tooltip component
@@ -160,7 +154,6 @@ export default {
 
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       show1: this.show ?? false,
-      externalAnchorShow: false,
     };
   },
 };
