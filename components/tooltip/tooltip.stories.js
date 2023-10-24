@@ -63,6 +63,10 @@ export const argTypesData = {
       },
     },
   },
+
+  enabled: {
+    type: 'boolean',
+  },
   show: {
     options: [null, true, false],
     type: 'select',
