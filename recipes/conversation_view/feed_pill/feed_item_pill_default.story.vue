@@ -7,6 +7,7 @@
     :border-color="borderColor"
     :aria-label="ariaLabel"
     :toggleable="toggleable"
+    :default-toggled="defaultToggled"
   >
     <template #subtitle>
       Last 43 minutes - Ended at 5:04pm
