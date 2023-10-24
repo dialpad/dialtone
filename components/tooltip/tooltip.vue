@@ -303,7 +303,7 @@ export default {
     },
 
     anchor () {
-      return this.externalAnchor ? document.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
+      return this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     },
   },
 
@@ -341,6 +341,7 @@ export default {
   },
 
   mounted () {
+    this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
 
     // immediate watcher fires before mounted, so have this here in case
@@ -351,6 +352,7 @@ export default {
   },
 
   beforeUnmount () {
+    this.externalAnchor && this.removeExternalAnchorEventListeners();
     if (this.tip) {
       this.tip?.destroy();
     }
@@ -377,10 +379,10 @@ export default {
     onEnterAnchor (e) {
       if (this.delay) {
         this.inTimer = setTimeout(function (event) {
-          return this.triggerShow(event);
+          this.triggerShow(event);
         }.bind(this, e), TOOLTIP_DELAY_MS);
       } else {
-        return this.triggerShow(e);
+        this.triggerShow(e);
       }
     },
 
@@ -401,9 +403,11 @@ export default {
       }
     },
 
-    onLeaveAnchor () {
+    onLeaveAnchor (e) {
+      if (e.type === 'keydown' && e.code !== 'Escape') return;
+
       clearTimeout(this.inTimer);
-      return this.triggerHide();
+      this.triggerHide();
     },
 
     triggerHide () {
@@ -450,6 +454,24 @@ export default {
         onMount: this.onMount,
         ...this.tippyProps,
       };
+    },
+
+    addExternalAnchorEventListeners () {
+      ['focusin', 'mouseenter'].forEach(listener => {
+        this.anchor.addEventListener(listener, (event) => this.onEnterAnchor(event));
+      });
+      ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
+        this.anchor.addEventListener(listener, (event) => this.onLeaveAnchor(event));
+      });
+    },
+
+    removeExternalAnchorEventListeners () {
+      ['focusin', 'mouseenter'].forEach(listener => {
+        this.anchor.removeEventListener(listener, (event) => this.onEnterAnchor(event));
+      });
+      ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
+        this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
+      });
     },
   },
 };

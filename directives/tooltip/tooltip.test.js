@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
-import { DtTooltipDirective } from './tooltip';
+import { DtTooltipDirective } from './tooltip.js';
+import { getUniqueString } from '@/common/utils.js';
 
 import {
   TOOLTIP_DIRECTIONS,
@@ -9,9 +10,11 @@ const MOCK_TOOLTIP_TEXT = 'Tooltip text content';
 const MOCK_ANCHOR_TEXT = 'Button placeholder';
 
 const WrapperComponent = {
+  name: 'wrapper-component',
   template: `
-    <button v-dt-tooltip:[placement]="MOCK_TOOLTIP_TEXT">{{MOCK_ANCHOR_TEXT}}</button>
+    <button :key="id" v-dt-tooltip:[placement]="MOCK_TOOLTIP_TEXT">{{MOCK_ANCHOR_TEXT}}</button>
   `,
+
   props: {
     placement: {
       type: String,
@@ -21,6 +24,7 @@ const WrapperComponent = {
 
   data () {
     return {
+      id: getUniqueString(),
       MOCK_ANCHOR_TEXT,
       MOCK_TOOLTIP_TEXT,
     };
@@ -51,8 +55,8 @@ describe('DtTooltipDirective Tests', () => {
   };
 
   afterEach(() => {
+    mockProps = {};
     wrapper.unmount();
-    document.body.outerHTML = '';
   });
 
   beforeAll(() => {
@@ -71,8 +75,8 @@ describe('DtTooltipDirective Tests', () => {
   describe('Presentation Tests', () => {
     describe('when tooltip is open', () => {
       beforeEach(async () => {
-        updateWrapper();
-        await anchor.trigger('focusin');
+        await updateWrapper();
+        await anchor.trigger('mouseenter');
       });
 
       it('should render the component', () => {
@@ -88,7 +92,7 @@ describe('DtTooltipDirective Tests', () => {
       });
 
       it('should render the message', () => {
-        expect(document.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe(MOCK_TOOLTIP_TEXT);
+        expect(document.body.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe(MOCK_TOOLTIP_TEXT);
       });
     });
     describe('When a placement is provided', () => {
@@ -96,8 +100,8 @@ describe('DtTooltipDirective Tests', () => {
         describe(`When direction is ${placement}`, () => {
           beforeEach(async () => {
             mockProps = { placement };
-            updateWrapper();
-            await anchor.trigger('focusin');
+            await updateWrapper();
+            await anchor.trigger('mouseenter');
           });
 
           it('should have correct arrow direction class', () => {
