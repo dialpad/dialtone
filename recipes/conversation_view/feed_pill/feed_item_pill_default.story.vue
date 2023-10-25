@@ -7,6 +7,7 @@
     :border-color="$attrs.borderColor"
     :aria-label="$attrs.ariaLabel"
     :toggleable="$attrs.toggleable"
+    :default-toggled="$attrs.defaultToggled"
   >
     <template #subtitle>
       Last 43 minutes - Ended at 5:04pm

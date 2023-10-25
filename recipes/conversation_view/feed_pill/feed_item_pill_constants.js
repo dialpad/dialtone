@@ -1,7 +1,7 @@
 export const FEED_ITEM_PILL_BORDER_COLORS = {
-  default: 'dt-feed-item-pill--border-default',
-  ai: 'dt-feed-item-pill--border-ai',
-  critical: 'dt-feed-item-pill--border-critical',
+  default: 'dt-recipe-feed-item-pill__border-default',
+  ai: 'dt-recipe-feed-item-pill__border-ai',
+  critical: 'dt-recipe-feed-item-pill__border-critical',
 };
 
 export default {

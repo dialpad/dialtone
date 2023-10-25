@@ -1,12 +1,18 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import DtRecipeFeedItemPillDefaultTemplate from './feed_item_pill_default.story.vue';
+import DtRecipeFeedItemPillVariantsTemplate from './feed_item_pill_variants.story.vue';
 
 // Default Prop Values
-export const argsData = {
+const args = {
+  iconName: 'video',
+  title: 'This meeting has ended',
+  ariaLabel: 'Click to expand',
+  wrapperClass: 'd-w628',
+  buttonClass: 'd-bar24',
 };
 
-export const argTypesData = {
+const argTypes = {
   // Slots
   subtitle: {
     control: 'text',
@@ -46,8 +52,8 @@ export const argTypesData = {
 export default {
   title: 'Recipes/Conversation View/Feed Item Pill',
   component: DtRecipeFeedItemPill,
-  args: argsData,
-  argTypes: argTypesData,
+  args,
+  argTypes,
   excludeStories: /.*Data$/,
 };
 
@@ -57,45 +63,24 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtRecipeFeedItemPillDefaultTemplate,
 );
 
+const VariantsTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtRecipeFeedItemPillVariantsTemplate,
+);
+
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  parameters: { a11y: { disable: true } },
-  args: {
-    iconName: 'video',
-    title: 'This meeting has ended',
-    ariaLabel: 'Click to expand',
-    buttonClass: '',
-    toggleable: true,
-    wrapperClass: 'd-w628',
-    borderColor: 'default',
+  parameters: {
+    a11y: { disable: true },
   },
 };
 
-export const AiBorderGradient = {
-  render: DefaultTemplate,
-  parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { disable: true } },
-  args: {
-    iconName: 'video',
-    title: 'This meeting has ended',
-    wrapperClass: 'd-w628',
-    buttonClass: '',
-    ariaLabel: 'Click to expand',
-    toggleable: true,
-    borderColor: 'ai',
-  },
-};
-
-export const NoToggleVariant = {
-  render: DefaultTemplate,
-  parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { disable: true } },
-  args: {
-    iconName: 'video',
-    title: 'This meeting has ended',
-    wrapperClass: 'd-w628',
-    expanded: false,
-    ariaLabel: 'Click to expand',
-    toggleable: false,
-    borderColor: 'critical',
+export const Variants = {
+  render: VariantsTemplate,
+  parameters: {
+    options: { showPanel: false },
+    a11y: { disable: true },
+    controls: { disable: true },
   },
 };

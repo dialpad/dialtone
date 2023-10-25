@@ -1,25 +1,27 @@
 <template>
-  <div :class="['dt-feed-item-pill--border', borderClass, wrapperClass]">
-    <div class="d-p8 d-bgc-secondary">
+  <div :class="['dt-recipe-feed-item-pill__border', borderClass, wrapperClass]">
+    <div class="dt-recipe-feed-item-pill__wrapper">
       <dt-collapsible :open="expanded">
         <template #anchor>
           <button
+            data-qa="dt-recipe-feed-item-pill"
             :aria-label="ariaLabel"
-            data-qa="dt-feed-item-pill"
-            :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left d-btn--circle', toggleableClass, buttonClass]"
+            :class="['dt-recipe-feed-item-pill__button', toggleableClass, buttonClass]"
             @focusin="hover = true"
             @focusout="hover = false"
             @mouseenter="hover = true"
             @mouseleave="hover = false"
             @click="onClick"
           >
-            <dt-item-layout class="d-w100p d-p8">
-              <span class="d-fw-bold">{{ title }}</span>
+            <dt-item-layout class="dt-recipe-feed-item-pill__layout">
+              <slot name="title">
+                <span class="dt-recipe-feed-item-pill__title">{{ title }}</span>
+              </slot>
               <template #left>
                 <dt-icon
+                  data-qa="dt-recipe-feed-item-pill__icon"
                   size="300"
-                  class="dt-feed-item-pill--icon d-pr8"
-                  data-qa="dt-feed-item-pill-icon"
+                  class="dt-recipe-feed-item-pill__icon"
                   :name="computedIcon"
                 />
               </template>
@@ -36,7 +38,7 @@
           </button>
         </template>
         <template #content>
-          <div class="d-jc-center d-d-flex">
+          <div class="dt-recipe-feed-item-pill__content">
             <slot name="content" />
           </div>
         </template>
@@ -103,6 +105,11 @@ export default {
       default: () => true,
     },
 
+    defaultToggled: {
+      type: Boolean,
+      default: () => false,
+    },
+
     /**
      * Callbox border color
      * @values default, ai, critical
@@ -117,7 +124,7 @@ export default {
   data () {
     return {
       hover: false,
-      expanded: false,
+      expanded: this.defaultToggled,
     };
   },
 
@@ -150,35 +157,70 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.dt-recipe-feed-item-pill {
+  &__wrapper {
+    background-color: var(--dt-color-surface-secondary);
+    padding: var(--dt-space-400);
+  }
+
+  &__button {
+    background-color: var(--dt-color-surface-moderate);
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    border-width: 0;
+    border-radius: var(--dt-size-radius-600);
+    --button-padding-x: var(--button-padding-y-md);
+    --button-padding-y: var(--button-padding-y-md);
+    --button-color-text: var(--dt-action-color-foreground-muted-default);
+    --button-border-radius: var(--dt-size-radius-600);
+  }
+
+  &__layout {
+    padding: var(--dt-space-400);
+    width: 100%;
+  }
+
+  &__icon {
+    animation: fade 0.15s ease-in;
+    margin-right: var(--dt-space-400);
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__title {
+    font-weight: var(--dt-font-weight-bold);
+  }
+
   // Gradient radius solution taken from https://stackoverflow.com/a/53037637
-  .dt-feed-item-pill--border {
+  &__border {
     border: double 1px transparent;
-    border-radius: 4.8rem; // Special value determined by designer here where it works in both expanded and collapsed
+    border-radius: var(--dt-size-radius-600);
     background-origin: border-box;
     background-clip: content-box, border-box;
     overflow: hidden;
   }
 
-  .dt-feed-item-pill--border-default {
+  &__border-default {
     background: var(--dt-color-border-default)
   }
 
-  .dt-feed-item-pill--border-ai {
+  &__border-ai {
     background-image:
       linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)),
       var(--dt-badge-color-background-ai);
   }
 
-  .dt-feed-item-pill--border-critical {
+  &__border-critical {
     background: var(--dt-color-foreground-critical);
-  }
-
-  .dt-feed-item-pill--icon {
-    animation: fade 0.15s ease-in;
   }
 
   @keyframes fade {
     0%   {transform: scale(0);}
     100% {transform: scale(1);}
   }
+}
 </style>
