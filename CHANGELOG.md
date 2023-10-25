@@ -1,3 +1,18 @@
+# [3.93.0](https://github.com/dialpad/dialtone-vue/compare/v3.92.1...v3.93.0) (2023-10-25)
+
+
+### Bug Fixes
+
+* add disabled prop to tooltip - vue3 ([#1277](https://github.com/dialpad/dialtone-vue/issues/1277)) ([e25a755](https://github.com/dialpad/dialtone-vue/commit/e25a755bfddd3d0eaebbf2413d2a800689c9bb7c))
+* **Button:** icon sizing ([#1269](https://github.com/dialpad/dialtone-vue/issues/1269)) ([ec0df97](https://github.com/dialpad/dialtone-vue/commit/ec0df975b6fe3fea447e058212d1e11ea76de612))
+* **Dt Tooltip Directive:** default delay ([#1273](https://github.com/dialpad/dialtone-vue/issues/1273)) ([5c65241](https://github.com/dialpad/dialtone-vue/commit/5c65241746d6f8f2a821d702eb3d8fafc126e854))
+
+
+### Features
+
+* add initial date formatting functions ([#1279](https://github.com/dialpad/dialtone-vue/issues/1279)) ([f8340e9](https://github.com/dialpad/dialtone-vue/commit/f8340e9a30e54488ca13755a40730db4b07f3c89))
+* **Call Pill:** add default toggled state - vue3 ([#1275](https://github.com/dialpad/dialtone-vue/issues/1275)) ([c4afed8](https://github.com/dialpad/dialtone-vue/commit/c4afed87b4fae26754b652235e757e01543706e6))
+
 ## [3.92.1](https://github.com/dialpad/dialtone-vue/compare/v3.92.0...v3.92.1) (2023-10-20)
 
 
