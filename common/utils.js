@@ -379,6 +379,16 @@ export function safeConcatStrings (elements) {
   return elements.filter(str => !!str).join(' ');
 }
 
+/**
+ * Locale safe function to capitalize the first letter of a string.
+ * @param {string} str the string to capitalize the first letter of
+ * @param {string} locale a string representing the locale to be used. Defaults to 'en-US'
+ * @returns The passed in string with the first letter capitalized
+ */
+export function capitalizeFirstLetter (str, locale = 'en-US') {
+  return str.replace(/^\p{CWU}/u, char => char.toLocaleUpperCase(locale));
+}
+
 export default {
   getUniqueString,
   getRandomElement,
@@ -399,4 +409,5 @@ export default {
   isPhoneNumber,
   isURL,
   safeConcatStrings,
+  capitalizeFirstLetter,
 };
