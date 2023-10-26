@@ -145,13 +145,24 @@
         <!-- Right content -->
         <div class="d-d-flex">
           <!-- Optionally displayed remaining character counter -->
-          <p
+          <dt-tooltip
             v-if="displayCharacterLimitWarning"
-            class="d-fc-error d-mr16 d-as-center dt-message-input--remaining-char"
-            data-qa="dt-message-input-character-limit"
+            :enabled="characterLimitWarningMessage && (characterLimitCount - inputLength < 0)"
+            placement="top-end"
+            :message="characterLimitWarningMessage"
+            :offset="[10, -8]"
           >
-            {{ characterLimitCount - inputLength }}
-          </p>
+            <template #anchor>
+              <p
+                v-if="displayCharacterLimitWarning"
+                class="d-fc-error d-mr16 d-as-center dt-message-input--remaining-char"
+                data-qa="dt-message-input-character-limit"
+              >
+                {{ characterLimitCount - inputLength }}
+              </p>
+            </template>
+          </dt-tooltip>
+
           <dt-tooltip
             placement="top-end"
             :message="sendTooltipLabel"
@@ -361,6 +372,14 @@ export default {
     characterLimitWarning: {
       type: Number,
       default: 500,
+    },
+
+    /**
+     * Character limit warning message
+     */
+    characterLimitWarningMessage: {
+      type: String,
+      default: '',
     },
 
     // Error related props

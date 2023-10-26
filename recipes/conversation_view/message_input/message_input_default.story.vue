@@ -15,6 +15,7 @@
       :has-character-limit="$attrs.hasCharacterLimit"
       :character-limit-count="$attrs.characterLimitCount"
       :character-limit-warning="$attrs.characterLimitWarning"
+      :character-limit-warning-message="$attrs.characterLimitWarningMessage"
       :notice-kind="$attrs.noticeKind"
       :notice-message="$attrs.noticeMessage"
       :emoji-tab-set-labels="$attrs.emojiTabSetLabels"
