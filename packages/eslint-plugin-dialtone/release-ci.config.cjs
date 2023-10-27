@@ -1,4 +1,4 @@
-const name = 'dialtone-tokens';
+const name = 'eslint-plugin-dialtone';
 const srcRoot = `packages/${name}`;
 
 module.exports = {
