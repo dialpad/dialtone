@@ -4,7 +4,7 @@ const srcRoot = `packages/${name}`;
 module.exports = {
   extends: 'release.config.base.js',
   pkgRoot: srcRoot,
-  tagFormat: name + '-v${version}',
+  tagFormat: name + '/v${version}',
   commitPaths: [`${srcRoot}/*`],
   assets: [`${srcRoot}/CHANGELOG.md`, `${srcRoot}/CHANGELOG.json`, `${srcRoot}/package.json`, `${srcRoot}/package-lock.json`],
   plugins: [
