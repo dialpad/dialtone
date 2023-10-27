@@ -94,8 +94,10 @@ After you have discussed your change with the Dialtone team, follow these steps 
 5. Push your branch to remote. `git push -u origin my-change-branch`.
 6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
 7. Set the label on your PR:
- - 'visual-test-ready' if your PR includes visual UI changes.
- - 'no-visual-test' if not UI changes.
+
+- 'visual-test-ready' if your PR includes visual UI changes.
+- 'no-visual-test' if not UI changes.
+
 8. Run `./copy_pr_vue3.sh` in the root of the repository to copy your changes to a vue3 branch titled `my-change-branch-vue3`
 9. Create a pull request into the `staging-vue3` branch, reviewers will be automatically added and notified of your PR.
 10. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_pr_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
@@ -325,11 +327,22 @@ We use [Vite](https://vitejs.dev/) to run our local server and bundle our build.
 
 We use [Storybook](https://storybook.js.org/) for our Dialtone Vue component documentation.
 Storybook allows you to render each component in isolation and change any available properties.
-Our storybook is hosted at https://vue.dialpad.design, and can also be run locally via `npm start`.
+Our storybook is hosted at <https://vue.dialpad.design>, and can also be run locally via `npm start`.
 For more detailed info on how to use storybook in Dialtone Vue, refer to our [storybook documentation](https://vue.dialpad.design/?path=/story/docs-storybook-getting-started--page).
 
 Storybook has its own build process and dependencies separate from our project.
 See the [storybook](../storybook) folder within our repo.
+
+#### Function Documentation via TypeDoc
+
+Storybook does not support documentation of functions by default, however we have a custom solution to this problem.
+[TypeDoc](https://typedoc.org/) can generate documentation for functions as markdown files, and then we can include
+these markdown files in our storybook mdx files. See the functions folder in the root of the project. To generate
+the function documentation run `npm run build:documentation:functions`. This will not happen automatically when you are
+running the server locally so you must do this manually to get function documentation to update locally. Currently all
+(non-test) javascript files within the common folder will have md generated for them. The files will then
+be output in `functions/generated/modules` folder and you can then include them in your MDX files within the "functions"
+directory. See any existing examples of mdx files within that folder for more details.
 
 ### ESLint
 

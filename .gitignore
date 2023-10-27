@@ -4,6 +4,7 @@ node_modules
 # Builds
 /dist
 /storybook-static
+functions/generated
 
 # local env files
 .DS_Store
