@@ -10,19 +10,21 @@ import {
 } from 'date-fns';
 import { capitalizeFirstLetter } from './utils';
 
+let dialtoneLocale;
+
 // Base functions just wrap core date-fns functions, but this allows us to do checks and set default options.
 
 function _baseFormat (date, formatString) {
   _checkLocaleSet();
   return format(date, formatString, {
-    locale: global.locale,
+    locale: dialtoneLocale,
   });
 }
 
 function _baseFormatDuration (duration, formatString) {
   _checkLocaleSet();
   return formatDuration(duration, {
-    locale: global.locale,
+    locale: dialtoneLocale,
     format: formatString,
   });
 }
@@ -30,12 +32,12 @@ function _baseFormatDuration (duration, formatString) {
 function _baseFormatDistance (date, baseDate) {
   _checkLocaleSet();
   return formatDistance(date, baseDate, {
-    locale: global.locale,
+    locale: dialtoneLocale,
   });
 }
 
 function _isLocaleSet () {
-  return global.locale !== undefined;
+  return dialtoneLocale !== undefined;
 }
 
 function _checkLocaleSet () {
@@ -50,7 +52,7 @@ function _checkLocaleSet () {
  * @param {Locale} locale A date-fns locale object
  */
 export function setDateLocale (locale) {
-  global.locale = locale;
+  dialtoneLocale = locale;
 }
 
 /**
@@ -89,8 +91,8 @@ export function durationInHHMM (durationInSeconds) {
  * @returns {string} A human readable string representing the distance between the date and now
  */
 function _getRelativeDaysText (days) {
-  const rtl = new Intl.RelativeTimeFormat(global.locale.code, { numeric: 'auto' });
-  return capitalizeFirstLetter(rtl.formatToParts(days, 'day')[0].value, global.locale.code);
+  const rtl = new Intl.RelativeTimeFormat(dialtoneLocale.code, { numeric: 'auto' });
+  return capitalizeFirstLetter(rtl.formatToParts(days, 'day')[0].value, dialtoneLocale.code);
 }
 
 /**
