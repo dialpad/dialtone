@@ -1,0 +1,23 @@
+{
+  "name": "@dialpad/design-system",
+  "version": "1.0.0",
+  "description": "Design system monorepo",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx nx run-many --target=test --all",
+    "lint": "npx nx run-many --target=lint --all",
+    "build": "npx nx run-many --target=build --all",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "husky": "^8.0.0",
+    "nx": "^17.0.2",
+    "semantic-release-npm-github-publish": "^1.5.4",
+    "semantic-release-plus": "^20.0.0"
+  },
+  "repository": "git@github.com:dialpad/design-system.git"
+}
