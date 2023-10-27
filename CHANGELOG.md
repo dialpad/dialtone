@@ -1,3 +1,15 @@
+## [2.103.1](https://github.com/dialpad/dialtone-vue/compare/v2.103.0...v2.103.1) (2023-10-27)
+
+
+### Bug Fixes
+
+* date functions locale global ([2400feb](https://github.com/dialpad/dialtone-vue/commit/2400feb7e7248353063ae5b12c3dae571a66ad6f))
+
+
+### Documentation
+
+* document date functions ([#1282](https://github.com/dialpad/dialtone-vue/issues/1282)) ([d3d9b54](https://github.com/dialpad/dialtone-vue/commit/d3d9b54005139fcd670e396b41fb8df5f6ac9afb))
+
 # [2.103.0](https://github.com/dialpad/dialtone-vue/compare/v2.102.1...v2.103.0) (2023-10-25)
 
 
