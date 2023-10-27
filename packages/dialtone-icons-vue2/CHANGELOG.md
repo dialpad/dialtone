@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/dialpad/design-system/compare/dialtone-icons-vue2/v2.4.0...dialtone-icons-vue2/v2.4.1) (2023-10-27)
+
+
+### Code Refactoring
+
+* move .github to root workspace ([3a5bc29](https://github.com/dialpad/design-system/commit/3a5bc29ba2eb12ae087a6ab7877ba4264ce8be46))
+
 # [2.4.0](https://github.com/dialpad/dialtone-icons/compare/v2.3.0...v2.4.0) (2023-10-20)
 
 
