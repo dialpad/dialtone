@@ -1,0 +1,107 @@
+plugins {
+    id('com.android.library') version '7.1.1'
+    id 'org.jetbrains.kotlin.android' version '1.7.20'
+    id ('maven-publish')
+}
+
+ext.kotlin_version = '1.7.20'
+project.buildDir = 'dist_android'
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    def composeBom = platform('androidx.compose:compose-bom:2022.10.00')
+    implementation composeBom
+    implementation 'androidx.compose.ui:ui'
+}
+
+android {
+    sourceSets {
+        main {
+            java.srcDirs = ['dist/android/java']
+            res.srcDirs = ['dist/android/res']
+            manifest.srcFile 'dist/android/AndroidManifest.xml'
+        }
+    }
+}
+
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+task setProperties(type: WriteProperties) {
+    outputFile = file('gradle.properties')
+    property 'android.useAndroidX', true
+    property 'version', version
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                // sources
+                artifact androidSourcesJar
+
+                groupId = 'design.dialpad'
+
+
+                pom {
+                    name = 'Dialtone Tokens'
+                    description = "Design tokens for Dialpad's design system, Dialtone."
+                    url = 'https://dialpad.design'
+
+                    licenses {
+                        license {
+                            name = 'MIT'
+                            url = 'https://github.com/dialpad/dialtone-tokens/blob/staging/LICENSE.md'
+                        }
+                    }
+
+                    scm {
+                        connection = 'scm:git:git://github.com/dialpad/dialtone-tokens.git'
+                        developerConnection = 'scm:git:ssh://github.com/dialpad/dialtone-tokens.git'
+                        url = 'https//github.com/dialpad/dialtone-tokens'
+                    }
+
+                }
+            }
+        }
+        repositories {
+            maven {
+                name = "Dialtone Tokens Maven Packages"
+                url = uri("https://maven.pkg.github.com/dialpad/dialtone-tokens")
+                credentials {
+                    username = project.findProperty("release.user") ?: System.getenv("GITHUB_USER")
+                    password = project.findProperty("release.key") ?: System.getenv("GITHUB_TOKEN")
+                }
+            }
+        }
+    }
+}
+
+artifacts {
+    archives androidSourcesJar
+}
+
+android {
+    compileSdkVersion 31
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName '1.0'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
+    }
+}

@@ -1,0 +1,46 @@
+{
+  "badge": {
+    "color": {
+      "background": {
+        "default": {
+          "value": "{color.surface.moderate-opaque}",
+          "type": "color"
+        },
+        "info": {
+          "value": "{color.surface.info}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.surface.success}",
+          "type": "color"
+        },
+        "warning": {
+          "value": "{color.surface.warning}",
+          "type": "color"
+        },
+        "critical": {
+          "value": "{color.surface.critical}",
+          "type": "color"
+        },
+        "bulletin": {
+          "value": "{color.brand.purple}",
+          "type": "color"
+        },
+        "ai": {
+          "value": "{color.gradient.magenta-purple}",
+          "type": "color"
+        }
+      },
+      "foreground": {
+        "default": {
+          "value": "{color.foreground.primary}",
+          "type": "color"
+        },
+        "bulletin": {
+          "value": "{color.neutral.white}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

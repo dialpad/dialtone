@@ -1,0 +1,22 @@
+{
+  "font": {
+    "size": {
+      "root": {
+        "value": "10px",
+        "type": "fontSizes"
+      }
+    }
+  },
+  "size": {
+    "base": {
+      "value": "{font.size.root} * .8",
+      "type": "sizing"
+    }
+  },
+  "space": {
+    "base": {
+      "value": "{size.base}",
+      "type": "spacing"
+    }
+  }
+}

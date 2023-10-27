@@ -1,0 +1,12 @@
+{
+  "radio": {
+    "color": {
+      "border": {
+        "unchecked": {
+          "value": "{color.black.500}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}
