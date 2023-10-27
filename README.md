@@ -46,3 +46,10 @@ the root of the project with:
 ```bash
 npx nx <command> <package/app>
 ```
+
+
+### Releasing
+
+```bash
+pnpm run release
+```
