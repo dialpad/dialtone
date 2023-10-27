@@ -34,6 +34,7 @@
     "@tokens-studio/sd-transforms": "^0.11.0",
     "maven": "^5.0.0",
     "style-dictionary": "^3.8.0",
+    "tinycolor2": "^1.6.0",
     "token-transformer": "^0.0.31"
   }
 }
