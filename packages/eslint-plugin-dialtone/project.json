@@ -1,3 +1,29 @@
 {
-  "name": "eslint-plugin-dialtone"
+  "name": "eslint-plugin-dialtone",
+  "targets": {
+    "release-local": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx semantic-release-plus --no-ci --extends ./packages/eslint-plugin-dialtone/release-local.config.cjs",
+        "parallel": false
+      }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "pnpm publish --filter ./packages/eslint-plugin-dialtone",
+        "parallel": false
+      }
+    },
+    "release-github": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx semantic-release-plus --extends ./packages/eslint-plugin-dialtone/release-ci.config.cjs",
+        "parallel": false
+      }
+    }
+  }
 }

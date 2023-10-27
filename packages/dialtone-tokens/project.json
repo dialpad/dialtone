@@ -1,3 +1,29 @@
 {
-  "name": "dialtone-tokens"
+  "name": "dialtone-tokens",
+  "targets": {
+    "release-local": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx semantic-release-plus --no-ci --extends ./packages/dialtone-tokens/release-local.config.cjs",
+        "parallel": false
+      }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "pnpm publish --filter ./packages/dialtone-tokens",
+        "parallel": false
+      }
+    },
+    "release-github": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx semantic-release-plus --extends ./packages/dialtone-tokens/release-ci.config.cjs",
+        "parallel": false
+      }
+    }
+  }
 }
