@@ -7,6 +7,7 @@ const config = {
     '../recipes/**/*.mdx', '../docs/**/*.mdx',
     '../directives/**/*.stories.@(js|jsx|ts|tsx)',
     '../directives/**/*.mdx',
+    '../functions/**/*.mdx'
   ],
   addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-a11y", 'storybook-dark-mode'],
   framework: {
