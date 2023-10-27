@@ -1,3 +1,13 @@
 {
-  "name": "dialtone-icons-vue2"
+  "name": "dialtone-icons@2",
+  "targets": {
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx semantic-release-plus --dry-run --extends ./packages/dialtone-icons-vue2/release-local.config.cjs",
+        "parallel": false
+      }
+    }
+  }
 }

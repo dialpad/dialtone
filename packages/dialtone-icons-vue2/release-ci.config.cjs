@@ -1,16 +1,11 @@
+const name = 'dialtone-icons-vue2';
+const srcRoot = `packages/${name}`;
+
 module.exports = {
-  branches: [
-    'production',
-    'vue3',
-    {
-      name: 'beta',
-      prerelease: true,
-    },
-    {
-      name: 'alpha',
-      prerelease: true,
-    },
-  ],
+  extends: 'release.config.base.js',
+  pkgRoot: `${srcRoot}/dist`,
+  tagFormat: name + '-v${version}',
+  commitPaths: [`${srcRoot}/*`],
   plugins: [
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
@@ -22,5 +17,16 @@ module.exports = {
       config: '@dialpad/conventional-changelog-angular',
     }],
     '@semantic-release/github',
+  ],
+  branches: [
+    'production',
+    {
+      name: 'beta',
+      prerelease: true,
+    },
+    {
+      name: 'alpha',
+      prerelease: true,
+    },
   ],
 };

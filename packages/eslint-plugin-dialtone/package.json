@@ -31,7 +31,6 @@
       "url": "https://github.com/iropolo"
     }
   ],
-  "repository": "git@github.com:dialpad/eslint-plugin-dialtone.git",
   "bugs": {
     "email": "dialtone@dialpad.com"
   },

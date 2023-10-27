@@ -18,7 +18,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "git@github.com:dialpad/dialtone-tokens.git",
   "author": "Dialpad",
   "license": "MIT",
   "bugs": {

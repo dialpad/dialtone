@@ -1,0 +1,9 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+# Validate commit message in production and staging branches
+if [[ "$branch" = "staging" || "$branch" = "production" ]]; then
+  npx --no-install commitlint --edit "$1"
+fi
