@@ -22,6 +22,14 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     steps:
+      - name: Check out branch
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+
       - name: parse branch from ref
         id: branch
         run: echo ::set-output name=BRANCH::${GITHUB_REF/refs\/heads\//}
@@ -33,14 +41,6 @@ jobs:
           route: GET /orgs/dialpad/members/${{ github.actor }}
         env:
           GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
-
-      - name: Check out branch
-        uses: actions/checkout@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '18.x'
 
       - name: Install PNPM
         uses: pnpm/action-setup@v2.2.1
@@ -59,7 +59,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Set npm token
-        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
+        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
 
       # note that npm run build is executed before publishing via prepublishOnly
       - name: Deploy production
