@@ -23,7 +23,7 @@ module.exports = {
     ['@semantic-release/git', {
       /* eslint-disable-next-line no-template-curly-in-string */
       message: `chore(release): ${name}` +
-        '-v${nextRelease.version}\n\n${nextRelease.notes}',
+        '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
   ],
   branches: [
