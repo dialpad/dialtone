@@ -8,7 +8,7 @@
     "lint": "npx nx run-many --target=lint --all",
     "build": "npx nx run-many --target=build --all",
     "prepare": "husky install",
-    "release": "npx nx affected -t release-local"
+    "release": "./scripts/release.sh"
   },
   "keywords": [],
   "author": "",
