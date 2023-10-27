@@ -1,3 +1,16 @@
+## [3.93.1](https://github.com/dialpad/dialtone-vue/compare/v3.93.0...v3.93.1) (2023-10-27)
+
+
+### Bug Fixes
+
+* date functions locale global ([8fe7307](https://github.com/dialpad/dialtone-vue/commit/8fe73076ea6b4addc4d03c228f6a7ec1cba6c6ac))
+* **Message Input:** tooltip should be displayed when character limit has been reached ([#1280](https://github.com/dialpad/dialtone-vue/issues/1280)) ([b5a99cb](https://github.com/dialpad/dialtone-vue/commit/b5a99cb9bb0020c69e553cfb993dd60e54456bd7))
+
+
+### Documentation
+
+* document date functions ([#1283](https://github.com/dialpad/dialtone-vue/issues/1283)) ([5efa023](https://github.com/dialpad/dialtone-vue/commit/5efa023c303a07de0cfb5cb9d18b8fc5d8c0e67b))
+
 # [3.93.0](https://github.com/dialpad/dialtone-vue/compare/v3.92.1...v3.93.0) (2023-10-25)
 
 
