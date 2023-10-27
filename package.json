@@ -7,7 +7,8 @@
     "test": "npx nx run-many --target=test --all",
     "lint": "npx nx run-many --target=lint --all",
     "build": "npx nx run-many --target=build --all",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "npx nx affected -t release-local"
   },
   "keywords": [],
   "author": "",

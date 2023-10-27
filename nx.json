@@ -15,5 +15,8 @@
   },
   "installation": {
     "version": "17.0.2"
+  },
+  "affected": {
+    "defaultBase": "origin/production"
   }
 }
