@@ -13,7 +13,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm publish",
+        "command": "pnpm publish --filter ./packages/dialtone-icons-vue2",
         "parallel": false
       }
     },
