@@ -1,4 +1,4 @@
-const name = 'dialtone-icons-vue3';
+const name = 'eslint-plugin-dialtone';
 const srcRoot = `packages/${name}`;
 
 module.exports = {

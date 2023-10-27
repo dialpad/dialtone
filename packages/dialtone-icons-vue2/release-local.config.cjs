@@ -12,7 +12,6 @@ module.exports = {
       preset: 'angular',
       releaseRules: [
         { type: 'refactor', release: 'patch' },
-        { type: 'ci', release: 'patch' },
       ],
     }],
     ['@semantic-release/release-notes-generator', {
@@ -20,12 +19,12 @@ module.exports = {
     }],
     ['@dialpad/semantic-release-changelog-json', { changelogFile: `${srcRoot}/CHANGELOG.md`, changelogJsonFile: `${srcRoot}/CHANGELOG.json` }],
     ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
-    //['@semantic-release/npm', { npmPublish: false }],
-    //['@semantic-release/git', {
-    //  /* eslint-disable-next-line no-template-curly-in-string */
-    //  message: `chore(release): ${name}` +
-    //    '/v${nextRelease.version}\n\n${nextRelease.notes}',
-    //}],
+    ['@semantic-release/npm', { npmPublish: false }],
+    ['@semantic-release/git', {
+      /* eslint-disable-next-line no-template-curly-in-string */
+      message: `chore(release): ${name}` +
+        '/v${nextRelease.version}\n\n${nextRelease.notes}',
+    }],
   ],
   branches: [
     'staging',
