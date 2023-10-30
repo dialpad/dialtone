@@ -44,7 +44,7 @@ jobs:
       with:
         branch: gh-pages
         folder: packages/dialtone/docs/.vuepress/dist
-        target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
+        target-folder: design-system/deploy-previews/pr-${{ github.event.pull_request.number }}
 
     - name: Add Message
       uses: mshick/add-pr-comment@v1
