@@ -27,7 +27,9 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          cd packages/dialtone-tokens
+          pnpm install --frozen-lockfile
 
       - name: Lint pull request commit message when it has a single commit
         if: ${{ github.event.pull_request.commits == '1' }}
