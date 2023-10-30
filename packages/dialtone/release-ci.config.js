@@ -1,21 +1,12 @@
+/* eslint-disable no-template-curly-in-string */
+const name = 'dialtone';
+const srcRoot = `packages/${name}`;
+
 module.exports = {
-  branches: [
-    'production',
-    'staging',
-    'next',
-    {
-      name: 'beta',
-      prerelease: true,
-    },
-    {
-      name: 'alpha',
-      prerelease: true,
-    },
-    {
-      name: 'version8',
-      prerelease: true,
-    },
-  ],
+  extends: 'release.config.base.js',
+  pkgRoot: srcRoot,
+  tagFormat: name + '/v${version}',
+  commitPaths: [`${srcRoot}/*`],
   plugins: [
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
@@ -27,5 +18,17 @@ module.exports = {
       config: '@dialpad/conventional-changelog-angular',
     }],
     '@semantic-release/github',
+  ],
+  branches: [
+    'production',
+    'next',
+    {
+      name: 'beta',
+      prerelease: true,
+    },
+    {
+      name: 'alpha',
+      prerelease: true,
+    },
   ],
 };
