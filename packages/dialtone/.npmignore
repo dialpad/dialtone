@@ -1,0 +1,12 @@
+# Build tools
+gulp/
+postcss.config.js
+postcss-sorting.json
+gulpfile.js
+
+# Docs
+docs/
+prototypes/
+
+# Editor
+.editorconfig

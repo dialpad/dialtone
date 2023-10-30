@@ -1,0 +1,46 @@
+{
+  "layout": [
+    {
+      "var": "sidebar-col",
+      "output": "minmax(19.2rem, 38.4rem)"
+    },
+    {
+      "var": "content-col",
+      "output": "minmax(min-content, 128rem)"
+    },
+    {
+      "var": "header-row",
+      "output": "minmax(12.8rem, min-content)"
+    },
+    {
+      "var": "content-row",
+      "output": "minmax(51.2rem, max-content)"
+    },
+    {
+      "var": "col",
+      "output": "12"
+    },
+    {
+      "var": "col-width",
+      "output": "minmax(min-content, 25.6rem)"
+    },
+    {
+      "var": "auto-col",
+      "output": "1fr"
+    }
+  ],
+  "gap": [
+    {
+      "direction": "both",
+      "pixel": "0, 1, 2, 4, 6, 8, 12, 16, 24, 32, 48, 64"
+    },
+    {
+      "direction": "column",
+      "pixel": "0, 1, 2, 4, 6, 8, 12, 16, 24, 32, 48, 64"
+    },
+    {
+      "direction": "row",
+      "pixel": "0, 1, 2, 4, 6, 8, 12, 16, 24, 32, 48, 64"
+    }
+  ]
+}

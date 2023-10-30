@@ -1,0 +1,15 @@
+# dependencies
+node_modules
+
+# Library
+lib
+
+# configs
+docs/.vuepress
+
+# data
+docs/_data
+
+# assets
+docs/assets
+fonts

@@ -1,0 +1,152 @@
+//
+//  DIALTONE
+//  COMPONENTS: SELECT MENUS
+//
+//  These are select menu classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialpad.design/components/select
+//
+//  TABLE OF CONTENTS
+//  • SELECT MENUS
+//    - Sizes
+//  • SELECT MENU INPUTS
+//    - Validation States
+//
+
+//  ============================================================================
+//  $  SELECT MENU (NATIVE)
+//  ----------------------------------------------------------------------------
+.d-select {
+  //  Component CSS Vars
+  //  --------------------------------------------------------------------------
+  --select-color-border: var(--dt-inputs-color-border-default);
+  --select-notch-position-right: var(--dt-space-400);
+
+  position: relative;
+  width: stretch;
+
+  //  --  Arrows
+  &::after {
+    --select-arrow-size: calc(var(--dt-size-300) * 3.5);
+
+    position: absolute;
+    top: 50%;
+    right: var(--select-notch-position-right);
+    z-index: var(--zi-selected);
+    width: var(--select-arrow-size);
+    height: var(--select-arrow-size);
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDEyIj4KICA8cGF0aCBmaWxsPSIjNTU1IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zLjE0NiA3LjE0NmEuNS41IDAgMCAxIC43MDggMEw2IDkuMjkzbDIuMTQ2LTIuMTQ3YS41LjUgMCAxIDEgLjcwOC43MDhsLTIuNSAyLjVhLjUuNSAwIDAgMS0uNzA4IDBsLTIuNS0yLjVhLjUuNSAwIDAgMSAwLS43MDhabTIuNS01LjVhLjUuNSAwIDAgMSAuNzA4IDBsMi41IDIuNWEuNS41IDAgMSAxLS43MDguNzA4TDYgMi43MDcgMy44NTQgNC44NTRhLjUuNSAwIDEgMS0uNzA4LS43MDhsMi41LTIuNVoiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transform: translateY(-50%);
+    content: '';
+    pointer-events: none;
+  }
+}
+
+//  $  SELECT MENU INPUT
+//  ----------------------------------------------------------------------------
+.d-select__input {
+  --select-color-border: var(--input-color-border);
+  --select-notch-padding-right: var(--dt-space-550);
+
+  // Use shared style properties of d-input (<input>, <textarea>)
+  .d-input();
+
+  // select options can be styled on windows
+  & option {
+    color: var(--dt-color-foreground-secondary);
+    background-color: var(--dt-color-surface-secondary);
+  }
+
+  //  --  FOCUS STATE
+  &:focus {
+      --input-color-background: var(--dt-inputs-color-background-focus);
+  }
+
+  // Adjust space on right beneath arrows
+  padding-right: var(--select-notch-padding-right);
+
+  &[disabled],
+  &[read-only] {
+    color: var(--dt-inputs-color-foreground-disabled);
+    background: var(--dt-inputs-color-background-disabled);
+    border-color: transparent;
+    border-style: solid;
+    border-width: var(--input-border-width);
+  }
+
+  &::-moz-focus-inner {
+    outline: none !important;
+  }
+
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 var(--dt-color-black-900);
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+//  $$  SIZES
+//  ----------------------------------------------------------------------------
+.d-select--xs {
+  .d-select__input {
+    #d-internal__input-and-select-xs();
+  }
+}
+
+.d-select--sm {
+  .d-select__input {
+    #d-internal__input-and-select-sm();
+  }
+}
+
+.d-select--lg {
+  .d-select__input {
+    #d-internal__input-and-select-lg();
+
+    --select-notch-padding-right: calc(var(--dt-space-300) * 9);
+  }
+
+  &::after {
+    --select-arrow-size: calc(var(--dt-size-300) * 4.5);
+    --select-notch-position-right: var(--dt-space-450);
+  }
+}
+
+.d-select--xl {
+  .d-select__input {
+    #d-internal__input-and-select-xl();
+
+    --select-notch-padding-right: calc(var(--dt-space-300) * 9);
+  }
+
+  &::after {
+    --select-arrow-size: calc(var(--dt-size-300) * 4.5);
+    --select-notch-position-right: var(--dt-space-450);
+  }
+}
+
+//  $$  VALIDATION STATES
+//  ------------------------------------------------------------------------
+.d-select__input--success {
+  --input-color-border: var(--dt-inputs-color-border-success);
+}
+
+.d-select__input--error {
+  --input-color-border: var(--dt-inputs-color-border-critical);
+}
+
+.d-select__input--warning {
+  --input-color-border: var(--dt-inputs-color-border-warning);
+}
+
+.d-select--disabled {
+  &::before,
+  &::after {
+    opacity: 0.33;
+  }
+}

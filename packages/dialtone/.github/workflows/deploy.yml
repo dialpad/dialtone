@@ -1,0 +1,93 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - production
+      - alpha
+      - beta
+      - staging
+      - next
+      - legacy
+
+jobs:
+  deploy:
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+
+      - name: parse branch from ref
+        id: branch
+        run: echo ::set-output name=BRANCH::${GITHUB_REF/refs\/heads\//}
+
+      # Will prevent the rest of the steps from running on fail
+      - name: Check if user is a dialpad member
+        uses: octokit/request-action@v2.1.0
+        with:
+          route: GET /orgs/dialpad/members/${{ github.actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build library and docsite (Staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        run: npm run build:docsite -- --deploySubdir /staging/
+
+      - name: Deploy to GitHub Pages (Staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          target-folder: staging
+
+      - name: Build library and docsite (Next)
+        if: ${{ github.ref == 'refs/heads/next' }}
+        run: npm run build:docsite -- --deploySubdir /next/
+
+      - name: Deploy to GitHub Pages (Next)
+        if: ${{ github.ref == 'refs/heads/next' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          target-folder: next
+
+      - name: Build library and docsite (Legacy)
+        if: ${{ github.ref == 'refs/heads/legacy' }}
+        run: npm run build:docsite -- --deploySubdir /legacy/
+
+      - name: Deploy to GitHub Pages (Legacy)
+        if: ${{ github.ref == 'refs/heads/legacy' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          target-folder: legacy
+
+      - name: Build library and docsite
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: npm run build:docsite
+
+      - name: Deploy to GitHub Pages
+        if: ${{ github.ref == 'refs/heads/production' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          clean-exclude: |
+            deploy-previews
+            legacy
+            staging
+            next

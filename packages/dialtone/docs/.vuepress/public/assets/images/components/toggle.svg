@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
+<rect x="102" y="39" width="60" height="30" rx="15" fill="var(--dt-color-brand-purple)" id="Rectangle 492"/>
+<rect x="135" y="42" width="24" height="24" rx="12" fill="var(--dt-color-neutral-white)" id="Rectangle 493"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M127.099 47.6154C127.627 48.1088 127.635 48.916 127.116 49.4184L116.584 59.6184C116.332 59.8625 115.987 60 115.628 60C115.268 60 114.923 59.8625 114.671 59.6184L109.884 54.982C109.365 54.4797 109.373 53.6724 109.901 53.179C110.429 52.6856 111.278 52.6929 111.797 53.1952L115.628 56.9054L125.203 47.6316C125.722 47.1292 126.571 47.1219 127.099 47.6154Z" fill="var(--dt-action-color-foreground-base-primary-default)" id="Vector (Stroke)"/>
+</svg>

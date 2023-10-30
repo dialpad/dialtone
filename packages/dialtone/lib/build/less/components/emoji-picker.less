@@ -1,0 +1,223 @@
+//
+//  DIALTONE
+//  COMPONENTS: EMOJI-PICKER
+//
+//  These are the styles for emoji-picker component.
+//
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+
+//  @@  BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-emoji-picker {
+  flex-direction: column;
+  // fixed width to achieve accessibility in keyboard (372px)
+  // with this width we have 9 emoji per row
+  width: calc(var(--dt-size-925) + var(--dt-size-600) + var(--dt-size-400));
+  height: 100%;
+  background-color: var(--dt-color-surface-primary);
+  border-radius: var(--dt-size-300);
+
+  &--header {
+    position: relative;
+    padding: var(--dt-space-300) var(--dt-space-300) 0 var(--dt-space-400);
+
+    &::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: var(--dt-size-100);
+      background-color: var(--dt-color-surface-moderate) !important;
+      content: '';
+    }
+  }
+
+  &__alignment {
+    width: auto;
+    max-width: calc(var(--dt-size-925) + var(--dt-size-400));
+    margin: 0 var(--dt-space-500);
+  }
+
+  &--footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: calc(var(--dt-size-650) + var(--dt-size-400) + var(--dt-size-200));
+    padding: 0 var(--dt-space-500);
+    background: var(--dt-color-surface-secondary);
+    border-top: var(--dt-size-100) solid var(--dt-color-border-subtle);
+  }
+
+  &__tabset-list {
+      gap: var(--dt-space-300);
+
+      &::after {
+        background-color: var(--dt-color-surface-moderate) !important;
+      }
+
+      button {
+        padding: var(--dt-space-400);
+
+        &.d-tab--selected {
+          &::after {
+            height: var(--dt-size-200);
+          }
+        }
+    }
+  }
+
+  &__skin-list {
+    display: inline-flex;
+    flex-direction: row;
+    gap: var(--dt-space-300);
+    align-items: flex-start;
+    padding: var(--dt-space-300);
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: calc(var(--dt-size-600) + var(--dt-size-400));
+
+    button {
+      width: var(--dt-size-600);
+      height: var(--dt-size-600);
+      margin: 0;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: calc(var(--dt-size-550) + var(--dt-size-300));
+      outline: none;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: calc(var(--dt-size-550) + var(--dt-size-300));
+      }
+
+      &.selected {
+        border: var(--dt-size-100) solid rgba(0, 0, 0, 0.25);
+        border-radius: calc(var(--dt-size-550) + var(--dt-size-300));
+      }
+    }
+  }
+
+  &__skin-selected {
+    button {
+      display: inline-block;
+      width: var(--dt-size-625);
+      height: var(--dt-size-625);
+      margin: 0;
+      padding: calc(var(--dt-space-350) + var(--dt-space-100));
+      background: rgba(0, 0, 0, 0.1);
+      border: none;
+      border-radius: calc(var(--dt-size-550) + var(--dt-size-300));
+      outline: none;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--dt-color-surface-bold);
+      }
+    }
+  }
+
+  &__selector {
+    min-height: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
+
+    p {
+      margin-bottom: var(--dt-space-300);
+      font-weight: 700;
+      font-size: var(--dt-size-450);
+      letter-spacing: -0.01em;
+    }
+  }
+
+  &__category {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding-top: var(--dt-space-525);
+    background: var(--dt-color-surface-primary);
+  }
+
+  &__list {
+    position: relative;
+    height: 100%;
+    max-height: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
+    padding-bottom: calc(var(--dt-space-300) + var(--dt-space-100));
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    div:not(:first-child) {
+      p {
+        margin-top: calc(var(--dt-space-525) + var(--dt-space-200));
+      }
+    }
+  }
+
+  &__search-label {
+    margin-top: calc(var(--dt-space-525));
+  }
+
+  &__tab {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--dt-space-200);
+    width: calc(100% + calc(var(--dt-size-500) - var(--dt-size-100)));
+    max-width: calc(var(--dt-size-925) + var(--dt-size-400));
+    // We use this margin left to align the emoji list with the tabset label
+    margin-left: var(--dt-space-350-negative);
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(var(--dt-size-600) + var(--dt-size-300));
+      height: calc(var(--dt-size-600) + var(--dt-size-300));
+      margin: 0;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+
+      &:hover,
+      &:active {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      &.hover-emoji {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      &:focus {
+        box-shadow: var(--dt-shadow-focus);
+      }
+    }
+  }
+
+  &__search {
+    position: relative;
+    z-index: 1;
+    margin: var(--dt-space-500) var(--dt-space-550) 0 var(--dt-space-500);
+    background-color: var(--dt-color-surface-primary);
+  }
+
+  &__search-button {
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  &__data {
+    display: flex;
+    gap: var(--dt-space-100);
+    align-items: center;
+    width: 100%;
+    max-width: calc(var(--dt-size-905) + var(--dt-size-550) + var(--dt-size-200));
+  }
+}

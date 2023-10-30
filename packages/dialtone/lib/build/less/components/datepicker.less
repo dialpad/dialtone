@@ -1,0 +1,103 @@
+//
+//  DIALTONE
+//  COMPONENTS: DATEPICKER
+//
+//  These are the styles for datepicker component.
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-datepicker {
+  width: calc(var(--dt-size-925) - var(--dt-size-550));
+  padding: var(--dt-size-500);
+
+  p {
+    display: flex;
+    margin: 0;
+    font-weight: 400;
+    font-size: var(--dt-size-450);
+    font-family: inherit;
+    font-style: normal;
+    text-transform: uppercase;
+  }
+
+  &--body {
+    padding: 0 var(--dt-size-400);
+  }
+
+  &__week-day {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--dt-size-500);
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--dt-size-550);
+      height: var(--dt-size-550);
+
+      p {
+        margin: 0;
+        color: var(--dt-color-surface-strong);
+      }
+    }
+  }
+
+  &__week {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--dt-size-400);
+  }
+
+  &__day {
+    width: var(--dt-size-550);
+    height: var(--dt-size-550);
+    padding: 0;
+    font-size: var(--dt-size-450);
+    background-color: transparent;
+    border: none;
+    border-radius: calc(var(--dt-size-650) + var(--dt-size-200));
+    cursor: pointer;
+
+    &--disabled {
+      color: var(--dt-color-surface-bold);
+    }
+
+    &--selected {
+     color: var(--dt-color-foreground-primary);
+     background: var(--dt-color-purple-400);
+    }
+
+    &:focus {
+     box-shadow: var(--dt-shadow-focus);
+    }
+  }
+
+  &__month-year-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin-bottom: var(--dt-size-525);
+
+    > div {
+        display: inline-flex;
+      }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      color: var(--dt-action-color-foreground-base-default);
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
