@@ -1,10 +1,12 @@
-name: Lint PR
+name: Lint PR Dialtone-tokens
 
 on:
   pull_request:
     types: ['opened', 'edited', 'reopened', 'synchronize']
     branches:
       - staging
+    paths:
+      - 'packages/dialtone-tokens/**'
 
 jobs:
   commitlint:
