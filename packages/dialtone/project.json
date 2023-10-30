@@ -4,6 +4,7 @@
     "release-local": {
       "executor": "nx:run-commands",
       "outputs": [],
+      "dependsOn": ["^build"],
       "options": {
         "command": "npx semantic-release-plus --no-ci --extends ./packages/dialtone/release-local.config.cjs",
         "parallel": false
@@ -25,9 +26,19 @@
         "parallel": false
       }
     },
+    "build-docs": {
+      "executor": "nx:run-script",
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "options": {
+        "script": "build:docsite",
+        "parallel": false
+      }
+    },
     "start": {
       "executor": "nx:run-commands",
       "outputs": [],
+      "dependsOn": ["^build"],
       "options": {
         "command": "npx nx run dialtone:start",
         "parallel": false
