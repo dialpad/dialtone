@@ -37,14 +37,14 @@ jobs:
       run: pnpm install --frozen-lockfile
 
     - name: Build library and docsite
-      run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /deploy-previews/pr-${{github.event.pull_request.number}}/
+      run: npx nx run --verbose dialtone:build-docs -- --deploySubdir design-system/deploy-previews/pr-${{github.event.pull_request.number}}/
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
         branch: gh-pages
         folder: packages/dialtone/docs/.vuepress/dist
-        target-folder: design-system/deploy-previews/pr-${{ github.event.pull_request.number }}
+        target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
 
     - name: Add Message
       uses: mshick/add-pr-comment@v1
