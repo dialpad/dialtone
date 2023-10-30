@@ -67,6 +67,6 @@ jobs:
       with:
         message: |
           ✔️ Deploy Preview ready!
-          😎 Browse the preview: https://dialpad.design/deploy-previews/pr-${{ github.event.pull_request.number }}
+          😎 Browse the preview: https://dialpad.github.io/design-system/deploy-previews/pr-${{ github.event.pull_request.number }}
           🔨 If you experience an SSL issue then wait 2 minutes and try again.
         allow-repeats: true
