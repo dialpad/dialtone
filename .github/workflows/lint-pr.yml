@@ -1,10 +1,12 @@
-name: Lint PR
+name: Lint PR Dialtone-tokens
 
 on:
   pull_request:
     types: ['opened', 'edited', 'reopened', 'synchronize']
     branches:
       - staging
+    paths:
+      - 'packages/dialtone-tokens/**'
 
 jobs:
   commitlint:
@@ -21,7 +23,7 @@ jobs:
           node-version: '18.x'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint pull request commit message when it has a single commit
         if: ${{ github.event.pull_request.commits == '1' }}
