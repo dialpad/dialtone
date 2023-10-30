@@ -111,8 +111,7 @@
 </template>
 
 <script setup>
-// Whyyy oh why do I have to do this...
-import { categories } from '../../../node_modules/@dialpad/dialtone-icons/dist/icons.json';
+import { categories } from '@dialpad/dialtone-icons/dist/icons.json';
 import { computed, onMounted, ref, watch } from 'vue';
 import IconPopover from '../baseComponents/IconPopover.vue';
 import IconPopoverContent from '../baseComponents/IconPopoverContent.vue';
