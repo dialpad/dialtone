@@ -27,9 +27,8 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: |
-          cd packages/dialtone-tokens
-          pnpm install
+        run: pnpm install
+        working-directory: ./packages/dialtone-tokens
 
       - name: Lint pull request commit message when it has a single commit
         if: ${{ github.event.pull_request.commits == '1' }}
