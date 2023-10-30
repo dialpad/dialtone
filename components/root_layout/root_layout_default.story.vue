@@ -13,24 +13,24 @@
     <template
       #header
     >
-      <v-html
+      <html-fragment
         :html="$attrs.header"
       />
     </template>
     <template
       #sidebar
     >
-      <v-html
+      <html-fragment
         :html="$attrs.sidebar"
       />
     </template>
-    <v-html
+    <html-fragment
       :html="$attrs.default"
     />
     <template
       #footer
     >
-      <v-html
+      <html-fragment
         :html="$attrs.footer"
       />
     </template>
@@ -39,10 +39,10 @@
 
 <script>
 import DtRootLayout from './root_layout.vue';
-import VHtml from '@/common/v_html';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtRootLayoutDefault',
-  components: { DtRootLayout, VHtml },
+  components: { DtRootLayout, htmlFragment },
 };
 </script>

@@ -10,13 +10,17 @@ import DtRootLayout from './root_layout.vue';
 import DtRootLayoutDefaultTemplate from './root_layout_default.story.vue';
 import DtRootLayoutStickyTemplate from './root_layout_sticky.story.vue';
 
+const sidebarItems = '<div>Sidebar item</div>'.repeat(45);
+
 // Default Prop Values
 export const argsData = {
   sidebarPosition: 'left',
-  header: '<div class="d-bgc-purple-200 d-h64">Header</div>',
-  footer: '<div class="d-bgc-gold-200 d-h64">Footer</div>',
-  sidebar:
-    '<div class="d-bgc-black-200 d-wmn264 d-h100p"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
+  header: '<div class="d-h64">Header</div>',
+  headerClass: 'd-bgc-purple-200',
+  footer: '<div class="d-h64">Footer</div>',
+  footerClass: 'd-bgc-gold-200',
+  sidebar: `<div class="d-w264">${sidebarItems}</div>`,
+  sidebarClass: 'd-bgc-black-200',
   default: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim eleifend condimentum.
   Vestibulum euismod leo at finibus mattis. Integer ut dui id ligula tincidunt pellentesque. Vestibulum a ullamcorper
   risus. Ut tristique sapien eget magna lacinia, non interdum lacus malesuada. Proin augue lacus, finibus eget aliquam
