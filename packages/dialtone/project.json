@@ -28,7 +28,16 @@
     },
     "build-docs": {
       "executor": "nx:run-script",
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        {
+          "projects": [
+            "dialtone-icons@3",
+            "dialtone-tokens"
+          ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
       "outputs": [],
       "options": {
         "script": "build:docsite",

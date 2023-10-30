@@ -9,7 +9,7 @@ env:
   HUSKY: 0
 
 jobs:
-  deploy:
+  deploy-preview:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
