@@ -1,0 +1,73 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		// FILES
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true
+    },
+
+		// SEARCH
+    // Note that gitignored files are automatically excluded from search. Do not add files
+    // here that are already gitignored.
+    "search.exclude": {
+      "**/package-lock.json": true,
+      "**/locale": true
+    },
+
+		// SPACING
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.trimAutoWhitespace": true,
+		"editor.rulers": [120],
+		"files.trimTrailingWhitespace": true,
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.stylelint": true,
+			"source.fixAll.eslint": true,
+		},
+		"javascript.format.enable": false,
+
+		// LINTING / FORMATTING
+		"css.validate": false,
+		"less.validate": false,
+		"stylelint.validate": [
+			"css",
+			"less",
+		],
+		"eslint.format.enable": true,
+		"eslint.validate": [
+			"javascript",
+      "javascriptreact",
+      "vue",
+      "vue-html",
+      "html"
+		],
+		"vetur.completion.tagCasing": "kebab",
+		"vetur.format.enable": false,
+		"vetur.validation.script": false,
+		"vetur.validation.template": false,
+		"yaml.format.enable": true,
+    	"yaml.format.singleQuote": true,
+    	"yaml.schemas": {
+      		"https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
+	    },
+		"markdownlint.config": {
+			"default": true,
+			"line-length": false,
+			"no-duplicate-heading": false,
+			"no-trailing-punctuation": false,
+			"no-inline-html": false,
+			"first-line-h1": false
+		},
+		"[markdown]": {
+			"editor.rulers": []
+		}
+	}
+}

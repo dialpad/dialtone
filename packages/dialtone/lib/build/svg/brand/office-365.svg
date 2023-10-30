@@ -1,0 +1,36 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.571 2.069l1.366 3.597v12.297l-1.333 3.97 5.902-1.639a1.904 1.904 0 001.393-1.834V5.542a1.903 1.903 0 00-1.396-1.835L12.571 2.07z" fill="url(#office-365__paint0_linear)"/>
+  <path d="M7.239 16.878l-1.757.96A1.001 1.001 0 014 16.96V7.45a1.9 1.9 0 01.954-1.65l6.192-3.553a1.869 1.869 0 011.642-.107 1.86 1.86 0 011.15 1.724v1.8L8.904 7.5a1.415 1.415 0 00-.93 1.33v6.807a1.415 1.415 0 01-.736 1.24z" fill="url(#office-365__paint1_linear)"/>
+  <path d="M13.937 17.963v2.214a1.82 1.82 0 01-2.713 1.59l-3.88-2.174a.87.87 0 01.425-1.63h6.168z" fill="url(#office-365__paint2_linear)"/>
+  <path d="M7.239 16.878l-1.757.96A1.001 1.001 0 014 16.96V7.45a1.9 1.9 0 01.954-1.65l6.192-3.553a1.869 1.869 0 011.642-.107 1.86 1.86 0 011.15 1.724v1.8L8.904 7.5a1.415 1.415 0 00-.93 1.33v6.807a1.415 1.415 0 01-.736 1.24z" fill="url(#office-365__paint3_linear)"/>
+  <path d="M13.937 17.963v2.214a1.82 1.82 0 01-2.713 1.59l-3.88-2.174a.87.87 0 01.425-1.63h6.168z" fill="url(#office-365__paint4_linear)"/>
+  <defs>
+    <linearGradient id="office-365__paint0_linear" x1="16.235" y1=".94" x2="16.235" y2="20.54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB900"/>
+      <stop offset=".166" stop-color="#EF8400"/>
+      <stop offset=".313" stop-color="#E25C01"/>
+      <stop offset=".429" stop-color="#DB4401"/>
+      <stop offset=".5" stop-color="#D83B01"/>
+    </linearGradient>
+    <linearGradient id="office-365__paint1_linear" x1="12.782" y1="1.762" x2="2.29" y2="16.747" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#800600"/>
+      <stop offset=".6" stop-color="#C72127"/>
+      <stop offset=".728" stop-color="#C13959"/>
+      <stop offset=".847" stop-color="#BC4B81"/>
+      <stop offset=".942" stop-color="#B95799"/>
+      <stop offset="1" stop-color="#B85BA2"/>
+    </linearGradient>
+    <linearGradient id="office-365__paint2_linear" x1="7.462" y1="19.982" x2="20.393" y2="19.982" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F32B44"/>
+      <stop offset=".6" stop-color="#A4070A"/>
+    </linearGradient>
+    <linearGradient id="office-365__paint3_linear" x1="12.997" y1="1.455" x2="10.775" y2="4.629" gradientUnits="userSpaceOnUse">
+      <stop stop-opacity=".4"/>
+      <stop offset="1" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="office-365__paint4_linear" x1="16.26" y1="20.268" x2="10.46" y2="19.761" gradientUnits="userSpaceOnUse">
+      <stop stop-opacity=".4"/>
+      <stop offset="1" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>

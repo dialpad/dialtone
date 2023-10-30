@@ -1,0 +1,119 @@
+//
+//  DIALTONE
+//  COMPONENTS: TOAST
+//
+//  These are the styles for toast notices, which are used by alert users to
+//  information they might need. For further documentation of these styles,
+//  please visit https://dialpad.design/components/toasts
+
+//  ============================================================================
+//  @   TOAST CONTAINER
+//  ----------------------------------------------------------------------------
+.d-toast-wrapper {
+  position: absolute;
+  top: var(--dt-space-600); // 32
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-500);
+  transform: translateX(-50%);
+}
+
+//  ============================================================================
+//  @   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-toast {
+    //  Component CSS Vars
+    //  ------------------------------------------------------------------------
+    --toast-color-shadow: hsla(var(--dt-color-black-900-hsl) / 0.15);
+    --toast-box-shadow: 0 0 0 var(--dt-size-100) var(--toast-color-shadow) inset, var(--dt-shadow-medium);
+
+    z-index: var(--zi-notification);
+    display: block;
+    max-width: var(--dt-size-975);
+    word-break: normal;
+    box-shadow: var(--toast-box-shadow);
+    pointer-events: all;
+
+    //  If there's a link in a toast, break the url so it wraps
+    > a {
+        word-break: break-all;
+    }
+
+    // If you want to hide and reveal the toast
+    &[aria-hidden='true'] {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    &[aria-hidden='false'] {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+//  ============================================================================
+//  $   CONTENT CONTAINER
+//  ----------------------------------------------------------------------------
+.d-toast__dialog {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .d-notice__actions {
+        margin-left: var(--dt-space-600); // 32
+    }
+}
+
+//  ============================================================================
+//  $   UC Toast Shims
+//  ============================================================================
+//  $$  CHAT
+//  ----------------------------------------------------------------------------
+.d-toast--chat {
+  .d-notice__icon,
+  .d-toast__meta {
+    color: var(--dt-color-black-500);
+  }
+
+  .d-toast__meta {
+    font-size: var(--dt-font-size-100);
+  }
+
+  &.d-toast--important {
+    .d-notice__icon,
+    .d-toast__meta {
+      color: var(--dt-color-foreground-secondary-inverted);
+    }
+  }
+}
+
+//  $$  ORGANIZER
+//  ----------------------------------------------------------------------------
+.d-toast--organizer {
+  //
+}
+
+//  $$  VIEWING
+//  ----------------------------------------------------------------------------
+// TODO: resolve
+.d-toast--viewing {
+ //
+}
+
+.d-toast--organizer,
+.d-toast--viewing {
+  --toast-border-radius: var(--dt-size-radius-200);
+
+  border-top: var(--dt-size-300) solid var(--dt-color-magenta-300);
+
+  .d-notice__icon {
+    color: var(--dt-color-magenta-300);
+  }
+}
+
+.d-toast--chat,
+.d-toast--organizer,
+.d-toast--viewing {
+  --toast-color-background: var(--dt-color-surface-secondary);
+}

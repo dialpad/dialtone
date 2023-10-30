@@ -1,0 +1,879 @@
+//
+//  DIALTONE DOCUMENTATION
+//  UNIVERSAL FILE
+//
+//  These are various visual styles for Dialtone's documentation.
+//  For more information, please visit:
+//  https://dialpad.design/
+//
+//
+//  TABLE OF CONTENTS
+//  • IMPORTS
+//  • COLOR PALETTES
+//  • TOC
+//  • ICON GRID
+//  • HOME PAGE
+//  ----------------------------------------------------------------------------
+
+:root {
+  --docsearch-primary-color: #7C52FF;
+}
+
+//  ============================================================================
+//  @   RESETS
+//  ============================================================================
+//      [1]     Universally set border-box
+//  ----------------------------------------------------------------------------
+
+* {
+  &,
+  &::before,
+  &::after {
+    box-sizing: border-box; // [1]
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 7.2rem;
+}
+
+//  ============================================================================
+//  $   SEARCH (Algolia)
+//      Override
+//  ----------------------------------------------------------------------------
+html body {
+
+  --docsearch-primary-color: var(--dt-color-brand-purple);
+  --docsearch-text-color: var(--dt-color-foreground-primary);
+  --docsearch-spacing: var(--dt-space-550);
+  // --docsearch-icon-stroke-width
+  --docsearch-highlight-color: var(--docsearch-primary-color);
+  --docsearch-muted-color: var(--dt-color-foreground-tertiary);
+  --docsearch-container-background: var(--dt-color-surface-backdrop);
+  // --docsearch-logo-color
+  --docsearch-modal-width: var(--dt-size-1000);
+  --docsearch-modal-height: var(--dt-size-1000);
+  --docsearch-modal-background: var(--dt-color-surface-secondary);
+  --docsearch-modal-shadow: var(--dt-shadow-large);
+  --docsearch-searchbox-height: 40px;
+  // --docsearch-searchbox-background
+  --docsearch-searchbox-focus-background: var(--dt-inputs-color-background-default);
+  --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-150) var(--dt-inputs-color-border-default);
+  --docsearch-hit-height: var(--dt-size-650);
+  --docsearch-hit-color: var(--dt-color-foreground-tertiary);
+  --docsearch-hit-active-color: var(--dt-color-neutral-white);
+  --docsearch-hit-background: var(--dt-color-surface-primary);
+  --docsearch-hit-shadow: inset 0 0 0 1px var(--dt-color-border-subtle);
+  --docsearch-key-gradient: linear-gradient(-225deg,var(--dt-color-surface-primary),var(--dt-color-surface-secondary));
+  --docsearch-key-shadow: inset 0 0 0 1px var(--dt-color-border-default);
+  --docsearch-footer-height: var(--dt-size-650);
+  --docsearch-footer-background: var(--dt-color-surface-primary);
+  --docsearch-footer-shadow: 0 -1px 0 0 var(--dt-color-border-subtle),0 -1px 3px 0 rgba(0,0,0,.2);
+
+  .DocSearch-Modal {
+    border-radius: var(--dt-size-radius-500);
+    background-clip: padding-box;
+    border: var(--dt-size-100) solid var(--dt-color-border-subtle);
+    border-radius: var(--dt-size-500);
+    box-shadow: var(--dt-shadow-large);
+    margin-top: 15vh;
+  }
+
+  .DocSearch-SearchBar {
+    padding-bottom: var(--dt-space-550);
+    border-bottom: 1px solid var(--dt-color-border-subtle);
+  }
+
+  .DocSearch-Form {
+    padding-left: var(--dt-space-450);
+    padding-right: var(--dt-space-450);
+    border-radius: var(--dt-size-radius-400);
+  }
+
+  .DocSearch-MagnifierLabel,
+  .DocSearch-Reset {
+    color: var(--dt-color-foreground-muted)
+  }
+
+  .DocSearch-Input {
+    font-size: var(--dt-font-size-300);
+    &:focus-visible {
+      box-shadow: none;
+    }
+    &::placeholder {
+      color: var(--dt-inputs-color-foreground-placeholder);
+    }
+  }
+
+  .DocSearch-LoadingIndicator svg,
+  .DocSearch-MagnifierLabel svg,
+  .DocSearch-Search-Icon {
+    width: var(--dt-icon-size-300) !important;
+    height: var(--dt-icon-size-300) !important;
+  }
+
+  .DocSearch-Reset:hover {
+    color: var(--dt-color-foreground-primary)
+  }
+
+  .DocSearch-Cancel {
+    // no overrides
+  }
+
+  .DocSearch-Dropdown {
+    // no overrides
+  }
+
+  .DocSearch-Dropdown-Container {
+    // no overrides
+  }
+
+  .DocSearch-Hits {
+    // no overrides
+  }
+
+  .DocSearch-Hit-source {
+    padding: var(--dt-space-400) var(--dt-space-300) 0;
+    font-size: var(--dt-font-size-200);
+    font-weight: var(--dt-font-weight-bold);
+    color: var(--dt-color-foreground-primary);
+  }
+
+  .DocSearch-Title {
+    font-size: var(--dt-font-size-300);
+    color: var(--dt-color-foreground-secondary);
+    strong {
+      color: var(--dt-color-foreground-primary);
+    }
+  }
+
+  .DocSearch-Hit-Container {
+    padding-right: 0;
+  }
+
+  .DocSearch-Hit {
+    padding-bottom: var(--dt-space-400);
+  }
+
+  .DocSearch-Hits mark {
+    background: var(--dt-color-surface-warning);
+    color: var(--dt-color-foreground-primary);
+    padding: var(--dt-space-200);
+  }
+
+  .DocSearch-Hit a {
+    border-radius: var(--dt-size-radius-300);
+    padding-left: var(--dt-space-450);
+    padding-right: var(--dt-space-450);
+  }
+
+  .DocSearch-Hit-action svg,
+  .DocSearch-Hit-icon svg {
+    width: var(--dt-icon-size-200);
+    height: var(--dt-icon-size-200);
+  }
+
+  .DocSearch-Hit-content-wrapper {
+    margin: 0 var(--dt-space-200);
+    line-height: var(--dt-font-line-height-200);
+    font-weight: var(--dt-font-weight-normal);
+  }
+
+  .DocSearch-Hit-action {
+    // no overrides
+  }
+
+  .DocSearch-Hit[aria-selected=true] mark {
+    color: var(--dt-color-foreground-primary) !important;
+    text-decoration: none;
+  }
+
+  .DocSearch-Hit-title {
+    font-size: var(--dt-font-size-200);
+  }
+
+  .DocSearch-Hit-path {
+    font-size: var(--dt-font-size-100);
+    color: var(--dt-color-foreground-muted);
+  }
+
+  .DocSearch-HitsFooter {
+    // no overrides
+  }
+
+  .DocSearch-Footer {
+    border-radius: 0 0 var(--dt-size-radius-500) var(--dt-size-radius-500);
+  }
+
+  .DocSearch-Logo {
+    // no overrides
+  }
+
+  .DocSearch-Logo svg {
+    filter: saturate(0) contrast(.25);
+  }
+
+  .DocSearch-Commands {
+    // no overrides
+  }
+
+  .DocSearch-Commands-Key {
+    border-radius: var(--dt-size-radius-300);
+  }
+
+  .DocSearch-Label {
+    font-size: var(--dt-font-size-100);
+  }
+
+  .DocSearch-Help {
+    color: var(--dt-color-foreground-secondary);
+  }
+
+  .DocSearch-NoResults {
+    font-size: var(--dt-font-size-200);
+    padding: var(--dt-space-600) 0;
+  }
+
+  .DocSearch-Help {
+    margin-top: var(--dt-space-400);
+    font-size: var(--dt-font-size-100);
+  }
+
+  .DocSearch-Prefill {
+    color: var(--dt-color-link-primary);
+  }
+
+  .DocSearch-NoResults-Prefill-List li {
+    list-style-type: none;
+  }
+}
+
+//  ============================================================================
+//  $   TOC
+//      Because we're using a third-party plugin to generate the subnav menu,
+//      we can't add utility classes directly to the HTML. So we have to use
+//      custom CSS here instead.
+//  ----------------------------------------------------------------------------
+.vuepress-toc {
+  height: fit-content;
+
+  .active-category {
+    &::before {
+      position: absolute;
+      top: var(--dt-space-300);
+      bottom: var(--dt-space-300);
+      left: var(--dt-space-300-negative);
+      width: var(--dt-size-200);
+      background-color: var(--dt-color-purple-400);
+      border-radius: var(--dt-size-200);
+      content: '';
+    }
+  }
+
+  .toc-item {
+    >.toc-list {
+      padding-left: var(--dt-space-400);
+    }
+  }
+}
+
+//  ============================================================================
+//  $   LAYOUT
+//      Because the doc site needs layout specifications that aren't
+//      appropriate to ship as part of Dialtone.
+//  ----------------------------------------------------------------------------
+.dialtone-header {
+  background-color: var(--dt-color-surface-secondary);
+  // TODO: redo 😜
+  border-bottom: var(--dt-size-100) solid var(--dt-color-border-subtle);
+  display: flex;
+  height: var(--dt-size-700);
+  align-items: center;
+  padding: var(--dt-space-500);
+  padding-left: var(--dt-space-400);
+  justify-content: space-between;
+}
+
+.dialtone-sidebar {
+  // TODO: redo 😜
+  height: calc(100vh - var(--dt-space-700));
+  background-color: var(--dt-color-surface-secondary);
+  border-right: var(--dt-size-100) solid var(--dt-color-border-subtle);
+  overflow-y: auto;
+  position: sticky;
+  top: var(--dt-size-700);
+
+
+  &__list {
+    width: calc(var(--dt-size-300) * 64);
+    top: var(--dt-space-700);
+    bottom: 0;
+    padding-top: var(--dt-size-550);
+    padding-left: var(--dt-size-500);
+    padding-right: var(--dt-size-500);
+    padding-bottom: 96px;
+  }
+}
+
+a.header-anchor {
+  float: left;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  font-size: var(--dt-font-size-300);
+  opacity: 0;
+}
+
+.d-docsite--header-2 {
+  margin-top: var(--dt-space-600);
+  margin-bottom: var(--dt-space-400);
+  font-weight: var(--dt-font-weight-medium);
+  font-size: var(--dt-font-size-400);
+  line-height: var(--dt-font-line-height-200);
+}
+
+.d-docsite--header-3 {
+  margin-top: var(--dt-space-500);
+  margin-bottom: var(--dt-space-300);
+  font-weight: var(--dt-font-weight-semi-bold);
+  font-size: var(--dt-font-size-300);
+  line-height: var(--dt-font-line-height-400);
+}
+
+.d-docsite--header-4 {
+  margin-top: var(--dt-space-400);
+  margin-bottom: var(--dt-space-300);
+  font-weight: var(--dt-font-weight-bold);
+  font-size: var(--dt-font-size-200);
+  line-height: var(--dt-font-line-height-400);
+}
+
+.d-docsite--header-2,
+.d-docsite--header-3 {
+  &:hover a.header-anchor {
+    opacity: 1;
+  }
+}
+
+.d-ga-toc {
+  grid-area: toc !important;
+}
+
+.d-gl-docsite {
+  grid-template-areas: 'content';
+  grid-template-columns: [content] minmax(32rem, 99rem);
+}
+
+.d-gl-docsite-toc {
+  grid-template-areas: 'content toc';
+  grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(min-content, 21.6rem);
+}
+
+.d-docsite--paragraph {
+  max-width: 75ch;
+  margin-bottom: 1em;
+  font-size: var(--dt-font-size-200);
+  line-height: var(--dt-font-line-height-400);
+
+  .d-notice & {
+    // OVERRIDE
+    margin: unset; // TODO: make sure this doesn't get inserted into components
+  }
+}
+
+.d-docsite--unordered-list,
+.d-docsite--list-element,
+.d-docsite--ordered-list {
+  list-style: revert;
+}
+
+.d-docsite--unordered-list,
+.d-docsite--ordered-list {
+  margin: var(--dt-space-400) 0;
+  padding-left: var(--dt-space-500);
+}
+
+.d-docsite--list-element {
+  max-width: 75ch;
+  margin-bottom: var(--dt-space-300);
+  font-size: var(--dt-font-size-200);
+  line-height: var(--dt-font-line-height-400);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.d-docsite--preview-header {
+  margin-top: var(--dt-space-600);
+  margin-bottom: var(--dt-space-300);
+}
+
+//  ============================================================================
+//  $   ICON GRID
+//      Styles our icon pages
+//  ----------------------------------------------------------------------------
+.d-gl-docsite-icons {
+  --icon-card-width: 12rem;
+  --icon-grid-columns: auto-fit;
+
+  display: grid;
+  grid-auto-rows: 12rem;
+  grid-template-columns: repeat(var(--icon-grid-columns), [col] var(--icon-card-width));
+
+  &--large {
+    &:extend(.d-gl-docsite-icons);
+
+    --icon-card-width: 18rem;
+
+    grid-auto-rows: 18rem;
+  }
+}
+
+.dialtone-icon-grid__item {
+  position: relative;
+  height: var(--dt-size-750);
+  width: var(--dt-size-100-percent);
+}
+
+.dialtone-icon-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.dialtone-icon-card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--dt-space-400);
+  background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0);
+  border-radius: var(--dt-size-400);
+  cursor: pointer;
+  transition: all 150ms var(--ttf-in-out);
+
+  &:hover {
+    background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0.4);
+  }
+
+  .dialtone-icon-card[data-selected='yes'] & {
+    background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0.4);
+  }
+}
+
+.dialtone-icon-card__footer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: var(--zi-popover);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: calc((var(--icon-card-width) * 2) + var(--dt-size-600));
+  min-height: var(--icon-card-width);
+  margin-right: var(--dt-space-100-negative);
+  padding: var(--dt-space-450) var(--dt-space-500);
+  color: var(--dt-color-black-200);
+  font-size: var(--dt-font-size-200);
+  background-color: var(--dt-color-black-700);
+  border-radius: var(--dt-size-400);
+  box-shadow: var(--bs-md);
+
+  .dialtone-icon-card[data-selected='yes'] & {
+    margin: var(--dt-size-100-negative);
+    transform: translateX(calc(-1 * var(--icon-card-width)));
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 50ms var(--ttf-in-out) 0s,
+      transform 50ms var(--ttf-in-out) 0s,
+      visibility 0s 50ms;
+  }
+
+  //  If it's in the first two columns, show the footer on the right
+  .dialtone-icon-grid__item:nth-child(6n+1) .dialtone-icon-card[data-selected='yes'] &,
+  .dialtone-icon-grid__item:nth-child(6n+2) .dialtone-icon-card[data-selected='yes'] & {
+    right: var(--dt-size-100);
+    margin-right: unset;
+    transform: translateX(100%);
+  }
+
+  .dialtone-icon-card[data-selected='no'] & {
+    transform: translateX(0);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 100ms var(--ttf-in-out) 0s,
+      transform 100ms var(--ttf-in-out) 0s,
+      visibility 0s 0s;
+  }
+}
+
+.dialtone-icon-card__footer-spot-illustration {
+  .dialtone-icon-card__footer();
+
+  width: calc(var(--icon-card-width) * 1.5);
+  min-height: auto;
+}
+
+.dialtone-icon-card__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialtone-icon-card__list__item {
+  font-size: var(--dt-font-size-100);
+
+  strong {
+    display: inline-block;
+    width: 20%;
+  }
+}
+
+.dialtone-icon-card__icon {
+  width: var(--dt-size-650);
+  height: var(--dt-size-650);
+  margin-bottom: var(--dt-space-300);
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.dialtone-icon-card__icon--autosize {
+  margin-bottom: var(--dt-space-300);
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.dialtone-icon-card__title {
+  margin-top: 0;
+  margin-bottom: var(--dt-space-300);
+  font-weight: var(--dt-font-weight-bold);
+  font-size: var(--dt-font-size-200);
+  line-height: var(--dt-font-line-height-200);
+}
+
+.dialtone-icon-card__subtitle {
+  width: 100%;
+  margin-bottom: 0;
+  overflow: hidden;
+  font-size: var(--dt-font-size-100);
+  line-height: var(--lh-none);
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.dialtone-icon-card__description {
+  color: var(--dt-color-neutral-white);
+  font-size: var(--dt-font-size-100);
+}
+
+.dialtone-icon-popover {
+  max-width: var(--dt-size-950);
+}
+
+//  ============================================================================
+//  $   HOME PAGE
+//      Styles the site's home page
+//  ----------------------------------------------------------------------------
+
+.hero {
+  position: relative;
+  background-color: var(--dt-color-surface-primary);
+
+  &--inner-wrapper {
+    padding-top: calc(var(--dt-space-300) * 32);
+    padding-bottom: calc(var(--dt-space-300) * 32);
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+    }
+  }
+
+  &--content {
+    align-items: flex-start;
+    max-width: 40%;
+
+    @media (max-width: 640px) {
+      align-items: unset;
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+
+  &--image {
+
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+
+  .dp-logo {
+    position: absolute;
+    inset: 0;
+    background-color: var(--dt-color-surface-strong);
+    opacity: .05;
+    mask: url("/assets/images/home-dp-logo.svg") 80% bottom no-repeat;
+  }
+
+  @media (max-width: 640px) {
+    padding-right: var(--dt-space-500);
+    padding-left: var(--dt-space-400);
+  }
+}
+
+.links {
+  padding-top: var(--dt-space-650);
+  padding-bottom: var(--dt-space-650);
+
+  @media (max-width: 640px) {
+    display: block !important;
+  }
+}
+
+.link {
+  @media (max-width: 640px) {
+    display: block;
+    grid-column: 1 / -1 !important;
+    margin-bottom: calc(var(--dt-space-300) * 18);
+  }
+}
+
+//  ============================================================================
+//  $   DOC PAGE TITLE
+//      The <h1> element
+//  ----------------------------------------------------------------------------
+
+.dialtone-page-title {
+  margin-bottom: var(--dt-space-400);
+  font-weight: var(--dt-font-weight-medium);
+  font-size: var(--dt-font-size-500);
+  line-height: var(--dt-font-line-height-200);
+}
+
+//  ============================================================================
+//  $   INTRO PARAGRAPH
+//      Type styles for intro paragraph, aka front matter's `desc`
+//  ----------------------------------------------------------------------------
+
+.dialtone-intro {
+  max-width: 58ch;
+  margin-bottom: var(--dt-space-400);
+  color: var(--dt-color-foreground-secondary);
+  font-size: var(--dt-font-size-300);
+  line-height: var(--dt-font-line-height-300);
+}
+
+//  ============================================================================
+//  $   LANDING PAGE WALL
+//      Style the grid of landing page items
+//  ----------------------------------------------------------------------------
+
+.dialtone-wall {
+  display: grid;
+  grid-gap: var(--dt-space-500);
+  margin-top: var(--dt-space-500);
+
+  @media screen and (min-width: 640px) {
+    grid-gap: var(--dt-space-600);
+    grid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+  }
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: [full-start] repeat(3, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+  }
+
+  &__item {
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    background-color: var(--dt-color-surface-primary);
+    border: var(--dt-size-100) solid;
+    border-color: var(--dt-color-border-default);
+    border-radius: var(--dt-size-400);
+    transition-timing-function: var(--ttf-in-out);
+    transition-duration: var(--td200);
+    transition-property: box-shadow;
+
+    &--disabled {
+      opacity: .7;
+    }
+
+    &:is(a):hover {
+      text-decoration: none;
+      border-color: var(--dt-color-border-moderate);
+      box-shadow: var(--dt-shadow-small);
+    }
+
+    &:is(a):active {
+      box-shadow: none;
+    }
+  }
+
+  &__image {
+    text-align: center;
+    background-color: var(--dt-color-surface-secondary);
+  }
+
+  &__thumb {
+    width: auto;
+    height: var(--dt-size-750);
+
+    @media screen and (min-width: 640px) {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--dt-space-300);
+    padding: var(--dt-space-500);
+  }
+
+  &__title {
+    display: flex;
+    gap: var(--dt-space-400);
+    align-items: center;
+    color: var(--dt-color-foreground-secondary);
+    font-weight: var(--dt-font-weight-semi-bold);
+    font-size: var(--dt-font-size-300);
+    line-height: var(--dt-font-line-height-200);
+  }
+
+  &__title-text {
+    flex: 1;
+  }
+
+  &__description {
+    color: var(--dt-color-foreground-tertiary);
+    font-size: var(--dt-font-size-200);
+    line-height: var(--dt-font-line-height-300);
+  }
+}
+
+//  ============================================================================
+//  $   DEFINITION LIST
+//      Style a doc page's <dl>
+//  ----------------------------------------------------------------------------
+
+.dialtone-definition {
+  > dt {
+    margin-top: var(--dt-space-500);
+    font-weight: var(--dt-font-weight-bold);
+  }
+
+  > dd {
+    max-width: 72ch;
+    margin: 0;
+  }
+
+  code {
+    font-weight: var(--dt-font-weight-normal);
+  }
+}
+
+//  ============================================================================
+//  $   USAGE
+//      Styles the Use When / Don't Use When sections
+//  ----------------------------------------------------------------------------
+
+.dialtone-usage {
+  --usage-item-color-background: var(--dt-color-surface-secondary);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-500);
+  margin-top: var(--dt-space-500);
+  margin-bottom: var(--dt-space-500);
+
+  @media screen and (min-width: 640px) {
+    flex-direction: row;
+  }
+
+  &__hd {
+    display: flex;
+    gap: var(--dt-space-400);
+    align-items: center;
+    font-size: var(--dt-font-size-200);
+
+    &--do {
+      color: var(--dt-color-foreground-success);
+    }
+
+    &--dont {
+      color: var(--dt-color-foreground-critical-strong);
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--dt-space-400);
+    padding: var(--dt-space-500);
+    background-color: var(--usage-item-color-background);
+    border-radius: var(--dt-size-400);
+
+    &--do {
+      --usage-item-color-background: var(--dt-color-surface-success);
+    }
+
+    &--dont {
+      --usage-item-color-background: var(--dt-color-surface-critical);
+    }
+
+  }
+
+  &__bd {
+    font-size: var(--dt-font-size-200);
+    line-height: var(--dt-font-line-height-400);
+
+    .d-docsite--unordered-list {
+      // unfortunate
+      margin: 0 !important;
+      padding: 0;
+      list-style: none;
+
+      *+* {
+        margin-top: var(--dt-space-400);
+      }
+    }
+  }
+}
+
+.back-to-top {
+  background-color: var(--primary-color);
+
+  &:hover {
+    background-color: var(--primary-color-hover);
+  }
+}
+
+//  ============================================================================
+//  $   DEBUGGING / TEST
+//  ----------------------------------------------------------------------------
+
+[outline] {
+  outline: var(--dt-size-200) solid orangered;
+}
+
+// ============================================================================
+// $    MEDIA QUERIES
+// ----------------------------------------------------------------------------
+
+@media (max-width: 980px) {
+  html {
+    scroll-padding-top: 13.6rem;
+  }
+}

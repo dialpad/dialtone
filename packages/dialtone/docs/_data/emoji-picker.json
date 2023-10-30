@@ -1,0 +1,99 @@
+{
+  "classes": [
+    {
+      "class": "d-emoji-picker",
+      "applies": "N/A",
+      "description": "Emoji picker's parent wrapper."
+    },
+    {
+      "class": "d-emoji-picker--header",
+      "applies": ".d-emoji-picker",
+      "description": "Emoji picker's header wrapper."
+    },
+    {
+      "class": "d-emoji-picker--body",
+      "applies": ".d-emoji-picker",
+      "description": "Emoji picker's body wrapper."
+    },
+    {
+      "class": "d-emoji-picker--footer",
+      "applies": ".d-emoji-picker",
+      "description": "Emoji picker's footer wrapper."
+    },
+    {
+      "class": "d-emoji-picker__alignment",
+      "applies": ".d-emoji-picker",
+      "description": "Align emoji picker's wrapper."
+    },
+    {
+      "class": "d-emoji-picker__tabset-list",
+      "applies": ".d-emoji-picker",
+      "description": "Align tabs group."
+    },
+    {
+      "class": "d-tab--selected",
+      "applies": ".d-emoji-picker__tabset-list",
+      "description": "Selected tab style."
+    },
+    {
+      "class": "d-emoji-picker__skin-list",
+      "applies": ".d-emoji-picker",
+      "description": "Contains skin tone options."
+    },
+    {
+      "class": "selected",
+      "applies": ".d-emoji-picker__skin-list",
+      "description": "Selected skin tone style."
+    },
+    {
+      "class": "d-emoji-picker__skin-selected",
+      "applies": ".d-emoji-picker",
+      "description": "Selected skin tone style in container."
+    },
+    {
+      "class": "d-emoji-picker__selector",
+      "applies": ".d-emoji-picker",
+      "description": "Emoji picker's selector wrapper."
+    },
+    {
+      "class": "d-emoji-picker__category",
+      "applies": ".d-emoji-picker",
+      "description": "Fixed label category style."
+    },
+    {
+      "class": "d-emoji-picker__list",
+      "applies": ".d-emoji-picker",
+      "description": "Emoji picker's emoji list style."
+    },
+    {
+      "class": "d-emoji-picker__search-label",
+      "applies": ".d-emoji-picker",
+      "description": "Search label in selector wrapper."
+    },
+    {
+      "class": "d-emoji-picker___tab",
+      "applies": ".d-emoji-picker",
+      "description": "Emoji's Tab in selector wrapper."
+    },
+    {
+      "class": "hover-emoji",
+      "applies": ".d-emoji-picker___tab",
+      "description": "Emoji's hover effect in selector wrapper."
+    },
+    {
+      "class": "d-emoji-picker__search",
+      "applies": ".d-emoji-picker",
+      "description": "Search input style of search input wrapper."
+    },
+    {
+      "class": "d-emoji-picker__search-button",
+      "applies": ".d-emoji-picker",
+      "description": "Search button style of search input wrapper."
+    },
+    {
+      "class": "d-emoji-picker__data",
+      "applies": ".d-emoji-picker",
+      "description": "Emoji's description style."
+    }
+  ]
+}

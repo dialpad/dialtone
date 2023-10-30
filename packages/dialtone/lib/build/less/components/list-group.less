@@ -1,0 +1,48 @@
+//
+//  DIALTONE 5 SHIM
+//  COMPONENTS: LIST GROUPS
+//
+//  These are the list group definitions, which are used by classes or can be
+//  used within Vue components. For further documentation of these values,
+//  please visit https://dialpad.design/components/list-groups
+//
+//  ============================================================================
+.d-list-group,
+.d-list-group__item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.d-list-group--header,
+.d-list-group--link {
+    display: block;
+    padding: var(--dt-space-300) var(--dt-space-550); // 4 24
+}
+
+.d-list-group--header {
+    font-weight: var(--dt-font-weight-bold);
+    font-size: var(--dt-font-size-100);
+    text-transform: uppercase;
+}
+
+.d-list-group--link {
+    color: var(--dt-color-black-800);
+    font-size: var(--dt-font-size-200);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--dt-color-black-900);
+        background-color: hsla(var(--dt-color-purple-400-hsl) ~' / ' 85%);
+    }
+
+    &-selected {
+        color: var(--dt-color-neutral-white);
+        background-color: var(--dt-color-purple-400);
+
+        &:hover {
+            color: var(--dt-color-neutral-white);
+            background-color: hsl(var(--dt-color-purple-400-h) var(--dt-color-purple-400-s) calc(var(--dt-color-purple-400-l) + 10%));
+        }
+    }
+}

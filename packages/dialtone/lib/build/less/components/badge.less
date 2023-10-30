@@ -1,0 +1,139 @@
+//
+//  DIALTONE
+//  COMPONENTS: BADGES
+//
+//  These are badge classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialpad.design/components/badges
+//
+//  TABLE OF CONTENTS
+//  • COMPONENT CSS VARIABLES
+//  • BASE STYLE
+//  • KIND
+//  • TYPE
+//  • SLOTS
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+
+.d-badge {
+  //  COMPONENT CSS VARIABLES
+  //  --------------------------------------------------------------------------
+  --badge-color-text: var(--dt-badge-color-foreground-default);
+  --badge-color-background: var(--dt-badge-color-background-default);
+  --badge-radius: var(--dt-size-300);
+  --badge-line-height: calc(var(--dt-size-500) + var(--dt-size-200));
+  --badge-font-size: var(--dt-font-size-100);
+  --badge-font-weight: var(--dt-font-weight-semi-bold);
+  --badge-gap: var(--dt-space-300);
+  --badge-letter-spacing: var(--dt-size-50);
+  --badge-padding-y: var(--dt-space-100);
+  --badge-padding-x: var(--dt-space-400);
+  --badge-text-case: none;
+  --badge-decorative-color: var(--dt-color-black-900);
+
+  //  BASE STYLE
+  //  --------------------------------------------------------------------------
+  display: inline-flex;
+  gap: var(--badge-gap);
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: var(--dt-size-550);
+  padding: var(--badge-padding-y) var(--badge-padding-x);
+  color: var(--badge-color-text);
+  font-weight: var(--badge-font-weight);
+  font-size: var(--badge-font-size);
+  line-height: var(--badge-line-height);
+  letter-spacing: var(--badge-letter-spacing);
+  text-align: center;
+  text-transform: var(--badge-text-case);
+  background-color: var(--badge-color-background);
+  border-radius: var(--badge-radius);
+
+  //  Kind
+  //  --------------------------------------------------------------------------
+
+  &--count {
+    --badge-radius: var(--dt-size-radius-pill);
+    --badge-padding-x: calc(var(--dt-space-400) - var(--dt-space-100));
+    --badge-padding-y: var(--dt-space-300);
+    --badge-line-height: var(--dt-size-500);
+  }
+
+  //  TYPE
+  //  --------------------------------------------------------------------------
+
+  &--info {
+    --badge-color-background: var(--dt-badge-color-background-info);
+  }
+
+  &--success {
+    --badge-color-background: var(--dt-badge-color-background-success);
+  }
+
+  &--warning {
+    --badge-color-background: var(--dt-badge-color-background-warning);
+  }
+
+  &--critical {
+    --badge-color-background: var(--dt-badge-color-background-critical);
+  }
+
+  &--bulletin {
+    --badge-color-text: var(--dt-badge-color-foreground-bulletin);
+    --badge-color-background: var(--dt-badge-color-background-bulletin);
+  }
+
+  &--ai {
+    --badge-color-text: var(--dt-badge-color-foreground-bulletin); // missing token or is ok to use this one?
+    --badge-color-background: var(--dt-color-magenta-300);
+
+    background-image: var(--dt-badge-color-background-ai);
+  }
+
+  &--decorate-black-400 { --badge-decorative-color: var(--dt-color-black-400); }
+  &--decorate-black-500 { --badge-decorative-color: var(--dt-color-black-500); }
+  &--decorate-black-900 { --badge-decorative-color: var(--dt-color-black-900); }
+  &--decorate-red-200 { --badge-decorative-color: var(--dt-color-red-200); }
+  &--decorate-red-300 { --badge-decorative-color: var(--dt-color-red-300); }
+  &--decorate-red-400 { --badge-decorative-color: var(--dt-color-red-400); }
+  &--decorate-purple-200 { --badge-decorative-color: var(--dt-color-purple-200); }
+  &--decorate-purple-300 { --badge-decorative-color: var(--dt-color-purple-300); }
+  &--decorate-purple-400 { --badge-decorative-color: var(--dt-color-purple-400); }
+  &--decorate-purple-500 { --badge-decorative-color: var(--dt-color-purple-500); }
+  &--decorate-blue-200 { --badge-decorative-color: var(--dt-color-blue-200); }
+  &--decorate-blue-300 { --badge-decorative-color: var(--dt-color-blue-300); }
+  &--decorate-blue-400 { --badge-decorative-color: var(--dt-color-blue-400); }
+  &--decorate-green-300 { --badge-decorative-color: var(--dt-color-green-300); }
+  &--decorate-green-400 { --badge-decorative-color: var(--dt-color-green-400); }
+  &--decorate-green-500 { --badge-decorative-color: var(--dt-color-green-500); }
+  &--decorate-gold-300 { --badge-decorative-color: var(--dt-color-gold-300); }
+  &--decorate-gold-400 { --badge-decorative-color: var(--dt-color-gold-400); }
+  &--decorate-gold-500 { --badge-decorative-color: var(--dt-color-gold-500); }
+  &--decorate-magenta-200 { --badge-decorative-color: var(--dt-color-magenta-200); }
+  &--decorate-magenta-300 { --badge-decorative-color: var(--dt-color-magenta-300); }
+  &--decorate-magenta-400 { --badge-decorative-color: var(--dt-color-magenta-400); }
+
+  //  SLOTS
+  //  --------------------------------------------------------------------------
+
+  &__decorative {
+    display: inline-flex;
+    width: var(--dt-size-400);
+    height: var(--dt-size-400);
+    background-color: var(--badge-decorative-color);
+    border-radius: var(--dt-size-200);
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon-left,
+  &__icon-right {
+    display: flex;
+  }
+}

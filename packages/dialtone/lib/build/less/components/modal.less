@@ -1,0 +1,340 @@
+//
+//  DIALTONE
+//  COMPONENTS: MODALS
+//
+//  These are modal classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialpad.design/components/modals
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLES
+//    - Wrapper
+//    - Dialog
+//    - Make them appear
+//  • MODAL BACKGROUND
+//  • HEADER
+//  • CONTENT
+//  • FOOTER
+//  • TRANSITIONS
+//
+//  ============================================================================
+//  $   BASE STYLES
+//  ============================================================================
+//  $$  WRAPPER
+//  ----------------------------------------------------------------------------
+.d-modal {
+    //  Component CSS Vars
+    //  ------------------------------------------------------------------------
+    --modal-backdrop-color-background: var(--dt-color-surface-backdrop);
+    --modal-dialog-padding: var(--dt-space-600);
+    --modal-dialog-color-background: var(--dt-color-surface-primary);
+    --modal-dialog-color-border: var(--dt-color-border-subtle);
+    --modal-dialog-color-text: var(--dt-color-foreground-primary);
+    --modal-header-color-text: var(--dt-color-foreground-primary);
+    --modal-dialog-shadow: var(--dt-shadow-large);
+
+    position: fixed;
+    inset: 0;
+    z-index: var(--zi-hide);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--dt-space-600); // 32
+    background-color: var(--modal-backdrop-color-background);
+    backface-visibility: hidden;
+    visibility: hidden;
+    opacity: 0;
+    will-change: visibility, z-index, opacity;
+}
+
+.d-modal--transparent {
+  --modal-backdrop-color-background: var(--d-bgc-transparent);
+
+  &[aria-hidden='false'] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+}
+
+//  $$  MODAL DIALOG
+//  ----------------------------------------------------------------------------
+.d-modal__dialog {
+  position: relative;
+  z-index: var(--zi-hide);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-500); //
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--dt-size-1020); // 628
+  max-height: 100%;
+  padding: var(--modal-dialog-padding); // 32
+  overflow-y: auto;
+  color: var(--modal-dialog-color-text);
+  font-size: var(--dt-font-size-200);
+  line-height: var(--dt-font-line-height-400);
+  background-color: var(--modal-dialog-color-background);
+  background-clip: padding-box;
+  border: var(--dt-size-100) solid var(--modal-dialog-color-border);
+  border-radius: var(--dt-size-500);
+  box-shadow: var(--modal-dialog-shadow);
+  transform: translate3d(0, 30%, 0) scale3d(0.75, 0.75, 0.75);
+  backface-visibility: hidden;
+  visibility: hidden;
+  opacity: 0;
+  will-change: visibility, z-index, opacity, transform;
+}
+
+//  $$   MAKE THEM APPEAR
+//  ----------------------------------------------------------------------------
+.d-modal[aria-hidden='false'],
+.d-modal[aria-hidden='false'] .d-modal__dialog,
+.d-modal--transparent[aria-hidden='false'],
+.d-modal--transparent[aria-hidden='false'] .d-modal__dialog {
+  z-index: var(--zi-modal);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  visibility: visible;
+  opacity: 1;
+}
+
+
+//  ============================================================================
+//  $   MODAL AREAS
+//  ----------------------------------------------------------------------------
+.d-modal__footer {
+  --modal-footer-padding: var(--dt-space-550); // 24
+
+  display: flex;
+  flex-direction: row-reverse;
+  gap: var(--dt-space-400);
+  align-items: center;
+}
+
+
+//  ============================================================================
+//  $   TYPE STYLES
+//  ============================================================================
+//  $$  HEADER
+//  ----------------------------------------------------------------------------
+.d-modal__header {
+  --modal-header-padding: var(--dt-space-550); // 24
+
+  margin: 0 !important;
+  color: var(--modal-header-color-text);
+  font-weight: var(--dt-font-weight-medium);
+  font-size: var(--dt-font-size-400);
+  line-height: var(--dt-font-line-height-100);
+}
+
+//  $$  CONTENT
+//  ----------------------------------------------------------------------------
+.d-modal__content {
+  max-width: 75ch;
+}
+
+
+//  ============================================================================
+//  $   BUTTONS
+//  ----------------------------------------------------------------------------
+.d-modal__close {
+  position: absolute;
+  top: var(--dt-space-500); // 16
+  right: var(--dt-space-500); // 16
+  margin: 0 !important;
+}
+
+
+//  ============================================================================
+//  $   BANNERS
+//  ----------------------------------------------------------------------------
+.d-modal__banner {
+  --modal-banner-padding-y: var(--dt-space-500);
+  --modal-banner-padding-x: var(--dt-space-600);
+  --modal-banner-color-background: var(--dt-color-surface-warning);
+
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--dt-size-1020); // 628
+  padding: var(--modal-banner-padding-y) var(--modal-banner-padding-x); // 16 32
+  color: var(--dt-color-foreground-primary);
+  font-size: var(--dt-font-size-200);
+  line-height: var(--dt-font-line-height-300);
+  background-color: var(--modal-banner-color-background);
+  background-clip: padding-box;
+  border: var(--dt-size-100) solid var(--modal-dialog-color-border);
+  border-bottom-width: 0;
+  border-radius: var(--dt-size-500) var(--dt-size-500) 0 0;
+  box-shadow: var(--modal-dialog-shadow);
+
+  &--warning {
+    --modal-banner-color-background: var(--dt-color-surface-warning);
+  }
+
+  &--info {
+    --modal-banner-color-background: var(--dt-color-surface-info);
+  }
+
+  &--critical {
+    --modal-banner-color-background: var(--dt-color-surface-critical);
+  }
+
+  &--success {
+    --modal-banner-color-background: var(--dt-color-surface-success);
+  }
+
+  &--general {
+    --modal-banner-color-background: var(--dt-color-surface-secondary);
+  }
+
+  &::before {
+    // 🤦 don't ask. or do, i'm not even sorry.
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: var(--zi-modal-element);
+    height: var(--modal-banner-padding-y);
+    background-color: var(--modal-banner-color-background);
+    content: '';
+  }
+
+  &:not(.d-d-none) + .d-modal__dialog {
+    border-top-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+
+//  ============================================================================
+//  $   MODIFYING STYLES
+//  ============================================================================
+//  $$  FULL WIDTH
+//  ----------------------------------------------------------------------------
+.d-modal--full {
+  --modal-dialog-padding: 0;
+
+  padding: 0;
+  overflow: hidden scroll;
+  transform: unset !important;
+
+  .d-modal__dialog {
+    display: flex;
+    flex-direction: column;
+    max-width: unset;
+    height: 100%;
+    border-radius: 0;
+    transform: unset !important;
+  }
+
+  .d-modal__header {
+    padding: var(--dt-space-600) var(--dt-space-600) 0; // 32
+  }
+
+  .d-modal__content {
+    padding-right: 0;
+    padding-left: var(--dt-space-600); // 32
+  }
+
+  .d-modal__footer {
+    margin-top: auto !important;
+    padding: 0 var(--dt-space-550) var(--dt-space-600) var(--dt-space-600); // 0 24 32 32
+  }
+
+  .d-modal__banner {
+    max-width: unset;
+    padding: var(--dt-space-450) var(--dt-space-600); // 12 32
+    border-radius: 0;
+  }
+}
+
+// $$   SCROLLABLE
+//  ----------------------------------------------------------------------------
+.d-modal__dialog--scrollable {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .d-modal__content {
+    overflow-y: auto;
+  }
+}
+
+//  $$  DANGER
+//  ----------------------------------------------------------------------------
+.d-modal--danger {
+  --modal-header-color-text: var(--dt-color-foreground-primary);
+}
+
+
+//  ============================================================================
+//  $   TRANSITIONS
+//  ----------------------------------------------------------------------------
+.d-modal--animate {
+  z-index: var(--zi-hide) !important;
+  backface-visibility: hidden !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.d-modal__dialog--animate {
+  .d-modal--animate();
+
+  transform: translate3d(0, 30%, 0) scale3d(0.75, 0.75, 0.75) !important;
+}
+
+.d-modal--animate-in,
+ .d-modal__dialog--animate-in {
+  transition:
+    opacity 100ms var(--ttf-in-out) 10ms,
+    z-index 0s 0s,
+    visibility 0s 0s,
+    transform 100ms var(--ttf-in-out) 10ms;
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
+}
+
+.d-modal--animate-out {
+  transition:
+    opacity 100ms var(--ttf-in-out) 10ms,
+    z-index 0s 200ms,
+    visibility 0s 200ms,
+    transform 100ms var(--ttf-in-out) 10ms;
+
+  &.d-modal--full {
+    transition:
+      opacity 200ms var(--ttf-in-out) 0s,
+      z-index 0s 200ms,
+      visibility 0s 200ms;
+  }
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
+}
+
+.d-modal__dialog--animate-out {
+  transition:
+    opacity 200ms var(--ttf-in-out) 0s,
+    z-index 0s 200ms,
+    visibility 0s 200ms,
+    transform 100ms var(--ttf-in-out) 0s;
+
+  &.d-modal--full {
+    transition:
+      opacity 200ms var(--ttf-in-out) 0s,
+      z-index 0s 200ms,
+      visibility 0s 200ms;
+  }
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
+}

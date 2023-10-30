@@ -1,0 +1,67 @@
+[
+  {
+    "class": "auto",
+    "output": "overflow: auto",
+    "description": "Adds scrollbars to an element when its content overflows its bounds. Scrollbars are shown only if scrolling is necessary."
+  },
+  {
+    "class": "x-auto",
+    "output": "overflow-x: auto",
+    "description": "Adds scrollbars to an element when its content overflows its horizontal bounds. Scrollbars are shown only if scrolling is necessary."
+  },
+  {
+    "class": "y-auto",
+    "output": "overflow-y: auto",
+    "description": "Adds scrollbars to an element when its content overflows its vertical bounds. Scrollbars are shown only if scrolling is necessary."
+  },
+  {
+    "class": "hidden",
+    "output": "overflow: hidden",
+    "description": "Content is clipped if necessary to fit into an element. No scrollbars are provided."
+  },
+  {
+    "class": "x-hidden",
+    "output": "overflow-x: hidden",
+    "description": "Content is clipped if necessary to fit into an element. No horizontal scrollbars are provided."
+  },
+  {
+    "class": "y-hidden",
+    "output": "overflow-y: hidden",
+    "description": "Content is clipped if necessary to fit into an element. No vertical scrollbars are provided."
+  },
+  {
+    "class": "scroll",
+    "output": "overflow: scroll",
+    "description": "Adds scrollbars to an element. Scrollbars are always shown unless always-visible scrollbars are disabled by the operating system."
+  },
+  {
+    "class": "x-scroll",
+    "output": "overflow-x: scroll",
+    "description": "Adds horizontal scrollbars to an element. Scrollbars are always shown unless always-visible scrollbars are disabled by the operating system."
+  },
+  {
+    "class": "y-scroll",
+    "output": "overflow-y: scroll",
+    "description": "Adds vertical scrollbars to an element. Scrollbars are always shown unless always-visible scrollbars are disabled by the operating system."
+  },
+  {
+    "class": "visible",
+    "output": "overflow: visible",
+    "description": "Prevents content within an element from being clipped both horizontally and vertically. Content that overflows the element’s bounds will be visible."
+  },
+  {
+    "class": "x-visible",
+    "output": "overflow-x: visible",
+    "description": "Prevents content within an element from being clipped horizontally. Content that overflows the element’s bounds will be visible."
+  },
+  {
+    "class": "y-visible",
+    "output": "overflow-y: visible",
+    "description": "Prevents content within an element from being clipped vertically. Content that overflows the element’s bounds will be visible."
+  },
+  {
+    "class": "unset",
+    "output": "overflow: unset",
+    "description": "Resets the overflow property to its initial value."
+  }
+]

@@ -1,0 +1,296 @@
+//
+//  DIALTONE
+//  COMPONENTS: INPUTS
+//
+//  These are input classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialpad.design/components/inputs
+//
+//  TABLE OF CONTENTS
+//  • VARIABLES
+//  • INPUTS & TEXTAREAS
+//    - Base Style
+//    - Wrapper
+//    - Validation States
+//    - Sizes
+//  • INPUT ICONS
+//
+
+//  $  INPUTS
+//  ----------------------------------------------------------------------------
+.d-input,
+.d-input--md,
+.d-textarea,
+.d-textarea--md,
+.d-input__wrapper--md,
+.d-input__wrapper {
+    //  Component CSS Vars
+    //  ------------------------------------------------------------------------
+    --input-color-border: var(--dt-inputs-color-border-default);
+    --input-color-background: var(--dt-inputs-color-background-default);
+    --input-color-background-disabled: var(--dt-inputs-color-background-disabled);
+    --input-color-text: var(--dt-inputs-color-foreground-default);
+    --input-border-width: calc(var(--dt-size-100) + var(--dt-size-50)); // 1.5
+    --input-border-radius: var(--dt-size-400);
+    --input-padding-y: calc(var(--dt-space-400) - var(--input-border-width));
+    --input-padding-x: calc((var(--dt-space-500) - var(--dt-space-300)) - var(--input-border-width));
+    --input-font-size: var(--dt-font-size-200);
+    --input-line-height: var(--dt-font-line-height-200);
+
+    position: relative;
+    display: inline-flex;
+    flex: 1 0%;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: var(--input-padding-y) var(--input-padding-x);
+    color: var(--input-color-text);
+    font-weight: inherit;
+    font-size: var(--input-font-size);
+    font-family: inherit;
+    line-height: var(--input-line-height);
+    background-color: var(--input-color-background);
+    border: var(--input-border-width) solid var(--input-color-border);
+    border-radius: var(--input-border-radius);
+    outline: none;
+    box-shadow: none;
+    transition-timing-function: var(--ttf-in-out);
+    transition-duration: var(--td100);
+    transition-property: box-shadow, background-color;
+    appearance: none;
+    caret-color: var(--input-color-text);
+
+    //  --  Placeholder copy
+    &::placeholder {
+        color: var(--dt-inputs-color-foreground-placeholder);
+    }
+    //  --  Remove input EDGE additions
+    &::-ms-clear {
+        display: none;
+    }
+    //  --  FOCUS STATE
+    &:focus,
+    &:focus-within {
+        --input-color-background: var(--dt-inputs-color-background-focus);
+        --input-color-border: var(--dt-inputs-color-border-focus) !important;
+
+        box-shadow: 0 0 0 var(--dt-size-100) var(--dt-inputs-color-border-focus) inset;
+    }
+    //  --  DISABLED / READ-ONLY
+    &[disabled],
+    &[read-only] {
+        --input-color-border: var(--dt-inputs-color-border-disabled) !important;
+        --input-color-background: var(--dt-inputs-color-background-disabled);
+        --input-color-text: var(--dt-inputs-color-foreground-disabled);
+
+        &:focus,
+        &:focus-within {
+            box-shadow: none !important;
+        }
+
+        //  --  Placeholder copy
+        &::placeholder {
+            color: var(--dt-inputs-color-foreground-placeholder);
+        }
+    }
+
+    //  --  DISABLED
+    &[disabled] {
+        cursor: not-allowed;
+    }
+
+    //  --  BROWSER-SPECIFIC
+    &::-moz-focus-inner {
+        outline: none !important;
+    }
+
+    &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 var(--dt-color-black-900);
+    }
+
+    &::-ms-expand {
+        display: none;
+    }
+}
+
+//  $$  INPUT WRAPPER
+//  ----------------------------------------------------------------------------
+.d-input__wrapper {
+    padding: 0;
+
+    .d-input-icon.d-input-icon--right {
+        margin-right: var(--dt-space-400);
+    }
+
+    .d-input-icon.d-input-icon--left {
+        margin-left: var(--dt-space-400);
+    }
+
+    .d-textarea + .d-input-icon.d-input-icon--right {
+      position: absolute;
+      right: var(--dt-space-450);
+    }
+
+    .d-input,
+    .d-textarea {
+        flex: 1;
+        background-color: transparent;
+        border: none;
+
+        &:focus {
+            border: none;
+            outline: 0;
+            box-shadow: none !important;
+        }
+
+        &.d-input-icon--right {
+            padding-right: var(--dt-space-350);
+        }
+
+        &.d-input-icon--left {
+            padding-left: var(--dt-space-350);
+        }
+    }
+
+    .d-textarea {
+      &.d-input-icon--right {
+        padding-right: var(--dt-space-625);
+      }
+    }
+}
+
+//  $$  SIZES
+//  ----------------------------------------------------------------------------
+.d-input.d-input--xs {
+    #d-internal__input-and-select-xs();
+}
+
+.d-input.d-input--sm {
+    #d-internal__input-and-select-sm();
+}
+
+.d-input.d-input--lg {
+    #d-internal__input-and-select-lg();
+}
+
+.d-input.d-input--xl {
+    #d-internal__input-and-select-xl();
+}
+
+
+//  ============================================================================
+//  $  TEXTAREAS
+//  ----------------------------------------------------------------------------
+.d-textarea {
+    min-height: calc(var(--dt-size-300) * 20); // 80
+    vertical-align: top;
+    border-bottom-right-radius: var(--dt-size-300);
+    resize: vertical;
+    scroll-padding-block: var(--input-padding-y);
+}
+
+//  $$  SIZES
+//  ----------------------------------------------------------------------------
+.d-textarea--xs {
+    #d-internal__input-and-select-xs();
+
+    min-height: calc(var(--dt-size-300) * 10); // 40
+}
+
+.d-textarea--sm {
+    #d-internal__input-and-select-sm();
+
+    min-height: var(--dt-size-650); // 48
+}
+
+.d-textarea--lg {
+    #d-internal__input-and-select-lg();
+
+    min-height: calc(var(--dt-size-300) * 23); // 92
+}
+
+.d-textarea--xl {
+    #d-internal__input-and-select-xl();
+
+    min-height: calc(var(--dt-size-300) * 25); // 100
+}
+
+//  $$  VALIDATION STATES
+//  ----------------------------------------------------------------------------
+.d-input--warning,
+.d-textarea--warning {
+    --input-color-border: var(--dt-inputs-color-border-warning) !important;
+}
+
+.d-input--error,
+.d-textarea--error {
+    --input-color-border: var(--dt-inputs-color-border-critical) !important;
+}
+
+.d-input--success,
+.d-textarea--success {
+    --input-color-border: var(--dt-inputs-color-border-success) !important;
+}
+
+//  ============================================================================
+//  $  INPUT ICONS
+//  ----------------------------------------------------------------------------
+.d-input-icon {
+    //  Component CSS Vars
+    //  ------------------------------------------------------------------------
+    --input-icon-size: var(--dt-size-500);
+    --input-icon-container-height: var(--dt-size-600);
+
+    z-index: var(--zi-base1);
+    display: inline-flex;
+    align-items: center;
+    height: var(--input-icon-container-height);
+    margin: 0;
+
+    svg {
+        // Backwards-compatible to DT6 icons
+        width: var(--input-icon-size);
+        height: var(--input-icon-size);
+    }
+}
+
+
+
+//  $$ SIZES
+//  ----------------------------------------------------------------------------
+.d-input-icon.d-input--xs {
+    --input-icon-container-height: calc(var(--dt-size-600) - var(--dt-size-300));
+}
+
+.d-input-icon--xs {
+    // Backwards-compatible to DT6 icons
+    --input-icon-size: var(--dt-icon-size-100);
+}
+
+.d-input-icon.d-input--sm {
+    --input-icon-container-height: var(--dt-size-600);
+}
+
+.d-input-icon--sm {
+    // Backwards-compatible to DT6 icons
+    --input-icon-size: var(--dt-icon-size-200);
+}
+
+.d-input-icon.d-input--lg {
+    --input-icon-container-height: calc(var(--dt-size-300) * 10);
+}
+
+.d-input-icon--lg {
+    // Backwards-compatible to DT6 icons
+    --input-icon-size: var(--dt-icon-size-400);
+}
+
+.d-input-icon.d-input--xl {
+    --input-icon-container-height: calc(var(--dt-size-300) * 14);
+}
+
+.d-input-icon--xl {
+    // Backwards-compatible to DT6 icons
+    --input-icon-size: var(--dt-icon-size-500);
+}

@@ -1,0 +1,11 @@
+# dependencies
+node_modules
+
+# vuepress
+!docs/.vuepress
+docs/.vuepress/.cache
+docs/.vuepress/.temp
+
+# builds
+docs/.vuepress/dist
+lib/dist

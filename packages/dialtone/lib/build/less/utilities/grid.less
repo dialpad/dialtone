@@ -1,0 +1,244 @@
+//
+//  DIALTONE
+//  UTILITIES: GRID
+//
+//  These are the CSS grid utility classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialpad.design/utilities/grid
+//
+//  TABLE OF CONTENTS
+//  • GRID VARIABLES
+//  • COLUMNS
+//  • GAP
+//  • JUSTIFY ITEMS
+//  • JUSTIFY SELF
+//  • LAYOUTS
+//      - AREAS
+//  • PLACE CONTENT
+//  • PLACE ITEMS
+//  • PLACE SELF
+//  • ROWS
+//
+//  ============================================================================
+//  $   COLUMNS
+//  ----------------------------------------------------------------------------
+.d-gc-full { grid-column: 1 ~' / ' -1 !important; }
+
+.d-gcs-auto { grid-column-start: auto !important; }
+.d-gce-auto { grid-column-end: auto !important; }
+.d-gc-auto { grid-column: auto !important; }
+
+.d-gcs-unset { grid-column-start: unset !important; }
+.d-gce-unset { grid-column-end: unset !important; }
+.d-gc-unset { grid-column: unset !important; }
+
+
+//  ============================================================================
+//  $   GAP
+//  ============================================================================
+//      Defines the size of grid 'gaps' (lines). We generate a gap for
+//      each defined spacing unit.
+//  ----------------------------------------------------------------------------
+.d-gcg-unset { grid-column-gap: unset !important; }
+.d-grg-unset { grid-row-gap: unset !important; }
+.d-gg-unset { grid-gap: unset !important; }
+
+
+//  ============================================================================
+//  $   JUSTIFY ITEMS
+//      Aligns grid items along the main axis.
+//  ----------------------------------------------------------------------------
+.d-ji-center { justify-items: center !important; }
+.d-ji-end { justify-items: end !important; }
+.d-ji-start { justify-items: start !important; }
+.d-ji-left { justify-items: left !important; }
+.d-ji-right { justify-items: right !important; }
+.d-ji-baseline { justify-items: baseline !important; }
+.d-ji-first-baseline { justify-items: first-baseline !important; }
+.d-ji-last-baseline { justify-items: last-baseline !important; }
+.d-ji-stretch { justify-items: stretch !important; }
+.d-ji-safe { justify-items: safe !important; }
+.d-ji-unsafe { justify-items: unsafe !important; }
+.d-ji-normal { justify-items: normal !important; }
+.d-ji-legacy { justify-items: legacy !important; }
+.d-ji-auto { justify-items: auto !important; }
+.d-ji-unset { justify-items: unset !important; }
+
+
+//  ============================================================================
+//  $   JUSTIFY SELF
+//      Aligns grid item along the main axis.
+//  ----------------------------------------------------------------------------
+.d-js-center { justify-self: center !important; }
+.d-js-end { justify-self: end !important; }
+.d-js-start { justify-self: start !important; }
+.d-js-left { justify-self: left !important; }
+.d-js-right { justify-self: right !important; }
+.d-js-baseline { justify-self: baseline !important; }
+.d-js-first-baseline { justify-self: first-baseline !important; }
+.d-js-last-baseline { justify-self: last-baseline !important; }
+.d-js-stretch { justify-self: stretch !important; }
+.d-js-safe { justify-self: safe !important; }
+.d-js-unsafe { justify-self: unsafe !important; }
+.d-js-normal { justify-self: normal !important; }
+.d-js-legacy { justify-self: legacy !important; }
+.d-js-auto { justify-self: auto !important; }
+.d-js-unset { justify-self: unset !important; }
+
+
+//  ============================================================================
+//  $   LAYOUTS
+//  ----------------------------------------------------------------------------
+.d-gl-sidebar {
+    grid-template-areas: 'sidebar content';
+    grid-template-columns: [sidebar-start] var(--sidebar-width) [sidebar-end content-start] var(--content-width) [content-end];
+}
+
+.d-gl-header {
+    grid-template-areas: 'header'
+                         'content';
+    grid-template-rows: [header-start] var(--header-height) [header-end content-start] var(--content-height) [content-end];
+    grid-auto-rows: 1fr;
+    grid-auto-columns: minmax(min-content, auto);
+}
+
+//  $   GRID AREAS
+//  ----------------------------------------------------------------------------
+.d-ga-sidebar { grid-area: sidebar !important; }
+.d-ga-content { grid-area: content !important; }
+.d-ga-header { grid-area: header !important; }
+
+
+//  ============================================================================
+//  $   PLACE CONTENT
+//      Aligns grid items along the block and inline directions at once
+//  ----------------------------------------------------------------------------
+.d-plc-center { place-content: center !important; }
+.d-plc-center-end { place-content: center end !important; }
+.d-plc-center-start { place-content: center start !important; }
+.d-plc-center-stretch { place-content: center stretch !important; }
+.d-plc-center-space-around { place-content: center space-around !important; }
+.d-plc-center-space-evenly { place-content: center space-evenly !important; }
+.d-plc-center-space-between { place-content: center space-between !important; }
+
+.d-plc-end { place-content: end !important; }
+.d-plc-end-start { place-content: end start !important; }
+.d-plc-end-stretch { place-content: end stretch !important; }
+.d-plc-end-center { place-content: end center !important; }
+.d-plc-end-space-around { place-content: end space-around !important; }
+.d-plc-end-space-evenly { place-content: end space-evenly !important; }
+.d-plc-end-space-between { place-content: end space-between !important; }
+
+.d-plc-start { place-content: start !important; }
+.d-plc-start-end { place-content: start end !important; }
+.d-plc-start-center { place-content: start center !important; }
+.d-plc-start-stretch { place-content: start stretch !important; }
+.d-plc-start-space-around { place-content: start space-around !important; }
+.d-plc-start-space-evenly { place-content: start space-evenly !important; }
+.d-plc-start-space-between { place-content: start space-between !important; }
+
+.d-plc-stretch { place-content: stretch !important; }
+.d-plc-stretch-end { place-content: stretch end !important; }
+.d-plc-stretch-start { place-content: stretch start !important; }
+.d-plc-stretch-center { place-content: stretch center !important; }
+.d-plc-stretch-space-evenly { place-content: stretch space-evenly !important; }
+.d-plc-stretch-space-around { place-content: stretch space-around !important; }
+.d-plc-stretch-space-between { place-content: stretch space-between !important; }
+
+.d-plc-space-around { place-content: space-around !important; }
+.d-plc-space-around-end { place-content: space-around end !important; }
+.d-plc-space-around-start { place-content: space-around start !important; }
+.d-plc-space-around-center { place-content: space-around center !important; }
+.d-plc-space-around-space-evenly { place-content: space-around space-evenly !important; }
+.d-plc-space-around-space-between { place-content: space-around space-between !important; }
+
+.d-plc-space-evenly { place-content: space-evenly !important; }
+.d-plc-space-evenly-end { place-content: space-evenly end !important; }
+.d-plc-space-evenly-start { place-content: space-evenly start !important; }
+.d-plc-space-evenly-center { place-content: space-evenly center !important; }
+.d-plc-space-evenly-space-around { place-content: space-evenly space-around !important; }
+.d-plc-space-evenly-space-between { place-content: space-evenly space-between !important; }
+
+.d-plc-space-between { place-content: space-between !important; }
+.d-plc-space-between-end { place-content: space-between end !important; }
+.d-plc-space-between-start { place-content: space-between start !important; }
+.d-plc-space-between-center { place-content: space-between center !important; }
+.d-plc-space-between-space-around { place-content: space-between space-around !important; }
+.d-plc-space-between-space-evenly { place-content: space-between space-evenly !important; }
+
+.d-plc-normal { place-content: normal !important; }
+.d-plc-legacy { place-content: legacy !important; }
+.d-plc-auto { place-content: auto !important; }
+.d-plc-unset { place-content: unset !important; }
+
+
+//  ============================================================================
+//  $   PLACE ITEMS
+//  ----------------------------------------------------------------------------
+.d-pli-center { place-items: center !important; }
+.d-pli-center-end { place-items: center end !important; }
+.d-pli-center-start { place-items: center start !important; }
+.d-pli-center-stretch { place-items: center stretch !important; }
+
+.d-pli-end { place-items: end !important; }
+.d-pli-end-start { place-items: end start !important; }
+.d-pli-end-stretch { place-items: end stretch !important; }
+.d-pli-end-center { place-items: end center !important; }
+
+.d-pli-start { place-items: start !important; }
+.d-pli-start-end { place-items: start end !important; }
+.d-pli-start-center { place-items: start center !important; }
+.d-pli-start-stretch { place-items: start stretch !important; }
+
+.d-pli-stretch { place-items: stretch !important; }
+.d-pli-stretch-end { place-items: stretch end !important; }
+.d-pli-stretch-start { place-items: stretch start !important; }
+.d-pli-stretch-center { place-items: stretch center !important; }
+
+.d-pli-normal { place-items: normal !important; }
+.d-pli-legacy { place-items: legacy !important; }
+.d-pli-auto { place-items: auto !important; }
+.d-pli-unset { place-items: unset !important; }
+
+
+//  ============================================================================
+//  $   PLACE SELF
+//  ----------------------------------------------------------------------------
+.d-pls-center { place-self: center !important; }
+.d-pls-center-end { place-self: center end !important; }
+.d-pls-center-start { place-self: center start !important; }
+.d-pls-center-stretch { place-self: center stretch !important; }
+
+.d-pls-end { place-self: end !important; }
+.d-pls-end-start { place-self: end start !important; }
+.d-pls-end-stretch { place-self: end stretch !important; }
+.d-pls-end-center { place-self: end center !important; }
+
+.d-pls-start { place-self: start !important; }
+.d-pls-start-end { place-self: start end !important; }
+.d-pls-start-center { place-self: start center !important; }
+.d-pls-start-stretch { place-self: start stretch !important; }
+
+.d-pls-stretch { place-self: stretch !important; }
+.d-pls-stretch-end { place-self: stretch end !important; }
+.d-pls-stretch-start { place-self: stretch start !important; }
+.d-pls-stretch-center { place-self: stretch center !important; }
+
+.d-pls-normal { place-self: normal !important; }
+.d-pls-legacy { place-self: legacy !important; }
+.d-pls-auto { place-self: auto !important; }
+.d-pls-unset { place-self: unset !important; }
+
+
+//  ============================================================================
+//  $   ROWS
+//  ----------------------------------------------------------------------------
+.d-gr-full { grid-row: 1 ~' / ' -1 !important; }
+
+.d-grs-auto { grid-row-start: auto !important; }
+.d-gre-auto { grid-row-end: auto !important; }
+.d-gr-auto { grid-row: auto !important; }
+
+.d-grs-unset { grid-row-start: unset !important; }
+.d-gre-unset { grid-row-end: unset !important; }
+.d-gr-unset { grid-row: unset !important; }

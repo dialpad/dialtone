@@ -1,0 +1,300 @@
+//
+//  DIALTONE
+//  UTILITIES: TYPOGRAPHY
+//
+//  These are utility typography classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialpad.design/utilties/typography
+//
+//  TABLE OF CONTENTS
+//  • FONT FAMILY
+//  • RESET HEADERS & PARAGRAPH MARGINS
+//  • FONT SIZE
+//  • FONT STYLE
+//  • FONT WEIGHT
+//  • LINE HEIGHT
+//  • LISTS
+//  • TEXT ALIGN
+//  • TEXT DECORATION
+//  • TEXT OVERFLOW
+//  • TEXT TRANSFORM
+//  • VERTICAL ALIGN
+//  • WHITESPACE
+//  • WORD-BREAK
+//  • WORD-WRAP
+//
+//  ============================================================================
+//  $   FONT FAMILY
+//  ----------------------------------------------------------------------------
+.d-ff-custom { font-family: var(--dt-font-family-body) !important; }
+.d-ff-sans { font-family: var(--dt-font-family-body) !important; }
+.d-ff-mono { font-family: var(--dt-font-family-mono) !important; }
+.d-ff-marketing { font-family: var(--dt-font-family-expressive) !important; }
+.d-ff-unset { font-family: unset !important; }
+
+//  ============================================================================
+//  $   RESET HEADERS & PARAGRAPH MARGINS
+//  ----------------------------------------------------------------------------
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+//  ============================================================================
+//  $   BODY STYLES
+//  ----------------------------------------------------------------------------
+.d-body-base          { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); }
+.d-body-small         { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); }
+.d-body-compact       { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); }
+.d-body-compact-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); }
+
+//  ============================================================================
+//  $   LABEL STYLES
+//  ----------------------------------------------------------------------------
+.d-label-base                { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-semi-bold); }
+.d-label-small               { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-semi-bold); }
+.d-label-compact             { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-semi-bold); }
+.d-label-plain               { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); }
+.d-label-compact-plain       { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); }
+.d-label-compact-small       { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-semi-bold); }
+.d-label-plain-small         { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); }
+.d-label-compact-plain-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); }
+
+//  ============================================================================
+//  $   HELPER STYLES
+//  ----------------------------------------------------------------------------
+.d-helper-base  { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); }
+.d-helper-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); }
+
+//  ============================================================================
+//  $   CODE STYLES
+//  ----------------------------------------------------------------------------
+
+.d-code-base  { font-family: var(--dt-font-family-mono); line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-200); }
+.d-code-small { font-family: var(--dt-font-family-mono); line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); }
+
+//  ============================================================================
+//  $   FONT SIZE
+//  ----------------------------------------------------------------------------
+.d-fs-100 { font-size: var(--dt-font-size-100) !important; }
+.d-fs-200 { font-size: var(--dt-font-size-200) !important; }
+.d-fs-300 { font-size: var(--dt-font-size-300) !important; }
+.d-fs-400 { font-size: var(--dt-font-size-400) !important; }
+.d-fs-500 { font-size: var(--dt-font-size-500) !important; }
+
+.d-fs-100-mobile { font-size: var(--dt-font-size-100-mobile) !important; }
+.d-fs-200-mobile { font-size: var(--dt-font-size-200-mobile) !important; }
+.d-fs-300-mobile { font-size: var(--dt-font-size-300-mobile) !important; }
+.d-fs-400-mobile { font-size: var(--dt-font-size-400-mobile) !important; }
+.d-fs-500-mobile { font-size: var(--dt-font-size-500-mobile) !important; }
+
+.d-fs-100-tc8 { font-size: var(--dt-font-size-100-tc8) !important; }
+.d-fs-200-tc8 { font-size: var(--dt-font-size-200-tc8) !important; }
+.d-fs-300-tc8 { font-size: var(--dt-font-size-300-tc8) !important; }
+.d-fs-400-tc8 { font-size: var(--dt-font-size-400-tc8) !important; }
+.d-fs-500-tc8 { font-size: var(--dt-font-size-500-tc8) !important; }
+
+.d-fs-100-tv { font-size: var(--dt-font-size-100-tv) !important; }
+.d-fs-200-tv { font-size: var(--dt-font-size-200-tv) !important; }
+.d-fs-300-tv { font-size: var(--dt-font-size-300-tv) !important; }
+.d-fs-400-tv { font-size: var(--dt-font-size-400-tv) !important; }
+.d-fs-500-tv { font-size: var(--dt-font-size-500-tv) !important; }
+
+.d-headline10 { .d-fs-100(); font-weight: var(--dt-font-weight-bold); .d-tt-uppercase(); }
+.d-headline24 { .d-fs-300(); font-weight: var(--dt-font-weight-bold) !important; }
+.d-headline28 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
+.d-headline32 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
+.d-headline36 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
+.d-headline42 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
+.d-headline48 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
+.d-headline54 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
+
+.d-headline-eyebrow            { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-normal); .d-tt-uppercase(); }
+.d-headline-small              { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-bold); }
+.d-headline-soft-small         { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium); }
+.d-headline-medium             { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold); }
+.d-headline-compact-small      { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-bold); }
+.d-headline-compact-soft-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium); }
+.d-headline-compact-base,
+.d-headline-compact-medium     { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold); }
+.d-headline-compact-large      { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-300); font-weight: var(--dt-font-weight-bold); }
+.d-headline-large              { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-300); font-weight: var(--dt-font-weight-bold); }
+.d-headline-extra-large        { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-400); font-weight: var(--dt-font-weight-medium); }
+.d-headline-extra-extra-large  { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-500); font-weight: var(--dt-font-weight-medium); }
+
+.d-fs-unset { font-size: unset !important; }
+
+//  ============================================================================
+//  $$  FONT STYLE
+//  ----------------------------------------------------------------------------
+.d-fs-normal { font-style: normal !important; }
+.d-fs-italic { font-style: italic !important; }
+.d-fs-unset { font-style: unset !important; }
+
+
+//  ============================================================================
+//  $$  FONT WEIGHT
+//  ----------------------------------------------------------------------------
+.d-fw-normal { font-weight: var(--dt-font-weight-normal) !important; }
+.d-fw-medium { font-weight: var(--dt-font-weight-medium) !important; }
+.d-fw-semibold { font-weight: var(--dt-font-weight-semi-bold) !important; }
+.d-fw-bold { font-weight: var(--dt-font-weight-bold) !important; }
+.d-fw-unset { font-weight: unset !important; }
+
+
+//  ============================================================================
+//  $  LINE HEIGHT
+//  ----------------------------------------------------------------------------
+.d-lh0 { line-height: var(--lh0) !important; }
+.d-lh1 { line-height: var(--lh1) !important; }
+.d-lh2 { line-height: var(--lh2) !important; }
+.d-lh4 { line-height: var(--lh4) !important; }
+.d-lh6 { line-height: var(--lh6) !important; }
+.d-lh8 { line-height: var(--lh8) !important; }
+.d-lh12 { line-height: var(--lh12) !important; }
+.d-lh16 { line-height: var(--lh16) !important; }
+.d-lh20 { line-height: var(--lh20) !important; }
+.d-lh24 { line-height: var(--lh24) !important; }
+.d-lh-100 { line-height: var(--dt-font-line-height-100) !important; }
+.d-lh-200 { line-height: var(--dt-font-line-height-200) !important; }
+.d-lh-300 { line-height: var(--dt-font-line-height-300) !important; }
+.d-lh-400 { line-height: var(--dt-font-line-height-400) !important; }
+.d-lh-500 { line-height: var(--dt-font-line-height-500) !important; }
+.d-lh-600 { line-height: var(--dt-font-line-height-600) !important; }
+.d-lh-unset { line-height: unset !important; }
+
+
+//  ============================================================================
+//  $   LISTS
+//  ----------------------------------------------------------------------------
+.d-ls-reset {
+    //  We want to reset everything when applied
+    &,
+    li,
+    ol,
+    ul {
+        margin: 0;
+        padding: 0;
+        .d-ls-none();
+    }
+}
+.d-ls-none { list-style: none !important; }
+.d-lst-disc { list-style-type: disc !important; }
+.d-lst-circle { list-style-type: circle !important; }
+.d-lst-content { list-style-type: var(--ls-content) !important; }
+.d-lst-decimal { list-style-type: decimal !important; }
+.d-lst-none { list-style-type: none !important; }
+
+
+//  ============================================================================
+//  $$  TEXT ALIGN
+//  ----------------------------------------------------------------------------
+.d-ta-left { text-align: left !important; }
+.d-ta-right { text-align: right !important; }
+.d-ta-center { text-align: center !important; }
+.d-ta-justify { text-align: justify !important; }
+.d-ta-unset { text-align: unset !important; }
+
+
+//  ============================================================================
+//  $$  TEXT DECORATION
+//  ----------------------------------------------------------------------------
+.d-td-none { text-decoration: none !important; }
+.d-td-underline {
+    text-decoration: underline !important;
+    text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100)) !important;
+    text-decoration-thickness: var(--dt-size-border-100) !important;
+}
+.d-td-dotted {
+    text-decoration: underline dotted !important;
+    text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100)) !important;
+    text-decoration-thickness: var(--dt-size-border-100) !important;
+}
+.d-td-line-through { text-decoration: line-through !important; }
+.d-td-unset { text-decoration: unset !important; }
+
+
+//  ============================================================================
+//  $$  TEXT OVERFLOW
+//  ----------------------------------------------------------------------------
+.d-to-ellipsis { text-overflow: ellipsis !important; }
+.d-to-clip { text-overflow: clip !important; }
+.d-to-unset { text-overflow: unset !important; }
+
+//  $$  OVERFLOW WRAP
+//  ----------------------------------------------------------------------------
+.d-ow-normal { overflow-wrap: normal !important; }
+.d-ow-anywhere { overflow-wrap: anywhere !important; }
+.d-ow-break-word { overflow-wrap: break-word !important; }
+.d-ow-unset { overflow-wrap: unset !important; }
+
+//  ============================================================================
+//  $$  TEXT TRANSFORM
+//  ----------------------------------------------------------------------------
+.d-tt-uppercase { text-transform: uppercase !important; }
+.d-tt-lowercase { text-transform: lowercase !important; }
+.d-tt-capitalize { text-transform: capitalize !important; }
+.d-tt-full-width { text-transform: full-width !important; }
+.d-tt-none { text-transform: none !important; }
+.d-tt-unset { text-transform: unset !important; }
+
+
+//  ============================================================================
+//  $$  VERTICAL ALIGN
+//  ----------------------------------------------------------------------------
+.d-va-baseline { vertical-align: baseline !important; }
+.d-va-top { vertical-align: top !important; }
+.d-va-bottom { vertical-align: bottom !important; }
+.d-va-text-top { vertical-align: text-top !important; }
+.d-va-text-bottom { vertical-align: text-bottom !important; }
+.d-va-middle { vertical-align: middle !important; }
+.d-va-sub { vertical-align: sub !important; }
+.d-va-super { vertical-align: super !important; }
+.d-va-unset { vertical-align: unset !important; }
+
+
+//  ============================================================================
+//  $$  WHITESPACE
+//  ----------------------------------------------------------------------------
+.d-ws-normal { white-space: normal !important; }
+.d-ws-nowrap { white-space: nowrap !important; }
+.d-ws-pre { white-space: pre !important; }
+.d-ws-pre-line { white-space: pre-line !important; }
+.d-ws-pre-wrap { white-space: pre-wrap !important; }
+.d-ws-break-spaces { white-space: break-spaces !important; }
+.d-ws-unset { white-space: unset !important; }
+
+
+//  ============================================================================
+//  $$  WORD BREAK
+//  ----------------------------------------------------------------------------
+.d-wb-normal { word-break: normal !important; }
+.d-wb-break-all { word-break: break-all !important; }
+.d-wb-keep-all { word-break: keep-all !important; }
+.d-wb-unset { word-break: unset !important; }
+
+//  ============================================================================
+//  $$  WORD WRAP
+//  ----------------------------------------------------------------------------
+.d-ww-break-word { word-wrap: break-word !important; }
+.d-ww-normal { word-wrap: normal !important; }
+.d-ww-initial { word-wrap: initial !important; }
+.d-ww-inherit { word-wrap: inherit !important; }
+
+
+// Unsure what to do with this
+//  $$  TRUNCATE
+//  ----------------------------------------------------------------------------
+.d-truncate {
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+}

@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="2" width="20" height="20" rx="6" fill="url(#zoomBackground)"/>
+<path d="M7 8.5625C6.65482 8.5625 6.375 8.84232 6.375 9.1875V13.2144C6.375 14.2499 7.21447 15.0894 8.25 15.0894H14.057C14.4021 15.0894 14.682 14.8096 14.682 14.4644V10.4375C14.682 9.40197 13.8425 8.5625 12.807 8.5625H7Z" fill="white"/>
+<path d="M15.4948 10.1851C15.3555 10.3038 15.2753 10.4777 15.2753 10.6607V13.2879C15.2753 13.4709 15.3555 13.6447 15.4948 13.7635L17.0632 15.1008C17.469 15.4467 18.0938 15.1584 18.0938 14.6252V9.32338C18.0938 8.79018 17.469 8.50184 17.0632 8.84779L15.4948 10.1851Z" fill="white"/>
+<defs>
+<linearGradient id="zoomBackground" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4594FF"/>
+<stop offset="0.604167" stop-color="#357CFC"/>
+<stop offset="1" stop-color="#2C6FFA"/>
+</linearGradient>
+</defs>
+</svg>

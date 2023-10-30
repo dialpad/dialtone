@@ -1,0 +1,148 @@
+//
+//  DIALTONE
+//  COMPONENTS: FORMS
+//
+//  These are form classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialpad.design/components/forms
+//
+//  TABLE OF CONTENTS
+//  • FIELDSETS
+//  • LABELS
+//    - Sizes
+//  • DESCRIPTIONS
+//    - Sizes
+//  • VALIDATION MESSAGES
+//    - Validation States
+//
+//  ============================================================================
+//  $  FIELDSETS
+//  ----------------------------------------------------------------------------
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+
+//  ============================================================================
+//  $  LABELS
+//  ----------------------------------------------------------------------------
+.d-label {
+  display: flex;
+  flex: 1 0%;
+  align-items: baseline;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin-bottom: var(--dt-space-300);
+  color: var(--dt-color-foreground-secondary);
+  font-weight: var(--dt-font-weight-semi-bold);
+  font-size: var(--dt-font-size-200);
+  font-family: inherit;
+  line-height: var(--dt-font-line-height-300);
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  legend & { cursor: default; }
+}
+
+//  $$  SIZES
+//  ----------------------------------------------------------------------------
+.d-label--xs {
+  font-size: var(--dt-font-size-100);
+}
+
+.d-label--sm {
+  font-size: var(--dt-font-size-200);
+}
+
+.d-label--lg {
+  font-size: var(--dt-font-size-200);
+}
+
+.d-label--xl {
+  font-size: var(--dt-font-size-300);
+}
+
+//  ============================================================================
+//  $ DESCRIPTIONS
+//  ----------------------------------------------------------------------------
+.d-description {
+  display: flex;
+  box-sizing: border-box;
+  color: var(--dt-color-foreground-tertiary);
+  font-size: var(--dt-font-size-100);
+  font-family: inherit;
+  line-height: var(--dt-font-line-height-400);
+  fill: currentColor;
+}
+
+.d-label + .d-description {
+  margin-top: var(--dt-space-300-negative);
+  margin-bottom: var(--dt-space-300);
+}
+
+//  $$  SIZES
+//  ----------------------------------------------------------------------------
+.d-description--lg {
+  font-size: var(--dt-font-size-200);
+}
+
+.d-description--xl {
+  font-size: var(--dt-font-size-200);
+}
+
+//  ============================================================================
+//  $   VALIDATION MESSAGES
+//  ----------------------------------------------------------------------------
+.d-validation-message {
+  --validation-color-text: var(--dt-color-foreground-tertiary);
+
+  display: flex;
+  gap: var(--dt-space-300);
+  align-items: flex-start;
+  margin-top: var(--dt-space-400);
+  color: var(--validation-color-text);
+  font-weight: var(--dt-font-weight-medium);
+  font-size: var(--dt-font-size-100);
+  font-family: inherit;
+  line-height: var(--dt-font-line-height-300);
+
+  // Icon Slot
+  &::before {
+    display: block;
+    width: var(--dt-size-500); // 16
+    min-width: var(--dt-size-500); // 16
+    height: var(--dt-size-500); // 16
+    background-color: var(--validation-color-text);
+    content: '';
+  }
+}
+
+//  $$   VALIDATION STATES
+//  ----------------------------------------------------------------------------
+
+.d-validation-message--warning {
+  --validation-color-text: var(--dt-color-foreground-warning);
+
+  &::before {
+    mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDEyIj4gPHBhdGggZmlsbD0iIzY4M2UwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNS4yNCAxLjE5N2ExLjUgMS41IDAgMCAxIDIuMDYuNTU2bDMuOTk4IDYuOTk3YTEuNTA0IDEuNTA0IDAgMCAxIDAgMS41IDEuNSAxLjUgMCAwIDEtMS4yOTcuNzVIMi4wMDJhMS41IDEuNSAwIDAgMS0xLjMxLTIuMjQ5VjguNzVMNC42OSAxLjc1M2ExLjUgMS41IDAgMCAxIC41NS0uNTU2Wm0uNzU1Ljc5NmEuNS41IDAgMCAwLS40MzUuMjU0di4wMDFMMS41NTcgOS4yNWEuNS41IDAgMCAwIC40MzguNzVIMTBhLjUuNSAwIDAgMCAuNDMyLS43NWwtLjAwMS0uMDAyLTQtNy0uMDAxLS4wMDFhLjUuNSAwIDAgMC0uNDM1LS4yNTRaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz4gPHBhdGggZmlsbD0iIzY4M2UwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNiA0YS41LjUgMCAwIDEgLjUuNXYyYS41LjUgMCAwIDEtMSAwdi0yQS41LjUgMCAwIDEgNiA0Wm0tLjUgNC41QS41LjUgMCAwIDEgNiA4aC4wMDVhLjUuNSAwIDAgMSAwIDFINmEuNS41IDAgMCAxLS41LS41WiIgY2xpcC1ydWxlPSJldmVub2RkIi8+IDwvc3ZnPg==') repeat;
+  }
+}
+
+.d-validation-message--error {
+  --validation-color-text: var(--dt-color-foreground-critical);
+
+  &::before {
+    mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDEyIj4gPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4gPHBhdGggZmlsbD0iI2VjMGUwZSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNiAxLjVhNC41IDQuNSAwIDEgMCAwIDkgNC41IDQuNSAwIDAgMCAwLTlaTS41IDZhNS41IDUuNSAwIDEgMSAxMSAwIDUuNSA1LjUgMCAwIDEtMTEgMFpNNiAzLjVhLjUuNSAwIDAgMSAuNS41djJhLjUuNSAwIDAgMS0xIDBWNGEuNS41IDAgMCAxIC41LS41Wk01LjUgOGEuNS41IDAgMCAxIC41LS41aC4wMDVhLjUuNSAwIDAgMSAwIDFINmEuNS41IDAgMCAxLS41LS41WiIgY2xpcC1ydWxlPSJldmVub2RkIi8+IDwvZz4gPGRlZnM+IDxjbGlwUGF0aCBpZD0iYSI+IDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoMTJ2MTJIMHoiLz4gPC9jbGlwUGF0aD4gPC9kZWZzPiA8L3N2Zz4=') no-repeat;
+  }
+}
+
+.d-validation-message--success {
+  --validation-color-text: var(--dt-color-foreground-success);
+
+  &::before {
+    mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDEyIj4gPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4gPHBhdGggZmlsbD0iIzAwNjcxZCIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNLjUgNmE1LjUgNS41IDAgMSAxIDExIDAgNS41IDUuNSAwIDAgMS0xMSAwWk02IDEuNWE0LjUgNC41IDAgMSAwIDAgOSA0LjUgNC41IDAgMCAwIDAtOVptMS44NTQgMy4xNDZhLjUuNSAwIDAgMSAwIC43MDhsLTIgMmEuNS41IDAgMCAxLS43MDggMGwtMS0xYS41LjUgMCAxIDEgLjcwOC0uNzA4bC42NDYuNjQ3IDEuNjQ2LTEuNjQ3YS41LjUgMCAwIDEgLjcwOCAwWiIgY2xpcC1ydWxlPSJldmVub2RkIi8+IDwvZz4gPGRlZnM+IDxjbGlwUGF0aCBpZD0iYSI+IDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoMTJ2MTJIMHoiLz4gPC9jbGlwUGF0aD4gPC9kZWZzPiA8L3N2Zz4=') no-repeat;
+  }
+}
