@@ -13,7 +13,8 @@ export const argsData = {
   shortTime: '4:54',
   onFocus: action('focus'),
   onHover: action('hover'),
-  default: `<p>Elementum fames nullam elementum velit proin vitae aliquet.
+  default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
 };
