@@ -21,6 +21,7 @@
     </header>
     <aside
       ref="root-layout-sidebar"
+      tabindex="0"
       :class="['d-root-layout__sidebar', sidebarClass]"
       data-qa="dt-root-layout-sidebar"
     >
@@ -109,7 +110,7 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the min-width of the inner element instead.
+     * DEPRECATED: set the width of the inner element instead.
      */
     sidebarWidth: {
       type: String,

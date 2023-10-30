@@ -52,7 +52,7 @@
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/dialtone": "^8.21.2",
+    "@dialpad/dialtone": "^8.21.3",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "^1.27.3",
     "@percy/storybook": "^4.3.7",

@@ -13,27 +13,36 @@
     <template
       #header
     >
-      <span v-html="header" />
+      <html-fragment
+        :html="header"
+      />
     </template>
     <template
       #sidebar
     >
-      <span v-html="sidebar" />
+      <html-fragment
+        :html="sidebar"
+      />
     </template>
-    <span v-html="defaultSlot" />
+    <html-fragment
+      :html="defaultSlot"
+    />
     <template
       #footer
     >
-      <span v-html="footer" />
+      <html-fragment
+        :html="footer"
+      />
     </template>
   </dt-root-layout>
 </template>
 
 <script>
 import DtRootLayout from './root_layout.vue';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtRootLayoutDefault',
-  components: { DtRootLayout },
+  components: { DtRootLayout, htmlFragment },
 };
 </script>
