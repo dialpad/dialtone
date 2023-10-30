@@ -7,6 +7,7 @@ settings:
 overrides:
   '@dialpad/dialtone>postcss-preset-env': ^7.0.0
   '@dialpad/dialtone>stylelint': ^15.10.1
+  '@dialpad/dialtone>@dialpad/dialtone-icons': ^3.4.0
 
 importers:
 
@@ -31,7 +32,7 @@ importers:
   packages/dialtone:
     dependencies:
       '@dialpad/dialtone-icons':
-        specifier: workspace:^3
+        specifier: ^3.4.0
         version: link:../dialtone-icons-vue3
       chalk:
         specifier: ^5.2.0

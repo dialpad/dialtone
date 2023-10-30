@@ -80,7 +80,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "workspace:^3",
+    "@dialpad/dialtone-icons": "workspace:^",
     "docopt": "^0.6.2"
   },
   "devDependencies": {
