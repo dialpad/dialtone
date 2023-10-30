@@ -61,7 +61,6 @@
     "lint:code": "eslint '**/*.{js,vue}'",
     "lint:docs": "markdownlint 'docs/**/*.md'",
     "lint:library": "run-s stylelint lesshint",
-    "prepare": "husky install",
     "prepublishOnly": "npm run build",
     "release": "./scripts/release.sh",
     "start": "gulp watch",
@@ -81,7 +80,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "^3.4.0",
+    "@dialpad/dialtone-icons": "workspace:^3",
     "docopt": "^0.6.2"
   },
   "devDependencies": {
@@ -89,7 +88,7 @@
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
     "@dialpad/dialtone-combinator": "^0.3.1",
-    "@dialpad/dialtone-tokens": "^1.23.1",
+    "@dialpad/dialtone-tokens": "workspace:^",
     "@dialpad/dialtone-vue": "^3.92.0",
     "@dialpad/postcss-responsive-variations": "^1.1.5",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
@@ -157,9 +156,6 @@
     "vuepress-plugin-seo2": "2.0.0-beta.124",
     "vuepress-plugin-sitemap2": "2.0.0-beta.174",
     "yargs": "^17.7.2"
-  },
-  "resolutions": {
-    "postcss-preset-env": "^7.0.0"
   },
   "peerDependencies": {
     "chalk": "^5.2.0",
