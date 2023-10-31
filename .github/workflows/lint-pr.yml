@@ -1,4 +1,4 @@
-name: Lint PR Dialtone-tokens
+name: Lint PR
 
 on:
   pull_request:
