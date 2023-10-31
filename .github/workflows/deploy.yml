@@ -1,0 +1,107 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - production
+      - alpha
+      - beta
+      - staging
+    paths:
+      - 'packages/dialtone/**'
+
+env:
+  HUSKY: 0
+
+jobs:
+  deploy:
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18 ]
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: parse branch from ref
+        id: branch
+        run: echo ::set-output name=BRANCH::${GITHUB_REF/refs\/heads\//}
+
+      # Will prevent the rest of the steps from running on fail
+      - name: Check if user is a dialpad member
+        uses: octokit/request-action@v2.1.0
+        with:
+          route: GET /orgs/dialpad/members/${{ github.actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build library and docsite (Staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /design-system/staging/
+
+      - name: Deploy to GitHub Pages (Staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: packages/dialtone/docs/.vuepress/dist
+          target-folder: staging
+
+      - name: Build library and docsite (Next)
+        if: ${{ github.ref == 'refs/heads/next' }}
+        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /design-system/next/
+
+      - name: Deploy to GitHub Pages (Next)
+        if: ${{ github.ref == 'refs/heads/next' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: packages/dialtone/docs/.vuepress/dist
+          target-folder: next
+
+      - name: Build library and docsite (Legacy)
+        if: ${{ github.ref == 'refs/heads/legacy' }}
+        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /design-system/legacy/
+
+      - name: Deploy to GitHub Pages (Legacy)
+        if: ${{ github.ref == 'refs/heads/legacy' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: packages/dialtone/docs/.vuepress/dist
+          target-folder: legacy
+
+      - name: Build library and docsite
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /design-system/
+
+      - name: Deploy to GitHub Pages
+        if: ${{ github.ref == 'refs/heads/production' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: packages/dialtone/docs/.vuepress/dist
+          clean-exclude: |
+            deploy-previews
+            legacy
+            staging
+            next

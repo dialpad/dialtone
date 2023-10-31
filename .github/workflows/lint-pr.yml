@@ -9,30 +9,29 @@ on:
 jobs:
   commitlint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18 ]
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           # we need + 1 commit
           fetch-depth: 2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: '18.x'
+          version: 8
 
-      - name: Install PNPM
-        uses: pnpm/action-setup@v2.2.1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          version: '8'
-
-      - name: Use the node_modules cache if available [pnpm]
-        uses: actions/cache@v2
-        id: npm-cache
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-node-${{ steps.versions.outputs.node_version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ steps.versions.outputs.node_version }}-    
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

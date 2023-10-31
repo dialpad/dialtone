@@ -16,18 +16,26 @@ jobs:
   release:
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18 ]
+
     defaults:
       run:
         working-directory: ${{ github.workspace }}
 
     steps:
-      - name: Check out branch
-        uses: actions/checkout@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: '18.x'
+          version: 8
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: parse branch from ref
         id: branch
@@ -40,19 +48,6 @@ jobs:
           route: GET /orgs/dialpad/members/${{ github.actor }}
         env:
           GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
-
-      - name: Install PNPM
-        uses: pnpm/action-setup@v2.2.1
-        with:
-          version: '8'
-
-      - name: Use the node_modules cache if available [pnpm]
-        uses: actions/cache@v2
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-node-${{ steps.versions.outputs.node_version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ steps.versions.outputs.node_version }}-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
