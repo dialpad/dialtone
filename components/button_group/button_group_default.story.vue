@@ -1,14 +1,26 @@
 <template>
   <dt-button-group
     :alignment="$attrs.alignment"
+    class="d-gg8"
   >
     <html-fragment
       v-if="defaultSlot"
       :html="defaultSlot"
     />
+    <template v-else-if="alignment === 'end'">
+      <dt-button
+        importance="outlined"
+      >
+        Cancel
+      </dt-button>
+      <dt-button
+        importance="primary"
+      >
+        Confirm
+      </dt-button>
+    </template>
     <template v-else>
       <dt-button
-        class="d-mr6"
         importance="primary"
       >
         Confirm
