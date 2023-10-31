@@ -5,7 +5,7 @@ on:
     types: [closed]
 
 jobs:
-  clean:
+  clean-preview:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +16,11 @@ jobs:
         git config user.name github-actions
         git config user.email github-actions@github.com
         git pull
-        rm -rf deploy-previews/pr-${{ github.event.pull_request.number }}
-        git add -A
-        git commit -m "deploy preview cleanup"
-        git push
+        if [ -d "deploy-previews/pr-${{ github.event.pull_request.number }}" ]; then 
+          rm -rf deploy-previews/pr-${{ github.event.pull_request.number }}
+          git add -A
+          git commit -m "deploy preview cleanup"
+          git push
+        else
+          echo "No preview was created"
+        fi
