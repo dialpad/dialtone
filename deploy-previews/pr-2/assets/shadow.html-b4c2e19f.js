@@ -1,1 +1,0 @@
-import{_ as o,s as t,v as n,x as a,y as s}from"./framework-ae505c83.js";const c={};function _(r,l){const e=t("token-table");return n(),a("div",null,[s(e,{category:"shadow"})])}const m=o(c,[["render",_],["__file","shadow.html.vue"]]);export{m as default};
