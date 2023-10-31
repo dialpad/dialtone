@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
+<rect x="101" y="34" width="104" height="48" rx="4" fill="var(--dt-color-surface-primary)" id="button-bg"/>
+<rect x="101.5" y="34.5" width="103" height="47" rx="3.5" stroke="var(--dt-color-border-bold)" stroke-opacity="0.5" stroke-dasharray="2 2" id="button-bg"/>
+<rect x="59" y="34" width="38" height="48" rx="4" fill="var(--dt-color-surface-moderate)" id="button-bg"/>
+<rect x="59" y="14" width="146" height="16" rx="4" fill="var(--dt-color-surface-moderate)" id="button-bg"/>
+<rect x="59" y="86" width="146" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="button-bg"/>
+</svg>
