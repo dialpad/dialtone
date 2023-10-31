@@ -5,8 +5,6 @@ on:
     types: ['opened', 'edited', 'reopened', 'synchronize']
     branches:
       - staging
-    paths:
-      - 'packages/dialtone-tokens/**'
 
 jobs:
   commitlint:
