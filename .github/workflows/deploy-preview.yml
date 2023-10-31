@@ -2,8 +2,8 @@ name: Deploy Preview
 
 on:
   pull_request:
-   paths:
-    - 'packages/dialtone/**'
+    paths:
+      - 'packages/dialtone/**'
 
 env:
   HUSKY: 0
@@ -13,47 +13,53 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18 ]
+
     defaults:
       run:
         working-directory: ${{ github.workspace }}
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+      - uses: actions/checkout@v3
+        with:
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
 
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '18.x'
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
-    - name: Install PNPM
-      uses: pnpm/action-setup@v2.2.1
-      with:
-        version: '8'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-    - name: Build library and docsite
-      run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /design-system/deploy-previews/pr-${{github.event.pull_request.number}}/
+      - name: Build library and docsite
+        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /design-system/deploy-previews/pr-${{github.event.pull_request.number}}/
 
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4.2.5
-      with:
-        branch: gh-pages
-        folder: packages/dialtone/docs/.vuepress/dist
-        target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: packages/dialtone/docs/.vuepress/dist
+          target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
 
-    - name: Add Message
-      uses: mshick/add-pr-comment@v1
-      env:
-        BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        message: |
-          ✔️ Deploy Preview ready!
-          😎 Browse the preview: https://dialpad.github.io/design-system/deploy-previews/pr-${{ github.event.pull_request.number }}
-          🔨 If you experience an SSL issue then wait 2 minutes and try again.
-        allow-repeats: true
+      - name: Add Message
+        uses: mshick/add-pr-comment@v1
+        env:
+          BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            ✔️ Deploy Preview ready!
+            😎 Browse the preview: https://dialpad.github.io/design-system/deploy-previews/pr-${{ github.event.pull_request.number }}
+            🔨 If you experience an SSL issue then wait 2 minutes and try again.
+          allow-repeats: true
