@@ -23,7 +23,8 @@
   },
   "resolutions": {
     "@dialpad/dialtone>postcss-preset-env": "^7.0.0",
-    "@dialpad/dialtone>stylelint": "^15.10.1"
+    "@dialpad/dialtone>stylelint": "^15.10.1",
+    "@dialpad/dialtone>@dialpad/dialtone-icons": "^3.4.0"
   },
   "repository": "git@github.com:dialpad/design-system.git"
 }

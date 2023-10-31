@@ -8,7 +8,7 @@
     "Design System",
     "CSS"
   ],
-  "homepage": "https://dialpad.design",
+  "homepage": "https://dialpad.github.io/design-system",
   "bugs": {
     "email": "dialtone@dialpad.com"
   },
@@ -80,7 +80,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "workspace:^3",
+    "@dialpad/dialtone-icons": "workspace:^",
     "docopt": "^0.6.2"
   },
   "devDependencies": {
@@ -149,7 +149,7 @@
     "precss": "^4.0.0",
     "prismjs": "^1.29.0",
     "semantic-release": "^21.0.6",
-    "stylelint": "15.9.0",
+    "stylelint": "15.11.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-recommended-less": "^1.0.4",
     "stylelint-config-standard": "^33.0.0",
