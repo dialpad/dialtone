@@ -8,7 +8,6 @@ on:
       - alpha
       - beta
       - next
-      - legacy
 
 env:
   HUSKY: 0
@@ -64,4 +63,24 @@ jobs:
       # note that npm run build is executed before publishing via prepublishOnly
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: npx nx run dialtone-icons@2:release
+        run: npx nx affected -t release
+
+      - name: Deploy prerelease
+        if: ${{ github.ref != 'refs/heads/production' }}
+        run: npx nx affected -t release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
+
+      - name: Github Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx nx affected -t release-github
+
+      - name: Set registry to github packages
+        run: npm config set @dialpad:registry https://npm.pkg.github.com
+
+      - name: Set github auth token
+        run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+
+      # note that npm run build is executed before publishing via prepublishOnly
+      - name: Deploy production to github packages
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: npx nx affected -t release
