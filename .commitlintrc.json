@@ -23,5 +23,5 @@
     "body-max-line-length": [0, "always", 100],
     "subject-full-stop": [0, "never", "."]
   },
-  "helpUrl": "https://github.com/dialpad/design-system/blob/staging/.github/COMMIT_CONVENTION.md"
+  "helpUrl": "https://github.com/dialpad/dialtone/blob/staging/.github/COMMIT_CONVENTION.md"
 }

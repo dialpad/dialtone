@@ -26,5 +26,5 @@
     "@dialpad/dialtone>stylelint": "^15.10.1",
     "@dialpad/dialtone>@dialpad/dialtone-icons": "^3.4.0"
   },
-  "repository": "git@github.com:dialpad/design-system.git"
+  "repository": "git@github.com:dialpad/dialtone.git"
 }
