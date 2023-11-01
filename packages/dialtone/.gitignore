@@ -22,12 +22,6 @@
 # Build generated files #
 ######################
 lib/dist
-docs/assets/css
-docs/assets/fonts
-docs/.vuepress/public/fonts
-docs/_includes/icons
-docs/_includes/patterns
-docs/_includes/spot
 
 # Logs and databases #
 ######################
@@ -74,16 +68,6 @@ _site/
 # NPM #
 ###############
 node_modules
-
-# Environment normalization #
-###############
-/docs/.bundle
-/docs/vendor/bundle
-
-# VuePress #
-.temp
-.cache
-docs/.vuepress/dist
 
 # Jest Folders #
 coverage/
