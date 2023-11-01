@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
+<rect x="48.5" y="46.5" width="159" height="31" rx="7.5" fill="var(--dt-color-surface-primary)" stroke="var(--dt-color-border-brand)" id="box"/>
+<rect x="64" y="30" width="55" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="box"/>
+<rect x="64" y="58" width="97" height="8" rx="4" fill="var(--dt-color-foreground-placeholder" id="label"/>
+</svg>
