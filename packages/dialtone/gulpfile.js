@@ -154,7 +154,6 @@ const paths = {
   fonts: {
     input: './lib/build/fonts/*.woff2',
     outputLib: './lib/dist/fonts/',
-    outputDocs: './docs/.vuepress/public/fonts/',
   },
   mobile: {
     output: './lib/dist/ios/',
@@ -422,8 +421,7 @@ const webfonts = function (done) {
 
   return src(paths.fonts.input)
     .pipe(cache('webfonts'))
-    .pipe(dest(paths.fonts.outputLib))
-    .pipe(dest(paths.fonts.outputDocs));
+    .pipe(dest(paths.fonts.outputLib));
 };
 
 //  ================================================================================
