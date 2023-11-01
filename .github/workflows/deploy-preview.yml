@@ -43,7 +43,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build library and docsite
-        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /design-system/deploy-previews/pr-${{github.event.pull_request.number}}/
+        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /deploy-previews/pr-${{github.event.pull_request.number}}/
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.2.5
@@ -60,6 +60,6 @@ jobs:
         with:
           message: |
             ✔️ Deploy Preview ready!
-            😎 Browse the preview: https://dialpad.github.io/design-system/deploy-previews/pr-${{ github.event.pull_request.number }}
+            😎 Browse the preview: https://dialpad.design/deploy-previews/pr-${{ github.event.pull_request.number }}
             🔨 If you experience an SSL issue then wait 2 minutes and try again.
           allow-repeats: true
