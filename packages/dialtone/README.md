@@ -1,3 +1,7 @@
+# ⚠️ Dialtone repository is now part of a monorepo
+
+This repository has been deprecated and the files have been moved to [Design system monorepo](https://github.com/dialpad/design-system/tree/staging/packages/dialtone) on Nov. 1st, 2023.
+
 # Dialtone
 
 This is the home for Dialtone, Dialpad's design system. It includes the resources needed to create consistent, predictable interfaces that conform to Dialpad’s design principles, language, styles, and best practices.

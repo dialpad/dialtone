@@ -20,12 +20,10 @@
         <section class="d-d-flex">
           <dt-avatar
             size="lg"
-            color="purple-200"
             :seed="author"
+            :full-name="author"
             avatar-class="d-mr16"
-          >
-            {{ initials }}
-          </dt-avatar>
+          />
           <div class="d-d-grid d-g-cols1">
             <div class="d-fw-semibold d-fc-secondary">
               {{ author }}
@@ -48,7 +46,7 @@ import { format } from 'date-fns';
 import { computed } from 'vue';
 import CopyButton from './CopyButton.vue';
 
-const props = defineProps({
+defineProps({
   posted: {
     type: Date,
     required: true,
@@ -67,16 +65,6 @@ const props = defineProps({
   },
 });
 
-const initials = computed(() => {
-  // get first and last initials from author name.
-  const words = props.author.split(' ');
-  if (words.length === 0) return '';
-  if (words.length > 1) {
-    return words[0][0] + words[words.length - 1][0];
-  } else {
-    return words[0][0];
-  }
-});
 const blogLink = computed(() => {
   return window.location.href;
 });
