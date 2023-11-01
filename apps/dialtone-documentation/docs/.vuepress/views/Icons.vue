@@ -1,14 +1,13 @@
 <template>
   <div
-    :class="{ ['d-bgc-contrast d-fc-primary-inverted']: ['light', 'night'].includes(variation) }"
     class="d-stack16 d-p16 d-bar8"
   >
     <h3
-      :id="`${variation}-${kind}`"
+      :id="kind"
       class="d-docsite--header-3 d-mt0"
     >
       <a
-        :href="`#${variation}-${kind}`"
+        :href="`#${kind}`"
         class="header-anchor"
       >#</a>
       {{ title }}
@@ -24,7 +23,6 @@
         :hidden="icon.hidden"
         :name="icon.name"
         :selected="selectedCardIndex === index"
-        :variation="variation"
         :vue="icon.vue"
         @click="toggleCard(index)"
       />
@@ -33,7 +31,7 @@
 </template>
 
 <script>
-import BaseIcon, { ICON_KINDS, ICON_VARIATIONS } from '../baseComponents/BaseIcon.vue';
+import BaseIcon, { ICON_KINDS } from '../baseComponents/BaseIcon.vue';
 
 export default {
   name: 'Icons',
@@ -47,15 +45,6 @@ export default {
       required: true,
       validator: (_kind) => {
         return ICON_KINDS.includes(_kind);
-      },
-    },
-
-    variation: {
-      type: String,
-      default: null,
-      validator: (_variation) => {
-        if (_variation === null) return true;
-        return ICON_VARIATIONS.includes(_variation);
       },
     },
 
@@ -82,21 +71,11 @@ export default {
     iconsContainerClass () {
       return this.size ? `d-gl-docsite-icons--${this.size}` : 'd-gl-docsite-icons';
     },
-
-    isWeatherKind () {
-      return this.kind === 'weather';
-    },
-
-    isPatternsKind () {
-      return this.kind === 'patterns';
-    },
   },
 
   async beforeCreate () {
     const importedModule = await import(`../../_data/svg-${this.kind}.json`);
-    this.icons = (this.isWeatherKind || this.isPatternsKind)
-      ? importedModule.default[this.variation]
-      : this.icons = importedModule.default;
+    this.icons = importedModule.default;
   },
 
   methods: {

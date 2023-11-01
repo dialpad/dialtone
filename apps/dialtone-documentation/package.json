@@ -1,0 +1,90 @@
+{
+  "name": "@dialpad/dialtone-documentation",
+  "version": "1.0.0",
+  "description": "Dialtone CSS library documentation site",
+  "bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+  "contributors": [
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Ignacio Ropolo",
+      "email": "ignacio.ropolo@dialpad.com",
+      "url": "https://github.com/iropolo"
+    },
+    {
+      "name": "Nina Repetto",
+      "email": "nina.repetto@dialpad.com",
+      "url": "https://github.com/ninamarina"
+    }
+  ],
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "Design System",
+    "CSS",
+    "Vuepress"
+  ],
+  "scripts": {
+    "lint": "run-s lint:docs lint:code",
+    "lint:fix": "run-s lint-staged:docs lint-staged:code",
+    "build": "vuepress build docs",
+    "lint-staged:code": "npm run lint:code -- --fix",
+    "lint-staged:docs": "npm run lint:docs -- --fix",
+    "lint:code": "eslint '**/*.{js,vue}'",
+    "lint:docs": "markdownlint '**/*.md'",
+    "start": "vuepress dev docs"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "dependencies": {
+    "@dialpad/dialtone-icons": "workspace:^"
+  },
+  "devDependencies": {
+    "@dialpad/dialtone-combinator": "^0.3.1",
+    "@dialpad/dialtone-tokens": "workspace:^",
+    "@dialpad/dialtone-vue": "^3.93.1",
+    "@dialpad/postcss-responsive-variations": "^1.1.5",
+    "@docsearch/js": "^3.5.1",
+    "@toycode/markdown-it-class": "^1.2.4",
+    "@vuepress/bundler-vite": "2.0.0-beta.60",
+    "@vuepress/client": "2.0.0-beta.60",
+    "@vuepress/plugin-active-header-links": "2.0.0-beta.60",
+    "@vuepress/plugin-back-to-top": "2.0.0-beta.60",
+    "@vuepress/plugin-docsearch": "2.0.0-beta.60",
+    "@vuepress/plugin-git": "2.0.0-beta.60",
+    "@vuepress/plugin-google-analytics": "2.0.0-beta.60",
+    "@vuepress/plugin-prismjs": "2.0.0-beta.60",
+    "@vuepress/plugin-theme-data": "2.0.0-beta.60",
+    "@vuepress/plugin-toc": "2.0.0-beta.60",
+    "@vuepress/utils": "2.0.0-beta.60",
+    "date-fns": "^2.30.0",
+    "markdown-it": "^13.0.2",
+    "markdown-it-anchor": "^8.6.7",
+    "markdownlint": "^0.29.0",
+    "markdownlint-cli": "^0.35.0",
+    "npm-run-all": "^4.1.5",
+    "prismjs": "^1.29.0",
+    "vite-svg-loader": "^4.0.0",
+    "vue": "^3.3.7",
+    "vue-router": "^4.2.5",
+    "vuepress": "2.0.0-beta.60",
+    "vuepress-plugin-seo2": "2.0.0-beta.124",
+    "vuepress-plugin-sitemap2": "2.0.0-beta.174"
+  }
+}

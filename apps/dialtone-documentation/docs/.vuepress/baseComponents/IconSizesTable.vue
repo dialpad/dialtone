@@ -64,7 +64,7 @@ export default {
   async created () {
     const module = await import('../../_data/icons-sizes.json');
     this.iconSizes = module.v6;
-    this.exampleIcon = defineAsyncComponent(() => import('../../../lib/dist/vue/icons/IconPhone.vue'));
+    this.exampleIcon = defineAsyncComponent(() => import('@dialpad/dialtone/lib/dist/vue/icons/IconPhone.vue'));
   },
 };
 </script>

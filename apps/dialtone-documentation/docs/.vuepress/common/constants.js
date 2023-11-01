@@ -1,4 +1,4 @@
-import dialtoneChangelog from '@projectRoot/CHANGELOG.json';
+import dialtoneChangelog from '@projectRoot/node_modules/@dialpad/dialtone/CHANGELOG.json';
 import dialtoneVueChangelog from '@projectRoot/node_modules/@dialpad/dialtone-vue/CHANGELOG.json';
 
 export const DIALTONE_CHANGELOGS = {

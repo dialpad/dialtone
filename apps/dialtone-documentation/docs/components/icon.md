@@ -73,7 +73,5 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 
 <script setup>
     import IconCatalog from "@views/IconCatalog.vue";
-    import InboxIcon from '@v7Icons/Inbox.vue';
-    import IconInfo from '@v7Icons/Info.vue';
     import { v7 as sizes } from '@data/icons-sizes.json';
 </script>

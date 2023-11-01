@@ -1,0 +1,26 @@
+# Build generated files #
+######################
+docs/assets/css
+docs/assets/fonts
+docs/.vuepress/public/fonts
+docs/_includes/icons
+docs/_includes/patterns
+docs/_includes/spot
+
+# OS generated files #
+######################
+.DS_Store
+
+# NPM #
+###############
+node_modules
+
+# Environment normalization #
+###############
+/docs/.bundle
+/docs/vendor/bundle
+
+# VuePress #
+.temp
+.cache
+docs/.vuepress/dist
