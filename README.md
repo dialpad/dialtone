@@ -1,9 +1,24 @@
-# Design system monorepo
+# Dialtone
+
+## About this repo
+
+The dialtone repository is a monorepo composed of Dialtone NPM packages.
+
+```sh
+dialtone/
+|--- .github                    # Github configuration and workflows
+|--- packages                   # NPM packages
+  |--- dialtone                 # Dialtone CSS library
+  |--- dialtone-icons-vue2      # Dialtone icons compatible with vue 2
+  |--- dialtone-icons-vue3      # Dialtone icons compatible with vue 3
+  |--- dialtone-tokens          # Dialtone tokens library
+  |--- eslint-plugin-dialtone   # Dialtone tokens library
+|--- scripts                    # Shared scripts
+```
 
 ## Tooling
 - We use [pnpm](https://pnpm.io) for managing workspaces
 - We use [Nx](https://nx.dev/) as build system for improved speed and easier monorepo administration.
-
 
 ## Local development
 
@@ -46,7 +61,6 @@ the root of the project with:
 ```bash
 npx nx <command> <package/app>
 ```
-
 
 ### Releasing
 
