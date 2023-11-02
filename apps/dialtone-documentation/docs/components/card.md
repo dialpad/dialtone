@@ -219,6 +219,5 @@ At minimum, card contains body of content. It could also have header with button
 <component-class-table component-name="card"></component-class-table>
 
 <script setup>
-  import IconMenuVertical from '@svgIcons/IconMenuVertical.vue';
   import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>

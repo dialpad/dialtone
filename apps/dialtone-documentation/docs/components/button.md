@@ -522,11 +522,3 @@ We provide the following branded buttons for log-in and sign-up workflows.
 ## Classes
 
 <component-class-table component-name="button"></component-class-table>
-
-<script setup>
-  import IconPhone from '@svgIcons/IconPhone.vue';
-  import IconGoogleGlyph from '@svgIcons/IconGoogleGlyph.vue';
-  import IconOffice365 from '@svgIcons/IconOffice365.vue';
-  import IconLinkedin from '@svgIcons/IconLinkedin.vue';
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>

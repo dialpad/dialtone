@@ -429,8 +429,6 @@ You may use different icon sizes in different sized inputs
 - Placeholder text should not include critical information. Use description text for any information that helps the user successfully interact with the input.
 
 <script setup>
-  import IconSend from '@svgIcons/IconSend.vue';
-  import IconLock from '@svgIcons/IconLock.vue';
   import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 
   const messages = {

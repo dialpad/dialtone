@@ -205,8 +205,6 @@ At minimum, modals contain a title and one button. They could also contain body 
 <component-class-table component-name="modal"></component-class-table>
 
 <script setup>
-  import IconCheckmark from '@svgIcons/IconCheckmark.vue';
-  import IconClose from '@svgIcons/IconClose.vue';
   import ExampleModal from '@exampleComponents/ExampleModal.vue';
   import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>

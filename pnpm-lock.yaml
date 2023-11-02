@@ -7,7 +7,7 @@ settings:
 overrides:
   '@dialpad/dialtone>postcss-preset-env': ^7.0.0
   '@dialpad/dialtone>stylelint': ^15.10.1
-  '@dialpad/dialtone>@dialpad/dialtone-icons': ^3.4.0
+  '@dialpad/dialtone-documentation>@dialpad/dialtone-icons': ^3.4.0
 
 importers:
 
@@ -29,69 +29,33 @@ importers:
         specifier: ^20.0.0
         version: 20.0.0(semantic-release@21.1.2)
 
-  packages/dialtone:
+  apps/dialtone-documentation:
     dependencies:
       '@dialpad/dialtone-icons':
         specifier: ^3.4.0
-        version: link:../dialtone-icons-vue3
-      chalk:
-        specifier: ^5.2.0
-        version: 5.3.0
-      docopt:
-        specifier: ^0.6.2
-        version: 0.6.2
-      globby:
-        specifier: ^13.1.4
-        version: 13.2.2
-      inquirer:
-        specifier: ^9.1.5
-        version: 9.2.11
+        version: link:../../packages/dialtone-icons-vue3
     devDependencies:
-      '@commitlint/cli':
-        specifier: ^17.6.6
-        version: 17.8.1
-      '@commitlint/config-conventional':
-        specifier: ^17.6.6
-        version: 17.8.1
-      '@dialpad/conventional-changelog-angular':
-        specifier: ^1.1.1
-        version: 1.1.1
       '@dialpad/dialtone-combinator':
         specifier: ^0.3.1
         version: 0.3.1
       '@dialpad/dialtone-tokens':
         specifier: workspace:^
-        version: link:../dialtone-tokens
+        version: link:../../packages/dialtone-tokens
       '@dialpad/dialtone-vue':
         specifier: ^3.93.1
         version: 3.93.1(@dialpad/dialtone@packages+dialtone)(@tiptap/core@2.1.12)(vue@3.3.7)
       '@dialpad/postcss-responsive-variations':
         specifier: ^1.1.5
         version: 1.1.5(postcss@8.4.31)
-      '@dialpad/semantic-release-changelog-json':
-        specifier: ^1.0.0
-        version: 1.0.0(semantic-release@21.1.2)
       '@docsearch/js':
         specifier: ^3.5.1
         version: 3.5.2(@algolia/client-search@4.20.0)(search-insights@2.9.0)
-      '@semantic-release/changelog':
-        specifier: ^6.0.3
-        version: 6.0.3(semantic-release@21.1.2)
-      '@semantic-release/git':
-        specifier: ^10.0.1
-        version: 10.0.1(semantic-release@21.1.2)
       '@toycode/markdown-it-class':
         specifier: ^1.2.4
         version: 1.2.4
-      '@vue/cli-plugin-eslint':
-        specifier: ~5.0.8
-        version: 5.0.8(@vue/cli-service@5.0.8)(eslint@8.44.0)
-      '@vue/cli-service':
-        specifier: ~5.0.8
-        version: 5.0.8(vue@3.3.7)
       '@vuepress/bundler-vite':
         specifier: 2.0.0-beta.60
-        version: 2.0.0-beta.60(@types/node@20.5.1)(less@4.2.0)(ts-node@10.9.1)(typescript@5.2.2)
+        version: 2.0.0-beta.60(@types/node@20.5.1)(ts-node@10.9.1)(typescript@5.2.2)
       '@vuepress/client':
         specifier: 2.0.0-beta.60
         version: 2.0.0-beta.60(typescript@5.2.2)
@@ -122,6 +86,88 @@ importers:
       '@vuepress/utils':
         specifier: 2.0.0-beta.60
         version: 2.0.0-beta.60
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
+      markdown-it:
+        specifier: ^13.0.2
+        version: 13.0.2
+      markdown-it-anchor:
+        specifier: ^8.6.7
+        version: 8.6.7(@types/markdown-it@13.0.5)(markdown-it@13.0.2)
+      markdownlint:
+        specifier: ^0.29.0
+        version: 0.29.0
+      markdownlint-cli:
+        specifier: ^0.35.0
+        version: 0.35.0
+      npm-run-all:
+        specifier: ^4.1.5
+        version: 4.1.5
+      prismjs:
+        specifier: ^1.29.0
+        version: 1.29.0
+      vite-svg-loader:
+        specifier: ^4.0.0
+        version: 4.0.0
+      vue:
+        specifier: ^3.3.7
+        version: 3.3.7(typescript@5.2.2)
+      vue-router:
+        specifier: ^4.2.5
+        version: 4.2.5(vue@3.3.7)
+      vuepress:
+        specifier: 2.0.0-beta.60
+        version: 2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7)
+      vuepress-plugin-seo2:
+        specifier: 2.0.0-beta.124
+        version: 2.0.0-beta.124(typescript@5.2.2)
+      vuepress-plugin-sitemap2:
+        specifier: 2.0.0-beta.174
+        version: 2.0.0-beta.174(vuepress@2.0.0-beta.60)
+
+  packages/dialtone:
+    dependencies:
+      chalk:
+        specifier: ^5.2.0
+        version: 5.3.0
+      docopt:
+        specifier: ^0.6.2
+        version: 0.6.2
+      globby:
+        specifier: ^13.1.4
+        version: 13.2.2
+      inquirer:
+        specifier: ^9.1.5
+        version: 9.2.11
+    devDependencies:
+      '@commitlint/cli':
+        specifier: ^17.6.6
+        version: 17.8.1
+      '@commitlint/config-conventional':
+        specifier: ^17.6.6
+        version: 17.8.1
+      '@dialpad/conventional-changelog-angular':
+        specifier: ^1.1.1
+        version: 1.1.1
+      '@dialpad/dialtone-tokens':
+        specifier: workspace:^
+        version: link:../dialtone-tokens
+      '@dialpad/semantic-release-changelog-json':
+        specifier: ^1.0.0
+        version: 1.0.0(semantic-release@21.1.2)
+      '@semantic-release/changelog':
+        specifier: ^6.0.3
+        version: 6.0.3(semantic-release@21.1.2)
+      '@semantic-release/git':
+        specifier: ^10.0.1
+        version: 10.0.1(semantic-release@21.1.2)
+      '@vue/cli-plugin-eslint':
+        specifier: ~5.0.8
+        version: 5.0.8(@vue/cli-service@5.0.8)(eslint@8.44.0)
+      '@vue/cli-service':
+        specifier: ~5.0.8
+        version: 5.0.8
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.16(postcss@8.4.31)
@@ -131,9 +177,6 @@ importers:
       cssnano:
         specifier: ^6.0.1
         version: 6.0.1(postcss@8.4.31)
-      date-fns:
-        specifier: ^2.30.0
-        version: 2.30.0
       del:
         specifier: ^6.1.1
         version: 6.1.1
@@ -206,18 +249,6 @@ importers:
       lint-staged:
         specifier: ^13.2.3
         version: 13.3.0
-      markdown-it:
-        specifier: ^13.0.2
-        version: 13.0.2
-      markdown-it-anchor:
-        specifier: ^8.6.7
-        version: 8.6.7(@types/markdown-it@13.0.5)(markdown-it@13.0.2)
-      markdownlint:
-        specifier: ^0.29.0
-        version: 0.29.0
-      markdownlint-cli:
-        specifier: ^0.35.0
-        version: 0.35.0
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
@@ -236,9 +267,6 @@ importers:
       precss:
         specifier: ^4.0.0
         version: 4.0.0
-      prismjs:
-        specifier: ^1.29.0
-        version: 1.29.0
       semantic-release:
         specifier: ^21.0.6
         version: 21.1.2(typescript@5.2.2)
@@ -266,24 +294,6 @@ importers:
       tinycolor2:
         specifier: ^1.6.0
         version: 1.6.0
-      vite-svg-loader:
-        specifier: ^4.0.0
-        version: 4.0.0
-      vue:
-        specifier: ^3.3.7
-        version: 3.3.7(typescript@5.2.2)
-      vue-router:
-        specifier: ^4.2.5
-        version: 4.2.5(vue@3.3.7)
-      vuepress:
-        specifier: 2.0.0-beta.60
-        version: 2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(less@4.2.0)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7)
-      vuepress-plugin-seo2:
-        specifier: 2.0.0-beta.124
-        version: 2.0.0-beta.124(typescript@5.2.2)
-      vuepress-plugin-sitemap2:
-        specifier: 2.0.0-beta.174
-        version: 2.0.0-beta.174(vuepress@2.0.0-beta.60)
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -4100,7 +4110,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.5(@types/node@20.5.1)(less@4.2.0)
+      vite: 4.0.5(@types/node@20.5.1)
       vue: 3.3.7(typescript@5.2.2)
     dev: true
 
@@ -4125,7 +4135,7 @@ packages:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
       eslint: '>=7.5.0'
     dependencies:
-      '@vue/cli-service': 5.0.8(vue@3.3.7)
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
       eslint: 8.44.0
       eslint-webpack-plugin: 3.2.0(eslint@8.44.0)(webpack@5.89.0)
@@ -4145,7 +4155,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8(vue@3.3.7)
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
     transitivePeerDependencies:
       - encoding
@@ -4156,10 +4166,10 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8(vue@3.3.7)
+      '@vue/cli-service': 5.0.8
     dev: true
 
-  /@vue/cli-service@5.0.8(vue@3.3.7):
+  /@vue/cli-service@5.0.8:
     resolution: {integrity: sha512-nV7tYQLe7YsTtzFrfOMIHc5N2hp5lHG2rpYr0aNja9rNljdgcPZLyQRb2YRivTHqTv7lI962UXFURcpStHgyFw==}
     engines: {node: ^12.0.0 || >= 14.0.0}
     hasBin: true
@@ -4236,7 +4246,7 @@ packages:
       ssri: 8.0.1
       terser-webpack-plugin: 5.3.9(webpack@5.89.0)
       thread-loader: 3.0.4(webpack@5.89.0)
-      vue-loader: 17.3.0(vue@3.3.7)(webpack@5.89.0)
+      vue-loader: 17.3.0(webpack@5.89.0)
       vue-style-loader: 4.1.3
       webpack: 5.89.0
       webpack-bundle-analyzer: 4.9.1
@@ -4491,7 +4501,7 @@ packages:
     resolution: {integrity: sha512-Iu8Tbg3f+emIIMmI2ycSI8QcEuAUgPTgHwesDU1eKMLE4YC/c/sFbGc70QgMq31ijRftV0R7vCm9co6rldCeOA==}
     dev: true
 
-  /@vuepress/bundler-vite@2.0.0-beta.60(@types/node@20.5.1)(less@4.2.0)(ts-node@10.9.1)(typescript@5.2.2):
+  /@vuepress/bundler-vite@2.0.0-beta.60(@types/node@20.5.1)(ts-node@10.9.1)(typescript@5.2.2):
     resolution: {integrity: sha512-nf+UAKNlAEZXZqu2Ztvr8Hg/5CtevWxvQGfYKV4lhw8UmoDjKKHoHPpPhF1QTUbnZ8W+jPLzIVz+hjunzsxl/A==}
     dependencies:
       '@vitejs/plugin-vue': 4.4.0(vite@4.0.5)(vue@3.3.7)
@@ -4504,7 +4514,7 @@ packages:
       postcss: 8.4.31
       postcss-load-config: 4.0.1(postcss@8.4.31)(ts-node@10.9.1)
       rollup: 3.29.4
-      vite: 4.0.5(@types/node@20.5.1)(less@4.2.0)
+      vite: 4.0.5(@types/node@20.5.1)
       vue: 3.3.7(typescript@5.2.2)
       vue-router: 4.2.5(vue@3.3.7)
     transitivePeerDependencies:
@@ -18579,7 +18589,7 @@ packages:
       svgo: 3.0.2
     dev: true
 
-  /vite@4.0.5(@types/node@20.5.1)(less@4.2.0):
+  /vite@4.0.5(@types/node@20.5.1):
     resolution: {integrity: sha512-7m87RC+caiAxG+8j3jObveRLqaWA/neAdCat6JAZwMkSWqFHOvg8MYe5fAQxVBRAuKAQ1S6XDh3CBQuLNbY33w==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -18606,7 +18616,6 @@ packages:
     dependencies:
       '@types/node': 20.5.1
       esbuild: 0.16.17
-      less: 4.2.0
       postcss: 8.4.31
       resolve: 1.22.8
       rollup: 3.29.4
@@ -18787,7 +18796,7 @@ packages:
       - whiskers
     dev: true
 
-  /vue-loader@17.3.0(vue@3.3.7)(webpack@5.89.0):
+  /vue-loader@17.3.0(webpack@5.89.0):
     resolution: {integrity: sha512-VUURABiN0TIUz0yvJJ/V/rZjGUh10JZtD+IDI5bXFslzFi9mV6ebKkPzoqiSi8e0vh8Ip7JHJx+I0AzAG0KsCA==}
     peerDependencies:
       '@vue/compiler-sfc': '*'
@@ -18801,7 +18810,6 @@ packages:
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
-      vue: 3.3.7(typescript@5.2.2)
       watchpack: 2.4.0
       webpack: 5.89.0
     dev: true
@@ -18881,7 +18889,7 @@ packages:
       '@vuepress/shared': 2.0.0-beta.60
       '@vuepress/utils': 2.0.0-beta.60
       sitemap: 7.1.1
-      vuepress: 2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(less@4.2.0)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7)
+      vuepress: 2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -18906,14 +18914,14 @@ packages:
       - typescript
     dev: true
 
-  /vuepress-vite@2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(less@4.2.0)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7):
+  /vuepress-vite@2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7):
     resolution: {integrity: sha512-ljHvo419nbfYl/cQecVbYL4bwJjUOX0+z76v/4yX6ODeGIpdHIs7ARZ4t52mr0EEfwP6aZbZa+qFZTTQutxAuQ==}
     hasBin: true
     peerDependencies:
       '@vuepress/client': 2.0.0-beta.60
       vue: ^3.2.45
     dependencies:
-      '@vuepress/bundler-vite': 2.0.0-beta.60(@types/node@20.5.1)(less@4.2.0)(ts-node@10.9.1)(typescript@5.2.2)
+      '@vuepress/bundler-vite': 2.0.0-beta.60(@types/node@20.5.1)(ts-node@10.9.1)(typescript@5.2.2)
       '@vuepress/cli': 2.0.0-beta.60(typescript@5.2.2)
       '@vuepress/client': 2.0.0-beta.60(typescript@5.2.2)
       '@vuepress/core': 2.0.0-beta.60(typescript@5.2.2)
@@ -18933,11 +18941,11 @@ packages:
       - typescript
     dev: true
 
-  /vuepress@2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(less@4.2.0)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7):
+  /vuepress@2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7):
     resolution: {integrity: sha512-evkv5PtX5pdlEyY5EcEV+rN/HTmi8iG7ZcvAnMFfYKWdvKiUjE+/DPwZfmE8emx33FEE2htbAKgtruABTocEjA==}
     hasBin: true
     dependencies:
-      vuepress-vite: 2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(less@4.2.0)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7)
+      vuepress-vite: 2.0.0-beta.60(@types/node@20.5.1)(@vuepress/client@2.0.0-beta.60)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.3.7)
     transitivePeerDependencies:
       - '@types/node'
       - '@vue/composition-api'

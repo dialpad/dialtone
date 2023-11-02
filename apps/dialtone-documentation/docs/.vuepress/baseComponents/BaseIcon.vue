@@ -11,19 +11,17 @@
       <header class="dialtone-icon-card__header js-dialtone-icon-card-copy-area">
         <div :class="cardIconClass">
           <component
-            :is="dynamicIconComponent"
+            :is="vue"
           />
         </div>
         <p class="dialtone-icon-card__subtitle d-tt-capitalize">
           {{ name }}
-          {{ (!isWeatherKind && variation) ? `(${variation})` : '' }}
         </p>
       </header>
       <footer :class="cardFooterClass">
         <div class="dialtone-icon-card__content">
           <h2 class="dialtone-icon-card__title d-tt-capitalize">
             {{ name }}
-            {{ (!isWeatherKind && variation) ? `(${variation})` : '' }}
           </h2>
           <div class="dialtone-icon-card__list">
             <span class="dialtone-icon-card__list__item">
@@ -49,13 +47,28 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
+import SpotPublish from '@dialpad/dialtone/lib/dist/vue/spot/SpotPublish.vue';
+import SpotWirelessScreenshare from '@dialpad/dialtone/lib/dist/vue/spot/SpotWirelessScreenshare.vue';
+import SpotFemaleLaptopTyping from '@dialpad/dialtone/lib/dist/vue/spot/SpotFemaleLaptopTyping.vue';
+import SpotMaleLaptopTyping from '@dialpad/dialtone/lib/dist/vue/spot/SpotMaleLaptopTyping.vue';
+import SpotFileUpload from '@dialpad/dialtone/lib/dist/vue/spot/SpotFileUpload.vue';
+import SpotBrowserTableGraph from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserTableGraph.vue';
+import SpotBrowserListCallout from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserListCallout.vue';
 
-export const ICON_KINDS = ['brand', 'patterns', 'spot', 'system', 'weather'];
-export const ICON_VARIATIONS = ['dark', 'light', 'night', 'day'];
+export const ICON_KINDS = ['spot'];
 
 export default {
   name: 'BaseIcon',
+  components: {
+    SpotPublish,
+    SpotWirelessScreenshare,
+    SpotFemaleLaptopTyping,
+    SpotMaleLaptopTyping,
+    SpotFileUpload,
+    SpotBrowserTableGraph,
+    SpotBrowserListCallout,
+  },
+
   props: {
     name: {
       type: String,
@@ -99,22 +112,9 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    variation: {
-      type: String,
-      default: null,
-      validator: (_variation) => {
-        if (_variation === null) return true;
-        return ICON_VARIATIONS.includes(_variation);
-      },
-    },
   },
 
   computed: {
-    isWeatherKind () {
-      return this.kind === 'weather';
-    },
-
     isSpotKind () {
       return this.kind === 'spot';
     },
@@ -124,22 +124,11 @@ export default {
     },
 
     cardFooterClass () {
-      return this.isSpotKind ? 'dialtone-icon-card__footer-spot-illustration' : 'dialtone-icon-card__footer';
+      return 'dialtone-icon-card__footer-spot-illustration';
     },
 
     cardIconClass () {
-      return this.isSpotKind ? 'dialtone-icon-card__icon--autosize' : 'dialtone-icon-card__icon';
-    },
-
-    dynamicIconComponent () {
-      switch (this.kind) {
-        case 'patterns':
-          return defineAsyncComponent(() => import(`../../../lib/dist/vue/patterns/${this.vue}.vue`));
-        case 'spot':
-          return defineAsyncComponent(() => import(`../../../lib/dist/vue/spot/${this.vue}.vue`));
-        default:
-          return defineAsyncComponent(() => import(`../../../lib/dist/vue/icons/${this.vue}.vue`));
-      }
+      return 'dialtone-icon-card__icon--autosize';
     },
   },
 };

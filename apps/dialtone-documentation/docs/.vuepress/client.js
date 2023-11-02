@@ -20,16 +20,6 @@ import ComponentCombinator from './baseComponents/ComponentCombinator.vue';
 import ExampleTabs from './baseComponents/ExampleTabs.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 
-// Common icons
-import IconInfo from '@svgIcons/IconInfo.vue';
-import IconLightbulb from '@svgIcons/IconLightbulb.vue';
-import IconCheckCircle from '@svgIcons/IconCheckCircle.vue';
-import IconWarning from '@svgIcons/IconWarning.vue';
-import IconError from '@svgIcons/IconError.vue';
-import IconClose from '@svgIcons/IconClose.vue';
-import IconCheckmark from '@svgIcons/IconCheckmark.vue';
-import IconPhone from '@svgIcons/IconPhone.vue';
-
 export default defineClientConfig({
   enhance ({ app, router, siteData }) {
     // Common views
@@ -51,16 +41,6 @@ export default defineClientConfig({
     app.component('ComponentCombinator', ComponentCombinator);
     app.component('ExampleTabs', ExampleTabs);
     app.component('SvgLoader', SvgLoader);
-
-    // Common icons
-    app.component('IconInfo', IconInfo);
-    app.component('IconPhone', IconPhone);
-    app.component('IconLightbulb', IconLightbulb);
-    app.component('IconCheckCircle', IconCheckCircle);
-    app.component('IconWarning', IconWarning);
-    app.component('IconError', IconError);
-    app.component('IconClose', IconClose);
-    app.component('IconCheckmark', IconCheckmark);
   },
   setup () {},
   rootComponents: [],
