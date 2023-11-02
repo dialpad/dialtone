@@ -1070,6 +1070,9 @@
       "plug": [
         "power"
       ],
+      "poly-adapter": [],
+      "poly-base-station": [],
+      "poly-handset": [],
       "print-fax": [
         "printer",
         "office",
