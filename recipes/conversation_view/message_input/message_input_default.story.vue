@@ -26,6 +26,7 @@
       :send-button-aria-label="$attrs.sendButtonAriaLabel"
       :emoji-button-aria-label="$attrs.emojiButtonAriaLabel"
       :image-button-aria-label="$attrs.imageButtonAriaLabel"
+      :max-height="$attrs.maxHeight"
       @submit="$attrs.onSubmit"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"

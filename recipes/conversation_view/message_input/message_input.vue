@@ -32,7 +32,10 @@
       @focusout="hasFocus = false"
     >
       <!-- Some wrapper to restrict the height and show the scrollbar -->
-      <div class="d-of-auto d-mx16 d-mt8 d-mb4 d-hmx40p">
+      <div
+        class="d-of-auto d-mx16 d-mt8 d-mb4"
+        :style="{ 'max-height': maxHeight }"
+      >
         <dt-rich-text-editor
           ref="richTextEditor"
           v-model="internalInputValue"
@@ -411,6 +414,15 @@ export default {
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
+    },
+
+    /**
+     * Content area needs to dynamically adjust height based on the conversation area height.
+     * can be vh|px|rem|em|%
+     */
+    maxHeight: {
+      type: String,
+      default: 'unset',
     },
 
     // Emoji picker props
