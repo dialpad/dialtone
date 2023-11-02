@@ -105,14 +105,12 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   MyComponentDefaultTemplate,
 );
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
-  argTypes,
   argTypes,
   MyComponentVariantsTemplate,
 );

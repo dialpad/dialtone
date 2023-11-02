@@ -109,11 +109,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtAvatarDefaultTemplate);
+const DefaultTemplate = (args) =>
+  createTemplateFromVueFile(args, DtAvatarDefaultTemplate);
 
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtAvatarVariantsTemplate);
+const VariantsTemplate = (args) =>
+  createTemplateFromVueFile(args, DtAvatarVariantsTemplate);
 
 // Stories
 export const Default = {

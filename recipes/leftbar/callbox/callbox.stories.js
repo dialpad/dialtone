@@ -35,15 +35,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallboxDefaultTemplate,
 );
 
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallboxVariantsTemplate,
 );
 

@@ -97,9 +97,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRichTextEditorDefaultTemplate,
 );
 

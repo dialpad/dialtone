@@ -65,7 +65,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, StackDefault);
+const Template = (args) => createTemplateFromVueFile(args, StackDefault);
 
 export const Default = {
   render: Template,

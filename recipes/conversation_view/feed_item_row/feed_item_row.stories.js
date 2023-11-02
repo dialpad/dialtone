@@ -116,14 +116,12 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeFeedItemRowDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeFeedItemRowVariantsTemplate,
 );
 

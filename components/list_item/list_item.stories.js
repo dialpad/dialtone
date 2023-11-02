@@ -153,8 +153,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemDefaultTemplate);
-const CustomTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemCustomTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtListItemDefaultTemplate);
+const CustomTemplate = (args) => createTemplateFromVueFile(args, DtListItemCustomTemplate);
 
 export const Default = {
   render: DefaultTemplate,

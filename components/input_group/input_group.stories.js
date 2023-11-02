@@ -106,8 +106,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, InputGroupDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, InputGroupVariantsTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, InputGroupDefaultTemplate);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, InputGroupVariantsTemplate);
 
 export const Default = {
   render: DefaultTemplate,

@@ -118,7 +118,7 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtModalDefaultTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtModalDefaultTemplate);
 
 export const Default = {
   render: DefaultTemplate,

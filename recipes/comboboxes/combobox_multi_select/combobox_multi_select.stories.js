@@ -134,9 +134,8 @@ export default {
 };
 
 // Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(
+const Template = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeComboboxMultiSelectDefaultTemplate,
 );
 

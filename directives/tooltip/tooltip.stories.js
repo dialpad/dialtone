@@ -15,8 +15,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, TooltipDirectiveDefaultTemplate);
+const DefaultTemplate = (args) =>
+  createTemplateFromVueFile(args, TooltipDirectiveDefaultTemplate);
 
 // Stories
 export const Default = {

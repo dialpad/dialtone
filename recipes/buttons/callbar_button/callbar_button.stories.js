@@ -128,19 +128,16 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallbarButtonDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallbarButtonVariantsTemplate,
 );
-const CallbarTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const CallbarTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallbarButtonCallbarTemplate,
 );
 

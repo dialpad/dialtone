@@ -134,14 +134,12 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtImageViewerDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtImageViewerVariantsTemplate,
 );
 
