@@ -4,3 +4,7 @@ build
 .nx/installation
 .nx/cache
 .idea
+
+# OS generated files #
+######################
+.DS_Store
