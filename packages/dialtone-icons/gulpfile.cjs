@@ -40,6 +40,7 @@ const paths = {
     outputSvg: './dist/svg/',
   },
   exports: {
+    keywords: './src/keywords.json',
     iconsList: './src/icons.json',
   },
 };
@@ -167,28 +168,35 @@ const buildIcons = function (done) {
 };
 
 //  ================================================================================
-//  @@ Updates icons.json file with any newly added icons
-//  Reads previous icons.json file to extract keywords and add any new icon
+//  @@ Updates keywords.json file with any newly added icons
+//  Reads previous keywords.json file to extract keywords and add any new icon
 //  into the respective category.
 //  ================================================================================
 const updateIconsJSON = function (done) {
-  const rawData = fs.readFileSync(paths.exports.iconsList)
-  const iconsJSON = JSON.parse(rawData).categories;
+  const rawData = fs.readFileSync(paths.exports.keywords)
+  const keywordsJSON = JSON.parse(rawData).categories;
+  const iconsList = [];
 
-  const result = _getAllFiles('./src/svg')
+  const updatedKeywords = _getAllFiles('./src/svg')
       .filter(file => file.endsWith('.svg'))
       .reduce((acc, file) => {
         const [category, fileName] = file.split('/').slice(-2);
         const iconName = fileName.replace('.svg', '');
-        const keywords = iconsJSON[category][iconName] || [];
+        const keywords = keywordsJSON[category][iconName] || [];
         acc[category] = {...acc[category], [iconName]: keywords}
+
+        iconsList.push(iconName);
+
         return acc;
       }, {});
 
-  fs.writeFileSync(paths.exports.iconsList, JSON.stringify({ categories: {...result}}));
+  iconsList.sort();
+
+  fs.writeFileSync(paths.exports.keywords, JSON.stringify({ categories: {...updatedKeywords}}));
+  fs.writeFileSync(paths.exports.iconsList, JSON.stringify(iconsList));
 
   // Prettifies the JSON to improve readability and easier keyword adding.
-  src(paths.exports.iconsList)
+  src([paths.exports.keywords, paths.exports.iconsList])
     .pipe(jsonFormat(2))
     .pipe(dest('./src/'));
 
@@ -196,10 +204,10 @@ const updateIconsJSON = function (done) {
 };
 
 //  ================================================================================
-//  @@ Copy icons.json to dist
+//  @@ Copy keywords.json and icons.json to dist
 //  ================================================================================
 const copyFiles = function (done) {
-  src(paths.exports.iconsList)
+  src([paths.exports.keywords, paths.exports.iconsList])
       .pipe(dest('./dist'));
   return done();
 };
