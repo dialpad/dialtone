@@ -135,11 +135,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => {
-  return createTemplateFromVueFile(args, CheckboxGroupDefaultTemplate);
+const DefaultTemplate = (args, { argTypes }) => {
+  return createTemplateFromVueFile(args, argTypes, CheckboxGroupDefaultTemplate);
 };
-const VariantsTemplate = (args) => {
-  return createTemplateFromVueFile(args, CheckboxGroupVariantsTemplate);
+const VariantsTemplate = (args, { argTypes }) => {
+  return createTemplateFromVueFile(args, argTypes, CheckboxGroupVariantsTemplate);
 };
 
 export const Default = {

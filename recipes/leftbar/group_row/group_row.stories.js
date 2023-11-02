@@ -44,8 +44,10 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtRecipeGroupRowDefaultTemplate);
-const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtRecipeGroupRowVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeGroupRowDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeGroupRowVariantsTemplate);
 
 export const Default = {
   render: DefaultTemplate,

@@ -96,8 +96,10 @@ export default {
   decorators: [decorator],
   excludeStories: /.*Data$/,
 };
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtRecipeGeneralRowDefaultTemplate);
-const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtRecipeGeneralRowVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeGeneralRowDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeGeneralRowVariantsTemplate);
 
 export const Default = {
   render: DefaultTemplate,

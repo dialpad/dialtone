@@ -154,7 +154,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const Template = (args) => createTemplateFromVueFile(args, ButtonDefault);
+const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ButtonDefault);
 
 export const Default = {
   render: Template,
@@ -164,7 +164,7 @@ export const Default = {
   },
 };
 
-const VariantsTemplate = (args) => createTemplateFromVueFile(args, ButtonVariants);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ButtonVariants);
 
 export const Variants = {
   render: VariantsTemplate,

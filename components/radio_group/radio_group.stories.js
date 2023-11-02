@@ -123,8 +123,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, RadioGroupDefaultTemplate);
-const VariantsTemplate = (args) => createTemplateFromVueFile(args, RadioGroupVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioGroupDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioGroupVariantsTemplate);
 
 export const Default = {
   render: DefaultTemplate,

@@ -99,8 +99,9 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtRecipeMessageInputDefaultTemplate,
 );
 

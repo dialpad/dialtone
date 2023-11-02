@@ -88,12 +88,12 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) =>
-  createTemplateFromVueFile(args, DtBadgeDefaultTemplate);
-const VariantsTemplate = (args) =>
-  createTemplateFromVueFile(args, DtBadgeVariantsTemplate);
-const ExamplesTemplate = (args) =>
-  createTemplateFromVueFile(args, DtBadgeExamplesTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeVariantsTemplate);
+const ExamplesTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeExamplesTemplate);
 
 export const Default = {
   render: DefaultTemplate,

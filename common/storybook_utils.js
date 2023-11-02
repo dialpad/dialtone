@@ -12,7 +12,7 @@ import { pascalCaseToKebabCase } from '@/common/utils';
  *                                      but rather the usage of that component.
  * @returns {component} the template component with props and args added.
  */
-export const createTemplateFromVueFile = (args, templateComponent) => ({
+export const createTemplateFromVueFile = (args, argTypes, templateComponent) => ({
   components: { templateComponent },
   setup () {
     return { args };

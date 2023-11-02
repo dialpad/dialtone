@@ -30,7 +30,7 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args) => createTemplateFromVueFile(args, LazyShowDefault);
+const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, LazyShowDefault);
 
 export const Default = {
   render: Template,

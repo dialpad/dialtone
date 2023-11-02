@@ -37,7 +37,7 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args) => createTemplateFromVueFile(args, BannerDefault);
+const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, BannerDefault);
 
 export const Default = {
   render: Template,

@@ -112,13 +112,15 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtEmojiPickerDefaultTemplate,
 );
 
-const WithPopoverTemplate = (args) => createTemplateFromVueFile(
+const WithPopoverTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtEmojiPickerWithPopoverTemplate,
 );
 

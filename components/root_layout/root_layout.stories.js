@@ -128,12 +128,14 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtRootLayoutDefaultTemplate,
 );
-const StickyTemplate = (args) => createTemplateFromVueFile(
+const StickyTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtRootLayoutStickyTemplate,
 );
 
