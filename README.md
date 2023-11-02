@@ -9,8 +9,7 @@ dialtone/
 |--- .github                    # Github configuration and workflows
 |--- packages                   # NPM packages
   |--- dialtone                 # Dialtone CSS library
-  |--- dialtone-icons-vue2      # Dialtone icons compatible with vue 2
-  |--- dialtone-icons-vue3      # Dialtone icons compatible with vue 3
+  |--- dialtone-icons           # Dialtone SVG icons library
   |--- dialtone-tokens          # Dialtone tokens library
   |--- eslint-plugin-dialtone   # Dialtone tokens library
 |--- scripts                    # Shared scripts

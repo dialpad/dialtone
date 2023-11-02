@@ -5,7 +5,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx semantic-release-plus --no-ci --extends ./packages/dialtone-icons-vue2/release-local.config.cjs",
+        "command": "npx semantic-release-plus --no-ci --extends ./packages/dialtone-icons/release-local.config.cjs",
         "parallel": false
       }
     },
@@ -13,7 +13,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "pnpm publish --filter ./packages/dialtone-icons-vue2",
+        "command": "pnpm publish --filter ./packages/dialtone-icons",
         "parallel": false
       }
     },
@@ -21,7 +21,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx semantic-release-plus --extends ./packages/dialtone-icons-vue2/release-ci.config.cjs",
+        "command": "npx semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs",
         "parallel": false
       }
     }
