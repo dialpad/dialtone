@@ -9,6 +9,7 @@ export * from './components/card';
 export * from './components/codeblock';
 export * from './components/combobox';
 export * from './components/collapsible';
+export * from './components/description_list';
 export * from './components/dropdown';
 export * from './components/image_viewer';
 export * from './components/input';
