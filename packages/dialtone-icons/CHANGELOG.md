@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v3.4.1...dialtone-icons/v4.0.0) (2023-11-02)
+
+
+### chore
+
+* unify dialtone icons ([#8](https://github.com/dialpad/dialtone/issues/8)) ([d22e89f](https://github.com/dialpad/dialtone/commit/d22e89f3255a10532088764b6d29f413fb180877))
+
+
+### BREAKING CHANGES
+
+* Unified dialtone-icons@2 and dialtone-icons@3 into one version.
+
 ## [2.4.1](https://github.com/dialpad/design-system/compare/dialtone-icons-vue2/v2.4.0...dialtone-icons-vue2/v2.4.1) (2023-10-27)
 
 
