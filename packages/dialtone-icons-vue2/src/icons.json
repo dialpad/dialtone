@@ -1,20 +1,69 @@
 {
   "categories": {
     "alerts": {
-      "alert-circle": [],
-      "alert-triangle": [],
-      "bell-minus": [],
-      "bell-off": [],
-      "bell-plus": [],
-      "bell-ring": [],
-      "bell": [],
-      "concierge-bell": [],
-      "flame": [],
-      "megaphone-off": [],
-      "megaphone": [],
-      "newspaper": [],
-      "siren": [],
-      "snooze": []
+      "alert-circle": [
+        "warning",
+        "caution"
+      ],
+      "alert-triangle": [
+        "danger",
+        "error"
+      ],
+      "bell-minus": [
+        "quiet"
+      ],
+      "bell-off": [
+        "mute",
+        "silent",
+        "notify",
+        "notification"
+      ],
+      "bell-plus": [
+        "notify",
+        "increase",
+        "notification"
+      ],
+      "bell-ring": [
+        "alarm",
+        "notify",
+        "notification"
+      ],
+      "bell": [
+        "notification",
+        "alert",
+        "ring"
+      ],
+      "concierge-bell": [
+        "notification"
+      ],
+      "flame": [
+        "fire",
+        "burn",
+        "hot"
+      ],
+      "megaphone-off": [
+        "announce"
+      ],
+      "megaphone": [
+        "announce",
+        "shout",
+        "broadcast"
+      ],
+      "newspaper": [
+        "news",
+        "article",
+        "press",
+        "blog"
+      ],
+      "siren": [
+        "emergency",
+        "alarm"
+      ],
+      "snooze": [
+        "delay",
+        "postpone",
+        "remind"
+      ]
     },
     "arrows": {
       "arrow-down-left": [
@@ -260,7 +309,11 @@
         "missed",
         "escape"
       ],
-      "call-rejected": [],
+      "call-rejected": [
+        "decline",
+        "ignore",
+        "dismiss"
+      ],
       "contacts": [
         "address",
         "people",
@@ -269,15 +322,28 @@
       "dialer": [
         "phone"
       ],
-      "digital-whisper": [],
+      "digital-whisper": [
+        "private"
+      ],
       "forward": [
         "send",
         "share",
         "email"
       ],
-      "hand": [],
-      "listen": [],
-      "listening": [],
+      "hand": [
+        "gesture",
+        "palm"
+      ],
+      "listen": [
+        "ear",
+        "hear",
+        "audio"
+      ],
+      "listening": [
+        "ear",
+        "hear",
+        "audio"
+      ],
       "mail-open": [
         "email",
         "message",
@@ -323,7 +389,10 @@
         "call",
         "forward"
       ],
-      "phone-hang-up": [],
+      "phone-hang-up": [
+        "disconnect",
+        "end"
+      ],
       "phone-hold": [
         "phone",
         "pause",
@@ -362,7 +431,11 @@
         "message",
         "reply"
       ],
-      "voicemail-drop": [],
+      "voicemail-drop": [
+        "message",
+        "record",
+        "inbox"
+      ],
       "voicemail": [
         "phone",
         "cassette"
@@ -371,7 +444,9 @@
         "message",
         "chat"
       ],
-      "whisper": []
+      "whisper": [
+        "soft"
+      ]
     },
     "controls": {
       "barge": [
@@ -401,7 +476,10 @@
         "import",
         "export"
       ],
-      "end-chat": [],
+      "end-chat": [
+        "finish",
+        "terminate"
+      ],
       "expand": [
         "scale",
         "fullscreen"
@@ -425,7 +503,8 @@
       ],
       "food": [
         "pizza",
-        "emoji"
+        "emoji",
+        "slice"
       ],
       "gamepad": [
         "controller",
@@ -447,7 +526,11 @@
         "move",
         "drag"
       ],
-      "hear": [],
+      "hear": [
+        "listen",
+        "ear",
+        "audio"
+      ],
       "heart": [
         "like",
         "love",
@@ -461,19 +544,27 @@
         "timeline",
         "version"
       ],
-      "hold": [],
+      "hold": [
+        "pause",
+        "wait"
+      ],
       "key": [
         "password",
         "login",
         "authentication",
         "secure"
       ],
-      "large-self-view": [],
+      "large-self-view": [
+        "view",
+        "focus"
+      ],
       "layout-dashboard": [
         "masonry",
         "brick"
       ],
-      "layout-filmstrip": [],
+      "layout-filmstrip": [
+        "view"
+      ],
       "layout-grid": [
         "app",
         "home",
@@ -489,12 +580,22 @@
         "window",
         "webpage"
       ],
-      "lightbulb-off": [],
-      "lightbulb": [],
-      "listen": [
-        "ear"
+      "lightbulb-off": [
+        "dark"
       ],
-      "living-thing": [],
+      "lightbulb": [
+        "light"
+      ],
+      "listen": [
+        "ear",
+        "hear"
+      ],
+      "living-thing": [
+        "pet",
+        "cat",
+        "dog",
+        "animal"
+      ],
       "lock-filled": [
         "security",
         "password",
@@ -526,15 +627,23 @@
         "close",
         "shrink"
       ],
-      "minus-circle": [],
+      "minus-circle": [
+        "subtract",
+        "decrease"
+      ],
       "multi-line-dept": [
         "selection",
         "line",
         "department",
         "fork"
       ],
-      "music-off": [],
-      "object": [],
+      "music-off": [
+        "mute",
+        "silent"
+      ],
+      "object": [
+        "item"
+      ],
       "option": [
         "key",
         "mac",
@@ -548,13 +657,21 @@
         "audio",
         "stop"
       ],
-      "pause": [],
+      "pause": [
+        "music",
+        "audio",
+        "stop"
+      ],
       "phone-hang-up": [
         "end",
         "call",
         "leave"
       ],
-      "picture-in-picture": [],
+      "picture-in-picture": [
+        "overlay",
+        "miniature",
+        "window"
+      ],
       "pin-off": [
         "unpin",
         "unsave",
@@ -572,7 +689,10 @@
         "music",
         "start"
       ],
-      "play-filled": [],
+      "play-filled": [
+        "music",
+        "start"
+      ],
       "play": [
         "music",
         "start"
@@ -596,7 +716,10 @@
       "refresh": [
         "reload"
       ],
-      "rewind-15-sec": [],
+      "rewind-15-sec": [
+        "back",
+        "reverse"
+      ],
       "rewind": [
         "music"
       ],
@@ -627,9 +750,15 @@
         "menu"
       ],
       "sidebar": [
-        "menu"
+        "menu",
+        "navigation",
+        "panel"
       ],
-      "skip-15-sec": [],
+      "skip-15-sec": [
+        "fast-forward",
+        "advance",
+        "forward"
+      ],
       "skip-back-ten": [
         "rewind",
         "back",
@@ -659,6 +788,10 @@
       "sliders": [
         "settings",
         "controls"
+      ],
+      "small-self-view": [
+        "square",
+        "views"
       ],
       "sort-asc": [
         "filter"
@@ -692,7 +825,10 @@
         "arrows",
         "call"
       ],
-      "transportation": [],
+      "transportation": [
+        "vehicle",
+        "travel"
+      ],
       "trash": [
         "garbage",
         "delete",
@@ -766,7 +902,10 @@
         "zero",
         "one"
       ],
-      "dash": [],
+      "dash": [
+        "horizontal",
+        "minus"
+      ],
       "equal": [
         "calculate",
         "maths"
@@ -776,7 +915,9 @@
         "diagram",
         "graph"
       ],
-      "live-queue": [],
+      "live-queue": [
+        "waiting"
+      ],
       "pie-chart": [
         "statistics",
         "diagram"
@@ -815,10 +956,14 @@
         "electricity"
       ],
       "bluetooth-connected": [
-        "paired"
+        "paired",
+        "linked",
+        "connected"
       ],
       "bluetooth-off": [
-        "lost"
+        "lost",
+        "disconnected",
+        "inactive"
       ],
       "bluetooth-searching": [
         "pairing"
@@ -849,7 +994,10 @@
         "chromecast",
         "airplay"
       ],
-      "deskphone": [],
+      "deskphone": [
+        "telephone",
+        "landline"
+      ],
       "download-cloud": [
         "import"
       ],
@@ -868,7 +1016,11 @@
         "lens",
         "photo"
       ],
-      "hd": [],
+      "hd": [
+        "quality",
+        "resolution",
+        "high"
+      ],
       "headphones": [
         "music",
         "audio",
@@ -950,8 +1102,12 @@
         "audio",
         "music"
       ],
-      "switch-to-cellular": [],
-      "switch-to-hd": [],
+      "switch-to-cellular": [
+        "signal"
+      ],
+      "switch-to-hd": [
+        "quality"
+      ],
       "usb": [
         "universal",
         "serial",
@@ -1027,7 +1183,12 @@
         "format"
       ],
       "branch": [],
-      "call-merge": [],
+      "call-merge": [
+        "arrows",
+        "converge",
+        "join",
+        "connect"
+      ],
       "edit-2": [
         "pencil",
         "change"
@@ -1079,7 +1240,9 @@
         "chain",
         "url"
       ],
-      "list-add": [],
+      "list-add": [
+        "insert"
+      ],
       "list-bullet": [
         "options"
       ],
@@ -1087,7 +1250,9 @@
         "todo",
         "done"
       ],
-      "list-ordered": [],
+      "list-ordered": [
+        "sort"
+      ],
       "paperclip": [
         "attachment",
         "file"
@@ -1129,6 +1294,10 @@
         "dda",
         "wheelchair"
       ],
+      "add-task": [
+        "check",
+        "plus"
+      ],
       "album": [
         "photo",
         "book"
@@ -1144,8 +1313,12 @@
         "index",
         "box"
       ],
-      "attestation-outline": [],
-      "attestation": [],
+      "attestation-outline": [
+        "checkbox"
+      ],
+      "attestation": [
+        "checkbox"
+      ],
       "book-open": [
         "read",
         "library"
@@ -1190,14 +1363,20 @@
         "collection",
         "cluster"
       ],
-      "check-circle-filled": [],
+      "check-circle-filled": [
+        "approved",
+        "done"
+      ],
       "check-circle": [
         "done"
       ],
       "check": [
         "done"
       ],
-      "circle-half-filled": [],
+      "circle-half-filled": [
+        "mode",
+        "dark"
+      ],
       "close": [
         "cancel",
         "close",
@@ -1226,9 +1405,15 @@
         "payment",
         "cc"
       ],
-      "dissatisfied": [],
-      "double-check": [],
-      "empty": [],
+      "dissatisfied": [
+        "unhappy"
+      ],
+      "double-check": [
+        "read"
+      ],
+      "empty": [
+        "blank"
+      ],
       "flag-off": [
         "unflag"
       ],
@@ -1408,7 +1593,8 @@
       "sparkle": [
         "stars",
         "magic",
-        "help"
+        "help",
+        "ai"
       ],
       "star-filled": [
         "bookmark",
@@ -1437,6 +1623,9 @@
         "marks",
         "copy",
         "multiple"
+      ],
+      "task": [
+        "check"
       ],
       "text-cursor-input": [
         "select"
@@ -1480,7 +1669,10 @@
         "pleased",
         "good"
       ],
-      "video-settings": []
+      "video-settings": [
+        "preferences",
+        "configure"
+      ]
     },
     "os": {
       "clipboard-check": [
