@@ -65,12 +65,14 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtTabsDefaultTemplate,
 );
-const VariantsTemplate = (args) => createTemplateFromVueFile(
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtTabsVariantsTemplate,
 );
 

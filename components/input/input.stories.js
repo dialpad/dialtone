@@ -258,8 +258,8 @@ export default {
 };
 
 export const Default = {
-  render: (args) => {
-    return createTemplateFromVueFile(args, InputDefault);
+  render: (args, { argTypes }) => {
+    return createTemplateFromVueFile(args, argTypes, InputDefault);
   },
 };
 

@@ -33,12 +33,14 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const DefaultTemplate = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtIconDefaultTemplate,
 );
-const VariantsTemplate = (args) => createTemplateFromVueFile(
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtIconVariantsTemplate,
 );
 

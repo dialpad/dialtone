@@ -135,8 +135,8 @@ export default {
 };
 
 // Checkbox Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, CheckboxDefault);
-const VariantsTemplate = (args) => createTemplateFromVueFile(args, CheckboxVariants);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, CheckboxDefault);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, CheckboxVariants);
 
 export const Default = {
   render: DefaultTemplate,

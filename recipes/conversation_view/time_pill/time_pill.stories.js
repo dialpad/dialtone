@@ -38,8 +38,8 @@ export default {
 const today = new Date('1999-03-28');
 
 // Templates
-const DefaultTemplate = (args) =>
-  createTemplateFromVueFile(args, DtRecipeTimePillDefaultTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeTimePillDefaultTemplate);
 
 export const Default = {
   render: DefaultTemplate,

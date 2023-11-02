@@ -111,8 +111,8 @@ export default {
 };
 
 // Toggle Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, ToggleDefault);
-const VariantsTemplate = (args) => createTemplateFromVueFile(args, ToggleVariants);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleDefault);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleVariants);
 
 export const Default = {
   render: DefaultTemplate,

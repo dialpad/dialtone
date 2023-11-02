@@ -36,7 +36,7 @@ export default {
 };
 
 // Validation Messages Template
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtValidationMessages);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtValidationMessages);
 
 export const Default = {
   render: DefaultTemplate,

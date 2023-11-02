@@ -112,13 +112,15 @@ export default {
 };
 
 // Templates
-const Template = (args) => createTemplateFromVueFile(
+const Template = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtDatepickerDefaultTemplate,
 );
 
-const WithPopoverTemplate = (args) => createTemplateFromVueFile(
+const WithPopoverTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtDatepickerWithPopoverTemplate,
 );
 

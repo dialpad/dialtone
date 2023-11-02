@@ -81,8 +81,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) =>
-  createTemplateFromVueFile(args, DtRecipeGroupedChipDefaultTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeGroupedChipDefaultTemplate);
 
 export const Default = {
   render: DefaultTemplate,

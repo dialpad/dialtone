@@ -114,7 +114,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const DefaultTemplate = (args) => createTemplateFromVueFile(args, ScrollerDefault);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ScrollerDefault);
 
 export const Default = {
   render: DefaultTemplate,
@@ -123,7 +123,7 @@ export const Default = {
   },
 };
 
-const DynamicTemplate = (args) => createTemplateFromVueFile(args, ScrollerDynamic);
+const DynamicTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ScrollerDynamic);
 
 export const Dynamic = {
   render: DynamicTemplate,
