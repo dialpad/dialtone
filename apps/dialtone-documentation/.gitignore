@@ -7,20 +7,12 @@ docs/_includes/icons
 docs/_includes/patterns
 docs/_includes/spot
 
-# OS generated files #
-######################
-.DS_Store
-
-# NPM #
-###############
-node_modules
-
 # Environment normalization #
 ###############
 /docs/.bundle
 /docs/vendor/bundle
 
 # VuePress #
-.temp
-.cache
+docs/.vuepress/.temp
+docs/.vuepress/.cache
 docs/.vuepress/dist
