@@ -6,19 +6,14 @@ This is the home for Dialtone icons. It includes the resources needed to impleme
 
 To add Dialtone icons into your project, you can install it via NPM:
 
-**For Vue 2 projects:**
 ```
 npm install --save @dialpad/dialtone-icons
 ```
 
-**For Vue 3 projects:**
-```
-npm install --save @dialpad/dialtone-icons@vue3
-```
-
 Once installed, you can import icons like:
+
 ```
-import { Accessibility } from '@dialpad/dialtone-icons';
+import Accessibility from '@dialpad/dialtone-icons/dist/svg/accessibility.svg';
 ```
 
 ## Committing
@@ -26,9 +21,8 @@ import { Accessibility } from '@dialpad/dialtone-icons';
 If you need to add icons, follow the next steps to get your icons committed.
 
 1. Place the `.svg` files into `src/svg` inside the category folder.
-2. Run `npm run build`
+2. Run `pnpm run build`
 3. Commit and push your changes.
-4. `git cherry-pick` your commit(s) (not release commit) to `vue3`.
 
 ## Questions?
 

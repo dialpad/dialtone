@@ -10,6 +10,8 @@ on:
       - staging
     paths:
       - 'packages/dialtone/**'
+      - 'packages/dialtone-tokens/**'
+      - 'apps/dialtone-documentation/**'
 
 env:
   HUSKY: 0
@@ -56,7 +58,7 @@ jobs:
 
       - name: Build library and docsite (Staging)
         if: ${{ github.ref == 'refs/heads/staging' }}
-        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /staging/
+        run: npx nx run --verbose dialtone-documentation:build -- --deploySubdir /staging/
 
       - name: Deploy to GitHub Pages (Staging)
         if: ${{ github.ref == 'refs/heads/staging' }}
@@ -68,7 +70,7 @@ jobs:
 
       - name: Build library and docsite (Next)
         if: ${{ github.ref == 'refs/heads/next' }}
-        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /next/
+        run: npx nx run --verbose dialtone-documentation:build -- --deploySubdir /next/
 
       - name: Deploy to GitHub Pages (Next)
         if: ${{ github.ref == 'refs/heads/next' }}
@@ -80,7 +82,7 @@ jobs:
 
       - name: Build library and docsite (Legacy)
         if: ${{ github.ref == 'refs/heads/legacy' }}
-        run: npx nx run --verbose dialtone:build-docs -- --deploySubdir /legacy/
+        run: npx nx run --verbose dialtone-documentation:build -- --deploySubdir /legacy/
 
       - name: Deploy to GitHub Pages (Legacy)
         if: ${{ github.ref == 'refs/heads/legacy' }}
@@ -92,7 +94,7 @@ jobs:
 
       - name: Build library and docsite
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: npx nx run --verbose dialtone:build-docs
+        run: npx nx run --verbose dialtone-documentation:build
 
       - name: Deploy to GitHub Pages
         if: ${{ github.ref == 'refs/heads/production' }}
