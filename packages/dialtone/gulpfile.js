@@ -48,12 +48,11 @@ const classes = [
 //     What makes everything go
 //  ================================================================================
 //  @@ GENERAL
-const { src, dest, watch, series, parallel } = require('gulp');
+const { src, dest, watch, series } = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
 const cache = require('gulp-cached');
 const through2 = require('through2');
-const argv = require('yargs').argv;
 
 //  @@ STYLES
 const postCSS = settings.styles ? require('gulp-postcss') : null;
@@ -88,12 +87,6 @@ const categories = [
   'time',
   'weather',
 ];
-
-//  @@ FAVICONS
-// var favicon = settings.favicons ? require('gulp-favicons') : null;
-
-//  @@ BUILD
-const cp = settings.build ? require('child_process') : null;
 
 //  ================================================================================
 //  @  PATHS
@@ -161,7 +154,6 @@ const paths = {
   fonts: {
     input: './lib/build/fonts/*.woff2',
     outputLib: './lib/dist/fonts/',
-    outputDocs: './docs/.vuepress/public/fonts/',
   },
   mobile: {
     output: './lib/dist/ios/',
@@ -429,48 +421,7 @@ const webfonts = function (done) {
 
   return src(paths.fonts.input)
     .pipe(cache('webfonts'))
-    .pipe(dest(paths.fonts.outputLib))
-    .pipe(dest(paths.fonts.outputDocs));
-};
-
-//  ================================================================================
-//  @@  BUILD SITE
-//  ================================================================================
-const buildDocs = function (done) {
-  //  Make sure this feature is activated before running
-  if (!settings.build) return done();
-
-  return cp.spawn(
-    'vuepress', [
-      'build',
-            `docs`,
-    ], {
-      stdio: 'inherit',
-      env: { ...process.env, VUEPRESS_BASE_URL: argv.deploySubdir ?? '/' },
-    },
-  );
-};
-
-// copies the .nojekyll file to the output directory.
-// this is necessary to get around a problem with github pages where files starting with _ are not served.
-const copyNoJekyll = function (done) {
-  return src('./.nojekyll')
-    .pipe(dest('docs/.vuepress/dist'));
-};
-
-const watchDocs = function (done) {
-  //  Make sure this feature is activated before running
-  if (!settings.watch) return done();
-
-  return cp.spawn(
-    'vuepress', [
-      'dev',
-      'docs',
-    ], {
-      stdio: 'inherit',
-      env: { ...process.env },
-    },
-  );
+    .pipe(dest(paths.fonts.outputLib));
 };
 
 //  ================================================================================
@@ -592,20 +543,7 @@ exports.buildWatch = series(
 exports.watch = series(
   exports.clean,
   exports.buildWatch,
-  parallel(
-    watchFiles,
-    watchDocs,
-  ),
-);
-
-// build the library and docsite
-exports.docsite = series(
-  exports.clean,
-  webfonts,
-  exports.svg,
-  libStyles,
-  buildDocs,
-  copyNoJekyll,
+  watchFiles,
 );
 
 //  --  CONVERT WEBFONTS

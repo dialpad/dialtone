@@ -9,8 +9,7 @@ dialtone/
 |--- .github                    # Github configuration and workflows
 |--- packages                   # NPM packages
   |--- dialtone                 # Dialtone CSS library
-  |--- dialtone-icons-vue2      # Dialtone icons compatible with vue 2
-  |--- dialtone-icons-vue3      # Dialtone icons compatible with vue 3
+  |--- dialtone-icons           # Dialtone SVG icons library
   |--- dialtone-tokens          # Dialtone tokens library
   |--- eslint-plugin-dialtone   # Dialtone tokens library
 |--- scripts                    # Shared scripts
@@ -35,22 +34,6 @@ To install a local dependency, just add the `--workspace` flag
 
 ```bash
 pnpm add <dependency> --filter <package/app> --workspace
-```
-
-As we have projects with the same name over `package.json` to release the package to npm,
-you need to specify the relative path to that project when installing packages unless
-you want to install the dependency to both, e.g:
-
-This command will install <dependency> on both `packages/dialtone-icons-vue2` and `packages/dialtone-icons-vue3`
-
-```bash
-pnpm add <dependency> --filter @dialpad/dialtone-icons -D
-```
-
-Use relative path if you want to install the dependency on just one project instead. 
-
-```bash
-pnpm add <dependency> --filter './packages/dialtone-icons-vue2' -D
 ```
 
 ### Running commands

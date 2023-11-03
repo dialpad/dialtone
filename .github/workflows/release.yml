@@ -58,16 +58,16 @@ jobs:
       # note that npm run build is executed before publishing via prepublishOnly
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: npx nx affected -t release
+        run: npx nx run-many --target=release
 
       - name: Deploy prerelease
         if: ${{ github.ref != 'refs/heads/production' }}
-        run: npx nx affected -t release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
+        run: npx nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
 
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx nx affected -t release-github
+        run: npx nx run-many --target=release-github
 
       - name: Set registry to github packages
         run: npm config set @dialpad:registry https://npm.pkg.github.com
@@ -78,4 +78,4 @@ jobs:
       # note that npm run build is executed before publishing via prepublishOnly
       - name: Deploy production to github packages
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: npx nx affected -t release
+        run: npx nx run-many --target=release
