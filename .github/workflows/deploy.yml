@@ -70,7 +70,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
-          folder: packages/dialtone/docs/.vuepress/dist
+          folder: apps/dialtone-documentation/docs/.vuepress/dist
           target-folder: ${{ steps.branch-name.outputs.current_branch }}
 
       - name: Build library and docsite
@@ -82,7 +82,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
-          folder: packages/dialtone/docs/.vuepress/dist
+          folder: apps/dialtone-documentation/docs/.vuepress/dist
           clean-exclude: |
             deploy-previews
             legacy

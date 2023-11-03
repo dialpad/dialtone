@@ -52,7 +52,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
-          folder: packages/dialtone/docs/.vuepress/dist
+          folder: app/dialtone-documentation/docs/.vuepress/dist
           target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
 
       - name: Add Message
