@@ -1,11 +1,11 @@
 <template>
   <dt-recipe-settings-menu-button
-    :update-available="updateAvailable"
-    :aria-label="ariaLabel"
-    @click="onClick"
+    :update-available="$attrs.updateAvailable"
+    :aria-label="$attrs.ariaLabel"
+    @click="$attrs.onClick"
   >
-    <template v-if="defaultSlot">
-      {{ defaultSlot }}
+    <template v-if="$attrs.default">
+      {{ $attrs.default }}
     </template>
   </dt-recipe-settings-menu-button>
 </template>

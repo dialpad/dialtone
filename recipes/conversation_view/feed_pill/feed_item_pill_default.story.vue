@@ -1,13 +1,13 @@
 <template>
   <dt-recipe-feed-item-pill
-    :icon-name="iconName"
-    :title="title"
-    :wrapper-class="wrapperClass"
-    :button-class="buttonClass"
-    :border-color="borderColor"
-    :aria-label="ariaLabel"
-    :toggleable="toggleable"
-    :default-toggled="defaultToggled"
+    :icon-name="$attrs.iconName"
+    :title="$attrs.title"
+    :wrapper-class="$attrs.wrapperClass"
+    :button-class="$attrs.buttonClass"
+    :border-color="$attrs.borderColor"
+    :aria-label="$attrs.ariaLabel"
+    :toggleable="$attrs.toggleable"
+    :default-toggled="$attrs.defaultToggled"
   >
     <template #subtitle>
       Last 43 minutes - Ended at 5:04pm

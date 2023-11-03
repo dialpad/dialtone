@@ -1,10 +1,10 @@
 <template>
   <dt-emoji
-    :code="code"
-    :size="size"
-    :img-class="imgClass"
-    :aria-label="ariaLabel"
-    :show-skeleton="showSkeleton"
+    :code="$attrs.code"
+    :size="$attrs.size"
+    :img-class="$attrs.imgClass"
+    :aria-label="$attrs.ariaLabel"
+    :show-skeleton="$attrs.showSkeleton"
   />
 </template>
 

@@ -6,7 +6,6 @@ import { DocsContainer } from '@storybook/addon-docs';
 import { useDarkMode } from "storybook-dark-mode";
 import Vue from 'vue';
 import React from 'react';
-import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '../common/emoji.js';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
@@ -17,7 +16,6 @@ setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.
 setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 
-Vue.use(fixDefaultSlot);
 Vue.use(DtTooltipDirective);
 
 // Fixes method "toJSON" is not defined on click event in Sb 6.5.11

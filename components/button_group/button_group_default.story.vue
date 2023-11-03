@@ -1,13 +1,13 @@
 <template>
   <dt-button-group
-    :alignment="alignment"
+    :alignment="$attrs.alignment"
     class="d-gg8"
   >
     <html-fragment
-      v-if="defaultSlot"
-      :html="defaultSlot"
+      v-if="$attrs.default"
+      :html="$attrs.default"
     />
-    <template v-else-if="alignment === 'end'">
+    <template v-else-if="$attrs.alignment === 'end'">
       <dt-button
         importance="outlined"
       >

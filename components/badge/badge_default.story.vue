@@ -1,15 +1,15 @@
 <template>
   <dt-badge
-    :text="text"
-    :type="type"
-    :kind="kind"
-    :decoration="decoration"
-    :icon-left="iconLeft"
-    :icon-right="iconRight"
-    :label-class="labelClass"
+    :text="$attrs.text"
+    :type="$attrs.type"
+    :kind="$attrs.kind"
+    :decoration="$attrs.decoration"
+    :icon-left="$attrs.iconLeft"
+    :icon-right="$attrs.iconRight"
+    :label-class="$attrs.labelClass"
   >
-    <template v-if="defaultSlot">
-      {{ defaultSlot }}
+    <template v-if="$attrs.default">
+      {{ $attrs.default }}
     </template>
   </dt-badge>
 </template>

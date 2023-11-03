@@ -1,21 +1,21 @@
 <template>
   <dt-radio-group
-    :id="id"
-    :name="name"
-    :legend="legend"
-    :value="value"
-    :disabled="disabled"
-    :messages="messages"
-    :show-messages="showMessages"
-    :legend-class="legendClass"
-    :messages-class="messagesClass"
-    :legend-child-props="legendChildProps"
-    :messages-child-props="messagesChildProps"
-    @input="onInput"
+    :id="$attrs.id"
+    :name="$attrs.name"
+    :legend="$attrs.legend"
+    :value="$attrs.value"
+    :disabled="$attrs.disabled"
+    :messages="$attrs.messages"
+    :show-messages="$attrs.showMessages"
+    :legend-class="$attrs.legendClass"
+    :messages-class="$attrs.messagesClass"
+    :legend-child-props="$attrs.legendChildProps"
+    :messages-child-props="$attrs.messagesChildProps"
+    @input="$attrs.onInput"
   >
     <slot>
       <dt-radio
-        v-for="option in options"
+        v-for="option in $attrs.options"
         :key="option.value"
         :value="option.value"
       >
@@ -23,10 +23,10 @@
       </dt-radio>
     </slot>
     <template
-      v-if="legendSlot"
+      v-if="$attrs.legendSlot"
       slot="legend"
     >
-      <span v-html="legendSlot" />
+      <span v-html="$attrs.legendSlot" />
     </template>
   </dt-radio-group>
 </template>

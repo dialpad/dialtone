@@ -1,7 +1,7 @@
 <template>
   <dt-presence
-    :presence="presence"
-    :sr-text="srText"
+    :presence="$attrs.presence"
+    :sr-text="$attrs.srText"
   />
 </template>
 

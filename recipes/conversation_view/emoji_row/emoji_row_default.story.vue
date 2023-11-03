@@ -1,8 +1,8 @@
 <template>
   <dt-recipe-emoji-row
-    :reactions="reactions"
-    @emoji-clicked="onEmojiClicked"
-    @emoji-hovered="onEmojiHovered"
+    :reactions="$attrs.reactions"
+    @emoji-clicked="$attrs.onEmojiClicked"
+    @emoji-hovered="$attrs.onEmojiHovered"
   />
 </template>
 

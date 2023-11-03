@@ -3,7 +3,7 @@
   <div class="d-d-flex d-fd-column d-stack8">
     <div>
       <h4>With Icon</h4>
-      <dt-chip :close-button-props="closeButtonProps">
+      <dt-chip :close-button-props="$attrs.closeButtonProps">
         <template #icon>
           <dt-icon
             name="lock-filled"
@@ -17,11 +17,11 @@
     </div>
     <div>
       <h4>With Avatar</h4>
-      <dt-chip :close-button-props="closeButtonProps">
+      <dt-chip :close-button-props="$attrs.closeButtonProps">
         <template #avatar>
           <dt-avatar
             full-name="Jaqueline Nackos"
-            :seed="avatarSeed"
+            :seed="$attrs.avatarSeed"
           />
         </template>
         <template #default>
@@ -34,7 +34,7 @@
       <dt-chip
         :interactive="false"
         :hide-close="true"
-        :close-button-props="closeButtonProps"
+        :close-button-props="$attrs.closeButtonProps"
       >
         <template #default>
           Chip

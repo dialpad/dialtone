@@ -8,22 +8,22 @@
       <dt-toast
         ref="toast"
         :show.sync="isShown"
-        :kind="kind"
-        :title="title"
-        :message="message"
-        :title-id="titleId"
-        :content-id="contentId"
-        :important="important"
-        :hide-close="hideClose"
-        :duration="duration"
+        :kind="$attrs.kind"
+        :title="$attrs.title"
+        :message="$attrs.message"
+        :title-id="$attrs.titleId"
+        :content-id="$attrs.contentId"
+        :important="$attrs.important"
+        :hide-close="$attrs.hideClose"
+        :duration="$attrs.duration"
         :close-button-props="buttonCloseProps"
-        :visually-hidden-close="visuallyHiddenClose"
-        :visually-hidden-close-label="visuallyHiddenCloseLabel"
-        @close="onClose($event)"
+        :visually-hidden-close="$attrs.visuallyHiddenClose"
+        :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+        @close="$attrs.onClose($event)"
       >
         <span
-          v-if="defaultSlot"
-          v-html="defaultSlot"
+          v-if="$attrs.default"
+          v-html="$attrs.default"
         />
         <span v-else>
           Message body with
@@ -36,30 +36,30 @@
 
         <template slot="action">
           <span
-            v-if="action"
-            v-html="action"
+            v-if="$attrs.action"
+            v-html="$attrs.action"
           />
           <dt-button
             v-else
             size="sm"
             importance="outlined"
             :kind="buttonKind"
-            @click="onClick"
+            @click="$attrs.onClick"
           >
             Action
           </dt-button>
         </template>
         <template
-          v-if="icon"
+          v-if="$attrs.icon"
           slot="icon"
         >
-          <dt-icon :name="icon" />
+          <dt-icon :name="$attrs.icon" />
         </template>
         <template
-          v-if="titleOverride"
+          v-if="$attrs.titleOverride"
           slot="titleOverride"
         >
-          <span v-html="titleOverride" />
+          <span v-html="$attrs.titleOverride" />
         </template>
       </dt-toast>
     </aside>
@@ -78,17 +78,17 @@ export default {
 
   data () {
     return {
-      isShown: this.show,
+      isShown: this.$attrs.show,
     };
   },
 
   computed: {
     shouldInvertButton () {
-      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
     },
 
     isInverted () {
-      return this.important && this.shouldInvertButton;
+      return this.$attrs.important && this.shouldInvertButton;
     },
 
     buttonKind () {
@@ -101,7 +101,7 @@ export default {
 
     buttonCloseProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         kind: this.buttonKind,
         ariaLabel: 'Close',
       };

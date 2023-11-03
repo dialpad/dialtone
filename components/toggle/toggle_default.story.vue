@@ -1,17 +1,17 @@
 <template>
   <dt-toggle
-    :checked="checked"
-    :disabled="disabled"
-    :size="size"
-    :show-icon="showIcon"
-    :label-class="labelClass"
-    :label-child-props="labelChildProps"
-    :toggle-on-click="toggleOnClick"
-    @change="onChange"
+    :checked="$attrs.checked"
+    :disabled="$attrs.disabled"
+    :size="$attrs.size"
+    :show-icon="$attrs.showIcon"
+    :label-class="$attrs.labelClass"
+    :label-child-props="$attrs.labelChildProps"
+    :toggle-on-click="$attrs.toggleOnClick"
+    @change="$attrs.onChange"
   >
     <span
-      v-if="defaultSlot"
-      v-html="defaultSlot"
+      v-if="$attrs.default"
+      v-html="$attrs.default"
     />
   </dt-toggle>
 </template>

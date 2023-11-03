@@ -1,21 +1,21 @@
 <template>
   <dt-checkbox-group
-    :id="id"
-    :name="name"
-    :legend="legend"
-    :selected-values="selectedValues"
-    :disabled="disabled"
-    :messages="messages"
-    :show-messages="showMessages"
-    :legend-class="legendClass"
-    :messages-class="messagesClass"
-    :legend-child-props="legendChildProps"
-    :messages-child-props="messagesChildProps"
-    @input="onInput"
+    :id="$attrs.id"
+    :name="$attrs.name"
+    :legend="$attrs.legend"
+    :selected-values="$attrs.selectedValues"
+    :disabled="$attrs.disabled"
+    :messages="$attrs.messages"
+    :show-messages="$attrs.showMessages"
+    :legend-class="$attrs.legendClass"
+    :messages-class="$attrs.messagesClass"
+    :legend-child-props="$attrs.legendChildProps"
+    :messages-child-props="$attrs.messagesChildProps"
+    @input="$attrs.onInput"
   >
     <slot>
       <dt-checkbox
-        v-for="option in options"
+        v-for="option in $attrs.options"
         :key="option.value"
         :value="option.value"
       >
@@ -23,10 +23,10 @@
       </dt-checkbox>
     </slot>
     <template
-      v-if="legendSlot"
+      v-if="$attrs.legendSlot"
       slot="legend"
     >
-      <span v-html="legendSlot" />
+      <span v-html="$attrs.legendSlot" />
     </template>
   </dt-checkbox-group>
 </template>

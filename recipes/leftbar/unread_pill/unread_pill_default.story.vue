@@ -1,11 +1,11 @@
 <template>
   <dt-recipe-unread-pill
-    :direction="direction"
-    :kind="kind"
-    @click="onClick"
+    :direction="$attrs.direction"
+    :kind="$attrs.kind"
+    @click="$attrs.onClick"
   >
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
+    <template v-if="$attrs.default">
+      <span v-html="$attrs.default" />
     </template>
   </dt-recipe-unread-pill>
 </template>

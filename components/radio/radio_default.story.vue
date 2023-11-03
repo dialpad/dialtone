@@ -1,30 +1,30 @@
 <template>
   <dt-radio
-    :label="label"
-    :name="name"
-    :value="value"
-    :checked="checked"
-    :description="description"
-    :validation-state="validationState"
-    :disabled="disabled"
-    :input-class="inputClass"
-    :label-class="labelClass"
-    :description-class="descriptionClass"
-    :label-child-props="labelChildProps"
-    :description-child-props="descriptionChildProps"
-    :messages="messages"
-    @input="onInput"
-    @focusin="onFocusIn"
-    @focusout="onFocusOut"
+    :label="$attrs.label"
+    :name="$attrs.name"
+    :value="$attrs.value"
+    :checked="$attrs.checked"
+    :description="$attrs.description"
+    :validation-state="$attrs.validationState"
+    :disabled="$attrs.disabled"
+    :input-class="$attrs.inputClass"
+    :label-class="$attrs.labelClass"
+    :description-class="$attrs.descriptionClass"
+    :label-child-props="$attrs.labelChildProps"
+    :description-child-props="$attrs.descriptionChildProps"
+    :messages="$attrs.messages"
+    @input="$attrs.onInput"
+    @focusin="$attrs.onFocusIn"
+    @focusout="$attrs.onFocusOut"
   >
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
+    <template v-if="$attrs.default">
+      <span v-html="$attrs.default" />
     </template>
     <template
-      v-if="descriptionSlot"
+      v-if="$attrs.descriptionSlot"
       slot="description"
     >
-      <span v-html="descriptionSlot" />
+      <span v-html="$attrs.descriptionSlot" />
     </template>
   </dt-radio>
 </template>

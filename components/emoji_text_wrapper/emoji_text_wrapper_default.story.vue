@@ -1,10 +1,10 @@
 <template>
   <dt-emoji-text-wrapper
-    :size="size"
-    :element-type="elementType"
+    :size="$attrs.size"
+    :element-type="$attrs.elementType"
   >
-    <template v-if="defaultSlot">
-      <html-fragment :html="defaultSlot" />
+    <template v-if="$attrs.default">
+      <html-fragment :html="$attrs.default" />
     </template>
   </dt-emoji-text-wrapper>
 </template>

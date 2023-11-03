@@ -1,16 +1,16 @@
 <template>
   <dt-rich-text-editor
     v-model="inputValue"
-    :editable="editable"
-    :input-aria-label="inputAriaLabel"
-    :input-class="inputClass"
-    :output-format="outputFormat"
-    :auto-focus="autoFocus"
-    :link="link"
-    :placeholder="placeholder"
-    @blur="onBlur"
-    @input="onInput"
-    @focus="onFocus"
+    :editable="$attrs.editable"
+    :input-aria-label="$attrs.inputAriaLabel"
+    :input-class="$attrs.inputClass"
+    :output-format="$attrs.outputFormat"
+    :auto-focus="$attrs.autoFocus"
+    :link="$attrs.link"
+    :placeholder="$attrs.placeholder"
+    @blur="$attrs.onBlur"
+    @input="$attrs.onInput"
+    @focus="$attrs.onFocus"
   />
 </template>
 
@@ -26,7 +26,7 @@ export default {
 
   data () {
     return {
-      inputValue: this.value,
+      inputValue: this.$attrs.value,
     };
   },
 

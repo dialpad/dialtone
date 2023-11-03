@@ -1,20 +1,20 @@
 <template>
   <dt-item-layout>
     <template slot="left">
-      <span v-html="left" />
+      <span v-html="$attrs.left" />
     </template>
-    <span v-html="defaultSlot" />
+    <span v-html="$attrs.default" />
     <template slot="subtitle">
-      <span v-html="subtitle" />
+      <span v-html="$attrs.subtitle" />
     </template>
     <template slot="bottom">
-      <span v-html="bottom" />
+      <span v-html="$attrs.bottom" />
     </template>
     <template slot="right">
-      <span v-html="right" />
+      <span v-html="$attrs.right" />
     </template>
     <template slot="selected">
-      <span v-html="selected" />
+      <span v-html="$attrs.selected" />
     </template>
   </dt-item-layout>
 </template>

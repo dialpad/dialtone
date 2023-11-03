@@ -1,37 +1,37 @@
 <!-- eslint-disable vue/no-v-text-v-html-on-component -->
 <template>
   <dt-chip
-    :id="id"
-    :hide-close="hideClose"
-    :close-button-props="closeButtonProps"
-    :aria-label="ariaLabel"
-    :interactive="interactive"
-    :size="size"
-    :content-class="contentClass"
-    @click="onClick"
-    @close="onClose"
+    :id="$attrs.id"
+    :hide-close="$attrs.hideClose"
+    :close-button-props="$attrs.closeButtonProps"
+    :aria-label="$attrs.ariaLabel"
+    :interactive="$attrs.interactive"
+    :size="$attrs.size"
+    :content-class="$attrs.contentClass"
+    @click="$attrs.onClick"
+    @close="$attrs.onClose"
   >
     <template
-      v-if="icon"
+      v-if="$attrs.icon"
       slot="icon"
     >
       <dt-icon
-        :name="icon"
+        :name="$attrs.icon"
         :size="iconSize"
       />
     </template>
     <template
-      v-else-if="avatar"
+      v-else-if="$attrs.avatar"
       slot="avatar"
     >
       <dt-avatar
-        :full-name="avatar"
-        :seed="avatarSeed"
+        :full-name="$attrs.avatar"
+        :seed="$attrs.avatarSeed"
       />
     </template>
     <span
-      v-if="defaultSlot"
-      v-html="defaultSlot"
+      v-if="$attrs.default"
+      v-html="$attrs.default"
     />
   </dt-chip>
 </template>

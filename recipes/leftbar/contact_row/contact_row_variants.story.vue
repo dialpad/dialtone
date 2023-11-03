@@ -9,7 +9,7 @@
         avatar-presence="active"
         avatar-seed="JN"
         avatar-alt="Avatar person"
-        :avatar-src="avatarSrc"
+        :avatar-src="$attrs.avatarSrc"
         user-status="Good Morning! :smile:"
         call-button-tooltip="Call"
       />
@@ -25,7 +25,7 @@
         avatar-alt="Avatar person"
         presence-text="Away"
         user-status="Out for a bit"
-        :avatar-src="avatarSrc"
+        :avatar-src="$attrs.avatarSrc"
         call-button-tooltip="Call"
       />
     </div>
@@ -40,7 +40,7 @@
         avatar-alt="Avatar person"
         presence-text="In a meeting"
         user-status="Meetings all day"
-        :avatar-src="avatarSrc"
+        :avatar-src="$attrs.avatarSrc"
         call-button-tooltip="Call"
       />
     </div>
@@ -53,7 +53,7 @@
         avatar-presence="active"
         avatar-seed="JN"
         avatar-alt="Avatar person"
-        :avatar-src="avatarSrc"
+        :avatar-src="$attrs.avatarSrc"
         unread-count="5"
         unread-count-tooltip="55 unread messages"
         :has-unreads="true"
@@ -69,7 +69,7 @@
         avatar-presence="active"
         avatar-seed="JN"
         avatar-alt="Avatar person"
-        :avatar-src="avatarSrc"
+        :avatar-src="$attrs.avatarSrc"
         :selected="true"
         call-button-tooltip="Call"
       />

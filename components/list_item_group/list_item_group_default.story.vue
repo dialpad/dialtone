@@ -4,9 +4,9 @@
     aria-label="list"
   >
     <dt-list-item-group
-      :heading="heading"
-      :heading-class="headingClass"
-      :list-class="listClass"
+      :heading="$attrs.heading"
+      :heading-class="$attrs.headingClass"
+      :list-class="$attrs.listClass"
     >
       <dt-list-item
         class="d-pl8"
@@ -30,10 +30,10 @@
         item3
       </dt-list-item>
       <template
-        v-if="headingSlot"
+        v-if="$attrs.headingSlot"
         slot="headingSlot"
       >
-        <span v-html="headingSlot" />
+        <span v-html="$attrs.headingSlot" />
       </template>
     </dt-list-item-group>
   </div>

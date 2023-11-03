@@ -1,7 +1,7 @@
 <template>
   <dt-recipe-time-pill
-    :date-time="dateTime"
-    :date-time-display="dateTimeDisplay"
+    :date-time="$attrs.dateTime"
+    :date-time-display="$attrs.dateTimeDisplay"
   />
 </template>
 

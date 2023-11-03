@@ -2,10 +2,10 @@
 <template>
   <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-flg12 d-fl-col2">
     <dt-popover
-      :open="open"
-      :modal="modal"
-      :hide-on-click="hideOnClick"
-      :transition="transition"
+      :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
+      :transition="$attrs.transition"
       width-content="anchor"
       placement="bottom-start"
       initial-focus-element="first"
@@ -38,10 +38,10 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="open"
-      :modal="modal"
-      :hide-on-click="hideOnClick"
-      :transition="transition"
+      :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
+      :transition="$attrs.transition"
       width-content="anchor"
       initial-focus-element="first"
       class="d-mb128 d-jc-flex-end"
@@ -73,10 +73,10 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="open"
-      :modal="modal"
-      :hide-on-click="hideOnClick"
-      :transition="transition"
+      :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
+      :transition="$attrs.transition"
       padding="none"
       width-content="anchor"
       initial-focus-element="first"
@@ -108,10 +108,10 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       :modal="modal || false"
-      :hide-on-click="hideOnClick"
-      :transition="transition"
+      :hide-on-click="$attrs.hideOnClick"
+      :transition="$attrs.transition"
       width-content="anchor"
       class="d-jc-flex-end"
     >
@@ -142,10 +142,10 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="open"
-      :modal="modal"
-      :hide-on-click="hideOnClick"
-      :transition="transition"
+      :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
+      :transition="$attrs.transition"
       class="d-mb128"
       :show-close-button="true"
       placement="bottom-start"
@@ -220,10 +220,10 @@
     </dt-popover>
 
     <dt-popover
-      :open="open"
-      :modal="modal"
-      :hide-on-click="hideOnClick"
-      :transition="transition"
+      :open="$attrs.open"
+      :modal="$attrs.modal"
+      :hide-on-click="$attrs.hideOnClick"
+      :transition="$attrs.transition"
       class="d-mb128 d-jc-flex-end"
       :show-close-button="true"
       max-height="20rem"
@@ -256,10 +256,10 @@
     </dt-popover>
 
     <dt-popover
-      :open="open"
-      :modal="modal"
-      :transition="transition"
-      :hide-on-click="hideOnClick"
+      :open="$attrs.open"
+      :modal="$attrs.modal"
+      :transition="$attrs.transition"
+      :hide-on-click="$attrs.hideOnClick"
       class="d-my128"
       max-height="20rem"
       max-width="50rem"
@@ -297,10 +297,10 @@
     </dt-popover>
 
     <dt-popover
-      :open="open"
-      :modal="modal"
-      :transition="transition"
-      :hide-on-click="hideOnClick"
+      :open="$attrs.open"
+      :modal="$attrs.modal"
+      :transition="$attrs.transition"
+      :hide-on-click="$attrs.hideOnClick"
       content-class="d-pl12 d-pr16"
       initial-focus-element="first"
       class="d-my128 d-jc-flex-end"
@@ -320,7 +320,7 @@
             {{ sampleText }}
           </p>
           <dt-dropdown
-            :open="open"
+            :open="$attrs.open"
             max-height="13rem"
           >
             <template #anchor="{ attrs }">
@@ -386,10 +386,10 @@
     </dt-popover>
 
     <dt-popover
-      :open="open"
-      :modal="modal"
-      :transition="transition"
-      :hide-on-click="hideOnClick"
+      :open="$attrs.open"
+      :modal="$attrs.modal"
+      :transition="$attrs.transition"
+      :hide-on-click="$attrs.hideOnClick"
       content-class="d-pl12 d-pr16"
       class="d-my128"
       initial-focus-element="first"
@@ -408,7 +408,7 @@
           <p>
             {{ sampleText }}
           </p>
-          <dt-tooltip :show="open">
+          <dt-tooltip :show="$attrs.open">
             <template #anchor>
               <dt-button>
                 Hover me
@@ -422,8 +422,8 @@
 
     <dt-popover
       :modal="modal || false"
-      :hide-on-click="hideOnClick"
-      :transition="transition"
+      :hide-on-click="$attrs.hideOnClick"
+      :transition="$attrs.transition"
       content-class="d-pl12 d-pr16"
       class="d-my128 d-jc-flex-end"
       max-height="20rem"
@@ -470,7 +470,7 @@ export default {
 
   data () {
     return {
-      openPopoverWithTriggerOverride: this.open,
+      openPopoverWithTriggerOverride: this.$attrs.open,
       sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Consequuntur delectus distinctio id iure labore,
             maiores mollitia reprehenderit sunt tempore veritatis.

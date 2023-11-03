@@ -13,11 +13,11 @@ import { pascalCaseToKebabCase } from '@/common/utils';
  *                                      but rather the usage of that component.
  * @returns {component} the template component with props and args added.
  */
-export const createTemplateFromVueFile = (args, argTypes, templateComponent) => {
-  templateComponent.props = Object.keys(argTypes);
-  templateComponent.args = args;
-  return templateComponent;
-};
+export const createTemplateFromVueFile = (args, argTypes, templateComponent) => ({
+  components: { templateComponent },
+  props: Object.keys(argTypes),
+  template: '<template-component v-bind="$props"></template-component>',
+});
 
 /**
  * Gets the full list of icon component names from the dialtone package

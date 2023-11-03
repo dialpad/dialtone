@@ -1,9 +1,9 @@
 <template>
   <div :class="['d-p8', { 'd-bgc-black-900': inverted }]">
     <dt-keyboard-shortcut
-      :inverted="inverted"
-      :shortcut="shortcut"
-      :screen-reader-text="screenReaderText"
+      :inverted="$attrs.inverted"
+      :shortcut="$attrs.shortcut"
+      :screen-reader-text="$attrs.screenReaderText"
     />
   </div>
 </template>

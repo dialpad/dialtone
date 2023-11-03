@@ -24,10 +24,10 @@
       >
         <dt-tooltip
           v-if="direction !== null"
-          :transition="transition"
+          :transition="$attrs.transition"
           :placement="direction"
           :message="localMessage"
-          :show="show"
+          :show="$attrs.show"
           class="d-mx64"
         >
           <template #anchor>
@@ -47,9 +47,9 @@
       </div>
       <dt-tooltip
         class="d-ml4"
-        :transition="transition"
+        :transition="$attrs.transition"
         :message="localMessage"
-        :show="show"
+        :show="$attrs.show"
       >
         <template #anchor>
           <dt-button
@@ -71,9 +71,9 @@
       <!-- Text -->
       <dt-tooltip
         class="d-mb64 d-mt64"
-        :transition="transition"
+        :transition="$attrs.transition"
         :message="localMessage"
-        :show="show"
+        :show="$attrs.show"
       >
         <template #anchor>
           <dt-button link>
@@ -86,7 +86,7 @@
       <!-- Open state -->
       <dt-tooltip
         class="d-mb64 d-mt32"
-        :transition="transition"
+        :transition="$attrs.transition"
         :message="localMessage"
         :show="show1"
       >
@@ -105,9 +105,9 @@
         <!-- Inverted state -->
         <dt-tooltip
           :inverted="true"
-          :transition="transition"
+          :transition="$attrs.transition"
           :message="localMessage"
-          :show="show"
+          :show="$attrs.show"
         >
           <template #anchor>
             <dt-button
@@ -121,7 +121,7 @@
       </div>
     </div>
     <dt-tooltip
-      :transition="transition"
+      :transition="$attrs.transition"
       external-anchor="#external-tooltip-anchor"
     >
       This is a tooltip with external anchor, the actual dt-tooltip component
@@ -153,7 +153,7 @@ export default {
       TOOLTIP_DIRECTIONS: sliceIntoChunks(this.customDirections || TOOLTIP_DIRECTIONS, 3),
 
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-      show1: this.show ?? false,
+      show1: this.$attrs.show ?? false,
     };
   },
 };

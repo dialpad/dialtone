@@ -7,11 +7,11 @@
       <div class="some-text" />
       <div class="some-text">
         <dt-tooltip
-          :id="id"
-          :placement="placement"
+          :id="$attrs.id"
+          :placement="$attrs.placement"
           class="tooltip"
           :fallback-placements="['right', 'bottom']"
-          :offset="offset"
+          :offset="$attrs.offset"
           :show="true"
         >
           <template
@@ -28,7 +28,7 @@
           </template>
           <template slot="default">
             <div>
-              {{ defaultSlot }}
+              {{ $attrs.default }}
             </div>
           </template>
         </dt-tooltip>

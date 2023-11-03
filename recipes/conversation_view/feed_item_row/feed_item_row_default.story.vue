@@ -1,29 +1,29 @@
 <template>
   <ul class="d-pt16 feed-item-row__default-story">
     <dt-recipe-feed-item-row
-      :show-header="showHeader"
-      :avatar-image-url="avatarImageUrl"
-      :display-name="displayName"
-      :time="time"
-      :short-time="shortTime"
-      :is-active="isActive"
-      :state="state"
-      @hover="onHover"
-      @focus="onFocus"
+      :show-header="$attrs.showHeader"
+      :avatar-image-url="$attrs.avatarImageUrl"
+      :display-name="$attrs.displayName"
+      :time="$attrs.time"
+      :short-time="$attrs.shortTime"
+      :is-active="$attrs.isActive"
+      :state="$attrs.state"
+      @hover="$attrs.onHover"
+      @focus="$attrs.onFocus"
     >
-      <template v-if="defaultSlot">
-        <span v-html="defaultSlot" />
+      <template v-if="$attrs.default">
+        <span v-html="$attrs.default" />
       </template>
-      <template 
-        v-if="avatar"
+      <template
+        v-if="$attrs.avatar"
         #avatar
       >
         <span
-          v-html="avatar"
+          v-html="$attrs.avatar"
         />
       </template>
       <template
-        v-if="threading"
+        v-if="$attrs.threading"
         #threading
       >
         <dt-stack

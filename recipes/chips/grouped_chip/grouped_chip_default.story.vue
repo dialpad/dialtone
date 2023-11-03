@@ -2,32 +2,32 @@
   <dt-recipe-grouped-chip>
     <!-- Left hand Chip -->
     <template
-      v-if="leftIcon"
+      v-if="$attrs.leftIcon"
       slot="leftIcon"
     >
       <dt-icon
-        :name="leftIcon"
+        :name="$attrs.leftIcon"
         size="200"
       />
     </template>
     <template #leftContent>
-      <span v-html="leftContent" />
+      <span v-html="$attrs.leftContent" />
     </template>
     <!-- Right hand Chip -->
     <template
-      v-if="rightIcon"
+      v-if="$attrs.rightIcon"
       slot="rightIcon"
     >
       <dt-icon
-        :name="rightIcon"
+        :name="$attrs.rightIcon"
         size="200"
       />
     </template>
     <template
-      v-if="rightContent"
+      v-if="$attrs.rightContent"
       #rightContent
     >
-      <span v-html="rightContent" />
+      <span v-html="$attrs.rightContent" />
     </template>
   </dt-recipe-grouped-chip>
 </template>

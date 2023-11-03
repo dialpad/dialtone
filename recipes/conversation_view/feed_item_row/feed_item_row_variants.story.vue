@@ -6,17 +6,17 @@
       <ul class="d-py8">
         <dt-recipe-feed-item-row
           :show-header="false"
-          :avatar-image-url="avatarImageUrl"
-          :display-name="displayName"
-          :time="time"
-          :short-time="shortTime"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
           :is-active="true"
-          :state="state"
-          @hover="onHover"
-          @focus="onFocus"
+          :state="$attrs.state"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
-          <template v-if="defaultSlot">
-            <span v-html="defaultSlot" />
+          <template v-if="$attrs.default">
+            <span v-html="$attrs.default" />
           </template>
           <template
             #threading
@@ -91,13 +91,13 @@
       <ul class="d-py8">
         <dt-recipe-feed-item-row
           :show-header="true"
-          :avatar-image-url="avatarImageUrl"
-          :display-name="displayName"
-          :time="time"
-          :short-time="shortTime"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
           :is-active="true"
-          @hover="onHover"
-          @focus="onFocus"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
           <dt-image-viewer
             :image-src="fryImage"
@@ -141,7 +141,7 @@
             #reactions
           >
             <dt-recipe-emoji-row
-              :reactions="reactions"
+              :reactions="$attrs.reactions"
             />
           </template>
         </dt-recipe-feed-item-row>
@@ -152,17 +152,17 @@
       <ul class="d-py8">
         <dt-recipe-feed-item-row
           :show-header="false"
-          :avatar-image-url="avatarImageUrl"
-          :display-name="displayName"
-          :time="time"
-          :short-time="shortTime"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
           :is-active="true"
           state="ERROR"
-          @hover="onHover"
-          @focus="onFocus"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
-          <template v-if="defaultSlot">
-            <span v-html="defaultSlot" />
+          <template v-if="$attrs.default">
+            <span v-html="$attrs.default" />
           </template>
         </dt-recipe-feed-item-row>
       </ul>
@@ -178,17 +178,17 @@
         <dt-recipe-feed-item-row
           ref="feedItemRowFade"
           :show-header="false"
-          :avatar-image-url="avatarImageUrl"
-          :display-name="displayName"
-          :time="time"
-          :short-time="shortTime"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
           :is-active="true"
           state="SEARCHED"
-          @hover="onHover"
-          @focus="onFocus"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
-          <template v-if="defaultSlot">
-            <span v-html="defaultSlot" />
+          <template v-if="$attrs.default">
+            <span v-html="$attrs.default" />
           </template>
         </dt-recipe-feed-item-row>
       </ul>

@@ -2,13 +2,13 @@
   <dt-recipe-ivr-node
     :node-label="label"
     :node-type="nodeType"
-    :is-selected="isSelected"
-    :dtmf-key="dtmfKey"
-    :menu-button-aria-label="menuButtonAriaLabel"
+    :is-selected="$attrs.isSelected"
+    :dtmf-key="$attrs.dtmfKey"
+    :menu-button-aria-label="$attrs.menuButtonAriaLabel"
     @click="onClick($event)"
   >
     <template
-      v-if="connector"
+      v-if="$attrs.connector"
       #connector
     >
       <div
@@ -18,10 +18,10 @@
       </div>
     </template>
     <template
-      v-if="content"
+      v-if="$attrs.content"
       #content
     >
-      <span v-html="content" />
+      <span v-html="$attrs.content" />
     </template>
     <template
       v-else
@@ -52,7 +52,7 @@
         <div class="d-d-flex d-ai-center d-gg8">
           <dt-avatar
             full-name="Person Avatar"
-            :image-src="defaultImage"
+            :image-src="$attrs.defaultImage"
             seed="seed"
           />
           <p>Carolina Garcia Rodriguez</p>
@@ -81,10 +81,10 @@
       </div>
     </template>
     <template
-      v-if="menuItems"
+      v-if="$attrs.menuItems"
       #menuItems
     >
-      <span v-html="menuItems" />
+      <span v-html="$attrs.menuItems" />
     </template>
     <template
       v-else
@@ -195,7 +195,7 @@ export default {
     },
 
     label () {
-      return this.nodeLabel || IVR_NODE_LABELS[this.nodeType];
+      return this.$attrs.nodeLabel || IVR_NODE_LABELS[this.nodeType];
     },
 
     fileName () {

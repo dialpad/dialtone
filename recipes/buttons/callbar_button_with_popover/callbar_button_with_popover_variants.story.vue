@@ -43,7 +43,7 @@
         arrow-button-label="Open popover"
         aria-label="Icon only"
         button-width-size="md"
-        :open-popover="openPopover"
+        :open-popover="$attrs.openPopover"
       >
         <template #icon>
           <dt-icon name="mic" />

@@ -1,53 +1,53 @@
 <template>
   <dt-recipe-callbox
-    :badge-text="badgeText"
-    :badge-color="badgeColor"
-    :avatar-src="avatarSrc"
-    :avatar-full-name="avatarFullName"
-    :avatar-seed="avatarSeed"
-    :title="title"
-    :border-color="borderColor"
-    :clickable="clickable"
-    :is-on-hold="isOnHold"
-    @click="onClick"
+    :badge-text="$attrs.badgeText"
+    :badge-color="$attrs.badgeColor"
+    :avatar-src="$attrs.avatarSrc"
+    :avatar-full-name="$attrs.avatarFullName"
+    :avatar-seed="$attrs.avatarSeed"
+    :title="$attrs.title"
+    :border-color="$attrs.borderColor"
+    :clickable="$attrs.clickable"
+    :is-on-hold="$attrs.isOnHold"
+    @click="$attrs.onClick"
   >
     <template
-      v-if="video"
+      v-if="$attrs.video"
       #video
     >
       <div
-        v-html="video"
+        v-html="$attrs.video"
       />
     </template>
     <template
-      v-if="badge"
+      v-if="$attrs.badge"
       #badge
     >
       <span
-        v-html="badge"
+        v-html="$attrs.badge"
       />
     </template>
     <template
-      v-if="subtitle"
+      v-if="$attrs.subtitle"
       #subtitle
     >
       <span
-        v-html="subtitle"
+        v-html="$attrs.subtitle"
       />
     </template>
     <template
-      v-if="right"
+      v-if="$attrs.right"
       #right
     >
       <div
-        v-html="right"
+        v-html="$attrs.right"
       />
     </template>
     <template
-      v-if="bottom"
+      v-if="$attrs.bottom"
       #bottom
     >
-      <div v-html="bottom" />
+      <div v-html="$attrs.bottom" />
     </template>
   </dt-recipe-callbox>
 </template>

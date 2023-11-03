@@ -1,9 +1,9 @@
 <template>
   <dt-breadcrumb-item
-    :inverted="inverted"
-    :selected="selected"
-    :label="label"
-    :href="href"
+    :inverted="$attrs.inverted"
+    :selected="$attrs.selected"
+    :label="$attrs.label"
+    :href="$attrs.href"
   />
 </template>
 

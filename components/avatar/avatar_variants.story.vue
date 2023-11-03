@@ -6,10 +6,10 @@
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`image-${size}`"
-          :seed="seed"
+          :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Image"
-          :image-src="imageSrc"
+          :image-src="$attrs.imageSrc"
         />
       </div>
     </div>
@@ -19,7 +19,7 @@
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`initials-${size}`"
-          :seed="seed"
+          :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Icon"
         />
@@ -31,7 +31,7 @@
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`icon-${size}`"
-          :seed="seed"
+          :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Icon"
           icon-name="user"
@@ -44,10 +44,10 @@
         <dt-avatar
           v-for="state in AVATAR_PRESENCE_STATES"
           :key="`presence-${state}`"
-          :seed="seed"
+          :seed="$attrs.seed"
           size="md"
           full-name="Person avatar"
-          :image-src="imageSrc"
+          :image-src="$attrs.imageSrc"
           :presence="state"
         />
       </div>
@@ -56,17 +56,17 @@
       <h2>Overlay</h2>
       <div class="d-flow16 d-d-flex">
         <dt-avatar
-          :seed="seed"
+          :seed="$attrs.seed"
           size="xl"
           full-name="Person avatar"
-          :image-src="imageSrc"
+          :image-src="$attrs.imageSrc"
           overlay-icon="hear"
         />
         <dt-avatar
-          :seed="seed"
+          :seed="$attrs.seed"
           size="xl"
           full-name="Person avatar"
-          :image-src="imageSrc"
+          :image-src="$attrs.imageSrc"
           overlay-text="+3"
         />
       </div>
@@ -75,20 +75,20 @@
       <h2>Clickable</h2>
       <div class="d-flow16 d-d-flex">
         <dt-avatar
-          :seed="seed"
+          :seed="$attrs.seed"
           full-name="Person avatar"
           clickable
         />
         <dt-avatar
-          :seed="seed"
+          :seed="$attrs.seed"
           icon-name="user"
           aria-label="user icon avatar"
           clickable
         />
         <dt-avatar
-          :seed="seed"
+          :seed="$attrs.seed"
           full-name="Person avatar"
-          :image-src="imageSrc"
+          :image-src="$attrs.imageSrc"
           clickable
         />
       </div>
@@ -97,20 +97,20 @@
       <h2>Group</h2>
       <div class="d-flow16 d-d-flex">
         <dt-avatar
-          :seed="seed"
+          :seed="$attrs.seed"
           full-name="Person avatar"
-          group="3"
+          :group="3"
         />
         <dt-avatar
-          :seed="seed"
+          :seed="$attrs.seed"
           icon-name="user"
-          group="10"
+          :group="10"
         />
         <dt-avatar
-          :seed="seed"
+          :seed="$attrs.seed"
           full-name="Person avatar"
-          :image-src="imageSrc"
-          group="100"
+          :image-src="$attrs.imageSrc"
+          :group="100"
         />
       </div>
     </div>

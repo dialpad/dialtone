@@ -1,19 +1,19 @@
 <template>
   <dt-combobox
-    :empty-state-message="emptyStateMessage"
-    :loading="loading"
-    :show-list="!!value && showList"
-    :label="label"
-    :label-visible="labelVisible"
-    :size="size"
-    :description="description"
-    :empty-list="emptyList"
-    :empty-state-class="emptyStateClass"
-    :click-on-select="clickOnSelect"
+    :empty-state-message="$attrs.emptyStateMessage"
+    :loading="$attrs.loading"
+    :show-list="!!value && $attrs.showList"
+    :label="$attrs.label"
+    :label-visible="$attrs.labelVisible"
+    :size="$attrs.size"
+    :description="$attrs.description"
+    :empty-list="$attrs.emptyList"
+    :empty-state-class="$attrs.emptyStateClass"
+    :click-on-select="$attrs.clickOnSelect"
     @escape="onComboboxEscape"
-    @highlight="onHighlight"
+    @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
-    @opened="onOpened"
+    @opened="$attrs.onOpened"
   >
     <template
       slot="input"
@@ -51,10 +51,10 @@
       </ol>
     </template>
     <template
-      v-if="emptyListItem"
+      v-if="$attrs.emptyListItem"
       slot="emptyListItem"
     >
-      <span v-html="emptyListItem" />
+      <span v-html="$attrs.emptyListItem" />
     </template>
   </dt-combobox>
 </template>
@@ -83,24 +83,24 @@ export default {
 
   computed: {
     displayItems () {
-      return this.items;
+      return this.$attrs.items;
     },
   },
 
   methods: {
     onComboboxSelect (i) {
-      this.value = this.items[i].name;
-      this.onSelect(i);
+      this.value = this.$attrs.items[i].name;
+      this.$attrs.onSelect(i);
     },
 
     onListItemSelect (i) {
-      this.value = this.items[i].name;
-      this.onItemClick(i);
+      this.value = this.$attrs.items[i].name;
+      this.$attrs.onItemClick(i);
     },
 
     onComboboxEscape () {
       this.value = '';
-      this.onEscape();
+      this.$attrs.onEscape();
     },
   },
 };

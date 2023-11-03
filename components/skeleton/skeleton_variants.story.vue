@@ -16,18 +16,18 @@
             size: 'sm',
             shape: 'circle',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <p>M (32x32px)</p>
         <dt-skeleton
           :shape-option="{
             shape: 'circle',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <p>L (48x48px)</p>
         <dt-skeleton
@@ -35,8 +35,8 @@
             size: 'lg',
             shape: 'circle',
           }"
-          :animate="animate"
-          :aria-label="ariaLabel"
+          :animate="$attrs.animate"
+          :aria-label="$attrs.ariaLabel"
         />
       </div>
       <div class="d-p4 d-fl1 d-w25p">
@@ -48,17 +48,17 @@
           :shape-option="{
             shape: 'square',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
       </div>
       <div class="d-p4 d-fl1 d-w25p">
         <h3>Text: Body</h3>
         <p class="d-mb24" />
         <dt-skeleton
-          :aria-label="ariaLabel"
-          :animate="animate"
+          :aria-label="$attrs.ariaLabel"
+          :animate="$attrs.animate"
           :text-option="{
             width: '120px',
           }"
@@ -77,9 +77,9 @@
             width: '160px',
             headingHeight: 'sm',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <p>M (height: 24px)</p>
         <dt-skeleton
@@ -88,9 +88,9 @@
             headingHeight: 'md',
             width: '240px',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           class="d-mb24"
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
         />
         <p>L (height: 32px)</p>
         <dt-skeleton
@@ -99,8 +99,8 @@
             headingHeight: 'lg',
             width: '320px',
           }"
-          :animate="animate"
-          :aria-label="ariaLabel"
+          :animate="$attrs.animate"
+          :aria-label="$attrs.ariaLabel"
         />
       </div>
     </section>
@@ -112,38 +112,38 @@
         <h3>Text List</h3>
         <p class="d-mb24" />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           :offset="0.5"
           class="d-mb16"
         />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           :offset="0.5"
           class="d-mb16"
         />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           :offset="0.5"
           class="d-mb16"
         />
         <dt-skeleton
-          :aria-label="ariaLabel"
+          :aria-label="$attrs.ariaLabel"
           :text-option="{
             width: '120px',
           }"
-          :animate="animate"
+          :animate="$attrs.animate"
           :offset="0.5"
           class="d-mb16"
         />
@@ -161,8 +161,8 @@
               rows: 1,
             },
           }"
-          :animate="animate"
-          :aria-label="ariaLabel"
+          :animate="$attrs.animate"
+          :aria-label="$attrs.ariaLabel"
         />
 
         <h3 class="d-pt16">
@@ -179,8 +179,8 @@
               rows: 1,
             },
           }"
-          :animate="animate"
-          :aria-label="ariaLabel"
+          :animate="$attrs.animate"
+          :aria-label="$attrs.ariaLabel"
         />
         <h3 class="d-pt16">
           Messages / Transcript / Comment
@@ -197,8 +197,8 @@
               ],
             },
           }"
-          :animate="animate"
-          :aria-label="ariaLabel"
+          :animate="$attrs.animate"
+          :aria-label="$attrs.ariaLabel"
         />
       </div>
       <div class="d-p4 d-fl1 d-w50p">
@@ -211,8 +211,8 @@
             rows: 5,
             randomWidth: false,
           }"
-          :animate="animate"
-          :aria-label="ariaLabel"
+          :animate="$attrs.animate"
+          :aria-label="$attrs.ariaLabel"
           :offset="0.5"
         />
       </div>

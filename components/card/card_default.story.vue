@@ -1,10 +1,10 @@
 <template>
   <dt-card
     class="d-w264"
-    :container-class="containerClass"
-    :header-class="headerClass"
-    :content-class="contentClass"
-    :footer-class="footerClass"
+    :container-class="$attrs.containerClass"
+    :header-class="$attrs.headerClass"
+    :content-class="$attrs.contentClass"
+    :footer-class="$attrs.footerClass"
     :max-height="maxHeight"
   >
     <template
@@ -29,11 +29,11 @@
       v-else-if="header"
       #header
     >
-      <span v-html="header" />
+      <span v-html="$attrs.header" />
     </template>
     <template #content>
-      <div v-if="content">
-        <span v-html="content" />
+      <div v-if="$attrs.content">
+        <span v-html="$attrs.content" />
       </div>
       <div
         v-else
@@ -63,7 +63,7 @@
       v-else-if="footer"
       #footer
     >
-      <span v-html="footer" />
+      <span v-html="$attrs.footer" />
     </template>
   </dt-card>
 </template>

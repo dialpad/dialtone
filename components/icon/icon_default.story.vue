@@ -1,8 +1,8 @@
 <template>
   <dt-icon
-    :size="size"
-    :name="name"
-    :aria-label="ariaLabel"
+    :size="$attrs.size"
+    :name="$attrs.name"
+    :aria-label="$attrs.ariaLabel"
   />
 </template>
 

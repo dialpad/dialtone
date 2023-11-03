@@ -8,12 +8,12 @@
   >
     <dt-breadcrumbs
       class="d-py16 d-px12"
-      :breadcrumbs="breadcrumbs"
-      :inverted="inverted"
+      :breadcrumbs="$attrs.breadcrumbs"
+      :inverted="$attrs.inverted"
     >
       <html-fragment
-        v-if="defaultSlot"
-        :html="defaultSlot"
+        v-if="$attrs.default"
+        :html="$attrs.default"
       />
     </dt-breadcrumbs>
   </div>

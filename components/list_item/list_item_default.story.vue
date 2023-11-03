@@ -3,26 +3,26 @@
     ref="listWrapper"
   >
     <dt-list-item
-      :id="id"
-      :role="role"
-      :element-type="elementType"
-      :type="type"
-      :navigation-type="navigationType"
-      :selected="selected"
-      @click="onClick"
+      :id="$attrs.id"
+      :role="$attrs.role"
+      :element-type="$attrs.elementType"
+      :type="$attrs.type"
+      :navigation-type="$attrs.navigationType"
+      :selected="$attrs.selected"
+      @click="$attrs.onClick"
     >
       <template slot="left">
-        <dt-icon :name="left" />
+        <dt-icon :name="$attrs.left" />
       </template>
-      <span v-html="defaultSlot" />
+      <span v-html="$attrs.default" />
       <template slot="subtitle">
-        <span v-html="subtitle" />
+        <span v-html="$attrs.subtitle" />
       </template>
       <template slot="bottom">
-        <span v-html="bottom" />
+        <span v-html="$attrs.bottom" />
       </template>
       <template slot="right">
-        <dt-icon :name="right" />
+        <dt-icon :name="$attrs.right" />
       </template>
     </dt-list-item>
   </ul>

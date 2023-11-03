@@ -1,34 +1,34 @@
 <template>
   <dt-recipe-callbar-button
-    :id="id"
-    :active="active"
-    :aria-label="ariaLabel"
-    :circle="circle"
-    :importance="importance"
-    :disabled="disabled"
-    :danger="danger"
-    :button-class="buttonClass"
-    :text-class="textClass"
-    :button-width-size="buttonWidthSize"
-    @click="onClick"
+    :id="$attrs.id"
+    :active="$attrs.active"
+    :aria-label="$attrs.ariaLabel"
+    :circle="$attrs.circle"
+    :importance="$attrs.importance"
+    :disabled="$attrs.disabled"
+    :danger="$attrs.danger"
+    :button-class="$attrs.buttonClass"
+    :text-class="$attrs.textClass"
+    :button-width-size="$attrs.buttonWidthSize"
+    @click="$attrs.onClick"
   >
     <template
-      v-if="tooltip"
+      v-if="$attrs.tooltip"
       slot="tooltip"
     >
-      <span v-html="tooltip" />
+      <span v-html="$attrs.tooltip" />
     </template>
 
     <span
-      v-if="defaultSlot"
-      v-html="defaultSlot"
+      v-if="$attrs.default"
+      v-html="$attrs.default"
     />
 
     <template
-      v-if="icon"
+      v-if="$attrs.icon"
       slot="icon"
     >
-      <dt-icon :name="icon" />
+      <dt-icon :name="$attrs.icon" />
     </template>
   </dt-recipe-callbar-button>
 </template>

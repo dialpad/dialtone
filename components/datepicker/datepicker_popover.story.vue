@@ -28,16 +28,16 @@
       </template>
       <template #content>
         <dt-datepicker
-          :locale="locale"
-          :prev-month-label="prevMonthLabel"
-          :next-month-label="nextMonthLabel"
-          :prev-year-label="prevYearLabel"
-          :next-year-label="nextYearLabel"
-          :select-day-label="selectDayLabel"
-          :change-to-label="changeToLabel"
-          :selected-date="currentSelectedDate"
-          @selected-date="currentSelectedDate = $event; onSelectedDate($event)"
-          @close-datepicker="onCloseDatepicker"
+          :locale="$attrs.locale"
+          :prev-month-label="$attrs.prevMonthLabel"
+          :next-month-label="$attrs.nextMonthLabel"
+          :prev-year-label="$attrs.prevYearLabel"
+          :next-year-label="$attrs.nextYearLabel"
+          :select-day-label="$attrs.selectDayLabel"
+          :change-to-label="$attrs.changeToLabel"
+          :selected-date="$attrs.currentSelectedDate"
+          @selected-date="currentSelectedDate = $event; $attrs.onSelectedDate($event)"
+          @close-datepicker="$attrs.onCloseDatepicker"
         />
       </template>
     </dt-popover>
@@ -56,8 +56,8 @@ export default {
 
   data () {
     return {
-      currentSelectedDate: this.date,
-      datepickerOpened: this.opened,
+      currentSelectedDate: this.$attrs.date,
+      datepickerOpened: this.$attrs.opened,
     };
   },
 

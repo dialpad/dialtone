@@ -4,13 +4,13 @@
     as the storybook control defined in the corresponding `.story.js` file.
   -->
   <dt-recipe-top-banner-info
-    :color-code="colorCode"
+    :color-code="$attrs.colorCode"
   >
     <template
-      v-if="left"
+      v-if="$attrs.left"
       slot="left"
     >
-      <span v-html="left" />
+      <span v-html="$attrs.left" />
     </template>
     <template
       v-else
@@ -18,18 +18,18 @@
     >
       <span class="d-fw-bold"> Active Call </span>
     </template>
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
+    <template v-if="$attrs.default">
+      <span v-html="$attrs.default" />
     </template>
     <span v-else>
       <span class="d-fw-medium">Caller ID: </span>
       Aerolabs Support (415) 583-3482
     </span>
     <template
-      v-if="right"
+      v-if="$attrs.right"
       slot="right"
     >
-      <span v-html="right" />
+      <span v-html="$attrs.right" />
     </template>
     <template
       v-else

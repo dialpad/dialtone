@@ -5,8 +5,8 @@
     as the storybook control defined in the corresponding `.story.js` file.
   -->
   <dt-datepicker
-    :generic-prop="genericProp"
-    @generic-event="onGenericEvent"
+    :generic-prop="$attrs.genericProp"
+    @generic-event="$attrs.onGenericEvent"
   >
     <!--
       We can also bind any slot data that the user has entered into the storybook controls. In this example we
@@ -17,14 +17,14 @@
       We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
       same name.
     -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
+    <template v-if="$attrs.default">
+      <span v-html="$attrs.default" />
     </template>
     <template
-      v-if="namedSlot"
+      v-if="$attrs.namedSlot"
       #namedSlot
     >
-      <span v-html="namedSlot" />
+      <span v-html="$attrs.namedSlot" />
     </template>
   </dt-datepicker>
 </template>

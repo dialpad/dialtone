@@ -1,33 +1,33 @@
 <template>
   <dt-collapsible
-    :id="id"
-    :anchor-text="anchorText"
-    :max-height="maxHeight"
-    :max-width="maxWidth"
+    :id="$attrs.id"
+    :anchor-text="$attrs.anchorText"
+    :max-height="$attrs.maxHeight"
+    :max-width="$attrs.maxWidth"
     :open="isOpen"
     :initial-focus-element="'first'"
-    :element-type="elementType"
-    :content-element-type="contentElementType"
-    :anchor-class="anchorClass"
-    :content-class="contentClass"
-    :aria-label="ariaLabel"
-    :aria-labelledby="ariaLabelledBy"
-    @opened="onOpened"
+    :element-type="$attrs.elementType"
+    :content-element-type="$attrs.contentElementType"
+    :anchor-class="$attrs.anchorClass"
+    :content-class="$attrs.contentClass"
+    :aria-label="$attrs.ariaLabel"
+    :aria-labelledby="$attrs.ariaLabelledBy"
+    @opened="$attrs.onOpened"
   >
     <template
-      v-if="anchor"
+      v-if="$attrs.anchor"
       slot="anchor"
       slot-scope="{ attrs }"
     >
       <div
         v-bind="attrs"
-        v-html="anchor"
+        v-html="$attrs.anchor"
       />
     </template>
     <template slot="content">
       <div
-        v-if="content"
-        v-html="content"
+        v-if="$attrs.content"
+        v-html="$attrs.content"
       />
       <div
         v-else

@@ -6,10 +6,10 @@
         :key="i"
         class="d-mr8"
         :placement="variant"
-        :padding="padding"
-        :navigation-type="navigationType"
-        :transition="transition"
-        :open="open"
+        :padding="$attrs.padding"
+        :navigation-type="$attrs.navigationType"
+        :transition="$attrs.transition"
+        :open="$attrs.open"
       >
         <template slot="anchor">
           <dt-button>
@@ -24,7 +24,7 @@
             v-for="(item) in items"
             :key="item.id"
             role="menuitem"
-            :navigation-type="navigationType"
+            :navigation-type="$attrs.navigationType"
             @click="close"
           >
             {{ item.name }}
@@ -33,25 +33,25 @@
       </dt-dropdown>
 
       <dt-dropdown
-        :open="open"
+        :open="$attrs.open"
         class="d-mr8"
-        :placement="placement"
-        :fallback-placements="fallbackPlacements"
-        :padding="padding"
-        :modal="modal"
-        :max-height="maxHeight"
-        :max-width="maxWidth"
-        :navigation-type="navigationType"
-        :transition="transition"
-        @opened="onOpened"
+        :placement="$attrs.placement"
+        :fallback-placements="$attrs.fallbackPlacements"
+        :padding="$attrs.padding"
+        :modal="$attrs.modal"
+        :max-height="$attrs.maxHeight"
+        :max-width="$attrs.maxWidth"
+        :navigation-type="$attrs.navigationType"
+        :transition="$attrs.transition"
+        @opened="$attrs.onOpened"
       >
         <template
           slot="anchor"
           slot-scope="{ attrs }"
         >
           <div
-            v-if="anchor"
-            v-html="anchor"
+            v-if="$attrs.anchor"
+            v-html="$attrs.anchor"
           />
           <dt-button
             v-else
@@ -65,18 +65,18 @@
           slot-scope="{ close }"
         >
           <dt-list-item-group
-            :list-class="listClass"
+            :list-class="$attrs.listClass"
           >
             <dt-list-item
               role="menuitem"
-              :navigation-type="navigationType"
+              :navigation-type="$attrs.navigationType"
               @click="close"
             >
               Menu item 1
             </dt-list-item>
             <dt-list-item
               role="menuitem"
-              :navigation-type="navigationType"
+              :navigation-type="$attrs.navigationType"
               @click="close"
             >
               Menu Item 2
@@ -85,7 +85,7 @@
           <dt-dropdown-separator />
           <dt-list-item
             role="menuitem"
-            :navigation-type="navigationType"
+            :navigation-type="$attrs.navigationType"
             @click="close"
           >
             Menu Item 3
@@ -95,24 +95,24 @@
 
       <dt-dropdown
         class="d-mr8"
-        :open="open"
-        :placement="placement"
-        :fallback-placements="fallbackPlacements"
-        :padding="padding"
-        :modal="modal"
-        :max-height="maxHeight"
-        :max-width="maxWidth"
-        :navigation-type="navigationType"
-        :transition="transition"
-        @opened="onOpened"
+        :open="$attrs.open"
+        :placement="$attrs.placement"
+        :fallback-placements="$attrs.fallbackPlacements"
+        :padding="$attrs.padding"
+        :modal="$attrs.modal"
+        :max-height="$attrs.maxHeight"
+        :max-width="$attrs.maxWidth"
+        :navigation-type="$attrs.navigationType"
+        :transition="$attrs.transition"
+        @opened="$attrs.onOpened"
       >
         <template
           slot="anchor"
           slot-scope="{ attrs }"
         >
           <div
-            v-if="anchor"
-            v-html="anchor"
+            v-if="$attrs.anchor"
+            v-html="$attrs.anchor"
           />
           <dt-button
             v-else
@@ -127,12 +127,12 @@
         >
           <dt-list-item-group
             heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
-            :list-class="listClass"
+            :list-class="$attrs.listClass"
             heading="Menu Heading A"
           >
             <dt-list-item
               role="menuitem"
-              :navigation-type="navigationType"
+              :navigation-type="$attrs.navigationType"
               @click="close"
             >
               Menu Item 1
@@ -140,7 +140,7 @@
             <dt-dropdown-separator />
             <dt-list-item
               role="menuitem"
-              :navigation-type="navigationType"
+              :navigation-type="$attrs.navigationType"
               @click="close"
             >
               Menu Item 2
@@ -148,13 +148,13 @@
           </dt-list-item-group>
           <dt-dropdown-separator />
           <dt-list-item-group
-            :list-class="listClass"
+            :list-class="$attrs.listClass"
             heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
             heading="Menu Heading B"
           >
             <dt-list-item
               role="menuitem"
-              :navigation-type="navigationType"
+              :navigation-type="$attrs.navigationType"
               @click="close"
             >
               Menu Item 3
@@ -173,11 +173,11 @@
       <div class="d-d-flex">
         <dt-dropdown
           class="d-mr8"
-          :padding="padding"
-          :navigation-type="navigationType"
-          :open="open"
+          :padding="$attrs.padding"
+          :navigation-type="$attrs.navigationType"
+          :open="$attrs.open"
           :open-on-context="true"
-          :transition="transition"
+          :transition="$attrs.transition"
         >
           <template
             slot="anchor"
@@ -198,7 +198,7 @@
               v-for="(item) in items"
               :key="item.id"
               role="menuitem"
-              :navigation-type="navigationType"
+              :navigation-type="$attrs.navigationType"
               @click="close"
             >
               {{ item.name }}

@@ -1,21 +1,21 @@
 <template>
   <dt-input-group
-    :id="id"
+    :id="$attrs.id"
     v-model="internalValue"
-    :name="name"
-    :legend="legend"
-    :disabled="disabled"
-    :messages="messages"
-    :show-messages="showMessages"
-    :legend-class="legendClass"
-    :messages-class="messagesClass"
-    :legend-child-props="legendChildProps"
-    :messages-child-props="messagesChildProps"
-    @input="onInput"
+    :name="$attrs.name"
+    :legend="$attrs.legend"
+    :disabled="$attrs.disabled"
+    :messages="$attrs.messages"
+    :show-messages="$attrs.showMessages"
+    :legend-class="$attrs.legendClass"
+    :messages-class="$attrs.messagesClass"
+    :legend-child-props="$attrs.legendChildProps"
+    :messages-child-props="$attrs.messagesChildProps"
+    @input="$attrs.onInput"
   >
     <slot>
       <input-decorator
-        v-for="option in options"
+        v-for="option in $attrs.options"
         :key="option.value"
         :value="option.value"
       >
@@ -23,10 +23,10 @@
       </input-decorator>
     </slot>
     <template
-      v-if="legendSlot"
+      v-if="$attrs.legendSlot"
       slot="legend"
     >
-      <span v-html="legendSlot" />
+      <span v-html="$attrs.legendSlot" />
     </template>
   </dt-input-group>
 </template>
@@ -42,7 +42,7 @@ export default {
 
   data () {
     return {
-      internalValue: this.value,
+      internalValue: this.$attrs.value,
     };
   },
 

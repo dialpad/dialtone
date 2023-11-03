@@ -2,54 +2,54 @@
   <dt-input
     ref="input"
     v-model="inputValue"
-    :type="type"
-    :messages="messages"
-    :size="size"
-    :icon-size="iconSize"
-    :label="label"
-    :messages-child-props="messagesChildProps"
-    :name="name"
-    :disabled="disabled"
-    :show-messages="showMessages"
-    :messages-class="messagesClass"
-    :placeholder="placeholder"
-    :input-class="inputClass"
-    :retain-warning="retainWarning"
-    :input-wrapper-class="inputWrapperClass"
-    :current-length="currentLength"
+    :type="$attrs.type"
+    :messages="$attrs.messages"
+    :size="$attrs.size"
+    :icon-size="$attrs.iconSize"
+    :label="$attrs.label"
+    :messages-child-props="$attrs.messagesChildProps"
+    :name="$attrs.name"
+    :disabled="$attrs.disabled"
+    :show-messages="$attrs.showMessages"
+    :messages-class="$attrs.messagesClass"
+    :placeholder="$attrs.placeholder"
+    :input-class="$attrs.inputClass"
+    :retain-warning="$attrs.retainWarning"
+    :input-wrapper-class="$attrs.inputWrapperClass"
+    :current-length="$attrs.currentLength"
     :validate="validationConfig"
-    @blur="onBlur"
-    @input="onInput"
-    @clear="onClear"
-    @focus="onFocus"
-    @focusin="onFocusIn"
-    @focusout="onFocusOut"
+    @blur="$attrs.onBlur"
+    @input="$attrs.onInput"
+    @clear="$attrs.onClear"
+    @focus="$attrs.onFocus"
+    @focusin="$attrs.onFocusIn"
+    @focusout="$attrs.onFocusOut"
     @update:length="updateLength"
-    @update:invalid="onUpdateIsInvalid"
+    @update:invalid="$attrs.onUpdateIsInvalid"
   >
     <template
-      v-if="labelSlot"
+      v-if="$attrs.labelSlot"
       slot="labelSlot"
     >
-      <span v-html="labelSlot" />
+      <span v-html="$attrs.labelSlot" />
     </template>
     <template
-      v-if="description"
+      v-if="$attrs.description"
       slot="description"
     >
-      <span v-html="description" />
+      <span v-html="$attrs.description" />
     </template>
     <template
-      v-if="leftIcon"
+      v-if="$attrs.leftIcon"
       slot="leftIcon"
     >
-      <dt-icon :name="leftIcon" />
+      <dt-icon :name="$attrs.leftIcon" />
     </template>
     <template
-      v-if="rightIcon"
+      v-if="$attrs.rightIcon"
       slot="rightIcon"
     >
-      <dt-icon :name="rightIcon" />
+      <dt-icon :name="$attrs.rightIcon" />
     </template>
   </dt-input>
 </template>
@@ -72,7 +72,7 @@ export default {
 
   computed: {
     validationMessage () {
-      const remainingCharacters = this.validate?.length?.max - this.inputLength;
+      const remainingCharacters = this.$attrs?.validate?.length?.max - this.inputLength;
 
       if (remainingCharacters < 0) {
         return `${Math.abs(remainingCharacters)} characters over limit`;
@@ -82,16 +82,16 @@ export default {
     },
 
     validationConfig () {
-      if (!this?.validate?.length) {
+      if (!this?.$attrs?.validate?.length) {
         return null;
       }
 
       // Deep clone validate object
-      const validateConfigData = JSON.parse(JSON.stringify(this.validate));
+      const validateConfigData = JSON.parse(JSON.stringify(this.$attrs.validate));
 
       // Adds validation message
-      validateConfigData.length.message = this?.validate?.length?.message
-        ? this.validate.length.message
+      validateConfigData.length.message = this?.$attrs?.validate?.length?.message
+        ? this.$attrs.validate.length.message
         : this.validationMessage;
 
       return validateConfigData;
@@ -107,7 +107,7 @@ export default {
   methods: {
     updateLength ($event) {
       this.inputLength = $event;
-      this.onUpdateLength($event);
+      this.$attrs.onUpdateLength($event);
     },
   },
 };

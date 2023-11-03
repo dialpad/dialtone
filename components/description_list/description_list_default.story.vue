@@ -1,10 +1,10 @@
 <template>
   <dt-description-list
-    :gap="gap"
-    :items="items"
-    :direction="direction"
-    :term-class="termClass"
-    :description-class="descriptionClass"
+    :gap="$attrs.gap"
+    :items="$attrs.items"
+    :direction="$attrs.direction"
+    :term-class="$attrs.termClass"
+    :description-class="$attrs.descriptionClass"
   />
 </template>
 

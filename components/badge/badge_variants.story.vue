@@ -5,16 +5,16 @@
       class="d-d-flex d-gg8 d-ai-center d-ff-row-wrap"
     >
       <dt-badge
-        v-for="type in types"
-        :key="type.value"
-        :text="type.display"
-        :type="type.value"
+        v-for="t in types"
+        :key="t.value"
+        :text="t.display"
+        :type="t.value"
       />
       <dt-badge
-        v-for="type in types.slice(0, types.length - 1)"
-        :key="`${type.value}-count`"
+        v-for="t in types.slice(0, types.length - 1)"
+        :key="`${t.value}-count`"
         text="1"
-        :type="type.value"
+        :type="t.value"
         kind="count"
       />
       <dt-badge

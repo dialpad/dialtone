@@ -1,33 +1,33 @@
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
-    :label="label"
-    :label-visible="labelVisible"
-    :description="description"
-    :size="size"
-    :loading="loading"
-    :max-height="maxHeight"
-    :content-width="contentWidth"
-    :has-suggestion-list="hasSuggestionList"
-    :show-list="showList"
-    :padding="padding"
-    :list-id="listId"
-    :empty-list="emptyList"
-    :empty-state-message="emptyStateMessage"
-    :append-to="appendTo"
-    :visually-hidden-close="visuallyHiddenClose"
-    :visually-hidden-close-label="visuallyHiddenCloseLabel"
-    :transition="transition"
+    :label="$attrs.label"
+    :label-visible="$attrs.labelVisible"
+    :description="$attrs.description"
+    :size="$attrs.size"
+    :loading="$attrs.loading"
+    :max-height="$attrs.maxHeight"
+    :content-width="$attrs.contentWidth"
+    :has-suggestion-list="$attrs.hasSuggestionList"
+    :show-list="$attrs.showList"
+    :padding="$attrs.padding"
+    :list-id="$attrs.listId"
+    :empty-list="$attrs.emptyList"
+    :empty-state-message="$attrs.emptyStateMessage"
+    :append-to="$attrs.appendTo"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+    :transition="$attrs.transition"
     @escape="onComboboxEscape"
-    @highlight="onHighlight"
+    @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
-    @opened="onOpened"
+    @opened="$attrs.onOpened"
   >
     <template
-      v-if="header"
+      v-if="$attrs.header"
       #header
     >
-      <span v-html="header" />
+      <span v-html="$attrs.header" />
     </template>
 
     <template #input="{ inputProps, onInput }">
@@ -58,10 +58,10 @@
       </ul>
     </template>
     <template
-      v-if="footer"
+      v-if="$attrs.footer"
       #footer
     >
-      <span v-html="footer" />
+      <span v-html="$attrs.footer" />
     </template>
     <template
       v-else-if="!emptyList"

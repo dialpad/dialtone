@@ -1,37 +1,37 @@
 <!-- eslint-disable vue/no-static-inline-styles -->
 <template>
   <dt-root-layout
-    :header-class="headerClass"
-    :header-sticky="headerSticky"
-    :content-class="contentClass"
-    :sidebar-class="sidebarClass"
-    :sidebar-position="sidebarPosition"
-    :footer-class="footerClass"
-    :fixed="fixed"
-    :responsive-breakpoint="responsiveBreakpoint"
+    :header-class="$attrs.headerClass"
+    :header-sticky="$attrs.headerSticky"
+    :content-class="$attrs.contentClass"
+    :sidebar-class="$attrs.sidebarClass"
+    :sidebar-position="$attrs.sidebarPosition"
+    :footer-class="$attrs.footerClass"
+    :fixed="$attrs.fixed"
+    :responsive-breakpoint="$attrs.responsiveBreakpoint"
   >
     <template
       #header
     >
       <html-fragment
-        :html="header"
+        :html="$attrs.header"
       />
     </template>
     <template
       #sidebar
     >
       <html-fragment
-        :html="sidebar"
+        :html="$attrs.sidebar"
       />
     </template>
     <html-fragment
-      :html="defaultSlot"
+      :html="$attrs.default"
     />
     <template
       #footer
     >
       <html-fragment
-        :html="footer"
+        :html="$attrs.footer"
       />
     </template>
   </dt-root-layout>

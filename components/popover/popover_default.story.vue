@@ -1,34 +1,34 @@
 <template>
   <dt-popover
-    :id="id"
+    :id="$attrs.id"
     :key="uniqueKey"
     :open.sync="isOpen"
-    :placement="placement"
-    :content-class="contentClass"
-    :fallback-placements="fallbackPlacements"
-    :padding="padding"
-    :hide-on-click="hideOnClick"
-    :role="role"
-    :element-type="elementType"
-    :transition="transition"
-    :aria-labelledby="ariaLabelledby"
-    :aria-label="ariaLabel"
-    :offset="offset"
-    :modal="modal"
-    :initial-focus-element="initialFocusElement"
-    :content-width="contentWidth"
-    :show-close-button="showCloseButton"
-    :header-class="headerClass"
-    :footer-class="footerClass"
-    :max-height="maxHeight"
-    :max-width="maxWidth"
-    :tether="tether"
-    :sticky="sticky"
-    :open-with-arrow-keys="openWithArrowKeys"
-    :visually-hidden-close="visuallyHiddenClose"
-    :visually-hidden-close-label="visuallyHiddenCloseLabel"
-    :append-to="appendTo"
-    @opened="onOpened"
+    :placement="$attrs.placement"
+    :content-class="$attrs.contentClass"
+    :fallback-placements="$attrs.fallbackPlacements"
+    :padding="$attrs.padding"
+    :hide-on-click="$attrs.hideOnClick"
+    :role="$attrs.role"
+    :element-type="$attrs.elementType"
+    :transition="$attrs.transition"
+    :aria-labelledby="$attrs.ariaLabelledby"
+    :aria-label="$attrs.ariaLabel"
+    :offset="$attrs.offset"
+    :modal="$attrs.modal"
+    :initial-focus-element="$attrs.initialFocusElement"
+    :content-width="$attrs.contentWidth"
+    :show-close-button="$attrs.showCloseButton"
+    :header-class="$attrs.headerClass"
+    :footer-class="$attrs.footerClass"
+    :max-height="$attrs.maxHeight"
+    :max-width="$attrs.maxWidth"
+    :tether="$attrs.tether"
+    :sticky="$attrs.sticky"
+    :open-with-arrow-keys="$attrs.openWithArrowKeys"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+    :append-to="$attrs.appendTo"
+    @opened="$attrs.onOpened"
   >
     <template
       slot="anchor"
@@ -46,8 +46,8 @@
     >
       <div>
         <span
-          v-if="content"
-          v-html="content"
+          v-if="$attrs.content"
+          v-html="$attrs.content"
         />
         <template v-else>
           <p class="d-mb4">
@@ -63,16 +63,16 @@
       </div>
     </template>
     <template
-      v-if="headerContent"
+      v-if="$attrs.headerContent"
       slot="headerContent"
     >
-      <span v-html="headerContent" />
+      <span v-html="$attrs.headerContent" />
     </template>
     <template
-      v-if="footerContent"
+      v-if="$attrs.footerContent"
       slot="footerContent"
     >
-      <span v-html="footerContent" />
+      <span v-html="$attrs.footerContent" />
     </template>
   </dt-popover>
 </template>
@@ -91,7 +91,7 @@ export default {
 
   data: function () {
     return {
-      isOpen: this.open,
+      isOpen: this.$attrs.open,
     };
   },
 

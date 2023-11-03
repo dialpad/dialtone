@@ -5,11 +5,11 @@
     <dt-list-item
       navigation-type="tab"
       type="custom"
-      @click="onClick"
+      @click="$attrs.onClick"
     >
       <span
-        v-if="defaultSlot"
-        v-html="defaultSlot"
+        v-if="$attrs.default"
+        v-html="$attrs.default"
       />
       <div
         v-else

@@ -1,52 +1,52 @@
 <template>
   <div>
     <dt-modal
-      :title="title"
-      :banner-title="bannerTitle"
+      :title="$attrs.title"
+      :banner-title="$attrs.bannerTitle"
       :close-button-props="buttonCloseProps"
       :show="isOpen"
-      :kind="kind"
-      :size="size"
-      :copy="copy"
-      :modal-class="modalClass"
-      :banner-class="bannerClass"
-      :banner-kind="bannerKind"
-      :dialog-class="dialogClass"
-      :content-class="contentClass"
-      :hide-close="hideClose"
-      :labelled-by-id="labelledById"
-      :fixed-header-footer="fixedHeaderFooter"
-      :visually-hidden-close="visuallyHiddenClose"
-      :visually-hidden-close-label="visuallyHiddenCloseLabel"
-      :close-on-click="closeOnClick"
-      :initial-focus-element="initialFocusElement"
+      :kind="$attrs.kind"
+      :size="$attrs.size"
+      :copy="$attrs.copy"
+      :modal-class="$attrs.modalClass"
+      :banner-class="$attrs.bannerClass"
+      :banner-kind="$attrs.bannerKind"
+      :dialog-class="$attrs.dialogClass"
+      :content-class="$attrs.contentClass"
+      :hide-close="$attrs.hideClose"
+      :labelled-by-id="$attrs.labelledById"
+      :fixed-header-footer="$attrs.fixedHeaderFooter"
+      :visually-hidden-close="$attrs.visuallyHiddenClose"
+      :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+      :close-on-click="$attrs.closeOnClick"
+      :initial-focus-element="$attrs.initialFocusElement"
       @update:show="updateShow"
     >
       <template
-        v-if="banner"
+        v-if="$attrs.banner"
         slot="banner"
       >
-        <span v-html="banner" />
+        <span v-html="$attrs.banner" />
       </template>
       <template
-        v-if="header"
+        v-if="$attrs.header"
         slot="header"
       >
-        <span v-html="header" />
+        <span v-html="$attrs.header" />
       </template>
       <template
-        v-if="defaultSlot"
+        v-if="$attrs.default"
         slot="default"
       >
-        <span v-html="defaultSlot" />
+        <span v-html="$attrs.default" />
       </template>
       <template
         v-if="showFooter"
         slot="footer"
       >
         <span
-          v-if="footer"
-          v-html="footer"
+          v-if="$attrs.footer"
+          v-html="$attrs.footer"
         />
         <div v-else>
           <dt-button
@@ -58,7 +58,7 @@
           </dt-button>
           <dt-button
             id="confirm-button"
-            :kind="kind"
+            :kind="$attrs.kind"
             importance="primary"
             class="d-ml6"
           >
@@ -96,27 +96,27 @@ export default {
 
   data () {
     return {
-      isOpen: this.show,
+      isOpen: this.$attrs.show,
     };
   },
 
   computed: {
     buttonCloseProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         ariaLabel: 'Close',
       };
     },
 
     secondaryButtonKind () {
-      return this.kind === 'danger' ? 'muted' : 'default';
+      return this.$attrs.kind === 'danger' ? 'muted' : 'default';
     },
   },
 
   watch: {
     show: {
       handler () {
-        this.isOpen = this.show;
+        this.isOpen = this.$attrs.show;
       },
     },
   },
@@ -124,7 +124,7 @@ export default {
   methods: {
     updateShow (open) {
       this.isOpen = open;
-      this.toggleOpen(open);
+      this.$attrs.toggleOpen(open);
     },
   },
 

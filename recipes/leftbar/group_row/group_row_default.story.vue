@@ -1,13 +1,13 @@
 <template>
   <dt-recipe-group-row
-    :group-count-text="groupCountText"
-    :names="names"
-    :unread-count="unreadCount"
-    :unread-count-tooltip="unreadCountTooltip"
-    :has-unreads="hasUnreads"
-    :selected="selected"
-    :is-typing="isTyping"
-    @click="onClick"
+    :group-count-text="$attrs.groupCountText"
+    :names="$attrs.names"
+    :unread-count="$attrs.unreadCount"
+    :unread-count-tooltip="$attrs.unreadCountTooltip"
+    :has-unreads="$attrs.hasUnreads"
+    :selected="$attrs.selected"
+    :is-typing="$attrs.isTyping"
+    @click="$attrs.onClick"
   />
 </template>
 

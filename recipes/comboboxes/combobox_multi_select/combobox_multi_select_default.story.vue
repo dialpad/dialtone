@@ -1,31 +1,31 @@
 <template>
   <dt-recipe-combobox-multi-select
     ref="comboboxMultiSelect"
-    :label="label"
-    :label-visible="labelVisible"
-    :description="description"
-    :size="size"
-    :loading="loading"
-    :loading-message="loadingMessage"
-    :show-list="showList"
-    :selected-items="selectedItems"
-    :max-selected="maxSelected"
-    :list-max-height="listMaxHeight"
-    :max-selected-message="maxSelectedMessage"
-    :has-suggestion-list="hasSuggestionList"
-    :visually-hidden-close-label="visuallyHiddenCloseLabel"
-    :append-to="appendTo"
-    :transition="transition"
+    :label="$attrs.label"
+    :label-visible="$attrs.labelVisible"
+    :description="$attrs.description"
+    :size="$attrs.size"
+    :loading="$attrs.loading"
+    :loading-message="$attrs.loadingMessage"
+    :show-list="$attrs.showList"
+    :selected-items="$attrs.selectedItems"
+    :max-selected="$attrs.maxSelected"
+    :list-max-height="$attrs.listMaxHeight"
+    :max-selected-message="$attrs.maxSelectedMessage"
+    :has-suggestion-list="$attrs.hasSuggestionList"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+    :append-to="$attrs.appendTo"
+    :transition="$attrs.transition"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
     @max-selected="onComboboxMaxSelected"
   >
     <template
-      v-if="header"
+      v-if="$attrs.header"
       #header
     >
-      <span v-html="header" />
+      <span v-html="$attrs.header" />
     </template>
     <template #list>
       <ul
@@ -46,10 +46,10 @@
       </ul>
     </template>
     <template
-      v-if="footer"
+      v-if="$attrs.footer"
       #footer
     >
-      <span v-html="footer" />
+      <span v-html="$attrs.footer" />
     </template>
   </dt-recipe-combobox-multi-select>
 </template>
@@ -96,7 +96,7 @@ export default {
     },
 
     onComboboxMaxSelected () {
-      this.onMaxSelected();
+      this.$attrs.onMaxSelected();
     },
 
     onComboboxRemove (item) {

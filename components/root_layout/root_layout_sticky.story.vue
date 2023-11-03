@@ -1,29 +1,29 @@
 <template>
   <dt-root-layout
-    :header-class="headerClass"
-    :header-sticky="headerSticky"
-    :content-class="contentClass"
-    :sidebar-class="sidebarClass"
-    :sidebar-position="sidebarPosition"
-    :footer-class="footerClass"
-    :fixed="fixed"
-    :responsive-breakpoint="responsiveBreakpoint"
+    :header-class="$attrs.headerClass"
+    :header-sticky="$attrs.headerSticky"
+    :content-class="$attrs.contentClass"
+    :sidebar-class="$attrs.sidebarClass"
+    :sidebar-position="$attrs.sidebarPosition"
+    :footer-class="$attrs.footerClass"
+    :fixed="$attrs.fixed"
+    :responsive-breakpoint="$attrs.responsiveBreakpoint"
   >
     <template
       #header
     >
-      <span v-html="header" />
+      <span v-html="$attrs.header" />
     </template>
     <template
       #sidebar
     >
-      <span v-html="sidebar" />
+      <span v-html="$attrs.sidebar" />
     </template>
-    <span v-html="defaultSlot" />
+    <span v-html="$attrs.default" />
     <template
       #footer
     >
-      <span v-html="footer" />
+      <span v-html="$attrs.footer" />
     </template>
   </dt-root-layout>
 </template>

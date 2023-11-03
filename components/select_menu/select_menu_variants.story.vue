@@ -8,7 +8,7 @@
       id="default"
       name="default"
       label="Default"
-      :options="options"
+      :options="$attrs.options"
     />
     <!-- Default -->
 
@@ -18,7 +18,7 @@
       name="with-description"
       label="With"
       description="Description"
-      :options="options"
+      :options="$attrs.options"
     />
     <!-- With Description -->
 
@@ -26,7 +26,7 @@
     <dt-select-menu
       id="with-slotted-label"
       name="with-slotted-label"
-      :options="options"
+      :options="$attrs.options"
     >
       <template slot="label">
         With Slotted Label
@@ -39,7 +39,7 @@
       id="with-slotted-description"
       name="with-slotted-description"
       label="With"
-      :options="options"
+      :options="$attrs.options"
     >
       <template slot="description">
         Slotted Description
@@ -54,7 +54,7 @@
       label="With Slotted Options"
     >
       <option
-        v-for="option in options"
+        v-for="option in $attrs.options"
         :key="`with-slotted-options-${option.value}`"
         :value="option.value"
       >
@@ -68,7 +68,7 @@
       id="with-error-message"
       name="with-error-message"
       label="With Error Message"
-      :options="options"
+      :options="$attrs.options"
       :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
     />
     <!-- With Error Message -->
@@ -78,7 +78,7 @@
       id="with-error-messages-hidden"
       name="with-error-messages-hidden"
       label="With Error Messages Hidden"
-      :options="options"
+      :options="$attrs.options"
       :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
       :show-messages="false"
     />
@@ -89,7 +89,7 @@
       id="with-success-message"
       name="with-success-message"
       label="With Success Message"
-      :options="options"
+      :options="$attrs.options"
       :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
     />
     <!-- With Success Message -->
@@ -99,7 +99,7 @@
       id="with-warning-message"
       name="with-warning-message"
       label="With Warning Message"
-      :options="options"
+      :options="$attrs.options"
       :messages="[{ message: 'Warning', type: VALIDATION_MESSAGE_TYPES.WARNING }]"
     />
     <!-- With Warning Message -->
@@ -109,7 +109,7 @@
       id="disabled"
       name="disabled"
       label="Disabled"
-      :options="options"
+      :options="$attrs.options"
       disabled
     />
     <!-- Disabled -->
@@ -119,7 +119,7 @@
       id="extra-small"
       name="extra-small"
       label="Extra Small"
-      :options="options"
+      :options="$attrs.options"
       size="xs"
     />
     <!-- Extra Small -->
@@ -129,7 +129,7 @@
       id="small"
       name="small"
       label="Small"
-      :options="options"
+      :options="$attrs.options"
       size="sm"
     />
     <!-- Small -->
@@ -139,7 +139,7 @@
       id="large"
       name="large"
       label="Large"
-      :options="options"
+      :options="$attrs.options"
       size="lg"
     />
     <!-- Large -->
@@ -149,7 +149,7 @@
       id="extra-large"
       name="extra-large"
       label="Extra Large"
-      :options="options"
+      :options="$attrs.options"
       size="xl"
     />
     <!-- Extra Large -->

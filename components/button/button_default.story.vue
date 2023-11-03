@@ -1,34 +1,34 @@
 <template>
   <dt-button
-    :importance="importance"
-    :type="type"
-    :size="size"
-    :kind="kind"
-    :circle="circle"
-    :loading="loading"
-    :label-class="labelClass"
-    :assertive-on-focus="assertiveOnFocus"
-    :link="link"
-    :link-kind="linkKind"
-    :icon-position="iconPosition"
-    :disabled="disabled"
-    :width="width"
-    :active="active"
-    @click="onClick"
-    @focusin="onFocusIn"
-    @focusout="onFocusOut"
+    :importance="$attrs.importance"
+    :type="$attrs.type"
+    :size="$attrs.size"
+    :kind="$attrs.kind"
+    :circle="$attrs.circle"
+    :loading="$attrs.loading"
+    :label-class="$attrs.labelClass"
+    :assertive-on-focus="$attrs.assertiveOnFocus"
+    :link="$attrs.link"
+    :link-kind="$attrs.linkKind"
+    :icon-position="$attrs.iconPosition"
+    :disabled="$attrs.disabled"
+    :width="$attrs.width"
+    :active="$attrs.active"
+    @click="$attrs.onClick"
+    @focusin="$attrs.onFocusIn"
+    @focusout="$attrs.onFocusOut"
   >
     <span
-      v-if="defaultSlot"
-      v-html="defaultSlot"
+      v-if="$attrs.default"
+      v-html="$attrs.default"
     />
     <template
-      v-if="icon"
+      v-if="$attrs.icon"
       slot="icon"
       slot-scope="{ iconSize }"
     >
       <dt-icon
-        :name="icon"
+        :name="$attrs.icon"
         :size="iconSize"
       />
     </template>

@@ -1,5 +1,5 @@
 <template>
-  <dt-codeblock :text="text" />
+  <dt-codeblock :text="$attrs.text" />
 </template>
 
 <script>

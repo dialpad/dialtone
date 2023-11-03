@@ -37,7 +37,7 @@
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <dt-link
             kind="danger"
-            @click.stop="onMarkAsSpam"
+            @click.stop="$attrs.onMarkAsSpam"
           >
             Mark as spam
           </dt-link>
@@ -51,7 +51,7 @@
       <dt-button
         importance="clear"
         kind="muted"
-        @click="onGroupContactClick"
+        @click="$attrs.onGroupContactClick"
       >
         <dt-recipe-contact-info avatar-icon="user">
           <template #header>
@@ -169,8 +169,8 @@
         Contact with items in right slot
       </p>
       <dt-recipe-contact-info
-        :avatar-full-name="avatarFullName"
-        :avatar-seed="avatarSeed"
+        :avatar-full-name="$attrs.avatarFullName"
+        :avatar-seed="$attrs.avatarSeed"
       >
         <template #header>
           <div class="d-fw-bold d-fs-200">
@@ -217,7 +217,7 @@
           2 matches found.
           <dt-button
             link
-            @click.stop="onConnectToARecord"
+            @click.stop="$attrs.onConnectToARecord"
           >
             Connect to a record
           </dt-button>
