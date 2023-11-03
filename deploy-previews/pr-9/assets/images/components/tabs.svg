@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="32" y="63" width="200" height="2" rx="1" fill="var(--dt-color-surface-moderate)" id="bar"/>
-<rect x="32" y="63" width="56" height="2" rx="1" fill="var(--dt-color-link-primary)" id="activebar"/>
-<rect x="32" y="43" width="56" height="12" rx="6" fill="var(--dt-color-link-primary)" id="tab-active"/>
-<rect x="104" y="43" width="56" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="tab-inactive-two"/>
-<rect x="176" y="43" width="56" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="tab-inactive-three"/>
-</svg>
