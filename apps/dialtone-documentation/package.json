@@ -53,7 +53,8 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "workspace:^"
+    "@dialpad/dialtone-icons": "workspace:^",
+    "@dialpad/dialtone": "workspace:^"
   },
   "devDependencies": {
     "@dialpad/dialtone-combinator": "^0.3.1",
