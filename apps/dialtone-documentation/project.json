@@ -7,7 +7,7 @@
         {
           "projects": [
             "dialtone",
-            "dialtone-icons@3"
+            "dialtone-icons"
           ],
           "target": "build",
           "params": "ignore"
@@ -15,7 +15,7 @@
       ],
       "outputs": [],
       "options": {
-        "script": "build:docsite",
+        "script": "build",
         "parallel": false
       }
     },
@@ -24,7 +24,7 @@
       "outputs": [],
       "dependsOn": [
         {
-          "projects": ["dialtone-icons@3"],
+          "projects": ["dialtone-icons"],
           "target": "build",
           "params": "ignore"
         }

@@ -31,6 +31,9 @@ importers:
 
   apps/dialtone-documentation:
     dependencies:
+      '@dialpad/dialtone':
+        specifier: workspace:^
+        version: link:../../packages/dialtone
       '@dialpad/dialtone-icons':
         specifier: ^3.4.0
         version: 3.4.0(vue@3.3.7)
