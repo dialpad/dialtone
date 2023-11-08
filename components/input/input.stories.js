@@ -291,18 +291,6 @@ export const WithBothIcons = {
     leftIcon: 'send',
     rightIcon: 'lock-filled',
   },
-  parameters: {
-    a11y: {
-      config: {
-        rules: [
-          {
-            id: 'duplicate-id',
-            enabled: false,
-          },
-        ],
-      },
-    },
-  },
 };
 
 export const WithWarning = {

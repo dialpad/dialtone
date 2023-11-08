@@ -8,14 +8,15 @@ let mockProps = {};
 describe('DtIcon Tests', () => {
   let wrapper;
 
-  const updateWrapper = () => {
+  const updateWrapper = async () => {
     wrapper = mount(DtIcon, {
       props: { ...baseProps, ...mockProps },
     });
+    await vi.dynamicImportSettled();
   };
 
-  beforeEach(() => {
-    updateWrapper();
+  beforeEach(async () => {
+    await updateWrapper();
   });
 
   afterEach(() => {
@@ -35,10 +36,10 @@ describe('DtIcon Tests', () => {
     });
 
     describe('When size prop is set', () => {
-      it('Should have correct class', () => {
+      it('Should have correct class', async () => {
         mockProps = { size: '800' };
 
-        updateWrapper();
+        await updateWrapper();
 
         expect(wrapper.classes().includes('d-icon--size-800')).toBe(true);
       });
@@ -47,10 +48,10 @@ describe('DtIcon Tests', () => {
 
   describe('Accessibility Tests', () => {
     describe('When ariaLabel prop is set', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         mockProps = { ariaLabel: 'icon description' };
 
-        updateWrapper();
+        await updateWrapper();
       });
 
       it('sets the aria-label attribute', () => {

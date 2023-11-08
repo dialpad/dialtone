@@ -26,26 +26,27 @@ describe('DtRecipeGeneralRow Tests', () => {
   let provide = {};
 
   // Helpers
-  const _setChildWrappers = () => {
+  const _setChildWrappers = async () => {
+    await vi.dynamicImportSettled();
     iconType = wrapper.find('[data-qa="dt-leftbar-row-icon"]');
     description = wrapper.find('.dt-leftbar-row__description');
     unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
   };
 
-  const _setWrappers = () => {
+  const _setWrappers = async () => {
     wrapper = mount(DtRecipeGeneralRow, {
       props,
       attrs,
       slots,
       provide,
     });
-    _setChildWrappers();
+    await _setChildWrappers();
   };
 
-  beforeEach(() => {
+  beforeEach(async () => {
     props = baseProps;
     slots = {};
-    _setWrappers();
+    await _setWrappers();
   });
 
   // Teardown
@@ -79,9 +80,9 @@ describe('DtRecipeGeneralRow Tests', () => {
       const hasUnreads = true;
 
       // Test Setup
-      beforeEach(() => {
+      beforeEach(async () => {
         props = { ...baseProps, hasUnreads, unreadCount };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should render the unreadCount', () => {
@@ -95,9 +96,9 @@ describe('DtRecipeGeneralRow Tests', () => {
       const color = 'magenta-200';
 
       // Test Setup
-      beforeEach(() => {
+      beforeEach(async () => {
         props = { ...baseProps, type, color };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should render the contact center icon', () => {

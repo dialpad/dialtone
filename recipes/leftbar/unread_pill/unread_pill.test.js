@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils';
-import { itBehavesLikeHasCorrectClass } from '@/tests/shared_examples/classes';
 import DtRecipeUnreadPill from './unread_pill.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
@@ -29,23 +28,24 @@ describe('DtRecipeUnreadPill Tests', () => {
   let provide = {};
 
   // Helpers
-  const _setChildWrappers = () => {
+  const _setChildWrappers = async () => {
+    await vi.dynamicImportSettled();
     unreadPillLabel = wrapper.find('[data-qa="dt-leftbar-unread-pill__label"]');
     unreadPillIcon = wrapper.find('[data-qa="dt-icon"]');
   };
 
-  const _setWrappers = () => {
+  const _setWrappers = async () => {
     wrapper = mount(DtRecipeUnreadPill, {
       props,
       attrs,
       slots,
       provide,
     });
-    _setChildWrappers();
+    await _setChildWrappers();
   };
 
-  beforeEach(function () {
-    _setWrappers();
+  beforeEach(async function () {
+    await _setWrappers();
   });
 
   // Teardown
@@ -74,7 +74,7 @@ describe('DtRecipeUnreadPill Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        itBehavesLikeHasCorrectClass(wrapper, 'dt-leftbar-unread-pill--messages');
+        expect(wrapper.classes('dt-leftbar-unread-pill--messages')).toBe(true);
       });
     });
 
@@ -84,28 +84,29 @@ describe('DtRecipeUnreadPill Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        itBehavesLikeHasCorrectClass(wrapper, 'dt-leftbar-unread-pill--mentions');
+        expect(wrapper.classes('dt-leftbar-unread-pill--mentions')).toBe(true);
       });
     });
 
     describe('When the direction is up', () => {
       beforeEach(async () => {
         await wrapper.setProps({ direction: 'up' });
+        await _setChildWrappers();
       });
 
       it('should contain the correct class', () => {
-        itBehavesLikeHasCorrectClass(unreadPillIcon, 'd-icon--arrow-up');
+        expect(unreadPillIcon.classes('d-icon--arrow-up')).toBe(true);
       });
     });
 
     describe('When the direction is down', () => {
       beforeEach(async () => {
         await wrapper.setProps({ direction: 'down' });
-        _setChildWrappers();
+        await _setChildWrappers();
       });
 
       it('should contain the correct class', () => {
-        itBehavesLikeHasCorrectClass(unreadPillIcon, 'd-icon--arrow-down');
+        expect(unreadPillIcon.classes('d-icon--arrow-down')).toBe(true);
       });
     });
   });

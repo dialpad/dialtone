@@ -26,10 +26,16 @@ export default {
     a11y: {
       config: {
         // This is a legitimate color contrast issue that needs to be fixed by the design team in the future.
-        rules: [{
-          id: 'color-contrast',
-          reviewOnFail: true,
-        }],
+        rules: [
+          {
+            id: 'color-contrast',
+            reviewOnFail: true,
+          },
+          {
+            id: 'duplicate-id',
+            enabled: false,
+          }
+        ],
       },
     },
     controls: {

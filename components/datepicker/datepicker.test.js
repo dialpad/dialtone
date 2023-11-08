@@ -33,11 +33,13 @@ describe('DtDatepicker Tests', () => {
   let nextMonthButton;
   let nextYearButton;
 
-  const updateWrapper = () => {
+  const updateWrapper = async () => {
     wrapper = mount(DtDatepicker, {
       propsData: { ...baseProps, ...mockProps },
       attachTo: document.body,
     });
+
+    await vi.dynamicImportSettled();
 
     datepickerHeader = wrapper.find('.d-datepicker--header');
     prevYearButton = wrapper.find('#prevYearButton');
@@ -46,8 +48,8 @@ describe('DtDatepicker Tests', () => {
     nextYearButton = wrapper.find('#nextYearButton');
   };
 
-  beforeEach(() => {
-    updateWrapper();
+  beforeEach(async () => {
+    await updateWrapper();
   });
 
   afterEach(() => {
@@ -131,11 +133,13 @@ describe('DtDatepicker Tests', () => {
 
       it('previous month button should has correct aria label', () => {
         expect(prevMonthButton.attributes('aria-label'))
+        // eslint-disable-next-line max-len
           .toContain(`${baseProps.changeToLabel} ${baseProps.prevMonthLabel} ${formatMonth(MOCK_TODAY_MONTH - 1, MONTH_FORMAT)}`);
       });
 
       it('next month button should has correct aria label', () => {
         expect(nextMonthButton.attributes('aria-label'))
+        // eslint-disable-next-line max-len
           .toContain(`${baseProps.changeToLabel} ${baseProps.nextMonthLabel} ${formatMonth(MOCK_TODAY_MONTH + 1, MONTH_FORMAT)}`);
       });
 

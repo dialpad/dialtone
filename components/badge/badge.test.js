@@ -113,6 +113,7 @@ describe('DtBadge Tests', () => {
           mockProps = { type: 'ai' };
 
           updateWrapper();
+          await vi.dynamicImportSettled();
         });
 
         it('should have correct type', async () => {

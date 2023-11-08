@@ -1,7 +1,10 @@
 import { defineConfig } from 'vite';
+import svgLoader from 'vite-svg-loader';
+import vue from '@vitejs/plugin-vue';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
-import vue from '@vitejs/plugin-vue';
+import hash from 'string-hash';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +21,12 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ['vue', '@dialpad/dialtone'],
+      plugins: [nodeResolve()],
+      external: [
+        'vue',
+        '@dialpad/dialtone',
+        /node_modules/,
+      ],
       output: {
         globals: {
           vue: 'Vue',
@@ -26,7 +34,22 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue()],
+  plugins: [vue(), svgLoader({
+    svgoConfig: {
+      plugins: [
+        {
+          name: 'prefixIds',
+          params: {
+            delim: '',
+            prefix: (_, extra) => {
+              return `dt-icon${hash(extra.path)}`;
+            },
+            prefixClassNames: false,
+          },
+        },
+      ],
+    },
+  })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),

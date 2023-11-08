@@ -15,23 +15,24 @@ describe('DtNoticeIcon tests', () => {
   let props;
   let slotsData;
 
-  const _setWrappers = () => {
+  const _setWrappers = async () => {
     wrapper = mount(DtNoticeIcon, {
       global: { components: { 'dt-icon': DtIcon } },
       props,
       slots: slotsData,
     });
-    _setChildWrappers();
+    await _setChildWrappers();
   };
 
-  const _setChildWrappers = () => {
+  const _setChildWrappers = async () => {
+    await vi.dynamicImportSettled();
     icon = wrapper.findComponent(DtIcon);
   };
 
-  beforeEach(function () {
+  beforeEach(async function () {
     props = baseProps;
     slotsData = baseSlotsData;
-    _setWrappers();
+    await _setWrappers();
   });
 
   describe('Presentation Tests', () => {
@@ -52,7 +53,7 @@ describe('DtNoticeIcon tests', () => {
     describe('When kind is base', () => {
       beforeEach(async () => {
         await wrapper.setProps({ kind: 'base' });
-        _setChildWrappers();
+        await _setChildWrappers();
       });
 
       it('Should render base icon', () => {
@@ -65,7 +66,7 @@ describe('DtNoticeIcon tests', () => {
         slotsData = {
           default: '<dt-icon name="accessibility" />',
         };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('Should render correctly', async () => {

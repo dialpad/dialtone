@@ -82,6 +82,7 @@ describe('DtAvatar Tests', () => {
         mockProps = { iconName: 'accessibility' };
 
         updateWrapper();
+        await vi.dynamicImportSettled();
       });
 
       it('icon should exist', () => {

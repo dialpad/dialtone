@@ -197,11 +197,6 @@ export const Default = {
             id: 'aria-allowed-attr',
             enabled: false,
           },
-          // Verify why contact info and avatar aren't getting unique IDs
-          {
-            id: 'duplicate-id',
-            enabled: false,
-          },
         ],
       },
     },
