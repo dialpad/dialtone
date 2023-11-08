@@ -30,7 +30,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 ### Base Styles
 
 <code-well-header>
-    <inbox-icon></inbox-icon>
+    <dt-icon name="inbox" />
 </code-well-header>
 
 ```html
@@ -63,7 +63,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
     <tr v-for="{size, width_height, className } in sizes">
       <th scope="row">{{ size }}</th>
       <td class="d-ta-center">
-        <inbox-icon :class="className" />
+        <dt-icon name="inbox" :size="size" />
       </td>
       <td class="d-ff-mono d-fs-100">{{ width_height }}</td>
       <td class="d-ff-mono d-fs-100">.{{ className }}</td>
@@ -73,5 +73,5 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 
 <script setup>
     import IconCatalog from "@views/IconCatalog.vue";
-    import { v7 as sizes } from '@data/icons-sizes.json';
+    import sizes from '@data/icons-sizes.json';
 </script>

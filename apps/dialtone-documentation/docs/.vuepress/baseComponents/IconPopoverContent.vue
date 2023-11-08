@@ -83,7 +83,7 @@
 
 <script setup>
 import { computed, nextTick, ref, watch } from 'vue';
-import { v7 as sizes } from '@data/icons-sizes.json';
+import sizes from '@data/icons-sizes.json';
 import CopyButton from './CopyButton.vue';
 
 const props = defineProps({
