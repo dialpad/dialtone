@@ -71,7 +71,7 @@ export default {
 
     icon () {
       const iconPath = `/node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`;
-      return dialtoneIcons[iconPath];
+      return dialtoneIcons[iconPath].default;
     },
   },
 };
