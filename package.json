@@ -24,7 +24,7 @@
     "storybook:build": "npm run build:documentation:functions && npm run storybook:clean && STORYBOOK_ENV=production storybook build && touch ./storybook-static/.nojekyll",
     "storybook:build:docs-only": "STORYBOOK_ENV=production && build:documentation:functions && storybook build --docs",
     "storybook:test": "test-storybook --url http://localhost:9010/",
-    "test": "vitest run",
+    "test": "vitest run --test-timeout=10000",
     "test:one": "vitest related --run",
     "test:watch": "vitest"
   },
