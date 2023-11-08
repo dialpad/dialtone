@@ -45,8 +45,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/dialtone-tokens
       '@dialpad/dialtone-vue':
-        specifier: 3.93.1
-        version: 3.93.1(@dialpad/dialtone@packages+dialtone)(@tiptap/core@2.1.12)(vue@3.3.8)
+        specifier: ^3.94.0
+        version: 3.94.0(@dialpad/dialtone-icons@3.4.0)(@dialpad/dialtone@packages+dialtone)(@tiptap/core@2.1.12)(vue@3.3.8)
       '@dialpad/postcss-responsive-variations':
         specifier: ^1.1.5
         version: 1.1.5(postcss@8.4.31)
@@ -1296,11 +1296,12 @@ packages:
     dependencies:
       vue: 3.3.8(typescript@5.2.2)
 
-  /@dialpad/dialtone-vue@3.93.1(@dialpad/dialtone@packages+dialtone)(@tiptap/core@2.1.12)(vue@3.3.8):
-    resolution: {integrity: sha512-xrZfwrAkOJztDxY9RI5HGrZGnku4FRtdBZibstN1QBfqa6pbEgMfriVE9vFzoJZwX9qLj4PYcx3BGmn+h+yuMQ==}
+  /@dialpad/dialtone-vue@3.94.0(@dialpad/dialtone-icons@3.4.0)(@dialpad/dialtone@packages+dialtone)(@tiptap/core@2.1.12)(vue@3.3.8):
+    resolution: {integrity: sha512-61rwqjMsYzgtmfEA9E1uvDoS7chTKWv2p1qsypW1eA9obSiZrb7iAabG3RZqqRN2JH/Ey0EIgy/JppRPFZKZDw==}
     engines: {node: '>= 14.17'}
     peerDependencies:
       '@dialpad/dialtone': ^7.30.0 || ^8.21.2
+      '@dialpad/dialtone-icons': ^4.1.0
       vue: '>=3.2'
     dependencies:
       '@dialpad/dialtone': link:packages/dialtone
