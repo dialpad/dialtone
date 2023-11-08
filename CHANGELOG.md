@@ -1,3 +1,28 @@
+# [3.94.0](https://github.com/dialpad/dialtone-vue/compare/v3.93.1...v3.94.0) (2023-11-08)
+
+
+### Bug Fixes
+
+* fix time stamp being too low vue3 ([#1284](https://github.com/dialpad/dialtone-vue/issues/1284)) ([1458f1e](https://github.com/dialpad/dialtone-vue/commit/1458f1e01bb090616631da717007795fbe67d5de))
+* max height for content editable ([#1293](https://github.com/dialpad/dialtone-vue/issues/1293)) ([6695eb6](https://github.com/dialpad/dialtone-vue/commit/6695eb62e84f273a1e05bef20986670cd6916b85))
+* update dialtone-icons version ([56af5ae](https://github.com/dialpad/dialtone-vue/commit/56af5aee0e36ee355544ec778abe3b7c8fd8f09b))
+
+
+### Code Refactoring
+
+* **Icon:** update dialtone icons usage ([#1295](https://github.com/dialpad/dialtone-vue/issues/1295)) ([ab0ce7d](https://github.com/dialpad/dialtone-vue/commit/ab0ce7d7d0c6df8c4cee301fc2bfe0159476953b))
+
+
+### Documentation
+
+* fixed story for button-group component alignment vue3 version ([#1288](https://github.com/dialpad/dialtone-vue/issues/1288)) ([fc85c15](https://github.com/dialpad/dialtone-vue/commit/fc85c15c169e345f2ebf42c7d1cc71e90d4f5649))
+* update root layout examples ([#1286](https://github.com/dialpad/dialtone-vue/issues/1286)) ([77757a6](https://github.com/dialpad/dialtone-vue/commit/77757a698bc36720352186d5fbec2703e0cd3e47))
+
+
+### Features
+
+* add description list component vue 3 ([#1291](https://github.com/dialpad/dialtone-vue/issues/1291)) ([80075c3](https://github.com/dialpad/dialtone-vue/commit/80075c3d68ab9a3e265ae8e39bd3db0c9df52c45))
+
 ## [3.93.1](https://github.com/dialpad/dialtone-vue/compare/v3.93.0...v3.93.1) (2023-10-27)
 
 
