@@ -15,9 +15,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@commitlint/cli": "^17.8.1",
+    "@commitlint/cli": "^18.2.0",
     "husky": "^8.0.3",
-    "nx": "^17.0.2",
+    "nx": "^17.0.3",
     "semantic-release-npm-github-publish": "^1.5.4",
     "semantic-release-plus": "^20.0.0"
   },

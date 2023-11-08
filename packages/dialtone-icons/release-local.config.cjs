@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 const name = 'dialtone-icons';
 const srcRoot = `packages/${name}`;
 
@@ -6,7 +7,12 @@ module.exports = {
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
   commitPaths: [`${srcRoot}/*`],
-  assets: [`${srcRoot}/CHANGELOG.md`, `${srcRoot}/CHANGELOG.json`, `${srcRoot}/package.json`, `${srcRoot}/package-lock.json`],
+  assets: [
+    `${srcRoot}/CHANGELOG.md`,
+    `${srcRoot}/CHANGELOG.json`,
+    `${srcRoot}/package.json`,
+    `${srcRoot}/package-lock.json`
+  ],
   plugins: [
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
@@ -17,7 +23,10 @@ module.exports = {
     ['@semantic-release/release-notes-generator', {
       config: '@dialpad/conventional-changelog-angular',
     }],
-    ['@dialpad/semantic-release-changelog-json', { changelogFile: `${srcRoot}/CHANGELOG.md`, changelogJsonFile: `${srcRoot}/CHANGELOG.json` }],
+    ['@dialpad/semantic-release-changelog-json', {
+      changelogFile: `${srcRoot}/CHANGELOG.md`,
+      changelogJsonFile: `${srcRoot}/CHANGELOG.json`,
+    }],
     ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
     ['@semantic-release/npm', { npmPublish: false }],
     ['@semantic-release/git', {
