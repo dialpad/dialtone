@@ -1,3 +1,10 @@
+## [2.104.1](https://github.com/dialpad/dialtone-vue/compare/v2.104.0...v2.104.1) (2023-11-08)
+
+
+### Bug Fixes
+
+* external dependencies ([ff0d577](https://github.com/dialpad/dialtone-vue/commit/ff0d577488bf77265eafa482863b96b95948f091))
+
 # [2.104.0](https://github.com/dialpad/dialtone-vue/compare/v2.103.1...v2.104.0) (2023-11-08)
 
 
