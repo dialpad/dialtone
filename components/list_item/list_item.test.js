@@ -113,6 +113,7 @@ describe('DtListItem tests', () => {
     describe('When item is selected', () => {
       it('should render checkmark icon', async () => {
         await wrapper.setProps({ selected: true });
+        await vi.dynamicImportSettled();
 
         const icon = wrapper.find('[data-qa="dt-icon"]');
 

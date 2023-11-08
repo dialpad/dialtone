@@ -1,5 +1,4 @@
-import * as dialtoneIcons from '@dialpad/dialtone-icons';
-import { pascalCaseToKebabCase } from '@/common/utils';
+import iconNames from '@dialpad/dialtone-icons/dist/icons.json';
 
 /**
  * Will use a Vue SFC to render the template rather than a template string.
@@ -24,7 +23,7 @@ export const createTemplateFromVueFile = (args, argTypes, templateComponent) => 
  * @returns {string[]} icon component names
  */
 export function getIconNames () {
-  return [undefined, ...Object.keys(dialtoneIcons).map(name => pascalCaseToKebabCase(name))];
+  return [undefined, ...iconNames];
 }
 
 export const generateTemplate = (component,

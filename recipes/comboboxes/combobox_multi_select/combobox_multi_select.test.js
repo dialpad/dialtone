@@ -2,7 +2,6 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtPopover from '@/components/popover/popover.vue';
-import { itBehavesLikeDoesNotHaveClass } from '@/tests/shared_examples/classes';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
@@ -295,7 +294,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       });
 
       it('Does not contain modal-opened class', () => {
-        itBehavesLikeDoesNotHaveClass(popoverContainer, 'd-popover__anchor--modal-opened');
+        expect(popoverContainer.classes('d-popover__anchor--modal-opened')).toBe(false);
       });
     });
   });

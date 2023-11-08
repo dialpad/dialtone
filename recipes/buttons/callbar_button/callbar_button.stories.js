@@ -157,16 +157,6 @@ export const Callbar = {
   args: {},
 
   parameters: {
-    a11y: {
-      config: {
-        rules: [
-          {
-            id: 'duplicate-id',
-            enabled: false,
-          },
-        ],
-      },
-    },
     options: { showPanel: false },
     controls: { disable: true },
   },

@@ -118,10 +118,6 @@ export const Variants = {
             id: 'color-contrast',
             enabled: false,
           },
-          {
-            id: 'duplicate-id',
-            enabled: false,
-          },
         ],
       },
     },

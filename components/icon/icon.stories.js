@@ -48,6 +48,14 @@ export const Default = {
 
 export const Variants = {
   render: VariantsTemplate,
-  args: {},
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: { limit: undefined },
+  parameters: {
+    percy: {
+      args: {
+        limit: 10,
+      },
+    },
+    options: { showPanel: false },
+    controls: { disable: true },
+  },
 };
