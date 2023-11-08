@@ -12,8 +12,12 @@
 
 <script>
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
-import { defineAsyncComponent } from 'vue';
 import { getUniqueString } from '@/common/utils.js';
+
+const dialtoneIcons = import.meta.glob(
+  '/node_modules/@dialpad/dialtone-icons/dist/svg/*.svg',
+  { as: 'component', eager: true },
+);
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -66,10 +70,8 @@ export default {
     },
 
     icon () {
-      const name = this.name;
-      return defineAsyncComponent(() =>
-        import(`../../node_modules/@dialpad/dialtone-icons/dist/svg/${name}.svg`),
-      );
+      const iconPath = `/node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`;
+      return dialtoneIcons[iconPath];
     },
   },
 };
