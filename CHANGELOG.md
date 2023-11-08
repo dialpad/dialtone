@@ -1,3 +1,10 @@
+## [2.104.3](https://github.com/dialpad/dialtone-vue/compare/v2.104.2...v2.104.3) (2023-11-08)
+
+
+### Bug Fixes
+
+* **Dt Icon:** import default module ([02e4c56](https://github.com/dialpad/dialtone-vue/commit/02e4c561f3fcb38ad6fa476335b8920e3db0a12e))
+
 ## [2.104.2](https://github.com/dialpad/dialtone-vue/compare/v2.104.1...v2.104.2) (2023-11-08)
 
 
