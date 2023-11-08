@@ -45,7 +45,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/dialtone-tokens
       '@dialpad/dialtone-vue':
-        specifier: ^3.93.1
+        specifier: 3.93.1
         version: 3.93.1(@dialpad/dialtone@packages+dialtone)(@tiptap/core@2.1.12)(vue@3.3.8)
       '@dialpad/postcss-responsive-variations':
         specifier: ^1.1.5
