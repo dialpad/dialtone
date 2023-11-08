@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.0.0...dialtone-icons/v4.1.0) (2023-11-08)
+
+
+### Features
+
+* added icons: task, add task and small view. added more keywords ([#7](https://github.com/dialpad/dialtone/issues/7)) ([c6ab5f2](https://github.com/dialpad/dialtone/commit/c6ab5f2d0b37b1ed34d3f1c6b1bed7a7c0eb033d))
+
 # [4.0.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v3.4.1...dialtone-icons/v4.0.0) (2023-11-02)
 
 
