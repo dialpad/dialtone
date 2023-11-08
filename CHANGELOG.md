@@ -1,3 +1,10 @@
+## [2.104.2](https://github.com/dialpad/dialtone-vue/compare/v2.104.1...v2.104.2) (2023-11-08)
+
+
+### Bug Fixes
+
+* remove dialtone-icons from external deps ([21ef620](https://github.com/dialpad/dialtone-vue/commit/21ef6203b45e7a6de88e4ad05684f1453f6bc412))
+
 ## [2.104.1](https://github.com/dialpad/dialtone-vue/compare/v2.104.0...v2.104.1) (2023-11-08)
 
 
