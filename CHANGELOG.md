@@ -1,3 +1,10 @@
+## [3.94.3](https://github.com/dialpad/dialtone-vue/compare/v3.94.2...v3.94.3) (2023-11-10)
+
+
+### Bug Fixes
+
+* select events ([aa10d83](https://github.com/dialpad/dialtone-vue/commit/aa10d8373c471937b43375e3c8af192b2f01c21b))
+
 ## [3.94.2](https://github.com/dialpad/dialtone-vue/compare/v3.94.1...v3.94.2) (2023-11-08)
 
 
