@@ -270,7 +270,7 @@ describe('DtSelectMenu Tests', () => {
 
   describe('Interactivity Tests', () => {
     describe('When select menu value has changed', () => {
-      const MOCK_SELECTED_VALUE = MOCK_OPTIONS[1].value;
+      const MOCK_SELECTED_VALUE = MOCK_OPTIONS[0].value;
 
       beforeEach(() => {
         select.element.value = MOCK_SELECTED_VALUE;
