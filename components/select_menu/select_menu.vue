@@ -39,6 +39,7 @@
         data-qa="dt-select-wrapper"
       >
         <select
+          ref="selectElement"
           :class="[
             'd-select__input',
             SELECT_STATE_MODIFIERS[state],
@@ -280,7 +281,17 @@ export default {
     },
   },
 
+  watch: {
+    // whenever question changes, this function will run
+    options () {
+      this.$nextTick(() => {
+        this.emitValue(this.$refs.selectElement.value, null);
+      });
+    },
+  },
+
   mounted () {
+    this.emitValue(this.$refs.selectElement.value, null);
     this.validateOptionsPresence();
   },
 
