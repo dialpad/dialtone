@@ -82,6 +82,7 @@ export default {
 
       if (event.key === 'Enter') {
         this.enterHandler();
+        event.stopPropagation();
         return true;
       }
 
