@@ -38,6 +38,7 @@ module.exports = {
       'Components/Toggle: Default',
       'Components/Tooltip: Default',
       'Components/Tooltip: Flip',
+      'Components/Tooltip: Change On Click',
       'Components/Validation Messages: Default',
       'Recipes/Buttons/Callbar Button: Default',
       'Recipes/Buttons/Callbar Button: Callbar',
@@ -54,7 +55,7 @@ module.exports = {
       'Recipes/List Items/Contact Info: Default',
       'Recipes/Notices/Top Banner Info: Default',
       'Utilities/Lazy Show',
-      'Visual Testing/'
+      'Visual Testing/',
     ],
   },
   snapshot: {
