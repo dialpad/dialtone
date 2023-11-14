@@ -59,7 +59,7 @@ Use `d-gcg{#}` or `d-grg{#}` to independently change the row and column gap spac
 
 <script setup>
   import { gap } from '@data/grid.json';
-  import { values } from '@data/spacing.json';
+  import { values } from '@data/gap.json';
 </script>
 
 ## Classes
