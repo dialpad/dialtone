@@ -1,6 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
-import DtPopover from './popover.vue';
-import SrOnlyCloseButton from '../../common/sr_only_close_button.vue';
+import { DtPopover } from '@/components/popover';
+import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
 
 const MOCK_TRANSITION_STUB = () => ({
   render: function (h) {
@@ -128,7 +128,7 @@ describe('DtPopover Tests', () => {
       });
 
       it('should not render the visually hidden close button', () => {
-        const buttonExists = wrapper.findComponent(SrOnlyCloseButton).exists();
+        const buttonExists = wrapper.findComponent(SrOnlyCloseButtonComponent).exists();
 
         expect(!buttonExists).toBe(true);
       });
@@ -158,7 +158,7 @@ describe('DtPopover Tests', () => {
       });
 
       it('should contain a visually hidden close button', () => {
-        const buttonExists = wrapper.findComponent(SrOnlyCloseButton).exists();
+        const buttonExists = wrapper.findComponent(SrOnlyCloseButtonComponent).exists();
 
         expect(buttonExists).toBe(true);
       });
@@ -304,7 +304,7 @@ describe('DtPopover Tests', () => {
         describe('When sr-only close button is enabled and activated', () => {
           it('should close the popover', async () => {
             await wrapper.setProps({ visuallyHiddenClose: true });
-            await wrapper.findComponent(SrOnlyCloseButton).trigger('click');
+            await wrapper.findComponent(SrOnlyCloseButtonComponent).trigger('click');
 
             expect(popoverWindow.isVisible()).toBe(false);
           });

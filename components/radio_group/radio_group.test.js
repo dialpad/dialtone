@@ -1,8 +1,8 @@
 import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
-import { DtValidationMessages } from '../validation_messages';
-import { DtRadio } from '../radio';
-import DtRadioGroup from './radio_group.vue';
-import RadiosFixture from '../../tests/fixtures/radios.vue';
+import { DtValidationMessages } from '@/components/validation_messages';
+import { DtRadio } from '@/components/radio';
+import { DtRadioGroup } from '@/components/radio_group';
+import RadiosFixture from '@/tests/fixtures/radios.vue';
 
 const MOCK_LEGEND = 'My Legend';
 const MOCK_SELECTED_VALUE = 'kiwi';

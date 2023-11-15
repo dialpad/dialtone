@@ -19,7 +19,7 @@
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
-    @max-selected="onComboboxMaxSelected"
+    @max-selected="$attrs.onMaxSelected"
   >
     <template
       v-if="$attrs.header"
@@ -76,18 +76,18 @@ export default {
     onComboboxInput (value) {
       // Filter list
       this.items = ITEMS_LIST_DATA.filter(item => item.value.includes(value));
-      this.onInput(value);
+      this.$attrs.onInput(value);
     },
 
     onComboboxSelect (i) {
       if (this.items[i]) {
-        this.onSelect(i);
+        this.$attrs.onSelect(i);
 
         const item = this.items[i].value;
-        if (this.selectedItems.includes(item)) {
+        if (this.$attrs.selectedItems.includes(item)) {
           return;
         }
-        this.selectedItems.push(item);
+        this.$attrs.selectedItems.push(item);
 
         // Clear input box and unfilter list
         this.$refs.comboboxMultiSelect.$data.value = '';
@@ -95,17 +95,13 @@ export default {
       }
     },
 
-    onComboboxMaxSelected () {
-      this.$attrs.onMaxSelected();
-    },
-
     onComboboxRemove (item) {
-      this.onRemove(item);
-      const index = this.selectedItems.indexOf(item);
+      this.$attrs.onRemove(item);
+      const index = this.$attrs.selectedItems.indexOf(item);
       if (index < 0) {
         return;
       }
-      this.selectedItems.splice(index, 1);
+      this.$attrs.selectedItems.splice(index, 1);
     },
   },
 };

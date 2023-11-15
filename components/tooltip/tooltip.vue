@@ -53,14 +53,14 @@ import {
   TOOLTIP_DIRECTIONS,
   TOOLTIP_STICKY_VALUES,
   TOOLTIP_DELAY_MS,
-} from './tooltip_constants';
+} from '@/components/tooltip';
 import { getUniqueString } from '@/common/utils';
-import DtLazyShow from '../lazy_show/lazy_show.vue';
+import { DtLazyShow } from '@/components/lazy_show';
 import {
   createTippy,
   getAnchor,
   getPopperOptions,
-} from '../popover/tippy_utils';
+} from '@/components/popover/tippy_utils';
 
 /**
  * A tooltip is a floating label that briefly explains an action, function, or an element.

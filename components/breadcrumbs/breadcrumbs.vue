@@ -25,7 +25,7 @@
 <script>
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
-import util from '@/common/utils';
+import utils from '@/common/utils';
 
 /**
  * Breadcrumbs are links used to provide context for the currently-viewed page
@@ -79,7 +79,7 @@ export default {
 
   methods: {
     getBreadcrumbItemKey (index) {
-      return `breadcrumbs-item-${index}-${util.getUniqueString()}`;
+      return `breadcrumbs-item-${index}-${utils.getUniqueString()}`;
     },
   },
 };

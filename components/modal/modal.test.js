@@ -1,7 +1,6 @@
-import DtButton from '../button/button.vue';
-import DtModal from './modal.vue';
+import { DtButton } from '@/components/button';
+import { DtModal, MODAL_BANNER_KINDS } from '@/components/modal';
 import { createLocalVue, shallowMount, mount } from '@vue/test-utils';
-import { MODAL_BANNER_KINDS } from './modal_constants';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 let MOCK_CONSOLE_ERROR_SPY;
@@ -157,6 +156,7 @@ describe('DtModal Tests', () => {
     expect(closeBtn.attributes(labelProp)).toEqual(newAriaLabel);
   });
 
+  // eslint-disable-next-line max-len
   it('Should emit a sync-able update event when overlay / close-icon are clicked, or escape key is pressed', async () => {
     const mountWrapper = mount(DtModal, {
       propsData: { ...baseProps, ...{ show: true } },

@@ -73,7 +73,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Chips/Grouped Chips',
+  title: 'Recipes/Chips/Grouped Chip',
   component: DtRecipeGroupedChip,
   args: argsData,
   argTypes: argTypesData,

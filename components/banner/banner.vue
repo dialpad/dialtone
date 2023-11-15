@@ -49,13 +49,10 @@
 </template>
 
 <script>
-import DtNoticeIcon from '../notice/notice_icon.vue';
-import DtNoticeContent from '../notice/notice_content.vue';
-import DtNoticeAction from '../notice/notice_action.vue';
-import { NOTICE_KINDS } from '../notice/notice_constants';
-import Modal from '../../common/mixins/modal';
-import util from '@/common/utils';
-import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button';
+import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
+import Modal from '@/common/mixins/modal';
+import utils from '@/common/utils';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 /**
  * Banners are a type of notice, delivering system and engagement messaging.
@@ -80,7 +77,7 @@ export default {
      */
     titleId: {
       type: String,
-      default () { return util.getUniqueString(); },
+      default () { return utils.getUniqueString(); },
     },
 
     /**
@@ -89,7 +86,7 @@ export default {
      */
     contentId: {
       type: String,
-      default () { return util.getUniqueString(); },
+      default () { return utils.getUniqueString(); },
     },
 
     /**

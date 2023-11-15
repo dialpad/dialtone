@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import DtToast from './toast.vue';
-import DtButton from '../button/button.vue';
+import { DtToast } from '@/components/toast';
+import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 
 export default {

@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import DtRichTextEditor from '../../rich_text_editor.vue';
+import { DtRichTextEditor } from '@/components/rich_text_editor';
 import { EditorContent } from '@tiptap/vue-2';
 
 // Wrappers

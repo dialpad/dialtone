@@ -1,6 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
-import EmptyComponentFixture from '../../tests/fixtures/component.vue';
-import DtChip from './chip.vue';
+import EmptyComponentFixture from '@/tests/fixtures/component.vue';
+import { DtChip } from '@/components/chip';
 
 const MOCK_DEFAULT_TEXT = 'TEXT';
 

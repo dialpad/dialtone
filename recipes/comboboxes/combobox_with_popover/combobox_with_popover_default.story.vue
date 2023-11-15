@@ -18,7 +18,7 @@
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :transition="$attrs.transition"
-    @escape="onComboboxEscape"
+    @escape="$attrs.onEscape"
     @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
     @opened="$attrs.onOpened"
@@ -44,7 +44,7 @@
         class="d-p4"
       >
         <dt-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in $attrs.items"
           :key="item.id"
           role="option"
           navigation-type="arrow-keys"
@@ -97,12 +97,8 @@ export default {
 
   methods: {
     onComboboxSelect (i) {
-      this.onSelect(i);
-      this.value = this.items[i].number;
-    },
-
-    onComboboxEscape () {
-      this.onEscape();
+      this.$attrs.onSelect(i);
+      this.value = this.$attrs.items[i].number;
     },
   },
 };

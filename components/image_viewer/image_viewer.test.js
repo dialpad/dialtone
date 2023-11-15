@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import DtButton from '../button/button.vue';
-import DtImageViewer from './image_viewer.vue';
+import { DtButton } from '@/components/button';
+import { DtImageViewer } from '@/components/image_viewer';
 
 const baseProps = {
   imageSrc: 'test.png',

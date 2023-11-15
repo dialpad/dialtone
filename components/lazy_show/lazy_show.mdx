@@ -7,7 +7,7 @@ import * as LazyShowStories from './lazy_show.stories';
 # Lazy Show
 
 <Subtitle>
-  Lazy Show is a utility component that prevents its children from being rendered until the first time it is shown.
+  Lazy Show is an utility component that prevents its children from being rendered until the first time it is shown.
 </Subtitle>
 
 ## Basic Usage
@@ -26,7 +26,7 @@ so you can pass any valid Vue `transition` class to control the enter/leave tran
 import { DtLazyShow } from '@dialpad/dialtone-vue';
 ```
 
-```jsx
+```html
 <dt-lazy-show
   :transition="transition"
   :show="open"
@@ -36,7 +36,7 @@ import { DtLazyShow } from '@dialpad/dialtone-vue';
 ```
 
 <Canvas>
-  <Story of={ShowStories.Default} />
+  <Story of={LazyShowStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events

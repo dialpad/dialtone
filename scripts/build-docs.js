@@ -23,6 +23,7 @@ const componentsList = [
   'codeblock.vue',
   'collapsible.vue',
   'combobox.vue',
+  'description_list.vue',
   'dropdown.vue',
   'emoji.vue',
   'emoji_picker.vue',

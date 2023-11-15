@@ -253,6 +253,11 @@ export const Default = {
         ],
       },
     },
+    percy: {
+      args: {
+        showList: true,
+      },
+    },
   },
 };
 
