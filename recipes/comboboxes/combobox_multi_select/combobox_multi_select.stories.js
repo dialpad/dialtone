@@ -169,5 +169,10 @@ export const WithMaxSelectValidation = {
         ],
       },
     },
+    percy: {
+      args: {
+        showList: true,
+      },
+    },
   },
 };

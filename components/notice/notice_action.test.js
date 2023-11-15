@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
 
-import DtNoticeAction from './notice_action.vue';
-import DtButton from '../button/button.vue';
-import SrOnlyCloseButton from '../../common/sr_only_close_button.vue';
+import { DtNoticeAction } from '@/components/notice';
+import { DtButton } from '@/components/button';
+import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
@@ -36,7 +36,7 @@ describe('DtNoticeAction tests', () => {
 
   const _setChildWrappers = () => {
     closeButton = wrapper.findComponent(DtButton);
-    srOnlyCloseButton = wrapper.findComponent(SrOnlyCloseButton);
+    srOnlyCloseButton = wrapper.findComponent(SrOnlyCloseButtonComponent);
   };
 
   beforeEach(() => {

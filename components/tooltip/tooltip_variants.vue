@@ -27,7 +27,7 @@
           :transition="$attrs.transition"
           :placement="direction"
           :message="localMessage"
-          :show="$attrs.show"
+          :show="$attrs.showTooltip"
           class="d-mx64"
         >
           <template #anchor>
@@ -49,7 +49,7 @@
         class="d-ml4"
         :transition="transition"
         :message="localMessage"
-        :show="show"
+        :show="$attrs.showTooltip"
       >
         <template #anchor>
           <dt-button
@@ -73,7 +73,7 @@
         class="d-mb64 d-mt64"
         :transition="$attrs.transition"
         :message="localMessage"
-        :show="$attrs.show"
+        :show="$attrs.showTooltip"
       >
         <template #anchor>
           <dt-button link>
@@ -107,7 +107,7 @@
           :inverted="true"
           :transition="$attrs.transition"
           :message="localMessage"
-          :show="$attrs.show"
+          :show="$attrs.showTooltip"
         >
           <template #anchor>
             <dt-button
@@ -123,6 +123,7 @@
     <dt-tooltip
       :transition="transition"
       external-anchor="#external-tooltip-anchor"
+      :show="$attrs.showTooltip"
     >
       This is a tooltip with external anchor, the actual dt-tooltip component
       is at the end of this page
@@ -153,7 +154,7 @@ export default {
       TOOLTIP_DIRECTIONS: sliceIntoChunks(this.$attrs.customDirections || TOOLTIP_DIRECTIONS, 3),
 
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-      show1: this.$attrs.show ?? false,
+      show1: this.$attrs.showTooltip ?? false,
     };
   },
 };

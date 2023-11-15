@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
-import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue';
-import DtRecipeCallbarButton from '../callbar_button/callbar_button.vue';
-import DtPopover from '@/components/popover/popover.vue';
+import { DtRecipeCallbarButtonWithPopover } from '@/recipes/buttons/callbar_button_with_popover';
+import { DtRecipeCallbarButton } from '@/recipes/buttons/callbar_button';
+import { DtPopover } from '@/components/popover';
 
 // Constants
 const baseProps = {

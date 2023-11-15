@@ -15,6 +15,7 @@ export const argsData = {
   default: `This is a simple tooltip. You can set the position of the tooltip using the placement prop!`,
   sticky: false,
   onShown: action('shown'),
+  showTooltip: null,
 };
 
 export const argTypesData = {
@@ -137,6 +138,11 @@ export const Variants = {
   parameters: {
     options: { showPanel: false },
     controls: { disable: true },
+    percy: {
+      args: {
+        showTooltip: true,
+      },
+    },
   },
 };
 

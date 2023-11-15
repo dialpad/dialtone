@@ -21,7 +21,7 @@
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :transition="$attrs.transition"
-    @escape="onComboboxEscape"
+    @escape="$attrs.onEscape"
     @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
     @opened="$attrs.onOpened"
@@ -102,10 +102,6 @@ export default {
     onComboboxSelect (i) {
       this.$attrs.onSelect(i);
       this.value = this.$attrs.items[i].number;
-    },
-
-    onComboboxEscape () {
-      this.$attrs.onEscape();
     },
   },
 };

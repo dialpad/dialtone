@@ -203,11 +203,10 @@
 </template>
 
 <script>
-import DtDropdown from './dropdown.vue';
-import DtListItemGroup from '../list_item_group/list_item_group.vue';
-import DtDropdownSeparator from './dropdown_separator.vue';
-import { DtListItem } from '../list_item';
-import { DtButton } from '../button';
+import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
+import { DtListItemGroup } from '@/components/list_item_group';
+import { DtListItem } from '@/components/list_item';
+import { DtButton } from '@/components/button';
 import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 
 export default {

@@ -54,8 +54,8 @@
 </template>
 
 <script>
-import { DtButton } from '../button';
-import { DtIcon } from '../icon';
+import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/icon';
 import {
   CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
   CHIP_SIZE_MODIFIERS,

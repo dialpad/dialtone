@@ -23,7 +23,7 @@
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
-    @max-selected="onComboboxMaxSelected"
+    @max-selected="$attrs.onMaxSelected"
   >
     <template
       v-if="$attrs.header"
@@ -97,10 +97,6 @@ export default {
         this.$refs.comboboxMultiSelect.$data.value = '';
         this.items = ITEMS_LIST_DATA;
       }
-    },
-
-    onComboboxMaxSelected () {
-      this.$attrs.onMaxSelected();
     },
 
     onComboboxRemove (item) {

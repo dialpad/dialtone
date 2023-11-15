@@ -2,17 +2,21 @@
   <dt-stack
     direction="row"
     gap="600"
-    class="d-mt64"
+    class="d-m64"
   >
+    <span v-dt-tooltip="'Default placement'">Span with tooltip</span>
     <dt-button
-      v-dt-tooltip:top-end="'Tooltip text on top-end'"
+      v-dt-tooltip:bottom="'Tooltip on bottom'"
       importance="clear"
       kind="danger"
+      circle
+      aria-label="example button"
     >
-      Trying complex examples
+      <template #icon>
+        <dt-icon name="phone-hang-up" />
+      </template>
     </dt-button>
-    <span v-dt-tooltip="'Text with default placement'">More text</span>
-    <dt-button v-dt-tooltip:bottom="'Tooltip text on bottom'">
+    <dt-button v-dt-tooltip:top-end="'Tooltip on top end'">
       Button with tooltip
     </dt-button>
   </dt-stack>
@@ -21,8 +25,9 @@
 <script>
 import DtStack from '@/components/stack/stack.vue';
 import DtButton from '@/components/button/button.vue';
+import DtIcon from '@/components/icon/icon.vue';
 export default {
   name: 'DtTooltipDirectiveDefault',
-  components: { DtButton, DtStack },
+  components: { DtIcon, DtButton, DtStack },
 };
 </script>
