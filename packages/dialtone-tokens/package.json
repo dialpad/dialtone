@@ -9,9 +9,11 @@
     "build:token-transformer": "npm run build:token-transformer:light && npm run build:token-transformer:dark",
     "build:token-transformer:light": "token-transformer tokens token_transformer/tokens-light.json root,base/default,semantic/dp/default,components/checkbox,components/avatar/default,components/badge/default,components/checkbox/default,components/icon/default,components/radio/default root --expandTypography=true --expandShadow=true",
     "build:token-transformer:dark": "token-transformer tokens token_transformer/tokens-dark.json root,base/default,base/dark,semantic/dp/default,semantic/dp/dark,components/avatar/default,components/badge/default,components/checkbox/default,components/checkbox/dark,components/icon/default,components/radio/default,components/radio/dark root --expandTypography=true --expandShadow=true",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run publish:external-packages",
     "release": "semantic-release --no-ci --extends ./release-local.config.cjs",
-    "build:all-platforms": "npm run build:token-transformer && node ./build.js && cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version && ./build-ios.js"
+    "publish:external-packages": "npm run build:android-package && npm run build:ios-package",
+    "publish:android-package": "cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version",
+    "publish:ios-package": "./build-ios.js"
   },
   "files": [
     "dist"
