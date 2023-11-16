@@ -1,0 +1,59 @@
+import { Meta, Subtitle } from '@storybook/blocks';
+
+<Meta title="Docs/Storybook/Getting Started" />
+
+# Getting Started
+
+## What is Storybook?
+
+Storybook provides a harness for rendering Vue components and acts as the bridge between
+engineers and designers when working with a component library and design system.
+It provides the engineer an opportunity to visualize all of the states, props, data, and events
+related to a component before using it in code. Storybook can also auto-generate component
+documentation and becomes a great time-saver when it comes to building up a large and robust
+component library.
+
+## Dialtone Vue Setup
+
+### NPM_AUTH_TOKEN
+
+Ensure that `NPM_AUTH_TOKEN` is set in your path. You will need to set the token to an NPM authentication token which has read level access to the `@dialpad` organization.
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+## Storybook Setup
+
+### Running Storybook Locally
+
+Runs storybook locally at `localhost:9010`
+
+```shell
+cd dialtone-vue
+
+npm run storybook
+```
+
+### Building Storybook
+
+Outputs the bundled storybook to `dialtone-vue/storybook-static`
+
+```shell
+cd dialtone-vue
+
+npm run storybook:build
+```
+
+### Deploying Storybook
+
+Storybook is deployed automatically from the master branch to [Netlify](https://dialtone-vue.netlify.app).
+
+## Modifying Storybook Build Config
+
+Most of the time we shouldn't need to modify Storybook's build config, both of the
+UI and the Canvas have been configured to support Dialtone classes and asset imports.
+However, if for whatever reason we need to modify the build configs, they can be found
+in `dialtone-vue/.storybook/main.js`.

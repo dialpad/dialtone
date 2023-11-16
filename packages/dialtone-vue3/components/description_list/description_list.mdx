@@ -1,0 +1,58 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtDescriptionListStories from './description_list.stories.js';
+
+<Meta of={DtDescriptionListStories}/>
+
+# DtDescriptionList
+
+<Subtitle>
+  Description lists are a way to group and clarify associated ideas.
+  They are notably useful when outlining and explaining terms, like those in a glossary.
+</Subtitle>
+
+## Base Style
+
+<Canvas of={DtDescriptionListStories.Default} />
+
+## Column Direction
+
+<Canvas of={DtDescriptionListStories.ColumnDirection} />
+
+## Long Text
+
+<Canvas of={DtDescriptionListStories.LongText} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtDescriptionList } from '@dialpad/dialtone-vue';
+```
+
+### Default
+
+```jsx
+<dt-description-list
+  :items="[{
+    term: 'Customer Intent',
+    description: 'Hello, I'm looking to return my TV',
+  }]"
+/>
+```
+
+### Column Direction
+
+```jsx
+<dt-description-list
+  :items="[{
+    term: 'Customer Intent',
+    description: 'Hello, I'm looking to return my TV',
+  }]"
+  :direction="column"
+/>
+```
