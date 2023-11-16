@@ -52,6 +52,11 @@ jobs:
         run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
         continue-on-error: true
 
+      - name: Build external packages (android, ios)
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: npm run publish:external-packages
+        continue-on-error: true
+
       - name: Deploy production - Gradle
         if: ${{ github.ref == 'refs/heads/production' }}
         run: ./gradlew publish
