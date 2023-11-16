@@ -58,6 +58,7 @@
         <!-- Left content -->
         <div class="d-d-flex">
           <dt-tooltip
+            v-if="!isEdit"
             placement="top-start"
             :message="imageTooltipLabel"
             :offset="[-4, -4]"
@@ -166,19 +167,35 @@
             </template>
           </dt-tooltip>
 
+          <!-- Cancel button for edit mode -->
+          <dt-button
+            v-if="isEdit"
+            data-qa="dt-message-input-cancel-button"
+            class="dt-message-input--cancel-button"
+            size="sm"
+            kind="muted"
+            importance="clear"
+            :aria-label="cancelButtonAriaLabel"
+            @click="onCancel"
+          >
+            <p>{{ cancelButtonText }}</p>
+          </dt-button>
+
+          <!-- Send button -->
           <dt-tooltip
             placement="top-end"
+            :enabled="!isEdit"
             :message="sendTooltipLabel"
             :show="!isSendDisabled && sendButtonFocus"
-            :offset="[6, -4]"
+            :offset="[6, -8]"
           >
             <template #anchor>
               <!-- Right positioned UI - send button -->
               <dt-button
                 data-qa="dt-message-input-send-btn"
                 size="sm"
-                :kind="!isSendDisabled ? 'default' : 'muted'"
-                circle
+                :kind="sendButtonKind"
+                :circle="!isEdit"
                 importance="primary"
                 :class="{
                   'message-input-button__disabled d-fc-muted': isSendDisabled,
@@ -191,11 +208,19 @@
                 @focusin="sendButtonFocus = true"
                 @focusout="sendButtonFocus = false"
               >
-                <template #icon>
+                <template
+                  v-if="!isEdit"
+                  #icon
+                >
                   <dt-icon
                     name="send"
                     size="300"
                   />
+                </template>
+                <template
+                  v-if="isEdit"
+                >
+                  <p>{{ saveChangesButtonText }}</p>
                 </template>
               </dt-button>
             </template>
@@ -203,7 +228,10 @@
         </div>
       </section>
     </div>
-    <section class="d-d-flex d-jc-space-between d-h24 d-ai-center">
+    <section
+      v-if="!isEdit"
+      class="d-d-flex d-jc-space-between d-h24 d-ai-center"
+    >
       <div
         data-qa="dt-message-input-footer-left"
       >
@@ -508,6 +536,38 @@ export default {
       type: String,
       default: 'Send',
     },
+
+    /**
+     * isEdit
+     */
+    isEdit: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * i18n Save changes button text
+    */
+    saveChangesButtonText: {
+      type: String,
+      default: 'Save changes',
+    },
+
+    /**
+     * Cancel aria label
+     */
+    cancelButtonAriaLabel: {
+      type: String,
+      default: 'Cancel button',
+    },
+
+    /**
+     * Cancel button i18n text
+    */
+    cancelButtonText: {
+      type: String,
+      default: 'Cancel',
+    },
   },
 
   emits: [
@@ -543,6 +603,14 @@ export default {
      * @type {Boolean}
      */
     'notice-close',
+
+    /**
+     * Fires when cancel button is pressed (only on edit mode)
+     *
+     * @event cancel
+     * @type {Boolean}
+     */
+    'cancel',
   ],
 
   data () {
@@ -597,6 +665,10 @@ export default {
 
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
+    },
+
+    sendButtonKind () {
+      return !this.isSendDisabled ? 'default' : 'muted';
     },
   },
 
@@ -657,6 +729,10 @@ export default {
       this.$emit('submit', this.internalInputValue);
     },
 
+    onCancel () {
+      this.$emit('cancel');
+    },
+
     noticeClose () {
       this.$emit('notice-close', true);
     },
@@ -682,5 +758,9 @@ export default {
 
 .dt-message-input-notice .d-notice__icon {
   margin-right: 8px;
+}
+.dt-message-input--cancel-button {
+  color: var(--dt-color-black-500);
+  margin-right: var(--dt-space-300);
 }
 </style>

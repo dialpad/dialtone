@@ -24,9 +24,14 @@
       :emoji-search-results-label="$attrs.emojiSearchResultsLabel"
       :emoji-search-placeholder-label="$attrs.emojiSearchPlaceholderLabel"
       :send-button-aria-label="$attrs.sendButtonAriaLabel"
+      :send-tooltip-label="$attrs.sendTooltipLabel"
       :emoji-button-aria-label="$attrs.emojiButtonAriaLabel"
       :image-button-aria-label="$attrs.imageButtonAriaLabel"
       :max-height="$attrs.maxHeight"
+      :is-edit="$attrs.isEdit"
+      :save-changes-button-text="$attrs.saveChangesButtonText"
+      :cancel-button-aria-label="$attrs.cancelButtonAriaLabel"
+      :cancel-button-text="$attrs.cancelButtonText"
       @submit="$attrs.onSubmit"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
@@ -34,6 +39,7 @@
       @select-media="$attrs.onSelectMedia"
       @add-media="$attrs.onAddMedia"
       @notice-close="$attrs.onNoticeClose"
+      @cancel="$attrs.onCancel"
     >
       <template
         #footerLeft

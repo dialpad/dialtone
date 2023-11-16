@@ -71,6 +71,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onCancel: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -81,6 +87,7 @@ export const argsData = {
   noticeMessage: 'Files must be less than 32 MB to be sent as Dialpad messages.',
   maxHeight: '40vh',
   characterLimitWarningMessage: 'You have reached the character limit.',
+  isEdit: false,
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),
@@ -88,6 +95,7 @@ export const argsData = {
   onSelectMedia: action('select-media'),
   onAddMedia: action('add-media'),
   onNoticeClose: action('notice-close'),
+  onCancel: action('cancel'),
 };
 
 // Story Collection
