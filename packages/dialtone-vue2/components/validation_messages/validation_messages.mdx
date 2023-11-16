@@ -1,0 +1,74 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ValidationMessagesStories from './validation_messages.stories';
+
+<Meta of={ValidationMessagesStories}/>
+
+# Validation Messages
+
+<Subtitle>
+  Validation messages are used to convey information to the user about the current state of the input element. These
+  messages can have an error, warning or success type.
+</Subtitle>
+
+## Validation Message Format
+
+Each provided validation message has the following format:
+
+```json
+{
+  message: "Some informative message",
+  type: "error|warning|success",
+}
+```
+
+## Base Style
+
+Validation messages are typically paired with an input element. They are currently built in to some of
+our shared input components such as `dt-input`, `dt-radio-group`.
+
+<Canvas>
+  <Story of={ValidationMessagesStories.Default} />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story of={ValidationMessagesStories.Variants} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtValidationMessages } from '@dialpad/dialtone-vue';
+```
+
+<h3 style={{ color: 'red' }}>With Error Messages</h3>
+
+```html
+<dt-validation-messages
+  :validationMessages="[{ message: 'Error', type: 'error' }]"
+/>
+```
+
+<h3 style={{ color: 'Goldenrod' }}>With Warning Messages</h3>
+
+```html
+<dt-validation-messages
+  :validationMessages="[{ message: 'Warning', type: 'warning' }]"
+/>
+```
+
+<h3 style={{ color: 'green' }}>With Success Messages</h3>
+
+```html
+<dt-validation-messages
+  :validationMessages="[{ message: 'Success', type: 'success' }]"
+/>
+```

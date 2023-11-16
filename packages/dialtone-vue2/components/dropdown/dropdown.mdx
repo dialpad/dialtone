@@ -1,0 +1,268 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as DropdownStories from './dropdown.stories';
+
+<Meta of={DropdownStories}/>
+
+# Dropdown
+
+<Subtitle>
+  A Dropdown presents a list of options or actions.
+</Subtitle>
+
+## Base Style
+
+The dropdown component provides accessibility controls when using with List item component.
+
+The dropdown has 2 major pieces that are provided as required named slots: the anchor and the list.
+
+The **anchor** slot contains the element that controls the dropdown's visibility.
+
+The **list** slot contains a list of items to show as dropdown menu items.
+
+<Canvas>
+  <Story of={DropdownStories.Default} />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story of={DropdownStories.Variants} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Accessibility
+
+It is possible to include a screen reader visible only close button setting `visually-hidden-close`
+and `visually-hidden-close-label` props.
+
+The dropdown menu has a role of "menu" and the list items have a role "menuitem".
+See [W3C guidelines](https://www.w3.org/TR/wai-aria-practices/#menubutton) for more information.
+
+### List
+
+The Dropdown is rendered with semantic `<ul>` and `<li>`. The `list` slot is wrapped in `<ul>` element so make sure
+the items are wrapped in `<li>` element and each item has the `menuitem` role. It is recommended to use the [List Item
+component](?path=/story/components-list-item--default) as it supports all the necessary accessibility props and interactions.
+
+### Focus & Keyboard
+
+A dropdown menu has well defined standard
+[keyboard interactions](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-links.html#kbd_label)
+that it should support.
+The focus will be set to the the active item on keyboard navigation. `UP` and `DOWN` arrows move the highlighted
+selection between the list items. `HOME` and `END` keys will jump straight to the first or the last item.
+Once the beginning or the end of the list is reached the selection will move to the opposite end of the list by default.
+If you want custom behavior you can pass `onBeginningOfList` and `onEndOfList` methods as props. `A-Z` keys will cycle
+through items that start with the corresponding letter.
+
+Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the highlight
+selection changes, a **highlight** event is emitted with the index of the currently highlighted item.
+`SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
+
+## Usage
+
+Use the Dropdown component when you have a list of links or actions that can be performed. Use the
+[Select Menu](?path=/story/components-select-menu--default) component to allow the users to choose one option from the list.
+
+### Import
+
+```jsx
+import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-dropdown
+  @highlight="onHighlight"
+  @opened="onOpen"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      v-for="(item, i) in items"
+      :key="item.id"
+      :navigation-type="navigationType"
+      role="menuitem"
+      @click="close(); handleItem(i);"
+    >
+      {{ item.name }}
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```
+
+If you wish to override the default behavior of clicking on the anchor to open the dropdown, set the `open` prop.
+`close` is the method event handler passed to the `list` slots that closes the dropdown when clicking on the item.
+
+It's possible to specify different event handlers per each list item in case you are not using `v-for` for
+rendering items:
+
+```html
+<dt-dropdown
+  @highlight="onHighlight"
+  @update:open="updateOpen"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      role="menuitem"
+      @click="onClick(); handleFirstItem();"
+    >
+      First item
+    </dt-list-item>
+    <dt-list-item
+      role="menuitem"
+      @click="close(); handleSecondItem();"
+    >
+      Second item
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```
+
+#### With sections
+
+Use the `dt-dropdown-separator` component to visually separate items in the dropdown menu.
+
+```jsx
+import { DtDropdown, DtButton, DtDropdownSeparator } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-dropdown
+  @highlight="onHighlight"
+  @update:open="updateOpen"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      role="menuitem"
+      @click="handleFirstItem();"
+    >
+      First item
+    </dt-list-item>
+    <dt-dropdown-separator />
+    <dt-list-item
+      role="menuitem"
+      @click="handleSecondItem();"
+    >
+      Second item
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```
+
+#### With sections and headings
+
+Use the `dt-dropdown-list` component to group items and the `heading` prop to add a heading
+to this group list.
+
+```jsx
+import { DtDropdown, DtButton, DtDropdownSeparator, DtListItemGroup } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-dropdown
+  @highlight="onHighlight"
+  @update:open="updateOpen"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      role="menuitem"
+      :navigation-type="navigationType"
+      @click="handleFirstItem();"
+    >
+      First item
+    </dt-list-item>
+    <dt-dropdown-separator />
+    <dt-list-item-group
+      :list-class="listClass"
+      heading="Menu Heading"
+    >
+      <dt-list-item
+        role="menuitem"
+        :navigation-type="navigationType"
+        @click="handleSecondItem();"
+      >
+        Second item
+      </dt-list-item>
+      <dt-list-item
+        role="menuitem"
+        :navigation-type="navigationType"
+        @click="handleThirdItem();"
+      >
+       Third item
+      </dt-list-item>
+    </dt-list-item-group>
+  </template>
+</dt-dropdown>
+```
+
+#### Context menu
+
+Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger
+behavior.
+
+```jsx
+import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-dropdown
+  @highlight="onHighlight"
+  @update:open="updateOpen"
+  :openOnContext="true"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+    >
+      Right Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      role="menuitem"
+      :navigation-type="navigationType"
+      @click="handleFirstItem();"
+    >
+      First item
+    </dt-list-item>
+    <dt-list-item
+      role="menuitem"
+      :navigation-type="navigationType"
+      @click="handleSecondItem();"
+    >
+      Second item
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```

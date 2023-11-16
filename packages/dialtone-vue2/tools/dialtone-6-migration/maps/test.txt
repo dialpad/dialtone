@@ -1,0 +1,3 @@
+d-input-message--warning:d-validation-message--warning
+d-some-class1:d-some-new-class1 d-some-other-new-class1
+d-some-class2:d-some-new-class2 d-some-other-new-class2

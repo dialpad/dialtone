@@ -1,0 +1,64 @@
+import { Meta, Subtitle, Story, Canvas } from '@storybook/blocks';
+import { DocImg } from '../components'
+
+<Meta title="Docs/Storybook/File Structure" />
+
+# File Structure
+
+## File Naming
+
+File names are used to determine which story or documentation page are to be registered for Storybook to display.
+
+All files that end with `*.story.vue` will get parsed as single file component story templates.
+
+All files that end with `*.stories.js` will get parsed as stories.
+
+All files that end with `*.mdx` will get parsed as documentation.
+
+For your stories to be registered, they must adhere to the naming scheme just described.
+
+## Folder Structure
+
+All documentation stories should be placed in the `dialtone-vue/docs` directory following
+a predictable structure to emulate the Storybook sidebar directory (although this does mean
+they are implicitly mapped, more on this later).
+
+Individual component stories should be colocated in their respective subdirectories containing the `.stories.js`, `.mdx`
+`<COMPONENT_NAME>_default.story.vue` files.
+
+### Example
+
+```
+# In dialtone-vue:
+
+docs/
+  component_driven_development/
+    writing_component_tests.mdx
+    ...
+  storybook/
+    getting_started.mdx
+    ...
+  welcome.mdx
+  ...
+components/
+  input
+    input.stories.js
+    input.mdx
+  notice/
+    notice_default.story.vue
+    notice.stories.js
+    notice.mdx
+  ...
+```
+
+### Storybook sidebar
+
+<DocImg src="https://static.dialpadcdn.comdialtone/sidebar.png" />
+
+## Naming Hierarchy
+
+`TODO`
+
+## Sorting
+
+`TODO`
