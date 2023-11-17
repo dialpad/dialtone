@@ -1,3 +1,10 @@
+## [3.95.1](https://github.com/dialpad/dialtone-vue/compare/v3.95.0...v3.95.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* dialbot reference ([2776d7f](https://github.com/dialpad/dialtone-vue/commit/2776d7f58c1c5fa088f174dc4c8e1097f71aa71e))
+
 # [3.95.0](https://github.com/dialpad/dialtone-vue/compare/v3.94.4...v3.95.0) (2023-11-17)
 
 
