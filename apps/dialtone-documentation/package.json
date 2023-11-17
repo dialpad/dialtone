@@ -59,7 +59,7 @@
   "devDependencies": {
     "@dialpad/dialtone-combinator": "^0.3.1",
     "@dialpad/dialtone-tokens": "workspace:^",
-    "@dialpad/dialtone-vue": "^3.94.2",
+    "@dialpad/dialtone-vue": "workspace:^3",
     "@dialpad/postcss-responsive-variations": "^1.1.5",
     "@docsearch/js": "^3.5.1",
     "@toycode/markdown-it-class": "^1.2.4",
