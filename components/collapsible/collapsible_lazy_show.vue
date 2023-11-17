@@ -101,8 +101,6 @@ export default {
         if (!element.style.height) {
           element.style.height = '0px';
         }
-
-        element.style.display = null;
       });
     },
 
@@ -160,6 +158,6 @@ export default {
   .enter-active,
   .leave-active {
     overflow: hidden;
-    transition: height var(--td300) var(--ttf-quint);
+    transition: height var(--td300) var(--ttf-out-quint);
   }
 </style>
