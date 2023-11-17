@@ -13,15 +13,15 @@
     :class="dialbotClasses"
     data-qa="general-row-dialbot"
   >
-    <icon-dialbot
-      class="d-svg--size24"
+    <dt-icon
+      name="dialbot"
+      size="500"
     />
   </div>
 </template>
 
 <script>
 import { DtIcon } from '@/components/icon';
-import IconDialbot from '@dialpad/dialtone/lib/dist/vue/icons/IconDialbot.vue';
 import {
   LEFTBAR_GENERAL_ROW_ICON_MAPPING as ICON_MAPPING,
   LEFTBAR_GENERAL_ROW_TYPES as TYPES,
@@ -30,7 +30,7 @@ import {
 
 export default {
   name: 'DtRecipeLeftbarGeneralRowIcon',
-  components: { DtIcon, IconDialbot },
+  components: { DtIcon },
   props: {
     type: {
       type: String,
@@ -74,8 +74,6 @@ export default {
 
     dialbotClasses () {
       return [
-        'd-w24',
-        'd-h24',
         'd-d-flex',
         'd-ai-center',
         'd-jc-center',
