@@ -1,4 +1,4 @@
-const { extractShadows, extractTypographies } = require('@dialpad/dialtone/postcss/helpers');
+import { extractShadows, extractTypographies } from './helpersWrapper.mjs';
 
 /**
  * Compose typography tokens
