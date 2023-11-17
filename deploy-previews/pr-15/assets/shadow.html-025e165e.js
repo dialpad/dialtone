@@ -1,0 +1,1 @@
+import{_ as o,s as t,v as n,x as a,y as s}from"./framework-4ea48d0d.js";const c={};function _(r,l){const e=t("token-table");return n(),a("div",null,[s(e,{category:"shadow"})])}const m=o(c,[["render",_],["__file","shadow.html.vue"]]);export{m as default};
