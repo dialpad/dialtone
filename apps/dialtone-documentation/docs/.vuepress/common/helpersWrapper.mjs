@@ -2,7 +2,7 @@
 let extractColors, appendHoverFocusSelectors, extractShadows, extractTypographies, removePrefixFromColor;
 
 async function loadHelpers() {
-  const helpers = await import('@dialpad/dialtone/postcss/helpers');
+  const helpers = await import('@dialpad/dialtone/postcss/helpers.mjs');
   extractColors = helpers.extractColors;
   appendHoverFocusSelectors = helpers.appendHoverFocusSelectors;
   extractShadows = helpers.extractShadows;
