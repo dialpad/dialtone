@@ -53,8 +53,8 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "workspace:^",
-    "@dialpad/dialtone": "workspace:^"
+    "@dialpad/dialtone": "workspace:^",
+    "@dialpad/dialtone-icons": "workspace:^"
   },
   "devDependencies": {
     "@dialpad/dialtone-combinator": "^0.3.1",
@@ -62,6 +62,7 @@
     "@dialpad/dialtone-vue": "^3.94.2",
     "@dialpad/postcss-responsive-variations": "^1.1.5",
     "@docsearch/js": "^3.5.1",
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@toycode/markdown-it-class": "^1.2.4",
     "@vuepress/bundler-vite": "2.0.0-beta.60",
     "@vuepress/client": "2.0.0-beta.60",
