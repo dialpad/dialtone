@@ -1,3 +1,22 @@
+# [2.105.0](https://github.com/dialpad/dialtone-vue/compare/v2.104.3...v2.105.0) (2023-11-17)
+
+
+### Bug Fixes
+
+* select events ([f9c8eb5](https://github.com/dialpad/dialtone-vue/commit/f9c8eb5b65e34cbf3ae7bbccfb9cd53cddfa78ea))
+* test ([ce80137](https://github.com/dialpad/dialtone-vue/commit/ce80137f3b809247b728358a174ea8ef93248723))
+
+
+### Documentation
+
+* fix not working stories ([#1302](https://github.com/dialpad/dialtone-vue/issues/1302)) ([594497d](https://github.com/dialpad/dialtone-vue/commit/594497dd7d8cc45c450f99e9f55b6d82ef83ec3f))
+* **Tooltip:** add sticky popper variation ([#1298](https://github.com/dialpad/dialtone-vue/issues/1298)) ([7435500](https://github.com/dialpad/dialtone-vue/commit/7435500d4cbd3b3ad4690b3b87469b4d27000026))
+
+
+### Features
+
+* upgrade vite to v5 and node to v20 ([#1308](https://github.com/dialpad/dialtone-vue/issues/1308)) ([a524db4](https://github.com/dialpad/dialtone-vue/commit/a524db492ff57072fd7eba89494b841cedf34639))
+
 ## [2.104.3](https://github.com/dialpad/dialtone-vue/compare/v2.104.2...v2.104.3) (2023-11-08)
 
 
