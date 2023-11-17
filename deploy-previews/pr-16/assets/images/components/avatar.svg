@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
+<circle cx="132" cy="53" r="28" fill="var(--dt-avatar-color-background-1700)" id="avatar-shape"/>
+<path d="M135 62V45H147V47.9335H138.791V52.0215H146.536V54.79H138.791V59.0665H147V62H135Z" fill="var(--dt-avatar-color-foreground)" id="Vector"/>
+<path d="M117 62L123.278 45H126.598V48.2987H125.463L120.957 62H117ZM120.37 57.8766L121.294 55.2141H129.694L130.617 57.8766H120.37ZM130.031 62L125.537 48.2987V45H127.709L134 62H130.031Z" fill="var(--dt-avatar-color-foreground)" id="Vector"/>
+</svg>

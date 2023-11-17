@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
+<g clip-path="url(#clip0_511_15123)" id="button-bg">
+<rect x="66" y="17" width="132" height="100" rx="8" fill="var(--dt-color-surface-primary)" id="button-bg"/>
+<rect x="66.5" y="17.5" width="131" height="99" rx="7.5" stroke="var(--dt-color-border-bold)" stroke-opacity="0.5" id="button-bg"/>
+<rect x="112" y="29" width="40" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="Rectangle 495"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M179.646 30.1464C179.842 29.9512 180.158 29.9512 180.354 30.1464L183.027 32.8196C183.222 33.0149 183.222 33.3315 183.027 33.5267L180.354 36.1999C180.158 36.3951 179.842 36.3951 179.646 36.1999C179.451 36.0046 179.451 35.688 179.646 35.4928L181.966 33.1732L179.646 30.8536C179.451 30.6583 179.451 30.3417 179.646 30.1464ZM183.389 30.1464C183.584 29.9512 183.901 29.9512 184.096 30.1464L186.769 32.8196C186.964 33.0149 186.964 33.3315 186.769 33.5267L184.096 36.1999C183.901 36.3951 183.584 36.3951 183.389 36.1999C183.194 36.0046 183.194 35.688 183.389 35.4928L185.708 33.1732L183.389 30.8536C183.194 30.6583 183.194 30.3417 183.389 30.1464Z" fill="var(--dt-color-surface-moderate)" id="Vector (Stroke)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M85.2691 30.1464C85.0738 29.9512 84.7572 29.9512 84.562 30.1464L81.8888 32.8196C81.6936 33.0149 81.6936 33.3315 81.8888 33.5267L84.562 36.1999C84.7572 36.3951 85.0738 36.3951 85.2691 36.1999C85.4643 36.0046 85.4643 35.688 85.2691 35.4928L82.9495 33.1732L85.2691 30.8536C85.4643 30.6583 85.4643 30.3417 85.2691 30.1464ZM81.5267 30.1464C81.3314 29.9512 81.0148 29.9512 80.8195 30.1464L78.1464 32.8196C77.9511 33.0149 77.9511 33.3315 78.1464 33.5267L80.8195 36.1999C81.0148 36.3951 81.3314 36.3951 81.5267 36.1999C81.7219 36.0046 81.7219 35.688 81.5267 35.4928L79.207 33.1732L81.5267 30.8536C81.7219 30.6583 81.7219 30.3417 81.5267 30.1464Z" fill="var(--dt-color-surface-moderate)" id="Vector (Stroke)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M165.646 29.1464C165.842 28.9512 166.158 28.9512 166.354 29.1464L169.561 32.3542C169.757 32.5495 169.757 32.8661 169.561 33.0613L166.354 36.2691C166.158 36.4644 165.842 36.4644 165.646 36.2691C165.451 36.0739 165.451 35.7573 165.646 35.562L168.501 32.7078L165.646 29.8536C165.451 29.6583 165.451 29.3417 165.646 29.1464Z" fill="var(--dt-color-border-brand)" id="Vector (Stroke)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M99.2691 29.1464C99.0738 28.9512 98.7572 28.9512 98.562 29.1464L95.3542 32.3542C95.1589 32.5495 95.1589 32.8661 95.3542 33.0613L98.562 36.2691C98.7572 36.4644 99.0738 36.4644 99.2691 36.2691C99.4643 36.0739 99.4643 35.7573 99.2691 35.562L96.4148 32.7078L99.2691 29.8536C99.4643 29.6583 99.4643 29.3417 99.2691 29.1464Z" fill="var(--dt-color-border-brand)" id="Vector (Stroke)"/>
+<rect x="78" y="49" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-1"/>
+<rect x="78" y="67" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-1"/>
+<rect x="78" y="85" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-1"/>
+<rect x="98" y="49" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-2"/>
+<rect x="98" y="67" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-2"/>
+<rect x="98" y="85" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-2"/>
+<rect x="118" y="49" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-3"/>
+<rect x="118" y="67" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-3"/>
+<rect x="118" y="85" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-3"/>
+<rect x="138" y="49" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-4"/>
+<rect x="138" y="67" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-4"/>
+<rect x="138" y="85" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-4"/>
+<rect x="158" y="49" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-5"/>
+<rect x="158" y="67" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-5"/>
+<rect x="158" y="85" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-5"/>
+<rect x="178" y="49" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-6"/>
+<rect x="178" y="67" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-6"/>
+<rect x="178" y="85" width="8" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="date-6"/>
+</g>
+<defs>
+<clipPath id="button-bg">
+<rect width="264" height="107" fill="var(--dt-color-surface-primary)" id="button-bg"/>
+</clipPath>
+</defs>
+</svg>
