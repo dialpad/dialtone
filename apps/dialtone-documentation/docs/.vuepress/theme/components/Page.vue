@@ -4,11 +4,7 @@
     :class="gridClass"
   >
     <div class="d-p24 lg:d-pr24 lg:d-pt64">
-      <page-header>
-        <template #content-bottom>
-          <page-toc v-if="isMobile && includeToc" />
-        </template>
-      </page-header>
+      <page-header></page-header>
       <content />
       <nav
         :class="prev ? 'd-jc-space-between' : 'd-jc-flex-end'"
