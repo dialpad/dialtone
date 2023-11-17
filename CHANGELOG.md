@@ -1,3 +1,10 @@
+## [2.105.1](https://github.com/dialpad/dialtone-vue/compare/v2.105.0...v2.105.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* dialbot reference ([a4c4ca6](https://github.com/dialpad/dialtone-vue/commit/a4c4ca61a04151005c24e84523e7d54142e2ea31))
+
 # [2.105.0](https://github.com/dialpad/dialtone-vue/compare/v2.104.3...v2.105.0) (2023-11-17)
 
 
