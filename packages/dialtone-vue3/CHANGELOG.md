@@ -1,3 +1,29 @@
+## [3.95.1](https://github.com/dialpad/dialtone-vue/compare/v3.95.0...v3.95.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* dialbot reference ([2776d7f](https://github.com/dialpad/dialtone-vue/commit/2776d7f58c1c5fa088f174dc4c8e1097f71aa71e))
+
+# [3.95.0](https://github.com/dialpad/dialtone-vue/compare/v3.94.4...v3.95.0) (2023-11-17)
+
+
+### Bug Fixes
+
+* enter event stop propagation on suggestion list ([#1301](https://github.com/dialpad/dialtone-vue/issues/1301)) ([82cd466](https://github.com/dialpad/dialtone-vue/commit/82cd466592df526589a1031ecca7af9b2a1d3a9c))
+
+
+### Documentation
+
+* fix not working stories ([#1303](https://github.com/dialpad/dialtone-vue/issues/1303)) ([149d658](https://github.com/dialpad/dialtone-vue/commit/149d658cfdeb30fbc3623d40d0a8f9f174710bfd))
+* **Tooltip:** add sticky popper variation ([#1299](https://github.com/dialpad/dialtone-vue/issues/1299)) ([12f2157](https://github.com/dialpad/dialtone-vue/commit/12f2157de9c69c96ab59dd79f38c30bd9f0e97ec))
+
+
+### Features
+
+* **Message Input:** edit message mode using the same recipe  ([#1306](https://github.com/dialpad/dialtone-vue/issues/1306)) ([ff28904](https://github.com/dialpad/dialtone-vue/commit/ff28904caa648f96c2b5b5d4e3ce029dc1f36cd0))
+* upgrade vite to v5 and node to v20 ([#1309](https://github.com/dialpad/dialtone-vue/issues/1309)) ([8f9dad4](https://github.com/dialpad/dialtone-vue/commit/8f9dad4e39c0b2e2318919d1deb007c76568332d))
+
 ## [3.94.4](https://github.com/dialpad/dialtone-vue/compare/v3.94.3...v3.94.4) (2023-11-10)
 
 
