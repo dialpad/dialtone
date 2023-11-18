@@ -4,7 +4,7 @@ import { getUniqueString } from '@/common/utils.js';
 
 import {
   TOOLTIP_DIRECTIONS,
-} from '@/components/tooltip/tooltip_constants';
+} from '@/components/tooltip';
 
 const MOCK_TOOLTIP_TEXT = 'Tooltip text content';
 const MOCK_ANCHOR_TEXT = 'Button placeholder';

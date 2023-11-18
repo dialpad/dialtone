@@ -49,7 +49,9 @@
 
 <script>
 import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
-import { DtIcon, DtItemLayout, DtCollapsible } from '@/index';
+import { DtIcon } from '@/components/icon';
+import { DtItemLayout } from '@/components/item_layout';
+import { DtCollapsible } from '@/components/collapsible';
 
 export default {
   name: 'DtRecipeFeedItemPill',

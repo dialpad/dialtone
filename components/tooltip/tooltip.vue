@@ -53,7 +53,7 @@ import {
   TOOLTIP_DIRECTIONS,
   TOOLTIP_STICKY_VALUES,
   TOOLTIP_DELAY_MS,
-} from '@/components/tooltip';
+} from './tooltip_constants.js';
 import { getUniqueString } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import {

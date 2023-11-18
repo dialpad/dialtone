@@ -32,8 +32,8 @@
 
 <script>
 import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
-import DtButton from '@/components/button/button.vue';
-import DtTooltip from '@/components/tooltip/tooltip.vue';
+import { DtButton } from '@/components/button';
+import { DtTooltip } from '@/components/tooltip';
 import utils from '@/common/utils';
 
 export default {

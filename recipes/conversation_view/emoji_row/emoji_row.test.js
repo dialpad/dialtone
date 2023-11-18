@@ -1,13 +1,10 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import {
-  itBehavesLikeEmitsExpectedEvent,
-} from '../../../tests/shared_examples/events';
-import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
 } from '../../../tests/shared_examples/validation';
 import DtRecipeEmojiRow from './emoji_row.vue';
-import DtTooltip from '@/components/tooltip/tooltip.vue';
+import { DtTooltip } from '@/components/tooltip';
 
 // Constants
 const testEmojiObj = {
@@ -128,20 +125,20 @@ describe('DtRecipeEmojiRow Tests', function () {
      * Test(s) to ensure that the component correctly handles user input
      */
 
-    describe('Click Emoji button event', async function () {
+    describe('Click Emoji button event', function () {
       it('Should emit a emoji clicked event', async () => {
         await emojiReactionButton.trigger('click');
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'emoji-clicked', testEmojiObj.emojiUnicodeOrShortname);
+        expect(wrapper.emitted('emoji-clicked')[0][0]).toBe(testEmojiObj.emojiUnicodeOrShortname);
       });
     });
 
-    describe('Hover Emoji button event', async function () {
+    describe('Hover Emoji button event', function () {
       beforeEach(async () => {
         tooltip.vm.$emit('shown', true);
       });
 
       it('Should emit a hovered event', async () => {
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'emoji-hovered', {
+        expect(wrapper.emitted('emoji-hovered')[0][0]).toEqual({
           reaction: testEmojiObj.emojiUnicodeOrShortname,
           state: true,
         });
