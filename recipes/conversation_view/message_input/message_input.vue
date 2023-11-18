@@ -258,11 +258,10 @@ import {
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
-import { DtPopover } from '@/components/popover/index';
-import { DtInput } from '@/components/input/index';
-import { DtNotice } from '@/components/notice/index';
-import { NOTICE_KINDS } from '@/components/notice/notice_constants';
-import { DtTooltip } from '@/components/tooltip/index';
+import { DtPopover } from '@/components/popover';
+import { DtInput } from '@/components/input';
+import { DtNotice, NOTICE_KINDS } from '@/components/notice';
+import { DtTooltip } from '@/components/tooltip';
 
 export default {
   name: 'DtRecipeMessageInput',

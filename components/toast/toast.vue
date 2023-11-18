@@ -49,7 +49,7 @@
 <script>
 import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
 import utils from '@/common/utils';
-import { TOAST_ROLES, TOAST_MIN_DURATION } from '@/components/toast';
+import { TOAST_ROLES, TOAST_MIN_DURATION } from './toast_constants.js';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 /**

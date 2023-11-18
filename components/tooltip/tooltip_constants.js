@@ -1,7 +1,7 @@
 /*
 * Tippy directions - https://atomiks.github.io/tippyjs/v6/all-props/#placement
 * */
-import { BASE_TIPPY_DIRECTIONS, TIPPY_STICKY_VALUES } from '../popover/tippy_utils';
+import { BASE_TIPPY_DIRECTIONS, TIPPY_STICKY_VALUES } from '@/components/popover/tippy_utils';
 
 export const TOOLTIP_DIRECTIONS = [
   ...BASE_TIPPY_DIRECTIONS,
@@ -21,3 +21,11 @@ export const TOOLTIP_STICKY_VALUES = [
 ];
 
 export const TOOLTIP_HIDE_ON_CLICK_VARIANTS = [true, false, 'toggle'];
+
+export default {
+  TOOLTIP_DIRECTIONS,
+  TOOLTIP_DELAY_MS,
+  TOOLTIP_KIND_MODIFIERS,
+  TOOLTIP_STICKY_VALUES,
+  TOOLTIP_HIDE_ON_CLICK_VARIANTS,
+};
