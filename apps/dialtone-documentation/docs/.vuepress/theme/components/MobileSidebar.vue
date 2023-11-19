@@ -3,8 +3,8 @@
     <div
       class="
         d-px16
-        d-ps-fixed d-w100p d-bgc-primary d-h64 d-x0
-        lg:d-d-flex d-bb d-bc-black-100 d-ai-center
+        d-ps-fixed d-w100p d-bgc-secondary d-h64 d-x0
+        lg:d-d-flex d-bb d-bc-default d-ai-center
         d-jc-space-between d-t64 d-d-none
       "
     >

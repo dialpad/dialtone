@@ -2,7 +2,7 @@
   <div class="dialtone-usage">
     <div class="dialtone-usage__item dialtone-usage__item--do">
       <h3 class="dialtone-usage__hd dialtone-usage__hd--do">
-        <dt-icon name="thumbs-up" />
+        <dt-icon name="thumbs-up" size="400" />
         Do
       </h3>
       <div class="dialtone-usage__bd">
@@ -11,7 +11,7 @@
     </div>
     <div class="dialtone-usage__item dialtone-usage__item--dont">
       <h3 class="dialtone-usage__hd dialtone-usage__hd--dont">
-        <dt-icon name="thumbs-down" />
+        <dt-icon name="thumbs-down" size="400" />
         Don’t
       </h3>
       <div class="dialtone-usage__bd">

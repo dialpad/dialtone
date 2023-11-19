@@ -256,20 +256,7 @@ html body {
 //      custom CSS here instead.
 //  ----------------------------------------------------------------------------
 .vuepress-toc {
-  height: fit-content;
-
-  .active-category {
-    &::before {
-      position: absolute;
-      top: var(--dt-space-300);
-      bottom: var(--dt-space-300);
-      left: var(--dt-space-300-negative);
-      width: var(--dt-size-200);
-      background-color: var(--dt-color-purple-400);
-      border-radius: var(--dt-size-200);
-      content: '';
-    }
-  }
+  // height: fit-content;
 
   .toc-item {
     >.toc-list {
@@ -277,6 +264,8 @@ html body {
     }
   }
 }
+
+
 
 //  ============================================================================
 //  $   LAYOUT
@@ -367,6 +356,12 @@ a.header-anchor {
 .d-gl-docsite-toc {
   grid-template-areas: 'content toc';
   grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(min-content, 21.6rem);
+
+  @media (max-width: 1260px) {
+    grid-template-areas: 'content';
+    grid-template-columns: [content] minmax(32rem, 99rem);
+  }
+
 }
 
 .d-docsite--paragraph {
@@ -820,17 +815,17 @@ a.header-anchor {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: var(--dt-space-400);
+    gap: var(--dt-space-500);
     padding: var(--dt-space-500);
     background-color: var(--usage-item-color-background);
     border-radius: var(--dt-size-400);
 
     &--do {
-      --usage-item-color-background: var(--dt-color-surface-success);
+      --usage-item-color-background: var(--dt-color-surface-success-subtle);
     }
 
     &--dont {
-      --usage-item-color-background: var(--dt-color-surface-critical);
+      --usage-item-color-background: var(--dt-color-surface-critical-subtle);
     }
 
   }

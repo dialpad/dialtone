@@ -1,6 +1,6 @@
 <template>
-  <aside class="lg:d-ps-relative lg:d-w100p d-ps-fixed d-pt32 d-pr12">
-    <h2 class="d-headline-eyebrow d-fw-semibold d-px12 d-pb4">
+  <aside class="lg:d-ps-relative lg:d-w100p d-ps-fixed dialtone-toc">
+    <h2 class="d-headline-eyebrow d-fw-semibold d-fc-secondary d-px12 d-pb4">
       On this page
     </h2>
     <toc
@@ -16,7 +16,14 @@ const options = {
   itemClass: 'toc-item lg:d-d-flex d-fw-wrap',
   linkTag: 'a',
   linkClass: 'd-btn d-btn--sm d-btn--muted d-fw-normal d-w100p d-jc-flex-start',
-  linkActiveClass: 'active-item d-btn--active d-fw-medium',
-  linkChildrenActiveClass: 'active-category',
+  linkActiveClass: 'd-btn--active d-fc-primary',
+  linkChildrenActiveClass: '',
 };
 </script>
+
+<style>
+.dialtone-toc {
+  width: var(--dt-size-850);
+  margin-top: var(--dt-space-600);
+}
+</style>

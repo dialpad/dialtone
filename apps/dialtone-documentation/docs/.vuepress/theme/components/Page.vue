@@ -4,11 +4,7 @@
     :class="gridClass"
   >
     <div class="d-p24 lg:d-pr24 lg:d-pt64">
-      <page-header>
-        <template #content-bottom>
-          <page-toc v-if="isMobile && includeToc" />
-        </template>
-      </page-header>
+      <page-header></page-header>
       <content />
       <nav
         :class="prev ? 'd-jc-space-between' : 'd-jc-flex-end'"
@@ -50,7 +46,7 @@
           </dt-button>
         </router-link>
       </nav>
-      <footer class="d-mt16 d-mb16 d-body-small d-fc-secondary">
+      <footer class="d-mt16 d-mb16 d-body-small d-fc-tertiary">
         <span
           v-if="$frontmatter.title"
           v-text="$frontmatter.title"
