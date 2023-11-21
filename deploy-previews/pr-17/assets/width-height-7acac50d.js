@@ -1,0 +1,1 @@
+const e=[10,20,25,30,40,50,60,70,75,80,90,100],t=[0,1,2,4,6,8,12,16,24,32,42,48,64,72,84,96,102,114,128,164,216,264,332,464,512,628,764,828,912,1024,1140,1268,1340],o=["auto","unset"],n={percentage:e,fixed:t,other:o};export{n as default,t as fixed,o as other,e as percentage};
