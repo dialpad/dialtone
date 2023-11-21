@@ -1,6 +1,5 @@
 node_modules
 dist
-build
 .nx/installation
 .nx/cache
 .idea

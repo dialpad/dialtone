@@ -213,7 +213,6 @@ Key foreground colors rendered on surfaces to indicate hierarchy and importance.
   </tbody>
 </table>
 
-
 ## Status text
 
 Foreground colors distinguishing important information with a status role.
