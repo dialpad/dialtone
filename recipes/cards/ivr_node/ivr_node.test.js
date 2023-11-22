@@ -63,7 +63,7 @@ describe('DtPagination Tests', () => {
       );
       it('Default slot renders correctly as card content', () => {
         const content = wrapper.find('.d-card__content');
-        expect(content.text()).toEqual('Hangup');
+        expect(content.text()).toBe('Hangup');
       });
     });
 
@@ -78,7 +78,7 @@ describe('DtPagination Tests', () => {
       it('should render dtmf connector', () => {
         const dtmfDot = wrapper.find('[data-qa="dt-top-connector-dtmf"]');
         expect(dtmfDot.exists()).toBeTruthy();
-        expect(dtmfDot.text()).toEqual('2');
+        expect(dtmfDot.text()).toBe('2');
       });
     });
 

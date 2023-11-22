@@ -147,7 +147,8 @@ describe('DtCheckbox Tests', () => {
 
         updateWrapper();
 
-        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+          .toBe(true);
       });
 
       it('applies validation classes for warning state', () => {
@@ -155,7 +156,8 @@ describe('DtCheckbox Tests', () => {
 
         updateWrapper();
 
-        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists()).toBe(true);
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists())
+          .toBe(true);
       });
 
       it('applies validation classes for error state', () => {
@@ -163,7 +165,8 @@ describe('DtCheckbox Tests', () => {
 
         updateWrapper();
 
-        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists()).toBe(true);
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists())
+          .toBe(true);
       });
     });
 
@@ -402,7 +405,8 @@ describe('DtCheckbox Tests', () => {
         });
 
         it('has validation classes', () => {
-          expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+          expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+            .toBe(true);
         });
 
         describe('When the checkbox has a validation state', () => {
@@ -411,7 +415,8 @@ describe('DtCheckbox Tests', () => {
 
             updateWrapper();
 
-            expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+            expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+              .toBe(true);
           });
         });
       });

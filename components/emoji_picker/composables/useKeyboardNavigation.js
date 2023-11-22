@@ -24,7 +24,9 @@ export function useKeyboardNavigation (emits) {
   }
 
   function focusEmoji (indexTab, indexEmoji) {
-    const emojiRef = isFiltering.value ? emojiFilteredRefs.value?.[indexEmoji] : emojiRefs.value?.[indexTab]?.[indexEmoji];
+    const emojiRef = isFiltering.value
+      ? emojiFilteredRefs.value?.[indexEmoji]
+      : emojiRefs.value?.[indexTab]?.[indexEmoji];
 
     if (emojiRef) {
       emojiRef.focus();

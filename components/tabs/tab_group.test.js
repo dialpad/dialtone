@@ -1,8 +1,4 @@
 import { mount } from '@vue/test-utils';
-import {
-  itBehavesLikeAppliesClassToChild,
-  itBehavesLikeAppliesChildProp,
-} from '../../tests/shared_examples/extendability';
 import DtTabGroup from './tab_group.vue';
 import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
@@ -101,7 +97,7 @@ describe('DtTabGroup Tests', () => {
     });
 
     it('should not emitted on mount', () => {
-      expect(wrapper.emitted('change')).toBe(undefined);
+      expect(wrapper.emitted('change')).toBeUndefined();
     });
 
     describe('Correct size modifiers', () => {
@@ -386,7 +382,7 @@ describe('DtTabGroup Tests', () => {
       });
 
       it('should apply custom class to tab list', () => {
-        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', tabList);
+        expect(wrapper.find('.my-custom-class').html()).toBe(tabList.html());
       });
     });
 
@@ -397,7 +393,7 @@ describe('DtTabGroup Tests', () => {
       });
 
       it('tab list should have provided child prop', () => {
-        itBehavesLikeAppliesChildProp(tabList, 'some', 'prop');
+        expect(tabList.attributes('some')).toBe('prop');
       });
     });
   });

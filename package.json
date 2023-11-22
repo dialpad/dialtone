@@ -13,7 +13,7 @@
     "install:all": "npm install && npm install --prefix generator-dialtone-vue",
     "lint-staged:code": "eslint --ext .js,.vue --ignore-path .gitignore --fix",
     "lint-staged:docs": "markdownlint --fix",
-    "lint:code": "eslint --ext .js,.vue --ignore-path .gitignore",
+    "lint:code": "eslint . --ext .js,.vue --ignore-path .gitignore",
     "lint:docs": "markdownlint '**/*.mdx'",
     "prepublishOnly": "npm run build",
     "pretest": "npm run clean",

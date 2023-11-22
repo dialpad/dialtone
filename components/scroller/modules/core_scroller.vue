@@ -1,3 +1,4 @@
+<!-- eslint-disable max-len -->
 <template>
   <div
     ref="scroller"
@@ -46,11 +47,11 @@
   </div>
 </template>
 
-<!--
+<script setup>
+/*
 This is a code from external library (https://github.com/Akryum/vue-virtual-scroller/blob/master/packages/vue-virtual-scroller/src/components/RecycleScroller.vue)
 We have modified it for our own specific use.
--->
-<script setup>
+*/
 import { computed, watch, markRaw, shallowReactive, onMounted, nextTick, reactive, ref } from 'vue';
 
 const props = defineProps({
