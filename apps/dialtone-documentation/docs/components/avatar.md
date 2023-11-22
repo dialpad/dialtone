@@ -1,7 +1,7 @@
 ---
 title: Avatar
 description: An avatar is a visual representation of a user or object.
-status: new
+status: ready
 thumb: true
 image: assets/images/components/avatar.png
 storybook: https://vue.dialpad.design/?path=/story/components-avatar--default

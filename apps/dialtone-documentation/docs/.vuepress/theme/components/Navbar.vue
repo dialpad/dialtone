@@ -99,7 +99,7 @@
         <template #anchor>
           <a
             class="d-btn d-btn--muted d-btn--circle"
-            href="https://codepen.io/pen/?template=BajJpwW"
+            href="https://codepen.io/pen?template=oNmoRqO"
             target="_blank"
             rel="noopener noreferrer"
           >

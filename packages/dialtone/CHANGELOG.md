@@ -1,3 +1,17 @@
+## [8.21.4](https://github.com/dialpad/dialtone/compare/dialtone/v8.21.3...dialtone/v8.21.4) (2023-11-17)
+
+
+### Bug Fixes
+
+* remove old icons from dialtone ([#11](https://github.com/dialpad/dialtone/issues/11)) ([0f6071f](https://github.com/dialpad/dialtone/commit/0f6071f185985b5dd384b01795e232b4ca2d4487))
+* **Toast:** remove margin ([#13](https://github.com/dialpad/dialtone/issues/13)) ([a29bd03](https://github.com/dialpad/dialtone/commit/a29bd03160f569a5284d08517aae4b7c28c286f4))
+
+
+### Documentation
+
+* fix missing dependencies ([b9c41df](https://github.com/dialpad/dialtone/commit/b9c41df20c5e532d6d6249f5c9af0c00a29e0ade))
+* separate dialtone documentation site and library ([#6](https://github.com/dialpad/dialtone/issues/6)) ([c937293](https://github.com/dialpad/dialtone/commit/c93729356d7844a6e85f7dbbd29a34c4f5e72372))
+
 ## [8.21.3](https://github.com/dialpad/dialtone/compare/v8.21.2...v8.21.3) (2023-10-27)
 
 

@@ -40,7 +40,7 @@ description: Utilities for controlling the space between child elements.
 ```
 
 <script setup>
-  import { values } from '@data/spacing.json';
+  import { values } from '@data/auto-spacing.json';
 </script>
 
 ## Classes

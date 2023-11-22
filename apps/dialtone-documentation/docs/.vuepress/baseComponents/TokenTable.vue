@@ -65,7 +65,7 @@
           </dt-stack>
         </th>
         <td
-          class="d-fs-100 d-lh-300"
+          class="d-ff-mono d-fw-normal d-fs-100 d-fs-100 d-lh-300"
         >
           <div class="d-wmx264">
             {{ tokenValue }}

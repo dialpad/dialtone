@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.1.0...dialtone-icons/v4.1.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* **Icons:** device icon name changes ([#12](https://github.com/dialpad/dialtone/issues/12)) ([7b3b015](https://github.com/dialpad/dialtone/commit/7b3b0155810db27825aa02c944bc1c51d73b3dbf))
+
 # [4.1.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.0.0...dialtone-icons/v4.1.0) (2023-11-08)
 
 
