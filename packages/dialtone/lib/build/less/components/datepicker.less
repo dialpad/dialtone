@@ -11,38 +11,45 @@
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
 .d-datepicker {
-  width: calc(var(--dt-size-925) - var(--dt-size-550));
-  padding: var(--dt-size-500);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-400);
+  width: calc(var(--dt-size-300) * 76);
+  padding: var(--dt-space-500);
 
   p {
     display: flex;
-    margin: 0;
-    font-weight: 400;
-    font-size: var(--dt-size-450);
-    font-family: inherit;
-    font-style: normal;
+    color: var(--dt-color-foreground-secondary);
+    font-size: var(--dt-font-size-100);
     text-transform: uppercase;
   }
 
   &--body {
-    padding: 0 var(--dt-size-400);
+    padding: 0;
+  }
+
+  &__calendar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--dt-space-200);
   }
 
   &__week-day {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--dt-size-500);
 
     > div {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: var(--dt-size-550);
-      height: var(--dt-size-550);
+      width: var(--dt-size-600);
+      height: var(--dt-size-600);
 
       p {
         margin: 0;
-        color: var(--dt-color-surface-strong);
+        color: var(--dt-color-foreground-tertiary);
+        font-weight: var(--dt-font-weight-medium);
       }
     }
   }
@@ -51,53 +58,83 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--dt-size-400);
   }
 
   &__day {
-    width: var(--dt-size-550);
-    height: var(--dt-size-550);
+    width: var(--dt-size-600);
+    height: var(--dt-size-600);
     padding: 0;
-    font-size: var(--dt-size-450);
+    color: var(--dt-action-color-foreground-muted-default);
+    font-size: var(--dt-font-size-100);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
     background-color: transparent;
     border: none;
-    border-radius: calc(var(--dt-size-650) + var(--dt-size-200));
+    border-radius: var(--dt-size-radius-circle);
     cursor: pointer;
 
     &--disabled {
-      color: var(--dt-color-surface-bold);
+      color: var(--dt-color-foreground-muted);
+      cursor: default;
     }
 
     &--selected {
-     color: var(--dt-color-foreground-primary);
-     background: var(--dt-color-purple-400);
+     color: var(--dt-color-neutral-white);
+     background: var(--dt-color-brand-purple);
     }
 
-    &:focus {
-     box-shadow: var(--dt-shadow-focus);
+    &:hover:not(.d-datepicker__day--selected, .d-datepicker__day--disabled) {
+      color: var(--dt-action-color-foreground-muted-hover);
+      background-color: var(--dt-action-color-background-muted-hover);
+    }
+
+    &:active:not(.d-datepicker__day--selected, .d-datepicker__day--disabled) {
+      color: var(--dt-action-color-foreground-muted-active);
+      background-color: var(--dt-action-color-background-muted-active);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--dt-shadow-focus);
+    }
+
+    &:focus-visible:not(.d-datepicker__day--selected) {
+      background-color: var(--dt-color-surface-moderate);
     }
   }
 
   &__month-year-picker {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  margin-bottom: var(--dt-size-525);
+    display: flex;
+    gap: var(--dt-space-500);
+    align-items: center;
+    justify-content: space-between;
 
     > div {
-        display: inline-flex;
-      }
+      display: flex;
+      gap: var(--dt-space-200);
+    }
 
     button {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      width: var(--dt-size-600);
+      height: var(--dt-size-600);
       padding: 0;
       color: var(--dt-action-color-foreground-base-default);
-      background-color: transparent;
+      background-color: var(--dt-action-color-background-base-default);
       border: none;
+      border-radius: var(--dt-size-radius-circle);
       cursor: pointer;
+
+      &:hover {
+        color: var(--dt-action-color-foreground-base-hover);
+        background-color: var(--dt-action-color-background-base-hover);
+      }
+
+      &:active {
+        color: var(--dt-action-color-foreground-base-active);
+        background-color: var(--dt-action-color-background-base-active);
+      }
     }
   }
 }
