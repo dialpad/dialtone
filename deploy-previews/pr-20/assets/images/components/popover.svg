@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
+<g clip-path="url(#clip0_526_15507)" id="button-bg">
+<g filter="url(#filter0_d_526_15507)" id="button-bg">
+<rect x="52" y="19" width="160" height="70" rx="8" fill="var(--dt-color-surface-primary)" shape-rendering="crispEdges" id="button-bg"/>
+<rect x="51.5" y="18.5" width="161" height="71" rx="8.5" stroke="var(--dt-color-border-bold)" stroke-opacity="0.5" shape-rendering="crispEdges" id="button-bg"/>
+</g>
+<rect x="64" y="31" width="64" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="button-bg"/>
+<rect x="64" y="44" width="93" height="6" rx="3" fill="var(--dt-color-surface-moderate)" id="Rectangle 490"/>
+<rect x="64" y="65" width="36" height="12" rx="4" fill="var(--dt-action-color-background-base-primary-default)" id="Rectangle 491"/>
+</g>
+<defs>
+<filter id="filter0_d_526_15507" x="35" y="8" width="194" height="104" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix" id="button-bg"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" id="button-bg"/>
+<feOffset dy="6" id="Rectangle 490"/>
+<feGaussianBlur stdDeviation="8" id="Rectangle 491"/>
+<feComposite in2="hardAlpha" operator="out" id="button-bg"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_526_15507"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_526_15507" result="shape"/>
+</filter>
+<clipPath id="button-bg">
+<rect width="264" height="107" fill="var(--dt-color-surface-primary)" id="button-bg"/>
+</clipPath>
+</defs>
+</svg>
