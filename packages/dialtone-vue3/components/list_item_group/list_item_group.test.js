@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtListItemGroup from './list_item_group.vue';
+import { DtListItemGroup } from '@dialpad/dialtone-vue';
 
 const baseProps = {
   heading: 'Heading',

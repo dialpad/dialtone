@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
+import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
 import { setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '@/common/emoji.js';
 import customEmojiJson from '@/common/custom-emoji.json';
 

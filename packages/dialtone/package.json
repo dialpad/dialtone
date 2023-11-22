@@ -61,7 +61,7 @@
     "lint:library": "run-s stylelint lesshint",
     "prepublishOnly": "npm run build",
     "start": "gulp watch",
-    "stylelint": "npx stylelint 'lib/build/less/**/*.less' 'docs/.vuepress/theme/**/*.{less,css}'",
+    "stylelint": "npx stylelint 'lib/build/less/**/*.less'",
     "build:icons": "gulp icons",
     "test:postcss-generator-plugin": "jest --coverage && eslint ."
   },
@@ -70,9 +70,6 @@
     "last 1 version",
     "maintained node versions"
   ],
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "publishConfig": {
     "access": "public"
   },

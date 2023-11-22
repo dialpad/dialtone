@@ -10,19 +10,10 @@
     "build:documentation:functions": "npx typedoc --plugin typedoc-plugin-markdown",
     "clean": "rm -rf ./dist",
     "install:all": "npm install && npm install --prefix generator-dialtone-vue",
-    "lint": "run-s lint:code lint:docs",
     "lint-staged:code": "eslint --ext .js,.vue --ignore-path .gitignore --fix",
-    "lint-staged:docs": "markdownlint --fix",
-    "lint:code": "eslint --ext .js,.vue --ignore-path .gitignore",
-    "lint:docs": "markdownlint '**/*.mdx'",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore",
     "prepublishOnly": "npm run build",
     "pretest": "npm run clean",
-    "start": "npm run storybook",
-    "storybook": "STORYBOOK_ENV=development storybook dev -p 9010",
-    "storybook:clean": "rm -rf ./storybook-static",
-    "storybook:build": "npm run build:documentation:functions && npm run storybook:clean && STORYBOOK_ENV=production storybook build && touch ./storybook-static/.nojekyll",
-    "storybook:build:docs-only": "STORYBOOK_ENV=production && build:documentation:functions && storybook build --docs",
-    "storybook:test": "test-storybook --url http://localhost:9010/",
     "test": "vitest run --test-timeout=10000",
     "test:one": "vitest related --run",
     "test:watch": "vitest"
@@ -208,11 +199,7 @@
       "style": "./dist/style.css"
     }
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "./scripts/commit-msg"
-  },
-  "homepage": "https://vue.dialpad.design",
+  "homepage": "https://dialtone.dialpad.com/vue",
   "keywords": [
     "Dialpad",
     "Dialtone",
@@ -223,5 +210,5 @@
     "Vue"
   ],
   "license": "MIT",
-  "repository": "git@github.com:dialpad/dialtone-vue.git"
+  "repository": "git@github.com:dialpad/dialtone.git"
 }

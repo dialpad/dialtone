@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtAvatar from './avatar.vue';
+import { DtAvatar } from '@dialpad/dialtone-vue';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 
 const MOCK_AVATAR_STUB = vi.fn();
