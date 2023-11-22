@@ -8,7 +8,7 @@
             v-if="$frontmatter.title"
             class="dialtone-page-title"
             v-text="$frontmatter.title"
-          ></h1>
+          />
           <span
             v-if="$frontmatter.new"
             class="d-badge d-badge--bulletin"
