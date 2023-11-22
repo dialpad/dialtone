@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
+<rect x="97" y="61" width="54" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="description"/>
+<rect x="97" y="41" width="96" height="12" rx="6" fill="var(--dt-color-foreground-placeholder)" id="title"/>
+<rect x="71" y="38" width="18" height="18" rx="3" fill="var(--dt-action-color-background-base-primary-default)" id="checkbox"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M85.7325 42.2579C86.0847 42.6062 86.0898 43.176 85.7439 43.5306L78.7227 50.7306C78.5546 50.9029 78.3249 51 78.0851 51C77.8453 51 77.6156 50.9029 77.4476 50.7306L74.2561 47.4579C73.9102 47.1033 73.9153 46.5335 74.2675 46.1852C74.6196 45.8369 75.1853 45.842 75.5312 46.1966L78.0851 48.8156L84.4688 42.2694C84.8147 41.9147 85.3804 41.9096 85.7325 42.2579Z" fill="var(--dt-action-color-foreground-base-primary-default)" id="check"/>
+</svg>
