@@ -115,7 +115,8 @@ describe('DtRadio Tests', () => {
 
           updateWrapper();
 
-          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists()).toBe(true);
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists())
+            .toBe(true);
         });
       });
 
@@ -125,7 +126,8 @@ describe('DtRadio Tests', () => {
 
           updateWrapper();
 
-          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists()).toBe(true);
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists())
+            .toBe(true);
         });
       });
 
@@ -135,7 +137,8 @@ describe('DtRadio Tests', () => {
 
           updateWrapper();
 
-          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+            .toBe(true);
         });
       });
     });
@@ -427,7 +430,8 @@ describe('DtRadio Tests', () => {
 
           updateWrapper();
 
-          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists()).toBe(true);
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+            .toBe(true);
         });
 
         describe('When the radio has a validation state', () => {
@@ -447,7 +451,8 @@ describe('DtRadio Tests', () => {
 
             updateWrapper();
 
-            expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists()).toBe(true);
+            expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]}`).exists())
+              .toBe(true);
           });
         });
       });
