@@ -8,6 +8,3 @@ need.
 
 ## Dialtone Tokens
 [CONTRIBUTING.md](../packages/dialtone-tokens/.github/CONTRIBUTING.md)
-
-## Dialtone Vue 3
-[CONTRIBUTING.md](../packages/dialtone-vue3/.github/CONTRIBUTING.md)
