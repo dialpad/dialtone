@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="68" y="59" width="108" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="line-3"/>
-<rect x="68" y="75" width="64" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="line-2"/>
-<rect x="68" y="43" width="128" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="line-1"/>
-<rect x="88" y="23" width="108" height="12" rx="6" fill="var(--dt-color-foreground-placeholder)" id="title-line"/>
-<path d="M68 26L73 31L78 26" stroke="var(--dt-color-foreground-placeholder)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="arrow-down"/>
-</svg>
