@@ -1,3 +1,15 @@
+# [3.96.0](https://github.com/dialpad/dialtone-vue/compare/v3.95.1...v3.96.0) (2023-11-20)
+
+
+### Bug Fixes
+
+* **Collapsible:** use correct transition timing variable ([#1305](https://github.com/dialpad/dialtone-vue/issues/1305)) ([a8019f3](https://github.com/dialpad/dialtone-vue/commit/a8019f3d6c03c2cc048254b9a1ce21ae550f0394))
+
+
+### Features
+
+* **Dp 84718:** emit skin tone when selected ([#1312](https://github.com/dialpad/dialtone-vue/issues/1312)) ([9df6c64](https://github.com/dialpad/dialtone-vue/commit/9df6c64e14c161ee89f6fbfb1e2d57c0b5c665c1)), closes [#1313](https://github.com/dialpad/dialtone-vue/issues/1313)
+
 ## [3.95.1](https://github.com/dialpad/dialtone-vue/compare/v3.95.0...v3.95.1) (2023-11-17)
 
 

@@ -1,8 +1,8 @@
-<!--
+<script>
+/*
 This is a code from external library (https://github.com/Akryum/vue-virtual-scroller/blob/master/packages/vue-virtual-scroller/src/components/DynamicScrollerItem.vue)
 We have modified it for our own specific use.
--->
-<script>
+*/
 import { h } from 'vue';
 
 export default {

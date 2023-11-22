@@ -1,7 +1,11 @@
 <template>
   <div>
-    <dt-radio value="pear">{{'Pear'}}</dt-radio>
-    <dt-radio value="kiwi">{{'Kiwi'}}</dt-radio>
+    <dt-radio value="pear">
+      {{ 'Pear' }}
+    </dt-radio>
+    <dt-radio value="kiwi">
+      {{ 'Kiwi' }}
+    </dt-radio>
   </div>
 </template>
 

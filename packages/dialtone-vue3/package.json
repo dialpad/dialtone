@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.95.1",
+  "version": "3.96.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "build": "run-s clean build:main build:typescript build:documentation",
@@ -11,7 +11,7 @@
     "clean": "rm -rf ./dist",
     "install:all": "npm install && npm install --prefix generator-dialtone-vue",
     "lint-staged:code": "eslint --ext .js,.vue --ignore-path .gitignore --fix",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore",
+    "lint": "eslint . --ext .js,.vue --ignore-path .gitignore",
     "prepublishOnly": "npm run build",
     "pretest": "npm run clean",
     "test": "vitest run --test-timeout=10000",

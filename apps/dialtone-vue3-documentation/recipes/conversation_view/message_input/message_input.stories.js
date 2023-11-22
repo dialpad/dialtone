@@ -75,6 +75,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onSkinTone: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -93,6 +99,7 @@ export const argsData = {
   onSelectMedia: action('select-media'),
   onAddMedia: action('add-media'),
   onNoticeClose: action('notice-close'),
+  onSkinTone: action('skin-tone'),
   onCancel: action('cancel'),
 };
 

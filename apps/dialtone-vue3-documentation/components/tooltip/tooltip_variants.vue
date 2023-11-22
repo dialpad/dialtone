@@ -132,10 +132,7 @@
 </template>
 
 <script>
-import DtTooltip from './tooltip.vue';
-import { DtButton } from './../button';
-import { DtIcon } from './../icon';
-import { TOOLTIP_DIRECTIONS } from './tooltip_constants';
+import { DtTooltip, DtButton, DtIcon, TOOLTIP_DIRECTIONS } from '@dialpad/dialtone-vue';
 
 function sliceIntoChunks (arr, chunkSize) {
   const res = [];

@@ -2,10 +2,6 @@ import { mount } from '@vue/test-utils';
 import DtRecipeMessageInput from './message_input.vue';
 import { beforeEach, describe } from '@/node_modules/vitest/dist/index';
 
-import {
-  itBehavesLikeEmitsExpectedEvent,
-} from '@/tests/shared_examples/events';
-
 // Wrappers
 let wrapper;
 let editor;
@@ -212,7 +208,7 @@ describe('DtMessage tests', () => {
       it('should fire notice-close event when closed', async () => {
         expect(errorNoticeEl.exists()).toBe(true);
         await errorNoticeEl.find('button').trigger('click');
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'notice-close', true);
+        expect(wrapper.emitted('notice-close')[0][0]).toBe(true);
       });
     });
 
@@ -226,7 +222,7 @@ describe('DtMessage tests', () => {
       // eslint-disable-next-line vitest/expect-expect
       it('should fire submit event with the text as payload', async () => {
         await sendBtn.trigger('click');
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'submit', randoText);
+        expect(wrapper.emitted('submit')[0][0]).toBe(randoText);
       });
     });
 

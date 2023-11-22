@@ -53,7 +53,7 @@ import {
   TOOLTIP_DIRECTIONS,
   TOOLTIP_STICKY_VALUES,
   TOOLTIP_DELAY_MS,
-} from '@/components/tooltip';
+} from './tooltip_constants.js';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import {
@@ -69,7 +69,6 @@ import {
  * @see https://dialpad.design/components/tooltip.html
  */
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
   name: 'DtTooltip',
   components: {
     DtLazyShow,
@@ -251,18 +250,19 @@ export default {
 
   emits: [
     /**
-     * Event fired to sync the show prop with the parent component
-     * @event update:show
-     */
-    'update:show',
-
-    /**
      * Emitted when tooltip is shown or hidden
      *
      * @event shown
      * @type {Boolean}
      */
     'shown',
+
+    /**
+     * Sync show value
+     *
+     * @event update:show
+     */
+    'update:show',
   ],
 
   data () {
@@ -373,6 +373,7 @@ export default {
 
   beforeUnmount () {
     this.externalAnchor && this.removeExternalAnchorEventListeners();
+
     if (this.tip) {
       this.tip?.destroy();
     }
