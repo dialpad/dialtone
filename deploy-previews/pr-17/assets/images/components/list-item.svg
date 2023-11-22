@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="100" y="42" width="96" height="12" rx="6" fill="var(--dt-color-foreground-placeholder)" id="Rectangle 490"/>
-<rect x="100" y="62" width="54" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="Rectangle 491"/>
-<path d="M86.5 51.3333V44.6667C86.4997 44.3744 86.4225 44.0873 86.2763 43.8343C86.13 43.5813 85.9198 43.3711 85.6667 43.225L79.8333 39.8917C79.58 39.7454 79.2926 39.6684 79 39.6684C78.7074 39.6684 78.42 39.7454 78.1667 39.8917L72.3333 43.225C72.0802 43.3711 71.87 43.5813 71.7237 43.8343C71.5775 44.0873 71.5003 44.3744 71.5 44.6667V51.3333C71.5003 51.6256 71.5775 51.9126 71.7237 52.1657C71.87 52.4187 72.0802 52.6289 72.3333 52.775L78.1667 56.1083C78.42 56.2546 78.7074 56.3316 79 56.3316C79.2926 56.3316 79.58 56.2546 79.8333 56.1083L85.6667 52.775C85.9198 52.6289 86.13 52.4187 86.2763 52.1657C86.4225 51.9126 86.4997 51.6256 86.5 51.3333Z" stroke="var(--dt-color-foreground-placeholder)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" id="Vector"/>
-<path d="M71.7417 43.8333L79 48L86.2584 43.8333" stroke="var(--dt-color-foreground-placeholder)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" id="Vector"/>
-<path d="M79 56.3333V48" stroke="var(--dt-color-foreground-placeholder)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" id="Vector"/>
-</svg>

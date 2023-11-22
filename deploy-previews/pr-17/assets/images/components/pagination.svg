@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="120" y="42" width="24.0001" height="24" rx="6.00001" fill="var(--dt-action-color-background-base-primary-default)" id="button-bg"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M204.209 48.237C204.487 47.921 204.939 47.921 205.217 48.237L209.791 53.4279C210.07 53.7439 210.07 54.2561 209.791 54.5721L205.217 59.763C204.939 60.079 204.487 60.079 204.209 59.763C203.93 59.447 203.93 58.9347 204.209 58.6188L208.279 54L204.209 49.3812C203.93 49.0653 203.93 48.553 204.209 48.237Z" fill="var(--dt-color-brand-purple)" id="arrow"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M59.7912 48.237C59.5127 47.921 59.0613 47.921 58.7829 48.237L54.2088 53.4279C53.9304 53.7439 53.9304 54.2561 54.2088 54.5721L58.7829 59.763C59.0613 60.079 59.5127 60.079 59.7912 59.763C60.0696 59.447 60.0696 58.9347 59.7912 58.6188L55.7212 54L59.7912 49.3812C60.0696 49.0653 60.0696 48.553 59.7912 48.237Z" fill="var(--dt-color-brand-purple)" id="arrow"/>
-<rect x="72" y="48" width="12" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="date-1"/>
-<rect x="96" y="48" width="12" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="date-2"/>
-<rect x="156" y="48" width="12" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="date-3"/>
-<rect x="180" y="48" width="12" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="date-4"/>
-</svg>
