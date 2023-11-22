@@ -1,0 +1,158 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { DtTooltip } from '@dialpad/dialtone-vue';
+
+import * as TooltipStories from './tooltip.stories';
+
+<Meta of={TooltipStories}/>
+
+# Tooltip
+
+<Subtitle>
+    A tooltip is a floating label that briefly explains an action, function, or an element.
+    Its content is exclusively text and shouldn't be vital information for users.
+    If richer media is desired, consider using a popover instead.
+</Subtitle>
+
+## Default
+
+The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a
+screen element or component, a text box displays information about that element (such as a description of a button's
+function, or what an abbreviation stands for). The tooltip is displayed continuously as long as the user hovers over the
+element
+
+A tooltip has two slots:
+
+1. **the anchor** required slot
+2. **the default** slot (which could be replaced with prop message)
+
+<Canvas>
+    <Story of={TooltipStories.Default} />
+</Canvas>
+
+## Variants
+
+<Canvas>
+    <Story of={TooltipStories.Variants} />
+</Canvas>
+
+## Flip
+
+<Canvas>
+    <Story of={TooltipStories.Flip} />
+</Canvas>
+
+## Dinamically change the position when the content changes
+
+This is achieved by setting the property `sticky` to "popper"
+
+<Canvas>
+    <Story of={TooltipStories.ChangeOnClick} />
+</Canvas>
+
+## Props & Slots
+
+<Controls />
+
+## Accessibility
+
+Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
+See also [wai aria practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/#tooltip).
+
+### General info
+
+1. **Twelve directions are offered:** three on each face of the tooltip.
+2. **Inverted:** Inverts styles to work on dark backgrounds.
+
+### Anchor
+
+The anchor element that activates the tooltip should be fully accessible by keyboard. The easiest way to do this is by
+using an element like an `DtButton` that is already accessible. When pressing the 'ESC' key in a focused tooltip,
+tooltip will be closed.
+
+There are some required ARIA attributes for the anchor element (such as `aria-hidden` set based on `open`).
+To make this as straightforward as possible, these ARIA attributes are passed
+with the correct values as the `attrs` to the anchor slot. Applying them is as simple as using `v-bind`.
+
+### Focus & Keyboard
+
+Due to the different contexts in which a tooltip can be used, focus management and
+keyboard shortcut ESC is provided.
+You are encouraged to consult the ARIA documentation for the particular role
+
+## Usage
+
+### Import
+
+```jsx
+import { DtTooltip, TOOLTIP_TIPPY_DIRECTIONS } from '@dialpad/dialtone-vue';
+```
+
+### Arrow Directions
+
+'top' is assigned by default.
+Twelve directions are offered: three on each face of the tooltip.
+
+### Fallback Placements
+
+The tooltip uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
+[popper](https://popper.js.org/docs/v2/modifiers/flip/), if the tooltip opens in a placement where it will
+be clipped, it will move to a new position. It will do this automatically by default, but if you want to
+manually specify which position it will move to in what order you can do so via the fallbackPlacements prop.
+
+### Default
+
+```html
+<dt-tooltip>
+    Message
+    <template #anchor>
+      Anchor
+    </template>
+</dt-tooltip>
+```
+
+### Open state
+
+```html
+<dt-tooltip
+    message="Message"
+    :show="true"
+>
+    <template #anchor>
+      <dt-button
+        importance="outlined"
+      >
+        Open default state
+      </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### top-start
+
+```html
+<dt-tooltip
+    placement="top-start"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button>
+            top-start
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### top
+
+```html
+<dt-tooltip
+    placement="top"
+    message="Message"
+    >
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            top
+        </dt-button>
+    </template>
+</dt-tooltip>
+```

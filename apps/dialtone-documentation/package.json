@@ -49,9 +49,6 @@
     "lint:docs": "markdownlint '**/*.md'",
     "start": "vuepress dev docs"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "dependencies": {
     "@dialpad/dialtone-icons": "workspace:^",
     "@dialpad/dialtone": "workspace:^"
@@ -59,7 +56,7 @@
   "devDependencies": {
     "@dialpad/dialtone-combinator": "^0.3.1",
     "@dialpad/dialtone-tokens": "workspace:^",
-    "@dialpad/dialtone-vue": "workspace:^3",
+    "@dialpad/dialtone-vue": "workspace:^",
     "@dialpad/postcss-responsive-variations": "^1.1.5",
     "@docsearch/js": "^3.5.1",
     "@toycode/markdown-it-class": "^1.2.4",
