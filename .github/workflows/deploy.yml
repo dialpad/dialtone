@@ -20,6 +20,7 @@ env:
 
 jobs:
   cache-and-install:
+    if: ${{ false }}
     runs-on: ubuntu-latest
 
     steps:
@@ -95,6 +96,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
   gcp-auth:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -107,7 +109,6 @@ jobs:
           credentials_json: ${{ secrets.DIALTONE_GCP_SA_KEY }}
 
   deploy-dialtone:
-#    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions]
     needs: [check-dialpad-member, get-branch-name, filter-actions]
     if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}
