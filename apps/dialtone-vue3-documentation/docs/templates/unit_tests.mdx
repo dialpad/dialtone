@@ -6,7 +6,7 @@ import { Meta, Subtitle } from '@storybook/blocks';
 
 ```js
 import { assert } from 'chai';
-import { shallowMount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtMyComponent from './my_component.vue';
 
 // Constants
@@ -35,7 +35,7 @@ describe('DtMyComponent Tests', function () {
       attrs,
       slots,
       provide,
-
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -48,7 +48,7 @@ describe('DtMyComponent Tests', function () {
   // Setup
   before(function () {
     testContext = {};
-
+    testContext.localVue = createLocalVue();
   });
   beforeEach(function () {});
 
