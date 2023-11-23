@@ -1,11 +1,11 @@
-const { extractShadows, extractTypographies } = require('@dialpad/dialtone/postcss/helpers');
+import Helpers from '@dialpad/dialtone/postcss/helpers.cjs';
 
 /**
  * Compose typography tokens
  */
 export function getComposedTypographyTokens () {
   const tokens = [];
-  const dialtoneTypographies = extractTypographies();
+  const dialtoneTypographies = Helpers.extractTypographies();
   dialtoneTypographies
     .forEach(typographyName => {
       const composedVar = `--dt-typography-${typographyName}`;
@@ -22,7 +22,7 @@ export function getComposedTypographyTokens () {
  */
 export function getComposedShadowTokens (theme) {
   const tokens = [];
-  const dialtoneShadows = extractShadows(theme);
+  const dialtoneShadows = Helpers.extractShadows(theme);
   Object
     .keys(dialtoneShadows)
     .forEach(shadowName => {

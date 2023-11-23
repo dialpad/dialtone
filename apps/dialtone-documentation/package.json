@@ -49,6 +49,7 @@
     "lint:docs": "markdownlint '**/*.md'",
     "start": "vuepress dev docs"
   },
+  "type": "module",
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
