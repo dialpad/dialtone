@@ -104,11 +104,12 @@ jobs:
           credentials_json: ${{ secrets.DIALTONE_GCP_SA_KEY }}
 
   deploy-dialtone:
-    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions]
-    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
+#    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions]
+#    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
     env:
+      DIALTONE_CHANGED: ${{ needs.filter-actions.outputs.dialtone }}
       VUEPRESS_BASE_URL: fromJSON('["/${{ needs.get-branch-name.branch-name.outputs.current_branch }}/", "/"]')[github.ref == 'refs/heads/production']
     steps:
       - name: Build Dialtone library and docsite
