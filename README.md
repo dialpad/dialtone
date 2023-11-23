@@ -92,3 +92,5 @@ pnpm run release
 ```
 
 This will automatically release all packages that need to be released.
+
+Testing an open source contribution
