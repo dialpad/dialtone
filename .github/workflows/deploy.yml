@@ -108,6 +108,7 @@ jobs:
 
   deploy-dialtone:
 #    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions]
+    needs: [cache-and-install]
 #    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
