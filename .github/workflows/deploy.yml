@@ -20,7 +20,6 @@ env:
 
 jobs:
   cache-and-install:
-    concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -60,7 +59,6 @@ jobs:
         run: pnpm install --frozen-lockfile
 
   filter-actions:
-    concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Filter actions by path
@@ -76,7 +74,6 @@ jobs:
               - 'packages/**'
 
   get-branch-name:
-    concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
     - name: Get branch name
@@ -84,7 +81,6 @@ jobs:
       uses: tj-actions/branch-names@v7
 
   check-dialpad-member:
-    concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
     # Will prevent the rest of the steps from running on fail
