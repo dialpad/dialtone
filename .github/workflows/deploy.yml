@@ -104,7 +104,7 @@ jobs:
           credentials_json: ${{ secrets.DIALTONE_GCP_SA_KEY }}
 
   deploy-dialtone:
-    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions, gcp-auth]
+    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions]
     if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
