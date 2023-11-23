@@ -5,3 +5,7 @@ export const LABEL_SIZES = {
   LARGE: 'lg',
   EXTRA_LARGE: 'xl',
 };
+
+export default {
+  LABEL_SIZES,
+};

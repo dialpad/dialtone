@@ -44,6 +44,7 @@ export * from './components/scroller';
 export * from './components/emoji_picker';
 export * from './components/datepicker';
 export * from './components/item_layout';
+export * from './components/rich_text_editor';
 
 /// Recipes
 export * from './recipes/comboboxes/combobox_with_popover';
