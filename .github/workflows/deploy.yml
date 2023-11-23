@@ -35,7 +35,7 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8
-          run-install: false
+          run_install: false
 
       - name: Get pnpm store directory
         shell: bash
@@ -102,13 +102,12 @@ jobs:
           credentials_json: ${{ secrets.DIALTONE_GCP_SA_KEY }}
 
   deploy-dialtone:
-#    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions]
-    needs: [cache-and-install]
+    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions]
 #    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
     env:
-      DIALTONE_CHANGED: ${{ needs.filter-actions.outputs.dialtone }}
+      DIALTONE_CHANGED: ${{ needs.filter-actions.outputs }}
       VUEPRESS_BASE_URL: fromJSON('["/${{ needs.get-branch-name.branch-name.outputs.current_branch }}/", "/"]')[github.ref == 'refs/heads/production']
     steps:
       - name: Checkout
@@ -123,7 +122,7 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8
-          run-install: false
+          run_install: false
 
       - name: Get pnpm store directory
         shell: bash
