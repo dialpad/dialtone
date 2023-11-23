@@ -45,8 +45,7 @@
 </template>
 
 <script>
-import { DtChip } from '@dialpad/dialtone-vue';
-import DtAvatar, { DtIcon } from '@dialpad/dialtone-vue';
+import { DtAvatar, DtChip, DtIcon } from '@dialpad/dialtone-vue';
 
 export default {
   name: 'DtChipVariants',

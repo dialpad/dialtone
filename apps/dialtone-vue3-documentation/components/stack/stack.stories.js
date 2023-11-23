@@ -1,12 +1,12 @@
-import { DtStack } from '@dialpad/dialtone-vue';
-
-import StackDefault from './stack_default.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
+  DtStack,
   DT_STACK_DIRECTION,
   DT_STACK_GAP,
   DT_STACK_RESPONSIVE_BREAKPOINTS,
-} from '@/components/stack/stack_constants';
+} from '@dialpad/dialtone-vue';
+
+import StackDefault from './stack_default.story.vue';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 export const argsData = {
   direction: { default: 'column' },

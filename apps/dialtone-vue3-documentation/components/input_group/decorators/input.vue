@@ -31,16 +31,16 @@
 </template>
 
 <script>
-import { RADIO_INPUT_VALIDATION_CLASSES } from '../../radio/radio_constants';
 import {
-  InputMixin,
-  GroupableMixin,
-} from '../../../common/mixins/input';
+  RADIO_INPUT_VALIDATION_CLASSES,
+  DtInputMixin,
+  DtGroupableInputMixin,
+} from '@dialpad/dialtone-vue';
 
 export default {
   name: 'InputDecorator',
 
-  mixins: [InputMixin, GroupableMixin],
+  mixins: [DtInputMixin, DtGroupableInputMixin],
 
   inheritAttrs: false,
 

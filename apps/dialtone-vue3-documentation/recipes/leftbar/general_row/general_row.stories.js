@@ -1,13 +1,13 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
-import { DtRecipeGeneralRow, LEFTBAR_GENERAL_ROW_ICON_SIZES } from '@dialpad/dialtone-vue';
+import {
+  DtRecipeGeneralRow, LEFTBAR_GENERAL_ROW_ICON_SIZES,
+  LEFTBAR_GENERAL_ROW_TYPES,
+  LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
+} from '@dialpad/dialtone-vue';
 
 import DtRecipeGeneralRowDefaultTemplate from './general_row_default.story.vue';
 import DtRecipeGeneralRowVariantsTemplate from './general_row_variants.story.vue';
-import {
-  LEFTBAR_GENERAL_ROW_TYPES,
-  LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
-} from '@/recipes/leftbar/general_row/general_row_constants';
 
 // Default Prop Values
 export const argsData = {

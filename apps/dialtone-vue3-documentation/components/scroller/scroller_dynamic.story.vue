@@ -51,7 +51,7 @@
 import { DtScroller } from '@dialpad/dialtone-vue';
 import { nextTick, ref } from 'vue';
 
-import defaultAvatar from './person.png';
+import defaultAvatar from '@/common/assets/person.png';
 
 /* eslint-disable max-len */
 const messages = [

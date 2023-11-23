@@ -1,13 +1,13 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { DtRecipeUnreadPill } from '@dialpad/dialtone-vue';
+import {
+  DtRecipeUnreadPill,
+  UNREAD_PILL_DIRECTIONS,
+  UNREAD_PILL_KINDS,
+} from '@dialpad/dialtone-vue';
 
 import DtRecipeUnreadPillDefaultTemplate from './unread_pill_default.story.vue';
 import DtRecipeUnreadPillVariantsTemplate from './unread_pill_variants.story.vue';
-import {
-  UNREAD_PILL_DIRECTIONS,
-  UNREAD_PILL_KINDS,
-} from '@/recipes/leftbar/unread_pill/unread_pill_constants';
 
 // Default Prop Values
 export const argsData = {

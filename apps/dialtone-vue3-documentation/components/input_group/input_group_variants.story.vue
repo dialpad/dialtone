@@ -92,7 +92,8 @@
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import { InputsDecorator, DtInputGroup } from '@dialpad/dialtone-vue';
+import { DtInputGroup } from '@dialpad/dialtone-vue';
+import InputsDecorator from './decorators/inputs.vue';
 
 export default {
   name: 'InputGroupVariants',

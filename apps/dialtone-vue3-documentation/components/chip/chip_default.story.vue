@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import DtAvatar, { DtChip, DtIcon, CHIP_ICON_SIZES } from '@dialpad/dialtone-vue';
+import { DtAvatar, DtChip, DtIcon, CHIP_ICON_SIZES } from '@dialpad/dialtone-vue';
 import VHtml from '@/common/v_html';
 
 export default {

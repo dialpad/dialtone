@@ -4,8 +4,8 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS,
   ROOT_LAYOUT_SIDEBAR_POSITIONS,
-} from './root_layout_constants';
-import { DtRootLayout } from '@dialpad/dialtone-vue';
+  DtRootLayout,
+} from '@dialpad/dialtone-vue';
 
 import DtRootLayoutDefaultTemplate from './root_layout_default.story.vue';
 import DtRootLayoutStickyTemplate from './root_layout_sticky.story.vue';

@@ -203,7 +203,8 @@
 </template>
 
 <script>
-import { DtDropdown, DtDropdownSeparator, DtListItemGroup, DtListItem, DtButton, DROPDOWN_STORY_ITEMS } from '@dialpad/dialtone-vue';
+import { DtDropdown, DtDropdownSeparator, DtListItemGroup, DtListItem, DtButton } from '@dialpad/dialtone-vue';
+import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 
 export default {
   name: 'DtDropdownVariants',

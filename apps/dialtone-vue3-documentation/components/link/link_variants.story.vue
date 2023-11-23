@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { DtLink, LINK_VARIANTS, INVERTED } from '@dialpad/dialtone-vue';
+import { DtLink, LINK_VARIANTS } from '@dialpad/dialtone-vue';
 
 export default {
   name: 'DtLinkVariants',
@@ -35,7 +35,7 @@ export default {
 
   computed: {
     filteredKindClasses () {
-      return LINK_VARIANTS.filter(kind => kind !== INVERTED);
+      return LINK_VARIANTS.filter(kind => kind !== 'inverted');
     },
   },
 };

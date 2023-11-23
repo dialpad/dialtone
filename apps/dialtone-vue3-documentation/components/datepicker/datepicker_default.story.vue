@@ -57,8 +57,15 @@
 </template>
 
 <script setup>
-import { DtDatepicker } from '@dialpad/dialtone-vue';
-import { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } from './formatUtils.js';
+import {
+  DtDatepicker,
+  formatLong,
+  formatMedium,
+  formatShort,
+  formatNoYear,
+  formatNumerical,
+} from '@dialpad/dialtone-vue';
+
 import { ref } from 'vue';
 
 const props = defineProps({
@@ -73,21 +80,21 @@ const currentSelectedDate = ref(props.date);
 
 <style scoped>
 table {
-    border-collapse: collapse;
-    width: 100%;
-  }
+  border-collapse: collapse;
+  width: 100%;
+}
 
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
 
-  th {
-    background-color: #f2f2f2;
-  }
+th {
+  background-color: #f2f2f2;
+}
 
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 </style>

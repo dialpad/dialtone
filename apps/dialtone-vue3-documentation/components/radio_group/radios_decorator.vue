@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { DtRadio } from '../radio';
+import { DtRadio } from '@dialpad/dialtone-vue';
 
 export default {
   name: 'RadiosDecorator',

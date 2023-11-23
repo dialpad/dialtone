@@ -92,7 +92,8 @@
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import { RadiosDecorator, DtRadioGroup } from '@dialpad/dialtone-vue';
+import { DtRadioGroup } from '@dialpad/dialtone-vue';
+import RadiosDecorator from './radios_decorator.vue';
 
 export default {
   name: 'RadioGroupVariants',

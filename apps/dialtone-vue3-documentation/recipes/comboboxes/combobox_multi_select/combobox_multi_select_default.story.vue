@@ -59,7 +59,8 @@
 </template>
 
 <script>
-import { DtListItem, DtRecipeComboboxMultiSelect, ITEMS_LIST_DATA } from '@dialpad/dialtone-vue';
+import { DtListItem, DtRecipeComboboxMultiSelect } from '@dialpad/dialtone-vue';
+import { ITEMS_LIST_DATA } from './combobox_multi_select_story_constants';
 
 export default {
   name: 'DtRecipeComboboxMultiSelectDefault',

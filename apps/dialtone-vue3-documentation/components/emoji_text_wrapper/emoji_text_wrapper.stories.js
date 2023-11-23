@@ -1,5 +1,6 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { ICON_SIZE_MODIFIERS, DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
+import { ICON_SIZE_MODIFIERS } from '@dialpad/dialtone-vue';
+import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue/emoji';
 
 import DtEmojiTextWrapperDefaultTemplate from './emoji_text_wrapper_default.story.vue';
 import DtEmojiTextWrapperVariantsTemplate from './emoji_text_wrapper_variants.story.vue';

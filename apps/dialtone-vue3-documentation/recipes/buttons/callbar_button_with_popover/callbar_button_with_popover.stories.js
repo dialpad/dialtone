@@ -1,14 +1,13 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import { DtRecipeCallbarButtonWithPopover, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '@dialpad/dialtone-vue';
+import {
+  DtRecipeCallbarButtonWithPopover, CALLBAR_BUTTON_VALID_WIDTH_SIZE,
+  POPOVER_DIRECTIONS,
+  POPOVER_INITIAL_FOCUS_STRINGS,
+} from '@dialpad/dialtone-vue';
 
 import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './callbar_button_with_popover_default.story.vue';
 import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_with_popover_variants.story.vue';
-
-import {
-  POPOVER_DIRECTIONS,
-  POPOVER_INITIAL_FOCUS_STRINGS,
-} from '@/components/popover/popover_constants';
 
 const iconsList = getIconNames();
 

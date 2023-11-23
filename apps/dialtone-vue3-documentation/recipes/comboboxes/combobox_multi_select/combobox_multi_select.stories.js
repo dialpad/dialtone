@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { DtRecipeComboboxMultiSelect, MULTI_SELECT_SIZES } from '@dialpad/dialtone-vue';
-
 import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
 
 // Default Prop Values

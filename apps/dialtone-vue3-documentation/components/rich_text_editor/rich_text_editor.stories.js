@@ -1,11 +1,11 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { DtRichTextEditor } from '@dialpad/dialtone-vue';
-import DtRichTextEditorDefaultTemplate from './rich_text_editor_default.story.vue';
 import {
+  DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from './rich_text_editor_constants';
+} from '@dialpad/dialtone-vue';
+import DtRichTextEditorDefaultTemplate from './rich_text_editor_default.story.vue';
 
 import mentionSuggestion from './mention_suggestion';
 

@@ -50,7 +50,8 @@
 </template>
 
 <script>
-import { DtDropdown, LIST_ITEM_NAVIGATION_TYPES, DROPDOWN_STORY_ITEMS, DtListItem, DtButton } from '@dialpad/dialtone-vue';
+import { DtDropdown, LIST_ITEM_NAVIGATION_TYPES, DtListItem, DtButton } from '@dialpad/dialtone-vue';
+import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 
 export default {
   name: 'DtDropdownDefault',

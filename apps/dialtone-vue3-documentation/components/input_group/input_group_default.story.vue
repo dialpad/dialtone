@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { InputDecorator, DtInputGroup } from '@dialpad/dialtone-vue';
+import { DtInputGroup } from '@dialpad/dialtone-vue';
+import InputDecorator from './decorators/input.vue';
 
 export default {
   name: 'InputGroupDefault',

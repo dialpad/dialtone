@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
+import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue/emoji';
 
 export default {
   name: 'DtEmojiTextWrapperVariants',

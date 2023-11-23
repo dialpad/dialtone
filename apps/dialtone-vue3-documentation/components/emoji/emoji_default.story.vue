@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { DtEmoji } from '@dialpad/dialtone-vue';
+import { DtEmoji } from '@dialpad/dialtone-vue/emoji';
 
 export default {
   name: 'DtEmojiDefault',

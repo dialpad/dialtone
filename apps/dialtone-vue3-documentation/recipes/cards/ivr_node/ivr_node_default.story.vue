@@ -128,15 +128,15 @@
 </template>
 
 <script>
-import { DtRecipeIvrNode, DtIcon, DtButton, DtAvatar, DtListItem, DtKeyboardShortcut } from '@dialpad/dialtone-vue';
 import {
+  DtRecipeIvrNode, DtIcon, DtButton, DtAvatar, DtListItem, DtKeyboardShortcut,
   IVR_NODE_BRANCH,
   IVR_NODE_EXPERT, IVR_NODE_GO_TO, IVR_NODE_HANGUP,
   IVR_NODE_LABELS,
   IVR_NODE_PROMPT_COLLECT,
   IVR_NODE_PROMPT_MENU,
   IVR_NODE_PROMPT_PLAY, IVR_NODE_TRANSFER,
-} from './ivr_node_constants';
+} from '@dialpad/dialtone-vue';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',
