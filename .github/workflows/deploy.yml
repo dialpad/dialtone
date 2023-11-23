@@ -22,11 +22,6 @@ jobs:
   cache-and-install:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [ 18 ]
-        pnpm-version: [ 8 ]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,12 +29,12 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18
 
       - name: Use pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: ${{ matrix.pnpm-version }}
+          version: 8
           run-install: false
 
       - name: Get pnpm store directory
@@ -119,6 +114,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run-install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
       - name: Setup pnpm cache
         uses: actions/cache@v3
         with:
@@ -127,7 +138,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Build Dialtone library and docsite
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Dialtone library and documentation site
         run: npx nx run --verbose dialtone-documentation:build
 
       - name: 'Set up Cloud SDK'
