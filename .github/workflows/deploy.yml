@@ -98,26 +98,25 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
   gcp-auth:
-    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: 'Authenticate to Google Cloud'
-        id: 'auth'
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
-          credentials_json: ${{ secrets.DIALTONE_GCP_SA_KEY }}
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
 
   deploy-dialtone:
     needs: [check-dialpad-member, get-branch-name, filter-actions]
     if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
-    env:
-      VUEPRESS_BASE_URL:
-        ${{ fromJSON('{"false": "/${{ needs.get-branch-name.outputs.current_branch }}/", "true": "/"}')[github.ref == 'refs/heads/production'] }}
+#    env:
+#      VUEPRESS_BASE_URL: ${{ fromJSON('{"false": "/needs.get-branch-name.outputs.current_branch/", "true": "/"}')[github.ref == 'refs/heads/production'] }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
