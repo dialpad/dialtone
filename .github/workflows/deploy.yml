@@ -116,8 +116,8 @@ jobs:
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
     env:
-      VUEPRESS_BASE_URL: ${{ github.ref == 'refs/heads/production' && '/' || format("/{0}/", needs.get-branch-name.outputs.current_branch) }}
-#      VUEPRESS_BASE_URL: ${{ fromJSON('[format("/{0}/", needs.get-branch-name.outputs.current_branch), "/"]')[github.ref == 'refs/heads/production'] }}
+      VUEPRESS_BASE_URL:
+        ${{ fromJSON('{"false": "/${{ needs.get-branch-name.outputs.current_branch }}/", "true": "/"}')[github.ref == 'refs/heads/production'] }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
