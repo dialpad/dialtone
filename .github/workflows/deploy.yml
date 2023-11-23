@@ -4,87 +4,160 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - production
       - alpha
       - beta
-      - staging
-      - next
       - legacy
+      - next
+      - production
+      - staging
 
     paths:
-      - 'packages/dialtone/**'
-      - 'packages/dialtone-tokens/**'
-      - 'apps/dialtone-documentation/**'
+      - 'packages/**'
+      - 'apps/**'
 
 env:
   HUSKY: 0
 
 jobs:
-  deploy:
+  cache-and-install:
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [ 18 ]
-
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
+        pnpm-version: [ 8 ]
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
 
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v7
-
-      # Will prevent the rest of the steps from running on fail
-      - name: Check if user is a dialpad member
-        uses: octokit/request-action@v2.1.0
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
         with:
-          route: GET /orgs/dialpad/members/${{ github.actor }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+          version: ${{ matrix.pnpm-version }}
+          run-install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build library and docsite (${{ steps.branch-name.outputs.current_branch }})
-        if: ${{ github.ref != 'refs/heads/production' }}
-        env:
-          VUEPRESS_BASE_URL: /${{ steps.branch-name.outputs.current_branch }}/
+  filter-actions:
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Filter actions by path
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dialtone:
+              - 'apps/dialtone-documentation/**'
+              - 'packages/**'
+            dialtone-vue:
+              - 'apps/dialtone-vue3-documentation/**'
+              - 'packages/**'
+
+  get-branch-name:
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v7
+
+  check-dialpad-member:
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+    # Will prevent the rest of the steps from running on fail
+    - name: Check if user is a dialpad member
+      uses: octokit/request-action@v2.1.0
+      with:
+        route: GET /orgs/dialpad/members/${{ github.actor }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+
+  gcp-auth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Authenticate to Google Cloud'
+        id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.DIALTONE_GCP_SA_KEY }}
+
+  deploy-dialtone:
+    needs: [check-dialpad-member, cache-and-install, get-branch-name, filter-actions, gcp-auth]
+    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
+    env:
+      VUEPRESS_BASE_URL: fromJSON('["/${{ needs.get-branch-name.branch-name.outputs.current_branch }}/", "/"]')[github.ref == 'refs/heads/production']
+    steps:
+      - name: Build Dialtone library and docsite
         run: npx nx run --verbose dialtone-documentation:build
 
-      - name: Deploy to GitHub Pages (${{ steps.branch-name.outputs.current_branch }})
-        if: ${{ github.ref != 'refs/heads/production' }}
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
         with:
-          branch: gh-pages
-          folder: apps/dialtone-documentation/docs/.vuepress/dist
-          target-folder: ${{ steps.branch-name.outputs.current_branch }}
+          version: '>= 363.0.0'
 
-      - name: Build library and docsite
-        if: ${{ github.ref == 'refs/heads/production' }}
-        run: npx nx run --verbose dialtone-documentation:build
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
 
-      - name: Deploy to GitHub Pages
-        if: ${{ github.ref == 'refs/heads/production' }}
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
-        with:
-          branch: gh-pages
-          folder: apps/dialtone-documentation/docs/.vuepress/dist
-          clean-exclude: |
-            deploy-previews
-            legacy
-            staging
-            next
+#      - name: Deploy Dialtone to GCP
+#        if: ${{ github.ref != 'refs/heads/production' }}
+#        uses: google-github-actions/upload-cloud-storage@v1
+#        with:
+#          path: apps/dialtone-documentation/docs/.vuepress/dist
+#          destination: "dialtone.dialpad.com" # /${{ steps.branch-name.outputs.current_branch }}
+#          parent: false
+#
+#      - name: Deploy to GitHub Pages
+#        if: ${{ github.ref == 'refs/heads/production' }}
+#        uses: JamesIves/github-pages-deploy-action@v4.2.5
+#        with:
+#          branch: gh-pages
+#          folder: apps/dialtone-documentation/docs/.vuepress/dist
+#          clean-exclude: |
+#            alpha
+#            beta
+#            deploy-previews
+#            legacy
+#            next
+#            staging
+
+
+#  deploy-dialtone-vue:
+#    needs: cache-and-install
+#    if: ${{ needs.cache-and-install.outputs.dialtone-vue == 'true' }}
+#    concurrency: ${{ github.workflow }}-${{ github.ref }}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Build Dialtone Vue library and docsite
+#        run: npx nx run --verbose dialtone-vue3-documentation:build
+#
+#      - name: Deploy Dialtone Vue to GitHub Pages
+#        uses: JamesIves/github-pages-deploy-action@v4.2.5
+#        with:
+#          branch: gh-pages
+#          folder: apps/dialtone-vue3-documentation/storybook-static
+#          target-folder: ${{ steps.branch-name.outputs.current_branch }}
