@@ -114,6 +114,37 @@
     }
 }
 
+.d-input__label-text {
+    display: flex;
+    flex: 1 0%;
+    align-items: baseline;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-bottom: var(--dt-space-300);
+    color: var(--dt-color-foreground-secondary);
+    font-weight: var(--dt-font-weight-semi-bold);
+    font-size: var(--dt-font-size-200);
+    font-family: inherit;
+    line-height: var(--dt-font-line-height-300);
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.d-input__description {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    color: var(--dt-color-foreground-tertiary);
+    font-size: var(--dt-font-size-100);
+    font-family: inherit;
+    line-height: var(--dt-font-line-height-400);
+    fill: currentColor;
+}
+
+.d-input__length-description {
+    margin-bottom: var(--dt-space-200);
+}
+
 //  $$  INPUT WRAPPER
 //  ----------------------------------------------------------------------------
 .d-input__wrapper {
