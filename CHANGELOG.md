@@ -1,3 +1,15 @@
+## [3.96.1](https://github.com/dialpad/dialtone-vue/compare/v3.96.0...v3.96.1) (2023-11-24)
+
+
+### Bug Fixes
+
+* npm run lint not detecting errors ([#1317](https://github.com/dialpad/dialtone-vue/issues/1317)) ([bf99a34](https://github.com/dialpad/dialtone-vue/commit/bf99a342cb759f3f2878953bd969bf4bd6bc8fb5))
+
+
+### Code Refactoring
+
+* **Dp 85018:** modify msg input emoji picker pass through props structure ([#1315](https://github.com/dialpad/dialtone-vue/issues/1315)) ([296d98f](https://github.com/dialpad/dialtone-vue/commit/296d98f49de6cb6e0bf686f195276604da66afa8))
+
 # [3.96.0](https://github.com/dialpad/dialtone-vue/compare/v3.95.1...v3.96.0) (2023-11-20)
 
 
