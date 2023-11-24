@@ -97,27 +97,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
-  gcp-auth:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
-          service_account: ${{ secrets.DIALTONE_GCP_SA }}
-
   deploy-dialtone:
     needs: [check-dialpad-member, get-branch-name, filter-actions]
     if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 #    env:
 #      VUEPRESS_BASE_URL: ${{ fromJSON('{"false": "/needs.get-branch-name.outputs.current_branch/", "true": "/"}')[github.ref == 'refs/heads/production'] }}
     steps:
@@ -153,6 +140,13 @@ jobs:
 
       - name: Build Dialtone library and documentation site
         run: npx nx run --verbose dialtone-documentation:build
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
