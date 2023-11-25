@@ -106,8 +106,7 @@ jobs:
       contents: 'read'
       id-token: 'write'
     env:
-      VUEPRESS_BASE_URL: |
-        ${{ fromJSON('{"false": format("/{0}/", needs.get-branch-name.outputs.current_branch), "true": "/"}')[github.ref == 'refs/heads/production'] }}
+      VUEPRESS_BASE_URL: ${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
