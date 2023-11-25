@@ -157,32 +157,32 @@ jobs:
       - name: List bucket contents
         run: gcloud storage ls gs://dialtone.dialpad.com
 
-      - name: Clean up bucket
-        if: ${{ github.ref == 'refs/heads/production' }}
-        run: >
-          gcloud storage ls gs://dialtone.dialpad.com |
-          grep -v -E '
-          /alpha/|
-          /beta/|
-          /legacy/|
-          /next/|
-          /deploy-previews/|
-          /vue/|
-          /vue3/|
-          /staging/
-          ' | 
-          gcloud storage rm --recursive --read-paths-from-stdin
-
-      - name: Clean up bucket ${{ env.VUEPRESS_BASE_URL }} directory
-        if: ${{ github.ref != 'refs/heads/production' }}
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.VUEPRESS_BASE_URL) }}
-
-      - name: Upload to GCP
-        uses: google-github-actions/upload-cloud-storage@v1
-        with:
-          path: apps/dialtone-documentation/docs/.vuepress/dist
-          destination: ${{ format('dialtone.dialpad.com{0}', env.VUEPRESS_BASE_URL) }}
-          parent: false
+#      - name: Clean up bucket
+#        if: ${{ github.ref == 'refs/heads/production' }}
+#        run: >
+#          gcloud storage ls gs://dialtone.dialpad.com |
+#          grep -v -E '
+#          /alpha/|
+#          /beta/|
+#          /legacy/|
+#          /next/|
+#          /deploy-previews/|
+#          /vue/|
+#          /vue3/|
+#          /staging/
+#          ' |
+#          gcloud storage rm --recursive --read-paths-from-stdin
+#
+#      - name: Clean up bucket ${{ env.VUEPRESS_BASE_URL }} directory
+#        if: ${{ github.ref != 'refs/heads/production' }}
+#        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.VUEPRESS_BASE_URL) }}
+#
+#      - name: Upload to GCP
+#        uses: google-github-actions/upload-cloud-storage@v1
+#        with:
+#          path: apps/dialtone-documentation/docs/.vuepress/dist
+#          destination: ${{ format('dialtone.dialpad.com{0}', env.VUEPRESS_BASE_URL) }}
+#          parent: false
 
 #  deploy-dialtone-vue:
 #    needs: cache-and-install
