@@ -370,7 +370,7 @@ The base button font size is 16px and should be used in most cases. Every button
 <button class="d-btn d-btn--primary d-btn--xl" type="button"><span class="d-btn__label">...</span></button>
 ```
 
-### Loading
+## Loading
 
 Loading buttons are useful for communicating a delay between the button interaction and its action taking place. Every button style can accept the loading button class, though we only provide a few possible examples.
 
