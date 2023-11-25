@@ -90,7 +90,7 @@ jobs:
     steps:
     # Will prevent the rest of the steps from running on fail
     - name: Check if user is a dialpad member
-      uses: octokit/request-action@v2.1.0
+      uses: octokit/request-action@v2
       with:
         route: GET /orgs/dialpad/members/${{ github.actor }}
       env:
@@ -138,7 +138,6 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone library and documentation site
-        continue-on-error: true
         run: npx nx run --verbose dialtone-documentation:build
 
       - id: auth
@@ -147,7 +146,6 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
-          token_format: 'access_token'
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
