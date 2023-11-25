@@ -20,6 +20,7 @@ env:
 
 jobs:
   cache-and-install:
+    if: ${{ false }}
     runs-on: ubuntu-latest
 
     steps:
@@ -90,14 +91,14 @@ jobs:
     steps:
     # Will prevent the rest of the steps from running on fail
     - name: Check if user is a dialpad member
-      uses: octokit/request-action@v2
+      uses: octokit/request-action@v2.x
       with:
         route: GET /orgs/dialpad/members/${{ github.actor }}
       env:
         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
   deploy-dialtone:
-    needs: [cache-and-install, check-dialpad-member, get-branch-name, filter-actions]
+    needs: [check-dialpad-member, get-branch-name, filter-actions]
     if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
