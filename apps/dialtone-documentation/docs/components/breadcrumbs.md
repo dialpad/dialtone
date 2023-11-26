@@ -7,8 +7,9 @@ image: assets/images/components/breadcrumbs.png
 storybook: https://vue.dialpad.design/?path=/story/components-breadcrumbs--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8918%3A21306&viewport=-61%2C443%2C1.12&t=xHutRjwo1o5zMTgT-11
 ---
+
 <code-well-header>
-  <nav class="d-breadcrumbs d-bgc-primary d-py16 d-px12" aria-label="breadcrumb">
+  <nav class="d-breadcrumbs" aria-label="breadcrumb">
     <ol>
       <li class="d-breadcrumbs__item">
         <a href="#" class="d-link d-link--muted">Root</a>
@@ -47,8 +48,10 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
 
 ## Variants and examples
 
+### Default
+
 <code-well-header>
-    <nav class="d-breadcrumbs d-bgc-primary d-py16 d-px12" aria-label="breadcrumb">
+    <nav class="d-breadcrumbs" aria-label="breadcrumb">
         <ol>
             <li class="d-breadcrumbs__item">
                 <a href="#" class="d-link d-link--muted">Root</a>
@@ -64,25 +67,6 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
             </li>
             <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
                 <a href="#" class="d-link d-link--muted" aria-current="location">Current Page</a>
-            </li>
-        </ol>
-    </nav>
-    <nav class="d-breadcrumbs d-breadcrumbs--inverted d-bgc-contrast d-py16 d-px12 d-mt0" aria-label="inverted breadcrumb">
-        <ol>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--inverted">Root</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--inverted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--inverted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--inverted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
-                <a href="#" class="d-link d-link--inverted" aria-current="location">Current Page</a>
             </li>
         </ol>
     </nav>
@@ -108,12 +92,50 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
     </li>
   </ol>
 </nav>
-<nav class="d-breadcrumbs d-breadcrumbs--inverted" aria-label="breadcrumb">
+```
+
+### Inverted
+
+<code-well-header class="d-bgc-contrast">
+    <nav class="d-breadcrumbs d-breadcrumbs--inverted d-bgc-contrast" aria-label="inverted breadcrumb">
+        <ol>
+            <li class="d-breadcrumbs__item">
+                <a href="#" class="d-link d-link--inverted">Root</a>
+            </li>
+            <li class="d-breadcrumbs__item">
+                <a href="#" class="d-link d-link--inverted">Section</a>
+            </li>
+            <li class="d-breadcrumbs__item">
+                <a href="#" class="d-link d-link--inverted">Section</a>
+            </li>
+            <li class="d-breadcrumbs__item">
+                <a href="#" class="d-link d-link--inverted">Section</a>
+            </li>
+            <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
+                <a href="#" class="d-link d-link--inverted" aria-current="location">Current Page</a>
+            </li>
+        </ol>
+    </nav>
+</code-well-header>
+
+```html
+<nav class="d-breadcrumbs d-breadcrumbs--inverted" aria-label="inverted breadcrumb">
   <ol>
-    <li class="d-breadcrumbs__item">
-      <a href="#" class="d-link d-link--inverted">Root</a>
-    </li>
-      ...
+      <li class="d-breadcrumbs__item">
+          <a href="#" class="d-link d-link--inverted">Root</a>
+      </li>
+      <li class="d-breadcrumbs__item">
+          <a href="#" class="d-link d-link--inverted">Section</a>
+      </li>
+      <li class="d-breadcrumbs__item">
+          <a href="#" class="d-link d-link--inverted">Section</a>
+      </li>
+      <li class="d-breadcrumbs__item">
+          <a href="#" class="d-link d-link--inverted">Section</a>
+      </li>
+      <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
+          <a href="#" class="d-link d-link--inverted" aria-current="location">Current Page</a>
+      </li>
   </ol>
 </nav>
 ```
