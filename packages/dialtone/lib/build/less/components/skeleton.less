@@ -10,6 +10,8 @@
 //  TABLE OF CONTENTS
 //  • SKELETON CONTAINER
 //  • SKELETON LIST ITEM
+//  • SKELETON PARAGRAPH
+//  • SKELETON TEXT
 
 //  ============================================================================
 //  @   SKELETON CONTAINER
@@ -68,4 +70,28 @@
     flex-direction: column;
     width: 100%;
   }
+}
+
+//  ============================================================================
+//  @   SKELETON PARAGRAPH
+//  ----------------------------------------------------------------------------
+.d-skeleton-paragraph {
+  width: 100%;
+  margin-bottom: var(--dt-space-450);
+
+  &:last-child {
+    margin-bottom: var(--dt-space-0);
+  }
+}
+
+//  ============================================================================
+//  @   SKELETON TEXT
+//  ----------------------------------------------------------------------------
+.d-skeleton-text {
+  height: 80%;
+  border-radius: var(--dt-size-radius-200);
+}
+
+.d-skeleton-text--heading {
+  border-radius: var(--dt-size-radius-200);
 }
