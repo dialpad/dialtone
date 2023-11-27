@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 import { DtValidationMessages } from '../validation_messages';
 import { DtCheckbox } from '../checkbox';
 import CheckboxesFixture from './checkboxes_decorator.vue';
-import { DtCheckboxGroup } from '@dialpad/dialtone-vue';
+import DtCheckboxGroup from './checkbox_group.vue';
 
 const MOCK_LEGEND = 'My Legend';
 const MOCK_SELECTED_VALUE = 'apple';

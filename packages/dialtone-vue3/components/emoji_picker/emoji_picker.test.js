@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { DtEmojiPicker } from '@dialpad/dialtone-vue';
+import DtEmojiPicker from './DtEmojiPicker.vue';
 
 const MOCK_RECENTLY_USED_EMOJIS = [
   {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { DtDescriptionList } from '@dialpad/dialtone-vue';
+import DtDescriptionList from './description_list.vue';
 
 let MOCK_LIST = null;
 

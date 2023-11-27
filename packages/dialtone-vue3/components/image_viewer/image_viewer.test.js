@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { DtImageViewer } from '@dialpad/dialtone-vue';
+import DtImageViewer from './image_viewer.vue';
 
 const baseProps = {
   imageSrc: 'test.png',
