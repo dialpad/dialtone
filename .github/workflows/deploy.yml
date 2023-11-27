@@ -58,8 +58,6 @@ jobs:
 
   filter-actions:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     outputs:
       dialtone: ${{ steps.filter.outputs.dialtone }}
       dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
