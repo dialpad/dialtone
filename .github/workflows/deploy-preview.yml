@@ -25,7 +25,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Use pnpm
         uses: pnpm/action-setup@v2
@@ -73,7 +73,7 @@ jobs:
               - 'packages/**'
 
 
-  deploy-dialtone-preview:
+  dialtone:
     needs: [cache-and-install, filter-actions]
     if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     runs-on: ubuntu-latest
@@ -91,7 +91,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Use pnpm
         uses: pnpm/action-setup@v2
@@ -149,7 +149,7 @@ jobs:
             ✔️ Dialtone Deploy Preview ready!
             😎 Browse the preview: https://dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}
           allow-repeats: true
-  deploy-dialtone-vue-3-preview:
+  dialtone-vue-3:
     needs: [cache-and-install, filter-actions]
     if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
     runs-on: ubuntu-latest
@@ -167,7 +167,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Use pnpm
         uses: pnpm/action-setup@v2

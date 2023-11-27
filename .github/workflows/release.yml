@@ -19,11 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18 ]
-
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
+        node-version: [ 20 ]
 
     steps:
       - uses: actions/checkout@v3
