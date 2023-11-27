@@ -1,6 +1,7 @@
 name: Clean Preview
 
 on:
+  workflow_dispatch:
   pull_request_target:
     types: [closed]
 
@@ -29,20 +30,17 @@ jobs:
               - 'packages/**'
 
 
-  clean-dialtone-preview:
+  clean:
     needs: filter-actions
-    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
     env:
-      BASE_DIRECTORY: /deploy-previews/pr-${{github.event.pull_request.number}}/
+      DIALTONE_BASE_DIRECTORY: /deploy-previews/pr-${{github.event.pull_request.number}}/
+      DIALTONE_VUE_3_BASE_DIRECTORY: /vue3/deploy-previews/pr-${{github.event.pull_request.number}}/
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
-
       - id: auth
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
@@ -53,35 +51,13 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
 
-      - name: Clean up bucket ${{ env.BASE_DIRECTORY }} directory
+      - name: Clean up Dialtone preview
+        if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.BASE_DIRECTORY) }}
+        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.DIALTONE_BASE_DIRECTORY) }}
 
-  clean-dialtone-vue-3-preview:
-    needs: filter-actions
-    if: ${{ needs.filter-actions.outputs.dialtone-vue3 == 'true' }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-    env:
-      BASE_DIRECTORY: /vue3/deploy-previews/pr-${{github.event.pull_request.number}}/
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
-
-      - id: auth
-        name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
-          service_account: ${{ secrets.DIALTONE_GCP_SA }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
-
-      - name: Clean up bucket ${{ env.BASE_DIRECTORY }} directory
+      - name: Clean up Dialtone-vue 3 preview
+        if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
         continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.BASE_DIRECTORY) }}
+        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.DIALTONE_VUE_3_BASE_DIRECTORY) }}
 
