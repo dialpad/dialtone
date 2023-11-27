@@ -145,8 +145,8 @@ jobs:
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          workload_identity_provider: 'projects/359749251657/locations/global/workloadIdentityPools/wif-pool/providers/gh-provider'
-          service_account: 'github-actions@dp-dialtone-design-system.iam.gserviceaccount.com'
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
@@ -169,7 +169,8 @@ jobs:
 
       - name: Clean up bucket ${{ env.VUEPRESS_BASE_URL }} directory
         if: ${{ github.ref != 'refs/heads/production' }}
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.VUEPRESS_BASE_URL) }}
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com/{0}/', needs.get-branch-name.outputs.current_branch) }}
 
       - name: Upload to GCP
         uses: google-github-actions/upload-cloud-storage@v1
