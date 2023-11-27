@@ -2,7 +2,6 @@
   <div
     v-if="!hidden"
     :id="file"
-    class="dialtone-icon-grid__item"
   >
     <aside
       :data-selected="selectedStatus"
@@ -54,6 +53,8 @@ import SpotMaleLaptopTyping from '@dialpad/dialtone/lib/dist/vue/spot/SpotMaleLa
 import SpotFileUpload from '@dialpad/dialtone/lib/dist/vue/spot/SpotFileUpload.vue';
 import SpotBrowserTableGraph from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserTableGraph.vue';
 import SpotBrowserListCallout from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserListCallout.vue';
+import SpotMind from '@dialpad/dialtone/lib/dist/vue/spot/SpotMind.vue';
+import SpotEmpty from '@dialpad/dialtone/lib/dist/vue/spot/SpotEmpty.vue';
 
 export const ICON_KINDS = ['spot'];
 
@@ -67,6 +68,8 @@ export default {
     SpotFileUpload,
     SpotBrowserTableGraph,
     SpotBrowserListCallout,
+    SpotMind,
+    SpotEmpty,
   },
 
   props: {

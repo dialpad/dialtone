@@ -12,10 +12,22 @@
     "desc": "Browser Table Graph"
   },
   {
+    "name": "Publish",
+    "file": "publish",
+    "vue": "SpotPublish",
+    "desc": "Publish"
+  },
+  {
     "name": "File Upload",
     "file": "file-upload",
     "vue": "SpotFileUpload",
     "desc": "File Upload"
+  },
+  {
+    "name": "Wireless Screen Share",
+    "file": "wireless-screenshare",
+    "vue": "SpotWirelessScreenshare",
+    "desc": "Wireless Screen Share"
   },
   {
     "name": "Male Laptop Typing",
@@ -30,15 +42,15 @@
     "desc": "A woman typing laptop"
   },
   {
-    "name": "Wireless Screen Share",
-    "file": "wireless-screenshare",
-    "vue": "SpotWirelessScreenshare",
-    "desc": "Wireless Screen Share"
+    "name": "Mind",
+    "file": "mind",
+    "vue": "Mind",
+    "desc": "Mind"
   },
   {
-    "name": "Publish",
-    "file": "publish",
-    "vue": "SpotPublish",
-    "desc": "Publish"
+    "name": "Empty State",
+    "file": "empty",
+    "vue": "EmptyState",
+    "desc": "When there is nothing to display"
   }
 ]
