@@ -6,6 +6,10 @@
 //  The --placeholder-from-color and --placeholder-to-color custom properties can be set on the parent class of the
 //  placeholder to control the animation colors.
 //  For further documentation of these styles, please visit https://dialpad.design/components/skeleton
+//
+//  TABLE OF CONTENTS
+//  • SKELETON CONTAINER
+//  • SKELETON LIST ITEM
 
 //  ============================================================================
 //  @   SKELETON CONTAINER
@@ -42,5 +46,26 @@
   80% {
     background: var(--placeholder-from-color);
     fill: var(--placeholder-from-color);
+  }
+}
+
+//  ============================================================================
+//  @   SKELETON LIST ITEM
+//  ----------------------------------------------------------------------------
+.d-skeleton-list-item {
+  display: flex;
+
+  &--single {
+    align-items: center;
+  }
+
+  &__shape {
+    margin-right: var(--dt-space-400);
+  }
+
+  &__paragraph-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 }
