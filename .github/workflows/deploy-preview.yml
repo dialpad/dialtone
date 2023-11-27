@@ -78,8 +78,9 @@ jobs:
     if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: read
+      id-token: write
+      pull-requests: write
     env:
       VUEPRESS_BASE_URL: /deploy-previews/pr-${{github.event.pull_request.number}}/
     steps:
@@ -153,8 +154,9 @@ jobs:
     if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: read
+      id-token: write
+      pull-requests: write
     env:
       BASE_DIRECTORY: /vue3/deploy-previews/pr-${{github.event.pull_request.number}}/
     steps:
