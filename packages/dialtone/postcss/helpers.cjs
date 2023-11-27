@@ -1,6 +1,6 @@
-const { REGEX_OPTIONS } = require('./constants');
-const dialtoneTokensLight = require('../node_modules/@dialpad/dialtone-tokens/dist/tokens-light.json');
-const dialtoneTokensDark = require('../node_modules/@dialpad/dialtone-tokens/dist/tokens-dark.json');
+const { REGEX_OPTIONS } = require('./constants.cjs');
+const dialtoneTokensLight = require('@dialpad/dialtone-tokens/dist/tokens-light.json');
+const dialtoneTokensDark = require('@dialpad/dialtone-tokens/dist/tokens-dark.json');
 
 const colorsRegex = new RegExp(`dtColor(Neutral)?(${REGEX_OPTIONS.COLORS})([0-9]{3})?`);
 const themeColorsRegex = /(dtTheme).*(Color).*/;

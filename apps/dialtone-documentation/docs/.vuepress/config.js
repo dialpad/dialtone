@@ -1,3 +1,4 @@
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { defineUserConfig } from 'vuepress';
 import { getDirname, path } from '@vuepress/utils';
 import { viteBundler } from '@vuepress/bundler-vite';
@@ -45,7 +46,7 @@ export default defineUserConfig({
 
   bundler: viteBundler({
     viteOptions: {
-      plugins: [viteSvgLoader()],
+      plugins: [viteSvgLoader(), viteCommonjs()],
       css: {
         devSourcemap: true,
       },

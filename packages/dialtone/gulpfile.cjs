@@ -62,7 +62,7 @@ const less = settings.styles ? require('gulp-less') : null;
 const postCSSResponsify = settings.styles
   ? require('@dialpad/postcss-responsive-variations')({ breakpoints, classes })
   : null;
-const postCSSDialtoneGenerator = settings.styles ? require('./postcss/dialtone-generators') : null;
+const postCSSDialtoneGenerator = settings.styles ? require('./postcss/dialtone-generators.cjs') : null;
 const sourcemaps = settings.styles ? require('gulp-sourcemaps') : null;
 const autoprefixer = settings.styles ? require('autoprefixer') : null;
 
@@ -70,7 +70,7 @@ const autoprefixer = settings.styles ? require('autoprefixer') : null;
 const path = settings.svgs ? require('path') : null;
 const svgmin = settings.svgs ? require('gulp-svgmin') : null;
 const replace = settings.svgs ? require('gulp-replace') : null;
-const svgStrokeToFill = settings.svgs ? require('./svg-stroke-to-fill') : null;
+const svgStrokeToFill = settings.svgs ? require('./svg-stroke-to-fill.cjs') : null;
 const categories = [
   'alerts',
   'arrows',
@@ -98,7 +98,7 @@ const paths = {
     libSvg: './lib/dist/svg/**/*',
     libVueIcons: './lib/dist/vue/**/*',
     libFonts: './dist/fonts/**/*',
-    libJS: './lib/dist/js/**/*.{mjs,js}',
+    libJS: './lib/dist/js/**/*.{mjs,js,cjs}',
   },
   scripts: {
     input: './lib/build/js/**/*',
