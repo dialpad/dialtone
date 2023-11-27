@@ -154,7 +154,7 @@ jobs:
           version: '>= 363.0.0'
 
       - name: List bucket contents
-        run: gcloud info
+        run: gcloud storage ls gs://dialtone.dialpad.com
 
 #      - name: Clean up bucket
 #        if: ${{ github.ref == 'refs/heads/production' }}
