@@ -1,0 +1,39 @@
+//
+//  DIALTONE
+//  COMPONENTS: Keyboard Shortcut
+//
+//  These are the styles for Keyboard Shortcut component.
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-keyboard-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-right: var(--dt-space-300);
+  padding-left: var(--dt-space-300);
+  font-size: var(--dt-font-size-100);
+  font-family: var(--dt-font-family-body);
+  border: var(--dt-size-100) solid;
+  border-color: var(--dt-color-border-default);
+  border-radius: var(--dt-size-radius-300);
+
+  &--inverted {
+    border-color: var(--dt-color-border-moderate-inverted);
+  }
+
+  &__icon,
+  &__item {
+    margin-right: var(--dt-space-200);
+    color: var(--dt-color-foreground-tertiary);
+
+    &--inverted {
+      color: var(--dt-color-foreground-secondary-inverted);
+    }
+  }
+}

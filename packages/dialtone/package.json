@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "8.21.4",
+  "version": "8.21.5",
   "description": "Dialpad's design system",
   "keywords": [
     "Dialpad",
@@ -46,18 +46,19 @@
     "CHANGELOG.json"
   ],
   "bin": {
-    "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.js",
-    "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs"
+    "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
+    "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.js"
   },
   "repository": "git@github.com:dialpad/dialtone.git",
+  "type": "module",
   "scripts": {
-    "build": "gulp",
+    "build": "gulp --gulpfile ./gulpfile.cjs",
     "lint": "run-s lint:library lint:code",
     "lint:fix": "run-s lint-staged:library lint-staged:code",
     "lesshint": "npx lesshint 'lib/build/less/utilities'",
     "lint-staged:code": "npm run lint:code -- --fix",
     "lint-staged:library": "npm run stylelint -- --fix",
-    "lint:code": "eslint '**/*.{js,vue}'",
+    "lint:code": "eslint '**/*.{js,cjs,vue}'",
     "lint:library": "run-s stylelint lesshint",
     "prepublishOnly": "npm run build",
     "start": "gulp watch",

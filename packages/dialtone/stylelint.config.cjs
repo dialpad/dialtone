@@ -6,6 +6,7 @@ module.exports = {
     'docs/assets/css/**/*',
     'docs/assets/fonts/**/*',
     '**/*.js',
+    '**/*.cjs',
     '**/*.vue',
     '**/*.md',
   ],

@@ -16,14 +16,14 @@ const {
   GAP_SPACES,
   WIDTH_HEIGHTS,
   PLATFORM_FONT_SIZES, Z_INDEX,
-} = require('./constants');
+} = require('./constants.cjs');
 const {
   extractColors,
   appendHoverFocusSelectors,
   extractShadows,
   extractTypographies,
   removePrefixFromColor,
-} = require('./helpers');
+} = require('./helpers.cjs');
 const tinycolor = require('tinycolor2');
 const bodyCSSVariables = [];
 const lightCSSVariables = [];
