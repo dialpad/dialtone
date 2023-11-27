@@ -181,7 +181,7 @@ jobs:
 
   deploy-dialtone-vue-3:
     needs: [cache-and-install, check-dialpad-member, get-branch-name, filter-actions]
-    if: ${{ needs.cache-and-install.outputs.dialtone-vue == 'true' }}
+    if: ${{ needs.filter-actions.outputs.dialtone-vue == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
