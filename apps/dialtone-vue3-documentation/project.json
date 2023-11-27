@@ -34,6 +34,13 @@
         "script": "start",
         "parallel": true
       }
+    },
+    "test": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "test",
+        "parallel": true
+      }
     }
   }
 }
