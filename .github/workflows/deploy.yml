@@ -147,11 +147,10 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
+          token_format: 'access_token'
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
-        with:
-          project_id: 'dp-dialtone-design-system'
 
       - name: GCloud info
         run: gcloud info
