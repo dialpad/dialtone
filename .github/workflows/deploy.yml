@@ -151,7 +151,10 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          version: '>= 363.0.0'
+          project_id: 'dp-dialtone-design-system'
+
+      - name: GCloud info
+        run: gcloud info
 
       - name: List bucket contents
         run: gcloud storage ls gs://dialtone.dialpad.com
