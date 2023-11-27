@@ -1,0 +1,39 @@
+{
+  "name": "dialtone-vue3-documentation",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "dependsOn": [
+        {
+          "projects": [
+            "dialtone",
+            "dialtone-icons",
+            "dialtone-vue3"
+          ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "outputs": [],
+      "options": {
+        "script": "build",
+        "parallel": false
+      }
+    },
+    "start": {
+      "executor": "nx:run-script",
+      "outputs": [],
+      "dependsOn": [
+        {
+          "projects": ["dialtone-icons", "dialtone-vue3"],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "options": {
+        "script": "start",
+        "parallel": true
+      }
+    }
+  }
+}

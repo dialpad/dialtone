@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/blocks';
+import { version } from '../package.json';
+import { LogoContainer, Logo } from './components';
+
+<Meta title="Welcome" id="welcome" />
+
+<LogoContainer>
+  <Logo className="example-doc__image" src="https://static.dialpadcdn.com/dialtone/dialpad_logo.svg" />
+</LogoContainer>
+
+# Dialtone Vue 📞
+
+<img src={`https://img.shields.io/badge/npm-${version.replaceAll('-', '--')}-7C52FF`} alt={`Version ${version}`} />
+
+Dialtone Vue is a library of Vue components for <a class="d-link" href="https://dialpad.design/">Dialtone</a>, by Dialpad.
+
+## Goals
+
+The goal of the Dialtone Vue library is to simplify and standardize the use of common UI patterns and behaviour across all
+Dialpad projects.
+
+1. Implement [Dialtone components][dt-components] and other common UI behaviour in
+   a central place to ensure a consistent experience.
+2. Abstract common patterns into a simple component interface to speed development.
+3. Thoroughly document and test shared components to make using them fast and reliable.
+4. Bake in accessibility features to ensure all our projects are usable by all users.
+
+## Project Maintainers
+
+### Engineering
+
+- **Jonathan Araquistain** - Engineering Manager
+- **Brad Paugh** - Engineering
+- **Julio Ortega** - Engineering
+- **Ignacio Ropolo** - Engineering
+- **Nina Repetto** - Engineering
+
+### Product Design
+
+- **Francis Rupert** - Manager, Design Systems and Platform
+- **Marshall Norman** - Product Design
+- **Bradley Hawkins** - Product Design
+- **Federico Sarassola** - Product Design
+
+[dt-components]: https://dialpad.design/components

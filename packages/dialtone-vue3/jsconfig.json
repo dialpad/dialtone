@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+  },
+  "include": ["**/*"],
+  "exclude": ["**/node_modules", "**/compiled", "**/.cache", "**/compressed", "**/dist", "**/storybook-static"],
+}

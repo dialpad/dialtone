@@ -1,0 +1,15 @@
+# dependencies
+node_modules
+
+# configs
+.storybook
+
+# builds
+storybook-static
+
+# styles
+css
+
+# assets
+docs/assets
+fonts

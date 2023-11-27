@@ -5,22 +5,83 @@ on:
     types: [closed]
 
 jobs:
-  clean-preview:
+  filter-actions:
     runs-on: ubuntu-latest
-
+    permissions:
+      pull-requests: read
+    outputs:
+      dialtone: ${{ steps.filter.outputs.dialtone }}
+      dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
     steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: gh-pages
-    - run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git pull
-        if [ -d "deploy-previews/pr-${{ github.event.pull_request.number }}" ]; then 
-          rm -rf deploy-previews/pr-${{ github.event.pull_request.number }}
-          git add -A
-          git commit -m "deploy preview cleanup"
-          git push
-        else
-          echo "No preview was created"
-        fi
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Filter actions by path
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dialtone:
+              - 'apps/dialtone-documentation/**'
+              - 'packages/**'
+            dialtone-vue-3:
+              - 'apps/dialtone-vue3-documentation/**'
+              - 'packages/**'
+
+
+  clean-dialtone-preview:
+    needs: filter-actions
+    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    env:
+      BASE_DIRECTORY: /deploy-previews/pr-${{github.event.pull_request.number}}/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Clean up bucket ${{ env.BASE_DIRECTORY }} directory
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.BASE_DIRECTORY) }}
+
+  clean-dialtone-vue-3-preview:
+    needs: filter-actions
+    if: ${{ needs.filter-actions.outputs.dialtone-vue3 == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    env:
+      BASE_DIRECTORY: /vue3/deploy-previews/pr-${{github.event.pull_request.number}}/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Clean up bucket ${{ env.BASE_DIRECTORY }} directory
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.BASE_DIRECTORY) }}
+

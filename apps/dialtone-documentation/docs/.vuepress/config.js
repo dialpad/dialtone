@@ -9,7 +9,7 @@ import anchor from 'markdown-it-anchor';
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
-const siteURL = 'https://dialpad.design';
+const siteURL = 'https://dialtone.dialpad.com';
 const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
 
 const themeConfig = {

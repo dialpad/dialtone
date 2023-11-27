@@ -1,59 +1,143 @@
 name: Deploy Preview
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
-      - 'packages/dialtone/**'
-      - 'packages/dialtone-tokens/**'
-      - 'apps/dialtone-documentation/**'
+      - 'packages/**'
+      - 'apps/**'
 
 env:
   HUSKY: 0
-  VUEPRESS_BASE_URL: /deploy-previews/pr-${{github.event.pull_request.number}}/
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  deploy-preview:
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
-
+  cache-and-install:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [ 18 ]
-
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
-
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          node-version: 18
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build library and docsite
+  filter-actions:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      dialtone: ${{ steps.filter.outputs.dialtone }}
+      dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Filter actions by path
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dialtone:
+              - 'apps/dialtone-documentation/**'
+              - 'packages/**'
+            dialtone-vue-3:
+              - 'apps/dialtone-vue3-documentation/**'
+              - 'packages/**'
+
+
+  deploy-dialtone-preview:
+    needs: [cache-and-install, filter-actions]
+    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    env:
+      VUEPRESS_BASE_URL: /deploy-previews/pr-${{github.event.pull_request.number}}/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Dialtone library and documentation site
         run: npx nx run --verbose dialtone-documentation:build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
         with:
-          branch: gh-pages
-          folder: apps/dialtone-documentation/docs/.vuepress/dist
-          target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Clean up bucket ${{ env.VUEPRESS_BASE_URL }} directory
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.VUEPRESS_BASE_URL) }}
+
+      - name: Upload Dialtone to GCP
+        uses: google-github-actions/upload-cloud-storage@v1
+        with:
+          path: apps/dialtone-documentation/docs/.vuepress/dist
+          destination: ${{ format('dialtone.dialpad.com{0}', env.VUEPRESS_BASE_URL) }}
+          parent: false
 
       - name: Add Message
         uses: mshick/add-pr-comment@v1
@@ -62,7 +146,82 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           message: |
-            ✔️ Deploy Preview ready!
-            😎 Browse the preview: https://dialpad.design/deploy-previews/pr-${{ github.event.pull_request.number }}
-            🔨 If you experience an SSL issue then wait 2 minutes and try again.
+            ✔️ Dialtone Deploy Preview ready!
+            😎 Browse the preview: https://dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}
+          allow-repeats: true
+  deploy-dialtone-vue-3-preview:
+    needs: [cache-and-install, filter-actions]
+    if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    env:
+      BASE_DIRECTORY: /vue3/deploy-previews/pr-${{github.event.pull_request.number}}/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Dialtone library and documentation site
+        run: npx nx run --verbose dialtone-vue3-documentation:build
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Clean up bucket ${{ env.BASE_DIRECTORY }} directory
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.BASE_DIRECTORY) }}
+
+      - name: Upload Dialtone-vue 3 to GCP
+        uses: google-github-actions/upload-cloud-storage@v1
+        with:
+          path: apps/dialtone-vue3-documentation/storybook-static
+          destination: ${{ format('dialtone.dialpad.com{0}', env.BASE_DIRECTORY) }}
+          parent: false
+
+      - name: Add Message
+        uses: mshick/add-pr-comment@v1
+        env:
+          BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            ✔️ Dialtone-vue 3 Deploy Preview ready!
+            😎 Browse the preview: https://dialtone.dialpad.com/vue3/deploy-previews/pr-${{ github.event.pull_request.number }}
           allow-repeats: true

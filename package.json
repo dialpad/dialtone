@@ -8,6 +8,7 @@
     "lint": "npx nx run-many --target=lint",
     "build": "npx nx run-many --target=build",
     "start:dialtone": "npx nx run-many --target=start --projects=dialtone,dialtone-documentation",
+    "start:dialtone-vue3": "npx nx run-many --target=start --projects=dialtone,dialtone-vue3-documentation",
     "prepare": "husky install",
     "release": "./scripts/release.sh"
   },
