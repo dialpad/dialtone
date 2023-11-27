@@ -130,10 +130,10 @@ Our code is linted by:
 
 Configuration can be found in:
 
-- [stylelint.config.js](../stylelint.config.js), [.stylelintignore](../.stylelintignore)
-- [.lesshintrc.js](../.lesshintrc.js)
-- [.eslintrc.js](../.eslintrc.js), [.eslintignore](../.eslintignore)
-- [.markdownlintrc](../.markdownlintrc), [.markdownlintignore](../.markdownlintignore)
+- [stylelint.config.cjs](../stylelint.config.cjs), [.stylelintignore](../.stylelintignore)
+- [.lesshintrc.cjs](../.lesshintrc.cjs)
+- [.eslintrc.cjs](../.eslintrc.cjs), [.eslintignore](../.eslintignore)
+- [.markdownlintrc](apps/dialtone-documentation/.markdownlintrc), [.markdownlintignore](apps/dialtone-documentation/.markdownlintignore)
 
 Your code will be linted automatically on commit.
 
