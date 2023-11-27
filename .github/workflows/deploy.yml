@@ -1,7 +1,6 @@
 name: Deploy
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - alpha
@@ -18,7 +17,9 @@ on:
 env:
   HUSKY: 0
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   cache-and-install:
@@ -61,7 +62,7 @@ jobs:
       pull-requests: read
     outputs:
       dialtone: ${{ steps.filter.outputs.dialtone }}
-      dialtone-vue: ${{ steps.filter.outputs.dialtone-vue }}
+      dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -74,7 +75,7 @@ jobs:
             dialtone:
               - 'apps/dialtone-documentation/**'
               - 'packages/**'
-            dialtone-vue:
+            dialtone-vue-3:
               - 'apps/dialtone-vue3-documentation/**'
               - 'packages/**'
 
@@ -181,7 +182,7 @@ jobs:
 
   deploy-dialtone-vue-3:
     needs: [cache-and-install, check-dialpad-member, get-branch-name, filter-actions]
-    if: ${{ needs.filter-actions.outputs.dialtone-vue == 'true' }}
+    if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
@@ -248,7 +249,7 @@ jobs:
         continue-on-error: true
         run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com/vue3/{0}/', needs.get-branch-name.outputs.current_branch) }}
 
-      - name: Upload Dialtone-vue to GCP ${{ needs.get-branch-name.outputs.current_branch }}
+      - name: Upload Dialtone-vue 3 to GCP ${{ needs.get-branch-name.outputs.current_branch }}
         uses: google-github-actions/upload-cloud-storage@v1
         if: ${{ github.ref != 'refs/heads/production' }}
         with:
