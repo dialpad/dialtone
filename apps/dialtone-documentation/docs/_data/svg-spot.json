@@ -44,13 +44,13 @@
   {
     "name": "Mind",
     "file": "mind",
-    "vue": "Mind",
+    "vue": "SpotMind",
     "desc": "Mind"
   },
   {
     "name": "Empty State",
     "file": "empty",
-    "vue": "EmptyState",
+    "vue": "SpotEmpty",
     "desc": "When there is nothing to display"
   }
 ]
