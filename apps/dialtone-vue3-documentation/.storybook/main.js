@@ -4,7 +4,13 @@ const config = {
     '../@(components|directives|recipes)/**/*.stories.@(js|jsx|ts|tsx)',
     '../@(components|directives|docs|functions|recipes)/**/*.mdx',
   ],
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-a11y", 'storybook-dark-mode'],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-a11y",
+    'storybook-dark-mode',
+    "@storybook/addon-mdx-gfm"
+  ],
   framework: {
     name: "@storybook/vue3-vite",
     options: {}
