@@ -54,11 +54,11 @@ jobs:
       # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: pnpm nx run-many --target=release
+        run: pnpm nx affected --target=release
 
       - name: Deploy prerelease
         if: ${{ github.ref != 'refs/heads/production' }}
-        run: pnpm nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
+        run: pnpm nx affected --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
 
       - name: Set registry to github packages
         run: npm config set @dialpad:registry https://npm.pkg.github.com
@@ -69,13 +69,13 @@ jobs:
       # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Deploy production to github packages
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: pnpm nx run-many --target=release
+        run: pnpm nx affected --target=release
 
       - name: Deploy ${{ steps.branch.outputs.BRANCH }} to github packages
         if: ${{ github.ref != 'refs/heads/production' }}
-        run: pnpm nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
+        run: pnpm nx affected --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
 
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm nx run-many --target=release-github
+        run: pnpm nx affected --target=release-github
