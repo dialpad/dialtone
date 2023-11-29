@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { DtEmojiPicker } from '@dialpad/dialtone-vue';
+import { DtEmojiPicker } from '@dialpad/dialtone-vue/emoji';
 import { ref } from 'vue';
 
 const skinTone = ref('Default');

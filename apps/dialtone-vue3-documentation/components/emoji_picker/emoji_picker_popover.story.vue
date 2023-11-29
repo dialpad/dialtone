@@ -38,7 +38,8 @@
 </template>
 
 <script setup>
-import { DtEmojiPicker, DtButton, DtIcon, DtPopover } from '@dialpad/dialtone-vue';
+import { DtButton, DtIcon, DtPopover } from '@dialpad/dialtone-vue';
+import { DtEmojiPicker } from '@dialpad/dialtone-vue/emoji';
 import { ref } from 'vue';
 
 const skinTone = ref('Default');

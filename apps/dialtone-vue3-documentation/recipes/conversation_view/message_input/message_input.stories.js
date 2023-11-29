@@ -1,6 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { DtRecipeMessageInput, NOTICE_KINDS } from '@dialpad/dialtone-vue';
+import { NOTICE_KINDS } from '@dialpad/dialtone-vue';
+import { DtRecipeMessageInput } from '@dialpad/dialtone-vue/message_input';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 
 /*

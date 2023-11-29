@@ -16,8 +16,7 @@
 </template>
 
 <script>
-// Temporary solution while we move this to a shared library
-import { DtRichTextEditor } from '../../../../packages/dialtone-vue3/components/rich_text_editor';
+import { DtRichTextEditor } from '@dialpad/dialtone-vue/message_input';
 
 export default {
   name: 'DtRichTextEditorDefault',

@@ -1,11 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-// Temporary solution while we move this to a shared library
 import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from '../../../../packages/dialtone-vue3/components/rich_text_editor';
+} from '@dialpad/dialtone-vue/message_input';
 
 import DtRichTextEditorDefaultTemplate from './rich_text_editor_default.story.vue';
 

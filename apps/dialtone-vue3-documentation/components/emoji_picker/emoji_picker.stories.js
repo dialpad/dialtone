@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { DtEmojiPicker } from '@dialpad/dialtone-vue';
+import { DtEmojiPicker } from '@dialpad/dialtone-vue/emoji';
 import DtEmojiPickerDefaultTemplate from './emoji_picker_default.story.vue';
 import DtEmojiPickerWithPopoverTemplate from './emoji_picker_popover.story.vue';
 
