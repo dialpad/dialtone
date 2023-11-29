@@ -16,39 +16,6 @@
         "parallel": false
       }
     },
-    "build-docs": {
-      "executor": "nx:run-script",
-      "dependsOn": [
-        {
-          "projects": [
-            "dialtone",
-            "dialtone-icons"
-          ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "outputs": [],
-      "options": {
-        "script": "storybook:build",
-        "parallel": false
-      }
-    },
-    "start": {
-      "executor": "nx:run-script",
-      "outputs": [],
-      "dependsOn": [
-        {
-          "projects": ["dialtone-icons"],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "options": {
-        "script": "start",
-        "parallel": true
-      }
-    },
     "release-local": {
       "executor": "nx:run-commands",
       "outputs": [],
@@ -75,6 +42,13 @@
     },
     "test": {
       "executor": "nx:run-script",
+      "dependsOn": [
+        {
+          "projects": [ "dialtone-icons" ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
       "options": {
         "script": "test",
         "parallel": true
