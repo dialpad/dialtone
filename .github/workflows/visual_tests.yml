@@ -2,25 +2,36 @@ name: Visual Tests
 
 on:
   push:
-    branches: staging
-    paths:
-      - 'apps/dialtone-vue3-documentation'
-      - 'packages/dialtone'
-      - 'packages/dialtone-icons'
-      - 'packages/dialtone-tokens'
-      - 'packages/dialtone-vue3'
+    branches: [ staging ]
   pull_request:
     types: [ labeled, synchronize, opened ]
-    paths:
-      - 'apps/dialtone-vue3-documentation'
-      - 'packages/dialtone'
-      - 'packages/dialtone-icons'
-      - 'packages/dialtone-tokens'
-      - 'packages/dialtone-vue3'
 
 jobs:
+  filter-actions:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Filter actions by path
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dialtone-vue-3:
+              - 'apps/dialtone-vue3-documentation'
+              - 'packages/dialtone'
+              - 'packages/dialtone-icons'
+              - 'packages/dialtone-tokens'
+              - 'packages/dialtone-vue3'
+
   prompt_for_label:
-    if: (github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready'))
+    needs: filter-actions
+    if: (needs.filter-actions.outputs.dialtone-vue-3 && (github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready')))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v6
@@ -29,7 +40,8 @@ jobs:
             throw "Please add either the visual-test-ready or no-visual-test label to this PR depending on whether you want to run visual tests or not. It is recommended to run visual tests if your PR changes any UI.";
 
   test:
-    if: contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'
+    needs: filter-actions
+    if: (needs.filter-actions.outputs.dialtone-vue-3 && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'))
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
