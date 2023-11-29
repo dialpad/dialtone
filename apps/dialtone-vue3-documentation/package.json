@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "Dialtone Vue library documentation site",
   "scripts": {
-    "build:documentation:functions": "npx typedoc --plugin typedoc-plugin-markdown",
     "lint:staged": "markdownlint --fix",
     "lint": "markdownlint '**/*.mdx'",
     "start": "STORYBOOK_ENV=development storybook dev -p 9010",
     "clean": "rm -rf ./storybook-static",
-    "build": "npm run build:documentation:functions && npm run clean && STORYBOOK_ENV=production storybook build && touch ./storybook-static/.nojekyll",
+    "build": "npm run clean && STORYBOOK_ENV=production storybook build && touch ./storybook-static/.nojekyll",
     "build:docs-only": "STORYBOOK_ENV=production && build:documentation:functions && storybook build --docs",
     "test": "test-storybook --url http://localhost:9010/"
   },
@@ -119,7 +118,11 @@
     }
   ],
   "engineStrict": true,
-  "homepage": "https://dialtone.dialpad.com/vue",
+  "engines": {
+    "node": ">= 14.17"
+  },
+  "type": "module",
+  "homepage": "https://dialtone.dialpad.com/vue3",
   "keywords": [
     "Dialpad",
     "Dialtone",
