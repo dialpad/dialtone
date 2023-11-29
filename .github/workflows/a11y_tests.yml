@@ -53,10 +53,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone library and documentation site
-        run: npx nx run --verbose dialtone-vue3-documentation:build
+        run: pnpm dlx nx run --verbose dialtone-vue3-documentation:build
 
       - name: Start storybook and run a11y tests
         run: |
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server apps/dialtone-vue3-documentation/storybook-static --port 9010 --silent" \
-            "npx wait-on tcp:9010 && npx nx run --verbose dialtone-vue3-documentation:test"
+          pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "pnpm dlx http-server apps/dialtone-vue3-documentation/storybook-static --port 9010 --silent" \
+            "pnpm dlx wait-on tcp:9010 && pnpm dlx nx run --verbose dialtone-vue3-documentation:test"

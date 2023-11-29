@@ -41,7 +41,7 @@ jobs:
       - name: Set npm token
         run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
 
-      # note that npm run build is executed before publishing via prepublishOnly
+      # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
@@ -54,7 +54,7 @@ jobs:
 
       - name: Build external packages (android, ios)
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: npm run publish:external-packages
+        run: pnpm run publish:external-packages
         continue-on-error: true
 
       - name: Deploy production - Gradle
@@ -81,4 +81,4 @@ jobs:
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release --extends ./release-ci.config.cjs
+        run: pnpm dlx semantic-release --extends ./release-ci.config.cjs

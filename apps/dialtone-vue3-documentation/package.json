@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Dialtone Vue library documentation site",
   "scripts": {
-    "lint:staged": "markdownlint --fix",
+    "lint:fix": "pnpm run lint --fix",
     "lint": "markdownlint '**/*.mdx'",
     "start": "STORYBOOK_ENV=development storybook dev -p 9010",
     "clean": "rm -rf ./storybook-static",
-    "build": "npm run clean && STORYBOOK_ENV=production storybook build && touch ./storybook-static/.nojekyll",
+    "build": "pnpm run clean && STORYBOOK_ENV=production storybook build && touch ./storybook-static/.nojekyll",
     "build:docs-only": "STORYBOOK_ENV=production && build:documentation:functions && storybook build --docs",
     "test": "test-storybook --url http://localhost:9010/"
   },

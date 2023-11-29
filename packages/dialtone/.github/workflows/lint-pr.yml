@@ -30,14 +30,14 @@ jobs:
           echo "correct format: <type>(<scope>): <subject>"
           echo "example: feat: add modal component"
           echo "Please amend your commit message (git commit --amend) if commitlint reports an error and push using: git push --force-with-lease"
-          git show -s --format=%B HEAD^2 | npx commitlint --verbose
+          git show -s --format=%B HEAD^2 | pnpm dlx commitlint --verbose
 
       - name: Lint pull request title
         run: |
           echo "The PR's title should adhere to the commit message convention."
           echo "correct format: <type>(<scope>): <subject>"
           echo "example: feat: add modal component"
-          npx commitlint --verbose << EOF
+          pnpm dlx commitlint --verbose << EOF
           ${{ github.event.pull_request.title }}
           EOF
 
@@ -55,4 +55,4 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint
+        run: pnpm run lint

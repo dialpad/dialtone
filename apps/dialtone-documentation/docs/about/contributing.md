@@ -70,8 +70,8 @@ If you need to add an icon into Dialtone, here’s how you would go about doing 
      a “label” file would be IconLabel. An “international-calling-alt” file would be IconInternationalCallingAlt.
    - **Desc:** This is a description about the icon and where it is used.
 
-4. Verify your changes have been updated on the website by running `npm run start` and navigating to `localhost:4000`.
-   If you would like to verify your final output svg file run `npm run build` and look in the `./lib/dist/svg` folder
+4. Verify your changes have been updated on the website by running `pnpm run start` and navigating to `localhost:4000`.
+   If you would like to verify your final output svg file run `pnpm run build` and look in the `./lib/dist/svg` folder
 5. Commit and push your branch to Dialtone.
 6. Open a pull request.
 7. Once approved it can be merged into staging and will go out in the next dialtone release.

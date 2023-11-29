@@ -43,4 +43,4 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run unit tests
-        run: npx nx run dialtone-vue3:test
+        run: pnpm dlx nx run dialtone-vue3:test

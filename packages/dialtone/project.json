@@ -14,7 +14,7 @@
         }
       ],
       "options": {
-        "command": "npx semantic-release-plus --no-ci --extends ./packages/dialtone/release-local.config.cjs",
+        "command": "pnpm dlx semantic-release-plus --no-ci --extends ./packages/dialtone/release-local.config.cjs",
         "parallel": false
       }
     },
@@ -48,7 +48,7 @@
         }
       ],
       "options": {
-        "command": "npx semantic-release-plus --extends ./packages/dialtone/release-ci.config.cjs",
+        "command": "pnpm dlx semantic-release-plus --extends ./packages/dialtone/release-ci.config.cjs",
         "parallel": false
       }
     },

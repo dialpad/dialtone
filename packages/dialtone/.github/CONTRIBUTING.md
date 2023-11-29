@@ -137,8 +137,8 @@ Configuration can be found in:
 
 Your code will be linted automatically on commit.
 
-- **Lint manually:** `npm run lint`
-- **With autofix:** `npm run lint:fix`
+- **Lint manually:** `pnpm run lint`
+- **With autofix:** `pnpm run lint:fix`
 
 Note that we use lesshint only for the utilities folder and stylelint for everything else. Due to some unsupported syntax limitations we cannot use stylelint on our utilities folder.
 
@@ -147,7 +147,7 @@ Note that we use lesshint only for the utilities folder and stylelint for everyt
 Here are some important directories to know within the Dialtone repository
 
 - `lib/build`: All source code and assets for the Dialtone library.
-- `lib/dist`: The compiled bundle will be output here upon `npm run build`.
+- `lib/dist`: The compiled bundle will be output here upon `pnpm run build`.
 - `lib/build/fonts`: Fonts we wish to bundle with Dialtone (woff2 format).
 - `lib/build/less`: LESS files defining our styles. they are processed and transpiled to CSS on build.
 - `lib/build/svg`: SVGs used for icons and spot illustrations. See [adding icons](https://dialpad.design/about/contributing.html#adding-icons-and-illustrations) for instructions on how to add icons into Dialtone.

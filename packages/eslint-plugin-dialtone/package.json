@@ -38,6 +38,7 @@
   "main": "./lib/index.js",
   "exports": "./lib/index.js",
   "scripts": {
+    "lint:fix": "pnpm run lint --fix",
     "lint": "eslint .",
     "test": "mocha tests --recursive"
   },
