@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { DtCheckbox } from '@dialpad/dialtone-vue';
+import { DtCheckbox } from '../checkbox';
 
 export default {
   name: 'CheckboxesDecorator',

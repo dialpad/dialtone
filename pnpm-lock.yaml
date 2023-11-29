@@ -639,38 +639,38 @@ importers:
         specifier: workspace:^
         version: link:../dialtone-icons
       '@tiptap/core':
-        specifier: ^2.1.12
-        version: 2.1.12(@tiptap/pm@2.1.12)
+        specifier: 2.0.3
+        version: 2.0.3(@tiptap/pm@2.1.12)
       '@tiptap/extension-code-block':
         specifier: ^2.0.3
-        version: 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)
+        version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
       '@tiptap/extension-document':
         specifier: ^2.0.3
-        version: 2.1.12(@tiptap/core@2.1.12)
+        version: 2.1.12(@tiptap/core@2.0.3)
       '@tiptap/extension-hard-break':
         specifier: ^2.0.3
-        version: 2.1.12(@tiptap/core@2.1.12)
+        version: 2.1.12(@tiptap/core@2.0.3)
       '@tiptap/extension-mention':
         specifier: ^2.1.11
-        version: 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(@tiptap/suggestion@2.1.12)
+        version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(@tiptap/suggestion@2.1.12)
       '@tiptap/extension-paragraph':
         specifier: ^2.0.3
-        version: 2.1.12(@tiptap/core@2.1.12)
+        version: 2.1.12(@tiptap/core@2.0.3)
       '@tiptap/extension-placeholder':
         specifier: ^2.0.3
-        version: 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)
+        version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
       '@tiptap/extension-text':
         specifier: ^2.0.3
-        version: 2.1.12(@tiptap/core@2.1.12)
+        version: 2.1.12(@tiptap/core@2.0.3)
       '@tiptap/pm':
         specifier: ^2.0.3
         version: 2.1.12
       '@tiptap/suggestion':
         specifier: ^2.1.4
-        version: 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)
+        version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
       '@tiptap/vue-3':
         specifier: ^2.0.3
-        version: 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(vue@3.3.8)
+        version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(vue@3.3.8)
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -699,12 +699,6 @@ importers:
       '@dialpad/semantic-release-changelog-json':
         specifier: ^1.0.0
         version: 1.0.0(semantic-release@21.1.2)
-      '@percy/cli':
-        specifier: ^1.27.4
-        version: 1.27.4(typescript@5.2.2)
-      '@percy/storybook':
-        specifier: ^5.0.0
-        version: 5.0.0(typescript@5.2.2)
       '@rollup/plugin-node-resolve':
         specifier: ^15.2.3
         version: 15.2.3
@@ -714,45 +708,6 @@ importers:
       '@semantic-release/git':
         specifier: ^10.0.1
         version: 10.0.1(semantic-release@21.1.2)
-      '@storybook/addon-a11y':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-actions':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-docs':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-essentials':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-links':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-viewport':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/blocks':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/manager-api':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/test-runner':
-        specifier: ^0.15.1
-        version: 0.15.2(@types/node@20.5.1)(ts-node@10.9.1)
-      '@storybook/testing-library':
-        specifier: ^0.2.2
-        version: 0.2.2
-      '@storybook/theming':
-        specifier: ^7.5.3
-        version: 7.5.3(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/vue3':
-        specifier: ^7.5.3
-        version: 7.5.3(@vue/compiler-core@3.3.8)(vue@3.3.8)
-      '@storybook/vue3-vite':
-        specifier: ^7.5.3
-        version: 7.5.3(@vue/compiler-core@3.3.8)(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)(vite@5.0.2)(vue@3.3.8)
       '@vitejs/plugin-vue':
         specifier: ^4.5.0
         version: 4.5.0(vite@5.0.2)(vue@3.3.8)
@@ -792,9 +747,6 @@ importers:
       eslint-plugin-promise:
         specifier: ^6.1.1
         version: 6.1.1(eslint@8.44.0)
-      eslint-plugin-storybook:
-        specifier: ^0.6.15
-        version: 0.6.15(eslint@8.44.0)(typescript@5.2.2)
       eslint-plugin-vitest:
         specifier: ^0.2.6
         version: 0.2.8(eslint@8.44.0)(typescript@5.2.2)(vite@5.0.2)(vitest@0.33.0)
@@ -846,12 +798,6 @@ importers:
       source-map-support:
         specifier: ^0.5.21
         version: 0.5.21
-      storybook:
-        specifier: ^7.5.3
-        version: 7.5.3
-      storybook-dark-mode:
-        specifier: ^3.0.1
-        version: 3.0.1(react-dom@18.2.0)(react@18.2.0)
       string-hash:
         specifier: ^1.1.3
         version: 1.1.3
@@ -7422,12 +7368,32 @@ packages:
       '@testing-library/dom': 9.3.3
     dev: true
 
+  /@tiptap/core@2.0.3(@tiptap/pm@2.1.12):
+    resolution: {integrity: sha512-jLyVIWAdjjlNzrsRhSE2lVL/7N8228/1R1QtaVU85UlMIwHFAcdzhD8FeiKkqxpTnGpaDVaTy7VNEtEgaYdCyA==}
+    peerDependencies:
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/pm': 2.1.12
+    dev: false
+
   /@tiptap/core@2.1.12(@tiptap/pm@2.1.12):
     resolution: {integrity: sha512-ZGc3xrBJA9KY8kln5AYTj8y+GDrKxi7u95xIl2eccrqTY5CQeRu6HRNM1yT4mAjuSaG9jmazyjGRlQuhyxCKxQ==}
     peerDependencies:
       '@tiptap/pm': ^2.0.0
     dependencies:
       '@tiptap/pm': 2.1.12
+    dev: true
+
+  /@tiptap/extension-bubble-menu@2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12):
+    resolution: {integrity: sha512-gAGi21EQ4wvLmT7klgariAc2Hf+cIjaNU2NWze3ut6Ku9gUo5ZLqj1t9SKHmNf4d5JG63O8GxpErqpA7lHlRtw==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+      tippy.js: 6.3.7
+    dev: false
 
   /@tiptap/extension-bubble-menu@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12):
     resolution: {integrity: sha512-gAGi21EQ4wvLmT7klgariAc2Hf+cIjaNU2NWze3ut6Ku9gUo5ZLqj1t9SKHmNf4d5JG63O8GxpErqpA7lHlRtw==}
@@ -7438,6 +7404,17 @@ packages:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/pm': 2.1.12
       tippy.js: 6.3.7
+    dev: true
+
+  /@tiptap/extension-code-block@2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12):
+    resolution: {integrity: sha512-RXtSYCVsnk8D+K80uNZShClfZjvv1EgO42JlXLVGWQdIgaNyuOv/6I/Jdf+ZzhnpsBnHufW+6TJjwP5vJPSPHA==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+    dev: false
 
   /@tiptap/extension-code-block@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12):
     resolution: {integrity: sha512-RXtSYCVsnk8D+K80uNZShClfZjvv1EgO42JlXLVGWQdIgaNyuOv/6I/Jdf+ZzhnpsBnHufW+6TJjwP5vJPSPHA==}
@@ -7447,6 +7424,15 @@ packages:
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/pm': 2.1.12
+    dev: true
+
+  /@tiptap/extension-document@2.1.12(@tiptap/core@2.0.3):
+    resolution: {integrity: sha512-0QNfAkCcFlB9O8cUNSwTSIQMV9TmoEhfEaLz/GvbjwEq4skXK3bU+OQX7Ih07waCDVXIGAZ7YAZogbvrn/WbOw==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+    dev: false
 
   /@tiptap/extension-document@2.1.12(@tiptap/core@2.1.12):
     resolution: {integrity: sha512-0QNfAkCcFlB9O8cUNSwTSIQMV9TmoEhfEaLz/GvbjwEq4skXK3bU+OQX7Ih07waCDVXIGAZ7YAZogbvrn/WbOw==}
@@ -7454,6 +7440,18 @@ packages:
       '@tiptap/core': ^2.0.0
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
+    dev: true
+
+  /@tiptap/extension-floating-menu@2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12):
+    resolution: {integrity: sha512-uo0ydCJNg6AWwLT6cMUJYVChfvw2PY9ZfvKRhh9YJlGfM02jS4RUG/bJBts6R37f+a5FsOvAVwg8EvqPlNND1A==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+      tippy.js: 6.3.7
+    dev: false
 
   /@tiptap/extension-floating-menu@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12):
     resolution: {integrity: sha512-uo0ydCJNg6AWwLT6cMUJYVChfvw2PY9ZfvKRhh9YJlGfM02jS4RUG/bJBts6R37f+a5FsOvAVwg8EvqPlNND1A==}
@@ -7464,6 +7462,15 @@ packages:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/pm': 2.1.12
       tippy.js: 6.3.7
+    dev: true
+
+  /@tiptap/extension-hard-break@2.1.12(@tiptap/core@2.0.3):
+    resolution: {integrity: sha512-nqKcAYGEOafg9D+2cy1E4gHNGuL12LerVa0eS2SQOb+PT8vSel9OTKU1RyZldsWSQJ5rq/w4uIjmLnrSR2w6Yw==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+    dev: false
 
   /@tiptap/extension-hard-break@2.1.12(@tiptap/core@2.1.12):
     resolution: {integrity: sha512-nqKcAYGEOafg9D+2cy1E4gHNGuL12LerVa0eS2SQOb+PT8vSel9OTKU1RyZldsWSQJ5rq/w4uIjmLnrSR2w6Yw==}
@@ -7471,6 +7478,19 @@ packages:
       '@tiptap/core': ^2.0.0
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
+    dev: true
+
+  /@tiptap/extension-mention@2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(@tiptap/suggestion@2.1.12):
+    resolution: {integrity: sha512-Nc8wFlyPp+/48IpOFPk2O3hYsF465wizcM3aihMvZM96Ahic7dvv9yVptyOfoOwgpExl2FIn1QPjRDXF60VAUg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+      '@tiptap/suggestion': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+      '@tiptap/suggestion': 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
+    dev: false
 
   /@tiptap/extension-mention@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(@tiptap/suggestion@2.1.12):
     resolution: {integrity: sha512-Nc8wFlyPp+/48IpOFPk2O3hYsF465wizcM3aihMvZM96Ahic7dvv9yVptyOfoOwgpExl2FIn1QPjRDXF60VAUg==}
@@ -7482,6 +7502,15 @@ packages:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/pm': 2.1.12
       '@tiptap/suggestion': 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)
+    dev: true
+
+  /@tiptap/extension-paragraph@2.1.12(@tiptap/core@2.0.3):
+    resolution: {integrity: sha512-hoH/uWPX+KKnNAZagudlsrr4Xu57nusGekkJWBcrb5MCDE91BS+DN2xifuhwXiTHxnwOMVFjluc0bPzQbkArsw==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+    dev: false
 
   /@tiptap/extension-paragraph@2.1.12(@tiptap/core@2.1.12):
     resolution: {integrity: sha512-hoH/uWPX+KKnNAZagudlsrr4Xu57nusGekkJWBcrb5MCDE91BS+DN2xifuhwXiTHxnwOMVFjluc0bPzQbkArsw==}
@@ -7489,6 +7518,17 @@ packages:
       '@tiptap/core': ^2.0.0
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
+    dev: true
+
+  /@tiptap/extension-placeholder@2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12):
+    resolution: {integrity: sha512-K52o7B1zkP4vaVy3z4ZwHn+tQy6KlXtedj1skLg+796ImwH2GYS5z6MFOTfKzBO2hLncUzLco/s0C5PLCD6SDw==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+    dev: false
 
   /@tiptap/extension-placeholder@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12):
     resolution: {integrity: sha512-K52o7B1zkP4vaVy3z4ZwHn+tQy6KlXtedj1skLg+796ImwH2GYS5z6MFOTfKzBO2hLncUzLco/s0C5PLCD6SDw==}
@@ -7498,6 +7538,15 @@ packages:
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/pm': 2.1.12
+    dev: true
+
+  /@tiptap/extension-text@2.1.12(@tiptap/core@2.0.3):
+    resolution: {integrity: sha512-rCNUd505p/PXwU9Jgxo4ZJv4A3cIBAyAqlx/dtcY6cjztCQuXJhuQILPhjGhBTOLEEL4kW2wQtqzCmb7O8i2jg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+    dev: false
 
   /@tiptap/extension-text@2.1.12(@tiptap/core@2.1.12):
     resolution: {integrity: sha512-rCNUd505p/PXwU9Jgxo4ZJv4A3cIBAyAqlx/dtcY6cjztCQuXJhuQILPhjGhBTOLEEL4kW2wQtqzCmb7O8i2jg==}
@@ -7505,6 +7554,7 @@ packages:
       '@tiptap/core': ^2.0.0
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
+    dev: true
 
   /@tiptap/pm@2.1.12:
     resolution: {integrity: sha512-Q3MXXQABG4CZBesSp82yV84uhJh/W0Gag6KPm2HRWPimSFELM09Z9/5WK9RItAYE0aLhe4Krnyiczn9AAa1tQQ==}
@@ -7528,6 +7578,16 @@ packages:
       prosemirror-transform: 1.8.0
       prosemirror-view: 1.32.3
 
+  /@tiptap/suggestion@2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12):
+    resolution: {integrity: sha512-rhlLWwVkOodBGRMK0mAmE34l2a+BqM2Y7q1ViuQRBhs/6sZ8d83O4hARHKVwqT5stY4i1l7d7PoemV3uAGI6+g==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+    dev: false
+
   /@tiptap/suggestion@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12):
     resolution: {integrity: sha512-rhlLWwVkOodBGRMK0mAmE34l2a+BqM2Y7q1ViuQRBhs/6sZ8d83O4hARHKVwqT5stY4i1l7d7PoemV3uAGI6+g==}
     peerDependencies:
@@ -7536,6 +7596,21 @@ packages:
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/pm': 2.1.12
+    dev: true
+
+  /@tiptap/vue-3@2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(vue@3.3.8):
+    resolution: {integrity: sha512-yAcfmWw/9jtIUbhb0uGQVI9NoPYgHRasX2sAGWnm9Al+0aJktgmQ3mLCifXfXfjyEbeMF0p2L6Ul8tO7eho7aQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+      vue: ^3.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/extension-bubble-menu': 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
+      '@tiptap/extension-floating-menu': 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+      vue: 3.3.8(typescript@5.2.2)
+    dev: false
 
   /@tiptap/vue-3@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(vue@3.3.8):
     resolution: {integrity: sha512-yAcfmWw/9jtIUbhb0uGQVI9NoPYgHRasX2sAGWnm9Al+0aJktgmQ3mLCifXfXfjyEbeMF0p2L6Ul8tO7eho7aQ==}
@@ -7549,6 +7624,7 @@ packages:
       '@tiptap/extension-floating-menu': 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)
       '@tiptap/pm': 2.1.12
       vue: 3.3.8(typescript@5.2.2)
+    dev: true
 
   /@tokenizer/token@0.3.0:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
