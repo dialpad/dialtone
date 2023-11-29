@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { DtRecipeMessageInput } from '@dialpad/dialtone-vue';
+import { DtRecipeMessageInput } from '@dialpad/dialtone-vue/message_input';
 
 export default {
   name: 'DtRecipeMessageInputDefault',

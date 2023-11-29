@@ -1,8 +1,8 @@
 module.exports = {
   '*.{js, cjs, vue}': [
-    'npm run lint-staged:code',
+    'pnpm run lint-staged:code',
   ],
   '*.{less, css}': [
-    'npm run lint-staged:library',
+    'pnpm run lint-staged:library',
   ],
 };

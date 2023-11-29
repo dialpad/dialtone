@@ -138,7 +138,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone library and documentation site
-        run: npx nx run --verbose dialtone-documentation:build
+        run: pnpm nx run --verbose dialtone-documentation:build
 
       - id: auth
         name: Authenticate to Google Cloud
@@ -217,7 +217,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone Vue library and docsite
-        run: npx nx run --verbose dialtone-vue3-documentation:build
+        run: pnpm nx run --verbose dialtone-vue3-documentation:build
 
       - id: auth
         name: Authenticate to Google Cloud

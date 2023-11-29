@@ -4,21 +4,19 @@
   "description": "Design system monorepo",
   "main": "index.js",
   "scripts": {
-    "test": "npx nx run-many --target=test",
-    "lint": "npx nx run-many --target=lint",
-    "build": "npx nx run-many --target=build",
-    "start:dialtone": "npx nx run-many --target=start --projects=dialtone,dialtone-documentation",
-    "start:dialtone-vue3": "npx nx run-many --target=start --projects=dialtone,dialtone-vue3-documentation",
+    "test": "pnpm nx affected --target=test",
+    "lint": "pnpm nx affected --target=lint:fix",
+    "build": "pnpm nx affected --target=build",
+    "start:dialtone": "pnpm nx run-many --target=start --projects=dialtone,dialtone-documentation",
+    "start:dialtone-vue3": "pnpm nx run-many --target=start --projects=dialtone,dialtone-vue3-documentation",
     "prepare": "husky install",
     "release": "./scripts/release.sh"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@commitlint/cli": "^18.2.0",
+    "@commitlint/cli": "^18.4.3",
     "husky": "^8.0.3",
-    "nx": "^17.0.3",
+    "nx": "^17.1.3",
     "semantic-release-npm-github-publish": "^1.5.4",
     "semantic-release-plus": "^20.0.0"
   },
@@ -26,5 +24,21 @@
     "@dialpad/dialtone>postcss-preset-env": "^7.0.0",
     "@dialpad/dialtone>stylelint": "^15.10.1"
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "./scripts/commit-msg"
+  },
+  "homepage": "https://dialtone.dialpad.com",
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "Dialtone Vue",
+    "Dialtone Icons",
+    "Dialtone Tokens",
+    "Design System",
+    "Components",
+    "Component Library"
+  ],
+  "license": "MIT",
   "repository": "git@github.com:dialpad/dialtone.git"
 }

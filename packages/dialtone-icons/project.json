@@ -5,7 +5,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx semantic-release-plus --no-ci --extends ./packages/dialtone-icons/release-local.config.cjs",
+        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-icons/release-local.config.cjs",
         "parallel": false
       }
     },
@@ -21,7 +21,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs",
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs",
         "parallel": false
       }
     }

@@ -4,7 +4,8 @@ import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from '@dialpad/dialtone-vue';
+} from '@dialpad/dialtone-vue/message_input';
+
 import DtRichTextEditorDefaultTemplate from './rich_text_editor_default.story.vue';
 
 import mentionSuggestion from './mention_suggestion';

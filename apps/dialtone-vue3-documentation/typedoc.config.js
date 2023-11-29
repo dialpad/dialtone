@@ -1,5 +1,6 @@
 // You can see all available options here https://typedoc.org/guides/options/ or via `pnpm typedoc --help`
 
+/** @type {import('typedoc').TypeDocOptions} */
 export default {
   entryPoints: ['common/*.js'],
 
@@ -8,7 +9,5 @@ export default {
   out: 'functions/generated',
   githubPages: false,
   name: 'Date and Time',
-  hideInPageTOC: true,
-  hideBreadcrumbs: true,
   entryPointStrategy: 'expand',
 };

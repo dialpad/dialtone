@@ -1,30 +1,20 @@
-name: Accessibility Tests
+name: Unit Tests
 
 on:
   pull_request:
+  push:
     branches:
       - staging
     paths:
-      - 'packages/**'
-      - 'apps/dialtone-vue3-documentation'
-
-env:
-  HUSKY: 0
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+      - 'packages/dialtone-vue3'
 
 jobs:
-  a11y_tests:
+  dialtone-vue-3:
     runs-on: ubuntu-latest
     steps:
       - name: Check out branch
         uses: actions/checkout@v4
-        with:
-          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
 
-        # This hangs on node 18 for some reason.
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -52,11 +42,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Dialtone library and documentation site
-        run: pnpm nx run --verbose dialtone-vue3-documentation:build
-
-      - name: Start storybook and run a11y tests
-        run: |
-          pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "pnpm dlx http-server apps/dialtone-vue3-documentation/storybook-static --port 9010 --silent" \
-            "pnpm dlx wait-on tcp:9010 && pnpm nx run --verbose dialtone-vue3-documentation:test:a11y"
+      - name: Run unit tests
+        run: pnpm nx run dialtone-vue3:test

@@ -86,7 +86,7 @@ DialtoneTokens.dtColorPurple200
 
 1. clone repo
 2. `npm install`
-3. `npm run build` to build tokens. Built tokens will be output to the dist folder.
+3. `pnpm run build` to build tokens. Built tokens will be output to the dist folder.
 
 - `base.json` Contains tokens exported from figma.
 - `tokens/tokens.json` Contains tokens in style dictionary format (generated from `base.json`).

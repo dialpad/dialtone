@@ -16,44 +16,11 @@
         "parallel": false
       }
     },
-    "build-docs": {
-      "executor": "nx:run-script",
-      "dependsOn": [
-        {
-          "projects": [
-            "dialtone",
-            "dialtone-icons"
-          ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "outputs": [],
-      "options": {
-        "script": "storybook:build",
-        "parallel": false
-      }
-    },
-    "start": {
-      "executor": "nx:run-script",
-      "outputs": [],
-      "dependsOn": [
-        {
-          "projects": ["dialtone-icons"],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "options": {
-        "script": "start",
-        "parallel": true
-      }
-    },
     "release-local": {
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx semantic-release-plus --no-ci --extends ./packages/dialtone-vue3/release-local.config.cjs",
+        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-vue3/release-local.config.cjs",
         "parallel": false
       }
     },
@@ -69,8 +36,22 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx semantic-release-plus --extends ./packages/dialtone-vue3/release-ci.config.cjs",
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-vue3/release-ci.config.cjs",
         "parallel": false
+      }
+    },
+    "test": {
+      "executor": "nx:run-script",
+      "dependsOn": [
+        {
+          "projects": [ "dialtone-icons" ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "options": {
+        "script": "test",
+        "parallel": true
       }
     }
   }

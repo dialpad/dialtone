@@ -75,13 +75,13 @@ Any new components or updates to existing components require the following:
   - Minimum contrast ratio.
 - Changes must be made for Vue 2 as well as Vue 3, `staging` and `staging-vue3` branches respectively
 - Unit tests are passing locally.
-  - `npm run test`
+  - `pnpm run test`
 - Linters are passing locally.
-  - `npm run lint`
+  - `pnpm run lint`
 - Library builds locally.
-  - `npm run build`
+  - `pnpm run build`
 - Documentation builds locally.
-  - `npm run storybook:build`
+  - `pnpm run storybook:build`
 
 ### How to Submit
 
@@ -290,7 +290,7 @@ change via a blog post on [dialpad.design](https://dialpad.design/about/whats-ne
 - **`.storybook`:** Build time configuration files for storybook. If you need to edit the storybook webpack config for example, you would do so here.
 - **`components`:** Everything related to a specific component is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
 - **`css`:** We store any global less/css in here. Right now it is only used for Dialtone overrides.
-- **`dist`:** The Dialtone Vue library is output here upon `npm run build`.
+- **`dist`:** The Dialtone Vue library is output here upon `pnpm run build`.
 - **`docs`:** Any storybook documentation not directly related to a component.
 - **`generator-dialtone-vue`:** - Yeoman generator config.
 - **`recipes`:** Everything related to recipe components is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
@@ -338,7 +338,7 @@ See the [storybook](../storybook) folder within our repo.
 Storybook does not support documentation of functions by default, however we have a custom solution to this problem.
 [TypeDoc](https://typedoc.org/) can generate documentation for functions as markdown files, and then we can include
 these markdown files in our storybook mdx files. See the functions folder in the root of the project. To generate
-the function documentation run `npm run build:documentation:functions`. This will not happen automatically when you are
+the function documentation run `pnpm run build:documentation:functions`. This will not happen automatically when you are
 running the server locally so you must do this manually to get function documentation to update locally. Currently all
 (non-test) javascript files within the common folder will have md generated for them. The files will then
 be output in `functions/generated/modules` folder and you can then include them in your MDX files within the "functions"
@@ -350,12 +350,12 @@ We use ESLint to promote best practices throughout our codebase.
 ESLint will check any of our javascript or vue code for styling or syntax errors.
 The configuration can be found in [.eslintrc.cjs](../eslintrc.cjs).
 Any changes code changes you make will be automatically linted upon commit (configuration in [lint-staged.config.cjs](../lint-staged.config.cjs)).
-You can manually run ESLint via `npm run lint`.
+You can manually run ESLint via `pnpm run lint`.
 
 ### Yeoman
 
 We use Yeoman as our generator to scaffold new components.
-This means if you are creating a new component you can simply just run `npx yo dialtone-vue` and enter the name of your component.
+This means if you are creating a new component you can simply just run `pnpm yo dialtone-vue` and enter the name of your component.
 All files for your component (component, tests, storybook files) will be generated with starter templates and proper naming conventions.
 For more details on how to use yeoman, see [the docs](https://vue.dialpad.design/?path=/story/docs-component-driven-development-yeoman-generator--page).
 

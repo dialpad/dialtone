@@ -4,7 +4,7 @@
   "description": "Dialtone icon library",
   "scripts": {
     "build": "gulp",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "files": [
     "dist"

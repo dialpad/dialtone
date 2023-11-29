@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeMessageInput from './message_input.vue';
-import { beforeEach, describe } from '@/node_modules/vitest/dist/index';
 
 // Wrappers
 let wrapper;
@@ -72,7 +71,7 @@ const _mountWrapper = () => {
   });
 };
 
-describe('DtMessage tests', () => {
+describe('DtRecipeMessageInput tests', () => {
   // Test Setup
   beforeAll(() => {
     global.Range.prototype.getClientRects = getClientRectsMock;
