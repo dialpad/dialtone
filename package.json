@@ -14,9 +14,9 @@
   },
   "author": "",
   "devDependencies": {
-    "@commitlint/cli": "^18.2.0",
+    "@commitlint/cli": "^18.4.3",
     "husky": "^8.0.3",
-    "nx": "^17.0.3",
+    "nx": "^17.1.3",
     "semantic-release-npm-github-publish": "^1.5.4",
     "semantic-release-plus": "^20.0.0"
   },
