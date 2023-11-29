@@ -23,15 +23,15 @@ jobs:
         with:
           filters: |
             dialtone-vue-3:
-              - 'apps/dialtone-vue3-documentation'
-              - 'packages/dialtone'
-              - 'packages/dialtone-icons'
-              - 'packages/dialtone-tokens'
-              - 'packages/dialtone-vue3'
+              - 'apps/dialtone-vue3-documentation/**'
+              - 'packages/dialtone/**'
+              - 'packages/dialtone-icons/**'
+              - 'packages/dialtone-tokens/**'
+              - 'packages/dialtone-vue3/**'
 
   prompt_for_label:
     needs: filter-actions
-    if: (needs.filter-actions.outputs.dialtone-vue-3 && (github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready')))
+    if: (needs.filter-actions.outputs.dialtone-vue-3 == 'true' && (github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready')))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v6
@@ -41,7 +41,7 @@ jobs:
 
   test:
     needs: filter-actions
-    if: (needs.filter-actions.outputs.dialtone-vue-3 && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'))
+    if: (needs.filter-actions.outputs.dialtone-vue-3 == 'true' && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'))
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
