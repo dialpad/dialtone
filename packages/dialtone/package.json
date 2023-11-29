@@ -49,7 +49,6 @@
     "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
     "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.js"
   },
-  "repository": "git@github.com:dialpad/dialtone.git",
   "type": "module",
   "scripts": {
     "build": "gulp --gulpfile ./gulpfile.cjs",

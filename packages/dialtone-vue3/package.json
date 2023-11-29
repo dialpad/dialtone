@@ -181,7 +181,7 @@
       "style": "./dist/style.css"
     }
   },
-  "homepage": "https://dialtone.dialpad.com/vue",
+  "homepage": "https://dialtone.dialpad.com/vue3",
   "keywords": [
     "Dialpad",
     "Dialtone",
@@ -191,6 +191,5 @@
     "Component Library",
     "Vue"
   ],
-  "license": "MIT",
-  "repository": "git@github.com:dialpad/dialtone.git"
+  "license": "MIT"
 }
