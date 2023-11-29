@@ -11,6 +11,7 @@ export * from './components/combobox';
 export * from './components/collapsible';
 export * from './components/description_list';
 export * from './components/dropdown';
+export * from './components/emoji_picker';
 export * from './components/image_viewer';
 export * from './components/input';
 export * from './components/input_group';
