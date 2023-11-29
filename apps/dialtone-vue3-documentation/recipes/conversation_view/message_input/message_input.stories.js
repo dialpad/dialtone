@@ -70,6 +70,12 @@ export const argTypesData = {
     },
   },
 
+  onSelectedEmoji: {
+    table: {
+      disable: true,
+    },
+  },
+
   onCancel: {
     table: {
       disable: true,
@@ -92,11 +98,30 @@ export const argsData = {
   maxHeight: '40vh',
   characterLimitWarningMessage: 'You have reached the character limit.',
   isEdit: false,
+  emojiPickerProps: {
+    searchNoResultsLabel: 'No results',
+    searchResultsLabel: 'Search results',
+    searchPlaceholderLabel: 'Search...',
+    skinSelectorButtonTooltipLabel: 'Change default skin tone',
+    tabSetLabels: [
+      'Most recently used',
+      'Smileys and people',
+      'Nature',
+      'Food',
+      'Activity',
+      'Travel',
+      'Objects',
+      'Symbols',
+      'Flags',
+    ],
+    skinTone: 'Default',
+  },
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),
   onInput: action('input'),
   onSelectMedia: action('select-media'),
+  onSelectedEmoji: action('selected-emoji'),
   onAddMedia: action('add-media'),
   onNoticeClose: action('notice-close'),
   onSkinTone: action('skin-tone'),
