@@ -59,4 +59,4 @@ jobs:
         run: |
           pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "pnpm dlx http-server apps/dialtone-vue3-documentation/storybook-static --port 9010 --silent" \
-            "pnpm dlx wait-on tcp:9010 && pnpm nx run --verbose dialtone-vue3-documentation:test"
+            "pnpm dlx wait-on tcp:9010 && pnpm nx run --verbose dialtone-vue3-documentation:test:a11y"

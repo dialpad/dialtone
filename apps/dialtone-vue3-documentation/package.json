@@ -9,7 +9,8 @@
     "clean": "rm -rf ./storybook-static",
     "build": "pnpm run clean && STORYBOOK_ENV=production storybook build && touch ./storybook-static/.nojekyll",
     "build:docs-only": "STORYBOOK_ENV=production && build:documentation:functions && storybook build --docs",
-    "test": "test-storybook --url http://localhost:9010/"
+    "test:a11y": "test-storybook --url http://localhost:9010/",
+    "test:visual": "pnpm exec percy storybook --disable-cache --config ../../percy.config.cjs --verbose ./storybook-static"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",

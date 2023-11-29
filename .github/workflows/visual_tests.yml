@@ -86,4 +86,4 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: pnpm --filter @dialpad/dialtone-vue3-documentation exec percy storybook --disable-cache --config percy.config.cjs --verbose ./storybook-static
+        run: pnpm nx run --verbose dialtone-vue3-documentation:test:visual
