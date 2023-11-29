@@ -1,3 +1,10 @@
+# [8.22.0](https://github.com/dialpad/dialtone/compare/dialtone/v8.21.5...dialtone/v8.22.0) (2023-11-29)
+
+
+### Features
+
+* release component styles ([#28](https://github.com/dialpad/dialtone/issues/28)) ([36bd126](https://github.com/dialpad/dialtone/commit/36bd126796f03ce0a9b7c94d42cc1e4188aabe3a))
+
 ## [8.21.5](https://github.com/dialpad/dialtone/compare/dialtone/v8.21.4...dialtone/v8.21.5) (2023-11-27)
 
 
