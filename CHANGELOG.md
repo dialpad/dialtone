@@ -1,3 +1,17 @@
+# [2.106.0](https://github.com/dialpad/dialtone-vue/compare/v2.105.1...v2.106.0) (2023-11-29)
+
+
+### Bug Fixes
+
+* **Collapsible:** use correct transition timing variable ([#1304](https://github.com/dialpad/dialtone-vue/issues/1304)) ([53a3f3f](https://github.com/dialpad/dialtone-vue/commit/53a3f3f89b6aee85512abca68bcda46024d6206a))
+* npm run lint not detecting errors ([#1316](https://github.com/dialpad/dialtone-vue/issues/1316)) ([9eb678f](https://github.com/dialpad/dialtone-vue/commit/9eb678fef65a5756bc94b9b39c1346fdb87f7006))
+* updates necessary for feed-item-row product implementation ([#1318](https://github.com/dialpad/dialtone-vue/issues/1318)) ([c33a77f](https://github.com/dialpad/dialtone-vue/commit/c33a77f54f4ea2b8daedb135b35468b7cccfe10c))
+
+
+### Features
+
+* **Emoji Picker:** emoji picker component ([#1307](https://github.com/dialpad/dialtone-vue/issues/1307)) ([e601f7b](https://github.com/dialpad/dialtone-vue/commit/e601f7b8c1e3e87892bf5c59afc0f12a07391a05))
+
 ## [2.105.1](https://github.com/dialpad/dialtone-vue/compare/v2.105.0...v2.105.1) (2023-11-17)
 
 
