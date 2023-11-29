@@ -1,4 +1,4 @@
-// You can see all available options here https://typedoc.org/guides/options/ or via `pnpm dlx typedoc --help`
+// You can see all available options here https://typedoc.org/guides/options/ or via `pnpm typedoc --help`
 
 export default {
   entryPoints: ['common/*.js'],

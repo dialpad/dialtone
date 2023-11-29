@@ -7,7 +7,7 @@
     "build:main": "vite build",
     "build:typescript": "vue-tsc",
     "build:documentation": "node scripts/build-docs.js",
-    "build:documentation:functions": "pnpm dlx typedoc --plugin typedoc-plugin-markdown",
+    "build:documentation:functions": "pnpm typedoc --plugin typedoc-plugin-markdown",
     "clean": "rm -rf ./dist",
     "install:all": "pnpm install && pnpm install --prefix generator-dialtone-vue",
     "lint:fix": "pnpm run lint --fix",

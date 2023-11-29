@@ -32,7 +32,7 @@ Dialtone 8 provides a migration script helper that should do most of the search 
 ### Usage
 
 ```bash
-pnpm dlx dialtone-migration-helper [options]
+pnpm dialtone-migration-helper [options]
 ```
 
 The script will prompt what do you want to migrate:
@@ -71,7 +71,7 @@ for the piece of UI you wish to change
 - **Navigate to the desired project folder**
 
 ```bash
-pnpm dlx dialtone-migration-helper --include "file1" "file2"
+pnpm dialtone-migration-helper --include "file1" "file2"
 ```
 
 ### 3. Verify the migration script changed the files as expected

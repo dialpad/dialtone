@@ -355,7 +355,7 @@ You can manually run ESLint via `pnpm run lint`.
 ### Yeoman
 
 We use Yeoman as our generator to scaffold new components.
-This means if you are creating a new component you can simply just run `pnpm dlx yo dialtone-vue` and enter the name of your component.
+This means if you are creating a new component you can simply just run `pnpm yo dialtone-vue` and enter the name of your component.
 All files for your component (component, tests, storybook files) will be generated with starter templates and proper naming conventions.
 For more details on how to use yeoman, see [the docs](https://vue.dialpad.design/?path=/story/docs-component-driven-development-yeoman-generator--page).
 

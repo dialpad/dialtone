@@ -4,11 +4,11 @@
   "description": "Design system monorepo",
   "main": "index.js",
   "scripts": {
-    "test": "pnpm dlx nx run-many --target=test",
-    "lint": "pnpm dlx nx run-many --target=lint:fix",
-    "build": "pnpm dlx nx run-many --target=build",
-    "start:dialtone": "pnpm dlx nx run-many --target=start --projects=dialtone,dialtone-documentation",
-    "start:dialtone-vue3": "pnpm dlx nx run-many --target=start --projects=dialtone,dialtone-vue3-documentation",
+    "test": "pnpm nx run-many --target=test",
+    "lint": "pnpm nx run-many --target=lint:fix",
+    "build": "pnpm nx run-many --target=build",
+    "start:dialtone": "pnpm nx run-many --target=start --projects=dialtone,dialtone-documentation",
+    "start:dialtone-vue3": "pnpm nx run-many --target=start --projects=dialtone,dialtone-vue3-documentation",
     "prepare": "husky install",
     "release": "./scripts/release.sh"
   },

@@ -80,10 +80,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone library and documentation site
-        run: pnpm dlx nx run --verbose dialtone-vue3-documentation:build
+        run: pnpm nx run --verbose dialtone-vue3-documentation:build
 
       - name: Run Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: pnpm dlx percy storybook --disable-cache --config percy.config.cjs --verbose apps/dialtone-vue3-documentation/storybook-static
+        run: pnpm --filter @dialpad/dialtone-vue3-documentation exec percy storybook --disable-cache --config percy.config.cjs --verbose ./storybook-static

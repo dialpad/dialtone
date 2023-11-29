@@ -81,4 +81,4 @@ jobs:
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm dlx semantic-release --extends ./release-ci.config.cjs
+        run: pnpm semantic-release --extends ./release-ci.config.cjs

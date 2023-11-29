@@ -76,13 +76,13 @@ You can run commands like `build`, `test`, `start` from
 the root of the project with:
 
 ```bash
-pnpm dlx nx <command> <package/app>
+pnpm nx <command> <package/app>
 ```
 
 Example:
 
 ```bash
-pnpm dlx nx build dialtone-documentation
+pnpm nx build dialtone-documentation
 ```
 
 ### Releasing
