@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - staging
+    paths:
+      - 'packages/dialtone-vue3'
 
 jobs:
   dialtone-vue-3:
