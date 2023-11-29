@@ -58,14 +58,16 @@
 
     <template #bottom>
       <div
-        class="d-d-flex d-fw-wrap"
+        class="dt-feed-item-row__reactions"
         data-qa="dt-feed-item-row--reactions"
       >
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
       </div>
-      <!-- @slot Slot for threading row component -->
-      <slot name="threading" />
+      <div class="dt-feed-item-row__threading">
+        <!-- @slot Slot for threading row component -->
+        <slot name="threading" />
+      </div>
     </template>
 
     <!-- Action menu -->
@@ -93,6 +95,7 @@ import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_
 import { DtAvatar } from '@/components/avatar';
 import { DtLazyShow } from '@/components/lazy_show';
 import { DtListItem } from '@/components/list_item';
+import Modal from '../../../common/mixins/modal';
 
 export default {
   name: 'DtRecipeFeedItemRow',
@@ -102,6 +105,8 @@ export default {
     DtLazyShow,
     DtListItem,
   },
+
+  mixins: [Modal],
 
   inheritAttrs: false,
 
@@ -206,6 +211,14 @@ export default {
         mouseleave: () => this.setHover(false),
         focusin: () => this.setFocus(true),
         focusout: () => this.setFocus(false),
+        keydown: event => {
+          switch (event.code) {
+            case 'Tab':
+              this.trapFocus(event);
+              break;
+          }
+          this.$emit('keydown', event);
+        },
       };
     },
 
@@ -214,7 +227,7 @@ export default {
         'd-w100p',
         'd-box-border',
         'd-ps-relative',
-        'd-px8',
+        'd-px16',
         { 'd-bgc-secondary-opaque': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
         FEED_ROW_STATE_BACKGROUND_COLOR[this.state],
         'dt-feed-item-row',
@@ -225,6 +238,10 @@ export default {
   },
 
   methods: {
+    trapFocus (e) {
+      this.focusTrappedTabPress(e);
+    },
+
     setFocus (bool) {
       this.$emit('focus', bool);
     },
@@ -247,12 +264,27 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.dt-feed-item-row :deep(.dt-item-layout--left) {
+  align-self: baseline;
+}
+
 .dt-feed-item-row {
   transition-duration: 2s !important;
 
+  &__reactions {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__threading {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+  }
+
   &__left-time {
     color: var(--dt-color-foreground-tertiary);
-    padding-top: var(--dt-space-350);
     line-height: var(--dt-font-line-height-400);
     font-size: var(--dt-font-size-100);
     font-weight: var(--dt-font-weight-normal);

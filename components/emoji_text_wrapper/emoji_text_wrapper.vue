@@ -56,7 +56,7 @@ export default {
       return split.map((item) => {
         if (replaceList.includes(item)) {
           return this.$createElement(DtEmoji, {
-            attrs: { class: 'd-mx4 d-d-inline-block' },
+            attrs: { class: 'd-d-inline-block' },
             props: { code: item, size: this.size, ...this.$attrs },
           });
         }

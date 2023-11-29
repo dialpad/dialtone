@@ -4,7 +4,6 @@
       v-for="reaction in reactions"
       :key="reaction.unicodeOutput"
       :reaction="reaction"
-      class="d-mr4 d-mb4"
     >
       <dt-tooltip
         class="d-d-inline-block"
@@ -39,6 +38,8 @@
         </template>
       </dt-tooltip>
     </span>
+    <!-- @slot Slot for emoji picker component, including the anchor. -->
+    <slot name="picker" />
   </span>
 </template>
 
@@ -97,12 +98,13 @@ export default {
 .dt-emoji-row {
   display: flex;
   flex-wrap: wrap;
+  gap: var(--dt-space-300);
 
   &__reaction {
     padding: var(--dt-space-300) var(--dt-space-400); // 4px 8px
     gap: var(--dt-space-300);
     border-radius: var(--dt-size-radius-500);
-    margin-bottom: 0;
+    border-width: var(--dt-size-border-100);
     transition-delay: 0s;
     transition-duration: var(--td50);
     transition-property: all;
@@ -111,12 +113,17 @@ export default {
     color: var(--dt-color-foreground-secondary);
     background-color: var(--dt-color-surface-moderate-opaque);
 
-    &:hover, &:focus{
+    &.dt-emoji-row__picker {
+      padding: var(--dt-space-200) var(--dt-space-350); // 2px 6px
+    }
+
+    &:hover, &:focus-visible {
       border-color: hsla(var(--dt-color-black-600-hsl)/100%)!important;
     }
 
     &--selected {
       color: var(--dt-color-link-primary);
+      border-width: var(--dt-size-border-150);
       background-color: var(--dt-color-purple-100) !important;
       border-color: var(--dt-color-brand-purple) !important;
       &:hover {
@@ -124,5 +131,6 @@ export default {
       }
     }
   }
+
 }
 </style>
