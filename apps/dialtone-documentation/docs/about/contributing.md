@@ -70,10 +70,30 @@ If you need to add an icon into Dialtone, here’s how you would go about doing 
      a “label” file would be IconLabel. An “international-calling-alt” file would be IconInternationalCallingAlt.
    - **Desc:** This is a description about the icon and where it is used.
 
-4. Verify your changes have been updated on the website by running `pnpm run start` and navigating to `localhost:4000`.
-   If you would like to verify your final output svg file run `pnpm run build` and look in the `./lib/dist/svg` folder
-5. Commit and push your branch to Dialtone.
-6. Open a pull request.
-7. Once approved it can be merged into staging and will go out in the next dialtone release.
+4. Import the Illustrations into the `BaseIcon.vue` file:
+
+   ```yaml
+      {
+         "import SpotIlluVueName from '@dialpad/dialtone/lib/dist/vue/spot/SpotIlluVueName.vue';"
+      }
+   ```
+
+5. Also add them in the export / components list:
+
+   ```yaml
+      {
+      "export default {
+         components: {
+            SpotIlluVueName,
+         }
+      }"
+      }
+   ```
+
+6. Verify your changes have been updated on the website by running `npm run start` and navigating to `localhost:4000`.
+   If you would like to verify your final output svg file run `npm run build` and look in the `./lib/dist/svg` folder
+7. Commit and push your branch to Dialtone.
+8. Open a pull request.
+9. Once approved it can be merged into staging and will go out in the next dialtone release.
 
 [dialtone-icons]: https://github.com/dialpad/dialtone-icons "Dialtone Icons"
