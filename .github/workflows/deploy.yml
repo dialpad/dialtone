@@ -22,40 +22,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  cache-and-install:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
   filter-actions:
     runs-on: ubuntu-latest
     outputs:
@@ -97,14 +63,16 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
-  deploy-dialtone:
-    needs: [cache-and-install, check-dialpad-member, get-branch-name, filter-actions]
+  deploy:
+    needs: [check-dialpad-member, get-branch-name, filter-actions]
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
     env:
       VUEPRESS_BASE_URL: ${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ env.VUEPRESS_BASE_URL }}
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ env.VUEPRESS_BASE_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -136,8 +104,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Dialtone library and documentation site
-        run: pnpm nx run --verbose dialtone-documentation:build
+      - name: Build documentation sites
+        run: pnpm nx run-many --verbose --target=build --projects=dialtone-documentation,dialtone-vue3-documentation
 
       - id: auth
         name: Authenticate to Google Cloud
@@ -149,106 +117,41 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
 
-      - name: Clean up bucket
+      - name: Clean up bucket Dialtone
         if: ${{ github.ref == 'refs/heads/production' }}
         run: >
           gcloud storage ls gs://dialtone.dialpad.com |
-          grep -v -E '
-          /alpha/|
-          /beta/|
-          /legacy/|
-          /next/|
-          /deploy-previews/|
-          /vue/|
-          /vue3/|
-          /staging/
-          ' |
+          grep -v -E '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/vue/|/vue3/|/staging/' |
           gcloud storage rm --recursive --read-paths-from-stdin
 
-      - name: Clean up bucket ${{ needs.get-branch-name.outputs.current_branch }} directory
+      - name: Clean up bucket Dialtone Vue 3
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: >
+          gcloud storage ls gs://dialtone.dialpad.com/vue3 |
+          grep -v -E '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/staging/' |
+          gcloud storage rm --recursive --read-paths-from-stdin
+
+
+      - name: Clean up Dialtone ${{ needs.get-branch-name.outputs.current_branch }}
         if: ${{ github.ref != 'refs/heads/production' }}
         continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com/{0}/', needs.get-branch-name.outputs.current_branch) }}
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
+
+      - name: Clean up Dialtone Vue 3 ${{ needs.get-branch-name.outputs.current_branch }}
+        if: ${{ github.ref != 'refs/heads/production' }}
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
 
       - name: Upload Dialtone to GCP
         uses: google-github-actions/upload-cloud-storage@v1
         with:
           path: apps/dialtone-documentation/docs/.vuepress/dist
-          destination: ${{ format('dialtone.dialpad.com/{0}', github.ref == 'refs/heads/production' && '' || needs.get-branch-name.outputs.current_branch) }}
+          destination: ${{ env.DIALTONE_BUCKET_DIRECTORY }}
           parent: false
 
-  deploy-dialtone-vue-3:
-    needs: [cache-and-install, check-dialpad-member, get-branch-name, filter-actions]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build Dialtone Vue library and docsite
-        run: pnpm nx run --verbose dialtone-vue3-documentation:build
-
-      - id: auth
-        name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
-          service_account: ${{ secrets.DIALTONE_GCP_SA }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
-
-      - name: Clean up bucket
-        if: ${{ github.ref == 'refs/heads/production' }}
-        continue-on-error: true
-        run: >
-          gcloud storage ls gs://dialtone.dialpad.com/vue3 |
-          grep -v -E '/alpha/|
-          /beta/|
-          /legacy/|
-          /next/|
-          /deploy-previews/|
-          /staging/' |
-          gcloud storage rm --recursive --read-paths-from-stdin
-
-      - name: Clean up bucket ${{ needs.get-branch-name.outputs.current_branch }} directory
-        if: ${{ github.ref != 'refs/heads/production' }}
-        continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com/vue3/{0}/', needs.get-branch-name.outputs.current_branch) }}
-
-      - name: Upload Dialtone-vue 3 to GCP ${{ needs.get-branch-name.outputs.current_branch }}
+      - name: Upload Dialtone-vue 3 to GCP
         uses: google-github-actions/upload-cloud-storage@v1
-        if: ${{ github.ref != 'refs/heads/production' }}
         with:
           path: apps/dialtone-vue3-documentation/storybook-static
-          destination: ${{ format('dialtone.dialpad.com/vue3/{0}', github.ref == 'refs/heads/production' && '' || needs.get-branch-name.outputs.current_branch) }}
+          destination: ${{ env.DIALTONE_VUE_3_BUCKET_DIRECTORY }}
           parent: false
