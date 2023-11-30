@@ -48,8 +48,8 @@ jobs:
       pull-requests: write
     env:
       VUEPRESS_BASE_URL: /deploy-previews/pr-${{ github.event.pull_request.number }}/
-      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ env.VUEPRESS_BASE_URL }}
-      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ env.VUEPRESS_BASE_URL }}
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}/
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3/deploy-previews/pr-${{ github.event.pull_request.number }}/
     steps:
       - uses: actions/checkout@v4
         with:

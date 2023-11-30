@@ -72,8 +72,8 @@ jobs:
       id-token: 'write'
     env:
       VUEPRESS_BASE_URL: ${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
-      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ env.VUEPRESS_BASE_URL }}
-      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ env.VUEPRESS_BASE_URL }}
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
