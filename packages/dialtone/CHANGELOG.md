@@ -1,3 +1,17 @@
+## [8.22.1](https://github.com/dialpad/dialtone/compare/dialtone/v8.22.0...dialtone/v8.22.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* skeleton paragraph styles ([#30](https://github.com/dialpad/dialtone/issues/30)) ([3ff3f65](https://github.com/dialpad/dialtone/commit/3ff3f65d47993aa0303833cfd0ea507526ccc290))
+
+## [8.22.1](https://github.com/dialpad/dialtone/compare/dialtone/v8.22.0...dialtone/v8.22.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* skeleton paragraph styles ([#30](https://github.com/dialpad/dialtone/issues/30)) ([3ff3f65](https://github.com/dialpad/dialtone/commit/3ff3f65d47993aa0303833cfd0ea507526ccc290))
+
 # [8.22.0](https://github.com/dialpad/dialtone/compare/dialtone/v8.21.5...dialtone/v8.22.0) (2023-11-29)
 
 
