@@ -48,7 +48,8 @@ jobs:
       pull-requests: write
     env:
       VUEPRESS_BASE_URL: /deploy-previews/pr-${{github.event.pull_request.number}}/
-      VUE_3_BASE_DIRECTORY: /vue3/deploy-previews/pr-${{github.event.pull_request.number}}/
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3/deploy-previews/pr-${{ github.event.pull_request.number }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -102,19 +103,19 @@ jobs:
       - name: Clean up bucket Dialtone
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com/deploy-previews/pr-{0}', github.event.pull_request.number) }}
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
 
       - name: Clean up bucket Dialtone Vue 3
         if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
         continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com/vue3/deploy-previews/pr-{0}', github.event.pull_request.number) }}
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
 
       - name: Upload Dialtone to GCP
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         uses: google-github-actions/upload-cloud-storage@v1
         with:
           path: apps/dialtone-documentation/docs/.vuepress/dist
-          destination: ${{ format('dialtone.dialpad.com{0}', env.VUEPRESS_BASE_URL) }}
+          destination: ${{ env.DIALTONE_BUCKET_DIRECTORY }}
           parent: false
 
       - name: Add Dialtone ready message
@@ -126,7 +127,7 @@ jobs:
         with:
           message: |
             ✔️ Dialtone Deploy Preview ready!
-            😎 Browse the preview: https://dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}
+            😎 Browse the preview: https://${{ env.DIALTONE_BUCKET_DIRECTORY }}
           allow-repeats: true
 
       - name: Upload Dialtone-vue 3 to GCP
@@ -134,7 +135,7 @@ jobs:
         uses: google-github-actions/upload-cloud-storage@v1
         with:
           path: apps/dialtone-vue3-documentation/storybook-static
-          destination: ${{ format('dialtone.dialpad.com{0}', env.BASE_DIRECTORY) }}
+          destination: ${{ env.DIALTONE_VUE_3_BUCKET_DIRECTORY }}
           parent: false
 
       - name: Add Dialtone Vue 3 ready message
@@ -146,5 +147,5 @@ jobs:
         with:
           message: |
             ✔️ Dialtone-vue 3 Deploy Preview ready!
-            😎 Browse the preview: https://dialtone.dialpad.com/vue3/deploy-previews/pr-${{ github.event.pull_request.number }}
+            😎 Browse the preview: https://${{ env.DIALTONE_VUE_3_BUCKET_DIRECTORY }}
           allow-repeats: true
