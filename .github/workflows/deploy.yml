@@ -99,7 +99,6 @@ jobs:
 
   deploy-dialtone:
     needs: [cache-and-install, check-dialpad-member, get-branch-name, filter-actions]
-    if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
@@ -180,7 +179,6 @@ jobs:
 
   deploy-dialtone-vue-3:
     needs: [cache-and-install, check-dialpad-member, get-branch-name, filter-actions]
-    if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
