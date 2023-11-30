@@ -82,11 +82,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone library and documentation site
-        if: ${{ needs.filter-actions.output.dialtone == 'true' }}
+        if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         run: pnpm nx run --verbose dialtone-documentation:build
 
       - name: Build Dialtone-vue 3 library and documentation site
-        if: ${{ needs.filter-actions.output.dialtone-vue-3 == 'true' }}
+        if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
         run: pnpm nx run --verbose dialtone-vue3-documentation:build
 
       - id: auth
@@ -100,17 +100,17 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
 
       - name: Clean up bucket Dialtone
-        if: ${{ needs.filter-actions.output.dialtone == 'true' }}
+        if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         continue-on-error: true
         run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com/deploy-previews/pr-{0}', github.event.pull_request.number) }}
 
       - name: Clean up bucket Dialtone Vue 3
-        if: ${{ needs.filter-actions.output.dialtone-vue-3 == 'true' }}
+        if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
         continue-on-error: true
         run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com/vue3/deploy-previews/pr-{0}', github.event.pull_request.number) }}
 
       - name: Upload Dialtone to GCP
-        if: ${{ needs.filter-actions.output.dialtone == 'true' }}
+        if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         uses: google-github-actions/upload-cloud-storage@v1
         with:
           path: apps/dialtone-documentation/docs/.vuepress/dist
@@ -118,7 +118,7 @@ jobs:
           parent: false
 
       - name: Add Dialtone ready message
-        if: ${{ needs.filter-actions.output.dialtone == 'true' }}
+        if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         uses: mshick/add-pr-comment@v1
         env:
           BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -130,7 +130,7 @@ jobs:
           allow-repeats: true
 
       - name: Upload Dialtone-vue 3 to GCP
-        if: ${{ needs.filter-actions.output.dialtone-vue-3 == 'true' }}
+        if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
         uses: google-github-actions/upload-cloud-storage@v1
         with:
           path: apps/dialtone-vue3-documentation/storybook-static
@@ -138,7 +138,7 @@ jobs:
           parent: false
 
       - name: Add Dialtone Vue 3 ready message
-        if: ${{ needs.filter-actions.output.dialtone-vue-3 == 'true' }}
+        if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
         uses: mshick/add-pr-comment@v1
         env:
           BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
