@@ -45,12 +45,18 @@
     "name": "Mind",
     "file": "mind",
     "vue": "SpotMind",
-    "desc": "Mind"
+    "desc": "Used to prompt user engagement."
   },
   {
-    "name": "Empty State",
-    "file": "empty",
-    "vue": "SpotEmpty",
-    "desc": "When there is nothing to display"
+    "name": "Blank Space",
+    "file": "blank-space",
+    "vue": "SpotBlankSpace",
+    "desc": "When there is nothing to display."
+  },
+  {
+    "name": "Vector Vortex",
+    "file": "vector-vortex",
+    "vue": "SpotVectorVortex",
+    "desc": "Suggests layers of security to information."
   }
 ]

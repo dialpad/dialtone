@@ -13,9 +13,6 @@
             :is="vue"
           />
         </div>
-        <p class="dialtone-icon-card__subtitle d-tt-capitalize">
-          {{ name }}
-        </p>
       </header>
       <footer :class="cardFooterClass">
         <div class="dialtone-icon-card__content">
@@ -54,7 +51,8 @@ import SpotFileUpload from '@dialpad/dialtone/lib/dist/vue/spot/SpotFileUpload.v
 import SpotBrowserTableGraph from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserTableGraph.vue';
 import SpotBrowserListCallout from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserListCallout.vue';
 import SpotMind from '@dialpad/dialtone/lib/dist/vue/spot/SpotMind.vue';
-import SpotEmpty from '@dialpad/dialtone/lib/dist/vue/spot/SpotEmpty.vue';
+import SpotBlankSpace from '@dialpad/dialtone/lib/dist/vue/spot/SpotBlankSpace.vue';
+import SpotVectorVortex from '@dialpad/dialtone/lib/dist/vue/spot/SpotVectorVortex.vue';
 
 export const ICON_KINDS = ['spot'];
 
@@ -69,7 +67,8 @@ export default {
     SpotBrowserTableGraph,
     SpotBrowserListCallout,
     SpotMind,
-    SpotEmpty,
+    SpotBlankSpace,
+    SpotVectorVortex,
   },
 
   props: {
