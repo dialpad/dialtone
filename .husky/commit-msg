@@ -5,5 +5,5 @@ branch="$(git rev-parse --abbrev-ref HEAD)"
 
 # Validate commit message in production and staging branches
 if [[ "$branch" = "staging" || "$branch" = "production" ]]; then
-  pnpm dlx --no-install commitlint --edit "$1"
+  pnpm exec commitlint --edit "$1"
 fi
