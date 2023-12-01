@@ -23,7 +23,6 @@ jobs:
         with:
           filters: |
             dialtone-vue-3:
-              - 'apps/dialtone-vue3-documentation/**'
               - 'packages/dialtone/**'
               - 'packages/dialtone-icons/**'
               - 'packages/dialtone-tokens/**'

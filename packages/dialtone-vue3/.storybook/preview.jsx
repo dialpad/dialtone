@@ -1,5 +1,5 @@
 import '../css/dialtone-globals.less';
-import '@dialpad/dialtone/lib/dist/css/dialtone.min.css';
+import '@dialpad/dialtone/lib/dist/css/dialtone.css';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { setup } from '@storybook/vue3';
 import React from 'react';

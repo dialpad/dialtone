@@ -5,8 +5,7 @@ on:
     branches:
       - staging
     paths:
-      - 'packages/**'
-      - 'apps/dialtone-vue3-documentation'
+      - 'packages/dialtone-vue3'
 
 env:
   HUSKY: 0
@@ -58,5 +57,5 @@ jobs:
       - name: Start storybook and run a11y tests
         run: |
           pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "pnpm dlx http-server apps/dialtone-vue3-documentation/storybook-static --port 9010 --silent" \
+            "pnpm dlx http-server packages/dialtone-vue3/storybook-static --port 9010 --silent" \
             "pnpm dlx wait-on tcp:9010 && pnpm nx run --verbose dialtone-vue3-documentation:test:a11y"

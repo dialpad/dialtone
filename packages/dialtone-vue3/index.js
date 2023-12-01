@@ -41,7 +41,6 @@ export * from './components/root_layout';
 export * from './components/icon';
 export * from './components/stack';
 export * from './components/scroller';
-export * from './components/emoji_picker';
 export * from './components/datepicker';
 export * from './components/item_layout';
 
@@ -64,7 +63,6 @@ export * from './recipes/conversation_view/feed_pill';
 export * from './recipes/conversation_view/time_pill';
 export * from './recipes/conversation_view/emoji_row';
 export * from './recipes/conversation_view/attachment_carousel';
-export * from './recipes/conversation_view/message_input';
 export * from './recipes/leftbar/callbox';
 
 // Mixins

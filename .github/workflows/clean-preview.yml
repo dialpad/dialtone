@@ -26,7 +26,6 @@ jobs:
               - 'apps/dialtone-documentation/**'
               - 'packages/**'
             dialtone-vue-3:
-              - 'apps/dialtone-vue3-documentation/**'
               - 'packages/**'
 
 

@@ -4,7 +4,7 @@
 set -e
 
 # get latest dialtone version number
-dialtoneLatest=$(npm show @dialpad/dialtone version)
+dialtoneLatest=$(pnpm show @dialpad/dialtone version)
 
 # get current dialtone version in package.json, remove the ^
 dialtoneDevVersion=$(node -p "require('./package.json').devDependencies['@dialpad/dialtone']" | sed 's/\^//')
@@ -29,7 +29,7 @@ if [ ${dialtoneDevVersion%.*} != $peerDialtoneVersion ]; then
   fi
 fi
 
-echo "Enter the name of the version segment you are incrementing (Ex/ major, minor, patch. 'npm version --help' in your cli for all possible args): "
+echo "Enter the name of the version segment you are incrementing (Ex/ major, minor, patch. 'pnpm version --help' in your cli for all possible args): "
 read npmVersionArgument
 branch=$(git branch --show-current)
 

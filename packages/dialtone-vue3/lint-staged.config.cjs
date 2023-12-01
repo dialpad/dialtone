@@ -1,8 +1,8 @@
 module.exports = {
   '*.{js,vue}': [
-    'npm run lint-staged:code',
+    'pnpm run lint-staged:code',
   ],
   '*.mdx': [
-    'npm run lint-staged:docs',
+    'pnpm run lint-staged:docs',
   ],
 };
