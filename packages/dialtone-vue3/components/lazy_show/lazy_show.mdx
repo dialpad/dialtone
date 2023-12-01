@@ -1,0 +1,44 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as LazyShowStories from './lazy_show.stories';
+
+<Meta of={LazyShowStories}/>
+
+# Lazy Show
+
+<Subtitle>
+  Lazy Show is an utility component that prevents its children from being rendered until the first time it is shown.
+</Subtitle>
+
+## Basic Usage
+
+`DtLazyShow` is essentially a combination of a `v-if` and `v-show`. This means that the child slot will not be
+rendered/initialized until the first time `show` is `true`, after which the slot will stay in the DOM and be
+hidden/shown with the `v-show` directive. This is useful to prevent elements which are hidden from being rendered
+immediately, but keeping them alive when toggled later.
+
+The lazy show wraps the slot in a parent `div` in order to achieve this. It also wraps the `v-show` in a `transition`,
+so you can pass any valid Vue `transition` class to control the enter/leave transitions.
+
+### Import
+
+```jsx
+import { DtLazyShow } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-lazy-show
+  :transition="transition"
+  :show="open"
+>
+  I'm Lazy!
+</dt-lazy-show>
+```
+
+<Canvas>
+  <Story of={LazyShowStories.Default} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />

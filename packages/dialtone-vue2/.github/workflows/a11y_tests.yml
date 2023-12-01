@@ -1,0 +1,34 @@
+name: Accessibility Tests
+
+on:
+  pull_request:
+    branches: [ staging, staging-vue3, vue3, production ]
+  push:
+    branches: [ staging, staging-vue3 ]
+
+jobs:
+  a11y_tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v3
+
+        # This hangs on node 18 for some reason.
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build storybook
+        run: npm run storybook:build
+
+      - name: Start storybook and run a11y tests
+        run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 9010 --silent" \
+            "npx wait-on tcp:9010 && npm run storybook:test"

@@ -1,0 +1,54 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as CodeBlockStories from './codeblock.stories';
+
+<Meta of={CodeBlockStories}/>
+
+# Codeblock
+
+<Subtitle>
+  A codeblock is a UI element intended to display a piece of code in a separate and self-contained block.
+</Subtitle>
+
+## Base Style
+
+Text passed into the component is rendered under the assumption that it's preformatted.
+
+For example, to render something like:
+
+```js
+function someFunction() {
+  return "some result";
+}
+```
+
+You'll have to do:
+
+```vue
+<dt-codeblock
+  text="function someFunction() {\n  return "some result";\n}"
+/>
+```
+
+<Canvas>
+  <Story of={CodeBlockStories.Default} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtCodeblock } from '@dialpad/dialtone-vue';
+```
+
+### Default
+
+```vue
+<dt-codeblock
+  text="some pre-formatted codeblock"
+/>
+```

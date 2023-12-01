@@ -16,6 +16,14 @@
         "parallel": false
       }
     },
+    "build-docs": {
+      "executor": "nx:run-script",
+      "outputs": [],
+      "options": {
+        "script": "storybook:build",
+        "parallel": false
+      }
+    },
     "release-local": {
       "executor": "nx:run-commands",
       "outputs": [],
