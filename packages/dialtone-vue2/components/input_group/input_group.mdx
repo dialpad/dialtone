@@ -1,0 +1,196 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as InputGroupStories from './input_group.stories';
+
+<Meta of={InputGroupStories}/>
+
+# Input Group
+
+<Subtitle>
+  Input Groups are convenience components for a grouping of related inputs. While each input within the group
+  could be independent, the `v-model` on the group provides a convenient interface for determining the current state of
+  the group.
+</Subtitle>
+
+## Base Style
+
+Input Groups are typically paired with a legend which identifies the group. If no legend is provided then it is
+expected that an `aria-label` will be given in order to provide an invisible label to screen readers. Each Input
+Group should contain one or more inputs which users can interact with.
+
+<Canvas>
+  <Story of={InputGroupStories.Default} />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story of={InputGroupStories.Variants} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Model
+
+The Vue model can have one of the following types `[String, Number, Boolean, Object]`:
+
+```js
+// default = null
+const value = 'some value';
+```
+
+The Vue model is dependant on the child component(s) implementing the provided `groupContext` and calling the provided
+`setGroupValue` method which will handle updating the provided `groupContext` and Vue model in the parent.
+
+```html
+<script>
+import {
+  DtInputMixin,
+  DtGroupableInputMixin,
+} from '@dialpad/dialtone-vue';
+
+export default {
+  name: 'MyInputElement',
+
+  mixins: [DtInputMixin, DtGroupableInputMixin],
+
+  computed: {
+    groupValue () {
+      return this.groupContext?.value;
+    },
+
+    inputListeners () {
+      return {
+        change: event => this.emitValue(event.target.value),
+      };
+    },
+  },
+
+  watch: {
+    groupValue: {
+      immediate: true,
+      handler (newGroupValue) {
+        if (this.hasGroup) {
+          // update internal value when the input group value changes
+          this.internalChecked = newGroupValue === this.value;
+        }
+      },
+    },
+  },
+
+  methods: {
+    emitValue (value) {
+      if (value !== this.groupValue) {
+        // update provided value if injected
+        this.setGroupValue(value);
+
+        this.$emit('input', value);
+      }
+    },
+  },
+};
+</script>
+```
+
+## Usage
+
+### Import
+
+```jsx
+import {
+  VALIDATION_MESSAGE_TYPES,
+  DtInputGroup
+} from '@dialpad/dialtone-vue';
+```
+
+### With Legend
+
+```html
+<dt-input-group
+  name="my-group-name"
+  legend="My Legend"
+>
+  <!-- Slotted Input Elements -->
+</dt-input-group>
+```
+
+### With Slotted Legend
+
+```html
+<dt-input-group name="my-group-name">
+  <!-- Slotted Input Elements -->
+  <template #legend>
+    With Slotted Legend
+  </template>
+</dt-input-group>
+```
+
+### With Value
+
+```html
+<dt-input-group
+  name="my-group-name"
+  legend="My Legend"
+  :value="['option1']"
+>
+  <!-- Slotted Input Elements -->
+</dt-input-group>
+```
+
+### Disabled
+
+```html
+<dt-input-group
+  name="my-group-name"
+  legend="My Legend"
+  disabled
+>
+  <!-- Slotted Input Elements -->
+</dt-input-group>
+```
+
+### With Validation Messages
+
+```html
+<dt-input-group
+  name="my-group-name"
+  legend="My Legend"
+  :messages="[{ message: 'My Success Message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+>
+  <!-- Slotted Input Elements -->
+</dt-input-group>
+```
+
+### With Validation Messages Hidden
+
+```html
+<dt-input-group
+  name="my-group-name"
+  legend="My Legend"
+  :messages="[{ message: 'My Success Message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+  :show-messages="false"
+>
+  <!-- Slotted Input Elements -->
+</dt-input-group>
+```
+
+### Extending
+
+If your input(s) require additional logic in order to be grouped then you can extend the Input Group using
+[extends](https://v3.vuejs.org/api/options-composition.html#extends) in your Vue SFC.
+
+#### Example
+
+```html
+<script>
+import { DtInputGroup } from '@dialpad/dialtone-vue';
+
+export default {
+  name: "MyComponent",
+  extends: DtInputGroup,
+  ...
+};
+</script>
+```

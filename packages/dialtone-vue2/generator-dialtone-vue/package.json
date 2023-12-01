@@ -1,0 +1,14 @@
+{
+  "name": "generator-dialtone-vue",
+  "version": "0.1.0",
+  "description": "generate boilerplate for new dialtone vue components",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^5.7.0"
+  }
+}
