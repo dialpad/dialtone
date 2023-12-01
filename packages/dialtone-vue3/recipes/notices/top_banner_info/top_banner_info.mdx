@@ -1,0 +1,51 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as TopBannerInfoStories from './top_banner_info.stories';
+
+<Meta of={TopBannerInfoStories}/>
+
+# Top Banner Info
+
+<Subtitle>
+  A top banner info is an informational ribbon that used to indicate call status.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story of={TopBannerInfoStories.Default} />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story of={TopBannerInfoStories.Variants} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeTopBannerInfo } from '@dialpad/dialtone-vue';
+```
+
+### With Green 400 Variant
+
+```vue
+<dt-recipe-top-banner-info
+  color-code="green300"
+/>
+```
+
+### With Red 100 Variant
+
+```vue
+<dt-recipe-top-banner-info
+  color-code="red100"
+/>
+```

@@ -1,0 +1,108 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as ScrollerStories from './scroller.stories';
+
+<Meta of={ScrollerStories} />
+
+# Scroller
+
+<Subtitle>
+  Blazing fast scrolling of any amount of data
+</Subtitle>
+
+On this file you will find the documentation for our current MVP functionality.
+
+If you need more information about the component, we are using a Fork of [Akryum/vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller)
+
+## Usage
+
+You need to set the size of the virtual-scroller element and the items elements (for example, with CSS).
+Unless you are using variable size mode, all items should have the same height (or width in horizontal mode)
+to prevent display glitches.
+
+If the items are objects, the scroller needs to be able to identify them.
+By default it will look for an id field on the items. This can be configured with
+the keyField prop if you are using another field name.
+
+We are exposing `scrollToItem` method to navigate to a specific item in the list.
+
+Scroller component will fire an event when it reach the top or bottom of the list, also when is in the middle.
+
+We are also exposing:
+`scrollToBottom()` (only accessible by the dynamic component)
+This function will scroll to the bottom of the scroller, this is necessary because the dynamic component has variable size.
+
+`updateItems()` This function is necessary to call when the user do some update to the list
+(add elements from the top with unshift or update some item).
+
+`updateItemsFromBottom()` This function is necessary to call when the user push some element to the array list.
+
+### Important
+
+Due the flexibility of the component IT WILL NOT UPDATE AUTOMATICALLY.
+
+You MUST use `updateItems()` when use `unshift` or update some item data.
+
+You MUST use `updateItemsFromBottom()` if you use `push` to add some element to the array list.
+
+The list item components must be reactive to the item prop being updated without
+being re-created (use computed props or watchers to properly react to props changes!).
+
+The browsers have a size limitation on DOM elements, it means that currently
+the virtual scroller can't display more than ~500k items depending on the browser.
+
+## Slots, Props & Events
+
+<Controls />
+
+### Import
+
+```jsx
+import { DtScroller } from '@dialpad/dialtone-vue';
+```
+
+### Default
+
+#### Default Scroller
+
+```html
+<dt-scroller
+ :items="items"
+ :item-size="32"
+ :scroller-height="200"
+ :scroller-width="300"
+ >
+ <template #default="{ item }">
+   <div class="user">
+     {{ item.name }}
+   </div>
+ </template>
+</dt-scroller>
+```
+
+#### Dynamic Scroller
+
+```html
+<dt-scroller
+ :items="dynamicItems"
+ :min-item-size="54"
+ :scroller-height="300"
+ :scroller-width="500"
+ :dynamic="true"
+ >
+ <template #default="{ item }">
+   <div class="avatar">
+     {{ item.id }}
+     <img
+      :key="item.avatar"
+      :src="item.avatar"
+      alt="avatar"
+      class="image"
+     >
+  </div>
+  <div class="text">
+     {{ item.message }}
+  </div>
+ </template>
+</dt-scroller>
+```

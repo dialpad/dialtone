@@ -1,0 +1,7 @@
+export { default as DtRecipeIvrNode } from './ivr_node.vue';
+export {
+  IVR_NODE_ICON_TYPES, IVR_NODE_LABELS,
+  IVR_NODE_PROMPT_MENU, IVR_NODE_PROMPT_COLLECT, IVR_NODE_PROMPT_PLAY,
+  IVR_NODE_EXPERT, IVR_NODE_GO_TO, IVR_NODE_BRANCH, IVR_NODE_TRANSFER,
+  IVR_NODE_HANGUP,
+} from './ivr_node_constants';

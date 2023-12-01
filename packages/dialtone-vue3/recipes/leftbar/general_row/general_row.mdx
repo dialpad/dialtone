@@ -1,0 +1,65 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as GeneralRowStories from './general_row.stories';
+
+<Meta of={GeneralRowStories}/>
+
+# General Row
+
+<Subtitle>
+  This component covers all the leftbar rows that are simple icons with text.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story of={GeneralRowStories.Default} />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story of={GeneralRowStories.Variants} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeGeneralRow } from '@dialpad/dialtone-vue';
+```
+
+### Channel With Unread Messages
+
+```html
+<dt-recipe-general-row
+  type="channels"
+  description="Channel name"
+  unread-count="29"
+  unread-count-tooltip="29 unread messages"
+/>
+```
+
+### Contact Center
+
+```html
+<dt-recipe-general-row
+  type="contact center"
+  description="Contact Center name"
+  color="magenta-200"
+/>
+```
+
+### Dialbot
+
+```html
+<dt-recipe-general-row
+  type="dialbot"
+  description="Dialbot"
+/>
+```
