@@ -81,8 +81,7 @@
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtIcon } from '@/components/icon';
-import { DtRecipeCallbarButton } from '@/recipes/buttons/callbar_button';
-import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button/callbar_button_constants';
+import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils from '@/common/utils';
 
 export default {

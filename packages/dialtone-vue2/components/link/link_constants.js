@@ -13,3 +13,8 @@ export const LINK_KIND_MODIFIERS = {
   muted: 'd-link--muted',
   inverted: 'd-link--inverted',
 };
+
+export default {
+  LINK_VARIANTS,
+  LINK_KIND_MODIFIERS,
+};

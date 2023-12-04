@@ -56,6 +56,7 @@
         'max-height': maxHeight,
         'max-width': maxWidth,
       }"
+      data-qa="dt-collapsible--content"
       tabindex="-1"
       appear
       v-on="$listeners"

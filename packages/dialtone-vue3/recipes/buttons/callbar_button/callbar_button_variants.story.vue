@@ -1,5 +1,3 @@
-<!-- eslint-disable max-lines -->
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
   <div class="d-stack16">
     <h3>

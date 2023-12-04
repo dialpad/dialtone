@@ -23,8 +23,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtCodeblockDefaultTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtCodeblockDefaultTemplate,
+);
 
 export const Default = {
   render: DefaultTemplate,

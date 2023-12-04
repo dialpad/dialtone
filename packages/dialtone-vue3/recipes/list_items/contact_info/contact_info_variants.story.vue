@@ -33,14 +33,14 @@
             </div>
           </div>
         </template>
-        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
         <template #subtitle>
-          <div
-            class="d-fc-red-400"
+          <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
+          <dt-link
+            kind="danger"
             @click.stop="$attrs.onMarkAsSpam"
           >
             Mark as spam
-          </div>
+          </dt-link>
         </template>
       </dt-recipe-contact-info>
     </div>
@@ -252,13 +252,14 @@
 import DtRecipeContactInfo from './contact_info.vue';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
+import { DtLink } from '@/components/link';
 
 import avatar1 from '@/common/assets/avatar1.png';
 import avatar2 from '@/common/assets/avatar2.png';
 
 export default {
   name: 'DtRecipeContactInfoVariants',
-  components: { DtButton, DtRecipeContactInfo, DtIcon },
+  components: { DtButton, DtRecipeContactInfo, DtIcon, DtLink },
   data () {
     return {
       adminListenInAvatars: [

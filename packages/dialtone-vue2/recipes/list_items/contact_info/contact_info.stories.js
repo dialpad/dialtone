@@ -130,10 +130,16 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeContactInfoDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeContactInfoVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeContactInfoDefaultTemplate,
+);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeContactInfoVariantsTemplate,
+);
 
 export const Default = {
   render: DefaultTemplate,

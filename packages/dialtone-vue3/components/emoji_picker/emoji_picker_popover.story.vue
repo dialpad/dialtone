@@ -38,11 +38,11 @@
 </template>
 
 <script setup>
-import DtEmojiPicker from './DtEmojiPicker.vue';
+import DtEmojiPicker from './emoji_picker.vue';
 import { ref } from 'vue';
-import DtButton from '@/components/button/button.vue';
-import DtIcon from '@/components/icon/icon.vue';
-import DtPopover from '@/components/popover/popover.vue';
+import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/icon';
+import { DtPopover } from '@/components/popover';
 
 const skinTone = ref('Default');
 const emojiPickerOpened = ref(false);

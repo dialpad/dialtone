@@ -101,9 +101,8 @@
 </template>
 
 <script>
-// eslint-disable max-len
 import { emojisGrouped as emojisImported } from '@/components/emoji_picker/emojis';
-import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
+import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker';
 
 export default {
   name: 'EmojiSelector',

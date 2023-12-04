@@ -111,21 +111,13 @@
 </template>
 
 <script>
-/* eslint-disable vuejs-accessibility/no-static-element-interactions */
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
-import { DtCombobox } from '@/components/combobox';
-import DtPopover from '@/components/popover/popover.vue';
+import { DtCombobox, LABEL_SIZES } from '@/components/combobox';
+import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
-import {
-  POPOVER_APPEND_TO_VALUES,
-  POPOVER_CONTENT_WIDTHS,
-} from '../../../components/popover/popover_constants';
-import {
-  DROPDOWN_PADDING_CLASSES,
-} from '@/components/dropdown/dropdown_constants';
-import SrOnlyCloseButtonMixin from '../../../common/mixins/sr_only_close_button';
-import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
+import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',

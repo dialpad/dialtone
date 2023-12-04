@@ -53,7 +53,7 @@
 
 <script setup>
 import { computed, nextTick, ref, watchEffect } from 'vue';
-import { CDN_URL, EMOJI_SKIN_TONE_MODIFIERS } from '@/components/emoji_picker/emoji_picker_constants';
+import { CDN_URL, EMOJI_PICKER_SKIN_TONE_MODIFIERS } from '@/components/emoji_picker';
 import { DtTooltip } from '@/components/tooltip';
 
 const props = defineProps({
@@ -92,37 +92,37 @@ const skinList = [
   {
     name: ':wave_tone1:',
     unicode_output: '1f44b-1f3fb',
-    skinTone: EMOJI_SKIN_TONE_MODIFIERS.LIGHT,
+    skinTone: EMOJI_PICKER_SKIN_TONE_MODIFIERS.LIGHT,
     skinCode: '_tone1',
   },
   {
     name: ':wave_tone2:',
     unicode_output: '1f44b-1f3fc',
-    skinTone: EMOJI_SKIN_TONE_MODIFIERS.MEDIUM_LIGHT,
+    skinTone: EMOJI_PICKER_SKIN_TONE_MODIFIERS.MEDIUM_LIGHT,
     skinCode: '_tone2',
   },
   {
     name: ':wave_tone3:',
     unicode_output: '1f44b-1f3fd',
-    skinTone: EMOJI_SKIN_TONE_MODIFIERS.MEDIUM,
+    skinTone: EMOJI_PICKER_SKIN_TONE_MODIFIERS.MEDIUM,
     skinCode: '_tone3',
   },
   {
     name: ':wave_tone4:',
     unicode_output: '1f44b-1f3fe',
-    skinTone: EMOJI_SKIN_TONE_MODIFIERS.MEDIUM_DARK,
+    skinTone: EMOJI_PICKER_SKIN_TONE_MODIFIERS.MEDIUM_DARK,
     skinCode: '_tone4',
   },
   {
     name: ':wave_tone5:',
     unicode_output: '1f44b-1f3ff',
-    skinTone: EMOJI_SKIN_TONE_MODIFIERS.DARK,
+    skinTone: EMOJI_PICKER_SKIN_TONE_MODIFIERS.DARK,
     skinCode: '_tone5',
   },
   {
     name: ':wave:',
     unicode_output: '1f44b',
-    skinTone: EMOJI_SKIN_TONE_MODIFIERS.DEFAULT,
+    skinTone: EMOJI_PICKER_SKIN_TONE_MODIFIERS.DEFAULT,
     skinCode: '',
   },
 ];

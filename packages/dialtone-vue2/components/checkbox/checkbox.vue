@@ -131,9 +131,9 @@ export default {
         */
         ...this.$listeners,
         /*
-         * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input
-         * element which will result in the hander being called twice (once on the input element and once by the emitted
-         * input event by the change listener).
+         * Override input listener to as no-op. Prevents parent input listeners from being passed through
+         * onto the input element which will result in the handler being called twice
+         * (once on the input element and once by the emitted input event by the change listener).
         */
         input: () => {},
         change: event => this.emitValue(event.target),

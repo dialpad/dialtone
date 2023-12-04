@@ -4,9 +4,9 @@
     :id="$attrs.id"
     :hide-close="$attrs.hideClose"
     :close-button-props="$attrs.closeButtonProps"
-    :aria-label="$attrs.ariaLabel"
     :interactive="$attrs.interactive"
     :size="$attrs.size"
+    :aria-label="$attrs.ariaLabel"
     :content-class="$attrs.contentClass"
     @click="$attrs.onClick"
     @close="$attrs.onClose"
@@ -47,7 +47,7 @@ export default {
   components: { DtAvatar, DtChip, DtIcon },
   computed: {
     iconSize () {
-      return CHIP_ICON_SIZES[this.size];
+      return CHIP_ICON_SIZES[this.$attrs.size];
     },
   },
 };

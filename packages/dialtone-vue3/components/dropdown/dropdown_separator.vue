@@ -18,9 +18,6 @@ export default {
 .dt-list-separator {
   border-top: var(--dt-size-100) solid var(--dt-color-border-default);
   list-style: none;
-  margin-top: var(--dt-space-300);
-  margin-bottom: var(--dt-space-300);
-  margin-left: var(--dt-space-300-negative);
-  margin-right: var(--dt-space-300-negative);
+  margin: var(--dt-space-300) var(--dt-space-300-negative);
 }
 </style>

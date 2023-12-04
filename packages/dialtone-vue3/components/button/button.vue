@@ -54,7 +54,7 @@ import {
   INVALID_COMBINATION,
 } from './button_constants';
 
-import { LINK_KIND_MODIFIERS } from '../link/link_constants';
+import { LINK_KIND_MODIFIERS } from '@/components/link';
 
 /**
  * A button is a UI element which allows users to take an action throughout the app.

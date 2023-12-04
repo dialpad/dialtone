@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { RADIO_INPUT_VALIDATION_CLASSES } from '../../radio/radio_constants';
+import { RADIO_INPUT_VALIDATION_CLASSES } from '@/components/radio';
 import {
   InputMixin,
   GroupableMixin,
