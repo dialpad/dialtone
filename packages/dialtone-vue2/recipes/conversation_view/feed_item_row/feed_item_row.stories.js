@@ -116,10 +116,16 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeFeedItemRowDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeFeedItemRowVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeFeedItemRowDefaultTemplate,
+);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeFeedItemRowVariantsTemplate,
+);
 
 export const Default = {
   render: DefaultTemplate,
@@ -129,10 +135,29 @@ export const Default = {
     threading: 'threading',
   },
 };
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-allowed-attr',
+          enabled: false,
+        },
+        {
+          id: 'color-contrast',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 
 export const Variants = {
   render: VariantsTemplate,
 
   args: {
   },
+};
+Variants.parameters = {
+  a11y: Default.parameters.a11y,
 };

@@ -54,8 +54,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeSettingsMenuButtonDefaultTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeSettingsMenuButtonDefaultTemplate,
+);
 
 export const Default = {
   render: DefaultTemplate,

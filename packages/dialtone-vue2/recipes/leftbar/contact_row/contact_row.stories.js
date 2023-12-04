@@ -48,8 +48,10 @@ export const argTypesData = {
   },
 
   click: {
+    description: 'Native click event for the entire row',
     table: {
       type: { summary: 'event' },
+      category: 'events',
     },
   },
 

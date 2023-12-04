@@ -1,7 +1,7 @@
 <template>
   <dt-stack gap="600">
     <div>
-      <h3>
+      <h3 class="d-mb8">
         Channel with unread messages
       </h3>
       <dt-recipe-general-row
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div>
-      <h3>
+      <h3 class="d-mb8">
         Contact Center
       </h3>
       <dt-recipe-general-row
@@ -26,7 +26,7 @@
       />
     </div>
     <div>
-      <h3>
+      <h3 class="d-mb8">
         Dialbot
       </h3>
       <dt-recipe-general-row

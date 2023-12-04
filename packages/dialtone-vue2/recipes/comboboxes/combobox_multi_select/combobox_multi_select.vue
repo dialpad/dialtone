@@ -25,7 +25,7 @@
           <dt-chip
             v-for="item in selectedItems"
             ref="chips"
-            :key="item.id"
+            :key="item"
             :label-class="['d-chip__label']"
             class="combobox__chip"
             :close-button-props="{ ariaLabel: 'close' }"
@@ -61,14 +61,12 @@
     </template>
 
     <!-- @slot slot for popover header -->
-    <template #header>
-      <div
-        v-if="$slots.header"
-        ref="header"
-      >
-        <slot
-          name="header"
-        />
+    <template
+      v-if="$slots.header"
+      #header
+    >
+      <div ref="header">
+        <slot name="header" />
       </div>
     </template>
 
@@ -92,14 +90,12 @@
     </template>
 
     <!-- @slot slot for popover footer -->
-    <template #footer>
-      <div
-        v-if="$slots.footer"
-        ref="footer"
-      >
-        <slot
-          name="footer"
-        />
+    <template
+      v-if="$slots.footer"
+      #footer
+    >
+      <div ref="footer">
+        <slot name="footer" />
       </div>
     </template>
   </dt-recipe-combobox-with-popover>
@@ -328,6 +324,14 @@ export default {
      * @type {Object}
      */
     'max-selected',
+
+    /**
+     * Native keyup event
+     *
+     * @event keyup
+     * @type {KeyboardEvent}
+      */
+    'keyup',
   ],
 
   data () {

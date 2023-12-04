@@ -49,6 +49,7 @@
         role="listbox"
         :external-anchor="externalAnchor"
         :content-width="contentWidth"
+        :content-appear="true"
         :content-tabindex="null"
         :modal="false"
         :auto-focus="false"
@@ -58,9 +59,11 @@
         :visually-hidden-close="visuallyHiddenClose"
         @opened="opened($event, arguments[1]);"
       >
-        <template #headerContent>
+        <template
+          v-if="$slots.header"
+          #headerContent
+        >
           <div
-            v-if="$slots.header"
             ref="header"
           >
             <slot name="header" />
@@ -92,9 +95,11 @@
           </div>
         </template>
 
-        <template #footerContent>
+        <template
+          v-if="$slots.footer"
+          #footerContent
+        >
           <div
-            v-if="$slots.footer"
             ref="footer"
           >
             <slot name="footer" />
@@ -108,18 +113,11 @@
 <script>
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
-import { DtCombobox } from '@/components/combobox';
-import { DtPopover } from '@/components/popover';
+import { DtCombobox, LABEL_SIZES } from '@/components/combobox';
+import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
-import {
-  POPOVER_APPEND_TO_VALUES,
-  POPOVER_CONTENT_WIDTHS,
-} from '../../../components/popover/popover_constants';
-import {
-  DROPDOWN_PADDING_CLASSES,
-} from '@/components/dropdown/dropdown_constants';
-import SrOnlyCloseButtonMixin from '../../../common/mixins/sr_only_close_button';
-import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
+import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -287,7 +285,7 @@ export default {
       default: true,
     },
 
-    /*
+    /**
      * Determines when to show the skeletons and also controls aria-busy attribute.
      */
     loading: {

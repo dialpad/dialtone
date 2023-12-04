@@ -210,6 +210,7 @@ import fryImage from '@/common/assets/fry.gif';
 
 export default {
   name: 'DtRecipeFeedItemRowVariants',
+
   components: {
     DtRecipeEmojiRow,
     DtRecipeFeedItemRow,

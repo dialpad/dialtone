@@ -1,4 +1,3 @@
-<!-- eslint-disable max-lines -->
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
@@ -66,13 +65,8 @@
       v-if="hasSlotContent($slots.header)"
       #header
     >
-      <div
-
-        ref="header"
-      >
-        <slot
-          name="header"
-        />
+      <div ref="header">
+        <slot name="header" />
       </div>
     </template>
 
@@ -100,12 +94,8 @@
       v-if="hasSlotContent($slots.footer)"
       #footer
     >
-      <div
-        ref="footer"
-      >
-        <slot
-          name="footer"
-        />
+      <div ref="footer">
+        <slot name="footer" />
       </div>
     </template>
   </dt-recipe-combobox-with-popover>

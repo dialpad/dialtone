@@ -68,7 +68,9 @@ export const argTypesData = {
   },
 
   click: {
+    description: 'Native click event on the row itself',
     table: {
+      category: 'events',
       type: { summary: 'event' },
     },
   },
@@ -94,8 +96,6 @@ export default {
   decorators: [decorator],
   excludeStories: /.*Data$/,
 };
-
-// Templates
 const DefaultTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtRecipeGeneralRowDefaultTemplate);
 const VariantsTemplate = (args, { argTypes }) =>
