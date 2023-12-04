@@ -28,7 +28,7 @@
       "outputs": [],
       "options": {
         "script": "storybook:build",
-        "parallel": false
+        "parallel": true
       }
     },
     "release-local": {

@@ -31,7 +31,7 @@
 import DtTabGroup from '@/components/tabs/tab_group.vue';
 import DtTab from '@/components/tabs/tab.vue';
 import DtIcon from '@/components/icon/icon.vue';
-import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants';
+import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker';
 
 export default {
   name: 'EmojiTabset',
