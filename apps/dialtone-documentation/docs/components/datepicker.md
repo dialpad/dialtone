@@ -7,7 +7,157 @@ status: beta
 storybook: https://vue.dialpad.design/?path=/story/components-datepicker--default
 figma: planned
 ---
+<style  lang="less">
+  .dddd-datepicker {
+    --datepicker-width: calc(var(--dt-size-300) * 75); // A bit of a magic number as default fixed size, may use CSS utilities to override
+    --datepicker-button-size: calc(var(--dt-size-600) - var(--dt-size-200)); // Emulates SM button since Vue component in lieu of Vue component using DT button
+
+    width: var(--datepicker-width);
+    padding: var(--dt-space-500);
+
+    &__hd {
+      padding: 0 4px;
+    }
+    &__bd {
+    }
+    &__header {
+      width: 100%;
+      justify-content: space-between;
+      color: var(--dt-color-foreground-secondary);
+      text-align: center;
+    }
+    &__header-title {
+    }
+    &__nav {
+    }
+    &__nav-btn {
+      height: var(--datepicker-button-size);
+      aspect-ratio: 1 / 1;
+    }
+    &__weekday {
+      color: var(--dt-color-foreground-tertiary);
+      font-weight: var(--dt-font-weight-medium);
+      font-size: var(--dt-font-size-100);
+      text-transform: uppercase;
+    }
+    &__calendar {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    &__cell {
+      padding: 0;
+      padding-top: var(--dt-space-200);
+      text-align: center;
+
+      &--header {
+        padding-top: 0;
+        padding-bottom: var(--dt-space-400);
+      }
+    }
+    &__day {
+      height: var(--datepicker-button-size);
+      aspect-ratio: 1 / 1;
+
+      &--selected {
+        color: var(--dt-color-neutral-white);
+        background: var(--dt-color-brand-purple);
+      }
+
+      &--disabled {
+        background-color: var(--dt-color-neutral-transparent);
+        color: var(--dt-color-foreground-muted);
+      }
+    }
+  }
+</style>
+
+
 <code-well-header>
+  <dt-stack class="dddd-datepicker" gap="400">
+    <div class="dddd-datepicker__hd">
+      <dt-stack direction="row" class="dddd-datepicker__header" gap="300">
+        <dt-stack as="nav" direction="row" gap="200" class="dddd-datepicker__nav">
+          <dt-button size="xs" importance="clear" class="d-btn--icon-only d-bar-circle dddd-datepicker__nav-btn" aria-label="Go to previous year, September 2022">
+            <dt-icon name="chevrons-left" size="300" />
+          </dt-button>
+          <dt-button size="xs" importance="clear" class="d-btn--icon-only d-bar-circle dddd-datepicker__nav-btn" aria-label="Go to previous month, August">
+            <dt-icon name="chevron-left" size="300" />
+          </dt-button>
+        </dt-stack>
+        <div class="d-headline-eyebrow dddd-datepicker__header-title" id="calendar-heading">September 2023</div>
+        <dt-stack as="nav" direction="row" gap="200" class="dddd-datepicker__nav">
+          <dt-button size="xs" importance="clear" class="d-btn--icon-only d-bar-circle dddd-datepicker__nav-btn" aria-label="Go to next month, October">
+            <dt-icon name="chevron-right" size="300" />
+          </dt-button>
+          <dt-button size="xs" importance="clear" class="d-btn--icon-only d-bar-circle dddd-datepicker__nav-btn" aria-label="Go to previous year, September 2024">
+            <dt-icon name="chevrons-right" size="300" />
+          </dt-button>
+        </dt-stack>
+      </dt-stack>
+    </div>
+    <div class="dddd-datepicker__bd">
+      <table class="dddd-datepicker__calendar" aria-labelledby="calendar-heading">
+        <thead>
+          <tr>
+            <th scope="col" class="dddd-datepicker__cell dddd-datepicker__cell--header"><span class="dddd-datepicker__weekday" title="Sunday" aria-label="Sunday">SU</span></th>
+            <th scope="col" class="dddd-datepicker__cell dddd-datepicker__cell--header"><span class="dddd-datepicker__weekday" title="Monday" aria-label="Monday">MO</span></th>
+            <th scope="col" class="dddd-datepicker__cell dddd-datepicker__cell--header"><span class="dddd-datepicker__weekday" title="Tuesday" aria-label="Tuesday">TU</span></th>
+            <th scope="col" class="dddd-datepicker__cell dddd-datepicker__cell--header"><span class="dddd-datepicker__weekday" title="Wednesday" aria-label="Wednesday">WE</span></th>
+            <th scope="col" class="dddd-datepicker__cell dddd-datepicker__cell--header"><span class="dddd-datepicker__weekday" title="Thursday" aria-label="Thursday">TH</span></th>
+            <th scope="col" class="dddd-datepicker__cell dddd-datepicker__cell--header"><span class="dddd-datepicker__weekday" title="Friday" aria-label="Friday">FR</span></th>
+            <th scope="col" class="dddd-datepicker__cell dddd-datepicker__cell--header"><span class="dddd-datepicker__weekday" title="Saturday" aria-label="Saturday">SA</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day dddd-datepicker__day--disabled" :circle="true" size="sm" importance="clear" disabled aria-label="Sunday, August 31, 2023">31</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Monday, September 1, 2023">1</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Tuesday, September 2, 2023">2</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Wednesday, September 3, 2023">3</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day dddd-datepicker__day--selected" :circle="true" size="sm" importance="clear" aria-selected="true" aria-label="Select Thursday, September 4, 2023">4</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Friday, September 5, 2023">5</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Saturday, September 6, 2023">6</dt-button></td>
+          </tr>
+          <tr>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Sunday, September 7, 2023">7</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Monday, September 8, 2023">8</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Tuesday, September 9, 2023">9</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Wednesday, September 10, 2023">10</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Thursday, September 11, 2023">11</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Friday, September 12, 2023">12</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Saturday, September 13, 2023">13</dt-button></td>
+          </tr>
+          <tr>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Sunday, September 14, 2023">14</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Monday, September 15, 2023">15</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Tuesday, September 16, 2023">16</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Wednesday, September 17, 2023">17</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Thursday, September 18, 2023">18</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Friday, September 19, 2023">19</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Saturday, September 20, 2023">20</dt-button></td>
+          </tr>
+          <tr>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Sunday, September 21, 2023">21</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Monday, September 22, 2023">22</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Tuesday, September 23, 2023">23</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Wednesday, September 24, 2023">24</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Thursday, September 25, 2023">25</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Friday, September 26, 2023">26</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Saturday, September 27, 2023">27</dt-button></td>
+          </tr>
+          <tr>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Sunday, September 28, 2023">28</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Monday, September 29, 2023">29</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day" :circle="true" size="sm" importance="clear" aria-selected="false" aria-label="Select Tuesday, September 30, 2023">30</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day dddd-datepicker__day--disabled" :circle="true" size="sm" importance="clear" disabled aria-label="Wednesday, October 1, 2023">1</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day dddd-datepicker__day--disabled" :circle="true" size="sm" importance="clear" disabled aria-label="Thursday, October 2, 2023">2</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day dddd-datepicker__day--disabled" :circle="true" size="sm" importance="clear" disabled aria-label="Friday, October 3, 2023">3</dt-button></td>
+            <td class="dddd-datepicker__cell"><dt-button class="dddd-datepicker__day dddd-datepicker__day--disabled" :circle="true" size="sm" importance="clear" disabled aria-label="Saturday, October 4, 2023">4</dt-button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </dt-stack>
   <dt-datepicker
     prev-month-label="Previous month"
     next-month-label="Next month"
