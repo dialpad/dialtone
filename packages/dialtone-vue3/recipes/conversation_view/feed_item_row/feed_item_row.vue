@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <dt-list-item
     ref="FeedItemRef"
@@ -36,13 +37,13 @@
       <div
         v-if="showHeader"
         data-qa="dt-feed-item-row--header"
-        class="d-d-flex d-ai-center"
+        class="dt-feed-item-row__header"
       >
-        <p class="d-fs-200 d-lh-300 d-fw-bold d-to-ellipsis d-of-hidden d-ws-nowrap">
+        <p class="dt-feed-item-row__header__name">
           {{ displayName }}
         </p>
         <time
-          class="d-fs-100 d-mt2 d-lh-300 d-fc-tertiary d-fw-normal d-ml4 d-fl-shrink0"
+          class="dt-feed-item-row__header__time"
         >
           {{ time }}
         </time>
@@ -73,7 +74,7 @@
       <div
         v-show="isActive"
         data-qa="dt-feed-item-row--menu"
-        class="d-ps-absolute d-tn24 d-r12"
+        class="dt-feed-item-row__menu"
       >
         <dt-lazy-show
           :appear="true"
@@ -249,6 +250,42 @@ export default {
 .dt-feed-item-row {
   transition-duration: 2s !important;
 
+  &__header {
+    display: flex;
+    align-items: center;
+
+    &__name {
+      font-size: var(--dt-font-size-200);
+      line-height: var(--dt-font-line-height-300);
+      font-weight: var(--dt-font-weight-bold);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &__time {
+      font-size: var(--dt-font-size-100);
+      margin-top: var(--dt-space-200);
+      line-height: var(--dt-font-line-height-300);
+      color: var(--dt-color-foreground-tertiary);
+      font-weight: var(--dt-font-weight-normal);
+      margin-left: var(--dt-space-300);
+      flex-shrink: 0;
+    }
+  }
+
+  &__reactions {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__threading {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+  }
+
   &__left-time {
     color: var(--dt-color-foreground-tertiary);
     padding-top: var(--dt-space-350);
@@ -257,6 +294,12 @@ export default {
     font-weight: var(--dt-font-weight-normal);
     white-space: nowrap;
     height: 100%;
+  }
+
+  &__menu {
+    position: absolute;
+    top: var(--dt-space-550-negative);
+    right: var(--dt-space-450);
   }
 
   .content-text-wrapper-class:not(img) {

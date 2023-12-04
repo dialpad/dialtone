@@ -26,7 +26,7 @@
       <div
         v-if="$slots.subtitle"
         data-qa="dt-item-layout-subtitle-wrapper"
-        :class="['dt-item-layout--subtitle', { 'd-mtn2': $slots.default }]"
+        :class="['dt-item-layout--subtitle', { 'dt-item-layout--subtitle--with-title': $slots.default }]"
       >
         <!-- @slot Slot for content below main content -->
         <slot name="subtitle" />
@@ -88,6 +88,11 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    .dt-item-layout--subtitle {
+      &--with-title {
+        margin-top: var(--dt-space-200-negative);
+      }
+    }
   }
 
   &--selected {

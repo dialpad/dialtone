@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <span class="dt-emoji-row">
     <span
@@ -7,7 +8,7 @@
       class="d-mr4 d-mb4"
     >
       <dt-tooltip
-        class="d-d-inline-block"
+        class="dt-emoji-row__tooltip"
         content-class="d-wmx464"
         @shown="(shown) => emojiHovered(reaction, shown)"
       >
@@ -26,13 +27,13 @@
             :attrs="attrs"
             @click="emojiClicked(reaction)"
           >
-            <span class="d-mr4 d-d-inline-flex">
+            <span class="dt-emoji-row__emoji">
               <dt-emoji
                 size="200"
                 :code="reaction.emojiUnicodeOrShortname"
               />
             </span>
-            <span class="d-fw-bold d-fs-100">
+            <span class="dt-emoji-row__reaction-number">
               {{ reaction.num }}
             </span>
           </dt-button>
@@ -98,6 +99,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
 
+  &__tooltip {
+    display: inline-block;
+  }
+
   &__reaction {
     padding: var(--dt-space-300) var(--dt-space-400); // 4px 8px
     gap: var(--dt-space-300);
@@ -124,5 +129,16 @@ export default {
       }
     }
   }
+
+  &__emoji {
+    margin-right: var(--dt-space-300);
+    display: inline-flex;
+  }
+
+  &__reaction-number {
+    font-weight: var(--dt-font-weight-bold);
+    font-size: var(--dt-font-size-100);
+  }
+
 }
 </style>

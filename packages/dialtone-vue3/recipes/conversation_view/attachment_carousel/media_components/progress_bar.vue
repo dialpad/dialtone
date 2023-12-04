@@ -44,7 +44,7 @@ export default {
     aria-valuemax="100"
   >
     <svg
-      class="progress-bar d-w24 d-h24"
+      class="progress-bar"
       :style="cssVars"
     >
       <circle
@@ -65,6 +65,11 @@ export default {
 </template>
 
 <style lang="less">
+.progress-bar {
+  width: var(--dt-size-550);
+  height: var(--dt-size-550);
+}
+
 .progress-bar__circle {
   fill: none;
   stroke-width: 2;

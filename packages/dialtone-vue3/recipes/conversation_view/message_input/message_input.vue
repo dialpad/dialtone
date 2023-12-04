@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <dt-notice
     v-if="showNotice"

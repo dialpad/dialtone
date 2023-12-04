@@ -5,7 +5,7 @@
   >
     <template #anchor>
       <span
-        :class="{ 'd-c-not-allowed': disabled }"
+        :class="{ 'dt-recipe-callbar-button--disabled': disabled }"
       >
         <dt-button
           :importance="buttonImportance"
@@ -226,5 +226,9 @@ export default {
   .base-button__icon {
     color: var(--primary-color);
   }
+}
+
+.dt-recipe-callbar-button--disabled {
+  cursor: not-allowed;
 }
 </style>

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="d-datepicker">
     <div class="d-datepicker--header">

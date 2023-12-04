@@ -28,7 +28,7 @@ describe('DtCollapsible Tests', () => {
 
     anchorElement = wrapper.find('[data-qa="dt-button"]');
     contentElement = wrapper.find('[data-qa="content-element"]');
-    contentWrapperElement = wrapper.getComponent('.d-dt-collapsible__content');
+    contentWrapperElement = wrapper.getComponent('[data-qa="dt-collapsible--content"]');
   };
 
   beforeAll(() => {

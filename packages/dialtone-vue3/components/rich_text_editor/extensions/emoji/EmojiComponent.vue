@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <node-view-wrapper
     class="d-d-inline-block"

@@ -8,10 +8,7 @@
     <div
       :id="!ariaLabelledBy && labelledBy"
       ref="anchor"
-      :class="[
-        'd-dt-collapsibe__anchor',
-        anchorClass,
-      ]"
+      :class="anchorClass"
     >
       <!-- @slot Slot for the anchor element that toggles the collapsible content -->
       <slot
@@ -34,10 +31,11 @@
         >
           <dt-icon
             :name=" isOpen ? 'chevron-down' : 'chevron-right'"
-            class="d-icon d-icon--size-300 d-mr8 d-fl-shrink0"
+            class="d-collapsible__icon"
+            size="300"
           />
           <span
-            class="d-mr-auto d-truncate"
+            class="d-collapsible__anchor-text"
             :title="anchorText"
           >
             {{ anchorText }}
@@ -53,14 +51,12 @@
       :aria-label="ariaLabel"
       :show="isOpen"
       :element-type="contentElementType"
-      :class="[
-        'd-dt-collapsible__content',
-        contentClass,
-      ]"
+      :class="contentClass"
       :style="{
         'max-height': maxHeight,
         'max-width': maxWidth,
       }"
+      data-qa="dt-collapsible--content"
       tabindex="-1"
       appear
       v-on="collapsibleListeners"

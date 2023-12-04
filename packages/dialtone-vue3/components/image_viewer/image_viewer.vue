@@ -2,7 +2,7 @@
   <div>
     <dt-button
       data-qa="dt-image-viewer-preview"
-      class="d-p0 d-c-zoom-in"
+      class="d-image-viewer__preview-button"
       :aria-label="ariaLabel"
       importance="clear"
       @click="openModal"
@@ -29,12 +29,12 @@
       >
         <div
           data-qa="dt-image-viewer-full"
-          class="d-p0 d-bar0 d-wmx80p d-hmx80p"
+          class="d-image-viewer__full"
           role="dialog"
           aria-modal="true"
         >
           <img
-            class="d-wmx100p d-hmx100p"
+            class="d-image-viewer__full__image"
             :src="imageSrc"
             :alt="imageAlt"
           >
@@ -54,7 +54,7 @@
           >
             <template #icon>
               <dt-icon
-                class="d-fc-neutral-white"
+                class="d-image-viewer__close-button"
                 name="close"
                 size="400"
               />

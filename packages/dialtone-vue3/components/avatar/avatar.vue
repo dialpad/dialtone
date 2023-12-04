@@ -32,7 +32,7 @@
       />
       <span
         v-else
-        :class="[AVATAR_KIND_MODIFIERS.initials, 'd-ps-absolute d-zi-base d-us-none']"
+        :class="[AVATAR_KIND_MODIFIERS.initials]"
       >
         {{ formattedInitials }}
       </span>

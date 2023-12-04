@@ -1,7 +1,7 @@
 <template>
   <div
     data-qa="grouped-chip"
-    class="d-d-inline-flex d-ws-nowrap d-bgc-unset"
+    class="dt-grouped-chip"
   >
     <dt-chip
       :hide-close="true"
@@ -9,7 +9,7 @@
       content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-blr-pill d-bgc-moderate-opaque d-wmx84 dt-chip-content"
+      class="dt-chip-content dt-chip-content--left"
     >
       <template
         v-if="hasSlotContent($slots.leftIcon)"
@@ -41,7 +41,7 @@
       content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-brr-pill d-bgc-purple-200 d-wmx84 dt-chip-content"
+      class="dt-chip-content dt-chip-content--right"
     >
       <template #icon>
         <div
@@ -85,7 +85,28 @@ export default {
 </script>
 
 <style lang="less">
+.dt-grouped-chip {
+  display: inline-flex;
+  white-space: nowrap;
+  background-color: unset;
+  background-image: unset;
+}
+
 .dt-chip-content {
   font-variant-numeric: tabular-nums;
+
+  &--left {
+    border-top-left-radius: var(--dt-size-radius-pill);
+    border-bottom-left-radius: var(--dt-size-radius-pill);
+    background-color: var(--dt-color-surface-moderate-opaque);
+    max-width: var(--dt-size-730);
+  }
+
+  &--right {
+    border-top-right-radius: var(--dt-size-radius-pill);
+    border-bottom-right-radius: var(--dt-size-radius-pill);
+    background-color: var(--dt-color-purple-200);
+    max-width: var(--dt-size-730);
+  }
 }
 </style>

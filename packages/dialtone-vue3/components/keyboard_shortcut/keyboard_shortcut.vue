@@ -2,16 +2,8 @@
 <template>
   <kbd
     :class="[
-      'd-d-inline-flex',
-      'd-ff-custom',
-      'd-ai-center',
-      'd-jc-center',
-      'd-box-border',
-      'd-px4',
-      'd-ba',
-      'd-bar4',
-      'd-fs-100',
-      inverted ? 'd-bc-moderate-inverted' : 'd-bc-default',
+      'd-keyboard-shortcut',
+      { 'd-keyboard-shortcut--inverted': inverted },
     ]"
   >
     <span
@@ -30,8 +22,8 @@
         size="100"
         aria-hidden="true"
         :class="[
-          inverted ? 'd-fc-secondary-inverted' : 'd-fc-tertiary',
-          'd-mr2',
+          'd-keyboard-shortcut__icon',
+          { 'd-keyboard-shortcut__icon--inverted': inverted },
         ]"
       />
       <span
@@ -39,8 +31,8 @@
         :key="`${i}-${item}`"
         aria-hidden="true"
         :class="[
-          inverted ? 'd-fc-secondary-inverted' : 'd-fc-tertiary',
-          'd-mr2',
+          'd-keyboard-shortcut__item',
+          { 'd-keyboard-shortcut__item--inverted': inverted },
         ]"
         v-html="item"
       />

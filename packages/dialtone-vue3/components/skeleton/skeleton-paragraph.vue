@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'd-w100p',
+      'd-skeleton-paragraph',
       contentClass,
     ]"
     contentClass
@@ -11,11 +11,6 @@
       v-for="row in integerRows"
       :key="row"
       data-qa="skeleton-paragraph-row"
-      :class="[
-        {
-          'd-mb12': row !== integerRows,
-        },
-      ]"
       :content-class="rowClass"
       :animate="animate"
       :offset="offset"
