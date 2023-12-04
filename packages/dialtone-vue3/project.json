@@ -18,6 +18,13 @@
     },
     "build-docs": {
       "executor": "nx:run-script",
+      "dependsOn": [
+        {
+          "projects": [ "dialtone-icons" ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
       "outputs": [],
       "options": {
         "script": "storybook:build",
