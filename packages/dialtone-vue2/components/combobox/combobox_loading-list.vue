@@ -1,6 +1,6 @@
 <template>
   <ol
-    class="d-p0 d-mt8 d-hmx332 d-of-y-auto"
+    class="d-combobox__loading-list"
     aria-busy="true"
   >
     <dt-list-item

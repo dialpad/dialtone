@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-d-flex d-ai-center"
+    class="dt-recipe--callbar-button-with-popover"
   >
     <dt-recipe-callbar-button
       :aria-label="ariaLabel"
@@ -45,7 +45,8 @@
           circle
           importance="clear"
           size="lg"
-          :class="['dt-recipe--callbar-button-with-popover--arrow', { 'd-mln24': !isCompactMode }]"
+          :class="['dt-recipe--callbar-button-with-popover--arrow',
+                   { 'dt-recipe--callbar-button-with-popover--arrow--large': !isCompactMode }]"
           width="2rem"
           :aria-label="arrowButtonLabel"
           :active="open"
@@ -54,7 +55,7 @@
           <template #icon>
             <dt-icon
               name="chevron-up"
-              class="d-fc-black-800"
+              class="dt-recipe--callbar-button-with-popover--arrow__icon"
               size="200"
             />
           </template>
@@ -324,7 +325,7 @@ export default {
 </script>
 
 <style lang="less">
-.dt-recipe--callbar-button-with-popover--arrow.d-btn--circle {
+.dt-recipe--callbar-button-with-popover--arrow {
   margin-top: var(--dt-space-350-negative);
   margin-left: calc(var(--dt-space-300-negative) * 5);
   width: var(--dt-size-500);
@@ -335,7 +336,16 @@ export default {
   &.d-btn--active {
     background: var(--dt-color-surface-moderate-opaque);
   }
+
+  &--large {
+    margin-left: var(--dt-space-550-negative);
+  }
+
+  &__icon {
+    color: var(--dt-color-black-800);
+  }
 }
+
 .dt-recipe--callbar-button-with-popover--popover {
   .d-popover__header {
     background: var(--dt-color-surface-contrast);
@@ -345,8 +355,8 @@ export default {
       color: var(--dt-color-foreground-primary-inverted);
     }
   }
-
 }
+
 .dt-recipe--callbar-button-with-popover--button .d-tab--selected::after,
 .dt-recipe--callbar-button-with-popover--button .d-tab--selected:hover::after {
   --tab--bgc: var(--dt-color-surface-contrast);
@@ -356,8 +366,14 @@ export default {
   flex-direction: column;
   height: 100%;
 }
+
 .dt-recipe--callbar-button-with-popover--button .tab-content {
   flex: 1 1 100%;
   overflow-y: auto;
+}
+
+.dt-recipe--callbar-button-with-popover {
+  display: flex;
+  align-items: center;
 }
 </style>

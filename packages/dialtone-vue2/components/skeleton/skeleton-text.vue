@@ -4,8 +4,7 @@
     ref="skeleton"
     data-qa="skeleton-text-body"
     :class="[
-      'd-h8',
-      'd-bar2',
+      'd-skeleton-text',
       'skeleton-placeholder',
       {
         'skeleton-placeholder--animate': animate,
@@ -23,7 +22,7 @@
     data-qa="skeleton-text-heading"
     :class="[
       SKELETON_HEADING_HEIGHTS[headingHeight],
-      'd-bar2',
+      'd-skeleton-text--heading',
       'skeleton-placeholder',
       {
         'skeleton-placeholder--animate': animate,

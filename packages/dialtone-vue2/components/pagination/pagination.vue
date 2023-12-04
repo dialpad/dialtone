@@ -1,10 +1,10 @@
 <template>
   <nav
     :aria-label="ariaLabel"
-    class="d-d-flex d-fd-row d-gg4 d-ai-center"
+    class="d-pagination"
   >
     <dt-button
-      class="d-px8"
+      class="d-pagination__button"
       data-qa="dt-pagination-prev"
       :aria-label="prevAriaLabel"
       :kind="isFirstPage ? 'default' : 'muted'"
@@ -23,12 +23,12 @@
     <div
       v-for="(page, index) in pages"
       :key="`page-${page}-${index}`"
-      :class="{ 'd-as-flex-end': isNaN(Number(page)) }"
+      :class="{ 'd-pagination__separator': isNaN(Number(page)) }"
     >
       <!-- eslint-disable vue/no-bare-strings-in-template -->
       <div
         v-if="isNaN(Number(page))"
-        class="d-fc-tertiary d-w24 d-ta-center"
+        class="d-pagination__separator-icon"
         data-qa="dt-pagination-separator"
       >
         <dt-icon
@@ -50,7 +50,7 @@
       </dt-button>
     </div>
     <dt-button
-      class="d-px8"
+      class="d-pagination__button"
       data-qa="dt-pagination-next"
       :aria-label="nextAriaLabel"
       :disabled="isLastPage"

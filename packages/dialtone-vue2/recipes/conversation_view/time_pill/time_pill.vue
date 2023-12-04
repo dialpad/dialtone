@@ -2,7 +2,7 @@
   <time
     data-qa="dt-time-pill"
     :dateTime="dateTime"
-    class="d-ba d-bar-pill d-baw1 d-bc-black-300 d-px16 d-py4 d-fs-100"
+    class="dt-time-pill"
   >
     {{ dateTimeDisplay }}
   </time>
@@ -44,5 +44,16 @@ export default {
 </script>
 
 <style lang="less">
-
+.dt-time-pill {
+  border: var(--dt-size-100) solid;
+  border-radius: var(--dt-size-radius-pill);
+  border-width: var(--dt-size-100);
+  --bco: 100%;
+  border-color: var(--dt-color-black-300);
+  padding-left: var(--dt-space-500);
+  padding-right: var(--dt-space-500);
+  padding-top: var(--dt-space-300);
+  padding-bottom: var(--dt-space-300);
+  font-size: var(--dt-font-size-100);
+}
 </style>

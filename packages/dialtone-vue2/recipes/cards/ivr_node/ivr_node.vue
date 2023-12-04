@@ -1,13 +1,13 @@
 <template>
   <div
-    class="d-d-flex d-fd-column d-ai-center d-c-pointer ivr_node__width"
+    class="ivr_node"
     v-on="$listeners"
   >
     <div
       v-if="dtmfKey"
       data-qa="dt-top-connector-dtmf"
-      class="ivr-connector d-w24 d-h24 d-bar-circle d-mbn12 d-fc-neutral-white d-fs-200"
-      :class="{ 'd-mbn16': isSelected }"
+      class="ivr-connector ivr-connector--dtmf"
+      :class="{ 'ivr-connector--dtmf--selected': isSelected }"
     >
       {{ dtmfKey }}
     </div>
@@ -18,8 +18,8 @@
     <div
       v-if="!dtmfKey && !$slots.connector"
       data-qa="dt-top-connector"
-      class="ivr-connector d-w8 d-h8 d-bar-circle d-mbn4"
-      :class="{ 'd-mbn8': isSelected }"
+      class="ivr-connector"
+      :class="{ 'ivr-connector--selected': isSelected }"
     />
     <dt-card
       content-class="d-bt d-bc-black-300 d-px12 d-pt8 d-pb12"
@@ -39,7 +39,7 @@
     >
       <template #header>
         <!-- node label and icon section on left of the header -->
-        <div class="d-d-flex d-ai-center">
+        <div class="ivr_node__header-left">
           <dt-button
             :aria-label="nodeType"
             importance="clear"
@@ -55,7 +55,7 @@
             </template>
           </dt-button>
           <p
-            class="d-fs-200 d-fw-bold"
+            class="ivr_node__label"
             data-qa="ivr-node-label"
           >
             {{ nodeLabel }}
@@ -82,7 +82,7 @@
             </dt-button>
           </template>
           <template #list="{ close }">
-            <div class="d-w164">
+            <div class="ivr_node__dropdown-list">
               <slot
                 name="menuItems"
                 :close="close"
@@ -201,18 +201,58 @@ export default {
 </script>
 
 <style lang="less">
-.ivr_node__width {
+.ivr_node {
   width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  &__header-left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__label {
+    font-size: var(--dt-font-size-200);
+    font-weight: var(--dt-font-weight-bold);
+  }
+
+  &__dropdown-list {
+    width: var(--dt-size-825);
+  }
 }
+
 .ivr_node__goto_icon {
   transform: rotate(90deg);
 }
-.ivr-connector{
+
+.ivr-connector {
   z-index: var(--zi-base);
   display: flex;
   justify-content: center;
   align-items: center;
   border-color: var(--dt-color-purple-600);
   background-color: var(--dt-color-purple-600);
+  width: var(--dt-size-400);
+  height: var(--dt-size-400);
+  border-radius: var(--dt-size-radius-circle);
+  margin-bottom: var(--dt-space-300-negative);
+
+  &--selected {
+    margin-bottom: var(--dt-space-400-negative);
+  }
+
+  &.ivr-connector--dtmf {
+    width: var(--dt-size-550);
+    height: var(--dt-size-550);
+    margin-bottom: var(--dt-space-450-negative);
+    color: var(--dt-color-neutral-white);
+    font-size: var(--dt-font-size-200);
+
+    &--selected {
+      margin-bottom: var(--dt-space-500-negative);
+    }
+  }
 }
 </style>

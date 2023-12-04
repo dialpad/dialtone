@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import DtDatepicker from './DtDatepicker.vue';
+import DtDatepicker from './datepicker.vue';
 import { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } from './formatUtils.js';
 
 export default {

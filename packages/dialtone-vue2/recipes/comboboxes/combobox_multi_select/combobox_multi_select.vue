@@ -16,18 +16,18 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="d-ps-relative d-d-block"
+        class="combobox__input-wrapper"
       >
         <span
           ref="chipsWrapper"
-          class="d-ps-absolute d-mx2 d-pl1"
+          class="combobox__chip-wrapper"
         >
           <dt-chip
             v-for="item in selectedItems"
             ref="chips"
             :key="item.id"
             :label-class="['d-chip__label']"
-            :class="['d-mt4', 'd-mx2', 'd-zi-base1']"
+            class="combobox__chip"
             :close-button-props="{ ariaLabel: 'close' }"
             :size="CHIP_SIZES[size]"
             v-on="chipListeners"
@@ -41,7 +41,7 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="d-fl-grow1"
+          class="combobox__input"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
@@ -84,7 +84,7 @@
         />
         <div
           v-else
-          class="d-ta-center d-py16"
+          class="combobox__list--loading"
         >
           {{ loadingMessage }}
         </div>
@@ -604,3 +604,34 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="less">
+.combobox__input-wrapper {
+  position: relative;
+  display: block;
+}
+
+.combobox__chip-wrapper {
+  position: absolute;
+  margin-left: var(--dt-space-200);
+  margin-right: var(--dt-space-200);
+  padding-left: var(--dt-space-100);
+}
+
+.combobox__chip {
+  margin-top: var(--dt-space-300);
+  margin-left: var(--dt-space-200);
+  margin-right: var(--dt-space-200);
+  z-index: var(--zi-base1);
+}
+
+.combobox__input {
+  flex-grow: 1;
+}
+
+.combobox__list--loading {
+  text-align: center;
+  padding-top: var(--dt-space-500);
+  padding-bottom: var(--dt-space-500);
+}
+</style>
