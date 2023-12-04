@@ -9,14 +9,14 @@
     <template #left>
       <button
         v-if="showAvatar"
-        class="d-ps-relative d-bgc-transparent d-baw0 d-c-pointer"
+        class="dt-contact-info__left"
         data-qa="contact-info-left"
         :aria-labelledby="avatarAriaLabel"
         @click="avatarClick"
       >
         <span
           v-if="avatarList"
-          class="dt-contact-info--avatars d-mrn4 d-d-flex d-fd-row"
+          class="dt-contact-info--avatars"
         >
           <dt-avatar
             v-for="(avatar, index) in avatarList"
@@ -238,10 +238,24 @@ export default {
     align-items: center;
   }
 
-  &--avatars .d-avatar {
-    border-radius: var(--dt-size-radius-pill);
-    border: var(--dt-size-300) solid var(--contact-info-avatar-border-color);
-    box-sizing: unset;
+  &__left {
+    position: relative;
+    background-color: transparent;
+    background-image: none;
+    border-width: 0;
+    cursor: pointer;
+  }
+
+  &--avatars {
+    margin-right: var(--dt-space-300-negative);
+    display: flex;
+    flex-direction: row;
+
+    .d-avatar {
+      border-radius: var(--dt-size-radius-pill);
+      border: var(--dt-size-300) solid var(--contact-info-avatar-border-color);
+      box-sizing: unset;
+    }
   }
 }
 </style>

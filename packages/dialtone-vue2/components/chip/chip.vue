@@ -29,7 +29,7 @@
         v-if="$slots.default"
         :id="`${id}-content`"
         data-qa="dt-chip-label"
-        :class="['d-truncate', 'd-chip__text', contentClass]"
+        :class="['d-chip__text', contentClass]"
       >
         <!-- @slot slot for Content within chip -->
         <slot />

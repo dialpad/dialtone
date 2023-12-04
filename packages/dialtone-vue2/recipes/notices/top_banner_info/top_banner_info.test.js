@@ -32,7 +32,7 @@ describe('DtRecipeTopBannerInfo Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    middleContent = wrapper.find('.d-top-banner-info__middle');
+    middleContent = wrapper.find('[data-qa="banner-info--middle"]');
     rootElement = wrapper.find('[data-qa="banner-info"]');
   };
 

@@ -31,7 +31,6 @@
         :class="[
           'base-input__description',
           'd-description',
-          'd-fd-column',
           descriptionSizeClasses[size],
         ]"
         data-qa="dt-input-description"
@@ -45,9 +44,7 @@
         <div
           v-if="shouldValidateLength"
           data-qa="dt-input-length-description"
-          :class="[
-            'd-mb2',
-          ]"
+          class="d-input__length-description"
         >
           {{ validationProps.length.description }}
         </div>

@@ -9,7 +9,10 @@
     <div
       v-if="$slots.content"
       data-qa="dt-popover-header-footer-content"
-      :class="['d-to-ellipsis', 'd-w100p', contentClass]"
+      :class="[{
+        'd-popover__header__content': type === 'header',
+        'd-popover__footer__content': type === 'footer',
+      }, contentClass]"
     >
       <!-- @slot Slot for main content -->
       <slot name="content" />
@@ -18,7 +21,10 @@
       v-if="showCloseButton"
       ref="popover__close-button"
       data-qa="dt-popover-close"
-      class="d-p6 d-mr6 d-bc-transparent"
+      :class="{
+        'd-popover__header__close-button': type === 'header',
+        'd-popover__footer__close-button': type === 'footer',
+      }"
       importance="outlined"
       kind="muted"
       circle

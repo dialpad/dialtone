@@ -2,15 +2,15 @@
   <div
     data-qa="skeleton-list-item"
     :class="[
-      'd-d-flex',
+      'd-skeleton-list-item',
       {
-        'd-ai-center': paragraphs.rows === 1,
+        'd-skeleton-list-item--single': paragraphs.rows === 1,
       },
       contentClass,
     ]"
   >
     <dt-skeleton-shape
-      class="d-mr8"
+      class="d-skeleton-list-item__shape"
       :size="shapeSize"
       :shape="shape"
       :animation-duration="animationDuration"
@@ -18,7 +18,7 @@
       :offset="offset"
       :content-class="shapeClass"
     />
-    <div class="d-d-flex d-fd-column d-w100p">
+    <div class="d-skeleton-list-item__paragraph-container">
       <dt-skeleton-paragraph
         v-bind="paragraphs"
         :animation-duration="animationDuration"

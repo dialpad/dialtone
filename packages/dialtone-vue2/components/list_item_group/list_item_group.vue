@@ -1,7 +1,7 @@
 <template>
   <ul
     :id="id"
-    :class="['d-ps-relative', 'd-px0', listClass]"
+    :class="['d-list-item-group', listClass]"
     role="group"
     data-qa="dt-dropdown-list-wrapper"
     :aria-labelledby="`${id}-heading`"

@@ -1,6 +1,6 @@
 <template>
   <ol
-    class="d-p0"
+    class="d-combobox__empty-list"
     data-qa="dt-combobox-empty-list"
   >
     <slot>

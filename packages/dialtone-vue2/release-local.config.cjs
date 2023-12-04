@@ -1,21 +1,17 @@
 /* eslint-disable no-template-curly-in-string */
+const name = 'dialtone-vue2';
+const srcRoot = `packages/${name}`;
+
 module.exports = {
-  branches: [
-    'production',
-    'staging',
-    {
-      name: 'beta',
-      prerelease: true,
-    },
-    {
-      name: 'alpha',
-      prerelease: true,
-    },
-    {
-      name: 'dialtone8',
-      prerelease: 'dialtone8',
-      channel: 'next',
-    },
+  extends: 'release.config.base.js',
+  pkgRoot: srcRoot,
+  tagFormat: name + '/v${version}',
+  commitPaths: [`${srcRoot}/*`],
+  assets: [
+    `${srcRoot}/CHANGELOG.md`,
+    `${srcRoot}/CHANGELOG.json`,
+    `${srcRoot}/package.json`,
+    `${srcRoot}/package-lock.json`,
   ],
   plugins: [
     ['@semantic-release/commit-analyzer', {
@@ -27,15 +23,28 @@ module.exports = {
     ['@semantic-release/release-notes-generator', {
       config: '@dialpad/conventional-changelog-angular',
     }],
-    '@semantic-release/changelog',
-    '@dialpad/semantic-release-changelog-json',
-    ['@semantic-release/npm', {
-      npmPublish: false,
+    ['@dialpad/semantic-release-changelog-json', {
+      changelogFile: `${srcRoot}/CHANGELOG.md`,
+      changelogJsonFile: `${srcRoot}/CHANGELOG.json`,
     }],
+    ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
+    ['@semantic-release/npm', { npmPublish: false }],
     ['@semantic-release/git', {
-      assets: ['CHANGELOG.md', 'CHANGELOG.json', 'package.json', 'package-lock.json', 'npm-shrinkwrap.json'],
       /* eslint-disable-next-line no-template-curly-in-string */
-      message: 'chore(release): ${nextRelease.version} \n\n${nextRelease.notes}',
+      message: `chore(release): ${name}` +
+        '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
+  ],
+  branches: [
+    'staging',
+    'next',
+    {
+      name: 'beta',
+      prerelease: true,
+    },
+    {
+      name: 'alpha',
+      prerelease: true,
+    },
   ],
 };

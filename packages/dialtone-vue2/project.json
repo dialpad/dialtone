@@ -1,0 +1,66 @@
+{
+  "name": "dialtone-vue2",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "dependsOn": [
+        {
+          "projects": [ "dialtone-icons" ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "outputs": [],
+      "options": {
+        "script": "build",
+        "parallel": false
+      }
+    },
+    "build-docs": {
+      "executor": "nx:run-script",
+      "outputs": [],
+      "options": {
+        "script": "storybook:build",
+        "parallel": false
+      }
+    },
+    "release-local": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-vue2/release-local.config.cjs",
+        "parallel": false
+      }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "pnpm publish --filter ./packages/dialtone-vue2",
+        "parallel": false
+      }
+    },
+    "release-github": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-vue2/release-ci.config.cjs",
+        "parallel": false
+      }
+    },
+    "test": {
+      "executor": "nx:run-script",
+      "dependsOn": [
+        {
+          "projects": [ "dialtone-icons" ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "options": {
+        "script": "test",
+        "parallel": true
+      }
+    }
+  }
+}

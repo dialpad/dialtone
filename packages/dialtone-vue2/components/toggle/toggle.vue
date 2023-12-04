@@ -1,5 +1,5 @@
 <template>
-  <div class="d-d-flex d-ai-center">
+  <div class="d-toggle-wrapper">
     <label
       v-if="$slots.default"
       :class="labelClass"

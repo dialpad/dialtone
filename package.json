@@ -9,16 +9,25 @@
     "build": "pnpm nx run-many --target=build",
     "start:dialtone": "pnpm nx run-many --target=start --projects=dialtone,dialtone-documentation",
     "start:dialtone-vue3": "pnpm nx run-many --target=start --projects=dialtone,dialtone-vue3",
+    "start:dialtone-vue2": "pnpm nx run-many --target=start --projects=dialtone,dialtone-vue2",
     "prepare": "husky install",
     "release": "./scripts/release.sh"
   },
-  "author": "",
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "husky": "^8.0.3",
     "nx": "^17.1.3",
     "semantic-release-npm-github-publish": "^1.5.4",
     "semantic-release-plus": "^20.0.0"
+  },
+  "pnpm": {
+    "packageExtensions": {
+      "vue-template-compiler": {
+        "peerDependencies": {
+          "vue": "^2.7.15"
+        }
+      }
+    }
   },
   "resolutions": {
     "@dialpad/dialtone>postcss-preset-env": "^7.0.0",

@@ -376,10 +376,7 @@ export default {
 
     listClasses () {
       return [
-        'd-ps-relative',
-        'd-stack2',
-        'd-m4',
-        'd-px0',
+        'd-dropdown-list',
         DROPDOWN_PADDING_CLASSES[this.padding],
         this.listClass,
         { 'd-context-menu-list': this.openOnContext },
@@ -497,5 +494,14 @@ export default {
 <style lang="less">
 .d-context-menu-list {
   width: var(--dt-size-850);
+}
+.d-dropdown-list {
+  position: relative;
+  margin: var(--dt-space-300);
+  padding-left: var(--dt-space-0);
+  padding-right: var(--dt-space-0);
+  >.dt-list-item {
+    margin-top: var(--dt-space-200);
+  }
 }
 </style>

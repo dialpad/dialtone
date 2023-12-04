@@ -1,3 +1,7 @@
+const componentsList = require('./common/components_list.cjs');
+componentsList.push('btn', 'select', 'validation-message', 'label', 'description');
+const componentsNames = componentsList.map(name => name.replace('_', '-').replace('.vue', ''));
+
 module.exports = {
   extends: [
     'standard',
@@ -145,6 +149,7 @@ module.exports = {
       nonwords: false,
     }],
     'vue/template-curly-spacing': ['error', 'never'],
+    'vue/no-restricted-class': ['error', `/^d-(?!(${componentsNames.join('|')})).*/`],
   },
   overrides: [
     {
@@ -171,6 +176,19 @@ module.exports = {
       ],
       rules: {
         'vue/no-bare-strings-in-template': [
+          'off',
+        ],
+        'vue/no-restricted-class': [
+          'off',
+        ],
+      },
+    },
+    {
+      files: [
+        'common/**',
+      ],
+      rules: {
+        'vue/no-restricted-class': [
           'off',
         ],
       },
