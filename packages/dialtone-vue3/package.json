@@ -6,6 +6,7 @@
     "build": "run-s clean build:main build:typescript build:documentation",
     "build:main": "vite build",
     "build:typescript": "vue-tsc",
+    "lint": "run-s lint:code lint:docs",
     "build:documentation": "node scripts/build-docs.js",
     "build:documentation:functions": "pnpm exec typedoc --plugin typedoc-plugin-markdown",
     "clean": "rm -rf ./dist",
