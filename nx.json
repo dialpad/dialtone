@@ -4,17 +4,16 @@
       "cache": true,
       "dependsOn": ["^build"]
     },
-    "lint": {
-      "cache": true
-    },
+    "lint:fix": { "cache": true },
     "test": {
-      "cache": true
+      "cache": true,
+      "dependsOn": ["^build"]
     }
   },
   "installation": {
     "version": "17.0.2"
   },
   "affected": {
-    "defaultBase": "origin/production"
+    "defaultBase": "production"
   }
 }

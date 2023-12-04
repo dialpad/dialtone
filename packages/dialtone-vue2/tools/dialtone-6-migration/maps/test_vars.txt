@@ -1,0 +1,2 @@
+--some-css-var:--some-new-css-var
+@some-less-var:@some-new-less-var

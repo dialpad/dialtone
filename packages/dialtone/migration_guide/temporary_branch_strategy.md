@@ -19,7 +19,7 @@ Until we are done with the migrations, we must release all changes made on the `
 1. a change or multiple changes were committed to the `staging` branch.
 2. release the staging branch using our regular process.
 3. either cherry-pick individual commits or merge staging into branch `version8`.
-4. in `version8` branch run `npm run release`
+4. in `version8` branch run `pnpm run release`
 5. checkout the `next` branch and merge `version8` branch via `git merge version8 --ff-only`
 6. push the branch and the github action to deploy it will trigger
 
@@ -39,7 +39,7 @@ Until we are done with the migrations, we must release all changes made on the `
 1. a change or multiple changes were committed to the `staging` branch.
 2. release the staging branch using our regular process.
 3. either cherry-pick individual commits or merge staging into branch `dialtone8`.
-4. in `dialtone8` branch run `npm run release`
+4. in `dialtone8` branch run `pnpm run release`
 5. checkout the `next` branch and merge `dialtone8` branch via `git merge dialtone8 --ff-only`
 6. push the branch and the github action to deploy it will trigger
 
@@ -59,7 +59,7 @@ Until we are done with the migrations, we must release all changes made on the `
 1. a change or multiple changes were committed to the `staging-vue3` branch.
 2. release the staging-vue3 branch using our regular process.
 3. either cherry-pick individual commits or merge staging into branch `dialtone8-vue3`.
-4. in `dialtone8-vue3` branch run `npm run release`
+4. in `dialtone8-vue3` branch run `pnpm run release`
 5. checkout the `next-vue3` branch and merge `dialtone8-vue3` branch via `git merge dialtone8-vue3 --ff-only`
 6. push the branch and the github action to deploy it will trigger
 

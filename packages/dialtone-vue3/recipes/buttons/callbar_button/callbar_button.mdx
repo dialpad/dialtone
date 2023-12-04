@@ -1,0 +1,67 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as CallbarButtonStories from './callbar_button.stories';
+
+<Meta of={CallbarButtonStories}/>
+
+# Callbar Button
+
+<Subtitle>
+  This is a button formatted for the callbar. It has a tooltip and support an icon.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story of={CallbarButtonStories.Default} />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story of={CallbarButtonStories.Variants} />
+</Canvas>
+
+## All call bar buttons from the spec
+
+<Canvas>
+  <Story of={CallbarButtonStories.Callbar} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeCallbarButton } from '@dialpad/dialtone-vue';
+```
+
+### Simplest form
+
+```html
+<dt-recipe-callbar-button>
+  Button
+</dt-recipe-callbar-button>
+```
+
+### Complex
+
+```html
+<dt-recipe-callbar-button
+  :disabled="true"
+  :active="false"
+  :danger="true"
+>
+  Button
+  <template #tooltip>
+    This is the tooltip
+  </template>
+  <template #icon>
+    <icon-dialpad-glyph />
+  </template>
+</dt-recipe-callbar-button>
+```

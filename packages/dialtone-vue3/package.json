@@ -1,0 +1,225 @@
+{
+  "name": "@dialpad/dialtone-vue",
+  "version": "3.96.1",
+  "description": "Vue component library for Dialpad's design system Dialtone",
+  "scripts": {
+    "build": "run-s clean build:main build:typescript build:documentation",
+    "build:main": "vite build",
+    "build:typescript": "vue-tsc",
+    "lint": "run-s lint:code lint:docs",
+    "build:documentation": "node scripts/build-docs.js",
+    "build:documentation:functions": "pnpm exec typedoc --plugin typedoc-plugin-markdown",
+    "clean": "rm -rf ./dist",
+    "lint-staged:code": "pnpm run lint:code --fix",
+    "lint-staged:docs": "pnpm run lint:docs --fix",
+    "lint:code": "eslint . --ext .js,.vue --ignore-path .gitignore",
+    "lint:docs": "markdownlint '**/*.mdx'",
+    "prepublishOnly": "pnpm run build",
+    "pretest": "pnpm run clean",
+    "start": "pnpm run storybook",
+    "storybook": "STORYBOOK_ENV=development storybook dev -p 9010",
+    "storybook:clean": "rm -rf ./storybook-static",
+    "storybook:build": "pnpm run storybook:clean && pnpm run build:documentation:functions && STORYBOOK_ENV=production pnpm exec storybook build",
+    "storybook:build:docs-only": "pnpm run storybook:build --docs",
+    "test:a11y": "pnpm exec test-storybook --url http://localhost:9010/",
+    "test:visual": "pnpm exec percy storybook --disable-cache --config ./percy.config.cjs --verbose ./storybook-static",
+    "test": "pnpm exec vitest run --test-timeout=10000",
+    "test:one": "pnpm exec vitest related --run",
+    "test:watch": "pnpm exec vitest"
+  },
+  "files": [
+    "dist",
+    "types",
+    "CHANGELOG.md",
+    "CHANGELOG.json"
+  ],
+  "dependencies": {
+    "@dialpad/dialtone-icons": "workspace:^",
+    "@tiptap/core": "^2.0.3",
+    "@tiptap/extension-code-block": "^2.0.3",
+    "@tiptap/extension-document": "^2.0.3",
+    "@tiptap/extension-hard-break": "^2.0.3",
+    "@tiptap/extension-mention": "^2.1.11",
+    "@tiptap/extension-paragraph": "^2.0.3",
+    "@tiptap/extension-placeholder": "^2.0.3",
+    "@tiptap/extension-text": "^2.0.3",
+    "@tiptap/pm": "^2.0.3",
+    "@tiptap/suggestion": "^2.1.4",
+    "@tiptap/vue-3": "^2.0.3",
+    "date-fns": "^2.30.0",
+    "emoji-regex": "^10.2.1",
+    "emoji-toolkit": "^6.6.0",
+    "tippy.js": "^6.3.7"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
+    "@dialpad/conventional-changelog-angular": "^1.1.1",
+    "@dialpad/dialtone": "workspace:^",
+    "@dialpad/semantic-release-changelog-json": "^1.0.0",
+    "@percy/cli": "^1.27.4",
+    "@percy/storybook": "^5.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@storybook/addon-a11y": "^7.6.1",
+    "@storybook/addon-actions": "^7.6.1",
+    "@storybook/addon-docs": "^7.6.1",
+    "@storybook/addon-essentials": "^7.6.1",
+    "@storybook/addon-links": "^7.6.1",
+    "@storybook/addon-mdx-gfm": "^7.6.1",
+    "@storybook/addon-viewport": "^7.6.1",
+    "@storybook/blocks": "^7.6.1",
+    "@storybook/manager-api": "^7.6.1",
+    "@storybook/test-runner": "^0.16.0",
+    "@storybook/testing-library": "^0.2.2",
+    "@storybook/theming": "^7.6.1",
+    "@storybook/vue3": "^7.6.1",
+    "@storybook/vue3-vite": "^7.6.1",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "@vue/test-utils": "^2.4.0",
+    "@vue/tsconfig": "^0.4.0",
+    "axe-core": "^4.7.2",
+    "axe-playwright": "^1.2.3",
+    "c8": "^8.0.0",
+    "chai": "^4.3.7",
+    "eslint": "8.44",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-vitest": "^0.2.6",
+    "eslint-plugin-vitest-globals": "^1.3.1",
+    "eslint-plugin-vue": "^9.15.1",
+    "eslint-plugin-vuejs-accessibility": "^2.1.0",
+    "jsdom": "^22.1.0",
+    "less": "^4.2.0",
+    "lint-staged": "^13.2.3",
+    "macos-release": "^3.2.0",
+    "markdownlint": "^0.29.0",
+    "markdownlint-cli": "^0.35.0",
+    "npm-run-all": "^4.1.5",
+    "null-loader": "^4.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "semantic-release": "^21.0.6",
+    "sinon": "^15.2.0",
+    "source-map-support": "^0.5.21",
+    "storybook": "^7.6.1",
+    "storybook-dark-mode": "^3.0.3",
+    "string-hash": "^1.1.3",
+    "tippy.js": "^6.3.7",
+    "typedoc": "^0.25.2",
+    "typedoc-plugin-markdown": "^3.16.0",
+    "vite": "^5.0.0",
+    "vite-svg-loader": "^4.0.0",
+    "vitest": "0.33.0",
+    "vue": "^3.3.4",
+    "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
+    "vue-docgen-api": "^4.73.0",
+    "vue-tsc": "^1.8.8",
+    "yo": "^4.3.1",
+    "yorkie": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@dialpad/dialtone": "^7.30.0 || ^8.21.2",
+    "vue": ">=3.2"
+  },
+  "bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+  "contributors": [
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Ignacio Ropolo",
+      "email": "ignacio.ropolo@dialpad.com",
+      "url": "https://github.com/iropolo"
+    },
+    {
+      "name": "Nina Repetto",
+      "email": "nina.repetto@dialpad.com",
+      "url": "https://github.com/ninamarina"
+    }
+  ],
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 14.17"
+  },
+  "type": "module",
+  "main": "./dist/dialtone-vue.cjs",
+  "types": "./dist/types/index.d.ts",
+  "module": "./dist/dialtone-vue.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/dialtone-vue.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/dialtone-vue.cjs"
+      }
+    },
+    "./emoji": {
+      "import": {
+        "types": "./dist/types/emoji.d.ts",
+        "default": "./dist/emoji.js"
+      },
+      "require": {
+        "types": "./dist/types/emoji.d.ts",
+        "default": "./dist/emoji.cjs"
+      }
+    },
+    "./message_input": {
+      "import": {
+        "types": "./dist/types/message_input.d.ts",
+        "default": "./dist/message_input.js"
+      },
+      "require": {
+        "types": "./dist/types/message_input.d.ts",
+        "default": "./dist/message_input.cjs"
+      }
+    },
+    "./directives": {
+      "import": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.js"
+      },
+      "require": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.cjs"
+      }
+    },
+    "./css": {
+      "style": "./dist/style.css"
+    }
+  },
+  "homepage": "https://dialtone.dialpad.com/vue3",
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "Dialtone Vue",
+    "Design System",
+    "Components",
+    "Component Library",
+    "Vue",
+    "Storybook"
+  ],
+  "license": "MIT"
+}

@@ -17,7 +17,7 @@ In order to push the `production` branch to deploy the documentation site and/or
 
 1. Make sure your `staging` and `production` branches are up-to-date locally. You should be in the `staging` branch. If you want to make a prerelease, it should be `beta` or `alpha` branch instead of `staging`.
 2. Stop your local server and keep your working directory clean before versioning.
-3. In your CLI window, run `npm run release` from the dialtone-tokens repository directory.
+3. In your CLI window, run `pnpm run release` from the dialtone-tokens repository directory.
 4. If there are changes that should trigger a release:
    - The script will update the `package.json` and `package-lock.json` files with the version number according to the types of changes introduced since the last release and will add release notes in the `CHANGELOG.MD` file.
    - A release commit and a git tag associated with this commit will be created and pushed to the remote.

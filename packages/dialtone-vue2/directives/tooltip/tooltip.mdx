@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/blocks';
+import * as TooltipDirectiveStories from './tooltip.stories.js';
+
+<Meta of={TooltipDirectiveStories}/>
+
+# Tooltip directive
+
+A tooltip is a floating label that briefly explains an action, function, or an element.
+Its content is exclusively text and shouldn't be vital information for users.
+If customization other than placement is needed consider using `dt-tooltip` component instead.
+
+## Usage
+
+Import the directive from dialtone-vue/directives
+
+```js
+import { DtTooltipDirective } from "@dialpad/dialtone-vue/directives";
+```
+
+Install the directive into vue instance
+
+```js
+Vue.use(DtTooltipDirective);
+```
+
+### Default
+
+Default tooltip directive uses `top` as default placement
+
+```html
+<dt-button v-dt-tooltip="Tooltip text">Placeholder button</dt-button>
+```
+
+### With Placement
+
+It's possible to change the tooltip default placement with directive arguments,
+possible values: **bottom, bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end,
+top, top-start, top-end**.
+
+```html
+<dt-button v-dt-tooltip:bottom-start="Tooltip text">Placeholder button</dt-button>
+```

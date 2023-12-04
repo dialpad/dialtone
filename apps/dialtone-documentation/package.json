@@ -43,25 +43,24 @@
     "lint": "run-s lint:docs lint:code",
     "lint:fix": "run-s lint-staged:docs lint-staged:code",
     "build": "vuepress build docs",
-    "lint-staged:code": "npm run lint:code -- --fix",
-    "lint-staged:docs": "npm run lint:docs -- --fix",
+    "lint-staged:code": "pnpm run lint:code --fix",
+    "lint-staged:docs": "pnpm run lint:docs --fix",
     "lint:code": "eslint '**/*.{js,vue}'",
     "lint:docs": "markdownlint '**/*.md'",
     "start": "vuepress dev docs"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
+  "type": "module",
   "dependencies": {
-    "@dialpad/dialtone-icons": "workspace:^",
-    "@dialpad/dialtone": "workspace:^"
+    "@dialpad/dialtone": "workspace:^",
+    "@dialpad/dialtone-icons": "workspace:^"
   },
   "devDependencies": {
     "@dialpad/dialtone-combinator": "^0.3.1",
     "@dialpad/dialtone-tokens": "workspace:^",
-    "@dialpad/dialtone-vue": "^3.94.2",
+    "@dialpad/dialtone-vue": "workspace:^",
     "@dialpad/postcss-responsive-variations": "^1.1.5",
     "@docsearch/js": "^3.5.1",
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@toycode/markdown-it-class": "^1.2.4",
     "@vuepress/bundler-vite": "2.0.0-beta.60",
     "@vuepress/client": "2.0.0-beta.60",
@@ -75,6 +74,7 @@
     "@vuepress/plugin-toc": "2.0.0-beta.60",
     "@vuepress/utils": "2.0.0-beta.60",
     "date-fns": "^2.30.0",
+    "lint-staged": "^13.2.3",
     "markdown-it": "^13.0.2",
     "markdown-it-anchor": "^8.6.7",
     "markdownlint": "^0.29.0",

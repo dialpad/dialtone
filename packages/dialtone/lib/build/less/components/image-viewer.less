@@ -1,0 +1,35 @@
+//
+//  DIALTONE
+//  COMPONENTS: Image Viewer
+//
+//  These are the styles for Image Viewer component.
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-image-viewer__preview-button {
+  padding: var(--dt-space-0);
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
+
+.d-image-viewer__full {
+  max-width: 80%;
+  max-height: 80%;
+  padding: var(--dt-space-0);
+  border-radius: var(--dt-size-radius-0);
+
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.d-image-viewer__close-button {
+  --fco: 100%;
+
+  color: hsla(var(--dt-color-neutral-white-h) var(--dt-color-neutral-white-s) var(--dt-color-neutral-white-l) / var(--fco));
+}

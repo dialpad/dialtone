@@ -1,3 +1,4 @@
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { defineUserConfig } from 'vuepress';
 import { getDirname, path } from '@vuepress/utils';
 import { viteBundler } from '@vuepress/bundler-vite';
@@ -8,7 +9,7 @@ import anchor from 'markdown-it-anchor';
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
-const siteURL = 'https://dialpad.design';
+const siteURL = 'https://dialtone.dialpad.com';
 const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
 
 const themeConfig = {
@@ -45,7 +46,7 @@ export default defineUserConfig({
 
   bundler: viteBundler({
     viteOptions: {
-      plugins: [viteSvgLoader()],
+      plugins: [viteSvgLoader(), viteCommonjs()],
       css: {
         devSourcemap: true,
       },

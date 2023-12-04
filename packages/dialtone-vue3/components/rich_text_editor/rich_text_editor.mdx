@@ -1,0 +1,135 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as RichTextEditorStories from './rich_text_editor.stories';
+
+<Meta of={ RichTextEditorStories }/>
+
+# Rich Text Editor
+
+<Subtitle>
+  A rich text editor is a component that allows users to format text with a
+  variety of styles. It enables also mixing text with custom components built as
+  extensions, such as links and user mentions.
+</Subtitle>
+
+<div class="d-notice d-notice--info d-wmx100p">
+<b>NOTICE:</b> This component is not a part of Dialtone-Vue core package and can
+only be used by other Dialtone components. To keep this code out of the
+Dialtone-vue core any Dialtone component that uses this should be built into
+their separate build targets.
+</div>
+
+## Base Style
+
+The editor itself is without any styling and the intention is to wrap it with
+another component, such as Message Input, that provides the UI.
+
+<Canvas>
+  <Story of={RichTextEditorStories.Default} />
+</Canvas>
+
+## Output format
+
+There are 3 defined output formats currently for the input text.
+
+### Text
+
+Provide prop `outputFormat: 'text'`
+
+Plain text format as output without taking into consideration any marks (italics, bold) / html tags/ codeblocks
+that may be included in the input text user provides.
+
+### Json
+
+Provide prop `outputFormat: 'json'`
+
+the input will be formated as a json document that can then be consumed by product.
+The type of the each node in the input will be present for example: `codeblock`, `image`
+along with other meta data pertaining to the text node.
+
+### HTML
+
+Provide prop `outputFormat: 'html'`
+
+the input will be formated as native html that can then be consumed by product.
+
+## Tiptap Plugins Used
+
+### [HardBreak](https://tiptap.dev/api/nodes/hard-break)
+
+HardBreak plugin is used to add support for `<br>` tags in the rich text editor.
+
+### [CodeBlocks](https://tiptap.dev/api/nodes/code-block)
+
+Codeblock plugin is used to enaable the support for code and also specify the language. Type ``` followed by space
+or ~~~ with space to enable a codeblock in the rich text editor.
+
+### [Placeholder](https://tiptap.dev/api/extensions/placeholder)
+
+Provides support to enable placeholder support
+
+### [Mention](https://tiptap.dev/api/nodes/mention)
+
+The tiptap Mention plugin is apt for our use case of mentioning users or channels within the editor.
+It also creates the respective nodes with ability for user to customize the trigger character.
+
+#### How to use the Mention plugin:
+
+When using the Rich Text editor, the developer would have to pass in the suggestion object prop
+which MUST contain an items function that takes in a query and returns a list of object with the properties:
+
+```json
+{ 
+  contactId: String,
+  name: String,
+  avatarSrc: String
+}
+```
+
+There can be additional properties that override the mention plugin and
+more details can be seen here: [Suggestion Tiptap utility](https://tiptap.dev/api/utilities/suggestion).
+If this mentionSuggestion Object prop is not supplied, the mention plugin is disabled by default.
+
+To see it in action type char '@' into rich editor With channel mentions.
+<Canvas>
+  <Story of={RichTextEditorStories.WithMentionSuggestions} />
+</Canvas>
+
+## Slots, Props and Events
+
+<Controls />
+
+## Usage (internal only)
+
+```js
+import { DtRichTextEditor } from '@components/rich_text_editor';
+```
+
+### Default
+
+```jsx
+<dt-rich-text-editor
+  :v-model="text"
+  :input-aria-label="ariaLabel"
+/>
+```
+
+### With Links
+
+```jsx
+<dt-rich-text-editor
+  :v-model="text"
+  :input-aria-label="ariaLabel"
+  link
+/>
+```
+
+### With mentionSuggestion
+
+```jsx
+<dt-rich-text-editor
+  :v-model="text"
+  :input-aria-label="ariaLabel"
+  :mention-suggestion="mentionSuggestion
+/>
+```

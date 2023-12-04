@@ -7,15 +7,11 @@ on:
       - staging
 
 jobs:
-  commitlint:
+  commit-lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18 ]
-
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
+        node-version: [ 20 ]
 
     steps:
       - uses: actions/checkout@v3
@@ -43,13 +39,13 @@ jobs:
           echo "correct format: <type>(<scope>): <subject>"
           echo "example: feat: add dialbot icon"
           echo "Please amend your commit message (git commit --amend) if commitlint reports an error and push using: git push --force-with-lease"
-          git show -s --format=%B HEAD^2 | npx commitlint --verbose
+          git show -s --format=%B HEAD^2 | pnpm commitlint --verbose
 
       - name: Lint pull request title
         run: |
           echo "The PR's title should adhere to the commit message convention."
           echo "correct format: <type>(<scope>): <subject>"
           echo "example: feat: add dialbot icon"
-          npx commitlint --verbose << EOF
+          pnpm commitlint --verbose << EOF
           ${{ github.event.pull_request.title }}
           EOF

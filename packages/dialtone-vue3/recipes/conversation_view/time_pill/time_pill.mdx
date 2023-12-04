@@ -1,0 +1,37 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as TimePillStories from './time_pill.stories';
+
+<Meta of={TimePillStories}/>
+
+# Time Pill
+
+<Subtitle>
+  Used to divide feed items that are from different dates.
+</Subtitle>
+
+## Base Style
+
+Pass in a display value as dateTimeDisplay, and the actual date into dateTime.
+
+<b>Examples</b>:
+
+- dateTimeDisplay: 'Today', 'Yesterday', 'Monday, September 13'
+
+- dateTime: '2022-09-13'
+
+<Canvas>
+  <Story of={TimePillStories.Default} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeTimePill } from '@dialpad/dialtone-vue';
+```

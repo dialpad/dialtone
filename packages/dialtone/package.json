@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "8.21.4",
+  "version": "8.22.1",
   "description": "Dialpad's design system",
   "keywords": [
     "Dialpad",
@@ -46,23 +46,23 @@
     "CHANGELOG.json"
   ],
   "bin": {
-    "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.js",
-    "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs"
+    "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
+    "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.js"
   },
-  "repository": "git@github.com:dialpad/dialtone.git",
+  "type": "module",
   "scripts": {
-    "build": "gulp",
+    "build": "gulp --gulpfile ./gulpfile.cjs",
     "lint": "run-s lint:library lint:code",
     "lint:fix": "run-s lint-staged:library lint-staged:code",
-    "lesshint": "npx lesshint 'lib/build/less/utilities'",
-    "lint-staged:code": "npm run lint:code -- --fix",
-    "lint-staged:library": "npm run stylelint -- --fix",
-    "lint:code": "eslint '**/*.{js,vue}'",
+    "lesshint": "pnpm lesshint 'lib/build/less/utilities'",
+    "lint-staged:code": "pnpm run lint:code --fix",
+    "lint-staged:library": "pnpm run stylelint --fix",
+    "lint:code": "eslint '**/*.{js,cjs,vue}'",
     "lint:library": "run-s stylelint lesshint",
-    "prepublishOnly": "npm run build",
-    "start": "gulp watch",
-    "stylelint": "npx stylelint 'lib/build/less/**/*.less' 'docs/.vuepress/theme/**/*.{less,css}'",
-    "build:icons": "gulp icons",
+    "prepublishOnly": "pnpm run build",
+    "start": "gulp watch --gulpfile ./gulpfile.cjs",
+    "stylelint": "pnpm exec stylelint 'lib/build/less/**/*.less'",
+    "build:icons": "gulp icons --gulpfile ./gulpfile.cjs",
     "test:postcss-generator-plugin": "jest --coverage && eslint ."
   },
   "unpkg": "dist/css/dialtone.min.css",
@@ -70,9 +70,6 @@
     "last 1 version",
     "maintained node versions"
   ],
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "publishConfig": {
     "access": "public"
   },

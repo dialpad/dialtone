@@ -1,13 +1,14 @@
 {
   "name": "dialtone-documentation",
   "targets": {
-    "build": {
+    "build-docs": {
       "executor": "nx:run-script",
       "dependsOn": [
         {
           "projects": [
             "dialtone",
-            "dialtone-icons"
+            "dialtone-icons",
+            "dialtone-vue3"
           ],
           "target": "build",
           "params": "ignore"
@@ -24,7 +25,7 @@
       "outputs": [],
       "dependsOn": [
         {
-          "projects": ["dialtone-icons"],
+          "projects": ["dialtone-vue3", "dialtone-icons"],
           "target": "build",
           "params": "ignore"
         }

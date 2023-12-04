@@ -19,11 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18 ]
-
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
+        node-version: [ 20 ]
 
     steps:
       - uses: actions/checkout@v3
@@ -55,14 +51,14 @@ jobs:
       - name: Set npm token
         run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
 
-      # note that npm run build is executed before publishing via prepublishOnly
+      # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: npx nx run-many --target=release
+        run: pnpm nx run-many --target=release
 
       - name: Deploy prerelease
         if: ${{ github.ref != 'refs/heads/production' }}
-        run: npx nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
+        run: pnpm nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
 
       - name: Set registry to github packages
         run: npm config set @dialpad:registry https://npm.pkg.github.com
@@ -70,16 +66,16 @@ jobs:
       - name: Set github auth token
         run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
-      # note that npm run build is executed before publishing via prepublishOnly
+      # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Deploy production to github packages
         if: ${{ github.ref == 'refs/heads/production' }}
-        run: npx nx run-many --target=release
+        run: pnpm nx run-many --target=release
 
       - name: Deploy ${{ steps.branch.outputs.BRANCH }} to github packages
         if: ${{ github.ref != 'refs/heads/production' }}
-        run: npx nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
+        run: pnpm nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
 
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx nx run-many --target=release-github
+        run: pnpm nx run-many --target=release-github

@@ -1,0 +1,83 @@
+import { Meta, Subtitle, Controls } from '@storybook/blocks';
+
+<Meta title="Docs/Storybook/Writing Documentation" />
+
+# Writing Documentation
+
+## How to write MDX documentation
+
+[MDX]((https://storybook.js.org/docs/vue/api/mdx)) is a standard file format that combines
+[Markdown](https://guides.github.com/features/mastering-markdown/) with [JSX](https://facebook.github.io/jsx/). It
+allows us to create beautiful, interactive documentation with ease.
+
+## Where will the documentation appear
+
+The MDX documentation will appear in a tab at the top of the storybook component explorer next to the `Canvas` tab.
+
+## What should be documented
+
+### Component description
+
+Each component and component variant should have a description which provides information on the functionality that the
+component provides. The description can also include any details that we deem useful which include but are not limited
+to:
+
+* Usage recommendations
+* Limitations
+* Gotchas
+
+### Usage
+
+#### How to import
+
+All components should include clear instructions on how to import them.
+
+##### Example
+
+```js
+import { MyComponent } from '@dialpad/component';
+```
+
+#### How to use
+
+We should also provide instructions on how to use the components that we have created.
+
+##### Example
+
+```jsx
+<my-component some="prop">
+  Default Slot
+</my-component>
+```
+
+### [Props](https://v3.vuejs.org/guide/component-props.html)
+
+Each component should have a section which lists all of the props which the component can accept. In addition to listing
+the props, we also need to provide documentation on the default value for the prop and a brief description about the
+prop which includes accepted types.
+
+You can either manually provide this documentation or use the `Controls` component to provide some auto generated
+documentation.
+
+#### Controls Example
+
+```jsx
+<Controls />
+```
+
+Note: `PRIMARY_STORY` is imported from `@storybook/addon-docs`.
+
+### [Slots](https://v3.vuejs.org/guide/component-slots.html)
+
+Each component should have a section which lists all of the slots which the component can accept. In addition to
+listing the slots, if there are any named slots please provide a brief description about the slot. It is assumed that
+the default slot will be used to pass children.
+
+### [Events](https://v3.vuejs.org/guide/component-custom-events.html)
+
+In the `Events` section we will list and document any custom events that are emitted from the component.
+
+# Did we miss anything?
+
+This is a living document that is constantly being updated, feel free to suggest new additions and changes by opening
+a PR and assigning to one of the project's contributors.

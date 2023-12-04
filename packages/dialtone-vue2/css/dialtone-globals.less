@@ -1,0 +1,148 @@
+// Import dialtone style definitions as references globally so they can be used in
+// mixins. See: https://dialpad.design
+@import '@dialpad/dialtone/lib/build/less/components/modal';
+
+// Reset base font size to 12px.
+:root {
+  --base--font-size: var(--dt-font-size-100);
+}
+
+// Vue transition classes for code samples.
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.18s ease-in-out;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0 !important;
+}
+.fade-enter-to, .fade-leave {
+  opacity: 1 !important;
+}
+
+.slide-down-enter-active {
+  transition: transform 0.28s ease-out;
+}
+
+.slide-down-leave-active {
+  transition: transform 0.28s ease-in;
+}
+
+.slide-down-enter {
+  transform: translateY(-100%);
+}
+
+.slide-down-leave-to {
+  transform: translateY(100%);
+}
+
+.pop-enter-active {
+  animation: pop .5s;
+}
+
+.pop-leave-active {
+  animation: pop .5s reverse;
+}
+
+@keyframes pop {
+  50%  { transform: scale(1.2); }
+}
+
+.shake-enter-active {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(8px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-16px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(16px, 0, 0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0
+  }
+  50% {
+    opacity: 0.5
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1
+  }
+  50% {
+    opacity: 0.5
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.18s ease-in-out;
+}
+
+.fade-out {
+  animation: fade-out 0.18s ease-in-out;
+}
+
+.d-zoom-enter, .d-zoom-leave-to {
+  .d-modal--animate();
+}
+
+.d-zoom__dialog-enter, .d-zoom__dialog-leave-to {
+  .d-modal__dialog--animate();
+}
+
+.d-zoom-enter-active, .d-zoom__dialog-enter-active {
+  .d-modal--animate-in();
+}
+
+.d-zoom-leave-active {
+  .d-modal--animate-out();
+}
+
+.d-zoom__dialog-leave-active {
+  .d-modal__dialog--animate-out();
+}
+
+/* Hiding class, making content visible only to screen readers but not visually */
+/* "sr" meaning "screen-reader" */
+/* https://css-tricks.com/inclusively-hidden/ */
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+// Component preview background and foreground colors need to be set apart from global theme
+.sb-show-main {
+   background: var(--dt-color-surface-primary) !important;
+   color: var(--dt-color-foreground-primary) !important;
+}
+
+// CSS override to avoid header links to move while changing theme on Docs mode
+.css-1ofkq6d {
+  margin-left: -24px !important;
+}

@@ -26,6 +26,6 @@ jobs:
           echo "correct format: <type>(<scope>): <subject>"
           echo "example: feat: add modal component"
           echo "Please amend your commit message (git commit --amend) if commitlint reports an error and push using: git push --force-with-lease"
-          npx commitlint --verbose << EOF
+          pnpm commitlint --verbose << EOF
           ${{ github.event.head_commit.message }}
           EOF

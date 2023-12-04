@@ -75,10 +75,13 @@
   }
 
   &__initials {
+    position: absolute;
+    z-index: var(--zi-base);
     font-weight: var(--dt-font-weight-bold);
     font-size: var(--avatar-size-text);
     line-height: var(--dt-font-line-height-100);
     text-transform: uppercase;
+    user-select: none;
   }
 
   &__icon {

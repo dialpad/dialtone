@@ -1,3 +1,32 @@
+## [8.22.1](https://github.com/dialpad/dialtone/compare/dialtone/v8.22.0...dialtone/v8.22.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* skeleton paragraph styles ([#30](https://github.com/dialpad/dialtone/issues/30)) ([3ff3f65](https://github.com/dialpad/dialtone/commit/3ff3f65d47993aa0303833cfd0ea507526ccc290))
+
+## [8.22.1](https://github.com/dialpad/dialtone/compare/dialtone/v8.22.0...dialtone/v8.22.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* skeleton paragraph styles ([#30](https://github.com/dialpad/dialtone/issues/30)) ([3ff3f65](https://github.com/dialpad/dialtone/commit/3ff3f65d47993aa0303833cfd0ea507526ccc290))
+
+# [8.22.0](https://github.com/dialpad/dialtone/compare/dialtone/v8.21.5...dialtone/v8.22.0) (2023-11-29)
+
+
+### Features
+
+* release component styles ([#28](https://github.com/dialpad/dialtone/issues/28)) ([36bd126](https://github.com/dialpad/dialtone/commit/36bd126796f03ce0a9b7c94d42cc1e4188aabe3a))
+
+## [8.21.5](https://github.com/dialpad/dialtone/compare/dialtone/v8.21.4...dialtone/v8.21.5) (2023-11-27)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** remove underlines ([#19](https://github.com/dialpad/dialtone/issues/19)) ([e47ba02](https://github.com/dialpad/dialtone/commit/e47ba02c279ca4b8feee302f67143104a27d0f61))
+* **Datepicker:** correct and polished styles ([#20](https://github.com/dialpad/dialtone/issues/20)) ([73a3d3a](https://github.com/dialpad/dialtone/commit/73a3d3a0251882786cec0b6dac9729de7bb17157))
+
 ## [8.21.4](https://github.com/dialpad/dialtone/compare/dialtone/v8.21.3...dialtone/v8.21.4) (2023-11-17)
 
 
