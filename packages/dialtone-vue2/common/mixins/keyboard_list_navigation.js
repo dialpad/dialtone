@@ -166,8 +166,12 @@ export default ({
       this.focusActiveItemIfNeeded();
     },
 
-    isValidCharacter (key) {
-      return key.length === 1;
+    isValidLetter (key) {
+      if (key.length > 1) {
+        return false;
+      }
+
+      return (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z');
     },
 
     jumpToBeginning () {
