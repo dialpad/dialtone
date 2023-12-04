@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtEmojiPicker from './DtEmojiPicker.vue';
+import DtEmojiPicker from './emoji_picker.vue';
 import DtEmojiPickerDefaultTemplate from './emoji_picker_default.story.vue';
 import DtEmojiPickerWithPopoverTemplate from './emoji_picker_popover.story.vue';
 
@@ -52,7 +52,6 @@ const recentlyUsedEmojis = [
   },
 ];
 
-// Default Prop Values
 export const argsData = {
   onSkinTone: action('skin-tone'),
   onSelectedEmoji: action('selected-emoji'),
@@ -73,6 +72,8 @@ export const argsData = {
   searchNoResultsLabel: 'No results',
   searchResultsLabel: 'Search results',
   searchPlaceholderLabel: 'Search...',
+  skinTone: 'Default',
+  showPopover: false,
 };
 
 export const argTypesData = {
@@ -97,7 +98,6 @@ export const argTypesData = {
   },
 };
 
-// Story Collection
 export default {
   title: 'Components/Emoji Picker',
   component: DtEmojiPicker,
@@ -112,7 +112,7 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const Template = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
   DtEmojiPickerDefaultTemplate,
@@ -126,12 +126,24 @@ const WithPopoverTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: Template,
   args: {},
 };
 
 export const WithPopover = {
   render: WithPopoverTemplate,
   args: {},
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    controls: {
+      disable: true,
+    },
+    percy: {
+      args: {
+        showPopover: true,
+      },
+    },
+  },
 };

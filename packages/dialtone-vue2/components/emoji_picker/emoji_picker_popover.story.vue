@@ -39,9 +39,9 @@
 
 <script>
 import DtEmojiPicker from './emoji_picker.vue';
-import DtButton from '@/components/button/button.vue';
-import DtIcon from '@/components/icon/icon.vue';
-import DtPopover from '@/components/popover/popover.vue';
+import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/icon';
+import { DtPopover } from '@/components/popover';
 
 export default {
   name: 'DtEmojiPickerDefaultTemplate',

@@ -6,9 +6,9 @@
       :alt="emoji.name"
       :aria-label="emoji.name"
       :title="emoji.name"
-      :src="`${cdnUrl + emoji.unicode_character}.png`"
+      :src="`${CDN_URL + emoji.unicode_character}.png`"
     >
-    {{ emoji ? emoji.name : '' }}
+    {{ emoji?.name }}
   </div>
 </template>
 
@@ -30,10 +30,10 @@ export default {
     },
   },
 
-  computed: {
-    cdnUrl () {
-      return CDN_URL;
-    },
+  data () {
+    return {
+      CDN_URL,
+    };
   },
 };
 </script>

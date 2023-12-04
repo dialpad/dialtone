@@ -1,7 +1,8 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
     ref="container"
-    class="base-input"
+    :class="['base-input', { 'd-vi-hidden': hidden }]"
     data-qa="dt-input"
   >
     <label
@@ -266,6 +267,14 @@ export default {
       type: Object,
       default: null,
     },
+
+    /**
+     * hidden allows to use input without the element visually present in DOM
+     */
+    hidden: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -349,9 +358,7 @@ export default {
       },
 
       isInputFocused: false,
-
       isInvalid: false,
-
       defaultLength: 0,
     };
   },
@@ -559,6 +566,9 @@ export default {
     },
 
     inputWrapperClasses () {
+      if (this.hidden) {
+        return [];
+      }
       return [
         'd-input__wrapper',
         { [this.stateClass]: this.showInputState },

@@ -8,6 +8,7 @@ export const INPUT_TYPES = {
   NUMBER: 'number',
   DATE: 'date',
   TIME: 'time',
+  FILE: 'file',
 };
 
 export const INPUT_SIZES = {

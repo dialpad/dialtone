@@ -18,7 +18,7 @@ export default {
   components: { DtImageViewer },
   data: function () {
     return {
-      isOpen: this.open,
+      isOpen: this.$attrs.open,
     };
   },
 

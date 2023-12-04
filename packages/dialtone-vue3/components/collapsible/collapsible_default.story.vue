@@ -4,7 +4,7 @@
     :anchor-text="$attrs.anchorText"
     :max-height="$attrs.maxHeight"
     :max-width="$attrs.maxWidth"
-    :open="$attrs.isOpen"
+    :open="isOpen"
     :initial-focus-element="'first'"
     :element-type="$attrs.elementType"
     :content-element-type="$attrs.contentElementType"

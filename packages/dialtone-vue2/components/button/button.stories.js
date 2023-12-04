@@ -57,22 +57,16 @@ export const argTypesData = {
     control: 'boolean',
   },
   importance: {
+    control: 'select',
     options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
-    control: {
-      type: 'select',
-    },
   },
   size: {
+    control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
-    control: {
-      type: 'select',
-    },
   },
   kind: {
+    control: 'select',
     options: Object.keys(BUTTON_KIND_MODIFIERS),
-    control: {
-      type: 'select',
-    },
   },
   link: {
     type: {
@@ -86,19 +80,15 @@ export const argTypesData = {
     control: 'boolean',
   },
   linkKind: {
+    control: 'select',
     options: Object.keys(LINK_KIND_MODIFIERS),
-    control: {
-      type: 'select',
-    },
   },
   loading: {
     control: 'boolean',
   },
   iconPosition: {
+    control: 'select',
     options: Object.keys(ICON_POSITION_MODIFIERS),
-    control: {
-      type: 'select',
-    },
   },
   labelClass: {
     description: 'Pass through classes. Used to customize the label container',

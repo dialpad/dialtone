@@ -1,3 +1,4 @@
+<!-- eslint-disable max-lines -->
 <template>
   <dt-popover
     ref="popover"
@@ -55,18 +56,13 @@
 </template>
 
 <script>
-import KeyboardNavigation from '../../common/mixins/keyboard_list_navigation';
-import { DtPopover } from '@/components/popover';
-import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item/list_item_constants';
-import {
-  DROPDOWN_PADDING_CLASSES,
-} from './dropdown_constants';
-import {
-  POPOVER_APPEND_TO_VALUES,
-} from '@/components/popover/popover_constants';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import { DtPopover, POPOVER_APPEND_TO_VALUES } from '@/components/popover';
+import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
+import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button.js';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button.js';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 export default {
@@ -317,6 +313,7 @@ export default {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
       DROPDOWN_PADDING_CLASSES,
+      EVENT_KEYNAMES,
       openedWithKeyboard: false,
       isOpen: null,
     };
@@ -479,6 +476,7 @@ export default {
       if (!this.isOpen || !this.isArrowKeyNav) {
         return;
       }
+
       return this.onHomeKey();
     },
 
@@ -486,6 +484,7 @@ export default {
       if (!this.isOpen || !this.isArrowKeyNav) {
         return;
       }
+
       return this.onEndKey();
     },
 

@@ -41,7 +41,6 @@
     </table>
     <br>
     <br>
-
     <dt-datepicker
       :locale="$attrs.locale"
       :prev-month-label="$attrs.prevMonthLabel"
@@ -50,8 +49,8 @@
       :next-year-label="$attrs.nextYearLabel"
       :select-day-label="$attrs.selectDayLabel"
       :change-to-label="$attrs.changeToLabel"
-      :selected-date="$attrs.currentSelectedDate"
-      @selected-date="currentSelectedDate = $event; onSelectedDate($event)"
+      :selected-date="currentSelectedDate"
+      @selected-date="currentSelectedDate = $event; $attrs.onSelectedDate($event)"
       @close-datepicker="$attrs.onCloseDatepicker"
     />
   </div>

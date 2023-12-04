@@ -52,7 +52,7 @@ import {
   INVALID_COMBINATION,
 } from './button_constants';
 
-import { LINK_KIND_MODIFIERS } from '../link/link_constants';
+import { LINK_KIND_MODIFIERS } from '@/components/link';
 
 /**
  * A button is a UI element which allows users to take an action throughout the app.
@@ -322,7 +322,7 @@ export default {
     isInvalidPropCombination (circle, kind, importance) {
       for (const row of INVALID_COMBINATION) {
         if (circle === row.circle && kind === row.kind && importance === row.importance) {
-          console.error(row.message);
+          console.warn(row.message);
           return false;
         }
       }
