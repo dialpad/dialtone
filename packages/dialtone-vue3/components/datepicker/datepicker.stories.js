@@ -102,7 +102,6 @@ export const argTypesData = {
   },
 };
 
-// Story Collection
 export default {
   title: 'Components/Datepicker',
   component: DtDatepicker,

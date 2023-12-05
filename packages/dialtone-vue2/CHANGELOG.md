@@ -1,3 +1,65 @@
+## [2.105.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.3...dialtone-vue2/v2.105.4) (2023-12-05)
+
+
+### Bug Fixes
+
+* add tag to avoid conflicts ([9596dc0](https://github.com/dialpad/dialtone/commit/9596dc0ba2c3520f7d73fd69b52bc397260e2b75))
+
+## [2.105.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.3...dialtone-vue2/v2.105.4) (2023-12-05)
+
+
+### Bug Fixes
+
+* add tag to avoid conflicts ([9596dc0](https://github.com/dialpad/dialtone/commit/9596dc0ba2c3520f7d73fd69b52bc397260e2b75))
+
+## [2.105.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.2...dialtone-vue2/v2.105.3) (2023-12-05)
+
+
+### Bug Fixes
+
+* change something to force release ([b39fe3b](https://github.com/dialpad/dialtone/commit/b39fe3b82bc7c8c412cb7121f3abd5cd4cee2282))
+* emoji_selector ts error ([ea20c75](https://github.com/dialpad/dialtone/commit/ea20c7594cd968db31b9ade529f71dced573edee))
+* revert "change something to force release" ([4f5efd0](https://github.com/dialpad/dialtone/commit/4f5efd0e43b4ff7d4da9172ab1ebf6cb982046fc))
+
+## [2.105.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.2...dialtone-vue2/v2.105.3) (2023-12-05)
+
+
+### Bug Fixes
+
+* change something to force release ([b39fe3b](https://github.com/dialpad/dialtone/commit/b39fe3b82bc7c8c412cb7121f3abd5cd4cee2282))
+* emoji_selector ts error ([ea20c75](https://github.com/dialpad/dialtone/commit/ea20c7594cd968db31b9ade529f71dced573edee))
+* revert "change something to force release" ([4f5efd0](https://github.com/dialpad/dialtone/commit/4f5efd0e43b4ff7d4da9172ab1ebf6cb982046fc))
+
+# 1.0.0 (2023-12-05)
+
+
+### Bug Fixes
+
+* change something to force release ([b39fe3b](https://github.com/dialpad/dialtone/commit/b39fe3b82bc7c8c412cb7121f3abd5cd4cee2282))
+* emoji_selector ts error ([ea20c75](https://github.com/dialpad/dialtone/commit/ea20c7594cd968db31b9ade529f71dced573edee))
+* revert "change something to force release" ([4f5efd0](https://github.com/dialpad/dialtone/commit/4f5efd0e43b4ff7d4da9172ab1ebf6cb982046fc))
+
+## [1.0.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v1.0.0...dialtone-vue2/v1.0.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* emoji_selector ts error ([ea20c75](https://github.com/dialpad/dialtone/commit/ea20c7594cd968db31b9ade529f71dced573edee))
+
+
+### Reverts
+
+* Revert "fix: emoji_selector ts error" ([3ac6c78](https://github.com/dialpad/dialtone/commit/3ac6c78a49cfc9cc63eac04dfab2f38ad9fd231b))
+
+# 1.0.0 (2023-12-05)
+
+
+### Bug Fixes
+
+* change something to force release ([b39fe3b](https://github.com/dialpad/dialtone/commit/b39fe3b82bc7c8c412cb7121f3abd5cd4cee2282))
+* emoji_selector ts error ([ee3078e](https://github.com/dialpad/dialtone/commit/ee3078eeaf8dcaf22605446344e5a4bc68731fec))
+* revert "change something to force release" ([4f5efd0](https://github.com/dialpad/dialtone/commit/4f5efd0e43b4ff7d4da9172ab1ebf6cb982046fc))
+
 # [2.106.0](https://github.com/dialpad/dialtone-vue/compare/v2.105.1...v2.106.0) (2023-11-29)
 
 

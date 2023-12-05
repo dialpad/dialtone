@@ -17,7 +17,7 @@
       "outputs": [],
       "options": {
         "script": "build",
-        "parallel": false
+        "parallel": true
       }
     },
     "start": {

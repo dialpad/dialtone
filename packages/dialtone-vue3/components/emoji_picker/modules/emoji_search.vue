@@ -22,9 +22,7 @@
           @click="clearSearch"
           @keydown.enter="clearSearch"
         >
-          <dt-icon
-            name="close"
-          />
+          <dt-icon name="close" />
         </button>
       </template>
     </dt-input>
@@ -32,8 +30,8 @@
 </template>
 
 <script setup>
-import DtInput from '@/components/input/input.vue';
-import DtIcon from '@/components/icon/icon.vue';
+import { DtInput } from '@/components/input';
+import { DtIcon } from '@/components/icon';
 import { onMounted, ref } from 'vue';
 
 defineProps({

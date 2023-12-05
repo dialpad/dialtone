@@ -95,8 +95,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeIvrNodeDefaultTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeIvrNodeDefaultTemplate,
+);
 
 export const Default = {
   render: DefaultTemplate,

@@ -101,9 +101,8 @@
 </template>
 
 <script>
-// eslint-disable max-len
 import { emojisGrouped as emojisImported } from '@/components/emoji_picker/emojis';
-import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
+import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker';
 
 export default {
   name: 'EmojiSelector',
@@ -285,7 +284,7 @@ export default {
       }
     },
 
-    searchByNameAndKeywords: function () {
+    searchByNameAndKeywords() {
       const searchStr = this.emojiFilter.toLowerCase();
       this.filteredEmojis = this.currentEmojis.filter(function (obj) {
         const nameIncludesSearchStr = obj.name.toLowerCase().includes(searchStr);
@@ -369,7 +368,7 @@ export default {
       this.focusEmoji(0, 0);
     },
 
-    hoverEmoji: function (emoji, isFirst) {
+    hoverEmoji (emoji, isFirst) {
       if (isFirst === undefined) { isFirst = false; }
       this.hoverFirstEmoji = isFirst;
       this.$emit('highlighted-emoji', emoji);
@@ -536,7 +535,7 @@ export default {
       }
     },
 
-    handleKeyDownFilteredEmojis: function (event, indexEmoji, emoji) {
+    handleKeyDownFilteredEmojis (event, indexEmoji, emoji) {
       event.preventDefault();
       this.hoverFirstEmoji = false;
 

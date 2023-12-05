@@ -12,6 +12,7 @@ jobs:
       pull-requests: read
     outputs:
       dialtone: ${{ steps.filter.outputs.dialtone }}
+      dialtone-vue-2: ${{ steps.filter.outputs.dialtone-vue-2 }}
       dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
     steps:
       - name: Checkout
@@ -25,6 +26,8 @@ jobs:
             dialtone:
               - 'apps/dialtone-documentation/**'
               - 'packages/**'
+            dialtone-vue-2:
+              - 'packages/**'
             dialtone-vue-3:
               - 'packages/**'
 
@@ -36,8 +39,9 @@ jobs:
       contents: 'read'
       id-token: 'write'
     env:
-      DIALTONE_BASE_DIRECTORY: /deploy-previews/pr-${{github.event.pull_request.number}}/
-      DIALTONE_VUE_3_BASE_DIRECTORY: /vue3/deploy-previews/pr-${{github.event.pull_request.number}}/
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}/
+      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue/deploy-previews/pr-${{ github.event.pull_request.number }}/
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3/deploy-previews/pr-${{ github.event.pull_request.number }}/
     steps:
       - uses: actions/checkout@v4
       - id: auth
@@ -53,10 +57,15 @@ jobs:
       - name: Clean up Dialtone preview
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.DIALTONE_BASE_DIRECTORY) }}
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
+
+      - name: Clean up Dialtone-vue 2 preview
+        if: ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' }}
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
 
       - name: Clean up Dialtone-vue 3 preview
         if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
         continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://dialtone.dialpad.com{0}', env.DIALTONE_VUE_3_BASE_DIRECTORY) }}
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
 

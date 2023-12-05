@@ -122,7 +122,6 @@ export default {
 // Templates
 const DefaultTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
-
 const VariantsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtChipVariantsTemplate);
 

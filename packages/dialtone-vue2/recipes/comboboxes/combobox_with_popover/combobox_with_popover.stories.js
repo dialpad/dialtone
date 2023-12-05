@@ -219,8 +219,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeComboboxWithPopoverDefaultTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeComboboxWithPopoverDefaultTemplate,
+);
 
 export const Default = {
   render: DefaultTemplate,

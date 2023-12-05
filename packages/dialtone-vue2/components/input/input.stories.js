@@ -74,10 +74,8 @@ export const argTypesData = {
     control: 'text',
   },
   type: {
+    control: 'select',
     options: [null, ...Object.values(INPUT_TYPES)],
-    control: {
-      type: 'select',
-    },
     table: {
       defaultValue: {
         summary: DtInput.props.type.default,
@@ -88,10 +86,8 @@ export const argTypesData = {
     control: 'object',
   },
   size: {
+    control: 'select',
     options: Object.values(INPUT_SIZES),
-    control: {
-      type: 'select',
-    },
     table: {
       defaultValue: {
         summary: INPUT_SIZES.DEFAULT,

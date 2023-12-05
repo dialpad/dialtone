@@ -69,10 +69,8 @@ export const argTypesData = {
         summary: 'string',
       },
     },
+    control: 'select',
     options: ['', ...Object.values(VALIDATION_MESSAGE_TYPES)],
-    control: {
-      type: 'select',
-    },
   },
   labelChildProps: {
     control: null,

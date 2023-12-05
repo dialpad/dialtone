@@ -95,7 +95,7 @@ import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_
 import { DtAvatar } from '@/components/avatar';
 import { DtLazyShow } from '@/components/lazy_show';
 import { DtListItem } from '@/components/list_item';
-import Modal from '../../../common/mixins/modal';
+import Modal from '@/common/mixins/modal';
 
 export default {
   name: 'DtRecipeFeedItemRow',
@@ -195,6 +195,14 @@ export default {
      * @type {Boolean}
      */
     'focus',
+
+    /**
+     * Key down event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+     */
+    'keydown',
   ],
 
   data () {

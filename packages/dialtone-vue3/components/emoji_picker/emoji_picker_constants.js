@@ -1,6 +1,6 @@
 export const CDN_URL = 'https://static.dialpadcdn.com/joypixels/png/unicode/32/';
 export const EMOJIS_PER_ROW = 9;
-export const EMOJI_SKIN_TONE_MODIFIERS = {
+export const EMOJI_PICKER_SKIN_TONE_MODIFIERS = {
   DEFAULT: 'Default',
   LIGHT: 'Light',
   MEDIUM_LIGHT: 'MediumLight',
@@ -9,7 +9,7 @@ export const EMOJI_SKIN_TONE_MODIFIERS = {
   DARK: 'Dark',
 };
 
-export const EMOJI_CATEGORIES = {
+export const EMOJI_PICKER_CATEGORIES = {
   MOST_RECENTLY_USED: 'Most recently used',
   SMILEYS_AND_PEOPLE: 'Smileys and people',
   NATURE: 'Nature',
@@ -19,4 +19,9 @@ export const EMOJI_CATEGORIES = {
   OBJECTS: 'Objects',
   SYMBOLS: 'Symbols',
   FLAGS: 'Flags',
+};
+
+export default {
+  EMOJI_PICKER_SKIN_TONE_MODIFIERS,
+  EMOJI_PICKER_CATEGORIES,
 };

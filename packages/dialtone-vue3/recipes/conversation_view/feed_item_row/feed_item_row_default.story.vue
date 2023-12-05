@@ -59,7 +59,24 @@
       >
         <dt-recipe-emoji-row
           :reactions="mockReactions"
-        />
+        >
+          <template #picker>
+            <dt-button
+              importance="clear"
+              size="sm"
+              aria-label="Add reaction"
+              data-qa="feed-item-reaction-button"
+              class="dt-emoji-row__reaction dt-emoji-row__picker"
+            >
+              <span class="d-d-inline-flex">
+                <dt-icon
+                  size="300"
+                  name="satisfied"
+                />
+              </span>
+            </dt-button>
+          </template>
+        </dt-recipe-emoji-row>
       </template>
       <template #menu>
         <!-- TODO replace this with DT menu -->
@@ -155,7 +172,8 @@ export default {
       }
     }
     &__thread{
-      height: 32px;
+      padding-top: .3rem;
+      padding-bottom: .3rem;
     }
     &__reply{
       color: var(--dt-color-foreground-tertiary);

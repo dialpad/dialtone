@@ -1,5 +1,5 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtDatepicker from './datepicker.vue';
 import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
 import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
@@ -67,7 +67,6 @@ export const argTypesData = {
       },
     },
   },
-
   changeToLabel: {
     control: 'text',
     table: {
@@ -84,20 +83,17 @@ export const argTypesData = {
       disable: true,
     },
   },
-
   onCloseDatepicker: {
     table: {
       disable: true,
     },
   },
-
   'selected-date': {
     description: 'Event fired when a date is selected',
     table: {
       type: { summary: 'event' },
     },
   },
-
   'close-datepicker': {
     description: 'Event fired when user presses the esc key',
     table: {
@@ -127,7 +123,6 @@ const WithPopoverTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtDatepickerWithPopoverTemplate,
 );
 
-// Stories
 export const Default = {
   render: Template,
   args: {},

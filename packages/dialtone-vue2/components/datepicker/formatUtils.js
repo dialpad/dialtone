@@ -21,3 +21,11 @@ export function formatNoYear (date, abbreviated = false) {
 export function formatNumerical (date) {
   return format(date, 'MM/dd/yy');
 }
+
+export default {
+  formatLong,
+  formatMedium,
+  formatShort,
+  formatNoYear,
+  formatNumerical,
+};

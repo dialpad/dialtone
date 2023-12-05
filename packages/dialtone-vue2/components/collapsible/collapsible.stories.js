@@ -68,8 +68,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtCollapsibleDefaultStory);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtCollapsibleDefaultStory,
+);
 
 export const Default = {
   render: DefaultTemplate,

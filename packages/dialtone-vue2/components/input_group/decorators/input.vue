@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import { RADIO_INPUT_VALIDATION_CLASSES } from '../../radio/radio_constants';
+import { RADIO_INPUT_VALIDATION_CLASSES } from '@/components/radio';
 import {
   InputMixin,
   GroupableMixin,
-} from '../../../common/mixins/input';
+} from '@/common/mixins/input.js';
 
 export default {
   name: 'InputDecorator',
@@ -43,6 +43,16 @@ export default {
   mixins: [InputMixin, GroupableMixin],
 
   inheritAttrs: false,
+
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String}
+     */
+    'input',
+  ],
 
   computed: {
     inputValidationClass () {

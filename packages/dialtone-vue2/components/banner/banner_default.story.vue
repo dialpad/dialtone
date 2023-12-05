@@ -17,7 +17,7 @@
       :pinned="$attrs.pinned"
       :hide-close="$attrs.hideClose"
       :close-button-props="buttonCloseProps"
-      :class="{ 'd-ps-sticky': show }"
+      :class="{ 'd-ps-sticky': $attrs.show }"
       :hide-icon="$attrs.hideIcon"
       :background-image="$attrs.backgroundImage"
       :background-size="$attrs.backgroundSize"
@@ -77,16 +77,9 @@ export default {
 
   components: { DtBanner, DtButton, DtIcon },
 
-  props: {
-    show: {
-      type: Boolean,
-      default: false,
-    },
-  },
-
   data () {
     return {
-      displayBanner: this.show,
+      displayBanner: this.$attrs.show,
     };
   },
 
@@ -110,7 +103,7 @@ export default {
     buttonCloseProps () {
       return {
         ...this.$attrs.closeButtonProps,
-        kind: this.$attrs.buttonKind,
+        kind: this.buttonKind,
         ariaLabel: 'Close',
       };
     },

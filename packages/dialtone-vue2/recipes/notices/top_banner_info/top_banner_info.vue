@@ -69,7 +69,7 @@ export default {
   color: var(--dt-color-foreground-primary);
 
    &__left {
-     margin: var(--dt-space-300) 0 var(--dt-space-300) var(--dt-space-500);
+     margin: var(--dt-space-300) 0 var(--dt-space-300) var(--dt-space-400);
      min-width: 20%;
   }
   &__middle {

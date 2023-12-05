@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import DtInput from '@/components/input/input.vue';
-import DtIcon from '@/components/icon/icon.vue';
+import { DtInput } from '@/components/input';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'EmojiSearch',
