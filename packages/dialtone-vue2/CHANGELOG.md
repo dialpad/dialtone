@@ -1,3 +1,15 @@
+## [1.0.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v1.0.0...dialtone-vue2/v1.0.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* emoji_selector ts error ([ea20c75](https://github.com/dialpad/dialtone/commit/ea20c7594cd968db31b9ade529f71dced573edee))
+
+
+### Reverts
+
+* Revert "fix: emoji_selector ts error" ([3ac6c78](https://github.com/dialpad/dialtone/commit/3ac6c78a49cfc9cc63eac04dfab2f38ad9fd231b))
+
 # 1.0.0 (2023-12-05)
 
 
