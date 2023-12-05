@@ -1,3 +1,12 @@
+# 1.0.0 (2023-12-05)
+
+
+### Bug Fixes
+
+* change something to force release ([b39fe3b](https://github.com/dialpad/dialtone/commit/b39fe3b82bc7c8c412cb7121f3abd5cd4cee2282))
+* emoji_selector ts error ([ea20c75](https://github.com/dialpad/dialtone/commit/ea20c7594cd968db31b9ade529f71dced573edee))
+* revert "change something to force release" ([4f5efd0](https://github.com/dialpad/dialtone/commit/4f5efd0e43b4ff7d4da9172ab1ebf6cb982046fc))
+
 ## [1.0.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v1.0.0...dialtone-vue2/v1.0.1) (2023-12-05)
 
 
