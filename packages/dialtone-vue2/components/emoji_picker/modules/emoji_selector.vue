@@ -284,7 +284,7 @@ export default {
       }
     },
 
-    searchByNameAndKeywords() {
+    searchByNameAndKeywords: function () {
       const searchStr = this.emojiFilter.toLowerCase();
       this.filteredEmojis = this.currentEmojis.filter(function (obj) {
         const nameIncludesSearchStr = obj.name.toLowerCase().includes(searchStr);
@@ -368,7 +368,7 @@ export default {
       this.focusEmoji(0, 0);
     },
 
-    hoverEmoji (emoji, isFirst) {
+    hoverEmoji: function (emoji, isFirst) {
       if (isFirst === undefined) { isFirst = false; }
       this.hoverFirstEmoji = isFirst;
       this.$emit('highlighted-emoji', emoji);
@@ -535,7 +535,7 @@ export default {
       }
     },
 
-    handleKeyDownFilteredEmojis (event, indexEmoji, emoji) {
+    handleKeyDownFilteredEmojis: function (event, indexEmoji, emoji) {
       event.preventDefault();
       this.hoverFirstEmoji = false;
 
