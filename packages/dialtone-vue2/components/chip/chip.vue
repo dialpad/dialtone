@@ -20,7 +20,7 @@
       </span>
       <span
         v-else-if="$slots.avatar"
-        data-qa="dt-chip-avatar"
+        data-qa="dt-chip-avatara"
       >
         <!-- @slot slot for Chip avatar -->
         <slot name="avatar" />
