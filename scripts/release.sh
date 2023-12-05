@@ -9,7 +9,7 @@ if ! [[ "$branch" =~ ^staging$ ]]; then
 fi
 
 git pull &&
-pnpm nx run-many --target=release-local &&
+pnpm nx run-many --target=release-local --parallel=false &&
 git checkout production &&
 git merge --ff-only staging &&
 git push -u origin production
