@@ -9,6 +9,23 @@ figma: planned
 ---
 
 <code-well-header>
+  <div class="d-bgc-red-300 d-p32 d-fw-bold d-fs-400 d-fc-primary-inverted">
+    <div class="d-fs-500 d-fc-gold-200">⚠️⚠️⚠️⚠️⚠️ TODO ⚠️⚠️⚠️⚠️</div>
+    <div class="d-fs-300">in the service of <a href="https://dialpad.atlassian.net/browse/DLT-1379" target="_parent">DLT-1379</a> and <a href="https://dialpad.atlassian.net/browse/DLT-1392" target="_parent">DLT-1392</a></div>
+    <hr>
+    <div class="d-lh-300">Update the Vue component to use this HTML structure.</div>
+    <div class="d-fs-300">In addition to cleaner semantics, it has several a11y-oriented updates</div>
+    <div class="d-fs-300">Ask Francis if any questions.</div>
+  </div>
+
+  <div class="d-fs-300 d-fw-bold d-fc-critical">Update <code class="d-fc-critical">datepicker.vue</code>, <code class="d-fc-critical">month-year-picker.vue</code>, and <code class="d-fc-critical">calendar.vue</code>...</div>
+  <dt-datepicker
+    prev-month-label="Previous month"
+    next-month-label="Next month"
+    prev-year-label="Previous year"
+    next-year-label="Next year"
+  />
+  <div class="d-fs-300 d-fw-bold d-fc-critical">..with the below...</div>
   <dt-stack class="d-datepicker" gap="400">
     <div class="d-datepicker__hd">
       <dt-stack direction="row" class="d-datepicker__header" gap="300">
@@ -110,12 +127,6 @@ figma: planned
       </table>
     </div>
   </dt-stack>
-  <dt-datepicker
-    prev-month-label="Previous month"
-    next-month-label="Next month"
-    prev-year-label="Previous year"
-    next-year-label="Next year"
-  />
 </code-well-header>
 
 ```html
