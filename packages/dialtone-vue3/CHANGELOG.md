@@ -1,3 +1,10 @@
+## [3.96.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.96.1...dialtone-vue3/v3.96.2) (2023-12-05)
+
+
+### Code Refactoring
+
+* force dialtone-vue3 release ([9c582f9](https://github.com/dialpad/dialtone/commit/9c582f9e6ae8d7d984fe7bb4a2d8c019d30bafa5))
+
 ## [3.96.1](https://github.com/dialpad/dialtone-vue/compare/v3.96.0...v3.96.1) (2023-11-24)
 
 
