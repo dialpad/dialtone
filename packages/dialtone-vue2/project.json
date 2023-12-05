@@ -50,7 +50,7 @@
       ],
       "outputs": [],
       "options": {
-        "command": "pnpm publish --filter ./packages/dialtone-vue2",
+        "command": "pnpm publish --filter ./packages/dialtone-vue2 --tag latest",
         "parallel": false
       }
     },
