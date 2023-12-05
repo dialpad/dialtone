@@ -5,6 +5,13 @@
 
 * add tag to avoid conflicts ([9596dc0](https://github.com/dialpad/dialtone/commit/9596dc0ba2c3520f7d73fd69b52bc397260e2b75))
 
+## [2.105.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.3...dialtone-vue2/v2.105.4) (2023-12-05)
+
+
+### Bug Fixes
+
+* add tag to avoid conflicts ([9596dc0](https://github.com/dialpad/dialtone/commit/9596dc0ba2c3520f7d73fd69b52bc397260e2b75))
+
 ## [2.105.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.2...dialtone-vue2/v2.105.3) (2023-12-05)
 
 
