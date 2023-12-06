@@ -285,9 +285,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.dt-feed-item-row :deep(.dt-item-layout--left) {
-  align-self: baseline;
-}
 
 .dt-feed-item-row {
   transition-duration: 2s !important;
