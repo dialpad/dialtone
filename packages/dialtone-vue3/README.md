@@ -7,9 +7,9 @@ Dialtone Vue is available in Vue 2 as well as Vue 3:
 - **[Component Documentation Site (Vue 2) ↗️][dialtone-vue]**
 - **[Component Documentation Site (Vue 3) ↗️][dialtone-vue3]**
 
-[dt]: https://dialpad.design
-[dialtone-vue]: https://vue.dialpad.design
-[dialtone-vue3]: https://vue.dialpad.design/vue3
+[dt]: https://dialtone.dialpad.com
+[dialtone-vue]: https://dialtone.dialpad.com/vue
+[dialtone-vue3]: https://dialtone.dialpad.com/vue3
 
 ## Installation
 
@@ -48,8 +48,8 @@ These requirements are enforced via peer dependencies of Dialtone Vue when possi
 
 ## Emojis
 
-Dialtone Vue uses [JoyPixels](https://www.joypixels.com/) to render emojis. If you are using the emoji components, Dialtone Vue will use the free JoyPixels assets hosted on JSDelivr CDN by default. 
-You may wish to use self-hosted JoyPixels assets such as the SVGs only available to premium license holders. 
+Dialtone Vue uses [JoyPixels](https://www.joypixels.com/) to render emojis. If you are using the emoji components, Dialtone Vue will use the free JoyPixels assets hosted on JSDelivr CDN by default.
+You may wish to use self-hosted JoyPixels assets such as the SVGs only available to premium license holders.
 In order to do this, set your custom asset URL with the following functions for small and large emojis during initialization of your app:
 
 ```js
@@ -72,26 +72,24 @@ const emojiData = getEmojiData();
 
 If you would like to contribute to Dialtone Vue the first step is to get the project running locally. Follow the below quickstart to do so.
 
-1. Clone the repo `git clone https://github.com/dialpad/dialtone-vue.git`
+1. Clone the monorepo `git clone git@github.com:dialpad/dialtone.git`
 2. Install dependencies `pnpm install`
-3. Run local dev server `pnpm start`
-4. Visit local dev server at http://localhost:9010/
+3. Run local dev server `pnpm start:dialtone-vue3`
+4. Visit local dev server at <http://localhost:9010/>
 
 Next read the more detailed contributor documentation in [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ## Project Status
 
-Dialtone Vue is a new project, and as such it is under constant development as we add new components and refine existing ones. Please refer to the [jira board][jira] to see what we are currently working on and what we have planned for the future.
+Please refer to the [jira board][jira] to see what we are currently working on and what we have planned for the future.
 
-[jira]: https://dialpad.atlassian.net/browse/DT
-[request]: https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428
-[report]: https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428
+[jira]: https://dialpad.atlassian.net/jira/software/c/projects/DLT/boards/548/backlog
 
 ## Requesting features / reporting bugs
 
 Requesting a feature or reporting a bug? Please do so at the below links:
 
-- [Request Feature](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428)
-- [Report Bug](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428)
+- [Request Feature](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10975&pid=12508)
+- [Report Bug](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=12508)
 
-Please also feel free to contact us via the [#dialtone Slack channel](https://dialpad.slack.com/messages/dialtone/) with any questions
+Please also feel free to contact us via the #dialtone Dialpad channel with any questions
