@@ -1,3 +1,10 @@
+export const ARROW_KEYS = {
+  ARROW_UP: 'ArrowUp',
+  ARROW_DOWN: 'ArrowDown',
+  ARROW_LEFT: 'ArrowLeft',
+  ARROW_RIGHT: 'ArrowRight',
+};
+
 export const CDN_URL = 'https://static.dialpadcdn.com/joypixels/png/unicode/32/';
 export const EMOJIS_PER_ROW = 9;
 export const EMOJI_PICKER_SKIN_TONE_MODIFIERS = {
