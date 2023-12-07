@@ -1,72 +1,79 @@
 ---
 title: Spacing
 status: In progress
-description: The spacing scale defines the paddings, gaps, and margins around interface elements.
+description: The spacing units defines the paddings, gaps, and margins around interface elements.
 ---
 
-<aside class="d-notice d-notice--info d-mt24 d-wmx100p" role="status" aria-hidden="false">
-  <div class="d-notice__content d-stack4">
-    <p class="d-notice__message">
-      <strong>Note:</strong> By the Feb 2024, we aim to integrate spacing and sizing into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height, border radius, space-between, and paddings within your elements in your Figma files.
-    </p>
-  </div>
-</aside>
-&nbsp;
+## Usage
 
-Our team utilizes a 4px-system modular scale for both spacing and [sizing](https://). This scale, inspired by the Fibonacci sequence, employs values like 8px, 16px, 24px, and so on. We opted for the 4px base due to its adaptability across various screen sizes and divisibility.
+Use spacing units, when [stacking elements](#stacking) or when adding [padding](#padding) or margin.
 
-There are two ways where we're going to use the Spacing units, when [stacking elements](#stacking) and when adding [padding](#padding) or margin.
+When setting the scale of an element, use [Size](https://) units.
 
-## Stacking
+### Stacking
+
+<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
 When adding space between elements, whether vertically or horizontally, we use `space-between` or `gap` to define the space that separetes each element, where the value it’s set as a variable on Figma and as a Token on code.
 
-<div class="d-d-grid d-gg16 d-g-cols2 md:d-g-cols1">
- <dt-stack direction="column" gap="400">
-  <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=915-8431&viewport=522%2C582%2C1.02&t=uBcZsecOJbI3n41L-8&scaling=min-zoom&starting-point-node-id=915%3A8431&hide-ui=1"></iframe>
-<div><p class="d-fw-bold">Vertical stacking</p>
-  <p class="d-body-base d-fc-tertiary">Space between (gap) groups vertically.</p></div>
+ <dt-stack direction="column" gap="500">
+  <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=915-8431&viewport=398%2C188%2C0.69&t=6vK8RL1nGPsb99Nc-8&scaling=min-zoom&starting-point-node-id=915%3A8431&hotspot-hints=0&hide-ui=1"></iframe>
+<div>
+<p class="d-fw-bold">Vertical stacking</p>
+<p class="d-body-base d-fc-tertiary">Set the space-between/gap groups vertically.</p>
+</div>
   </dt-stack>
-  <dt-stack direction="column" gap="400">
+  <dt-stack direction="column" gap="500">
   <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=967-20985&viewport=506%2C417%2C0.64&t=JQtYzRgn0vnxMb00-8&scaling=min-zoom&starting-point-node-id=967%3A20985&hotspot-hints=0&hide-ui=1"></iframe>
-  <div><p class="d-fw-bold">Horizontal stacking</p>
-  <p class="d-body-base d-fc-tertiary">Space between (gap) groups horizontally.</p></div>
+  <div>
+  <p class="d-fw-bold">Horizontal stacking</p>
+  <p class="d-body-base d-fc-tertiary">Set the space-between/gap groups horizontally.</p>
+  </div>
   </dt-stack>
 </div>
 
-## Padding
+### Padding
 
-When adding space around an element, use `padding` to create some breathing room. Avoid using `margin`, which adds space outside the element and can affect the layout, in that case, follow the [stacking](#stacking) approach.
+<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div>
 
-<dt-stack direction="column" gap="400">
-<div class="d-bgc-black-100 d-w100p d-h100p d-hmn264">
-WIP
+When adding space around an element, use `padding` to create some breathing room.
+
+Avoid using `margin`, which adds space outside the element and can affect the layout, in that case, follow the [stacking](#stacking) approach.
+
 </div>
-<div><p class="d-fw-bold">Vertical stacking</p>
-<p class="d-body-base d-fc-tertiary">Space between (gap) groups vertically.</p></div>
+<dt-stack class="d-gc2" direction="column" gap="500">
+
+ <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=1296-18759&viewport=363%2C11%2C0.59&t=Mz4eVpwafboXN0Vl-8&scaling=min-zoom&starting-point-node-id=1296%3A18759&hotspot-hints=0&hide-ui=1"></iframe>
+<div>
+<p class="d-body-base d-fc-tertiary">Padding can be measured vertically and horizontally.</p>
+</div>
 </dt-stack>
+</div>
 
-## Establish connections
+## Visual guides
 
-<div class="d-d-grid d-gg16 d-g-cols2 md:d-g-cols1" >
+### Grouping
+
+<div class="d-d-grid d-gg16 d-g-cols3 md:d-g-cols1" >
   <div>
-    <dt-stack direction="column" gap="400">
-      <div>
-        <p>Adjust the distance between elements to guide users' understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.
-      </p>
-      </div>
-      <div>
-        <p class="d-body-base d-fc-tertiary">Consistent and intentional spacing decisions across pages create a predictable layout, reducing cognitive load and allowing users to focus on the content rather than the layout.</p>
-      </div>
+<dt-stack direction="column" gap="400">
+<p>Group and adjust the distance between elements to guide users understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.</p>
+<p class="d-body-base d-fc-tertiary">Consistent and intentional spacing decisions across pages create a predictable layout, reducing cognitive load and allowing users to focus on the content rather than the layout.</p>
     </dt-stack>
   </div>
-    <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=65%3A23331&type=design&node-id=890-22355&viewport=-285%2C-1288%2C0.54&t=Cl3RtWMqP6pSyjct-8&scaling=min-zoom&starting-point-node-id=88%3A25302&hide-ui=1"></iframe>
+  <dt-stack class="d-gc2" direction="column" gap="500">
+    <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=1296-22361&viewport=363%2C11%2C0.59&t=Mz4eVpwafboXN0Vl-8&scaling=min-zoom&starting-point-node-id=1296%3A22361&hotspot-hints=0&hide-ui=1"></iframe>
+    <p class="d-body-base d-fc-tertiary">
+    <strong>Proximity groups</strong> are formed by placing elements close together. <strong>Delimited groups,</strong> on the other hand, are defined by clear visual boundaries, such as borders.
+    </p>
+    </dt-stack>
 </div>
 
-## Emphasize importance
+### Guiding the eye
 
-<div class="d-d-grid d-gg16 d-g-cols2 md:d-g-cols1" >
-  <div >
+<div class="d-d-grid d-gg16 d-g-cols3 md:d-g-cols1" >
+  <div>
     <dt-stack direction="column" gap="400">
       <div>
         <p>Control the amount of space around an element to affect its visual importance. Use larger spaces for more prominent elements and smaller for those of lower importance. Keep in mind the position of the elements will benefit the order of reading.
@@ -77,8 +84,8 @@ WIP
       </div>
     </dt-stack>
   </div>
-    <div class="d-bgc-black-100 d-w100p d-h100p d-hmn264">
-    WIP
+  <div class="d-gc2">
+    <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=1348-89968&viewport=566%2C-51%2C0.52&t=wUB7MrK2Vd0ojWxj-8&scaling=min-zoom&starting-point-node-id=1348%3A89968&hotspot-hints=0&hide-ui=1"></iframe>
     </div>
 </div>
 
@@ -148,7 +155,7 @@ Here are some frequently used tokens. For a complete list, visit the [Spacing To
 
 WIP: Tokens table
 
-**🌟 Design Tip:** Optimize your workflow in Figma by setting the nudge amount to 4px or 8px. It's a small change that can make a big difference in ease of use!
+**Note:** By Feb 2024, we aim to integrate **spacing** units into Figma Variables. This will simplify the process of setting these tokens on space-between and paddings within your elements in your Figma files, making it easier for engineers to obtain the correct variable for each case.
 
 ## Key Takeaways
 
@@ -157,3 +164,5 @@ WIP: Tokens table
 - Maintain a balanced visual hierarchy by using the modular scale for font, sizes and spacing.
 - Consider the overall composition and whitespace to create well-proportioned layouts.
 - Ensure consistent spacing across various screen sizes and breakpoints.
+
+**🌟 Design Tip:** Optimize your workflow in Figma by setting the nudge amount to 4px or 8px. It's a small change that can make a big difference in ease of use!
