@@ -1,3 +1,15 @@
+# [3.97.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.96.3...dialtone-vue3/v3.97.0) (2023-12-07)
+
+
+### Code Refactoring
+
+* **Emoji Picker:** code readability ([#36](https://github.com/dialpad/dialtone/issues/36)) ([59f4882](https://github.com/dialpad/dialtone/commit/59f4882be487d05eb20696162b14e9c7fcf5fdf5))
+
+
+### Features
+
+* **Feed Item Row:** add gap instead of padding and label field ([#37](https://github.com/dialpad/dialtone/issues/37)) ([16eb296](https://github.com/dialpad/dialtone/commit/16eb2969894dd93bbb09b4baa28677fa2fa970c2))
+
 ## [3.96.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.96.2...dialtone-vue3/v3.96.3) (2023-12-05)
 
 
