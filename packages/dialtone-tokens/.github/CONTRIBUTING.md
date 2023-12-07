@@ -12,11 +12,11 @@ This repo's `base.json` file is the source of truth for all design tokens in Dia
 
 ## What libraries are used to do this?
 
- - [Token Transformer](https://www.npmjs.com/package/token-transformer): To convert figma token format to style dictionary token format
- - [Style Dictionary](https://amzn.github.io/style-dictionary/#/README): To read our base tokens and output them in different formats
- - [NPM](https://www.npmjs.com/): To install dependencies needed for this repo and deploy our NPM package
- - [Maven](https://maven.apache.org/guides/getting-started/index.html): To package android tokens for deployment
- - [Swift Package Manager](https://www.swift.org/package-manager): To package iOS tokens for deployment
+- [Token Transformer](https://www.npmjs.com/package/token-transformer): To convert figma token format to style dictionary token format
+- [Style Dictionary](https://amzn.github.io/style-dictionary/#/README): To read our base tokens and output them in different formats
+- [NPM](https://www.npmjs.com/): To install dependencies needed for this repo and deploy our NPM package
+- [Maven](https://maven.apache.org/guides/getting-started/index.html): To package android tokens for deployment
+- [Swift Package Manager](https://www.swift.org/package-manager): To package iOS tokens for deployment
 
 ## Token build process
 

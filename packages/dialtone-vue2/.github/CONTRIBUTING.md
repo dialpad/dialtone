@@ -1,6 +1,6 @@
 # Contributing
 
-Before contributing a new component to Dialtone Vue, please check the [Jira board](https://switchcomm.atlassian.net/jira/software/projects/DT/boards/187/backlog)
+Before contributing a new component to Dialtone Vue, please check the [Jira board](https://dialpad.atlassian.net/jira/software/c/projects/DLT/boards/548/backlog)
 to see if there is already an issue for it and if not, add it.
 
 ## Overview
@@ -9,8 +9,8 @@ to see if there is already an issue for it and if not, add it.
 
 Dialtone is a design system by Dialpad comprised of CSS components, Vue components, utility classes, visual assets, documentation.
 Dialtone Vue is the Vue component portion of Dialtone and is distributed as a separate package.
-It is recommended that you are familiar with [Dialtone](https://github.com/dialpad/dialtone/tree/staging)
-as well as it's [contribution guide](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
+It is recommended that you are familiar with the [Dialtone CSS](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone) package.
+as well as it's [contribution guide](../../dialtone/.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
 
 Dialtone is a peer dependency of Dialtone Vue.
 
@@ -32,7 +32,7 @@ There are a couple important considerations when thinking about contributing to 
 The first is to remember that Dialtone Vue strives to offer components to be shared by multiple teams or features.
 Generally, one-off or first-time elements (i.e. snowflakes) aren't a great fit, though there may be the occasional exception.
 
-The second is to check with the Dialtone team (in [#dialtone](https://dialpad.slack.com/messages/dialtone/)) to ensure the contribution isn't already requested, planned, or even complete.
+The second is to check with the Dialtone team (in #dialtone Dialpad channel) to ensure the contribution isn't already requested, planned, or even complete.
 
 ### Roles
 
@@ -45,7 +45,7 @@ The second is to check with the Dialtone team (in [#dialtone](https://dialpad.sl
 ### Before Submitting
 
 Before submitting a pull request, make sure to communicate what you wish to change to the Dialtone team.
-The easiest way to do this is via the [#dialtone](https://dialpad.slack.com/messages/dialtone/) Slack channel.
+The easiest way to do this is via the #dialtone Dialpad channel.
 It's possible your change is already being worked on, has already been fixed, or maybe we just need to discuss the best solution to the problem.
 This prevents you from having to re-write your entire change, or even having to scrap it entirely.
 
@@ -73,7 +73,7 @@ Any new components or updates to existing components require the following:
   - Navigable by keyboard.
   - Read by a screen reader.
   - Minimum contrast ratio.
-- Changes must be made for Vue 2 as well as Vue 3, `staging` and `staging-vue3` branches respectively
+- Changes must be made for Vue 2 as well as Vue 3, `dialtone-vue2` and `dialtone-vue3` package folders respectively
 - Unit tests are passing locally.
   - `npm run test`
 - Linters are passing locally.
@@ -98,23 +98,20 @@ After you have discussed your change with the Dialtone team, follow these steps 
 - 'visual-test-ready' if your PR includes visual UI changes.
 - 'no-visual-test' if not UI changes.
 
-8. Run `./copy_pr_vue3.sh` in the root of the repository to copy your changes to a vue3 branch titled `my-change-branch-vue3`
+8. Run `./copy_to_vue3.sh` in the root of the repository to copy your current changes in the vue 2 folder to the vue 3 folder.
 9. Create a pull request into the `staging-vue3` branch, reviewers will be automatically added and notified of your PR.
-10. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_pr_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
-11. Once your changes have been approved, you may squash merge your branch into `staging` and `staging-vue3`.
+10. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_to_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
+11. Once your changes have been approved, you may squash your branch into staging.
 
 Once your change is in `staging` it will go live with the next Dialtone Vue release.
 Releases are done on demand by the Dialtone team, and are done fairly regularly.
-
-If you made a local style change, or you need your change to be released promptly, please ask in the [#dialtone](https://dialpad.slack.com/messages/dialtone/) Slack channel for a release as dialtone-vue styles are now
-[included within dialtone](https://dialpad.design/about/whats-new/posts/2023-8-14.html).
 
 ## Coding Guidelines
 
 ### CSS
 
-We should to use `<style scoped>` sections with custom styling using [Dialtone tokens](https://dialpad.design/tokens/) in Dialtone Vue for all component styling.
-Avoid using [utility classes](https://dialpad.design/utilities/) in dialtone-vue, those should be only used at the application level.
+We should use [Dialtone tokens](https://dialpad.design/tokens/) in Dialtone Vue for all component styling.
+Avoid using [utility classes](https://dialpad.design/utilities/) in Dialtone Vue, those should be only used at the application level.
 
 ### How We Use Slots
 
@@ -241,10 +238,10 @@ except when noted below. This in particular means:
 
 - **No access to the Vuex store:** Different projects will have different store structures, and so Dialtone Vue components cannot access the Vuex store. Dialtone Vue components should take data as props only.
 - **No I18n:** Each project will have its own i18n implementation. Any text needed in a Dialtone Vue component should be passed as props or slots.
-- **No custom directives:** Directives in Vue are installed globally and vary from project to project. Custom directives (such as `v-tooltip`) cannot be used in Dialtone Vue components.
+- **No custom directives:** Directives in Vue are installed globally and vary from project to project. Custom directives (such as `v-tooltip`) cannot be used in Dialtone Vue components, unless they exist in dialtone itself.
 - **No other custom global methods:** Some projects may implement custom global methods on the Vue object. Dialtone Vue components are limited to the built-in Vue methods.
 - **No imports outside the dialtone-vue directory**
-- **Vue 2 compatibility:** Dialtone Vue components should ideally support Vue 2 and 3, but a minimum of Vue 2 support is currently required.
+- **Vue 2 compatibility:** Dialtone Vue components should support Vue 2 and Vue 3.
 
 ### Exports
 
@@ -262,7 +259,7 @@ export {
 Our unit tests are written with [Vitest](https://vitest.dev/) and can be found alongside any javascript/vue code files existing in Dialtone Vue.
 Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex: `link.vue` is tested by `link.test.js`.
 All code in Dialtone Vue should have tests written for it.
-You can see more details on writing tests in the following [documentation](https://vue.dialpad.design/?path=/story/docs-component-driven-development-unit-tests--page).
+You can see more details on writing tests in the following [documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-unit-tests--page).
 
 Before you start to write tests, please follow the [Contributing Guideline - Writing Tests for Design System Components](TEST_CONTRIBUTING/TEST_GUIDELINE.md).
 
@@ -270,10 +267,7 @@ Before you start to write tests, please follow the [Contributing Guideline - Wri
 
 Dialtone Vue components should utilize the global immutable CSS classes provided by Dialtone whenever possible.
 It is a requirement of any project using Dialtone Vue to include Dialtone as a dependency.
-If needed, you can also write custom CSS using [Dialtone Tokens CSS variables](https://dialpad.design/tokens/).
-
-If you made a local style change, please ask in the [#dialtone](https://dialpad.slack.com/messages/dialtone/) Slack channel for a release as dialtone-vue styles are now
-[included within dialtone](https://dialpad.design/about/whats-new/posts/2023-8-14.html).
+If needed, you can also write custom CSS using [Dialtone Tokens CSS variables](https://dialtone.dialpad.com/tokens/).
 
 Please **do not** use any mixins or utility classes in Dialtone Vue components.
 
@@ -282,7 +276,7 @@ Please **do not** use any mixins or utility classes in Dialtone Vue components.
 Dialtone Vue is a dependency of other projects, so you must always be aware of making a breaking change.
 It is possible to make breaking changes to a component, however if you do so you will need to update / verify
 all instances of usage of the component in ubervoice/uberconf before updating and communicate the breaking
-change via a blog post on [dialpad.design](https://dialpad.design/about/whats-new/).
+change via a blog post on [dialtone.dialpad.com](https://dialtone.dialpad.com/about/whats-new/).
 
 ### Folder Structure
 
@@ -327,11 +321,8 @@ We use [Vite](https://vitejs.dev/) to run our local server and bundle our build.
 
 We use [Storybook](https://storybook.js.org/) for our Dialtone Vue component documentation.
 Storybook allows you to render each component in isolation and change any available properties.
-Our storybook is hosted at <https://vue.dialpad.design>, and can also be run locally via `npm start`.
-For more detailed info on how to use storybook in Dialtone Vue, refer to our [storybook documentation](https://vue.dialpad.design/?path=/story/docs-storybook-getting-started--page).
-
-Storybook has its own build process and dependencies separate from our project.
-See the [storybook](../storybook) folder within our repo.
+Our storybook is hosted at <https://dialtone.dialpad.com/vue>, and can also be run locally via `npm start`.
+For more detailed info on how to use storybook in Dialtone Vue, refer to our [storybook documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--page).
 
 #### Function Documentation via TypeDoc
 
@@ -357,7 +348,7 @@ You can manually run ESLint via `npm run lint`.
 We use Yeoman as our generator to scaffold new components.
 This means if you are creating a new component you can simply just run `npx yo dialtone-vue` and enter the name of your component.
 All files for your component (component, tests, storybook files) will be generated with starter templates and proper naming conventions.
-For more details on how to use yeoman, see [the docs](https://vue.dialpad.design/?path=/story/docs-component-driven-development-yeoman-generator--page).
+For more details on how to use yeoman, see [the docs](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-yeoman-generator--page).
 
 ### GitHub Actions
 
