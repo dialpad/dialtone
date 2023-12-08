@@ -1,95 +1,48 @@
 #!/usr/bin/env bash
 
-current_branch="$(git rev-parse --abbrev-ref HEAD)"
+#####################################################################################################################################
+# dialtone-vue-sync.sh                                                                                                              #
+#####################################################################################################################################
+# Description:                                                                                                                      #
+#  The following script will copy your changes from dialtone-vue 2 -> 3 or from dialtone-vue 3 -> 2.                                #
+# Optional Parameters:                                                                                                              #
+#  commit-sha / branch: revision number or branch name, if you provide one, it will compare it with current HEAD,                   #
+#  if 2 are provided, it will compare the diff between the two.                                                                     #
+# Example usage:                                                                                                                    #
+#  dialtone-vue-sync.sh                                                                                                             #
+#  dialtone-vue-sync.sh staging                                                                                                     #
+#  dialtone-vue-sync.sh 16eb2969894dd93bbb09b4baa28677fa2fa970c2                                                                    #
+#  dialtone-vue-sync.sh 16eb2969894dd93bbb09b4baa28677fa2fa970c2 59f4882be487d05eb20696162b14e9c7fcf5fdf5                           #
+#####################################################################################################################################
 
-#sync_changes () {
-#  local src_version=$1
-#  local dest_version=$2
-#
-#  while IFS= read -r line; do
-#    echo -e "\033[0m"; # Reset text color
-#
-#    status=$(echo "$line" | awk '{print $1}')
-#    src_file=$(echo "$line" | awk '{print $2}')
-#    dest_file=${src_file/$src_version/$dest_version}
-#    case $status in
-#      R*)
-#        renamed_file=$(echo "$line" | awk '{print $3}')
-#        src_file=${dest_file}
-#        dest_file=${renamed_file/$src_version/$dest_version}
-#
-#        echo -e "\033[0;33mRenaming file $src_file -> $dest_file"
-#        git mv "$src_file" "$dest_file"
-#      ;;
-#      M)
-#        echo -e "\033[0;34mCopying modified file $src_file -> $dest_file"
-#        cp "$src_file" "$dest_file";
-#      ;;
-#      A)
-#        echo -e "\033[0;32mCopying added file: $src_file -> $dest_file"
-#        cp "$src_file" "$dest_file";
-#        git add "$dest_file"
-#      ;;
-#      D)
-#        echo -e "\033[0;31mDeleting file $dest_file"
-#        git rm -r "$dest_file"
-#      ;;
-#      *)
-#        echo "Unhandled case $status"
-#        break
-#      ;;
-#    esac
-#  done < <(git diff --name-status staging HEAD | awk -v filter_path="packages\\/$src_version" '$2 ~ filter_path {print}')
-#}
+before_commit=${1:-HEAD~1};
+after_commit=${2:-HEAD};
 
 sync_changes () {
-  local src_version=$1
-  local dest_version=$2
+  local src_version=$1;
+  local dest_version=$2;
+  local detected_diff;
 
-  if [[ $(git status --porcelain) ]]; then
-    while IFS= read -r line <&3; do
-      src_file=$(echo "$line" | awk '{print $2}');
-      dest_file=${src_file/$src_version/$dest_version}
-      echo "Checking diff with file: $src_file";
-      patch=$(git diff staging HEAD -- "$src_file" | sed -e "s/packages\\/$src_version/packages\\/$dest_version/g");
-      if echo "$patch" | git am --3way; then
-        echo "Command succeeded";
-      else
-        read -p "Conflict merging the changes, do you want to skip? (y/N)" -n 1 -r;
-        echo;
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-          echo "Skipping patching $dest_file";
-          git am --skip
-        else
-          read -p "Resolve the conflicts and press <enter> to continue" -n 1 -r;
-          git am --continue
-        fi
-      fi
-    done 3< <(git diff --name-status staging HEAD -- "packages/$src_version/");
+  echo "Detecting changes with filter on packages/$src_version"
+  detected_diff=$(git diff "$3" "$4" -- "packages/$src_version");
 
-#    git diff HEAD~1 HEAD -- "packages/$src_version/" | sed -e "s/packages\\/$src_version/packages\\/$dest_version/g" | git am --3way
+  if [[ $detected_diff ]]; then
+    echo "Applying patch"
+    echo "$detected_diff" | git apply -p3 --directory packages/"$dest_version" --3way;
   else
-    echo "No changes found from $3 -> $4"
+    echo "No changes found on packages/$src_version from $3 -> $4"
   fi
 }
 
-#sync_changes () {
-#  local src_version=$1
-#  local dest_version=$2
-#
-#  if [[ ${git status --porcelain} ]]; then
-#    git diff HEAD~1 HEAD -- "packages/$src_version/" | sed -e "s/packages\\/$src_version/packages\\/$dest_version/g" | git am --3way
-#  else
-#    echo "No changes found from $3 -> $4"
-#  fi
-#}
-
-# If run from scripts folder, go to parent
-#if [[ "$PWD" =~ [/\/scripts]$  ]]; then
-#  cd ../
-#fi
-
-#mkdir /tmp/patches;
+echo "Welcome to dialtone-vue sync script."
+echo "This script will copy your changes from one dialtone-vue version to the other."
+echo "By default the script will copy over the changes from the last commit, if you want to copy changes between"
+echo "two arbitrary commits, use: dialtone-vue-sync.sh 'commit-sha/branch_name' 'commit-sha/branch_name'"
+read -p "Comparing $before_commit -> $after_commit, do you want to continue? [Y/n]:" -n 1 -r reply;
+echo;
+if [[ "$reply" =~ ^([nN][oO]|[nN])$ ]]; then
+    exit 0;
+fi
 
 PS3='Please choose where you performed your changes: '
 options=("Dialtone-vue 2" "Dialtone-vue 3" "Quit")
@@ -97,23 +50,11 @@ select opt in "${options[@]}"
 do
     case $opt in
         "Dialtone-vue 2")
-#          new_branch="$current_branch-vue2"
-#          git checkout -b "$new_branch" "$current_branch"
-          sync_changes 'dialtone-vue2' 'dialtone-vue3'
-#          git commit -am "Sync dialtone-vue 2 changes"
-#          git checkout "$current_branch"
-#          git merge --no-commit "$new_branch"
-#          git branch --delete "$new_branch"
+          sync_changes 'dialtone-vue2' 'dialtone-vue3' "$before_commit" "$after_commit"
           break
           ;;
         "Dialtone-vue 3")
-#          new_branch="$current_branch-vue3"
-#          git checkout -b "$new_branch" "$current_branch"
-          sync_changes 'dialtone-vue3' 'dialtone-vue2'
-#          git commit -am "Sync dialtone-vue 3 changes"
-#          git checkout "$current_branch"
-#          git merge --no-commit "$new_branch"
-#          git branch --delete "$new_branch"
+          sync_changes 'dialtone-vue3' 'dialtone-vue2' "$before_commit" "$after_commit"
           break
           ;;
         "Quit")
