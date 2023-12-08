@@ -20,32 +20,40 @@
   &__hd {
     padding: 0 4px;
   }
+
   &__bd {
   }
+
   &__header {
-    width: 100%;
     justify-content: space-between;
+    width: 100%;
     color: var(--dt-color-foreground-secondary);
     text-align: center;
   }
+
   &__header-title {
   }
+
   &__nav {
   }
+
   &__nav-btn {
     width: var(--datepicker-button-size);
     height: var(--datepicker-button-size);
   }
+
   &__weekday {
     color: var(--dt-color-foreground-tertiary);
     font-weight: var(--dt-font-weight-medium);
     font-size: var(--dt-font-size-100);
     text-transform: uppercase;
   }
+
   &__calendar {
     width: 100%;
     border-collapse: collapse;
   }
+
   &__cell {
     padding: 0;
     padding-top: var(--dt-space-200);
@@ -56,6 +64,7 @@
       padding-bottom: var(--dt-space-400);
     }
   }
+
   &__day {
     width: var(--datepicker-button-size);
     height: var(--datepicker-button-size);
@@ -67,8 +76,8 @@
     }
 
     &--disabled {
-      background-color: var(--dt-color-neutral-transparent);
       color: var(--dt-color-foreground-muted);
+      background-color: var(--dt-color-neutral-transparent);
     }
   }
 }
