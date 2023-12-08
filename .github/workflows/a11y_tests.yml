@@ -5,6 +5,7 @@ on:
     branches:
       - staging
     paths:
+      - 'packages/dialtone-vue2'
       - 'packages/dialtone-vue3'
 
 env:
