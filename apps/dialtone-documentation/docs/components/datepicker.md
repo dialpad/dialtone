@@ -33,14 +33,14 @@ figma: planned
           <dt-tooltip message="Previous year" placement="top">
             <template #anchor>
               <dt-button size="xs" importance="clear" class="d-btn--icon-only d-btn--muted d-bar-circle d-datepicker__nav-btn" aria-label="Go to previous year, September 2022">
-                <dt-icon name="chevrons-left" size="300" />
+                <dt-icon name="chevrons-left" size="200" />
               </dt-button>
             </template>
           </dt-tooltip>
           <dt-tooltip message="Previous month" placement="top">
             <template #anchor>
               <dt-button size="xs" importance="clear" class="d-btn--icon-only d-btn--muted d-bar-circle d-datepicker__nav-btn" aria-label="Go to previous month, August">
-                <dt-icon name="chevron-left" size="300" />
+                <dt-icon name="chevron-left" size="200" />
               </dt-button>
             </template>
           </dt-tooltip>
@@ -50,14 +50,14 @@ figma: planned
           <dt-tooltip message="Next month" placement="top">
             <template #anchor>
               <dt-button size="xs" importance="clear" class="d-btn--icon-only d-btn--muted d-bar-circle d-datepicker__nav-btn" aria-label="Go to next month, October">
-                <dt-icon name="chevron-right" size="300" />
+                <dt-icon name="chevron-right" size="200" />
               </dt-button>
             </template>
           </dt-tooltip>
           <dt-tooltip message="Next year" placement="top">
             <template #anchor>
               <dt-button size="xs" importance="clear" class="d-btn--icon-only d-btn--muted d-bar-circle d-datepicker__nav-btn" aria-label="Go to previous year, September 2024">
-                <dt-icon name="chevrons-right" size="300" />
+                <dt-icon name="chevrons-right" size="200" />
               </dt-button>
             </template>
           </dt-tooltip>
