@@ -40,13 +40,13 @@
     "Vuepress"
   ],
   "scripts": {
-    "lint": "run-s lint:docs lint:code",
-    "lint:fix": "run-s lint-staged:docs lint-staged:code",
     "build": "vuepress build docs",
-    "lint-staged:code": "pnpm run lint:code --fix",
-    "lint-staged:docs": "pnpm run lint:docs --fix",
+    "lint": "run-s lint:docs lint:code",
+    "lint-staged": "pnpm exec lint-staged",
     "lint:code": "eslint '**/*.{js,vue}'",
     "lint:docs": "markdownlint '**/*.md'",
+    "lint-staged:code": "pnpm run lint:code --fix",
+    "lint-staged:docs": "pnpm run lint:docs --fix",
     "start": "vuepress dev docs"
   },
   "type": "module",
@@ -74,7 +74,6 @@
     "@vuepress/plugin-toc": "2.0.0-beta.60",
     "@vuepress/utils": "2.0.0-beta.60",
     "date-fns": "^2.30.0",
-    "lint-staged": "^13.2.3",
     "markdown-it": "^13.0.2",
     "markdown-it-anchor": "^8.6.7",
     "markdownlint": "^0.29.0",

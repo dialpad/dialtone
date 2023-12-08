@@ -6,15 +6,15 @@
     "build": "run-s clean build:main build:typescript build:documentation",
     "build:main": "vite build",
     "build:typescript": "vue-tsc",
-    "lint": "run-s lint:code lint:docs",
-    "lint:fix": "run-s lint-staged:code lint-staged:docs",
     "build:documentation": "node scripts/build-docs.js",
     "build:documentation:functions": "pnpm exec typedoc --plugin typedoc-plugin-markdown",
     "clean": "rm -rf ./dist",
-    "lint-staged:code": "pnpm run lint:code --fix",
-    "lint-staged:docs": "pnpm run lint:docs --fix",
+    "lint": "run-s lint:code lint:docs",
     "lint:code": "eslint . --ext .js,.vue --ignore-path .gitignore",
     "lint:docs": "markdownlint '**/*.mdx'",
+    "lint-staged": "pnpm exec lint-staged",
+    "lint-staged:code": "pnpm run lint:code --fix",
+    "lint-staged:docs": "pnpm run lint:docs --fix",
     "prepublishOnly": "pnpm run build",
     "pretest": "pnpm run clean",
     "start": "pnpm run storybook",
@@ -98,7 +98,6 @@
     "eslint-plugin-vuejs-accessibility": "^2.1.0",
     "jsdom": "^22.1.0",
     "less": "^4.2.0",
-    "lint-staged": "^13.2.3",
     "macos-release": "^3.2.0",
     "markdownlint": "^0.29.0",
     "markdownlint-cli": "^0.35.0",
@@ -202,10 +201,6 @@
     "./css": {
       "style": "./dist/style.css"
     }
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "./scripts/commit-msg"
   },
   "homepage": "https://dialtone.dialpad.com/vue",
   "keywords": [

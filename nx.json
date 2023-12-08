@@ -4,7 +4,7 @@
       "cache": true,
       "dependsOn": ["^build"]
     },
-    "lint:fix": { "cache": true },
+    "lint-staged": { "cache": true },
     "test": {
       "cache": true,
       "dependsOn": ["^build"]
