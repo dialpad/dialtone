@@ -48,6 +48,8 @@ const badgeKindClass = (status) => {
       return 'd-badge--bulletin';
     case 'ready':
       return 'd-badge--success';
+    case 'beta':
+      return 'd-badge--info';
     default:
       return '';
   }

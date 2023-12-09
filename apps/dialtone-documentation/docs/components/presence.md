@@ -1,7 +1,7 @@
 ---
 title: Presence
 description: A visual control element indicating the current status of a user.
-status: new
+status: ready
 thumb: true
 image: assets/images/components/presence.png
 storybook: https://vue.dialpad.design/?path=/docs/components-presence--default
