@@ -93,65 +93,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 Here are some frequently used tokens. For a complete list, visit the [Spacing Tokens](https://) section.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">Token</th>
-      <th scope="col">REM</th>
-      <th scope="col">PX</th>
-      <th scope="col">Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>
-        <div class="d-d-flex d-jc-space-between d-ai-center">
-          <dt-stack direction="row" class="d-fl0 d-fs-300 d-fc-primary d-p6 d-fw-medium">
-            <div style="height: var(--dt-size-625); width: var(--dt-size-500); background-color: var(--dt-color-black-200); display: flex; align-items: center; justify-content: center; font-size: var(--dt-font-size-100); color: var(--dt-color-black-500);">
-              A
-            </div>
-            <div style="width: 0rem; height: var(--dt-size-625);
-    background-color: var(--dt-color-brand-purple);"></div>
-            <div style="height: var(--dt-size-625); width: var(--dt-size-500); background-color: var(--dt-color-black-200); display: flex; align-items: center; justify-content: center; font-size: var(--dt-font-size-100); color: var(--dt-color-black-500);">
-              B
-            </div>
-          </dt-stack>
-        </div>
-      </th>
-      <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">var(--dt-space-0)</td>
-      <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">0rem</td>
-      <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">0px</td>
-      <td scope="row" class="d-lh-300">
-        <div class="d-fw-normal d-fs-100">Default space between elements.</div>
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <div class="d-d-flex d-jc-space-between d-ai-center">
-          <dt-stack direction="row" class="d-fl0 d-fs-300 d-fc-primary d-p6 d-fw-medium">
-            <div style="height: var(--dt-size-625); width: var(--dt-size-500); background-color: var(--dt-color-black-200); display: flex; align-items: center; justify-content: center; font-size: var(--dt-font-size-100); color: var(--dt-color-black-500);">
-              A
-            </div>
-            <div style="width: 0.2rem; height: var(--dt-size-625);
-    background-color: var(--dt-color-brand-purple);"></div>
-            <div style="height: var(--dt-size-625); width: var(--dt-size-500); background-color: var(--dt-color-black-200); display: flex; align-items: center; justify-content: center; font-size: var(--dt-font-size-100); color: var(--dt-color-black-500);">
-              B
-            </div>
-          </dt-stack>
-        </div>
-      </th>
-      <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">var(--dt-space-200)</td>
-      <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">0.2rem</td>
-      <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">4px</td>
-      <td scope="row" class="d-lh-300">
-        <div class="d-fw-normal d-fs-100">
-          Horizontal stack Icon + Text, Vertical stack List group.
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<token-table category="space" :tokenList="tokenList" />
 
 WIP: Tokens table
 
@@ -166,3 +108,10 @@ WIP: Tokens table
 - Ensure consistent spacing across various screen sizes and breakpoints.
 
 **🌟 Design Tip:** Optimize your workflow in Figma by setting the nudge amount to 4px or 8px. It's a small change that can make a big difference in ease of use!
+
+<script setup>
+const tokenList = {
+  'var(--dt-space-0)': { description: 'Default space between elements.' },
+  'var(--dt-space-200)': { description: 'Horizontal stack Icon + Text, Vertical stack List group.' },
+};
+</script>
