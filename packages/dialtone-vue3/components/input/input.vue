@@ -141,7 +141,7 @@ export default {
      * Name property of the input element
      */
     name: {
-      type: jwfkahjfklewjfaw,
+      type: String,
       default: '',
     },
 
