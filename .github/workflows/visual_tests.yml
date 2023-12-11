@@ -49,7 +49,7 @@ jobs:
             throw "Please add either the visual-test-ready or no-visual-test label to this PR depending on whether you want to run visual tests or not. It is recommended to run visual tests if your PR changes any UI.";
 
   dialtone-vue-2:
-    needs: [filter-actions, prompt-for-label]
+    needs: filter-actions
     if: (needs.filter-actions.outputs.dialtone-vue-2 == 'true' && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'))
 
     runs-on: ubuntu-latest
@@ -94,7 +94,7 @@ jobs:
         run: pnpm nx run --verbose dialtone-vue2:test:visual
 
   dialtone-vue-3:
-    needs: [filter-actions, prompt-for-label]
+    needs: filter-actions
     if: (needs.filter-actions.outputs.dialtone-vue-3 == 'true' && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'))
     runs-on: ubuntu-latest
     steps:
