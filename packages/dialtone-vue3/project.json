@@ -20,7 +20,7 @@
       "executor": "nx:run-script",
       "dependsOn": [
         {
-          "projects": [ "dialtone-icons" ],
+          "projects": [ "dialtone", "dialtone-icons" ],
           "target": "build",
           "params": "ignore"
         }
