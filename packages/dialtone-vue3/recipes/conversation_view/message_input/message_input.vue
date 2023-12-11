@@ -1,244 +1,210 @@
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
-  <dt-notice
-    v-if="showNotice"
-    data-qa="dt-message-input-error-notice"
-    :class="noticeClasses"
-    :kind="noticeKind"
-    :close-button-props="computedCloseButtonProps"
-    @close="noticeClose"
-  >
-    {{ noticeMessage }}
-    <template #icon>
-      <dt-icon
-        size="300"
-        name="alert-circle"
-      />
-    </template>
-  </dt-notice>
   <div
-    class="d-ps-relative d-bar8 d-bgc-white"
+    data-qa="dt-message-input"
+    role="presentation"
+    class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
+    :class="{ 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }"
+    @click="$refs.richTextEditor.focusEditor()"
+    @drag-enter="onDrag"
+    @drag-over="onDrag"
+    @drop="onDrop"
+    @keydown.enter.exact="onSend"
+    @focusin="hasFocus = true"
+    @focusout="hasFocus = false"
   >
+    <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
-      data-qa="dt-message-input"
-      role="presentation"
-      class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
-      :class="{ 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }"
-      @click="$refs.richTextEditor.focusEditor()"
-      @drag-enter="onDrag"
-      @drag-over="onDrag"
-      @drop="onDrop"
-      @keydown.enter.exact="onSend"
-      @focusin="hasFocus = true"
-      @focusout="hasFocus = false"
+      class="d-of-auto d-mx16 d-mt8 d-mb4"
+      :style="{ 'max-height': maxHeight }"
     >
-      <!-- Some wrapper to restrict the height and show the scrollbar -->
-      <div
-        class="d-of-auto d-mx16 d-mt8 d-mb4"
-        :style="{ 'max-height': maxHeight }"
-      >
-        <dt-rich-text-editor
-          ref="richTextEditor"
-          v-model="internalInputValue"
-          :editable="editable"
-          :input-aria-label="inputAriaLabel"
-          :input-class="inputClass"
-          :output-format="outputFormat"
-          :auto-focus="autoFocus"
-          :link="link"
-          :placeholder="placeholder"
-          v-bind="$attrs"
-          @focus="hasFocus = true"
-          @blur="hasFocus = false"
-        />
-      </div>
-      <!-- @slot Slot for attachment carousel -->
-      <slot name="middle" />
-      <!-- Section for the bottom UI -->
-      <section class="d-d-flex d-jc-space-between d-mx8 d-my4">
-        <!-- Left content -->
-        <div class="d-d-flex">
-          <dt-tooltip
-            v-if="!isEdit"
-            placement="top-start"
-            :message="imageTooltipLabel"
-            :offset="[-4, -4]"
-          >
-            <template #anchor>
-              <dt-button
-                data-qa="dt-message-input-image-btn"
-                size="sm"
-                circle
-                :kind="imagePickerFocus ? 'default' : 'muted'"
-                importance="clear"
-                :aria-label="imageButtonAriaLabel"
-                @click="onSelectImage"
-                @mouseenter="imagePickerFocus = true"
-                @mouseleave="imagePickerFocus = false"
-                @focusin="imagePickerFocus = true"
-                @focusout="imagePickerFocus = false"
-              >
-                <template #icon>
-                  <dt-icon
-                    name="image"
-                    size="300"
-                  />
-                </template>
-              </dt-button>
-              <dt-input
-                ref="messageInputImageUpload"
-                data-qa="dt-message-input-image-input"
-                type="file"
-                class="d-ps-absolute"
-                multiple
-                hidden
-                @input="onImageUpload"
-              />
-            </template>
-          </dt-tooltip>
-          <dt-popover
-            data-qa="dt-message-input-emoji-picker-popover"
-            :open="emojiPickerOpened"
-            initial-focus-element="#searchInput"
-            padding="none"
-            @opened="(open) => { emojiPickerOpened = open }"
-          >
-            <template #anchor>
-              <dt-tooltip
-                :message="emojiTooltipMessage"
-                :offset="[0, -4]"
-              >
-                <template #anchor>
-                  <dt-button
-                    data-qa="dt-message-input-emoji-picker-btn"
-                    size="sm"
-                    circle
-                    :kind="emojiPickerHovered ? 'default' : 'muted'"
-                    importance="clear"
-                    :aria-label="emojiButtonAriaLabel"
-                    :offset="[0, 0]"
-                    @click="toggleEmojiPicker"
-                    @mouseenter="emojiPickerFocus = true"
-                    @mouseleave="emojiPickerFocus = false"
-                    @focusin="emojiPickerFocus = true"
-                    @focusout="emojiPickerFocus = false"
-                  >
-                    <template #icon>
-                      <dt-icon
-                        :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
-                        size="300"
-                      />
-                    </template>
-                  </dt-button>
-                </template>
-              </dt-tooltip>
-            </template>
-            <template #content>
-              <dt-emoji-picker
-                v-bind="emojiPickerProps"
-                @skin-tone="onSkinTone"
-                @selected-emoji="onSelectEmoji"
-              />
-            </template>
-          </dt-popover>
-        </div>
-        <!-- Right content -->
-        <div class="d-d-flex">
-          <!-- Optionally displayed remaining character counter -->
-          <dt-tooltip
-            v-if="displayCharacterLimitWarning"
-            :enabled="characterLimitWarningMessage && (characterLimitCount - inputLength < 0)"
-            placement="top-end"
-            :message="characterLimitWarningMessage"
-            :offset="[10, -8]"
-          >
-            <template #anchor>
-              <p
-                v-if="displayCharacterLimitWarning"
-                class="d-fc-error d-mr16 d-as-center dt-message-input--remaining-char"
-                data-qa="dt-message-input-character-limit"
-              >
-                {{ characterLimitCount - inputLength }}
-              </p>
-            </template>
-          </dt-tooltip>
-
-          <!-- Cancel button for edit mode -->
-          <dt-button
-            v-if="isEdit"
-            data-qa="dt-message-input-cancel-button"
-            class="dt-message-input--cancel-button"
-            size="sm"
-            kind="muted"
-            importance="clear"
-            :aria-label="cancelButtonAriaLabel"
-            @click="onCancel"
-          >
-            <p>{{ cancelButtonText }}</p>
-          </dt-button>
-
-          <!-- Send button -->
-          <dt-tooltip
-            placement="top-end"
-            :enabled="!isEdit"
-            :message="sendTooltipLabel"
-            :show="!isSendDisabled && sendButtonFocus"
-            :offset="[6, -8]"
-          >
-            <template #anchor>
-              <!-- Right positioned UI - send button -->
-              <dt-button
-                data-qa="dt-message-input-send-btn"
-                size="sm"
-                :kind="sendButtonKind"
-                :circle="!isEdit"
-                importance="primary"
-                :class="{
-                  'message-input-button__disabled d-fc-muted': isSendDisabled,
-                }"
-                :aria-label="sendButtonAriaLabel"
-                :aria-disabled="isSendDisabled"
-                @click="onSend"
-                @mouseenter="sendButtonFocus = true"
-                @mouseleave="sendButtonFocus = false"
-                @focusin="sendButtonFocus = true"
-                @focusout="sendButtonFocus = false"
-              >
-                <template
-                  v-if="!isEdit"
-                  #icon
-                >
-                  <dt-icon
-                    name="send"
-                    size="300"
-                  />
-                </template>
-                <template
-                  v-if="isEdit"
-                >
-                  <p>{{ saveChangesButtonText }}</p>
-                </template>
-              </dt-button>
-            </template>
-          </dt-tooltip>
-        </div>
-      </section>
+      <dt-rich-text-editor
+        ref="richTextEditor"
+        v-model="internalInputValue"
+        :editable="editable"
+        :input-aria-label="inputAriaLabel"
+        :input-class="inputClass"
+        :output-format="outputFormat"
+        :auto-focus="autoFocus"
+        :link="link"
+        :placeholder="placeholder"
+        v-bind="$attrs"
+        @focus="hasFocus = true"
+        @blur="hasFocus = false"
+      />
     </div>
-    <section
-      v-if="!isEdit"
-      class="d-d-flex d-jc-space-between d-h24 d-ai-center"
-    >
-      <div
-        data-qa="dt-message-input-footer-left"
-      >
-        <!-- @slot Slot for helper text. Who is typing can go here -->
-        <slot name="footerLeft" />
+    <!-- @slot Slot for attachment carousel -->
+    <slot name="middle" />
+    <!-- Section for the bottom UI -->
+    <section class="d-d-flex d-jc-space-between d-mx8 d-my4">
+      <!-- Left content -->
+      <div class="d-d-flex">
+        <dt-tooltip
+          v-if="showImagePicker"
+          placement="top-start"
+          :message="showImagePicker.tooltipLabel"
+          :offset="[-4, -4]"
+        >
+          <template #anchor>
+            <dt-button
+              data-qa="dt-message-input-image-btn"
+              size="sm"
+              circle
+              :kind="imagePickerFocus ? 'default' : 'muted'"
+              importance="clear"
+              :aria-label="showImagePicker.ariaLabel"
+              @click="onSelectImage"
+              @mouseenter="imagePickerFocus = true"
+              @mouseleave="imagePickerFocus = false"
+              @focusin="imagePickerFocus = true"
+              @focusout="imagePickerFocus = false"
+            >
+              <template #icon>
+                <dt-icon
+                  name="image"
+                  size="300"
+                />
+              </template>
+            </dt-button>
+            <dt-input
+              ref="messageInputImageUpload"
+              data-qa="dt-message-input-image-input"
+              type="file"
+              class="d-ps-absolute"
+              multiple
+              hidden
+              @input="onImageUpload"
+            />
+          </template>
+        </dt-tooltip>
+        <dt-popover
+          v-if="showEmojiPicker"
+          data-qa="dt-message-input-emoji-picker-popover"
+          :open="emojiPickerOpened"
+          initial-focus-element="#searchInput"
+          padding="none"
+          @opened="(open) => { emojiPickerOpened = open }"
+        >
+          <template #anchor>
+            <dt-tooltip
+              :message="emojiTooltipMessage"
+              :offset="[0, -4]"
+            >
+              <template #anchor>
+                <dt-button
+                  data-qa="dt-message-input-emoji-picker-btn"
+                  size="sm"
+                  circle
+                  :kind="emojiPickerHovered ? 'default' : 'muted'"
+                  importance="clear"
+                  :aria-label="emojiButtonAriaLabel"
+                  :offset="[0, 0]"
+                  @click="toggleEmojiPicker"
+                  @mouseenter="emojiPickerFocus = true"
+                  @mouseleave="emojiPickerFocus = false"
+                  @focusin="emojiPickerFocus = true"
+                  @focusout="emojiPickerFocus = false"
+                >
+                  <template #icon>
+                    <dt-icon
+                      :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
+                      size="300"
+                    />
+                  </template>
+                </dt-button>
+              </template>
+            </dt-tooltip>
+          </template>
+          <template #content>
+            <dt-emoji-picker
+              v-bind="emojiPickerProps"
+              @skin-tone="onSkinTone"
+              @selected-emoji="onSelectEmoji"
+            />
+          </template>
+        </dt-popover>
       </div>
-      <div
-        data-qa="dt-message-input-footer-right"
-      >
-        <!-- @slot helper text for the input. Shift + enter for new line -->
-        <slot name="footerRight" />
+      <!-- Right content -->
+      <div class="d-d-flex">
+        <!-- Optionally displayed remaining character counter -->
+        <dt-tooltip
+          v-if="Boolean(showCharacterLimit)"
+          class="dt-message-input--remaining-char-tooltip"
+          placement="top-end"
+          :enabled="characterLimitTooltipEnabled"
+          :message="showCharacterLimit.message"
+          :offset="[10, -8]"
+        >
+          <template #anchor>
+            <p
+              v-show="displayCharacterLimitWarning"
+              class="d-fc-error d-mr16 dt-message-input--remaining-char"
+              data-qa="dt-message-input-character-limit"
+            >
+              {{ showCharacterLimit.count - inputLength }}
+            </p>
+          </template>
+        </dt-tooltip>
+
+        <!-- Cancel button for edit mode -->
+        <dt-button
+          v-if="showCancel"
+          data-qa="dt-message-input-cancel-button"
+          class="dt-message-input--cancel-button"
+          size="sm"
+          kind="muted"
+          importance="clear"
+          :aria-label="showCancel.ariaLabel"
+          @click="onCancel"
+        >
+          <p>{{ showCancel.text }}</p>
+        </dt-button>
+
+        <!-- Send button -->
+        <dt-tooltip
+          v-if="showSend"
+          placement="top-end"
+          :enabled="!showSend"
+          :message="showSend.tooltipLabel"
+          :show="!isSendDisabled && sendButtonFocus"
+          :offset="[6, -8]"
+        >
+          <template #anchor>
+            <!-- Right positioned UI - send button -->
+            <dt-button
+              data-qa="dt-message-input-send-btn"
+              size="sm"
+              :kind="sendButtonKind"
+              :circle="Boolean(showSend.icon)"
+              importance="primary"
+              :class="{
+                'message-input-button__disabled d-fc-muted': isSendDisabled,
+              }"
+              :aria-label="showSend.ariaLabel"
+              :aria-disabled="isSendDisabled"
+              @click="onSend"
+              @mouseenter="sendButtonFocus = true"
+              @mouseleave="sendButtonFocus = false"
+              @focusin="sendButtonFocus = true"
+              @focusout="sendButtonFocus = false"
+            >
+              <template
+                v-if="showSend.icon"
+                #icon
+              >
+                <dt-icon
+                  :name="showSend.icon"
+                  size="300"
+                />
+              </template>
+              <template
+                v-if="showSend.text"
+              >
+                <p>{{ showSend.text }}</p>
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
       </div>
     </section>
   </div>
@@ -256,7 +222,6 @@ import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
-import { DtNotice, NOTICE_KINDS } from '@/components/notice';
 import { DtTooltip } from '@/components/tooltip';
 
 export default {
@@ -267,7 +232,6 @@ export default {
     DtEmojiPicker,
     DtIcon,
     DtInput,
-    DtNotice,
     DtPopover,
     DtRichTextEditor,
     DtTooltip,
@@ -374,71 +338,6 @@ export default {
       default: false,
     },
 
-    // Character limit props
-
-    /**
-     * Enable character Limit warning
-     */
-    hasCharacterLimit: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Max number of characters allowed
-     */
-    characterLimitCount: {
-      type: Number,
-      default: 1500,
-    },
-
-    /**
-     * Number after which warning for max limit appears
-     */
-    characterLimitWarning: {
-      type: Number,
-      default: 500,
-    },
-
-    /**
-     * Character limit warning message
-     */
-    characterLimitWarningMessage: {
-      type: String,
-      default: '',
-    },
-
-    // Error related props
-
-    /**
-     * Show error notice
-     * This should be turned to false after notice-close event is fired.
-     */
-    showNotice: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * message in the notice
-     */
-    noticeMessage: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * kind of notice to manage color
-     * @values base, error, info, success, warning
-     */
-    noticeKind: {
-      type: String,
-      default: 'error',
-      validate (kind) {
-        return NOTICE_KINDS.includes(kind);
-      },
-    },
-
     /**
      * Content area needs to dynamically adjust height based on the conversation area height.
      * can be vh|px|rem|em|%
@@ -449,6 +348,10 @@ export default {
     },
 
     // Emoji picker props
+    showEmojiPicker: {
+      type: Boolean,
+      default: true,
+    },
 
     /**
      * Props to pass into the emoji picker.
@@ -476,7 +379,6 @@ export default {
     },
 
     // Aria label for buttons
-
     /**
      * Emoji button aria label
      */
@@ -485,62 +387,33 @@ export default {
       default: 'emoji button',
     },
 
-    imageButtonAriaLabel: {
-      type: String,
-      default: 'image button',
-    },
-
     /**
-     * Image button tooltip label
+     * Enable character Limit warning
      */
-    imageTooltipLabel: {
-      type: String,
-      default: 'Attach Image',
+    showCharacterLimit: {
+      type: [Boolean, Object],
+      default: () => ({ count: 1500, warning: 500, message: '' }),
     },
 
-    sendButtonAriaLabel: {
-      type: String,
-      default: 'send button',
+    showImagePicker: {
+      type: [Boolean, Object],
+      default: () => ({ tooltipLabel: 'Attach Image', ariaLabel: 'image button' }),
     },
 
     /**
-     * Send button tooltip label
+     * Send button defaults.
      */
-    sendTooltipLabel: {
-      type: String,
-      default: 'Send',
+    showSend: {
+      type: [Boolean, Object],
+      default: () => ({ icon: 'send' }),
     },
 
     /**
-     * isEdit
+     * Cancel button defaults.
      */
-    isEdit: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * i18n Save changes button text
-    */
-    saveChangesButtonText: {
-      type: String,
-      default: 'Save changes',
-    },
-
-    /**
-     * Cancel aria label
-     */
-    cancelButtonAriaLabel: {
-      type: String,
-      default: 'Cancel button',
-    },
-
-    /**
-     * Cancel button i18n text
-    */
-    cancelButtonText: {
-      type: String,
-      default: 'Cancel',
+    showCancel: {
+      type: [Boolean, Object],
+      default: () => ({ text: 'Cancel' }),
     },
   },
 
@@ -568,15 +441,6 @@ export default {
      * @type {Array}
      */
     'add-media',
-
-    /**
-     * Fires when notice is closed by user.
-     * Listen to this event to toggle showNotice on usage.
-     *
-     * @event notice-close
-     * @type {Boolean}
-     */
-    'notice-close',
 
     /**
      * Fires when cancel button is pressed (only on edit mode)
@@ -620,36 +484,24 @@ export default {
     },
 
     displayCharacterLimitWarning () {
-      return this.hasCharacterLimit &&
-        (this.characterLimitCount - this.inputLength) <= this.characterLimitWarning;
+      return Boolean(this.showCharacterLimit) &&
+        ((this.showCharacterLimit.count - this.inputLength) <= this.showCharacterLimit.warning);
+    },
+
+    characterLimitTooltipEnabled () {
+      return this.showCharacterLimit.message && (this.showCharacterLimit.count - this.inputLength < 0);
     },
 
     isSendDisabled () {
       return this.inputLength === 0 ||
       this.disableSend ||
-      (this.hasCharacterLimit && this.inputLength > this.characterLimitCount);
+      (this.showCharacterLimit && this.inputLength > this.showCharacterLimit.count);
     },
 
     computedCloseButtonProps () {
       return {
         ariaLabel: 'Close',
       };
-    },
-
-    noticeClasses () {
-      return [
-        'dt-message-input-notice',
-        'd-ps-relative',
-        'd-t8',
-        'd-bbr0',
-        'd-pt4',
-        'd-pb8',
-        'd-pr12',
-        'd-pl16',
-        'd-bs-none',
-        'd-fs-100',
-        'd-wmx-unset',
-      ];
     },
 
     emojiPickerHovered () {
@@ -727,10 +579,6 @@ export default {
       this.$emit('cancel');
     },
 
-    noticeClose () {
-      this.$emit('notice-close', true);
-    },
-
     focus () {
       this.$refs.richTextEditor.focusEditor();
       this.hasFocus = true;
@@ -740,6 +588,10 @@ export default {
 </script>
 
 <style lang="less">
+.dt-message-input--remaining-char-tooltip {
+  margin-top: auto;
+  margin-bottom: auto;
+}
 .dt-message-input--remaining-char {
   font-size: 1.2rem;
 }
@@ -750,9 +602,6 @@ export default {
   cursor: default;
 }
 
-.dt-message-input-notice .d-notice__icon {
-  margin-right: 8px;
-}
 .dt-message-input--cancel-button {
   color: var(--dt-color-black-500);
   margin-right: var(--dt-space-300);
