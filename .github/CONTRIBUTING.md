@@ -12,11 +12,7 @@ Each package has its own contributing guide, please follow the links to find the
 
 [CONTRIBUTING.md](../packages/dialtone-tokens/.github/CONTRIBUTING.md)
 
-## Dialtone Vue 2
-
-[CONTRIBUTING.md](../packages/dialtone-vue2/.github/CONTRIBUTING.md)
-
-## Dialtone Vue 3
+## Dialtone Vue
 
 [CONTRIBUTING.md](../packages/dialtone-vue3/.github/CONTRIBUTING.md)
 
