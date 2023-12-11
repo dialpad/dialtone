@@ -6,13 +6,11 @@ Thanks for your interest in contributing to Dialtone! Please take a moment to re
 
 ### What is Dialtone?
 
-Dialtone is a design system by Dialpad comprised of CSS components, [Vue components](https://vue.dialpad.design/), utility classes, visual assets, documentation and examples which strives to:
+Dialtone is a design system by Dialpad comprised of CSS components, [Vue components](https://dialtone.dialpad.com/vue), utility classes, visual assets, documentation and examples which strives to:
 
 - Create a consistent design language between all Dialpad products.
 - Create a suite of well-documented, flexible and intuitive UI components that are easy for designers, developers and users to use.
 - Document and promote accessible development and design across Dialpad.
-
-Though part of the design system, Dialtone's Vue components are distributed as a separate package and therefore have their own [repository](https://github.com/dialpad/dialtone-vue) and contribution guidelines.
 
 ### What is a contribution?
 
@@ -28,7 +26,7 @@ Types of contributions:
 
 There are a couple important considerations when thinking about contributing to Dialtone. The first is to remember that Dialtone strives to offer styles, components, or patterns intended to be shared by multiple teams or features. Generally, one-off or first-time elements (i.e. snowflakes) aren't a great fit, though there may be the occasional exception.
 
-The second is to check with the Dialtone team (in [#dialtone](https://dialpad.slack.com/messages/dialtone/)) to ensure the contribution isn't already requested, planned, or even complete. You may also see our [Jira board](https://switchcomm.atlassian.net/jira/software/projects/DT/boards/187/backlog) for upcoming work.
+The second is to check with the Dialtone team (in the #dialtone Dialpad channel) to ensure the contribution isn't already requested, planned, or even complete. You may also see our [Jira backlog](https://dialpad.atlassian.net/jira/software/c/projects/DLT/boards/548/backlog) for upcoming work, and our [Jira timeline](https://dialpad.atlassian.net/jira/software/c/projects/DLT/boards/548/timeline) for our long term quarterly roadmap.
 
 ### Roles
 
@@ -40,15 +38,15 @@ The second is to check with the Dialtone team (in [#dialtone](https://dialpad.sl
 
 ### Feature request
 
-To request a new Dialtone feature or enhancement, submit a [feature request](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428) to our Jira.
+To request a new Dialtone feature or enhancement, submit a [feature request](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10975&pid=12508) to our Jira.
 
 ### Bug report
 
-If you would like to report a bug, please post it in [#dialtone](https://dialpad.slack.com/messages/dialtone/). We will assist you in determining whether it is a Dialtone bug. Please give us a working example of the bug on a private beta or deploy preview link. A branch we can checkout is also helpful. If we have determined that this is a bug in Dialtone, then you may create a [bug report](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428) on Jira for the bug. We will get to fixing the bug in the future, or you can fix the bug yourself by [Making a Pull Request](#making-a-pull-request)
+If you would like to report a bug, please post it in the #dialtone Dialpad channel. We will assist you in determining whether it is a Dialtone bug. Please give us a working example of the bug on a private beta or deploy preview link. A branch we can checkout is also helpful. If we have determined that this is a bug in Dialtone, then you may create a [bug report](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=12508) on Jira for the bug. We will get to fixing the bug in the future, or you can fix the bug yourself by [Making a Pull Request](#making-a-pull-request)
 
 ### Making a pull request
 
-Before submitting a pull request, make sure to communicate what you wish to change to the Dialtone team. The easiest way to do this is via the [#dialtone](https://dialpad.slack.com/messages/dialtone/) Slack channel. It's possible your change is already being worked on, has already been fixed, or maybe we just need to discuss the best solution to the problem. This prevents you from having to re-write your entire change, or even having to scrap it entirely.
+Before submitting a pull request, make sure to communicate what you wish to change to the Dialtone team. The easiest way to do this is via the #dialtone Dialpad channel. It's possible your change is already being worked on, has already been fixed, or maybe we just need to discuss the best solution to the problem. This prevents you from having to re-write your entire change, or even having to scrap it entirely.
 
 After you have discussed your change with the Dialtone team, follow these steps to submit it:
 
@@ -60,20 +58,22 @@ After you have discussed your change with the Dialtone team, follow these steps 
 6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
 7. Once your changes have been approved, you may squash merge your branch into `staging`.
 
-Once your change is in `staging` it will go live with the next Dialtone release. Releases are done on demand by the Dialtone team, and are done fairly regularly. If you need your change to be released promptly, please ask in the #dialtone slack channel.
+Once your change is in `staging` it will go live with the next Dialtone release. Releases are done on demand by the Dialtone team, and are done fairly regularly. If you need your change to be released promptly, please ask in the #dialtone Dialpad channel.
 
 ## Coding guidelines
 
 ### Naming conventions
 
-All Dialtone classes available to users are prefixed with `d-`.
+All Dialtone CSS classes available to users are prefixed with `d-`.
 
 ```less
 .d-input {}
 .d-stack8 {}
 ```
 
-Note that variables are not classes and do not follow this convention. For example: `@purple-300` (`LESS`) or `var(--dt-size-450)` (CSS Custom Property).
+### Tokens
+
+Tokens are the values that make up the design system. Colors, sizing, spacing and typography are valid tokens, and are output as variables in the Dialtone CSS. Tokens are defined in the dialtone-tokens package and are always prefixed with dt. Example: `var(--dt-color-black-100)`. See [Dialtone Tokens](../packages/dialtone-tokens/README.md) for more information.
 
 #### Utility classes
 
@@ -96,16 +96,17 @@ Component class names use the [Block Element Modifier (BEM)](http://getbem.com/n
 
 ### Immutable utility classes
 
-All of our utility classes are set to `!important`. This is because they are designed to be immutable, and `!important` is the best way we have of achieving immutability in CSS.
+All of our utility classes are set to `!important`. This is because they are designed to be immutable, and `!important` is the best way we have of achieving immutability in CSS. Utility classes should only be applied at the application level and not within dialtone vue components.
 
 ### CSS vars
 
-We use CSS vars, also known as [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) in our classes for better reusability. We try to always use CSS vars, e.g. `var(--size-500)` over less vars `@su16` in our code, however we often use LESS vars to help generate CSS vars.
+We use CSS vars, also known as [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) in our component classes for better reusability. We should use tokens to apply values to properties within our CSS classes unless a relevant token does not exist. For example, we should use `var(--dt-color-black-100)` instead of `#000000` or `var(--dt-space-400)` instead of `0.8rem`.
 
-Here we set the `--avatar--size` CSS var to `12`, and set both the width and the height to reference this variable.
+Here we set the `--avatar--size` CSS var to the `--dt-size-450` token, and set both the width and the height to reference this variable.
+
 ```less
 .d-avatar {
-    --avatar--size: var(--size-450);
+    --avatar--size: var(--dt-size-450);
     width: var(--avatar--size);
     height: var(--avatar--size);
 }
@@ -115,7 +116,7 @@ Now in variation `d-avatar--sm`, we just set `--avatar--size`. Width and height 
 
 ```less
 .d-avatar--sm {
-  --avatar--size: var(--size-400);
+  --avatar--size: var(--dt-size-400);
 }
 ```
 
@@ -137,8 +138,8 @@ Configuration can be found in:
 
 Your code will be linted automatically on commit.
 
-- **Lint manually:** `pnpm run lint`
-- **With autofix:** `pnpm run lint:fix`
+- **Lint manually:** `pnpm nx lint dialtone`
+- **With autofix:** `pnpm nx lint:fix dialtone`
 
 Note that we use lesshint only for the utilities folder and stylelint for everything else. Due to some unsupported syntax limitations we cannot use stylelint on our utilities folder.
 
@@ -147,16 +148,16 @@ Note that we use lesshint only for the utilities folder and stylelint for everyt
 Here are some important directories to know within the Dialtone repository
 
 - `lib/build`: All source code and assets for the Dialtone library.
-- `lib/dist`: The compiled bundle will be output here upon `pnpm run build`.
+- `lib/dist`: The compiled bundle will be output here upon `pnpm run build` or `pnpm nx build dialtone`.
 - `lib/build/fonts`: Fonts we wish to bundle with Dialtone (woff2 format).
 - `lib/build/less`: LESS files defining our styles. they are processed and transpiled to CSS on build.
-- `lib/build/svg`: SVGs used for icons and spot illustrations. See [adding icons](https://dialpad.design/about/contributing.html#adding-icons-and-illustrations) for instructions on how to add icons into Dialtone.
+- `lib/build/svg`: Contains only spot illustrations. Icons are stored in the dialtone-icons package. See [adding icons and illustrations](https://dialtone.dialpad.com/about/contributing.html#adding-icons-and-illustrations) for instructions on how to add icons into Dialtone.
 
 For folder structure of the doc site, see the [VuePress section](#vuepress) of this document.
 
 ### Testing
 
-Because Dialtone is purely a CSS library we do not perform any automated testing. Please locally test your changes via `npm start` and visually verifying them.
+Any changes you make to Dialtone CSS that is used in Dialtone Vue components will be tested in our percy visual tests when you create a pull request. Other than that please manually test your changes on the Dialtone documentation site as well.
 
 ### A11y standards
 
@@ -177,7 +178,7 @@ Dialtone follows [SemVer](https://semver.org/) for versioning and the commit mes
 
 ## How we manage work
 
-We use Jira to manage our work and you can visit the [Dialtone board and backlog](https://switchcomm.atlassian.net/jira/software/projects/DT/boards/187/backlog) assuming you are an authenticated Dialpad employee. Below we will define how we use our Jira board so team members and external contriubutors are all on the same page.
+We use Jira to manage our work and you can visit the [Dialtone board and backlog](https://dialpad.atlassian.net/jira/software/c/projects/DLT/boards/548/backlog) assuming you are an authenticated Dialpad employee. Below we will define how we use our Jira board so team members and external contriubutors are all on the same page.
 
 ### Issue Types
 
@@ -195,7 +196,7 @@ Proposals can be submitted by anyone with access to the jira board. Each proposa
 
 #### Epic
 
-Epics are a collection of multiple stories. As compared to stories, scope is very flexible. Stories will be added and removed as necessary. Epics will likely be closely related with our quarterly OKRs but may not necessarily be a direct 1 to 1 mapping to them. For example you may have multiple epics to complete an OKR if it makes sense to do so. Epics should have a start and end date in order to assist us with long term roadmapping. If it does not make sense to give an epic a start and end date and it is an infinitely ongoing collection, then it likely should be a part of the [square bracket categories](#square-bracket-categories) below. Not all stories need to be in an epic.
+Epics are a collection of multiple stories, and always have a start and end length of one quarter. They should map to our quarterly OKRs. If a single feature will take multiple quarters to complete it should be split up into separate quarterly epics. If a story does not belong in any epic it can be put into the "Future work" epic, which holds all "uncategorized" stories.
 
 #### Bug
 
@@ -232,13 +233,13 @@ In the backlog we always try to keep our jira items sorted in this order from to
 - Spikes
 - Stories / Proposals
 
-Within each of these categories, items marked todo should always be above items marked needs definition. The top items of needs defintion are next to be groomed, and the top items of todo are next to be pulled into the sprint.
+Within each of these categories, items marked 'backlog' should always be above items marked 'needs definition'. The top items of 'needs defintion' are next to be groomed, and the top items of 'backlog' are next to be pulled into the sprint. Once a story is assigned to someone it can be moved to 'todo' status.
 
 Proposals are mixed in and ranked with stories as they will eventually be turned into stories.
 
-### Square bracket categories
+### Component Categories
 
-We use these to categorize our work by preceding the title of the Jira ticket by one of the below tags. These are long running categories and unlike epics will never be "completed". Try to use just one if you can, but if necessary multiple can be used.
+"Components" are a feature of Jira that allows you to categorize your tickets in any way you wish. We use these to categorize our tickets in the long term. Unlike epics, components never have a start or end date. Multiple components can be applied to a single ticket. Try to use just one if you can, but if necessary multiple can be used.
 
 - `[Component]`: this story changes all components or multiple components.
 - `[Dropdown(or any component name)]`: this story includes change to only the dropdown component. Exclude Dt prefix and use [title case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case) format.
@@ -253,7 +254,7 @@ We use these to categorize our work by preceding the title of the Jira ticket by
 
 ### What about outside contributions?
 
-If you are developer contributing to Dialtone but are not on the Dialtone team your work will be added to the Dialtone board as normal and groomed with the Dialtone team. The main difference is that we will not be including your story in a Dialtone team sprint. The status of the ticket can just be updated directly in the backlog as you work. You may want to create a duplicate story on your own team board to include in your own team sprint. If you do so make sure to link to the existing Dialtone ticket and update the status of both of them.
+If you are developer contributing to Dialtone but are not on the Dialtone team your work will be added to the Dialtone board as normal and groomed with the Dialtone team. The main difference is that we will not be including your story in a Dialtone team sprint. The Dialtone ticket can be pulled into your own team's sprint, or just updated within our backlog if you prefer.
 
 ## Tooling
 
@@ -322,7 +323,5 @@ also to define the component status on [Components status page],
 - Linting our LESS files on pull request `.github/workflows/lint-pr.yml`.
 - Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION](COMMIT_CONVENTION.md) for our commit message conventions.
 
-
-
-[Components overview page]: https://dialpad.design/components/
-[Components status page]: https://dialpad.design/components/status/
+[Components overview page]: https://dialtone.dialpad.com/components/
+[Components status page]: https://dialtone.dialpad.com/components/status/

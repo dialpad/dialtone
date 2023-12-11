@@ -1,6 +1,6 @@
 # Releasing
 
-## Requirements to run `semantic-release`, which is used in this guide https://semantic-release.gitbook.io/semantic-release/#requirements
+## Requirements to run `semantic-release`, which is used in this guide <https://semantic-release.gitbook.io/semantic-release/#requirements>
 
 `semantic-release` uses the commit messages to determine the consumer impact of changes in the codebase. In dialtone-tokens we use [conventional commits specification](https://www.conventionalcommits.org/en/v1.0.0/#specification) for commit messages, so semantic-release automatically determines the next semantic version number, generates a changelog and publishes the release.
 
@@ -17,7 +17,7 @@ In order to push the `production` branch to deploy the documentation site and/or
 
 1. Make sure your `staging` and `production` branches are up-to-date locally. You should be in the `staging` branch. If you want to make a prerelease, it should be `beta` or `alpha` branch instead of `staging`.
 2. Stop your local server and keep your working directory clean before versioning.
-3. In your CLI window, run `pnpm run release` from the dialtone-tokens repository directory.
+3. In your CLI window, run `pnpm run release`.
 4. If there are changes that should trigger a release:
    - The script will update the `package.json` and `package-lock.json` files with the version number according to the types of changes introduced since the last release and will add release notes in the `CHANGELOG.MD` file.
    - A release commit and a git tag associated with this commit will be created and pushed to the remote.
@@ -39,10 +39,12 @@ In order to push the `production` branch to deploy the documentation site and/or
 7. Update the `staging` branch with the release you have made on `alpha` or `beta` branch:
 
 Replace `$BRANCH` with `alpha` or `beta` depending on the pre-release you made:
+
 ```
 git checkout staging
 git merge --ff-only $BRANCH
 ```
+
 8. Push to the remote: `git push`. Make sure `staging` and the release branch keep up-to-date after the release.
 
 ---
