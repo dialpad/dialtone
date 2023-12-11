@@ -1,3 +1,17 @@
+## [2.106.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.0...dialtone-vue2/v2.106.1) (2023-12-09)
+
+
+### Bug Fixes
+
+* **Select Menu:** correctly support v-model, fix infinite loop bug ([bf834fa](https://github.com/dialpad/dialtone/commit/bf834faf32e07c3d32ac6b06ac408cf42842c325))
+
+# [2.106.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.4...dialtone-vue2/v2.106.0) (2023-12-07)
+
+
+### Features
+
+* **Feed Item Row:** add gap instead of padding and label field ([#37](https://github.com/dialpad/dialtone/issues/37)) ([16eb296](https://github.com/dialpad/dialtone/commit/16eb2969894dd93bbb09b4baa28677fa2fa970c2))
+
 ## [2.105.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.3...dialtone-vue2/v2.105.4) (2023-12-05)
 
 
