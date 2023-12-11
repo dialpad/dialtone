@@ -1,21 +1,5 @@
 <template>
   <div class="d-h264">
-    <!-- <dt-notice
-      v-if="showNotice"
-      data-qa="dt-message-input-error-notice"
-      :class="noticeClasses"
-      :kind="noticeKind"
-      :close-button-props="computedCloseButtonProps"
-      @close="noticeClose"
-    >
-      {{ noticeMessage }}
-      <template #icon>
-        <dt-icon
-          size="300"
-          name="alert-circle"
-        />
-      </template>
-    </dt-notice> -->
     <dt-recipe-message-input
       ref="input"
       v-model="modelValue"
