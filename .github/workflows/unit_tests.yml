@@ -2,6 +2,9 @@ name: Unit Tests
 
 on:
   pull_request:
+    paths:
+      - 'packages/dialtone-vue3'
+      - 'packages/dialtone-vue2'
   push:
     branches:
       - staging
