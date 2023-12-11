@@ -1,7 +1,7 @@
 import { parse } from 'vue-docgen-api';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
-import { readdirSync, writeFile } from 'fs';
+import { readdirSync, writeFile, existsSync, mkdirSync } from 'fs';
 
 import componentsList from '../common/components_list.cjs';
 
@@ -32,6 +32,10 @@ const getFileList = (folder) => {
 const writeDocumentationFile = (data) => {
   const jsonData = JSON.stringify(data);
 
+  const dist = path.resolve(join(__dirname, '../dist'));
+  if (!existsSync(dist)) {
+    mkdirSync(dist);
+  }
   writeFile(outputPath, jsonData, 'utf8', (err) => {
     if (err) return console.error('An error occurred while writing JSON Object to File.', err);
 
