@@ -86,7 +86,7 @@ jobs:
 
       - name: Build Dialtone library and documentation site (Vue 3)
         if: needs.filter-actions.outputs.dialtone-vue-3 == 'true'
-        run: pnpm nx run --verbose dialtone-vue3:build:documentation
+        run: pnpm nx run --verbose dialtone-vue3:storybook:build
 
       - name: Run Visual Tests (Vue 3)
         if: needs.filter-actions.outputs.dialtone-vue-3 == 'true'
@@ -97,7 +97,7 @@ jobs:
 
       - name: Build Dialtone library and documentation site (Vue 2)
         if: needs.filter-actions.outputs.dialtone-vue-2 == 'true'
-        run: pnpm nx run --verbose dialtone-vue2:build:documentation
+        run: pnpm nx run --verbose dialtone-vue2:storybook:build
 
       - name: Run Visual Tests (Vue 2)
         if: needs.filter-actions.outputs.dialtone-vue-2 == 'true'
