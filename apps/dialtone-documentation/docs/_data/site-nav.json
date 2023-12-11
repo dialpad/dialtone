@@ -123,6 +123,14 @@
           "planned": true
         },
         {
+          "text": "Spacing",
+          "link": "/design/spacing/"
+        },
+        {
+          "text": "Sizing",
+          "link": "/design/sizing/"
+        },
+        {
           "text": "Motion",
           "link": "/design/motion/",
           "planned": true

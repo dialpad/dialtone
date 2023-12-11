@@ -8,13 +8,13 @@ description: The spacing units defines the paddings, gaps, and margins around in
 
 Use spacing units, when [stacking elements](#stacking) or when adding [padding](#padding) or margin.
 
-When setting the scale of an element, use [Size](https://) units.
+When setting the scale of an element, use [Size](/design/sizing/) units.
 
 ### Stacking
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
-When adding space between elements, whether vertically or horizontally, we use `space-between` or `gap` to define the space that separetes each element, where the value it’s set as a variable on Figma and as a Token on code.
+When adding space between elements, both vertically and horizontally, we can use either `space-between` or `gap` to define the space that separates each element. The value is set as a variable in Figma and as a token in code.
 
  <dt-stack direction="column" gap="500">
   <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=915-8431&viewport=398%2C188%2C0.69&t=6vK8RL1nGPsb99Nc-8&scaling=min-zoom&starting-point-node-id=915%3A8431&hotspot-hints=0&hide-ui=1"></iframe>
@@ -91,17 +91,17 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ## Tokens
 
-Here are some frequently used tokens. For a complete list, visit the [Spacing Tokens](https://) section.
+Here are some frequently used tokens. For a complete list, visit the [Spacing Tokens](/tokens/spacing) section.
 
 <token-table category="space" :tokenList="tokenList" />
 
-WIP: Tokens table
+WIP: Tokens decriptions/usage in progress.
 
 **Note:** By Feb 2024, we aim to integrate **spacing** units into Figma Variables. This will simplify the process of setting these tokens on space-between and paddings within your elements in your Figma files, making it easier for engineers to obtain the correct variable for each case.
 
 ## Key Takeaways
 
-- Use predefined tokens: They help maintain consistency and make it easier to update designs.
+- Use predefined tokens, they help maintain consistency and make it easier to update designs.
 - Keep sizes and spacing consistent: This ensures a polished look across all devices.
 - Maintain a balanced visual hierarchy by using the modular scale for font, sizes and spacing.
 - Consider the overall composition and whitespace to create well-proportioned layouts.
@@ -113,5 +113,12 @@ WIP: Tokens table
 const tokenList = {
   'var(--dt-space-0)': { description: 'Default space between elements.' },
   'var(--dt-space-200)': { description: 'Horizontal stack Icon + Text, Vertical stack List group.' },
+  'var(--dt-space-300)': { },
+  'var(--dt-space-400)': { },
+  'var(--dt-space-450)': { },
+  'var(--dt-space-500)': { },
+  'var(--dt-space-550)': { },
+  'var(--dt-space-600)': { },
+  'var(--dt-space-650)': { },
 };
 </script>
