@@ -1,7 +1,7 @@
 ---
 title: Icon
 description: An icon is used to visually communicate commands, meaning, status, feedback, or common actions.
-status: new
+status: ready
 thumb: true
 image: assets/images/components/icon.png
 storybook: https://vue.dialpad.design/?path=/docs/components-icon--default

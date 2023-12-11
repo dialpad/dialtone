@@ -1,7 +1,7 @@
 ---
 title: List item
 description: A list item is an element that can be used to represent individual items in a list.
-status: planned
+status: ready
 thumb: true
 image: assets/images/components/list-item.png
 storybook: https://vue.dialpad.design/?path=/story/components-list-item--default
