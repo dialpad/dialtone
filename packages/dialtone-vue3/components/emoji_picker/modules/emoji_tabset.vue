@@ -79,6 +79,7 @@ const emits = defineEmits([
   'selected-tabset',
 
   'focus-search-input',
+  'focus-skin-selector',
 ]);
 
 const TABS_DATA = [
@@ -157,7 +158,11 @@ function handleKeyDown (event, tabId) {
 
   if (event.key === 'Tab') {
     event.preventDefault();
-    emits('focus-search-input');
+    if (event.shiftKey) {
+      emits('focus-skin-selector');
+    } else {
+      emits('focus-search-input');
+    }
   }
 
   if (event.key === 'ArrowDown') {
