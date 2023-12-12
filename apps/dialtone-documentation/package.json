@@ -42,11 +42,8 @@
   "scripts": {
     "build": "vuepress build docs",
     "lint": "run-s lint:docs lint:code",
-    "lint-staged": "pnpm exec lint-staged",
     "lint:code": "eslint '**/*.{js,vue}'",
     "lint:docs": "markdownlint '**/*.md'",
-    "lint-staged:code": "pnpm run lint:code --fix",
-    "lint-staged:docs": "pnpm run lint:docs --fix",
     "start": "vuepress dev docs"
   },
   "type": "module",

@@ -31,6 +31,13 @@
         "parallel": true
       }
     },
+    "lint-staged": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm lint-staged",
+        "parallel": true
+      }
+    },
     "release-local": {
       "executor": "nx:run-commands",
       "outputs": [],
