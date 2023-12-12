@@ -1,3 +1,15 @@
+# [3.98.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.97.0...dialtone-vue3/v3.98.0) (2023-12-12)
+
+
+### Documentation
+
+* fix links, fix outdated documentation. ([#40](https://github.com/dialpad/dialtone/issues/40)) ([124082e](https://github.com/dialpad/dialtone/commit/124082e3f375cda464d8a206199f187c13ea27ea))
+
+
+### Features
+
+* refactor message input vue3 ([#46](https://github.com/dialpad/dialtone/issues/46)) ([32130f9](https://github.com/dialpad/dialtone/commit/32130f969abbd8646fc652d7aec4e70d9caf1104))
+
 # [3.97.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.96.3...dialtone-vue3/v3.97.0) (2023-12-07)
 
 
