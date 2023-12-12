@@ -1,6 +1,6 @@
 module.exports = {
   '*.less': [
-    'stylelint --fix',
-    'lesshint --fix'
+    'pnpm exec stylelint --fix',
+    'pnpm exec lesshint --fix'
   ]
 };
