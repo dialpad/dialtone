@@ -3,8 +3,6 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 
-import { NOTICE_KINDS } from '@/components/notice/notice_constants';
-
 /*
   Controls
   ========
@@ -22,13 +20,6 @@ import { NOTICE_KINDS } from '@/components/notice/notice_constants';
 */
 
 export const argTypesData = {
-  // Props
-  noticeKind: {
-    options: NOTICE_KINDS,
-    control: {
-      type: 'select',
-    },
-  },
   // Events
   onSubmit: {
     table: {
@@ -96,10 +87,7 @@ export const argsData = {
   modelValue: 'Always the Padawan, never the Jedi.',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
-  noticeMessage: 'Files must be less than 32 MB to be sent as Dialpad messages.',
   maxHeight: '40vh',
-  characterLimitWarningMessage: 'You have reached the character limit.',
-  isEdit: false,
   emojiPickerProps: {
     searchNoResultsLabel: 'No results',
     searchResultsLabel: 'Search results',
@@ -117,6 +105,11 @@ export const argsData = {
       'Flags',
     ],
     skinTone: 'Default',
+  },
+  showCharacterLimit: {
+    count: 1000,
+    warning: 500,
+    message: 'You have exceeded the character limit',
   },
   onSubmit: action('submit'),
   onFocus: action('focus'),

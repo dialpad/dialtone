@@ -14,9 +14,6 @@ let imageBtn;
 let emojiPickerBtn;
 let sendBtn;
 
-let footerLeftSlot;
-let footerRightSlot;
-
 // Test Environment
 let props;
 let attrs;
@@ -37,8 +34,6 @@ const randoText = 'ricketyrick';
 
 const baseSlots = {
   middle: 'image carousel',
-  footerLeft: 'footer left',
-  footerRight: 'footer right',
 };
 
 // Helpers
@@ -55,10 +50,6 @@ const _setChildWrappers = () => {
   messageInputEl = wrapper.find('[data-qa="dt-message-input"]');
   characterLimitEl = wrapper.find('[data-qa="dt-message-input-character-limit"]');
   errorNoticeEl = wrapper.find('[data-qa="dt-message-input-error-notice"]');
-
-  // slot divs
-  footerLeftSlot = wrapper.find('[data-qa="dt-message-input-footer-left"]');
-  footerRightSlot = wrapper.find('[data-qa="dt-message-input-footer-right"]');
 };
 
 const _mountWrapper = () => {
@@ -113,14 +104,6 @@ describe('DtRecipeMessageInput tests', () => {
 
     it('should contain send button', function () {
       expect(sendBtn.exists()).toBe(true);
-    });
-
-    it('should contain left footer slot', function () {
-      expect(footerLeftSlot.text()).toBe(baseSlots.footerLeft);
-    });
-
-    it('should contain right footer slot', function () {
-      expect(footerRightSlot.text()).toBe(baseSlots.footerRight);
     });
 
     it('should not have border applied on message-input when not focused', () => {
