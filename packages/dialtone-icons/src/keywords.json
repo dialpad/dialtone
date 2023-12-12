@@ -1127,7 +1127,8 @@
       "video": [
         "camera",
         "movie",
-        "film"
+        "film",
+        "recording"
       ],
       "volume-1": [
         "music",
@@ -1545,7 +1546,8 @@
         "log",
         "scripture",
         "document",
-        "parchment"
+        "parchment",
+        "transcript"
       ],
       "settings": [
         "cog",
