@@ -47,7 +47,7 @@
   ],
   "bin": {
     "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
-    "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.js"
+    "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs"
   },
   "type": "module",
   "scripts": {
