@@ -24,6 +24,11 @@ If you need to add icons, follow the next steps to get your icons committed.
 2. Run `pnpm run build`
 3. Commit and push your changes.
 
-## Questions?
+## Requesting features / reporting bugs
 
-If you have a question, please feel free to [open an issue](https://github.com/dialpad/dialtone-icons/issues/new).
+Requesting a feature or reporting a bug? Please do so at the below links:
+
+- [Request Feature](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10975&pid=12508)
+- [Report Bug](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=12508)
+
+Please also feel free to contact us via the #dialtone Dialpad channel with any questions.

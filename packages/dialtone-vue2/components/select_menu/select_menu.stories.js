@@ -8,9 +8,9 @@ import DtSelectMenuVariantsTemplate from './select_menu_variants.story.vue';
 
 // Constants
 const SELECT_OPTIONS = [
-  { value: 1, label: 'Option 1' },
-  { value: 2, label: 'Option 2' },
-  { value: 3, label: 'Option 3' },
+  { value: '1', label: 'Option 1' },
+  { value: '2', label: 'Option 2' },
+  { value: '3', label: 'Option 3' },
 ];
 
 // Default Prop Values
@@ -150,22 +150,6 @@ export const argTypesData = {
   },
 
   // HTML attributes
-  value: {
-    description: 'HTML select value attribute. Provides a value for the select',
-    options: SELECT_OPTIONS.map((option) => option.value),
-    control: {
-      type: 'select',
-    },
-    table: {
-      category: 'html attributes',
-      type: {
-        summary: 'string',
-      },
-      defaultValue: {
-        summary: '',
-      },
-    },
-  },
   name: {
     description: 'HTML select name attribute. Provides a name for the select',
     control: {

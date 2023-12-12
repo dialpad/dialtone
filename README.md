@@ -53,6 +53,20 @@ pnpm run start:dialtone
 
 Access the local server at `http://localhost:4000`
 
+For dialtone vue 2 storybook and library run:
+
+```bash
+pnpm run start:dialtone-vue2
+```
+
+For dialtone vue 3 storybook and library run:
+
+```bash
+pnpm run start:dialtone-vue3
+```
+
+Access the local server for Dialtone Vue via `http://localhost:9010/`
+
 ## Local development
 
 Use the `--filter` flag to run commands

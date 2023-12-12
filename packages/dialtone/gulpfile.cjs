@@ -247,129 +247,6 @@ const moveStyleTagsToEOF = function (file, enc, cb) {
 //  @@  COMPILE SVGS
 //      Lint and optimize SVG files
 //  ================================================================================
-// TODO: Remove this scripts once old icon set is deprecated
-const buildSystemSVGs = function (done) {
-  //  Make sure this feature is activated before running
-  if (!settings.svgs) return done();
-
-  //  Compile system icons
-  return src(paths.svgs.sysInput)
-    .pipe(cache('buildSystemSVGs'))
-    .pipe(replace(' fill="none"', ''))
-    .pipe(replace(' fill="#000"', ''))
-    .pipe(replace(' fill="#000000"', ''))
-    .pipe(replace(' fill="#0D0C0F"', ''))
-    .pipe(replace(' fill="black"', ''))
-    .pipe(replace(' fill="#141721"', ''))
-    .pipe(replace('<svg width="24" height="24"', '<svg '))
-    .pipe(replace('<svg', function (match) {
-      const name = path.parse(this.file.path).name;
-      const converted = name.toLowerCase().replace(/-(.)/g, function (match, group1) {
-        return group1.toUpperCase();
-      });
-      const title = name
-        .replace(/\b\S/g, t => t.toUpperCase())
-        .replace(/[-]+/g, ' ');
-
-      return `${match}
-      aria-hidden="true"
-      focusable="false"
-      aria-label="${title}"
-      class="d-svg d-svg--system d-svg__${converted}"`;
-    }))
-    .pipe(svgmin())
-    .pipe(dest(paths.svgs.sysOutputLib))
-    .pipe(replace('<svg', '<template>\n  <svg'))
-    .pipe(replace('</svg>', '</svg>\n</template>'))
-  // move any style tags within the svg into style tags of the vue component
-    .pipe(through2.obj(moveStyleTagsToEOF))
-    .pipe(replace('<style>', '<style scoped>'))
-    .pipe(rename(function (file) {
-      const converted = file.basename.replace(/\b\S/g, t => t.toUpperCase()).replace(/[-]+/g, '');
-
-      file.basename = 'Icon' + converted;
-      file.extname = '.vue';
-    }))
-    .pipe(dest(paths.svgs.outputVue));
-};
-
-const buildBrandSVGs = function (done) {
-  //  Make sure this feature is activated before running
-  if (!settings.svgs) return done();
-  //  Compile brand icons
-  return src(paths.svgs.brandInput)
-    .pipe(cache('buildBrandSVGs'))
-    .pipe(replace('<svg width="24" height="24"', '<svg '))
-    .pipe(replace('<svg', function (match) {
-      const name = path.parse(this.file.path).name;
-      const converted = name.toLowerCase().replace(/-(.)/g, function (match, group1) {
-        return group1.toUpperCase();
-      });
-      const title = name
-        .replace(/\b\S/g, t => t.toUpperCase())
-        .replace(/[-]+/g, ' ');
-
-      return `${match}
-      aria-hidden="true"
-      focusable="false"
-      aria-label="${title}"
-      class="d-svg d-svg--native d-svg__${converted}"`;
-    }))
-    .pipe(svgmin())
-    .pipe(dest(paths.svgs.brandOutputLib))
-    .pipe(replace('<svg', '<template>\n  <svg'))
-    .pipe(replace('</svg>', '</svg>\n</template>'))
-  // move any style tags within the svg into style tags of the vue component
-    .pipe(through2.obj(moveStyleTagsToEOF))
-    .pipe(replace('<style>', '<style scoped>'))
-    .pipe(rename(function (file) {
-      const converted = file.basename.replace(/\b\S/g, t => t.toUpperCase()).replace(/[-]+/g, '');
-      file.basename = 'Icon' + converted;
-      file.extname = '.vue';
-    }))
-    .pipe(dest(paths.svgs.outputVue));
-};
-
-const buildPatternSVGs = function (done) {
-  //  Make sure this feature is activated before running
-  if (!settings.patterns) return done();
-
-  //  Compile system icons
-  return src(paths.patterns.input)
-    .pipe(cache('buildPatternSVGs'))
-    .pipe(replace('<svg', function (match) {
-      const name = path.parse(this.file.path).name;
-      const converted = name.toLowerCase().replace(/-(.)/g, function (match, group1) {
-        return group1.toUpperCase();
-      });
-      const title = name
-        .replace(/\b\S/g, t => t.toUpperCase())
-        .replace(/[-]+/g, ' ');
-
-      return `${match}
-      aria-hidden="true"
-      focusable="false"
-      aria-label="${title}"
-      class="d-svg d-svg--pattern d-svg__${converted}"
-      xmlns="http://www.w3.org/2000/svg"`;
-    }))
-    .pipe(svgmin())
-    .pipe(dest(paths.patterns.outputLib))
-    .pipe(replace('<svg', '<template>\n  <svg'))
-    .pipe(replace('</svg>', '</svg>\n</template>'))
-  // move any style tags within the svg into style tags of the vue component
-    .pipe(through2.obj(moveStyleTagsToEOF))
-    .pipe(replace('<style>', '<style scoped>'))
-    .pipe(rename(function (file) {
-      const converted = file.basename
-        .replace(/\b\S/g, t => t.toUpperCase())
-        .replace(/[-]+/g, '');
-
-      file.basename = 'Pattern' + converted;
-      file.extname = '.vue';
-    }))
-    .pipe(dest(paths.patterns.outputVue));
-};
 
 const buildSpotIllustrationSVGs = function (done) {
   //  Make sure this feature is activated before running
@@ -515,9 +392,6 @@ exports.clean = series(
 );
 
 exports.svg = series(
-  buildSystemSVGs,
-  buildBrandSVGs,
-  buildPatternSVGs,
   buildSpotIllustrationSVGs,
   buildNewSVGIcons,
 );

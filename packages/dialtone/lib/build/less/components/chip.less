@@ -80,11 +80,6 @@
 
     margin: var(--dt-space-200-negative) var(--dt-space-300) var(--dt-space-200-negative) var(--dt-space-350-negative);
   }
-
-  .d-svg {
-    width: var(--dt-icon-size-300);
-    height: var(--dt-icon-size-300);
-  }
 }
 
 .d-chip__close {
@@ -112,11 +107,6 @@
   &.d-btn--active:active:not([disabled]) {
     --button-color-background: hsla(var(--dt-color-black-800-hsl) ~' / ' 25%);
   }
-
-  .d-btn__icon .d-svg {
-    width: var(--dt-icon-size-300);
-    height: var(--dt-icon-size-300);
-  }
 }
 
 .d-chip__icon {
@@ -143,11 +133,6 @@
   padding: var(--dt-space-200) var(--dt-space-350);
   font-size: var(--dt-font-size-100);
 
-  .d-svg {
-    width: var(--dt-icon-size-200);
-    height: var(--dt-icon-size-200);
-  }
-
   // reserves space within the chip for the close button, since the close button is
   // not nested within the chip.
   &:not(:only-child)::after {
@@ -173,11 +158,6 @@
     width: var(--dt-size-550);
     height: var(--dt-size-550);
   }
-
-  .d-btn__icon .d-svg {
-    width: var(--dt-icon-size-200);
-    height: var(--dt-icon-size-200);
-  }
 }
 
 //  $$ SMALL
@@ -185,11 +165,6 @@
 .d-chip__label--sm {
   padding: var(--dt-space-200) var(--dt-space-400);
   font-size: var(--dt-font-size-200);
-
-  .d-svg {
-    width: var(--dt-size-500);
-    height: var(--dt-size-500);
-  }
 
   // reserves space within the chip for the close button, since the close button is
   // not nested within the chip.
@@ -213,10 +188,5 @@
   &::before {
     width: var(--dt-size-550);
     height: var(--dt-size-550);
-  }
-
-  .d-btn__icon .d-svg {
-    width: var(--dt-size-500);
-    height: var(--dt-size-500);
   }
 }

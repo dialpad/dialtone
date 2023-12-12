@@ -45,6 +45,7 @@
             SELECT_STATE_MODIFIERS[state],
           ]"
           v-bind="$attrs"
+          :value="value"
           data-qa="dt-select"
           :disabled="disabled"
           v-on="selectListeners"
@@ -137,6 +138,15 @@ export default {
       type: Array,
       default: () => [],
       validator: options => optionsValidator(options),
+    },
+
+    /**
+     * Sets the selected value of the select menu. If it does not match a value in the options array, then it will be
+     * 'unselected'.
+     */
+    value: {
+      type: String,
+      default: null,
     },
 
     /**
@@ -281,17 +291,7 @@ export default {
     },
   },
 
-  watch: {
-    // whenever question changes, this function will run
-    options () {
-      this.$nextTick(() => {
-        this.emitValue(this.$refs.selectElement.value, null);
-      });
-    },
-  },
-
   mounted () {
-    this.emitValue(this.$refs.selectElement.value, null);
     this.validateOptionsPresence();
   },
 
