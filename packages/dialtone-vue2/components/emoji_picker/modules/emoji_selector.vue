@@ -284,7 +284,7 @@ export default {
       }
     },
 
-    searchByNameAndKeywords() {
+    searchByNameAndKeywords () {
       const searchStr = this.emojiFilter.toLowerCase();
       this.filteredEmojis = this.currentEmojis.filter(function (obj) {
         const nameIncludesSearchStr = obj.name.toLowerCase().includes(searchStr);
@@ -608,6 +608,10 @@ export default {
         child.dataset.index = index;
       });
     },
+
+    focusLastEmoji () {
+      this.focusEmoji(this.tabs.length - 1, 0);
+    }
 
   },
 

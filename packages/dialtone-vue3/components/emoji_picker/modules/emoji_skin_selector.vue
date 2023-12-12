@@ -86,6 +86,7 @@ const emits = defineEmits([
    */
   'skin-tone',
   'focus-tabset',
+  'focus-last-emoji',
 ]);
 
 const skinList = [
@@ -181,7 +182,11 @@ const handleKeyDown = (event, skin, index) => {
   }
 
   if (event.key === 'Tab') {
-    emits('focus-tabset');
+    if (event.shiftKey) {
+      emits('focus-last-emoji');
+    } else {
+      emits('focus-tabset');
+    }
   }
 };
 

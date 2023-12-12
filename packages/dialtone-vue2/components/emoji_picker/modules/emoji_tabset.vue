@@ -156,7 +156,11 @@ export default {
 
       if (event.key === 'Tab') {
         event.preventDefault();
-        this.$emit('focus-search-input');
+        if (event.shiftKey) {
+          this.$emit('focus-skin-selector');
+        } else {
+          this.$emit('focus-search-input');
+        }
       }
 
       if (event.key === 'ArrowDown') {

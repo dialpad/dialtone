@@ -574,6 +574,10 @@ function focusEmojiSelector () {
   focusEmoji(0, 0);
 }
 
+function focusLastEmoji () {
+  focusEmoji(tabs.value.length - 1, 0);
+}
+
 onMounted(() => {
   setTabLabelObserver();
 });
@@ -584,5 +588,6 @@ onUnmounted(() => {
 
 defineExpose({
   focusEmojiSelector,
+  focusLastEmoji,
 });
 </script>

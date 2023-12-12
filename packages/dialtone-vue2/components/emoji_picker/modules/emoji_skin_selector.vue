@@ -201,7 +201,11 @@ export default {
       }
 
       if (event.key === 'Tab') {
-        this.$emit('focus-tabset');
+        if (event.shiftKey) {
+          this.$emit('focus-last-emoji');
+        } else {
+          this.$emit('focus-tabset');
+        }
       }
     },
 

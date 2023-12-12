@@ -11,6 +11,7 @@
         :tab-set-labels="tabSetLabels"
         :is-scrolling="isScrolling"
         @focus-search-input="$refs.searchInputRef.focusSearchInput()"
+        @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @selected-tabset="scrollToSelectedTabset"
         @keydown.esc.native="$emit('close')"
       />
@@ -53,6 +54,7 @@
         :skin-tone="skinTone"
         @skin-tone="$emit('skin-tone', $event)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
+        @focus-last-emoji="$refs.emojiSelectorRef.focusLastEmoji()"
         @keydown.esc.native="$emit('close')"
       />
     </div>
