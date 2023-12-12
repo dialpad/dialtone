@@ -1,11 +1,11 @@
 module.exports = {
   '*.{js, mjs, cjs, vue}': [
-    'eslint --fix',
+    'pnpm exec eslint --fix',
   ],
   '*.less': [
-    'stylelint --fix'
+    'pnpm exec stylelint --fix'
   ],
   '*.{md, mdx}': [
-    'markdownlint'
+    'pnpm exec markdownlint'
   ]
 };
