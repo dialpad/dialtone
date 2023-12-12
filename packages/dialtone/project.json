@@ -67,13 +67,6 @@
       "options": {
         "script": "start"
       }
-    },
-    "lint-staged": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm lint-staged",
-        "parallel": true
-      }
     }
   }
 }

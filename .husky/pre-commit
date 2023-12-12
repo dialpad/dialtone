@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm nx run-many --target=lint-staged --parallel=false
+pnpm lint-staged --debug
