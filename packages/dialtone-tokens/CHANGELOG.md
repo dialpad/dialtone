@@ -11,6 +11,19 @@
 * fix links, fix outdated documentation. ([#40](https://github.com/dialpad/dialtone/issues/40)) ([124082e](https://github.com/dialpad/dialtone/commit/124082e3f375cda464d8a206199f187c13ea27ea))
 * update codepen template ([#14](https://github.com/dialpad/dialtone/issues/14)) ([7690b65](https://github.com/dialpad/dialtone/commit/7690b654766fca67e7b64b097085c99f260bf57e))
 
+## [1.23.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.2...dialtone-tokens/v1.23.3) (2023-12-13)
+
+
+### Bug Fixes
+
+* global lint ([#47](https://github.com/dialpad/dialtone/issues/47)) ([8148de3](https://github.com/dialpad/dialtone/commit/8148de3341973a5c5ed46cf1367302b8a4b11021))
+
+
+### Documentation
+
+* fix links, fix outdated documentation. ([#40](https://github.com/dialpad/dialtone/issues/40)) ([124082e](https://github.com/dialpad/dialtone/commit/124082e3f375cda464d8a206199f187c13ea27ea))
+* update codepen template ([#14](https://github.com/dialpad/dialtone/issues/14)) ([7690b65](https://github.com/dialpad/dialtone/commit/7690b654766fca67e7b64b097085c99f260bf57e))
+
 ## [1.23.2](https://github.com/dialpad/dialtone-tokens/compare/v1.23.1...v1.23.2) (2023-09-27)
 
 
