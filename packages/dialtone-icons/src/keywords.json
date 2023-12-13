@@ -211,7 +211,10 @@
       ]
     },
     "brand": {
-      "ai-notes": [],
+      "ai-notes": [
+        "artificial",
+        "intelligence"
+      ],
       "coaching-hub": [],
       "dialpad-ai": [
         "artificial",
