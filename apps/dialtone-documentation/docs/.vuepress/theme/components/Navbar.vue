@@ -132,6 +132,7 @@
       </dt-tooltip>
       <dt-tooltip
         placement="bottom"
+        sticky="popper"
       >
         <template #default>
           <span class="d-tt-capitalize">{{ `${currentTheme} theme` }}</span>
