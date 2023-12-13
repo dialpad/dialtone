@@ -28,11 +28,6 @@
   },
   "homepage": "https://dialpad.design/",
   "devDependencies": {
-    "@commitlint/cli": "^17.0.3",
-    "@commitlint/config-conventional": "^17.0.3",
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
     "@tokens-studio/sd-transforms": "^0.11.0",
     "maven": "^5.0.0",
     "style-dictionary": "^3.8.0",
