@@ -1,3 +1,17 @@
+## [2.106.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.1...dialtone-vue2/v2.106.2) (2023-12-13)
+
+
+### Bug Fixes
+
+* **Callbox:** correct color on voice chat icon ([#52](https://github.com/dialpad/dialtone/issues/52)) ([50defaf](https://github.com/dialpad/dialtone/commit/50defafca9108c822a15bac125e2344afde67428))
+* global lint ([#47](https://github.com/dialpad/dialtone/issues/47)) ([8148de3](https://github.com/dialpad/dialtone/commit/8148de3341973a5c5ed46cf1367302b8a4b11021))
+* linter errors, add global lint command ([7ff09ea](https://github.com/dialpad/dialtone/commit/7ff09eac46bce73a67c03a7a5f8b3be93c294fca))
+
+
+### Documentation
+
+* fix links, fix outdated documentation. ([#40](https://github.com/dialpad/dialtone/issues/40)) ([124082e](https://github.com/dialpad/dialtone/commit/124082e3f375cda464d8a206199f187c13ea27ea))
+
 ## [2.106.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.0...dialtone-vue2/v2.106.1) (2023-12-09)
 
 
