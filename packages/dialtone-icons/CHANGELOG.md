@@ -1,3 +1,15 @@
+# [4.2.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.1.1...dialtone-icons/v4.2.0) (2023-12-13)
+
+
+### Documentation
+
+* fix links, fix outdated documentation. ([#40](https://github.com/dialpad/dialtone/issues/40)) ([124082e](https://github.com/dialpad/dialtone/commit/124082e3f375cda464d8a206199f187c13ea27ea))
+
+
+### Features
+
+* add keywords ([112d575](https://github.com/dialpad/dialtone/commit/112d575ce497deb5f0d28eb7e8b804bfe765a7bd))
+
 ## [4.1.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.1.0...dialtone-icons/v4.1.1) (2023-11-22)
 
 
