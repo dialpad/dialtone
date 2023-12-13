@@ -6,6 +6,6 @@ module.exports = {
     'pnpm exec stylelint --fix'
   ],
   '*.{md, mdx}': [
-    'pnpm exec markdownlint'
+    'pnpm exec markdownlint --fix'
   ]
 };

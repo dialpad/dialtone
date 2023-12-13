@@ -1,0 +1,12 @@
+# dependencies
+node_modules
+
+# Auto-generated
+CHANGELOG.md
+
+# dialtone-documentation
+.vuepress
+
+# dialtone-vue
+.storybook
+storybook-static
