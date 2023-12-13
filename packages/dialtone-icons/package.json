@@ -10,12 +10,6 @@
     "dist"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
-    "@commitlint/config-conventional": "^17.6.6",
-    "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/semantic-release-changelog-json": "^1.0.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
     "del": "^6.1.1",
     "gulp": "^4.0.2",
     "gulp-json-format": "^2.0.0",
