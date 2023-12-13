@@ -115,7 +115,7 @@ jobs:
             packages/dialtone-tokens/**/gradle-wrapper.properties
 
       - name: Build android
-        run: pnpm run publish:android-package
+        run: pnpm nx run dialtone-tokens:publish:android-package
 
       - name: Publish production - Gradle
         run: ./gradlew publish
@@ -130,7 +130,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build swift
-        run: pnpm run publish:ios-package
+        run: pnpm nx run dialtone-tokens:publish:ios-package
 
       - name: Publish production - Swift
         uses: cpina/github-action-push-to-another-repository@v1.5.1
