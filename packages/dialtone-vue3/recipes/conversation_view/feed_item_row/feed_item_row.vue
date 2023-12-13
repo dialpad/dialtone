@@ -170,7 +170,7 @@ export default {
     /**
      * A label displayed next to the displayName. Will not show if empty.
      */
-     labelText: {
+    labelText: {
       type: String,
       default: '',
     },
@@ -285,7 +285,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 .dt-feed-item-row {
   transition-duration: 2s !important;
 

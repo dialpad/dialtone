@@ -611,7 +611,7 @@ export default {
 
     focusLastEmoji () {
       this.focusEmoji(this.tabs.length - 1, 0);
-    }
+    },
 
   },
 

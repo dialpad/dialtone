@@ -216,7 +216,7 @@ export default {
      * @event keydown
      * @type {KeyboardEvent}
      */
-     'keydown',
+    'keydown',
   ],
 
   data () {
