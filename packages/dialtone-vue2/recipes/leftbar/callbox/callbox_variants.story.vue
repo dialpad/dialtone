@@ -304,7 +304,8 @@
             class="d-ai-center d-of-x-hidden"
           >
             <dt-icon
-              name="activity"
+              class="voice-chat-icon"
+              name="waveform"
               size="100"
             />
             <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
@@ -480,5 +481,9 @@ export default {
   height: 140px;
   object-fit: cover;
   width: 100%;
+}
+
+.voice-chat-icon {
+  color: var(--dt-color-purple-400);
 }
 </style>
