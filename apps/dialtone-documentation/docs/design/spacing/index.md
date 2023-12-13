@@ -37,7 +37,7 @@ When adding space between elements, both vertically and horizontally, we can use
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 <div>
 
-When adding space around an element, use `padding` to create some breathing room.
+When adding space around an element, use `padding` to create breathing room.
 
 Avoid using `margin`, which adds space outside the element and can affect the layout, in that case, follow the [stacking](#stacking) approach.
 
