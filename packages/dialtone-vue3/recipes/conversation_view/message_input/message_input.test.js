@@ -8,7 +8,6 @@ let editor;
 let imageInputEl;
 let messageInputEl;
 let characterLimitEl;
-let errorNoticeEl;
 
 let imageBtn;
 let emojiPickerBtn;
@@ -49,7 +48,6 @@ const _setChildWrappers = () => {
   imageInputEl = wrapper.find('[data-qa="dt-message-input-image-input"]');
   messageInputEl = wrapper.find('[data-qa="dt-message-input"]');
   characterLimitEl = wrapper.find('[data-qa="dt-message-input-character-limit"]');
-  errorNoticeEl = wrapper.find('[data-qa="dt-message-input-error-notice"]');
 };
 
 const _mountWrapper = () => {
@@ -127,25 +125,25 @@ describe('DtRecipeMessageInput tests', () => {
     describe('When character Limit is disabled', () => {
       beforeEach(async () => {
         await wrapper.setProps({
-          hasCharacterLimit: false,
-          characterLimitCount: 15,
-          characterLimitWarning: 5,
+          showCharacterLimit: false,
           modelValue: randoText,
         });
       });
 
       it('should not show any limit on reaching the character Warning', () => {
         expect(editor.text()).toBe(randoText);
-        expect(characterLimitEl.exists()).toBe(false);
+        expect(characterLimitEl.isVisible()).toBe(false);
       });
     });
 
     describe('When character Limit is enabled', () => {
       beforeEach(async () => {
         await wrapper.setProps({
-          hasCharacterLimit: true,
-          characterLimitCount: 15,
-          characterLimitWarning: 5,
+          showCharacterLimit: {
+            count: 15,
+            warning: 5,
+            message: 'test warning',
+          },
           modelValue: randoText,
         });
         _setChildWrappers();
@@ -156,44 +154,9 @@ describe('DtRecipeMessageInput tests', () => {
         expect(characterLimitEl.text()).toBe('4');
       });
     });
-
-    // Error notice tests
-    it('By default error notice should not be shown', () => {
-      expect(errorNoticeEl.exists()).toBe(false);
-    });
-
-    describe('When error Notice is enabled', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({
-          showNotice: true,
-          noticeMessage: randoText,
-        });
-        _setChildWrappers();
-      });
-      it('should show the noticeMessage in the text', () => {
-        expect(errorNoticeEl.exists()).toBe(true);
-        expect(errorNoticeEl.text()).toBe(randoText);
-      });
-    });
   });
 
   describe('Interactivity tests', function () {
-    describe('When notice is enabled', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({
-          showNotice: true,
-          noticeMessage: randoText,
-        });
-        _setChildWrappers();
-      });
-
-      it('should fire notice-close event when closed', async () => {
-        expect(errorNoticeEl.exists()).toBe(true);
-        await errorNoticeEl.find('button').trigger('click');
-        expect(wrapper.emitted('notice-close')[0][0]).toBe(true);
-      });
-    });
-
     describe('When send button is clicked', () => {
       beforeEach(async () => {
         await wrapper.setProps({
