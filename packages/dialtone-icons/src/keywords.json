@@ -211,6 +211,11 @@
       ]
     },
     "brand": {
+      "agent-assist": [
+        "ai",
+        "conversation",
+        "chat"
+      ],
       "ai-notes": [
         "artificial",
         "intelligence"
