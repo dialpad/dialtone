@@ -686,7 +686,17 @@
       "inputs.color.border.critical": "S:cd32e20a14d569696b9deec01dd68b4c3cedb60f,",
       "inputs.color.border.success": "S:3e6fdf080f15e6deaa3ee9a268179190d6e496b1,",
       "inputs.color.border.warning": "S:a61ba4e58db89699549293ded34c3265b07c07f9,",
-      "inputs.color.border.disabled": "S:c3f95ca261811da42f7f0ef3906b741ab9ccaf43,"
+      "inputs.color.border.disabled": "S:c3f95ca261811da42f7f0ef3906b741ab9ccaf43,",
+      "action.color.foreground.positive.default": "S:f243bd764b9b56f2180183388ed56a40fb2cfc4c,",
+      "action.color.foreground.positive.hover": "S:0cdc6282ff07ed44ba8a45cbe54433b75cc8cfed,",
+      "action.color.foreground.positive.active": "S:afb180b2ab6a07105db6dce1a24afed56e88132d,",
+      "action.color.foreground.positive.primary.default": "S:bfcd8d949a8b63862e7c975424cd2e63eafc3c99,",
+      "action.color.background.positive.default": "S:5b1ff703919814d8b77db0af1f92cf6b92b06a35,",
+      "action.color.background.positive.hover": "S:73501100fecd560a7b7d8b2549853b827a29a3ea,",
+      "action.color.background.positive.active": "S:db712826b81835a106470d96107164a398d662fa,",
+      "action.color.background.positive.primary.default": "S:0b1b28fa23ed74ff21e706a587860f364266934d,",
+      "action.color.background.positive.primary.hover": "S:8072fdff0ba0cc2f38bafc930ca7ff6807bb9046,",
+      "action.color.background.positive.primary.active": "S:cc2fc9da809d32371e57f34eb229c9ce90e52eac,"
     },
     "selectedTokenSets": {
       "base/dark": "enabled",
