@@ -15,7 +15,7 @@
     // Note that gitignored files are automatically excluded from search. Do not add files
     // here that are already gitignored.
     "search.exclude": {
-      "**/package-lock.json": true
+      "**/pnpm-lock.yaml": true
     },
 
     // SPACING

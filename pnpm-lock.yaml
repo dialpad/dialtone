@@ -118,7 +118,7 @@ importers:
         version: 1.0.1(stylelint@15.11.0)
       vitest:
         specifier: ^1.0.4
-        version: 1.0.4(@types/node@18.18.9)(jsdom@22.1.0)(less@4.2.0)
+        version: 1.0.4(@types/node@18.18.9)
 
   apps/dialtone-documentation:
     dependencies:
@@ -533,9 +533,6 @@ importers:
       vite-plugin-vue2-svg:
         specifier: ^0.4.0
         version: 0.4.0(react-dom@16.14.0)(react@16.14.0)(vue-template-compiler@2.7.15)
-      vitest:
-        specifier: ^1.0.4
-        version: 1.0.4(@types/node@18.18.9)(jsdom@22.1.0)(less@4.2.0)
       vue:
         specifier: ^2.7.15
         version: 2.7.15
@@ -732,9 +729,6 @@ importers:
       vite-svg-loader:
         specifier: ^4.0.0
         version: 4.0.0
-      vitest:
-        specifier: 1.0.4
-        version: 1.0.4(@types/node@18.18.9)(jsdom@22.1.0)(less@4.2.0)
       vue:
         specifier: ^3.3.4
         version: 3.3.8(typescript@5.2.2)
@@ -13847,7 +13841,7 @@ packages:
     dependencies:
       '@typescript-eslint/utils': 6.11.0(eslint@8.55.0)(typescript@5.2.2)
       eslint: 8.55.0
-      vitest: 1.0.4(@types/node@18.18.9)(jsdom@22.1.0)(less@4.2.0)
+      vitest: 1.0.4(@types/node@18.18.9)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -27537,7 +27531,7 @@ packages:
       replace-ext: 1.0.1
     dev: true
 
-  /vite-node@1.0.4(@types/node@18.18.9)(less@4.2.0):
+  /vite-node@1.0.4(@types/node@18.18.9):
     resolution: {integrity: sha512-9xQQtHdsz5Qn8hqbV7UKqkm8YkJhzT/zr41Dmt5N7AlD8hJXw/Z7y0QiD5I8lnTthV9Rvcvi0QW7PI0Fq83ZPg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -27700,7 +27694,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.0.4(@types/node@18.18.9)(jsdom@22.1.0)(less@4.2.0):
+  /vitest@1.0.4(@types/node@18.18.9):
     resolution: {integrity: sha512-s1GQHp/UOeWEo4+aXDOeFBJwFzL6mjycbQwwKWX2QcYfh/7tIerS59hWQ20mxzupTJluA2SdwiBuWwQHH67ckg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -27736,7 +27730,6 @@ packages:
       chai: 4.3.10
       debug: 4.3.4(supports-color@8.1.1)
       execa: 8.0.1
-      jsdom: 22.1.0
       local-pkg: 0.5.0
       magic-string: 0.30.5
       pathe: 1.1.1
@@ -27746,7 +27739,7 @@ packages:
       tinybench: 2.5.1
       tinypool: 0.8.1
       vite: 5.0.2(@types/node@18.18.9)(less@4.2.0)
-      vite-node: 1.0.4(@types/node@18.18.9)(less@4.2.0)
+      vite-node: 1.0.4(@types/node@18.18.9)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
