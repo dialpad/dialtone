@@ -515,6 +515,7 @@ export default {
 
     /**
      * Set this prop to true and popover component will support hovercard behaviour
+     * It will open on mouseenter and close on mouseleave with timer delay of 300ms
      */
     hovercard: {
       type: Boolean,
@@ -738,6 +739,7 @@ export default {
     },
 
     defaultToggleOpen (e) {
+      if (this.hovercard) { return; }
       if (this.openOnContext) { return; }
 
       // Only use default toggle behaviour if the user has not set the open prop.

@@ -11,6 +11,7 @@
     :header-class="$attrs.headerClass"
     :footer-class="$attrs.footerClass"
     :append-to="$attrs.appendTo"
+    @opened="$attrs.onOpened"
   >
     <template #anchor>
       <dt-recipe-contact-row

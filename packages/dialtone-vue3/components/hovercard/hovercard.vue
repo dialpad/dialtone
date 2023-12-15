@@ -5,7 +5,7 @@
     :content-class="contentClass"
     :fallback-placements="fallbackPlacements"
     :padding="padding"
-    :transition="transition"
+    :transition="transition ? 'fade' : null"
     :offset="offset"
     :modal="false"
     initial-focus-element="none"
@@ -13,6 +13,7 @@
     :footer-class="footerClass"
     :append-to="appendTo"
     :hovercard="true"
+    @opened="(e) => ($emit('opened', e))"
   >
     <template #anchor>
       <slot name="anchor" />
@@ -36,12 +37,13 @@ import { getUniqueString } from '@/common/utils';
 
 defineProps({
   /**
-     * Named transition when the content display is toggled.
-     * @see DtLazyShow
+     * Fade transition when the content display is toggled.
+     * @type boolean
+     * @values true, false
      */
   transition: {
-    type: String,
-    default: 'fade',
+    type: Boolean,
+    default: false,
   },
 
   /**
@@ -79,7 +81,7 @@ defineProps({
      */
   placement: {
     type: String,
-    default: 'bottom-end',
+    default: 'top-start',
   },
 
   /**
@@ -107,7 +109,7 @@ defineProps({
      */
   offset: {
     type: Array,
-    default: () => [0, 4],
+    default: () => [0, 16],
   },
 
   /**
@@ -164,4 +166,6 @@ defineProps({
     },
   },
 });
+
+defineEmits(['opened']);
 </script>
