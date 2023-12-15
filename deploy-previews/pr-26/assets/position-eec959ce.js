@@ -1,1 +1,0 @@
-const t=[{class:"static",output:"static"},{class:"relative",output:"relative"},{class:"absolute",output:"absolute"},{class:"fixed",output:"fixed"},{class:"sticky",output:"sticky"}],s={position:t};export{s as default,t as position};

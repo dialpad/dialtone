@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="80" y="41" width="104" height="24" rx="12" fill="var(--dt-color-surface-bold-opaque)" fill-opacity="0.18" id="background"/>
-<rect x="110" y="50" width="36" height="6" rx="3" fill="var(--dt-color-foreground-placeholder)" id="text"/>
-<rect x="80" y="41" width="24" height="24" rx="12" fill="var(--dt-color-brand-purple)" id="avatar"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M170.176 50.1757C170.41 49.9414 170.79 49.9414 171.024 50.1757L173 52.1515L174.976 50.1757C175.21 49.9414 175.59 49.9414 175.824 50.1757C176.059 50.4101 176.059 50.7899 175.824 51.0243L173.849 53L175.824 54.9757C176.059 55.2101 176.059 55.5899 175.824 55.8243C175.59 56.0586 175.21 56.0586 174.976 55.8243L173 53.8485L171.024 55.8243C170.79 56.0586 170.41 56.0586 170.176 55.8243C169.941 55.5899 169.941 55.2101 170.176 54.9757L172.151 53L170.176 51.0243C169.941 50.7899 169.941 50.4101 170.176 50.1757Z" fill="var(--dt-color-foreground-placeholder)" id="closeicon"/>
-</svg>

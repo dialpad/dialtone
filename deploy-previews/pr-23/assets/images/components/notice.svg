@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="43" y="33" width="177" height="40" rx="8" fill="var(--dt-color-surface-primary)" id="button-bg"/>
-<rect x="42.5" y="32.5" width="178" height="41" rx="8.5" stroke="var(--dt-color-border-bold)" stroke-opacity="0.5" id="button-bg"/>
-<rect x="78" y="49" width="64" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="Rectangle 494"/>
-<circle cx="60" cy="53" r="6" fill="var(--dt-color-foreground-placeholder)" id="Ellipse 68"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M195.293 48.2929C195.683 47.9024 196.317 47.9024 196.707 48.2929L200 51.5858L203.293 48.2929C203.683 47.9024 204.317 47.9024 204.707 48.2929C205.098 48.6834 205.098 49.3166 204.707 49.7071L201.414 53L204.707 56.2929C205.098 56.6834 205.098 57.3166 204.707 57.7071C204.317 58.0976 203.683 58.0976 203.293 57.7071L200 54.4142L196.707 57.7071C196.317 58.0976 195.683 58.0976 195.293 57.7071C194.902 57.3166 194.902 56.6834 195.293 56.2929L198.586 53L195.293 49.7071C194.902 49.3166 194.902 48.6834 195.293 48.2929Z" fill="var(--dt-color-foreground-placeholder)" id="Vector (Stroke)"/>
-</svg>

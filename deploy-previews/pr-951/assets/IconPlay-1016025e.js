@@ -1,0 +1,1 @@
+import{_ as e,v as s,x as a,y as o}from"./framework-09315036.js";const t={},c={"aria-hidden":"true",focusable:"false","aria-label":"Play",class:"d-svg d-svg--system d-svg__play",viewBox:"0 0 24 24"},_=o("path",{d:"M8 5v14l11-7L8 5Z"},null,-1),l=[_];function n(r,d){return s(),a("svg",c,l)}const f=e(t,[["render",n],["__file","IconPlay.vue"]]);export{f as default};
