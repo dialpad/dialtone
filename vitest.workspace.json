@@ -1,0 +1,4 @@
+[
+  "packages/dialtone-vue2/vite.config.js",
+  "packages/dialtone-vue3/vite.config.js"
+]
