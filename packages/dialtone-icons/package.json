@@ -3,8 +3,7 @@
   "version": "4.2.0",
   "description": "Dialtone icon library",
   "scripts": {
-    "build": "gulp",
-    "prepublishOnly": "pnpm run build"
+    "build": "gulp"
   },
   "files": [
     "dist"
