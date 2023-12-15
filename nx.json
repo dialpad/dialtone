@@ -11,6 +11,10 @@
     "test": {
       "cache": true,
       "dependsOn": ["^build"]
+    },
+    "release": {
+      "cache": true,
+      "dependsOn": ["build", "^build"]
     }
   },
   "installation": {

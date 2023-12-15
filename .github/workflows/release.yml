@@ -13,37 +13,55 @@ env:
   HUSKY: 0
 
 jobs:
-  release:
-    concurrency: ${{ github.workflow }}-${{ github.ref }}
+  get-branch-name:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 20 ]
-
+    outputs:
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-
-      - name: parse branch from ref
-        id: branch
-        run: echo ::set-output name=BRANCH::${GITHUB_REF/refs\/heads\//}
-
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v7.0.7
+  check-dialpad-member:
+    runs-on: ubuntu-latest
+    steps:
       # Will prevent the rest of the steps from running on fail
       - name: Check if user is a dialpad member
-        uses: octokit/request-action@v2.1.0
+        uses: octokit/request-action@v2.x
         with:
           route: GET /orgs/dialpad/members/${{ github.actor }}
         env:
           GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+  npm:
+    needs: [get-branch-name, check-dialpad-member]
+    concurrency: ${{ github.workflow }}-${{ github.ref }}-npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -52,30 +70,75 @@ jobs:
         run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
 
       # note that pnpm run build is executed before publishing via prepublishOnly
-      - name: Deploy production
+      - name: Publish production
         if: ${{ github.ref == 'refs/heads/production' }}
         run: pnpm nx run-many --target=release
 
-      - name: Deploy prerelease
+      - name: Publish pre-release
         if: ${{ github.ref != 'refs/heads/production' }}
-        run: pnpm nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
+        run: pnpm nx run-many --target=release --args="--tag ${{ needs.get-branch-name.outputs.current_branch }}"
 
-      - name: Set registry to github packages
+      - name: Set registry to GitHub packages
         run: npm config set @dialpad:registry https://npm.pkg.github.com
 
-      - name: Set github auth token
+      - name: Set GitHub auth token
         run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
       # note that pnpm run build is executed before publishing via prepublishOnly
-      - name: Deploy production to github packages
+      - name: Publish production to GitHub packages
         if: ${{ github.ref == 'refs/heads/production' }}
         run: pnpm nx run-many --target=release
 
-      - name: Deploy ${{ steps.branch.outputs.BRANCH }} to github packages
+      - name: Publish pre-release to GitHub packages
         if: ${{ github.ref != 'refs/heads/production' }}
-        run: pnpm nx run-many --target=release --args="--tag ${{ steps.branch.outputs.BRANCH }}"
+        run: pnpm nx run-many --target=release --args="--tag ${{ needs.get-branch-name.outputs.current_branch }}"
 
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm nx run-many --target=release-github
+
+  android:
+    needs: check-dialpad-member
+    if: ${{ github.ref == 'refs/heads/production' }}
+    concurrency: ${{ github.workflow }}-${{ github.ref }}-android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'gradle'
+          cache-dependency-path: |
+            packages/dialtone-tokens/*.gradle*
+            packages/dialtone-tokens/**/gradle-wrapper.properties
+
+      - name: Build android
+        run: pnpm nx run dialtone-tokens:publish:android-package
+
+      - name: Publish production - Gradle
+        run: ./gradlew publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER: braddialpad
+
+  swift:
+    needs: check-dialpad-member
+    if: ${{ github.ref == 'refs/heads/production' }}
+    concurrency: ${{ github.workflow }}-${{ github.ref }}-swift
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build swift
+        run: pnpm nx run dialtone-tokens:publish:ios-package
+
+      - name: Publish production - Swift
+        uses: cpina/github-action-push-to-another-repository@v1.5.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
+        with:
+          user-email: 'dialtone@dialpad.com'
+          source-directory: 'dist_ios'
+          destination-repository-name: 'dialtone-tokens-swift'
+          destination-github-username: 'dialpad'
+          commit-message: "dialtone-tokens-swift release"
