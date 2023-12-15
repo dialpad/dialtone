@@ -74,9 +74,8 @@ export const argTypesData = {
     },
   },
   transition: {
-    options: ['true', 'false'],
     control: {
-      type: 'select',
+      type: 'boolean',
     },
   },
   appendTo: {
