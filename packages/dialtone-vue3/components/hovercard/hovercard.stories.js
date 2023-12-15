@@ -12,14 +12,14 @@ export const argsData = {
   placement: 'bottom-end',
   contentWidth: null,
   sticky: false,
-  offset: [50, 20],
+  offset: [50, 10],
   appendTo: 'body',
   onOpened: action('opened'),
   visuallyHiddenCloseLabel: 'Close popover',
 };
 
 const decorator = () => ({
-  template: `<div style="background-color: var(--dt-theme-sidebar-color-background)" class="d-wmx264 d-p8"><story />
+  template: `<div class="d-wmx264"><story />
   </div>`,
 });
 
