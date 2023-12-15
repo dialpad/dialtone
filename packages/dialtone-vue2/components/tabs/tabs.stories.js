@@ -39,6 +39,12 @@ export const argTypesData = {
     },
   },
 
+  inverted: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
   // Action Event Handlers
   onChange: {
     table: {
