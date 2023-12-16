@@ -59,13 +59,15 @@ For dialtone vue 2 storybook and library run:
 pnpm run start:dialtone-vue2
 ```
 
+Access the local storybook server for Dialtone Vue 2 via `http://localhost:9010/`
+
 For dialtone vue 3 storybook and library run:
 
 ```bash
 pnpm run start:dialtone-vue3
 ```
 
-Access the local server for Dialtone Vue via `http://localhost:9010/`
+Access the local storybook server for Dialtone Vue 3 via `http://localhost:9011/`
 
 ## Local development
 

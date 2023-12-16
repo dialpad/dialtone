@@ -75,7 +75,7 @@ If you would like to contribute to Dialtone Vue the first step is to get the pro
 1. Clone the monorepo `git clone git@github.com:dialpad/dialtone.git`
 2. Install dependencies `pnpm install`
 3. Run local dev server `pnpm start:dialtone-vue2` or `pnpm start:dialtone-vue3`
-4. Visit local dev server at <http://localhost:9010/>
+4. Visit local dev server at vue2: <http://localhost:9010/> vue3: <http://localhost:9011/>
 
 Next read the more detailed contributor documentation in [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
