@@ -1,8 +1,7 @@
 {
-  "name": "@dialpad/design-system",
+  "name": "@dialpad/dialtone-mono",
   "version": "1.0.0",
   "description": "Design system monorepo",
-  "main": "index.js",
   "scripts": {
     "test": "nx run-many --target=test",
     "build": "nx run-many --target=build",
@@ -63,6 +62,43 @@
   "resolutions": {
     "@dialpad/dialtone>postcss-preset-env": "^7.0.0",
     "@dialpad/dialtone>stylelint": "^15.10.1"
+  },
+  "exports": {
+    "./css": {
+      "style": "./dist/dialtone.min.css"
+    },
+    "./icons": {
+      "import": "./dist/emoji.js",
+      "require": "./dist/emoji.cjs"
+    },
+    "./tokens": {
+      "import": "./dist/emoji.js",
+      "require": "./dist/emoji.cjs"
+    },
+    "./vue@2": {
+      "import": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.js"
+      },
+      "require": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.cjs"
+      }
+    },
+    "./vue@3": {
+      "import": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.js"
+      },
+      "require": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.cjs"
+      }
+    },
+    "./eslint-plugin": {
+      "import": "./dist/emoji.js",
+      "require": "./dist/emoji.cjs"
+    }
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [
