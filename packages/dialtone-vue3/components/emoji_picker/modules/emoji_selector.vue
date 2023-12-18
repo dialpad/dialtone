@@ -44,11 +44,11 @@
             :ref="el => { if (el) setEmojiRef(el, indexTab, indexEmoji) }"
             type="button"
             :aria-label="emoji.name"
-            @click="$emit('selected-emoji', emoji)"
-            @focusin="$emit('highlighted-emoji', emoji)"
-            @focusout="$emit('highlighted-emoji', null)"
-            @mouseover="$emit('highlighted-emoji', emoji)"
-            @mouseleave="$emit('highlighted-emoji', null)"
+            @click="selectEmoji(emoji)"
+            @focusin="highlightEmoji(emoji)"
+            @focusout="highlightEmoji(null)"
+            @mouseover="highlightEmoji(emoji)"
+            @mouseleave="highlightEmoji(null)"
             @keydown="event => handleKeyDown(event, indexTab, indexEmoji, emoji)"
           >
             <img
@@ -79,9 +79,9 @@
             :class="{
               'hover-emoji': (index === 0 && hoverFirstEmoji),
             }"
-            @click="$emit('selected-emoji', emoji)"
-            @focusin="$emit('highlighted-emoji', emoji)"
-            @focusout="$emit('highlighted-emoji', null)"
+            @click="selectEmoji(emoji)"
+            @focusin="highlightEmoji(emoji)"
+            @focusout="highlightEmoji(null)"
             @mouseover="hoverEmoji(emoji)"
             @mouseleave="hoverEmoji(null)"
             @keydown="event => handleKeyDownFilteredEmojis(event, index, emoji)"
@@ -104,7 +104,7 @@
 // eslint-disable max-len
 import { emojisGrouped as emojis } from '@/components/emoji_picker/emojis';
 import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
-import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
+import { CDN_URL, ARROW_KEYS } from '@/components/emoji_picker/emoji_picker_constants';
 import { useKeyboardNavigation } from '@/components/emoji_picker/composables/useKeyboardNavigation';
 
 const props = defineProps({
@@ -211,16 +211,15 @@ const emits = defineEmits([
 ]);
 
 const {
-  emojiRefs,
   emojiFilteredRefs,
   isFiltering,
   hoverFirstEmoji,
   setEmojiRef,
   setFilteredRef,
-  hoverEmoji,
   focusEmoji,
-  handleHorizontalNavigation,
-} = useKeyboardNavigation(emits);
+  handleArrowNavigationFiltered,
+  handleArrowNavigation,
+} = useKeyboardNavigation();
 
 /**
  * The ref for the tab category
@@ -342,7 +341,7 @@ watch(() => props.emojiFilter, () => {
     isFiltering.value = false;
     // If the emoji filter is empty, emit null to remove the highlighted emoji
     // of the previous search
-    emits('highlighted-emoji', null);
+    highlightEmoji(null);
   }
   debouncedSearch();
 });
@@ -354,6 +353,11 @@ watch(
   },
   { deep: true },
 );
+
+function hoverEmoji (emoji, isFirst = false) {
+  hoverFirstEmoji.value = isFirst;
+  emits('highlighted-emoji', emoji);
+}
 
 /**
  * Filters an array of emoji objects based on a search string that matches both the name and keywords.
@@ -504,144 +508,67 @@ function setTabLabelObserver () {
 
 const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
   event.preventDefault();
-  hoverFirstEmoji.value = false;
 
-  if (event.key === 'ArrowUp') {
-    const position = indexEmoji % EMOJIS_PER_ROW;
-
-    if (!focusEmoji(0, indexEmoji - EMOJIS_PER_ROW)) {
-      const lastEmojiPosition =
-        emojiFilteredRefs.value.length - (emojiFilteredRefs.value.length % EMOJIS_PER_ROW) + position;
-
-      focusEmoji(0, lastEmojiPosition);
-
-      if (!focusEmoji(0, lastEmojiPosition)) {
-        focusEmoji(0, emojiFilteredRefs.value.length - 1);
-      }
-    }
+  if (Object.values(ARROW_KEYS).includes(event.key)) {
+    handleArrowNavigationFiltered(event.key, indexEmoji);
+    return;
   }
 
-  if (event.key === 'ArrowDown') {
-    if (!focusEmoji(0, indexEmoji + EMOJIS_PER_ROW)) {
-      const position = indexEmoji % EMOJIS_PER_ROW;
-
-      if (emojiFilteredRefs.value?.[indexEmoji + (EMOJIS_PER_ROW - position)]) {
-        focusEmoji(0, emojiFilteredRefs.value.length - 1);
-      } else {
-        focusEmoji(0, position);
-      }
-    }
-  }
-
-  if (event.key === 'ArrowLeft') {
-    handleHorizontalNavigation('left', 0, indexEmoji);
-  }
-
-  if (event.key === 'ArrowRight') {
-    handleHorizontalNavigation('right', 0, indexEmoji);
-  }
-
-  if (event.key === 'Tab') {
-    emits('focus-skin-selector');
-  }
-
-  if (event.key === 'Enter') {
-    emits('selected-emoji', emoji);
+  switch (event.key) {
+    case 'Tab':
+      emits('focus-skin-selector');
+      break;
+    case 'Enter':
+      selectEmoji(emoji);
+      break;
+    default:
+      break;
   }
 };
 
 const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
   event.preventDefault();
 
-  if (event.key === 'ArrowUp') {
-    const position = indexEmoji % EMOJIS_PER_ROW;
-
-    if (indexTab === 0) {
-      // we are on the first emoji tab, then we should jump to the last row of the last emoji tab
-      const numberOfMissingEmojis =
-        EMOJIS_PER_ROW - (emojiRefs.value[emojiRefs.value.length - 1].length % EMOJIS_PER_ROW);
-
-      const emojiToJump =
-        emojiRefs.value[emojiRefs.value.length - 1].length + numberOfMissingEmojis - (EMOJIS_PER_ROW - position);
-
-      if (!focusEmoji(emojiRefs.value.length - 1, emojiToJump)) {
-        // if there is no emoji in this position, jump to the last emoji of the row
-        focusEmoji(emojiRefs.value.length - 1, emojiRefs.value[emojiRefs.value.length - 1].length - 1);
-      }
-      return;
-    }
-
-    // if we are not on the first tab, we should jump to the previous row of the current tab
-    if (!focusEmoji(indexTab, indexEmoji - EMOJIS_PER_ROW)) {
-      // if there is no previous row, we should jump to emoji in the sampe position of the previous tab
-      const previousTab = indexTab - 1 < 0 ? 0 : indexTab - 1;
-      const emojisInPreviousTab = emojiRefs.value[previousTab].length;
-      const lastEmojiPosition = emojisInPreviousTab - (emojisInPreviousTab % EMOJIS_PER_ROW) + position;
-
-      if (!focusEmoji(previousTab, lastEmojiPosition)) {
-        // if there is no emoji in this position, jump to the last emoji of the row
-        focusEmoji(indexTab - 1, emojiRefs.value[indexTab - 1].length - 1);
-      }
-    }
+  if (Object.values(ARROW_KEYS).includes(event.key)) {
+    handleArrowNavigation(event.key, indexTab, indexEmoji);
+    return;
   }
 
-  if (event.key === 'ArrowDown') {
-    if (!focusEmoji(indexTab, indexEmoji + EMOJIS_PER_ROW)) {
-      // if cannot go down
-
-      // Calculate position from cell 0 to cell 8
-      const position = indexEmoji % EMOJIS_PER_ROW;
-
-      // check if it exists a next row in the current tab
-      if (emojiRefs.value?.[indexTab]?.[indexEmoji + (EMOJIS_PER_ROW - position)]) {
-        // if it exists, we should focus the last emoji of the next row in the current tab
-        focusEmoji(indexTab, emojiRefs.value[indexTab].length - 1);
-        // if we are at the end of the list it will do nothing
+  switch (event.key) {
+    case 'Tab':
+      if (event.shiftKey) {
+        if (focusEmoji(indexTab, 0) && indexTab > 0) {
+          scrollToTab(indexTab, true);
+        } else {
+          scrollToTab(1, false);
+          emits('focus-search-input');
+        }
       } else {
-        // We don't have next row, we are in the last of the tab, then jump
-        // to the next tab but in the equal emoji position in row 0.
-
-        if (!focusEmoji(indexTab + 1, position)) {
-          // We are on the bottom!, should jump to the same position emoji in the first row of the first tabset
-          // if it doesn't has, jump to the last
-          if (!focusEmoji(0, position)) {
-            focusEmoji(0, emojiRefs.value[0].length - 1);
-          }
+        if (focusEmoji(indexTab + 1, 0)) {
+          scrollToTab(indexTab + 1 + 1, false);
+        } else {
+          // We are on the last emoji tabset, jump to the skin selector
+          emits('focus-skin-selector');
         }
       }
-    }
-  }
+      break;
 
-  if (event.key === 'ArrowLeft') {
-    handleHorizontalNavigation('left', indexTab, indexEmoji);
-  }
+    case 'Enter':
+      selectEmoji(emoji);
+      break;
 
-  if (event.key === 'ArrowRight') {
-    handleHorizontalNavigation('right', indexTab, indexEmoji);
-  }
-
-  if (event.key === 'Tab') {
-    if (focusEmoji(indexTab + 1, 0)) {
-      scrollToTab((indexTab + 1) + 1, false);
-    } else {
-      // We are on the last emoji tabset, jump to the skin selector
-      emits('focus-skin-selector');
-    }
-  }
-
-  if (event.key === 'Tab' && event.shiftKey) {
-    if (focusEmoji(indexTab, 0) && indexTab > 0) {
-      scrollToTab(indexTab, true);
-    } else {
-      scrollToTab(1, false);
-      emits('focus-search-input');
-    }
-  }
-
-  if (event.key === 'Enter') {
-    emits('selected-emoji', emoji);
+    default:
+      break;
   }
 };
+
+function selectEmoji (emoji) {
+  emits('selected-emoji', emoji);
+}
+
+function highlightEmoji (emoji) {
+  emits('highlighted-emoji', emoji);
+}
 
 function focusEmojiSelector () {
   focusEmoji(0, 0);

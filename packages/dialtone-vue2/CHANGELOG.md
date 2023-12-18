@@ -1,3 +1,10 @@
+# [2.106.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.4...dialtone-vue2/v2.106.0) (2023-12-07)
+
+
+### Features
+
+* **Feed Item Row:** add gap instead of padding and label field ([#37](https://github.com/dialpad/dialtone/issues/37)) ([16eb296](https://github.com/dialpad/dialtone/commit/16eb2969894dd93bbb09b4baa28677fa2fa970c2))
+
 ## [2.105.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.105.3...dialtone-vue2/v2.105.4) (2023-12-05)
 
 

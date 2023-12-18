@@ -46,6 +46,10 @@
         >
           {{ time }}
         </time>
+        <dt-badge
+          v-if="labelText"
+          :text="labelText"
+        />
       </div>
       <!-- @slot Default content slot for feed item row -->
       <span
@@ -95,6 +99,7 @@ import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_
 import { DtAvatar } from '@/components/avatar';
 import { DtLazyShow } from '@/components/lazy_show';
 import { DtListItem } from '@/components/list_item';
+import { DtBadge } from '@/components/badge';
 import Modal from '@/common/mixins/modal';
 
 export default {
@@ -104,6 +109,7 @@ export default {
     DtAvatar,
     DtLazyShow,
     DtListItem,
+    DtBadge,
   },
 
   mixins: [Modal],
@@ -162,6 +168,14 @@ export default {
     },
 
     /**
+     * A label displayed next to the displayName. Will not show if empty.
+     */
+    labelText: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * displays a darkened background on the row.
      */
     isActive: {
@@ -202,7 +216,7 @@ export default {
      * @event keydown
      * @type {KeyboardEvent}
      */
-    'keydown',
+     'keydown',
   ],
 
   data () {
@@ -272,16 +286,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.dt-feed-item-row :deep(.dt-item-layout--left) {
-  align-self: baseline;
-}
-
 .dt-feed-item-row {
   transition-duration: 2s !important;
 
   &__header {
     display: flex;
     align-items: center;
+    gap: var(--dt-space-300);
 
     &__name {
       font-size: var(--dt-font-size-200);
@@ -304,8 +315,6 @@ export default {
   }
 
   &__reactions {
-    padding-top: var(--dt-space-200);
-    padding-bottom: var(--dt-space-200);
     display: flex;
     flex-wrap: wrap;
   }
@@ -335,10 +344,17 @@ export default {
   }
 
   &:deep(.dt-item-layout--left) {
+    align-self: baseline;
     .d-avatar {
       align-self: flex-start;
       margin-top: var(--dt-space-300);
     }
+  }
+
+  &:deep(.dt-item-layout--bottom) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--dt-space-200);
   }
 }
 </style>
