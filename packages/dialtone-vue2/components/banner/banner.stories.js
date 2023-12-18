@@ -26,6 +26,11 @@ argTypesData.contentId = {
   },
 };
 argsData.visuallyHiddenCloseLabel = 'Close Banner';
+argTypesData.hideIcon = {
+  control: {
+    type: 'boolean',
+  },
+};
 
 export { argsData, argTypesData };
 

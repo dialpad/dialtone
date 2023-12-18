@@ -79,6 +79,12 @@ export const argTypesData = {
     control: null,
   },
 
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
   // Directives
   'v-model': {
     description: 'Supported by this component',

@@ -51,6 +51,11 @@ export const argTypesData = {
       },
     },
   },
+  inverted: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 // Story Collection

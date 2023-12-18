@@ -62,6 +62,18 @@ export const argTypesData = {
     },
   },
 
+  showIcon: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
+  toggleOnClick: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
   // Directives
   'v-model': {
     description: 'Supported by this component',

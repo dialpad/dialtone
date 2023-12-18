@@ -106,6 +106,36 @@ export const argTypesData = {
       },
     },
   },
+  clickOnSelect: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  emptyList: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  labelVisible: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  listRenderedOutside: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  loading: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showList: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Action Event Handlers
   onEscape: {

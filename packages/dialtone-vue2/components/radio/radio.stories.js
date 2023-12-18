@@ -81,6 +81,11 @@ export const argTypesData = {
   descriptionChildProps: {
     control: null,
   },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Directives
   'v-model': {

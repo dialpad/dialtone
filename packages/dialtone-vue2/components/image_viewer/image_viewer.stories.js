@@ -122,6 +122,12 @@ export const argTypesData = {
       },
     },
   },
+
+  open: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 // Story Collection
