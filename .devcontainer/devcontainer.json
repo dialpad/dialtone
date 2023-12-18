@@ -12,7 +12,7 @@
 	"forwardPorts": [4000, 9010, 9011],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": ["pnpm install", "pnpm run build"],
+	"postCreateCommand": "./.devcontainer/post_create.sh",
 
 	// Configure tool-specific properties.
 	"customizations": {
