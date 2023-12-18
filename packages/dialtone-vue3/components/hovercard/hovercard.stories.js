@@ -69,7 +69,7 @@ export const argTypesData = {
     },
     table: {
       defaultValue: {
-        summary: 'bottom-end',
+        summary: 'top-start',
       },
     },
   },
