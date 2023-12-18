@@ -32,7 +32,6 @@ module.exports = {
       'Components/Radio Group: Default',
       'Components/Rich Text Editor',
       'Components/Root Layout',
-      'Components/Scroller: Dynamic',
       'Components/Select Menu: Default',
       'Components/Skeleton: Default',
       'Components/Tabs: Tab',
@@ -59,7 +58,6 @@ module.exports = {
       'Recipes/List Items/Contact Info: Default',
       'Recipes/Notices/Top Banner Info: Default',
       'Utilities/Lazy Show',
-      'Visual Testing/',
     ],
   },
   snapshot: {
