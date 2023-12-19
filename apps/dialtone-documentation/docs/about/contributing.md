@@ -66,7 +66,7 @@ If you need to add an icon into Dialtone, here’s how you would go about doing 
 4. Import the Illustrations into the `BaseIcon.vue` file:
 
    ```js
-   import SpotIlluVueName from '@dialpad/dialtone/lib/dist/vue/spot/SpotIlluVueName.vue';
+   import SpotIlluVueName from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotIlluVueName.vue';
    ```
 
 5. Also add them in the export / components list:
