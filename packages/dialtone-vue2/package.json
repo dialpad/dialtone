@@ -174,7 +174,8 @@
     },
     "./css": {
       "style": "./dist/style.css"
-    }
+    },
+    "./CHANGELOG.json": "./CHANGELOG.json"
   },
   "homepage": "https://dialtone.dialpad.com/vue",
   "keywords": [

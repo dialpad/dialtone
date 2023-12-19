@@ -42,7 +42,6 @@
   ],
   "files": [
     "lib",
-    "dist",
     "CHANGELOG.json"
   ],
   "bin": {
