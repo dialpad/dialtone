@@ -341,8 +341,8 @@ importers:
   packages/dialtone-tokens:
     devDependencies:
       '@tokens-studio/sd-transforms':
-        specifier: ^0.11.0
-        version: 0.11.9
+        specifier: ^0.12.2
+        version: 0.12.2
       maven:
         specifier: ^5.0.0
         version: 5.0.0
@@ -7480,9 +7480,9 @@ packages:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: true
 
-  /@tokens-studio/sd-transforms@0.11.9:
-    resolution: {integrity: sha512-x6bkMKdWCp5V0DuIQtoMhwJg18l9BEs+SYcY+TZwWOYgByvsGJItiaqq0gV+9JzYwzXfU+xVrxalFfngHauWYg==}
-    engines: {node: '>=15.14.0'}
+  /@tokens-studio/sd-transforms@0.12.2:
+    resolution: {integrity: sha512-ugiAOuem35yQ9BZ87bSkG4zz0xUzrdZLOenSn6/gRrGwDW8x1sWJ8AZ1OZXqIxZIOEGyjmUofSBkhulgKE70JA==}
+    engines: {node: '>=17.0.0'}
     dependencies:
       '@tokens-studio/types': 0.2.5
       color2k: 2.0.2

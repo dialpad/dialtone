@@ -7,8 +7,8 @@
   "scripts": {
     "build": "pnpm run build:token-transformer && node ./build.js",
     "build:token-transformer": "pnpm run build:token-transformer:light && pnpm run build:token-transformer:dark",
-    "build:token-transformer:light": "token-transformer tokens token_transformer/tokens-light.json root,base/default,semantic/dp/default,components/checkbox,components/avatar/default,components/badge/default,components/checkbox/default,components/icon/default,components/radio/default root --expandTypography=true --expandShadow=true",
-    "build:token-transformer:dark": "token-transformer tokens token_transformer/tokens-dark.json root,base/default,base/dark,semantic/dp/default,semantic/dp/dark,components/avatar/default,components/badge/default,components/checkbox/default,components/checkbox/dark,components/icon/default,components/radio/default,components/radio/dark root --expandTypography=true --expandShadow=true",
+    "build:token-transformer:light": "token-transformer tokens token_transformer/tokens-light.json root,base,mode/light,brand/dp,components/checkbox,components/avatar/default,components/badge/default,components/checkbox/default,components/icon/default,components/radio/default root --expandTypography=true --expandShadow=true",
+    "build:token-transformer:dark": "token-transformer tokens token_transformer/tokens-dark.json root,base,mode/dark,brand/dp,components/avatar/default,components/badge/default,components/checkbox/default,components/checkbox/dark,components/icon/default,components/radio/default,components/radio/dark root --expandTypography=true --expandShadow=true",
     "release": "semantic-release --no-ci --extends ./release-local.config.cjs",
     "publish:external-packages": "pnpm run publish:android-package && pnpm run publish:ios-package",
     "publish:android-package": "cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version",
@@ -27,7 +27,7 @@
   },
   "homepage": "https://dialpad.design/",
   "devDependencies": {
-    "@tokens-studio/sd-transforms": "^0.11.0",
+    "@tokens-studio/sd-transforms": "^0.12.2",
     "maven": "^5.0.0",
     "style-dictionary": "^3.8.0",
     "tinycolor2": "^1.6.0",
