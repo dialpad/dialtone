@@ -1,3 +1,16 @@
+## [2.106.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.2...dialtone-vue2/v2.106.3) (2023-12-19)
+
+
+### Bug Fixes
+
+* **Tabs:** fix inverted boolean storybook ([#60](https://github.com/dialpad/dialtone/issues/60)) ([16b0f29](https://github.com/dialpad/dialtone/commit/16b0f29c80bee86372f3257e6b400e0ebf7d80c0))
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+* update Percy integration ([#61](https://github.com/dialpad/dialtone/issues/61)) ([05d9a7b](https://github.com/dialpad/dialtone/commit/05d9a7b2a95f45e91d7cb4074866e952a1dce398))
+
 ## [2.106.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.1...dialtone-vue2/v2.106.2) (2023-12-13)
 
 

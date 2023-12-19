@@ -1,3 +1,21 @@
+# [3.99.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.98.1...dialtone-vue3/v3.99.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* unit test ([#56](https://github.com/dialpad/dialtone/issues/56)) ([b4bfe06](https://github.com/dialpad/dialtone/commit/b4bfe064cace1d74afd8f077d929de2b07477cb9))
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+* update Percy integration ([#61](https://github.com/dialpad/dialtone/issues/61)) ([05d9a7b](https://github.com/dialpad/dialtone/commit/05d9a7b2a95f45e91d7cb4074866e952a1dce398))
+
+
+### Features
+
+* **Hovercard:** hovercard stub ([#58](https://github.com/dialpad/dialtone/issues/58)) ([95ea15e](https://github.com/dialpad/dialtone/commit/95ea15eab5ad432db80f5eb5f3bdf4ccc8a9f46a))
+
 # [3.98.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.97.0...dialtone-vue3/v3.98.0) (2023-12-12)
 
 
