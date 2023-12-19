@@ -1,6 +1,6 @@
 {
-  "name": "@dialpad/dialtone",
-  "version": "8.22.1",
+  "name": "@dialpad/dialtone-css",
+  "version": "1.0.0",
   "description": "Dialpad's design system",
   "keywords": [
     "Dialpad",
@@ -42,7 +42,6 @@
   ],
   "files": [
     "lib",
-    "dist",
     "CHANGELOG.json"
   ],
   "bin": {
@@ -51,14 +50,14 @@
   },
   "type": "module",
   "scripts": {
-    "build": "gulp --gulpfile ./gulpfile.cjs",
+    "build": "gulp",
     "lesshint": "pnpm exec lesshint 'lib/build/less/utilities'",
     "lint": "run-s lint:library lint:code",
     "lint:code": "eslint '**/*.{js,cjs,vue}'",
     "lint:library": "run-s stylelint lesshint",
-    "start": "gulp watch --gulpfile ./gulpfile.cjs",
+    "start": "gulp watch",
     "stylelint": "pnpm exec stylelint 'lib/build/less/**/*.less'",
-    "build:icons": "gulp icons --gulpfile ./gulpfile.cjs",
+    "build:icons": "gulp icons",
     "test:postcss-generator-plugin": "jest --coverage && eslint ."
   },
   "unpkg": "dist/css/dialtone.min.css",
@@ -80,7 +79,6 @@
     "child_process": "^1.0.2",
     "cssnano": "^6.0.1",
     "del": "^6.1.1",
-    "gulp": "^4.0.2",
     "gulp-cached": "^1.1.1",
     "gulp-concat": "^2.6.1",
     "gulp-less": "^5.0.0",

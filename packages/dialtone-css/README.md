@@ -1,12 +1,13 @@
 # Dialtone
 
-This is the home for Dialtone, Dialpad's design system. It includes the resources needed to create consistent, predictable interfaces that conform to Dialpad’s design principles, language, styles, and best practices.
+This is the home for Dialtone, Dialpad's design system. It includes the resources needed to create consistent,
+predictable interfaces that conform to Dialpad’s design principles, language, styles, and best practices.
 
 ## Install Dialtone
 
 ### Install it via NPM:
 
-```
+```shell
 npm install @dialpad/dialtone
 ```
 
@@ -15,13 +16,13 @@ npm install @dialpad/dialtone
 - CSS/LESS:
 
 ```less
-@import "node_modules/@dialpad/dialtone/lib/dist/css/dialtone.min.css";
+@import "node_modules/@dialpad/dialtone-css/lib/dist/css/dialtone.min.css";
 ```
 
 - Javascript:
 
 ```js
-import '@dialpad/dialtone/lib/dist/css/dialtone.min.css';
+import '@dialpad/dialtone-css/lib/dist/css/dialtone.min.css';
 ```
 
 ### Add dialtone's theme class to the `<body>`
@@ -29,12 +30,14 @@ import '@dialpad/dialtone/lib/dist/css/dialtone.min.css';
 - Light mode
 
 ```html
+
 <body class="dialtone-theme-light">...</body>
 ```
 
 - Dark mode
 
 ```html
+
 <body class="dialtone-theme-dark">...</body>
 ```
 
@@ -43,11 +46,13 @@ It is required to do this for Dialtone to function.
 
 ## Building Dialtone locally
 
-To build Dialtone locally, visit our [installation instructions](https://dialtone.dialpad.design/guides/getting-started/#build-dialtone-locally).
+To build Dialtone locally, visit
+our [installation instructions](https://dialtone.dialpad.design/guides/getting-started/#build-dialtone-locally).
 
 ## Contributing
 
-If you're interested in contributing to Dialtone, please read our [contributing docs](.github/CONTRIBUTING.md) **before submitting a pull request**.
+If you're interested in contributing to Dialtone, please read our [contributing docs](.github/CONTRIBUTING.md) **before
+submitting a pull request**.
 
 ## Requesting features / reporting bugs
 

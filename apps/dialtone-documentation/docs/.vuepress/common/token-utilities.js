@@ -1,4 +1,4 @@
-import Helpers from '@dialpad/dialtone/postcss/helpers.cjs';
+import Helpers from '@dialpad/dialtone-css/postcss/helpers.cjs';
 
 /**
  * Compose typography tokens

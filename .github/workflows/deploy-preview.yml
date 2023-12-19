@@ -175,7 +175,7 @@ jobs:
         with:
           message: |
             ✔️ Deploy previews ready!
-            ${{ needs.filter-actions.outputs.dialtone == 'true' && format('😎 Dialtone preview: https://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
-            ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' && format('😎 Dialtone-vue 2 preview: https://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
-            ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' && format('😎 Dialtone-vue 3 the preview: https://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
+            ${{ needs.filter-actions.outputs.dialtone == 'true' && format('😎 Dialtone preview: https://{0}', env.DIALTONE_BUCKET_DIRECTORY) || '' }}
+            ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' && format('😎 Dialtone-vue 2 preview: https://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) || '' }}
+            ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' && format('😎 Dialtone-vue 3 the preview: https://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) || '' }}
           allow-repeats: true

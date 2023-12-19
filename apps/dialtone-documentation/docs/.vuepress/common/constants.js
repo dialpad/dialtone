@@ -1,5 +1,5 @@
-import dialtoneChangelog from '@projectRoot/node_modules/@dialpad/dialtone/CHANGELOG.json';
-import dialtoneVueChangelog from '@projectRoot/node_modules/@dialpad/dialtone-vue/CHANGELOG.json';
+import dialtoneChangelog from '@dialpad/dialtone-css/CHANGELOG.json';
+import dialtoneVueChangelog from '@dialpad/dialtone-vue/CHANGELOG.json';
 
 export const DIALTONE_CHANGELOGS = {
   Dialtone: {

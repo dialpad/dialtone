@@ -7,14 +7,22 @@
       "dependsOn": [
         {
           "projects": [
-            "dialtone-tokens"
+            "dialtone-css",
+            "dialtone-icons",
+            "dialtone-tokens",
+            "dialtone-vue2",
+            "dialtone-vue3",
+            "eslint-plugin-dialtone"
           ],
           "target": "build",
           "params": "ignore"
         }
       ],
       "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone/release-local.config.cjs",
+        "commands": [
+          "pnpm semantic-release-plus --dry-run --no-ci --extends ./release-local.config.cjs",
+          "gulp"
+        ],
         "parallel": false
       }
     },
@@ -24,14 +32,19 @@
       "dependsOn": [
         {
           "projects": [
-            "dialtone-tokens"
+            "dialtone-css",
+            "dialtone-icons",
+            "dialtone-tokens",
+            "dialtone-vue2",
+            "dialtone-vue3",
+            "eslint-plugin-dialtone"
           ],
           "target": "build",
           "params": "ignore"
         }
       ],
       "options": {
-        "command": "pnpm publish --filter ./packages/dialtone",
+        "command": "pnpm publish",
         "parallel": false
       }
     },
@@ -41,31 +54,20 @@
       "dependsOn": [
         {
           "projects": [
-            "dialtone-tokens"
+            "dialtone-css",
+            "dialtone-icons",
+            "dialtone-tokens",
+            "dialtone-vue2",
+            "dialtone-vue3",
+            "eslint-plugin-dialtone"
           ],
           "target": "build",
           "params": "ignore"
         }
       ],
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./packages/dialtone/release-ci.config.cjs",
+        "command": "pnpm semantic-release-plus --extends ./release-ci.config.cjs",
         "parallel": false
-      }
-    },
-    "start": {
-      "executor": "nx:run-script",
-      "outputs": [],
-      "dependsOn": [
-        {
-          "projects": [
-            "dialtone-tokens"
-          ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "options": {
-        "script": "start"
       }
     }
   }

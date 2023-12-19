@@ -2,9 +2,12 @@
 
 Migration from version `6` to `7` is mostly visual, focusing on CSS updates.
 
-While the migration is fairly straightforward, there may be instances where manual updates to a product's code are required. These are usually search-and-replace tasks, and may include decisions to be made with your Product Designer; for example, contrast ratios to meet accessibility requirements.
+While the migration is fairly straightforward, there may be instances where manual updates to a product's code are
+required. These are usually search-and-replace tasks, and may include decisions to be made with your Product Designer;
+for example, contrast ratios to meet accessibility requirements.
 
-**⚠️ Note for `dialtone-vue`:** Updating `dialtone-vue` to the latest beta version components automatically receive Color updates.
+**⚠️ Note for `dialtone-vue`:** Updating `dialtone-vue` to the latest beta version components automatically receive
+Color updates.
 
 ---
 
@@ -17,6 +20,7 @@ While the migration is fairly straightforward, there may be instances where manu
 ### Color: Updated Ramps
 
 #### Purple
+
 1. Updated color values for `purple-100`, `purple-200` and `purple-300` stops.
 2. Consolidated Dialtone v6's `purple-400` and `purple-500` stops into the redefined `purple-400` stop.
 3. Consolidated Dialtone v6's `purple-600` and `purple-700` stops into the redefined `purple-500` stop.
@@ -33,6 +37,7 @@ New Color Ramp
 New Color Ramp
 
 #### Green
+
 1. Removed `green-600` and `green-700` color stops.
 2. Updated color values for `green-100`, `green-200`, `green-300`, `green-400` and `green-500` stops.
 3. Consolidated Dialtone v6's `green-100` and `green-200` stops into the redefined `green-100` stop.
@@ -40,26 +45,36 @@ New Color Ramp
 5. Consolidated Dialtone v6's `green-400` stop into the redefined `green-300` stop.
 6. Consolidated Dialtone v6's `green-500` and `green-600` stops into the redefined `green-400` stop.
 7. Consolidated Dialtone v6's `green-700` stop into the redefined `green-500` stop.
+
 #### Black
+
 1. Removed `black-025`, `black-050`, `black-075` color stops.
-2. Updated color values for `black-100`, `black-200`, `black-300`, `black-400`, `black-500`, `black-600`, `black-700`, `black-800`, `black-900` stops.
+2. Updated color values
+   for `black-100`, `black-200`, `black-300`, `black-400`, `black-500`, `black-600`, `black-700`, `black-800`, `black-900`
+   stops.
 3. Consolidated Dialtone v6's `black-600` and `black-500` stops into the redefined `black-600` stop.
 4. Consolidated Dialtone v6's `black-400` and `black-300` stops into the redefined `black-500` stop.
 5. Consolidated Dialtone v6's `black-200` and `black-100` stops into the redefined `black-400` stop.
+
 #### Yellow/Gold
+
 1. Renamed `yellow-[100-700]` to `gold-[100-500]` color stops.
 2. Consolidated Dialtone v6's `yellow-050`, `yellow-100` and `yellow-200` stops into the redefined `gold-100` stop.
 3. Consolidated Dialtone v6's `yellow-300` and `yellow-400` stops into the redefined `gold-200` stop.
 4. Consolidated Dialtone v6's `yellow-500` stop into the redefined `gold-300` stop.
 5. Consolidated Dialtone v6's `yellow-600` stop into the redefined `gold-500` stop.
+
 #### Pink/Magenta
+
 1. Renamed `pink-[100-700]` to `magenta-[100-500]` color stops.
 2. Consolidated Dialtone v6's `pink-100`, `pink-200` and `pink-300` stops into the redefined `magenta-100` stop.
 3. Consolidated Dialtone v6's `pink-400` stop into the redefined `magenta-200` stop.
 4. Consolidated Dialtone v6's `pink-500` stop into the redefined `magenta-300` stop.
 5. Consolidated Dialtone v6's `pink-600` stop into the redefined `magenta-400` stop.
 6. Consolidated Dialtone v6's `pink-700` stop into the redefined `magenta-500` stop.
+
 #### Red
+
 1. Removed `red-600` and `red-700` color stops.
 2. Updated color values for `red-100`, `red-200`, `red-300`, `red-400`, `red-500` stops.
 3. Consolidated Dialtone v6's `red-100`, `red-200` and `red-300` stops into the redefined `red-100` stop.
@@ -69,6 +84,7 @@ New Color Ramp
 7. Consolidated Dialtone v6's `red-700` stop into the redefined `red-500` stop.
 
 ### Color: Removed Primary Theme
+
 - Removed Spot Illustrations' theming capability.
 
 ### Color: New/Updated/Removed Text Color Variables
@@ -117,52 +133,59 @@ New Color Ramp
 ---
 
 ### Typography: Updated Font Stack
+
 - Replaced `Inter` font with local system font stack.
 - Replaced `RobotoMono` font with `SFMono`.
 - Removed `fw-thin`, `fw-light` and `fw-black` variables (RobotoMono shims).
 - `fw-medium` and `fw-semibold` are no longer restricted to Marketing use.
 
 ### Typography: Updated Font size Ramps
+
 - Removed `fs10`, `fs11`, `fs12`, `fs14`, `fs16`, `fs18`, `fs20`, `fs24`, `fs28`, `fs32`, `fs36`, `fs42`, `fs48`, `fs54`.
 
 ### Typography: New Body Styles
 
 #### Body
-* `d-body-base`
-* `d-body-small`
-* `d-body-compact`
-* `d-body-compact-small`
+
+- `d-body-base`
+- `d-body-small`
+- `d-body-compact`
+- `d-body-compact-small`
 
 #### Label
-* `d-label-base`
-* `d-label-small`
-* `d-label-compact`
-* `d-label-plain`
-* `d-label-compact-plain`
-* `d-label-compact-small`
-* `d-label-plain-small`
-* `d-label-compact-plain-small`
+
+- `d-label-base`
+- `d-label-small`
+- `d-label-compact`
+- `d-label-plain`
+- `d-label-compact-plain`
+- `d-label-compact-small`
+- `d-label-plain-small`
+- `d-label-compact-plain-small`
 
 #### Helper
-* `d-helper-base`
-* `d-helper-small`
+
+- `d-helper-base`
+- `d-helper-small`
 
 #### Code
-* `d-code-base`
-* `d-code-small`
+
+- `d-code-base`
+- `d-code-small`
 
 ### Typography: New Headline Styles
-* `d-headline-eyebrow`
-* `d-headline-small`
-* `d-headline-soft-small`
-* `d-headline-medium`
-* `d-headline-compact-small`
-* `d-headline-compact-soft-small`
-* `d-headline-compact-medium`
-* `d-headline-large`
-* `d-headline-compact-large`
-* `d-headline-extra-large`
-* `d-headline-extra-extra-large`
+
+- `d-headline-eyebrow`
+- `d-headline-small`
+- `d-headline-soft-small`
+- `d-headline-medium`
+- `d-headline-compact-small`
+- `d-headline-compact-soft-small`
+- `d-headline-compact-medium`
+- `d-headline-large`
+- `d-headline-compact-large`
+- `d-headline-extra-large`
+- `d-headline-extra-extra-large`
 
 ---
 
@@ -177,7 +200,7 @@ Follow steps in this exact order.
 
 ### 1. Update to Dialtone v7
 
-```
+```bash
 npm install @dialpad/dialtone@beta
 ```
 
@@ -270,19 +293,25 @@ Search for | Replace with
 
 ### 4. Color: Replace hardcoded HEX values
 
-Any custom CSS authored with HEX values (e.g. `#ff0000`) should be replaced with its CSS Custom Property equivalent (e.g. `var(--[COLOR-STOP])`). If no equivalent exists, consult your Product Designer.
+Any custom CSS authored with HEX values (e.g. `#ff0000`) should be replaced with its CSS Custom Property equivalent (
+e.g. `var(--[COLOR-STOP])`). If no equivalent exists, consult your Product Designer.
 
 #### Example
 
 Replace...
 
 ```css
-.foo { color: #ECE1FF; }
+.foo {
+  color: #ECE1FF;
+}
 ```
 
 ...with
+
 ```css
-.foo { color: var(--dt-color-purple-100); }
+.foo {
+  color: var(--dt-color-purple-100);
+}
 ```
 
 Search for | Replace with
@@ -335,7 +364,9 @@ Search for | Replace with
 `#FFBC0F` | `var(--dt-color-gold-300)`
 `#3F2D00` | `var(--dt-color-gold-500)`
 
-In some cases you may not be able to replace a hex code with a CSS variable. A common case of this is in email templates where you cannot import CSS files and therefore don't have access to Dialtone CSS variables. For these specific cases you can replace the old hex value with the new hex value, see the table below.
+In some cases you may not be able to replace a hex code with a CSS variable. A common case of this is in email templates
+where you cannot import CSS files and therefore don't have access to Dialtone CSS variables. For these specific cases
+you can replace the old hex value with the new hex value, see the table below.
 
 #### Example
 
@@ -346,11 +377,12 @@ Replace...
 ```
 
 ...with
+
 ```html
 <a style="background-color: #7C52FF">Click Here</a>
 ```
 
-__IMPORTANT NOTE:__ Only use these if you are unable to use css variables.
+*IMPORTANT NOTE:* Only use these if you are unable to use css variables.
 
 Search for | Replace with
 :-:|:-:
@@ -404,7 +436,8 @@ Search for | Replace with
 
 ### 5. Color: Check color updates for readability
 
-Check updates to confirm desired rendering and alignment to contrast accessibility requirements. When in doubt, confer with your Product Designer to identify a proper solution.
+Check updates to confirm desired rendering and alignment to contrast accessibility requirements. When in doubt, confer
+with your Product Designer to identify a proper solution.
 
 ### 6. Typography
 
@@ -480,9 +513,9 @@ Search for | Replace with
 Search for | Replace with
 :-:|:-:
 `var(--lh-tighter)` | `var(--lh-200)`
-`var(--lh-tight)`   | `var(--lh-200)`
+`var(--lh-tight)`  | `var(--lh-200)`
 `var(--lh-normal)`  | `var(--lh-300)`
-`var(--lh-loose)`   | `var(--lh-400)`
+`var(--lh-loose)`  | `var(--lh-400)`
 `var(--lh-looser)`  | `var(--lh-500)`
 
 ### Icons
@@ -491,8 +524,7 @@ Search for | Replace with
 
 Do a search in [Icon docs][icon-docs] to find an icon that matches your needs.
 For icon component documentation on props (naming and sizing), check
-[Dialtone Vue - Icon component](https://vue.dialpad.design/?path=/story/components-icon--default)
-
+[Dialtone Vue - Icon component](https://vue.dialpad.design/?path=/story/components-icon--default).
 *Check with your designer or ask in #dialtone if you are having trouble finding a replacement for an existing icon*
 
 **If you can use vue components**:
@@ -528,14 +560,12 @@ Remove any usage of `d-svg` and `d-svg--*`.
 
 **Consult your Product Designer if anything looks off after the update.**
 
-
 #### Product custom CSS
 
 Remove any custom icon sizing e.g. `.foo .icon { width: xxx; height: yyy; }.`
 and replace with the correct sizing class in [icon documentation][icon-docs].
 
 [icon-docs]: https://dialpad.design/components/icon.html
-
 
 #### Badge
 
@@ -545,11 +575,13 @@ The "color" prop has been removed from the DtBadge component and replaced with "
 
 ##### Styling
 
-The previous d-badge color classes are no longer valid and will have to be replaced with a "type" class. There is no direct mapping guide, as the previous use of badge colors may not imply which updated type to use. Use your judgment on a case-by-case basis and validate with your Product Designer.
+The previous d-badge color classes are no longer valid and will have to be replaced with a "type" class. There is no
+direct mapping guide, as the previous use of badge colors may not imply which updated type to use. Use your judgment on
+a case-by-case basis and validate with your Product Designer.
 
 Classes removed:
 
-```
+```css
 d-badge--white
 d-badge--black-700
 d-badge--purple-100
@@ -568,7 +600,7 @@ d-badge--red-300
 
 Replaced with:
 
-```
+```css
 d-badge--info
 d-badge--success
 d-badge--warning

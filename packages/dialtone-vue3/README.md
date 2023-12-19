@@ -15,21 +15,21 @@ Dialtone Vue is available in Vue 2 as well as Vue 3:
 
 You can install the Dialtone Vue library into your project via the following commands:
 
-- Vue 2: `npm install @dialpad/dialtone @dialpad/dialtone-vue`
-- Vue 3: `npm install @dialpad/dialtone @dialpad/dialtone-vue@vue3`
+- Vue 2: `npm install @dialpad/dialtone-css @dialpad/dialtone-vue`
+- Vue 3: `npm install @dialpad/dialtone-css @dialpad/dialtone-vue@vue3`
 
 ## Usage
 
 First you must globally import Dialtone's css:
 
 ```js
-import '@dialpad/dialtone/lib/dist/css/dialtone.min.css';
+import '@dialpad/dialtone-css/lib/dist/css/dialtone.min.css';
 ```
 
 or
 
 ```css
-@import 'node_modules/@dialpad/dialtone/lib/dist/css/dialtone.min.css';
+@import 'node_modules/@dialpad/dialtone-css/lib/dist/css/dialtone.min.css';
 ```
 
 Dialtone Vue components can be imported directly from the package. Some components also export named constants, which can be imported as well:

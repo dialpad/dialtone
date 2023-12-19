@@ -22,7 +22,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'vue',
-        '@dialpad/dialtone',
+        '@dialpad/dialtone-css',
       ],
       output: {
         globals: {
