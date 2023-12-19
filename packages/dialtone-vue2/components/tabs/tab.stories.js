@@ -9,6 +9,16 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  selected: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 // Story Collection

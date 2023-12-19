@@ -98,6 +98,16 @@ export const argTypesData = {
       type: 'select',
     },
   },
+  tether: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Action Event Handlers
   onOpened: {

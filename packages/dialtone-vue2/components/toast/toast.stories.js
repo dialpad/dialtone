@@ -81,12 +81,30 @@ export const argTypesData = {
         summary: 'false',
       },
     },
+    control: {
+      type: 'boolean',
+    },
   },
   duration: {
     table: {
       defaultValue: {
         summary: 'null',
       },
+    },
+  },
+  hideClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  important: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
+    control: {
+      type: 'boolean',
     },
   },
 

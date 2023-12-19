@@ -148,6 +148,11 @@ export const argTypesData = {
     description:
       'Pass through props. A set of props that are passed into the validation messages component',
   },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // HTML attributes
   name: {

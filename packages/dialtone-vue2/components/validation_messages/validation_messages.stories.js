@@ -24,6 +24,11 @@ export const argTypesData = {
       },
     },
   },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 // Story Collection

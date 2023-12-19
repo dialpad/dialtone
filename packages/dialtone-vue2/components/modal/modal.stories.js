@@ -90,6 +90,31 @@ export const argTypesData = {
       },
     },
   },
+  closeOnClick: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  fixedHeaderFooter: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  hideClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  show: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Events
   'update:show': {

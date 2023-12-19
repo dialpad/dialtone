@@ -45,6 +45,12 @@ const argTypesData = {
     },
   },
 
+  open: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
   // Action Event Handlers
   opened: {
     description: 'Emitted whenever the content is collapsed or expanded.',

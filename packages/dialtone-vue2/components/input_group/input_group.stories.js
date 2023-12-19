@@ -71,6 +71,16 @@ export const argTypesData = {
       },
     },
   },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Directives
   'v-model': {

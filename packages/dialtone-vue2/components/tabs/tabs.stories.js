@@ -38,6 +38,21 @@ export const argTypesData = {
       type: 'select',
     },
   },
+  borderless: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  inverted: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Action Event Handlers
   onChange: {
