@@ -43,16 +43,16 @@
 </template>
 
 <script>
-import SpotPublish from '@dialpad/dialtone/lib/dist/vue/spot/SpotPublish.vue';
-import SpotWirelessScreenshare from '@dialpad/dialtone/lib/dist/vue/spot/SpotWirelessScreenshare.vue';
-import SpotFemaleLaptopTyping from '@dialpad/dialtone/lib/dist/vue/spot/SpotFemaleLaptopTyping.vue';
-import SpotMaleLaptopTyping from '@dialpad/dialtone/lib/dist/vue/spot/SpotMaleLaptopTyping.vue';
-import SpotFileUpload from '@dialpad/dialtone/lib/dist/vue/spot/SpotFileUpload.vue';
-import SpotBrowserTableGraph from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserTableGraph.vue';
-import SpotBrowserListCallout from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserListCallout.vue';
-import SpotMind from '@dialpad/dialtone/lib/dist/vue/spot/SpotMind.vue';
-import SpotBlankSpace from '@dialpad/dialtone/lib/dist/vue/spot/SpotBlankSpace.vue';
-import SpotVectorVortex from '@dialpad/dialtone/lib/dist/vue/spot/SpotVectorVortex.vue';
+import SpotPublish from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotPublish.vue';
+import SpotWirelessScreenshare from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotWirelessScreenshare.vue';
+import SpotFemaleLaptopTyping from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotFemaleLaptopTyping.vue';
+import SpotMaleLaptopTyping from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotMaleLaptopTyping.vue';
+import SpotFileUpload from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotFileUpload.vue';
+import SpotBrowserTableGraph from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotBrowserTableGraph.vue';
+import SpotBrowserListCallout from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotBrowserListCallout.vue';
+import SpotMind from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotMind.vue';
+import SpotBlankSpace from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotBlankSpace.vue';
+import SpotVectorVortex from '@dialpad/dialtone-css/lib/dist/vue/spot/SpotVectorVortex.vue';
 
 export const ICON_KINDS = ['spot'];
 
