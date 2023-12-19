@@ -3,6 +3,7 @@ dist
 .nx/installation
 .nx/cache
 .idea
+*.code-workspace
 
 # OS generated files #
 ######################
