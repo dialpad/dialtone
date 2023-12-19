@@ -1,3 +1,15 @@
+# [4.3.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.2.1...dialtone-icons/v4.3.0) (2023-12-19)
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+
+
+### Features
+
+* add new agentassist icon ([#57](https://github.com/dialpad/dialtone/issues/57)) ([526f7e8](https://github.com/dialpad/dialtone/commit/526f7e8c89e3e03c5ae57b3c30c2472603569cf0))
+
 # [4.2.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.1.1...dialtone-icons/v4.2.0) (2023-12-13)
 
 
