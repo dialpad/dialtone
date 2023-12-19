@@ -1,0 +1,74 @@
+{
+  "name": "dialtone",
+  "targets": {
+    "release-local": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "dependsOn": [
+        {
+          "projects": [
+            "dialtone-css",
+            "dialtone-icons",
+            "dialtone-tokens",
+            "dialtone-vue2",
+            "dialtone-vue3",
+            "eslint-plugin-dialtone"
+          ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "options": {
+        "commands": [
+          "pnpm semantic-release-plus --dry-run --no-ci --extends ./release-local.config.cjs",
+          "gulp"
+        ],
+        "parallel": false
+      }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "dependsOn": [
+        {
+          "projects": [
+            "dialtone-css",
+            "dialtone-icons",
+            "dialtone-tokens",
+            "dialtone-vue2",
+            "dialtone-vue3",
+            "eslint-plugin-dialtone"
+          ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "options": {
+        "command": "pnpm publish",
+        "parallel": false
+      }
+    },
+    "release-github": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "dependsOn": [
+        {
+          "projects": [
+            "dialtone-css",
+            "dialtone-icons",
+            "dialtone-tokens",
+            "dialtone-vue2",
+            "dialtone-vue3",
+            "eslint-plugin-dialtone"
+          ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "options": {
+        "command": "pnpm semantic-release-plus --extends ./release-ci.config.cjs",
+        "parallel": false
+      }
+    }
+  }
+}

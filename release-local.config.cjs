@@ -1,6 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 const name = 'dialtone';
-const srcRoot = `packages/${name}`;
+const srcRoot = `.`;
 
 module.exports = {
   extends: 'release.config.base.js',
@@ -11,7 +11,7 @@ module.exports = {
     `${srcRoot}/CHANGELOG.md`,
     `${srcRoot}/CHANGELOG.json`,
     `${srcRoot}/package.json`,
-    `${srcRoot}/package-lock.json`,
+    `${srcRoot}/pnpm-lock.yaml`,
   ],
   plugins: [
     ['@semantic-release/commit-analyzer', {

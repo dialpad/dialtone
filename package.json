@@ -1,7 +1,7 @@
 {
-  "name": "@dialpad/dialtone-mono",
-  "version": "1.0.0",
-  "description": "Design system monorepo",
+  "name": "@dialpad/dialtone",
+  "version": "9.0.0",
+  "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "test": "nx run-many --target=test",
     "build": "nx run-many --target=build",
@@ -21,6 +21,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "gulp": "^4.0.2",
     "eslint": "^8.55.0",
     "eslint-config-semistandard": "^17.0.0",
     "eslint-config-standard": "^17.1.0",
@@ -63,42 +64,78 @@
     "@dialpad/dialtone>postcss-preset-env": "^7.0.0",
     "@dialpad/dialtone>stylelint": "^15.10.1"
   },
+  "files": ["dist"],
   "exports": {
     "./css": {
-      "style": "./dist/dialtone.min.css"
+      "style": "./dist/css/dialtone.min.css"
     },
-    "./icons": {
-      "import": "./dist/emoji.js",
-      "require": "./dist/emoji.cjs"
-    },
-    "./tokens": {
-      "import": "./dist/emoji.js",
-      "require": "./dist/emoji.cjs"
-    },
-    "./vue@2": {
+    "./vue2": {
       "import": {
-        "types": "./dist/types/directives.d.ts",
-        "default": "./dist/directives.js"
+        "types": "./dist/vue2/types/index.d.ts",
+        "default": "./dist/vue2/dialtone-vue.js"
       },
       "require": {
-        "types": "./dist/types/directives.d.ts",
-        "default": "./dist/directives.cjs"
+        "types": "./dist/vue2/types/index.d.ts",
+        "default": "./dist/vue2/dialtone-vue.cjs"
       }
     },
-    "./vue@3": {
+    "./vue2/emoji": {
+        "import": {
+          "types": "./dist/vue2/types/emoji.d.ts",
+          "default": "./dist/vue2/emoji.js"
+        },
+        "require": {
+          "types": "./dist/vue2/types/emoji.d.ts",
+          "default": "./dist/vue2/emoji.cjs"
+        }
+      },
+    "./vue2/directives": {
       "import": {
-        "types": "./dist/types/directives.d.ts",
-        "default": "./dist/directives.js"
+        "types": "./dist/vue2/types/directives.d.ts",
+        "default": "./dist/vue2/directives.js"
       },
       "require": {
-        "types": "./dist/types/directives.d.ts",
-        "default": "./dist/directives.cjs"
+        "types": "./dist/vue2/types/directives.d.ts",
+        "default": "./dist/vue2/directives.cjs"
       }
     },
-    "./eslint-plugin": {
-      "import": "./dist/emoji.js",
-      "require": "./dist/emoji.cjs"
-    }
+    "./vue2/css": {
+      "style": "./dist/vue2/style.css"
+    },
+    "./vue3": {
+      "import": {
+        "types": "./dist/vue3/types/index.d.ts",
+        "default": "./dist/vue3/dialtone-vue.js"
+      },
+      "require": {
+        "types": "./dist/vue3/types/index.d.ts",
+        "default": "./dist/vue3/dialtone-vue.cjs"
+      }
+    },
+    "./vue3/emoji": {
+        "import": {
+          "types": "./dist/vue3/types/emoji.d.ts",
+          "default": "./dist/vue3/emoji.js"
+        },
+        "require": {
+          "types": "./dist/vue3/types/emoji.d.ts",
+          "default": "./dist/vue3/emoji.cjs"
+        }
+      },
+    "./vue3/directives": {
+      "import": {
+        "types": "./dist/vue3/types/directives.d.ts",
+        "default": "./dist/vue3/directives.js"
+      },
+      "require": {
+        "types": "./dist/vue3/types/directives.d.ts",
+        "default": "./dist/vue3/directives.cjs"
+      }
+    },
+    "./vue3/css": {
+      "style": "./dist/vue3/style.css"
+    },
+    "./eslint-plugin": "./dist/eslint-plugin/index.js"
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [

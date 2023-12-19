@@ -71,6 +71,9 @@ importers:
       eslint-plugin-vuejs-accessibility:
         specifier: ^2.1.0
         version: 2.2.0(eslint@8.55.0)
+      gulp:
+        specifier: ^4.0.2
+        version: 4.0.2
       husky:
         specifier: ^8.0.3
         version: 8.0.3
@@ -253,9 +256,6 @@ importers:
       del:
         specifier: ^6.1.1
         version: 6.1.1
-      gulp:
-        specifier: ^4.0.2
-        version: 4.0.2
       gulp-cached:
         specifier: ^1.1.1
         version: 1.1.1
