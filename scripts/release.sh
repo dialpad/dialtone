@@ -10,6 +10,7 @@ fi
 
 git pull &&
 pnpm nx affected --target=release-local --parallel=false &&
+pnpm nx release-local &&
 git checkout production &&
 git merge --ff-only staging &&
 git push -u origin production
