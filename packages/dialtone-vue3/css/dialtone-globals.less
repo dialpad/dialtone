@@ -1,6 +1,6 @@
 // Import dialtone style definitions as references globally so they can be used in
 // mixins. See: https://dialpad.design
-@import '@dialpad/dialtone/lib/build/less/components/modal';
+@import '@dialpad/dialtone-css/lib/build/less/components/modal';
 
 // Reset base font size to 12px.
 :root {
@@ -11,9 +11,11 @@
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.18s ease-in-out;
 }
+
 .fade-enter-from, .fade-leave-to {
   opacity: 0 !important;
 }
+
 .fade-enter-to, .fade-leave-from {
   opacity: 1 !important;
 }
@@ -47,25 +49,25 @@
 }
 
 .shake-enter-active {
-  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 @keyframes shake {
   10%, 90% {
-    transform: translate3d(-4px, 0, 0);
+    transform: translate3d(var(--dt-size-300-negative), 0, 0);
   }
 
   20%, 80% {
-    transform: translate3d(8px, 0, 0);
+    transform: translate3d(var(--dt-size-400), 0, 0);
   }
 
   30%, 50%, 70% {
-    transform: translate3d(-16px, 0, 0);
+    transform: translate3d(var(--dt-size-500-negative), 0, 0);
   }
 
   40%, 60% {
-    transform: translate3d(16px, 0, 0);
+    transform: translate3d(var(--dt-size-500), 0, 0);
   }
 }
 
@@ -73,6 +75,7 @@
   0% {
     opacity: 0
   }
+
   50% {
     opacity: 0.5
   }
@@ -86,6 +89,7 @@
   0% {
     opacity: 1
   }
+
   50% {
     opacity: 0.5
   }
@@ -124,25 +128,27 @@
 }
 
 /* Hiding class, making content visible only to screen readers but not visually */
+
 /* "sr" meaning "screen-reader" */
+
 /* https://css-tricks.com/inclusively-hidden/ */
-.sr-only:not(:focus):not(:active) {
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+.sr-only:not(:focus, :active) {
+  position: absolute;
+  width: 1px;
   height: 1px;
   overflow: hidden;
-  position: absolute;
   white-space: nowrap;
-  width: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
 }
 
 // Component preview background and foreground colors need to be set apart from global theme
 .sb-show-main {
-   background: var(--dt-color-surface-primary) !important;
    color: var(--dt-color-foreground-primary) !important;
+   background: var(--dt-color-surface-primary) !important;
 }
 
 // CSS override to avoid header links to move while changing theme on Docs mode
 .css-1ofkq6d {
-  margin-left: -24px !important;
+  margin-left: var(--dt-space-550-negative) !important;
 }

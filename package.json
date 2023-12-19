@@ -61,8 +61,8 @@
     }
   },
   "resolutions": {
-    "@dialpad/dialtone>postcss-preset-env": "^7.0.0",
-    "@dialpad/dialtone>stylelint": "^15.10.1"
+    "@dialpad/dialtone-css>postcss-preset-env": "^7.0.0",
+    "@dialpad/dialtone-css>stylelint": "^15.10.1"
   },
   "files": ["dist"],
   "exports": {
