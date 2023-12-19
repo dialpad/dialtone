@@ -3,7 +3,6 @@ dist
 .nx/installation
 .nx/cache
 .idea
-.vscode
 
 # OS generated files #
 ######################
