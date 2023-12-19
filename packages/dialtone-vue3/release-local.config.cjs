@@ -10,8 +10,7 @@ module.exports = {
   assets: [
     `${srcRoot}/CHANGELOG.md`,
     `${srcRoot}/CHANGELOG.json`,
-    `${srcRoot}/package.json`,
-    `${srcRoot}/package-lock.json`,
+    `${srcRoot}/package.json`
   ],
   plugins: [
     ['@semantic-release/commit-analyzer', {
