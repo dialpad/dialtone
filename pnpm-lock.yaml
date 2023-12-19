@@ -5,8 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@dialpad/dialtone>postcss-preset-env': ^7.0.0
-  '@dialpad/dialtone>stylelint': ^15.10.1
+  '@dialpad/dialtone-css>postcss-preset-env': ^7.0.0
+  '@dialpad/dialtone-css>stylelint': ^15.10.1
 
 packageExtensionsChecksum: b1881ef95d6b1b1fbf91f31a46f88bcb
 
@@ -102,7 +102,7 @@ importers:
         specifier: ^20.0.0
         version: 20.0.0(semantic-release@21.1.2)
       stylelint:
-        specifier: ^15.10.1
+        specifier: 15.11.0
         version: 15.11.0(typescript@5.2.2)
       stylelint-config-rational-order:
         specifier: ^0.1.2
