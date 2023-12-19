@@ -130,6 +130,46 @@ export const argTypesData = {
       },
     },
   },
+  hideOnClick: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  modal: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  open: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  openOnContext: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  openWithArrowKeys: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showCloseButton: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  tether: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Events
   onOpened: {

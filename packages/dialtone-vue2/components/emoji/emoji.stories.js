@@ -17,6 +17,11 @@ export const argTypesData = {
       type: 'select',
     },
   },
+  showSkeleton: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 // Story Collection

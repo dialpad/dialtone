@@ -72,6 +72,11 @@ export const argTypesData = {
       },
     },
   },
+  animate: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 // Story Collection

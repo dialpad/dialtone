@@ -72,6 +72,21 @@ export const argTypesData = {
       disable: true,
     },
   },
+  hideClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  important: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Action Event Handlers
   onClick: {

@@ -128,6 +128,21 @@ export const argTypesData = {
       },
     },
   },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  labelVisible: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // HTML attributes
   placeholder: {

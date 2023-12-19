@@ -1,0 +1,66 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "start: dialtone docsite",
+      "type": "shell",
+      "command": "pnpm start:dialtone",
+      "problemMatcher": [
+        "$vite"
+      ],
+      "isBackground": true
+    },
+    {
+      "label": "start: dialtone vue 2 storybook",
+      "type": "shell",
+      "command": "pnpm start:dialtone-vue2",
+      "problemMatcher": [
+        "$vite"
+      ],
+      "isBackground": true
+    },
+    {
+      "label": "start: dialtone vue 3 storybook",
+      "type": "shell",
+      "command": "pnpm start:dialtone-vue3",
+      "problemMatcher": [
+        "$vite"
+      ],
+      "isBackground": true
+    },
+    {
+      "label": "start: all",
+      "dependsOn": [
+        "start: dialtone docsite",
+        "start: dialtone vue 2 storybook",
+        "start: dialtone vue 3 storybook"
+      ],
+      "problemMatcher": [
+        "$vite"
+      ],
+      "isBackground": true
+    },
+    {
+      "label": "lint: all",
+      "type": "shell",
+      "command": "pnpm lint",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    },
+    {
+      "label": "test: all",
+      "type": "shell",
+      "command": "pnpm test",
+      "problemMatcher": []
+    },
+    {
+      "label": "build: all",
+      "type": "shell",
+      "command": "pnpm build",
+      "problemMatcher": []
+    }
+  ]
+}
