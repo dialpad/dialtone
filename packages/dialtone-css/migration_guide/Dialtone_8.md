@@ -2,18 +2,19 @@
 
 Migration from dialtone version `7` to `8`
 
-Dialtone 8.x deprecates the use of LESS variables to favor the usage of [Design tokens](https://spectrum.adobe.com/page/design-tokens/).
+Dialtone 8.x deprecates the use of LESS variables to favor the usage
+of [Design tokens](https://spectrum.adobe.com/page/design-tokens/).
 
 While the migration should be straightforward using the provided script, there might be instances where manual updates
 to a product's code are required.
 
-These are usually search-and-replace tasks, and may include decisions to be made with your Product Designer 
+These are usually search-and-replace tasks, and may include decisions to be made with your Product Designer
 like RAW HEX values or CSS variables that are not semantically correct. e.g:
 
 - We might find this property `background-color: var(--dt-color-neutral-white)` in order to make sure
-that this is going to have the expected behaviour, we need to change the fixed color variable to its corresponding
-semantically correct token `background-color: var(--dt-color-surface-primary)` this ensures the background color 
-to use the right `surface` color token.
+  that this is going to have the expected behaviour, we need to change the fixed color variable to its corresponding
+  semantically correct token `background-color: var(--dt-color-surface-primary)` this ensures the background color
+  to use the right `surface` color token.
 
 ---
 
@@ -62,10 +63,10 @@ npm install @dialpad/dialtone@next
 
 ### 2. Run the script
 
-⚠️ Running the script from the root of your project is dangerous, 
+⚠️ Running the script from the root of your project is dangerous,
 and it's not recommended to run it on all your code base at once, this might break things.
 
-It is highly recommended to navigate to the desired folder and run it only on the desired files 
+It is highly recommended to navigate to the desired folder and run it only on the desired files
 for the piece of UI you wish to change
 
 - **Navigate to the desired project folder**
@@ -84,9 +85,9 @@ need to be done due to limitations on the script ability to know the scope of th
 As a rule of thumb, when applying color reach first for Design Tokens (either as CSS variables or CSS Utilities)
 unless they meet a specific design need to use a base color.
 
-* Foreground content (text and icons)
-* Surfaces/Background
-* Borders
+- Foreground content (text and icons)
+- Surfaces/Background
+- Borders
 
 For example, the default foreground color shall be `var(--dt-color-foreground-primary)`.
 So any previous use of `var(--black-900)`, `#000`, `#000000`, `black`, etc...
@@ -94,11 +95,11 @@ Should use `var(--dt-color-foreground-primary)`.
 
 #### Foreground Color (CSS `color` property)
 
-* CSS Variables
+- CSS Variables
 
 |     Search for     |                 Replace with                 | Alternative                          |
 |:------------------:|:--------------------------------------------:|:-------------------------------------|
-| `var(--black-500)` |  `var(--dt-color-foreground-placeholder) `   | `var(--dt-color-foreground-disabled` |
+| `var(--black-500)` |   `var(--dt-color-foreground-placeholder)`   | `var(--dt-color-foreground-disabled` |
 | `var(--black-600)` |    `var(--dt-color-foreground-tertiary)`     |                                      |
 | `var(--black-700)` |    `var(--dt-color-foreground-secondary)`    |                                      |
 | `var(--black-900)` |     `var(--dt-color-foreground-primary)`     |                                      |
@@ -108,11 +109,11 @@ Should use `var(--dt-color-foreground-primary)`.
 | `var(--green-500)` | `var(--dt-color-foreground-success-strong)`  |                                      |
 | `var(--gold-500)`  |     `var(--dt-color-foreground-warning)`     |                                      |
 
-* HEX Values
+- HEX Values
 
 | Search for |                 Replace with                 |
 |:----------:|:--------------------------------------------:|
-|   `#000`   |    `var(--dt-color-foreground-primary) `     |
+|   `#000`   |     `var(--dt-color-foreground-primary)`     |
 | `#000000`  |     `var(--dt-color-foreground-primary)`     |
 | `#3A3A3A`  |    `var(--dt-color-foreground-secondary)`    |
 |   `#555`   |    `var(--dt-color-foreground-tertiary)`     |
@@ -123,14 +124,14 @@ Should use `var(--dt-color-foreground-primary)`.
 | `#124620`  | `var(--dt-color-foreground-success-strong)`  |
 | `#815008`  |     `var(--dt-color-foreground-warning)`     |
 
-* Colors
+- Colors
 
 | Search for |             Replace with              |
 |:----------:|:-------------------------------------:|
-|  `black`   | `var(--dt-color-foreground-primary) ` |
+|  `black`   | `var(--dt-color-foreground-primary)`  |
 |   `gray`   | `var(--dt-color-foreground-tertiary)` |
 
-* Classes
+- Classes
 
 |    Search for    |      Replace with      |
 |:----------------:|:----------------------:|
@@ -144,17 +145,17 @@ Should use `var(--dt-color-foreground-primary)`.
 
 #### Background Color (CSS `background-color` property)
 
-* CSS Variables
+- CSS Variables
 
 |     Search for     |               Replace with                |
 |:------------------:|:-----------------------------------------:|
 |   `var(--white)`   |     `var(--dt-color-surface-primary)`     |
 | `var(--black-100)` |    `var(--dt-color-surface-secondary)`    |
 | `var(--black-200)` |    `var(--dt-color-surface-moderate)`     |
-| `var(--black-300)` |      `var(--dt-color-surface-bold) `      |
-| `var(--black-600)` |     `var(--dt-color-surface-strong) `     |
-| `var(--black-800)` |    `var(--dt-color-surface-contrast) `    |
-| `var(--black-900)` |    `var(--dt-color-surface-contrast) `    |
+| `var(--black-300)` |      `var(--dt-color-surface-bold)`       |
+| `var(--black-600)` |     `var(--dt-color-surface-strong)`      |
+| `var(--black-800)` |    `var(--dt-color-surface-contrast)`     |
+| `var(--black-900)` |    `var(--dt-color-surface-contrast)`     |
 |  `var(--red-100)`  |    `var(--dt-color-surface-critical)`     |
 |  `var(--red-400)`  | `var(--dt-color-surface-critical-strong)` |
 | `var(--gold-100)`  |     `var(--dt-color-surface-warning)`     |
@@ -164,11 +165,11 @@ Should use `var(--dt-color-foreground-primary)`.
 | `var(--blue-100)`  |      `var(--dt-color-surface-info)`       |
 | `var(--blue-400)`  |   `var(--dt-color-surface-info-strong)`   |
 
-* HEX Values
+- HEX Values
 
 | Search for |               Replace with                |
 |:----------:|:-----------------------------------------:|
-|   `#FFF`   |    `var(--dt-color-surface-primary) `     |
+|   `#FFF`   |     `var(--dt-color-surface-primary)`     |
 | `#FFFFFF`  |     `var(--dt-color-surface-primary)`     |
 | `#F9F9F9`  |    `var(--dt-color-surface-secondary)`    |
 | `#E9E9E9`  |    `var(--dt-color-surface-moderate)`     |
@@ -188,14 +189,14 @@ Should use `var(--dt-color-foreground-primary)`.
 | `#EAF2FA`  |      `var(--dt-color-surface-info)`       |
 | `#1768C6`  |   `var(--dt-color-surface-info-strong)`   |
 
-* Colors
+- Colors
 
 | Search for |            Replace with            |
 |:----------:|:----------------------------------:|
-|  `white`   | `var(--dt-color-surface-primary) ` |
+|  `white`   | `var(--dt-color-surface-primary)`  |
 |  `black`   | `var(--dt-color-surface-contrast)` |
 
-* Classes
+- Classes
 
 |    Search for     |      Replace with       |
 |:-----------------:|:-----------------------:|
@@ -218,7 +219,7 @@ Should use `var(--dt-color-foreground-primary)`.
 
 #### Border Color (CSS `border-color` property)
 
-* CSS Variables
+- CSS Variables
 
 |      Search for      |               Replace with               |
 |:--------------------:|:----------------------------------------:|
@@ -231,17 +232,17 @@ Should use `var(--dt-color-foreground-primary)`.
 |  `var(--gold-200)`   | `var(--dt-color-border-warning-subtle)`  |
 |  `var(--gold-400)`   |     `var(--dt-color-border-warning)`     |
 |  `var(--gold-500)`   | `var(--dt-color-border-warning-strong)`  |
-| `var(--purple-200)`  |  `var(--dt-color-border-brand-subtle) `  |
-| `var(--purple-400)`  |     `var(--dt-color-border-brand) `      |
-| `var(--purple-500)`  |  `var(--dt-color-border-brand-strong) `  |
-| `var(--magenta-300)` |     `var(--dt-color-border-accent) `     |
+| `var(--purple-200)`  |  `var(--dt-color-border-brand-subtle)`   |
+| `var(--purple-400)`  |      `var(--dt-color-border-brand)`      |
+| `var(--purple-500)`  |  `var(--dt-color-border-brand-strong)`   |
+| `var(--magenta-300)` |     `var(--dt-color-border-accent)`      |
 
-* HEX Values
+- HEX Values
 
 | Search for |               Replace with               |
 |:----------:|:----------------------------------------:|
 | `#FF8585`  | `var(--dt-color-border-critical-subtle)` |
-| `#EC0E0E`  |    `var(--dt-color-border-critical) `    |
+| `#EC0E0E`  |    `var(--dt-color-border-critical)`     |
 | `#B70B0B`  | `var(--dt-color-border-critical-strong)` |
 | `#B0FFA3`  | `var(--dt-color-border-success-subtle)`  |
 | `#1AA340`  |     `var(--dt-color-border-success)`     |
@@ -254,7 +255,7 @@ Should use `var(--dt-color-foreground-primary)`.
 | `#3A1D95`  |  `var(--dt-color-border-brand-strong)`   |
 | `#F9008E`  |     `var(--dt-color-border-accent)`      |
 
-* Classes
+- Classes
 
 |     Search for     |      Replace with      |
 |:------------------:|:----------------------:|
@@ -274,12 +275,12 @@ Should use `var(--dt-color-foreground-primary)`.
 
 ### 5. Visually verify the UI
 
-Visually verify the piece of UI you changed in light mode as well as dark mode, 
+Visually verify the piece of UI you changed in light mode as well as dark mode,
 fix anything that is obviously off.
 
 ### 6. Share a preview
 
-Share a preview with your product designer to make sure that 
+Share a preview with your product designer to make sure that
 everything's working and looking as it should and make any further requested changes.
 
 ### 7. Make a PR to commit your changes.

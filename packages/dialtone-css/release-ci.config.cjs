@@ -1,5 +1,5 @@
 /* eslint-disable no-template-curly-in-string */
-const name = 'dialtone';
+const name = 'dialtone-css';
 const srcRoot = `packages/${name}`;
 
 module.exports = {

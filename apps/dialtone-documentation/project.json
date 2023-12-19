@@ -6,7 +6,7 @@
       "dependsOn": [
         {
           "projects": [
-            "dialtone",
+            "dialtone-css",
             "dialtone-icons",
             "dialtone-vue3"
           ],

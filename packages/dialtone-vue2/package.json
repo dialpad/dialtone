@@ -50,7 +50,7 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "@dialpad/dialtone": "workspace:^",
+    "@dialpad/dialtone-css": "workspace:^",
     "@percy/cli": "^1.27.4",
     "@percy/storybook": "^5.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -100,7 +100,7 @@
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": "^7.30.0 || ^8.21.2",
+    "@dialpad/dialtone-css": "^7.30.0 || ^8.21.2",
     "vue": ">=2.6"
   },
   "bugs": {
