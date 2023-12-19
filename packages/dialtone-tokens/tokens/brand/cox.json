@@ -4,6 +4,10 @@
       "base": {
         "value": "#285A93",
         "type": "color"
+      },
+      "base-dark": {
+        "value": "#00ADFA",
+        "type": "color"
       }
     },
     "mention": {
@@ -39,6 +43,19 @@
                 "value": ".03",
                 "space": "hsl",
                 "color": "{theme.color.base} "
+              }
+            }
+          }
+        },
+        "foreground": {
+          "value": "{theme.color.base}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": "0.75",
+                "space": "lch"
               }
             }
           }

@@ -1,0 +1,10 @@
+{
+  "text-group": {
+    "value": {
+      "itemSpacing": "{space.500}",
+      "verticalPadding": "{space.400}",
+      "horizontalPadding": "{space.400}"
+    },
+    "type": "composition"
+  }
+}

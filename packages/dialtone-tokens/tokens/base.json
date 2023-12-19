@@ -3,18 +3,15 @@
     "neutral": {
       "white": {
         "value": "#ffffff",
-        "type": "color",
-        "description": "White color independent of any theme."
+        "type": "color"
       },
       "black": {
         "value": "#000000",
-        "type": "color",
-        "description": "Black color independent of any theme."
+        "type": "color"
       },
       "transparent": {
         "value": "transparent",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
+        "type": "color"
       }
     },
     "black": {
@@ -216,20 +213,17 @@
     "gradient": {
       "magenta-purple": {
         "value": "linear-gradient(135deg, {color.brand.magenta} 10%, {color.brand.purple} 90%)",
-        "type": "color",
-        "description": "Gradient for Ai-oriented treatments."
+        "type": "color"
       }
     },
     "brand": {
       "purple": {
         "value": "#7C52FF",
-        "type": "color",
-        "description": "Primary brand color."
+        "type": "color"
       },
       "magenta": {
         "value": "#F9008E",
-        "type": "color",
-        "description": "Secondary brand color, typically used as an accent color."
+        "type": "color"
       }
     }
   },
