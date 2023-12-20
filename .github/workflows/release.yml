@@ -107,6 +107,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -117,6 +122,25 @@ jobs:
             packages/dialtone-tokens/*.gradle*
             packages/dialtone-tokens/**/gradle-wrapper.properties
 
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -124,6 +148,7 @@ jobs:
         run: pnpm nx run dialtone-tokens:publish:android-package
 
       - name: Publish production - Gradle
+        working-directory: ./packages/dialtone-tokens
         run: ./gradlew publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
