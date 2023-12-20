@@ -199,7 +199,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
         with:
           user-email: 'dialtone@dialpad.com'
-          source-directory: 'dist_ios'
+          source-directory: 'packages/dialtone-tokens/dist_ios'
           destination-repository-name: 'dialtone-tokens-swift'
           destination-github-username: 'dialpad'
           commit-message: "dialtone-tokens-swift release"
