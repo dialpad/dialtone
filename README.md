@@ -21,7 +21,15 @@ dialtone/
 |--- scripts                    # Shared scripts
 ```
 
-## Tooling
+## Quick start
+
+If you would like to contribute to Dialtone without having to do any local environment setup, you can use GitHub Codespaces. You can initialize a new Codespace by clicking the green "Code" button at the top right of the Dialtone GitHub page.
+
+![Creating a codespace](./.github/new_codespace.png)
+
+Please see the [Codespaces docs](./.github/codespaces.md) for more information.
+
+### Local environment setup
 
 - We use [pnpm](https://pnpm.io) for managing workspaces
 
@@ -34,7 +42,7 @@ npm install -g pnpm
 - We use [Nx](https://nx.dev/) as build system for improved speed and easier monorepo administration.
 nx is installed as a dev dependency in the root of the project.
 
-## Quick start
+### Setup
 
 Once pnpm is installed, in the monorepo root run:
 
