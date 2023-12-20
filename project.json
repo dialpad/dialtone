@@ -40,7 +40,7 @@
         }
       ],
       "options": {
-        "command": "pnpm semantic-release-plus --dry-run --no-ci --extends ./release-local.config.cjs",
+        "command": "pnpm semantic-release-plus --no-ci --extends ./release-local.config.cjs",
         "parallel": false
       }
     },
