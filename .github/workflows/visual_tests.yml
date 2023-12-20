@@ -50,7 +50,7 @@ jobs:
 
   dialtone-vue-2:
     needs: filter-actions
-    if: (needs.filter-actions.outputs.dialtone-vue-2 == 'true' && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'))
+    if: ((needs.filter-actions.outputs.dialtone-vue-2 == 'true' && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) || github.event_name == 'push'))
 
     runs-on: ubuntu-latest
     steps:
@@ -95,7 +95,7 @@ jobs:
 
   dialtone-vue-3:
     needs: filter-actions
-    if: (false && needs.filter-actions.outputs.dialtone-vue-3 == 'true' && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready') || github.event_name == 'push'))
+    if: ((false && (needs.filter-actions.outputs.dialtone-vue-3 == 'true' && (contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) || github.event_name == 'push'))
     runs-on: ubuntu-latest
     steps:
       - name: Check out branch
