@@ -1,3 +1,10 @@
+## [2.106.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.3...dialtone-vue2/v2.106.4) (2023-12-20)
+
+
+### Bug Fixes
+
+* missing icons ([95cfe08](https://github.com/dialpad/dialtone/commit/95cfe08f62a40ef3e202a8600ce0e631df961b64))
+
 ## [2.106.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.2...dialtone-vue2/v2.106.3) (2023-12-19)
 
 
