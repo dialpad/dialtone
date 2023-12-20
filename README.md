@@ -104,7 +104,7 @@ pnpm nx build dialtone-documentation
 ### Releasing
 
 ```bash
-pnpm run release
+pnpm run release:all
 ```
 
 This will automatically release all packages that need to be released.

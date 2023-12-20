@@ -22,16 +22,17 @@
         :kind="kind"
         :hidden="icon.hidden"
         :name="icon.name"
-        :selected="selectedCardIndex === index"
         :vue="icon.vue"
-        @click="toggleCard(index)"
+        :figma-link="icon.figmaLink"
+        :raw-svg="icon.rawSvg"
       />
     </div>
   </div>
 </template>
 
 <script>
-import BaseIcon, { ICON_KINDS } from '../baseComponents/BaseIcon.vue';
+import BaseIcon from '../baseComponents/BaseIcon.vue';
+import { ICON_KINDS } from '../baseComponents/constants.js';
 
 export default {
   name: 'Icons',
@@ -64,7 +65,6 @@ export default {
 
   data: () => ({
     icons: [],
-    selectedCardIndex: undefined,
   }),
 
   computed: {
@@ -76,13 +76,6 @@ export default {
   async beforeCreate () {
     const importedModule = await import(`../../_data/svg-${this.kind}.json`);
     this.icons = importedModule.default;
-  },
-
-  methods: {
-    toggleCard (index) {
-      if (this.selectedCardIndex === index) index = undefined;
-      this.selectedCardIndex = index;
-    },
   },
 };
 </script>

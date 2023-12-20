@@ -106,7 +106,7 @@ export default {
 
   async beforeCreate () {
     this.documentation = (
-      await import('../../../node_modules/@dialpad/dialtone-vue/dist/component-documentation.json')
+      await import('@dialpad/dialtone-vue/component-documentation.json')
     ).default;
   },
 

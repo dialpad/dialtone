@@ -436,6 +436,13 @@ a.header-anchor {
   display: flex;
   width: 100%;
   height: 100%;
+
+  .d-popover {
+    height: 100%;
+    > div {
+      height: 100%;
+    }
+  }
 }
 
 .dialtone-icon-card__header {
@@ -460,71 +467,9 @@ a.header-anchor {
   }
 }
 
-.dialtone-icon-card__footer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: var(--zi-popover);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: calc((var(--icon-card-width) * 2) + var(--dt-size-600));
-  min-height: var(--icon-card-width);
-  margin-right: var(--dt-space-100-negative);
-  padding: var(--dt-space-450) var(--dt-space-500);
-  color: var(--dt-color-black-200);
-  font-size: var(--dt-font-size-200);
-  background-color: var(--dt-color-black-700);
-  border-radius: var(--dt-size-400);
-  box-shadow: var(--bs-md);
-
-  .dialtone-icon-card[data-selected='yes'] & {
-    margin: var(--dt-size-100-negative);
-    transform: translateX(calc(-1 * var(--icon-card-width)));
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 50ms var(--ttf-in-out) 0s,
-      transform 50ms var(--ttf-in-out) 0s,
-      visibility 0s 50ms;
-  }
-
-  //  If it's in the first two columns, show the footer on the right
-  .dialtone-icon-grid__item:nth-child(6n+1) .dialtone-icon-card[data-selected='yes'] &,
-  .dialtone-icon-grid__item:nth-child(6n+2) .dialtone-icon-card[data-selected='yes'] & {
-    right: var(--dt-size-100);
-    margin-right: unset;
-    transform: translateX(100%);
-  }
-
-  .dialtone-icon-card[data-selected='no'] & {
-    transform: translateX(0);
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 100ms var(--ttf-in-out) 0s,
-      transform 100ms var(--ttf-in-out) 0s,
-      visibility 0s 0s;
-  }
-}
-
-.dialtone-icon-card__footer-spot-illustration {
-  .dialtone-icon-card__footer();
-
-  width: calc(var(--icon-card-width) * 1.5);
-  min-height: auto;
-}
-
 .dialtone-icon-card__list {
   display: flex;
   flex-direction: column;
-}
-
-.dialtone-icon-card__list__item {
-  font-size: var(--dt-font-size-100);
-
-  strong {
-    display: inline-block;
-    width: 20%;
-  }
 }
 
 .dialtone-icon-card__icon {
@@ -564,11 +509,6 @@ a.header-anchor {
   white-space: nowrap;
   text-align: center;
   text-overflow: ellipsis;
-}
-
-.dialtone-icon-card__description {
-  color: var(--dt-color-neutral-white);
-  font-size: var(--dt-font-size-100);
 }
 
 .dialtone-icon-popover {

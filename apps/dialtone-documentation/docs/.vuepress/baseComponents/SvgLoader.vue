@@ -31,5 +31,9 @@ const svgs = [
     loader: () => import(`../public/assets/images/favicons/${props.name}.svg?component`),
     onError: () => {},
   }),
+  defineAsyncComponent({
+    loader: () => import(`../../../node_modules/@dialpad/dialtone-css/lib/dist/svg/spot/${props.name}.svg?component`),
+    onError: () => {},
+  }),
 ];
 </script>
