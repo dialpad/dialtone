@@ -117,6 +117,9 @@ jobs:
             packages/dialtone-tokens/*.gradle*
             packages/dialtone-tokens/**/gradle-wrapper.properties
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build android
         run: pnpm nx run dialtone-tokens:publish:android-package
 
@@ -158,6 +161,9 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build swift
         run: pnpm nx run dialtone-tokens:publish:ios-package
