@@ -1,3 +1,10 @@
+## [3.99.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.0...dialtone-vue3/v3.99.1) (2023-12-20)
+
+
+### Bug Fixes
+
+* missing icons ([95cfe08](https://github.com/dialpad/dialtone/commit/95cfe08f62a40ef3e202a8600ce0e631df961b64))
+
 # [3.99.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.98.1...dialtone-vue3/v3.99.0) (2023-12-19)
 
 
