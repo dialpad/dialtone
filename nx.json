@@ -9,11 +9,11 @@
       "dependsOn": ["^build"]
     },
     "test": {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["^build"]
     },
     "release": {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["build", "^build"]
     }
   },

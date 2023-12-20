@@ -50,6 +50,7 @@
       "dependsOn": [
         {
           "projects": [
+            "dialtone",
             "dialtone-css",
             "dialtone-icons",
             "dialtone-tokens",
