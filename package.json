@@ -10,7 +10,7 @@
     "start:dialtone-vue3": "nx run-many --target=start --projects=dialtone-css,dialtone-vue3",
     "start:dialtone-vue2": "nx run-many --target=start --projects=dialtone-css,dialtone-vue2",
     "prepare": "husky install",
-    "release:all": "./scripts/release.sh",
+    "release:affected": "./scripts/release.sh",
     "test:vitest": "vitest"
   },
   "devDependencies": {
