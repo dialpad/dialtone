@@ -1,3 +1,15 @@
+## [9.0.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.0.2...dialtone/v9.0.3) (2023-12-20)
+
+
+### Bug Fixes
+
+* missing icons ([95cfe08](https://github.com/dialpad/dialtone/commit/95cfe08f62a40ef3e202a8600ce0e631df961b64))
+
+
+### Documentation
+
+* add codespaces documentation ([#65](https://github.com/dialpad/dialtone/issues/65)) ([2b5fe65](https://github.com/dialpad/dialtone/commit/2b5fe658932aa6db1d0a1de0d5e28fb7f6af7484))
+
 ## [9.0.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.0.1...dialtone/v9.0.2) (2023-12-20)
 
 
