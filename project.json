@@ -1,6 +1,27 @@
 {
   "name": "dialtone",
   "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        {
+          "projects": [
+            "dialtone-css",
+            "dialtone-icons",
+            "dialtone-tokens",
+            "dialtone-vue2",
+            "dialtone-vue3",
+            "eslint-plugin-dialtone"
+          ],
+          "target": "build",
+          "params": "ignore"
+        }
+      ],
+      "options": {
+        "command": "gulp",
+        "parallel": false
+      }
+    },
     "release-local": {
       "executor": "nx:run-commands",
       "outputs": [],
@@ -19,10 +40,7 @@
         }
       ],
       "options": {
-        "commands": [
-          "pnpm semantic-release-plus --dry-run --no-ci --extends ./release-local.config.cjs",
-          "gulp"
-        ],
+        "command": "pnpm semantic-release-plus --dry-run --no-ci --extends ./release-local.config.cjs",
         "parallel": false
       }
     },
