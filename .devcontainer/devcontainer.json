@@ -11,9 +11,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [4000, 9010, 9011],
 
-	"updateContentCommand": "./.devcontainer/post_create.sh",
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "./.devcontainer/post_create.sh",
+	"updateContentCommand": "pnpm install",
 
 	// Configure tool-specific properties.
 	"customizations": {
