@@ -1,46 +1,46 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
 {
-	"name": "Node.js",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
-	"features": {
-		"ghcr.io/devcontainers-contrib/features/pnpm:2": {}
-	},
+  "name": "Node.js",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/pnpm:2": {}
+  },
 
-	"hostRequirements": {
-		"cpus": 4,
+  "hostRequirements": {
+    "cpus": 4,
     "memory": "16gb"
-	},
+  },
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [4000, 9010, 9011],
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [4000, 9010, 9011],
 
-	"updateContentCommand": "pnpm install",
+  "updateContentCommand": "pnpm install",
 
-	// Configure tool-specific properties.
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"dbaeumer.vscode-eslint",
-				"deque-systems.vscode-axe-linter",
-				"digitalbrainstem.javascript-ejs-support",
-				"figma.figma-vscode-extension",
-				"waderyan.gitblame",
-				"github.vscode-github-actions",
-				"github.copilot",
-				"github.vscode-pull-request-github",
-				"davidanson.vscode-markdownlint",
-				"unifiedjs.vscode-mdx",
-				"esbenp.prettier-vscode",
-				"stylelint.vscode-stylelint",
-				"jock.svg",
-				"zixuanchen.vitest-explorer",
-				"vue.volar"
-			]
-		}
-	}
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "deque-systems.vscode-axe-linter",
+        "digitalbrainstem.javascript-ejs-support",
+        "figma.figma-vscode-extension",
+        "waderyan.gitblame",
+        "github.vscode-github-actions",
+        "github.copilot",
+        "github.vscode-pull-request-github",
+        "davidanson.vscode-markdownlint",
+        "unifiedjs.vscode-mdx",
+        "esbenp.prettier-vscode",
+        "stylelint.vscode-stylelint",
+        "jock.svg",
+        "zixuanchen.vitest-explorer",
+        "vue.volar"
+      ]
+    }
+  }
 
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
 }
