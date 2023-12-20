@@ -32,7 +32,7 @@ const svgs = [
     onError: () => {},
   }),
   defineAsyncComponent({
-    loader: () => import(`../../../node_modules/@dialpad/dialtone/lib/dist/svg/spot/${props.name}.svg?component`),
+    loader: () => import(`../../../node_modules/@dialpad/dialtone-css/lib/dist/svg/spot/${props.name}.svg?component`),
     onError: () => {},
   }),
 ];
