@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "test": "nx run-many --target=test",
@@ -64,7 +64,9 @@
     "@dialpad/dialtone-css>postcss-preset-env": "^7.0.0",
     "@dialpad/dialtone-css>stylelint": "^15.10.1"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./css": {
       "style": "./dist/css/dialtone.min.css"
@@ -80,15 +82,15 @@
       }
     },
     "./vue2/emoji": {
-        "import": {
-          "types": "./dist/vue2/types/emoji.d.ts",
-          "default": "./dist/vue2/emoji.js"
-        },
-        "require": {
-          "types": "./dist/vue2/types/emoji.d.ts",
-          "default": "./dist/vue2/emoji.cjs"
-        }
+      "import": {
+        "types": "./dist/vue2/types/emoji.d.ts",
+        "default": "./dist/vue2/emoji.js"
       },
+      "require": {
+        "types": "./dist/vue2/types/emoji.d.ts",
+        "default": "./dist/vue2/emoji.cjs"
+      }
+    },
     "./vue2/directives": {
       "import": {
         "types": "./dist/vue2/types/directives.d.ts",
@@ -113,15 +115,15 @@
       }
     },
     "./vue3/emoji": {
-        "import": {
-          "types": "./dist/vue3/types/emoji.d.ts",
-          "default": "./dist/vue3/emoji.js"
-        },
-        "require": {
-          "types": "./dist/vue3/types/emoji.d.ts",
-          "default": "./dist/vue3/emoji.cjs"
-        }
+      "import": {
+        "types": "./dist/vue3/types/emoji.d.ts",
+        "default": "./dist/vue3/emoji.js"
       },
+      "require": {
+        "types": "./dist/vue3/types/emoji.d.ts",
+        "default": "./dist/vue3/emoji.cjs"
+      }
+    },
     "./vue3/directives": {
       "import": {
         "types": "./dist/vue3/types/directives.d.ts",
