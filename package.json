@@ -69,7 +69,7 @@
   ],
   "exports": {
     "./css": {
-      "style": "./dist/css/dialtone.min.css"
+      "style": "./dist/css/lib/dist/css/dialtone.min.css"
     },
     "./vue2": {
       "import": {
