@@ -15,7 +15,7 @@ import { ICON_SIZE_MODIFIERS } from './icon_constants';
 import { getUniqueString } from '@/common/utils.js';
 
 const dialtoneIcons = import.meta.glob(
-  '/node_modules/@dialpad/dialtone-icons/dist/svg/*.svg',
+  './node_modules/@dialpad/dialtone-icons/dist/svg/*.svg',
   { as: 'component', eager: true },
 );
 

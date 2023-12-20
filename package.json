@@ -4,7 +4,7 @@
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "test": "nx run-many --target=test",
-    "build": "nx run-many --target=build",
+    "build": "nx run-many --target=build --exclude=dialtone",
     "lint": "nx run-many --target=lint --projects=dialtone-css,dialtone-vue2,dialtone-vue3,dialtone-documentation",
     "start:dialtone": "nx run-many --target=start --projects=dialtone-css,dialtone-documentation",
     "start:dialtone-vue3": "nx run-many --target=start --projects=dialtone-css,dialtone-vue3",

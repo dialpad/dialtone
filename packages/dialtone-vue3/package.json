@@ -183,7 +183,8 @@
     "./css": {
       "style": "./dist/style.css"
     },
-    "./CHANGELOG.json": "./CHANGELOG.json"
+    "./CHANGELOG.json": "./CHANGELOG.json",
+    "./component-documentation.json": "./dist/component-documentation.json"
   },
   "homepage": "https://dialtone.dialpad.com/vue3",
   "keywords": [
