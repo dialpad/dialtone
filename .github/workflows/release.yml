@@ -87,10 +87,12 @@ jobs:
       # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Publish production to GitHub packages
         if: ${{ github.ref == 'refs/heads/production' }}
+        continue-on-error: true
         run: pnpm nx run-many --target=release
 
       - name: Publish pre-release to GitHub packages
         if: ${{ github.ref != 'refs/heads/production' }}
+        continue-on-error: true
         run: pnpm nx run-many --target=release --args="--tag ${{ needs.get-branch-name.outputs.current_branch }}"
 
       - name: Github Release
