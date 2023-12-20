@@ -1,3 +1,10 @@
+## [9.0.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.0.1...dialtone/v9.0.2) (2023-12-20)
+
+
+### Bug Fixes
+
+* mono-package release ([367db43](https://github.com/dialpad/dialtone/commit/367db43ea7c7e240c2a43972d8aea951ad57f12f))
+
 ## [9.0.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.0.0...dialtone/v9.0.1) (2023-12-20)
 
 
