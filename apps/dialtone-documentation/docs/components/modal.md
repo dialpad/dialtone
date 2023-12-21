@@ -94,7 +94,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 ### Base Style
 
 <code-well-header>
-  <example-modal kind="base" />
+  <example-modal />
 </code-well-header>
 
 ```html
@@ -206,5 +206,4 @@ At minimum, modals contain a title and one button. They could also contain body 
 
 <script setup>
   import ExampleModal from '@exampleComponents/ExampleModal.vue';
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>

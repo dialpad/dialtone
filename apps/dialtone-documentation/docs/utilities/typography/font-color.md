@@ -191,12 +191,46 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
           </td>
         </tr>
       </tbody>
-      <tbody v-for="{ color, stops } in baseColors">
+    </template>
+  </utility-class-table>
+</div>
+
+### Light mode
+
+<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
+  <utility-class-table class="d-bgc-primary">
+    <template #content>
+      <tbody v-for="{ color, stops } in baseColors.lightMode">
         <tr v-for="{ stop } in stops.reverse()">
           <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-{{ color }}-{{ stop }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl1 d-ff-mono d-fs-100">
+                  --fco: 100%;<br/>
+                  color: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--fco)) !important;
+              </div>
+              <div class="d-fl0 d-ml16 d-p4 d-fs-300 d-lh4" :class="`d-fc-${color}-${stop}`">
+                  Aa
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </template>
+  </utility-class-table>
+</div>
+
+### Dark mode
+
+<div class="d-h464 d-of-y-scroll dialtone-theme-dark">
+  <utility-class-table class="d-bgc-primary d-table--inverted">
+    <template #content>
+      <tbody v-for="{ color, stops } in baseColors.darkMode">
+        <tr v-for="{ stop } in stops.reverse()">
+          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-{{ color }}-{{ stop }}</th>
+          <td>
+            <div class="d-d-flex d-jc-space-between d-ai-center">
+              <div class="d-fl1 d-ff-mono d-fs-100 d-fc-primary">
                   --fco: 100%;<br/>
                   color: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--fco)) !important;
               </div>

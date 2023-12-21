@@ -349,7 +349,3 @@ We offer different sizes for instances in which the interface requires a smaller
 ## Classes
 
 <component-class-table component-name="select" />
-
-<script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>

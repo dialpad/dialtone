@@ -229,5 +229,4 @@ The best accessibility is semantic HTML. Most screen readers understand how to p
 
 <script setup>
   import ExampleToggle from '@exampleComponents/ExampleToggle.vue';
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>

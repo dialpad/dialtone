@@ -83,5 +83,4 @@ You may wish to announce any live changes to this component via the screen reade
 
 <script setup>
   import ExamplePresence from '@exampleComponents/ExamplePresence.vue';
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>
