@@ -57,7 +57,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
         </tr>
         <tr>
             <td>
-                <dt-avatar image-src="/assets/images/person.png" image-alt="person avatar" group="3" />
+                <dt-avatar image-src="/assets/images/person.png" image-alt="person avatar" :group="3" />
             </td>
             <th class="d-ta-left"><a class="d-link" href="#group">Group</a></th>
             <td>When reflecting more than 2 participants.</td>
@@ -143,8 +143,8 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">
-        <dt-avatar group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     </div>
 </code-well-header>
 

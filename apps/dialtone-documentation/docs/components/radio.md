@@ -357,10 +357,6 @@ The best accessibility is semantic HTML. Most screen readers understand how to p
 - Input with validation errors should have `aria-describedby` with the `id` of the validation message.
 - Input with validation errors should have `aria-describedby` with the `id` of the validation message.
 
-<script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>
-
 ## Vue API
 
 <component-vue-api component-name="radio" />

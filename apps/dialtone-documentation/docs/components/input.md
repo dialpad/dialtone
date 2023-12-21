@@ -429,8 +429,6 @@ You may use different icon sizes in different sized inputs
 - Placeholder text should not include critical information. Use description text for any information that helps the user successfully interact with the input.
 
 <script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-
   const messages = {
     warning: { "message": "Warning validation message", "type": "warning" },
     error: { "message": "Error validation message", "type": "error" },
