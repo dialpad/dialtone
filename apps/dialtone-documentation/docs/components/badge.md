@@ -404,5 +404,4 @@ Decorative badges label and classify items for quick recognition.
 
 <script setup>
   import { classes } from '@data/badge.json';
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>

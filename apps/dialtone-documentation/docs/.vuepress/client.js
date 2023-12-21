@@ -17,6 +17,7 @@ import ComponentAccessibleTable from './baseComponents/ComponentAccessibleTable.
 import ComponentCombinator from './baseComponents/ComponentCombinator.vue';
 import ExampleTabs from './baseComponents/ExampleTabs.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
+import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
 
 export default defineClientConfig({
   enhance ({ app, router, siteData }) {
@@ -37,6 +38,7 @@ export default defineClientConfig({
     app.component('ComponentCombinator', ComponentCombinator);
     app.component('ExampleTabs', ExampleTabs);
     app.component('SvgLoader', SvgLoader);
+    app.component('DialtoneUsage', DialtoneUsage);
   },
   setup () {},
   rootComponents: [],

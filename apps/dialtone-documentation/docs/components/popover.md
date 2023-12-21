@@ -167,5 +167,4 @@ If your popover is modal, please see the accessibility section of this page rega
 
 <script setup>
   import ExamplePopover from '@exampleComponents/ExamplePopover.vue';
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>

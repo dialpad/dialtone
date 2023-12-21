@@ -358,9 +358,6 @@ importers:
 
   packages/dialtone-vue2:
     dependencies:
-      '@dialpad/dialtone-icons':
-        specifier: workspace:^
-        version: link:../dialtone-icons
       '@linusborg/vue-simple-portal':
         specifier: ^0.1.5
         version: 0.1.5(vue@2.7.15)
@@ -413,6 +410,9 @@ importers:
       '@dialpad/dialtone-css':
         specifier: workspace:^
         version: link:../dialtone-css
+      '@dialpad/dialtone-icons':
+        specifier: workspace:^
+        version: link:../dialtone-icons
       '@percy/cli':
         specifier: ^1.27.4
         version: 1.27.4(typescript@5.2.2)
@@ -557,9 +557,6 @@ importers:
 
   packages/dialtone-vue3:
     dependencies:
-      '@dialpad/dialtone-icons':
-        specifier: workspace:^
-        version: link:../dialtone-icons
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.1.12)
@@ -609,6 +606,9 @@ importers:
       '@dialpad/dialtone-css':
         specifier: workspace:^
         version: link:../dialtone-css
+      '@dialpad/dialtone-icons':
+        specifier: workspace:^
+        version: link:../dialtone-icons
       '@percy/cli':
         specifier: ^1.27.4
         version: 1.27.4(typescript@5.2.2)
@@ -7093,7 +7093,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.8(typescript@5.2.2)
-      vue-component-type-helpers: 1.8.25
+      vue-component-type-helpers: 1.8.26
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -27777,8 +27777,8 @@ packages:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
     dev: true
 
-  /vue-component-type-helpers@1.8.25:
-    resolution: {integrity: sha512-NCA6sekiJIMnMs4DdORxATXD+/NRkQpS32UC+I1KQJUasx+Z7MZUb3Y+MsKsFmX+PgyTYSteb73JW77AibaCCw==}
+  /vue-component-type-helpers@1.8.26:
+    resolution: {integrity: sha512-CIwb7s8cqUuPpHDk+0DY8EJ/x8tzdzqw8ycX8hhw1GnbngTgSsIceHAqrrLjmv8zXi+j5XaiqYRQMw8sKyyjkw==}
     dev: true
 
   /vue-demi@0.14.6(vue@3.3.8):

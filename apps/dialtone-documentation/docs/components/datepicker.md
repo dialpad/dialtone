@@ -10,19 +10,23 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT8-Component-Libra
 
 <code-well-header>
   <dt-datepicker
+    change-to-label="Change to"
     prev-month-label="Previous month"
     next-month-label="Next month"
     prev-year-label="Previous year"
     next-year-label="Next year"
+    select-day-label="Select day"
   />
 </code-well-header>
 
 ```html
 <dt-datepicker
+    change-to-label="Change to"
     prev-month-label="Previous month"
     next-month-label="Next month"
     prev-year-label="Previous year"
     next-year-label="Next year"
+    select-day-label="Select day"
     :selected-date="new Date()"
   />
 ```

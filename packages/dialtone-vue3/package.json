@@ -31,7 +31,6 @@
     "CHANGELOG.json"
   ],
   "dependencies": {
-    "@dialpad/dialtone-icons": "workspace:^",
     "@tiptap/core": "^2.0.3",
     "@tiptap/extension-code-block": "^2.0.3",
     "@tiptap/extension-document": "^2.0.3",
@@ -50,6 +49,7 @@
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:^",
+    "@dialpad/dialtone-icons": "workspace:^",
     "@percy/cli": "^1.27.4",
     "@percy/storybook": "^5.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -99,6 +99,7 @@
   },
   "peerDependencies": {
     "@dialpad/dialtone-css": "^7.30.0 || ^8.21.2",
+    "@dialpad/dialtone-icons": "^4.3.0",
     "vue": ">=3.2"
   },
   "bugs": {

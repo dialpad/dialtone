@@ -217,7 +217,3 @@ They should be easy to scan for relevant and actionable information. Elements, l
 At minimum, card contains body of content. It could also have header with buttons, and footer with buttons/text.
 
 <component-class-table component-name="card"></component-class-table>
-
-<script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>

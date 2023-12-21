@@ -3,12 +3,15 @@
     <thead>
       <tr>
         <th
-          class="d-w25p"
+          class="d-w25p d-fc-primary"
           scope="col"
         >
           Class
         </th>
-        <th scope="col">
+        <th
+          class="d-fc-primary"
+          scope="col"
+        >
           Output
         </th>
       </tr>

@@ -664,7 +664,3 @@ Relative timestamps may change based on context. When using relative timestamps,
 ### Duration
 
 Durations are represented as **DD:HH:MM:SS** (i.e. 1:04:05:30).
-
-<script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>
