@@ -67,6 +67,10 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "dialtone-health-check": "./dist/css/js/dialtone_health_check/index.cjs",
+    "dialtone-migration-helper": "./dist/css/js/dialtone_migration_helper/index.mjs"
+  },
   "exports": {
     "./css": {
       "style": "./dist/css/dialtone.min.css",
