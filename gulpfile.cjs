@@ -24,8 +24,12 @@ const paths = {
     dist: './dist/**',
   },
   input: {
-    css: './packages/dialtone-css/CHANGELOG.json',
-    'css/lib': './packages/dialtone-css/lib/**',
+    css: [
+      './packages/dialtone-css/lib/dist/css/**',
+      './packages/dialtone-css/lib/dist/**',
+      '!./packages/dialtone-css/lib/dist/css',
+      './packages/dialtone-css/CHANGELOG.json'
+    ],
     icons: './packages/dialtone-icons/dist/**',
     tokens: './packages/dialtone-tokens/dist/**',
     vue2: './packages/dialtone-vue2/dist/**',
@@ -34,7 +38,6 @@ const paths = {
   },
   output: {
     css: './dist/css',
-    'css/lib': './dist/css/lib',
     icons: './dist/icons',
     tokens: './dist/tokens',
     vue2: './dist/vue2',

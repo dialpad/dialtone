@@ -63,7 +63,7 @@
         }
       ],
       "options": {
-        "command": "pnpm publish",
+        "command": "pnpm publish --tag next",
         "parallel": false
       }
     },

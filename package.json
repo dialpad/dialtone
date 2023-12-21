@@ -69,9 +69,12 @@
   ],
   "exports": {
     "./css": {
-      "style": "./dist/css/lib/dist/css/dialtone.min.css"
+      "style": "./dist/css/dialtone.min.css",
+      "import": "./dist/css/dialtone.min.css",
+      "require": "./dist/css/dialtone.min.css"
     },
     "./vue2": {
+      "style": "./dist/vue2/style.css",
       "import": {
         "types": "./dist/vue2/types/index.d.ts",
         "default": "./dist/vue2/dialtone-vue.js"
@@ -101,10 +104,8 @@
         "default": "./dist/vue2/directives.cjs"
       }
     },
-    "./vue2/css": {
-      "style": "./dist/vue2/style.css"
-    },
     "./vue3": {
+      "style": "./dist/vue3/style.css",
       "import": {
         "types": "./dist/vue3/types/index.d.ts",
         "default": "./dist/vue3/dialtone-vue.js"
@@ -133,9 +134,6 @@
         "types": "./dist/vue3/types/directives.d.ts",
         "default": "./dist/vue3/directives.cjs"
       }
-    },
-    "./vue3/css": {
-      "style": "./dist/vue3/style.css"
     },
     "./eslint-plugin": "./dist/eslint-plugin/index.js"
   },
