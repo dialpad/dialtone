@@ -256,6 +256,7 @@
       "facebook": [],
       "freshsales-crm": [],
       "front": [],
+      "giphy": [],
       "gmail": [],
       "google-business-messaging": [],
       "google-calendar": [],
@@ -518,6 +519,12 @@
         "controller",
         "emoji",
         "activity"
+      ],
+      "gif-filled": [
+        "giphy"
+      ],
+      "gif-outline": [
+        "giphy"
       ],
       "grid": [
         "table"
@@ -806,6 +813,9 @@
       ],
       "sort-desc": [
         "filter"
+      ],
+      "sticker": [
+        "label"
       ],
       "stop-circle": [
         "media",
