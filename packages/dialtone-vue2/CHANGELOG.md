@@ -1,3 +1,10 @@
+## [2.106.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.4...dialtone-vue2/v2.106.5) (2023-12-21)
+
+
+### Bug Fixes
+
+* change dialtone-icons to peer ([#67](https://github.com/dialpad/dialtone/issues/67)) ([a63a606](https://github.com/dialpad/dialtone/commit/a63a60676ee744313ff40792a767f36346899917))
+
 ## [2.106.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.3...dialtone-vue2/v2.106.4) (2023-12-20)
 
 
