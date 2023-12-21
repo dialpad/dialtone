@@ -1,3 +1,20 @@
+# [9.1.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.0.3...dialtone/v9.1.0) (2023-12-21)
+
+
+### Bug Fixes
+
+* change dialtone-icons to peer ([#67](https://github.com/dialpad/dialtone/issues/67)) ([a63a606](https://github.com/dialpad/dialtone/commit/a63a60676ee744313ff40792a767f36346899917))
+
+
+### Documentation
+
+* fix multiple issues ([#70](https://github.com/dialpad/dialtone/issues/70)) ([3478dd4](https://github.com/dialpad/dialtone/commit/3478dd43d10e3b1a42a16be308306faecf5cbd9b))
+
+
+### Features
+
+* add icon sticker gif and brand giphy ([#66](https://github.com/dialpad/dialtone/issues/66)) ([6e9e4d5](https://github.com/dialpad/dialtone/commit/6e9e4d5922d8c3e187024ba0e60495f9c7d80f31))
+
 ## [9.0.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.0.2...dialtone/v9.0.3) (2023-12-20)
 
 
