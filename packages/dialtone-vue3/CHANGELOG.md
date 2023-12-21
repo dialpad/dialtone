@@ -1,3 +1,10 @@
+## [3.99.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.1...dialtone-vue3/v3.99.2) (2023-12-21)
+
+
+### Bug Fixes
+
+* change dialtone-icons to peer ([#67](https://github.com/dialpad/dialtone/issues/67)) ([a63a606](https://github.com/dialpad/dialtone/commit/a63a60676ee744313ff40792a767f36346899917))
+
 ## [3.99.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.0...dialtone-vue3/v3.99.1) (2023-12-20)
 
 
