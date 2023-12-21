@@ -1,3 +1,15 @@
+# [4.4.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.3.0...dialtone-icons/v4.4.0) (2023-12-21)
+
+
+### Documentation
+
+* fix multiple issues ([#70](https://github.com/dialpad/dialtone/issues/70)) ([3478dd4](https://github.com/dialpad/dialtone/commit/3478dd43d10e3b1a42a16be308306faecf5cbd9b))
+
+
+### Features
+
+* add icon sticker gif and brand giphy ([#66](https://github.com/dialpad/dialtone/issues/66)) ([6e9e4d5](https://github.com/dialpad/dialtone/commit/6e9e4d5922d8c3e187024ba0e60495f9c7d80f31))
+
 # [4.3.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.2.1...dialtone-icons/v4.3.0) (2023-12-19)
 
 
