@@ -2,32 +2,43 @@ import DtBanner from './banner.vue';
 
 import BannerDefault from './banner_default.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { argsData, argTypesData } from '../notice/notice.stories.js';
+import { argsData as noticeArgsData, argTypesData as noticeArgTypesData } from '../notice/notice.stories.js';
 
 import backgroundImage from '@/common/assets/dialpad-gradient.png';
 
-argTypesData.role = {
-  table: {
-    disable: true,
-  },
+export const argsData = {
+  ...noticeArgsData,
+  backgroundImage: null,
+  visuallyHiddenCloseLabel: 'Close Banner',
 };
-argTypesData.titleId = {
-  table: {
-    defaultValue: {
-      summary: 'generated unique ID',
-    },
-  },
-};
-argTypesData.contentId = {
-  table: {
-    defaultValue: {
-      summary: 'generated unique ID',
-    },
-  },
-};
-argsData.visuallyHiddenCloseLabel = 'Close Banner';
 
-export { argsData, argTypesData };
+export const argTypesData = {
+  ...noticeArgTypesData,
+  role: {
+    table: {
+      disable: true,
+    },
+  },
+  titleId: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  contentId: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  hideIcon: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
 export default {
   title: 'Components/Banner',
