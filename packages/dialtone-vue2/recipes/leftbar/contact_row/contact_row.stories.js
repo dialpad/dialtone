@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeContactRow from './contact_row.vue';
 
 import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
@@ -77,18 +77,12 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeContactRowDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeContactRowVariantsTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeContactRow, DtRecipeContactRowDefaultTemplate, argsData),
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeContactRow, DtRecipeContactRowVariantsTemplate, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

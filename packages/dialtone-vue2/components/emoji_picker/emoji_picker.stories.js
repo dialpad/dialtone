@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtEmojiPicker from './emoji_picker.vue';
 import DtEmojiPickerDefaultTemplate from './emoji_picker_default.story.vue';
 import DtEmojiPickerWithPopoverTemplate from './emoji_picker_popover.story.vue';
@@ -111,27 +111,14 @@ export default {
   },
 };
 
-// Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiPickerDefaultTemplate,
-);
-
-const WithPopoverTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiPickerWithPopoverTemplate,
-);
-
 // Stories
 export const Default = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtEmojiPicker, DtEmojiPickerDefaultTemplate, argsData),
   args: {},
 };
 
 export const WithPopover = {
-  render: WithPopoverTemplate,
+  render: (argsData) => createRenderConfig(DtEmojiPicker, DtEmojiPickerWithPopoverTemplate, argsData),
   args: {},
   parameters: {
     options: {

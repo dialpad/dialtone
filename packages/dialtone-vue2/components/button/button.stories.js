@@ -11,7 +11,7 @@ import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 
 import ButtonDefault from './button_default.story.vue';
 import ButtonVariants from './button_variants.story.vue';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 
 export const argsData = {
   onClick: action('click'),
@@ -160,21 +160,16 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ButtonDefault);
-
 export const Default = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtButton, ButtonDefault, argsData),
 
   args: {
     default: 'Button',
   },
 };
 
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, ButtonVariants);
-
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtButton, ButtonVariants, argsData),
   parameters: { options: { showPanel: false }, controls: { disable: true } },
   args: {},
 };

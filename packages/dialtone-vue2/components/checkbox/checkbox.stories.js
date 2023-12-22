@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import CheckboxDefault from './checkbox_default.story.vue';
 import CheckboxVariants from './checkbox_variants.story.vue';
@@ -140,19 +140,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Checkbox Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, CheckboxDefault);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, CheckboxVariants);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCheckbox, CheckboxDefault, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtCheckbox, CheckboxVariants, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

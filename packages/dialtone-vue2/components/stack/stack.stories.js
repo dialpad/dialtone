@@ -1,7 +1,7 @@
 import DtStack from './stack.vue';
 
 import StackDefault from './stack_default.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import {
   DT_STACK_DIRECTION,
   DT_STACK_GAP,
@@ -65,9 +65,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, StackDefault);
-
 export const Default = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtStack, StackDefault, argsData),
   args: {},
 };

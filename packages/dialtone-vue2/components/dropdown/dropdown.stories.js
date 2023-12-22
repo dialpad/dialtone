@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtDropdown from './dropdown.vue';
 
 import DtDropdownDefaultTemplate from './dropdown_default.story.vue';
@@ -149,20 +149,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDropdownDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDropdownVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtDropdown, DtDropdownDefaultTemplate, argsData),
   args: {},
 
   parameters: {
@@ -181,7 +169,7 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtDropdown, DtDropdownVariantsTemplate, argsData),
   args: {},
 
   parameters: {

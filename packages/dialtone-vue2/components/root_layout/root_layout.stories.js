@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 // import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import {
   ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS,
   ROOT_LAYOUT_SIDEBAR_POSITIONS,
@@ -127,14 +127,8 @@ export default {
   },
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRootLayoutDefaultTemplate);
-const StickyTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRootLayoutStickyTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRootLayout, DtRootLayoutDefaultTemplate, argsData),
 
   args: {
     default: argsData.default.repeat(40),
@@ -142,7 +136,7 @@ export const Default = {
 };
 
 export const StickyHeader = {
-  render: StickyTemplate,
+  render: (argsData) => createRenderConfig(DtRootLayout, DtRootLayoutStickyTemplate, argsData),
 
   args: {
     headerSticky: true,

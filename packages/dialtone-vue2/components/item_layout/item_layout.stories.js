@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtItemLayout from './item_layout.vue';
 import DtItemLayoutDefaultTemplate from './item_layout_default.story.vue';
 
@@ -73,15 +73,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtItemLayoutDefaultTemplate,
-);
-
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtItemLayout, DtItemLayoutDefaultTemplate, argsData),
   args: {},
 };

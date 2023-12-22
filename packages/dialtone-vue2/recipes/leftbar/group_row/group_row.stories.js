@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeGroupRow from './group_row.vue';
 
 import DtRecipeGroupRowDefaultTemplate from './group_row_default.story.vue';
@@ -42,20 +42,13 @@ export default {
   decorators: [decorator],
   excludeStories: /.*Data$/,
 };
-
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeGroupRowDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeGroupRowVariantsTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeGroupRow, DtRecipeGroupRowDefaultTemplate, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeGroupRow, DtRecipeGroupRowVariantsTemplate, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

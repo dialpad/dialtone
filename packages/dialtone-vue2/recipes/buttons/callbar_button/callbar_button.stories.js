@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtRecipeCallbarButton from './callbar_button.vue';
 import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 
@@ -127,25 +127,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonVariantsTemplate,
-);
-const CallbarTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonCallbarTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeCallbarButton, DtRecipeCallbarButtonDefaultTemplate, argsData),
 
   args: {
     default: 'Button',
@@ -156,13 +139,13 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeCallbarButton, DtRecipeCallbarButtonVariantsTemplate, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };
 
 export const Callbar = {
-  render: CallbarTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeCallbarButton, DtRecipeCallbarButtonCallbarTemplate, argsData),
   args: {},
 
   parameters: {

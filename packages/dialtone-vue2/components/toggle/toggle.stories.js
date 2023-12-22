@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import ToggleDefault from './toggle_default.story.vue';
 import ToggleVariants from './toggle_variants.story.vue';
 
@@ -122,14 +122,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Toggle Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, ToggleDefault);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, ToggleVariants);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtToggle, ToggleDefault, argsData),
   args: {},
 
   parameters: {
@@ -148,7 +142,7 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtToggle, ToggleVariants, argsData),
   args: {},
 
   parameters: {

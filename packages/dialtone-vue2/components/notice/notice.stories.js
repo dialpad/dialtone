@@ -3,7 +3,7 @@ import DtNotice from './notice.vue';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
 import NoticeDefault from './notice_default.story.vue';
 
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 
 const iconsList = getIconNames();
 
@@ -117,10 +117,8 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, NoticeDefault);
-
 export const Default = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtNotice, NoticeDefault, argsData),
 
   args: {
     title: 'Base title (optional)',
@@ -129,7 +127,7 @@ export const Default = {
 };
 
 export const Error = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtNotice, NoticeDefault, argsData),
 
   args: {
     ...Default.args,
@@ -139,7 +137,7 @@ export const Error = {
 };
 
 export const Info = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtNotice, NoticeDefault, argsData),
 
   args: {
     ...Default.args,
@@ -149,7 +147,7 @@ export const Info = {
 };
 
 export const Success = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtNotice, NoticeDefault, argsData),
 
   args: {
     ...Default.args,
@@ -159,7 +157,7 @@ export const Success = {
 };
 
 export const Warning = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtNotice, NoticeDefault, argsData),
 
   args: {
     ...Default.args,
@@ -169,7 +167,7 @@ export const Warning = {
 };
 
 export const Important = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtNotice, NoticeDefault, argsData),
 
   args: {
     ...Default.args,

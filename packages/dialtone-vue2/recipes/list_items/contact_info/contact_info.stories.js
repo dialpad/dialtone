@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtRecipeContactInfo from './contact_info.vue';
 
 import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story.vue';
@@ -129,20 +129,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeContactInfoDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeContactInfoVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeContactInfo, DtRecipeContactInfoDefaultTemplate, argsData),
 
   args: {
     avatarSrc: avatarImage,
@@ -204,7 +192,7 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeContactInfo, DtRecipeContactInfoVariantsTemplate, argsData),
 
   args: {
     avatarFullName: 'Natalie Woods',

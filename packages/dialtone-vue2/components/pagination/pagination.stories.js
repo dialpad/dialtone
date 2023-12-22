@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtPagination from './pagination.vue';
 
 import DtPaginationDefaultTemplate from './pagination_default.story.vue';
@@ -73,14 +73,9 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtPaginationDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtPaginationVariantsTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtPagination, DtPaginationDefaultTemplate, argsData),
+
   args: {},
 
   parameters: {
@@ -103,7 +98,8 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtPagination, DtPaginationVariantsTemplate, argsData),
+
   args: {},
 
   parameters: {

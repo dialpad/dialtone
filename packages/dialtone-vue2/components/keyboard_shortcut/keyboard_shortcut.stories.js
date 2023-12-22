@@ -1,5 +1,5 @@
 import { SHORTCUTS_ALIASES_LIST } from './keyboard_shortcut_constants';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtKeyboardShortcut from './keyboard_shortcut.vue';
 
 import DtKeyboardShortcutDefaultTemplate from './keyboard_shortcut_default.story.vue';
@@ -32,19 +32,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtKeyboardShortcutDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtKeyboardShortcutVariantsTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtKeyboardShortcut, DtKeyboardShortcutDefaultTemplate, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtKeyboardShortcut, DtKeyboardShortcutVariantsTemplate, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

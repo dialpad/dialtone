@@ -1,7 +1,7 @@
 import DtBanner from './banner.vue';
+import { createRenderConfig } from '@/common/storybook_utils';
 
 import BannerDefault from './banner_default.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { argsData as noticeArgsData, argTypesData as noticeArgTypesData } from '../notice/notice.stories.js';
 
 import backgroundImage from '@/common/assets/dialpad-gradient.png';
@@ -48,10 +48,8 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, BannerDefault);
-
 export const Default = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtBanner, BannerDefault, argsData),
 
   args: {
     title: 'Optional title',
@@ -69,37 +67,37 @@ export const Default = {
 };
 
 export const Error = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtBanner, BannerDefault, argsData),
   args: { ...Default.args, kind: 'error' },
   parameters: Default.parameters,
 };
 
 export const Info = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtBanner, BannerDefault, argsData),
   args: { ...Default.args, kind: 'info' },
   parameters: Default.parameters,
 };
 
 export const Success = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtBanner, BannerDefault, argsData),
   args: { ...Default.args, kind: 'success' },
   parameters: Default.parameters,
 };
 
 export const Warning = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtBanner, BannerDefault, argsData),
   args: { ...Default.args, kind: 'warning' },
   parameters: Default.parameters,
 };
 
 export const Pinned = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtBanner, BannerDefault, argsData),
   args: { ...Default.args, pinned: true },
   parameters: Default.parameters,
 };
 
 export const CustomBackground = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtBanner, BannerDefault, argsData),
 
   args: {
     ...Default.args,

@@ -6,7 +6,7 @@ import { Meta, Subtitle } from '@storybook/blocks';
 
 ```jsx
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtMyComponent from './my_component.vue';
 import MyComponentMdx from './my_component.mdx';
 import MyComponentDefaultTemplate from './my_component_default.story.vue';
@@ -104,22 +104,14 @@ export default {
   },
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  MyComponentDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  MyComponentVariantsTemplate,
-);
-
 // Stories
-export const Default = DefaultTemplate.bind({});
+export const Default = {
+  render: (argsData) => createRenderConfig(DtMyComponent, MyComponentDefaultTemplate, argsData),
+};
 Default.args = {};
 
-export const Variants = VariantsTemplate.bind({});
+export const Variants = VariantsTemplate.bind({
+  render: (argsData) => createRenderConfig(DtMyComponent, MyComponentVariantsTemplate, argsData),
+});
 Variants.args = {};
 ```

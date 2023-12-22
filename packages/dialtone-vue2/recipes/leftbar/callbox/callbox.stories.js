@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeCallbox from './callbox.vue';
 import DtRecipeCallboxDefaultTemplate from './callbox_default.story.vue';
 import DtRecipeCallboxVariantsTemplate from './callbox_variants.story.vue';
@@ -35,20 +35,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallboxDefaultTemplate,
-);
-
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallboxVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeCallbox, DtRecipeCallboxDefaultTemplate, argsData),
   args: {
     video: 'Video slot',
     badge: 'Badge slot',
@@ -67,7 +55,7 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeCallbox, DtRecipeCallboxVariantsTemplate, argsData),
 
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

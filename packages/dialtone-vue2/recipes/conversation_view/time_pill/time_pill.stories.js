@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeTimePill from './time_pill.vue';
 
 import DtRecipeTimePillDefaultTemplate from './time_pill_default.story.vue';
@@ -37,12 +37,8 @@ export default {
 
 const today = new Date('1999-03-28');
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeTimePillDefaultTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeTimePill, DtRecipeTimePillDefaultTemplate, argsData),
 
   args: {
     dateTime: today.toISOString().split('T')[0],

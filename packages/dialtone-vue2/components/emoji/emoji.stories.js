@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 import DtEmoji from './emoji.vue';
 
@@ -33,25 +33,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtEmoji, DtEmojiDefaultTemplate, argsData),
   args: {},
 };
 
 export const CustomEmoji = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtEmoji, DtEmojiDefaultTemplate, argsData),
 
   args: {
     code: ':shipit:',
@@ -59,7 +47,7 @@ export const CustomEmoji = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtEmoji, DtEmojiVariantsTemplate, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

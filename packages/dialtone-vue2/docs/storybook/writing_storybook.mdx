@@ -247,9 +247,9 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, NoticeDefault);
-
-export const Default = Template.bind({});
+export const Default = {
+  render: (argsData) => createRenderConfig(DtNotice, NoticeDefault, argsData),
+};
 Default.args = {
   title: 'Notice title',
   default: 'Main content of the notice goes here.',

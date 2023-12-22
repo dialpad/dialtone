@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
 
 import DtBreadcrumbItemDefaultTemplate from './breadcrumb_item_default.story.vue';
@@ -22,12 +22,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtBreadcrumbItemDefaultTemplate);
-
 export const BreadcrumbItem = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtBreadcrumbItem, DtBreadcrumbItemDefaultTemplate, argsData),
   args: {},
   parameters: {
     a11y: {
