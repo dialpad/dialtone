@@ -1,4 +1,4 @@
-import { getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtAvatar from './avatar.vue';
 import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES, AVATAR_COLORS } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
@@ -109,48 +109,24 @@ export default {
 };
 
 // Templates
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtAvatarDefaultTemplate);
+
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtAvatarVariantsTemplate);
+
+// Stories
 export const Default = {
-  render (argsData) {
-    return ({
-      components: { DtAvatar: DtAvatarDefaultTemplate },
-      setup () {
-        return { argsData };
-      },
-      template: `<DtAvatar
-          :onClick="argsData.onClick"
-          :size="argsData.size"
-          :presence="argsData.presence"
-          :fullName="argsData.fullName"
-          :imageAlt="argsData.imageAlt"
-          :imageSrc="argsData.imageSrc"
-          :seed="argsData.seed"
-          :iconName="argsData.iconName"
-          :iconSize="argsData.iconSize"
-      ></DtAvatar>`,
-    });
-  },
+  render: DefaultTemplate,
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex"><story /></div>`,
+    }),
+  ],
 };
 
 export const Variants = {
-  render (argsData) {
-    return ({
-      components: { DtAvatar: DtAvatarVariantsTemplate },
-      setup () {
-        return { argsData };
-      },
-      template: `<DtAvatar
-          :onClick="argsData.onClick"
-          :size="argsData.size"
-          :presence="argsData.presence"
-          :fullName="argsData.fullName"
-          :imageAlt="argsData.imageAlt"
-          :imageSrc="argsData.imageSrc"
-          :seed="argsData.seed"
-          :iconName="argsData.iconName"
-          :iconSize="argsData.iconSize"
-      ></DtAvatar>`,
-    });
-  },
+  render: VariantsTemplate,
   parameters: {
     percy: {
       args: {
