@@ -1,14 +1,14 @@
-# Dialtone
+# Dialtone CSS
 
-This is the home for Dialtone, Dialpad's design system. It includes the resources needed to create consistent,
+This is the home for Dialtone CSS, Dialpad's design system. It includes the resources needed to create consistent,
 predictable interfaces that conform to Dialpad’s design principles, language, styles, and best practices.
 
-## Install Dialtone
+## Installation
 
 ### Install it via NPM:
 
 ```shell
-npm install @dialpad/dialtone
+npm install @dialpad/dialtone-css@latest
 ```
 
 ### Import dialtone:

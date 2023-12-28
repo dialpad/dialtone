@@ -4,9 +4,10 @@ The monorepo for Dialpad's design system Dialtone.
 
 ## About this repo
 
-The @dialpad/dialtone repository is a monorepo composed of independently released Dialtone NPM packages.
+The @dialpad/dialtone repository is a monorepo composed of Dialtone NPM packages and apps.
 
-The following is a list of packages included in this monorepo. Note that libraries (packages folder) are separated from apps (apps folder):
+The following is a list of packages included in this monorepo. Note that libraries (packages folder) are separated from
+apps (apps folder):
 
 ```sh
 dialtone/
@@ -14,16 +15,20 @@ dialtone/
 |--- apps                       # Apps
   |--- dialtone-documentation   # Documentation site
 |--- packages                   # NPM packages
-  |--- dialtone                 # Dialtone CSS library
-  |--- dialtone-icons           # Dialtone SVG icons library
-  |--- dialtone-tokens          # Dialtone tokens library
+  |--- dialtone-css             # CSS library
+  |--- dialtone-vue2            # Vue component library compatible with vue@2
+  |--- dialtone-vue3            # Vue component library compatible with vue@3
+  |--- dialtone-icons           # SVG icons library
+  |--- dialtone-tokens          # Tokens library
   |--- eslint-plugin-dialtone   # Custom ESLint rules for Dialtone users
 |--- scripts                    # Shared scripts
 ```
 
 ## Quick start
 
-If you would like to contribute to Dialtone without having to do any local environment setup, you can use GitHub Codespaces. You can initialize a new Codespace by clicking the green "Code" button at the top right of the Dialtone GitHub page.
+If you would like to contribute to Dialtone without having to do any local environment setup, you can use GitHub
+Codespaces. You can initialize a new Codespace by clicking the green "Code" button at the top right of the Dialtone
+GitHub page.
 
 ![Creating a codespace](./.github/new_codespace.png)
 
@@ -32,7 +37,7 @@ Please see the [Codespaces docs](./.github/codespaces.md) for more information.
 ### Local environment setup
 
 - We use [Nx](https://nx.dev/) as build system for improved speed and easier monorepo administration.
-nx is installed as a dev dependency in the root of the project.
+  nx is installed as a dev dependency in the root of the project.
 - We use [pnpm](https://pnpm.io) for managing workspaces
 
 If you do not have pnpm installed, you can install it with:
@@ -109,7 +114,79 @@ pnpm nx build dialtone-documentation
 ### Releasing
 
 ```bash
-pnpm run release:all
+pnpm run release:affected
 ```
 
 This will automatically release all packages that need to be released.
+
+## Installation
+
+### Install it via NPM:
+
+```shell
+npm install @dialpad/dialtone@next
+```
+
+### Import packages:
+
+#### Dialtone CSS
+
+- LESS
+
+```less
+@import "@dialpad/dialtone/css";
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/css";
+```
+
+#### Dialtone eslint-plugin
+
+```js
+import dialtone from "@dialpad/dialtone/eslint-plugin"
+```
+
+#### Dialtone icons
+
+Dialtone icons doesn't have a default export, so you need to access
+the files directly under the dist/ folder as following:
+
+- Importing icons:
+
+```js
+import IconArrowUp from '@dialpad/dialtone/dist/icons/svg/arrow-up.svg';
+```
+
+- Importing json files
+
+```js
+import keywords from '@dialpad/dialtone/dist/icons/keywords.json';
+import iconsList from '@dialpad/dialtone/dist/icons/icons.json';
+```
+
+#### Dialtone Vue
+
+- Vue 2
+
+```js
+import * from "@dialpad/dialtone/vue2"
+```
+
+- Vue 3
+
+```js
+import * from "@dialpad/dialtone/vue3"
+```
+
+#### Dialtone Tokens
+
+Dialtone tokens doesn't have a default export, so you need to access
+the files directly under the dist/ folder as following:
+
+```less
+import "@dialpad/dialtone/dist/tokens/css/variables-light.css" // Light tokens
+import "@dialpad/dialtone/dist/tokens/css/variables-dark.css" // Dark tokens
+```
