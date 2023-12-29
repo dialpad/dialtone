@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtImageViewer from './image_viewer.vue';
 
 import DtImageViewerDefaultTemplate from './image_viewer_default.story.vue';
@@ -139,20 +139,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtImageViewerDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtImageViewerVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtImageViewer, DtImageViewerDefaultTemplate, argsData),
 
   args: {
     imageSrc: defaultImage,
@@ -164,7 +152,7 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtImageViewer, DtImageViewerVariantsTemplate, argsData),
   args: {},
 
   parameters: {

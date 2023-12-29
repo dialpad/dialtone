@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtAvatar from './avatar.vue';
 import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES, AVATAR_COLORS } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
@@ -108,16 +108,9 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtAvatarDefaultTemplate);
-
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtAvatarVariantsTemplate);
-
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtAvatar, DtAvatarDefaultTemplate, argsData),
   decorators: [
     () => ({
       template: `<div class="d-d-flex"><story /></div>`,
@@ -126,7 +119,7 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtAvatar, DtAvatarVariantsTemplate, argsData),
   parameters: {
     percy: {
       args: {

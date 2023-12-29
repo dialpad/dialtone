@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtListItem from './list_item.vue';
 
 import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './list_item_constants';
@@ -152,14 +152,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtListItemDefaultTemplate);
-const CustomTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtListItemCustomTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtListItem, DtListItemDefaultTemplate, argsData),
 
   args: {
     left: 'globe-2',
@@ -172,6 +166,6 @@ export const Default = {
 };
 
 export const Custom = {
-  render: CustomTemplate,
+  render: (argsData) => createRenderConfig(DtListItem, DtListItemCustomTemplate, argsData),
   args: {},
 };

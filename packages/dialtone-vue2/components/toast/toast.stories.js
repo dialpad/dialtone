@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtToast from './toast.vue';
 
 import DtToastDefaultTemplate from './toast_default.story.vue';
@@ -137,9 +137,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtToastDefaultTemplate);
+const DefaultTemplate = (argsData) => createRenderConfig(DtToast, DtToastDefaultTemplate, argsData);
 
 export const Default = {
   render: DefaultTemplate,

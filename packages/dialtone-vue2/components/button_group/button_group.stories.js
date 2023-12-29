@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtButtonGroup from './button_group.vue';
 
 import DtButtonGroupDefaultTemplate from './button_group_default.story.vue';
@@ -35,14 +35,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtButtonGroupDefaultTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtButtonGroup, DtButtonGroupDefaultTemplate, argsData),
   args: {},
 };

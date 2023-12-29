@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtCard from './card.vue';
 
 import DtCardDefaultTemplate from './card_default.story.vue';
@@ -62,15 +62,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCardDefaultTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCard, DtCardDefaultTemplate, argsData),
   args: {},
 
   parameters: {
@@ -90,7 +83,7 @@ export const Default = {
 };
 
 export const WithHeader = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCard, DtCardDefaultTemplate, argsData),
 
   args: {
     showHeader: true,
@@ -99,7 +92,7 @@ export const WithHeader = {
 };
 
 export const WithFooter = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCard, DtCardDefaultTemplate, argsData),
 
   args: {
     showFooter: true,
@@ -108,7 +101,7 @@ export const WithFooter = {
 };
 
 export const WithHeaderAndFooter = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCard, DtCardDefaultTemplate, argsData),
 
   args: {
     showHeader: true,
@@ -118,7 +111,7 @@ export const WithHeaderAndFooter = {
 };
 
 export const WithScrollableContent = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCard, DtCardDefaultTemplate, argsData),
 
   args: {
     maxHeight: '50px',

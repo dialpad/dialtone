@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtTooltip from './tooltip.vue';
 import DtTooltipFlipTemplate from './tooltip_flip.story.vue';
 import DtTooltipDefault from './tooltip_default.story.vue';
@@ -120,23 +120,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const TooltipFlipTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtTooltipFlipTemplate);
-const TooltipDefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtTooltipDefault);
-const TooltipVariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
-const TooltipChangeOnClick = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtTooltipChangeOnClick);
-
 export const Default = {
-  render: TooltipDefaultTemplate,
+  render: (argsData) => createRenderConfig(DtTooltip, DtTooltipDefault, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: TooltipVariantsTemplate,
+  render: (argsData) => createRenderConfig(DtTooltip, DtTooltipVariantsTemplate, argsData),
   args: {},
   parameters: {
     options: { showPanel: false },
@@ -150,8 +140,7 @@ export const Variants = {
 };
 
 export const Flip = {
-  render: TooltipFlipTemplate,
-
+  render: (argsData) => createRenderConfig(DtTooltip, DtTooltipFlipTemplate, argsData),
   args: {
     default: 'Scroll down to see how the tooltip changes based on the available space.',
   },
@@ -163,7 +152,7 @@ export const Flip = {
 };
 
 export const ChangeOnClick = {
-  render: TooltipChangeOnClick,
+  render: (argsData) => createRenderConfig(DtTooltip, DtTooltipChangeOnClick, argsData),
   args: {
     anchor: 'Click to see the tooltip content change',
     sticky: 'popper',

@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtBadge from './badge.vue';
 import DtBadgeDefaultTemplate from './badge_default.story.vue';
 import DtBadgeVariantsTemplate from './badge_variants.story.vue';
@@ -87,16 +87,8 @@ export default {
   argTypes: argTypesData,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtBadgeDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtBadgeVariantsTemplate);
-const ExamplesTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtBadgeExamplesTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtBadge, DtBadgeDefaultTemplate, argsData),
 
   args: {
     default: 'Badge',
@@ -104,8 +96,7 @@ export const Default = {
 };
 
 export const Count = {
-  render: DefaultTemplate,
-
+  render: (argsData) => createRenderConfig(DtBadge, DtBadgeDefaultTemplate, argsData),
   args: {
     default: '1',
     kind: 'count',
@@ -113,13 +104,13 @@ export const Count = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtBadge, DtBadgeVariantsTemplate, argsData),
   parameters: { options: { showPanel: false }, controls: { disable: true } },
   args: {},
 };
 
 export const Examples = {
-  render: ExamplesTemplate,
+  render: (argsData) => createRenderConfig(DtBadge, DtBadgeExamplesTemplate, argsData),
   parameters: { options: { showPanel: false }, controls: { disable: true } },
   args: {},
 };

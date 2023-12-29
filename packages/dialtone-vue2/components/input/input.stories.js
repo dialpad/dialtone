@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtInput from './input.vue';
 import { INPUT_SIZES, INPUT_TYPES } from './input_constants';
 
@@ -268,9 +268,7 @@ export default {
 };
 
 export const Default = {
-  render: (args, { argTypes }) => {
-    return createTemplateFromVueFile(args, argTypes, InputDefault);
-  },
+  render: (argsData) => createRenderConfig(DtInput, InputDefault, argsData),
 };
 
 export const WithDescription = {

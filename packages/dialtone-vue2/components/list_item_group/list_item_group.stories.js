@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtListItemGroup from './list_item_group.vue';
 
 import DtListItemGroupDefaultTemplate from './list_item_group_default.story.vue';
@@ -38,11 +38,7 @@ export default {
   parameters: {},
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtListItemGroupDefaultTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtListItemGroup, DtListItemGroupDefaultTemplate, argsData),
   args: {},
 };

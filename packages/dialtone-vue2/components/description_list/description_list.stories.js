@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { DT_STACK_GAP } from '@/components/stack/stack_constants';
 import DtDescriptionList from './description_list.vue';
 import DtDescriptionListDefaultTemplate from './description_list_default.story.vue';
@@ -97,16 +97,9 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDescriptionListDefaultTemplate,
-);
-
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtDescriptionList, DtDescriptionListDefaultTemplate, argsData),
   args: {},
 };
 

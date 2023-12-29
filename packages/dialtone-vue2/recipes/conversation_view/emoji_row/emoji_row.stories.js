@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeEmojiRow from './emoji_row.vue';
 import DtRecipeEmojiRowDefaultTemplate from './emoji_row_default.story.vue';
 
@@ -57,16 +57,9 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeEmojiRowDefaultTemplate,
-);
-
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeEmojiRow, DtRecipeEmojiRowDefaultTemplate, argsData),
 
   args: {
     reactions: [

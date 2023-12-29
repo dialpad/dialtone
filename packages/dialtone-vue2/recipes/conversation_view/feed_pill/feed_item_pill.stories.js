@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import DtRecipeFeedItemPillDefaultTemplate from './feed_item_pill_default.story.vue';
 import DtRecipeFeedItemPillVariantsTemplate from './feed_item_pill_variants.story.vue';
@@ -56,30 +56,16 @@ export default {
   argTypes,
   excludeStories: /.*Data$/,
 };
-
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeFeedItemPillDefaultTemplate,
-);
-
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeFeedItemPillVariantsTemplate,
-);
-
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeFeedItemPill, DtRecipeFeedItemPillDefaultTemplate, argsData),
   parameters: {
     a11y: { disable: true },
   },
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeFeedItemPill, DtRecipeFeedItemPillVariantsTemplate, argsData),
   parameters: {
     options: { showPanel: false },
     a11y: { disable: true },

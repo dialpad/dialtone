@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 
 import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
@@ -132,20 +132,12 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
 };
-
-// Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeComboboxMultiSelectDefaultTemplate,
-);
-
 export const Default = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtRecipeComboboxMultiSelect, DtRecipeComboboxMultiSelectDefaultTemplate, argsData),
 };
 
 export const WithMaxSelectValidation = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtRecipeComboboxMultiSelect, DtRecipeComboboxMultiSelectDefaultTemplate, argsData),
 
   args: {
     description: 'Select up to 2 options.',
