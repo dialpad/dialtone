@@ -308,7 +308,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> 2nd header without being bold, use it to generate hierarchy under a header or title
     </td>
   </tr>
   <tr>
@@ -376,7 +376,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text<br>- Cards<br>
+    <td class="d-pr0 d-fs-100"> This is the base body style you shuold use it always you have a doubt
     </td>
   </tr>
   <tr>
@@ -397,7 +397,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> If the space to type is too tight, use this variant
     </td>
   </tr>
   <tr>
@@ -420,7 +420,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> Use it to generate a smaller hierarchy of the base text if needed
     </td>
   </tr>
   <tr>
@@ -443,7 +443,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> Smallest text in tightest space, use this
     </td>
   </tr>
   <tr>
@@ -467,7 +467,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text<br>- Cards<br>
+    <td class="d-pr0 d-fs-100">For every label without contrains
     </td>
   </tr>
   <tr>
@@ -488,7 +488,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> Use it if the label container is small or need to generate a smaller label
     </td>
   </tr>
   <tr>
@@ -509,7 +509,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> Use it in reduced spaces
     </td>
   </tr>
   <tr>
@@ -530,7 +530,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">-Text over titles
+    <td class="d-pr0 d-fs-100"> If the boldness of the text isn't needed
     </td>
   </tr>
   <tr>
@@ -551,7 +551,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text<br>- Cards<br>
+    <td class="d-pr0 d-fs-100"> same as before but without bold
     </td>
   </tr>
   <tr>
@@ -572,7 +572,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> for the smallest and tightnest spaces.
     </td>
   </tr>
   <tr>
@@ -593,7 +593,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> The smallest label size, without the bold variable
     </td>
   </tr>
   <tr>
@@ -616,7 +616,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">-Text
+    <td class="d-pr0 d-fs-100">Same as before, but compacted
     </td>
   </tr>
   <tr>
@@ -642,7 +642,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> Use this style for a base helper
     </td>
   </tr>
   <tr>
@@ -665,7 +665,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> If the text is too long or the space is too tight, use this one
     </td>
   </tr>
   <tr>
@@ -691,7 +691,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> Use for base code typography
     </td>
   </tr>
   <tr>
@@ -714,7 +714,7 @@ Our styles and variations are:
       <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg aria-hidden="true" role="img" data-name="Copy" class="d-icon d-icon--copy d-icon--size-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" id="dt9" data-qa="dt-icon"><g clip-path="url(#dt-icon2608328470a)"><path fill="currentColor" fill-rule="evenodd" d="M2 1.5a.5.5 0 0 0-.5.5v4.5A.5.5 0 0 0 2 7h.5a.5.5 0 0 1 0 1H2A1.5 1.5 0 0 1 .5 6.5V2A1.5 1.5 0 0 1 2 .5h4.5A1.5 1.5 0 0 1 8 2v.5a.5.5 0 0 1-1 0V2a.5.5 0 0 0-.5-.5H2ZM5.5 5a.5.5 0 0 0-.5.5V10a.5.5 0 0 0 .5.5H10a.5.5 0 0 0 .5-.5V5.5A.5.5 0 0 0 10 5H5.5ZM4 5.5A1.5 1.5 0 0 1 5.5 4H10a1.5 1.5 0 0 1 1.5 1.5V10a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 10V5.5Z" clip-rule="evenodd"></path></g><defs><clipPath id="dt-icon2608328470a"><path fill="#fff" d="M0 0h12v12H0z"></path></clipPath></defs></svg></span><!----></button></span></div>
     </td>
-    <td class="d-pr0 d-fs-100">- Text
+    <td class="d-pr0 d-fs-100"> If the space is reduced, use this style
     </td>
   </tr>
   </tbody>
