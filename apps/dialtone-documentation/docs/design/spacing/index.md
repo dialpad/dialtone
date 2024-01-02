@@ -17,14 +17,14 @@ When setting the scale of an element, use [Size](/design/sizing/) units.
 When adding space between elements, both vertically and horizontally, we can use either `space-between` or `gap` to define the space that separates each element. The value is set as a variable in Figma and as a token in code.
 
  <dt-stack direction="column" gap="500">
-  <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=915-8431&viewport=398%2C188%2C0.69&t=6vK8RL1nGPsb99Nc-8&scaling=min-zoom&starting-point-node-id=915%3A8431&hotspot-hints=0&hide-ui=1"></iframe>
+  <iframe style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15958&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15958&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
 <p class="d-fw-bold">Vertical stacking</p>
 <p class="d-body-base d-fc-tertiary">Set the space-between/gap groups vertically.</p>
 </div>
   </dt-stack>
   <dt-stack direction="column" gap="500">
-  <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=967-20985&viewport=506%2C417%2C0.64&t=JQtYzRgn0vnxMb00-8&scaling=min-zoom&starting-point-node-id=967%3A20985&hotspot-hints=0&hide-ui=1"></iframe>
+  <iframe style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15997&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15997&hotspot-hints=0&hide-ui=1"></iframe>
   <div>
   <p class="d-fw-bold">Horizontal stacking</p>
   <p class="d-body-base d-fc-tertiary">Set the space-between/gap groups horizontally.</p>
@@ -44,7 +44,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 </div>
 <dt-stack class="d-gc2" direction="column" gap="500">
 
- <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=1296-18759&viewport=363%2C11%2C0.59&t=Mz4eVpwafboXN0Vl-8&scaling=min-zoom&starting-point-node-id=1296%3A18759&hotspot-hints=0&hide-ui=1"></iframe>
+ <iframe style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16168&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16168&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
 <p class="d-body-base d-fc-tertiary">Padding can be measured vertically and horizontally.</p>
 </div>
@@ -59,11 +59,11 @@ Avoid using `margin`, which adds space outside the element and can affect the la
   <div>
 <dt-stack direction="column" gap="400">
 <p>Group and adjust the distance between elements to guide users understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.</p>
-<p class="d-body-base d-fc-tertiary">Consistent and intentional spacing decisions across pages create a predictable layout, reducing cognitive load and allowing users to focus on the content rather than the layout.</p>
+<p class="d-body-base">Consistent and intentional spacing decisions across pages create a predictable layout, reducing cognitive load and allowing users to focus on the content rather than the layout.</p>
     </dt-stack>
   </div>
   <dt-stack class="d-gc2" direction="column" gap="500">
-    <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=1296-22361&viewport=363%2C11%2C0.59&t=Mz4eVpwafboXN0Vl-8&scaling=min-zoom&starting-point-node-id=1296%3A22361&hotspot-hints=0&hide-ui=1"></iframe>
+    <iframe style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16175&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16175&hotspot-hints=0&hide-ui=1"></iframe>
     <p class="d-body-base d-fc-tertiary">
     <strong>Proximity groups</strong> are formed by placing elements close together. <strong>Delimited groups,</strong> on the other hand, are defined by clear visual boundaries, such as borders.
     </p>
@@ -80,12 +80,12 @@ Avoid using `margin`, which adds space outside the element and can affect the la
       </p>
       </div>
       <div>
-        <p class="d-body-base d-fc-tertiary">The empty areas around elements provide visual breathing room, enhancing readability and contrast.</p>
+        <p class="d-body-base">The empty areas around elements provide visual breathing room, enhancing readability and contrast.</p>
       </div>
     </dt-stack>
   </div>
   <div class="d-gc2">
-    <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FKun0him7tdf4i7oR9wjnH9/Dialtone-Web?page-id=915%3A8033&type=design&node-id=1348-89968&viewport=566%2C-51%2C0.52&t=wUB7MrK2Vd0ojWxj-8&scaling=min-zoom&starting-point-node-id=1348%3A89968&hotspot-hints=0&hide-ui=1"></iframe>
+    <iframe style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16225&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16225&hotspot-hints=0&hide-ui=1"></iframe>
     </div>
 </div>
 
