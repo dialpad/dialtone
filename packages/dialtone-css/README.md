@@ -1,7 +1,7 @@
 # Dialtone CSS
 
-This is the home for Dialtone CSS, Dialpad's design system. It includes the resources needed to create consistent,
-predictable interfaces that conform to Dialpad’s design principles, language, styles, and best practices.
+This is the library for Dialtone's CSS. Any classes or styles used within Dialtone should
+be stored here and documented on our site under `apps/dialtone-documentation`.
 
 ## Installation
 

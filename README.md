@@ -119,7 +119,7 @@ pnpm run release:affected
 
 This will automatically release all packages that need to be released.
 
-## Installation
+## Usage
 
 ### Install it via NPM:
 
@@ -131,9 +131,9 @@ npm install @dialpad/dialtone@next
 
 #### Dialtone CSS
 
-- LESS
+- CSS
 
-```less
+```css
 @import "@dialpad/dialtone/css";
 ```
 
@@ -151,8 +151,9 @@ import dialtone from "@dialpad/dialtone/eslint-plugin"
 
 #### Dialtone icons
 
-Dialtone icons doesn't have a default export, so you need to access
-the files directly under the dist/ folder as following:
+⚠️ *You should avoid importing the icons directly*, please use `DtIcon` vue component instead. ⚠️
+
+In case you cannot use vue components, import the files directly under the `dist/` folder as following:
 
 - Importing icons:
 
@@ -172,13 +173,13 @@ import iconsList from '@dialpad/dialtone/dist/icons/icons.json';
 - Vue 2
 
 ```js
-import * from "@dialpad/dialtone/vue2"
+import { DtButton } from "@dialpad/dialtone/vue2"
 ```
 
 - Vue 3
 
 ```js
-import * from "@dialpad/dialtone/vue3"
+import { DtButton } from "@dialpad/dialtone/vue3"
 ```
 
 #### Dialtone Tokens
@@ -186,7 +187,7 @@ import * from "@dialpad/dialtone/vue3"
 Dialtone tokens doesn't have a default export, so you need to access
 the files directly under the dist/ folder as following:
 
-```less
-import "@dialpad/dialtone/dist/tokens/css/variables-light.css" // Light tokens
-import "@dialpad/dialtone/dist/tokens/css/variables-dark.css" // Dark tokens
+```css
+@import "@dialpad/dialtone/dist/tokens/css/variables-light.css" // Light tokens
+@import "@dialpad/dialtone/dist/tokens/css/variables-dark.css" // Dark tokens
 ```
