@@ -24,7 +24,6 @@ Some components that have fixed width/height: Avatar, Icon and Toggle.
 </p>
 </dt-stack>
 
-
 <dt-stack class="d-gc2" direction="column" gap="500">
 <iframe style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25635&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25635&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
@@ -50,8 +49,6 @@ The size of some components is determined by their content. Most expand vertical
 <p class="d-body-base d-fc-tertiary">This button has a fixed `height`, a `min-width` and grows horizontally depending on its content.</p>
 </dt-stack>
 </div>
-
-
 
 ### Responsiveness
 
