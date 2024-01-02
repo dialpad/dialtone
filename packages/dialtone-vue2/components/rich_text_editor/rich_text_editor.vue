@@ -7,10 +7,13 @@
 
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-2';
+import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
+import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
+import Emoji from './extensions/emoji';
 import Link from './extensions/link';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
@@ -97,6 +100,14 @@ export default {
     },
 
     /**
+     * Placeholder text
+     */
+    placeholder: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Enables the Link extension and optionally passes configurations to it
      */
     link: {
@@ -146,20 +157,45 @@ export default {
   data () {
     return {
       editor: null,
+      popoverOpened: false,
     };
   },
 
   computed: {
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text];
+      const extensions = [CodeBlock, Document, Paragraph, Text];
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
-      // Enable placeholder text
+
+      // Enable placeholderText
       extensions.push(
         Placeholder.configure({ placeholder: this.placeholder }),
       );
+
+      // make sure that this is defined before any other extensions
+      // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
+      extensions.push(
+        HardBreak.extend({
+          addKeyboardShortcuts () {
+            return {
+              Enter: () => true,
+              'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
+                () => commands.newlineInCode(),
+                () => commands.createParagraphNear(),
+                () => commands.liftEmptyBlock(),
+                () => commands.splitBlock(),
+              ]),
+            };
+          },
+        }),
+      );
+
+      // Emoji has some interactions with Enter key
+      // hence this should be done last otherwise the enter wont add a emoji.
+      extensions.push(Emoji);
+
       return extensions;
     },
 
@@ -292,6 +328,10 @@ export default {
 
     updateEditorAttributes (attributes) {
       this.editor.setOptions({ editorProps: { attributes } });
+    },
+
+    focusEditor () {
+      this.editor.commands.focus();
     },
   },
 };
