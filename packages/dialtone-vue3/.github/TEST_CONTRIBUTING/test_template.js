@@ -8,8 +8,8 @@ import DtTestComponent from './test_component.vue';
  * @notation MOCK_[NAME]
  */
 const MOCK_EXPECTED_VALUE = true;
-const MOCK_FIELD_NAME = 'mockFieldName';
-const MOCK_FUNCTION = vi.fn();
+// const MOCK_FIELD_NAME = 'mockFieldName';
+// const MOCK_FUNCTION = vi.fn();
 
 /**
  * Environment Constants variables
