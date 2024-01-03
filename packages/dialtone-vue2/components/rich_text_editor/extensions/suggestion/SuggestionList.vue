@@ -68,10 +68,6 @@ export default {
     },
   },
 
-  mounted () {
-    console.log('ITEMS: ', this.items);
-  },
-
   methods: {
     onKeyDown ({ event }) {
       if (event.key === 'ArrowUp') {

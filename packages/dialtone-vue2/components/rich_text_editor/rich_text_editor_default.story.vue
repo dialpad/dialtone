@@ -8,7 +8,6 @@
     :auto-focus="$attrs.autoFocus"
     :placeholder="$attrs.placeholder"
     :link="$attrs.link"
-    :placeholder="$attrs.placeholder"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
     @focus="$attrs.onFocus"
