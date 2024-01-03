@@ -13,14 +13,14 @@
 <!--- Tick or place an `x` for the type of change. Should match the type in the commit message / PR title
 in https://github.com/dialpad/dialtone/blob/staging/.github/COMMIT_CONVENTION.md -->
 
-### These types will increment the version number on release
+These types will increment the version number on release:
 
 - [ ] Fix
 - [ ] Feature
 - [ ] Performance Improvement
 - [ ] Refactor
 
-### These types will not increment the version number, but will still deploy to documentation site on release
+These types will not increment the version number, but will still deploy to documentation site on release:
 
 - [ ] Documentation
 - [ ] Build system
@@ -44,28 +44,28 @@ in https://github.com/dialpad/dialtone/blob/staging/.github/COMMIT_CONVENTION.md
 <!--- Tick or place an `x` in all of the checkboxes that apply -->
 <!--- Remove checkboxes that do not apply -->
 
-### For all PRs
+For all PRs:
 
 - [ ] I have ensured no private Dialpad links or info are in the code or pull request description (Dialtone is a public repo!).
 - [ ] I have reviewed my changes.
 - [ ] I have added all relevant documentation.
 - [ ] I have considered the performance impact of my change.
 
-### For all Vue changes
+For all Vue changes:
 
 - [ ] I have added / updated unit tests.
 - [ ] I have made my changes in Vue 2 and Vue 3. Note: you may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script.
 - [ ] I have validated components with a screen reader.
 - [ ] I have validated components keyboard navigation.
 
-### For all CSS changes
+For all CSS changes:
 
 - [ ] I have used design tokens whenever possible.
 - [ ] I have considered how this change will behave on different screen sizes.
 - [ ] I have visually validated my change in light and dark mode.
 - [ ] I have used gap or flexbox properties for layout instead of margin whenever possible.
 
-### If new component
+If new component:
 
 <!--- There are lots of things to remember when adding a new component to the system! This is so you don't forget any of them. -->
 
