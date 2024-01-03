@@ -7,6 +7,8 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from './rich_text_editor_constants';
 
+import mentionSuggestion from './mention_suggestion';
+
 // Default Prop Values
 export const argsData = {
   value: `I’m not a standalone component, please use Message Input instead 🙏!`,
@@ -104,5 +106,13 @@ export const WithLinks = {
     link: true,
     value: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
     'IP addresses: 192.158.1.38, email addresses: noreply@dialpad.com and phone numbers: (778) 765-8813, +17787658813!',
+  },
+};
+
+export const WithMentionSuggestions = {
+  render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
+  args: {
+    value: 'The editor can also suggest mentions: @John Doe, @Jane Doe!',
+    mentionSuggestion,
   },
 };

@@ -7,7 +7,7 @@
     :output-format="$attrs.outputFormat"
     :auto-focus="$attrs.autoFocus"
     :link="$attrs.link"
-    :placeholder="$attrs.placeholder"
+    :mention-suggestion="$attrs.mentionSuggestion"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
     @focus="$attrs.onFocus"
