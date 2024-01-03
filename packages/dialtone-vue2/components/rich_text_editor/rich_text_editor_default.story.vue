@@ -6,6 +6,7 @@
     :input-class="$attrs.inputClass"
     :output-format="$attrs.outputFormat"
     :auto-focus="$attrs.autoFocus"
+    :placeholder="$attrs.placeholder"
     :link="$attrs.link"
     :mention-suggestion="$attrs.mentionSuggestion"
     :placeholder="$attrs.placeholder"

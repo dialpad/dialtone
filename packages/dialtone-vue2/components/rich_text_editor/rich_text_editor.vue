@@ -179,7 +179,8 @@ export default {
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
-      // Enable placeholder text
+
+      // Enable placeholderText
       extensions.push(
         Placeholder.configure({ placeholder: this.placeholder }),
       );
