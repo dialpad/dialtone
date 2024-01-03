@@ -1,3 +1,10 @@
+## [2.106.6](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.5...dialtone-vue2/v2.106.6) (2024-01-03)
+
+
+### Bug Fixes
+
+* vue2 storybook components and recipe ([#71](https://github.com/dialpad/dialtone/issues/71)) ([b66ad61](https://github.com/dialpad/dialtone/commit/b66ad612cfa0768712ce6427b806d432ad27b394))
+
 ## [2.106.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.4...dialtone-vue2/v2.106.5) (2023-12-21)
 
 
