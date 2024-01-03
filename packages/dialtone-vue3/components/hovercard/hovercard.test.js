@@ -1,43 +1,30 @@
 import { mount } from '@vue/test-utils';
 import DtHovercard from './hovercard.vue';
 
-/**
- * Auxiliary variables
- * These variables will be used inside tests to help readability and DRY
- * @prefix MOCK_
- * @notation MOCK_[NAME]
- */
-const MOCK_EXPECTED_VALUE = true;
-// const MOCK_FIELD_NAME = 'mockFieldName';
-// const MOCK_FUNCTION = vi.fn();
+const MOCK_DEFAULT_SLOT_MESSAGE = 'Message';
+const MOCK_HEADER_CONTENT = 'Hovercard Title';
+const MOCK_FOOTER_CONTENT = 'Hovercard Footer';
 
-/**
- * Environment Constants variables
- * Will be always present in every test
- * @prefix base
- * @notation base[NAME]
- */
-const baseProps = {};
+const baseProps = { id: 'hovercard-1' };
 const baseAttrs = {};
-const baseSlots = {};
-const baseProvide = {};
+const baseSlots = {
+  anchor: '<template #anchor="{ attrs }">' +
+                  '<button data-qa="dt-button" v-bind="attrs">Hover me</button>' +
+                '</template>',
+  content: MOCK_DEFAULT_SLOT_MESSAGE,
+  headerContent: MOCK_HEADER_CONTENT,
+  footerContent: MOCK_FOOTER_CONTENT,
+};
 
-/**
- * Environment variables
- * Will be reset after each test
- * @prefix mock
- * @notation mock[NAME]
- */
 let mockProps = {};
 let mockAttrs = {};
 let mockSlots = {};
-let mockProvide = {};
 
-describe('DtTestComponent Tests', () => {
-  /**
-   * Wrappers
-   * Will contain the component and all its necessary children
-   */
+describe('DtHovercard Tests', () => {
+  let anchor;
+  let hovercardWindow;
+  let content;
+  let button;
   let wrapper;
 
   const updateWrapper = () => {
@@ -46,72 +33,107 @@ describe('DtTestComponent Tests', () => {
       attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
       global: {
-        provide: { ...baseProvide, ...mockProvide },
+        stubs: {
+          transition: false,
+        },
       },
+      attachTo: document.body,
     });
+
+    hovercardWindow = wrapper.find('[data-qa="dt-hovercard"]');
+    anchor = wrapper.find('[data-qa="dt-hovercard-anchor"]');
+    content = wrapper.find('[data-qa="dt-popover-content"]');
+    button = wrapper.find('[data-qa="dt-button"]');
   };
 
-  /**
-   * Setup
-   * Will prepare the environment for each test
-   */
   beforeEach(() => {
+    vi.useFakeTimers();
+    vi.runAllTimers();
     updateWrapper();
   });
 
-  /**
-   * Teardown
-   * Will reset the environment after each test
-   */
   afterEach(() => {
+    vi.useRealTimers();
+    vi.clearAllTimers();
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
-    mockProvide = {};
   });
 
   describe('Presentation Tests', () => {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
-    it('Should render the component', () => {
-      expect(wrapper).toBeDefined();
-    });
-  });
+    describe('When mouseenter on anchor', () => {
+      beforeEach(async () => {
+        await anchor.trigger('mouseenter');
+      });
 
-  describe('Accessibility Tests', () => {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
-    it('Bypass empty test suite', () => {
-      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+      it('should render the component', () => {
+        expect(wrapper.exists()).toBe(true);
+      });
+
+      it('should render the hovercard content', () => {
+        content = wrapper.find('[data-qa="dt-hovercard-content"]');
+
+        expect(content.text()).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
+      });
+
+      it('should render the anchor slot', () => {
+        expect(anchor.text()).toBe('Hover me');
+      });
     });
   });
 
   describe('Interactivity Tests', () => {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
-    it('Bypass empty test suite', () => {
-      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
-    });
-  });
+    describe('When mouse leave on anchor', () => {
+      it('hovercard is not displayed', async () => {
+        await anchor.trigger('mouseenter');
+        await anchor.trigger('mouseleave');
+        content = wrapper.find('[data-qa="dt-hovercard-content"]');
 
-  describe('Validation Tests', () => {
-    /*
-     * Test(s) to ensure that custom validators are working as expected
-     */
-    it('Bypass empty test suite', () => {
-      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+        expect(content.isVisible()).toBe(false);
+      });
     });
-  });
 
-  describe('Extendability Tests', () => {
-    /*
-     * Test(s) to ensure that the component can be correctly extended
-     */
-    it('Bypass empty test suite', () => {
-      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+    describe('When mouse enter on hovercard', () => {
+      it('should still display the hovercard', async () => {
+        await anchor.trigger('mouseenter');
+        await hovercardWindow.trigger('mouseenter');
+        content = wrapper.find('[data-qa="dt-hovercard-content"]');
+
+        expect(content.text()).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
+      });
+    });
+
+    describe('When focusin on anchor', () => {
+      it('hovercard is not displayed', async () => {
+        await anchor.trigger('focusin');
+        content = wrapper.find('[data-qa="dt-hovercard-content"]');
+
+        expect(content.isVisible()).toBe(false);
+      });
+    });
+
+    describe('Accessibility Tests', () => {
+      describe('When hovercard is open', () => {
+        beforeEach(async () => {
+          await anchor.trigger('mouseenter');
+        });
+
+        it('shows correct role', () => {
+          expect(hovercardWindow.attributes('role')).toBe('dialog');
+        });
+
+        it('aria-expanded should be set correctly on the anchor', () => {
+          expect(button.attributes('aria-expanded')).toBe('true');
+        });
+
+        it('aria-controls should be set correctly on the anchor', () => {
+          expect(button.attributes('aria-controls')).toBe('hovercard-1');
+        });
+
+        it('aria-haspopup should be set correctly on the anchor', () => {
+          expect(button.attributes('aria-haspopup')).toBe('dialog');
+        });
+      });
     });
   });
 });

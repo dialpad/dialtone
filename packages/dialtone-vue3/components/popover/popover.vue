@@ -21,7 +21,7 @@
       <div
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
-        data-qa="dt-popover-anchor"
+        :data-qa="qa ? `${qa}-anchor` : 'dt-popover-anchor'"
         :tabindex="openOnContext ? 0 : undefined"
         @click.capture="defaultToggleOpen"
         @contextmenu="onContext"
@@ -47,7 +47,7 @@
         :id="id"
         ref="content"
         :role="role"
-        data-qa="dt-popover"
+        :data-qa="qa ?? 'dt-popover'"
         :aria-hidden="`${!isOpen}`"
         :aria-labelledby="labelledBy"
         :aria-label="ariaLabel"
@@ -86,7 +86,7 @@
         </popover-header-footer>
         <div
           ref="popover__content"
-          data-qa="dt-popover-content"
+          :data-qa="qa ? `${qa}-content` : 'dt-popover-content'"
           :class="[
             'd-popover__content',
             POPOVER_PADDING_CLASSES[padding],
@@ -529,6 +529,11 @@ export default {
       validator: timer => {
         return timer === null || (timer.enter && timer.leave && Object.keys(timer).includes('current'));
       },
+    },
+
+    qa: {
+      type: String,
+      default: null,
     },
   },
 

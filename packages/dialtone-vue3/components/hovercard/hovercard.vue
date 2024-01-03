@@ -15,6 +15,7 @@
     :append-to="appendTo"
     :hovercard="true"
     :timer="timer"
+    qa="dt-hovercard"
     @opened="(e) => ($emit('opened', e))"
   >
     <template #anchor>
