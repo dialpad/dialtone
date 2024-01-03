@@ -1,3 +1,15 @@
+## [9.1.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.1.0...dialtone/v9.1.1) (2024-01-03)
+
+
+### Bug Fixes
+
+* vue2 storybook components and recipe ([#71](https://github.com/dialpad/dialtone/issues/71)) ([b66ad61](https://github.com/dialpad/dialtone/commit/b66ad612cfa0768712ce6427b806d432ad27b394))
+
+
+### Documentation
+
+* update mono-package documentation ([#73](https://github.com/dialpad/dialtone/issues/73)) ([e037c86](https://github.com/dialpad/dialtone/commit/e037c8622c414922ae6d5715b95cd4b9136dcaa1))
+
 # [9.1.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.0.3...dialtone/v9.1.0) (2023-12-21)
 
 
