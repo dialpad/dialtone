@@ -207,10 +207,6 @@ export default {
         extensions.push(MentionPlugin.configure({ suggestion: suggestionObject }));
       }
 
-      // Emoji has some interactions with Enter key
-      // hence this should be done last otherwise the enter wont add a emoji.
-      extensions.push(Emoji);
-
       return extensions;
     },
 
