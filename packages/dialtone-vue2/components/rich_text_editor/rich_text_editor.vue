@@ -13,6 +13,7 @@ import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
+import Emoji from './extensions/emoji';
 import Link from './extensions/link';
 import { MentionPlugin } from './extensions/mentions/mention';
 import {
@@ -178,7 +179,8 @@ export default {
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
-      // Enable placeholder text
+
+      // Enable placeholderText
       extensions.push(
         Placeholder.configure({ placeholder: this.placeholder }),
       );
@@ -206,6 +208,10 @@ export default {
         const suggestionObject = { ...this.mentionSuggestion, ...suggestion };
         extensions.push(MentionPlugin.configure({ suggestion: suggestionObject }));
       }
+
+      // Emoji has some interactions with Enter key
+      // hence this should be done last otherwise the enter wont add a emoji.
+      extensions.push(Emoji);
 
       return extensions;
     },

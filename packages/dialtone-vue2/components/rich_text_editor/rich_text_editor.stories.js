@@ -16,8 +16,8 @@ export const argsData = {
   inputAriaLabel: 'This is a descriptive label',
   outputFormat: 'text',
   autoFocus: false,
-  link: true,
   placeholder: 'Type here...',
+  link: true,
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
@@ -101,7 +101,7 @@ export const Default = {
 };
 
 export const WithLinks = {
-  ...Default,
+  render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
   args: {
     link: true,
     value: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
