@@ -107,6 +107,12 @@ jobs:
     if: ${{ github.ref == 'refs/heads/production' }}
     concurrency: ${{ github.workflow }}-${{ github.ref }}-android
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      issues: write
+      pull-requests: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
