@@ -12,6 +12,13 @@ on:
       - 'packages/dialtone-vue3/**'
       - 'packages/dialtone-vue2/**'
 
+env:
+  HUSKY: 0
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
