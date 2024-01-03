@@ -114,14 +114,6 @@ export default {
       type: [Boolean, Object],
       default: false,
     },
-
-    /**
-     * Placeholder text
-     */
-    placeholder: {
-      type: String,
-      default: '',
-    },
   },
 
   emits: [
