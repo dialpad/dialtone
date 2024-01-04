@@ -12,9 +12,8 @@ import * as HovercardStories from './hovercard.stories';
 
 ## Base Style
 
-The hovercard will appear upon the mouse entering the anchor.
-It will remain open as long as the mouse cursor is over either the open card or the anchor,
-and it comes into view after a delay of 300 milliseconds.
+The hovercard will appear upon the mouse entering the anchor, with a delay of 300 milliseconds.
+It will remain open as long as the mouse cursor is over either the open card or the anchor.
 
 <Canvas>
   <Story of={HovercardStories.Default} />
@@ -22,10 +21,10 @@ and it comes into view after a delay of 300 milliseconds.
 
 ## When there are many hovercards
 
-Move your mouse over the avatars to reveal the respective hovercards.
 Initially, there is a 300ms delay when numerous hovercards are present.
 However, when transitioning from one anchor to another, the delay is determined by the mouse movement time.
 This implies that the closer the anchors are, the faster the hovercard appears.
+Move the mouse over the avatars to reveal the hovercards in the example.
 
 <Canvas>
   <Story of={HovercardStories.Many} />
