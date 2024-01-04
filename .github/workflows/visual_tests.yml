@@ -43,10 +43,10 @@ jobs:
 
   prompt-for-label:
     needs: filter-actions
-    if: ( always() && (needs.filter-actions.outputs.dialtone-vue-2 == 'true' || needs.filter-actions.outputs.dialtone-vue-3 == 'true') && (github.event_name == 'pull_request' && github.ref != 'refs/heads/staging' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready')))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v6
+        if: ((needs.filter-actions.outputs.dialtone-vue-2 == 'true' || needs.filter-actions.outputs.dialtone-vue-3 == 'true') && (github.event_name == 'pull_request' && github.ref != 'refs/heads/staging' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready')))
         with:
           script: |
             throw "Please add either the visual-test-ready or no-visual-test label to this PR depending on whether you want to run visual tests or not. It is recommended to run visual tests if your PR changes any UI.";
