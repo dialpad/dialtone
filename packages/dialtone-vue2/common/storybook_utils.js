@@ -4,7 +4,7 @@ import iconNames from '@dialpad/dialtone-icons/dist/icons.json';
  * Will use a Vue SFC to render the template rather than a template string.
  * This is useful for more complex components that are hard to work with and
  * get messy when rendered via a template string. Will pass args and argTypes
- * into the component so it is able to be live edited with storybook controls addon.
+ * into the component, so it is able to be live edited with storybook controls addon.
  * @param component this will get the component name
  * @param defaultTemplate we will mount in this component
  * @param argsData storybook control args
@@ -14,10 +14,11 @@ import iconNames from '@dialpad/dialtone-icons/dist/icons.json';
 export function createRenderConfig (component, defaultTemplate, argsData) {
   return {
     components: { [component.name]: defaultTemplate },
-    setup () {
-      return { argsData };
+    props: [...Object.keys(component.props), ...Object.keys(argsData)],
+    setup (props) {
+      return { props };
     },
-    template: `<${component.name} v-bind="argsData"></${component.name}>`,
+    template: `<${component.name} v-bind="props" />`,
   };
 }
 
