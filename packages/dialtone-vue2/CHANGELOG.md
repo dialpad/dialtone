@@ -1,3 +1,16 @@
+# [2.107.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.6...dialtone-vue2/v2.107.0) (2024-01-04)
+
+
+### Documentation
+
+* update PR template for monorepo ([#82](https://github.com/dialpad/dialtone/issues/82)) ([a940afa](https://github.com/dialpad/dialtone/commit/a940afa4caea7286709067365cb25984e283e3e5))
+
+
+### Features
+
+* port contact suggestion ([#78](https://github.com/dialpad/dialtone/issues/78)) ([c1b9e3b](https://github.com/dialpad/dialtone/commit/c1b9e3bef5088a3ad8a78e9fbd524fba15d25f46))
+* port emoji suggestions ([#77](https://github.com/dialpad/dialtone/issues/77)) ([6000d7d](https://github.com/dialpad/dialtone/commit/6000d7d871b216b86c729f5512a4ab36c6657259))
+
 ## [2.106.6](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.5...dialtone-vue2/v2.106.6) (2024-01-03)
 
 
