@@ -43,7 +43,7 @@ jobs:
 
   prompt-for-label:
     needs: filter-actions
-    if: ( always() && (needs.filter-actions.outputs.dialtone-vue-2 == 'true' || needs.filter-actions.outputs.dialtone-vue-3 == 'true') && (github.event_name == 'pull_request' && github.ref != 'refs/heads/staging' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready')))
+    if: ((needs.filter-actions.outputs.dialtone-vue-2 == 'true' || needs.filter-actions.outputs.dialtone-vue-3 == 'true') && (github.event_name == 'pull_request' && github.ref != 'refs/heads/staging' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready')))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v6
