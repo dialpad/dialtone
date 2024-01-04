@@ -523,6 +523,12 @@ export default {
       default: false,
     },
 
+    /**
+     * The timer is used only when the hovercard prop is true.
+     * It defines the delays when opening several hovercards.
+     * It must have the keys: enter, leave and current.
+     * If null, the default delay of 300ms will be used.
+     */
     timer: {
       type: [Object, null],
       default: null,
@@ -531,6 +537,10 @@ export default {
       },
     },
 
+    /**
+     * A prefix for the data-qa tags in the elements inside the popover.
+     * If null, `dt-popover` will be used.
+     */
     qa: {
       type: String,
       default: null,
