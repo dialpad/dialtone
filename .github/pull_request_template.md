@@ -29,6 +29,10 @@ These types will not increment the version number, but will still deploy to docu
 - [ ] Test
 - [ ] Other (chore)
 
+## :book: Jira Ticket
+
+<!--- Enter the URL of the Jira ticket associated with this PR -->
+
 ## :book: Description
 
 <!--- Describe specifically what the changes are -->
