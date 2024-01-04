@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <div>
     <portal v-if="modal && isOpen">
@@ -18,13 +19,15 @@
       <div
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
-        data-qa="dt-popover-anchor"
+        :data-qa="qa ? `${qa}-anchor` : 'dt-popover-anchor'"
         :tabindex="openOnContext ? 0 : undefined"
         @click.capture="defaultToggleOpen"
         @contextmenu="onContext"
         @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
         @keydown.escape.capture="closePopover"
+        @mouseenter="onEnterAnchor"
+        @mouseleave="onLeaveAnchor"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -55,6 +58,8 @@
         :tabindex="contentTabindex"
         appear
         v-on="popoverListeners"
+        @mouseenter="onEnterContent"
+        @mouseleave="onLeaveContent"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -76,7 +81,7 @@
         </popover-header-footer>
         <div
           ref="popover__content"
-          data-qa="dt-popover-content"
+          :data-qa="qa ? `${qa}-content` : 'dt-popover-content'"
           :class="[
             'd-popover__content',
             POPOVER_PADDING_CLASSES[padding],
@@ -133,6 +138,7 @@ import { createTippy, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import { TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -496,6 +502,28 @@ export default {
             (appendTo instanceof HTMLElement);
       },
     },
+
+    /**
+     * Set this prop to true and popover component will support hovercard behaviour
+     * It will open on mouseenter and close on mouseleave with timer delay of 300ms
+     */
+    hovercard: {
+      type: Boolean,
+      default: false,
+    },
+
+    timer: {
+      type: [Object, null],
+      default: null,
+      validator: timer => {
+        return timer === null || (timer.enter && timer.leave && Object.keys(timer).includes('current'));
+      },
+    },
+
+    qa: {
+      type: String,
+      default: null,
+    },
   },
 
   emits: [
@@ -525,6 +553,8 @@ export default {
       isOpen: false,
       anchorEl: null,
       popoverContentEl: null,
+      inTimer: null,
+      outTimer: null,
     };
   },
 
@@ -559,6 +589,10 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
+    },
+
+    currentHovercard () {
+      return this.timer?.current;
     },
   },
 
@@ -624,6 +658,16 @@ export default {
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeEventListeners();
         this.tip.hide();
+      }
+    },
+
+    currentHovercard () {
+      if (this.hovercard && this.timer) {
+        if (this.currentHovercard === this.id) {
+          this.isOpen = true;
+        } else {
+          this.isOpen = false;
+        }
       }
     },
   },
@@ -917,6 +961,56 @@ export default {
         onShow: this.onShow,
       });
     },
+
+    //  ============================================================================
+    //  $ HOVERCARD
+    //  ----------------------------------------------------------------------------
+
+    setInTimer () {
+      this.inTimer = setTimeout(() => {
+        this.isOpen = true;
+      }, TOOLTIP_DELAY_MS);
+    },
+
+    setOutTimer () {
+      this.outTimer = setTimeout(() => {
+        this.isOpen = false;
+      }, TOOLTIP_DELAY_MS);
+    },
+
+    onEnterAnchor () {
+      if (!this.hovercard) return;
+      if (this.timer) this.timer.enter(this.id);
+      else {
+        clearTimeout(this.outTimer);
+        this.setInTimer();
+      }
+    },
+
+    onLeaveAnchor () {
+      if (!this.hovercard) return;
+      if (this.timer) this.timer.leave();
+      else {
+        clearTimeout(this.inTimer);
+        this.setOutTimer();
+      }
+    },
+
+    onEnterContent () {
+      if (!this.hovercard) return;
+      if (this.timer) this.timer.enter(this.id);
+      else clearTimeout(this.outTimer);
+    },
+
+    onLeaveContent () {
+      if (!this.hovercard) return;
+      if (this.timer) this.timer.leave();
+      else this.setOutTimer();
+    },
+
+    //  ============================================================================
+    //  $ HOVERCARD
+    //  ----------------------------------------------------------------------------
   },
 };
 </script>

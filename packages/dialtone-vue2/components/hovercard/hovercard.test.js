@@ -8,8 +8,8 @@ const MOCK_FOOTER_CONTENT = 'Hovercard Footer';
 const baseProps = { id: 'hovercard-1' };
 const baseAttrs = {};
 const baseSlots = {
-  anchor: '<template #anchor="{ attrs }">' +
-                  '<button data-qa="dt-button" v-bind="attrs">Hover me</button>' +
+  anchor: '<template #anchor="attrs">' +
+                  '<button data-qa="dt-button" v-bind="props.attrs">Hover me</button>' +
                 '</template>',
   content: MOCK_DEFAULT_SLOT_MESSAGE,
   headerContent: MOCK_HEADER_CONTENT,
@@ -29,7 +29,7 @@ describe('DtHovercard Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtHovercard, {
-      props: { ...baseProps, ...mockProps },
+      propsData: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
       global: {
@@ -77,6 +77,7 @@ describe('DtHovercard Tests', () => {
       });
 
       it('should render the anchor slot', () => {
+        console.log(wrapper.html());
         expect(anchor.text()).toBe('Hover me');
       });
     });
