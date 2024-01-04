@@ -89,7 +89,6 @@ export default {
 
 export const Default = {
   render: (argsData) => createRenderConfig(DtBadge, DtBadgeDefaultTemplate, argsData),
-
   args: {
     default: 'Badge',
   },
