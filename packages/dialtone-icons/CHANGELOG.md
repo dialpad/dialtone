@@ -1,3 +1,10 @@
+## [4.4.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.4.0...dialtone-icons/v4.4.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* update on the Video icon to have a better  visual balance ([#80](https://github.com/dialpad/dialtone/issues/80)) ([00d448f](https://github.com/dialpad/dialtone/commit/00d448f8e049adbcc83d2a8e76199f034e2c1c79))
+
 # [4.4.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.3.0...dialtone-icons/v4.4.0) (2023-12-21)
 
 

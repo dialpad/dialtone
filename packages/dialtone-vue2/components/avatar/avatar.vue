@@ -346,8 +346,22 @@ export default {
   watch: {
     fullName: {
       immediate: true,
-      handler (newName) {
-        this.formatInitials(newName);
+      handler () {
+        this.formatInitials();
+      },
+    },
+
+    size: {
+      immediate: true,
+      handler () {
+        this.formatInitials();
+      },
+    },
+
+    group: {
+      immediate: true,
+      handler () {
+        this.formatInitials();
       },
     },
 
@@ -375,8 +389,8 @@ export default {
       el.addEventListener('error', () => this._erroredImageEventHandler(el), { once: true });
     },
 
-    formatInitials (string) {
-      const initials = extractInitialsFromName(string);
+    formatInitials () {
+      const initials = extractInitialsFromName(this.fullName);
 
       if (this.validatedSize === 'xs') {
         this.formattedInitials = '';
