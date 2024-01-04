@@ -109,12 +109,9 @@ export const argTypesData = {
 export const argsData = {
   placement: 'top-start',
   fallbackPlacements: ['bottom-start'],
-  contentWidth: null,
-  sticky: false,
   offset: [0, 16],
   appendTo: 'body',
   onOpened: action('opened'),
-  visuallyHiddenCloseLabel: 'Close popover',
   transition: false,
   cardData: [{
     name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
