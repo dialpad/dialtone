@@ -2,8 +2,14 @@
 title: Icons
 status: in progress
 shortTitle: icons
-description: Glyphs with clean lines and consistent styles for clear context and easy understanding.
+description: An icon style for visually communicating commands, status, and more.
+storybook: https://vue.dialpad.design/?path=/docs/components-icon--default
+figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
+
+## Icon catalog
+
+<icon-catalog></icon-catalog>
 
 ## Usage
 
@@ -23,14 +29,14 @@ Find a list of available icons in [DT Core: Icons]([https://](https://www.figma.
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
-For detailed instructions on using the icons and full library of icons, check the [Icon component](/components/icon.html).
+For detailed instructions on using the icons, check the [Icon component](/components/icon.html).
 
 <div class="d-gc2">
 <code-well-header>
 <dt-stack direction="row" as="section" gap="600">
     <dt-icon :name="selectedIcon" :size="selectedSize" />
     <dt-select-menu label="Name" :options="iconListOptions" @change="changeIcon" />
-    <dt-select-menu label="Size" :options="iconSizeOptions" @change="changeIconSize" />
+    <dt-select-menu label="Size" :options="sizeValues" @change="changeIconSize" />
 </dt-stack>
 </code-well-header>
 
@@ -44,76 +50,25 @@ import { DtIcon } from '@dialpad/dialtone-vue';
 
 ### Choosing the right icon
 
-Some icons are linked to specific actions, like the Settings gear <dt-icon name="settings" size="200" /> or the Edit pencil <dt-icon name="edit" size="200" />. For actions without a dedicated icon, avoid reusing icons that are already associated with other actions, this helps prevent confusion and ensures clear understanding. Instead, select an existing icon from the [Icon Library](/components/icon.html) without a specific action meaning or consider [creating a new one](#crafting-an-icon) that clearly represents the intended action.
+Some icons are linked to specific actions, like the Settings gear <dt-icon name="settings" size="200" /> or the Edit pencil <dt-icon name="edit" size="200" />. For actions without a dedicated icon, avoid reusing icons that are already associated with other actions, this helps prevent confusion and ensures clear understanding. Instead, select an existing icon from the [Icon Catalog](#icon-catalog) without a specific action meaning or consider [creating a new one](#crafting-an-icon) that clearly represents the intended action.
 
 ### Sizing
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
-The icon size is defined based on the context and text size next to it. Note that sizes 600, 700, and 800 are exclusive to devices. Below are some examples:
+The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 
 <div class="d-gc2">
 <p class="d-body-small"><dt-icon name="food" size="200" /> 200 when body small</p>
 <p class="d-body-base"><dt-icon name="food" size="300" /> 300 when body base</p>
-<p class="d-headline-large"><dt-icon name="food" size="400" /> 400 when headline medium</p>
-<p class="d-headline-extra-large"><dt-icon name="food" size="500" /> 500  when headline large</p>
+<p class="d-headline-large"><dt-icon name="food" size="400" /> 400 when headline large</p>
+<p class="d-headline-extra-large"><dt-icon name="food" size="500" /> 500  when headline extra large</p>
 <p class="d-fs-300-tv"><dt-icon name="food" size="600" /> 600 when device 300</p>
 <p class="d-fs-400-tv"><dt-icon name="food" size="700" /> 700 when device 400</p>
 <!-- <p class="d-fs-500-tv"><dt-icon name="food" size="800" /> 800 when device 500</p> -->
 
 </div>
 </div>
-
-### Colors
-
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
-
-When setting the color of an icon take these into considaration:
-
-<div class="d-gc1">
-<div style="background: var(--dt-color-purple-100)" class="d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
-<dt-stack direction="row" as="section" gap="600" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
-<dt-stack direction="row" as="section" gap="300" class="d-fl1">
-<dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<p class="d-body-base">Ai Contact C...</p>
-</dt-stack>
-<dt-stack direction="row" as="section" gap="300">
-<dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
-<p class="d-fc-success d-body-small">Available</p>
-</dt-stack>
-</dt-stack>
-</div>
-
-- Match the icon color with the text color when pairing them.
-- All icons are monochrome.
-
-</div>
-
-<div class="d-gc1">
-<div class="d-bgc-critical-subtle-opaque d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
-<dt-stack direction="row" as="section" gap="600" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
-<dt-stack direction="row" as="section" gap="300" class="d-fl1">
-<dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<p class="d-body-base">Ai Contact C...</p>
-</dt-stack>
-<dt-stack direction="row" as="section" gap="300">
-<dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
-<p class="d-fc-success d-body-small">Available</p>
-</dt-stack>
-</dt-stack>
-</div>
-
-- Don’t use different colors for text and icons.
-- Don’t use more than one color within an icon.
-
-</div>
-</div>
-
-### Accessibility
-
-If the icon serves a purpose beyond its visual representation, provide a clear description in the `ariaLabel` prop. This ensures all users understand its function, regardless of how they interact with it, e.g: `<dt-icon name="settings" ariaLabel="Edit your profile" />`
-
-Icons contrast guidelines are the same as [Typography].
 
 ## Crafting an icon
 
@@ -150,6 +105,10 @@ Go to the [Icon Builder page]([https://](https://www.figma.com/file/zz40wi0uW9Mv
 
 <script setup>
 import { ref } from 'vue';
+import IconCatalog from "@views/IconCatalog.vue";
+import sizes from '@data/icons-sizes.json';
+
+const sizeValues = sizes.map(item => ({ value: item.size, label: item.size }));
 
 const iconListOptions = [
   { value: 'user-plus', label: 'User Plus' },
@@ -158,18 +117,22 @@ const iconListOptions = [
   { value: 'credit-card', label: 'Credit Card' }
 ];
 
-const iconSizeOptions = [
-  { value: '600', label: '600' },
-  { value: '500', label: '500' },
-  { value: '400', label: '400' },
-  { value: '300', label: '300' }
+const iconColors = [
+  { value: 'd-fc-success', label: 'd-fc-success' },
+  { value: 'd-fc-error', label: 'd-fc-error' },
+  { value: 'd-fc-primary', label: 'd-fc-primary' },
 ];
 
 const selectedIcon = ref('settings');
 const selectedSize = ref('500');
+const selectedColor = ref('d-fc-success');
 
 const changeIcon = (newIcon) => {
   selectedIcon.value = newIcon;
+};
+
+const changeIconColor = (newColor) => {
+  selectedColor.value = newColor;
 };
 
 const changeIconSize = (newSize) => {
