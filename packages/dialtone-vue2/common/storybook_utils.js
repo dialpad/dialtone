@@ -14,7 +14,7 @@ import iconNames from '@dialpad/dialtone-icons/dist/icons.json';
 export function createRenderConfig (component, defaultTemplate, argsData) {
   return {
     components: { [component.name]: defaultTemplate },
-    props: [...Object.keys(component.props), ...Object.keys(argsData)],
+    props: [...Object.keys(component.props ?? {}), ...Object.keys(argsData)],
     setup (props) {
       return { props };
     },
