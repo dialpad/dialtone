@@ -8,6 +8,8 @@ storybook: https://vue.dialpad.design/?path=/docs/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
 
+Check out our complete icon collection in the [Icon Catalog](/design/icons/#icon-catalog).
+
 ## Usage
 
 ### Changing the Icon
@@ -236,7 +238,7 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
   ];
 
   const selectedIcon = ref('settings');
-  const selectedSize = ref('500');
+  const selectedSize = ref(500);
   const selectedColor = ref('d-fc-success');
   const selectedDirection = ref('row');
 

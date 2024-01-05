@@ -20,7 +20,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 Find a list of available icons in [DT Core: Icons]([https://](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library)), or search the icons in the search library within your Figma file.
 
 <dt-stack class="d-gc2" direction="column" gap="500">
-<img alt="Figma Search Icon" src="/assets/images/figma-search-icon.gif" style="border-radius: 8px">
+<img alt="Figma Search Icon" src="/assets/images/figma-search-icon.gif" style="border-radius: var(--dt-size-radius-400)">
 <p class="d-body-base d-fc-tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</p>
 </dt-stack>
 </div>
@@ -33,11 +33,13 @@ For detailed instructions on using the icons, check the [Icon component](/compon
 
 <div class="d-gc2">
 <code-well-header>
-<dt-stack direction="row" as="section" gap="600">
-    <dt-icon :name="selectedIcon" :size="selectedSize" />
+  <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1 d-w100p">
+    <div class="d-fl-center">
+      <dt-icon :name="selectedIcon" :size="selectedSize" />
+    </div>
     <dt-select-menu label="Name" :options="iconListOptions" @change="changeIcon" />
     <dt-select-menu label="Size" :options="sizeValues" @change="changeIconSize" />
-</dt-stack>
+  </div>
 </code-well-header>
 
 ```js
@@ -90,7 +92,7 @@ Go to the [Icon Builder page]([https://](https://www.figma.com/file/zz40wi0uW9Mv
 
 </div>
 <div class="d-gc2">
-<iframe style="border: 0px; border-radius: 8px" width="100%" height="306" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=44-1450&viewport=-3223%2C-6%2C0.78&t=ma5fyi8Din3K3CgW-8&scaling=min-zoom&starting-point-node-id=44%3A1450&hotspot-hints=0&hide-ui=1" allowfullscreen></iframe>
+<iframe style="border: 0px; border-radius: var(--dt-size-radius-400)" width="100%" height="306" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=44-1450&viewport=-3223%2C-6%2C0.78&t=ma5fyi8Din3K3CgW-8&scaling=min-zoom&starting-point-node-id=44%3A1450&hotspot-hints=0&hide-ui=1" allowfullscreen></iframe>
 </div>
 </div>
 
@@ -117,22 +119,11 @@ const iconListOptions = [
   { value: 'credit-card', label: 'Credit Card' }
 ];
 
-const iconColors = [
-  { value: 'd-fc-success', label: 'd-fc-success' },
-  { value: 'd-fc-error', label: 'd-fc-error' },
-  { value: 'd-fc-primary', label: 'd-fc-primary' },
-];
-
 const selectedIcon = ref('settings');
 const selectedSize = ref('500');
-const selectedColor = ref('d-fc-success');
 
 const changeIcon = (newIcon) => {
   selectedIcon.value = newIcon;
-};
-
-const changeIconColor = (newColor) => {
-  selectedColor.value = newColor;
 };
 
 const changeIconSize = (newSize) => {
