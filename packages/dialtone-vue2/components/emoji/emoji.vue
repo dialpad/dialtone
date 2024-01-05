@@ -35,7 +35,7 @@ import { DtSkeleton } from '../skeleton';
 
 /**
  * Renders an emoji from a shortcode such as :smile: or unicode character such as 😄
- * @see https://dialpad.design/components/emoji.html
+ * @see https://dialtone.dialpad.com/components/emoji.html
  */
 export default {
   name: 'DtEmoji',
@@ -57,7 +57,7 @@ export default {
 
     /**
      * The size of the emoji. Can be any of the icon size utility classes from
-     * <a class="d-link" href="https://dialpad.design/components/icon.html" target="_blank"> Dialpad Icon Size</a>
+     * <a class="d-link" href="https://dialtone.dialpad.com/components/icon.html" target="_blank"> Dialpad Icon Size</a>
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {

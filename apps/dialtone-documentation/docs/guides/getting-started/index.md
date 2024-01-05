@@ -49,7 +49,7 @@ Though an atomic CSS approach comes with many advantages, we know it also offers
 
 ### Components
 
-There are two methods to implement Dialtone components: Vue (recommended) and CSS. Vue is the preferred method as it's more robust and readily accessible out-of-the-box. [Get started with Vue components](https://vue.dialpad.design/).
+There are two methods to implement Dialtone components: Vue (recommended) and CSS. Vue is the preferred method as it's more robust and readily accessible out-of-the-box. [Get started with Vue components](https://dialtone.dialpad.com/vue/).
 In the event Dialtone Vue doesn't suit your needs, Dialtone's CSS library offers the same set of components. These may require more work to implement and make accessible, but will work in a pinch.
 
 <code-well-header>

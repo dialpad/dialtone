@@ -21,7 +21,7 @@ const dialtoneIcons = import.meta.glob(
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
- * @see https://dialpad.design/components/icon.html
+ * @see https://dialtone.dialpad.com/components/icon.html
  */
 export default {
   name: 'DtIcon',

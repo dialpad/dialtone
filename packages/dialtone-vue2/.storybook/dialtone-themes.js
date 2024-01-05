@@ -6,7 +6,7 @@ import { create } from '@storybook/theming/create';
 
 const _baseThemeVariables = {
   brandTitle: 'Dialpad storybook',
-  brandUrl: 'https://dialpad.design',
+  brandUrl: 'https://dialtone.dialpad.com',
   brandImage: 'https://static.dialpadcdn.com/dialtone/dialpad_logo.svg',
   fontBase: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
 }

@@ -55,7 +55,7 @@ import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 /**
  * A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions.
  * It contains at-a-glance information about outcomes and can be paired with actions.
- * @see https://dialpad.design/components/toast.html
+ * @see https://dialtone.dialpad.com/components/toast.html
  */
 export default {
   name: 'DtToast',

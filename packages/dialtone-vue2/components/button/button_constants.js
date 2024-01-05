@@ -67,7 +67,7 @@ function _invalidCombinationMessage (circle, kind, importance) {
   return `You cannot have a ${circle ? 'circle ' : ''}button \
 with kind: ${kind} and importance: ${importance} as it \
 does not exist in our design system. \
-See https://dialpad.design/components/button.html for a \
+See https://dialtone.dialpad.com/components/button.html for a \
 list of available button styles`;
 }
 

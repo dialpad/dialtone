@@ -757,6 +757,9 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
     devDependencies:
+      eslint-plugin-eslint-plugin:
+        specifier: ^5.2.1
+        version: 5.2.1(eslint@8.55.0)
       mocha:
         specifier: ^10.0.0
         version: 10.2.0
@@ -7093,7 +7096,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.8(typescript@5.2.2)
-      vue-component-type-helpers: 1.8.26
+      vue-component-type-helpers: 1.8.27
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -13702,6 +13705,17 @@ packages:
       eslint: 8.55.0
       eslint-utils: 2.1.0
       regexpp: 3.2.0
+    dev: true
+
+  /eslint-plugin-eslint-plugin@5.2.1(eslint@8.55.0):
+    resolution: {integrity: sha512-W+WergGahmRTz5yhw/+6TVqlXZkxucK0rM6KWRjona3MYx8+QJ+9KpXn3sYi1lgLduitfmT8YiAmO4RPC/mxEQ==}
+    engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.55.0
+      eslint-utils: 3.0.0(eslint@8.55.0)
+      estraverse: 5.3.0
     dev: true
 
   /eslint-plugin-import@2.29.0(eslint@8.55.0):
@@ -27777,8 +27791,8 @@ packages:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
     dev: true
 
-  /vue-component-type-helpers@1.8.26:
-    resolution: {integrity: sha512-CIwb7s8cqUuPpHDk+0DY8EJ/x8tzdzqw8ycX8hhw1GnbngTgSsIceHAqrrLjmv8zXi+j5XaiqYRQMw8sKyyjkw==}
+  /vue-component-type-helpers@1.8.27:
+    resolution: {integrity: sha512-0vOfAtI67UjeO1G6UiX5Kd76CqaQ67wrRZiOe7UAb9Jm6GzlUr/fC7CV90XfwapJRjpCMaZFhv1V0ajWRmE9Dg==}
     dev: true
 
   /vue-demi@0.14.6(vue@3.3.8):

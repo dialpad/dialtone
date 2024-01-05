@@ -4,7 +4,7 @@ description: A scroller component that allows blazing fast scrolling of any amou
 status: beta
 thumb: true
 image: assets/images/components/scroller.png
-storybook: https://vue.dialpad.design/vue3/?path=/story/components-scroller--default
+storybook: https://dialtone.dialpad.com/vue/vue3/?path=/story/components-scroller--default
 ---
 
 #### Default Scroller

@@ -5,13 +5,13 @@ be stored here and documented on our site under `apps/dialtone-documentation`.
 
 ## Installation
 
-### Install it via NPM:
+### Install it via NPM
 
 ```shell
 npm install @dialpad/dialtone-css@latest
 ```
 
-### Import dialtone:
+### Import dialtone
 
 - CSS/LESS:
 
@@ -47,7 +47,7 @@ It is required to do this for Dialtone to function.
 ## Building Dialtone locally
 
 To build Dialtone locally, visit
-our [installation instructions](https://dialtone.dialpad.design/guides/getting-started/#build-dialtone-locally).
+our [installation instructions](https://dialtone.dialpad.com/guides/getting-started/#build-dialtone-locally).
 
 ## Contributing
 

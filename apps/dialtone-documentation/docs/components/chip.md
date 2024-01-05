@@ -4,7 +4,7 @@ description: A Chip is a compact UI element that provides brief, descriptive inf
 status: ready
 thumb: true
 image: assets/images/components/chip.png
-storybook: https://vue.dialpad.design/?path=/story/components-chip--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-chip--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=9937%3A64802
 ---
 

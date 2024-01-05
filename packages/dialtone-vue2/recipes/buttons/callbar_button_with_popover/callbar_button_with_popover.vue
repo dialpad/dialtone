@@ -185,7 +185,7 @@ export default {
      * Determines whether the button should have active styling
      * default is false.
      * @values true, false
-     * @see https://dialpad.design/components/button/
+     * @see https://dialtone.dialpad.com/components/button/
      */
     active: {
       type: Boolean,
@@ -196,7 +196,7 @@ export default {
      * Determines whether the button should have danger styling
      * default is false.
      * @values true, false
-     * @see https://dialpad.design/components/button/
+     * @see https://dialtone.dialpad.com/components/button/
      */
     danger: {
       type: Boolean,

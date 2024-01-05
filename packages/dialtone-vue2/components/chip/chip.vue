@@ -67,7 +67,7 @@ import { getUniqueString } from '@/common/utils';
  * A chip is a compact UI element that provides brief, descriptive information about an element.
  * It is terse, ideally one word. It is important a button is identifiable, consistent, and
  * communicates its actions clearly, and is appropriately sized to its action.
- * @see https://dialpad.design/components/chip.html
+ * @see https://dialtone.dialpad.com/components/chip.html
  */
 export default {
   name: 'DtChip',

@@ -4,7 +4,7 @@ description: Stack is a layout component used to group elements together and app
 status: beta
 thumb: true
 image: assets/images/components/stack.png
-storybook: https://vue.dialpad.design/?path=/story/components-stack--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--default
 ---
 
 <code-well-header>

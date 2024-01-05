@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/emoji.png
 figma: planned
-storybook: https://vue.dialpad.design/?path=/story/components-emoji--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--default
 ---
 
 <code-well-header>

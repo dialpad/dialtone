@@ -6,7 +6,7 @@ import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 
 /**
  * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
- * @see https://dialpad.design/components/emoji_text_wrapper.html
+ * @see https://dialtone.dialpad.com/components/emoji_text_wrapper.html
  */
 export default {
   name: 'DtEmojiTextWrapper',
