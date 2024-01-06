@@ -68,7 +68,7 @@ This is why it is important to evaluate the change carefully and asses its impac
 Any new components or updates to existing components require the following:
 
 - Unit tests covering the entire change.
-- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://vue.dialpad.design/?path=/story/docs-storybook-getting-started--page)
+- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--page)
 - Component is accessible according to requirements.
   - Navigable by keyboard.
   - Read by a screen reader.
@@ -98,6 +98,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
 - 'visual-test-ready' if your PR includes visual UI changes.
 - 'no-visual-test' if not UI changes.
 
+<!-- markdownlint-disable MD029 -->
 8. Run `./copy_pr_vue3.sh` in the root of the repository to copy your current changes in the vue 2 folder to the vue 3 folder.
 9. Create a pull request into the `staging-vue3` branch, reviewers will be automatically added and notified of your PR.
 10. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_pr_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
@@ -110,8 +111,8 @@ Releases are done on demand by the Dialtone team, and are done fairly regularly.
 
 ### CSS
 
-We should use [Dialtone tokens](https://dialpad.design/tokens/) in Dialtone Vue for all component styling.
-Avoid using [utility classes](https://dialpad.design/utilities/) in Dialtone Vue, those should be only used at the application level.
+We should use [Dialtone tokens](https://dialtone.dialpad.com/tokens/) in Dialtone Vue for all component styling.
+Avoid using [utility classes](https://dialtone.dialpad.com/utilities/) in Dialtone Vue, those should be only used at the application level.
 
 ### How We Use Slots
 
@@ -340,7 +341,7 @@ directory. See any existing examples of mdx files within that folder for more de
 We use ESLint to promote best practices throughout our codebase.
 ESLint will check any of our javascript or vue code for styling or syntax errors.
 The configuration can be found in [.eslintrc.cjs](../.eslintrc.cjs).
-Any changes code changes you make will be automatically linted upon commit (configuration in 
+Any changes code changes you make will be automatically linted upon commit (configuration in
 [lintstagedrc.cjs](../../../lintstagedrc.cjs)).
 You can manually run ESLint via `npm run lint`.
 

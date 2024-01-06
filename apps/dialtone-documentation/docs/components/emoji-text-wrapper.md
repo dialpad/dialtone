@@ -4,7 +4,7 @@ description: "Wrapper to find and replace shortcodes like :smile: or unicode cha
 status: ready
 thumb: true
 image: assets/images/components/emoji-text-wrapper.png
-storybook: https://vue.dialpad.design/?path=/story/components-emoji-text-wrapper--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-text-wrapper--default
 ---
 
 <code-well-header>

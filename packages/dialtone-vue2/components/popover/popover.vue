@@ -136,7 +136,7 @@ import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
- * @see https://dialpad.design/components/popover.html
+ * @see https://dialtone.dialpad.com/components/popover.html
  */
 export default {
   name: 'DtPopover',

@@ -25,7 +25,7 @@
         <template #anchor>
           <a
             class="d-btn d-btn--muted d-btn--circle"
-            href="https://vue.dialpad.design"
+            href="https://dialtone.dialpad.com/vue"
             target="_blank"
             rel="noreferrer noopener"
           >

@@ -30,7 +30,7 @@ import utils from '@/common/utils';
 /**
  * Breadcrumbs are links used to provide context for the currently-viewed page
  * and where it is located within the overall site structure.
- * @see https://dialpad.design/components/breadcrumbs.html
+ * @see https://dialtone.dialpad.com/components/breadcrumbs.html
  */
 export default {
   name: 'DtBreadcrumbs',

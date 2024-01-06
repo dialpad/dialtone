@@ -57,7 +57,7 @@ export function setDateLocale (locale) {
 
 /**
  * This formats a date to the Dialtone standard medium date format as shown here:
- * https://dialpad.design/guides/writing-guidelines/#formats-by-length
+ * https://dialtone.dialpad.com/guides/writing-guidelines/#formats-by-length
  * @param {Date} date A javascript date object
  * @returns {string} A string in the format of 'September 2, 2022'
  */

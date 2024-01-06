@@ -35,7 +35,7 @@ import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggl
 
 /**
  * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.
- * @see https://dialpad.design/components/toggle.html
+ * @see https://dialtone.dialpad.com/components/toggle.html
  */
 export default {
 

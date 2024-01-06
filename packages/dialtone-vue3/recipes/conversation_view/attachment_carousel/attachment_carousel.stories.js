@@ -22,69 +22,69 @@ import DtRecipeAttachmentCarouselDefaultTemplate from './attachment_carousel_def
 const mediaList = [
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
     isUploading: true,
     progress: 97,
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/fry-21e0f1a9.gif',
+    path: 'https://dialtone.dialpad.com/vue/assets/fry-21e0f1a9.gif',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
+    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
     altText: 'Image Alt Text',
   },
 ];

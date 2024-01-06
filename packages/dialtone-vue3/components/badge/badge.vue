@@ -46,7 +46,7 @@ import { DtIcon } from '@/components/icon';
 /**
  * A badge is a compact UI element that provides brief, descriptive information about an element.
  * It is terse, ideally one word.
- * @see https://dialpad.design/components/badge.html
+ * @see https://dialtone.dialpad.com/components/badge.html
  */
 export default {
   name: 'DtBadge',
@@ -58,7 +58,7 @@ export default {
   props: {
     /**
      * Icon on the left side of the badge. Supports any valid icon name from the icon catalog at
-     * https://dialpad.design/components/icon.html#icon-catalog. If type:'ai' is set, the ai icon
+     * https://dialtone.dialpad.com/components/icon.html#icon-catalog. If type:'ai' is set, the ai icon
      * will automatically be shown here, but this can be overridden by setting this prop.
      */
     iconLeft: {
@@ -68,7 +68,7 @@ export default {
 
     /**
      * Icon on the right side of the badge. Supports any valid icon name from the icon catalog at
-     * https://dialpad.design/components/icon.html#icon-catalog
+     * https://dialtone.dialpad.com/components/icon.html#icon-catalog
      */
     iconRight: {
       type: String,
