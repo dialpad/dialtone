@@ -19,20 +19,16 @@
     @opened="(e) => ($emit('opened', e))"
   >
     <template #anchor>
-      <!-- @slot Anchor element that activates the hovercard. Usually a button. -->
       <slot name="anchor" />
     </template>
     <template #content>
-      <!-- @slot Slot for the content that is displayed in the hovercard when it is open. -->
       <slot name="content" />
     </template>
     <template #headerContent>
-      <!-- @slot Slot for hovercard header content -->
       <slot name="headerContent" />
     </template>
 
     <template #footerContent>
-      <!-- @slot Slot for the footer content. -->
       <slot name="footerContent" />
     </template>
   </dt-popover>
