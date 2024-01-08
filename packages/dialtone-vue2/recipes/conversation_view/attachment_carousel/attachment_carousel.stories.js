@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeAttachmentCarousel from './attachment_carousel.vue';
 import DtRecipeAttachmentCarouselDefaultTemplate from './attachment_carousel_default.story.vue';
 import TestImage from '@/common/assets/test.jpg?url';
@@ -10,7 +10,7 @@ import TestImage from '@/common/assets/test.jpg?url';
 
   Here we define any custom configuration for props / slots / events in storybook
 
-  By default storybook will display any props / slots / events from the associated component. It will also use jsdoc
+  By default, storybook will display any props / slots / events from the associated component. It will also use jsdoc
   comments on the component to populate details such as description and default value. You should only enter config
   here if it was not possible to add into the jsdoc of the component itself.
 
@@ -120,15 +120,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeAttachmentCarouselDefaultTemplate,
-);
-
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) =>
+    createRenderConfig(
+      DtRecipeAttachmentCarousel,
+      DtRecipeAttachmentCarouselDefaultTemplate,
+      argsData,
+    ),
   args: {},
 };
