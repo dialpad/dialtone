@@ -20,7 +20,7 @@ module.exports = {
     fixable: null, // Or `code` or `whitespace`
     schema: [], // Add a schema if the rule has options
     messages: {
-      avoidRequireContext: 'Avoid custom dialtone icons implementation. Use DtIcon component instead https://vue.dialpad.design/?path=/docs/components-icon--default',
+      avoidRequireContext: 'Avoid custom dialtone icons implementation. Use DtIcon component instead https://dialtone.dialpad.com/vue/?path=/docs/components-icon--default',
       avoidCustomImport: 'Avoid importing dialtone icons with custom webpack alias'
     }
   },

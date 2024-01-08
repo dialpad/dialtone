@@ -92,7 +92,7 @@ const ICONS_LIST = getIconNames();
 
 /**
  * An avatar is a visual representation of a user or object.
- * @see https://dialpad.design/components/avatar.html
+ * @see https://dialtone.dialpad.com/components/avatar.html
  */
 export default {
   name: 'DtAvatar',

@@ -124,7 +124,7 @@ import { MessagesMixin } from '../../common/mixins/input.js';
  * It can have a range of options and supports single line and multi-line lengths,
  * as well as varying formats, including numbers, masked passwords, etc.
  * @property {Boolean} placeholder attribute
- * @see https://dialpad.design/components/input.html
+ * @see https://dialtone.dialpad.com/components/input.html
  */
 export default {
   name: 'DtInput',

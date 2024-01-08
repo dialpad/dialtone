@@ -4,7 +4,7 @@ status: ready
 thumb: true
 image: assets/images/components/toggle.png
 description: A toggle, or "switch", is a button control element that allows the user to make a binary selection.
-storybook: https://vue.dialpad.design/?path=/story/components-toggle--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21460&viewport=-359%2C250%2C0.49&t=xHutRjwo1o5zMTgT-11
 ---
 <code-well-header>

@@ -30,7 +30,7 @@ module.exports = {
       {
         directiveName: 'tooltip',
         replacement: 'dt-tooltip',
-        link: 'https://vue.dialpad.design/?path=/docs/directives-tooltip--docs',
+        link: 'https://dialtone.dialpad.com/vue/?path=/docs/directives-tooltip--docs',
       },
     ];
 

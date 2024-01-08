@@ -4,7 +4,7 @@ description: A link is a navigational element that can be found on its own, with
 status: ready
 thumb: true
 image: assets/images/components/link.png
-storybook: https://vue.dialpad.design/?path=/story/components-link--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-link--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21226&viewport=-746%2C-197%2C1.41&t=xHutRjwo1o5zMTgT-11
 ---
 <code-well-header>

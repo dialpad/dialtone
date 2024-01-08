@@ -4,7 +4,7 @@ description: Lazy show is a utility component that prevents its children from be
 status: ready
 thumb: true
 image: assets/images/components/lazy-show.png
-storybook: https://vue.dialpad.design/?path=/story/utilities-lazy-show--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/utilities-lazy-show--default
 ---
 
 <code-well-header>

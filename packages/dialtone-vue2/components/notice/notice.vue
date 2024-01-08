@@ -46,7 +46,7 @@ import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button';
 
 /**
  * A notice is an informational and assistive message that appears inline with content.
- * @see https://dialpad.design/components/notice.html
+ * @see https://dialtone.dialpad.com/components/notice.html
  */
 export default {
   name: 'DtNotice',

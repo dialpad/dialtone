@@ -130,7 +130,7 @@ import { NOTICE_KINDS } from '@/components/notice';
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
  * via a window that sits on top of the page content.
- * @see https://dialpad.design/components/modal.html
+ * @see https://dialtone.dialpad.com/components/modal.html
  */
 export default {
   name: 'DtModal',

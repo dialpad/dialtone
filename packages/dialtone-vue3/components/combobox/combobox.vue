@@ -58,7 +58,7 @@ import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 /**
  * A combobox is a semantic component that displays an input element combined with a listbox,
  * which enables the user to select items from the list.
- * @see https://dialpad.design/components/combobox.html
+ * @see https://dialtone.dialpad.com/components/combobox.html
  */
 export default {
   name: 'DtCombobox',

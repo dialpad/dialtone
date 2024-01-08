@@ -26,7 +26,7 @@
 import { PRESENCE_STATES, PRESENCE_STATES_LIST } from './presence_constants';
 /**
  * Presence is a user status visual indicator element.
- * @see https://dialpad.design/components/presence.html
+ * @see https://dialtone.dialpad.com/components/presence.html
  */
 export default {
   name: 'DtPresence',

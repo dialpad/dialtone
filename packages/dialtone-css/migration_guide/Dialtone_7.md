@@ -524,7 +524,7 @@ Search for | Replace with
 
 Do a search in [Icon docs][icon-docs] to find an icon that matches your needs.
 For icon component documentation on props (naming and sizing), check
-[Dialtone Vue - Icon component](https://vue.dialpad.design/?path=/story/components-icon--default).
+[Dialtone Vue - Icon component](https://dialtone.dialpad.com/vue/?path=/story/components-icon--default).
 *Check with your designer or ask in #dialtone if you are having trouble finding a replacement for an existing icon*
 
 **If you can use vue components**:
@@ -565,7 +565,7 @@ Remove any usage of `d-svg` and `d-svg--*`.
 Remove any custom icon sizing e.g. `.foo .icon { width: xxx; height: yyy; }.`
 and replace with the correct sizing class in [icon documentation][icon-docs].
 
-[icon-docs]: https://dialpad.design/components/icon.html
+[icon-docs]: https://dialtone.dialpad.com/components/icon.html
 
 #### Badge
 

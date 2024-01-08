@@ -4,7 +4,7 @@ description: This component displays a visual representation of a keyboard short
 status: ready
 thumb: true
 image: assets/images/components/keyboard-shortcut.png
-storybook: https://vue.dialpad.design/?path=/story/components-keyboard-shortcut--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-keyboard-shortcut--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components?type=design&node-id=8922-20524&mode=design&t=4VsDQfzhbBwFVFl2-11
 ---
 
