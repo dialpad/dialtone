@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeAttachmentCarousel from './attachment_carousel.vue';
 import DtRecipeAttachmentCarouselDefaultTemplate from './attachment_carousel_default.story.vue';
+import TestImage from '@/common/assets/test.jpg?url';
 
 /*
   Controls
@@ -22,69 +23,69 @@ import DtRecipeAttachmentCarouselDefaultTemplate from './attachment_carousel_def
 const mediaList = [
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
     isUploading: true,
     progress: 97,
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/fry-21e0f1a9.gif',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
   {
     type: 'image',
-    path: 'https://dialtone.dialpad.com/vue/assets/test-078acfea.jpg',
+    path: TestImage,
     altText: 'Image Alt Text',
   },
 ];
