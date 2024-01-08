@@ -1,3 +1,22 @@
+# [9.3.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.2.0...dialtone/v9.3.0) (2024-01-08)
+
+
+### Bug Fixes
+
+* error in stories when component.props is undefined ([#89](https://github.com/dialpad/dialtone/issues/89)) ([1694544](https://github.com/dialpad/dialtone/commit/169454471870a62e0ebb22617c9c3b13cfbb9257))
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+* fix storybook reactivity ([#85](https://github.com/dialpad/dialtone/issues/85)) ([0206c8c](https://github.com/dialpad/dialtone/commit/0206c8c2ff8b9a534cd92c7a46420bc038bff867))
+
+
+### Features
+
+* added unread and rematch icons ([bb6830a](https://github.com/dialpad/dialtone/commit/bb6830adeb18ab6bbc3726d701c191c2a91fcadf))
+* port attachment carousel ([#86](https://github.com/dialpad/dialtone/issues/86)) ([a67aae2](https://github.com/dialpad/dialtone/commit/a67aae2946d4088b54d7de871a236c7baa351424))
+
 # [9.2.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.1.1...dialtone/v9.2.0) (2024-01-04)
 
 
