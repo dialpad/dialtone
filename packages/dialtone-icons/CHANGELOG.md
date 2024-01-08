@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.4.1...dialtone-icons/v4.5.0) (2024-01-08)
+
+
+### Features
+
+* added unread and rematch icons ([bb6830a](https://github.com/dialpad/dialtone/commit/bb6830adeb18ab6bbc3726d701c191c2a91fcadf))
+
 ## [4.4.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.4.0...dialtone-icons/v4.4.1) (2024-01-04)
 
 
