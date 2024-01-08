@@ -1,7 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="d-datepicker">
-    <div class="d-datepicker--header">
+  <dt-stack
+    class="d-datepicker"
+    gap="400"
+  >
+    <div class="d-datepicker__hd">
       <month-year-picker
         ref="monthYearPicker"
         :prev-month-label="prevMonthLabel"
@@ -15,7 +18,7 @@
         @close-datepicker="$emit('close-datepicker')"
       />
     </div>
-    <div class="d-datepicker--body">
+    <div class="d-datepicker__bd">
       <calendar
         ref="calendar"
         :locale="locale"
@@ -26,17 +29,18 @@
         @close-datepicker="$emit('close-datepicker')"
       />
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import MonthYearPicker from './modules/month-year-picker.vue';
 import Calendar from './modules/calendar.vue';
+import DtStack from '@/components/stack/stack.vue';
 
 export default {
   name: 'DtDatepicker',
 
-  components: { MonthYearPicker, Calendar },
+  components: { DtStack, MonthYearPicker, Calendar },
 
   props: {
     /**

@@ -5,7 +5,7 @@
     </p>
     <br>
     <br>
-    <table>
+    <table class="format-table">
       <tr>
         <th>Format</th>
         <th>Result</th>
@@ -82,10 +82,9 @@ export default {
 </script>
 
 <style scoped>
-table {
+.format-table {
     border-collapse: collapse;
     width: 100%;
-  }
 
   th, td {
     padding: 8px;
@@ -100,4 +99,5 @@ table {
   tr:nth-child(even) {
     background-color: #f9f9f9;
   }
+}
 </style>
