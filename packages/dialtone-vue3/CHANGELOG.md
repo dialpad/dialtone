@@ -1,3 +1,15 @@
+# [3.101.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.100.0...dialtone-vue3/v3.101.0) (2024-01-08)
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+
+
+### Features
+
+* port attachment carousel ([#86](https://github.com/dialpad/dialtone/issues/86)) ([a67aae2](https://github.com/dialpad/dialtone/commit/a67aae2946d4088b54d7de871a236c7baa351424))
+
 # [3.100.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.2...dialtone-vue3/v3.100.0) (2024-01-04)
 
 
