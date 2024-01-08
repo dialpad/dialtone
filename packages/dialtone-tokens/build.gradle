@@ -55,7 +55,7 @@ afterEvaluate {
                 pom {
                     name = 'Dialtone Tokens'
                     description = "Design tokens for Dialpad's design system, Dialtone."
-                    url = 'https://dialpad.design'
+                    url = 'https://dialtone.dialpad.com'
 
                     licenses {
                         license {

@@ -66,7 +66,7 @@ import {
  * A tooltip is a floating label that briefly explains an action, function, or an element.
  * Its content is exclusively text and shouldn't be vital information for users.
  * If richer media is desired, consider using a popover instead.
- * @see https://dialpad.design/components/tooltip.html
+ * @see https://dialtone.dialpad.com/components/tooltip.html
  */
 export default {
   name: 'DtTooltip',

@@ -645,10 +645,16 @@
         </router-link>
         <a
           class="d-link"
-          href="https://vue.dialpad.design/"
+          href="https://dialpad.dialtone.com/vue"
           target="_blank"
           rel="noopener noreferrer"
-        >Browse Vue components</a>
+        >Browse Vue 2 components</a>
+        <a
+          class="d-link"
+          href="https://dialpad.dialtone.com/vue3"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Browse Vue 3 components</a>
       </div>
     </div>
     <div class="link d-body-base d-gc3 d-px32 d-ta-center">

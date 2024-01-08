@@ -47,7 +47,7 @@ import { hasSlotContent } from '@/common/utils';
 /**
  * A card contains summary content and actions about a single subject.
  * It can be used by itself or within a list, and is generally interactive.
- * @see https://dialpad.design/components/card.html
+ * @see https://dialtone.dialpad.com/components/card.html
  */
 export default {
   name: 'DtCard',

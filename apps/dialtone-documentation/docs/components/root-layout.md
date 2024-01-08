@@ -4,7 +4,7 @@ description: A root layout provides a standardized group of containers to displa
 status: ready
 thumb: true
 image: assets/images/components/root-layout.png
-storybook: https://vue.dialpad.design/?path=/story/components-root-layout--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-root-layout--default
 ---
 
 <code-well-header>

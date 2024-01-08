@@ -65,7 +65,7 @@ import { DtValidationMessages } from '../validation_messages';
 /**
  * Checkboxes are control elements that allow the user to make a selection.They are typically used in a
  * Checkbox Group which allows the user to make one or more selections from a list of options.
- * @see https://dialpad.design/components/checkbox.html
+ * @see https://dialtone.dialpad.com/components/checkbox.html
  */
 export default {
   name: 'DtCheckbox',

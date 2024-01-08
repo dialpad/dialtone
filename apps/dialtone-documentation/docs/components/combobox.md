@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/combobox.png
 figma: planned
-storybook: https://vue.dialpad.design/?path=/story/components-combobox--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--default
 ---
 
 <code-well-header bgclass="d-bgc-neutral-white">

@@ -98,7 +98,7 @@ import { DtValidationMessages } from '../validation_messages';
  * @property {Boolean} disabled attribute
  * @property {String} name attribute
  * @property {String} value attribute
- * @see https://dialpad.design/components/select.html
+ * @see https://dialtone.dialpad.com/components/select.html
  */
 export default {
   name: 'DtSelectMenu',

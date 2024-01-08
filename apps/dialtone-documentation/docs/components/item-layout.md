@@ -4,7 +4,7 @@ description: An item layout provides a standardized group of containers to enabl
 status: ready
 thumb: true
 image: assets/images/components/item-layout.png
-storybook: https://vue.dialpad.design/?path=/story/components-item-layout--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-item-layout--default
 ---
 
 <code-well-header>

@@ -75,7 +75,7 @@ import { DtIcon } from '@/components/icon';
 
 /**
  * Pagination allows you to divide large amounts of content into smaller chunks across multiple pages.
- * @see https://dialpad.design/components/pagination.html
+ * @see https://dialtone.dialpad.com/components/pagination.html
  */
 export default {
   name: 'DtPagination',

@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/dialpad/dialtone-tokens/issues"
   },
-  "homepage": "https://dialpad.design/",
+  "homepage": "https://dialtone.dialpad.com/",
   "devDependencies": {
     "@tokens-studio/sd-transforms": "^0.11.0",
     "maven": "^5.0.0",

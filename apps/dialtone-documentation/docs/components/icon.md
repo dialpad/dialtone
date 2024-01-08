@@ -4,7 +4,7 @@ description: An icon is used to visually communicate commands, meaning, status, 
 status: ready
 thumb: true
 image: assets/images/components/icon.png
-storybook: https://vue.dialpad.design/?path=/docs/components-icon--default
+storybook: https://dialtone.dialpad.com/vue/?path=/docs/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
 
