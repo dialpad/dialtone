@@ -10,17 +10,45 @@ Use size units, when setting the scale of an element.
 
 When adding space around on in between elements use [Spacing](/design/spacing/) units.
 
+### Setting a specific size
+
+<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+
+When assigning a size to an element, utilize [Size Tokens](#tokens) for the value.
+
+<div class="d-gc2">
+<code-well-header>
+  <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
+    <div class="d-fl-center d-ba d-bc-purple-400 d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
+      Box
+    </div>
+    <dt-select-menu label="min-width" :options="sizeValues" @change="changeBoxSize" />
+  </div>
+</code-well-header>
+
+```html
+<style>
+.box {
+  min-width: var(--dt-size-720);
+}
+</style>
+<div class="box">Box</div>
+```
+
+</div>
+</div>
+
 ### Widths and Heights
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 <dt-stack direction="column" gap="100">
 <p>
 
-For optimal responsiveness, we avoid using fixed `widths` or `heights` when defining element sizes. However, when setting a minimum dimensions, use `min-width` or `min-height`. This approach promotes flexibility and layout stability, key components of responsive design.
+For optimal layout flexibility and responsiveness, generally avoid using fixed `widths` or `heights` when defining element sizes. Instead, use percentages values or set `min-width` or `min-height`. This allows the elements to adjust naturally to different screen sizes.
 
 </p>
 <p class="d-body-base d-fc-tertiary">
-Some components that have fixed width/height: Avatar, Icon and Toggle.
+Exceptions exist for select elements like Avatars, Icons, and Toggles. These elements require fixed dimensions to maintain consistent scale across devices within flexible layouts.
 </p>
 </dt-stack>
 
@@ -69,7 +97,7 @@ Adapting to different devices, sizes should be fluid across breakpoints. While m
 
 <div class="d-d-grid d-gg24 d-g-cols1 md:d-g-cols1">
 
-To ensure clickable and interactive areas are easily accessible, we recommend a minimum area of `var(--dt-space-300)`, except for links within text. In Dialtone we've applied these to components such as buttons, toggles, checkboxes, radio buttons, dropdowns, and inputs.
+To ensure clickable and interactive areas are easily accessible, we recommend a minimum area of `var(--dt-size-300)`, except for links within text. In Dialtone we've applied these to components such as buttons, toggles, checkboxes, radio buttons, dropdowns, and inputs.
 
 </div>
 
@@ -87,9 +115,9 @@ WIP: Tokens decriptions/usage in progress.
 
 - Use predefined tokens, they help maintain consistency and make it easier to update designs.
 - Keep sizes and spacing consistent: This ensures a polished look across all devices.
-- Avoid using a fixed position for elements in your layouts. The more fluid your design, the better it will respond to different screen sizes.
 
 <script setup>
+import { ref } from 'vue';
 const tokenList = {
   'var(--dt-size-300)': { description: '' },
   'var(--dt-size-450)': { description: '' },
@@ -98,4 +126,16 @@ const tokenList = {
   'var(--dt-size-550)': { description: '' },
   'var(--dt-size-600)': { description: '' },
 };
+
+  const sizeValues = [
+    { value: 'var(--dt-size-720)', label: 'var(--dt-size-720)' },
+    { value: 'var(--dt-size-800)', label: 'var(--dt-size-800)' },
+    { value: 'var(--dt-size-825)', label: 'var(--dt-size-825)' },
+  ];
+
+  const selectedSize = ref('var(--dt-size-720)');
+
+  const changeBoxSize = (newSize) => {
+    selectedSize.value = newSize;
+  };
 </script>

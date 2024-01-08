@@ -10,12 +10,57 @@ Use spacing units, when [stacking elements](#stacking) or when adding [padding](
 
 When setting the scale of an element, use [Size](/design/sizing/) units.
 
-### Stacking
+### Setting a specific spacing
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
+When setting the gap between elements, utilize [Space Tokens](#tokens) for the gap value.
+
+<div class="d-gc2">
+<code-well-header>
+  <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
+    <div class="d-d-flex d-fd-row" :style="{ gap: selectedSpace }">
+      <div class="d-fl-center d-ba d-bc-purple-400 d-w100p">
+        Element A
+      </div>
+      <div class="d-fl-center d-ba d-bc-purple-400 d-w100p">
+        Element B
+      </div>
+    </div>
+    <dt-select-menu label="gap" :options="spaceValues" @change="changeSpace" />
+  </div>
+</code-well-header>
+
+```html
+<style>
+.wrapper {
+  gap: var(--dt-size-400);
+}
+</style>
+<div class="wrapper">
+  <div>
+    Element A
+  </div>
+  <div>
+    Element B
+  </div>
+</div>
+```
+
+</div>
+</div>
+
+### Stacking
+
+<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div>
+
 When adding space between elements, both vertically and horizontally, we can use either `space-between` or `gap` to define the space that separates each element. The value is set as a variable in Figma and as a token in code.
 
+- For gaps inside a box/container, such as between headings, text, and buttons, use values like `var(--dt-space-0)` to `var(--dt-space-550)`
+- For spaces between different boxes/containers on a page, choose values from `var(--dt-space-600)` to `var(--dt-space-700)`
+
+</div>
  <dt-stack direction="column" gap="500">
   <iframe style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15958&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15958&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
@@ -91,7 +136,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ## Tokens
 
-Here are some frequently used tokens. For a complete list, visit the [Spacing Tokens](/tokens/spacing) section.
+Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/spacing) section.
 
 <token-table category="space" :tokenList="tokenList" />
 
@@ -102,14 +147,14 @@ WIP: Tokens decriptions/usage in progress.
 ## Key Takeaways
 
 - Use predefined tokens, they help maintain consistency and make it easier to update designs.
-- Keep sizes and spacing consistent: This ensures a polished look across all devices.
-- Maintain a balanced visual hierarchy by using the modular scale for font, sizes and spacing.
 - Consider the overall composition and whitespace to create well-proportioned layouts.
 - Ensure consistent spacing across various screen sizes and breakpoints.
+- Keep spacing consistent: This ensures a polished look across all devices.
 
 **🌟 Design Tip:** Optimize your workflow in Figma by setting the nudge amount to 4px or 8px. It's a small change that can make a big difference in ease of use!
 
 <script setup>
+import { ref } from 'vue';
 const tokenList = {
   'var(--dt-space-0)': { description: 'Default space between elements.' },
   'var(--dt-space-200)': { description: 'Horizontal stack Icon + Text, Vertical stack List group.' },
@@ -120,5 +165,18 @@ const tokenList = {
   'var(--dt-space-550)': { },
   'var(--dt-space-600)': { },
   'var(--dt-space-650)': { },
+};
+
+const spaceValues = [
+  { value: 'var(--dt-space-300)', label: 'var(--dt-space-300)' },
+  { value: 'var(--dt-space-400)', label: 'var(--dt-space-400)' },
+  { value: 'var(--dt-space-500)', label: 'var(--dt-space-500)' },
+  { value: 'var(--dt-space-600)', label: 'var(--dt-space-600)' },
+];
+
+const selectedSpace = ref('var(--dt-space-200)');
+
+const changeSpace = (newSpace) => {
+  selectedSpace.value = newSpace;
 };
 </script>
