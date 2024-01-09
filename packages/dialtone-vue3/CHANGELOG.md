@@ -1,3 +1,15 @@
+# [3.102.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.101.0...dialtone-vue3/v3.102.0) (2024-01-09)
+
+
+### Documentation
+
+* fix datepicker table dark mode ([#90](https://github.com/dialpad/dialtone/issues/90)) ([9ef39a9](https://github.com/dialpad/dialtone/commit/9ef39a9b5356931132af83086c24e855ecf5f1a7))
+
+
+### Features
+
+* port message input recipe ([#81](https://github.com/dialpad/dialtone/issues/81)) ([efb5732](https://github.com/dialpad/dialtone/commit/efb573246395e96c596cef548111b822dc5b032a))
+
 # [3.101.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.100.0...dialtone-vue3/v3.101.0) (2024-01-08)
 
 
