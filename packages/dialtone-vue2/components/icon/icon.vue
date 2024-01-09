@@ -13,6 +13,7 @@
 <script>
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
 import { getUniqueString } from '@/common/utils.js';
+import iconNames from '@dialpad/dialtone-icons/dist/icons.json';
 
 const dialtoneIcons = import.meta.glob(
   '/node_modules/@dialpad/dialtone-icons/dist/svg/*.svg',
@@ -53,6 +54,7 @@ export default {
     name: {
       type: String,
       required: true,
+      validator: (name) => iconNames.includes(name),
     },
 
     /**
@@ -71,7 +73,7 @@ export default {
 
     icon () {
       const iconPath = `/node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`;
-      return dialtoneIcons[iconPath].default;
+      return dialtoneIcons[iconPath]?.default;
     },
   },
 };
