@@ -10,8 +10,6 @@
     @drag-over="onDrag"
     @drop="onDrop"
     @keydown.enter.exact="onSend"
-    @focusin="hasFocus = true"
-    @focusout="hasFocus = false"
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
@@ -29,8 +27,9 @@
         :link="link"
         :placeholder="placeholder"
         v-bind="$attrs"
-        @focus="hasFocus = true"
-        @blur="hasFocus = false"
+        @focus="onFocus"
+        @blur="onBlur"
+        @input="onInput($event)"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -56,8 +55,8 @@
               @click="onSelectImage"
               @mouseenter="imagePickerFocus = true"
               @mouseleave="imagePickerFocus = false"
-              @focusin="imagePickerFocus = true"
-              @focusout="imagePickerFocus = false"
+              @focus="imagePickerFocus = true"
+              @blur="imagePickerFocus = false"
             >
               <template #icon>
                 <dt-icon
@@ -102,8 +101,8 @@
                   @click="toggleEmojiPicker"
                   @mouseenter="emojiPickerFocus = true"
                   @mouseleave="emojiPickerFocus = false"
-                  @focusin="emojiPickerFocus = true"
-                  @focusout="emojiPickerFocus = false"
+                  @focus="emojiPickerFocus = true"
+                  @blur="emojiPickerFocus = false"
                 >
                   <template #icon>
                     <dt-icon
@@ -185,8 +184,8 @@
               @click="onSend"
               @mouseenter="sendButtonFocus = true"
               @mouseleave="sendButtonFocus = false"
-              @focusin="sendButtonFocus = true"
-              @focusout="sendButtonFocus = false"
+              @focus="sendButtonFocus = true"
+              @blur="sendButtonFocus = false"
             >
               <template
                 v-if="showSend.icon"
@@ -465,6 +464,27 @@ export default {
      * @type {String}
      */
     'selected-emoji',
+
+    /**
+     * Native focus event
+     * @event input
+     * @type {String|JSON}
+     */
+    'focus',
+
+    /**
+     * Native blur event
+     * @event input
+     * @type {String|JSON}
+     */
+    'blur',
+
+    /**
+     * Native input event
+     * @event input
+     * @type {String|JSON}
+     */
+    'input',
   ],
 
   data () {
@@ -579,9 +599,19 @@ export default {
       this.$emit('cancel');
     },
 
-    focus () {
-      this.$refs.richTextEditor.focusEditor();
+    onFocus (event) {
       this.hasFocus = true;
+      this.$refs.richTextEditor.focusEditor();
+      this.$emit('focus', event);
+    },
+
+    onBlur (event) {
+      this.hasFocus = false;
+      this.$emit('blur', event);
+    },
+
+    onInput (event) {
+      this.$emit('input', event);
     },
   },
 };
