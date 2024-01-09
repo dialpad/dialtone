@@ -92,6 +92,8 @@ jobs:
       - name: Build Dialtone library and documentation site
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         run: pnpm nx run --verbose dialtone-documentation:build-docs
+        env:
+          VUEPRESS_BASE_URL: /deploy-previews/pr-${{ github.event.pull_request.number }}/
 
       - name: Build Dialtone-vue 2 library and documentation site
         if: ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' }}
