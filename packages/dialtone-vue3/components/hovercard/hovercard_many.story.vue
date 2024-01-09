@@ -27,11 +27,12 @@
           :append-to="$attrs.appendTo"
           @opened="$attrs.onOpened"
         >
-          <template #anchor>
+          <template #anchor="slotProps">
             <dt-avatar
               :full-name="data.name"
               :image-src="data.src"
               avatar-class="d-c-pointer"
+              v-bind="slotProps"
             />
           </template>
           <template #content>

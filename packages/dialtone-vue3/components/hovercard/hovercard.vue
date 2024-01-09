@@ -18,8 +18,11 @@
     qa="dt-hovercard"
     @opened="(e) => ($emit('opened', e))"
   >
-    <template #anchor>
-      <slot name="anchor" />
+    <template #anchor="{ attrs }">
+      <slot
+        name="anchor"
+        v-bind="attrs"
+      />
     </template>
     <template #content>
       <slot name="content" />

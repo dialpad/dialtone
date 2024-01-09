@@ -13,7 +13,7 @@
     :append-to="$attrs.appendTo"
     @opened="$attrs.onOpened"
   >
-    <template #anchor>
+    <template #anchor="slotProps">
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
         avatar-presence="busy"
@@ -22,6 +22,7 @@
         :avatar-src="defaultImage"
         user-status="Working from SF"
         call-button-tooltip=""
+        v-bind="slotProps"
       />
     </template>
     <template #content>

@@ -8,9 +8,9 @@ const MOCK_FOOTER_CONTENT = 'Hovercard Footer';
 const baseProps = { id: 'hovercard-1' };
 const baseAttrs = {};
 const baseSlots = {
-  anchor: '<template #anchor="attrs">' +
-                  '<button data-qa="dt-button" v-bind="props.attrs">Hover me</button>' +
-                '</template>',
+  anchor: '<template #anchor="slotProps">' +
+            '<button data-qa="dt-button" v-bind="slotProps">Hover me</button>' +
+          '</template>',
   content: MOCK_DEFAULT_SLOT_MESSAGE,
   headerContent: MOCK_HEADER_CONTENT,
   footerContent: MOCK_FOOTER_CONTENT,

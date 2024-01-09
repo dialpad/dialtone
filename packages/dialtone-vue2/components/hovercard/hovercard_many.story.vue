@@ -27,16 +27,23 @@
           :append-to="$attrs.appendTo"
           @opened="$attrs.onOpened"
         >
-          <template #anchor>
+          <template #anchor="slotProps">
             <dt-avatar
               :full-name="data.name"
               :image-src="data.src"
               avatar-class="d-c-pointer"
+              v-bind="slotProps"
             />
           </template>
           <template #content>
-            <dt-stack direction="column" gap="400">
-              <dt-stack direction="row" gap="300">
+            <dt-stack
+              direction="column"
+              gap="400"
+            >
+              <dt-stack
+                direction="row"
+                gap="300"
+              >
                 <dt-avatar
                   :full-name="data.name"
                   :image-src="data.src"
@@ -45,30 +52,58 @@
                   size="md"
                   presence="active"
                 />
-                <dt-stack direction="column" gap="0">
+                <dt-stack
+                  direction="column"
+                  gap="0"
+                >
                   <p class="d-headline-compact-medium">
                     {{ data.name }}
                   </p>
-                  <p class="d-body-small d-fc-tertiary">Good Morning! :smile:</p>
-                </dt-stack>
-                </dt-stack>
-                <dt-stack direction="column" gap="300" class="d-fc-secondary">
-                  <p>
-                    Vice President of Sales Enablement Aerolabs
+                  <p class="d-body-small d-fc-tertiary">
+                    Good Morning! :smile:
                   </p>
-                  <dt-stack direction="row" gap="300">
-                    <dt-icon name="clock-4" size="200" />
-                    <p class="d-body-small"><b>Local Time:</b> 12:32 PM</p>
-                  </dt-stack>
                 </dt-stack>
-                <dt-stack direction="row" gap="400">
-                  <dt-button width="var(--dt-size-100-percent)" importance="outlined" kind="muted">
-                    Call
-                  </dt-button>
-                  <dt-button width="var(--dt-size-100-percent)" importance="outlined" kind="muted">
-                    Message
-                  </dt-button>
+              </dt-stack>
+              <dt-stack
+                direction="column"
+                gap="300"
+                class="d-fc-secondary"
+              >
+                <p>
+                  Vice President of Sales Enablement Aerolabs
+                </p>
+                <dt-stack
+                  direction="row"
+                  gap="300"
+                >
+                  <dt-icon
+                    name="clock-4"
+                    size="200"
+                  />
+                  <p class="d-body-small">
+                    <b>Local Time:</b> 12:32 PM
+                  </p>
                 </dt-stack>
+              </dt-stack>
+              <dt-stack
+                direction="row"
+                gap="400"
+              >
+                <dt-button
+                  width="var(--dt-size-100-percent)"
+                  importance="outlined"
+                  kind="muted"
+                >
+                  Call
+                </dt-button>
+                <dt-button
+                  width="var(--dt-size-100-percent)"
+                  importance="outlined"
+                  kind="muted"
+                >
+                  Message
+                </dt-button>
+              </dt-stack>
             </dt-stack>
           </template>
         </dt-hovercard>

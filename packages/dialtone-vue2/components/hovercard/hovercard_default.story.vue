@@ -13,7 +13,7 @@
     :append-to="$attrs.appendTo"
     @opened="$attrs.onOpened"
   >
-    <template #anchor>
+    <template #anchor="slotProps">
       <dt-recipe-contact-row
         name="Jaqueline Nackos"
         avatar-presence="busy"
@@ -22,11 +22,18 @@
         :avatar-src="defaultImage"
         user-status="Working from SF"
         call-button-tooltip=""
+        v-bind="slotProps"
       />
     </template>
     <template #content>
-      <dt-stack direction="column" gap="400">
-        <dt-stack direction="row" gap="300">
+      <dt-stack
+        direction="column"
+        gap="400"
+      >
+        <dt-stack
+          direction="row"
+          gap="300"
+        >
           <dt-avatar
             full-name="Jaqueline Nackos"
             :image-src="defaultImage"
@@ -35,27 +42,55 @@
             size="md"
             presence="busy"
           />
-          <dt-stack direction="column" gap="0">
+          <dt-stack
+            direction="column"
+            gap="0"
+          >
             <p class="d-headline-compact-medium">
               Jaqueline Nackos
             </p>
-            <p class="d-body-small d-fc-tertiary"><span class="d-fc-critical">In a meeting</span> • Working from SF</p>
+            <p class="d-body-small d-fc-tertiary">
+              <span class="d-fc-critical">In a meeting</span> • Working from SF
+            </p>
           </dt-stack>
         </dt-stack>
-        <dt-stack direction="column" gap="300" class="d-fc-secondary">
+        <dt-stack
+          direction="column"
+          gap="300"
+          class="d-fc-secondary"
+        >
           <p>
             Vice President of Sales Enablement Aerolabs
           </p>
-          <dt-stack direction="row" gap="300">
-            <dt-icon name="clock-4" size="200" />
-            <p class="d-body-small"><b>Local Time:</b> 12:32 PM</p>
+          <dt-stack
+            direction="row"
+            gap="300"
+          >
+            <dt-icon
+              name="clock-4"
+              size="200"
+            />
+            <p class="d-body-small">
+              <b>Local Time:</b> 12:32 PM
+            </p>
           </dt-stack>
         </dt-stack>
-        <dt-stack direction="row" gap="400">
-          <dt-button width="var(--dt-size-100-percent)" importance="outlined" kind="muted">
+        <dt-stack
+          direction="row"
+          gap="400"
+        >
+          <dt-button
+            width="var(--dt-size-100-percent)"
+            importance="outlined"
+            kind="muted"
+          >
             Call
           </dt-button>
-          <dt-button width="var(--dt-size-100-percent)" importance="outlined" kind="muted">
+          <dt-button
+            width="var(--dt-size-100-percent)"
+            importance="outlined"
+            kind="muted"
+          >
             Message
           </dt-button>
         </dt-stack>
