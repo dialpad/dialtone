@@ -116,7 +116,7 @@ describe('DtRecipeMessageInput tests', () => {
       });
 
       it('should programmatically focus to input', async () => {
-        wrapper.vm.focus();
+        wrapper.vm.onFocus();
         await wrapper.vm.$nextTick();
         expect(messageInputEl.classes('d-bc-black-500')).toBe(true);
       });

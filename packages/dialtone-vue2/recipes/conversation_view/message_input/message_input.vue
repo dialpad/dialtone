@@ -10,6 +10,8 @@
     @drag-over="onDrag"
     @drop="onDrop"
     @keydown.enter.exact="onSend"
+    @focus="onFocus"
+    @blur="onBlur"
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
@@ -27,8 +29,8 @@
         :link="link"
         :placeholder="placeholder"
         v-bind="$attrs"
-        @focus="onFocus($event, true)"
-        @blur="onFocus($event, false)"
+        @focus="onFocus"
+        @blur="onBlur"
         @input="onInput($event)"
       />
     </div>
@@ -599,14 +601,15 @@ export default {
       this.$emit('cancel');
     },
 
-    onFocus (event, val) {
-      this.hasFocus = val;
-      if (val) {
-        this.$refs.richTextEditor.focusEditor();
-        this.$emit('focus', event);
-      } else {
-        this.$emit('blur', event);
-      }
+    onFocus (event) {
+      this.hasFocus = true;
+      this.$refs.richTextEditor.focusEditor();
+      this.$emit('focus', event);
+    },
+
+    onBlur (event) {
+      this.hasFocus = false;
+      this.$emit('blur', event);
     },
 
     onInput (event) {
