@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import DtRecipeMessageInput from './message_input.vue';
 
 // Wrappers
@@ -14,8 +14,7 @@ let emojiPickerBtn;
 let sendBtn;
 
 // Test Environment
-let props;
-let attrs;
+let propsData;
 let slots;
 let listeners;
 const getClientRectsMock = vi.fn(() => [{}]);
@@ -24,7 +23,7 @@ const scrollByMock = vi.fn();
 
 // Constants
 const baseProps = {
-  modelValue: 'initial value',
+  value: 'initial value',
   inputAriaLabel: 'aria-label text',
   inputClass: 'qa-editor',
 };
@@ -35,6 +34,7 @@ const baseSlots = {
   middle: 'image carousel',
 };
 
+const testContext = {};
 // Helpers
 const _setChildWrappers = () => {
   editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
@@ -52,10 +52,10 @@ const _setChildWrappers = () => {
 
 const _mountWrapper = () => {
   wrapper = mount(DtRecipeMessageInput, {
-    props,
+    propsData,
     listeners,
-    attrs,
     slots,
+    localVue: testContext.localVue,
     attachTo: document.body,
   });
 };
@@ -63,14 +63,14 @@ const _mountWrapper = () => {
 describe('DtRecipeMessageInput tests', () => {
   // Test Setup
   beforeAll(() => {
+    testContext.localVue = createLocalVue();
     global.Range.prototype.getClientRects = getClientRectsMock;
     global.Range.prototype.getBoundingClientRect = getBoundingClientRectMock;
     global.scrollBy = scrollByMock;
   });
 
   beforeEach(async () => {
-    props = baseProps;
-    attrs = {};
+    propsData = baseProps;
     slots = baseSlots;
     _mountWrapper();
     await wrapper.vm.$nextTick();
@@ -79,7 +79,7 @@ describe('DtRecipeMessageInput tests', () => {
 
   // Test Teardown
   afterEach(function () {
-    props = baseProps;
+    propsData = baseProps;
     slots = baseSlots;
   });
 
@@ -126,7 +126,7 @@ describe('DtRecipeMessageInput tests', () => {
       beforeEach(async () => {
         await wrapper.setProps({
           showCharacterLimit: false,
-          modelValue: randoText,
+          value: randoText,
         });
       });
 
@@ -144,7 +144,7 @@ describe('DtRecipeMessageInput tests', () => {
             warning: 5,
             message: 'test warning',
           },
-          modelValue: randoText,
+          value: randoText,
         });
         _setChildWrappers();
       });
@@ -160,7 +160,7 @@ describe('DtRecipeMessageInput tests', () => {
     describe('When send button is clicked', () => {
       beforeEach(async () => {
         await wrapper.setProps({
-          modelValue: randoText,
+          value: randoText,
         });
         _setChildWrappers();
       });

@@ -71,7 +71,7 @@
           :disabled="disabled"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          data-qa="dt-input-input"
+          :data-qa="$attrs['data-qa'] ?? 'dt-input-input'"
           v-bind="$attrs"
           v-on="inputListeners"
         />
@@ -84,7 +84,7 @@
           :disabled="disabled"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          data-qa="dt-input-input"
+          :data-qa="$attrs['data-qa'] ?? 'dt-input-input'"
           v-bind="$attrs"
           v-on="inputListeners"
         >

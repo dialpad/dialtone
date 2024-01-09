@@ -163,6 +163,16 @@
         "default": "./dist/emoji.cjs"
       }
     },
+    "./message_input": {
+      "import": {
+        "types": "./dist/types/message_input.d.ts",
+        "default": "./dist/message_input.js"
+      },
+      "require": {
+        "types": "./dist/types/message_input.d.ts",
+        "default": "./dist/message_input.cjs"
+      }
+    },
     "./directives": {
       "import": {
         "types": "./dist/types/directives.d.ts",

@@ -126,7 +126,7 @@ export default {
 
   computed: {
     showRecentlyUsedTab () {
-      return this.recentlyUsedEmojis.length > 0;
+      return this.recentlyUsedEmojis?.length > 0;
     },
   },
 

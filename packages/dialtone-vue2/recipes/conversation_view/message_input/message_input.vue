@@ -245,7 +245,7 @@ export default {
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
      */
-    modelValue: {
+    value: {
       type: [Object, String],
       default: '',
     },
@@ -489,7 +489,7 @@ export default {
 
   data () {
     return {
-      internalInputValue: this.modelValue, // internal input content
+      internalInputValue: this.value, // internal input content
       hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
@@ -534,7 +534,7 @@ export default {
   },
 
   watch: {
-    modelValue (newValue) {
+    value (newValue) {
       this.internalInputValue = newValue;
     },
   },
@@ -601,7 +601,9 @@ export default {
 
     onFocus (event) {
       this.hasFocus = true;
+      console.log('B', this.hasFocus);
       this.$refs.richTextEditor.focusEditor();
+      console.log('A', this.hasFocus);
       this.$emit('focus', event);
     },
 
