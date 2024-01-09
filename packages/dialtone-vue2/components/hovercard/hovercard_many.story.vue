@@ -35,30 +35,41 @@
             />
           </template>
           <template #content>
-            <div>
-              <dt-recipe-contact-row
-                :name="data.name"
-                avatar-presence="active"
-                avatar-seed="JN"
-                avatar-alt="Avatar person"
-                :avatar-src="data.src"
-                user-status="Good Morning! :smile:"
-                call-button-tooltip="Call"
-                selected
-                :has-call-button="false"
-              />
-              <br>
-              <p>
-                Vice President of Sales Enablement
-                Aerolabs
-              </p>
-              <p>
-                <b>Work:</b> (415) 555-1234
-              </p>
-              <p>
-                <b>Local Time:</b> 12:32 PM
-              </p>
-            </div>
+            <dt-stack direction="column" gap="400">
+              <dt-stack direction="row" gap="300">
+                <dt-avatar
+                  :full-name="data.name"
+                  :image-src="data.src"
+                  image-alt="Person avatar"
+                  seed="JN"
+                  size="md"
+                  presence="active"
+                />
+                <dt-stack direction="column" gap="0">
+                  <p class="d-headline-compact-medium">
+                    {{ data.name }}
+                  </p>
+                  <p class="d-body-small d-fc-tertiary">Good Morning! :smile:</p>
+                </dt-stack>
+                </dt-stack>
+                <dt-stack direction="column" gap="300" class="d-fc-secondary">
+                  <p>
+                    Vice President of Sales Enablement Aerolabs
+                  </p>
+                  <dt-stack direction="row" gap="300">
+                    <dt-icon name="clock-4" size="200" />
+                    <p class="d-body-small"><b>Local Time:</b> 12:32 PM</p>
+                  </dt-stack>
+                </dt-stack>
+                <dt-stack direction="row" gap="400">
+                  <dt-button width="var(--dt-size-100-percent)" importance="outlined" kind="muted">
+                    Call
+                  </dt-button>
+                  <dt-button width="var(--dt-size-100-percent)" importance="outlined" kind="muted">
+                    Message
+                  </dt-button>
+                </dt-stack>
+            </dt-stack>
           </template>
         </dt-hovercard>
       </template>
@@ -91,8 +102,8 @@
 import DtHovercard from './hovercard.vue';
 import DtRecipeFeedItemRow from '@/recipes/conversation_view/feed_item_row/feed_item_row.vue';
 import DtRecipeEmojiRow from '@/recipes/conversation_view/emoji_row/emoji_row.vue';
-import DtRecipeContactRow from '@/recipes/leftbar/contact_row/contact_row.vue';
-import { DtAvatar } from '@/components/avatar';
-import { DtIcon } from '@/components/icon';
-import { DtButton } from '@/components/button';
+import DtStack from '../stack/stack.vue';
+import DtIcon from '../icon/icon.vue';
+import DtButton from '../button/button.vue';
+import DtAvatar from '../avatar/avatar.vue';
 </script>
