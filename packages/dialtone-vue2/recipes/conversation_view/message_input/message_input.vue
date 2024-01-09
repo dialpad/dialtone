@@ -10,8 +10,6 @@
     @drag-over="onDrag"
     @drop="onDrop"
     @keydown.enter.exact="onSend"
-    @focus="onFocus"
-    @blur="onBlur"
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
@@ -603,7 +601,9 @@ export default {
 
     onFocus (event) {
       this.hasFocus = true;
+      console.log('B', this.hasFocus);
       this.$refs.richTextEditor.focusEditor();
+      console.log('A', this.hasFocus);
       this.$emit('focus', event);
     },
 
