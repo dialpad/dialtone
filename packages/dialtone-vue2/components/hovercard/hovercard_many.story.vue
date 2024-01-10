@@ -1,7 +1,7 @@
 <template>
   <ul class="d-mb4">
     <dt-recipe-feed-item-row
-      v-for="data in $attrs.cardData"
+      v-for="data in cardData"
       :key="data.name"
       :show-header="true"
       :avatar-image-url="data.src"
@@ -137,8 +137,29 @@
 import DtHovercard from './hovercard.vue';
 import DtRecipeFeedItemRow from '@/recipes/conversation_view/feed_item_row/feed_item_row.vue';
 import DtRecipeEmojiRow from '@/recipes/conversation_view/emoji_row/emoji_row.vue';
+import avatar1 from '@/common/assets/avatar1.png';
+import avatar2 from '@/common/assets/avatar2.png';
 import DtStack from '../stack/stack.vue';
 import DtIcon from '../icon/icon.vue';
 import DtButton from '../button/button.vue';
 import DtAvatar from '../avatar/avatar.vue';
+
+const cardData = [{
+  name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  Elementum fames nullam elementum velit proin vitae aliquet.
+  Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
+  aliquet elementum venenatis quisque.</p>`,
+},
+{
+  name: 'Joseph Lumaban', src: avatar1, time: '5:05 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  Elementum fames nullam elementum velit proin vitae aliquet.
+  Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
+  aliquet elementum venenatis quisque.</p>`,
+},
+{
+  name: 'Purdie Afra', time: '5:16 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  Elementum fames nullam elementum velit proin vitae aliquet.
+  Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
+  aliquet elementum venenatis quisque.</p>`,
+}];
 </script>

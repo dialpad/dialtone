@@ -21,7 +21,7 @@
       <div
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
-        :data-qa="qa ? `${qa}-anchor` : 'dt-popover-anchor'"
+        :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}-anchor` : 'dt-popover-anchor'"
         :tabindex="openOnContext ? 0 : undefined"
         @click.capture="defaultToggleOpen"
         @contextmenu="onContext"
@@ -47,7 +47,7 @@
         :id="id"
         ref="content"
         :role="role"
-        :data-qa="qa ?? 'dt-popover'"
+        :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}` : 'dt-popover'"
         :aria-hidden="`${!isOpen}`"
         :aria-labelledby="labelledBy"
         :aria-label="ariaLabel"
@@ -86,7 +86,7 @@
         </popover-header-footer>
         <div
           ref="popover__content"
-          :data-qa="qa ? `${qa}-content` : 'dt-popover-content'"
+          :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}-content` : 'dt-popover-content'"
           :class="[
             'd-popover__content',
             POPOVER_PADDING_CLASSES[padding],
@@ -535,15 +535,6 @@ export default {
       validator: timer => {
         return timer === null || (timer.enter && timer.leave && Object.keys(timer).includes('current'));
       },
-    },
-
-    /**
-     * A prefix for the data-qa tags in the elements inside the popover.
-     * If null, `dt-popover` will be used.
-     */
-    qa: {
-      type: String,
-      default: null,
     },
   },
 
