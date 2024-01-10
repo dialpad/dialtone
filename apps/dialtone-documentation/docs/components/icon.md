@@ -161,9 +161,9 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 
 ### Accessibility
 
-- If the icon serves a purpose beyond its visual representation, provide a clear description in the `ariaLabel` prop. This ensures all users understand its function, regardless of how they interact with it, e.g: `<dt-icon name="settings" ariaLabel="Edit your profile" />`
+- If the icon serves a purpose beyond its visual representation, provide a clear description in the `aria-label` prop. This ensures all users understand its function, regardless of how they interact with it, e.g: `<dt-icon name="settings" aria-label="Edit your profile" />`
 
-- Icons contrast guidelines are the same as [Typography].
+- Icons contrast guidelines are the same as Typography.
 
 - Avoid using icons as clickable elements; instead, use the [Icon Button](/components/button.html#icon-only) for interactive actions.
 
