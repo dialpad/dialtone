@@ -14,7 +14,8 @@
         :change-to-label="changeToLabel"
         :selected-date="selectedDate"
         @calendar-days="updateCalendarDays"
-        @focus-day="$refs.calendar.focusFirstDay()"
+        @focus-first-day="$refs.calendar.focusFirstDay()"
+        @focus-last-day="$refs.calendar.focusLastDay()"
         @close-datepicker="$emit('close-datepicker')"
       />
     </div>
@@ -27,6 +28,8 @@
         @select-date="$emit('selected-date', $event)"
         @focus-month-year-picker="$refs.monthYearPicker.focusMonthYearPicker()"
         @close-datepicker="$emit('close-datepicker')"
+        @go-to-next-month="$refs.monthYearPicker.goToNextMonth()"
+        @go-to-prev-month="$refs.monthYearPicker.goToPrevMonth()"
       />
     </div>
   </dt-stack>

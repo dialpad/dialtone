@@ -178,11 +178,18 @@ export default {
     'calendar-days',
 
     /**
-     * Will focus the day picker
+     * Will focus first day in calendar
      *
-     * @event focus-day
+     * @event focus-first-day
      */
-    'focus-day',
+    'focus-first-day',
+
+    /**
+     * Will focus last day in calendar
+     *
+     * @event focus-last-day
+     */
+    'focus-last-day',
 
     /**
      * Will close the datepicker
@@ -279,11 +286,12 @@ export default {
 
         case 'ArrowDown':
           event.preventDefault();
-          this.$emit('focus-day');
+          this.$emit('focus-first-day');
           break;
 
         case 'Tab':
-          this.$emit('focus-day');
+          event.preventDefault();
+          this.$emit('focus-first-day');
           break;
 
         case 'Escape':
@@ -304,14 +312,29 @@ export default {
     },
 
     changeMonth (value) {
-      const initialDate = set(this.selectedDate, { month: this.selectMonth, year: this.selectYear });
-      const date = ++value ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
+      // Adjust year when changing from January to December or vice versa
+      if ((this.selectMonth === 0 && value === -1) || (this.selectMonth === 11 && value === 1)) {
+        this.selectYear += value;
+      }
 
-      this.selectMonth = getMonth(date);
+      // Calculate the new date by adding or subtracting months
+      const initialDate = set(this.selectedDate, { month: this.selectMonth, year: this.selectYear });
+      const newDate = value === 1 ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
+
+      // Update the selected month
+      this.selectMonth = getMonth(newDate);
     },
 
     changeYear (value) {
       this.selectYear = this.selectYear + value;
+    },
+
+    goToNextMonth () {
+      this.changeMonth(1);
+    },
+
+    goToPrevMonth () {
+      this.changeMonth(-1);
     },
   },
 };

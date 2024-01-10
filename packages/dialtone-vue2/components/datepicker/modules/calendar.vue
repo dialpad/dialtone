@@ -30,7 +30,7 @@
           class="d-datepicker__cell"
         >
           <dt-button
-            :ref="el => { if (el) setDayRef(el, day.currentMonth) }"
+            :ref="el => { if (el) setDayRef(el, day) }"
             class="d-datepicker__day"
             :circle="true"
             size="sm"
@@ -55,10 +55,11 @@
 </template>
 
 <script>
-import { getWeekDayNames } from '@/components/datepicker/utils.js';
+import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate } from '@/components/datepicker/utils.js';
 import { WEEK_START, MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
 import { format, getYear } from 'date-fns';
 import DtButton from '@/components/button/button.vue';
+import { nextTick } from 'vue';
 
 export default {
   name: 'DtDatepickerCalendar',
@@ -134,9 +135,9 @@ export default {
       return `${this.selectDayLabel} ${day.text} ${format(day.value, MONTH_FORMAT)} ${getYear(day.value)}`;
     },
 
-    setDayRef (el, currentMonth) {
-      if (!this.daysRef.includes(el) && currentMonth) {
-        this.daysRef.push(el);
+    setDayRef (el, day) {
+      if (!this.daysRef.some(day => day.el === el) && day.currentMonth) {
+        this.daysRef.push({ el, day });
       }
     },
 
@@ -146,9 +147,14 @@ export default {
           event.preventDefault();
           this.focusDay -= 7;
           try {
-            this.daysRef[this.focusDay].$el.focus();
+            this.daysRef[this.focusDay].el.$el.focus();
           } catch (error) {
-            this.$emit('focus-month-year-picker');
+            const prevFocusDate = calculatePrevFocusDate(this.daysRef[this.focusDay + 7].day.value);
+            this.$emit('go-to-prev-month');
+            nextTick(() => {
+              this.daysRef[prevFocusDate - 1].el.$el.focus();
+              this.focusDay += prevFocusDate - 1;
+            });
           }
           break;
 
@@ -156,9 +162,14 @@ export default {
           event.preventDefault();
           this.focusDay += 7;
           try {
-            this.daysRef[this.focusDay].$el.focus();
+            this.daysRef[this.focusDay].el.$el.focus();
           } catch (error) {
-            this.$emit('focus-month-year-picker');
+            const nextFocusDate = calculateNextFocusDate(this.daysRef[this.focusDay - 7].day.value);
+            this.$emit('go-to-next-month');
+            nextTick(() => {
+              this.daysRef[nextFocusDate - 1].el.$el.focus();
+              this.focusDay += nextFocusDate - 1;
+            });
           }
           break;
 
@@ -166,7 +177,11 @@ export default {
           event.preventDefault();
           if (this.focusDay > 0) {
             this.focusDay -= 1;
-            this.daysRef[this.focusDay].$el.focus();
+            this.daysRef[this.focusDay].el.$el.focus();
+          } else {
+            // if we are on month first day, jump to last day of prev month
+            this.$emit('go-to-prev-month');
+            this.focusLastDay();
           }
           break;
 
@@ -174,7 +189,11 @@ export default {
           event.preventDefault();
           if (this.focusDay < this.daysRef.length - 1) {
             this.focusDay += 1;
-            this.daysRef[this.focusDay].$el.focus();
+            this.daysRef[this.focusDay].el.$el.focus();
+          } else {
+            // if we are on month last day, jump to first day of next month
+            this.$emit('go-to-next-month');
+            this.focusFirstDay();
           }
           break;
 
@@ -191,7 +210,16 @@ export default {
 
     focusFirstDay () {
       this.focusDay = 0;
-      this.daysRef[this.focusDay].$el.focus();
+      nextTick(() => {
+        this.daysRef[this.focusDay].el.$el.focus();
+      });
+    },
+
+    focusLastDay () {
+      nextTick(() => {
+        this.focusDay = this.daysRef.length - 1;
+        this.daysRef[this.focusDay].el.$el.focus();
+      });
     },
 
     selectDay (day) {
