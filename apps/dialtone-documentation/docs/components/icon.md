@@ -1,6 +1,6 @@
 ---
 title: Icon
-description: An icon is used to visually communicate commands, meaning, status, feedback, or common actions.
+description: Collection of customizable symbols and sizes
 status: ready
 thumb: true
 image: assets/images/components/icon.png
@@ -16,7 +16,7 @@ Check out our complete icon collection in the [Icon Catalog](/design/icons/#icon
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
-To change the icon, modify the 'name' prop to your desired icon. Explore the [Icon Catalog](/design/icons/#icon-catalog) for options.
+To change the icon, modify the `name` prop to your desired icon. Explore the [Icon Catalog](/design/icons/) for options.
 
 <div class="d-gc2">
 <code-well-header>

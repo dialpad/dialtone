@@ -7,8 +7,6 @@ storybook: https://vue.dialpad.design/?path=/docs/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
 
-## Icon catalog
-
 <icon-catalog></icon-catalog>
 
 ## Usage
@@ -52,7 +50,7 @@ import { DtIcon } from '@dialpad/dialtone-vue';
 
 ### Choosing the right icon
 
-Some icons are linked to specific actions, like the Settings gear <dt-icon name="settings" size="200" /> or the Edit pencil <dt-icon name="edit" size="200" />. For actions without a dedicated icon, avoid reusing icons that are already associated with other actions, this helps prevent confusion and ensures clear understanding. Instead, select an existing icon from the [Icon Catalog](#icon-catalog) without a specific action meaning or consider [creating a new one](#crafting-an-icon) that clearly represents the intended action.
+Some icons are linked to specific actions, like the Settings gear <dt-icon name="settings" size="200" /> or the Edit pencil <dt-icon name="edit" size="200" />. For actions without a dedicated icon, avoid reusing icons that are already associated with other actions, this helps prevent confusion and ensures clear understanding. Instead, select an existing icon from the Icon Catalog without a specific action meaning or consider [creating a new one](#crafting-an-icon) that clearly represents the intended action.
 
 ### Sizing
 
