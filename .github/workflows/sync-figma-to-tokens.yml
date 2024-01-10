@@ -14,22 +14,38 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - name: Install Node.js
+      - name: Clone repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16.0'
+          node-version: 20
 
-      - name: Set NPM version
-        run: npm install -g npm@9.5.1
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
 
-      - name: Clone repo
-        uses: actions/checkout@v3
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
 
       - name: Sync variables in Figma file to tokens
-        run: npm run sync-figma-to-tokens -- --output tokens
+        run: pnpm nx run --verbose dialtone-tokens:sync-figma-to-tokens -- --output tokens
         env:
           FILE_KEY: ${{ github.event.inputs.file_key }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_ACTION_VARIABLES_SYNC_FIGMA_TOKEN }}
