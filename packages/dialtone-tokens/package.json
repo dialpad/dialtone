@@ -12,7 +12,9 @@
     "release": "semantic-release --no-ci --extends ./release-local.config.cjs",
     "publish:external-packages": "pnpm run publish:android-package && pnpm run publish:ios-package",
     "publish:android-package": "cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version",
-    "publish:ios-package": "./build-ios.js"
+    "publish:ios-package": "./build-ios.js",
+    "sync-tokens-to-figma": "tsx sync-scripts/sync_tokens_to_figma.ts",
+    "sync-figma-to-tokens": "tsx sync-scripts/sync_figma_to_tokens.ts"
   },
   "files": [
     "dist"
@@ -28,9 +30,14 @@
   "homepage": "https://dialtone.dialpad.com/",
   "devDependencies": {
     "@tokens-studio/sd-transforms": "^0.11.0",
+    "@types/node": "^20.4.5",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
     "maven": "^5.0.0",
     "style-dictionary": "^3.8.0",
     "tinycolor2": "^1.6.0",
-    "token-transformer": "^0.0.31"
+    "token-transformer": "^0.0.31",
+    "tsx": "^4.7.0",
+    "typescript": "^5.1.6"
   }
 }

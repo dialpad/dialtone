@@ -8,3 +8,4 @@ dist_legacy
 .gradle
 local.properties
 .idea
+.env
