@@ -41,9 +41,9 @@ Dialtone's CSS library offers a framework of utility-first classes. Each class i
 
 In the above example, we used:
 
-- Our [padding utility class](/utilities/spacing/padding/) `.d-p16` to add 16px of padding
-- Our [background color utility class](/utilities/backgrounds/color/) `.d-bgc-black-600` to add a purple background
-- Our [font color utility class](/utilities/typography/color/) `.d-fc-primary-inverted` to change the font color to the inverted primary text color
+- Our [padding utility class](utilities/spacing/padding/) `.d-p16` to add 16px of padding
+- Our [background color utility class](utilities/backgrounds/color/) `.d-bgc-black-600` to add a purple background
+- Our [font color utility class](utilities/typography/color/) `.d-fc-primary-inverted` to change the font color to the inverted primary text color
 
 Though an atomic CSS approach comes with many advantages, we know it also offers a notable disadvantage: reducing the CSS cascade. This is especially true for repeated UI elements, which can end up creating redundant mark-up. For these instances, Dialtone offers components.
 
