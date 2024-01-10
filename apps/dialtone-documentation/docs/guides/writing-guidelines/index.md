@@ -268,13 +268,13 @@ We use <strong>sentence case</strong> for all of our writing, with the exception
 <template #do>
 
 * Search contacts and messages
-* ![Correct: Eyebrow text styled as uppercase](assets/images/eyebrow--do.png)
+* ![Correct: Eyebrow text styled as uppercase](/assets/images/eyebrow--do.png)
 
 </template>
 <template #dont>
 
 * Search Contacts and Messages
-* ![Incorrect: Eyebrow text styled as lowcase](assets/images/eyebrow--dont.png)
+* ![Incorrect: Eyebrow text styled as lowcase](/assets/images/eyebrow--dont.png)
 
 </template>
 </dialtone-usage>
