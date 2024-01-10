@@ -46,7 +46,7 @@
         :key="name"
       >
         <td>
-          <token-example :category="category" :name="exampleName || name" :value="exampleValue" />
+          <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
         </td>
         <th
           scope="row"
@@ -151,7 +151,7 @@ export default {
         .forEach(([_, value]) => {
           const { name, value: tokenValue, description } = value[FORMAT_MAP[this.format]] || {};
           // exclude base tokens
-          if (!name.endsWith('base)') && !name.endsWith('root)')) {
+          if (name && !name.endsWith('base)') && !name.endsWith('root)')) {
             const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
             tokens.push({ exampleValue, exampleName, name, tokenValue, description });
           }
