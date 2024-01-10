@@ -63,7 +63,9 @@ describe('DtHovercard Tests', () => {
   describe('Presentation Tests', () => {
     describe('When mouseenter on anchor', () => {
       beforeEach(async () => {
+        vi.useFakeTimers();
         await anchor.trigger('mouseenter');
+        vi.runAllTimers();
       });
 
       it('should render the component', () => {
@@ -85,8 +87,10 @@ describe('DtHovercard Tests', () => {
   describe('Interactivity Tests', () => {
     describe('When mouse leave on anchor', () => {
       it('hovercard is not displayed', async () => {
+        vi.useFakeTimers();
         await anchor.trigger('mouseenter');
         await anchor.trigger('mouseleave');
+        vi.runAllTimers();
         content = wrapper.find('[data-qa="dt-hovercard-content"]');
 
         expect(content.isVisible()).toBe(false);
@@ -116,10 +120,15 @@ describe('DtHovercard Tests', () => {
   describe('Accessibility Tests', () => {
     describe('When hovercard is open', () => {
       beforeEach(async () => {
+        vi.useFakeTimers();
         await anchor.trigger('mouseenter');
       });
 
       it('shows correct role', () => {
+        vi.runAllTimers();
+        hovercardWindow = wrapper.find('[data-qa="dt-hovercard__dialog"]');
+        console.log(wrapper.html());
+        console.log(hovercardWindow.attributes());
         expect(hovercardWindow.attributes('role')).toBe('dialog');
       });
 
