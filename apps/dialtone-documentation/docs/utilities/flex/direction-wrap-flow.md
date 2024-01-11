@@ -26,14 +26,14 @@ The `flex-direction` property declares a flex container’s main axis direction.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216">
   <div class="d-d-flex d-fd-row-reverse d-w100p d-bar8 d-bgc-purple-100">
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-500 d-bar4 d-fs-300 d-fc-primary-inverted d-fw-bold">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-500 d-bar4 d-fs-300 d-fc-primary-inverted d-fw-bold">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-500 d-bar4 d-fs-300 d-fc-primary-inverted d-fw-bold">3</div>
+    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-300 d-bar4 d-fs-300 d-fc-primary d-fw-bold">1</div>
+    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-300 d-bar4 d-fs-300 d-fc-primary d-fw-bold">2</div>
+    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-300 d-bar4 d-fs-300 d-fc-primary d-fw-bold">3</div>
   </div>
   <div class="d-d-flex d-fd-row d-w100p d-mt16 d-bar8 d-bgc-purple-100">
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-500 d-bar4 d-fs-300 d-fc-primary-inverted d-fw-bold">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-500 d-bar4 d-fs-300 d-fc-primary-inverted d-fw-bold">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-500 d-bar4 d-fs-300 d-fc-primary-inverted d-fw-bold">3</div>
+    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-300 d-bar4 d-fs-300 d-fc-primary d-fw-bold">1</div>
+    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-300 d-bar4 d-fs-300 d-fc-primary d-fw-bold">2</div>
+    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-purple-300 d-bar4 d-fs-300 d-fc-primary d-fw-bold">3</div>
   </div>
 </code-well-header>
 
@@ -109,7 +109,7 @@ The `flex-flow` property is a shorthand property that sets allows you to quickly
 </table>
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-blue-100 d-bgo50 d-w100p d-hmn216">
-  <div class="d-d-flex d-ff-row-reverse-wrap d-w100p d-bar8 d-bgc-blue-200">
+  <div class="d-d-flex d-ff-row-reverse-wrap d-w100p d-bar8 d-bgc-blue-100">
     <div class="d-fl-center d-m8 d-p16 d-w25p d-h64 d-bgc-blue-400 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-m8 d-p16 d-w50p d-h64 d-bgc-blue-400 d-bar4 d-fs-300 d-fw-bold">2</div>
     <div class="d-fl-center d-m8 d-p16 d-w75p d-h64 d-bgc-blue-400 d-bar4 d-fs-300 d-fw-bold">3</div>

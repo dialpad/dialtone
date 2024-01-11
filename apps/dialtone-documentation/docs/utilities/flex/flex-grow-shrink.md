@@ -33,7 +33,7 @@ control the grow and shrink flex values separately with their own utility classe
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216 d-of-auto" custom>
   <div class="d-d-flex d-w100p d-bar8 d-bgc-magenta-100">
     <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-magenta-100 d-ps-relative">Content cannot flex</div>
-    <div class="d-fl1 d-p16 d-fs-200 d-lh-tight d-bgc-magenta-100 d-ps-relative">Text that will flex</div>
+    <div class="d-fl1 d-p16 d-fs-200 d-lh-tight d-bgc-magenta-200 d-ps-relative">Text that will flex</div>
     <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-magenta-100 d-ps-relative">Content cannot flex</div>
   </div>
 </code-well-header>
@@ -117,7 +117,7 @@ The `flex-shrink` sets the flex container’s shrink factor relative to the pare
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn216 d-of-auto" custom>
   <div class="d-d-flex d-w5 d-bar8 d-bgc-red-100">
     <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-red-100">Longer text that cannot flex</div>
-    <div class="d-fl-shrink1 d-p16 d-fs-200 d-lh-tight d-bgc-red-100">Text that will shrink even if it causes text to wrap</div>
+    <div class="d-fl-shrink1 d-p16 d-fs-200 d-lh-tight d-bgc-red-200">Text that will shrink even if it causes text to wrap</div>
     <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-red-100">Longer text that cannot flex</div>
   </div>
 </code-well-header>
