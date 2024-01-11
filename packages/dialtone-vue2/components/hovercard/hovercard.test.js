@@ -8,12 +8,15 @@ const MOCK_FOOTER_CONTENT = 'Hovercard Footer';
 const baseProps = { id: 'hovercard-1' };
 const baseAttrs = {};
 const baseSlots = {
-  anchor: '<template #anchor="slotProps">' +
-            '<button data-qa="dt-button" v-bind="slotProps">Hover me</button>' +
-          '</template>',
   content: MOCK_DEFAULT_SLOT_MESSAGE,
   headerContent: MOCK_HEADER_CONTENT,
   footerContent: MOCK_FOOTER_CONTENT,
+};
+
+const baseScopedSlots = {
+  anchor: '<template #anchor="{ attrs }">' +
+          '<button data-qa="dt-button" v-bind="attrs">Hover me</button>' +
+          '</template>',
 };
 
 let mockProps = {};
@@ -32,6 +35,7 @@ describe('DtHovercard Tests', () => {
       propsData: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
+      scopedSlots: { ...baseScopedSlots },
       global: {
         stubs: {
           transition: false,
@@ -63,7 +67,9 @@ describe('DtHovercard Tests', () => {
   describe('Presentation Tests', () => {
     describe('When mouseenter on anchor', () => {
       beforeEach(async () => {
+        vi.useFakeTimers();
         await anchor.trigger('mouseenter');
+        vi.runAllTimers();
       });
 
       it('should render the component', () => {
@@ -77,7 +83,6 @@ describe('DtHovercard Tests', () => {
       });
 
       it('should render the anchor slot', () => {
-        console.log(wrapper.html());
         expect(anchor.text()).toBe('Hover me');
       });
     });
@@ -86,8 +91,11 @@ describe('DtHovercard Tests', () => {
   describe('Interactivity Tests', () => {
     describe('When mouse leave on anchor', () => {
       it('hovercard is not displayed', async () => {
+        vi.useFakeTimers();
         await anchor.trigger('mouseenter');
+        vi.runAllTimers();
         await anchor.trigger('mouseleave');
+        vi.runAllTimers();
         content = wrapper.find('[data-qa="dt-hovercard-content"]');
 
         expect(content.isVisible()).toBe(false);
@@ -117,10 +125,13 @@ describe('DtHovercard Tests', () => {
   describe('Accessibility Tests', () => {
     describe('When hovercard is open', () => {
       beforeEach(async () => {
+        vi.useFakeTimers();
         await anchor.trigger('mouseenter');
       });
 
       it('shows correct role', () => {
+        vi.runAllTimers();
+        hovercardWindow = wrapper.find('[data-qa="dt-hovercard__dialog"]');
         expect(hovercardWindow.attributes('role')).toBe('dialog');
       });
 

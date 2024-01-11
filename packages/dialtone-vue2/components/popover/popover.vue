@@ -43,7 +43,7 @@
         :id="id"
         ref="content"
         :role="role"
-        :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}` : 'dt-popover'"
+        :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}__dialog` : 'dt-popover'"
         :aria-hidden="`${!isOpen}`"
         :aria-labelledby="labelledBy"
         :aria-label="ariaLabel"

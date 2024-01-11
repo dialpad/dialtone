@@ -11,7 +11,7 @@
       v-on="$listeners"
     >
       <!-- @slot Slot for main content -->
-      <slot v-if="initialized" />
+      <slot />
     </div>
   </transition>
 </template>
@@ -55,15 +55,6 @@ export default {
     },
   },
 
-  /******************
-   *      DATA      *
-   ******************/
-  data () {
-    return {
-      initialized: !!this.show,
-    };
-  },
-
   computed: {
     /**
      * Set the css property to false when running tests only.
@@ -73,17 +64,6 @@ export default {
      */
     isCSSEnabled () {
       return process.env.NODE_ENV !== 'test';
-    },
-  },
-
-  /******************
-   *      WATCH     *
-   ******************/
-  watch: {
-    show: function (newValue) {
-      if (!newValue || this.initialized) return;
-
-      this.initialized = true;
     },
   },
 };

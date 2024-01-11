@@ -89,6 +89,7 @@ describe('DtHovercard Tests', () => {
       it('hovercard is not displayed', async () => {
         vi.useFakeTimers();
         await anchor.trigger('mouseenter');
+        vi.runAllTimers();
         await anchor.trigger('mouseleave');
         vi.runAllTimers();
         content = wrapper.find('[data-qa="dt-hovercard-content"]');
@@ -127,8 +128,6 @@ describe('DtHovercard Tests', () => {
       it('shows correct role', () => {
         vi.runAllTimers();
         hovercardWindow = wrapper.find('[data-qa="dt-hovercard__dialog"]');
-        console.log(wrapper.html());
-        console.log(hovercardWindow.attributes());
         expect(hovercardWindow.attributes('role')).toBe('dialog');
       });
 
