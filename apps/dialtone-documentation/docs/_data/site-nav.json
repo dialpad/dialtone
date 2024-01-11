@@ -8,10 +8,6 @@
           "link": "/about/dialtone.html"
         },
         {
-          "text": "Contributing",
-          "link": "/about/contributing.html"
-        },
-        {
           "text": "What's New",
           "link": "/about/whats-new/"
         }
@@ -64,6 +60,10 @@
         {
           "text": "Getting started",
           "link": "/guides/getting-started/"
+        },
+        {
+          "text": "Contributing",
+          "link": "/guides/contributing/"
         },
         {
           "text": "Design principles",
