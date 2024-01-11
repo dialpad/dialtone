@@ -4,7 +4,7 @@ description: A banner is a type of Notice, delivering system and engagement mess
 status: ready
 thumb: true
 image: assets/images/components/banner.png
-storybook: https://vue.dialpad.design/?path=/story/components-banner--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-banner--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8922%3A20410&viewport=-178%2C151%2C0.23&t=xHutRjwo1o5zMTgT-11
 ---
 

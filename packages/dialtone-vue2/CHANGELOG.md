@@ -1,3 +1,46 @@
+# [2.109.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.108.0...dialtone-vue2/v2.109.0) (2024-01-09)
+
+
+### Documentation
+
+* fix datepicker table dark mode ([#90](https://github.com/dialpad/dialtone/issues/90)) ([9ef39a9](https://github.com/dialpad/dialtone/commit/9ef39a9b5356931132af83086c24e855ecf5f1a7))
+
+
+### Features
+
+* port message input recipe ([#81](https://github.com/dialpad/dialtone/issues/81)) ([efb5732](https://github.com/dialpad/dialtone/commit/efb573246395e96c596cef548111b822dc5b032a))
+
+# [2.108.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.107.0...dialtone-vue2/v2.108.0) (2024-01-08)
+
+
+### Bug Fixes
+
+* error in stories when component.props is undefined ([#89](https://github.com/dialpad/dialtone/issues/89)) ([1694544](https://github.com/dialpad/dialtone/commit/169454471870a62e0ebb22617c9c3b13cfbb9257))
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+* fix storybook reactivity ([#85](https://github.com/dialpad/dialtone/issues/85)) ([0206c8c](https://github.com/dialpad/dialtone/commit/0206c8c2ff8b9a534cd92c7a46420bc038bff867))
+
+
+### Features
+
+* port attachment carousel ([#86](https://github.com/dialpad/dialtone/issues/86)) ([a67aae2](https://github.com/dialpad/dialtone/commit/a67aae2946d4088b54d7de871a236c7baa351424))
+
+# [2.107.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.6...dialtone-vue2/v2.107.0) (2024-01-04)
+
+
+### Documentation
+
+* update PR template for monorepo ([#82](https://github.com/dialpad/dialtone/issues/82)) ([a940afa](https://github.com/dialpad/dialtone/commit/a940afa4caea7286709067365cb25984e283e3e5))
+
+
+### Features
+
+* port contact suggestion ([#78](https://github.com/dialpad/dialtone/issues/78)) ([c1b9e3b](https://github.com/dialpad/dialtone/commit/c1b9e3bef5088a3ad8a78e9fbd524fba15d25f46))
+* port emoji suggestions ([#77](https://github.com/dialpad/dialtone/issues/77)) ([6000d7d](https://github.com/dialpad/dialtone/commit/6000d7d871b216b86c729f5512a4ab36c6657259))
+
 ## [2.106.6](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.5...dialtone-vue2/v2.106.6) (2024-01-03)
 
 

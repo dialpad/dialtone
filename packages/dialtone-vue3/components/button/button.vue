@@ -60,7 +60,7 @@ import { LINK_KIND_MODIFIERS } from '@/components/link';
  * A button is a UI element which allows users to take an action throughout the app.
  * It is important a button is identifiable, consistent, and communicates its actions clearly,
  * and is appropriately sized to its action.
- * @see https://dialpad.design/components/button.html
+ * @see https://dialtone.dialpad.com/components/button.html
  */
 export default {
   name: 'DtButton',

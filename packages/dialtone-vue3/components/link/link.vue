@@ -19,7 +19,7 @@ import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants';
  * A link is a navigational element that can be found on its own, within other text, or directly following content.
  * @property {String} href attribute
  * @property {String} rel attribute
- * @see https://dialpad.design/components/link.html
+ * @see https://dialtone.dialpad.com/components/link.html
  */
 export default {
   name: 'DtLink',

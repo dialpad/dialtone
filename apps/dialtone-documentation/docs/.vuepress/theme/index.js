@@ -114,7 +114,7 @@ export const dialtoneVuepressTheme = (options) => {
         placeholder: 'Search Dialtone',
       }),
       sitemapPlugin({
-        hostname: 'https://dialpad.design',
+        hostname: 'https://dialtone.dialpad.com',
       }),
     ],
     extendsMarkdown: (md) => {

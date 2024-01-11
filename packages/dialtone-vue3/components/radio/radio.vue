@@ -62,7 +62,7 @@ import { hasSlotContent } from '@/common/utils';
 /**
  * Radios are control elements that allow the user to make a single selection.
  * They are typically used in a Radio Group which allows the user to make a selection from a list of options.
- * @see https://dialpad.design/components/radio.html
+ * @see https://dialtone.dialpad.com/components/radio.html
  */
 export default {
   name: 'DtRadio',

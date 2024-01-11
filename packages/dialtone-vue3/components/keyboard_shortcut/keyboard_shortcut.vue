@@ -46,7 +46,7 @@ import { SHORTCUTS_ICON_ALIASES, SHORTCUTS_ICON_SEPARATOR } from './keyboard_sho
 
 /**
  * This component displays a visual representation of a keyboard shortcut to the user.
- * @see https://dialpad.design/components/keyboard_shortcut.html
+ * @see https://dialtone.dialpad.com/components/keyboard_shortcut.html
  */
 export default {
   name: 'DtKeyboardShortcut',

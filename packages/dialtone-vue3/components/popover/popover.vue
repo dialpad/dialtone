@@ -145,7 +145,7 @@ import { TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
- * @see https://dialpad.design/components/popover.html
+ * @see https://dialtone.dialpad.com/components/popover.html
  */
 export default {
   name: 'DtPopover',

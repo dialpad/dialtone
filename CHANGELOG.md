@@ -1,3 +1,60 @@
+# [9.4.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.3.0...dialtone/v9.4.0) (2024-01-09)
+
+
+### Documentation
+
+* fix datepicker table dark mode ([#90](https://github.com/dialpad/dialtone/issues/90)) ([9ef39a9](https://github.com/dialpad/dialtone/commit/9ef39a9b5356931132af83086c24e855ecf5f1a7))
+
+
+### Features
+
+* port message input recipe ([#81](https://github.com/dialpad/dialtone/issues/81)) ([efb5732](https://github.com/dialpad/dialtone/commit/efb573246395e96c596cef548111b822dc5b032a))
+
+# [9.3.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.2.0...dialtone/v9.3.0) (2024-01-08)
+
+
+### Bug Fixes
+
+* error in stories when component.props is undefined ([#89](https://github.com/dialpad/dialtone/issues/89)) ([1694544](https://github.com/dialpad/dialtone/commit/169454471870a62e0ebb22617c9c3b13cfbb9257))
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+* fix storybook reactivity ([#85](https://github.com/dialpad/dialtone/issues/85)) ([0206c8c](https://github.com/dialpad/dialtone/commit/0206c8c2ff8b9a534cd92c7a46420bc038bff867))
+
+
+### Features
+
+* added unread and rematch icons ([bb6830a](https://github.com/dialpad/dialtone/commit/bb6830adeb18ab6bbc3726d701c191c2a91fcadf))
+* port attachment carousel ([#86](https://github.com/dialpad/dialtone/issues/86)) ([a67aae2](https://github.com/dialpad/dialtone/commit/a67aae2946d4088b54d7de871a236c7baa351424))
+
+# [9.2.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.1.1...dialtone/v9.2.0) (2024-01-04)
+
+
+### Bug Fixes
+
+* update on the Video icon to have a better  visual balance ([#80](https://github.com/dialpad/dialtone/issues/80)) ([00d448f](https://github.com/dialpad/dialtone/commit/00d448f8e049adbcc83d2a8e76199f034e2c1c79))
+
+
+### Documentation
+
+* fix broken link in blog post ([2c6b2ca](https://github.com/dialpad/dialtone/commit/2c6b2cac0c40cbed8edbbf169b26cd53370ad272))
+* hide old illustrations ([#83](https://github.com/dialpad/dialtone/issues/83)) ([8cf9ddd](https://github.com/dialpad/dialtone/commit/8cf9dddd1d7430de2141927aa091902670da04f1))
+* update PR template for monorepo ([#82](https://github.com/dialpad/dialtone/issues/82)) ([a940afa](https://github.com/dialpad/dialtone/commit/a940afa4caea7286709067365cb25984e283e3e5))
+
+
+### Features
+
+* port contact suggestion ([#78](https://github.com/dialpad/dialtone/issues/78)) ([c1b9e3b](https://github.com/dialpad/dialtone/commit/c1b9e3bef5088a3ad8a78e9fbd524fba15d25f46))
+* port emoji suggestions ([#77](https://github.com/dialpad/dialtone/issues/77)) ([6000d7d](https://github.com/dialpad/dialtone/commit/6000d7d871b216b86c729f5512a4ab36c6657259))
+
+
+### Reverts
+
+* fix prompt-for-label if condition not running ([#84](https://github.com/dialpad/dialtone/issues/84)) ([59f186f](https://github.com/dialpad/dialtone/commit/59f186fabf13336d7a0128c0ff3e5139c936e064))
+* move if condition to step ([7dd1c19](https://github.com/dialpad/dialtone/commit/7dd1c19fafa195c5668de027d587404db2cb5bea))
+
 ## [9.1.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.1.0...dialtone/v9.1.1) (2024-01-03)
 
 

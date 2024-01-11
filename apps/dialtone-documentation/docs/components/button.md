@@ -4,7 +4,7 @@ description: A button is an UI element which signals key actions to take an acti
 status: ready
 thumb: true
 image: assets/images/components/button.png
-storybook: https://vue.dialpad.design/?path=/story/components-button--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A20208&viewport=-1695%2C219%2C0.19&t=xHutRjwo1o5zMTgT-11
 ---
 

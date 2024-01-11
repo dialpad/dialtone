@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/collapsible.png
 figma: planned
-storybook: https://vue.dialpad.design/?path=/story/components-collapsible--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-collapsible--default
 ---
 
 <code-well-header>

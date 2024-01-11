@@ -50,7 +50,7 @@ import { DtItemLayout } from '@/components/item_layout';
 
 /**
  * A list item is an element that can be used to represent individual items in a list.
- * @see https://dialpad.design/components/list_item.html
+ * @see https://dialtone.dialpad.com/components/list_item.html
  */
 export default {
   name: 'DtListItem',

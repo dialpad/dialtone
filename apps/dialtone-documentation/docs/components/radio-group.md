@@ -4,7 +4,7 @@ description: Radio groups are control elements that allow the user to make a sin
 status: ready
 thumb: true
 image: assets/images/components/radio-group.png
-storybook: https://vue.dialpad.design/?path=/story/components-radio-group--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio-group--default
 ---
 
 <code-well-header>

@@ -20,7 +20,7 @@ module.exports = {
         fixable: null, // Or `code` or `whitespace`
         schema: [], // Add a schema if the rule has options
         messages: {
-            avoidDeprecatedImport: 'Avoid usage of old dialtone icons [deprecated]. Check https://dialpad.design/components/icon.html for details.',
+            avoidDeprecatedImport: 'Avoid usage of old dialtone icons [deprecated]. Check https://dialtone.dialpad.com/components/icon.html for details.',
         },
     },
     create(context) {

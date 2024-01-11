@@ -1,3 +1,39 @@
+# [3.102.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.101.0...dialtone-vue3/v3.102.0) (2024-01-09)
+
+
+### Documentation
+
+* fix datepicker table dark mode ([#90](https://github.com/dialpad/dialtone/issues/90)) ([9ef39a9](https://github.com/dialpad/dialtone/commit/9ef39a9b5356931132af83086c24e855ecf5f1a7))
+
+
+### Features
+
+* port message input recipe ([#81](https://github.com/dialpad/dialtone/issues/81)) ([efb5732](https://github.com/dialpad/dialtone/commit/efb573246395e96c596cef548111b822dc5b032a))
+
+# [3.101.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.100.0...dialtone-vue3/v3.101.0) (2024-01-08)
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+
+
+### Features
+
+* port attachment carousel ([#86](https://github.com/dialpad/dialtone/issues/86)) ([a67aae2](https://github.com/dialpad/dialtone/commit/a67aae2946d4088b54d7de871a236c7baa351424))
+
+# [3.100.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.2...dialtone-vue3/v3.100.0) (2024-01-04)
+
+
+### Documentation
+
+* update PR template for monorepo ([#82](https://github.com/dialpad/dialtone/issues/82)) ([a940afa](https://github.com/dialpad/dialtone/commit/a940afa4caea7286709067365cb25984e283e3e5))
+
+
+### Features
+
+* port emoji suggestions ([#77](https://github.com/dialpad/dialtone/issues/77)) ([6000d7d](https://github.com/dialpad/dialtone/commit/6000d7d871b216b86c729f5512a4ab36c6657259))
+
 ## [3.99.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.1...dialtone-vue3/v3.99.2) (2023-12-21)
 
 

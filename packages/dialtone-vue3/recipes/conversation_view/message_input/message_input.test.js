@@ -111,12 +111,12 @@ describe('DtRecipeMessageInput tests', () => {
 
     describe('When we focus anywhere on the message input', () => {
       it('should focus and add the border for the message input', async () => {
-        await messageInputEl.trigger('focusin');
+        await editor.trigger('focus');
         expect(messageInputEl.classes('d-bc-black-500')).toBe(true);
       });
 
       it('should programmatically focus to input', async () => {
-        wrapper.vm.focus();
+        wrapper.vm.onFocus();
         await wrapper.vm.$nextTick();
         expect(messageInputEl.classes('d-bc-black-500')).toBe(true);
       });

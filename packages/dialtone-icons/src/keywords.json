@@ -440,6 +440,12 @@
         "message",
         "reply"
       ],
+      "unread": [
+        "message",
+        "text",
+        "chat",
+        "conversation"
+      ],
       "voicemail-drop": [
         "message",
         "record",
@@ -1914,6 +1920,9 @@
         "create",
         "follow",
         "subscribe"
+      ],
+      "user-rematch": [
+        "people"
       ],
       "user-remove": [
         "delete",
