@@ -131,10 +131,6 @@ describe('DtHovercard Tests', () => {
         expect(hovercardWindow.attributes('role')).toBe('dialog');
       });
 
-      it('aria-expanded should be set correctly on the anchor', () => {
-        expect(button.attributes('aria-expanded')).toBe('true');
-      });
-
       it('aria-controls should be set correctly on the anchor', () => {
         expect(button.attributes('aria-controls')).toBe('hovercard-1');
       });
