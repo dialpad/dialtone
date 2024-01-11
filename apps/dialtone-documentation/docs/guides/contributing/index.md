@@ -11,7 +11,7 @@ TBD
 
 ### Code
 
-To make changes in our Design System please first read the
+To make code changes in our Design System please first read the
 [CONTRIBUTING.md](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md#contributing)
 in our Dialtone repository.
 
