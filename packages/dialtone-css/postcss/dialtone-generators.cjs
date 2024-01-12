@@ -765,12 +765,14 @@ function boxShadows (declaration, mode = 'light') {
     .keys(dialtoneShadows)
     .forEach(shadowName => {
       const shadowVar = `--dt-shadow-${shadowName}`;
+      // in css inset shadows are defined by adding the inset keyword
+      const isInset = shadowName.includes('inset');
       const times = dialtoneShadows[shadowName];
       const value = Array(times)
         .fill(undefined)
         .map((val, i) => {
           const shadowNumber = i + 1;
-          return `var(${shadowVar}-${shadowNumber}-x) var(${shadowVar}-${shadowNumber}-y) var(${shadowVar}-${shadowNumber}-blur) var(${shadowVar}-${shadowNumber}-spread) var(${shadowVar}-${shadowNumber}-color)`;
+          return `var(${shadowVar}-${shadowNumber}-x) var(${shadowVar}-${shadowNumber}-y) var(${shadowVar}-${shadowNumber}-blur) var(${shadowVar}-${shadowNumber}-spread) var(${shadowVar}-${shadowNumber}-color)${isInset ? ' inset' : ''}`;
         }).join(', ');
 
       if (mode === 'light') {
