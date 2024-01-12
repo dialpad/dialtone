@@ -7,6 +7,11 @@ export default (function () {
   let start = null;
   let prevCard = null;
 
+  // Handles the timer for when the event that opens the hovercard
+  // is triggered.
+  // If no hovercard is active, it sets a delay of TOOLTIP_DELAY_MS.
+  // If there was an active hovercard, the delay depends on the time it takes
+  // to move from one anchor to the other.
   function enter (id) {
     if (prevCard) {
       const time = Date.now() - start + 100;
@@ -38,6 +43,8 @@ export default (function () {
     }
   }
 
+  // Handles the timer for when the event that closes the hovercard
+  // is triggered.
   function leave () {
     if (timerEnter) {
       clearTimeout(timerEnter);
