@@ -26,23 +26,6 @@ const baseProps = {
   value: 'initial value',
   inputAriaLabel: 'aria-label text',
   inputClass: 'qa-editor',
-  emojiPickerProps: {
-    searchNoResultsLabel: 'No results',
-    searchResultsLabel: 'Search results',
-    searchPlaceholderLabel: 'Search...',
-    skinSelectorButtonTooltipLabel: 'Change default skin tone',
-    tabSetLabels: [
-      'Most recently used',
-      'Smileys and people',
-      'Nature',
-      'Food',
-      'Activity',
-      'Travel',
-      'Objects',
-      'Symbols',
-      'Flags',
-    ],
-  },
 };
 
 const randoText = 'ricketyrick';
