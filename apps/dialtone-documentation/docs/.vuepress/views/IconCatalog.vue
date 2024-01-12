@@ -132,6 +132,11 @@ const searchIcon = () => {
     searching.value = true;
     resetCategory();
     filterIconList();
+
+    // Update URL with search parameter
+    const queryParams = new URLSearchParams(window.location.search);
+    queryParams.set('search', search.value || '');
+    history.pushState(null, null, `?${queryParams.toString()}${window.location.hash}`);
   });
 };
 
@@ -141,6 +146,11 @@ const resetSearch = () => {
   resetCategory();
   searchRef.value.focus();
   filterIconList();
+
+  // Remove search parameter from URL
+  const queryParams = new URLSearchParams(window.location.search);
+  queryParams.delete('search');
+  history.pushState(null, null, `?${queryParams.toString()}${window.location.hash}`);
 };
 
 const resetCategory = () => {
@@ -193,6 +203,13 @@ watch(selectedCategory, (newCategory) => {
 });
 onMounted(() => {
   isMobile.value = window.outerWidth <= 980;
+  // Check for existing search parameter in URL
+  const queryParams = new URLSearchParams(window.location.search);
+  const searchParam = queryParams.get('search');
+  if (searchParam !== null) {
+    search.value = searchParam;
+    searching.value = true;
+  }
   filterIconList();
 });
 </script>
