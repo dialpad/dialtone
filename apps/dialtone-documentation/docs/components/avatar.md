@@ -165,7 +165,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 ### Presence
 
-Positions the [Presence](/components/presence.html) component at each size.
+Positions the [Presence](components/presence.html) component at each size.
 
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">

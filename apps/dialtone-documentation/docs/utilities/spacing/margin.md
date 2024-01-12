@@ -72,7 +72,7 @@ Auto margins allow an element to fill a remaining space within an object. This i
 ## Classes
 
 Margins can be added to an element by using a utility class (i.e. `.d-m[#]`) or by using a directional class (i.e. `.d-m{t|r|b|l|y|x}[#]`).
-The margin utility classes help visually separate elements. Because layouts are highly contextual, margins are never applied natively to a component's outer wrapper. Instead you can use these margin classes to provide that space or the [Stack and Flow layouts](/utilities/layout/stacks/).
+The margin utility classes help visually separate elements. Because layouts are highly contextual, margins are never applied natively to a component's outer wrapper. Instead you can use these margin classes to provide that space or the [Stack and Flow layouts](utilities/layout/stacks/).
 
 <div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
   <utility-class-table>
