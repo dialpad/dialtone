@@ -16,10 +16,6 @@ const baseSlots = {
   footerContent: MOCK_FOOTER_CONTENT,
 };
 
-let mockProps = {};
-let mockAttrs = {};
-let mockSlots = {};
-
 describe('DtHovercard Tests', () => {
   let anchor;
   let hovercardWindow;
@@ -29,9 +25,9 @@ describe('DtHovercard Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtHovercard, {
-      props: { ...baseProps, ...mockProps },
-      attrs: { ...baseAttrs, ...mockAttrs },
-      slots: { ...baseSlots, ...mockSlots },
+      props: { ...baseProps },
+      attrs: { ...baseAttrs },
+      slots: { ...baseSlots },
       global: {
         stubs: {
           transition: false,
@@ -42,9 +38,12 @@ describe('DtHovercard Tests', () => {
 
     hovercardWindow = wrapper.find('[data-qa="dt-hovercard"]');
     anchor = wrapper.find('[data-qa="dt-hovercard-anchor"]');
-    content = wrapper.find('[data-qa="dt-popover-content"]');
     button = wrapper.find('[data-qa="dt-button"]');
   };
+
+  // Since tippy appends the element to the body, the assertion is done in
+  // document insted of the wrapper
+  const getHovercardContent = () => document.querySelector('[data-qa="dt-hovercard-content"]');
 
   beforeEach(() => {
     vi.useFakeTimers();
@@ -55,9 +54,8 @@ describe('DtHovercard Tests', () => {
   afterEach(() => {
     vi.useRealTimers();
     vi.clearAllTimers();
-    mockProps = {};
-    mockAttrs = {};
-    mockSlots = {};
+    wrapper.unmount();
+    document.body.innerHTML = '';
   });
 
   describe('Presentation Tests', () => {
@@ -68,14 +66,14 @@ describe('DtHovercard Tests', () => {
         vi.runAllTimers();
       });
 
-      it('should render the component', () => {
-        expect(wrapper.exists()).toBe(true);
+      it('should render the hovercard content', () => {
+        content = getHovercardContent();
+
+        expect(content.textContent).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
       });
 
-      it('should render the hovercard content', () => {
-        content = wrapper.find('[data-qa="dt-hovercard-content"]');
-
-        expect(content.text()).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
+      it('should render the component', () => {
+        expect(wrapper.exists()).toBe(true);
       });
 
       it('should render the anchor slot', () => {
@@ -89,12 +87,13 @@ describe('DtHovercard Tests', () => {
       it('hovercard is not displayed', async () => {
         vi.useFakeTimers();
         await anchor.trigger('mouseenter');
-        vi.runAllTimers();
+        await vi.runAllTimers();
         await anchor.trigger('mouseleave');
-        vi.runAllTimers();
-        content = wrapper.find('[data-qa="dt-hovercard-content"]');
+        await vi.runAllTimers();
 
-        expect(content.isVisible()).toBe(false);
+        content = getHovercardContent();
+
+        expect(content).toBeNull();
       });
     });
 
@@ -102,18 +101,21 @@ describe('DtHovercard Tests', () => {
       it('should still display the hovercard', async () => {
         await anchor.trigger('mouseenter');
         await hovercardWindow.trigger('mouseenter');
-        content = wrapper.find('[data-qa="dt-hovercard-content"]');
+        await vi.runAllTimers();
 
-        expect(content.text()).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
+        content = getHovercardContent();
+
+        expect(content.textContent).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
       });
     });
 
     describe('When focusin on anchor', () => {
       it('hovercard is not displayed', async () => {
         await anchor.trigger('focusin');
-        content = wrapper.find('[data-qa="dt-hovercard-content"]');
 
-        expect(content.isVisible()).toBe(false);
+        content = getHovercardContent();
+
+        expect(content).toBeNull();
       });
     });
   });
@@ -126,8 +128,8 @@ describe('DtHovercard Tests', () => {
       });
 
       it('shows correct role', () => {
-        vi.runAllTimers();
         hovercardWindow = wrapper.find('[data-qa="dt-hovercard__dialog"]');
+
         expect(hovercardWindow.attributes('role')).toBe('dialog');
       });
 
