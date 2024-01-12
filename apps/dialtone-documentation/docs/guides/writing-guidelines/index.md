@@ -63,10 +63,12 @@ We use **active voice** most often. Passive voice may occasionally be appropriat
 
 * The host canceled this meeting.
 </template>
+
 <template #dont>
 
 * This meeting was canceled by the host.
 </template>
+
 </dialtone-usage>
 
 ### Tone
@@ -226,10 +228,12 @@ Because contact center users are more specialized than talk users, it may occasi
 
 * Unmute microphone
 </template>
+
 <template #dont>
 
 * Unmute mic
 </template>
+
 </dialtone-usage>
 
 <!-- This should be a JSON file, spit out as a styled <dl> -->

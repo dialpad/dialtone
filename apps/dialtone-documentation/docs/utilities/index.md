@@ -41,7 +41,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 
 ### Border color
 
-`d-bc-purple-400` applies a border (`b`) color (`c`) of [Purple 400](/design/colors/#purple).
+`d-bc-purple-400` applies a border (`b`) color (`c`) of [Purple 400](design/colors/#purple).
 
 <code-well-header>
   <div class="d-bt d-btw4 d-bc-purple-400">Box</div>
@@ -67,7 +67,7 @@ A basic example styling a container by combining Dialtone's CSS utilities. Follo
 
 ### 2. Apply a dark background color
 
-Add `d-bgc-black-900` from the list of [background color utility classes](/utilities/backgrounds/color/).
+Add `d-bgc-black-900` from the list of [background color utility classes](utilities/backgrounds/color/).
 
 <code-well-header>
   <div class="d-bgc-black-900">Box</div>
@@ -79,7 +79,7 @@ Add `d-bgc-black-900` from the list of [background color utility classes](/utili
 
 ### 3. Apply color to the foreground text
 
-Since this is primary content on a dark background, let's use `d-fc-primary-inverted` from the [font color utilities](/utilities/typography/color/).
+Since this is primary content on a dark background, let's use `d-fc-primary-inverted` from the [font color utilities](utilities/typography/color/).
 
 <code-well-header>
   <div class="d-bgc-black-600 d-fc-primary-inverted">Box</div>
@@ -91,7 +91,7 @@ Since this is primary content on a dark background, let's use `d-fc-primary-inve
 
 ### 4. Apply some padding
 
-Let's use `d-px16` for horizontal padding (right and left), and `d-py8` for vertical padding (top and bottom), from the list of [padding utility classes](/utilities/spacing/padding/).
+Let's use `d-px16` for horizontal padding (right and left), and `d-py8` for vertical padding (top and bottom), from the list of [padding utility classes](utilities/spacing/padding/).
 
 <code-well-header>
   <div class="d-bgc-black-600 d-fc-primary-inverted d-px16 d-py8">Box</div>
@@ -147,7 +147,7 @@ Convert it to a `flex` container by adding `class="d-d-flex"`.
 
 ### 7. Add borders to segment each.
 
-Add a border to each box by applying `d-divide-x` (horizontal borders) to the surrounding container from the list of [divide width classes](/utilities/borders/divide-width.html).
+Add a border to each box by applying `d-divide-x` (horizontal borders) to the surrounding container from the list of [divide width classes](utilities/borders/divide-width.html).
 
 <code-well-header>
   <div class="d-d-flex d-divide-x">
@@ -169,7 +169,7 @@ Add a border to each box by applying `d-divide-x` (horizontal borders) to the su
 
 ### 8. And change the border color
 
-Since the border color of `d-divide-x` inherits the color of the parent's foreground (implicitly `currentColor`), let's soften it with `d-divide-black-400`, from the list of [divide color classes](/utilities/borders/divide-color.html).
+Since the border color of `d-divide-x` inherits the color of the parent's foreground (implicitly `currentColor`), let's soften it with `d-divide-black-400`, from the list of [divide color classes](utilities/borders/divide-color.html).
 
 <code-well-header>
   <div class="d-d-flex d-divide-x d-divide-black-400">
