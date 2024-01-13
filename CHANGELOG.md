@@ -1,3 +1,19 @@
+## [9.4.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.4.0...dialtone/v9.4.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* icon name validation ([b9cfcff](https://github.com/dialpad/dialtone/commit/b9cfcff6eb23e9a54bb8ee0cde36cc348dd2b606))
+* inset shadow generation ([#94](https://github.com/dialpad/dialtone/issues/94)) ([32cd6b4](https://github.com/dialpad/dialtone/commit/32cd6b4bf64b44da43121c5173f41672c5254813))
+* token table ([#92](https://github.com/dialpad/dialtone/issues/92)) ([2b0b58e](https://github.com/dialpad/dialtone/commit/2b0b58e4969421c0b6f58ecbfeba14d5b5d00f92))
+* video-off icon issue ([#99](https://github.com/dialpad/dialtone/issues/99)) ([4ecb3c0](https://github.com/dialpad/dialtone/commit/4ecb3c0576b69f0fb31911700c1a8dfe6d3a6497))
+
+
+### Documentation
+
+* fix links starting with / ([#91](https://github.com/dialpad/dialtone/issues/91)) ([b694973](https://github.com/dialpad/dialtone/commit/b6949730abe4732b7fa614991b98f7e4911a5504))
+* move contributing guide to "guides" ([#96](https://github.com/dialpad/dialtone/issues/96)) ([10f867c](https://github.com/dialpad/dialtone/commit/10f867cb0dae023c88d83bf21f15b3b445d720fd))
+
 # [9.4.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.3.0...dialtone/v9.4.0) (2024-01-09)
 
 
