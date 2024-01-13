@@ -1,3 +1,10 @@
+## [4.5.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.0...dialtone-icons/v4.5.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* video-off icon issue ([#99](https://github.com/dialpad/dialtone/issues/99)) ([4ecb3c0](https://github.com/dialpad/dialtone/commit/4ecb3c0576b69f0fb31911700c1a8dfe6d3a6497))
+
 # [4.5.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.4.1...dialtone-icons/v4.5.0) (2024-01-08)
 
 
