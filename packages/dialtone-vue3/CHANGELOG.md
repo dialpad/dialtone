@@ -1,3 +1,10 @@
+## [3.102.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.102.0...dialtone-vue3/v3.102.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* icon name validation ([b9cfcff](https://github.com/dialpad/dialtone/commit/b9cfcff6eb23e9a54bb8ee0cde36cc348dd2b606))
+
 # [3.102.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.101.0...dialtone-vue3/v3.102.0) (2024-01-09)
 
 
