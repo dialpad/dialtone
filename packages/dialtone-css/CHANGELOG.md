@@ -1,3 +1,16 @@
+## [8.22.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.22.1...dialtone-css/v8.22.2) (2024-01-13)
+
+
+### Bug Fixes
+
+* inset shadow generation ([#94](https://github.com/dialpad/dialtone/issues/94)) ([32cd6b4](https://github.com/dialpad/dialtone/commit/32cd6b4bf64b44da43121c5173f41672c5254813))
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+* update mono-package documentation ([#73](https://github.com/dialpad/dialtone/issues/73)) ([e037c86](https://github.com/dialpad/dialtone/commit/e037c8622c414922ae6d5715b95cd4b9136dcaa1))
+
 ## [8.22.1](https://github.com/dialpad/dialtone/compare/dialtone/v8.22.0...dialtone/v8.22.1) (2023-11-30)
 
 
