@@ -1,3 +1,10 @@
+## [2.109.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.109.0...dialtone-vue2/v2.109.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* icon name validation ([b9cfcff](https://github.com/dialpad/dialtone/commit/b9cfcff6eb23e9a54bb8ee0cde36cc348dd2b606))
+
 # [2.109.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.108.0...dialtone-vue2/v2.109.0) (2024-01-09)
 
 
