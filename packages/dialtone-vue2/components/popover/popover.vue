@@ -593,7 +593,7 @@ export default {
     },
 
     currentHovercard () {
-      return this.timer?.current;
+      return this.timer?.current.value;
     },
   },
 
