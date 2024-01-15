@@ -76,6 +76,7 @@
         :icon-name="name"
         :category="category"
         :keywords="keywords"
+        :id="'in-' + name"
         @click="selectIcon({ name, keywords, category })"
       />
     </div>
@@ -112,7 +113,7 @@
 
 <script setup>
 import { categories } from '@dialpad/dialtone-icons/dist/keywords.json';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import IconPopover from '../baseComponents/IconPopover.vue';
 import IconPopoverContent from '../baseComponents/IconPopoverContent.vue';
 import { debounce } from '../common/utilities';
@@ -192,8 +193,21 @@ const filterIconList = () => {
 
 const selectIcon = (icon) => {
   selectedIcon.value = icon;
-  if (isMobile.value) isModalOpen.value = true;
-  else isPopoverOpen.value[icon.name] = !isPopoverOpen.value[icon.name];
+  openPopoverIcon(icon.name);
+};
+
+const openPopoverIcon = (iconName) => {
+  if (isMobile.value) {
+    isModalOpen.value = true;
+  } else {
+    isPopoverOpen.value[iconName] = !isPopoverOpen.value[iconName];
+    nextTick(() => {
+      const iconElement = document.getElementById(`in-${iconName}`); // Scroll to the opened popover
+      if (iconElement) {
+        iconElement.scrollIntoView({ behavior: 'auto' });
+      }
+    });
+  }
 };
 
 watch(selectedCategory, (newCategory) => {
@@ -211,6 +225,11 @@ onMounted(() => {
     searching.value = true;
   }
   filterIconList();
+  // Open the popover if iconName has something
+  const initialIconName = new URLSearchParams(window.location.search).get('iconName');
+  if (initialIconName) {
+    openPopoverIcon(initialIconName);
+  }
 });
 </script>
 

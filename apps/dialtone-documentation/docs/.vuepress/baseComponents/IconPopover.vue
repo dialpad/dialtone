@@ -31,12 +31,19 @@
       </dt-button>
     </template>
     <template #headerContent>
-      <span
+      <div class="d-d-flex d-fd-row d-ai-center d-plc-space-between">
+        <span
         class="d-tt-capitalize d-fc-primary"
         v-text="name"
+        />
+        <copy-button
+        class="d-ml8"
+        :text="shareIcon"
+        aria-label="Copy link"
       />
-    </template>
-    <template #content>
+    </div>
+  </template>
+  <template #content>
       <icon-popover-content
         :icon-name="iconName"
         :keywords="keywords"
@@ -47,7 +54,9 @@
 </template>
 
 <script setup>
+import { computed, ref, watch } from 'vue';
 import IconPopoverContent from './IconPopoverContent.vue';
+import CopyButton from './CopyButton.vue';
 const emits = defineEmits(['update:modelValue']);
 const props = defineProps({
   iconName: { type: String, required: true },
@@ -59,6 +68,10 @@ const name = props.iconName.replaceAll('-', ' ');
 const emitOpened = (open) => {
   emits('update:modelValue', open);
 };
+
+const shareIcon = computed(() => {
+  return `${window.location.origin}${window.location.pathname}?iconName=${props.iconName}`;
+});
 </script>
 
 <style scoped lang="less">
