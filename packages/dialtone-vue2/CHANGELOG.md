@@ -1,3 +1,10 @@
+## [2.110.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.110.0...dialtone-vue2/v2.110.1) (2024-01-15)
+
+
+### Bug Fixes
+
+* **Hovercard:** timer for vue 2 ([#103](https://github.com/dialpad/dialtone/issues/103)) ([d29c2f6](https://github.com/dialpad/dialtone/commit/d29c2f6804a72119a0da5bada45acfe34ea1784e))
+
 # [2.110.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.109.1...dialtone-vue2/v2.110.0) (2024-01-15)
 
 
