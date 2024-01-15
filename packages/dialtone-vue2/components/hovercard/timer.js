@@ -1,8 +1,7 @@
-import { ref } from 'vue';
 import { TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 
 export default (function () {
-  const current = ref(null);
+  const current = { value: null };
   let timerLeave, timerEnter;
   let start = null;
   let prevCard = null;
