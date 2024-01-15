@@ -1,3 +1,10 @@
+# [2.110.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.109.1...dialtone-vue2/v2.110.0) (2024-01-15)
+
+
+### Features
+
+* **Hovercard:** add hovercard implementation ([#72](https://github.com/dialpad/dialtone/issues/72)) ([32cc1a8](https://github.com/dialpad/dialtone/commit/32cc1a837043f5fdbf562992ad9bc83f1d2b9252))
+
 ## [2.109.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.109.0...dialtone-vue2/v2.109.1) (2024-01-13)
 
 
