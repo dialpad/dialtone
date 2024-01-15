@@ -16,6 +16,7 @@
         icon-position="top"
         importance="clear"
         kind="muted"
+        :active="modelValue"
       >
         <template #icon>
           <dt-icon
@@ -54,7 +55,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import IconPopoverContent from './IconPopoverContent.vue';
 import CopyButton from './CopyButton.vue';
 const emits = defineEmits(['update:modelValue']);
@@ -70,7 +71,12 @@ const emitOpened = (open) => {
 };
 
 const shareIcon = computed(() => {
-  return `${window.location.origin}${window.location.pathname}?iconName=${props.iconName}`;
+  const currentUrl = window.location.href;
+  const newUrl = currentUrl.includes('icon_name=')
+    ? currentUrl.replace(/icon_name=[^&]+/, `icon_name=${props.iconName}`)
+    : `${currentUrl}${currentUrl.includes('?') ? '&' : '?'}icon_name=${props.iconName}`;
+
+  return newUrl;
 });
 </script>
 

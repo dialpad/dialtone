@@ -204,7 +204,7 @@ const openPopoverIcon = (iconName) => {
     nextTick(() => {
       const iconElement = document.getElementById(`in-${iconName}`); // Scroll to the opened popover
       if (iconElement) {
-        iconElement.scrollIntoView({ behavior: 'auto' });
+        iconElement.scrollIntoView({ behavior: 'instant' });
       }
     });
   }
@@ -226,7 +226,7 @@ onMounted(() => {
   }
   filterIconList();
   // Open the popover if iconName has something
-  const initialIconName = new URLSearchParams(window.location.search).get('iconName');
+  const initialIconName = new URLSearchParams(window.location.search).get('icon_name');
   if (initialIconName) {
     openPopoverIcon(initialIconName);
   }
