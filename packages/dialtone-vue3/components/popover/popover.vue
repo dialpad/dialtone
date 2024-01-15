@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <div>
     <Teleport
@@ -20,7 +21,7 @@
       <div
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
-        data-qa="dt-popover-anchor"
+        :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}-anchor` : 'dt-popover-anchor'"
         :tabindex="openOnContext ? 0 : undefined"
         @click.capture="defaultToggleOpen"
         @contextmenu="onContext"
@@ -46,7 +47,7 @@
         :id="id"
         ref="content"
         :role="role"
-        data-qa="dt-popover"
+        :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}__dialog` : 'dt-popover'"
         :aria-hidden="`${!isOpen}`"
         :aria-labelledby="labelledBy"
         :aria-label="ariaLabel"
@@ -85,7 +86,7 @@
         </popover-header-footer>
         <div
           ref="popover__content"
-          data-qa="dt-popover-content"
+          :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}-content` : 'dt-popover-content'"
           :class="[
             'd-popover__content',
             POPOVER_PADDING_CLASSES[padding],
@@ -521,6 +522,20 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * The timer is used only when the hovercard prop is true.
+     * It defines the delays when opening several hovercards.
+     * It must have the keys: enter, leave and current.
+     * If null, the default delay of 300ms will be used.
+     */
+    timer: {
+      type: [Object, null],
+      default: null,
+      validator: timer => {
+        return timer === null || (timer.enter && timer.leave && Object.keys(timer).includes('current'));
+      },
+    },
   },
 
   emits: [
@@ -591,6 +606,10 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
+    },
+
+    currentHovercard () {
+      return this.timer?.current;
     },
   },
 
@@ -667,6 +686,16 @@ export default {
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeEventListeners();
         this.tip.hide();
+      }
+    },
+
+    currentHovercard () {
+      if (this.hovercard && this.timer) {
+        if (this.currentHovercard === this.id) {
+          this.isOpen = true;
+        } else {
+          this.isOpen = false;
+        }
       }
     },
   },
@@ -987,26 +1016,34 @@ export default {
       }, TOOLTIP_DELAY_MS);
     },
 
-    onEnterAnchor (e) {
+    onEnterAnchor () {
       if (!this.hovercard) return;
-      clearTimeout(this.outTimer);
-      this.setInTimer(e);
+      if (this.timer) this.timer.enter(this.id);
+      else {
+        clearTimeout(this.outTimer);
+        this.setInTimer();
+      }
     },
 
-    onLeaveAnchor (e) {
+    onLeaveAnchor () {
       if (!this.hovercard) return;
-      clearTimeout(this.inTimer);
-      this.setOutTimer(e);
+      if (this.timer) this.timer.leave();
+      else {
+        clearTimeout(this.inTimer);
+        this.setOutTimer();
+      }
     },
 
     onEnterContent () {
       if (!this.hovercard) return;
-      clearTimeout(this.outTimer);
+      if (this.timer) this.timer.enter(this.id);
+      else clearTimeout(this.outTimer);
     },
 
-    onLeaveContent (e) {
+    onLeaveContent () {
       if (!this.hovercard) return;
-      this.setOutTimer(e);
+      if (this.timer) this.timer.leave();
+      else this.setOutTimer();
     },
 
     //  ============================================================================

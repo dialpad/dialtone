@@ -8,12 +8,15 @@ const MOCK_FOOTER_CONTENT = 'Hovercard Footer';
 const baseProps = { id: 'hovercard-1' };
 const baseAttrs = {};
 const baseSlots = {
-  anchor: '<template #anchor="slotProps">' +
-            '<button data-qa="dt-button" v-bind="slotProps">Hover me</button>' +
-          '</template>',
   content: MOCK_DEFAULT_SLOT_MESSAGE,
   headerContent: MOCK_HEADER_CONTENT,
   footerContent: MOCK_FOOTER_CONTENT,
+};
+
+const baseScopedSlots = {
+  anchor: '<template #anchor="{ attrs }">' +
+          '<button data-qa="dt-button" v-bind="attrs">Hover me</button>' +
+          '</template>',
 };
 
 describe('DtHovercard Tests', () => {
@@ -25,9 +28,10 @@ describe('DtHovercard Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtHovercard, {
-      props: { ...baseProps },
+      propsData: { ...baseProps },
       attrs: { ...baseAttrs },
       slots: { ...baseSlots },
+      scopedSlots: { ...baseScopedSlots },
       global: {
         stubs: {
           transition: false,
@@ -54,7 +58,7 @@ describe('DtHovercard Tests', () => {
   afterEach(() => {
     vi.useRealTimers();
     vi.clearAllTimers();
-    wrapper.unmount();
+    wrapper.destroy();
     document.body.innerHTML = '';
   });
 
