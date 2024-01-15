@@ -2,7 +2,7 @@ import DtHovercard from './hovercard.vue';
 
 import DtHovercardDefaultTemplate from './hovercard_default.story.vue';
 import DtHovercardManyTemplate from './hovercard_many.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 import {
   POPOVER_DIRECTIONS,
@@ -158,13 +158,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtHovercardDefaultTemplate,
-);
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtHovercard, DtHovercardDefaultTemplate, argsData),
   decorators: [() => ({
     template: `<div class="d-d-flex d-jc-center d-ai-center d-h464"><story />
     </div>`,
@@ -173,13 +168,8 @@ export const Default = {
   args: {},
 };
 
-const ManyTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtHovercardManyTemplate,
-);
 export const Many = {
-  render: ManyTemplate,
+  render: (argsData) => createRenderConfig(DtHovercard, DtHovercardManyTemplate, argsData),
   decorators: [() => ({
     template: `<div class="d-wmx464"><story />
     </div>`,
