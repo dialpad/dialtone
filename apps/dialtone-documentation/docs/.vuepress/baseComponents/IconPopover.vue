@@ -34,17 +34,17 @@
     <template #headerContent>
       <div class="d-d-flex d-fd-row d-ai-center d-plc-space-between">
         <span
-        class="d-tt-capitalize d-fc-primary"
-        v-text="name"
+          class="d-tt-capitalize d-fc-primary"
+          v-text="name"
         />
         <copy-button
-        class="d-ml8"
-        :text="shareIcon"
-        aria-label="Copy link"
-      />
-    </div>
-  </template>
-  <template #content>
+          class="d-ml8"
+          :text="shareIcon"
+          aria-label="Copy link"
+        />
+      </div>
+    </template>
+    <template #content>
       <icon-popover-content
         :icon-name="iconName"
         :keywords="keywords"
@@ -70,14 +70,7 @@ const emitOpened = (open) => {
   emits('update:modelValue', open);
 };
 
-const shareIcon = computed(() => {
-  const currentUrl = window.location.href;
-  const newUrl = currentUrl.includes('icon_name=')
-    ? currentUrl.replace(/icon_name=[^&]+/, `icon_name=${props.iconName}`)
-    : `${currentUrl}${currentUrl.includes('?') ? '&' : '?'}icon_name=${props.iconName}`;
-
-  return newUrl;
-});
+const shareIcon = computed(() => `${window.location.origin}${window.location.pathname}?icon_name=${props.iconName}`);
 </script>
 
 <style scoped lang="less">

@@ -71,12 +71,12 @@
     <div class="d-gl-docsite-icons">
       <icon-popover
         v-for="(keywords, name) in icons"
+        :id="`in-${name}`"
         :key="name"
         v-model="isPopoverOpen[name]"
         :icon-name="name"
         :category="category"
         :keywords="keywords"
-        :id="'in-' + name"
         @click="selectIcon({ name, keywords, category })"
       />
     </div>
@@ -193,10 +193,11 @@ const filterIconList = () => {
 
 const selectIcon = (icon) => {
   selectedIcon.value = icon;
-  openPopoverIcon(icon.name);
+  if (isMobile.value) isModalOpen.value = true;
+  else isPopoverOpen.value[icon.name] = !isPopoverOpen.value[icon.name];
 };
 
-const openPopoverIcon = (iconName) => {
+const scrollToIcon = (iconName) => {
   if (isMobile.value) {
     isModalOpen.value = true;
   } else {
@@ -204,7 +205,13 @@ const openPopoverIcon = (iconName) => {
     nextTick(() => {
       const iconElement = document.getElementById(`in-${iconName}`); // Scroll to the opened popover
       if (iconElement) {
+        // there is a style in dialtone-docs.less setting scroll-behavior: smooth, so
+        // we need to first set it to auto to avoid having the scroll animation
+        document.documentElement.style.scrollBehavior = 'auto';
         iconElement.scrollIntoView({ behavior: 'instant' });
+        // set the scroll behavior to smooth again
+        // eslint-disable-next-line no-return-assign
+        setTimeout(() => document.documentElement.style.scrollBehavior = 'smooth', 5);
       }
     });
   }
@@ -215,6 +222,7 @@ watch(selectedCategory, (newCategory) => {
   searching.value = false;
   filterIconList();
 });
+
 onMounted(() => {
   isMobile.value = window.outerWidth <= 980;
   // Check for existing search parameter in URL
@@ -228,7 +236,7 @@ onMounted(() => {
   // Open the popover if iconName has something
   const initialIconName = new URLSearchParams(window.location.search).get('icon_name');
   if (initialIconName) {
-    openPopoverIcon(initialIconName);
+    scrollToIcon(initialIconName);
   }
 });
 </script>
