@@ -150,27 +150,29 @@ export const argsData = {
   transition: false,
 };
 
-const decorator = () => ({
-  template: `<div class="d-wmx464"><story />
-  </div>`,
-});
-
 export default {
   title: 'Components/Hovercard',
   component: DtHovercard,
   args: argsData,
   argTypes: argTypesData,
-  decorators: [decorator],
   excludeStories: /.*Data$/,
 };
 
 export const Default = {
   render: (argsData) => createRenderConfig(DtHovercard, DtHovercardDefaultTemplate, argsData),
+  decorators: [() => ({
+    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464"><story />
+    </div>`,
+  })],
 
   args: {},
 };
 
 export const Many = {
   render: (argsData) => createRenderConfig(DtHovercard, DtHovercardManyTemplate, argsData),
+  decorators: [() => ({
+    template: `<div class="d-wmx464"><story />
+    </div>`,
+  })],
   args: { ...Default.args, offset: [0, 5] },
 };

@@ -150,17 +150,11 @@ export const argsData = {
   transition: false,
 };
 
-const decorator = () => ({
-  template: `<div class="d-wmx464"><story />
-  </div>`,
-});
-
 export default {
   title: 'Components/Hovercard',
   component: DtHovercard,
   args: argsData,
   argTypes: argTypesData,
-  decorators: [decorator],
   excludeStories: /.*Data$/,
 };
 
@@ -171,6 +165,10 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 );
 export const Default = {
   render: DefaultTemplate,
+  decorators: [() => ({
+    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464"><story />
+    </div>`,
+  })],
 
   args: {},
 };
@@ -182,5 +180,9 @@ const ManyTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 );
 export const Many = {
   render: ManyTemplate,
+  decorators: [() => ({
+    template: `<div class="d-wmx464"><story />
+    </div>`,
+  })],
   args: { ...Default.args, offset: [0, 5] },
 };
