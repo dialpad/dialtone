@@ -23,6 +23,24 @@ importers:
       '@dialpad/conventional-changelog-angular':
         specifier: ^1.1.1
         version: 1.1.1
+      '@dialpad/dialtone-css':
+        specifier: workspace:*
+        version: link:packages/dialtone-css
+      '@dialpad/dialtone-icons':
+        specifier: workspace:*
+        version: link:packages/dialtone-icons
+      '@dialpad/dialtone-tokens':
+        specifier: workspace:*
+        version: link:packages/dialtone-tokens
+      '@dialpad/dialtone-vue2':
+        specifier: ./packages/dialtone-vue2
+        version: link:packages/dialtone-vue2
+      '@dialpad/dialtone-vue3':
+        specifier: ./packages/dialtone-vue3
+        version: link:packages/dialtone-vue3
+      '@dialpad/eslint-plugin-dialtone':
+        specifier: workspace:*
+        version: link:packages/eslint-plugin-dialtone
       '@dialpad/semantic-release-changelog-json':
         specifier: ^1.0.0
         version: 1.0.0(semantic-release@21.1.2)
