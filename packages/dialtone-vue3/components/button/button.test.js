@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtButton from './button.vue';
+import DtButton from './button.ce.vue';
 import EmptyComponentFixture from '@/tests/fixtures/component.vue';
 
 const MOCK_BUTTON_STUB = vi.fn();

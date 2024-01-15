@@ -459,7 +459,7 @@
 
 <script>
 import DtRecipeCallbox from './callbox.vue';
-import DtButton from '@/components/button/button.vue';
+import DtButton from '@/components/button/button.ce.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtStack from '@/components/stack/stack.vue';

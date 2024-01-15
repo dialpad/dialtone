@@ -182,7 +182,7 @@
 </template>
 
 <script>
-import DtButton from './button.vue';
+import DtButton from './button.ce.vue';
 import { DtIcon } from '@/components/icon';
 
 export default {

@@ -4,7 +4,7 @@ module.exports = [
   'badge.vue',
   'banner.vue',
   'breadcrumbs.vue',
-  'button.vue',
+  'button.ce.vue',
   'button_group.vue',
   'card.vue',
   'checkbox.vue',

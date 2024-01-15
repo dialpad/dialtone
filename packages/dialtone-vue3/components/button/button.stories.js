@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import DtButton from './button.vue';
+import DtButton from './button.ce.vue';
 import {
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,

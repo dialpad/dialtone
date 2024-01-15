@@ -31,7 +31,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue(), svgLoader({
+  plugins: [vue({ customElement: true }), svgLoader({
     svgoConfig: {
       plugins: [
         {

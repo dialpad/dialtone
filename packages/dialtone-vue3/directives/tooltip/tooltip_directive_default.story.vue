@@ -24,7 +24,7 @@
 
 <script>
 import DtStack from '@/components/stack/stack.vue';
-import DtButton from '@/components/button/button.vue';
+import DtButton from '@/components/button/button.ce.vue';
 import DtIcon from '@/components/icon/icon.vue';
 export default {
   name: 'DtTooltipDirectiveDefault',

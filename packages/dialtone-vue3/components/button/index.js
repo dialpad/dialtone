@@ -1,4 +1,4 @@
-export { default as DtButton } from './button.vue';
+export { default as DtButton } from './button.ce.vue';
 export {
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
