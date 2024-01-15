@@ -741,6 +741,7 @@ export default {
     },
 
     defaultToggleOpen (e) {
+      if (this.hovercard) { return; }
       if (this.openOnContext) { return; }
 
       // Only use default toggle behaviour if the user has not set the open prop.
