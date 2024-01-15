@@ -1,3 +1,10 @@
+## [8.22.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.22.2...dialtone-css/v8.22.3) (2024-01-15)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** box-sizing ([#102](https://github.com/dialpad/dialtone/issues/102)) ([98f7eb6](https://github.com/dialpad/dialtone/commit/98f7eb68e7c76db295376820d05a32d5950eb817))
+
 ## [8.22.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.22.1...dialtone-css/v8.22.2) (2024-01-13)
 
 
