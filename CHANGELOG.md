@@ -1,3 +1,15 @@
+# [9.5.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.4.1...dialtone/v9.5.0) (2024-01-15)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** box-sizing ([#102](https://github.com/dialpad/dialtone/issues/102)) ([98f7eb6](https://github.com/dialpad/dialtone/commit/98f7eb68e7c76db295376820d05a32d5950eb817))
+
+
+### Features
+
+* **Hovercard:** add hovercard implementation ([#72](https://github.com/dialpad/dialtone/issues/72)) ([32cc1a8](https://github.com/dialpad/dialtone/commit/32cc1a837043f5fdbf562992ad9bc83f1d2b9252))
+
 ## [9.4.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.4.0...dialtone/v9.4.1) (2024-01-13)
 
 
