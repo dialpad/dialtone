@@ -49,9 +49,9 @@ Use `d-js-end` to justify an item to the end of its inline axis.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-g-cols3 d-w100p d-bar8 d-bgc-magenta-100">
-    <div class="d-fl-center d-js-end d-m8 d-p16 d-wmn64 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-wmn64 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-wmn64 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold d-o50">3</div>
+    <div class="d-fl-center d-js-end d-m8 d-p16 d-wmn64 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
+    <div class="d-fl-center d-m8 d-p16 d-wmn64 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
+    <div class="d-fl-center d-m8 d-p16 d-wmn64 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold d-o50">3</div>
   </div>
 </code-well-header>
 
@@ -69,9 +69,9 @@ Use `d-js-center` to justify an item to the center of its inline axis.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-g-cols3 d-w100p d-bar8 d-bgc-red-100">
-    <div class="d-fl-center d-js-center d-m8 d-p16 d-wmn64 d-bgc-red-100 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-wmn64 d-bgc-red-100 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-wmn64 d-bgc-red-100 d-bar4 d-fs-300 d-fw-bold d-o50">3</div>
+    <div class="d-fl-center d-js-center d-m8 d-p16 d-wmn64 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">1</div>
+    <div class="d-fl-center d-m8 d-p16 d-wmn64 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
+    <div class="d-fl-center d-m8 d-p16 d-wmn64 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold d-o50">3</div>
   </div>
 </code-well-header>
 
