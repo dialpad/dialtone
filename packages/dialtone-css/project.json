@@ -1,72 +1,27 @@
 {
   "name": "dialtone-css",
   "targets": {
-    "release-local": {
-      "executor": "nx:run-commands",
-      "outputs": [],
-      "dependsOn": [
-        {
-          "projects": [
-            "dialtone-tokens"
-          ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-css/release-local.config.cjs",
-        "parallel": false
-      }
-    },
     "release": {
       "executor": "nx:run-commands",
-      "outputs": [],
-      "dependsOn": [
-        {
-          "projects": [
-            "dialtone-tokens"
-          ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
       "options": {
-        "command": "pnpm publish --filter ./packages/dialtone-css",
-        "parallel": false
+        "command": "pnpm publish --filter ./packages/dialtone-css"
       }
     },
     "release-github": {
       "executor": "nx:run-commands",
-      "outputs": [],
-      "dependsOn": [
-        {
-          "projects": [
-            "dialtone-tokens"
-          ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-css/release-ci.config.cjs",
-        "parallel": false
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-css/release-ci.config.cjs"
+      }
+    },
+    "release-local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-css/release-local.config.cjs"
       }
     },
     "start": {
       "executor": "nx:run-script",
-      "outputs": [],
-      "dependsOn": [
-        {
-          "projects": [
-            "dialtone-tokens"
-          ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "options": {
-        "script": "start"
-      }
+      "options": { "script": "start" }
     }
   }
 }
