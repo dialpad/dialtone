@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.5.1",
+  "version": "4.5.2",
   "description": "Dialtone icon library",
   "scripts": {
     "build": "gulp"
