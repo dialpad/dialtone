@@ -1,3 +1,10 @@
+## [4.5.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.1...dialtone-icons/v4.5.2) (2024-01-16)
+
+
+### Bug Fixes
+
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
 ## [4.5.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.0...dialtone-icons/v4.5.1) (2024-01-13)
 
 
