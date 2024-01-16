@@ -53,10 +53,10 @@ Use `d-plc-end{-n}` to align grid items along the end of the block and/or inline
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-g-cols2 d-plc-end-center d-gg16 d-p16 d-w100p d-h216d-bar8 d-bgc-magenta-100" style="--col-width: 6.4rem;">
-    <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">4</div>
+    <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
+    <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">2</div>
+    <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+    <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">4</div>
   </div>
 </code-well-header>
 
@@ -75,10 +75,10 @@ Use `d-plc-center{-n}` to align grid items along the center of the block and/or 
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-g-cols2 d-plc-center d-gg16 d-p16 d-w100p d-h216d-bar8 d-bgc-red-100" style="--col-width: 6.4rem;">
-    <div class="d-fl-center d-p16 d-bgc-red-100 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-bgc-red-100 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-bgc-red-100 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-bgc-red-100 d-bar4 d-fs-300 d-fw-bold">4</div>
+    <div class="d-fl-center d-p16 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">1</div>
+    <div class="d-fl-center d-p16 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">2</div>
+    <div class="d-fl-center d-p16 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+    <div class="d-fl-center d-p16 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">4</div>
   </div>
 </code-well-header>
 
@@ -119,10 +119,10 @@ Use `d-plc-space-around{-n}` to distribute grid items so there is an equal amoun
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-g-cols2 d-plc-space-around d-gg16 d-p16 d-w100p d-h216d-bar8 d-bgc-magenta-100" style="--col-width: 6.4rem;">
-    <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">4</div>
+    <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
+    <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">2</div>
+    <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+    <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">4</div>
   </div>
 </code-well-header>
 

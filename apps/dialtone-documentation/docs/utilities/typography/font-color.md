@@ -22,7 +22,7 @@ Please use **only** these colors or variations of these colors which pass WCAG 2
 
 Use `d-fc-{color}` to change an element's text color.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <p class="d-fs-200 d-fc-purple-400">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
@@ -34,7 +34,7 @@ Use `d-fc-{color}` to change an element's text color.
 
 Use `d-fco{n}` to change an element's text color opacity. You can also change font color opacity on `:hover`, `:focus`, `:focus-visible`, or in dark mode by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}`, or `d:d-fco{n}` prefixes.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102 d-stack8" custom>
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102 d-stack8" custom>
   <p class="d-fs-200 d-fc-purple-400">The quick brown fox jumps over the lazy dog.</p>
   <p class="d-fs-200 d-fc-purple-400 d-fco99">The quick brown fox jumps over the lazy dog.</p>
   <p class="d-fs-200 d-fc-purple-400 d-fco95">The quick brown fox jumps over the lazy dog.</p>
@@ -62,7 +62,7 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 
 Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <button class="d-p16 d-bar4 d-fs-200 d-fc-purple-400 h:d-fc-neutral-white d-bgc-transparent h:d-bgc-purple-500 d-ba d-bc-transparent">Hover over me</button>
 </code-well-header>
 
@@ -74,7 +74,7 @@ Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 
 Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-within` state.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-center d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
   <button class="d-p16 d-bar4 d-fs-200 d-fc-magenta-300 f:d-fc-neutral-white d-bgc-transparent f:d-bgc-magenta-400 d-ba d-bc-transparent">Click or focus on me</button>
 </code-well-header>
 
@@ -86,7 +86,7 @@ Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-with
 
 Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` state [only when focused by keyboard].
 
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-center d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
   <button class="d-p16 d-bar4 d-fs-200 d-fc-magenta-300 fv:d-fc-neutral-white d-bgc-transparent fv:d-bgc-magenta-400 d-ba d-bc-transparent">Focus on me</button>
 </code-well-header>
 
