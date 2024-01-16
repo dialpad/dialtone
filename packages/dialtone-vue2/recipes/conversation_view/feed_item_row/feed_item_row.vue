@@ -3,7 +3,7 @@
     ref="FeedItemRef"
     navigation-type="none"
     v-bind="$attrs"
-    :class="listItemClasses"
+    :class="['dt-feed-item-row', listItemClasses]"
     data-qa="dt-feed-item-row"
     v-on="feedListeners"
   >
@@ -62,13 +62,17 @@
 
     <template #bottom>
       <div
+        v-if="$slots.reactions"
         class="dt-feed-item-row__reactions"
         data-qa="dt-feed-item-row--reactions"
       >
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
       </div>
-      <div class="dt-feed-item-row__threading">
+      <div
+        v-if="$slots.threading"
+        class="dt-feed-item-row__threading"
+      >
         <!-- @slot Slot for threading row component -->
         <slot name="threading" />
       </div>
@@ -317,6 +321,8 @@ export default {
   &__reactions {
     display: flex;
     flex-wrap: wrap;
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
   }
 
   &__threading {
@@ -354,7 +360,7 @@ export default {
   &:deep(.dt-item-layout--bottom) {
     display: flex;
     flex-direction: column;
-    gap: var(--dt-space-200);
+    margin-top: 0;
   }
 }
 </style>
