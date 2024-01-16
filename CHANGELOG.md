@@ -1,3 +1,16 @@
+# [9.6.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.5.0...dialtone/v9.6.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* **Hovercard:** timer for vue 2 ([#103](https://github.com/dialpad/dialtone/issues/103)) ([d29c2f6](https://github.com/dialpad/dialtone/commit/d29c2f6804a72119a0da5bada45acfe34ea1784e))
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
+
+### Features
+
+* **Datepicker:** vue2 style and keyboard navigation enhancement ([#95](https://github.com/dialpad/dialtone/issues/95)) ([2850eae](https://github.com/dialpad/dialtone/commit/2850eae8b1a54b6886fcc8c7cd0bee1f4f2c79be))
+
 # [9.5.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.4.1...dialtone/v9.5.0) (2024-01-15)
 
 
