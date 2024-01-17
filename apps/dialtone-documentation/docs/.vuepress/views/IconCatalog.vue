@@ -136,7 +136,14 @@ const searchIcon = () => {
 
     // Update URL with search parameter
     const queryParams = new URLSearchParams(window.location.search);
-    queryParams.set('search', search.value || '');
+    if (queryParams.get('icon_name')) {
+      queryParams.delete('icon_name');
+    }
+    if (search.value) {
+      queryParams.set('search', search.value);
+    } else {
+      queryParams.delete('search');
+    }
     history.pushState(null, null, `?${queryParams.toString()}${window.location.hash}`);
   });
 };
@@ -197,23 +204,22 @@ const selectIcon = (icon) => {
   else isPopoverOpen.value[icon.name] = !isPopoverOpen.value[icon.name];
 };
 
-const scrollToIcon = (iconName) => {
+const scrollToIcon = async (iconName) => {
   if (isMobile.value) {
     isModalOpen.value = true;
   } else {
     isPopoverOpen.value[iconName] = !isPopoverOpen.value[iconName];
-    nextTick(() => {
-      const iconElement = document.getElementById(`in-${iconName}`); // Scroll to the opened popover
-      if (iconElement) {
-        // there is a style in dialtone-docs.less setting scroll-behavior: smooth, so
-        // we need to first set it to auto to avoid having the scroll animation
-        document.documentElement.style.scrollBehavior = 'auto';
-        iconElement.scrollIntoView({ behavior: 'instant' });
-        // set the scroll behavior to smooth again
-        // eslint-disable-next-line no-return-assign
-        setTimeout(() => document.documentElement.style.scrollBehavior = 'smooth', 5);
-      }
-    });
+    await nextTick();
+    const iconElement = document.getElementById(`in-${iconName}`); // Scroll to the opened popover
+    if (iconElement) {
+      // there is a style in dialtone-docs.less setting scroll-behavior: smooth, so
+      // we need to first set it to auto to avoid having the scroll animation
+      document.documentElement.style.scrollBehavior = 'auto';
+      iconElement.scrollIntoView({ behavior: 'instant' });
+      await nextTick();
+      // set the scroll behavior to smooth again
+      document.documentElement.style.scrollBehavior = 'smooth';
+    }
   }
 };
 
@@ -230,7 +236,6 @@ onMounted(() => {
   const searchParam = queryParams.get('search');
   if (searchParam !== null) {
     search.value = searchParam;
-    searching.value = true;
   }
   filterIconList();
   // Open the popover if iconName has something

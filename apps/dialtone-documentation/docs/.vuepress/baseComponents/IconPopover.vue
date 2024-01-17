@@ -68,6 +68,13 @@ const props = defineProps({
 const name = props.iconName.replaceAll('-', ' ');
 const emitOpened = (open) => {
   emits('update:modelValue', open);
+  if (!open) {
+    const queryParams = new URLSearchParams(window.location.search);
+    if (queryParams.get('icon_name')) {
+      queryParams.delete('icon_name');
+      history.pushState(null, null, `?${queryParams.toString()}${window.location.hash}`);
+    }
+  }
 };
 
 const shareIcon = computed(() => `${window.location.origin}${window.location.pathname}?icon_name=${props.iconName}`);
