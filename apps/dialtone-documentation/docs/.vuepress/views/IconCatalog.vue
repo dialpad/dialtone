@@ -91,6 +91,7 @@
     </strong>
   </div>
   <dt-modal
+    v-if="selectedIcon"
     :show="isModalOpen"
     :close-button-props="{ ariaLabel: 'Close' }"
     size="full"
@@ -206,6 +207,13 @@ const selectIcon = (icon) => {
 
 const scrollToIcon = async (iconName) => {
   if (isMobile.value) {
+    const iconsList = filteredIconsList.value;
+    for (const category of Object.keys(iconsList)) {
+      if (iconsList[category][iconName]) {
+        selectIcon({ name: iconName, keywords: iconsList[category][iconName], category });
+        break;
+      }
+    }
     isModalOpen.value = true;
   } else {
     isPopoverOpen.value[iconName] = !isPopoverOpen.value[iconName];
