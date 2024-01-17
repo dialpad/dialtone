@@ -3,37 +3,11 @@
   "targets": {
     "build-docs": {
       "executor": "nx:run-script",
-      "dependsOn": [
-        {
-          "projects": [
-            "dialtone-css",
-            "dialtone-icons",
-            "dialtone-vue3"
-          ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "outputs": [],
-      "options": {
-        "script": "build",
-        "parallel": true
-      }
+      "options": { "script": "build" }
     },
     "start": {
       "executor": "nx:run-script",
-      "outputs": [],
-      "dependsOn": [
-        {
-          "projects": ["dialtone-vue3", "dialtone-icons"],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "options": {
-        "script": "start",
-        "parallel": true
-      }
+      "options": { "script": "start" }
     }
   }
 }

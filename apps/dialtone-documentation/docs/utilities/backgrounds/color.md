@@ -70,24 +70,24 @@ Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 
 Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state background color.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <button class="d-p16 d-bar4 d-fs-200 d-fc-black-800 d-bgc-transparent f:d-fc-red-200 f:d-bgc-red-200 f:d-bgo25 d-ba d-bc-transparent">Click on me</button>
+<code-well-header class="d-fl-center d-bgc-red-100 d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+  <button class="d-p16 d-bar4 d-fs-200 d-fc-black-800 d-bgc-transparent f:d-fc-red-300 f:d-bgc-red-300 f:d-bgo25 d-ba d-bc-transparent">Click on me</button>
 </code-well-header>
 
 ```html
-<button class="d-bgc-transparent f:d-fc-red-200 f:d-bgc-red-200 f:d-bgo25">...</button>
+<button class="d-bgc-transparent f:d-fc-red-300 f:d-bgc-red-300 f:d-bgo25">...</button>
 ```
 
 ## Focus visible
 
 Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background color [only when focused by keyboard].
 
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <button class="d-p16 d-bar4 d-fs-200 d-fc-black-800 d-bgc-transparent fv:d-fc-red-200 fv:d-bgc-red-200 fv:d-bgo25 d-ba d-bc-transparent">Focus on me</button>
+<code-well-header class="d-fl-center d-bgc-red-100 d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+  <button class="d-p16 d-bar4 d-fs-200 d-fc-black-800 d-bgc-transparent fv:d-fc-red-300 fv:d-bgc-red-300 fv:d-bgo25 d-ba d-bc-transparent">Focus on me</button>
 </code-well-header>
 
 ```html
-<button class="d-bgc-transparent fv:d-fc-red-200 fv:d-bgc-red-200 fv:d-bgo25">...</button>
+<button class="d-bgc-transparent fv:d-fc-red-300 fv:d-bgc-red-300 fv:d-bgo25">...</button>
 ```
 
 <script setup>

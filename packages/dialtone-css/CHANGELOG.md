@@ -1,3 +1,15 @@
+# [8.23.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.22.3...dialtone-css/v8.23.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
+
+### Features
+
+* **Datepicker:** vue2 style and keyboard navigation enhancement ([#95](https://github.com/dialpad/dialtone/issues/95)) ([2850eae](https://github.com/dialpad/dialtone/commit/2850eae8b1a54b6886fcc8c7cd0bee1f4f2c79be))
+
 ## [8.22.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.22.2...dialtone-css/v8.22.3) (2024-01-15)
 
 

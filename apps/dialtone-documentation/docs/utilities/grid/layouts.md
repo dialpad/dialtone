@@ -119,14 +119,14 @@ Use `.d-g-cols{n}` to create a multi-column layout.
 <aside class="d-bar8 d-of-hidden">
   <header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216">
     <div class="d-d-grid d-g-cols4 d-gg16 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-magenta-100">
-      <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">1</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">2</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">3</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">4</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">5</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">6</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">7</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold">8</div>
+      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
+      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">2</div>
+      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">4</div>
+      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">5</div>
+      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">6</div>
+      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">7</div>
+      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">8</div>
     </div>
   </header>
 </aside>

@@ -1,3 +1,15 @@
+## [1.23.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.4...dialtone-tokens/v1.23.5) (2024-01-16)
+
+
+### Bug Fixes
+
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+
 ## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
 
 

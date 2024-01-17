@@ -1,69 +1,132 @@
 <template>
-  <div class="d-datepicker__month-year-picker">
-    <div>
-      <button
-        id="prevYearButton"
-        :ref="el => { if (el) setDayRef(el) }"
-        type="button"
-        :aria-label="`${changeToLabel} ${prevYearLabel} ${selectYear - 1}`"
-        @click="changeYear(-1)"
-        @keydown="handleKeyDown($event)"
+  <dt-stack
+    direction="row"
+    class="d-datepicker__month-year"
+    gap="300"
+  >
+    <dt-stack
+      as="nav"
+      direction="row"
+      gap="200"
+      class="d-datepicker__nav"
+    >
+      <dt-tooltip
+        :message="prevYearLabel"
+        placement="top"
       >
-        <dt-icon
-          name="chevrons-left"
-          size="400"
-        />
-      </button>
-      <button
-        id="prevMonthButton"
-        :ref="el => { if (el) setDayRef(el) }"
-        type="button"
-        :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, MONTH_FORMAT)}`"
-        @click="changeMonth(-1)"
-        @keydown="handleKeyDown($event)"
+        <template #anchor>
+          <dt-button
+            id="prevYearButton"
+            :ref="el => { if (el) setDayRef(el) }"
+            size="xs"
+            importance="clear"
+            kind="muted"
+            :circle="true"
+            class="d-datepicker__nav-btn"
+            type="button"
+            :aria-label="`${changeToLabel} ${prevYearLabel} ${selectYear - 1}`"
+            @click="changeYear(-1)"
+            @keydown="handleKeyDown($event)"
+          >
+            <dt-icon
+              name="chevrons-left"
+              size="200"
+            />
+          </dt-button>
+        </template>
+      </dt-tooltip>
+      <dt-tooltip
+        :message="prevMonthLabel"
+        placement="top"
       >
-        <dt-icon
-          name="chevron-left"
-          size="300"
-        />
-      </button>
-    </div>
-    <div>
-      <p>
-        {{ formattedMonth(selectMonth, MONTH_FORMAT) }}
+        <template #anchor>
+          <dt-button
+            id="prevMonthButton"
+            :ref="el => { if (el) setDayRef(el) }"
+            size="xs"
+            importance="clear"
+            kind="muted"
+            :circle="true"
+            class="d-datepicker__nav-btn"
+            type="button"
+            :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, MONTH_FORMAT)}`"
+            @click="changeMonth(-1)"
+            @keydown="handleKeyDown($event)"
+          >
+            <dt-icon
+              name="chevron-left"
+              size="200"
+            />
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </dt-stack>
+    <div
+      id="calendar-heading"
+      class="d-datepicker__month-year-title"
+    >
+      {{ formattedMonth(selectMonth, MONTH_FORMAT) }}
 
-        {{ selectYear }}
-      </p>
+      {{ selectYear }}
     </div>
-    <div>
-      <button
-        id="nextMonthButton"
-        :ref="el => { if (el) setDayRef(el) }"
-        type="button"
-        :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, MONTH_FORMAT)}`"
-        @click="changeMonth(1)"
-        @keydown="handleKeyDown($event)"
+    <dt-stack
+      as="nav"
+      direction="row"
+      gap="200"
+      class="d-datepicker__nav"
+    >
+      <dt-tooltip
+        :message="nextMonthLabel"
+        placement="top"
       >
-        <dt-icon
-          name="chevron-right"
-          size="300"
-        />
-      </button>
-      <button
-        id="nextYearButton"
-        :ref="el => { if (el) setDayRef(el) }"
-        type="button"
-        :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
-        @click="changeYear(1)"
-        @keydown="handleKeyDown($event)"
+        <template #anchor>
+          <dt-button
+            id="nextMonthButton"
+            :ref="el => { if (el) setDayRef(el) }"
+            size="xs"
+            importance="clear"
+            :circle="true"
+            kind="muted"
+            class="d-datepicker__nav-btn"
+            type="button"
+            :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, MONTH_FORMAT)}`"
+            @click="changeMonth(1)"
+            @keydown="handleKeyDown($event)"
+          >
+            <dt-icon
+              name="chevron-right"
+              size="200"
+            />
+          </dt-button>
+        </template>
+      </dt-tooltip>
+      <dt-tooltip
+        :message="nextYearLabel"
+        placement="top"
       >
-        <dt-icon
-          name="chevrons-right"
-          size="300"
-        />
-      </button>
-    </div>
-  </div>
+        <template #anchor>
+          <dt-button
+            id="nextYearButton"
+            :ref="el => { if (el) setDayRef(el) }"
+            size="xs"
+            kind="muted"
+            :circle="true"
+            importance="clear"
+            class="d-datepicker__nav-btn"
+            type="button"
+            :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
+            @click="changeYear(1)"
+            @keydown="handleKeyDown($event)"
+          >
+            <dt-icon
+              name="chevrons-right"
+              size="200"
+            />
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script>
@@ -71,11 +134,14 @@ import { DtIcon } from '@/components/icon';
 import { getYear, addMonths, getMonth, set, subMonths, getDate } from 'date-fns';
 import { getCalendarDays, formatMonth } from '../utils';
 import { MONTH_FORMAT } from '../datepicker_constants';
+import DtStack from '@/components/stack/stack.vue';
+import DtTooltip from '@/components/tooltip/tooltip.vue';
+import DtButton from '@/components/button/button.vue';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
 
-  components: { DtIcon },
+  components: { DtButton, DtTooltip, DtStack, DtIcon },
 
   props: {
     prevMonthLabel: {
@@ -119,11 +185,18 @@ export default {
     'calendar-days',
 
     /**
-     * Will focus the day picker
+     * Will focus first day in calendar
      *
-     * @event focus-day
+     * @event focus-first-day
      */
-    'focus-day',
+    'focus-first-day',
+
+    /**
+     * Will focus last day in calendar
+     *
+     * @event focus-last-day
+     */
+    'focus-last-day',
 
     /**
      * Will close the datepicker
@@ -191,7 +264,7 @@ export default {
     },
 
     focusMonthYearPicker () {
-      this.focusRefs[0].focus();
+      this.focusRefs[0].$el.focus();
     },
 
     handleKeyDown (event) {
@@ -200,10 +273,10 @@ export default {
           event.preventDefault();
           if (this.focusPicker === 0) {
             this.focusPicker = 3;
-            this.focusRefs[this.focusPicker].focus();
+            this.focusRefs[this.focusPicker].$el.focus();
           } else {
             this.focusPicker--;
-            this.focusRefs[this.focusPicker].focus();
+            this.focusRefs[this.focusPicker].$el.focus();
           }
           break;
 
@@ -211,20 +284,21 @@ export default {
           event.preventDefault();
           if (this.focusPicker === 3) {
             this.focusPicker = 0;
-            this.focusRefs[this.focusPicker].focus();
+            this.focusRefs[this.focusPicker].$el.focus();
           } else {
             this.focusPicker++;
-            this.focusRefs[this.focusPicker].focus();
+            this.focusRefs[this.focusPicker].$el.focus();
           }
           break;
 
         case 'ArrowDown':
           event.preventDefault();
-          this.$emit('focus-day');
+          this.$emit('focus-first-day');
           break;
 
         case 'Tab':
-          this.$emit('focus-day');
+          event.preventDefault();
+          this.$emit('focus-first-day');
           break;
 
         case 'Escape':
@@ -245,14 +319,29 @@ export default {
     },
 
     changeMonth (value) {
-      const initialDate = set(this.selectedDate, { month: this.selectMonth, year: this.selectYear });
-      const date = ++value ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
+      // Adjust year when changing from January to December or vice versa
+      if ((this.selectMonth === 0 && value === -1) || (this.selectMonth === 11 && value === 1)) {
+        this.selectYear += value;
+      }
 
-      this.selectMonth = getMonth(date);
+      // Calculate the new date by adding or subtracting months
+      const initialDate = set(this.selectedDate, { month: this.selectMonth, year: this.selectYear });
+      const newDate = value === 1 ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
+
+      // Update the selected month
+      this.selectMonth = getMonth(newDate);
     },
 
     changeYear (value) {
       this.selectYear = this.selectYear + value;
+    },
+
+    goToNextMonth () {
+      this.changeMonth(1);
+    },
+
+    goToPrevMonth () {
+      this.changeMonth(-1);
     },
   },
 };

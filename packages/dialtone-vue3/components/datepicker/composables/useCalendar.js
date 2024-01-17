@@ -1,5 +1,5 @@
-import { computed, ref, watch } from 'vue';
-import { getWeekDayNames } from '@/components/datepicker/utils.js';
+import { computed, ref, watch, nextTick } from 'vue';
+import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate } from '@/components/datepicker/utils.js';
 import { MONTH_FORMAT, WEEK_START } from '@/components/datepicker/datepicker_constants.js';
 import { format, getYear } from 'date-fns';
 
@@ -22,9 +22,9 @@ export function useCalendar (props, emits) {
     return `${props.selectDayLabel} ${day.text} ${format(day.value, MONTH_FORMAT)} ${getYear(day.value)}`;
   }
 
-  function setDayRef (el, currentMonth) {
-    if (!daysRef.value.includes(el) && currentMonth) {
-      daysRef.value.push(el);
+  function setDayRef (el, day) {
+    if (!daysRef.value.some(day => day.el === el) && day.currentMonth) {
+      daysRef.value.push({ el, day });
     }
   }
 
@@ -34,9 +34,15 @@ export function useCalendar (props, emits) {
         event.preventDefault();
         focusDay.value -= 7;
         try {
-          daysRef.value[focusDay.value].focus();
+          daysRef.value[focusDay.value].el.$el.focus();
         } catch (error) {
-          emits('focus-month-year-picker');
+          const prevFocusDate = calculatePrevFocusDate(daysRef.value[focusDay.value + 7].day.value);
+          emits('go-to-prev-month');
+
+          nextTick(() => {
+            daysRef.value[prevFocusDate - 1].el.$el.focus();
+            focusDay.value += prevFocusDate - 1;
+          });
         }
         break;
 
@@ -44,9 +50,15 @@ export function useCalendar (props, emits) {
         event.preventDefault();
         focusDay.value += 7;
         try {
-          daysRef.value[focusDay.value].focus();
+          daysRef.value[focusDay.value].el.$el.focus();
         } catch (error) {
-          emits('focus-month-year-picker');
+          const nextFocusDate = calculateNextFocusDate(daysRef.value[focusDay.value - 7].day.value);
+          emits('go-to-next-month');
+
+          nextTick(() => {
+            daysRef.value[nextFocusDate - 1].el.$el.focus();
+            focusDay.value += nextFocusDate - 1;
+          });
         }
         break;
 
@@ -54,7 +66,11 @@ export function useCalendar (props, emits) {
         event.preventDefault();
         if (focusDay.value > 0) {
           focusDay.value -= 1;
-          daysRef.value[focusDay.value].focus();
+          daysRef.value[focusDay.value].el.$el.focus();
+        } else {
+          // if we are on month first day, jump to last day of prev month
+          emits('go-to-prev-month');
+          focusLastDay();
         }
         break;
 
@@ -62,7 +78,12 @@ export function useCalendar (props, emits) {
         event.preventDefault();
         if (focusDay.value < daysRef.value.length - 1) {
           focusDay.value += 1;
-          daysRef.value[focusDay.value].focus();
+          daysRef.value[focusDay.value].el.$el.focus();
+        } else {
+          // if we are on month last day, jump to first day of next month
+          emits('go-to-next-month');
+
+          focusFirstDay();
         }
         break;
 
@@ -79,7 +100,17 @@ export function useCalendar (props, emits) {
 
   function focusFirstDay () {
     focusDay.value = 0;
-    daysRef.value[focusDay.value].focus();
+
+    nextTick(() => {
+      daysRef.value[focusDay.value].el.$el.focus();
+    });
+  }
+
+  function focusLastDay () {
+    nextTick(() => {
+      focusDay.value = daysRef.value.length - 1;
+      daysRef.value[focusDay.value].el.$el.focus();
+    });
   }
 
   function selectDay (day) {

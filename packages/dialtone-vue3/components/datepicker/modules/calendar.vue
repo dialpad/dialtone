@@ -1,45 +1,63 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="d-datepicker__calendar">
-    <div
-      class="d-datepicker__week-day"
-    >
-      <div
-        v-for="day in weekDays"
-        :key="day"
+  <table
+    class="d-datepicker__calendar"
+    aria-labelledby="calendar-heading"
+  >
+    <thead>
+      <tr>
+        <th
+          v-for="day in weekDays"
+          :key="day"
+          scope="col"
+          class="d-datepicker__cell d-datepicker__cell--header"
+        >
+          <span
+            class="d-datepicker__weekday"
+            :title="day"
+            :aria-label="day"
+          > {{ day }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        v-for="(week, indexWeek) in calendarDays"
+        :key="indexWeek"
       >
-        <p>
-          {{ day }}
-        </p>
-      </div>
-    </div>
-    <div
-      v-for="(week, indexWeek) in calendarDays"
-      :key="indexWeek"
-      class="d-datepicker__week"
-    >
-      <button
-        v-for="(day, indexDays) in week.days"
-        :key="indexWeek + indexDays"
-        :ref="el => { if (el) setDayRef(el, day.currentMonth) }"
-        class="d-datepicker__day"
-        :class="{
-          'd-datepicker__day--disabled': !day.currentMonth,
-          'd-datepicker__day--selected': selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected,
-        }"
-        type="button"
-        :aria-label="dayAriaLabel(day)"
-        @click="selectDay(day)"
-        @keydown="handleKeyDown($event)"
-      >
-        {{ day.text }}
-      </button>
-    </div>
-  </div>
+        <td
+          v-for="(day, indexDays) in week.days"
+          :key="indexWeek + indexDays"
+          class="d-datepicker__cell"
+        >
+          <dt-button
+            :ref="el => { if (el) setDayRef(el, day) }"
+            class="d-datepicker__day"
+            :circle="true"
+            size="sm"
+            importance="clear"
+            :disabled="!day.currentMonth"
+            :class="{
+              'd-datepicker__day--disabled': !day.currentMonth,
+              'd-datepicker__day--selected': selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected,
+            }"
+            type="button"
+            :aria-selected="!!selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected"
+            :aria-label="dayAriaLabel(day)"
+            @click="selectDay(day)"
+            @keydown="handleKeyDown($event)"
+          >
+            {{ day.text }}
+          </dt-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script setup>
 import { useCalendar } from '@/components/datepicker/composables/useCalendar.js';
+import { DtButton } from '@/components/button';
 
 const props = defineProps({
   calendarDays: {
@@ -80,6 +98,20 @@ const emits = defineEmits([
      * @event close-datepicker
      */
   'close-datepicker',
+
+  /**
+     * Will go to the next month
+     *
+     * @event go-to-next-month
+     */
+  'go-to-next-month',
+
+  /**
+     * Will go to the previous month
+     *
+     * @event go-to-prev-month
+     */
+  'go-to-prev-month',
 ]);
 
 const {

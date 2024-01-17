@@ -28,6 +28,8 @@ let mockProps = {};
 describe('DtDatepicker Tests', () => {
   let wrapper;
   let datepickerHeader;
+  let datepickerBody;
+  let datepickerValue;
   let prevYearButton;
   let prevMonthButton;
   let nextMonthButton;
@@ -41,7 +43,9 @@ describe('DtDatepicker Tests', () => {
 
     await vi.dynamicImportSettled();
 
-    datepickerHeader = wrapper.find('.d-datepicker--header');
+    datepickerHeader = wrapper.find('.d-datepicker__hd');
+    datepickerBody = wrapper.find('.d-datepicker__bd');
+    datepickerValue = wrapper.find('.d-datepicker__month-year-title');
     prevYearButton = wrapper.find('#prevYearButton');
     prevMonthButton = wrapper.find('#prevMonthButton');
     nextMonthButton = wrapper.find('#nextMonthButton');
@@ -83,23 +87,23 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('should render month and year of selected date', () => {
-        expect(wrapper.find('.d-datepicker--header p').text()).toBe(MOCK_HEADER_SELECTED_DATE);
+        expect(datepickerValue.text()).toBe(MOCK_HEADER_SELECTED_DATE);
       });
     });
 
     describe('On the body', () => {
       it('should render datepicker body', () => {
-        expect(wrapper.find('.d-datepicker--body').exists()).toBe(true);
+        expect(datepickerBody.exists()).toBe(true);
       });
 
       it('should render 7 days of the week', () => {
-        const weekDays = wrapper.find('.d-datepicker__week-day');
+        const weekDays = wrapper.findAll('.d-datepicker__weekday');
 
-        expect(weekDays.findAll('div').length).toBe(7);
+        expect(weekDays.length).toBe(7);
       });
 
       it('should render 6 weeks', () => {
-        const weeks = wrapper.findAll('.d-datepicker__week');
+        const weeks = wrapper.findAll('.d-datepicker__calendar tbody tr');
 
         expect(weeks.length).toBe(6);
       });
@@ -239,7 +243,7 @@ describe('DtDatepicker Tests', () => {
     it('should update year when previous year button is clicked', async () => {
       await prevYearButton.trigger('click');
 
-      expect(wrapper.find('.d-datepicker--header p')
+      expect(datepickerValue
         .text())
         .toBe(`${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR - 1}`);
     });
@@ -247,7 +251,7 @@ describe('DtDatepicker Tests', () => {
     it('should update year when next year button is clicked', async () => {
       await nextYearButton.trigger('click');
 
-      expect(wrapper.find('.d-datepicker--header p')
+      expect(datepickerValue
         .text())
         .toBe(`${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR + 1}`);
     });
@@ -255,7 +259,7 @@ describe('DtDatepicker Tests', () => {
     it('should update month when previous month button is clicked', async () => {
       await prevMonthButton.trigger('click');
 
-      expect(wrapper.find('.d-datepicker--header p')
+      expect(datepickerValue
         .text())
         .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
     });
@@ -263,9 +267,70 @@ describe('DtDatepicker Tests', () => {
     it('should update month when next month button is clicked', async () => {
       await nextMonthButton.trigger('click');
 
-      expect(wrapper.find('.d-datepicker--header p')
+      expect(datepickerValue
         .text())
         .toBe(`${formatMonth(MOCK_TODAY_MONTH + 1, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+    });
+
+    it('should go to previous month on left arrow press on first day', async () => {
+      const days = wrapper.findAll('.d-datepicker__day');
+
+      await days.at(6).trigger('keydown.ArrowLeft');
+
+      expect(datepickerValue
+        .text())
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+    });
+
+    it('should go to next month on right arrow press on last day', async () => {
+      const daysJuly = wrapper.findAll('.d-datepicker__day');
+
+      await daysJuly.at(6).trigger('keydown.ArrowLeft');
+
+      // Should be June
+      expect(datepickerValue
+        .text())
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+
+      const daysJune = wrapper.findAll('.d-datepicker__day');
+
+      await daysJune.at(33).trigger('keydown.ArrowRight');
+
+      // Should be July again
+      expect(datepickerValue
+        .text())
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+    });
+
+    it('should go to prev month on up arrow press on some day of first week month', async () => {
+      const daysJuly = wrapper.findAll('.d-datepicker__day');
+
+      await daysJuly.at(6).trigger('keydown.ArrowUp');
+
+      // Should be June
+      expect(datepickerValue
+        .text())
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+    });
+
+    it('should go to next month on down arrow press on some day of last week month', async () => {
+      const daysJuly = wrapper.findAll('.d-datepicker__day');
+
+      await daysJuly.at(6).trigger('keydown.ArrowUp');
+
+      // Should be June
+      expect(datepickerValue
+        .text())
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+
+      const daysJune = wrapper.findAll('.d-datepicker__day');
+
+      await daysJune.at(33).trigger('keydown.ArrowDown');
+
+      // Should be July again
+      expect(datepickerValue
+        .text())
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH, MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
     });
 
     it('should emit selected-date event when a day is clicked', async () => {

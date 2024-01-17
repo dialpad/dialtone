@@ -1,3 +1,15 @@
+# [2.111.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.110.1...dialtone-vue2/v2.111.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
+
+### Features
+
+* **Datepicker:** vue2 style and keyboard navigation enhancement ([#95](https://github.com/dialpad/dialtone/issues/95)) ([2850eae](https://github.com/dialpad/dialtone/commit/2850eae8b1a54b6886fcc8c7cd0bee1f4f2c79be))
+
 ## [2.110.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.110.0...dialtone-vue2/v2.110.1) (2024-01-15)
 
 

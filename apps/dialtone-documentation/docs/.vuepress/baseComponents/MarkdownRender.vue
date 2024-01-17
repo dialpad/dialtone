@@ -24,7 +24,11 @@ const props = defineProps({
 const markdownToHtml = computed(() => {
   // eslint-disable-next-line new-cap
   const md = new markdownIt({ html: true });
-  const renderedMarkdown = md.render(props.markdown);
+  let renderedMarkdown = md.render(props.markdown);
+
+  // Add 'd-link' class to all <a> tags
+  renderedMarkdown = renderedMarkdown.replace(/<a /g, '<a class="d-link" ');
+
   return renderedMarkdown;
 });
 </script>
