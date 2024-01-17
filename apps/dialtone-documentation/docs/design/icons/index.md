@@ -1,6 +1,5 @@
 ---
 title: Icons
-status: in progress
 shortTitle: icons
 description: An icon style for visually communicating commands, status, and more.
 storybook: https://vue.dialpad.design/?path=/docs/components-icon--default
