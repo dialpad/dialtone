@@ -1,3 +1,19 @@
+## [9.6.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.6.0...dialtone/v9.6.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** spacing and transition improvements - Vue 2 ([#109](https://github.com/dialpad/dialtone/issues/109)) ([b33a82c](https://github.com/dialpad/dialtone/commit/b33a82c68f27d0db8760e4332667fa19eacd5b24))
+* Icons Update ([#110](https://github.com/dialpad/dialtone/issues/110)) ([4804d83](https://github.com/dialpad/dialtone/commit/4804d83f29cd52960fc2c9ab67f2ae37635951e0))
+* **Popover:** set text color within popover dialog ([#108](https://github.com/dialpad/dialtone/issues/108)) ([9ea0fe7](https://github.com/dialpad/dialtone/commit/9ea0fe715cff346ba1bf4b35ba1772a6c998a397))
+
+
+### Documentation
+
+* added icons section in design language ([#50](https://github.com/dialpad/dialtone/issues/50)) ([fe7a0ac](https://github.com/dialpad/dialtone/commit/fe7a0ac949f57de8b755c52e99a1b92096b727fd))
+* added update url with search value ([#100](https://github.com/dialpad/dialtone/issues/100)) ([174b3fc](https://github.com/dialpad/dialtone/commit/174b3fc52c2351855e5e6ac5a5bddae58d55094e))
+* adjusted background on utilities examples ([#97](https://github.com/dialpad/dialtone/issues/97)) ([43cb609](https://github.com/dialpad/dialtone/commit/43cb609803588055cfdfd81fbfd9a4a5ddaf4e35))
+
 # [9.6.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.5.0...dialtone/v9.6.0) (2024-01-16)
 
 
