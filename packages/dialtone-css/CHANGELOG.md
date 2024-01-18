@@ -1,3 +1,10 @@
+## [8.23.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.23.0...dialtone-css/v8.23.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* **Popover:** set text color within popover dialog ([#108](https://github.com/dialpad/dialtone/issues/108)) ([9ea0fe7](https://github.com/dialpad/dialtone/commit/9ea0fe715cff346ba1bf4b35ba1772a6c998a397))
+
 # [8.23.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.22.3...dialtone-css/v8.23.0) (2024-01-16)
 
 
