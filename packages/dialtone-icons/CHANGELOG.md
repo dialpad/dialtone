@@ -1,3 +1,10 @@
+## [4.5.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.2...dialtone-icons/v4.5.3) (2024-01-18)
+
+
+### Bug Fixes
+
+* Icons Update ([#110](https://github.com/dialpad/dialtone/issues/110)) ([4804d83](https://github.com/dialpad/dialtone/commit/4804d83f29cd52960fc2c9ab67f2ae37635951e0))
+
 ## [4.5.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.1...dialtone-icons/v4.5.2) (2024-01-16)
 
 
