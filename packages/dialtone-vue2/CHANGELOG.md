@@ -1,3 +1,10 @@
+## [2.111.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.111.0...dialtone-vue2/v2.111.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** spacing and transition improvements - Vue 2 ([#109](https://github.com/dialpad/dialtone/issues/109)) ([b33a82c](https://github.com/dialpad/dialtone/commit/b33a82c68f27d0db8760e4332667fa19eacd5b24))
+
 # [2.111.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.110.1...dialtone-vue2/v2.111.0) (2024-01-16)
 
 
