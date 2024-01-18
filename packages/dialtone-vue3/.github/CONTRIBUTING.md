@@ -90,7 +90,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
 1. See [README.md](../README.md) for instructions on how to initially clone and run the project.
 2. First make sure you are on the `staging` branch with `git checkout staging`, and that it is up-to-date with `git pull`.
 3. Create a personal branch to make your change off of `staging` with `git checkout -b my-change-branch`. We use kebab-case for branch names.
-4. Make and commit your changes. Note our [commit message conventions](COMMIT_CONVENTION.md).
+4. Make and commit your changes. Note our commit message conventions in [COMMIT_CONVENTION.md].
 5. Push your branch to remote. `git push -u origin my-change-branch`.
 6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
 7. Set the label on your PR:
@@ -297,7 +297,7 @@ change via a blog post on [dialtone.dialpad.com](https://dialtone.dialpad.com/ab
 
 Dialtone Vue uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/)
 to have commit messages that can be used as part of the [semantic release process](RELEASING.md).
-For more information, see [COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md).
+For more information, see [COMMIT_CONVENTION.md].
 
 Commit message conventions will be enforced on commit via git hook when pushing to branches (`production`, `staging`, `alpha` and `beta`).
 
@@ -360,6 +360,8 @@ Currently, we use GitHub Actions for the following:
 
 - Deploying to production `.github/workflows/deploy.yml`, See [RELEASING](RELEASING.md) for instructions on how to do this.
 - Linting our files on pull request `.github/workflows/lint-pr.yml`.
-- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION](COMMIT_CONVENTION.md) for our commit message conventions.
+- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION] for our commit message conventions.
 - Running unit tests on pull requests and pushes to staging `.github/workflows/unit_tests.yml`.
 - Running visual tests after approved pull requests and pushes to staging `.github/workflows/visual_tests.yml`.
+
+[COMMIT_CONVENTION.md]: /.github/COMMIT_CONVENTION.md
