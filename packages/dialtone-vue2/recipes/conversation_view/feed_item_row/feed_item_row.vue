@@ -261,10 +261,13 @@ export default {
   },
 
   watch: {
-    state (newState, oldState) {
-      if (newState !== DEFAULT_FEED_ROW_STATE) {
-        this.transitionActive = true;
-      }
+    state: {
+      immediate: true,
+      handler: function (newState, oldState) {
+        if (newState !== DEFAULT_FEED_ROW_STATE) {
+          this.transitionActive = true;
+        }
+      },
     },
   },
 
