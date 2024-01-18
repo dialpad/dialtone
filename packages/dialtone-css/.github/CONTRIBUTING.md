@@ -53,7 +53,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
 1. See [README.md](../README.md) for instructions on how to initially clone and run the project.
 2. First make sure you are on the `staging` branch with `git checkout staging`, and that it is up to date with `git pull`.
 3. Create a personal branch to make your change off of `staging` with `git checkout -b my-change-branch`. We use kebab-case for branch names.
-4. Make and commit your changes. Note our [commit message conventions](COMMIT_CONVENTION.md). If you have only a single commit on your branch, then your git commit message must follow the conventions. If you have multiple commits on your branch, then the github PR title must follow the commit message conventions. Your change will be automatically linted on commit.
+4. Make and commit your changes. Note our commit message conventions in [COMMIT_CONVENTION.md]. If you have only a single commit on your branch, then your git commit message must follow the conventions. If you have multiple commits on your branch, then the github PR title must follow the commit message conventions. Your change will be automatically linted on commit.
 5. Push your branch to remote. `git push -u origin my-change-branch`.
 6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
 7. Once your changes have been approved, you may squash merge your branch into `staging`.
@@ -165,7 +165,7 @@ Dialtone adopts the [WCAG 2.1 AA](https://www.w3.org/WAI/standards-guidelines/wc
 
 ## Commit Message Convention
 
-Dialtone uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) to have commit messages that can be used as part of the [semantic release process](RELEASING.md). For more information, see [COMMIT_CONVENTION.md](COMMIT_CONVENTION.md).
+Dialtone uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) to have commit messages that can be used as part of the [semantic release process](RELEASING.md). For more information, see [COMMIT_CONVENTION.md].
 
 ### Git Hooks
 
@@ -321,7 +321,8 @@ also to define the component status on [Components status page],
 
 - Deploying to `production` `.github/workflows/deploy.yml`, See [RELEASING](RELEASING.md) for instructions on how to do this.
 - Linting our LESS files on pull request `.github/workflows/lint-pr.yml`.
-- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION](COMMIT_CONVENTION.md) for our commit message conventions.
+- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION.md] for our commit message conventions.
 
 [Components overview page]: https://dialtone.dialpad.com/components/
 [Components status page]: https://dialtone.dialpad.com/components/status/
+[COMMIT_CONVENTION.md]: /.github/COMMIT_CONVENTION.md
