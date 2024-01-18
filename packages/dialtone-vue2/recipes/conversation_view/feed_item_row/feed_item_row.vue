@@ -325,21 +325,19 @@ export default {
 
   &__header {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     flex-wrap: wrap;
     gap: var(--dt-space-300);
+    font-size: var(--dt-font-size-200);
+    line-height: var(--dt-font-line-height-300);
 
     &__name {
-      font-size: var(--dt-font-size-200);
-      line-height: var(--dt-font-line-height-300);
       font-weight: var(--dt-font-weight-bold);
     }
 
     &__time {
       font-size: var(--dt-font-size-100);
-      line-height: 2.1rem;
       color: var(--dt-color-foreground-tertiary);
-      font-weight: var(--dt-font-weight-normal);
       flex-shrink: 0;
     }
   }
