@@ -198,6 +198,9 @@
         "undo",
         "history"
       ],
+      "rematch": [
+        "user"
+      ],
       "repeat": [
         "loop",
         "arrows"
