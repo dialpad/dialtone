@@ -1,7 +1,7 @@
 export const FEED_ROW_STATE_BACKGROUND_COLOR = {
   NORMAL: '',
-  SEARCHED: 'd-bgc-warning-subtle',
-  ERROR: 'd-bgc-critical-subtle',
+  SEARCHED: 'dt-feed-item-row--state-searched',
+  ERROR: 'dt-feed-item-row--state-error',
 };
 
 export const DEFAULT_FEED_ROW_STATE = 'NORMAL';
