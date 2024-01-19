@@ -8,7 +8,9 @@ Thanks for your interest in contributing to Dialtone Icons! Please take a moment
 
 Dialtone Icons is an icon repository which serves to store, pre-process and ship icons
 to use either on [Dialtone-vue icon]
-or standalone as SVG files
+or standalone as SVG files.
+
+[Check the Icon catalog.](https://dialtone.dialpad.com/design/icons/)
 
 ### What is a contribution?
 
@@ -59,6 +61,29 @@ After you have discussed your change with the Dialtone team, follow these steps 
 Once your change is in `staging` it will go live with the next Dialtone icons release.
 Releases are done on demand by the Dialtone team, and are done fairly regularly.
 If you need your change to be released promptly, please ask in the #dialtone Dialpad channel.
+
+## Adding an icon
+
+- In the [Icons Figma file] select and export each icon as SVG.
+- Place the exported SVG file(s) in the appropriate folder category inside `./src/svg/`
+- Add the name and keywords in the `keywords.json` file. Add the keywords array as the value. e.g:
+
+```js
+{
+   "arrows": {
+     "arrow-left": ["arrow", "left", "direction"],
+   //   ...
+   }
+   // ...
+}
+```
+
+- Run `pnpm run build`
+- Add, commit and push your changes as mentioned from step 4 in [Making a pull request](#making-a-pull-request).
+- Open a pull request.
+- Once approved it can be merged into main and will go out in the next Dialtone release.
+
+[Learn more on How to craft an icon.](https://dialtone.dialpad.com/design/icons/#crafting-an-icon)
 
 ## Coding guidelines
 
@@ -176,3 +201,4 @@ All GHA workflows are in the `.github/workflows` directory. Currently, we use Gi
 [SemVer]: https://semver.org/
 [Conventional Commits specification]: https://www.conventionalcommits.org/en/v1.0.0/
 [Dialtone-vue icon]: https://vue.dialpad.design/?path=/story/components-icon--default
+[Icons Figma file]: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT9-Icon-Library?type=design&node-id=10023-2864&mode=design&t=MvRnRubYryeiG1az-0
