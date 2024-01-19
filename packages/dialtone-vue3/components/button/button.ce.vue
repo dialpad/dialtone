@@ -15,7 +15,6 @@
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
-      v-if="shouldRenderIcon()"
       data-qa="dt-button-icon"
       :class="[
         'base-button__icon',
@@ -30,7 +29,6 @@
       />
     </span>
     <span
-      v-if="hasSlotContent($slots.default)"
       data-qa="dt-button-label"
       :class="['d-btn__label', 'base-button__label', labelClass]"
     >
@@ -288,6 +286,14 @@ export default {
         this.isInvalidPropCombination(this.circle, this.kind, this.importance);
       },
     },
+  },
+
+  async mounted () {
+    const dialtoneCSS = await import('@dialpad/dialtone-css/lib/dist/css/dialtone.min.css', { assert: { type: 'css' } });
+    const shadowRoot = this.$el.parentNode;
+    console.log(dialtoneCSS.default);
+    shadowRoot.adoptedStyleSheets.push(dialtoneCSS.default);
+    // console.log(document.styleSheets, shadowRoot.styleSheets);
   },
 
   methods: {

@@ -139,7 +139,11 @@
         "default": "./dist/vue3/directives.cjs"
       }
     },
-    "./eslint-plugin": "./dist/eslint-plugin/index.js"
+    "./eslint-plugin": "./dist/eslint-plugin/index.js",
+    "./web-components": {
+      "import": "./dist/vue3/web-components.js",
+      "require": "./dist/vue3/web-components.cjs"
+    }
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [

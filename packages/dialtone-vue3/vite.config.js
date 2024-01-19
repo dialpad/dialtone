@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import svgLoader from 'vite-svg-loader';
 import vue from '@vitejs/plugin-vue';
+import babel from 'vite-plugin-babel';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import hash from 'string-hash';
@@ -17,36 +18,46 @@ export default defineConfig({
         emoji: resolve(__dirname, './emoji.js'),
         message_input: resolve(__dirname, './message_input.js'),
         directives: resolve(__dirname, './directives.js'),
+        'web-components': resolve(__dirname, './index.ce.js'),
       },
     },
     rollupOptions: {
-      external: [
-        'vue',
-        '@dialpad/dialtone-css',
-      ],
-      output: {
-        globals: {
-          vue: 'Vue',
-        },
-      },
+      external: ['@dialpad/dialtone-css'],
     },
   },
-  plugins: [vue({ customElement: true }), svgLoader({
-    svgoConfig: {
-      plugins: [
-        {
-          name: 'prefixIds',
-          params: {
-            delim: '',
-            prefix: (_, extra) => {
-              return `dt-icon${hash(extra.path)}`;
-            },
-            prefixClassNames: false,
-          },
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          plugins: ['@babel/plugin-syntax-import-attributes'],
         },
-      ],
-    },
-  })],
+        parserOptions: {
+          plugins: ['@babel/plugin-syntax-import-attributes'],
+        },
+      },
+    }),
+    svgLoader({
+      svgoConfig: {
+        plugins: [
+          {
+            name: 'prefixIds',
+            params: {
+              delim: '',
+              prefix: (_, extra) => {
+                return `dt-icon${hash(extra.path)}`;
+              },
+              prefixClassNames: false,
+            },
+          },
+        ],
+      },
+    }),
+    babel({
+      babelConfig: {
+        plugins: ['@babel/plugin-syntax-import-attributes'],
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
