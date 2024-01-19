@@ -12,13 +12,6 @@ import Document from '@tiptap/extension-document';
 import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
-import Bold from '@tiptap/extension-bold';
-import BulletList from '@tiptap/extension-bullet-list';
-import Italic from '@tiptap/extension-italic';
-import TipTapLink from '@tiptap/extension-link';
-import ListItem from '@tiptap/extension-list-item';
-import Strike from '@tiptap/extension-strike';
-import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import Emoji from './extensions/emoji';
 import Link from './extensions/link';
@@ -26,7 +19,6 @@ import { MentionPlugin } from './extensions/mentions/mention';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-  RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
 } from './rich_text_editor_constants';
 
 import suggestion from './extensions/mentions/suggestion';
@@ -54,14 +46,6 @@ export default {
     editable: {
       type: Boolean,
       default: true,
-    },
-
-    /**
-     * Whether the input allows for line breaks to be introduced in the text.
-     */
-    allowLineBreaks: {
-      type: Boolean,
-      default: false,
     },
 
     /**
@@ -191,18 +175,7 @@ export default {
   computed: {
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [
-        Bold,
-        BulletList,
-        CodeBlock,
-        Document,
-        Italic,
-        ListItem,
-        Paragraph,
-        Strike,
-        Text,
-        Underline,
-      ];
+      const extensions = [CodeBlock, Document, Paragraph, Text];
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
@@ -214,27 +187,21 @@ export default {
 
       // make sure that this is defined before any other extensions
       // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
-      if (!this.allowLineBreaks) {
-        extensions.push(
-          HardBreak.extend({
-            addKeyboardShortcuts () {
-              return {
-                Enter: () => true,
-                'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
-                  () => commands.newlineInCode(),
-                  () => commands.createParagraphNear(),
-                  () => commands.liftEmptyBlock(),
-                  () => commands.splitBlock(),
-                ]),
-              };
-            },
-          }),
-        );
-      }
-
-      extensions.push(TipTapLink.configure({
-        protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
-      }));
+      extensions.push(
+        HardBreak.extend({
+          addKeyboardShortcuts () {
+            return {
+              Enter: () => true,
+              'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
+                () => commands.newlineInCode(),
+                () => commands.createParagraphNear(),
+                () => commands.liftEmptyBlock(),
+                () => commands.splitBlock(),
+              ]),
+            };
+          },
+        }),
+      );
 
       if (this.mentionSuggestion) {
         // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
@@ -394,9 +361,5 @@ export default {
     color: var(--dt-color-foreground-placeholder);
     pointer-events: none;
     height: 0;
-  }
-
-  .ProseMirror li {
-    list-style-type: circle;
   }
 </style>
