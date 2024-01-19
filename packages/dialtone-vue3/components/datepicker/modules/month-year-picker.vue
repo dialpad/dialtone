@@ -49,7 +49,7 @@
             :circle="true"
             class="d-datepicker__nav-btn"
             type="button"
-            :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, MONTH_FORMAT)}`"
+            :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, INTL_MONTH_FORMAT, locale)}`"
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -65,7 +65,7 @@
       id="calendar-heading"
       class="d-datepicker__month-year-title"
     >
-      {{ formattedMonth(selectMonth, MONTH_FORMAT) }}
+      {{ formattedMonth(selectMonth, INTL_MONTH_FORMAT, locale) }}
 
       {{ selectYear }}
     </div>
@@ -89,7 +89,7 @@
             :circle="true"
             class="d-datepicker__nav-btn"
             type="button"
-            :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, MONTH_FORMAT)}`"
+            :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, INTL_MONTH_FORMAT, locale)}`"
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
@@ -134,11 +134,16 @@ import { DtIcon } from '@/components/icon';
 import { DtStack } from '@/components/stack';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
-import { MONTH_FORMAT } from '../datepicker_constants';
+import { INTL_MONTH_FORMAT } from '../datepicker_constants';
 import { onMounted } from 'vue';
 import { useMonthYearPicker } from '@/components/datepicker/composables/useMonthYearPicker.js';
 
 const props = defineProps({
+  locale: {
+    type: String,
+    required: true,
+  },
+
   prevMonthLabel: {
     type: String,
     required: true,

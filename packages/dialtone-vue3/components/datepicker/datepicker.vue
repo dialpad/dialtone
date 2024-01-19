@@ -7,6 +7,7 @@
     <div class="d-datepicker__hd">
       <month-year-picker
         ref="monthYearPicker"
+        :locale="locale"
         :prev-month-label="prevMonthLabel"
         :next-month-label="nextMonthLabel"
         :prev-year-label="prevYearLabel"
