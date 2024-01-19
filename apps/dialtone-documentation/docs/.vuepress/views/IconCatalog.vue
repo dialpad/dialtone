@@ -17,6 +17,7 @@
         </template>
         <template #rightIcon>
           <dt-button
+            v-if="!isSearchEmpty"
             id="search-input-button-close"
             kind="muted"
             importance="clear"
@@ -167,6 +168,8 @@ const resetCategory = () => {
   selectedCategory.value = '';
 };
 
+const isSearchEmpty = computed(() => !search.value || search.value.trim().length === 0);
+
 const hasSearchResults = computed(() => Object.keys(filteredIconsList.value).length > 0);
 
 /**
@@ -258,6 +261,6 @@ onMounted(() => {
 <style scoped>
   /* more or less a hack, 🤷‍♂️ */
   #search-input-button-close {
-    margin-right: var(--dt-size-300-negative);
+    margin-right: var(--dt-size-350-negative);
   }
 </style>
