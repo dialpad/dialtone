@@ -1,3 +1,10 @@
+# [3.105.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.104.0...dialtone-vue3/v3.105.0) (2024-01-19)
+
+
+### Features
+
+* datepicker full language support ([#118](https://github.com/dialpad/dialtone/issues/118)) ([988b727](https://github.com/dialpad/dialtone/commit/988b727103cfa34b0cf7cb2a26317f58d5cb5350))
+
 # [3.104.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.103.0...dialtone-vue3/v3.104.0) (2024-01-16)
 
 
