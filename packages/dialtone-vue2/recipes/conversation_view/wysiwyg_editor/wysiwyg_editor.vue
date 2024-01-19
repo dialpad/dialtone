@@ -112,7 +112,7 @@
       </dt-button>
 
       <dt-button
-        v-if="showAddLinkButton"
+        v-if="showAddLink.showAddLinkButton"
         data-qa="dt-wysiwyg-editor-add-link-btn"
         class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
         size="sm"
@@ -129,9 +129,11 @@
         </template>
       </dt-button>
     </div>
+
+    <!-- Add/Remove link modal -->
     <dt-modal
       :show="showLinkInput"
-      :title="addLinkTitle"
+      :title="showAddLink.setLinkModalTitle"
       :visually-hidden-close="true"
       :visually-hidden-close-label="'Close link input modal'"
       data-qa="dt-wysiwyg-editor-link-input-modal"
@@ -144,7 +146,7 @@
       <div class="d-m4">
         <dt-rich-text-editor
           v-model="linkInput"
-          input-aria-label="Add link input field"
+          :input-aria-label="showAddLink.setLinkInputAriaLabel"
           data-qa="dt-wysiwyg-editor-link-input"
           :link="true"
           :output-format="textOutputFormat"
@@ -158,26 +160,29 @@
       </div>
       <template #footer>
         <dt-button
+          :aria-label="confirmSetLinkButton.ariaLabel"
           data-qa="dt-wysiwyg-editor-set-link-confirm-btn"
           @click="setLink"
         >
-          {{ confirmSetLinkButtonLabel }}
+          {{ confirmSetLinkButton.label }}
         </dt-button>
         <dt-button
+          :aria-label="cancelSetLinkButton.ariaLabel"
           importance="clear"
           kind="muted"
           data-qa="dt-wysiwyg-editor-set-link-cancel-btn"
           @click="closeLinkInputModal"
         >
-          {{ cancelSetLinkButtonLabel }}
+          {{ cancelSetLinkButton.label }}
         </dt-button>
         <dt-button
+          :aria-label="removeLinkButton.ariaLabel"
           importance="clear"
           kind="muted"
           data-qa="dt-wysiwyg-editor-remove-link-btn"
           @click="removeLink"
         >
-          {{ removeLinkButtonLabel }}
+          {{ removeLinkButton.label }}
         </dt-button>
       </template>
     </dt-modal>
@@ -322,35 +327,27 @@ export default {
     },
 
     /**
-     * The title shown in the link input modal.
+     * Confirm set link button defaults.
      */
-    setLinkModalTitle: {
-      type: String,
-      default: 'Add a link',
+    confirmSetLinkButton: {
+      type: Object,
+      default: () => ({ label: 'Confirm', ariaLabel: 'Confirm set link' }),
     },
 
     /**
-     * The text shown in confirmation button to set a link.
+     * Remove link button defaults.
      */
-    confirmSetLinkButtonLabel: {
-      type: String,
-      default: 'Confirm',
+    removeLinkButton: {
+      type: Object,
+      default: () => ({ label: 'Remove', ariaLabel: 'Remove link' }),
     },
 
     /**
-     * The text shown in remove link button.
+     * Cancel set link button defaults.
      */
-    removeLinkButtonLabel: {
-      type: String,
-      default: 'Remove',
-    },
-
-    /**
-     * The text shown in cancel button to set a link.
-     */
-    cancelSetLinkButtonLabel: {
-      type: String,
-      default: 'Cancel',
+    cancelSetLinkButton: {
+      type: Object,
+      default: () => ({ label: 'Cancel', ariaLabel: 'Cancel set link' }),
     },
 
     /**
@@ -402,11 +399,15 @@ export default {
     },
 
     /**
-     * Show buttons to add and remove links
+     * Show add link default config.
      */
-    showAddLinkButton: {
-      type: Boolean,
-      default: true,
+    showAddLink: {
+      type: Object,
+      default: () => ({
+        showAddLinkButton: true,
+        setLinkModalTitle: 'Add a link',
+        setLinkInputAriaLabel: 'Input field to add link',
+      }),
     },
   },
 
@@ -449,10 +450,6 @@ export default {
   },
 
   computed: {
-    addLinkTitle () {
-      return this.setLinkModalTitle;
-    },
-
     inputLength () {
       return this.internalInputValue.length;
     },
