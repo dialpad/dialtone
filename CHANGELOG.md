@@ -1,3 +1,16 @@
+# [9.7.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.6.1...dialtone/v9.7.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* icon dt-ai alignment adjust ([#116](https://github.com/dialpad/dialtone/issues/116)) ([5467c5c](https://github.com/dialpad/dialtone/commit/5467c5c9ceb5099dd2d03cc61b118ee192538961))
+* input focus within ([#106](https://github.com/dialpad/dialtone/issues/106)) ([98aab0a](https://github.com/dialpad/dialtone/commit/98aab0ab0cf9584a9dffe72d62d3f4eb3dfeb0e2))
+
+
+### Features
+
+* datepicker full language support ([#118](https://github.com/dialpad/dialtone/issues/118)) ([988b727](https://github.com/dialpad/dialtone/commit/988b727103cfa34b0cf7cb2a26317f58d5cb5350))
+
 ## [9.6.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.6.0...dialtone/v9.6.1) (2024-01-18)
 
 
