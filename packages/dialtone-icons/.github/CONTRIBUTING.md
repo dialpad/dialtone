@@ -65,9 +65,8 @@ If you need your change to be released promptly, please ask in the #dialtone Dia
 ### Important Folders and Files
 
 - `src/svg`: All the source SVG icon files.
-<!-- - `baseIconTemplate`: Used as base template to generate a unique identifier for the icons -->
-- `icons.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable while searching on [Dialtone icons documentation](https://dialpad.design/components/icon.html)
-<!-- - `utils.js`: Singleton that's used at build time to generate the unique ID to every icon. -->
+- `keywords.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable while searching on [Dialtone icons documentation](https://dialpad.design/components/icon.html).
+- `icons.json`: This file is auto generated and used to list all the icons in Storybook.
 
 ## Commit Message Convention
 
