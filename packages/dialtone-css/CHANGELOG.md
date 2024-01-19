@@ -1,3 +1,10 @@
+## [8.23.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.23.1...dialtone-css/v8.23.2) (2024-01-19)
+
+
+### Bug Fixes
+
+* input focus within ([#106](https://github.com/dialpad/dialtone/issues/106)) ([98aab0a](https://github.com/dialpad/dialtone/commit/98aab0ab0cf9584a9dffe72d62d3f4eb3dfeb0e2))
+
 ## [8.23.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.23.0...dialtone-css/v8.23.1) (2024-01-18)
 
 
