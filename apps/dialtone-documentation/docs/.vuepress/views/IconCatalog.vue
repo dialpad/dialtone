@@ -13,19 +13,20 @@
         @keyup="searchIcon"
       >
         <template #leftIcon>
-          <dt-icon name="search" />
+          <dt-icon name="search" size="300" />
         </template>
         <template #rightIcon>
           <dt-button
             id="search-input-button-close"
             kind="muted"
             importance="clear"
+            size="xs"
             circle
             aria-label="Clear filters"
             @click="resetSearch"
           >
             <template #icon>
-              <dt-icon name="close" />
+              <dt-icon name="close" size="200" />
             </template>
           </dt-button>
         </template>
