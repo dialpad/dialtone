@@ -13,19 +13,21 @@
         @keyup="searchIcon"
       >
         <template #leftIcon>
-          <dt-icon name="search" />
+          <dt-icon name="search" size="300" />
         </template>
         <template #rightIcon>
           <dt-button
+            v-if="!isSearchEmpty"
             id="search-input-button-close"
             kind="muted"
             importance="clear"
+            size="xs"
             circle
             aria-label="Clear filters"
             @click="resetSearch"
           >
             <template #icon>
-              <dt-icon name="close" />
+              <dt-icon name="close" size="200" />
             </template>
           </dt-button>
         </template>
@@ -166,6 +168,8 @@ const resetCategory = () => {
   selectedCategory.value = '';
 };
 
+const isSearchEmpty = computed(() => !search.value || search.value.trim().length === 0);
+
 const hasSearchResults = computed(() => Object.keys(filteredIconsList.value).length > 0);
 
 /**
@@ -257,6 +261,6 @@ onMounted(() => {
 <style scoped>
   /* more or less a hack, 🤷‍♂️ */
   #search-input-button-close {
-    margin-right: var(--dt-size-300-negative);
+    margin-right: var(--dt-size-350-negative);
   }
 </style>
