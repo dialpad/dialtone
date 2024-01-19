@@ -49,7 +49,7 @@
             :circle="true"
             class="d-datepicker__nav-btn"
             type="button"
-            :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, MONTH_FORMAT)}`"
+            :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1)}`"
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -65,7 +65,7 @@
       id="calendar-heading"
       class="d-datepicker__month-year-title"
     >
-      {{ formattedMonth(selectMonth, MONTH_FORMAT) }}
+      {{ formattedMonth(selectMonth) }}
 
       {{ selectYear }}
     </div>
@@ -89,7 +89,7 @@
             kind="muted"
             class="d-datepicker__nav-btn"
             type="button"
-            :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, MONTH_FORMAT)}`"
+            :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1)}`"
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
@@ -133,7 +133,7 @@
 import { DtIcon } from '@/components/icon';
 import { getYear, addMonths, getMonth, set, subMonths, getDate } from 'date-fns';
 import { getCalendarDays, formatMonth } from '../utils';
-import { MONTH_FORMAT } from '../datepicker_constants';
+import { INTL_MONTH_FORMAT } from '../datepicker_constants';
 import DtStack from '@/components/stack/stack.vue';
 import DtTooltip from '@/components/tooltip/tooltip.vue';
 import DtButton from '@/components/button/button.vue';
@@ -144,6 +144,11 @@ export default {
   components: { DtButton, DtTooltip, DtStack, DtIcon },
 
   props: {
+    locale: {
+      type: String,
+      required: true,
+    },
+
     prevMonthLabel: {
       type: String,
       required: true,
@@ -223,11 +228,7 @@ export default {
     },
 
     formattedMonth () {
-      return (month, format) => formatMonth(month, format);
-    },
-
-    MONTH_FORMAT () {
-      return MONTH_FORMAT;
+      return (month) => formatMonth(month, INTL_MONTH_FORMAT, this.locale);
     },
   },
 

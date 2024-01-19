@@ -14,7 +14,7 @@ export function useMonthYearPicker (props, emits) {
   });
 
   const formattedMonth = computed(() => {
-    return (month, format) => formatMonth(month, format);
+    return (month, format, locale) => formatMonth(month, format, locale);
   });
 
   watch(selectMonth, () => {

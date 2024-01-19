@@ -1,5 +1,5 @@
 import {
-  startOfWeek, addDays, getMonth, isEqual, format,
+  startOfWeek, addDays, getMonth, isEqual,
   addMonths, startOfMonth, getDay, getDate,
   subMonths, endOfMonth,
 } from 'date-fns';
@@ -88,8 +88,8 @@ export const getWeekDayNames = (locale, weekStart) => {
   return [days[weekStart]].concat(...afterWeekStart).concat(...beforeWeekStart);
 };
 
-export const formatMonth = (month, monthFormat) => {
-  return format(new Date(2000, month, 1), monthFormat);
+export const formatMonth = (month, monthFormat, locale) => {
+  return new Intl.DateTimeFormat(locale, { month: monthFormat }).format(new Date(2000, month, 1));
 };
 
 export const calculateNextFocusDate = (currentDate) => {
