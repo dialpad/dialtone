@@ -112,7 +112,11 @@
       </dt-button>
 
       <dt-button
+<<<<<<< HEAD
         v-if="showAddLink.showAddLinkButton"
+=======
+        v-if="showAddLinkButton"
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
         data-qa="dt-wysiwyg-editor-add-link-btn"
         class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
         size="sm"
@@ -129,11 +133,17 @@
         </template>
       </dt-button>
     </div>
+<<<<<<< HEAD
 
     <!-- Add/Remove link modal -->
     <dt-modal
       :show="showLinkInput"
       :title="showAddLink.setLinkModalTitle"
+=======
+    <dt-modal
+      :show="showLinkInput"
+      :title="addLinkTitle"
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
       :visually-hidden-close="true"
       :visually-hidden-close-label="'Close link input modal'"
       data-qa="dt-wysiwyg-editor-link-input-modal"
@@ -146,7 +156,11 @@
       <div class="d-m4">
         <dt-rich-text-editor
           v-model="linkInput"
+<<<<<<< HEAD
           :input-aria-label="showAddLink.setLinkInputAriaLabel"
+=======
+          input-aria-label="Add link input field"
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
           data-qa="dt-wysiwyg-editor-link-input"
           :link="true"
           :output-format="textOutputFormat"
@@ -160,6 +174,7 @@
       </div>
       <template #footer>
         <dt-button
+<<<<<<< HEAD
           :aria-label="confirmSetLinkButton.ariaLabel"
           data-qa="dt-wysiwyg-editor-set-link-confirm-btn"
           @click="setLink"
@@ -168,21 +183,39 @@
         </dt-button>
         <dt-button
           :aria-label="cancelSetLinkButton.ariaLabel"
+=======
+          data-qa="dt-wysiwyg-editor-set-link-confirm-btn"
+          @click="setLink"
+        >
+          {{ confirmSetLinkButtonLabel }}
+        </dt-button>
+        <dt-button
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
           importance="clear"
           kind="muted"
           data-qa="dt-wysiwyg-editor-set-link-cancel-btn"
           @click="closeLinkInputModal"
         >
+<<<<<<< HEAD
           {{ cancelSetLinkButton.label }}
         </dt-button>
         <dt-button
           :aria-label="removeLinkButton.ariaLabel"
+=======
+          {{ cancelSetLinkButtonLabel }}
+        </dt-button>
+        <dt-button
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
           importance="clear"
           kind="muted"
           data-qa="dt-wysiwyg-editor-remove-link-btn"
           @click="removeLink"
         >
+<<<<<<< HEAD
           {{ removeLinkButton.label }}
+=======
+          {{ removeLinkButtonLabel }}
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
         </dt-button>
       </template>
     </dt-modal>
@@ -327,6 +360,7 @@ export default {
     },
 
     /**
+<<<<<<< HEAD
      * Confirm set link button defaults.
      */
     confirmSetLinkButton: {
@@ -348,6 +382,37 @@ export default {
     cancelSetLinkButton: {
       type: Object,
       default: () => ({ label: 'Cancel', ariaLabel: 'Cancel set link' }),
+=======
+     * The title shown in the link input modal.
+     */
+    setLinkModalTitle: {
+      type: String,
+      default: 'Add a link',
+    },
+
+    /**
+     * The text shown in confirmation button to set a link.
+     */
+    confirmSetLinkButtonLabel: {
+      type: String,
+      default: 'Confirm',
+    },
+
+    /**
+     * The text shown in remove link button.
+     */
+    removeLinkButtonLabel: {
+      type: String,
+      default: 'Remove',
+    },
+
+    /**
+     * The text shown in cancel button to set a link.
+     */
+    cancelSetLinkButtonLabel: {
+      type: String,
+      default: 'Cancel',
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
     },
 
     /**
@@ -399,6 +464,7 @@ export default {
     },
 
     /**
+<<<<<<< HEAD
      * Show add link default config.
      */
     showAddLink: {
@@ -408,6 +474,13 @@ export default {
         setLinkModalTitle: 'Add a link',
         setLinkInputAriaLabel: 'Input field to add link',
       }),
+=======
+     * Show buttons to add and remove links
+     */
+    showAddLinkButton: {
+      type: Boolean,
+      default: true,
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
     },
   },
 
@@ -450,6 +523,13 @@ export default {
   },
 
   computed: {
+<<<<<<< HEAD
+=======
+    addLinkTitle () {
+      return this.setLinkModalTitle;
+    },
+
+>>>>>>> 6396f4c8e (feat(wysiwyg-editor, rich-text-editor): add wysiwyg component)
     inputLength () {
       return this.internalInputValue.length;
     },
