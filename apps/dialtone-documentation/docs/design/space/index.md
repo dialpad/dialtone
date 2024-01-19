@@ -1,8 +1,19 @@
 ---
-title: Spacing
-status: In progress
-description: The spacing units defines the paddings, gaps, and margins around interface elements.
+title: Space
+description: Define paddings, gaps, and margins around elements.
 ---
+
+<svg-loader name="space-img" />
+
+## Choosing Space vs Size
+
+### Space
+
+Spacing design tokens focus on controlling **spatial relationships**; that is, the space between and around elements. Example CSS properties they correspond to: `padding`, `margin`, `gap`
+
+### Size
+
+[Size](/design/size/) design tokens define intrinsic **dimensions** of UI components. Example CSS properties they correspond to: `width`, `height`, `border-radius`, `border-width`, positioning properties, i.e. `top`, `left`, etc.
 
 ## Usage
 
@@ -14,8 +25,16 @@ When setting the scale of an element, use [Size](/design/sizing/) units.
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
+<div>
+
 When setting the gap between elements, utilize [Space Tokens](#tokens) for the gap value.
 
+👍
+`gap: var(--dt-space-400)`
+
+👎
+`gap: var(--dt-size-400)`
+</div>
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
@@ -155,6 +174,8 @@ WIP: Tokens decriptions/usage in progress.
 
 <script setup>
 import { ref } from 'vue';
+import SvgLoader from '../../../../baseComponents/SvgLoader.vue';
+
 const tokenList = {
   'var(--dt-space-0)': { description: 'Default space between elements.' },
   'var(--dt-space-200)': { description: 'Horizontal stack Icon + Text, Vertical stack List group.' },

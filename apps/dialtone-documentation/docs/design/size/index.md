@@ -1,21 +1,35 @@
 ---
-title: Sizing
-status: In progress
+title: Size
 description: A system to maintain consistent size and scale.
 ---
 
+<svg-loader name="size-img" />
+
+## Choosing Size vs Space
+
+### Size
+
+Size design tokens define intrinsic **dimensions** of UI components. Example CSS properties they correspond to: `width`, `height`, `border-radius`, `border-width`, positioning properties, i.e. `top`, `left`, etc.
+
+### Space
+
+[Space](/design/space/) design tokens focus on controlling **spatial relationships**; that is, the space between and around elements. Example CSS properties they correspond to: `padding`, `margin`, `gap`
+
 ## Usage
-
-Use size units, when setting the scale of an element.
-
-When adding space around on in between elements use [Spacing](/design/spacing/) units.
 
 ### Setting a specific size
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div>
 
 When assigning a size to an element, utilize [Size Tokens](#tokens) for the value.
 
+👍
+`width: var(--dt-size-400)`
+
+👎
+`width: var(--dt-space-400)`
+</div>
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
