@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import svgLoader from 'vite-svg-loader';
 import vue from '@vitejs/plugin-vue';
-import babel from 'vite-plugin-babel';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import hash from 'string-hash';
@@ -50,11 +49,6 @@ export default defineConfig({
             },
           },
         ],
-      },
-    }),
-    babel({
-      babelConfig: {
-        plugins: ['@babel/plugin-syntax-import-attributes'],
       },
     }),
   ],

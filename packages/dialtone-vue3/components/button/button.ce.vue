@@ -288,12 +288,13 @@ export default {
     },
   },
 
-  async mounted () {
-    const dialtoneCSS = await import('@dialpad/dialtone-css/lib/dist/css/dialtone.min.css', { assert: { type: 'css' } });
+  mounted () {
     const shadowRoot = this.$el.parentNode;
-    console.log(dialtoneCSS.default);
-    shadowRoot.adoptedStyleSheets.push(dialtoneCSS.default);
-    // console.log(document.styleSheets, shadowRoot.styleSheets);
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://unpkg.com/@dialpad/dialtone@8.22.1/lib/dist/css/dialtone.min.css';
+    shadowRoot.append(link);
   },
 
   methods: {

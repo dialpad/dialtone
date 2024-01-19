@@ -48,7 +48,6 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-import-attributes": "^7.23.3",
     "@dialpad/dialtone-css": "workspace:^",
     "@dialpad/dialtone-icons": "workspace:^",
     "@percy/cli": "^1.27.4",
@@ -90,7 +89,6 @@
     "typedoc": "^0.25.2",
     "typedoc-plugin-markdown": "^3.16.0",
     "vite": "^5.0.0",
-    "vite-plugin-babel": "^1.2.0",
     "vite-svg-loader": "^4.0.0",
     "vue": "^3.3.4",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
