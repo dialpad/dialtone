@@ -325,7 +325,7 @@ describe('DtRecipeWysiwygEditor tests', () => {
     describe('When add link button is disabled', () => {
       beforeEach(async () => {
         _mountWrapper();
-        await wrapper.setProps({ showAddLinkButton: false });
+        await wrapper.setProps({ showAddLink: { showAddLinkButton: false } });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
       });
@@ -419,8 +419,6 @@ describe('DtRecipeWysiwygEditor tests', () => {
 
         expect(linkInputEl.exists()).toBe(true);
         expect(linkInputEl.isVisible()).toBe(true);
-
-        linkInputEl.value = 'https://www.youtube.com';
 
         confirmAddLinkBtn = await wrapper.find('[data-qa="dt-wysiwyg-editor-set-link-confirm-btn"]');
 
