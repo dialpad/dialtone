@@ -198,7 +198,8 @@
     "Components",
     "Component Library",
     "Vue",
-    "Storybook"
+    "Storybook",
+    "Testing alpha release"
   ],
   "license": "MIT"
 }
