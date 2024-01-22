@@ -15,7 +15,7 @@ fi
 
 if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
   echo "Deleting local and remote $release_branch branch"
-  git branch -d "$release_branch" || true
+  git branch -D "$release_branch" || true
   git push origin --delete "$release_branch" || true
 
   echo "Checking out and pushing a clean $release_branch branch"
