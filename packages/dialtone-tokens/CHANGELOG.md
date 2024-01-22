@@ -1,3 +1,10 @@
+## [1.23.6-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.5...dialtone-tokens/v1.23.6-alpha.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* remove release command from tokens ([ef84641](https://github.com/dialpad/dialtone/commit/ef8464136386399654e217642e80040a3a62fecd))
+
 ## [1.23.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.4...dialtone-tokens/v1.23.5) (2024-01-16)
 
 
