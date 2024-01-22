@@ -113,11 +113,27 @@ pnpm nx build dialtone-documentation
 
 ### Releasing
 
+Running this commands will automatically release all packages that need to be released.
+
+#### Production
+
+Note: needs to be run while on staging branch.
+
 ```bash
-pnpm run release:affected
+pnpm run release
 ```
 
-This will automatically release all packages that need to be released.
+#### Alpha/Beta
+
+Note: needs to be run while on your feature branch.
+
+```bash
+pnpm run release:alpha
+```
+
+```bash
+pnpm run release:beta
+```
 
 ## Usage
 
