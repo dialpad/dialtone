@@ -1,3 +1,10 @@
+# [2.112.0-alpha.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.112.0-alpha.1...dialtone-vue2/v2.112.0-alpha.2) (2024-01-22)
+
+
+### Bug Fixes
+
+* test alpha release ([4c9f966](https://github.com/dialpad/dialtone/commit/4c9f96609716f7c600e5ee8f72b7b343f5a8ab06))
+
 ## [2.111.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.111.0...dialtone-vue2/v2.111.1) (2024-01-18)
 
 
