@@ -11,6 +11,8 @@
     "start:dialtone-vue2": "nx run-many --target=start --projects=dialtone-css,dialtone-vue2",
     "prepare": "husky install",
     "release:affected": "./scripts/release.sh",
+    "release:affected:alpha": "./scripts/release.sh alpha",
+    "release:affected:beta": "./scripts/release.sh beta",
     "test:vitest": "vitest"
   },
   "devDependencies": {
