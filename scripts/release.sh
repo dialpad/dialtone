@@ -9,8 +9,8 @@ if [[ "$release_branch" == "production" && "$current_branch" != "staging" ]]; th
   exit 1;
 else
   echo "Deleting local and remote $release_branch branch"
-  git branch -d "$release_branch"
-  git push origin --delete "$release_branch"
+  git branch -d "$release_branch" || true
+  git push origin --delete "$release_branch" || true
 fi
 
 echo "Updating branch"
