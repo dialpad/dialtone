@@ -18,4 +18,4 @@ Each package has its own contributing guide, please follow the links to find the
 
 ## Dialtone Icons
 
-Coming soon..
+[CONTRIBUTING.md](../packages/dialtone-icons/.github/CONTRIBUTING.md)
