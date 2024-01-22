@@ -1,3 +1,13 @@
+# [9.7.0-alpha.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.7.0-alpha.1...dialtone/v9.7.0-alpha.2) (2024-01-22)
+
+
+### Bug Fixes
+
+* force delete pre-release branch ([4b44324](https://github.com/dialpad/dialtone/commit/4b443247a985ade912973c7d077d2cf0ce8c9ca4))
+* increase parallel build ([d589bc3](https://github.com/dialpad/dialtone/commit/d589bc36ef1a1ce0abb46c5fd01755cd66e5ada3))
+* remove release command from tokens ([ef84641](https://github.com/dialpad/dialtone/commit/ef8464136386399654e217642e80040a3a62fecd))
+* test alpha release ([4c9f966](https://github.com/dialpad/dialtone/commit/4c9f96609716f7c600e5ee8f72b7b343f5a8ab06))
+
 ## [9.6.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.6.0...dialtone/v9.6.1) (2024-01-18)
 
 
