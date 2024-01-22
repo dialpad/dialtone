@@ -18,10 +18,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "Dialpad",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dialpad/dialtone-tokens/issues"
@@ -38,5 +34,32 @@
     "token-transformer": "^0.0.31",
     "tsx": "^4.7.0",
     "typescript": "^5.1.6"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Ignacio Ropolo",
+      "email": "ignacio.ropolo@dialpad.com",
+      "url": "https://github.com/iropolo"
+    },
+    {
+      "name": "Nina Repetto",
+      "email": "nina.repetto@dialpad.com",
+      "url": "https://github.com/ninamarina"
+    }
+  ]
 }
