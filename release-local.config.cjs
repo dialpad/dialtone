@@ -3,7 +3,6 @@ const name = 'dialtone';
 const srcRoot = `.`;
 
 module.exports = {
-  debug: true,
   extends: 'release.config.base.js',
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
@@ -37,8 +36,8 @@ module.exports = {
     }],
   ],
   branches: [
-    'master',
-    'before',
+    'staging',
+    'next',
     {
       name: 'beta',
       prerelease: true,
