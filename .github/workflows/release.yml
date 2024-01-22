@@ -78,7 +78,7 @@ jobs:
       - name: Publish pre-release
         if: ${{ github.ref != 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --verbose --target=release --parallel=false --tag ${{ needs.get-branch-name.outputs.current_branch }}
+        run: pnpm nx run-many --verbose --target=release --parallel=false --publish-branch ${{ needs.get-branch-name.outputs.current_branch }}  --tag ${{ needs.get-branch-name.outputs.current_branch }}
 
       - name: Set registry to GitHub packages
         run: npm config set @dialpad:registry https://npm.pkg.github.com
@@ -95,7 +95,7 @@ jobs:
       - name: Publish pre-release to GitHub packages
         if: ${{ github.ref != 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --verbose --target=release --parallel=false --tag ${{ needs.get-branch-name.outputs.current_branch }}
+        run: pnpm nx run-many --verbose --target=release --parallel=false --publish-branch ${{ needs.get-branch-name.outputs.current_branch }} --tag ${{ needs.get-branch-name.outputs.current_branch }}
 
       - name: Github Release
         env:
