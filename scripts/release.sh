@@ -20,6 +20,7 @@ if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
 
   echo "Checking out to a clean $release_branch branch"
   git checkout -b "$release_branch";
+  git push origin "$release_branch"
 fi
 
 echo "Running build in parallel to improve performance"
