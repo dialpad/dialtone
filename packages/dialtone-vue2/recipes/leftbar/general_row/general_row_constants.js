@@ -25,7 +25,7 @@ export const LEFTBAR_GENERAL_ROW_ICON_MAPPING = {
   'locked channel unread': 'lock-filled',
   'channel unread': 'hash-bold',
   [LEFTBAR_GENERAL_ROW_TYPES.ASSIGNED]: 'at-sign',
-  [LEFTBAR_GENERAL_ROW_TYPES.DIGITAL]: 'message',
+  [LEFTBAR_GENERAL_ROW_TYPES.DIGITAL]: 'laptop-2',
 };
 
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS = {

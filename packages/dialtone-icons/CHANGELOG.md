@@ -1,3 +1,10 @@
+## [4.5.4](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.3...dialtone-icons/v4.5.4) (2024-01-19)
+
+
+### Bug Fixes
+
+* icon dt-ai alignment adjust ([#116](https://github.com/dialpad/dialtone/issues/116)) ([5467c5c](https://github.com/dialpad/dialtone/commit/5467c5c9ceb5099dd2d03cc61b118ee192538961))
+
 ## [4.5.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.2...dialtone-icons/v4.5.3) (2024-01-18)
 
 

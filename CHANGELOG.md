@@ -1,12 +1,15 @@
-# [9.7.0-alpha.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.7.0-alpha.1...dialtone/v9.7.0-alpha.2) (2024-01-22)
+# [9.7.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.6.1...dialtone/v9.7.0) (2024-01-19)
 
 
 ### Bug Fixes
 
-* force delete pre-release branch ([4b44324](https://github.com/dialpad/dialtone/commit/4b443247a985ade912973c7d077d2cf0ce8c9ca4))
-* increase parallel build ([d589bc3](https://github.com/dialpad/dialtone/commit/d589bc36ef1a1ce0abb46c5fd01755cd66e5ada3))
-* remove release command from tokens ([ef84641](https://github.com/dialpad/dialtone/commit/ef8464136386399654e217642e80040a3a62fecd))
-* test alpha release ([4c9f966](https://github.com/dialpad/dialtone/commit/4c9f96609716f7c600e5ee8f72b7b343f5a8ab06))
+* icon dt-ai alignment adjust ([#116](https://github.com/dialpad/dialtone/issues/116)) ([5467c5c](https://github.com/dialpad/dialtone/commit/5467c5c9ceb5099dd2d03cc61b118ee192538961))
+* input focus within ([#106](https://github.com/dialpad/dialtone/issues/106)) ([98aab0a](https://github.com/dialpad/dialtone/commit/98aab0ab0cf9584a9dffe72d62d3f4eb3dfeb0e2))
+
+
+### Features
+
+* datepicker full language support ([#118](https://github.com/dialpad/dialtone/issues/118)) ([988b727](https://github.com/dialpad/dialtone/commit/988b727103cfa34b0cf7cb2a26317f58d5cb5350))
 
 ## [9.6.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.6.0...dialtone/v9.6.1) (2024-01-18)
 
