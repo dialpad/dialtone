@@ -36,8 +36,8 @@ module.exports = {
     }],
   ],
   branches: [
-    'staging',
-    'next',
+    'master',
+    'before',
     {
       name: 'beta',
       prerelease: true,
