@@ -73,12 +73,12 @@ jobs:
       - name: Publish production
         if: ${{ github.ref == 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --target=release --parallel=false
+        run: pnpm nx run-many --verbose --target=release --parallel=false
 
       - name: Publish pre-release
         if: ${{ github.ref != 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --target=release --parallel=false --tag ${{ needs.get-branch-name.outputs.current_branch }}
+        run: pnpm nx run-many --verbose --target=release --parallel=false --tag ${{ needs.get-branch-name.outputs.current_branch }}
 
       - name: Set registry to GitHub packages
         run: npm config set @dialpad:registry https://npm.pkg.github.com
@@ -90,17 +90,17 @@ jobs:
       - name: Publish production to GitHub packages
         if: ${{ github.ref == 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --target=release --parallel=false
+        run: pnpm nx run-many --verbose --target=release --parallel=false
 
       - name: Publish pre-release to GitHub packages
         if: ${{ github.ref != 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --target=release --parallel=false --tag ${{ needs.get-branch-name.outputs.current_branch }}
+        run: pnpm nx run-many --verbose --target=release --parallel=false --tag ${{ needs.get-branch-name.outputs.current_branch }}
 
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm nx run-many --target=release-github --parallel=false
+        run: pnpm nx run-many --verbose --target=release-github --parallel=false
 
   android:
     needs: check-dialpad-member
@@ -155,7 +155,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build android
-        run: pnpm nx run dialtone-tokens:publish:android-package
+        run: pnpm nx run --verbose dialtone-tokens:publish:android-package
 
       - name: Publish production - Gradle
         working-directory: ./packages/dialtone-tokens
@@ -201,7 +201,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build swift
-        run: pnpm nx run dialtone-tokens:publish:ios-package
+        run: pnpm nx run --verbose dialtone-tokens:publish:ios-package
 
       - name: Publish production - Swift
         uses: cpina/github-action-push-to-another-repository@v1.5.1
