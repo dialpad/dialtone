@@ -42,3 +42,7 @@ fi
 
 echo "Pushing changes to $release_branch"
 git push -u origin "$release_branch";
+
+echo "Merge changes back to $current_branch"
+git checkout "$current_branch"
+git merge --ff-only "$release_branch"
