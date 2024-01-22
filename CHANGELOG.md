@@ -1,3 +1,10 @@
+# [9.7.0-alpha.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.7.0-alpha.1...dialtone/v9.7.0-alpha.2) (2024-01-22)
+
+
+### Bug Fixes
+
+* increase parallel build ([d589bc3](https://github.com/dialpad/dialtone/commit/d589bc36ef1a1ce0abb46c5fd01755cd66e5ada3))
+
 ## [9.6.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.6.0...dialtone/v9.6.1) (2024-01-18)
 
 
