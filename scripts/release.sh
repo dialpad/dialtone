@@ -23,7 +23,7 @@ if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
 fi
 
 echo "Running build in parallel to improve performance"
-pnpm nx affected --verbose --target=build --parallel=5;
+pnpm nx affected --verbose --target=build --parallel=6;
 
 echo "Running release-local on affected projects"
 pnpm nx affected --verbose --target=release-local --parallel=false;
