@@ -17,7 +17,7 @@ echo "Updating branch"
 git pull;
 
 echo "Running release-local on affected projects"
-pnpm nx affected --target=release-local --parallel=false;
+pnpm nx affected --verbose --target=release-local --parallel=false;
 
 echo "Checking out to $release_branch"
 if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
