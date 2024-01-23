@@ -455,7 +455,6 @@ export default {
       hasFocus: false,
 
       linkOptions: {
-        openOnClick: true,
         class: 'd-link d-c-text d-d-inline-block',
       },
 
@@ -467,15 +466,6 @@ export default {
   computed: {
     inputLength () {
       return this.internalInputValue.length;
-    },
-
-    displayCharacterLimitWarning () {
-      return Boolean(this.showCharacterLimit) &&
-        ((this.showCharacterLimit.count - this.inputLength) <= this.showCharacterLimit.warning);
-    },
-
-    characterLimitTooltipEnabled () {
-      return this.showCharacterLimit.message && (this.showCharacterLimit.count - this.inputLength < 0);
     },
 
     htmlOutputFormat () {
@@ -495,7 +485,7 @@ export default {
     },
 
     removeLink () {
-      this.$refs.richTextEditor?.editor?.chain().focus().unsetLink().run();
+      this.$refs.richTextEditor?.editor?.chain()?.focus()?.unsetLink()?.run();
       this.closeLinkInputModal();
     },
 
@@ -505,6 +495,9 @@ export default {
       event?.stopPropagation();
 
       if (!this.linkInput) {
+        // If link text is set to empty string,
+        // remove any existing links.
+        this.removeLink();
         return;
       }
 

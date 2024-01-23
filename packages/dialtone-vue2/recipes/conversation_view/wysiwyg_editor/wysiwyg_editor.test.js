@@ -425,6 +425,7 @@ describe('DtRecipeWysiwygEditor tests', () => {
         await confirmAddLinkBtn.trigger('click');
         await wrapper.vm.$nextTick();
 
+        expect(linkInputEl.exists()).toBe(true);
         expect(linkInputEl.isVisible()).toBe(false);
       });
 
