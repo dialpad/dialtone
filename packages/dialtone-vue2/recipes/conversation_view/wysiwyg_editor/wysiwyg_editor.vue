@@ -12,15 +12,20 @@
     @click="$refs.richTextEditor.focusEditor()"
   >
     <!-- Section for the top UI -->
-    <div
-      class="d-d-flex d-fd-row d-px8 d-py2 d-bgc-black-200"
-      :class="{ 'd-btr8': roundedEdges, 'd-btr0': !roundedEdges }"
+    <dt-stack
+      direction="row"
+      gap="100"
+      :class="['d-px8', 'd-py2', 'd-bgc-black-200', {
+        'd-btr8': roundedEdges,
+        'd-btr0': !roundedEdges,
+      }]"
     >
       <dt-button
         v-if="showBoldButton"
         data-qa="dt-wysiwyg-editor-bold-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('bold') }"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('bold'),
+        }]"
         importance="clear"
         kind="inverted"
         size="sm"
@@ -38,8 +43,9 @@
       <dt-button
         v-if="showItalicsButton"
         data-qa="dt-wysiwyg-editor-italics-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('italic') }"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('italic'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -57,8 +63,9 @@
       <dt-button
         v-if="showUnderlineButton"
         data-qa="dt-wysiwyg-editor-underline-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('underline') }"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('underline'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -76,8 +83,9 @@
       <dt-button
         v-if="showStrikeButton"
         data-qa="dt-wysiwyg-editor-strike-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('strike') }"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('strike'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -95,8 +103,9 @@
       <dt-button
         v-if="showListItemsButton"
         data-qa="dt-wysiwyg-editor-list-items-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('bulletList') }"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('bulletList'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -114,7 +123,9 @@
       <dt-button
         v-if="showAddLink.showAddLinkButton"
         data-qa="dt-wysiwyg-editor-add-link-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('link'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -128,7 +139,7 @@
           />
         </template>
       </dt-button>
-    </div>
+    </dt-stack>
 
     <!-- Add/Remove link modal -->
     <dt-modal
@@ -152,10 +163,10 @@
           :output-format="textOutputFormat"
           :placeholder="setLinkPlaceholder"
           input-class="d-bgc-black-100 d-bar4 d-ba d-baw1 d-bc-black-300 d-pl6 d-py4 d-ol-none"
-          @click="onInputFocus($event)"
-          @click.native.stop="onInputFocus($event)"
-          @focus="onInputFocus($event)"
-          @enter.native="setLink"
+          @click="onInputFocus"
+          @click.native.stop="onInputFocus"
+          @focus="onInputFocus"
+          @keyup.enter="setLink"
         />
       </div>
       <template #footer>
@@ -227,6 +238,7 @@ import {
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtModal } from '@/components/modal';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeWysiwygEditor',
@@ -236,6 +248,7 @@ export default {
     DtButton,
     DtIcon,
     DtModal,
+    DtStack,
   },
 
   mixins: [],
