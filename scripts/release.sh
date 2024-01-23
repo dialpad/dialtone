@@ -29,7 +29,7 @@ pnpm nx affected --verbose --target=build --parallel=6;
 echo "Running release-local on affected projects"
 pnpm nx affected --verbose --target=release-local --parallel=false;
 
-if [[ "$release_branch" == "production" && "$current_branch" != "staging" ]]; then
+if [[ "$release_branch" == "production" && "$current_branch" == "staging" ]]; then
   echo "Checking out to $release_branch"
   git checkout "$release_branch";
 
