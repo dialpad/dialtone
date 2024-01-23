@@ -23,7 +23,7 @@
       :show-list-items-button="$attrs.showListItemsButton"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
-      @input="onInput($event)"
+      @input="$attrs.onInput"
     />
     <p><strong>Editor content is:</strong></p>
     <span>{{ value }}</span>
@@ -40,12 +40,6 @@ export default {
     return {
       value: this.$attrs.value,
     };
-  },
-
-  methods: {
-    onInput (updatedInput) {
-      this.value = updatedInput;
-    },
   },
 };
 </script>

@@ -152,21 +152,21 @@
       kind="default"
       size="default"
       :close-button-props="{ ariaLabel: 'Close the dialog' }"
+      @click="onInputFocus"
+      @click.native.stop="onInputFocus"
       @update:show="(s) => updateInputModal(s)"
     >
       <div class="d-m4">
-        <dt-rich-text-editor
+        <dt-input
           v-model="linkInput"
           :input-aria-label="showAddLink.setLinkInputAriaLabel"
           data-qa="dt-wysiwyg-editor-link-input"
-          :link="true"
-          :output-format="textOutputFormat"
           :placeholder="setLinkPlaceholder"
-          input-class="d-bgc-black-100 d-bar4 d-ba d-baw1 d-bc-black-300 d-pl6 d-py4 d-ol-none"
+          input-wrapper-class="d-bgc-black-100 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
           @click="onInputFocus"
           @click.native.stop="onInputFocus"
           @focus="onInputFocus"
-          @keyup.enter="setLink"
+          @keydown.enter="setLink"
         />
       </div>
       <template #footer>
@@ -212,9 +212,9 @@
         :input-class="inputClass"
         :output-format="htmlOutputFormat"
         :auto-focus="autoFocus"
-        :link="linkOptions"
         :placeholder="placeholder"
         :allow-line-breaks="true"
+        :link="false"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
@@ -239,6 +239,7 @@ import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtModal } from '@/components/modal';
 import { DtStack } from '@/components/stack';
+import { DtInput } from '@/components/input';
 
 export default {
   name: 'DtRecipeWysiwygEditor',
@@ -249,6 +250,7 @@ export default {
     DtIcon,
     DtModal,
     DtStack,
+    DtInput,
   },
 
   mixins: [],
@@ -453,7 +455,7 @@ export default {
       hasFocus: false,
 
       linkOptions: {
-        openOnClick: false,
+        openOnClick: true,
         class: 'd-link d-c-text d-d-inline-block',
       },
 
@@ -479,10 +481,6 @@ export default {
     htmlOutputFormat () {
       return RICH_TEXT_EDITOR_OUTPUT_FORMATS[2];
     },
-
-    textOutputFormat () {
-      return RICH_TEXT_EDITOR_OUTPUT_FORMATS[0];
-    },
   },
 
   watch: {
@@ -501,7 +499,15 @@ export default {
       this.closeLinkInputModal();
     },
 
-    setLink () {
+    setLink (event) {
+      const editor = this.$refs.richTextEditor?.editor;
+      event?.preventDefault();
+      event?.stopPropagation();
+
+      if (!this.linkInput) {
+        return;
+      }
+
       // Check if input matches any of the supported link formats
       const prefix = WYSIWYG_EDITOR_SUPPORTED_LINK_PROTOCOLS.find(prefixRegex => prefixRegex.test(this.linkInput));
 
@@ -510,15 +516,30 @@ export default {
         this.linkInput = `${WYSIWYG_EDITOR_DEFAULT_LINK_PREFIX}${this.linkInput}`;
       }
 
-      if (this.linkInput) {
-        // update link
-        this.$refs.richTextEditor?.editor
+      const selection = editor?.view?.state?.selection;
+
+      if (selection.anchor === selection.head) {
+        // If no text has been selected, manually insert the link text.
+        // Do not rely on link options set through DtRichTextEditor
+        // component, because they clash with these and cause issues.
+        editor
+          .chain()
+          .focus()
+          .insertContentAt(
+            selection.anchor,
+            `<a class="${this.linkOptions.class}" href=${this.linkInput}>${this.linkInput}</a>`,
+          )
+          .run();
+      } else {
+        // Set or edit the link
+        editor
           .chain()
           .focus()
           .extendMarkRange('link')
-          .setLink({ href: this.linkInput })
+          .setLink({ href: this.linkInput, class: this.linkOptions.class })
           .run();
       }
+
       this.closeLinkInputModal();
     },
 

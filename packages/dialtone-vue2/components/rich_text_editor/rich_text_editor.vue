@@ -232,7 +232,8 @@ export default {
         );
       }
 
-      extensions.push(TipTapLink.configure({
+      extensions.push(TipTapLink.extend({ inclusive: false }).configure({
+        autolink: true,
         protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
       }));
 
