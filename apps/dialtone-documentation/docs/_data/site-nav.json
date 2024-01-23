@@ -35,8 +35,8 @@
           "link": "/tokens/shadow.html"
         },
         {
-          "text": "Sizing",
-          "link": "/tokens/sizing.html"
+          "text": "Size",
+          "link": "/tokens/size.html"
         },
         {
           "text": "Spacing",
@@ -120,6 +120,14 @@
           "text": "Elevation",
           "link": "/design/elevation/",
           "planned": true
+        },
+        {
+          "text": "Space",
+          "link": "/design/space/"
+        },
+        {
+          "text": "Size",
+          "link": "/design/size/"
         },
         {
           "text": "Motion",
