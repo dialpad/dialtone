@@ -1194,6 +1194,10 @@
       ]
     },
     "editing": {
+      "align-center": [],
+      "align-justify": [],
+      "align-left": [],
+      "align-right": [],
       "asterisk": [
         "reference"
       ],
