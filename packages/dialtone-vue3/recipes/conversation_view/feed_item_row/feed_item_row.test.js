@@ -179,12 +179,12 @@ describe('DtFeedItemRow tests', () => {
       });
 
       it('should not add highlight background to the feed row', () => {
-        expect(wrapper.classes('d-bgc-secondary-opaque')).toBe(false);
+        expect(wrapper.classes('dt-feed-item-row--active')).toBe(false);
       });
 
       it('should add highlight background to the feed row when isActive is toggled', async () => {
         await wrapper.setProps({ isActive: true });
-        expect(wrapper.classes('d-bgc-secondary-opaque')).toBe(true);
+        expect(wrapper.classes('dt-feed-item-row--active')).toBe(true);
       });
     });
   });
