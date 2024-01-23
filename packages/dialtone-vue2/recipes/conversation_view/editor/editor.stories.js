@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createRenderConfig } from '@/common/storybook_utils';
-import DtRecipeWysiwygEditor from './wysiwyg_editor.vue';
-import DtRecipeWysiwygEditorDefaultTemplate from './wysiwyg_editor_default.story.vue';
+import DtRecipeEditor from './editor.vue';
+import DtRecipeEditorDefaultTemplate from './editor_default.story.vue';
 
 /*
   Controls
@@ -53,8 +53,8 @@ export const argsData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Conversation View/Wysiwyg Editor',
-  component: DtRecipeWysiwygEditor,
+  title: 'Recipes/Conversation View/Editor',
+  component: DtRecipeEditor,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -62,5 +62,5 @@ export default {
 
 // Stories
 export const Default = {
-  render: (argsData) => createRenderConfig(DtRecipeWysiwygEditor, DtRecipeWysiwygEditorDefaultTemplate, argsData),
+  render: (argsData) => createRenderConfig(DtRecipeEditor, DtRecipeEditorDefaultTemplate, argsData),
 };

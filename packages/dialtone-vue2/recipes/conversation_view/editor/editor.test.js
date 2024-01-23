@@ -1,11 +1,11 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import DtRecipeWysiwygEditor from './wysiwyg_editor.vue';
+import DtRecipeEditor from './editor.vue';
 
 // Wrappers
 let wrapper;
 let editor;
 
-let wysiwygEditorEl;
+let editorEl;
 let linkInputEl;
 
 let boldFormatBtn;
@@ -41,19 +41,19 @@ const _setChildWrappers = () => {
   editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
 
   // buttons
-  boldFormatBtn = wrapper.find('[data-qa="dt-wysiwyg-editor-bold-btn"]');
-  italicsFormatBtn = wrapper.find('[data-qa="dt-wysiwyg-editor-italics-btn"]');
-  underlineFormatBtn = wrapper.find('[data-qa="dt-wysiwyg-editor-underline-btn"]');
-  strikeFormatBtn = wrapper.find('[data-qa="dt-wysiwyg-editor-strike-btn"]');
-  listItemsFormatBtn = wrapper.find('[data-qa="dt-wysiwyg-editor-list-items-btn"]');
-  addLinkBtn = wrapper.find('[data-qa="dt-wysiwyg-editor-add-link-btn"]');
+  boldFormatBtn = wrapper.find('[data-qa="dt-editor-bold-btn"]');
+  italicsFormatBtn = wrapper.find('[data-qa="dt-editor-italics-btn"]');
+  underlineFormatBtn = wrapper.find('[data-qa="dt-editor-underline-btn"]');
+  strikeFormatBtn = wrapper.find('[data-qa="dt-editor-strike-btn"]');
+  listItemsFormatBtn = wrapper.find('[data-qa="dt-editor-list-items-btn"]');
+  addLinkBtn = wrapper.find('[data-qa="dt-editor-add-link-btn"]');
 
   // Els
-  wysiwygEditorEl = wrapper.find('[data-qa="dt-wysiwyg-editor"]');
+  editorEl = wrapper.find('[data-qa="dt-editor"]');
 };
 
 const _mountWrapper = () => {
-  wrapper = mount(DtRecipeWysiwygEditor, {
+  wrapper = mount(DtRecipeEditor, {
     propsData,
     listeners,
     slots,
@@ -62,7 +62,7 @@ const _mountWrapper = () => {
   });
 };
 
-describe('DtRecipeWysiwygEditor tests', () => {
+describe('DtRecipeEditor tests', () => {
   // Test Setup
   beforeAll(() => {
     testContext.localVue = createLocalVue();
@@ -116,20 +116,20 @@ describe('DtRecipeWysiwygEditor tests', () => {
     });
 
     it('should not have border applied on message-input when not focused', () => {
-      expect(wysiwygEditorEl.classes('d-bc-default')).toBe(true);
-      expect(wysiwygEditorEl.classes('d-bc-black-500')).toBe(false);
+      expect(editorEl.classes('d-bc-default')).toBe(true);
+      expect(editorEl.classes('d-bc-black-500')).toBe(false);
     });
 
-    describe('When we focus anywhere on the wysiwyg editor', () => {
-      it('should focus and add the border for the wysiwyg editor', async () => {
+    describe('When we focus anywhere on the editor', () => {
+      it('should focus and add the border for the editor', async () => {
         await editor.trigger('focus');
-        expect(wysiwygEditorEl.classes('d-bc-black-500')).toBe(true);
+        expect(editorEl.classes('d-bc-black-500')).toBe(true);
       });
 
       it('should programmatically focus to input', async () => {
         wrapper.vm.onFocus();
         await wrapper.vm.$nextTick();
-        expect(wysiwygEditorEl.classes('d-bc-black-500')).toBe(true);
+        expect(editorEl.classes('d-bc-black-500')).toBe(true);
       });
     });
 
@@ -143,7 +143,7 @@ describe('DtRecipeWysiwygEditor tests', () => {
 
       it('the editor edges should not be round', async () => {
         expect(editor.text()).toBe(testText);
-        expect(wysiwygEditorEl.classes('d-bar0')).toBe(true);
+        expect(editorEl.classes('d-bar0')).toBe(true);
       });
     });
 
@@ -157,27 +157,27 @@ describe('DtRecipeWysiwygEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-bold-btn"]')
+          .find('[data-qa="dt-editor-bold-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-italics-btn"]')
+          .find('[data-qa="dt-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-underline-btn"]')
+          .find('[data-qa="dt-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-strike-btn"]')
+          .find('[data-qa="dt-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-list-items-btn"]')
+          .find('[data-qa="dt-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-add-link-btn"]')
+          .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -192,27 +192,27 @@ describe('DtRecipeWysiwygEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-bold-btn"]')
+          .find('[data-qa="dt-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-italics-btn"]')
+          .find('[data-qa="dt-editor-italics-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-underline-btn"]')
+          .find('[data-qa="dt-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-strike-btn"]')
+          .find('[data-qa="dt-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-list-items-btn"]')
+          .find('[data-qa="dt-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-add-link-btn"]')
+          .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -227,27 +227,27 @@ describe('DtRecipeWysiwygEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-bold-btn"]')
+          .find('[data-qa="dt-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-italics-btn"]')
+          .find('[data-qa="dt-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-underline-btn"]')
+          .find('[data-qa="dt-editor-underline-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-strike-btn"]')
+          .find('[data-qa="dt-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-list-items-btn"]')
+          .find('[data-qa="dt-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-add-link-btn"]')
+          .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -262,27 +262,27 @@ describe('DtRecipeWysiwygEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-bold-btn"]')
+          .find('[data-qa="dt-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-italics-btn"]')
+          .find('[data-qa="dt-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-underline-btn"]')
+          .find('[data-qa="dt-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-strike-btn"]')
+          .find('[data-qa="dt-editor-strike-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-list-items-btn"]')
+          .find('[data-qa="dt-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-add-link-btn"]')
+          .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -297,27 +297,27 @@ describe('DtRecipeWysiwygEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-bold-btn"]')
+          .find('[data-qa="dt-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-italics-btn"]')
+          .find('[data-qa="dt-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-underline-btn"]')
+          .find('[data-qa="dt-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-strike-btn"]')
+          .find('[data-qa="dt-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-list-items-btn"]')
+          .find('[data-qa="dt-editor-list-items-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-add-link-btn"]')
+          .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -332,27 +332,27 @@ describe('DtRecipeWysiwygEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-bold-btn"]')
+          .find('[data-qa="dt-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-italics-btn"]')
+          .find('[data-qa="dt-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-underline-btn"]')
+          .find('[data-qa="dt-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-strike-btn"]')
+          .find('[data-qa="dt-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-list-items-btn"]')
+          .find('[data-qa="dt-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-wysiwyg-editor-add-link-btn"]')
+          .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(false);
       });
     });
@@ -415,12 +415,12 @@ describe('DtRecipeWysiwygEditor tests', () => {
       it('link input modal should be opened and closed when confirm button is closed', async () => {
         await addLinkBtn.trigger('click');
 
-        linkInputEl = await wrapper.find('[data-qa="dt-wysiwyg-editor-link-input"]');
+        linkInputEl = await wrapper.find('[data-qa="dt-editor-link-input"]');
 
         expect(linkInputEl.exists()).toBe(true);
         expect(linkInputEl.isVisible()).toBe(true);
 
-        confirmAddLinkBtn = await wrapper.find('[data-qa="dt-wysiwyg-editor-set-link-confirm-btn"]');
+        confirmAddLinkBtn = await wrapper.find('[data-qa="dt-editor-set-link-confirm-btn"]');
 
         await confirmAddLinkBtn.trigger('click');
         await wrapper.vm.$nextTick();
@@ -432,12 +432,12 @@ describe('DtRecipeWysiwygEditor tests', () => {
       it('link input modal should be opened and closed when cancel button is closed', async () => {
         await addLinkBtn.trigger('click');
 
-        linkInputEl = await wrapper.find('[data-qa="dt-wysiwyg-editor-link-input"]');
+        linkInputEl = await wrapper.find('[data-qa="dt-editor-link-input"]');
 
         expect(linkInputEl.exists()).toBe(true);
         expect(linkInputEl.isVisible()).toBe(true);
 
-        cancelAddLinkBtn = await wrapper.find('[data-qa="dt-wysiwyg-editor-set-link-cancel-btn"]');
+        cancelAddLinkBtn = await wrapper.find('[data-qa="dt-editor-set-link-cancel-btn"]');
 
         await cancelAddLinkBtn.trigger('click');
         await wrapper.vm.$nextTick();

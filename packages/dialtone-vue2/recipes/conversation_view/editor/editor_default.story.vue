@@ -1,7 +1,7 @@
 <template>
   <div>
-    <dt-recipe-wysiwyg-editor
-      ref="wysiwygEditor"
+    <dt-recipe-editor
+      ref="editor"
       v-model="value"
       class="d-mb32"
       :input-aria-label="$attrs.inputAriaLabel"
@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import DtRecipeWysiwygEditor from './wysiwyg_editor.vue';
+import DtRecipeEditor from './editor.vue';
 
 export default {
-  name: 'DtRecipeWysiwygEditorDefault',
-  components: { DtRecipeWysiwygEditor },
+  name: 'DtRecipeEditorDefault',
+  components: { DtRecipeEditor },
   data () {
     return {
       value: this.$attrs.value,
