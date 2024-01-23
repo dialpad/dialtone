@@ -113,7 +113,7 @@ pnpm nx build dialtone-documentation
 
 ### Releasing
 
-Running this commands will automatically release all packages that need to be released.
+Running these commands will automatically release all packages that need to be released.
 
 #### Production
 
