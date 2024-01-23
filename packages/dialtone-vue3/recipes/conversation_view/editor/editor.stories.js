@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeWysiwygEditor from './wysiwyg_editor.vue';
+import DtRecipeEditor from './editor.vue';
 
 /*
   Controls
@@ -52,8 +52,8 @@ export const argsData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Conversation View/Wysiwyg Editor',
-  component: DtRecipeWysiwygEditor,
+  title: 'Recipes/Conversation View/Editor',
+  component: DtRecipeEditor,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -63,7 +63,7 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeWysiwygEditor,
+  DtRecipeEditor,
 );
 
 // Stories

@@ -1,0 +1,26 @@
+import { Canvas, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtRecipeEditorStories from './editor.stories.js';
+
+<Meta of={DtRecipeEditorStories}/>
+
+# Editor Recipe
+
+<Subtitle>
+  Editor recipe wraps the Rich Text Editor for uses cases where formatted text is needed.
+</Subtitle>
+
+## Base Style
+
+<Canvas of={DtRecipeEditorStories.Default} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeEditor } from '@dialpad/dialtone-vue';
+```

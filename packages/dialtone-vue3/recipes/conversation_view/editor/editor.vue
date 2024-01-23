@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
-    data-qa="dt-wysiwyg-editor"
+    data-qa="dt-editor"
     role="presentation"
     :class="['d-d-flex', 'd-fd-column', 'd-baw1', 'd-ba', {
       'd-bc-black-500': hasFocus,
@@ -12,15 +12,20 @@
     @click="$refs.richTextEditor.focusEditor()"
   >
     <!-- Section for the top UI -->
-    <div
-      class="d-d-flex d-fd-row d-px8 d-py2 d-bgc-black-200"
-      :class="{ 'd-btr8': roundedEdges, 'd-btr0': !roundedEdges }"
+    <dt-stack
+      direction="row"
+      gap="100"
+      :class="['d-px8', 'd-py2', 'd-bgc-black-200', {
+        'd-btr8': roundedEdges,
+        'd-btr0': !roundedEdges,
+      }]"
     >
       <dt-button
         v-if="showBoldButton"
-        data-qa="dt-wysiwyg-editor-bold-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('bold') }"
+        data-qa="dt-editor-bold-btn"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('bold'),
+        }]"
         importance="clear"
         kind="inverted"
         size="sm"
@@ -37,9 +42,10 @@
 
       <dt-button
         v-if="showItalicsButton"
-        data-qa="dt-wysiwyg-editor-italics-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('italic') }"
+        data-qa="dt-editor-italics-btn"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('italic'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -56,9 +62,10 @@
 
       <dt-button
         v-if="showUnderlineButton"
-        data-qa="dt-wysiwyg-editor-underline-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('underline') }"
+        data-qa="dt-editor-underline-btn"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('underline'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -75,9 +82,10 @@
 
       <dt-button
         v-if="showStrikeButton"
-        data-qa="dt-wysiwyg-editor-strike-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('strike') }"
+        data-qa="dt-editor-strike-btn"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('strike'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -94,9 +102,10 @@
 
       <dt-button
         v-if="showListItemsButton"
-        data-qa="dt-wysiwyg-editor-list-items-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
-        :class="{ 'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('bulletList') }"
+        data-qa="dt-editor-list-items-btn"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('bulletList'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -113,8 +122,10 @@
 
       <dt-button
         v-if="showAddLink.showAddLinkButton"
-        data-qa="dt-wysiwyg-editor-add-link-btn"
-        class="h:d-bgc-black-300 d-fc-black-700 d-mx4"
+        data-qa="dt-editor-add-link-btn"
+        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
+          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('link'),
+        }]"
         size="sm"
         importance="clear"
         kind="inverted"
@@ -128,7 +139,7 @@
           />
         </template>
       </dt-button>
-    </div>
+    </dt-stack>
 
     <!-- Add/Remove link modal -->
     <dt-modal
@@ -136,31 +147,31 @@
       :title="showAddLink.setLinkModalTitle"
       :visually-hidden-close="true"
       :visually-hidden-close-label="'Close link input modal'"
-      data-qa="dt-wysiwyg-editor-link-input-modal"
+      data-qa="dt-editor-link-input-modal"
       show-footer
       kind="default"
       size="default"
       :close-button-props="{ ariaLabel: 'Close the dialog' }"
+      @click="onInputFocus"
+      @click.stop="onInputFocus"
     >
       <div class="d-m4">
-        <dt-rich-text-editor
+        <dt-input
           v-model="linkInput"
           :input-aria-label="showAddLink.setLinkInputAriaLabel"
-          data-qa="dt-wysiwyg-editor-link-input"
-          :link="true"
-          :output-format="textOutputFormat"
+          data-qa="dt-editor-link-input"
           :placeholder="setLinkPlaceholder"
-          input-class="d-bgc-black-100 d-bar4 d-ba d-baw1 d-bc-black-300 d-pl6 d-py4 d-ol-none"
-          @click="onInputFocus($event)"
-          @click.stop="onInputFocus($event)"
-          @focus="onInputFocus($event)"
-          @enter="setLink"
+          input-wrapper-class="d-bgc-black-100 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
+          @click="onInputFocus"
+          @click.stop="onInputFocus"
+          @focus="onInputFocus"
+          @keydown.enter="setLink"
         />
       </div>
       <template #footer>
         <dt-button
           :aria-label="confirmSetLinkButton.ariaLabel"
-          data-qa="dt-wysiwyg-editor-set-link-confirm-btn"
+          data-qa="dt-editor-set-link-confirm-btn"
           @click="setLink"
         >
           {{ confirmSetLinkButton.label }}
@@ -169,7 +180,7 @@
           :aria-label="cancelSetLinkButton.ariaLabel"
           importance="clear"
           kind="muted"
-          data-qa="dt-wysiwyg-editor-set-link-cancel-btn"
+          data-qa="dt-editor-set-link-cancel-btn"
           @click="closeLinkInputModal"
         >
           {{ cancelSetLinkButton.label }}
@@ -178,7 +189,7 @@
           :aria-label="removeLinkButton.ariaLabel"
           importance="clear"
           kind="muted"
-          data-qa="dt-wysiwyg-editor-remove-link-btn"
+          data-qa="dt-editor-remove-link-btn"
           @click="removeLink"
         >
           {{ removeLinkButton.label }}
@@ -200,9 +211,9 @@
         :input-class="inputClass"
         :output-format="htmlOutputFormat"
         :auto-focus="autoFocus"
-        :link="linkOptions"
         :placeholder="placeholder"
         :allow-line-breaks="true"
+        :link="false"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
@@ -220,21 +231,25 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
 import {
-  WYSIWYG_EDITOR_SUPPORTED_LINK_PROTOCOLS,
-  WYSIWYG_EDITOR_DEFAULT_LINK_PREFIX,
-} from './wysiwyg_editor_constants.js';
+  EDITOR_SUPPORTED_LINK_PROTOCOLS,
+  EDITOR_DEFAULT_LINK_PREFIX,
+} from './editor_constants.js';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtModal } from '@/components/modal';
+import { DtStack } from '@/components/stack';
+import { DtInput } from '@/components/input';
 
 export default {
-  name: 'DtRecipeWysiwygEditor',
+  name: 'DtRecipeEditor',
 
   components: {
     DtRichTextEditor,
     DtButton,
     DtIcon,
     DtModal,
+    DtStack,
+    DtInput,
   },
 
   mixins: [],
@@ -439,7 +454,6 @@ export default {
       hasFocus: false,
 
       linkOptions: {
-        openOnClick: false,
         class: 'd-link d-c-text d-d-inline-block',
       },
 
@@ -453,21 +467,8 @@ export default {
       return this.internalInputValue.length;
     },
 
-    displayCharacterLimitWarning () {
-      return Boolean(this.showCharacterLimit) &&
-        ((this.showCharacterLimit.count - this.inputLength) <= this.showCharacterLimit.warning);
-    },
-
-    characterLimitTooltipEnabled () {
-      return this.showCharacterLimit.message && (this.showCharacterLimit.count - this.inputLength < 0);
-    },
-
     htmlOutputFormat () {
       return RICH_TEXT_EDITOR_OUTPUT_FORMATS[2];
-    },
-
-    textOutputFormat () {
-      return RICH_TEXT_EDITOR_OUTPUT_FORMATS[0];
     },
   },
 
@@ -492,28 +493,54 @@ export default {
     },
 
     removeLink () {
-      this.$refs.richTextEditor?.editor?.chain().focus().unsetLink().run();
+      this.$refs.richTextEditor?.editor?.chain()?.focus()?.unsetLink()?.run();
       this.closeLinkInputModal();
     },
 
-    setLink () {
+    setLink (event) {
+      const editor = this.$refs.richTextEditor?.editor;
+      event?.preventDefault();
+      event?.stopPropagation();
+
+      if (!this.linkInput) {
+        // If link text is set to empty string,
+        // remove any existing links.
+        this.removeLink();
+        return;
+      }
+
       // Check if input matches any of the supported link formats
-      const prefix = WYSIWYG_EDITOR_SUPPORTED_LINK_PROTOCOLS.find(prefixRegex => prefixRegex.test(this.linkInput));
+      const prefix = EDITOR_SUPPORTED_LINK_PROTOCOLS.find(prefixRegex => prefixRegex.test(this.linkInput));
 
       if (!prefix) {
         // If no matching pattern is found, prepend default prefix
-        this.linkInput = `${WYSIWYG_EDITOR_DEFAULT_LINK_PREFIX}${this.linkInput}`;
+        this.linkInput = `${EDITOR_DEFAULT_LINK_PREFIX}${this.linkInput}`;
       }
 
-      if (this.linkInput) {
-        // Update link
-        this.$refs.richTextEditor?.editor
+      const selection = editor?.view?.state?.selection;
+
+      if (selection.anchor === selection.head) {
+        // If no text has been selected, manually insert the link text.
+        // Do not rely on link options set through DtRichTextEditor
+        // component, because they clash with these and cause issues.
+        editor
+          .chain()
+          .focus()
+          .insertContentAt(
+            selection.anchor,
+            `<a class="${this.linkOptions.class}" href=${this.linkInput}>${this.linkInput}</a>`,
+          )
+          .run();
+      } else {
+        // Set or edit the link
+        editor
           .chain()
           .focus()
           .extendMarkRange('link')
-          .setLink({ href: this.linkInput })
+          .setLink({ href: this.linkInput, class: this.linkOptions.class })
           .run();
       }
+
       this.closeLinkInputModal();
     },
 
@@ -565,11 +592,11 @@ export default {
 </script>
 
 <style lang="less">
-.dt-wysiwyg-editor--remaining-char-tooltip {
+.dt-editor--remaining-char-tooltip {
   margin-top: auto;
   margin-bottom: auto;
 }
-.dt-wysiwyg-editor--remaining-char {
+.dt-editor--remaining-char {
   font-size: 1.2rem;
 }
 </style>
