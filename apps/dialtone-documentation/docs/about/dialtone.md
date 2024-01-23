@@ -15,26 +15,11 @@ description: Dialtone is Dialpad's Design System that unites product teams aroun
       >
         <img
           alt="Dialtone CSS version number"
-          src="https://img.shields.io/github/package-json/v/dialpad/dialtone?color=D3BCFF&label=CSS"
+          src="https://img.shields.io/github/package-json/v/dialpad/dialtone?color=D3BCFF&label=Dialtone"
         />
       </a>
     </dt-stack>
     <dialtone-changelog />
-  </div>
-  <div>
-    <dt-stack class="d-ai-center" direction="row" gap="400">
-      <h3 class="d-docsite--header-3">Dialtone-vue</h3>
-      <a
-        class="d-d-inline-flex d-pt12"
-        href="https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-vue3"
-      >
-        <img
-          alt="Dialtone Vue version number"
-          src="https://img.shields.io/github/package-json/v/dialpad/dialtone-vue/vue3?color=D3BCFF&label=Vue"
-        >
-      </a>
-    </dt-stack>
-    <dialtone-changelog project="DialtoneVue" />
   </div>
 </div>
 

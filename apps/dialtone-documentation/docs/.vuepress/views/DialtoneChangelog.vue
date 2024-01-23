@@ -44,7 +44,7 @@ const getVersion = (item) => changelogJson.value.versions[item].version;
 
 const getUrlHandler = () => DIALTONE_CHANGELOGS[props.project].url_handler;
 
-const getGithubReleaseUrl = (item) => `https://github.com/dialpad/${getUrlHandler()}/releases/tag/v${getVersion(item)}`;
+const getGithubReleaseUrl = (item) => `https://github.com/dialpad/dialtone/releases/tag/${getUrlHandler()}/v${getVersion(item)}`;
 
 const formatReleaseNote = (note) => {
   const formatter = Object.create(ReleaseNoteFormatter);
