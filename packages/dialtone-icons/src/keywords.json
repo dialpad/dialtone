@@ -1300,6 +1300,11 @@
         "remove",
         "format"
       ],
+      "summary": [
+        "Edit",
+        "AI",
+        "Call length"
+      ],
       "text-cursor": [
         "select"
       ],
