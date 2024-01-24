@@ -1,6 +1,6 @@
 {
   "default": true,
-  "line-length": false,
+  "line-length": { "line_length" : 120 },
   "no-duplicate-heading": false,
   "no-trailing-punctuation": false,
   "no-inline-html": false,
