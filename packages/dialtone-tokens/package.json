@@ -9,7 +9,6 @@
     "build:token-transformer": "pnpm run build:token-transformer:light && pnpm run build:token-transformer:dark",
     "build:token-transformer:light": "token-transformer tokens token_transformer/tokens-light.json root,base/default,semantic/dp/default,components/checkbox,components/avatar/default,components/badge/default,components/checkbox/default,components/icon/default,components/radio/default root --expandTypography=true --expandShadow=true",
     "build:token-transformer:dark": "token-transformer tokens token_transformer/tokens-dark.json root,base/default,base/dark,semantic/dp/default,semantic/dp/dark,components/avatar/default,components/badge/default,components/checkbox/default,components/checkbox/dark,components/icon/default,components/radio/default,components/radio/dark root --expandTypography=true --expandShadow=true",
-    "release": "semantic-release --no-ci --extends ./release-local.config.cjs",
     "publish:external-packages": "pnpm run publish:android-package && pnpm run publish:ios-package",
     "publish:android-package": "cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version",
     "publish:ios-package": "./build-ios.js",
@@ -19,10 +18,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "Dialpad",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dialpad/dialtone-tokens/issues"
@@ -39,5 +34,32 @@
     "token-transformer": "^0.0.31",
     "tsx": "^4.7.0",
     "typescript": "^5.1.6"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Ignacio Ropolo",
+      "email": "ignacio.ropolo@dialpad.com",
+      "url": "https://github.com/iropolo"
+    },
+    {
+      "name": "Nina Repetto",
+      "email": "nina.repetto@dialpad.com",
+      "url": "https://github.com/ninamarina"
+    }
+  ]
 }

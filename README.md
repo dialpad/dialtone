@@ -113,11 +113,46 @@ pnpm nx build dialtone-documentation
 
 ### Releasing
 
+Running these commands will call [release.sh](./scripts/release.sh) which
+automatically release all packages that need to be released.
+
+Once done, a GitHub Action will be triggered, you can check the progress here:
+[release.yml](https://github.com/dialpad/dialtone/actions/workflows/release.yml)
+
+#### Production
+
+This can only be run while on **staging** branch. After running the command, it will execute the following steps:
+
+1. Run build on the affected projects to improve the speed of the next step.
+2. Run release-local script on the affected projects to verify and increase the version according to commits.
+3. Merge `staging` version changes to `production`
+4. Push `production` branch.
+   - A GHA will publish the release on npm and GitHub with `@latest` tag.
+5. Merge changes from `production` back to `staging`
+
 ```bash
-pnpm run release:affected
+pnpm run release
 ```
 
-This will automatically release all packages that need to be released.
+#### Alpha/Beta
+
+Needs to be run while on your feature branch. After running the command, it will execute the following steps:
+
+1. Delete local and remote `alpha/beta` branch.
+2. Checkout to a clean `alpha/beta` branch and push to origin.
+3. Run build on the affected projects to improve the speed of the next step.
+4. Run release-local script on the affected projects to verify and increase the version according to commits.
+5. Push updated `alpha/beta` branch to origin.
+   - A GHA will publish the release on npm and GitHub with `@alpha` or `@beta` tag.
+6. Merge changes from `alpha/beta` back to your feature branch.
+
+```bash
+pnpm run release:alpha
+```
+
+```bash
+pnpm run release:beta
+```
 
 ## Usage
 
