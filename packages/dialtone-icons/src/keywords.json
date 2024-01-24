@@ -241,6 +241,10 @@
       ]
     },
     "brand-full-color": {
+      "0365-calendar": [
+        "microsoft",
+        "office"
+      ],
       "airtable": [],
       "amex": [],
       "app-store-badge": [],
@@ -1194,6 +1198,13 @@
       ]
     },
     "editing": {
+      "ai-write": [
+        "edit",
+        "AI",
+        "call length",
+        "summary",
+        "pencil"
+      ],
       "align-center": [
         "Text",
         "Format",
@@ -1319,11 +1330,6 @@
         "delete",
         "remove",
         "format"
-      ],
-      "summary": [
-        "Edit",
-        "AI",
-        "Call length"
       ],
       "text-cursor": [
         "select"
