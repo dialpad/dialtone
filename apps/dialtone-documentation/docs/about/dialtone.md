@@ -14,7 +14,7 @@ description: Dialtone is Dialpad's Design System that unites product teams aroun
         href="https://github.com/dialpad/dialtone/"
       >
         <img
-          alt="Dialtone CSS version number"
+          alt="Dialtone version number"
           src="https://img.shields.io/github/package-json/v/dialpad/dialtone?color=D3BCFF&label=Dialtone"
         />
       </a>
