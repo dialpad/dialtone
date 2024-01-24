@@ -2,7 +2,7 @@ import DtModal from './modal.vue';
 
 import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 import { NOTICE_KINDS } from '@/components/notice';
 
@@ -90,6 +90,31 @@ export const argTypesData = {
       },
     },
   },
+  closeOnClick: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  fixedHeaderFooter: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  hideClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  show: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Events
   'update:show': {
@@ -117,12 +142,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtModalDefaultTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtModal, DtModalDefaultTemplate, argsData),
 
   args: {},
   parameters: {
@@ -135,7 +156,7 @@ export const Default = {
 };
 
 export const WithFooter = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtModal, DtModalDefaultTemplate, argsData),
 
   args: {
     showFooter: true,
@@ -145,7 +166,7 @@ export const WithFooter = {
 };
 
 export const WithFixedHeaderFooter = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtModal, DtModalDefaultTemplate, argsData),
 
   args: {
     showFooter: true,
@@ -157,7 +178,7 @@ export const WithFixedHeaderFooter = {
 };
 
 export const WithBanner = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtModal, DtModalDefaultTemplate, argsData),
 
   args: {
     bannerTitle: 'Example banner',
@@ -167,7 +188,7 @@ export const WithBanner = {
 };
 
 export const WithDangerStyle = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtModal, DtModalDefaultTemplate, argsData),
 
   args: {
     kind: 'danger',
@@ -178,7 +199,7 @@ export const WithDangerStyle = {
 };
 
 export const WithFullSize = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtModal, DtModalDefaultTemplate, argsData),
 
   args: {
     size: 'full',
@@ -189,7 +210,7 @@ export const WithFullSize = {
 };
 
 export const WithCustomHeaderAndContent = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtModal, DtModalDefaultTemplate, argsData),
 
   args: {
     header: `

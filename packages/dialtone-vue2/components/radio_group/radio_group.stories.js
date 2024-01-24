@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRadioGroup from './radio_group.vue';
 
 import RadioGroupDefaultTemplate from './radio_group_default.story.vue';
@@ -71,6 +71,16 @@ export const argTypesData = {
       },
     },
   },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Directives
   'v-model': {
@@ -122,19 +132,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, RadioGroupDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, RadioGroupVariantsTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(RadioGroupVariantsTemplate,RadioGroupDefaultTemplate , argsData),
   args: {},
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(RadioGroupVariantsTemplate,RadioGroupVariantsTemplate , argsData),
   args: {},
 
   parameters: {

@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/eslint-plugin-dialtone",
-  "version": "1.5.0",
+  "version": "1.0.1",
   "description": "dialtone eslint plugin",
   "keywords": [
     "Dialpad",
@@ -47,6 +47,7 @@
     "requireindex": "^1.2.0"
   },
   "devDependencies": {
+    "eslint-plugin-eslint-plugin": "^5.2.1",
     "mocha": "^10.0.0"
   },
   "engines": {

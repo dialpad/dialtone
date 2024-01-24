@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "deque-systems.vscode-axe-linter",
+    "digitalbrainstem.javascript-ejs-support",
+    "figma.figma-vscode-extension",
+    "waderyan.gitblame",
+    "github.vscode-github-actions",
+    "github.copilot",
+    "github.vscode-pull-request-github",
+    "davidanson.vscode-markdownlint",
+    "unifiedjs.vscode-mdx",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "jock.svg",
+    "zixuanchen.vitest-explorer",
+    "vue.volar"
+  ]
+}

@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
 
@@ -49,20 +49,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiTextWrapperDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiTextWrapperVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtEmojiTextWrapper, DtEmojiTextWrapperDefaultTemplate, argsData),
 
   args: {
     default:
@@ -71,7 +59,8 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtEmojiTextWrapper, DtEmojiTextWrapperVariantsTemplate, argsData),
+
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

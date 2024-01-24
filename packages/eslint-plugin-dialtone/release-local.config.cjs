@@ -6,7 +6,7 @@ module.exports = {
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
   commitPaths: [`${srcRoot}/*`],
-  assets: [`${srcRoot}/CHANGELOG.md`, `${srcRoot}/CHANGELOG.json`, `${srcRoot}/package.json`, `${srcRoot}/package-lock.json`],
+  assets: [`${srcRoot}/CHANGELOG.md`, `${srcRoot}/CHANGELOG.json`, `${srcRoot}/package.json`],
   plugins: [
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',

@@ -16,6 +16,7 @@
         icon-position="top"
         importance="clear"
         kind="muted"
+        :active="modelValue"
       >
         <template #icon>
           <dt-icon
@@ -31,10 +32,17 @@
       </dt-button>
     </template>
     <template #headerContent>
-      <span
-        class="d-tt-capitalize d-fc-primary"
-        v-text="name"
-      />
+      <div class="d-d-flex d-fd-row d-ai-center d-plc-space-between">
+        <span
+          class="d-tt-capitalize d-fc-primary"
+          v-text="name"
+        />
+        <copy-button
+          class="d-ml8"
+          :text="shareIcon"
+          aria-label="Copy link"
+        />
+      </div>
     </template>
     <template #content>
       <icon-popover-content
@@ -47,7 +55,9 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import IconPopoverContent from './IconPopoverContent.vue';
+import CopyButton from './CopyButton.vue';
 const emits = defineEmits(['update:modelValue']);
 const props = defineProps({
   iconName: { type: String, required: true },
@@ -58,7 +68,16 @@ const props = defineProps({
 const name = props.iconName.replaceAll('-', ' ');
 const emitOpened = (open) => {
   emits('update:modelValue', open);
+  if (!open) {
+    const queryParams = new URLSearchParams(window.location.search);
+    if (queryParams.get('icon_name')) {
+      queryParams.delete('icon_name');
+      history.pushState(null, null, `?${queryParams.toString()}${window.location.hash}`);
+    }
+  }
 };
+
+const shareIcon = computed(() => `${window.location.origin}${window.location.pathname}?icon_name=${props.iconName}`);
 </script>
 
 <style scoped lang="less">

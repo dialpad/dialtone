@@ -2,6 +2,7 @@
   <!-- eslint-disable vue/no-static-inline-styles -->
   <dt-stack :direction="{ default: 'row' }" gap="400">
     <dt-select-menu
+      v-show="!tokenList"
       name="format-select"
       label="Select Format"
       select-class="d-w128"
@@ -31,12 +32,18 @@
         <th
           scope="col"
         >
-          Value
+          {{ tokenList ? "REM" : "Value" }}
+        </th>
+        <th
+          v-show="!!tokenList"
+          scope="col"
+        >
+          PX
         </th>
         <th
           scope="col"
         >
-          Description
+          {{ tokenList ? "Usage" : "Description" }}
         </th>
       </tr>
     </thead>
@@ -46,7 +53,7 @@
         :key="name"
       >
         <td>
-          <token-example :category="category" :name="exampleName || name" :value="exampleValue" />
+          <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
         </td>
         <th
           scope="row"
@@ -69,6 +76,14 @@
         >
           <div class="d-wmx264">
             {{ tokenValue }}
+          </div>
+        </td>
+        <td
+          v-show="!!tokenList"
+          class="d-ff-mono d-fw-normal d-fs-100 d-fs-100 d-lh-300"
+        >
+          <div class="d-wmx264">
+            {{ remToPixels(tokenValue) }}
           </div>
         </td>
         <td
@@ -133,6 +148,10 @@ export default {
       default: 'color',
       validator: (v) => Object.keys(CATEGORY_MAP).includes(v),
     },
+
+    tokenList: {
+      type: Object,
+    },
   },
 
   data () {
@@ -147,13 +166,16 @@ export default {
     tokensProcessed () {
       const tokens = [];
       Object.entries(tokensJson[this.theme])
-        .filter(([key, value]) => CATEGORY_MAP[this.category].includes(key.split('/')[0]) && value[FORMAT_MAP.CSS])
+        .filter(([key, value]) => CATEGORY_MAP[this.category].includes(key.split('/')[0]) &&
+          value[FORMAT_MAP.CSS] &&
+          (!this.tokenList || this.tokenList[value[FORMAT_MAP.CSS].name]))
         .forEach(([_, value]) => {
           const { name, value: tokenValue, description } = value[FORMAT_MAP[this.format]] || {};
+          const tokenDescription = this.tokenList ? this.tokenList[name].description : description;
           // exclude base tokens
-          if (!name.endsWith('base)') && !name.endsWith('root)')) {
+          if (name && !name.endsWith('base)') && !name.endsWith('root)')) {
             const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
-            tokens.push({ exampleValue, exampleName, name, tokenValue, description });
+            tokens.push({ exampleValue, exampleName, name, tokenValue, description: tokenDescription });
           }
         });
       const composedTokens = [];
@@ -178,6 +200,11 @@ export default {
 
     setTheme (newTheme) {
       this.theme = newTheme;
+    },
+
+    remToPixels (value) {
+      if (this.category !== 'size' && this.category !== 'space') return;
+      return `${parseFloat(value.replace('rem', '')) * 10}px`;
     },
 
   },

@@ -1,0 +1,227 @@
+//
+//  DIALTONE
+//  UTILITIES: FLEXBOX
+//
+//  These are the flexbox utility classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes, visit:
+//  https://dialtone.dialpad.com/utilities/layout/flex/
+//
+//  TABLE OF CONTENTS
+//  • ALIGN CONTENT
+//  • ALIGN ITEMS
+//  • ALIGN SELF
+//  • COLUMNS & LAYOUTS
+//  • DIRECTION, WRAP, & FLOW
+//  • FLEX, GROW, & SHRINK
+//  • JUSTIFY CONTENT
+//  • ORDER
+//
+//  ============================================================================
+//  $  ALIGN CONTENT
+//     Aligns the container's lines when there is extra space in the
+//     cross-axis. Note that this only works when a parent container
+//     has more than one line.
+//  ----------------------------------------------------------------------------
+.d-ac-center { align-content: center !important; }
+.d-ac-flex-end { align-content: flex-end !important; }
+.d-ac-flex-start { align-content: flex-start !important; }
+.d-ac-space-around { align-content: space-around !important; }
+.d-ac-space-between { align-content: space-between !important; }
+.d-ac-space-evenly { align-content: space-evenly !important; }
+.d-ac-baseline { align-content: baseline !important; }
+.d-ac-stretch { align-content: stretch !important; }
+.d-ac-normal { align-content: normal !important; }
+.d-ac-unset { align-content: unset !important; }
+
+
+//  ============================================================================
+//  $  ALIGN ITEMS
+//     Defines the default behavior for how child items align along
+//     the parent's cross axis. Think of it the cross-axis for
+//     justify-content.
+//  ----------------------------------------------------------------------------
+.d-ai-center { align-items: center !important; }
+.d-ai-flex-end { align-items: flex-end !important; }
+.d-ai-flex-start { align-items: flex-start !important; }
+.d-ai-baseline { align-items: baseline !important; }
+.d-ai-stretch { align-items: stretch !important; }
+.d-ai-normal { align-items: normal !important; }
+.d-ai-unset { align-items: unset !important; }
+
+
+//  ============================================================================
+//  $  ALIGN SELF
+//     Allows child containers to re-align themselves regardless
+//     of the parent's main axis direction.
+//  ----------------------------------------------------------------------------
+.d-as-center { align-self: center !important; }
+.d-as-flex-end { align-self: flex-end !important; }
+.d-as-flex-start { align-self: flex-start !important; }
+.d-as-baseline { align-self: baseline !important; }
+.d-as-stretch { align-self: stretch !important; }
+.d-as-auto { align-self: auto !important; }
+.d-as-normal { align-self: normal !important; }
+.d-as-unset { align-self: unset !important; }
+
+
+//  ============================================================================
+//  $  COLUMNS & LAYOUTS
+//  ----------------------------------------------------------------------------
+
+//  $$  FLEX GAPS
+//  ----------------------------------------------------------------------------
+.d-flg0 > * { --fl-gap: 0 !important; }
+.d-flg1 > * { --fl-gap: var(--dt-space-100) !important; }
+.d-flg2 > * { --fl-gap: var(--dt-space-100) !important; }
+.d-flg4 > * { --fl-gap: var(--dt-space-300) !important; }
+.d-flg6 > * { --fl-gap: var(--dt-space-350) !important; }
+.d-flg8 > * { --fl-gap: var(--dt-space-400) !important; }
+.d-flg12 > * { --fl-gap: var(--dt-space-450) !important; }
+.d-flg16 > * { --fl-gap: var(--dt-space-500) !important; }
+.d-flg24 > * { --fl-gap: var(--dt-space-550) !important; }
+.d-flg32 > * { --fl-gap: var(--dt-space-600) !important; }
+.d-flg48 > * { --fl-gap: var(--dt-space-650) !important; }
+.d-flg64 > * { --fl-gap: var(--dt-space-700) !important; }
+
+
+
+//  ============================================================================
+//  $  DIRECTION, WRAP, & FLOW
+//  ----------------------------------------------------------------------------
+//  $$  FLEX DIRECTION
+//      This determines the content flow direction within the parent container.
+//      Default value is row.
+//  ----------------------------------------------------------------------------
+.d-fd-row { flex-direction: row !important; }
+.d-fd-row-reverse { flex-direction: row-reverse !important; }
+.d-fd-column { flex-direction: column !important; }
+.d-fd-column-reverse { flex-direction: column-reverse !important; }
+.d-fd-unset { flex-direction: unset !important; }
+
+//  $$  FLEX WRAP
+//      This determines if a parent's children will wrap.
+//      Default value is nowrap.
+//  ----------------------------------------------------------------------------
+.d-fw-wrap { flex-wrap: wrap !important; }
+.d-fw-wrap-reverse { flex-wrap: wrap-reverse !important; }
+.d-fw-nowrap { flex-wrap: nowrap !important; }
+.d-fw-unset { flex-wrap: unset !important; }
+
+//  $$  FLEX FLOW
+//      This is another shorthand property for flex-direction and flex-wrap.
+//      Default value is 'row nowrap'.
+//  ----------------------------------------------------------------------------
+.d-ff-row-wrap { flex-flow: row wrap !important; }
+.d-ff-row-wrap-reverse { flex-flow: row wrap-reverse !important; }
+.d-ff-row-nowrap { flex-flow: row nowrap !important; }
+.d-ff-row-reverse-wrap { flex-flow: row-reverse wrap !important; }
+.d-ff-row-reverse-wrap-reverse { flex-flow: row-reverse wrap-reverse !important; }
+.d-ff-row-reverse-nowrap { flex-flow: row-reverse nowrap !important; }
+.d-ff-column-wrap { flex-flow: column wrap !important; }
+.d-ff-column-wrap-reverse { flex-flow: column wrap-reverse !important; }
+.d-ff-column-nowrap { flex-flow: column nowrap !important; }
+.d-ff-column-reverse-wrap { flex-flow: column-reverse wrap !important; }
+.d-ff-column-reverse-wrap-reverse { flex-flow: column-reverse wrap-reverse !important; }
+.d-ff-column-reverse-nowrap { flex-flow: column-reverse nowrap !important; }
+.d-f-flow-unset { flex-flow: unset !important; }
+
+
+//  ============================================================================
+//  $  FLEX, GROW, & SHRINK
+//  ----------------------------------------------------------------------------
+//  $$  FLEX
+//      Graduating scale of flex-grow and flex-shrink values
+//  ----------------------------------------------------------------------------
+.d-fl0 { flex: 0 auto !important; }
+.d-fl1 { flex: 1 auto !important; }
+.d-fl2 { flex: 2 auto !important; }
+.d-fl3 { flex: 3 auto !important; }
+.d-fl4 { flex: 4 auto !important; }
+.d-fl5 { flex: 5 auto !important; }
+.d-fl-unset { flex: unset !important; }
+
+//  $$$  FLEX NONE
+//       This is equivalent to flex: 0 0 auto.
+//       It sizes the item according to its width/height properties, but makes it
+//       fully inflexible.
+.d-fl-none { flex: none !important; }
+
+//  $$$  FLEX EQUAL
+//       Equally distributes children out within a parent container
+.d-fl-equal {
+  flex-basis: 0 !important;
+  flex-grow: 1 !important;
+  flex-shrink: 1 !important;
+}
+
+//  $$  FLEX GROW
+//      Specifies the flex-grow value, which states how much an item will
+//      grow relative to other flex items in the container when there isn't
+//      enough space in the row. Default value is 1.
+//  ----------------------------------------------------------------------------
+.d-fl-grow0 { flex-grow: 0 !important; }
+.d-fl-grow1 { flex-grow: 1 !important; }
+.d-fl-grow2 { flex-grow: 2 !important; }
+.d-fl-grow3 { flex-grow: 3 !important; }
+.d-fl-grow4 { flex-grow: 4 !important; }
+.d-fl-grow5 { flex-grow: 5 !important; }
+.d-fl-grow-unset { flex-grow: unset !important; }
+
+//  $$  FLEX SHRINK
+//      Specifies the flex-shrink factor, which states how much an item will
+//      shrink relative to other flex items in the container when there isn't
+//      enough space in the row. Default value is 1.
+//  ----------------------------------------------------------------------------
+.d-fl-shrink0 { flex-shrink: 0 !important; }
+.d-fl-shrink1 { flex-shrink: 1 !important; }
+.d-fl-shrink2 { flex-shrink: 2 !important; }
+.d-fl-shrink3 { flex-shrink: 3 !important; }
+.d-fl-shrink4 { flex-shrink: 4 !important; }
+.d-fl-shrink5 { flex-shrink: 5 !important; }
+.d-fl-shrink-unset { flex-shrink: unset !important; }
+
+
+//  ============================================================================
+//  $  JUSTIFY CONTENT
+//     Defines the child alignment along the parent's main axis
+//  ----------------------------------------------------------------------------
+.d-jc-center { justify-content: center !important; }
+.d-jc-flex-end { justify-content: flex-end !important; }
+.d-jc-flex-start { justify-content: flex-start !important; }
+.d-jc-space-around { justify-content: space-around !important; }
+.d-jc-space-between { justify-content: space-between !important; }
+.d-jc-space-evenly { justify-content: space-evenly !important; }
+.d-jc-baseline { justify-content: baseline !important; }
+.d-jc-normal { justify-content: normal !important; }
+.d-jc-unset { justify-content: unset !important; }
+
+
+//  $$  CENTER ITEMS
+//      A common combination of classes is .d-jc-center and .ai-center.
+//      Use this class when you want both.
+//  ----------------------------------------------------------------------------
+.d-fl-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+//  ============================================================================
+//  $  ORDER
+//      Designate a child container's position.
+//  ----------------------------------------------------------------------------
+.d-order1 { order: 1 !important; }
+.d-order2 { order: 2 !important; }
+.d-order3 { order: 3 !important; }
+.d-order4 { order: 4 !important; }
+.d-order5 { order: 5 !important; }
+.d-order6 { order: 6 !important; }
+.d-order7 { order: 7 !important; }
+.d-order8 { order: 8 !important; }
+.d-order9 { order: 9 !important; }
+.d-order10 { order: 10 !important; }
+.d-order11 { order: 11 !important; }
+.d-order12 { order: 12 !important; }
+.d-order-first { order: -9999 !important; }
+.d-order-last { order: 9999 !important; }

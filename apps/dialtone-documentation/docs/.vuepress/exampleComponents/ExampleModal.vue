@@ -114,7 +114,6 @@
 
 <script>
 import Modal from '@mixins/modal.js';
-const MODAL_KINDS = ['full-screen', 'danger', 'fixed', 'base'];
 
 export default {
   name: 'ExampleModal',
@@ -125,17 +124,11 @@ export default {
     kind: {
       type: String,
       default: 'base',
-      validator: (_kind) => {
-        return MODAL_KINDS.includes(_kind);
-      },
     },
 
     bannerKind: {
       type: String,
       default: 'warning',
-      validate (kind) {
-        return window.DIALTONE_CONSTANTS.NOTICE_KINDS.includes(kind);
-      },
     },
 
     bannerTitle: {

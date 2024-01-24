@@ -4,7 +4,7 @@ description: A radio is an input control that allows users to select only one op
 status: ready
 thumb: true
 image: assets/images/components/radio.png
-storybook: https://vue.dialpad.design/?path=/story/components-radio--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A22042&viewport=-451%2C205%2C0.6&t=xHutRjwo1o5zMTgT-11
 ---
 
@@ -356,10 +356,6 @@ The best accessibility is semantic HTML. Most screen readers understand how to p
 - If the input is a required field, use the `aria-required` property and use the validation message for input errors.
 - Input with validation errors should have `aria-describedby` with the `id` of the validation message.
 - Input with validation errors should have `aria-describedby` with the `id` of the validation message.
-
-<script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>
 
 ## Vue API
 

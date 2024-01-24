@@ -7,7 +7,7 @@ import {
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import PopoverVariants from './popover_variants.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 
 import { action } from '@storybook/addon-actions';
 import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './popover_constants';
@@ -130,6 +130,46 @@ export const argTypesData = {
       },
     },
   },
+  hideOnClick: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  modal: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  open: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  openOnContext: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  openWithArrowKeys: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showCloseButton: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  tether: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Events
   onOpened: {
@@ -162,12 +202,9 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverDefault);
-const TemplateVariants = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, PopoverVariants);
-
 export const Default = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtPopover, PopoverDefault, argsData),
+
   args: {},
 
   decorators: [
@@ -180,7 +217,8 @@ export const Default = {
 };
 
 export const Variants = {
-  render: TemplateVariants,
+  render: (argsData) => createRenderConfig(DtPopover, PopoverVariants, argsData),
+
   args: {},
 
   parameters: {

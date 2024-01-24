@@ -1,0 +1,33 @@
+//
+//  DIALTONE
+//  COMPONENTS: COLLAPSIBLE
+//
+//  These are collapsible classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/collapsible
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-collapsible__icon {
+  --icon-base-scale: var(--dt-size-400);
+  --icon-size-300: calc(var(--icon-base-scale) * 2.25);
+  --icon-size: var(--icon-size-300);
+
+  flex: none;
+  flex-shrink: 0;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  margin-right: var(--dt-space-400);
+  fill: currentColor;
+}
+
+.d-collapsible__anchor-text {
+  margin-right: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

@@ -1,7 +1,7 @@
 <template>
   <component
     :is="icon"
-    v-if="icon"
+    v-show="name"
     :id="id"
     data-qa="dt-icon"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
@@ -13,6 +13,7 @@
 <script>
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
 import { getUniqueString } from '@/common/utils.js';
+import iconNames from '@dialpad/dialtone-icons/dist/icons.json';
 
 const dialtoneIcons = import.meta.glob(
   '/node_modules/@dialpad/dialtone-icons/dist/svg/*.svg',
@@ -21,7 +22,7 @@ const dialtoneIcons = import.meta.glob(
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
- * @see https://dialpad.design/components/icon.html
+ * @see https://dialtone.dialpad.com/components/icon.html
  */
 export default {
   name: 'DtIcon',
@@ -53,6 +54,7 @@ export default {
     name: {
       type: String,
       required: true,
+      validator: (name) => iconNames.includes(name),
     },
 
     /**

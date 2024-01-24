@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtCodeblock from './codeblock.vue';
 
 import DtCodeblockDefaultTemplate from './codeblock_default.story.vue';
@@ -22,15 +22,8 @@ export default {
   parameters: {},
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCodeblockDefaultTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCodeblock, DtCodeblockDefaultTemplate, argsData),
 
   args: {
     text: 'function someFunction() {\n  return "some result";\n}',

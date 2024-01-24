@@ -1,3 +1,69 @@
+## [4.5.4](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.3...dialtone-icons/v4.5.4) (2024-01-19)
+
+
+### Bug Fixes
+
+* icon dt-ai alignment adjust ([#116](https://github.com/dialpad/dialtone/issues/116)) ([5467c5c](https://github.com/dialpad/dialtone/commit/5467c5c9ceb5099dd2d03cc61b118ee192538961))
+
+## [4.5.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.2...dialtone-icons/v4.5.3) (2024-01-18)
+
+
+### Bug Fixes
+
+* Icons Update ([#110](https://github.com/dialpad/dialtone/issues/110)) ([4804d83](https://github.com/dialpad/dialtone/commit/4804d83f29cd52960fc2c9ab67f2ae37635951e0))
+
+## [4.5.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.1...dialtone-icons/v4.5.2) (2024-01-16)
+
+
+### Bug Fixes
+
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
+## [4.5.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.0...dialtone-icons/v4.5.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* video-off icon issue ([#99](https://github.com/dialpad/dialtone/issues/99)) ([4ecb3c0](https://github.com/dialpad/dialtone/commit/4ecb3c0576b69f0fb31911700c1a8dfe6d3a6497))
+
+# [4.5.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.4.1...dialtone-icons/v4.5.0) (2024-01-08)
+
+
+### Features
+
+* added unread and rematch icons ([bb6830a](https://github.com/dialpad/dialtone/commit/bb6830adeb18ab6bbc3726d701c191c2a91fcadf))
+
+## [4.4.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.4.0...dialtone-icons/v4.4.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* update on the Video icon to have a better  visual balance ([#80](https://github.com/dialpad/dialtone/issues/80)) ([00d448f](https://github.com/dialpad/dialtone/commit/00d448f8e049adbcc83d2a8e76199f034e2c1c79))
+
+# [4.4.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.3.0...dialtone-icons/v4.4.0) (2023-12-21)
+
+
+### Documentation
+
+* fix multiple issues ([#70](https://github.com/dialpad/dialtone/issues/70)) ([3478dd4](https://github.com/dialpad/dialtone/commit/3478dd43d10e3b1a42a16be308306faecf5cbd9b))
+
+
+### Features
+
+* add icon sticker gif and brand giphy ([#66](https://github.com/dialpad/dialtone/issues/66)) ([6e9e4d5](https://github.com/dialpad/dialtone/commit/6e9e4d5922d8c3e187024ba0e60495f9c7d80f31))
+
+# [4.3.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.2.1...dialtone-icons/v4.3.0) (2023-12-19)
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+
+
+### Features
+
+* add new agentassist icon ([#57](https://github.com/dialpad/dialtone/issues/57)) ([526f7e8](https://github.com/dialpad/dialtone/commit/526f7e8c89e3e03c5ae57b3c30c2472603569cf0))
+
 # [4.2.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.1.1...dialtone-icons/v4.2.0) (2023-12-13)
 
 

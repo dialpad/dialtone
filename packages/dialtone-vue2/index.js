@@ -11,7 +11,7 @@ export * from './components/combobox';
 export * from './components/collapsible';
 export * from './components/description_list';
 export * from './components/dropdown';
-export * from './components/emoji_picker';
+export * from './components/hovercard';
 export * from './components/image_viewer';
 export * from './components/input';
 export * from './components/input_group';
@@ -61,6 +61,7 @@ export * from './recipes/conversation_view/feed_item_row';
 export * from './recipes/conversation_view/feed_pill';
 export * from './recipes/conversation_view/time_pill';
 export * from './recipes/conversation_view/emoji_row';
+export * from './recipes/conversation_view/attachment_carousel';
 export * from './recipes/leftbar/callbox';
 
 // Mixins

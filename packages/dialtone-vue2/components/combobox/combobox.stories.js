@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtCombobox from './combobox.vue';
 
 import DtComboboxDefaultTemplate from './combobox_default.story.vue';
@@ -106,6 +106,36 @@ export const argTypesData = {
       },
     },
   },
+  clickOnSelect: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  emptyList: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  labelVisible: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  listRenderedOutside: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  loading: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showList: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Action Event Handlers
   onEscape: {
@@ -179,15 +209,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtComboboxDefaultTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCombobox, DtComboboxDefaultTemplate, argsData),
 
   args: {
     items: [
@@ -208,7 +231,7 @@ export const Default = {
 };
 
 export const Empty = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCombobox, DtComboboxDefaultTemplate, argsData),
 
   args: {
     items: [],

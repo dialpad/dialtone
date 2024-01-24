@@ -22,7 +22,7 @@ Please use **only** these colors or variations of these colors which pass WCAG 2
 
 Use `d-fc-{color}` to change an element's text color.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <p class="d-fs-200 d-fc-purple-400">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
@@ -34,7 +34,7 @@ Use `d-fc-{color}` to change an element's text color.
 
 Use `d-fco{n}` to change an element's text color opacity. You can also change font color opacity on `:hover`, `:focus`, `:focus-visible`, or in dark mode by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}`, or `d:d-fco{n}` prefixes.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102 d-stack8" custom>
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102 d-stack8" custom>
   <p class="d-fs-200 d-fc-purple-400">The quick brown fox jumps over the lazy dog.</p>
   <p class="d-fs-200 d-fc-purple-400 d-fco99">The quick brown fox jumps over the lazy dog.</p>
   <p class="d-fs-200 d-fc-purple-400 d-fco95">The quick brown fox jumps over the lazy dog.</p>
@@ -62,7 +62,7 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 
 Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <button class="d-p16 d-bar4 d-fs-200 d-fc-purple-400 h:d-fc-neutral-white d-bgc-transparent h:d-bgc-purple-500 d-ba d-bc-transparent">Hover over me</button>
 </code-well-header>
 
@@ -74,7 +74,7 @@ Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 
 Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-within` state.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-center d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
   <button class="d-p16 d-bar4 d-fs-200 d-fc-magenta-300 f:d-fc-neutral-white d-bgc-transparent f:d-bgc-magenta-400 d-ba d-bc-transparent">Click or focus on me</button>
 </code-well-header>
 
@@ -86,7 +86,7 @@ Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-with
 
 Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` state [only when focused by keyboard].
 
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-center d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
   <button class="d-p16 d-bar4 d-fs-200 d-fc-magenta-300 fv:d-fc-neutral-white d-bgc-transparent fv:d-bgc-magenta-400 d-ba d-bc-transparent">Focus on me</button>
 </code-well-header>
 
@@ -191,12 +191,46 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
           </td>
         </tr>
       </tbody>
-      <tbody v-for="{ color, stops } in baseColors">
+    </template>
+  </utility-class-table>
+</div>
+
+### Light mode
+
+<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
+  <utility-class-table class="d-bgc-primary">
+    <template #content>
+      <tbody v-for="{ color, stops } in baseColors.lightMode">
         <tr v-for="{ stop } in stops.reverse()">
           <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-{{ color }}-{{ stop }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl1 d-ff-mono d-fs-100">
+                  --fco: 100%;<br/>
+                  color: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--fco)) !important;
+              </div>
+              <div class="d-fl0 d-ml16 d-p4 d-fs-300 d-lh4" :class="`d-fc-${color}-${stop}`">
+                  Aa
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </template>
+  </utility-class-table>
+</div>
+
+### Dark mode
+
+<div class="d-h464 d-of-y-scroll dialtone-theme-dark">
+  <utility-class-table class="d-bgc-primary d-table--inverted">
+    <template #content>
+      <tbody v-for="{ color, stops } in baseColors.darkMode">
+        <tr v-for="{ stop } in stops.reverse()">
+          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-{{ color }}-{{ stop }}</th>
+          <td>
+            <div class="d-d-flex d-jc-space-between d-ai-center">
+              <div class="d-fl1 d-ff-mono d-fs-100 d-fc-primary">
                   --fco: 100%;<br/>
                   color: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--fco)) !important;
               </div>

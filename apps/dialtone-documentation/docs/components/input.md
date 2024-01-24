@@ -4,7 +4,7 @@ description: An input field is an input control that allows users to enter alpha
 status: ready
 thumb: true
 image: assets/images/components/input.png
-storybook: https://vue.dialpad.design/?path=/story/components-input--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A21866&viewport=-983%2C83%2C0.16&t=xHutRjwo1o5zMTgT-11
 ---
 
@@ -429,8 +429,6 @@ You may use different icon sizes in different sized inputs
 - Placeholder text should not include critical information. Use description text for any information that helps the user successfully interact with the input.
 
 <script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-
   const messages = {
     warning: { "message": "Warning validation message", "type": "warning" },
     error: { "message": "Error validation message", "type": "error" },

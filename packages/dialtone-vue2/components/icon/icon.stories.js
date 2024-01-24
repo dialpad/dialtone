@@ -3,7 +3,7 @@ import { ICON_SIZE_MODIFIERS } from './icon_constants';
 
 import DtIconDefaultTemplate from './icon_default.story.vue';
 import DtIconVariantsTemplate from './icon_variants.story.vue';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 const iconsList = getIconNames();
 export const argTypesData = {
   size: {
@@ -33,19 +33,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtIconDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtIconVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtIcon, DtIconDefaultTemplate, argsData),
 
   args: {
     name: 'accessibility',
@@ -53,7 +42,7 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtIcon, DtIconVariantsTemplate, argsData),
   args: { limit: undefined },
   parameters: {
     percy: {

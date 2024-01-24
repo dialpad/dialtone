@@ -1,0 +1,53 @@
+//
+//  DIALTONE
+//  COMPONENTS: ITEM LAYOUT
+//
+// Custom layout to enable developer to use list-item like stack.
+// It is used as base for `dt-list-item` component
+// visit https://dialtone.dialpad.com/components/item_layout
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.dt-item-layout {
+  display: flex;
+  align-items: center;
+  min-height: calc(var(--dt-size-550) + var(--dt-size-300));
+  padding: var(--dt-space-300) var(--dt-space-400);
+  font-size: var(--dt-font-size-200);
+  line-height: var(--dt-font-line-height-300);
+
+  &--content {
+    flex-grow: 1;
+    min-width: var(--dt-size-0);
+  }
+
+  &--subtitle {
+    color: var(--dt-color-foreground-tertiary);
+    font-size: var(--dt-font-size-100);
+  }
+
+  &--right,
+  &--left {
+    display: flex;
+    align-items: center;
+    min-width: var(--dt-size-600);
+    min-height: inherit;
+  }
+
+  &--right {
+    padding-left: var(--dt-space-400);
+  }
+
+  &--left {
+    justify-content: flex-end;
+    padding-right: var(--dt-space-400);
+  }
+
+  &--bottom {
+    margin-top: var(--dt-space-200);
+  }
+}

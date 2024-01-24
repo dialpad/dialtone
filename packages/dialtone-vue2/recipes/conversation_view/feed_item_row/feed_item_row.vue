@@ -3,7 +3,7 @@
     ref="FeedItemRef"
     navigation-type="none"
     v-bind="$attrs"
-    :class="listItemClasses"
+    :class="['dt-feed-item-row', listItemClasses]"
     data-qa="dt-feed-item-row"
     v-on="feedListeners"
   >
@@ -21,17 +21,17 @@
         />
       </slot>
       <!-- show time instead of avatar when headers not present -->
-      <div
+      <span
         v-if="!showHeader"
         v-show="isActive"
         class="dt-feed-item-row__left-time"
         data-qa="dt-feed-item-row--left-time"
       >
         {{ shortTime }}
-      </div>
+      </span>
     </template>
 
-    <article>
+    <article class="dt-feed-item-row__content">
       <!-- Feed Item -->
       <div
         v-if="showHeader"
@@ -62,13 +62,17 @@
 
     <template #bottom>
       <div
+        v-if="$slots.reactions"
         class="dt-feed-item-row__reactions"
         data-qa="dt-feed-item-row--reactions"
       >
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
       </div>
-      <div class="dt-feed-item-row__threading">
+      <div
+        v-if="$slots.threading"
+        class="dt-feed-item-row__threading"
+      >
         <!-- @slot Slot for threading row component -->
         <slot name="threading" />
       </div>
@@ -184,7 +188,7 @@ export default {
     },
 
     /**
-     * state for the feed item row. Can be default, searched & error
+     * state for the feed item row. Can be normal, searched & error
      */
     state: {
       type: String,
@@ -221,7 +225,7 @@ export default {
 
   data () {
     return {
-      faded: false,
+      transitionActive: false,
     };
   },
 
@@ -233,6 +237,7 @@ export default {
         mouseleave: () => this.setHover(false),
         focusin: () => this.setFocus(true),
         focusout: () => this.setFocus(false),
+        transitionend: () => this.transitionComplete(),
         keydown: event => {
           switch (event.code) {
             case 'Tab':
@@ -246,20 +251,33 @@ export default {
 
     listItemClasses () {
       return [
-        'd-w100p',
-        'd-box-border',
-        'd-ps-relative',
-        'd-px16',
-        { 'd-bgc-secondary-opaque': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
-        FEED_ROW_STATE_BACKGROUND_COLOR[this.state],
         'dt-feed-item-row',
-        'd-t',
-        'd-tp-bgc',
+        { 'dt-feed-item-row--active': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
+        { 'dt-feed-item-row--state-transition': this.transitionActive },
+        FEED_ROW_STATE_BACKGROUND_COLOR[this.state],
+
       ];
     },
   },
 
+  watch: {
+    state: {
+      immediate: true,
+      handler: function (newState, oldState) {
+        if (newState !== DEFAULT_FEED_ROW_STATE) {
+          this.transitionActive = true;
+        }
+      },
+    },
+  },
+
   methods: {
+    transitionComplete () {
+      if (this.state === DEFAULT_FEED_ROW_STATE) {
+        this.transitionActive = false;
+      }
+    },
+
     trapFocus (e) {
       this.focusTrappedTabPress(e);
     },
@@ -271,45 +289,55 @@ export default {
     setHover (bool) {
       this.$emit('hover', bool);
     },
-
-    fade () {
-      // Do not fade if its a default feed row state
-      if (this.state === DEFAULT_FEED_ROW_STATE || this.faded === true) {
-        return;
-      }
-
-      this.$refs.FeedItemRef.$el.classList.remove(FEED_ROW_STATE_BACKGROUND_COLOR[this.state]);
-      this.faded = true;
-    },
   },
 };
 </script>
 
 <style lang="less" scoped>
 .dt-feed-item-row {
-  transition-duration: 2s !important;
+  &--state-searched {
+    background-color: var(--dt-color-surface-warning-subtle);
+  }
+
+  &--state-error {
+    background-color: var(--dt-color-surface-critical-subtle);
+  }
+
+  &--active {
+    background-color: var(--dt-color-surface-secondary-opaque);
+  }
+
+  &--state-transition {
+    transition-duration: 2s;
+    transition-delay: 0s;
+    transition-timing-function: var(--ttf-in-out);
+    transition-property: background-color;
+  }
+
+  width: var(--dt-size-100-percent);
+  box-sizing: border-box;
+  position: relative;
+  padding: var(--dt-space-300) var(--dt-space-500);
+
+  &__content {
+    padding-left: var(--dt-space-300);
+  }
 
   &__header {
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    flex-wrap: wrap;
     gap: var(--dt-space-300);
+    font-size: var(--dt-font-size-200);
+    line-height: var(--dt-font-line-height-300);
 
     &__name {
-      font-size: var(--dt-font-size-200);
-      line-height: var(--dt-font-line-height-300);
       font-weight: var(--dt-font-weight-bold);
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
     }
 
     &__time {
       font-size: var(--dt-font-size-100);
-      margin-top: var(--dt-space-200);
-      line-height: var(--dt-font-line-height-300);
       color: var(--dt-color-foreground-tertiary);
-      font-weight: var(--dt-font-weight-normal);
-      margin-left: var(--dt-space-300);
       flex-shrink: 0;
     }
   }
@@ -317,6 +345,9 @@ export default {
   &__reactions {
     display: flex;
     flex-wrap: wrap;
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+    padding-left: var(--dt-space-300);
   }
 
   &__threading {
@@ -329,6 +360,7 @@ export default {
     line-height: var(--dt-font-line-height-400);
     font-size: var(--dt-font-size-100);
     font-weight: var(--dt-font-weight-normal);
+    vertical-align: middle;
     white-space: nowrap;
     height: 100%;
   }
@@ -343,18 +375,33 @@ export default {
     line-height: 1.6rem;
   }
 
-  &:deep(.dt-item-layout--left) {
-    align-self: baseline;
+  &:deep(.dt-item-layout) {
+    font: var(--dt-typography-body-base);
+    min-height: initial;
+    padding: 0px;
     .d-avatar {
-      align-self: flex-start;
       margin-top: var(--dt-space-300);
     }
+  }
+
+  &:deep(.dt-item-layout--left) {
+    align-self: flex-start;
+    text-align: end;
+    display: block;
+    .d-avatar {
+      margin-top: var(--dt-space-300);
+    }
+  }
+
+  &:deep(.dt-item-layout--right) {
+    padding: 0;
+    min-width: initial;
   }
 
   &:deep(.dt-item-layout--bottom) {
     display: flex;
     flex-direction: column;
-    gap: var(--dt-space-200);
+    margin-top: 0;
   }
 }
 </style>

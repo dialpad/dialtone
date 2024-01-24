@@ -55,7 +55,7 @@ import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 /**
  * Banners are a type of notice, delivering system and engagement messaging.
  * These are highly intrusive notices and should be used sparingly and appropriately.
- * @see https://dialpad.design/components/banner.html
+ * @see https://dialtone.dialpad.com/components/banner.html
  */
 export default {
   name: 'DtBanner',

@@ -1,0 +1,30 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtRecipeAttachmentCarouselStories from './attachment_carousel.stories.js';
+
+<Meta of={DtRecipeAttachmentCarouselStories}/>
+
+# DtRecipeAttachmentCarousel
+
+<Subtitle>
+  Attachment carousel is used in message input or any place where we need a
+  preview of all uploaded files before its sent to the user in feed.
+</Subtitle>
+
+## Base Style
+
+Attachment carousel can house mediaType of image/video for now.
+It has the ability to preview each individual media and also remove them from the list.
+
+<Canvas of={DtRecipeAttachmentCarouselStories.Default} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeAttachmentCarousel } from '@dialpad/dialtone-vue';
+```

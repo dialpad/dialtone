@@ -68,7 +68,7 @@ This is why it is important to evaluate the change carefully and asses its impac
 Any new components or updates to existing components require the following:
 
 - Unit tests covering the entire change.
-- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://vue.dialpad.design/?path=/story/docs-storybook-getting-started--page)
+- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--page)
 - Component is accessible according to requirements.
   - Navigable by keyboard.
   - Read by a screen reader.
@@ -90,7 +90,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
 1. See [README.md](../README.md) for instructions on how to initially clone and run the project.
 2. First make sure you are on the `staging` branch with `git checkout staging`, and that it is up-to-date with `git pull`.
 3. Create a personal branch to make your change off of `staging` with `git checkout -b my-change-branch`. We use kebab-case for branch names.
-4. Make and commit your changes. Note our [commit message conventions](COMMIT_CONVENTION.md).
+4. Make and commit your changes. Note our commit message conventions in [COMMIT_CONVENTION.md].
 5. Push your branch to remote. `git push -u origin my-change-branch`.
 6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
 7. Set the label on your PR:
@@ -98,6 +98,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
 - 'visual-test-ready' if your PR includes visual UI changes.
 - 'no-visual-test' if not UI changes.
 
+<!-- markdownlint-disable MD029 -->
 8. Run `./copy_pr_vue3.sh` in the root of the repository to copy your current changes in the vue 2 folder to the vue 3 folder.
 9. Create a pull request into the `staging-vue3` branch, reviewers will be automatically added and notified of your PR.
 10. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_pr_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
@@ -110,8 +111,8 @@ Releases are done on demand by the Dialtone team, and are done fairly regularly.
 
 ### CSS
 
-We should use [Dialtone tokens](https://dialpad.design/tokens/) in Dialtone Vue for all component styling.
-Avoid using [utility classes](https://dialpad.design/utilities/) in Dialtone Vue, those should be only used at the application level.
+We should use [Dialtone tokens](https://dialtone.dialpad.com/tokens/) in Dialtone Vue for all component styling.
+Avoid using [utility classes](https://dialtone.dialpad.com/utilities/) in Dialtone Vue, those should be only used at the application level.
 
 ### How We Use Slots
 
@@ -296,7 +297,7 @@ change via a blog post on [dialtone.dialpad.com](https://dialtone.dialpad.com/ab
 
 Dialtone Vue uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/)
 to have commit messages that can be used as part of the [semantic release process](RELEASING.md).
-For more information, see [COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md).
+For more information, see [COMMIT_CONVENTION.md].
 
 Commit message conventions will be enforced on commit via git hook when pushing to branches (`production`, `staging`, `alpha` and `beta`).
 
@@ -340,7 +341,7 @@ directory. See any existing examples of mdx files within that folder for more de
 We use ESLint to promote best practices throughout our codebase.
 ESLint will check any of our javascript or vue code for styling or syntax errors.
 The configuration can be found in [.eslintrc.cjs](../.eslintrc.cjs).
-Any changes code changes you make will be automatically linted upon commit (configuration in 
+Any changes code changes you make will be automatically linted upon commit (configuration in
 [lintstagedrc.cjs](../../../lintstagedrc.cjs)).
 You can manually run ESLint via `npm run lint`.
 
@@ -359,6 +360,8 @@ Currently, we use GitHub Actions for the following:
 
 - Deploying to production `.github/workflows/deploy.yml`, See [RELEASING](RELEASING.md) for instructions on how to do this.
 - Linting our files on pull request `.github/workflows/lint-pr.yml`.
-- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION](COMMIT_CONVENTION.md) for our commit message conventions.
+- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION] for our commit message conventions.
 - Running unit tests on pull requests and pushes to staging `.github/workflows/unit_tests.yml`.
 - Running visual tests after approved pull requests and pushes to staging `.github/workflows/visual_tests.yml`.
+
+[COMMIT_CONVENTION.md]: /.github/COMMIT_CONVENTION.md

@@ -1,0 +1,88 @@
+//
+//  DIALTONE
+//  COMPONENTS: DATEPICKER
+//
+//  These are the styles for datepicker component.
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-datepicker {
+  --datepicker-width: calc(var(--dt-size-300) * 75); // A bit of a magic number as default fixed size, may use CSS utilities to override
+  --datepicker-button-size: calc(var(--dt-size-600) - var(--dt-size-200)); // Emulates SM button since Vue component in lieu of Vue component using DT button
+
+  width: var(--datepicker-width);
+  padding: var(--dt-space-500);
+  box-sizing: border-box;
+
+  &__hd {
+    padding: 0 var(--dt-space-300);
+  }
+
+  &__bd {
+  }
+
+  &__month-year {
+    justify-content: space-between;
+    width: 100%;
+    color: var(--dt-color-foreground-secondary);
+    text-align: center;
+  }
+
+  &__month-year-title {
+    line-height: var(--dt-font-line-height-300);
+    font-size: var(--dt-font-size-100);
+    font-weight: var(--dt-font-weight-normal);
+    text-transform: uppercase;
+  }
+
+  &__nav {
+  }
+
+  &__nav-btn {
+    width: var(--datepicker-button-size);
+    height: var(--datepicker-button-size);
+  }
+
+  &__weekday {
+    color: var(--dt-color-foreground-tertiary);
+    font-weight: var(--dt-font-weight-medium);
+    font-size: var(--dt-font-size-100);
+    text-transform: uppercase;
+  }
+
+  &__calendar {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__cell {
+    padding: 0;
+    padding-top: var(--dt-space-200);
+    text-align: center;
+
+    &--header {
+      padding-top: 0;
+      padding-bottom: var(--dt-space-400);
+    }
+  }
+
+  &__day {
+    width: var(--datepicker-button-size);
+    height: var(--datepicker-button-size);
+    font-variant-numeric: tabular-nums;
+
+    &--selected {
+      color: var(--dt-color-neutral-white);
+      background: var(--dt-color-brand-purple);
+    }
+
+    &--disabled {
+      color: var(--dt-color-foreground-muted);
+      background-color: var(--dt-color-neutral-transparent);
+    }
+  }
+}

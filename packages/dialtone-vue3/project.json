@@ -3,85 +3,33 @@
   "targets": {
     "build": {
       "executor": "nx:run-script",
-      "dependsOn": [
-        {
-          "projects": [ "dialtone-icons" ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "outputs": [],
-      "options": {
-        "script": "build",
-        "parallel": false
-      }
+      "options": { "script": "build" }
     },
     "build-docs": {
       "executor": "nx:run-script",
-      "dependsOn": [
-        {
-          "projects": [ "dialtone", "dialtone-icons" ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "outputs": [],
-      "options": {
-        "script": "storybook:build",
-        "parallel": true
-      }
-    },
-    "release-local": {
-      "executor": "nx:run-commands",
-      "outputs": [],
-      "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-vue3/release-local.config.cjs",
-        "parallel": false
-      }
+      "options": { "script": "storybook:build" }
     },
     "release": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        {
-          "projects": [ "dialtone-icons" ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "outputs": [],
       "options": {
-        "command": "pnpm publish --filter ./packages/dialtone-vue3 --tag vue3",
-        "parallel": false
+        "command": "pnpm publish --filter ./packages/dialtone-vue3 --tag vue3"
       }
     },
     "release-github": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        {
-          "projects": [ "dialtone-icons" ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "outputs": [],
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-vue3/release-ci.config.cjs",
-        "parallel": false
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-vue3/release-ci.config.cjs"
+      }
+    },
+    "release-local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-vue3/release-local.config.cjs"
       }
     },
     "test": {
       "executor": "nx:run-script",
-      "dependsOn": [
-        {
-          "projects": [ "dialtone-icons" ],
-          "target": "build",
-          "params": "ignore"
-        }
-      ],
-      "options": {
-        "script": "test",
-        "parallel": true
-      }
+      "options": { "script": "test" }
     }
   }
 }

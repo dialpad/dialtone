@@ -284,7 +284,7 @@ const urlWithoutProtocolRegex = new RegExp(
 );
 
 // match complete hostnames with protocols and optional URL paths, queries and fragments,
-// e.g. "ws://localhost:9010" or "https://dialpad.com/news?cache=1#heading1"
+// e.g. "ws://localhost:9011" or "https://dialpad.com/news?cache=1#heading1"
 const urlWithProtocolRegex = /\b[a-z\d.-]+:\/\/[^<>\s]+/;
 
 // match email addresses with an optional "mailto:" prefix and URL queries, e.g.

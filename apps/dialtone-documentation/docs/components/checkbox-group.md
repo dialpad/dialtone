@@ -4,7 +4,7 @@ description: Checkbox groups are convenient components for a grouping of related
 status: ready
 thumb: true
 image: assets/images/components/checkbox-group.png
-storybook: https://vue.dialpad.design/?path=/story/components-checkbox-group--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox-group--default
 ---
 
 <code-well-header>

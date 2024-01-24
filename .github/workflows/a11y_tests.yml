@@ -100,5 +100,5 @@ jobs:
       - name: Start storybook and run a11y tests
         run: |
           pnpm dlx concurrently -k -s first -n "SB,TEST" -c "green,yellow" \
-            "pnpm dlx http-server packages/dialtone-vue3/storybook-static --port 9010 --silent" \
-            "pnpm dlx wait-on tcp:9010 && pnpm nx run --verbose dialtone-vue3:test:a11y"
+            "pnpm dlx http-server packages/dialtone-vue3/storybook-static --port 9011 --silent" \
+            "pnpm dlx wait-on tcp:9011 && pnpm nx run --verbose dialtone-vue3:test:a11y"

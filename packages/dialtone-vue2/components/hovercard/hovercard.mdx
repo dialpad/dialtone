@@ -1,0 +1,47 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as HovercardStories from './hovercard.stories';
+
+<Meta of={HovercardStories}/>
+
+# Hovercard
+
+<Subtitle>
+  The Hovercard component provides a popover-like experience for displaying additional information.
+</Subtitle>
+
+## Base Style
+
+The hovercard will appear upon the mouse entering the anchor, with a delay of 300 milliseconds.
+It will remain open as long as the mouse cursor is over either the open card or the anchor.
+
+<Canvas>
+  <Story of={HovercardStories.Default} />
+</Canvas>
+
+## When there are many hovercards
+
+Initially, there is a 300ms delay when numerous hovercards are present.
+However, when transitioning from one anchor to another, the delay is determined by the mouse movement time.
+This implies that the closer the anchors are, the faster the hovercard appears.
+To achive this, the component uses a global timer.
+Move the mouse over the avatars to reveal the hovercards in the example.
+
+<Canvas>
+  <Story of={HovercardStories.Many} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+### Import
+
+```js
+import { DtHovercard } from '@dialpad/dialtone-vue';
+```
+
+### Default
+
+```html
+```

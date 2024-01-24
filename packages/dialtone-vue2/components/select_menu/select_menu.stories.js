@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { SELECT_SIZE_MODIFIERS } from './select_menu_constants';
 import DtSelectMenu from './select_menu.vue';
 
@@ -148,6 +148,11 @@ export const argTypesData = {
     description:
       'Pass through props. A set of props that are passed into the validation messages component',
   },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // HTML attributes
   name: {
@@ -213,19 +218,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtSelectMenuDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtSelectMenuVariantsTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtSelectMenu, DtSelectMenuDefaultTemplate, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtSelectMenu, DtSelectMenuVariantsTemplate, argsData),
   args: {},
 
   parameters: {

@@ -1,0 +1,196 @@
+//
+//  DIALTONE
+//  UTILITIES: BORDERS
+//
+//  These are border utility classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/utilities/borders
+//
+//  TABLE OF CONTENTS
+//  • BORDERS
+//    - COLOR
+//    - DIRECTION
+//    - RADIUS
+//    - STYLE
+//    - WIDTH
+//  • DIVIDERS
+//    - VERTICAL DIVIDERS
+//    - HORIZONTAL DIVIDERS
+//
+//  ============================================================================
+//  $  BORDERS
+//  ============================================================================
+//  $$ DIRECTION
+//  ----------------------------------------------------------------------------
+.d-ba { border: var(--dt-size-100) solid !important; }
+.d-bt { border-top: var(--dt-size-100) solid !important; }
+.d-br { border-right: var(--dt-size-100) solid !important; }
+.d-bb { border-bottom: var(--dt-size-100) solid !important; }
+.d-bl { border-left: var(--dt-size-100) solid !important; }
+.d-bx { .d-br(); .d-bl(); }
+.d-by { .d-bt(); .d-bb(); }
+.d-ba-none { border: none !important; }
+.d-ba-unset { border: unset !important; }
+
+//  ============================================================================
+//  $  BORDER RADIUS
+//  ============================================================================
+//  $$ ALL
+//  ----------------------------------------------------------------------------
+.d-bar-circle { border-radius: var(--dt-size-radius-circle) !important; }
+.d-bar-pill { border-radius: var(--dt-size-radius-pill) !important; }
+.d-bar-unset { border-radius: unset !important; }
+
+//  $$ TOP
+//  ----------------------------------------------------------------------------
+.d-btr-circle { border-top-left-radius: var(--dt-size-radius-circle) !important; border-top-right-radius: var(--dt-size-radius-circle) !important; }
+.d-btr-pill { border-top-left-radius: var(--dt-size-radius-pill) !important; border-top-right-radius: var(--dt-size-radius-pill) !important; }
+
+//  $$ RIGHT
+//  ----------------------------------------------------------------------------
+.d-brr-circle { border-top-right-radius: var(--dt-size-radius-circle) !important; border-bottom-right-radius: var(--dt-size-radius-circle) !important; }
+.d-brr-pill { border-top-right-radius: var(--dt-size-radius-pill) !important; border-bottom-right-radius: var(--dt-size-radius-pill) !important; }
+
+//  $$ BOTTOM
+//  ----------------------------------------------------------------------------
+.d-bbr-circle { border-bottom-right-radius: var(--dt-size-radius-circle) !important; border-bottom-left-radius: var(--dt-size-radius-circle) !important; }
+.d-bbr-pill { border-bottom-right-radius: var(--dt-size-radius-pill) !important; border-bottom-left-radius: var(--dt-size-radius-pill) !important; }
+
+//  $$ RIGHT
+//  ----------------------------------------------------------------------------
+.d-blr-circle { border-top-left-radius: var(--dt-size-radius-circle) !important; border-bottom-left-radius: var(--dt-size-radius-circle) !important; }
+.d-blr-pill { border-top-left-radius: var(--dt-size-radius-pill) !important; border-bottom-left-radius: var(--dt-size-radius-pill) !important; }
+
+
+//  $$ STYLE
+//  ----------------------------------------------------------------------------
+.d-bas-dashed { border-style: dashed !important; }
+.d-bts-dashed { border-top-style: dashed !important; }
+.d-brs-dashed { border-right-style: dashed !important; }
+.d-bbs-dashed { border-bottom-style: dashed !important; }
+.d-bls-dashed { border-left-style: dashed !important; }
+
+.d-bas-dotted { border-style: dotted !important; }
+.d-bts-dotted { border-top-style: dotted !important; }
+.d-brs-dotted { border-right-style: dotted !important; }
+.d-bbs-dotted { border-bottom-style: dotted !important; }
+.d-bls-dotted { border-left-style: dotted !important; }
+
+.d-bas-unset { border-style: unset !important; }
+
+
+//  $$ WIDTH
+//  ----------------------------------------------------------------------------
+.d-baw0 { border-width: 0 !important; }
+.d-baw1 { border-width: var(--dt-size-100) !important; }
+.d-baw2 { border-width: var(--dt-size-200) !important; }
+.d-baw4 { border-width: var(--dt-size-300) !important; }
+.d-baw6 { border-width: var(--dt-size-350) !important; }
+
+//  --  Top Border width
+.d-btw0 { border-top-width: 0 !important; }
+.d-btw1 { border-top-width: var(--dt-size-100) !important; }
+.d-btw2 { border-top-width: var(--dt-size-200) !important; }
+.d-btw4 { border-top-width: var(--dt-size-300) !important; }
+.d-btw6 { border-top-width: var(--dt-size-350) !important; }
+
+//  --  Right Border width
+.d-brw0 { border-right-width: 0 !important; }
+.d-brw1 { border-right-width: var(--dt-size-100) !important; }
+.d-brw2 { border-right-width: var(--dt-size-200) !important; }
+.d-brw4 { border-right-width: var(--dt-size-300) !important; }
+.d-brw6 { border-right-width: var(--dt-size-350) !important; }
+
+//  --  Bottom Border width
+.d-bbw0 { border-bottom-width: 0 !important; }
+.d-bbw1 { border-bottom-width: var(--dt-size-100) !important; }
+.d-bbw2 { border-bottom-width: var(--dt-size-200) !important; }
+.d-bbw4 { border-bottom-width: var(--dt-size-300) !important; }
+.d-bbw6 { border-bottom-width: var(--dt-size-350) !important; }
+
+//  --  Left Border width
+.d-blw0 { border-left-width: 0 !important; }
+.d-blw1 { border-left-width: var(--dt-size-100) !important; }
+.d-blw2 { border-left-width: var(--dt-size-200) !important; }
+.d-blw4 { border-left-width: var(--dt-size-300) !important; }
+.d-blw6 { border-left-width: var(--dt-size-350) !important; }
+
+//  --  X Border width
+.d-bxw0 { .d-brw0(); .d-blw0(); }
+.d-bxw1 { .d-brw1(); .d-blw1(); }
+.d-bxw2 { .d-brw2(); .d-blw2(); }
+.d-bxw4 { .d-brw4(); .d-blw4(); }
+.d-bxw6 { .d-brw6(); .d-blw6(); }
+
+//  --  Y Border width
+.d-byw0 { .d-btw0(); .d-bbw0(); }
+.d-byw1 { .d-btw1(); .d-bbw1(); }
+.d-byw2 { .d-btw2(); .d-bbw2(); }
+.d-byw4 { .d-btw4(); .d-bbw4(); }
+.d-byw6 { .d-btw6(); .d-bbw6(); }
+
+
+//  ============================================================================
+//  $  DIVIDERS
+//  ============================================================================
+//  $$ VERTICAL DIVIDERS
+//  ----------------------------------------------------------------------------
+.d-divide-y > * + * {
+    --divide-y-reverse: 0;
+
+    border-top: calc(~'1px * (1 - var(--divide-y-reverse))') solid !important;
+    border-bottom: calc(~'1px * var(--divide-y-reverse)') solid !important;
+}
+
+.d-divide-y0 > * + * {
+    --divide-y-reverse: 0;
+
+    border-top: calc(~'0 * (1 - var(--divide-y-reverse))') solid !important;
+    border-bottom: calc(~'0 * var(--divide-y-reverse)') solid !important;
+}
+
+.d-divide-y2 > * + * {
+    --divide-y-reverse: 0;
+
+    border-top: calc(~'2px * (1 - var(--divide-y-reverse))') solid !important;
+    border-bottom: calc(~'2px * var(--divide-y-reverse)') solid !important;
+}
+
+.d-divide-y4 > * + * {
+    --divide-y-reverse: 0;
+
+    border-top: calc(~'4px * (1 - var(--divide-y-reverse))') solid !important;
+    border-bottom: calc(~'4px * var(--divide-y-reverse)') solid !important;
+}
+.d-divide-y-reverse > * + * { --divide-y-reverse: 1; }
+
+//  $$ HORIZONTAL DIVIDERS
+//  ----------------------------------------------------------------------------
+.d-divide-x > * + * {
+    --divide-x-reverse: 0;
+
+    border-right: calc(~'1px * var(--divide-x-reverse)') solid !important;
+    border-left: calc(~'1px * (1 - var(--divide-x-reverse))') solid !important;
+}
+
+.d-divide-x0 > * + * {
+    --divide-x-reverse: 0;
+
+    border-right: calc(~'0 * var(--divide-x-reverse)') solid !important;
+    border-left: calc(~'0 * (1 - var(--divide-x-reverse))') solid !important;
+}
+
+.d-divide-x2 > * + * {
+    --divide-x-reverse: 0;
+
+    border-right: calc(~'2px * var(--divide-x-reverse)') solid !important;
+    border-left: calc(~'2px * (1 - var(--divide-x-reverse))') solid !important;
+}
+
+.d-divide-x4 > * + * {
+    --divide-x-reverse: 0;
+
+    border-right: calc(~'4px * var(--divide-x-reverse)') solid !important;
+    border-left: calc(~'4px * (1 - var(--divide-x-reverse))') solid !important;
+}
+.d-divide-x-reverse > * + * { --divide-x-reverse: 1; }

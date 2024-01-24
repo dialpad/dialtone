@@ -170,7 +170,7 @@
     <div>
       <h3>Feed item state "searched"</h3>
       <dt-button
-        @click="$refs.feedItemRowFade.fade()"
+        @click="fadeState = fadeState === 'NORMAL' ? 'SEARCHED' : 'NORMAL'"
       >
         Click to fade
       </dt-button>
@@ -183,7 +183,7 @@
           :time="$attrs.time"
           :short-time="$attrs.shortTime"
           :is-active="true"
-          state="SEARCHED"
+          :state="fadeState"
           @hover="$attrs.onHover"
           @focus="$attrs.onFocus"
         >
@@ -223,6 +223,7 @@ export default {
 
   data () {
     return {
+      fadeState: 'SEARCHED',
       mockReactions: [
         {
           emojiUnicodeOrShortname: '😀',

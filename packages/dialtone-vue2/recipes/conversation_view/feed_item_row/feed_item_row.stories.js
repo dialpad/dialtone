@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 import DtRecipeFeedItemRowDefaultTemplate from './feed_item_row_default.story.vue';
 import DtRecipeFeedItemRowVariantsTemplate from './feed_item_row_variants.story.vue';
@@ -13,10 +13,9 @@ export const argsData = {
   shortTime: '4:54',
   onFocus: action('focus'),
   onHover: action('hover'),
-  default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
-  Elementum fames nullam elementum velit proin vitae aliquet.
+  default: `Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
-  aliquet elementum venenatis quisque.</p>`,
+  aliquet elementum venenatis quisque.`,
 };
 
 /*
@@ -115,20 +114,14 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeFeedItemRowDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeFeedItemRowVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeFeedItemRow, DtRecipeFeedItemRowDefaultTemplate, argsData),
+
+  decorators: [
+    () => ({
+      template: `<ul class="d-ls-none d-pt32" style="padding-inline-start: 0px; max-width: 960px"><story /></ul>`,
+    }),
+  ],
 
   args: {
     showHeader: true,
@@ -153,7 +146,7 @@ Default.parameters = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeFeedItemRow, DtRecipeFeedItemRowVariantsTemplate, argsData),
 
   args: {
   },

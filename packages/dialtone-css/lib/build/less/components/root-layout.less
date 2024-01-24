@@ -1,0 +1,125 @@
+//
+//  DIALTONE
+//  COMPONENTS: Root Layout
+//
+//  These are the styles for root layout for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/root-layout.html
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-root-layout {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'sidebar body'
+    'footer footer';
+  grid-template-rows: min-content 1fr min-content;
+  grid-template-columns: min-content 1fr;
+  min-height: 100vh;
+
+  &--inverted {
+    grid-template-areas:
+      'header header'
+      'body sidebar'
+      'footer footer';
+    grid-template-columns: 1fr min-content;
+  }
+
+  &--fixed {
+    height: 100vh;
+  }
+
+  &__header {
+    grid-area: header;
+
+    &--sticky {
+      position: sticky;
+      top: 0;
+      z-index: var(--zi-navigation);
+    }
+  }
+
+  &__sidebar {
+    grid-area: sidebar;
+    height: 100%;
+    overflow: hidden auto;
+    box-shadow: none;
+  }
+
+  &__content {
+    grid-area: body;
+    overflow-y: auto;
+    box-shadow: none;
+
+    &:focus-visible {
+      box-shadow: none;
+    }
+  }
+
+  &__footer {
+    grid-area: footer;
+  }
+}
+
+@media (max-width: 480px) {
+
+  // Having a fixed height in mobile mode doesn't really make any sense,
+  // so we'll set it back to auto if the media query triggered.
+  .d-root-layout--fixed.d-root-layout__responsive--sm {
+    height: auto;
+  }
+
+  .d-root-layout__responsive--sm {
+    grid-template-areas:
+    'header'
+    'sidebar'
+    'body'
+    'footer';
+    grid-template-rows: min-content auto 1fr min-content;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+
+  // Having a fixed height in mobile mode doesn't really make any sense,
+  // so we'll set it back to auto if the media query triggered.
+  .d-root-layout--fixed.d-root-layout__responsive--md {
+    height: auto;
+  }
+
+  .d-root-layout__responsive--md {
+    grid-template-areas:
+    'header'
+    'sidebar'
+    'body'
+    'footer';
+    grid-template-rows: min-content auto 1fr min-content;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 980px) {
+
+  // Having a fixed height in mobile mode doesn't really make any sense,
+  // so we'll set it back to auto if the media query triggered.
+  .d-root-layout--fixed.d-root-layout__responsive--lg {
+    height: auto;
+  }
+
+  .d-root-layout__responsive--lg {
+    grid-template-areas:
+    'header'
+    'sidebar'
+    'body'
+    'footer';
+    grid-template-rows: min-content auto 1fr min-content;
+    grid-template-columns: 1fr;
+  }
+}

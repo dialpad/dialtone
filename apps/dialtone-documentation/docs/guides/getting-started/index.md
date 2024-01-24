@@ -14,13 +14,13 @@ npm install @dialpad/dialtone
 Add the following line in your Less file:
 
 ```less
-@import "node_modules/@dialpad/dialtone/lib/build/less/dialtone.less";
+@import "node_modules/@dialpad/dialtone-css/lib/build/less/dialtone.less";
 ```
 
 If you only need access to Dialtone's variables and customizations to build a file and don't need the whole library exported, use this line instead in your Less file:
 
 ```less
-@import (reference) "node_modules/@dialpad/dialtone/lib/build/less/dialtone.less";
+@import (reference) "node_modules/@dialpad/dialtone-css/lib/build/less/dialtone.less";
 ```
 
 ## Usage
@@ -41,15 +41,15 @@ Dialtone's CSS library offers a framework of utility-first classes. Each class i
 
 In the above example, we used:
 
-- Our [padding utility class](/utilities/spacing/padding/) `.d-p16` to add 16px of padding
-- Our [background color utility class](/utilities/backgrounds/color/) `.d-bgc-black-600` to add a purple background
-- Our [font color utility class](/utilities/typography/color/) `.d-fc-primary-inverted` to change the font color to the inverted primary text color
+- Our [padding utility class](utilities/spacing/padding/) `.d-p16` to add 16px of padding
+- Our [background color utility class](utilities/backgrounds/color/) `.d-bgc-black-600` to add a purple background
+- Our [font color utility class](utilities/typography/color/) `.d-fc-primary-inverted` to change the font color to the inverted primary text color
 
 Though an atomic CSS approach comes with many advantages, we know it also offers a notable disadvantage: reducing the CSS cascade. This is especially true for repeated UI elements, which can end up creating redundant mark-up. For these instances, Dialtone offers components.
 
 ### Components
 
-There are two methods to implement Dialtone components: Vue (recommended) and CSS. Vue is the preferred method as it's more robust and readily accessible out-of-the-box. [Get started with Vue components](https://vue.dialpad.design/).
+There are two methods to implement Dialtone components: Vue (recommended) and CSS. Vue is the preferred method as it's more robust and readily accessible out-of-the-box. [Get started with Vue components](https://dialtone.dialpad.com/vue/).
 In the event Dialtone Vue doesn't suit your needs, Dialtone's CSS library offers the same set of components. These may require more work to implement and make accessible, but will work in a pinch.
 
 <code-well-header>

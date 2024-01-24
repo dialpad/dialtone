@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtCheckboxGroup from './checkbox_group.vue';
 
 import CheckboxGroupDefaultTemplate from './checkbox_group_default.story.vue';
@@ -74,6 +74,16 @@ export const argTypesData = {
       },
     },
   },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Directives
   'v-model': {
@@ -130,21 +140,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => {
-  return createTemplateFromVueFile(args, argTypes, CheckboxGroupDefaultTemplate);
-};
-const VariantsTemplate = (args, { argTypes }) => {
-  return createTemplateFromVueFile(args, argTypes, CheckboxGroupVariantsTemplate);
-};
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtCheckboxGroup, CheckboxGroupDefaultTemplate, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtCheckboxGroup, CheckboxGroupVariantsTemplate, argsData),
   args: {},
 
   parameters: {

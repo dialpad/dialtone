@@ -4,7 +4,7 @@ description: An avatar is a visual representation of a user or object.
 status: ready
 thumb: true
 image: assets/images/components/avatar.png
-storybook: https://vue.dialpad.design/?path=/story/components-avatar--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-avatar--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8918%3A21289&viewport=137%2C605%2C0.46&t=xHutRjwo1o5zMTgT-11
 ---
 
@@ -57,7 +57,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
         </tr>
         <tr>
             <td>
-                <dt-avatar image-src="/assets/images/person.png" image-alt="person avatar" group="3" />
+                <dt-avatar image-src="/assets/images/person.png" image-alt="person avatar" :group="3" />
             </td>
             <th class="d-ta-left"><a class="d-link" href="#group">Group</a></th>
             <td>When reflecting more than 2 participants.</td>
@@ -143,8 +143,8 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">
-        <dt-avatar group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     </div>
 </code-well-header>
 
@@ -165,7 +165,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 ### Presence
 
-Positions the [Presence](/components/presence.html) component at each size.
+Positions the [Presence](components/presence.html) component at each size.
 
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">

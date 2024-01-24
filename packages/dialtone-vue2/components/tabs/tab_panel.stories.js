@@ -7,6 +7,11 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  hidden: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 // Story Collection

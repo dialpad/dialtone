@@ -18,7 +18,7 @@
 <script>
 /**
  * Lazy Show is a utility component that prevents its children from being rendered until the first time it is shown.
- * @see https://dialpad.design/components/lazy_show.html
+ * @see https://dialtone.dialpad.com/components/lazy_show.html
  */
 export default {
   name: 'DtLazyShow',

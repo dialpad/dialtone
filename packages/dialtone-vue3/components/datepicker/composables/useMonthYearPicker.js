@@ -14,7 +14,7 @@ export function useMonthYearPicker (props, emits) {
   });
 
   const formattedMonth = computed(() => {
-    return (month, format) => formatMonth(month, format);
+    return (month, format, locale) => formatMonth(month, format, locale);
   });
 
   watch(selectMonth, () => {
@@ -34,7 +34,7 @@ export function useMonthYearPicker (props, emits) {
   }
 
   function focusMonthYearPicker () {
-    focusRefs.value[0].focus();
+    focusRefs.value[0].$el.focus();
   }
 
   function handleKeyDown (event) {
@@ -43,10 +43,10 @@ export function useMonthYearPicker (props, emits) {
         event.preventDefault();
         if (focusPicker.value === 0) {
           focusPicker.value = 3;
-          focusRefs.value[focusPicker.value].focus();
+          focusRefs.value[focusPicker.value].$el.focus();
         } else {
           focusPicker.value--;
-          focusRefs.value[focusPicker.value].focus();
+          focusRefs.value[focusPicker.value].$el.focus();
         }
         break;
 
@@ -54,20 +54,21 @@ export function useMonthYearPicker (props, emits) {
         event.preventDefault();
         if (focusPicker.value === 3) {
           focusPicker.value = 0;
-          focusRefs.value[focusPicker.value].focus();
+          focusRefs.value[focusPicker.value].$el.focus();
         } else {
           focusPicker.value++;
-          focusRefs.value[focusPicker.value].focus();
+          focusRefs.value[focusPicker.value].$el.focus();
         }
         break;
 
       case 'ArrowDown':
         event.preventDefault();
-        emits('focus-day');
+        emits('focus-first-day');
         break;
 
       case 'Tab':
-        emits('focus-day');
+        event.preventDefault();
+        emits('focus-first-day');
         break;
 
       case 'Escape':
@@ -88,14 +89,29 @@ export function useMonthYearPicker (props, emits) {
   }
 
   function changeMonth (value) {
-    const initialDate = set(props.selectedDate, { month: selectMonth.value, year: selectYear.value });
-    const date = ++value ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
+    // Adjust year when changing from January to December or vice versa
+    if ((selectMonth.value === 0 && value === -1) || (selectMonth.value === 11 && value === 1)) {
+      selectYear.value += value;
+    }
 
-    selectMonth.value = getMonth(date);
+    // Calculate the new date by adding or subtracting months
+    const initialDate = set(props.selectedDate, { month: selectMonth.value, year: selectYear.value });
+    const newDate = value === 1 ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
+
+    // Update the selected month
+    selectMonth.value = getMonth(newDate);
   }
 
   function changeYear (value) {
     selectYear.value = selectYear.value + value;
+  }
+
+  function goToNextMonth () {
+    changeMonth(1);
+  }
+
+  function goToPrevMonth () {
+    changeMonth(-1);
   }
 
   return {
@@ -107,5 +123,7 @@ export function useMonthYearPicker (props, emits) {
     handleKeyDown,
     changeMonth,
     changeYear,
+    goToNextMonth,
+    goToPrevMonth,
   };
 }

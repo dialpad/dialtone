@@ -1,3 +1,104 @@
+# [3.105.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.104.0...dialtone-vue3/v3.105.0) (2024-01-19)
+
+
+### Features
+
+* datepicker full language support ([#118](https://github.com/dialpad/dialtone/issues/118)) ([988b727](https://github.com/dialpad/dialtone/commit/988b727103cfa34b0cf7cb2a26317f58d5cb5350))
+
+# [3.104.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.103.0...dialtone-vue3/v3.104.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
+
+### Features
+
+* **Datepicker:** vue2 style and keyboard navigation enhancement ([#95](https://github.com/dialpad/dialtone/issues/95)) ([2850eae](https://github.com/dialpad/dialtone/commit/2850eae8b1a54b6886fcc8c7cd0bee1f4f2c79be))
+
+# [3.103.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.102.1...dialtone-vue3/v3.103.0) (2024-01-15)
+
+
+### Features
+
+* **Hovercard:** add hovercard implementation ([#72](https://github.com/dialpad/dialtone/issues/72)) ([32cc1a8](https://github.com/dialpad/dialtone/commit/32cc1a837043f5fdbf562992ad9bc83f1d2b9252))
+
+## [3.102.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.102.0...dialtone-vue3/v3.102.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* icon name validation ([b9cfcff](https://github.com/dialpad/dialtone/commit/b9cfcff6eb23e9a54bb8ee0cde36cc348dd2b606))
+
+# [3.102.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.101.0...dialtone-vue3/v3.102.0) (2024-01-09)
+
+
+### Documentation
+
+* fix datepicker table dark mode ([#90](https://github.com/dialpad/dialtone/issues/90)) ([9ef39a9](https://github.com/dialpad/dialtone/commit/9ef39a9b5356931132af83086c24e855ecf5f1a7))
+
+
+### Features
+
+* port message input recipe ([#81](https://github.com/dialpad/dialtone/issues/81)) ([efb5732](https://github.com/dialpad/dialtone/commit/efb573246395e96c596cef548111b822dc5b032a))
+
+# [3.101.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.100.0...dialtone-vue3/v3.101.0) (2024-01-08)
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+
+
+### Features
+
+* port attachment carousel ([#86](https://github.com/dialpad/dialtone/issues/86)) ([a67aae2](https://github.com/dialpad/dialtone/commit/a67aae2946d4088b54d7de871a236c7baa351424))
+
+# [3.100.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.2...dialtone-vue3/v3.100.0) (2024-01-04)
+
+
+### Documentation
+
+* update PR template for monorepo ([#82](https://github.com/dialpad/dialtone/issues/82)) ([a940afa](https://github.com/dialpad/dialtone/commit/a940afa4caea7286709067365cb25984e283e3e5))
+
+
+### Features
+
+* port emoji suggestions ([#77](https://github.com/dialpad/dialtone/issues/77)) ([6000d7d](https://github.com/dialpad/dialtone/commit/6000d7d871b216b86c729f5512a4ab36c6657259))
+
+## [3.99.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.1...dialtone-vue3/v3.99.2) (2023-12-21)
+
+
+### Bug Fixes
+
+* change dialtone-icons to peer ([#67](https://github.com/dialpad/dialtone/issues/67)) ([a63a606](https://github.com/dialpad/dialtone/commit/a63a60676ee744313ff40792a767f36346899917))
+
+## [3.99.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.99.0...dialtone-vue3/v3.99.1) (2023-12-20)
+
+
+### Bug Fixes
+
+* missing icons ([95cfe08](https://github.com/dialpad/dialtone/commit/95cfe08f62a40ef3e202a8600ce0e631df961b64))
+
+# [3.99.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.98.1...dialtone-vue3/v3.99.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* unit test ([#56](https://github.com/dialpad/dialtone/issues/56)) ([b4bfe06](https://github.com/dialpad/dialtone/commit/b4bfe064cace1d74afd8f077d929de2b07477cb9))
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+* update Percy integration ([#61](https://github.com/dialpad/dialtone/issues/61)) ([05d9a7b](https://github.com/dialpad/dialtone/commit/05d9a7b2a95f45e91d7cb4074866e952a1dce398))
+
+
+### Features
+
+* **Hovercard:** hovercard stub ([#58](https://github.com/dialpad/dialtone/issues/58)) ([95ea15e](https://github.com/dialpad/dialtone/commit/95ea15eab5ad432db80f5eb5f3bdf4ccc8a9f46a))
+
 # [3.98.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.97.0...dialtone-vue3/v3.98.0) (2023-12-12)
 
 

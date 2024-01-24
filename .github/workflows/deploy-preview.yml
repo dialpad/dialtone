@@ -166,38 +166,16 @@ jobs:
       # Post messages #
       # ------------- #
 
-      - name: Add Dialtone ready message
-        if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
+      - name: Add preview ready message
+        if: (needs.filter-actions.outputs.dialtone == 'true' || needs.filter-actions.outputs.dialtone-vue-2 == 'true' || needs.filter-actions.outputs.dialtone-vue-3 == 'true' )
         uses: mshick/add-pr-comment@v1
         env:
           BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           message: |
-            ✔️ Dialtone Deploy Preview ready!
-            😎 Browse the preview: https://${{ env.DIALTONE_BUCKET_DIRECTORY }}
-          allow-repeats: true
-
-      - name: Add Dialtone-vue 2 ready message
-        if: ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' }}
-        uses: mshick/add-pr-comment@v1
-        env:
-          BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: |
-            ✔️ Dialtone-vue 2 Deploy Preview ready!
-            😎 Browse the preview: https://${{ env.DIALTONE_VUE_2_BUCKET_DIRECTORY }}
-          allow-repeats: true
-
-      - name: Add Dialtone-vue 3 ready message
-        if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
-        uses: mshick/add-pr-comment@v1
-        env:
-          BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: |
-            ✔️ Dialtone-vue 3 Deploy Preview ready!
-            😎 Browse the preview: https://${{ env.DIALTONE_VUE_3_BUCKET_DIRECTORY }}
+            ✔️ Deploy previews ready!
+            ${{ needs.filter-actions.outputs.dialtone == 'true' && format('😎 Dialtone preview: https://{0}', env.DIALTONE_BUCKET_DIRECTORY) || '' }}
+            ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' && format('😎 Dialtone-vue 2 preview: https://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) || '' }}
+            ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' && format('😎 Dialtone-vue 3 the preview: https://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) || '' }}
           allow-repeats: true

@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 import DtRecipeGeneralRow from './general_row.vue';
 
@@ -96,18 +96,14 @@ export default {
   decorators: [decorator],
   excludeStories: /.*Data$/,
 };
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeGeneralRowDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeGeneralRowVariantsTemplate);
 
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeGeneralRow, DtRecipeGeneralRowDefaultTemplate, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeGeneralRow, DtRecipeGeneralRowVariantsTemplate, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

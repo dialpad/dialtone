@@ -1,0 +1,210 @@
+//
+//  DIALTONE
+//  UTILITIES: EFFECTS
+//
+//  These are effects utility classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/utilities/effects
+//
+//  TABLE OF CONTENTS
+//  • ANIMATIONS
+//      - GENERIC LOADING
+//      - DIALPAD BAR ANIMATION
+//  • BOX SHADOW
+//  • OPACITY
+//  • TRANSITION
+//
+//
+//  ============================================================================
+//  $   ANIMATIONS
+//  ----------------------------------------------------------------------------
+//  $$  GENERIC LOADING
+//      This could be applied to an empty div or a psuedo element (ie ::before)
+//  ----------------------------------------------------------------------------
+@keyframes d-loading-circle {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+//  $$   DIALPAD BAR ANIMATION
+//  ----------------------------------------------------------------------------
+@keyframes d-loading-bars__short {
+  0% {
+    min-height: var(--dt-size-300);
+    transform: translateY(var(--dt-size-500-negative));
+    opacity: 0;
+  }
+
+  5% {
+    min-height: var(--dt-size-300);
+    transform: translateY(var(--dt-size-500));
+    opacity: 0.5;
+  }
+
+  10% {
+    min-height: 1rem;
+    transform: translateY(var(--dt-size-200-negative));
+    opacity: 1;
+  }
+
+  15% {
+    transform: translateY(var(--dt-size-100));
+    opacity: 1;
+  }
+
+  20%,
+ 70% {
+    min-height: 1rem;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  75% {
+    min-height: 0.75rem;
+    transform: translateY(1rem);
+    opacity: 1;
+  }
+
+  80% {
+    min-height: var(--dt-size-300);
+    transform: translateY(var(--dt-size-300-negative));
+    opacity: 0.5;
+  }
+
+  85%,
+ 100% {
+    min-height: var(--dt-size-300);
+    transform: translateY(var(--dt-size-500));
+    opacity: 0;
+  }
+}
+
+@keyframes d-loading-bars__tall {
+  0% {
+    min-height: var(--dt-size-300);
+    transform: translateY(var(--dt-size-500-negative));
+    opacity: 0;
+  }
+
+  5% {
+    min-height: var(--dt-size-300);
+    transform: translateY(var(--dt-size-500));
+    opacity: 0.5;
+  }
+
+  10% {
+    min-height: 1rem;
+    transform: translateY(var(--dt-size-200-negative));
+    opacity: 1;
+  }
+
+  15% {
+    min-height: 2.2rem;
+    transform: translateY(var(--dt-size-100));
+    opacity: 1;
+  }
+
+  20%,
+ 70% {
+    min-height: 2.2rem;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  75% {
+    min-height: var(--dt-size-500);
+    transform: translateY(1rem);
+    opacity: 1;
+  }
+
+  80% {
+    min-height: 1rem;
+    transform: translateY(var(--dt-size-300-negative));
+    opacity: 1;
+  }
+
+  85%,
+ 100% {
+    min-height: var(--dt-size-300);
+    transform: translateY(var(--dt-size-500));
+    opacity: 0;
+  }
+}
+
+//  ============================================================================
+//  $   BOX SHADOW
+//  ----------------------------------------------------------------------------
+.d-bs-sm { box-shadow: var(--dt-shadow-small) !important; }
+.d-bs-md { box-shadow: var(--dt-shadow-medium) !important; }
+.d-bs-lg { box-shadow: var(--dt-shadow-large) !important; }
+.d-bs-xl { box-shadow: var(--dt-shadow-extra-large) !important; }
+.d-bs-card { box-shadow: var(--dt-shadow-card) !important; }
+.d-bs-none { box-shadow: none !important; }
+.d-bs-unset { box-shadow: unset !important; }
+
+
+//  ============================================================================
+//  $   OPACITY
+//      For times that you want a fill background, but not at 100% opacity.
+//      These are only offered for $white and gray.
+//  ----------------------------------------------------------------------------
+.d-o0 { opacity: 0 !important; }
+.d-o5 { opacity: 0.05 !important; }
+.d-o10 { opacity: 0.1 !important; }
+.d-o20 { opacity: 0.2 !important; }
+.d-o25 { opacity: 0.25 !important; }
+.d-o30 { opacity: 0.3 !important; }
+.d-o40 { opacity: 0.4 !important; }
+.d-o50 { opacity: 0.5 !important; }
+.d-o60 { opacity: 0.6 !important; }
+.d-o70 { opacity: 0.7 !important; }
+.d-o75 { opacity: 0.75 !important; }
+.d-o80 { opacity: 0.8 !important; }
+.d-o90 { opacity: 0.9 !important; }
+.d-o100 { opacity: 1 !important; }
+.d-o-unset { opacity: unset !important; }
+
+
+//  ============================================================================
+//  $   TRANSITION
+//  ----------------------------------------------------------------------------
+.d-t {
+    transition-delay: 0s;
+    transition-timing-function: var(--ttf-in-out);
+    transition-duration: var(--td50);
+    transition-property: all;
+}
+
+//  --  TRANSITION DURATION
+.d-td0 { transition-duration: var(--td0) !important; }
+.d-td50 { transition-duration: var(--td50) !important; }
+.d-td100 { transition-duration: var(--td100) !important; }
+.d-td150 { transition-duration: var(--td150) !important; }
+.d-td200 { transition-duration: var(--td200) !important; }
+.d-td300 { transition-duration: var(--td300) !important; }
+
+//  --  TRANSITION TIMING
+.d-ttf-in-out { transition-timing-function: var(--ttf-in-out) !important; }
+.d-ttf-out { transition-timing-function: var(--ttf-out) !important; }
+.ttf-out-quint { transition-timing-function: var(--ttf-out-quint) !important; }
+
+//  --  TRANSITION PROPERTY
+.d-tp-all { transition-property: all !important; }
+.d-tp-o { transition-property: opacity !important; }
+.d-tp-bs { transition-property: box-shadow !important; }
+.d-tp-bgc { transition-property: background-color !important; }
+.d-tp-transform { transition-property: transform !important; }
+.d-tp-colors { transition-property: background-color, border-color, color, fill, stroke !important; }
+
+//  --  TRANSITION DELAY
+.d-t-delay25 { transition-delay: var(--td25) !important; }
+.d-t-delay50 { transition-delay: var(--td50) !important; }
+.d-t-delay100 { transition-delay: var(--td100) !important; }
+.d-t-delay150 { transition-delay: var(--td150) !important; }
+.d-t-delay200 { transition-delay: var(--td200) !important; }
+.d-t-delay300 { transition-delay: var(--td300) !important; }

@@ -63,10 +63,12 @@ We use **active voice** most often. Passive voice may occasionally be appropriat
 
 * The host canceled this meeting.
 </template>
+
 <template #dont>
 
 * This meeting was canceled by the host.
 </template>
+
 </dialtone-usage>
 
 ### Tone
@@ -226,10 +228,12 @@ Because contact center users are more specialized than talk users, it may occasi
 
 * Unmute microphone
 </template>
+
 <template #dont>
 
 * Unmute mic
 </template>
+
 </dialtone-usage>
 
 <!-- This should be a JSON file, spit out as a styled <dl> -->
@@ -664,7 +668,3 @@ Relative timestamps may change based on context. When using relative timestamps,
 ### Duration
 
 Durations are represented as **DD:HH:MM:SS** (i.e. 1:04:05:30).
-
-<script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>

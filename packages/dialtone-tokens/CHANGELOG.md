@@ -1,3 +1,63 @@
+## [1.23.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.4...dialtone-tokens/v1.23.5) (2024-01-16)
+
+
+### Bug Fixes
+
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+
+## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+
+
+### Documentation
+
+* **Design Tokens:** a few quick color descriptions ([#55](https://github.com/dialpad/dialtone/issues/55)) ([104bb09](https://github.com/dialpad/dialtone/commit/104bb092e4d0ac6546d1df66393298598bbf4b46))
+
+## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+
+
+### Documentation
+
+* **Design Tokens:** a few quick color descriptions ([#55](https://github.com/dialpad/dialtone/issues/55)) ([104bb09](https://github.com/dialpad/dialtone/commit/104bb092e4d0ac6546d1df66393298598bbf4b46))
+
+## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+
+
+### Documentation
+
+* **Design Tokens:** a few quick color descriptions ([#55](https://github.com/dialpad/dialtone/issues/55)) ([104bb09](https://github.com/dialpad/dialtone/commit/104bb092e4d0ac6546d1df66393298598bbf4b46))
+
+## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+
+
+### Documentation
+
+* **Design Tokens:** a few quick color descriptions ([#55](https://github.com/dialpad/dialtone/issues/55)) ([104bb09](https://github.com/dialpad/dialtone/commit/104bb092e4d0ac6546d1df66393298598bbf4b46))
+
 ## [1.23.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.2...dialtone-tokens/v1.23.3) (2023-12-13)
 
 

@@ -1,0 +1,173 @@
+//
+//  DIALTONE
+//  COMPONENTS: TOGGLE
+//
+//  These are toggle classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/toggle
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//  • TOGGLE VARIANTS
+//  • CHECKED TOGGLE
+//  • INDETERMINATE TOGGLE
+//  • FOCUSED TOGGLE
+//  • DISABLED TOGGLE
+//  • TOGGLE WRAPPER
+//
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-toggle {
+  //  Component specific CSS Vars
+  //  ------------------------------------------------------------------------
+  --toggle-transition-timing-function: var(--ttf-out-quint);
+  --toggle-transition-speed: var(--td300);
+  --toggle-color-background: var(--dt-color-black-400);
+  --toggle-size-height: var(--dt-size-550); // 24
+  --toggle-size-width: var(--dt-size-650); // 48
+  --toggle-size-icon: var(--dt-size-500); // 16
+
+  //  $$  BASE STYLE
+  //  ----------------------------------------------------------------------------
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: var(--toggle-size-width);
+  min-width: var(--toggle-size-width);
+  height: var(--toggle-size-height);
+  padding: 0;
+  line-height: var(--lh4);
+  vertical-align: middle;
+  background-color: var(--toggle-color-background);
+  border: var(--dt-size-100) solid var(--toggle-color-background);
+  border-radius: var(--toggle-size-width);
+  cursor: pointer;
+  transition-timing-function: var(--ttf-out-quint);
+  transition-duration: var(--td200);
+  transition-property: background-color, border, color, box-shadow;
+
+  &__inner {
+    position: absolute;
+    top: calc(var(--dt-space-300) - var(--dt-space-100)); // 3
+    left: var(--dt-space-550); // 24
+    width: var(--toggle-size-icon);
+    height: var(--toggle-size-icon);
+
+    .d-toggle--small & {
+      top: var(--dt-space-100); // 1
+      left: calc(var(--dt-space-500) + var(--dt-space-100)); // 17
+    }
+
+    .d-toggle--indeterminate & {
+      display: none;
+    }
+
+    color: var(--dt-color-neutral-white);
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01LjM4MTI4IDUuMzgxMjhDNS43MjI5OSA1LjAzOTU3IDYuMjc3MDEgNS4wMzk1NyA2LjYxODcyIDUuMzgxMjhMMTIgMTAuNzYyNkwxNy4zODEzIDUuMzgxMjhDMTcuNzIzIDUuMDM5NTcgMTguMjc3IDUuMDM5NTcgMTguNjE4NyA1LjM4MTI4QzE4Ljk2MDQgNS43MjI5OSAxOC45NjA0IDYuMjc3MDEgMTguNjE4NyA2LjYxODcyTDEzLjIzNzQgMTJMMTguNjE4NyAxNy4zODEzQzE4Ljk2MDQgMTcuNzIzIDE4Ljk2MDQgMTguMjc3IDE4LjYxODcgMTguNjE4N0MxOC4yNzcgMTguOTYwNCAxNy43MjMgMTguOTYwNCAxNy4zODEzIDE4LjYxODdMMTIgMTMuMjM3NEw2LjYxODcyIDE4LjYxODdDNi4yNzcwMSAxOC45NjA0IDUuNzIyOTkgMTguOTYwNCA1LjM4MTI4IDE4LjYxODdDNS4wMzk1NyAxOC4yNzcgNS4wMzk1NyAxNy43MjMgNS4zODEyOCAxNy4zODEzTDEwLjc2MjYgMTJMNS4zODEyOCA2LjYxODcyQzUuMDM5NTcgNi4yNzcwMSA1LjAzOTU3IDUuNzIyOTkgNS4zODEyOCA1LjM4MTI4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  &::after {
+    position: absolute;
+    top: var(--dt-space-100); // 1
+    left: var(--dt-space-100); // 1
+    width: calc(var(--toggle-size-icon) + var(--dt-size-300));
+    height: calc(var(--toggle-size-icon) + var(--dt-size-300));
+    background-color: var(--dt-color-neutral-white);
+    border-radius: var(--dt-size-radius-circle);
+    cursor: pointer;
+    transition: left var(--toggle-transition-speed) var(--toggle-transition-timing-function);
+    content: ' ';
+  }
+
+  //  $$  TOGGLE VARIANTS
+  //  ----------------------------------------------------------------------------
+  &--small {
+    --toggle-size-height: calc(var(--dt-size-500) + var(--dt-size-200)); // 18
+    --toggle-size-width: calc(var(--dt-size-600) + var(--dt-size-300)); // 36
+    --toggle-size-icon: calc(var(--dt-size-500) - var(--dt-size-200)); // 14
+
+    &::before {
+      position: absolute;
+      inset: var(--dt-space-300-negative) 0 var(--dt-space-300-negative) 0; // -4 // -4
+      content: '';
+    }
+  }
+
+  &--small::after {
+    width: var(--toggle-size-icon);
+    height: var(--toggle-size-icon);
+  }
+
+  //  $$  CHECKED TOGGLE
+  //  ----------------------------------------------------------------------------
+  &--checked {
+    --toggle-color-background: var(--dt-color-brand-purple);
+
+    .d-toggle__inner {
+      left: var(--dt-space-350); // 6
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMC42MTg3IDUuMzgxMjhDMjAuOTYwNCA1LjcyMjk5IDIwLjk2MDQgNi4yNzcwMSAyMC42MTg3IDYuNjE4NzJMOS42MTg3MiAxNy42MTg3QzkuMjc3MDEgMTcuOTYwNCA4LjcyMjk5IDE3Ljk2MDQgOC4zODEyOCAxNy42MTg3TDMuMzgxMjggMTIuNjE4N0MzLjAzOTU3IDEyLjI3NyAzLjAzOTU3IDExLjcyMyAzLjM4MTI4IDExLjM4MTNDMy43MjI5OSAxMS4wMzk2IDQuMjc3MDEgMTEuMDM5NiA0LjYxODcyIDExLjM4MTNMOSAxNS43NjI2TDE5LjM4MTMgNS4zODEyOEMxOS43MjMgNS4wMzk1NyAyMC4yNzcgNS4wMzk1NyAyMC42MTg3IDUuMzgxMjhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K');
+    }
+
+    &.d-toggle--small .d-toggle__inner {
+      left: calc(var(--dt-space-100) + var(--dt-space-200)); // 3
+    }
+
+    &::after {
+      left: calc(var(--dt-space-550) + var(--dt-space-100)); // 25
+    }
+
+    &.d-toggle--small::after {
+      right: var(--dt-space-100); // 1
+      left: calc(calc(var(--dt-space-300) * 5) - var(--dt-space-100)); // 19
+    }
+  }
+
+  //  $$  INDETERMINATE TOGGLE
+  //  ----------------------------------------------------------------------------
+  &--indeterminate {
+    &__inner {
+      display: none;
+    }
+
+    &::after {
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  //  $$  FOCUSED TOGGLE
+  //  ----------------------------------------------------------------------------
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--dt-shadow-focus);
+  }
+
+  //  $$  DISABLED TOGGLE
+  //  ----------------------------------------------------------------------------
+  &--disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &::after {
+      cursor: not-allowed;
+      transition-property: none;
+    }
+  }
+}
+
+.d-toggle-group {
+  gap: var(--dt-space-400); // 8
+}
+
+//  ============================================================================
+//  $   TOGGLE WRAPPER
+//  ----------------------------------------------------------------------------
+.d-toggle-wrapper {
+  display: flex;
+  align-items: center;
+}

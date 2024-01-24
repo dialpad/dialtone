@@ -1,49 +1,68 @@
 <template>
-  <div class="d-datepicker__calendar">
-    <div
-      class="d-datepicker__week-day"
-    >
-      <div
-        v-for="day in weekDays"
-        :key="day"
+  <table
+    class="d-datepicker__calendar"
+    aria-labelledby="calendar-heading"
+  >
+    <thead>
+      <tr>
+        <th
+          v-for="day in weekDays"
+          :key="day"
+          scope="col"
+          class="d-datepicker__cell d-datepicker__cell--header"
+        >
+          <span
+            class="d-datepicker__weekday"
+            :title="day"
+            :aria-label="day"
+          > {{ day }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        v-for="(week, indexWeek) in calendarDays"
+        :key="indexWeek"
       >
-        <p>
-          {{ day }}
-        </p>
-      </div>
-    </div>
-    <div
-      v-for="(week, indexWeek) in calendarDays"
-      :key="indexWeek"
-      class="d-datepicker__week"
-    >
-      <button
-        v-for="(day, indexDays) in week.days"
-        :key="indexWeek + indexDays"
-        :ref="el => { if (el) setDayRef(el, day.currentMonth) }"
-        class="d-datepicker__day"
-        :class="{
-          'd-datepicker__day--disabled': !day.currentMonth,
-          'd-datepicker__day--selected': selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected,
-        }"
-        type="button"
-        :aria-label="dayAriaLabel(day)"
-        @click="selectDay(day)"
-        @keydown="handleKeyDown($event)"
-      >
-        {{ day.text }}
-      </button>
-    </div>
-  </div>
+        <td
+          v-for="(day, indexDays) in week.days"
+          :key="indexWeek + indexDays"
+          class="d-datepicker__cell"
+        >
+          <dt-button
+            :ref="`buttonRef_${indexWeek}_${indexDays}`"
+            class="d-datepicker__day"
+            :circle="true"
+            size="sm"
+            importance="clear"
+            :disabled="!day.currentMonth"
+            :class="{
+              'd-datepicker__day--disabled': !day.currentMonth,
+              'd-datepicker__day--selected': selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected,
+            }"
+            type="button"
+            :aria-selected="!!selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected"
+            :aria-label="dayAriaLabel(day)"
+            @click="selectDay(day)"
+            @keydown="handleKeyDown($event)"
+          >
+            {{ day.text }}
+          </dt-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
-import { getWeekDayNames } from '@/components/datepicker/utils.js';
+import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate } from '@/components/datepicker/utils.js';
 import { WEEK_START, MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
 import { format, getYear } from 'date-fns';
+import DtButton from '@/components/button/button.vue';
 
 export default {
   name: 'DtDatepickerCalendar',
+  components: { DtButton },
 
   props: {
     calendarDays: {
@@ -105,8 +124,14 @@ export default {
     calendarDays () {
       // on calendarDays update, reset our local variables
       this.focusDay = 0;
-      this.daysRef = [];
       this.selectedDay = null;
+
+      this.daysRef = [];
+
+      this.$nextTick(() => {
+        this.daysRef = [];
+        this.setDayRef();
+      });
     },
   },
 
@@ -115,10 +140,16 @@ export default {
       return `${this.selectDayLabel} ${day.text} ${format(day.value, MONTH_FORMAT)} ${getYear(day.value)}`;
     },
 
-    setDayRef (el, currentMonth) {
-      if (!this.daysRef.includes(el) && currentMonth) {
-        this.daysRef.push(el);
-      }
+    setDayRef (el, day) {
+      this.calendarDays.forEach((week, weekIndex) => {
+        week.days.forEach((day, dayIndex) => {
+          const refKey = `buttonRef_${weekIndex}_${dayIndex}`;
+          const dayButton = this.$refs[refKey];
+          if (dayButton && day.currentMonth) {
+            this.daysRef.push({ el: dayButton[0], day });
+          }
+        });
+      });
     },
 
     handleKeyDown (event) {
@@ -127,9 +158,15 @@ export default {
           event.preventDefault();
           this.focusDay -= 7;
           try {
-            this.daysRef[this.focusDay].focus();
+            this.daysRef[this.focusDay].el.$el.focus();
           } catch (error) {
-            this.$emit('focus-month-year-picker');
+            const prevFocusDate = calculatePrevFocusDate(this.daysRef[this.focusDay + 7].day.value);
+            this.$emit('go-to-prev-month');
+            this.$nextTick(() => {
+              this.setDayRef();
+              this.daysRef[prevFocusDate - 1].el.$el.focus();
+              this.focusDay += prevFocusDate - 1;
+            });
           }
           break;
 
@@ -137,9 +174,15 @@ export default {
           event.preventDefault();
           this.focusDay += 7;
           try {
-            this.daysRef[this.focusDay].focus();
+            this.daysRef[this.focusDay].el.$el.focus();
           } catch (error) {
-            this.$emit('focus-month-year-picker');
+            const nextFocusDate = calculateNextFocusDate(this.daysRef[this.focusDay - 7].day.value);
+            this.$emit('go-to-next-month');
+            this.$nextTick(() => {
+              this.setDayRef();
+              this.daysRef[nextFocusDate - 1].el.$el.focus();
+              this.focusDay += nextFocusDate - 1;
+            });
           }
           break;
 
@@ -147,7 +190,13 @@ export default {
           event.preventDefault();
           if (this.focusDay > 0) {
             this.focusDay -= 1;
-            this.daysRef[this.focusDay].focus();
+            this.daysRef[this.focusDay].el.$el.focus();
+          } else {
+            // if we are on month first day, jump to last day of prev month
+            this.$emit('go-to-prev-month');
+            this.$nextTick(() => {
+              this.focusLastDay();
+            });
           }
           break;
 
@@ -155,7 +204,13 @@ export default {
           event.preventDefault();
           if (this.focusDay < this.daysRef.length - 1) {
             this.focusDay += 1;
-            this.daysRef[this.focusDay].focus();
+            this.daysRef[this.focusDay].el.$el.focus();
+          } else {
+            // if we are on month last day, jump to first day of next month
+            this.$emit('go-to-next-month');
+            this.$nextTick(() => {
+              this.focusFirstDay();
+            });
           }
           break;
 
@@ -172,7 +227,16 @@ export default {
 
     focusFirstDay () {
       this.focusDay = 0;
-      this.daysRef[this.focusDay].focus();
+      this.$nextTick(() => {
+        this.daysRef[this.focusDay].el.$el.focus();
+      });
+    },
+
+    focusLastDay () {
+      this.$nextTick(() => {
+        this.focusDay = this.daysRef.length - 1;
+        this.daysRef[this.focusDay].el.$el.focus();
+      });
     },
 
     selectDay (day) {

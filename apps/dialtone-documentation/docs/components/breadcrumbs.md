@@ -4,7 +4,7 @@ description: Breadcrumbs are links used to provide context for the currently-vie
 status: ready
 thumb: true
 image: assets/images/components/breadcrumbs.png
-storybook: https://vue.dialpad.design/?path=/story/components-breadcrumbs--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-breadcrumbs--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8918%3A21306&viewport=-61%2C443%2C1.12&t=xHutRjwo1o5zMTgT-11
 ---
 

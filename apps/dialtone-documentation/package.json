@@ -48,7 +48,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@dialpad/dialtone": "workspace:^",
+    "@dialpad/dialtone-css": "workspace:^",
     "@dialpad/dialtone-icons": "workspace:^"
   },
   "devDependencies": {
@@ -75,7 +75,7 @@
     "markdown-it-anchor": "^8.6.7",
     "npm-run-all": "^4.1.5",
     "prismjs": "^1.29.0",
-    "vite-svg-loader": "^4.0.0",
+    "vite-svg-loader": "^5.1.0",
     "vue": "^3.3.7",
     "vue-router": "^4.2.5",
     "vuepress": "2.0.0-beta.60",

@@ -62,7 +62,7 @@
 /**
  * Custom layout to enable developer to use list-item like stack.
  * It is used as base for `dt-list-item` component
- * @see https://dialpad.design/components/item_layout.html
+ * @see https://dialtone.dialpad.com/components/item_layout.html
  */
 <script>
 export default {

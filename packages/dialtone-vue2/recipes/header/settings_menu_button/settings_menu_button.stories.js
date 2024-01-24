@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeSettingsMenuButton from './settings_menu_button.vue';
 import DtRecipeSettingsMenuButtonDefaultTemplate from './settings_menu_button_default.story.vue';
 
@@ -52,16 +52,8 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
 };
-
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeSettingsMenuButtonDefaultTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeSettingsMenuButton, DtRecipeSettingsMenuButtonDefaultTemplate, argsData),
 
   args: {
     default: 'Update',

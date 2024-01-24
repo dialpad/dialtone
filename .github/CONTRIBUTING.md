@@ -6,7 +6,7 @@ Each package has its own contributing guide, please follow the links to find the
 
 ## Dialtone CSS
 
-[CONTRIBUTING.md](../packages/dialtone/.github/CONTRIBUTING.md)
+[CONTRIBUTING.md](../packages/dialtone-css/.github/CONTRIBUTING.md)
 
 ## Dialtone Tokens
 
@@ -18,4 +18,4 @@ Each package has its own contributing guide, please follow the links to find the
 
 ## Dialtone Icons
 
-Coming soon..
+[CONTRIBUTING.md](../packages/dialtone-icons/.github/CONTRIBUTING.md)

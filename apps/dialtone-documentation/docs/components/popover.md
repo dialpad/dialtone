@@ -4,7 +4,7 @@ description: A Popover displays a content overlay when its anchor element is act
 status: ready
 thumb: true
 image: assets/images/components/popover.png
-storybook: https://vue.dialpad.design/?path=/story/components-popover--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8921%3A22411&viewport=831%2C-269%2C0.43&t=xHutRjwo1o5zMTgT-11
 ---
 <code-well-header bgclass="d-bgc-primary">
@@ -167,5 +167,4 @@ If your popover is modal, please see the accessibility section of this page rega
 
 <script setup>
   import ExamplePopover from '@exampleComponents/ExamplePopover.vue';
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>

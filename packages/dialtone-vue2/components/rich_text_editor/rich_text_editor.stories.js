@@ -1,11 +1,13 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRichTextEditor from './rich_text_editor.vue';
 import DtRichTextEditorDefaultTemplate from './rich_text_editor_default.story.vue';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from './rich_text_editor_constants';
+
+import mentionSuggestion from './mention_suggestion';
 
 // Default Prop Values
 export const argsData = {
@@ -14,8 +16,8 @@ export const argsData = {
   inputAriaLabel: 'This is a descriptive label',
   outputFormat: 'text',
   autoFocus: false,
-  link: true,
   placeholder: 'Type here...',
+  link: true,
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
@@ -94,19 +96,23 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRichTextEditorDefaultTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
 };
 
 export const WithLinks = {
-  ...Default,
+  render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
   args: {
     link: true,
     value: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
     'IP addresses: 192.158.1.38, email addresses: noreply@dialpad.com and phone numbers: (778) 765-8813, +17787658813!',
+  },
+};
+
+export const WithMentionSuggestions = {
+  render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
+  args: {
+    value: 'The editor can also suggest mentions: @John Doe, @Jane Doe!',
+    mentionSuggestion,
   },
 };

@@ -25,7 +25,7 @@ const baseSlots = {
 let mockProps = {};
 let mockSlots = {};
 
-describe.skip('DtPopover Tests', () => {
+describe('DtPopover Tests', () => {
   let wrapper;
   let popoverWindow;
   let anchor;
@@ -92,7 +92,7 @@ describe.skip('DtPopover Tests', () => {
         expect(popoverWindow.exists()).toBe(true);
       });
 
-      it('should render the main content', () => {
+      it.skip('should render the main content', () => {
         mainContent = wrapper.findComponent({ ref: 'popover__content' });
 
         expect(mainContent.text()).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
@@ -262,7 +262,7 @@ describe.skip('DtPopover Tests', () => {
           });
         });
 
-        describe('When close button is activated', () => {
+        describe.skip('When close button is activated', () => {
           it('should close the popover', async () => {
             closeButton = wrapper.find('[data-qa="dt-popover-close"]');
 
@@ -284,7 +284,7 @@ describe.skip('DtPopover Tests', () => {
     });
   });
 
-  describe.skip('Accessibility Tests', () => {
+  describe('Accessibility Tests', () => {
     describe('When popover is open', () => {
       beforeEach(async () => {
         await wrapper.setProps({ open: true });

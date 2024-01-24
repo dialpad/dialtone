@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtSkeleton from './skeleton.vue';
 
 import DtSkeletonDefaultTemplate from './skeleton_default.story.vue';
@@ -72,6 +72,11 @@ export const argTypesData = {
       },
     },
   },
+  animate: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 // Story Collection
@@ -83,14 +88,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtSkeletonDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtSkeletonVariantsTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtSkeleton, DtSkeletonDefaultTemplate, argsData),
 
   decorators: [
     () => ({
@@ -102,7 +101,7 @@ export const Default = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtSkeleton, DtSkeletonVariantsTemplate, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

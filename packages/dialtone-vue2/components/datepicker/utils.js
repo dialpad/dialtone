@@ -1,16 +1,18 @@
 import {
-  startOfWeek, addDays, getMonth, isEqual, format,
+  startOfWeek, addDays, getMonth, isEqual,
+  addMonths, startOfMonth, getDay, getDate,
+  subMonths, endOfMonth,
 } from 'date-fns';
 import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
 
-const getDate = (value) => (value ? new Date(value) : new Date());
+const _parsedGetDate = (value) => (value ? new Date(value) : new Date());
 
 /**
  * Get 7 days from the provided start date, month is used to check
  * whether the date is from the specified month or in the offset
  */
 const getWeekDays = (startDay, month, selectedDay) => {
-  const startDate = getDate(JSON.parse(JSON.stringify(startDay)));
+  const startDate = _parsedGetDate(JSON.parse(JSON.stringify(startDay)));
   const dates = [];
   for (let i = 0; i < 7; i++) {
     const next = addDays(startDate, i);
@@ -39,8 +41,8 @@ const isDateEqual = (date, dateToCompare) => {
  */
 export const getCalendarDays = (month, year, selectedDay) => {
   const weeks = [];
-  const firstDate = getDate(new Date(year, month));
-  const lastDate = getDate(new Date(year, month + 1, 0));
+  const firstDate = _parsedGetDate(new Date(year, month));
+  const lastDate = _parsedGetDate(new Date(year, month + 1, 0));
 
   const weekStartsOn = WEEK_START;
 
@@ -86,6 +88,39 @@ export const getWeekDayNames = (locale, weekStart) => {
   return [days[weekStart]].concat(...afterWeekStart).concat(...beforeWeekStart);
 };
 
-export const formatMonth = (month, monthFormat) => {
-  return format(new Date(2000, month, 1), monthFormat);
+export const formatMonth = (month, monthFormat, locale) => {
+  return new Intl.DateTimeFormat(locale, { month: monthFormat }).format(new Date(2000, month, 1));
+};
+
+export const calculateNextFocusDate = (currentDate) => {
+  const date = new Date(currentDate);
+  const currentWeekday = getDay(date);
+  const nextMonthDate = addMonths(date, 1);
+  const nextMonthStart = startOfMonth(nextMonthDate);
+  const nextMonthStartWeekday = getDay(nextMonthStart);
+
+  const dayDifference = (currentWeekday - nextMonthStartWeekday + 7) % 7;
+
+  // Add the difference in days to the first day of the next month
+  const focusDate = addDays(nextMonthStart, dayDifference);
+
+  // Returns only the day of the month
+  return getDate(focusDate);
+};
+
+export const calculatePrevFocusDate = (currentDate) => {
+  const date = new Date(currentDate);
+  const currentWeekday = getDay(date);
+
+  // Move to the last day of the previous month
+  const lastDayOfPrevMonth = endOfMonth(subMonths(date, 1));
+  let focusDate = lastDayOfPrevMonth;
+
+  // Adjust to the same weekday in the last week of the previous month
+  while (getDay(focusDate) !== currentWeekday) {
+    focusDate = addDays(focusDate, -1);
+  }
+
+  // Returns only the day of the month
+  return getDate(focusDate);
 };

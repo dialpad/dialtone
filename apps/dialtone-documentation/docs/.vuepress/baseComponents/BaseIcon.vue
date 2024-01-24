@@ -7,132 +7,145 @@
       :data-selected="selectedStatus"
       class="dialtone-icon-card js-dialtone-icon-card"
     >
-      <header class="dialtone-icon-card__header js-dialtone-icon-card-copy-area">
-        <div :class="cardIconClass">
-          <component
-            :is="vue"
+      <dt-popover
+        :modal="true"
+        :content-width="null"
+        :show-close-button="true"
+        placement="right"
+        :fallback-placements="['left', 'auto']"
+        dialog-class="d-w100vw dialtone-icon-popover"
+        padding="large"
+        @opened="onPopoverOpened"
+      >
+        <template #anchor>
+          <dt-button class="dialtone-icon-card__header js-dialtone-icon-card-copy-area">
+            <div class="dialtone-icon-card__icon--autosize">
+              <svg-loader :name="file" />
+            </div>
+          </dt-button>
+        </template>
+        <template #headerContent>
+          <span
+            class="d-tt-capitalize d-fc-primary"
+            v-text="name"
           />
-        </div>
-      </header>
-      <footer :class="cardFooterClass">
-        <div class="dialtone-icon-card__content">
-          <h2 class="dialtone-icon-card__title d-tt-capitalize">
-            {{ name }}
-          </h2>
-          <div class="dialtone-icon-card__list">
-            <span class="dialtone-icon-card__list__item">
-              <strong>SVG:</strong> <span class="code-example">{{ `${file}.svg` }}</span>
-            </span>
-            <span class="dialtone-icon-card__list__item">
-              <strong>Vue:</strong> <span class="code-example js-vue-file">{{ `<${vue} />` }}</span>
-            </span>
-            <span
-              v-if="code"
-              class="dialtone-icon-card__list__item"
-            >
-              <strong>Codes:</strong> <span class="code-example">{{ code }}</span>
-            </span>
+        </template>
+        <template #content>
+          <div class="d-stack16 d-fc-primary">
+            <div class="d-d-flex d-ai-center">
+              <div class="d-d-flex d-fd-column d-fl-grow5">
+                <span class="d-label d-label--sm">Name</span>
+                <div class="d-d-flex d-jc-space-between">
+                  <span class="d-body-compact">{{ name }}</span>
+                  <dt-link :href="figmaLink" target="_blank" rel="noopener noreferrer">
+                    Figma
+                  </dt-link>
+                </div>
+                <span class="d-body-compact-small">{{ desc }}</span>
+              </div>
+            </div>
+            <div class="d-d-flex d-ai-flex-end">
+              <div class="d-fl-grow1">
+                <dt-input
+                  class="d-ff-mono"
+                  label="SVG"
+                  readonly
+                  tabindex="-1"
+                  size="sm"
+                  :value="rawSvg"
+                />
+              </div>
+              <copy-button
+                class="d-ml8"
+                :text="rawSvg"
+                aria-label="Copy SVG markup"
+              />
+            </div>
+            <div class="d-d-flex d-ai-flex-end">
+              <div class="d-fl-grow1">
+                <dt-input
+                  class="d-ff-mono"
+                  label="Vue"
+                  tabindex="-1"
+                  readonly
+                  size="sm"
+                  :value="`<${vue} />`"
+                />
+              </div>
+              <copy-button
+                class="d-ml8"
+                :text="`<${vue} />`"
+                aria-label="Copy Vue markup"
+              />
+            </div>
           </div>
-          <p class="dialtone-icon-card__description">
-            {{ desc }}
-          </p>
-        </div>
-      </footer>
+        </template>
+      </dt-popover>
     </aside>
   </div>
 </template>
 
-<script>
-import SpotPublish from '@dialpad/dialtone/lib/dist/vue/spot/SpotPublish.vue';
-import SpotWirelessScreenshare from '@dialpad/dialtone/lib/dist/vue/spot/SpotWirelessScreenshare.vue';
-import SpotFemaleLaptopTyping from '@dialpad/dialtone/lib/dist/vue/spot/SpotFemaleLaptopTyping.vue';
-import SpotMaleLaptopTyping from '@dialpad/dialtone/lib/dist/vue/spot/SpotMaleLaptopTyping.vue';
-import SpotFileUpload from '@dialpad/dialtone/lib/dist/vue/spot/SpotFileUpload.vue';
-import SpotBrowserTableGraph from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserTableGraph.vue';
-import SpotBrowserListCallout from '@dialpad/dialtone/lib/dist/vue/spot/SpotBrowserListCallout.vue';
-import SpotMind from '@dialpad/dialtone/lib/dist/vue/spot/SpotMind.vue';
-import SpotBlankSpace from '@dialpad/dialtone/lib/dist/vue/spot/SpotBlankSpace.vue';
-import SpotVectorVortex from '@dialpad/dialtone/lib/dist/vue/spot/SpotVectorVortex.vue';
+<script setup>
+import { computed, ref } from 'vue';
+import { ICON_KINDS } from './constants.js';
+import CopyButton from './CopyButton.vue';
+import SvgLoader from './SvgLoader.vue';
 
-export const ICON_KINDS = ['spot'];
-
-export default {
-  name: 'BaseIcon',
-  components: {
-    SpotPublish,
-    SpotWirelessScreenshare,
-    SpotFemaleLaptopTyping,
-    SpotMaleLaptopTyping,
-    SpotFileUpload,
-    SpotBrowserTableGraph,
-    SpotBrowserListCallout,
-    SpotMind,
-    SpotBlankSpace,
-    SpotVectorVortex,
+defineProps({
+  name: {
+    type: String,
+    required: true,
   },
 
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
+  file: {
+    type: String,
+    required: true,
+  },
 
-    file: {
-      type: String,
-      required: true,
-    },
+  figmaLink: {
+    type: String,
+    required: true,
+  },
 
-    desc: {
-      type: String,
-      default: '',
-    },
+  desc: {
+    type: String,
+    default: '',
+  },
 
-    code: {
-      type: String,
-      default: '',
-    },
+  code: {
+    type: String,
+    default: '',
+  },
 
-    hidden: {
-      type: Boolean,
-      default: false,
-    },
+  hidden: {
+    type: Boolean,
+    default: false,
+  },
 
-    vue: {
-      type: String,
-      required: true,
-    },
+  vue: {
+    type: String,
+    required: true,
+  },
 
-    kind: {
-      type: String,
-      required: true,
-      validator: (kind) => {
-        return ICON_KINDS.includes(kind);
-      },
-    },
-
-    selected: {
-      type: Boolean,
-      default: false,
+  kind: {
+    type: String,
+    required: true,
+    validator: (kind) => {
+      return ICON_KINDS.includes(kind);
     },
   },
 
-  computed: {
-    isSpotKind () {
-      return this.kind === 'spot';
-    },
-
-    selectedStatus () {
-      return this.selected ? 'yes' : 'no';
-    },
-
-    cardFooterClass () {
-      return 'dialtone-icon-card__footer-spot-illustration';
-    },
-
-    cardIconClass () {
-      return 'dialtone-icon-card__icon--autosize';
-    },
+  rawSvg: {
+    type: String,
+    required: true,
   },
+});
+
+const selected = ref(false);
+
+const selectedStatus = computed(() => selected.value ? 'yes' : 'no');
+const onPopoverOpened = (open) => {
+  selected.value = open;
 };
 </script>
 

@@ -18,10 +18,6 @@ export default {
     return {
       onStart: props => {
         component = new VueRenderer(SuggestionList, {
-          // // using vue 2:
-          // parent: this,
-          // propsData: props,
-          // using vue 3:
           props: {
             itemComponent: markRaw(MentionSuggestion),
             itemType: 'mention',

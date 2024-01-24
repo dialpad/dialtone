@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtRecipeGroupedChip from './grouped_chip.vue';
 
 import DtRecipeGroupedChipDefaultTemplate from './grouped_chip_default.story.vue';
@@ -80,12 +80,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtRecipeGroupedChipDefaultTemplate);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeGroupedChip, DtRecipeGroupedChipDefaultTemplate, argsData),
 
   args: {
     leftIcon: 'clock',

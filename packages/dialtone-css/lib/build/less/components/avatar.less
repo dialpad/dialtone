@@ -1,0 +1,169 @@
+//
+//  DIALTONE
+//  COMPONENTS: Avatars
+//
+//  These are avatars classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/avatars
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//    • COLOR VARIANTS
+//    • CHILDREN
+//    • SIZES
+//    • VARIANTS
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-avatar {
+  //  Component CSS Vars
+  //  ------------------------------------------------------------------------
+  --avatar-color-background: var(--dt-avatar-color-background-000);
+  --avatar-color-text: var(--dt-avatar-color-foreground);
+  --avatar-size-shape: var(--dt-size-600);
+  --avatar-size-image: 100%;
+  --avatar-size-text: var(--dt-font-size-200);
+  --avatar-presence-position-right: var(--dt-space-200-negative);
+  --avatar-presence-position-bottom: var(--dt-space-200-negative);
+  --avatar-count-color-shadow: var(--dt-theme-sidebar-color-background);
+
+  position: relative;
+  display: flex;
+  color: var(--avatar-color-text);
+
+  //  --  COLOR VARIANTS
+  //  ------------------------------------------------------------------------
+   &--color-100 { --avatar-color-background: var(--dt-avatar-color-background-100); }
+   &--color-200 { --avatar-color-background: var(--dt-avatar-color-background-200); }
+   &--color-300 { --avatar-color-background: var(--dt-avatar-color-background-300); }
+   &--color-400 { --avatar-color-background: var(--dt-avatar-color-background-400); }
+   &--color-500 { --avatar-color-background: var(--dt-avatar-color-background-500); }
+   &--color-600 { --avatar-color-background: var(--dt-avatar-color-background-600); }
+   &--color-700 { --avatar-color-background: var(--dt-avatar-color-background-700); }
+   &--color-800 { --avatar-color-background: var(--dt-avatar-color-background-800); }
+   &--color-900 { --avatar-color-background: var(--dt-avatar-color-background-900); }
+   &--color-1000 { --avatar-color-background: var(--dt-avatar-color-background-1000); }
+   &--color-1100 { --avatar-color-background: var(--dt-avatar-color-background-1100); }
+   &--color-1200 { --avatar-color-background: var(--dt-avatar-color-background-1200); }
+   &--color-1300 { --avatar-color-background: var(--dt-avatar-color-background-1300); }
+   &--color-1400 { --avatar-color-background: var(--dt-avatar-color-background-1400); }
+   &--color-1500 { --avatar-color-background: var(--dt-avatar-color-background-1500); }
+   &--color-1600 { --avatar-color-background: var(--dt-avatar-color-background-1600); }
+   &--color-1700 { --avatar-color-background: var(--dt-avatar-color-background-1700); }
+   &--color-1800 { --avatar-color-background: var(--dt-avatar-color-background-1800); }
+
+  //  --  CHILDREN
+  //  ------------------------------------------------------------------------
+
+  &__canvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--avatar-size-shape);
+    height: var(--avatar-size-shape);
+    overflow: hidden;
+    background-color: var(--avatar-color-background);
+    border-radius: var(--dt-size-radius-pill);
+  }
+
+  &__image {
+    width: var(--avatar-size-image);
+    height: var(--avatar-size-image);
+    object-fit: cover;
+    border-radius: var(--dt-size-radius-pill);
+  }
+
+  &__initials {
+    position: absolute;
+    z-index: var(--zi-base);
+    font-weight: var(--dt-font-weight-bold);
+    font-size: var(--avatar-size-text);
+    line-height: var(--dt-font-line-height-100);
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  &__icon {
+    display: flex;
+  }
+
+  &__presence {
+    position: absolute;
+    right: var(--avatar-presence-position-right);
+    bottom: var(--avatar-presence-position-bottom);
+    display: flex;
+  }
+
+  &__count {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: calc(var(--dt-size-300) * 3.5);
+    padding: var(--dt-space-200) calc(var(--dt-space-200) + var(--dt-space-100));
+    color: var(--dt-color-foreground-primary-inverted);
+    font-weight: var(--dt-font-weight-bold);
+    font-size: calc(var(--dt-font-size-100) - var(--dt-size-200));
+    line-height: var(--dt-font-line-height-100);
+    text-align: center;
+    background-color: var(--dt-color-surface-strong);
+    border-radius: var(--dt-size-radius-pill);
+    box-shadow: 0 0 0 var(--dt-size-200) var(--avatar-count-color-shadow);
+
+    .dt-leftbar-row--selected &,
+    .dt-leftbar-row__primary:hover & {
+      --avatar-count-color-shadow: var(--dt-theme-sidebar-row-color-background-hover);
+    }
+  }
+
+  //  --  SIZES
+  //  ------------------------------------------------------------------------
+
+  &--xs {
+    --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
+    --avatar-presence-position-right: var(--dt-space-300-negative);
+    --avatar-presence-position-bottom: var(--dt-space-300-negative);
+  }
+
+  &--sm {
+    --avatar-size-shape: var(--dt-size-550);
+    --avatar-size-text: var(--dt-font-size-100);
+    --avatar-presence-position-right: var(--dt-space-200-negative);
+    --avatar-presence-position-bottom: var(--dt-space-200-negative);
+  }
+
+  &--md {
+    --avatar-size-shape: var(--dt-size-600);
+    --avatar-size-text: var(--dt-font-size-200);
+    --avatar-presence-position-right: var(--dt-space-100-negative);
+    --avatar-presence-position-bottom: var(--dt-space-100-negative);
+  }
+
+  &--lg {
+    --avatar-size-shape: var(--dt-size-650);
+    --avatar-size-text: var(--dt-font-size-300);
+    --avatar-presence-position-right: var(--dt-space-100);
+    --avatar-presence-position-bottom: var(--dt-space-100);
+  }
+
+  &--xl {
+    --avatar-size-shape: var(--dt-size-700);
+    --avatar-size-text: var(--dt-font-size-400);
+    --avatar-presence-position-right: var(--dt-space-300);
+    --avatar-presence-position-bottom: var(--dt-space-300);
+  }
+
+  //  --  GROUP
+  //  ------------------------------------------------------------------------
+
+  &--group {
+    --avatar-size-shape: calc(var(--dt-size-300) * 4.5);
+
+    width: var(--dt-size-550);
+    height: var(--dt-size-550);
+  }
+}

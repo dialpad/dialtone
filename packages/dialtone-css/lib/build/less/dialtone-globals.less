@@ -1,0 +1,45 @@
+//
+//  DIALTONE
+//  GLOBALS
+//
+//  This file provides global CSS styles for Dialtone. For more Information
+//  about Dialtone and these classes, please visit:
+//  https://dialtone.dialpad.com
+//
+//  ============================================================================
+
+
+//  ============================================================================
+//  @   RESETS
+//  ============================================================================
+//      [1]     Font size set to 10px to make REM values easier to calculate
+//      [2]     We don't want 10px to be the default size, so we reset it to
+//              the desired 16px size;
+//      [3]     Prevent adjustments of font size after orientation changes in iOS.
+//  ----------------------------------------------------------------------------
+
+html,
+body {
+    margin: 0;
+    /* stylelint-disable-next-line meowtec/no-px */
+    font-size: 10px;
+}
+
+body {
+    color: var(--dt-color-foreground-primary);
+    font-size: var(--dt-typography-body-base-font-size);
+    font-family: var(--dt-typography-body-base-font-family);
+    line-height: var(--dt-typography-body-base-line-height);
+    background-color: var(--dt-color-surface-primary);
+    -webkit-text-size-adjust: 100%;
+}
+
+//  ============================================================================
+//  @   FOCUS VISIBLE
+//  ----------------------------------------------------------------------------
+// This will hide the focus indicator if the element receives focus via the mouse,
+// but it will still show up on keyboard focus.
+//
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}

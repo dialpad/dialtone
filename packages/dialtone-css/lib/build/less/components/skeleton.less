@@ -1,0 +1,101 @@
+//
+//  DIALTONE
+//  COMPONENTS: SKELETON
+//
+//  These are the styles for skeleton component.
+//  The --placeholder-from-color and --placeholder-to-color custom properties can be set on the parent class of the
+//  placeholder to control the animation colors.
+//  For further documentation of these styles, please visit https://dialtone.dialpad.com/components/skeleton
+//
+//
+//  TABLE OF CONTENTS
+//  • SKELETON CONTAINER
+//  • SKELETON LIST ITEM
+//  • SKELETON PARAGRAPH
+//  • SKELETON TEXT
+
+//  ============================================================================
+//  @   SKELETON CONTAINER
+//  ----------------------------------------------------------------------------
+.skeleton-placeholder {
+  --placeholder-from-color: hsla(var(--dt-color-black-900-hsl) / 0.2);
+  --placeholder-to-color: hsla(var(--dt-color-black-900-hsl) / 0.1);
+
+  display: flex;
+  width: 100%;
+  background: var(--placeholder-from-color);
+  animation-duration: 1000ms;
+  fill: var(--placeholder-from-color);
+  stroke: none;
+
+  &--animate {
+    animation-name: skeleton-placeholder-throb;
+    animation-iteration-count: infinite;
+  }
+}
+
+// the animation is used by the skeleton component
+@keyframes skeleton-placeholder-throb {
+  20% {
+    background: var(--placeholder-from-color);
+    fill: var(--placeholder-from-color);
+  }
+
+  50% {
+    background: var(--placeholder-to-color);
+    fill: var(--placeholder-to-color);
+  }
+
+  80% {
+    background: var(--placeholder-from-color);
+    fill: var(--placeholder-from-color);
+  }
+}
+
+//  ============================================================================
+//  @   SKELETON LIST ITEM
+//  ----------------------------------------------------------------------------
+.d-skeleton-list-item {
+  display: flex;
+
+  &--single {
+    align-items: center;
+  }
+
+  &__shape {
+    margin-right: var(--dt-space-400);
+  }
+
+  &__paragraph-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+//  ============================================================================
+//  @   SKELETON PARAGRAPH
+//  ----------------------------------------------------------------------------
+.d-skeleton-paragraph {
+  width: 100%;
+
+  .d-skeleton-text {
+    margin-bottom: var(--dt-space-450);
+
+    &:last-child {
+      margin-bottom: var(--dt-space-0);
+    }
+  }
+}
+
+//  ============================================================================
+//  @   SKELETON TEXT
+//  ----------------------------------------------------------------------------
+.d-skeleton-text {
+  height: var(--dt-size-400);
+  border-radius: var(--dt-size-radius-200);
+}
+
+.d-skeleton-text--heading {
+  border-radius: var(--dt-size-radius-200);
+}

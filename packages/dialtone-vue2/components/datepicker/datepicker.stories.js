@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtDatepicker from './datepicker.vue';
 import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
 import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
@@ -110,21 +110,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDatepickerDefaultTemplate,
-);
-
-const WithPopoverTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDatepickerWithPopoverTemplate,
-);
-
 export const Default = {
-  render: Template,
+  render: (argsData) => createRenderConfig(DtDatepicker, DtDatepickerDefaultTemplate, argsData),
   args: {},
   parameters: {
     percy: {
@@ -136,7 +123,7 @@ export const Default = {
 };
 
 export const WithPopover = {
-  render: WithPopoverTemplate,
+  render: (argsData) => createRenderConfig(DtDatepicker, DtDatepickerWithPopoverTemplate, argsData),
   args: {},
   parameters: {
     options: { showPanel: false },

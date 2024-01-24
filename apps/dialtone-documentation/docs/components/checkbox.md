@@ -4,7 +4,7 @@ description: A checkbox is an input control that allows users to select zero, on
 status: ready
 thumb: true
 image: assets/images/components/checkbox.png
-storybook: https://vue.dialpad.design/?path=/story/components-checkbox--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8921%3A21160&viewport=-351%2C484%2C0.54&t=xHutRjwo1o5zMTgT-11
 ---
 <code-well-header>
@@ -435,7 +435,3 @@ The best accessibility is semantic HTML. Most screen readers understand how to p
 - Input with description text should have `aria-describedby` with the `id` of the description text.
 - If the input is a required field, use the `aria-required` property and use the validation message for input errors.
 - Input with validation errors should have `aria-describedby` with the `id` of the validation message.
-
-<script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>

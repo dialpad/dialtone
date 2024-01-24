@@ -1,0 +1,118 @@
+//
+//  DIALTONE
+//  COMPONENTS: TABLES
+//
+//  These are table component classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/tables
+//
+//  TABLE OF CONTENTS
+//  • DEFAULT STYLE
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-table {
+    //  Component CSS Vars
+    //  ------------------------------------------------------------------------
+    --table-color-border: var(--dt-color-border-default);
+    --table-th-color-text: var(--dt-color-foreground-secondary);
+    --table-td-color-text: var(--dt-color-foreground-tertiary);
+    --table-font-size: var(--dt-font-size-200);
+    --table-th-font-size: var(--dt-font-size-100);
+    --table-line-height: var(--dt-font-line-height-200);
+
+    display: table;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    font-size: var(--table-font-size);
+    line-height: var(--table-line-height);
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    // Caption styles
+    .d-table__caption {
+      margin-bottom: var(--dt-space-400); // 8
+      color: var(--table-th-color-text);
+      font-weight: var(--dt-font-weight-bold);
+      font-size: var(--table-font-size);
+      .d-ta-unset();
+    }
+
+    // Table Head Styles
+    thead {
+        border-bottom: var(--dt-size-200) solid var(--table-color-border);
+
+        // Column Header Styles
+        th {
+            font-size: var(--table-th-font-size);
+            line-height: var(--dt-font-line-height-100);
+            text-transform: uppercase;
+        }
+    }
+
+    // Header Styles
+    th {
+        color: var(--table-th-color-text);
+        font-weight: var(--dt-font-weight-bold);
+    }
+
+    // Cell Styles
+    td {
+        color: var(--table-td-color-text);
+    }
+
+    // Header & Cell Styles
+    th,
+    td {
+        padding: var(--dt-space-500); // 16
+        text-align: left;
+        border-bottom: var(--dt-size-100) solid var(--table-color-border);
+    }
+
+    // Nested Table Body, First Row Styles, used internally on the Dialtone site
+    tbody + tbody tr:first-of-type {
+        // Header & Cell Styles
+        td,
+        th {
+            border-top: var(--dt-size-200) solid var(--table-color-border);
+        }
+    }
+
+    // Last Table Row Styles
+    tbody tr:last-of-type {
+        // Header & Cell Styles
+        td,
+        th {
+            border-bottom-width: 0;
+        }
+    }
+}
+
+//  ============================================================================
+//  $   INVERTED STYLE
+//  ----------------------------------------------------------------------------
+.d-table--inverted {
+    --table-th-color-text: var(--dt-color-foreground-secondary-inverted);
+    --table-td-color-text: var(--dt-color-foreground-tertiary-inverted);
+    --table-color-border: var(--dt-color-border-default-inverted);
+}
+
+//  ============================================================================
+//  $   STRIPED ROW BACKGROUNDS
+//  ----------------------------------------------------------------------------
+.d-table--striped {
+    // Row Styles
+    tr:nth-child(even) {
+        background-color: var(--dt-color-surface-secondary-opaque);
+    }
+
+    &.d-table--inverted {
+        // Row Styles
+        tr:nth-child(even) {
+            background-color: hsla(var(--bgc-primary-hsl) / 0.1);
+        }
+    }
+}

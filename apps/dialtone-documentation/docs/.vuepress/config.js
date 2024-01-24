@@ -46,7 +46,7 @@ export default defineUserConfig({
 
   bundler: viteBundler({
     viteOptions: {
-      plugins: [viteSvgLoader(), viteCommonjs()],
+      plugins: [viteSvgLoader({ svgo: false }), viteCommonjs()],
       css: {
         devSourcemap: true,
       },
@@ -105,6 +105,7 @@ export default defineUserConfig({
     '@mixins': path.resolve(__dirname, './common/mixins/'),
     '@projectRoot': path.resolve(__dirname, '../../'),
     '@': path.resolve(__dirname, '../'),
+    '@dialtone': path.resolve(__dirname, '../../../../'),
   },
 
   plugins: [

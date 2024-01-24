@@ -4,7 +4,7 @@ description: A select menu is an input control that allows users to choose one o
 status: ready
 thumb: true
 image: assets/images/components/select-menu.png
-storybook: https://vue.dialpad.design/?path=/story/components-select-menu--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-select-menu--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21569&viewport=-1857%2C206%2C0.37&t=xHutRjwo1o5zMTgT-11
 ---
 
@@ -349,7 +349,3 @@ We offer different sizes for instances in which the interface requires a smaller
 ## Classes
 
 <component-class-table component-name="select" />
-
-<script setup>
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
-</script>

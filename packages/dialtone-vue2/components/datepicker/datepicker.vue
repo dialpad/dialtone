@@ -1,9 +1,13 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="d-datepicker">
-    <div class="d-datepicker--header">
+  <dt-stack
+    class="d-datepicker"
+    gap="400"
+  >
+    <div class="d-datepicker__hd">
       <month-year-picker
         ref="monthYearPicker"
+        :locale="locale"
         :prev-month-label="prevMonthLabel"
         :next-month-label="nextMonthLabel"
         :prev-year-label="prevYearLabel"
@@ -11,11 +15,12 @@
         :change-to-label="changeToLabel"
         :selected-date="selectedDate"
         @calendar-days="updateCalendarDays"
-        @focus-day="$refs.calendar.focusFirstDay()"
+        @focus-first-day="$refs.calendar.focusFirstDay()"
+        @focus-last-day="$refs.calendar.focusLastDay()"
         @close-datepicker="$emit('close-datepicker')"
       />
     </div>
-    <div class="d-datepicker--body">
+    <div class="d-datepicker__bd">
       <calendar
         ref="calendar"
         :locale="locale"
@@ -24,19 +29,22 @@
         @select-date="$emit('selected-date', $event)"
         @focus-month-year-picker="$refs.monthYearPicker.focusMonthYearPicker()"
         @close-datepicker="$emit('close-datepicker')"
+        @go-to-next-month="$refs.monthYearPicker.goToNextMonth()"
+        @go-to-prev-month="$refs.monthYearPicker.goToPrevMonth()"
       />
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import MonthYearPicker from './modules/month-year-picker.vue';
 import Calendar from './modules/calendar.vue';
+import DtStack from '@/components/stack/stack.vue';
 
 export default {
   name: 'DtDatepicker',
 
-  components: { MonthYearPicker, Calendar },
+  components: { DtStack, MonthYearPicker, Calendar },
 
   props: {
     /**

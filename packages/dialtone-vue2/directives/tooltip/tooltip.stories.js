@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils.js';
+import { createRenderConfig } from '@/common/storybook_utils.js';
 import TooltipDirectiveDefaultTemplate from './tooltip_directive_default.story.vue';
 
 export const argsData = {};
@@ -14,13 +14,9 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, TooltipDirectiveDefaultTemplate);
-
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig('<div></div>', TooltipDirectiveDefaultTemplate, argsData),
   parameters: {
     options: { showPanel: false },
     controls: { disable: true },

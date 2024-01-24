@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import DtRecipeIvrNode from './ivr_node.vue';
 
 import DtRecipeIvrNodeDefaultTemplate from './ivr_node_default.story.vue';
@@ -94,12 +94,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeIvrNodeDefaultTemplate,
-);
+const DefaultTemplate = (argsData) => createRenderConfig(DtRecipeIvrNode, DtRecipeIvrNodeDefaultTemplate, argsData);
 
 export const Default = {
   render: DefaultTemplate,

@@ -4,7 +4,7 @@ description: A modal focuses the user’s attention on a single task or message.
 status: ready
 thumb: true
 image: assets/images/components/modal.png
-storybook: https://vue.dialpad.design/?path=/story/components-modal--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A20396&viewport=-724%2C-52%2C0.38&t=xHutRjwo1o5zMTgT-11
 ---
 <code-well-header>
@@ -94,7 +94,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 ### Base Style
 
 <code-well-header>
-  <example-modal kind="base" />
+  <example-modal />
 </code-well-header>
 
 ```html
@@ -206,5 +206,4 @@ At minimum, modals contain a title and one button. They could also contain body 
 
 <script setup>
   import ExampleModal from '@exampleComponents/ExampleModal.vue';
-  import DialtoneUsage from '@baseComponents/DialtoneUsage.vue';
 </script>

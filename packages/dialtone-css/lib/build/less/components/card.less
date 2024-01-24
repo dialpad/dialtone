@@ -1,0 +1,56 @@
+//
+//  DIALTONE
+//  COMPONENTS: CARD
+//
+//  These are card classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/card
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//  • HEADER
+//  • CONTENT
+//  • FOOTER
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ============================================================================
+//  $$  WRAPPER
+//  ----------------------------------------------------------------------------
+.d-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--dt-color-surface-primary);
+  border-radius: var(--dt-size-300);
+  box-shadow: var(--dt-shadow-card);
+}
+
+
+//  ============================================================================
+//  $   CARD AREAS
+//  ----------------------------------------------------------------------------
+//  $$  HEADER
+//  ----------------------------------------------------------------------------
+.d-card__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--dt-size-500) var(--dt-size-500) 0;
+}
+
+//  $$  CONTENT
+//  ----------------------------------------------------------------------------
+.d-card__content {
+  padding: var(--dt-space-500);
+  overflow-y: auto;
+}
+
+//  $$  FOOTER
+//  ----------------------------------------------------------------------------
+.d-card__footer {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--dt-space-500) var(--dt-space-500);
+}

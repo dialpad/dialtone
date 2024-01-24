@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import RadioDefault from './radio_default.story.vue';
 import RadioVariants from './radio_variants.story.vue';
@@ -81,6 +81,11 @@ export const argTypesData = {
   descriptionChildProps: {
     control: null,
   },
+  showMessages: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Directives
   'v-model': {
@@ -137,19 +142,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Radio Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, RadioDefault);
-const VariantsTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, RadioVariants);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRadio, RadioDefault, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRadio, RadioVariants, argsData),
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

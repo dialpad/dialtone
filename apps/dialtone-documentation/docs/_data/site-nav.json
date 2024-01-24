@@ -8,10 +8,6 @@
           "link": "/about/dialtone.html"
         },
         {
-          "text": "Contributing",
-          "link": "/about/contributing.html"
-        },
-        {
           "text": "What's New",
           "link": "/about/whats-new/"
         }
@@ -39,8 +35,8 @@
           "link": "/tokens/shadow.html"
         },
         {
-          "text": "Sizing",
-          "link": "/tokens/sizing.html"
+          "text": "Size",
+          "link": "/tokens/size.html"
         },
         {
           "text": "Spacing",
@@ -64,6 +60,10 @@
         {
           "text": "Getting started",
           "link": "/guides/getting-started/"
+        },
+        {
+          "text": "Contributing",
+          "link": "/guides/contributing/"
         },
         {
           "text": "Design principles",
@@ -109,8 +109,7 @@
         },
         {
           "text": "Icons",
-          "link": "/design/icons/",
-          "planned": true
+          "link": "/design/icons/"
         },
         {
           "text": "Illustrations",
@@ -120,6 +119,14 @@
           "text": "Elevation",
           "link": "/design/elevation/",
           "planned": true
+        },
+        {
+          "text": "Space",
+          "link": "/design/space/"
+        },
+        {
+          "text": "Size",
+          "link": "/design/size/"
         },
         {
           "text": "Motion",

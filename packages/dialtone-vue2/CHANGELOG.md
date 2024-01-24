@@ -1,3 +1,127 @@
+# [2.112.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.111.1...dialtone-vue2/v2.112.0) (2024-01-19)
+
+
+### Features
+
+* datepicker full language support ([#118](https://github.com/dialpad/dialtone/issues/118)) ([988b727](https://github.com/dialpad/dialtone/commit/988b727103cfa34b0cf7cb2a26317f58d5cb5350))
+
+## [2.111.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.111.0...dialtone-vue2/v2.111.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** spacing and transition improvements - Vue 2 ([#109](https://github.com/dialpad/dialtone/issues/109)) ([b33a82c](https://github.com/dialpad/dialtone/commit/b33a82c68f27d0db8760e4332667fa19eacd5b24))
+
+# [2.111.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.110.1...dialtone-vue2/v2.111.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
+
+
+### Features
+
+* **Datepicker:** vue2 style and keyboard navigation enhancement ([#95](https://github.com/dialpad/dialtone/issues/95)) ([2850eae](https://github.com/dialpad/dialtone/commit/2850eae8b1a54b6886fcc8c7cd0bee1f4f2c79be))
+
+## [2.110.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.110.0...dialtone-vue2/v2.110.1) (2024-01-15)
+
+
+### Bug Fixes
+
+* **Hovercard:** timer for vue 2 ([#103](https://github.com/dialpad/dialtone/issues/103)) ([d29c2f6](https://github.com/dialpad/dialtone/commit/d29c2f6804a72119a0da5bada45acfe34ea1784e))
+
+# [2.110.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.109.1...dialtone-vue2/v2.110.0) (2024-01-15)
+
+
+### Features
+
+* **Hovercard:** add hovercard implementation ([#72](https://github.com/dialpad/dialtone/issues/72)) ([32cc1a8](https://github.com/dialpad/dialtone/commit/32cc1a837043f5fdbf562992ad9bc83f1d2b9252))
+
+## [2.109.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.109.0...dialtone-vue2/v2.109.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* icon name validation ([b9cfcff](https://github.com/dialpad/dialtone/commit/b9cfcff6eb23e9a54bb8ee0cde36cc348dd2b606))
+
+# [2.109.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.108.0...dialtone-vue2/v2.109.0) (2024-01-09)
+
+
+### Documentation
+
+* fix datepicker table dark mode ([#90](https://github.com/dialpad/dialtone/issues/90)) ([9ef39a9](https://github.com/dialpad/dialtone/commit/9ef39a9b5356931132af83086c24e855ecf5f1a7))
+
+
+### Features
+
+* port message input recipe ([#81](https://github.com/dialpad/dialtone/issues/81)) ([efb5732](https://github.com/dialpad/dialtone/commit/efb573246395e96c596cef548111b822dc5b032a))
+
+# [2.108.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.107.0...dialtone-vue2/v2.108.0) (2024-01-08)
+
+
+### Bug Fixes
+
+* error in stories when component.props is undefined ([#89](https://github.com/dialpad/dialtone/issues/89)) ([1694544](https://github.com/dialpad/dialtone/commit/169454471870a62e0ebb22617c9c3b13cfbb9257))
+
+
+### Documentation
+
+* fix old dialpad.design links ([#88](https://github.com/dialpad/dialtone/issues/88)) ([2ec0a6a](https://github.com/dialpad/dialtone/commit/2ec0a6a5150cf51505ba902234061f1c31d2604c))
+* fix storybook reactivity ([#85](https://github.com/dialpad/dialtone/issues/85)) ([0206c8c](https://github.com/dialpad/dialtone/commit/0206c8c2ff8b9a534cd92c7a46420bc038bff867))
+
+
+### Features
+
+* port attachment carousel ([#86](https://github.com/dialpad/dialtone/issues/86)) ([a67aae2](https://github.com/dialpad/dialtone/commit/a67aae2946d4088b54d7de871a236c7baa351424))
+
+# [2.107.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.6...dialtone-vue2/v2.107.0) (2024-01-04)
+
+
+### Documentation
+
+* update PR template for monorepo ([#82](https://github.com/dialpad/dialtone/issues/82)) ([a940afa](https://github.com/dialpad/dialtone/commit/a940afa4caea7286709067365cb25984e283e3e5))
+
+
+### Features
+
+* port contact suggestion ([#78](https://github.com/dialpad/dialtone/issues/78)) ([c1b9e3b](https://github.com/dialpad/dialtone/commit/c1b9e3bef5088a3ad8a78e9fbd524fba15d25f46))
+* port emoji suggestions ([#77](https://github.com/dialpad/dialtone/issues/77)) ([6000d7d](https://github.com/dialpad/dialtone/commit/6000d7d871b216b86c729f5512a4ab36c6657259))
+
+## [2.106.6](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.5...dialtone-vue2/v2.106.6) (2024-01-03)
+
+
+### Bug Fixes
+
+* vue2 storybook components and recipe ([#71](https://github.com/dialpad/dialtone/issues/71)) ([b66ad61](https://github.com/dialpad/dialtone/commit/b66ad612cfa0768712ce6427b806d432ad27b394))
+
+## [2.106.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.4...dialtone-vue2/v2.106.5) (2023-12-21)
+
+
+### Bug Fixes
+
+* change dialtone-icons to peer ([#67](https://github.com/dialpad/dialtone/issues/67)) ([a63a606](https://github.com/dialpad/dialtone/commit/a63a60676ee744313ff40792a767f36346899917))
+
+## [2.106.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.3...dialtone-vue2/v2.106.4) (2023-12-20)
+
+
+### Bug Fixes
+
+* missing icons ([95cfe08](https://github.com/dialpad/dialtone/commit/95cfe08f62a40ef3e202a8600ce0e631df961b64))
+
+## [2.106.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.2...dialtone-vue2/v2.106.3) (2023-12-19)
+
+
+### Bug Fixes
+
+* **Tabs:** fix inverted boolean storybook ([#60](https://github.com/dialpad/dialtone/issues/60)) ([16b0f29](https://github.com/dialpad/dialtone/commit/16b0f29c80bee86372f3257e6b400e0ebf7d80c0))
+
+
+### Code Refactoring
+
+* dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
+* update Percy integration ([#61](https://github.com/dialpad/dialtone/issues/61)) ([05d9a7b](https://github.com/dialpad/dialtone/commit/05d9a7b2a95f45e91d7cb4074866e952a1dce398))
+
 ## [2.106.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.106.1...dialtone-vue2/v2.106.2) (2023-12-13)
 
 

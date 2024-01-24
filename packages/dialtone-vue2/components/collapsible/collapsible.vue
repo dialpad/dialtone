@@ -80,7 +80,7 @@ import { DtIcon } from '@/components/icon';
 
 /**
  * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
- * @see https://dialpad.design/components/collapsible.html
+ * @see https://dialtone.dialpad.com/components/collapsible.html
  */
 export default {
   name: 'DtCollapsible',
