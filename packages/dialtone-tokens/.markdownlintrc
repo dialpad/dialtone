@@ -1,4 +1,0 @@
-{
-  "extends": "/.markdownlintrc"
-  "line-length": { "line_length" : 120 }
-}
