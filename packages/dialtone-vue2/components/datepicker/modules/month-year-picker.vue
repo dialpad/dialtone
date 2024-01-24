@@ -17,7 +17,7 @@
         <template #anchor>
           <dt-button
             id="prevYearButton"
-            :ref="el => { if (el) setDayRef(el) }"
+            :ref="refNames[0]"
             size="xs"
             importance="clear"
             kind="muted"
@@ -42,7 +42,7 @@
         <template #anchor>
           <dt-button
             id="prevMonthButton"
-            :ref="el => { if (el) setDayRef(el) }"
+            :ref="refNames[1]"
             size="xs"
             importance="clear"
             kind="muted"
@@ -82,7 +82,7 @@
         <template #anchor>
           <dt-button
             id="nextMonthButton"
-            :ref="el => { if (el) setDayRef(el) }"
+            :ref="refNames[2]"
             size="xs"
             importance="clear"
             :circle="true"
@@ -107,7 +107,7 @@
         <template #anchor>
           <dt-button
             id="nextYearButton"
-            :ref="el => { if (el) setDayRef(el) }"
+            :ref="refNames[3]"
             size="xs"
             kind="muted"
             :circle="true"
@@ -218,6 +218,7 @@ export default {
       highlightedDay: null,
       focusPicker: 0,
       focusRefs: [],
+      refNames: ['prevYearButtonRef', 'prevMonthButtonRef', 'nextMonthButtonRef', 'nextYearButtonRef'],
     };
   },
 
@@ -254,17 +255,17 @@ export default {
   },
 
   mounted () {
+    this.setButtonsRef();
     this.focusMonthYearPicker();
   },
 
   methods: {
-    setDayRef (el) {
-      if (!this.focusRefs.includes(el)) {
-        this.focusRefs.push(el);
-      }
+    setButtonsRef () {
+      this.focusRefs = this.refNames.map(refName => this.$refs[refName]);
     },
 
     focusMonthYearPicker () {
+      this.focusPicker = 0;
       this.focusRefs[0].$el.focus();
     },
 
