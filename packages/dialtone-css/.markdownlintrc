@@ -1,8 +1,4 @@
 {
-  "default": true,
-  "line-length": { "line_length" : 120 },
-  "no-duplicate-heading": false,
-  "no-trailing-punctuation": false,
-  "no-inline-html": false,
-  "first-line-h1": false
+  "extends": "/.markdownlintrc"
+  "line-length": { "line_length" : 120 }
 }
