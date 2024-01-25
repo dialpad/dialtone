@@ -146,6 +146,7 @@ export default {
 
   &__reaction-number {
     font: var(--dt-typography-body-small);
+    line-height: var(--dt-font-line-height-100);
   }
 }
 </style>
