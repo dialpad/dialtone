@@ -128,7 +128,6 @@ export default {
     &--selected {
       color: var(--dt-color-link-primary);
       border-width: var(--dt-size-border-150);
-      font-weight: var(--dt-font-weight-bold);
       background-color: var(--dt-color-purple-100);
       border-color: var(--dt-color-brand-purple);
       .dt-emoji-row__reaction-number {
