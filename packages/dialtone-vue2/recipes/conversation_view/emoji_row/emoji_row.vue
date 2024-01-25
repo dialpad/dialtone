@@ -122,16 +122,20 @@ export default {
     }
 
     &:hover, &:focus-visible {
-      border-color: hsla(var(--dt-color-black-600-hsl)/100%)!important;
+      border-color: var(--dt-color-border-subtle);
     }
 
     &--selected {
       color: var(--dt-color-link-primary);
       border-width: var(--dt-size-border-150);
-      background-color: var(--dt-color-purple-100) !important;
-      border-color: var(--dt-color-brand-purple) !important;
+      font-weight: var(--dt-font-weight-bold);
+      background-color: var(--dt-color-purple-100);
+      border-color: var(--dt-color-brand-purple);
+      .dt-emoji-row__reaction-number {
+        font-weight: var(--dt-font-weight-bold);
+      }
       &:hover {
-        color: var(--dt-color-link-primary);
+        border-color: var(--dt-color-border-brand-strong);
       }
     }
   }
@@ -142,9 +146,7 @@ export default {
   }
 
   &__reaction-number {
-    font-weight: var(--dt-font-weight-bold);
-    font-size: var(--dt-font-size-100);
+    font: var(--dt-typography-body-small);
   }
-
 }
 </style>
