@@ -1,3 +1,27 @@
+# [9.8.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.7.0...dialtone/v9.8.0) (2024-01-26)
+
+
+### Bug Fixes
+
+* datepicker keyboard navigation fix vue2 only ([#124](https://github.com/dialpad/dialtone/issues/124)) ([4763a98](https://github.com/dialpad/dialtone/commit/4763a98a2d9bc244a25f0634d09725a3ba7afdba))
+* **Feed Item Row, Emoji Row:** spacing / color fixes ([#126](https://github.com/dialpad/dialtone/issues/126)) ([e8b9116](https://github.com/dialpad/dialtone/commit/e8b9116370b6bd3a5d94cfd08a2b809c277c58b8))
+* **Feed Item Row:** spacing and transition improvements - Vue 3 ([#111](https://github.com/dialpad/dialtone/issues/111)) ([bf18be2](https://github.com/dialpad/dialtone/commit/bf18be2ba92801ceb8d775ea5fede602e5303d6c))
+* **General Row:** map digital type to laptop-2 ([#114](https://github.com/dialpad/dialtone/issues/114)) ([ee3abfa](https://github.com/dialpad/dialtone/commit/ee3abfad17e9aefb55b934e311fdbe5d5cdac2b3))
+* icon 'ai-write' name update ([#125](https://github.com/dialpad/dialtone/issues/125)) ([8b47655](https://github.com/dialpad/dialtone/commit/8b47655e525389ce74d0fd06325fee7ef70ad76c))
+
+
+### Documentation
+
+* update release notes for monorepo ([#121](https://github.com/dialpad/dialtone/issues/121)) ([c810cf3](https://github.com/dialpad/dialtone/commit/c810cf320b89a9139898f562ab9aece44353aa6f))
+
+
+### Features
+
+* add summary icon ([#119](https://github.com/dialpad/dialtone/issues/119)) ([43c5b78](https://github.com/dialpad/dialtone/commit/43c5b7857812ecc541fbac2b6c4d6b731e02701c))
+* added new docs for spacing in design language ([#38](https://github.com/dialpad/dialtone/issues/38)) ([bba2b60](https://github.com/dialpad/dialtone/commit/bba2b6078ada31147e90549a14504323c0d15078))
+* **Badge:** updated horizontal padding ([#122](https://github.com/dialpad/dialtone/issues/122)) ([9b55973](https://github.com/dialpad/dialtone/commit/9b559736fe514647feebe6ecd04ed32dbc5c6754))
+* **Icons:** added new alignment icons ([#123](https://github.com/dialpad/dialtone/issues/123)) ([23aa073](https://github.com/dialpad/dialtone/commit/23aa0730625e8b8e094f92d9be34709256e42e8f))
+
 # [9.7.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.6.1...dialtone/v9.7.0) (2024-01-19)
 
 
