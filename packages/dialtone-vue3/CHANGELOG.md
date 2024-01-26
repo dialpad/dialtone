@@ -1,3 +1,11 @@
+## [3.105.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.0...dialtone-vue3/v3.105.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** spacing and transition improvements - Vue 3 ([#111](https://github.com/dialpad/dialtone/issues/111)) ([bf18be2](https://github.com/dialpad/dialtone/commit/bf18be2ba92801ceb8d775ea5fede602e5303d6c))
+* **General Row:** map digital type to laptop-2 ([#114](https://github.com/dialpad/dialtone/issues/114)) ([ee3abfa](https://github.com/dialpad/dialtone/commit/ee3abfad17e9aefb55b934e311fdbe5d5cdac2b3))
+
 # [3.105.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.104.0...dialtone-vue3/v3.105.0) (2024-01-19)
 
 
