@@ -1425,6 +1425,11 @@
         "collection",
         "cluster"
       ],
+      "bullet": [
+        "dot",
+        "point",
+        "circle"
+      ],
       "check-circle-filled": [
         "approved",
         "done"
