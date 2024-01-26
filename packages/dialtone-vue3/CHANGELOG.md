@@ -1,3 +1,10 @@
+## [3.105.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.1...dialtone-vue3/v3.105.2) (2024-01-26)
+
+
+### Bug Fixes
+
+* missing exports ([#128](https://github.com/dialpad/dialtone/issues/128)) ([d44a3bb](https://github.com/dialpad/dialtone/commit/d44a3bbbf569372034cfddba0ebb8347b27dfc11))
+
 ## [3.105.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.0...dialtone-vue3/v3.105.1) (2024-01-26)
 
 
