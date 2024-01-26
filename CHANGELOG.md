@@ -1,3 +1,20 @@
+# [9.9.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.8.0...dialtone/v9.9.0) (2024-01-26)
+
+
+### Bug Fixes
+
+* missing exports ([#128](https://github.com/dialpad/dialtone/issues/128)) ([d44a3bb](https://github.com/dialpad/dialtone/commit/d44a3bbbf569372034cfddba0ebb8347b27dfc11))
+
+
+### Documentation
+
+* fix of the site nav in tokens ([#129](https://github.com/dialpad/dialtone/issues/129)) ([094c1e9](https://github.com/dialpad/dialtone/commit/094c1e95ee117070f50236858025bc4a97869892))
+
+
+### Features
+
+* new icon bullet ([#127](https://github.com/dialpad/dialtone/issues/127)) ([e96e6c3](https://github.com/dialpad/dialtone/commit/e96e6c303f842fa3110d0e55246d830c7d1adbc0))
+
 # [9.8.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.7.0...dialtone/v9.8.0) (2024-01-26)
 
 
