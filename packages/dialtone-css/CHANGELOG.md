@@ -1,3 +1,10 @@
+# [8.24.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.23.2...dialtone-css/v8.24.0) (2024-01-26)
+
+
+### Features
+
+* **Badge:** updated horizontal padding ([#122](https://github.com/dialpad/dialtone/issues/122)) ([9b55973](https://github.com/dialpad/dialtone/commit/9b559736fe514647feebe6ecd04ed32dbc5c6754))
+
 ## [8.23.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.23.1...dialtone-css/v8.23.2) (2024-01-19)
 
 
