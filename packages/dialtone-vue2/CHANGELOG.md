@@ -1,3 +1,12 @@
+## [2.112.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.112.0...dialtone-vue2/v2.112.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* datepicker keyboard navigation fix vue2 only ([#124](https://github.com/dialpad/dialtone/issues/124)) ([4763a98](https://github.com/dialpad/dialtone/commit/4763a98a2d9bc244a25f0634d09725a3ba7afdba))
+* **Feed Item Row, Emoji Row:** spacing / color fixes ([#126](https://github.com/dialpad/dialtone/issues/126)) ([e8b9116](https://github.com/dialpad/dialtone/commit/e8b9116370b6bd3a5d94cfd08a2b809c277c58b8))
+* **General Row:** map digital type to laptop-2 ([#114](https://github.com/dialpad/dialtone/issues/114)) ([ee3abfa](https://github.com/dialpad/dialtone/commit/ee3abfad17e9aefb55b934e311fdbe5d5cdac2b3))
+
 # [2.112.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.111.1...dialtone-vue2/v2.112.0) (2024-01-19)
 
 
