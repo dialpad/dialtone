@@ -380,7 +380,7 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.1.12)
       '@tiptap/extension-blockquote':
-        specifier: 2.1.16
+        specifier: ^2.1.16
         version: 2.1.16(@tiptap/core@2.0.3)
       '@tiptap/extension-bold':
         specifier: ^2.1.16
