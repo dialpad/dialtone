@@ -281,13 +281,19 @@ export default {
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
+
+      isTouchDevice: false,
     };
   },
 
   computed: {
+    // isTouchDevice () {
+    //   return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+    // },
+
     // whether the tooltip is visible or not.
     isVisible () {
-      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default);
+      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default) && !this.isTouchDevice;
     },
 
     tooltipListeners () {
@@ -363,6 +369,8 @@ export default {
 
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
+
+    this.isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
 
     // immediate watcher fires before mounted, so have this here in case
     // show prop was initially set to true.
