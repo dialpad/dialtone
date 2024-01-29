@@ -1,6 +1,6 @@
 <template>
   <img
-    :src="`@/node_modules/@dialpad/dialtone-icons/dist/svg/${name}.svg`"
+    :src="`/node_modules/@dialpad/dialtone-icons/dist/svg/${name}.svg`"
     class="injectable-svg d-icon"
   >
 </template>
