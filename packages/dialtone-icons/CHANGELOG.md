@@ -1,3 +1,28 @@
+# [4.7.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.6.0...dialtone-icons/v4.7.0) (2024-01-26)
+
+
+### Documentation
+
+* fix of the site nav in tokens ([#129](https://github.com/dialpad/dialtone/issues/129)) ([094c1e9](https://github.com/dialpad/dialtone/commit/094c1e95ee117070f50236858025bc4a97869892))
+
+
+### Features
+
+* new icon bullet ([#127](https://github.com/dialpad/dialtone/issues/127)) ([e96e6c3](https://github.com/dialpad/dialtone/commit/e96e6c303f842fa3110d0e55246d830c7d1adbc0))
+
+# [4.6.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.4...dialtone-icons/v4.6.0) (2024-01-26)
+
+
+### Bug Fixes
+
+* icon 'ai-write' name update ([#125](https://github.com/dialpad/dialtone/issues/125)) ([8b47655](https://github.com/dialpad/dialtone/commit/8b47655e525389ce74d0fd06325fee7ef70ad76c))
+
+
+### Features
+
+* add summary icon ([#119](https://github.com/dialpad/dialtone/issues/119)) ([43c5b78](https://github.com/dialpad/dialtone/commit/43c5b7857812ecc541fbac2b6c4d6b731e02701c))
+* **Icons:** added new alignment icons ([#123](https://github.com/dialpad/dialtone/issues/123)) ([23aa073](https://github.com/dialpad/dialtone/commit/23aa0730625e8b8e094f92d9be34709256e42e8f))
+
 ## [4.5.4](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.5.3...dialtone-icons/v4.5.4) (2024-01-19)
 
 
