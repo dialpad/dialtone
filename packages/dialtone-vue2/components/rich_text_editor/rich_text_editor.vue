@@ -7,6 +7,7 @@
 
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-2';
+// import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
 import HardBreak from '@tiptap/extension-hard-break';
@@ -17,9 +18,11 @@ import BulletList from '@tiptap/extension-bullet-list';
 import Italic from '@tiptap/extension-italic';
 import TipTapLink from '@tiptap/extension-link';
 import ListItem from '@tiptap/extension-list-item';
+import OrderedList from '@tiptap/extension-ordered-list';
 import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
+import TextAlign from '@tiptap/extension-text-align';
 import Emoji from './extensions/emoji';
 import Link from './extensions/link';
 import { MentionPlugin } from './extensions/mentions/mention';
@@ -192,6 +195,7 @@ export default {
     extensions () {
       // These are the default extensions needed just for plain text.
       const extensions = [
+        // Blockquote,
         Bold,
         BulletList,
         CodeBlock,
@@ -246,6 +250,15 @@ export default {
       // Emoji has some interactions with Enter key
       // hence this should be done last otherwise the enter wont add a emoji.
       extensions.push(Emoji);
+
+      extensions.push(TextAlign.configure({
+        types: ['paragraph'],
+        defaultAlignment: 'left',
+      }));
+
+      extensions.push(OrderedList.configure({
+        itemTypeName: 'listItem',
+      }));
 
       return extensions;
     },
@@ -391,13 +404,16 @@ export default {
 <style>
   .ProseMirror p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
-    float: left;
     color: var(--dt-color-foreground-placeholder);
     pointer-events: none;
     height: 0;
   }
 
-  .ProseMirror li {
+  .ProseMirror ul > li {
     list-style-type: circle;
+  }
+
+  .ProseMirror ol > li {
+    list-style-type: decimal;
   }
 </style>

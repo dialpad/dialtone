@@ -130,9 +130,9 @@
               data-qa="dt-editor-align-left-btn"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: 'left' })"
               size="sm"
-              @click="onBoldTextToggle"
+              @click="onTextAlign('left')"
             >
               <template #icon>
                 <dt-icon
@@ -152,9 +152,9 @@
               data-qa="dt-editor-align-center-btn"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: 'center' })"
               size="sm"
-              @click="onBoldTextToggle"
+              @click="onTextAlign('center')"
             >
               <template #icon>
                 <dt-icon
@@ -174,9 +174,9 @@
               data-qa="dt-editor-align-right-btn"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: 'right' })"
               size="sm"
-              @click="onBoldTextToggle"
+              @click="onTextAlign('right')"
             >
               <template #icon>
                 <dt-icon
@@ -196,9 +196,9 @@
               data-qa="dt-editor-align-justify-btn"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: 'justify' })"
               size="sm"
-              @click="onBoldTextToggle"
+              @click="onTextAlign('justify')"
             >
               <template #icon>
                 <dt-icon
@@ -254,6 +254,8 @@
               importance="clear"
               kind="muted"
               size="sm"
+              :active="$refs.richTextEditor?.editor.isActive('orderedList')"
+              @click="onOrderedListToggle"
             >
               <template #icon>
                 <dt-icon
@@ -267,7 +269,7 @@
         </dt-tooltip>
       </dt-stack>
 
-      <dt-stack
+      <!--dt-stack
         direction="row"
         gap="100"
         v-if="showQuoteButton"
@@ -282,9 +284,9 @@
               data-qa="dt-editor-quote-btn"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor.isActive('bulletList')"
+              :active="$refs.richTextEditor?.editor.isActive('blockquote')"
               size="sm"
-              @click="onBulletListToggle"
+              @click="onBlockquoteToggle"
             >
               <template #icon>
                 <dt-icon
@@ -296,7 +298,7 @@
             </dt-button>
           </template>
         </dt-tooltip>
-      </dt-stack>
+      </dt-stack-->
 
       <dt-stack
         direction="row"
@@ -344,9 +346,9 @@
               data-qa="dt-editor-code-block-btn"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor.isActive('link')"
+              :active="$refs.richTextEditor?.editor.isActive('codeBlock')"
               size="sm"
-              @click="openLinkInputModal"
+              @click="onCodeBlockToggle"
             >
               <template #icon>
                 <dt-icon
@@ -848,9 +850,29 @@ export default {
       this.$refs.richTextEditor?.editor.chain().focus().toggleStrike().run();
     },
 
+    onTextAlign (alignment) {
+      if (this.$refs.richTextEditor?.editor?.isActive({ textAlign: alignment })) {
+        // If this alignment type is already set here, unset it
+        return this.$refs.richTextEditor?.editor.chain().focus().unsetTextAlign().run();
+      }
+      this.$refs.richTextEditor?.editor.chain().focus().setTextAlign(alignment).run();
+    },
+
     onBulletListToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleBulletList().run();
     },
+
+    onOrderedListToggle () {
+      this.$refs.richTextEditor?.editor.chain().focus().toggleOrderedList().run();
+    },
+
+    onCodeBlockToggle () {
+      this.$refs.richTextEditor?.editor.chain().focus().toggleCodeBlock().run();
+    },
+
+    // onBlockquoteToggle () {
+    //  this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
+    // },
 
     onFocus (event) {
       this.hasFocus = true;
