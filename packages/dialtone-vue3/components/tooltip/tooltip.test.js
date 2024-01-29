@@ -165,6 +165,24 @@ describe('DtTooltip tests', () => {
         });
       });
 
+      describe('When device is touch based', () => {
+        beforeEach(() => {
+          window.ontouchstart = vi.fn();
+          updateWrapper();
+        });
+
+        afterEach(() => {
+          delete window.ontouchstart;
+        });
+
+        it('should hide tooltip', async () => {
+          await wrapper.setProps({ delay: false });
+          await anchor.trigger('mouseenter');
+
+          expect(tooltip.isVisible()).toBe(false);
+        });
+      });
+
       describe('When focusout tooltip', () => {
         it('should display tooltip', async () => {
           await anchor.trigger('focusout');

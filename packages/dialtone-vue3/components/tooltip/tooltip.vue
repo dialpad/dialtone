@@ -299,13 +299,18 @@ export default {
 
       // reference to the anchor element
       anchor: null,
+      isTouchDevice: false,
     };
   },
 
   computed: {
+    // isTouchDevice () {
+    //   return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+    // },
+
     // whether the tooltip is visible or not.
     isVisible () {
-      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default);
+      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default) && !this.isTouchDevice;
     },
 
     tooltipListeners () {
@@ -383,6 +388,14 @@ export default {
     this.anchor = this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
+
+    this.isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+
+    // immediate watcher fires before mounted, so have this here in case
+    // show prop was initially set to true.
+    if (this.isShown) {
+      this.tip.show();
+    }
   },
 
   beforeUnmount () {
