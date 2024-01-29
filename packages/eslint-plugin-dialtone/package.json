@@ -29,6 +29,11 @@
       "name": "Ignacio Ropolo",
       "email": "ignacio.ropolo@dialpad.com",
       "url": "https://github.com/iropolo"
+    },
+    {
+      "name": "Nina Repetto",
+      "email": "nina.repetto@dialpad.com",
+      "url": "https://github.com/ninamarina"
     }
   ],
   "bugs": {
@@ -40,7 +45,7 @@
   "scripts": {
     "lint": "run-s lint:docs lint:code",
     "lint:code": "eslint '**/*.js'",
-    "lint:docs": "markdownlint '**/*.md'",
+    "lint:docs": "markdownlint 'docs/**/*.md'",
     "test": "mocha tests --recursive"
   },
   "dependencies": {
