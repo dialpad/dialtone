@@ -1,6 +1,6 @@
 <template>
   <img
-    :src="iconSRC"
+    :src="`@/node_modules/@dialpad/dialtone-icons/dist/svg/${name}.svg`"
     class="injectable-svg d-icon"
   >
 </template>
@@ -11,12 +11,6 @@ import SVGInject from '@iconfu/svg-inject';
 export default {
   props: {
     name: String,
-  },
-
-  computed: {
-    iconSRC () {
-      return `/node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`;
-    },
   },
 
   watch: {
