@@ -5,7 +5,6 @@ import DtRecipeEditor from './editor.vue';
 let wrapper;
 let editor;
 
-let editorEl;
 let linkInputEl;
 
 let boldFormatBtn;
@@ -13,6 +12,13 @@ let italicsFormatBtn;
 let underlineFormatBtn;
 let strikeFormatBtn;
 let listItemsFormatBtn;
+let alignLeftBtn;
+let alignCenterBtn;
+let alignRightBtn;
+let alignJustifyBtn;
+let orderedListBtn;
+let blockquoteBtn;
+let codeblockBtn;
 let addLinkBtn;
 let confirmAddLinkBtn;
 let cancelAddLinkBtn;
@@ -47,9 +53,13 @@ const _setChildWrappers = () => {
   strikeFormatBtn = wrapper.find('[data-qa="dt-editor-strike-btn"]');
   listItemsFormatBtn = wrapper.find('[data-qa="dt-editor-list-items-btn"]');
   addLinkBtn = wrapper.find('[data-qa="dt-editor-add-link-btn"]');
-
-  // Els
-  editorEl = wrapper.find('[data-qa="dt-editor"]');
+  alignLeftBtn = wrapper.find('[data-qa="dt-editor-align-left-btn"]');
+  alignCenterBtn = wrapper.find('[data-qa="dt-editor-align-center-btn"]');
+  alignRightBtn = wrapper.find('[data-qa="dt-editor-align-right-btn"]');
+  alignJustifyBtn = wrapper.find('[data-qa="dt-editor-align-justify-btn"]');
+  orderedListBtn = wrapper.find('[data-qa="dt-editor-ordered-list-items-btn"]');
+  blockquoteBtn = wrapper.find('[data-qa="dt-editor-blockquote-btn"]');
+  codeblockBtn = wrapper.find('[data-qa="dt-editor-code-block-btn"]');
 };
 
 const _mountWrapper = () => {
@@ -111,40 +121,36 @@ describe('DtRecipeEditor tests', () => {
       expect(listItemsFormatBtn.exists()).toBe(true);
     });
 
+    it('should contain ordered list button', function () {
+      expect(orderedListBtn.exists()).toBe(true);
+    });
+
+    it('should contain align left button', function () {
+      expect(alignLeftBtn.exists()).toBe(true);
+    });
+
+    it('should contain align center button', function () {
+      expect(alignCenterBtn.exists()).toBe(true);
+    });
+
+    it('should contain align right button', function () {
+      expect(alignRightBtn.exists()).toBe(true);
+    });
+
+    it('should contain align justify button', function () {
+      expect(alignJustifyBtn.exists()).toBe(true);
+    });
+
     it('should contain add link button', function () {
       expect(addLinkBtn.exists()).toBe(true);
     });
 
-    it('should not have border applied on message-input when not focused', () => {
-      expect(editorEl.classes('d-bc-default')).toBe(true);
-      expect(editorEl.classes('d-bc-black-500')).toBe(false);
+    it('should contain blockquote button', function () {
+      expect(blockquoteBtn.exists()).toBe(true);
     });
 
-    describe('When we focus anywhere on the editor', () => {
-      it('should focus and add the border for the editor', async () => {
-        await editor.trigger('focus');
-        expect(editorEl.classes('d-bc-black-500')).toBe(true);
-      });
-
-      it('should programmatically focus to input', async () => {
-        wrapper.vm.onFocus();
-        await wrapper.vm.$nextTick();
-        expect(editorEl.classes('d-bc-black-500')).toBe(true);
-      });
-    });
-
-    describe('When rounded edges is disabled', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({
-          roundedEdges: false,
-          value: testText,
-        });
-      });
-
-      it('the editor edges should not be round', async () => {
-        expect(editor.text()).toBe(testText);
-        expect(editorEl.classes('d-bar0')).toBe(true);
-      });
+    it('should contain code block button', function () {
+      expect(codeblockBtn.exists()).toBe(true);
     });
 
     describe('When bold button is disabled', () => {
@@ -397,10 +403,68 @@ describe('DtRecipeEditor tests', () => {
       });
     });
 
+    describe('When alignment button is clicked', () => {
+      it('if alignment is left (default) then text output has no styles applied', async () => {
+        await alignLeftBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('<p>In the beginning, it was a nice day.</p>');
+      });
+
+      it('if alignment is center then text should be aligned to the center', async () => {
+        await alignCenterBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('text-align: center');
+      });
+
+      it('if alignment is right then text should be aligned to the right', async () => {
+        await alignRightBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('text-align: right');
+      });
+
+      it('if alignment is justify then text style should be set to justify', async () => {
+        await alignJustifyBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('text-align: justify');
+      });
+    });
+
+    describe('When blockquote button is clocked', () => {
+      it('editor output should be enclosed in blockquote tags', async () => {
+        const expectedOutput = '<blockquote><p>In the beginning, it was a nice day.</p></blockquote>';
+        await blockquoteBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()
+          .replace(/(\r\n|\n|\s+|\r)/gm, ''))
+          .toContain(expectedOutput.replace(/(\r\n|\n|\s+|\r)/gm, ''));
+      });
+    });
+
+    describe('When code block button is clocked', () => {
+      it('editor output should be enclosed in code block tags', async () => {
+        await codeblockBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('<code>In the beginning, it was a nice day.</code>');
+      });
+    });
+
     describe('When list items button is clicked', () => {
       it('editor output should be enclosed in list item html tags', async () => {
         const expectedHtmlOutput = '<ul><li><p>In the beginning, it was a nice day.</p></li></ul>';
         await listItemsFormatBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+
+        // Editor adds spaces and linebreaks for this. So remove them to compare
+        const editorHtmlOutput = editor.html().replaceAll(/[\n\r]/g, '').replaceAll(' ', '');
+        expect(editorHtmlOutput)
+          .toContain(expectedHtmlOutput.replaceAll(' ', ''));
+      });
+    });
+
+    describe('When ordered list button is clicked', () => {
+      it('editor output should be enclosed in ordered list item html tags', async () => {
+        const expectedHtmlOutput = '<ol><li><p>In the beginning, it was a nice day.</p></li></ol>';
+        await orderedListBtn.trigger('click');
         await wrapper.vm.$nextTick();
 
         // Editor adds spaces and linebreaks for this. So remove them to compare

@@ -87,6 +87,9 @@ describe('DtRichTextEditor tests', () => {
             type: 'doc',
             content: [{
               type: 'paragraph',
+              attrs: {
+                textAlign: 'left',
+              },
               content: [{
                 text: 'new value',
                 type: 'text',

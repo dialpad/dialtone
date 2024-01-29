@@ -281,7 +281,7 @@
         >
           <template #anchor>
             <dt-button
-              data-qa="dt-editor-quote-btn"
+              data-qa="dt-editor-blockquote-btn"
               importance="clear"
               kind="muted"
               :active="$refs.richTextEditor?.editor.isActive('blockquote')"
