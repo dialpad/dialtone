@@ -3,142 +3,362 @@
   <div
     data-qa="dt-editor"
     role="presentation"
-    :class="['d-d-flex', 'd-fd-column', 'd-baw1', 'd-ba', {
-      'd-bc-black-500': hasFocus,
-      'd-bc-default': !hasFocus,
-      'd-bar8': roundedEdges,
-      'd-bar0': !roundedEdges,
-    }]"
+    class="d-d-flex d-fd-column"
     @click="$refs.richTextEditor.focusEditor()"
   >
     <!-- Section for the top UI -->
     <dt-stack
       direction="row"
-      gap="100"
-      :class="['d-px8', 'd-py2', 'd-bgc-black-200', {
-        'd-btr8': roundedEdges,
-        'd-btr0': !roundedEdges,
-      }]"
+      gap="0"
+      class="d-py4 d-bgc-black-100 d-divide-x d-divide-black-200"
     >
-      <dt-button
-        v-if="showBoldButton"
-        data-qa="dt-editor-bold-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('bold'),
-        }]"
-        importance="clear"
-        kind="inverted"
-        size="sm"
-        @click="onBoldTextToggle"
+      <dt-stack
+        direction="row"
+        gap="100"
+        :class="{ 'd-px4 d-py4': this.showingTextFormatButtons }"
       >
-        <template #icon>
-          <dt-icon
-            name="bold"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
+        <dt-tooltip
+          message="Bold"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              v-if="showBoldButton"
+              data-qa="dt-editor-bold-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              size="sm"
+              @click="onBoldTextToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="bold"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
 
-      <dt-button
-        v-if="showItalicsButton"
-        data-qa="dt-editor-italics-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('italic'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="onItalicTextToggle"
+        <dt-tooltip
+          message="Italics"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              v-if="showItalicsButton"
+              data-qa="dt-editor-italics-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive('italic')"
+              size="sm"
+              @click="onItalicTextToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="italic"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+
+        <dt-tooltip
+          message="Underline"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              v-if="showUnderlineButton"
+              data-qa="dt-editor-underline-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive('underline')"
+              size="sm"
+              @click="onUnderlineTextToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="underline"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+
+        <dt-tooltip
+          message="Strike"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              v-if="showStrikeButton"
+              data-qa="dt-editor-strike-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive('strike')"
+              size="sm"
+              @click="onStrikethroughTextToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="strikethrough"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </dt-stack>
+
+      <dt-stack
+        direction="row"
+        gap="100"
+        :class="{ 'd-px4 d-py4': this.showingAlignmentButtons }"
       >
-        <template #icon>
-          <dt-icon
-            name="italic"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
+        <dt-tooltip message="Align Left">
+          <template #anchor>
+            <dt-button
+              v-if="showAlignLeftButton"
+              data-qa="dt-editor-align-left-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              size="sm"
+              @click="onBoldTextToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="align-left"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
 
-      <dt-button
-        v-if="showUnderlineButton"
-        data-qa="dt-editor-underline-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('underline'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="onUnderlineTextToggle"
+        <dt-tooltip message="Align Center">
+          <template #anchor>
+            <dt-button
+              v-if="showAlignCenterButton"
+              data-qa="dt-editor-align-center-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              size="sm"
+              @click="onBoldTextToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="align-center"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+
+        <dt-tooltip message="Align Right">
+          <template #anchor>
+            <dt-button
+              v-if="showAlignRightButton"
+              data-qa="dt-editor-align-right-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              size="sm"
+              @click="onBoldTextToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="align-right"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+
+        <dt-tooltip message="Justify">
+          <template #anchor>
+            <dt-button
+              v-if="showAlignJustifyButton"
+              data-qa="dt-editor-align-justify-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              size="sm"
+              @click="onBoldTextToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="align-justify"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </dt-stack>
+
+      <dt-stack
+        direction="row"
+        gap="100"
+        v-if="showingListButtons"
+        :class="{ 'd-px4 d-py4': showingListButtons }"
       >
-        <template #icon>
-          <dt-icon
-            name="underline"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
+        <dt-tooltip
+          message="Bullet List"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              v-if="showListItemsButton"
+              data-qa="dt-editor-list-items-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor.isActive('bulletList')"
+              size="sm"
+              @click="onBulletListToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="list-bullet"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
 
-      <dt-button
-        v-if="showStrikeButton"
-        data-qa="dt-editor-strike-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('strike'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="onStrikethroughTextToggle"
+        <dt-tooltip
+          message="Ordered List"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              v-if="showOrderedListButton"
+              data-qa="dt-editor-ordered-list-items-btn"
+              importance="clear"
+              kind="muted"
+              size="sm"
+            >
+              <template #icon>
+                <dt-icon
+                  name="list-ordered"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </dt-stack>
+
+      <dt-stack
+        direction="row"
+        gap="100"
+        v-if="showQuoteButton"
+        class="d-px4 d-py4"
       >
-        <template #icon>
-          <dt-icon
-            name="strikethrough"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
+        <dt-tooltip
+          message="Quote"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              data-qa="dt-editor-quote-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor.isActive('bulletList')"
+              size="sm"
+              @click="onBulletListToggle"
+            >
+              <template #icon>
+                <dt-icon
+                  name="quote"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </dt-stack>
 
-      <dt-button
-        v-if="showListItemsButton"
-        data-qa="dt-editor-list-items-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('bulletList'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="onBulletListToggle"
-      >
-        <template #icon>
-          <dt-icon
-            name="list-bullet"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
-
-      <dt-button
+      <dt-stack
+        direction="row"
+        gap="100"
         v-if="showAddLink.showAddLinkButton"
-        data-qa="dt-editor-add-link-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('link'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="openLinkInputModal"
+        class="d-px4 d-py4"
       >
-        <template #icon>
-          <dt-icon
-            name="link-2"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
+        <dt-tooltip
+          :message="$refs.richTextEditor?.editor.isActive('link') ? 'Edit Link' : 'Add Link'"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              data-qa="dt-editor-add-link-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor.isActive('link')"
+              size="sm"
+              @click="openLinkInputModal"
+            >
+              <template #icon>
+                <dt-icon
+                  name="link-2"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </dt-stack>
+
+      <dt-stack
+        direction="row"
+        gap="100"
+        v-if="showCodeBlockButton"
+        class="d-px4 d-py4"
+      >
+        <dt-tooltip
+          message="Code"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              data-qa="dt-editor-code-block-btn"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor.isActive('link')"
+              size="sm"
+              @click="openLinkInputModal"
+            >
+              <template #icon>
+                <dt-icon
+                  name="code"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </dt-stack>
     </dt-stack>
 
     <!-- Add/Remove link modal -->
@@ -240,6 +460,7 @@ import { DtButton } from '@/components/button';
 import { DtModal } from '@/components/modal';
 import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
+import { DtTooltip } from '@/components/tooltip';
 
 export default {
   name: 'DtRecipeEditor',
@@ -251,9 +472,8 @@ export default {
     DtModal,
     DtStack,
     DtInput,
+    DtTooltip,
   },
-
-  mixins: [],
 
   inheritAttrs: false,
 
@@ -282,14 +502,6 @@ export default {
       type: String,
       required: true,
       default: '',
-    },
-
-    /**
-     * Indicates if the borders should be rounded.
-     */
-    roundedEdges: {
-      type: Boolean,
-      default: true,
     },
 
     /**
@@ -414,6 +626,62 @@ export default {
     },
 
     /**
+     * Show button to render ordered list items
+     */
+    showOrderedListButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to align text to the left
+     */
+    showAlignLeftButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to align text to the center
+     */
+    showAlignCenterButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to align text to the right
+     */
+    showAlignRightButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to justify text
+     */
+    showAlignJustifyButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to add quote format to text
+     */
+    showQuoteButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to add code block
+     */
+    showCodeBlockButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Show add link default config.
      */
     showAddLink: {
@@ -470,6 +738,18 @@ export default {
 
     htmlOutputFormat () {
       return RICH_TEXT_EDITOR_OUTPUT_FORMATS[2];
+    },
+
+    showingTextFormatButtons () {
+      return this.showBoldButton || this.showItalicsButton || this.showStrikeButton || this.showUnderlineButton;
+    },
+
+    showingAlignmentButtons () {
+      return this.showAlignLeftButton || this.showAlignCenterButton || this.showAlignRightButton || this.showAlignJustifyButton;
+    },
+
+    showingListButtons () {
+      return this.showListItemsButton || this.showOrderedListButton;
     },
   },
 
