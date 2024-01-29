@@ -269,7 +269,7 @@
         </dt-tooltip>
       </dt-stack>
 
-      <!--dt-stack
+      <dt-stack
         direction="row"
         gap="100"
         v-if="showQuoteButton"
@@ -298,7 +298,7 @@
             </dt-button>
           </template>
         </dt-tooltip>
-      </dt-stack-->
+      </dt-stack>
 
       <dt-stack
         direction="row"
@@ -431,7 +431,7 @@
         data-qa="dt-rich-text-editor"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
-        :input-class="inputClass"
+        :input-class="`${this.inputClass} d-ol-none d-my6`"
         :output-format="htmlOutputFormat"
         :auto-focus="autoFocus"
         :placeholder="placeholder"
@@ -870,9 +870,9 @@ export default {
       this.$refs.richTextEditor?.editor.chain().focus().toggleCodeBlock().run();
     },
 
-    // onBlockquoteToggle () {
-    //  this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
-    // },
+    onBlockquoteToggle () {
+      this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
+    },
 
     onFocus (event) {
       this.hasFocus = true;

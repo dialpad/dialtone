@@ -7,7 +7,7 @@
 
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-2';
-// import Blockquote from '@tiptap/extension-blockquote';
+import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
 import HardBreak from '@tiptap/extension-hard-break';
@@ -195,7 +195,7 @@ export default {
     extensions () {
       // These are the default extensions needed just for plain text.
       const extensions = [
-        // Blockquote,
+        Blockquote,
         Bold,
         BulletList,
         CodeBlock,
@@ -415,5 +415,10 @@ export default {
 
   .ProseMirror ol > li {
     list-style-type: decimal;
+  }
+
+  .ProseMirror blockquote {
+    padding-left: 1rem;
+    border-left: 3px solid var(--dt-color-foreground-muted-inverted);
   }
 </style>
