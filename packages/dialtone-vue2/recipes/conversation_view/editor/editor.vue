@@ -15,100 +15,26 @@
       <dt-stack
         direction="row"
         gap="100"
-        :class="{ 'd-px4 d-py4': this.showingTextFormatButtons }"
+        :class="{ 'd-p4': showingTextFormatButtons }"
       >
         <dt-tooltip
-          message="Bold"
+          v-for="button in textFormatButtons"
+          :key="button.selector"
+          :message="button.tooltipMessage"
           placement="top"
         >
           <template #anchor>
             <dt-button
-              v-if="showBoldButton"
-              data-qa="dt-editor-bold-btn"
+              :data-qa="button.dataQA"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive('bold')"
+              :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               size="sm"
-              @click="onBoldTextToggle"
+              @click="button.onClick()"
             >
               <template #icon>
                 <dt-icon
-                  name="bold"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-
-        <dt-tooltip
-          message="Italics"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              v-if="showItalicsButton"
-              data-qa="dt-editor-italics-btn"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive('italic')"
-              size="sm"
-              @click="onItalicTextToggle"
-            >
-              <template #icon>
-                <dt-icon
-                  name="italic"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-
-        <dt-tooltip
-          message="Underline"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              v-if="showUnderlineButton"
-              data-qa="dt-editor-underline-btn"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive('underline')"
-              size="sm"
-              @click="onUnderlineTextToggle"
-            >
-              <template #icon>
-                <dt-icon
-                  name="underline"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-
-        <dt-tooltip
-          message="Strike"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              v-if="showStrikeButton"
-              data-qa="dt-editor-strike-btn"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive('strike')"
-              size="sm"
-              @click="onStrikethroughTextToggle"
-            >
-              <template #icon>
-                <dt-icon
-                  name="strikethrough"
+                  :name="button.iconName"
                   size="200"
                   class="d-fw-bold"
                 />
@@ -121,88 +47,25 @@
       <dt-stack
         direction="row"
         gap="100"
-        :class="{ 'd-px4 d-py4': this.showingAlignmentButtons }"
+        :class="{ 'd-p4': showingAlignmentButtons }"
       >
-        <dt-tooltip message="Align Left">
+        <dt-tooltip
+          v-for="button in alignmentButtons"
+          :key="button.selector"
+          :message="button.tooltipMessage"
+        >
           <template #anchor>
             <dt-button
-              v-if="showAlignLeftButton"
-              data-qa="dt-editor-align-left-btn"
+              :data-qa="button.dataQA"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: 'left' })"
+              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: button.selector })"
               size="sm"
-              @click="onTextAlign('left')"
+              @click="button.onClick()"
             >
               <template #icon>
                 <dt-icon
-                  name="align-left"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-
-        <dt-tooltip message="Align Center">
-          <template #anchor>
-            <dt-button
-              v-if="showAlignCenterButton"
-              data-qa="dt-editor-align-center-btn"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: 'center' })"
-              size="sm"
-              @click="onTextAlign('center')"
-            >
-              <template #icon>
-                <dt-icon
-                  name="align-center"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-
-        <dt-tooltip message="Align Right">
-          <template #anchor>
-            <dt-button
-              v-if="showAlignRightButton"
-              data-qa="dt-editor-align-right-btn"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: 'right' })"
-              size="sm"
-              @click="onTextAlign('right')"
-            >
-              <template #icon>
-                <dt-icon
-                  name="align-right"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-
-        <dt-tooltip message="Justify">
-          <template #anchor>
-            <dt-button
-              v-if="showAlignJustifyButton"
-              data-qa="dt-editor-align-justify-btn"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: 'justify' })"
-              size="sm"
-              @click="onTextAlign('justify')"
-            >
-              <template #icon>
-                <dt-icon
-                  name="align-justify"
+                  :name="button.iconName"
                   size="200"
                   class="d-fw-bold"
                 />
@@ -213,53 +76,29 @@
       </dt-stack>
 
       <dt-stack
-        direction="row"
-        gap="100"
         v-if="showingListButtons"
-        :class="{ 'd-px4 d-py4': showingListButtons }"
+        direction="row"
+        gap="100"
+        :class="{ 'd-p4': showingListButtons }"
       >
         <dt-tooltip
-          message="Bullet List"
+          v-for="button in listButtons"
+          :key="button.selector"
+          :message="button.tooltipMessage"
           placement="top"
         >
           <template #anchor>
             <dt-button
-              v-if="showListItemsButton"
-              data-qa="dt-editor-list-items-btn"
+              :data-qa="button.dataQA"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor.isActive('bulletList')"
+              :active="$refs.richTextEditor?.editor.isActive(button.selector)"
               size="sm"
-              @click="onBulletListToggle"
+              @click="button.onClick()"
             >
               <template #icon>
                 <dt-icon
-                  name="list-bullet"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-
-        <dt-tooltip
-          message="Ordered List"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              v-if="showOrderedListButton"
-              data-qa="dt-editor-ordered-list-items-btn"
-              importance="clear"
-              kind="muted"
-              size="sm"
-              :active="$refs.richTextEditor?.editor.isActive('orderedList')"
-              @click="onOrderedListToggle"
-            >
-              <template #icon>
-                <dt-icon
-                  name="list-ordered"
+                  :name="button.iconName"
                   size="200"
                   class="d-fw-bold"
                 />
@@ -270,89 +109,28 @@
       </dt-stack>
 
       <dt-stack
+        v-for="button in individualButtons"
+        :key="button.selector"
         direction="row"
         gap="100"
-        v-if="showQuoteButton"
-        class="d-px4 d-py4"
+        class="d-p4"
       >
         <dt-tooltip
-          message="Quote"
+          :message="button.tooltipMessage"
           placement="top"
         >
           <template #anchor>
             <dt-button
-              data-qa="dt-editor-blockquote-btn"
+              :data-qa="button.dataQA"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor.isActive('blockquote')"
+              :active="$refs.richTextEditor?.editor.isActive(button.selector)"
               size="sm"
-              @click="onBlockquoteToggle"
+              @click="button.onClick()"
             >
               <template #icon>
                 <dt-icon
-                  name="quote"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-      </dt-stack>
-
-      <dt-stack
-        direction="row"
-        gap="100"
-        v-if="showAddLink.showAddLinkButton"
-        class="d-px4 d-py4"
-      >
-        <dt-tooltip
-          :message="$refs.richTextEditor?.editor.isActive('link') ? 'Edit Link' : 'Add Link'"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              data-qa="dt-editor-add-link-btn"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor.isActive('link')"
-              size="sm"
-              @click="openLinkInputModal"
-            >
-              <template #icon>
-                <dt-icon
-                  name="link-2"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-      </dt-stack>
-
-      <dt-stack
-        direction="row"
-        gap="100"
-        v-if="showCodeBlockButton"
-        class="d-px4 d-py4"
-      >
-        <dt-tooltip
-          message="Code"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              data-qa="dt-editor-code-block-btn"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor.isActive('codeBlock')"
-              size="sm"
-              @click="onCodeBlockToggle"
-            >
-              <template #icon>
-                <dt-icon
-                  name="code"
+                  :name="button.iconName"
                   size="200"
                   class="d-fw-bold"
                 />
@@ -431,7 +209,7 @@
         data-qa="dt-rich-text-editor"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
-        :input-class="`${this.inputClass} d-ol-none d-my6`"
+        :input-class="`${inputClass} d-ol-none d-my6`"
         :output-format="htmlOutputFormat"
         :auto-focus="autoFocus"
         :placeholder="placeholder"
@@ -747,11 +525,45 @@ export default {
     },
 
     showingAlignmentButtons () {
-      return this.showAlignLeftButton || this.showAlignCenterButton || this.showAlignRightButton || this.showAlignJustifyButton;
+      return this.showAlignLeftButton || this.showAlignCenterButton ||
+          this.showAlignRightButton || this.showAlignJustifyButton;
     },
 
     showingListButtons () {
       return this.showListItemsButton || this.showOrderedListButton;
+    },
+
+    textFormatButtons () {
+      return [
+        { showBtn: this.showBoldButton, selector: 'bold', iconName: 'bold', dataQA: 'dt-editor-bold-btn', tooltipMessage: 'Bold', onClick: this.onBoldTextToggle },
+        { showBtn: this.showItalicsButton, selector: 'italic', iconName: 'italic', dataQA: 'dt-editor-italics-btn', tooltipMessage: 'Italics', onClick: this.onItalicTextToggle },
+        { showBtn: this.showUnderlineButton, selector: 'underline', iconName: 'underline', dataQA: 'dt-editor-underline-btn', tooltipMessage: 'Underline', onClick: this.onUnderlineTextToggle },
+        { showBtn: this.showStrikeButton, selector: 'strike', iconName: 'strikethrough', dataQA: 'dt-editor-strike-btn', tooltipMessage: 'Strike', onClick: this.onStrikethroughTextToggle },
+      ].filter(button => button.showBtn);
+    },
+
+    alignmentButtons () {
+      return [
+        { showBtn: this.showAlignLeftButton, selector: 'left', iconName: 'align-left', dataQA: 'dt-editor-align-left-btn', tooltipMessage: 'Align Left', onClick: () => this.onTextAlign('left') },
+        { showBtn: this.showAlignCenterButton, selector: 'center', iconName: 'align-center', dataQA: 'dt-editor-align-center-btn', tooltipMessage: 'Align Center', onClick: () => this.onTextAlign('center') },
+        { showBtn: this.showAlignRightButton, selector: 'right', iconName: 'align-right', dataQA: 'dt-editor-align-right-btn', tooltipMessage: 'Align Right', onClick: () => this.onTextAlign('right') },
+        { showBtn: this.showAlignJustifyButton, selector: 'justify', iconName: 'align-justify', dataQA: 'dt-editor-align-justify-btn', tooltipMessage: 'Align Justify', onClick: () => this.onTextAlign('justify') },
+      ].filter(button => button.showBtn);
+    },
+
+    listButtons () {
+      return [
+        { showBtn: this.showListItemsButton, selector: 'bulletList', iconName: 'list-bullet', dataQA: 'dt-editor-list-items-btn', tooltipMessage: 'Bullet List', onClick: this.onBulletListToggle },
+        { showBtn: this.showOrderedListButton, selector: 'orderedList', iconName: 'list-ordered', dataQA: 'dt-editor-ordered-list-items-btn', tooltipMessage: 'Ordered List', onClick: this.onOrderedListToggle },
+      ].filter(button => button.showBtn);
+    },
+
+    individualButtons () {
+      return [
+        { showBtn: this.showQuoteButton, selector: 'blockquote', iconName: 'quote', dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
+        { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', iconName: 'link-2', dataQA: 'dt-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInputModal },
+        { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
+      ].filter(button => button.showBtn);
     },
   },
 
