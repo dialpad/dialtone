@@ -53,6 +53,7 @@ import {
   TOOLTIP_DIRECTIONS,
   TOOLTIP_STICKY_VALUES,
   TOOLTIP_DELAY_MS,
+  TOOLTIP_APPEND_TO_VALUES,
 } from './tooltip_constants.js';
 import { getUniqueString } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
@@ -81,6 +82,20 @@ export default {
     id: {
       type: String,
       default () { return getUniqueString(); },
+    },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * 'body' will append to the nearest body (supports shadow DOM).
+     * @values 'body', 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: 'body',
+      validator: appendTo => {
+        return TOOLTIP_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
+      },
     },
 
     /**
@@ -299,6 +314,7 @@ export default {
         offset: this.offset,
         interactive: false,
         trigger: 'manual',
+        appendTo: this.appendTo === 'body' ? this.anchorEl?.getRootNode()?.querySelector('body') : this.appendTo,
         placement: this.placement,
         sticky: this.sticky,
         popperOptions: getPopperOptions({
