@@ -133,11 +133,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 export const Default = {
-  render: (argsData) => createRenderConfig(DtRecipeComboboxMultiSelect, DtRecipeComboboxMultiSelectDefaultTemplate, argsData),
+  render: (argsData) =>
+    createRenderConfig(DtRecipeComboboxMultiSelect, DtRecipeComboboxMultiSelectDefaultTemplate, argsData),
 };
 
 export const WithMaxSelectValidation = {
-  render: (argsData) => createRenderConfig(DtRecipeComboboxMultiSelect, DtRecipeComboboxMultiSelectDefaultTemplate, argsData),
+  render: (argsData) =>
+    createRenderConfig(DtRecipeComboboxMultiSelect, DtRecipeComboboxMultiSelectDefaultTemplate, argsData),
 
   args: {
     description: 'Select up to 2 options.',

@@ -2,13 +2,15 @@
 
 ## Rule Details
 
-This informs developers of deprecated product side directives that should be replaced by Dialtone Vue directives. It will suggest a replacement directive.
+This informs developers of deprecated product side directives that should be replaced by Dialtone Vue directives.
+It will suggest a replacement directive.
 
-Currently the directives with the below attribute names are considered deprecated:
+Currently, the directives with the below attribute names are considered deprecated:
 
 - v-tooltip
 
-This rule specifically targets components in ubervoice. If you are using Dialtone Vue outside of ubervoice you may want to disable this rule.
+This rule specifically targets components in UberVoice.
+If you are using Dialtone Vue outside UberVoice you may want to disable this rule.
 
 Examples of **incorrect** code for this rule:
 

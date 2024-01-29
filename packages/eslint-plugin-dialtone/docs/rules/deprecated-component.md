@@ -2,9 +2,10 @@
 
 ## Rule Details
 
-This informs developers of deprecated product side components that should be replaced by Dialtone Vue components. It will suggest a replacement component.
+This informs developers of deprecated product side components that should be replaced by Dialtone Vue components.
+It will suggest a replacement component.
 
-Currently the components with the below filenames are considered deprecated:
+Currently, the components with the below filenames are considered deprecated:
 
 - select_menu
 - dropdown_menu
@@ -12,7 +13,8 @@ Currently the components with the below filenames are considered deprecated:
 - base_date_picker
 - checkbox
 
-This rule specifically targets components in ubervoice. If you are using Dialtone Vue outside of ubervoice you should not enable this rule.
+This rule specifically targets components in UberVoice.
+If you are using Dialtone Vue outside UberVoice you should not enable this rule.
 
 Examples of **incorrect** code for this rule:
 

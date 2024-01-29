@@ -213,7 +213,8 @@ export default {
 };
 
 export const Default = {
-  render: (argsData) => createRenderConfig(DtRecipeCallbarButtonWithPopover, DtRecipeCallbarButtonWithPopoverDefaultTemplate, argsData),
+  render: (argsData) =>
+    createRenderConfig(DtRecipeCallbarButtonWithPopover, DtRecipeCallbarButtonWithPopoverDefaultTemplate, argsData),
 
   args: {
     default: 'Button',
@@ -231,7 +232,8 @@ export const Default = {
 };
 
 export const Variants = {
-  render: (argsData) => createRenderConfig(DtRecipeCallbarButtonWithPopover, DtRecipeCallbarButtonWithPopoverVariantsTemplate, argsData),
+  render: (argsData) =>
+    createRenderConfig(DtRecipeCallbarButtonWithPopover, DtRecipeCallbarButtonWithPopoverVariantsTemplate, argsData),
   args: {},
   parameters: {
     options: { showPanel: false },
