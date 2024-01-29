@@ -19,7 +19,6 @@ Understanding the fundamentals is key. Learn about the anatomy of type, the inte
 
 To define the Typeface selection, we make accessibility a priority, so we approach it by using the default system fonts by each operating system to have the best conversion to all possible variables of our product (Japanese, Russian, etc)
 
-
 <figure class="d-m1 d-p16 d-mr0 d-p0 d-bar4 d-ta-left">
 <svg-loader name="roboto" />
 <svg-loader name="appleSF" />
@@ -43,22 +42,13 @@ Our styles and variations are:
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-100 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-fs-100</div>
-    <div><p class="d-fs-100">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-fs-200</div>
-    <div><p class="d-fs-200">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-fs-300</div>
-    <div><p class="d-fs-300">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-fs-400</div>
-    <div><p class="d-fs-400">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-fs-500</div>
-    <div><p class="d-fs-500">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-headline36</div>
-    <div><p class="d-headline36">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-headline48</div>
-    <div><p class="d-headline48">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-headline54</div>
-    <div><p class="d-headline54">Ai that works for you.</p></div>
+    <template v-for="name in fontSizeValues">
+      <div>
+        <span class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">{{ name }}</span>
+        <copy-button :text="name" aria-label="copy class" class="d-d-inline" />
+      </div>
+      <div><p :class="name">{{ exampleAi }}</p></div>
+    </template>
   </div>
 </code-well-header>
 
@@ -66,21 +56,15 @@ Our styles and variations are:
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-100 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-lh-100</div>
-    <div><p class="d-fs-300 d-lh-100 d-bgc-purple-200 d-bgo25">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-lh-200</div>
-    <div><p class="d-fs-300 d-lh-200 d-bgc-purple-200 d-bgo25">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-lh-300</div>
-    <div><p class="d-fs-300 d-lh-300 d-bgc-purple-200 d-bgo25">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-lh-400</div>
-    <div><p class="d-fs-300 d-lh-400 d-bgc-purple-200 d-bgo25">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-lh-500</div>
-    <div><p class="d-fs-300 d-lh-500 d-bgc-purple-200 d-bgo25">Ai that works for you.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">d-lh-600</div>
-    <div><p class="d-fs-300 d-lh-600 d-bgc-purple-200 d-bgo25">Ai that works for you.</p></div>
+    <template v-for="name in lineHeightValues">
+      <div>
+        <span class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">{{ name }}</span>
+        <copy-button :text="name" aria-label="copy class" class="d-d-inline" />
+      </div>
+      <div><p :class="['d-fs-300 d-bgc-purple-200 d-bgo25', name]">{{ exampleAi }}</p></div>
+    </template>
   </div>
 </code-well-header>
-<br>
 
 ## Usage
 
@@ -139,91 +123,76 @@ Our styles and variations are:
   </dt-stack>
 </dt-stack>
 ```
+
 ## Styles
+
 ### Headlines
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <div class="d-code-small d-fc-purple-400">.d-headline-eyebrow</div>
-    <div><p class="d-headline-eyebrow">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-small</div>
-    <div><p class="d-headline-small">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-soft-small</div>
-    <div><p class="d-headline-soft-small">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-medium</div>
-    <div><p class="d-headline-medium">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-compact-small</div>
-    <div><p class="d-headline-compact-small">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-compact-soft-small</div>
-    <div><p class="d-headline-compact-soft-small">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-compact-medium</div>
-    <div><p class="d-headline-compact-medium">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-large</div>
-    <div><p class="d-headline-large">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-extra-large</div>
-    <div><p class="d-headline-extra-large">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-headline-extra-extra-large</div>
-    <div><p class="d-headline-extra-extra-large">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 25rem 1fr">
+    <template v-for="{ var: varName } in typographyStylesHeadlines">
+      <div>
+        <span class="d-code-small d-fc-purple-400">{{ varName }}</span>
+        <copy-button :text="varName" aria-label="copy class" class="d-d-inline" />
+      </div>
+      <div><p :class="varName">{{ example }}</p></div>
+    </template>
   </div>
 </code-well-header>
 
 ### Body
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <div class="d-code-small d-fc-purple-400">.d-body-base</div>
-    <div><p class="d-body-base">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-body-compact</div>
-    <div><p class="d-body-compact">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-body-small</div>
-    <div><p class="d-body-small">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-body-compact-small</div>
-    <div><p class="d-body-compact-small">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 25rem 1fr">
+    <template v-for="{ var: varName } in typographyStylesBody">
+      <div>
+        <span class="d-code-small d-fc-purple-400">{{ varName }}</span>
+        <copy-button :text="varName" aria-label="copy class" class="d-d-inline" />
+      </div>
+      <div><p :class="varName">{{ example }}</p></div>
+    </template>
   </div>
 </code-well-header>
 
 ### Label
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <div class="d-code-small d-fc-purple-400">.d-label-base</div>
-    <div><p class="d-label-base">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-label-small</div>
-    <div><p class="d-label-small">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-label-compact</div>
-    <div><p class="d-label-compact">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-label-plain</div>
-    <div><p class="d-label-plain">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-label-compact-plain</div>
-    <div><p class="d-label-compact-plain">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-label-compact-small</div>
-    <div><p class="d-label-compact-small">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-label-plain-small</div>
-    <div><p class="d-label-plain-small">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-label-compact-plain-small</div>
-    <div><p class="d-label-compact-plain-small">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 25rem 1fr">
+    <template v-for="{ var: varName } in typographyStylesLabel">
+      <div>
+        <span class="d-code-small d-fc-purple-400">{{ varName }}</span>
+        <copy-button :text="varName" aria-label="copy class" class="d-d-inline" />
+      </div>
+      <div><p :class="varName">{{ example }}</p></div>
+    </template>
   </div>
 </code-well-header>
 
 ### Helper
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <div class="d-code-small d-fc-purple-400">.d-helper-base</div>
-    <div><p class="d-helper-base">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-helper-small</div>
-    <div><p class="d-helper-small">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 25rem 1fr">
+    <template v-for="{ var: varName } in typographyStylesHelper">
+      <div>
+        <span class="d-code-small d-fc-purple-400">{{ varName }}</span>
+        <copy-button :text="varName" aria-label="copy class" class="d-d-inline" />
+      </div>
+      <div><p :class="varName">{{ example }}</p></div>
+    </template>
   </div>
 </code-well-header>
 
 ### Code
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <div class="d-code-small d-fc-purple-400">.d-code-base</div>
-    <div><p class="d-code-base">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code-small d-fc-purple-400">.d-code-small</div>
-    <div><p class="d-code-small">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 25rem 1fr">
+    <template v-for="{ var: varName } in typographyStylesCode">
+      <div>
+        <span class="d-code-small d-fc-purple-400">{{ varName }}</span>
+        <copy-button :text="varName" aria-label="copy class" class="d-d-inline" />
+      </div>
+      <div><p :class="varName">{{ example }}</p></div>
+    </template>
   </div>
 </code-well-header>
 
@@ -236,5 +205,31 @@ In a world of diverse devices, responsive design is paramount. Learn how our typ
 We have our own sections for the Tokens and theming, you can check our typography tokens in the [Design tokens section](tokens.md)
 
 <script setup>
-import SvgLoader from '../../../../baseComponents/SvgLoader.vue';
+import { typographyStyles, fontSize, lineHeight } from '@data/type.json';
+import CopyButton from '@baseComponents/CopyButton.vue';
+import SvgLoader from '@baseComponents/SvgLoader.vue';
+
+const typographyStylesHeadlines = typographyStyles.filter(type => type.var.startsWith("d-headline"));
+const typographyStylesBody = typographyStyles.filter(type => type.var.startsWith("d-body"));
+const typographyStylesLabel = typographyStyles.filter(type => type.var.startsWith("d-label"));
+const typographyStylesHelper = typographyStyles.filter(type => type.var.startsWith("d-helper"));
+const typographyStylesCode = typographyStyles.filter(type => type.var.startsWith("d-code"));
+
+const example = "The quick brown fox jumps over the lazy dog."
+
+const fontSizeValues = fontSize.product.reduce((accum, curr) => {
+  accum.push(`d-fs-${curr.stop}`);
+  return accum;
+}, []);
+fontSizeValues.push('d-headline36', 'd-headline48', 'd-headline54');
+
+const lineHeightValues = lineHeight.reduce((accum, curr) => {
+  if (curr.class.startsWith('-') && !curr.class.endsWith('unset')) {
+    accum.push(`d-lh${curr.class}`);
+  }
+  return accum;
+}, []);
+
+const exampleAi = "Ai that works for you."
+
 </script>
