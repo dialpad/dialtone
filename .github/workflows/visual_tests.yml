@@ -88,13 +88,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone-vue 2 library and documentation site
-        run: nx run --verbose dialtone-vue2:build-docs
+        run: pnpm nx run --verbose dialtone-vue2:build-docs
 
       - name: Run Dialtone-vue 2 Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: nx run --verbose dialtone-vue2:test:visual
+        run: pnpm nx run --verbose dialtone-vue2:test:visual
 
   dialtone-vue-3:
     needs: filter-actions
@@ -132,10 +132,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone-vue 3 library and documentation site
-        run: nx run --verbose dialtone-vue3:build-docs
+        run: pnpm nx run --verbose dialtone-vue3:build-docs
 
       - name: Run Dialtone-vue 3 Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: nx run --verbose dialtone-vue3:test:visual
+        run: pnpm nx run --verbose dialtone-vue3:test:visual

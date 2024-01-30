@@ -50,13 +50,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone library and documentation site
-        run: nx run --verbose dialtone-vue2:build-docs
+        run: pnpm nx run --verbose dialtone-vue2:build-docs
 
       - name: Start storybook and run a11y tests
         run: |
           pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "pnpm dlx http-server packages/dialtone-vue2/storybook-static --port 9010 --silent" \
-            "pnpm dlx wait-on tcp:9010 && nx run --verbose dialtone-vue2:test:a11y"
+            "pnpm dlx wait-on tcp:9010 && pnpm nx run --verbose dialtone-vue2:test:a11y"
 
   dialtone-vue-3:
     runs-on: ubuntu-latest
@@ -95,10 +95,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Dialtone library and documentation site
-        run: nx run --verbose dialtone-vue3:build-docs
+        run: pnpm nx run --verbose dialtone-vue3:build-docs
 
       - name: Start storybook and run a11y tests
         run: |
           pnpm dlx concurrently -k -s first -n "SB,TEST" -c "green,yellow" \
             "pnpm dlx http-server packages/dialtone-vue3/storybook-static --port 9011 --silent" \
-            "pnpm dlx wait-on tcp:9011 && nx run --verbose dialtone-vue3:test:a11y"
+            "pnpm dlx wait-on tcp:9011 && pnpm nx run --verbose dialtone-vue3:test:a11y"
