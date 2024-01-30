@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import { createSvgPlugin } from 'vite-plugin-vue2-svg';
-import svgLoader from 'vite-svg-loader';
 import vue from '@vitejs/plugin-vue2';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
@@ -47,7 +46,7 @@ export default defineConfig({
         },
       ],
     },
-  }), svgLoader({ defaultImport: 'component' })],
+  })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
