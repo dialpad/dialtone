@@ -11,6 +11,6 @@ import DtIcon from './icon.vue';
 
 export default {
   name: 'IconDefault',
-  components: {DtIcon},
+  components: { DtIcon },
 };
 </script>
