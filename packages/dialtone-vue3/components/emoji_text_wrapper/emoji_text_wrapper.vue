@@ -56,9 +56,9 @@ export default {
       const split = textContent.split(regexp);
       return split.map((item) => {
         if (replaceList.includes(item)) {
-          return h(DtEmoji, { ...this.$attrs, class: 'd-mx4 d-d-inline-block', size: this.size, code: item });
+          return h(DtEmoji, { ...this.$attrs, size: this.size, code: item });
         }
-        return item;
+        return h('span', item);
       });
     },
 
@@ -102,7 +102,7 @@ export default {
       this.elementType,
       {
         'data-qa': 'emoji-text-wrapper',
-        class: this.$attrs.class,
+        class: 'd-emoji-text-wrapper',
       },
       this.loadingEmojiJson
         ? defaultSlotContent
