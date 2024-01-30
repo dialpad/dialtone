@@ -75,13 +75,13 @@ Any new components or updates to existing components require the following:
   - Minimum contrast ratio.
 - Changes must be made for Vue 2 as well as Vue 3, `dialtone-vue2` and `dialtone-vue3` package folders respectively
 - Unit tests are passing locally.
-  - `pnpm nx test dialtone-vue2` or `pnpm nx test dialtone-vue3`
+  - `nx test dialtone-vue2` or `nx test dialtone-vue3`
 - Linters are passing locally.
-  - `pnpm nx lint dialtone-vue2` or `pnpm nx lint dialtone-vue3`
+  - `nx lint dialtone-vue2` or `nx lint dialtone-vue3`
 - Library builds locally.
-  - `pnpm nx lint dialtone-vue2` or `pnpm nx lint dialtone-vue3`
+  - `nx lint dialtone-vue2` or `nx lint dialtone-vue3`
 - Documentation builds locally.
-  - `pnpm nx storybook:build dialtone-vue2` or `pnpm nx storybook:build dialtone-vue3`
+  - `nx storybook:build dialtone-vue2` or `nx storybook:build dialtone-vue3`
 
 ### How to Submit
 

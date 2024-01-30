@@ -78,7 +78,7 @@ If you need your change to be released promptly, please ask in the #dialtone Dia
 }
 ```
 
-- Run `pnpm run build`
+- Run `nx build dialtone-icons`
 - Add, commit and push your changes as mentioned from step 4 in [Making a pull request](#making-a-pull-request).
 - Open a pull request.
 - Once approved it can be merged into main and will go out in the next Dialtone release.

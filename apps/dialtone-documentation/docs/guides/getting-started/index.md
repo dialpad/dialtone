@@ -177,7 +177,7 @@ cd ./path/to/dialtone
 Dialtone uses [Gulp](https://gulpjs.com/) to automate its various workflows. Run the following command to install Gulp and all other project dependencies:
 
 ```bash
-    npm install
+npm install
 ```
 
 ### Building Dialtone
