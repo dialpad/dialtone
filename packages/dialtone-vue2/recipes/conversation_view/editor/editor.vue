@@ -13,13 +13,15 @@
       class="d-py4 d-bgc-black-100 d-divide-x d-divide-black-200"
     >
       <dt-stack
+        v-for="buttonGroup in buttonGroups"
+        :key="buttonGroup.key"
         direction="row"
         gap="100"
-        :class="{ 'd-p4': showingTextFormatButtons }"
+        class="d-p4"
       >
         <dt-tooltip
-          v-for="button in textFormatButtons"
-          :key="button.selector"
+          v-for="button in buttonGroup.buttonGroup"
+          :key="`${buttonGroup.key}-${JSON.stringify(button.selector)}`"
           :message="button.tooltipMessage"
           placement="top"
         >
@@ -29,102 +31,6 @@
               importance="clear"
               kind="muted"
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-              size="sm"
-              @click="button.onClick()"
-            >
-              <template #icon>
-                <dt-icon
-                  :name="button.iconName"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-      </dt-stack>
-
-      <dt-stack
-        direction="row"
-        gap="100"
-        :class="{ 'd-p4': showingAlignmentButtons }"
-      >
-        <dt-tooltip
-          v-for="button in alignmentButtons"
-          :key="button.selector"
-          :message="button.tooltipMessage"
-        >
-          <template #anchor>
-            <dt-button
-              :data-qa="button.dataQA"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive({ textAlign: button.selector })"
-              size="sm"
-              @click="button.onClick()"
-            >
-              <template #icon>
-                <dt-icon
-                  :name="button.iconName"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-      </dt-stack>
-
-      <dt-stack
-        v-if="showingListButtons"
-        direction="row"
-        gap="100"
-        :class="{ 'd-p4': showingListButtons }"
-      >
-        <dt-tooltip
-          v-for="button in listButtons"
-          :key="button.selector"
-          :message="button.tooltipMessage"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              :data-qa="button.dataQA"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor.isActive(button.selector)"
-              size="sm"
-              @click="button.onClick()"
-            >
-              <template #icon>
-                <dt-icon
-                  :name="button.iconName"
-                  size="200"
-                  class="d-fw-bold"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
-      </dt-stack>
-
-      <dt-stack
-        v-for="button in individualButtons"
-        :key="button.selector"
-        direction="row"
-        gap="100"
-        class="d-p4"
-      >
-        <dt-tooltip
-          :message="button.tooltipMessage"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              :data-qa="button.dataQA"
-              importance="clear"
-              kind="muted"
-              :active="$refs.richTextEditor?.editor.isActive(button.selector)"
               size="sm"
               @click="button.onClick()"
             >
@@ -533,6 +439,19 @@ export default {
       return this.showListItemsButton || this.showOrderedListButton;
     },
 
+    buttonGroups () {
+      const individualButtonStacks = this.individualButtons.map(buttonData => ({
+        key: buttonData.selector,
+        buttonGroup: [buttonData],
+      }));
+      return [
+        { key: 'format', buttonGroup: this.textFormatButtons },
+        { key: 'alignment', buttonGroup: this.alignmentButtons },
+        { key: 'list', buttonGroup: this.listButtons },
+        ...individualButtonStacks,
+      ].filter(buttonGroupData => buttonGroupData.buttonGroup.length > 0);
+    },
+
     textFormatButtons () {
       return [
         { showBtn: this.showBoldButton, selector: 'bold', iconName: 'bold', dataQA: 'dt-editor-bold-btn', tooltipMessage: 'Bold', onClick: this.onBoldTextToggle },
@@ -544,10 +463,10 @@ export default {
 
     alignmentButtons () {
       return [
-        { showBtn: this.showAlignLeftButton, selector: 'left', iconName: 'align-left', dataQA: 'dt-editor-align-left-btn', tooltipMessage: 'Align Left', onClick: () => this.onTextAlign('left') },
-        { showBtn: this.showAlignCenterButton, selector: 'center', iconName: 'align-center', dataQA: 'dt-editor-align-center-btn', tooltipMessage: 'Align Center', onClick: () => this.onTextAlign('center') },
-        { showBtn: this.showAlignRightButton, selector: 'right', iconName: 'align-right', dataQA: 'dt-editor-align-right-btn', tooltipMessage: 'Align Right', onClick: () => this.onTextAlign('right') },
-        { showBtn: this.showAlignJustifyButton, selector: 'justify', iconName: 'align-justify', dataQA: 'dt-editor-align-justify-btn', tooltipMessage: 'Align Justify', onClick: () => this.onTextAlign('justify') },
+        { showBtn: this.showAlignLeftButton, selector: { textAlign: 'left' }, iconName: 'align-left', dataQA: 'dt-editor-align-left-btn', tooltipMessage: 'Align Left', onClick: () => this.onTextAlign('left') },
+        { showBtn: this.showAlignCenterButton, selector: { textAlign: 'center' }, iconName: 'align-center', dataQA: 'dt-editor-align-center-btn', tooltipMessage: 'Align Center', onClick: () => this.onTextAlign('center') },
+        { showBtn: this.showAlignRightButton, selector: { textAlign: 'right' }, iconName: 'align-right', dataQA: 'dt-editor-align-right-btn', tooltipMessage: 'Align Right', onClick: () => this.onTextAlign('right') },
+        { showBtn: this.showAlignJustifyButton, selector: { textAlign: 'justify' }, iconName: 'align-justify', dataQA: 'dt-editor-align-justify-btn', tooltipMessage: 'Align Justify', onClick: () => this.onTextAlign('justify') },
       ].filter(button => button.showBtn);
     },
 
