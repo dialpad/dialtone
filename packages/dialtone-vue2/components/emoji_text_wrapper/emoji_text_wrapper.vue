@@ -56,11 +56,10 @@ export default {
       return split.map((item) => {
         if (replaceList.includes(item)) {
           return this.$createElement(DtEmoji, {
-            attrs: { class: 'd-d-inline-block' },
             props: { code: item, size: this.size, ...this.$attrs },
           });
         }
-        return item;
+        return this.$createElement('span', item);
       });
     },
 
@@ -103,6 +102,7 @@ export default {
     const defaultSlotContent = this.$slots.default || [];
     return h(
       this.elementType,
+      { class: 'd-emoji-text-wrapper' },
       this.loadingEmojiJson
         ? defaultSlotContent
         : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
