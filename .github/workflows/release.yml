@@ -69,16 +69,15 @@ jobs:
       - name: Set npm token
         run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
 
-      # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Publish production
         if: ${{ github.ref == 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --verbose --target=release --parallel=false
+        run: nx run-many --verbose --target=release --parallel=false
 
       - name: Publish pre-release
         if: ${{ github.ref != 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --verbose --target=release --parallel=false --publish-branch ${{ needs.get-branch-name.outputs.current_branch }}  --tag ${{ needs.get-branch-name.outputs.current_branch }}
+        run: nx run-many --verbose --target=release --parallel=false --publish-branch ${{ needs.get-branch-name.outputs.current_branch }}  --tag ${{ needs.get-branch-name.outputs.current_branch }}
 
       - name: Set registry to GitHub packages
         run: npm config set @dialpad:registry https://npm.pkg.github.com
@@ -86,21 +85,20 @@ jobs:
       - name: Set GitHub auth token
         run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
-      # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Publish production to GitHub packages
         if: ${{ github.ref == 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --verbose --target=release --parallel=false
+        run: nx run-many --verbose --target=release --parallel=false
 
       - name: Publish pre-release to GitHub packages
         if: ${{ github.ref != 'refs/heads/production' }}
         continue-on-error: true
-        run: pnpm nx run-many --verbose --target=release --parallel=false --publish-branch ${{ needs.get-branch-name.outputs.current_branch }} --tag ${{ needs.get-branch-name.outputs.current_branch }}
+        run: nx run-many --verbose --target=release --parallel=false --publish-branch ${{ needs.get-branch-name.outputs.current_branch }} --tag ${{ needs.get-branch-name.outputs.current_branch }}
 
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm nx run-many --verbose --target=release-github --parallel=false
+        run: nx run-many --verbose --target=release-github --parallel=false
 
   android:
     needs: check-dialpad-member
@@ -155,7 +153,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build android
-        run: pnpm nx run --verbose dialtone-tokens:publish:android-package
+        run: nx run --verbose dialtone-tokens:publish:android-package
 
       - name: Publish production - Gradle
         working-directory: ./packages/dialtone-tokens
@@ -201,7 +199,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build swift
-        run: pnpm nx run --verbose dialtone-tokens:publish:ios-package
+        run: nx run --verbose dialtone-tokens:publish:ios-package
 
       - name: Publish production - Swift
         uses: cpina/github-action-push-to-another-repository@v1.5.1

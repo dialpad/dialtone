@@ -91,15 +91,15 @@ jobs:
 
       - name: Build Dialtone library and documentation site
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
-        run: pnpm nx run --verbose dialtone-documentation:build-docs
+        run: nx run --verbose dialtone-documentation:build-docs
 
       - name: Build Dialtone-vue 2 library and documentation site
         if: ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' }}
-        run: pnpm nx run --verbose dialtone-vue2:build-docs
+        run: nx run --verbose dialtone-vue2:build-docs
 
       - name: Build Dialtone-vue 3 library and documentation site
         if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
-        run: pnpm nx run --verbose dialtone-vue3:build-docs
+        run: nx run --verbose dialtone-vue3:build-docs
 
       # --------- #
       # Setup GCP #

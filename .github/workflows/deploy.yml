@@ -113,7 +113,7 @@ jobs:
       # ---------- #
 
       - name: Build documentation sites
-        run: pnpm nx run-many --verbose --target=build-docs --projects=dialtone-documentation,dialtone-vue2,dialtone-vue3
+        run: nx run-many --verbose --target=build-docs --projects=dialtone-documentation,dialtone-vue2,dialtone-vue3
 
       # --------- #
       # Setup GCP #

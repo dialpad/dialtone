@@ -24,10 +24,10 @@ if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
 fi
 
 echo "Running build in parallel to improve performance"
-pnpm nx affected --verbose --target=build --parallel=6;
+nx affected --verbose --target=build --parallel=6;
 
 echo "Running release-local on affected projects"
-pnpm nx affected --verbose --target=release-local --parallel=false;
+nx affected --verbose --target=release-local --parallel=false;
 
 if [[ "$release_branch" == "production" && "$current_branch" == "staging" ]]; then
   echo "Checking out to $release_branch"
