@@ -1,12 +1,11 @@
 <template>
   <div
-    v-if="modifiedSvgContent"
     :id="id"
     ref="iconRef"
     data-qa="dt-icon"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
     :aria-label="ariaLabel"
-    :class="iconSize"
+    :class="iconClass"
     v-html="modifiedSvgContent"
   />
 </template>
@@ -70,8 +69,8 @@ export default {
   },
 
   computed: {
-    iconSize () {
-      return ICON_SIZE_MODIFIERS[this.size];
+    iconClass () {
+      return `d-icon ${ICON_SIZE_MODIFIERS[this.size]}`;
     },
   },
 
