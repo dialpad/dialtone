@@ -9,7 +9,7 @@ The @dialpad/dialtone repository is a monorepo composed of Dialtone NPM packages
 The following is a list of packages included in this monorepo. Note that libraries (packages folder) are separated from
 apps (apps folder):
 
-```sh
+```text
 dialtone/
 |--- .github                    # Github configuration and workflows
 |--- apps                       # Apps
@@ -24,6 +24,38 @@ dialtone/
 |--- scripts                    # Shared scripts
 ```
 
+## Tooling
+
+### PNPM
+
+PNPM (Performant NPM) is a package management solution designed to address the challenges posed by
+traditional package managers.
+
+We use PNPM to manage everything related to NPM, **adding, installing, removing and publishing packages**.
+
+### NX
+
+Nx is a build system with built-in tooling and advanced CI capabilities.
+It helps you maintain and scale monorepos, both locally and on CI.
+
+NX manages the scheduling and caching of our PNPM scripts.
+
+We still rely on the package installation and package linking mechanism that PNPM workspaces provide us,
+but use Nx instead to **run our tasks in the most efficient way**.
+
+One of the main benefits of adding Nx to our PNPM workspace is speed via caching.
+
+Running commands via NX will enable us to do several things:
+
+- Setup the project dependencies to other projects command,
+if they need to run before a specific command.
+- Improve the speed of the command execution by saving its output to cache.
+- Run the command on the [affected](https://nx.dev/nx-api/nx/documents/affected) projects only.
+
+⚠️ You can run the commands with PNPM too, but it's not advisable as You'll lose the advantages that NX provides.
+
+For more information, check [setup a monorepo with PNPM workspaces and NX](https://blog.nrwl.io/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx-bc5d97258a7e#d69f)
+
 ## Quick start
 
 If you would like to contribute to Dialtone without having to do any local environment setup, you can use GitHub
@@ -36,11 +68,9 @@ Please see the [Codespaces docs](./.github/codespaces.md) for more information.
 
 ### Local environment setup
 
-- We use [Nx](https://nx.dev/) as build system for improved speed and easier monorepo administration.
-  nx is installed as a dev dependency in the root of the project.
-- We use [pnpm](https://pnpm.io) for managing workspaces
-
-If you do not have pnpm installed, you can install it with:
+- We use [pnpm](https://pnpm.io) for managing dependencies, so you need to have it installed
+in order to be able to manage the packages. In order to install it, run the following command
+or follow its [installation guide](https://pnpm.io/installation):
 
 ```bash
 npm install -g pnpm
@@ -52,29 +82,32 @@ Once pnpm is installed, in the monorepo root run:
 pnpm install
 ```
 
-This will install the dependencies for all packages.
+This will install the dependencies for all the monorepo packages and apps.
 
-In order to run dialtone locally, you can use:
+### Running the projects
+
+#### Dialtone
 
 ```bash
-# This will start the server for the documentation site and the library so it is live updated with any changes.
-pnpm run start:dialtone
+nx start:dialtone
 ```
+
+This will start the documentation site and watch the library changes, so it is live updated.
 
 Access the local server at `http://localhost:4000`
 
-For dialtone vue 2 storybook and library run:
+#### Dialtone Vue 2:
 
 ```bash
-pnpm run start:dialtone-vue2
+nx start:dialtone-vue2
 ```
 
 Access the local storybook server for Dialtone Vue 2 via `http://localhost:9010/`
 
-For dialtone vue 3 storybook and library run:
+#### Dialtone Vue 3:
 
 ```bash
-pnpm run start:dialtone-vue3
+nx start:dialtone-vue3
 ```
 
 Access the local storybook server for Dialtone Vue 3 via `http://localhost:9011/`
@@ -102,13 +135,13 @@ You can run commands like `build`, `test`, `start` from
 the root of the project with:
 
 ```bash
-pnpm nx <command> <package/app>
+nx <command> <package/app>
 ```
 
 Example:
 
 ```bash
-pnpm nx build dialtone-documentation
+nx build dialtone-documentation
 ```
 
 ### Releasing
@@ -131,7 +164,7 @@ This can only be run while on **staging** branch. After running the command, it 
 5. Merge changes from `production` back to `staging`
 
 ```bash
-pnpm run release
+nx run dialtone:release
 ```
 
 #### Alpha/Beta
@@ -147,11 +180,11 @@ Needs to be run while on your feature branch. After running the command, it will
 6. Merge changes from `alpha/beta` back to your feature branch.
 
 ```bash
-pnpm run release:alpha
+nx run dialtone:release:alpha
 ```
 
 ```bash
-pnpm run release:beta
+nx run dialtone:release:beta
 ```
 
 ## Usage
