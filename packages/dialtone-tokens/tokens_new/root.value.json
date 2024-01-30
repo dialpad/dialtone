@@ -1291,7 +1291,7 @@
   },
   "66-percent": {
     "$type": "number",
-    "$value": 66.69999694824219,
+    "$value": 66.69,
     "$description": "%",
     "$extensions": {
       "com.figma": {
