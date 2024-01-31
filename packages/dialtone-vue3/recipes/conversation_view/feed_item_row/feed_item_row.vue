@@ -385,7 +385,7 @@ export default {
     display: block;
     padding-right: var(--dt-space-300);
     padding-left: var(--dt-space-0);
-    // min-width = avatar width + padding
+    /* min-width = avatar width + padding */
     min-width: calc(var(--dt-space-600) + var(--dt-space-300));
   }
 
