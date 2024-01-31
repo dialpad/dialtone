@@ -133,6 +133,15 @@ describe('DtTooltip tests', () => {
       });
     });
 
+    describe('When anchor element is touched', () => {
+      it('should hide tooltip', async () => {
+        await wrapper.setProps({ show: true });
+        await anchor.trigger('touchstart');
+
+        expect(tooltip.isVisible()).toBe(false);
+      });
+    });
+
     describe('When show prop is false', () => {
       it('should display tooltip', async () => {
         await wrapper.setProps({ show: false });
@@ -160,24 +169,6 @@ describe('DtTooltip tests', () => {
       describe('When mouseleave tooltip', () => {
         it('should hide tooltip', async () => {
           await anchor.trigger('mouseleave');
-
-          expect(tooltip.isVisible()).toBe(false);
-        });
-      });
-
-      describe('When device is touch based', () => {
-        beforeEach(() => {
-          window.ontouchstart = vi.fn();
-          updateWrapper();
-        });
-
-        afterEach(() => {
-          delete window.ontouchstart;
-        });
-
-        it('should hide tooltip', async () => {
-          await wrapper.setProps({ delay: false });
-          await anchor.trigger('mouseenter');
 
           expect(tooltip.isVisible()).toBe(false);
         });

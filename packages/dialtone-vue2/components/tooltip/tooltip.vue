@@ -12,6 +12,7 @@
       @mouseenter="onEnterAnchor"
       @mouseleave="onLeaveAnchor"
       @keydown.esc="onLeaveAnchor"
+      @touchstart="onTouchStart"
     >
       <!-- @slot Slot for the anchor element -->
       <slot
@@ -271,13 +272,15 @@ export default {
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
+
+      isTouchDevice: false,
     };
   },
 
   computed: {
     // whether the tooltip is visible or not.
     isVisible () {
-      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default);
+      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default) && !this.isTouchDevice;
     },
 
     tooltipListeners () {
@@ -484,6 +487,10 @@ export default {
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
         this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
+    },
+
+    onTouchStart () {
+      this.isTouchDevice = true;
     },
   },
 };

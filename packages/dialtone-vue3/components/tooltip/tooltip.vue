@@ -12,6 +12,7 @@
       @mouseenter="onEnterAnchor"
       @mouseleave="onLeaveAnchor"
       @keydown.esc="onLeaveAnchor"
+      @touchstart="onTouchStart"
     >
       <!-- @slot Slot for the anchor element -->
       <slot
@@ -287,10 +288,6 @@ export default {
   },
 
   computed: {
-    // isTouchDevice () {
-    //   return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
-    // },
-
     // whether the tooltip is visible or not.
     isVisible () {
       return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default) && !this.isTouchDevice;
@@ -369,8 +366,6 @@ export default {
 
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
-
-    this.isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
 
     // immediate watcher fires before mounted, so have this here in case
     // show prop was initially set to true.
@@ -501,6 +496,10 @@ export default {
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
         this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
+    },
+
+    onTouchStart () {
+      this.isTouchDevice = true;
     },
   },
 };
