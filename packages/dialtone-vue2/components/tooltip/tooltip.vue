@@ -12,6 +12,7 @@
       @mouseenter="onEnterAnchor"
       @mouseleave="onLeaveAnchor"
       @keydown.esc="onLeaveAnchor"
+      @touchstart="onTouchStart"
     >
       <!-- @slot Slot for the anchor element -->
       <slot
@@ -289,13 +290,14 @@ export default {
 
       // reference to the anchor element
       anchor: null,
+      isTouchDevice: false,
     };
   },
 
   computed: {
     // whether the tooltip is visible or not.
     isVisible () {
-      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default);
+      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default) && !this.isTouchDevice;
     },
 
     tooltipListeners () {
@@ -508,6 +510,10 @@ export default {
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
         this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
+    },
+
+    onTouchStart () {
+      this.isTouchDevice = true;
     },
   },
 };

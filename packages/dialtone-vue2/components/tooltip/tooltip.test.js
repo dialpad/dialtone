@@ -146,6 +146,15 @@ describe('DtTooltip tests', () => {
       });
     });
 
+    describe('When anchor element is touched', () => {
+      it('should hide tooltip', async () => {
+        await wrapper.setProps({ show: true });
+        await anchor.trigger('touchstart');
+
+        expect(tooltip.isVisible()).toBe(false);
+      });
+    });
+
     describe('When show prop is false', () => {
       it('should display tooltip', async () => {
         await wrapper.setProps({ show: false });
