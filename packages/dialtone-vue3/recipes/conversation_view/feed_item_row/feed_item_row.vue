@@ -9,17 +9,21 @@
   >
     <!-- Avatar or time -->
     <template #left>
-      <!-- @slot Slot to contain the avatar, overrides avatar props. -->
-      <slot
+      <div
         v-if="showHeader"
-        name="avatar"
+        class="dt-feed-item-row__avatar-container"
       >
-        <dt-avatar
-          :full-name="displayName"
-          :image-src="avatarImageUrl"
-          :seed="avatarSeed"
-        />
-      </slot>
+        <!-- @slot Slot to contain the avatar, overrides avatar props. -->
+        <slot
+          name="avatar"
+        >
+          <dt-avatar
+            :full-name="displayName"
+            :image-src="avatarImageUrl"
+            :seed="avatarSeed"
+          />
+        </slot>
+      </div>
       <!-- show time instead of avatar when headers not present -->
       <span
         v-if="!showHeader"
@@ -53,7 +57,6 @@
       </div>
       <!-- @slot Default content slot for feed item row -->
       <span
-        class="content-text-wrapper-class"
         data-qa="dt-feed-item-row--content"
       >
         <slot />
@@ -99,6 +102,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_item_row_constants.js';
 import { DtAvatar } from '@/components/avatar';
 import { DtLazyShow } from '@/components/lazy_show';
@@ -318,6 +322,11 @@ export default {
   position: relative;
   padding: var(--dt-space-300) var(--dt-space-500);
 
+  &__avatar-container {
+    padding-top: var(--dt-space-300);
+    padding-bottom: var(--dt-space-300);
+  }
+
   &__content {
     padding-left: var(--dt-space-300);
   }
@@ -356,7 +365,6 @@ export default {
     font-weight: var(--dt-font-weight-normal);
     vertical-align: middle;
     white-space: nowrap;
-    height: 100%;
   }
 
   &__menu {
@@ -365,26 +373,20 @@ export default {
     right: var(--dt-space-450);
   }
 
-  .content-text-wrapper-class:not(img) {
-    line-height: 1.6rem;
-  }
-
   &:deep(.dt-item-layout) {
     font: var(--dt-typography-body-base);
     min-height: initial;
     padding: 0px;
-    .d-avatar {
-      margin-top: var(--dt-space-300);
-    }
   }
 
   &:deep(.dt-item-layout--left) {
     align-self: flex-start;
     text-align: end;
     display: block;
-    .d-avatar {
-      margin-top: var(--dt-space-300);
-    }
+    padding-right: var(--dt-space-300);
+    padding-left: var(--dt-space-0);
+    /* min-width = avatar width + padding */
+    min-width: calc(var(--dt-space-600) + var(--dt-space-300));
   }
 
   &:deep(.dt-item-layout--right) {
