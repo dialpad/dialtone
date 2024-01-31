@@ -94,7 +94,6 @@
           <template #content>
             <span
               v-if="showAddLink.setLinkTitle.length > 0"
-              class="d-fw-bold"
             >
               {{ showAddLink.setLinkTitle }}
             </span>
@@ -111,29 +110,32 @@
             />
           </template>
           <template #footerContent>
-            <div class="d-mx8">
+            <div class="d-ml8 d-mr12">
               <dt-button
-                class="d-mx4"
+                class="d-mx2"
                 :aria-label="removeLinkButton.ariaLabel"
                 importance="clear"
                 kind="muted"
+                size="sm"
                 data-qa="dt-editor-remove-link-btn"
                 @click="removeLink"
               >
                 {{ removeLinkButton.label }}
               </dt-button>
               <dt-button
-                class="d-mx4"
+                class="d-mx2"
                 :aria-label="cancelSetLinkButton.ariaLabel"
                 importance="clear"
                 kind="muted"
+                size="sm"
                 data-qa="dt-editor-set-link-cancel-btn"
                 @click="closeLinkInput"
               >
                 {{ cancelSetLinkButton.label }}
               </dt-button>
               <dt-button
-                class="d-mx4"
+                class="d-mx2"
+                size="sm"
                 :aria-label="confirmSetLinkButton.ariaLabel"
                 data-qa="dt-editor-set-link-confirm-btn"
                 @click="setLink"
