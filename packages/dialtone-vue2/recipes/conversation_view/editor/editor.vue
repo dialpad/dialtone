@@ -10,7 +10,7 @@
     <dt-stack
       direction="row"
       gap="0"
-      class="d-py4 d-bgc-black-100 d-divide-x d-divide-black-200"
+      class="d-py4 dt-editor--top-bar-background d-divide-x d-divide-black-200"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
@@ -624,11 +624,7 @@ export default {
 </script>
 
 <style lang="less">
-.dt-editor--remaining-char-tooltip {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.dt-editor--remaining-char {
-  font-size: 1.2rem;
+.dt-editor--top-bar-background {
+  background-color: var(--dt-color-surface-secondary);
 }
 </style>
