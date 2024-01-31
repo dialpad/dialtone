@@ -420,9 +420,6 @@ export default {
     },
 
     onEnterAnchor (e) {
-      // since this method will be trigger by mouse event, updating the flag is non-touch device
-      this.isTouchDevice = false;
-
       if (this.delay) {
         this.inTimer = setTimeout(function (event) {
           this.triggerShow(event);
@@ -430,6 +427,9 @@ export default {
       } else {
         this.triggerShow(e);
       }
+
+       // since this method will be trigger by mouse event, updating the flag is non-touch device
+       this.isTouchDevice = false;
     },
 
     triggerShow (e) {
