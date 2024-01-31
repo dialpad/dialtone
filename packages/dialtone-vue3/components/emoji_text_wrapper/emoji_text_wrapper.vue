@@ -15,8 +15,6 @@ export default {
     DtEmoji,
   },
 
-  inheritAttrs: false,
-
   props: {
     /**
      * Element type (tag name) to use for the wrapper.
