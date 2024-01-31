@@ -198,7 +198,6 @@ export default {
         Blockquote,
         Bold,
         BulletList,
-        CodeBlock,
         Document,
         Italic,
         ListItem,
@@ -254,6 +253,12 @@ export default {
       extensions.push(TextAlign.configure({
         types: ['paragraph'],
         defaultAlignment: 'left',
+      }));
+
+      extensions.push(CodeBlock.configure({
+        HTMLAttributes: {
+          class: 'dt-rich-text-editor--code-block',
+        },
       }));
 
       extensions.push(OrderedList.configure({
@@ -404,13 +409,14 @@ export default {
 <style>
   .ProseMirror p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
+    float: left;
     color: var(--dt-color-foreground-placeholder);
     pointer-events: none;
     height: 0;
   }
 
   .ProseMirror ul > li {
-    list-style-type: circle;
+    list-style-type: disc;
   }
 
   .ProseMirror ol > li {
@@ -418,7 +424,13 @@ export default {
   }
 
   .ProseMirror blockquote {
-    padding-left: 1rem;
-    border-left: 3px solid var(--dt-color-foreground-muted-inverted);
+    padding-left: var(--dt-space-400);
+    border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
+    margin-left: 0;
+  }
+
+  .dt-rich-text-editor--code-block {
+    background: var(--dt-color-surface-secondary);
+    padding: var(--dt-space-400);
   }
 </style>

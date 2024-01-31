@@ -476,7 +476,7 @@ describe('DtRecipeEditor tests', () => {
 
     describe('When add link button is clicked', () => {
       // eslint-disable-next-line vitest/expect-expect
-      it('link input modal should be opened and closed when confirm button is closed', async () => {
+      it('link input popover should be opened and closed when confirm button is closed', async () => {
         await addLinkBtn.trigger('click');
 
         linkInputEl = await wrapper.find('[data-qa="dt-editor-link-input"]');
@@ -493,7 +493,7 @@ describe('DtRecipeEditor tests', () => {
         expect(linkInputEl.isVisible()).toBe(false);
       });
 
-      it('link input modal should be opened and closed when cancel button is closed', async () => {
+      it('link input popover should be opened and closed when cancel button is closed', async () => {
         await addLinkBtn.trigger('click');
 
         linkInputEl = await wrapper.find('[data-qa="dt-editor-link-input"]');

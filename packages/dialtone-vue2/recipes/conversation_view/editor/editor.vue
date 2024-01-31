@@ -16,7 +16,7 @@
         v-for="buttonGroup in buttonGroups"
         :key="buttonGroup.key"
         direction="row"
-        gap="100"
+        gap="300"
         class="d-p4"
       >
         <dt-tooltip
@@ -45,64 +45,106 @@
           </template>
         </dt-tooltip>
       </dt-stack>
-    </dt-stack>
 
-    <!-- Add/Remove link modal -->
-    <dt-modal
-      :show="showLinkInput"
-      :title="showAddLink.setLinkModalTitle"
-      :visually-hidden-close="true"
-      :visually-hidden-close-label="'Close link input modal'"
-      data-qa="dt-editor-link-input-modal"
-      show-footer
-      kind="default"
-      size="default"
-      :close-button-props="{ ariaLabel: 'Close the dialog' }"
-      @click="onInputFocus"
-      @click.native.stop="onInputFocus"
-      @update:show="(s) => updateInputModal(s)"
-    >
-      <div class="d-m4">
-        <dt-input
-          v-model="linkInput"
-          :input-aria-label="showAddLink.setLinkInputAriaLabel"
-          data-qa="dt-editor-link-input"
-          :placeholder="setLinkPlaceholder"
-          input-wrapper-class="d-bgc-black-100 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
+      <dt-stack
+        v-if="linkButton.showBtn"
+        direction="row"
+        gap="300"
+        class="d-p4"
+      >
+        <dt-popover
+          :open.sync="showLinkInput"
+          placement="bottom-start"
+          :visually-hidden-close="true"
+          :visually-hidden-close-label="'Close link input popover'"
+          data-qa="dt-editor-link-input-popover"
+          :show-close-button="false"
           @click="onInputFocus"
           @click.native.stop="onInputFocus"
-          @focus="onInputFocus"
-          @keydown.enter="setLink"
-        />
-      </div>
-      <template #footer>
-        <dt-button
-          :aria-label="confirmSetLinkButton.ariaLabel"
-          data-qa="dt-editor-set-link-confirm-btn"
-          @click="setLink"
+          @opened="updateInput"
         >
-          {{ confirmSetLinkButton.label }}
-        </dt-button>
-        <dt-button
-          :aria-label="cancelSetLinkButton.ariaLabel"
-          importance="clear"
-          kind="muted"
-          data-qa="dt-editor-set-link-cancel-btn"
-          @click="closeLinkInputModal"
-        >
-          {{ cancelSetLinkButton.label }}
-        </dt-button>
-        <dt-button
-          :aria-label="removeLinkButton.ariaLabel"
-          importance="clear"
-          kind="muted"
-          data-qa="dt-editor-remove-link-btn"
-          @click="removeLink"
-        >
-          {{ removeLinkButton.label }}
-        </dt-button>
-      </template>
-    </dt-modal>
+          <template #anchor>
+            <dt-tooltip
+              :key="linkButton.key"
+              :message="linkButton.tooltipMessage"
+              placement="top"
+            >
+              <template #anchor>
+                <dt-button
+                  :data-qa="linkButton.dataQA"
+                  importance="clear"
+                  kind="muted"
+                  class="d-ol-none"
+                  :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
+                  size="sm"
+                  @click="linkButton.onClick()"
+                >
+                  <template #icon>
+                    <dt-icon
+                      :name="linkButton.iconName"
+                      size="200"
+                      class="d-fw-bold"
+                    />
+                  </template>
+                </dt-button>
+              </template>
+            </dt-tooltip>
+          </template>
+
+          <template #content>
+            <span
+              v-if="showAddLink.setLinkTitle.length > 0"
+              class="d-fw-bold d-mb4"
+            >
+              {{ showAddLink.setLinkTitle }}
+            </span>
+            <dt-input
+              v-model="linkInput"
+              :input-aria-label="showAddLink.setLinkInputAriaLabel"
+              data-qa="dt-editor-link-input"
+              :placeholder="setLinkPlaceholder"
+              input-wrapper-class="d-bgc-black-100 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
+              @click="onInputFocus"
+              @click.native.stop="onInputFocus"
+              @focus="onInputFocus"
+              @keydown.enter="setLink"
+            />
+          </template>
+          <template #footerContent>
+            <div class="d-mx8">
+              <dt-button
+                class="d-mx4"
+                :aria-label="removeLinkButton.ariaLabel"
+                importance="clear"
+                kind="muted"
+                data-qa="dt-editor-remove-link-btn"
+                @click="removeLink"
+              >
+                {{ removeLinkButton.label }}
+              </dt-button>
+              <dt-button
+                class="d-mx4"
+                :aria-label="cancelSetLinkButton.ariaLabel"
+                importance="clear"
+                kind="muted"
+                data-qa="dt-editor-set-link-cancel-btn"
+                @click="closeLinkInput"
+              >
+                {{ cancelSetLinkButton.label }}
+              </dt-button>
+              <dt-button
+                class="d-mx4"
+                :aria-label="confirmSetLinkButton.ariaLabel"
+                data-qa="dt-editor-set-link-confirm-btn"
+                @click="setLink"
+              >
+                {{ confirmSetLinkButton.label }}
+              </dt-button>
+            </div>
+          </template>
+        </dt-popover>
+      </dt-stack>
+    </dt-stack>
 
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
@@ -143,7 +185,7 @@ import {
 } from './editor_constants.js';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
-import { DtModal } from '@/components/modal';
+import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
@@ -155,7 +197,7 @@ export default {
     DtRichTextEditor,
     DtButton,
     DtIcon,
-    DtModal,
+    DtPopover,
     DtStack,
     DtInput,
     DtTooltip,
@@ -374,7 +416,7 @@ export default {
       type: Object,
       default: () => ({
         showAddLinkButton: true,
-        setLinkModalTitle: 'Add a link',
+        setLinkTitle: 'Add a link',
         setLinkInputAriaLabel: 'Input field to add link',
       }),
     },
@@ -480,9 +522,12 @@ export default {
     individualButtons () {
       return [
         { showBtn: this.showQuoteButton, selector: 'blockquote', iconName: 'quote', dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
-        { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', iconName: 'link-2', dataQA: 'dt-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInputModal },
         { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
       ].filter(button => button.showBtn);
+    },
+
+    linkButton () {
+      return { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', iconName: 'link-2', dataQA: 'dt-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInput };
     },
   },
 
@@ -499,7 +544,7 @@ export default {
 
     removeLink () {
       this.$refs.richTextEditor?.editor?.chain()?.focus()?.unsetLink()?.run();
-      this.closeLinkInputModal();
+      this.closeLinkInput();
     },
 
     setLink (event) {
@@ -546,23 +591,24 @@ export default {
           .run();
       }
 
-      this.closeLinkInputModal();
+      this.closeLinkInput();
     },
 
-    openLinkInputModal () {
+    openLinkInput () {
       this.showLinkInput = true;
     },
 
-    updateInputModal (openModal) {
-      if (!openModal) {
-        return this.closeLinkInputModal();
+    updateInput (openedInput) {
+      if (!openedInput) {
+        return this.closeLinkInput();
       }
       this.linkInput = this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
     },
 
-    closeLinkInputModal () {
+    closeLinkInput () {
       this.showLinkInput = false;
       this.linkInput = '';
+      this.$refs.richTextEditor.editor?.chain().focus();
     },
 
     onBoldTextToggle () {
