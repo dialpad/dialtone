@@ -94,7 +94,7 @@
           <template #content>
             <span
               v-if="showAddLink.setLinkTitle.length > 0"
-              class="d-fw-bold d-mb4"
+              class="d-fw-bold"
             >
               {{ showAddLink.setLinkTitle }}
             </span>
@@ -103,7 +103,7 @@
               :input-aria-label="showAddLink.setLinkInputAriaLabel"
               data-qa="dt-editor-link-input"
               :placeholder="setLinkPlaceholder"
-              input-wrapper-class="d-bgc-black-100 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
+              input-wrapper-class="d-bgc-black-100 d-mt6 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
               @click="onInputFocus"
               @click.native.stop="onInputFocus"
               @focus="onInputFocus"
