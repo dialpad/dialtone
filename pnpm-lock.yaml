@@ -605,6 +605,9 @@ importers:
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/extension-blockquote':
+        specifier: ^2.1.16
+        version: 2.1.16(@tiptap/core@2.0.3)
       '@tiptap/extension-bold':
         specifier: ^2.1.16
         version: 2.1.16(@tiptap/core@2.0.3)
@@ -632,6 +635,9 @@ importers:
       '@tiptap/extension-mention':
         specifier: ^2.1.11
         version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(@tiptap/suggestion@2.1.12)
+      '@tiptap/extension-ordered-list':
+        specifier: ^2.2.0
+        version: 2.2.1(@tiptap/core@2.0.3)
       '@tiptap/extension-paragraph':
         specifier: ^2.0.3
         version: 2.1.12(@tiptap/core@2.0.3)
@@ -644,6 +650,9 @@ importers:
       '@tiptap/extension-text':
         specifier: ^2.0.3
         version: 2.1.12(@tiptap/core@2.0.3)
+      '@tiptap/extension-text-align':
+        specifier: ^2.2.0
+        version: 2.2.1(@tiptap/core@2.0.3)
       '@tiptap/extension-underline':
         specifier: ^2.1.16
         version: 2.1.16(@tiptap/core@2.0.3)
@@ -7723,6 +7732,14 @@ packages:
       '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
     dev: false
 
+  /@tiptap/extension-ordered-list@2.2.1(@tiptap/core@2.0.3):
+    resolution: {integrity: sha512-6OcdBALgYnj/TKSV+ouT202U1ydJGenGL9ofhpdogC1scE0oMaR25f1T9k7RMUGAv+7FNIcVZp2+bf1SLCTX1A==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+    dev: false
+
   /@tiptap/extension-paragraph@2.1.12(@tiptap/core@2.0.3):
     resolution: {integrity: sha512-hoH/uWPX+KKnNAZagudlsrr4Xu57nusGekkJWBcrb5MCDE91BS+DN2xifuhwXiTHxnwOMVFjluc0bPzQbkArsw==}
     peerDependencies:
@@ -7751,6 +7768,14 @@ packages:
 
   /@tiptap/extension-text-align@2.2.0(@tiptap/core@2.0.3):
     resolution: {integrity: sha512-Fub3RyQlmwB10aWzmVFqyfi9ww0uQYLag76ae/bjkkqSjHo/1ET9/9vhEqpQQVR7kAifs4CyRQguaASYSPxKYg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+    dev: false
+
+  /@tiptap/extension-text-align@2.2.1(@tiptap/core@2.0.3):
+    resolution: {integrity: sha512-gwgYKo+i5HVxmUp0fOVrr5a9xJ800YWAr/0NlieBqYZ1OgoDZu1WEvXDLChHweKWfqEZNky6LHcDs0jdU52t7A==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
     dependencies:
