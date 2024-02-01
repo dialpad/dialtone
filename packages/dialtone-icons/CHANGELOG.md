@@ -1,3 +1,10 @@
+## [4.7.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.7.0...dialtone-icons/v4.7.1) (2024-02-01)
+
+
+### Bug Fixes
+
+* name of the office365-calendar icon ([#137](https://github.com/dialpad/dialtone/issues/137)) ([7c86bb0](https://github.com/dialpad/dialtone/commit/7c86bb04a21a9b3a9a7880519efbd429affa41e6))
+
 # [4.7.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.6.0...dialtone-icons/v4.7.0) (2024-01-26)
 
 
