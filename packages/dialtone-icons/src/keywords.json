@@ -241,10 +241,6 @@
       ]
     },
     "brand-full-color": {
-      "o365-calendar": [
-        "microsoft",
-        "office"
-      ],
       "airtable": [],
       "amex": [],
       "app-store-badge": [],
@@ -289,6 +285,10 @@
       "microsoft": [],
       "miro": [],
       "monday-com": [],
+      "o365-calendar": [
+        "microsoft",
+        "office"
+      ],
       "office-365": [],
       "pipedrive": [],
       "play-store-badge": [],
