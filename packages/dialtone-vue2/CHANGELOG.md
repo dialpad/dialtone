@@ -1,3 +1,16 @@
+# [2.113.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.112.2...dialtone-vue2/v2.113.0) (2024-02-01)
+
+
+### Bug Fixes
+
+* change padding on right slot of call pill stories ([#138](https://github.com/dialpad/dialtone/issues/138)) ([9a23a42](https://github.com/dialpad/dialtone/commit/9a23a423f3a6e2f01e2a86d5f765a3912e12fd08))
+* **Feed Item Row:** set inset focus ring on feed item ([#139](https://github.com/dialpad/dialtone/issues/139)) ([e4e935a](https://github.com/dialpad/dialtone/commit/e4e935a35f1fab8582def30ade82d06bcab393f0))
+
+
+### Features
+
+* **Wysiwyg Editor, Rich Text Editor:** add wysiwyg component ([#113](https://github.com/dialpad/dialtone/issues/113)) ([367d3e2](https://github.com/dialpad/dialtone/commit/367d3e2aa5344d734fd725c1f7419c44107fb116))
+
 ## [2.112.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.112.1...dialtone-vue2/v2.112.2) (2024-01-26)
 
 

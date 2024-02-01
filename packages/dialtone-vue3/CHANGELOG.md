@@ -1,3 +1,18 @@
+# [3.106.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.2...dialtone-vue3/v3.106.0) (2024-02-01)
+
+
+### Bug Fixes
+
+* change padding on right slot of call pill stories ([#138](https://github.com/dialpad/dialtone/issues/138)) ([9a23a42](https://github.com/dialpad/dialtone/commit/9a23a423f3a6e2f01e2a86d5f765a3912e12fd08))
+* **Feed Item Row, Emoji Row:** spacing / color fixes - Vue 3 ([#134](https://github.com/dialpad/dialtone/issues/134)) ([21f3e21](https://github.com/dialpad/dialtone/commit/21f3e213714ca322aa96dde4b4fa3aed3bd9cc62))
+* **Feed Item Row:** set inset focus ring on feed item ([#139](https://github.com/dialpad/dialtone/issues/139)) ([e4e935a](https://github.com/dialpad/dialtone/commit/e4e935a35f1fab8582def30ade82d06bcab393f0))
+
+
+### Features
+
+* **Wysiwyg Editor, Rich Text Editor:** add wysiwyg component ([#113](https://github.com/dialpad/dialtone/issues/113)) ([367d3e2](https://github.com/dialpad/dialtone/commit/367d3e2aa5344d734fd725c1f7419c44107fb116))
+* **Wysiwyg Editor, Rich Text Editor:** add wysiwyg component for vue3 ([#117](https://github.com/dialpad/dialtone/issues/117)) ([bc93fb8](https://github.com/dialpad/dialtone/commit/bc93fb8b4ebf2aa03ea5079dba0760d550194f69))
+
 ## [3.105.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.1...dialtone-vue3/v3.105.2) (2024-01-26)
 
 

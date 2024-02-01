@@ -16,7 +16,7 @@
       <span class="d-fc-tertiary d-fs-100">8 people joined</span>
     </template>
     <template #right>
-      <div class="d-pr16">
+      <div>
         <dt-button
           aria-label="Open external link"
           kind="muted"
