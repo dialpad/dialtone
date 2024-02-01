@@ -299,6 +299,11 @@ export default {
 
 <style lang="less" scoped>
 .dt-feed-item-row {
+
+  &:focus-visible {
+    box-shadow: var(--dt-shadow-focus-inset);
+  }
+
   &--state-searched {
     background-color: var(--dt-color-surface-warning-subtle);
   }
