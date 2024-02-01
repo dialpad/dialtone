@@ -286,6 +286,9 @@ export default {
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
+
+      // reference to the anchor element
+      anchor: null,
     };
   },
 
@@ -314,7 +317,7 @@ export default {
         offset: this.offset,
         interactive: false,
         trigger: 'manual',
-        appendTo: this.appendTo === 'body' ? this.anchorEl?.getRootNode()?.querySelector('body') : this.appendTo,
+        appendTo: this.appendTo === 'body' && this.anchor ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
         placement: this.placement,
         sticky: this.sticky,
         popperOptions: getPopperOptions({
@@ -323,10 +326,6 @@ export default {
           onChangePlacement: this.onChangePlacement,
         }),
       };
-    },
-
-    anchor () {
-      return this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     },
   },
 
@@ -363,11 +362,13 @@ export default {
     },
   },
 
+  // eslint-disable-next-line complexity
   mounted () {
     if (!this.enabled && this.show != null) {
       console.warn('Tooltip: You cannot use both the enabled and show props at the same time.');
       console.warn('The show prop will be ignored.');
     }
+    this.anchor = this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
 
