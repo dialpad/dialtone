@@ -636,7 +636,7 @@ importers:
         specifier: ^2.1.11
         version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(@tiptap/suggestion@2.1.12)
       '@tiptap/extension-ordered-list':
-        specifier: ^2.2.1
+        specifier: ^2.2.0
         version: 2.2.1(@tiptap/core@2.0.3)
       '@tiptap/extension-paragraph':
         specifier: ^2.0.3
@@ -651,7 +651,7 @@ importers:
         specifier: ^2.0.3
         version: 2.1.12(@tiptap/core@2.0.3)
       '@tiptap/extension-text-align':
-        specifier: ^2.2.1
+        specifier: ^2.2.0
         version: 2.2.1(@tiptap/core@2.0.3)
       '@tiptap/extension-underline':
         specifier: ^2.1.16
