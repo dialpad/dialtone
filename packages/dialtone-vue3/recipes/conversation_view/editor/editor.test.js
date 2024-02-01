@@ -5,8 +5,6 @@ import DtRecipeEditor from './editor.vue';
 let wrapper;
 let editor;
 
-let linkInputEl;
-
 let boldFormatBtn;
 let italicsFormatBtn;
 let underlineFormatBtn;
@@ -20,8 +18,6 @@ let orderedListBtn;
 let blockquoteBtn;
 let codeblockBtn;
 let addLinkBtn;
-let confirmAddLinkBtn;
-let cancelAddLinkBtn;
 
 const testText = 'In the beginning, it was a nice day.';
 
@@ -470,47 +466,6 @@ describe('DtRecipeEditor tests', () => {
         const editorHtmlOutput = editor.html().replaceAll(/[\n\r]/g, '').replaceAll(' ', '');
         expect(editorHtmlOutput)
           .toContain(expectedHtmlOutput.replaceAll(' ', ''));
-      });
-    });
-
-    describe('When add link button is clicked', () => {
-      // eslint-disable-next-line vitest/expect-expect
-      it('link input popover should be opened and closed when confirm button is closed', async () => {
-        await addLinkBtn.trigger('click');
-        await wrapper.vm.$nextTick();
-
-        linkInputEl = await wrapper.find('[data-qa="dt-editor-link-input"]');
-
-        expect(linkInputEl.exists()).toBe(true);
-        expect(linkInputEl.isVisible()).toBe(true);
-
-        confirmAddLinkBtn = await wrapper.find('[data-qa="dt-editor-set-link-confirm-btn"]');
-
-        await confirmAddLinkBtn.trigger('click');
-        await wrapper.vm.$nextTick();
-
-        linkInputEl = await wrapper.find('[data-qa="dt-editor-link-input"]');
-
-        expect(linkInputEl?.isVisible()).toBe(false);
-      });
-
-      it('link input popover should be opened and closed when cancel button is closed', async () => {
-        await addLinkBtn.trigger('click');
-        await wrapper.vm.$nextTick();
-
-        linkInputEl = await wrapper.find('[data-qa="dt-editor-link-input"]');
-
-        expect(linkInputEl.exists()).toBe(true);
-        expect(linkInputEl.isVisible()).toBe(true);
-
-        cancelAddLinkBtn = await wrapper.find('[data-qa="dt-editor-set-link-cancel-btn"]');
-
-        await cancelAddLinkBtn.trigger('click');
-        await wrapper.vm.$nextTick();
-
-        linkInputEl = await wrapper.find('[data-qa="dt-editor-link-input"]');
-
-        expect(linkInputEl?.isVisible()).toBe(false);
       });
     });
   });

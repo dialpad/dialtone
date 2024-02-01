@@ -1,6 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeEditor from './editor.vue';
+import DtRecipeEditorDefault from './editor_default.story.vue';
 
 /*
   Controls
@@ -63,7 +64,7 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeEditor,
+  DtRecipeEditorDefault,
 );
 
 // Stories

@@ -53,7 +53,7 @@
         class="d-p4"
       >
         <dt-popover
-          :open.sync="showLinkInput"
+          :open="showLinkInput"
           placement="bottom-start"
           :visually-hidden-close="true"
           :visually-hidden-close-label="'Close link input popover'"
