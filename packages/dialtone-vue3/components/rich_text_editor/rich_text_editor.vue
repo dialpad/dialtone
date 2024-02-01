@@ -7,6 +7,7 @@
 
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-3';
+import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
 import HardBreak from '@tiptap/extension-hard-break';
@@ -17,9 +18,11 @@ import BulletList from '@tiptap/extension-bullet-list';
 import Italic from '@tiptap/extension-italic';
 import TipTapLink from '@tiptap/extension-link';
 import ListItem from '@tiptap/extension-list-item';
+import OrderedList from '@tiptap/extension-ordered-list';
 import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
+import TextAlign from '@tiptap/extension-text-align';
 import Emoji from './extensions/emoji';
 import Link from './extensions/link';
 import { MentionPlugin } from './extensions/mentions/mention';
@@ -40,14 +43,6 @@ export default {
 
   props: {
     /**
-     * Whether the input allows for line breaks to be introduced in the text.
-     */
-    allowLineBreaks: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
      */
@@ -62,6 +57,14 @@ export default {
     editable: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Whether the input allows for line breaks to be introduced in the text.
+     */
+    allowLineBreaks: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -192,9 +195,9 @@ export default {
     extensions () {
       // These are the default extensions needed just for plain text.
       const extensions = [
+        Blockquote,
         Bold,
         BulletList,
-        CodeBlock,
         Document,
         Italic,
         ListItem,
@@ -232,7 +235,8 @@ export default {
         );
       }
 
-      extensions.push(TipTapLink.configure({
+      extensions.push(TipTapLink.extend({ inclusive: false }).configure({
+        autolink: true,
         protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
       }));
 
@@ -245,6 +249,21 @@ export default {
       // Emoji has some interactions with Enter key
       // hence this should be done last otherwise the enter wont add a emoji.
       extensions.push(Emoji);
+
+      extensions.push(TextAlign.configure({
+        types: ['paragraph'],
+        defaultAlignment: 'left',
+      }));
+
+      extensions.push(CodeBlock.configure({
+        HTMLAttributes: {
+          class: 'dt-rich-text-editor--code-block',
+        },
+      }));
+
+      extensions.push(OrderedList.configure({
+        itemTypeName: 'listItem',
+      }));
 
       return extensions;
     },
@@ -396,7 +415,22 @@ export default {
     height: 0;
   }
 
-  .ProseMirror li {
-    list-style-type: circle;
+  .ProseMirror ul > li {
+    list-style-type: disc;
+  }
+
+  .ProseMirror ol > li {
+    list-style-type: decimal;
+  }
+
+  .ProseMirror blockquote {
+    padding-left: var(--dt-space-400);
+    border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
+    margin-left: 0;
+  }
+
+  .dt-rich-text-editor--code-block {
+    background: var(--dt-color-surface-secondary);
+    padding: var(--dt-space-400);
   }
 </style>

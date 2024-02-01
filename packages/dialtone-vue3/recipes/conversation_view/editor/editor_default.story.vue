@@ -2,12 +2,11 @@
   <div>
     <dt-recipe-editor
       ref="editor"
-      v-model="value"
+      v-model="modelValue"
       class="d-mb32"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
-      :rounded-edges="$attrs.roundedEdges"
       :input-class="$attrs.inputClass"
       :link="$attrs.link"
       :placeholder="$attrs.placeholder"
@@ -21,12 +20,19 @@
       :show-strike-button="$attrs.showStrikeButton"
       :show-underline-button="$attrs.showUnderlineButton"
       :show-list-items-button="$attrs.showListItemsButton"
+      :show-ordered-list-button="$attrs.showOrderedListButton"
+      :show-align-left-button="$attrs.showAlignLeftButton"
+      :show-align-center-button="$attrs.showAlignCenterButton"
+      :show-align-right-button="$attrs.showAlignRightButton"
+      :show-align-justify-button="$attrs.showAlignJustifyButton"
+      :show-quote-button="$attrs.showQuoteButton"
+      :show-code-block-button="$attrs.showCodeBlockButton"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
-      @input="onInput($event)"
+      @input="$attrs.onInput"
     />
     <p><strong>Editor content is:</strong></p>
-    <span>{{ value }}</span>
+    <span>{{ modelValue }}</span>
   </div>
 </template>
 
@@ -38,14 +44,8 @@ export default {
   components: { DtRecipeEditor },
   data () {
     return {
-      value: this.$attrs.value,
+      modelValue: this.$attrs.modelValue,
     };
-  },
-
-  methods: {
-    onInput (updatedInput) {
-      this.value = updatedInput;
-    },
   },
 };
 </script>

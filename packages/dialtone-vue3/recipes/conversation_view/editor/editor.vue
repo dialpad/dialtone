@@ -3,199 +3,150 @@
   <div
     data-qa="dt-editor"
     role="presentation"
-    :class="['d-d-flex', 'd-fd-column', 'd-baw1', 'd-ba', {
-      'd-bc-black-500': hasFocus,
-      'd-bc-default': !hasFocus,
-      'd-bar8': roundedEdges,
-      'd-bar0': !roundedEdges,
-    }]"
+    class="d-d-flex d-fd-column"
     @click="$refs.richTextEditor.focusEditor()"
   >
     <!-- Section for the top UI -->
     <dt-stack
       direction="row"
-      gap="100"
-      :class="['d-px8', 'd-py2', 'd-bgc-black-200', {
-        'd-btr8': roundedEdges,
-        'd-btr0': !roundedEdges,
-      }]"
+      gap="0"
+      class="d-py4 dt-editor--top-bar-background d-divide-x d-divide-black-200"
     >
-      <dt-button
-        v-if="showBoldButton"
-        data-qa="dt-editor-bold-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('bold'),
-        }]"
-        importance="clear"
-        kind="inverted"
-        size="sm"
-        @click="onBoldTextToggle"
+      <dt-stack
+        v-for="buttonGroup in buttonGroups"
+        :key="buttonGroup.key"
+        direction="row"
+        gap="300"
+        class="d-p4"
       >
-        <template #icon>
-          <dt-icon
-            name="bold"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
+        <dt-tooltip
+          v-for="button in buttonGroup.buttonGroup"
+          :key="`${buttonGroup.key}-${JSON.stringify(button.selector)}`"
+          :message="button.tooltipMessage"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              :data-qa="button.dataQA"
+              importance="clear"
+              kind="muted"
+              :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+              size="sm"
+              @click="button.onClick()"
+            >
+              <template #icon>
+                <dt-icon
+                  :name="button.iconName"
+                  size="200"
+                  class="d-fw-bold"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </dt-stack>
 
-      <dt-button
-        v-if="showItalicsButton"
-        data-qa="dt-editor-italics-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('italic'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="onItalicTextToggle"
+      <dt-stack
+        v-if="linkButton.showBtn"
+        direction="row"
+        gap="300"
+        class="d-p4"
       >
-        <template #icon>
-          <dt-icon
-            name="italic"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
-
-      <dt-button
-        v-if="showUnderlineButton"
-        data-qa="dt-editor-underline-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('underline'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="onUnderlineTextToggle"
-      >
-        <template #icon>
-          <dt-icon
-            name="underline"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
-
-      <dt-button
-        v-if="showStrikeButton"
-        data-qa="dt-editor-strike-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor?.isActive('strike'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="onStrikethroughTextToggle"
-      >
-        <template #icon>
-          <dt-icon
-            name="strikethrough"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
-
-      <dt-button
-        v-if="showListItemsButton"
-        data-qa="dt-editor-list-items-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('bulletList'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="onBulletListToggle"
-      >
-        <template #icon>
-          <dt-icon
-            name="list-bullet"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
-
-      <dt-button
-        v-if="showAddLink.showAddLinkButton"
-        data-qa="dt-editor-add-link-btn"
-        :class="['h:d-bgc-black-300', 'd-fc-black-700', 'd-mx4', {
-          'd-bgc-black-300 d-fc-black-900': $refs.richTextEditor?.editor.isActive('link'),
-        }]"
-        size="sm"
-        importance="clear"
-        kind="inverted"
-        @click="openLinkInputModal"
-      >
-        <template #icon>
-          <dt-icon
-            name="link-2"
-            size="200"
-            class="d-fw-bold"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-
-    <!-- Add/Remove link modal -->
-    <dt-modal
-      :show="showLinkInput"
-      :title="showAddLink.setLinkModalTitle"
-      :visually-hidden-close="true"
-      :visually-hidden-close-label="'Close link input modal'"
-      data-qa="dt-editor-link-input-modal"
-      show-footer
-      kind="default"
-      size="default"
-      :close-button-props="{ ariaLabel: 'Close the dialog' }"
-      @click="onInputFocus"
-      @click.stop="onInputFocus"
-    >
-      <div class="d-m4">
-        <dt-input
-          v-model="linkInput"
-          :input-aria-label="showAddLink.setLinkInputAriaLabel"
-          data-qa="dt-editor-link-input"
-          :placeholder="setLinkPlaceholder"
-          input-wrapper-class="d-bgc-black-100 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
+        <dt-popover
+          :open.sync="showLinkInput"
+          placement="bottom-start"
+          :visually-hidden-close="true"
+          :visually-hidden-close-label="'Close link input popover'"
+          data-qa="dt-editor-link-input-popover"
+          :show-close-button="false"
           @click="onInputFocus"
           @click.stop="onInputFocus"
-          @focus="onInputFocus"
-          @keydown.enter="setLink"
-        />
-      </div>
-      <template #footer>
-        <dt-button
-          :aria-label="confirmSetLinkButton.ariaLabel"
-          data-qa="dt-editor-set-link-confirm-btn"
-          @click="setLink"
+          @opened="updateInput"
         >
-          {{ confirmSetLinkButton.label }}
-        </dt-button>
-        <dt-button
-          :aria-label="cancelSetLinkButton.ariaLabel"
-          importance="clear"
-          kind="muted"
-          data-qa="dt-editor-set-link-cancel-btn"
-          @click="closeLinkInputModal"
-        >
-          {{ cancelSetLinkButton.label }}
-        </dt-button>
-        <dt-button
-          :aria-label="removeLinkButton.ariaLabel"
-          importance="clear"
-          kind="muted"
-          data-qa="dt-editor-remove-link-btn"
-          @click="removeLink"
-        >
-          {{ removeLinkButton.label }}
-        </dt-button>
-      </template>
-    </dt-modal>
+          <template #anchor>
+            <dt-tooltip
+              :key="linkButton.key"
+              :message="linkButton.tooltipMessage"
+              placement="top"
+            >
+              <template #anchor>
+                <dt-button
+                  :data-qa="linkButton.dataQA"
+                  importance="clear"
+                  kind="muted"
+                  class="d-ol-none"
+                  :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
+                  size="sm"
+                  @click="linkButton.onClick()"
+                >
+                  <template #icon>
+                    <dt-icon
+                      :name="linkButton.iconName"
+                      size="200"
+                      class="d-fw-bold"
+                    />
+                  </template>
+                </dt-button>
+              </template>
+            </dt-tooltip>
+          </template>
+
+          <template #content>
+            <span
+              v-if="showAddLink.setLinkTitle.length > 0"
+            >
+              {{ showAddLink.setLinkTitle }}
+            </span>
+            <dt-input
+              v-model="linkInput"
+              :input-aria-label="showAddLink.setLinkInputAriaLabel"
+              data-qa="dt-editor-link-input"
+              :placeholder="setLinkPlaceholder"
+              input-wrapper-class="d-bgc-black-100 d-mt6 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
+              @click="onInputFocus"
+              @click.stop="onInputFocus"
+              @focus="onInputFocus"
+              @keydown.enter="setLink"
+            />
+          </template>
+          <template #footerContent>
+            <div class="d-ml8 d-mr12">
+              <dt-button
+                class="d-mx2"
+                :aria-label="removeLinkButton.ariaLabel"
+                importance="clear"
+                kind="muted"
+                size="sm"
+                data-qa="dt-editor-remove-link-btn"
+                @click="removeLink"
+              >
+                {{ removeLinkButton.label }}
+              </dt-button>
+              <dt-button
+                class="d-mx2"
+                :aria-label="cancelSetLinkButton.ariaLabel"
+                importance="clear"
+                kind="muted"
+                size="sm"
+                data-qa="dt-editor-set-link-cancel-btn"
+                @click="closeLinkInput"
+              >
+                {{ cancelSetLinkButton.label }}
+              </dt-button>
+              <dt-button
+                class="d-mx2"
+                size="sm"
+                :aria-label="confirmSetLinkButton.ariaLabel"
+                data-qa="dt-editor-set-link-confirm-btn"
+                @click="setLink"
+              >
+                {{ confirmSetLinkButton.label }}
+              </dt-button>
+            </div>
+          </template>
+        </dt-popover>
+      </dt-stack>
+    </dt-stack>
 
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
@@ -208,7 +159,7 @@
         data-qa="dt-rich-text-editor"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
-        :input-class="inputClass"
+        :input-class="`${inputClass} d-ol-none d-my6`"
         :output-format="htmlOutputFormat"
         :auto-focus="autoFocus"
         :placeholder="placeholder"
@@ -236,9 +187,10 @@ import {
 } from './editor_constants.js';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
-import { DtModal } from '@/components/modal';
+import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
+import { DtTooltip } from '@/components/tooltip';
 
 export default {
   name: 'DtRecipeEditor',
@@ -247,9 +199,10 @@ export default {
     DtRichTextEditor,
     DtButton,
     DtIcon,
-    DtModal,
+    DtPopover,
     DtStack,
     DtInput,
+    DtTooltip,
   },
 
   mixins: [],
@@ -281,14 +234,6 @@ export default {
       type: String,
       required: true,
       default: '',
-    },
-
-    /**
-     * Indicates if the borders should be rounded.
-     */
-    roundedEdges: {
-      type: Boolean,
-      default: true,
     },
 
     /**
@@ -413,13 +358,69 @@ export default {
     },
 
     /**
+     * Show button to render ordered list items
+     */
+    showOrderedListButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to align text to the left
+     */
+    showAlignLeftButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to align text to the center
+     */
+    showAlignCenterButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to align text to the right
+     */
+    showAlignRightButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to justify text
+     */
+    showAlignJustifyButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to add quote format to text
+     */
+    showQuoteButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show button to add code block
+     */
+    showCodeBlockButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Show add link default config.
      */
     showAddLink: {
       type: Object,
       default: () => ({
         showAddLinkButton: true,
-        setLinkModalTitle: 'Add a link',
+        setLinkTitle: 'Add a link',
         setLinkInputAriaLabel: 'Input field to add link',
       }),
     },
@@ -470,20 +471,73 @@ export default {
     htmlOutputFormat () {
       return RICH_TEXT_EDITOR_OUTPUT_FORMATS[2];
     },
+
+    showingTextFormatButtons () {
+      return this.showBoldButton || this.showItalicsButton || this.showStrikeButton || this.showUnderlineButton;
+    },
+
+    showingAlignmentButtons () {
+      return this.showAlignLeftButton || this.showAlignCenterButton ||
+          this.showAlignRightButton || this.showAlignJustifyButton;
+    },
+
+    showingListButtons () {
+      return this.showListItemsButton || this.showOrderedListButton;
+    },
+
+    buttonGroups () {
+      const individualButtonStacks = this.individualButtons.map(buttonData => ({
+        key: buttonData.selector,
+        buttonGroup: [buttonData],
+      }));
+      return [
+        { key: 'format', buttonGroup: this.textFormatButtons },
+        { key: 'alignment', buttonGroup: this.alignmentButtons },
+        { key: 'list', buttonGroup: this.listButtons },
+        ...individualButtonStacks,
+      ].filter(buttonGroupData => buttonGroupData.buttonGroup.length > 0);
+    },
+
+    textFormatButtons () {
+      return [
+        { showBtn: this.showBoldButton, selector: 'bold', iconName: 'bold', dataQA: 'dt-editor-bold-btn', tooltipMessage: 'Bold', onClick: this.onBoldTextToggle },
+        { showBtn: this.showItalicsButton, selector: 'italic', iconName: 'italic', dataQA: 'dt-editor-italics-btn', tooltipMessage: 'Italics', onClick: this.onItalicTextToggle },
+        { showBtn: this.showUnderlineButton, selector: 'underline', iconName: 'underline', dataQA: 'dt-editor-underline-btn', tooltipMessage: 'Underline', onClick: this.onUnderlineTextToggle },
+        { showBtn: this.showStrikeButton, selector: 'strike', iconName: 'strikethrough', dataQA: 'dt-editor-strike-btn', tooltipMessage: 'Strike', onClick: this.onStrikethroughTextToggle },
+      ].filter(button => button.showBtn);
+    },
+
+    alignmentButtons () {
+      return [
+        { showBtn: this.showAlignLeftButton, selector: { textAlign: 'left' }, iconName: 'align-left', dataQA: 'dt-editor-align-left-btn', tooltipMessage: 'Align Left', onClick: () => this.onTextAlign('left') },
+        { showBtn: this.showAlignCenterButton, selector: { textAlign: 'center' }, iconName: 'align-center', dataQA: 'dt-editor-align-center-btn', tooltipMessage: 'Align Center', onClick: () => this.onTextAlign('center') },
+        { showBtn: this.showAlignRightButton, selector: { textAlign: 'right' }, iconName: 'align-right', dataQA: 'dt-editor-align-right-btn', tooltipMessage: 'Align Right', onClick: () => this.onTextAlign('right') },
+        { showBtn: this.showAlignJustifyButton, selector: { textAlign: 'justify' }, iconName: 'align-justify', dataQA: 'dt-editor-align-justify-btn', tooltipMessage: 'Align Justify', onClick: () => this.onTextAlign('justify') },
+      ].filter(button => button.showBtn);
+    },
+
+    listButtons () {
+      return [
+        { showBtn: this.showListItemsButton, selector: 'bulletList', iconName: 'list-bullet', dataQA: 'dt-editor-list-items-btn', tooltipMessage: 'Bullet List', onClick: this.onBulletListToggle },
+        { showBtn: this.showOrderedListButton, selector: 'orderedList', iconName: 'list-ordered', dataQA: 'dt-editor-ordered-list-items-btn', tooltipMessage: 'Ordered List', onClick: this.onOrderedListToggle },
+      ].filter(button => button.showBtn);
+    },
+
+    individualButtons () {
+      return [
+        { showBtn: this.showQuoteButton, selector: 'blockquote', iconName: 'quote', dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
+        { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
+      ].filter(button => button.showBtn);
+    },
+
+    linkButton () {
+      return { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', iconName: 'link-2', dataQA: 'dt-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInput };
+    },
   },
 
   watch: {
     value (newValue) {
       this.internalInputValue = newValue;
-    },
-
-    showLinkInput (showingModal) {
-      if (!showingModal) {
-        return this.closeLinkInputModal();
-      }
-      // If there was a link previously associated to the selected text,
-      // set it as a value in the input.
-      this.linkInput = this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
     },
   },
 
@@ -494,7 +548,7 @@ export default {
 
     removeLink () {
       this.$refs.richTextEditor?.editor?.chain()?.focus()?.unsetLink()?.run();
-      this.closeLinkInputModal();
+      this.closeLinkInput();
     },
 
     setLink (event) {
@@ -541,16 +595,24 @@ export default {
           .run();
       }
 
-      this.closeLinkInputModal();
+      this.closeLinkInput();
     },
 
-    openLinkInputModal () {
+    openLinkInput () {
       this.showLinkInput = true;
     },
 
-    closeLinkInputModal () {
+    updateInput (openedInput) {
+      if (!openedInput) {
+        return this.closeLinkInput();
+      }
+      this.linkInput = this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
+    },
+
+    closeLinkInput () {
       this.showLinkInput = false;
       this.linkInput = '';
+      this.$refs.richTextEditor.editor?.chain().focus();
     },
 
     onBoldTextToggle () {
@@ -569,8 +631,28 @@ export default {
       this.$refs.richTextEditor?.editor.chain().focus().toggleStrike().run();
     },
 
+    onTextAlign (alignment) {
+      if (this.$refs.richTextEditor?.editor?.isActive({ textAlign: alignment })) {
+        // If this alignment type is already set here, unset it
+        return this.$refs.richTextEditor?.editor.chain().focus().unsetTextAlign().run();
+      }
+      this.$refs.richTextEditor?.editor.chain().focus().setTextAlign(alignment).run();
+    },
+
     onBulletListToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleBulletList().run();
+    },
+
+    onOrderedListToggle () {
+      this.$refs.richTextEditor?.editor.chain().focus().toggleOrderedList().run();
+    },
+
+    onCodeBlockToggle () {
+      this.$refs.richTextEditor?.editor.chain().focus().toggleCodeBlock().run();
+    },
+
+    onBlockquoteToggle () {
+      this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
     },
 
     onFocus (event) {
@@ -592,11 +674,7 @@ export default {
 </script>
 
 <style lang="less">
-.dt-editor--remaining-char-tooltip {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.dt-editor--remaining-char {
-  font-size: 1.2rem;
+.dt-editor--top-bar-background {
+  background-color: var(--dt-color-surface-secondary);
 }
 </style>
