@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
   <node-view-wrapper
-    class="d-d-inline-block"
+    class="d-d-inline-block d-va-bottom d-lh0"
   >
     <dt-emoji
-      size="300"
+      size="500"
       :code="node.attrs.code"
     />
   </node-view-wrapper>
