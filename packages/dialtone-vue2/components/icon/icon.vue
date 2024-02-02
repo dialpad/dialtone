@@ -71,7 +71,7 @@ export default {
 
   computed: {
     iconClass () {
-      return `d-icon ${ICON_SIZE_MODIFIERS[this.size]}`;
+      return `d-icon d-icon--${this.name} ${ICON_SIZE_MODIFIERS[this.size]}`;
     },
   },
 
