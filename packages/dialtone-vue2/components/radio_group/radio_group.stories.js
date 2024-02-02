@@ -133,12 +133,12 @@ export default {
 };
 
 export const Default = {
-  render: (argsData) => createRenderConfig(RadioGroupVariantsTemplate,RadioGroupDefaultTemplate , argsData),
+  render: (argsData) => createRenderConfig(RadioGroupVariantsTemplate, RadioGroupDefaultTemplate, argsData),
   args: {},
 };
 
 export const Variants = {
-  render: (argsData) => createRenderConfig(RadioGroupVariantsTemplate,RadioGroupVariantsTemplate , argsData),
+  render: (argsData) => createRenderConfig(RadioGroupVariantsTemplate, RadioGroupVariantsTemplate, argsData),
   args: {},
 
   parameters: {

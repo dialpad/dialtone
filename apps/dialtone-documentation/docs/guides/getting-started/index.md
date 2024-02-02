@@ -174,10 +174,11 @@ cd ./path/to/dialtone
 
 ### Install dependencies
 
-Dialtone uses [Gulp](https://gulpjs.com/) to automate its various workflows. Run the following command to install Gulp and all other project dependencies:
+Dialtone uses [Gulp](https://gulpjs.com/) to automate its various workflows.
+Run the following command to install Gulp and all other project dependencies:
 
 ```bash
-    npm install
+pnpm install
 ```
 
 ### Building Dialtone
@@ -185,7 +186,7 @@ Dialtone uses [Gulp](https://gulpjs.com/) to automate its various workflows. Run
 You're now ready to build Dialtone! To build and run the development server:
 
 ```bash
-    npm start
+nx start:dialtone
 ```
 
 Once finished, visit [http://localhost:4000/](http://localhost:4000/).

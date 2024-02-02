@@ -86,8 +86,8 @@ DialtoneTokens.dtColorPurple200
 ## Quick Start for Contributors
 
 1. clone repo
-2. `npm install`
-3. `pnpm run build` to build tokens. Built tokens will be output to the dist folder.
+2. `pnpm install`
+3. `nx build dialtone-tokens` to build tokens. Built tokens will be output to the dist folder.
 
 - `base.json` Contains tokens exported from figma.
 - `tokens/tokens.json` Contains tokens in style dictionary format (generated from `base.json`).

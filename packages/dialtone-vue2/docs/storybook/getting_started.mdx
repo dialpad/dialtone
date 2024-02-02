@@ -15,10 +15,6 @@ component library.
 
 ## Dialtone Vue Setup
 
-### NPM_AUTH_TOKEN
-
-Ensure that `NPM_AUTH_TOKEN` is set in your path. You will need to set the token to an NPM authentication token which has read level access to the `@dialpad` organization.
-
 ### Install Dependencies
 
 ```bash
@@ -32,9 +28,7 @@ pnpm install
 Runs storybook locally at `localhost:9010`
 
 ```shell
-cd dialtone-vue
-
-pnpm run storybook
+nx storybook dialtone-vue2
 ```
 
 ### Building Storybook
@@ -42,9 +36,7 @@ pnpm run storybook
 Outputs the bundled storybook to `dialtone-vue/storybook-static`
 
 ```shell
-cd dialtone-vue
-
-pnpm run storybook:build
+nx storybook:build dialtone-vue2
 ```
 
 ### Deploying Storybook

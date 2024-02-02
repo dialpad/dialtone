@@ -218,7 +218,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 export const Default = {
-  render: (argsData) => createRenderConfig(DtRecipeComboboxWithPopover, DtRecipeComboboxWithPopoverDefaultTemplate, argsData),
+  render: (argsData) =>
+    createRenderConfig(DtRecipeComboboxWithPopover, DtRecipeComboboxWithPopoverDefaultTemplate, argsData),
 
   args: {
     items: [
@@ -257,7 +258,8 @@ export const Default = {
 };
 
 export const Empty = {
-  render: (argsData) => createRenderConfig(DtRecipeComboboxWithPopover, DtRecipeComboboxWithPopoverDefaultTemplate, argsData),
+  render: (argsData) =>
+    createRenderConfig(DtRecipeComboboxWithPopover, DtRecipeComboboxWithPopoverDefaultTemplate, argsData),
 
   args: {
     items: [],

@@ -10,7 +10,7 @@
     "build:documentation:functions": "pnpm exec typedoc --plugin typedoc-plugin-markdown",
     "clean": "rm -rf ./dist",
     "lint": "run-s lint:code lint:docs",
-    "lint:code": "eslint . --ext .js,.vue --ignore-path .gitignore",
+    "lint:code": "eslint . --ext .js,.vue --ignore-path .eslintignore",
     "lint:docs": "markdownlint '**/*.mdx'",
     "pretest": "pnpm run clean",
     "start": "pnpm run storybook",

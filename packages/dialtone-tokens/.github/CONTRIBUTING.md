@@ -21,7 +21,7 @@ This repo's `tokens` folder contains multiple json files which are the source of
 
 ## Token build process
 
-Because our tokens come from figma, it contains some syntax specific to Figma. This syntax must be translated into a format that Style Dictionary expects. To do this we use [token-transformer](https://www.npmjs.com/package/token-transformer) for Android / iOS, and [sd-transforms](https://github.com/tokens-studio/sd-transforms) for web. token-transformer can be run individually via `pnpm nx build:token-transformer dialtone-tokens`. It can also be run as part of `pnpm nx build dialtone-tokens` which will build and output all different formats. Token Transformer outputs the new json file to the `token_transformer` directory.
+Because our tokens come from figma, it contains some syntax specific to Figma. This syntax must be translated into a format that Style Dictionary expects. To do this we use [token-transformer](https://www.npmjs.com/package/token-transformer) for Android / iOS, and [sd-transforms](https://github.com/tokens-studio/sd-transforms) for web. token-transformer can be run individually via `nx build:token-transformer dialtone-tokens`. It can also be run as part of `nx build dialtone-tokens` which will build and output all different formats. Token Transformer outputs the new json file to the `token_transformer` directory.
 
 Next in the process is running Style Dictionary which will output tokens to a variety of different formats. We currently output the following:
 
@@ -32,7 +32,7 @@ Next in the process is running Style Dictionary which will output tokens to a va
 - LESS
 - CSS
 
-All of these are output to the dist folder when you do `pnpm run build`
+All of these are output to the dist folder when you do `nx build dialtone-tokens`
 
 ## Style Dictionary Configuration
 
@@ -48,11 +48,11 @@ Because our design tokens are consumed on a variety of different platforms, we o
 
 ### Web
 
-Our web package is output via npm. Even though it is meant for web we contain the files for all platforms in the package (android, ios) for maximum flexibility. Everything in the `dist` folder after you run `pnpm run build` is included in the NPM package. You can access the NPM package here: [@dialpad/dialtone-tokens](https://www.npmjs.com/package/@dialpad/dialtone-tokens)
+Our web package is output via npm. Even though it is meant for web we contain the files for all platforms in the package (android, ios) for maximum flexibility. Everything in the `dist` folder after you run `nx build dialtone-tokens` is included in the NPM package. You can access the NPM package here: [@dialpad/dialtone-tokens](https://www.npmjs.com/package/@dialpad/dialtone-tokens)
 
 ### Android
 
-Upon build, the Android source code is output to `dist/android` folder. If we are looking to publish the package, this source must be compiled into an Android package. This is done via Gradle by running `publish:android-package`. The compiled package will contain kotlin as well as resource files for Dialtone's tokens. The Android package is served through Github Packages and can be found here: [design.dialpad.tokens.dialtone-tokens](https://github.com/dialpad/dialtone-tokens/packages/1646082). You do not have to run this command locally unless you are looking to debug something related to the Android package. The android package will be built and released on CI via our regular release process.
+Upon build, the Android source code is output to `dist/android` folder. If we are looking to publish the package, this source must be compiled into an Android package. This is done via Gradle by running `publish:android-package`. The compiled package will contain kotlin as well as resource files for Dialtone's tokens. The Android package is served through GitHub Packages and can be found here: [design.dialpad.tokens.dialtone-tokens](https://github.com/dialpad/dialtone-tokens/packages/1646082). You do not have to run this command locally unless you are looking to debug something related to the Android package. The android package will be built and released on CI via our regular release process.
 
 If you would like to build the Android package locally for debugging purposes you will need to:
 

@@ -8,11 +8,11 @@ import * as InputStories from '../../components/input/input.stories';
 
 Writing stories for Storybook using the Component Story Format (CSF)
 
-### [Official Docs](https://storybook.js.org/docs/vue/get-started/introduction)
+[Official Docs](https://storybook.js.org/docs/vue/get-started/introduction)
 
 ## What is a story?
 
-Stories the are building blocks of Storybook, they represent a snapshot or slice of the
+Stories are building blocks of Storybook, they represent a snapshot or slice of the
 component at a particular state, rendered onto a "playground" or "sandbox" for anyone to interact with.
 In turn, we can take these stories and embed them into
 [MDX](https://github.com/mdx-js/mdx) files (like the one you're reading right now)
@@ -349,6 +349,7 @@ WithWarning.args = {
 `TODO`
 
 ### Ignoring Exports
+
 Sometimes we don't want specific exports to be parsed as a story. This may occur if we want to export some
 data property to be reused in composite stories. This can be accomplished by specifying the `excludeStories`
 field in the `default export`

@@ -3,7 +3,7 @@
 export default {
   entryPoints: ['common/*.js'],
 
-  // Non public modules should be added here.
+  // Non-public modules should be added here.
   exclude: ['**/*.test.js', 'common/storybook_utils.js', 'common/custom-emoji-test.js', 'common/mixins'],
   out: 'functions/generated',
   githubPages: false,
