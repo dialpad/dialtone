@@ -33,6 +33,23 @@ traditional package managers.
 
 We use PNPM to manage everything related to NPM, **adding, installing, removing and publishing packages**.
 
+#### Do
+
+Use PNPM to manage packages dependencies
+
+```bash
+pnpm add eslint --filter dialtone-icons
+```
+
+#### Don't
+
+Run package scripts with PNPM, this will not use NX cache and pipelines,
+so you might end up missing dependencies that needed to be built before.
+
+```bash
+pnpm run --filter packages/dialtone-css build
+```
+
 ### NX
 
 Nx is a build system with built-in tooling and advanced CI capabilities.
@@ -55,6 +72,23 @@ if they need to run before a specific command.
 ⚠️ You can run the commands with PNPM too, but it's not advisable as You'll lose the advantages that NX provides.
 
 For more information, check [setup a monorepo with PNPM workspaces and NX](https://blog.nrwl.io/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx-bc5d97258a7e#d69f)
+
+#### Do
+
+Use NX to run scripts, this will use cache, improve the performance,
+and build any dependency needed before running your command.
+
+```bash
+nx run dialtone-css:build
+```
+
+#### Don't
+
+Try installing packages with NX, this doesn't work at all, please use PNPM instead.
+
+```bash
+nx add eslint --filter dialtone-icons
+```
 
 ## Quick start
 
