@@ -1,6 +1,6 @@
 # Finds deprecated dialtone svg and vue icons usage (deprecated-icons)
 
-We separated icons from dialtone into dialtone-icons repo,
+We moved the icons from dialtone-legacy to dialtone-icons package,
 so we are deprecating old svg and vue icons on dialtone once the migrations are finished.
 
 ## Rule Details
