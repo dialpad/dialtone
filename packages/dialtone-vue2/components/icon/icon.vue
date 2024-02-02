@@ -65,6 +65,7 @@ export default {
     return {
       modifiedSvgContent: null,
       auxElement: null,
+      observer: null,
     };
   },
 
@@ -93,29 +94,102 @@ export default {
 
   methods: {
     setRefObserver () {
-      const iconRef = this.$refs.iconRef;
+      if (!this.$refs.iconRef) return;
 
-      if (iconRef) {
-        const observer = new MutationObserver(() => {
-          if (!this.auxElement) {
-            const svgElement = this.$refs.iconRef.children[0];
-            Array.from(this.$refs.iconRef.attributes).forEach(attr => {
-              svgElement.setAttribute(attr.name, attr.value);
-            });
-            this.auxElement = svgElement;
-
-            this.$refs.iconRef.replaceWith(svgElement);
-          } else {
-            Array.from(this.$refs.iconRef.attributes).forEach(attr => {
-              this.auxElement.setAttribute(attr.name, attr.value);
-            });
+      this.observer = new MutationObserver(async (mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'childList') {
+            await this.handleChildListMutation();
+          } else if (mutation.type === 'attributes') {
+            this.handleAttributesMutation();
           }
-        });
+        }
+      });
 
-        observer.observe(iconRef, { attributes: true, childList: true, subtree: true });
+      this.observerConnect();
+    },
 
-        this.observer = observer;
+    async handleChildListMutation () {
+      if (!this.auxElement) {
+        // Initial setup when the child (SVG) is first added
+        await this.initializeSvgElement();
+      } else {
+        // Update SVG element when children change
+        await this.updateSvgElement();
       }
+    },
+
+    handleAttributesMutation () {
+      if (!this.auxElement) return;
+
+      // Update auxElement attributes to match iconRef
+      this.syncAttributes(this.auxElement, this.$refs.iconRef.attributes);
+
+      // Reflect changes in the DOM
+      const currentSvgElement = document.getElementById(this.id);
+      if (currentSvgElement) {
+        currentSvgElement.replaceWith(this.auxElement.cloneNode(true));
+      }
+    },
+
+    async initializeSvgElement () {
+      await this.loadSvg();
+
+      const initialSvgElement = this.$refs.iconRef.children[0];
+
+      this.syncAttributes(initialSvgElement, this.$refs.iconRef.attributes);
+
+      this.auxElement = initialSvgElement.cloneNode(true);
+
+      this.$refs.iconRef.replaceWith(initialSvgElement);
+    },
+
+    async updateSvgElement () {
+      await this.loadSvg();
+
+      const updatedSvgElement = this.$refs.iconRef.children[0];
+
+      if (!updatedSvgElement) return;
+
+      // Get updated SVG element attributes using cloneNode to avoid reference issues
+      const auxUpdatedSvgElementAttributes = this.$refs.iconRef.children[0].cloneNode(true).attributes;
+
+      // Add previous attributes to the updated SVG element
+      this.syncAttributes(updatedSvgElement, this.auxElement.attributes);
+
+      // Add current attributes to the updated SVG element (e.g. v-show attribute)
+      this.syncAttributes(updatedSvgElement, this.$refs.iconRef.attributes);
+
+      // Override auxElement attributes with the updated SVG element attributes
+      // This will override for example viewBox attribute but will not override id (because it doesnt has it)
+      this.syncAttributes(updatedSvgElement, auxUpdatedSvgElementAttributes);
+
+      // Update auxElement with the updated SVG element
+      this.auxElement = updatedSvgElement.cloneNode(true);
+
+      const currentSvgElement = document.getElementById(this.id);
+
+      currentSvgElement?.replaceWith(updatedSvgElement);
+    },
+
+    syncAttributes (targetElement, attributes) {
+      // To avoid triggering the observer when setting attributes
+      // we disconnect the observer, set the attributes, and then reconnect the observer
+      this.observerDisconnect();
+
+      Array.from(attributes).forEach(attr => {
+        targetElement.setAttribute(attr.name, attr.value);
+      });
+
+      this.observerConnect();
+    },
+
+    observerConnect () {
+      this.observer.observe(this.$refs.iconRef, { attributes: true, childList: true, subtree: true });
+    },
+
+    observerDisconnect () {
+      this.observer.disconnect();
     },
 
     async loadSvg () {
