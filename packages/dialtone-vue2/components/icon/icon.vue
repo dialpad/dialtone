@@ -3,6 +3,7 @@
     :id="id"
     ref="iconRef"
     data-qa="dt-icon"
+    :data-name="name"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
     :aria-label="ariaLabel"
     :class="iconClass"
