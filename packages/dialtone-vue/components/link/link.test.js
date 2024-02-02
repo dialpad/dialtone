@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
   LINK_KIND_MODIFIERS,
@@ -18,6 +18,7 @@ const baseSlots = {
 
 let mockProps = {};
 let mockSlots = {};
+const testContext = {};
 
 describe('DtLink tests', () => {
   let wrapper;
@@ -25,12 +26,17 @@ describe('DtLink tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtLink, {
-      props: { ...baseProps, ...mockProps },
+      propsData: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
+      localVue: testContext.localVue,
     });
 
     nativeLink = wrapper.find('[data-qa="dt-link"]');
   };
+
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
+  });
 
   beforeEach(() => {
     updateWrapper();

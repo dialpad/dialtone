@@ -8,7 +8,7 @@
       @focusin="$attrs.onFocusIn"
       @focusout="$attrs.onFocusOut"
     >
-      {{ defaultSlot }}
+      {{ $attrs.default }}
     </dt-link>
   </div>
 </template>

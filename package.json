@@ -15,6 +15,9 @@
     "release:beta": "./scripts/release.sh beta",
     "test:vitest": "vitest"
   },
+  "dependencies": {
+    "vue-demi": "^0.14.6"
+  },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",

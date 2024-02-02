@@ -6,6 +6,7 @@
     ]"
     data-qa="dt-link"
     :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
+    v-on="$listeners"
   >
     <!-- @slot Slot for main content -->
     <slot />
@@ -37,6 +38,32 @@ export default {
       },
     },
   },
+
+  emits: [
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+
+    /**
+     * Native focus in event
+     *
+     * @event focusin
+     * @type {FocusEvent}
+     */
+    'focusin',
+
+    /**
+     * Native focus out event
+     *
+     * @event focusout
+     * @type {FocusEvent}
+     */
+    'focusout',
+  ],
 
   data () {
     return {
