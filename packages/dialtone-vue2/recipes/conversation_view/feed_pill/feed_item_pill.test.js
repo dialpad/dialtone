@@ -114,7 +114,9 @@ describe('DtRecipeFeedItemPill Tests', function () {
 
       it('should show a different icon', () => {
         expect(icon.exists()).toBe(true);
-        expect(icon.attributes('data-name')).toBe('Chevron Right');
+        const iconName = icon.find('[data-name="Chevron Right"]').exists();
+
+        expect(iconName).toBe(true);
       });
     });
 

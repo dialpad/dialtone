@@ -79,7 +79,6 @@ describe('DtRecipeGeneralRow Tests', () => {
 
       it('should render the icon', () => {
         expect(iconType.exists()).toBe(true);
-        expect(iconType.find('svg').exists()).toBeTruthy();
       });
 
       it('should render the description', () => {

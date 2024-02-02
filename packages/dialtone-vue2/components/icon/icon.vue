@@ -3,7 +3,6 @@
     :id="id"
     ref="iconRef"
     data-qa="dt-icon"
-    :data-name="setDataName(name)"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
     :aria-label="ariaLabel"
     :class="iconClass"
@@ -94,13 +93,6 @@ export default {
   },
 
   methods: {
-    setDataName (str) {
-      return str
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-    },
-
     setRefObserver () {
       if (!this.$refs.iconRef) return;
 
