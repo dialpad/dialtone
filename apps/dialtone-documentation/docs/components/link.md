@@ -7,6 +7,24 @@ image: assets/images/components/link.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-link--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21226&viewport=-746%2C-197%2C1.41&t=xHutRjwo1o5zMTgT-11
 ---
+
+<div>
+  <dt-stack direction="row" gap="500" class="d-mb16">
+    <u>native underline</u>
+    <del>native del</del>
+    <ins>native ins</ins>
+    <abbr title="asdf">native abbr</abbr>
+    <s>native strikethrough</s>
+    <a href="#link">native link</a>
+  </dt-stack>
+  <dt-stack direction="row" gap="500" class="d-mb16">
+    <a href="#link" class="d-link">d-link</a>
+    <u class="d-td-underline">d-td-underline</u>
+    <u class="d-td-dotted">d-td-dotted</u>
+    <u class="d-td-line-through">d-td-line-through</u>
+  </dt-stack>
+</div>
+
 <code-well-header>
   <a href="#link" class="d-link">Base link</a>
 </code-well-header>

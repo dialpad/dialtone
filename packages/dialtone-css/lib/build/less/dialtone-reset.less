@@ -75,6 +75,14 @@ pre {
 
 a {
   background-color: transparent;
+  text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
+  text-decoration-thickness: var(--dt-size-border-50);
+}
+
+ins,
+u {
+  text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
+  text-decoration-thickness: var(--dt-size-border-50);
 }
 
 /**
@@ -86,6 +94,13 @@ abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
   text-decoration: underline dotted; /* 2 */
+  text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
+  text-decoration-thickness: var(--dt-size-border-100);
+}
+
+del,
+s {
+  text-decoration-thickness: var(--dt-size-border-100) !important;
 }
 
 /**
