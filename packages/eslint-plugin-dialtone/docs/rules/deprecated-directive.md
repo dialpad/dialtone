@@ -9,7 +9,7 @@ Currently, the directives with the below attribute names are considered deprecat
 
 - v-tooltip
 
-This rule specifically targets components in UberVoice.
+This rule specifically targets directives in UberVoice.
 If you are using Dialtone Vue outside UberVoice you may want to disable this rule.
 
 Examples of **incorrect** code for this rule:
