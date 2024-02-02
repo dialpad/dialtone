@@ -131,7 +131,7 @@ describe('DtBadge Tests', () => {
         it('renders ai icon in iconLeft slot by default', () => {
           iconLeft = iconLeftWrapper.find('[data-name="Dialpad Ai"]');
 
-          expect(iconLeft.attributes('data-name') === 'Dialpad Ai').toBe(true);
+          expect(iconLeft.exists()).toBe(true);
         });
       });
     });
