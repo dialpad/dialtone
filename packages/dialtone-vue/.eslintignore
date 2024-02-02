@@ -1,0 +1,18 @@
+# dependencies
+node_modules
+
+# storybook
+storybook-static
+
+# tests
+tests/.cache
+tests/compiled
+
+# ejs files
+**/*.ejs
+
+# builds
+dist
+
+# tools
+tools
