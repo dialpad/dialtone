@@ -1,6 +1,0 @@
-# Build generated files #
-######################
-lib/dist
-
-# Jest Folders #
-coverage/

@@ -1,8 +1,0 @@
-token_transformer
-dist*/*
-!dist_ios/Package.swift
-!dist_ios/.github
-!dist_ios/VERSION
-.gradle
-local.properties
-.env
