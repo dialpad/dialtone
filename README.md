@@ -110,13 +110,18 @@ or follow its [installation guide](https://pnpm.io/installation):
 npm install -g pnpm
 ```
 
-Once pnpm is installed, in the monorepo root run:
+Once pnpm is installed, install nx globally to make sure you can run commands such as `nx run build`
+without having to prefix them with `pnpm` or `pnpm exec`:
+
+```bash
+pnpm add --global nx@latest
+```
+
+Then, install the dependencies for all the monorepo packages and apps.
 
 ```bash
 pnpm install
 ```
-
-This will install the dependencies for all the monorepo packages and apps.
 
 ### Running the projects
 
