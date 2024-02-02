@@ -9,15 +9,14 @@
     <!-- Section for the top UI -->
     <dt-stack
       direction="row"
-      gap="0"
-      class="d-py4 dt-editor--top-bar-background d-divide-x d-divide-black-200"
+      gap="400"
+      class="d-p8 dt-editor--top-bar-background"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
         :key="buttonGroup.key"
         direction="row"
         gap="300"
-        class="d-p4"
       >
         <dt-tooltip
           v-for="button in buttonGroup.buttonGroup"
@@ -31,7 +30,7 @@
               importance="clear"
               kind="muted"
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-              size="sm"
+              size="xs"
               @click="button.onClick()"
             >
               <template #icon>
@@ -45,12 +44,11 @@
           </template>
         </dt-tooltip>
       </dt-stack>
-
+      <div style="height: calc(var(--dt-size-550) + var(--dt-size-300)); width: var(--dt-size-100); background: var(--dt-color-border-subtle);"></div>
       <dt-stack
         v-if="linkButton.showBtn"
         direction="row"
         gap="300"
-        class="d-p4"
       >
         <dt-popover
           :open.sync="showLinkInput"
@@ -76,7 +74,7 @@
                   kind="muted"
                   class="d-ol-none"
                   :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
-                  size="sm"
+                  size="xs"
                   @click="linkButton.onClick()"
                 >
                   <template #icon>
