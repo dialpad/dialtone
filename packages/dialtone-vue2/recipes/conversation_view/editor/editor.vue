@@ -9,7 +9,7 @@
     <!-- Section for the top UI -->
     <dt-stack
       direction="row"
-      gap="400"
+      gap="450"
       class="d-p8 dt-editor--top-bar-background"
     >
       <dt-stack
