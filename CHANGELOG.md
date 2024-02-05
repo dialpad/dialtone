@@ -1,3 +1,10 @@
+## [9.11.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.0...dialtone/v9.11.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* push new keywords.json ([f3cc041](https://github.com/dialpad/dialtone/commit/f3cc0418b7fc9a000954148cec38e521f24dcd50))
+
 # [9.11.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.10.1...dialtone/v9.11.0) (2024-02-05)
 
 
