@@ -53,6 +53,7 @@ import {
   TOOLTIP_DIRECTIONS,
   TOOLTIP_STICKY_VALUES,
   TOOLTIP_DELAY_MS,
+  TOOLTIP_APPEND_TO_VALUES,
 } from './tooltip_constants.js';
 import { getUniqueString } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
@@ -81,6 +82,20 @@ export default {
     id: {
       type: String,
       default () { return getUniqueString(); },
+    },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * 'body' will append to the nearest body (supports shadow DOM).
+     * @values 'body', 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: 'body',
+      validator: appendTo => {
+        return TOOLTIP_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
+      },
     },
 
     /**
@@ -271,6 +286,9 @@ export default {
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
+
+      // reference to the anchor element
+      anchor: null,
     };
   },
 
@@ -294,11 +312,16 @@ export default {
       };
     },
 
+    appendToElement () {
+      return this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo;
+    },
+
     tippyProps () {
       return {
         offset: this.offset,
         interactive: false,
         trigger: 'manual',
+        appendTo: this.appendToElement,
         placement: this.placement,
         sticky: this.sticky,
         popperOptions: getPopperOptions({
@@ -307,10 +330,6 @@ export default {
           onChangePlacement: this.onChangePlacement,
         }),
       };
-    },
-
-    anchor () {
-      return this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     },
   },
 
@@ -347,19 +366,15 @@ export default {
     },
   },
 
+  // eslint-disable-next-line complexity
   mounted () {
     if (!this.enabled && this.show != null) {
       console.warn('Tooltip: You cannot use both the enabled and show props at the same time.');
       console.warn('The show prop will be ignored.');
     }
+    this.anchor = this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
-
-    // immediate watcher fires before mounted, so have this here in case
-    // show prop was initially set to true.
-    if (this.isShown) {
-      this.tip.show();
-    }
   },
 
   beforeDestroy () {
@@ -458,12 +473,21 @@ export default {
       this.setProps();
     },
 
+    onCreate (instance) {
+      // immediate watcher fires before mounted, so have this here in case
+      // show prop was initially set to true.
+      if (this.isShown) {
+        instance.show();
+      }
+    },
+
     initOptions () {
       return {
         contentElement: this.$refs.content.$el,
         allowHTML: true,
         zIndex: this.calculateAnchorZindex(),
         onMount: this.onMount,
+        onCreate: this.onCreate,
         ...this.tippyProps,
       };
     },
