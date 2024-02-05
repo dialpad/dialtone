@@ -1,3 +1,11 @@
+## [8.24.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.0...dialtone-css/v8.24.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** center align emojis within text ([#136](https://github.com/dialpad/dialtone/issues/136)) ([60dca67](https://github.com/dialpad/dialtone/commit/60dca6758f39865bab2e49d474f1eb84273a558c))
+* **Style:** align text decoration treatments ([#141](https://github.com/dialpad/dialtone/issues/141)) ([6baf8b2](https://github.com/dialpad/dialtone/commit/6baf8b2faecb25c162c5b67280b610da50d50054))
+
 # [8.24.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.23.2...dialtone-css/v8.24.0) (2024-01-26)
 
 
