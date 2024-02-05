@@ -475,10 +475,13 @@ export default {
 
     onMount () {
       this.setProps();
+    },
+
+    onCreate (instance) {
       // immediate watcher fires before mounted, so have this here in case
       // show prop was initially set to true.
       if (this.isShown) {
-        this.tip.show();
+        instance.show();
       }
     },
 
@@ -488,6 +491,7 @@ export default {
         allowHTML: true,
         zIndex: this.calculateAnchorZindex(),
         onMount: this.onMount,
+        onCreate: this.onCreate,
         ...this.tippyProps,
       };
     },
