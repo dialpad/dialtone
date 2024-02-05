@@ -312,12 +312,16 @@ export default {
       };
     },
 
+    appendToElement () {
+      return this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo;
+    },
+
     tippyProps () {
       return {
         offset: this.offset,
         interactive: false,
         trigger: 'manual',
-        appendTo: this.appendTo === 'body' && this.anchor ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
+        appendTo: this.appendToElement,
         placement: this.placement,
         sticky: this.sticky,
         popperOptions: getPopperOptions({
