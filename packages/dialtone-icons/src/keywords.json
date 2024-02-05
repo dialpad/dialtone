@@ -1198,41 +1198,162 @@
       ]
     },
     "editing": {
-      "ai-write": ["edit", "AI", "call length", "summary", "pencil"],
-      "align-center": ["Text", "Format", "Flush"],
-      "align-justify": ["Text", "Format", "Flush"],
-      "align-left": ["Text", "Format", "Flush"],
-      "align-right": ["Text", "Format", "Flush"],
-      "asterisk": ["reference"],
-      "at-sign": ["mention", "at", "email", "message"],
-      "baseline": ["text", "format", "color"],
-      "bold": ["text", "strong", "format"],
+      "ai-write": [
+        "edit",
+        "AI",
+        "call length",
+        "summary",
+        "pencil"
+      ],
+      "align-center": [
+        "Text",
+        "Format",
+        "Flush"
+      ],
+      "align-justify": [
+        "Text",
+        "Format",
+        "Flush"
+      ],
+      "align-left": [
+        "Text",
+        "Format",
+        "Flush"
+      ],
+      "align-right": [
+        "Text",
+        "Format",
+        "Flush"
+      ],
+      "asterisk": [
+        "reference"
+      ],
+      "at-sign": [
+        "mention",
+        "at",
+        "email",
+        "message"
+      ],
+      "baseline": [
+        "text",
+        "format",
+        "color"
+      ],
+      "bold": [
+        "text",
+        "strong",
+        "format"
+      ],
       "branch": [],
-      "call-merge": ["arrows", "converge", "join", "connect"],
-      "code-block": ["developer", "programming", "script", "syntax"],
-      "edit-2": ["pencil", "change"],
-      "edit": ["pencil", "change"],
-      "eraser": ["pencil", "drawing", "undo", "delete", "clear"],
+      "call-merge": [
+        "arrows",
+        "converge",
+        "join",
+        "connect"
+      ],
+      "code-block": [
+        "developer",
+        "programming",
+        "script",
+        "syntax"
+      ],
+      "edit-2": [
+        "pencil",
+        "change"
+      ],
+      "edit": [
+        "pencil",
+        "change"
+      ],
+      "eraser": [
+        "pencil",
+        "drawing",
+        "undo",
+        "delete",
+        "clear"
+      ],
       "expert-node": [],
-      "image": ["picture", "photo"],
-      "indent": ["text", "tab"],
-      "inspect": ["element", "mouse", "click", "cursor", "pointer", "box"],
-      "italic": ["oblique", "text", "format"],
-      "keyboard": ["layout", "spell", "settings", "mouse"],
-      "link-2-off": ["unchain", "chain"],
-      "link-2": ["chain", "url"],
-      "list-add": ["insert"],
-      "list-bullet": ["options"],
-      "list-checks": ["todo", "done"],
-      "list-ordered": ["sort"],
-      "paperclip": ["attachment", "file"],
-      "quote": ["quotation"],
-      "scissors": ["cut"],
-      "strikethrough": ["cross out", "delete", "remove", "format"],
-      "text-cursor": ["select"],
-      "type": ["text", "font", "typography"],
-      "underline": ["text", "format"],
-      "unlink-2": ["url", "unchain", "unchain"]
+      "image": [
+        "picture",
+        "photo"
+      ],
+      "indent": [
+        "text",
+        "tab"
+      ],
+      "inspect": [
+        "element",
+        "mouse",
+        "click",
+        "cursor",
+        "pointer",
+        "box"
+      ],
+      "italic": [
+        "oblique",
+        "text",
+        "format"
+      ],
+      "keyboard": [
+        "layout",
+        "spell",
+        "settings",
+        "mouse"
+      ],
+      "link-2-off": [
+        "unchain",
+        "chain"
+      ],
+      "link-2": [
+        "chain",
+        "url"
+      ],
+      "list-add": [
+        "insert"
+      ],
+      "list-bullet": [
+        "options"
+      ],
+      "list-checks": [
+        "todo",
+        "done"
+      ],
+      "list-ordered": [
+        "sort"
+      ],
+      "paperclip": [
+        "attachment",
+        "file"
+      ],
+      "quote": [
+        "quotation"
+      ],
+      "scissors": [
+        "cut"
+      ],
+      "strikethrough": [
+        "cross out",
+        "delete",
+        "remove",
+        "format"
+      ],
+      "text-cursor": [
+        "select"
+      ],
+      "type": [
+        "text",
+        "font",
+        "typography"
+      ],
+      "underline": [
+        "text",
+        "format"
+      ],
+      "unlink-2": [
+        "url",
+        "unchain",
+        "unchain"
+      ]
     },
     "general": {
       "accessibility": [
