@@ -1,3 +1,10 @@
+## [4.8.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.8.0...dialtone-icons/v4.8.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* push new keywords.json ([f3cc041](https://github.com/dialpad/dialtone/commit/f3cc0418b7fc9a000954148cec38e521f24dcd50))
+
 # [4.8.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.7.2...dialtone-icons/v4.8.0) (2024-02-05)
 
 
