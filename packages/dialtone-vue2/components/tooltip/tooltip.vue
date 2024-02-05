@@ -371,12 +371,6 @@ export default {
     this.anchor = this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
-
-    // immediate watcher fires before mounted, so have this here in case
-    // show prop was initially set to true.
-    if (this.isShown) {
-      this.tip.show();
-    }
   },
 
   beforeDestroy () {
@@ -473,6 +467,11 @@ export default {
 
     onMount () {
       this.setProps();
+      // immediate watcher fires before mounted, so have this here in case
+      // show prop was initially set to true.
+      if (this.isShown) {
+        this.tip.show();
+      }
     },
 
     initOptions () {
