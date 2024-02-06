@@ -1,11 +1,11 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.7.0",
+  "version": "9.11.4",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
-    "test": "nx run-many --target=test",
-    "build": "nx run-many --target=build",
-    "lint": "nx run-many --target=lint --projects=dialtone-css,dialtone-vue2,dialtone-vue3,dialtone-documentation",
+    "test:all": "nx run-many --target=test",
+    "build:all": "nx run-many --target=build",
+    "lint:all": "nx run-many --target=lint",
     "start:dialtone": "nx run-many --target=start --projects=dialtone-css,dialtone-documentation",
     "start:dialtone-vue3": "nx run-many --target=start --projects=dialtone-css,dialtone-vue3",
     "start:dialtone-vue2": "nx run-many --target=start --projects=dialtone-css,dialtone-vue2",
@@ -110,6 +110,21 @@
         "default": "./dist/vue2/directives.cjs"
       }
     },
+    "./vue2/message_input": {
+      "import": {
+        "types": "./dist/vue2/types/message_input.d.ts",
+        "default": "./dist/vue2/message_input.js"
+      },
+      "require": {
+        "types": "./dist/vue2/types/message_input.d.ts",
+        "default": "./dist/vue2/message_input.cjs"
+      }
+    },
+    "./vue2/css": {
+      "style": "./dist/vue2/style.css"
+    },
+    "./vue2/CHANGELOG.json": "./packages/dialtone-vue2/CHANGELOG.json",
+    "./vue2/component-documentation.json": "./dist/vue2/component-documentation.json",
     "./vue3": {
       "style": "./dist/vue3/style.css",
       "import": {
@@ -141,6 +156,21 @@
         "default": "./dist/vue3/directives.cjs"
       }
     },
+    "./vue3/message_input": {
+      "import": {
+        "types": "./dist/vue3/types/message_input.d.ts",
+        "default": "./dist/vue3/message_input.js"
+      },
+      "require": {
+        "types": "./dist/vue3/types/message_input.d.ts",
+        "default": "./dist/vue3/message_input.cjs"
+      }
+    },
+    "./vue3/css": {
+      "style": "./dist/vue3/style.css"
+    },
+    "./vue3/CHANGELOG.json": "./packages/dialtone-vue3/CHANGELOG.json",
+    "./vue3/component-documentation.json": "./dist/vue3/component-documentation.json",
     "./eslint-plugin": "./dist/eslint-plugin/index.js"
   },
   "homepage": "https://dialtone.dialpad.com",

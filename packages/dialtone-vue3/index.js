@@ -63,6 +63,7 @@ export * from './recipes/conversation_view/feed_pill';
 export * from './recipes/conversation_view/time_pill';
 export * from './recipes/conversation_view/emoji_row';
 export * from './recipes/conversation_view/attachment_carousel';
+export * from './recipes/conversation_view/editor';
 export * from './recipes/leftbar/callbox';
 
 // Mixins

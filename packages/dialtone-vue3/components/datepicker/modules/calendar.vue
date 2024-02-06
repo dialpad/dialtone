@@ -39,7 +39,9 @@
             :disabled="!day.currentMonth"
             :class="{
               'd-datepicker__day--disabled': !day.currentMonth,
-              'd-datepicker__day--selected': selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected,
+              'd-datepicker__day--selected': selectedDay
+                ? ((day.text === selectedDay) && day.currentMonth)
+                : day.selected,
             }"
             type="button"
             :aria-selected="!!selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected"

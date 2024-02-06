@@ -241,10 +241,6 @@
       ]
     },
     "brand-full-color": {
-      "0365-calendar": [
-        "microsoft",
-        "office"
-      ],
       "airtable": [],
       "amex": [],
       "app-store-badge": [],
@@ -289,6 +285,10 @@
       "microsoft": [],
       "miro": [],
       "monday-com": [],
+      "o365-calendar": [
+        "microsoft",
+        "office"
+      ],
       "office-365": [],
       "pipedrive": [],
       "play-store-badge": [],
@@ -1251,6 +1251,12 @@
         "join",
         "connect"
       ],
+      "code-block": [
+        "developer",
+        "programming",
+        "script",
+        "syntax"
+      ],
       "edit-2": [
         "pencil",
         "change"
@@ -1424,6 +1430,11 @@
         "units",
         "collection",
         "cluster"
+      ],
+      "bullet": [
+        "dot",
+        "point",
+        "circle"
       ],
       "check-circle-filled": [
         "approved",

@@ -66,6 +66,14 @@ export const argTypesData = {
     },
   },
 
+  appendTo: {
+    table: {
+      defaultValue: {
+        summary: 'body',
+      },
+    },
+  },
+
   enabled: {
     type: 'boolean',
   },

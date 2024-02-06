@@ -6,7 +6,7 @@ import { BASE_TIPPY_DIRECTIONS, TIPPY_STICKY_VALUES } from '@/components/popover
 export const TOOLTIP_DIRECTIONS = [
   ...BASE_TIPPY_DIRECTIONS,
 ];
-
+export const TOOLTIP_APPEND_TO_VALUES = ['parent', 'body'];
 export const TOOLTIP_DELAY_MS = 300;
 
 export const TOOLTIP_KIND_MODIFIERS = {
@@ -24,6 +24,7 @@ export const TOOLTIP_HIDE_ON_CLICK_VARIANTS = [true, false, 'toggle'];
 
 export default {
   TOOLTIP_DIRECTIONS,
+  TOOLTIP_APPEND_TO_VALUES,
   TOOLTIP_DELAY_MS,
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_STICKY_VALUES,

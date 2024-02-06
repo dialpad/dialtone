@@ -6,13 +6,13 @@ This is the home for Dialtone icons. It includes the resources needed to impleme
 
 To add Dialtone icons into your project, you can install it via NPM:
 
-```
+```shell
 npm install --save @dialpad/dialtone-icons
 ```
 
 Once installed, you can import icons like:
 
-```
+```js
 import Accessibility from '@dialpad/dialtone-icons/dist/svg/accessibility.svg';
 ```
 
@@ -21,7 +21,7 @@ import Accessibility from '@dialpad/dialtone-icons/dist/svg/accessibility.svg';
 If you need to add icons, follow the next steps to get your icons committed.
 
 1. Place the `.svg` files into `src/svg` inside the category folder.
-2. Run `pnpm run build`
+2. Run `nx build dialtone-icons`
 3. Commit and push your changes.
 
 ## Requesting features / reporting bugs

@@ -1,6 +1,6 @@
 # eslint-plugin-dialtone
 
-dialtone eslint plugin containing rules to help developers maintain dialtone recommended practices. 
+Dialtone ESLint plugin containing rules to help developers maintain dialtone recommended practices.
 
 ## Adding a new rule
 
@@ -12,8 +12,8 @@ yo eslint:rule
 
 ### Writing rules
 
-You can try the code you're trying to detect here: https://astexplorer.net/ to know which function you need to call
-inside `create` function.
+You can try the code you're trying to detect here: [AST Explorer](https://astexplorer.net/)
+to know which function you need to call inside `create` function.
 
 ## Installation
 
@@ -31,7 +31,8 @@ npm install @dialpad/eslint-plugin-dialtone --save-dev
 
 ## Usage
 
-Add `@dialpad/dialtone` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `@dialpad/dialtone` to the plugins section of your `.eslintrc` configuration file.
+You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
@@ -40,7 +41,6 @@ Add `@dialpad/dialtone` to the plugins section of your `.eslintrc` configuration
     ]
 }
 ```
-
 
 Then configure the rules you want to use under the rules section.
 
@@ -55,5 +55,3 @@ Then configure the rules you want to use under the rules section.
 ## Supported Rules
 
 * Fill in provided rules here
-
-

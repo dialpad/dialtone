@@ -1,3 +1,44 @@
+# [2.114.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.113.0...dialtone-vue2/v2.114.0) (2024-02-05)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** center align emojis within text ([#136](https://github.com/dialpad/dialtone/issues/136)) ([60dca67](https://github.com/dialpad/dialtone/commit/60dca6758f39865bab2e49d474f1eb84273a558c))
+
+
+### Features
+
+* **Tooltip:** add appendTo prop to tooltip ([#132](https://github.com/dialpad/dialtone/issues/132)) ([47e1dc5](https://github.com/dialpad/dialtone/commit/47e1dc584eafb06cf99e9118ac68cece22473ca1))
+
+# [2.113.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.112.2...dialtone-vue2/v2.113.0) (2024-02-01)
+
+
+### Bug Fixes
+
+* change padding on right slot of call pill stories ([#138](https://github.com/dialpad/dialtone/issues/138)) ([9a23a42](https://github.com/dialpad/dialtone/commit/9a23a423f3a6e2f01e2a86d5f765a3912e12fd08))
+* **Feed Item Row:** set inset focus ring on feed item ([#139](https://github.com/dialpad/dialtone/issues/139)) ([e4e935a](https://github.com/dialpad/dialtone/commit/e4e935a35f1fab8582def30ade82d06bcab393f0))
+
+
+### Features
+
+* **Wysiwyg Editor, Rich Text Editor:** add wysiwyg component ([#113](https://github.com/dialpad/dialtone/issues/113)) ([367d3e2](https://github.com/dialpad/dialtone/commit/367d3e2aa5344d734fd725c1f7419c44107fb116))
+
+## [2.112.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.112.1...dialtone-vue2/v2.112.2) (2024-01-26)
+
+
+### Bug Fixes
+
+* missing exports ([#128](https://github.com/dialpad/dialtone/issues/128)) ([d44a3bb](https://github.com/dialpad/dialtone/commit/d44a3bbbf569372034cfddba0ebb8347b27dfc11))
+
+## [2.112.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.112.0...dialtone-vue2/v2.112.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* datepicker keyboard navigation fix vue2 only ([#124](https://github.com/dialpad/dialtone/issues/124)) ([4763a98](https://github.com/dialpad/dialtone/commit/4763a98a2d9bc244a25f0634d09725a3ba7afdba))
+* **Feed Item Row, Emoji Row:** spacing / color fixes ([#126](https://github.com/dialpad/dialtone/issues/126)) ([e8b9116](https://github.com/dialpad/dialtone/commit/e8b9116370b6bd3a5d94cfd08a2b809c277c58b8))
+* **General Row:** map digital type to laptop-2 ([#114](https://github.com/dialpad/dialtone/issues/114)) ([ee3abfa](https://github.com/dialpad/dialtone/commit/ee3abfad17e9aefb55b934e311fdbe5d5cdac2b3))
+
 # [2.112.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.111.1...dialtone-vue2/v2.112.0) (2024-01-19)
 
 

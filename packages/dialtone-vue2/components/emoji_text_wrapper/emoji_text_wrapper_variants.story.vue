@@ -11,11 +11,10 @@
     <dt-emoji-text-wrapper>
       Text only with invalid unicode 🫡 emoji
     </dt-emoji-text-wrapper>
-    <dt-emoji-text-wrapper
-      class="d-btn d-btn--primary"
-      element-type="button"
-    >
-      Button wrapper :smile:
+    <dt-emoji-text-wrapper>
+      <button class="d-btn d-btn--primary">
+        Button wrapper :smile:
+      </button>
     </dt-emoji-text-wrapper>
     <dt-emoji-text-wrapper size="800">
       Bigger emoji size :smile:

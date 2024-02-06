@@ -5,8 +5,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    },
+    }
   },
   "include": ["**/*"],
-  "exclude": ["**/node_modules", "**/compiled", "**/.cache", "**/compressed", "**/dist", "**/storybook-static"],
+  "exclude": ["**/node_modules", "**/compiled", "**/.cache", "**/compressed", "**/dist", "**/storybook-static"]
 }

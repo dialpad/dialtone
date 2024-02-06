@@ -4,13 +4,46 @@
     "defaultBase": "production"
   },
   "targetDefaults": {
-    "build": { "cache": true, "dependsOn": ["^build"] },
-    "build-docs": { "cache": true, "dependsOn": ["^build"] },
-    "test": { "dependsOn": ["^build"] },
-    "release": { "dependsOn": ["build", "^build"] },
-    "release-local": { "dependsOn": ["build", "^build"] },
-    "release-github": { "dependsOn": ["build", "^build"] },
-    "start": { "dependsOn": ["^build"] }
+    "build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "build-docs": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "release": {
+      "dependsOn": [
+        "build",
+        "^build"
+      ]
+    },
+    "release-local": {
+      "dependsOn": [
+        "build",
+        "^build"
+      ]
+    },
+    "release-github": {
+      "dependsOn": [
+        "build",
+        "^build"
+      ]
+    },
+    "start": {
+      "dependsOn": [
+        "^build"
+      ]
+    }
   },
   "installation": {
     "version": "17.0.2"

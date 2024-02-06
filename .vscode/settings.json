@@ -58,5 +58,8 @@
   },
   "[markdown]": {
     "editor.rulers": []
-  }
+  },
+  "markdownlint.ignore": [
+        "**/CHANGELOG.md"
+    ]
 }

@@ -6,7 +6,9 @@ import DtEmojiTextWrapperDefaultTemplate from './emoji_text_wrapper_default.stor
 import DtEmojiTextWrapperVariantsTemplate from './emoji_text_wrapper_variants.story.vue';
 
 // Default Prop Values
-export const argsData = {};
+export const argsData = {
+  size: '500',
+};
 
 /**
  * example prop description decorator
@@ -25,6 +27,7 @@ export const argTypesData = {
   // Props
   size: {
     options: Object.keys(ICON_SIZE_MODIFIERS),
+    mapping: ICON_SIZE_MODIFIERS,
     control: {
       type: 'select',
     },
