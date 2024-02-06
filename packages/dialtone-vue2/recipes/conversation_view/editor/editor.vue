@@ -43,8 +43,10 @@
             </dt-button>
           </template>
         </dt-tooltip>
+        <div
+        class="dt-editor--button-group-divider">
+        </div>
       </dt-stack>
-      <div style="height: calc(var(--dt-size-550) + var(--dt-size-300)); width: var(--dt-size-100); background: var(--dt-color-border-subtle);"></div>
       <dt-stack
         v-if="linkButton.showBtn"
         direction="row"
@@ -672,5 +674,12 @@ export default {
 <style lang="less">
 .dt-editor--top-bar-background {
   background-color: var(--dt-color-surface-secondary);
+}
+
+.dt-editor--button-group-divider {
+  margin-left: var(--dt-space-400);
+  height: calc(var(--dt-size-550) + var(--dt-size-300));
+  width: var(--dt-size-100);
+  background: var(--dt-color-border-subtle);
 }
 </style>
