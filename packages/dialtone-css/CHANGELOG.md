@@ -1,3 +1,10 @@
+## [8.24.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.3...dialtone-css/v8.24.4) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** emoji line-height fix ([effe163](https://github.com/dialpad/dialtone/commit/effe16387d1f6853e437b935b2d1147b1749e75e))
+
 ## [8.24.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.2...dialtone-css/v8.24.3) (2024-02-06)
 
 
