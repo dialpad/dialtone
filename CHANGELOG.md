@@ -1,3 +1,10 @@
+## [9.11.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.1...dialtone/v9.11.2) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** line-height issue ([5ed7606](https://github.com/dialpad/dialtone/commit/5ed76068f76a723e688c7a926f2c118dded50a55))
+
 ## [9.11.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.0...dialtone/v9.11.1) (2024-02-05)
 
 
