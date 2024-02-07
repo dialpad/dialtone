@@ -1,3 +1,10 @@
+## [9.11.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.5...dialtone/v9.11.6) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** stop showing tootip for touch based devices ([#131](https://github.com/dialpad/dialtone/issues/131)) ([0c1be19](https://github.com/dialpad/dialtone/commit/0c1be19bbc7700a917358430f7721fe65552b6c2))
+
 ## [9.11.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.4...dialtone/v9.11.5) (2024-02-07)
 
 
