@@ -5,7 +5,7 @@ import {
   TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 
-const baseProps = { delay: false };
+const baseProps = { delay: false, appendTo: document.body };
 const baseSlots = {
   default: 'Test message',
   anchor: `<template #anchor="attrs"><button data-qa="dt-button" v-bind="attrs">Hover me</button></template>`,
@@ -130,6 +130,15 @@ describe('DtTooltip tests', () => {
         await wrapper.setProps({ show: true });
 
         expect(tooltip.isVisible()).toBe(true);
+      });
+    });
+
+    describe('When anchor element is touched', () => {
+      it('should hide tooltip', async () => {
+        await wrapper.setProps({ show: true });
+        await anchor.trigger('touchstart');
+
+        expect(tooltip.isVisible()).toBe(false);
       });
     });
 

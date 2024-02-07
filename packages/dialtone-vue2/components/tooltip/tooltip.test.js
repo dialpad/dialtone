@@ -11,7 +11,7 @@ const MOCK_TRANSITION_STUB = () => ({
   },
 });
 
-const baseProps = { delay: false };
+const baseProps = { delay: false, appendTo: document.body };
 const baseSlots = {
   default: 'Test message',
 };
@@ -143,6 +143,15 @@ describe('DtTooltip tests', () => {
         await wrapper.setProps({ show: true });
 
         expect(tooltip.isVisible()).toBe(true);
+      });
+    });
+
+    describe('When anchor element is touched', () => {
+      it('should hide tooltip', async () => {
+        await wrapper.setProps({ show: true });
+        await anchor.trigger('touchstart');
+
+        expect(tooltip.isVisible()).toBe(false);
       });
     });
 

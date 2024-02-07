@@ -1,3 +1,29 @@
+## [3.107.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.1...dialtone-vue3/v3.107.2) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** stop showing tootip for touch based devices ([#131](https://github.com/dialpad/dialtone/issues/131)) ([0c1be19](https://github.com/dialpad/dialtone/commit/0c1be19bbc7700a917358430f7721fe65552b6c2))
+
+## [3.107.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.0...dialtone-vue3/v3.107.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Emoji Row:** update emoji-row to use more semantic colors ([#143](https://github.com/dialpad/dialtone/issues/143)) ([0f7d112](https://github.com/dialpad/dialtone/commit/0f7d112a336e03a98e060ef5531da5352db69496))
+
+# [3.107.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.106.0...dialtone-vue3/v3.107.0) (2024-02-05)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** center align emojis within text ([#136](https://github.com/dialpad/dialtone/issues/136)) ([60dca67](https://github.com/dialpad/dialtone/commit/60dca6758f39865bab2e49d474f1eb84273a558c))
+
+
+### Features
+
+* **Tooltip:** add appendTo prop to tooltip ([#132](https://github.com/dialpad/dialtone/issues/132)) ([47e1dc5](https://github.com/dialpad/dialtone/commit/47e1dc584eafb06cf99e9118ac68cece22473ca1))
+
 # [3.106.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.2...dialtone-vue3/v3.106.0) (2024-02-01)
 
 

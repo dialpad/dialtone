@@ -1,3 +1,17 @@
+## [4.8.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.8.0...dialtone-icons/v4.8.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* push new keywords.json ([f3cc041](https://github.com/dialpad/dialtone/commit/f3cc0418b7fc9a000954148cec38e521f24dcd50))
+
+# [4.8.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.7.2...dialtone-icons/v4.8.0) (2024-02-05)
+
+
+### Features
+
+* add codeblock icon ([#140](https://github.com/dialpad/dialtone/issues/140)) ([371191b](https://github.com/dialpad/dialtone/commit/371191bbd4a60b9550836b305afe96ee9c2f9165))
+
 ## [4.7.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.7.1...dialtone-icons/v4.7.2) (2024-02-01)
 
 

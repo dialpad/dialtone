@@ -1,3 +1,32 @@
+## [8.24.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.3...dialtone-css/v8.24.4) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** emoji line-height fix ([effe163](https://github.com/dialpad/dialtone/commit/effe16387d1f6853e437b935b2d1147b1749e75e))
+
+## [8.24.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.2...dialtone-css/v8.24.3) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** revert line-height issue ([3d02819](https://github.com/dialpad/dialtone/commit/3d02819ff8afa7783336ead3f137fbdb30ee1d7f))
+
+## [8.24.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.1...dialtone-css/v8.24.2) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** line-height issue ([5ed7606](https://github.com/dialpad/dialtone/commit/5ed76068f76a723e688c7a926f2c118dded50a55))
+
+## [8.24.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.0...dialtone-css/v8.24.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** center align emojis within text ([#136](https://github.com/dialpad/dialtone/issues/136)) ([60dca67](https://github.com/dialpad/dialtone/commit/60dca6758f39865bab2e49d474f1eb84273a558c))
+* **Style:** align text decoration treatments ([#141](https://github.com/dialpad/dialtone/issues/141)) ([6baf8b2](https://github.com/dialpad/dialtone/commit/6baf8b2faecb25c162c5b67280b610da50d50054))
+
 # [8.24.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.23.2...dialtone-css/v8.24.0) (2024-01-26)
 
 

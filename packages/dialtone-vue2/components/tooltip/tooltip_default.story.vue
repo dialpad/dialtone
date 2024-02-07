@@ -16,6 +16,7 @@
         :fallback-placements="$attrs.fallbackPlacements"
         :offset="$attrs.offset"
         :sticky="$attrs.sticky"
+        :append-to="$attrs.appendTo"
         :content-class="$attrs.contentClass"
         :transition="$attrs.transition"
         :show="$attrs.showTooltip"

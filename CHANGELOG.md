@@ -1,3 +1,59 @@
+## [9.11.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.5...dialtone/v9.11.6) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** stop showing tootip for touch based devices ([#131](https://github.com/dialpad/dialtone/issues/131)) ([0c1be19](https://github.com/dialpad/dialtone/commit/0c1be19bbc7700a917358430f7721fe65552b6c2))
+
+## [9.11.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.4...dialtone/v9.11.5) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Emoji Row:** update emoji-row to use more semantic colors ([#143](https://github.com/dialpad/dialtone/issues/143)) ([0f7d112](https://github.com/dialpad/dialtone/commit/0f7d112a336e03a98e060ef5531da5352db69496))
+
+## [9.11.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.3...dialtone/v9.11.4) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** emoji line-height fix ([effe163](https://github.com/dialpad/dialtone/commit/effe16387d1f6853e437b935b2d1147b1749e75e))
+
+## [9.11.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.2...dialtone/v9.11.3) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** revert line-height issue ([3d02819](https://github.com/dialpad/dialtone/commit/3d02819ff8afa7783336ead3f137fbdb30ee1d7f))
+
+## [9.11.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.1...dialtone/v9.11.2) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** line-height issue ([5ed7606](https://github.com/dialpad/dialtone/commit/5ed76068f76a723e688c7a926f2c118dded50a55))
+
+## [9.11.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.0...dialtone/v9.11.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* push new keywords.json ([f3cc041](https://github.com/dialpad/dialtone/commit/f3cc0418b7fc9a000954148cec38e521f24dcd50))
+
+# [9.11.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.10.1...dialtone/v9.11.0) (2024-02-05)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** center align emojis within text ([#136](https://github.com/dialpad/dialtone/issues/136)) ([60dca67](https://github.com/dialpad/dialtone/commit/60dca6758f39865bab2e49d474f1eb84273a558c))
+* **Style:** align text decoration treatments ([#141](https://github.com/dialpad/dialtone/issues/141)) ([6baf8b2](https://github.com/dialpad/dialtone/commit/6baf8b2faecb25c162c5b67280b610da50d50054))
+
+
+### Features
+
+* add codeblock icon ([#140](https://github.com/dialpad/dialtone/issues/140)) ([371191b](https://github.com/dialpad/dialtone/commit/371191bbd4a60b9550836b305afe96ee9c2f9165))
+* **Tooltip:** add appendTo prop to tooltip ([#132](https://github.com/dialpad/dialtone/issues/132)) ([47e1dc5](https://github.com/dialpad/dialtone/commit/47e1dc584eafb06cf99e9118ac68cece22473ca1))
+
 ## [9.10.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.10.0...dialtone/v9.10.1) (2024-02-01)
 
 
