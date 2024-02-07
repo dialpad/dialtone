@@ -1,3 +1,10 @@
+## [9.11.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.4...dialtone/v9.11.5) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Emoji Row:** update emoji-row to use more semantic colors ([#143](https://github.com/dialpad/dialtone/issues/143)) ([0f7d112](https://github.com/dialpad/dialtone/commit/0f7d112a336e03a98e060ef5531da5352db69496))
+
 ## [9.11.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.3...dialtone/v9.11.4) (2024-02-06)
 
 
