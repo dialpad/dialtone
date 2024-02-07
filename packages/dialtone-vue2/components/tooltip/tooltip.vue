@@ -525,11 +525,7 @@ export default {
       });
     },
 
-    onTouchStart (event) {
-      if (event.cancelable) {
-        event.preventDefault();
-      }
-      event.stopPropagation();
+    onTouchStart () {
       this.isTouchDevice = true;
     },
   },
