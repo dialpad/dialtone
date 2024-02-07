@@ -12,9 +12,6 @@ module.exports = {
     node: true,
     amd: true,
   },
-  globals: {
-    __VUEPRESS_SSR__: 'readonly',
-  },
   rules: {
     camelcase: ['error', {
       properties: 'never', // Ignore snake_case in JSON properties, which are often params.
@@ -115,6 +112,6 @@ module.exports = {
       multiline: {
         max: 1,
       },
-    }],
-  },
+    }]
+  }
 };

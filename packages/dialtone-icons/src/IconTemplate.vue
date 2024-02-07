@@ -7,10 +7,8 @@ import { getUniqueString } from '@/common/utils';
 
 export default {
   name: '__ICON_NAME__',
-  computed: {
-    uniqueID () {
-      return getUniqueString();
-    },
+  created () {
+    this.uniqueID = getUniqueString('dt-icon');
   },
 };
 </script>
