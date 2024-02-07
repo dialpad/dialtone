@@ -13,12 +13,8 @@
 <script>
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
 import { getUniqueString } from '@/common/utils.js';
-import iconNames from '@dialpad/dialtone-icons/dist/icons.json';
-
-const dialtoneIcons = import.meta.glob(
-  '/node_modules/@dialpad/dialtone-icons/dist/svg/*.svg',
-  { as: 'component', eager: true },
-);
+import iconNames from '@dialpad/dialtone-icons/icons.json';
+import { icons } from '@dialpad/dialtone-icons';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -72,8 +68,7 @@ export default {
     },
 
     icon () {
-      const iconPath = `/node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`;
-      return dialtoneIcons[iconPath];
+      return icons[`./${this.name}`]?.default;
     },
   },
 };
