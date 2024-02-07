@@ -308,7 +308,7 @@ export default {
 
   computed: {
     // whether the tooltip is visible or not.
-    isVisible() {
+    isVisible () {
       const hasMessage = !!this.message?.trim();
       const hasDefaultSlot = !!this.$slots?.default;
       const isDeviceCompatible = !this.isTouchDevice;
