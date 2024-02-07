@@ -3,51 +3,30 @@
   "version": "4.7.2",
   "description": "Dialtone icon library",
   "scripts": {
-    "build": "pnpm run build:icons && pnpm run build:library",
-    "build:icons": "gulp",
-    "build:library": "vite build"
+    "build": "gulp && nx run-many --target=build --projects=dialtone-icons-* --parallel=2 --skip-nx-cache"
   },
   "files": [
     "dist"
   ],
-  "main": "./dist/dialtone-icon.umd.js",
-  "module": "./dist/dialtone-icon.mjs",
-  "workspaces": {
-    "nohoist": ["vue", "vue-demi"]
-  },
   "exports": {
-    ".": {
-      "import": "./dist/dialtone-icon.mjs",
-      "require": "./dist/dialtone-icon.umd.js"
+    "./vue2": {
+      "import": "./dist/dialtone-icon@2.mjs",
+      "require": "./dist/dialtone-icon@2.umd.js"
     },
-    "./keywords.json": "./dist/keywords.json",
-    "./icons.json": "./dist/icons.json"
-  },
-  "dependencies": {
-    "vue-demi": "^0.14.7"
+    "./vue3": {
+      "import": "./dist/dialtone-icon@3.mjs",
+      "require": "./dist/dialtone-icon@3.umd.js"
+    },
+    "./*": "./dist/*"
   },
   "devDependencies": {
     "del": "^6.1.1",
     "gulp": "^4.0.2",
-    "gulp-dom": "^1.0.0",
     "gulp-json-format": "^2.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.1.3",
     "gulp-svgmin": "^4.1.0",
-    "svg-parser": "^2.0.4",
-    "vite": "^5.0.12",
-    "vite-plugin-hot-export": "^0.5.9",
-    "@vitejs/plugin-vue": "^5.0.3",
-    "vue": "^3.4.15"
-  },
-  "peerDependencies": {
-    "@vue/composition-api": "^1.7.2",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "lodash": "^4.17.21"
   },
   "bugs": {
     "email": "dialtone@dialpad.com"

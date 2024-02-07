@@ -32,10 +32,6 @@ export default {
             id: 'color-contrast',
             reviewOnFail: true,
           },
-          {
-            id: 'duplicate-id',
-            enabled: false,
-          }
         ],
       },
     },

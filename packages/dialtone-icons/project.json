@@ -1,6 +1,12 @@
 {
   "name": "dialtone-icons",
   "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build"
+      }
+    },
     "release": {
       "executor": "nx:run-commands",
       "options": {

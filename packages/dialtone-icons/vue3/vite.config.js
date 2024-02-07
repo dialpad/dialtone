@@ -6,22 +6,24 @@ export default defineConfig({
   plugins: [vue()],
   build: {
     lib: {
-      entry: resolve(__dirname, 'index.js'),
-      name: 'DialtoneIcon',
-      fileName: 'dialtone-icon',
+      entry: resolve(__dirname, '../index.js'),
+      name: 'DialtoneIcon@3',
+      fileName: 'dialtone-icon@3',
     },
     rollupOptions: {
-      external: ['vue', 'vue-demi'],
+      external: ['vue'],
       output: {
         globals: {
           vue: 'Vue',
-          'vue-demi': 'VueDemi',
         },
       },
     },
     emptyOutDir: false,
+    outDir: '../dist',
   },
-  optimizeDeps: {
-    exclude: ['vue-demi'],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, '../../../'),
+    },
   },
 });

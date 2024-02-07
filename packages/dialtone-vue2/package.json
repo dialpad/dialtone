@@ -30,9 +30,6 @@
     "CHANGELOG.md",
     "CHANGELOG.json"
   ],
-  "workspaces": {
-    "nohoist": ["@dialpad/dialtone-icons"]
-  },
   "dependencies": {
     "@linusborg/vue-simple-portal": "^0.1.5",
     "@tiptap/core": "^2.0.3",
