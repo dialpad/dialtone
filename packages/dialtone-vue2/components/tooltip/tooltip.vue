@@ -297,7 +297,13 @@ export default {
   computed: {
     // whether the tooltip is visible or not.
     isVisible () {
-      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default) && !this.isTouchDevice;
+      const hasMessage = !!this.message?.trim();
+      const hasDefaultSlot = !!this.$slots?.default;
+      const isDeviceCompatible = !this.isTouchDevice;
+
+      const shouldBeVisible = this.isShown && this.enabled && (hasMessage || hasDefaultSlot);
+
+      return shouldBeVisible && isDeviceCompatible;
     },
 
     tooltipListeners () {
@@ -406,6 +412,10 @@ export default {
     },
 
     onEnterAnchor (e) {
+      // Note: This is to stop the call of mouseenter event when touchstart event is triggered,
+      //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null.
+      if(this.isTouchDevice && !e.relatedTarget) return;
+
       if (this.delay) {
         this.inTimer = setTimeout(function (event) {
           this.triggerShow(event);
@@ -515,9 +525,8 @@ export default {
       });
     },
 
-    onTouchStart (event) {
+    onTouchStart () {
       this.isTouchDevice = true;
-      event.preventDefault();
     },
   },
 };
