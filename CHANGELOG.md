@@ -1,3 +1,10 @@
+## [9.11.7](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.6...dialtone/v9.11.7) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** initialization issue ([#146](https://github.com/dialpad/dialtone/issues/146)) ([d032ecd](https://github.com/dialpad/dialtone/commit/d032ecd3859ead4cd1d7b9462d60b20adfed9cb2))
+
 ## [9.11.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.5...dialtone/v9.11.6) (2024-02-07)
 
 
