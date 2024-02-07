@@ -1,3 +1,10 @@
+## [2.114.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.114.1...dialtone-vue2/v2.114.2) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** stop showing tootip for touch based devices ([#131](https://github.com/dialpad/dialtone/issues/131)) ([0c1be19](https://github.com/dialpad/dialtone/commit/0c1be19bbc7700a917358430f7721fe65552b6c2))
+
 ## [2.114.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.114.0...dialtone-vue2/v2.114.1) (2024-02-07)
 
 
