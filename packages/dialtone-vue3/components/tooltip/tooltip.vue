@@ -330,16 +330,16 @@ export default {
       };
     },
 
-    appendToElement () {
-      return this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo;
-    },
-
     tippyProps () {
+      const appendToElement = this.appendTo === 'body'
+        ? this.anchor?.getRootNode()?.querySelector('body')
+        : this.appendTo;
+
       return {
         offset: this.offset,
         interactive: false,
         trigger: 'manual',
-        appendTo: this.appendToElement,
+        appendTo: appendToElement,
         placement: this.placement,
         sticky: this.sticky,
         popperOptions: getPopperOptions({
@@ -371,14 +371,14 @@ export default {
     isShown (isShown) {
       if (isShown) {
         this.setProps();
-        this.tip.show();
+        this.tip?.show();
       } else {
-        this.tip.hide();
+        this.tip?.hide();
       }
     },
 
     sticky (sticky) {
-      this.tip.setProps({
+      this.tip?.setProps({
         sticky,
       });
     },
@@ -424,7 +424,7 @@ export default {
     onEnterAnchor (e) {
       // Note: This is to stop the call of mouseenter event when touchstart event is triggered,
       //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null
-      if(this.isTouchDevice && !e.relatedTarget) return;
+      if (this.isTouchDevice && !e.relatedTarget) return;
 
       if (this.delay) {
         this.inTimer = setTimeout(function (event) {

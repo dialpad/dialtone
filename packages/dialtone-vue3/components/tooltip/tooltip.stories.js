@@ -115,6 +115,11 @@ export const argTypesData = {
       },
     },
   },
+  showTooltip: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
