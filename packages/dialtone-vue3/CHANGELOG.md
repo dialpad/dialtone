@@ -1,3 +1,10 @@
+## [3.107.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.2...dialtone-vue3/v3.107.3) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** initialization issue ([#146](https://github.com/dialpad/dialtone/issues/146)) ([d032ecd](https://github.com/dialpad/dialtone/commit/d032ecd3859ead4cd1d7b9462d60b20adfed9cb2))
+
 ## [3.107.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.1...dialtone-vue3/v3.107.2) (2024-02-07)
 
 
