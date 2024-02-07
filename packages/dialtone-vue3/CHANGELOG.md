@@ -1,3 +1,10 @@
+## [3.107.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.0...dialtone-vue3/v3.107.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Emoji Row:** update emoji-row to use more semantic colors ([#143](https://github.com/dialpad/dialtone/issues/143)) ([0f7d112](https://github.com/dialpad/dialtone/commit/0f7d112a336e03a98e060ef5531da5352db69496))
+
 # [3.107.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.106.0...dialtone-vue3/v3.107.0) (2024-02-05)
 
 
