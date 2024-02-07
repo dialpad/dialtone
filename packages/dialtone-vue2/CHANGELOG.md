@@ -1,3 +1,10 @@
+## [2.114.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.114.2...dialtone-vue2/v2.114.3) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** initialization issue ([#146](https://github.com/dialpad/dialtone/issues/146)) ([d032ecd](https://github.com/dialpad/dialtone/commit/d032ecd3859ead4cd1d7b9462d60b20adfed9cb2))
+
 ## [2.114.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.114.1...dialtone-vue2/v2.114.2) (2024-02-07)
 
 
