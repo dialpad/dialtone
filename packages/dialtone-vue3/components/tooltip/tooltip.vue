@@ -298,17 +298,19 @@ export default {
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
 
-      isTouchDevice: false,
       // reference to the anchor element
       anchor: null,
+
+      // flag check touch based device
+      isTouchDevice: false,
     };
   },
 
   computed: {
     // whether the tooltip is visible or not.
     isVisible() {
-      const hasMessage = !!this.message.trim();
-      const hasDefaultSlot = !!this.$slots.default;
+      const hasMessage = !!this.message?.trim();
+      const hasDefaultSlot = !!this.$slots?.default;
       const isDeviceCompatible = !this.isTouchDevice;
 
       const shouldBeVisible = this.isShown && this.enabled && (hasMessage || hasDefaultSlot);
@@ -422,7 +424,7 @@ export default {
     onEnterAnchor (e) {
       // Note: This is to stop the call of mouseenter event when touchstart event is triggered,
       //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null.
-      if(!e.relatedTarget) return;
+      if(this.isTouchDevice && !e.relatedTarget) return;
 
       if (this.delay) {
         this.inTimer = setTimeout(function (event) {
