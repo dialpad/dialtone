@@ -111,6 +111,7 @@
   },
   "peerDependencies": {
     "@dialpad/dialtone-css": "^7.30.0 || ^8.21.2",
+    "@dialpad/dialtone-icons": "latest",
     "vue": ">=2.6"
   },
   "bugs": {
