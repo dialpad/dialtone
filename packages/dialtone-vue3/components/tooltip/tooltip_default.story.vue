@@ -21,7 +21,7 @@
         :content-class="$attrs.contentClass"
         :content-appear="$attrs.contentAppear"
         :transition="$attrs.transition"
-        :show.sync="$attrs.show"
+        :show="showTooltip"
         :enabled="$attrs.enabled"
         :delay="$attrs.delay"
         :external-anchor="$attrs.externalAnchor"
