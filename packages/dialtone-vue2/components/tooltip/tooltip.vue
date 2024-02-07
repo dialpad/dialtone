@@ -415,7 +415,7 @@ export default {
 
     onEnterAnchor (e) {
       // Note: This is to stop the call of mouseenter event when touchstart event is triggered,
-      //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null.
+      //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null
       if(this.isTouchDevice && !e.relatedTarget) return;
 
       if (this.delay) {
