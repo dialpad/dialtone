@@ -1,9 +1,7 @@
 ---
 title: Typography
-description: This plays a crucial role in establishing visual hierarchy, readability, and brand identity in our digital products.
+description: Clear, legible, and easy-to-read text.
 ---
-
-<svg-loader name="header-typo" />
 
 ## Introduction
 
@@ -17,54 +15,46 @@ Understanding the fundamentals is key. Learn about the anatomy of type, the inte
 
 ### Typeface selection
 
-To define the Typeface selection, we make accessibility a priority, so we approach it by using the default system fonts by each operating system to have the best conversion to all possible variables of our product (Japanese, Russian, etc)
-
-<figure class="d-m1 d-p16 d-mr0 d-p0 d-bar4 d-ta-left">
+<dt-stack direction="row" gap="500">
 <svg-loader name="roboto" />
 <svg-loader name="appleSF" />
 <svg-loader name="windows" />
 <svg-loader name="linux" />
-</figure>
+</dt-stack>
 
 ### Font weight
 
-Typography is versatile, and so is our system. Uncover the different styles and variations available, from headings to body text, ensuring flexibility in design while maintaining a cohesive look and feel.
-Our styles and variations are:
-
-<figure class="d-m1 d-p16 d-mr0 d-p0 d-bar4 d-ta-left">
+<dt-stack direction="row" gap="500">
 <svg-loader name="light" />
 <svg-loader name="regular" />
 <svg-loader name="medium" />
 <svg-loader name="bold" />
-</figure>
+</dt-stack>
 
-### Typescale
+### Font size
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-100 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <template v-for="name in fontSizeValues">
-      <div>
-        <span class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">{{ name }}</span>
-        <copy-button :text="name" aria-label="copy class" class="d-d-inline" />
-      </div>
-      <div><p :class="name">{{ exampleAi }}</p></div>
-    </template>
-  </div>
-</code-well-header>
+<dt-stack direction="row" gap="500">
+<svg-loader name="d-fs-100" />
+<svg-loader name="d-fs-200" />
+<svg-loader name="d-fs-300" />
+<svg-loader name="d-fs-400" />
+<svg-loader name="d-fs-500" />
+</dt-stack>
 
 ### Line height
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-100 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 21rem 1fr">
-    <template v-for="name in lineHeightValues">
-      <div>
-        <span class="d-fs-100 d-ff-mono d-fc-purple-400 d-fco75">{{ name }}</span>
-        <copy-button :text="name" aria-label="copy class" class="d-d-inline" />
-      </div>
-      <div><p :class="['d-fs-300 d-bgc-purple-200 d-bgo25', name]">{{ exampleAi }}</p></div>
-    </template>
-  </div>
-</code-well-header>
+<dt-stack direction="column" gap="500">
+<dt-stack direction="row" gap="500">
+<svg-loader name="d-lh-100" />
+<svg-loader name="d-lh-200" />
+<svg-loader name="d-lh-300" />
+</dt-stack>
+<dt-stack direction="row" gap="500">
+<svg-loader name="d-lh-400" />
+<svg-loader name="d-lh-500" />
+<svg-loader name="d-lh-600" />
+</dt-stack>
+</dt-stack>
 
 ## Usage
 
