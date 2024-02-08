@@ -1,2098 +1,4 @@
 {
-  "size": {
-    "0": {
-      "$type": "number",
-      "$value": "{0}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-0)",
-            "ANDROID": "dtSize0",
-            "iOS": "dtSize0"
-          }
-        }
-      }
-    },
-    "50": {
-      "$type": "number",
-      "$value": "{50}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-50)",
-            "ANDROID": "dtSize50",
-            "iOS": "dtSize50"
-          }
-        }
-      }
-    },
-    "100": {
-      "$type": "number",
-      "$value": "{100}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-100)",
-            "ANDROID": "dtSize100",
-            "iOS": "dtSize100"
-          }
-        }
-      }
-    },
-    "200": {
-      "$type": "number",
-      "$value": "{200}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-200)",
-            "ANDROID": "dtSize200",
-            "iOS": "dtSize200"
-          }
-        }
-      }
-    },
-    "300": {
-      "$type": "number",
-      "$value": "{300}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-300)",
-            "ANDROID": "dtSize300",
-            "iOS": "dtSize300"
-          }
-        }
-      }
-    },
-    "350": {
-      "$type": "number",
-      "$value": "{350}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-350)",
-            "ANDROID": "dtSize350",
-            "iOS": "dtSize350"
-          }
-        }
-      }
-    },
-    "400": {
-      "$type": "number",
-      "$value": "{400}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-400)",
-            "ANDROID": "dtSize400",
-            "iOS": "dtSize400"
-          }
-        }
-      }
-    },
-    "450": {
-      "$type": "number",
-      "$value": "{450}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-450)",
-            "ANDROID": "dtSize450",
-            "iOS": "dtSize450"
-          }
-        }
-      }
-    },
-    "500": {
-      "$type": "number",
-      "$value": "{500}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-500)",
-            "ANDROID": "dtSize500",
-            "iOS": "dtSize500"
-          }
-        }
-      }
-    },
-    "525": {
-      "$type": "number",
-      "$value": "{525}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-525)",
-            "ANDROID": "dtSize525",
-            "iOS": "dtSize525"
-          }
-        }
-      }
-    },
-    "550": {
-      "$type": "number",
-      "$value": "{550}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-550)",
-            "ANDROID": "dtSize550",
-            "iOS": "dtSize550"
-          }
-        }
-      }
-    },
-    "600": {
-      "$type": "number",
-      "$value": "{600}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-600)",
-            "ANDROID": "dtSize600",
-            "iOS": "dtSize600"
-          }
-        }
-      }
-    },
-    "625": {
-      "$type": "number",
-      "$value": "{625}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-625)",
-            "ANDROID": "dtSize625",
-            "iOS": "dtSize625"
-          }
-        }
-      }
-    },
-    "650": {
-      "$type": "number",
-      "$value": "{650}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-650)",
-            "ANDROID": "dtSize650",
-            "iOS": "dtSize650"
-          }
-        }
-      }
-    },
-    "700": {
-      "$type": "number",
-      "$value": "{700}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-700)",
-            "ANDROID": "dtSize700",
-            "iOS": "dtSize700"
-          }
-        }
-      }
-    },
-    "720": {
-      "$type": "number",
-      "$value": "{720}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-720)",
-            "ANDROID": "dtSize720",
-            "iOS": "dtSize720"
-          }
-        }
-      }
-    },
-    "730": {
-      "$type": "number",
-      "$value": "{730}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-730)",
-            "ANDROID": "dtSize730",
-            "iOS": "dtSize730"
-          }
-        }
-      }
-    },
-    "750": {
-      "$type": "number",
-      "$value": "{750}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-750)",
-            "ANDROID": "dtSize750",
-            "iOS": "dtSize750"
-          }
-        }
-      }
-    },
-    "760": {
-      "$type": "number",
-      "$value": "{760}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-760)",
-            "ANDROID": "dtSize760",
-            "iOS": "dtSize760"
-          }
-        }
-      }
-    },
-    "775": {
-      "$type": "number",
-      "$value": "{775}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-775)",
-            "ANDROID": "dtSize775",
-            "iOS": "dtSize775"
-          }
-        }
-      }
-    },
-    "800": {
-      "$type": "number",
-      "$value": "{800}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-800)",
-            "ANDROID": "dtSize800",
-            "iOS": "dtSize800"
-          }
-        }
-      }
-    },
-    "825": {
-      "$type": "number",
-      "$value": "{825}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-825)",
-            "ANDROID": "dtSize825",
-            "iOS": "dtSize825"
-          }
-        }
-      }
-    },
-    "850": {
-      "$type": "number",
-      "$value": "{850}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-850)",
-            "ANDROID": "dtSize850",
-            "iOS": "dtSize850"
-          }
-        }
-      }
-    },
-    "875": {
-      "$type": "number",
-      "$value": "{875}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-875)",
-            "ANDROID": "dtSize875",
-            "iOS": "dtSize875"
-          }
-        }
-      }
-    },
-    "900": {
-      "$type": "number",
-      "$value": "{900}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-900)",
-            "ANDROID": "dtSize900",
-            "iOS": "dtSize900"
-          }
-        }
-      }
-    },
-    "905": {
-      "$type": "number",
-      "$value": "{905}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-905)",
-            "ANDROID": "dtSize905",
-            "iOS": "dtSize905"
-          }
-        }
-      }
-    },
-    "925": {
-      "$type": "number",
-      "$value": "{925}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-925)",
-            "ANDROID": "dtSize925",
-            "iOS": "dtSize925"
-          }
-        }
-      }
-    },
-    "950": {
-      "$type": "number",
-      "$value": "{950}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-950)",
-            "ANDROID": "dtSize950",
-            "iOS": "dtSize950"
-          }
-        }
-      }
-    },
-    "975": {
-      "$type": "number",
-      "$value": "{975}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-975)",
-            "ANDROID": "dtSize975",
-            "iOS": "dtSize975"
-          }
-        }
-      }
-    },
-    "1000": {
-      "$type": "number",
-      "$value": "{1000}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1000)",
-            "ANDROID": "dtSize1000",
-            "iOS": "dtSize1000"
-          }
-        }
-      }
-    },
-    "1020": {
-      "$type": "number",
-      "$value": "{1020}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1020)",
-            "ANDROID": "dtSize1020",
-            "iOS": "dtSize1020"
-          }
-        }
-      }
-    },
-    "1040": {
-      "$type": "number",
-      "$value": "{1040}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1040)",
-            "ANDROID": "dtSize1040",
-            "iOS": "dtSize1040"
-          }
-        }
-      }
-    },
-    "1050": {
-      "$type": "number",
-      "$value": "{1050}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1050)",
-            "ANDROID": "dtSize1050",
-            "iOS": "dtSize1050"
-          }
-        }
-      }
-    },
-    "1060": {
-      "$type": "number",
-      "$value": "{1060}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1060)",
-            "ANDROID": "dtSize1060",
-            "iOS": "dtSize1060"
-          }
-        }
-      }
-    },
-    "1080": {
-      "$type": "number",
-      "$value": "{1080}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1080)",
-            "ANDROID": "dtSize1080",
-            "iOS": "dtSize1080"
-          }
-        }
-      }
-    },
-    "1100": {
-      "$type": "number",
-      "$value": "{1100}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1100)",
-            "ANDROID": "dtSize1100",
-            "iOS": "dtSize1100"
-          }
-        }
-      }
-    },
-    "1115": {
-      "$type": "number",
-      "$value": "{1115}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1115)",
-            "ANDROID": "dtSize1115",
-            "iOS": "dtSize1115"
-          }
-        }
-      }
-    },
-    "1120": {
-      "$type": "number",
-      "$value": "{1120}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1120)",
-            "ANDROID": "dtSize1120",
-            "iOS": "dtSize1120"
-          }
-        }
-      }
-    },
-    "1125": {
-      "$type": "number",
-      "$value": "{1125}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1125)",
-            "ANDROID": "dtSize1125",
-            "iOS": "dtSize1125"
-          }
-        }
-      }
-    },
-    "1130": {
-      "$type": "number",
-      "$value": "{1130}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1130)",
-            "ANDROID": "dtSize1130",
-            "iOS": "dtSize1130"
-          }
-        }
-      }
-    },
-    "1150": {
-      "$type": "number",
-      "$value": "{1150}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1150)",
-            "ANDROID": "dtSize1150",
-            "iOS": "dtSize1150"
-          }
-        }
-      }
-    },
-    "1200": {
-      "$type": "number",
-      "$value": "{1200}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1200)",
-            "ANDROID": "dtSize1200",
-            "iOS": "dtSize1200"
-          }
-        }
-      }
-    },
-    "radiius": {
-      "0": {
-        "$type": "number",
-        "$value": "{0}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-0)",
-              "ANDROID": "dtSizeRadius0",
-              "iOS": "dtSizeRadius0"
-            }
-          }
-        }
-      },
-      "100": {
-        "$type": "number",
-        "$value": "{100}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-100)",
-              "ANDROID": "dtSizeRadius100",
-              "iOS": "dtSizeRadius100"
-            }
-          }
-        }
-      },
-      "200": {
-        "$type": "number",
-        "$value": "{200}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-200)",
-              "ANDROID": "dtSizeRadius200",
-              "iOS": "dtSizeRadius200"
-            }
-          }
-        }
-      },
-      "300": {
-        "$type": "number",
-        "$value": "{300}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-300)",
-              "ANDROID": "dtSizeRadius300",
-              "iOS": "dtSizeRadius300"
-            }
-          }
-        }
-      },
-      "400": {
-        "$type": "number",
-        "$value": "{400}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-400)",
-              "ANDROID": "dtSizeRadius400",
-              "iOS": "dtSizeRadius400"
-            }
-          }
-        }
-      },
-      "500": {
-        "$type": "number",
-        "$value": "{500}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-500)",
-              "ANDROID": "dtSizeRadius500",
-              "iOS": "dtSizeRadius500"
-            }
-          }
-        }
-      },
-      "600": {
-        "$type": "number",
-        "$value": "{600}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-600)",
-              "ANDROID": "dtSizeRadius600",
-              "iOS": "dtSizeRadius600"
-            }
-          }
-        }
-      },
-      "pill": {
-        "$type": "number",
-        "$value": "{760}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-pill)",
-              "ANDROID": "dtSizeRadiusPill",
-              "iOS": "dtSizeRadiusPill"
-            }
-          }
-        }
-      },
-      "circle": {
-        "$type": "number",
-        "$value": "{50-percent}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-radius-circle)",
-              "ANDROID": "dtSizeRadiusCircle",
-              "iOS": "dtSizeRadiusCircle"
-            }
-          }
-        }
-      }
-    },
-    "border": {
-      "0": {
-        "$type": "number",
-        "$value": "{0}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "STROKE_FLOAT"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-border-0)",
-              "ANDROID": "dtSizeBorder0",
-              "iOS": "dtSizeBorder0"
-            }
-          }
-        }
-      },
-      "50": {
-        "$type": "number",
-        "$value": "{50}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "STROKE_FLOAT"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-border-50)",
-              "ANDROID": "dtSizeBorder50",
-              "iOS": "dtSizeBorder50"
-            }
-          }
-        }
-      },
-      "100": {
-        "$type": "number",
-        "$value": "{100}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "STROKE_FLOAT"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-border-100)",
-              "ANDROID": "dtSizeBorder100",
-              "iOS": "dtSizeBorder100"
-            }
-          }
-        }
-      },
-      "150": {
-        "$type": "number",
-        "$value": "{150}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "STROKE_FLOAT"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-border-150)",
-              "ANDROID": "dtSizeBorder150",
-              "iOS": "dtSizeBorder150"
-            }
-          }
-        }
-      },
-      "200": {
-        "$type": "number",
-        "$value": "{200}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "STROKE_FLOAT"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-border-200)",
-              "ANDROID": "dtSizeBorder200",
-              "iOS": "dtSizeBorder200"
-            }
-          }
-        }
-      },
-      "300": {
-        "$type": "number",
-        "$value": "{300}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "STROKE_FLOAT"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-border-300)",
-              "ANDROID": "dtSizeBorder300",
-              "iOS": "dtSizeBorder300"
-            }
-          }
-        }
-      },
-      "400": {
-        "$type": "number",
-        "$value": "{400}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "STROKE_FLOAT"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--dt-size-border-400)",
-              "ANDROID": "dtSizeBorder400",
-              "iOS": "dtSizeBorder400"
-            }
-          }
-        }
-      }
-    },
-    "50-negative": {
-      "$type": "number",
-      "$value": "{50-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-50-negative)",
-            "ANDROID": "dtSize50Negative",
-            "iOS": "dtSize50Negative"
-          }
-        }
-      }
-    },
-    "100-negative": {
-      "$type": "number",
-      "$value": "{100-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-100-negative)",
-            "ANDROID": "dtSize100Negative",
-            "iOS": "dtSize100Negative"
-          }
-        }
-      }
-    },
-    "200-negative": {
-      "$type": "number",
-      "$value": "{200-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-200-negative)",
-            "ANDROID": "dtSize200Negative",
-            "iOS": "dtSize200Negative"
-          }
-        }
-      }
-    },
-    "300-negative": {
-      "$type": "number",
-      "$value": "{300-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-300-negative)",
-            "ANDROID": "dtSize300Negative",
-            "iOS": "dtSize300Negative"
-          }
-        }
-      }
-    },
-    "350-negative": {
-      "$type": "number",
-      "$value": "{350-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-350-negative)",
-            "ANDROID": "dtSize350Negative",
-            "iOS": "dtSize350Negative"
-          }
-        }
-      }
-    },
-    "400-negative": {
-      "$type": "number",
-      "$value": "{400-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-400-negative)",
-            "ANDROID": "dtSize400Negative",
-            "iOS": "dtSize400Negative"
-          }
-        }
-      }
-    },
-    "450-negative": {
-      "$type": "number",
-      "$value": "{450-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-450-negative)",
-            "ANDROID": "dtSize450Negative",
-            "iOS": "dtSize450Negative"
-          }
-        }
-      }
-    },
-    "500-negative": {
-      "$type": "number",
-      "$value": "{500-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-500-negative)",
-            "ANDROID": "dtSize500Negative",
-            "iOS": "dtSize500Negative"
-          }
-        }
-      }
-    },
-    "525-negative": {
-      "$type": "number",
-      "$value": "{525-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-525-negative)",
-            "ANDROID": "dtSize525Negative",
-            "iOS": "dtSize525Negative"
-          }
-        }
-      }
-    },
-    "550-negative": {
-      "$type": "number",
-      "$value": "{550-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-550-negative)",
-            "ANDROID": "dtSize550Negative",
-            "iOS": "dtSize550Negative"
-          }
-        }
-      }
-    },
-    "600-negative": {
-      "$type": "number",
-      "$value": "{600-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-600-negative)",
-            "ANDROID": "dtSize600Negative",
-            "iOS": "dtSize600Negative"
-          }
-        }
-      }
-    },
-    "625-negative": {
-      "$type": "number",
-      "$value": "{625-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-625-negative)",
-            "ANDROID": "dtSize625Negative",
-            "iOS": "dtSize625Negative"
-          }
-        }
-      }
-    },
-    "650-negative": {
-      "$type": "number",
-      "$value": "{650-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-650-negative)",
-            "ANDROID": "dtSize650Negative",
-            "iOS": "dtSize650Negative"
-          }
-        }
-      }
-    },
-    "700-negative": {
-      "$type": "number",
-      "$value": "{700-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-700-negative)",
-            "ANDROID": "dtSize700Negative",
-            "iOS": "dtSize700Negative"
-          }
-        }
-      }
-    },
-    "720-negative": {
-      "$type": "number",
-      "$value": "{720-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-720-negative)",
-            "ANDROID": "dtSize720Negative",
-            "iOS": "dtSize720Negative"
-          }
-        }
-      }
-    },
-    "730-negative": {
-      "$type": "number",
-      "$value": "{730-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-730-negative)",
-            "ANDROID": "dtSize730Negative",
-            "iOS": "dtSize730Negative"
-          }
-        }
-      }
-    },
-    "750-negative": {
-      "$type": "number",
-      "$value": "{750-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-750-negative)",
-            "ANDROID": "dtSize750Negative",
-            "iOS": "dtSize750Negative"
-          }
-        }
-      }
-    },
-    "760-negative": {
-      "$type": "number",
-      "$value": "{760-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-760-negative)",
-            "ANDROID": "dtSize760Negative",
-            "iOS": "dtSize760Negative"
-          }
-        }
-      }
-    },
-    "775-negative": {
-      "$type": "number",
-      "$value": "{775-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-775-negative)",
-            "ANDROID": "dtSize775Negative",
-            "iOS": "dtSize775Negative"
-          }
-        }
-      }
-    },
-    "800-negative": {
-      "$type": "number",
-      "$value": "{800-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-800-negative)",
-            "ANDROID": "dtSize800Negative",
-            "iOS": "dtSize800Negative"
-          }
-        }
-      }
-    },
-    "825-negative": {
-      "$type": "number",
-      "$value": "{825-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-825-negative)",
-            "ANDROID": "dtSize825Negative",
-            "iOS": "dtSize825Negative"
-          }
-        }
-      }
-    },
-    "850-negative": {
-      "$type": "number",
-      "$value": "{850-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-850-negative)",
-            "ANDROID": "dtSize850Negative",
-            "iOS": "dtSize850Negative"
-          }
-        }
-      }
-    },
-    "875-negative": {
-      "$type": "number",
-      "$value": "{875-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-875-negative)",
-            "ANDROID": "dtSize875Negative",
-            "iOS": "dtSize875Negative"
-          }
-        }
-      }
-    },
-    "900-negative": {
-      "$type": "number",
-      "$value": "{900-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-900-negative)",
-            "ANDROID": "dtSize900Negative",
-            "iOS": "dtSize900Negative"
-          }
-        }
-      }
-    },
-    "905-negative": {
-      "$type": "number",
-      "$value": "{905-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-905-negative)",
-            "ANDROID": "dtSize905Negative",
-            "iOS": "dtSize905Negative"
-          }
-        }
-      }
-    },
-    "925-negative": {
-      "$type": "number",
-      "$value": "{925-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-925-negative)",
-            "ANDROID": "dtSize925Negative",
-            "iOS": "dtSize925Negative"
-          }
-        }
-      }
-    },
-    "950-negative": {
-      "$type": "number",
-      "$value": "{950-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-950-negative)",
-            "ANDROID": "dtSize950Negative",
-            "iOS": "dtSize950Negative"
-          }
-        }
-      }
-    },
-    "975-negative": {
-      "$type": "number",
-      "$value": "{975-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-975-negative)",
-            "ANDROID": "dtSize975Negative",
-            "iOS": "dtSize975Negative"
-          }
-        }
-      }
-    },
-    "1000-negative": {
-      "$type": "number",
-      "$value": "{1000-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1000-negative)",
-            "ANDROID": "dtSize1000Negative",
-            "iOS": "dtSize1000Negative"
-          }
-        }
-      }
-    },
-    "1020-negative": {
-      "$type": "number",
-      "$value": "{1020-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1020-negative)",
-            "ANDROID": "dtSize1020Negative",
-            "iOS": "dtSize1020Negative"
-          }
-        }
-      }
-    },
-    "1040-negative": {
-      "$type": "number",
-      "$value": "{1040-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1040-negative)",
-            "ANDROID": "dtSize1040Negative",
-            "iOS": "dtSize1040Negative"
-          }
-        }
-      }
-    },
-    "1050-negative": {
-      "$type": "number",
-      "$value": "{1050-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1050-negative)",
-            "ANDROID": "dtSize1050Negative",
-            "iOS": "dtSize1050Negative"
-          }
-        }
-      }
-    },
-    "1060-negative": {
-      "$type": "number",
-      "$value": "{1060-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1060-negative)",
-            "ANDROID": "dtSize1060Negative",
-            "iOS": "dtSize1060Negative"
-          }
-        }
-      }
-    },
-    "1080-negative": {
-      "$type": "number",
-      "$value": "{1080-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1080-negative)",
-            "ANDROID": "dtSize1080Negative",
-            "iOS": "dtSize1080Negative"
-          }
-        }
-      }
-    },
-    "1100-negative": {
-      "$type": "number",
-      "$value": "{1100-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1100-negative)",
-            "ANDROID": "dtSize1100Negative",
-            "iOS": "dtSize1100Negative"
-          }
-        }
-      }
-    },
-    "1115-negative": {
-      "$type": "number",
-      "$value": "{1115-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1115-negative)",
-            "ANDROID": "dtSize1115Negative",
-            "iOS": "dtSize1115Negative"
-          }
-        }
-      }
-    },
-    "1120-negative": {
-      "$type": "number",
-      "$value": "{1120-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1120-negative)",
-            "ANDROID": "dtSize1120Negative",
-            "iOS": "dtSize1120Negative"
-          }
-        }
-      }
-    },
-    "1125-negative": {
-      "$type": "number",
-      "$value": "{1125-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1125-negative)",
-            "ANDROID": "dtSize1125Negative",
-            "iOS": "dtSize1125Negative"
-          }
-        }
-      }
-    },
-    "1130-negative": {
-      "$type": "number",
-      "$value": "{1130-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1130-negative)",
-            "ANDROID": "dtSize1130Negative",
-            "iOS": "dtSize1130Negative"
-          }
-        }
-      }
-    },
-    "1150-negative": {
-      "$type": "number",
-      "$value": "{1150-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1150-negative)",
-            "ANDROID": "dtSize1150Negative",
-            "iOS": "dtSize1150Negative"
-          }
-        }
-      }
-    },
-    "1200-negative": {
-      "$type": "number",
-      "$value": "{1200-negative}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-1200-negative)",
-            "ANDROID": "dtSize1200Negative",
-            "iOS": "dtSize1200Negative"
-          }
-        }
-      }
-    },
-    "0-percent": {
-      "$type": "number",
-      "$value": "{0-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-0-percent)",
-            "ANDROID": "dtSize0Percent",
-            "iOS": "dtSize0Percent"
-          }
-        }
-      }
-    },
-    "5-percent": {
-      "$type": "number",
-      "$value": "{5-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-5-percent)",
-            "ANDROID": "dtSize5Percent",
-            "iOS": "dtSize5Percent"
-          }
-        }
-      }
-    },
-    "10-percent": {
-      "$type": "number",
-      "$value": "{10-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-10-percent)",
-            "ANDROID": "dtSize10Percent",
-            "iOS": "dtSize10Percent"
-          }
-        }
-      }
-    },
-    "20-percent": {
-      "$type": "number",
-      "$value": "{20-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-20-percent)",
-            "ANDROID": "dtSize20Percent",
-            "iOS": "dtSize20Percent"
-          }
-        }
-      }
-    },
-    "25-percent": {
-      "$type": "number",
-      "$value": "{25-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-25-percent)",
-            "ANDROID": "dtSize25Percent",
-            "iOS": "dtSize25Percent"
-          }
-        }
-      }
-    },
-    "30-percent": {
-      "$type": "number",
-      "$value": "{30-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-30-percent)",
-            "ANDROID": "dtSize30Percent",
-            "iOS": "dtSize30Percent"
-          }
-        }
-      }
-    },
-    "33-percent": {
-      "$type": "number",
-      "$value": "{33-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-33-percent)",
-            "ANDROID": "dtSize33Percent",
-            "iOS": "dtSize33Percent"
-          }
-        }
-      }
-    },
-    "40-percent": {
-      "$type": "number",
-      "$value": "{40-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-40-percent)",
-            "ANDROID": "dtSize40Percent",
-            "iOS": "dtSize40Percent"
-          }
-        }
-      }
-    },
-    "50-percent": {
-      "$type": "number",
-      "$value": "{50-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-50-percent)",
-            "ANDROID": "dtSize50Percent",
-            "iOS": "dtSize50Percent"
-          }
-        }
-      }
-    },
-    "60-percent": {
-      "$type": "number",
-      "$value": "{60-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-60-percent)",
-            "ANDROID": "dtSize60Percent",
-            "iOS": "dtSize60Percent"
-          }
-        }
-      }
-    },
-    "66-percent": {
-      "$type": "number",
-      "$value": "{66-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-66-percent)",
-            "ANDROID": "dtSize66Percent",
-            "iOS": "dtSize66Percent"
-          }
-        }
-      }
-    },
-    "70-percent": {
-      "$type": "number",
-      "$value": "{70-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-70-percent)",
-            "ANDROID": "dtSize70Percent",
-            "iOS": "dtSize70Percent"
-          }
-        }
-      }
-    },
-    "75-percent": {
-      "$type": "number",
-      "$value": "{75-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-75-percent)",
-            "ANDROID": "dtSize75Percent",
-            "iOS": "dtSize75Percent"
-          }
-        }
-      }
-    },
-    "80-percent": {
-      "$type": "number",
-      "$value": "{80-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-80-percent)",
-            "ANDROID": "dtSize80Percent",
-            "iOS": "dtSize80Percent"
-          }
-        }
-      }
-    },
-    "90-percent": {
-      "$type": "number",
-      "$value": "{90-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-90-percent)",
-            "ANDROID": "dtSize90Percent",
-            "iOS": "dtSize90Percent"
-          }
-        }
-      }
-    },
-    "95-percent": {
-      "$type": "number",
-      "$value": "{95-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-95-percent)",
-            "ANDROID": "dtSize95Percent",
-            "iOS": "dtSize95Percent"
-          }
-        }
-      }
-    },
-    "100-percent": {
-      "$type": "number",
-      "$value": "{100-percent}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": true,
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--dt-size-100-percent)",
-            "ANDROID": "dtSize100Percent",
-            "iOS": "dtSize100Percent"
-          }
-        }
-      }
-    }
-  },
   "space": {
     "0": {
       "$type": "number",
@@ -3890,6 +1796,2100 @@
             "WEB": "var(--dt-space-100-percent)",
             "ANDROID": "dtSpace100Percent",
             "iOS": "dtSpace100Percent"
+          }
+        }
+      }
+    }
+  },
+  "size": {
+    "0": {
+      "$type": "number",
+      "$value": "{0}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-0)",
+            "ANDROID": "dtSize0",
+            "iOS": "dtSize0"
+          }
+        }
+      }
+    },
+    "50": {
+      "$type": "number",
+      "$value": "{50}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-50)",
+            "ANDROID": "dtSize50",
+            "iOS": "dtSize50"
+          }
+        }
+      }
+    },
+    "100": {
+      "$type": "number",
+      "$value": "{100}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-100)",
+            "ANDROID": "dtSize100",
+            "iOS": "dtSize100"
+          }
+        }
+      }
+    },
+    "200": {
+      "$type": "number",
+      "$value": "{200}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-200)",
+            "ANDROID": "dtSize200",
+            "iOS": "dtSize200"
+          }
+        }
+      }
+    },
+    "300": {
+      "$type": "number",
+      "$value": "{300}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-300)",
+            "ANDROID": "dtSize300",
+            "iOS": "dtSize300"
+          }
+        }
+      }
+    },
+    "350": {
+      "$type": "number",
+      "$value": "{350}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-350)",
+            "ANDROID": "dtSize350",
+            "iOS": "dtSize350"
+          }
+        }
+      }
+    },
+    "400": {
+      "$type": "number",
+      "$value": "{400}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-400)",
+            "ANDROID": "dtSize400",
+            "iOS": "dtSize400"
+          }
+        }
+      }
+    },
+    "450": {
+      "$type": "number",
+      "$value": "{450}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-450)",
+            "ANDROID": "dtSize450",
+            "iOS": "dtSize450"
+          }
+        }
+      }
+    },
+    "500": {
+      "$type": "number",
+      "$value": "{500}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-500)",
+            "ANDROID": "dtSize500",
+            "iOS": "dtSize500"
+          }
+        }
+      }
+    },
+    "525": {
+      "$type": "number",
+      "$value": "{525}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-525)",
+            "ANDROID": "dtSize525",
+            "iOS": "dtSize525"
+          }
+        }
+      }
+    },
+    "550": {
+      "$type": "number",
+      "$value": "{550}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-550)",
+            "ANDROID": "dtSize550",
+            "iOS": "dtSize550"
+          }
+        }
+      }
+    },
+    "600": {
+      "$type": "number",
+      "$value": "{600}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-600)",
+            "ANDROID": "dtSize600",
+            "iOS": "dtSize600"
+          }
+        }
+      }
+    },
+    "625": {
+      "$type": "number",
+      "$value": "{625}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-625)",
+            "ANDROID": "dtSize625",
+            "iOS": "dtSize625"
+          }
+        }
+      }
+    },
+    "650": {
+      "$type": "number",
+      "$value": "{650}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-650)",
+            "ANDROID": "dtSize650",
+            "iOS": "dtSize650"
+          }
+        }
+      }
+    },
+    "700": {
+      "$type": "number",
+      "$value": "{700}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-700)",
+            "ANDROID": "dtSize700",
+            "iOS": "dtSize700"
+          }
+        }
+      }
+    },
+    "720": {
+      "$type": "number",
+      "$value": "{720}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-720)",
+            "ANDROID": "dtSize720",
+            "iOS": "dtSize720"
+          }
+        }
+      }
+    },
+    "730": {
+      "$type": "number",
+      "$value": "{730}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-730)",
+            "ANDROID": "dtSize730",
+            "iOS": "dtSize730"
+          }
+        }
+      }
+    },
+    "750": {
+      "$type": "number",
+      "$value": "{750}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-750)",
+            "ANDROID": "dtSize750",
+            "iOS": "dtSize750"
+          }
+        }
+      }
+    },
+    "760": {
+      "$type": "number",
+      "$value": "{760}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-760)",
+            "ANDROID": "dtSize760",
+            "iOS": "dtSize760"
+          }
+        }
+      }
+    },
+    "775": {
+      "$type": "number",
+      "$value": "{775}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-775)",
+            "ANDROID": "dtSize775",
+            "iOS": "dtSize775"
+          }
+        }
+      }
+    },
+    "800": {
+      "$type": "number",
+      "$value": "{800}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-800)",
+            "ANDROID": "dtSize800",
+            "iOS": "dtSize800"
+          }
+        }
+      }
+    },
+    "825": {
+      "$type": "number",
+      "$value": "{825}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-825)",
+            "ANDROID": "dtSize825",
+            "iOS": "dtSize825"
+          }
+        }
+      }
+    },
+    "850": {
+      "$type": "number",
+      "$value": "{850}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-850)",
+            "ANDROID": "dtSize850",
+            "iOS": "dtSize850"
+          }
+        }
+      }
+    },
+    "875": {
+      "$type": "number",
+      "$value": "{875}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-875)",
+            "ANDROID": "dtSize875",
+            "iOS": "dtSize875"
+          }
+        }
+      }
+    },
+    "900": {
+      "$type": "number",
+      "$value": "{900}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-900)",
+            "ANDROID": "dtSize900",
+            "iOS": "dtSize900"
+          }
+        }
+      }
+    },
+    "905": {
+      "$type": "number",
+      "$value": "{905}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-905)",
+            "ANDROID": "dtSize905",
+            "iOS": "dtSize905"
+          }
+        }
+      }
+    },
+    "925": {
+      "$type": "number",
+      "$value": "{925}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-925)",
+            "ANDROID": "dtSize925",
+            "iOS": "dtSize925"
+          }
+        }
+      }
+    },
+    "950": {
+      "$type": "number",
+      "$value": "{950}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-950)",
+            "ANDROID": "dtSize950",
+            "iOS": "dtSize950"
+          }
+        }
+      }
+    },
+    "975": {
+      "$type": "number",
+      "$value": "{975}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-975)",
+            "ANDROID": "dtSize975",
+            "iOS": "dtSize975"
+          }
+        }
+      }
+    },
+    "1000": {
+      "$type": "number",
+      "$value": "{1000}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1000)",
+            "ANDROID": "dtSize1000",
+            "iOS": "dtSize1000"
+          }
+        }
+      }
+    },
+    "1020": {
+      "$type": "number",
+      "$value": "{1020}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1020)",
+            "ANDROID": "dtSize1020",
+            "iOS": "dtSize1020"
+          }
+        }
+      }
+    },
+    "1040": {
+      "$type": "number",
+      "$value": "{1040}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1040)",
+            "ANDROID": "dtSize1040",
+            "iOS": "dtSize1040"
+          }
+        }
+      }
+    },
+    "1050": {
+      "$type": "number",
+      "$value": "{1050}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1050)",
+            "ANDROID": "dtSize1050",
+            "iOS": "dtSize1050"
+          }
+        }
+      }
+    },
+    "1060": {
+      "$type": "number",
+      "$value": "{1060}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1060)",
+            "ANDROID": "dtSize1060",
+            "iOS": "dtSize1060"
+          }
+        }
+      }
+    },
+    "1080": {
+      "$type": "number",
+      "$value": "{1080}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1080)",
+            "ANDROID": "dtSize1080",
+            "iOS": "dtSize1080"
+          }
+        }
+      }
+    },
+    "1100": {
+      "$type": "number",
+      "$value": "{1100}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1100)",
+            "ANDROID": "dtSize1100",
+            "iOS": "dtSize1100"
+          }
+        }
+      }
+    },
+    "1115": {
+      "$type": "number",
+      "$value": "{1115}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1115)",
+            "ANDROID": "dtSize1115",
+            "iOS": "dtSize1115"
+          }
+        }
+      }
+    },
+    "1120": {
+      "$type": "number",
+      "$value": "{1120}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1120)",
+            "ANDROID": "dtSize1120",
+            "iOS": "dtSize1120"
+          }
+        }
+      }
+    },
+    "1125": {
+      "$type": "number",
+      "$value": "{1125}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1125)",
+            "ANDROID": "dtSize1125",
+            "iOS": "dtSize1125"
+          }
+        }
+      }
+    },
+    "1130": {
+      "$type": "number",
+      "$value": "{1130}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1130)",
+            "ANDROID": "dtSize1130",
+            "iOS": "dtSize1130"
+          }
+        }
+      }
+    },
+    "1150": {
+      "$type": "number",
+      "$value": "{1150}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1150)",
+            "ANDROID": "dtSize1150",
+            "iOS": "dtSize1150"
+          }
+        }
+      }
+    },
+    "1200": {
+      "$type": "number",
+      "$value": "{1200}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1200)",
+            "ANDROID": "dtSize1200",
+            "iOS": "dtSize1200"
+          }
+        }
+      }
+    },
+    "border": {
+      "0": {
+        "$type": "number",
+        "$value": "{0}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-border-0)",
+              "ANDROID": "dtSizeBorder0",
+              "iOS": "dtSizeBorder0"
+            }
+          }
+        }
+      },
+      "50": {
+        "$type": "number",
+        "$value": "{50}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-border-50)",
+              "ANDROID": "dtSizeBorder50",
+              "iOS": "dtSizeBorder50"
+            }
+          }
+        }
+      },
+      "100": {
+        "$type": "number",
+        "$value": "{100}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-border-100)",
+              "ANDROID": "dtSizeBorder100",
+              "iOS": "dtSizeBorder100"
+            }
+          }
+        }
+      },
+      "150": {
+        "$type": "number",
+        "$value": "{150}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-border-150)",
+              "ANDROID": "dtSizeBorder150",
+              "iOS": "dtSizeBorder150"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "number",
+        "$value": "{200}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-border-200)",
+              "ANDROID": "dtSizeBorder200",
+              "iOS": "dtSizeBorder200"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "number",
+        "$value": "{300}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-border-300)",
+              "ANDROID": "dtSizeBorder300",
+              "iOS": "dtSizeBorder300"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "number",
+        "$value": "{400}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-border-400)",
+              "ANDROID": "dtSizeBorder400",
+              "iOS": "dtSizeBorder400"
+            }
+          }
+        }
+      }
+    },
+    "50-negative": {
+      "$type": "number",
+      "$value": "{50-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-50-negative)",
+            "ANDROID": "dtSize50Negative",
+            "iOS": "dtSize50Negative"
+          }
+        }
+      }
+    },
+    "100-negative": {
+      "$type": "number",
+      "$value": "{100-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-100-negative)",
+            "ANDROID": "dtSize100Negative",
+            "iOS": "dtSize100Negative"
+          }
+        }
+      }
+    },
+    "200-negative": {
+      "$type": "number",
+      "$value": "{200-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-200-negative)",
+            "ANDROID": "dtSize200Negative",
+            "iOS": "dtSize200Negative"
+          }
+        }
+      }
+    },
+    "300-negative": {
+      "$type": "number",
+      "$value": "{300-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-300-negative)",
+            "ANDROID": "dtSize300Negative",
+            "iOS": "dtSize300Negative"
+          }
+        }
+      }
+    },
+    "350-negative": {
+      "$type": "number",
+      "$value": "{350-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-350-negative)",
+            "ANDROID": "dtSize350Negative",
+            "iOS": "dtSize350Negative"
+          }
+        }
+      }
+    },
+    "400-negative": {
+      "$type": "number",
+      "$value": "{400-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-400-negative)",
+            "ANDROID": "dtSize400Negative",
+            "iOS": "dtSize400Negative"
+          }
+        }
+      }
+    },
+    "450-negative": {
+      "$type": "number",
+      "$value": "{450-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-450-negative)",
+            "ANDROID": "dtSize450Negative",
+            "iOS": "dtSize450Negative"
+          }
+        }
+      }
+    },
+    "500-negative": {
+      "$type": "number",
+      "$value": "{500-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-500-negative)",
+            "ANDROID": "dtSize500Negative",
+            "iOS": "dtSize500Negative"
+          }
+        }
+      }
+    },
+    "525-negative": {
+      "$type": "number",
+      "$value": "{525-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-525-negative)",
+            "ANDROID": "dtSize525Negative",
+            "iOS": "dtSize525Negative"
+          }
+        }
+      }
+    },
+    "550-negative": {
+      "$type": "number",
+      "$value": "{550-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-550-negative)",
+            "ANDROID": "dtSize550Negative",
+            "iOS": "dtSize550Negative"
+          }
+        }
+      }
+    },
+    "600-negative": {
+      "$type": "number",
+      "$value": "{600-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-600-negative)",
+            "ANDROID": "dtSize600Negative",
+            "iOS": "dtSize600Negative"
+          }
+        }
+      }
+    },
+    "625-negative": {
+      "$type": "number",
+      "$value": "{625-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-625-negative)",
+            "ANDROID": "dtSize625Negative",
+            "iOS": "dtSize625Negative"
+          }
+        }
+      }
+    },
+    "650-negative": {
+      "$type": "number",
+      "$value": "{650-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-650-negative)",
+            "ANDROID": "dtSize650Negative",
+            "iOS": "dtSize650Negative"
+          }
+        }
+      }
+    },
+    "700-negative": {
+      "$type": "number",
+      "$value": "{700-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-700-negative)",
+            "ANDROID": "dtSize700Negative",
+            "iOS": "dtSize700Negative"
+          }
+        }
+      }
+    },
+    "720-negative": {
+      "$type": "number",
+      "$value": "{720-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-720-negative)",
+            "ANDROID": "dtSize720Negative",
+            "iOS": "dtSize720Negative"
+          }
+        }
+      }
+    },
+    "730-negative": {
+      "$type": "number",
+      "$value": "{730-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-730-negative)",
+            "ANDROID": "dtSize730Negative",
+            "iOS": "dtSize730Negative"
+          }
+        }
+      }
+    },
+    "750-negative": {
+      "$type": "number",
+      "$value": "{750-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-750-negative)",
+            "ANDROID": "dtSize750Negative",
+            "iOS": "dtSize750Negative"
+          }
+        }
+      }
+    },
+    "760-negative": {
+      "$type": "number",
+      "$value": "{760-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-760-negative)",
+            "ANDROID": "dtSize760Negative",
+            "iOS": "dtSize760Negative"
+          }
+        }
+      }
+    },
+    "775-negative": {
+      "$type": "number",
+      "$value": "{775-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-775-negative)",
+            "ANDROID": "dtSize775Negative",
+            "iOS": "dtSize775Negative"
+          }
+        }
+      }
+    },
+    "800-negative": {
+      "$type": "number",
+      "$value": "{800-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-800-negative)",
+            "ANDROID": "dtSize800Negative",
+            "iOS": "dtSize800Negative"
+          }
+        }
+      }
+    },
+    "825-negative": {
+      "$type": "number",
+      "$value": "{825-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-825-negative)",
+            "ANDROID": "dtSize825Negative",
+            "iOS": "dtSize825Negative"
+          }
+        }
+      }
+    },
+    "850-negative": {
+      "$type": "number",
+      "$value": "{850-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-850-negative)",
+            "ANDROID": "dtSize850Negative",
+            "iOS": "dtSize850Negative"
+          }
+        }
+      }
+    },
+    "875-negative": {
+      "$type": "number",
+      "$value": "{875-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-875-negative)",
+            "ANDROID": "dtSize875Negative",
+            "iOS": "dtSize875Negative"
+          }
+        }
+      }
+    },
+    "900-negative": {
+      "$type": "number",
+      "$value": "{900-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-900-negative)",
+            "ANDROID": "dtSize900Negative",
+            "iOS": "dtSize900Negative"
+          }
+        }
+      }
+    },
+    "905-negative": {
+      "$type": "number",
+      "$value": "{905-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-905-negative)",
+            "ANDROID": "dtSize905Negative",
+            "iOS": "dtSize905Negative"
+          }
+        }
+      }
+    },
+    "925-negative": {
+      "$type": "number",
+      "$value": "{925-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-925-negative)",
+            "ANDROID": "dtSize925Negative",
+            "iOS": "dtSize925Negative"
+          }
+        }
+      }
+    },
+    "950-negative": {
+      "$type": "number",
+      "$value": "{950-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-950-negative)",
+            "ANDROID": "dtSize950Negative",
+            "iOS": "dtSize950Negative"
+          }
+        }
+      }
+    },
+    "975-negative": {
+      "$type": "number",
+      "$value": "{975-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-975-negative)",
+            "ANDROID": "dtSize975Negative",
+            "iOS": "dtSize975Negative"
+          }
+        }
+      }
+    },
+    "1000-negative": {
+      "$type": "number",
+      "$value": "{1000-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1000-negative)",
+            "ANDROID": "dtSize1000Negative",
+            "iOS": "dtSize1000Negative"
+          }
+        }
+      }
+    },
+    "1020-negative": {
+      "$type": "number",
+      "$value": "{1020-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1020-negative)",
+            "ANDROID": "dtSize1020Negative",
+            "iOS": "dtSize1020Negative"
+          }
+        }
+      }
+    },
+    "1040-negative": {
+      "$type": "number",
+      "$value": "{1040-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1040-negative)",
+            "ANDROID": "dtSize1040Negative",
+            "iOS": "dtSize1040Negative"
+          }
+        }
+      }
+    },
+    "1050-negative": {
+      "$type": "number",
+      "$value": "{1050-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1050-negative)",
+            "ANDROID": "dtSize1050Negative",
+            "iOS": "dtSize1050Negative"
+          }
+        }
+      }
+    },
+    "1060-negative": {
+      "$type": "number",
+      "$value": "{1060-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1060-negative)",
+            "ANDROID": "dtSize1060Negative",
+            "iOS": "dtSize1060Negative"
+          }
+        }
+      }
+    },
+    "1080-negative": {
+      "$type": "number",
+      "$value": "{1080-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1080-negative)",
+            "ANDROID": "dtSize1080Negative",
+            "iOS": "dtSize1080Negative"
+          }
+        }
+      }
+    },
+    "1100-negative": {
+      "$type": "number",
+      "$value": "{1100-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1100-negative)",
+            "ANDROID": "dtSize1100Negative",
+            "iOS": "dtSize1100Negative"
+          }
+        }
+      }
+    },
+    "1115-negative": {
+      "$type": "number",
+      "$value": "{1115-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1115-negative)",
+            "ANDROID": "dtSize1115Negative",
+            "iOS": "dtSize1115Negative"
+          }
+        }
+      }
+    },
+    "1120-negative": {
+      "$type": "number",
+      "$value": "{1120-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1120-negative)",
+            "ANDROID": "dtSize1120Negative",
+            "iOS": "dtSize1120Negative"
+          }
+        }
+      }
+    },
+    "1125-negative": {
+      "$type": "number",
+      "$value": "{1125-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1125-negative)",
+            "ANDROID": "dtSize1125Negative",
+            "iOS": "dtSize1125Negative"
+          }
+        }
+      }
+    },
+    "1130-negative": {
+      "$type": "number",
+      "$value": "{1130-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1130-negative)",
+            "ANDROID": "dtSize1130Negative",
+            "iOS": "dtSize1130Negative"
+          }
+        }
+      }
+    },
+    "1150-negative": {
+      "$type": "number",
+      "$value": "{1150-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1150-negative)",
+            "ANDROID": "dtSize1150Negative",
+            "iOS": "dtSize1150Negative"
+          }
+        }
+      }
+    },
+    "1200-negative": {
+      "$type": "number",
+      "$value": "{1200-negative}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-1200-negative)",
+            "ANDROID": "dtSize1200Negative",
+            "iOS": "dtSize1200Negative"
+          }
+        }
+      }
+    },
+    "0-percent": {
+      "$type": "number",
+      "$value": "{0-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-0-percent)",
+            "ANDROID": "dtSize0Percent",
+            "iOS": "dtSize0Percent"
+          }
+        }
+      }
+    },
+    "5-percent": {
+      "$type": "number",
+      "$value": "{5-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-5-percent)",
+            "ANDROID": "dtSize5Percent",
+            "iOS": "dtSize5Percent"
+          }
+        }
+      }
+    },
+    "10-percent": {
+      "$type": "number",
+      "$value": "{10-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-10-percent)",
+            "ANDROID": "dtSize10Percent",
+            "iOS": "dtSize10Percent"
+          }
+        }
+      }
+    },
+    "20-percent": {
+      "$type": "number",
+      "$value": "{20-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-20-percent)",
+            "ANDROID": "dtSize20Percent",
+            "iOS": "dtSize20Percent"
+          }
+        }
+      }
+    },
+    "25-percent": {
+      "$type": "number",
+      "$value": "{25-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-25-percent)",
+            "ANDROID": "dtSize25Percent",
+            "iOS": "dtSize25Percent"
+          }
+        }
+      }
+    },
+    "30-percent": {
+      "$type": "number",
+      "$value": "{30-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-30-percent)",
+            "ANDROID": "dtSize30Percent",
+            "iOS": "dtSize30Percent"
+          }
+        }
+      }
+    },
+    "33-percent": {
+      "$type": "number",
+      "$value": "{33-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-33-percent)",
+            "ANDROID": "dtSize33Percent",
+            "iOS": "dtSize33Percent"
+          }
+        }
+      }
+    },
+    "40-percent": {
+      "$type": "number",
+      "$value": "{40-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-40-percent)",
+            "ANDROID": "dtSize40Percent",
+            "iOS": "dtSize40Percent"
+          }
+        }
+      }
+    },
+    "50-percent": {
+      "$type": "number",
+      "$value": "{50-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-50-percent)",
+            "ANDROID": "dtSize50Percent",
+            "iOS": "dtSize50Percent"
+          }
+        }
+      }
+    },
+    "60-percent": {
+      "$type": "number",
+      "$value": "{60-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-60-percent)",
+            "ANDROID": "dtSize60Percent",
+            "iOS": "dtSize60Percent"
+          }
+        }
+      }
+    },
+    "66-percent": {
+      "$type": "number",
+      "$value": "{66-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-66-percent)",
+            "ANDROID": "dtSize66Percent",
+            "iOS": "dtSize66Percent"
+          }
+        }
+      }
+    },
+    "70-percent": {
+      "$type": "number",
+      "$value": "{70-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-70-percent)",
+            "ANDROID": "dtSize70Percent",
+            "iOS": "dtSize70Percent"
+          }
+        }
+      }
+    },
+    "75-percent": {
+      "$type": "number",
+      "$value": "{75-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-75-percent)",
+            "ANDROID": "dtSize75Percent",
+            "iOS": "dtSize75Percent"
+          }
+        }
+      }
+    },
+    "80-percent": {
+      "$type": "number",
+      "$value": "{80-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-80-percent)",
+            "ANDROID": "dtSize80Percent",
+            "iOS": "dtSize80Percent"
+          }
+        }
+      }
+    },
+    "90-percent": {
+      "$type": "number",
+      "$value": "{90-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-90-percent)",
+            "ANDROID": "dtSize90Percent",
+            "iOS": "dtSize90Percent"
+          }
+        }
+      }
+    },
+    "95-percent": {
+      "$type": "number",
+      "$value": "{95-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-95-percent)",
+            "ANDROID": "dtSize95Percent",
+            "iOS": "dtSize95Percent"
+          }
+        }
+      }
+    },
+    "100-percent": {
+      "$type": "number",
+      "$value": "{100-percent}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dt-size-100-percent)",
+            "ANDROID": "dtSize100Percent",
+            "iOS": "dtSize100Percent"
+          }
+        }
+      }
+    },
+    "radius": {
+      "0": {
+        "$type": "number",
+        "$value": "{0}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-0)",
+              "ANDROID": "dtSizeRadius0",
+              "iOS": "dtSizeRadius0"
+            }
+          }
+        }
+      },
+      "100": {
+        "$type": "number",
+        "$value": "{100}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-100)",
+              "ANDROID": "dtSizeRadius100",
+              "iOS": "dtSizeRadius100"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "number",
+        "$value": "{200}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-200)",
+              "ANDROID": "dtSizeRadius200",
+              "iOS": "dtSizeRadius200"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "number",
+        "$value": "{300}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-300)",
+              "ANDROID": "dtSizeRadius300",
+              "iOS": "dtSizeRadius300"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "number",
+        "$value": "{400}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-400)",
+              "ANDROID": "dtSizeRadius400",
+              "iOS": "dtSizeRadius400"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "number",
+        "$value": "{500}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-500)",
+              "ANDROID": "dtSizeRadius500",
+              "iOS": "dtSizeRadius500"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "number",
+        "$value": "{600}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-600)",
+              "ANDROID": "dtSizeRadius600",
+              "iOS": "dtSizeRadius600"
+            }
+          }
+        }
+      },
+      "pill": {
+        "$type": "number",
+        "$value": "{760}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-pill)",
+              "ANDROID": "dtSizeRadiusPill",
+              "iOS": "dtSizeRadiusPill"
+            }
+          }
+        }
+      },
+      "circle": {
+        "$type": "number",
+        "$value": "{50-percent}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--dt-size-radius-circle)",
+              "ANDROID": "dtSizeRadiusCircle",
+              "iOS": "dtSizeRadiusCircle"
+            }
           }
         }
       }
