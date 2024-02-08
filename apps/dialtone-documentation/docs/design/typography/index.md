@@ -3,17 +3,9 @@ title: Typography
 description: Clear, legible, and easy-to-read text.
 ---
 
-## Introduction
-
-Typography is more than just selecting fonts; it's about creating a harmonious and effective reading experience. In this documentation, we'll explore how our chosen typefaces, styles, and layouts come together to convey a consistent brand identity across digital interfaces.
-
-## Core Principles
-
-Understanding the fundamentals is key. Learn about the anatomy of type, the interplay of typefaces, and how to strike the right balance between readability and aesthetics. Discover how size, spacing, and hierarchy contribute to a seamless user experience.
-
 ## Properties
 
-### Typeface selection
+### [Font family](../../utilities/typography/font-family.md)
 
 <dt-stack direction="row" gap="500">
 <svg-loader name="roboto" />
@@ -22,7 +14,7 @@ Understanding the fundamentals is key. Learn about the anatomy of type, the inte
 <svg-loader name="linux" />
 </dt-stack>
 
-### Font weight
+### [Font weight](../../utilities/typography/font-weight.md)
 
 <dt-stack direction="row" gap="500">
 <svg-loader name="light" />
@@ -31,7 +23,7 @@ Understanding the fundamentals is key. Learn about the anatomy of type, the inte
 <svg-loader name="bold" />
 </dt-stack>
 
-### Font size
+### [Font size](../../utilities/typography/font-size.md)
 
 <dt-stack direction="row" gap="500">
 <svg-loader name="d-fs-100" />
@@ -41,7 +33,7 @@ Understanding the fundamentals is key. Learn about the anatomy of type, the inte
 <svg-loader name="d-fs-500" />
 </dt-stack>
 
-### Line height
+### [Line height](../../utilities/typography/font-family.md)
 
 <dt-stack direction="column" gap="500">
 <dt-stack direction="row" gap="500">
@@ -56,7 +48,11 @@ Understanding the fundamentals is key. Learn about the anatomy of type, the inte
 </dt-stack>
 </dt-stack>
 
-## Usage
+## Styles
+
+A collection of intentional typographic styles crafted to ensure consistent and clear presentation of user interface and content.
+
+### Usage
 
 <code-well-header class="d-pb32">
   <div class="d-w100p">
@@ -113,8 +109,6 @@ Understanding the fundamentals is key. Learn about the anatomy of type, the inte
   </dt-stack>
 </dt-stack>
 ```
-
-## Styles
 
 ### Headlines
 
