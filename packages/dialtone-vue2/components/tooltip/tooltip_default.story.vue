@@ -19,7 +19,7 @@
         :append-to="$attrs.appendTo"
         :content-class="$attrs.contentClass"
         :transition="$attrs.transition"
-        :show="showTooltip"
+        :show="$attrs.showTooltip"
         :enabled="$attrs.enabled"
         :delay="$attrs.delay"
         :external-anchor="$attrs.externalAnchor"
@@ -31,7 +31,7 @@
         >
           <dt-button
             importance="outlined"
-            :kind="buttonKind"
+            :kind="$attrs.buttonKind"
           >
             {{ $attrs.anchor }}
           </dt-button>
