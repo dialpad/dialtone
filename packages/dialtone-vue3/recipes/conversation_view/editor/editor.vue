@@ -9,15 +9,14 @@
     <!-- Section for the top UI -->
     <dt-stack
       direction="row"
-      gap="0"
-      class="d-py4 dt-editor--top-bar-background d-divide-x d-divide-black-200"
+      gap="450"
+      class="d-p8 dt-editor--top-bar-background"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
         :key="buttonGroup.key"
         direction="row"
         gap="300"
-        class="d-p4"
       >
         <dt-tooltip
           v-for="button in buttonGroup.buttonGroup"
@@ -31,7 +30,7 @@
               importance="clear"
               kind="muted"
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-              size="sm"
+              size="xs"
               @click="button.onClick()"
             >
               <template #icon>
@@ -44,13 +43,14 @@
             </dt-button>
           </template>
         </dt-tooltip>
+        <div
+        class="dt-editor--button-group-divider">
+        </div>
       </dt-stack>
-
       <dt-stack
         v-if="linkButton.showBtn"
         direction="row"
         gap="300"
-        class="d-p4"
       >
         <dt-popover
           :open="showLinkInput"
@@ -76,7 +76,7 @@
                   kind="muted"
                   class="d-ol-none"
                   :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
-                  size="sm"
+                  size="xs"
                   @click="linkButton.onClick()"
                 >
                   <template #icon>
@@ -526,7 +526,7 @@ export default {
     individualButtons () {
       return [
         { showBtn: this.showQuoteButton, selector: 'blockquote', iconName: 'quote', dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
-        { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
+        { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code-block', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
       ].filter(button => button.showBtn);
     },
 
@@ -676,5 +676,12 @@ export default {
 <style lang="less">
 .dt-editor--top-bar-background {
   background-color: var(--dt-color-surface-secondary);
+}
+
+.dt-editor--button-group-divider {
+  margin-left: var(--dt-space-400);
+  height: calc(var(--dt-size-550) + var(--dt-size-300));
+  width: var(--dt-size-100);
+  background: var(--dt-color-border-subtle);
 }
 </style>
