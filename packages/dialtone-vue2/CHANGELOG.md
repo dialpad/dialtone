@@ -1,3 +1,15 @@
+# [2.115.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.114.3...dialtone-vue2/v2.115.0) (2024-02-08)
+
+
+### Bug Fixes
+
+* **Tooltip:** revert initialization issue ([#146](https://github.com/dialpad/dialtone/issues/146)) ([002f152](https://github.com/dialpad/dialtone/commit/002f152d535bcb4d7ae9715d149a9260cd2504e1))
+
+
+### Features
+
+* **Tooltip:** revert add appendTo prop to tooltip ([#132](https://github.com/dialpad/dialtone/issues/132)) ([c6cb0ec](https://github.com/dialpad/dialtone/commit/c6cb0ecf9c2787e197bb4d136022c9d92da4bf61))
+
 ## [2.114.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.114.2...dialtone-vue2/v2.114.3) (2024-02-07)
 
 
