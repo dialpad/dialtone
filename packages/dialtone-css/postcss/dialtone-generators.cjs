@@ -828,6 +828,7 @@ function _generateHoverFocusVariations (rule) {
   const borderColorRegex = new RegExp(`\\.d-bc-(${REGEX_OPTIONS.BORDER_COLORS})(-(${REGEX_OPTIONS.BORDER_COLOR_VARIATIONS}))?`);
   const boxShadowRegex = new RegExp(`\\.d-bs-(${REGEX_OPTIONS.BOX_SHADOWS})`);
   const textDecorationRegex = new RegExp(`\\.d-td-(${REGEX_OPTIONS.TEXT_DECORATION})`);
+  const opacityRegex = new RegExp(`\\.d-o(${REGEX_OPTIONS.OPACITY_VARIATIONS})`);
   const found = [
     backgroundGradientRegex,
     fontColorRegex,
@@ -835,6 +836,7 @@ function _generateHoverFocusVariations (rule) {
     borderColorRegex,
     boxShadowRegex,
     textDecorationRegex,
+    opacityRegex,
   ].some(regex => regex.test(rule.selector));
   if (!found) return;
   const selectors = rule.selectors.map(selector => appendHoverFocusSelectors(selector));

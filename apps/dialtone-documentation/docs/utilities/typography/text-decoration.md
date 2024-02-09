@@ -56,7 +56,7 @@ Use `d-td-none` to remove text decorations.
 </script>
 
 ## Hover
-Use h:d-td-{n} to change an element's :hover state text decoration.
+Use `h:d-td-{n}` to change an element's :hover state text decoration.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
   <p class="d-fs-300 d-fc-magenta-300 h:d-td-underline">The quick brown fox jumps over the lazy dog.</p>
@@ -67,10 +67,12 @@ Use h:d-td-{n} to change an element's :hover state text decoration.
 ```
 
 ## Focus
-Use f:d-td-{n} to change an element's :focus and :focus-within state text decoration.
+Use `f:d-td-{n}` to change an element's :focus and :focus-within state text decoration.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-neutral-white d-w100p d-hmn102" custom>
-  <button class="d-ba-none d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fs-200 d-fw-bold d-bs-none f:d-td-underline">Click me</button>
+<code-well-header class="d-d-flex d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
+  <button class="d-ba-none d-bgc-magenta-100 d-fs-200 d-bs-none f:d-td-underline">
+    <p class="d-fs-300 d-fc-magenta-300 d-fc-red">Click me</p>
+  </button>
 </code-well-header>
 
 ```html
@@ -78,10 +80,12 @@ Use f:d-td-{n} to change an element's :focus and :focus-within state text decora
 ```
 
 ## Focus visible
-Use fv:d-td-{n} to change an element's :focus-visible state text decoration [only when focused by keyboard].
+Use `fv:d-td-{n}` to change an element's :focus-visible state text decoration [only when focused by keyboard].
 
-<code-well-header class="d-fl-center d-p24 d-bgc-neutral-white d-w100p d-hmn102" custom>
-  <button class="d-ba-none d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fs-200 d-fw-bold d-bs-none fv:d-td-underline">Focus me</button>
+<code-well-header class="d-d-flex d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
+  <button class="d-ba-none d-bgc-purple-100 d-fs-200 d-bs-none fv:d-td-underline">
+    <p class="d-fs-300 d-fc-purple-300 d-fc-red">Focus me</p>
+  </button>
 </code-well-header>
 
 ```html

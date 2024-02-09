@@ -256,6 +256,16 @@ module.exports = {
       'underline',
       'unset',
     ].join('|'),
+    OPACITY_VARIATIONS: [
+      '0',
+      '10',
+      '25',
+      '50',
+      '75',
+      '90',
+      '95',
+      '99'
+    ].join('|'),
   },
   WIDTH_HEIGHTS: {
     0: '0',
