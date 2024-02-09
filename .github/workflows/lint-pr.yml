@@ -1,4 +1,4 @@
-name: Lint PR
+name: Lint PR Title
 
 on:
   pull_request:
@@ -31,15 +31,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Lint pull request commit message when it has a single commit
-        if: ${{ github.event.pull_request.commits == '1' }}
-        run: |
-          echo "Since your PR has a single commit, this commit should adhere to the commit message convention."
-          echo "correct format: <type>(<scope>): <subject>"
-          echo "example: feat: add dialbot icon"
-          echo "Please amend your commit message (git commit --amend) if commitlint reports an error and push using: git push --force-with-lease"
-          git show -s --format=%B HEAD^2 | pnpm commitlint --verbose
 
       - name: Lint pull request title
         run: |

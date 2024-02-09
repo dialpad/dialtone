@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.5.4",
+  "version": "4.8.1",
   "description": "Dialtone icon library",
   "scripts": {
     "build": "gulp"
@@ -51,8 +51,7 @@
     "Dialtone",
     "Dialtone Icons",
     "Icons",
-    "Icon Library",
-    "Vue"
+    "Icon Library"
   ],
   "license": "MIT"
 }

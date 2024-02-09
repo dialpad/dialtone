@@ -121,6 +121,11 @@
       "description": "Styles stack with gap 400 between elements."
     },
     {
+      "class": "d-stack--gap-450",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 400 between elements."
+    },
+    {
       "class": "d-stack--gap-500",
       "applies": ".d-stack",
       "description": "Styles stack with gap 500 between elements."

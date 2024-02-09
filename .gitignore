@@ -1,10 +1,46 @@
+# NPM #
 node_modules
-dist
+
+# NX #
 .nx/installation
 .nx/cache
-.idea
-*.code-workspace
 
 # OS generated files #
-######################
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*_rsa
+*_rsa.pub
+
+# VS Code #
+.vscode
+*.code-workspace
+
+# JetBrains #
+.idea
+
+# Build and generated files #
+dist
+.temp
+.cache
+
+# Dialtone icons #
+packages/dialtone-icons/src/icons.json
+
+# Dialtone tokens #
+packages/dialtone-tokens/token_transformer
+packages/dialtone-tokens/dist*/*
+!dist_ios/Package.swift
+!dist_ios/.github
+!dist_ios/VERSION
+.gradle
+local.properties
+.env
+
+# Dialtone vue #
+packages/dialtone-vue*/storybook-static
+packages/dialtone-vue*/functions/generated

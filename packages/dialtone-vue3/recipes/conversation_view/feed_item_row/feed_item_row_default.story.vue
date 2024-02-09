@@ -26,7 +26,7 @@
       #threading
     >
       <dt-stack
-        class="feed-item-row__thread d-pl4 d-d-flex d-ai-center"
+        class="feed-item-row__thread d-p4 d-d-flex d-ai-center"
         direction="row"
         gap="400"
       >

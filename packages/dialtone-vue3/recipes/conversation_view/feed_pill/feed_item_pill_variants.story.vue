@@ -16,7 +16,7 @@
           Lasted 8 min • Ended at 11:56 AM
         </template>
         <template #right>
-          <div class="d-pr16">
+          <div>
             <dt-button
               aria-label="Open external link"
               kind="muted"
@@ -63,7 +63,7 @@
         :toggleable="false"
       >
         <template #right>
-          <div class="d-pr16">
+          <div>
             <dt-button
               aria-label="Call Ben"
               kind="muted"
@@ -95,7 +95,7 @@
           From (800)504-9978
         </template>
         <template #right>
-          <div class="d-pr16">
+          <div>
             <dt-button
               aria-label="Open external link"
               kind="muted"
@@ -125,7 +125,7 @@
         :toggleable="false"
       >
         <template #right>
-          <div class="d-pr16">
+          <div>
             <dt-button
               aria-label="Open external link"
               kind="muted"
@@ -167,7 +167,7 @@
           <span class="d-fc-tertiary d-fs-100">8 people joined</span>
         </template>
         <template #right>
-          <div class="d-pr16">
+          <div>
             <dt-button
               aria-label="Open external link"
               kind="muted"
@@ -221,7 +221,7 @@
           <span class="d-fc-tertiary d-fs-100">8 people joined</span>
         </template>
         <template #right>
-          <div class="d-pr16">
+          <div>
             <dt-button
               aria-label="Open external link"
               kind="muted"

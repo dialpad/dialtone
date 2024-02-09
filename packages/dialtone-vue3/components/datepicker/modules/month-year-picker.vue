@@ -49,7 +49,9 @@
             :circle="true"
             class="d-datepicker__nav-btn"
             type="button"
-            :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, INTL_MONTH_FORMAT, locale)}`"
+            :aria-label="
+              `${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, INTL_MONTH_FORMAT, locale)}`
+            "
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -89,7 +91,9 @@
             :circle="true"
             class="d-datepicker__nav-btn"
             type="button"
-            :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, INTL_MONTH_FORMAT, locale)}`"
+            :aria-label="
+              `${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, INTL_MONTH_FORMAT, locale)}`
+            "
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >

@@ -21,10 +21,10 @@ If you need to add an icon into Dialtone, here’s how you would go about doing 
 
 ### For system icons
 
-1. Create a new branch in [dialtone-icons] repo starting with "feat/" in the name.
-2. Place the exported SVG file(s) in the appropriate folder category inside `./src/svg/`
+1. Create a new branch starting with "feat/" in the name.
+2. Place the exported SVG file(s) in the appropriate folder category inside `packages/dialtone-icons/src/svg/`
 3. If you need to add keywords related to the icon.
-   - Add the icon name to `./src/icons.json` into the correct category.
+   - Add the icon name to `packages/dialtone-icons/src/keywords.json` into the correct category.
    - Add the keywords array as the value. e.g.
 
    ```json
@@ -36,14 +36,14 @@ If you need to add an icon into Dialtone, here’s how you would go about doing 
    }
    ```
 
-4. Commit and push your branch to [dialtone-icons].
+4. Commit and push your branch.
 5. Open a pull request.
-6. Once approved it can be merged into main and will go out in the next dialtone-icons release.
+6. Once approved it can be merged into staging and will go out in the next release.
 
 ### For spot illustrations
 
-1. Create a new branch in [dialtone] repo starting with "brand-icon/" or "spot-illustration/" in the name.
-2. Place the exported SVG file(s) in the appropriate folders: `./lib/build/svg/spot/`
+1. Create a new branch starting with "brand-icon/" or "spot-illustration/" in the name.
+2. Place the exported SVG file(s) in the appropriate folders: `packages/dialtone-css/lib/build/svg/spot/`
 3. **Add icon or pattern information to the correct data file.** On their own data file: `./docs/_data/svg-spot.json`
 
    The data is pulled from the data files in the ordered it's entered, so you must place it in alphabetical order
@@ -79,10 +79,8 @@ If you need to add an icon into Dialtone, here’s how you would go about doing 
    }
    ```
 
-6. Verify your changes have been updated on the website by running `pnpm run start:dialtone` and navigating to `localhost:4000`.
-   If you would like to verify your final output svg file run `pnpm nx build dialtone` and look in the `./lib/dist/svg` folder
-7. Commit and push your branch to Dialtone.
+6. Verify your changes have been updated on the website by running `nx start:dialtone` and navigating to `localhost:4000`.
+   If you would like to verify your final output svg file run `nx build dialtone-css` and look in the `packages/dialtone-css/lib/dist/svg` folder
+7. Commit and push your branch.
 8. Open a pull request.
-9. Once approved it can be merged into staging and will go out in the next dialtone release.
-
-[dialtone-icons]: https://github.com/dialpad/dialtone-icons "Dialtone Icons"
+9. Once approved it can be merged into staging and will go out in the next release.

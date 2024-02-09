@@ -138,8 +138,8 @@ Configuration can be found in:
 
 Your code will be linted automatically on commit.
 
-- **Lint manually:** `pnpm nx lint dialtone`
-- **With autofix:** `pnpm nx lint:fix dialtone`
+- **Lint manually:** `nx lint dialtone`
+- **With autofix:** `nx lint:fix dialtone`
 
 Note that we use lesshint only for the utilities folder and stylelint for everything else. Due to some unsupported syntax limitations we cannot use stylelint on our utilities folder.
 
@@ -148,7 +148,7 @@ Note that we use lesshint only for the utilities folder and stylelint for everyt
 Here are some important directories to know within the Dialtone repository
 
 - `lib/build`: All source code and assets for the Dialtone library.
-- `lib/dist`: The compiled bundle will be output here upon `pnpm run build` or `pnpm nx build dialtone`.
+- `lib/dist`: The compiled bundle will be output here upon `nx build dialtone-css`.
 - `lib/build/fonts`: Fonts we wish to bundle with Dialtone (woff2 format).
 - `lib/build/less`: LESS files defining our styles. they are processed and transpiled to CSS on build.
 - `lib/build/svg`: Contains only spot illustrations. Icons are stored in the dialtone-icons package. See [adding icons and illustrations](https://dialtone.dialpad.com/about/contributing.html#adding-icons-and-illustrations) for instructions on how to add icons into Dialtone.

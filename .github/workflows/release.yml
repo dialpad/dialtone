@@ -69,7 +69,6 @@ jobs:
       - name: Set npm token
         run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
 
-      # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Publish production
         if: ${{ github.ref == 'refs/heads/production' }}
         continue-on-error: true
@@ -86,7 +85,6 @@ jobs:
       - name: Set GitHub auth token
         run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
-      # note that pnpm run build is executed before publishing via prepublishOnly
       - name: Publish production to GitHub packages
         if: ${{ github.ref == 'refs/heads/production' }}
         continue-on-error: true

@@ -53,7 +53,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 export const Default = {
-  render: (argsData) => createRenderConfig(DtRecipeSettingsMenuButton, DtRecipeSettingsMenuButtonDefaultTemplate, argsData),
+  render: (argsData) =>
+    createRenderConfig(DtRecipeSettingsMenuButton, DtRecipeSettingsMenuButtonDefaultTemplate, argsData),
 
   args: {
     default: 'Update',

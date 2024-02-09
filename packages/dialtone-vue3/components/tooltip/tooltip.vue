@@ -12,6 +12,7 @@
       @mouseenter="onEnterAnchor"
       @mouseleave="onLeaveAnchor"
       @keydown.esc="onLeaveAnchor"
+      @touchstart="onTouchStart"
     >
       <!-- @slot Slot for the anchor element -->
       <slot
@@ -281,13 +282,22 @@ export default {
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
+
+      // flag check touch based device
+      isTouchDevice: false,
     };
   },
 
   computed: {
     // whether the tooltip is visible or not.
     isVisible () {
-      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default);
+      const hasMessage = !!this.message?.trim();
+      const hasDefaultSlot = !!this.$slots?.default;
+      const isDeviceCompatible = !this.isTouchDevice;
+
+      const shouldBeVisible = this.isShown && this.enabled && (hasMessage || hasDefaultSlot);
+
+      return shouldBeVisible && isDeviceCompatible;
     },
 
     tooltipListeners () {
@@ -398,6 +408,10 @@ export default {
     },
 
     onEnterAnchor (e) {
+      // Note: This is to stop the call of mouseenter event when touchstart event is triggered,
+      //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null
+      if (this.isTouchDevice && !e.relatedTarget) return;
+
       if (this.delay) {
         this.inTimer = setTimeout(function (event) {
           this.triggerShow(event);
@@ -405,6 +419,9 @@ export default {
       } else {
         this.triggerShow(e);
       }
+
+      // since this method will be trigger by mouse event, updating the flag is non-touch device
+      this.isTouchDevice = false;
     },
 
     triggerShow (e) {
@@ -493,6 +510,10 @@ export default {
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
         this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
+    },
+
+    onTouchStart () {
+      this.isTouchDevice = true;
     },
   },
 };

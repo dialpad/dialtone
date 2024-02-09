@@ -1,3 +1,78 @@
+# [3.108.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.3...dialtone-vue3/v3.108.0) (2024-02-08)
+
+
+### Bug Fixes
+
+* **Tooltip:** revert initialization issue ([#146](https://github.com/dialpad/dialtone/issues/146)) ([002f152](https://github.com/dialpad/dialtone/commit/002f152d535bcb4d7ae9715d149a9260cd2504e1))
+
+
+### Features
+
+* **Tooltip:** revert add appendTo prop to tooltip ([#132](https://github.com/dialpad/dialtone/issues/132)) ([c6cb0ec](https://github.com/dialpad/dialtone/commit/c6cb0ecf9c2787e197bb4d136022c9d92da4bf61))
+
+## [3.107.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.2...dialtone-vue3/v3.107.3) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** initialization issue ([#146](https://github.com/dialpad/dialtone/issues/146)) ([d032ecd](https://github.com/dialpad/dialtone/commit/d032ecd3859ead4cd1d7b9462d60b20adfed9cb2))
+
+## [3.107.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.1...dialtone-vue3/v3.107.2) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** stop showing tootip for touch based devices ([#131](https://github.com/dialpad/dialtone/issues/131)) ([0c1be19](https://github.com/dialpad/dialtone/commit/0c1be19bbc7700a917358430f7721fe65552b6c2))
+
+## [3.107.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.0...dialtone-vue3/v3.107.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Emoji Row:** update emoji-row to use more semantic colors ([#143](https://github.com/dialpad/dialtone/issues/143)) ([0f7d112](https://github.com/dialpad/dialtone/commit/0f7d112a336e03a98e060ef5531da5352db69496))
+
+# [3.107.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.106.0...dialtone-vue3/v3.107.0) (2024-02-05)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** center align emojis within text ([#136](https://github.com/dialpad/dialtone/issues/136)) ([60dca67](https://github.com/dialpad/dialtone/commit/60dca6758f39865bab2e49d474f1eb84273a558c))
+
+
+### Features
+
+* **Tooltip:** add appendTo prop to tooltip ([#132](https://github.com/dialpad/dialtone/issues/132)) ([47e1dc5](https://github.com/dialpad/dialtone/commit/47e1dc584eafb06cf99e9118ac68cece22473ca1))
+
+# [3.106.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.2...dialtone-vue3/v3.106.0) (2024-02-01)
+
+
+### Bug Fixes
+
+* change padding on right slot of call pill stories ([#138](https://github.com/dialpad/dialtone/issues/138)) ([9a23a42](https://github.com/dialpad/dialtone/commit/9a23a423f3a6e2f01e2a86d5f765a3912e12fd08))
+* **Feed Item Row, Emoji Row:** spacing / color fixes - Vue 3 ([#134](https://github.com/dialpad/dialtone/issues/134)) ([21f3e21](https://github.com/dialpad/dialtone/commit/21f3e213714ca322aa96dde4b4fa3aed3bd9cc62))
+* **Feed Item Row:** set inset focus ring on feed item ([#139](https://github.com/dialpad/dialtone/issues/139)) ([e4e935a](https://github.com/dialpad/dialtone/commit/e4e935a35f1fab8582def30ade82d06bcab393f0))
+
+
+### Features
+
+* **Wysiwyg Editor, Rich Text Editor:** add wysiwyg component ([#113](https://github.com/dialpad/dialtone/issues/113)) ([367d3e2](https://github.com/dialpad/dialtone/commit/367d3e2aa5344d734fd725c1f7419c44107fb116))
+* **Wysiwyg Editor, Rich Text Editor:** add wysiwyg component for vue3 ([#117](https://github.com/dialpad/dialtone/issues/117)) ([bc93fb8](https://github.com/dialpad/dialtone/commit/bc93fb8b4ebf2aa03ea5079dba0760d550194f69))
+
+## [3.105.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.1...dialtone-vue3/v3.105.2) (2024-01-26)
+
+
+### Bug Fixes
+
+* missing exports ([#128](https://github.com/dialpad/dialtone/issues/128)) ([d44a3bb](https://github.com/dialpad/dialtone/commit/d44a3bbbf569372034cfddba0ebb8347b27dfc11))
+
+## [3.105.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.105.0...dialtone-vue3/v3.105.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** spacing and transition improvements - Vue 3 ([#111](https://github.com/dialpad/dialtone/issues/111)) ([bf18be2](https://github.com/dialpad/dialtone/commit/bf18be2ba92801ceb8d775ea5fede602e5303d6c))
+* **General Row:** map digital type to laptop-2 ([#114](https://github.com/dialpad/dialtone/issues/114)) ([ee3abfa](https://github.com/dialpad/dialtone/commit/ee3abfad17e9aefb55b934e311fdbe5d5cdac2b3))
+
 # [3.105.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.104.0...dialtone-vue3/v3.105.0) (2024-01-19)
 
 
