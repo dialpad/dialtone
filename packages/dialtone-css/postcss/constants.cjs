@@ -249,6 +249,13 @@ module.exports = {
       'ExtraExtraLarge',
 
     ].join('|'),
+    TEXT_DECORATION: [
+      'dotted',
+      'line-through',
+      'none',
+      'underline',
+      'unset',
+    ].join('|'),
   },
   WIDTH_HEIGHTS: {
     0: '0',

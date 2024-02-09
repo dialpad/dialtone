@@ -55,6 +55,39 @@ Use `d-td-none` to remove text decorations.
   import { decoration } from '@data/type.json';
 </script>
 
+## Hover
+Use h:d-td-{n} to change an element's :hover state text decoration.
+
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
+  <p class="d-fs-300 d-fc-magenta-300 h:d-td-underline">The quick brown fox jumps over the lazy dog.</p>
+</code-well-header>
+
+```html
+<p class="h:d-td-underline">...</p>
+```
+
+## Focus
+Use f:d-td-{n} to change an element's :focus and :focus-within state text decoration.
+
+<code-well-header class="d-fl-center d-p24 d-bgc-neutral-white d-w100p d-hmn102" custom>
+  <button class="d-ba-none d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fs-200 d-fw-bold d-bs-none f:d-td-underline">Click me</button>
+</code-well-header>
+
+```html
+<p class="f:d-td-underline">...</p>
+```
+
+## Focus visible
+Use fv:d-td-{n} to change an element's :focus-visible state text decoration [only when focused by keyboard].
+
+<code-well-header class="d-fl-center d-p24 d-bgc-neutral-white d-w100p d-hmn102" custom>
+  <button class="d-ba-none d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fs-200 d-fw-bold d-bs-none fv:d-td-underline">Focus me</button>
+</code-well-header>
+
+```html
+<p class="fv:d-td-underline">...</p>
+```
+
 ## Classes
 
 <utility-class-table>
