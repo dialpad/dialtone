@@ -5,7 +5,7 @@ import {
   TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 
-const baseProps = { delay: false, appendTo: document.body };
+const baseProps = { delay: false };
 const baseSlots = {
   default: 'Test message',
   anchor: `<template #anchor="attrs"><button data-qa="dt-button" v-bind="attrs">Hover me</button></template>`,

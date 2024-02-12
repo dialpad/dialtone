@@ -1,3 +1,22 @@
+# [3.108.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.3...dialtone-vue3/v3.108.0) (2024-02-08)
+
+
+### Bug Fixes
+
+* **Tooltip:** revert initialization issue ([#146](https://github.com/dialpad/dialtone/issues/146)) ([002f152](https://github.com/dialpad/dialtone/commit/002f152d535bcb4d7ae9715d149a9260cd2504e1))
+
+
+### Features
+
+* **Tooltip:** revert add appendTo prop to tooltip ([#132](https://github.com/dialpad/dialtone/issues/132)) ([c6cb0ec](https://github.com/dialpad/dialtone/commit/c6cb0ecf9c2787e197bb4d136022c9d92da4bf61))
+
+## [3.107.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.2...dialtone-vue3/v3.107.3) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Tooltip:** initialization issue ([#146](https://github.com/dialpad/dialtone/issues/146)) ([d032ecd](https://github.com/dialpad/dialtone/commit/d032ecd3859ead4cd1d7b9462d60b20adfed9cb2))
+
 ## [3.107.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.107.1...dialtone-vue3/v3.107.2) (2024-02-07)
 
 

@@ -11,7 +11,7 @@ const MOCK_TRANSITION_STUB = () => ({
   },
 });
 
-const baseProps = { delay: false, appendTo: document.body };
+const baseProps = { delay: false };
 const baseSlots = {
   default: 'Test message',
 };
