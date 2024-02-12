@@ -20,7 +20,7 @@ const _ = require('lodash');
 
       // Create unique IDs
       result = result.replace(/(clip-path|fill)="url\(#([^)]+)\)"/g, ':$1="`url(#${uniqueID}$2)`"')
-      result = result.replace(/(clipPath|linearGradient) id="([^"]+)"/g, '$1 :id="`${uniqueID}$2`"')
+      result = result.replace(/(clipPath|linearGradient|radialGradient) id="([^"]+)"/g, '$1 :id="`${uniqueID}$2`"')
 
       if (!/\${uniqueID}/g.test(result)) {
         // Remove created function if not needed
