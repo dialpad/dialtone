@@ -1,5 +1,6 @@
 {
   "name": "dialtone-documentation",
+  "implicitDependencies": ["dialtone-icons-vue3"],
   "targets": {
     "build-docs": {
       "executor": "nx:run-script",

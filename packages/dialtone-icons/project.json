@@ -5,7 +5,8 @@
       "executor": "nx:run-script",
       "options": {
         "script": "build"
-      }
+      },
+      "inputs": ["{projectRoot}/src/**/*"]
     },
     "release": {
       "executor": "nx:run-commands",
