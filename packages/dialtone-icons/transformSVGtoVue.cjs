@@ -17,8 +17,16 @@ const _ = require('lodash');
 
       let result = template.replace('__SVG_CONTENT__', svgContent);
       result = result.replace('__ICON_NAME__', iconName)
-      result = result.replace(/clip-path="url\([^)]+\)"/g, ':clip-path="`url(#${uniqueID})`"')
-      result = result.replace(/clipPath id="[^"]+"/g, 'clipPath :id="uniqueID"')
+
+      // Create unique IDs
+      result = result.replace(/(clip-path|fill)="url\(#([^)]+)\)"/g, ':$1="`url(#${uniqueID}$2)`"')
+      result = result.replace(/(clipPath|linearGradient) id="([^"]+)"/g, '$1 :id="`${uniqueID}$2`"')
+
+      if (!/\${uniqueID}/g.test(result)) {
+        // Remove created function if not needed
+        result = result.replace(/\s+created .*\n.*\n.*/, '');
+        result = result.replace(/import {[\s\w]+} from '[\w@\/]+';\n\n/, '');
+      }
 
       fs.writeFileSync(`./src/icons/${fileName.replace('.svg', '.vue')}`, result, 'utf8');
     })
