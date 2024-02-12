@@ -13,9 +13,9 @@ export const argsData = {
   shortTime: '4:54',
   onFocus: action('focus'),
   onHover: action('hover'),
-  default: `Elementum fames nullam elementum velit proin vitae aliquet.
+  default: `Elementum fames :smile: nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
-  aliquet elementum venenatis quisque.`,
+  aliquet elementum venenatis :laughing: quisque.`,
 };
 
 /*
