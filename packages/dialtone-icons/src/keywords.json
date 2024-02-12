@@ -1981,6 +1981,11 @@
         "account",
         "contact"
       ],
+      "user-speak": [
+        "voice",
+        "talk",
+        "speak"
+      ],
       "users": [
         "group",
         "people"
