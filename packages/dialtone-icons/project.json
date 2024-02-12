@@ -6,7 +6,7 @@
       "options": {
         "script": "build"
       },
-      "inputs": ["{projectRoot}/src/**/*"]
+      "inputs": ["{projectRoot}/src/**/*", "{projectRoot}/transformSVGtoVue.cjs", "{projectRoot}/gulpfile.cjs"]
     },
     "release": {
       "executor": "nx:run-commands",
