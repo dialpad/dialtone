@@ -1976,15 +1976,15 @@
         "unsubscribe",
         "unavailable"
       ],
-      "user": [
-        "person",
-        "account",
-        "contact"
-      ],
       "user-speak": [
         "voice",
         "talk",
         "speak"
+      ],
+      "user": [
+        "person",
+        "account",
+        "contact"
       ],
       "users": [
         "group",
