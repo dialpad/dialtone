@@ -3,8 +3,8 @@
     <dt-skeleton
       v-show="imgLoading && showSkeleton"
       :offset="0"
-      :class="emojiSize"
-      :shape-option="{ shape: 'square', contentClass: emojiSize, size: 'auto' }"
+      :class="['d-icon', emojiSize]"
+      :shape-option="{ shape: 'circle', size: '100%' }"
     />
     <img
       v-show="!imgLoading"
@@ -152,6 +152,8 @@ export default {
       handler: async function () {
         this.imgLoading = true;
       },
+
+      immediate: true,
     },
   },
 
