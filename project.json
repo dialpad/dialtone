@@ -36,6 +36,12 @@
         "command": "pnpm semantic-release-plus --no-ci --extends ./release-local.config.cjs",
         "parallel": false
       }
+    },
+    "test": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "test:vitest"
+      }
     }
   }
 }
