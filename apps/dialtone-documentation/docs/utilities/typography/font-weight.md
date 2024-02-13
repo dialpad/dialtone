@@ -3,6 +3,16 @@ title: Font weight
 description: Utilities to change an element's font-weight.
 ---
 
+<dt-notice
+  kind="warning"
+  hideClose="true"
+  class="d-wmx100p"
+>
+  <template #default>
+    <p class="d-body-compact">Before applying a typography utility, first consider using <router-link class="d-fw-semibold d-link d-link--muted" to="/design/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
+  </template>
+</dt-notice>
+
 ## Classes
 
 <utility-class-table>
