@@ -11,7 +11,12 @@
     @focus="$attrs.onFocus"
   >
     <template v-if="$attrs.default">
-      <span v-html="$attrs.default" />
+      <dt-emoji-text-wrapper
+        element-type="span"
+        size="400"
+      >
+        {{ $attrs.default }}
+      </dt-emoji-text-wrapper>
     </template>
     <template
       v-if="$attrs.avatar"
@@ -110,6 +115,7 @@
 <script>
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 import { DtRecipeEmojiRow } from '../emoji_row';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
@@ -121,6 +127,7 @@ export default {
     DtAvatar,
     DtRecipeFeedItemRow,
     DtRecipeEmojiRow,
+    DtEmojiTextWrapper,
     DtIcon,
     DtButton,
     DtStack,
