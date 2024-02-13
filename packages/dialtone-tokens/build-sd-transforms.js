@@ -35,7 +35,7 @@ StyleDictionary.registerAction({
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/css/tokens-studio',
-  transforms: [...transforms, 'name/cti/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem'].filter(transform => !transform.includes('name/cti/camel', 'ts/size/px')),
+  transforms: [...transforms, 'name/cti/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem'].filter(transform => !['name/cti/camel', 'ts/size/px', 'ts/typography/css/fontFamily'].includes(transform)),
 });
 
 export async function run() {
