@@ -3,6 +3,16 @@ title: Font size
 description: Utilities to change an element's font-size.
 ---
 
+<dt-notice
+  kind="warning"
+  hideClose="true"
+  class="d-wmx100p"
+>
+  <template #default>
+    <p class="d-body-compact">Before applying a typography utility, first consider using <router-link class="d-fw-bold d-link d-link--muted" to="/design/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
+  </template>
+</dt-notice>
+
 ## Usage
 
 Use `d-{fs|headline}-{stop}` to change an element's font-size in the product or `d-{fs|headline}-{stop}-{platform}` to
