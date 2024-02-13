@@ -17,8 +17,10 @@
       ]
     },
     "test": {
+      "cache": true,
       "dependsOn": [
-        "^build"
+        "^build",
+        "build"
       ]
     },
     "release": {
