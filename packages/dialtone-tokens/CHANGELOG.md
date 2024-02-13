@@ -1,3 +1,10 @@
+## [1.23.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.7...dialtone-tokens/v1.23.8) (2024-02-13)
+
+
+### Bug Fixes
+
+* android repository ref ([dc47df4](https://github.com/dialpad/dialtone/commit/dc47df4e7d44e4fa4f8d2a18bca6ff457d1dbe02))
+
 ## [1.23.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.6...dialtone-tokens/v1.23.7) (2024-02-13)
 
 
