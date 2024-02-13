@@ -15,6 +15,27 @@ function tokenTypeFromVariable(variable: Variable) {
   }
 }
 
+function getCustomType (variable: Variable) {
+  const variableName = variable.name.split('/')[0];
+
+  switch (variableName) {
+    case 'space':
+      return 'spacing';
+    case 'size':
+      const subVariableName = variable.name.split('/')[1];
+      switch (subVariableName) {
+        case 'border':
+          return 'borderWidth';
+        case 'radius':
+          return 'borderRadius';
+        default:
+          return 'sizing';
+      }
+    default:
+      return undefined;
+  }
+}
+
 function tokenValueFromVariable(
   variable: Variable,
   modeId: string,
@@ -73,6 +94,7 @@ export function tokenFilesFromLocalVariables(localVariablesResponse: ApiGetLocal
             codeSyntax: variable.codeSyntax,
           },
         },
+        $customType: getCustomType(variable),
       }
 
       Object.assign(obj, token)

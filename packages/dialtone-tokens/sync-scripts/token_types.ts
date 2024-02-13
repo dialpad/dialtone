@@ -27,7 +27,8 @@ export interface Token {
       scopes?: VariableScope[]
       codeSyntax?: VariableCodeSyntax
     }
-  }
+  },
+  $customType?: 'sizing' | 'spacing' | 'borderWidth' | 'borderRadius'
 }
 
 export type TokenOrTokenGroup =

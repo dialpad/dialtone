@@ -5,11 +5,12 @@ import FigmaApi from './figma_api.js'
 
 import { green } from './utils.js'
 import { tokenFilesFromLocalVariables } from './token_export.js'
+import { transformFigmaToSD } from './transform.js';
 
 /**
  * Usage:
  *
- * // Defaults to writing to the tokens_new directory
+ * // Defaults to writing to the figma_tokens directory
  * npm run sync-figma-to-tokens
  *
  * // Writes to the specified directory
@@ -27,7 +28,7 @@ async function main() {
 
   const tokensFiles = tokenFilesFromLocalVariables(localVariables)
 
-  let outputDir = 'tokens_new'
+  let outputDir = 'figma_tokens'
   const outputArgIdx = process.argv.indexOf('--output')
   if (outputArgIdx !== -1) {
     outputDir = process.argv[outputArgIdx + 1]
@@ -45,4 +46,6 @@ async function main() {
   console.log(green(`✅ Tokens files have been written to the ${outputDir} directory`))
 }
 
-main()
+main().then(() => {
+  transformFigmaToSD();
+});
