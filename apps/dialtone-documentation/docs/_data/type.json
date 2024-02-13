@@ -21,12 +21,12 @@
       "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium);"
     },
     {
-      "var": "d-headline-compact-medium",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold);"
-    },
-    {
       "var": "d-headline-medium",
       "output": "line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold);"
+    },
+    {
+      "var": "d-headline-compact-medium",
+      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold);"
     },
     {
       "var": "d-headline-large",
@@ -65,12 +65,12 @@
       "output": "line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-semi-bold);"
     },
     {
-      "var": "d-label-small",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-semi-bold);"
-    },
-    {
       "var": "d-label-compact",
       "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-semi-bold);"
+    },
+    {
+      "var": "d-label-small",
+      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-semi-bold);"
     },
     {
       "var": "d-label-plain",
