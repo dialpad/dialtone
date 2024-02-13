@@ -65,7 +65,9 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
   hideClose="true"
   class="d-wmx100p"
 >
-  <p class="d-body-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles with the same values.</p>
+  <template #default>
+    <p class="d-body-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-fw-semibold d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles with the same values.</p>
+  </template>
 </dt-notice>
 
 ### Usage
@@ -216,9 +218,22 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
   </div>
 </code-well-header>
 
-## Design tokens
+### API
 
-We have our own sections for the Tokens and theming, you can check our typography tokens in the [Design tokens section](/tokens/typography.md)
+<table class="d-table dialtone-doc-table">
+  <thead>
+    <tr>
+      <th scope="col" class="d-w40p">Class</th>
+      <th scope="col">Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="{ var: varName, output } in typographyStyles">
+      <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.{{ varName }}</td>
+      <td class="d-ff-mono d-fs-100">{{ output }}</td>
+    </tr>
+  </tbody>
+</table>
 
 <script setup>
   import { typographyStyles, fontSize, lineHeight } from '@data/type.json';
