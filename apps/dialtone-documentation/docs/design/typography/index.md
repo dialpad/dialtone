@@ -58,7 +58,7 @@ Adjusts vertical spacing between lines of text, optimizing legibility and text f
 
 ## Styles
 
-Dialtone's type categories are narrowed down to five style types that combine `font-size`, `font-family`, `font-weight`, and `line-height` properties: **Headline**, **Body**, **Label**, **Helper**, and **Code**.
+Dialtone's text styles are narrowed down to five categories: **Headline**, **Body**, **Label**, **Helper**, or **Code**. These combine `font-size`, `font-family`, `font-weight`, and `line-height` style properties into a CSS Utility for a uniform design language across all content.
 
 <dt-notice
   kind="warning"
