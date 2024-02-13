@@ -18,6 +18,27 @@
 //      [3]     Prevent adjustments of font size after orientation changes in iOS.
 //  ----------------------------------------------------------------------------
 
+@font-face {
+  font-weight: 400;
+  font-family: Archivo;
+  font-style: normal;
+  src: url('../fonts/Archivo-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: Archivo;
+  font-style: normal;
+  src: url('../fonts/Archivo-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: Archivo;
+  font-style: normal;
+  src: url('../fonts/Archivo-SemiBold.woff2') format('woff2');
+}
+
 html,
 body {
     margin: 0;
@@ -32,14 +53,4 @@ body {
     line-height: var(--dt-typography-body-base-line-height);
     background-color: var(--dt-color-surface-primary);
     -webkit-text-size-adjust: 100%;
-}
-
-//  ============================================================================
-//  @   FOCUS VISIBLE
-//  ----------------------------------------------------------------------------
-// This will hide the focus indicator if the element receives focus via the mouse,
-// but it will still show up on keyboard focus.
-//
-.js-focus-visible :focus:not(.focus-visible) {
-  outline: none;
 }
