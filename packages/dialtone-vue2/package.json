@@ -59,8 +59,8 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "@dialpad/dialtone-css": "workspace:^",
-    "@dialpad/dialtone-icons": "workspace:^",
+    "@dialpad/dialtone-css": "workspace:*",
+    "@dialpad/dialtone-icons": "workspace:*",
     "@percy/cli": "^1.27.4",
     "@percy/storybook": "^5.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
