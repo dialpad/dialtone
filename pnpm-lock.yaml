@@ -126,20 +126,20 @@ importers:
   apps/dialtone-documentation:
     dependencies:
       '@dialpad/dialtone-css':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/dialtone-css
       '@dialpad/dialtone-icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/dialtone-icons
     devDependencies:
       '@dialpad/dialtone-combinator':
         specifier: ^0.3.1
         version: 0.3.1
       '@dialpad/dialtone-tokens':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/dialtone-tokens
       '@dialpad/dialtone-vue':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/dialtone-vue3
       '@dialpad/postcss-responsive-variations':
         specifier: ^1.1.5
@@ -236,7 +236,7 @@ importers:
         version: 9.2.12
     devDependencies:
       '@dialpad/dialtone-tokens':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../dialtone-tokens
       '@vue/cli-plugin-eslint':
         specifier: ~5.0.8
@@ -486,10 +486,10 @@ importers:
         version: 6.3.7
     devDependencies:
       '@dialpad/dialtone-css':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../dialtone-css
       '@dialpad/dialtone-icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../dialtone-icons
       '@percy/cli':
         specifier: ^1.27.4
@@ -718,10 +718,10 @@ importers:
         version: 6.3.7
     devDependencies:
       '@dialpad/dialtone-css':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../dialtone-css
       '@dialpad/dialtone-icons':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../dialtone-icons
       '@percy/cli':
         specifier: ^1.27.4
