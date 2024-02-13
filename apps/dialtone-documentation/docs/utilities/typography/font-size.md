@@ -30,12 +30,6 @@ change in other platforms (mobile, tc8, tv).
     <div><p class="d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-fs-500</div>
     <div><p class="d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-headline36</div>
-    <div><p class="d-headline36 d-lh1">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-headline48</div>
-    <div><p class="d-headline48 d-lh1">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-headline54</div>
-    <div><p class="d-headline54 d-lh1">The quick brown fox jumps over the lazy dog.</p></div>
   </div>
 </code-well-header>
 
@@ -45,9 +39,6 @@ change in other platforms (mobile, tc8, tv).
 <p class="d-fs-300">...</p>
 <p class="d-fs-400">...</p>
 <p class="d-fs-500">...</p>
-<p class="d-headline36 d-lh1">...</p>
-<p class="d-headline48 d-lh1">...</p>
-<p class="d-headline54 d-lh1">...</p>
 ```
 
 <script setup>
@@ -58,7 +49,7 @@ change in other platforms (mobile, tc8, tv).
 
 ### Product
 
-<div class="d-h464 d-of-y-auto d-bb d-bc-black-200">
+<div class="d-hmx464 d-of-y-auto d-bb d-bc-default">
   <table class="d-table dialtone-doc-table">
     <thead>
       <tr>
@@ -82,30 +73,13 @@ change in other platforms (mobile, tc8, tv).
           </div>
         </td>
       </tr>
-      <tr v-for="{ size, output, headline } in fontSize.product">
-        <div v-if="headline === 'yes'" style="display: contents">
-          <th scope="row">{{ size }}px</th>
-          <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-headline{{ size }}</td>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
-                font-size: {{ output }}rem !important;<br/>
-                font-weight: var(--dt-font-weight-bold) !important;
-              </div>
-              <div class="d-fl0 d-lh4" :class="`d-headline${size}`">
-                Aa
-              </div>
-            </div>
-          </td>
-        </div>
-      </tr>
     </tbody>
   </table>
 </div>
 
 ### Mobile
 
-<div class="d-h464 d-of-y-auto d-bb d-bc-black-200">
+<div class="d-hmx464 d-of-y-auto d-bb d-bc-default">
   <table class="d-table dialtone-doc-table">
     <thead>
       <tr>
@@ -129,30 +103,13 @@ change in other platforms (mobile, tc8, tv).
           </div>
         </td>
       </tr>
-      <tr v-for="{ size, output, headline } in fontSize.mobile">
-        <div v-if="headline === 'yes'" style="display: contents">
-          <th scope="row">{{ size }}px</th>
-          <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-headline{{ size }}</td>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
-                font-size: {{ output }}rem !important;<br/>
-                font-weight: var(--dt-font-weight-bold) !important;
-              </div>
-              <div class="d-fl0 d-lh4" :class="`d-headline${size}`">
-                Aa
-              </div>
-            </div>
-          </td>
-        </div>
-      </tr>
     </tbody>
   </table>
 </div>
 
 ### TC8
 
-<div class="d-h464 d-of-y-auto d-bb d-bc-black-200">
+<div class="d-hmx464 d-of-y-auto d-bb d-bc-default">
   <table class="d-table dialtone-doc-table">
     <thead>
       <tr>
@@ -176,30 +133,13 @@ change in other platforms (mobile, tc8, tv).
           </div>
         </td>
       </tr>
-      <tr v-for="{ size, output, headline } in fontSize.tc8">
-        <div v-if="headline === 'yes'" style="display: contents">
-          <th scope="row">{{ size }}px</th>
-          <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-headline{{ size }}</td>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
-                font-size: {{ output }}rem !important;<br/>
-                font-weight: var(--dt-font-weight-bold) !important;
-              </div>
-              <div class="d-fl0 d-lh4" :class="`d-headline${size}`">
-                Aa
-              </div>
-            </div>
-          </td>
-        </div>
-      </tr>
     </tbody>
   </table>
 </div>
 
 ### TV
 
-<div class="d-h464 d-of-y-auto d-bb d-bc-black-200">
+<div class="d-hmx464 d-of-y-auto d-bb d-bc-default">
   <table class="d-table dialtone-doc-table">
     <thead>
       <tr>
@@ -222,23 +162,6 @@ change in other platforms (mobile, tc8, tv).
             </div>
           </div>
         </td>
-      </tr>
-      <tr v-for="{ size, output, headline } in fontSize.tv">
-        <div v-if="headline === 'yes'" style="display: contents">
-          <th scope="row">{{ size }}px</th>
-          <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-headline{{ size }}</td>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
-                font-size: {{ output }}rem !important;<br/>
-                font-weight: var(--dt-font-weight-bold) !important;
-              </div>
-              <div class="d-fl0 d-lh4" :class="`d-headline${size}`">
-                Aa
-              </div>
-            </div>
-          </td>
-        </div>
       </tr>
     </tbody>
   </table>
