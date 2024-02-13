@@ -65,7 +65,7 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
   hideClose="true"
   class="d-wmx100p"
 >
-  <p class="d-body-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles and use the same values.</p>
+  <p class="d-body-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles with the same values.</p>
 </dt-notice>
 
 ### Usage
