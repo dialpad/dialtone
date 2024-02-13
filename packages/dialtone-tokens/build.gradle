@@ -76,7 +76,7 @@ afterEvaluate {
         repositories {
             maven {
                 name = "Dialtone Tokens Maven Packages"
-                url = uri("https://maven.pkg.github.com/dialpad/dialtone-tokens")
+                url = uri("https://maven.pkg.github.com/dialpad/dialtone")
                 credentials {
                     username = project.findProperty("release.user") ?: System.getenv("GITHUB_USER")
                     password = project.findProperty("release.key") ?: System.getenv("GITHUB_TOKEN")
