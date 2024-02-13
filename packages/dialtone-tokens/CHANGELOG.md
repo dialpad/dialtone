@@ -1,3 +1,10 @@
+## [1.23.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.6...dialtone-tokens/v1.23.7) (2024-02-13)
+
+
+### Bug Fixes
+
+* attempt fix of android release ([dab49e9](https://github.com/dialpad/dialtone/commit/dab49e943a9fd115242cdade41f93982b1a74937))
+
 ## [1.23.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.5...dialtone-tokens/v1.23.6) (2024-02-13)
 
 
