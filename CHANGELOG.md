@@ -1,3 +1,15 @@
+## [9.13.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.1...dialtone/v9.13.2) (2024-02-13)
+
+
+### Bug Fixes
+
+* android repository ref ([dc47df4](https://github.com/dialpad/dialtone/commit/dc47df4e7d44e4fa4f8d2a18bca6ff457d1dbe02))
+
+
+### Documentation
+
+* **Typography:** remove deprecated d-headline classes ([#155](https://github.com/dialpad/dialtone/issues/155)) ([e2ae9c2](https://github.com/dialpad/dialtone/commit/e2ae9c206e6d215346d319aec567cf21b50a67f1))
+
 ## [9.13.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.0...dialtone/v9.13.1) (2024-02-13)
 
 
