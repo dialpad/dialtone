@@ -1,3 +1,10 @@
+# [4.9.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.8.1...dialtone-icons/v4.9.0) (2024-02-13)
+
+
+### Features
+
+* new icon user speak ([#147](https://github.com/dialpad/dialtone/issues/147)) ([b8a9ac9](https://github.com/dialpad/dialtone/commit/b8a9ac9477bbdb3c3e76e0bf5648c6abac37e151))
+
 ## [4.8.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.8.0...dialtone-icons/v4.8.1) (2024-02-05)
 
 
