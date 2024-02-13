@@ -1,3 +1,16 @@
+# [8.25.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.4...dialtone-css/v8.25.0) (2024-02-13)
+
+
+### Bug Fixes
+
+* load archivo font ([#152](https://github.com/dialpad/dialtone/issues/152)) ([3147749](https://github.com/dialpad/dialtone/commit/3147749fdd9f21387942ed4d00f5856230bd18f1))
+* rich editor improvements ([#142](https://github.com/dialpad/dialtone/issues/142)) ([a776d47](https://github.com/dialpad/dialtone/commit/a776d477b7b8c5e8b7b668427d640f6a7f3c0b6d))
+
+
+### Features
+
+* text decoration scopes ([#148](https://github.com/dialpad/dialtone/issues/148)) ([5e58ef1](https://github.com/dialpad/dialtone/commit/5e58ef156ad3f350f6c53fca01dae8a1f2eca350))
+
 ## [8.24.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.3...dialtone-css/v8.24.4) (2024-02-06)
 
 
