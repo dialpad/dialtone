@@ -220,20 +220,22 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
 
 ### API
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w40p">Class</th>
-      <th scope="col">Output</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{ var: varName, output } in typographyStyles">
-      <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.{{ varName }}</td>
-      <td class="d-ff-mono d-fs-100">{{ output }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="d-hmx464 d-of-y-auto d-bb d-bc-default">
+  <table class="d-table dialtone-doc-table">
+    <thead>
+      <tr>
+        <th scope="col" class="d-w40p">Class</th>
+        <th scope="col">Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="{ var: varName, output } in typographyStyles">
+        <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.{{ varName }}</td>
+        <td class="d-ff-mono d-fs-100">{{ output }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <script setup>
   import { typographyStyles, fontSize, lineHeight } from '@data/type.json';
