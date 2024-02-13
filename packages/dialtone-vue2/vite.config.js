@@ -21,7 +21,6 @@ export default defineConfig({
       external: [
         'vue',
         '@dialpad/dialtone-css',
-        '@dialpad/dialtone-icons',
       ],
       output: {
         globals: {
