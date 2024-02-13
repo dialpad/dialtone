@@ -1,3 +1,12 @@
+## [2.115.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.115.0...dialtone-vue2/v2.115.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* **Emoji:** skeleton display issue ([#150](https://github.com/dialpad/dialtone/issues/150)) ([5ccf8ca](https://github.com/dialpad/dialtone/commit/5ccf8cacb4d409a92bba700f4f42b68256a6e6c5))
+* **Feed Item Row:** change typography to compact ([#149](https://github.com/dialpad/dialtone/issues/149)) ([47f4a45](https://github.com/dialpad/dialtone/commit/47f4a45300d41bf29e3032311d7ea4a20062ea35))
+* rich editor improvements ([#142](https://github.com/dialpad/dialtone/issues/142)) ([a776d47](https://github.com/dialpad/dialtone/commit/a776d477b7b8c5e8b7b668427d640f6a7f3c0b6d))
+
 # [2.115.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.114.3...dialtone-vue2/v2.115.0) (2024-02-08)
 
 
