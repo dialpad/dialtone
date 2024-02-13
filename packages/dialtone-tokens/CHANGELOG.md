@@ -1,3 +1,10 @@
+## [1.23.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.5...dialtone-tokens/v1.23.6) (2024-02-13)
+
+
+### Bug Fixes
+
+* extra quotes on font tokens ([#151](https://github.com/dialpad/dialtone/issues/151)) ([ec96822](https://github.com/dialpad/dialtone/commit/ec96822c633dd52b2b544d500de77cc3097f6edb))
+
 ## [1.23.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.4...dialtone-tokens/v1.23.5) (2024-01-16)
 
 
