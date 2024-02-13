@@ -1,3 +1,10 @@
+## [9.13.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.0...dialtone/v9.13.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* attempt fix of android release ([dab49e9](https://github.com/dialpad/dialtone/commit/dab49e943a9fd115242cdade41f93982b1a74937))
+
 # [9.13.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.12.0...dialtone/v9.13.0) (2024-02-13)
 
 
