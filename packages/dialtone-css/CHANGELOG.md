@@ -1,3 +1,10 @@
+## [8.25.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.25.0...dialtone-css/v8.25.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* font path issue ([59aad42](https://github.com/dialpad/dialtone/commit/59aad427b6b220244a6fef5560f757fbd9335577))
+
 # [8.25.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.24.4...dialtone-css/v8.25.0) (2024-02-13)
 
 
