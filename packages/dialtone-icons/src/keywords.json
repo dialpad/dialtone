@@ -1707,12 +1707,14 @@
       "thumbs-down": [
         "dislike",
         "bad",
-        "emotion"
+        "emotion",
+        "no"
       ],
       "thumbs-up": [
         "like",
         "good",
-        "emotion"
+        "emotion",
+        "yes"
       ],
       "too-many-queries": [
         "list",
@@ -1751,14 +1753,13 @@
         "like",
         "good",
         "emotion",
-        "filled",
-        "ok"
+        "ok",
+        "yes"
       ],
       "thumbs-down-filled": [
         "dislike",
         "bad",
         "emotion",
-        "filled",
         "no"
       ]
     },
