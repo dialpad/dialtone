@@ -1746,6 +1746,13 @@
       "video-settings": [
         "preferences",
         "configure"
+      ],
+      "thumbs-up-filled": [
+        "like",
+        "good",
+        "emotion"
+        "filled"
+        "ok"
       ]
     },
     "os": {
