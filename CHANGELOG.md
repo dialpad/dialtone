@@ -1,3 +1,10 @@
+## [9.13.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.2...dialtone/v9.13.3) (2024-02-14)
+
+
+### Bug Fixes
+
+* font path issue ([59aad42](https://github.com/dialpad/dialtone/commit/59aad427b6b220244a6fef5560f757fbd9335577))
+
 ## [9.13.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.1...dialtone/v9.13.2) (2024-02-13)
 
 
