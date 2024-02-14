@@ -1,3 +1,10 @@
+## [9.13.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.3...dialtone/v9.13.4) (2024-02-14)
+
+
+### Bug Fixes
+
+* **Emoji Row:** tooltip position when content changes ([#156](https://github.com/dialpad/dialtone/issues/156)) ([ce6c452](https://github.com/dialpad/dialtone/commit/ce6c4528b7b60a894695d4087d044222069db291))
+
 ## [9.13.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.2...dialtone/v9.13.3) (2024-02-14)
 
 
