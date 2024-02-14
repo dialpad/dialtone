@@ -1750,9 +1750,16 @@
       "thumbs-up-filled": [
         "like",
         "good",
-        "emotion"
-        "filled"
+        "emotion",
+        "filled",
         "ok"
+      ],
+      "thumbs-down-filled": [
+        "dislike",
+        "bad",
+        "emotion",
+        "filled",
+        "no"
       ]
     },
     "os": {
