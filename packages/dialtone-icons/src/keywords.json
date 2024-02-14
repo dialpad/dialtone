@@ -1707,12 +1707,14 @@
       "thumbs-down": [
         "dislike",
         "bad",
-        "emotion"
+        "emotion",
+        "no"
       ],
       "thumbs-up": [
         "like",
         "good",
-        "emotion"
+        "emotion",
+        "yes"
       ],
       "too-many-queries": [
         "list",
@@ -1746,6 +1748,19 @@
       "video-settings": [
         "preferences",
         "configure"
+      ],
+      "thumbs-up-filled": [
+        "like",
+        "good",
+        "emotion",
+        "ok",
+        "yes"
+      ],
+      "thumbs-down-filled": [
+        "dislike",
+        "bad",
+        "emotion",
+        "no"
       ]
     },
     "os": {
