@@ -8,6 +8,7 @@
       <dt-tooltip
         class="dt-emoji-row__tooltip"
         content-class="d-wmx464"
+        sticky="popper"
         @shown="(shown) => emojiHovered(reaction, shown)"
       >
         <span aria-hidden="true">
