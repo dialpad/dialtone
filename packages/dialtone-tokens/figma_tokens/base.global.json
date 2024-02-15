@@ -3,7 +3,7 @@
     "0": {
       "$type": "number",
       "$value": "{0}",
-      "$description": "",
+      "$description": "Close elements",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
@@ -41,7 +41,7 @@
     "100": {
       "$type": "number",
       "$value": "{100}",
-      "$description": "",
+      "$description": "Small spaces",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
