@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "pnpm run sync:figma-to-tokens && pnpm run build:token-transformer && node ./build.js",
+    "build": "pnpm run build:token-transformer && node ./build.js",
     "build:token-transformer": "pnpm run build:token-transformer:light && pnpm run build:token-transformer:dark",
     "build:token-transformer:light": "token-transformer tokens token_transformer/tokens-light.json root,base/default,semantic/dp/default,components/checkbox,components/avatar/default,components/badge/default,components/checkbox/default,components/icon/default,components/radio/default root --expandTypography=true --expandShadow=true",
     "build:token-transformer:dark": "token-transformer tokens token_transformer/tokens-dark.json root,base/default,base/dark,semantic/dp/default,semantic/dp/dark,components/avatar/default,components/badge/default,components/checkbox/default,components/checkbox/dark,components/icon/default,components/radio/default,components/radio/dark root --expandTypography=true --expandShadow=true",
