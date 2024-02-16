@@ -1,3 +1,10 @@
+# [3.109.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.108.2...dialtone-vue3/v3.109.0) (2024-02-16)
+
+
+### Features
+
+* universal dialtone-icons ([#145](https://github.com/dialpad/dialtone/issues/145)) ([b5dcaef](https://github.com/dialpad/dialtone/commit/b5dcaefafd32f448803a91161527642806b21d3e))
+
 ## [3.108.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.108.1...dialtone-vue3/v3.108.2) (2024-02-14)
 
 
