@@ -30,6 +30,8 @@ dist
 
 # Dialtone icons #
 packages/dialtone-icons/src/icons.json
+packages/dialtone-icons/src/icons/*
+!packages/dialtone-icons/src/icons/index.js
 
 # Dialtone tokens #
 packages/dialtone-tokens/token_transformer
