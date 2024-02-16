@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.8...dialtone-tokens/v1.24.0) (2024-02-16)
+
+
+### Features
+
+* universal dialtone-icons ([#145](https://github.com/dialpad/dialtone/issues/145)) ([b5dcaef](https://github.com/dialpad/dialtone/commit/b5dcaefafd32f448803a91161527642806b21d3e))
+
 ## [1.23.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.7...dialtone-tokens/v1.23.8) (2024-02-13)
 
 
