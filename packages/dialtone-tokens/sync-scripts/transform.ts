@@ -47,7 +47,6 @@ const replaceValue = (variableName: string, valueKey: string) => {
   const value = parsedRoot[key].$value;
 
   if (variableName.endsWith('-percent')) return `${value}%`;
-  else if (value === 0) return value;
   else return `${value}px`;
 };
 
