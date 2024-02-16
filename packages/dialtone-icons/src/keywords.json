@@ -1704,11 +1704,24 @@
       "text-cursor-input": [
         "select"
       ],
+      "thumbs-down-filled": [
+        "dislike",
+        "bad",
+        "emotion",
+        "no"
+      ],
       "thumbs-down": [
         "dislike",
         "bad",
         "emotion",
         "no"
+      ],
+      "thumbs-up-filled": [
+        "like",
+        "good",
+        "emotion",
+        "ok",
+        "yes"
       ],
       "thumbs-up": [
         "like",
@@ -1748,19 +1761,6 @@
       "video-settings": [
         "preferences",
         "configure"
-      ],
-      "thumbs-up-filled": [
-        "like",
-        "good",
-        "emotion",
-        "ok",
-        "yes"
-      ],
-      "thumbs-down-filled": [
-        "dislike",
-        "bad",
-        "emotion",
-        "no"
       ]
     },
     "os": {
