@@ -48,13 +48,13 @@
   },
   "type": "module",
   "dependencies": {
-    "@dialpad/dialtone-css": "workspace:^",
-    "@dialpad/dialtone-icons": "workspace:^"
+    "@dialpad/dialtone-css": "workspace:*",
+    "@dialpad/dialtone-icons": "workspace:*"
   },
   "devDependencies": {
     "@dialpad/dialtone-combinator": "^0.3.1",
-    "@dialpad/dialtone-tokens": "workspace:^",
-    "@dialpad/dialtone-vue": "workspace:^",
+    "@dialpad/dialtone-tokens": "workspace:*",
+    "@dialpad/dialtone-vue": "workspace:*",
     "@dialpad/postcss-responsive-variations": "^1.1.5",
     "@docsearch/js": "^3.5.1",
     "@originjs/vite-plugin-commonjs": "^1.0.3",

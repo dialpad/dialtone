@@ -1,4 +1,4 @@
-import iconNames from '@dialpad/dialtone-icons/dist/icons.json';
+import iconNames from '@dialpad/dialtone-icons/icons.json';
 
 /**
  * Will use a Vue SFC to render the template rather than a template string.

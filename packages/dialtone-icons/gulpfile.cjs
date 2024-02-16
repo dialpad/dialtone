@@ -18,9 +18,9 @@ const settings = {
 const { src, dest, series } = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
-const through2 = require('through2');
 const fs = require("fs");
 const jsonFormat = require('gulp-json-format');
+const exec = require('child_process').exec;
 
 //  @@ SVGS
 const path = settings.svgs ? require('path') : null;
@@ -84,27 +84,6 @@ const cleanSVGs = () => {
 };
 
 //  ================================================================================
-//  @@  COMPILE CSS
-//      Lint, minify, and concatenate style files
-//  ================================================================================
-const moveStyleTagsToEOF = function (file, enc, cb) {
-  if (!file.isBuffer()) return cb(null, file);
-
-  const styleTagsRegex = /<style[\s\S]*<\/style>/gmi;
-  let content = file.contents.toString();
-  const result = styleTagsRegex.exec(content);
-
-  if (!result) return cb(null, file);
-
-  const matchedText = result[0];
-  content = content.replace(styleTagsRegex, '');
-  content = content + matchedText;
-  file.contents = Buffer.from(content);
-
-  return cb(null, file);
-};
-
-//  ================================================================================
 //  @@  COMPILE SVGS
 //      Lint and optimize SVG files
 //  ================================================================================
@@ -156,15 +135,15 @@ const buildIcons = function (done) {
       }
     }))
     .pipe(rename({ dirname: '' }))
-    .pipe(dest(paths.icons.outputSvg))
-    .pipe(replace(/(clip-path|fill|mask|filter)="url\(#[a-z]\)"/g, (match) => {
-      return ':'+ match
-          .replace(/url\(#[a-z]\)/, (match) => `\`${match}\``)
-          .replace(/#[a-z]/, (id) => '#${uniqueID}__' + id.charAt(1))
-    }))
-    // move any style tags within the svg into style tags of the vue component
-    .pipe(through2.obj(moveStyleTagsToEOF))
-    .pipe(replace('<style>', '<style scoped>'));
+  .pipe(dest(paths.icons.outputSvg));
+};
+
+const transformSVGtoVue = function (done) {
+  exec('node ./transformSVGtoVue.cjs', (err, stdout, stderr) => {
+    console.error(stderr);
+    console.log(stdout);
+    done(err)
+  });
 };
 
 //  ================================================================================
@@ -221,6 +200,7 @@ const copyFiles = function (done) {
 exports.default = series(
   cleanSVGs,
   buildIcons,
+  transformSVGtoVue,
   updateIconsJSON,
   copyFiles,
 );

@@ -8,13 +8,25 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    "./vue2": {
+      "import": "./dist/dialtone-icon@2.mjs",
+      "require": "./dist/dialtone-icon@2.umd.js"
+    },
+    "./vue3": {
+      "import": "./dist/dialtone-icon@3.mjs",
+      "require": "./dist/dialtone-icon@3.umd.js"
+    },
+    "./*": "./dist/*"
+  },
   "devDependencies": {
     "del": "^6.1.1",
     "gulp": "^4.0.2",
     "gulp-json-format": "^2.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.1.3",
-    "gulp-svgmin": "^4.1.0"
+    "gulp-svgmin": "^4.1.0",
+    "lodash": "^4.17.21"
   },
   "bugs": {
     "email": "dialtone@dialpad.com"
