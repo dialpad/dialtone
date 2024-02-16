@@ -1,3 +1,16 @@
+# [9.14.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.4...dialtone/v9.14.0) (2024-02-16)
+
+
+### Bug Fixes
+
+* dist exports ([#159](https://github.com/dialpad/dialtone/issues/159)) ([dbdc525](https://github.com/dialpad/dialtone/commit/dbdc525b7778d29e764b6d250ccd34e9d2aa2026))
+
+
+### Features
+
+* **Icons:** thumbs up and down filled icons ([#157](https://github.com/dialpad/dialtone/issues/157)) ([da4a006](https://github.com/dialpad/dialtone/commit/da4a006539f37f147d15623758d50ee79843d940))
+* universal dialtone-icons ([#145](https://github.com/dialpad/dialtone/issues/145)) ([b5dcaef](https://github.com/dialpad/dialtone/commit/b5dcaefafd32f448803a91161527642806b21d3e))
+
 ## [9.13.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.3...dialtone/v9.13.4) (2024-02-14)
 
 
