@@ -2,4 +2,4 @@ packages:
   # documentation sites
   - 'apps/*'
   # npm publishable packages
-  - 'packages/*'
+  - 'packages/**/*'

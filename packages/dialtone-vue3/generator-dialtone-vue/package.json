@@ -1,5 +1,5 @@
 {
-  "name": "generator-dialtone-vue",
+  "name": "generator-dialtone-vue3",
   "version": "0.1.0",
   "description": "generate boilerplate for new dialtone vue components",
   "files": [
