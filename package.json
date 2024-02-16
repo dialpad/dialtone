@@ -171,7 +171,8 @@
     },
     "./vue3/CHANGELOG.json": "./packages/dialtone-vue3/CHANGELOG.json",
     "./vue3/component-documentation.json": "./dist/vue3/component-documentation.json",
-    "./eslint-plugin": "./dist/eslint-plugin/index.js"
+    "./eslint-plugin": "./dist/eslint-plugin/index.js",
+    "./dist/*": "./dist/*"
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [
