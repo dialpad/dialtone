@@ -52,6 +52,12 @@ export const argTypesData = {
       },
     },
   },
+
+  type: {
+    defaultValue: 'default',
+    control: 'select',
+    options: ['default', 'custom'],
+  },
 };
 
 // Set default values at the story level here.
