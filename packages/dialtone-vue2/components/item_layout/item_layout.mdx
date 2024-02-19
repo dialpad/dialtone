@@ -25,3 +25,20 @@ import * as DtItemLayoutStories from './item_layout.stories.js';
 ```jsx
 import { DtItemLayout } from '@dialpad/dialtone-vue';
 ```
+
+### With default type
+
+By default, item layout includes custom styling, like paddings, sizes, colors, etc.
+
+```html
+<dt-item-layout />
+```
+
+### With custom type
+
+Setting the `type` property to `custom`, removes all the custom styling maintaining the slots positions.
+This way you can utilize the layout and customize your own styling.
+
+```html
+<dt-item-layout type="custom" />
+```
