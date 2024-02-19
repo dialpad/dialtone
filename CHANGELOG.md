@@ -1,3 +1,10 @@
+## [9.14.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.14.0...dialtone/v9.14.1) (2024-02-19)
+
+
+### Bug Fixes
+
+* add dependsOn to publish ([34ba916](https://github.com/dialpad/dialtone/commit/34ba916123c45f638742f8b8341a58b7f9123182))
+
 # [9.14.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.4...dialtone/v9.14.0) (2024-02-16)
 
 
