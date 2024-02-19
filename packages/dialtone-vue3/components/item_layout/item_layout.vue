@@ -79,7 +79,7 @@ export default {
     },
 
     /**
-     * The type of child list item to use.
+     * Set this prop to custom remove the default styling.
      * @values default, custom
      */
     type: {
