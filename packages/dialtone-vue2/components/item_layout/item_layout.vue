@@ -4,7 +4,7 @@
     :class="['dt-item-layout', { 'dt-item-layout--custom': type === 'custom' }]"
   >
     <section
-      v-if="hasSlotContent($slots.left)"
+      v-if="$slots.left"
       data-qa="dt-item-layout-left-wrapper"
       class="dt-item-layout--left"
     >
@@ -16,7 +16,7 @@
       class="dt-item-layout--content"
     >
       <div
-        v-if="hasSlotContent($slots.default)"
+        v-if="$slots.default"
         data-qa="dt-item-layout-title-wrapper"
         class="dt-item-layout--title"
       >
@@ -24,15 +24,15 @@
         <slot />
       </div>
       <div
-        v-if="hasSlotContent($slots.subtitle)"
+        v-if="$slots.subtitle"
         data-qa="dt-item-layout-subtitle-wrapper"
-        :class="['dt-item-layout--subtitle', { 'dt-item-layout--subtitle--with-title': hasSlotContent($slots.default) }]"
+        :class="['dt-item-layout--subtitle', { 'dt-item-layout--subtitle--with-title': $slots.default }]"
       >
         <!-- @slot Slot for content below main content -->
         <slot name="subtitle" />
       </div>
       <div
-        v-if="hasSlotContent($slots.bottom)"
+        v-if="$slots.bottom"
         data-qa="dt-item-layout-bottom-wrapper"
         class="dt-item-layout--bottom"
       >
@@ -41,7 +41,7 @@
       </div>
     </section>
     <section
-      v-if="hasSlotContent($slots.right)"
+      v-if="$slots.right"
       data-qa="dt-item-layout-right-wrapper"
       class="dt-item-layout--right"
     >
@@ -49,7 +49,7 @@
       <slot name="right" />
     </section>
     <section
-      v-if="hasSlotContent($slots.selected)"
+      v-if="$slots.selected"
       data-qa="dt-item-layout-selected-wrapper"
       class="dt-item-layout--selected"
     >
@@ -65,8 +65,6 @@
  * @see https://dialtone.dialpad.com/components/item_layout.html
  */
 <script>
-import { hasSlotContent } from '@/common/utils.js';
-
 export default {
   name: 'DtItemLayout',
   props: {
@@ -88,7 +86,5 @@ export default {
       validator: (t) => Object.values(['default', 'custom']).includes(t),
     },
   },
-
-  methods: { hasSlotContent },
 };
 </script>
