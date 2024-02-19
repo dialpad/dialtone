@@ -16,11 +16,10 @@
         "^build"
       ]
     },
-    "test": {
-      "cache": true,
+    "publish": {
       "dependsOn": [
-        "^build",
-        "build"
+        "build",
+        "^build"
       ]
     },
     "release": {
@@ -44,6 +43,13 @@
     "start": {
       "dependsOn": [
         "^build"
+      ]
+    },
+    "test": {
+      "cache": true,
+      "dependsOn": [
+        "^build",
+        "build"
       ]
     }
   },
