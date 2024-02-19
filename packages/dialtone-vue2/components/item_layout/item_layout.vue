@@ -1,10 +1,10 @@
 <template>
   <component
     :is="as"
-    class="dt-item-layout"
+    :class="['dt-item-layout', { 'dt-item-layout--custom': type === 'custom' }]"
   >
     <section
-      v-if="$slots.left"
+      v-if="hasSlotContent($slots.left)"
       data-qa="dt-item-layout-left-wrapper"
       class="dt-item-layout--left"
     >
@@ -16,7 +16,7 @@
       class="dt-item-layout--content"
     >
       <div
-        v-if="$slots.default"
+        v-if="hasSlotContent($slots.default)"
         data-qa="dt-item-layout-title-wrapper"
         class="dt-item-layout--title"
       >
@@ -24,15 +24,15 @@
         <slot />
       </div>
       <div
-        v-if="$slots.subtitle"
+        v-if="hasSlotContent($slots.subtitle)"
         data-qa="dt-item-layout-subtitle-wrapper"
-        :class="['dt-item-layout--subtitle', { 'dt-item-layout--subtitle--with-title': $slots.default }]"
+        :class="['dt-item-layout--subtitle', { 'dt-item-layout--subtitle--with-title': hasSlotContent($slots.default) }]"
       >
         <!-- @slot Slot for content below main content -->
         <slot name="subtitle" />
       </div>
       <div
-        v-if="$slots.bottom"
+        v-if="hasSlotContent($slots.bottom)"
         data-qa="dt-item-layout-bottom-wrapper"
         class="dt-item-layout--bottom"
       >
@@ -41,7 +41,7 @@
       </div>
     </section>
     <section
-      v-if="$slots.right"
+      v-if="hasSlotContent($slots.right)"
       data-qa="dt-item-layout-right-wrapper"
       class="dt-item-layout--right"
     >
@@ -49,7 +49,7 @@
       <slot name="right" />
     </section>
     <section
-      v-if="$slots.selected"
+      v-if="hasSlotContent($slots.selected)"
       data-qa="dt-item-layout-selected-wrapper"
       class="dt-item-layout--selected"
     >
@@ -65,6 +65,8 @@
  * @see https://dialtone.dialpad.com/components/item_layout.html
  */
 <script>
+import { hasSlotContent } from '@/common/utils.js';
+
 export default {
   name: 'DtItemLayout',
   props: {
@@ -75,29 +77,18 @@ export default {
       type: String,
       default: 'div',
     },
+
+    /**
+     * The type of child list item to use.
+     * @values default, custom
+     */
+    type: {
+      type: String,
+      default: 'default',
+      validator: (t) => Object.values(['default', 'custom']).includes(t),
+    },
   },
+
+  methods: { hasSlotContent },
 };
 </script>
-
-<style lang="less" scoped>
-// Move this to dialtone
-.dt-item-layout {
-  align-items: stretch;
-
-  &--content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .dt-item-layout--subtitle {
-      &--with-title {
-        margin-top: var(--dt-space-200-negative);
-      }
-    }
-  }
-
-  &--selected {
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
