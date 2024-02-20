@@ -1,5 +1,8 @@
 <template>
-  <dt-item-layout>
+  <dt-item-layout
+    :as="$attrs.as"
+    :unstyled="$attrs.unstyled"
+  >
     <template slot="left">
       <span
         v-if="$attrs.left"

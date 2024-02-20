@@ -53,10 +53,8 @@ export const argTypesData = {
     },
   },
 
-  type: {
-    defaultValue: 'default',
-    control: 'select',
-    options: ['default', 'custom'],
+  unstyled: {
+    control: { type: 'boolean' },
   },
 };
 

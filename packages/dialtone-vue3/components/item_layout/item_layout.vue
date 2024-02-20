@@ -1,7 +1,7 @@
 <template>
   <component
     :is="as"
-    :class="['dt-item-layout', { 'dt-item-layout--custom': type === 'custom' }]"
+    :class="['dt-item-layout', { 'dt-item-layout--custom': unstyled }]"
   >
     <section
       v-if="hasSlotContent($slots.left)"
@@ -79,13 +79,12 @@ export default {
     },
 
     /**
-     * Set this prop to custom remove the default styling.
-     * @values default, custom
+     * Set this prop to remove the default styling.
+     * @values true, false
      */
-    type: {
-      type: String,
-      default: 'default',
-      validator: (t) => Object.values(['default', 'custom']).includes(t),
+    unstyled: {
+      type: Boolean,
+      default: false,
     },
   },
 
