@@ -203,7 +203,7 @@ const libStyles = function (done) {
   //  Compile library files
   return src(paths.styles.inputLib)
     .pipe(less({ paths: ['./node_modules'] })) // compile less to css
-    .pipe(replace('../../fonts/', '../fonts/'))
+    .pipe(replace('../fonts/', './fonts/'))
     .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify]))
     .pipe(postCSS([autoprefixer()]))
     .pipe(dest(paths.styles.outputLib))

@@ -19,4 +19,4 @@ pluginManagement {
         mavenCentral()
     }
 }
-rootProject.name = 'dialtone-tokens'
+rootProject.name = 'tokens'

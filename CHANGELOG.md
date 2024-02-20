@@ -1,3 +1,78 @@
+## [9.14.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.14.0...dialtone/v9.14.1) (2024-02-19)
+
+
+### Bug Fixes
+
+* add dependsOn to publish ([34ba916](https://github.com/dialpad/dialtone/commit/34ba916123c45f638742f8b8341a58b7f9123182))
+
+# [9.14.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.4...dialtone/v9.14.0) (2024-02-16)
+
+
+### Bug Fixes
+
+* dist exports ([#159](https://github.com/dialpad/dialtone/issues/159)) ([dbdc525](https://github.com/dialpad/dialtone/commit/dbdc525b7778d29e764b6d250ccd34e9d2aa2026))
+
+
+### Features
+
+* **Icons:** thumbs up and down filled icons ([#157](https://github.com/dialpad/dialtone/issues/157)) ([da4a006](https://github.com/dialpad/dialtone/commit/da4a006539f37f147d15623758d50ee79843d940))
+* universal dialtone-icons ([#145](https://github.com/dialpad/dialtone/issues/145)) ([b5dcaef](https://github.com/dialpad/dialtone/commit/b5dcaefafd32f448803a91161527642806b21d3e))
+
+## [9.13.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.3...dialtone/v9.13.4) (2024-02-14)
+
+
+### Bug Fixes
+
+* **Emoji Row:** tooltip position when content changes ([#156](https://github.com/dialpad/dialtone/issues/156)) ([ce6c452](https://github.com/dialpad/dialtone/commit/ce6c4528b7b60a894695d4087d044222069db291))
+
+## [9.13.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.2...dialtone/v9.13.3) (2024-02-14)
+
+
+### Bug Fixes
+
+* font path issue ([59aad42](https://github.com/dialpad/dialtone/commit/59aad427b6b220244a6fef5560f757fbd9335577))
+
+## [9.13.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.1...dialtone/v9.13.2) (2024-02-13)
+
+
+### Bug Fixes
+
+* android repository ref ([dc47df4](https://github.com/dialpad/dialtone/commit/dc47df4e7d44e4fa4f8d2a18bca6ff457d1dbe02))
+
+
+### Documentation
+
+* **Typography:** remove deprecated d-headline classes ([#155](https://github.com/dialpad/dialtone/issues/155)) ([e2ae9c2](https://github.com/dialpad/dialtone/commit/e2ae9c206e6d215346d319aec567cf21b50a67f1))
+
+## [9.13.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.13.0...dialtone/v9.13.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* attempt fix of android release ([dab49e9](https://github.com/dialpad/dialtone/commit/dab49e943a9fd115242cdade41f93982b1a74937))
+
+# [9.13.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.12.0...dialtone/v9.13.0) (2024-02-13)
+
+
+### Bug Fixes
+
+* **Emoji:** skeleton display issue ([#150](https://github.com/dialpad/dialtone/issues/150)) ([5ccf8ca](https://github.com/dialpad/dialtone/commit/5ccf8cacb4d409a92bba700f4f42b68256a6e6c5))
+* extra quotes on font tokens ([#151](https://github.com/dialpad/dialtone/issues/151)) ([ec96822](https://github.com/dialpad/dialtone/commit/ec96822c633dd52b2b544d500de77cc3097f6edb))
+* **Feed Item Row:** change typography to compact ([#149](https://github.com/dialpad/dialtone/issues/149)) ([47f4a45](https://github.com/dialpad/dialtone/commit/47f4a45300d41bf29e3032311d7ea4a20062ea35))
+* load archivo font ([#152](https://github.com/dialpad/dialtone/issues/152)) ([3147749](https://github.com/dialpad/dialtone/commit/3147749fdd9f21387942ed4d00f5856230bd18f1))
+* rich editor improvements ([#142](https://github.com/dialpad/dialtone/issues/142)) ([a776d47](https://github.com/dialpad/dialtone/commit/a776d477b7b8c5e8b7b668427d640f6a7f3c0b6d))
+
+
+### Documentation
+
+* **Typography:** design language ([#75](https://github.com/dialpad/dialtone/issues/75)) ([6d6ecd5](https://github.com/dialpad/dialtone/commit/6d6ecd500bd42527239ae29721c57104f230632f))
+
+
+### Features
+
+* new icon user speak ([#147](https://github.com/dialpad/dialtone/issues/147)) ([b8a9ac9](https://github.com/dialpad/dialtone/commit/b8a9ac9477bbdb3c3e76e0bf5648c6abac37e151))
+* text decoration scopes ([#148](https://github.com/dialpad/dialtone/issues/148)) ([5e58ef1](https://github.com/dialpad/dialtone/commit/5e58ef156ad3f350f6c53fca01dae8a1f2eca350))
+
 # [9.12.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.11.7...dialtone/v9.12.0) (2024-02-08)
 
 

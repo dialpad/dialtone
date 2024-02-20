@@ -1704,15 +1704,30 @@
       "text-cursor-input": [
         "select"
       ],
+      "thumbs-down-filled": [
+        "dislike",
+        "bad",
+        "emotion",
+        "no"
+      ],
       "thumbs-down": [
         "dislike",
         "bad",
-        "emotion"
+        "emotion",
+        "no"
+      ],
+      "thumbs-up-filled": [
+        "like",
+        "good",
+        "emotion",
+        "ok",
+        "yes"
       ],
       "thumbs-up": [
         "like",
         "good",
-        "emotion"
+        "emotion",
+        "yes"
       ],
       "too-many-queries": [
         "list",

@@ -2,7 +2,8 @@
   "name": "dialtone",
   "implicitDependencies": [
     "dialtone-css",
-    "dialtone-icons",
+    "dialtone-icons-vue2",
+    "dialtone-icons-vue3",
     "dialtone-tokens",
     "dialtone-vue2",
     "dialtone-vue3",
@@ -12,11 +13,10 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "gulp",
-        "parallel": false
+        "command": "gulp"
       }
     },
-    "release": {
+    "publish": {
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm publish --tag next",

@@ -1,3 +1,31 @@
+# [1.24.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.8...dialtone-tokens/v1.24.0) (2024-02-16)
+
+
+### Features
+
+* universal dialtone-icons ([#145](https://github.com/dialpad/dialtone/issues/145)) ([b5dcaef](https://github.com/dialpad/dialtone/commit/b5dcaefafd32f448803a91161527642806b21d3e))
+
+## [1.23.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.7...dialtone-tokens/v1.23.8) (2024-02-13)
+
+
+### Bug Fixes
+
+* android repository ref ([dc47df4](https://github.com/dialpad/dialtone/commit/dc47df4e7d44e4fa4f8d2a18bca6ff457d1dbe02))
+
+## [1.23.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.6...dialtone-tokens/v1.23.7) (2024-02-13)
+
+
+### Bug Fixes
+
+* attempt fix of android release ([dab49e9](https://github.com/dialpad/dialtone/commit/dab49e943a9fd115242cdade41f93982b1a74937))
+
+## [1.23.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.5...dialtone-tokens/v1.23.6) (2024-02-13)
+
+
+### Bug Fixes
+
+* extra quotes on font tokens ([#151](https://github.com/dialpad/dialtone/issues/151)) ([ec96822](https://github.com/dialpad/dialtone/commit/ec96822c633dd52b2b544d500de77cc3097f6edb))
+
 ## [1.23.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.4...dialtone-tokens/v1.23.5) (2024-01-16)
 
 

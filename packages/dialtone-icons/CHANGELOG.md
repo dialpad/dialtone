@@ -1,3 +1,18 @@
+# [4.10.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.9.0...dialtone-icons/v4.10.0) (2024-02-16)
+
+
+### Features
+
+* **Icons:** thumbs up and down filled icons ([#157](https://github.com/dialpad/dialtone/issues/157)) ([da4a006](https://github.com/dialpad/dialtone/commit/da4a006539f37f147d15623758d50ee79843d940))
+* universal dialtone-icons ([#145](https://github.com/dialpad/dialtone/issues/145)) ([b5dcaef](https://github.com/dialpad/dialtone/commit/b5dcaefafd32f448803a91161527642806b21d3e))
+
+# [4.9.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.8.1...dialtone-icons/v4.9.0) (2024-02-13)
+
+
+### Features
+
+* new icon user speak ([#147](https://github.com/dialpad/dialtone/issues/147)) ([b8a9ac9](https://github.com/dialpad/dialtone/commit/b8a9ac9477bbdb3c3e76e0bf5648c6abac37e151))
+
 ## [4.8.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.8.0...dialtone-icons/v4.8.1) (2024-02-05)
 
 

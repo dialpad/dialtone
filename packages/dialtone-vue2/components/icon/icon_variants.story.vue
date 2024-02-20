@@ -20,7 +20,7 @@
 
 <script>
 import DtIcon from './icon.vue';
-import { categories } from '@dialpad/dialtone-icons/dist/keywords.json';
+import { categories } from '@dialpad/dialtone-icons/keywords.json';
 
 export default {
   name: 'IconDefault',

@@ -49,25 +49,25 @@ afterEvaluate {
                 // sources
                 artifact androidSourcesJar
 
-                groupId = 'design.dialpad'
+                groupId = 'dialtone.dialpad'
 
 
                 pom {
                     name = 'Dialtone Tokens'
                     description = "Design tokens for Dialpad's design system, Dialtone."
-                    url = 'https://dialtone.dialpad.com'
+                    url = 'https://dialtone.dialpad.com/tokens/'
 
                     licenses {
                         license {
                             name = 'MIT'
-                            url = 'https://github.com/dialpad/dialtone-tokens/blob/staging/LICENSE.md'
+                            url = 'https://github.com/dialpad/dialtone/blob/staging/LICENSE'
                         }
                     }
 
                     scm {
-                        connection = 'scm:git:git://github.com/dialpad/dialtone-tokens.git'
-                        developerConnection = 'scm:git:ssh://github.com/dialpad/dialtone-tokens.git'
-                        url = 'https//github.com/dialpad/dialtone-tokens'
+                        connection = 'scm:git:git://github.com/dialpad/dialtone.git'
+                        developerConnection = 'scm:git:ssh://github.com/dialpad/dialtone.git'
+                        url = 'https//github.com/dialpad/dialtone'
                     }
 
                 }
@@ -76,7 +76,7 @@ afterEvaluate {
         repositories {
             maven {
                 name = "Dialtone Tokens Maven Packages"
-                url = uri("https://maven.pkg.github.com/dialpad/dialtone-tokens")
+                url = uri("https://maven.pkg.github.com/dialpad/dialtone")
                 credentials {
                     username = project.findProperty("release.user") ?: System.getenv("GITHUB_USER")
                     password = project.findProperty("release.key") ?: System.getenv("GITHUB_TOKEN")
