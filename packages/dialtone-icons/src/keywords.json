@@ -490,6 +490,11 @@
         "nothing",
         "maths"
       ],
+      "customize": [
+        "settings",
+        "personalize",
+        "configuration"
+      ],
       "delete": [
         "backspace",
         "remove"
