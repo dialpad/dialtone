@@ -1,3 +1,10 @@
+## [8.26.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.26.0...dialtone-css/v8.26.1) (2024-02-21)
+
+
+### Bug Fixes
+
+* tooltip misplaced ([#162](https://github.com/dialpad/dialtone/issues/162)) ([da3a2d1](https://github.com/dialpad/dialtone/commit/da3a2d15fa9e7837a0b0eec8721a92270beb16d3))
+
 # [8.26.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.25.1...dialtone-css/v8.26.0) (2024-02-16)
 
 
