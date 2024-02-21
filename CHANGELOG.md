@@ -1,3 +1,12 @@
+## [9.14.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.14.1...dialtone/v9.14.2) (2024-02-21)
+
+
+### Bug Fixes
+
+* **Popover:** reading from undefined ref ([#165](https://github.com/dialpad/dialtone/issues/165)) ([2772e04](https://github.com/dialpad/dialtone/commit/2772e04c9b7a07025bb37d8c4a17596d59abdf88))
+* tooltip directive reactive ([#164](https://github.com/dialpad/dialtone/issues/164)) ([3caf8b1](https://github.com/dialpad/dialtone/commit/3caf8b1db0c7ea757b70cf48af4426bc9a4f9ef5))
+* tooltip misplaced ([#162](https://github.com/dialpad/dialtone/issues/162)) ([da3a2d1](https://github.com/dialpad/dialtone/commit/da3a2d15fa9e7837a0b0eec8721a92270beb16d3))
+
 ## [9.14.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.14.0...dialtone/v9.14.1) (2024-02-19)
 
 
