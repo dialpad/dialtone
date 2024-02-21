@@ -1,3 +1,11 @@
+## [2.116.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.116.0...dialtone-vue2/v2.116.1) (2024-02-21)
+
+
+### Bug Fixes
+
+* **Popover:** reading from undefined ref ([#165](https://github.com/dialpad/dialtone/issues/165)) ([2772e04](https://github.com/dialpad/dialtone/commit/2772e04c9b7a07025bb37d8c4a17596d59abdf88))
+* tooltip directive reactive ([#164](https://github.com/dialpad/dialtone/issues/164)) ([3caf8b1](https://github.com/dialpad/dialtone/commit/3caf8b1db0c7ea757b70cf48af4426bc9a4f9ef5))
+
 # [2.116.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.115.2...dialtone-vue2/v2.116.0) (2024-02-16)
 
 
