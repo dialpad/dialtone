@@ -13,6 +13,24 @@ env:
   HUSKY: 0
 
 jobs:
+  filter-actions:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      dialtone-tokens: ${{ steps.filter.outputs.dialtone-tokens }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Filter actions by path
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dialtone-tokens:
+              - 'packages/dialtone-tokens/**'
+
   get-branch-name:
     runs-on: ubuntu-latest
     outputs:
@@ -101,8 +119,8 @@ jobs:
         run: pnpm nx run-many --verbose --target=release-github --parallel=false
 
   android:
-    needs: check-dialpad-member
-    if: ${{ github.ref == 'refs/heads/production' }}
+    needs: [check-dialpad-member, filter-actions]
+    if: (github.ref == 'refs/heads/production' && needs.filter-actions.outputs.dialtone-tokens == 'true')
     concurrency: ${{ github.workflow }}-${{ github.ref }}-android
     runs-on: ubuntu-latest
     permissions:
