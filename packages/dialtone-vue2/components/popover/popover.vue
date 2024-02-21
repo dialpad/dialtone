@@ -879,7 +879,7 @@ export default {
 
     focusInitialElement () {
       if (this.initialFocusElement === 'dialog') {
-        this.$refs.content.$el.focus();
+        this.$refs.content?.$el.focus();
       }
       // find by ID
       if (this.initialFocusElement.startsWith('#')) {
