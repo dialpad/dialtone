@@ -4,9 +4,9 @@
     gap="600"
     class="d-m64"
   >
-    <span v-dt-tooltip="'Default placement'">Span with tooltip</span>
+    <span v-dt-tooltip="tooltipText">Span with tooltip</span>
     <dt-button
-      v-dt-tooltip:bottom="'Tooltip on bottom'"
+      v-dt-tooltip:bottom="tooltipText"
       importance="clear"
       kind="danger"
       circle
@@ -16,8 +16,13 @@
         <dt-icon name="phone-hang-up" />
       </template>
     </dt-button>
-    <dt-button v-dt-tooltip:top-end="'Tooltip on top end'">
+    <dt-button v-dt-tooltip:top-end="tooltipText">
       Button with tooltip
+    </dt-button>
+    <dt-button
+      @click="updateTooltipText('Updated placement')"
+    >
+      Update Tooltip Text
     </dt-button>
   </dt-stack>
 </template>
@@ -29,5 +34,17 @@ import DtIcon from '@/components/icon/icon.vue';
 export default {
   name: 'DtTooltipDirectiveDefault',
   components: { DtIcon, DtButton, DtStack },
+  data () {
+    return {
+      tooltipText: 'Default placement',
+    };
+  },
+
+  methods: {
+    updateTooltipText (text) {
+      this.tooltipText = text;
+    },
+  },
+
 };
 </script>
