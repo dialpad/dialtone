@@ -1,87 +1,83 @@
-import { rgbToHex } from './color.js'
-import { ApiGetLocalVariablesResponse, Variable } from './figma_api.js'
-import { Token, TokensFile } from './token_types.js'
+import { rgbToHex } from './color.js';
+import { ApiGetLocalVariablesResponse, Variable } from './figma_api.js';
+import { Token, TokensFile } from './token_types.js';
 
-function tokenTypeFromVariable(variable: Variable) {
+function tokenTypeFromVariable (variable: Variable) {
   switch (variable.resolvedType) {
     case 'BOOLEAN':
-      return 'boolean'
+      return 'boolean';
     case 'COLOR':
-      return 'color'
+      return 'color';
     case 'FLOAT':
-      return 'number'
+      return 'number';
     case 'STRING':
-      return 'string'
+      return 'string';
   }
 }
 
 function getCustomType (variable: Variable) {
-  const variableName = variable.name.split('/')[0];
+  const variableNames = variable.name.split('/');
 
-  switch (variableName) {
-    case 'space':
-      return 'spacing';
-    case 'size':
-      const subVariableName = variable.name.split('/')[1];
-      switch (subVariableName) {
-        case 'border':
-          return 'borderWidth';
-        case 'radius':
-          return 'borderRadius';
-        default:
-          return 'sizing';
-      }
-    default:
-      return undefined;
-  }
+  const customTypeMap = {
+    space: { space: 'spacing' },
+    size: {
+      border: 'borderWidth',
+      radius: 'borderRadius',
+      size: 'sizing',
+    },
+  };
+
+  if (!customTypeMap[variableNames[0]]) return undefined;
+
+  return customTypeMap[variableNames[0]][variableNames[1]] || customTypeMap[variableNames[0]][variableNames[0]];
 }
 
-function tokenValueFromVariable(
+function tokenValueFromVariable (
   variable: Variable,
   modeId: string,
   localVariables: { [id: string]: Variable },
 ) {
-  const value = variable.valuesByMode[modeId]
+  const value = variable.valuesByMode[modeId];
   if (typeof value === 'object') {
     if ('type' in value && value.type === 'VARIABLE_ALIAS') {
-      const aliasedVariable = localVariables[value.id]
-      return `{${aliasedVariable.name.replace(/\//g, '.')}}`
+      const aliasedVariable = localVariables[value.id];
+      return `{${aliasedVariable.name.replace(/\//g, '.')}}`;
     } else if ('r' in value) {
-      return rgbToHex(value)
+      return rgbToHex(value);
     }
 
-    throw new Error(`Format of variable value is invalid: ${value}`)
+    throw new Error(`Format of variable value is invalid: ${value}`);
   } else {
-    return value
+    return value;
   }
 }
 
-export function tokenFilesFromLocalVariables(localVariablesResponse: ApiGetLocalVariablesResponse) {
-  const tokenFiles: { [fileName: string]: TokensFile } = {}
-  const localVariableCollections = localVariablesResponse.meta.variableCollections
-  const localVariables = localVariablesResponse.meta.variables
+export function tokenFilesFromLocalVariables (localVariablesResponse: ApiGetLocalVariablesResponse) {
+  const tokenFiles: { [fileName: string]: TokensFile } = {};
+  const localVariableCollections = localVariablesResponse.meta.variableCollections;
+  const localVariables = localVariablesResponse.meta.variables;
 
   Object.values(localVariables).forEach((variable) => {
     // Skip remote variables because we only want to generate tokens for local variables
     if (variable.remote) {
-      return
+      return;
     }
 
-    const collection = localVariableCollections[variable.variableCollectionId]
+    const collection = localVariableCollections[variable.variableCollectionId];
 
     collection.modes.forEach((mode) => {
-      const fileName = `${collection.name}.${mode.name}.json`
+      const fileName = `${collection.name}.${mode.name}.json`;
 
       if (!tokenFiles[fileName]) {
-        tokenFiles[fileName] = {}
+        tokenFiles[fileName] = {};
       }
 
-      let obj: any = tokenFiles[fileName]
+      let obj: any = tokenFiles[fileName];
 
       variable.name.split('/').forEach((groupName) => {
-        obj[groupName] = obj[groupName] || {}
-        obj = obj[groupName]
-      })
+        obj[groupName] = obj[groupName] || {};
+        obj = obj[groupName];
+      });
 
       const token: Token = {
         $type: tokenTypeFromVariable(variable),
@@ -95,11 +91,11 @@ export function tokenFilesFromLocalVariables(localVariablesResponse: ApiGetLocal
           },
         },
         $customType: getCustomType(variable),
-      }
+      };
 
-      Object.assign(obj, token)
-    })
-  })
+      Object.assign(obj, token);
+    });
+  });
 
-  return tokenFiles
+  return tokenFiles;
 }
