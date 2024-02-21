@@ -678,7 +678,7 @@ export default {
       ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
       : null;
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
-    this.popoverContentEl = this.$refs.content.$el;
+    this.popoverContentEl = this.$refs.content?.$el;
 
     if (this.isOpen) {
       this.initTippyInstance();
