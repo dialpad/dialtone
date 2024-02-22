@@ -1,4 +1,4 @@
-import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/tooltip';
+import { DtTooltip } from '@/components/tooltip';
 import { getUniqueString } from '@/common/utils';
 import { createApp, h } from 'vue';
 
@@ -56,30 +56,8 @@ export const DtTooltipDirective = {
 
     DtTooltipDirectiveApp.mount(mountPoint);
 
-    const isValidBindingTextValue = (value) => typeof value === 'string' && value?.trim();
-    const isValidBindingPlacementValue = (value) => value === undefined || TOOLTIP_DIRECTIONS.includes(value);
-
     app.directive('dt-tooltip', {
-      beforeMount (anchor, binding) {
-        if (!isValidBindingTextValue(binding.value)) {
-          // eslint-disable-next-line no-console
-          console.warn(
-            'Missing value for v-dt-tooltip directive on: ',
-            anchor,
-            'received value: ',
-            binding.value,
-          );
-          return;
-        }
-        if (!isValidBindingPlacementValue(binding.arg)) {
-          // eslint-disable-next-line no-console
-          console.warn(
-            'Wrong placement value provided for v-dt-tooltip directive on: '
-            , anchor,
-            'received value: ',
-            binding.arg);
-          return;
-        }
+      bind (anchor, binding) {
         // Initial tooltip setup
         setupTooltip(anchor, binding);
       },
