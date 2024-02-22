@@ -365,7 +365,6 @@ export default {
 
   &__left-time {
     color: var(--dt-color-foreground-tertiary);
-    line-height: var(--dt-font-line-height-400);
     font-size: var(--dt-font-size-100);
     font-weight: var(--dt-font-weight-normal);
     vertical-align: middle;
