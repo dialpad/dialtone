@@ -1,5 +1,5 @@
 <template>
-  <dt-tab-group class="example-tab-group">
+  <dt-tab-group class="code-example-tab-group">
     <template #tabs>
       <dt-tab
         id="vueTab"
@@ -40,7 +40,8 @@
         kind="warning"
         hide-close
       >
-        This component needs Javascript to work as the example
+        When using HTML / CSS code only the visuals of the component are rendered. It may require
+        additional javascript to function the same way as the example.
       </dt-banner>
       <div class="language-html" data-ext="html">
         <pre class="language-html" v-html="highlightedHtml" />
@@ -70,12 +71,14 @@ const props = defineProps({
   showHtmlWarning: Boolean,
 });
 
+const trimmedHtmlCode = props.htmlCode.replace(/^\n/gm, '');
+const trimmedVueCode = props.vueCode.replace(/^\n/gm, '');
 const highlightedHtml = Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html');
 const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html');
 </script>
 
 <style scoped lang="less">
-.example-tab-group {
+.code-example-tab-group {
   margin-top: var(--dt-space-500);
   .language-html {
     margin-top: 0;

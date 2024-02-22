@@ -16,6 +16,41 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     </div>
 </code-well-header>
 
+<code-example-tabs
+htmlCode='
+<!-- icon -->
+<div class="d-avatar d-avatar--lg">
+    <div class="d-avatar__canvas">
+        <svg>...</svg>
+    </div>
+</div>
+<!-- initials -->
+<div class="d-avatar d-avatar--lg d-avatar--color-1000">
+    <div class="d-avatar__canvas">
+        <span class="d-avatar__initials">dp</span>
+    </div>
+    <div class="d-presence d-avatar__presence d-avatar__presence--lg">
+        <div class="d-presence__inner d-presence__inner--busy" />
+    </div>
+</div>
+<!-- image -->
+<div class="d-avatar d-avatar--lg d-avatar--color-1800">
+    <div class="d-avatar__canvas d-avatar--image-loaded">
+        <img class="d-avatar__image" data-qa="dt-avatar-image" src="/assets/images/person.png" alt="avatar user">
+    </div>
+    <div class="d-presence d-avatar__presence d-avatar__presence--lg" data-qa="dt-presence" role="status" aria-live="off">
+        <div class="d-presence__inner d-presence__inner--active" />
+    </div>
+</div>
+'
+vueCode='
+<dt-avatar size="lg" icon-name="user" icon-size="500" />
+<dt-avatar size="lg" full-name="dp" color="1000" presence="busy" />
+<dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" presence="active" />
+'
+showHtmlWarning>
+</code-example-tabs>
+
 <!-- <component-combinator component-name="DtAvatar" /> -->
 
 ## Usage
@@ -73,15 +108,22 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     <dt-avatar icon-name="user" icon-size="300" />
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-avatar d-avatar--{$size}">
     <div class="d-avatar__canvas">
         <span class="d-avatar__icon">
-            <svg>...</svg>
+        <svg>...</svg>
         </span>
     </div>
-</div>
-```
+</div>'
+vueCode='
+<dt-avatar
+    icon-name="person"
+/>
+'
+showHtmlWarning>
+</code-example-tabs>
 
 ### Initials
 
@@ -91,13 +133,23 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     </dt-stack>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-avatar d-avatar--{$size} d-avatar--{$color}">
     <div class="d-avatar__canvas">
         <span class="d-avatar__initials">DP</span>
     </div>
 </div>
-```
+'
+vueCode='
+<!-- colors 100 to 1800 are valid -->
+<dt-avatar
+    full-name="DP"
+    color="100"
+/>
+'
+showHtmlWarning>
+</code-example-tabs>
 
 ### Image
 
@@ -105,13 +157,19 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-avatar d-avatar--{$size}">
     <div class="d-avatar__canvas">
-        <img class="d-avatar__image" src="/path/to/image" />
+        <img class="d-avatar__image" src="/path/to/image" alt="avatar user" />
     </div>
 </div>
-```
+'
+vueCode='
+<dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
+'
+showHtmlWarning>
+</code-example-tabs>
 
 ### Sizes
 
@@ -121,23 +179,43 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     </div>
 </code-well-header>
 
-```html
-    <div class="d-avatar d-avatar--xs">
-        ...
+<code-example-tabs
+htmlCode='
+<div class="d-avatar d-avatar--xs">
+    <div class="d-avatar__canvas">
+        <svg>...</svg>
     </div>
-    <div class="d-avatar d-avatar--sm">
-        ...
+</div>
+<div class="d-avatar d-avatar--sm">
+    <div class="d-avatar__canvas">
+        <svg>...</svg>
     </div>
-    <div class="d-avatar d-avatar--md">
-        ...
+</div>
+<div class="d-avatar d-avatar--md">
+    <div class="d-avatar__canvas">
+        <svg>...</svg>
     </div>
-    <div class="d-avatar d-avatar--lg">
-        ...
+</div>
+<div class="d-avatar d-avatar--lg">
+    <div class="d-avatar__canvas">
+        <svg>...</svg>
     </div>
-    <div class="d-avatar d-avatar--xl">
-        ...
+</div>
+<div class="d-avatar d-avatar--xl">
+    <div class="d-avatar__canvas">
+        <svg>...</svg>
     </div>
-```
+</div>
+'
+vueCode='
+<dt-avatar size="xs" icon-name="user" />
+<dt-avatar size="sm" icon-name="user" />
+<dt-avatar size="md" icon-name="user" />
+<dt-avatar size="lg" icon-name="user" />
+<dt-avatar size="xl" icon-name="user" />
+'
+showHtmlWarning>
+</code-example-tabs>
 
 ### Group
 
@@ -148,20 +226,27 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-avatar d-avatar--group">
     <div class="d-avatar__canvas">
-        <img class="d-avatar__image" src="/assets/images/person.png" alt=""/>
+        <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
     </div>
     <span class="d-avatar__count"><span class="d-avatar__count-number">12</span></span>
 </div>
 <div class="d-avatar d-avatar--group">
     <div class="d-avatar__canvas">
-        <img class="d-avatar__image" src="/assets/images/person.png" alt=""/>
+        <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
     </div>
     <span class="d-avatar__count"><span class="d-avatar__count-number">1</span></span>
 </div>
-```
+'
+vueCode='
+<dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+'
+showHtmlWarning>
+</code-example-tabs>
 
 ### Presence
 
@@ -184,18 +269,33 @@ Positions the [Presence](components/presence.html) component at each size.
     </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-avatar d-avatar--{$size)">
     <div class="d-avatar__canvas">
         ...
     </div>
     <div class="d-avatar__presence">
-        <div class="d-presence">
-            <div class="d-presence__inner d-presence__inner--{$status}"></div>
+        <div class="d-presence d-avatar__presence d-avatar__presence--md"><!---->
+            <div class="d-presence__inner d-presence__inner--{$status}" />
         </div>
     </div>
 </div>
-```
+'
+vueCode='
+<dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="xl" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="xs" presence="active" color="1200" />
+<dt-avatar size="sm" presence="away" color="500" full-name="W" />
+<dt-avatar size="md" presence="busy" color="800" full-name="FR" />
+<dt-avatar size="lg" presence="offline" color="1200" full-name="JH" />
+<dt-avatar size="xl" color="1500" full-name="AE" />
+'
+showHtmlWarning>
+</code-example-tabs>
 
 ## Vue API
 
