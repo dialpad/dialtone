@@ -1,5 +1,5 @@
 <template>
-  <aside class="lg:d-ps-relative lg:d-w100p d-ps-fixed dialtone-toc">
+  <aside class="d-of-auto d-h75p lg:d-ps-relative lg:d-w100p d-ps-fixed dialtone-toc">
     <h2 class="d-headline-eyebrow d-fw-semibold d-fc-secondary d-px12 d-pb4">
       On this page
     </h2>
