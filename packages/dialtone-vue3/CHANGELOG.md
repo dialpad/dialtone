@@ -1,3 +1,10 @@
+## [3.109.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.109.1...dialtone-vue3/v3.109.2) (2024-02-22)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** left line height ([#166](https://github.com/dialpad/dialtone/issues/166)) ([2e3b569](https://github.com/dialpad/dialtone/commit/2e3b569de8d79d2b8f27b8e9e2b0d1bf7a3cbe8c))
+
 ## [3.109.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.109.0...dialtone-vue3/v3.109.1) (2024-02-21)
 
 
