@@ -57,7 +57,7 @@ export const DtTooltipDirective = {
     DtTooltipDirectiveApp.mount(mountPoint);
 
     app.directive('dt-tooltip', {
-      bind (anchor, binding) {
+      beforeMount (anchor, binding) {
         // Initial tooltip setup
         setupTooltip(anchor, binding);
       },
