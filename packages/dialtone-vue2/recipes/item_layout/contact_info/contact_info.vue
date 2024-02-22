@@ -1,8 +1,6 @@
 <template>
-  <dt-list-item
-    :id="id"
+  <dt-item-layout
     :role="role"
-    element-type="div"
     data-qa="contact-info"
     class="dt-contact-info"
   >
@@ -48,41 +46,37 @@
         <slot name="header" />
       </div>
     </template>
-
     <template #subtitle>
       <div data-qa="contact-info-subtitle">
         <!-- @slot Slot for subtitle information -->
         <slot name="subtitle" />
       </div>
     </template>
-
     <template #bottom>
       <div data-qa="contact-info-bottom">
         <!-- @slot Slot for information at the bottom -->
         <slot name="bottom" />
       </div>
     </template>
-
     <template #right>
       <div data-qa="contact-info-right">
         <!-- @slot Slot for the right content -->
         <slot name="right" />
       </div>
     </template>
-  </dt-list-item>
+  </dt-item-layout>
 </template>
 
 <script>
-import DtListItem from '@/components/list_item/list_item.vue';
+import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
-import utils from '@/common/utils';
 
 export default {
   name: 'DtRecipeContactInfo',
 
   components: {
     DtAvatar,
-    DtListItem,
+    DtItemLayout,
   },
 
   /* inheritAttrs: false is generally an option we want to set on library
@@ -92,14 +86,6 @@ export default {
   // inheritAttrs: false,
 
   props: {
-    /**
-     * Id for the item.
-     */
-    id: {
-      type: String,
-      default () { return utils.getUniqueString(); },
-    },
-
     /**
      * String to use for the item's role.
      */

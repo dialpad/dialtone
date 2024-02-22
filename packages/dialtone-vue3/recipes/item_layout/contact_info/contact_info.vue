@@ -1,8 +1,6 @@
 <template>
-  <dt-list-item
-    :id="id"
+  <dt-item-layout
     :role="role"
-    element-type="div"
     data-qa="contact-info"
     class="dt-contact-info"
   >
@@ -69,11 +67,11 @@
         <slot name="right" />
       </div>
     </template>
-  </dt-list-item>
+  </dt-item-layout>
 </template>
 
 <script>
-import DtListItem from '@/components/list_item/list_item.vue';
+import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import utils from '@/common/utils';
 
@@ -82,7 +80,7 @@ export default {
 
   components: {
     DtAvatar,
-    DtListItem,
+    DtItemLayout,
   },
 
   /* inheritAttrs: false is generally an option we want to set on library
@@ -92,14 +90,6 @@ export default {
   // inheritAttrs: false,
 
   props: {
-    /**
-     * Id for the item.
-     */
-    id: {
-      type: String,
-      default () { return utils.getUniqueString(); },
-    },
-
     /**
      * String to use for the item's role.
      */
