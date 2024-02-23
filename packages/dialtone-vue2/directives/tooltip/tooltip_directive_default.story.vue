@@ -19,6 +19,10 @@
     <dt-button v-dt-tooltip:top-end="'Tooltip on top end'">
       Button with tooltip
     </dt-button>
+
+    <dt-button v-dt-tooltip="empty">
+      Empty tooltip
+    </dt-button>
   </dt-stack>
 </template>
 
@@ -29,5 +33,10 @@ import DtIcon from '@/components/icon/icon.vue';
 export default {
   name: 'DtTooltipDirectiveDefault',
   components: { DtIcon, DtButton, DtStack },
+  data () {
+    return {
+      empty: undefined,
+    };
+  },
 };
 </script>

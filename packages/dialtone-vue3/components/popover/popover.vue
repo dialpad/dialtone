@@ -705,7 +705,7 @@ export default {
       ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
       : null;
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
-    this.popoverContentEl = this.$refs.content.$el;
+    this.popoverContentEl = this.$refs.content?.$el;
 
     if (this.isOpen) {
       this.initTippyInstance();
@@ -913,7 +913,7 @@ export default {
 
     focusInitialElement () {
       if (this.initialFocusElement === 'dialog') {
-        this.$refs.content.$el.focus();
+        this.$refs.content?.$el?.focus();
       }
       // find by ID
       if (this.initialFocusElement.startsWith('#')) {

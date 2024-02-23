@@ -21,9 +21,20 @@ This repo's `tokens` folder contains multiple json files which are the source of
 
 ## Token build process
 
-Because our tokens come from figma, it contains some syntax specific to Figma. This syntax must be translated into a format that Style Dictionary expects. To do this we use [token-transformer](https://www.npmjs.com/package/token-transformer) for Android / iOS, and [sd-transforms](https://github.com/tokens-studio/sd-transforms) for web. token-transformer can be run individually via `nx build:token-transformer dialtone-tokens`. It can also be run as part of `nx build dialtone-tokens` which will build and output all different formats. Token Transformer outputs the new json file to the `token_transformer` directory.
+Because our tokens come from figma, it contains some syntax specific to Figma.
+This syntax must be translated into a format that Style Dictionary expects.
 
-Next in the process is running Style Dictionary which will output tokens to a variety of different formats. We currently output the following:
+To do this we use:
+
+- [token-transformer](https://www.npmjs.com/package/token-transformer) for Android / iOS. It can be run individually via `nx build:token-transformer dialtone-tokens`.
+- [sd-transforms](https://github.com/tokens-studio/sd-transforms) for web.
+- [transform](../sync-scripts/transform.ts) As a custom translator for [Figma Variables](https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma).
+
+It can also be run as part of `nx build dialtone-tokens` which will build and output all different formats.
+Token Transformer outputs the new json file to the `token_transformer` directory.
+
+Next in the process is running Style Dictionary which will output tokens to a variety of different formats.
+We currently output the following:
 
 - Flat JSON
 - Android XML

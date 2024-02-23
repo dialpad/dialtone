@@ -1,4 +1,4 @@
-import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/tooltip';
+import { DtTooltip } from '@/components/tooltip';
 import { getUniqueString } from '@/common/utils';
 import { createApp, h } from 'vue';
 
@@ -19,8 +19,16 @@ export const DtTooltipDirective = {
       },
 
       methods: {
-        addTooltip (id, message, placement) {
-          this.tooltips.push({ id, message, placement });
+        addOrUpdateTooltip (id, message, placement) {
+          const index = this.tooltips.findIndex(tooltip => tooltip.id === id);
+          if (index !== -1) {
+            // Update existing tooltip
+            this.tooltips[index].message = message;
+            this.tooltips[index].placement = placement;
+          } else {
+            // Add new tooltip
+            this.tooltips.push({ id, message, placement });
+          }
         },
 
         removeTooltip (id) {
@@ -37,7 +45,7 @@ export const DtTooltipDirective = {
               placement,
               /**
                * Set the delay to false when running tests only.
-              */
+               */
               delay: process.env.NODE_ENV !== 'test',
               externalAnchor: `[data-dt-tooltip-id="${id}"]`,
             });
@@ -48,42 +56,30 @@ export const DtTooltipDirective = {
 
     DtTooltipDirectiveApp.mount(mountPoint);
 
-    const isValidBindingTextValue = (value) => typeof value === 'string' && value?.trim();
-    const isValidBindingPlacementValue = (value) => value === undefined || TOOLTIP_DIRECTIONS.includes(value);
-
     app.directive('dt-tooltip', {
       beforeMount (anchor, binding) {
-        if (!isValidBindingTextValue(binding.value)) {
-          // eslint-disable-next-line no-console
-          console.warn(
-            'Missing value for v-dt-tooltip directive on: ',
-            anchor,
-            'received value: ',
-            binding.value,
-          );
-          return;
+        // Initial tooltip setup
+        setupTooltip(anchor, binding);
+      },
+      updated (anchor, binding) {
+        // Update tooltip on binding value change
+        if (binding.value !== binding.oldValue) {
+          setupTooltip(anchor, binding);
         }
-        if (!isValidBindingPlacementValue(binding.arg)) {
-          // eslint-disable-next-line no-console
-          console.warn(
-            'Wrong placement value provided for v-dt-tooltip directive on: '
-            , anchor,
-            'received value: ',
-            binding.arg);
-          return;
-        }
-
-        const tooltipId = getUniqueString();
-        const message = binding.value;
-        const placement = binding.arg || DEFAULT_PLACEMENT;
-
-        anchor.setAttribute('data-dt-tooltip-id', tooltipId);
-        DtTooltipDirectiveApp._instance?.ctx.addTooltip(tooltipId, message, placement);
       },
       unmounted (anchor) {
         DtTooltipDirectiveApp._instance?.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
       },
     });
+
+    function setupTooltip (anchor, binding) {
+      const tooltipId = anchor.getAttribute('data-dt-tooltip-id') || getUniqueString();
+      const message = binding.value;
+      const placement = binding.arg || DEFAULT_PLACEMENT;
+
+      anchor.setAttribute('data-dt-tooltip-id', tooltipId);
+      DtTooltipDirectiveApp._instance?.ctx.addOrUpdateTooltip(tooltipId, message, placement);
+    }
   },
 };
 

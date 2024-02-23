@@ -130,7 +130,7 @@
   transform: translateY(var(--dt-space-500)); // 16
 
   &::after {
-    top: var(--dt-space-350-negative); // -6
+    top: calc(var(--dt-space-350-negative) - var(--dt-space-50-negative)); // -5.5
     border-top-width: 0;
     border-bottom-color: var(--tooltip-color-background);
   }
@@ -148,7 +148,7 @@
   transform: translateY(var(--dt-space-500-negative)); // -16
 
   &::after {
-    bottom: var(--dt-space-350-negative); // -6
+    bottom: calc(var(--dt-space-350-negative) - var(--dt-space-50-negative)); // -5.5
     border-top-color: var(--tooltip-color-background);
     border-bottom-width: 0;
   }
@@ -204,7 +204,7 @@
   transform: translateX(var(--dt-space-500-negative)); // -16
 
   &::after {
-    right: var(--dt-space-350-negative); // -6
+    right: calc(var(--dt-space-350-negative) - var(--dt-space-50-negative)); // -5.5
     border-right-width: 0;
     border-left-color: var(--tooltip-color-background);
   }
@@ -222,7 +222,7 @@
   transform: translateX(var(--dt-space-500)); // 16
 
   &::after {
-    left: var(--dt-space-350-negative); // -6
+    left: calc(var(--dt-space-350-negative) - var(--dt-space-50-negative)); // -5.5
     border-right-color: var(--tooltip-color-background);
     border-left-width: 0;
   }
