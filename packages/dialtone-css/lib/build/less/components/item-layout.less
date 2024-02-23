@@ -20,6 +20,7 @@
 
   &:not(&--custom) {
     grid-template-columns: minmax(0, max-content) minmax(0, 1fr) minmax(0, max-content) minmax(0, max-content);
+    gap: var(--dt-space-400);
     align-items: center;
     min-height: calc(var(--dt-size-550) + var(--dt-size-300));
     padding: var(--dt-space-300) var(--dt-space-400);
@@ -37,14 +38,6 @@
 
     .dt-item-layout--selected {
       align-self: center;
-    }
-
-    .dt-item-layout--left {
-      padding-right: var(--dt-space-400);
-    }
-
-    .dt-item-layout--right {
-      padding-left: var(--dt-space-400);
     }
 
     .dt-item-layout--bottom {
