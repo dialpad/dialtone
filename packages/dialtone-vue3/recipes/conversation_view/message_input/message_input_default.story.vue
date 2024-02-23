@@ -12,6 +12,7 @@
       :placeholder="$attrs.placeholder"
       :disable-send="$attrs.disableSend"
       :max-height="$attrs.maxHeight"
+      :mention-suggestion="$attrs.mentionSuggestion"
       :show-emoji-picker="$attrs.showEmojiPicker"
       :emoji-picker-props="$attrs.emojiPickerProps"
       :emoji-tooltip-message="$attrs.emojiTooltipMessage"
