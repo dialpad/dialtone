@@ -16,41 +16,6 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     </div>
 </code-well-header>
 
-<code-example-tabs
-htmlCode='
-<!-- icon -->
-<div class="d-avatar d-avatar--lg">
-    <div class="d-avatar__canvas">
-        <svg>...</svg>
-    </div>
-</div>
-<!-- initials -->
-<div class="d-avatar d-avatar--lg d-avatar--color-1000">
-    <div class="d-avatar__canvas">
-        <span class="d-avatar__initials">dp</span>
-    </div>
-    <div class="d-presence d-avatar__presence d-avatar__presence--lg">
-        <div class="d-presence__inner d-presence__inner--busy" />
-    </div>
-</div>
-<!-- image -->
-<div class="d-avatar d-avatar--lg d-avatar--color-1800">
-    <div class="d-avatar__canvas d-avatar--image-loaded">
-        <img class="d-avatar__image" data-qa="dt-avatar-image" src="/assets/images/person.png" alt="avatar user">
-    </div>
-    <div class="d-presence d-avatar__presence d-avatar__presence--lg" data-qa="dt-presence" role="status" aria-live="off">
-        <div class="d-presence__inner d-presence__inner--active" />
-    </div>
-</div>
-'
-vueCode='
-<dt-avatar size="lg" icon-name="user" icon-size="500" />
-<dt-avatar size="lg" full-name="dp" color="1000" presence="busy" />
-<dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" presence="active" />
-'
-showHtmlWarning>
-</code-example-tabs>
-
 <!-- <component-combinator component-name="DtAvatar" /> -->
 
 ## Usage
