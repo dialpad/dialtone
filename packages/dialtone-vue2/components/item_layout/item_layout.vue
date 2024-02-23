@@ -1,7 +1,7 @@
 <template>
   <component
     :is="as"
-    :class="['dt-item-layout', { 'dt-item-layout--custom': unstyled }]"
+    :class="unstyled ? 'dt-item-layout--custom' : 'dt-item-layout'"
   >
     <section
       v-if="$slots.left"
