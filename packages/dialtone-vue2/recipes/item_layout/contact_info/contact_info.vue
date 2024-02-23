@@ -4,9 +4,11 @@
     data-qa="contact-info"
     class="dt-contact-info"
   >
-    <template #left>
+    <template
+      v-if="showAvatar"
+      #left
+    >
       <button
-        v-if="showAvatar"
         class="dt-contact-info__left"
         data-qa="contact-info-left"
         :aria-labelledby="avatarAriaLabel"
@@ -52,13 +54,19 @@
         <slot name="subtitle" />
       </div>
     </template>
-    <template #bottom>
+    <template
+      v-if="$slots.bottom"
+      #bottom
+    >
       <div data-qa="contact-info-bottom">
         <!-- @slot Slot for information at the bottom -->
         <slot name="bottom" />
       </div>
     </template>
-    <template #right>
+    <template
+      v-if="$slots.right"
+      #right
+    >
       <div data-qa="contact-info-right">
         <!-- @slot Slot for the right content -->
         <slot name="right" />
