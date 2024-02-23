@@ -7,14 +7,14 @@
         panel-id="vuePanel"
         selected
       >
-        Vue code
+        Vue
       </dt-tab>
       <dt-tab
         id="htmlTab"
         label="htmlCode"
         panel-id="htmlPanel"
       >
-        HTML code
+        HTML
       </dt-tab>
     </template>
     <dt-tab-panel
