@@ -214,15 +214,35 @@
       ]
     },
     "brand": {
-      "agent-assist": ["ai", "conversation", "chat"],
-      "ai-notes": ["artificial", "intelligence"],
+      "agent-assist": [
+        "ai",
+        "conversation",
+        "chat"
+      ],
+      "ai-notes": [
+        "artificial",
+        "intelligence"
+      ],
       "coaching-hub": [],
-      "dialpad-ai-reversed": ["dp", "brand"],
-      "dialpad-ai": ["artificial", "intelligence", "voice"],
+      "dialpad-ai-reversed": [
+        "dp",
+        "brand"
+      ],
+      "dialpad-ai": [
+        "artificial",
+        "intelligence",
+        "voice"
+      ],
       "dialpad-logomark": [],
-      "dp-phone": ["call", "dialpad"],
+      "dp-phone": [
+        "call",
+        "dialpad"
+      ],
       "waveform": [],
-      "zoom-logo": ["video", "competitor"]
+      "zoom-logo": [
+        "video",
+        "competitor"
+      ]
     },
     "brand-full-color": {
       "airtable": [],
@@ -270,7 +290,10 @@
       "microsoft": [],
       "miro": [],
       "monday-com": [],
-      "o365-calendar": ["microsoft", "office"],
+      "o365-calendar": [
+        "microsoft",
+        "office"
+      ],
       "office-365": [],
       "pipedrive": [],
       "play-store-badge": [],
@@ -280,7 +303,10 @@
       "slack": [],
       "snapchat": [],
       "telegram": [],
-      "threads": ["meta", "facebook"],
+      "threads": [
+        "meta",
+        "facebook"
+      ],
       "tiktok": [],
       "toggl": [],
       "twitter": [],
@@ -289,7 +315,9 @@
       "visa": [],
       "we-chat": [],
       "whatsapp": [],
-      "x-brand": ["twitter"],
+      "x-brand": [
+        "twitter"
+      ],
       "zendesk": [],
       "zoho-crm": [],
       "zoho-desk": [],
