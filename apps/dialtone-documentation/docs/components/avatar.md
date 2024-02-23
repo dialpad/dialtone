@@ -87,8 +87,7 @@ vueCode='
     icon-name="person"
 />
 '
-showHtmlWarning>
-</code-example-tabs>
+showHtmlWarning />
 
 ### Initials
 
@@ -113,8 +112,7 @@ vueCode='
     color="100"
 />
 '
-showHtmlWarning>
-</code-example-tabs>
+showHtmlWarning />
 
 ### Image
 
@@ -133,8 +131,7 @@ htmlCode='
 vueCode='
 <dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
 '
-showHtmlWarning>
-</code-example-tabs>
+showHtmlWarning />
 
 ### Sizes
 
@@ -179,8 +176,7 @@ vueCode='
 <dt-avatar size="lg" icon-name="user" />
 <dt-avatar size="xl" icon-name="user" />
 '
-showHtmlWarning>
-</code-example-tabs>
+showHtmlWarning />
 
 ### Group
 
@@ -210,8 +206,7 @@ vueCode='
 <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 '
-showHtmlWarning>
-</code-example-tabs>
+showHtmlWarning />
 
 ### Presence
 
@@ -259,8 +254,7 @@ vueCode='
 <dt-avatar size="lg" presence="offline" color="1200" full-name="JH" />
 <dt-avatar size="xl" color="1500" full-name="AE" />
 '
-showHtmlWarning>
-</code-example-tabs>
+showHtmlWarning />
 
 ## Vue API
 
