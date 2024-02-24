@@ -1,21 +1,31 @@
 <template>
-  <dt-tab-group class="code-example-tab-group">
+  <dt-tab-group class="code-example-tab-group" @change="selectedTab = $event.selected">
     <template #tabs>
-      <dt-tab
-        id="vueTab"
-        label="vueCode"
-        panel-id="vuePanel"
-        selected
-      >
-        Vue
-      </dt-tab>
-      <dt-tab
-        id="htmlTab"
-        label="htmlCode"
-        panel-id="htmlPanel"
-      >
-        HTML
-      </dt-tab>
+      <div class="d-d-flex d-jc-space-between d-ai-flex-start d-w100p">
+        <div>
+          <dt-tab
+            id="vueTab"
+            label="vueCode"
+            panel-id="vuePanel"
+            selected
+          >
+            Vue
+          </dt-tab>
+          <dt-tab
+            id="htmlTab"
+            label="htmlCode"
+            panel-id="htmlPanel"
+          >
+            HTML
+          </dt-tab>
+        </div>
+        <copy-button
+          :text="selectedTab === 'htmlPanel' ? trimmedHtmlCode : trimmedVueCode"
+          aria-label="Copy code"
+        >
+          Copy code
+        </copy-button>
+      </div>
     </template>
     <dt-tab-panel
       id="vuePanel"
@@ -23,11 +33,6 @@
     >
       <div class="language-html" data-ext="html">
         <pre class="language-html" v-html="highlightedVue" />
-        <copy-button
-          class="code-copy-button"
-          :text="trimmedVueCode"
-          aria-label="Copy Vue code"
-        />
       </div>
     </dt-tab-panel>
     <dt-tab-panel
@@ -45,11 +50,6 @@
       </dt-banner>
       <div class="language-html" data-ext="html">
         <pre class="language-html" v-html="highlightedHtml" />
-        <copy-button
-          class="code-copy-button"
-          :text="trimmedHtmlCode"
-          aria-label="Copy Html code"
-        />
       </div>
     </dt-tab-panel>
   </dt-tab-group>
@@ -58,6 +58,7 @@
 <script setup>
 import Prism from 'prismjs';
 import CopyButton from './CopyButton.vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   htmlCode: {
@@ -75,6 +76,8 @@ const trimmedHtmlCode = props.htmlCode.replace(/^\n/gm, '');
 const trimmedVueCode = props.vueCode.replace(/^\n/gm, '');
 const highlightedHtml = Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html');
 const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html');
+
+const selectedTab = ref('0');
 </script>
 
 <style scoped lang="less">
@@ -83,11 +86,6 @@ const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.htm
   .language-html {
     margin-top: 0;
     position: relative;
-    .code-copy-button {
-      position: absolute;
-      top: var(--dt-space-450);
-      right: var(--dt-space-450);
-    }
   }
 }
 </style>

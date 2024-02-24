@@ -6,18 +6,19 @@
     <template #anchor>
       <dt-button
         :aria-label="ariaLabel"
-        :circle="true"
+        :circle="$slots.default ? false : true"
         size="xs"
         importance="clear"
         kind="muted"
         @click="copyToClipboard"
       >
-        <template #icon>
+        <template #icon="{ iconSize }">
           <dt-icon
             name="copy"
-            size="300"
+            :size="iconSize"
           />
         </template>
+        <slot />
       </dt-button>
     </template>
   </dt-tooltip>
