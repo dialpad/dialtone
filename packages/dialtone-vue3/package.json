@@ -9,7 +9,6 @@
     "build:documentation": "node scripts/build-docs.js",
     "build:documentation:functions": "pnpm exec typedoc --plugin typedoc-plugin-markdown",
     "clean": "rm -rf ./dist",
-    "generate": "pnpm exec yo @dialpad/dialtone:vue3",
     "lint": "run-s lint:code lint:docs",
     "lint:code": "eslint . --ext .js,.vue --ignore-path .eslintignore",
     "lint:docs": "markdownlint '**/*.mdx'",

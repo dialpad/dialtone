@@ -1,90 +1,117 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import <%= componentName %> from './<%= fileName %>.vue';
 
-// Constants
+/**
+ * Auxiliary variables
+ * These variables will be used inside tests to help readability and DRY
+ * @prefix MOCK_
+ * @notation MOCK_[NAME]
+ */
+const MOCK_EXPECTED_VALUE = true;
+// const MOCK_FIELD_NAME = 'mockFieldName';
+// const MOCK_FUNCTION = vi.fn();
+
+/**
+ * Environment Constants variables
+ * Will be always present in every test
+ * @prefix base
+ * @notation base[NAME]
+ */
 const baseProps = {};
+const baseAttrs = {};
+const baseSlots = {};
+const baseProvide = {};
+
+/**
+ * Environment variables
+ * Will be reset after each test
+ * @prefix mock
+ * @notation mock[NAME]
+ */
+let mockProps = {};
+let mockAttrs = {};
+let mockSlots = {};
+let mockProvide = {};
 
 describe('<%= componentName %> Tests', function () {
-  // Wrappers
+  /**
+   * Wrappers
+   * Will contain the component and all its necessary children
+   */
   let wrapper;
-  let childContainer;
 
-  // Environment
-  let props = baseProps;
-  let attrs = {};
-  let slots = {};
-  let provide = {};
-
-  // Helpers
-  const _setChildWrappers = () => {
-    childContainer = wrapper.find('[data-qa="child-container"]');
-  };
-
-  const _setWrappers = () => {
-    wrapper = shallowMount(<%= componentName %>, {
-      props,
-      attrs,
-      slots,
-      provide,
+  const updateWrapper = () => {
+    wrapper = mount(<%= componentName %>, {
+      props: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
+      global: {
+        provide: { ...baseProvide, ...mockProvide },
+      },
     });
-    _setChildWrappers();
   };
 
-  // Shared Examples
-  const itBehavesLikeSomeExpectation = () => {
-    it('should be equal', function () { assert.strictEqual(1, 1); });
-  };
-
-  // Setup
-  beforeAll(function () {});
-  beforeEach(function () {});
-
-  // Teardown
-  afterEach(function () {
-    props = baseProps;
-    attrs = {};
-    slots = {};
-    provide = {};
+  /**
+   * Setup
+   * Will prepare the environment for each test
+   */
+  beforeEach( () => {
+    updateWrapper();
   });
-  afterAll(function () {});
 
-  describe('Presentation Tests', function () {
+  /**
+   * Teardown
+   * Will reset the environment after each test
+   */
+  afterEach( () => {
+    mockProps = {};
+    mockAttrs = {};
+    mockSlots = {};
+    mockProvide = {};
+  });
+
+  describe('Presentation Tests', () => {
     /*
      * Test(s) to ensure that the component is correctly rendering
      */
-
-    describe('When some description of the current environment', function () {});
+    it('Should render the component', () => {
+      expect(wrapper).toBeDefined();
+    });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     /*
      * Test(s) to ensure that the component is accessible
      */
-
-    describe('When some description of the current environment', function () {});
+    it('Bypass empty test suite', () => {
+      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+    });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     /*
      * Test(s) to ensure that the component correctly handles user input
      */
-
-    describe('When some description of the current environment', function () {});
+    it('Bypass empty test suite', () => {
+      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+    });
   });
 
-  describe('Validation Tests', function () {
+  describe('Validation Tests', () => {
     /*
      * Test(s) to ensure that custom validators are working as expected
      */
-
-    describe('When some description of the current environment', function () {});
+    it('Bypass empty test suite', () => {
+      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+    });
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     /*
      * Test(s) to ensure that the component can be correctly extended
      */
-
-    describe('When some description of the current environment', function () {});
+    it('Bypass empty test suite', () => {
+      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+    });
   });
 });
