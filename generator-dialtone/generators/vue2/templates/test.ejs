@@ -32,6 +32,9 @@ let mockProps = {};
 let mockAttrs = {};
 let mockSlots = {};
 let mockProvide = {};
+let mockListeners = {};
+
+const testContext = {}; **TEST CONTEXT**
 
 describe('<%= componentName %> Tests', function () {
   /**
@@ -42,11 +45,12 @@ describe('<%= componentName %> Tests', function () {
 
   const updateWrapper = () => {
     wrapper = mount(<%= componentName %>, {
-      props: { ...baseProps, ...mockProps },
+      propsData: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
-      global: {
-        provide: { ...baseProvide, ...mockProvide },
+      provide: { ...baseProvide, ...mockProvide },
+      listeners: { ...mockListeners },
+      localVue: testContext.localVue,
       },
     });
   };
@@ -55,6 +59,10 @@ describe('<%= componentName %> Tests', function () {
    * Setup
    * Will prepare the environment for each test
    */
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
+  });
+
   beforeEach( () => {
     updateWrapper();
   });
@@ -68,6 +76,7 @@ describe('<%= componentName %> Tests', function () {
     mockAttrs = {};
     mockSlots = {};
     mockProvide = {};
+    mockListeners = {};
   });
 
   describe('Presentation Tests', () => {
