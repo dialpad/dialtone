@@ -192,8 +192,8 @@ export default {
     },
 
     getTabChildren () {
-      return this.$children.map(({ $el }) => $el)
-        .filter(({ className }) => className.includes('d-tab'))
+      const tabs = Array.from(this.$refs.tabs.querySelectorAll('.d-tab'));
+      return tabs
         .map(el => {
           return ({
             context: el,

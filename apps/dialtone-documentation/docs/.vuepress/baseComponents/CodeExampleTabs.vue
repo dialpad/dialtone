@@ -4,17 +4,17 @@
       <div class="d-d-flex d-jc-space-between d-ai-flex-start d-w100p">
         <div>
           <dt-tab
-            id="vueTab"
-            label="vueCode"
-            panel-id="vuePanel"
+            :id="vueTabId"
+            label="Vue code"
+            :panel-id="vuePanelId"
             selected
           >
             Vue
           </dt-tab>
           <dt-tab
-            id="htmlTab"
-            label="htmlCode"
-            panel-id="htmlPanel"
+            :id="htmlTabId"
+            label="HTML code"
+            :panel-id="htmlPanelId"
           >
             HTML
           </dt-tab>
@@ -28,16 +28,16 @@
       </div>
     </template>
     <dt-tab-panel
-      id="vuePanel"
-      tab-id="vueTab"
+      :id="vuePanelId"
+      :tab-id="vueTabId"
     >
       <div class="language-html" data-ext="html">
         <pre class="language-html" v-html="highlightedVue" />
       </div>
     </dt-tab-panel>
     <dt-tab-panel
-      id="htmlPanel"
-      tab-id="htmlTab"
+      :id="htmlPanelId"
+      :tab-id="htmlTabId"
     >
       <dt-banner
         v-if="showHtmlWarning"
@@ -59,6 +59,7 @@
 import Prism from 'prismjs';
 import CopyButton from './CopyButton.vue';
 import { ref } from 'vue';
+import { getUniqueString } from '@dialtone/common/utils';
 
 const props = defineProps({
   htmlCode: {
@@ -78,6 +79,10 @@ const highlightedHtml = Prism.highlight(props.htmlCode.trim(), Prism.languages.h
 const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html');
 
 const selectedTab = ref('0');
+const vueTabId = getUniqueString();
+const vuePanelId = getUniqueString();
+const htmlTabId = getUniqueString();
+const htmlPanelId = getUniqueString();
 </script>
 
 <style scoped lang="less">
