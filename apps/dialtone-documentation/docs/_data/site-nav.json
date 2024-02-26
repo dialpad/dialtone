@@ -14,41 +14,10 @@
       ]
     }
   ],
-  "/tokens/": [
-    {
-      "text": "tokens",
-      "children": [
-        {
-          "text": "Overview",
-          "link": "/tokens/"
-        },
-        {
-          "text": "Color",
-          "link": "/tokens/color.html"
-        },
-        {
-          "text": "Typography",
-          "link": "/tokens/typography.html"
-        },
-        {
-          "text": "Shadow",
-          "link": "/tokens/shadow.html"
-        },
-        {
-          "text": "Size",
-          "link": "/tokens/size.html"
-        },
-        {
-          "text": "Space",
-          "link": "/tokens/space.html"
-        },
-        {
-          "text": "Component",
-          "link": "/tokens/component.html"
-        }
-      ]
-    }
-  ],
+  "/tokens/": {
+    "text": "Tokens",
+    "children": "auto"
+  },
   "/guides/": [
     {
       "text": "Guides",
