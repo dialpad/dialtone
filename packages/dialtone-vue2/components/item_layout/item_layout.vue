@@ -1,7 +1,7 @@
 <template>
   <component
     :is="as"
-    class="dt-item-layout"
+    :class="unstyled ? 'dt-item-layout--custom' : 'dt-item-layout'"
   >
     <section
       v-if="$slots.left"
@@ -75,29 +75,15 @@ export default {
       type: String,
       default: 'div',
     },
+
+    /**
+     * Set this prop to remove the default styling.
+     * @values true, false
+     */
+    unstyled: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
-
-<style lang="less" scoped>
-// Move this to dialtone
-.dt-item-layout {
-  align-items: stretch;
-
-  &--content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .dt-item-layout--subtitle {
-      &--with-title {
-        margin-top: var(--dt-space-200-negative);
-      }
-    }
-  }
-
-  &--selected {
-    display: flex;
-    align-items: center;
-  }
-}
-</style>

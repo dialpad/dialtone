@@ -14,40 +14,96 @@
 //  ----------------------------------------------------------------------------
 .dt-item-layout {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   min-height: calc(var(--dt-size-550) + var(--dt-size-300));
   padding: var(--dt-space-300) var(--dt-space-400);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-300);
 
-  &--content {
+  > .dt-item-layout--content {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    justify-content: center;
     min-width: var(--dt-size-0);
+
+    > .dt-item-layout--subtitle {
+      color: var(--dt-color-foreground-tertiary);
+      font-size: var(--dt-font-size-100);
+    }
+
+    > .dt-item-layout--subtitle--with-title {
+      margin-top: var(--dt-space-200-negative);
+    }
+
+    > .dt-item-layout--bottom {
+      margin-top: var(--dt-space-200);
+    }
   }
 
-  &--subtitle {
-    color: var(--dt-color-foreground-tertiary);
-    font-size: var(--dt-font-size-100);
-  }
-
-  &--right,
-  &--left {
+  > .dt-item-layout--right,
+  > .dt-item-layout--left {
     display: flex;
     align-items: center;
     min-width: var(--dt-size-600);
     min-height: inherit;
   }
 
-  &--right {
+  > .dt-item-layout--right {
     padding-left: var(--dt-space-400);
   }
 
-  &--left {
+  > .dt-item-layout--left {
     justify-content: flex-end;
     padding-right: var(--dt-space-400);
   }
 
-  &--bottom {
-    margin-top: var(--dt-space-200);
+  > .dt-item-layout--selected {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.dt-item-layout--custom {
+  display: grid;
+  grid-template-areas: 'left content right selected';
+  grid-template-columns: minmax(0, max-content) 1fr minmax(0, max-content) minmax(0, max-content);
+
+  > .dt-item-layout--left {
+    grid-area: left;
+  }
+
+  > .dt-item-layout--right {
+    grid-area: right;
+  }
+
+  > .dt-item-layout--content {
+    display: grid;
+    grid-area: content;
+    grid-template-areas:
+      'title'
+      'subtitle'
+      'bottom';
+    grid-template-rows: repeat(auto-fit, minmax(0, auto));
+
+    > .dt-item-layout--title {
+      grid-area: title;
+    }
+
+    > .dt-item-layout--subtitle {
+      grid-area: subtitle;
+    }
+
+    > .dt-item-layout--subtitle--with-title {
+      //
+    }
+
+    > .dt-item-layout--bottom {
+      grid-area: bottom;
+    }
+  }
+
+  > .dt-item-layout--selected {
+    grid-area: selected;
   }
 }

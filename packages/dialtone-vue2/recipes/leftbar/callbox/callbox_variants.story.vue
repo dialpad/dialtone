@@ -392,14 +392,16 @@
       <template #bottom>
         <dt-item-layout>
           <template #default>
-            <div class="d-d-flex d-ai-center">
+            <dt-stack
+              direction="row"
+            >
               <dt-icon
                 class="d-mr8"
                 name="share-screen"
                 size="400"
               />
               <span class="d-fs-100">Sharing screen</span>
-            </div>
+            </dt-stack>
           </template>
           <template #right>
             <dt-button
