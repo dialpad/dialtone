@@ -26,6 +26,7 @@
         :auto-focus="autoFocus"
         :link="link"
         :placeholder="placeholder"
+        :mention-suggestion="mentionSuggestion"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
@@ -414,6 +415,22 @@ export default {
       type: [Boolean, Object],
       default: () => ({ text: 'Cancel' }),
     },
+
+    /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the contacts for suggestion.
+     * items({ query }) => { return [ContactObject]; }
+     * ContactObject format:
+     * { name: string, avatarSrc: string, id: string }
+     *
+     * When null, it does not add the plugin.
+     */
+    mentionSuggestion: {
+      type: Object,
+      default: null,
+    },
   },
 
   emits: [
@@ -601,9 +618,7 @@ export default {
 
     onFocus (event) {
       this.hasFocus = true;
-      console.log('B', this.hasFocus);
       this.$refs.richTextEditor.focusEditor();
-      console.log('A', this.hasFocus);
       this.$emit('focus', event);
     },
 
