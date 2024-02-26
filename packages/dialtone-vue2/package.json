@@ -9,6 +9,7 @@
     "build:documentation": "node scripts/build-docs.js",
     "build:documentation:functions": "pnpm exec typedoc --plugin typedoc-plugin-markdown",
     "clean": "rm -rf ./dist",
+    "generate": "pnpm exec yo @dialpad/dialtone:vue2",
     "lint": "run-s lint:code lint:docs",
     "lint:code": "eslint . --ext .js,.vue --ignore-path .eslintignore",
     "lint:docs": "markdownlint '**/*.mdx'",
@@ -61,6 +62,7 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/generator-dialtone": "workspace:*",
     "@percy/cli": "^1.27.4",
     "@percy/storybook": "^5.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -105,7 +107,7 @@
     "vue-docgen-api": "^4.73.0",
     "vue-template-compiler": "^2.7.15",
     "vue-tsc": "^1.8.25",
-    "yo": "^4.3.1",
+    "yo": "^5.0.0",
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {

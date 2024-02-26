@@ -3,3 +3,5 @@ packages:
   - 'apps/*'
   # npm publishable packages
   - 'packages/**/*'
+  # yeoman generator
+  - 'generator-dialtone'
