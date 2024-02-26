@@ -117,11 +117,9 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 ## Tokens
 
-Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/sizing/) section.
+Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/size/) section.
 
 <token-table category="size" :tokenList="tokenList" />
-
-WIP: Tokens decriptions/usage.
 
 <DtNotice
   kind="info"

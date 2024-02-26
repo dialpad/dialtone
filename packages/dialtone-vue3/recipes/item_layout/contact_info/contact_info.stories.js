@@ -122,7 +122,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/List Items/Contact Info',
+  title: 'Recipes/Item Layout/Contact Info',
   component: DtRecipeContactInfo,
   args: argsData,
   argTypes: argTypesData,

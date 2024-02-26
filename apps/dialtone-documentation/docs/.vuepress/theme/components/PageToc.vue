@@ -1,5 +1,5 @@
 <template>
-  <aside class="lg:d-ps-relative lg:d-w100p d-ps-fixed dialtone-toc">
+  <aside class="d-of-auto d-py32 lg:d-ps-relative lg:d-w100p d-ps-fixed dialtone-toc">
     <h2 class="d-headline-eyebrow d-fw-semibold d-fc-secondary d-px12 d-pb4">
       On this page
     </h2>
@@ -24,6 +24,6 @@ const options = {
 <style>
 .dialtone-toc {
   width: var(--dt-size-850);
-  margin-top: var(--dt-space-600);
+  height: calc(100vh - var(--dt-size-700));
 }
 </style>

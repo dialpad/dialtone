@@ -1,20 +1,41 @@
 <template>
-  <dt-item-layout>
+  <dt-item-layout
+    :as="$attrs.as"
+    :unstyled="$attrs.unstyled"
+  >
     <template #left>
-      <span v-html="$attrs.left" />
+      <span
+        v-if="$attrs.left"
+        v-html="$attrs.left"
+      />
     </template>
-    <span v-html="defaultSlot" />
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
     <template #subtitle>
-      <span v-html="$attrs.subtitle" />
+      <span
+        v-if="$attrs.subtitle"
+        v-html="$attrs.subtitle"
+      />
     </template>
     <template #bottom>
-      <span v-html="$attrs.bottom" />
+      <span
+        v-if="$attrs.bottom"
+        v-html="$attrs.bottom"
+      />
     </template>
     <template #right>
-      <span v-html="$attrs.right" />
+      <span
+        v-if="$attrs.right"
+        v-html="$attrs.right"
+      />
     </template>
     <template #selected>
-      <span v-html="$attrs.selected" />
+      <span
+        v-if="$attrs.selected"
+        v-html="$attrs.selected"
+      />
     </template>
   </dt-item-layout>
 </template>

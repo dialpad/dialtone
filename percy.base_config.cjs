@@ -57,7 +57,7 @@ module.exports = {
       'Recipes/Leftbar/General Row: Default',
       'Recipes/Leftbar/Group Row: Default',
       'Recipes/Leftbar/Unread Pill: Default',
-      'Recipes/List Items/Contact Info: Default',
+      'Recipes/Item Layout/Contact Info: Default',
       'Recipes/Notices/Top Banner Info: Default',
       'Utilities/Lazy Show',
     ],

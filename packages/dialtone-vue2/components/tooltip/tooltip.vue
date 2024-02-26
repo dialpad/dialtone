@@ -511,8 +511,7 @@ export default {
 </script>
 
 <style lang="less">
-.tippy-box[data-popper-reference-hidden],
-.tippy-box[data-popper-escaped] {
+.tippy-box[data-popper-reference-hidden] {
   .d-tooltip {
     visibility: hidden;
     pointer-events: none;

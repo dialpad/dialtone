@@ -52,6 +52,10 @@ export const argTypesData = {
       },
     },
   },
+
+  unstyled: {
+    control: { type: 'boolean' },
+  },
 };
 
 // Set default values at the story level here.

@@ -13,7 +13,7 @@
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",
     "jock.svg",
-    "zixuanchen.vitest-explorer",
+    "vitest.explorer",
     "vue.volar"
   ]
 }
