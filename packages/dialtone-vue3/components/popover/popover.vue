@@ -1052,13 +1052,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.tippy-box[data-popper-reference-hidden],
-.tippy-box[data-popper-escaped] {
-  .d-popover__dialog {
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
-</style>
