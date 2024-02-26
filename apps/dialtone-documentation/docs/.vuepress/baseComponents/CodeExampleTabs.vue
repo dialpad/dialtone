@@ -19,9 +19,10 @@
             HTML
           </dt-tab>
         </div>
+        <!-- aria label blank so no tooltip displays since it would be redundant to the "Copy code" text -->
         <copy-button
           :text="selectedTab === 'htmlPanel' ? trimmedHtmlCode : trimmedVueCode"
-          aria-label="Copy code"
+          aria-label=""
         >
           Copy code
         </copy-button>
