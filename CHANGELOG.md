@@ -1,3 +1,26 @@
+# [9.15.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.14.3...dialtone/v9.15.0) (2024-02-27)
+
+
+### Bug Fixes
+
+* **Contact Info:** use item layout instead of list item ([#168](https://github.com/dialpad/dialtone/issues/168)) ([d66cd07](https://github.com/dialpad/dialtone/commit/d66cd07c45a50c1f04b281e50132c57e866cf3aa))
+* **Popover:** remove data-popper-escaped ([#172](https://github.com/dialpad/dialtone/issues/172)) ([ca142bc](https://github.com/dialpad/dialtone/commit/ca142bc56bb893282a8974793e9045d378848c9d))
+* **Tooltip:** remove validators from directive ([#169](https://github.com/dialpad/dialtone/issues/169)) ([7984139](https://github.com/dialpad/dialtone/commit/7984139493b2c440ee51435aef49abbdbbc01017))
+
+
+### Documentation
+
+* aside overflow behavior ([#167](https://github.com/dialpad/dialtone/issues/167)) ([c580bf2](https://github.com/dialpad/dialtone/commit/c580bf2c2260392ca929be34960bbc4416bb7902))
+* fixed links on design section ([#173](https://github.com/dialpad/dialtone/issues/173)) ([d028498](https://github.com/dialpad/dialtone/commit/d02849887e29c7afe993cecca3f29239ddb2d5fc))
+
+
+### Features
+
+* added new dialpad ai reversed icons ([#171](https://github.com/dialpad/dialtone/issues/171)) ([9a800bd](https://github.com/dialpad/dialtone/commit/9a800bde880508ee4d48fadbd2af4d6ed25b0139))
+* **Item Layout:** add unstyled prop ([#160](https://github.com/dialpad/dialtone/issues/160)) ([907b7ae](https://github.com/dialpad/dialtone/commit/907b7ae40b0480dadff2ec170d5c29577a7d3791))
+* **Message Input:** add mentions to message input ([#174](https://github.com/dialpad/dialtone/issues/174)) ([682dc42](https://github.com/dialpad/dialtone/commit/682dc42feef687a370cae3cb250ec95b3f0f781e))
+* transform Figma variables to sd format ([#154](https://github.com/dialpad/dialtone/issues/154)) ([3cb3581](https://github.com/dialpad/dialtone/commit/3cb3581dcbd87ada48e76032094c38faf07a663a))
+
 ## [9.14.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.14.2...dialtone/v9.14.3) (2024-02-22)
 
 
