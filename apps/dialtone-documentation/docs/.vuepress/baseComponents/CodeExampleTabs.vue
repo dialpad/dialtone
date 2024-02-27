@@ -1,6 +1,7 @@
 <template>
-  <dt-tab-group class="code-example-tab-group" @change="selectedTab = $event.selected">
+  <dt-tab-group class="code-example-tab-group" @change="selectedPanelId = $event.selected">
     <template #tabs>
+      {{ selectedPanelId }}
       <div class="d-d-flex d-jc-space-between d-ai-flex-start d-w100p">
         <div>
           <dt-tab
@@ -21,7 +22,7 @@
         </div>
         <!-- aria label blank so no tooltip displays since it would be redundant to the "Copy code" text -->
         <copy-button
-          :text="selectedTab === 'htmlPanel' ? trimmedHtmlCode : trimmedVueCode"
+          :text="selectedPanelId === htmlPanelId ? trimmedHtmlCode : trimmedVueCode"
           aria-label=""
         >
           Copy code
@@ -79,11 +80,12 @@ const trimmedVueCode = props.vueCode.replace(/^\n/gm, '');
 const highlightedHtml = Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html');
 const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html');
 
-const selectedTab = ref('0');
 const vueTabId = getUniqueString();
 const vuePanelId = getUniqueString();
 const htmlTabId = getUniqueString();
 const htmlPanelId = getUniqueString();
+
+const selectedPanelId = ref(vuePanelId);
 </script>
 
 <style scoped lang="less">
