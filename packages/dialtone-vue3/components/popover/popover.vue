@@ -845,7 +845,8 @@ export default {
     preventScrolling () {
       if (this.modal) {
         const element = this.anchorEl?.closest('body, .tippy-box');
-        if (element.tagName.toLowerCase() === 'body') {
+        if (!element) return;
+        if (element.tagName?.toLowerCase() === 'body') {
           element.classList.add('d-of-hidden');
           this.tip.setProps({ offset: this.offset });
         } else {
