@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {} from './<%= fileName %>_constants';
+import { DEFAULT_CONSTANTS } from './<%= fileName %>_constants';
 
 export default {
   name: '<%= componentName %>',
@@ -39,8 +39,8 @@ export default {
      */
     genericProp: {
       type: String,
-      default: 'a generic prop'
-    }
+      default: 'a generic prop',
+    },
   },
 
   emits: [
@@ -50,7 +50,7 @@ export default {
      * @event generic-event
      * @type {Boolean}
      */
-    'generic-event'
+    'generic-event',
   ],
 
   data () {

@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import <%= componentName %> from './<%= fileName %>.vue';
 
 /**
@@ -62,7 +62,7 @@ describe('<%= componentName %> Tests', function () {
     testContext.localVue = createLocalVue();
   });
 
-  beforeEach( () => {
+  beforeEach(() => {
     updateWrapper();
   });
 
@@ -70,7 +70,7 @@ describe('<%= componentName %> Tests', function () {
    * Teardown
    * Will reset the environment after each test
    */
-  afterEach( () => {
+  afterEach(() => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
