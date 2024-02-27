@@ -13,7 +13,9 @@
       <!-- @slot description of the named slot -->
       <slot name="namedSlot" />
     </div>
-    <button @click="$emit('generic-event')">Click to fire generic-event</button>
+    <button @click="$emit('generic-event')">
+      Click to fire generic-event
+    </button>
   </div>
 </template>
 
@@ -54,7 +56,9 @@ export default {
   ],
 
   data () {
-    return {};
+    return {
+      DEFAULT_CONSTANTS,
+    };
   },
 
   computed: {},
