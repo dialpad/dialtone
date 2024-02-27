@@ -1,7 +1,9 @@
 name: Send mail
 on:
   workflow_dispatch:
-
+  pull_request:
+#    paths:
+#      - 'apps/dialtone-documentation/docs/about/whats-new/posts/**'
 jobs:
   send-email:
     runs-on: ubuntu-latest
