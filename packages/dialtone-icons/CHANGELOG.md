@@ -1,3 +1,11 @@
+# [4.11.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.10.0...dialtone-icons/v4.11.0) (2024-02-27)
+
+
+### Features
+
+* added new dialpad ai reversed icons ([#171](https://github.com/dialpad/dialtone/issues/171)) ([9a800bd](https://github.com/dialpad/dialtone/commit/9a800bde880508ee4d48fadbd2af4d6ed25b0139))
+* **Message Input:** add mentions to message input ([#174](https://github.com/dialpad/dialtone/issues/174)) ([682dc42](https://github.com/dialpad/dialtone/commit/682dc42feef687a370cae3cb250ec95b3f0f781e))
+
 # [4.10.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.9.0...dialtone-icons/v4.10.0) (2024-02-16)
 
 
