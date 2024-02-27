@@ -1,7 +1,7 @@
 {
-  "name": "generator-dialtone-vue2",
+  "name": "@dialpad/generator-dialtone",
   "version": "0.1.0",
-  "description": "generate boilerplate for new dialtone vue components",
+  "description": "Generate boilerplate for dialtone",
   "files": [
     "generators"
   ],

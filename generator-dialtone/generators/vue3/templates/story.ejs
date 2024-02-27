@@ -17,14 +17,15 @@
       We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
       same name.
     -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      v-if="namedSlot"
-      #namedSlot
-    >
-      <span v-html="namedSlot" />
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
+    <template #namedSlot>
+      <span
+        v-if="$attrs.namedSlot"
+        v-html="$attrs.namedSlot"
+      />
     </template>
   </<%= componentNameKebab %>>
 </template>

@@ -1,5 +1,5 @@
-import { mount } from '@vue/test-utils';
-import DtTestComponent from './test_component.vue';
+import { createLocalVue, mount } from '@vue/test-utils';
+import <%= componentName %> from './<%= fileName %>.vue';
 
 /**
  * Auxiliary variables
@@ -32,8 +32,11 @@ let mockProps = {};
 let mockAttrs = {};
 let mockSlots = {};
 let mockProvide = {};
+let mockListeners = {};
 
-describe('DtTestComponent Tests', () => {
+const testContext = {};
+
+describe('<%= componentName %> Tests', function () {
   /**
    * Wrappers
    * Will contain the component and all its necessary children
@@ -41,13 +44,13 @@ describe('DtTestComponent Tests', () => {
   let wrapper;
 
   const updateWrapper = () => {
-    wrapper = mount(DtTestComponent, {
-      props: { ...baseProps, ...mockProps },
+    wrapper = mount(<%= componentName %>, {
+      propsData: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
-      global: {
-        provide: { ...baseProvide, ...mockProvide },
-      },
+      provide: { ...baseProvide, ...mockProvide },
+      listeners: { ...mockListeners },
+      localVue: testContext.localVue,
     });
   };
 
@@ -55,7 +58,11 @@ describe('DtTestComponent Tests', () => {
    * Setup
    * Will prepare the environment for each test
    */
-  beforeEach( () => {
+  beforeAll(() => {
+    testContext.localVue = createLocalVue();
+  });
+
+  beforeEach(() => {
     updateWrapper();
   });
 
@@ -63,11 +70,12 @@ describe('DtTestComponent Tests', () => {
    * Teardown
    * Will reset the environment after each test
    */
-  afterEach( () => {
+  afterEach(() => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
     mockProvide = {};
+    mockListeners = {};
   });
 
   describe('Presentation Tests', () => {

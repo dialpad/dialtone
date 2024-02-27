@@ -262,7 +262,7 @@ Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex:
 All code in Dialtone Vue should have tests written for it.
 You can see more details on writing tests in the following [documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-unit-tests--page).
 
-Before you start to write tests, please follow the [Contributing Guideline - Writing Tests for Design System Components](TEST_CONTRIBUTING/TEST_GUIDELINE.md).
+Before you start to write tests, please follow the [Contributing Guideline - Writing Tests for Dialtone-vue Components](TEST_CONTRIBUTING/TEST_GUIDELINE.md).
 
 ### Dialtone Usage
 
@@ -287,7 +287,6 @@ change via a blog post on [dialtone.dialpad.com](https://dialtone.dialpad.com/ab
 - **`css`:** We store any global less/css in here. Right now it is only used for Dialtone overrides.
 - **`dist`:** The Dialtone Vue library is output here upon `npm run build`.
 - **`docs`:** Any storybook documentation not directly related to a component.
-- **`generator-dialtone-vue`:** - Yeoman generator config.
 - **`recipes`:** Everything related to recipe components is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
 - **`scripts`:** - Contains shell scripts.
 - **`tests`:** For utility/helper files to be used in multiple tests and test configuration. Actual tests are stored in the component folder.
@@ -348,7 +347,7 @@ You can manually run ESLint via `npm run lint`.
 ### Yeoman
 
 We use Yeoman as our generator to scaffold new components.
-This means if you are creating a new component you can simply just run `npx yo dialtone-vue` and enter the name of your component.
+This means if you are creating a new component you can simply just run `pnpm exec yo @dialpad/dialtone:vue3` and enter the name of your component.
 All files for your component (component, tests, storybook files) will be generated with starter templates and proper naming conventions.
 For more details on how to use yeoman, see [the docs](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-yeoman-generator--page).
 

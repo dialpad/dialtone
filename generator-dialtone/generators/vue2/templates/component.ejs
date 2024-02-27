@@ -13,12 +13,14 @@
       <!-- @slot description of the named slot -->
       <slot name="namedSlot" />
     </div>
-    <button @click="$emit('generic-event')">Click to fire generic-event</button>
+    <button @click="$emit('generic-event')">
+      Click to fire generic-event
+    </button>
   </div>
 </template>
 
 <script>
-import {} from './<%= fileName %>_constants';
+import { DEFAULT_CONSTANTS } from './<%= fileName %>_constants';
 
 export default {
   name: '<%= componentName %>',
@@ -39,8 +41,8 @@ export default {
      */
     genericProp: {
       type: String,
-      default: 'a generic prop'
-    }
+      default: 'a generic prop',
+    },
   },
 
   emits: [
@@ -50,11 +52,13 @@ export default {
      * @event generic-event
      * @type {Boolean}
      */
-    'generic-event'
+    'generic-event',
   ],
 
   data () {
-    return {};
+    return {
+      DEFAULT_CONSTANTS,
+    };
   },
 
   computed: {},

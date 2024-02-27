@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtTestComponent from './test_component.vue';
+import <%= componentName %> from './<%= fileName %>.vue';
 
 /**
  * Auxiliary variables
@@ -33,7 +33,7 @@ let mockAttrs = {};
 let mockSlots = {};
 let mockProvide = {};
 
-describe('DtTestComponent Tests', () => {
+describe('<%= componentName %> Tests', function () {
   /**
    * Wrappers
    * Will contain the component and all its necessary children
@@ -41,7 +41,7 @@ describe('DtTestComponent Tests', () => {
   let wrapper;
 
   const updateWrapper = () => {
-    wrapper = mount(DtTestComponent, {
+    wrapper = mount(<%= componentName %>, {
       props: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
@@ -55,7 +55,7 @@ describe('DtTestComponent Tests', () => {
    * Setup
    * Will prepare the environment for each test
    */
-  beforeEach( () => {
+  beforeEach(() => {
     updateWrapper();
   });
 
@@ -63,7 +63,7 @@ describe('DtTestComponent Tests', () => {
    * Teardown
    * Will reset the environment after each test
    */
-  afterEach( () => {
+  afterEach(() => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};

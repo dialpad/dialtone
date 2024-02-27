@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import <%= componentName %> from './<%= fileName %>.vue';
 import <%= componentName %>DefaultTemplate from './<%= fileName %>_default.story.vue';
 import <%= componentName %>VariantsTemplate from './<%= fileName %>_variants.story.vue';
@@ -9,7 +9,7 @@ import <%= componentName %>VariantsTemplate from './<%= fileName %>_variants.sto
 
   Here we define any custom configuration for props / slots / events in storybook
 
-  By default storybook will display any props / slots / events from the associated component. It will also use jsdoc
+  By default, storybook will display any props / slots / events from the associated component. It will also use jsdoc
   comments on the component to populate details such as description and default value. You should only enter config
   here if it was not possible to add into the jsdoc of the component itself.
 
@@ -75,7 +75,7 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createRenderConfig(
   args,
   argTypes,
   <%= componentName %>DefaultTemplate,
@@ -87,7 +87,7 @@ export const Default = {
   args: {},
 };
 
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args, { argTypes }) => createRenderConfig(
   args,
   argTypes,
   <%= componentName %>VariantsTemplate,
