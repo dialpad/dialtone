@@ -1,3 +1,10 @@
+# [8.27.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.26.1...dialtone-css/v8.27.0) (2024-02-27)
+
+
+### Features
+
+* **Item Layout:** add unstyled prop ([#160](https://github.com/dialpad/dialtone/issues/160)) ([907b7ae](https://github.com/dialpad/dialtone/commit/907b7ae40b0480dadff2ec170d5c29577a7d3791))
+
 ## [8.26.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.26.0...dialtone-css/v8.26.1) (2024-02-21)
 
 
