@@ -15,7 +15,7 @@ import TokenTable from './baseComponents/TokenTable.vue';
 import ComponentVueApi from './baseComponents/ComponentVueApi.vue';
 import ComponentAccessibleTable from './baseComponents/ComponentAccessibleTable.vue';
 import ComponentCombinator from './baseComponents/ComponentCombinator.vue';
-import ExampleTabs from './baseComponents/ExampleTabs.vue';
+import CodeExampleTabs from './baseComponents/CodeExampleTabs.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
 
@@ -36,7 +36,7 @@ export default defineClientConfig({
     app.component('ComponentVueApi', ComponentVueApi);
     app.component('ComponentAccessibleTable', ComponentAccessibleTable);
     app.component('ComponentCombinator', ComponentCombinator);
-    app.component('ExampleTabs', ExampleTabs);
+    app.component('CodeExampleTabs', CodeExampleTabs);
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
   },
