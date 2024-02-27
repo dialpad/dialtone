@@ -1,3 +1,18 @@
+# [3.110.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.109.2...dialtone-vue3/v3.110.0) (2024-02-27)
+
+
+### Bug Fixes
+
+* **Contact Info:** use item layout instead of list item ([#168](https://github.com/dialpad/dialtone/issues/168)) ([d66cd07](https://github.com/dialpad/dialtone/commit/d66cd07c45a50c1f04b281e50132c57e866cf3aa))
+* **Popover:** remove data-popper-escaped ([#172](https://github.com/dialpad/dialtone/issues/172)) ([ca142bc](https://github.com/dialpad/dialtone/commit/ca142bc56bb893282a8974793e9045d378848c9d))
+* **Tooltip:** remove validators from directive ([#169](https://github.com/dialpad/dialtone/issues/169)) ([7984139](https://github.com/dialpad/dialtone/commit/7984139493b2c440ee51435aef49abbdbbc01017))
+
+
+### Features
+
+* **Item Layout:** add unstyled prop ([#160](https://github.com/dialpad/dialtone/issues/160)) ([907b7ae](https://github.com/dialpad/dialtone/commit/907b7ae40b0480dadff2ec170d5c29577a7d3791))
+* **Message Input:** add mentions to message input ([#174](https://github.com/dialpad/dialtone/issues/174)) ([682dc42](https://github.com/dialpad/dialtone/commit/682dc42feef687a370cae3cb250ec95b3f0f781e))
+
 ## [3.109.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.109.1...dialtone-vue3/v3.109.2) (2024-02-22)
 
 
