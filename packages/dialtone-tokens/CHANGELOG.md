@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.24.0...dialtone-tokens/v1.25.0) (2024-02-27)
+
+
+### Features
+
+* transform Figma variables to sd format ([#154](https://github.com/dialpad/dialtone/issues/154)) ([3cb3581](https://github.com/dialpad/dialtone/commit/3cb3581dcbd87ada48e76032094c38faf07a663a))
+
 # [1.24.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.8...dialtone-tokens/v1.24.0) (2024-02-16)
 
 

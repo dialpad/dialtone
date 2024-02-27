@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.24.0",
+  "version": "1.25.0",
   "description": "Design tokens for Dialtone.",
   "main": "index.js",
   "type": "module",
@@ -34,7 +34,7 @@
     "token-transformer": "^0.0.31",
     "tsx": "^4.7.0",
     "typescript": "^5.1.6",
-    "@typescript-eslint/parser":"^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
     "@typescript-eslint/eslint-plugin": "^7.0.1"
   },
   "contributors": [
