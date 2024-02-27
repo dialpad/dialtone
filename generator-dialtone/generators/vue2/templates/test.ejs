@@ -34,7 +34,7 @@ let mockSlots = {};
 let mockProvide = {};
 let mockListeners = {};
 
-const testContext = {}; **TEST CONTEXT**
+const testContext = {};
 
 describe('<%= componentName %> Tests', function () {
   /**
@@ -51,7 +51,6 @@ describe('<%= componentName %> Tests', function () {
       provide: { ...baseProvide, ...mockProvide },
       listeners: { ...mockListeners },
       localVue: testContext.localVue,
-      },
     });
   };
 
