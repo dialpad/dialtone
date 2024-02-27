@@ -17,12 +17,10 @@
       We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
       same name.
     -->
-    <template>
-      <span
-        v-if="defaultSlot"
-        v-html="defaultSlot"
-      />
-    </template>
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
     <template #namedSlot>
       <span
         v-if="$attrs.namedSlot"
