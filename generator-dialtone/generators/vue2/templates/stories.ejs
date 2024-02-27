@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import <%= componentName %> from './<%= fileName %>.vue';
 import <%= componentName %>DefaultTemplate from './<%= fileName %>_default.story.vue';
 import <%= componentName %>VariantsTemplate from './<%= fileName %>_variants.story.vue';
@@ -75,7 +75,7 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createRenderConfig(
   args,
   argTypes,
   <%= componentName %>DefaultTemplate,
@@ -87,7 +87,7 @@ export const Default = {
   args: {},
 };
 
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args, { argTypes }) => createRenderConfig(
   args,
   argTypes,
   <%= componentName %>VariantsTemplate,
