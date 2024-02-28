@@ -36,6 +36,7 @@
           :size="avatarSize"
           :full-name="avatarFullName"
           :image-src="avatarSrc"
+          :image-alt="avatarAlt"
           :icon-name="avatarIcon"
           :seed="avatarSeed"
           :presence="presence"
@@ -114,6 +115,15 @@ export default {
      * Optional avatar image url.
      */
     avatarSrc: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Optional avatar image alt text.
+     * Required if avatarSrc is provided.
+     */
+    avatarAlt: {
       type: String,
       default: '',
     },

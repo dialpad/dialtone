@@ -20,6 +20,7 @@
           <dt-avatar
             :full-name="displayName"
             :image-src="avatarImageUrl"
+            :image-alt="avatarImageAlt"
             :seed="avatarSeed"
           />
         </slot>
@@ -142,9 +143,19 @@ export default {
     },
 
     /**
-     * Show the avatar of the user, if this is not passed in, the initials would display
+     * Optional avatar image url.
+     * If not provided it will use extracted initials from displayName.
      */
     avatarImageUrl: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Optional avatar image alt text.
+     * Required if avatarImageUrl is provided.
+     */
+    avatarImageAlt: {
       type: String,
       default: '',
     },
@@ -363,6 +374,11 @@ export default {
     padding-left: var(--dt-space-300);
   }
 
+  &__threading {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+  }
+
   &__left-time {
     color: var(--dt-color-foreground-tertiary);
     font-size: var(--dt-font-size-100);
@@ -389,7 +405,7 @@ export default {
     display: block;
     padding-right: var(--dt-space-300);
     padding-left: var(--dt-space-0);
-    /* min-width = avatar width + padding */
+    // min-width = avatar width + padding
     min-width: calc(var(--dt-space-600) + var(--dt-space-300));
   }
 

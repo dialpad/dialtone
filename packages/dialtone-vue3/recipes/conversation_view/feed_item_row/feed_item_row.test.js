@@ -103,6 +103,7 @@ describe('DtFeedItemRow tests', () => {
           ...baseProps,
           showHeader: true,
           avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
+          avatarImageAlt: 'image alt',
         };
         _mountWrapper();
         _setChildWrappers();

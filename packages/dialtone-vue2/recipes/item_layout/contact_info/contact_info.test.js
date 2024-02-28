@@ -5,6 +5,7 @@ import DtRecipeContactInfo from './contact_info.vue';
 const basePropsData = {
   avatarSrc: 'avatar1.png',
   avatarFullName: 'Joseph Lumaban',
+  avatarAlt: 'image alt',
   presence: 'active',
 };
 

@@ -4,7 +4,6 @@
     :id="id"
     :class="avatarClasses"
     data-qa="dt-avatar"
-    :aria-label="buttonAriaLabel"
     @click="handleClick"
   >
     <div
@@ -21,7 +20,7 @@
         class="d-avatar__image"
         data-qa="dt-avatar-image"
         :src="imageSrc"
-        :alt="imageAlt || fullName"
+        :alt="imageAlt"
       >
       <dt-icon
         v-else-if="iconName"
@@ -227,8 +226,7 @@ export default {
     },
 
     /**
-     * Alt attribute of the image, by default
-     * it'd be the full name
+     * Alt attribute of the image
      */
     imageAlt: {
       type: String,
@@ -255,7 +253,7 @@ export default {
     },
 
     /**
-     * Full name used to extract initials and set alt attribute.
+     * Full name used to extract initials.
      */
     fullName: {
       type: String,
@@ -335,15 +333,13 @@ export default {
     showImage () {
       return this.imageLoadedSuccessfully !== false && this.imageSrc;
     },
-
-    buttonAriaLabel () {
-      if (!this.clickable) return undefined;
-
-      return this.fullName || this.imageAlt || this.$attrs['aria-label'];
-    },
   },
 
   watch: {
+    clickable () {
+      this.validateProps();
+    },
+
     fullName: {
       immediate: true,
       handler () {
@@ -416,8 +412,8 @@ export default {
     },
 
     validateProps () {
-      if (this.imageSrc && !(this.fullName || this.imageAlt)) {
-        throw new Error('full-name or image-alt must be set if image-src is provided');
+      if (this.imageSrc && !this.imageAlt) {
+        throw new Error('image-alt must be set if image-src is provided');
       }
     },
 

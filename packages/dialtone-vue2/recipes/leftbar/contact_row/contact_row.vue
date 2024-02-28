@@ -83,7 +83,7 @@ export default {
 
     /**
      * Optional avatar image alt text.
-     * If not provided it will use the name.
+     * Required if avatarSrc is provided.
      */
     avatarAlt: {
       type: String,

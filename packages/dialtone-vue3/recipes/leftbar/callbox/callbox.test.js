@@ -4,6 +4,7 @@ import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from '@/recipes/leftbar/c
 
 const MOCK_CALLBOX_STUB = vi.fn();
 const MOCK_AVATAR_IMAGE_SOURCE = 'image.png';
+const MOCK_AVATAR_IMAGE_ALT = 'image alt';
 const MOCK_AVATAR_FULL_NAME = 'Jaqueline Nackos';
 const MOCK_AVATAR_INITIALS = 'J';
 const MOCK_TITLE = '1 Participant';
@@ -92,11 +93,11 @@ describe('DtRecipeCallbox Tests', () => {
         });
       });
 
-      describe('When avatarSrc and avatarFullName are provided', () => {
+      describe('When avatarSrc and avatarAlt are provided', () => {
         it('Should render the image', () => {
           mockProps = {
             avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
-            avatarFullName: MOCK_AVATAR_FULL_NAME,
+            avatarAlt: MOCK_AVATAR_IMAGE_ALT,
           };
 
           updateWrapper();
@@ -197,7 +198,7 @@ describe('DtRecipeCallbox Tests', () => {
         beforeEach(async () => {
           mockProps = {
             avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
-            avatarFullName: MOCK_AVATAR_FULL_NAME,
+            avatarAlt: MOCK_AVATAR_IMAGE_ALT,
           };
           mockAttrs = { onClick: MOCK_CALLBOX_STUB };
 
@@ -238,7 +239,7 @@ describe('DtRecipeCallbox Tests', () => {
         beforeEach(async () => {
           mockProps = {
             avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
-            avatarFullName: MOCK_AVATAR_FULL_NAME,
+            avatarAlt: MOCK_AVATAR_IMAGE_ALT,
             clickable: true,
           };
           mockAttrs = { onClick: MOCK_CALLBOX_STUB };
