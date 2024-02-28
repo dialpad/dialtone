@@ -9,34 +9,43 @@ Design tokens are all the defined values that are part of the design system, suc
 
 See the [dialtone-tokens repository](https://github.com/dialpad/dialtone-tokens) for usage info.
 
-## Color tokens
+<all-tokens>
+<template #color>
 
-<token-table category="color" />
+## Color
 
-## Typography tokens
+</template>
+<template #typography>
 
-<token-table category="typography" />
+## Typography
 
-## Shadow tokens
+</template>
+<template #shadow>
 
-<token-table category="shadow" />
+## Shadow
 
-## Size tokens
+</template>
+<template #size>
+
+## Size
 
 <p class="dialtone-intro">Consistent size and scale.</p>
 
 Need help using these design tokens? Learn how in the [Sizing documentation](/design/size/).
 
-<token-table category="size" />
+</template>
+<template #space>
 
-## Space tokens
+## Space
 
 <p class="dialtone-intro">Defines the paddings, gaps, and margins</p>
 
 Need help using these design tokens? Learn how in the [Spacing documentation](/design/space/).
 
-<token-table category="space" />
+</template>
+<template #component>
 
-## Components tokens
+## Component
 
-<token-table category="component" />
+</template>
+</all-tokens>

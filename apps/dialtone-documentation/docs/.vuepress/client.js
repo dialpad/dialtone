@@ -12,6 +12,7 @@ import CodeWellHeader from './baseComponents/CodeWellHeader.vue';
 import UtilityClassTable from './baseComponents/UtilityClassTable.vue';
 import ComponentClassTable from './baseComponents/ComponentClassTable.vue';
 import TokenTable from './baseComponents/TokenTable.vue';
+import AllTokens from './baseComponents/AllTokens.vue';
 import ComponentVueApi from './baseComponents/ComponentVueApi.vue';
 import ComponentAccessibleTable from './baseComponents/ComponentAccessibleTable.vue';
 import ComponentCombinator from './baseComponents/ComponentCombinator.vue';
@@ -33,6 +34,7 @@ export default defineClientConfig({
     app.component('UtilityClassTable', UtilityClassTable);
     app.component('ComponentClassTable', ComponentClassTable);
     app.component('TokenTable', TokenTable);
+    app.component('AllTokens', AllTokens);
     app.component('ComponentVueApi', ComponentVueApi);
     app.component('ComponentAccessibleTable', ComponentAccessibleTable);
     app.component('ComponentCombinator', ComponentCombinator);
