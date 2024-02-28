@@ -620,6 +620,7 @@ export default {
   margin-left: var(--dt-space-200);
   margin-right: var(--dt-space-200);
   padding-left: var(--dt-space-100);
+  max-width: 99%;
 }
 
 .combobox__chip {
@@ -627,6 +628,7 @@ export default {
   margin-left: var(--dt-space-200);
   margin-right: var(--dt-space-200);
   z-index: var(--zi-base1);
+  max-width: 100%;
 }
 
 .combobox__input {
