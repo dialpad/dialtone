@@ -1,3 +1,16 @@
+## [9.15.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.15.0...dialtone/v9.15.1) (2024-02-28)
+
+
+### Bug Fixes
+
+* popover error ([#178](https://github.com/dialpad/dialtone/issues/178)) ([daebcb6](https://github.com/dialpad/dialtone/commit/daebcb675f1cb7d1b878d7950a492d6ca8be616a))
+
+
+### Documentation
+
+* fix typo in link ([b695463](https://github.com/dialpad/dialtone/commit/b695463258d3ca1f4cf66822552317a126d28ed9))
+* use CodeExampleTabs component for avatar page ([#170](https://github.com/dialpad/dialtone/issues/170)) ([b4e0ad9](https://github.com/dialpad/dialtone/commit/b4e0ad9bc105eceff518052848072e4004f84029))
+
 # [9.15.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.14.3...dialtone/v9.15.0) (2024-02-27)
 
 
