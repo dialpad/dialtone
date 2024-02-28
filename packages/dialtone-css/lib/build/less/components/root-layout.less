@@ -50,6 +50,10 @@
     height: 100%;
     overflow: hidden auto;
     box-shadow: none;
+
+    &:focus-visible {
+      box-shadow: var(--dt-shadow-focus-inset);
+    }
   }
 
   &__content {
@@ -58,7 +62,7 @@
     box-shadow: none;
 
     &:focus-visible {
-      box-shadow: none;
+      box-shadow: var(--dt-shadow-focus-inset);
     }
   }
 
