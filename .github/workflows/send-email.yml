@@ -41,7 +41,7 @@ jobs:
           ADDED_FILES: ${{ steps.changed-files.outputs.added_files }}
         run: |
           echo "One or more blog posts were added."
-          echo "List all the files that have been added: $TEST_ALL_CHANGED_FILES"
+          echo "List all the files that have been added: $ADDED_FILES"
 
 #      - name: Send email
 #        if: false
