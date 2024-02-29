@@ -650,7 +650,6 @@ export default {
 }
 
 .dt-message-input--cancel-button {
-  color: var(--dt-color-black-500);
   margin-right: var(--dt-space-300);
 }
 </style>
