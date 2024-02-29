@@ -58,7 +58,7 @@ jobs:
         env:
           MARKDOWN_FILE_PATH: ${{ matrix.files }}
         run: |
-          sed -i '' '/^---$/,/^---$/d' $MARKDOWN_FILE_PATH
+          sed -i '/^---$/,/^---$/d' $MARKDOWN_FILE_PATH
 
       - name: Send email
         uses: dawidd6/action-send-mail@v3
