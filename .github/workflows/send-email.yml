@@ -38,59 +38,45 @@ jobs:
       - name: List all changed files
         run: echo '${{ steps.changed-blog-posts.outputs.all_changed_files }}'
 
-  extract-markdown-content:
-    name: Extract Markdown content
+  send-email:
+    name: Send email
     runs-on: ubuntu-latest
     needs: [changed-files]
     strategy:
       matrix:
         files: ${{ fromJSON(needs.changed-files.outputs.added-posts) }}
-    outputs:
-      content: ${{ steps.remove-frontmatter.outputs.content }}
+    env:
+      FROM_MAIL: julio.ortega@dialpad.com
+      TO_MAIL: julio.ortega@dialpad.com
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Find & Replace
-        id: remove-frontmatter
+        with:
+          fetch-depth: 0
+
+      - name: Remove frontmatter
         env:
           MARKDOWN_FILE_PATH: ${{ matrix.files }}
         run: |
-          echo "content=$(sed '/^---$/,/^---$/d' $MARKDOWN_FILE_PATH)" >> $GITHUB_OUTPUT
+          sed -i '' '/^---$/,/^---$/d' $MARKDOWN_FILE_PATH
 
-
-#  send-email:
-#    name: Send email
-#    runs-on: ubuntu-latest
-#    needs: [changed-files]
-#    strategy:
-#      matrix:
-#        files: ${{ fromJSON(needs.changed-files.outputs.added-posts) }}
-#    env:
-#      FROM_MAIL: julio.ortega@dialpad.com
-#      TO_MAIL: julio.ortega@dialpad.com
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#
-#      - name: Send email
-#        uses: dawidd6/action-send-mail@v3
-#        with:
-#          server_address: smtp.gmail.com
-#          server_port: 465
-#          secure: true
-#          username: ${{ env.FROM_MAIL }}
-#          password: ${{ secrets.MAIL_PASSWORD }}
-#          subject: Dialtone updates
-#          to: ${{ env.TO_MAIL }}
-#          from: ${{ env.FROM_MAIL }}
-#          html_body: file://${{ matrix.files }}
-#          bcc: ${{ env.FROM_MAIL }}
-#          reply_to: ${{ env.FROM_MAIL }}
-#          convert_markdown: false
-#          # Optional nodemailer log: true/false
-#          nodemailerlog: true
-#          # Optional nodemailer debug: true/false
-#          # if true log nodemailer will also be set true
-#          nodemailerdebug: true
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ env.FROM_MAIL }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Dialtone updates
+          to: ${{ env.TO_MAIL }}
+          from: ${{ env.FROM_MAIL }}
+          html_body: file://${{ matrix.files }}
+          bcc: ${{ env.FROM_MAIL }}
+          reply_to: ${{ env.FROM_MAIL }}
+          convert_markdown: false
+          # Optional nodemailer log: true/false
+          nodemailerlog: true
+          # Optional nodemailer debug: true/false
+          # if true log nodemailer will also be set true
+          nodemailerdebug: true
