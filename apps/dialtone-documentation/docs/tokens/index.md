@@ -49,3 +49,7 @@ Need help using these design tokens? Learn how in the [Spacing documentation](/d
 
 </template>
 </all-tokens>
+
+<script setup>
+  import AllTokens from '@baseComponents/AllTokens.vue';
+</script>
