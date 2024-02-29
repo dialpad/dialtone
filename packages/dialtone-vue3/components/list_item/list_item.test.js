@@ -7,7 +7,7 @@ const MOCK_CLICK_STUB = vi.fn();
 const baseProps = {
   id: 'dt-item',
   navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
-  role: 'tab',
+  role: 'option',
 };
 const baseAttrs = {
   onClick: MOCK_CLICK_STUB,

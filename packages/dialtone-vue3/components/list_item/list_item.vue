@@ -10,7 +10,7 @@
     }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
-    :aria-selected="hasAriaSelected"
+    :aria-selected="role === 'option' ? isHighlighted : undefined"
     v-on="listItemListeners"
   >
     <component
@@ -49,7 +49,7 @@ import utils from '@/common/utils';
 import { DtIcon } from '@/components/icon';
 import { DtItemLayout } from '@/components/item_layout';
 
-const ARIA_SELECTED_ALLOWED_ROLES = ['gridcell', 'option', 'row', 'tab'];
+const ROLES = ['listitem', 'option'];
 
 /**
  * A list item is an element that can be used to represent individual items in a list.
@@ -85,6 +85,7 @@ export default {
     role: {
       type: String,
       default: 'listitem',
+      validator: (role) => (ROLES).includes(role),
     },
 
     /**
@@ -207,14 +208,6 @@ export default {
         return this.highlightId && this.highlightId() ? this.id === this.highlightId() : this.mouseHighlighted;
       }
       return false;
-    },
-
-    hasAriaSelected () {
-      if (ARIA_SELECTED_ALLOWED_ROLES.includes(this.role)) {
-        return this.isHighlighted;
-      } else {
-        return undefined;
-      }
     },
 
     isFocusable () {
