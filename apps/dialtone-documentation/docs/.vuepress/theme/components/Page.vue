@@ -95,6 +95,7 @@ const gridClass = computed(() => {
 const items = useThemeLocaleData().value.sidebar;
 const route = useRoute();
 const includeToc = computed(() => {
+  // get the item that matches the current route from site-nav without cosidering the last '/'
   const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
   if (!items[key] || !Array.isArray(items[key])) return false;
   const headers = usePageData().value.headers;
