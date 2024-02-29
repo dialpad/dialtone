@@ -24,18 +24,7 @@
 </template>
 
 <script>
-import TokenTable from '@baseComponents/TokenTable.vue';
-
-const FORMAT_MAP = {
-  CSS: 'css/variables',
-  Android: 'compose/object',
-  iOS: 'ios-swift/enum.swift',
-};
-
-const THEMES = [
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' },
-];
+import TokenTable, { CATEGORY_MAP, FORMAT_MAP, THEMES } from '@baseComponents/TokenTable.vue';
 
 export default {
   name: 'AllTokens',
@@ -49,14 +38,7 @@ export default {
       format: 'CSS',
       theme: 'light',
       THEMES,
-      categories: [
-        'color',
-        'typography',
-        'size',
-        'space',
-        'shadow',
-        'component',
-      ],
+      categories: Object.keys(CATEGORY_MAP),
     };
   },
 

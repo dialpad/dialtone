@@ -82,13 +82,13 @@ import { getComposedTypographyTokens, getComposedShadowTokens } from '../common/
 import CopyButton from './CopyButton.vue';
 import TokenExample from './TokenExample.vue';
 
-const FORMAT_MAP = {
+export const FORMAT_MAP = {
   CSS: 'css/variables',
   Android: 'compose/object',
   iOS: 'ios-swift/enum.swift',
 };
 
-const THEMES = [
+export const THEMES = [
   { value: 'light', label: 'Light' },
   { value: 'dark', label: 'Dark' },
 ];
