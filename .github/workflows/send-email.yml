@@ -46,24 +46,17 @@ jobs:
       matrix:
         files: ${{ fromJSON(needs.changed-files.outputs.added-posts) }}
     outputs:
-      content: ${{ steps.extract-content.outputs.content }}
+      content: ${{ steps.remove-frontmatter.outputs.content }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Read markdown file
-        id: read-file
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ${{ matrix.files }}
-
       - name: Find & Replace
         id: remove-frontmatter
-        uses: ashley-taylor/regex-property-action@v1.3
-        with:
-          value: ${{ steps.read-file.outputs.content }}
-          regex: /^---$.*^---$/ms
-          replacement: ""
+        env:
+          MARKDOWN_FILE_PATH: ${{ matrix.files }}
+        run: |
+          echo "content=$(sed '/^---$/,/^---$/d' $MARKDOWN_FILE_PATH)" >> $GITHUB_OUTPUT
+
 
 #  send-email:
 #    name: Send email
