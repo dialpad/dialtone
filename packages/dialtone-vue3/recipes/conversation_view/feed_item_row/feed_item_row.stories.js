@@ -145,10 +145,6 @@ Default.parameters = {
     config: {
       rules: [
         {
-          id: 'aria-allowed-attr',
-          enabled: false,
-        },
-        {
           id: 'color-contrast',
           enabled: false,
         },

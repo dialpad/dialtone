@@ -10,7 +10,7 @@
     }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
-    :aria-selected="isHighlighted"
+    :aria-selected="role === 'option' ? isHighlighted : undefined"
     v-on="listItemListeners"
   >
     <component
@@ -49,6 +49,8 @@ import utils from '@/common/utils';
 import { DtIcon } from '@/components/icon';
 import { DtItemLayout } from '@/components/item_layout';
 
+const ROLES = ['listitem', 'option'];
+
 /**
  * A list item is an element that can be used to represent individual items in a list.
  * @see https://dialtone.dialpad.com/components/list_item.html
@@ -83,6 +85,7 @@ export default {
     role: {
       type: String,
       default: 'listitem',
+      validator: (role) => (ROLES).includes(role),
     },
 
     /**
