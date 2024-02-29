@@ -17,9 +17,19 @@ export default defineClientConfig({
       await registerDialtoneCombinator(app);
     }
     router.options.scrollBehavior = (to, from, savedPosition) => {
-      return to.hash
-        ? { el: to.hash, behavior: 'smooth', top: 64 }
-        : { top: 0 };
+      if (to.hash) {
+        const html = document.querySelector('html');
+        // vue-router does not incorporate scroll-padding-top on its own.
+        if (html) {
+          const top = parseFloat(getComputedStyle(html).scrollPaddingTop);
+          return {
+            el: to.hash,
+            behavior: 'smooth',
+            top,
+          };
+        }
+      }
+      return { top: 0 };
     };
   },
   setup () {

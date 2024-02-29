@@ -33,6 +33,7 @@
         v-for="item in sidebarItems"
         :key="item.link || item.text"
         :item="item"
+        :is-single-page="item.isSinglePage"
         @click="toggleSiteNav"
       />
     </div>
@@ -40,17 +41,15 @@
 </template>
 
 <script setup>
-import SidebarItem from '../components/SidebarItem.vue';
+import SidebarItem from './SidebarItem.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useSidebarItems } from '../composables/useSidebarItems';
 
 const route = useRoute();
 const items = useThemeLocaleData().value.sidebar;
-const sidebarItems = computed(() => {
-  const key = Object.keys(items).filter(item => route.path.includes(item));
-  return items[key] || [];
-});
+const sidebarItems = useSidebarItems(items);
 
 const isSiteNavOpen = ref(false);
 

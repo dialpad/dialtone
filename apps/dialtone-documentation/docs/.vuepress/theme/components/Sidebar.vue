@@ -12,20 +12,16 @@
       v-for="item in sidebarItems"
       :key="item.link || item.text"
       :item="item"
+      :is-single-page="item.isSinglePage"
     />
   </dt-stack>
 </template>
 
 <script setup>
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import SidebarItem from '../components/SidebarItem.vue';
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import SidebarItem from './SidebarItem.vue';
+import { useSidebarItems } from '../composables/useSidebarItems';
 
-const route = useRoute();
 const items = useThemeLocaleData().value.sidebar;
-const sidebarItems = computed(() => {
-  const key = Object.keys(items).filter(item => route.path.includes(item));
-  return items[key] || [];
-});
+const sidebarItems = useSidebarItems(items);
 </script>

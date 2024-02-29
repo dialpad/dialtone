@@ -76,12 +76,15 @@ const isMobile = ref(false);
 // Remove "planned" items to avoid errors
 const currentItems = computed(() => {
   const key = Object.keys(items).filter(item => route.path.includes(item));
+  if (!Array.isArray(items[key])) return null;
   return items[key].map(item => item.children.filter(child => !child.planned));
 });
 
 // Finds the current item
 // eslint-disable-next-line complexity
 const findCurrent = () => {
+  if (!currentItems.value) return;
+
   prev.value = null;
   next.value = null;
 

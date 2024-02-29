@@ -1,23 +1,4 @@
 <template>
-  <!-- eslint-disable vue/no-static-inline-styles -->
-  <dt-stack :direction="{ default: 'row' }" gap="400">
-    <dt-select-menu
-      v-show="!tokenList"
-      name="format-select"
-      label="Select Format"
-      select-class="d-w128"
-      :options="formatSelectMenuOptions"
-      @change="setFormat"
-    />
-    <dt-select-menu
-      v-if="category === 'color'"
-      name="theme-select"
-      label="Select Theme"
-      select-class="d-w128"
-      :options="THEMES"
-      @change="setTheme"
-    />
-  </dt-stack>
   <table class="d-table dialtone-doc-table">
     <thead>
       <tr>
@@ -101,13 +82,13 @@ import { getComposedTypographyTokens, getComposedShadowTokens } from '../common/
 import CopyButton from './CopyButton.vue';
 import TokenExample from './TokenExample.vue';
 
-const FORMAT_MAP = {
+export const FORMAT_MAP = {
   CSS: 'css/variables',
   Android: 'compose/object',
   iOS: 'ios-swift/enum.swift',
 };
 
-const THEMES = [
+export const THEMES = [
   { value: 'light', label: 'Light' },
   { value: 'dark', label: 'Dark' },
 ];
@@ -149,17 +130,22 @@ export default {
       validator: (v) => Object.keys(CATEGORY_MAP).includes(v),
     },
 
+    format: {
+      type: String,
+      default: 'CSS',
+      validator: (v) => Object.keys(FORMAT_MAP).includes(v),
+    },
+
+    theme: {
+      type: String,
+      default: 'light',
+      validator: (v) => THEMES.find(theme => theme.value === v),
+    },
+
     tokenList: {
       type: Object,
+      default: null,
     },
-  },
-
-  data () {
-    return {
-      format: 'CSS',
-      theme: 'light',
-      THEMES,
-    };
   },
 
   computed: {
@@ -194,14 +180,6 @@ export default {
   },
 
   methods: {
-    setFormat (newFormat) {
-      this.format = newFormat;
-    },
-
-    setTheme (newTheme) {
-      this.theme = newTheme;
-    },
-
     remToPixels (value) {
       if (this.category !== 'size' && this.category !== 'space') return;
       return `${parseFloat(value.replace('rem', '')) * 10}px`;

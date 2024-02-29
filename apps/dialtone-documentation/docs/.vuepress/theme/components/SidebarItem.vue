@@ -24,7 +24,7 @@
             :class="[
               itemClass,
               {
-                'd-btn--active d-fw-medium': isExactActive,
+                'd-btn--active d-fw-medium': isActiveLink(isExactActive, subItem.link),
               },
             ]"
             @click="navigate"
@@ -50,10 +50,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 const itemClass = 'd-btn d-btn--muted d-bar-pill d-w100p d-jc-flex-start d-fw-normal d-fc-primary';
 const props = defineProps({
+  isSinglePage: {
+    type: Boolean,
+    default: false,
+  },
   item: {
     type: Object,
     default: () => {},
@@ -62,4 +67,17 @@ const props = defineProps({
 const subItems = computed(() => {
   return props.item?.children || [];
 });
+const route = useRoute();
+const hash = ref(route.hash);
+
+watch(route, newRoute => {
+  hash.value = newRoute.hash;
+});
+
+// isExactActive from the router-link doesn't work with hashes,
+// that's why we need to check for the hash if it's a single page
+const isActiveLink = (isExactActive, link) => {
+  if (props.isSinglePage) return hash.value === link;
+  return isExactActive;
+};
 </script>
