@@ -62,12 +62,8 @@ jobs:
         uses: ashley-taylor/regex-property-action@v1.3
         with:
           value: ${{ steps.read-file.outputs.content }}
-          regex: /^---$.*^---$/
-          flags: "ms"
+          regex: /^---$.*^---$/ms
           replacement: ""
-
-      - name: Print Result
-        run: echo "${{ steps.remove-frontmatter.outputs.value }}"
 
 #  send-email:
 #    name: Send email
