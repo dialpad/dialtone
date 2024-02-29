@@ -405,7 +405,7 @@ export default {
      */
     showSend: {
       type: [Boolean, Object],
-      default: () => ({ icon: 'send', ariaLabel: 'send' }),
+      default: () => ({ icon: 'send' }),
     },
 
     /**
