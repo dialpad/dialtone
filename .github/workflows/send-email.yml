@@ -54,28 +54,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Test
-        run: |
-          echo ${{ matrix.files }}
-
-#      - name: Send email
-#        if: false
-#        uses: dawidd6/action-send-mail@v3
-#        with:
-#          server_address: smtp.gmail.com
-#          server_port: 465
-#          secure: true
-#          username: ${{ env.FROM_MAIL }}
-#          password: ${{ secrets.MAIL_PASSWORD }}
-#          subject: Dialtone updates
-#          to: ${{ env.TO_MAIL }}
-#          from: ${{ env.FROM_MAIL }}
-#          html_body: file://${{ needs.changed-files.outputs.added-files }}
-#          bcc: ${{ env.FROM_MAIL }}
-#          reply_to: ${{ env.FROM_MAIL }}
-#          convert_markdown: true
-#          # Optional nodemailer log: true/false
-#          nodemailerlog: true
-#          # Optional nodemailer debug: true/false
-#          # if true log nodemailer will also be set true
-#          nodemailerdebug: true
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ env.FROM_MAIL }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Dialtone updates
+          to: ${{ env.TO_MAIL }}
+          from: ${{ env.FROM_MAIL }}
+          html_body: file://${{ matrix.files }}
+          bcc: ${{ env.FROM_MAIL }}
+          reply_to: ${{ env.FROM_MAIL }}
+          convert_markdown: true
+          # Optional nodemailer log: true/false
+          nodemailerlog: true
+          # Optional nodemailer debug: true/false
+          # if true log nodemailer will also be set true
+          nodemailerdebug: true
