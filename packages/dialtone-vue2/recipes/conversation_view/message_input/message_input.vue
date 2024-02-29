@@ -405,7 +405,7 @@ export default {
      */
     showSend: {
       type: [Boolean, Object],
-      default: () => ({ icon: 'send' }),
+      default: () => ({ icon: 'send', ariaLabel: 'send' }),
     },
 
     /**
@@ -650,7 +650,6 @@ export default {
 }
 
 .dt-message-input--cancel-button {
-  color: var(--dt-color-black-500);
   margin-right: var(--dt-space-300);
 }
 </style>
