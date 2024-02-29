@@ -47,7 +47,7 @@ jobs:
         files: ${{ fromJSON(needs.changed-files.outputs.added-posts) }}
     env:
       FROM_MAIL: julio.ortega@dialpad.com
-      TO_MAIL: brad-paugh@dialpad.com
+      TO_MAIL: julio.ortega@dialpad.com
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
