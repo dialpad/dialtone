@@ -68,7 +68,7 @@ jobs:
           html_body: file://${{ matrix.files }}
           bcc: ${{ env.FROM_MAIL }}
           reply_to: ${{ env.FROM_MAIL }}
-          convert_markdown: false
+          convert_markdown: true
           # Optional nodemailer log: true/false
           nodemailerlog: true
           # Optional nodemailer debug: true/false
