@@ -11,16 +11,12 @@ const MOCK_GROUP = 25;
 const MOCK_CUSTOM_CLASS = 'my-custom-class';
 let MOCK_ELEMENT = null;
 
-const baseAttrs = {
-  ariaLabel: 'Button aria label',
-};
 const baseProps = {
   fullName: 'Jaqueline Nackos',
   imageAlt: MOCK_IMAGE_ALT,
 };
 
 let mockProps = {};
-let mockAttrs = {};
 
 describe('DtAvatar Tests', () => {
   let wrapper;
@@ -31,7 +27,6 @@ describe('DtAvatar Tests', () => {
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
       props: { ...baseProps, ...mockProps },
-      attrs: { ...baseAttrs, ...mockAttrs },
     });
 
     image = wrapper.find('[data-qa="dt-avatar-image"]');
@@ -45,7 +40,6 @@ describe('DtAvatar Tests', () => {
 
   afterEach(() => {
     mockProps = {};
-    mockAttrs = {};
   });
 
   describe('Presentation Tests', () => {
@@ -246,8 +240,6 @@ describe('DtAvatar Tests', () => {
     describe('When clickable is false (default)', () => {
       describe('When avatar is clicked', () => {
         beforeEach(async () => {
-          mockAttrs = { onClick: MOCK_AVATAR_STUB };
-
           updateWrapper();
 
           await wrapper.trigger('click');
@@ -266,7 +258,6 @@ describe('DtAvatar Tests', () => {
       describe('When avatar is clicked', () => {
         beforeEach(async () => {
           mockProps = { clickable: true };
-          mockAttrs = { onClick: MOCK_AVATAR_STUB };
 
           updateWrapper();
 

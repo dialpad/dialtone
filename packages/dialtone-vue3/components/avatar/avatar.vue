@@ -231,7 +231,7 @@ export default {
      */
     imageAlt: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -418,8 +418,8 @@ export default {
     },
 
     validateProps () {
-      if (this.imageSrc && !this.imageAlt) {
-        throw new Error('image-alt must be set if image-src is provided');
+      if (this.imageSrc && this.imageAlt === undefined) {
+        throw new Error('full-name or image-alt must be set if image-src is provided');
       }
     },
 
