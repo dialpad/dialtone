@@ -54,12 +54,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Remove frontmatter
-        env:
-          MARKDOWN_FILE_PATH: ${{ matrix.files }}
-        run: |
-          sed -i '/^---$/,/^---$/d' $MARKDOWN_FILE_PATH
-
       - name: Get link from file name
         id: get-post-url
         env:
@@ -67,6 +61,25 @@ jobs:
         run: |
           PREFIX="https:\/\/dialtone.dialpad.com"
           echo "POST_URL=$(echo $MARKDOWN_FILE_PATH | sed -e "s/apps\/dialtone-documentation\/docs/$PREFIX/" -e 's/md/html/')" >> $GITHUB_OUTPUT
+
+      # This will do the following:
+      # - Remove frontmatter.
+      # - Remove script setup.
+      # - Remove blog post component.
+      # - Remove empty lines at the beginning of the file.
+      # - Ellipsis the article to the first 5 lines.
+      # - Append the URL of the article at the end of the article.
+      - name: Process Markdown file
+        env:
+          MARKDOWN_FILE_PATH: ${{ matrix.files }}
+          POST_URL: ${{ steps.get-post-url.outputs.POST_URL }}
+        run: |
+          sed -i '/^---$/,/^---$/d' $MARKDOWN_FILE_PATH
+          sed -i '/^<script setup>$/,/^<\/script>$/d' $MARKDOWN_FILE_PATH
+          sed -i '/^<\/*BlogPost.*$/d' $MARKDOWN_FILE_PATH
+          sed -i '/./,$!d' $MARKDOWN_FILE_PATH
+          sed -i 5q $MARKDOWN_FILE_PATH
+          echo -e "... Read the full article [here]($POST_URL)" >> $MARKDOWN_FILE_PATH
 
       - name: Send email
         uses: dawidd6/action-send-mail@v3
@@ -79,8 +92,6 @@ jobs:
           subject: Dialtone updates
           to: ${{ env.TO_MAIL }}
           from: ${{ env.FROM_MAIL }}
-          body: |
-            Read the full article on: ${{ steps.get-post-url.outputs.POST_URL }}
           html_body: file://${{ matrix.files }}
           bcc: ${{ env.FROM_MAIL }}
           reply_to: ${{ env.FROM_MAIL }}
