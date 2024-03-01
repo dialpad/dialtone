@@ -86,6 +86,7 @@
         <dt-avatar
           :seed="$attrs.seed"
           icon-name="user"
+          icon-aria-label="user icon"
           clickable
         />
         <dt-avatar
