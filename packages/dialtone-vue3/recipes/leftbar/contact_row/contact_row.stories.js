@@ -11,7 +11,6 @@ import defaultImage from '@/common/assets/avatar2.png';
 export const argsData = {
   name: 'Jaqueline Nackos',
   avatarSrc: defaultImage,
-  avatarAlt: 'Avatar person',
   callButtonTooltip: 'Call',
   hasUnreads: true,
   unreadCount: '55',

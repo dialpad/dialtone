@@ -20,7 +20,7 @@
           <dt-avatar
             :full-name="displayName"
             :image-src="avatarImageUrl"
-            :image-alt="avatarImageAlt"
+            image-alt=""
             :seed="avatarSeed"
           />
         </slot>
@@ -147,15 +147,6 @@ export default {
      * If not provided it will use extracted initials from displayName.
      */
     avatarImageUrl: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Optional avatar image alt text.
-     * Required if avatarImageUrl is provided.
-     */
-    avatarImageAlt: {
       type: String,
       default: '',
     },

@@ -17,7 +17,7 @@
       <dt-avatar
         :full-name="name"
         :image-src="avatarSrc"
-        :image-alt="avatarAlt"
+        image-alt=""
         :icon-name="iconName"
         icon-size="200"
         size="sm"
@@ -78,15 +78,6 @@ export default {
      * If not provided it will use the initial of the name.
      */
     avatarSrc: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Optional avatar image alt text.
-     * Required if avatarSrc is provided.
-     */
-    avatarAlt: {
       type: String,
       default: '',
     },
