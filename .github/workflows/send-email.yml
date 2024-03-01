@@ -1,13 +1,5 @@
 name: Send communications
 on:
-  workflow_dispatch:
-    inputs:
-      post_file_name:
-        description: 'The post file name'
-        required: true
-  pull_request:
-    paths:
-      - 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
   push:
     branches:
       - production
@@ -47,7 +39,7 @@ jobs:
         files: ${{ fromJSON(needs.changed-files.outputs.added-posts) }}
     env:
       FROM_MAIL: julio.ortega@dialpad.com
-      TO_MAIL: julio.ortega@dialpad.com
+      TO_MAIL: dialtone-users@dialpad.com
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -94,7 +86,7 @@ jobs:
           from: ${{ env.FROM_MAIL }}
           html_body: file://${{ matrix.files }}
           bcc: ${{ env.FROM_MAIL }}
-          reply_to: ${{ env.FROM_MAIL }}
+          reply_to: dialtone@dialpad.com
           convert_markdown: true
           # Optional nodemailer log: true/false
           nodemailerlog: true
