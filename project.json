@@ -7,7 +7,8 @@
     "dialtone-tokens",
     "dialtone-vue2",
     "dialtone-vue3",
-    "eslint-plugin-dialtone"
+    "eslint-plugin-dialtone",
+    "stylelint-plugin-dialtone"
   ],
   "targets": {
     "build": {
