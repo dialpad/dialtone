@@ -66,7 +66,7 @@ jobs:
           MARKDOWN_FILE_PATH: ${{ matrix.files }}
         run: |
           PREFIX="https:\/\/dialtone.dialpad.com"
-          echo "POST_URL=$(echo $MARKDOWN_FILE_PATH | sed -e "s/apps\/dialtone-documentation\/docs/$PREFIX/" -e 's/md/html/)' >> $GITHUB_OUTPUT
+          echo "POST_URL=$(echo $MARKDOWN_FILE_PATH | sed -e "s/apps\/dialtone-documentation\/docs/$PREFIX/" -e 's/md/html/')" >> $GITHUB_OUTPUT
 
       - name: Send email
         uses: dawidd6/action-send-mail@v3
