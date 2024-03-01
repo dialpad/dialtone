@@ -60,6 +60,14 @@ jobs:
         run: |
           sed -i '/^---$/,/^---$/d' $MARKDOWN_FILE_PATH
 
+      - name: Get link from file name
+        id: get-post-url
+        env:
+          MARKDOWN_FILE_PATH: ${{ matrix.files }}
+        run: |
+          PREFIX="https:\/\/dialtone.dialpad.com"
+          echo "POST_URL=$(echo $MARKDOWN_FILE_PATH | sed -e "s/apps\/dialtone-documentation\/docs/$PREFIX/" -e 's/md/html/)' >> $GITHUB_OUTPUT
+
       - name: Send email
         uses: dawidd6/action-send-mail@v3
         with:
@@ -71,10 +79,12 @@ jobs:
           subject: Dialtone updates
           to: ${{ env.TO_MAIL }}
           from: ${{ env.FROM_MAIL }}
+          body: |
+            Read the full article on: ${{ steps.get-post-url.outputs.POST_URL }}
           html_body: file://${{ matrix.files }}
           bcc: ${{ env.FROM_MAIL }}
           reply_to: ${{ env.FROM_MAIL }}
-          convert_markdown: false
+          convert_markdown: true
           # Optional nodemailer log: true/false
           nodemailerlog: true
           # Optional nodemailer debug: true/false
