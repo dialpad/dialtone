@@ -889,6 +889,9 @@ importers:
       stylelint:
         specifier: 15.11.0
         version: 15.11.0(typescript@5.3.3)
+      stylelint-test-rule-node:
+        specifier: ^0.2.1
+        version: 0.2.1(stylelint@15.11.0)
 
 packages:
 
@@ -7732,7 +7735,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.8(typescript@5.2.2)
-      vue-component-type-helpers: 2.0.0
+      vue-component-type-helpers: 2.0.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -27562,6 +27565,15 @@ packages:
       stylelint: 9.10.1
     dev: true
 
+  /stylelint-test-rule-node@0.2.1(stylelint@15.11.0):
+    resolution: {integrity: sha512-+/CVfxp6MhXTRe9rA21j2DA8VoiZyU4gnK4soADWhV95e0KC6XQ9YoP8cvWNjWqjRIrebL+fc7ZNoBqnTnfeYA==}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.0.1
+    dependencies:
+      stylelint: 15.11.0(typescript@5.3.3)
+    dev: true
+
   /stylelint@14.16.1:
     resolution: {integrity: sha512-ErlzR/T3hhbV+a925/gbfc3f3Fep9/bnspMiJPorfGEmcBbXdS+oo6LrVtoUZ/w9fqD6o6k7PtUlCOsCRdjX/A==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
@@ -29537,8 +29549,8 @@ packages:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
     dev: true
 
-  /vue-component-type-helpers@2.0.0:
-    resolution: {integrity: sha512-r+lO2aYasxliE6I76dutaY0GBCnqM7Q/c3VO2MPxrJsIUwPZIESLfis9/1EXAMWajnpF+o0syJAIV6Y6/crKNw==}
+  /vue-component-type-helpers@2.0.1:
+    resolution: {integrity: sha512-TSOLgONQc8YzdLzTvPwcBdPnGAIIY3T8jWUQA9gt/LhmYKpJV/2ErD3nKzG4WZ255XYc4malvZDAvfKDCPI0Jg==}
     dev: true
 
   /vue-demi@0.14.7(vue@3.4.15):

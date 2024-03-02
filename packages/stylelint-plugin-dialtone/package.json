@@ -11,6 +11,7 @@
     "Dialtone",
     "stylelint"
   ],
+  "type": "module",
   "contributors": [
     {
       "name": "Brad Paugh",
@@ -40,6 +41,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "stylelint": "15.11.0"
+    "stylelint": "15.11.0",
+    "stylelint-test-rule-node": "^0.2.1"
   }
 }
