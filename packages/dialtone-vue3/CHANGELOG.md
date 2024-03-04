@@ -1,3 +1,15 @@
+## [3.110.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.110.0...dialtone-vue3/v3.110.1) (2024-02-28)
+
+
+### Bug Fixes
+
+* popover error ([#178](https://github.com/dialpad/dialtone/issues/178)) ([daebcb6](https://github.com/dialpad/dialtone/commit/daebcb675f1cb7d1b878d7950a492d6ca8be616a))
+
+
+### Documentation
+
+* use CodeExampleTabs component for avatar page ([#170](https://github.com/dialpad/dialtone/issues/170)) ([b4e0ad9](https://github.com/dialpad/dialtone/commit/b4e0ad9bc105eceff518052848072e4004f84029))
+
 # [3.110.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.109.2...dialtone-vue3/v3.110.0) (2024-02-27)
 
 

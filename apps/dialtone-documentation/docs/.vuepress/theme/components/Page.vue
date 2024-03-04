@@ -64,7 +64,9 @@
 import PageHeader from '../components/PageHeader.vue';
 import PageToc from '../components/PageToc.vue';
 import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import { usePageData } from '@vuepress/client';
+import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 
 const props = defineProps({
   prev: {
@@ -90,7 +92,12 @@ const gridClass = computed(() => {
   if (props.isMobile || !includeToc.value) return 'd-gl-docsite';
   return 'd-gl-docsite-toc';
 });
+const items = useThemeLocaleData().value.sidebar;
+const route = useRoute();
 const includeToc = computed(() => {
+  // get the item that matches the current route from site-nav without cosidering the last '/'
+  const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
+  if (!items[key] || !Array.isArray(items[key])) return false;
   const headers = usePageData().value.headers;
   return headers?.length > 0;
 });

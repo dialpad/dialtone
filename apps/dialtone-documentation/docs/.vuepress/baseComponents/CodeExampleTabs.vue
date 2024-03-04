@@ -1,7 +1,6 @@
 <template>
   <dt-tab-group class="code-example-tab-group" @change="selectedPanelId = $event.selected">
     <template #tabs>
-      {{ selectedPanelId }}
       <div class="d-d-flex d-jc-space-between d-ai-flex-start d-w100p">
         <div>
           <dt-tab
