@@ -885,6 +885,10 @@ importers:
         version: 10.2.0
 
   packages/stylelint-plugin-dialtone:
+    dependencies:
+      requireindex:
+        specifier: ^1.2.0
+        version: 1.2.0
     devDependencies:
       stylelint:
         specifier: 15.11.0
@@ -7735,7 +7739,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.8(typescript@5.2.2)
-      vue-component-type-helpers: 2.0.1
+      vue-component-type-helpers: 2.0.4
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -29549,8 +29553,8 @@ packages:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
     dev: true
 
-  /vue-component-type-helpers@2.0.1:
-    resolution: {integrity: sha512-TSOLgONQc8YzdLzTvPwcBdPnGAIIY3T8jWUQA9gt/LhmYKpJV/2ErD3nKzG4WZ255XYc4malvZDAvfKDCPI0Jg==}
+  /vue-component-type-helpers@2.0.4:
+    resolution: {integrity: sha512-IFZ8rjfV1zWf1LOMPfmMaHe28zZfo5w2NyZxCqeqLGT3CGur0Y9+R3/bvX400tqVukuzf8mLw2fOvGTyXKPWjg==}
     dev: true
 
   /vue-demi@0.14.7(vue@3.4.15):

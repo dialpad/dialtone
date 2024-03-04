@@ -11,17 +11,18 @@ apps (apps folder):
 
 ```text
 dialtone/
-|--- .github                    # Github configuration and workflows
-|--- apps                       # Apps
-  |--- dialtone-documentation   # Documentation site
-|--- packages                   # NPM packages
-  |--- dialtone-css             # CSS library
-  |--- dialtone-vue2            # Vue component library compatible with vue@2
-  |--- dialtone-vue3            # Vue component library compatible with vue@3
-  |--- dialtone-icons           # SVG icons library
-  |--- dialtone-tokens          # Tokens library
-  |--- eslint-plugin-dialtone   # Custom ESLint rules for Dialtone users
-|--- scripts                    # Shared scripts
+|--- .github                      # Github configuration and workflows
+|--- apps                         # Apps
+  |--- dialtone-documentation     # Documentation site
+|--- packages                     # NPM packages
+  |--- dialtone-css               # CSS library
+  |--- dialtone-vue2              # Vue component library compatible with vue@2
+  |--- dialtone-vue3              # Vue component library compatible with vue@3
+  |--- dialtone-icons             # SVG icons library
+  |--- dialtone-tokens            # Tokens library
+  |--- eslint-plugin-dialtone     # Custom ESLint rules for Dialtone users
+  |--- stylelint-plugin-dialtone  # Custom Stylelint rules for Dialtone users
+|--- scripts                      # Shared scripts
 ```
 
 ## Tooling

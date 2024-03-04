@@ -2,38 +2,27 @@
 
 Dialtone StyleLint plugin containing rules to help developers maintain dialtone recommended practices for CSS.
 
-## Adding a new rule
-
-We use yeoman generator to generate new rules, simply run the command below and follow the steps.
-
-```shell
-yo stylelint:rule
-```
-
 ## Installation
 
-You'll first need to install [ESLint](https://eslint.org/):
+You'll first need to install [stylelint](https://stylelint.io/) into your project:
 
 ```sh
-npm i eslint --save-dev
+npm install -D stylelint
 ```
 
 Next, install `@dialpad/stylelint-plugin-dialtone`:
 
 ```sh
-npm install @dialpad/stylelint-plugin-dialtone --save-dev
+npm install -D @dialpad/stylelint-plugin-dialtone
 ```
 
 ## Usage
-<!--
-Add `@dialpad/dialtone` to the plugins section of your `.eslintrc` configuration file.
-You can omit the `stylelint-plugin-` prefix:
+
+Add `@dialpad/stylelint-plugin-dialtone` to the plugins array in your stylelint.config file.
 
 ```json
 {
-    "plugins": [
-        "@dialpad/dialtone"
-    ]
+  "plugins": ["@dialpad/stylelint-plugin-dialtone"],
 }
 ```
 
@@ -41,12 +30,8 @@ Then configure the rules you want to use under the rules section.
 
 ```json
 {
-    "rules": {
-        "@dialpad/dialtone/rule-name": 2
-    }
+  "rules": {
+    "@dialpad/stylelint-plugin-dialtone/no-mixins": true
+  }
 }
 ```
-
-## Supported Rules
-
-* Fill in provided rules here -->
