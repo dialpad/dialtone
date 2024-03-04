@@ -48,9 +48,13 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <span class="d-badge"><span class="d-badge__label">Label</span></span>
 </code-well-header>
 
-```html
-<span class="d-badge"><span class="d-badge__label">Label</span></span>
-```
+<code-example-tabs
+htmlCode='
+<span class="d-badge"><span class="d-badge__label">Label</span></span>'
+vueCode='
+<dt-badge type="default" kind="label" text="Label" />
+'
+showHtmlWarning />
 
 ### Count
 
@@ -58,9 +62,13 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>
 </code-well-header>
 
-```html
-<span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>
-```
+<code-example-tabs
+htmlCode='
+<span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>'
+vueCode='
+<dt-badge type="default" kind="count" default="1" />
+'
+showHtmlWarning />
 
 ## Type
 
@@ -150,7 +158,8 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   </tbody>
 </table>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-badge"><span class="d-badge__label">Label</span></span>
 <span class="d-badge d-badge--info"><span class="d-badge__label">Label</span></span>
 <span class="d-badge d-badge--success"><span class="d-badge__label">Label</span></span>
@@ -163,14 +172,29 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   </span>
   <span class="d-badge__label">Label</span>
 </span>
-
 <span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>
 <span class="d-badge d-badge--count d-badge--info"><span class="d-badge__label">2</span></span>
 <span class="d-badge d-badge--count d-badge--success"><span class="d-badge__label">3</span></span>
 <span class="d-badge d-badge--count d-badge--warning"><span class="d-badge__label">4</span></span>
 <span class="d-badge d-badge--count d-badge--critical"><span class="d-badge__label">5</span></span>
 <span class="d-badge d-badge--count d-badge--bulletin"><span class="d-badge__label">6</span></span>
-```
+'
+vueCode='
+<dt-badge type="default" kind="label" text="Label" />
+<dt-badge type="info" kind="label" text="Label" />
+<dt-badge type="success" kind="label" text="Label" />
+<dt-badge type="warning" kind="label" text="Label" />
+<dt-badge type="critical" kind="label" text="Label" />
+<dt-badge type="bulletin" kind="label" text="Label" />
+<dt-badge type="ai" text="Label" kind="label" icon-left="dialpad-ai" />
+<dt-badge type="default" text="1" kind="count" />
+<dt-badge type="info" text="1" kind="count" />
+<dt-badge type="success" text="1" kind="count" />
+<dt-badge type="warning" text="1" kind="count" />
+<dt-badge type="critical" text="1" kind="count" />
+<dt-badge type="bulletin" text="1" kind="count" />
+'
+showHtmlWarning />
 
 ## Icon
 
@@ -191,7 +215,8 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   </dt-stack>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-badge">
   <span class="d-badge__icon-left">
     <dt-icon name="lightning-bolt" size="200" />
@@ -205,7 +230,12 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     <dt-icon name="lightning-bolt" size="200" />
   </span>
 </span>
-```
+'
+vueCode='
+<dt-badge type="default" text="Label" kind="label" icon-left="lightning-bolt"/>
+<dt-badge type="default" text="Label" kind="label" icon-right="lightning-bolt"/>
+'
+showHtmlWarning />
 
 ## Decorative
 
@@ -259,12 +289,38 @@ Decorative badges label and classify items for quick recognition.
   </dt-stack>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-badge d-badge--decorate-{$color}">
   <span class="d-badge__decorative"></span>
   <span class="d-badge__label">Label</span>
 </span>
-```
+'
+vueCode='
+<dt-badge text="Label" decoration="black-400" />
+<dt-badge text="Label" decoration="black-500" />
+<dt-badge text="Label" decoration="black-900" />
+<dt-badge text="Label" decoration="red-200" />
+<dt-badge text="Label" decoration="red-300" />
+<dt-badge text="Label" decoration="red-400" />
+<dt-badge text="Label" decoration="purple-200" />
+<dt-badge text="Label" decoration="purple-300" />
+<dt-badge text="Label" decoration="purple-400" />
+<dt-badge text="Label" decoration="purple-500" />
+<dt-badge text="Label" decoration="blue-200" />
+<dt-badge text="Label" decoration="blue-300" />
+<dt-badge text="Label" decoration="blue-400" />
+<dt-badge text="Label" decoration="green-300" />
+<dt-badge text="Label" decoration="green-400" />
+<dt-badge text="Label" decoration="green-500" />
+<dt-badge text="Label" decoration="gold-300" />
+<dt-badge text="Label" decoration="gold-400" />
+<dt-badge text="Label" decoration="gold-500" />
+<dt-badge text="Label" decoration="magenta-200" />
+<dt-badge text="Label" decoration="magenta-300" />
+<dt-badge text="Label" decoration="magenta-400" />
+'
+showHtmlWarning />
 
 <dialtone-usage>
 <template #do>

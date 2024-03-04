@@ -181,11 +181,18 @@ The base button should be the go-to button for most of your needs. When in doubt
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn" type="button"><span class="d-btn__label">...</span></button>
-```
+'
+vueCode='
+<dt-button> Place call </dt-button>
+<dt-button importance="outlined"> Place call </dt-button>
+<dt-button importance="clear"> Place call </dt-button>
+'
+showHtmlWarning />
 
 ### Danger
 
@@ -205,11 +212,18 @@ The danger button style is used to communicate critical or destructive actions s
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--danger d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--danger d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--danger" type="button"><span class="d-btn__label">...</span></button>
-```
+'
+vueCode='
+<dt-button kind="danger"> Place call </dt-button>
+<dt-button kind="danger" importance="outlined"> Place call </dt-button>
+<dt-button kind="danger" importance="clear"> Place call </dt-button>
+'
+showHtmlWarning />
 
 ### Inverted
 
@@ -229,11 +243,18 @@ The inverted button style is used to visually separate buttons set on darker bac
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--inverted d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--inverted d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--inverted" type="button"><span class="d-btn__label">...</span></button>
-```
+'
+vueCode='
+<dt-button kind="inverted"> Place call </dt-button>
+<dt-button kind="inverted" importance="outlined"> Place call </dt-button>
+<dt-button kind="inverted" importance="clear"> Place call </dt-button>
+'
+showHtmlWarning />
 
 ### Muted
 
@@ -250,10 +271,16 @@ The muted button style is used to communicate non-primary actions for contexts i
   </div>
 </code-well-header>
 
- ```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--muted" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--muted d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
-```
+'
+vueCode='
+<dt-button kind="muted" importance="clear"> Place call </dt-button>
+<dt-button kind="muted" importance="outlined"> Place call </dt-button>
+'
+showHtmlWarning />
 
 ### Disabled
 
@@ -273,12 +300,17 @@ All button styles and variations appear the same when disabled.
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn" type="button" disabled><span class="d-btn__label">...</span></button>
 <span class="d-c-not-allowed">
   <button class="d-btn d-btn--disabled" type="button" aria-disabled="true"><span class="d-btn__label">...</span></button>
 </span>
-```
+'
+vueCode='
+<dt-button disabled> Place call </dt-button>
+'
+showHtmlWarning />
 
 ### Active
 
@@ -315,12 +347,22 @@ Different button styles and variations appear different when active.
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--active" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--primary d-btn--active" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--danger d-btn--active" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--inverted d-btn--primary d-btn--active" type="button"><span class="d-btn__label">...</span></button>
-```
+<button class="d-btn d-btn--primary d-btn--muted d-btn--active" type="button"><span class="d-btn__label">...</span></button>
+'
+vueCode='
+<dt-button active importance="clear"> Place call </dt-button>
+<dt-button active> Place call </dt-button>
+<dt-button active kind="danger" importance="clear"> Place call </dt-button>
+<dt-button active kind="inverted"> Place call </dt-button>
+<dt-button active kind="muted"> Place call </dt-button>
+'
+showHtmlWarning />
 
 ### Link
 
@@ -333,10 +375,16 @@ Buttons can be styled as a [Link](link.md) in situations for which you need the 
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button type="button" class="d-link">...</button>
 <button type="button" class="d-link" disabled>...</button>
-```
+'
+vueCode='
+<dt-button link> Place call </dt-button>
+<dt-button link disabled> Place call </dt-button>
+'
+showHtmlWarning />
 
 ## Sizes
 
@@ -362,13 +410,22 @@ The base button font size is 16px and should be used in most cases. Every button
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--primary d-btn--xs" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--primary d-btn--sm" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--primary d-btn--lg" type="button"><span class="d-btn__label">...</span></button>
 <button class="d-btn d-btn--primary d-btn--xl" type="button"><span class="d-btn__label">...</span></button>
-```
+'
+vueCode='
+<dt-button size="xs"> Place call </dt-button>
+<dt-button size="sm"> Place call </dt-button>
+<dt-button> Place call </dt-button>
+<dt-button size="lg"> Place call </dt-button>
+<dt-button size="xl"> Place call </dt-button>
+'
+showHtmlWarning />
 
 ## Loading
 
@@ -388,11 +445,18 @@ Loading buttons are useful for communicating a delay between the button interact
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--loading d-btn--primary" type="button"><span class="d-btn__label">Place call</span></button>
 <button class="d-btn d-btn--loading d-btn--outlined" type="button"><span class="d-btn__label">Place call</span></button>
 <button class="d-btn d-btn--danger d-btn--loading" type="button"><span class="d-btn__label">Place call</span></button>
-```
+'
+vueCode='
+<dt-button loading> Place call </dt-button>
+<dt-button loading importance="outlined"> Place call </dt-button>
+<dt-button loading importance="clear" kind="danger"> Place call </dt-button>
+'
+showHtmlWarning />
 
 ## Icon support
 
@@ -423,7 +487,8 @@ Button labels can include an icon next to the text. Every button style can accep
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--outlined" type="button">
   <span class="d-btn__icon d-btn__icon--left">...</span>
   <span class="d-btn__label">...</span>
@@ -436,7 +501,21 @@ Button labels can include an icon next to the text. Every button style can accep
   <span class="d-btn__icon d-btn__icon--right">...</span>
   <span class="d-btn__label">...</span>
 </button>
-```
+'
+vueCode='
+<!-- icon-position can be "right/top/bottom" , 
+     no icon-position will be left -->
+<dt-button importance="outlined" icon-position="right">
+    <template #icon>
+        <dt-icon
+            name="phone"
+            size="300"
+        />
+    </template>
+    Label
+</dt-button>
+'
+showHtmlWarning />
 
 ### Icon only
 
@@ -452,13 +531,44 @@ Sometimes an icon-only, circle button is desired. These buttons are used for tog
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--circle" type="button">...</button>
 <button class="d-btn d-btn--circle d-btn--outlined" type="button">...</button>
 <button class="d-btn d-btn--circle d-btn--danger" type="button">...</button>
 <button class="d-btn d-btn--circle d-btn--danger d-btn--outlined" type="button">...</button>
 <button class="d-btn d-btn--circle d-btn--danger d-btn--primary" type="button">...</button>
-```
+'
+vueCode='
+<!-- circle clear-->
+<dt-button circle importance="clear">
+    <template #icon>
+        <dt-icon
+            name="phone"
+            size="300"
+        />
+    </template>
+</dt-button>
+<!-- circle outlined-->
+<dt-button circle importance="outlined">
+    <template #icon>
+        <dt-icon
+            name="phone"
+            size="300"
+        />
+    </template>
+</dt-button>
+<!-- circle outlined danger-->
+<dt-button circle kind="danger" importance="outlined">
+    <template #icon>
+        <dt-icon
+            name="phone"
+            size="300"
+        />
+    </template>
+</dt-button>
+'
+showHtmlWarning />
 
 <code-well-header bgclass="d-bgc-contrast">
   <div class="d-d-flex d-flow8">
@@ -468,11 +578,24 @@ Sometimes an icon-only, circle button is desired. These buttons are used for tog
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--circle btn--inverted" type="button">...</button>
 <button class="d-btn d-btn--circle btn--inverted d-btn--outlined" type="button">...</button>
 <button class="d-btn d-btn--circle btn--inverted d-btn--primary" type="button">...</button>
-```
+'
+vueCode='
+<!-- circle inverted clear-->
+<dt-button circle kind="inverted" importance="clear">
+    <template #icon>
+        <dt-icon
+            name="phone"
+            size="300"
+        />
+    </template>
+</dt-button>
+'
+showHtmlWarning />
 
 If you want to use the rectangular button, use the icon only styles.
 
@@ -483,10 +606,32 @@ If you want to use the rectangular button, use the icon only styles.
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <button class="d-btn d-btn--icon-only" type="button">...</button>
 <button class="d-btn d-btn--icon-only d-btn--outlined" type="button">...</button>
-```
+'
+vueCode='
+<!-- clear-->
+<dt-button importance="clear">
+    <template #icon>
+        <dt-icon
+            name="phone"
+            size="300"
+        />
+    </template>
+</dt-button>
+<!-- outlined-->
+<dt-button importance="outlined">
+    <template #icon>
+        <dt-icon
+            name="phone"
+            size="300"
+        />
+    </template>
+</dt-button>
+'
+showHtmlWarning />
 
 ## Branded
 
