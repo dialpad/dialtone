@@ -25,6 +25,7 @@
       <dt-icon
         v-else-if="iconName"
         :name="iconName"
+        :aria-label="iconAriaLabel"
         :size="iconSize || AVATAR_ICON_SIZES[size]"
         :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
         data-qa="dt-avatar-icon"
@@ -230,7 +231,7 @@ export default {
      */
     imageAlt: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -267,6 +268,15 @@ export default {
     clickable: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Descriptive label for the icon.
+     * To avoid a11y issues, set this prop if clickable and iconName are set.
+     */
+    iconAriaLabel: {
+      type: String,
+      default: undefined,
     },
   },
 
@@ -336,10 +346,6 @@ export default {
   },
 
   watch: {
-    clickable () {
-      this.validateProps();
-    },
-
     fullName: {
       immediate: true,
       handler () {
@@ -412,8 +418,8 @@ export default {
     },
 
     validateProps () {
-      if (this.imageSrc && !this.imageAlt) {
-        throw new Error('image-alt must be set if image-src is provided');
+      if (this.imageSrc && this.imageAlt === undefined) {
+        throw new Error('full-name or image-alt must be set if image-src is provided');
       }
     },
 

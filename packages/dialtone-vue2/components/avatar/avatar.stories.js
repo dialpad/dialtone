@@ -14,7 +14,7 @@ export const argsData = {
   size: 'md',
   presence: null,
   fullName: 'Jaqueline Nackos',
-  imageAlt: 'image-alt',
+  imageAlt: 'profile image',
   imageSrc: defaultImage,
   seed: '',
   iconName: 'accessibility',

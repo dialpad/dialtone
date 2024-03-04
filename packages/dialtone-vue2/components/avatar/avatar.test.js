@@ -11,16 +11,12 @@ const MOCK_GROUP = 25;
 const MOCK_CUSTOM_CLASS = 'my-custom-class';
 let MOCK_ELEMENT = null;
 
-const baseAttrs = {
-  ariaLabel: 'Button aria label',
-};
 const baseProps = {
   fullName: 'Jaqueline Nackos',
   imageAlt: MOCK_IMAGE_ALT,
 };
 const baseListeners = {};
 
-let mockAttrs = {};
 let mockProps = {};
 let mockListeners = {};
 const testContext = {};
@@ -34,7 +30,6 @@ describe('DtAvatar Tests', () => {
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
       propsData: { ...baseProps, ...mockProps },
-      attrs: { ...baseAttrs, ...mockAttrs },
       listeners: { ...baseListeners, ...mockListeners },
       localVue: testContext.localVue,
     });
@@ -53,7 +48,6 @@ describe('DtAvatar Tests', () => {
   });
 
   afterEach(() => {
-    mockAttrs = {};
     mockProps = {};
     mockListeners = {};
   });
