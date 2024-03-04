@@ -304,14 +304,14 @@ export default {
   data () {
     return {
       adminListenInAvatars: [
-        { src: avatar1, fullName: 'Jaqueline Nackos', seed: 'JN', alt: '' },
-        { src: avatar2, fullName: 'Joseph Lumaban', icon: 'hear', seed: 'JL', alt: '' },
+        { src: avatar1, fullName: 'Jaqueline Nackos', seed: 'JN' },
+        { src: avatar2, fullName: 'Joseph Lumaban', icon: 'hear', seed: 'JL' },
       ],
 
       groupCallAvatars: [
         { fullName: 'Joseph Lumaban', seed: 'JL' },
-        { src: avatar1, fullName: 'Jaqueline Nackos', seed: 'JN', alt: '' },
-        { src: avatar2, fullName: 'Natalie Woods', text: '+3', seed: 'NW', alt: '' },
+        { src: avatar1, fullName: 'Jaqueline Nackos', seed: 'JN' },
+        { src: avatar2, fullName: 'Natalie Woods', text: '+3', seed: 'NW' },
       ],
     };
   },
