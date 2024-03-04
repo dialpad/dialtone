@@ -8,22 +8,28 @@ This rule aims to detect and prevent usage of LESS mixins.
 
 Examples of **incorrect** code for this rule:
 
-```js
-import SpotFileUpload from '@dSpot/SpotFileUpload';
-import IconDynamicLayout from '@dIcon/IconDynamicLayout';
+Mixin usage:
+
+```css
+.a {
+  .aMixin();
+}
 ```
 
-```js
-const requireIcon = require.context(
-    '@dialpad/dialtone/lib/dist/vue/icons',
-    false,
-    /.*\\.vue$/,
-);
+Older style mixin syntax usage:
+
+```css
+.a {
+ .aMixin;
+}
 ```
 
 Examples of **correct** code for this rule:
 
-```js
-import { DtIcon } from '@dialpad/dialtone-vue';
-<dt-icon name="settings" />
+No mixins used.
+
+```css
+.a {
+  color: var(--dt-color-foreground-critical);
+}
 ```
