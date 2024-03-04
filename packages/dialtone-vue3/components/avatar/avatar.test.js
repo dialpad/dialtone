@@ -15,8 +15,10 @@ const baseProps = {
   fullName: 'Jaqueline Nackos',
   imageAlt: MOCK_IMAGE_ALT,
 };
+const baseAttrs = {};
 
 let mockProps = {};
+let mockAttrs = {};
 
 describe('DtAvatar Tests', () => {
   let wrapper;
@@ -27,6 +29,7 @@ describe('DtAvatar Tests', () => {
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
       props: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
     });
 
     image = wrapper.find('[data-qa="dt-avatar-image"]');
@@ -240,6 +243,8 @@ describe('DtAvatar Tests', () => {
     describe('When clickable is false (default)', () => {
       describe('When avatar is clicked', () => {
         beforeEach(async () => {
+          mockAttrs = { onClick: MOCK_AVATAR_STUB };
+
           updateWrapper();
 
           await wrapper.trigger('click');
@@ -258,6 +263,7 @@ describe('DtAvatar Tests', () => {
       describe('When avatar is clicked', () => {
         beforeEach(async () => {
           mockProps = { clickable: true };
+          mockAttrs = { onClick: MOCK_AVATAR_STUB };
 
           updateWrapper();
 
