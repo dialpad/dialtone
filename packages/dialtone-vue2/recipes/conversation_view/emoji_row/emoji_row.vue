@@ -129,6 +129,8 @@ export default {
   &:active {
     --emoji-item-color-background: var(--dt-action-color-background-muted-active);
     --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-active);
+
+    transform: scale(.98);
   }
 
   &--selected {
