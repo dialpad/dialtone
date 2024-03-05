@@ -48,7 +48,7 @@ export const argTypesData = {
     },
   },
 
-  avatarAriaLabel: {
+  avatarLabelledBy: {
     table: {
       type: { summary: 'string' },
     },
@@ -137,8 +137,9 @@ export const Default = {
     avatarSeed: 'JL',
     avatarFullName: 'Joseph Lumaban',
     avatarSize: 'lg',
+    avatarLabelledBy: 'contact-name',
     presence: 'active',
-    header: `<div class="d-fs-200 d-fw-bold"> Joseph Lumaban </div>`,
+    header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
     subtitle: `<div class="d-fs-100 d-mt2"> +1 (415) 123-4567 </div>`,
     bottom: `<div class="d-d-flex d-ai-center d-mtn6">
     <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">

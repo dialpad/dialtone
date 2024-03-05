@@ -4,6 +4,7 @@ import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants
 
 const MOCK_AVATAR_STUB = vi.fn();
 const MOCK_IMAGE_SOURCE = 'image.png';
+const MOCK_IMAGE_ALT = 'image alt';
 const MOCK_INITIALS = 'JN';
 const MOCK_SIZE = 'lg';
 const MOCK_GROUP = 25;
@@ -12,12 +13,12 @@ let MOCK_ELEMENT = null;
 
 const baseProps = {
   fullName: 'Jaqueline Nackos',
+  imageAlt: MOCK_IMAGE_ALT,
 };
 const baseAttrs = {};
 
 let mockProps = {};
 let mockAttrs = {};
-const testContext = {};
 
 describe('DtAvatar Tests', () => {
   let wrapper;
@@ -27,9 +28,8 @@ describe('DtAvatar Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
-      propsData: { ...baseProps, ...mockProps },
+      props: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
-      localVue: testContext.localVue,
     });
 
     image = wrapper.find('[data-qa="dt-avatar-image"]');
@@ -43,7 +43,6 @@ describe('DtAvatar Tests', () => {
 
   afterEach(() => {
     mockProps = {};
-    mockAttrs = {};
   });
 
   describe('Presentation Tests', () => {
@@ -73,7 +72,7 @@ describe('DtAvatar Tests', () => {
       });
 
       it('alt should match those provided by attrs', () => {
-        expect(image.attributes('alt')).toBe(baseProps.fullName);
+        expect(image.attributes('alt')).toBe(MOCK_IMAGE_ALT);
       });
     });
 

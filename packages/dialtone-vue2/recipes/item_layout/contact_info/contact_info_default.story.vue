@@ -3,6 +3,7 @@
     :show-avatar="$attrs.showAvatar"
     :avatar-src="$attrs.avatarSrc"
     :avatar-full-name="$attrs.avatarFullName"
+    :avatar-labelledby="$attrs.avatarLabelledby"
     :avatar-icon="$attrs.avatarIcon"
     :avatar-size="$attrs.avatarSize"
     :avatar-seed="$attrs.avatarSeed"
