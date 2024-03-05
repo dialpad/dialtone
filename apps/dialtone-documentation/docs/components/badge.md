@@ -242,7 +242,7 @@ showHtmlWarning />
 Decorative badges label and classify items for quick recognition.
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="500" class="d-ai-baseline">
     <dt-stack gap="500">
       <span class="d-label-compact">Black</span>
       <span class="d-badge d-badge--decorate-black-400"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>

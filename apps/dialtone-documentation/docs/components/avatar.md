@@ -76,11 +76,11 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 <code-example-tabs
 htmlCode='
 <div class="d-avatar d-avatar--{$size}">
-    <div class="d-avatar__canvas">
-        <span class="d-avatar__icon">
-        <svg>...</svg>
-        </span>
-    </div>
+  <div class="d-avatar__canvas">
+      <span class="d-avatar__icon">
+      <svg>...</svg>
+      </span>
+  </div>
 </div>'
 vueCode='
 <dt-avatar
@@ -100,9 +100,9 @@ showHtmlWarning />
 <code-example-tabs
 htmlCode='
 <div class="d-avatar d-avatar--{$size} d-avatar--{$color}">
-    <div class="d-avatar__canvas">
-        <span class="d-avatar__initials">DP</span>
-    </div>
+  <div class="d-avatar__canvas">
+      <span class="d-avatar__initials">DP</span>
+  </div>
 </div>
 '
 vueCode='
@@ -123,9 +123,9 @@ showHtmlWarning />
 <code-example-tabs
 htmlCode='
 <div class="d-avatar d-avatar--{$size}">
-    <div class="d-avatar__canvas">
-        <img class="d-avatar__image" src="/path/to/image" alt="avatar user" />
-    </div>
+  <div class="d-avatar__canvas">
+      <img class="d-avatar__image" src="/path/to/image" alt="avatar user" />
+  </div>
 </div>
 '
 vueCode='
@@ -144,29 +144,29 @@ showHtmlWarning />
 <code-example-tabs
 htmlCode='
 <div class="d-avatar d-avatar--xs">
-    <div class="d-avatar__canvas">
-        <svg>...</svg>
-    </div>
+  <div class="d-avatar__canvas">
+      <svg>...</svg>
+  </div>
 </div>
 <div class="d-avatar d-avatar--sm">
-    <div class="d-avatar__canvas">
-        <svg>...</svg>
-    </div>
+  <div class="d-avatar__canvas">
+      <svg>...</svg>
+  </div>
 </div>
 <div class="d-avatar d-avatar--md">
-    <div class="d-avatar__canvas">
-        <svg>...</svg>
-    </div>
+  <div class="d-avatar__canvas">
+      <svg>...</svg>
+  </div>
 </div>
 <div class="d-avatar d-avatar--lg">
-    <div class="d-avatar__canvas">
-        <svg>...</svg>
-    </div>
+  <div class="d-avatar__canvas">
+      <svg>...</svg>
+  </div>
 </div>
 <div class="d-avatar d-avatar--xl">
-    <div class="d-avatar__canvas">
-        <svg>...</svg>
-    </div>
+  <div class="d-avatar__canvas">
+      <svg>...</svg>
+  </div>
 </div>
 '
 vueCode='
@@ -190,16 +190,16 @@ showHtmlWarning />
 <code-example-tabs
 htmlCode='
 <div class="d-avatar d-avatar--group">
-    <div class="d-avatar__canvas">
-        <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
-    </div>
-    <span class="d-avatar__count"><span class="d-avatar__count-number">12</span></span>
+  <div class="d-avatar__canvas">
+      <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
+  </div>
+  <span class="d-avatar__count"><span class="d-avatar__count-number">12</span></span>
 </div>
 <div class="d-avatar d-avatar--group">
-    <div class="d-avatar__canvas">
-        <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
-    </div>
-    <span class="d-avatar__count"><span class="d-avatar__count-number">1</span></span>
+  <div class="d-avatar__canvas">
+      <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
+  </div>
+  <span class="d-avatar__count"><span class="d-avatar__count-number">1</span></span>
 </div>
 '
 vueCode='
@@ -232,14 +232,14 @@ Positions the [Presence](components/presence.html) component at each size.
 <code-example-tabs
 htmlCode='
 <div class="d-avatar d-avatar--{$size)">
-    <div class="d-avatar__canvas">
-        ...
-    </div>
-    <div class="d-avatar__presence">
-        <div class="d-presence d-avatar__presence d-avatar__presence--md"><!---->
-            <div class="d-presence__inner d-presence__inner--{$status}" />
-        </div>
-    </div>
+  <div class="d-avatar__canvas">
+      ...
+  </div>
+  <div class="d-avatar__presence">
+      <div class="d-presence d-avatar__presence d-avatar__presence--md"><!---->
+          <div class="d-presence__inner d-presence__inner--{$status}" />
+      </div>
+  </div>
 </div>
 '
 vueCode='

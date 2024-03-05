@@ -96,28 +96,28 @@ htmlCode='
 '
 vueCode='
 <dt-breadcrumbs 
-    :breadcrumbs="[
-    {
-      href: `#`,
-      label: `Root`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Current Page`,
-      selected: true,
-    },
+  :breadcrumbs="[
+  {
+    href: `#`,
+    label: `Root`,
+  },
+  {
+    href: `#`,
+    label: `Section`,
+  },
+  {
+    href: `#`,
+    label: `Section`,
+  },
+  {
+    href: `#`,
+    label: `Section`,
+  },
+  {
+    href: `#`,
+    label: `Current Page`,
+    selected: true,
+  },
   ]" />
 '
 showHtmlWarning />
@@ -150,49 +150,49 @@ showHtmlWarning />
 htmlCode='
 <nav class="d-breadcrumbs d-breadcrumbs--inverted" aria-label="inverted breadcrumb">
   <ol>
-      <li class="d-breadcrumbs__item">
-          <a href="#" class="d-link d-link--inverted">Root</a>
-      </li>
-      <li class="d-breadcrumbs__item">
-          <a href="#" class="d-link d-link--inverted">Section</a>
-      </li>
-      <li class="d-breadcrumbs__item">
-          <a href="#" class="d-link d-link--inverted">Section</a>
-      </li>
-      <li class="d-breadcrumbs__item">
-          <a href="#" class="d-link d-link--inverted">Section</a>
-      </li>
-      <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
-          <a href="#" class="d-link d-link--inverted" aria-current="location">Current Page</a>
-      </li>
+    <li class="d-breadcrumbs__item">
+        <a href="#" class="d-link d-link--inverted">Root</a>
+    </li>
+    <li class="d-breadcrumbs__item">
+        <a href="#" class="d-link d-link--inverted">Section</a>
+    </li>
+    <li class="d-breadcrumbs__item">
+        <a href="#" class="d-link d-link--inverted">Section</a>
+    </li>
+    <li class="d-breadcrumbs__item">
+        <a href="#" class="d-link d-link--inverted">Section</a>
+    </li>
+    <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
+        <a href="#" class="d-link d-link--inverted" aria-current="location">Current Page</a>
+    </li>
   </ol>
 </nav>
 '
 vueCode='
 <dt-breadcrumbs 
-    inverted
-    :breadcrumbs="[
-    {
-      href: `#`,
-      label: `Root`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Current Page`,
-      selected: true,
-    },
+  inverted
+  :breadcrumbs="[
+  {
+    href: `#`,
+    label: `Root`,
+  },
+  {
+    href: `#`,
+    label: `Section`,
+  },
+  {
+    href: `#`,
+    label: `Section`,
+  },
+  {
+    href: `#`,
+    label: `Section`,
+  },
+  {
+    href: `#`,
+    label: `Current Page`,
+    selected: true,
+  },
   ]" />
 '
 showHtmlWarning />

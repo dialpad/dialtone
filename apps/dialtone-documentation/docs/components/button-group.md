@@ -16,18 +16,18 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button-group
 <code-example-tabs
 htmlCode='
 <div role="group" class="d-btn-group d-btn-group--start" alignment="start">
-    <button type="button" class="base-button__button d-btn d-btn--primary">
-        <span class="d-btn__label base-button__label"> Confirm </span>
-    </button>
-    <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
-        <span class="d-btn__label base-button__label"> Cancel </span>
-    </button>
+  <button type="button" class="base-button__button d-btn d-btn--primary">
+    <span class="d-btn__label base-button__label"> Confirm </span>
+  </button>
+  <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
+    <span class="d-btn__label base-button__label"> Cancel </span>
+  </button>
 </div>
 '
 vueCode='
 <dt-button-group>
-    <dt-button importance="primary">Confirm</dt-button>
-    <dt-button importance="outlined">Cancel</dt-button>
+  <dt-button importance="primary">Confirm</dt-button>
+  <dt-button importance="outlined">Cancel</dt-button>
 </dt-button-group>
 '
 showHtmlWarning />
@@ -49,18 +49,18 @@ When aligned to `start`, the `primary` button is on the **left** side of the gro
 <code-example-tabs
 htmlCode='
 <div role="group" class="d-btn-group d-btn-group--start" alignment="start">
-    <button type="button" class="base-button__button d-btn d-btn--primary">
-        <span class="d-btn__label base-button__label"> Confirm </span>
-    </button>
-    <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
-        <span class="d-btn__label base-button__label"> Cancel </span>
-    </button>
+  <button type="button" class="base-button__button d-btn d-btn--primary">
+    <span class="d-btn__label base-button__label"> Confirm </span>
+  </button>
+  <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
+    <span class="d-btn__label base-button__label"> Cancel </span>
+  </button>
 </div>
 '
 vueCode='
 <dt-button-group>
-    <dt-button importance="primary">Confirm</dt-button>
-    <dt-button importance="outlined">Cancel</dt-button>
+  <dt-button importance="primary">Confirm</dt-button>
+  <dt-button importance="outlined">Cancel</dt-button>
 </dt-button-group>
 '
 showHtmlWarning />
@@ -78,12 +78,12 @@ When aligned to `end`, the `primary` button is on the **right** side of the grou
 <code-example-tabs
 htmlCode='
 <div role="group" class="d-btn-group d-btn-group--end">
-    <button type="button" class="base-button__button d-btn d-btn--primary">
-        <span class="d-btn__label base-button__label"> Confirm </span>
-    </button>
-    <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
-        <span class="d-btn__label base-button__label"> Cancel </span>
-    </button>
+  <button type="button" class="base-button__button d-btn d-btn--primary">
+    <span class="d-btn__label base-button__label"> Confirm </span>
+  </button>
+  <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
+    <span class="d-btn__label base-button__label"> Cancel </span>
+  </button>
 </div>
 '
 vueCode='
@@ -107,18 +107,18 @@ When set to `space-between`, the elements are evenly distributed within the row,
 <code-example-tabs
 htmlCode='
 <div role="group" class="d-btn-group d-btn-group--space-between">
-    <button type="button" class="base-button__button d-btn d-btn--primary">
-        <span class="d-btn__label base-button__label"> Confirm </span>
-    </button>
-    <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
-        <span class="d-btn__label base-button__label"> Cancel </span>
-    </button>
+  <button type="button" class="base-button__button d-btn d-btn--primary">
+    <span class="d-btn__label base-button__label"> Confirm </span>
+  </button>
+  <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
+    <span class="d-btn__label base-button__label"> Cancel </span>
+  </button>
 </div>
 '
 vueCode='
 <dt-button-group alignment="space-between">
-    <dt-button importance="primary">Confirm</dt-button>
-    <dt-button importance="outlined">Cancel</dt-button>
+  <dt-button importance="primary">Confirm</dt-button>
+  <dt-button importance="outlined">Cancel</dt-button>
 </dt-button-group>
 '
 showHtmlWarning />

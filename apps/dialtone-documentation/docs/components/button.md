@@ -506,13 +506,13 @@ vueCode='
 <!-- icon-position can be "right/top/bottom" , 
      no icon-position will be left -->
 <dt-button importance="outlined" icon-position="right">
-    <template #icon>
-        <dt-icon
-            name="phone"
-            size="300"
-        />
-    </template>
-    Label
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
+  Label
 </dt-button>
 '
 showHtmlWarning />
@@ -542,30 +542,30 @@ htmlCode='
 vueCode='
 <!-- circle clear-->
 <dt-button circle importance="clear">
-    <template #icon>
-        <dt-icon
-            name="phone"
-            size="300"
-        />
-    </template>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
 </dt-button>
 <!-- circle outlined-->
 <dt-button circle importance="outlined">
-    <template #icon>
-        <dt-icon
-            name="phone"
-            size="300"
-        />
-    </template>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
 </dt-button>
 <!-- circle outlined danger-->
 <dt-button circle kind="danger" importance="outlined">
-    <template #icon>
-        <dt-icon
-            name="phone"
-            size="300"
-        />
-    </template>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+ </template>
 </dt-button>
 '
 showHtmlWarning />
@@ -587,12 +587,12 @@ htmlCode='
 vueCode='
 <!-- circle inverted clear-->
 <dt-button circle kind="inverted" importance="clear">
-    <template #icon>
-        <dt-icon
-            name="phone"
-            size="300"
-        />
-    </template>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+     />
+  </template>
 </dt-button>
 '
 showHtmlWarning />
@@ -614,21 +614,21 @@ htmlCode='
 vueCode='
 <!-- clear-->
 <dt-button importance="clear">
-    <template #icon>
-        <dt-icon
-            name="phone"
-            size="300"
-        />
-    </template>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
 </dt-button>
 <!-- outlined-->
 <dt-button importance="outlined">
-    <template #icon>
-        <dt-icon
-            name="phone"
-            size="300"
-        />
-    </template>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
 </dt-button>
 '
 showHtmlWarning />
