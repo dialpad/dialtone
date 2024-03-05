@@ -227,7 +227,9 @@ export default {
     },
 
     /**
-     * Alt attribute of the image
+     * Alt attribute of the image, required if imageSrc is provided.
+     * Can be set to '' (empty string) if the image is described
+     * in text nearby
      */
     imageAlt: {
       type: String,
