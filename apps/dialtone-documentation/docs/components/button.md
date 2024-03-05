@@ -558,8 +558,26 @@ vueCode='
     />
   </template>
 </dt-button>
+<!-- circle clear danger-->
+<dt-button circle kind="danger" importance="clear">
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
+</dt-button>
 <!-- circle outlined danger-->
 <dt-button circle kind="danger" importance="outlined">
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+ </template>
+</dt-button>
+<!-- circle danger-->
+<dt-button circle kind="danger">
   <template #icon>
     <dt-icon
       name="phone"
