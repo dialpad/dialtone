@@ -2,6 +2,7 @@
   <editor-content
     :editor="editor"
     data-qa="dt-rich-text-editor"
+    class="dt-rich-text-editor"
   />
 </template>
 
@@ -406,7 +407,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
   .ProseMirror p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
     float: left;
@@ -432,5 +433,9 @@ export default {
   .dt-rich-text-editor--code-block {
     background: var(--dt-color-surface-secondary);
     padding: var(--dt-space-400);
+  }
+
+  .dt-rich-text-editor {
+    overflow: hidden;
   }
 </style>
