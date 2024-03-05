@@ -1,3 +1,20 @@
+## [9.15.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.15.1...dialtone/v9.15.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* avatar image alt repeated ([#181](https://github.com/dialpad/dialtone/issues/181)) ([d0177be](https://github.com/dialpad/dialtone/commit/d0177be3366a8258a9890f71e090a4021fe3f98c))
+* **Feed Item Row:** accessibility error ([#183](https://github.com/dialpad/dialtone/issues/183)) ([036176c](https://github.com/dialpad/dialtone/commit/036176cd7de3cc65cf3ff4ed7ab8cbd768148db6))
+* long dt chip ([#179](https://github.com/dialpad/dialtone/issues/179)) ([08c68aa](https://github.com/dialpad/dialtone/commit/08c68aae1f5f68f47cdad7239e748a06ee4e6ad9))
+* **Message Input:** color contrast on cancel button ([#182](https://github.com/dialpad/dialtone/issues/182)) ([535733d](https://github.com/dialpad/dialtone/commit/535733d1504e545406d71efdc85e9550e3ccea5a))
+* **Root Layout:** focus ring on scrollable regions ([#180](https://github.com/dialpad/dialtone/issues/180)) ([52b8e27](https://github.com/dialpad/dialtone/commit/52b8e2739859ad8f45bc9bead436718d840c0a5d))
+
+
+### Documentation
+
+* add all token categories in a single page ([#176](https://github.com/dialpad/dialtone/issues/176)) ([b225e03](https://github.com/dialpad/dialtone/commit/b225e0366660e0ec722ecca77b676e3a70f46cc8))
+* remove leftover from code-example-tabs component ([#184](https://github.com/dialpad/dialtone/issues/184)) ([7f91483](https://github.com/dialpad/dialtone/commit/7f91483885a29fa8a799ab99ceff09640a775386))
+
 ## [9.15.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.15.0...dialtone/v9.15.1) (2024-02-28)
 
 
