@@ -30,7 +30,7 @@
     </thead>
     <tbody>
       <tr
-        v-for="({ exampleValue, exampleName, name, tokenValue, description }) in tokensProcessed"
+        v-for="({ exampleValue, exampleName, name, tokenValue, description }) in filteredTokens"
         :key="name"
       >
         <td>
@@ -123,6 +123,11 @@ export default {
       validator: (v) => Object.keys(FORMAT_MAP).includes(v),
     },
 
+    searchCriteria: {
+      type: String,
+      default: null,
+    },
+
     theme: {
       type: String,
       default: 'light',
@@ -159,6 +164,19 @@ export default {
   computed: {
     tokensProcessed () {
       return this.processedTokens[this.format][this.theme];
+    },
+
+    /**
+     * Search tokens by name, value, description or category name
+    */
+    filteredTokens () {
+      if (!this.searchCriteria) return this.tokensProcessed;
+      const regex = new RegExp(this.searchCriteria, 'i');
+      return this.tokensProcessed.filter((token) => {
+        if (regex.test(this.category)) return true;
+        const { name, tokenValue, description } = token;
+        return regex.test(name) || regex.test(tokenValue) || regex.test(description);
+      });
     },
 
     formatSelectMenuOptions () {
