@@ -1,3 +1,13 @@
+## [3.110.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.110.1...dialtone-vue3/v3.110.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* avatar image alt repeated ([#181](https://github.com/dialpad/dialtone/issues/181)) ([d0177be](https://github.com/dialpad/dialtone/commit/d0177be3366a8258a9890f71e090a4021fe3f98c))
+* **Feed Item Row:** accessibility error ([#183](https://github.com/dialpad/dialtone/issues/183)) ([036176c](https://github.com/dialpad/dialtone/commit/036176cd7de3cc65cf3ff4ed7ab8cbd768148db6))
+* long dt chip ([#179](https://github.com/dialpad/dialtone/issues/179)) ([08c68aa](https://github.com/dialpad/dialtone/commit/08c68aae1f5f68f47cdad7239e748a06ee4e6ad9))
+* **Message Input:** color contrast on cancel button ([#182](https://github.com/dialpad/dialtone/issues/182)) ([535733d](https://github.com/dialpad/dialtone/commit/535733d1504e545406d71efdc85e9550e3ccea5a))
+
 ## [3.110.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.110.0...dialtone-vue3/v3.110.1) (2024-02-28)
 
 
