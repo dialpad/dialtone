@@ -158,6 +158,7 @@ export default {
 
   &__reaction-number {
     font: var(--dt-typography-body-small);
+    font-variant: tabular-nums;
   }
 }
 </style>
