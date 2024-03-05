@@ -102,19 +102,6 @@ export const CATEGORY_MAP = {
   component: ['avatar', 'badge', 'checkbox', 'icon', 'inputs', 'action'],
 };
 
-const COMPOSED_TOKENS_CATEGORIES = [
-  {
-    category: 'typography',
-    format: 'CSS',
-    getTokensFn: getComposedTypographyTokens,
-  },
-  {
-    category: 'shadow',
-    format: 'CSS',
-    getTokensFn: getComposedShadowTokens,
-  },
-];
-
 export default {
   name: 'TokenTable',
 
@@ -148,28 +135,30 @@ export default {
     },
   },
 
+  data () {
+    return {
+      processedTokens: {
+        CSS: {
+          light: [],
+          dark: [],
+        },
+
+        Android: {
+          light: [],
+          dark: [],
+        },
+
+        iOS: {
+          light: [],
+          dark: [],
+        },
+      },
+    };
+  },
+
   computed: {
     tokensProcessed () {
-      const tokens = [];
-      Object.entries(tokensJson[this.theme])
-        .filter(([key, value]) => CATEGORY_MAP[this.category].includes(key.split('/')[0]) &&
-          value[FORMAT_MAP.CSS] &&
-          (!this.tokenList || this.tokenList[value[FORMAT_MAP.CSS].name]))
-        .forEach(([_, value]) => {
-          const { name, value: tokenValue, description } = value[FORMAT_MAP[this.format]] || {};
-          const tokenDescription = this.tokenList ? this.tokenList[name].description : description;
-          // exclude base tokens
-          if (name && !name.endsWith('base)') && !name.endsWith('root)')) {
-            const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
-            tokens.push({ exampleValue, exampleName, name, tokenValue, description: tokenDescription });
-          }
-        });
-      const composedTokens = [];
-      if (COMPOSED_TOKENS_CATEGORIES.some(item => item.category === this.category && item.format === this.format)) {
-        composedTokens.push(...COMPOSED_TOKENS_CATEGORIES
-          .find(item => item.category === this.category).getTokensFn(this.theme));
-      }
-      return [...composedTokens, ...tokens];
+      return this.processedTokens[this.format][this.theme];
     },
 
     formatSelectMenuOptions () {
@@ -179,12 +168,64 @@ export default {
     },
   },
 
+  beforeMount () {
+    this.addTokens();
+    this.addComposedTokens();
+  },
+
   methods: {
     remToPixels (value) {
       if (this.category !== 'size' && this.category !== 'space') return;
       return `${parseFloat(value.replace('rem', '')) * 10}px`;
     },
 
+    isBaseToken (name) {
+      return name.endsWith('base)') || name.endsWith('root)');
+    },
+
+    tokenInList (name) {
+      return this.tokenList && this.tokenList[name];
+    },
+
+    addTokens () {
+      for (const format in this.processedTokens) {
+        for (const theme of THEMES) {
+          const tokens = [];
+          Object.entries(tokensJson[theme.value])
+            .filter(([key, value]) => CATEGORY_MAP[this.category].includes(key.split('/')[0]) &&
+          value[FORMAT_MAP.CSS] &&
+          (!this.tokenList || this.tokenList[value[FORMAT_MAP.CSS].name]))
+            .forEach(([_, value]) => {
+              const { name, value: tokenValue, description } = value[FORMAT_MAP[format]] || {};
+              const tokenDescription = this.tokenInList(name) ? this.tokenList[name].description : description;
+              // exclude base tokens
+              if (name && !this.isBaseToken(name)) {
+                const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
+                tokens.push({ exampleValue, exampleName, name, tokenValue, description: tokenDescription });
+              }
+            });
+          this.processedTokens[format][theme.value] = [...tokens];
+        }
+      }
+    },
+
+    addComposedTokens () {
+      if (this.category === 'typography') {
+        for (const theme of THEMES) {
+          this.processedTokens.CSS[theme.value] = [
+            ...getComposedTypographyTokens(),
+            ...this.processedTokens.CSS[theme.value],
+          ];
+        }
+      } else if (this.category === 'shadow') {
+        for (const theme of THEMES) {
+          this.processedTokens.CSS[theme.value] = [
+            ...getComposedShadowTokens(theme.value),
+            ...this.processedTokens.CSS[theme.value],
+          ];
+        }
+      }
+    },
   },
 };
 </script>
