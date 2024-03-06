@@ -56,7 +56,7 @@ htmlCode='
       <h2 class="d-notice__title" id="info-alert-title">...</h2>
       <p class="d-notice__message" id="info-alert-desc">...</p>
     </div>
-    <div class="d-notice__actions">...</div>
+  <div class="d-notice__actions">...</div>
 </aside>
 
 <aside class="d-banner d-banner--error" role="alert" aria-hidden="false">...</aside>

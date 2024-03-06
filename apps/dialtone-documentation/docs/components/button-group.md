@@ -88,8 +88,8 @@ htmlCode='
 '
 vueCode='
 <dt-button-group alignment="end">
-    <dt-button importance="primary">Confirm</dt-button>
-    <dt-button importance="outlined">Cancel</dt-button>
+  <dt-button importance="primary">Confirm</dt-button>
+  <dt-button importance="outlined">Cancel</dt-button>
 </dt-button-group>
 '
 showHtmlWarning />

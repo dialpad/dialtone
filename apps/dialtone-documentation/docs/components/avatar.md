@@ -101,15 +101,15 @@ showHtmlWarning />
 htmlCode='
 <div class="d-avatar d-avatar--{$size} d-avatar--{$color}">
   <div class="d-avatar__canvas">
-      <span class="d-avatar__initials">DP</span>
+    <span class="d-avatar__initials">DP</span>
   </div>
 </div>
 '
 vueCode='
 <!-- colors 100 to 1800 are valid -->
 <dt-avatar
-    full-name="DP"
-    color="100"
+  full-name="DP"
+  color="100"
 />
 '
 showHtmlWarning />

@@ -290,12 +290,7 @@ All button styles and variations appear the same when disabled.
 <code-well-header>
   <div class="d-d-flex d-flow8">
     <div>
-      <button class="d-btn" type="button" disabled><span class="d-btn__label">Place call</span></button>
-    </div>
-    <div>
-      <span class="d-c-not-allowed">
-        <button class="d-btn d-btn--disabled" type="button" aria-disabled="true"><span class="d-btn__label">Place call</span></button>
-      </span>
+      <button type="button" disabled="disabled" class="base-button__button d-btn d-btn--primary" ><span class="d-btn__label base-button__label">Place call</span></button>
     </div>
   </div>
 </code-well-header>
@@ -574,7 +569,7 @@ vueCode='
       name="phone"
       size="300"
     />
- </template>
+  </template>
 </dt-button>
 <!-- circle danger-->
 <dt-button circle kind="danger">
@@ -583,7 +578,7 @@ vueCode='
       name="phone"
       size="300"
     />
- </template>
+  </template>
 </dt-button>
 '
 showHtmlWarning />

@@ -97,27 +97,27 @@ htmlCode='
 vueCode='
 <dt-breadcrumbs 
   :breadcrumbs="[
-  {
-    href: `#`,
-    label: `Root`,
-  },
-  {
-    href: `#`,
-    label: `Section`,
-  },
-  {
-    href: `#`,
-    label: `Section`,
-  },
-  {
-    href: `#`,
-    label: `Section`,
-  },
-  {
-    href: `#`,
-    label: `Current Page`,
-    selected: true,
-  },
+    {
+      href: `#`,
+      label: `Root`,
+    },
+    {
+      href: `#`,
+      label: `Section`,
+    },
+    {
+      href: `#`,
+      label: `Section`,
+    },
+    {
+      href: `#`,
+      label: `Section`,
+    },
+    {
+      href: `#`,
+      label: `Current Page`,
+      selected: true,
+    },
   ]" />
 '
 showHtmlWarning />
@@ -172,27 +172,27 @@ vueCode='
 <dt-breadcrumbs 
   inverted
   :breadcrumbs="[
-  {
-    href: `#`,
-    label: `Root`,
-  },
-  {
-    href: `#`,
-    label: `Section`,
-  },
-  {
-    href: `#`,
-    label: `Section`,
-  },
-  {
-    href: `#`,
-    label: `Section`,
-  },
-  {
-    href: `#`,
-    label: `Current Page`,
-    selected: true,
-  },
+    {
+      href: `#`,
+      label: `Root`,
+    },
+    {
+      href: `#`,
+      label: `Section`,
+    },
+    {
+      href: `#`,
+      label: `Section`,
+    },
+    {
+      href: `#`,
+      label: `Section`,
+    },
+    {
+      href: `#`,
+      label: `Current Page`,
+      selected: true,
+    },
   ]" />
 '
 showHtmlWarning />
