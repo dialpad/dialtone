@@ -1,3 +1,15 @@
+# [3.111.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.110.2...dialtone-vue3/v3.111.0) (2024-03-06)
+
+
+### Bug Fixes
+
+* lower aggression of feed-item-row deep selector ([#189](https://github.com/dialpad/dialtone/issues/189)) ([de20342](https://github.com/dialpad/dialtone/commit/de20342dc0e831f64c704d84786e293423fbb02d))
+
+
+### Features
+
+* **Emoji Row, Time Pill:** feed time pill and emoji style updates ([#187](https://github.com/dialpad/dialtone/issues/187)) ([cd39cbb](https://github.com/dialpad/dialtone/commit/cd39cbb26db054810ee2b8ed42b610157ba90ca1))
+
 ## [3.110.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.110.1...dialtone-vue3/v3.110.2) (2024-03-05)
 
 
