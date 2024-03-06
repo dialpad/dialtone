@@ -22,6 +22,7 @@
           v-if="shouldShowAvatar"
           avatar-class="dt-recipe-callbox--avatar"
           :image-src="avatarSrc"
+          image-alt=""
           :full-name="avatarFullName"
           :seed="avatarSeed"
           :clickable="clickable"
@@ -121,8 +122,8 @@ export default {
     },
 
     /**
-     * Avatar's full name, used as alt attribute for image and
-     * to extract initials to display in avatar if `avatarSrc` is empty.
+     * Avatar's full name, used to extract initials
+     * to display if `avatarSrc` is empty.
      */
     avatarFullName: {
       type: String,

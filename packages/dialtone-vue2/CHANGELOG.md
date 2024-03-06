@@ -1,3 +1,25 @@
+# [2.118.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.117.2...dialtone-vue2/v2.118.0) (2024-03-06)
+
+
+### Bug Fixes
+
+* lower aggression of feed-item-row deep selector ([#189](https://github.com/dialpad/dialtone/issues/189)) ([de20342](https://github.com/dialpad/dialtone/commit/de20342dc0e831f64c704d84786e293423fbb02d))
+
+
+### Features
+
+* **Emoji Row, Time Pill:** feed time pill and emoji style updates ([#187](https://github.com/dialpad/dialtone/issues/187)) ([cd39cbb](https://github.com/dialpad/dialtone/commit/cd39cbb26db054810ee2b8ed42b610157ba90ca1))
+
+## [2.117.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.117.1...dialtone-vue2/v2.117.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* avatar image alt repeated ([#181](https://github.com/dialpad/dialtone/issues/181)) ([d0177be](https://github.com/dialpad/dialtone/commit/d0177be3366a8258a9890f71e090a4021fe3f98c))
+* **Feed Item Row:** accessibility error ([#183](https://github.com/dialpad/dialtone/issues/183)) ([036176c](https://github.com/dialpad/dialtone/commit/036176cd7de3cc65cf3ff4ed7ab8cbd768148db6))
+* long dt chip ([#179](https://github.com/dialpad/dialtone/issues/179)) ([08c68aa](https://github.com/dialpad/dialtone/commit/08c68aae1f5f68f47cdad7239e748a06ee4e6ad9))
+* **Message Input:** color contrast on cancel button ([#182](https://github.com/dialpad/dialtone/issues/182)) ([535733d](https://github.com/dialpad/dialtone/commit/535733d1504e545406d71efdc85e9550e3ccea5a))
+
 ## [2.117.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.117.0...dialtone-vue2/v2.117.1) (2024-02-28)
 
 

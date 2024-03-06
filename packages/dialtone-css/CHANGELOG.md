@@ -1,3 +1,11 @@
+## [8.27.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.27.0...dialtone-css/v8.27.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* long dt chip ([#179](https://github.com/dialpad/dialtone/issues/179)) ([08c68aa](https://github.com/dialpad/dialtone/commit/08c68aae1f5f68f47cdad7239e748a06ee4e6ad9))
+* **Root Layout:** focus ring on scrollable regions ([#180](https://github.com/dialpad/dialtone/issues/180)) ([52b8e27](https://github.com/dialpad/dialtone/commit/52b8e2739859ad8f45bc9bead436718d840c0a5d))
+
 # [8.27.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.26.1...dialtone-css/v8.27.0) (2024-02-27)
 
 

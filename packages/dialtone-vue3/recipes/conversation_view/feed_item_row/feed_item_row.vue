@@ -20,6 +20,7 @@
           <dt-avatar
             :full-name="displayName"
             :image-src="avatarImageUrl"
+            image-alt=""
             :seed="avatarSeed"
           />
         </slot>
@@ -142,7 +143,8 @@ export default {
     },
 
     /**
-     * Show the avatar of the user, if this is not passed in, the initials would display
+     * Optional avatar image url.
+     * If not provided it will use extracted initials from displayName.
      */
     avatarImageUrl: {
       type: String,
@@ -363,6 +365,11 @@ export default {
     padding-left: var(--dt-space-300);
   }
 
+  &__threading {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+  }
+
   &__left-time {
     color: var(--dt-color-foreground-tertiary);
     font-size: var(--dt-font-size-100);
@@ -377,28 +384,28 @@ export default {
     right: var(--dt-space-450);
   }
 
-  &:deep(.dt-item-layout) {
+  &:deep(> .dt-item-layout) {
     font: var(--dt-typography-body-compact-base);
     min-height: initial;
     padding: 0px;
   }
 
-  &:deep(.dt-item-layout--left) {
+  &:deep(> .dt-item-layout > .dt-item-layout--left) {
     align-self: flex-start;
     text-align: end;
     display: block;
     padding-right: var(--dt-space-300);
     padding-left: var(--dt-space-0);
-    /* min-width = avatar width + padding */
+    // min-width = avatar width + padding
     min-width: calc(var(--dt-space-600) + var(--dt-space-300));
   }
 
-  &:deep(.dt-item-layout--right) {
+  &:deep(> .dt-item-layout > .dt-item-layout--right) {
     padding: 0;
     min-width: initial;
   }
 
-  &:deep(.dt-item-layout--bottom) {
+  &:deep(> .dt-item-layout > .dt-item-layout--bottom) {
     display: flex;
     flex-direction: column;
     margin-top: 0;

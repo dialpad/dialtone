@@ -98,11 +98,10 @@ describe('DtRecipeCallbox Tests', () => {
         });
       });
 
-      describe('When avatarSrc and avatarFullName are provided', () => {
+      describe('When avatarSrc is provided', () => {
         it('Should render the image', () => {
           mockProps = {
             avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
-            avatarFullName: MOCK_AVATAR_FULL_NAME,
           };
 
           updateWrapper();
@@ -203,7 +202,6 @@ describe('DtRecipeCallbox Tests', () => {
         beforeEach(async () => {
           mockProps = {
             avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
-            avatarFullName: MOCK_AVATAR_FULL_NAME,
           };
           mockListeners = { click: MOCK_CALLBOX_STUB };
 
@@ -244,7 +242,6 @@ describe('DtRecipeCallbox Tests', () => {
         beforeEach(async () => {
           mockProps = {
             avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
-            avatarFullName: MOCK_AVATAR_FULL_NAME,
             clickable: true,
           };
           mockListeners = { click: MOCK_CALLBOX_STUB };

@@ -11,7 +11,7 @@
       <button
         class="dt-contact-info__left"
         data-qa="contact-info-left"
-        :aria-labelledby="avatarAriaLabel"
+        :aria-labelledby="avatarLabelledBy"
         @click="avatarClick"
       >
         <span
@@ -25,6 +25,7 @@
             :seed="avatar.seed"
             :full-name="avatar.fullName"
             :image-src="avatar.src"
+            image-alt=""
             :icon-name="avatarIcon"
             :overlay-icon="avatar.icon"
             :overlay-text="avatar.text"
@@ -36,6 +37,7 @@
           :size="avatarSize"
           :full-name="avatarFullName"
           :image-src="avatarSrc"
+          image-alt=""
           :icon-name="avatarIcon"
           :seed="avatarSeed"
           :presence="presence"
@@ -48,12 +50,14 @@
         <slot name="header" />
       </div>
     </template>
+
     <template #subtitle>
       <div data-qa="contact-info-subtitle">
         <!-- @slot Slot for subtitle information -->
         <slot name="subtitle" />
       </div>
     </template>
+
     <template
       v-if="$slots.bottom"
       #bottom
@@ -63,6 +67,7 @@
         <slot name="bottom" />
       </div>
     </template>
+
     <template
       v-if="$slots.right"
       #right
@@ -127,8 +132,8 @@ export default {
     },
 
     /**
-     * Avatar's full name, used as alt attribute for image and
-     * to extract initials to display in avatar if `avatarSrc` and `avatarIcon` are empty.
+     * Avatar's full name, used to extract initials
+     * to display in avatar if `avatarSrc` and `avatarIcon` are empty.
      */
     avatarFullName: {
       type: String,
@@ -153,9 +158,9 @@ export default {
     },
 
     /**
-     * The aria label of the avatar
+     * The aria-labelledby of the button containing avatars
      */
-    avatarAriaLabel: {
+    avatarLabelledBy: {
       type: String,
       default: '',
     },
@@ -175,7 +180,7 @@ export default {
      * Showing multiple avatars in contact info.
      * The props of array items are: <br>
      * `src` - avatar image url (optional) <br>
-     * `fullName` - full name, used as alt attribute for image and extract initials to display in avatar<br>
+     * `fullName` - full name, used to extract initials to display in avatar<br>
      *  if `avatarSrc` and `avatarIcon` are empty<br>
      * `seed` - determines uniqueness of avatar background <br>
      * `text` - text that overlays the avatar (optional) <br>

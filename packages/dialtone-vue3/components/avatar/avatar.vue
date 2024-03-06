@@ -4,7 +4,6 @@
     :id="id"
     :class="avatarClasses"
     data-qa="dt-avatar"
-    :aria-label="buttonAriaLabel"
     @click="handleClick"
   >
     <div
@@ -21,11 +20,12 @@
         class="d-avatar__image"
         data-qa="dt-avatar-image"
         :src="imageSrc"
-        :alt="imageAlt || fullName"
+        :alt="imageAlt"
       >
       <dt-icon
         v-else-if="iconName"
         :name="iconName"
+        :aria-label="iconAriaLabel"
         :size="iconSize || AVATAR_ICON_SIZES[size]"
         :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
         data-qa="dt-avatar-icon"
@@ -227,12 +227,13 @@ export default {
     },
 
     /**
-     * Alt attribute of the image, by default
-     * it'd be the full name
+     * Alt attribute of the image, required if imageSrc is provided.
+     * Can be set to '' (empty string) if the image is described
+     * in text nearby
      */
     imageAlt: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -255,7 +256,7 @@ export default {
     },
 
     /**
-     * Full name used to extract initials and set alt attribute.
+     * Full name used to extract initials.
      */
     fullName: {
       type: String,
@@ -269,6 +270,15 @@ export default {
     clickable: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Descriptive label for the icon.
+     * To avoid a11y issues, set this prop if clickable and iconName are set.
+     */
+    iconAriaLabel: {
+      type: String,
+      default: undefined,
     },
   },
 
@@ -335,19 +345,27 @@ export default {
     showImage () {
       return this.imageLoadedSuccessfully !== false && this.imageSrc;
     },
-
-    buttonAriaLabel () {
-      if (!this.clickable) return undefined;
-
-      return this.fullName || this.imageAlt || this.$attrs['aria-label'];
-    },
   },
 
   watch: {
     fullName: {
       immediate: true,
-      handler (newName) {
-        this.formatInitials(newName);
+      handler () {
+        this.formatInitials();
+      },
+    },
+
+    size: {
+      immediate: true,
+      handler () {
+        this.formatInitials();
+      },
+    },
+
+    group: {
+      immediate: true,
+      handler () {
+        this.formatInitials();
       },
     },
 
@@ -375,8 +393,8 @@ export default {
       el.addEventListener('error', () => this._erroredImageEventHandler(el), { once: true });
     },
 
-    formatInitials (string) {
-      const initials = extractInitialsFromName(string);
+    formatInitials () {
+      const initials = extractInitialsFromName(this.fullName);
 
       if (this.validatedSize === 'xs') {
         this.formattedInitials = '';
@@ -402,7 +420,7 @@ export default {
     },
 
     validateProps () {
-      if (this.imageSrc && !(this.fullName || this.imageAlt)) {
+      if (this.imageSrc && this.imageAlt === undefined) {
         throw new Error('full-name or image-alt must be set if image-src is provided');
       }
     },

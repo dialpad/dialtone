@@ -10,6 +10,7 @@
           :size="size"
           full-name="Avatar Image"
           :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
         />
       </div>
     </div>
@@ -48,6 +49,7 @@
           size="md"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
           :presence="state"
         />
       </div>
@@ -60,6 +62,7 @@
           size="xl"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
           overlay-icon="hear"
         />
         <dt-avatar
@@ -67,6 +70,7 @@
           size="xl"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
           overlay-text="+3"
         />
       </div>
@@ -82,13 +86,14 @@
         <dt-avatar
           :seed="$attrs.seed"
           icon-name="user"
-          aria-label="user icon avatar"
+          icon-aria-label="user icon"
           clickable
         />
         <dt-avatar
           :seed="$attrs.seed"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
           clickable
         />
       </div>
@@ -110,6 +115,7 @@
           :seed="$attrs.seed"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
           :group="100"
         />
       </div>

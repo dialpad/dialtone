@@ -4,10 +4,16 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Unknown contact (phone number only) with attestation
       </p>
-      <dt-recipe-contact-info avatar-icon="user">
+      <dt-recipe-contact-info
+        avatar-labelled-by="contact-number1"
+        avatar-icon="user"
+      >
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
-            <div class="d-fs-200 d-fw-bold d-mr4">
+            <div
+              id="contact-number1"
+              class="d-fs-200 d-fw-bold d-mr4"
+            >
               +1 (415) 123-4567
             </div>
             <dt-icon
@@ -25,10 +31,16 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Unknown contact with "marked as spam" button
       </p>
-      <dt-recipe-contact-info avatar-icon="user">
+      <dt-recipe-contact-info
+        avatar-labelled-by="contact-number2"
+        avatar-icon="user"
+      >
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
-            <div class="d-fs-200 d-fw-bold d-mr4">
+            <div
+              id="contact-number2"
+              class="d-fs-200 d-fw-bold d-mr4"
+            >
               +1 (415) 123-4567
             </div>
           </div>
@@ -51,12 +63,19 @@
       <dt-button
         importance="clear"
         kind="muted"
+        aria-labelledby="contact-name1"
         @click="$attrs.onGroupContactClick"
       >
-        <dt-recipe-contact-info avatar-icon="user">
+        <dt-recipe-contact-info
+          avatar-labelled-by="contact-name1"
+          avatar-icon="user"
+        >
           <template #header>
             <div class="d-d-flex d-ai-center d-mb2">
-              <div class="d-fs-200 d-fw-bold d-mr4">
+              <div
+                id="contact-name1"
+                class="d-fs-200 d-fw-bold d-mr4"
+              >
                 Joseph Lumaban
               </div>
             </div>
@@ -90,10 +109,16 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Group contact with transfer info
       </p>
-      <dt-recipe-contact-info avatar-icon="user">
+      <dt-recipe-contact-info
+        avatar-labelled-by="contact-name2"
+        avatar-icon="user"
+      >
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
-            <div class="d-fs-200 d-fw-bold d-mr4">
+            <div
+              id="contact-name2"
+              class="d-fs-200 d-fw-bold d-mr4"
+            >
               Joseph Lumaban
             </div>
           </div>
@@ -129,10 +154,16 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Admin view / listening in
       </p>
-      <dt-recipe-contact-info :avatar-list="adminListenInAvatars">
+      <dt-recipe-contact-info
+        avatar-labelled-by="contact-names1"
+        :avatar-list="adminListenInAvatars"
+      >
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
-            <div class="d-fw-bold d-fs-200">
+            <div
+              id="contact-names1"
+              class="d-fw-bold d-fs-200"
+            >
               Joseph Lumaban & Justin H.
             </div>
             <div class="d-fs-200">
@@ -171,9 +202,13 @@
       <dt-recipe-contact-info
         :avatar-full-name="$attrs.avatarFullName"
         :avatar-seed="$attrs.avatarSeed"
+        avatar-labelled-by="contact-name3"
       >
         <template #header>
-          <div class="d-fw-bold d-fs-200">
+          <div
+            id="contact-name"
+            class="d-fw-bold d-fs-200"
+          >
             Natalie Woods
           </div>
         </template>
@@ -228,10 +263,16 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Group call
       </p>
-      <dt-recipe-contact-info :avatar-list="groupCallAvatars">
+      <dt-recipe-contact-info
+        avatar-labelled-by="group-name"
+        :avatar-list="groupCallAvatars"
+      >
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
-            <div class="d-fw-bold d-fs-200">
+            <div
+              id="group-name"
+              class="d-fw-bold d-fs-200"
+            >
               Group Call
             </div>
           </div>
