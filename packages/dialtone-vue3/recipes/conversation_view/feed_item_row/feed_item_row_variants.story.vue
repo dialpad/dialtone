@@ -193,6 +193,70 @@
         </dt-recipe-feed-item-row>
       </ul>
     </div>
+    <div>
+      <h3>Feed item pill within</h3>
+      <ul class="d-py8">
+        <dt-recipe-feed-item-row
+          ref="feedItemRowFade"
+          :show-header="false"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
+          :is-active="true"
+          :state="fadeState"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
+        >
+          <dt-recipe-feed-item-pill
+            default-toggled
+            title="Ben called you"
+            icon-name="phone-outgoing"
+            wrapper-class="d-w628"
+            border-color="ai"
+          >
+            <template #subtitle>
+              Lasted 8 min • Ended at 11:56 AM
+            </template>
+            <template #right>
+              <div>
+                <dt-button
+                  aria-label="Open external link"
+                  kind="muted"
+                  importance="clear"
+                  :circle="true"
+                  @click.stop=""
+                >
+                  <template #icon>
+                    <dt-icon
+                      name="external-link"
+                      size="300"
+                    />
+                  </template>
+                </dt-button>
+              </div>
+            </template>
+            <template #content>
+              <div class="d-p16">
+                <p>
+                  The agent from Dialpad called to follow up on a support ticket
+                  that Jeff was handling for them regarding Dialpad CTI. They apologized
+                  for calling outside of the requested time and expressed that they had
+                  asked the team to look into the issue and would email them after the call.
+                </p>
+                <p class="d-fs-100 d-mt12">
+                  <strong>Actions items</strong>
+                </p>
+                <p class="d-d-flex">
+                  <strong class="d-mr4">1. </strong>
+                  The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
+                </p>
+              </div>
+            </template>
+          </dt-recipe-feed-item-pill>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
   </dt-stack>
 </template>
 
@@ -200,6 +264,7 @@
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 
 import { DtRecipeEmojiRow } from '../emoji_row';
+import { DtRecipeFeedItemPill } from '../feed_pill';
 import { DtStack } from '@/components/stack';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
@@ -214,6 +279,7 @@ export default {
   components: {
     DtRecipeEmojiRow,
     DtRecipeFeedItemRow,
+    DtRecipeFeedItemPill,
     DtStack,
     DtAvatar,
     DtIcon,
