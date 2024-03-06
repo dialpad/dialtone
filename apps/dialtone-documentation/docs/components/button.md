@@ -290,7 +290,7 @@ All button styles and variations appear the same when disabled.
 <code-well-header>
   <div class="d-d-flex d-flow8">
     <div>
-      <button type="button" disabled="disabled" class="base-button__button d-btn d-btn--primary" ><span class="d-btn__label base-button__label">Place call</span></button>
+      <button type="button" disabled="disabled" class="base-button__button d-btn d-btn--primary"><span class="d-btn__label base-button__label">Place call</span></button>
     </div>
   </div>
 </code-well-header>
@@ -298,9 +298,6 @@ All button styles and variations appear the same when disabled.
 <code-example-tabs
 htmlCode='
 <button class="d-btn" type="button" disabled><span class="d-btn__label">...</span></button>
-<span class="d-c-not-allowed">
-  <button class="d-btn d-btn--disabled" type="button" aria-disabled="true"><span class="d-btn__label">...</span></button>
-</span>
 '
 vueCode='
 <dt-button disabled> Place call </dt-button>
@@ -600,6 +597,24 @@ htmlCode='
 vueCode='
 <!-- circle inverted clear-->
 <dt-button circle kind="inverted" importance="clear">
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+     />
+  </template>
+</dt-button>
+<!-- circle inverted outlined-->
+<dt-button circle kind="inverted" importance="outlined">
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+     />
+  </template>
+</dt-button>
+<!-- circle inverted primary-->
+<dt-button circle kind="inverted">
   <template #icon>
     <dt-icon
       name="phone"
