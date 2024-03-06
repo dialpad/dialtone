@@ -45,15 +45,12 @@ export default {
 
 <style lang="less">
 .dt-time-pill {
-  border: var(--dt-size-100) solid;
+  color: var(--dt-color-foreground-primary);
   border-radius: var(--dt-size-radius-pill);
-  border-width: var(--dt-size-100);
-  --bco: 100%;
-  border-color: var(--dt-color-black-300);
-  padding-left: var(--dt-space-500);
-  padding-right: var(--dt-space-500);
-  padding-top: var(--dt-space-300);
-  padding-bottom: var(--dt-space-300);
+  line-height: var(--dt-font-line-height-300);
   font-size: var(--dt-font-size-100);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-default);
+  background-color: var(--dt-color-surface-primary);
+  padding: var(--dt-space-300) var(--dt-space-500);
 }
 </style>

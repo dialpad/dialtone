@@ -4,7 +4,7 @@
     data-qa="dt-message-input"
     role="presentation"
     :class="['d-d-flex', 'd-fd-column', 'd-bar8', 'd-baw1', 'd-ba', 'd-c-text',
-             { 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }]"
+             { 'd-bc-bold d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }]"
     @click="$refs.richTextEditor.focusEditor()"
     @drag-enter="onDrag"
     @drag-over="onDrag"
