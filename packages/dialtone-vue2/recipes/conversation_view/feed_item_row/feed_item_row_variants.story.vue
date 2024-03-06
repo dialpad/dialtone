@@ -193,7 +193,7 @@
         </dt-recipe-feed-item-row>
       </ul>
     </div>
-    <div>
+    <div class="d-h332">
       <h3>Feed item pill within</h3>
       <ul class="d-py8">
         <dt-recipe-feed-item-row
