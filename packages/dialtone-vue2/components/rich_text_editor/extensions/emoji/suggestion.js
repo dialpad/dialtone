@@ -1,4 +1,3 @@
-import { markRaw } from 'vue';
 import { VueRenderer } from '@tiptap/vue-2';
 import { emojisIndexed } from '@/components/emoji_picker/emojis';
 
@@ -59,7 +58,7 @@ export default {
         component = new VueRenderer(SuggestionList, {
           parent: this,
           propsData: {
-            itemComponent: markRaw(EmojiSuggestion),
+            itemComponent: EmojiSuggestion,
             itemType: 'emoji',
             ...props,
           },
