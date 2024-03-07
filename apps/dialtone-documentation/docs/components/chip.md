@@ -23,18 +23,25 @@ The base chip should be the go-to chip for most of your needs.
   <example-chip label="Chip"/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__text">Chip</span>
+  <button type="button" aria-labelledby="dt0-content" aria-label="" class="d-chip__label">
+    <span class="d-chip__text"> Chip </span>
   </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
+  <button type="button" aria-label="close" class="base-button__button d-btn d-btn--primary d-btn--icon-only d-chip__close">
+    <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
       <svg>...</svg>
     </span>
   </button>
 </span>
-```
+'
+vueCode='
+<dt-chip>
+  Chip
+</dt-chip>
+'
+showHtmlWarning />
 
 ### Without close button
 
@@ -42,13 +49,20 @@ The base chip should be the go-to chip for most of your needs.
   <example-chip label="Chip" hide-close-btn/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-chip">
   <button class="d-chip__label" type="button">
     <span class="d-chip__text">Chip</span>
   </button>
 </span>
-```
+'
+vueCode='
+<dt-chip :hide-close="true">
+  Chip
+</dt-chip>
+'
+showHtmlWarning />
 
 ### With icon
 
@@ -56,7 +70,8 @@ The base chip should be the go-to chip for most of your needs.
   <example-chip label="Chip" with-icon hide-close-btn/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-chip">
   <button class="d-chip__label" type="button">
     <span class="d-chip__icon">
@@ -65,7 +80,21 @@ The base chip should be the go-to chip for most of your needs.
     <span class="d-chip__text">Chip</span>
   </button>
 </span>
-```
+'
+vueCode='
+<dt-chip :hide-close="true">
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="200"
+    />
+  </template>
+  <template #default>
+    Chip
+  </template>
+</dt-chip>
+'
+showHtmlWarning />
 
 ### With icon and close button
 
@@ -73,7 +102,8 @@ The base chip should be the go-to chip for most of your needs.
   <example-chip label="Chip" with-icon/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-chip">
   <button class="d-chip__label" type="button">
     <span class="d-chip__icon">
@@ -87,7 +117,21 @@ The base chip should be the go-to chip for most of your needs.
     </span>
   </button>
 </span>
-```
+'
+vueCode='
+<dt-chip>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="200"
+    />
+  </template>
+  <template #default>
+    Chip
+  </template>
+</dt-chip>
+'
+showHtmlWarning />
 
 ### With Avatar and close button
 
@@ -95,7 +139,8 @@ The base chip should be the go-to chip for most of your needs.
   <example-chip label="Chip" with-avatar/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-chip">
   <button class="d-chip__label" type="button">
     <span class="d-avatar">...</span>
@@ -107,7 +152,20 @@ The base chip should be the go-to chip for most of your needs.
     </span>
   </button>
 </span>
-```
+'
+vueCode='
+<dt-chip>
+  <template #avatar>
+    <dt-avatar
+      full-name="Jaqueline Nackos"
+    />
+  </template>
+  <template #default>
+    Chip
+  </template>
+</dt-chip>
+'
+showHtmlWarning />
 
 ### Non Interactive
 
@@ -118,7 +176,8 @@ the close button can still be interactive even if the chip is non-interactive.
   <example-chip label="Chip" :interactive="false"/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-chip">
   <span class="d-chip__label">
     <span class="d-chip__text">Chip</span>
@@ -129,7 +188,13 @@ the close button can still be interactive even if the chip is non-interactive.
     </span>
   </button>
 </span>
-```
+'
+vueCode='
+<dt-chip :interactive="false">
+    Chip
+</dt-chip>
+'
+showHtmlWarning />
 
 ### Truncated
 
@@ -139,7 +204,8 @@ To truncate text, add `.d-truncate` to the content element, and set the width of
   <example-chip label="Chip loooooong name" truncate/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-chip">
   <button class="d-chip__label d-w102" type="button">
     <span class="d-chip__text d-truncate">Chip loooooong name</span>
@@ -150,17 +216,24 @@ To truncate text, add `.d-truncate` to the content element, and set the width of
     </span>
   </button>
 </span>
-```
+'
+vueCode='
+<dt-chip content-class="d-w102">
+    <span class="d-chip__text d-truncate">Chip loooooong name</span>
+</dt-chip>
+'
+showHtmlWarning />
 
 ### Sizes
 
 <code-well-header>
-  <example-chip label="Chip" with-icon size="xs"/>
-  <example-chip label="Chip" with-avatar size="sm"/>
-  <example-chip label="Chip" with-icon/>
+  <example-chip label="Chip" size="xs"/>
+  <example-chip label="Chip" size="sm"/>
+  <example-chip label="Chip" />
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <span class="d-chip">
   <button class="d-chip__label d-chip__label--xs" type="button">
     <span class="d-chip__icon">
@@ -198,7 +271,19 @@ To truncate text, add `.d-truncate` to the content element, and set the width of
     </span>
   </button>
 </span>
-```
+'
+vueCode='
+<dt-chip size="xs">
+  chip
+</dt-chip>
+<dt-chip size="sm">
+  chip
+</dt-chip>
+<dt-chip>
+  chip
+</dt-chip>
+'
+showHtmlWarning />
 
 <script setup>
   import ExampleChip from '@exampleComponents/ExampleChip.vue';
