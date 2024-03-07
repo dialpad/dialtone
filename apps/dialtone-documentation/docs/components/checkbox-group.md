@@ -246,6 +246,28 @@ vueCode='
   <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
   <dt-checkbox value="other"><span>Other</span></dt-checkbox>
 </dt-checkbox-group>
+<dt-checkbox-group
+  name="fruits-checkbox-group"
+  class="d-input-group__fieldset"
+  legend="Fruits"
+  validation-state="warning"
+  :messages="[{ message: `Warning validation message.`, type: `warning` }]"
+>
+  <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
+  <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
+  <dt-checkbox value="other"><span>Other</span></dt-checkbox>
+</dt-checkbox-group>
+<dt-checkbox-group
+  name="fruits-checkbox-group"
+  class="d-input-group__fieldset"
+  legend="Fruits"
+  validation-state="error"
+  :messages="[{ message: `Error validation message.`, type: `error` }]"
+>
+  <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
+  <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
+  <dt-checkbox value="other"><span>Other</span></dt-checkbox>
+</dt-checkbox-group>
 '
 showHtmlWarning />
 

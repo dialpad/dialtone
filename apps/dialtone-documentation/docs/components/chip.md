@@ -219,7 +219,7 @@ htmlCode='
 '
 vueCode='
 <dt-chip content-class="d-w102">
-    <span class="d-chip__text d-truncate">Chip loooooong name</span>
+  <span class="d-chip__text d-truncate">Chip loooooong name</span>
 </dt-chip>
 '
 showHtmlWarning />
