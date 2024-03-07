@@ -35,6 +35,7 @@ const extractValues = (values: JSON) => {
     result[variable] = {
       value: parsedValue,
       type: values[variable]?.$customType ?? values[variable]?.$type,
+      description: values[variable]?.$description,
     };
     return result;
   });
