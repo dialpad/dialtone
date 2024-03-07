@@ -26,10 +26,12 @@
       :show-align-right-button="$attrs.showAlignRightButton"
       :show-align-justify-button="$attrs.showAlignJustifyButton"
       :show-quote-button="$attrs.showQuoteButton"
+      :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
+      @quick-replies-click="$attrs.onQuickRepliesClick"
     />
     <p><strong>Editor content is:</strong></p>
     <span>{{ value }}</span>

@@ -38,6 +38,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onQuickRepliesClick: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -49,6 +55,7 @@ export const argsData = {
   onFocus: action('focus'),
   onBlur: action('blur'),
   onInput: action('input'),
+  onQuickRepliesClick: action('quick-replies-click'),
 };
 
 // Story Collection

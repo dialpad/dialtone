@@ -43,9 +43,7 @@
             </dt-button>
           </template>
         </dt-tooltip>
-        <div
-        class="dt-editor--button-group-divider">
-        </div>
+        <div class="dt-editor--button-group-divider" />
       </dt-stack>
       <dt-stack
         v-if="linkButton.showBtn"
@@ -414,6 +412,14 @@ export default {
     },
 
     /**
+     * Show button to handle quick replies
+     */
+    showQuickRepliesButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Show add link default config.
      */
     showAddLink: {
@@ -447,6 +453,13 @@ export default {
      * @type {String|JSON}
      */
     'input',
+
+    /**
+     * Quick replies button
+     * pressed event
+     * @event quick-replies-click
+    */
+    'quick-replies-click',
   ],
 
   data () {
@@ -527,6 +540,7 @@ export default {
       return [
         { showBtn: this.showQuoteButton, selector: 'blockquote', iconName: 'quote', dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
         { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code-block', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
+        { showBtn: this.showQuickRepliesButton, selector: 'quickReplies', iconName: 'lightning-bolt', dataQA: 'dt-editor-quick-replies-btn', tooltipMessage: 'Quick Replies', onClick: this.onQuickRepliesClick },
       ].filter(button => button.showBtn);
     },
 
@@ -649,6 +663,10 @@ export default {
 
     onCodeBlockToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleCodeBlock().run();
+    },
+
+    onQuickRepliesClick () {
+      this.$emit('quick-replies-click');
     },
 
     onBlockquoteToggle () {

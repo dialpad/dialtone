@@ -22,6 +22,7 @@ let codeblockBtn;
 let addLinkBtn;
 let confirmAddLinkBtn;
 let cancelAddLinkBtn;
+let quickRepliesBtn;
 
 const testText = 'In the beginning, it was a nice day.';
 
@@ -60,6 +61,7 @@ const _setChildWrappers = () => {
   orderedListBtn = wrapper.find('[data-qa="dt-editor-ordered-list-items-btn"]');
   blockquoteBtn = wrapper.find('[data-qa="dt-editor-blockquote-btn"]');
   codeblockBtn = wrapper.find('[data-qa="dt-editor-code-block-btn"]');
+  quickRepliesBtn = wrapper.find('[data-qa="dt-editor-quick-replies-btn"]');
 };
 
 const _mountWrapper = () => {
@@ -153,6 +155,10 @@ describe('DtRecipeEditor tests', () => {
       expect(codeblockBtn.exists()).toBe(true);
     });
 
+    it('should contain quick replies button', function () {
+      expect(quickRepliesBtn.exists()).toBe(true);
+    });
+
     describe('When bold button is disabled', () => {
       beforeEach(async () => {
         _mountWrapper();
@@ -184,6 +190,10 @@ describe('DtRecipeEditor tests', () => {
 
         expect(wrapper
           .find('[data-qa="dt-editor-add-link-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-quick-replies-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -220,6 +230,10 @@ describe('DtRecipeEditor tests', () => {
         expect(wrapper
           .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
       });
     });
 
@@ -254,6 +268,10 @@ describe('DtRecipeEditor tests', () => {
 
         expect(wrapper
           .find('[data-qa="dt-editor-add-link-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-quick-replies-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -290,6 +308,10 @@ describe('DtRecipeEditor tests', () => {
         expect(wrapper
           .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
       });
     });
 
@@ -325,6 +347,10 @@ describe('DtRecipeEditor tests', () => {
         expect(wrapper
           .find('[data-qa="dt-editor-add-link-btn"]')
           .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
       });
     });
 
@@ -359,6 +385,49 @@ describe('DtRecipeEditor tests', () => {
 
         expect(wrapper
           .find('[data-qa="dt-editor-add-link-btn"]')
+          .exists()).toBe(false);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
+      });
+    });
+
+    describe('When add quick replies button is disabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ showQuickRepliesButton: false });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should not appear in the formatting options', () => {
+        expect(wrapper
+          .find('[data-qa="dt-editor-bold-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-italics-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-underline-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-strike-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-list-items-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-add-link-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-editor-quick-replies-btn"]')
           .exists()).toBe(false);
       });
     });
@@ -507,6 +576,14 @@ describe('DtRecipeEditor tests', () => {
         await wrapper.vm.$nextTick();
 
         expect(linkInputEl.isVisible()).toBe(false);
+      });
+    });
+
+    describe('When quick replies button is clicked', () => {
+      it('quick replies clicked event should be fired', async () => {
+        await quickRepliesBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect('quick-replies-click' in wrapper.emitted()).toBeTruthy();
       });
     });
   });
