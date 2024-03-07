@@ -1,4 +1,4 @@
-const name = 'stylint-plugin-dialtone';
+const name = 'stylelint-plugin-dialtone';
 const srcRoot = `packages/${name}`;
 
 module.exports = {
