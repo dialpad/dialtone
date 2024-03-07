@@ -1,3 +1,15 @@
+# [3.112.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.111.0...dialtone-vue3/v3.112.0) (2024-03-07)
+
+
+### Bug Fixes
+
+* message input issues ([#190](https://github.com/dialpad/dialtone/issues/190)) ([caa07b6](https://github.com/dialpad/dialtone/commit/caa07b6e9e167094a5e91f5cd8499201194823f0))
+
+
+### Features
+
+* **Editor:** add quick replies icon to editor ([#193](https://github.com/dialpad/dialtone/issues/193)) ([7a6829f](https://github.com/dialpad/dialtone/commit/7a6829faab0d29498d2184b486c49efc03e7d8bb))
+
 # [3.111.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.110.2...dialtone-vue3/v3.111.0) (2024-03-06)
 
 
