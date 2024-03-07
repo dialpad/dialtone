@@ -85,7 +85,7 @@ export const Emoji = Node.create({
   },
 
   renderHTML ({ HTMLAttributes }) {
-    return ['emoji-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return ['emoji-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
   },
 
   addInputRules () {

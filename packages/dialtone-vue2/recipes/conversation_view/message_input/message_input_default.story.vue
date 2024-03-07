@@ -34,10 +34,6 @@
         @cancel="$attrs.onCancel"
       />
     </div>
-
-    <button @click="$refs.input.focus()">
-      focus test
-    </button>
   </div>
 </template>
 
