@@ -90,19 +90,24 @@ const setTheme = (newTheme) => {
 };
 
 const setSearchCriteria = () => {
-  searchCriteria.value = searchInput.value;
+  searchCriteria.value = searchInput.value?.trim();
 
   if (!searchCriteria.value) {
     filteredTokens.value = structuredClone(processedTokens[format.value][theme.value]);
     return;
   }
   const newTokens = {};
-  const regex = new RegExp(searchCriteria.value, 'i');
+  const searchValues = searchCriteria.value.split(' ');
+
   Object.keys(CATEGORY_MAP).forEach((category) => {
     const results = processedTokens[format.value][theme.value][category].filter((token) => {
-      if (regex.test(category)) return true;
-      const { name, tokenValue, description } = token;
-      return regex.test(name) || regex.test(tokenValue) || regex.test(description);
+      return searchValues.every(searchValue => {
+        const searchRegex = searchValue.replace(/\(/, '\\(').replace(/\)/, '\\)'); // escape parenthesis
+        const regex = new RegExp(searchRegex, 'i');
+        if (regex.test(category)) return true;
+        const { name, tokenValue, description } = token;
+        return regex.test(name) || regex.test(tokenValue) || regex.test(description);
+      });
     });
     if (results.length) newTokens[category] = results;
   });
