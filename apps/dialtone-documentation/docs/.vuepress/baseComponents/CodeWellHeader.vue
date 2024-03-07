@@ -1,5 +1,5 @@
 <template>
-  <aside class="d-bar8 d-of-hidden">
+  <aside class="d-bar8">
     <header :class="classes">
       <slot />
     </header>

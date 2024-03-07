@@ -47,7 +47,8 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
   Message body
 </dt-banner>
 
-```html
+<code-example-tabs
+htmlCode='
 <aside class="d-banner d-banner--base" role="alert" aria-hidden="false">
   <div class="d-banner__dialog" role="alertdialog" aria-labelledy="info-alert-title" aria-describedby="info-alert-desc">
     <div class="d-notice__icon">...</div>
@@ -55,14 +56,25 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
       <h2 class="d-notice__title" id="info-alert-title">...</h2>
       <p class="d-notice__message" id="info-alert-desc">...</p>
     </div>
-    <div class="d-notice__actions">...</div>
+  <div class="d-notice__actions">...</div>
 </aside>
 
 <aside class="d-banner d-banner--error" role="alert" aria-hidden="false">...</aside>
 <aside class="d-banner d-banner--info" role="alert" aria-hidden="false">...</aside>
 <aside class="d-banner d-banner--success" role="alert" aria-hidden="false">...</aside>
 <aside class="d-banner d-banner--warning" role="alert" aria-hidden="false">...</aside>
-```
+'
+vueCode='
+<dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="error" title="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="info" title="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="success" title="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="warning" title="Optional banner title"> Message body </dt-banner>
+<dt-banner background-image="{$background-image}" background-size="contain"> Message body </dt-banner>
+<dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
+<dt-banner important="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
+'
+showHtmlWarning />
 
 ## Vue API
 
