@@ -1,4 +1,3 @@
-import { markRaw } from 'vue';
 import { VueRenderer } from '@tiptap/vue-2';
 import tippy from 'tippy.js';
 
@@ -20,7 +19,7 @@ export default {
         component = new VueRenderer(SuggestionList, {
           parent: this,
           propsData: {
-            itemComponent: markRaw(MentionSuggestion),
+            itemComponent: MentionSuggestion,
             itemType: 'mention',
             ...props,
           },
