@@ -1,3 +1,21 @@
+# [9.18.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.17.0...dialtone/v9.18.0) (2024-03-07)
+
+
+### Bug Fixes
+
+* message input issues ([#190](https://github.com/dialpad/dialtone/issues/190)) ([caa07b6](https://github.com/dialpad/dialtone/commit/caa07b6e9e167094a5e91f5cd8499201194823f0))
+* remove markRaw ([#191](https://github.com/dialpad/dialtone/issues/191)) ([74884e2](https://github.com/dialpad/dialtone/commit/74884e2284bdeeb0e824a58b44377e6248d27fdc))
+
+
+### Documentation
+
+* use CodeExampleTabs from badge to button-group ([#185](https://github.com/dialpad/dialtone/issues/185)) ([808015b](https://github.com/dialpad/dialtone/commit/808015b5662379695f7c8b1ea9f787357d8c4c22))
+
+
+### Features
+
+* **Editor:** add quick replies icon to editor ([#193](https://github.com/dialpad/dialtone/issues/193)) ([7a6829f](https://github.com/dialpad/dialtone/commit/7a6829faab0d29498d2184b486c49efc03e7d8bb))
+
 # [9.17.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.16.0...dialtone/v9.17.0) (2024-03-07)
 
 
