@@ -12,20 +12,45 @@ on:
       - 'packages/dialtone-vue2/**'
       - 'packages/dialtone-vue3/**'
 
+env:
+  HUSKY: 0
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  filter-actions:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      dialtone-vue-2: ${{ steps.filter.outputs.dialtone-vue-2 }}
+      dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Filter actions by path
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dialtone-vue-2:
+              - 'packages/dialtone-vue2/**'
+            dialtone-vue-3:
+              - 'packages/dialtone-vue3/**'
+
+
   dialtone-vue-2:
+    needs: filter-actions
+    if: ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
 
-        # This hangs on node 18 for some reason.
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -53,7 +78,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Dialtone library and documentation site
+      - name: Install Playwright Browsers
+        run: pnpm dlx playwright install chromium
+
+      - name: Build Dialtone-vue 2 library and documentation site
         run: pnpm nx run --verbose dialtone-vue2:build-docs
 
       - name: Start storybook and run a11y tests
@@ -63,14 +91,14 @@ jobs:
             "pnpm dlx wait-on tcp:9010 && pnpm nx run --verbose dialtone-vue2:test:a11y"
 
   dialtone-vue-3:
+    needs: filter-actions
+    if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
 
-        # This hangs on node 18 for some reason.
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -98,7 +126,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Dialtone library and documentation site
+      - name: Install Playwright Browsers
+        run: pnpm dlx playwright install chromium
+
+      - name: Build Dialtone-vue 3 library and documentation site
         run: pnpm nx run --verbose dialtone-vue3:build-docs
 
       - name: Start storybook and run a11y tests
