@@ -55,6 +55,9 @@ import {
   TOOLTIP_STICKY_VALUES,
   TOOLTIP_DELAY_MS,
 } from './tooltip_constants.js';
+import {
+  POPOVER_APPEND_TO_VALUES,
+} from '../popover/popover_constants';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import {
@@ -170,6 +173,21 @@ export default {
       default: false,
       validator: (sticky) => {
         return TOOLTIP_STICKY_VALUES.includes(sticky);
+      },
+    },
+
+    /**
+     * Sets the element to which the tooltip is going to append to.
+     * 'body' will append to the nearest body (supports shadow DOM).
+     * This prop is not reactive, must be set on initial render.
+     * @values 'body', 'parent', HTMLElement,
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: 'body',
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
       },
     },
 
@@ -488,6 +506,7 @@ export default {
       return {
         contentElement: this.$refs.content.$el,
         allowHTML: true,
+        appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
         zIndex: this.calculateAnchorZindex(),
         onMount: this.onMount,
         ...this.tippyProps,
