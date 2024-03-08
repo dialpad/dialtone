@@ -38,8 +38,8 @@ jobs:
       matrix:
         files: ${{ fromJSON(needs.changed-files.outputs.added-posts) }}
     env:
-      FROM_MAIL: julio.ortega@dialpad.com
       TO_MAIL: dialtone-users@dialpad.com
+      FROM_MAIL: ${{ secrets.MAIL_ACCOUNT }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -76,11 +76,7 @@ jobs:
       - name: Send email
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: ${{ env.FROM_MAIL }}
-          password: ${{ secrets.MAIL_PASSWORD }}
+          connection_url: ${{ secrets.MAIL_CONNECTION }}
           subject: Dialtone updates
           to: ${{ env.TO_MAIL }}
           from: ${{ env.FROM_MAIL }}
