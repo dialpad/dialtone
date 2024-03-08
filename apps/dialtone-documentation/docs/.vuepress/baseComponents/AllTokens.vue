@@ -102,7 +102,10 @@ const filterTokens = () => {
     return;
   }
   const newTokens = {};
-  const searchValues = searchCriteria.value.split(' ');
+
+  // Replace '/' characters for '-' to allow to search by the name shown in Figma:
+  // typography/body/compact/small should match typography-body-compact-small
+  const searchValues = searchCriteria.value.replaceAll('/', '-').split(' ');
 
   Object.keys(CATEGORY_MAP).forEach((category) => {
     const results = processedTokens[format.value][theme.value][category].filter((token) => {
