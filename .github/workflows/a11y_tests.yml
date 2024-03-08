@@ -1,12 +1,16 @@
 name: Accessibility Tests
 
 on:
-  pull_request:
+  push:
     branches:
       - staging
+      - production
+
+  pull_request:
+    types: ['opened', 'synchronize']
     paths:
-      - 'packages/dialtone-vue2'
-      - 'packages/dialtone-vue3'
+      - 'packages/dialtone-vue2/**'
+      - 'packages/dialtone-vue3/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
