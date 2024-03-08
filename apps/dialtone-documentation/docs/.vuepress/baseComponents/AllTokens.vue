@@ -83,15 +83,20 @@ const formatSelectMenuOptions = computed(() => {
 
 const setFormat = (newFormat) => {
   format.value = newFormat;
+  filterTokens();
 };
 
 const setTheme = (newTheme) => {
   theme.value = newTheme;
+  filterTokens();
 };
 
 const setSearchCriteria = () => {
   searchCriteria.value = searchInput.value?.trim();
+  filterTokens();
+};
 
+const filterTokens = () => {
   if (!searchCriteria.value) {
     filteredTokens.value = structuredClone(processedTokens[format.value][theme.value]);
     return;
@@ -166,7 +171,7 @@ const hasSearchResults = computed(() => Object.keys(filteredTokens.value).length
 onBeforeMount(() => {
   addTokens();
   addComposedTokens();
-  filteredTokens.value = structuredClone(processedTokens[format.value][theme.value]);
+  filterTokens();
 });
 
 const addTokens = () => {
