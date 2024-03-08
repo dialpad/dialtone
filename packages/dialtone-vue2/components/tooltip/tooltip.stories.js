@@ -66,6 +66,12 @@ export const argTypesData = {
     },
   },
 
+  appendTo: {
+    control: {
+      type: null,
+    },
+  },
+
   enabled: {
     type: 'boolean',
   },

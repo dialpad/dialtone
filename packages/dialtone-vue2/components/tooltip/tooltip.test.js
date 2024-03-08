@@ -11,7 +11,8 @@ const MOCK_TRANSITION_STUB = () => ({
   },
 });
 
-const baseProps = { delay: false };
+// jsdom doesn't like this.anchor?.getRootNode() so use document.body.
+const baseProps = { delay: false, appendTo: document.body };
 const baseSlots = {
   default: 'Test message',
 };
