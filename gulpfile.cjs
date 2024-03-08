@@ -28,13 +28,14 @@ const paths = {
       './packages/dialtone-css/lib/dist/css/**',
       './packages/dialtone-css/lib/dist/**',
       '!./packages/dialtone-css/lib/dist/css',
-      './packages/dialtone-css/CHANGELOG.json'
+      './packages/dialtone-css/CHANGELOG.json',
     ],
     icons: './packages/dialtone-icons/dist/**',
     tokens: './packages/dialtone-tokens/dist/**',
     vue2: './packages/dialtone-vue2/dist/**',
     vue3: './packages/dialtone-vue3/dist/**',
     'eslint-plugin': './packages/eslint-plugin-dialtone/lib/**',
+    'stylelint-plugin': './packages/stylelint-plugin-dialtone/lib/**',
   },
   output: {
     css: './dist/css',
@@ -43,7 +44,8 @@ const paths = {
     vue2: './dist/vue2',
     vue3: './dist/vue3',
     'eslint-plugin': './dist/eslint-plugin',
-  }
+    'stylelint-plugin': './dist/stylelint-plugin',
+  },
 };
 
 //  ================================================================================
@@ -75,7 +77,7 @@ const copyFiles = function (done) {
   Object.keys(paths.input).forEach(name => {
     src(paths.input[name])
       .pipe(dest(paths.output[name]));
-  })
+  });
   return done();
 };
 

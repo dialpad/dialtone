@@ -1,3 +1,28 @@
+# [2.119.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.118.0...dialtone-vue2/v2.119.0) (2024-03-07)
+
+
+### Bug Fixes
+
+* message input issues ([#190](https://github.com/dialpad/dialtone/issues/190)) ([caa07b6](https://github.com/dialpad/dialtone/commit/caa07b6e9e167094a5e91f5cd8499201194823f0))
+* remove markRaw ([#191](https://github.com/dialpad/dialtone/issues/191)) ([74884e2](https://github.com/dialpad/dialtone/commit/74884e2284bdeeb0e824a58b44377e6248d27fdc))
+
+
+### Features
+
+* **Editor:** add quick replies icon to editor ([#193](https://github.com/dialpad/dialtone/issues/193)) ([7a6829f](https://github.com/dialpad/dialtone/commit/7a6829faab0d29498d2184b486c49efc03e7d8bb))
+
+# [2.118.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.117.2...dialtone-vue2/v2.118.0) (2024-03-06)
+
+
+### Bug Fixes
+
+* lower aggression of feed-item-row deep selector ([#189](https://github.com/dialpad/dialtone/issues/189)) ([de20342](https://github.com/dialpad/dialtone/commit/de20342dc0e831f64c704d84786e293423fbb02d))
+
+
+### Features
+
+* **Emoji Row, Time Pill:** feed time pill and emoji style updates ([#187](https://github.com/dialpad/dialtone/issues/187)) ([cd39cbb](https://github.com/dialpad/dialtone/commit/cd39cbb26db054810ee2b8ed42b610157ba90ca1))
+
 ## [2.117.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.117.1...dialtone-vue2/v2.117.2) (2024-03-05)
 
 

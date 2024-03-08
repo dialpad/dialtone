@@ -11,7 +11,7 @@ import mentionSuggestion from './mention_suggestion';
 
 // Default Prop Values
 export const argsData = {
-  value: `I’m not a standalone component, please use Message Input instead 🙏!`,
+  value: `I am not a standalone component, please use Message Input instead 🙏!`,
   editable: true,
   inputAriaLabel: 'This is a descriptive label',
   outputFormat: 'text',

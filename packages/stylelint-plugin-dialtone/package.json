@@ -1,0 +1,62 @@
+{
+  "name": "stylelint-plugin-dialtone",
+  "version": "1.0.0",
+  "description": "dialtone stylelint plugin",
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "stylelint"
+  ],
+  "contributors": [
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Ignacio Ropolo",
+      "email": "ignacio.ropolo@dialpad.com",
+      "url": "https://github.com/iropolo"
+    },
+    {
+      "name": "Nina Repetto",
+      "email": "nina.repetto@dialpad.com",
+      "url": "https://github.com/ninamarina"
+    }
+  ],
+  "bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "exports": "./lib/index.js",
+  "scripts": {
+    "lint": "run-s lint:docs lint:code",
+    "lint:code": "eslint '**/*.js'",
+    "lint:docs": "markdownlint 'docs/**/*.md'",
+    "test": "node --test ./tests/lib/rules/*.mjs"
+  },
+  "dependencies": {
+    "requireindex": "^1.2.0"
+  },
+  "devDependencies": {
+    "stylelint": "15.11.0",
+    "stylelint-test-rule-node": "^0.2.1"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  },
+  "peerDependencies": {
+    "stylelint": "^14.0.0 || ^15.0.0"
+  }
+}
