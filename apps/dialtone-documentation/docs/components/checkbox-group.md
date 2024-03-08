@@ -40,7 +40,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox-gro
 <code-example-tabs
 htmlCode='
 <fieldset
-  class="d-input-group__fieldset d-input-group__fieldset"
+  class="d-input-group__fieldset"
   legend="Fruits"
   name="fruits-checkbox-group"
 >
@@ -60,7 +60,8 @@ htmlCode='
         </div>
         <div class="d-checkbox__copy d-checkbox__label">
           <div class="">
-            <span>Apple</span></div>
+            <span>Apple</span>
+          </div>
         </div>
       </div>
     </label>
@@ -164,7 +165,7 @@ showHtmlWarning />
 <code-example-tabs
 htmlCode='
 <fieldset
-  class="d-input-group__fieldset d-input-group__fieldset"
+  class="d-input-group__fieldset"
   legend="Fruits"
   name="fruits-checkbox-group"
 >
@@ -184,7 +185,8 @@ htmlCode='
         </div>
         <div class="d-checkbox__copy d-checkbox__label">
           <div class="">
-            <span>Apple</span></div>
+            <span>Apple</span>
+          </div>
         </div>
       </div>
     </label>
