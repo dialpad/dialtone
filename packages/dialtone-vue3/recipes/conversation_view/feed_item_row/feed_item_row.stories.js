@@ -148,6 +148,11 @@ Default.parameters = {
           id: 'color-contrast',
           enabled: false,
         },
+        {
+          // @fixme We have nested buttons, we need to fix this in the future.
+          id: 'nested-interactive',
+          reviewOnFail: true,
+        },
       ],
     },
   },

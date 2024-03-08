@@ -29,6 +29,7 @@
           v-for="(day, indexDays) in week.days"
           :key="indexWeek + indexDays"
           class="d-datepicker__cell"
+          role="listbox"
         >
           <dt-button
             :ref="el => { if (el) setDayRef(el, day) }"
@@ -46,6 +47,7 @@
             type="button"
             :aria-selected="!!selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected"
             :aria-label="dayAriaLabel(day)"
+            role="option"
             @click="selectDay(day)"
             @keydown="handleKeyDown($event)"
           >

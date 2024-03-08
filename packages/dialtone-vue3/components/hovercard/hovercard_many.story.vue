@@ -31,6 +31,7 @@
             <dt-avatar
               :full-name="data.name"
               :image-src="data.src"
+              image-alt=""
               avatar-class="d-c-pointer"
               v-bind="slotProps"
             />
