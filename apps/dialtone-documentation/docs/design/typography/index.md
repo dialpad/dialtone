@@ -66,7 +66,7 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
   class="d-wmx100p"
 >
   <template #default>
-    <p class="d-body-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-fw-semibold d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles with the same values.</p>
+    <p class="d-body-base-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-fw-semibold d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles with the same values.</p>
   </template>
 </dt-notice>
 
@@ -81,19 +81,19 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
       </dt-stack>
       <dt-stack direction="row" gap="500" class="d-ai-flex-start">
         <dt-stack gap="200">
-          <h3 class="d-headline-compact-medium">Ai Contact Center</h3>
+          <h3 class="d-headline-medium-compact">Ai Contact Center</h3>
           <p class="d-body-small">The world’s most advanced customer engagement platform</p>
         </dt-stack>
         <dt-stack gap="200">
-          <h3 class="d-headline-compact-medium">Ai Contact Center</h3>
+          <h3 class="d-headline-medium-compact">Ai Contact Center</h3>
           <p class="d-body-small">The world’s most advanced customer engagement platform</p>
         </dt-stack>
         <dt-stack gap="200">
-          <h3 class="d-headline-compact-medium">Ai Voice</h3>
+          <h3 class="d-headline-medium-compact">Ai Voice</h3>
           <p class="d-body-small">Say hello to the world’s smartest business phone</p>
         </dt-stack>
         <dt-stack gap="200">
-          <h3 class="d-headline-compact-medium">Ai Meetings</h3>
+          <h3 class="d-headline-medium-compact">Ai Meetings</h3>
           <p class="d-body-small">Ai-powered video meetings with built-in transcriptions</p>
         </dt-stack>
       </dt-stack>
@@ -109,19 +109,19 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
   </dt-stack>
   <dt-stack direction="row" gap="500" class="d-wmx764">
     <dt-stack gap="200">
-      <h3 class="d-headline-compact-medium">Ai Contact Center</h3>
+      <h3 class="d-headline-medium-compact">Ai Contact Center</h3>
       <p class="d-body-small">The world’s most advanced customer engagement platform</p>
     </dt-stack>
     <dt-stack gap="200">
-      <h3 class="d-headline-compact-medium">Ai Contact Center</h3>
+      <h3 class="d-headline-medium-compact">Ai Contact Center</h3>
       <p class="d-body-small">The world’s most advanced customer engagement platform</p>
     </dt-stack>
     <dt-stack gap="200">
-      <h3 class="d-headline-compact-medium">Ai Voice</h3>
+      <h3 class="d-headline-medium-compact">Ai Voice</h3>
       <p class="d-body-small">Say hello to the world’s smartest business phone system</p>
     </dt-stack>
     <dt-stack gap="200">
-      <h3 class="d-headline-compact-medium">Ai Meetings</h3>
+      <h3 class="d-headline-medium-compact">Ai Meetings</h3>
       <p class="d-body-small">Ai-powered video meetings with built-in transcriptions</p>
     </dt-stack>
   </dt-stack>
