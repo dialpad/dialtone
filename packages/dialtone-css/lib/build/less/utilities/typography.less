@@ -51,55 +51,181 @@ ul {
 //  ============================================================================
 //  $   HEADLINE STYLES
 //  ----------------------------------------------------------------------------
-.d-headline10,
+//  NOTE: the second item comma-delimited class is backwards-compatible,
+//        and will be removed once no longer in use in the product.
+//        e.g. `d-headline-small-soft` replaces replaced `d-headline-soft-small`
 .d-headline-eyebrow {
+    line-height: var(--dt-typography-headline-eyebrow-line-height);
+    font-size: var(--dt-typography-headline-eyebrow-font-size);
+    font-weight: var(--dt-typography-headline-eyebrow-font-weight);
     text-transform: var(--dt-typography-headline-eyebrow-text-case);
-    font: var(--dt-typography-headline-eyebrow-font-weight) var(--dt-typography-headline-eyebrow-font-size)/var(--dt-typography-headline-eyebrow-line-height) var(--dt-typography-headline-eyebrow-font-family)
 }
-.d-headline-small              { font: var(--dt-typography-headline-small) }
-.d-headline-soft-small         { font: var(--dt-typography-headline-soft-small) }
-.d-headline-medium             { font: var(--dt-typography-headline-medium) }
-.d-headline-compact-small      { font: var(--dt-typography-headline-compact-small) }
-.d-headline-compact-soft-small { font: var(--dt-typography-headline-compact-soft-small)}
-.d-headline-compact-base,
-.d-headline-compact-medium     { font: var(--dt-typography-headline-compact-medium) }
-.d-headline-compact-large      { font: var(--dt-typography-headline-compact-large) }
-.d-headline-large              { font: var(--dt-typography-headline-large) }
-.d-headline-extra-large        { font: var(--dt-typography-headline-extra-large) }
-.d-headline-extra-extra-large  { font: var(--dt-typography-headline-extra-extra-large) }
+.d-headline-small {
+    line-height: var(--dt-typography-headline-small-line-height);
+    font-size: var(--dt-typography-headline-small-font-size);
+    font-weight: var(--dt-typography-headline-small-font-weight);
+}
+.d-headline-small-soft,
+.d-headline-soft-small {
+    line-height: var(--dt-typography-headline-small-soft-line-height);
+    font-size: var(--dt-typography-headline-small-soft-font-size);
+    font-weight: var(--dt-typography-headline-small-soft-font-weight);
+}
+.d-headline-medium {
+    line-height: var(--dt-typography-headline-medium-line-height);
+    font-size: var(--dt-typography-headline-medium-font-size);
+    font-weight: var(--dt-typography-headline-medium-font-weight);
+}
+.d-headline-small-compact,
+.d-headline-compact-small {
+    line-height: var(--dt-typography-headline-small-compact-line-height);
+    font-size: var(--dt-typography-headline-small-compact-font-size);
+    font-weight: var(--dt-typography-headline-small-compact-font-weight);
+}
+.d-headline-small-soft-compact,
+.d-headline-compact-soft-small {
+    line-height: var(--dt-typography-headline-small-soft-compact-line-height);
+    font-size: var(--dt-typography-headline-small-soft-compact-font-size);
+    font-weight: var(--dt-typography-headline-small-soft-compact-font-weight);
+}
+.d-headline-medium-compact,
+.d-headline-compact-medium {
+    line-height: var(--dt-typography-headline-medium-compact-line-height);
+    font-size: var(--dt-typography-headline-medium-compact-font-size);
+    font-weight: var(--dt-typography-headline-medium-compact-font-weight);
+}
+.d-headline-large-compact,
+.d-headline-compact-large {
+    line-height: var(--dt-typography-headline-large-compact-line-height);
+    font-size: var(--dt-typography-headline-large-compact-font-size);
+    font-weight: var(--dt-typography-headline-large-compact-font-weight);
+}
+.d-headline-large {
+    line-height: var(--dt-typography-headline-large-line-height);
+    font-size: var(--dt-typography-headline-large-font-size);
+    font-weight: var(--dt-typography-headline-large-font-weight);
+}
+.d-headline-extra-large {
+    line-height: var(--dt-typography-headline-extra-large-line-height);
+    font-size: var(--dt-typography-headline-extra-large-font-size);
+    font-weight: var(--dt-typography-headline-extra-large-font-weight);
+}
+.d-headline-extra-extra-large {
+    line-height: var(--dt-typography-headline-extra-extra-large-line-height);
+    font-size: var(--dt-typography-headline-extra-extra-large-font-size);
+    font-weight: var(--dt-typography-headline-extra-extra-large-font-weight);
+}
 
 //  ============================================================================
 //  $   BODY STYLES
 //  ----------------------------------------------------------------------------
-.d-body-base          { font: var(--dt-typography-body-base) }
-.d-body-small         { font: var(--dt-typography-body-small); }
-.d-body-compact       { font: var(--dt-typography-body-compact-base) }
-.d-body-compact-small { font: var(--dt-typography-body-compact-small) }
+//  NOTE: the second item comma-delimited class is backwards-compatible,
+//        and will be removed once no longer in use in the product.
+.d-body-base {
+    line-height: var(--dt-typography-body-base-line-height);
+    font-size: var(--dt-typography-body-base-font-size);
+    font-weight: var(--dt-typography-body-base-font-weight);
+}
+.d-body-small {
+    line-height: var(--dt-typography-body-small-line-height);
+    font-size: var(--dt-typography-body-small-font-size);
+    font-weight: var(--dt-typography-body-small-font-weight);
+}
+.d-body-base-compact,
+.d-body-compact {
+    line-height: var(--dt-typography-body-base-compact-line-height);
+    font-size: var(--dt-typography-body-base-compact-font-size);
+    font-weight: var(--dt-typography-body-base-compact-font-weight);
+}
+.d-body-small-compact,
+.d-body-compact-small {
+    line-height: var(--dt-typography-body-small-compact-line-height);
+    font-size: var(--dt-typography-body-small-compact-font-size);
+    font-weight: var(--dt-typography-body-small-compact-font-weight);
+}
 
 //  ============================================================================
 //  $   LABEL STYLES
 //  ----------------------------------------------------------------------------
-.d-label-base                { font: var(--dt-typography-label-base) }
-.d-label-small               { font: var(--dt-typography-label-small) }
-.d-label-compact             { font: var(--dt-typography-label-compact-base) }
-.d-label-plain               { font: var(--dt-typography-label-plain-base) }
-.d-label-compact-plain       { font: var(--dt-typography-label-compact-plain-base) }
-.d-label-compact-small       { font: var(--dt-typography-label-compact-small) }
-.d-label-plain-small         { font: var(--dt-typography-label-plain-small) }
-.d-label-compact-plain-small { font: var(--dt-typography-label-compact-plain-small) }
+//  NOTE: the second item comma-delimited class is backwards-compatible,
+//        and will be removed once no longer in use in the product.
+.d-label-base {
+    line-height: var(--dt-typography-label-base-line-height);
+    font-size: var(--dt-typography-label-base-font-size);
+    font-weight: var(--dt-typography-label-base-font-weight);
+}
+.d-label-small {
+    line-height: var(--dt-typography-label-small-line-height);
+    font-size: var(--dt-typography-label-small-font-size);
+    font-weight: var(--dt-typography-label-small-font-weight);
+}
+.d-label-base-compact,
+.d-label-compact {
+    line-height: var(--dt-typography-label-base-compact-line-height);
+    font-size: var(--dt-typography-label-base-compact-font-size);
+    font-weight: var(--dt-typography-label-base-compact-font-weight);
+}
+.d-label-base-plain,
+.d-label-plain {
+    line-height: var(--dt-typography-label-base-plain-line-height);
+    font-size: var(--dt-typography-label-base-plain-font-size);
+    font-weight: var(--dt-typography-label-base-plain-font-weight);
+}
+.d-label-base-plain-compact,
+.d-label-compact-plain {
+    line-height: var(--dt-typography-label-base-plain-compact-line-height);
+    font-size: var(--dt-typography-label-base-plain-compact-font-size);
+    font-weight: var(--dt-typography-label-base-plain-compact-font-weight);
+}
+.d-label-small-compact,
+.d-label-compact-small {
+    line-height: var(--dt-typography-label-small-compact-line-height);
+    font-size: var(--dt-typography-label-small-compact-font-size);
+    font-weight: var(--dt-typography-label-small-compact-font-weight);
+}
+.d-label-small-plain,
+.d-label-plain-small {
+    line-height: var(--dt-typography-label-small-plain-line-height);
+    font-size: var(--dt-typography-label-small-plain-font-size);
+    font-weight: var(--dt-typography-label-small-plain-font-weight);
+}
+.d-label-small-plain-compact,
+.d-label-compact-plain-small {
+    line-height: var(--dt-typography-label-small-plain-compact-line-height);
+    font-size: var(--dt-typography-label-small-plain-compact-font-size);
+    font-weight: var(--dt-typography-label-small-plain-compact-font-weight);
+}
 
 //  ============================================================================
 //  $   HELPER STYLES
 //  ----------------------------------------------------------------------------
-.d-helper-base  { font: var(--dt-typography-helper-base) }
-.d-helper-small { font: var(--dt-typography-helper-small) }
+.d-helper-base {
+    line-height: var(--dt-typography-helper-base-line-height);
+    font-size: var(--dt-typography-helper-base-font-size);
+    font-weight: var(--dt-typography-helper-base-font-weight);
+}
+.d-helper-small {
+    line-height: var(--dt-typography-helper-small-line-height);
+    font-size: var(--dt-typography-helper-small-font-size);
+    font-weight: var(--dt-typography-helper-small-font-weight);
+}
 
 //  ============================================================================
 //  $   CODE STYLES
 //  ----------------------------------------------------------------------------
 
-.d-code-base  { font: var(--dt-typography-code-base) }
-.d-code-small { font: var(--dt-typography-code-small) }
+.d-code-base  {
+    font-family: var(--dt-typography-code-base-font-family);
+    line-height: var(--dt-typography-code-base-line-height);
+    font-size: var(--dt-typography-code-base-font-size);
+    font-weight: var(--dt-typography-code-base-font-weight);
+}
+.d-code-small {
+    font-family: var(--dt-typography-code-small-font-family);
+    line-height: var(--dt-typography-code-small-line-height);
+    font-size: var(--dt-typography-code-small-font-size);
+    font-weight: var(--dt-typography-code-small-font-weight);
+}
 
 //  ============================================================================
 //  $   FONT SIZE
