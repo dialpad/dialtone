@@ -1,3 +1,15 @@
+# [3.113.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.112.0...dialtone-vue3/v3.113.0) (2024-03-09)
+
+
+### Bug Fixes
+
+* **List Item:** add menuitem as valid role ([#197](https://github.com/dialpad/dialtone/issues/197)) ([826ea78](https://github.com/dialpad/dialtone/commit/826ea786b3edf2a6b52cf589e4bd8280816080e5))
+
+
+### Features
+
+* **Tooltip:** add appendTo prop ([#195](https://github.com/dialpad/dialtone/issues/195)) ([76f2b11](https://github.com/dialpad/dialtone/commit/76f2b11b056782c694ea592c5344019abeda4159))
+
 # [3.112.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.111.0...dialtone-vue3/v3.112.0) (2024-03-07)
 
 
