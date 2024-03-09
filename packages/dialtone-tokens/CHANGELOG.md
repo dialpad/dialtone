@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.25.0...dialtone-tokens/v1.26.0) (2024-03-09)
+
+
+### Features
+
+* add description from figma tokens ([#194](https://github.com/dialpad/dialtone/issues/194)) ([1fe992e](https://github.com/dialpad/dialtone/commit/1fe992e24b2557a1c450cd4fe535d5e7bf11a49e))
+
 # [1.25.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.24.0...dialtone-tokens/v1.25.0) (2024-02-27)
 
 
