@@ -108,27 +108,15 @@ ul {
 .d-fs-400-tv { font-size: var(--dt-font-size-400-tv) !important; }
 .d-fs-500-tv { font-size: var(--dt-font-size-500-tv) !important; }
 
-.d-headline10 { .d-fs-100(); font-weight: var(--dt-font-weight-bold); .d-tt-uppercase(); }
-.d-headline24 { .d-fs-300(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline28 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline32 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline36 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline42 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline48 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline54 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
-
-.d-headline-eyebrow            { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-normal); .d-tt-uppercase(); }
-.d-headline-small              { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-bold); }
-.d-headline-soft-small         { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium); }
-.d-headline-medium             { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold); }
-.d-headline-compact-small      { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-bold); }
-.d-headline-compact-soft-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium); }
-.d-headline-compact-base,
-.d-headline-compact-medium     { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold); }
-.d-headline-compact-large      { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-300); font-weight: var(--dt-font-weight-bold); }
-.d-headline-large              { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-300); font-weight: var(--dt-font-weight-bold); }
-.d-headline-extra-large        { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-400); font-weight: var(--dt-font-weight-medium); }
-.d-headline-extra-extra-large  { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-500); font-weight: var(--dt-font-weight-medium); }
+// TODO: deprecate these `d-headline##` classes once no longer in product use
+.d-headline10 { .d-headline-eyebrow(); }
+.d-headline24 { .d-headline-large(); }
+.d-headline28 { .d-headline-extra-large(); }
+.d-headline32 { .d-headline-extra-large(); }
+.d-headline36 { .d-headline-extra-large(); }
+.d-headline42 { .d-headline-extra-extra-large(); }
+.d-headline48 { .d-headline-extra-extra-large(); }
+.d-headline54 { .d-headline-extra-extra-large(); }
 
 .d-fs-unset { font-size: unset !important; }
 
