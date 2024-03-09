@@ -561,7 +561,7 @@
           Design language
         </h2>
       </router-link>
-      <p class="d-mb8 d-body-compact d-fc-secondary">
+      <p class="d-mb8 d-body-base-compact d-fc-secondary">
         Foundational color, iconography, and spacing guidelines
       </p>
       <router-link
@@ -633,7 +633,7 @@
           Components
         </h2>
       </router-link>
-      <p class="d-mb8 d-body-compact d-fc-secondary">
+      <p class="d-mb8 d-body-base-compact d-fc-secondary">
         Presentational UI components offered in CSS and Vue
       </p>
       <div class="d-d-inline-flex d-fd-column d-stack4">
@@ -720,7 +720,7 @@
           Utilities
         </h2>
       </router-link>
-      <p class="d-mb8 d-body-compact d-fc-secondary">
+      <p class="d-mb8 d-body-base-compact d-fc-secondary">
         A utility-first CSS framework for building user interfaces.
       </p>
       <router-link
@@ -766,7 +766,7 @@
           Guides
         </h2>
       </router-link>
-      <p class="d-mb8 d-body-compact d-fc-secondary">
+      <p class="d-mb8 d-body-base-compact d-fc-secondary">
         Reference guidelines for Accessibility, Writing, and more
       </p>
       <div class="d-d-inline-flex d-fd-column d-stack4">

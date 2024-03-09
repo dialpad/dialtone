@@ -46,7 +46,7 @@
             direction="column"
             gap="0"
           >
-            <p class="d-headline-compact-medium">
+            <p class="d-headline-medium-compact">
               Jaqueline Nackos
             </p>
             <p class="d-body-small d-fc-tertiary">

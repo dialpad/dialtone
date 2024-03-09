@@ -25,7 +25,7 @@
     <div class="d-d-flex d-ai-center">
       <div class="d-d-flex d-fd-column d-fl-grow5">
         <span class="d-label d-label--sm">Name</span>
-        <span class="d-body-compact">{{ iconName }}</span>
+        <span class="d-body-base-compact">{{ iconName }}</span>
       </div>
       <copy-button
         class="d-ml8"
@@ -36,13 +36,13 @@
     <div class="d-d-flex d-fd-column">
       <span class="d-label d-label--sm">Category</span>
       <span
-        class="d-tt-capitalize d-body-compact"
+        class="d-tt-capitalize d-body-base-compact"
         v-text="category"
       />
     </div>
     <div class="d-d-flex d-fd-column">
       <span class="d-label d-label--sm">Keywords</span>
-      <span class="d-body-compact">{{ keywords.join(', ') || '-' }}</span>
+      <span class="d-body-base-compact">{{ keywords.join(', ') || '-' }}</span>
     </div>
     <div class="d-d-flex d-ai-flex-end">
       <div class="d-fl-grow1">
