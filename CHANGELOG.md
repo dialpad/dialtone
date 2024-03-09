@@ -1,3 +1,16 @@
+# [9.19.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.18.0...dialtone/v9.19.0) (2024-03-09)
+
+
+### Bug Fixes
+
+* **List Item:** add menuitem as valid role ([#197](https://github.com/dialpad/dialtone/issues/197)) ([826ea78](https://github.com/dialpad/dialtone/commit/826ea786b3edf2a6b52cf589e4bd8280816080e5))
+
+
+### Features
+
+* add description from figma tokens ([#194](https://github.com/dialpad/dialtone/issues/194)) ([1fe992e](https://github.com/dialpad/dialtone/commit/1fe992e24b2557a1c450cd4fe535d5e7bf11a49e))
+* **Tooltip:** add appendTo prop ([#195](https://github.com/dialpad/dialtone/issues/195)) ([76f2b11](https://github.com/dialpad/dialtone/commit/76f2b11b056782c694ea592c5344019abeda4159))
+
 # [9.18.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.17.0...dialtone/v9.18.0) (2024-03-07)
 
 
