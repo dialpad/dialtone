@@ -8,6 +8,6 @@ description: Core typographic styles for body text and headlines.
   hideClose="true"
 >
   <template #default>
-    <p class="d-body-base-compact"> This content has moved to <router-link class="d-fw-semibold d-link d-link--muted" to="/design/typography/">Design Language > Typography</router-link>. Please update your bookmarks.</p>
+    <p class="d-body--base-compact"> This content has moved to <router-link class="d-fw-semibold d-link d-link--muted" to="/design/typography/">Design Language > Typography</router-link>. Please update your bookmarks.</p>
   </template>
 </dt-notice>

@@ -9,7 +9,7 @@ description: Utilities to change an element's line-height.
   class="d-wmx100p"
 >
   <template #default>
-    <p class="d-body-base-compact">Before applying a typography utility, first consider using <router-link class="d-fw-bold d-link d-link--muted" to="/design/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
+    <p class="d-body--base-compact">Before applying a typography utility, first consider using <router-link class="d-fw-bold d-link d-link--muted" to="/design/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
   </template>
 </dt-notice>
 

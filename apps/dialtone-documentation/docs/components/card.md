@@ -11,7 +11,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <div class="d-headline-medium">
+      <div class="d-headline--medium">
         Lorem ipsum
       </div>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
@@ -89,7 +89,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <div class="d-headline-medium">
+      <div class="d-headline--medium">
         Lorem ipsum
       </div>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
@@ -105,7 +105,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 ```html
 <div class="d-card d-w264">
   <div class="d-card__header">
-    <div class="d-headline-medium">
+    <div class="d-headline--medium">
       Lorem ipsum
     </div>
     <button type="button" class="d-btn d-btn--xs d-btn--circle">
@@ -169,7 +169,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <div class="d-headline-medium">
+      <div class="d-headline--medium">
         Lorem ipsum
       </div>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
@@ -190,7 +190,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 ```html
 <div class="d-card d-w264">
   <div class="d-card__header">
-    <div class="d-headline-medium">
+    <div class="d-headline--medium">
       Lorem ipsum
     </div>
     <button type="button" class="d-btn d-btn--xs d-btn--circle">

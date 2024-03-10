@@ -161,11 +161,11 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 <code-well-header>
   <fieldset class="d-w25p d-stack8">
-    <legend class="d-headline-large">DND Settings</legend>
+    <legend class="d-headline--large">DND Settings</legend>
     <div class="d-toggle-wrapper d-d-flex d-fd-column d-stack8">
       <div class="row d-d-flex d-ai-center d-jc-space-between">
-        <div class="d-headline-medium">Status</div>
-        <div class="d-headline-medium">DND</div>
+        <div class="d-headline--medium">Status</div>
+        <div class="d-headline--medium">DND</div>
       </div>
       <div class="row d-d-flex d-ai-center d-jc-space-between">
         <example-toggle label="Acorn Test" id="Dialtone-Toggle8" />
@@ -185,11 +185,11 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ```html
 <fieldset class="d-w25p d-stack8">
-  <legend class="d-headline-large">DND Settings</legend>
+  <legend class="d-headline--large">DND Settings</legend>
   <div class="d-toggle-wrapper d-d-flex d-fd-column d-stack8">
     <div class="row d-d-flex d-ai-center d-jc-space-between">
-      <div class="d-headline-medium">Status</div>
-      <div class="d-headline-medium">DND</div>
+      <div class="d-headline--medium">Status</div>
+      <div class="d-headline--medium">DND</div>
     </div>
     <div class="row d-d-flex d-ai-center d-jc-space-between">
       <div class="d-toggle-copy"><label class="d-toggle-label" for="Dialtone-Toggle8">Acorn Test</label></div>

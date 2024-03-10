@@ -55,7 +55,7 @@ No arrow direction is assigned by default. You must select a direction. Twelve d
   <div v-for="dir in directions" class="d-p32 d-bgc-secondary d-bar8">
     <div class="d-tooltip d-tooltip--show" :class="'d-tooltip__arrow--'+dir">
       <div class="d-tt-capitalize d-mb4">{{ capitalizeDirection(dir) }}</div>
-      <div class="d-code-small d-fc-black-400">.d-tooltip__arrow--{{ dir }}</div>
+      <div class="d-code--small d-fc-muted-inverted">.d-tooltip__arrow--{{ dir }}</div>
     </div>
   </div>
 </div>
