@@ -58,41 +58,157 @@ Adjusts vertical spacing between lines of text, optimizing legibility and text f
 
 ## Styles
 
-Dialtone's text styles are narrowed down to five categories: **Headline**, **Body**, **Label**, **Helper**, or **Code**. These combine `font-size`, `font-family`, `font-weight`, and `line-height` style properties into a CSS Utility for a uniform design language across all content.
-
 <dt-notice
-  kind="warning"
+  kind="info"
   hideClose="true"
   class="d-wmx100p"
 >
   <template #default>
-    <p class="d-body--base-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-fw-semibold d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles with the same values.</p>
+    Reach for these styles first before using <router-link class="d-link d-link--muted" to="../../utilities/">CSS Utilities</router-link> or creating custom styles with <router-link class="d-link d-link--muted" to="/tokens/">Design Tokens</router-link>.
   </template>
 </dt-notice>
 
 ### Usage
 
+All product UI text can be characterized as one of **Headline**, **Body**, **Label**, **Helper**, or **Code**. These styles are effectively multi-property CSS Utilities, combining properties like `font-size`, `font-family`, `font-weight`, and `line-height`.
+
+```html
+<el class="d-{category}--{size}-{strength}-{density}">...</el>
+```
+
+<div class="d-bb d-bc-default">
+  <table class="d-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Size</th>
+        <th>Strength <span class="d-label--small-plain-compact d-tt-none">(optional)</span></th>
+        <th>Density <span class="d-label--small-plain-compact d-tt-none">(optional)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="d-va-top">
+        <td>
+          <code class="d-code--small">headline</code>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">eyebrow</code></div>
+            <div><code class="d-code--small">small</code></div>
+            <div><code class="d-code--small">medium</code></div>
+            <div><code class="d-code--small">large</code></div>
+            <div><code class="d-code--small">extra-large</code></div>
+            <div><code class="d-code--small">extra-extra-large</code></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">soft</code></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">compact</code></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr class="d-va-top">
+        <td>
+          <code class="d-code--small">body</code>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">small</code></div>
+            <div><code class="d-code--small">base</code></div>
+          </dt-stack>
+        </td>
+        <td>
+          <span class="d-fc-muted" aria-hidden="true">-</span>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">compact</code></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr class="d-va-top">
+        <td>
+          <code class="d-code--small">label</code>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">small</code></div>
+            <div><code class="d-code--small">base</code></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">plain</code></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">compact</code></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr class="d-va-top">
+        <td>
+          <code class="d-code--small">helper</code>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">small</code></div>
+            <div><code class="d-code--small">base</code></div>
+          </dt-stack>
+        </td>
+        <td>
+          <span class="d-fc-muted" aria-hidden="true">-</span>
+        </td>
+        <td>
+          <span class="d-fc-muted" aria-hidden="true">-</span>
+        </td>
+      </tr>
+      <tr class="d-va-top">
+        <td>
+          <code class="d-code--small">code</code>
+        </td>
+        <td>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">small</code></div>
+            <div><code class="d-code--small">base</code></div>
+          </dt-stack>
+        </td>
+        <td>
+          <span class="d-fc-muted" aria-hidden="true">-</span>
+        </td>
+        <td>
+          <span class="d-fc-muted" aria-hidden="true">-</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+#### Examples
+
 <code-well-header class="d-pb32">
   <div class="d-w100p">
-    <dt-stack gap="500">
-      <dt-stack gap="200">
+    <dt-stack gap="400">
+      <dt-stack>
         <h2 class="d-headline--large">Ai that works for you</h2>
-        <div class="d-body--base">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+        <div class="d-body--base-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
       </dt-stack>
       <dt-stack direction="row" gap="500" class="d-ai-flex-start">
-        <dt-stack gap="200">
+        <dt-stack>
           <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
           <p class="d-body--small">The world’s most advanced customer engagement platform</p>
         </dt-stack>
-        <dt-stack gap="200">
-          <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
-          <p class="d-body--small">The world’s most advanced customer engagement platform</p>
-        </dt-stack>
-        <dt-stack gap="200">
+        <dt-stack>
           <h3 class="d-headline--medium-compact">Ai Voice</h3>
           <p class="d-body--small">Say hello to the world’s smartest business phone</p>
         </dt-stack>
-        <dt-stack gap="200">
+        <dt-stack>
           <h3 class="d-headline--medium-compact">Ai Meetings</h3>
           <p class="d-body--small">Ai-powered video meetings with built-in transcriptions</p>
         </dt-stack>
@@ -102,25 +218,21 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
 </code-well-header>
 
 ```html
-<dt-stack gap="500">
-  <dt-stack gap="200">
+<dt-stack gap="400">
+  <dt-stack>
     <h2 class="d-headline--large">Ai that works for you</h2>
-    <div class="d-body--base">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+    <div class="d-body--base-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
   </dt-stack>
-  <dt-stack direction="row" gap="500" class="d-wmx764">
-    <dt-stack gap="200">
+  <dt-stack direction="row" gap="500" class="d-ai-flex-start">
+    <dt-stack>
       <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
       <p class="d-body--small">The world’s most advanced customer engagement platform</p>
     </dt-stack>
-    <dt-stack gap="200">
-      <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
-      <p class="d-body--small">The world’s most advanced customer engagement platform</p>
-    </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack>
       <h3 class="d-headline--medium-compact">Ai Voice</h3>
-      <p class="d-body--small">Say hello to the world’s smartest business phone system</p>
+      <p class="d-body--small">Say hello to the world’s smartest business phone</p>
     </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack>
       <h3 class="d-headline--medium-compact">Ai Meetings</h3>
       <p class="d-body--small">Ai-powered video meetings with built-in transcriptions</p>
     </dt-stack>
@@ -148,7 +260,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
 
 ### Body
 
-Default text style for readable content, designed for comfort and clarity in reading varying lengths.
+Default text style for longer-form prose content, designed for comfort and clarity in reading varying lengths.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
   <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
@@ -166,7 +278,7 @@ Default text style for readable content, designed for comfort and clarity in rea
 
 ### Label
 
-Identifying form fields, buttons, and other interface elements, ensuring clear navigation and interaction.
+Shorter-length copy like form fields, buttons, and other UI labeling elements, ensuring clear navigation and interaction.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
   <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
