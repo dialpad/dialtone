@@ -339,7 +339,11 @@
       "typography.body.small": "S:faaa0a21bc145b59d2192c523f57b830d43385c2,",
       "typography.body.small-compact": "S:5f2ddbbb4925a95459d278e0d60da440ec8185a1,",
       "typography.body.base": "S:a7dfb13c8b30535b9acdfddc0351ad9f0175e29a,",
-      "typography.body.base-compact": "S:36e6345f00c372e1562c2bbeaab7b4f42c18fef2,"
+      "typography.body.base-compact": "S:36e6345f00c372e1562c2bbeaab7b4f42c18fef2,",
+      "typography.headline.large-soft": "S:1cc97ed0072fb4dfa6b44c873b3d4d60ac3b7b59,",
+      "typography.headline.large-soft-compact": "S:cb948ce90094bb92ef8e5899d28cfa3369bf0fa9,",
+      "typography.headline.extra-large-compact": "S:4646dff6474b6574c0c47af000c795bd19b58da3,",
+      "typography.headline.extra-extra-large-compact": "S:9a96ba165bdefc470bc8d1c902fb104962d52862,"
     },
     "selectedTokenSets": {
       "base/default": "enabled",

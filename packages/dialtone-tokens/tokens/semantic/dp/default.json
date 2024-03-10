@@ -924,10 +924,31 @@
         "type": "typography",
         "description": "section"
       },
+      "large-soft": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "section"
+      },
       "large-compact": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "large-soft-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
           "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.300}",
           "textCase": "{font.text-case.none}"
@@ -945,11 +966,33 @@
         "type": "typography",
         "description": "display"
       },
+      "extra-large-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.100}",
+          "fontSize": "{font.size.400}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "display"
+      },
       "extra-extra-large": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.medium}",
           "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.500}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "page head"
+      },
+      "extra-extra-large-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.100}",
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
