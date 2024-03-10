@@ -709,9 +709,9 @@ CSS variables for themeable parts of the UI, primarily targeting the topbar and 
 
 ## Base palette
 
-Base colors are the literal value of all available colors. Use these only if all abstracted Text, Status text, Surface, or Border colors do not fit your need.
+Base colors are the literal value of all available colors. Use these only if all abstracted Text, Status text, Surface, or Border colors do not fit your need — consult a Product Designer.
 
-Each of the colors listed above references these. For example, `var(--dt-color-foreground-primary)` is an alias to `var(--dt-color-black-900)`, and `var(--dt-color-foreground-critical)` is an alias to `var(--dt-color-red-300)`.
+Each of the colors listed above references these. For example, in Light mode `var(--dt-color-foreground-primary)` is an alias to `var(--dt-color-black-900)`, and `var(--dt-color-foreground-critical)` is an alias to `var(--dt-color-red-300)`, though will have a different value in Dark mode.
 
 ### Light Theme
 

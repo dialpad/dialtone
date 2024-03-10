@@ -159,13 +159,15 @@ Here are some frequently used tokens, don't use values outside the recommended r
 
 <token-table category="space" :tokenList="tokenList" />
 
-<DtNotice
+<dt-notice
   kind="info"
-  title="Note"
+  title="Figma Variables"
   hideClose="true"
 >
-By Feb 2024, we aim to integrate spacing units into Figma Variables. This will simplify the process of setting these tokens on space-between and paddings within your elements in your Figma files, making it easier for engineers to obtain the correct variable for each case.
-</DtNotice>
+  <template #default>
+    By April 2024, we aim to integrate sizing units into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height in your Figma files, making it easier for engineers to obtain the correct variable for each case.
+  </template>
+</dt-notice>
 
 ## Key Takeaways
 
