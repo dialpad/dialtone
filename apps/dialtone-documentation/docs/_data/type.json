@@ -33,8 +33,16 @@
       "output": "line-height: var(--dt-typography-headline-large-line-height); font-size: var(--dt-typography-headline-large-font-size); font-weight: var(--dt-typography-headline-large-font-weight);"
     },
     {
+      "var": "d-headline--large-soft",
+      "output": "line-height: var(--dt-typography-headline-large-soft-line-height); font-size: var(--dt-typography-headline-large-soft-font-size); font-weight: var(--dt-typography-headline-large-soft-font-weight);"
+    },
+    {
       "var": "d-headline--large-compact",
       "output": "line-height: var(--dt-typography-headline-large-compact-line-height); font-size: var(--dt-typography-headline-large-compact-font-size); font-weight: var(--dt-typography-headline-large-compact-font-weight);"
+    },
+    {
+      "var": "d-headline--large-soft-compact",
+      "output": "line-height: var(--dt-typography-headline-large-soft-compact-line-height); font-size: var(--dt-typography-headline-large-soft-compact-font-size); font-weight: var(--dt-typography-headline-large-soft-compact-font-weight);"
     },
     {
       "var": "d-headline--extra-large",
