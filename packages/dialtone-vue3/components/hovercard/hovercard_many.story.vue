@@ -56,10 +56,10 @@
                   direction="column"
                   gap="0"
                 >
-                  <p class="d-headline-medium-compact">
+                  <p class="d-headline--medium-compact">
                     {{ data.name }}
                   </p>
-                  <p class="d-body-small d-fc-tertiary">
+                  <p class="d-body--small d-fc-tertiary">
                     Good Morning! :smile:
                   </p>
                 </dt-stack>
@@ -80,7 +80,7 @@
                     name="clock-4"
                     size="200"
                   />
-                  <p class="d-body-small">
+                  <p class="d-body--small">
                     <b>Local Time:</b> 12:32 PM
                   </p>
                 </dt-stack>

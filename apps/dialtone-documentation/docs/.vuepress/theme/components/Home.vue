@@ -4,7 +4,7 @@
     <div class="hero--inner-wrapper d-d-flex d-jc-space-between d-mx-auto d-wmx1340 d-pl32 d-pr32">
       <div class="dp-logo" />
       <div class="hero--content d-d-flex d-fd-column d-jc-center">
-        <h1 class="d-headline-extra-extra-large d-mb12">
+        <h1 class="d-headline--extra-extra-large d-mb12">
           Improve your UI's reception with Dialtone
         </h1>
         <p class="d-fs-300 d-lh-400 d-mb16 d-fc-secondary">
@@ -516,7 +516,7 @@
     </div>
   </section>
   <section class="links d-d-grid d-gg16 d-g-cols12 d-wmx1340 d-mx-auto">
-    <div class="link d-body-base d-gc3 d-px32 d-ta-center">
+    <div class="link d-body--base d-gc3 d-px32 d-ta-center">
       <router-link
         class="d-fc-primary h:d-fc-purple-400 d-d-block d-td-none d-bar8 d-pt4"
         to="/design/"
@@ -557,11 +557,11 @@
             stroke-width="2"
           />
         </svg>
-        <h2 class="d-headline-extra-large d-mb8 d-baw0">
+        <h2 class="d-headline--extra-large d-mb8 d-baw0">
           Design language
         </h2>
       </router-link>
-      <p class="d-mb8 d-body-base-compact d-fc-secondary">
+      <p class="d-mb8 d-body--base-compact d-fc-secondary">
         Foundational color, iconography, and spacing guidelines
       </p>
       <router-link
@@ -571,7 +571,7 @@
         Browse design guidelines
       </router-link>
     </div>
-    <div class="link d-body-base d-gc3 d-px32 d-ta-center">
+    <div class="link d-body--base d-gc3 d-px32 d-ta-center">
       <router-link
         class="d-fc-primary h:d-fc-purple-400 d-d-block d-td-none d-bar8 d-pt4"
         to="/components/"
@@ -629,11 +629,11 @@
           />
         </svg>
 
-        <h2 class="d-headline-extra-large d-mb8 d-baw0">
+        <h2 class="d-headline--extra-large d-mb8 d-baw0">
           Components
         </h2>
       </router-link>
-      <p class="d-mb8 d-body-base-compact d-fc-secondary">
+      <p class="d-mb8 d-body--base-compact d-fc-secondary">
         Presentational UI components offered in CSS and Vue
       </p>
       <div class="d-d-inline-flex d-fd-column d-stack4">
@@ -657,7 +657,7 @@
         >Browse Vue 3 components</a>
       </div>
     </div>
-    <div class="link d-body-base d-gc3 d-px32 d-ta-center">
+    <div class="link d-body--base d-gc3 d-px32 d-ta-center">
       <router-link
         class="d-fc-primary h:d-fc-purple-400 d-d-block d-td-none d-bar8 d-pt4"
         to="/utilities/"
@@ -716,11 +716,11 @@
           <path d="M22.272 63.7305H73.728" stroke="var(--dt-color-purple-400)" stroke-width="2" />
           <path d="M48 18.5464V79.4538" stroke="var(--dt-color-purple-400)" stroke-width="2" />
         </svg>
-        <h2 class="d-headline-extra-large d-mb8 d-baw0">
+        <h2 class="d-headline--extra-large d-mb8 d-baw0">
           Utilities
         </h2>
       </router-link>
-      <p class="d-mb8 d-body-base-compact d-fc-secondary">
+      <p class="d-mb8 d-body--base-compact d-fc-secondary">
         A utility-first CSS framework for building user interfaces.
       </p>
       <router-link
@@ -730,7 +730,7 @@
         Browse utility classes
       </router-link>
     </div>
-    <div class="link d-body-base d-gc3 d-px32 d-ta-center">
+    <div class="link d-body--base d-gc3 d-px32 d-ta-center">
       <router-link
         class="d-fc-primary h:d-fc-purple-400 d-d-block d-td-none d-bar8 d-pt4"
         to="/guides/"
@@ -762,11 +762,11 @@
           <rect x="18" y="40" width="40" height="2" fill="var(--dt-color-purple-400)" />
           <rect x="14" y="40" width="2" height="2" fill="var(--dt-color-purple-400)" />
         </svg>
-        <h2 class="d-headline-extra-large d-mb8 d-baw0">
+        <h2 class="d-headline--extra-large d-mb8 d-baw0">
           Guides
         </h2>
       </router-link>
-      <p class="d-mb8 d-body-base-compact d-fc-secondary">
+      <p class="d-mb8 d-body--base-compact d-fc-secondary">
         Reference guidelines for Accessibility, Writing, and more
       </p>
       <div class="d-d-inline-flex d-fd-column d-stack4">
@@ -792,7 +792,7 @@
     </div>
   </section>
   <section class="d-bt d-bc-subtle d-bgc-secondary d-py64 d-ta-center">
-    <div class="d-headline-large d-fw-medium d-fc-secondary d-px48 d-flow16 d-d-flex d-jc-center d-ai-center">
+    <div class="d-headline--large d-fw-medium d-fc-secondary d-px48 d-flow16 d-d-flex d-jc-center d-ai-center">
       <div>Don't see something? Want to contribute?</div>
       <a
         class="d-btn d-btn--muted d-btn--outlined d-btn--lg"

@@ -36,12 +36,12 @@
               <div class="d-d-flex d-fd-column d-fl-grow5">
                 <span class="d-label d-label--sm">Name</span>
                 <div class="d-d-flex d-jc-space-between">
-                  <span class="d-body-base-compact">{{ name }}</span>
+                  <span class="d-body--base-compact">{{ name }}</span>
                   <dt-link :href="figmaLink" target="_blank" rel="noopener noreferrer">
                     Figma
                   </dt-link>
                 </div>
-                <span class="d-body-small-compact">{{ desc }}</span>
+                <span class="d-body--small-compact">{{ desc }}</span>
               </div>
             </div>
             <div class="d-d-flex d-ai-flex-end">

@@ -46,7 +46,7 @@
           </dt-button>
         </router-link>
       </nav>
-      <footer class="d-mt16 d-mb16 d-body-small d-fc-tertiary">
+      <footer class="d-mt16 d-mb16 d-body--small d-fc-tertiary">
         <span
           v-if="$frontmatter.title"
           v-text="$frontmatter.title"
