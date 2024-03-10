@@ -66,7 +66,7 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
   class="d-wmx100p"
 >
   <template #default>
-    <p class="d-body-base-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-fw-semibold d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles with the same values.</p>
+    <p class="d-body--base-compact">Reach for these styles first before using CSS Utilities or creating custom styles. Otherwise, CSS Utilities are available for <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Font family</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-weight.md">Font weight</router-link>, <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-size.md">Font size</router-link>, and <router-link class="d-fw-semibold d-link d-link--muted" to="../../utilities/typography/font-family.md">Line height</router-link>, as well as <router-link class="d-fw-semibold d-link d-link--muted" to="/tokens/typography.md">Design Tokens</router-link> when you need to create custom styles with the same values.</p>
   </template>
 </dt-notice>
 
@@ -76,25 +76,25 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
   <div class="d-w100p">
     <dt-stack gap="500">
       <dt-stack gap="200">
-        <h2 class="d-headline-large">Ai that works for you</h2>
-        <div class="d-body-base">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+        <h2 class="d-headline--large">Ai that works for you</h2>
+        <div class="d-body--base">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
       </dt-stack>
       <dt-stack direction="row" gap="500" class="d-ai-flex-start">
         <dt-stack gap="200">
-          <h3 class="d-headline-medium-compact">Ai Contact Center</h3>
-          <p class="d-body-small">The world’s most advanced customer engagement platform</p>
+          <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
+          <p class="d-body--small">The world’s most advanced customer engagement platform</p>
         </dt-stack>
         <dt-stack gap="200">
-          <h3 class="d-headline-medium-compact">Ai Contact Center</h3>
-          <p class="d-body-small">The world’s most advanced customer engagement platform</p>
+          <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
+          <p class="d-body--small">The world’s most advanced customer engagement platform</p>
         </dt-stack>
         <dt-stack gap="200">
-          <h3 class="d-headline-medium-compact">Ai Voice</h3>
-          <p class="d-body-small">Say hello to the world’s smartest business phone</p>
+          <h3 class="d-headline--medium-compact">Ai Voice</h3>
+          <p class="d-body--small">Say hello to the world’s smartest business phone</p>
         </dt-stack>
         <dt-stack gap="200">
-          <h3 class="d-headline-medium-compact">Ai Meetings</h3>
-          <p class="d-body-small">Ai-powered video meetings with built-in transcriptions</p>
+          <h3 class="d-headline--medium-compact">Ai Meetings</h3>
+          <p class="d-body--small">Ai-powered video meetings with built-in transcriptions</p>
         </dt-stack>
       </dt-stack>
     </dt-stack>
@@ -104,25 +104,25 @@ Dialtone's text styles are narrowed down to five categories: **Headline**, **Bod
 ```html
 <dt-stack gap="500">
   <dt-stack gap="200">
-    <h2 class="d-headline-large">Ai that works for you</h2>
-    <div class="d-body-base">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+    <h2 class="d-headline--large">Ai that works for you</h2>
+    <div class="d-body--base">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
   </dt-stack>
   <dt-stack direction="row" gap="500" class="d-wmx764">
     <dt-stack gap="200">
-      <h3 class="d-headline-medium-compact">Ai Contact Center</h3>
-      <p class="d-body-small">The world’s most advanced customer engagement platform</p>
+      <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
+      <p class="d-body--small">The world’s most advanced customer engagement platform</p>
     </dt-stack>
     <dt-stack gap="200">
-      <h3 class="d-headline-medium-compact">Ai Contact Center</h3>
-      <p class="d-body-small">The world’s most advanced customer engagement platform</p>
+      <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
+      <p class="d-body--small">The world’s most advanced customer engagement platform</p>
     </dt-stack>
     <dt-stack gap="200">
-      <h3 class="d-headline-medium-compact">Ai Voice</h3>
-      <p class="d-body-small">Say hello to the world’s smartest business phone system</p>
+      <h3 class="d-headline--medium-compact">Ai Voice</h3>
+      <p class="d-body--small">Say hello to the world’s smartest business phone system</p>
     </dt-stack>
     <dt-stack gap="200">
-      <h3 class="d-headline-medium-compact">Ai Meetings</h3>
-      <p class="d-body-small">Ai-powered video meetings with built-in transcriptions</p>
+      <h3 class="d-headline--medium-compact">Ai Meetings</h3>
+      <p class="d-body--small">Ai-powered video meetings with built-in transcriptions</p>
     </dt-stack>
   </dt-stack>
 </dt-stack>
@@ -137,7 +137,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
     <template v-for="{ var: varName } in typographyStylesHeadlines">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code-small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -155,7 +155,7 @@ Default text style for readable content, designed for comfort and clarity in rea
     <template v-for="{ var: varName } in typographyStylesBody">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code-small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -173,7 +173,7 @@ Identifying form fields, buttons, and other interface elements, ensuring clear n
     <template v-for="{ var: varName } in typographyStylesLabel">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code-small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -191,7 +191,7 @@ Complementary information or guidance, such as tooltips and hints, to aid user u
     <template v-for="{ var: varName } in typographyStylesHelper">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code-small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -209,7 +209,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
     <template v-for="{ var: varName } in typographyStylesCode">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code-small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
