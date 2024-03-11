@@ -53,9 +53,11 @@ ul {
 //  ----------------------------------------------------------------------------
 //  NOTE: the comma-delimited classes are backwards-compatible,
 //        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
 .d-headline--eyebrow,
 .d-headline-eyebrow {
+    // font: var(--dt-typography-headline-eyebrow); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-eyebrow-line-height);
     font-size: var(--dt-typography-headline-eyebrow-font-size);
     font-weight: var(--dt-typography-headline-eyebrow-font-weight);
@@ -64,13 +66,12 @@ ul {
 
 .d-headline--small,
 .d-headline-small {
-    line-height: var(--dt-typography-headline-small-line-height);
-    font-size: var(--dt-typography-headline-small-font-size);
-    font-weight: var(--dt-typography-headline-small-font-weight);
+    font: var(--dt-typography-headline-small);
 }
 
 .d-headline--small-soft,
 .d-headline-soft-small {
+    // font: var(--dt-typography-headline-small-soft); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-small-soft-line-height);
     font-size: var(--dt-typography-headline-small-soft-font-size);
     font-weight: var(--dt-typography-headline-small-soft-font-weight);
@@ -78,13 +79,12 @@ ul {
 
 .d-headline--medium,
 .d-headline-medium {
-    line-height: var(--dt-typography-headline-medium-line-height);
-    font-size: var(--dt-typography-headline-medium-font-size);
-    font-weight: var(--dt-typography-headline-medium-font-weight);
+    font: var(--dt-typography-headline-medium);
 }
 
 .d-headline--small-compact,
 .d-headline-compact-small {
+    // font: var(--dt-typography-headline-small-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-small-compact-line-height);
     font-size: var(--dt-typography-headline-small-compact-font-size);
     font-weight: var(--dt-typography-headline-small-compact-font-weight);
@@ -92,6 +92,7 @@ ul {
 
 .d-headline--small-soft-compact,
 .d-headline-compact-soft-small {
+    // font: var(--dt-typography-headline-small-soft-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-small-soft-compact-line-height);
     font-size: var(--dt-typography-headline-small-soft-compact-font-size);
     font-weight: var(--dt-typography-headline-small-soft-compact-font-weight);
@@ -99,6 +100,7 @@ ul {
 
 .d-headline--medium-compact,
 .d-headline-compact-medium {
+    // font: var(--dt-typography-headline-medium-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-medium-compact-line-height);
     font-size: var(--dt-typography-headline-medium-compact-font-size);
     font-weight: var(--dt-typography-headline-medium-compact-font-weight);
@@ -106,12 +108,11 @@ ul {
 
 .d-headline--large,
 .d-headline-large {
-    line-height: var(--dt-typography-headline-large-line-height);
-    font-size: var(--dt-typography-headline-large-font-size);
-    font-weight: var(--dt-typography-headline-large-font-weight);
+    font: var(--dt-typography-headline-large);
 }
 
 .d-headline--large-soft {
+    // font: var(--dt-typography-headline-large-soft); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-large-soft-line-height);
     font-size: var(--dt-typography-headline-large-soft-font-size);
     font-weight: var(--dt-typography-headline-large-soft-font-weight);
@@ -119,12 +120,14 @@ ul {
 
 .d-headline--large-compact,
 .d-headline-compact-large {
+    // font: var(--dt-typography-headline-large-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-large-compact-line-height);
     font-size: var(--dt-typography-headline-large-compact-font-size);
     font-weight: var(--dt-typography-headline-large-compact-font-weight);
 }
 
 .d-headline--large-soft-compact {
+    // font: var(--dt-typography-headline-large-soft-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-large-soft-compact-line-height);
     font-size: var(--dt-typography-headline-large-soft-compact-font-size);
     font-weight: var(--dt-typography-headline-large-soft-compact-font-weight);
@@ -132,12 +135,11 @@ ul {
 
 .d-headline--extra-large,
 .d-headline-extra-large {
-    line-height: var(--dt-typography-headline-extra-large-line-height);
-    font-size: var(--dt-typography-headline-extra-large-font-size);
-    font-weight: var(--dt-typography-headline-extra-large-font-weight);
+    font: var(--dt-typography-headline-extra-large);
 }
 
 .d-headline--extra-large-compact {
+    // font: var(--dt-typography-headline-extra-large-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-extra-large-compact-line-height);
     font-size: var(--dt-typography-headline-extra-large-compact-font-size);
     font-weight: var(--dt-typography-headline-extra-large-compact-font-weight);
@@ -145,12 +147,11 @@ ul {
 
 .d-headline--extra-extra-large,
 .d-headline-extra-extra-large {
-    line-height: var(--dt-typography-headline-extra-extra-large-line-height);
-    font-size: var(--dt-typography-headline-extra-extra-large-font-size);
-    font-weight: var(--dt-typography-headline-extra-extra-large-font-weight);
+    font: var(--dt-typography-headline-extra-extra-large);
 }
 
 .d-headline--extra-extra-large-compact {
+    // font: var(--dt-typography-headline-extra-extra-large-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-headline-extra-extra-large-compact-line-height);
     font-size: var(--dt-typography-headline-extra-extra-large-compact-font-size);
     font-weight: var(--dt-typography-headline-extra-extra-large-compact-font-weight);
@@ -161,23 +162,21 @@ ul {
 //  ----------------------------------------------------------------------------
 //  NOTE: the comma-delimited classes are backwards-compatible,
 //        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
 .d-body--base,
 .d-body-base {
-    line-height: var(--dt-typography-body-base-line-height);
-    font-size: var(--dt-typography-body-base-font-size);
-    font-weight: var(--dt-typography-body-base-font-weight);
+    font: var(--dt-typography-body-base);
 }
 
 .d-body--small,
 .d-body-small  {
-    line-height: var(--dt-typography-body-small-line-height);
-    font-size: var(--dt-typography-body-small-font-size);
-    font-weight: var(--dt-typography-body-small-font-weight);
+    font: var(--dt-typography-body-small);
 }
 
 .d-body--base-compact,
 .d-body-compact {
+    // font: var(--dt-typography-body-base-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-body-base-compact-line-height);
     font-size: var(--dt-typography-body-base-compact-font-size);
     font-weight: var(--dt-typography-body-base-compact-font-weight);
@@ -185,6 +184,7 @@ ul {
 
 .d-body--small-compact,
 .d-body-compact-small {
+    // font: var(--dt-typography-body-small-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-body-small-compact-line-height);
     font-size: var(--dt-typography-body-small-compact-font-size);
     font-weight: var(--dt-typography-body-small-compact-font-weight);
@@ -195,23 +195,21 @@ ul {
 //  ----------------------------------------------------------------------------
 //  NOTE: the comma-delimited classes are backwards-compatible,
 //        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
 .d-label--base,
 .d-label-base {
-    line-height: var(--dt-typography-label-base-line-height);
-    font-size: var(--dt-typography-label-base-font-size);
-    font-weight: var(--dt-typography-label-base-font-weight);
+    font: var(--dt-typography-label-base);
 }
 
 .d-label--small,
 .d-label-small {
-    line-height: var(--dt-typography-label-small-line-height);
-    font-size: var(--dt-typography-label-small-font-size);
-    font-weight: var(--dt-typography-label-small-font-weight);
+    font: var(--dt-typography-label-small);
 }
 
 .d-label--base-compact,
 .d-label-compact {
+    // font: var(--dt-typography-label-base-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-label-base-compact-line-height);
     font-size: var(--dt-typography-label-base-compact-font-size);
     font-weight: var(--dt-typography-label-base-compact-font-weight);
@@ -219,6 +217,7 @@ ul {
 
 .d-label--base-plain,
 .d-label-plain {
+    // font: var(--dt-typography-label-base-plain); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-label-base-plain-line-height);
     font-size: var(--dt-typography-label-base-plain-font-size);
     font-weight: var(--dt-typography-label-base-plain-font-weight);
@@ -226,6 +225,7 @@ ul {
 
 .d-label--base-plain-compact,
 .d-label-compact-plain {
+    // font: var(--dt-typography-label-base-plain-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-label-base-plain-compact-line-height);
     font-size: var(--dt-typography-label-base-plain-compact-font-size);
     font-weight: var(--dt-typography-label-base-plain-compact-font-weight);
@@ -233,6 +233,7 @@ ul {
 
 .d-label--small-compact,
 .d-label-compact-small {
+    // font: var(--dt-typography-label-small-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-label-small-compact-line-height);
     font-size: var(--dt-typography-label-small-compact-font-size);
     font-weight: var(--dt-typography-label-small-compact-font-weight);
@@ -240,6 +241,7 @@ ul {
 
 .d-label--small-plain,
 .d-label-plain-small {
+    // font: var(--dt-typography-label-small-plain); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-label-small-plain-line-height);
     font-size: var(--dt-typography-label-small-plain-font-size);
     font-weight: var(--dt-typography-label-small-plain-font-weight);
@@ -247,6 +249,7 @@ ul {
 
 .d-label--small-plain-compact,
 .d-label-compact-plain-small {
+    // font: var(--dt-typography-label-small-plain-compact); // replace with this once Style Dictionary transform resolved
     line-height: var(--dt-typography-label-small-plain-compact-line-height);
     font-size: var(--dt-typography-label-small-plain-compact-font-size);
     font-weight: var(--dt-typography-label-small-plain-compact-font-weight);
@@ -257,19 +260,16 @@ ul {
 //  ----------------------------------------------------------------------------
 //  NOTE: the comma-delimited classes are backwards-compatible,
 //        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
 .d-helper--base,
 .d-helper-base {
-    line-height: var(--dt-typography-helper-base-line-height);
-    font-size: var(--dt-typography-helper-base-font-size);
-    font-weight: var(--dt-typography-helper-base-font-weight);
+    font: var(--dt-typography-helper-base);
 }
 
 .d-helper--small,
 .d-helper-small {
-    line-height: var(--dt-typography-helper-small-line-height);
-    font-size: var(--dt-typography-helper-small-font-size);
-    font-weight: var(--dt-typography-helper-small-font-weight);
+    font: var(--dt-typography-helper-small);
 }
 
 //  ============================================================================
@@ -277,21 +277,16 @@ ul {
 //  ----------------------------------------------------------------------------
 //  NOTE: the comma-delimited classes are backwards-compatible,
 //        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
 .d-code--base,
 .d-code-base {
-    font-family: var(--dt-typography-code-base-font-family);
-    line-height: var(--dt-typography-code-base-line-height);
-    font-size: var(--dt-typography-code-base-font-size);
-    font-weight: var(--dt-typography-code-base-font-weight);
+    font: var(--dt-typography-code-base);
 }
 
 .d-code--small,
 .d-code-small {
-    font-family: var(--dt-typography-code-small-font-family);
-    line-height: var(--dt-typography-code-small-line-height);
-    font-size: var(--dt-typography-code-small-font-size);
-    font-weight: var(--dt-typography-code-small-font-weight);
+    font: var(--dt-typography-code-small);
 }
 
 //  ============================================================================

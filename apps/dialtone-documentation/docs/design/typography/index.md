@@ -357,6 +357,8 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
 
 ### API
 
+Each typography style is expressed through a shorthand `font` property, and its value's design token contains all font styles, e.g. `font-size`, `line-height`, `font-family`, etc,
+
 <div class="d-hmx464 d-of-y-auto d-bb d-bc-default">
   <table class="d-table dialtone-doc-table">
     <thead>
