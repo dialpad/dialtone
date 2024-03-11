@@ -47,9 +47,8 @@ jobs:
     if: ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+      - name: Check out branch
+        uses: actions/checkout@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -95,9 +94,8 @@ jobs:
     if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+      - name: Check out branch
+        uses: actions/checkout@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v3
