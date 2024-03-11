@@ -13,7 +13,7 @@ export const argsData = {
   shortTime: '4:54',
   onFocus: action('focus'),
   onHover: action('hover'),
-  attachment: '<img src="https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg"></img>',
+  attachment: '<img alt="dwight" src="https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg"></img>',
   default: `Elementum fames :smile: nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis :laughing: quisque.`,
