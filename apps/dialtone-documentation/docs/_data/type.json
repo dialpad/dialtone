@@ -6,7 +6,7 @@
     },
     {
       "var": "d-headline--small",
-      "output": "font: var(--dt-typography-headline-small);"
+      "output": "font: var(--dt-typography-headline-small)"
     },
     {
       "var": "d-headline--small-soft",
@@ -22,7 +22,7 @@
     },
     {
       "var": "d-headline--medium",
-      "output": "font: var(--dt-typography-headline-medium);"
+      "output": "font: var(--dt-typography-headline-medium)"
     },
     {
       "var": "d-headline--medium-compact",
@@ -30,7 +30,7 @@
     },
     {
       "var": "d-headline--large",
-      "output": "font: var(--dt-typography-headline-large);"
+      "output": "font: var(--dt-typography-headline-large)"
     },
     {
       "var": "d-headline--large-soft",
@@ -46,7 +46,7 @@
     },
     {
       "var": "d-headline--extra-large",
-      "output": "font: var(--dt-typography-headline-extra-large);"
+      "output": "font: var(--dt-typography-headline-extra-large)"
     },
     {
       "var": "d-headline--extra-large-compact",
@@ -54,7 +54,7 @@
     },
     {
       "var": "d-headline--extra-extra-large",
-      "output": "font: var(--dt-typography-headline-extra-extra-large);"
+      "output": "font: var(--dt-typography-headline-extra-extra-large)"
     },
     {
       "var": "d-headline--extra-extra-large-compact",
@@ -62,7 +62,7 @@
     },
     {
       "var": "d-body--base",
-      "output": "font: var(--dt-typography-body-base);"
+      "output": "font: var(--dt-typography-body-base)"
     },
     {
       "var": "d-body--base-compact",
@@ -70,7 +70,7 @@
     },
     {
       "var": "d-body--small",
-      "output": "font: var(--dt-typography-body-small);"
+      "output": "font: var(--dt-typography-body-small)"
     },
     {
       "var": "d-body--small-compact",
@@ -78,7 +78,7 @@
     },
     {
       "var": "d-label--base",
-      "output": "font: var(--dt-typography-label-base);"
+      "output": "font: var(--dt-typography-label-base)"
     },
     {
       "var": "d-label--base-compact",
@@ -86,7 +86,7 @@
     },
     {
       "var": "d-label--small",
-      "output": "font: var(--dt-typography-label-small);"
+      "output": "font: var(--dt-typography-label-small)"
     },
     {
       "var": "d-label--base-plain",
@@ -110,19 +110,19 @@
     },
     {
       "var": "d-helper--base",
-      "output": "font: var(--dt-typography-helper-base);"
+      "output": "font: var(--dt-typography-helper-base)"
     },
     {
       "var": "d-helper--small",
-      "output": "font: var(--dt-typography-helper-small);"
+      "output": "font: var(--dt-typography-helper-small)"
     },
     {
       "var": "d-code--base",
-      "output": "font: var(--dt-typography-code-base);"
+      "output": "font: var(--dt-typography-code-base)"
     },
     {
       "var": "d-code--small",
-      "output": "font: var(--dt-typography-code-small);"
+      "output": "font: var(--dt-typography-code-small)"
     }
   ],
   "fontFamily": [

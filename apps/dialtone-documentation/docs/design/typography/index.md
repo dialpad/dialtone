@@ -3,7 +3,7 @@ title: Typography
 description: Clear, legible, and easy-to-read text.
 ---
 
-## Properties
+## Font properties
 
 ### Font family
 
@@ -57,16 +57,6 @@ Adjusts vertical spacing between lines of text, optimizing legibility and text f
 </dt-stack>
 
 ## Styles
-
-<dt-notice
-  kind="info"
-  hideClose="true"
-  class="d-wmx100p"
->
-  <template #default>
-    Reach for these styles first before using <router-link class="d-link d-link--muted" to="../../utilities/">CSS Utilities</router-link> or creating custom styles with <router-link class="d-link d-link--muted" to="/tokens/">Design Tokens</router-link>.
-  </template>
-</dt-notice>
 
 ### Usage
 
@@ -215,7 +205,7 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
   </table>
 </div>
 
-#### Examples
+### Examples
 
 <code-well-header class="d-pb32">
   <div class="d-w100p">
@@ -303,7 +293,7 @@ Default text style for longer-form prose content, designed for comfort and clari
 
 ### Label
 
-Shorter-length copy like form fields, buttons, and other UI labeling elements, ensuring clear navigation and interaction.
+Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and interaction.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
   <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
