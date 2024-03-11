@@ -45,7 +45,7 @@
             gap="300"
             class="d-ai-center"
           >
-            <span class="d-ws-nowrap">{{ name }}</span>
+            <span>{{ name }}</span>
             <copy-button
               :text="name"
               aria-label="copy token"

@@ -1,7 +1,7 @@
 <template>
   <div
     class="d-d-grid d-jc-center"
-    :class="gridClass"
+    :class="[gridClass, tokensPageClass]"
   >
     <div class="d-p24 lg:d-pr24 lg:d-pt64">
       <page-header />
@@ -92,6 +92,7 @@ const gridClass = computed(() => {
   if (props.isMobile || !includeToc.value) return 'd-gl-docsite';
   return 'd-gl-docsite-toc';
 });
+
 const items = useThemeLocaleData().value.sidebar;
 const route = useRoute();
 const includeToc = computed(() => {
@@ -100,5 +101,10 @@ const includeToc = computed(() => {
   if (!items[key] || !Array.isArray(items[key])) return false;
   const headers = usePageData().value.headers;
   return headers?.length > 0;
+});
+
+const tokensPageClass = computed(() => {
+  if (route.path.includes('tokens')) return 'tokens-page';
+  return '';
 });
 </script>

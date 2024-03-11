@@ -1,4 +1,13 @@
 <template>
+  <aside class="d-of-auto d-py32 lg:d-ps-relative lg:d-w100p d-ps-fixed dialtone-toc">
+    <h2 class="d-headline-eyebrow d-fw-semibold d-fc-secondary d-px12 d-pb4">
+      On this page
+    </h2>
+    <toc
+      :headers="filteredHeaders"
+      :options="tocOptions"
+    />
+  </aside>
   <div class="tokens-bar">
     <dt-input
       id="search-input"
@@ -45,9 +54,21 @@
     />
   </div>
   <div v-for="category in Object.keys(filteredTokens)" :key="category">
-    <slot :name="category">
-      <!-- slot for anchor header -->
-    </slot>
+    <h2
+      :id="category"
+      class="d-docsite--header-2 d-tt-capitalize"
+      tabindex="-1"
+    >
+      <a
+        :href="`#${category}`"
+        class="header-anchor d-link d-docsite--link d-link"
+      >#</a>
+      {{ category }}
+    </h2>
+    <p class="dialtone-intro">
+      {{ categoryIntroAndDesc[category]?.intro }}
+    </p>
+    <div v-html="categoryIntroAndDesc[category]?.description" />
     <token-table :category="category" :tokens="filteredTokens[category]" />
   </div>
   <div
@@ -65,8 +86,30 @@
 import * as tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 import { getComposedTypographyTokens, getComposedShadowTokens } from '../common/token-utilities';
 import TokenTable, { CATEGORY_MAP, FORMAT_MAP, THEMES } from '@baseComponents/TokenTable.vue';
-import { computed, ref, onBeforeMount } from 'vue';
+import { capitalize, computed, ref, onBeforeMount } from 'vue';
 import { debounce } from '../common/utilities';
+
+const tocOptions = {
+  listClass: 'toc-list d-ls-reset',
+  itemClass: 'toc-item lg:d-d-flex d-fw-wrap',
+  linkTag: 'a',
+  linkClass: 'd-btn d-btn--sm d-btn--muted d-fw-normal d-w100p d-jc-flex-start',
+  linkActiveClass: 'd-btn--active d-fc-primary',
+  linkChildrenActiveClass: '',
+};
+
+const categoryIntroAndDesc = {
+  size: {
+    intro: 'Consistent size and scale.',
+    description: `Need help using these design tokens? Learn how in the
+      <a href="/design/size/" class="d-docsite--link d-link">Sizing documentation</a>.`,
+  },
+  space: {
+    intro: 'Defines the paddings, gaps, and margins.',
+    description: `Need help using these design tokens? Learn how in the
+      <a href="/design/space/" class="d-docsite--link d-link">Spacing documentation</a>.`,
+  },
+};
 
 const format = ref('CSS');
 const theme = ref('light');
@@ -74,12 +117,19 @@ const searchInput = ref(null);
 const searchCriteria = ref(null);
 const processedTokens = {}; // is set beforeMount and never changes
 const filteredTokens = ref({}); // same as processedTokens but filtered by format, theme and search
+const filteredHeaders = ref([]); // to fill the dynamic table of contents
 
 const formatSelectMenuOptions = computed(() => {
   return Object.keys(FORMAT_MAP).map((item) => {
     return { value: item, label: item };
   });
 });
+
+const updateHeaders = () => {
+  filteredHeaders.value = Object.keys(filteredTokens.value).map((category) => {
+    return { title: capitalize(category), level: 2, slug: category, children: [] };
+  });
+};
 
 const setFormat = (newFormat) => {
   format.value = newFormat;
@@ -99,6 +149,7 @@ const setSearchCriteria = () => {
 const filterTokens = () => {
   if (!searchCriteria.value) {
     filteredTokens.value = structuredClone(processedTokens[format.value][theme.value]);
+    updateHeaders();
     return;
   }
   const newTokens = {};
@@ -120,6 +171,7 @@ const filterTokens = () => {
     if (results.length) newTokens[category] = results;
   });
   filteredTokens.value = structuredClone(newTokens);
+  updateHeaders();
 };
 
 const searchToken = () => {
@@ -229,5 +281,14 @@ const isBaseToken = (name) => name.endsWith('base)') || name.endsWith('root)');
     grid-gap: var(--dt-space-400);
     grid-template-columns: auto min-content min-content;
     align-items: end;
+  }
+  .dialtone-toc {
+    width: var(--dt-size-850);
+    height: calc(100vh - var(--dt-size-700));
+    top: var(--dt-space-700);
+    right: var(--dt-space-730);
+    @media (max-width: 1260px) {
+      display: none;
+    }
   }
 </style>
