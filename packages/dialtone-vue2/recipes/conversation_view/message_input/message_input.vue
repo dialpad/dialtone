@@ -597,8 +597,8 @@ export default {
       this.$refs.messageInputImageUpload.$refs.input.click();
     },
 
-    onImageUpload (val) {
-      this.$emit('select-media', val);
+    onImageUpload () {
+      this.$emit('select-media', this.$refs.messageInputImageUpload.$refs.input.files);
     },
 
     toggleEmojiPicker () {
