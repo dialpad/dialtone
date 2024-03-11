@@ -103,11 +103,21 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
         </td>
         <td>
           <dt-stack gap="200">
+            <div><code class="d-code--small">&nbsp;</code></div>
             <div><code class="d-code--small">soft</code></div>
+            <div><code class="d-code--small">&nbsp;</code></div>
+            <div><code class="d-code--small">soft</code></div>
+            <div><code class="d-code--small">&nbsp;</code></div>
+            <div><code class="d-code--small">&nbsp;</code></div>
           </dt-stack>
         </td>
         <td>
           <dt-stack gap="200">
+            <div><code class="d-code--small">&nbsp;</code></div>
+            <div><code class="d-code--small">compact</code></div>
+            <div><code class="d-code--small">compact</code></div>
+            <div><code class="d-code--small">compact</code></div>
+            <div><code class="d-code--small">compact</code></div>
             <div><code class="d-code--small">compact</code></div>
           </dt-stack>
         </td>
@@ -123,10 +133,14 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
           </dt-stack>
         </td>
         <td>
-          <span class="d-fc-muted" aria-hidden="true">-</span>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">&nbsp;</code></div>
+            <div><code class="d-code--small">&nbsp;</code></div>
+          </dt-stack>
         </td>
         <td>
           <dt-stack gap="200">
+            <div><code class="d-code--small">compact</code></div>
             <div><code class="d-code--small">compact</code></div>
           </dt-stack>
         </td>
@@ -144,10 +158,12 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
         <td>
           <dt-stack gap="200">
             <div><code class="d-code--small">plain</code></div>
+            <div><code class="d-code--small">plain</code></div>
           </dt-stack>
         </td>
         <td>
           <dt-stack gap="200">
+            <div><code class="d-code--small">compact</code></div>
             <div><code class="d-code--small">compact</code></div>
           </dt-stack>
         </td>
@@ -163,10 +179,13 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
           </dt-stack>
         </td>
         <td>
-          <span class="d-fc-muted" aria-hidden="true">-</span>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">&nbsp;</code></div>
+            <div><code class="d-code--small">&nbsp;</code></div>
+          </dt-stack>
         </td>
         <td>
-          <span class="d-fc-muted" aria-hidden="true">-</span>
+          <div><code class="d-code--small">&nbsp;</code></div>
         </td>
       </tr>
       <tr class="d-va-top">
@@ -180,10 +199,16 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
           </dt-stack>
         </td>
         <td>
-          <span class="d-fc-muted" aria-hidden="true">-</span>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">&nbsp;</code></div>
+            <div><code class="d-code--small">&nbsp;</code></div>
+          </dt-stack>
         </td>
         <td>
-          <span class="d-fc-muted" aria-hidden="true">-</span>
+          <dt-stack gap="200">
+            <div><code class="d-code--small">&nbsp;</code></div>
+            <div><code class="d-code--small">&nbsp;</code></div>
+          </dt-stack>
         </td>
       </tr>
     </tbody>
