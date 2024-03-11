@@ -27,6 +27,14 @@
       />
     </template>
     <template
+      v-if="$attrs.attachment"
+      #attachment
+    >
+      <span
+        v-html="$attrs.attachment"
+      />
+    </template>
+    <template
       v-if="$attrs.threading"
       #threading
     >
