@@ -157,7 +157,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/space) section.
 
-<token-table category="space" :tokenList="tokenList" />
+<token-table category="space" :tokenList="true" :tokens="tokens" />
 
 <DtNotice
   kind="info"
@@ -178,19 +178,34 @@ By Feb 2024, we aim to integrate spacing units into Figma Variables. This will s
 
 <script setup>
 import { ref } from 'vue';
+import * as tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 import SvgLoader from '../../../../baseComponents/SvgLoader.vue';
 
-const tokenList = {
-  'var(--dt-space-0)': { description: 'Default space between elements.' },
-  'var(--dt-space-200)': { description: 'Horizontal stack Icon + Text, Vertical stack List group.' },
-  'var(--dt-space-300)': { },
-  'var(--dt-space-400)': { },
-  'var(--dt-space-450)': { },
-  'var(--dt-space-500)': { },
-  'var(--dt-space-550)': { },
-  'var(--dt-space-600)': { },
-  'var(--dt-space-650)': { },
+const spaces = {
+  "space/0": { description: 'Default space between elements.' },
+  "space/200": { description: 'Horizontal stack Icon + Text, Vertical stack List group.' },
+  "space/300": {},
+  "space/400": {},
+  "space/450": {},
+  "space/500": {},
+  "space/550": {},
+  "space/600": {},
+  "space/650": {}
 };
+const theme = "light";
+const tokens = Object.keys(tokensJson[theme]).reduce((acc, curr) => {
+  if (Object.keys(spaces).includes(curr)) {
+    const { name, value, description } = tokensJson[theme][curr]["css/variables"];
+    acc.push({
+      name,
+      tokenValue: value,
+      description: spaces[curr].description || description,
+      exampleValue: value,
+      exampleName: name,
+    });
+  }
+  return acc;
+}, []);
 
 const spaceValues = [
   { value: 'var(--dt-space-300)', label: 'var(--dt-space-300)' },

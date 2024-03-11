@@ -121,8 +121,8 @@ export default {
     },
 
     tokenList: {
-      type: Object,
-      default: null,
+      type: Boolean,
+      default: false,
     },
   },
 

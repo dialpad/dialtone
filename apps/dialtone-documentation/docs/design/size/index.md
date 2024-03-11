@@ -119,7 +119,7 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/size/) section.
 
-<token-table category="size" :tokenList="tokenList" />
+<token-table category="size" :tokenList="true" :tokens="tokens" />
 
 <DtNotice
   kind="info"
@@ -136,14 +136,23 @@ By Feb 2024, we aim to integrate sizing units into Figma Variables. This will si
 
 <script setup>
 import { ref } from 'vue';
-const tokenList = {
-  'var(--dt-size-300)': { description: '' },
-  'var(--dt-size-450)': { description: '' },
-  'var(--dt-size-400)': { description: '' },
-  'var(--dt-size-500)': { description: '' },
-  'var(--dt-size-550)': { description: '' },
-  'var(--dt-size-600)': { description: '' },
-};
+import * as tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+
+const sizes = ["size/300", "size/450", "size/400", "size/500", "size/550", "size/600"];
+const theme = "light";
+const tokens = Object.keys(tokensJson[theme]).reduce((acc, curr) => {
+  if (sizes.includes(curr)) {
+    const { name, value, description } = tokensJson[theme][curr]["css/variables"];
+    acc.push({
+      name,
+      tokenValue: value,
+      description,
+      exampleValue: value,
+      exampleName: name,
+    });
+  }
+  return acc;
+}, []);
 
   const sizeValues = [
     { value: 'var(--dt-size-720)', label: 'var(--dt-size-720)' },
