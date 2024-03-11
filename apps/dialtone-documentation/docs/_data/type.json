@@ -49,8 +49,16 @@
       "output": "line-height: var(--dt-typography-headline-extra-large-line-height); font-size: var(--dt-typography-headline-extra-large-font-size); font-weight: var(--dt-typography-headline-extra-large-font-weight);"
     },
     {
+      "var": "d-headline--extra-large-compact",
+      "output": "line-height: var(--dt-typography-headline-extra-large-compact-line-height); font-size: var(--dt-typography-headline-extra-large-compact-font-size); font-weight: var(--dt-typography-headline-extra-large-compact-font-weight);"
+    },
+    {
       "var": "d-headline--extra-extra-large",
       "output": "line-height: var(--dt-typography-headline-extra-extra-large-line-height); font-size: var(--dt-typography-headline-extra-extra-large-font-size); font-weight: var(--dt-typography-headline-extra-extra-large-font-weight);"
+    },
+    {
+      "var": "d-headline--extra-extra-large-compact",
+      "output": "line-height: var(--dt-typography-headline-extra-extra-large-compact-line-height); font-size: var(--dt-typography-headline-extra-extra-large-compact-font-size); font-weight: var(--dt-typography-headline-extra-extra-large-compact-font-weight);"
     },
     {
       "var": "d-body--base",
