@@ -74,7 +74,7 @@
     },
     {
       "var": "d-headline--large-soft-compact",
-      "output": "var(--dt-typography-headline-large-soft-compact)"
+      "output": "font: var(--dt-typography-headline-large-soft-compact)"
     },
     {
       "var": "d-headline--extra-large",
