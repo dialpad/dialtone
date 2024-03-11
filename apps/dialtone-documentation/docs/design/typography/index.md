@@ -77,127 +77,29 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
       </tr>
     </thead>
     <tbody>
-      <tr class="d-va-top">
+      <tr class="d-va-top" v-for="item in typographyVariants" :key="item.category">
         <td>
-          <code class="d-code--small">headline</code>
+          <code class="d-code--small">{{ item.category }}</code>
         </td>
         <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">eyebrow</code></div>
-            <div><code class="d-code--small">small</code></div>
-            <div><code class="d-code--small">medium</code></div>
-            <div><code class="d-code--small">large</code></div>
-            <div><code class="d-code--small">extra-large</code></div>
-            <div><code class="d-code--small">extra-extra-large</code></div>
+          <dt-stack gap="300">
+            <div v-for="(size, index) in item.size" :key="index" :class="{'d-fc-transparent': size === '-'}">
+              <code class="d-code--small">{{ size }}</code>
+            </div>
           </dt-stack>
         </td>
         <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">&nbsp;</code></div>
-            <div><code class="d-code--small">soft</code></div>
-            <div><code class="d-code--small">&nbsp;</code></div>
-            <div><code class="d-code--small">soft</code></div>
-            <div><code class="d-code--small">&nbsp;</code></div>
-            <div><code class="d-code--small">&nbsp;</code></div>
+          <dt-stack gap="300">
+            <div v-for="(strength, index) in item.strength" :key="index" :class="{'d-fc-transparent': strength === '-'}">
+              <code class="d-code--small">{{ strength }}</code>
+            </div>
           </dt-stack>
         </td>
         <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">&nbsp;</code></div>
-            <div><code class="d-code--small">compact</code></div>
-            <div><code class="d-code--small">compact</code></div>
-            <div><code class="d-code--small">compact</code></div>
-            <div><code class="d-code--small">compact</code></div>
-            <div><code class="d-code--small">compact</code></div>
-          </dt-stack>
-        </td>
-      </tr>
-      <tr class="d-va-top">
-        <td>
-          <code class="d-code--small">body</code>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">small</code></div>
-            <div><code class="d-code--small">base</code></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">&nbsp;</code></div>
-            <div><code class="d-code--small">&nbsp;</code></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">compact</code></div>
-            <div><code class="d-code--small">compact</code></div>
-          </dt-stack>
-        </td>
-      </tr>
-      <tr class="d-va-top">
-        <td>
-          <code class="d-code--small">label</code>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">small</code></div>
-            <div><code class="d-code--small">base</code></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">plain</code></div>
-            <div><code class="d-code--small">plain</code></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">compact</code></div>
-            <div><code class="d-code--small">compact</code></div>
-          </dt-stack>
-        </td>
-      </tr>
-      <tr class="d-va-top">
-        <td>
-          <code class="d-code--small">helper</code>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">small</code></div>
-            <div><code class="d-code--small">base</code></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">&nbsp;</code></div>
-            <div><code class="d-code--small">&nbsp;</code></div>
-          </dt-stack>
-        </td>
-        <td>
-          <div><code class="d-code--small">&nbsp;</code></div>
-        </td>
-      </tr>
-      <tr class="d-va-top">
-        <td>
-          <code class="d-code--small">code</code>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">small</code></div>
-            <div><code class="d-code--small">base</code></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">&nbsp;</code></div>
-            <div><code class="d-code--small">&nbsp;</code></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="200">
-            <div><code class="d-code--small">&nbsp;</code></div>
-            <div><code class="d-code--small">&nbsp;</code></div>
+          <dt-stack gap="300">
+            <div v-for="(density, index) in item.density" :key="index" :class="{'d-fc-transparent': density === '-'}">
+              <code class="d-code--small">{{ density }}</code>
+            </div>
           </dt-stack>
         </td>
       </tr>
@@ -367,7 +269,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
 </div>
 
 <script setup>
-  import { typographyStyles, fontSize, lineHeight } from '@data/type.json';
+  import { typographyVariants, typographyStyles, fontSize, lineHeight } from '@data/type.json';
   import CopyButton from '@baseComponents/CopyButton.vue';
   import SvgLoader from '@baseComponents/SvgLoader.vue';
 

@@ -1,4 +1,36 @@
 {
+  "typographyVariants": [
+    {
+      "category": "headline",
+      "size": ["eyebrow", "small", "medium", "large", "extra-large", "extra-extra-large"],
+      "strength": ["-", "soft", "-", "soft", "-", "-"],
+      "density": ["-", "compact", "compact", "compact", "compact", "compact"]
+    },
+    {
+      "category": "body",
+      "size": ["small", "base"],
+      "strength": ["-", "-"],
+      "density": ["compact", "compact"]
+    },
+    {
+      "category": "label",
+      "size": ["small", "base"],
+      "strength": ["plain", "plain"],
+      "density": ["compact", "compact"]
+    },
+    {
+      "category": "helper",
+      "size": ["small", "base"],
+      "strength": ["-", "-"],
+      "density": ["-"]
+    },
+    {
+      "category": "code",
+      "size": ["small", "base"],
+      "strength": ["-", "-"],
+      "density": ["-", "-"]
+    }
+  ],
   "typographyStyles": [
     {
       "var": "d-headline--eyebrow",
