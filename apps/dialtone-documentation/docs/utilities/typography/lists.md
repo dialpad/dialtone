@@ -83,20 +83,20 @@ Use `d-ls-{disc|decimal}` to change an unordered list's bullet styling.
   <template #content>
     <tbody>
       <tr>
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-ls-reset</th>
-        <td class="d-ff-mono d-fs-100">
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ls-reset</th>
+        <td class="d-code--sm">
           margin: 0;<br/>
           padding: 0;<br/>
           list-style: none !important;
         </td>
       </tr>
       <tr>
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-ls-none</th>
-        <td class="d-ff-mono d-fs-100">list-style: none !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ls-none</th>
+        <td class="d-code--sm">list-style: none !important;</td>
       </tr>
       <tr v-for="i in lists">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-lst-{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-lst-{{ i }}</th>
+        <td class="d-code--sm">
           <span v-if="i === 'content'">list-style-type: var(--ls-content) !important;</span>
           <span v-else>list-style-type: {{ i }} !important;</span>
         </td>

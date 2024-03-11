@@ -11,8 +11,8 @@ Set an element's z-index by using a class (`.d-zi-{level}`>). These classes matc
   <template #content>
     <tbody>
       <tr v-for="{ name, output } in zIndex">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fs-100 d-fw-normal">.d-zi-{{ name }}</th>
-        <td class="d-ff-mono d-fs-100">z-index: {{ output }};</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-zi-{{ name }}</th>
+        <td class="d-code--sm">z-index: {{ output }};</td>
       </tr>
     </tbody>
    </template>
@@ -36,7 +36,7 @@ When writing Less, you can set an element's z-index by using a variable (`var(--
   </thead>
   <tbody>
     <tr v-for="{ name, description, output } in zIndex">
-      <th scope="row" class="d-ff-mono d-fc-magenta-300 d-fs-100 d-fw-normal">var(--zi-{{ name }})</th>
+      <th scope="row" class="d-code--sm d-fc-magenta-300 d-fw-normal">var(--zi-{{ name }})</th>
       <td>{{ output }}</td>
       <td class="dialtone-table--sans">{{ description }}</td>
     </tr>

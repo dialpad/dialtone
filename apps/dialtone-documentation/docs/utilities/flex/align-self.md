@@ -93,8 +93,8 @@ Use `d-as-flex-end` to align an item from the end of the parent's cross axis.
   <template #content>
     <tbody>
       <tr v-for=" { class: className, output } in alignSelf">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-{{ className }}</th>
-        <td class="d-ff-mono d-fs-100">{{ output }}</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
+        <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>
 </template>

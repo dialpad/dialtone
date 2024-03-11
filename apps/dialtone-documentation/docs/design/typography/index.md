@@ -261,8 +261,8 @@ Each typography style is expressed through a shorthand `font` property, and its 
     </thead>
     <tbody>
       <tr v-for="{ var: varName, output } in typographyStyles">
-        <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.{{ varName }}</td>
-        <td class="d-ff-mono d-fs-100">{{ output }}</td>
+        <td class="d-code--sm d-fc-purple-400">.{{ varName }}</td>
+        <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>
   </table>

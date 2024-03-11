@@ -207,8 +207,8 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
       <td class="d-ta-center">
         <dt-icon name="inbox" :size="size" />
       </td>
-      <td class="d-ff-mono d-fs-100">{{ width_height }}</td>
-      <td class="d-ff-mono d-fs-100">.{{ className }}</td>
+      <td class="d-code--sm">{{ width_height }}</td>
+      <td class="d-code--sm">.{{ className }}</td>
     </tr>
   </tbody>
 </table>

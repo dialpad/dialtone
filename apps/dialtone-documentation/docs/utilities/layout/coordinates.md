@@ -91,7 +91,7 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
           <td v-if="percent === 'no' && combo === 'no'" class="d-o50 d-bgc-black-200 d-fc-black-400 d-fs-100 d-ta-center">
             <em>N/A</em>
           </td>
-          <td v-else class="d-ff-mono d-fc-purple-400 d-fs-100">
+          <td v-else class="d-code--sm d-fc-purple-400">
             <span v-if="suffix === '-calc'">.d-{{ pre }}{{ coordinate }}{{ suffix }}</span>
             <span v-else>.d-{{ pre }}{{ coordinate }}</span>
           </td>
@@ -187,7 +187,7 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
           <td v-if="percent === 'no' && combo === 'no'" class="d-o50 d-bgc-black-200 d-fc-black-400 d-fs-100 d-ta-center">
             <em>N/A</em>
           </td>
-          <td v-else class="d-ff-mono d-fc-purple-400 d-fs-100">
+          <td v-else class="d-code--sm d-fc-purple-400">
             <span v-if="suffix === '-calc'">.d-{{ pre }}n{{ coordinate }}{{ suffix }}</span>
             <span v-else>.d-{{ pre }}n{{ coordinate }}</span>
           </td>

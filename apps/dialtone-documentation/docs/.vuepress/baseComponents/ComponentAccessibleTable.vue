@@ -26,11 +26,11 @@
       >
         <th
           scope="row"
-          class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100"
+          class="d-code--sm d-fc-purple-400"
           v-text="item"
         />
         <td
-          class="d-ff-mono d-fs-100"
+          class="d-code--sm"
           v-text="applies"
         />
         <td

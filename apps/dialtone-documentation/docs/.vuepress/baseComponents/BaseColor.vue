@@ -17,7 +17,7 @@
       v-for="({ stop, copy, hex, contrast, invertedContrast }, index) in stops"
       :key="index"
       :class="dynamicClasses(stop, copy, index)"
-      class="d-d-flex d-jc-space-between d-ai-center d-px12 d-py8 d-fs-100 d-lh6 d-ff-mono"
+      class="d-d-flex d-jc-space-between d-ai-center d-px12 d-py8 d-code--sm"
     >
       <div>
         <strong>var(--dt-color-{{ color }}{{ stop ? `-${stop}` : '' }})</strong>

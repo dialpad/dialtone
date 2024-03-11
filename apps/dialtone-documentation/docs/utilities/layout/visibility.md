@@ -7,9 +7,9 @@ description: Utilities for showing or hiding an element without changing the lay
 
 <code-well-header bgclass='d-bgc-purple-100'>
   <div class="d-w100p">
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-ff-mono d-fs-200 d-ta-center d-vi-visible">.d-vi-visible</div>
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-ff-mono d-fs-200 d-ta-center d-vi-visible-sr">.d-vi-visible-sr</div>
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-ff-mono d-fs-200 d-ta-center d-vi-hidden">.d-vi-hidden</div>
+    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-visible">.d-vi-visible</div>
+    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-visible-sr">.d-vi-visible-sr</div>
+    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-hidden">.d-vi-hidden</div>
   </div>
 </code-well-header>
 
@@ -29,12 +29,12 @@ Bear in mind using a visibility value of `hidden` on an element will remove it f
   <template #content>
     <tbody>
       <tr>
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-vi-visible</th>
-        <td class="d-ff-mono d-fs-100">visibility: visible !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-vi-visible</th>
+        <td class="d-code--sm">visibility: visible !important;</td>
       </tr>
       <tr>
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-vi-visible-sr</th>
-        <td class="d-ff-mono d-fs-100">border: 0;
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-vi-visible-sr</th>
+        <td class="d-code--sm">border: 0;
         clip: rect(1px,1px,1px,1px);
         clip-path: inset(50%);
         height: 1px;
@@ -46,8 +46,8 @@ Bear in mind using a visibility value of `hidden` on an element will remove it f
         word-wrap: normal;</td>
       </tr>
       <tr>
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-vi-hidden</th>
-        <td class="d-ff-mono d-fs-100">visibility: hidden !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-vi-hidden</th>
+        <td class="d-code--sm">visibility: hidden !important;</td>
       </tr>
     </tbody>
   </template>
