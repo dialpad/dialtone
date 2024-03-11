@@ -92,7 +92,7 @@ jobs:
           connection_url: ${{ secrets.MAIL_CONNECTION }}
           subject: "Dialtone: New blog post '${{ env.BLOG_POST_HEADING }}'"
           to: ${{ env.TO_MAIL }}
-          from: ${{ env.FROM_MAIL }}
+          from: Dialtone <${{ env.FROM_MAIL }}>
           html_body: file://${{ env.FILE_PATH }}
           bcc: ${{ env.FROM_MAIL }}
           reply_to: ${{ env.REPLY_TO }}
