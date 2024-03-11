@@ -2,127 +2,127 @@
   "typographyStyles": [
     {
       "var": "d-headline--eyebrow",
-      "output": "line-height: var(--dt-typography-headline-eyebrow-line-height); font-size: var(--dt-typography-headline-eyebrow-font-size); font-weight: var(--dt-typography-headline-eyebrow-font-weight); text-transform: var(--dt-typography-headline-eyebrow-text-case);"
+      "output": "font: var(--dt-typography-headline-eyebrow)"
     },
     {
       "var": "d-headline--small",
-      "output": "line-height: var(--dt-typography-headline-small-line-height); font-size: var(--dt-typography-headline-small-font-size); font-weight: var(--dt-typography-headline-small-font-weight);"
+      "output": "font: var(--dt-typography-headline-small);"
     },
     {
       "var": "d-headline--small-soft",
-      "output": "line-height: var(--dt-typography-headline-small-soft-line-height); font-size: var(--dt-typography-headline-small-soft-font-size); font-weight: var(--dt-typography-headline-small-soft-font-weight);"
+      "output": "font: var(--dt-typography-headline-small-soft)"
     },
     {
       "var": "d-headline--small-compact",
-      "output": "line-height: var(--dt-typography-headline-small-compact-line-height); font-size: var(--dt-typography-headline-small-compact-font-size); font-weight: var(--dt-typography-headline-small-compact-font-weight);"
+      "output": "font: var(--dt-typography-headline-small-compact)"
     },
     {
       "var": "d-headline--small-soft-compact",
-      "output": "line-height: var(--dt-typography-headline-small-soft-compact-line-height); font-size: var(--dt-typography-headline-small-soft-compact-font-size); font-weight: var(--dt-typography-headline-small-soft-compact-font-weight);"
+      "output": "font: var(--dt-typography-headline-small-soft-compact)"
     },
     {
       "var": "d-headline--medium",
-      "output": "line-height: var(--dt-typography-headline-medium-line-height); font-size: var(--dt-typography-headline-medium-font-size); font-weight: var(--dt-typography-headline-medium-font-weight);"
+      "output": "font: var(--dt-typography-headline-medium);"
     },
     {
       "var": "d-headline--medium-compact",
-      "output": "line-height: var(--dt-typography-headline-medium-compact-line-height); font-size: var(--dt-typography-headline-medium-compact-font-size); font-weight: var(--dt-typography-headline-medium-compact-font-weight);"
+      "output": "font: var(--dt-typography-headline-medium-compact)"
     },
     {
       "var": "d-headline--large",
-      "output": "line-height: var(--dt-typography-headline-large-line-height); font-size: var(--dt-typography-headline-large-font-size); font-weight: var(--dt-typography-headline-large-font-weight);"
+      "output": "font: var(--dt-typography-headline-large);"
     },
     {
       "var": "d-headline--large-soft",
-      "output": "line-height: var(--dt-typography-headline-large-soft-line-height); font-size: var(--dt-typography-headline-large-soft-font-size); font-weight: var(--dt-typography-headline-large-soft-font-weight);"
+      "output": "font: var(--dt-typography-headline-large-soft)"
     },
     {
       "var": "d-headline--large-compact",
-      "output": "line-height: var(--dt-typography-headline-large-compact-line-height); font-size: var(--dt-typography-headline-large-compact-font-size); font-weight: var(--dt-typography-headline-large-compact-font-weight);"
+      "output": "font: var(--dt-typography-headline-large-compact)"
     },
     {
       "var": "d-headline--large-soft-compact",
-      "output": "line-height: var(--dt-typography-headline-large-soft-compact-line-height); font-size: var(--dt-typography-headline-large-soft-compact-font-size); font-weight: var(--dt-typography-headline-large-soft-compact-font-weight);"
+      "output": "var(--dt-typography-headline-large-soft-compact)"
     },
     {
       "var": "d-headline--extra-large",
-      "output": "line-height: var(--dt-typography-headline-extra-large-line-height); font-size: var(--dt-typography-headline-extra-large-font-size); font-weight: var(--dt-typography-headline-extra-large-font-weight);"
+      "output": "font: var(--dt-typography-headline-extra-large);"
     },
     {
       "var": "d-headline--extra-large-compact",
-      "output": "line-height: var(--dt-typography-headline-extra-large-compact-line-height); font-size: var(--dt-typography-headline-extra-large-compact-font-size); font-weight: var(--dt-typography-headline-extra-large-compact-font-weight);"
+      "output": "font: var(--dt-typography-headline-extra-large-compact)"
     },
     {
       "var": "d-headline--extra-extra-large",
-      "output": "line-height: var(--dt-typography-headline-extra-extra-large-line-height); font-size: var(--dt-typography-headline-extra-extra-large-font-size); font-weight: var(--dt-typography-headline-extra-extra-large-font-weight);"
+      "output": "font: var(--dt-typography-headline-extra-extra-large);"
     },
     {
       "var": "d-headline--extra-extra-large-compact",
-      "output": "line-height: var(--dt-typography-headline-extra-extra-large-compact-line-height); font-size: var(--dt-typography-headline-extra-extra-large-compact-font-size); font-weight: var(--dt-typography-headline-extra-extra-large-compact-font-weight);"
+      "output": "font: var(--dt-typography-headline-extra-extra-large-compact)"
     },
     {
       "var": "d-body--base",
-      "output": "line-height: var(--dt-typography-body-base-line-height); font-size: var(--dt-typography-body-base-font-size); font-weight: var(--dt-typography-body-base-font-weight);"
+      "output": "font: var(--dt-typography-body-base);"
     },
     {
       "var": "d-body--base-compact",
-      "output": "line-height: var(--dt-typography-body-base-compact-line-height); font-size: var(--dt-typography-body-base-compact-font-size); font-weight: var(--dt-typography-body-base-compact-font-weight);"
+      "output": "font: var(--dt-typography-body-base-compact)"
     },
     {
       "var": "d-body--small",
-      "output": "line-height: var(--dt-typography-body-small-line-height); font-size: var(--dt-typography-body-small-font-size); font-weight: var(--dt-typography-body-small-font-weight);"
+      "output": "font: var(--dt-typography-body-small);"
     },
     {
       "var": "d-body--small-compact",
-      "output": "line-height: var(--dt-typography-body-small-compact-line-height); font-size: var(--dt-typography-body-small-compact-font-size); font-weight: var(--dt-typography-body-small-compact-font-weight);"
+      "output": "font: var(--dt-typography-body-small-compact)"
     },
     {
       "var": "d-label--base",
-      "output": "line-height: var(--dt-typography-label-base-line-height); font-size: var(--dt-typography-label-base-font-size); font-weight: var(--dt-typography-label-base-font-weight);"
+      "output": "font: var(--dt-typography-label-base);"
     },
     {
       "var": "d-label--base-compact",
-      "output": "line-height: var(--dt-typography-label-base-compact-line-height); font-size: var(--dt-typography-label-base-compact-font-size); font-weight: var(--dt-typography-label-base-compact-font-weight);"
+      "output": "font: var(--dt-typography-label-base-compact)"
     },
     {
       "var": "d-label--small",
-      "output": "line-height: var(--dt-typography-label-small-line-height); font-size: var(--dt-typography-label-small-font-size); font-weight: var(--dt-typography-label-small-font-weight);"
+      "output": "font: var(--dt-typography-label-small);"
     },
     {
       "var": "d-label--base-plain",
-      "output": "line-height: var(--dt-typography-label-base-plain-line-height); font-size: var(--dt-typography-label-base-plain-font-size); font-weight: var(--dt-typography-label-base-plain-font-weight);"
+      "output": "font: var(--dt-typography-label-base-plain)"
     },
     {
       "var": "d-label--base-plain-compact",
-      "output": "line-height: var(--dt-typography-label-base-plain-compact-line-height); font-size: var(--dt-typography-label-base-plain-compact-font-size); font-weight: var(--dt-typography-label-base-plain-compact-font-weight);"
+      "output": "font: var(--dt-typography-label-base-plain-compact)"
     },
     {
       "var": "d-label--small-compact",
-      "output": "line-height: var(--dt-typography-label-small-compact-line-height); font-size: var(--dt-typography-label-small-compact-font-size); font-weight: var(--dt-typography-label-small-compact-font-weight);"
+      "output": "font: var(--dt-typography-label-small-compact)"
     },
     {
       "var": "d-label--small-plain",
-      "output": "line-height: var(--dt-typography-label-small-plain-line-height); font-size: var(--dt-typography-label-small-plain-font-size); font-weight: var(--dt-typography-label-small-plain-font-weight);"
+      "output": "font: var(--dt-typography-label-small-plain)"
     },
     {
       "var": "d-label--small-plain-compact",
-      "output": "line-height: var(--dt-typography-label-small-plain-compact-line-height); font-size: var(--dt-typography-label-small-plain-compact-font-size); font-weight: var(--dt-typography-label-small-plain-compact-font-weight);"
+      "output": "font: var(--dt-typography-label-small-plain-compact)"
     },
     {
       "var": "d-helper--base",
-      "output": "line-height: var(--dt-typography-helper-base-line-height); font-size: var(--dt-typography-helper-base-font-size); font-weight: var(--dt-typography-helper-base-font-weight);"
+      "output": "font: var(--dt-typography-helper-base);"
     },
     {
       "var": "d-helper--small",
-      "output": "line-height: var(--dt-typography-helper-small-line-height); font-size: var(--dt-typography-helper-small-font-size); font-weight: var(--dt-typography-helper-small-font-weight);"
+      "output": "font: var(--dt-typography-helper-small);"
     },
     {
       "var": "d-code--base",
-      "output": "font-family: var(--dt-typography-code-base-font-family); line-height: var(--dt-typography-code-base-line-height); font-size: var(--dt-typography-code-base-font-size); font-weight: var(--dt-typography-code-base-font-weight);"
+      "output": "font: var(--dt-typography-code-base);"
     },
     {
       "var": "d-code--small",
-      "output": "font-family: var(--dt-typography-code-small-font-family); line-height: var(--dt-typography-code-small-line-height); font-size: var(--dt-typography-code-small-font-size); font-weight: var(--dt-typography-code-small-font-weight);"
+      "output": "font: var(--dt-typography-code-small);"
     }
   ],
   "fontFamily": [
