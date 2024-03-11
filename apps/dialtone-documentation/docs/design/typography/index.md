@@ -60,7 +60,7 @@ Adjusts vertical spacing between lines of text, optimizing legibility and text f
 
 ### Usage
 
-All product UI text can be characterized as one of **Headline**, **Body**, **Label**, **Helper**, or **Code**. These styles are effectively multi-property CSS Utilities, combining properties like `font-size`, `font-family`, `font-weight`, and `line-height`.
+All product UI text can be characterized as one of **Headline**, **Body**, **Label**, **Helper**, or **Code**. These styles are effectively **composition** CSS Utilities, combining multiple properties like `font-size`, `font-family`, `font-weight`, and `line-height`.
 
 ```html
 <el class="d-{category}--{size}-{strength}-{density}">...</el>
