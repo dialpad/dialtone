@@ -31,6 +31,7 @@
               kind="muted"
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               size="xs"
+              :aria-label="button.tooltipMessage"
               @click="button.onClick()"
             >
               <template #icon>
@@ -75,6 +76,7 @@
                   class="d-ol-none"
                   :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
                   size="xs"
+                  :aria-label="linkButton.tooltipMessage"
                   @click="linkButton.onClick()"
                 >
                   <template #icon>

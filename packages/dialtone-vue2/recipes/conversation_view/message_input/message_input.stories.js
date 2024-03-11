@@ -112,6 +112,10 @@ export const argsData = {
     warning: 500,
     message: 'You have exceeded the character limit',
   },
+  showSend: {
+    icon: 'send',
+    ariaLabel: 'send',
+  },
   mentionSuggestion,
   onSubmit: action('submit'),
   onFocus: action('focus'),

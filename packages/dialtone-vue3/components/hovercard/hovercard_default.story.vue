@@ -21,7 +21,7 @@
         avatar-alt="Avatar person"
         :avatar-src="defaultImage"
         user-status="Working from SF"
-        call-button-tooltip=""
+        call-button-tooltip="Call contact"
         v-bind="slotProps"
       />
     </template>

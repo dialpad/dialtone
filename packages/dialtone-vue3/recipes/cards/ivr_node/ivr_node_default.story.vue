@@ -53,6 +53,7 @@
           <dt-avatar
             full-name="Person Avatar"
             :image-src="$attrs.defaultImage"
+            image-alt=""
             seed="seed"
           />
           <p>Carolina Garcia Rodriguez</p>

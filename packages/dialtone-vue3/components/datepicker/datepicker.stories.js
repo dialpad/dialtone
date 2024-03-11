@@ -127,6 +127,21 @@ export const Default = {
   render: Template,
   args: {},
   parameters: {
+    // @fixme The a11y tests are run before the aria-labels are being loaded
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-input-field-name',
+            reviewOnFail: true,
+          },
+          {
+            id: 'landmark-unique',
+            reviewOnFail: true,
+          },
+        ],
+      },
+    },
     percy: {
       args: {
         date: defaultDate,
