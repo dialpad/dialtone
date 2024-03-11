@@ -1,8 +1,5 @@
 name: Send communications
 on:
-  pull_request:
-    paths:
-      - 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
   push:
     branches:
       - production
@@ -42,18 +39,12 @@ jobs:
         files: ${{ fromJSON(needs.changed-files.outputs.added-posts) }}
     env:
       FROM_MAIL: ${{ secrets.MAIL_ACCOUNT }}
-      TO_MAIL: >
-        brad.paugh@dialpad.com,
-        ignacio.ropolo@dialpad.com,
-        nina.repetto@dialpad.com,
-        julio.ortega@dialpad.com
+      TO_MAIL: dialtone-users@dialpad.com
       FILE_PATH: ${{ matrix.files }}
       REPLY_TO: dialtone@dialpad.com
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Get link from file name
         id: get-post-url
