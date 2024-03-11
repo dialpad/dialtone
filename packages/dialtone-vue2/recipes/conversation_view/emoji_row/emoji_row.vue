@@ -159,7 +159,10 @@ export default {
   }
 
   &__reaction-number {
-    font: var(--dt-typography-body-small);
+    // font: var(--dt-typography-body-sm); // replace with this once Style Dictionary transform resolved
+    line-height: var(--dt-typography-body-sm-line-height);
+    font-size: var(--dt-typography-body-sm-font-size);
+    font-weight: var(--dt-typography-body-sm-font-weight);
     font-variant: tabular-nums;
   }
 }

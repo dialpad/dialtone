@@ -6,7 +6,7 @@
         name="check-circle"
         size="300"
       />
-      <span class="d-label-plain-base">Ready</span>
+      <span class="d-label--md-plain-base">Ready</span>
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-icon
@@ -14,7 +14,7 @@
         name="tools"
         size="300"
       />
-      <span class="d-label-plain-base">In progress</span>
+      <span class="d-label--md-plain-base">In progress</span>
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-icon
@@ -22,7 +22,7 @@
         name="box-select"
         size="300"
       />
-      <span class="d-label-plain-base">Planned</span>
+      <span class="d-label--md-plain-base">Planned</span>
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-icon
@@ -30,7 +30,7 @@
         name="box"
         size="300"
       />
-      <span class="d-label-plain-base">N/A</span>
+      <span class="d-label--md-plain-base">N/A</span>
     </dt-stack>
   </dt-stack>
   <table class="d-table">

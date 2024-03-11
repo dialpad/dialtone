@@ -2,31 +2,31 @@
   "typographyVariants": [
     {
       "category": "headline",
-      "size": ["eyebrow", "small", "medium", "large", "extra-large", "extra-extra-large"],
+      "size": ["eyebrow", "sm", "md", "lg", "xl", "xxl"],
       "strength": ["-", "soft", "-", "soft", "-", "-"],
       "density": ["-", "compact", "compact", "compact", "compact", "compact"]
     },
     {
       "category": "body",
-      "size": ["small", "base"],
+      "size": ["sm", "md"],
       "strength": ["-", "-"],
       "density": ["compact", "compact"]
     },
     {
       "category": "label",
-      "size": ["small", "base"],
+      "size": ["sm", "md"],
       "strength": ["plain", "plain"],
       "density": ["compact", "compact"]
     },
     {
       "category": "helper",
-      "size": ["small", "base"],
+      "size": ["sm", "md"],
       "strength": ["-", "-"],
       "density": ["-"]
     },
     {
       "category": "code",
-      "size": ["small", "base"],
+      "size": ["sm", "md"],
       "strength": ["-", "-"],
       "density": ["-", "-"]
     }
@@ -37,124 +37,124 @@
       "output": "font: var(--dt-typography-headline-eyebrow)"
     },
     {
-      "var": "d-headline--small",
-      "output": "font: var(--dt-typography-headline-small)"
+      "var": "d-headline--sm",
+      "output": "font: var(--dt-typography-headline-sm)"
     },
     {
-      "var": "d-headline--small-soft",
-      "output": "font: var(--dt-typography-headline-small-soft)"
+      "var": "d-headline--sm-soft",
+      "output": "font: var(--dt-typography-headline-sm-soft)"
     },
     {
-      "var": "d-headline--small-compact",
-      "output": "font: var(--dt-typography-headline-small-compact)"
+      "var": "d-headline--sm-compact",
+      "output": "font: var(--dt-typography-headline-sm-compact)"
     },
     {
-      "var": "d-headline--small-soft-compact",
-      "output": "font: var(--dt-typography-headline-small-soft-compact)"
+      "var": "d-headline--sm-soft-compact",
+      "output": "font: var(--dt-typography-headline-sm-soft-compact)"
     },
     {
-      "var": "d-headline--medium",
-      "output": "font: var(--dt-typography-headline-medium)"
+      "var": "d-headline--md",
+      "output": "font: var(--dt-typography-headline-md)"
     },
     {
-      "var": "d-headline--medium-compact",
-      "output": "font: var(--dt-typography-headline-medium-compact)"
+      "var": "d-headline--md-compact",
+      "output": "font: var(--dt-typography-headline-md-compact)"
     },
     {
-      "var": "d-headline--large",
-      "output": "font: var(--dt-typography-headline-large)"
+      "var": "d-headline--lg",
+      "output": "font: var(--dt-typography-headline-lg)"
     },
     {
-      "var": "d-headline--large-soft",
-      "output": "font: var(--dt-typography-headline-large-soft)"
+      "var": "d-headline--lg-soft",
+      "output": "font: var(--dt-typography-headline-lg-soft)"
     },
     {
-      "var": "d-headline--large-compact",
-      "output": "font: var(--dt-typography-headline-large-compact)"
+      "var": "d-headline--lg-compact",
+      "output": "font: var(--dt-typography-headline-lg-compact)"
     },
     {
-      "var": "d-headline--large-soft-compact",
-      "output": "font: var(--dt-typography-headline-large-soft-compact)"
+      "var": "d-headline--lg-soft-compact",
+      "output": "font: var(--dt-typography-headline-lg-soft-compact)"
     },
     {
-      "var": "d-headline--extra-large",
-      "output": "font: var(--dt-typography-headline-extra-large)"
+      "var": "d-headline--xl",
+      "output": "font: var(--dt-typography-headline-xl)"
     },
     {
-      "var": "d-headline--extra-large-compact",
-      "output": "font: var(--dt-typography-headline-extra-large-compact)"
+      "var": "d-headline--xl-compact",
+      "output": "font: var(--dt-typography-headline-xl-compact)"
     },
     {
-      "var": "d-headline--extra-extra-large",
-      "output": "font: var(--dt-typography-headline-extra-extra-large)"
+      "var": "d-headline--xxl",
+      "output": "font: var(--dt-typography-headline-xxl)"
     },
     {
-      "var": "d-headline--extra-extra-large-compact",
-      "output": "font: var(--dt-typography-headline-extra-extra-large-compact)"
+      "var": "d-headline--xxl-compact",
+      "output": "font: var(--dt-typography-headline-xxl-compact)"
     },
     {
-      "var": "d-body--base",
-      "output": "font: var(--dt-typography-body-base)"
+      "var": "d-body--md",
+      "output": "font: var(--dt-typography-body-md)"
     },
     {
-      "var": "d-body--base-compact",
-      "output": "font: var(--dt-typography-body-base-compact)"
+      "var": "d-body--md-compact",
+      "output": "font: var(--dt-typography-body-md-compact)"
     },
     {
-      "var": "d-body--small",
-      "output": "font: var(--dt-typography-body-small)"
+      "var": "d-body--sm",
+      "output": "font: var(--dt-typography-body-sm)"
     },
     {
-      "var": "d-body--small-compact",
-      "output": "font: var(--dt-typography-body-small-compact)"
+      "var": "d-body--sm-compact",
+      "output": "font: var(--dt-typography-body-sm-compact)"
     },
     {
-      "var": "d-label--base",
-      "output": "font: var(--dt-typography-label-base)"
+      "var": "d-label--md",
+      "output": "font: var(--dt-typography-label-md)"
     },
     {
-      "var": "d-label--base-compact",
-      "output": "font: var(--dt-typography-label-base-compact)"
+      "var": "d-label--md-compact",
+      "output": "font: var(--dt-typography-label-md-compact)"
     },
     {
-      "var": "d-label--small",
-      "output": "font: var(--dt-typography-label-small)"
+      "var": "d-label--sm",
+      "output": "font: var(--dt-typography-label-sm)"
     },
     {
-      "var": "d-label--base-plain",
-      "output": "font: var(--dt-typography-label-base-plain)"
+      "var": "d-label--md-plain",
+      "output": "font: var(--dt-typography-label-md-plain)"
     },
     {
-      "var": "d-label--base-plain-compact",
-      "output": "font: var(--dt-typography-label-base-plain-compact)"
+      "var": "d-label--md-plain-compact",
+      "output": "font: var(--dt-typography-label-md-plain-compact)"
     },
     {
-      "var": "d-label--small-compact",
-      "output": "font: var(--dt-typography-label-small-compact)"
+      "var": "d-label--sm-compact",
+      "output": "font: var(--dt-typography-label-sm-compact)"
     },
     {
-      "var": "d-label--small-plain",
-      "output": "font: var(--dt-typography-label-small-plain)"
+      "var": "d-label--sm-plain",
+      "output": "font: var(--dt-typography-label-sm-plain)"
     },
     {
-      "var": "d-label--small-plain-compact",
-      "output": "font: var(--dt-typography-label-small-plain-compact)"
+      "var": "d-label--sm-plain-compact",
+      "output": "font: var(--dt-typography-label-sm-plain-compact)"
     },
     {
-      "var": "d-helper--base",
-      "output": "font: var(--dt-typography-helper-base)"
+      "var": "d-helper--md",
+      "output": "font: var(--dt-typography-helper-md)"
     },
     {
-      "var": "d-helper--small",
-      "output": "font: var(--dt-typography-helper-small)"
+      "var": "d-helper--sm",
+      "output": "font: var(--dt-typography-helper-sm)"
     },
     {
-      "var": "d-code--base",
-      "output": "font: var(--dt-typography-code-base)"
+      "var": "d-code--md",
+      "output": "font: var(--dt-typography-code-md)"
     },
     {
-      "var": "d-code--small",
-      "output": "font: var(--dt-typography-code-small)"
+      "var": "d-code--sm",
+      "output": "font: var(--dt-typography-code-sm)"
     }
   ],
   "fontFamily": [

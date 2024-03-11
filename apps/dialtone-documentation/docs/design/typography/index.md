@@ -72,33 +72,33 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
       <tr>
         <th>Category</th>
         <th>Size</th>
-        <th>Strength <span class="d-label--small-plain-compact d-tt-none">(optional)</span></th>
-        <th>Density <span class="d-label--small-plain-compact d-tt-none">(optional)</span></th>
+        <th>Strength <span class="d-label--sm-plain-compact d-tt-none">(optional)</span></th>
+        <th>Density <span class="d-label--sm-plain-compact d-tt-none">(optional)</span></th>
       </tr>
     </thead>
     <tbody>
       <tr class="d-va-top" v-for="item in typographyVariants" :key="item.category">
         <td>
-          <code class="d-code--small">{{ item.category }}</code>
+          <code class="d-code--sm">{{ item.category }}</code>
         </td>
         <td>
           <dt-stack gap="300">
             <div v-for="(size, index) in item.size" :key="index" :class="{'d-fc-transparent': size === '-'}">
-              <code class="d-code--small">{{ size }}</code>
+              <code class="d-code--sm">{{ size }}</code>
             </div>
           </dt-stack>
         </td>
         <td>
           <dt-stack gap="300">
             <div v-for="(strength, index) in item.strength" :key="index" :class="{'d-fc-transparent': strength === '-'}">
-              <code class="d-code--small">{{ strength }}</code>
+              <code class="d-code--sm">{{ strength }}</code>
             </div>
           </dt-stack>
         </td>
         <td>
           <dt-stack gap="300">
             <div v-for="(density, index) in item.density" :key="index" :class="{'d-fc-transparent': density === '-'}">
-              <code class="d-code--small">{{ density }}</code>
+              <code class="d-code--sm">{{ density }}</code>
             </div>
           </dt-stack>
         </td>
@@ -113,21 +113,21 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
   <div class="d-w100p">
     <dt-stack gap="400">
       <dt-stack>
-        <h2 class="d-headline--large">Ai that works for you</h2>
-        <div class="d-body--base-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+        <h2 class="d-headline--lg">Ai that works for you</h2>
+        <div class="d-body--md-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
       </dt-stack>
       <dt-stack direction="row" gap="500" class="d-ai-flex-start">
         <dt-stack>
-          <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
-          <p class="d-body--small">The world’s most advanced customer engagement platform</p>
+          <h3 class="d-headline--md-compact">Ai Contact Center</h3>
+          <p class="d-body--sm">The world’s most advanced customer engagement platform</p>
         </dt-stack>
         <dt-stack>
-          <h3 class="d-headline--medium-compact">Ai Voice</h3>
-          <p class="d-body--small">Say hello to the world’s smartest business phone</p>
+          <h3 class="d-headline--md-compact">Ai Voice</h3>
+          <p class="d-body--sm">Say hello to the world’s smartest business phone</p>
         </dt-stack>
         <dt-stack>
-          <h3 class="d-headline--medium-compact">Ai Meetings</h3>
-          <p class="d-body--small">Ai-powered video meetings with built-in transcriptions</p>
+          <h3 class="d-headline--md-compact">Ai Meetings</h3>
+          <p class="d-body--sm">Ai-powered video meetings with built-in transcriptions</p>
         </dt-stack>
       </dt-stack>
     </dt-stack>
@@ -137,21 +137,21 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
 ```html
 <dt-stack gap="400">
   <dt-stack>
-    <h2 class="d-headline--large">Ai that works for you</h2>
-    <div class="d-body--base-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+    <h2 class="d-headline--lg">Ai that works for you</h2>
+    <div class="d-body--md-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
   </dt-stack>
   <dt-stack direction="row" gap="500" class="d-ai-flex-start">
     <dt-stack>
-      <h3 class="d-headline--medium-compact">Ai Contact Center</h3>
-      <p class="d-body--small">The world’s most advanced customer engagement platform</p>
+      <h3 class="d-headline--md-compact">Ai Contact Center</h3>
+      <p class="d-body--sm">The world’s most advanced customer engagement platform</p>
     </dt-stack>
     <dt-stack>
-      <h3 class="d-headline--medium-compact">Ai Voice</h3>
-      <p class="d-body--small">Say hello to the world’s smartest business phone</p>
+      <h3 class="d-headline--md-compact">Ai Voice</h3>
+      <p class="d-body--sm">Say hello to the world’s smartest business phone</p>
     </dt-stack>
     <dt-stack>
-      <h3 class="d-headline--medium-compact">Ai Meetings</h3>
-      <p class="d-body--small">Ai-powered video meetings with built-in transcriptions</p>
+      <h3 class="d-headline--md-compact">Ai Meetings</h3>
+      <p class="d-body--sm">Ai-powered video meetings with built-in transcriptions</p>
     </dt-stack>
   </dt-stack>
 </dt-stack>
@@ -166,7 +166,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
     <template v-for="{ var: varName } in typographyStylesHeadlines">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -184,7 +184,7 @@ Default text style for longer-form prose content, designed for comfort and clari
     <template v-for="{ var: varName } in typographyStylesBody">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -202,7 +202,7 @@ Shorter-length copy like form fields, buttons, and other UI-labeling elements, e
     <template v-for="{ var: varName } in typographyStylesLabel">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -220,7 +220,7 @@ Complementary information or guidance, such as tooltips and hints, to aid user u
     <template v-for="{ var: varName } in typographyStylesHelper">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -238,7 +238,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
     <template v-for="{ var: varName } in typographyStylesCode">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--small d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>

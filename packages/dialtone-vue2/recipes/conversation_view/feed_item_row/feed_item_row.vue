@@ -386,7 +386,10 @@ export default {
   }
 
   &:deep(> .dt-item-layout) {
-    font: var(--dt-typography-body-compact-base);
+    // font: var(--dt-typography-body-md-compact); // replace with this once Style Dictionary transform resolved
+    line-height: var(--dt-typography-body-md-compact-line-height);
+    font-size: var(--dt-typography-body-md-compact-font-size);
+    font-weight: var(--dt-typography-body-md-compact-font-weight);
     min-height: initial;
     padding: 0px;
   }
