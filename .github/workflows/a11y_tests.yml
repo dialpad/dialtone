@@ -79,7 +79,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright Browsers
-        run: pnpm dlx playwright install chromium
+        run: pnpm dlx playwright install --with-deps
 
       - name: Build Dialtone-vue 2 library and documentation site
         run: pnpm nx run --verbose dialtone-vue2:build-docs
@@ -127,7 +127,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright Browsers
-        run: pnpm dlx playwright install chromium
+        run: pnpm dlx playwright install --with-deps
 
       - name: Build Dialtone-vue 3 library and documentation site
         run: pnpm nx run --verbose dialtone-vue3:build-docs
