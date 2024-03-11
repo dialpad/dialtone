@@ -15,6 +15,8 @@
         :content-id="$attrs.contentId"
         :important="$attrs.important"
         :hide-close="$attrs.hideClose"
+        :hide-action="$attrs.hideAction"
+        :hide-icon="$attrs.hideIcon"
         :duration="$attrs.duration"
         :close-button-props="buttonCloseProps"
         :visually-hidden-close="$attrs.visuallyHiddenClose"

@@ -6,6 +6,8 @@
     :content-id="$attrs.contentId"
     :important="$attrs.important"
     :hide-close="$attrs.hideClose"
+    :hide-action="$attrs.hideAction"
+    :hide-icon="$attrs.hideIcon"
     :close-button-props="computedCloseButtonProps"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"

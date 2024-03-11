@@ -77,6 +77,16 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
+  hideIcon: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  hideAction: {
+    control: {
+      type: 'boolean',
+    },
+  },
   important: {
     control: {
       type: 'boolean',

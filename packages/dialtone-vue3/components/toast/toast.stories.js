@@ -89,6 +89,21 @@ export const argTypesData = {
       },
     },
   },
+  hideClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  hideIcon: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  hideAction: {
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Action Event Handlers
   onClick: {

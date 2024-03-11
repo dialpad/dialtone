@@ -4,6 +4,7 @@
     data-qa="notice"
   >
     <dt-notice-icon
+      v-if="!hideIcon"
       :kind="kind"
     >
       <!-- @slot Slot for custom icon -->
@@ -25,6 +26,7 @@
       <slot />
     </dt-notice-content>
     <dt-notice-action
+      :hide-action="hideAction"
       :hide-close="hideClose"
       :close-button-props="closeButtonProps"
       :visually-hidden-close="visuallyHiddenClose"
@@ -135,6 +137,24 @@ export default {
      * @values true, false
      */
     hideClose: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Hides the icon from the notice
+     * @values true, false
+     */
+    hideIcon: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Hides the action from the notice
+     * @values true, false
+     */
+    hideAction: {
       type: Boolean,
       default: false,
     },

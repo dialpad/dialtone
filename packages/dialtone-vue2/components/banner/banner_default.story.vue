@@ -16,6 +16,7 @@
       :important="$attrs.important"
       :pinned="$attrs.pinned"
       :hide-close="$attrs.hideClose"
+      :hide-action="$attrs.hideAction"
       :close-button-props="buttonCloseProps"
       :class="{ 'd-ps-sticky': $attrs.show }"
       :hide-icon="$attrs.hideIcon"
