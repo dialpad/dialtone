@@ -70,7 +70,8 @@ They should be easy to scan for relevant and actionable information. Elements, l
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__header">
     <div>(header slot)</div>
@@ -82,7 +83,21 @@ They should be easy to scan for relevant and actionable information. Elements, l
     <div>(footer slot)</div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-card class="d-w264">
+  <template #header>
+    (header slot)
+  </template>
+  <template #content>
+    (content slot)
+  </template>
+  <template #footer>
+    (footer slot)
+  </template>
+</dt-card>
+'
+showHtmlWarning />
 
 ### With Header
 
@@ -102,7 +117,8 @@ They should be easy to scan for relevant and actionable information. Elements, l
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__header">
     <div class="d-headline-medium">
@@ -116,7 +132,30 @@ They should be easy to scan for relevant and actionable information. Elements, l
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-card class="d-w264">
+  <template #header>
+    <p class="d-headline-medium">Lorem ipsum</p>
+      <dt-button
+        size="xs"
+        importance="clear"
+        aria-label="Menu button"
+      >
+        <template #icon>
+          <dt-icon
+            name="more-vertical"
+            size="100"
+          />
+        </template>
+      </dt-button>
+  </template>
+  <template #content>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+  </template>
+</dt-card>
+'
+showHtmlWarning />
 
 ### With Footer
 
@@ -133,7 +172,8 @@ They should be easy to scan for relevant and actionable information. Elements, l
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__content">
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
@@ -144,7 +184,23 @@ They should be easy to scan for relevant and actionable information. Elements, l
     </div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-card class="d-w264">
+  <template #content>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+  </template>
+  <template #footer>
+    <dt-button
+      importance="outlined"
+      size="sm"
+    >
+      Button
+    </dt-button>
+  </template>
+</dt-card>
+'
+showHtmlWarning />
 
 ### Content only
 
@@ -156,13 +212,22 @@ They should be easy to scan for relevant and actionable information. Elements, l
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__content">
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-card class="d-w264">
+  <template #content>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+  </template>
+</dt-card>
+'
+showHtmlWarning />
 
 ### With Header, Footer and scrollable content
 
@@ -187,7 +252,8 @@ They should be easy to scan for relevant and actionable information. Elements, l
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__header">
     <div class="d-headline-medium">
@@ -206,7 +272,38 @@ They should be easy to scan for relevant and actionable information. Elements, l
     </div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-card max-height="50px" class="d-w264">
+  <template #header>
+    <p class="d-headline-medium">Lorem ipsum</p>
+      <dt-button
+        size="xs"
+        importance="clear"
+        aria-label="Menu button"
+      >
+        <template #icon>
+          <dt-icon
+            name="more-vertical"
+            size="100"
+          />
+        </template>
+      </dt-button>
+  </template>
+  <template #content>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+  </template>
+  <template #footer>
+    <dt-button
+      importance="outlined"
+      size="sm"
+    >
+      Button
+    </dt-button>
+  </template>
+</dt-card>
+'
+showHtmlWarning />
 
 ## Vue API
 
