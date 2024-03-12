@@ -174,7 +174,7 @@
         "type": "color"
       },
       "primary-inverted": {
-        "value": "{color.purple.300}",
+        "value": "{color.purple.200}",
         "type": "color"
       },
       "critical-inverted": {
@@ -222,7 +222,7 @@
         "type": "color"
       },
       "primary-inverted-hover": {
-        "value": "{color.purple.200}",
+        "value": "{color.purple.300}",
         "type": "color"
       },
       "critical-inverted-hover": {
