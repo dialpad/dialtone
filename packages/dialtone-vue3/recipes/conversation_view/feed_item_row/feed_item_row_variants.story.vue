@@ -16,13 +16,18 @@
           @focus="$attrs.onFocus"
         >
           <template v-if="$attrs.default">
-            <span v-html="$attrs.default" />
+            <dt-emoji-text-wrapper
+              element-type="span"
+              size="400"
+            >
+              {{ $attrs.default }}
+            </dt-emoji-text-wrapper>
           </template>
           <template
             #threading
           >
             <dt-stack
-              class="feed-item-row__thread d-d-flex d-ai-center"
+              class="feed-item-row__thread d-pl4 d-d-flex d-ai-center"
               direction="row"
               gap="400"
             >
@@ -87,7 +92,7 @@
       </ul>
     </div>
     <div>
-      <h3>Feed item with rich media</h3>
+      <h3>Feed item with image attachment</h3>
       <ul class="d-py8">
         <dt-recipe-feed-item-row
           :show-header="true"
@@ -99,49 +104,51 @@
           @hover="$attrs.onHover"
           @focus="$attrs.onFocus"
         >
-          <dt-image-viewer
-            :image-src="fryImage"
-            image-alt="Alt Text"
-            close-aria-label="Close"
-            image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
-            aria-label="Click to open image"
-          />
-          <template
-            #threading
-          >
-            <dt-stack
-              class="feed-item-row__thread d-d-flex d-ai-center"
-              direction="row"
-              gap="400"
-            >
-              <dt-stack
-                direction="row"
-                gap="300"
-              >
-                <dt-avatar
-                  v-for="person of persons"
-                  :key="person"
-                  :full-name="person"
-                  seed="seed"
-                  size="sm"
-                />
-              </dt-stack>
-              <dt-stack
-                direction="row"
-                gap="400"
-              >
-                <div class="d-fs-100 d-lh200 d-d-flex d-ai-center">
-                  <a class="d-link d-pr4">3 replies</a>
-                  <span class="feed-item-row__reply">Last reply an hour ago</span>
-                </div>
-              </dt-stack>
-            </dt-stack>
+          Some text alongside a gif
+          <template #attachment>
+            <dt-image-viewer
+              :image-src="fryImage"
+              image-alt="Alt Text"
+              close-aria-label="Close"
+              image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+              aria-label="Click to open image"
+            />
           </template>
           <template
             #reactions
           >
             <dt-recipe-emoji-row
-              :reactions="reactions"
+              :reactions="mockReactions"
+            />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div>
+      <h3>With video attachment</h3>
+      <ul class="d-py8">
+        <dt-recipe-feed-item-row
+          ref="feedItemRowFade"
+          :show-header="false"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
+          :is-active="true"
+        >
+          <template v-if="$attrs.default">
+            <dt-emoji-text-wrapper
+              element-type="span"
+              size="400"
+            >
+              {{ $attrs.default }}
+            </dt-emoji-text-wrapper>
+          </template>
+          <template #attachment>
+            <!-- eslint-disable-next-line vuejs-accessibility/media-has-caption -->
+            <video
+              controls
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
             />
           </template>
         </dt-recipe-feed-item-row>
@@ -162,7 +169,12 @@
           @focus="$attrs.onFocus"
         >
           <template v-if="defaultSlot">
-            <span v-html="defaultSlot" />
+            <dt-emoji-text-wrapper
+              element-type="span"
+              size="400"
+            >
+              {{ defaultSlot }}
+            </dt-emoji-text-wrapper>
           </template>
         </dt-recipe-feed-item-row>
       </ul>
@@ -188,7 +200,12 @@
           @focus="$attrs.onFocus"
         >
           <template v-if="defaultSlot">
-            <span v-html="defaultSlot" />
+            <dt-emoji-text-wrapper
+              element-type="span"
+              size="400"
+            >
+              {{ defaultSlot }}
+            </dt-emoji-text-wrapper>
           </template>
         </dt-recipe-feed-item-row>
       </ul>
@@ -204,56 +221,55 @@
           :time="$attrs.time"
           :short-time="$attrs.shortTime"
           :is-active="true"
-          :state="fadeState"
-          @hover="$attrs.onHover"
-          @focus="$attrs.onFocus"
         >
-          <dt-recipe-feed-item-pill
-            default-toggled
-            title="Ben called you"
-            icon-name="phone-outgoing"
-            wrapper-class="d-w628"
-            border-color="ai"
-          >
-            <template #subtitle>
-              Lasted 8 min • Ended at 11:56 AM
-            </template>
-            <template #right>
-              <div>
-                <dt-button
-                  aria-label="Open external link"
-                  kind="muted"
-                  importance="clear"
-                  :circle="true"
-                  @click.stop=""
-                >
-                  <template #icon>
-                    <dt-icon
-                      name="external-link"
-                      size="300"
-                    />
-                  </template>
-                </dt-button>
-              </div>
-            </template>
-            <template #content>
-              <div class="d-p16">
-                <p>
-                  The agent from Dialpad called to follow up on a support ticket
-                  that Jeff was handling for them regarding Dialpad CTI. They apologized
-                  for calling outside of the requested time and expressed that they had
-                  asked the team to look into the issue and would email them after the call.
-                </p>
-                <p class="d-fs-100 d-mt12">
-                  <strong>Actions items</strong>
-                </p>
-                <p class="d-d-flex">
-                  <strong class="d-mr4">1. </strong>
-                  The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
-                </p>
-              </div>
-            </template>
-          </dt-recipe-feed-item-pill>
+          <template #attachment>
+            <dt-recipe-feed-item-pill
+              default-toggled
+              title="Ben called you"
+              icon-name="phone-outgoing"
+              wrapper-class="d-w628"
+              border-color="ai"
+            >
+              <template #subtitle>
+                Lasted 8 min • Ended at 11:56 AM
+              </template>
+              <template #right>
+                <div>
+                  <dt-button
+                    aria-label="Open external link"
+                    kind="muted"
+                    importance="clear"
+                    :circle="true"
+                    @click.stop=""
+                  >
+                    <template #icon>
+                      <dt-icon
+                        name="external-link"
+                        size="300"
+                      />
+                    </template>
+                  </dt-button>
+                </div>
+              </template>
+              <template #content>
+                <div class="d-p16">
+                  <p>
+                    The agent from Dialpad called to follow up on a support ticket
+                    that Jeff was handling for them regarding Dialpad CTI. They apologized
+                    for calling outside of the requested time and expressed that they had
+                    asked the team to look into the issue and would email them after the call.
+                  </p>
+                  <p class="d-fs-100 d-mt12">
+                    <strong>Actions items</strong>
+                  </p>
+                  <p class="d-d-flex">
+                    <strong class="d-mr4">1. </strong>
+                    The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
+                  </p>
+                </div>
+              </template>
+            </dt-recipe-feed-item-pill>
+          </template>
         </dt-recipe-feed-item-row>
       </ul>
     </div>
@@ -266,6 +282,7 @@ import DtRecipeFeedItemRow from './feed_item_row.vue';
 import { DtRecipeEmojiRow } from '../emoji_row';
 import { DtRecipeFeedItemPill } from '../feed_pill';
 import { DtStack } from '@/components/stack';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
@@ -277,6 +294,7 @@ export default {
   name: 'DtRecipeFeedItemRowVariants',
 
   components: {
+    DtEmojiTextWrapper,
     DtRecipeEmojiRow,
     DtRecipeFeedItemRow,
     DtRecipeFeedItemPill,

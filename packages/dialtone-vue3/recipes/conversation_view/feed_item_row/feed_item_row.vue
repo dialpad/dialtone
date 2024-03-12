@@ -62,6 +62,13 @@
       >
         <slot />
       </span>
+      <div
+        v-if="$slots.attachment"
+        data-qa="dt-feed-item-row--attachment"
+        class="dt-feed-item-row__attachment"
+      >
+        <slot name="attachment" />
+      </div>
     </article>
 
     <template #bottom>
@@ -301,6 +308,11 @@ export default {
 <style lang="less" scoped>
 .dt-feed-item-row {
 
+  width: var(--dt-size-100-percent);
+  box-sizing: border-box;
+  position: relative;
+  padding: var(--dt-space-300) var(--dt-space-500);
+
   &:focus-visible {
     box-shadow: var(--dt-shadow-focus-inset);
   }
@@ -324,11 +336,6 @@ export default {
     transition-property: background-color;
   }
 
-  width: var(--dt-size-100-percent);
-  box-sizing: border-box;
-  position: relative;
-  padding: var(--dt-space-300) var(--dt-space-500);
-
   &__avatar-container {
     padding-top: var(--dt-space-300);
     padding-bottom: var(--dt-space-300);
@@ -336,6 +343,26 @@ export default {
 
   &__content {
     padding-left: var(--dt-space-300);
+  }
+
+  &__attachment {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-300);
+
+    &:deep(img)  {
+      border: var(--dt-color-border-subtle) solid var(--dt-size-border-100);
+      border-radius: var(--dt-size-radius-400);
+      display: block;
+      max-width: 30rem;
+      max-height: 30rem;
+      min-width: 5.6rem;
+      min-height: 5.6rem;
+    }
+
+    &:deep(video)  {
+      display: block;
+      height: 25.0rem;
+    }
   }
 
   &__header {
@@ -405,7 +432,7 @@ export default {
     min-width: initial;
   }
 
-  &:deep(> .dt-item-layout > .dt-item-layout--bottom) {
+  &:deep(> .dt-item-layout > .dt-item-layout--content > .dt-item-layout--bottom) {
     display: flex;
     flex-direction: column;
     margin-top: 0;

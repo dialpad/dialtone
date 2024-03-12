@@ -16,6 +16,7 @@ describe('DtFeedItemRow tests', () => {
   let avatarImgWrapper;
   let leftTimeWrapper;
   let contentWrapper;
+  let attachmentWrapper;
   let reactionsWrapper;
   let menuWrapper;
 
@@ -36,6 +37,7 @@ describe('DtFeedItemRow tests', () => {
     headerWrapper = wrapper.find('[data-qa="dt-feed-item-row--header"]');
     leftTimeWrapper = wrapper.find('[data-qa="dt-feed-item-row--left-time"]');
     contentWrapper = wrapper.find('[data-qa="dt-feed-item-row--content"]');
+    attachmentWrapper = wrapper.find('[data-qa="dt-feed-item-row--attachment"]');
     reactionsWrapper = wrapper.find('[data-qa="dt-feed-item-row--reactions"]');
     menuWrapper = wrapper.find('[data-qa="dt-feed-item-row--menu"]');
   };
@@ -125,6 +127,21 @@ describe('DtFeedItemRow tests', () => {
 
       it('should render default content in the slot provided', () => {
         expect(contentWrapper.text()).toBe(TEST_CONTENT);
+      });
+    });
+
+    describe('When attachment slot content is provided', () => {
+      const TEST_CONTENT = 'Test attachment content';
+      beforeEach(() => {
+        slots = {
+          attachment: TEST_CONTENT,
+        };
+        _mountWrapper();
+        _setChildWrappers();
+      });
+
+      it('should render default content in the slot provided', () => {
+        expect(attachmentWrapper.text()).toBe(TEST_CONTENT);
       });
     });
 
