@@ -40,7 +40,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { CATEGORY_MAP } from './TokenTable.vue';
+import { CATEGORY_MAP } from '../common/constants';
 
 const TYPOGRAPHY_KEY_MAP = {
   family: 'font-family',

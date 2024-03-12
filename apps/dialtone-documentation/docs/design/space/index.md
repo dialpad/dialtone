@@ -178,7 +178,7 @@ By Feb 2024, we aim to integrate spacing units into Figma Variables. This will s
 
 <script setup>
 import { ref } from 'vue';
-import * as tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 import SvgLoader from '../../../../baseComponents/SvgLoader.vue';
 
 const spaces = {

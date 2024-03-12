@@ -23,7 +23,7 @@
       </template>
       <template #rightIcon>
         <dt-button
-          v-if="!isSearchEmpty"
+          v-if="hasSearchTerm"
           id="search-input-button-close"
           kind="muted"
           importance="clear"
@@ -53,7 +53,7 @@
       @change="setTheme"
     />
   </div>
-  <div v-for="category in Object.keys(filteredTokens)" :key="category">
+  <div v-for="category in filteredTokensKeys" :key="category">
     <h2
       :id="category"
       class="d-docsite--header-2 d-tt-capitalize"
@@ -65,14 +65,14 @@
       >#</a>
       {{ category }}
     </h2>
-    <p class="dialtone-intro">
-      {{ categoryIntroAndDesc[category]?.intro }}
+    <p v-if="getCategoryIntro(category)" class="dialtone-intro">
+      {{ getCategoryIntro(category) }}
     </p>
-    <div v-html="categoryIntroAndDesc[category]?.description" />
+    <div v-if="getCategoryDescription(category)" v-html="getCategoryDescription(category)" />
     <token-table :category="category" :tokens="filteredTokens[category]" />
   </div>
   <div
-    v-if="!hasSearchResults"
+    v-if="noSearchResults"
     class="d-d-flex d-fl-center d-p16 d-gg4 d-fc-tertiary d-fs-300"
   >
     <span>No results found for</span>
@@ -83,9 +83,10 @@
 </template>
 
 <script setup>
-import * as tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 import { getComposedTypographyTokens, getComposedShadowTokens } from '../common/token-utilities';
-import TokenTable, { CATEGORY_MAP, FORMAT_MAP, THEMES } from '@baseComponents/TokenTable.vue';
+import { CATEGORY_MAP, FORMAT_MAP, THEMES } from '../common/constants';
+import TokenTable from '@baseComponents/TokenTable.vue';
 import { capitalize, computed, ref, onBeforeMount } from 'vue';
 import { debounce } from '../common/utilities';
 
@@ -111,6 +112,14 @@ const categoryIntroAndDesc = {
   },
 };
 
+const getCategoryIntro = (category) => {
+  return categoryIntroAndDesc[category]?.intro;
+};
+
+const getCategoryDescription = (category) => {
+  return categoryIntroAndDesc[category]?.description;
+};
+
 const format = ref('CSS');
 const theme = ref('light');
 const searchInput = ref(null);
@@ -126,7 +135,7 @@ const formatSelectMenuOptions = computed(() => {
 });
 
 const updateHeaders = () => {
-  filteredHeaders.value = Object.keys(filteredTokens.value).map((category) => {
+  filteredHeaders.value = filteredTokensKeys.value.map((category) => {
     return { title: capitalize(category), level: 2, slug: category, children: [] };
   });
 };
@@ -183,9 +192,11 @@ const resetSearch = () => {
   setSearchCriteria();
 };
 
-const isSearchEmpty = computed(() => !searchInput.value || searchInput.value.trim().length === 0);
+const filteredTokensKeys = computed(() => Object.keys(filteredTokens.value));
 
-const hasSearchResults = computed(() => Object.keys(filteredTokens.value).length > 0);
+const hasSearchTerm = computed(() => searchInput.value && searchInput.value.trim().length > 0);
+
+const noSearchResults = computed(() => filteredTokensKeys.value.length === 0);
 
 /*
 * Before mount process the file tokensJson and fill processedTokens with the data we want to show.

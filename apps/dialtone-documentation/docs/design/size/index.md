@@ -136,7 +136,7 @@ By Feb 2024, we aim to integrate sizing units into Figma Variables. This will si
 
 <script setup>
 import { ref } from 'vue';
-import * as tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 
 const sizes = ["size/300", "size/450", "size/400", "size/500", "size/550", "size/600"];
 const theme = "light";
