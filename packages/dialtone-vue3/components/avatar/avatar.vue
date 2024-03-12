@@ -421,7 +421,7 @@ export default {
 
     validateProps () {
       if (this.imageSrc && this.imageAlt === undefined) {
-        throw new Error('full-name or image-alt must be set if image-src is provided');
+        console.error('image-alt required if image-src is provided. Can be set to "" (empty string) if the image is described in text nearby');
       }
     },
 
