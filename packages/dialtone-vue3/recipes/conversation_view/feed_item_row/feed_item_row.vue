@@ -432,7 +432,7 @@ export default {
     min-width: initial;
   }
 
-  &:deep(> .dt-item-layout > .dt-item-layout--bottom) {
+  &:deep(> .dt-item-layout > .dt-item-layout--content > .dt-item-layout--bottom) {
     display: flex;
     flex-direction: column;
     margin-top: 0;
