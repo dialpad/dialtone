@@ -1,3 +1,21 @@
+# [9.20.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.19.0...dialtone/v9.20.0) (2024-03-13)
+
+
+### Bug Fixes
+
+* avatar validation ([#203](https://github.com/dialpad/dialtone/issues/203)) ([37925ab](https://github.com/dialpad/dialtone/commit/37925ab1c483b12748f8c9dde0e22840365c4a6f))
+* message input select media ([#201](https://github.com/dialpad/dialtone/issues/201)) ([dbb3d61](https://github.com/dialpad/dialtone/commit/dbb3d61d216dd3d82a74bec45847ca3ff8b9899c))
+
+
+### Documentation
+
+* use CodeExampleTabs from card to combobox ([#192](https://github.com/dialpad/dialtone/issues/192)) ([10e1e50](https://github.com/dialpad/dialtone/commit/10e1e509f80fa2568406ae2bd3d34bd99bd76a2b))
+
+
+### Features
+
+* **Feed Item Row:** add attachment slot ([#202](https://github.com/dialpad/dialtone/issues/202)) ([417c305](https://github.com/dialpad/dialtone/commit/417c30554977917f5d1329f5e06e40c8f55baf37))
+
 # [9.19.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.18.0...dialtone/v9.19.0) (2024-03-09)
 
 
