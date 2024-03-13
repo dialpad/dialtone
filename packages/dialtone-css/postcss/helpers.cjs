@@ -90,18 +90,19 @@ module.exports = {
   */
   extractTypographies () {
     // eslint-disable-next-line max-len
-    const typographiesRegex = new RegExp(`dtTypography(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})(${REGEX_OPTIONS.TYPOGRAPHY_SIZES})(\\w+)`);
+    const typographiesRegex = new RegExp(`dtTypography(${REGEX_OPTIONS.TYPOGRAPHY_TYPE})(${REGEX_OPTIONS.TYPOGRAPHY_SIZES})?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?(\\w+)`);
     return Object.keys(dialtoneTokensLight)
       .filter(key => typographiesRegex.test(key))
       .reduce((typographies, typography) => {
-        const [name, size] = typography
+        const matches = typography
           .split(typographiesRegex)
           .filter(chunk => !!chunk);
 
-        const typographyName = pascalToKebabCase(name);
-        const typographySize = pascalToKebabCase(size);
+        // Pop the last element because that is the portion we don't want to include
+        // ex: dtTypographyHeadlineEyebrowFontFamily we don't want FontFamily.
+        matches.pop();
 
-        typographies.add(`${typographyName}-${typographySize}`);
+        typographies.add(matches.map((item) => pascalToKebabCase(item)).join('-'));
 
         return typographies;
       }, new Set());
