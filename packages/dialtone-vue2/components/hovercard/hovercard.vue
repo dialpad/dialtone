@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
 import { TOOLTIP_DIRECTIONS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
@@ -180,7 +179,7 @@ export default {
 
   data () {
     return {
-      timer: reactive(useTimer()),
+      timer: useTimer(),
     };
   },
 };
