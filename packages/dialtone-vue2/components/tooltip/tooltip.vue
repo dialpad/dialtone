@@ -485,6 +485,7 @@ export default {
         this.tip.setProps({
           ...this.tippyProps,
           zIndex: this.calculateAnchorZindex(),
+          appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
         });
       }
     },
@@ -497,7 +498,6 @@ export default {
       return {
         contentElement: this.$refs.content.$el,
         allowHTML: true,
-        appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
         zIndex: this.calculateAnchorZindex(),
         onMount: this.onMount,
         ...this.tippyProps,
