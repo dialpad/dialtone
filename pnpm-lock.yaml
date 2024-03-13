@@ -432,9 +432,15 @@ importers:
 
   packages/dialtone-vue2:
     dependencies:
+      '@dialpad/dialtone-css':
+        specifier: workspace:*
+        version: link:../dialtone-css
       '@dialpad/dialtone-emojis':
         specifier: workspace:*
         version: link:../dialtone-emojis
+      '@dialpad/dialtone-icons':
+        specifier: workspace:*
+        version: link:../dialtone-icons
       '@linusborg/vue-simple-portal':
         specifier: ^0.1.5
         version: 0.1.5(vue@2.7.15)
