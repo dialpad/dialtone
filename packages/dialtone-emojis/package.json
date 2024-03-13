@@ -1,0 +1,10 @@
+{
+  "name": "@dialpad/dialtone-emojis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "files": ["src"],
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
