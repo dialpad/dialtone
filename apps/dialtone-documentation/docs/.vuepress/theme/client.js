@@ -2,6 +2,8 @@ import { defineClientConfig } from '@vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
 
+import { DtTooltipDirective } from '@dialpad/dialtone-vue/directives';
+
 // CSS
 import '@dialpad/dialtone-css/lib/dist/css/dialtone.css';
 import './assets/less/dialtone-docs.less';
@@ -69,6 +71,7 @@ async function registerDialtoneVue (app) {
     app.component(key, module[key]);
   });
   app.provide('dialtoneComponents', dialtoneComponents);
+  app.use(DtTooltipDirective);
   window.DIALTONE_CONSTANTS = dialtoneConstants;
 }
 
