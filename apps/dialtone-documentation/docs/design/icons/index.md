@@ -18,7 +18,7 @@ Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz
 
 <dt-stack class="d-gc2" direction="column" gap="500">
 <img alt="Figma Search Icon" src="/assets/images/figma-search-icon.gif" style="border-radius: var(--dt-size-radius-400)">
-<p class="d-body-base d-fc-tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</p>
+<p class="d-body--md d-fc-tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</p>
 </dt-stack>
 </div>
 
@@ -58,10 +58,10 @@ Some icons are linked to specific actions, like the Settings gear <dt-icon name=
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 
 <div class="d-gc2">
-<p class="d-body-small"><dt-icon name="food" size="200" /> 200 when body small</p>
-<p class="d-body-base"><dt-icon name="food" size="300" /> 300 when body base</p>
-<p class="d-headline-large"><dt-icon name="food" size="400" /> 400 when headline large</p>
-<p class="d-headline-extra-large"><dt-icon name="food" size="500" /> 500  when headline extra large</p>
+<p class="d-body--sm"><dt-icon name="food" size="200" /> 200 when body small</p>
+<p class="d-body--md"><dt-icon name="food" size="300" /> 300 when body base</p>
+<p class="d-headline--lg"><dt-icon name="food" size="400" /> 400 when headline large</p>
+<p class="d-headline--xl"><dt-icon name="food" size="500" /> 500  when headline extra large</p>
 <p class="d-fs-300-tv"><dt-icon name="food" size="600" /> 600 when device 300</p>
 <p class="d-fs-400-tv"><dt-icon name="food" size="700" /> 700 when device 400</p>
 <!-- <p class="d-fs-500-tv"><dt-icon name="food" size="800" /> 800 when device 500</p> -->

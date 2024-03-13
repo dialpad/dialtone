@@ -74,10 +74,10 @@ Use `d-dco{n}` to change a divider opacity value.
     <template #content>
       <tbody v-for="{ color: c, stops } in baseColors">
         <tr v-for="{ stop, copy } in stops">
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-divide-{{ c }}-{{ stop }}</th>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-divide-{{ c }}-{{ stop }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl-grow1 d-ff-mono d-fs-100">
+              <div class="d-fl-grow1 d-code--sm">
                 --dco: 100%;<br/>
                 border-color: hsla(var(--{{ c }}-{{ stop }}-h) var(--{{ c }}-{{ stop }}-s) var(--{{ c }}-{{ stop }}-l) / var(--dco)) !important;
               </div>

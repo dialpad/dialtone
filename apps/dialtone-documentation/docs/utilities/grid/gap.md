@@ -69,12 +69,12 @@ Use `d-gcg{#}` or `d-grg{#}` to independently change the row and column gap spac
     <template #content>
       <tbody v-for="{ direction: dir } in gap">
         <tr v-for="{ output: rem, value: px } in values">
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">
+          <th scope="row" class="d-code--sm d-fc-purple-400">
             <span v-if="dir === 'both'">.d-gg{{ px }}</span>
             <span v-else-if="dir === 'column'">.d-gcg{{ px }}</span>
             <span v-else-if="dir === 'row'">.d-grg{{ px }}</span>
           </th>
-          <td class="d-ff-mono d-fs-100">
+          <td class="d-code--sm">
             <span v-if="dir !== 'both'">grid-{{ dir }}-gap: {{ rem }}</span>
             <span v-else>grid-gap: {{ rem }}</span>
           </td>

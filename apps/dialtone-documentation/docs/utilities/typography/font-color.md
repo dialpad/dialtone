@@ -120,10 +120,10 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
       <tbody>
         <!-- Current Color -->
         <tr>
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-current</th>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-current</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
+              <div class="d-fl1 d-code--sm">
                 color: currentColor !important;
               </div>
               <div class="d-fl0 d-fc-current d-fs-300 d-lh4">
@@ -134,10 +134,10 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
         </tr>
         <!-- Transparent -->
         <tr>
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-transparent</th>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-transparent</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
+              <div class="d-fl1 d-code--sm">
                 color: transparent !important;
               </div>
               <div class="d-fl0 d-fc-transparent d-fs-300 d-lh4">
@@ -148,10 +148,10 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
         </tr>
         <!-- Unset Color -->
         <tr>
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-unset</th>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-unset</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
+              <div class="d-fl1 d-code--sm">
                 color: unset !important;
               </div>
               <div class="d-fl0 d-fc-unset d-fs-300 d-lh4">
@@ -162,10 +162,10 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
         </tr>
         <!-- White Color -->
         <tr>
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-neutral-white</th>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-neutral-white</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
+              <div class="d-fl1 d-code--sm">
                 --fco: 100%;<br/>
                 color: hsla(var(--dt-color-neutral-white-h) var(--dt-color-neutral-white-s) var(--dt-color-neutral-white-l) / var(--fco)) !important;
               </div>
@@ -177,10 +177,10 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
         </tr>
         <!-- Colors -->
         <tr v-for="{ var: color, output } in fontColorVars">
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-{{ color }}</th>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
+              <div class="d-fl1 d-code--sm">
                 --fco: 100%;<br/>
                 color: hsla(var(--{{ output }}-h) var(--{{ output }}-s) var(--{{ output }}-l) / var(--fco)) !important;
               </div>
@@ -202,10 +202,10 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
     <template #content>
       <tbody v-for="{ color, stops } in baseColors.lightMode">
         <tr v-for="{ stop } in stops.reverse()">
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-{{ color }}-{{ stop }}</th>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}-{{ stop }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100">
+              <div class="d-fl1 d-code--sm">
                   --fco: 100%;<br/>
                   color: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--fco)) !important;
               </div>
@@ -227,10 +227,10 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
     <template #content>
       <tbody v-for="{ color, stops } in baseColors.darkMode">
         <tr v-for="{ stop } in stops.reverse()">
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fc-{{ color }}-{{ stop }}</th>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}-{{ stop }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-ff-mono d-fs-100 d-fc-primary">
+              <div class="d-fl1 d-code--sm d-fc-primary">
                   --fco: 100%;<br/>
                   color: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--fco)) !important;
               </div>

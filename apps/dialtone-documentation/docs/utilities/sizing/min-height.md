@@ -49,20 +49,20 @@ Use `d-hmn{n}` to set a fixed minimum height for an element. This can be combine
     </thead>
     <tbody>
       <tr v-for="i in percentage">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-hmn{{ i }}p</th>
-        <td class="d-ff-mono d-fs-100">min-height: {{ i }}% !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-hmn{{ i }}p</th>
+        <td class="d-code--sm">min-height: {{ i }}% !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in fixed">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-hmn{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">min-height: {{ i }}px !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-hmn{{ i }}</th>
+        <td class="d-code--sm">min-height: {{ i }}px !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in other">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-hmn-{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">min-height: {{ i }} !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-hmn-{{ i }}</th>
+        <td class="d-code--sm">min-height: {{ i }} !important;</td>
       </tr>
     </tbody>
   </table>

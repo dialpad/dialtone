@@ -78,11 +78,11 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
   <template #content>
     <tbody>
       <tr v-for="size in boxShadowSizes">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-bs-{{ size }}</th>
-        <td v-if="size !== 'card'" class="d-ff-mono d-fs-100">
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-{{ size }}</th>
+        <td v-if="size !== 'card'" class="d-code--sm">
             box-shadow: var(--dt-shadow-{{ size }}-0-x) var(--dt-shadow-{{ size }}-0-y) var(--dt-shadow-{{ size }}-0-blur) var(--dt-shadow-{{ size }}-0-spread) var(--dt-shadow-{{ size }}-0-color) !important;
         </td>
-        <td v-else class="d-ff-mono d-fs-100">
+        <td v-else class="d-code--sm">
             box-shadow: var(--dt-shadow-card-0-x) var(--dt-shadow-card-0-y) var(--dt-shadow-card-0-blur) var(--dt-shadow-card-0-spread) var(--dt-shadow-card-0-color),<br/>
             var(--dt-shadow-card-1-x) var(--dt-shadow-card-1-y) var(--dt-shadow-card-1-blur) var(--dt-shadow-card-1-spread) var(--dt-shadow-card-1-color),<br/>
             var(--dt-shadow-card-2-x) var(--dt-shadow-card-2-y) var(--dt-shadow-card-2-blur) var(--dt-shadow-card-2-spread) var(--dt-shadow-card-2-color)<br/>
@@ -90,12 +90,12 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
         </td>
       </tr>
       <tr>
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-bs-none</th>
-        <td class="d-ff-mono d-fs-100">box-shadow: none !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-none</th>
+        <td class="d-code--sm">box-shadow: none !important;</td>
       </tr>
       <tr>
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-bs-unset</th>
-        <td class="d-ff-mono d-fs-100">box-shadow: unset !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-unset</th>
+        <td class="d-code--sm">box-shadow: unset !important;</td>
       </tr>
     </tbody>
   </template>

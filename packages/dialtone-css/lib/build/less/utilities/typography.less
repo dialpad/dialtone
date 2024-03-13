@@ -49,37 +49,190 @@ ul {
 }
 
 //  ============================================================================
+//  $   HEADLINE STYLES
+//  ----------------------------------------------------------------------------
+//  NOTE: the comma-delimited classes are backwards-compatible,
+//        and will be removed once no longer in use in the product.
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
+.d-headline--eyebrow,
+.d-headline-eyebrow {
+    font: var(--dt-typography-headline-eyebrow);
+}
+
+.d-headline--sm,
+.d-headline-small {
+    font: var(--dt-typography-headline-sm);
+}
+
+.d-headline--sm-soft,
+.d-headline-soft-small {
+    font: var(--dt-typography-headline-sm-soft);
+}
+
+.d-headline--md,
+.d-headline-medium {
+    font: var(--dt-typography-headline-md);
+}
+
+.d-headline--sm-compact,
+.d-headline-compact-small {
+    font: var(--dt-typography-headline-sm-compact);
+}
+
+.d-headline--sm-soft-compact,
+.d-headline-compact-soft-small {
+    font: var(--dt-typography-headline-sm-soft-compact);
+}
+
+.d-headline--md-compact,
+.d-headline-compact-medium {
+    font: var(--dt-typography-headline-md-compact);
+}
+
+.d-headline--lg,
+.d-headline-large {
+    font: var(--dt-typography-headline-lg);
+}
+
+.d-headline--lg-soft {
+    font: var(--dt-typography-headline-lg-soft);
+}
+
+.d-headline--lg-compact,
+.d-headline-compact-large {
+    font: var(--dt-typography-headline-lg-compact);
+}
+
+.d-headline--lg-soft-compact {
+    font: var(--dt-typography-headline-lg-soft-compact);
+}
+
+.d-headline--xl,
+.d-headline-extra-large {
+    font: var(--dt-typography-headline-xl);
+}
+
+.d-headline--xl-compact {
+    font: var(--dt-typography-headline-xl-compact);
+}
+
+.d-headline--xxl,
+.d-headline-extra-extra-large {
+    font: var(--dt-typography-headline-xxl);
+}
+
+.d-headline--xxl-compact {
+    font: var(--dt-typography-headline-xxl-compact);
+}
+
+//  ============================================================================
 //  $   BODY STYLES
 //  ----------------------------------------------------------------------------
-.d-body-base          { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); }
-.d-body-small         { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); }
-.d-body-compact       { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); }
-.d-body-compact-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); }
+//  NOTE: the comma-delimited classes are backwards-compatible,
+//        and will be removed once no longer in use in the product.
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
+.d-body--md,
+.d-body-base {
+    font: var(--dt-typography-body-md);
+}
+
+.d-body--sm,
+.d-body-small  {
+    font: var(--dt-typography-body-sm);
+}
+
+.d-body--md-compact,
+.d-body-compact {
+    font: var(--dt-typography-body-md-compact);
+}
+
+.d-body--sm-compact,
+.d-body-compact-small {
+    font: var(--dt-typography-body-sm-compact);
+}
 
 //  ============================================================================
 //  $   LABEL STYLES
 //  ----------------------------------------------------------------------------
-.d-label-base                { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-semi-bold); }
-.d-label-small               { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-semi-bold); }
-.d-label-compact             { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-semi-bold); }
-.d-label-plain               { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); }
-.d-label-compact-plain       { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); }
-.d-label-compact-small       { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-semi-bold); }
-.d-label-plain-small         { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); }
-.d-label-compact-plain-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); }
+//  NOTE: the comma-delimited classes are backwards-compatible,
+//        and will be removed once no longer in use in the product.
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
+.d-label--md,
+.d-label-base {
+    font: var(--dt-typography-label-md);
+}
+
+.d-label--sm,
+.d-label-small {
+    font: var(--dt-typography-label-sm);
+}
+
+.d-label--md-compact,
+.d-label-compact {
+    font: var(--dt-typography-label-md-compact);
+}
+
+.d-label--md-plain,
+.d-label-plain {
+    font: var(--dt-typography-label-md-plain);
+}
+
+.d-label--md-plain-compact,
+.d-label-compact-plain {
+    font: var(--dt-typography-label-md-plain-compact);
+}
+
+.d-label--sm-compact,
+.d-label-compact-small {
+    font: var(--dt-typography-label-sm-compact);
+}
+
+.d-label--sm-plain,
+.d-label-plain-small {
+    font: var(--dt-typography-label-sm-plain);
+}
+
+.d-label--sm-plain-compact,
+.d-label-compact-plain-small {
+    font: var(--dt-typography-label-sm-plain-compact);
+}
 
 //  ============================================================================
 //  $   HELPER STYLES
 //  ----------------------------------------------------------------------------
-.d-helper-base  { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); }
-.d-helper-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); }
+//  NOTE: the comma-delimited classes are backwards-compatible,
+//        and will be removed once no longer in use in the product.
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
+.d-helper--md,
+.d-helper-base {
+    font: var(--dt-typography-helper-md);
+}
+
+.d-helper--sm,
+.d-helper-small {
+    font: var(--dt-typography-helper-sm);
+}
 
 //  ============================================================================
 //  $   CODE STYLES
 //  ----------------------------------------------------------------------------
+//  NOTE: the comma-delimited classes are backwards-compatible,
+//        and will be removed once no longer in use in the product.
+//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+//        not comma-delimited then they're either new or already were ok.
+.d-code--md,
+.d-code-base {
+    font: var(--dt-typography-code-md);
+}
 
-.d-code-base  { font-family: var(--dt-font-family-mono); line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-200); }
-.d-code-small { font-family: var(--dt-font-family-mono); line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); }
+.d-code--sm,
+.d-code-small {
+    font: var(--dt-typography-code-sm);
+}
 
 //  ============================================================================
 //  $   FONT SIZE
@@ -108,27 +261,15 @@ ul {
 .d-fs-400-tv { font-size: var(--dt-font-size-400-tv) !important; }
 .d-fs-500-tv { font-size: var(--dt-font-size-500-tv) !important; }
 
-.d-headline10 { .d-fs-100(); font-weight: var(--dt-font-weight-bold); .d-tt-uppercase(); }
-.d-headline24 { .d-fs-300(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline28 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline32 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline36 { .d-fs-400(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline42 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline48 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
-.d-headline54 { .d-fs-500(); font-weight: var(--dt-font-weight-bold) !important; }
-
-.d-headline-eyebrow            { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-normal); .d-tt-uppercase(); }
-.d-headline-small              { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-bold); }
-.d-headline-soft-small         { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium); }
-.d-headline-medium             { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold); }
-.d-headline-compact-small      { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-bold); }
-.d-headline-compact-soft-small { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium); }
-.d-headline-compact-base,
-.d-headline-compact-medium     { line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold); }
-.d-headline-compact-large      { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-300); font-weight: var(--dt-font-weight-bold); }
-.d-headline-large              { line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-300); font-weight: var(--dt-font-weight-bold); }
-.d-headline-extra-large        { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-400); font-weight: var(--dt-font-weight-medium); }
-.d-headline-extra-extra-large  { line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-500); font-weight: var(--dt-font-weight-medium); }
+// TODO: deprecate these `d-headline##` classes once no longer in product use
+.d-headline10 { .d-headline--eyebrow(); }
+.d-headline24 { .d-headline--lg(); }
+.d-headline28 { .d-headline--xl(); }
+.d-headline32 { .d-headline--xl(); }
+.d-headline36 { .d-headline--xl(); }
+.d-headline42 { .d-headline--xxl(); }
+.d-headline48 { .d-headline--xxl(); }
+.d-headline54 { .d-headline--xxl(); }
 
 .d-fs-unset { font-size: unset !important; }
 

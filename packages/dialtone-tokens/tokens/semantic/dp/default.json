@@ -796,17 +796,7 @@
   },
   "typography": {
     "body": {
-      "small": {
-        "value": {
-          "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.normal}",
-          "lineHeight": "{font.lineHeight.300}",
-          "fontSize": "{font.size.100}",
-          "textCase": "{font.text-case.none}"
-        },
-        "type": "typography"
-      },
-      "base": {
+      "md": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.normal}",
@@ -814,29 +804,41 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Base default medium text style for main content."
       },
-      "compact": {
-        "small": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.100}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography"
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
         },
-        "base": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.200}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography"
-        }
+        "type": "typography",
+        "description": "A tighter-spaced version of medium body style."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Reduced small text style for less prominent or adjacent content."
+      },
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of small body style."
       }
     },
     "headline": {
@@ -848,9 +850,10 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.uppercase}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
       },
-      "small": {
+      "sm": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.bold}",
@@ -859,9 +862,42 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "subhead"
+        "description": "Smaller text size for secondary information or subheadings."
       },
-      "medium": {
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of small headline style."
+      },
+      "sm-soft": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A softer font weight version of small headline style."
+      },
+      "sm-soft-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A softer font weight, tighter-spaced version of small headline style."
+      },
+      "md": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.bold}",
@@ -870,9 +906,20 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "base"
+        "description": "Medium-sized base text style for headlines."
       },
-      "large": {
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of medium headline style."
+      },
+      "lg": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.bold}",
@@ -881,9 +928,42 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "section"
+        "description": "Large text style for headlines to attract attention."
       },
-      "extra-large": {
+      "lg-soft": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A softer font weight version of large headline style."
+      },
+      "lg-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of large body style."
+      },
+      "lg-soft-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A softer font weight, tighter spaced version of large headline style."
+      },
+      "xl": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.medium}",
@@ -892,9 +972,20 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "display"
+        "description": "Extra large text style for high importance headlines."
       },
-      "extra-extra-large": {
+      "xl-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.100}",
+          "fontSize": "{font.size.400}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of extra large headline style."
+      },
+      "xxl": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.medium}",
@@ -903,80 +994,22 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "page head"
+        "description": "Largest text style for extra extra large content."
       },
-      "soft": {
-        "small": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.medium}",
-            "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.100}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography",
-          "description": "subhead"
-        }
-      },
-      "compact": {
-        "small": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.bold}",
-            "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.100}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography",
-          "description": "subheading"
+      "xxl-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.100}",
+          "fontSize": "{font.size.500}",
+          "textCase": "{font.text-case.none}"
         },
-        "medium": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.bold}",
-            "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.200}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography"
-        },
-        "large": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.bold}",
-            "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.300}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography"
-        },
-        "soft": {
-          "small": {
-            "value": {
-              "fontFamily": "{font.family.body}",
-              "fontWeight": "{font.weight.medium}",
-              "lineHeight": "{font.lineHeight.200}",
-              "fontSize": "{font.size.100}",
-              "textCase": "{font.text-case.none}"
-            },
-            "type": "typography",
-            "description": "subhead"
-          }
-        }
+        "type": "typography",
+        "description": "A tighter-spaced version of extra extra large headline style."
       }
     },
     "label": {
-      "small": {
-        "value": {
-          "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.semiBold}",
-          "lineHeight": "{font.lineHeight.300}",
-          "fontSize": "{font.size.100}",
-          "textCase": "{font.text-case.none}"
-        },
-        "type": "typography"
-      },
-      "base": {
+      "md": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.semiBold}",
@@ -984,87 +1017,32 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Base default medium-sized text style for labels, providing clear identification and categorization."
       },
-      "compact": {
-        "small": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.semiBold}",
-            "lineHeight": "{font.lineHeight.200}",
-            "fontSize": "{font.size.100}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography"
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
         },
-        "base": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.semiBold}",
-            "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.200}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography"
-        },
-        "plain": {
-          "small": {
-            "value": {
-              "fontFamily": "{font.family.body}",
-              "fontWeight": "{font.weight.normal}",
-              "lineHeight": "{font.lineHeight.200}",
-              "fontSize": "{font.size.100}",
-              "textCase": "{font.text-case.none}"
-            },
-            "type": "typography"
-          },
-          "base": {
-            "value": {
-              "fontFamily": "{font.family.body}",
-              "fontWeight": "{font.weight.normal}",
-              "lineHeight": "{font.lineHeight.300}",
-              "fontSize": "{font.size.200}",
-              "textCase": "{font.text-case.none}"
-            },
-            "type": "typography"
-          }
-        }
+        "type": "typography",
+        "description": "A tighter-spaced version of medium label style."
       },
-      "plain": {
-        "small": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.300}",
-            "fontSize": "{font.size.100}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography"
-        },
-        "base": {
-          "value": {
-            "fontFamily": "{font.family.body}",
-            "fontWeight": "{font.weight.normal}",
-            "lineHeight": "{font.lineHeight.400}",
-            "fontSize": "{font.size.200}",
-            "textCase": "{font.text-case.none}"
-          },
-          "type": "typography"
-        }
-      }
-    },
-    "helper": {
-      "small": {
+      "md-plain": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.normal}",
-          "lineHeight": "{font.lineHeight.200}",
-          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A non-bold version of medium label style."
       },
-      "base": {
+      "md-plain-compact": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.normal}",
@@ -1072,22 +1050,80 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
-      }
-    },
-    "code": {
-      "small": {
+        "type": "typography",
+        "description": "A non-bolded, tighter-spaced version of medium label style."
+      },
+      "sm": {
         "value": {
-          "fontFamily": "{font.family.mono}",
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy."
+      },
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of small label style."
+      },
+      "sm-plain": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A non-bold version of small label style."
+      },
+      "sm-plain-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.normal}",
           "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "mono"
+        "description": "A non-bolded, tighter-spaced version of small label style."
+      }
+    },
+    "helper": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium-sized text style for supplementary contextual information."
       },
-      "base": {
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption."
+      }
+    },
+    "code": {
+      "md": {
         "value": {
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
@@ -1096,7 +1132,18 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "mono"
+        "description": "Base default medium-sized text style for monospace code snippets of technical content."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
       }
     }
   },

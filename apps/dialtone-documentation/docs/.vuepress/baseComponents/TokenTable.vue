@@ -38,7 +38,7 @@
         </td>
         <th
           scope="row"
-          class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100"
+          class="d-code--sm d-fc-purple-400"
         >
           <dt-stack
             direction="row"
@@ -53,7 +53,7 @@
           </dt-stack>
         </th>
         <td
-          class="d-ff-mono d-fw-normal d-fs-100 d-fs-100 d-lh-300"
+          class="d-code--sm"
         >
           <div class="d-wmx264">
             {{ tokenValue }}
@@ -61,7 +61,7 @@
         </td>
         <td
           v-show="!!tokenList"
-          class="d-ff-mono d-fw-normal d-fs-100 d-fs-100 d-lh-300"
+          class="d-code--sm"
         >
           <div class="d-wmx264">
             {{ remToPixels(tokenValue) }}

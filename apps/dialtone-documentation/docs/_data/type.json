@@ -1,112 +1,160 @@
 {
+  "typographyVariants": [
+    {
+      "category": "headline",
+      "size": ["eyebrow", "sm", "md", "lg", "xl", "xxl"],
+      "strength": ["-", "soft", "-", "soft", "-", "-"],
+      "density": ["-", "compact", "compact", "compact", "compact", "compact"]
+    },
+    {
+      "category": "body",
+      "size": ["sm", "md"],
+      "strength": ["-", "-"],
+      "density": ["compact", "compact"]
+    },
+    {
+      "category": "label",
+      "size": ["sm", "md"],
+      "strength": ["plain", "plain"],
+      "density": ["compact", "compact"]
+    },
+    {
+      "category": "helper",
+      "size": ["sm", "md"],
+      "strength": ["-", "-"],
+      "density": ["-"]
+    },
+    {
+      "category": "code",
+      "size": ["sm", "md"],
+      "strength": ["-", "-"],
+      "density": ["-", "-"]
+    }
+  ],
   "typographyStyles": [
     {
-      "var": "d-headline-eyebrow",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-normal); text-transform: uppercase;"
+      "var": "d-headline--eyebrow",
+      "output": "font: var(--dt-typography-headline-eyebrow)"
     },
     {
-      "var": "d-headline-small",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-bold);"
+      "var": "d-headline--sm",
+      "output": "font: var(--dt-typography-headline-sm)"
     },
     {
-      "var": "d-headline-soft-small",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium);"
+      "var": "d-headline--sm-soft",
+      "output": "font: var(--dt-typography-headline-sm-soft)"
     },
     {
-      "var": "d-headline-compact-small",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-bold);"
+      "var": "d-headline--sm-compact",
+      "output": "font: var(--dt-typography-headline-sm-compact)"
     },
     {
-      "var": "d-headline-compact-soft-small",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-medium);"
+      "var": "d-headline--sm-soft-compact",
+      "output": "font: var(--dt-typography-headline-sm-soft-compact)"
     },
     {
-      "var": "d-headline-medium",
-      "output": "line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold);"
+      "var": "d-headline--md",
+      "output": "font: var(--dt-typography-headline-md)"
     },
     {
-      "var": "d-headline-compact-medium",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-bold);"
+      "var": "d-headline--md-compact",
+      "output": "font: var(--dt-typography-headline-md-compact)"
     },
     {
-      "var": "d-headline-large",
-      "output": "line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-300); font-weight: var(--dt-font-weight-bold);"
+      "var": "d-headline--lg",
+      "output": "font: var(--dt-typography-headline-lg)"
     },
     {
-      "var": "d-headline-compact-large",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-300); font-weight: var(--dt-font-weight-bold);"
+      "var": "d-headline--lg-soft",
+      "output": "font: var(--dt-typography-headline-lg-soft)"
     },
     {
-      "var": "d-headline-extra-large",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-400); font-weight: var(--dt-font-weight-medium);"
+      "var": "d-headline--lg-compact",
+      "output": "font: var(--dt-typography-headline-lg-compact)"
     },
     {
-      "var": "d-headline-extra-extra-large",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-500); font-weight: var(--dt-font-weight-medium);"
+      "var": "d-headline--lg-soft-compact",
+      "output": "font: var(--dt-typography-headline-lg-soft-compact)"
     },
     {
-      "var": "d-body-base",
-      "output": "line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200);"
+      "var": "d-headline--xl",
+      "output": "font: var(--dt-typography-headline-xl)"
     },
     {
-      "var": "d-body-compact",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200);"
+      "var": "d-headline--xl-compact",
+      "output": "font: var(--dt-typography-headline-xl-compact)"
     },
     {
-      "var": "d-body-small",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100);"
+      "var": "d-headline--xxl",
+      "output": "font: var(--dt-typography-headline-xxl)"
     },
     {
-      "var": "d-body-compact-small",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100);"
+      "var": "d-headline--xxl-compact",
+      "output": "font: var(--dt-typography-headline-xxl-compact)"
     },
     {
-      "var": "d-label-base",
-      "output": "line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-semi-bold);"
+      "var": "d-body--md",
+      "output": "font: var(--dt-typography-body-md)"
     },
     {
-      "var": "d-label-compact",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200); font-weight: var(--dt-font-weight-semi-bold);"
+      "var": "d-body--md-compact",
+      "output": "font: var(--dt-typography-body-md-compact)"
     },
     {
-      "var": "d-label-small",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-semi-bold);"
+      "var": "d-body--sm",
+      "output": "font: var(--dt-typography-body-sm)"
     },
     {
-      "var": "d-label-plain",
-      "output": "line-height: var(--dt-font-line-height-400); font-size: var(--dt-font-size-200);"
+      "var": "d-body--sm-compact",
+      "output": "font: var(--dt-typography-body-sm-compact)"
     },
     {
-      "var": "d-label-compact-plain",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200);"
+      "var": "d-label--md",
+      "output": "font: var(--dt-typography-label-md)"
     },
     {
-      "var": "d-label-compact-small",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100); font-weight: var(--dt-font-weight-semi-bold);"
+      "var": "d-label--md-compact",
+      "output": "font: var(--dt-typography-label-md-compact)"
     },
     {
-      "var": "d-label-plain-small",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-100);"
+      "var": "d-label--sm",
+      "output": "font: var(--dt-typography-label-sm)"
     },
     {
-      "var": "d-label-compact-plain-small",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100);"
+      "var": "d-label--md-plain",
+      "output": "font: var(--dt-typography-label-md-plain)"
     },
     {
-      "var": "d-helper-base",
-      "output": "line-height: var(--dt-font-line-height-300); font-size: var(--dt-font-size-200);"
+      "var": "d-label--md-plain-compact",
+      "output": "font: var(--dt-typography-label-md-plain-compact)"
     },
     {
-      "var": "d-helper-small",
-      "output": "line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100);"
+      "var": "d-label--sm-compact",
+      "output": "font: var(--dt-typography-label-sm-compact)"
     },
     {
-      "var": "d-code-base",
-      "output": "font-family: var(--dt-font-family-mono); line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-200);"
+      "var": "d-label--sm-plain",
+      "output": "font: var(--dt-typography-label-sm-plain)"
     },
     {
-      "var": "d-code-small",
-      "output": "font-family: var(--dt-font-family-mono); line-height: var(--dt-font-line-height-200); font-size: var(--dt-font-size-100);"
+      "var": "d-label--sm-plain-compact",
+      "output": "font: var(--dt-typography-label-sm-plain-compact)"
+    },
+    {
+      "var": "d-helper--md",
+      "output": "font: var(--dt-typography-helper-md)"
+    },
+    {
+      "var": "d-helper--sm",
+      "output": "font: var(--dt-typography-helper-sm)"
+    },
+    {
+      "var": "d-code--md",
+      "output": "font: var(--dt-typography-code-md)"
+    },
+    {
+      "var": "d-code--sm",
+      "output": "font: var(--dt-typography-code-sm)"
     }
   ],
   "fontFamily": [

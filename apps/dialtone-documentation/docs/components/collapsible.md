@@ -17,7 +17,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-collapsible-
       initial-focus-element="first"
       >
       <template #content>
-        <div class="d-ta-center d-ba d-bc-gold-400 d-bgc-gold-100 d-bas-dotted d-baw2 d-p8 d-code-small">(content slot)</div>
+        <div class="d-ta-center d-ba d-bc-gold-400 d-bgc-gold-100 d-bas-dotted d-baw2 d-p8 d-code--sm">(content slot)</div>
       </template>
     </dt-collapsible>
     <dt-collapsible
@@ -26,7 +26,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-collapsible-
       initial-focus-element="first"
     >
       <template #content>
-        <div class="d-ta-center d-ba d-bc-gold-400 d-bgc-gold-100 d-bas-dotted d-baw2 d-p8 d-code-small">(content slot)</div>
+        <div class="d-ta-center d-ba d-bc-gold-400 d-bgc-gold-100 d-bas-dotted d-baw2 d-p8 d-code--sm">(content slot)</div>
       </template>
     </dt-collapsible>
   </div>
