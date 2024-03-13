@@ -49,6 +49,7 @@
     "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs"
   },
   "type": "module",
+  "main": "./lib/dist/css/dialtone.min.css",
   "scripts": {
     "build": "gulp",
     "lesshint": "pnpm exec lesshint 'lib/build/less/utilities'",
