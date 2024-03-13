@@ -1,3 +1,10 @@
+## [3.113.1-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.113.0...dialtone-vue3/v3.113.1-beta.1) (2024-03-13)
+
+
+### Bug Fixes
+
+* **Tooltip:** appendTo initialization ([#204](https://github.com/dialpad/dialtone/issues/204)) ([878e03b](https://github.com/dialpad/dialtone/commit/878e03b58257468757a90091202831c00d1630c7))
+
 # [3.113.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.112.0...dialtone-vue3/v3.113.0) (2024-03-09)
 
 
