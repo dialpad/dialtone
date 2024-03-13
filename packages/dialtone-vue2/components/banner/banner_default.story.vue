@@ -45,6 +45,7 @@
         slot="action"
       >
         <dt-button
+          size="sm"
           :kind="buttonKind"
           importance="outlined"
           @click="$attrs.onClick"
