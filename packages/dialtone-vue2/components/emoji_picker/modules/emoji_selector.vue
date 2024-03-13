@@ -101,7 +101,7 @@
 </template>
 
 <script>
-import { emojisGrouped as emojisImported } from '@/components/emoji_picker/emojis';
+import { emojisGrouped as emojisImported } from '@dialpad/dialtone-emojis';
 import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker';
 
 export default {

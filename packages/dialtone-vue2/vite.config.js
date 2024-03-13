@@ -26,6 +26,7 @@ export default defineConfig({
       output: {
         globals: {
           vue: 'Vue',
+          '@dialpad/dialtone-emojis': 'DialtoneEmojis',
         },
       },
     },

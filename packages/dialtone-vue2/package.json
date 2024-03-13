@@ -31,6 +31,7 @@
     "CHANGELOG.json"
   ],
   "dependencies": {
+    "@dialpad/dialtone-emojis": "workspace:*",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "@tiptap/core": "^2.0.3",
     "@tiptap/extension-blockquote": "^2.1.16",
