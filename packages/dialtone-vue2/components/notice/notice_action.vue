@@ -4,7 +4,7 @@
     data-qa="notice-content-actions"
   >
     <!-- @slot Slot for main content -->
-    <slot />
+    <slot v-if="!hideAction" />
     <dt-button
       v-if="!hideClose"
       ref="closeButton"
@@ -62,6 +62,15 @@ export default {
      * @values true, false
      */
     hideClose: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Hides the action from the notice
+     * @values true, false
+     */
+    hideAction: {
       type: Boolean,
       default: false,
     },

@@ -38,6 +38,11 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
+  hideAction: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 export default {
