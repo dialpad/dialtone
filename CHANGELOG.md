@@ -1,3 +1,10 @@
+## [9.19.1-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.19.0...dialtone/v9.19.1-beta.1) (2024-03-13)
+
+
+### Bug Fixes
+
+* **Tooltip:** appendTo initialization ([#204](https://github.com/dialpad/dialtone/issues/204)) ([878e03b](https://github.com/dialpad/dialtone/commit/878e03b58257468757a90091202831c00d1630c7))
+
 # [9.19.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.18.0...dialtone/v9.19.0) (2024-03-09)
 
 
