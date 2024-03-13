@@ -81,7 +81,7 @@ jobs:
         uses: dawidd6/action-send-mail@v3
         with:
           connection_url: ${{ secrets.MAIL_CONNECTION }}
-          subject: "Dialtone: New blog post '${{ env.BLOG_POST_HEADING }}'"
+          subject: "[dialtone] New blog post: '${{ env.BLOG_POST_HEADING }}'"
           to: ${{ env.TO_MAIL }}
           from: Dialtone <${{ env.FROM_MAIL }}>
           html_body: file://${{ env.FILE_PATH }}
