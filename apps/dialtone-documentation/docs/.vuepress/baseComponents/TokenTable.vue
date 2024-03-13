@@ -30,7 +30,7 @@
     </thead>
     <tbody>
       <tr
-        v-for="({ exampleValue, exampleName, name, tokenValue, description }) in tokensProcessed"
+        v-for="({ exampleValue, exampleName, name, tokenValue, description }) in tokens"
         :key="name"
       >
         <td>
@@ -45,7 +45,7 @@
             gap="300"
             class="d-ai-center"
           >
-            <span class="d-ws-nowrap">{{ name }}</span>
+            <span>{{ name }}</span>
             <copy-button
               :text="name"
               aria-label="copy token"
@@ -77,43 +77,9 @@
 </template>
 
 <script>
-import * as tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { getComposedTypographyTokens, getComposedShadowTokens } from '../common/token-utilities';
 import CopyButton from './CopyButton.vue';
 import TokenExample from './TokenExample.vue';
-
-export const FORMAT_MAP = {
-  CSS: 'css/variables',
-  Android: 'compose/object',
-  iOS: 'ios-swift/enum.swift',
-};
-
-export const THEMES = [
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' },
-];
-
-export const CATEGORY_MAP = {
-  color: ['color', 'opacity', 'theme'],
-  typography: ['typography', 'font'],
-  size: ['size'],
-  space: ['space'],
-  shadow: ['shadow'],
-  component: ['avatar', 'badge', 'checkbox', 'icon', 'inputs', 'action'],
-};
-
-const COMPOSED_TOKENS_CATEGORIES = [
-  {
-    category: 'typography',
-    format: 'CSS',
-    getTokensFn: getComposedTypographyTokens,
-  },
-  {
-    category: 'shadow',
-    format: 'CSS',
-    getTokensFn: getComposedShadowTokens,
-  },
-];
+import { CATEGORY_MAP } from '../common/constants';
 
 export default {
   name: 'TokenTable',
@@ -124,58 +90,20 @@ export default {
   },
 
   props: {
+    tokens: {
+      type: Array,
+      default: () => [],
+    },
+
     category: {
       type: String,
       default: 'color',
       validator: (v) => Object.keys(CATEGORY_MAP).includes(v),
     },
 
-    format: {
-      type: String,
-      default: 'CSS',
-      validator: (v) => Object.keys(FORMAT_MAP).includes(v),
-    },
-
-    theme: {
-      type: String,
-      default: 'light',
-      validator: (v) => THEMES.find(theme => theme.value === v),
-    },
-
     tokenList: {
-      type: Object,
-      default: null,
-    },
-  },
-
-  computed: {
-    tokensProcessed () {
-      const tokens = [];
-      Object.entries(tokensJson[this.theme])
-        .filter(([key, value]) => CATEGORY_MAP[this.category].includes(key.split('/')[0]) &&
-          value[FORMAT_MAP.CSS] &&
-          (!this.tokenList || this.tokenList[value[FORMAT_MAP.CSS].name]))
-        .forEach(([_, value]) => {
-          const { name, value: tokenValue, description } = value[FORMAT_MAP[this.format]] || {};
-          const tokenDescription = this.tokenList ? this.tokenList[name].description : description;
-          // exclude base tokens
-          if (name && !name.endsWith('base)') && !name.endsWith('root)')) {
-            const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
-            tokens.push({ exampleValue, exampleName, name, tokenValue, description: tokenDescription });
-          }
-        });
-      const composedTokens = [];
-      if (COMPOSED_TOKENS_CATEGORIES.some(item => item.category === this.category && item.format === this.format)) {
-        composedTokens.push(...COMPOSED_TOKENS_CATEGORIES
-          .find(item => item.category === this.category).getTokensFn(this.theme));
-      }
-      return [...composedTokens, ...tokens];
-    },
-
-    formatSelectMenuOptions () {
-      return Object.keys(FORMAT_MAP).map((item) => {
-        return { value: item, label: item };
-      });
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -184,7 +112,6 @@ export default {
       if (this.category !== 'size' && this.category !== 'space') return;
       return `${parseFloat(value.replace('rem', '')) * 10}px`;
     },
-
   },
 };
 </script>

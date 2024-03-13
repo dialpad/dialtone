@@ -352,6 +352,14 @@ a.header-anchor {
   grid-template-columns: [content] minmax(32rem, 104rem);
 }
 
+.d-gl-docsite.tokens-page {
+  grid-template-columns: [content] minmax(32rem, 0.6fr);
+
+  @media (max-width: 1260px) {
+    grid-template-columns: [content] minmax(32rem, 104rem);
+  }
+}
+
 .d-gl-docsite-toc {
   grid-template-areas: 'content toc';
   grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(min-content, 21.6rem);
