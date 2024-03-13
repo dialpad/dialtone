@@ -1,3 +1,16 @@
+# [3.114.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.113.0...dialtone-vue3/v3.114.0) (2024-03-13)
+
+
+### Bug Fixes
+
+* avatar validation ([#203](https://github.com/dialpad/dialtone/issues/203)) ([37925ab](https://github.com/dialpad/dialtone/commit/37925ab1c483b12748f8c9dde0e22840365c4a6f))
+* message input select media ([#201](https://github.com/dialpad/dialtone/issues/201)) ([dbb3d61](https://github.com/dialpad/dialtone/commit/dbb3d61d216dd3d82a74bec45847ca3ff8b9899c))
+
+
+### Features
+
+* **Feed Item Row:** add attachment slot ([#202](https://github.com/dialpad/dialtone/issues/202)) ([417c305](https://github.com/dialpad/dialtone/commit/417c30554977917f5d1329f5e06e40c8f55baf37))
+
 # [3.113.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.112.0...dialtone-vue3/v3.113.0) (2024-03-09)
 
 
