@@ -127,4 +127,22 @@
             cursor: not-allowed;
         }
     }
+
+    //  $$  MENTION
+    //  ----------------------------------------------------------------------------
+    // Styling specific to mentions such as @brad.paugh. The underline highlighting
+    // is reversed compared to a regular link, and it has a light background.
+    &--mention {
+        color: var(--dt-color-link-primary);
+        line-height: var(--dt-font-line-height-200);
+        text-decoration: none;
+        background-color: hsl(var(--dt-color-purple-400-hsl) / 0.1);
+        border-radius: var(--dt-size-radius-200);
+
+        &:hover {
+            color: var(--dt-color-link-primary);
+            text-decoration: underline;
+            background-color: hsl(var(--dt-color-purple-400-hsl) / 0.2);
+        }
+    }
 }
