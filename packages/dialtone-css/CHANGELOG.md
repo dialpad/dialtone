@@ -1,3 +1,10 @@
+# [8.28.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.27.1...dialtone-css/v8.28.0) (2024-03-14)
+
+
+### Features
+
+* **Typography:** refactor text styles ([#198](https://github.com/dialpad/dialtone/issues/198)) ([622c0f6](https://github.com/dialpad/dialtone/commit/622c0f65611010215b94624ccff6e82f62b32056))
+
 ## [8.27.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.27.0...dialtone-css/v8.27.1) (2024-03-05)
 
 
