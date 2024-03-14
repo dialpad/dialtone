@@ -1,3 +1,16 @@
+# [3.115.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.114.0...dialtone-vue3/v3.115.0) (2024-03-14)
+
+
+### Bug Fixes
+
+* **Tooltip:** appendTo initialization ([#204](https://github.com/dialpad/dialtone/issues/204)) ([3f9d2ed](https://github.com/dialpad/dialtone/commit/3f9d2ed558fffc1fdb6d76b2827531b2dfdd5c4a))
+* update missing props ([#199](https://github.com/dialpad/dialtone/issues/199)) ([64af482](https://github.com/dialpad/dialtone/commit/64af482fd8928b67fb924c446c75dbbf66547921))
+
+
+### Features
+
+* **Typography:** refactor text styles ([#198](https://github.com/dialpad/dialtone/issues/198)) ([622c0f6](https://github.com/dialpad/dialtone/commit/622c0f65611010215b94624ccff6e82f62b32056))
+
 # [3.114.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.113.0...dialtone-vue3/v3.114.0) (2024-03-13)
 
 
