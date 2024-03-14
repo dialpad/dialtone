@@ -180,12 +180,17 @@ export default {
 
   &__layout {
     padding: var(--dt-space-400);
+    gap: var(--dt-space-300);
     width: 100%;
+
+    &:deep(> .dt-item-layout--left) {
+      padding-right: var(--dt-space-0);
+      justify-content: center;
+    }
   }
 
   &__icon {
     animation: fade 0.15s ease-in;
-    margin-right: var(--dt-space-400);
   }
 
   &__content {
