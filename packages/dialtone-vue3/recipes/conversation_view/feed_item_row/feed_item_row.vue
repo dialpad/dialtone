@@ -412,7 +412,7 @@ export default {
   }
 
   &:deep(> .dt-item-layout) {
-    font: var(--dt-typography-body-compact-base);
+    font: var(--dt-typography-body-md-compact);
     min-height: initial;
     padding: 0px;
   }

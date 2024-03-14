@@ -47,20 +47,20 @@ Use `d-wmx{n}` to set a fixed minimum width for an element. This can be combined
     </thead>
     <tbody>
       <tr v-for="i in percentage">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-wmx{{ i }}p</th>
-        <td class="d-ff-mono d-fs-100">max-width: {{ i }}% !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-wmx{{ i }}p</th>
+        <td class="d-code--sm">max-width: {{ i }}% !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in fixed">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-wmx{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">max-width: {{ i }}px !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-wmx{{ i }}</th>
+        <td class="d-code--sm">max-width: {{ i }}px !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in other">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-wmx-{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">max-width: {{ i }} !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-wmx-{{ i }}</th>
+        <td class="d-code--sm">max-width: {{ i }} !important;</td>
       </tr>
     </tbody>
   </table>

@@ -29,8 +29,8 @@ By default, items are ordered by their position in the DOM. To re-order an eleme
   <template #content>
     <tbody>
       <tr v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, '-first', '-last']">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-order{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-order{{ i }}</th>
+        <td class="d-code--sm">
           order:
           <span v-if="i === '-first'">-9999</span>
           <span v-else-if="i === '-last'">9999</span>

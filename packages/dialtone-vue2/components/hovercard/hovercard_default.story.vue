@@ -46,10 +46,10 @@
             direction="column"
             gap="0"
           >
-            <p class="d-headline-compact-medium">
+            <p class="d-headline--md-compact">
               Jaqueline Nackos
             </p>
-            <p class="d-body-small d-fc-tertiary">
+            <p class="d-body--sm d-fc-tertiary">
               <span class="d-fc-critical">In a meeting</span> • Working from SF
             </p>
           </dt-stack>
@@ -70,7 +70,7 @@
               name="clock-4"
               size="200"
             />
-            <p class="d-body-small">
+            <p class="d-body--sm">
               <b>Local Time:</b> 12:32 PM
             </p>
           </dt-stack>

@@ -7,7 +7,7 @@ description: Utilities to control an element's width.
 
 Use `d-w{n}p` to set a percentage width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-fs-200 d-ff-mono d-ta-center d-of-y-scroll" custom>
+<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" custom>
   <div v-for="i in percentage" class="d-d-flex d-fl-center d-ps-relative">
     <span class="d-zi-active d-h64 d-d-flex d-ai-center">d-w{{i}}p</span>
     <div class="d-w100p d-h64 d-ps-absolute d-bgc-purple-200">
@@ -118,24 +118,24 @@ Use `d-w-auto` have the browser calculate and select a width.
     </thead>
     <tbody>
       <tr v-for="i in percentage">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-w{{ i }}p</th>
-        <td class="d-ff-mono d-fs-100">width: {{ i }}% !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w{{ i }}p</th>
+        <td class="d-code--sm">width: {{ i }}% !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in fixed">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-w{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">width: {{ i }}px !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w{{ i }}</th>
+        <td class="d-code--sm">width: {{ i }}px !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr>
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-w100vw</th>
-        <td class="d-ff-mono d-fs-100">width: 100vh !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w100vw</th>
+        <td class="d-code--sm">width: 100vh !important;</td>
       </tr>
       <tr v-for="i in other">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-w-{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">width: {{ i }} !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w-{{ i }}</th>
+        <td class="d-code--sm">width: {{ i }} !important;</td>
       </tr>
     </tbody>
   </table>

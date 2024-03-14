@@ -61,7 +61,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 For optimal layout flexibility and responsiveness, generally avoid using fixed `widths` or `heights` when defining element sizes. Instead, use percentages values or set `min-width` or `min-height`. This allows the elements to adjust naturally to different screen sizes.
 
 </p>
-<p class="d-body-base d-fc-tertiary">
+<p class="d-body--md d-fc-tertiary">
 Exceptions exist for select elements like Avatars, Icons, and Toggles. These elements require fixed dimensions to maintain consistent scale across devices within flexible layouts.
 </p>
 </dt-stack>
@@ -69,7 +69,7 @@ Exceptions exist for select elements like Avatars, Icons, and Toggles. These ele
 <dt-stack class="d-gc2" direction="column" gap="500">
 <iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25635&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25635&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
-<p class="d-body-base d-fc-tertiary">Text elements, typically occupy 100% of their allocated space, allowing text to flow freely within the designated area or until trucated.</p>
+<p class="d-body--md d-fc-tertiary">Text elements, typically occupy 100% of their allocated space, allowing text to flow freely within the designated area or until trucated.</p>
 </div>
 </dt-stack>
 </div>
@@ -84,11 +84,11 @@ The size of some components is determined by their content. Most expand vertical
 </div>
 <dt-stack direction="column" gap="500">
 <iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25749&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25739&hotspot-hints=0&hide-ui=1"></iframe>
-<p class="d-body-base d-fc-tertiary">This tooltip has a `min-width`, and its height depends on its content.</p>
+<p class="d-body--md d-fc-tertiary">This tooltip has a `min-width`, and its height depends on its content.</p>
 </dt-stack>
 <dt-stack direction="column" gap="500">
 <iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25744&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25744&hotspot-hints=0&hide-ui=1"></iframe>
-<p class="d-body-base d-fc-tertiary">This button has a fixed `height`, a `min-width` and grows horizontally depending on its content.</p>
+<p class="d-body--md d-fc-tertiary">This button has a fixed `height`, a `min-width` and grows horizontally depending on its content.</p>
 </dt-stack>
 </div>
 
@@ -121,13 +121,15 @@ Here are some frequently used tokens. For a complete list, visit the [Size Token
 
 <token-table category="size" :tokenList="true" :tokens="tokens" />
 
-<DtNotice
+<dt-notice
   kind="info"
-  title="Note"
+  title="Figma Variables"
   hideClose="true"
 >
-By Feb 2024, we aim to integrate sizing units into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height in your Figma files, making it easier for engineers to obtain the correct variable for each case.
-</DtNotice>
+  <template #default>
+    By April 2024, we aim to integrate sizing units into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height in your Figma files, making it easier for engineers to obtain the correct variable for each case.
+  </template>
+</dt-notice>
 
 ## Key Takeaways
 

@@ -138,7 +138,7 @@ It’s important to use the same words and spellings across the interface. This 
 
 <!-- This should be a JSON file -->
 
-<table class="d-table dialtone-doc-table d-body-base">
+<table class="d-table dialtone-doc-table d-body--md">
   <thead>
     <tr>
       <th class="d-w25p" scope="col">
@@ -238,7 +238,7 @@ Because contact center users are more specialized than talk users, it may occasi
 
 <!-- This should be a JSON file, spit out as a styled <dl> -->
 
-<table class="d-table dialtone-doc-table d-body-base">
+<table class="d-table dialtone-doc-table d-body--md">
   <thead>
     <tr>
       <th class="d-w25p" scope="col">
@@ -350,7 +350,7 @@ When written out, dates are represented in this order **[Day of week], [Month] [
 
 ### Formats by length
 
-<table class="d-table dialtone-doc-table d-body-base">
+<table class="d-table dialtone-doc-table d-body--md">
   <thead>
     <tr>
       <th class="d-w25p" scope="col">
@@ -385,7 +385,7 @@ When written out, dates are represented in this order **[Day of week], [Month] [
 
 If space isn’t an issue, spell out the full day of the week and month. When space is constrained, abbreviate days of the week and months.
 
-<table class="d-table dialtone-doc-table d-body-base">
+<table class="d-table dialtone-doc-table d-body--md">
   <thead>
     <tr>
       <th class="d-w25p" scope="col">
@@ -575,7 +575,7 @@ Relative timestamps may change based on context. When using relative timestamps,
   * minutes - min
   * seconds - s
 
-<table class="d-table dialtone-doc-table d-body-base">
+<table class="d-table dialtone-doc-table d-body--md">
   <thead>
     <tr>
       <th class="d-w25p" scope="col">
@@ -615,7 +615,7 @@ Relative timestamps may change based on context. When using relative timestamps,
 
 ### Absolute Timestamps
 
-<table class="d-table dialtone-doc-table d-body-base">
+<table class="d-table dialtone-doc-table d-body--md">
   <thead>
     <tr>
       <th class="d-w25p" scope="col">

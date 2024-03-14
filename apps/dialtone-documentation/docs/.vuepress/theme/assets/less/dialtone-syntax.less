@@ -14,7 +14,8 @@ div[class*="language-"] {
 		padding: var(--dt-space-450) !important;
 
 		& code {
-			color: var(--dt-color-black-900) !important;
+			padding: 0;
+			color: var(--dt-color-foreground-secondary) !important;
 			background-color: unset;
 		}
 	}
@@ -25,7 +26,7 @@ div[class*="language-"] {
 	}
 }
 
-code {
+code:not(.d-code--md, .d-code--sm) {
 	padding: var(--dt-space-200) var(--dt-space-300);
 	color: var(--dt-color-purple-400);
 	background-color: var(--dt-color-purple-100);
@@ -212,5 +213,5 @@ pre[class*="language-"].line-numbers > code {
 code,
 kbd,
 samp {
-  font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-family: var(--dt-font-family-mono);
 }

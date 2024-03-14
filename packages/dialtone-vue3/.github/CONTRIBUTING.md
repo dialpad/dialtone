@@ -99,10 +99,8 @@ After you have discussed your change with the Dialtone team, follow these steps 
 - 'no-visual-test' if not UI changes.
 
 <!-- markdownlint-disable MD029 -->
-8. Run `./copy_pr_vue3.sh` in the root of the repository to copy your current changes in the vue 2 folder to the vue 3 folder.
-9. Create a pull request into the `staging-vue3` branch, reviewers will be automatically added and notified of your PR.
-10. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_pr_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
-11. Once your changes have been approved, you may squash your branch into staging.
+8. If it's a Vue change, you need to update both dialtone-vue2 and dialtone-vue3 packages. You may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script.
+9. Once your changes have been approved, you may squash your branch into staging.
 
 Once your change is in `staging` it will go live with the next Dialtone Vue release.
 Releases are done on demand by the Dialtone team, and are done fairly regularly.

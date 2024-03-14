@@ -9,7 +9,7 @@ description: Utilities to change an element's font-size.
   class="d-wmx100p"
 >
   <template #default>
-    <p class="d-body-compact">Before applying a typography utility, first consider using <router-link class="d-fw-bold d-link d-link--muted" to="/design/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
+    <p class="d-body--md-compact">Before applying a typography utility, first consider using <router-link class="d-fw-bold d-link d-link--muted" to="/design/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
   </template>
 </dt-notice>
 
@@ -20,15 +20,15 @@ change in other platforms (mobile, tc8, tv).
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-fs-100</div>
+    <div class="d-code--sm d-fc-purple-400">.d-fs-100</div>
     <div><p class="d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-fs-200</div>
+    <div class="d-code--sm d-fc-purple-400">.d-fs-200</div>
     <div><p class="d-fs-200">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-fs-300</div>
+    <div class="d-code--sm d-fc-purple-400">.d-fs-300</div>
     <div><p class="d-fs-300">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-fs-400</div>
+    <div class="d-code--sm d-fc-purple-400">.d-fs-400</div>
     <div><p class="d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-fs-100 d-ff-mono d-fc-purple-400">.d-fs-500</div>
+    <div class="d-code--sm d-fc-purple-400">.d-fs-500</div>
     <div><p class="d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
   </div>
 </code-well-header>
@@ -61,10 +61,10 @@ change in other platforms (mobile, tc8, tv).
     <tbody>
       <tr v-for="{ stop, size, output } in fontSize.product">
         <th scope="row">{{ size }}px</th>
-        <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fs-{{ stop }}</td>
+        <td class="d-code--sm d-fc-purple-400">.d-fs-{{ stop }}</td>
         <td>
           <div class="d-d-flex d-jc-space-between d-ai-center">
-            <div class="d-fl1 d-ff-mono d-fs-100">
+            <div class="d-fl1 d-code--sm">
               font-size: {{ output }}rem !important;
             </div>
             <div class="d-fl0 d-lh4" :class="`d-fs-${stop}`">
@@ -91,10 +91,10 @@ change in other platforms (mobile, tc8, tv).
     <tbody>
       <tr v-for="{ stop, size, output } in fontSize.mobile">
         <th scope="row">{{ size }}px</th>
-        <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fs-{{ stop }}-mobile</td>
+        <td class="d-code--sm d-fc-purple-400">.d-fs-{{ stop }}-mobile</td>
         <td>
           <div class="d-d-flex d-jc-space-between d-ai-center">
-            <div class="d-fl1 d-ff-mono d-fs-100">
+            <div class="d-fl1 d-code--sm">
               font-size: {{ output }}rem !important;
             </div>
             <div class="d-fl0 d-lh4" :class="`d-fs-${stop}-mobile`">
@@ -121,10 +121,10 @@ change in other platforms (mobile, tc8, tv).
     <tbody>
       <tr v-for="{ stop, size, output } in fontSize.tc8">
         <th scope="row">{{ size }}px</th>
-        <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fs-{{ stop }}-tc8</td>
+        <td class="d-code--sm d-fc-purple-400">.d-fs-{{ stop }}-tc8</td>
         <td>
           <div class="d-d-flex d-jc-space-between d-ai-center">
-            <div class="d-fl1 d-ff-mono d-fs-100">
+            <div class="d-fl1 d-code--sm">
               font-size: {{ output }}rem !important;
             </div>
             <div class="d-fl0 d-lh4" :class="`d-fs-${stop}-tc8`">
@@ -151,10 +151,10 @@ change in other platforms (mobile, tc8, tv).
     <tbody>
       <tr v-for="{ stop, size, output } in fontSize.tv">
         <th scope="row">{{ size }}px</th>
-        <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-fs-{{ stop }}-tv</td>
+        <td class="d-code--sm d-fc-purple-400">.d-fs-{{ stop }}-tv</td>
         <td>
           <div class="d-d-flex d-jc-space-between d-ai-center">
-            <div class="d-fl1 d-ff-mono d-fs-100">
+            <div class="d-fl1 d-code--sm">
               font-size: {{ output }}rem !important;
             </div>
             <div class="d-fl0 d-lh4" :class="`d-fs-${stop}-tv`">

@@ -169,11 +169,11 @@ Use `d-plc-space-between{-n}` to distribute grid items along the block axis so t
       <tbody>
         <div v-for="c in alignments" style="display: contents">
           <tr v-for="i in alignments">
-            <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">
+            <th scope="row" class="d-code--sm d-fc-purple-400">
               <span v-if="i !== c">.d-plc-{{ c }}-{{ i }}</span>
               <span v-else>.d-plc-{{ c }}</span>
             </th>
-            <td class="d-ff-mono d-fs-100">
+            <td class="d-code--sm">
               <span v-if="i !== c">place-content: {{ c }} {{ i }} !important</span>
               <span v-else>place-content: {{ c }} !important</span>
             </td>

@@ -1,7 +1,7 @@
 <template>
   <li>
     <h3
-      class="d-headline-eyebrow d-fw-semibold d-pl12 d-pt8 d-pb8 d-fc-secondary"
+      class="d-headline--eyebrow d-fw-semibold d-pl12 d-pt8 d-pb8 d-fc-secondary"
       v-text="item.text"
     />
     <dt-stack

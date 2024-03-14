@@ -225,29 +225,26 @@ module.exports = {
       'FocusInset',
     ].join('|'),
     TYPOGRAPHY_VARIABLES: [
-      'Body',
-      'BodyCompact',
+      'Compact',
+      'Eyebrow',
+      'Soft',
+      'SoftCompact',
+      'Plain',
+      'PlainCompact',
+    ].join('|'),
+    TYPOGRAPHY_TYPE: [
       'Headline',
-      'HeadlineEyebrow',
-      'HeadlineSoft',
-      'HeadlineCompact',
-      'HeadlineCompactSoft',
+      'Body',
       'Label',
-      'LabelPlain',
-      'LabelCompact',
-      'LabelCompactPlain',
       'Helper',
       'Code',
-
     ].join('|'),
     TYPOGRAPHY_SIZES: [
-      'Small',
-      'Base',
-      'Medium',
-      'Large',
-      'ExtraLarge',
-      'ExtraExtraLarge',
-
+      'Sm',
+      'Md',
+      'Lg',
+      'Xl',
+      'Xxl',
     ].join('|'),
     TEXT_DECORATION: [
       'dotted',
@@ -264,7 +261,7 @@ module.exports = {
       '75',
       '90',
       '95',
-      '99'
+      '99',
     ].join('|'),
   },
   WIDTH_HEIGHTS: {

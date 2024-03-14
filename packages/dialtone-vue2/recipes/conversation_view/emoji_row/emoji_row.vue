@@ -159,7 +159,7 @@ export default {
   }
 
   &__reaction-number {
-    font: var(--dt-typography-body-small);
+    font: var(--dt-typography-body-sm);
     font-variant: tabular-nums;
   }
 }

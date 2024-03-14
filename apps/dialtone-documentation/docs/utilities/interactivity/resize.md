@@ -28,8 +28,8 @@ description: Utilities for controlling the resize of an element.
   <template #content>
     <tbody>
       <tr v-for="{ class: className, output } in resize">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fs-100">.{{ className }}</th>
-        <td class="d-ff-mono d-fs-100">{{ output }}</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.{{ className }}</th>
+        <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>
   </template>
