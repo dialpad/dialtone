@@ -1,5 +1,5 @@
 import emojiRegex from 'emoji-regex';
-import { emojisIndexed } from '@/components/emoji_picker/emojis';
+import { emojisIndexed } from '@dialpad/dialtone-emojis';
 
 export const emojiVersion = '6.6';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';

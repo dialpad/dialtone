@@ -1,6 +1,6 @@
 import { markRaw } from 'vue';
 import { VueRenderer } from '@tiptap/vue-3';
-import { emojisIndexed } from '@/components/emoji_picker/emojis';
+import { emojisIndexed } from '@dialpad/dialtone-emojis';
 
 import SuggestionList from '../suggestion/SuggestionList.vue';
 import EmojiSuggestion from './EmojiSuggestion.vue';

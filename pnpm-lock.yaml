@@ -529,9 +529,6 @@ importers:
       '@percy/storybook':
         specifier: ^5.0.1
         version: 5.0.1(typescript@5.2.2)
-      '@rollup/plugin-node-resolve':
-        specifier: ^15.2.3
-        version: 15.2.3
       '@storybook/addon-a11y':
         specifier: ^7.6.1
         version: 7.6.1
@@ -664,6 +661,15 @@ importers:
 
   packages/dialtone-vue3:
     dependencies:
+      '@dialpad/dialtone-css':
+        specifier: workspace:*
+        version: link:../dialtone-css
+      '@dialpad/dialtone-emojis':
+        specifier: workspace:*
+        version: link:../dialtone-emojis
+      '@dialpad/dialtone-icons':
+        specifier: workspace:*
+        version: link:../dialtone-icons
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.1.12)
@@ -724,6 +730,9 @@ importers:
       '@tiptap/suggestion':
         specifier: ^2.1.4
         version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
+      '@tiptap/vue-2':
+        specifier: ^2.0.3
+        version: 2.1.13(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(vue@3.3.8)
       '@tiptap/vue-3':
         specifier: ^2.0.3
         version: 2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(vue@3.3.8)
@@ -740,12 +749,6 @@ importers:
         specifier: ^6.3.7
         version: 6.3.7
     devDependencies:
-      '@dialpad/dialtone-css':
-        specifier: workspace:*
-        version: link:../dialtone-css
-      '@dialpad/dialtone-icons':
-        specifier: workspace:*
-        version: link:../dialtone-icons
       '@dialpad/generator-dialtone':
         specifier: workspace:*
         version: link:../../generator-dialtone
@@ -755,9 +758,6 @@ importers:
       '@percy/storybook':
         specifier: ^5.0.1
         version: 5.0.1(typescript@5.2.2)
-      '@rollup/plugin-node-resolve':
-        specifier: ^15.2.3
-        version: 15.2.3
       '@storybook/addon-a11y':
         specifier: ^7.6.1
         version: 7.6.1
@@ -866,12 +866,12 @@ importers:
       vite:
         specifier: ^5.0.0
         version: 5.0.2(@types/node@18.18.9)(less@4.2.0)
+      vite-bundle-visualizer:
+        specifier: ^1.0.1
+        version: 1.0.1
       vue:
         specifier: ^3.3.4
         version: 3.3.8(typescript@5.2.2)
-      vue-cli-plugin-webpack-bundle-analyzer:
-        specifier: ~4.0.0
-        version: 4.0.0
       vue-docgen-api:
         specifier: ^4.73.0
         version: 4.75.0(vue@3.3.8)
@@ -6014,37 +6014,6 @@ packages:
       '@resvg/resvg-js-win32-x64-msvc': 2.6.0
     dev: true
 
-  /@rollup/plugin-node-resolve@15.2.3:
-    resolution: {integrity: sha512-j/lym8nf5E21LwBT4Df1VD6hRO2L2iwUeUmP7litikRsVp1H6NWx20NEp0Y7su+7XGc476GnXXc4kFeZNGmaSQ==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^2.78.0||^3.0.0||^4.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      '@rollup/pluginutils': 5.0.5
-      '@types/resolve': 1.20.2
-      deepmerge: 4.3.1
-      is-builtin-module: 3.2.1
-      is-module: 1.0.0
-      resolve: 1.22.8
-    dev: true
-
-  /@rollup/pluginutils@5.0.5:
-    resolution: {integrity: sha512-6aEYR910NyP73oHiJglti74iRyOwgFU4x3meH/H8OJx6Ry0j6cOVZ5X/wTvub7G7Ao6qaHBEaNsV3GLJkSsF+Q==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      '@types/estree': 1.0.5
-      estree-walker: 2.0.2
-      picomatch: 2.3.1
-    dev: true
-
   /@rollup/rollup-android-arm-eabi@4.5.1:
     resolution: {integrity: sha512-YaN43wTyEBaMqLDYeze+gQ4ZrW5RbTEGtT5o1GVDkhpdNcsLTnLRcLccvwy3E9wiDKWg9RIhuoy3JQKDRBfaZA==}
     cpu: [arm]
@@ -8224,6 +8193,21 @@ packages:
       vue-ts-types: 1.6.1(vue@2.7.15)
     dev: false
 
+  /@tiptap/vue-2@2.1.13(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(vue@3.3.8):
+    resolution: {integrity: sha512-OsCINarPGyT3sDIXDrhVyaoH0I0VxeDDm+NgS5P0fPbBCnsHZ8csvxD9UB9/KZ/UoxYDfJ1zLplKQn1AIlnRzg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+      vue: ^2.6.0
+    dependencies:
+      '@tiptap/core': 2.0.3(@tiptap/pm@2.1.12)
+      '@tiptap/extension-bubble-menu': 2.1.13(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
+      '@tiptap/extension-floating-menu': 2.1.13(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+      vue: 3.3.8(typescript@5.2.2)
+      vue-ts-types: 1.6.1(vue@3.3.8)
+    dev: false
+
   /@tiptap/vue-3@2.1.12(@tiptap/core@2.0.3)(@tiptap/pm@2.1.12)(vue@3.3.8):
     resolution: {integrity: sha512-yAcfmWw/9jtIUbhb0uGQVI9NoPYgHRasX2sAGWnm9Al+0aJktgmQ3mLCifXfXfjyEbeMF0p2L6Ul8tO7eho7aQ==}
     peerDependencies:
@@ -8665,10 +8649,6 @@ packages:
       '@types/prop-types': 15.7.10
       '@types/scheduler': 0.16.6
       csstype: 3.1.3
-    dev: true
-
-  /@types/resolve@1.20.2:
-    resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
     dev: true
 
   /@types/responselike@1.0.3:
@@ -11643,11 +11623,6 @@ packages:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
-    dev: true
-
-  /builtin-modules@3.3.0:
-    resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
-    engines: {node: '>=6'}
     dev: true
 
   /builtins@5.0.1:
@@ -17885,13 +17860,6 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /is-builtin-module@3.2.1:
-    resolution: {integrity: sha512-BSLE3HnV2syZ0FK0iMA/yUGplUeMmNz4AW5fnTunbCIqZi4vG3WjJT9FHMy5D69xmAYBHXQhJdALdpwVxV501A==}
-    engines: {node: '>=6'}
-    dependencies:
-      builtin-modules: 3.3.0
-    dev: true
-
   /is-callable@1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
     engines: {node: '>= 0.4'}
@@ -18090,10 +18058,6 @@ packages:
 
   /is-mergeable-object@1.1.1:
     resolution: {integrity: sha512-CPduJfuGg8h8vW74WOxHtHmtQutyQBzR+3MjQ6iDHIYdbOnm1YC7jv43SqCoU8OPGTJD4nibmiryA4kmogbGrA==}
-    dev: true
-
-  /is-module@1.0.0:
-    resolution: {integrity: sha512-51ypPSPCoTEIN9dy5Oy+h4pShgJmPCygKfyRCISBI+JoWT/2oJvK8QPxmwv7b/p239jXrm9M1mlQbyKJ5A152g==}
     dev: true
 
   /is-nan@1.3.2:
@@ -29697,15 +29661,6 @@ packages:
     resolution: {integrity: sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==}
     dev: true
 
-  /vue-cli-plugin-webpack-bundle-analyzer@4.0.0:
-    resolution: {integrity: sha512-gEQt8RMh0j9aD591PXjuMJMoKG6Aaylsi2rZHDiDRE9zGEk7wlUMrIVGwL9bYnMAHSHkojQL4oQinM3WBxCDew==}
-    dependencies:
-      webpack-bundle-analyzer: 4.9.1
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-    dev: true
-
   /vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
     dev: true
@@ -29980,6 +29935,14 @@ packages:
       vue: ^2.6 || ^3.2
     dependencies:
       vue: 2.7.15
+    dev: false
+
+  /vue-ts-types@1.6.1(vue@3.3.8):
+    resolution: {integrity: sha512-Fee0nT2LSm/Drf7Gghpy8ssK4eGWtNgsPjgvC691lkMFWFtWRvgrD2+nFjRvd6aKJQhjcvY+SIPUCJpQpsyScA==}
+    peerDependencies:
+      vue: ^2.6 || ^3.2
+    dependencies:
+      vue: 3.3.8(typescript@5.2.2)
     dev: false
 
   /vue-tsc@1.8.25(typescript@5.2.2)(vue@2.7.15):
