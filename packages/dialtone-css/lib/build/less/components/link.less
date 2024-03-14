@@ -17,6 +17,8 @@
     --link-color-default: var(--dt-color-link-primary);
     --link-color-default-hover: var(--dt-color-link-primary-hover);
     --link-text-decoration: underline;
+    --link-padding: 0;
+    --link-background-color: transparent;
 
     position: relative;
     display: inline-flex;
@@ -25,13 +27,13 @@
     justify-content: center;
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    padding: var(--link-padding);
     color: var(--link-color-default);
     font: inherit;
     text-decoration: var(--link-text-decoration);
     text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
     text-decoration-thickness: var(--dt-size-border-50);
-    background-color: transparent;
+    background-color: var(--link-background-color);
     border: 0;
     transition-timing-function: var(--ttf-out-quint);
     transition-duration: var(--td200);
@@ -125,6 +127,27 @@
 
         &:hover {
             cursor: not-allowed;
+        }
+    }
+
+    //  $$  MENTION
+    //  ----------------------------------------------------------------------------
+    // Styling specific to mentions such as @brad.paugh. The underline highlighting
+    // is reversed compared to a regular link, and it has a light background.
+    &--mention {
+        --link-text-decoration: none;
+        --link-padding: 0 var(--dt-space-200);
+        --link-background-color: hsl(var(--dt-color-purple-400-hsl) / 0.1);
+
+        line-height: var(--dt-font-line-height-200);
+        border-radius: var(--dt-size-radius-200);
+
+        &:hover {
+            --link-text-decoration: underline;
+            --link-background-color: hsl(var(--dt-color-purple-400-hsl) / 0.2);
+
+            text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
+            text-decoration-thickness: var(--dt-size-border-50);
         }
     }
 }
