@@ -294,11 +294,11 @@
   "font": {
     "family": {
       "body": {
-        "value": "-apple-system,BlinkMacSystemFont,\"SF Pro\",\"Segoe UI Adjusted\",\"Segoe UI\",SFMono,\"Helvetica Neue\",Cantarell,Ubuntu,Roboto,Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"",
+        "value": "-apple-system, BlinkMacSystemFont, \"SF Pro\", \"Segoe UI Adjusted\", \"Segoe UI\", SFMono, \"Helvetica Neue\", Cantarell, Ubuntu, Roboto, Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
         "type": "fontFamilies"
       },
       "expressive": {
-        "value": "Archivo,{font.family.body}",
+        "value": "Archivo, {font.family.body}",
         "type": "fontFamilies"
       },
       "mono": {
