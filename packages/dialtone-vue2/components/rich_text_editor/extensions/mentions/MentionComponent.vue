@@ -4,9 +4,7 @@
     class="d-d-inline-block"
   >
     <dt-link
-      kind="inverted"
-      class="d-link--mention"
-      :href="null"
+      kind="mention"
     >
       {{ text }}
     </dt-link>
