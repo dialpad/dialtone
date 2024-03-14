@@ -23,10 +23,12 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 - Use for navigating between destinations.
 </template>
+
 <template #dont>
 
 - Use for actions, instead use a [Button](button.md).
 </template>
+
 </dialtone-usage>
 
 ### Best practices
@@ -50,6 +52,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <a href="#link" class="d-link d-link--success">Success link</a>
   <a href="#link" class="d-link d-link--warning">Warning link</a>
   <a href="#link" class="d-link d-link--disabled">Disabled link</a>
+  <a href="#link" class="d-link d-link--mention">Mention link</a>
 </code-well-header>
 
 ```html
@@ -59,6 +62,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 <a href="#link" class="d-link d-link--success">...</a>
 <a href="#link" class="d-link d-link--warning">...</a>
 <a href="#link" class="d-link d-link--disabled">...</a>
+<a href="#link" class="d-link d-link--mention">...</a>
 ```
 
 <code-well-header bgclass="d-bgc-contrast">

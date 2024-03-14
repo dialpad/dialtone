@@ -29,6 +29,16 @@
       "class": "d-link--warning",
       "applies": ".d-link",
       "description": "Warning link style. Used to alert users to potential problems."
+    },
+    {
+      "class": "d-link--disabled",
+      "applies": ".d-link",
+      "description": "Disabled link style."
+    },
+    {
+      "class": "d-link--mention",
+      "applies": ".d-link",
+      "description": "Mention link style. Used for links that refer to a user or channel."
     }
   ]
 }
