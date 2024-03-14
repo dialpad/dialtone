@@ -63,7 +63,6 @@
     "@dialpad/generator-dialtone": "workspace:*",
     "@percy/cli": "^1.27.4",
     "@percy/storybook": "^5.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
     "@storybook/addon-a11y": "^7.6.1",
     "@storybook/addon-actions": "^7.6.1",
     "@storybook/addon-docs": "^7.6.1",
