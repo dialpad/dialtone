@@ -1,3 +1,11 @@
+## [2.122.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.122.0...dialtone-vue2/v2.122.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* add box-sizing, padding, margin to reset ([#206](https://github.com/dialpad/dialtone/issues/206)) ([5641b56](https://github.com/dialpad/dialtone/commit/5641b5691d9be82f256eaf5ba9a04fac1e9252c3))
+* fix styling of d-link--mention ([#208](https://github.com/dialpad/dialtone/issues/208)) ([f99b37e](https://github.com/dialpad/dialtone/commit/f99b37edc952b3fb98686be86086b03641346f82))
+
 # [2.122.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.121.0...dialtone-vue2/v2.122.0) (2024-03-14)
 
 
