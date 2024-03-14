@@ -1,3 +1,11 @@
+## [9.21.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.21.0...dialtone/v9.21.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* add box-sizing, padding, margin to reset ([#206](https://github.com/dialpad/dialtone/issues/206)) ([5641b56](https://github.com/dialpad/dialtone/commit/5641b5691d9be82f256eaf5ba9a04fac1e9252c3))
+* fix styling of d-link--mention ([#208](https://github.com/dialpad/dialtone/issues/208)) ([f99b37e](https://github.com/dialpad/dialtone/commit/f99b37edc952b3fb98686be86086b03641346f82))
+
 # [9.21.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.20.0...dialtone/v9.21.0) (2024-03-14)
 
 
