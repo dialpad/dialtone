@@ -10,33 +10,33 @@ env:
   HUSKY: 0
 
 jobs:
-  changed-files:
-    name: Get changed files
+  added-posts:
+    name: Get added posts
     runs-on: ubuntu-latest
     outputs:
-      added-posts: ${{ steps.changed-blog-posts.outputs.added_files }}
+      added_posts: ${{ steps.changed-files.outputs.added_files }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Get changed blog posts
-        id: changed-blog-posts
+      - name: Get changed files
+        id: changed-files
         uses: tj-actions/changed-files@v42
         with:
           files: 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
           json: true
           escape_json: false
-      - name: List all changed files
-        run: echo '${{ steps.changed-blog-posts.outputs.all_changed_files }}'
+      - name: List all added posts
+        run: echo '${{ steps.changed-files.outputs.added_files }}'
 
   send-email:
     name: Send email
     runs-on: ubuntu-latest
-    needs: [changed-files]
+    needs: [added-posts]
     strategy:
       matrix:
-        files: ${{ fromJSON(needs.changed-files.outputs.added-posts) }}
+        files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
     env:
       FROM_MAIL: ${{ secrets.MAIL_ACCOUNT }}
       TO_MAIL: dialtone-users@dialpad.com
