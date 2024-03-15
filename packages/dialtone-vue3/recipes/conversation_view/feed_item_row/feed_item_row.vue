@@ -349,7 +349,7 @@ export default {
     padding-top: var(--dt-space-200);
     padding-bottom: var(--dt-space-300);
 
-    &:deep(img)  {
+    &:deep(.dt-feed-item-row__image)  {
       border: var(--dt-color-border-subtle) solid var(--dt-size-border-100);
       border-radius: var(--dt-size-radius-400);
       display: block;
@@ -359,7 +359,7 @@ export default {
       min-height: 5.6rem;
     }
 
-    &:deep(video)  {
+    &:deep(.dt-feed-item-row__video)  {
       display: block;
       height: 25.0rem;
     }
