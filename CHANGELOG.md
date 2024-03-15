@@ -1,3 +1,22 @@
+# [9.22.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.21.1...dialtone/v9.22.0) (2024-03-15)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** make image / video class ([#210](https://github.com/dialpad/dialtone/issues/210)) ([d660ef4](https://github.com/dialpad/dialtone/commit/d660ef4abc672cd79f6e2ce1428dfa568b3d57ec))
+* **Message Input:** remove condition for disabled send ([#207](https://github.com/dialpad/dialtone/issues/207)) ([432fc85](https://github.com/dialpad/dialtone/commit/432fc85b4abc0651506337e5dfe1523984201838))
+* tooltip directive on vue3 ([#209](https://github.com/dialpad/dialtone/issues/209)) ([65b665d](https://github.com/dialpad/dialtone/commit/65b665df8e0886b7fcb469418801558531ecbc31))
+
+
+### Documentation
+
+* add composition tokens tooltips ([#205](https://github.com/dialpad/dialtone/issues/205)) ([744452c](https://github.com/dialpad/dialtone/commit/744452cb6516adf3d3b9c2f50ac61b8c049b4d00))
+
+
+### Features
+
+* **Icons:** update icon to use design token ([#211](https://github.com/dialpad/dialtone/issues/211)) ([fb6688d](https://github.com/dialpad/dialtone/commit/fb6688d96fdc8b24362ef78faed6656ffd807983))
+
 ## [9.21.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.21.0...dialtone/v9.21.1) (2024-03-14)
 
 
