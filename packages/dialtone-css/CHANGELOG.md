@@ -1,3 +1,10 @@
+# [8.29.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.28.1...dialtone-css/v8.29.0) (2024-03-15)
+
+
+### Features
+
+* **Icons:** update icon to use design token ([#211](https://github.com/dialpad/dialtone/issues/211)) ([fb6688d](https://github.com/dialpad/dialtone/commit/fb6688d96fdc8b24362ef78faed6656ffd807983))
+
 ## [8.28.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.28.0...dialtone-css/v8.28.1) (2024-03-14)
 
 
