@@ -1,3 +1,11 @@
+## [2.122.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.122.1...dialtone-vue2/v2.122.2) (2024-03-15)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** make image / video class ([#210](https://github.com/dialpad/dialtone/issues/210)) ([d660ef4](https://github.com/dialpad/dialtone/commit/d660ef4abc672cd79f6e2ce1428dfa568b3d57ec))
+* **Message Input:** remove condition for disabled send ([#207](https://github.com/dialpad/dialtone/issues/207)) ([432fc85](https://github.com/dialpad/dialtone/commit/432fc85b4abc0651506337e5dfe1523984201838))
+
 ## [2.122.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.122.0...dialtone-vue2/v2.122.1) (2024-03-14)
 
 
