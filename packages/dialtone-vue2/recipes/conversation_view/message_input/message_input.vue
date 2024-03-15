@@ -530,8 +530,7 @@ export default {
     },
 
     isSendDisabled () {
-      return this.inputLength === 0 ||
-      this.disableSend ||
+      return this.disableSend ||
       (this.showCharacterLimit && this.inputLength > this.showCharacterLimit.count);
     },
 
