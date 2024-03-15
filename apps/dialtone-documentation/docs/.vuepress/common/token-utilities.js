@@ -9,9 +9,14 @@ export function getComposedTypographyTokens () {
   dialtoneTypographies
     .forEach(typographyName => {
       const composedVar = `--dt-typography-${typographyName}`;
-      // eslint-disable-next-line max-len
-      const tokenValue = `var(${composedVar}-font-weight) var(${composedVar}-font-size)/var(${composedVar}-line-height) var(${composedVar}-font-family)`;
-      tokens.push({ exampleValue: tokenValue, name: `var(${composedVar})`, tokenValue });
+      const weight = `var(${composedVar}-font-weight)`;
+      const sizeLineHeight = `var(${composedVar}-font-size) / var(${composedVar}-line-height)`;
+      const fontFamily = `var(${composedVar}-font-family)`;
+      tokens.push({
+        exampleValue: `${weight} ${sizeLineHeight} ${fontFamily}`,
+        name: `var(${composedVar})`,
+        tokenValue: [weight, sizeLineHeight, fontFamily],
+      });
     });
   return tokens;
 }
@@ -36,7 +41,7 @@ export function getComposedShadowTokens (theme) {
           return `var(${shadowVar}-${shadowNumber}-x) var(${shadowVar}-${shadowNumber}-y) var(${shadowVar}-${shadowNumber}-blur) var(${shadowVar}-${shadowNumber}-spread) var(${shadowVar}-${shadowNumber}-color)`;
         }).join(', ');
 
-      tokens.push({ exampleValue: tokenValue, name: `var(${shadowVar})`, tokenValue });
+      tokens.push({ exampleValue: tokenValue, name: `var(${shadowVar})`, tokenValue: tokenValue.split(' ') });
     });
   return tokens;
 }

@@ -55,7 +55,23 @@
         <td
           class="d-code--sm"
         >
-          <div class="d-wmx264">
+          <div v-if="isCompositionToken(tokenValue)" class="d-wmx264">
+            <span v-for="value in tokenValue" :key="value">
+              <span v-if="valueIsDivided(value)">
+                <span v-dt-tooltip="getTokenValue(getFirstValue(value))">
+                  {{ getFirstValue(value) }}
+                </span>
+                /
+                <span v-dt-tooltip="getTokenValue(getSecondValue(value))">
+                  {{ getSecondValue(value) }}&nbsp;
+                </span>
+              </span>
+              <span v-else v-dt-tooltip="getTokenValue(value)">
+                {{ value }}&nbsp;
+              </span>
+            </span>
+          </div>
+          <div v-else class="d-wmx264">
             {{ tokenValue }}
           </div>
         </td>
@@ -108,9 +124,29 @@ export default {
   },
 
   methods: {
+    getTokenValue (value) {
+      return this.tokens.find(token => token.name === value.replace(/,$/, ''))?.tokenValue.toString();
+    },
+
+    isCompositionToken (value) {
+      return Array.isArray(value);
+    },
+
     remToPixels (value) {
       if (this.category !== 'size' && this.category !== 'space') return;
       return `${parseFloat(value.replace('rem', '')) * 10}px`;
+    },
+
+    valueIsDivided (value) {
+      return value.includes(' / ');
+    },
+
+    getFirstValue (value) {
+      return value.split(' / ')[0];
+    },
+
+    getSecondValue (value) {
+      return value.split(' / ')[1];
     },
   },
 };
