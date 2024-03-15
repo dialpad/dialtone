@@ -18,7 +18,9 @@ and the content which can be either a message or a rich media.
 The default feed item row contains 4 slots:
 
 - **default** slot - contains the textual content of the feed item. Can also contain code blocks.
-- **attachment** slot - contains any image, video or pill style content such as "Feed Item Pill"
+- **attachment** slot - contains any image, video or pill style content such as "Feed Item Pill" if you are inserting an
+  image or video into this slot, set the `dt-feed-item-row__image` or `dt-feed-item-row__video` class respectively to
+  get the correct default dimensions and styling.
 - **threading** slot - the threading row component which is below the reactions slot
 - **menu** slot - the actions menu for current feed row. Floats towards the right and shows when isActive is true.
 - **reactions** slot - the emoji reactions list component below the content slot.
