@@ -1,3 +1,12 @@
+## [3.115.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.115.1...dialtone-vue3/v3.115.2) (2024-03-15)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** make image / video class ([#210](https://github.com/dialpad/dialtone/issues/210)) ([d660ef4](https://github.com/dialpad/dialtone/commit/d660ef4abc672cd79f6e2ce1428dfa568b3d57ec))
+* **Message Input:** remove condition for disabled send ([#207](https://github.com/dialpad/dialtone/issues/207)) ([432fc85](https://github.com/dialpad/dialtone/commit/432fc85b4abc0651506337e5dfe1523984201838))
+* tooltip directive on vue3 ([#209](https://github.com/dialpad/dialtone/issues/209)) ([65b665d](https://github.com/dialpad/dialtone/commit/65b665df8e0886b7fcb469418801558531ecbc31))
+
 ## [3.115.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.115.0...dialtone-vue3/v3.115.1) (2024-03-14)
 
 
