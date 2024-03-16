@@ -700,7 +700,11 @@
       "typography.helper.md": "S:9ac1a10edeb5cace86da961a993bb7ef85e45872,",
       "typography.helper.sm": "S:f7f22a4462279ac5e36a9e943449632186dd01fa,",
       "typography.code.md": "S:761bc1b93df45310128cb3b62c2be69133e69bf9,",
-      "typography.code.sm": "S:605e3572d12e7163019b20d536a3f3b08bd6501e,"
+      "typography.code.sm": "S:605e3572d12e7163019b20d536a3f3b08bd6501e,",
+      "typography.headline.lg-soft": "S:be6ab2f45cfdb396d2b45f508d85e371fd8dc7c7,",
+      "typography.headline.lg-soft-compact": "S:c48906d0bcb8002f7f927d02265ff08ae8a6ab4f,",
+      "typography.headline.xl-compact": "S:7282c98bf7ca59ded3f3a616389cd60ff4fefe54,",
+      "typography.headline.xxl-compact": "S:469b7d5fbde59f70952c871bb3e2d60b5e7354ff,"
     },
     "selectedTokenSets": {
       "base/dark": "enabled",
