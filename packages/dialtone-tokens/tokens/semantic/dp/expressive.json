@@ -1,0 +1,261 @@
+{
+  "typography": {
+    "body": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium text style for main content."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Reduced small text style for less prominent or adjacent content."
+      }
+    },
+    "headline": {
+      "eyebrow": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.uppercase}"
+        },
+        "type": "typography",
+        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text size for secondary information or subheadings."
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Medium-sized base text style for headlines."
+      },
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.400}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Large text style for headlines to attract attention."
+      },
+      "xl": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.500}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Extra large text style for high importance headlines."
+      },
+      "xxl": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.600}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Largest text style for extra extra large content."
+      }
+    },
+    "label": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium-sized text style for labels, providing clear identification and categorization."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy."
+      }
+    },
+    "helper": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium-sized text style for supplementary contextual information."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption."
+      }
+    },
+    "code": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium-sized text style for monospace code snippets of technical content."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
+      }
+    }
+  },
+  "inputs": {
+    "font": {
+      "size": {
+        "xl": {
+          "value": "{font.size.100}",
+          "type": "fontSizes"
+        }
+      }
+    },
+    "color": {
+      "foreground": {
+        "default": {
+          "value": "{color.foreground.secondary}",
+          "type": "color"
+        },
+        "placeholder": {
+          "value": "{color.foreground.placeholder}",
+          "type": "color"
+        }
+      },
+      "border": {
+        "default": {
+          "value": "{color.border.bold}",
+          "type": "color"
+        },
+        "disabled": {
+          "value": "{color.neutral.transparent}",
+          "type": "color"
+        }
+      },
+      "background": {
+        "default": {
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".03",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "focus": {
+          "value": "{color.black.900}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".01",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "font": {
+    "size": {
+      "100": {
+        "value": "{font.size.root} * 1.6",
+        "type": "fontSizes",
+        "description": "small"
+      },
+      "200": {
+        "value": "{font.size.root} * 2",
+        "type": "fontSizes",
+        "description": "medium / base"
+      },
+      "300": {
+        "value": "{font.size.root} * 2.8",
+        "type": "fontSizes",
+        "description": "large"
+      },
+      "400": {
+        "value": "{font.size.root} * 4.1",
+        "type": "fontSizes",
+        "description": "extra large / xl"
+      },
+      "500": {
+        "value": "{font.size.root} * 6.5",
+        "type": "fontSizes",
+        "description": "extra large / xxl"
+      },
+      "600": {
+        "value": "{font.size.root} * 10.5",
+        "type": "fontSizes"
+      }
+    }
+  }
+}
