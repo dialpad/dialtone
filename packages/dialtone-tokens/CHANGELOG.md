@@ -1,3 +1,15 @@
+## [1.27.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.0...dialtone-tokens/v1.27.1) (2024-03-18)
+
+
+### Bug Fixes
+
+* **Tokens:** fix android tokens package name ([538a09d](https://github.com/dialpad/dialtone/commit/538a09de08883f7707086e6c541a1cd3672e18ca))
+
+
+### Documentation
+
+* add composition tokens tooltips ([#205](https://github.com/dialpad/dialtone/issues/205)) ([744452c](https://github.com/dialpad/dialtone/commit/744452cb6516adf3d3b9c2f50ac61b8c049b4d00))
+
 # [1.27.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.26.0...dialtone-tokens/v1.27.0) (2024-03-14)
 
 
