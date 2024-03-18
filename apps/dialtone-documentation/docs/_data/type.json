@@ -34,7 +34,7 @@
   "typographyStyles": [
     {
       "var": "d-headline--eyebrow",
-      "output": "font: var(--dt-typography-headline-eyebrow)"
+      "output": "font: var(--dt-typography-headline-eyebrow); text-transform: var(--dt-typography-headline-eyebrow-text-case);"
     },
     {
       "var": "d-headline--sm",
