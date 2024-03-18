@@ -1,3 +1,10 @@
+## [8.29.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.0...dialtone-css/v8.29.1) (2024-03-18)
+
+
+### Bug Fixes
+
+* **Typography:** added uppercase to eyebrow headline style ([#212](https://github.com/dialpad/dialtone/issues/212)) ([7b741b2](https://github.com/dialpad/dialtone/commit/7b741b25501d1277d18965878cc95bfc072724a0))
+
 # [8.29.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.28.1...dialtone-css/v8.29.0) (2024-03-15)
 
 
