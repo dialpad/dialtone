@@ -1,3 +1,11 @@
+## [9.22.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.22.0...dialtone/v9.22.1) (2024-03-18)
+
+
+### Bug Fixes
+
+* **Tokens:** fix android tokens package name ([538a09d](https://github.com/dialpad/dialtone/commit/538a09de08883f7707086e6c541a1cd3672e18ca))
+* **Typography:** added uppercase to eyebrow headline style ([#212](https://github.com/dialpad/dialtone/issues/212)) ([7b741b2](https://github.com/dialpad/dialtone/commit/7b741b25501d1277d18965878cc95bfc072724a0))
+
 # [9.22.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.21.1...dialtone/v9.22.0) (2024-03-15)
 
 
