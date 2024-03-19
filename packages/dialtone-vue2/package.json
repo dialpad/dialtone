@@ -25,9 +25,7 @@
     "test:watch": "pnpm exec vitest"
   },
   "files": [
-    "dist",
-    "CHANGELOG.md",
-    "CHANGELOG.json"
+    "dist"
   ],
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
