@@ -28,7 +28,7 @@ export default {
   props: {
     /**
      * Applies the link variant styles
-     * @values null, danger, warning, success, muted, inverted
+     * @values null, danger, warning, success, muted, inverted, mention
      */
     kind: {
       type: String,

@@ -26,10 +26,10 @@
       >
         <th
           scope="row"
-          class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100"
+          class="d-code--sm d-fc-purple-400"
           v-text="`.${className}`"
         />
-        <td class="d-ff-mono d-fs-100 d-lh-300">
+        <td class="d-code--sm">
           <span
             class="code-example--inline"
             v-text="applies"

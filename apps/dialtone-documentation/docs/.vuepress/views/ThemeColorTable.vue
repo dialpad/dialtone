@@ -57,11 +57,11 @@
           {{ c.item }}
         </td>
         <td>
-          <div class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">
+          <div class="d-code--sm d-fc-purple-400">
             {{ c.property }}
           </div>
         </td>
-        <td class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">
+        <td class="d-code--sm d-fc-purple-400">
           var(--{{ c.name }})
         </td>
       </tr>

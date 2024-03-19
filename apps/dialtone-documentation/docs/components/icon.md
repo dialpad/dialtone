@@ -96,11 +96,11 @@ When setting the color of an icon take these into considaration:
 <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<p class="d-body-base d-truncate d-w100p d-wmx102">Ai Contact Center</p>
+<p class="d-body--md d-truncate d-w100p d-wmx102">Ai Contact Center</p>
 </dt-stack>
 <dt-stack direction="row" as="section" gap="300">
 <dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
-<p class="d-fc-success d-body-small">Available</p>
+<p class="d-fc-success d-body--sm">Available</p>
 </dt-stack>
 </dt-stack>
 </div>
@@ -115,11 +115,11 @@ When setting the color of an icon take these into considaration:
 <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<p class="d-body-base d-truncate d-w100p d-wmx102">Ai Contact Center</p>
+<p class="d-body--md d-truncate d-w100p d-wmx102">Ai Contact Center</p>
 </dt-stack>
 <dt-stack direction="row" as="section" gap="300">
 <dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
-<p class="d-fc-success d-body-small">Available</p>
+<p class="d-fc-success d-body--sm">Available</p>
 </dt-stack>
 </dt-stack>
 </div>
@@ -207,8 +207,8 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
       <td class="d-ta-center">
         <dt-icon name="inbox" :size="size" />
       </td>
-      <td class="d-ff-mono d-fs-100">{{ width_height }}</td>
-      <td class="d-ff-mono d-fs-100">.{{ className }}</td>
+      <td class="d-code--sm">{{ width_height }}</td>
+      <td class="d-code--sm">.{{ className }}</td>
     </tr>
   </tbody>
 </table>
@@ -216,7 +216,7 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 <script setup>
   import { ref } from 'vue';
   import sizes from '@data/icons-sizes.json';
-  
+
   const sizeValues = sizes.map(item => ({ value: item.size, label: item.size }));
 
   const iconListOptions = [

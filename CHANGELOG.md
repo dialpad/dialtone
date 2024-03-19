@@ -1,3 +1,56 @@
+## [9.22.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.22.0...dialtone/v9.22.1) (2024-03-18)
+
+
+### Bug Fixes
+
+* **Tokens:** fix android tokens package name ([538a09d](https://github.com/dialpad/dialtone/commit/538a09de08883f7707086e6c541a1cd3672e18ca))
+* **Typography:** added uppercase to eyebrow headline style ([#212](https://github.com/dialpad/dialtone/issues/212)) ([7b741b2](https://github.com/dialpad/dialtone/commit/7b741b25501d1277d18965878cc95bfc072724a0))
+
+# [9.22.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.21.1...dialtone/v9.22.0) (2024-03-15)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** make image / video class ([#210](https://github.com/dialpad/dialtone/issues/210)) ([d660ef4](https://github.com/dialpad/dialtone/commit/d660ef4abc672cd79f6e2ce1428dfa568b3d57ec))
+* **Message Input:** remove condition for disabled send ([#207](https://github.com/dialpad/dialtone/issues/207)) ([432fc85](https://github.com/dialpad/dialtone/commit/432fc85b4abc0651506337e5dfe1523984201838))
+* tooltip directive on vue3 ([#209](https://github.com/dialpad/dialtone/issues/209)) ([65b665d](https://github.com/dialpad/dialtone/commit/65b665df8e0886b7fcb469418801558531ecbc31))
+
+
+### Documentation
+
+* add composition tokens tooltips ([#205](https://github.com/dialpad/dialtone/issues/205)) ([744452c](https://github.com/dialpad/dialtone/commit/744452cb6516adf3d3b9c2f50ac61b8c049b4d00))
+
+
+### Features
+
+* **Icons:** update icon to use design token ([#211](https://github.com/dialpad/dialtone/issues/211)) ([fb6688d](https://github.com/dialpad/dialtone/commit/fb6688d96fdc8b24362ef78faed6656ffd807983))
+
+## [9.21.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.21.0...dialtone/v9.21.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* add box-sizing, padding, margin to reset ([#206](https://github.com/dialpad/dialtone/issues/206)) ([5641b56](https://github.com/dialpad/dialtone/commit/5641b5691d9be82f256eaf5ba9a04fac1e9252c3))
+* fix styling of d-link--mention ([#208](https://github.com/dialpad/dialtone/issues/208)) ([f99b37e](https://github.com/dialpad/dialtone/commit/f99b37edc952b3fb98686be86086b03641346f82))
+
+# [9.21.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.20.0...dialtone/v9.21.0) (2024-03-14)
+
+
+### Bug Fixes
+
+* **Tooltip:** appendTo initialization ([#204](https://github.com/dialpad/dialtone/issues/204)) ([3f9d2ed](https://github.com/dialpad/dialtone/commit/3f9d2ed558fffc1fdb6d76b2827531b2dfdd5c4a))
+* update missing props ([#199](https://github.com/dialpad/dialtone/issues/199)) ([64af482](https://github.com/dialpad/dialtone/commit/64af482fd8928b67fb924c446c75dbbf66547921))
+
+
+### Documentation
+
+* add search to tokens page ([#188](https://github.com/dialpad/dialtone/issues/188)) ([db63a8e](https://github.com/dialpad/dialtone/commit/db63a8efdf20e200b7f9fae3c1812086ff4cdabf))
+
+
+### Features
+
+* **Typography:** refactor text styles ([#198](https://github.com/dialpad/dialtone/issues/198)) ([622c0f6](https://github.com/dialpad/dialtone/commit/622c0f65611010215b94624ccff6e82f62b32056))
+
 # [9.20.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.19.0...dialtone/v9.20.0) (2024-03-13)
 
 

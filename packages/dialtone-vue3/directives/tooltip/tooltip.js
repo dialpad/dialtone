@@ -1,10 +1,11 @@
 import { DtTooltip } from '@/components/tooltip';
 import { getUniqueString } from '@/common/utils';
-import { createApp, h } from 'vue';
+import { createApp, getCurrentInstance, h } from 'vue';
 
 export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
   install (app) {
+    let tooltipInstance;
     const mountPoint = document.createElement('div');
     document.body.appendChild(mountPoint);
 
@@ -16,6 +17,10 @@ export const DtTooltipDirective = {
         return {
           tooltips: [],
         };
+      },
+
+      mounted () {
+        tooltipInstance = getCurrentInstance();
       },
 
       methods: {
@@ -68,7 +73,7 @@ export const DtTooltipDirective = {
         }
       },
       unmounted (anchor) {
-        DtTooltipDirectiveApp._instance?.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
+        tooltipInstance.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
       },
     });
 
@@ -78,7 +83,8 @@ export const DtTooltipDirective = {
       const placement = binding.arg || DEFAULT_PLACEMENT;
 
       anchor.setAttribute('data-dt-tooltip-id', tooltipId);
-      DtTooltipDirectiveApp._instance?.ctx.addOrUpdateTooltip(tooltipId, message, placement);
+
+      tooltipInstance.ctx.addOrUpdateTooltip(tooltipId, message, placement);
     }
   },
 };

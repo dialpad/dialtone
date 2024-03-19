@@ -1,3 +1,33 @@
+## [3.115.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.115.1...dialtone-vue3/v3.115.2) (2024-03-15)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** make image / video class ([#210](https://github.com/dialpad/dialtone/issues/210)) ([d660ef4](https://github.com/dialpad/dialtone/commit/d660ef4abc672cd79f6e2ce1428dfa568b3d57ec))
+* **Message Input:** remove condition for disabled send ([#207](https://github.com/dialpad/dialtone/issues/207)) ([432fc85](https://github.com/dialpad/dialtone/commit/432fc85b4abc0651506337e5dfe1523984201838))
+* tooltip directive on vue3 ([#209](https://github.com/dialpad/dialtone/issues/209)) ([65b665d](https://github.com/dialpad/dialtone/commit/65b665df8e0886b7fcb469418801558531ecbc31))
+
+## [3.115.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.115.0...dialtone-vue3/v3.115.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* add box-sizing, padding, margin to reset ([#206](https://github.com/dialpad/dialtone/issues/206)) ([5641b56](https://github.com/dialpad/dialtone/commit/5641b5691d9be82f256eaf5ba9a04fac1e9252c3))
+* fix styling of d-link--mention ([#208](https://github.com/dialpad/dialtone/issues/208)) ([f99b37e](https://github.com/dialpad/dialtone/commit/f99b37edc952b3fb98686be86086b03641346f82))
+
+# [3.115.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.114.0...dialtone-vue3/v3.115.0) (2024-03-14)
+
+
+### Bug Fixes
+
+* **Tooltip:** appendTo initialization ([#204](https://github.com/dialpad/dialtone/issues/204)) ([3f9d2ed](https://github.com/dialpad/dialtone/commit/3f9d2ed558fffc1fdb6d76b2827531b2dfdd5c4a))
+* update missing props ([#199](https://github.com/dialpad/dialtone/issues/199)) ([64af482](https://github.com/dialpad/dialtone/commit/64af482fd8928b67fb924c446c75dbbf66547921))
+
+
+### Features
+
+* **Typography:** refactor text styles ([#198](https://github.com/dialpad/dialtone/issues/198)) ([622c0f6](https://github.com/dialpad/dialtone/commit/622c0f65611010215b94624ccff6e82f62b32056))
+
 # [3.114.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.113.0...dialtone-vue3/v3.114.0) (2024-03-13)
 
 

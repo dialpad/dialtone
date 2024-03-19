@@ -25,14 +25,6 @@
 //      [1]     Universally set border-box
 //  ----------------------------------------------------------------------------
 
-* {
-  &,
-  &::before,
-  &::after {
-    box-sizing: border-box; // [1]
-  }
-}
-
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 7.2rem;
@@ -329,7 +321,7 @@ a.header-anchor {
 }
 
 .d-docsite--header-4 {
-  margin-top: var(--dt-space-400);
+  margin-top: var(--dt-space-500);
   margin-bottom: var(--dt-space-300);
   font-weight: var(--dt-font-weight-bold);
   font-size: var(--dt-font-size-200);

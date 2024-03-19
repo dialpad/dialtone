@@ -117,8 +117,8 @@ Use `d-va-text-bottom` to vertically align an element to text bottom.
   <template #content>
     <tbody>
       <tr v-for="i in ['baseline', 'top', 'bottom', 'text-top', 'text-bottom', 'middle', 'sub', 'super', 'unset']">
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-va-{{ i }}</th>
-          <td class="d-ff-mono d-fs-100">vertical-align: {{ i }} !important;</td>
+          <th scope="row" class="d-code--sm d-fc-purple-400">.d-va-{{ i }}</th>
+          <td class="d-code--sm">vertical-align: {{ i }} !important;</td>
       </tr>
     </tbody>
   </template>

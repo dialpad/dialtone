@@ -50,8 +50,8 @@ of the element rather than the viewable box.
   <template #content>
     <tbody>
       <tr v-for="i in ['unset', 'scroll', 'fixed', 'local']">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-bga-{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">background-attachment: {{ i }} !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bga-{{ i }}</th>
+        <td class="d-code--sm">background-attachment: {{ i }} !important;</td>
       </tr>
     </tbody>
   </template>

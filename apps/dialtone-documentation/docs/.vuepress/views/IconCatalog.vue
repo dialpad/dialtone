@@ -67,7 +67,7 @@
     class="d-mb16"
   >
     <span
-      class="d-headline-medium d-tt-capitalize"
+      class="d-headline--md d-tt-capitalize"
       v-text="category"
     />
     <div class="d-gl-docsite-icons">

@@ -4,9 +4,7 @@
     class="d-d-inline-block"
   >
     <dt-link
-      kind="inverted"
-      class="dt-link--mention"
-      :href="null"
+      kind="mention"
     >
       {{ text }}
     </dt-link>
@@ -34,17 +32,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-link--mention {
-  background-color: hsl(var(--dt-color-purple-400-hsl) / 10%);
-  color: var(--dt-color-link-primary);
-  border-radius: var(--dt-space-200);
-  height: 1.8rem;
-
-  &:hover {
-    color: var(--dt-color-link-primary);
-    background-color: hsl(var(--dt-color-purple-500-hsl) / 10%);
-  }
-}
-</style>

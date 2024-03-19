@@ -97,10 +97,10 @@ If an element's `flex-direction` is reversed, apply `d-divide-{y|x}-reverse` to 
     <template #content>
       <tbody v-for="d in ['y', 'x']">
         <tr v-for="i in ['default', '0', '2', '4']">
-          <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">
+          <th scope="row" class="d-code--sm d-fc-purple-400">
             d-divide-{{ d }}<span v-if="i !== 'default'" v-text="i"></span> > *+*
           </th>
-          <td class="d-ff-mono d-fs-100">
+          <td class="d-code--sm">
             --divide-{{ d }}-reverse: 0;<br/>
             <span v-if="d === 'y'">
               border-top: calc(

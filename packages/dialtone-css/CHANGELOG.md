@@ -1,3 +1,32 @@
+## [8.29.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.0...dialtone-css/v8.29.1) (2024-03-18)
+
+
+### Bug Fixes
+
+* **Typography:** added uppercase to eyebrow headline style ([#212](https://github.com/dialpad/dialtone/issues/212)) ([7b741b2](https://github.com/dialpad/dialtone/commit/7b741b25501d1277d18965878cc95bfc072724a0))
+
+# [8.29.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.28.1...dialtone-css/v8.29.0) (2024-03-15)
+
+
+### Features
+
+* **Icons:** update icon to use design token ([#211](https://github.com/dialpad/dialtone/issues/211)) ([fb6688d](https://github.com/dialpad/dialtone/commit/fb6688d96fdc8b24362ef78faed6656ffd807983))
+
+## [8.28.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.28.0...dialtone-css/v8.28.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* add box-sizing, padding, margin to reset ([#206](https://github.com/dialpad/dialtone/issues/206)) ([5641b56](https://github.com/dialpad/dialtone/commit/5641b5691d9be82f256eaf5ba9a04fac1e9252c3))
+* fix styling of d-link--mention ([#208](https://github.com/dialpad/dialtone/issues/208)) ([f99b37e](https://github.com/dialpad/dialtone/commit/f99b37edc952b3fb98686be86086b03641346f82))
+
+# [8.28.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.27.1...dialtone-css/v8.28.0) (2024-03-14)
+
+
+### Features
+
+* **Typography:** refactor text styles ([#198](https://github.com/dialpad/dialtone/issues/198)) ([622c0f6](https://github.com/dialpad/dialtone/commit/622c0f65611010215b94624ccff6e82f62b32056))
+
 ## [8.27.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.27.0...dialtone-css/v8.27.1) (2024-03-05)
 
 

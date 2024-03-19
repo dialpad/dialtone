@@ -244,44 +244,44 @@ Decorative badges label and classify items for quick recognition.
 <code-well-header bgclass="d-bgc-primary">
   <dt-stack direction="row" gap="500" class="d-ai-baseline">
     <dt-stack gap="500">
-      <span class="d-label-compact">Black</span>
+      <span class="d-label--md-compact">Black</span>
       <span class="d-badge d-badge--decorate-black-400"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-black-500"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-black-900"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label-compact">Red</span>
+      <span class="d-label--md-compact">Red</span>
       <span class="d-badge d-badge--decorate-red-200"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-red-300"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-red-400"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label-compact">Purple</span>
+      <span class="d-label--md-compact">Purple</span>
       <span class="d-badge d-badge--decorate-purple-200"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-purple-300"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-purple-400"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-purple-500"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label-compact">Blue</span>
+      <span class="d-label--md-compact">Blue</span>
       <span class="d-badge d-badge--decorate-blue-200"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-blue-300"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-blue-400"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label-compact">Green</span>
+      <span class="d-label--md-compact">Green</span>
       <span class="d-badge d-badge--decorate-green-300"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-green-400"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-green-500"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label-compact">Gold</span>
+      <span class="d-label--md-compact">Gold</span>
       <span class="d-badge d-badge--decorate-gold-300"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-gold-400"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-gold-500"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label-compact">Magenta</span>
+      <span class="d-label--md-compact">Magenta</span>
       <span class="d-badge d-badge--decorate-magenta-200"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-magenta-300"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>
       <span class="d-badge d-badge--decorate-magenta-400"><span class="d-badge__decorative"></span><span class="d-badge__label">Label</span></span>

@@ -41,24 +41,24 @@ To help keep prefixes concise, we use abbreviations. This syntax is used consist
   </thead>
   <tbody>
     <tr>
-      <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.xl:{class}</th>
-      <td class="d-ff-mono d-fs-100">max-width: 1264px</td>
-      <td class="d-ff-mono d-fs-100">The class is applied on extra large browser widths and below.</td>
+      <th scope="row" class="d-code--sm d-fc-purple-400">.xl:{class}</th>
+      <td class="d-code--sm">max-width: 1264px</td>
+      <td class="d-code--sm">The class is applied on extra large browser widths and below.</td>
     </tr>
     <tr>
-      <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.lg:{class}</th>
-      <td class="d-ff-mono d-fs-100">max-width: 980px</td>
-      <td class="d-ff-mono d-fs-100">The class is applied on large browser widths and below.</td>
+      <th scope="row" class="d-code--sm d-fc-purple-400">.lg:{class}</th>
+      <td class="d-code--sm">max-width: 980px</td>
+      <td class="d-code--sm">The class is applied on large browser widths and below.</td>
     </tr>
     <tr>
-      <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.md:{class}</th>
-      <td class="d-ff-mono d-fs-100">max-width: 640px</td>
-      <td class="d-ff-mono d-fs-100">The class is applied on medium browser widths and below.</td>
+      <th scope="row" class="d-code--sm d-fc-purple-400">.md:{class}</th>
+      <td class="d-code--sm">max-width: 640px</td>
+      <td class="d-code--sm">The class is applied on medium browser widths and below.</td>
     </tr>
     <tr>
-      <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.sm:{class}</th>
-      <td class="d-ff-mono d-fs-100">max-width: 480px</td>
-      <td class="d-ff-mono d-fs-100">The class is applied on small browser widths and below.</td>
+      <th scope="row" class="d-code--sm d-fc-purple-400">.sm:{class}</th>
+      <td class="d-code--sm">max-width: 480px</td>
+      <td class="d-code--sm">The class is applied on small browser widths and below.</td>
     </tr>
   </tbody>
 </table>

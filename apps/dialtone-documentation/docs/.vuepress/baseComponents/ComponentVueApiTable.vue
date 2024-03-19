@@ -34,7 +34,7 @@
       >
         <th
           scope="row"
-          class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100"
+          class="d-code--sm d-fc-purple-400"
         >
           <dt-stack gap="300">
             <div>{{ name }}</div>
@@ -56,7 +56,7 @@
           >
             <markdown-render :markdown="description" />
             <span v-if="type">
-              <span class="d-ff-mono d-fs-100 d-lh-300">Type:</span> <dt-badge>{{ type }}</dt-badge>
+              <span class="d-code--sm">Type:</span> <dt-badge>{{ type }}</dt-badge>
             </span>
             <dt-stack
               v-if="values"
@@ -64,7 +64,7 @@
               class="d-ai-center d-fw-wrap"
               gap="300"
             >
-              <span class="d-ff-mono d-fs-100 d-lh-300">Values:</span>
+              <span class="d-code--sm">Values:</span>
               <dt-badge
                 v-for="value in values"
 

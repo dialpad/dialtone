@@ -97,8 +97,8 @@ Use `d-ji-center` to justify items to the center of their inline axis.
   <template #content>
     <tbody>
       <tr v-for="i in ['center', 'end', 'start', 'left', 'right', 'baseline', 'first-baseline', 'last-baseline', 'stretch', 'safe', 'unsafe', 'normal', 'legacy', 'auto', 'unset']">
-        <th scope="row" class="d-ff-mono d-fc-purple-400 d-fw-normal d-fs-100">.d-ji-{{ i }}</th>
-        <td class="d-ff-mono d-fs-100">justify-items: {{ i }} !important;</td>
+        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ji-{{ i }}</th>
+        <td class="d-code--sm">justify-items: {{ i }} !important;</td>
       </tr>
     </tbody>
   </template>
