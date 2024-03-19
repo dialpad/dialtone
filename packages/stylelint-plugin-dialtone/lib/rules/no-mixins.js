@@ -8,7 +8,7 @@ const {
 const ruleName = '@dialpad/stylelint-plugin-dialtone/no-mixins';
 
 const messages = ruleMessages(ruleName, {
-  noMixinsRejected: (selector) => `Please avoid using LESS mixins "${selector}"`,
+  noMixinsRejected: (mixinName) => `Please avoid using LESS mixins "${mixinName}"`,
 });
 
 const meta = {
@@ -25,20 +25,15 @@ const ruleFunction = (primary) => {
     if (!validOptions) return;
 
     // This iterates through one selector at a time, so you don't have to worry about checking for nested selectors.
-    root.walkRules((ruleNode) => {
-      const { source } = ruleNode;
-
-      // any line that starts with a period and ends with a semicolon is a LESS mixin.
-      const regex = /\.[\S]+;/gm;
-
-      const matches = [...source.input.css.matchAll(regex)];
-      for (const match of matches) {
+    root.walkAtRules((ruleNode) => {
+      if (ruleNode.mixin) {
         report({
           result,
           ruleName,
-          message: messages.noMixinsRejected(match[0]),
           node: ruleNode,
-          word: match[0],
+          start: ruleNode.source.start,
+          end: ruleNode.source.end,
+          message: messages.noMixinsRejected(ruleNode.name),
         });
       }
     });
