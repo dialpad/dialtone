@@ -25,12 +25,9 @@
     "test:watch": "pnpm exec vitest"
   },
   "files": [
-    "dist",
-    "CHANGELOG.md",
-    "CHANGELOG.json"
+    "dist"
   ],
   "dependencies": {
-    "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@tiptap/core": "^2.0.3",
@@ -60,6 +57,7 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
+    "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
     "@percy/cli": "^1.27.4",
     "@percy/storybook": "^5.0.1",
@@ -107,31 +105,7 @@
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone-css": "7.30.0 || workspace:*",
-    "@dialpad/dialtone-emojis": "workspace:*",
-    "@dialpad/dialtone-icons": "workspace:*",
-    "@tiptap/core": "^2.0.3",
-    "@tiptap/extension-blockquote": "^2.1.16",
-    "@tiptap/extension-bold": "^2.1.16",
-    "@tiptap/extension-bullet-list": "^2.1.16",
-    "@tiptap/extension-code-block": "^2.0.3",
-    "@tiptap/extension-document": "^2.0.3",
-    "@tiptap/extension-hard-break": "^2.0.3",
-    "@tiptap/extension-italic": "^2.1.16",
-    "@tiptap/extension-link": "^2.1.16",
-    "@tiptap/extension-list-item": "^2.1.16",
-    "@tiptap/extension-mention": "^2.1.11",
-    "@tiptap/extension-ordered-list": "^2.2.0",
-    "@tiptap/extension-paragraph": "^2.0.3",
-    "@tiptap/extension-placeholder": "^2.0.3",
-    "@tiptap/extension-strike": "^2.1.16",
-    "@tiptap/extension-text": "^2.0.3",
-    "@tiptap/extension-text-align": "^2.2.0",
-    "@tiptap/extension-underline": "^2.1.16",
-    "@tiptap/pm": "^2.0.3",
-    "@tiptap/suggestion": "^2.1.4",
-    "@tiptap/vue-2": "^2.0.3",
-    "emoji-toolkit": "^6.6.0",
+    "@dialpad/dialtone-css": "workspace:^",
     "vue": ">=3.2"
   },
   "bugs": {
