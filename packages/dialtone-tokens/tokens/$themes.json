@@ -354,7 +354,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "semantic/dp/expressive": "disabled"
+      "semantic/dp/expressive_sm": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:0",
@@ -1261,7 +1261,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "semantic/dp/expressive": "disabled"
+      "semantic/dp/expressive_sm": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
@@ -2165,7 +2165,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "semantic/dp/expressive": "disabled"
+      "semantic/dp/expressive_sm": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2732,7 +2732,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "semantic/dp/expressive": "disabled"
+      "semantic/dp/expressive_sm": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3294,7 +3294,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "semantic/dp/expressive": "disabled"
+      "semantic/dp/expressive_sm": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:20076",
     "$figmaModeId": "406:4",
@@ -3861,7 +3861,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "semantic/dp/expressive": "disabled"
+      "semantic/dp/expressive_sm": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:20076",
     "$figmaModeId": "406:5",
