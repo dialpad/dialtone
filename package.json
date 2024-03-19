@@ -71,7 +71,8 @@
     "@dialpad/dialtone-css>stylelint": "^15.10.1"
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.json"
   ],
   "bin": {
     "dialtone-health-check": "./dist/css/js/dialtone_health_check/index.cjs",
@@ -84,7 +85,6 @@
       "require": "./dist/css/dialtone.min.css"
     },
     "./vue2": {
-      "style": "./dist/vue2/style.css",
       "import": {
         "types": "./dist/vue2/types/index.d.ts",
         "default": "./dist/vue2/dialtone-vue.js"
@@ -94,43 +94,12 @@
         "default": "./dist/vue2/dialtone-vue.cjs"
       }
     },
-    "./vue2/emoji": {
-      "import": {
-        "types": "./dist/vue2/types/emoji.d.ts",
-        "default": "./dist/vue2/emoji.js"
-      },
-      "require": {
-        "types": "./dist/vue2/types/emoji.d.ts",
-        "default": "./dist/vue2/emoji.cjs"
-      }
-    },
-    "./vue2/directives": {
-      "import": {
-        "types": "./dist/vue2/types/directives.d.ts",
-        "default": "./dist/vue2/directives.js"
-      },
-      "require": {
-        "types": "./dist/vue2/types/directives.d.ts",
-        "default": "./dist/vue2/directives.cjs"
-      }
-    },
-    "./vue2/message_input": {
-      "import": {
-        "types": "./dist/vue2/types/message_input.d.ts",
-        "default": "./dist/vue2/message_input.js"
-      },
-      "require": {
-        "types": "./dist/vue2/types/message_input.d.ts",
-        "default": "./dist/vue2/message_input.cjs"
-      }
-    },
     "./vue2/css": {
-      "style": "./dist/vue2/style.css"
+      "style": "./dist/vue2/style.css",
+      "import": "./dist/vue2/style.css",
+      "require": "./dist/vue2/style.css"
     },
-    "./vue2/CHANGELOG.json": "./packages/dialtone-vue2/CHANGELOG.json",
-    "./vue2/component-documentation.json": "./dist/vue2/component-documentation.json",
     "./vue3": {
-      "style": "./dist/vue3/style.css",
       "import": {
         "types": "./dist/vue3/types/index.d.ts",
         "default": "./dist/vue3/dialtone-vue.js"
@@ -140,43 +109,15 @@
         "default": "./dist/vue3/dialtone-vue.cjs"
       }
     },
-    "./vue3/emoji": {
-      "import": {
-        "types": "./dist/vue3/types/emoji.d.ts",
-        "default": "./dist/vue3/emoji.js"
-      },
-      "require": {
-        "types": "./dist/vue3/types/emoji.d.ts",
-        "default": "./dist/vue3/emoji.cjs"
-      }
-    },
-    "./vue3/directives": {
-      "import": {
-        "types": "./dist/vue3/types/directives.d.ts",
-        "default": "./dist/vue3/directives.js"
-      },
-      "require": {
-        "types": "./dist/vue3/types/directives.d.ts",
-        "default": "./dist/vue3/directives.cjs"
-      }
-    },
-    "./vue3/message_input": {
-      "import": {
-        "types": "./dist/vue3/types/message_input.d.ts",
-        "default": "./dist/vue3/message_input.js"
-      },
-      "require": {
-        "types": "./dist/vue3/types/message_input.d.ts",
-        "default": "./dist/vue3/message_input.cjs"
-      }
-    },
     "./vue3/css": {
-      "style": "./dist/vue3/style.css"
+      "style": "./dist/vue3/style.css",
+      "import": "./dist/vue3/style.css",
+      "require": "./dist/vue3/style.css"
     },
-    "./vue3/CHANGELOG.json": "./packages/dialtone-vue3/CHANGELOG.json",
-    "./vue3/component-documentation.json": "./dist/vue3/component-documentation.json",
     "./eslint-plugin": "./dist/eslint-plugin/index.js",
-    "./dist/*": "./dist/*"
+    "./stylelint-plugin": "./dist/stylelint-plugin/index.js",
+    "./CHANGELOG.json": "./CHANGELOG.json",
+    "./*": "./dist/*"
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [

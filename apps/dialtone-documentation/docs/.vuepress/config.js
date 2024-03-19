@@ -105,7 +105,7 @@ export default defineUserConfig({
     '@mixins': path.resolve(__dirname, './common/mixins/'),
     '@projectRoot': path.resolve(__dirname, '../../'),
     '@': path.resolve(__dirname, '../'),
-    '@dialtone': path.resolve(__dirname, '../../../../'),
+    '@workspaceRoot': path.resolve(__dirname, '../../../../'),
   },
 
   plugins: [

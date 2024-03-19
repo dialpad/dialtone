@@ -1,5 +1,5 @@
 {
-  "name": "stylelint-plugin-dialtone",
+  "name": "@dialpad/stylelint-plugin-dialtone",
   "version": "1.0.0",
   "description": "dialtone stylelint plugin",
   "keywords": [
@@ -39,6 +39,9 @@
   },
   "license": "MIT",
   "main": "./lib/index.js",
+  "files": [
+    "lib"
+  ],
   "exports": "./lib/index.js",
   "scripts": {
     "lint": "run-s lint:docs lint:code",

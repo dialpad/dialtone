@@ -18,7 +18,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import ComponentDocs from '@dialpad/dialtone-vue/component-documentation.json';
+import ComponentDocs from '@dialpad/dialtone-vue/dist/component-documentation.json';
 import ComponentVueApiTable from './ComponentVueApiTable.vue';
 
 const props = defineProps({

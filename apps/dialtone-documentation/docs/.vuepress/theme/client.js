@@ -3,7 +3,7 @@ import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
 
 // CSS
-import '@dialpad/dialtone-css/lib/dist/css/dialtone.css';
+import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 import { onBeforeMount, provide, ref } from 'vue';
@@ -73,7 +73,7 @@ async function registerDialtoneVue (app) {
 }
 
 async function registerEmojiDialtoneVue (app) {
-  const emojiModule = await import('@dialpad/dialtone-vue/emoji');
+  const emojiModule = await import('@dialpad/dialtone-vue');
   const dialtoneEmojiComponents = Object.keys(emojiModule).filter((key) => key.startsWith('Dt'));
   dialtoneEmojiComponents.forEach((key) => {
     app.component(key, emojiModule[key]);
