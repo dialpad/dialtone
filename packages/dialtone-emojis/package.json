@@ -1,10 +1,40 @@
 {
   "name": "@dialpad/dialtone-emojis",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Dialpad's emojis JSON data",
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "Emojis"
+  ],
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Ignacio Ropolo",
+      "email": "ignacio.ropolo@dialpad.com",
+      "url": "https://github.com/iropolo"
+    },
+    {
+      "name": "Nina Repetto",
+      "email": "nina.repetto@dialpad.com",
+      "url": "https://github.com/ninamarina"
+    }
+  ],
   "files": ["src"],
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "main": "index.js"
 }
