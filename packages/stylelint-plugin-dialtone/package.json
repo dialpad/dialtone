@@ -1,5 +1,5 @@
 {
-  "name": "stylelint-plugin-dialtone",
+  "name": "@dialpad/stylelint-plugin-dialtone",
   "version": "1.0.0",
   "description": "dialtone stylelint plugin",
   "keywords": [
