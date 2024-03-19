@@ -1,0 +1,35 @@
+{
+  "font": {
+    "size": {
+      "100": {
+        "value": "{font.size.root} * 1.2",
+        "type": "fontSizes",
+        "description": "small"
+      },
+      "200": {
+        "value": "{font.size.root} * 1.6",
+        "type": "fontSizes",
+        "description": "medium / base"
+      },
+      "300": {
+        "value": "{font.size.root} * 2.0",
+        "type": "fontSizes",
+        "description": "large"
+      },
+      "400": {
+        "value": "{font.size.root} * 2.8",
+        "type": "fontSizes",
+        "description": "extra large / xl"
+      },
+      "500": {
+        "value": "{font.size.root} * 4.1",
+        "type": "fontSizes",
+        "description": "extra large / xxl"
+      },
+      "600": {
+        "value": "{font.size.root} * 5.1",
+        "type": "fontSizes"
+      }
+    }
+  }
+}

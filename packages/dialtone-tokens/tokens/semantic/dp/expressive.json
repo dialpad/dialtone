@@ -173,56 +173,6 @@
           "type": "fontSizes"
         }
       }
-    },
-    "color": {
-      "foreground": {
-        "default": {
-          "value": "{color.foreground.secondary}",
-          "type": "color"
-        },
-        "placeholder": {
-          "value": "{color.foreground.placeholder}",
-          "type": "color"
-        }
-      },
-      "border": {
-        "default": {
-          "value": "{color.border.bold}",
-          "type": "color"
-        },
-        "disabled": {
-          "value": "{color.neutral.transparent}",
-          "type": "color"
-        }
-      },
-      "background": {
-        "default": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".03",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "focus": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".01",
-                "space": "hsl"
-              }
-            }
-          }
-        }
-      }
     }
   },
   "font": {
