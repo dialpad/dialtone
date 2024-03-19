@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { dependencies, peerDependencies } from './package.json';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,15 +16,18 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
-        ...Object.keys(dependencies),
-        ...Object.keys(peerDependencies),
-        'emoji-toolkit/emoji_strategy.json',
         /@dialpad/,
+        /@linusborg/,
+        /@tiptap/,
+        /date-fns/,
+        /emoji-regex/,
+        /emoji-toolkit/,
+        /tippy\.js/,
         /prosemirror/,
+        'vue',
       ],
       output: {
         globals: {
-          vue: 'Vue',
           '@dialpad/dialtone-icons/vue2': 'DialtoneIcons',
           '@dialpad/dialtone-icons/icons.json': 'DialtoneIconsJSON',
           '@dialpad/dialtone-emojis': 'DialtoneEmojis',
@@ -50,7 +52,11 @@ export default defineConfig({
           '@tiptap/extension-underline': 'Underline',
           '@tiptap/extension-text': 'Text',
           '@tiptap/extension-text-align': 'TextAlign',
+          'date-fns': 'DateFns',
+          'emoji-regex': 'EmojiRegex',
           'emoji-toolkit/emoji_strategy.json': 'EmojiJsonLocal',
+          'tippy.js': 'TippyJS',
+          vue: 'Vue',
         },
       },
     },
