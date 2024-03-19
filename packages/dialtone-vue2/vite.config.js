@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { dependencies, peerDependencies } from './package.json';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,10 +17,11 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
-        /@dialpad/,
-        /@tiptap/,
+        ...Object.keys(dependencies),
+        ...Object.keys(peerDependencies),
         'emoji-toolkit/emoji_strategy.json',
-        'vue',
+        /@dialpad/,
+        /prosemirror/,
       ],
       output: {
         globals: {
