@@ -13,6 +13,7 @@ export default defineConfig({
       entry: resolve(__dirname, './index.js'),
       name: 'DialtoneVue',
       fileName: 'dialtone-vue',
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
       external: [
