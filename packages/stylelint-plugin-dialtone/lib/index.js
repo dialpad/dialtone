@@ -1,6 +1,6 @@
 "use strict";
 
-const requireIndex = require("requireindex");
+const noMixins = require("./rules/no-mixins");
 
 // import all rules in lib/rules
-module.exports = requireIndex(__dirname + "/rules");
+module.exports = [noMixins];
