@@ -26,6 +26,7 @@ const ruleFunction = (primary) => {
 
     // This iterates through one selector at a time, so you don't have to worry about checking for nested selectors.
     root.walkAtRules((ruleNode) => {
+      // docs for mixin property used here: https://github.com/shellscape/postcss-less?tab=readme-ov-file#mixins
       if (!ruleNode.mixin) return;
       report({
         result,
