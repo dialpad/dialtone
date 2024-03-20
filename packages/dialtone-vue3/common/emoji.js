@@ -145,12 +145,12 @@ export function shortcodeToEmojiData (shortcode) {
 export function unicodeToString (emoji) {
   let key = '';
   for (const codePoint of emoji) {
-    const codepoint = codePoint.codePointAt(0).toString(16);
+    const codepoint = codePoint.codePointAt(0).toString(16).padStart(4, '0');
 
     // skip 200d and fe0f as these are not included in emoji_strategy.json keys
     if (['200d', 'fe0f'].includes(codepoint)) continue;
     if (key !== '') { key = key + '-'; }
-    key = key + codePoint.codePointAt(0).toString(16);
+    key = key + codepoint;
   }
   return key;
 }
