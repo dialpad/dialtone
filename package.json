@@ -55,6 +55,7 @@
     "stylelint-less": "1.0.4",
     "stylelint-no-px": "^1.0.1",
     "vitest": "^1.0.4",
+    "vue-docgen-api": "^4.75.0",
     "wait-on": "^7.2.0"
   },
   "pnpm": {
