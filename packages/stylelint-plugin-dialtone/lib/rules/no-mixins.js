@@ -26,16 +26,15 @@ const ruleFunction = (primary) => {
 
     // This iterates through one selector at a time, so you don't have to worry about checking for nested selectors.
     root.walkAtRules((ruleNode) => {
-      if (ruleNode.mixin) {
-        report({
-          result,
-          ruleName,
-          node: ruleNode,
-          start: ruleNode.source.start,
-          end: ruleNode.source.end,
-          message: messages.noMixinsRejected(ruleNode.name),
-        });
-      }
+      if (!ruleNode.mixin) return;
+      report({
+        result,
+        ruleName,
+        node: ruleNode,
+        start: ruleNode.source.start,
+        end: ruleNode.source.end,
+        message: messages.noMixinsRejected(ruleNode.name),
+      });
     });
   };
 };
