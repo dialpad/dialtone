@@ -902,10 +902,6 @@ importers:
         version: 10.2.0
 
   packages/stylelint-plugin-dialtone:
-    dependencies:
-      requireindex:
-        specifier: ^1.2.0
-        version: 1.2.0
     devDependencies:
       stylelint:
         specifier: 15.11.0

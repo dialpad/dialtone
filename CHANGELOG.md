@@ -1,3 +1,16 @@
+# [9.23.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.22.1...dialtone/v9.23.0) (2024-03-20)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** set correct search icon size ([#217](https://github.com/dialpad/dialtone/issues/217)) ([8d81675](https://github.com/dialpad/dialtone/commit/8d816752e1011b571c8912be4391de17382a9deb))
+* use mixin property to detect mixin ([#215](https://github.com/dialpad/dialtone/issues/215)) ([493f58e](https://github.com/dialpad/dialtone/commit/493f58ef37ea14392bfee0fabc7c0cf8fa524d2a))
+
+
+### Features
+
+* **General Row:** add home icon ([#213](https://github.com/dialpad/dialtone/issues/213)) ([fba9ccd](https://github.com/dialpad/dialtone/commit/fba9ccdf96b42efc9515baa9639377ed24b523c5))
+
 ## [9.22.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.22.0...dialtone/v9.22.1) (2024-03-18)
 
 
