@@ -163,9 +163,11 @@ const filterTokens = () => {
   }
   const newTokens = {};
 
-  // Replace '/' characters for '-' to allow to search by the name shown in Figma:
-  // typography/body/compact/small should match typography-body-compact-small
-  const searchValues = searchCriteria.value.replaceAll('/', '-').split(' ');
+  // Replace '/' characters for ' ' to allow to search by the name shown in Figma:
+  // typography/body/sm/compact should match var(--dt-typography-body-sm-compact)
+  // or dtTypographyBodySmCompact
+  const searchValues = searchCriteria.value.replaceAll('/', ' ').split(' ');
+  console.log('searchValues: ', searchValues);
 
   Object.keys(CATEGORY_MAP).forEach((category) => {
     const results = processedTokens[format.value][theme.value][category].filter((token) => {
