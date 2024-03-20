@@ -1,3 +1,15 @@
+# [3.116.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.115.2...dialtone-vue3/v3.116.0) (2024-03-20)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** set correct search icon size ([#217](https://github.com/dialpad/dialtone/issues/217)) ([8d81675](https://github.com/dialpad/dialtone/commit/8d816752e1011b571c8912be4391de17382a9deb))
+
+
+### Features
+
+* **General Row:** add home icon ([#213](https://github.com/dialpad/dialtone/issues/213)) ([fba9ccd](https://github.com/dialpad/dialtone/commit/fba9ccdf96b42efc9515baa9639377ed24b523c5))
+
 ## [3.115.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.115.1...dialtone-vue3/v3.115.2) (2024-03-15)
 
 
