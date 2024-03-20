@@ -11,7 +11,10 @@
       @keydown.enter="$emit('select-first-emoji')"
     >
       <template #leftIcon>
-        <dt-icon name="search" />
+        <dt-icon
+          name="search"
+          size="200"
+        />
       </template>
       <template
         v-if="modelValue.length > 0"
