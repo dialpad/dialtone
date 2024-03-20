@@ -13,7 +13,7 @@ npm install --save @dialpad/dialtone-icons
 Once installed, you can import icons like:
 
 ```js
-import Accessibility from '@dialpad/dialtone-icons/dist/svg/accessibility.svg';
+import Accessibility from '@dialpad/dialtone-icons/svg/accessibility.svg';
 ```
 
 ## Committing

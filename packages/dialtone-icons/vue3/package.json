@@ -7,5 +7,8 @@
     "@vue/compiler-sfc": "^3.4.15",
     "vite": "^5.0.12",
     "vue": "^3.4.15"
-  }
+  },
+  "type": "module",
+  "main": "../dist/dialtone-icon@3.cjs",
+  "module": "../dist/dialtone-icon@3.js"
 }

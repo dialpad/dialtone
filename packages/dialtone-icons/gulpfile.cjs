@@ -33,7 +33,7 @@ const replace = settings.svgs ? require('gulp-replace') : null;
 //  ================================================================================
 const paths = {
   clean: {
-    svgs: './dist/svg/**/*.svg',
+    dist: './dist/',
   },
   icons: {
     input: './src/svg/**/*.svg',
@@ -79,8 +79,8 @@ const cleanUp = (items) => {
 };
 
 //  --  Clean out SVGs
-const cleanSVGs = () => {
-  return cleanUp([paths.clean.svgs]);
+const cleanDist = () => {
+  return cleanUp([paths.clean.dist]);
 };
 
 //  ================================================================================
@@ -198,7 +198,7 @@ const copyFiles = function (done) {
 
 // default build task
 exports.default = series(
-  cleanSVGs,
+  cleanDist,
   buildIcons,
   transformSVGtoVue,
   updateIconsJSON,

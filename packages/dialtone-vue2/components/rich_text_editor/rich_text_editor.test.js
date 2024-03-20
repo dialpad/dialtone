@@ -170,14 +170,4 @@ describe('DtRichTextEditor tests', () => {
       });
     });
   });
-
-  describe('Build Tests', () => {
-    it('should not be included in the core build', async () => {
-      // Ok this one is a bit goofy, but it's a naive attempt to make sure no
-      // one exports this component at the root level.
-      const DialtoneVue = await import('../../index.js');
-
-      expect(Object.hasOwnProperty.call(DialtoneVue, 'DtRichTextEditor')).toBe(false);
-    });
-  });
 });

@@ -10,12 +10,12 @@
   ],
   "exports": {
     "./vue2": {
-      "import": "./dist/dialtone-icon@2.mjs",
-      "require": "./dist/dialtone-icon@2.umd.js"
+      "import": "./dist/dialtone-icon@2.js",
+      "require": "./dist/dialtone-icon@2.cjs"
     },
     "./vue3": {
-      "import": "./dist/dialtone-icon@3.mjs",
-      "require": "./dist/dialtone-icon@3.umd.js"
+      "import": "./dist/dialtone-icon@3.js",
+      "require": "./dist/dialtone-icon@3.cjs"
     },
     "./*": "./dist/*"
   },

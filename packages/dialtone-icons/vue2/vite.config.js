@@ -9,6 +9,7 @@ export default defineConfig({
       entry: resolve(__dirname, '../index.js'),
       name: 'DialtoneIcon@2',
       fileName: 'dialtone-icon@2',
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
       external: ['vue'],
