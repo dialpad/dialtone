@@ -1,5 +1,5 @@
 {
-  "name": "stylelint-plugin-dialtone",
+  "name": "@dialpad/stylelint-plugin-dialtone",
   "version": "1.0.0",
   "description": "dialtone stylelint plugin",
   "keywords": [
@@ -45,9 +45,6 @@
     "lint:code": "eslint '**/*.js'",
     "lint:docs": "markdownlint 'docs/**/*.md'",
     "test": "node --test ./tests/lib/rules/*.mjs"
-  },
-  "dependencies": {
-    "requireindex": "^1.2.0"
   },
   "devDependencies": {
     "stylelint": "15.11.0",

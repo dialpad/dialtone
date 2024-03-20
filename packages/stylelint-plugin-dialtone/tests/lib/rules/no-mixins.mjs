@@ -25,14 +25,14 @@ testRule({
         .aMixin();
       }`,
       description: 'simple class definition containing a LESS mixin',
-      message: messages.noMixinsRejected('.aMixin();'),
+      message: messages.noMixinsRejected('aMixin'),
     },
     {
       code: `.a {
         .aMixin;
       }`,
       description: 'simple class definition containing the older syntax for LESS mixins',
-      message: messages.noMixinsRejected('.aMixin;'),
+      message: messages.noMixinsRejected('aMixin'),
     },
     {
       code: `.a {
@@ -43,8 +43,8 @@ testRule({
       }`,
       description: 'multiple mixins in a class definition',
       warnings: [
-        { message: messages.noMixinsRejected('.aMixin;') },
-        { message: messages.noMixinsRejected('.otherMixin();') },
+        { message: messages.noMixinsRejected('aMixin') },
+        { message: messages.noMixinsRejected('otherMixin') },
       ],
     },
   ],
