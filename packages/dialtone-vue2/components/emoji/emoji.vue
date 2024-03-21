@@ -30,7 +30,7 @@ import {
   emojiImageUrlLarge,
   emojiFileExtensionLarge,
   customEmojiAssetUrl,
-} from '@/common/emoji.js';
+} from '@/common/emoji';
 import { DtSkeleton } from '../skeleton';
 
 /**

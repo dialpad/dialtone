@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Modal from '../../common/mixins/modal.js';
+import Modal from '@/common/mixins/modal';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';

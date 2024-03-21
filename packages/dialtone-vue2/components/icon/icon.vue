@@ -12,7 +12,7 @@
 
 <script>
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
-import { getUniqueString } from '@/common/utils.js';
+import { getUniqueString } from '@/common/utils';
 import iconNames from '@dialpad/dialtone-icons/icons.json';
 import { icons } from '@dialpad/dialtone-icons/vue2';
 
