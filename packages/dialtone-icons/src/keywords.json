@@ -412,7 +412,9 @@
       ],
       "phone-hang-up": [
         "disconnect",
-        "end"
+        "end",
+        "call",
+        "leave"
       ],
       "phone-hold": [
         "phone",
@@ -619,10 +621,6 @@
       "lightbulb": [
         "light"
       ],
-      "listen": [
-        "ear",
-        "hear"
-      ],
       "living-thing": [
         "pet",
         "cat",
@@ -694,11 +692,6 @@
         "music",
         "audio",
         "stop"
-      ],
-      "phone-hang-up": [
-        "end",
-        "call",
-        "leave"
       ],
       "picture-in-picture": [
         "overlay",

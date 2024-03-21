@@ -4,11 +4,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue2": "^2.3.1",
+    "glob": "^10.3.10",
     "vite": "^5.0.12",
     "vue": "^2.7.16",
     "vue-template-compiler": "^2.7.16"
   },
-  "type": "module",
-  "main": "../dist/dialtone-icon@2.cjs",
-  "module": "../dist/dialtone-icon@2.js"
+  "type": "module"
 }

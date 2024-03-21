@@ -42,6 +42,8 @@ const paths = {
   exports: {
     keywords: './src/keywords.json',
     iconsList: './src/icons.json',
+    vue2: './vue2/index.js',
+    vue3: './vue3/index.js',
   },
 };
 
@@ -182,6 +184,28 @@ const updateIconsJSON = function (done) {
   return done();
 };
 
+const updateExports = function (done) {
+  let importsList = '';
+  let exportsList = '';
+
+  _getAllFiles('./src/svg')
+  .filter(file => file.endsWith('.svg'))
+  .forEach(file => {
+    const [_, fileName] = file.split('/').slice(-2);
+    const iconName = fileName.replace('.svg', '');
+    const safeIconName = iconName.toLowerCase().split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+    importsList += `export const Icon${safeIconName} = () => import('../src/icons/${iconName}.vue');\n`;
+    exportsList += `  Icon${safeIconName},\n`;
+  });
+
+  const data = `${importsList}\nexport default {\n${exportsList}};\n`;
+
+  fs.writeFileSync(paths.exports.vue2, data);
+  fs.writeFileSync(paths.exports.vue3, data);
+
+  return done();
+};
+
 //  ================================================================================
 //  @@ Copy keywords.json and icons.json to dist
 //  ================================================================================
@@ -202,5 +226,6 @@ exports.default = series(
   buildIcons,
   transformSVGtoVue,
   updateIconsJSON,
+  updateExports,
   copyFiles,
 );

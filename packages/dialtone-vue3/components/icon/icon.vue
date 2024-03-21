@@ -14,7 +14,7 @@
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
 import { getUniqueString } from '@/common/utils.js';
 import iconNames from '@dialpad/dialtone-icons/icons.json';
-import { icons } from '@dialpad/dialtone-icons/vue3';
+import { markRaw } from 'vue';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -62,13 +62,25 @@ export default {
     },
   },
 
+  data () {
+    return {
+      icon: null,
+    };
+  },
+
   computed: {
     iconSize () {
       return ICON_SIZE_MODIFIERS[this.size];
     },
+  },
 
-    icon () {
-      return icons[`./${this.name}.vue`];
+  watch: {
+    name: {
+      immediate: true,
+      async handler (name) {
+        const icon = await import(`/node_modules/@dialpad/dialtone-icons/vue3/dist/components/${name}.js`);
+        this.icon = markRaw(icon.default);
+      },
     },
   },
 };
