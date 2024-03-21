@@ -1,0 +1,21 @@
+{
+  "color": {
+    "foreground": {
+      "keywords": [
+        "text"
+      ]
+    },
+    "surface": {
+      "keywords": [
+        "background",
+        "fill"
+      ]
+    }
+  },
+  "space": {
+    "keywords": [
+      "padding",
+      "gap"
+    ]
+  }
+}
