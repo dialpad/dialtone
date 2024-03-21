@@ -966,187 +966,50 @@
       ]
     },
     "devices": {
-      "airplay": [
-        "stream",
-        "cast",
-        "mirroring"
-      ],
+      "airplay": ["stream", "cast", "mirroring"],
       "ata-adapter": [],
-      "battery-charging": [
-        "power",
-        "electricity"
-      ],
-      "battery-full": [
-        "power",
-        "electricity"
-      ],
-      "battery-low": [
-        "power",
-        "electricity"
-      ],
-      "battery-medium": [
-        "power",
-        "electricity"
-      ],
-      "battery": [
-        "power",
-        "electricity"
-      ],
-      "bluetooth-connected": [
-        "paired",
-        "linked",
-        "connected"
-      ],
-      "bluetooth-off": [
-        "lost",
-        "disconnected",
-        "inactive"
-      ],
-      "bluetooth-searching": [
-        "pairing"
-      ],
-      "bluetooth": [
-        "wireless"
-      ],
-      "calculator": [
-        "count",
-        "calculating machine"
-      ],
-      "camera-off": [
-        "photo",
-        "webcam",
-        "video"
-      ],
-      "camera-tracking": [
-        "focus",
-        "lens",
-        "video"
-      ],
-      "camera": [
-        "photo",
-        "webcam",
-        "video"
-      ],
-      "cast": [
-        "chromecast",
-        "airplay"
-      ],
+      "battery-charging": ["power", "electricity"],
+      "battery-full": ["power", "electricity"],
+      "battery-low": ["power", "electricity"],
+      "battery-medium": ["power", "electricity"],
+      "battery": ["power", "electricity"],
+      "bluetooth-connected": ["paired", "linked", "connected"],
+      "bluetooth-off": ["lost", "disconnected", "inactive"],
+      "bluetooth-searching": ["pairing"],
+      "bluetooth": ["wireless"],
+      "calculator": ["count", "calculating machine"],
+      "camera-off": ["photo", "webcam", "video"],
+      "camera-tracking": ["focus", "lens", "video"],
+      "camera": ["photo", "webcam", "video"],
+      "cast": ["chromecast", "airplay"],
       "dect-base-station": [],
       "dect-handset": [],
-      "deskphone": [
-        "telephone",
-        "landline"
-      ],
-      "download-cloud": [
-        "import"
-      ],
-      "file-audio": [
-        "music",
-        "audio",
-        "sound",
-        "headphones"
-      ],
-      "film": [
-        "movie",
-        "video"
-      ],
-      "focus": [
-        "camera",
-        "lens",
-        "photo"
-      ],
-      "hd": [
-        "quality",
-        "resolution",
-        "high"
-      ],
-      "headphones": [
-        "music",
-        "audio",
-        "sound"
-      ],
-      "laptop-2": [
-        "computer"
-      ],
-      "lightning-bolt": [
-        "power",
-        "energy",
-        "electricity",
-        "electric"
-      ],
-      "mic-off": [
-        "record",
-        "sound",
-        "mute",
-        "microphone"
-      ],
-      "mic": [
-        "record",
-        "sound",
-        "listen",
-        "radio",
-        "podcast",
-        "microphone"
-      ],
-      "monitor-off": [
-        "share"
-      ],
-      "monitor-speaker": [
-        "devices",
-        "connect",
-        "cast"
-      ],
-      "monitor": [
-        "tv",
-        "screen",
-        "display"
-      ],
-      "mouse": [
-        "device",
-        "scroll",
-        "click"
-      ],
-      "plug": [
-        "power"
-      ],
-      "print-fax": [
-        "printer",
-        "office",
-        "device"
-      ],
-      "printer": [
-        "fax",
-        "office",
-        "device"
-      ],
-      "screen-share-off": [
-        "desktop",
-        "disconnect"
-      ],
-      "share-screen": [
-        "screenshare"
-      ],
-      "smartphone-charging": [
-        "phone",
-        "cellphone",
-        "device",
-        "power"
-      ],
-      "smartphone": [
-        "phone",
-        "cellphone",
-        "device"
-      ],
-      "speaker": [
-        "audio",
-        "music"
-      ],
-      "switch-to-cellular": [
-        "signal"
-      ],
-      "switch-to-hd": [
-        "quality"
-      ],
+      "deskphone": ["telephone", "landline"],
+      "download-cloud": ["import"],
+      "file-audio": ["music", "audio", "sound", "headphones"],
+      "film": ["movie", "video"],
+      "focus": ["camera", "lens", "photo"],
+      "hd": ["quality", "resolution", "high"],
+      "headphones": ["music", "audio", "sound"],
+      "headset": ["microphone", "headphones"],
+      "laptop-2": ["computer"],
+      "lightning-bolt": ["power", "energy", "electricity", "electric"],
+      "mic-off": ["record", "sound", "mute", "microphone"],
+      "mic": ["record", "sound", "listen", "radio", "podcast", "microphone"],
+      "monitor-off": ["share"],
+      "monitor-speaker": ["devices", "connect", "cast"],
+      "monitor": ["tv", "screen", "display"],
+      "mouse": ["device", "scroll", "click"],
+      "plug": ["power"],
+      "print-fax": ["printer", "office", "device"],
+      "printer": ["fax", "office", "device"],
+      "screen-share-off": ["desktop", "disconnect"],
+      "share-screen": ["screenshare"],
+      "smartphone-charging": ["phone", "cellphone", "device", "power"],
+      "smartphone": ["phone", "cellphone", "device"],
+      "speaker": ["audio", "music"],
+      "switch-to-cellular": ["signal"],
+      "switch-to-hd": ["quality"],
       "usb": [
         "universal",
         "serial",
@@ -1155,52 +1018,16 @@
         "connector",
         "interface"
       ],
-      "video-off": [
-        "camera",
-        "movie",
-        "film"
-      ],
-      "video": [
-        "camera",
-        "movie",
-        "film",
-        "recording"
-      ],
-      "volume-1": [
-        "music",
-        "sound"
-      ],
-      "volume-2": [
-        "music",
-        "sound"
-      ],
-      "volume-x": [
-        "music",
-        "sound",
-        "mute"
-      ],
-      "volume": [
-        "music",
-        "sound",
-        "mute"
-      ],
-      "webcam": [
-        "camera",
-        "security"
-      ],
-      "wifi-off": [
-        "disabled"
-      ],
-      "wifi": [
-        "connection",
-        "signal",
-        "wireless"
-      ],
-      "zap-off": [
-        "flash",
-        "camera",
-        "lightning"
-      ]
+      "video-off": ["camera", "movie", "film"],
+      "video": ["camera", "movie", "film", "recording"],
+      "volume-1": ["music", "sound"],
+      "volume-2": ["music", "sound"],
+      "volume-x": ["music", "sound", "mute"],
+      "volume": ["music", "sound", "mute"],
+      "webcam": ["camera", "security"],
+      "wifi-off": ["disabled"],
+      "wifi": ["connection", "signal", "wireless"],
+      "zap-off": ["flash", "camera", "lightning"]
     },
     "editing": {
       "ai-write": [
