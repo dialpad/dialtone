@@ -19,6 +19,41 @@ export const createTemplateFromVueFile = (args, argTypes, templateComponent) => 
   template: '<template-component v-bind="args"></template-component>',
 });
 
+export function createRenderConfig (component, defaultTemplate, argsData) {
+  return {
+    components: { [component.name]: defaultTemplate },
+    setup () {
+      return { argsData };
+    },
+    template: `<${component.name} v-bind="argsData"></${component.name}>`,
+  };
+}
+
+// export function createRenderConfig (component, defaultTemplate, argsData) {
+//   return {
+//     components: { [component.name]: defaultTemplate },
+//     setup () {
+//       return { argsData };
+//     },
+//     template: createTemplate(component.name, argsData),
+//   };
+// }
+//
+// function createTemplate (componentName, argsData) {
+//   let template = `<${componentName} `;
+//
+//   Object.entries(argsData).forEach(([key, value]) => {
+//     if (value === undefined) {
+//       // If the value is undefined, do not include it in the template
+//       return;
+//     }
+//     template += `${key}="${value}" `;
+//   });
+//
+//   template += `></${componentName}>`;
+//   return template;
+// }
+
 /**
  * Gets the full list of icon component names from the dialtone package
  * @returns {string[]} icon component names
@@ -53,4 +88,5 @@ export default {
   generateTemplate,
   createTemplateFromVueFile,
   getIconNames,
+  createRenderConfig,
 };
