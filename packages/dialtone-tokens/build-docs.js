@@ -26,7 +26,7 @@ export function buildDocs (platformName, theme, currentObj) {
         name: formatTokenName(platformName, tokenName),
         value: tokenValue,
         description: tokenDescription,
-        keywords: getTokenKeywords(tokenPath),
+        keywords: getTokenKeywords(keywordsJson, tokenPath),
       },
     };
     return null;
@@ -41,19 +41,19 @@ export function buildDocs (platformName, theme, currentObj) {
 /**
  * Gets the keywords from the keywords.json file
  * for the token category / subcategory
+ * @param {Object} obj Object with the token information
  * @param {Array} tokenPath The path that has first the category, then the subcategory (optional), then the name
+ * @param {Array} keywords Array with the keywords. Is completed by recursively looping through obj
  * @returns {Array|undefined} Array with the keywords, or undefined if there are none
  */
-function getTokenKeywords (tokenPath) {
-  const keywords = [];
-  const keywordsCategory = keywordsJson[tokenPath[0]];
-  const keywordsSubcategory = keywordsCategory && tokenPath[1] && keywordsCategory[tokenPath[1]];
-  if (keywordsCategory) {
-    if (keywordsCategory.keywords) keywords.push(...keywordsCategory.keywords);
+function getTokenKeywords (obj, tokenPath, keywords = []) {
+  if (tokenPath.legth === 0 || !obj) return;
+  const currentCategory = tokenPath[0];
+  if (currentCategory && obj[currentCategory] && obj[currentCategory].keywords) {
+    keywords.push(...obj[currentCategory].keywords);
   }
-  if (keywordsSubcategory) {
-    if (keywordsSubcategory.keywords) keywords.push(...keywordsSubcategory.keywords);
-  }
+  tokenPath.shift();
+  getTokenKeywords(obj[currentCategory], tokenPath, keywords);
   return keywords.length > 0 ? keywords : undefined;
 }
 
