@@ -41,6 +41,7 @@
                   class="d-fw-bold"
                 />
               </template>
+              {{ button.label || '' }}
             </dt-button>
           </template>
         </dt-tooltip>
@@ -504,11 +505,18 @@ export default {
         buttonGroup: [buttonData],
       }));
       return [
+        { key: 'new', buttonGroup: this.newButtons },
         { key: 'format', buttonGroup: this.textFormatButtons },
         { key: 'alignment', buttonGroup: this.alignmentButtons },
         { key: 'list', buttonGroup: this.listButtons },
         ...individualButtonStacks,
       ].filter(buttonGroupData => buttonGroupData.buttonGroup.length > 0);
+    },
+
+    newButtons () {
+      return [
+        { showBtn: this.showQuickRepliesButton, label: 'Quick reply', selector: 'quickReplies', iconName: 'lightning-bolt', dataQA: 'dt-editor-quick-replies-btn', tooltipMessage: 'Quick Reply', onClick: this.onQuickRepliesClick },
+      ].filter(button => button.showBtn);
     },
 
     textFormatButtons () {
@@ -540,7 +548,6 @@ export default {
       return [
         { showBtn: this.showQuoteButton, selector: 'blockquote', iconName: 'quote', dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
         { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code-block', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
-        { showBtn: this.showQuickRepliesButton, selector: 'quickReplies', iconName: 'lightning-bolt', dataQA: 'dt-editor-quick-replies-btn', tooltipMessage: 'Quick Replies', onClick: this.onQuickRepliesClick },
       ].filter(button => button.showBtn);
     },
 
