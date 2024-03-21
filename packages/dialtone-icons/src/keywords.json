@@ -355,11 +355,6 @@
         "gesture",
         "palm"
       ],
-      "listen": [
-        "ear",
-        "hear",
-        "audio"
-      ],
       "listening": [
         "ear",
         "hear",
@@ -409,12 +404,6 @@
       "phone-forward": [
         "call",
         "forward"
-      ],
-      "phone-hang-up": [
-        "disconnect",
-        "end",
-        "call",
-        "leave"
       ],
       "phone-hold": [
         "phone",
@@ -621,6 +610,11 @@
       "lightbulb": [
         "light"
       ],
+      "listen": [
+        "ear",
+        "hear",
+        "audio"
+      ],
       "living-thing": [
         "pet",
         "cat",
@@ -692,6 +686,12 @@
         "music",
         "audio",
         "stop"
+      ],
+      "phone-hang-up": [
+        "disconnect",
+        "end",
+        "call",
+        "leave"
       ],
       "picture-in-picture": [
         "overlay",
