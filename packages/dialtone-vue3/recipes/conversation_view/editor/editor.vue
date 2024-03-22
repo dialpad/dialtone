@@ -32,6 +32,7 @@
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               size="xs"
               :aria-label="button.tooltipMessage"
+              :class="{ 'd-btn--icon-only': !button.label }"
               @click="button.onClick()"
             >
               <template #icon>
@@ -41,7 +42,7 @@
                   class="d-fw-bold"
                 />
               </template>
-              {{ button.label || '' }}
+              {{ button?.label }}
             </dt-button>
           </template>
         </dt-tooltip>
