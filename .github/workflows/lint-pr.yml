@@ -35,8 +35,8 @@ jobs:
       - name: Lint pull request title
         run: |
           echo "The PR's title should adhere to the commit message convention."
-          echo "correct format: <type>(<scope>): <subject>"
-          echo "example: feat: add dialbot icon"
+          echo "correct format: <type>(<scope>): <jira> <subject>"
+          echo "example: feat: DLT-123 add dialbot icon"
           pnpm commitlint --verbose << EOF
           ${{ github.event.pull_request.title }}
           EOF
