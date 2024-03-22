@@ -29,7 +29,7 @@
       />
     </span>
     <span
-      v-if="!!$slots.default && !!$slots.default[0].text?.trim()"
+      v-if="$slots.default"
       data-qa="dt-button-label"
       :class="['d-btn__label', 'base-button__label', labelClass]"
     >
