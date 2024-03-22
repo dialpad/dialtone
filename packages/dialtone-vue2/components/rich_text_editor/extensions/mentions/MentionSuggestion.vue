@@ -6,7 +6,7 @@
     <dt-avatar
       :full-name="name"
       :image-src="avatarSrc"
-      image-alt=""
+      :image-alt="name"
       size="xs"
     />
     {{ name }}
