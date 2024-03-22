@@ -2,9 +2,7 @@
 
 Dialtone uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) for the commit messages in the release branches: `production`, `staging`, `alpha` and `beta`.
 When opening a PR, ensure the PR's title also complies with the Conventional Commits specification.
-This way, if your PR is merged using squash strategy, the PR's title will be used as the commit message
-except when your PR contains a single commit, in this case GitHub will use this commit for the commit message when
-your PR is merged, so in this case to meet the convention on the single commit of your PR is required.
+This way, if your PR is merged using squash strategy, the PR's title will be used as the commit message.
 
 Consult [the rules](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#rules) that are considered problems in the commit message.
 
