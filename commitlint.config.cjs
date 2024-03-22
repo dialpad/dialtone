@@ -30,7 +30,6 @@ module.exports = {
     {
       rules: {
         'jira-empty': ({ jira }) => {
-          console.log(jira);
           const test = !!jira;
           return [
             test,
