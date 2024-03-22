@@ -1,3 +1,23 @@
+# [9.24.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.23.0...dialtone/v9.24.0) (2024-03-22)
+
+
+### Bug Fixes
+
+* **Emoji:** dlt-1650 pad emoji unicode string with 0's ([#219](https://github.com/dialpad/dialtone/issues/219)) ([1eb4906](https://github.com/dialpad/dialtone/commit/1eb4906894537ed7ace2d9cad2de0513ff15a7cb))
+* warn console error cleanup ([#221](https://github.com/dialpad/dialtone/issues/221)) ([65bb319](https://github.com/dialpad/dialtone/commit/65bb31983f74feed2e6d4d03581be58e3631b458))
+
+
+### Documentation
+
+* add tokens keywords ([#220](https://github.com/dialpad/dialtone/issues/220)) ([20125f4](https://github.com/dialpad/dialtone/commit/20125f421352fe2ccef2f092bb16c4a279d76b31))
+* fix search for tokens ([#218](https://github.com/dialpad/dialtone/issues/218)) ([ff46724](https://github.com/dialpad/dialtone/commit/ff46724983c3b720fc6f48e71cbda88795e048f5))
+
+
+### Features
+
+* added new headset icon and update listed icons ([#224](https://github.com/dialpad/dialtone/issues/224)) ([c1373ec](https://github.com/dialpad/dialtone/commit/c1373ecb15492c7d20f7c2453b3def39457408e2))
+* adding new blog for Types update ([#222](https://github.com/dialpad/dialtone/issues/222)) ([73b40f3](https://github.com/dialpad/dialtone/commit/73b40f30a4c2fd3ed26b213ebdcfce7d37ee2e62))
+
 # [9.23.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.22.1...dialtone/v9.23.0) (2024-03-20)
 
 
