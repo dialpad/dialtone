@@ -1,3 +1,11 @@
+## [3.116.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.116.0...dialtone-vue3/v3.116.1) (2024-03-22)
+
+
+### Bug Fixes
+
+* **Emoji:** dlt-1650 pad emoji unicode string with 0's ([#219](https://github.com/dialpad/dialtone/issues/219)) ([1eb4906](https://github.com/dialpad/dialtone/commit/1eb4906894537ed7ace2d9cad2de0513ff15a7cb))
+* warn console error cleanup ([#221](https://github.com/dialpad/dialtone/issues/221)) ([65bb319](https://github.com/dialpad/dialtone/commit/65bb31983f74feed2e6d4d03581be58e3631b458))
+
 # [3.116.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.115.2...dialtone-vue3/v3.116.0) (2024-03-20)
 
 
