@@ -32,7 +32,6 @@
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               size="xs"
               :aria-label="button.tooltipMessage"
-              :class="{ 'd-btn--icon-only': !button.label }"
               @click="button.onClick()"
             >
               <template #icon>
@@ -41,7 +40,7 @@
                   size="200"
                 />
               </template>
-              {{ button.label }}
+              <span v-if="button.label">{{ button.label }}</span>
             </dt-button>
           </template>
         </dt-tooltip>
