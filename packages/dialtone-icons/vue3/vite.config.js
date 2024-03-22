@@ -12,7 +12,6 @@ const iconEntries = glob.sync('../src/icons/*.vue').reduce((entries, path) => {
 export default defineConfig({
   plugins: [vue()],
   build: {
-    outDir: 'dist',
     lib: {
       entry: {
         ...iconEntries,
@@ -23,6 +22,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['vue'],
       output: {
+        preserveModules: true,
         minifyInternalExports: true,
       },
     },

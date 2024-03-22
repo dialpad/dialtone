@@ -448,8 +448,8 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-emojis
       '@dialpad/dialtone-icons':
-        specifier: ../dialtone-icons/dialpad-dialtone-icons-4.11.0.tgz
-        version: file:packages/dialtone-icons/dialpad-dialtone-icons-4.11.0.tgz
+        specifier: workspace:*
+        version: link:../dialtone-icons
       '@linusborg/vue-simple-portal':
         specifier: ^0.1.5
         version: 0.1.5(vue@2.7.15)
@@ -604,9 +604,6 @@ importers:
       chai:
         specifier: ^4.3.7
         version: 4.3.10
-      glob:
-        specifier: ^10.3.10
-        version: 10.3.10
       jsdom:
         specifier: ^24.0.0
         version: 24.0.0
@@ -677,8 +674,8 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-emojis
       '@dialpad/dialtone-icons':
-        specifier: ../dialtone-icons/dialpad-dialtone-icons-4.11.0.tgz
-        version: file:packages/dialtone-icons/dialpad-dialtone-icons-4.11.0.tgz
+        specifier: workspace:*
+        version: link:../dialtone-icons
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.1.12)
@@ -830,9 +827,6 @@ importers:
       chai:
         specifier: ^4.3.7
         version: 4.3.10
-      glob:
-        specifier: ^10.3.10
-        version: 10.3.10
       jsdom:
         specifier: ^24.0.0
         version: 24.0.0
@@ -31116,9 +31110,3 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
-
-  file:packages/dialtone-icons/dialpad-dialtone-icons-4.11.0.tgz:
-    resolution: {integrity: sha512-RZpakAFf6E2Hb744E91EIXzVAFO9ptAXVZ8iXy5Eykyo77IWZ08/BmrHRSZq2Fr48THtXP0BNw4fe1MROLbqUQ==, tarball: file:packages/dialtone-icons/dialpad-dialtone-icons-4.11.0.tgz}
-    name: '@dialpad/dialtone-icons'
-    version: 4.11.0
-    dev: false

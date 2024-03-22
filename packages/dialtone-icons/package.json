@@ -64,6 +64,5 @@
     "Icons",
     "Icon Library"
   ],
-  "license": "MIT",
-  "sideEffects": false
+  "license": "MIT"
 }
