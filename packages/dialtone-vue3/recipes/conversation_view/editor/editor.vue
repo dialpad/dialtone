@@ -39,7 +39,6 @@
                 <dt-icon
                   :name="button.iconName"
                   size="200"
-                  class="d-fw-bold"
                 />
               </template>
               {{ button?.label }}
