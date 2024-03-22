@@ -62,7 +62,6 @@ fix(combobox, combobox-with-popover): DLT-123 fix keyboard navigation
 ### Jira:
 
 The id of the Jira ticket associated with the PR. If there are more than one, they can be added separated by spaces.
-If the commit is a revert, the word "Revert" can be added before the Jira id.
 If there is no associated Jira ticket, the word "NO-JIRA" should be used.
 
 ### Subject:
@@ -105,10 +104,4 @@ feat(modal): NO-JIRA add danger style
 
 ```txt
 feat(modal): DLT-123 DP-555 add danger style
-```
-
-#### Commit that reverts a Jira ticket
-
-```txt
-fix: Revert DLT-123 add danger style
 ```
