@@ -18,8 +18,13 @@ export default defineConfig({
     rollupOptions: {
       external: [
         /@dialpad/,
+        /@linusborg/,
         /@tiptap/,
-        'emoji-toolkit/emoji_strategy.json',
+        /date-fns/,
+        /emoji-regex/,
+        /emoji-toolkit/,
+        /tippy\.js/,
+        /prosemirror/,
         'vue',
       ],
       output: {
