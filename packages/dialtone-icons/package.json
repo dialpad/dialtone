@@ -10,9 +10,10 @@
   ],
   "exports": {
     ".": "./dist/index.js",
-    "./*.svg": "./dist/svg/*.svg",
-    "./*.json": "./dist/*.json",
-    "./*.vue": "./dist/components/*.vue"
+    "./icons.json": "./dist/icons.json",
+    "./keywords.json": "./dist/keywords.json",
+    "./*.svg": "./dist/svg/*",
+    "./*.vue": "./dist/components/*"
   },
   "main": "dist/index.js",
   "devDependencies": {

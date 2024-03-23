@@ -30,7 +30,6 @@ export default defineConfig({
       output: {
         globals: {
           vue: 'Vue',
-          '@dialpad/dialtone-icons/vue3': 'DialtoneIcons',
           '@dialpad/dialtone-icons/icons.json': 'DialtoneIconsJSON',
           '@dialpad/dialtone-emojis': 'DialtoneEmojis',
           '@tiptap/vue-3': 'TipTapVue3',

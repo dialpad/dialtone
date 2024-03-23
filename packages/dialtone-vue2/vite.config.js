@@ -29,7 +29,6 @@ export default defineConfig({
       ],
       output: {
         globals: {
-          '@dialpad/dialtone-icons/vue2': 'DialtoneIcons',
           '@dialpad/dialtone-icons/icons.json': 'DialtoneIconsJSON',
           '@dialpad/dialtone-emojis': 'DialtoneEmojis',
           '@tiptap/vue-2': 'TipTapVue2',
