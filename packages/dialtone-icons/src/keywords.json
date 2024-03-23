@@ -213,37 +213,6 @@
         "history"
       ]
     },
-    "brand": {
-      "agent-assist": [
-        "ai",
-        "conversation",
-        "chat"
-      ],
-      "ai-notes": [
-        "artificial",
-        "intelligence"
-      ],
-      "coaching-hub": [],
-      "dialpad-ai-reversed": [
-        "dp",
-        "brand"
-      ],
-      "dialpad-ai": [
-        "artificial",
-        "intelligence",
-        "voice"
-      ],
-      "dialpad-logomark": [],
-      "dp-phone": [
-        "call",
-        "dialpad"
-      ],
-      "waveform": [],
-      "zoom-logo": [
-        "video",
-        "competitor"
-      ]
-    },
     "brand-full-color": {
       "airtable": [],
       "amex": [],
@@ -323,6 +292,37 @@
       "zoho-desk": [],
       "zoho": [],
       "zoom": []
+    },
+    "brand": {
+      "agent-assist": [
+        "ai",
+        "conversation",
+        "chat"
+      ],
+      "ai-notes": [
+        "artificial",
+        "intelligence"
+      ],
+      "coaching-hub": [],
+      "dialpad-ai-reversed": [
+        "dp",
+        "brand"
+      ],
+      "dialpad-ai": [
+        "artificial",
+        "intelligence",
+        "voice"
+      ],
+      "dialpad-logomark": [],
+      "dp-phone": [
+        "call",
+        "dialpad"
+      ],
+      "waveform": [],
+      "zoom-logo": [
+        "video",
+        "competitor"
+      ]
     },
     "communication": {
       "call-abandoned": [

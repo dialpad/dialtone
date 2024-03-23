@@ -28,12 +28,6 @@ dist
 .temp
 .cache
 
-# Dialtone icons #
-packages/dialtone-icons/src/icons.json
-packages/dialtone-icons/src/icons
-packages/dialtone-icons/vue2/index.js
-packages/dialtone-icons/vue3/index.js
-
 # Dialtone tokens #
 packages/dialtone-tokens/token_transformer
 packages/dialtone-tokens/dist*/*

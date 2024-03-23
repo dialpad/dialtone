@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString } from '../utils';
 
 export default {
   name: '__ICON_NAME__',
   created () {
-    this.uniqueID = getUniqueString('dt-icon');
+    this.uniqueID = getUniqueString();
   },
 };
 </script>

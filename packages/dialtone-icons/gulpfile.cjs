@@ -6,8 +6,6 @@
 const settings = {
   clean: true, // Turn on/off clean tasks
   svgs: true, // Turn on/off SVG tasks
-  build: true, // Turn on/off build tasks
-  iconList: true, // Turn on/off icon list tasks
 };
 
 //  ================================================================================
@@ -20,12 +18,15 @@ const del = require('del');
 const rename = require('gulp-rename');
 const fs = require("fs");
 const jsonFormat = require('gulp-json-format');
+const {glob} = require("glob");
 const exec = require('child_process').exec;
+const _ = require('lodash');
 
-//  @@ SVGS
+//  @@ SVGs
 const path = settings.svgs ? require('path') : null;
 const svgmin = settings.svgs ? require('gulp-svgmin') : null;
 const replace = settings.svgs ? require('gulp-replace') : null;
+const svgList = glob.sync('./src/**/*.svg').sort();
 
 //  ================================================================================
 //  @  PATHS
@@ -39,29 +40,13 @@ const paths = {
     input: './src/svg/**/*.svg',
     outputSvg: './dist/svg/',
   },
+  utils: './src/utils.js',
   exports: {
     keywords: './src/keywords.json',
-    iconsList: './src/icons.json',
-    vue2: './vue2/index.js',
-    vue3: './vue3/index.js',
+    iconsList: './dist/icons.json',
+    index: './dist/index.js',
   },
 };
-
-// ====
-// Util Functions
-// ====
-const _getAllFiles = (dirPath, arrayOfFiles = []) => {
-  const files = fs.readdirSync(dirPath)
-  files.forEach(function(file) {
-    if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-      arrayOfFiles = _getAllFiles(dirPath + "/" + file, arrayOfFiles)
-    } else {
-      arrayOfFiles.push(path.join(__dirname, dirPath, "/", file))
-    }
-  })
-
-  return arrayOfFiles
-}
 
 //  ================================================================================
 //  @   TASKS
@@ -158,9 +143,7 @@ const updateIconsJSON = function (done) {
   const keywordsJSON = JSON.parse(rawData).categories;
   const iconsList = [];
 
-  const updatedKeywords = _getAllFiles('./src/svg')
-      .filter(file => file.endsWith('.svg'))
-      .reduce((acc, file) => {
+  const updatedKeywords = svgList.reduce((acc, file) => {
         const [category, fileName] = file.split('/').slice(-2);
         const iconName = fileName.replace('.svg', '');
         const keywords = keywordsJSON[category][iconName] || [];
@@ -176,10 +159,14 @@ const updateIconsJSON = function (done) {
   fs.writeFileSync(paths.exports.keywords, JSON.stringify({ categories: {...updatedKeywords}}));
   fs.writeFileSync(paths.exports.iconsList, JSON.stringify(iconsList));
 
-  // Prettifies the JSON to improve readability and easier keyword adding.
+  // Copies the icons.json and keywords.json to dist/
   src([paths.exports.keywords, paths.exports.iconsList])
-    .pipe(jsonFormat(2))
-    .pipe(dest('./src/'));
+  .pipe(dest('./dist/'));
+
+  // Prettifies the JSON to improve readability and easier keyword adding.
+  src(paths.exports.keywords)
+  .pipe(jsonFormat(2))
+  .pipe(dest('./src/'));
 
   return done();
 };
@@ -188,29 +175,25 @@ const updateExports = function (done) {
   let importsList = '';
   let exportsList = '';
 
-  _getAllFiles('./src/svg')
-  .filter(file => file.endsWith('.svg'))
-  .forEach(file => {
-    const [_, fileName] = file.split('/').slice(-2);
-    const iconName = fileName.replace('.svg', '');
-    const safeIconName = iconName.toLowerCase().split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
-    importsList += `export const Icon${safeIconName} = () => import('../src/icons/${iconName}.vue');\n`;
-    exportsList += `  Icon${safeIconName},\n`;
+  svgList.forEach(file => {
+    const fileName = file.split('/').slice(-2)[1];
+    const iconName = _.startCase(_.camelCase(fileName.split('.')[0])).replace(/ /g, '');
+    importsList += `export const DtIcon${iconName} = () => import('./components/${iconName}.vue');\n`;
+    exportsList += `  DtIcon${iconName},\n`;
   });
 
   const data = `${importsList}\nexport default {\n${exportsList}};\n`;
 
-  fs.writeFileSync(paths.exports.vue2, data);
-  fs.writeFileSync(paths.exports.vue3, data);
+  fs.writeFileSync(paths.exports.index, data);
 
   return done();
 };
 
 //  ================================================================================
-//  @@ Copy keywords.json and icons.json to dist
+//  @@ Copy files to dist
 //  ================================================================================
 const copyFiles = function (done) {
-  src([paths.exports.keywords, paths.exports.iconsList])
+  src([paths.utils])
       .pipe(dest('./dist'));
   return done();
 };
