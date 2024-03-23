@@ -2,7 +2,6 @@
   <component
     :is="icon"
     v-if="icon"
-    :id="id"
     data-qa="dt-icon"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
     :aria-label="ariaLabel"
@@ -12,8 +11,9 @@
 
 <script>
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
-import { getUniqueString } from '@/common/utils.js';
+import { kebabCaseToPascalCase } from '@/common/utils.js';
 import iconNames from '@dialpad/dialtone-icons/icons.json';
+import iconComponents from '@dialpad/dialtone-icons';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -23,16 +23,6 @@ export default {
   name: 'DtIcon',
 
   props: {
-    /**
-     * DtIcon identifier
-     */
-    id: {
-      type: String,
-      default () {
-        return getUniqueString();
-      },
-    },
-
     /**
      * The size of the icon.
      * @values 100, 200, 300, 400, 500, 600, 700, 800
@@ -71,14 +61,18 @@ export default {
     iconSize () {
       return ICON_SIZE_MODIFIERS[this.size];
     },
+
+    iconComponentName () {
+      return kebabCaseToPascalCase(`dt-icon-${this.name}`);
+    },
   },
 
   watch: {
     name: {
       immediate: true,
-      async handler (name) {
-        const icon = await import(`/node_modules/@dialpad/dialtone-icons/vue2/dist/components/${name}.js`);
-        this.icon = icon.default;
+      async handler () {
+        const iconComponent = await iconComponents[this.iconComponentName]();
+        this.icon = iconComponent.default;
       },
     },
   },
