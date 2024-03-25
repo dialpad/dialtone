@@ -565,8 +565,7 @@ export default {
 
       const dt = e.dataTransfer;
       const files = Array.from(dt.files);
-      const fileNames = files.map(file => file.name);
-      this.$emit('add-media', fileNames);
+      this.$emit('add-media', files);
     },
 
     onSkinTone (skinTone) {
