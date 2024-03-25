@@ -155,6 +155,7 @@
       "style": "./dist/style.css",
       "import": "./dist/style.css"
     },
+    "./component-documentation.json": "./dist/component-documentation.json",
     "./components/*": "./dist/components/*.js"
   },
   "homepage": "https://dialtone.dialpad.com/vue",

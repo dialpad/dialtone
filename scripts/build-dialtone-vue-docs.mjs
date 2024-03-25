@@ -15,7 +15,7 @@ if (!version) {
 }
 
 const componentsRootFolder = join(__dirname, `../packages/dialtone-vue${version}/components`);
-const outputPath = join(__dirname, `../packages/dialtone-vue${version}/dist/component-documentation.json`);
+const outputPath = join(__dirname, `../packages/dialtone-vue${version}/component-documentation.json`);
 const fileList = getFileList(componentsRootFolder);
 
 function getFileList(folder) {
