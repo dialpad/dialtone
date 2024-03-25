@@ -29,6 +29,7 @@
       @selected-emoji="$attrs.onSelectedEmoji"
       @skin-tone="$attrs.onSkinTone"
       @add-media="$attrs.onAddMedia"
+      @paste-media="$attrs.onPasteMedia"
       @notice-close="$attrs.onNoticeClose"
       @cancel="$attrs.onCancel"
     />
