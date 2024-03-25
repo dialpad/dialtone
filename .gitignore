@@ -28,6 +28,10 @@ dist
 .temp
 .cache
 
+# Dialtone icons #
+packages/dialtone-icons/index.js
+packages/dialtone-icons/src/icons
+
 # Dialtone tokens #
 packages/dialtone-tokens/token_transformer
 packages/dialtone-tokens/dist*/*

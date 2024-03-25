@@ -1,19 +1,27 @@
 <template>
-  <component
-    :is="icon"
-    v-if="icon"
-    data-qa="dt-icon"
-    :aria-hidden="ariaLabel ? 'false' : 'true'"
-    :aria-label="ariaLabel"
-    :class="iconSize"
-  />
+  <span :class="['d-icon', iconSize]">
+    <dt-skeleton
+      v-show="!loaded"
+      :shape-option="{ shape: 'circle', size: '100%' }"
+      :aria-label="ariaLabel"
+      class="d-icon__skeleton"
+    />
+    <component
+      :is="icon"
+      v-show="loaded"
+      :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}` : 'dt-icon'"
+      :size="size"
+      :aria-label="ariaLabel"
+      v-bind="$attrs"
+      @loaded="loaded = true"
+    />
+  </span>
 </template>
 
 <script>
-import { ICON_SIZE_MODIFIERS } from './icon_constants';
-import { kebabCaseToPascalCase } from '@/common/utils.js';
-import iconNames from '@dialpad/dialtone-icons/icons.json';
-import iconComponents from '@dialpad/dialtone-icons';
+import { DtSkeleton } from '../skeleton';
+import * as icons from '@dialpad/dialtone-icons/vue2';
+import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -21,6 +29,13 @@ import iconComponents from '@dialpad/dialtone-icons';
  */
 export default {
   name: 'DtIcon',
+
+  components: {
+    DtSkeleton,
+    ...icons,
+  },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -39,7 +54,7 @@ export default {
     name: {
       type: String,
       required: true,
-      validator: (name) => iconNames.includes(name),
+      validator: (name) => ICON_NAMES.includes(name),
     },
 
     /**
@@ -53,7 +68,7 @@ export default {
 
   data () {
     return {
-      icon: null,
+      loaded: false,
     };
   },
 
@@ -62,19 +77,13 @@ export default {
       return ICON_SIZE_MODIFIERS[this.size];
     },
 
-    iconComponentName () {
-      return kebabCaseToPascalCase(`dt-icon-${this.name}`);
+    icon () {
+      return `dt-icon-${this.name}`;
     },
   },
 
-  watch: {
-    name: {
-      immediate: true,
-      async handler () {
-        const iconComponent = await iconComponents[this.iconComponentName]();
-        this.icon = iconComponent.default;
-      },
-    },
+  mounted () {
+    console.log('attrs:', this.$attrs);
   },
 };
 </script>

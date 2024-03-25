@@ -144,26 +144,18 @@
     "node": ">= 12.20"
   },
   "type": "module",
-  "main": "./dist/dialtone-vue.cjs",
   "types": "./dist/types/index.d.ts",
   "module": "./dist/dialtone-vue.js",
   "exports": {
     ".": {
-      "import": {
         "types": "./dist/types/index.d.ts",
         "default": "./dist/dialtone-vue.js"
-      },
-      "require": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/dialtone-vue.umd.cjs"
-      }
     },
     "./css": {
       "style": "./dist/style.css",
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+      "import": "./dist/style.css"
     },
-    "./*": "./*"
+    "./components/*": "./dist/components/*.js"
   },
   "homepage": "https://dialtone.dialpad.com/vue",
   "keywords": [

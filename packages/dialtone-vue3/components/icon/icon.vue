@@ -1,20 +1,32 @@
 <template>
-  <component
-    :is="icon"
-    v-if="icon"
-    data-qa="dt-icon"
-    :aria-hidden="ariaLabel ? 'false' : 'true'"
-    :aria-label="ariaLabel"
-    :class="iconSize"
-  />
+  <span>
+    <dt-skeleton
+      v-if="!loaded"
+      :shape-option="{
+        size: skeletonSize,
+        shape: 'circle',
+      }"
+      :animate="true"
+      :aria-label="ariaLabel"
+      class="d-icon__skeleton"
+    />
+    <component
+      :is="icon"
+      v-show="loaded"
+      data-qa="dt-icon"
+      :size="size"
+      :aria-label="ariaLabel"
+      v-bind="$attrs"
+      @loaded="loaded = true"
+    />
+  </span>
 </template>
 
 <script>
-import { ICON_SIZE_MODIFIERS } from './icon_constants';
-import { kebabCaseToPascalCase } from '@/common/utils.js';
-import iconNames from '@dialpad/dialtone-icons/icons.json';
-import iconComponents from '@dialpad/dialtone-icons';
-import { markRaw } from 'vue';
+import { DtSkeleton } from '../skeleton';
+import * as icons from '@dialpad/dialtone-icons/vue3';
+import { ICON_SIZE_MODIFIERS, ICON_NAMES, ICON_SKELETON_SIZES } from './icon_constants';
+import { defineAsyncComponent } from 'vue';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -22,6 +34,16 @@ import { markRaw } from 'vue';
  */
 export default {
   name: 'DtIcon',
+
+  components: {
+    DtSkeleton,
+    ...Object.keys(icons).reduce((acc, icon) => {
+      acc[icon] = defineAsyncComponent(icons[icon]);
+      return acc;
+    }, {}),
+  },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -40,7 +62,7 @@ export default {
     name: {
       type: String,
       required: true,
-      validator: (name) => iconNames.includes(name),
+      validator: (name) => ICON_NAMES.includes(name),
     },
 
     /**
@@ -54,27 +76,17 @@ export default {
 
   data () {
     return {
-      icon: null,
+      loaded: false,
     };
   },
 
   computed: {
-    iconSize () {
-      return ICON_SIZE_MODIFIERS[this.size];
+    skeletonSize () {
+      return ICON_SKELETON_SIZES[this.size];
     },
 
-    iconComponentName () {
-      return kebabCaseToPascalCase(`dt-icon-${this.name}`);
-    },
-  },
-
-  watch: {
-    name: {
-      immediate: true,
-      async handler () {
-        const iconComponent = await iconComponents[this.iconComponentName]();
-        this.icon = markRaw(iconComponent.default);
-      },
+    icon () {
+      return `dt-icon-${this.name}`;
     },
   },
 };

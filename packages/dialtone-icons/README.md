@@ -14,19 +14,23 @@ Once installed, you can import icons in a couple different ways:
 
 ### In Vue.js
 
-- Individually (preferred):
+- Individually (tree-shakeable):
 
 ```js
-// named import
-import { DtIconAccessibility } from '@dialpad/dialtone-icons';
-// default import
-import DtIconAccessibility from '@dialpad/dialtone-icons/Accessibility.vue';
+// named import (preferred on vite)
+import { DtIconAccessibility } from '@dialpad/dialtone-icons/vue2'; // Vue 2.6+
+import { DtIconAccessibility } from '@dialpad/dialtone-icons/vue3'; // Vue 3+
+
+// default import (preferred on webpack)
+import DtIconAccessibility from '@dialpad/dialtone-icons/vue2/accessibility'; // Vue 2.6+
+import DtIconAccessibility from '@dialpad/dialtone-icons/vue3/accessibility'; // Vue 3+
 ```
 
 - All the icon components:
 
 ```js
-import icons from '@dialpad/dialtone-icons';
+import * as icons from '@dialpad/dialtone-icons/vue2'; // Vue 2.6+
+import * as icons from '@dialpad/dialtone-icons/vue3'; // Vue 3+
 ```
 
 ### In other framework (backbone, jQuery, vanilla)

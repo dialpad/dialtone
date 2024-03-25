@@ -2,6 +2,8 @@
   "name": "dialtone",
   "implicitDependencies": [
     "dialtone-css",
+    "dialtone-icons-vue2",
+    "dialtone-icons-vue3",
     "dialtone-tokens",
     "dialtone-vue2",
     "dialtone-vue3",

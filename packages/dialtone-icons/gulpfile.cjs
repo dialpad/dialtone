@@ -34,17 +34,17 @@ const svgList = glob.sync('./src/**/*.svg').sort();
 //  ================================================================================
 const paths = {
   clean: {
-    dist: './dist/',
+    dist: './dist/**/*',
+    icons: './src/icons/*'
   },
   icons: {
     input: './src/svg/**/*.svg',
     outputSvg: './dist/svg/',
   },
-  utils: './src/utils.js',
   exports: {
     keywords: './src/keywords.json',
     iconsList: './dist/icons.json',
-    index: './dist/index.js',
+    index: './index.js',
   },
 };
 
@@ -65,9 +65,14 @@ const cleanUp = (items) => {
   ]);
 };
 
-//  --  Clean out SVGs
+//  --  Clean out ./dist
 const cleanDist = () => {
   return cleanUp([paths.clean.dist]);
+};
+
+//  --  Clean out ./src/icons
+const cleanIcons = () => {
+  return cleanUp([paths.clean.icons]);
 };
 
 //  ================================================================================
@@ -172,29 +177,19 @@ const updateIconsJSON = function (done) {
 };
 
 const updateExports = function (done) {
-  let importsList = '';
   let exportsList = '';
 
   svgList.forEach(file => {
-    const fileName = file.split('/').slice(-2)[1];
-    const iconName = _.startCase(_.camelCase(fileName.split('.')[0])).replace(/ /g, '');
-    importsList += `export const DtIcon${iconName} = () => import('./components/${iconName}.vue');\n`;
-    exportsList += `  DtIcon${iconName},\n`;
+    const fileName = file.split('/').slice(-2)[1].split('.')[0];
+    const iconName = `dt-icon-${fileName}`.toLowerCase()
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+    exportsList += `export const ${iconName} = () => import('./src/icons/${fileName}.vue');\n`;
   });
 
-  const data = `${importsList}\nexport default {\n${exportsList}};\n`;
+  fs.writeFileSync(paths.exports.index, exportsList);
 
-  fs.writeFileSync(paths.exports.index, data);
-
-  return done();
-};
-
-//  ================================================================================
-//  @@ Copy files to dist
-//  ================================================================================
-const copyFiles = function (done) {
-  src([paths.utils])
-      .pipe(dest('./dist'));
   return done();
 };
 
@@ -206,9 +201,9 @@ const copyFiles = function (done) {
 // default build task
 exports.default = series(
   cleanDist,
+  cleanIcons,
   buildIcons,
   transformSVGtoVue,
   updateIconsJSON,
   updateExports,
-  copyFiles,
 );

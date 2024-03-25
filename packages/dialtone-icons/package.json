@@ -6,16 +6,19 @@
     "build": "gulp"
   },
   "files": [
-    "dist"
+    "dist",
+    "vue2/dist",
+    "vue3/dist"
   ],
   "exports": {
-    ".": "./dist/index.js",
+    "./vue2": "./vue2/dist/dialtone-icons.js",
+    "./vue2/*": "./vue2/dist/components/*.js",
+    "./vue3": "./vue3/dist/dialtone-icons.js",
+    "./vue3/*": "./vue3/dist/components/*.js",
     "./icons.json": "./dist/icons.json",
     "./keywords.json": "./dist/keywords.json",
-    "./*.svg": "./dist/svg/*",
-    "./*.vue": "./dist/components/*"
+    "./*.svg": "./dist/svg/*"
   },
-  "main": "dist/index.js",
   "devDependencies": {
     "del": "^6.1.1",
     "glob": "^10.3.10",
