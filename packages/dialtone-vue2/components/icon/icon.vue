@@ -1,11 +1,11 @@
 <template>
-  <span :class="['d-icon', iconSize]">
+  <span class="d-icon__wrapper">
     <dt-skeleton
       v-if="!loaded"
       :offset="0"
       :shape-option="{ shape: 'circle', size: '100%' }"
       :aria-label="ariaLabel"
-      :class="['d-icon__skeleton', 'd-icon', iconSize]"
+      :class="['d-icon', iconSize]"
     />
     <component
       :is="icon"
