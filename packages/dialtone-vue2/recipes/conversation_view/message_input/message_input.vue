@@ -174,12 +174,14 @@
             <dt-button
               data-qa="dt-message-input-send-btn"
               size="sm"
-              :kind="sendButtonKind"
-              :circle="Boolean(showSend.icon)"
+              kind="default"
               importance="primary"
-              :class="{
-                'message-input-button__disabled d-fc-muted': isSendDisabled,
-              }"
+              :class="[
+                'd-btn--circle',
+                {
+                  'message-input-button__disabled d-fc-muted': isSendDisabled,
+                },
+              ]"
               :aria-label="showSend.ariaLabel"
               :aria-disabled="isSendDisabled"
               @click="onSend"
@@ -543,10 +545,6 @@ export default {
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
     },
-
-    sendButtonKind () {
-      return !this.isSendDisabled ? 'default' : 'muted';
-    },
   },
 
   watch: {
@@ -567,8 +565,7 @@ export default {
 
       const dt = e.dataTransfer;
       const files = Array.from(dt.files);
-      const fileNames = files.map(file => file.name);
-      this.$emit('add-media', fileNames);
+      this.$emit('add-media', files);
     },
 
     onSkinTone (skinTone) {

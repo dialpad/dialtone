@@ -174,8 +174,8 @@ const filterTokens = () => {
         const searchRegex = searchValue.replace(/\(/, '\\(').replace(/\)/, '\\)'); // escape parenthesis
         const regex = new RegExp(searchRegex, 'i');
         if (regex.test(category)) return true;
-        const { name, tokenValue, description } = token;
-        return regex.test(name) || regex.test(tokenValue) || regex.test(description);
+        const { name, tokenValue, keywords } = token;
+        return regex.test(name) || regex.test(tokenValue) || regex.test(keywords);
       });
     });
     if (results.length) newTokens[category] = results;
@@ -214,6 +214,7 @@ const noSearchResults = computed(() => filteredTokensKeys.value.length === 0);
 *            description: ...,
 *            exampleValue: ...,
 *            exampleName: ...,
+*            keywords: ...,
 *          },
 *          ...
 *        ],
@@ -249,11 +250,11 @@ const addTokens = () => {
         Object.entries(tokensJson[theme.value])
           .filter(([key, value]) => CATEGORY_MAP[category].includes(key.split('/')[0]) && value[FORMAT_MAP.CSS])
           .forEach(([_, value]) => {
-            const { name, value: tokenValue, description } = value[FORMAT_MAP[format]] || {};
+            const { name, value: tokenValue, description, keywords } = value[FORMAT_MAP[format]] || {};
             // exclude base tokens
             if (name && !isBaseToken(name)) {
               const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
-              tokens.push({ exampleValue, exampleName, name, tokenValue, description });
+              tokens.push({ exampleValue, exampleName, name, tokenValue, description, keywords });
             }
           });
         if (!processedTokens[format]) processedTokens[format] = {};

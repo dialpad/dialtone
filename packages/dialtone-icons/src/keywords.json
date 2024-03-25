@@ -1058,6 +1058,10 @@
         "audio",
         "sound"
       ],
+      "headset": [
+        "microphone",
+        "headphones"
+      ],
       "laptop-2": [
         "computer"
       ],
