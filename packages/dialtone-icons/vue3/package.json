@@ -9,6 +9,11 @@
     "vite": "^5.0.12",
     "vue": "^3.4.15"
   },
+  "module": "./dist/dialtone-icons.js",
+  "exports": {
+    ".": "./dist/dialtone-icons.js",
+    "./*": "./dist/components/*.js"
+  },
   "type": "module",
   "sideEffects": false
 }
