@@ -579,6 +579,7 @@ export default {
 
     onPaste (e) {
       if (e.clipboardData.files.length) {
+        e.stopPropagation();
         e.preventDefault();
         const files = [...e.clipboardData.files];
         this.$emit('paste-media', files);
