@@ -5,7 +5,7 @@
     role="presentation"
     :class="['d-d-flex', 'd-fd-column', 'd-bar8', 'd-baw1', 'd-ba', 'd-c-text',
              { 'd-bc-bold d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }]"
-    @click="$refs.richTextEditor.focusEditor()"
+    @click="$refs.richTextEditor?.focusEditor()"
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
@@ -614,7 +614,7 @@ export default {
 
     onFocus (event) {
       this.hasFocus = true;
-      this.$refs.richTextEditor.focusEditor();
+      this.$refs.richTextEditor?.focusEditor();
       this.$emit('focus', event);
     },
 

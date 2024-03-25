@@ -60,7 +60,7 @@ export default {
           return true;
         }
 
-        return component.ref?.onKeyDown(props);
+        return component?.ref.onKeyDown(props);
       },
 
       onExit () {
