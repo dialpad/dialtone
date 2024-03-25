@@ -19,7 +19,7 @@ Each commit message consists of a **header**, a **body**, and a **footer**.
 The `header` is mandatory and has a **type**, **scope** (optional) and **subject**:
 
 ```txt
-<type>(<scope - optional>): <subject>
+<type>(<scope - optional>): <jira> <subject>
 ```
 
 ### Type:
@@ -48,14 +48,19 @@ For instance, if the commit affects a specific component, use the component's na
 Note: use lowercase and kebab-case syntax for the scope, that means all in lowercase and separate the words with dash.
 
 ```txt
-feat(select-menu): add leftIcon prop
+feat(select-menu): DLT-123 add leftIcon prop
 ```
 
 In case of multiple scopes, separate them with comma.
 
 ```txt
-fix(combobox, combobox-with-popover): fix keyboard navigation
+fix(combobox, combobox-with-popover): DLT-123 fix keyboard navigation
 ```
+
+### Jira:
+
+The id of the Jira ticket associated with the PR. If there are more than one, they can be added separated by spaces.
+If there is no associated Jira ticket, the word "NO-JIRA" should be used.
 
 ### Subject:
 
@@ -70,19 +75,31 @@ The subject contains a short description of the change:
 #### Commit message with only header
 
 ```txt
-feat: add danger style to Modal component
+feat: DLT-123 add danger style to Modal component
 ```
 
 #### Commit message with scope
 
 ```txt
-feat(modal): add danger style
+feat(modal): DLT-123 add danger style
 ```
 
 #### Commit message with BREAKING CHANGE footer
 
 ```txt
-feat: remove "Mark Pro" font family
+feat: DLT-123 remove "Mark Pro" font family
 
 BREAKING CHANGE: remove "Mark Pro" font family used in Dialtone 5.
+```
+
+#### Commit message with no associated Jira ticket
+
+```txt
+feat(modal): NO-JIRA add danger style
+```
+
+#### Commit message with several associated Jira tickets
+
+```txt
+feat(modal): DLT-123 DP-555 add danger style
 ```
