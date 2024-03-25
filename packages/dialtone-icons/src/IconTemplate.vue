@@ -9,8 +9,6 @@ import { ICON_SIZE_MODIFIERS } from '../constants';
 export default {
   name: '__ICON_NAME__',
 
-  inheritAttrs: false,
-
   props: {
     /**
      * The size of the icon.

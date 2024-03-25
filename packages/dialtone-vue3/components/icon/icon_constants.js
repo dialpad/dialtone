@@ -10,21 +10,9 @@ export const ICON_SIZE_MODIFIERS = {
   800: 'd-icon--size-800',
 };
 
-export const ICON_SKELETON_SIZES = {
-  100: '12px',
-  200: '14px',
-  300: '18px',
-  400: '20px',
-  500: '24px',
-  600: '32px',
-  700: '38px',
-  800: '48px',
-};
-
 export const ICON_NAMES = iconNames;
 
 export default {
   ICON_SIZE_MODIFIERS,
-  ICON_SKELETON_SIZES,
   ICON_NAMES,
 };

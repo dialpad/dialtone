@@ -9,6 +9,7 @@ export const ICON_SIZE_MODIFIERS = {
   700: 'd-icon--size-700',
   800: 'd-icon--size-800',
 };
+
 export const ICON_NAMES = iconNames;
 
 export default {

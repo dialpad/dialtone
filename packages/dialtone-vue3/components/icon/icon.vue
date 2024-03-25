@@ -1,21 +1,18 @@
 <template>
-  <span>
+  <span :class="['d-icon', iconSize]">
     <dt-skeleton
       v-if="!loaded"
-      :shape-option="{
-        size: skeletonSize,
-        shape: 'circle',
-      }"
-      :animate="true"
+      :offset="0"
+      :shape-option="{ shape: 'circle', size: '100%' }"
       :aria-label="ariaLabel"
-      class="d-icon__skeleton"
+      :class="['d-icon__skeleton', 'd-icon', iconSize]"
     />
     <component
       :is="icon"
       v-show="loaded"
-      data-qa="dt-icon"
       :size="size"
       :aria-label="ariaLabel"
+      :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
       v-bind="$attrs"
       @loaded="loaded = true"
     />
@@ -25,7 +22,7 @@
 <script>
 import { DtSkeleton } from '../skeleton';
 import * as icons from '@dialpad/dialtone-icons/vue3';
-import { ICON_SIZE_MODIFIERS, ICON_NAMES, ICON_SKELETON_SIZES } from './icon_constants';
+import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
 import { defineAsyncComponent } from 'vue';
 
 /**
@@ -81,8 +78,8 @@ export default {
   },
 
   computed: {
-    skeletonSize () {
-      return ICON_SKELETON_SIZES[this.size];
+    iconSize () {
+      return ICON_SIZE_MODIFIERS[this.size];
     },
 
     icon () {

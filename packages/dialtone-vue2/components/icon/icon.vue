@@ -1,17 +1,18 @@
 <template>
   <span :class="['d-icon', iconSize]">
     <dt-skeleton
-      v-show="!loaded"
+      v-if="!loaded"
+      :offset="0"
       :shape-option="{ shape: 'circle', size: '100%' }"
       :aria-label="ariaLabel"
-      class="d-icon__skeleton"
+      :class="['d-icon__skeleton', 'd-icon', iconSize]"
     />
     <component
       :is="icon"
       v-show="loaded"
-      :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}` : 'dt-icon'"
       :size="size"
       :aria-label="ariaLabel"
+      :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
       v-bind="$attrs"
       @loaded="loaded = true"
     />
@@ -80,10 +81,6 @@ export default {
     icon () {
       return `dt-icon-${this.name}`;
     },
-  },
-
-  mounted () {
-    console.log('attrs:', this.$attrs);
   },
 };
 </script>
