@@ -4,6 +4,8 @@
     "base/default",
     "base/dark",
     "semantic/dp/default",
+    "semantic/dp/expressive",
+    "semantic/dp/expressive_sm",
     "semantic/dp/dark",
     "semantic/tmo/default",
     "semantic/tmo/dark",
