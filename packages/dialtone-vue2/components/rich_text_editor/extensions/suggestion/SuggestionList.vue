@@ -123,7 +123,7 @@ export default {
           this.command(item);
           return;
         case 'mention':
-          this.command({ name: item.name, id: item.contactId, avatarSrc: item.avatarSrc });
+          this.command({ name: item.name, id: item.id, avatarSrc: item.avatarSrc });
           break;
       }
     },

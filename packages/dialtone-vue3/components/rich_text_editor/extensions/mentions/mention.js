@@ -34,7 +34,7 @@ export const MentionPlugin = Mention.extend({
   },
 
   renderText ({ node }) {
-    return '@ ' + node.attrs.name;
+    return `@${node.attrs.id}`;
   },
 
   renderHTML ({ HTMLAttributes }) {
