@@ -20,9 +20,20 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
 </code-well-header>
 
-```html
-  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
-```
+<code-example-tabs
+htmlCode='
+<kbd class="d-keyboard-shortcut">
+  <svg>...</svg>
+  <svg>...</svg>
+  <span aria-hidden="true" class="d-keyboard-shortcut__item">Ctrl</span>
+  <svg>...</svg>
+  <span aria-hidden="true" class="d-keyboard-shortcut__item">X</span>
+</kbd>
+'
+vueCode='
+<dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
+'
+showHtmlWarning />
 
 ### Inverted
 
@@ -30,9 +41,20 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <dt-keyboard-shortcut inverted shortcut="{cmd}+Ctrl+X" />
 </code-well-header>
 
-```html
-  <dt-keyboard-shortcut inverted shortcut="{cmd}+Ctrl+X" />
-```
+<code-example-tabs
+htmlCode='
+<kbd class="d-keyboard-shortcut d-keyboard-shortcut--inverted">
+  <svg>...</svg>
+  <svg>...</svg>
+  <span aria-hidden="true" class="d-keyboard-shortcut__item d-keyboard-shortcut__item--inverted">Ctrl</span>
+  <svg>...</svg>
+  <span aria-hidden="true" class="d-keyboard-shortcut__item d-keyboard-shortcut__item--inverted">X</span>
+</kbd>
+'
+vueCode='
+<dt-keyboard-shortcut inverted shortcut="{cmd}+Ctrl+X" />
+'
+showHtmlWarning />
 
 ## Vue API
 

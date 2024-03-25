@@ -10,6 +10,34 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 
 Check out our complete icon collection in the [Icon Catalog](/design/icons/#icon-catalog).
 
+<code-well-header>
+    <dt-icon name="inbox" />
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<svg
+  aria-hidden="true"
+  focusable="false"
+  data-name="[ICON_NAME]"
+  class="
+    d-icon
+    d-icon--size-[SIZE]
+    d-icon--[ICON_NAME]
+  "
+  viewBox="0 0 12 12"
+>
+  ...
+</svg>
+'
+vueCode='
+<dt-icon
+  size="500"
+  name="inbox"
+/>
+'
+showHtmlWarning />
+
 ## Usage
 
 ### Changing the Icon
@@ -166,30 +194,6 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 - Icons contrast guidelines are the same as Typography.
 
 - Avoid using icons as clickable elements; instead, use the [Icon Button](/components/button.html#icon-only) for interactive actions.
-
-## HTML
-
-### Base Styles
-
-<code-well-header>
-    <dt-icon name="inbox" />
-</code-well-header>
-
-```html
-<svg
-  aria-hidden="true"
-  focusable="false"
-  data-name="[ICON_NAME]"
-  class="
-    d-icon
-    d-icon--size-[SIZE]
-    d-icon--[ICON_NAME]
-  "
-  viewBox="0 0 12 12"
->
-  ...
-</svg>
-```
 
 ### Sizes
 
