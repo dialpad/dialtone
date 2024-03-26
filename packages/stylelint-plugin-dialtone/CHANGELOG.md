@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.0.1...stylelint-plugin-dialtone/v1.0.2) (2024-03-26)
+
+
+### Bug Fixes
+
+* NO-JIRA release not working with new commit convention ([#235](https://github.com/dialpad/dialtone/issues/235)) ([28ff27c](https://github.com/dialpad/dialtone/commit/28ff27cffac5e751eaf8496b7c716710a0153a61))
+
 ## [1.0.1](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.0.0...stylelint-plugin-dialtone/v1.0.1) (2024-03-20)
 
 
