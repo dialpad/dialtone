@@ -10,6 +10,7 @@
     @drag-over="onDrag"
     @drop="onDrop"
     @keydown.enter.exact="onSend"
+    @paste="onPaste"
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
@@ -461,6 +462,14 @@ export default {
     'add-media',
 
     /**
+     * Fires when media is pasted into the message input
+     *
+     * @event paste-media
+     * @type {Array}
+     */
+    'paste-media',
+
+    /**
      * Fires when cancel button is pressed (only on edit mode)
      *
      * @event cancel
@@ -566,6 +575,15 @@ export default {
       const dt = e.dataTransfer;
       const files = Array.from(dt.files);
       this.$emit('add-media', files);
+    },
+
+    onPaste (e) {
+      if (e.clipboardData.files.length) {
+        e.stopPropagation();
+        e.preventDefault();
+        const files = [...e.clipboardData.files];
+        this.$emit('paste-media', files);
+      }
     },
 
     onSkinTone (skinTone) {
