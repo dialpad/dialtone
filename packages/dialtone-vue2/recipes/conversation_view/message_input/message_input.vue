@@ -5,11 +5,12 @@
     role="presentation"
     :class="['d-d-flex', 'd-fd-column', 'd-bar8', 'd-baw1', 'd-ba', 'd-c-text',
              { 'd-bc-bold d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }]"
-    @click="$refs.richTextEditor.focusEditor()"
+    @click="$refs.richTextEditor?.focusEditor()"
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
     @keydown.enter.exact="onSend"
+    @paste="onPaste"
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
@@ -461,6 +462,14 @@ export default {
     'add-media',
 
     /**
+     * Fires when media is pasted into the message input
+     *
+     * @event paste-media
+     * @type {Array}
+     */
+    'paste-media',
+
+    /**
      * Fires when cancel button is pressed (only on edit mode)
      *
      * @event cancel
@@ -568,6 +577,15 @@ export default {
       this.$emit('add-media', files);
     },
 
+    onPaste (e) {
+      if (e.clipboardData.files.length) {
+        e.stopPropagation();
+        e.preventDefault();
+        const files = [...e.clipboardData.files];
+        this.$emit('paste-media', files);
+      }
+    },
+
     onSkinTone (skinTone) {
       this.$emit('skin-tone', skinTone);
     },
@@ -614,7 +632,7 @@ export default {
 
     onFocus (event) {
       this.hasFocus = true;
-      this.$refs.richTextEditor.focusEditor();
+      this.$refs.richTextEditor?.focusEditor();
       this.$emit('focus', event);
     },
 
