@@ -9,7 +9,23 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 
 <code-well-header bgclass="d-bgc-neutral-white">
-  <video class="d-w60p" src="/assets/images/components/preview--dropdown.mp4" autoplay loop></video>
+<body>
+  <dt-dropdown>
+    <template #anchor>
+      <dt-button>
+        Click to open
+      </dt-button>
+    </template>
+    <template #list>
+      <dt-list-item>
+        Menu item 1
+      </dt-list-item>
+      <dt-list-item>
+        Menu item 2
+      </dt-list-item>
+    </template>
+  </dt-dropdown>
+</body>
 </code-well-header>
 
 <code-example-tabs
@@ -20,6 +36,24 @@ htmlCode='
       <button class="base-button__button d-btn d-btn--primary">
         <span class="d-btn__label base-button__label"> Click to open </span>
       </button>
+    </div>
+  </div>
+</div>
+<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-35" data-popper-placement="bottom" style="...">
+  <div id="dt209" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor210" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="width: auto;">
+    <div class="d-popover__content">
+      <ul id="dt208" class="d-dropdown-list d-py0">
+        <li id="dt216" class="dt-list-item dt-list-item--static" tabindex="-1" role="listitem">
+          <div class="dt-item-layout">
+            <section class="dt-item-layout--content">
+              <div class="dt-item-layout--title">
+                Menu item 1
+              </div>
+            </section>
+          </div>
+        </li>
+        ...
+      </ul>
     </div>
   </div>
 </div>

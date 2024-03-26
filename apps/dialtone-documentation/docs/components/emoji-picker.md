@@ -175,8 +175,18 @@ vueCode='
 <dt-emoji-picker
     :skin-tone="Default"
     skin-selector-button-tooltip-label="Change default skin tone"
-    :tab-set-labels="tabSetLabels[]"
-    :recently-used-emojis="recentlyUsedEmojis[]"
+    :tab-set-labels=["Most recently used", "Smileys and people", ...]
+    :recently-used-emojis=[
+      {
+        name: "thumbs up",
+        ...
+      },
+      {
+        name: "thumbs up: medium-light skin tone",
+        ...
+      }
+      ...
+    ]
     search-results-label="Search results"
     search-no-results-label="Search results"
     search-placeholder-label="Search..."
