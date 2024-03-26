@@ -3,7 +3,7 @@
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
-# Validate commit message in production and staging branches
-if [[ "$branch" = "staging" || "$branch" = "production" ]]; then
+# Validate commit message in staging branch
+if [[ "$branch" = "staging" ]]; then
   pnpm exec commitlint --edit "$1"
 fi
