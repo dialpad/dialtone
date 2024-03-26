@@ -1,3 +1,10 @@
+# [4.12.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.11.0...dialtone-icons/v4.12.0) (2024-03-22)
+
+
+### Features
+
+* added new headset icon and update listed icons ([#224](https://github.com/dialpad/dialtone/issues/224)) ([c1373ec](https://github.com/dialpad/dialtone/commit/c1373ecb15492c7d20f7c2453b3def39457408e2))
+
 # [4.11.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.10.0...dialtone-icons/v4.11.0) (2024-02-27)
 
 
