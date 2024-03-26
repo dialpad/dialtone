@@ -167,30 +167,6 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 
 - Avoid using icons as clickable elements; instead, use the [Icon Button](/components/button.html#icon-only) for interactive actions.
 
-## HTML
-
-### Base Styles
-
-<code-well-header>
-    <dt-icon name="inbox" />
-</code-well-header>
-
-```html
-<svg
-  aria-hidden="true"
-  focusable="false"
-  data-name="[ICON_NAME]"
-  class="
-    d-icon
-    d-icon--size-[SIZE]
-    d-icon--[ICON_NAME]
-  "
-  viewBox="0 0 12 12"
->
-  ...
-</svg>
-```
-
 ### Sizes
 
 <table class="d-table dialtone-doc-table">

@@ -54,7 +54,8 @@ An input is normally paired with a label, but there are times when it can be use
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <label class="d-label" for="Dialtone--InputExample1a">...</label>
   <input class="d-input" id="Dialtone--InputExample1a" type="text" placeholder="..." />
@@ -67,7 +68,13 @@ An input is normally paired with a label, but there are times when it can be use
   <label class="d-label" for="Dialtone--InputExample1b">...</label>
   <input class="d-input" id="Dialtone--InputExample1b" type="text" placeholder="..." disabled />
 </div>
-```
+'
+vueCode='
+<dt-input label="Label" placeholder="Placeholder" />
+<dt-input label="Label" value="Value" />
+<dt-input label="Label" placeholder="Placeholder" disabled />
+'
+showHtmlWarning />
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
@@ -77,7 +84,8 @@ An input is normally paired with a label, but there are times when it can be use
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <label class="d-label" for="Dialtone--TextareaExample1a">...</label>
   <textarea class="d-textarea" id="Dialtone--TextareaExample1a" type="text" placeholder="..."></textarea>
@@ -90,7 +98,13 @@ An input is normally paired with a label, but there are times when it can be use
   <label class="d-label" for="Dialtone--TextareaExample1b">...</label>
   <textarea class="d-textarea" id="Dialtone--TextareaExample1b" type="text" placeholder="..." disabled></textarea>
 </div>
-```
+'
+vueCode='
+<dt-input label="Label" placeholder="Placeholder" type="textarea" />
+<dt-input label="Label" type="textarea" value="Value" />
+<dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
+'
+showHtmlWarning />
 
 ### With Description Text
 
@@ -100,11 +114,16 @@ An input is normally paired with a label, but there are times when it can be use
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <label class="d-label" for="Dialtone--InputExample2">...</label>
 <span class="d-description">...</span>
 <input class="d-input" id="Dialtone--InputExample2" type="text" placeholder="..." />
-```
+'
+vueCode='
+<dt-input label="Label" description="Helpful description text" placeholder="Placeholder"/>
+'
+showHtmlWarning />
 
 <code-well-header>
   <div class="d-w100p">
@@ -112,11 +131,16 @@ An input is normally paired with a label, but there are times when it can be use
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <label class="d-label" for="Dialtone--TextareaExample">...</label>
 <span class="d-description">...</span>
 <textarea class="d-textarea" id="Dialtone--TextareaExample" type="text" placeholder="..."></textarea>
-```
+'
+vueCode='
+<dt-input label="Label" description="Helpful description text" type="textarea" placeholder="Placeholder"/>
+'
+showHtmlWarning />
 
 ### With validation states
 
@@ -130,7 +154,8 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <label class="d-label" for="Dialtone--InputExample3">...</label>
   <input class="d-input d-input--error" id="Dialtone--InputExample3" type="email" placeholder="..." value="..." />
@@ -146,7 +171,13 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   <input class="d-input d-input--warning" id="Dialtone--InputExample5" type="email" placeholder="..." value="..." />
   <span class="d-validation-message d-validation-message--warning">...</span>
 </div>
-```
+'
+vueCode='
+<dt-input label="Label" type="email" value="Value" :messages="[messages.error]"/>
+<dt-input label="Label" type="email" value="Value" :messages="[messages.success]"/>
+<dt-input label="Label" type="email" value="Value" :messages="[messages.warning]"/>
+'
+showHtmlWarning />
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
@@ -156,7 +187,8 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <label class="d-label" for="Dialtone--TextareaExample3">...</label>
   <textarea class="d-textarea d-textarea--error" id="Dialtone--TextareaExample3" type="email" placeholder="..." value="..."></textarea>
@@ -172,7 +204,13 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   <textarea class="d-textarea d-textarea--warning" id="Dialtone--TextareaExample5" type="email" placeholder="..." value="..."></textarea>
   <span class="d-validation-message d-validation-message--warning">...</span>
 </div>
-```
+'
+vueCode='
+<dt-input label="Label" type="textarea" value="Value" :messages="[messages.error]"/>
+<dt-input label="Label" type="textarea" value="Value" :messages="[messages.success]"/>
+<dt-input label="Label" type="textarea" value="Value" :messages="[messages.warning]"/>
+'
+showHtmlWarning />
 
 ### With icons
 
@@ -191,7 +229,8 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <label class="d-label" for="Dialtone--InputExample--IconLeft">Label</label>
   <div class="d-input__wrapper">
@@ -203,10 +242,23 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   <label class="d-label" for="Dialtone--InputExample--IconRight">Label</label>
   <div class="d-input__wrapper">
     <input class="d-input d-input-icon--right" id="Dialtone--InputExample--IconRight" type="text" placeholder="Placeholder" />
-     <span class="d-input-icon d-input-icon--right"><dt-icon name="lock" size="200" /></span>
+    <span class="d-input-icon d-input-icon--right"><dt-icon name="lock" size="200" /></span>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-input label="Left icon" type="text" placeholder="Placeholder">
+  <template #leftIcon>
+    <dt-icon name="send" size="200" />
+  </template>
+</dt-input>
+<dt-input label="Right icon" type="text" placeholder="Placeholder">
+  <template #rightIcon>
+    <dt-icon name="lock" size="200" />
+  </template>
+</dt-input>
+'
+showHtmlWarning />
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
@@ -223,7 +275,8 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <label class="d-label" for="Dialtone--InputExample--IconLeft">...</label>
   <div class="d-input__wrapper">
@@ -231,7 +284,20 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     <textarea class="d-textarea d-input-icon--left" id="Dialtone--InputExample--IconLeft" type="text" placeholder="..."></textarea>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-input label="Left icon" type="textarea" placeholder="Placeholder">
+  <template #leftIcon>
+    <dt-icon name="send" size="200" />
+  </template>
+</dt-input>
+<dt-input label="Right icon" type="textarea" placeholder="Placeholder">
+  <template #rightIcon>
+    <dt-icon name="lock" size="200" />
+  </template>
+</dt-input>
+'
+showHtmlWarning />
 
 ### Input sizes
 
@@ -247,7 +313,8 @@ We offer different sizes for instances in which the interface requires a smaller
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <label>
     <div class="d-label d-label--xs">Extra small</div>
@@ -288,7 +355,15 @@ We offer different sizes for instances in which the interface requires a smaller
     </div>
   </label>
 </div>
-```
+'
+vueCode='
+<dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
+<dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+<dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
+<dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
+<dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
+'
+showHtmlWarning />
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
@@ -300,7 +375,8 @@ We offer different sizes for instances in which the interface requires a smaller
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <label>
     <div class="d-label d-label--xs">Extra small</div>
@@ -341,7 +417,15 @@ We offer different sizes for instances in which the interface requires a smaller
     </div>
   </label>
 </div>
-```
+'
+vueCode='
+<dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
+<dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
+<dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
+<dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
+<dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
+'
+showHtmlWarning />
 
 ### Icon Sizes
 
@@ -372,7 +456,8 @@ You may use different icon sizes in different sized inputs
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
   <div>
     <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:sm Icon:lg</label>
@@ -409,7 +494,30 @@ You may use different icon sizes in different sized inputs
     <textarea class="d-textarea d-input-icon--left d-textarea--lg" id="Dialtone--TextareaExample--IconLeft-lg-md" type="text" placeholder="Placeholder"></textarea>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-input label="Small input with large icon" type="text" placeholder="Placeholder" icon-size="lg" size="sm">
+  <template #leftIcon>
+    <dt-icon name="send" size="200" />
+  </template>
+</dt-input>
+<dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder" icon-size="xl">
+  <template #leftIcon>
+    <dt-icon name="send" size="200" />
+  </template>
+</dt-input>
+<dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" icon-size="md" size="xl">
+  <template #leftIcon>
+    <dt-icon name="send" size="200" />
+  </template>
+</dt-input>
+<dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" icon-size="md" size="lg">
+  <template #leftIcon>
+    <dt-icon name="send" size="200" />
+  </template>
+</dt-input>
+'
+showHtmlWarning />
 
 ## Vue API
 
