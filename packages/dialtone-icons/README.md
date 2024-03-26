@@ -10,10 +10,33 @@ To add Dialtone icons into your project, you can install it via NPM:
 npm install --save @dialpad/dialtone-icons
 ```
 
-Once installed, you can import icons like:
+Once installed, you can import icons in a couple different ways:
+
+### In Vue.js
+
+- Individually (tree-shakeable):
 
 ```js
-import Accessibility from '@dialpad/dialtone-icons/svg/accessibility.svg';
+// named import (preferred on vite)
+import { DtIconAccessibility } from '@dialpad/dialtone-icons/vue2'; // Vue 2.6+
+import { DtIconAccessibility } from '@dialpad/dialtone-icons/vue3'; // Vue 3+
+
+// default import (preferred on webpack)
+import DtIconAccessibility from '@dialpad/dialtone-icons/vue2/accessibility'; // Vue 2.6+
+import DtIconAccessibility from '@dialpad/dialtone-icons/vue3/accessibility'; // Vue 3+
+```
+
+- All the icon components:
+
+```js
+import * as icons from '@dialpad/dialtone-icons/vue2'; // Vue 2.6+
+import * as icons from '@dialpad/dialtone-icons/vue3'; // Vue 3+
+```
+
+### In other framework (backbone, jQuery, vanilla)
+
+```js
+import DtIconAccessibility from '@dialpad/dialtone-icons/svg/accessibility.svg';
 ```
 
 ## Committing
