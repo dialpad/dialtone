@@ -41,14 +41,13 @@
     }
   ],
   "files": [
-    "lib"
+    "lib/dist"
   ],
   "bin": {
     "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
     "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs"
   },
   "type": "module",
-  "main": "./lib/dist/dialtone.min.css",
   "scripts": {
     "build": "gulp",
     "lesshint": "pnpm exec lesshint 'lib/build/less/utilities'",
@@ -60,7 +59,13 @@
     "build:icons": "gulp icons",
     "test:postcss-generator-plugin": "jest --coverage && eslint ."
   },
-  "unpkg": "dist/dialtone.min.css",
+  "unpkg": "./lib/dist/dialtone.min.css",
+  "exports": {
+    ".": {
+      "import": "./lib/dist/dialtone.min.css",
+      "style": "./lib/dist/dialtone.min.css"
+    }
+  },
   "browserslist": [
     "last 1 version",
     "maintained node versions"
