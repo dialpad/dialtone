@@ -66,7 +66,6 @@ export default {
       },
 
       onExit () {
-        console.log('EXIT');
         popup[0].destroy();
         component.destroy();
       },
