@@ -14,30 +14,6 @@ Check out our complete icon collection in the [Icon Catalog](/design/icons/#icon
     <dt-icon name="inbox" />
 </code-well-header>
 
-<code-example-tabs
-htmlCode='
-<svg
-  aria-hidden="true"
-  focusable="false"
-  data-name="[ICON_NAME]"
-  class="
-    d-icon
-    d-icon--size-[SIZE]
-    d-icon--[ICON_NAME]
-  "
-  viewBox="0 0 12 12"
->
-  ...
-</svg>
-'
-vueCode='
-<dt-icon
-  size="500"
-  name="inbox"
-/>
-'
-showHtmlWarning />
-
 ## Usage
 
 ### Changing the Icon

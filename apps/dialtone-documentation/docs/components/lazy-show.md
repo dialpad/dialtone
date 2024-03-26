@@ -36,6 +36,7 @@ vueCode='
 </dt-button>
 <dt-lazy-show
   transition="fade"
+  :show="isShown"
 >
   Im Lazy!
 </dt-lazy-show>
