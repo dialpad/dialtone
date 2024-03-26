@@ -607,6 +607,9 @@ importers:
       chai:
         specifier: ^4.3.7
         version: 4.3.10
+      glob:
+        specifier: ^10.3.10
+        version: 10.3.10
       jsdom:
         specifier: ^24.0.0
         version: 24.0.0
@@ -830,6 +833,9 @@ importers:
       chai:
         specifier: ^4.3.7
         version: 4.3.10
+      glob:
+        specifier: ^10.3.10
+        version: 10.3.10
       jsdom:
         specifier: ^24.0.0
         version: 24.0.0

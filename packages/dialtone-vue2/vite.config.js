@@ -5,15 +5,15 @@ import { fileURLToPath } from 'url';
 import { glob } from 'glob';
 
 function _extractEntryNameFromPath (path, pathPrefix) {
-  const regex = new RegExp(`^${pathPrefix}\\/(.*)\\/index\\.js$`);
-  return path.replace(regex, '$1').replaceAll('_', '-');
+  const regex = new RegExp(`^${pathPrefix}(\\/(\\w+))+\\/index\\.js$`);
+  return path.replace(regex, '$2').replaceAll('_', '-');
 }
 function _getEntries (pathPrefix, globRegex, entrySuffix = '') {
   return glob.sync(globRegex).reduce((entries, path) => {
     let entryName = _extractEntryNameFromPath(path, pathPrefix);
     if (entrySuffix) entryName += `-${entrySuffix}`;
 
-    entries[entryName] = path;
+    entries[`lib/${entryName}`] = path;
 
     return entries;
   }, {});
@@ -21,10 +21,10 @@ function _getEntries (pathPrefix, globRegex, entrySuffix = '') {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const componentEntries = _getEntries('components', 'components/*/index.js');
 const commonEntries = _getEntries('common', 'common/*/index.js');
+const componentEntries = _getEntries('components', 'components/*/index.js');
 const directiveEntries = _getEntries('directives', 'directives/*/index.js', 'directive');
-const recipeEntries = _getEntries('recipes\\/(.*)', 'recipes/**/*/index.js');
+const recipeEntries = _getEntries('recipes', 'recipes/**/index.js');
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -53,11 +53,11 @@ export default defineConfig({
       ],
       output: {
         chunkFileNames: () => 'chunks/[name]-[hash].js',
-        minifyInternalExports: true,
+        minifyInternalExports: false,
       },
       treeshake: 'smallest',
     },
-    minify: true,
+    minify: false,
   },
   plugins: [vue()],
   resolve: {

@@ -147,7 +147,7 @@
   "module": "./dist/dialtone-vue.js",
   "exports": {
     ".": {
-        "types": "./dist/types/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "default": "./dist/dialtone-vue.js"
     },
     "./css": {
@@ -155,7 +155,7 @@
       "import": "./dist/style.css"
     },
     "./component-documentation.json": "./dist/component-documentation.json",
-    "./components/*": "./dist/components/*.js"
+    "./*": "./dist/lib/*.js"
   },
   "homepage": "https://dialtone.dialpad.com/vue3",
   "keywords": [
