@@ -29,9 +29,8 @@ dist
 .cache
 
 # Dialtone icons #
-packages/dialtone-icons/src/icons.json
-packages/dialtone-icons/src/icons/*
-!packages/dialtone-icons/src/icons/index.js
+packages/dialtone-icons/index.js
+packages/dialtone-icons/src/icons
 
 # Dialtone tokens #
 packages/dialtone-tokens/token_transformer

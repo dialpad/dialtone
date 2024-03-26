@@ -1,8 +1,15 @@
-import { getEmojiData, validateCustomEmojiJson } from './emoji';
+import { getEmojiData, validateCustomEmojiJson, unicodeToString } from './emoji';
 import { withValidCustomEmojis, withNotAllRequiredProps, withValidUnicodeEmojis } from './custom-emoji-test.js';
 
 describe('Emoji Tests', () => {
   describe('Validation Tests', () => {
+    describe('When a unicode emoji is passed in to unicodeToString that starts with 00', () => {
+      it('The preceding 0s should be included in the returned value', async () => {
+        const result = unicodeToString('1️⃣');
+        expect(result).toBe('0031-20e3');
+      });
+    });
+
     describe('When a custom emoji json is provided with valid emojis', () => {
       beforeEach(async () => {
         await validateCustomEmojiJson(withValidCustomEmojis);

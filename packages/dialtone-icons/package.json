@@ -1,26 +1,27 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.11.0",
+  "version": "4.12.0",
   "description": "Dialtone icon library",
   "scripts": {
     "build": "gulp"
   },
   "files": [
-    "dist"
+    "dist",
+    "vue2/dist",
+    "vue3/dist"
   ],
   "exports": {
-    "./vue2": {
-      "import": "./dist/dialtone-icon@2.js",
-      "require": "./dist/dialtone-icon@2.cjs"
-    },
-    "./vue3": {
-      "import": "./dist/dialtone-icon@3.js",
-      "require": "./dist/dialtone-icon@3.cjs"
-    },
-    "./*": "./dist/*"
+    "./vue2": "./vue2/dist/dialtone-icons.js",
+    "./vue2/*": "./vue2/dist/components/*.js",
+    "./vue3": "./vue3/dist/dialtone-icons.js",
+    "./vue3/*": "./vue3/dist/components/*.js",
+    "./icons.json": "./dist/icons.json",
+    "./keywords.json": "./dist/keywords.json",
+    "./*.svg": "./dist/svg/*"
   },
   "devDependencies": {
     "del": "^6.1.1",
+    "glob": "^10.3.10",
     "gulp": "^4.0.2",
     "gulp-json-format": "^2.0.0",
     "gulp-rename": "^2.0.0",
@@ -65,5 +66,7 @@
     "Icons",
     "Icon Library"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false
 }

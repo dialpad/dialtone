@@ -7,12 +7,15 @@ let mockProps = {};
 
 describe('DtIcon Tests', () => {
   let wrapper;
+  let icon;
 
   const updateWrapper = async () => {
     wrapper = mount(DtIcon, {
       props: { ...baseProps, ...mockProps },
     });
     await vi.dynamicImportSettled();
+
+    icon = wrapper.find('[data-qa="dt-icon"]');
   };
 
   beforeEach(async () => {
@@ -26,12 +29,12 @@ describe('DtIcon Tests', () => {
   describe('Presentation Tests', () => {
     it('Should render the accessibility icon', () => {
       expect(wrapper).toBeDefined();
-      expect(wrapper.classes().includes('d-icon--accessibility')).toBe(true);
+      expect(icon.classes().includes('d-icon--accessibility')).toBe(true);
     });
 
     describe('When size prop is not set', () => {
       it('Should have default class', () => {
-        expect(wrapper.classes().includes('d-icon--size-500')).toBe(true);
+        expect(icon.classes().includes('d-icon--size-500')).toBe(true);
       });
     });
 
@@ -41,7 +44,7 @@ describe('DtIcon Tests', () => {
 
         await updateWrapper();
 
-        expect(wrapper.classes().includes('d-icon--size-800')).toBe(true);
+        expect(icon.classes().includes('d-icon--size-800')).toBe(true);
       });
     });
   });
@@ -55,11 +58,11 @@ describe('DtIcon Tests', () => {
       });
 
       it('sets the aria-label attribute', () => {
-        expect(wrapper.attributes()['aria-label']).toBe('icon description');
+        expect(icon.attributes()['aria-label']).toBe('icon description');
       });
 
       it('sets aria-hidden to false', () => {
-        expect(wrapper.attributes()['aria-hidden']).toBe('false');
+        expect(icon.attributes()['aria-hidden']).toBe('false');
       });
     });
   });

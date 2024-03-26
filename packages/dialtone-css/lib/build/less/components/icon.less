@@ -23,6 +23,7 @@
   --icon-size-800: var(--dt-icon-size-800);
   --icon-size: var(--icon-size-500);
 
+  display: block;
   flex: none;
   width: var(--icon-size);
   height: var(--icon-size);
@@ -58,5 +59,9 @@
 
   &--size-100 {
     --icon-size: var(--icon-size-100);
+  }
+
+  &__wrapper {
+    display: inline-block;
   }
 }

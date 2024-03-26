@@ -5,11 +5,12 @@
     role="presentation"
     :class="['d-d-flex', 'd-fd-column', 'd-bar8', 'd-baw1', 'd-ba', 'd-c-text',
              { 'd-bc-bold d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }]"
-    @click="$refs.richTextEditor.focusEditor()"
+    @click="$refs.richTextEditor?.focusEditor()"
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
     @keydown.enter.exact="onSend"
+    @paste="onPaste"
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
@@ -174,12 +175,14 @@
             <dt-button
               data-qa="dt-message-input-send-btn"
               size="sm"
-              :kind="sendButtonKind"
-              :circle="Boolean(showSend.icon)"
+              kind="default"
               importance="primary"
-              :class="{
-                'message-input-button__disabled d-fc-muted': isSendDisabled,
-              }"
+              :class="[
+                'd-btn--circle',
+                {
+                  'message-input-button__disabled d-fc-muted': isSendDisabled,
+                },
+              ]"
               :aria-label="showSend.ariaLabel"
               :aria-disabled="isSendDisabled"
               @click="onSend"
@@ -459,6 +462,14 @@ export default {
     'add-media',
 
     /**
+     * Fires when media is pasted into the message input
+     *
+     * @event paste-media
+     * @type {Array}
+     */
+    'paste-media',
+
+    /**
      * Fires when cancel button is pressed (only on edit mode)
      *
      * @event cancel
@@ -543,10 +554,6 @@ export default {
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
     },
-
-    sendButtonKind () {
-      return !this.isSendDisabled ? 'default' : 'muted';
-    },
   },
 
   watch: {
@@ -567,8 +574,16 @@ export default {
 
       const dt = e.dataTransfer;
       const files = Array.from(dt.files);
-      const fileNames = files.map(file => file.name);
-      this.$emit('add-media', fileNames);
+      this.$emit('add-media', files);
+    },
+
+    onPaste (e) {
+      if (e.clipboardData.files.length) {
+        e.stopPropagation();
+        e.preventDefault();
+        const files = [...e.clipboardData.files];
+        this.$emit('paste-media', files);
+      }
     },
 
     onSkinTone (skinTone) {
@@ -617,7 +632,7 @@ export default {
 
     onFocus (event) {
       this.hasFocus = true;
-      this.$refs.richTextEditor.focusEditor();
+      this.$refs.richTextEditor?.focusEditor();
       this.$emit('focus', event);
     },
 
