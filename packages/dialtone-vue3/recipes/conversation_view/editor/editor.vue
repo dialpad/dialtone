@@ -160,7 +160,7 @@
         data-qa="dt-rich-text-editor"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
-        :input-class="`${inputClass} d-ol-none d-my6`"
+        :input-class="`d-ml16 d-ol-none d-my6 ${inputClass}`"
         :output-format="htmlOutputFormat"
         :auto-focus="autoFocus"
         :placeholder="placeholder"
