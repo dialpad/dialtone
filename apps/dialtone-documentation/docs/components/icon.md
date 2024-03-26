@@ -10,10 +10,6 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 
 Check out our complete icon collection in the [Icon Catalog](/design/icons/#icon-catalog).
 
-<code-well-header>
-    <dt-icon name="inbox" />
-</code-well-header>
-
 ## Usage
 
 ### Changing the Icon
