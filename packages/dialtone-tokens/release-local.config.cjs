@@ -22,11 +22,11 @@ module.exports = {
     ['@semantic-release/npm', { npmPublish: false }],
     ['@semantic-release/git', {
       /* eslint-disable-next-line no-template-curly-in-string */
-      message: `chore(release): ${name}` +
+      message: `chore(release): NO-JIRA ${name}` +
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
     ["@semantic-release/exec", {
-      "prepareCmd": "./gradlew setProperties -Pversion=${nextRelease.version} && echo '${nextRelease.version}' > ./dist_ios/VERSION && git add -A && git commit -m 'chore(release): " + name + "/v${nextRelease.version} gradle' && git push",
+      "prepareCmd": "./gradlew setProperties -Pversion=${nextRelease.version} && echo '${nextRelease.version}' > ./dist_ios/VERSION && git add -A && git commit -m 'chore(release): NO-JIRA " + name + "/v${nextRelease.version} gradle' && git push",
       "execCwd": srcRoot,
     }],
   ],
