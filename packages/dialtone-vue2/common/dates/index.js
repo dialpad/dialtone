@@ -8,7 +8,7 @@ import {
   isThisWeek,
   isThisYear,
 } from 'date-fns';
-import { capitalizeFirstLetter } from './utils';
+import { capitalizeFirstLetter } from '../utils';
 
 let dialtoneLocale;
 

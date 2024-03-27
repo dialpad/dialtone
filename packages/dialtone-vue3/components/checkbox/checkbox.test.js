@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtCheckbox from './checkbox.vue';
-import { VALIDATION_MESSAGE_TYPES } from '@/common/constants.js';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from '@/components/checkbox/checkbox_constants.js';
 
 const MOCK_SLOT_LABEL = 'My Slotted Label';

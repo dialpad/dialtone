@@ -82,6 +82,7 @@
     "axe-playwright": "^1.2.3",
     "c8": "^8.0.0",
     "chai": "^4.3.7",
+    "glob": "^10.3.10",
     "jsdom": "^24.0.0",
     "less": "^4.2.0",
     "macos-release": "^3.2.0",
@@ -146,15 +147,15 @@
   "module": "./dist/dialtone-vue.js",
   "exports": {
     ".": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/dialtone-vue.js"
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/dialtone-vue.js"
     },
     "./css": {
       "style": "./dist/style.css",
       "import": "./dist/style.css"
     },
     "./component-documentation.json": "./dist/component-documentation.json",
-    "./components/*": "./dist/components/*.js"
+    "./*": "./dist/lib/*.js"
   },
   "homepage": "https://dialtone.dialpad.com/vue3",
   "keywords": [

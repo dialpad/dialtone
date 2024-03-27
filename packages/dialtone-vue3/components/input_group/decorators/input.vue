@@ -35,7 +35,7 @@ import { RADIO_INPUT_VALIDATION_CLASSES } from '@/components/radio';
 import {
   InputMixin,
   GroupableMixin,
-} from '@/common/mixins/input.js';
+} from '@/common/mixins/input';
 
 export default {
   name: 'InputDecorator',

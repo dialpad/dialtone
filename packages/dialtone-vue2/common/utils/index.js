@@ -2,7 +2,7 @@ import {
   DEFAULT_PREFIX,
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
-} from './constants';
+} from '../constants';
 import Vue from 'vue';
 
 let UNIQUE_ID_COUNTER = 0;

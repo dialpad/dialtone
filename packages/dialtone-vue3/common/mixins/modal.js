@@ -35,9 +35,23 @@ export default {
      * @param {object} el - optional - ref of dom element to trap focus on.
      *  will default to the root node of the vue component
      */
-    async focusFirstElement (el) {
+    async focusFirstElement (el = this.$el) {
       const elToFocus = await this.getFirstFocusableElement(el);
       elToFocus?.focus({ preventScroll: true });
+    },
+
+    async focusElementById (elementId) {
+      await this.$nextTick();
+      const result = this.$el?.querySelector(elementId);
+      if (result) {
+        result.focus();
+        return;
+      }
+
+      // eslint-disable-next-line no-console
+      console.warn('Could not find the element specified in dt-modal prop "initialFocusElement". ' +
+        'Defaulting to focusing the first element.');
+      await this.focusFirstElement();
     },
 
     /**
