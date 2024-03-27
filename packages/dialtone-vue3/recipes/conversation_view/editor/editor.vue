@@ -32,15 +32,16 @@
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               size="xs"
               :aria-label="button.tooltipMessage"
+              :class="{ 'd-btn--icon-only': !button.label }"
               @click="button.onClick()"
             >
               <template #icon>
                 <dt-icon
                   :name="button.iconName"
                   size="200"
-                  class="d-fw-bold"
                 />
               </template>
+              {{ button?.label }}
             </dt-button>
           </template>
         </dt-tooltip>
@@ -159,7 +160,7 @@
         data-qa="dt-rich-text-editor"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
-        :input-class="`${inputClass} d-ol-none d-my6`"
+        :input-class="`d-ml16 d-ol-none d-my6 ${inputClass}`"
         :output-format="htmlOutputFormat"
         :auto-focus="autoFocus"
         :placeholder="placeholder"
@@ -506,11 +507,18 @@ export default {
         buttonGroup: [buttonData],
       }));
       return [
+        { key: 'new', buttonGroup: this.newButtons },
         { key: 'format', buttonGroup: this.textFormatButtons },
         { key: 'alignment', buttonGroup: this.alignmentButtons },
         { key: 'list', buttonGroup: this.listButtons },
         ...individualButtonStacks,
       ].filter(buttonGroupData => buttonGroupData.buttonGroup.length > 0);
+    },
+
+    newButtons () {
+      return [
+        { showBtn: this.showQuickRepliesButton, label: 'Quick reply', selector: 'quickReplies', iconName: 'lightning-bolt', dataQA: 'dt-editor-quick-replies-btn', tooltipMessage: 'Quick Reply', onClick: this.onQuickRepliesClick },
+      ].filter(button => button.showBtn);
     },
 
     textFormatButtons () {
@@ -542,7 +550,6 @@ export default {
       return [
         { showBtn: this.showQuoteButton, selector: 'blockquote', iconName: 'quote', dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
         { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code-block', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
-        { showBtn: this.showQuickRepliesButton, selector: 'quickReplies', iconName: 'lightning-bolt', dataQA: 'dt-editor-quick-replies-btn', tooltipMessage: 'Quick Replies', onClick: this.onQuickRepliesClick },
       ].filter(button => button.showBtn);
     },
 
