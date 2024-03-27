@@ -80,8 +80,9 @@ export default {
         return true;
       }
 
-      if (event.key === 'Enter') {
-        this.enterHandler();
+      if (event.key === 'Enter' || event.key === 'Tab') {
+        event.preventDefault(); // prevent moving the focus for the tab key
+        this.selectHandler();
         event.stopPropagation();
         return true;
       }
@@ -111,7 +112,7 @@ export default {
       }
     },
 
-    enterHandler () {
+    selectHandler () {
       this.selectItem(this.selectedIndex);
     },
 
