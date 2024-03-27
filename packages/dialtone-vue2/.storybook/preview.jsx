@@ -1,5 +1,5 @@
 import '../css/dialtone-globals.less';
-import '@dialpad/dialtone-css/lib/dist/dialtone.css';
+import '@dialpad/dialtone-css';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { DocsContainer } from '@storybook/addon-docs';
 import { useDarkMode } from "storybook-dark-mode";
