@@ -53,7 +53,7 @@ export default defineConfig({
       ],
       output: {
         chunkFileNames: () => 'chunks/[name]-[hash].js',
-        minifyInternalExports: false,
+        minifyInternalExports: true,
       },
       treeshake: 'smallest',
     },
