@@ -187,6 +187,7 @@ const route = useRoute();
 const currentTheme = inject('currentTheme');
 const systemPrefersDark = inject('systemPrefersDark');
 const themes = ['system', 'light', 'dark'];
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 const currentThemeIconName = computed(() => {
   switch (currentTheme.value) {
@@ -225,14 +226,12 @@ const toggleTheme = () => {
 };
 
 onMounted(() => {
-  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
   mediaQuery.addEventListener('change', updateThemeBasedOnSystem);
 
   updateThemeBasedOnSystem();
 });
 
 onUnmounted(() => {
-  window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', updateThemeBasedOnSystem);
+  mediaQuery.removeEventListener('change', updateThemeBasedOnSystem);
 });
 </script>
