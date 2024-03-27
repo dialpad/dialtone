@@ -173,7 +173,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { inject, computed } from 'vue';
+import { onMounted, onUnmounted, inject, computed } from 'vue';
 
 defineProps({
   items: {
@@ -202,17 +202,37 @@ const isActiveLink = (text) => {
   const linkBase = text.toLowerCase();
   return route.path.search(linkBase) !== -1;
 };
+
+const updateThemeBasedOnSystem = () => {
+  if (currentTheme.value === 'system') {
+    document.body.className = systemPrefersDark.matches ? 'dialtone-theme-dark' : 'dialtone-theme-light';
+  }
+};
+
 const toggleTheme = () => {
   const currentIndex = themes.indexOf(currentTheme.value);
   const nextIndex = (currentIndex + 1) % themes.length;
+
   currentTheme.value = themes[nextIndex];
 
   localStorage.setItem('preferredTheme', currentTheme.value);
 
-  if (currentTheme.value === 'system') {
-    document.body.className = systemPrefersDark.matches ? 'dialtone-theme-dark' : 'dialtone-theme-light';
-  } else {
+  updateThemeBasedOnSystem();
+
+  if (currentTheme.value !== 'system') {
     document.body.className = `dialtone-theme-${currentTheme.value}`;
   }
 };
+
+onMounted(() => {
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  mediaQuery.addEventListener('change', updateThemeBasedOnSystem);
+
+  updateThemeBasedOnSystem();
+});
+
+onUnmounted(() => {
+  window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', updateThemeBasedOnSystem);
+});
 </script>
