@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
+    sourcemap: true,
     lib: {
       entry: {
         'dialtone-vue': resolve(__dirname, './index.js'),

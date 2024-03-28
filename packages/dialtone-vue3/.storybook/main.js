@@ -11,6 +11,17 @@ const config = {
   },
   docs: {
     autodocs: false
-  }
+  },
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    return mergeConfig(config, {
+      build: {
+        sourcemap: true,
+      },
+      css: {
+        devSourcemap: true,
+      },
+    });
+  },
 };
 export default config;
