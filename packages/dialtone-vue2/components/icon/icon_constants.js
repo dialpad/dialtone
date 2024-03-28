@@ -1,3 +1,4 @@
+import iconNames from '@dialpad/dialtone-icons/icons.json';
 export const ICON_SIZE_MODIFIERS = {
   100: 'd-icon--size-100',
   200: 'd-icon--size-200',
@@ -9,6 +10,9 @@ export const ICON_SIZE_MODIFIERS = {
   800: 'd-icon--size-800',
 };
 
+export const ICON_NAMES = iconNames;
+
 export default {
   ICON_SIZE_MODIFIERS,
+  ICON_NAMES,
 };

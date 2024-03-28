@@ -74,7 +74,7 @@
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import DtListItem from './list_item.vue';
-import KeyboardNavigation from '../../common/mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',

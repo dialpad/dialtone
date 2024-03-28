@@ -22,7 +22,7 @@
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtIcon from '@/components/icon/icon.vue';
-import { safeConcatStrings, extractVueListeners } from '@/common/utils.js';
+import { safeConcatStrings, extractVueListeners } from '@/common/utils';
 
 export default {
   name: 'DtRecipeGroupRow',

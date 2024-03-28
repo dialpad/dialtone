@@ -29,7 +29,7 @@ import * as EmojiStories from './emoji.stories';
 ### Import
 
 ```jsx
-import { DtEmoji } from '@dialpad/dialtone-vue/emoji';
+import { DtEmoji } from '@dialpad/dialtone-vue';
 ```
 
 ### Smile
@@ -65,10 +65,10 @@ PNGs for emojis 16px and under, and the premium SVGs for emoji's larger than 16p
 emojis and large emojis with the following functions during initialization of your app:
 
 ```js
-// Note you must import from @dialpad/dialtone-vue/emoji. The emoji module is not included in the main
+// Note you must import from @dialpad/dialtone-vue. The emoji module is not included in the main
 // @dialpad/dialtone-vue package due to it's large size. You may wish to consider dynamically importing
 // the emoji module in your application.
-import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@dialpad/dialtone-vue/emoji'
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@dialpad/dialtone-vue'
 
 // 16px and smaller
 setEmojiAssetUrlSmall('https://my.example.website.com/joypixels/svg/unicode/32/', '.png')
@@ -85,7 +85,7 @@ It's possible to provide a custom emoji JSON file ([with this structure](#json-s
 that aren't part of the Unicode standard. To do so, first specify where the assets are and set the raw JSON:
 
 ```js
-import { setCustomEmojiUrl, setCustomEmojiJson } from '@dialpad/dialtone-vue/emoji'
+import { setCustomEmojiUrl, setCustomEmojiJson } from '@dialpad/dialtone-vue'
 // Your local custom emoji JSON file
 import customEmojiJson from './data/custom-emoji.json'
 
@@ -102,7 +102,7 @@ setCustomEmojiJson(customEmojiJson);
 </template>
 
 <script>
-import { DtEmoji } from '@dialpad/dialtone-vue/emoji';
+import { DtEmoji } from '@dialpad/dialtone-vue';
 
 export default {
   components: { DtEmoji },
@@ -170,7 +170,7 @@ You may access the full list of supported native emojis and all emoji metadata b
 executing it:
 
 ```js
-import { getEmojiData } from 'dialtone-vue/emoji'
+import { getEmojiData } from 'dialtone-vue'
 const emojiData = getEmojiData();
 ```
 
@@ -187,7 +187,7 @@ If you have setup a custom emoji json, you can get the resulting json (from the 
 with:
 
 ```js
-import { getEmojiData } from 'dialtone-vue/emoji'
+import { getEmojiData } from 'dialtone-vue'
 ```
 
 ## Accessibility

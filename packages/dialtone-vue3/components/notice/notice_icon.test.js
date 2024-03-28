@@ -26,7 +26,7 @@ describe('DtNoticeIcon tests', () => {
 
   const _setChildWrappers = async () => {
     await vi.dynamicImportSettled();
-    icon = wrapper.findComponent(DtIcon);
+    icon = wrapper.find('[data-qa="dt-icon"]');
   };
 
   beforeEach(async function () {

@@ -47,8 +47,11 @@ Example: A down arrow icon button that opens a dropdown settings menu, set the a
 
 ### Import
 
+In order for dt-icon to be tree-shakeable, import it as following, depending on the bundler your application is using.
+
 ```js
-import { DtIcon } from '@dialpad/dialtone-vue';
+import { DtIcon } from '@dialpad/dialtone-vue'; // vite
+import { DtIcon } from '@dialpad/dialtone-vue/components/icon'; // webpack
 ```
 
 ### Default

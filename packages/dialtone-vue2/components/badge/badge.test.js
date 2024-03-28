@@ -129,7 +129,7 @@ describe('DtBadge Tests', () => {
         });
 
         it('renders ai icon in iconLeft slot by default', () => {
-          iconLeft = iconLeftWrapper.findComponent({ name: 'DtIcon' });
+          iconLeft = iconLeftWrapper.find('[data-qa="dt-icon"]');
 
           expect(iconLeft.attributes('data-name') === 'Dialpad Ai').toBe(true);
         });

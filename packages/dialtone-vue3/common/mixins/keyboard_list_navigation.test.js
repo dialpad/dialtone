@@ -26,7 +26,6 @@ describe('Keyboard Navigation Mixin Tests', () => {
       attrs,
       slots,
       listeners,
-
     });
   };
 

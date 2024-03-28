@@ -65,7 +65,7 @@
  * @see https://dialtone.dialpad.com/components/item_layout.html
  */
 <script>
-import { hasSlotContent } from '@/common/utils.js';
+import { hasSlotContent } from '@/common/utils';
 
 export default {
   name: 'DtItemLayout',

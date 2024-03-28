@@ -78,7 +78,7 @@ If new component:
   - [ ] from the index.js in the root (either `packages/dialtone-vue2` or `packages/dialtone-vue3`).
 - [ ] I have added the styles for the new component to the `packages/dialtone-css` package.
 - [ ] I have created a page for the new component on the documentation site in `apps/dialtone-documentation`.
-- [ ] I have added the new component to `common/components_list.cjs` in `packages/dialtone-vue2` and `packages/dialtone-vue3`
+- [ ] I have added the new component to `common/components_list.cjs`
 - [ ] I have created a component story in storybook
 - [ ] I have created story / stories for any relevant component variants in storybook
 - [ ] I have created a docs page for the component in storybook.

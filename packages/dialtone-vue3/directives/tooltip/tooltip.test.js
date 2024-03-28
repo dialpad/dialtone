@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { DtTooltipDirective } from './tooltip.js';
-import { getUniqueString } from '@/common/utils.js';
+import { getUniqueString } from '@/common/utils';
 
 import {
   TOOLTIP_DIRECTIONS,

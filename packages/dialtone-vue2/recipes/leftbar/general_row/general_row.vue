@@ -141,7 +141,7 @@ import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
-import { safeConcatStrings } from '@/common/utils.js';
+import { safeConcatStrings } from '@/common/utils';
 
 export default {
   name: 'DtRecipeGeneralRow',

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import DtIcon from './icon.vue';
+import { DtIcon } from './';
 
 export default {
   name: 'IconDefault',

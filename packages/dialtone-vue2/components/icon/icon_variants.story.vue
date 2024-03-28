@@ -19,25 +19,16 @@
 </template>
 
 <script>
-import DtIcon from './icon.vue';
+import { DtIcon } from './';
 import { categories } from '@dialpad/dialtone-icons/keywords.json';
 
 export default {
   name: 'IconDefault',
+
   components: { DtIcon },
+
   data () {
     return {
-      sizes: [
-        '100',
-        '200',
-        '300',
-        '400',
-        '500',
-        '600',
-        '700',
-        '800',
-      ],
-
       categories,
     };
   },

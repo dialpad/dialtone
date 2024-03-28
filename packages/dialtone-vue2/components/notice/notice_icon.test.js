@@ -26,7 +26,7 @@ describe('DtNoticeIcon tests', () => {
 
     await vi.dynamicImportSettled();
 
-    icon = wrapper.findComponent(DtIcon);
+    icon = wrapper.find('[data-qa="dt-icon"]');
   };
 
   beforeAll(() => {

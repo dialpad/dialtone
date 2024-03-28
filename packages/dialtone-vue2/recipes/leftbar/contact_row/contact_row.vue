@@ -58,7 +58,7 @@
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
-import { safeConcatStrings } from '@/common/utils.js';
+import { safeConcatStrings } from '@/common/utils';
 
 export default {
   name: 'DtRecipeContactRow',

@@ -89,7 +89,7 @@ import {
   getUniqueString,
   getValidationState,
 } from '@/common/utils';
-import { MessagesMixin } from '../../common/mixins/input.js';
+import { MessagesMixin } from '@/common/mixins/input';
 import { optionsValidator } from './select_menu_validators.js';
 import { DtValidationMessages } from '../validation_messages';
 

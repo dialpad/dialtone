@@ -60,7 +60,7 @@
 import Prism from 'prismjs';
 import CopyButton from './CopyButton.vue';
 import { ref } from 'vue';
-import { getUniqueString } from '@dialtone/common/utils';
+import { getUniqueString } from '@workspaceRoot/common/utils';
 
 const props = defineProps({
   htmlCode: {

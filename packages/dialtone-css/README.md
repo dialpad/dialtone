@@ -16,13 +16,13 @@ npm install @dialpad/dialtone-css@latest
 - CSS/LESS:
 
 ```less
-@import "node_modules/@dialpad/dialtone-css/lib/dist/css/dialtone.min.css";
+@import "node_modules/@dialpad/dialtone-css/lib/dist/dialtone.min.css";
 ```
 
 - Javascript:
 
 ```js
-import '@dialpad/dialtone-css/lib/dist/css/dialtone.min.css';
+import '@dialpad/dialtone-css/lib/dist/dialtone.min.css';
 ```
 
 ### Add dialtone's theme class to the `<body>`

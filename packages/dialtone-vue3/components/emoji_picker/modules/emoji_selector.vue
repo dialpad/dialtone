@@ -102,7 +102,7 @@
 
 <script setup>
 // eslint-disable max-len
-import { emojisGrouped as emojis } from '@/components/emoji_picker/emojis';
+import { emojisGrouped as emojis } from '@dialpad/dialtone-emojis';
 import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
 import { CDN_URL, ARROW_KEYS } from '@/components/emoji_picker/emoji_picker_constants';
 import { useKeyboardNavigation } from '@/components/emoji_picker/composables/useKeyboardNavigation';

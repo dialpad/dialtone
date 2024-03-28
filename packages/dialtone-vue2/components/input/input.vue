@@ -110,14 +110,14 @@
 </template>
 
 <script>
-import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '@/common/constants.js';
+import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { INPUT_TYPES, INPUT_SIZES } from './input_constants';
 import {
   getUniqueString,
   getValidationState,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
-import { MessagesMixin } from '../../common/mixins/input.js';
+import { MessagesMixin } from '@/common/mixins/input';
 
 /**
  * An input field is an input control that allows users to enter alphanumeric information.

@@ -1,4 +1,4 @@
-import { getEmojiData, validateCustomEmojiJson, unicodeToString } from '@/common/emoji';
+import { getEmojiData, validateCustomEmojiJson, unicodeToString } from './emoji';
 import { withValidCustomEmojis, withNotAllRequiredProps, withValidUnicodeEmojis } from './custom-emoji-test.js';
 
 describe('Emoji Tests', () => {

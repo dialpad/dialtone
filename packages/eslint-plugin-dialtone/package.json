@@ -41,6 +41,9 @@
   },
   "license": "MIT",
   "main": "./lib/index.js",
+  "files": [
+    "lib"
+  ],
   "exports": "./lib/index.js",
   "scripts": {
     "lint": "run-s lint:docs lint:code",
