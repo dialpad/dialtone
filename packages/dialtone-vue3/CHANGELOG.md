@@ -1,3 +1,17 @@
+# [3.118.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.117.0...dialtone-vue3/v3.118.0) (2024-03-28)
+
+
+### Bug Fixes
+
+* **Editor:** DLT-1593 add quick replies icon to editor ([#225](https://github.com/dialpad/dialtone/issues/225)) ([f4a495f](https://github.com/dialpad/dialtone/commit/f4a495fe1c7f79baa34def6a515e09145e98eacf))
+* **Emoji Row:** DLT-1677 correct emoji reaction size ([#241](https://github.com/dialpad/dialtone/issues/241)) ([4f8a539](https://github.com/dialpad/dialtone/commit/4f8a539e2c4eb2ba5c40610b409c77ff358d3a10))
+
+
+### Features
+
+* NO-JIRA output / use sourcemaps in our packages / apps ([#242](https://github.com/dialpad/dialtone/issues/242)) ([eacdc17](https://github.com/dialpad/dialtone/commit/eacdc1713d985fe33ef71559a6d3ddc4b9c277a0))
+* **Suggestions:** DLT-1673 select suggestion with Tab ([#239](https://github.com/dialpad/dialtone/issues/239)) ([ac00c23](https://github.com/dialpad/dialtone/commit/ac00c235f9cfc5fb266d758c795887b6975e7493))
+
 # [3.117.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.116.1...dialtone-vue3/v3.117.0) (2024-03-26)
 
 
