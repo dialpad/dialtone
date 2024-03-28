@@ -1,3 +1,15 @@
+## [1.27.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.1...dialtone-tokens/v1.27.2) (2024-03-26)
+
+
+### Bug Fixes
+
+* NO-JIRA release not working with new commit convention ([#235](https://github.com/dialpad/dialtone/issues/235)) ([28ff27c](https://github.com/dialpad/dialtone/commit/28ff27cffac5e751eaf8496b7c716710a0153a61))
+
+
+### Documentation
+
+* add tokens keywords ([#220](https://github.com/dialpad/dialtone/issues/220)) ([20125f4](https://github.com/dialpad/dialtone/commit/20125f421352fe2ccef2f092bb16c4a279d76b31))
+
 ## [1.27.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.0...dialtone-tokens/v1.27.1) (2024-03-18)
 
 

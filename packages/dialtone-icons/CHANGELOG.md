@@ -1,3 +1,10 @@
+## [4.12.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.12.0...dialtone-icons/v4.12.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* NO-JIRA release not working with new commit convention ([#235](https://github.com/dialpad/dialtone/issues/235)) ([28ff27c](https://github.com/dialpad/dialtone/commit/28ff27cffac5e751eaf8496b7c716710a0153a61))
+
 # [4.12.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.11.0...dialtone-icons/v4.12.0) (2024-03-22)
 
 

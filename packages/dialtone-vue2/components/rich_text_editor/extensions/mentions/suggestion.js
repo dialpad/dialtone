@@ -10,6 +10,8 @@ export default {
   // This will also activate the mention plugin on the editor
   // items: ({ query }) => { return [] },
 
+  allowSpaces: true,
+
   render: () => {
     let component;
     let popup;

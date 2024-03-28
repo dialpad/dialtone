@@ -1,3 +1,25 @@
+# [9.25.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.24.0...dialtone/v9.25.0) (2024-03-26)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1672 allow spaces in mention suggestions ([#236](https://github.com/dialpad/dialtone/issues/236)) ([ca796d9](https://github.com/dialpad/dialtone/commit/ca796d960738b5cc837879edeb08ff35174ccf58))
+* **Message Input:** send complete files on add media ([#230](https://github.com/dialpad/dialtone/issues/230)) ([15c609f](https://github.com/dialpad/dialtone/commit/15c609fe5b66bc6ed71d42514feaf517f467b0bb))
+* **Message Input:** update mention suggestions rendering ([#229](https://github.com/dialpad/dialtone/issues/229)) ([5535e1f](https://github.com/dialpad/dialtone/commit/5535e1fac39f9b20398b03442645986760e36ac2))
+* NO-JIRA release not working with new commit convention ([#235](https://github.com/dialpad/dialtone/issues/235)) ([28ff27c](https://github.com/dialpad/dialtone/commit/28ff27cffac5e751eaf8496b7c716710a0153a61))
+* rich text editor warning/error cleanup ([#227](https://github.com/dialpad/dialtone/issues/227)) ([a60badb](https://github.com/dialpad/dialtone/commit/a60badba71b6ca93a8d9721875e0f3e6576f3479))
+
+
+### Documentation
+
+* DLT-1575 use CodeExampleTabs from Icon to Lazy show ([#232](https://github.com/dialpad/dialtone/issues/232)) ([57f0b98](https://github.com/dialpad/dialtone/commit/57f0b98224cf2b578004b13cd02cadab1680c1f2))
+* NO-JIRA fix example in blog post ([#234](https://github.com/dialpad/dialtone/issues/234)) ([bb7b28d](https://github.com/dialpad/dialtone/commit/bb7b28d23f2b392d87325a7f88ef7198ec45474b))
+
+
+### Features
+
+* **Message Input:** DLT-1665 add paste event ([#233](https://github.com/dialpad/dialtone/issues/233)) ([d35bf6e](https://github.com/dialpad/dialtone/commit/d35bf6e84dd46c7bd0f56195d5fad448be1912ba))
+
 # [9.24.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.23.0...dialtone/v9.24.0) (2024-03-22)
 
 
