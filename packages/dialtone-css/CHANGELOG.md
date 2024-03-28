@@ -1,3 +1,10 @@
+## [8.29.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.2...dialtone-css/v8.29.3) (2024-03-28)
+
+
+### Bug Fixes
+
+* **Typography:** DLT-1676 add font-smoothing ([#240](https://github.com/dialpad/dialtone/issues/240)) ([366c974](https://github.com/dialpad/dialtone/commit/366c9741db7291ca333243636a06e694de6d52b2))
+
 ## [8.29.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.1...dialtone-css/v8.29.2) (2024-03-26)
 
 
