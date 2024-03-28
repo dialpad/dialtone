@@ -1,5 +1,5 @@
 <template>
-  <span :class="['d-emoji', 'd-icon', emojiSize]">
+  <span class="d-emoji__wrapper">
     <dt-skeleton
       v-show="imgLoading && showSkeleton"
       :offset="0"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon';
 import {
   codeToEmojiData,
   stringToUnicode,
@@ -31,7 +31,7 @@ import {
   emojiFileExtensionLarge,
   customEmojiAssetUrl,
 } from '@/common/emoji';
-import { DtSkeleton } from '../skeleton';
+import { DtSkeleton } from '@/components/skeleton';
 
 /**
  * Renders an emoji from a shortcode such as :smile: or unicode character such as 😄
