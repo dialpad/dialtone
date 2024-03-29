@@ -110,7 +110,7 @@
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone-css": "7.30.0 || workspace:*",
+    "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "vue": ">=2.6"
   },
