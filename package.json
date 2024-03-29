@@ -67,58 +67,40 @@
       }
     }
   },
+  "files": [
+    "dist"
+  ],
   "resolutions": {
     "@dialpad/dialtone-css>postcss-preset-env": "^7.0.0",
     "@dialpad/dialtone-css>stylelint": "^15.10.1"
   },
-  "files": [
-    "dist",
-    "CHANGELOG.json"
-  ],
-  "bin": {
-    "dialtone-health-check": "./dist/css/js/dialtone_health_check/index.cjs",
-    "dialtone-migration-helper": "./dist/css/js/dialtone_migration_helper/index.mjs"
+  "peerDependencies": {
+    "@dialpad/dialtone-css": "workspace:^",
+    "@dialpad/eslint-plugin-dialtone": "workspace:^",
+    "@dialpad/dialtone-icons": "workspace:^",
+    "@dialpad/stylelint-plugin-dialtone": "workspace:^",
+    "@dialpad/dialtone-tokens": "workspace:^",
+    "@dialpad/dialtone-vue": "^2||^3"
   },
-  "exports": {
-    "./css": {
-      "style": "./dist/css/dialtone.min.css",
-      "import": "./dist/css/dialtone.min.css",
-      "require": "./dist/css/dialtone.min.css"
+  "peerDependenciesMeta": {
+    "@dialpad/dialtone-css": {
+      "optional": true
     },
-    "./vue2": {
-      "import": {
-        "types": "./dist/vue2/types/index.d.ts",
-        "default": "./dist/vue2/dialtone-vue.js"
-      },
-      "require": {
-        "types": "./dist/vue2/types/index.d.ts",
-        "default": "./dist/vue2/dialtone-vue.cjs"
-      }
+    "@dialpad/eslint-plugin-dialtone": {
+      "optional": true
     },
-    "./vue2/css": {
-      "style": "./dist/vue2/style.css",
-      "import": "./dist/vue2/style.css",
-      "require": "./dist/vue2/style.css"
+    "@dialpad/dialtone-icons": {
+      "optional": true
     },
-    "./vue3": {
-      "import": {
-        "types": "./dist/vue3/types/index.d.ts",
-        "default": "./dist/vue3/dialtone-vue.js"
-      },
-      "require": {
-        "types": "./dist/vue3/types/index.d.ts",
-        "default": "./dist/vue3/dialtone-vue.cjs"
-      }
+    "@dialpad/stylelint-plugin-dialtone": {
+      "optional": true
     },
-    "./vue3/css": {
-      "style": "./dist/vue3/style.css",
-      "import": "./dist/vue3/style.css",
-      "require": "./dist/vue3/style.css"
+    "@dialpad/dialtone-tokens": {
+      "optional": true
     },
-    "./eslint-plugin": "./dist/eslint-plugin/index.js",
-    "./stylelint-plugin": "./dist/stylelint-plugin/index.js",
-    "./CHANGELOG.json": "./CHANGELOG.json",
-    "./*": "./dist/*"
+    "@dialpad/dialtone-vue": {
+      "optional": true
+    }
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [
@@ -132,5 +114,8 @@
     "Component Library"
   ],
   "license": "MIT",
-  "repository": "git@github.com:dialpad/dialtone.git"
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dialpad/dialtone.git"
+  }
 }

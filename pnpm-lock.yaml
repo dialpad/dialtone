@@ -13,6 +13,25 @@ packageExtensionsChecksum: b1881ef95d6b1b1fbf91f31a46f88bcb
 importers:
 
   .:
+    dependencies:
+      '@dialpad/dialtone-css':
+        specifier: workspace:^
+        version: link:packages/dialtone-css
+      '@dialpad/dialtone-icons':
+        specifier: workspace:^
+        version: link:packages/dialtone-icons
+      '@dialpad/dialtone-tokens':
+        specifier: workspace:^
+        version: link:packages/dialtone-tokens
+      '@dialpad/dialtone-vue':
+        specifier: ^2 || ^3
+        version: link:packages/dialtone-vue3
+      '@dialpad/eslint-plugin-dialtone':
+        specifier: workspace:^
+        version: link:packages/eslint-plugin-dialtone
+      '@dialpad/stylelint-plugin-dialtone':
+        specifier: workspace:^
+        version: link:packages/stylelint-plugin-dialtone
     devDependencies:
       '@commitlint/cli':
         specifier: ^18.4.3

@@ -24,15 +24,61 @@ const paths = {
     dist: './dist/**',
   },
   input: {
-    css: './packages/dialtone-css/lib/dist/**/*',
-    icons: './packages/dialtone-icons/dist/**/*',
-    tokens: './packages/dialtone-tokens/dist/**/*',
-    vue2: './packages/dialtone-vue2/dist/**/*',
-    vue3: './packages/dialtone-vue3/dist/**/*',
-    'eslint-plugin': './packages/eslint-plugin-dialtone/lib/**/*',
-    'stylelint-plugin': './packages/stylelint-plugin-dialtone/lib/**/*',
+    root: './package.json',
+    css: {
+      base: './packages/dialtone-css',
+      files: [
+        './packages/dialtone-css/lib/dist/**',
+        './packages/dialtone-css/package.json'
+      ]
+    },
+    icons: {
+      base: './packages/dialtone-icons',
+      files: [
+        './packages/dialtone-icons/dist/**',
+        './packages/dialtone-icons/vue2/dist/**',
+        './packages/dialtone-icons/vue3/dist/**',
+        './packages/dialtone-icons/package.json'
+      ]
+    },
+    tokens: {
+      base: './packages/dialtone-tokens',
+      files: [
+        './packages/dialtone-tokens/dist/**',
+        './packages/dialtone-tokens/package.json',
+      ]
+    },
+    vue2: {
+      base: './packages/dialtone-vue2',
+      files: [
+        './packages/dialtone-vue2/dist/**',
+        './packages/dialtone-vue2/package.json',
+      ],
+    },
+    vue3: {
+      base: './packages/dialtone-vue3',
+      files: [
+        './packages/dialtone-vue3/dist/**',
+        './packages/dialtone-vue3/package.json',
+      ],
+    },
+    'eslint-plugin': {
+      base: './packages/eslint-plugin-dialtone',
+      files: [
+        './packages/eslint-plugin-dialtone/lib/**',
+        './packages/eslint-plugin-dialtone/package.json',
+      ],
+    },
+    'stylelint-plugin': {
+      base: './packages/stylelint-plugin-dialtone',
+      files: [
+        './packages/stylelint-plugin-dialtone/lib/**',
+        './packages/stylelint-plugin-dialtone/package.json',
+      ],
+    },
   },
   output: {
+    root: './dist',
     css: './dist/css',
     icons: './dist/icons',
     tokens: './dist/tokens',
@@ -70,7 +116,10 @@ const cleanDist = () => {
 //  ================================================================================
 const copyFiles = function (done) {
   Object.keys(paths.input).forEach(name => {
-    src(paths.input[name])
+    const base = paths.input[name].base || '.';
+    const inputGlobs = paths.input[name].files || paths.input[name];
+
+    src(inputGlobs, {base})
       .pipe(dest(paths.output[name]));
   });
   return done();
