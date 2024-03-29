@@ -492,7 +492,7 @@
           "x": "{size.0}",
           "y": "{size.0}",
           "blur": "{size.0}",
-          "spread": "{size.300}",
+          "spread": "{size.200} + {size.100}",
           "color": "{color.border.focus}",
           "type": "dropShadow"
         }
@@ -505,7 +505,7 @@
           "x": "{size.0}",
           "y": "{size.0}",
           "blur": "{size.0}",
-          "spread": "{size.200} + {size.100}",
+          "spread": "{size.200}",
           "color": "{color.border.focus}",
           "type": "innerShadow"
         }
