@@ -7,14 +7,14 @@ description: Utilities for controlling an element's outline.
 
 Use `d-ol-{focusring|focusring-inset|none}` to change an elements' outline.
 
-<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-bold d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-fl-center d-p16 d-bgc-bold d-code--sm d-ol-focusring">
+<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-bold d-w100p d-hmn102" custom>
+  <div class="d-fl-center d-p16 d-bgc-primary d-code--sm d-ol-focusring">
     .d-ol-focusring
   </div>
-  <div class="d-fl-center d-p16 d-bgc-bold d-code--sm d-ol-focusring-inset">
+  <div class="d-fl-center d-p16 d-bgc-primary d-code--sm d-ol-focusring-inset">
     .d-ol-focusring-inset
   </div>
-  <div class="d-fl-center d-p16 d-bgc-bold d-code--sm d-ol-none">
+  <div class="d-fl-center d-p16 d-bgc-primary d-code--sm d-ol-none">
     .d-ol-none
   </div>
 </code-well-header>
