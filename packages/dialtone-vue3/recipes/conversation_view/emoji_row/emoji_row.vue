@@ -106,52 +106,53 @@ export default {
   }
 
   &__reaction {
-  --emoji-item-color-inset-shadow: transparent;
-  --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-default);
-  --emoji-item-color-background: var(--dt-action-color-background-muted-hover);
+    --emoji-item-color-inset-shadow: transparent;
+    --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-default);
+    --emoji-item-color-background: var(--dt-action-color-background-muted-hover);
 
-  padding: var(--dt-space-300) var(--dt-space-400);
-  border-radius: var(--dt-size-radius-pill);
-  border: 0;
-  color: var(--emoji-item-color-foreground);
-  background-color: var(--emoji-item-color-background);
-  box-shadow: inset 0 0 0 var(--dt-size-border-150) var(--emoji-item-color-inset-shadow);
+    padding: var(--dt-space-300) var(--dt-space-400);
+    border-radius: var(--dt-size-radius-pill);
+    border: 0;
+    color: var(--emoji-item-color-foreground);
+    background-color: var(--emoji-item-color-background);
+    box-shadow: inset 0 0 0 var(--dt-size-border-150) var(--emoji-item-color-inset-shadow);
+    height: var(--dt-size-550);
 
-  &.dt-emoji-row__picker {
-    padding: var(--dt-space-200) var(--dt-space-350);
-  }
-
-  &:hover {
-    --emoji-item-color-inset-shadow: var(--dt-color-border-subtle);
-    --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-hover);
-  }
-
-  &:active {
-    --emoji-item-color-background: var(--dt-action-color-background-muted-active);
-    --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-active);
-
-    transform: scale(.98);
-  }
-
-  &--selected {
-    --emoji-item-color-inset-shadow: var(--dt-color-border-brand);
-    --emoji-item-color-foreground: var(--dt-color-link-primary);
-    --emoji-item-color-background: var(--dt-action-color-background-base-hover);
-
-    .dt-emoji-row__reaction-number {
-      font-weight: var(--dt-font-weight-bold);
+    &.dt-emoji-row__picker {
+      padding: var(--dt-space-200) var(--dt-space-350);
     }
 
     &:hover {
-      --emoji-item-color-inset-shadow: var(--dt-color-border-brand-strong);
-      --emoji-item-color-foreground: var(--dt-color-link-primary-hover);
+      --emoji-item-color-inset-shadow: var(--dt-color-border-subtle);
+      --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-hover);
     }
 
     &:active {
-      --emoji-item-color-background: var(--dt-action-color-background-base-active);
+      --emoji-item-color-background: var(--dt-action-color-background-muted-active);
+      --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-active);
+
+      transform: scale(.98);
+    }
+
+    &--selected {
+      --emoji-item-color-inset-shadow: var(--dt-color-border-brand);
+      --emoji-item-color-foreground: var(--dt-color-link-primary);
+      --emoji-item-color-background: var(--dt-action-color-background-base-hover);
+
+      .dt-emoji-row__reaction-number {
+        font-weight: var(--dt-font-weight-bold);
+      }
+
+      &:hover {
+        --emoji-item-color-inset-shadow: var(--dt-color-border-brand-strong);
+        --emoji-item-color-foreground: var(--dt-color-link-primary-hover);
+      }
+
+      &:active {
+        --emoji-item-color-background: var(--dt-action-color-background-base-active);
+      }
     }
   }
-}
 
   &__emoji {
     margin-right: var(--dt-space-300);

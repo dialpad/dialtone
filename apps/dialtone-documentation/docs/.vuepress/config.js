@@ -46,6 +46,9 @@ export default defineUserConfig({
 
   bundler: viteBundler({
     viteOptions: {
+      build: {
+        sourcemap: true,
+      },
       plugins: [viteSvgLoader({ svgo: false }), viteCommonjs()],
       css: {
         devSourcemap: true,
