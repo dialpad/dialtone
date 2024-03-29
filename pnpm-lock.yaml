@@ -24,7 +24,7 @@ importers:
         specifier: workspace:^
         version: link:packages/dialtone-tokens
       '@dialpad/dialtone-vue':
-        specifier: ^2 || ^3
+        specifier: ^2||^3
         version: link:packages/dialtone-vue3
       '@dialpad/eslint-plugin-dialtone':
         specifier: workspace:^
