@@ -70,35 +70,75 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    "./css": {
+      "import": "./dist/css/dialtone.min.css",
+      "style": "./dist/css/dialtone.min.css"
+    },
+    "./eslint-plugin": {
+      "default": "./dist/eslint-plugin/index.js"
+    },
+    "./stylelint-plugin": {
+      "default": "./dist/stylelint-plugin/index.js"
+    },
+    "./vue2": {
+      "types": "./dist/vue2/types/index.d.ts",
+      "default": "./dist/vue2/dialtone-vue.js"
+    },
+    "./vue3": {
+      "types": "./dist/vue3/types/index.d.ts",
+      "default": "./dist/vue3/dialtone-vue.js"
+    },
+    "./CHANGELOG.json": "./CHANGELOG.json",
+    "./*": "./dist/*"
+  },
   "resolutions": {
     "@dialpad/dialtone-css>postcss-preset-env": "^7.0.0",
     "@dialpad/dialtone-css>stylelint": "^15.10.1"
   },
   "peerDependencies": {
-    "@dialpad/dialtone-css": "workspace:^",
-    "@dialpad/eslint-plugin-dialtone": "workspace:^",
-    "@dialpad/dialtone-icons": "workspace:^",
-    "@dialpad/stylelint-plugin-dialtone": "workspace:^",
-    "@dialpad/dialtone-tokens": "workspace:^",
-    "@dialpad/dialtone-vue": "^2||^3"
+    "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/dialtone-emojis": "workspace:*",
+    "@dialpad/dialtone-tokens": "workspace:*",
+    "@linusborg/vue-simple-portal": "^0.1.5",
+    "@tiptap/core": "^2.0.3",
+    "@tiptap/extension-blockquote": "^2.1.16",
+    "@tiptap/extension-bold": "^2.1.16",
+    "@tiptap/extension-bullet-list": "^2.1.16",
+    "@tiptap/extension-code-block": "^2.0.3",
+    "@tiptap/extension-document": "^2.0.3",
+    "@tiptap/extension-hard-break": "^2.0.3",
+    "@tiptap/extension-italic": "^2.1.16",
+    "@tiptap/extension-link": "^2.1.16",
+    "@tiptap/extension-list-item": "^2.1.16",
+    "@tiptap/extension-mention": "^2.1.11",
+    "@tiptap/extension-ordered-list": "^2.2.0",
+    "@tiptap/extension-paragraph": "^2.0.3",
+    "@tiptap/extension-placeholder": "^2.0.3",
+    "@tiptap/extension-strike": "^2.1.16",
+    "@tiptap/extension-text": "^2.0.3",
+    "@tiptap/extension-text-align": "^2.2.0",
+    "@tiptap/extension-underline": "^2.1.16",
+    "@tiptap/pm": "^2.0.3",
+    "@tiptap/suggestion": "^2.1.4",
+    "@tiptap/vue-2": "^2.0.3",
+    "@tiptap/vue-3": "^2.0.3",
+    "date-fns": "^2.30.0",
+    "docopt": "^0.6.2",
+    "emoji-regex": "^10.2.1",
+    "emoji-toolkit": "^6.6.0",
+    "requireindex": "^1.2.0",
+    "stylelint": "15.11.0",
+    "tippy.js": "^6.3.7"
   },
   "peerDependenciesMeta": {
-    "@dialpad/dialtone-css": {
+    "@linusborg/vue-simple-portal": {
       "optional": true
     },
-    "@dialpad/eslint-plugin-dialtone": {
+    "@tiptap/vue-2": {
       "optional": true
     },
-    "@dialpad/dialtone-icons": {
-      "optional": true
-    },
-    "@dialpad/stylelint-plugin-dialtone": {
-      "optional": true
-    },
-    "@dialpad/dialtone-tokens": {
-      "optional": true
-    },
-    "@dialpad/dialtone-vue": {
+    "@tiptap/vue-3": {
       "optional": true
     }
   },

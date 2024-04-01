@@ -23,13 +23,13 @@ You can install the Dialtone Vue library into your project via the following com
 First you must globally import Dialtone's css:
 
 ```js
-import '@dialpad/dialtone-css/lib/dist/css/dialtone.min.css';
+import '@dialpad/dialtone-css';
 ```
 
 or
 
 ```css
-@import 'node_modules/@dialpad/dialtone-css/lib/dist/css/dialtone.min.css';
+@import '@dialpad/dialtone-css';
 ```
 
 Dialtone Vue components can be imported directly from the package. Some components also export named constants, which can be imported as well:

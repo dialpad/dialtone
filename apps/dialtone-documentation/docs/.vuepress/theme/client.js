@@ -3,7 +3,7 @@ import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
 
 // CSS
-import '@dialpad/dialtone-css';
+import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 import { onBeforeMount, provide, ref } from 'vue';

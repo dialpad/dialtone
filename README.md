@@ -259,21 +259,37 @@ import dialtone from "@dialpad/dialtone/eslint-plugin"
 
 #### Dialtone icons
 
-⚠️ *You should avoid importing the icons directly*, please use `DtIcon` vue component instead. ⚠️
-
-In case you cannot use vue components, import the files directly under the `dist/` folder as following:
-
-- Importing icons:
+- Importing for Vue 2:
 
 ```js
-import IconArrowUp from '@dialpad/dialtone/dist/icons/svg/arrow-up.svg';
+// Named import
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue2'; 
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
+```
+
+- Importing for Vue 3:
+
+```js
+// Named import
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3'; 
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
+```
+
+- In case you are not using vue, import the svg's directly as following:
+
+```js
+import IconArrowUp from '@dialpad/dialtone-icons/arrow-up.svg';
 ```
 
 - Importing json files
 
 ```js
-import keywords from '@dialpad/dialtone/dist/icons/keywords.json';
-import iconsList from '@dialpad/dialtone/dist/icons/icons.json';
+import keywords from '@dialpad/dialtone-icons/keywords.json';
+import iconsList from '@dialpad/dialtone-icons/icons.json';
 ```
 
 #### Dialtone Vue
@@ -281,21 +297,29 @@ import iconsList from '@dialpad/dialtone/dist/icons/icons.json';
 - Vue 2
 
 ```js
-import { DtButton } from "@dialpad/dialtone/vue2"
+// Named import
+import { DtButton } from "@dialpad/dialtone/vue2" 
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
 ```
 
 - Vue 3
 
 ```js
-import { DtButton } from "@dialpad/dialtone/vue3"
+// Named import
+import { DtButton } from "@dialpad/dialtone/vue3" 
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
 ```
 
 #### Dialtone Tokens
 
 Dialtone tokens doesn't have a default export, so you need to access
-the files directly under the dist/ folder as following:
+the files directly as following:
 
 ```css
-@import "@dialpad/dialtone/dist/tokens/css/variables-light.css" // Light tokens
-@import "@dialpad/dialtone/dist/tokens/css/variables-dark.css" // Dark tokens
+@import "@dialpad/dialtone-tokens/css/variables-light.css" // Light tokens
+@import "@dialpad/dialtone-tokens/css/variables-dark.css" // Dark tokens
 ```

@@ -36,7 +36,7 @@ import * as icons from '@dialpad/dialtone-icons/vue3'; // Vue 3+
 ### In other framework (backbone, jQuery, vanilla)
 
 ```js
-import DtIconAccessibility from '@dialpad/dialtone-icons/svg/accessibility.svg';
+import DtIconAccessibility from '@dialpad/dialtone-icons/accessibility.svg';
 ```
 
 ## Committing
