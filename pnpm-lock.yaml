@@ -20,6 +20,9 @@ importers:
       '@dialpad/dialtone-icons':
         specifier: workspace:*
         version: link:packages/dialtone-icons
+      '@dialpad/dialtone-tokens':
+        specifier: workspace:*
+        version: link:packages/dialtone-tokens
       '@linusborg/vue-simple-portal':
         specifier: ^0.1.5
         version: 0.1.5(vue@2.7.15)
@@ -92,12 +95,18 @@ importers:
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
+      docopt:
+        specifier: ^0.6.2
+        version: 0.6.2
       emoji-regex:
         specifier: ^10.2.1
         version: 10.3.0
       emoji-toolkit:
         specifier: ^6.6.0
         version: 6.6.0
+      requireindex:
+        specifier: ^1.2.0
+        version: 1.2.0
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7
