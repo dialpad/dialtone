@@ -1,5 +1,5 @@
 <template>
-  <span :class="['d-icon', iconSize]">
+  <span class="d-icon__wrapper">
     <dt-skeleton
       v-show="!iconLoaded && showSkeleton"
       :offset="0"
