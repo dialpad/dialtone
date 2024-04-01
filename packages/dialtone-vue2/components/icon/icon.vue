@@ -1,7 +1,7 @@
 <template>
   <span :class="['d-icon', iconSize]">
     <dt-skeleton
-      v-if="!loaded"
+      v-show="!iconLoaded && showSkeleton"
       :offset="0"
       :shape-option="{ shape: 'circle', size: '100%' }"
       :aria-label="ariaLabel"
@@ -9,12 +9,12 @@
     />
     <component
       :is="icon"
-      v-show="loaded"
+      v-show="iconLoaded"
       :size="size"
       :aria-label="ariaLabel"
       :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
       v-bind="$attrs"
-      @loaded="loaded = true"
+      @loaded="iconLoaded = true"
     />
   </span>
 </template>
@@ -65,11 +65,20 @@ export default {
       type: String,
       default: undefined,
     },
+
+    /**
+     * Shows a skeleton loader while the emoji asset is loading.
+     * @values true, false
+     */
+    showSkeleton: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data () {
     return {
-      loaded: false,
+      iconLoaded: false,
     };
   },
 

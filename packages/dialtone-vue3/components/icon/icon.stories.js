@@ -21,6 +21,11 @@ export const argTypesData = {
       },
     },
   },
+  showSkeleton: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 export const argsData = {};
@@ -50,6 +55,13 @@ export const Default = {
   args: {
     name: 'accessibility',
   },
+  parameters: {
+    percy: {
+      args: {
+        showSkeleton: false,
+      },
+    },
+  },
 };
 
 export const Variants = {
@@ -59,6 +71,7 @@ export const Variants = {
     percy: {
       args: {
         limit: 10,
+        showSkeleton: false,
       },
     },
     options: { showPanel: false },
