@@ -12,12 +12,12 @@
   ],
   "exports": {
     "./vue2": "./vue2/dist/dialtone-icons.js",
-    "./vue2/*": "./vue2/dist/components/*.js",
+    "./vue2/*": "./vue2/dist/components/*",
     "./vue3": "./vue3/dist/dialtone-icons.js",
-    "./vue3/*": "./vue3/dist/components/*.js",
+    "./vue3/*": "./vue3/dist/components/*",
     "./icons.json": "./dist/icons.json",
     "./keywords.json": "./dist/keywords.json",
-    "./*.svg": "./dist/svg/*"
+    "./*": "./dist/svg/*"
   },
   "devDependencies": {
     "del": "^6.1.1",
