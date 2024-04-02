@@ -55,6 +55,7 @@
     "stylelint-less": "1.0.4",
     "stylelint-no-px": "^1.0.1",
     "vitest": "^1.0.4",
+    "vue-docgen-api": "^4.75.0",
     "wait-on": "^7.2.0"
   },
   "pnpm": {
@@ -66,117 +67,80 @@
       }
     }
   },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./css": {
+      "import": "./dist/css/dialtone.min.css",
+      "style": "./dist/css/dialtone.min.css"
+    },
+    "./eslint-plugin": {
+      "default": "./dist/eslint-plugin/index.js"
+    },
+    "./stylelint-plugin": {
+      "default": "./dist/stylelint-plugin/index.js"
+    },
+    "./vue2": {
+      "types": "./dist/vue2/types/index.d.ts",
+      "default": "./dist/vue2/dialtone-vue.js"
+    },
+    "./vue3": {
+      "types": "./dist/vue3/types/index.d.ts",
+      "default": "./dist/vue3/dialtone-vue.js"
+    },
+    "./CHANGELOG.json": "./CHANGELOG.json",
+    "./*": "./dist/*"
+  },
   "resolutions": {
     "@dialpad/dialtone-css>postcss-preset-env": "^7.0.0",
     "@dialpad/dialtone-css>stylelint": "^15.10.1"
   },
-  "files": [
-    "dist"
-  ],
-  "bin": {
-    "dialtone-health-check": "./dist/css/js/dialtone_health_check/index.cjs",
-    "dialtone-migration-helper": "./dist/css/js/dialtone_migration_helper/index.mjs"
+  "peerDependencies": {
+    "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/dialtone-emojis": "workspace:*",
+    "@dialpad/dialtone-tokens": "workspace:*",
+    "@linusborg/vue-simple-portal": "^0.1.5",
+    "@tiptap/core": "^2.0.3",
+    "@tiptap/extension-blockquote": "^2.1.16",
+    "@tiptap/extension-bold": "^2.1.16",
+    "@tiptap/extension-bullet-list": "^2.1.16",
+    "@tiptap/extension-code-block": "^2.0.3",
+    "@tiptap/extension-document": "^2.0.3",
+    "@tiptap/extension-hard-break": "^2.0.3",
+    "@tiptap/extension-italic": "^2.1.16",
+    "@tiptap/extension-link": "^2.1.16",
+    "@tiptap/extension-list-item": "^2.1.16",
+    "@tiptap/extension-mention": "^2.1.11",
+    "@tiptap/extension-ordered-list": "^2.2.0",
+    "@tiptap/extension-paragraph": "^2.0.3",
+    "@tiptap/extension-placeholder": "^2.0.3",
+    "@tiptap/extension-strike": "^2.1.16",
+    "@tiptap/extension-text": "^2.0.3",
+    "@tiptap/extension-text-align": "^2.2.0",
+    "@tiptap/extension-underline": "^2.1.16",
+    "@tiptap/pm": "^2.0.3",
+    "@tiptap/suggestion": "^2.1.4",
+    "@tiptap/vue-2": "^2.0.3",
+    "@tiptap/vue-3": "^2.0.3",
+    "date-fns": "^2.30.0",
+    "docopt": "^0.6.2",
+    "emoji-regex": "^10.2.1",
+    "emoji-toolkit": "^6.6.0",
+    "requireindex": "^1.2.0",
+    "stylelint": "15.11.0",
+    "tippy.js": "^6.3.7"
   },
-  "exports": {
-    "./css": {
-      "style": "./dist/css/dialtone.min.css",
-      "import": "./dist/css/dialtone.min.css",
-      "require": "./dist/css/dialtone.min.css"
+  "peerDependenciesMeta": {
+    "@linusborg/vue-simple-portal": {
+      "optional": true
     },
-    "./vue2": {
-      "style": "./dist/vue2/style.css",
-      "import": {
-        "types": "./dist/vue2/types/index.d.ts",
-        "default": "./dist/vue2/dialtone-vue.js"
-      },
-      "require": {
-        "types": "./dist/vue2/types/index.d.ts",
-        "default": "./dist/vue2/dialtone-vue.cjs"
-      }
+    "@tiptap/vue-2": {
+      "optional": true
     },
-    "./vue2/emoji": {
-      "import": {
-        "types": "./dist/vue2/types/emoji.d.ts",
-        "default": "./dist/vue2/emoji.js"
-      },
-      "require": {
-        "types": "./dist/vue2/types/emoji.d.ts",
-        "default": "./dist/vue2/emoji.cjs"
-      }
-    },
-    "./vue2/directives": {
-      "import": {
-        "types": "./dist/vue2/types/directives.d.ts",
-        "default": "./dist/vue2/directives.js"
-      },
-      "require": {
-        "types": "./dist/vue2/types/directives.d.ts",
-        "default": "./dist/vue2/directives.cjs"
-      }
-    },
-    "./vue2/message_input": {
-      "import": {
-        "types": "./dist/vue2/types/message_input.d.ts",
-        "default": "./dist/vue2/message_input.js"
-      },
-      "require": {
-        "types": "./dist/vue2/types/message_input.d.ts",
-        "default": "./dist/vue2/message_input.cjs"
-      }
-    },
-    "./vue2/css": {
-      "style": "./dist/vue2/style.css"
-    },
-    "./vue2/CHANGELOG.json": "./packages/dialtone-vue2/CHANGELOG.json",
-    "./vue2/component-documentation.json": "./dist/vue2/component-documentation.json",
-    "./vue3": {
-      "style": "./dist/vue3/style.css",
-      "import": {
-        "types": "./dist/vue3/types/index.d.ts",
-        "default": "./dist/vue3/dialtone-vue.js"
-      },
-      "require": {
-        "types": "./dist/vue3/types/index.d.ts",
-        "default": "./dist/vue3/dialtone-vue.cjs"
-      }
-    },
-    "./vue3/emoji": {
-      "import": {
-        "types": "./dist/vue3/types/emoji.d.ts",
-        "default": "./dist/vue3/emoji.js"
-      },
-      "require": {
-        "types": "./dist/vue3/types/emoji.d.ts",
-        "default": "./dist/vue3/emoji.cjs"
-      }
-    },
-    "./vue3/directives": {
-      "import": {
-        "types": "./dist/vue3/types/directives.d.ts",
-        "default": "./dist/vue3/directives.js"
-      },
-      "require": {
-        "types": "./dist/vue3/types/directives.d.ts",
-        "default": "./dist/vue3/directives.cjs"
-      }
-    },
-    "./vue3/message_input": {
-      "import": {
-        "types": "./dist/vue3/types/message_input.d.ts",
-        "default": "./dist/vue3/message_input.js"
-      },
-      "require": {
-        "types": "./dist/vue3/types/message_input.d.ts",
-        "default": "./dist/vue3/message_input.cjs"
-      }
-    },
-    "./vue3/css": {
-      "style": "./dist/vue3/style.css"
-    },
-    "./vue3/CHANGELOG.json": "./packages/dialtone-vue3/CHANGELOG.json",
-    "./vue3/component-documentation.json": "./dist/vue3/component-documentation.json",
-    "./eslint-plugin": "./dist/eslint-plugin/index.js",
-    "./dist/*": "./dist/*"
+    "@tiptap/vue-3": {
+      "optional": true
+    }
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [
@@ -190,5 +154,8 @@
     "Component Library"
   ],
   "license": "MIT",
-  "repository": "git@github.com:dialpad/dialtone.git"
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dialpad/dialtone.git"
+  }
 }

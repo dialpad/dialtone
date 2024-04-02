@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { DtEmoji } from '@/emoji';
+import { DtEmoji } from '@/components/emoji';
 import { DtStack } from '@/components/stack';
 
 export default {

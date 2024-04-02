@@ -23,13 +23,13 @@ You can install the Dialtone Vue library into your project via the following com
 First you must globally import Dialtone's css:
 
 ```js
-import '@dialpad/dialtone-css/lib/dist/css/dialtone.min.css';
+import '@dialpad/dialtone-css';
 ```
 
 or
 
 ```css
-@import 'node_modules/@dialpad/dialtone-css/lib/dist/css/dialtone.min.css';
+@import '@dialpad/dialtone-css';
 ```
 
 Dialtone Vue components can be imported directly from the package. Some components also export named constants, which can be imported as well:
@@ -53,7 +53,7 @@ You may wish to use self-hosted JoyPixels assets such as the SVGs only available
 In order to do this, set your custom asset URL with the following functions for small and large emojis during initialization of your app:
 
 ```js
-import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@dialpad/dialtone-vue/emoji'
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@dialpad/dialtone-vue'
 
 // 16px and smaller
 setEmojiAssetUrlSmall('https://my.example.website.com/joypixels/svg/unicode/32/', '.png')
@@ -64,7 +64,7 @@ setEmojiAssetUrlLarge('https://my.example.website.com/joypixels/svg/unicode/', '
 You may access the emoji.json data for all emojis Dialtone Vue supports via executing the following function
 
 ```js
-import { getEmojiData } from '@dialpad/dialtone-vue/emoji'
+import { getEmojiData } from '@dialpad/dialtone-vue'
 const emojiData = getEmojiData();
 ```
 

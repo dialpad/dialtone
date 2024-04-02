@@ -2,7 +2,6 @@
   "name": "@dialpad/dialtone-tokens",
   "version": "1.27.2",
   "description": "Design tokens for Dialtone.",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "pnpm run build:token-transformer && node ./build.js",

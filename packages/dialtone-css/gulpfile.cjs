@@ -94,7 +94,7 @@ const categories = [
 //  ================================================================================
 const paths = {
   clean: {
-    libCss: './lib/dist/css/**/*',
+    libCss: './lib/dist/*.css',
     libSvg: './lib/dist/svg/**/*',
     libVueIcons: './lib/dist/vue/**/*',
     libFonts: './dist/fonts/**/*',
@@ -106,7 +106,7 @@ const paths = {
   },
   styles: {
     inputLib: './lib/build/less/dialtone.less',
-    outputLib: './lib/dist/css/',
+    outputLib: './lib/dist/',
   },
   svgs: {
     sysInput: './lib/build/svg/system/**/*.svg',

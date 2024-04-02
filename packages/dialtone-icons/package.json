@@ -6,21 +6,22 @@
     "build": "gulp"
   },
   "files": [
-    "dist"
+    "dist",
+    "vue2/dist",
+    "vue3/dist"
   ],
   "exports": {
-    "./vue2": {
-      "import": "./dist/dialtone-icon@2.mjs",
-      "require": "./dist/dialtone-icon@2.umd.js"
-    },
-    "./vue3": {
-      "import": "./dist/dialtone-icon@3.mjs",
-      "require": "./dist/dialtone-icon@3.umd.js"
-    },
-    "./*": "./dist/*"
+    "./vue2": "./vue2/dist/dialtone-icons.js",
+    "./vue2/*": "./vue2/dist/components/*",
+    "./vue3": "./vue3/dist/dialtone-icons.js",
+    "./vue3/*": "./vue3/dist/components/*",
+    "./icons.json": "./dist/icons.json",
+    "./keywords.json": "./dist/keywords.json",
+    "./*": "./dist/svg/*"
   },
   "devDependencies": {
     "del": "^6.1.1",
+    "glob": "^10.3.10",
     "gulp": "^4.0.2",
     "gulp-json-format": "^2.0.0",
     "gulp-rename": "^2.0.0",
@@ -65,5 +66,7 @@
     "Icons",
     "Icon Library"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false
 }

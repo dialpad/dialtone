@@ -117,13 +117,11 @@ describe('DtBadge Tests', () => {
         });
 
         it('should have correct type', async () => {
-          await wrapper.setProps({ type: 'ai' });
-
           expect(badge.classes(BADGE_TYPE_MODIFIERS.ai)).toBe(true);
         });
 
         it('renders ai icon in iconLeft slot by default', () => {
-          iconLeft = iconLeftWrapper.findComponent({ name: 'DtIcon' });
+          iconLeft = iconLeftWrapper.find('[data-qa="dt-icon"]');
 
           expect(iconLeft.attributes('data-name') === 'Dialpad Ai').toBe(true);
         });

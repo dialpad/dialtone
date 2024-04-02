@@ -2,9 +2,29 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { glob } from 'glob';
+
+function _extractEntryNameFromPath (path, pathPrefix) {
+  const regex = new RegExp(`^${pathPrefix}(\\/(\\w+))+\\/index\\.js$`);
+  return path.replace(regex, '$2').replaceAll('_', '-');
+}
+function _getEntries (pathPrefix, globRegex, entrySuffix = '') {
+  return glob.sync(globRegex).reduce((entries, path) => {
+    let entryName = _extractEntryNameFromPath(path, pathPrefix);
+    if (entrySuffix) entryName += `-${entrySuffix}`;
+
+    entries[`lib/${entryName}`] = path;
+
+    return entries;
+  }, {});
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const commonEntries = _getEntries('common', 'common/*/index.js');
+const componentEntries = _getEntries('components', 'components/*/index.js');
+const directiveEntries = _getEntries('directives', 'directives/*/index.js', 'directive');
+const recipeEntries = _getEntries('recipes', 'recipes/**/index.js');
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,24 +32,33 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       entry: {
+        ...commonEntries,
+        ...componentEntries,
+        ...directiveEntries,
+        ...recipeEntries,
         'dialtone-vue': resolve(__dirname, './index.js'),
-        emoji: resolve(__dirname, './emoji.js'),
-        message_input: resolve(__dirname, './message_input.js'),
-        directives: resolve(__dirname, './directives.js'),
       },
+      formats: ['es'],
     },
     rollupOptions: {
       external: [
+        /@dialpad/,
+        /@linusborg/,
+        /@tiptap/,
+        /date-fns/,
+        /emoji-regex/,
+        /emoji-toolkit/,
+        /tippy\.js/,
+        /prosemirror/,
         'vue',
-        '@dialpad/dialtone-css',
-        '@dialpad/dialtone-icons',
       ],
       output: {
-        globals: {
-          vue: 'Vue',
-        },
+        chunkFileNames: () => 'chunks/[name]-[hash].js',
+        minifyInternalExports: true,
       },
+      treeshake: 'smallest',
     },
+    minify: true,
   },
   plugins: [vue()],
   resolve: {

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate } from '@/components/datepicker/utils.js';
+import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate } from '@/components/datepicker/utils';
 import { WEEK_START, MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
 import { format, getYear } from 'date-fns';
 import DtButton from '@/components/button/button.vue';

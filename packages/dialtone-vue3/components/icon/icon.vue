@@ -1,20 +1,29 @@
 <template>
-  <component
-    :is="icon"
-    v-if="icon"
-    :id="id"
-    data-qa="dt-icon"
-    :aria-hidden="ariaLabel ? 'false' : 'true'"
-    :aria-label="ariaLabel"
-    :class="iconSize"
-  />
+  <span class="d-icon__wrapper">
+    <dt-skeleton
+      v-show="!iconLoaded && showSkeleton"
+      :offset="0"
+      :shape-option="{ shape: 'circle', size: '100%' }"
+      :aria-label="ariaLabel"
+      :class="['d-icon', iconSize]"
+    />
+    <component
+      :is="icon"
+      v-show="iconLoaded"
+      :size="size"
+      :aria-label="ariaLabel"
+      :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
+      v-bind="$attrs"
+      @loaded="iconLoaded = true"
+    />
+  </span>
 </template>
 
 <script>
-import { ICON_SIZE_MODIFIERS } from './icon_constants';
-import { getUniqueString } from '@/common/utils.js';
-import iconNames from '@dialpad/dialtone-icons/icons.json';
-import { icons } from '@dialpad/dialtone-icons/vue3';
+import { DtSkeleton } from '../skeleton';
+import * as icons from '@dialpad/dialtone-icons/vue3';
+import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
+import { defineAsyncComponent } from 'vue';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -23,17 +32,17 @@ import { icons } from '@dialpad/dialtone-icons/vue3';
 export default {
   name: 'DtIcon',
 
-  props: {
-    /**
-     * DtIcon identifier
-     */
-    id: {
-      type: String,
-      default () {
-        return getUniqueString();
-      },
-    },
+  components: {
+    DtSkeleton,
+    ...Object.keys(icons).reduce((acc, icon) => {
+      acc[icon] = defineAsyncComponent(icons[icon]);
+      return acc;
+    }, {}),
+  },
 
+  inheritAttrs: false,
+
+  props: {
     /**
      * The size of the icon.
      * @values 100, 200, 300, 400, 500, 600, 700, 800
@@ -50,7 +59,7 @@ export default {
     name: {
       type: String,
       required: true,
-      validator: (name) => iconNames.includes(name),
+      validator: (name) => ICON_NAMES.includes(name),
     },
 
     /**
@@ -60,6 +69,21 @@ export default {
       type: String,
       default: undefined,
     },
+
+    /**
+     * Shows a skeleton loader while the emoji asset is loading.
+     * @values true, false
+     */
+    showSkeleton: {
+      type: Boolean,
+      default: true,
+    },
+  },
+
+  data () {
+    return {
+      iconLoaded: false,
+    };
   },
 
   computed: {
@@ -68,7 +92,7 @@ export default {
     },
 
     icon () {
-      return icons[`./${this.name}.vue`];
+      return `dt-icon-${this.name}`;
     },
   },
 };

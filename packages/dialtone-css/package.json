@@ -41,8 +41,7 @@
     }
   ],
   "files": [
-    "lib",
-    "CHANGELOG.json"
+    "lib"
   ],
   "bin": {
     "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
@@ -60,7 +59,14 @@
     "build:icons": "gulp icons",
     "test:postcss-generator-plugin": "jest --coverage && eslint ."
   },
-  "unpkg": "dist/css/dialtone.min.css",
+  "unpkg": "./lib/dist/dialtone.min.css",
+  "exports": {
+    ".": {
+      "import": "./lib/dist/dialtone.min.css",
+      "style": "./lib/dist/dialtone.min.css"
+    },
+    "./*": "./*"
+  },
   "browserslist": [
     "last 1 version",
     "maintained node versions"

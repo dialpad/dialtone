@@ -2,10 +2,8 @@ import { defineClientConfig } from '@vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
 
-import { DtTooltipDirective } from '@dialpad/dialtone-vue/directives';
-
 // CSS
-import '@dialpad/dialtone-css/lib/dist/css/dialtone.css';
+import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 import { onBeforeMount, provide, ref } from 'vue';
@@ -15,7 +13,6 @@ export default defineClientConfig({
     // Register libraries
     if (!__VUEPRESS_SSR__) {
       await registerDialtoneVue(app);
-      await registerEmojiDialtoneVue(app);
       await registerDialtoneCombinator(app);
     }
     router.options.scrollBehavior = (to, from, savedPosition) => {
@@ -59,7 +56,8 @@ export default defineClientConfig({
 
 async function registerDialtoneVue (app) {
   const module = await import('@dialpad/dialtone-vue');
-  const dialtoneComponents = Object.keys(module).filter((key) => key.startsWith('Dt'));
+  const dialtoneComponents = Object.keys(module).filter((key) => (key.startsWith('Dt') && !key.endsWith('Directive')));
+  const dialtoneDirectives = Object.keys(module).filter((key) => (key.startsWith('Dt') && key.endsWith('Directive')));
   const dialtoneConstants = Object
     .keys(module)
     .filter((key) => /^[A-Z_]+$/.test(key))
@@ -67,21 +65,18 @@ async function registerDialtoneVue (app) {
       res[key] = module[key];
       return res;
     }, {});
+
   dialtoneComponents.forEach(key => {
     app.component(key, module[key]);
   });
-  app.provide('dialtoneComponents', dialtoneComponents);
-  app.use(DtTooltipDirective);
-  window.DIALTONE_CONSTANTS = dialtoneConstants;
-}
 
-async function registerEmojiDialtoneVue (app) {
-  const emojiModule = await import('@dialpad/dialtone-vue/emoji');
-  const dialtoneEmojiComponents = Object.keys(emojiModule).filter((key) => key.startsWith('Dt'));
-  dialtoneEmojiComponents.forEach((key) => {
-    app.component(key, emojiModule[key]);
+  dialtoneDirectives.forEach(directive => {
+    app.use(directive);
   });
-  app.provide('dialtoneEmojiComponents', dialtoneEmojiComponents);
+
+  app.provide('dialtoneComponents', dialtoneComponents);
+
+  window.DIALTONE_CONSTANTS = dialtoneConstants;
 }
 
 async function registerDialtoneCombinator (app) {

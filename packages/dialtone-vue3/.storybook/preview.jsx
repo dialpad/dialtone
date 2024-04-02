@@ -1,12 +1,12 @@
 import '../css/dialtone-globals.less';
-import '@dialpad/dialtone-css/lib/dist/css/dialtone.css';
+import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { setup } from '@storybook/vue3';
 import React from 'react';
 import { DocsContainer } from '@storybook/addon-docs';
 import { useDarkMode } from "storybook-dark-mode";
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
-import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji.js';
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DtTooltipDirective } from "@/directives/tooltip";

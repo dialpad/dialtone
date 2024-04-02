@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon';
 import {
   codeToEmojiData,
   stringToUnicode,
@@ -30,8 +30,8 @@ import {
   emojiImageUrlLarge,
   emojiFileExtensionLarge,
   customEmojiAssetUrl,
-} from '@/common/emoji.js';
-import { DtSkeleton } from '../skeleton';
+} from '@/common/emoji';
+import { DtSkeleton } from '@/components/skeleton';
 
 /**
  * Renders an emoji from a shortcode such as :smile: or unicode character such as 😄

@@ -1,2 +1,2 @@
 export { default as DtIcon } from './icon.vue';
-export { ICON_SIZE_MODIFIERS } from './icon_constants';
+export { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';

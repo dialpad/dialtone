@@ -4,7 +4,7 @@ Design tokens for Dialpad's design system Dialtone and everything related to bui
 
 Design tokens are all the defined values that are part of the design system, such as color, spacing, typography, and
 more. The goal is to store design tokens as JSON and output and publish them to many different formats (CSS, LESS,
-Android, iOS, etc) upon build.
+Android, iOS, etc.) upon build.
 
 ## Usage
 
@@ -21,7 +21,8 @@ npm install @dialpad/dialtone-tokens
 #### Import CSS Tokens
 
 ```css
-@import "node_modules/@dialpad/dialtone-css/css/variables.css";
+@import "@dialpad/dialtone-tokens/dist/css/variables-dark.css";  // Dark variables
+@import "@dialpad/dialtone-tokens/dist/css/variables-light.css"; // Light variables
 ```
 
 #### Use CSS Token
@@ -37,7 +38,8 @@ Or
 #### Import LESS Tokens
 
 ```less
-@import "node_modules/@dialpad/dialtone-css/less/variables.less";
+@import "@dialpad/dialtone-tokens/dist/less/variables-dark.less";  // Dark variables
+@import "@dialpad/dialtone-tokens/dist/less/variables-light.less"; // Light variables
 ```
 
 #### Use LESS Token
