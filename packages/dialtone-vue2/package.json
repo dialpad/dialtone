@@ -60,8 +60,8 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
-    "@percy/cli": "^1.28.2",
-    "@percy/storybook": "^5.0.3",
+    "@percy/cli": "1.28.2",
+    "@percy/storybook": "5.0.3",
     "@storybook/addon-a11y": "^7.6.1",
     "@storybook/addon-actions": "^7.6.1",
     "@storybook/addon-docs": "^7.6.1",
