@@ -160,7 +160,13 @@ export default {
   }
 
   &__reaction-number {
-    font: var(--dt-typography-body-sm);
+    // set font properties individually to change line height,
+    // as font shorthand property will override line-height.
+    font-weight: var(--dt-typography-body-sm-font-weight);
+    font-size: var(--dt-typography-body-sm-font-size);
+    font-family: var(--dt-typography-body-sm-font-family);
+    line-height: var(--dt-font-line-height-100);
+    font-variant: tabular-nums;
   }
 }
 </style>
