@@ -76,7 +76,7 @@ export default {
           showOnCreate: true,
           interactive: true,
           trigger: 'manual',
-          placement: 'bottom-start',
+          placement: 'top-start',
           contentElement: null,
           zIndex: 650,
         });
