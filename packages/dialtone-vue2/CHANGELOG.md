@@ -1,3 +1,11 @@
+## [2.125.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.125.0...dialtone-vue2/v2.125.1-alpha.1) (2024-04-03)
+
+
+### Bug Fixes
+
+* NO-JIRA dialtone-vue peer dependencies ([#243](https://github.com/dialpad/dialtone/issues/243)) ([1ff3d1f](https://github.com/dialpad/dialtone/commit/1ff3d1f38ecb4bf4f74ce9ee5884bb3168a5aba5))
+* **Suggestion List:** DP-85976 change suggestion list placement ([#246](https://github.com/dialpad/dialtone/issues/246)) ([45cffa5](https://github.com/dialpad/dialtone/commit/45cffa55b755e2abc7ac2c30638c36cfb8865937))
+
 # [2.125.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.124.0...dialtone-vue2/v2.125.0) (2024-03-28)
 
 
