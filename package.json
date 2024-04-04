@@ -99,7 +99,6 @@
   "peerDependencies": {
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-emojis": "workspace:*",
-    "@dialpad/dialtone-tokens": "workspace:*",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "@tiptap/core": "^2.0.3",
     "@tiptap/extension-blockquote": "^2.1.16",
@@ -130,17 +129,6 @@
     "requireindex": "^1.2.0",
     "stylelint": "15.11.0",
     "tippy.js": "^6.3.7"
-  },
-  "peerDependenciesMeta": {
-    "@linusborg/vue-simple-portal": {
-      "optional": true
-    },
-    "@tiptap/vue-2": {
-      "optional": true
-    },
-    "@tiptap/vue-3": {
-      "optional": true
-    }
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [

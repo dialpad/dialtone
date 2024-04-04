@@ -20,9 +20,6 @@ importers:
       '@dialpad/dialtone-icons':
         specifier: workspace:*
         version: link:packages/dialtone-icons
-      '@dialpad/dialtone-tokens':
-        specifier: workspace:*
-        version: link:packages/dialtone-tokens
       '@linusborg/vue-simple-portal':
         specifier: ^0.1.5
         version: 0.1.5(vue@2.7.15)
