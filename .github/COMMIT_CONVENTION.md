@@ -38,7 +38,13 @@ Must be one of the following:
 * **style**: not relevant changes (whitespace, code formatting, semicolons, etc).
 * **test**: changes that add or modify tests.
 
-> Only `feat`, `fix`, `perf` and `refactor` types trigger a new release. Commits with `BREAKING CHANGE:` in the footer of the commit message, regardless of type, will generate a `MAJOR` release.
+> Only `feat`, `fix`, `perf` and `refactor` types trigger a new release.
+>
+> Dialtone icons and Dialtone emojis packages trigger a patch release on `build`, `chore`, `ci`, `docs`, `style` and
+> `test` also.
+>
+> Commits with `BREAKING CHANGE:` in the footer of the commit message, regardless of type, will generate a `MAJOR`
+> release.
 
 ### Scope:
 
