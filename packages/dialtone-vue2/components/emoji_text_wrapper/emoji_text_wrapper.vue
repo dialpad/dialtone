@@ -54,7 +54,7 @@ export default {
       return split.map((item) => {
         if (replaceList.includes(item)) {
           return this.$createElement(DtEmoji, {
-            props: { code: item, size: this.size, ...this.$attrs },
+            props: { code: item, size: this.size },
           });
         }
         return this.$createElement('span', item);

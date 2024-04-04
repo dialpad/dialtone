@@ -54,7 +54,7 @@ export default {
       const split = textContent.split(regexp);
       return split.map((item) => {
         if (replaceList.includes(item)) {
-          return h(DtEmoji, { ...this.$attrs, size: this.size, code: item });
+          return h(DtEmoji, { size: this.size, code: item });
         }
         return h('span', item);
       });

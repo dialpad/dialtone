@@ -86,6 +86,20 @@
         call-button-tooltip="Call"
       />
     </div>
+    <div>
+      <h3>
+        With emojis in the name
+      </h3>
+      <dt-recipe-contact-row
+        name=":smile: :fire: Jaqueline Nackos"
+        avatar-presence="active"
+        avatar-seed="JN"
+        avatar-alt="Avatar person"
+        :avatar-src="$attrs.avatarSrc"
+        user-status="Good Morning! :smile:"
+        call-button-tooltip="Call"
+      />
+    </div>
   </dt-stack>
 </template>
 
