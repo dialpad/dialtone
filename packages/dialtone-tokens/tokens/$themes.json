@@ -353,9 +353,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "semantic/expressive/default": "disabled",
-      "semantic/expressive/sm": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:0",
@@ -1261,9 +1259,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "semantic/expressive/default": "disabled",
-      "semantic/expressive/sm": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
@@ -2166,9 +2162,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "semantic/expressive/default": "disabled",
-      "semantic/expressive/sm": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2734,9 +2728,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "semantic/expressive/default": "disabled",
-      "semantic/expressive/sm": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3297,9 +3289,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "semantic/expressive/default": "disabled",
-      "semantic/expressive/sm": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:20076",
     "$figmaModeId": "406:4",
@@ -3865,9 +3855,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "semantic/expressive/default": "disabled",
-      "semantic/expressive/sm": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:20076",
     "$figmaModeId": "406:5",
@@ -4414,5 +4402,21 @@
       "size.radius.circle": "41025ec179b12d651be3cd78eaa2d0e1f86a402a"
     },
     "group": "cox"
+  },
+  {
+    "id": "0372d8ab03e30b812857cd98434cdeb10d8db3a9",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "semantic/expressive/default": "source",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "expressive"
   }
 ]
