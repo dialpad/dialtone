@@ -130,17 +130,6 @@
     "stylelint": "15.11.0",
     "tippy.js": "^6.3.7"
   },
-  "peerDependenciesMeta": {
-    "@linusborg/vue-simple-portal": {
-      "optional": true
-    },
-    "@tiptap/vue-2": {
-      "optional": true
-    },
-    "@tiptap/vue-3": {
-      "optional": true
-    }
-  },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [
     "Dialpad",
