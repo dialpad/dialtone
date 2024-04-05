@@ -1,3 +1,10 @@
+# [1.28.0-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.2...dialtone-tokens/v1.28.0-alpha.1) (2024-04-05)
+
+
+### Features
+
+* **Focus Ring:** NO-JIRA reduce focus ring size ([#244](https://github.com/dialpad/dialtone/issues/244)) ([e24d0aa](https://github.com/dialpad/dialtone/commit/e24d0aabdbc87f8ff0e4e41bb42ef7f4b4d33a78))
+
 ## [1.27.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.1...dialtone-tokens/v1.27.2) (2024-03-26)
 
 
