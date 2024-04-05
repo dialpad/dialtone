@@ -63,16 +63,18 @@ jobs:
       # - Remove blog post component.
       # - Remove comments.
       # - Remove empty lines at the beginning of the file.
+      # - Replace links paths for their absolute paths (prefixed by https://dialtone.dialpad.com).
       # - Ellipsis the article to the first 10 lines.
       # - Append the URL of the article at the end of the article.
       - name: Process Markdown file
         run: >
-          sed -i
+          sed -i -E
           -e '/^---$/,/^---$/d'
           -e '/^<script setup>$/,/^<\/script>$/d'
           -e '/^<\/*BlogPost.*$/d'
           -e '/^<!--.*$/d'
           -e '/./,$!d'
+          -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g'
           $FILE_PATH &&
           sed -i 10q $FILE_PATH &&
           echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
