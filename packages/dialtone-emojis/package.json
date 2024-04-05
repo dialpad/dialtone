@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-emojis",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "Dialpad's emojis JSON data",
   "keywords": [
     "Dialpad",
@@ -35,6 +35,8 @@
       "url": "https://github.com/ninamarina"
     }
   ],
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "main": "index.js"
 }
