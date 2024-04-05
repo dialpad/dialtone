@@ -1,3 +1,15 @@
+# [8.30.0-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.3...dialtone-css/v8.30.0-alpha.1) (2024-04-05)
+
+
+### Bug Fixes
+
+* **Input:** DLT-1646 scrollbar overlapping border ([#250](https://github.com/dialpad/dialtone/issues/250)) ([0cfe5b3](https://github.com/dialpad/dialtone/commit/0cfe5b3ef41a4d70e36572c123dbd0aeaa9e567e))
+
+
+### Features
+
+* **Focus Ring:** NO-JIRA reduce focus ring size ([#244](https://github.com/dialpad/dialtone/issues/244)) ([e24d0aa](https://github.com/dialpad/dialtone/commit/e24d0aabdbc87f8ff0e4e41bb42ef7f4b4d33a78))
+
 ## [8.29.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.2...dialtone-css/v8.29.3) (2024-03-28)
 
 
