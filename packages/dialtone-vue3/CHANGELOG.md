@@ -1,3 +1,13 @@
+## [3.118.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.118.0...dialtone-vue3/v3.118.1-alpha.1) (2024-04-05)
+
+
+### Bug Fixes
+
+* **Contact Row:** DP-95121 remove attrs from emoji wrapper ([#249](https://github.com/dialpad/dialtone/issues/249)) ([99069ba](https://github.com/dialpad/dialtone/commit/99069babfc3f9a744d4c74084d2dd911905b62ec))
+* **Emoji Row:** NO-JIRA set reaction-number line-height to 1 ([#247](https://github.com/dialpad/dialtone/issues/247)) ([abce280](https://github.com/dialpad/dialtone/commit/abce28024494994b78f50092e75de1841c317a08))
+* NO-JIRA dialtone-vue peer dependencies ([#243](https://github.com/dialpad/dialtone/issues/243)) ([1ff3d1f](https://github.com/dialpad/dialtone/commit/1ff3d1f38ecb4bf4f74ce9ee5884bb3168a5aba5))
+* **Suggestion List:** DP-85976 change suggestion list placement ([#246](https://github.com/dialpad/dialtone/issues/246)) ([45cffa5](https://github.com/dialpad/dialtone/commit/45cffa55b755e2abc7ac2c30638c36cfb8865937))
+
 # [3.118.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.117.0...dialtone-vue3/v3.118.0) (2024-03-28)
 
 
