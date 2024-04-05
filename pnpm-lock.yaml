@@ -617,11 +617,11 @@ importers:
         specifier: ^2.30.0
         version: 2.30.0
       emoji-regex:
-        specifier: ^10.2.1
+        specifier: ^10.3.0
         version: 10.3.0
       emoji-toolkit:
-        specifier: ^6.6.0
-        version: 6.6.0
+        specifier: ^8.0.0
+        version: 8.0.0
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7
@@ -843,11 +843,11 @@ importers:
         specifier: ^2.30.0
         version: 2.30.0
       emoji-regex:
-        specifier: ^10.2.1
+        specifier: ^10.3.0
         version: 10.3.0
       emoji-toolkit:
-        specifier: ^6.6.0
-        version: 6.6.0
+        specifier: ^8.0.0
+        version: 8.0.0
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7
@@ -7827,7 +7827,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.8(typescript@5.2.2)
-      vue-component-type-helpers: 2.0.7
+      vue-component-type-helpers: 2.0.10
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -14276,6 +14276,10 @@ packages:
 
   /emoji-toolkit@6.6.0:
     resolution: {integrity: sha512-pEu0kow2p1N8zCKnn/L6H0F3rWUBB3P3hVjr/O5yl1fK7N9jU4vO4G7EFapC5Y3XwZLUCY0FZbOPyTkH+4V2eQ==}
+    dev: false
+
+  /emoji-toolkit@8.0.0:
+    resolution: {integrity: sha512-Vz8YIqQJsQ+QZ4yuKMMzliXceayqfWbNjb6bST+vm77QAhU2is3I+/PRxrNknW+q1bvHHMgjLCQXxzINWLVapg==}
     dev: false
 
   /emojis-list@3.0.0:
@@ -29738,8 +29742,8 @@ packages:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
     dev: true
 
-  /vue-component-type-helpers@2.0.7:
-    resolution: {integrity: sha512-7e12Evdll7JcTIocojgnCgwocX4WzIYStGClBQ+QuWPinZo/vQolv2EMq4a3lg16TKfwWafLimG77bxb56UauA==}
+  /vue-component-type-helpers@2.0.10:
+    resolution: {integrity: sha512-FC5fKJjDks3Ue/KRSYBdsiCaZa0kUPQfs8yQpb8W9mlO6BenV8G1z58xobeRMzevnmEcDa09LLwuXDwb4f6NMQ==}
     dev: true
 
   /vue-demi@0.14.7(vue@3.4.15):
