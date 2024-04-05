@@ -125,7 +125,7 @@
     "date-fns": "^2.30.0",
     "docopt": "^0.6.2",
     "emoji-regex": "^10.2.1",
-    "emoji-toolkit": "^6.6.0",
+    "emoji-toolkit": "^8.0.0",
     "requireindex": "^1.2.0",
     "stylelint": "15.11.0",
     "tippy.js": "^6.3.7"

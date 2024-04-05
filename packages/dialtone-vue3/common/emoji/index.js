@@ -1,7 +1,7 @@
 import emojiRegex from 'emoji-regex';
 import { emojisIndexed } from '@dialpad/dialtone-emojis';
 
-export const emojiVersion = '6.6';
+export const emojiVersion = '8.0';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
 export let customEmojiAssetUrl = null;
 
@@ -171,6 +171,7 @@ export function codeToEmojiData (code) {
     return shortcodeToEmojiData(code);
   } else {
     const unicodeString = unicodeToString(code);
+    console.log(unicodeString);
 
     const result = emojiJson[unicodeString];
     if (result) result.key = unicodeString;
