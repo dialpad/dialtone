@@ -231,8 +231,16 @@ nx run dialtone:release:beta
 
 ### Install it via NPM:
 
+#### Vue 3
+
 ```shell
 npm install @dialpad/dialtone@next
+```
+
+#### Vue 2
+
+```shell
+npm install @dialpad/dialtone@next @linusborg/vue-simple-portal @tiptap/vue-2
 ```
 
 ### Import packages:
