@@ -83,10 +83,10 @@ export async function run () {
           actions: ['buildDocJson'],
           basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
           buildPath: 'dist/less/',
-          theme: theme.name,
+          theme: themeName,
           files: [
             {
-              destination: `variables-${theme.name}.less`,
+              destination: `variables-${themeName}.less`,
               format: 'less/variables',
             },
           ],
