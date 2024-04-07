@@ -1,3 +1,10 @@
+## [9.27.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.27.0...dialtone/v9.27.1) (2024-04-07)
+
+
+### Bug Fixes
+
+* NO-JIRA optional peer dependencies ([7b2e051](https://github.com/dialpad/dialtone/commit/7b2e0511421b1c9dd92e54e4543ebe623513a6ef))
+
 # [9.27.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.26.0...dialtone/v9.27.0) (2024-04-07)
 
 
