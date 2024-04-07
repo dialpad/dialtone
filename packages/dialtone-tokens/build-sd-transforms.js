@@ -39,48 +39,61 @@ StyleDictionary.registerTransformGroup({
 export async function run () {
   const $themes = JSON.parse(await promises.readFile('tokens/$themes.json', 'utf-8'));
   const $metadata = JSON.parse(await promises.readFile('tokens/$metadata.json', 'utf-8'));
-  const configs = $themes.slice(0, 2).map(theme => ({
-
+  const configs = $themes.map(theme => {
     // use $metadata to iterate through the selected token sets
     // as this contains the correct token set order. The $themes
     // file does not.
-    source: $metadata.tokenSetOrder.filter(set => {
-      return Object.entries(theme.selectedTokenSets).filter(([, val]) => val !== 'disabled').map(([key, val]) => key).includes(set);
-    }).map(set => `tokens/${set}.json`),
-    platforms: {
-      css: {
-        transformGroup: 'custom/css/tokens-studio',
-        actions: ['buildDocJson'],
-        prefix: 'dt',
-        basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
-        buildPath: 'dist/css/',
-        theme: theme.name,
-        files: [
-          {
-            destination: `variables-${theme.name}.css`,
-            format: 'css/variables',
-            options: {
-              selector: `.dialtone-theme-${theme.name}`,
+    const source = $metadata
+      .tokenSetOrder
+      .filter(set => Object
+        .entries(theme.selectedTokenSets)
+        .filter(([, val]) => val !== 'disabled')
+        .map(([key]) => key).includes(set))
+      .map(set => `tokens/${set}.json`);
+
+    let themeName = theme.name;
+
+    if (theme.group !== 'dp') {
+      themeName = `${theme.group}-${theme.name}`;
+    }
+
+    return {
+      source,
+      platforms: {
+        css: {
+          transformGroup: 'custom/css/tokens-studio',
+          actions: ['buildDocJson'],
+          prefix: 'dt',
+          basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
+          buildPath: 'dist/css/',
+          theme: themeName,
+          files: [
+            {
+              destination: `variables-${themeName}.css`,
+              format: 'css/variables',
+              options: {
+                selector: `.dialtone-theme-${themeName}`,
+              },
             },
-          },
-        ],
+          ],
+        },
+        less: {
+          transformGroup: 'custom/css/tokens-studio',
+          prefix: 'dt',
+          actions: ['buildDocJson'],
+          basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
+          buildPath: 'dist/less/',
+          theme: theme.name,
+          files: [
+            {
+              destination: `variables-${theme.name}.less`,
+              format: 'less/variables',
+            },
+          ],
+        },
       },
-      less: {
-        transformGroup: 'custom/css/tokens-studio',
-        prefix: 'dt',
-        actions: ['buildDocJson'],
-        basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
-        buildPath: 'dist/less/',
-        theme: theme.name,
-        files: [
-          {
-            destination: `variables-${theme.name}.less`,
-            format: 'less/variables',
-          },
-        ],
-      },
-    },
-  }));
+    };
+  });
 
   configs.forEach(cfg => {
     const sd = StyleDictionary.extend(cfg);
