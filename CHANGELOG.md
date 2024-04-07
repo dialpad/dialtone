@@ -1,3 +1,19 @@
+# [9.27.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.26.0...dialtone/v9.27.0) (2024-04-07)
+
+
+### Bug Fixes
+
+* **Contact Row:** DP-95121 remove attrs from emoji wrapper ([#249](https://github.com/dialpad/dialtone/issues/249)) ([99069ba](https://github.com/dialpad/dialtone/commit/99069babfc3f9a744d4c74084d2dd911905b62ec))
+* **Emoji Row:** NO-JIRA set reaction-number line-height to 1 ([#247](https://github.com/dialpad/dialtone/issues/247)) ([abce280](https://github.com/dialpad/dialtone/commit/abce28024494994b78f50092e75de1841c317a08))
+* **Input:** DLT-1646 scrollbar overlapping border ([#250](https://github.com/dialpad/dialtone/issues/250)) ([0cfe5b3](https://github.com/dialpad/dialtone/commit/0cfe5b3ef41a4d70e36572c123dbd0aeaa9e567e))
+* NO-JIRA dialtone-vue peer dependencies ([#243](https://github.com/dialpad/dialtone/issues/243)) ([1ff3d1f](https://github.com/dialpad/dialtone/commit/1ff3d1f38ecb4bf4f74ce9ee5884bb3168a5aba5))
+* **Suggestion List:** DP-85976 change suggestion list placement ([#246](https://github.com/dialpad/dialtone/issues/246)) ([45cffa5](https://github.com/dialpad/dialtone/commit/45cffa55b755e2abc7ac2c30638c36cfb8865937))
+
+
+### Features
+
+* **Focus Ring:** NO-JIRA reduce focus ring size ([#244](https://github.com/dialpad/dialtone/issues/244)) ([e24d0aa](https://github.com/dialpad/dialtone/commit/e24d0aabdbc87f8ff0e4e41bb42ef7f4b4d33a78))
+
 # [9.26.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.25.0...dialtone/v9.26.0) (2024-03-28)
 
 
