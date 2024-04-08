@@ -136,6 +136,9 @@
     },
     "@tiptap/vue-2": {
       "optional": true
+    },
+    "@tiptap/vue-3": {
+      "optional": true
     }
   },
   "homepage": "https://dialtone.dialpad.com",
