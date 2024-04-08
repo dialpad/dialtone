@@ -328,6 +328,6 @@ Dialtone tokens doesn't have a default export, so you need to access
 the files directly as following:
 
 ```css
-@import "@dialpad/dialtone-tokens/css/variables-light.css" // Light tokens
-@import "@dialpad/dialtone-tokens/css/variables-dark.css" // Dark tokens
+@import "@dialpad/dialtone/tokens/css/variables-light.css" // Light tokens
+@import "@dialpad/dialtone/tokens/css/variables-dark.css" // Dark tokens
 ```
