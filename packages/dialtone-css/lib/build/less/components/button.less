@@ -535,6 +535,69 @@
 }
 
 //  ============================================================================
+//  $   SPLIT BUTTON
+//  ----------------------------------------------------------------------------
+
+// <div class="d-split-btn">
+//     <button class="d-btn d-btn--outlined d-split-btn__alpha" type="button">
+//         <span class="d-btn__label">Label</span>
+//     </button>
+//     <button class="d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega" type="button">
+//         <span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span>
+//     </button>
+// </div>
+
+.d-split-btn {
+    display: inline-flex;
+    gap: var(--dt-space-0);
+    align-items: stretch;
+    justify-content: center;
+
+    &__alpha,
+    &__omega {
+        position: relative;
+
+        &:focus-visible {
+            box-shadow: var(--dt-shadow-focus-inset);
+        }
+    }
+
+    &__omega {
+        // --button-padding-x: 2px;
+
+        &::before {
+            position: absolute;
+            top: var(--button-border-radius);
+            bottom: var(--button-border-radius);
+            left: var(--dt-size-50-negative);
+            width: var(--dt-space-100);
+            background-color: var(--button-color-text);
+            opacity: .4;
+            content: '';
+        }
+
+        &.d-btn--outlined::before,
+        &.d-btn--primary::before {
+            top: 0;
+            bottom: 0;
+        }
+    }
+
+    &__alpha:not(.d-btn--muted) {
+        border-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &__omega:not(.d-btn--muted) {
+        border-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+}
+
+//  ============================================================================
 //  $   BUTTON GROUP
 //  ----------------------------------------------------------------------------
 .d-btn-group {
