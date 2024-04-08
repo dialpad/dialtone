@@ -35,6 +35,8 @@
       "url": "https://github.com/ninamarina"
     }
   ],
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "main": "index.js"
 }

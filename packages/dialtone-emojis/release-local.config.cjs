@@ -36,7 +36,7 @@ module.exports = {
     ['@semantic-release/npm', { npmPublish: false }],
     ['@semantic-release/git', {
       /* eslint-disable-next-line no-template-curly-in-string */
-      message: `chore(release): ${name}` +
+      message: `chore(release): NO-JIRA ${name}` +
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
   ],
