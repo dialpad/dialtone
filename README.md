@@ -234,7 +234,7 @@ nx run dialtone:release:beta
 #### Vue 3
 
 ```shell
-npm install @dialpad/dialtone@next
+npm install @dialpad/dialtone@next @tiptap/vue-3
 ```
 
 #### Vue 2
