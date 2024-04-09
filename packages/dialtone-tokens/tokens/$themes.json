@@ -4454,7 +4454,8 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "semantic/expressive/default": "enabled"
     },
     "group": "expressive-sm"
   },
@@ -4475,7 +4476,8 @@
       "components/checkbox/dark": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "components/radio/dark": "enabled"
+      "components/radio/dark": "enabled",
+      "semantic/expressive/default": "enabled"
     },
     "group": "expressive-sm"
   }
