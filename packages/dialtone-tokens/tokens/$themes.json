@@ -4408,7 +4408,7 @@
     "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "root": "enabled",
+      "root": "source",
       "base/default": "enabled",
       "semantic/expressive/default": "enabled",
       "components/avatar/default": "enabled",
