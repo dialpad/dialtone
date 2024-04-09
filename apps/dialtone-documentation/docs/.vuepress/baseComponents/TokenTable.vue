@@ -30,7 +30,7 @@
     </thead>
     <tbody>
       <tr
-        v-for="({ exampleValue, exampleName, name, tokenValue, description }) in tokens"
+        v-for="({ exampleValue, exampleName, name, tokenValue, description }) in shownTokens"
         :key="name"
         tabindex="0"
         @mouseenter="onEnterRow(name)"
@@ -135,6 +135,12 @@ export default {
   data: () => ({
     hoveredRow: null,
   }),
+
+  computed: {
+    shownTokens () {
+      return this.tokens.filter(token => !token.hidden);
+    },
+  },
 
   methods: {
     getTokenValue (value) {

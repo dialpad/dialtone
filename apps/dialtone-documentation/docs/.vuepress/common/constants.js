@@ -24,8 +24,99 @@ export const CATEGORY_MAP = {
   size: ['size'],
   space: ['space'],
   shadow: ['shadow'],
-  component: ['avatar', 'badge', 'checkbox', 'icon', 'inputs', 'action'],
+  component: ['topbar', 'sidebar', 'presence', 'mention', 'avatar', 'badge', 'checkbox', 'icon', 'inputs', 'action'],
 };
+
+export const SUBCATEGORY_MAP = {
+  color: ['foreground', 'surface', 'border', 'link', 'neutral'],
+  font: ['family', 'weight', 'size'],
+  size: ['radius', 'border'],
+};
+
+export const getTokensStructure = () => ({
+  color: {
+    foreground: {
+      _children: [],
+    },
+    surface: {
+      _children: [],
+    },
+    border: {
+      _children: [],
+    },
+    link: {
+      _children: [],
+    },
+    neutral: {
+      _children: [],
+    },
+    brand: {
+      _children: [],
+    },
+    opacity: {
+      _children: [],
+    },
+    components: {
+      _children: [],
+    },
+    base: {
+      _children: [],
+    },
+  },
+  typography: {
+    'font style': {
+      _children: [],
+    },
+    'font family': {
+      _children: [],
+    },
+    'font weight': {
+      _children: [],
+    },
+    textcase: {
+      _children: [],
+    },
+    'line height': {
+      _children: [],
+    },
+    'font size': {
+      _children: [],
+    },
+    components: {
+      _children: [],
+    },
+  },
+  shadow: {
+    _children: [],
+  },
+  size: {
+    _children: [],
+    negative: {
+      _children: [],
+    },
+    percentage: {
+      _children: [],
+    },
+    radius: {
+      _children: [],
+    },
+    border: {
+      _children: [],
+    },
+    components: {
+      _children: [],
+    },
+  },
+  space: {
+    _children: [],
+    negative: {
+      _children: [],
+    },
+    percentage: {
+      _children: [],
+    },
+  },
+});
 
 export default {
   DIALTONE_CHANGELOGS,
