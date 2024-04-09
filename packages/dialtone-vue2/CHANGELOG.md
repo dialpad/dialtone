@@ -1,3 +1,10 @@
+# [2.126.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.125.1...dialtone-vue2/v2.126.0) (2024-04-09)
+
+
+### Features
+
+* DLT-1205 update joypixels to 8.0 ([#251](https://github.com/dialpad/dialtone/issues/251)) ([59a96a4](https://github.com/dialpad/dialtone/commit/59a96a4b5683566d499661efdeee03c7d865aff1))
+
 ## [2.125.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.125.0...dialtone-vue2/v2.125.1) (2024-04-07)
 
 
