@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.28.0...dialtone-tokens/v1.29.0) (2024-04-09)
+
+
+### Features
+
+* DLT-1678 build all themes ([#253](https://github.com/dialpad/dialtone/issues/253)) ([fe9c373](https://github.com/dialpad/dialtone/commit/fe9c373212f74a56afac3c7e9efe0d15bdeb7a7b))
+
 # [1.28.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.2...dialtone-tokens/v1.28.0) (2024-04-07)
 
 
