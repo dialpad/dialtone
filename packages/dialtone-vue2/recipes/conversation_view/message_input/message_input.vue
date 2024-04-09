@@ -28,6 +28,13 @@
         :link="link"
         :placeholder="placeholder"
         :mention-suggestion="mentionSuggestion"
+        :allow-blockquote="allowBlockquote"
+        :allow-bold="allowBold"
+        :allow-bullet-list="allowBulletList"
+        :allow-italic="allowItalic"
+        :allow-list-item="allowListItem"
+        :allow-strike="allowStrike"
+        :allow-underline="allowUnderline"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
@@ -433,6 +440,62 @@ export default {
     mentionSuggestion: {
       type: Object,
       default: null,
+    },
+
+    /**
+     * Whether the input allows for block quote.
+     */
+    allowBlockquote: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for bold to be introduced in the text.
+     */
+    allowBold: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for bullet list to be introduced in the text.
+    */
+    allowBulletList: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for italic to be introduced in the text.
+     */
+    allowItalic: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for list item to be introduced in the text.
+     */
+    allowListItem: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for strike to be introduced in the text.
+     */
+    allowStrike: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for underline to be introduced in the text.
+     */
+    allowUnderline: {
+      type: Boolean,
+      default: true,
     },
   },
 
