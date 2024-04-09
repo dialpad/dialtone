@@ -9,9 +9,6 @@
       Text only with unicode 😃 emoji
     </dt-emoji-text-wrapper>
     <dt-emoji-text-wrapper>
-      Text only with invalid unicode 🫡 emoji
-    </dt-emoji-text-wrapper>
-    <dt-emoji-text-wrapper>
       <button class="d-btn d-btn--primary">
         Button wrapper :smile:
       </button>

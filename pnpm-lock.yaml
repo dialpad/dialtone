@@ -99,8 +99,8 @@ importers:
         specifier: ^10.2.1
         version: 10.3.0
       emoji-toolkit:
-        specifier: ^6.6.0
-        version: 6.6.0
+        specifier: ^8.0.0
+        version: 8.0.0
       requireindex:
         specifier: ^1.2.0
         version: 1.2.0
@@ -617,11 +617,11 @@ importers:
         specifier: ^2.30.0
         version: 2.30.0
       emoji-regex:
-        specifier: ^10.2.1
+        specifier: ^10.3.0
         version: 10.3.0
       emoji-toolkit:
-        specifier: ^6.6.0
-        version: 6.6.0
+        specifier: ^8.0.0
+        version: 8.0.0
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7
@@ -843,11 +843,11 @@ importers:
         specifier: ^2.30.0
         version: 2.30.0
       emoji-regex:
-        specifier: ^10.2.1
+        specifier: ^10.3.0
         version: 10.3.0
       emoji-toolkit:
-        specifier: ^6.6.0
-        version: 6.6.0
+        specifier: ^8.0.0
+        version: 8.0.0
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7
@@ -14274,8 +14274,8 @@ packages:
   /emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
 
-  /emoji-toolkit@6.6.0:
-    resolution: {integrity: sha512-pEu0kow2p1N8zCKnn/L6H0F3rWUBB3P3hVjr/O5yl1fK7N9jU4vO4G7EFapC5Y3XwZLUCY0FZbOPyTkH+4V2eQ==}
+  /emoji-toolkit@8.0.0:
+    resolution: {integrity: sha512-Vz8YIqQJsQ+QZ4yuKMMzliXceayqfWbNjb6bST+vm77QAhU2is3I+/PRxrNknW+q1bvHHMgjLCQXxzINWLVapg==}
     dev: false
 
   /emojis-list@3.0.0:
