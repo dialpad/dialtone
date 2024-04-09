@@ -327,7 +327,23 @@ import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
 Dialtone tokens doesn't have a default export, so you need to access
 the files directly as following:
 
+- CSS
+
 ```css
-@import "@dialpad/dialtone-tokens/css/variables-light.css" // Light tokens
-@import "@dialpad/dialtone-tokens/css/variables-dark.css" // Dark tokens
+@import "@dialpad/dialtone/tokens/variables-light.css" // Light tokens
+@import "@dialpad/dialtone/tokens/variables-dark.css" // Dark tokens
+```
+
+- LESS
+
+```less
+@import "@dialpad/dialtone/tokens/variables-light.less" // Light tokens
+@import "@dialpad/dialtone/tokens/variables-dark.less" // Dark tokens
+```
+
+- JSON
+
+```js
+import "@dialpad/dialtone/tokens/tokens-light.json" // Light tokens
+import "@dialpad/dialtone/tokens/tokens-dark.json" // Dark tokens
 ```
