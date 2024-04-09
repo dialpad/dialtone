@@ -4415,8 +4415,68 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "semantic/dp/default": "enabled"
     },
     "group": "expressive"
+  },
+  {
+    "id": "2dd8e572ffd0fc521451be9a41df23182a10d6e6",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "enabled",
+      "base/dark": "enabled",
+      "semantic/dp/default": "enabled",
+      "semantic/dp/dark": "enabled",
+      "semantic/expressive/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/checkbox/dark": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled",
+      "components/radio/dark": "enabled"
+    },
+    "group": "expressive"
+  },
+  {
+    "id": "a7705a1017f866e6d26c86e483eea649824498cf",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "enabled",
+      "semantic/dp/default": "enabled",
+      "semantic/expressive/sm": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "expressive-sm"
+  },
+  {
+    "id": "b44842943a6314033f32e041ab17daf7d52c7c7a",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "enabled",
+      "base/dark": "enabled",
+      "semantic/dp/default": "enabled",
+      "semantic/dp/dark": "enabled",
+      "semantic/expressive/sm": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/checkbox/dark": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled",
+      "components/radio/dark": "enabled"
+    },
+    "group": "expressive-sm"
   }
 ]
