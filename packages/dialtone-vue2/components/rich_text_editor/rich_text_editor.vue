@@ -188,14 +188,6 @@ export default {
     },
 
     /**
-     * Whether the input allows for list item to be introduced in the text.
-     */
-    allowListItem: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
      * Whether the input allows for strike to be introduced in the text.
      */
     allowStrike: {
@@ -265,15 +257,13 @@ export default {
       }
       if (this.allowBulletList) {
         extensions.push(BulletList);
-      }
-      if (this.allowItalic) {
-        extensions.push(Italic);
-      }
-      if (this.allowListItem) {
         extensions.push(ListItem);
         extensions.push(OrderedList.configure({
           itemTypeName: 'listItem',
         }));
+      }
+      if (this.allowItalic) {
+        extensions.push(Italic);
       }
       if (this.allowStrike) {
         extensions.push(Strike);

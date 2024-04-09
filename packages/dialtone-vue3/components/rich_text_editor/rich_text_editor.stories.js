@@ -131,7 +131,6 @@ export const WithCustomExtensions = {
     allowBold: false,
     allowBulletList: false,
     allowItalic: false,
-    allowListItem: false,
     allowStrike: false,
     allowUnderline: false,
   },

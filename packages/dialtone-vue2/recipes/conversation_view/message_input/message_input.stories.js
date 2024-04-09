@@ -157,7 +157,6 @@ export const WithoutExtensions = {
     allowBold: false,
     allowBulletList: false,
     allowItalic: false,
-    allowListItem: false,
     allowStrike: false,
     allowUnderline: false,
   },

@@ -32,7 +32,6 @@
         :allow-bold="allowBold"
         :allow-bullet-list="allowBulletList"
         :allow-italic="allowItalic"
-        :allow-list-item="allowListItem"
         :allow-strike="allowStrike"
         :allow-underline="allowUnderline"
         v-bind="$attrs"
@@ -470,14 +469,6 @@ export default {
      * Whether the input allows for italic to be introduced in the text.
      */
     allowItalic: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Whether the input allows for list item to be introduced in the text.
-     */
-    allowListItem: {
       type: Boolean,
       default: true,
     },

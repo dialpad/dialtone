@@ -13,7 +13,6 @@
     :allow-bold="$attrs.allowBold"
     :allow-bullet-list="$attrs.allowBulletList"
     :allow-italic="$attrs.allowItalic"
-    :allow-list-item="$attrs.allowListItem"
     :allow-strike="$attrs.allowStrike"
     :allow-underline="$attrs.allowUnderline"
     @blur="$attrs.onBlur"
