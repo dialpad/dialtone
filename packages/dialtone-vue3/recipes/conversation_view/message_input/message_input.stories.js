@@ -157,3 +157,16 @@ export const Default = {
   render: DefaultTemplate,
   args: {},
 };
+
+export const WithoutExtensions = {
+  render: DefaultTemplate,
+  args: {
+    allowBlockquote: false,
+    allowBold: false,
+    allowBulletList: false,
+    allowItalic: false,
+    allowListItem: false,
+    allowStrike: false,
+    allowUnderline: false,
+  },
+};
