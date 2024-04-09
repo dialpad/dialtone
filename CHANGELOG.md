@@ -1,3 +1,17 @@
+# [9.28.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.27.1...dialtone/v9.28.0) (2024-04-09)
+
+
+### Bug Fixes
+
+* NO-JIRA add @tiptap/vue-3 as optional ([#254](https://github.com/dialpad/dialtone/issues/254)) ([ea4ee43](https://github.com/dialpad/dialtone/commit/ea4ee43419080b0a2a5283c0e152290418f51942))
+
+
+### Features
+
+* DLT-1205 update joypixels to 8.0 ([#251](https://github.com/dialpad/dialtone/issues/251)) ([59a96a4](https://github.com/dialpad/dialtone/commit/59a96a4b5683566d499661efdeee03c7d865aff1))
+* DLT-1678 build all themes ([#253](https://github.com/dialpad/dialtone/issues/253)) ([fe9c373](https://github.com/dialpad/dialtone/commit/fe9c373212f74a56afac3c7e9efe0d15bdeb7a7b))
+* NO-JIRA add tokens and remove eslint/stylelint plugins ([#255](https://github.com/dialpad/dialtone/issues/255)) ([58dfe4d](https://github.com/dialpad/dialtone/commit/58dfe4d75acdc1b206f8a74a3f7d5a43a7a755d2))
+
 ## [9.27.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.27.0...dialtone/v9.27.1) (2024-04-07)
 
 
