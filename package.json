@@ -71,16 +71,13 @@
     "dist"
   ],
   "exports": {
+    "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": {
       "import": "./dist/css/dialtone.min.css",
       "style": "./dist/css/dialtone.min.css"
     },
-    "./eslint-plugin": {
-      "default": "./dist/eslint-plugin/index.js"
-    },
-    "./stylelint-plugin": {
-      "default": "./dist/stylelint-plugin/index.js"
-    },
+    "./tokens/*.css": "./dist/tokens/css/*.css",
+    "./tokens/*.less": "./dist/tokens/less/*.less",
     "./vue2": {
       "types": "./dist/vue2/types/index.d.ts",
       "default": "./dist/vue2/dialtone-vue.js"
@@ -89,7 +86,6 @@
       "types": "./dist/vue3/types/index.d.ts",
       "default": "./dist/vue3/dialtone-vue.js"
     },
-    "./CHANGELOG.json": "./CHANGELOG.json",
     "./*": "./dist/*"
   },
   "resolutions": {
