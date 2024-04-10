@@ -116,3 +116,15 @@ export const WithMentionSuggestions = {
     mentionSuggestion,
   },
 };
+
+export const WithCustomExtensions = {
+  render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
+  args: {
+    allowBlockquote: false,
+    allowBold: false,
+    allowBulletList: false,
+    allowItalic: false,
+    allowStrike: false,
+    allowUnderline: false,
+  },
+};

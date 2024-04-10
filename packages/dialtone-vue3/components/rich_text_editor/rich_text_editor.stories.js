@@ -123,3 +123,15 @@ export const WithMentionSuggestions = {
     mentionSuggestion,
   },
 };
+
+export const WithCustomExtensions = {
+  ...Default,
+  args: {
+    allowBlockquote: false,
+    allowBold: false,
+    allowBulletList: false,
+    allowItalic: false,
+    allowStrike: false,
+    allowUnderline: false,
+  },
+};

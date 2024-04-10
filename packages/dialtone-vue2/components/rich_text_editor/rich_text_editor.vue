@@ -7,6 +7,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import { Editor, EditorContent } from '@tiptap/vue-2';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
@@ -153,6 +154,54 @@ export default {
       type: Object,
       default: null,
     },
+
+    /**
+     * Whether the input allows for block quote.
+     */
+    allowBlockquote: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for bold to be introduced in the text.
+     */
+    allowBold: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for bullet list to be introduced in the text.
+    */
+    allowBulletList: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for italic to be introduced in the text.
+     */
+    allowItalic: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for strike to be introduced in the text.
+     */
+    allowStrike: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for underline to be introduced in the text.
+     */
+    allowUnderline: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   emits: [
@@ -193,22 +242,34 @@ export default {
   },
 
   computed: {
+    // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [
-        Blockquote,
-        Bold,
-        BulletList,
-        Document,
-        Italic,
-        ListItem,
-        Paragraph,
-        Strike,
-        Text,
-        Underline,
-      ];
+      const extensions = [Document, Paragraph, Text];
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
+      }
+      if (this.allowBlockquote) {
+        extensions.push(Blockquote);
+      }
+      if (this.allowBold) {
+        extensions.push(Bold);
+      }
+      if (this.allowBulletList) {
+        extensions.push(BulletList);
+        extensions.push(ListItem);
+        extensions.push(OrderedList.configure({
+          itemTypeName: 'listItem',
+        }));
+      }
+      if (this.allowItalic) {
+        extensions.push(Italic);
+      }
+      if (this.allowStrike) {
+        extensions.push(Strike);
+      }
+      if (this.allowUnderline) {
+        extensions.push(Underline);
       }
 
       // Enable placeholderText
@@ -260,10 +321,6 @@ export default {
         HTMLAttributes: {
           class: 'dt-rich-text-editor--code-block',
         },
-      }));
-
-      extensions.push(OrderedList.configure({
-        itemTypeName: 'listItem',
       }));
 
       return extensions;

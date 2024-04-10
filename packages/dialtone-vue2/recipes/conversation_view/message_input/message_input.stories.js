@@ -149,3 +149,15 @@ export default {
 export const Default = {
   render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
 };
+
+export const WithoutExtensions = {
+  render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
+  args: {
+    allowBlockquote: false,
+    allowBold: false,
+    allowBulletList: false,
+    allowItalic: false,
+    allowStrike: false,
+    allowUnderline: false,
+  },
+};
