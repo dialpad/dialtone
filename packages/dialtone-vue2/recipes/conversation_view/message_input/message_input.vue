@@ -178,9 +178,9 @@
               kind="default"
               importance="primary"
               :class="[
-                'd-btn--circle',
                 {
                   'message-input-button__disabled d-fc-muted': isSendDisabled,
+                  'd-btn--circle': !showSend.icon,
                 },
               ]"
               :aria-label="showSend.ariaLabel"
