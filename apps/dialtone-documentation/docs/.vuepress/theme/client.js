@@ -56,22 +56,18 @@ export default defineClientConfig({
 
 async function registerDialtoneVue (app) {
   const module = await import('@dialpad/dialtone-vue');
-  const dialtoneComponents = Object.keys(module).filter((key) => (key.startsWith('Dt') && !key.endsWith('Directive')));
-  const dialtoneDirectives = Object.keys(module).filter((key) => (key.startsWith('Dt') && key.endsWith('Directive')));
-  const dialtoneConstants = Object
-    .keys(module)
-    .filter((key) => /^[A-Z_]+$/.test(key))
-    .reduce((res, key) => {
-      res[key] = module[key];
-      return res;
-    }, {});
+  const dialtoneConstants = [];
+  const dialtoneComponents = [];
 
-  dialtoneComponents.forEach(key => {
-    app.component(key, module[key]);
-  });
-
-  dialtoneDirectives.forEach(directive => {
-    app.use(directive);
+  Object.keys(module).forEach(key => {
+    if (/^[A-Z_]+$/.test(key)) {
+      dialtoneConstants[key] = module[key];
+    } else if (key.endsWith('Directive')) {
+      app.use(module[key]);
+    } else {
+      dialtoneComponents[key] = module[key];
+      app.component(key, module[key]);
+    }
   });
 
   app.provide('dialtoneComponents', dialtoneComponents);
