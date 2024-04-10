@@ -1,8 +1,7 @@
 <template>
   <div class="d-d-flex d-ai-flex-end d-jc-space-between d-w100p">
-    <div class="d-w100p d-mr8">
+    <div v-if="bannerTitle" class="d-w100p d-mr8">
       <dt-select-menu
-        v-if="bannerTitle"
         label="Kind of Banner"
         size="sm"
         @change="changeBannerKind"
