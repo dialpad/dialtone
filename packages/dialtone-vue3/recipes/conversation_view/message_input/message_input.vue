@@ -180,7 +180,7 @@
               :class="[
                 {
                   'message-input-button__disabled d-fc-muted': isSendDisabled,
-                  'd-btn--circle': !showSend.icon,
+                  'd-btn--circle': showSend.icon,
                 },
               ]"
               :aria-label="showSend.ariaLabel"
