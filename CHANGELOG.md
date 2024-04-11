@@ -1,3 +1,21 @@
+# [9.29.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.28.0...dialtone/v9.29.0) (2024-04-11)
+
+
+### Bug Fixes
+
+* NO-JIRA library not working ([#262](https://github.com/dialpad/dialtone/issues/262)) ([745ce50](https://github.com/dialpad/dialtone/commit/745ce5081d79f8d5a2fa448594604ce6b8d52fc2))
+* NO-JIRA remove circle button class when its not an icon ([#258](https://github.com/dialpad/dialtone/issues/258)) ([c24b46b](https://github.com/dialpad/dialtone/commit/c24b46b7cdc3b996f024797485d2bfd0a503a62a))
+
+
+### Documentation
+
+* NO-JIRA fix unresolved directives ([#260](https://github.com/dialpad/dialtone/issues/260)) ([7a98138](https://github.com/dialpad/dialtone/commit/7a98138f94db531f4ff348854d75a1ce6c791a08))
+
+
+### Features
+
+* DLT-1680 add ability to enable/disable extensions ([#256](https://github.com/dialpad/dialtone/issues/256)) ([75d167a](https://github.com/dialpad/dialtone/commit/75d167ae38958608b32e6c7bcc77834eff2fa962))
+
 # [9.28.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.27.1...dialtone/v9.28.0) (2024-04-09)
 
 
