@@ -1,3 +1,16 @@
+# [3.120.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.119.0...dialtone-vue3/v3.120.0) (2024-04-11)
+
+
+### Bug Fixes
+
+* NO-JIRA library not working ([#262](https://github.com/dialpad/dialtone/issues/262)) ([745ce50](https://github.com/dialpad/dialtone/commit/745ce5081d79f8d5a2fa448594604ce6b8d52fc2))
+* NO-JIRA remove circle button class when its not an icon ([#258](https://github.com/dialpad/dialtone/issues/258)) ([c24b46b](https://github.com/dialpad/dialtone/commit/c24b46b7cdc3b996f024797485d2bfd0a503a62a))
+
+
+### Features
+
+* DLT-1680 add ability to enable/disable extensions ([#256](https://github.com/dialpad/dialtone/issues/256)) ([75d167a](https://github.com/dialpad/dialtone/commit/75d167ae38958608b32e6c7bcc77834eff2fa962))
+
 # [3.119.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.118.1...dialtone-vue3/v3.119.0) (2024-04-09)
 
 
