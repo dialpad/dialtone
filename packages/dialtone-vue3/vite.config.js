@@ -38,7 +38,7 @@ export default defineConfig({
         ...recipeEntries,
         'dialtone-vue': resolve(__dirname, './index.js'),
       },
-      formats: ['es'],
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
       external: [
