@@ -1,3 +1,11 @@
+## [9.29.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.29.0...dialtone/v9.29.1) (2024-04-11)
+
+
+### Bug Fixes
+
+* NO-JIRA add cjs support for dialtone-emojis ([#264](https://github.com/dialpad/dialtone/issues/264)) ([100cf5c](https://github.com/dialpad/dialtone/commit/100cf5cfc58b6416c86bbe4d8c19a157052b046a))
+* NO-JIRA add types to vue3/* export ([2e770d1](https://github.com/dialpad/dialtone/commit/2e770d17e6e43b5fcc08fe896505a9f07b051c5e))
+
 # [9.29.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.28.0...dialtone/v9.29.0) (2024-04-11)
 
 
