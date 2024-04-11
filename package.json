@@ -82,6 +82,7 @@
     },
     "./vue2/css": "./dist/vue2/style.css",
     "./vue2/*": {
+      "types": "./dist/vue2/types/index.d.ts",
       "import": "./dist/vue2/lib/*.js",
       "require": "./dist/vue2/lib/*.cjs"
     },
@@ -92,6 +93,7 @@
     },
     "./vue3/css": "./dist/vue3/style.css",
     "./vue3/*": {
+      "types": "./dist/vue3/types/index.d.ts",
       "import": "./dist/vue3/lib/*.js",
       "require": "./dist/vue3/lib/*.cjs"
     },
