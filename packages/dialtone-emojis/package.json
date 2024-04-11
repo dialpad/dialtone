@@ -38,5 +38,6 @@
   "files": [
     "src"
   ],
-  "main": "index.js"
+  "main": "index.cjs",
+  "module": "index.js"
 }
