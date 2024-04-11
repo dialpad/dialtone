@@ -1,3 +1,10 @@
+## [4.12.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.12.2...dialtone-icons/v4.12.3) (2024-04-11)
+
+
+### Bug Fixes
+
+* NO-JIRA library not working ([#262](https://github.com/dialpad/dialtone/issues/262)) ([745ce50](https://github.com/dialpad/dialtone/commit/745ce5081d79f8d5a2fa448594604ce6b8d52fc2))
+
 ## [4.12.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.12.1...dialtone-icons/v4.12.2) (2024-04-07)
 
 ## [4.12.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.12.0...dialtone-icons/v4.12.1) (2024-03-26)
