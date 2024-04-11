@@ -126,7 +126,6 @@ vueCode='
     </dt-button>
     <dt-button
       id="confirm-button"
-      :kind="$attrs.kind"
       importance="primary"
       class="d-ml6"
     >
@@ -210,7 +209,6 @@ vueCode='
     </dt-button>
     <dt-button
       id="confirm-button"
-      :kind="$attrs.kind"
       importance="primary"
       class="d-ml6"
     >
@@ -293,7 +291,7 @@ vueCode='
     </dt-button>
     <dt-button
       id="confirm-button"
-      :kind="$attrs.kind"
+      kind="danger"
       importance="primary"
       class="d-ml6"
     >
@@ -376,7 +374,6 @@ vueCode='
     </dt-button>
     <dt-button
       id="confirm-button"
-      :kind="$attrs.kind"
       importance="primary"
       class="d-ml6"
     >
@@ -462,7 +459,6 @@ vueCode='
     </dt-button>
     <dt-button
       id="confirm-button"
-      :kind="$attrs.kind"
       importance="primary"
       class="d-ml6"
     >

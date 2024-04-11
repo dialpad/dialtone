@@ -236,8 +236,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="muted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -259,8 +259,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="muted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -282,8 +282,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="muted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -305,8 +305,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="muted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -328,8 +328,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="muted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -555,8 +555,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="inverted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -579,8 +579,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="inverted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -603,8 +603,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="inverted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -627,8 +627,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="inverted"
+      @click="onClick"
     >
       Action
     </dt-button>
@@ -651,8 +651,8 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      :kind="buttonKind"
-      @click="$attrs.onClick"
+      kind="inverted"
+      @click="onClick"
     >
       Action
     </dt-button>
