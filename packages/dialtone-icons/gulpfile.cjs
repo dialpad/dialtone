@@ -177,16 +177,16 @@ const updateIconsJSON = function (done) {
 };
 
 const updateExports = function (done) {
-  let exportsList = '';
+  let exportsList = "export const icons = import.meta.glob('./src/icons/*.vue', { eager: true, import: 'default' });";
 
-  svgList.forEach(file => {
-    const fileName = file.split('/').slice(-2)[1].split('.')[0];
-    const iconName = `dt-icon-${fileName}`.toLowerCase()
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join('');
-    exportsList += `export const ${iconName} = () => import('./src/icons/${fileName}.vue');\n`;
-  });
+  // svgList.forEach(file => {
+  //   const fileName = file.split('/').slice(-2)[1].split('.')[0];
+  //   const iconName = `dt-icon-${fileName}`.toLowerCase()
+  //   .split('-')
+  //   .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  //   .join('');
+  //   exportsList += `export const ${iconName} = () => import('./src/icons/${fileName}.vue');\n`;
+  // });
 
   fs.writeFileSync(paths.exports.index, exportsList);
 

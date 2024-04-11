@@ -27,14 +27,12 @@ describe('DtAvatar Tests', () => {
   let count;
   let presence;
 
-  const updateWrapper = async () => {
+  const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
       propsData: { ...baseProps, ...mockProps },
       listeners: { ...baseListeners, ...mockListeners },
       localVue: testContext.localVue,
     });
-
-    await vi.dynamicImportSettled();
 
     image = wrapper.find('[data-qa="dt-avatar-image"]');
     count = wrapper.find('[data-qa="dt-avatar-count"]');
@@ -66,10 +64,10 @@ describe('DtAvatar Tests', () => {
     });
 
     describe('When the imageSrc is provided', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         mockProps = { imageSrc: MOCK_IMAGE_SOURCE };
 
-        await updateWrapper();
+        updateWrapper();
       });
 
       it('image should exist', () => {
@@ -80,16 +78,16 @@ describe('DtAvatar Tests', () => {
         expect(image.attributes('src')).toBe(MOCK_IMAGE_SOURCE);
       });
 
-      it('alt should match those provided by attrs', async () => {
+      it('alt should match those provided by attrs', () => {
         expect(image.attributes('alt')).toBe(MOCK_IMAGE_ALT);
       });
     });
 
     describe('When the iconName is provided', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         mockProps = { iconName: 'accessibility' };
 
-        await updateWrapper();
+        updateWrapper();
       });
 
       it('icon should exist', () => {
@@ -97,7 +95,7 @@ describe('DtAvatar Tests', () => {
       });
 
       it('should have correct class', () => {
-        expect(wrapper.find('span').classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
+        expect(wrapper.find('svg').classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
       });
     });
 
@@ -113,10 +111,10 @@ describe('DtAvatar Tests', () => {
       });
 
       describe('When size is sm', () => {
-        it('shows a single character', async () => {
+        it('shows a single character', () => {
           mockProps = { size: 'sm' };
 
-          await updateWrapper();
+          updateWrapper();
 
           expect(wrapper.text()).toBe(MOCK_INITIALS[0]);
         });
@@ -144,10 +142,10 @@ describe('DtAvatar Tests', () => {
     });
 
     describe('When group is provided', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         mockProps = { group: MOCK_GROUP };
 
-        await updateWrapper();
+        updateWrapper();
       });
 
       it('should have group count', () => {

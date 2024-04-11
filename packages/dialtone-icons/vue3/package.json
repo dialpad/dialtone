@@ -9,11 +9,17 @@
     "vite": "^5.0.12",
     "vue": "^3.4.15"
   },
+  "type": "module",
+  "main": "./dist/dialtone-icons.cjs",
   "module": "./dist/dialtone-icons.js",
   "exports": {
-    ".": "./dist/dialtone-icons.js",
-    "./*": "./dist/components/*.js"
-  },
-  "type": "module",
-  "sideEffects": false
+    ".": {
+      "import": "./dist/dialtone-icons.js",
+      "require": "./dist/dialtone-icons.cjs"
+    },
+    "./*": {
+      "import": "./dist/components/*.js",
+      "require": "./dist/components/*.cjs"
+    }
+  }
 }

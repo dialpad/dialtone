@@ -57,7 +57,7 @@ describe('DtAvatar Tests', () => {
     });
 
     describe('When the imageSrc is provided', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         mockProps = { imageSrc: MOCK_IMAGE_SOURCE };
 
         updateWrapper();
@@ -77,11 +77,10 @@ describe('DtAvatar Tests', () => {
     });
 
     describe('When the iconName is provided', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         mockProps = { iconName: 'accessibility' };
 
         updateWrapper();
-        await vi.dynamicImportSettled();
       });
 
       it('icon should exist', () => {
@@ -105,7 +104,7 @@ describe('DtAvatar Tests', () => {
       });
 
       describe('When size is sm', () => {
-        it('shows a single character', async () => {
+        it('shows a single character', () => {
           mockProps = { size: 'sm' };
 
           updateWrapper();
@@ -136,7 +135,7 @@ describe('DtAvatar Tests', () => {
     });
 
     describe('When group is provided', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         mockProps = { group: MOCK_GROUP };
 
         updateWrapper();

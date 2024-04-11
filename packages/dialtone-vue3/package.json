@@ -148,14 +148,15 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "default": "./dist/dialtone-vue.js"
+      "import": "./dist/dialtone-vue.js",
+      "require": "./dist/dialtone-vue.cjs"
     },
-    "./css": {
-      "style": "./dist/style.css",
-      "import": "./dist/style.css"
-    },
+    "./css": "./dist/style.css",
     "./component-documentation.json": "./dist/component-documentation.json",
-    "./*": "./dist/lib/*"
+    "./*": {
+      "import": "./dist/lib/*.js",
+      "require": "./dist/lib/*.cjs"
+    }
   },
   "homepage": "https://dialtone.dialpad.com/vue3",
   "keywords": [
