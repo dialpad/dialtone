@@ -1,3 +1,10 @@
+## [3.120.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.120.0...dialtone-vue3/v3.120.1) (2024-04-12)
+
+
+### Bug Fixes
+
+* NO-JIRA update exports and peerDependencies ([#266](https://github.com/dialpad/dialtone/issues/266)) ([9a43203](https://github.com/dialpad/dialtone/commit/9a43203eb2b4a457543797c822a16d98daf334a4))
+
 # [3.120.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.119.0...dialtone-vue3/v3.120.0) (2024-04-11)
 
 
