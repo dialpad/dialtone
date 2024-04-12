@@ -1,3 +1,10 @@
+## [2.127.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.127.0...dialtone-vue2/v2.127.1) (2024-04-12)
+
+
+### Bug Fixes
+
+* NO-JIRA update exports and peerDependencies ([#266](https://github.com/dialpad/dialtone/issues/266)) ([9a43203](https://github.com/dialpad/dialtone/commit/9a43203eb2b4a457543797c822a16d98daf334a4))
+
 # [2.127.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.126.0...dialtone-vue2/v2.127.0) (2024-04-11)
 
 
