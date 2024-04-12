@@ -146,6 +146,7 @@
   },
   "type": "module",
   "types": "./dist/types/index.d.ts",
+  "main": "./dist/dialtone-vue.cjs",
   "module": "./dist/dialtone-vue.js",
   "exports": {
     ".": {
@@ -156,8 +157,8 @@
     "./css": "./dist/style.css",
     "./component-documentation.json": "./dist/component-documentation.json",
     "./*": {
-      "import": "./dist/lib/*.js",
-      "require": "./dist/lib/*.cjs"
+      "import": "./dist/*.js",
+      "require": "./dist/*.cjs"
     }
   },
   "homepage": "https://dialtone.dialpad.com/vue",
