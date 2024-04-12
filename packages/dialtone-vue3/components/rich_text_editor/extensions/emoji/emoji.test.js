@@ -37,6 +37,8 @@ const _getEmojiNodesFromJSON = () => {
   const emojiNodes = [];
 
   for (const paragraph of json.content) {
+    if (!paragraph.content) continue;
+
     for (const node of paragraph.content) {
       if (node.type !== 'emoji') continue;
       emojiNodes.push(node);

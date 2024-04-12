@@ -13,7 +13,11 @@ function _getEntries (pathPrefix, globRegex, entrySuffix = '') {
     let entryName = _extractEntryNameFromPath(path, pathPrefix);
     if (entrySuffix) entryName += `-${entrySuffix}`;
 
-    entries[`lib/${entryName}`] = path;
+    if (pathPrefix === 'common') {
+      entries[`common/${entryName}`] = path;
+    } else {
+      entries[`lib/${entryName}`] = path;
+    }
 
     return entries;
   }, {});
@@ -54,11 +58,11 @@ export default defineConfig({
       ],
       output: {
         chunkFileNames: () => 'chunks/[name]-[hash].js',
-        minifyInternalExports: true,
+        minifyInternalExports: false,
       },
       treeshake: 'smallest',
     },
-    minify: true,
+    minify: false,
   },
   plugins: [vue()],
   resolve: {
