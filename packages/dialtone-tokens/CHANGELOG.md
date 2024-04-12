@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.29.0...dialtone-tokens/v1.30.0) (2024-04-12)
+
+
+### Features
+
+* DLT-1627 adding new tokens for expressive mode ([#214](https://github.com/dialpad/dialtone/issues/214)) ([90f304f](https://github.com/dialpad/dialtone/commit/90f304feb933d23535cb7c891839c18646d63836))
+
 # [1.29.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.28.0...dialtone-tokens/v1.29.0) (2024-04-09)
 
 
