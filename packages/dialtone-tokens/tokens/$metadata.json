@@ -5,6 +5,8 @@
     "base/dark",
     "semantic/dp/default",
     "semantic/dp/dark",
+    "semantic/expressive/default",
+    "semantic/expressive/sm",
     "semantic/tmo/default",
     "semantic/tmo/dark",
     "semantic/cox/default",
