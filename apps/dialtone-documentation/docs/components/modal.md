@@ -8,38 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--defau
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A20396&viewport=-724%2C-52%2C0.38&t=xHutRjwo1o5zMTgT-11
 ---
 <code-well-header>
-  <div class="d-d-grid d-gg16 d-g-cols4 md:d-g-cols2 d-fs-200">
-    <a class="d-link" href="#base-style">
-      <figure class="d-m0">
-        <img class="d-bar4 d-w100p" alt="Modal screen: Base" :src="$withBase('/assets/images/screen-modal--base.png')">
-        <figcaption>Base Style</figcaption>
-      </figure>
-    </a>
-    <a class="d-link" href="#fixed-header-and-footer">
-      <figure class="d-m0">
-        <img class="d-bar4 d-w100p" alt="Modal screen: Fixed header and footer" :src="$withBase('/assets/images/screen-modal--fixed-header-and-footer.png')">
-        <figcaption>
-          Fixed header and footer
-        </figcaption>
-      </figure>
-    </a>
-    <a class="d-link" href="#danger">
-      <figure class="d-m0">
-        <img class="d-bar4 d-w100p" alt="Modal screen: Danger" :src="$withBase('/assets/images/screen-modal--danger.png')">
-        <figcaption>
-          Danger
-        </figcaption>
-      </figure>
-    </a>
-    <a class="d-link" href="#full-screen">
-      <figure class="d-m0">
-        <img class="d-bar4 d-w100p" alt="Modal screen: Full Screen" :src="$withBase('/assets/images/screen-modal--fullscreen.png')">
-        <figcaption>
-          Full Screen
-        </figcaption>
-      </figure>
-    </a>
-  </div>
+  <example-modal />
 </code-well-header>
 
 ## Usage
@@ -97,19 +66,80 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
   <example-modal />
 </code-well-header>
 
-```html
-<aside class="d-modal" id="modal-base" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true">
-  <div class="d-modal__dialog" role="document">
-    <h2 class="d-modal__header" id="modal-title">…</h2>
-    <p class="d-modal__content" id="modal-description">…</p>
+<code-example-tabs
+htmlCode='
+<button type="button" class="base-button__button d-btn d-btn--primary">
+  <span class="d-btn__label base-button__label"> Click to open </span>
+</button>
+<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+  <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
+    <h2 class="d-modal__header">
+      Example title
+    </h2>
+    <div class="d-modal__content">
+      <p id="modal-description">
+        Sed at orci quis nunc finibus gravida eget vitae est...
+      </p>
+      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
+    </div>
     <footer class="d-modal__footer">
-      <button class="d-btn" type="button">…</button>
-      <button class="d-btn d-btn--primary" type="button">…</button>
+      <button class="d-btn d-btn--primary" type="button">
+        Save changes
+      </button>
+      <button class="d-btn" type="button">
+        Cancel
+      </button>
     </footer>
-    <button href="#" class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close"><IconClose /></button>
+    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
+      <span class="d-btn__icon">
+        <span class="d-icon__wrapper">
+          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
+            <div
+              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            ></div>
+          </div>
+          <svg>...</svg>
+        </span>
+      </span>
+    </button>
   </div>
 </aside>
-```
+'
+vueCode='
+<dt-modal
+  title="Example title"
+  close-button-props="Close"
+  :show="isOpen"
+  @update:show="updateShow"
+  copy="Lorem ipsum ..."
+>
+  <template
+    #footer
+  >
+    <dt-button
+      id="cancel-button"
+      :kind="secondaryButtonKind"
+      importance="clear"
+    >
+      Cancel
+    </dt-button>
+    <dt-button
+      id="confirm-button"
+      importance="primary"
+      class="d-ml6"
+    >
+      Confirm
+    </dt-button>
+  </template>
+</dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
+'
+showHtmlWarning />
 
 ### Fixed header and footer
 
@@ -117,19 +147,82 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
   <example-modal kind="fixed" />
 </code-well-header>
 
-```html
-<aside class="d-modal" id="modal-base" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true">
-  <div class="d-modal__dialog d-modal__dialog--scrollable" role="document">
-    <h2 class="d-modal__header" id="modal-title">…</h2>
-    <p class="d-modal__content" id="modal-description">…</p>
+<code-example-tabs
+htmlCode='
+<button type="button" class="base-button__button d-btn d-btn--primary">
+  <span class="d-btn__label base-button__label"> Click to open </span>
+</button>
+<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+  <div class="d-modal__dialog d-modal__dialog--animate-in d-modal__dialog--scrollable d-hmx764" role="document">
+    <h2 class="d-modal__header">
+      Example title
+    </h2>
+    <div class="d-modal__content">
+      <p id="modal-description">
+        Sed at orci quis nunc finibus gravida eget vitae est...
+      </p>
+      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
+    </div>
     <footer class="d-modal__footer">
-      <button class="d-btn" type="button">…</button>
-      <button class="d-btn d-btn--primary" type="button">…</button>
+      <button class="d-btn d-btn--primary" type="button">
+        Save changes
+      </button>
+      <button class="d-btn" type="button">
+        Cancel
+      </button>
     </footer>
-    <button href="#" class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close"><IconClose /></button>
+    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
+      <span class="d-btn__icon">
+        <span class="d-icon__wrapper">
+          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
+            <div
+              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            ></div>
+          </div>
+          <svg>...</svg>
+        </span>
+      </span>
+    </button>
   </div>
 </aside>
-```
+'
+vueCode='
+<dt-modal
+  title="Example title"
+  close-button-props="Close"
+  :show="isOpen"
+  @update:show="updateShow"
+  :showFooter="true"
+  :fixed-header-footer="true"
+  copy="Sed at orci quis nunc finibus gravida eget vitae est..."
+>
+  <template
+    #footer
+  >
+    <dt-button
+      id="cancel-button"
+      :kind="secondaryButtonKind"
+      importance="clear"
+    >
+      Cancel
+    </dt-button>
+    <dt-button
+      id="confirm-button"
+      importance="primary"
+      class="d-ml6"
+    >
+      Confirm
+    </dt-button>
+  </template>
+</dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
+'
+showHtmlWarning />
 
 ### Danger
 
@@ -137,19 +230,82 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
   <example-modal kind="danger" />
 </code-well-header>
 
-```html
-<aside class="d-modal d-modal--danger" id="modal-base" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true">
-  <div class="d-modal__dialog" role="document">
-    <h2 class="d-modal__header" id="modal-title">…</h2>
-    <p class="d-modal__content" id="modal-description">…</p>
+<code-example-tabs
+htmlCode='
+<button type="button" class="base-button__button d-btn d-btn--primary">
+  <span class="d-btn__label base-button__label"> Click to open </span>
+</button>
+<aside id="modal-base" class="d-modal d-m0 d-modal--danger d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+  <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
+    <h2 class="d-modal__header">
+      Example title
+    </h2>
+    <div class="d-modal__content">
+      <p id="modal-description">
+        Sed at orci quis nunc finibus gravida eget vitae est...
+      </p>
+      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
+    </div>
     <footer class="d-modal__footer">
-      <button class="d-btn" type="button">…</button>
-      <button class="d-btn d-btn--danger d-btn--primary" type="button">…</button>
+      <button class="d-btn d-btn--primary d-btn--danger" type="button">
+        Save changes
+      </button>
+      <button class="d-btn d-btn--muted" type="button">
+        Cancel
+      </button>
     </footer>
-    <button href="#" class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close"><IconClose \></button>
+    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
+      <span class="d-btn__icon">
+        <span class="d-icon__wrapper">
+          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
+            <div
+              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            ></div>
+          </div>
+          <svg>...</svg>
+        </span>
+      </span>
+    </button>
   </div>
 </aside>
-```
+'
+vueCode='
+<dt-modal
+  title="Example title"
+  close-button-props="Close"
+  :show="isOpen"
+  kind="danger"
+  copy="Sed at orci quis nunc finibus gravida eget vitae est..."
+  @update:show="updateShow"
+>
+  <template
+    #footer
+  >
+    <dt-button
+      id="cancel-button"
+      :kind="secondaryButtonKind"
+      importance="clear"
+    >
+      Cancel
+    </dt-button>
+    <dt-button
+      id="confirm-button"
+      kind="danger"
+      importance="primary"
+      class="d-ml6"
+    >
+      Confirm
+    </dt-button>
+  </template>
+</dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
+'
+showHtmlWarning />
 
 ### Full Screen
 
@@ -157,19 +313,81 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
   <example-modal kind="full-screen" />
 </code-well-header>
 
-```html
-<aside class="d-modal d-modal--full" id="modal-base" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true">
-  <div class="d-modal__dialog" role="document">
-    <h2 class="d-modal__header" id="modal-title">…</h2>
-    <p class="d-modal__content" id="modal-description">…</p>
+<code-example-tabs
+htmlCode='
+<button type="button" class="base-button__button d-btn d-btn--primary">
+  <span class="d-btn__label base-button__label"> Click to open </span>
+</button>
+<aside id="modal-base" class="d-modal d-m0 d-modal--full d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+  <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
+    <h2 class="d-modal__header">
+      Example title
+    </h2>
+    <div class="d-modal__content">
+      <p id="modal-description">
+        Sed at orci quis nunc finibus gravida eget vitae est...
+      </p>
+      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
+    </div>
     <footer class="d-modal__footer">
-      <button class="d-btn" type="button">…</button>
-      <button class="d-btn d-btn--primary" type="button">…</button>
+      <button class="d-btn d-btn--primary" type="button">
+        Save changes
+      </button>
+      <button class="d-btn" type="button">
+        Cancel
+      </button>
     </footer>
-    <button href="#" class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close"><IconClose \></button>
+    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
+      <span class="d-btn__icon">
+        <span class="d-icon__wrapper">
+          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
+            <div
+              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            ></div>
+          </div>
+          <svg>...</svg>
+        </span>
+      </span>
+    </button>
   </div>
 </aside>
-```
+'
+vueCode='
+<dt-modal
+  title="Example title"
+  close-button-props="Close"
+  :show="isOpen"
+  size="full"
+  copy="Sed at orci quis nunc finibus gravida eget vitae est..."
+  @update:show="updateShow"
+>
+  <template
+    #footer
+  >
+    <dt-button
+      id="cancel-button"
+      :kind="secondaryButtonKind"
+      importance="clear"
+    >
+      Cancel
+    </dt-button>
+    <dt-button
+      id="confirm-button"
+      importance="primary"
+      class="d-ml6"
+    >
+      Confirm
+    </dt-button>
+  </template>
+</dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
+'
+showHtmlWarning />
 
 ### Has Banner
 
@@ -179,20 +397,82 @@ When there is a need of more context information regarding the content of the Mo
   <example-modal kind="default" bannerKind="success" bannerTitle="This banner can have different kinds." />
 </code-well-header>
 
-```html
-<aside class="d-modal" id="modal-base" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true">
-  <div class="d-modal__banner d-modal__banner--success">...</div>
-  <div class="d-modal__dialog" role="document">
-    <h2 class="d-modal__header" id="modal-title">…</h2>
-    <p class="d-modal__content" id="modal-description">…</p>
+<code-example-tabs
+htmlCode='
+<button type="button" class="base-button__button d-btn d-btn--primary">
+  <span class="d-btn__label base-button__label"> Click to open </span>
+</button>
+<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+  <div class="d-modal__banner d-modal__banner--success">This banner can have different kinds.</div>
+  <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
+    <h2 class="d-modal__header">
+      Example title
+    </h2>
+    <div class="d-modal__content">
+      <p id="modal-description">
+        Sed at orci quis nunc finibus gravida eget vitae est...
+      </p>
+    </div>
     <footer class="d-modal__footer">
-      <button class="d-btn" type="button">…</button>
-      <button class="d-btn d-btn--primary" type="button">…</button>
+      <button class="d-btn d-btn--primary" type="button">
+        Save changes
+      </button>
+      <button class="d-btn" type="button">
+        Cancel
+      </button>
     </footer>
-    <button href="#" class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close"><IconClose /></button>
+    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
+      <span class="d-btn__icon">
+        <span class="d-icon__wrapper">
+          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
+            <div
+              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            ></div>
+          </div>
+          <svg>...</svg>
+        </span>
+      </span>
+    </button>
   </div>
 </aside>
-```
+'
+vueCode='
+<dt-modal
+  title="Example title"
+  close-button-props="Close"
+  :show="isOpen"
+  banner-title="This banner can have different kinds."
+  banner-kind="success"
+  copy="Sed at orci quis nunc finibus gravida eget vitae est..."
+  @update:show="updateShow"
+>
+  <template
+    #footer
+  >
+    <dt-button
+      id="cancel-button"
+      :kind="secondaryButtonKind"
+      importance="clear"
+    >
+      Cancel
+    </dt-button>
+    <dt-button
+      id="confirm-button"
+      importance="primary"
+      class="d-ml6"
+    >
+      Confirm
+    </dt-button>
+  </template>
+</dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
+'
+showHtmlWarning />
 
 ## Vue API
 
