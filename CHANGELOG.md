@@ -1,3 +1,11 @@
+## [9.30.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.30.0...dialtone/v9.30.1) (2024-04-12)
+
+
+### Bug Fixes
+
+* **Combobox:** NO-JIRA remove bad validation ([#267](https://github.com/dialpad/dialtone/issues/267)) ([15900ec](https://github.com/dialpad/dialtone/commit/15900ece27fe565296b1e9c756fc1c1eb4c6608d))
+* **Emoji:** NO-JIRA alignment in vue 3 ([#268](https://github.com/dialpad/dialtone/issues/268)) ([99a5c34](https://github.com/dialpad/dialtone/commit/99a5c3433b3e4961d41bef379f1bb61bfbef81e7))
+
 # [9.30.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.29.1...dialtone/v9.30.0) (2024-04-12)
 
 
