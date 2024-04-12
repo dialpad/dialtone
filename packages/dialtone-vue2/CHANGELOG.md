@@ -1,3 +1,10 @@
+## [2.127.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.127.1...dialtone-vue2/v2.127.2) (2024-04-12)
+
+
+### Bug Fixes
+
+* **Combobox:** NO-JIRA remove bad validation ([#267](https://github.com/dialpad/dialtone/issues/267)) ([15900ec](https://github.com/dialpad/dialtone/commit/15900ece27fe565296b1e9c756fc1c1eb4c6608d))
+
 ## [2.127.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.127.0...dialtone-vue2/v2.127.1) (2024-04-12)
 
 
