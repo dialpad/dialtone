@@ -401,7 +401,7 @@ export default {
     validateEmptyListProps () {
       if (this.$slots.emptyListItem) { return; }
 
-      if ((this.emptyList && !this.emptyStateMessage) || (!this.emptyList && this.emptyStateMessage)) {
+      if (this.emptyList && !this.emptyStateMessage) {
         console.error(`Invalid props: you must pass both props emptyList and emptyStateMessage to show the
       empty message.`);
       }
