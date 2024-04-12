@@ -1,3 +1,21 @@
+# [9.30.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.29.1...dialtone/v9.30.0) (2024-04-12)
+
+
+### Bug Fixes
+
+* NO-JIRA add index.js to dialtone-emojis exports ([#265](https://github.com/dialpad/dialtone/issues/265)) ([df69ee5](https://github.com/dialpad/dialtone/commit/df69ee5b151a92ee567086e19356be00b9dcc93d))
+* NO-JIRA update exports and peerDependencies ([#266](https://github.com/dialpad/dialtone/issues/266)) ([9a43203](https://github.com/dialpad/dialtone/commit/9a43203eb2b4a457543797c822a16d98daf334a4))
+
+
+### Documentation
+
+* DLT-1576 use CodeExampleTabs from Link to Pagination ([#261](https://github.com/dialpad/dialtone/issues/261)) ([21b1ef4](https://github.com/dialpad/dialtone/commit/21b1ef4262244210d1e9a1d10b0a0aecf338d09a))
+
+
+### Features
+
+* DLT-1627 adding new tokens for expressive mode ([#214](https://github.com/dialpad/dialtone/issues/214)) ([90f304f](https://github.com/dialpad/dialtone/commit/90f304feb933d23535cb7c891839c18646d63836))
+
 ## [9.29.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.29.0...dialtone/v9.29.1) (2024-04-11)
 
 
