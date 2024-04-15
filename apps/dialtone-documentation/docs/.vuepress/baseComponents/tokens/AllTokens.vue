@@ -1,60 +1,10 @@
-<!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <aside class="d-of-auto d-py32 lg:d-ps-relative lg:d-w100p d-ps-fixed dialtone-toc">
-    <h2 class="d-headline-eyebrow d-fw-semibold d-fc-secondary d-px12 d-pb4">
-      On this page
-    </h2>
-    <toc
-      :headers="filteredHeaders"
-      :options="tocOptions"
-    />
-  </aside>
-  <div class="tokens-bar">
-    <dt-input
-      id="search-input"
-      v-model="searchInput"
-      autofocus
-      aria-label="Search tokens"
-      placeholder="Search Tokens / Value / Keyword"
-      type="text"
-      autocomplete="off"
-      @keyup="searchToken"
-    >
-      <template #leftIcon>
-        <dt-icon name="search" size="300" />
-      </template>
-      <template #rightIcon>
-        <dt-button
-          v-if="hasSearchTerm"
-          id="search-input-button-close"
-          kind="muted"
-          importance="clear"
-          size="xs"
-          circle
-          aria-label="Clear search"
-          @click="resetSearch"
-        >
-          <template #icon>
-            <dt-icon name="close" size="200" />
-          </template>
-        </dt-button>
-      </template>
-    </dt-input>
-    <dt-select-menu
-      name="format-select"
-      label="Select Format"
-      select-class="d-w128"
-      :options="formatSelectMenuOptions"
-      @change="setFormat"
-    />
-    <dt-select-menu
-      name="theme-select"
-      label="Select Theme"
-      select-class="d-w128"
-      :options="THEMES"
-      @change="setTheme"
-    />
-  </div>
+  <tokens-bar
+    @change-search-criteria="onChangeSearchCriteria"
+    @change-format="onChangeFormat"
+    @change-theme="onChangeTheme"
+  />
+  <tokens-toc :headers="filteredHeaders" />
   <div
     v-if="noSearchResults"
     class="d-d-flex d-fl-center d-p16 d-gg4 d-fc-tertiary d-fs-300"
@@ -68,35 +18,20 @@
 </template>
 
 <script setup>
-import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { getComposedTypographyTokens, getComposedShadowTokens, addTokenToStructure } from './utilities';
-import { FORMAT_MAP, THEMES, getTokensStructure } from './constants';
-import TokenTree from '@baseComponents/tokens/TokenTree.vue';
 import { capitalize, computed, ref, onBeforeMount } from 'vue';
-import { debounce } from '../../common/utilities';
-
-const tocOptions = {
-  listClass: 'toc-list d-ls-reset',
-  itemClass: 'toc-item lg:d-d-flex d-fw-wrap',
-  linkTag: 'a',
-  linkClass: 'd-btn d-btn--sm d-btn--muted d-w100p d-jc-flex-start',
-  linkActiveClass: 'd-btn--active d-fc-primary',
-  linkChildrenActiveClass: '',
-};
+import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+import { FORMAT_MAP, THEMES, getTokensStructure } from './constants';
+import TokenTree from './TokenTree.vue';
+import TokensToc from './TokensToc.vue';
+import TokensBar from './TokensBar.vue';
+import { getComposedTypographyTokens, getComposedShadowTokens, addTokenToStructure } from './utilities';
 
 const format = ref('CSS');
 const theme = ref('light');
-const searchInput = ref(null);
 const searchCriteria = ref(null);
 const processedTokens = {}; // is set beforeMount and never changes
 const filteredTokens = ref({}); // same as processedTokens but filtered by format, theme and search
 const filteredHeaders = ref([]); // to fill the dynamic table of contents
-
-const formatSelectMenuOptions = computed(() => {
-  return Object.keys(FORMAT_MAP).map((item) => {
-    return { value: item, label: item };
-  });
-});
 
 const updateHeaders = () => {
   if (filteredTokens.value === null) return [];
@@ -116,18 +51,18 @@ const updateHeadersRecursively = (node, category) => {
     });
 };
 
-const setFormat = (newFormat) => {
+const onChangeFormat = (newFormat) => {
   format.value = newFormat;
   filterTokens();
 };
 
-const setTheme = (newTheme) => {
+const onChangeTheme = (newTheme) => {
   theme.value = newTheme;
   filterTokens();
 };
 
-const setSearchCriteria = () => {
-  searchCriteria.value = searchInput.value?.trim();
+const onChangeSearchCriteria = (criteria) => {
+  searchCriteria.value = criteria;
   filterTokens();
 };
 
@@ -146,7 +81,6 @@ const filterTokens = () => {
   const regexArray = searchRegexArray.map(searchRegex => new RegExp(searchRegex, 'i'));
 
   filteredTokens.value = filterTokenNode(processedTokens[format.value][theme.value], null, regexArray);
-  console.log(filteredTokens.value);
   updateHeaders();
 };
 
@@ -184,17 +118,6 @@ const filterTokenNode = (node, name, regexArray) => {
   }
   return null;
 };
-
-const searchToken = () => {
-  debounce(() => setSearchCriteria());
-};
-
-const resetSearch = () => {
-  searchInput.value = null;
-  setSearchCriteria();
-};
-
-const hasSearchTerm = computed(() => searchInput.value && searchInput.value.trim().length > 0);
 
 const noSearchResults = computed(() => filteredTokens.value === null);
 
@@ -281,22 +204,3 @@ const addComposedTokens = () => {
   });
 };
 </script>
-
-<style scoped>
-  .tokens-bar {
-    display: grid;
-    grid-gap: var(--dt-space-400);
-    grid-template-columns: auto min-content min-content;
-    align-items: end;
-  }
-  .dialtone-toc {
-    width: var(--dt-size-850);
-    height: calc(100vh - var(--dt-size-700));
-    top: var(--dt-space-700);
-    right: 3%;
-    z-index: var(--zi-base1);  /* to be on top of the page default toc */
-    @media (max-width: 1260px) {
-      display: none;
-    }
-  }
-</style>
