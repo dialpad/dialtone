@@ -69,11 +69,11 @@
 
 <script setup>
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { getComposedTypographyTokens, getComposedShadowTokens, addTokenToStructure } from '../common/token-utilities';
-import { FORMAT_MAP, THEMES, getTokensStructure } from '../common/constants';
-import TokenTree from '@baseComponents/TokenTree.vue';
+import { getComposedTypographyTokens, getComposedShadowTokens, addTokenToStructure } from './utilities';
+import { FORMAT_MAP, THEMES, getTokensStructure } from './constants';
+import TokenTree from '@baseComponents/tokens/TokenTree.vue';
 import { capitalize, computed, ref, onBeforeMount } from 'vue';
-import { debounce } from '../common/utilities';
+import { debounce } from '../../common/utilities';
 
 const tocOptions = {
   listClass: 'toc-list d-ls-reset',

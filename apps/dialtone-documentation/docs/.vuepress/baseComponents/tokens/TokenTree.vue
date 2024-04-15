@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import TokenTable from '@baseComponents/TokenTable.vue';
+import TokenTable from '@baseComponents/tokens/TokenTable.vue';
 
 const props = defineProps({
   node: {

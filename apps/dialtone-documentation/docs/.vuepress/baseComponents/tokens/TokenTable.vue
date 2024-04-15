@@ -102,9 +102,9 @@
 </template>
 
 <script>
-import CopyButton from './CopyButton.vue';
+import CopyButton from '../CopyButton.vue';
 import TokenExample from './TokenExample.vue';
-import { CATEGORY_MAP } from '../common/constants';
+import { CATEGORY_MAP } from './constants';
 
 export default {
   name: 'TokenTable',
