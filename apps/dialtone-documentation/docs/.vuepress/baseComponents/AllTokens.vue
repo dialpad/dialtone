@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
   <aside class="d-of-auto d-py32 lg:d-ps-relative lg:d-w100p d-ps-fixed dialtone-toc">
     <h2 class="d-headline-eyebrow d-fw-semibold d-fc-secondary d-px12 d-pb4">
@@ -12,6 +13,7 @@
     <dt-input
       id="search-input"
       v-model="searchInput"
+      autofocus
       aria-label="Search tokens"
       placeholder="Search Tokens / Value / Keyword"
       type="text"
