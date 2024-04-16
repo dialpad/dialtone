@@ -14,10 +14,27 @@
       ]
     }
   ],
-  "/tokens/": {
-    "text": "Tokens",
-    "children": "auto"
-  },
+  "/tokens/": [
+    {
+      "text": "Design Tokens",
+      "children": [
+        {
+          "text": "All Design Tokens",
+          "link": "/tokens/"
+        },
+        {
+          "text": "For Designers",
+          "link": "/tokens/for-designers",
+          "planned": true
+        },
+        {
+          "text": "For Developers",
+          "link": "/tokens/for-developers",
+          "planned": true
+        }
+      ]
+    }
+  ],
   "/guides/": [
     {
       "text": "Guides",

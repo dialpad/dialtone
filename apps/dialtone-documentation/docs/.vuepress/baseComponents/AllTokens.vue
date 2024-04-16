@@ -299,7 +299,7 @@ const isBaseToken = (name) => name.endsWith('base)') || name.endsWith('root)');
     width: var(--dt-size-850);
     height: calc(100vh - var(--dt-size-700));
     top: var(--dt-space-700);
-    right: var(--dt-space-730);
+    right: 3%;
     @media (max-width: 1260px) {
       display: none;
     }
