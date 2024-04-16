@@ -1,10 +1,11 @@
 import Helpers from '@dialpad/dialtone-css/postcss/helpers.cjs';
-import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP } from './constants';
+import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, THEMES, getTokensStructure } from './constants';
 
 /**
  * Compose typography tokens
  */
-export function getComposedTypographyTokens () {
+function getComposedTypographyTokens () {
   const tokens = [];
   const dialtoneTypographies = Helpers.extractTypographies();
   dialtoneTypographies
@@ -26,7 +27,7 @@ export function getComposedTypographyTokens () {
  * Compose box shadow tokens
  * @param { string } [theme=light]
  */
-export function getComposedShadowTokens (theme) {
+function getComposedShadowTokens (theme) {
   const tokens = [];
   const dialtoneShadows = Helpers.extractShadows(theme);
   Object
@@ -47,8 +48,56 @@ export function getComposedShadowTokens (theme) {
   return tokens;
 }
 
+/**
+* Tokens that are a combination of other tokens.
+* Only apply for the categories typography and shadow, and only in CSS format.
+* @param { object } structure Structure where to add the tokens
+*/
+export const addComposedTokens = (structure) => {
+  const composedTypographyTokens = getComposedTypographyTokens();
+  THEMES.forEach((themeObj) => {
+    const theme = themeObj.value;
+    if (!structure.CSS || !structure.CSS[theme]) return;
+
+    const composedShadowTokens = getComposedShadowTokens(theme);
+
+    if (structure.CSS[theme].typography['font style']) {
+      structure.CSS[theme].typography['font style']._children = [
+        ...composedTypographyTokens,
+        ...structure.CSS[theme].typography['font style']._children,
+      ];
+    }
+
+    if (structure.CSS[theme].shadow) {
+      structure.CSS[theme].shadow._children = [
+        ...composedShadowTokens,
+        ...structure.CSS[theme].shadow._children,
+      ];
+    }
+  });
+};
+
+/**
+  Process the file tokensJson and fill processedTokens with the data we want to show.
+  This data contains the tokens names, values, description, exampleValue,
+  exampleName for the tokens in every format, theme and category, respecting the
+  structure defined in constants/getTokensStructure
+* @param { object } structure Structure where to add the tokens
+*/
+export const addTokensToStructure = (structure) => {
+  Object.keys(FORMAT_MAP).forEach(format => {
+    structure[format] = {};
+    for (const theme of THEMES) {
+      structure[format][theme.value] = getTokensStructure();
+      Object.entries(tokensJson[theme.value]).forEach((token) => {
+        addTokensToCategories(token, format, structure[format][theme.value]);
+      });
+    }
+  });
+};
+
 // eslint-disable-next-line complexity
-export const addTokenToStructure = (token, format, structure) => {
+const addTokensToCategories = (token, format, structure) => {
   const [key, value] = token;
   if (!value[FORMAT_MAP[format]] || !value[FORMAT_MAP.CSS] || isBaseToken(key)) return;
 

@@ -19,12 +19,10 @@
 
 <script setup>
 import { capitalize, computed, ref, onBeforeMount } from 'vue';
-import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { FORMAT_MAP, THEMES, getTokensStructure } from './constants';
 import TokenTree from './TokenTree.vue';
 import TokensToc from './TokensToc.vue';
 import TokensBar from './TokensBar.vue';
-import { getComposedTypographyTokens, getComposedShadowTokens, addTokenToStructure } from './utilities';
+import { addComposedTokens, addTokensToStructure } from './utilities';
 
 const format = ref('CSS');
 const theme = ref('light');
@@ -32,24 +30,6 @@ const searchCriteria = ref(null);
 const processedTokens = {}; // is set beforeMount and never changes
 const filteredTokens = ref({}); // same as processedTokens but filtered by format, theme and search
 const filteredHeaders = ref([]); // to fill the dynamic table of contents
-
-const updateHeaders = () => {
-  if (filteredTokens.value === null) return [];
-  filteredHeaders.value = updateHeadersRecursively(filteredTokens.value, null);
-};
-
-const updateHeadersRecursively = (node, category) => {
-  return Object.keys(node)
-    .filter(subNodeKey => subNodeKey !== '_children')
-    .map(subNodeKey => {
-      return {
-        title: capitalize(subNodeKey),
-        level: 2,
-        slug: category === null ? subNodeKey : `${category}-${subNodeKey}`,
-        children: updateHeadersRecursively(node[subNodeKey], category === null ? subNodeKey : category),
-      };
-    });
-};
 
 const onChangeFormat = (newFormat) => {
   format.value = newFormat;
@@ -121,85 +101,27 @@ const filterTokenNode = (node, name, regexArray) => {
 
 const noSearchResults = computed(() => filteredTokens.value === null);
 
-/*
-Before mount process the file tokensJson and fill processedTokens with the data we want to show.
-This data is static, and contains the tokens names, values, description, exampleValue,
-exampleName for the tokens in every format, theme and category.
+const updateHeaders = () => {
+  if (filteredTokens.value === null) return [];
+  filteredHeaders.value = updateHeadersRecursively(filteredTokens.value, null);
+};
 
-  processedTokens: {
-    CSS: {
-      light: {
-        color:
-          foreground:
-            _children:
-              [
-                {
-                  name: ...,
-                  tokenValue: ...,
-                  description: ...,
-                  exampleValue: ...,
-                  exampleName: ...,
-                  keywords: ...,
-                },
-                ...
-              ],
-          surface: {...},
-          ...
-        typography: {...},
-        shadow: {...},
-        size: {...},
-        space: {...},
-        component: {...}
-      },
-      dark: {...},
-    },
-    Android: {
-      light: {...},
-      dark: {...},
-    },
-    iOS: {
-      light: {...},
-      dark: {...},
-    },
-  }
-*/
+const updateHeadersRecursively = (node, category) => {
+  return Object.keys(node)
+    .filter(subNodeKey => subNodeKey !== '_children')
+    .map(subNodeKey => {
+      return {
+        title: capitalize(subNodeKey),
+        level: 2,
+        slug: category === null ? subNodeKey : `${category}-${subNodeKey}`,
+        children: updateHeadersRecursively(node[subNodeKey], category === null ? subNodeKey : category),
+      };
+    });
+};
+
 onBeforeMount(() => {
-  addTokens();
-  addComposedTokens();
+  addTokensToStructure(processedTokens);
+  addComposedTokens(processedTokens);
   filterTokens();
 });
-
-const addTokens = () => {
-  Object.keys(FORMAT_MAP).forEach(format => {
-    processedTokens[format] = {};
-    for (const theme of THEMES) {
-      // initialize processedTokens with desired structure
-      processedTokens[format][theme.value] = getTokensStructure();
-      Object.entries(tokensJson[theme.value]).forEach((token) => {
-        addTokenToStructure(token, format, processedTokens[format][theme.value]);
-      });
-    }
-  });
-};
-
-/*
-* Tokens that are a combination of other tokens.
-* Only apply for the categories typography and shadow, and only in CSS format.
-*/
-const addComposedTokens = () => {
-  const composedTypographyTokens = getComposedTypographyTokens();
-  THEMES.forEach((themeObj) => {
-    const theme = themeObj.value;
-    const composedShadowTokens = getComposedShadowTokens(theme);
-
-    processedTokens.CSS[theme].typography['font style']._children = [
-      ...composedTypographyTokens,
-      ...processedTokens.CSS[theme].typography['font style']._children,
-    ];
-    processedTokens.CSS[theme].shadow._children = [
-      ...composedShadowTokens,
-      ...processedTokens.CSS[theme].shadow._children,
-    ];
-  });
-};
 </script>
