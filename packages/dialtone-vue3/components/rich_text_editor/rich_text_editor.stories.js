@@ -8,6 +8,7 @@ import {
 } from './rich_text_editor_constants';
 
 import mentionSuggestion from './mention_suggestion';
+import channelSuggestion from './channel_suggestion';
 
 // Default Prop Values
 export const argsData = {
@@ -119,8 +120,9 @@ export const WithLinks = {
 export const WithMentionSuggestions = {
   ...Default,
   args: {
-    modelValue: 'The editor can also suggest mentions: @John Doe, @Jane Doe!',
+    modelValue: 'The editor can also suggest mentions: @John Doe, @Jane Doe! And channel suggestions: #dialpad.',
     mentionSuggestion,
+    channelSuggestion,
   },
 };
 

@@ -34,6 +34,7 @@
         :link="link"
         :placeholder="placeholder"
         :mention-suggestion="mentionSuggestion"
+        :channel-suggestion="channelSuggestion"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
@@ -437,6 +438,22 @@ export default {
      * When null, it does not add the plugin.
      */
     mentionSuggestion: {
+      type: Object,
+      default: null,
+    },
+
+    /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the channels for suggestion.
+     * items({ query }) => { return [ChannelObject]; }
+     * ChannelObject format:
+     * { name: string, id: string, locked: boolean }
+     *
+     * When null, it does not add the plugin. Setting locked to true will display a lock rather than hash.
+     */
+    channelSuggestion: {
       type: Object,
       default: null,
     },
