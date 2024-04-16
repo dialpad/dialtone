@@ -174,11 +174,10 @@ const addTokens = () => {
     processedTokens[format] = {};
     for (const theme of THEMES) {
       // initialize processedTokens with desired structure
-      const structure = getTokensStructure();
+      processedTokens[format][theme.value] = getTokensStructure();
       Object.entries(tokensJson[theme.value]).forEach((token) => {
-        addTokenToStructure(token, format, structure);
+        addTokenToStructure(token, format, processedTokens[format][theme.value]);
       });
-      processedTokens[format][theme.value] = structuredClone(structure);
     }
   });
 };
