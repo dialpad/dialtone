@@ -50,13 +50,11 @@ export function getComposedShadowTokens (theme) {
 // eslint-disable-next-line complexity
 export const addTokenToStructure = (token, format, structure) => {
   const [key, value] = token;
-  if (!value[FORMAT_MAP[format]] || !value[FORMAT_MAP.CSS]) return;
+  if (!value[FORMAT_MAP[format]] || !value[FORMAT_MAP.CSS] || isBaseToken(key)) return;
 
   const { name, value: tokenValue, description, keywords } = value[FORMAT_MAP[format]];
   const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
   const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords };
-
-  if (isBaseToken(key)) return;
 
   const splitKeys = key.split('/');
 
@@ -84,6 +82,7 @@ export const addTokenToStructure = (token, format, structure) => {
 
   if (key.startsWith('color')) {
     structure.color.base._children.push(displayToken);
+    return;
   }
 
   // TYPOGRAPHY
