@@ -112,12 +112,6 @@
                   @focus="emojiPickerFocus = true"
                   @blur="emojiPickerFocus = false"
                 >
-                  <template #icon>
-                    <dt-icon
-                      :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
-                      size="300"
-                    />
-                  </template>
                 </dt-button>
               </template>
             </dt-tooltip>
