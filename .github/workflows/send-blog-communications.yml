@@ -1,5 +1,8 @@
 name: Send blog communications
 on:
+  pull_request:
+    types:
+      - synchronize
   push:
     branches:
       - production
@@ -31,6 +34,7 @@ jobs:
         run: echo '${{ steps.changed-files.outputs.added_files }}'
 
   send-email:
+    if: false
     name: Send email
     runs-on: ubuntu-latest
     needs: [added-posts]
@@ -39,7 +43,7 @@ jobs:
         files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
     env:
       FROM_MAIL: ${{ secrets.MAIL_ACCOUNT }}
-      TO_MAIL: dialtone-users@dialpad.com
+      TO_MAIL: julio.ortega@dialpad.com
       FILE_PATH: ${{ matrix.files }}
       REPLY_TO: dialtone@dialpad.com
     steps:
