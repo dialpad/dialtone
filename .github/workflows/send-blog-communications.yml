@@ -146,5 +146,5 @@ jobs:
           gcloud functions call send-sms-to-dialtone-channel \
           --region=us-central1 --gen2 \
           --data '{
-            "message": "New blog post: '${{ env.BLOG_POST_HEADING }}', read full article: ${{ env.POST_URL }}"
+            "message": "New blog post: ${{ env.BLOG_POST_HEADING }}, read full article: ${{ env.POST_URL }}"
           }'
