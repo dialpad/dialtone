@@ -116,9 +116,9 @@
               </template>
             </dt-tooltip>
           </template>
-          <!-- @slot Slot for emoji picker -->
-          <slot name="emojiPicker" />
         </dt-popover>
+        <!-- @slot Slot for emoji picker -->
+        <slot name="emojiPicker" />
       </div>
       <!-- Right content -->
       <div class="d-d-flex">
@@ -411,7 +411,7 @@ export default {
      */
     showCancel: {
       type: [Boolean, Object],
-      default: () => ({ text: 'Cancel' }),
+      default: () => ({ text: 'Cancel me' }),
     },
 
     /**
