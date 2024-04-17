@@ -137,23 +137,23 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
-#          token_format: "access_token"
+          token_format: "access_token"
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
-#      - name: Send sms
-#        run: |
-#          curl -m 70 -X POST https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel-v1 \
-#          -H "Authorization: bearer ${{ steps.auth.outputs.access_token }}" \
-#          -H "Content-Type: application/json" \
-#          -d '{
-#            "message": "New blog post: ${{ env.BLOG_POST_HEADING }}, read full article: ${{ env.POST_URL }}"
-#          }'
+#      - name: Set up Cloud SDK
+#        uses: google-github-actions/setup-gcloud@v2
 
       - name: Send sms
         run: |
-          gcloud functions call send-sms-to-dialtone-channel-v1 \
-          --data '{
+          curl -m 70 -X POST https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel \
+          -H "Authorization: bearer ${{ steps.auth.outputs.access_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
             "message": "New blog post: ${{ env.BLOG_POST_HEADING }}, read full article: ${{ env.POST_URL }}"
           }'
+
+#      - name: Send sms
+#        run: |
+#          gcloud functions call send-sms-to-dialtone-channel-v1 \
+#          --data '{
+#            "message": "New blog post: ${{ env.BLOG_POST_HEADING }}, read full article: ${{ env.POST_URL }}"
+#          }'
