@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <table class="d-table dialtone-doc-table">
     <thead>
@@ -32,6 +33,8 @@
       <tr
         v-for="({ exampleValue, exampleName, name, tokenValue, description }) in tokens"
         :key="name"
+        @mouseenter="onEnterRow(name)"
+        @mouseleave="onLeaveRow(name)"
       >
         <td>
           <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
@@ -46,10 +49,14 @@
             class="d-ai-center"
           >
             <span>{{ name }}</span>
-            <copy-button
-              :text="name"
-              aria-label="copy token"
-            />
+            <div class="d-w32">
+              <dt-lazy-show :show="showCopyButton(name)">
+                <copy-button
+                  :text="name"
+                  aria-label="Copy Token"
+                />
+              </dt-lazy-show>
+            </div>
           </dt-stack>
         </th>
         <td
@@ -123,6 +130,10 @@ export default {
     },
   },
 
+  data: () => ({
+    hoveredRow: null,
+  }),
+
   methods: {
     getTokenValue (value) {
       return this.tokens.find(token => token.name === value.replace(/,$/, ''))?.tokenValue.toString();
@@ -148,6 +159,26 @@ export default {
     getSecondValue (value) {
       return value.split(' / ')[1];
     },
+
+    onEnterRow (name) {
+      console.log('ENTER', name);
+      this.hoveredRow = name;
+    },
+
+    onLeaveRow (name) {
+      console.log('LEAVE', name);
+      this.hoveredRow = null;
+    },
+
+    showCopyButton (name) {
+      return this.hoveredRow === name;
+    },
   },
 };
 </script>
+
+<style scoped>
+  .copy-button {
+    position: absolute;
+  }
+</style>
