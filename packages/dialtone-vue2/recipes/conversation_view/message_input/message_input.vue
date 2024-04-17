@@ -122,13 +122,8 @@
               </template>
             </dt-tooltip>
           </template>
-          <template #content>
-            <dt-emoji-picker
-              v-bind="emojiPickerProps"
-              @skin-tone="onSkinTone"
-              @selected-emoji="onSelectEmoji"
-            />
-          </template>
+          <!-- @slot Slot for emoji picker -->
+          <slot name="emojiPicker" />
         </dt-popover>
       </div>
       <!-- Right content -->
