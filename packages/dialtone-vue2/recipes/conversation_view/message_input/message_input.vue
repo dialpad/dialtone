@@ -84,39 +84,39 @@
             />
           </template>
         </dt-tooltip>
-        <dt-popover
-          v-if="showEmojiPicker"
-          data-qa="dt-message-input-emoji-picker-popover"
-          :open="emojiPickerOpened"
-          initial-focus-element="#searchInput"
-          padding="none"
-          @opened="(open) => { emojiPickerOpened = open }"
-        >
-          <template #anchor>
-            <dt-tooltip
-              :message="emojiTooltipMessage"
-              :offset="[0, -4]"
-            >
-              <template #anchor>
-                <dt-button
-                  data-qa="dt-message-input-emoji-picker-btn"
-                  size="sm"
-                  circle
-                  :kind="emojiPickerHovered ? 'default' : 'muted'"
-                  importance="clear"
-                  :aria-label="emojiButtonAriaLabel"
-                  :offset="[0, 0]"
-                  @click="toggleEmojiPicker"
-                  @mouseenter="emojiPickerFocus = true"
-                  @mouseleave="emojiPickerFocus = false"
-                  @focus="emojiPickerFocus = true"
-                  @blur="emojiPickerFocus = false"
-                >
-                </dt-button>
-              </template>
-            </dt-tooltip>
-          </template>
-        </dt-popover>
+<!--        <dt-popover-->
+<!--          v-if="showEmojiPicker"-->
+<!--          data-qa="dt-message-input-emoji-picker-popover"-->
+<!--          :open="emojiPickerOpened"-->
+<!--          initial-focus-element="#searchInput"-->
+<!--          padding="none"-->
+<!--          @opened="(open) => { emojiPickerOpened = open }"-->
+<!--        >-->
+<!--          <template #anchor>-->
+<!--            <dt-tooltip-->
+<!--              :message="emojiTooltipMessage"-->
+<!--              :offset="[0, -4]"-->
+<!--            >-->
+<!--              <template #anchor>-->
+<!--                <dt-button-->
+<!--                  data-qa="dt-message-input-emoji-picker-btn"-->
+<!--                  size="sm"-->
+<!--                  circle-->
+<!--                  :kind="emojiPickerHovered ? 'default' : 'muted'"-->
+<!--                  importance="clear"-->
+<!--                  :aria-label="emojiButtonAriaLabel"-->
+<!--                  :offset="[0, 0]"-->
+<!--                  @click="toggleEmojiPicker"-->
+<!--                  @mouseenter="emojiPickerFocus = true"-->
+<!--                  @mouseleave="emojiPickerFocus = false"-->
+<!--                  @focus="emojiPickerFocus = true"-->
+<!--                  @blur="emojiPickerFocus = false"-->
+<!--                >-->
+<!--                </dt-button>-->
+<!--              </template>-->
+<!--            </dt-tooltip>-->
+<!--          </template>-->
+<!--        </dt-popover>-->
         <!-- @slot Slot for emoji picker -->
         <slot name="emojiPicker" />
       </div>
