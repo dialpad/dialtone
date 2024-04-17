@@ -140,10 +140,10 @@ jobs:
 
       - name: Print identity token
         run: |
-          echo '${{ steps.auth.outputs.access_token }}'
+          echo ${{ steps.auth.outputs.access_token }}
 
       - name: Send sms
-        run: |
+        run: >
           curl https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel
           -H "Authorization: Bearer ${{ steps.auth.outputs.access_token }}"
-          -d '{"message": "Testing message from GHA"}'
+          -d "{\"message\": \"Testing message from GHA\"}"
