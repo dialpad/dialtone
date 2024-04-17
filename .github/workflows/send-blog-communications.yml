@@ -147,7 +147,10 @@ jobs:
           echo ${{ steps.auth.outputs.access_token }}
 
       - name: Send sms
-        run: >
-          curl https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel
-          -H "Authorization: bearer ${{ steps.auth.outputs.access_token }}"
-          -d "{\"message\": \"Testing message from GHA\"}"
+        run: |
+          curl -m 70 -X POST https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel \
+          -H "Authorization: bearer ${{ steps.auth.outputs.access_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "message": "Testing message from GHA"
+          }'
