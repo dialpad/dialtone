@@ -8,7 +8,6 @@ on:
 
 jobs:
   commit-lint:
-    if: false
     runs-on: ubuntu-latest
     strategy:
       matrix:
