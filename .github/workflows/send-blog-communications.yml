@@ -146,5 +146,5 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}",
+            "message": "New blog post: ${{ env.BLOG_POST_HEADING }}. Read full article: ${{ env.POST_URL }}",
           }'
