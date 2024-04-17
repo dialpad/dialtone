@@ -1,5 +1,8 @@
 name: Send blog communications
 on:
+  pull_request:
+    types:
+      - synchronize
   push:
     branches:
       - production
@@ -35,6 +38,7 @@ jobs:
         run: echo '${{ steps.changed-files.outputs.added_files }}'
 
   send-email:
+    if: false
     name: Send email
     runs-on: ubuntu-latest
     needs: [added-posts]
@@ -142,5 +146,5 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\", read full article: ${{ env.POST_URL }}"
+            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}",
           }'
