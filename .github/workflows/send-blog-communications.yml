@@ -137,17 +137,16 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
-          token_format: "id_token"
-          id_token_audience: "https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel"
+          token_format: "access_token"
 
       - name: Print identity token
         run: |
-          echo ${{ steps.auth.outputs.id_token }}
+          echo ${{ steps.auth.outputs.access_token }}
 
       - name: Send sms
         run: |
           curl -m 70 -X POST https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel \
-          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Authorization: bearer ${{ steps.auth.outputs.access_token }}" \
           -H "Content-Type: application/json" \
           -d '{
             "message": "Testing message from GHA"
