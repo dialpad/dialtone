@@ -147,7 +147,7 @@ jobs:
       - name: Send sms
         run: |
           curl -m 70 -X POST https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel \
-          -H "Authorization: bearer ${{ steps.auth.outputs.access_token }}" \
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
             "message": "New blog post: ${{ env.BLOG_POST_HEADING }}, read full article: ${{ env.POST_URL }}"
