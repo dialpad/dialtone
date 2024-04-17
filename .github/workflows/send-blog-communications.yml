@@ -137,17 +137,18 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
-          token_format: "access_token"
+          token_format: "id_token"
+          id_token_audience: "https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel"
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Print identity token
         run: |
-          echo ${{ steps.auth.outputs.access_token }}
+          echo ${{ steps.auth.outputs.id_token }}
 
       - name: Send sms
         run: >
           curl https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel
-          -H "Authorization: Bearer ${{ steps.auth.outputs.access_token }}"
+          -H "Authorization: Bearer ${{ steps.auth.outputs.id_token }}"
           -d "{\"message\": \"Testing message from GHA\"}"
