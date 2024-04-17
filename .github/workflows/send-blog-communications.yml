@@ -137,7 +137,8 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
-          token_format: "access_token"
+          token_format: "id_token"
+          id_token_audience: "https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel"
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
