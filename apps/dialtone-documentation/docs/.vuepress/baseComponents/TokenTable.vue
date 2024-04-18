@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <table class="d-table dialtone-doc-table">
     <thead>
@@ -35,6 +34,8 @@
         :key="name"
         @mouseenter="onEnterRow(name)"
         @mouseleave="onLeaveRow(name)"
+        @focusin="onEnterRow(name)"
+        @focusout="onLeaveRow(name)"
       >
         <td>
           <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
@@ -161,12 +162,10 @@ export default {
     },
 
     onEnterRow (name) {
-      console.log('ENTER', name);
       this.hoveredRow = name;
     },
 
     onLeaveRow (name) {
-      console.log('LEAVE', name);
       this.hoveredRow = null;
     },
 
@@ -176,9 +175,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .copy-button {
-    position: absolute;
-  }
-</style>
