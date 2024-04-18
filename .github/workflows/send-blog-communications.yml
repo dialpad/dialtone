@@ -1,4 +1,4 @@
-name: Send communications
+name: Send blog communications
 on:
   push:
     branches:
@@ -8,6 +8,10 @@ on:
 
 env:
   HUSKY: 0
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   added-posts:
@@ -95,3 +99,48 @@ jobs:
           # Optional nodemailer debug: true/false
           # if true log nodemailer will also be set true
           nodemailerdebug: true
+
+  send-sms:
+    name: Send SMS
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs: [ added-posts ]
+    strategy:
+      matrix:
+        files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
+    env:
+      FILE_PATH: ${{ matrix.files }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get link from file name
+        id: get-post-url
+        run: |
+          PREFIX="https:\/\/dialtone.dialpad.com"
+          echo "POST_URL=$(echo $FILE_PATH | sed -e "s/apps\/dialtone-documentation\/docs/$PREFIX/" -e 's/md/html/')" >> $GITHUB_ENV
+
+      - name: Get heading from blog post
+        id: get-heading
+        run: |
+          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH)" >> $GITHUB_ENV
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+          token_format: "id_token"
+          id_token_audience: "https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel"
+
+      - name: Send sms
+        run: |
+          curl -m 70 -X POST https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel \
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}"
+          }'
