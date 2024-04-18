@@ -32,10 +32,11 @@
       <tr
         v-for="({ exampleValue, exampleName, name, tokenValue, description }) in tokens"
         :key="name"
+        tabindex="0"
         @mouseenter="onEnterRow(name)"
-        @mouseleave="onLeaveRow(name)"
-        @focusin="onEnterRow(name)"
-        @focusout="onLeaveRow(name)"
+        @mouseleave="onLeaveRow()"
+        @focusin="onFocusInRow(name)"
+        @focusout="onFocusOutRow()"
       >
         <td>
           <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
@@ -53,6 +54,7 @@
             <div class="d-w32">
               <dt-lazy-show :show="showCopyButton(name)">
                 <copy-button
+                  :ref="`copyButton${name}`"
                   :text="name"
                   aria-label="Copy Token"
                 />
@@ -165,12 +167,32 @@ export default {
       this.hoveredRow = name;
     },
 
-    onLeaveRow (name) {
+    onLeaveRow () {
       this.hoveredRow = null;
     },
 
     showCopyButton (name) {
       return this.hoveredRow === name;
+    },
+
+    onFocusOutRow () {
+      if (document.activeElement.tagName === 'TR') {
+        this.hoveredRow = null;
+      }
+    },
+
+    async onFocusInRow (name) {
+      if (this.hoveredRow === name) return;
+      this.hoveredRow = name;
+      // when focusing the next row we want to redirect the focus to
+      // the copy button
+      if (document.activeElement.tagName === 'TR') {
+        await this.$nextTick(); // wait for the copy button to render
+        const copyButtonRef = this.$refs[`copyButton${name}`];
+        if (Array.isArray(copyButtonRef)) {
+          copyButtonRef[0]?.$el?.querySelector('button')?.focus();
+        }
+      }
     },
   },
 };
