@@ -81,7 +81,9 @@ export const getTokensStructure = () => ({
     _children: [],
   },
   size: {
-    _children: [],
+    base: {
+      _children: [],
+    },
     negative: {
       _children: [],
     },
@@ -99,7 +101,9 @@ export const getTokensStructure = () => ({
     },
   },
   space: {
-    _children: [],
+    base: {
+      _children: [],
+    },
     negative: {
       _children: [],
     },

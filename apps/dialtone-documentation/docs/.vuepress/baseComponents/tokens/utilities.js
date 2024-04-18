@@ -195,7 +195,7 @@ const addTokensToCategories = (token, format, structure) => {
   }
 
   if (key.startsWith('size')) {
-    structure.size._children.push(displayToken);
+    structure.size.base._children.push(displayToken);
     return;
   }
 
@@ -220,7 +220,7 @@ const addTokensToCategories = (token, format, structure) => {
   }
 
   if (key.startsWith('space')) {
-    structure.space._children.push(displayToken);
+    structure.space.base._children.push(displayToken);
   }
 };
 
