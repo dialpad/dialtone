@@ -76,6 +76,7 @@
             <dt-input
               ref="messageInputImageUpload"
               data-qa="dt-message-input-image-input"
+              accept="image/*, video/*"
               type="file"
               class="d-ps-absolute"
               multiple
