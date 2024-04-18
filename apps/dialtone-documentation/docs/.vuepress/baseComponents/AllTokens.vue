@@ -300,6 +300,7 @@ const isBaseToken = (name) => name.endsWith('base)') || name.endsWith('root)');
     height: calc(100vh - var(--dt-size-700));
     top: var(--dt-space-700);
     right: 3%;
+    z-index: var(--zi-base1);  /* to be on top of the page default toc */
     @media (max-width: 1260px) {
       display: none;
     }
