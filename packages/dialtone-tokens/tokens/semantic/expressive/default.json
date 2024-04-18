@@ -51,7 +51,7 @@
         "value": {
           "fontFamily": "{font.family.expressive}",
           "fontWeight": "{font.weight.bold}",
-          "lineHeight": "{font.lineHeight.400}",
+          "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.300}",
           "textCase": "{font.text-case.none}"
         },
