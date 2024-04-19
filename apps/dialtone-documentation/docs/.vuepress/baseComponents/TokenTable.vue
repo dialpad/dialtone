@@ -32,6 +32,11 @@
       <tr
         v-for="({ exampleValue, exampleName, name, tokenValue, description }) in tokens"
         :key="name"
+        tabindex="0"
+        @mouseenter="onEnterRow(name)"
+        @mouseleave="onLeaveRow()"
+        @focusin="onEnterRow(name)"
+        @focusout="onLeaveRow()"
       >
         <td>
           <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
@@ -46,10 +51,14 @@
             class="d-ai-center"
           >
             <span>{{ name }}</span>
-            <copy-button
-              :text="name"
-              aria-label="copy token"
-            />
+            <div class="d-w32">
+              <dt-lazy-show :show="showCopyButton(name)">
+                <copy-button
+                  :text="name"
+                  aria-label="Copy Token"
+                />
+              </dt-lazy-show>
+            </div>
           </dt-stack>
         </th>
         <td
@@ -123,6 +132,10 @@ export default {
     },
   },
 
+  data: () => ({
+    hoveredRow: null,
+  }),
+
   methods: {
     getTokenValue (value) {
       return this.tokens.find(token => token.name === value.replace(/,$/, ''))?.tokenValue.toString();
@@ -147,6 +160,18 @@ export default {
 
     getSecondValue (value) {
       return value.split(' / ')[1];
+    },
+
+    onEnterRow (name) {
+      this.hoveredRow = name;
+    },
+
+    onLeaveRow () {
+      this.hoveredRow = null;
+    },
+
+    showCopyButton (name) {
+      return this.hoveredRow === name;
     },
   },
 };
