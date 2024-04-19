@@ -12,6 +12,7 @@
         :allow-italic="$attrs.allowItalic"
         :allow-strike="$attrs.allowStrike"
         :allow-underline="$attrs.allowUnderline"
+        :is-new-message-input="$attrs.isNewMessageInput"
         :editable="$attrs.editable"
         :input-class="$attrs.inputClass"
         :link="$attrs.link"
