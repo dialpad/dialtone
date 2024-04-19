@@ -30,7 +30,7 @@
     </thead>
     <tbody>
       <tr
-        v-for="({ exampleValue, exampleName, name, tokenValue, description }) in tokens"
+        v-for="({ exampleValue, exampleName, name, tokenValue, description }) in shownTokens"
         :key="name"
         tabindex="0"
         @mouseenter="onEnterRow(name)"
@@ -102,9 +102,9 @@
 </template>
 
 <script>
-import CopyButton from './CopyButton.vue';
+import CopyButton from '../CopyButton.vue';
 import TokenExample from './TokenExample.vue';
-import { CATEGORY_MAP } from '../common/constants';
+import { CATEGORY_MAP } from './constants';
 
 export default {
   name: 'TokenTable',
@@ -135,6 +135,12 @@ export default {
   data: () => ({
     hoveredRow: null,
   }),
+
+  computed: {
+    shownTokens () {
+      return this.tokens.filter(token => !token.hidden);
+    },
+  },
 
   methods: {
     getTokenValue (value) {

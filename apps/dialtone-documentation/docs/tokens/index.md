@@ -10,5 +10,5 @@ See the [dialtone tokens README](https://github.com/dialpad/dialtone/tree/stagin
 <all-tokens />
 
 <script setup>
-  import AllTokens from '@baseComponents/AllTokens.vue';
+  import AllTokens from '@baseComponents/tokens/AllTokens.vue';
 </script>
