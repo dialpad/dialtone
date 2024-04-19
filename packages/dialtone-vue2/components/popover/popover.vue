@@ -912,7 +912,7 @@ export default {
     onClickOutside () {
       if (!this.hideOnClick) return;
       // If a popover is opened inside of this one, do not hide on click out
-      const innerModals = this.popoverContentEl.querySelector('.d-popover__anchor--opened');
+      const innerModals = this.popoverContentEl?.querySelector('.d-popover__anchor--opened');
       if (!innerModals) {
         this.closePopover();
       }
