@@ -34,6 +34,7 @@
         :allow-italic="allowItalic"
         :allow-strike="allowStrike"
         :allow-underline="allowUnderline"
+        :is-new-message-input="isNewMessageInput"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
@@ -85,7 +86,7 @@
           </template>
         </dt-tooltip>
         <dt-popover
-          v-if="showEmojiPicker"
+          v-if="showEmojiPicker && !isNewMessageInput"
           data-qa="dt-message-input-emoji-picker-popover"
           :open="emojiPickerOpened"
           initial-focus-element="#searchInput"
@@ -130,6 +131,11 @@
             />
           </template>
         </dt-popover>
+        <!-- @slot Slot for emojiGiphy picker -->
+        <slot
+          v-if="isNewMessageInput"
+          name="emojiGiphyPicker"
+        />
       </div>
       <!-- Right content -->
       <div class="d-d-flex">
@@ -487,6 +493,14 @@ export default {
     allowUnderline: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Sending this prop to product side as a temporary measure to use a slot for emoji & giphy picker.
+     */
+    isNewMessageInput: {
+      type: Boolean,
+      default: false,
     },
   },
 
