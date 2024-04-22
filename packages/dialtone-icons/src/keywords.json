@@ -1197,6 +1197,13 @@
         "flash",
         "camera",
         "lightning"
+      ],
+      "connection-api": [
+        "plug",
+        "plugin",
+        "connected",
+        "connection",
+        "connections"
       ]
     },
     "editing": {
