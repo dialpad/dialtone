@@ -17,8 +17,8 @@
 
 <script>
 import { DtStack } from '@/components/stack';
-import DtIconHash from '@dialpad/dialtone-icons/vue2/hash';
-import DtIconLock from '@dialpad/dialtone-icons/vue2/lock';
+import DtIconHash from '@dialpad/dialtone-icons/vue3/hash';
+import DtIconLock from '@dialpad/dialtone-icons/vue3/lock';
 
 export default {
   name: 'ChannelSuggestion',
