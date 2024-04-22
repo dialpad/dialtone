@@ -1,3 +1,4 @@
+import { markRaw } from 'vue';
 import { VueRenderer } from '@tiptap/vue-3';
 import tippy from 'tippy.js';
 
@@ -19,9 +20,8 @@ export default {
     return {
       onStart: props => {
         component = new VueRenderer(SuggestionList, {
-          parent: this,
-          propsData: {
-            itemComponent: ChannelSuggestion,
+          props: {
+            itemComponent: markRaw(ChannelSuggestion),
             itemType: 'channel',
             ...props,
           },
