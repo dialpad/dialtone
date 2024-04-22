@@ -182,7 +182,7 @@ export default {
 
 <style scoped>
 .token-name {
-  /* make space for the copy button the appears on mouse enter */
+  /* make space for the copy button that appears on mouse enter */
   min-height: 2.8rem;
 }
 
