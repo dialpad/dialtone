@@ -9,6 +9,7 @@
     :placeholder="$attrs.placeholder"
     :link="$attrs.link"
     :mention-suggestion="$attrs.mentionSuggestion"
+    :channel-suggestion="$attrs.channelSuggestion"
     :allow-blockquote="$attrs.allowBlockquote"
     :allow-bold="$attrs.allowBold"
     :allow-bullet-list="$attrs.allowBulletList"

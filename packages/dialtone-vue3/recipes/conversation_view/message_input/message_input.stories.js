@@ -3,6 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion';
+import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
 
 /*
   Controls
@@ -123,6 +124,7 @@ export const argsData = {
     ariaLabel: 'send',
   },
   mentionSuggestion,
+  channelSuggestion,
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),

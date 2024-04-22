@@ -126,6 +126,9 @@ export default {
         case 'mention':
           this.command({ name: item.name, id: item.id, avatarSrc: item.avatarSrc });
           break;
+        case 'channel':
+          this.command({ name: item.name, id: item.id });
+          break;
       }
     },
   },
