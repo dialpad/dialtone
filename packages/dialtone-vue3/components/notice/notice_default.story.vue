@@ -7,6 +7,7 @@
     :important="$attrs.important"
     :hide-close="$attrs.hideClose"
     :hide-action="$attrs.hideAction"
+    :truncate-text="$attrs.truncateText"
     :hide-icon="$attrs.hideIcon"
     :close-button-props="computedCloseButtonProps"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
