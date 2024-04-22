@@ -20,7 +20,7 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm publish --tag next",
+        "command": "pnpm publish",
         "parallel": false
       }
     },
