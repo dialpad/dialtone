@@ -1,3 +1,10 @@
+## [4.13.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.13.0...dialtone-icons/v4.13.1) (2024-04-22)
+
+
+### Bug Fixes
+
+* NO-JIRA keywords ([5200cef](https://github.com/dialpad/dialtone/commit/5200cef7d49b14469eb5994f23aa12d158f7187a))
+
 # [4.13.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.12.3...dialtone-icons/v4.13.0) (2024-04-22)
 
 
