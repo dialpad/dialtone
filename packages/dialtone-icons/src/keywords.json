@@ -1358,72 +1358,20 @@
       ]
     },
     "general": {
-      "accessibility": [
-        "disability",
-        "disabled",
-        "dda",
-        "wheelchair"
-      ],
-      "add-task": [
-        "check",
-        "plus"
-      ],
-      "album": [
-        "photo",
-        "book"
-      ],
-      "archive-restore": [
-        "archive",
-        "unarchive",
-        "restore",
-        "index",
-        "box"
-      ],
-      "archive": [
-        "index",
-        "box"
-      ],
-      "attestation-outline": [
-        "checkbox"
-      ],
-      "attestation": [
-        "checkbox"
-      ],
-      "book-open": [
-        "read",
-        "library"
-      ],
-      "book": [
-        "read",
-        "dictionary",
-        "booklet",
-        "magazine",
-        "library"
-      ],
-      "bookmark-minus": [
-        "delete",
-        "remove"
-      ],
-      "bookmark-plus": [
-        "add"
-      ],
-      "bookmark": [
-        "read",
-        "clip",
-        "marker",
-        "tag"
-      ],
-      "box-select": [
-        "selection",
-        "square",
-        "rectangular",
-        "marquee",
-        "tool"
-      ],
-      "box": [
-        "cube",
-        "package"
-      ],
+      "accessibility": ["disability", "disabled", "dda", "wheelchair"],
+      "add-task": ["check", "plus"],
+      "album": ["photo", "book"],
+      "archive-restore": ["archive", "unarchive", "restore", "index", "box"],
+      "archive": ["index", "box"],
+      "attestation-outline": ["checkbox"],
+      "attestation": ["checkbox"],
+      "book-open": ["read", "library"],
+      "book": ["read", "dictionary", "booklet", "magazine", "library"],
+      "bookmark-minus": ["delete", "remove"],
+      "bookmark-plus": ["add"],
+      "bookmark": ["read", "clip", "marker", "tag"],
+      "box-select": ["selection", "square", "rectangular", "marquee", "tool"],
+      "box": ["cube", "package"],
       "boxes": [
         "cubes",
         "packages",
@@ -1433,25 +1381,11 @@
         "collection",
         "cluster"
       ],
-      "bullet": [
-        "dot",
-        "point",
-        "circle"
-      ],
-      "check-circle-filled": [
-        "approved",
-        "done"
-      ],
-      "check-circle": [
-        "done"
-      ],
-      "check": [
-        "done"
-      ],
-      "circle-half-filled": [
-        "mode",
-        "dark"
-      ],
+      "bullet": ["dot", "point", "circle"],
+      "check-circle-filled": ["approved", "done"],
+      "check-circle": ["done"],
+      "check": ["done"],
+      "circle-half-filled": ["mode", "dark"],
       "close": [
         "cancel",
         "close",
@@ -1461,157 +1395,38 @@
         "clear",
         "maths"
       ],
-      "code": [
-        "source",
-        "programming",
-        "html",
-        "xml"
-      ],
-      "copy": [
-        "clone",
-        "duplicate"
-      ],
-      "copyright": [
-        "licence"
-      ],
-      "credit-card": [
-        "bank",
-        "purchase",
-        "payment",
-        "cc"
-      ],
-      "dissatisfied": [
-        "unhappy"
-      ],
-      "double-check": [
-        "read"
-      ],
-      "empty": [
-        "blank"
-      ],
-      "flag-off": [
-        "unflag"
-      ],
-      "flag": [
-        "report"
-      ],
-      "form-input": [
-        "2fa",
-        "authenticate",
-        "login",
-        "field",
-        "text"
-      ],
-      "gauge": [
-        "dashboard"
-      ],
-      "hash-bold": [
-        "number",
-        "pound",
-        "hashtag",
-        "number"
-      ],
-      "hash": [
-        "hashtag",
-        "number",
-        "pound"
-      ],
-      "help-circle": [
-        "question mark"
-      ],
-      "inbox": [
-        "email"
-      ],
-      "info": [
-        "help"
-      ],
-      "isolated-queries": [
-        "list",
-        "alert",
-        "query",
-        "queries"
-      ],
-      "keypad": [
-        "number",
-        "dialpad",
-        "keypad"
-      ],
-      "library": [
-        "book",
-        "music",
-        "album"
-      ],
-      "log-in": [
-        "sign in",
-        "arrow",
-        "enter",
-        "auth"
-      ],
-      "log-out": [
-        "sign out",
-        "arrow",
-        "exit",
-        "auth"
-      ],
-      "more-horizontal": [
-        "ellipsis",
-        "menu",
-        "options"
-      ],
-      "more-vertical": [
-        "ellipsis",
-        "menu",
-        "options"
-      ],
-      "network": [
-        "tree"
-      ],
-      "neutral": [
-        "bored",
-        "meh",
-        "average",
-        "face"
-      ],
-      "not-enough-queries": [
-        "list",
-        "plus",
-        "query",
-        "queries"
-      ],
-      "package": [
-        "box",
-        "container"
-      ],
-      "party-popper": [
-        "emoji",
-        "congratulations",
-        "celebration",
-        "party"
-      ],
-      "power": [
-        "on",
-        "off",
-        "device"
-      ],
-      "puzzle": [
-        "component",
-        "module",
-        "part",
-        "piece"
-      ],
-      "queries": [
-        "list",
-        "question mark",
-        "query",
-        "queries"
-      ],
-      "satisfied": [
-        "happy",
-        "pleased",
-        "smile",
-        "great",
-        "good"
-      ],
+      "code": ["source", "programming", "html", "xml"],
+      "copy": ["clone", "duplicate"],
+      "copyright": ["licence"],
+      "credit-card": ["bank", "purchase", "payment", "cc"],
+      "dissatisfied": ["unhappy"],
+      "double-check": ["read"],
+      "empty": ["blank"],
+      "flag-off": ["unflag"],
+      "flag": ["report"],
+      "form-input": ["2fa", "authenticate", "login", "field", "text"],
+      "gauge": ["dashboard"],
+      "hash-bold": ["number", "pound", "hashtag", "number"],
+      "hash": ["hashtag", "number", "pound"],
+      "help-circle": ["question mark"],
+      "inbox": ["email"],
+      "info": ["help"],
+      "isolated-queries": ["list", "alert", "query", "queries"],
+      "keypad": ["number", "dialpad", "keypad"],
+      "library": ["book", "music", "album"],
+      "log-in": ["sign in", "arrow", "enter", "auth"],
+      "log-out": ["sign out", "arrow", "exit", "auth"],
+      "more-horizontal": ["ellipsis", "menu", "options"],
+      "more-vertical": ["ellipsis", "menu", "options"],
+      "network": ["tree"],
+      "neutral": ["bored", "meh", "average", "face"],
+      "not-enough-queries": ["list", "plus", "query", "queries"],
+      "package": ["box", "container"],
+      "party-popper": ["emoji", "congratulations", "celebration", "party"],
+      "power": ["on", "off", "device"],
+      "puzzle": ["component", "module", "part", "piece"],
+      "queries": ["list", "question mark", "query", "queries"],
+      "satisfied": ["happy", "pleased", "smile", "great", "good"],
       "scroll": [
         "paper",
         "log",
@@ -1620,150 +1435,32 @@
         "parchment",
         "transcript"
       ],
-      "settings": [
-        "cog",
-        "edit",
-        "gear",
-        "preferences"
-      ],
-      "shield-alert": [
-        "security",
-        "secure",
-        "virus",
-        "admin",
-        "safety"
-      ],
-      "shield-check": [
-        "security",
-        "secure",
-        "done",
-        "save"
-      ],
-      "shield-close": [
-        "security",
-        "secure",
-        "wrong",
-        "unsave",
-        "virus"
-      ],
-      "shield-off": [
-        "security",
-        "secure",
-        "security",
-        "insecure"
-      ],
-      "shield": [
-        "security",
-        "secure"
-      ],
-      "somewhat-dissatisfied": [
-        "face"
-      ],
-      "somewhat-satisfied": [
-        "smile",
-        "happy",
-        "pleased",
-        "good",
-        "face"
-      ],
-      "sparkle": [
-        "stars",
-        "magic",
-        "help",
-        "ai"
-      ],
-      "star-filled": [
-        "bookmark",
-        "favorite",
-        "like",
-        "review",
-        "rating"
-      ],
-      "star": [
-        "bookmark",
-        "favorite",
-        "like",
-        "review",
-        "rating"
-      ],
-      "tag": [
-        "label",
-        "badge",
-        "ticket",
-        "mark"
-      ],
-      "tags": [
-        "labels",
-        "badges",
-        "tickets",
-        "marks",
-        "copy",
-        "multiple"
-      ],
-      "task": [
-        "check"
-      ],
-      "text-cursor-input": [
-        "select"
-      ],
-      "thumbs-down-filled": [
-        "dislike",
-        "bad",
-        "emotion",
-        "no"
-      ],
-      "thumbs-down": [
-        "dislike",
-        "bad",
-        "emotion",
-        "no"
-      ],
-      "thumbs-up-filled": [
-        "like",
-        "good",
-        "emotion",
-        "ok",
-        "yes"
-      ],
-      "thumbs-up": [
-        "like",
-        "good",
-        "emotion",
-        "yes"
-      ],
-      "too-many-queries": [
-        "list",
-        "minus",
-        "query",
-        "queries"
-      ],
-      "tools": [
-        "wrench"
-      ],
-      "triangle": [
-        "delta",
-        "shape"
-      ],
-      "very-dissatisfied": [
-        "sad",
-        "frown",
-        "unhappy",
-        "bad",
-        "poor",
-        "face"
-      ],
-      "very-satisfied": [
-        "happy",
-        "smile",
-        "face",
-        "great",
-        "pleased",
-        "good"
-      ],
-      "video-settings": [
-        "preferences",
-        "configure"
-      ]
+      "settings": ["cog", "edit", "gear", "preferences"],
+      "shield-alert": ["security", "secure", "virus", "admin", "safety"],
+      "shield-check": ["security", "secure", "done", "save"],
+      "shield-close": ["security", "secure", "wrong", "unsave", "virus"],
+      "shield-off": ["security", "secure", "security", "insecure"],
+      "shield": ["security", "secure"],
+      "somewhat-dissatisfied": ["face"],
+      "somewhat-satisfied": ["smile", "happy", "pleased", "good", "face"],
+      "sparkle": ["stars", "magic", "help", "ai"],
+      "star-filled": ["bookmark", "favorite", "like", "review", "rating"],
+      "star": ["bookmark", "favorite", "like", "review", "rating"],
+      "tag": ["label", "badge", "ticket", "mark"],
+      "tags": ["labels", "badges", "tickets", "marks", "copy", "multiple"],
+      "task": ["check"],
+      "text-cursor-input": ["select"],
+      "thumbs-down-filled": ["dislike", "bad", "emotion", "no"],
+      "thumbs-down": ["dislike", "bad", "emotion", "no"],
+      "thumbs-up-filled": ["like", "good", "emotion", "ok", "yes"],
+      "thumbs-up": ["like", "good", "emotion", "yes"],
+      "too-many-queries": ["list", "minus", "query", "queries"],
+      "tools": ["wrench"],
+      "triangle": ["delta", "shape"],
+      "very-dissatisfied": ["sad", "frown", "unhappy", "bad", "poor", "face"],
+      "very-satisfied": ["happy", "smile", "face", "great", "pleased", "good"],
+      "video-settings": ["preferences", "configure"],
+      "whatsapp-outlined": []
     },
     "os": {
       "clipboard-check": ["copied", "pasted"],
