@@ -1763,24 +1763,77 @@
       "video-settings": [
         "preferences",
         "configure"
+      ],
+      "whatsapp-outlined": [
       ]
     },
     "os": {
-      "clipboard-check": ["copied", "pasted"],
-      "clipboard-copy": ["copy", "paste"],
-      "clipboard-edit": ["edit", "paste", "signature"],
-      "clipboard-list": ["copy", "paste", "tasks"],
-      "clipboard-signature": ["paste", "signature"],
-      "clipboard-type": ["paste", "format", "text"],
-      "clipboard-x": ["copy", "paste", "discard", "remove"],
-      "clipboard": ["copy", "paste"],
-      "cloud-off": ["disconnect"],
-      "command": ["keyboard", "cmd", "terminal", "prompt"],
-      "cpu": ["processor", "technology", "computer", "chip"],
-      "external-link": ["outbound"],
-      "file-pdf": ["document"],
-      "file": ["document"],
-      "files": ["multiple", "copy", "documents"],
+      "clipboard-check": [
+        "copied",
+        "pasted"
+      ],
+      "clipboard-copy": [
+        "copy",
+        "paste"
+      ],
+      "clipboard-edit": [
+        "edit",
+        "paste",
+        "signature"
+      ],
+      "clipboard-list": [
+        "copy",
+        "paste",
+        "tasks"
+      ],
+      "clipboard-signature": [
+        "paste",
+        "signature"
+      ],
+      "clipboard-type": [
+        "paste",
+        "format",
+        "text"
+      ],
+      "clipboard-x": [
+        "copy",
+        "paste",
+        "discard",
+        "remove"
+      ],
+      "clipboard": [
+        "copy",
+        "paste"
+      ],
+      "cloud-off": [
+        "disconnect"
+      ],
+      "command": [
+        "keyboard",
+        "cmd",
+        "terminal",
+        "prompt"
+      ],
+      "cpu": [
+        "processor",
+        "technology",
+        "computer",
+        "chip"
+      ],
+      "external-link": [
+        "outbound"
+      ],
+      "file-pdf": [
+        "document"
+      ],
+      "file": [
+        "document"
+      ],
+      "files": [
+        "multiple",
+        "copy",
+        "documents"
+      ],
       "fingerprint": [
         "2fa",
         "authentication",
@@ -1788,9 +1841,19 @@
         "identity",
         "security"
       ],
-      "folder-tree": ["directory", "tree", "browser"],
-      "folder": ["directory"],
-      "folders": ["multiple", "copy", "directories"],
+      "folder-tree": [
+        "directory",
+        "tree",
+        "browser"
+      ],
+      "folder": [
+        "directory"
+      ],
+      "folders": [
+        "multiple",
+        "copy",
+        "directories"
+      ],
       "hard-drive": [
         "computer",
         "server",
@@ -1800,14 +1863,38 @@
         "disk",
         "hard disk"
       ],
-      "import": ["save"],
-      "languages": ["translate"],
-      "life-buoy": ["help", "rescue", "ship", "life ring", "support"],
-      "qr-code": ["barcode"],
-      "save": ["floppy disk"],
-      "scan-face": ["face", "biometric", "authentication", "2fa"],
-      "scan": ["qr-code"],
-      "share-2": ["network", "connections"],
+      "import": [
+        "save"
+      ],
+      "languages": [
+        "translate"
+      ],
+      "life-buoy": [
+        "help",
+        "rescue",
+        "ship",
+        "life ring",
+        "support"
+      ],
+      "qr-code": [
+        "barcode"
+      ],
+      "save": [
+        "floppy disk"
+      ],
+      "scan-face": [
+        "face",
+        "biometric",
+        "authentication",
+        "2fa"
+      ],
+      "scan": [
+        "qr-code"
+      ],
+      "share-2": [
+        "network",
+        "connections"
+      ],
       "signal-best": [
         "connection",
         "wireless",
@@ -1868,9 +1955,19 @@
         "prohibited",
         "error"
       ],
-      "toy-brick": ["lego", "block", "addon", "plugin", "integration"],
-      "upload-cloud": ["file"],
-      "upload": ["file"]
+      "toy-brick": [
+        "lego",
+        "block",
+        "addon",
+        "plugin",
+        "integration"
+      ],
+      "upload-cloud": [
+        "file"
+      ],
+      "upload": [
+        "file"
+      ]
     },
     "people": {
       "user-check": [
