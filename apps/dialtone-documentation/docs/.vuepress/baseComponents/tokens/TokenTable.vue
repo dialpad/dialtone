@@ -4,27 +4,28 @@
       <tr>
         <th
           scope="col"
-        />
-        <th
-          scope="col"
+          class="d-label--sm-compact d-tt-none"
         >
-          Name
+          Preview
         </th>
         <th
           scope="col"
+          class="d-label--sm-compact d-tt-none"
+        >
+          Token Name
+        </th>
+        <th
+          scope="col"
+          class="d-label--sm-compact d-tt-none d-ta-right"
         >
           {{ tokenList ? "REM" : "Value" }}
         </th>
         <th
           v-show="!!tokenList"
           scope="col"
+          class="d-label--sm-compact"
         >
           PX
-        </th>
-        <th
-          scope="col"
-        >
-          {{ tokenList ? "Usage" : "Description" }}
         </th>
       </tr>
     </thead>
@@ -41,16 +42,15 @@
         <td>
           <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
         </td>
-        <th
-          scope="row"
-          class="d-code--sm d-fc-purple-400"
-        >
+        <th scope="row">
           <dt-stack
             direction="row"
             gap="300"
-            class="d-ai-center"
+            class="d-ai-center token-name"
           >
-            <span>{{ name }}</span>
+            <span class="d-label--md-compact">
+              {{ name }}
+            </span>
             <div class="d-w32">
               <dt-lazy-show :show="showCopyButton(name)">
                 <copy-button
@@ -60,42 +60,39 @@
               </dt-lazy-show>
             </div>
           </dt-stack>
+          <div class="d-body--sm">
+            {{ description }}
+          </div>
         </th>
-        <td
-          class="d-code--sm"
-        >
-          <div v-if="isCompositionToken(tokenValue)" class="d-wmx264">
+        <td class="d-code--sm d-fc-purple-400 d-ta-right d-wmx264">
+          <div v-if="isCompositionToken(tokenValue)">
             <span v-for="value in tokenValue" :key="value">
               <span v-if="valueIsDivided(value)">
-                <span v-dt-tooltip="getTokenValue(getFirstValue(value))">
+                <span v-dt-tooltip="getTokenValue(getFirstValue(value))" class="h:d-fc-secondary">
                   {{ getFirstValue(value) }}
                 </span>
                 /
-                <span v-dt-tooltip="getTokenValue(getSecondValue(value))">
+                <span v-dt-tooltip="getTokenValue(getSecondValue(value))" class="h:d-fc-secondary">
                   {{ getSecondValue(value) }}&nbsp;
                 </span>
               </span>
-              <span v-else v-dt-tooltip="getTokenValue(value)">
+              <span v-else v-dt-tooltip="getTokenValue(value)" class="h:d-fc-secondary">
                 {{ value }}&nbsp;
               </span>
             </span>
           </div>
-          <div v-else class="d-wmx264">
+          <div v-else>
             {{ tokenValue }}
           </div>
         </td>
         <td
-          v-show="!!tokenList"
-          class="d-code--sm"
+          v-if="!!tokenList"
+          class="d-code--sm d-fc-purple-400"
         >
           <div class="d-wmx264">
             {{ remToPixels(tokenValue) }}
           </div>
         </td>
-        <td
-          class="d-fs-100 d-lh-300"
-          v-text="description"
-        />
       </tr>
     </tbody>
   </table>
@@ -182,3 +179,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.token-name {
+  /* make space for the copy button that appears on mouse enter */
+  min-height: 2.8rem;
+}
+
+.d-table th {
+  color: var(--color-foreground-tertiary);
+  font-weight: var(--dt-font-weight-semi-bold);
+}
+</style>
