@@ -1,3 +1,27 @@
+# [9.31.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.30.1...dialtone/v9.31.0) (2024-04-22)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1714 limit file type on image picker ([#274](https://github.com/dialpad/dialtone/issues/274)) ([63e82c6](https://github.com/dialpad/dialtone/commit/63e82c68a2fd3d8294db293285dce2b11a821b8d))
+* **Popover:** DP-96422 fix undefined on queryselector popover ([#275](https://github.com/dialpad/dialtone/issues/275)) ([2de9f95](https://github.com/dialpad/dialtone/commit/2de9f955000eb435bf4d5dbd3faf2f3a5c79dde4))
+
+
+### Documentation
+
+* DLT-1502 add token categorization ([#257](https://github.com/dialpad/dialtone/issues/257)) ([94631ff](https://github.com/dialpad/dialtone/commit/94631ff2da49edd79ae49b04095f03ce37ae7737))
+* DLT-1698 add tokens page sidebar ([#269](https://github.com/dialpad/dialtone/issues/269)) ([56459d4](https://github.com/dialpad/dialtone/commit/56459d4d700908c97518fd498cc45a26247ab3a8))
+* **Tokens:** DLT-1634 add description below ([#273](https://github.com/dialpad/dialtone/issues/273)) ([b51a97b](https://github.com/dialpad/dialtone/commit/b51a97b980d6829bf9c72e2d62f638514d480eca))
+* **Tokens:** DLT-1637 add copy button on hover ([#271](https://github.com/dialpad/dialtone/issues/271)) ([ae60e1e](https://github.com/dialpad/dialtone/commit/ae60e1e625383f1261b66773ca23bf093c037e69))
+
+
+### Features
+
+* DLT-1700 add an emojiGiphyPicker slot ([#277](https://github.com/dialpad/dialtone/issues/277)) ([b607311](https://github.com/dialpad/dialtone/commit/b60731132b82820fd288663b75f0205260eed339))
+* DLT-1718 add pdf-file icon ([#276](https://github.com/dialpad/dialtone/issues/276)) ([0e36bdf](https://github.com/dialpad/dialtone/commit/0e36bdf0b2ab6a1b557e10dcab9ede87645801f1))
+* DLT-1721 add icon whastapp-outline ([#280](https://github.com/dialpad/dialtone/issues/280)) ([c3ba8dd](https://github.com/dialpad/dialtone/commit/c3ba8dd0d7911aa5a74348d2f7211d0d9b937cb9))
+* **Rich Text Editor:** DLT-1601 add channel suggestions ([#270](https://github.com/dialpad/dialtone/issues/270)) ([d3cad61](https://github.com/dialpad/dialtone/commit/d3cad613f94b31549d3ebbdcf47fe4980a99fd16))
+
 ## [9.30.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.30.0...dialtone/v9.30.1) (2024-04-12)
 
 
