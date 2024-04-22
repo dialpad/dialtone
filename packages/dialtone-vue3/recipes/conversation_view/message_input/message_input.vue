@@ -131,6 +131,8 @@
             />
           </template>
         </dt-popover>
+        <!-- @slot Slot for emojiGiphy picker -->
+        <slot name="emojiGiphyPicker" />
       </div>
       <!-- Right content -->
       <div class="d-d-flex">
