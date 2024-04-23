@@ -562,8 +562,8 @@
           "link": "/components/emoji-text-wrapper.html"
         },
         {
-          "text": "Icon",
-          "link": "/components/icon.html"
+          "text": "Empty states",
+          "link": "/components/empty-states.html"
         },
         {
           "text": "Input",
