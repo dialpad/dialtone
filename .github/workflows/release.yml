@@ -16,8 +16,6 @@ env:
 jobs:
   filter-actions:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     outputs:
       dialtone: ${{ steps.filter.outputs.dialtone }}
       css: ${{ steps.filter.outputs.css }}
@@ -36,6 +34,8 @@ jobs:
         uses: dorny/paths-filter@v2
         id: filter
         with:
+          base: ${{ github.event.inputs.base && github.event.inputs.base || github.ref }}
+          list-files: 'json'
           filters: |
             dialtone:
               - 'package.json'
