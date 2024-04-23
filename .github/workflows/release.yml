@@ -72,6 +72,8 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: GET /orgs/dialpad/members/${{ github.actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
   release:
     needs: [get-branch-name, check-dialpad-member, filter-actions]
