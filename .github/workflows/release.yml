@@ -176,63 +176,63 @@ jobs:
       - name: Publish dialtone ${{ env.DIALTONE_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         run: >
-          pnpm nx dialtone:publish
+          pnpm nx publish dialtone
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.DIALTONE_RELEASE_TAG }}
 
       - name: Publish dialtone css ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.css == 'true' }}
         run: >
-          pnpm nx dialtone-css:publish
+          pnpm nx publish dialtone-css
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone emojis ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.emojis == 'true' }}
         run: >
-          pnpm nx dialtone-emojis:publish
+          pnpm nx publish dialtone-emojis
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone icons ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.icons == 'true' }}
         run: >
-          pnpm nx dialtone-icons:publish
+          pnpm nx publish dialtone-icons
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone tokens ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.tokens == 'true' }}
         run: >
-          pnpm nx dialtone-tokens:publish
+          pnpm nx publish dialtone-tokens
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone vue2 ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue2 == 'true' }}
         run: >
-          pnpm nx dialtone-vue2:publish
+          pnpm nx publish dialtone-vue2
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone vue3 ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue3 == 'true' }}
         run: >
-          pnpm nx dialtone-vue3:publish
+          pnpm nx publish dialtone-vue3
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
 
       - name: Publish Dialtone eslint plugin ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.eslint-plugin-dialtone == 'true' }}
         run: >
-          pnpm nx eslint-plugin-dialtone:publish
+          pnpm nx publish eslint-plugin-dialtone
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.stylelint-plugin-dialtone == 'true' }}
         run: >
-          pnpm nx stylelint-plugin-dialtone:publish
+          pnpm nx publish stylelint-plugin-dialtone
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
@@ -246,63 +246,63 @@ jobs:
       - name: Publish dialtone ${{ env.DIALTONE_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
         run: >
-          pnpm nx dialtone:publish
+          pnpm nx publish dialtone
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.DIALTONE_RELEASE_TAG }}
 
       - name: Publish dialtone css ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.css == 'true' }}
         run: >
-          pnpm nx dialtone-css:publish
+          pnpm nx publish dialtone-css
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone emojis ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.emojis == 'true' }}
         run: >
-          pnpm nx dialtone-emojis:publish
+          pnpm nx publish dialtone-emojis
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone icons ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.icons == 'true' }}
         run: >
-          pnpm nx dialtone-icons:publish
+          pnpm nx publish dialtone-icons
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone tokens ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.tokens == 'true' }}
         run: >
-          pnpm nx dialtone-tokens:publish
+          pnpm nx publish dialtone-tokens
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone vue2 ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue2 == 'true' }}
         run: >
-          pnpm nx dialtone-vue2:publish
+          pnpm nx publish dialtone-vue2
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone vue3 ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue3 == 'true' }}
         run: >
-          pnpm nx dialtone-vue3:publish
+          pnpm nx publish dialtone-vue3
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
 
       - name: Publish Dialtone eslint plugin ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.eslint-plugin-dialtone == 'true' }}
         run: >
-          pnpm nx eslint-plugin-dialtone:publish
+          pnpm nx publish eslint-plugin-dialtone
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
       - name: Publish Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.stylelint-plugin-dialtone == 'true' }}
         run: >
-          pnpm nx stylelint-plugin-dialtone:publish
+          pnpm nx publish stylelint-plugin-dialtone
            --publish-branch ${{ env.BRANCH_NAME }}
            --tag ${{ env.RELEASE_TAG }}
 
@@ -310,36 +310,36 @@ jobs:
       # Release to GitHub
       - name: Release dialtone ${{ env.DIALTONE_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
-        run: pnpm nx dialtone:release-github
+        run: pnpm nx release-github dialtone
 
       - name: Release dialtone css ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.css == 'true' }}
-        run: pnpm nx dialtone-css:release-github
+        run: pnpm nx release-github dialtone-css
 
       - name: Release dialtone emojis ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.emojis == 'true' }}
-        run: pnpm nx dialtone-emojis:release-github
+        run: pnpm nx release-github dialtone-emojis
 
       - name: Release dialtone icons ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.icons == 'true' }}
-        run: pnpm nx dialtone-icons:release-github
+        run: pnpm nx release-github dialtone-icons
 
       - name: Release dialtone tokens ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.tokens == 'true' }}
-        run: pnpm nx dialtone-tokens:release-github
+        run: pnpm nx release-github dialtone-tokens
 
       - name: Release dialtone vue2 ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue2 == 'true' }}
-        run: pnpm nx dialtone-vue2:release-github
+        run: pnpm nx release-github dialtone-vue2
 
       - name: Release dialtone vue3 ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue3 == 'true' }}
-        run: pnpm nx dialtone-vue3:release-github
+        run: pnpm nx release-github dialtone-vue3
 
       - name: Release Dialtone eslint plugin ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.eslint-plugin-dialtone == 'true' }}
-        run: pnpm nx eslint-plugin-dialtone:release-github
+        run: pnpm nx release-github eslint-plugin-dialtone
 
       - name: Release Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.stylelint-plugin-dialtone == 'true' }}
-        run: pnpm nx stylelint-plugin-dialtone:release-github
+        run: pnpm nx release-github stylelint-plugin-dialtone
