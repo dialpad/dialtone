@@ -2,6 +2,10 @@ name: Release packages
 
 on:
   workflow_dispatch:
+    inputs:
+      base:
+        required: true
+        description: 'Base commit SHA to compare changes from'
   push:
     branches:
       - production
