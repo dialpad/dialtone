@@ -7,6 +7,7 @@ on:
         required: false
         description: 'Base commit SHA to compare changes from'
       package:
+        type: 'choice'
         required: false
         description: 'Select a package to run a single release'
         options:
