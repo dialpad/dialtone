@@ -35,14 +35,20 @@ const svgList = glob.sync('./src/**/*.svg').sort();
 const paths = {
   clean: {
     dist: './dist/**/*',
-    icons: './src/icons/*'
+    icons: './src/icons/*',
+    illustrations: './src/illustrations/*',
+  },
+  illustrations: {
+    input: './src/svg/illustrations/**/*.svg',
+    outputSvg: './dist/svg/illustrations/',
   },
   icons: {
-    input: './src/svg/**/*.svg',
-    outputSvg: './dist/svg/',
+    input: './src/svg/icons/**/*.svg',
+    outputSvg: './dist/svg/icons/',
   },
   exports: {
-    keywords: './src/keywords.json',
+    keywordsIcons: './src/keywords-icons.json',
+    keywordsIllustrations: './src/keywords-illustration.json',
     iconsList: './dist/icons.json',
     index: './index.js',
   },
@@ -73,6 +79,11 @@ const cleanDist = () => {
 //  --  Clean out ./src/icons
 const cleanIcons = () => {
   return cleanUp([paths.clean.icons]);
+};
+
+//  --  Clean out ./src/illustrations
+const cleanIllustrations = () => {
+  return cleanUp([paths.clean.illustrations]);
 };
 
 //  ================================================================================
@@ -144,7 +155,7 @@ const transformSVGtoVue = function (done) {
 //  into the respective category.
 //  ================================================================================
 const updateIconsJSON = function (done) {
-  const rawData = fs.readFileSync(paths.exports.keywords)
+  const rawData = fs.readFileSync(paths.exports.keywordsIcons)
   const keywordsJSON = JSON.parse(rawData).categories;
   const iconsList = [];
 
@@ -161,15 +172,15 @@ const updateIconsJSON = function (done) {
 
   iconsList.sort();
 
-  fs.writeFileSync(paths.exports.keywords, JSON.stringify({ categories: {...updatedKeywords}}));
+  fs.writeFileSync(paths.exports.keywordsIcons, JSON.stringify({ categories: {...updatedKeywords}}));
   fs.writeFileSync(paths.exports.iconsList, JSON.stringify(iconsList));
 
   // Copies the icons.json and keywords.json to dist/
-  src([paths.exports.keywords, paths.exports.iconsList])
+  src([paths.exports.keywordsIcons, paths.exports.iconsList])
   .pipe(dest('./dist/'));
 
   // Prettifies the JSON to improve readability and easier keyword adding.
-  src(paths.exports.keywords)
+  src(paths.exports.keywordsIcons)
   .pipe(jsonFormat(2))
   .pipe(dest('./src/'));
 
@@ -202,6 +213,7 @@ const updateExports = function (done) {
 exports.default = series(
   cleanDist,
   cleanIcons,
+  cleanIllustrations,
   buildIcons,
   transformSVGtoVue,
   updateIconsJSON,
