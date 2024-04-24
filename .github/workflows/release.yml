@@ -210,11 +210,11 @@ jobs:
         if: ${{ needs.filter-actions.outputs.tokens == 'true' || github.event.inputs.package == 'tokens' }}
         run: pnpm nx publish dialtone-tokens --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
 
-      - name: Publish dialtone vue2 ${{ env.RELEASE_TAG }}
+      - name: Publish dialtone-vue@${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue2 == 'true' || github.event.inputs.package == 'vue2' }}
         run: pnpm nx publish dialtone-vue2 --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
 
-      - name: Publish dialtone vue3 ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
+      - name: Publish dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue3 == 'true' || github.event.inputs.package == 'vue3' }}
         run: pnpm nx publish dialtone-vue3 --publish-branch=${{ env.BRANCH_NAME }} --tag ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
 
@@ -253,11 +253,11 @@ jobs:
         if: ${{ needs.filter-actions.outputs.tokens == 'true' || github.event.inputs.package == 'tokens' }}
         run: pnpm nx publish dialtone-tokens --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
 
-      - name: Publish dialtone vue2 ${{ env.RELEASE_TAG }}
+      - name: Publish dialtone-vue@${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue2 == 'true' || github.event.inputs.package == 'vue2' }}
         run: pnpm nx publish dialtone-vue2 --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
 
-      - name: Publish dialtone vue3 ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
+      - name: Publish dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue3 == 'true' || github.event.inputs.package == 'vue3' }}
         run: pnpm nx publish dialtone-vue3 --publish-branch=${{ env.BRANCH_NAME }} --tag ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
 
@@ -290,11 +290,11 @@ jobs:
         if: ${{ needs.filter-actions.outputs.tokens == 'true' || github.event.inputs.package == 'tokens' }}
         run: pnpm nx release-github dialtone-tokens
 
-      - name: Release dialtone vue2 ${{ env.RELEASE_TAG }}
+      - name: Release dialtone-vue@${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue2 == 'true' || github.event.inputs.package == 'vue2' }}
         run: pnpm nx release-github dialtone-vue2
 
-      - name: Release dialtone vue3 ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
+      - name: Release dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.vue3 == 'true' || github.event.inputs.package == 'vue3' }}
         run: pnpm nx release-github dialtone-vue3
 
