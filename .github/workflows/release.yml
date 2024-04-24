@@ -32,7 +32,6 @@ env:
 
 jobs:
   filter-actions:
-    needs: [get-branch-name]
     runs-on: ubuntu-latest
     outputs:
       dialtone: ${{ steps.filter.outputs.dialtone }}
@@ -47,18 +46,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Get previous commit SHA
-        env:
-          BRANCH_NAME: ${{ needs.get-branch-name.outputs.current_branch }}
-        run: |
-          echo "PREV_COMMIT_SHA=$(git rev-parse ${{ env.BRANCH_NAME }}~1)" >> $GITHUB_ENV
+        with:
+          fetch-depth: 2
 
       - name: Filter actions by path
         uses: dorny/paths-filter@v2
         id: filter
         with:
-          base: ${{ github.event.inputs.base && github.event.inputs.base || env.PREV_COMMIT_SHA }}
+          base: ${{ github.event.inputs.base && github.event.inputs.base || github.ref }}
           list-files: 'json'
           filters: |
             dialtone:
