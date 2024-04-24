@@ -51,6 +51,7 @@ jobs:
           fetch-depth: 2
 
       - name: Filter actions by path
+        if: ${{ github.event.inputs.base || github.event_name == 'push' }}
         uses: dorny/paths-filter@v2
         id: filter
         with:
