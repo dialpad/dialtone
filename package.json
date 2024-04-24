@@ -163,5 +163,8 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dialpad/dialtone.git"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
