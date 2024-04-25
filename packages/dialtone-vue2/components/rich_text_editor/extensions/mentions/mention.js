@@ -1,27 +1,40 @@
 import Mention from '@tiptap/extension-mention';
-import { mergeAttributes, nodePasteRule } from '@tiptap/core';
+import { mergeAttributes, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import { VueNodeViewRenderer } from '@tiptap/vue-2';
+import { PluginKey } from '@tiptap/pm/state';
 
 // Mention component
 import MentionComponent from './MentionComponent.vue';
 
+export const mentionRegex = /@([\w.-]+)[^.\w]?/g;
+
 const mentionPasteMatch = (text, suggestions) => {
-  const matches = [...text.matchAll(/@([\w.-]+)/g)];
+  const matches = [...text.matchAll(mentionRegex)];
 
   return matches
     .filter(match => suggestions.some(({ id }) => id === match[1].trim()))
     .map(match => {
-      let text = match[1];
-      if (!text.endsWith(' ')) text += ' ';
+      let mention = match[1];
+      if (!mention.endsWith(' ')) mention += ' ';
       return {
         index: match.index,
-        text,
+        text: mention,
         match,
       };
     });
 };
 
-// Always the Padawan, never the Jedi. @2
+const mentionInputMatch = (text, suggestions) => {
+  const match = text.match(/@([\w.-]+)[^.\w]$/);
+  if (!match || !suggestions.some(({ id }) => id === match[1])) return;
+
+  return {
+    index: match.index,
+    text: match[0],
+    match,
+  };
+};
+
 export const MentionPlugin = Mention.extend({
   name: 'mention',
   group: 'inline',
@@ -61,6 +74,19 @@ export const MentionPlugin = Mention.extend({
     return ['mention-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
   },
 
+  addInputRules () {
+    const suggestions = this.options.suggestion?.items({ query: '' });
+    return [
+      nodeInputRule({
+        find: (text) => mentionInputMatch(text, suggestions),
+        type: this.type,
+        getAttributes (attrs) {
+          return suggestions.find(({ id }) => id === attrs[0].replace('@', '').trim());
+        },
+      }),
+    ];
+  },
+
   addPasteRules () {
     const suggestions = this.options.suggestion?.items({ query: '' });
     return [
@@ -72,5 +98,10 @@ export const MentionPlugin = Mention.extend({
         },
       }),
     ];
+  },
+}).configure({
+  suggestion: {
+    char: '@',
+    pluginKey: new PluginKey('mentionSuggestion'),
   },
 });
