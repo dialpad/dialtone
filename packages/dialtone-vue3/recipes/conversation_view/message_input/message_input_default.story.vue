@@ -2,7 +2,7 @@
   <div class="d-h264">
     <dt-recipe-message-input
       ref="input"
-      v-model="modelValue"
+      v-model="$attrs.modelValue"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :allow-blockquote="$attrs.allowBlockquote"
@@ -49,10 +49,5 @@ import DtRecipeMessageInput from './message_input.vue';
 export default {
   name: 'DtRecipeMessageInputDefault',
   components: { DtRecipeMessageInput },
-  data () {
-    return {
-      modelValue: this.$attrs.modelValue,
-    };
-  },
 };
 </script>
