@@ -11,6 +11,7 @@ export default {
   // items: ({ query }) => { return [] },
 
   allowSpaces: true,
+  startOfLine: true,
 
   render: () => {
     let component;
