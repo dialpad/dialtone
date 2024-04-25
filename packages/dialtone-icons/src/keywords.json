@@ -1887,6 +1887,11 @@
         "authentication",
         "2fa"
       ],
+      "scan-file": [
+        "document",
+        "capture",
+        "scanner"
+      ],
       "scan": [
         "qr-code"
       ],
