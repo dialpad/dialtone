@@ -3,6 +3,7 @@
     :editor="editor"
     data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
+    @selected-command="onSelectedCommand"
   />
 </template>
 
@@ -440,6 +441,10 @@ export default {
   },
 
   methods: {
+    onSelectedCommand (command) {
+      this.$emit('selected-command', command);
+    },
+
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
       this.editor = new Editor({

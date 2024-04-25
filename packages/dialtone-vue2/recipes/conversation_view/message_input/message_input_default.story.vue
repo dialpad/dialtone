@@ -36,6 +36,7 @@
         @input="$attrs.onInput"
         @select-media="$attrs.onSelectMedia"
         @selected-emoji="$attrs.onSelectedEmoji"
+        @selected-command="$attrs.onSelectedCommand"
         @skin-tone="$attrs.onSkinTone"
         @add-media="$attrs.onAddMedia"
         @paste-media="$attrs.onPasteMedia"

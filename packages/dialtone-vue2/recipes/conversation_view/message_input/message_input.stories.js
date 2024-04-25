@@ -78,6 +78,12 @@ export const argTypesData = {
     },
   },
 
+  onSelectedCommand: {
+    table: {
+      disable: true,
+    },
+  },
+
   onCancel: {
     table: {
       disable: true,
@@ -133,6 +139,7 @@ export const argsData = {
   onInput: action('input'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
+  onSelectedCommand: action('selected-command'),
   onAddMedia: action('add-media'),
   onPasteMedia: action('paste-media'),
   onNoticeClose: action('notice-close'),

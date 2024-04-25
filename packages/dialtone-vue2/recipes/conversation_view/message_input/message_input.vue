@@ -40,6 +40,7 @@
         @focus="onFocus"
         @blur="onBlur"
         @input="onInput($event)"
+        @selected-command="onSelectedCommand"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -587,6 +588,14 @@ export default {
     'selected-emoji',
 
     /**
+     * Fires when a slash command is selected
+     *
+     * @event selected-command
+     * @type {String}
+     */
+    'selected-command',
+
+    /**
      * Native focus event
      * @event input
      * @type {String|JSON}
@@ -698,6 +707,10 @@ export default {
       });
       this.emojiPickerOpened = false;
       this.$emit('selected-emoji', emoji);
+    },
+
+    onSelectedCommand (command) {
+      this.$emit('selected-command', command);
     },
 
     onSelectImage () {

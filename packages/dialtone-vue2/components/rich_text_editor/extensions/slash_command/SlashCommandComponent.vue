@@ -18,10 +18,16 @@ export default {
 
   props: nodeViewProps,
 
+  emits: ['selected-command'],
+
   computed: {
     text () {
       return '/' + this.$props.node.attrs.command;
     },
+  },
+
+  created () {
+    this.$parent.$emit('selected-command', this.$props.node.attrs.command);
   },
 };
 </script>
