@@ -1887,6 +1887,7 @@
         "authentication",
         "2fa"
       ],
+      "scan-file": [],
       "scan": [
         "qr-code"
       ],
