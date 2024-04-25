@@ -21,11 +21,11 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
         heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
         heading="Menu Heading A"
       >
-        <dt-list-item>
+        <dt-list-item navigation-type="arrow-keys">
           Menu Item 1
         </dt-list-item>
         <dt-dropdown-separator />
-        <dt-list-item>
+        <dt-list-item navigation-type="arrow-keys">
           Menu Item 2
         </dt-list-item>
       </dt-list-item-group>
@@ -34,7 +34,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
         heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
         heading="Menu Heading B"
       >
-        <dt-list-item>
+        <dt-list-item navigation-type="arrow-keys">
           Menu Item 3
         </dt-list-item>
       </dt-list-item-group>
@@ -109,12 +109,12 @@ vueCode='
     <dt-list-item-group
       heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
       heading="Menu Heading A"
-    >
-      <dt-list-item>
+    > 
+      <dt-list-item navigation-type="arrow-keys">
         Menu Item 1
       </dt-list-item>
       <dt-dropdown-separator />
-      <dt-list-item>
+      <dt-list-item navigation-type="arrow-keys">
         Menu Item 2
       </dt-list-item>
     </dt-list-item-group>
@@ -123,7 +123,7 @@ vueCode='
       heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
       heading="Menu Heading B"
     >
-      <dt-list-item>
+      <dt-list-item navigation-type="arrow-keys">
         Menu Item 3
       </dt-list-item>
     </dt-list-item-group>
