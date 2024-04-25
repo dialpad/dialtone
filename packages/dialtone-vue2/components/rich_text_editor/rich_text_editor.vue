@@ -29,6 +29,7 @@ import Emoji from './extensions/emoji';
 import Link from './extensions/link';
 import { MentionPlugin } from './extensions/mentions/mention';
 import { ChannelPlugin } from './extensions/channels/channel';
+import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
@@ -37,6 +38,7 @@ import {
 
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
+import slashCommandSuggestion from './extensions/slash_command/suggestion';
 
 export default {
   name: 'DtRichTextEditor',
@@ -169,6 +171,24 @@ export default {
      * When null, it does not add the plugin. Setting locked to true will display a lock rather than hash.
      */
     channelSuggestion: {
+      type: Object,
+      default: null,
+    },
+
+    /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the slash commands for suggestion.
+     * items({ query }) => { return [SlashCommandObject]; }
+     * SlashCommandObject format:
+     * { command: string, description: string, parametersExample?: string }
+     * The "parametersExample" parameter is optional, and describes an example
+     * of the parameters that command can take.
+     *
+     * When null, it does not add the plugin.
+     */
+    slashCommandSuggestion: {
       type: Object,
       default: null,
     },
@@ -330,6 +350,12 @@ export default {
         // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
         const suggestionObject = { ...this.channelSuggestion, ...channelSuggestion };
         extensions.push(ChannelPlugin.configure({ suggestion: suggestionObject }));
+      }
+
+      if (this.slashCommandSuggestion) {
+        // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
+        const suggestionObject = { ...this.slashCommandSuggestion, ...slashCommandSuggestion };
+        extensions.push(SlashCommandPlugin.configure({ suggestion: suggestionObject }));
       }
 
       // Emoji has some interactions with Enter key

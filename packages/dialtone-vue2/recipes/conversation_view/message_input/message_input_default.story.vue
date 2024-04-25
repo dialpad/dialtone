@@ -21,6 +21,7 @@
         :max-height="$attrs.maxHeight"
         :mention-suggestion="$attrs.mentionSuggestion"
         :channel-suggestion="$attrs.channelSuggestion"
+        :slash-command-suggestion="$attrs.slashCommandSuggestion"
         :show-emoji-picker="$attrs.showEmojiPicker"
         :emoji-picker-props="$attrs.emojiPickerProps"
         :emoji-tooltip-message="$attrs.emojiTooltipMessage"
