@@ -71,9 +71,6 @@
     "last 1 version",
     "maintained node versions"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "docopt": "^0.6.2"
   },
