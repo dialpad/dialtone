@@ -14,6 +14,10 @@ export default {
         command: 'meeting',
         description: 'Start a Dialpad Meeting',
       },
+      {
+        command: 'meeting2',
+        description: 'Start a Dialpad Meeting',
+      },
     ];
 
     if (query.length === 0) return COMMAND_LIST;
