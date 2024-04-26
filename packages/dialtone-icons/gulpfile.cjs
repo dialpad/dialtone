@@ -26,7 +26,8 @@ const _ = require('lodash');
 const path = settings.svgs ? require('path') : null;
 const svgmin = settings.svgs ? require('gulp-svgmin') : null;
 const replace = settings.svgs ? require('gulp-replace') : null;
-const svgList = glob.sync('./src/**/*.svg').sort();
+const svgListIcons = glob.sync('./src/svg/icons/**/*.svg').sort();
+const svgListIllustrations = glob.sync('./src/svg/illustrations/**/*.svg').sort();
 
 //  ================================================================================
 //  @  PATHS
@@ -48,7 +49,8 @@ const paths = {
   },
   exports: {
     keywordsIcons: './src/keywords-icons.json',
-    keywordsIllustrations: './src/keywords-illustration.json',
+    keywordsIllustrations: './src/keywords-illustrations.json',
+    illustrationsList: './dist/illustrations.json',
     iconsList: './dist/icons.json',
     index: './index.js',
   },
@@ -141,6 +143,57 @@ const buildIcons = function (done) {
   .pipe(dest(paths.icons.outputSvg));
 };
 
+const buildIllustrations = function (done) {
+  //  Make sure this feature is activated before running
+  if (!settings.svgs) return done();
+
+  //  Compile icons
+  return src(paths.illustrations.input)
+    .pipe(replace(' fill="none"', ''))
+    .pipe(replace(' fill="#000"', ' fill="currentColor"'))
+    .pipe(replace(' fill="#000000"', ' fill="currentColor"'))
+    .pipe(replace(' fill="black"', ' fill="currentColor"'))
+    .pipe(replace(' fill="#0D0C0F"', ' fill="currentColor"'))
+    .pipe(replace(' fill="#222"', ' fill="currentColor"'))
+    .pipe(replace(' fill="#222222"', ' fill="currentColor"'))
+    .pipe(replace(/<svg.*(width="[0-9]+|height="[0-9]+)"/g, (match) => {
+      return match
+          .replace(/width="[0-9]+"/, '')
+          .replace(/height="[0-9]+"/, '');
+    }))
+    .pipe(replace('<svg', function (match) {
+      const name = path.parse(this.file.path).name;
+      const title = name
+        .replace(/\b\S/g, t => t.toUpperCase())
+        .replace(/-+/g, ' ');
+      return `${match}
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+      data-name="${title}"`;
+      // class="d-icon d-icon--${name}"
+    }))
+    .pipe(svgmin(function getOptions () {
+      return {
+        multipass: true,
+        plugins: [
+          {
+            removeUnknownsAndDefaults: {
+              keepRoleAttr: true,
+            },
+          },
+          {
+            cleanupIDs: {
+              minify: true,
+            },
+          }
+        ],
+      }
+    }))
+    .pipe(rename({ dirname: '' }))
+  .pipe(dest(paths.illustrations.outputSvg));
+};
+
 const transformSVGtoVue = function (done) {
   exec('node ./transformSVGtoVue.cjs', (err, stdout, stderr) => {
     console.error(stderr);
@@ -159,16 +212,16 @@ const updateIconsJSON = function (done) {
   const keywordsJSON = JSON.parse(rawData).categories;
   const iconsList = [];
 
-  const updatedKeywords = svgList.reduce((acc, file) => {
-        const [category, fileName] = file.split('/').slice(-2);
-        const iconName = fileName.replace('.svg', '');
-        const keywords = keywordsJSON[category][iconName] || [];
-        acc[category] = {...acc[category], [iconName]: keywords}
+  const updatedKeywords = svgListIcons.reduce((acc, file) => {
+    const [category, fileName] = file.split('/').slice(-2);
+    const iconName = fileName.replace('.svg', '');
+    const keywords = keywordsJSON[category][iconName] || [];
+    acc[category] = {...acc[category], [iconName]: keywords}
 
-        iconsList.push(iconName);
+    iconsList.push(iconName);
 
-        return acc;
-      }, {});
+    return acc;
+  }, {});
 
   iconsList.sort();
 
@@ -181,6 +234,39 @@ const updateIconsJSON = function (done) {
 
   // Prettifies the JSON to improve readability and easier keyword adding.
   src(paths.exports.keywordsIcons)
+  .pipe(jsonFormat(2))
+  .pipe(dest('./src/'));
+
+  return done();
+};
+
+const updateIllustrationsJSON = function (done) {
+  const rawData = fs.readFileSync(paths.exports.keywordsIllustrations)
+  const keywordsJSON = JSON.parse(rawData).categories;
+  const illustrationsList = [];
+
+  const updatedKeywords = svgListIllustrations.reduce((acc, file) => {
+    const [category, fileName] = file.split('/').slice(-2);
+    const illustrationName = fileName.replace('.svg', '');
+    const keywords = keywordsJSON[category][illustrationName] || [];
+    acc[category] = {...acc[category], [illustrationName]: keywords}
+
+    illustrationsList.push(illustrationName);
+
+    return acc;
+  }, {});
+
+  illustrationsList.sort();
+
+  fs.writeFileSync(paths.exports.keywordsIllustrations, JSON.stringify({ categories: {...updatedKeywords}}));
+  fs.writeFileSync(paths.exports.illustrationsList, JSON.stringify(illustrationsList));
+
+  // Copies the icons.json and keywords.json to dist/
+  src([paths.exports.keywordsIllustrations, paths.exports.illustrationsList])
+  .pipe(dest('./dist/'));
+
+  // Prettifies the JSON to improve readability and easier keyword adding.
+  src(paths.exports.keywordsIllustrations)
   .pipe(jsonFormat(2))
   .pipe(dest('./src/'));
 
@@ -215,7 +301,9 @@ exports.default = series(
   cleanIcons,
   cleanIllustrations,
   buildIcons,
+  buildIllustrations,
   transformSVGtoVue,
   updateIconsJSON,
+  updateIllustrationsJSON,
   updateExports,
 );

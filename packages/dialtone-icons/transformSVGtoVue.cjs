@@ -11,32 +11,38 @@ const _ = require('lodash');
     }
 
     fileNames.forEach(function (fileName) {
-      const svgContent = fs.readFileSync(`./dist/svg/${fileName}`, 'utf8');
-      const template = fs.readFileSync('./src/IconTemplate.vue', 'utf8');
-      const iconName = `dt-icon-${fileName.replace('.svg', '')}`.toLowerCase()
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join('');
+      const filePath = `./dist/svg/${fileName}`;
 
-      let result = template.replace('__SVG_CONTENT__', svgContent);
-      result = result.replaceAll('__ICON_NAME__', iconName);
+      if (fs.statSync(filePath).isFile()) { // Check if the item is a file
+        const svgContent = fs.readFileSync(`./dist/svg/${fileName}`, 'utf8');
+        const template = fs.readFileSync('./src/IconTemplate.vue', 'utf8');
+        const iconName = `dt-icon-${fileName.replace('.svg', '')}`.toLowerCase()
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join('');
 
-      // result = result.replace('<svg', '<svg :aria-label="ariaLabel" :class="[iconSizeClass]"')
-      result = result.replace('<svg', '<svg :aria-label="ariaLabel" :class="iconSizeClass"')
+        let result = template.replace('__SVG_CONTENT__', svgContent);
+        result = result.replaceAll('__ICON_NAME__', iconName);
 
-      result = result.replace('aria-hidden="true"', ':aria-hidden="ariaHidden"')
+        // result = result.replace('<svg', '<svg :aria-label="ariaLabel" :class="[iconSizeClass]"')
+        result = result.replace('<svg', '<svg :aria-label="ariaLabel" :class="iconSizeClass"')
 
-      // Create unique IDs
-      result = result.replace(/(clip-path|fill)="url\(#([^)]+)\)"/g, ':$1="`url(#${uniqueID}$2)`"')
-      result = result.replace(/(clipPath|linearGradient|radialGradient) id="([^"]+)"/g, '$1 :id="`${uniqueID}$2`"')
+        result = result.replace('aria-hidden="true"', ':aria-hidden="ariaHidden"')
 
-      if (!/\${uniqueID}/g.test(result)) {
-        // Remove created function if not needed
-        result = result.replace(/\n\s+this.uniqueID.*;/, '');
-        result = result.replace(/import \{ getUniqueString \} from '\.\.\/utils';\n+/, '');
+        // Create unique IDs
+        result = result.replace(/(clip-path|fill)="url\(#([^)]+)\)"/g, ':$1="`url(#${uniqueID}$2)`"')
+        result = result.replace(/(clipPath|linearGradient|radialGradient) id="([^"]+)"/g, '$1 :id="`${uniqueID}$2`"')
+
+        if (!/\${uniqueID}/g.test(result)) {
+          // Remove created function if not needed
+          result = result.replace(/\n\s+this.uniqueID.*;/, '');
+          result = result.replace(/import \{ getUniqueString \} from '\.\.\/utils';\n+/, '');
+        }
+
+        fs.writeFileSync(`./src/icons/${fileName.replace('.svg', '.vue')}`, result, 'utf8');
+      } else {
+        console.log("Skipping directory:", filePath); // Log if it's a directory
       }
-
-      fs.writeFileSync(`./src/icons/${fileName.replace('.svg', '.vue')}`, result, 'utf8');
     })
   })
 })();
