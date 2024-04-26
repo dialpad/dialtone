@@ -6,7 +6,7 @@ import { PluginKey } from '@tiptap/pm/state';
 // Channel Mention component
 import ChannelComponent from './ChannelComponent.vue';
 
-export const channelRegex = /#([\w-]+)/g;
+export const channelRegex = /#([\w-]+)[^\w-]?/g;
 
 const channelPasteMatch = (text, suggestions) => {
   const matches = [...text.matchAll(channelRegex)];
@@ -25,15 +25,12 @@ const channelPasteMatch = (text, suggestions) => {
 };
 
 const channelInputMatch = (text, suggestions) => {
-  const match = text.match(/#([\w-]+)$/);
-  if (!match) return;
-  if (!suggestions.some(({ id }) => id === match[1].trim())) return;
+  const match = text.match(/#([\w-]+)[^\w-]$/);
+  if (!match || !suggestions.some(({ id }) => id === match[1])) return;
 
-  let channel = match[1];
-  if (!channel.endsWith(' ')) channel += ' ';
   return {
     index: match.index,
-    text: channel,
+    text: match[0],
     match,
   };
 };
@@ -84,7 +81,7 @@ export const ChannelPlugin = Mention.extend({
         find: (text) => channelInputMatch(text, suggestions),
         type: this.type,
         getAttributes (attrs) {
-          return suggestions.find(({ id }) => id === attrs[0].trim());
+          return suggestions.find(({ id }) => id === attrs[0].replace('#', '').trim());
         },
       }),
     ];

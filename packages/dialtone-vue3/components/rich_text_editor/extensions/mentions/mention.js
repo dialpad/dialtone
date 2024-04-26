@@ -6,7 +6,7 @@ import { PluginKey } from '@tiptap/pm/state';
 // Mention component
 import MentionComponent from './MentionComponent.vue';
 
-export const mentionRegex = /@([\w.-]+)[^.\w]?/g;
+export const mentionRegex = /@([\w.-]+)[^\w.-]?/g;
 
 const mentionPasteMatch = (text, suggestions) => {
   const matches = [...text.matchAll(mentionRegex)];
@@ -25,7 +25,7 @@ const mentionPasteMatch = (text, suggestions) => {
 };
 
 const mentionInputMatch = (text, suggestions) => {
-  const match = text.match(/@([\w.-]+)[^.\w]$/);
+  const match = text.match(/@([\w.-]+)[^\w.-]$/);
   if (!match || !suggestions.some(({ id }) => id === match[1])) return;
 
   return {
