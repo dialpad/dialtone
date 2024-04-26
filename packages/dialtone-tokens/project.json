@@ -28,6 +28,6 @@
       "options": {
         "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-tokens/release-local.config.cjs"
       }
-    },
+    }
   }
 }
