@@ -2,9 +2,6 @@
   "name": "@dialpad/dialtone-icons",
   "version": "4.13.1",
   "description": "Dialtone icon library",
-  "scripts": {
-    "build": "gulp"
-  },
   "files": [
     "dist",
     "vue2/dist",
