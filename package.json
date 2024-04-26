@@ -15,6 +15,82 @@
     "release:beta": "./scripts/release.sh beta",
     "test:vitest": "vitest run --test-timeout=10000"
   },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "vue-tsc>vue": "^2.7.15",
+        "@tiptap/vue-2>vue": "^2.6.0",
+        "@tiptap/vue-3>vue": "^3.3.4",
+        "@linusborg/vue-simple-portal>vue": "^2.6.6",
+        "@yeoman/types>mem-fs": "^3.0.0",
+        "@dialpad/dialtone-vue@2>vue": "^2.6.0",
+        "stylelint-test-rule-node>stylelint": "^16.0.1"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./CHANGELOG.json": "./CHANGELOG.json",
+    "./css": "./dist/css/dialtone.min.css",
+    "./tokens/*.css": "./dist/tokens/css/*.css",
+    "./tokens/*.less": "./dist/tokens/less/*.less",
+    "./vue2": {
+      "types": "./dist/vue2/types/index.d.ts",
+      "import": "./dist/vue2/dialtone-vue.js",
+      "require": "./dist/vue2/dialtone-vue.cjs"
+    },
+    "./vue2/css": "./dist/vue2/style.css",
+    "./vue2/*": {
+      "types": "./dist/vue2/types/index.d.ts",
+      "import": "./dist/vue2/*.js",
+      "require": "./dist/vue2/*.cjs"
+    },
+    "./vue3": {
+      "types": "./dist/vue3/types/index.d.ts",
+      "import": "./dist/vue3/dialtone-vue.js",
+      "require": "./dist/vue3/dialtone-vue.cjs"
+    },
+    "./vue3/css": "./dist/vue3/style.css",
+    "./vue3/*": {
+      "types": "./dist/vue3/types/index.d.ts",
+      "import": "./dist/vue3/*.js",
+      "require": "./dist/vue3/*.cjs"
+    },
+    "./*": "./dist/*"
+  },
+  "dependencies": {
+    "@dialpad/dialtone-emojis": "workspace:*",
+    "@dialpad/dialtone-icons": "workspace:*",
+    "@tiptap/core": "2.2.6",
+    "@tiptap/extension-blockquote": "2.2.6",
+    "@tiptap/extension-bold": "2.2.6",
+    "@tiptap/extension-bullet-list": "2.2.6",
+    "@tiptap/extension-code-block": "2.2.6",
+    "@tiptap/extension-document": "2.2.6",
+    "@tiptap/extension-hard-break": "2.2.6",
+    "@tiptap/extension-italic": "2.2.6",
+    "@tiptap/extension-link": "2.2.6",
+    "@tiptap/extension-list-item": "2.2.6",
+    "@tiptap/extension-mention": "2.2.6",
+    "@tiptap/extension-ordered-list": "2.2.6",
+    "@tiptap/extension-paragraph": "2.2.6",
+    "@tiptap/extension-placeholder": "2.2.6",
+    "@tiptap/extension-strike": "2.2.6",
+    "@tiptap/extension-text": "2.2.6",
+    "@tiptap/extension-text-align": "2.2.6",
+    "@tiptap/extension-underline": "2.2.6",
+    "@tiptap/pm": "2.2.6",
+    "@tiptap/suggestion": "2.2.6",
+    "date-fns": "2.30.0",
+    "docopt": "0.6.2",
+    "emoji-regex": "10.3.0",
+    "emoji-toolkit": "8.0.0",
+    "requireindex": "1.2.0",
+    "stylelint": "15.11.0",
+    "tippy.js": "6.3.7"
+  },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",
@@ -58,84 +134,11 @@
     "vue-docgen-api": "^4.75.0",
     "wait-on": "^7.2.0"
   },
-  "pnpm": {
-    "packageExtensions": {
-      "vue-template-compiler": {
-        "peerDependencies": {
-          "vue": "^2.7.15"
-        }
-      }
-    }
-  },
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    "./CHANGELOG.json": "./CHANGELOG.json",
-    "./css": "./dist/css/dialtone.min.css",
-    "./tokens/*.css": "./dist/tokens/css/*.css",
-    "./tokens/*.less": "./dist/tokens/less/*.less",
-    "./vue2": {
-      "types": "./dist/vue2/types/index.d.ts",
-      "import": "./dist/vue2/dialtone-vue.js",
-      "require": "./dist/vue2/dialtone-vue.cjs"
-    },
-    "./vue2/css": "./dist/vue2/style.css",
-    "./vue2/*": {
-      "types": "./dist/vue2/types/index.d.ts",
-      "import": "./dist/vue2/*.js",
-      "require": "./dist/vue2/*.cjs"
-    },
-    "./vue3": {
-      "types": "./dist/vue3/types/index.d.ts",
-      "import": "./dist/vue3/dialtone-vue.js",
-      "require": "./dist/vue3/dialtone-vue.cjs"
-    },
-    "./vue3/css": "./dist/vue3/style.css",
-    "./vue3/*": {
-      "types": "./dist/vue3/types/index.d.ts",
-      "import": "./dist/vue3/*.js",
-      "require": "./dist/vue3/*.cjs"
-    },
-    "./*": "./dist/*"
-  },
-  "resolutions": {
-    "@dialpad/dialtone-css>postcss-preset-env": "^7.0.0",
-    "@dialpad/dialtone-css>stylelint": "^15.10.1"
-  },
   "peerDependencies": {
-    "@dialpad/dialtone-emojis": "workspace:*",
-    "@dialpad/dialtone-icons": "workspace:*",
     "@linusborg/vue-simple-portal": "0.1.5",
-    "@tiptap/core": "2.2.6",
-    "@tiptap/extension-blockquote": "2.2.6",
-    "@tiptap/extension-bold": "2.2.6",
-    "@tiptap/extension-bullet-list": "2.2.6",
-    "@tiptap/extension-code-block": "2.2.6",
-    "@tiptap/extension-document": "2.2.6",
-    "@tiptap/extension-hard-break": "2.2.6",
-    "@tiptap/extension-italic": "2.2.6",
-    "@tiptap/extension-link": "2.2.6",
-    "@tiptap/extension-list-item": "2.2.6",
-    "@tiptap/extension-mention": "2.2.6",
-    "@tiptap/extension-ordered-list": "2.2.6",
-    "@tiptap/extension-paragraph": "2.2.6",
-    "@tiptap/extension-placeholder": "2.2.6",
-    "@tiptap/extension-strike": "2.2.6",
-    "@tiptap/extension-text": "2.2.6",
-    "@tiptap/extension-text-align": "2.2.6",
-    "@tiptap/extension-underline": "2.2.6",
-    "@tiptap/pm": "2.2.6",
-    "@tiptap/suggestion": "2.2.6",
     "@tiptap/vue-2": "2.2.6",
     "@tiptap/vue-3": "2.2.6",
-    "date-fns": "2.30.0",
-    "docopt": "0.6.2",
-    "emoji-regex": "10.3.0",
-    "emoji-toolkit": "8.0.0",
-    "requireindex": "1.2.0",
-    "stylelint": "15.11.0",
-    "tippy.js": "6.3.7"
+    "vue": "^2 || ^3"
   },
   "peerDependenciesMeta": {
     "@linusborg/vue-simple-portal": {
