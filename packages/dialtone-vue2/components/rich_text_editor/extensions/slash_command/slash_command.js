@@ -4,7 +4,22 @@ import { PluginKey } from '@tiptap/pm/state';
 
 // Slash Command Mention component
 import SlashCommandComponent from './SlashCommandComponent.vue';
-import { mergeAttributes, nodeInputRule } from '@tiptap/core';
+import { mergeAttributes, nodeInputRule, nodePasteRule } from '@tiptap/core';
+
+const slashCommandPasteMatch = (text, slashCommandRegex) => {
+  const matches = [...text.matchAll(slashCommandRegex)];
+
+  return matches
+    .map(match => {
+      let slashCommand = match[2];
+      if (!slashCommand.endsWith(' ')) slashCommand += ' ';
+      return {
+        index: match.index,
+        text: slashCommand,
+        match,
+      };
+    });
+};
 
 export const SlashCommandPlugin = Mention.extend({
   name: 'slash-commands',
@@ -54,6 +69,20 @@ export const SlashCommandPlugin = Mention.extend({
         type: this.type,
         getAttributes (attrs) {
           return { command: attrs[2] };
+        },
+      }),
+    ];
+  },
+
+  addPasteRules () {
+    const suggestions = this.options.suggestion?.items({ query: '' }).map(suggestion => suggestion.command);
+    const slashCommandRegex = new RegExp(`^((?:\\/)(${suggestions.join('|')})) ?$`, 'g');
+    return [
+      nodePasteRule({
+        find: (text) => slashCommandPasteMatch(text, slashCommandRegex),
+        type: this.type,
+        getAttributes (attrs) {
+          return { command: attrs[0].trim() };
         },
       }),
     ];
