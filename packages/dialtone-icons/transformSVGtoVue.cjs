@@ -4,17 +4,14 @@ const _ = require('lodash');
 (function () {
   if (!fs.existsSync('./src/icons')) fs.mkdirSync('./src/icons');
 
-  fs.readdir('./dist/svg', function (err, fileNames) {
+  fs.readdir('./dist/svg/icons', function (err, fileNames) {
     if (err) {
       console.log(err);
       return -1;
     }
 
     fileNames.forEach(function (fileName) {
-      const filePath = `./dist/svg/${fileName}`;
-
-      if (fs.statSync(filePath).isFile()) { // Check if the item is a file
-        const svgContent = fs.readFileSync(`./dist/svg/${fileName}`, 'utf8');
+        const svgContent = fs.readFileSync(`./dist/svg/icons/${fileName}`, 'utf8');
         const template = fs.readFileSync('./src/IconTemplate.vue', 'utf8');
         const iconName = `dt-icon-${fileName.replace('.svg', '')}`.toLowerCase()
         .split('-')
@@ -40,9 +37,6 @@ const _ = require('lodash');
         }
 
         fs.writeFileSync(`./src/icons/${fileName.replace('.svg', '.vue')}`, result, 'utf8');
-      } else {
-        console.log("Skipping directory:", filePath); // Log if it's a directory
-      }
     })
   })
 })();
