@@ -7,8 +7,9 @@ import SlashCommandComponent from './SlashCommandComponent.vue';
 import { mergeAttributes, nodeInputRule } from '@tiptap/core';
 
 export const SlashCommandPlugin = Mention.extend({
-
   name: 'slash-commands',
+  group: 'inline',
+  inline: true,
 
   addNodeView () {
     return VueNodeViewRenderer(SlashCommandComponent);
@@ -41,12 +42,12 @@ export const SlashCommandPlugin = Mention.extend({
   },
 
   renderHTML ({ HTMLAttributes }) {
-    return ['command-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return ['command-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
   },
 
   addInputRules () {
     const suggestions = this.options.suggestion?.items({ query: '' }).map(suggestion => suggestion.command);
-    const slashCommandRegex = new RegExp(`^((?:\\/)(${suggestions.join('|')}))\\s$`);
+    const slashCommandRegex = new RegExp(`^((?:\\/)(${suggestions.join('|')})) $`);
     return [
       nodeInputRule({
         find: slashCommandRegex,
