@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.31.1",
+  "version": "9.32.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "test:all": "nx run-many --target=test",
@@ -18,13 +18,41 @@
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {
-        "vue-tsc>vue": "^2.7.15",
-        "@tiptap/vue-2>vue": "^2.6.0",
-        "@tiptap/vue-3>vue": "^3.3.4",
-        "@linusborg/vue-simple-portal>vue": "^2.6.6",
-        "@yeoman/types>mem-fs": "^3.0.0",
-        "@dialpad/dialtone-vue@2>vue": "^2.6.0",
-        "stylelint-test-rule-node>stylelint": "^16.0.1"
+        "vue": "^2.6.0 || ^3.3.4",
+        "mem-fs": "^4.0.0",
+        "stylelint": "^15.11.0"
+      }
+    },
+    "packageExtensions": {
+      "@dialpad/dialtone-vue@2": {
+        "peerDependencies": {
+          "vue": "^2.6.0"
+        }
+      },
+      "@dialpad/dialtone-vue@3": {
+        "peerDependencies": {
+          "vue": "^3.3.4"
+        }
+      },
+      "@linusborg/vue-simple-portal": {
+        "peerDependencies": {
+          "vue": "^2.6.6"
+        }
+      },
+      "@tiptap/vue-2": {
+        "peerDependencies": {
+          "vue": "^2.6.0"
+        }
+      },
+      "@tiptap/vue-3": {
+        "peerDependencies": {
+          "vue": "^3.3.4"
+        }
+      },
+      "vue-template-compiler": {
+        "peerDependencies": {
+          "vue": "^2.7.15"
+        }
       }
     }
   },

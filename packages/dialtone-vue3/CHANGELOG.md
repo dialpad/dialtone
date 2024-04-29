@@ -1,3 +1,15 @@
+# [3.122.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.121.0...dialtone-vue3/v3.122.0) (2024-04-26)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
+
+
+### Features
+
+* **Dt Notice:** DLT-1671 add support for truncating text ([#281](https://github.com/dialpad/dialtone/issues/281)) ([a0ab1be](https://github.com/dialpad/dialtone/commit/a0ab1be9b28d829f20bd2a2c7ef6b6f35756e1c4))
+
 # [3.121.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.120.2...dialtone-vue3/v3.121.0) (2024-04-22)
 
 
