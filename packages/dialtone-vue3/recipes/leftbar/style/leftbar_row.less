@@ -238,6 +238,31 @@
     font-weight: var(--dt-font-weight-medium);
   }
 
+  &__container--off-duty {
+      border-radius: var(--dt-size-radius-500);
+      background-color: var(--dt-badge-color-background-critical);
+      border: var(--dt-size-100) solid var(--dt-color-border-subtle);
+
+     &:deep(.dt-leftbar-row__primary) {
+       margin: calc(var(--dt-size-100) * -1);
+     }
+  }
+
+  &--contact-centers {
+    &:deep(.dt-leftbar-row__alpha) {
+      padding-right: var(--dt-space-450);
+      padding-left: var(--dt-space-450);
+    }
+
+    .dt-leftbar-row__action-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: var(--dt-size-600);
+      height: var(--dt-size-500);
+    }
+  }
+
   //  ============================================================================
   //  $   LABEL'S ELEMENTS
   //  ----------------------------------------------------------------------------
