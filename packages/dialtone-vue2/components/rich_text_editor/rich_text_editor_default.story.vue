@@ -10,6 +10,7 @@
     :link="$attrs.link"
     :mention-suggestion="$attrs.mentionSuggestion"
     :channel-suggestion="$attrs.channelSuggestion"
+    :slash-command-suggestion="$attrs.slashCommandSuggestion"
     :allow-blockquote="$attrs.allowBlockquote"
     :allow-bold="$attrs.allowBold"
     :allow-bullet-list="$attrs.allowBulletList"

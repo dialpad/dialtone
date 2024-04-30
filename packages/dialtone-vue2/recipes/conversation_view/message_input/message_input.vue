@@ -29,6 +29,7 @@
         :placeholder="placeholder"
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
+        :slash-command-suggestion="slashCommandSuggestion"
         :allow-blockquote="allowBlockquote"
         :allow-bold="allowBold"
         :allow-bullet-list="allowBulletList"
@@ -39,6 +40,7 @@
         @focus="onFocus"
         @blur="onBlur"
         @input="onInput($event)"
+        @selected-command="onSelectedCommand"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -462,6 +464,24 @@ export default {
     },
 
     /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the slash commands for suggestion.
+     * items({ query }) => { return [SlashCommandObject]; }
+     * SlashCommandObject format:
+     * { command: string, description: string, parametersExample?: string }
+     * The "parametersExample" parameter is optional, and describes an example
+     * of the parameters that command can take.
+     *
+     * When null, it does not add the plugin.
+     */
+    slashCommandSuggestion: {
+      type: Object,
+      default: null,
+    },
+
+    /**
      * Whether the input allows for block quote.
      */
     allowBlockquote: {
@@ -566,6 +586,14 @@ export default {
      * @type {String}
      */
     'selected-emoji',
+
+    /**
+     * Fires when a slash command is selected
+     *
+     * @event selected-command
+     * @type {String}
+     */
+    'selected-command',
 
     /**
      * Native focus event
@@ -686,6 +714,10 @@ export default {
       });
       this.emojiPickerOpened = false;
       this.$emit('selected-emoji', emoji);
+    },
+
+    onSelectedCommand (command) {
+      this.$emit('selected-command', command);
     },
 
     onSelectImage () {

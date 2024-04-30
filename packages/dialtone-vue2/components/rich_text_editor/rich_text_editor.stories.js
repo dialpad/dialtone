@@ -9,6 +9,7 @@ import {
 
 import mentionSuggestion from './mention_suggestion';
 import channelSuggestion from './channel_suggestion';
+import slashCommandSuggestion from './slash_command_suggestion';
 
 // Default Prop Values
 export const argsData = {
@@ -116,6 +117,7 @@ export const WithMentionSuggestions = {
     value: 'The editor can also suggest mentions: @test.person, @test.person2! and channel suggestions: #dialpad.',
     mentionSuggestion,
     channelSuggestion,
+    slashCommandSuggestion,
   },
 };
 
