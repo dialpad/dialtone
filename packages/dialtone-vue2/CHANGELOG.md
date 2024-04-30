@@ -1,3 +1,16 @@
+# [2.130.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.129.0...dialtone-vue2/v2.130.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* DLT-1738 phone number regex lookahead ([#292](https://github.com/dialpad/dialtone/issues/292)) ([3100dfe](https://github.com/dialpad/dialtone/commit/3100dfeb9d306d3d32822f0c773663179bd9afc3))
+
+
+### Features
+
+* DLT-1651 message input parse suggestion ([#287](https://github.com/dialpad/dialtone/issues/287)) ([9c674c6](https://github.com/dialpad/dialtone/commit/9c674c63e7b7aa6367c5008883497fc4ef2e79c4))
+* **Rich Text Editor:** DLT-1598 add slash commands suggestions ([#284](https://github.com/dialpad/dialtone/issues/284)) ([3e39932](https://github.com/dialpad/dialtone/commit/3e399328238cd37822adc47a374d67028826cde8))
+
 # [2.129.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.128.0...dialtone-vue2/v2.129.0) (2024-04-26)
 
 
