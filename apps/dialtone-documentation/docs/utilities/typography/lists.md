@@ -54,12 +54,47 @@ Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Re
 Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bullet styling.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
+  <dt-stack gap="400">
+    <p>Paragraph of text.</p>
+    <ul class="d-pl16">
+      <li class="d-lst-disc"><strong>disc</strong> list item</li>
+      <li class="d-lst-circle"><strong>circle</strong> list item</li>
+      <li class="d-lst-decimal"><strong>decimal</strong> list item</li>
+      <li class="d-lst-content" style="--ls-content: '🫠'"><strong>content</strong> list item</li>
+      <li class="d-lst-none"><strong>none</strong> list item</li>
+    </ul>
+    <p>Paragraph of text.</p>
+    <ul class="d-pl16">
+      <li class="d-lst-disc">
+        An unordered list item
+        <ul class="d-pl16">
+          <li class="d-lst-circle">A nested unordered list item</li>
+          <li class="d-lst-circle">A nested unordered list item</li>
+        </ul>
+      </li>
+      <li class="d-lst-disc">
+        An unordered list item
+        <ul class="d-pl16">
+          <li class="d-pl8 d-lst-content" style="--ls-content: '✅'">A nested unordered list item</li>
+          <li class="d-pl8 d-lst-content" style="--ls-content: '❌'">A nested unordered list item</li>
+        </ul>
+      </li>
+    </ul>
+  </dt-stack>
+</code-well-header>
+
+```html
+<dt-stack gap="400">
+  <p>Paragraph of text.</p>
   <ul class="d-pl16">
-    <li class="d-lst-none"><strong>none</strong> list item</li>
     <li class="d-lst-disc"><strong>disc</strong> list item</li>
     <li class="d-lst-circle"><strong>circle</strong> list item</li>
     <li class="d-lst-decimal"><strong>decimal</strong> list item</li>
     <li class="d-lst-content" style="--ls-content: '🫠'"><strong>content</strong> list item</li>
+    <li class="d-lst-none"><strong>none</strong> list item</li>
+  </ul>
+  <p>Paragraph of text.</p>
+  <ul class="d-pl16">
     <li class="d-lst-disc">
       An unordered list item
       <ul class="d-pl16">
@@ -75,30 +110,7 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
       </ul>
     </li>
   </ul>
-</code-well-header>
-
-```html
-<ul class="d-pl16">
-  <li class="d-lst-none"><strong>none</strong> list item</li>
-  <li class="d-lst-disc"><strong>disc</strong> list item</li>
-  <li class="d-lst-circle"><strong>circle</strong> list item</li>
-  <li class="d-lst-decimal"><strong>decimal</strong> list item</li>
-  <li class="d-lst-content" style="--ls-content: '🫠'"><strong>content</strong> list item</li>
-  <li class="d-lst-disc">
-    An unordered list item
-    <ul class="d-pl16">
-      <li class="d-lst-circle">A nested unordered list item</li>
-      <li class="d-lst-circle">A nested unordered list item</li>
-    </ul>
-  </li>
-  <li class="d-lst-disc">
-    An unordered list item
-    <ul class="d-pl16">
-      <li class="d-pl8 d-lst-content" style="--ls-content: '✅'">A nested unordered list item</li>
-      <li class="d-pl8 d-lst-content" style="--ls-content: '❌'">A nested unordered list item</li>
-    </ul>
-  </li>
-</ul>
+</dt-stack>
 ```
 
 ## Custom starting number
