@@ -22,9 +22,6 @@ if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
   git checkout -b "$release_branch";
 fi
 
-echo "Running build in parallel to improve performance"
-pnpm nx affected --target=build --parallel=6;
-
 echo "Running release-local on affected projects"
 pnpm nx affected --target=release-local --parallel=false;
 
