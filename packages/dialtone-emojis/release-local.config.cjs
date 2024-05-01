@@ -7,6 +7,7 @@ const srcRoot = `packages/${name}`;
  */
 module.exports = {
   extends: 'release.config.base.js',
+  ci: false,
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
   commitPaths: [`${srcRoot}/*`],
