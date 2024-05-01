@@ -20,12 +20,15 @@ if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
 
   echo "Checking out to a clean $release_branch branch"
   git checkout -b "$release_branch";
+
+  echo "Running release-local on affected projects"
+  pnpm nx affected --target=release-local --base=staging --parallel=false;
 fi
 
-echo "Running release-local on affected projects"
-pnpm nx affected --target=release-local --parallel=false;
-
 if [[ "$release_branch" == "production" && "$current_branch" == "staging" ]]; then
+  echo "Running release-local on affected projects"
+  pnpm nx affected --target=release-local --base=production --parallel=false;
+
   echo "Checking out to $release_branch"
   git checkout "$release_branch";
 
