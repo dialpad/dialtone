@@ -18,7 +18,7 @@
     "release-local": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/eslint-plugin-dialtone/release-local.config.cjs",
+        "command": "pnpm semantic-release-plus --skip-tag --extends ./packages/eslint-plugin-dialtone/release-local.config.cjs",
         "parallel": false
       }
     }
