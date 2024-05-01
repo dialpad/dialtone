@@ -22,24 +22,6 @@
         "^build"
       ]
     },
-    "release": {
-      "dependsOn": [
-        "build",
-        "^build"
-      ]
-    },
-    "release-local": {
-      "dependsOn": [
-        "build",
-        "^build"
-      ]
-    },
-    "release-github": {
-      "dependsOn": [
-        "build",
-        "^build"
-      ]
-    },
     "start": {
       "dependsOn": [
         "^build"
