@@ -18,9 +18,8 @@ if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
   git branch -D "$release_branch" || true
   git push origin --delete "$release_branch" || true
 
-  echo "Checking out and pushing a clean $release_branch branch"
+  echo "Checking out to a clean $release_branch branch"
   git checkout -b "$release_branch";
-  git push origin "$release_branch"
 fi
 
 echo "Running build in parallel to improve performance"
