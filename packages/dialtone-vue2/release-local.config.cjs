@@ -2,8 +2,12 @@
 const name = 'dialtone-vue2';
 const srcRoot = `packages/${name}`;
 
+/**
+ * @type {import('semantic-release').GlobalConfig}
+ */
 module.exports = {
   extends: 'release.config.base.js',
+  ci: false,
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
   commitPaths: [`${srcRoot}/*`],
@@ -29,7 +33,6 @@ module.exports = {
     ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
     ['@semantic-release/npm', { npmPublish: false }],
     ['@semantic-release/git', {
-      /* eslint-disable-next-line no-template-curly-in-string */
       message: `chore(release): NO-JIRA ${name}` +
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
