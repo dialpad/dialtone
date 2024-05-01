@@ -169,3 +169,18 @@
         --notice-color-text: var(--dt-color-neutral-black);
     }
 }
+
+//  $$  TRUNCATE TEXT
+//  ----------------------------------------------------------------------------
+.d-notice.d-notice--truncate {
+    .d-notice__content {
+        overflow: hidden;
+
+        .d-notice__title,
+        .d-notice__message {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+}

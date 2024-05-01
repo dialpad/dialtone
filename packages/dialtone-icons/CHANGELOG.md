@@ -1,3 +1,30 @@
+# [4.14.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.13.1...dialtone-icons/v4.14.0) (2024-04-26)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
+
+
+### Features
+
+* DLT-1732 add scan-file icon ([#285](https://github.com/dialpad/dialtone/issues/285)) ([a32bb03](https://github.com/dialpad/dialtone/commit/a32bb03a6d76c43f145caf137db02e9587d615d0))
+
+## [4.13.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.13.0...dialtone-icons/v4.13.1) (2024-04-22)
+
+
+### Bug Fixes
+
+* NO-JIRA keywords ([5200cef](https://github.com/dialpad/dialtone/commit/5200cef7d49b14469eb5994f23aa12d158f7187a))
+
+# [4.13.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.12.3...dialtone-icons/v4.13.0) (2024-04-22)
+
+
+### Features
+
+* DLT-1718 add pdf-file icon ([#276](https://github.com/dialpad/dialtone/issues/276)) ([0e36bdf](https://github.com/dialpad/dialtone/commit/0e36bdf0b2ab6a1b557e10dcab9ede87645801f1))
+* DLT-1721 add icon whastapp-outline ([#280](https://github.com/dialpad/dialtone/issues/280)) ([c3ba8dd](https://github.com/dialpad/dialtone/commit/c3ba8dd0d7911aa5a74348d2f7211d0d9b937cb9))
+
 ## [4.12.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.12.2...dialtone-icons/v4.12.3) (2024-04-11)
 
 

@@ -1,3 +1,10 @@
+# [8.31.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.30.0...dialtone-css/v8.31.0) (2024-04-26)
+
+
+### Features
+
+* **Dt Notice:** DLT-1671 add support for truncating text ([#281](https://github.com/dialpad/dialtone/issues/281)) ([a0ab1be](https://github.com/dialpad/dialtone/commit/a0ab1be9b28d829f20bd2a2c7ef6b6f35756e1c4))
+
 # [8.30.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.3...dialtone-css/v8.30.0) (2024-04-07)
 
 

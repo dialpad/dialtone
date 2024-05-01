@@ -8,10 +8,11 @@ import {
 } from './rich_text_editor_constants';
 
 import mentionSuggestion from './mention_suggestion';
+import channelSuggestion from './channel_suggestion';
 
 // Default Prop Values
 export const argsData = {
-  modelValue: `I am not a standalone component, please use Message Input instead 🙏!`,
+  modelValue: `I am not a standalone component, please use Message Input instead :v_tone3: 🤖!`,
   editable: true,
   inputAriaLabel: 'This is a descriptive label',
   outputFormat: 'text',
@@ -119,8 +120,9 @@ export const WithLinks = {
 export const WithMentionSuggestions = {
   ...Default,
   args: {
-    modelValue: 'The editor can also suggest mentions: @John Doe, @Jane Doe!',
+    modelValue: 'The editor can also suggest mentions: @test.person, @test.person2! and channel suggestions: #dialpad.',
     mentionSuggestion,
+    channelSuggestion,
   },
 };
 

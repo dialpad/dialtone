@@ -34,6 +34,7 @@
         :link="link"
         :placeholder="placeholder"
         :mention-suggestion="mentionSuggestion"
+        :channel-suggestion="channelSuggestion"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
@@ -131,6 +132,8 @@
             />
           </template>
         </dt-popover>
+        <!-- @slot Slot for emojiGiphy picker -->
+        <slot name="emojiGiphyPicker" />
       </div>
       <!-- Right content -->
       <div class="d-d-flex">
@@ -443,6 +446,22 @@ export default {
     },
 
     /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the channels for suggestion.
+     * items({ query }) => { return [ChannelObject]; }
+     * ChannelObject format:
+     * { name: string, id: string, locked: boolean }
+     *
+     * When null, it does not add the plugin. Setting locked to true will display a lock rather than hash.
+     */
+    channelSuggestion: {
+      type: Object,
+      default: null,
+    },
+
+    /**
      * Whether the input allows for block quote.
      */
     allowBlockquote: {
@@ -568,6 +587,13 @@ export default {
      * @type {String|JSON}
      */
     'input',
+
+    /**
+     * Event to sync the value with the parent
+     * @event update:modelValue
+     * @type {String|JSON}
+     */
+    'update:modelValue',
   ],
 
   data () {
@@ -698,6 +724,7 @@ export default {
 
     onInput (event) {
       this.$emit('input', event);
+      this.$emit('update:modelValue', event);
     },
   },
 };

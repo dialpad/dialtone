@@ -192,6 +192,12 @@ automatically release all packages that need to be released.
 Once done, a GitHub Action will be triggered, you can check the progress here:
 [release.yml](https://github.com/dialpad/dialtone/actions/workflows/release.yml)
 
+If something goes wrong, and you need to re-run the release, you can run the workflow manually through the `Run workflow`
+option on GitHub.
+
+Select the `production` branch and pass the `commit SHA` which you would like to be the base to detect the changes or
+choose a `package` to release individually.
+
 #### Production
 
 This can only be run while on **staging** branch. After running the command, it will execute the following steps:
