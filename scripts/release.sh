@@ -23,10 +23,10 @@ if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
   git push origin "$release_branch"
 fi
 
-echo "Running release-local on affected projects"
-pnpm nx affected --target=release-local --parallel=false;
-
 if [[ "$release_branch" == "production" && "$current_branch" == "staging" ]]; then
+  echo "Running release-local on affected projects"
+  pnpm nx affected --target=release-local --base=production --parallel=false;
+
   echo "Checking out to $release_branch"
   git checkout "$release_branch";
 
