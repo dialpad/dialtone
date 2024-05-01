@@ -101,6 +101,46 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
 </ul>
 ```
 
+## Custom starting number
+
+Use the `start` attribute for an `<ol>` to set its starting number.
+
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
+  <dt-stack gap="400">
+    <p>Paragraph of text.</p>
+    <ol class="d-pl24">
+      <li class="d-lst-decimal">Decimal list item</li>
+      <li class="d-lst-decimal">Decimal list item</li>
+      <li class="d-lst-decimal">Decimal list item</li>
+    </ol>
+    <p>Paragraph of text. The list below starts at 4.</p>
+    <ol class="d-pl24" start="4">
+      <li class="d-lst-decimal">Decimal list item</li>
+      <li class="d-lst-decimal">Decimal list item</li>
+      <li class="d-lst-decimal">Decimal list item</li>
+    </ol>
+  </dt-stack>
+</code-well-header>
+
+```html
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
+  <dt-stack gap="400">
+    <p>Paragraph of text.</p>
+    <ol class="d-pl24">
+      <li class="d-lst-decimal">Decimal list item</li>
+      <li class="d-lst-decimal">Decimal list item</li>
+      <li class="d-lst-decimal">Decimal list item</li>
+    </ol>
+    <p>Paragraph of text. The list below starts at 4.</p>
+    <ol class="d-pl24" start="4">
+      <li class="d-lst-decimal">Decimal list item</li>
+      <li class="d-lst-decimal">Decimal list item</li>
+      <li class="d-lst-decimal">Decimal list item</li>
+    </ol>
+  </dt-stack>
+</code-well-header>
+```
+
 <script setup>
   import { lists } from '@data/type.json';
 </script>
