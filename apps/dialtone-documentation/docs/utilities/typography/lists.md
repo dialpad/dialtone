@@ -7,67 +7,95 @@ description: Utilities for controlling list styling.
 
 Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Reseting a list applies to the parent `ol` or `ul`, any child `li` elements, and any child `ol` or `ul` elements.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
-  <ul class="d-ls-reset d-fc-purple-400 d-fs-200">
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
+  <ul class="d-ls-reset">
     <li>An unordered list item</li>
     <li>
+      An unordered list item
       <ol>
-        <li>An ordered list item</li>
-        <li>An ordered list item</li>
+        <li>A nested ordered list item</li>
+        <li>A nested ordered list item</li>
       </ol>
     </li>
     <li>An unordered list item</li>
+    <li>
+      An unordered list item
+      <ul>
+        <li>A nested unordered list item</li>
+        <li>A nested unordered list item</li>
+      </ul>
+    </li>
   </ul>
 </code-well-header>
 
 ```html
 <ul class="d-ls-reset">
-  <li>...</li>
+  <li>An unordered list item</li>
   <li>
+    An unordered list item
     <ol>
-      <li>...</li>
-      <li>...</li>
+      <li>A nested ordered list item</li>
+      <li>A nested ordered list item</li>
     </ol>
   </li>
-  <li>...</li>
+  <li>An unordered list item</li>
+  <li>
+    An unordered list item
+    <ul>
+      <li>A nested unordered list item</li>
+      <li>A nested unordered list item</li>
+    </ul>
+  </li>
 </ul>
 ```
 
 ## Changing the list style type
 
-Use `d-ls-{disc|decimal}` to change an unordered list's bullet styling.
+Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bullet styling.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-green-100 d-w100p d-hmn102" custom>
-  <ul class="d-lst-disc d-fs-200 d-fc-success">
-    <li>An unordered list item</li>
-    <li>
-      <ul class="d-lst-circle">
-        <li class="d-pl4">An unordered list item</li>
-        <li class="d-pl4">An unordered list item</li>
+<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
+  <ul class="d-pl16">
+    <li class="d-lst-none"><strong>none</strong> list item</li>
+    <li class="d-lst-disc"><strong>disc</strong> list item</li>
+    <li class="d-lst-circle"><strong>circle</strong> list item</li>
+    <li class="d-lst-decimal"><strong>decimal</strong> list item</li>
+    <li class="d-lst-content" style="--ls-content: '🫠'"><strong>content</strong> list item</li>
+    <li class="d-lst-disc">
+      An unordered list item
+      <ul class="d-pl16">
+        <li class="d-lst-circle">A nested unordered list item</li>
+        <li class="d-lst-circle">A nested unordered list item</li>
       </ul>
     </li>
-    <li>
-      <ul>
-        <li class="d-pl4 d-lst-content" style="--ls-content: '✅'">An unordered list item</li>
-        <li class="d-pl4 d-lst-content" style="--ls-content: '❌'">An unordered list item</li>
+    <li class="d-lst-disc">
+      An unordered list item
+      <ul class="d-pl16">
+        <li class="d-pl8 d-lst-content" style="--ls-content: '✅'">A nested unordered list item</li>
+        <li class="d-pl8 d-lst-content" style="--ls-content: '❌'">A nested unordered list item</li>
       </ul>
     </li>
   </ul>
 </code-well-header>
 
 ```html
-<ul class="d-lst-disc">
-  <li>...</li>
-  <li>
-    <ul class="d-lst-circle">
-      <li>...</li>
-      <li>...</li>
+<ul class="d-pl16">
+  <li class="d-lst-none"><strong>none</strong> list item</li>
+  <li class="d-lst-disc"><strong>disc</strong> list item</li>
+  <li class="d-lst-circle"><strong>circle</strong> list item</li>
+  <li class="d-lst-decimal"><strong>decimal</strong> list item</li>
+  <li class="d-lst-content" style="--ls-content: '🫠'"><strong>content</strong> list item</li>
+  <li class="d-lst-disc">
+    An unordered list item
+    <ul class="d-pl16">
+      <li class="d-lst-circle">A nested unordered list item</li>
+      <li class="d-lst-circle">A nested unordered list item</li>
     </ul>
   </li>
-  <li>
-    <ul>
-      <li class="d-lst-content" style="--ls-content: '✅'">...</li>
-      <li class="d-lst-content" style="--ls-content: '❌'">...</li>
+  <li class="d-lst-disc">
+    An unordered list item
+    <ul class="d-pl16">
+      <li class="d-pl8 d-lst-content" style="--ls-content: '✅'">A nested unordered list item</li>
+      <li class="d-pl8 d-lst-content" style="--ls-content: '❌'">A nested unordered list item</li>
     </ul>
   </li>
 </ul>
