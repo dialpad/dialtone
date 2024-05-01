@@ -1,3 +1,10 @@
+## [1.0.3-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.2...dialtone-emojis/v1.0.3-alpha.1) (2024-05-01)
+
+
+### Bug Fixes
+
+* test change ([b7660f1](https://github.com/dialpad/dialtone/commit/b7660f10bbd305417ff6920de9ba6808acb56d7d))
+
 ## [1.0.2](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.1...dialtone-emojis/v1.0.2) (2024-04-12)
 
 
