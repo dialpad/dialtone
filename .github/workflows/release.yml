@@ -48,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Filter actions by path
         if: ${{ github.event.inputs.base || github.event_name == 'push' }}
