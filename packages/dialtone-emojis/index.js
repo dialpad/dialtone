@@ -22,8 +22,6 @@ import PeopleDark from './src/people-dark.json';
 import Symbols from './src/symbols.json';
 import Travel from './src/travel.json';
 
-// Test comment
-
 export const emojisGrouped = {
   ActivityDefault,
   ActivityLight,
