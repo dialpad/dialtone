@@ -1024,6 +1024,13 @@
         "chromecast",
         "airplay"
       ],
+      "connection-api": [
+        "plug",
+        "plugin",
+        "connected",
+        "connection",
+        "connections"
+      ],
       "dect-base-station": [],
       "dect-handset": [],
       "deskphone": [
@@ -1197,13 +1204,6 @@
         "flash",
         "camera",
         "lightning"
-      ],
-      "connection-api": [
-        "plug",
-        "plugin",
-        "connected",
-        "connection",
-        "connections"
       ]
     },
     "editing": {

@@ -1,3 +1,10 @@
+# [4.15.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.14.0...dialtone-icons/v4.15.0) (2024-05-02)
+
+
+### Features
+
+* DLT-1682 add channel-api icon ([#279](https://github.com/dialpad/dialtone/issues/279)) ([d909531](https://github.com/dialpad/dialtone/commit/d9095311e878dc03b19f5f02375790b6bd038743))
+
 # [4.14.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.13.1...dialtone-icons/v4.14.0) (2024-04-26)
 
 
