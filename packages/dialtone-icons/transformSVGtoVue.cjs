@@ -71,15 +71,15 @@ const _ = require('lodash');
 
         result = result.replace('aria-hidden="true"', ':aria-hidden="ariaHidden"')
 
-        // // Create unique IDs
-        // result = result.replace(/(clip-path|fill)="url\(#([^)]+)\)"/g, ':$1="`url(#${uniqueID}$2)`"')
-        // result = result.replace(/(clipPath|linearGradient|radialGradient) id="([^"]+)"/g, '$1 :id="`${uniqueID}$2`"')
-        //
-        // if (!/\${uniqueID}/g.test(result)) {
-        //   // Remove created function if not needed
-        //   result = result.replace(/\n\s+this.uniqueID.*;/, '');
-        //   result = result.replace(/import \{ getUniqueString \} from '\.\.\/utils';\n+/, '');
-        // }
+        // Create unique IDs
+        result = result.replace(/(clip-path|fill)="url\(#([^)]+)\)"/g, ':$1="`url(#${uniqueID}$2)`"')
+        result = result.replace(/(clipPath|linearGradient|radialGradient) id="([^"]+)"/g, '$1 :id="`${uniqueID}$2`"')
+
+        if (!/\${uniqueID}/g.test(result)) {
+          // Remove created function if not needed
+          result = result.replace(/\n\s+this.uniqueID.*;/, '');
+          result = result.replace(/import \{ getUniqueString \} from '\.\.\/utils';\n+/, '');
+        }
 
         fs.writeFileSync(`./src/illustrations/${fileName.replace('.svg', '.vue')}`, result, 'utf8');
     })

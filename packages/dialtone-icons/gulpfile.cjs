@@ -173,23 +173,6 @@ const buildIllustrations = function (done) {
       data-name="${title}"`;
       // class="d-icon d-icon--${name}"
     }))
-    .pipe(svgmin(function getOptions () {
-      return {
-        multipass: true,
-        plugins: [
-          {
-            removeUnknownsAndDefaults: {
-              keepRoleAttr: true,
-            },
-          },
-          {
-            cleanupIDs: {
-              minify: true,
-            },
-          }
-        ],
-      }
-    }))
     .pipe(rename({ dirname: '' }))
   .pipe(dest(paths.illustrations.outputSvg));
 };
