@@ -60,22 +60,31 @@ jobs:
           filters: |
             dialtone:
               - 'package.json'
+              - 'CHANGELOG.md'
             css:
               - 'packages/dialtone-css/package.json'
+              - 'packages/dialtone-css/CHANGELOG.md'
             emojis:
               - 'packages/dialtone-emojis/package.json'
+              - 'packages/dialtone-emojis/CHANGELOG.md'
             icons:
               - 'packages/dialtone-icons/package.json'
+              - 'packages/dialtone-icons/CHANGELOG.md'
             tokens:
               - 'packages/dialtone-tokens/package.json'
+              - 'packages/dialtone-tokens/CHANGELOG.md'
             vue2:
               - 'packages/dialtone-vue2/package.json'
+              - 'packages/dialtone-vue2/CHANGELOG.md'
             vue3:
               - 'packages/dialtone-vue3/package.json'
+              - 'packages/dialtone-vue3/CHANGELOG.md'
             eslint-plugin:
               - 'packages/eslint-plugin-dialtone/package.json'
+              - 'packages/eslint-plugin-dialtone/CHANGELOG.md'
             stylelint-plugin:
               - 'packages/stylelint-plugin-dialtone/package.json'
+              - 'packages/stylelint-plugin-dialtone/CHANGELOG.md'
 
   get-branch-name:
     runs-on: ubuntu-latest
@@ -98,6 +107,7 @@ jobs:
 
   release:
     needs: [get-branch-name, check-dialpad-member, filter-actions]
+    if: needs.filter-actions.outputs.changes != '[]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -112,6 +122,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v4
