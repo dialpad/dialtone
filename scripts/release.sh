@@ -13,31 +13,20 @@ elif [[ "$release_branch" == "$current_branch" ]]; then
   exit 1;
 fi
 
+echo "Checking out to $release_branch";
+git checkout "$release_branch";
+
+echo "Updating branch";
+git pull;
+
+echo "Merging changes";
+git merge --ff-only "$current_branch";
+
+echo "Running release-local on affected projects";
 if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
-  echo "Deleting local and remote $release_branch branch";
-  git branch -D "$release_branch" || true;
-  git push origin --delete "$release_branch" || true;
-
-  echo "Checking out and pushing a clean $release_branch branch";
-  git checkout -b "$release_branch";
-  git push origin "$release_branch";
-
-  echo "Running release-local on affected projects";
-  pnpm nx affected --target=release-local --base=staging --parallel=false;
-fi
-
-if [[ "$release_branch" == "production" && "$current_branch" == "staging" ]]; then
-  echo "Running release-local on affected projects";
+  pnpm nx affected --target=release-local --base=staging --parallel=false --args="--dry-run";
+else
   pnpm nx affected --target=release-local --base=production --parallel=false;
-
-  echo "Checking out to $release_branch";
-  git checkout "$release_branch";
-
-  echo "Updating branch";
-  git pull;
-
-  echo "Merging changes";
-  git merge --ff-only "$current_branch";
 fi
 
 echo "Pushing changes to $release_branch";
@@ -46,3 +35,6 @@ git push origin "$release_branch";
 echo "Merge changes back to $current_branch";
 git checkout "$current_branch";
 git merge --ff-only "$release_branch";
+
+echo "Pushing changes to $current_branch";
+git push origin "$current_branch";
