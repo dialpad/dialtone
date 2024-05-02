@@ -1,3 +1,10 @@
+# [9.34.0-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.0-beta.1...dialtone/v9.34.0-beta.2) (2024-05-02)
+
+
+### Bug Fixes
+
+* remove test change ([d7a45c2](https://github.com/dialpad/dialtone/commit/d7a45c2b70c39048f8e391cd38f859d200ee4c9f))
+
 # [9.34.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.33.0...dialtone/v9.34.0-beta.1) (2024-05-02)
 
 
