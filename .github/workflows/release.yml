@@ -64,7 +64,7 @@ jobs:
               - 'packages/dialtone-css/CHANGELOG.md'
             emojis:
               - 'packages/dialtone-emojis/package.json'
-            - 'packages/dialtone-emojis/CHANGELOG.md'
+              - 'packages/dialtone-emojis/CHANGELOG.md'
             icons:
               - 'packages/dialtone-icons/package.json'
               - 'packages/dialtone-icons/CHANGELOG.md'
