@@ -203,8 +203,8 @@ const transformSVGtoVue = function (done) {
 };
 
 //  ================================================================================
-//  @@ Updates keywords.json file with any newly added icons
-//  Reads previous keywords.json file to extract keywords and add any new icon
+//  @@ Updates keywords-icons.json file with any newly added icons
+//  Reads previous keywords-icons.json file to extract keywords and add any new icon
 //  into the respective category.
 //  ================================================================================
 const updateIconsJSON = function (done) {
@@ -228,7 +228,7 @@ const updateIconsJSON = function (done) {
   fs.writeFileSync(paths.exports.keywordsIcons, JSON.stringify({ categories: {...updatedKeywords}}));
   fs.writeFileSync(paths.exports.iconsList, JSON.stringify(iconsList));
 
-  // Copies the icons.json and keywords.json to dist/
+  // Copies the icons.json and keywords-icons.json to dist/
   src([paths.exports.keywordsIcons, paths.exports.iconsList])
   .pipe(dest('./dist/'));
 
@@ -261,7 +261,7 @@ const updateIllustrationsJSON = function (done) {
   fs.writeFileSync(paths.exports.keywordsIllustrations, JSON.stringify({ categories: {...updatedKeywords}}));
   fs.writeFileSync(paths.exports.illustrationsList, JSON.stringify(illustrationsList));
 
-  // Copies the icons.json and keywords.json to dist/
+  // Copies the illustrations.json and keywords-illustrations.json to dist/
   src([paths.exports.keywordsIllustrations, paths.exports.illustrationsList])
   .pipe(dest('./dist/'));
 

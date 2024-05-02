@@ -24,7 +24,7 @@ If you need to add an icon into Dialtone, here’s how you would go about doing 
 1. Create a new branch starting with "feat/" in the name.
 2. Place the exported SVG file(s) in the appropriate folder category inside `packages/dialtone-icons/src/svg/`
 3. If you need to add keywords related to the icon.
-   - Add the icon name to `packages/dialtone-icons/src/keywords.json` into the correct category.
+   - Add the icon name to `packages/dialtone-icons/src/keywords-icons.json` into the correct category.
    - Add the keywords array as the value. e.g.
 
    ```json

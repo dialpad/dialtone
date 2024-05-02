@@ -28,7 +28,9 @@
       "require": "./vue3/dist/components/*.cjs"
     },
     "./icons.json": "./dist/icons.json",
-    "./keywords.json": "./dist/keywords.json",
+    "./illustrations.json": "./dist/illustrations.json",
+    "./keywords-icons.json": "./dist/keywords-icons.json",
+    "./keywords-illustrations.json": "./dist/keywords-illustrations.json",
     "./*": "./dist/svg/*"
   },
   "devDependencies": {
