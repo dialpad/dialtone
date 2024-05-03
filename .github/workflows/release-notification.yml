@@ -2,10 +2,16 @@ name: Release notification
 on:
   release:
     types:
+      - created
+      - prereleased
       - published
+      - released
 
 env:
   RELEASE_NAME: ${{ github.event.release.name }}
+  RELEASE_TYPE: ${{ github.event.release.action }}
+  RELEASE_TAG: ${{ github.event.release.tag_name }}
+  RELEASE_URL: ${{ github.event.release.url }}
 
 jobs:
   send-sms:
@@ -17,8 +23,6 @@ jobs:
       id-token: write
     env:
       API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-test-channel
-      DIALTONE_VERSION: ${{ github.event.release.tag_name }}
-      RELEASE_URL: ${{ github.event.release.url }}
     steps:
       - id: auth
         name: Authenticate to Google Cloud
@@ -35,5 +39,5 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "message": "A new dialtone version has been published: \"${{ env.DIALTONE_VERSION }}\". Read the changelog: ${{ env.RELEASE_URL }}"
+            "message": "A new dialtone version has been published: \"${{ env.RELEASE_TAG }}\". Read the changelog: ${{ env.RELEASE_URL }}"
           }'
