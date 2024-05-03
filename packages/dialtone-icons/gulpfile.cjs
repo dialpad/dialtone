@@ -149,18 +149,6 @@ const buildIllustrations = function (done) {
 
   //  Compile icons
   return src(paths.illustrations.input)
-    .pipe(replace(' fill="none"', ''))
-    .pipe(replace(' fill="#000"', ' fill="currentColor"'))
-    .pipe(replace(' fill="#000000"', ' fill="currentColor"'))
-    .pipe(replace(' fill="black"', ' fill="currentColor"'))
-    .pipe(replace(' fill="#0D0C0F"', ' fill="currentColor"'))
-    .pipe(replace(' fill="#222"', ' fill="currentColor"'))
-    .pipe(replace(' fill="#222222"', ' fill="currentColor"'))
-    .pipe(replace(/<svg.*(width="[0-9]+|height="[0-9]+)"/g, (match) => {
-      return match
-          .replace(/width="[0-9]+"/, '')
-          .replace(/height="[0-9]+"/, '');
-    }))
     .pipe(replace('<svg', function (match) {
       const name = path.parse(this.file.path).name;
       const title = name
@@ -170,8 +158,8 @@ const buildIllustrations = function (done) {
       aria-hidden="true"
       focusable="false"
       role="img"
-      data-name="${title}"`;
-      // class="d-icon d-icon--${name}"
+      data-name="${title}"
+      class="d-illustration d-illustration--${name}"`;
     }))
     .pipe(rename({ dirname: '' }))
   .pipe(dest(paths.illustrations.outputSvg));
@@ -257,7 +245,8 @@ const updateIllustrationsJSON = function (done) {
 };
 
 const updateExports = function (done) {
-  let exportsList = "export const icons = import.meta.glob('./src/icons/*.vue', { eager: true, import: 'default' });";
+  let exportsListIcons = "export const icons = import.meta.glob('./src/icons/*.vue', { eager: true, import: 'default' });";
+  let exportsListIllustrations = "export const illustrations = import.meta.glob('./src/illustrations/*.vue', { eager: true, import: 'default' });";
 
   // svgList.forEach(file => {
   //   const fileName = file.split('/').slice(-2)[1].split('.')[0];
@@ -268,7 +257,7 @@ const updateExports = function (done) {
   //   exportsList += `export const ${iconName} = () => import('./src/icons/${fileName}.vue');\n`;
   // });
 
-  fs.writeFileSync(paths.exports.index, exportsList);
+  fs.writeFileSync(paths.exports.index, exportsListIcons + '\n' + exportsListIllustrations);
 
   return done();
 };
