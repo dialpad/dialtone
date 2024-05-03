@@ -1,3 +1,22 @@
+# [4.15.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.14.0...dialtone-icons/v4.15.0) (2024-05-02)
+
+
+### Features
+
+* DLT-1682 add channel-api icon ([#279](https://github.com/dialpad/dialtone/issues/279)) ([d909531](https://github.com/dialpad/dialtone/commit/d9095311e878dc03b19f5f02375790b6bd038743))
+
+# [4.14.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.13.1...dialtone-icons/v4.14.0) (2024-04-26)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
+
+
+### Features
+
+* DLT-1732 add scan-file icon ([#285](https://github.com/dialpad/dialtone/issues/285)) ([a32bb03](https://github.com/dialpad/dialtone/commit/a32bb03a6d76c43f145caf137db02e9587d615d0))
+
 ## [4.13.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.13.0...dialtone-icons/v4.13.1) (2024-04-22)
 
 

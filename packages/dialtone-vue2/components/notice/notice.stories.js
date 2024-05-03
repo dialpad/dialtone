@@ -15,6 +15,15 @@ export const argsData = {
   show: undefined,
 };
 
+const argsDataLongText = {
+  title: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
+  default: `Duis aute irure dolor in reprehenderit in voluptate velit
+      esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+};
+
 export const argTypesData = {
   // Slots
   titleOverride: {
@@ -93,6 +102,11 @@ export const argTypesData = {
     },
   },
   visuallyHiddenClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  truncateText: {
     control: {
       type: 'boolean',
     },
@@ -182,5 +196,16 @@ export const Important = {
   args: {
     ...Default.args,
     important: true,
+  },
+};
+
+export const TruncateContent = {
+  render: (argsData) => createRenderConfig(DtNotice, NoticeDefault, argsData),
+
+  args: {
+    ...Default.args,
+    truncateText: true,
+    title: argsDataLongText.title,
+    default: argsDataLongText.default,
   },
 };

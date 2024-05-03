@@ -1,6 +1,5 @@
 {
   "name": "dialtone-vue2",
-  "implicitDependencies": ["dialtone-icons-vue2"],
   "targets": {
     "build": {
       "executor": "nx:run-script",
@@ -25,7 +24,7 @@
     "release-local": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-vue2/release-local.config.cjs"
+        "command": "pnpm semantic-release-plus --skip-tag --extends ./packages/dialtone-vue2/release-local.config.cjs"
       }
     },
     "test": {

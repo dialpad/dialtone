@@ -3,6 +3,7 @@
     :editor="editor"
     data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
+    @selected-command="onSelectedCommand"
   />
 </template>
 
@@ -27,8 +28,10 @@ import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import Emoji from './extensions/emoji';
 import Link from './extensions/link';
-import { MentionPlugin } from './extensions/mentions/mention';
-import { ChannelPlugin } from './extensions/channels/channel';
+import { MentionPlugin, mentionRegex } from './extensions/mentions/mention';
+import { ChannelPlugin, channelRegex } from './extensions/channels/channel';
+import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
+import { emojiShortCodeRegex } from './extensions/emoji/emoji.js';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
@@ -37,6 +40,9 @@ import {
 
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
+import slashCommandSuggestion from './extensions/slash_command/suggestion';
+import emojiRegex from 'emoji-regex';
+import { codeToEmojiData } from '@/common/emoji';
 
 export default {
   name: 'DtRichTextEditor',
@@ -174,6 +180,24 @@ export default {
     },
 
     /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the slash commands for suggestion.
+     * items({ query }) => { return [SlashCommandObject]; }
+     * SlashCommandObject format:
+     * { command: string, description: string, parametersExample?: string }
+     * The "parametersExample" parameter is optional, and describes an example
+     * of the parameters that command can take.
+     *
+     * When null, it does not add the plugin.
+     */
+    slashCommandSuggestion: {
+      type: Object,
+      default: null,
+    },
+
+    /**
      * Whether the input allows for block quote.
      */
     allowBlockquote: {
@@ -232,7 +256,7 @@ export default {
 
     /**
      * Event to sync the value with the parent
-     * @event input
+     * @event update:value
      * @type {String|JSON}
      */
     'update:value',
@@ -256,6 +280,7 @@ export default {
     return {
       editor: null,
       popoverOpened: false,
+      internalValue: this.value,
     };
   },
 
@@ -332,6 +357,12 @@ export default {
         extensions.push(ChannelPlugin.configure({ suggestion: suggestionObject }));
       }
 
+      if (this.slashCommandSuggestion) {
+        // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
+        const suggestionObject = { ...this.slashCommandSuggestion, ...slashCommandSuggestion };
+        extensions.push(SlashCommandPlugin.configure({ suggestion: suggestionObject }));
+      }
+
       // Emoji has some interactions with Enter key
       // hence this should be done last otherwise the enter wont add a emoji.
       extensions.push(Emoji);
@@ -400,8 +431,9 @@ export default {
         // through the parent, so don't do anything here.
         return;
       }
-      // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, false);
+
+      this.internalValue = newValue;
+      this.insertContent();
     },
   },
 
@@ -414,11 +446,14 @@ export default {
   },
 
   methods: {
+    onSelectedCommand (command) {
+      this.$emit('selected-command', command);
+    },
+
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
       this.editor = new Editor({
         autofocus: this.autoFocus,
-        content: this.value,
         editable: this.editable,
         extensions: this.extensions,
         editorProps: {
@@ -428,7 +463,68 @@ export default {
           },
         },
       });
+      this.insertContent();
       this.addEditorListeners();
+    },
+
+    /**
+     * This function is necessary as tiptap doesn't render the content passed
+     * directly through `editor.commands.setContent` the content passed down to it
+     * should be already parsed. So We're parsing the elements into it's corresponding
+     * HTML version before setting it.
+     */
+    insertContent () {
+      this.parseMentions();
+      this.parseChannels();
+      this.parseEmojis();
+      this.editor.commands.setContent(this.internalValue, true);
+    },
+
+    parseEmojis () {
+      const matches = [...this.value.matchAll(emojiRegex()), ...this.value.matchAll(emojiShortCodeRegex)];
+      if (!matches) return;
+
+      matches.forEach(match => {
+        const emoji = codeToEmojiData(match[0]);
+        if (!emoji) return;
+        this.internalValue = this.internalValue.replace(new RegExp(` ${match[0]}`), ` <emoji-component code="${emoji.shortname}"></emoji-component>`);
+      });
+    },
+
+    parseChannels () {
+      if (!this.channelSuggestion) return;
+
+      const suggestions = this.channelSuggestion.items({ query: '' });
+      const matches = [...this.value.matchAll(channelRegex)]
+        .filter(match => suggestions.some(({ id }) => id === match[1]));
+
+      if (!matches) return;
+
+      matches.forEach(match => {
+        const channel = suggestions.find(({ id }) => id === match[1]);
+        this.internalValue = this.internalValue.replace(
+          `#${match[1]}`,
+          /** The space at the beginning is important as tiptap removes that while rendering.
+           *  So if multiple mentions, channels or emojis are next to each other it will fail
+           */
+          ` <channel-component name="${channel.name}" id="${channel.id}"></channel-component>`,
+        );
+      });
+    },
+
+    parseMentions () {
+      if (!this.mentionSuggestion) return;
+
+      const suggestions = this.mentionSuggestion.items({ query: '' });
+      const matches = [...this.value.matchAll(mentionRegex)]
+        .filter(match => suggestions.some(({ id }) => id === match[1]));
+
+      if (!matches) return;
+
+      matches.forEach(match => {
+        const mention = suggestions.find(({ id }) => id === match[1]);
+        this.internalValue = this.internalValue.replace(`@${match[1]}`, ` <mention-component name="${mention.name}" id="${mention.id}"></mention-component>`);
+      });
     },
 
     destroyEditor () {

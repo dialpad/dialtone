@@ -1,0 +1,41 @@
+name: Release notification
+
+on:
+  release:
+
+permissions: read-all
+
+env:
+  RELEASE_NAME: ${{ github.event.release.name }}
+  RELEASE_TYPE: ${{ github.event.release.action }}
+  RELEASE_TAG: ${{ github.event.release.tag_name }}
+  RELEASE_URL: ${{ github.event.release.url }}
+
+jobs:
+  send-sms:
+    if: ${{ startsWith('dialtone/v', env.RELEASE_NAME) }}
+    name: Send SMS
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-test-channel
+    steps:
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+          token_format: "id_token"
+          id_token_audience: ${{ env.API_URL }}
+
+      - name: Send sms
+        run: |
+          curl -m 70 -X POST ${{ env.API_URL }} \
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "message": "A new dialtone version has been published: \"${{ env.RELEASE_TAG }}\". Read the changelog: ${{ env.RELEASE_URL }}"
+          }'

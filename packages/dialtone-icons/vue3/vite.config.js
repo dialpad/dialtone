@@ -23,7 +23,6 @@ export default defineConfig({
       external: ['vue'],
       output: {
         minifyInternalExports: true,
-        sourcemap: true,
       },
     },
     minify: true,

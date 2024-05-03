@@ -2,8 +2,6 @@
   "name": "dialtone",
   "implicitDependencies": [
     "dialtone-css",
-    "dialtone-icons-vue2",
-    "dialtone-icons-vue3",
     "dialtone-tokens",
     "dialtone-vue2",
     "dialtone-vue3",
@@ -34,7 +32,7 @@
     "release-local": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./release-local.config.cjs",
+        "command": "pnpm semantic-release-plus --skip-tag --extends ./release-local.config.cjs",
         "parallel": false
       }
     },

@@ -587,6 +587,13 @@ export default {
      * @type {String|JSON}
      */
     'input',
+
+    /**
+     * Event to sync the value with the parent
+     * @event update:modelValue
+     * @type {String|JSON}
+     */
+    'update:modelValue',
   ],
 
   data () {
@@ -717,6 +724,7 @@ export default {
 
     onInput (event) {
       this.$emit('input', event);
+      this.$emit('update:modelValue', event);
     },
   },
 };

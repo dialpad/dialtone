@@ -26,8 +26,8 @@
     "release-local": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-tokens/release-local.config.cjs"
+        "command": "pnpm semantic-release-plus --skip-tag --extends ./packages/dialtone-tokens/release-local.config.cjs"
       }
-    },
+    }
   }
 }
