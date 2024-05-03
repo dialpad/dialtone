@@ -18,6 +18,13 @@ jobs:
     env:
       API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-test-channel
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v2.1.0
+
       - id: get-released-version
         name: Get released version from tag
         run: |
@@ -38,5 +45,8 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "message": "A new dialtone version has been published: \"${{ env.RELEASE_VERSION }}\". Read the full changelog: ${{ env.RELEASE_URL }}"
+            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published!
+              ${{ steps.extract-release-notes.outputs.release_notes }}\n
+
+              Read the full changelog: ${{ env.RELEASE_URL }}"
           }'
