@@ -1,11 +1,6 @@
 name: Release notification
 on:
   release:
-    types:
-      - created
-      - prereleased
-      - published
-      - released
 
 env:
   RELEASE_NAME: ${{ github.event.release.name }}
