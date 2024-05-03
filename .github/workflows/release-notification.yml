@@ -1,6 +1,9 @@
 name: Release notification
+
 on:
   release:
+
+permissions: read-all
 
 env:
   RELEASE_NAME: ${{ github.event.release.name }}
