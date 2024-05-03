@@ -47,3 +47,4 @@ jobs:
           -d '{
             "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published!\n\n\'${{ steps.extract-release-notes.outputs.release_notes }}\'\n\nRead the full changelog: ${{ env.RELEASE_URL }}"
           }'
+# Adding comment to test release
