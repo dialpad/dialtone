@@ -1,3 +1,10 @@
+## [9.34.1-alpha.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1-alpha.2...dialtone/v9.34.1-alpha.3) (2024-05-03)
+
+
+### Code Refactoring
+
+* change release message ([f128619](https://github.com/dialpad/dialtone/commit/f128619fa3e9940d804f5ef89938eccf734a0055))
+
 ## [9.34.1-alpha.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1-alpha.1...dialtone/v9.34.1-alpha.2) (2024-05-03)
 
 
