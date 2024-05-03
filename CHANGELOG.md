@@ -1,3 +1,10 @@
+## [9.34.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.0...dialtone/v9.34.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
 # [9.34.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.33.0...dialtone/v9.34.0) (2024-05-02)
 
 
