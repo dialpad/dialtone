@@ -16,11 +16,10 @@ const settings = {
 const { src, dest, series } = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
-const fs = require("fs");
+const fs = require('fs');
 const jsonFormat = require('gulp-json-format');
-const {glob} = require("glob");
+const { glob } = require('glob');
 const exec = require('child_process').exec;
-const _ = require('lodash');
 
 //  @@ SVGs
 const path = settings.svgs ? require('path') : null;
@@ -35,7 +34,7 @@ const svgList = glob.sync('./src/**/*.svg').sort();
 const paths = {
   clean: {
     dist: './dist/**/*',
-    icons: './src/icons/*'
+    icons: './src/icons/*',
   },
   icons: {
     input: './src/svg/**/*.svg',
@@ -94,8 +93,8 @@ const buildIcons = function (done) {
     .pipe(replace(' fill="#222222"', ' fill="currentColor"'))
     .pipe(replace(/<svg.*(width="[0-9]+|height="[0-9]+)"/g, (match) => {
       return match
-          .replace(/width="[0-9]+"/, '')
-          .replace(/height="[0-9]+"/, '');
+        .replace(/width="[0-9]+"/, '')
+        .replace(/height="[0-9]+"/, '');
     }))
     .pipe(replace('<svg', function (match) {
       const name = path.parse(this.file.path).name;
@@ -122,19 +121,19 @@ const buildIcons = function (done) {
             cleanupIDs: {
               minify: true,
             },
-          }
+          },
         ],
-      }
+      };
     }))
     .pipe(rename({ dirname: '' }))
-  .pipe(dest(paths.icons.outputSvg));
+    .pipe(dest(paths.icons.outputSvg));
 };
 
 const transformSVGtoVue = function (done) {
   exec('node ./transformSVGtoVue.cjs', (err, stdout, stderr) => {
     console.error(stderr);
     console.log(stdout);
-    done(err)
+    done(err);
   });
 };
 
@@ -144,40 +143,40 @@ const transformSVGtoVue = function (done) {
 //  into the respective category.
 //  ================================================================================
 const updateIconsJSON = function (done) {
-  const rawData = fs.readFileSync(paths.exports.keywords)
+  const rawData = fs.readFileSync(paths.exports.keywords);
   const keywordsJSON = JSON.parse(rawData).categories;
   const iconsList = [];
 
   const updatedKeywords = svgList.reduce((acc, file) => {
-        const [category, fileName] = file.split('/').slice(-2);
-        const iconName = fileName.replace('.svg', '');
-        const keywords = keywordsJSON[category][iconName] || [];
-        acc[category] = {...acc[category], [iconName]: keywords}
+    const [category, fileName] = file.split('/').slice(-2);
+    const iconName = fileName.replace('.svg', '');
+    const keywords = keywordsJSON[category][iconName] || [];
+    acc[category] = { ...acc[category], [iconName]: keywords };
 
-        iconsList.push(iconName);
+    iconsList.push(iconName);
 
-        return acc;
-      }, {});
+    return acc;
+  }, {});
 
   iconsList.sort();
 
-  fs.writeFileSync(paths.exports.keywords, JSON.stringify({ categories: {...updatedKeywords}}));
+  fs.writeFileSync(paths.exports.keywords, JSON.stringify({ categories: { ...updatedKeywords } }));
   fs.writeFileSync(paths.exports.iconsList, JSON.stringify(iconsList));
 
   // Copies the icons.json and keywords.json to dist/
   src([paths.exports.keywords, paths.exports.iconsList])
-  .pipe(dest('./dist/'));
+    .pipe(dest('./dist/'));
 
   // Prettifies the JSON to improve readability and easier keyword adding.
   src(paths.exports.keywords)
-  .pipe(jsonFormat(2))
-  .pipe(dest('./src/'));
+    .pipe(jsonFormat(2))
+    .pipe(dest('./src/'));
 
   return done();
 };
 
 const updateExports = function (done) {
-  let exportsList = "export const icons = import.meta.glob('./src/icons/*.vue', { eager: true, import: 'default' });";
+  const exportsList = 'export const icons = import.meta.glob(\'./src/icons/*.vue\', { eager: true, import: \'default\' });';
 
   // svgList.forEach(file => {
   //   const fileName = file.split('/').slice(-2)[1].split('.')[0];
