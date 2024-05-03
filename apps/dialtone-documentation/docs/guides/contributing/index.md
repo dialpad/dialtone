@@ -19,11 +19,7 @@ in our Dialtone repository.
 
 If you need to add an icon into Dialtone, here’s how you would go about doing that.
 
-### For system icons and illustrations
-
-This process is similar for both icons and illustrations.
-The exported SVG file(s) should be placed in the appropriate folder category inside `packages/dialtone-icons/src/svg/illustrations/`.
-The keywords for the illustrations should be added to the `keywords-illustrations.json` file.
+### For system icons
 
 1. Create a new branch starting with "feat/" in the name.
 2. Place the exported SVG file(s) in the appropriate folder category inside `packages/dialtone-icons/src/svg/icons/`
@@ -35,6 +31,27 @@ The keywords for the illustrations should be added to the `keywords-illustration
    {
       "arrows": {
         "arrow-left": ["arrow", "left", "direction"],
+        ...
+      }
+   }
+   ```
+
+4. Commit and push your branch.
+5. Open a pull request.
+6. Once approved it can be merged into staging and will go out in the next release.
+
+### For system illustrations
+
+1. Create a new branch starting with "feat/" in the name.
+2. Place the exported SVG file(s) in the appropriate folder category inside `packages/dialtone-icons/src/svg/illustrations/`
+3. If you need to add keywords related to the illustration.
+   - Add the illustration name to `packages/dialtone-icons/src/keywords-illustrations.json` into the correct category.
+   - Add the keywords array as the value. e.g.
+
+   ```json
+   {
+      "spot-illustrations": {
+        "blank-space": ["blank", "space"],
         ...
       }
    }
