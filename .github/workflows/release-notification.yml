@@ -58,4 +58,3 @@ jobs:
           -d '{
             "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published 🎉. Included changes:\n```markdown\n${{ env.RELEASE_NOTES }}```\nRead the full changelog: ${{ env.RELEASE_URL }}"
           }'
-# Adding comment to test release
