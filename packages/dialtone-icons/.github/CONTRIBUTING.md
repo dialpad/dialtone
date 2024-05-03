@@ -47,9 +47,12 @@ Generated Vue icons are output to the `src/icons/` folder when you do `nx build 
 
 ### Important Folders and Files
 
-- `src/svg`: All the source SVG icon files.
+- `src/icons/svg`: All the source SVG icon files.
+- `src/illustrations/svg`: All the source SVG icon files.
 - `keywords-icons.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable while searching on [Dialtone icons documentation](https://dialpad.design/components/icon.html).
+- `keywords-illustrations.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable.
 - `icons.json`: This file is auto generated and used to list all the icons in Storybook.
+- `illustrations.json`: This file is auto generated and used to list all the illustrations in Storybook.
 
 ## Commit Message Convention
 
