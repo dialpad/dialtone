@@ -1,3 +1,10 @@
+## [9.34.1-alpha.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1-alpha.1...dialtone/v9.34.1-alpha.2) (2024-05-03)
+
+
+### Code Refactoring
+
+* fix release action ([eb733b5](https://github.com/dialpad/dialtone/commit/eb733b5f43cb46fbedaea28cb5e045d451fd8f7d))
+
 ## [9.34.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.0...dialtone/v9.34.1-alpha.1) (2024-05-03)
 
 
