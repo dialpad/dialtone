@@ -39,6 +39,13 @@ import * as icons from '@dialpad/dialtone-icons/vue3'; // Vue 3+
 import DtIconAccessibility from '@dialpad/dialtone-icons/accessibility.svg';
 ```
 
+- Importing icon related data
+
+```js
+import keywords from '@dialpad/dialtone-icons/keywords.json';
+import iconsList from '@dialpad/dialtone-icons/icons.json';
+```
+
 ## Committing
 
 If you need to add icons, follow the next steps to get your icons committed.

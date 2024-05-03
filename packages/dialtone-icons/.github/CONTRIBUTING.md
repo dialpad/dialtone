@@ -43,42 +43,11 @@ to prefix the identifiers of every icon with `dt-icon`, that way even if we have
 
 Generated Vue icons are output to the `src/icons/` folder when you do `nx build dialtone-icons`
 
-## Coding guidelines
-
-### Important Folders and Files
+## Important Folders and Files
 
 - `src/svg`: All the source SVG icon files.
 - `keywords.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable while searching on [Dialtone icons documentation](https://dialpad.design/components/icon.html).
 - `icons.json`: This file is auto generated and used to list all the icons in Storybook.
 
-## Commit Message Convention
-
-Dialtone icons uses [Conventional Commits specification] to have commit messages that can be used as part of the releasing. For more information, see [COMMIT_CONVENTION.md].
-
-### Git Hooks
-
-To enforce your commit message on the release branches (`production`, `staging`, `alpha` and `beta`) are correct according to the Conventional Commits specification, there is a `commit-msg` git hook that will be invoked by `git commit`.
-`pre-commit` git hook will lint your code.
-
-## Versioning
-
-Dialtone icons follows [SemVer] for versioning and the commit message convention used in the project is aligned with SemVer by describing the features, fixes, and breaking changes made in commit messages.
-
-## Tooling
-
-### GitHub Actions
-
-[GitHub Actions] is what we use for our CI/CD solution.
-All GHA workflows are in the `.github/workflows` directory. Currently, we use GitHub Actions for the following:
-
-- Deploying to `production` `.github/workflows/deploy.yml`, See [RELEASING.md] for instructions on how to do this.
-- Linting our LESS files on pull request `.github/workflows/lint-pr.yml`.
-- Validating commit messages and Pull Request tile `.github/workflows/lint-pr.yml`, see [COMMIT_CONVENTION.md] for our commit message conventions.
-
-[RELEASING.md]: RELEASING.md
-[COMMIT_CONVENTION.md]: /.github/COMMIT_CONVENTION.md
-[GitHub Actions]: https://docs.github.com/en/actions
-[SemVer]: https://semver.org/
-[Conventional Commits specification]: https://www.conventionalcommits.org/en/v1.0.0/
 [Dialtone-vue icon]: https://vue.dialpad.design/?path=/story/components-icon--default
 [Icons Figma file]: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT9-Icon-Library?type=design&node-id=10023-2864&mode=design&t=MvRnRubYryeiG1az-0

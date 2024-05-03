@@ -8,116 +8,18 @@ to see if there is already an issue for it and if not, add it.
 ### What Is Dialtone Vue?
 
 Dialtone is a design system by Dialpad comprised of CSS components, Vue components, utility classes, visual assets, documentation.
-Dialtone Vue is the Vue component portion of Dialtone and is distributed as a separate package.
-It is recommended that you are familiar with the [Dialtone CSS](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone) package.
-as well as it's [contribution guide](../../dialtone/.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
+Dialtone Vue is the Vue component portion of Dialtone and is distributed as a separate package as well as included in the combined package.
+It is recommended that you are familiar with the [Dialtone CSS](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone) package and it's [contribution guide](../../dialtone/.github/CONTRIBUTING.md),
+as well as the general [contribution guide](../../.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
 
-Dialtone is a peer dependency of Dialtone Vue.
-
-### What Is a Contribution?
-
-A contribution is any proposal, design, code, or documentation completed by someone not on the core Dialtone team,
-and released through Dialtone Vue for other people to use.
-It can be created by anyone who'd like to help make Dialtone Vue better.
-
-Types of contributions:
-
-- **Fix:** Fixes a technical or documentation defect.
-- **Enhancement:** Extends an existing component without changing the underlying architecture or behavior.
-- **New feature:** Adds something new, like a component.
-
-### What Belongs in Dialtone Vue?
-
-There are a couple important considerations when thinking about contributing to Dialtone Vue.
-The first is to remember that Dialtone Vue strives to offer components to be shared by multiple teams or features.
-Generally, one-off or first-time elements (i.e. snowflakes) aren't a great fit, though there may be the occasional exception.
-
-The second is to check with the Dialtone team (in #dialtone Dialpad channel) to ensure the contribution isn't already requested, planned, or even complete.
-
-### Roles
-
-- **Contributor:** Has the ability to create PRs and merge their change into staging after at least one approving review.
-- **Maintainer:** A trusted contributor with the ability to release Dialtone.
-- **Admin:** Has the ability to change any configuration on the Dialtone repository and release Dialtone. Usually for members of the Dialtone team.
-
-## Making a Pull Request
-
-### Before Submitting
-
-Before submitting a pull request, make sure to communicate what you wish to change to the Dialtone team.
-The easiest way to do this is via the #dialtone Dialpad channel.
-It's possible your change is already being worked on, has already been fixed, or maybe we just need to discuss the best solution to the problem.
-This prevents you from having to re-write your entire change, or even having to scrap it entirely.
-
-The Dialtone library exists to serve multiple teams, so it is important to ensure that your PR does not introduce any unnecessary breaking changes.
-Breaking changes will require extra steps that may prolong the submission review process.
-If breaking changes are absolutely necessary for your use case, then you must communicate them to the Dialtone team in advance to allow for a smooth migration strategy for all dependant projects.
-
-Examples of breaking include the following:
-
-- **Changing or removing the component API**: renaming or removing props and emits, or changing their expected types
-
-Examples of non-breaking changes:
-
-- **Making new additions to the component API**: for example, adding a new prop to a component that triggers a different flow of behaviour or output, or adding a new emit event to detect specific changes.
-- **Refactoring**: changing the internal code of a component without changing any external behaviour.
-
-Some updates can unintentionally cause breaking changes, or cause changes to a component's output behaviour or functionality without necessary breaking it.
-This is why it is important to evaluate the change carefully and asses its impact on existing usage.
-
-Any new components or updates to existing components require the following:
-
-- Unit tests covering the entire change.
-- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--page)
-- Component is accessible according to requirements.
-  - Navigable by keyboard.
-  - Read by a screen reader.
-  - Minimum contrast ratio.
-- Changes must be made for Vue 2 as well as Vue 3, `dialtone-vue2` and `dialtone-vue3` package folders respectively
-- Unit tests are passing locally.
-  - `nx test dialtone-vue2` or `nx test dialtone-vue3`
-- Linters are passing locally.
-  - `nx lint dialtone-vue2` or `nx lint dialtone-vue3`
-- Library builds locally.
-  - `nx build dialtone-vue2` or `nx build dialtone-vue3`
-- Documentation builds locally.
-  - `nx storybook:build dialtone-vue2` or `nx storybook:build dialtone-vue3`
-
-### How to Submit
-
-After you have discussed your change with the Dialtone team, follow these steps to submit it:
-
-1. See [README.md](../README.md) for instructions on how to initially clone and run the project.
-2. First make sure you are on the `staging` branch with `git checkout staging`, and that it is up-to-date with `git pull`.
-3. Create a personal branch to make your change off of `staging` with `git checkout -b my-change-branch`. We use kebab-case for branch names.
-4. Make and commit your changes. Note our commit message conventions in [COMMIT_CONVENTION.md].
-5. Push your branch to remote. `git push -u origin my-change-branch`.
-6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
-7. Set the label on your PR:
-
-- 'visual-test-ready' if your PR includes visual UI changes.
-- 'no-visual-test' if not UI changes.
-
-<!-- markdownlint-disable MD029 -->
-8. If it's a Vue change, you need to update both dialtone-vue2 and dialtone-vue3 packages. You may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script.
-9. Once your changes have been approved, you may squash your branch into staging.
-
-Once your change is in `staging` it will go live with the next Dialtone Vue release.
-Releases are done on demand by the Dialtone team, and are done fairly regularly.
+Dialtone is a dependency of Dialtone Vue.
 
 ## Coding Guidelines
 
 ### CSS
 
-We should use [Dialtone tokens](https://dialtone.dialpad.com/tokens/) in Dialtone Vue for all component styling.
-Avoid using [utility classes](https://dialtone.dialpad.com/utilities/) in Dialtone Vue, those should be only used at the application level.
-
-### How We Use Slots
-
-Main content is the key visual content of a component.
-For example the text and the icon of a button are two different content slots.
-It is important that slots are used for this type of content as the consumer of the component can override the content with markup or vue components.
-If the button text was only a prop, the consumer could not make changes to the styling of the text.
+We should use [Dialtone tokens](https://dialtone.dialpad.com/tokens/) in Dialtone Vue for all component styling. For core components we should write CSS in a new component in the dialtone-css package. For recipe components we should write CSS in the component itself.
+Avoid using [utility classes](https://dialtone.dialpad.com/utilities/) in Dialtone Vue as they cannot be easily overidden in the product, those should be only used at the application level.
 
 ### Transparent Components
 
@@ -240,7 +142,7 @@ except when noted below. This in particular means:
 - **No custom directives:** Directives in Vue are installed globally and vary from project to project. Custom directives (such as `v-tooltip`) cannot be used in Dialtone Vue components, unless they exist in dialtone itself.
 - **No other custom global methods:** Some projects may implement custom global methods on the Vue object. Dialtone Vue components are limited to the built-in Vue methods.
 - **No imports outside the dialtone-vue directory**
-- **Vue 2 compatibility:** Dialtone Vue components should support Vue 2 and Vue 3.
+- **Vue 2 compatibility:** Dialtone Vue components should support Vue 2 and Vue 3. Vue 2 components are in the dialtone-vue2 package, Vue 3 components are in the dialtone-vue3 package. You may copy your changes from one to the other via `<dialtone-root>/scripts/dialtone-vue-sync.sh`
 
 ### Exports
 
@@ -264,8 +166,7 @@ Before you start to write tests, please follow the [Contributing Guideline - Wri
 
 ### Dialtone Usage
 
-Dialtone Vue components should utilize the global immutable CSS classes provided by Dialtone whenever possible.
-It is a requirement of any project using Dialtone Vue to include Dialtone as a dependency.
+Consumers of Dialtone Vue should utilize the global immutable CSS classes provided by Dialtone whenever possible.
 If needed, you can also write custom CSS using [Dialtone Tokens CSS variables](https://dialtone.dialpad.com/tokens/).
 
 Please **do not** use any mixins or utility classes in Dialtone Vue components.
@@ -283,31 +184,13 @@ change via a blog post on [dialtone.dialpad.com](https://dialtone.dialpad.com/ab
 - **`.storybook`:** Build time configuration files for storybook. If you need to edit the storybook webpack config for example, you would do so here.
 - **`components`:** Everything related to a specific component is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
 - **`css`:** We store any global less/css in here. Right now it is only used for Dialtone overrides.
+- **`directives`:** Vue directives we output as part of the Dialtone Vue library.
 - **`dist`:** The Dialtone Vue library is output here upon `npm run build`.
 - **`docs`:** Any storybook documentation not directly related to a component.
+- **`functions`:** Contains documentation for any functions we export as part of the library.
 - **`recipes`:** Everything related to recipe components is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
 - **`scripts`:** - Contains shell scripts.
 - **`tests`:** For utility/helper files to be used in multiple tests and test configuration. Actual tests are stored in the component folder.
-- **`tools`:** - Any additional tooling related to Dialtone Vue. Right now contains files related to the migration from Dialtone 5 to Dialtone 6.
-
-## Commit Message Convention
-
-Dialtone Vue uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/)
-to have commit messages that can be used as part of the [semantic release process](RELEASING.md).
-For more information, see [COMMIT_CONVENTION.md].
-
-Commit message conventions will be enforced on commit via git hook when pushing to branches (`production`, `staging`, `alpha` and `beta`).
-
-When creating a PR from your own feature branch it is enforced via GitHub actions in the following conditions:
-
-1. If you have only a single commit on your branch the commit message must follow the conventions.
-2. If you have more than one commit on your branch the commit messages do not have to follow the conventions but the title of the PR does.
-
-## Versioning
-
-Dialtone Vue follows [SemVer](https://semver.org/) for versioning and the commit message convention used in the project
-is aligned with SemVer by describing the features, fixes, and breaking changes made in commit messages.
-All versioning on release will be done automatically based on the commit messages contained in it.
 
 ## Tooling
 
@@ -348,17 +231,3 @@ We use Yeoman as our generator to scaffold new components.
 This means if you are creating a new component you can simply just run `pnpm exec yo @dialpad/dialtone:vue3` and enter the name of your component.
 All files for your component (component, tests, storybook files) will be generated with starter templates and proper naming conventions.
 For more details on how to use yeoman, see [the docs](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-yeoman-generator--page).
-
-### GitHub Actions
-
-[GitHub Actions](https://docs.github.com/en/actions) is what we use for our CI/CD solution.
-All GHA workflows are in the `.github/workflows` directory.
-Currently, we use GitHub Actions for the following:
-
-- Deploying to production `.github/workflows/deploy.yml`, See [RELEASING](RELEASING.md) for instructions on how to do this.
-- Linting our files on pull request `.github/workflows/lint-pr.yml`.
-- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION] for our commit message conventions.
-- Running unit tests on pull requests and pushes to staging `.github/workflows/unit_tests.yml`.
-- Running visual tests after approved pull requests and pushes to staging `.github/workflows/visual_tests.yml`.
-
-[COMMIT_CONVENTION.md]: /.github/COMMIT_CONVENTION.md
