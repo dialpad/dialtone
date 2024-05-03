@@ -24,9 +24,9 @@ git merge --ff-only "$current_branch";
 
 echo "Running release-local on affected projects";
 if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
-  pnpm nx affected --target=release-local --base=staging --parallel=false;
+  pnpm nx release-local --base=staging dialtone;
 else
-  pnpm nx affected --target=release-local --base=production --parallel=false;
+  pnpm nx release-local --base=production dialtone;
 fi
 
 echo "Pushing changes to $release_branch";
