@@ -17,7 +17,7 @@ echo "Checking out to $release_branch";
 git checkout "$release_branch";
 
 echo "Updating branch";
-git pull;
+git pull origin "$release_branch";
 
 echo "Merging changes";
 git merge --ff-only "$current_branch";
