@@ -112,6 +112,7 @@ jobs:
         files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
     env:
       FILE_PATH: ${{ matrix.files }}
+      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -134,11 +135,11 @@ jobs:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
           token_format: "id_token"
-          id_token_audience: "https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel"
+          id_token_audience: ${{ env.API_URL }}
 
       - name: Send sms
         run: |
-          curl -m 70 -X POST https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel \
+          curl -m 70 -X POST ${{ env.API_URL }} \
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{

@@ -19,7 +19,7 @@ git pull origin "$release_branch";
 
 if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
   echo "Merging changes";
-  git merge --ff-only "$current_branch";
+  git merge -X theirs "$current_branch";
 
   echo "Running release-local on affected projects";
   pnpm nx release-local --base=staging dialtone;

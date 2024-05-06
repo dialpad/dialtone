@@ -16,7 +16,7 @@ jobs:
       contents: read
       id-token: write
     env:
-      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-test-channel
+      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel
     steps:
       - name: Checkout
         uses: actions/checkout@v4
