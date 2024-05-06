@@ -1,3 +1,10 @@
+# [9.35.0-alpha.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0-alpha.1...dialtone/v9.35.0-alpha.2) (2024-05-06)
+
+
+### Bug Fixes
+
+* test HTML ([61e2579](https://github.com/dialpad/dialtone/commit/61e2579441aeb5ea396a0a302e319cfa59f36643))
+
 # [9.35.0-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1-alpha.4...dialtone/v9.35.0-alpha.1) (2024-05-03)
 
 
