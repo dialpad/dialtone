@@ -56,5 +56,5 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published.\n\n ```md\n${{ env.RELEASE_NOTES }}```\n\nRead the full changelog: ${{ env.RELEASE_URL }}"
+            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published 🎉. Included changes:\n```markdown\n${{ env.RELEASE_NOTES }}```\nRead the full changelog: ${{ env.RELEASE_URL }}"
           }'
