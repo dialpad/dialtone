@@ -1,3 +1,11 @@
+# [9.35.0-alpha.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0-alpha.3...dialtone/v9.35.0-alpha.4) (2024-05-06)
+
+
+### Bug Fixes
+
+* remove parentheses ([0f6807b](https://github.com/dialpad/dialtone/commit/0f6807b0528d23072ceabe2db2a04e397e185836))
+* try with code block ([302b802](https://github.com/dialpad/dialtone/commit/302b8021b28d561a688cb1990d976de0fa5be4da))
+
 # [9.35.0-alpha.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0-alpha.2...dialtone/v9.35.0-alpha.3) (2024-05-06)
 
 
