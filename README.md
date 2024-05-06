@@ -247,7 +247,7 @@ nx build
 ##### Run all Vue unit tests
 
 ```bash
-nx test:vue
+nx test
 ```
 
 ##### Run Vue 2 tests
