@@ -15,22 +15,29 @@ fi
 
 echo "Updating $release_branch";
 git checkout "$release_branch";
-git pull;
+git pull origin "$release_branch";
 
-echo "Updating branch";
-git checkout "$current_branch";
+if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
+  echo "Merging changes";
+  git merge -X theirs "$current_branch";
 
-echo "Running release-local on affected projects";
-pnpm nx affected --target=release-local --base="$release_branch" --parallel=false;
+  echo "Running release-local on affected projects";
+  pnpm nx release-local --base=staging dialtone;
+else
+  git checkout "$current_branch";
 
-echo "Checking out to $release_branch";
-git checkout "$release_branch";
+  echo "Running release-local on affected projects";
+  pnpm nx release-local --base="$release_branch" dialtone;
 
-echo "Merging changes";
-git merge --ff-only "$current_branch";
+  echo "Checking out to $release_branch";
+  git checkout "$release_branch";
 
-echo "Pushing changes to $release_branch";
-git push origin "$release_branch";
+  echo "Merging changes";
+  git merge --ff-only "$current_branch";
+
+  echo "Pushing changes to $release_branch";
+  git push origin "$release_branch";
+fi
 
 echo "Go back to $current_branch";
 git checkout "$current_branch";

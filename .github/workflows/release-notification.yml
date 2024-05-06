@@ -16,12 +16,30 @@ jobs:
       contents: read
       id-token: write
     env:
-      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-test-channel
+      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v2.1.0
+
+      - name: Sanitize release notes
+        id: sanitize-notes
+        env:
+          EXTRACTED_NOTES: ${{ steps.extract-release-notes.outputs.release_notes }}
+        run: >
+          echo "RELEASE_NOTES=$(
+            echo ${EXTRACTED_NOTES//$'\n'/\\n} |
+            sed 's/[(][^)]*[)]//g' |
+            tr -d '()'
+          )" >> $GITHUB_ENV;
+
       - id: get-released-version
         name: Get released version from tag
         run: |
-          echo "RELEASE_VERSION=${GITHUB_REF#refs/dialtone/v*/}" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=${GITHUB_REF#*dialtone/v}" >> $GITHUB_ENV
 
       - id: auth
         name: Authenticate to Google Cloud
@@ -38,5 +56,5 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "message": "A new dialtone version has been published: \"${{ env.RELEASE_VERSION }}\". Read the full changelog: ${{ env.RELEASE_URL }}"
+            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published 🎉. Included changes:\n```markdown\n${{ env.RELEASE_NOTES }}```\nRead the full changelog: ${{ env.RELEASE_URL }}"
           }'
