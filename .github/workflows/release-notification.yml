@@ -34,7 +34,7 @@ jobs:
             echo ${EXTRACTED_NOTES//$'\n'/\\n} |
             sed 's/[(][^)]*[)]//g' |
             tr -d '()'
-          )" >> GITHUB_ENV;
+          )" >> $GITHUB_ENV;
 
       - id: get-released-version
         name: Get released version from tag
