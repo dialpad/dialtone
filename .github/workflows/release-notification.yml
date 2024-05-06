@@ -28,9 +28,9 @@ jobs:
       - name: Sanitize release notes
         id: sanitize-notes
         env:
-          RELEASE_NOTES: ${{ steps.extract-release-notes.outputs.release_notes }}
+          EXTRACTED_NOTES: ${{ steps.extract-release-notes.outputs.release_notes }}
         run: |
-          echo "RELEASE_NOTES=${RELEASE_NOTES//$'\n'/}" >> $GITHUB_ENV
+          echo "RELEASE_NOTES=${EXTRACTED_NOTES//$'\n'/\\n}" >> $GITHUB_ENV
 
       - id: get-released-version
         name: Get released version from tag
@@ -52,5 +52,5 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published. \n <br><br> Read the full <a href='${{ env.RELEASE_URL }}'>changelog</a>."
+            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published.\n\n ${{ env.RELEASE_NOTES }}\n\nRead the full changelog: ${{ env.RELEASE_URL }}"
           }'
