@@ -41,11 +41,3 @@ fi
 
 echo "Go back to $current_branch";
 git checkout "$current_branch";
-
-if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
-  echo "Merging release commit back";
-  git merge --ff-only "$release_branch";
-
-  echo "Pushing changes to $current_branch";
-  git push origin "$current_branch";
-fi
