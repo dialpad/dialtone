@@ -25,6 +25,13 @@ jobs:
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@v2.1.0
 
+      - name: Sanitize release notes
+        id: sanitize-notes
+        env:
+          RELEASE_NOTES: ${{ steps.extract-release-notes.outputs.release_notes }}
+        run: |
+          echo "RELEASE_NOTES=${RELEASE_NOTES//$'\n'/}" >> $GITHUB_ENV
+
       - id: get-released-version
         name: Get released version from tag
         run: |
@@ -45,5 +52,5 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published!\n\n\'${{ steps.extract-release-notes.outputs.release_notes }}\'\n\nRead the full changelog: ${{ env.RELEASE_URL }}"
+            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published. \n <br><br> Read the full <a href='${{ env.RELEASE_URL }}'>changelog</a>."
           }'
