@@ -62,18 +62,52 @@ Your popover should be non-modal when:
   <example-popover modal />
 </code-well-header>
 
-```html
-<div class="d-modal--transparent"></div>
-<div class="d-popover">
-  <button id="anchor1" class="d-btn d-btn--primary" aria-expanded="false" aria-controls="dialog1" aria-haspopup="dialog">View Popover</button>
-  <div id="dialog1" class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="anchor1">
+<code-example-tabs
+htmlCode='
+<div class="d-popover d-fl-center d-fd-column d-p24 d-w100p d-of-auto">
+  <button id="anchor1" class="d-btn d-btn--primary" aria-expanded="true" aria-controls="dialog1" aria-haspopup="dialog">
+    View Popover
+  </button>
+  <div id="dialog1" class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164 d-vi-hidden" role="dialog" aria-modal="true" aria-hidden="false" aria-labelledby="anchor1">
     <div class="d-popover__content d-p16">
-      This is content rendered within the popover.<br>
-      <button class="d-btn d-btn--primary">Button</button>
+      <div class="d-mb8">
+        This is content rendered within the popover.
+      </div>
+      <button class="d-btn d-btn--primary">
+        Button
+      </button>
     </div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-popover
+  :open="onOpen"
+  class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164"
+>
+  <template slot="anchor">
+    <dt-button>
+       View Popover
+    </dt-button>
+  </template>
+  <template
+    slot="content"
+    slot-scope="{ close }"
+  >
+    <div>
+      <p class="d-mb4">
+        This is content rendered within the popover.
+      </p>
+      <dt-button
+        @click="close"
+      >
+        Button
+      </dt-button>
+    </div>
+  </template>
+</dt-popover>
+'
+showHtmlWarning />
 
 ### Popover - Non Modal
 
@@ -81,17 +115,53 @@ Your popover should be non-modal when:
   <example-popover />
 </code-well-header>
 
-```html
-<div class="d-popover">
-  <button id="anchor2" class="d-btn d-btn--primary" aria-expanded="false" aria-controls="dialog2" aria-haspopup="dialog">View Popover</button>
-  <div id="dialog2" class="d-popover__dialog d-ps-relative d-t4 d-w264" role="dialog" aria-modal="false" aria-hidden="true" aria-labelledby="anchor2">
+<code-example-tabs
+htmlCode='
+<div class="d-popover d-fl-center d-fd-column d-p24 d-w100p d-of-auto">
+  <button id="anchor1" class="d-btn d-btn--primary" aria-expanded="false" aria-controls="dialog1" aria-haspopup="dialog">
+    View Popover
+  </button>
+  <div id="dialog1" class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164 d-vi-visible" role="dialog" aria-modal="false" aria-hidden="true" aria-labelledby="anchor1">
     <div class="d-popover__content d-p16">
-      This is content rendered within the popover.<br>
-      <button class="d-btn d-btn--primary">Button</button>
+      <div class="d-mb8">
+        This is content rendered within the popover.
+      </div>
+      <button class="d-btn d-btn--primary">
+        Button
+      </button>
     </div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-popover
+  :open="onOpen"
+  :modal="false"
+  class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164"
+>
+  <template slot="anchor">
+    <dt-button>
+      View Popover
+    </dt-button>
+  </template>
+  <template
+    slot="content"
+    slot-scope="{ close }"
+  >
+    <div>
+      <p class="d-mb4">
+        This is content rendered within the popover.
+      </p>
+      <dt-button
+        @click="close"
+      >
+        Button
+      </dt-button>
+    </div>
+  </template>
+</dt-popover>
+'
+showHtmlWarning />
 
 ### With Header - Modal
 
@@ -103,23 +173,64 @@ Your popover should be non-modal when:
   </example-popover>
 </code-well-header>
 
-```html
-<div class="d-modal--transparent"></div>
-<div class="d-popover">
-  <button id="anchor3" class="d-btn d-btn--primary" aria-expanded="false" aria-controls="dialog3" aria-haspopup="dialog">View Popover</button>
-  <div id="dialog3" class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="anchor3">
+<code-example-tabs
+htmlCode='
+<div class="d-popover d-fl-center d-fd-column d-p24 d-w100p d-of-auto">
+  <button id="anchor1" class="d-btn d-btn--primary" aria-expanded="false" aria-controls="dialog1" aria-haspopup="dialog">
+    View Popover
+  </button>
+  <div id="dialog1" class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164 d-vi-visible" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="anchor1">
     <div class="d-popover__header d-px16">
       <div class="d-w100p">
         This is the header
       </div>
     </div>
     <div class="d-popover__content d-p16">
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
-      <button class="d-btn d-btn--primary">Button</button>
+      <div class="d-mb8">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam
+        repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati
+        quibusdam repudiandae.<br />
+      </div>
+      <button class="d-btn d-btn--primary">
+        Button
+      </button>
     </div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-popover
+  :open="onOpen"
+  class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164"
+>
+  <template slot="anchor">
+    <dt-button>
+      View Popover
+    </dt-button>
+  </template>
+  <template slot="headerContent">
+    <div class="d-w100p">
+      This is the header
+    </div>
+  </template>
+  <template
+    slot="content"
+    slot-scope="{ close }"
+  >
+    <div>
+      <div class="d-mb8">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br>
+      </div>
+      <dt-button
+        @click="close"
+      >
+        Button
+      </dt-button>
+    </div>
+  </template>
+</dt-popover>
+'
+showHtmlWarning />
 
 ### With Footer - Modal
 
@@ -131,14 +242,22 @@ Your popover should be non-modal when:
   </example-popover>
 </code-well-header>
 
-```html
-<div class="d-modal--transparent"></div>
-<div class="d-popover">
-  <button id="anchor4" class="d-btn d-btn--primary" aria-expanded="false" aria-controls="dialog4" aria-haspopup="dialog">View Popover</button>
-  <div id="dialog4" class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="anchor4">
+<code-example-tabs
+htmlCode='
+<div class="d-popover d-fl-center d-fd-column d-p24 d-w100p d-of-auto">
+  <button id="anchor1" class="d-btn d-btn--primary" aria-expanded="false" aria-controls="dialog1" aria-haspopup="dialog">
+    View Popover
+  </button>
+  <div id="dialog1" class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164 d-vi-visible" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="anchor1">
     <div class="d-popover__content d-p16">
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
-      <button class="d-btn d-btn--primary">Button</button>
+      <div class="d-mb8">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam
+        repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati
+        quibusdam repudiandae.<br />
+      </div>
+      <button class="d-btn d-btn--primary">
+        Button
+      </button>
     </div>
     <div class="d-popover__footer d-px16">
       <div class="d-w100p">
@@ -147,7 +266,40 @@ Your popover should be non-modal when:
     </div>
   </div>
 </div>
-```
+'
+vueCode='
+<dt-popover
+  :open="onOpen"
+  class="d-popover__dialog d-popover__dialog--modal d-ps-relative d-t4 d-w264 d-hmx164"
+>
+  <template slot="anchor">
+    <dt-button>
+      View Popover
+    </dt-button>
+  </template>
+  <template
+    slot="content"
+    slot-scope="{ close }"
+  >
+    <div>
+      <div class="d-mb8">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br>
+      </div>
+      <dt-button
+        @click="close"
+      >
+        Button
+      </dt-button>
+    </div>
+  </template>
+  <template slot="footerContent">
+    <div class="d-w100p">
+      This is the footer
+    </div>
+  </template>
+</dt-popover>
+'
+showHtmlWarning />
 
 ## Vue API
 
