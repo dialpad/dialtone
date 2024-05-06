@@ -13,28 +13,39 @@ elif [[ "$release_branch" == "$current_branch" ]]; then
   exit 1;
 fi
 
-echo "Checking out to $release_branch";
+echo "Updating $release_branch";
 git checkout "$release_branch";
-
-echo "Updating branch";
 git pull origin "$release_branch";
 
-echo "Merging changes";
-git merge --ff-only "$current_branch";
-
-echo "Running release-local on affected projects";
 if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
+  echo "Merging changes";
+  git merge -X theirs "$current_branch";
+
+  echo "Running release-local on affected projects";
   pnpm nx release-local --base=staging dialtone;
 else
-  pnpm nx release-local --base=production dialtone;
+  git checkout "$current_branch";
+
+  echo "Running release-local on affected projects";
+  pnpm nx release-local --base="$release_branch" dialtone;
+
+  echo "Checking out to $release_branch";
+  git checkout "$release_branch";
+
+  echo "Merging changes";
+  git merge --ff-only "$current_branch";
+
+  echo "Pushing changes to $release_branch";
+  git push origin "$release_branch";
 fi
 
-echo "Pushing changes to $release_branch";
-git push origin "$release_branch";
-
-echo "Merge changes back to $current_branch";
+echo "Go back to $current_branch";
 git checkout "$current_branch";
-git merge --ff-only "$release_branch";
 
-echo "Pushing changes to $current_branch";
-git push origin "$current_branch";
+if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
+  echo "Merging release commit back";
+  git merge --ff-only "$release_branch";
+
+  echo "Pushing changes to $current_branch";
+  git push origin "$current_branch";
+fi
