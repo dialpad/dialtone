@@ -1,3 +1,10 @@
+# [9.35.0-alpha.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0-alpha.4...dialtone/v9.35.0-alpha.5) (2024-05-06)
+
+
+### Bug Fixes
+
+* missing dollar sign ([b4b5fd1](https://github.com/dialpad/dialtone/commit/b4b5fd1cda3eda27449ea899efb408e57ee42c5d))
+
 # [9.35.0-alpha.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0-alpha.3...dialtone/v9.35.0-alpha.4) (2024-05-06)
 
 
