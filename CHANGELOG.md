@@ -1,3 +1,33 @@
+# [9.35.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1...dialtone/v9.35.0-beta.1) (2024-05-06)
+
+
+### Bug Fixes
+
+* missing dollar sign ([b4b5fd1](https://github.com/dialpad/dialtone/commit/b4b5fd1cda3eda27449ea899efb408e57ee42c5d))
+* NO-JIRA test sanitized release notes ([ee6412f](https://github.com/dialpad/dialtone/commit/ee6412f311dd65d35da99cf967c6fb4fafd7c7ee))
+* remove parentheses ([0f6807b](https://github.com/dialpad/dialtone/commit/0f6807b0528d23072ceabe2db2a04e397e185836))
+* remove test change ([d7a45c2](https://github.com/dialpad/dialtone/commit/d7a45c2b70c39048f8e391cd38f859d200ee4c9f))
+* spacing ([3bf9f6c](https://github.com/dialpad/dialtone/commit/3bf9f6cc982fac664f69b13e004e68db28502eec))
+* test change ([ffb5420](https://github.com/dialpad/dialtone/commit/ffb5420290db00190fb829486a071f5a99c69be1))
+* test HTML ([61e2579](https://github.com/dialpad/dialtone/commit/61e2579441aeb5ea396a0a302e319cfa59f36643))
+* try with code block ([302b802](https://github.com/dialpad/dialtone/commit/302b8021b28d561a688cb1990d976de0fa5be4da))
+
+
+### Code Refactoring
+
+* add quotes ([4125189](https://github.com/dialpad/dialtone/commit/4125189ae1ca313cc597b6353b1c38586ba46c7f))
+* change release message ([f128619](https://github.com/dialpad/dialtone/commit/f128619fa3e9940d804f5ef89938eccf734a0055))
+* fix indentation ([f6734d3](https://github.com/dialpad/dialtone/commit/f6734d3b3747f1b915d46d059ff7e3b06499c52e))
+* fix release action ([eb733b5](https://github.com/dialpad/dialtone/commit/eb733b5f43cb46fbedaea28cb5e045d451fd8f7d))
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+* scape quotes ([786f3cd](https://github.com/dialpad/dialtone/commit/786f3cd1829b75be83210fe2ce1bc61d2e2d9f5f))
+* test release ([971bd9b](https://github.com/dialpad/dialtone/commit/971bd9bc40cc05e39b3c4ef14213cbef647e8992))
+
+
+### Features
+
+* test release ([7a07314](https://github.com/dialpad/dialtone/commit/7a07314ec402a18b0cbc603f516c9245d0753112))
+
 ## [9.34.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.0...dialtone/v9.34.1) (2024-05-06)
 
 
