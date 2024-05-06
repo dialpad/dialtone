@@ -1,3 +1,12 @@
+# [9.35.0-alpha.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0-alpha.2...dialtone/v9.35.0-alpha.3) (2024-05-06)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1711 focus message input on emoji select ([#297](https://github.com/dialpad/dialtone/issues/297)) ([724acd5](https://github.com/dialpad/dialtone/commit/724acd51e8b7e35eaf60f1ec493c4111dcb94e78))
+* NO-JIRA test sanitized release notes ([ee6412f](https://github.com/dialpad/dialtone/commit/ee6412f311dd65d35da99cf967c6fb4fafd7c7ee))
+* **Tooltip:** DLT-1747 tooltip staying open over overlay ([#299](https://github.com/dialpad/dialtone/issues/299)) ([3233c11](https://github.com/dialpad/dialtone/commit/3233c11a000b6088fc62095354d46f49c778aef9))
+
 # [9.35.0-alpha.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0-alpha.1...dialtone/v9.35.0-alpha.2) (2024-05-06)
 
 
