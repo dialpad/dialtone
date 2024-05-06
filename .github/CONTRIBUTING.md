@@ -96,7 +96,7 @@ This is why it is important to evaluate the change carefully and asses its impac
 Any new components or updates to existing components require the following:
 
 - Unit tests covering the entire change.
-- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--page)
+- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://dialtone.dialpad.com/vue/?path=/docs/docs-storybook-getting-started--docs)
 - Component is accessible according to requirements.
   - Navigable by keyboard.
   - Read by a screen reader.
