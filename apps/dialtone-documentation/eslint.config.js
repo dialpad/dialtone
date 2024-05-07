@@ -1,4 +1,4 @@
-module.exports = {
+export default [{
   extends: [
     'standard',
     'semistandard',
@@ -117,4 +117,4 @@ module.exports = {
       },
     }],
   },
-};
+}];

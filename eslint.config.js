@@ -1,4 +1,4 @@
-module.exports = {
+export default [{
   extends: [
     'standard',
     'semistandard',
@@ -28,4 +28,4 @@ module.exports = {
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
     complexity: ['warn', 5],
   },
-};
+}];

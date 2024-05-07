@@ -4,7 +4,7 @@ import { getDirname, path } from '@vuepress/utils';
 import { viteBundler } from '@vuepress/bundler-vite';
 import viteSvgLoader from 'vite-svg-loader';
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics';
-import { seoPlugin } from 'vuepress-plugin-seo2';
+import { seoPlugin } from '@vuepress/plugin-seo';
 import anchor from 'markdown-it-anchor';
 
 const sidebar = require('../_data/site-nav.json');

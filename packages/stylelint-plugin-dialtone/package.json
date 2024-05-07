@@ -50,7 +50,7 @@
     "test": "node --test ./tests/lib/rules/*.mjs"
   },
   "devDependencies": {
-    "stylelint": "15.11.0",
+    "stylelint": "16.5.0",
     "stylelint-test-rule-node": "^0.2.1"
   },
   "engines": {

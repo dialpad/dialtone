@@ -68,6 +68,7 @@
     "@vuepress/plugin-git": "2.0.0-beta.60",
     "@vuepress/plugin-google-analytics": "2.0.0-beta.60",
     "@vuepress/plugin-prismjs": "2.0.0-beta.60",
+    "@vuepress/plugin-seo": "2.0.0-rc.3",
     "@vuepress/plugin-theme-data": "2.0.0-beta.60",
     "@vuepress/plugin-toc": "2.0.0-beta.60",
     "@vuepress/utils": "2.0.0-beta.60",
@@ -77,10 +78,9 @@
     "npm-run-all": "^4.1.5",
     "prismjs": "^1.29.0",
     "vite-svg-loader": "^5.1.0",
-    "vue": "^3.3.7",
+    "vue": "^3.4.27",
     "vue-router": "^4.2.5",
     "vuepress": "2.0.0-beta.60",
-    "vuepress-plugin-seo2": "2.0.0-beta.124",
     "vuepress-plugin-sitemap2": "2.0.0-beta.174"
   }
 }

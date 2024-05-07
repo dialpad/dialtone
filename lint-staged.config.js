@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   '*.{js, mjs, cjs, vue}': [
     'pnpm exec eslint --fix',
   ],

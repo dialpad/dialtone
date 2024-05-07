@@ -70,23 +70,6 @@ const autoprefixer = settings.styles ? require('autoprefixer') : null;
 const path = settings.svgs ? require('path') : null;
 const svgmin = settings.svgs ? require('gulp-svgmin') : null;
 const replace = settings.svgs ? require('gulp-replace') : null;
-const svgStrokeToFill = settings.svgs ? require('./svg-stroke-to-fill.cjs') : null;
-const categories = [
-  'alerts',
-  'arrows',
-  'brand',
-  'communications',
-  'controls',
-  'data',
-  'devices',
-  'editing',
-  'general',
-  'os',
-  'people',
-  'places',
-  'time',
-  'weather',
-];
 
 //  ================================================================================
 //  @  PATHS
@@ -107,25 +90,6 @@ const paths = {
   styles: {
     inputLib: './lib/build/less/dialtone.less',
     outputLib: './lib/dist/',
-  },
-  svgs: {
-    sysInput: './lib/build/svg/system/**/*.svg',
-    sysOutputLib: './lib/dist/svg/system/',
-    brandInput: './lib/build/svg/brand/**/*.svg',
-    brandOutputLib: './lib/dist/svg/brand/',
-    outputVue: './lib/dist/vue/icons/',
-    newInputRoot: './newIcons',
-    newOutputRoot: './lib/build/svg/v7',
-  },
-  version7: {
-    input: './lib/build/svg/v7/**/*.svg',
-    outputLib: './lib/dist/svg/v7/',
-    outputVue: './lib/dist/vue/v7/',
-  },
-  patterns: {
-    input: './lib/build/svg/patterns/**/*.svg',
-    outputLib: './lib/dist/svg/patterns/',
-    outputVue: './lib/dist/vue/patterns/',
   },
   spot: {
     input: './lib/build/svg/spot/**/*.svg',
@@ -316,73 +280,6 @@ const watchFiles = function (done) {
 };
 
 //  ================================================================================
-//  @@  NEW ICONS BUILD PROCESS
-//  ================================================================================
-const transformStrokeToFill = function (done) {
-  const promises = [];
-
-  categories.forEach(category => {
-    promises
-      .push(
-        svgStrokeToFill
-          .transform(
-              `${paths.svgs.newInputRoot}/${category}/`,
-              `${paths.svgs.newOutputRoot}/${category}/`,
-              { traceResolution: 600, showProgressBar: true },
-          ),
-      );
-  });
-
-  Promise
-    .all(promises)
-    .then(() => done());
-};
-
-const buildNewSVGIcons = function (done) {
-  //  Make sure this feature is activated before running
-  if (!settings.svgs) return done();
-
-  //  Compile icons
-  return src(paths.version7.input)
-    .pipe(cache('buildNewSVGIcons'))
-    .pipe(replace(' fill="none"', ''))
-    .pipe(replace(' fill="#000"', ' fill="currentColor"'))
-    .pipe(replace(' fill="#000000"', ' fill="currentColor"'))
-    .pipe(replace(' fill="black"', ' fill="currentColor"'))
-    .pipe(replace('width="12" height="12"', ''))
-    .pipe(replace('<svg', function (match) {
-      const name = path.parse(this.file.path).name;
-      const converted = name.toLowerCase().replace(/-(.)/g, function (match, group1) {
-        return group1.toUpperCase();
-      });
-      const title = name
-        .replace(/\b\S/g, t => t.toUpperCase())
-        .replace(/-+/g, ' ');
-      return `${match}
-      aria-hidden="true"
-      focusable="false"
-      data-name="${title}"
-      class="d-icon d-icon--${converted}"
-      xmlns="http://www.w3.org/2000/svg"`;
-    }))
-    .pipe(svgmin())
-    .pipe(rename({ dirname: '' }))
-    .pipe(dest(paths.version7.outputLib))
-    .pipe(replace('<svg', '<template>\n  <svg'))
-    .pipe(replace('</svg>', '</svg>\n</template>'))
-  // move any style tags within the svg into style tags of the vue component
-    .pipe(through2.obj(moveStyleTagsToEOF))
-    .pipe(replace('<style>', '<style scoped>'))
-    .pipe(rename(function (file) {
-      file.basename = file.basename
-        .replace(/\b\S/g, t => t.toUpperCase())
-        .replace(/-+/g, '');
-      file.extname = '.vue';
-    }))
-    .pipe(dest(paths.version7.outputVue));
-};
-
-//  ================================================================================
 //  @   EXPORT TASKS
 //  ================================================================================
 //  --  BUILD OUT THE SITE BUT DON'T START THE SERVER
@@ -393,7 +290,6 @@ exports.clean = series(
 
 exports.svg = series(
   buildSpotIllustrationSVGs,
-  buildNewSVGIcons,
 );
 
 // default build task
@@ -424,11 +320,7 @@ exports.watch = series(
 exports.fonts = series(
   webfonts,
 );
-// NEW ICONS BUILD PROCESS
-exports.icons = series(
-  transformStrokeToFill,
-  buildNewSVGIcons,
-);
+
 
 //  --  GENERATES ALL DIALPAD / UC FAVICONS
 // exports.favicons = series(
