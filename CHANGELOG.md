@@ -1,3 +1,10 @@
+## [9.34.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1...dialtone/v9.34.2) (2024-05-07)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1717 fix link overflow ([#302](https://github.com/dialpad/dialtone/issues/302)) ([999ab18](https://github.com/dialpad/dialtone/commit/999ab183005dc04258024dfc17068982e132b971))
+
 # [9.35.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1...dialtone/v9.35.0-beta.1) (2024-05-06)
 
 
