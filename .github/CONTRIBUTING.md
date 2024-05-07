@@ -123,10 +123,9 @@ After you have discussed your change with the Dialtone team, follow these steps 
 6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
 7. Set the label on your PR:
 
-- 'visual-test-ready' if your PR includes visual UI changes.
-- 'no-visual-test' if no UI changes.
+   - 'visual-test-ready' if your PR includes visual UI changes.
+   - 'no-visual-test' if no UI changes.
 
-<!-- markdownlint-disable MD029 -->
 8. If it's a Vue change, you need to update both dialtone-vue2 and dialtone-vue3 packages. You may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script.
 9. Once your changes have been approved, you may squash your branch into staging.
 
