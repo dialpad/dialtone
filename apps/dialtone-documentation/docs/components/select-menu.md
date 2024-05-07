@@ -87,34 +87,62 @@ A select is normally paired with a label, but there are times when it can be use
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
-  <div class="d-label">
-    <label for="Dialtone--SelectExample1">...</label>
-  </div>
-  <div class="d-select">
-    <select class="d-select__input" id="Dialtone--SelectExample1">
-      <option value="" selected>...</option>
-      <option value="...">...</option>
-      <option value="...">...</option>
-      <option value="...">...</option>
-    </select>
-  </div>
+  <label>
+    <div class="d-select">
+      <select class="d-select__input">
+        <option value=""> Please select one </option>
+        <option value="1"> Option 1 </option>
+        <option value="2"> Option 2 </option>
+        <option value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
 </div>
 <div>
-  <div class="d-label">
-    <label for="Dialtone--SelectExample2">...</label>
-  </div>
-  <div class="d-select d-select--disabled">
-    <select class="d-select__input" id="Dialtone--SelectExample2" disabled>
-      <option value="" selected>...</option>
-      <option value="...">...</option>
-      <option value="...">...</option>
-      <option value="...">...</option>
-    </select>
-  </div>
+  <label>
+    <div class="d-label">Disabled</div>
+    <div class="d-select d-select--disabled">
+      <select disabled="disabled" class="d-select__input">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
 </div>
-```
+'
+vueCode='
+<dt-select-menu
+  :options="[
+        { value: ``, label: `Please select one` },
+        { value: `1`, label: `Option 1` },
+        { value: `2`, label: `Option 2` },
+        { value: `3`, label: `Option 3` },  
+      ]"
+  label="Default"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+<dt-select-menu
+  :options="[
+        { value: ``, label: `Please select one` },
+        { value: `1`, label: `Option 1` },
+        { value: `2`, label: `Option 2` },
+        { value: `3`, label: `Option 3` },  
+      ]"
+  label="Disabled"
+  disabled
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+'
+showHtmlWarning />
 
 ### With description text
 
@@ -137,13 +165,39 @@ A select is normally paired with a label, but there are times when it can be use
   </div>
 </code-well-header>
 
-```html
-<div class="d-label">...</div>
-<div class="d-description">...</div>
-<div class="d-select">
-  <select class="d-select__input" id="Dialtone--SelectExample3">...</select>
+<code-example-tabs
+htmlCode='
+<div>
+  <label>
+    <div aria-details="select-dt0-description" class="d-label">Label</div>
+    <div id="select-dt0-description" class="d-description">Optional description text</div>
+    <div class="d-select">
+      <select class="d-select__input">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
 </div>
-```
+'
+vueCode='
+<dt-select-menu
+  :options="[
+        { value: ``, label: `Please select one` },
+        { value: `1`, label: `Option 1` },
+        { value: `2`, label: `Option 2` },
+        { value: `3`, label: `Option 3` },  
+      ]"
+  label="Label"
+  description="Optional description text"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+'
+showHtmlWarning />
 
 ### With validation states
 
@@ -202,29 +256,99 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
-  <div class="d-label">...</div>
-  <div class="d-select">
-    <select class="d-select__input d-select__input--error">...</select>
+  <label>
+    <div class="d-label">Label</div>
+    <div class="d-select">
+      <select class="d-select__input d-select__input--error">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
+  <div class="base-input__messages d-validation-message__container">
+    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error"><p>Error validation message</p></div>
   </div>
-  <div class="d-validation-message d-validation-message--error">...</div>
 </div>
 <div>
-  <div class="d-label">...</div>
-  <div class="d-select">
-    <select class="d-select__input d-select__input--success">...</select>
+  <label>
+    <div class="d-label">Label</div>
+    <div class="d-select">
+      <select class="d-select__input d-select__input--success">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
+  <div class="base-input__messages d-validation-message__container">
+    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success"><p>Success validation message</p></div>
   </div>
-  <div class="d-validation-message d-validation-message--success">...</div>
 </div>
 <div>
-  <div class="d-label">...</div>
-  <div class="d-select">
-    <select class="d-select__input d-select__input--warning">...</select>
+  <label>
+    <div class="d-label">Label</div>
+    <div class="d-select">
+      <select class="d-select__input d-select__input--warning">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
+  <div class="base-input__messages d-validation-message__container">
+    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning"><p>Warning validation message</p></div>
   </div>
-  <div class="d-validation-message d-validation-message--warning">...</div>
 </div>
-```
+'
+vueCode='
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  :messages="[{ message: `Error validation message`, type: `error` }]"
+  label="Label"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  :messages="[{ message: `Success validation message`, type: `success` }]"
+  label="Label"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  :messages="[{ message: `Warning validation message`, type: `warning` }]"
+  label="Label"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+'
+showHtmlWarning />
 
 ## Sizes
 
@@ -300,38 +424,116 @@ We offer different sizes for instances in which the interface requires a smaller
   </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div>
-  <div class="d-label d-label--xs">...</div>
-  <div class="d-select d-select--xs">
-    <select class="d-select__input">...</select>
-  </div>
+  <label>
+    <div class="d-label d-label--xs">Label</div>
+    <div class="d-select d-select--xs">
+      <select class="d-select__input">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
 </div>
 <div>
-  <div class="d-label d-label--sm">...</div>
-  <div class="d-select d-select--sm">
-    <select class="d-select__input">...</select>
-  </div>
+  <label>
+    <div class="d-label d-label--sm">Label</div>
+    <div class="d-select d-select--sm">
+      <select class="d-select__input">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
 </div>
 <div>
-  <div class="d-label">...</div>
-  <div class="d-select">
-    <select class="d-select__input">...</select>
-  </div>
+  <label>
+    <div class="d-label d-label--lg">Label</div>
+    <div class="d-select d-select--lg">
+      <select class="d-select__input">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
 </div>
 <div>
-  <div class="d-label d-label--lg">...</div>
-  <div class="d-select d-select--lg">
-    <select class="d-select__input">...</select>
-  </div>
+  <label>
+    <div class="d-label d-label--xl">Label</div>
+    <div class="d-select d-select--xl">
+      <select class="d-select__input">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
 </div>
-<div>
-  <div class="d-label d-label--xl">...</div>
-  <div class="d-select d-select--xl">
-    <select class="d-select__input">...</select>
-  </div>
-</div>
-```
+'
+vueCode='
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  label="Label"
+  size="xs"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  label="Label"
+  size="sm"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  label="Label"
+  size="lg"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  label="Label"
+  size="xl"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+'
+showHtmlWarning />
 
 ## Accessibility
 
