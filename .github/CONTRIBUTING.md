@@ -126,7 +126,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
    - 'visual-test-ready' if your PR includes visual UI changes.
    - 'no-visual-test' if no UI changes.
 
-8. If it's a Vue change, you need to update both dialtone-vue2 and dialtone-vue3 packages. You may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script.
+8. If it's a Vue change, you need to update both dialtone-vue2 and dialtone-vue3 packages. You may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script. Please see the section in the Dialtone Vue contributing guide: [Dialtone Vue Sync Script](../packages/dialtone-vue3/.github/CONTRIBUTING.md#dialtone-vue-sync-script) for details on usage of the script.
 9. Once your changes have been approved, you may squash your branch into staging.
 
 Once your change is in `staging` it will go live with the next Dialtone Vue release.

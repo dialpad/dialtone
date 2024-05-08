@@ -144,6 +144,43 @@ except when noted below. This in particular means:
 - **No imports outside the dialtone-vue directory**
 - **Vue 2 compatibility:** Dialtone Vue components should support Vue 2 and Vue 3. Vue 2 components are in the dialtone-vue2 package, Vue 3 components are in the dialtone-vue3 package. You may copy your changes from one to the other via `<dialtone-root>/scripts/dialtone-vue-sync.sh`
 
+### Dialtone Vue Sync script
+
+This script will allow you to copy your changes from Vue 2 to Vue 3 or vice versa. to run it, you can use the following command from the root dialtone directory:
+
+```bash
+./scripts/dialtone-vue-sync.sh
+```
+
+With no parameter this will simply copy the most recent commit from Vue 2 to Vue 3. The script will prompt you to input whether you made your initial changes in Vue 2 or Vue 3.
+
+If you would like to copy more than one commit you can enter the git SHA of the commit BEFORE the first one one you would like to copy, example below:
+
+```bash
+./scripts/dialtone-vue-sync.sh 16eb2969894dd93bbb09b4baa28677fa2fa970c2
+```
+
+This will copy the first commit after the SHA you entered, up to the most recent commit.
+
+You may also enter two SHA's to copy the specified range of commits.
+
+```bash
+./scripts/dialtone-vue-sync.sh 16eb2969894dd93bbb09b4baa28677fa2fa970c2 59f4882be487d05eb20696162b14e9c7fcf5fdf5
+```
+
+When the script completes it will have created new uncommited changes in the Vue 2 or Vue 3 folder. It is possible for there to be conflicts when running the script. If this happens, you will need to resolve the conflicts manually, and then commit the resolved changes.
+
+Note that the script only copies your exact changes from one version to the other, it does not migrate your changes to Vue 3 code.
+
+Here are some of the most common changes you will need to make between Vue 2 and Vue 3:
+
+- $listeners no longer exists in Vue 3. You will have to handle your listeners within $attrs. <https://v3-migration.vuejs.org/breaking-changes/listeners-removed.html>
+- prop.sync="value" has been changed to v-model:prop="value" in Vue 3 <https://v3-migration.vuejs.org/breaking-changes/v-model.html#v-model>
+- In Vue 3 you should only use the emits option for custom events you are emitting via `this.$emit`. Emits should not contain native events like `click` or `input`, unless you are manually emitting them. <https://v3-migration.vuejs.org/breaking-changes/emits-option.html>
+- In unit tests, the "propsData" property has been renamed to just "props". You will have to rename this in your test setup. <https://v3-migration.vuejs.org/breaking-changes/props-data.html>
+
+For the full list, see the Vue 3 migration guide: <https://v3-migration.vuejs.org/>
+
 ### Exports
 
 When adding a new component, please add its exports to `index.js`, including any named exports, so they're available for import to users of Dialtone Vue:
