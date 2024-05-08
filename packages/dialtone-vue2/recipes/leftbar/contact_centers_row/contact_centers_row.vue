@@ -4,7 +4,7 @@
     data-qa="dt-recipe-contact-centers-row"
   >
     <a
-      class="dt-leftbar-row__primary"
+      class="dt-leftbar-row__link"
       :data-qa="$attrs['data-qa'] ?? 'dt-leftbar-row-link'"
       :aria-label="getAriaLabel"
       :title="description"
@@ -31,32 +31,37 @@
           {{ description }}
         </dt-emoji-text-wrapper>
       </div>
-      <slot name="right" />
-      <div class="dt-leftbar-row__omega">
-        <dt-badge
-          v-if="showUnreadCount"
-          data-qa="dt-leftbar-row-unread-badge"
-          kind="count"
-          type="bulletin"
-        >
-          {{ unreadCount }}
-        </dt-badge>
-        <dt-button
-          v-else
-          class="dt-leftbar-row__action"
-          data-qa="dt-leftbar-row-action-button"
-          :aria-label="menuButtonAriaLabel"
-          importance="clear"
-          size="xs"
-          circle
-          @click.stop="$emit('click-menu', $event)"
-        >
-          <template #icon>
-            <dt-icon-chevron-down size="200" />
-          </template>
-        </dt-button>
-      </div>
     </a>
+    <div
+      v-if="$slots.right"
+      class="dt-leftbar-row__right"
+    >
+      <slot name="right" />
+    </div>
+    <div class="dt-leftbar-row__omega">
+      <dt-badge
+        v-if="showUnreadCount"
+        data-qa="dt-leftbar-row-unread-badge"
+        kind="count"
+        type="bulletin"
+      >
+        {{ unreadCount }}
+      </dt-badge>
+      <dt-button
+        v-else
+        class="dt-leftbar-row__action"
+        data-qa="dt-leftbar-row-action-button"
+        :aria-label="menuButtonAriaLabel"
+        importance="clear"
+        size="xs"
+        circle
+        @click.stop="$emit('click-menu', $event)"
+      >
+        <template #icon>
+          <dt-icon-chevron-down size="200" />
+        </template>
+      </dt-button>
+    </div>
   </div>
 </template>
 
@@ -152,6 +157,7 @@ export default {
       return [
         'dt-leftbar-row',
         'dt-leftbar-row--contact-centers',
+        'dt-leftbar-row__primary',
         {
           'dt-leftbar-row--unread-count': this.showUnreadCount,
           'dt-leftbar-row--selected': this.selected,

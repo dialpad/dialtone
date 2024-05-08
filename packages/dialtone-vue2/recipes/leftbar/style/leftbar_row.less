@@ -239,12 +239,20 @@
   }
 
   &--contact-centers {
-    &:deep(.dt-leftbar-row__primary) {
-      gap: var(--dt-space-300);
-      padding-right: var(--dt-space-625);
+    min-width: 0;
+    padding-right: var(--dt-space-625);
+    gap: var(--dt-space-300);
+
+    &:deep(.dt-leftbar-row__link) {
+      display: flex;
+      align-items: center;
+      min-width: 0;
     }
 
-    &:deep(.dt-leftbar-row__label) {
+    &:deep(.dt-leftbar-row__label){
+      display: flex;
+      flex: 1;
+      min-width: 0;
       flex-basis: 100%
     }
   }
