@@ -5,7 +5,7 @@ import {
 import { autolink } from './autolink';
 
 const defaultAttributes = {
-  class: 'd-link d-c-text d-d-inline-block',
+  class: 'd-link d-c-text d-d-inline-block d-wb-break-all',
   rel: 'noopener noreferrer nofollow',
 };
 
