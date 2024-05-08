@@ -38,6 +38,24 @@ Dialtone CSS includes all utility classes as well as tokens.
 import "@dialpad/dialtone/css";
 ```
 
+If you are using the Vue components, then import either Vue 2 or Vue 3 css:
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/vue2/css";
+/* Or */
+@import "@dialpad/dialtone/vue3/css";
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/vue2/css";
+/* Or */
+import "@dialpad/dialtone/vue3/css";
+```
+
 #### Dialtone icons
 
 - Vue 2:
