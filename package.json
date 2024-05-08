@@ -20,7 +20,8 @@
       "allowedVersions": {
         "vue": "^2.6.0 || ^3.3.4",
         "mem-fs": "^4.0.0",
-        "stylelint": "^15.11.0"
+        "stylelint": "^15.11.0",
+        "typescript": "^5.2"
       }
     },
     "packageExtensions": {
@@ -47,6 +48,11 @@
       "@tiptap/vue-3": {
         "peerDependencies": {
           "vue": "^3.3.4"
+        }
+      },
+      "typedoc": {
+        "peerDependencies": {
+          "typescript": "^5.2"
         }
       },
       "vue-template-compiler": {
