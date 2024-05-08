@@ -136,6 +136,7 @@ export const argsData = {
   onNoticeClose: action('notice-close'),
   onSkinTone: action('skin-tone'),
   onCancel: action('cancel'),
+  onHandleKeydown: action('keydown'),
 };
 
 // Story Collection

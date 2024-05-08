@@ -10,6 +10,7 @@
     @drag-over="onDrag"
     @drop="onDrop"
     @keydown.enter.exact="onSend"
+    @keydown="handleKeydown"
     @paste="onPaste"
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
@@ -570,6 +571,13 @@ export default {
     'focus',
 
     /**
+     * Native handleKeydown event
+     * @event event
+     * @type {String|JSON}
+     */
+    'keydown',
+
+    /**
      * Native blur event
      * @event input
      * @type {String|JSON}
@@ -645,6 +653,10 @@ export default {
   },
 
   methods: {
+    handleKeydown (e) {
+      this.$emit('keydown', e);
+    },
+
     onDrag (e) {
       e.stopPropagation();
       e.preventDefault();

@@ -42,6 +42,7 @@
         @paste-media="$attrs.onPasteMedia"
         @notice-close="$attrs.onNoticeClose"
         @cancel="$attrs.onCancel"
+        @keydown="$attrs.onHandleKeydown"
       />
     </div>
   </div>
