@@ -22,12 +22,12 @@ if [[ "$release_branch" == "alpha" || "$release_branch" == "beta" ]]; then
   git merge -X theirs "$current_branch";
 
   echo "Running release-local on affected projects";
-  pnpm nx release-local --base=staging dialtone;
+  pnpm nx affected --target=release-local --base=staging --parallel=false;
 else
   git checkout "$current_branch";
 
   echo "Running release-local on affected projects";
-  pnpm nx release-local --base="$release_branch" dialtone;
+  pnpm nx affected --target=release-local --base="$release_branch" --parallel=false;
 
   echo "Checking out to $release_branch";
   git checkout "$release_branch";
