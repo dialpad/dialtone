@@ -50,6 +50,13 @@ Or
 }
 ```
 
+#### Import JSON
+
+```js
+import "@dialpad/dialtone/tokens/tokens-light.json" // Light tokens
+import "@dialpad/dialtone/tokens/tokens-dark.json" // Dark tokens
+```
+
 ### iOS (swift)
 
 1. Within your XCode project `File > Swift Packages > Add Package Dependency`

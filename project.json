@@ -39,7 +39,7 @@
     "test": {
       "executor": "nx:run-script",
       "options": {
-        "script": "test:vitest"
+        "script": "test:vue"
       }
     }
   }
