@@ -15,6 +15,8 @@ export let emojiFileExtensionLarge = '.png';
 
 export const emojiJson = emojiJsonLocal;
 
+export const emojiShortCodeRegex = /(^| ):\w+:/g;
+
 export function getEmojiData () {
   return emojiJson;
 }
@@ -167,6 +169,7 @@ export function stringToUnicode (str) {
 
 // Takes in a code (which could be unicode or shortcode) and returns the emoji data for it.
 export function codeToEmojiData (code) {
+  code = code?.trim();
   if (code.startsWith(':') && code.endsWith(':')) {
     return shortcodeToEmojiData(code);
   } else {
@@ -183,7 +186,9 @@ export function codeToEmojiData (code) {
 // removes duplicates.
 // @returns {string[]}
 export function findShortCodes (textContent) {
-  const shortcodes = textContent.match(/:\w+:/g);
+  const shortcodes = (
+    textContent.match(emojiShortCodeRegex) || []
+  ).map(code => code.trim());
   return filterValidShortCodes(shortcodes);
 }
 
