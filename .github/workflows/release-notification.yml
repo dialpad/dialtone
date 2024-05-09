@@ -32,7 +32,7 @@ jobs:
         run: >
           echo "RELEASE_NOTES=$(
             echo ${EXTRACTED_NOTES//$'\n'/\\n} |
-            sed 's/[(][^)]*[)]//g' |
+            sed -e 's/[(][^)]*[)]//g' -e 's/"/\\"/g' |
             tr -d '()'
           )" >> $GITHUB_ENV;
 
