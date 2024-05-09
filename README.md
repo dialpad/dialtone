@@ -293,12 +293,6 @@ import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
 ```
 
-- In case you are not using vue, import the svg's directly as following:
-
-```js
-import IconArrowUp from '@dialpad/dialtone-icons/arrow-up.svg';
-```
-
 - Importing json files
 
 ```js
