@@ -32,6 +32,24 @@ or
 @import '@dialpad/dialtone-css';
 ```
 
+And then import Dialtone Vue css for either Vue 2 or Vue 3:
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/vue2/css";
+/* Or */
+@import "@dialpad/dialtone/vue3/css";
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/vue2/css";
+/* Or */
+import "@dialpad/dialtone/vue3/css";
+```
+
 Dialtone Vue components can be imported directly from the package. Some components also export named constants, which can be imported as well:
 
 ```js
