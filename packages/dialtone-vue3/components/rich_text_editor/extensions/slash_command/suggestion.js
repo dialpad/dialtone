@@ -1,3 +1,4 @@
+import { markRaw } from 'vue';
 import { VueRenderer } from '@tiptap/vue-3';
 import tippy from 'tippy.js';
 
@@ -21,8 +22,8 @@ export default {
       onStart: props => {
         component = new VueRenderer(SuggestionList, {
           parent: this,
-          propsData: {
-            itemComponent: SlashCommandSuggestion,
+          props: {
+            itemComponent: markRaw(SlashCommandSuggestion),
             itemType: 'slash-command',
             ...props,
           },
