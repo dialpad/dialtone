@@ -2,6 +2,9 @@
 const name = 'dialtone-vue2';
 const srcRoot = `packages/${name}`;
 
+/**
+ * @type {import('semantic-release').GlobalConfig}
+ */
 module.exports = {
   extends: 'release.config.base.js',
   pkgRoot: srcRoot,

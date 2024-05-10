@@ -1,6 +1,10 @@
+/* eslint-disable no-template-curly-in-string */
 const name = 'dialtone-icons';
 const srcRoot = `packages/${name}`;
 
+/**
+ * @type {import('semantic-release').GlobalConfig}
+ */
 module.exports = {
   extends: 'release.config.base.js',
   pkgRoot: srcRoot,
@@ -10,7 +14,13 @@ module.exports = {
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
       releaseRules: [
-        {type: 'refactor', release: 'patch'},
+        { type: 'build', release: 'patch' },
+        { type: 'chore', release: 'patch' },
+        { type: 'ci', release: 'patch' },
+        { type: 'docs', release: 'patch' },
+        { type: 'refactor', release: 'patch' },
+        { type: 'style', release: 'patch' },
+        { type: 'test', release: 'patch' },
       ],
     }],
     ['@semantic-release/release-notes-generator', {

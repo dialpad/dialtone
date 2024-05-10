@@ -2,6 +2,104 @@
 
 The monorepo for Dialpad's design system Dialtone.
 
+All packages of the monorepo are combined into a single Dialtone package for ease of use, however all separate packages of dialtone are also deployed individually. If you would like to use an individual package rather than the combined Dialtone package, you can find documentation for each package in the readme under the respective packages folder. The below usage instructions are for the combined package.
+
+## Usage
+
+### Install it via NPM:
+
+#### Vue 3
+
+```shell
+npm install @dialpad/dialtone@next @tiptap/vue-3
+```
+
+#### Vue 2
+
+```shell
+npm install @dialpad/dialtone@next @linusborg/vue-simple-portal @tiptap/vue-2
+```
+
+### Import packages:
+
+#### Dialtone CSS
+
+Dialtone CSS includes all utility classes as well as tokens.
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/css";
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/css";
+```
+
+If you are using the Vue components, then import either Vue 2 or Vue 3 css:
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/vue2/css";
+/* Or */
+@import "@dialpad/dialtone/vue3/css";
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/vue2/css";
+/* Or */
+import "@dialpad/dialtone/vue3/css";
+```
+
+#### Dialtone icons
+
+- Vue 2:
+
+```js
+// Named import
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue2';
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
+```
+
+- Vue 3:
+
+```js
+// Named import
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
+```
+
+#### Dialtone Vue components
+
+- Vue 2
+
+```js
+// Named import
+import { DtButton } from "@dialpad/dialtone/vue2"
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
+```
+
+- Vue 3
+
+```js
+// Named import
+import { DtButton } from "@dialpad/dialtone/vue3"
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
+```
+
 ## About this repo
 
 The @dialpad/dialtone repository is a monorepo composed of Dialtone NPM packages and apps.
@@ -16,6 +114,7 @@ dialtone/
   |--- dialtone-documentation     # Documentation site
 |--- packages                     # NPM packages
   |--- dialtone-css               # CSS library
+  |--- dialtone-emojis            # Emoji assets
   |--- dialtone-vue2              # Vue component library compatible with vue@2
   |--- dialtone-vue3              # Vue component library compatible with vue@3
   |--- dialtone-icons             # SVG icons library
@@ -25,33 +124,55 @@ dialtone/
 |--- scripts                      # Shared scripts
 ```
 
-## Tooling
+## Contributing
 
-### PNPM
+Please read our [contributing guide](.github/CONTRIBUTING.md) **before submitting a pull request**.
+
+### Quick start
+
+If you would like to contribute to Dialtone without having to do any local environment setup, you can use GitHub
+Codespaces. You can initialize a new Codespace by clicking the green "Code" button at the top right of the Dialtone
+GitHub page.
+
+![Creating a codespace](./.github/new_codespace.png)
+
+Please see the [Codespaces docs](./.github/codespaces.md) for more information.
+
+### Local development
+
+#### PNPM
 
 PNPM (Performant NPM) is a package management solution designed to address the challenges posed by
 traditional package managers.
 
 We use PNPM to manage everything related to NPM, **adding, installing, removing and publishing packages**.
 
-#### Do
+You will need to install PNPM locally to contribute to this project. <https://pnpm.io/installation>
 
-Use PNPM to manage packages dependencies
+##### Installation
+
+```bash
+npm install -g pnpm
+```
+
+##### Do
+
+Use PNPM to manage package dependencies
 
 ```bash
 pnpm add eslint --filter dialtone-icons
 ```
 
-#### Don't
+##### Don't
 
 Run package scripts with PNPM, this will not use NX cache and pipelines,
 so you might end up missing dependencies that needed to be built before.
 
 ```bash
-pnpm run --filter packages/dialtone-css build
+pnpm run --filter dialtone-css build
 ```
 
-### NX
+#### NX
 
 Nx is a build system with built-in tooling and advanced CI capabilities.
 It helps you maintain and scale monorepos, both locally and on CI.
@@ -74,7 +195,15 @@ if they need to run before a specific command.
 
 For more information, check [setup a monorepo with PNPM workspaces and NX](https://blog.nrwl.io/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx-bc5d97258a7e#d69f)
 
-#### Do
+##### Installation
+
+It is recommended to install NX globally via:
+
+```bash
+pnpm add --global nx@latest
+```
+
+##### Do
 
 Use NX to run scripts, this will use cache, improve the performance,
 and build any dependency needed before running your command.
@@ -83,7 +212,7 @@ and build any dependency needed before running your command.
 nx run dialtone-css:build
 ```
 
-#### Don't
+##### Don't
 
 Try installing packages with NX, this doesn't work at all, please use PNPM instead.
 
@@ -91,52 +220,25 @@ Try installing packages with NX, this doesn't work at all, please use PNPM inste
 nx add eslint --filter dialtone-icons
 ```
 
-## Quick start
+#### Running the projects
 
-If you would like to contribute to Dialtone without having to do any local environment setup, you can use GitHub
-Codespaces. You can initialize a new Codespace by clicking the green "Code" button at the top right of the Dialtone
-GitHub page.
-
-![Creating a codespace](./.github/new_codespace.png)
-
-Please see the [Codespaces docs](./.github/codespaces.md) for more information.
-
-### Local environment setup
-
-- We use [pnpm](https://pnpm.io) for managing dependencies, so you need to have it installed
-in order to be able to manage the packages. In order to install it, run the following command
-or follow its [installation guide](https://pnpm.io/installation):
-
-```bash
-npm install -g pnpm
-```
-
-Once pnpm is installed, install nx globally to make sure you can run commands such as `nx run build`
-without having to prefix them with `pnpm` or `pnpm exec`:
-
-```bash
-pnpm add --global nx@latest
-```
-
-Then, install the dependencies for all the monorepo packages and apps.
+First, install the dependencies for all the monorepo packages and apps.
 
 ```bash
 pnpm install
 ```
 
-### Running the projects
-
-#### Dialtone
+##### Dialtone documentation site
 
 ```bash
 nx start:dialtone
 ```
 
-This will start the documentation site and watch the library changes, so it is live updated.
+This will start the documentation site and watch the library for changes, it will be live updated with any changes.
 
 Access the local server at `http://localhost:4000`
 
-#### Dialtone Vue 2:
+##### Dialtone Vue 2 storybook
 
 ```bash
 nx start:dialtone-vue2
@@ -144,7 +246,7 @@ nx start:dialtone-vue2
 
 Access the local storybook server for Dialtone Vue 2 via `http://localhost:9010/`
 
-#### Dialtone Vue 3:
+##### Dialtone Vue 3 storybook
 
 ```bash
 nx start:dialtone-vue3
@@ -152,26 +254,61 @@ nx start:dialtone-vue3
 
 Access the local storybook server for Dialtone Vue 3 via `http://localhost:9011/`
 
-## Local development
+#### Common Commands
 
-Use the `--filter` flag to run commands
-for a specific package or app.
-
-### Adding dependencies for individual packages
+##### Production build the root project
 
 ```bash
-pnpm add <dependency> --filter <package/app>
+nx build
+```
+
+##### Run all Vue unit tests
+
+```bash
+nx test
+```
+
+##### Run Vue 2 tests
+
+```bash
+nx test dialtone-vue2
+```
+
+##### Run Vue 3 tests
+
+```bash
+nx test dialtone-vue3
+```
+
+Use the `--filter` flag to run commands for a specific package or app.
+
+##### Adding dependencies for individual packages
+
+```bash
+pnpm add <dependency> --filter <package or app name>
+```
+
+Example:
+
+```bash
+pnpm add eslint --filter dialtone-icons
 ```
 
 To install a local dependency, just add the `--workspace` flag
 
 ```bash
-pnpm add <dependency> --filter <package/app> --workspace
+pnpm add <dependency> --filter <package or app name> --workspace
 ```
 
-### Running commands for individual packages
+Example:
 
-You can run commands like `build`, `test`, `start` from
+```bash
+pnpm add @dialpad/dialtone-tokens --filter dialtone-icons --workspace
+```
+
+##### Running commands for individual packages
+
+You can run commands like `build`, `test`, `start` for individual packages from
 the root of the project with:
 
 ```bash
@@ -210,7 +347,7 @@ This can only be run while on **staging** branch. After running the command, it 
 5. Merge changes from `production` back to `staging`
 
 ```bash
-nx run dialtone:release
+nx run release
 ```
 
 #### Alpha/Beta
@@ -291,12 +428,6 @@ import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
 
 // Default import (Prefered if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
-```
-
-- In case you are not using vue, import the svg's directly as following:
-
-```js
-import IconArrowUp from '@dialpad/dialtone-icons/arrow-up.svg';
 ```
 
 - Importing json files

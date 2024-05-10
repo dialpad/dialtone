@@ -47,12 +47,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
       - name: Filter actions by path
         if: ${{ github.event.inputs.base || github.event_name == 'push' }}
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@v3
         id: filter
         with:
           base: ${{ github.event.inputs.base && github.event.inputs.base || github.ref }}
@@ -98,6 +96,7 @@ jobs:
 
   release:
     needs: [get-branch-name, check-dialpad-member, filter-actions]
+    if: needs.filter-actions.outputs.changes != '[]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -112,6 +111,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -130,9 +132,9 @@ jobs:
             packages/dialtone-tokens/**/gradle-wrapper.properties
 
       - name: Use pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: 9
           run_install: false
 
       - name: Get pnpm store directory
@@ -141,7 +143,7 @@ jobs:
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - name: Setup pnpm cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
           key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"

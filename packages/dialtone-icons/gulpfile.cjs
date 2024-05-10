@@ -16,17 +16,17 @@ const settings = {
 const { src, dest, series } = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
-const fs = require("fs");
+const fs = require('fs');
 const jsonFormat = require('gulp-json-format');
-const {glob} = require("glob");
+const { glob } = require('glob');
 const exec = require('child_process').exec;
-const _ = require('lodash');
 
 //  @@ SVGs
 const path = settings.svgs ? require('path') : null;
 const svgmin = settings.svgs ? require('gulp-svgmin') : null;
 const replace = settings.svgs ? require('gulp-replace') : null;
-const svgList = glob.sync('./src/**/*.svg').sort();
+const svgListIcons = glob.sync('./src/svg/icons/**/*.svg').sort();
+const svgListIllustrations = glob.sync('./src/svg/illustrations/**/*.svg').sort();
 
 //  ================================================================================
 //  @  PATHS
@@ -35,14 +35,21 @@ const svgList = glob.sync('./src/**/*.svg').sort();
 const paths = {
   clean: {
     dist: './dist/**/*',
-    icons: './src/icons/*'
+    icons: './src/icons/*',
+    illustrations: './src/illustrations/*',
+  },
+  illustrations: {
+    input: './src/svg/illustrations/**/*.svg',
+    outputSvg: './dist/svg/illustrations/',
   },
   icons: {
-    input: './src/svg/**/*.svg',
-    outputSvg: './dist/svg/',
+    input: './src/svg/icons/**/*.svg',
+    outputSvg: './dist/svg/icons/',
   },
   exports: {
-    keywords: './src/keywords.json',
+    keywordsIcons: './src/keywords-icons.json',
+    keywordsIllustrations: './src/keywords-illustrations.json',
+    illustrationsList: './dist/illustrations.json',
     iconsList: './dist/icons.json',
     index: './index.js',
   },
@@ -75,6 +82,11 @@ const cleanIcons = () => {
   return cleanUp([paths.clean.icons]);
 };
 
+//  --  Clean out ./src/illustrations
+const cleanIllustrations = () => {
+  return cleanUp([paths.clean.illustrations]);
+};
+
 //  ================================================================================
 //  @@  COMPILE SVGS
 //      Lint and optimize SVG files
@@ -94,8 +106,8 @@ const buildIcons = function (done) {
     .pipe(replace(' fill="#222222"', ' fill="currentColor"'))
     .pipe(replace(/<svg.*(width="[0-9]+|height="[0-9]+)"/g, (match) => {
       return match
-          .replace(/width="[0-9]+"/, '')
-          .replace(/height="[0-9]+"/, '');
+        .replace(/width="[0-9]+"/, '')
+        .replace(/height="[0-9]+"/, '');
     }))
     .pipe(replace('<svg', function (match) {
       const name = path.parse(this.file.path).name;
@@ -122,12 +134,34 @@ const buildIcons = function (done) {
             cleanupIDs: {
               minify: true,
             },
-          }
+          },
         ],
-      }
+      };
     }))
     .pipe(rename({ dirname: '' }))
-  .pipe(dest(paths.icons.outputSvg));
+    .pipe(dest(paths.icons.outputSvg));
+};
+
+const buildIllustrations = function (done) {
+  //  Make sure this feature is activated before running
+  if (!settings.svgs) return done();
+
+  //  Compile icons
+  return src(paths.illustrations.input)
+    .pipe(replace('<svg', function (match) {
+      const name = path.parse(this.file.path).name;
+      const title = name
+        .replace(/\b\S/g, t => t.toUpperCase())
+        .replace(/-+/g, ' ');
+      return `${match}
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+      data-name="${title}"
+      class="d-illustration d-illustration--${name}"`;
+    }))
+    .pipe(rename({ dirname: '' }))
+  .pipe(dest(paths.illustrations.outputSvg));
 };
 
 const transformSVGtoVue = function (done) {
@@ -139,37 +173,70 @@ const transformSVGtoVue = function (done) {
 };
 
 //  ================================================================================
-//  @@ Updates keywords.json file with any newly added icons
-//  Reads previous keywords.json file to extract keywords and add any new icon
+//  @@ Updates keywords-icons.json file with any newly added icons
+//  Reads previous keywords-icons.json file to extract keywords and add any new icon
 //  into the respective category.
 //  ================================================================================
 const updateIconsJSON = function (done) {
-  const rawData = fs.readFileSync(paths.exports.keywords)
+  const rawData = fs.readFileSync(paths.exports.keywordsIcons)
   const keywordsJSON = JSON.parse(rawData).categories;
   const iconsList = [];
 
-  const updatedKeywords = svgList.reduce((acc, file) => {
-        const [category, fileName] = file.split('/').slice(-2);
-        const iconName = fileName.replace('.svg', '');
-        const keywords = keywordsJSON[category][iconName] || [];
-        acc[category] = {...acc[category], [iconName]: keywords}
+  const updatedKeywords = svgListIcons.reduce((acc, file) => {
+    const [category, fileName] = file.split('/').slice(-2);
+    const iconName = fileName.replace('.svg', '');
+    const keywords = keywordsJSON[category][iconName] || [];
+    acc[category] = {...acc[category], [iconName]: keywords}
 
-        iconsList.push(iconName);
+    iconsList.push(iconName);
 
-        return acc;
-      }, {});
+    return acc;
+  }, {});
 
   iconsList.sort();
 
-  fs.writeFileSync(paths.exports.keywords, JSON.stringify({ categories: {...updatedKeywords}}));
+  fs.writeFileSync(paths.exports.keywordsIcons, JSON.stringify({ categories: {...updatedKeywords}}));
   fs.writeFileSync(paths.exports.iconsList, JSON.stringify(iconsList));
 
-  // Copies the icons.json and keywords.json to dist/
-  src([paths.exports.keywords, paths.exports.iconsList])
+  // Copies the icons.json and keywords-icons.json to dist/
+  src([paths.exports.keywordsIcons, paths.exports.iconsList])
   .pipe(dest('./dist/'));
 
   // Prettifies the JSON to improve readability and easier keyword adding.
-  src(paths.exports.keywords)
+  src(paths.exports.keywordsIcons)
+  .pipe(jsonFormat(2))
+  .pipe(dest('./src/'));
+
+  return done();
+};
+
+const updateIllustrationsJSON = function (done) {
+  const rawData = fs.readFileSync(paths.exports.keywordsIllustrations)
+  const keywordsJSON = JSON.parse(rawData).categories;
+  const illustrationsList = [];
+
+  const updatedKeywords = svgListIllustrations.reduce((acc, file) => {
+    const [category, fileName] = file.split('/').slice(-2);
+    const illustrationName = fileName.replace('.svg', '');
+    const keywords = keywordsJSON[category][illustrationName] || [];
+    acc[category] = {...acc[category], [illustrationName]: keywords}
+
+    illustrationsList.push(illustrationName);
+
+    return acc;
+  }, {});
+
+  illustrationsList.sort();
+
+  fs.writeFileSync(paths.exports.keywordsIllustrations, JSON.stringify({ categories: {...updatedKeywords}}));
+  fs.writeFileSync(paths.exports.illustrationsList, JSON.stringify(illustrationsList));
+
+  // Copies the illustrations.json and keywords-illustrations.json to dist/
+  src([paths.exports.keywordsIllustrations, paths.exports.illustrationsList])
+  .pipe(dest('./dist/'));
+
+  // Prettifies the JSON to improve readability and easier keyword adding.
+  src(paths.exports.keywordsIllustrations)
   .pipe(jsonFormat(2))
   .pipe(dest('./src/'));
 
@@ -177,7 +244,8 @@ const updateIconsJSON = function (done) {
 };
 
 const updateExports = function (done) {
-  let exportsList = "export const icons = import.meta.glob('./src/icons/*.vue', { eager: true, import: 'default' });";
+  let exportsListIcons = "export const icons = import.meta.glob('./src/icons/*.vue', { eager: true, import: 'default' });";
+  let exportsListIllustrations = "export const illustrations = import.meta.glob('./src/illustrations/*.vue', { eager: true, import: 'default' });";
 
   // svgList.forEach(file => {
   //   const fileName = file.split('/').slice(-2)[1].split('.')[0];
@@ -188,7 +256,7 @@ const updateExports = function (done) {
   //   exportsList += `export const ${iconName} = () => import('./src/icons/${fileName}.vue');\n`;
   // });
 
-  fs.writeFileSync(paths.exports.index, exportsList);
+  fs.writeFileSync(paths.exports.index, exportsListIcons + '\n' + exportsListIllustrations);
 
   return done();
 };
@@ -202,8 +270,11 @@ const updateExports = function (done) {
 exports.default = series(
   cleanDist,
   cleanIcons,
+  cleanIllustrations,
   buildIcons,
+  buildIllustrations,
   transformSVGtoVue,
   updateIconsJSON,
+  updateIllustrationsJSON,
   updateExports,
 );

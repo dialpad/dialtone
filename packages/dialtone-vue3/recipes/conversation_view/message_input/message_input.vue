@@ -88,47 +88,42 @@
         </dt-tooltip>
         <dt-popover
           v-if="showEmojiPicker"
+          v-model:open="emojiPickerOpened"
           data-qa="dt-message-input-emoji-picker-popover"
-          :open="emojiPickerOpened"
           initial-focus-element="#searchInput"
           padding="none"
-          @opened="(open) => { emojiPickerOpened = open }"
         >
-          <template #anchor>
-            <dt-tooltip
-              :message="emojiTooltipMessage"
-              :offset="[0, -4]"
+          <template #anchor="{ attrs }">
+            <dt-button
+              v-dt-tooltip="emojiTooltipMessage"
+              v-bind="attrs"
+              data-qa="dt-message-input-emoji-picker-btn"
+              size="sm"
+              circle
+              :kind="emojiPickerHovered ? 'default' : 'muted'"
+              importance="clear"
+              :aria-label="emojiButtonAriaLabel"
+              @click="toggleEmojiPicker"
+              @mouseenter="emojiPickerFocus = true"
+              @mouseleave="emojiPickerFocus = false"
+              @focus="emojiPickerFocus = true"
+              @blur="emojiPickerFocus = false"
             >
-              <template #anchor>
-                <dt-button
-                  data-qa="dt-message-input-emoji-picker-btn"
-                  size="sm"
-                  circle
-                  :kind="emojiPickerHovered ? 'default' : 'muted'"
-                  importance="clear"
-                  :aria-label="emojiButtonAriaLabel"
-                  :offset="[0, 0]"
-                  @click="toggleEmojiPicker"
-                  @mouseenter="emojiPickerFocus = true"
-                  @mouseleave="emojiPickerFocus = false"
-                  @focus="emojiPickerFocus = true"
-                  @blur="emojiPickerFocus = false"
-                >
-                  <template #icon>
-                    <dt-icon
-                      :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
-                      size="300"
-                    />
-                  </template>
-                </dt-button>
+              <template #icon>
+                <dt-icon
+                  :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
+                  size="300"
+                />
               </template>
-            </dt-tooltip>
+            </dt-button>
           </template>
-          <template #content>
+          <template
+            #content="{ close }"
+          >
             <dt-emoji-picker
               v-bind="emojiPickerProps"
               @skin-tone="onSkinTone"
-              @selected-emoji="onSelectEmoji"
+              @selected-emoji="(emoji) => { close(); onSelectEmoji(emoji); }"
             />
           </template>
         </dt-popover>
@@ -587,6 +582,13 @@ export default {
      * @type {String|JSON}
      */
     'input',
+
+    /**
+     * Event to sync the value with the parent
+     * @event update:modelValue
+     * @type {String|JSON}
+     */
+    'update:modelValue',
   ],
 
   data () {
@@ -634,6 +636,12 @@ export default {
     modelValue (newValue) {
       this.internalInputValue = newValue;
     },
+
+    emojiPickerOpened (newValue) {
+      if (!newValue) {
+        this.$refs.richTextEditor?.focusEditor();
+      }
+    },
   },
 
   methods: {
@@ -666,7 +674,6 @@ export default {
 
     onSelectEmoji (emoji) {
       if (!emoji) {
-        this.emojiPickerOpened = false;
         return;
       }
 
@@ -677,7 +684,6 @@ export default {
           code: emoji.shortname,
         },
       });
-      this.emojiPickerOpened = false;
       this.$emit('selected-emoji', emoji);
     },
 
@@ -717,6 +723,7 @@ export default {
 
     onInput (event) {
       this.$emit('input', event);
+      this.$emit('update:modelValue', event);
     },
   },
 };

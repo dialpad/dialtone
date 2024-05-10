@@ -2,11 +2,21 @@
   "name": "dialtone-icons",
   "targets": {
     "build": {
-      "executor": "nx:run-script",
+      "executor": "nx:run-commands",
       "options": {
-        "script": "build"
+        "cwd": "{projectRoot}",
+        "commands": [
+          {
+            "command": "gulp"
+          },
+          {
+            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2"
+          }
+        ],
+        "parallel": false
       },
-      "inputs": ["{projectRoot}/src/**/*", "{projectRoot}/transformSVGtoVue.cjs", "{projectRoot}/gulpfile.cjs"]
+      "inputs": ["{projectRoot}/src/**/*", "{projectRoot}/transformSVGtoVue.cjs", "{projectRoot}/gulpfile.cjs"],
+      "outputs": ["{projectRoot}/src/icons", "{projectRoot}/src/illustrations", "{projectRoot}/dist", "{projectRoot}/vue2/dist", "{projectRoot}/vue3/dist"]
     },
     "publish": {
       "executor": "nx:run-commands",
@@ -23,7 +33,7 @@
     "release-local": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/dialtone-icons/release-local.config.cjs"
+        "command": "pnpm semantic-release-plus --skip-tag --extends ./packages/dialtone-icons/release-local.config.cjs"
       }
     }
   }

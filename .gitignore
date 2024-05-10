@@ -31,6 +31,7 @@ dist
 # Dialtone icons #
 packages/dialtone-icons/index.js
 packages/dialtone-icons/src/icons
+packages/dialtone-icons/src/illustrations
 
 # Dialtone tokens #
 packages/dialtone-tokens/token_transformer

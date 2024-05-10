@@ -117,7 +117,7 @@
 </template>
 
 <script setup>
-import { categories } from '@dialpad/dialtone-icons/keywords.json';
+import { categories } from '@dialpad/dialtone-icons/keywords-icons.json';
 import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import IconPopover from '../baseComponents/IconPopover.vue';
 import IconPopoverContent from '../baseComponents/IconPopoverContent.vue';

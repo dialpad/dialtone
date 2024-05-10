@@ -438,6 +438,7 @@ describe('DtRecipeEditor tests', () => {
       _mountWrapper();
       await wrapper.vm.$nextTick();
       _setChildWrappers();
+      wrapper.vm.$refs.richTextEditor?.editor.commands.selectAll();
     });
 
     describe('When bold font button is clicked', () => {

@@ -430,10 +430,10 @@ export default {
       //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null
       if (this.isTouchDevice && !e.relatedTarget) return;
 
-      if (this.delay) {
-        this.inTimer = setTimeout(function (event) {
-          this.triggerShow(event);
-        }.bind(this, e), TOOLTIP_DELAY_MS);
+      if (this.delay && this.inTimer === null) {
+        this.inTimer = setTimeout(() => {
+          this.triggerShow(e);
+        }, TOOLTIP_DELAY_MS);
       } else {
         this.triggerShow(e);
       }
@@ -463,6 +463,7 @@ export default {
       if (e.type === 'keydown' && e.code !== 'Escape') return;
 
       clearTimeout(this.inTimer);
+      this.inTimer = null;
       this.triggerHide();
     },
 
