@@ -4,6 +4,7 @@ import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion';
 import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
+import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
 
 /*
   Controls
@@ -77,6 +78,12 @@ export const argTypesData = {
     },
   },
 
+  onSelectedCommand: {
+    table: {
+      disable: true,
+    },
+  },
+
   onCancel: {
     table: {
       disable: true,
@@ -125,12 +132,14 @@ export const argsData = {
   },
   mentionSuggestion,
   channelSuggestion,
+  slashCommandSuggestion,
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),
   onInput: action('input'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
+  onSelectedCommand: action('selected-command'),
   onAddMedia: action('add-media'),
   onPasteMedia: action('paste-media'),
   onNoticeClose: action('notice-close'),
