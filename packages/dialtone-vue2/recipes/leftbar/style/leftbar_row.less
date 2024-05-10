@@ -1,3 +1,4 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 .dt-leftbar-row {
   //  ============================================================================
   //  $   CSS CUSTOM PROPERTIES
@@ -27,14 +28,14 @@
   //  $   BASE STYLE
   //  ----------------------------------------------------------------------------
   position: relative;
-  opacity: var(--leftbar-row-opacity);
   display: flex;
   background-color: var(--dt-theme-sidebar-row-color-background);
   border-radius: var(--leftbar-row-radius);
+  cursor: pointer;
+  opacity: var(--leftbar-row-opacity);
+  transition-timing-function: var(--ttf-out-quint);
   transition-duration: var(--td200);
   transition-property: background-color, border, box-shadow;
-  transition-timing-function: var(--ttf-out-quint);
-  cursor: pointer;
 
   //  ============================================================================
   //  $   VARIANTS
@@ -49,12 +50,19 @@
     --leftbar-row-unread-badge-display: none;
 
     &:deep(.dt-leftbar-row__action) {
-      display: inline-flex;
+      display: initial;
     }
 
     &:deep(.dt-leftbar-row__action-button) {
       opacity: 1;
     }
+  }
+
+  .dt-leftbar-row__action-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: var(--dt-size-600);
   }
 
   &:hover, &:focus-within {
@@ -101,26 +109,26 @@
   &__is-typing {
     --is-typing-size-shape: var(--dt-size-550);
 
-    height: var(--is-typing-size-shape);
-    width: var(--is-typing-size-shape);
     position: absolute;
     display: flex;
+    gap: var(--dt-space-200);
     align-items: center;
     justify-content: center;
-    gap: 2px;
+    width: var(--is-typing-size-shape);
+    height: var(--is-typing-size-shape);
     border-radius: var(--dt-size-radius-pill);
     opacity: 0.75;
   }
 
   &__is-typing span {
-    transition: all 500ms ease;
-    background: var(--dt-color-surface-strong);
-    height: 4px;
-    width: 4px;
     display: inline-block;
+    width: var(--dt-size-300);
+    height: var(--dt-size-300);
     padding: 0;
-    opacity: 0.3;
+    background: var(--dt-color-surface-strong);
     border-radius: var(--dt-size-radius-pill);
+    opacity: var(--dt-opacity-500);
+    transition: all 500ms ease;
     animation: wave 1.5s ease infinite;
   }
 
@@ -150,20 +158,20 @@
   &__primary {
     // contains extra style properties to support both <button> and <a>
     display: flex;
-    align-items: center;
     flex: 1;
+    align-items: center;
     width: 100%;
-    text-align: left;
-    background-color: var(--leftbar-row-color-background);
+    margin: var(--dt-space-0);
+    padding: var(--dt-space-0);
     color: var(--leftbar-row-color-foreground);
-    text-decoration: none;
-    appearance: none;
     font-size: inherit;
     line-height: inherit;
-    margin: 0;
+    text-align: left;
+    text-decoration: none;
+    background-color: var(--leftbar-row-color-background);
     border: 0;
-    padding: 0;
     border-radius: var(--leftbar-row-radius);
+    appearance: none;
 
     &:active {
       --leftbar-row-color-background: var(--dt-theme-sidebar-row-color-background-active);
@@ -175,9 +183,13 @@
   }
 
   &__action-button {
-    opacity: 0;
     width: var(--leftbar-row-action-width);
     height: var(--leftbar-row-action-height);
+    opacity: 0;
+
+    &--expand {
+      opacity: 1;
+    }
   }
 
   //  ============================================================================
@@ -189,15 +201,15 @@
   //  <div class="dt-leftbar-row__omega">...</div>
 
   &__alpha {
-    color: var(--leftbar-row-alpha-color-foreground);
     display: flex;
-    box-sizing: border-box;
-    justify-content: center;
     align-items: center;
-    padding-left: var(--dt-space-400);
-    padding-right: var(--dt-space-400);
+    justify-content: center;
+    box-sizing: border-box;
     width: var(--leftbar-row-alpha-width);
     height: var(--leftbar-row-alpha-height);
+    padding-right: var(--dt-space-400);
+    padding-left: var(--dt-space-400);
+    color: var(--leftbar-row-alpha-color-foreground);
     border-radius: var(--leftbar-row-radius) 0 0 var(--leftbar-row-radius);
   }
 
@@ -208,15 +220,15 @@
 
   &__omega {
     position: absolute;
-    display: flex;
-    right: var(--leftbar-row-action-position-right);
     top: var(--leftbar-row-action-position-bottom);
-    transform: translateY(calc(var(--leftbar-row-action-position-bottom) * -1));
+    right: var(--leftbar-row-action-position-right);
+    display: flex;
     gap: var(--dt-space-300);
-    justify-content: flex-end;
     align-items: center;
+    justify-content: flex-end;
     box-sizing: border-box;
     border-radius: var(--leftbar-row-radius);
+    transform: translateY(calc(var(--leftbar-row-action-position-bottom) * -1));
   }
 
   &__unread-badge {
@@ -224,8 +236,8 @@
   }
 
   &__active-voice {
-    color: var(--dt-color-purple-400);
     display: inline-flex;
+    color: var(--dt-color-purple-400);
     .opacity-pulsate();
   }
 
@@ -233,15 +245,15 @@
     padding-top: var(--dt-space-200);
     padding-right: var(--dt-space-300);
     color: var(--dt-color-foreground-tertiary);
+    font-weight: var(--dt-font-weight-medium);
     font-size: var(--dt-font-size-100);
     line-height: var(--dt-font-line-height-400);
-    font-weight: var(--dt-font-weight-medium);
   }
 
   &--contact-centers {
+    gap: var(--dt-space-300);
     min-width: 0;
     padding-right: var(--dt-space-625);
-    gap: var(--dt-space-300);
 
     &:deep(.dt-leftbar-row__link) {
       display: flex;
@@ -252,8 +264,8 @@
     &:deep(.dt-leftbar-row__label){
       display: flex;
       flex: 1;
-      min-width: 0;
-      flex-basis: 100%
+      flex-basis: var(--dt-size-100-percent);
+      min-width: var(--dt-size-0);
     }
   }
 
@@ -271,62 +283,60 @@
   //
   &:deep(&__description) {
     display: block;
+    overflow: hidden;
+    color: var(--leftbar-row-description-color-foreground);
     font-weight: var(--leftbar-row-description-font-weight);
     font-size: var(--leftbar-row-description-font-size);
     line-height: var(--leftbar-row-description-line-height);
-    color: var(--leftbar-row-description-color-foreground);
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &:deep(&__status) {
     display: block;
+    padding-bottom: var(--dt-space-100);
+    overflow: hidden;
     color: var(--leftbar-row-status-color-foreground);
     font-size: var(--leftbar-row-status-font-size);
     line-height: var(--leftbar-row-status-line-height);
-    padding-bottom: var(--dt-space-100);
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
 
-  &:deep(&__meta-context ~ &__meta-custom:not(:empty):before) {
-    content: ' • ';
+  &:deep(&__meta-context ~ &__meta-custom:not(:empty)::before) {
     color: var(--dt-theme-sidebar-status-color-foreground);
+    content: ' • ';
   }
 
   &__icon-cc {
-    border-radius: var(--dt-size-200);
     width: calc(var(--dt-size-300) * 3.5);
     height: calc(var(--dt-size-300) * 3.5);
+    border-radius: var(--dt-size-200);
   }
 }
 
 .opacity-pulsate {
   -webkit-animation-name: opacity-pulsate;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-fill-mode: both;
-
   -moz-animation-name: opacity-pulsate;
-  -moz-animation-duration: 1s;
-  -moz-animation-iteration-count: infinite;
-  -moz-animation-fill-mode: both;
-
   animation-name: opacity-pulsate;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
   animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
   animation-fill-mode: both;
 }
 
-@-webkit-keyframes opacity-pulsate {
+@keyframes opacity-pulsate {
   0%, 100%   { opacity: 0.2; }
   50%  { opacity: 1; }
 }
 
-@-moz-keyframes opacity-pulsate {
+@keyframes opacity-pulsate {
   0%, 100%   {opacity: 0.2; }
   50%  { opacity: 1; }
 }
@@ -340,8 +350,9 @@
   0%, 50%, 100% {
     transform: translate(0, 0);
   }
+
   10% {
-    transform: translate(0, -5px);
-    opacity: 90%;
+    transform: translate(0, -.5rem);
+    opacity: 0.9;
   }
 }

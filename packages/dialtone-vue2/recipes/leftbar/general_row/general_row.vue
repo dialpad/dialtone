@@ -49,79 +49,86 @@
       </div>
     </a>
     <div
-      v-if="hasActions"
+      v-if="hasActions || $slots.secondaryLabel"
       class="dt-leftbar-row__omega"
     >
-      <dt-tooltip
+      <slot name="secondaryLabel" />
+      <div
         v-if="dndText"
-        placement="top"
-        :message="dndTextTooltip"
+        ref="dt-leftbar-row-dnd"
+        v-dt-tooltip="dndTextTooltip"
+        class="dt-leftbar-row__dnd"
+        data-qa="dt-leftbar-row-dnd"
       >
-        <template #anchor>
-          <div
-            ref="dt-leftbar-row-dnd"
-            class="dt-leftbar-row__dnd"
-            data-qa="dt-leftbar-row-dnd"
-          >
-            {{ dndText }}
-          </div>
-        </template>
-      </dt-tooltip>
-      <div
-        v-if="activeVoiceChat"
-        class="dt-leftbar-row__active-voice"
-      >
-        <dt-icon
-          size="300"
-          name="waveform"
-        />
+        {{ dndText }}
       </div>
-      <dt-tooltip
-        v-else-if="showUnreadCount"
-        :message="unreadCountTooltip"
-        placement="top"
-      >
-        <template #anchor>
-          <dt-badge
-            kind="count"
-            type="bulletin"
-            data-qa="dt-leftbar-row-unread-badge"
-            class="dt-leftbar-row__unread-badge"
-          >
-            {{ unreadCount }}
-          </dt-badge>
-        </template>
-      </dt-tooltip>
-      <div
-        v-if="hasCallButton"
-        class="dt-leftbar-row__action"
-        data-qa="dt-leftbar-row-action"
-      >
-        <dt-tooltip
-          :message="callButtonTooltip"
-          placement="top"
+      <div class="dt-leftbar-row__action-container">
+        <div
+          v-if="activeVoiceChat"
+          class="dt-leftbar-row__active-voice"
         >
-          <template #anchor>
-            <dt-button
-              class="dt-leftbar-row__action-button"
-              data-qa="dt-leftbar-row-action-call-button"
-              :circle="true"
-              size="xs"
-              kind="inverted"
-              :aria-label="callButtonTooltip"
-              @focus="actionFocused = true"
-              @blur="actionFocused = false"
-              @click.stop="$emit('call', $event)"
-            >
-              <template #icon>
-                <dt-icon
-                  name="phone"
-                  size="200"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-tooltip>
+          <dt-icon
+            size="300"
+            name="waveform"
+          />
+        </div>
+
+        <dt-badge
+          v-else-if="showUnreadCount"
+          v-dt-tooltip="unreadCountTooltip"
+          kind="count"
+          type="bulletin"
+          data-qa="dt-leftbar-row-unread-badge"
+          class="dt-leftbar-row__unread-badge"
+        >
+          {{ unreadCount }}
+        </dt-badge>
+        <div
+          v-if="hasCallButton"
+          class="dt-leftbar-row__action"
+          data-qa="dt-leftbar-row-action"
+        >
+          <dt-button
+            v-if="getIcon === 'ai contact center'"
+            v-dt-tooltip="callButtonTooltip"
+            class="dt-leftbar-row__action-button dt-leftbar-row__action-button--expand"
+            data-qa="dt-leftbar-row-action-expand-button"
+            :circle="true"
+            size="xs"
+            importance="clear"
+            :aria-label="callButtonTooltip"
+            @focus="actionFocused = true"
+            @blur="actionFocused = false"
+            @click.stop="$emit('expand', $event)"
+          >
+            <template #icon>
+              <dt-icon
+                name="chevron-down"
+                size="200"
+              />
+            </template>
+          </dt-button>
+          <dt-button
+            v-else
+            v-dt-tooltip="callButtonTooltip"
+            class="dt-leftbar-row__action-button"
+            data-qa="dt-leftbar-row-action-call-button"
+            :circle="true"
+            size="xs"
+            kind="inverted"
+            :aria-label="callButtonTooltip"
+            @focus="actionFocused = true"
+            @blur="actionFocused = false"
+            @click.stop="$emit('call', $event)"
+          >
+            <template #icon>
+              <dt-icon
+                name="phone"
+                size="200"
+              />
+            </template>
+          </dt-button>
+        </div>
       </div>
     </div>
   </div>
@@ -138,7 +145,6 @@ import {
 import { DtBadge } from '@/components/badge';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
-import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 import { safeConcatStrings } from '@/common/utils';
@@ -151,7 +157,6 @@ export default {
     DtBadge,
     DtIcon,
     DtButton,
-    DtTooltip,
     DtRecipeLeftbarGeneralRowIcon,
   },
 
