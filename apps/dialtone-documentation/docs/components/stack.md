@@ -21,8 +21,18 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
     </div>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-stack d-stack--gap-500">
+  <div class="d-bgc-magenta-100">Stack item 1</div>
+  <div class="d-bgc-magenta-100">Stack item 2</div>
+  <div class="d-bgc-magenta-100">Stack item 3</div>
+</div>
+'
+vueCode='
+<dt-stack
+  gap="500"
+>
   <div class="d-bgc-magenta-100">
     Stack item 1
   </div>
@@ -32,8 +42,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
   <div class="d-bgc-magenta-100">
     Stack item 3
   </div>
-</div>
-```
+</dt-stack>
+'
+showHtmlWarning />
 
 ## Examples
 
@@ -60,19 +71,42 @@ Row: flow horizontally
     </div>
 </code-well-header>
 
-```html
-<div class="d-stack d-stack--row d-stack--sm--column d-stack--lg--column-reverse d-stack--gap-100">
-  <div class="d-bgc-magenta-100">
-    Stack item 1
-  </div>
-  <div class="d-bgc-magenta-100">
-    Stack item 2
-  </div>
-  <div class="d-bgc-magenta-100">
-    Stack item 3
-  </div>
+<code-example-tabs
+htmlCode='
+<div class="d-stack d-stack--row d-stack--gap-500">
+  <div class="d-bgc-magenta-100">Stack item 1</div>
+  <div class="d-bgc-magenta-100">Stack item 2</div>
+  <div class="d-bgc-magenta-100">Stack item 3</div>
 </div>
-```
+'
+vueCode='
+<dt-stack
+  gap="500"
+  direction="row"
+>
+<span class="d-badge">Co-host</span>
+<span class="d-badge">Customer</span>
+<span class="d-badge">
+  <span class="d-badge__icon-left">
+    <dt-icon
+      name="lock"
+      size="200"
+    />
+  </span>
+  <span class="d-badge__label">Locked</span>
+</span>
+<span class="d-badge">
+  <span class="d-badge__icon-left">
+    <dt-icon
+      name="message"
+      size="200"
+    />
+  </span>
+  <span class="d-badge__label">Chat log</span>
+</span>
+</dt-stack>
+'
+showHtmlWarning />
 
 ### Responsive
 
@@ -92,8 +126,18 @@ Stacks column at small screen size and column reverse at large screen
     </div>
 </code-well-header>
 
-```html
-<div class="d-stack d-stack--row d-stack--sm--column d-stack--lg--column-reverse d-stack--gap-100">
+<code-example-tabs
+htmlCode='
+<div class="d-stack d-stack--row d-stack--sm--column d-stack--lg--column-reverse d-stack--gap-0">
+  <div class="d-bgc-magenta-100">Stack item 1</div>
+  <div class="d-bgc-magenta-100">Stack item 2</div>
+  <div class="d-bgc-magenta-100">Stack item 3</div>
+</div>
+'
+vueCode='
+<dt-stack
+  :direction="{ `default`: `row`, `sm`: `column`, `lg`: `column-reverse` }"
+>
   <div class="d-bgc-magenta-100">
     Stack item 1
   </div>
@@ -103,8 +147,9 @@ Stacks column at small screen size and column reverse at large screen
   <div class="d-bgc-magenta-100">
     Stack item 3
   </div>
-</div>
-```
+</dt-stack>
+'
+showHtmlWarning />
 
 Stacks row with gap 300 and stacks in row reverse the second element with gap 600
 
@@ -129,18 +174,39 @@ Stacks row with gap 300 and stacks in row reverse the second element with gap 60
     </section>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <section class="d-stack d-stack--row d-stack--gap-300">
-  <div>Stack item 1</div>
+  <div class="d-bgc-magenta-100">Stack item 1</div>
   <div>
-    <div>Stack item 2</div>
-    <div class="d-stack d-stack--row-reverse d-stack--gap-600">
-      <div>Stack item 3</div>
-      <div>Stack item 4</div>
+    <div class="d-bgc-magenta-100">Stack item 2</div>
+    <div class="d-stack d-stack--row-reverse d-stack--gap-500">
+      <div class="d-bgc-magenta-200">Stack item 3</div>
+      <div class="d-bgc-magenta-200">Stack item 4</div>
     </div>
   </div>
 </section>
-```
+'
+vueCode='
+<dt-stack
+  direction="row"
+  as="section"
+  gap="300"
+>
+  <div class="d-bgc-magenta-100">Stack item 1</div>
+  <div>
+    <div class="d-bgc-magenta-100">Stack item 2</div>
+    <dt-stack
+      direction="row-reverse"
+      gap="500"
+    >
+      <div class="d-bgc-magenta-200">Stack item 3</div>
+      <div class="d-bgc-magenta-200">Stack item 4</div>
+    </dt-stack>
+  </div>
+</dt-stack>
+'
+showHtmlWarning />
 
 ## Vue API
 
