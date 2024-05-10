@@ -273,6 +273,14 @@ export default {
      * @type {FocusEvent}
      */
     'focus',
+
+    /**
+     * Fires when a slash command is selected
+     *
+     * @event selected-command
+     * @type {String}
+     */
+    'selected-command',
   ],
 
   data () {
