@@ -99,7 +99,7 @@ storybook: https://dialtone.dialpad.com/vue/vue3/?path=/story/components-scrolle
 
 <code-example-tabs
 htmlCode='
-<div data-v-f28a4c1a="" class="vue-recycle-scroller ready direction-vertical scroller" data-qa="dt-scroller" tabindex="0" style="width: 300px; height: 200px;">
+<div data-v-f28a4c1a="" class="vue-recycle-scroller ready direction-vertical scroller" tabindex="0" style="width: 300px; height: 200px;">
   <div class="vue-recycle-scroller__item-wrapper" style="min-height: 1600px;">
     <div class="vue-recycle-scroller__item-view" style="transform: translateY(0px) translateX(0px);"><div data-v-f28a4c1a="" class="user">User 0</div></div>
     <div class="vue-recycle-scroller__item-view" style="transform: translateY(32px) translateX(0px);"><div data-v-f28a4c1a="" class="user">User 1</div></div>
@@ -181,7 +181,7 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div data-v-01cb3cee="" class="vue-recycle-scroller ready direction-vertical scroller" data-qa="dt-scroller" tabindex="0" style="width: 500px; height: 300px;">
+<div data-v-01cb3cee="" class="vue-recycle-scroller ready direction-vertical scroller" tabindex="0" style="width: 500px; height: 300px;">
   <div class="vue-recycle-scroller__item-wrapper" style="min-height: 3263px;">
     <div class="vue-recycle-scroller__item-view" style="transform: translateY(0px) translateX(0px);">
       <div data-index="0">
