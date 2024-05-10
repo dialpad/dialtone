@@ -16,11 +16,10 @@ const settings = {
 const { src, dest, series } = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
-const fs = require("fs");
+const fs = require('fs');
 const jsonFormat = require('gulp-json-format');
-const {glob} = require("glob");
+const { glob } = require('glob');
 const exec = require('child_process').exec;
-const _ = require('lodash');
 
 //  @@ SVGs
 const path = settings.svgs ? require('path') : null;
@@ -107,8 +106,8 @@ const buildIcons = function (done) {
     .pipe(replace(' fill="#222222"', ' fill="currentColor"'))
     .pipe(replace(/<svg.*(width="[0-9]+|height="[0-9]+)"/g, (match) => {
       return match
-          .replace(/width="[0-9]+"/, '')
-          .replace(/height="[0-9]+"/, '');
+        .replace(/width="[0-9]+"/, '')
+        .replace(/height="[0-9]+"/, '');
     }))
     .pipe(replace('<svg', function (match) {
       const name = path.parse(this.file.path).name;
@@ -135,12 +134,34 @@ const buildIcons = function (done) {
             cleanupIDs: {
               minify: true,
             },
-          }
+          },
         ],
-      }
+      };
     }))
     .pipe(rename({ dirname: '' }))
-  .pipe(dest(paths.icons.outputSvg));
+    .pipe(dest(paths.icons.outputSvg));
+};
+
+const buildIllustrations = function (done) {
+  //  Make sure this feature is activated before running
+  if (!settings.svgs) return done();
+
+  //  Compile icons
+  return src(paths.illustrations.input)
+    .pipe(replace('<svg', function (match) {
+      const name = path.parse(this.file.path).name;
+      const title = name
+        .replace(/\b\S/g, t => t.toUpperCase())
+        .replace(/-+/g, ' ');
+      return `${match}
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+      data-name="${title}"
+      class="d-illustration d-illustration--${name}"`;
+    }))
+    .pipe(rename({ dirname: '' }))
+  .pipe(dest(paths.illustrations.outputSvg));
 };
 
 const buildIllustrations = function (done) {

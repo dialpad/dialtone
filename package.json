@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.34.0",
+  "version": "9.34.3",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "test:all": "nx run-many --target=test",
@@ -13,7 +13,7 @@
     "release": "./scripts/release.sh",
     "release:alpha": "./scripts/release.sh alpha",
     "release:beta": "./scripts/release.sh beta",
-    "test:vitest": "vitest run --test-timeout=10000"
+    "test:vue": "vitest run --test-timeout=10000"
   },
   "pnpm": {
     "peerDependencyRules": {

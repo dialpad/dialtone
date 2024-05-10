@@ -1,3 +1,10 @@
+## [3.123.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.1...dialtone-vue3/v3.123.2) (2024-05-08)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1717 fix link overflow ([#302](https://github.com/dialpad/dialtone/issues/302)) ([999ab18](https://github.com/dialpad/dialtone/commit/999ab183005dc04258024dfc17068982e132b971))
+
 # [3.123.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.122.0...dialtone-vue3/v3.123.0) (2024-04-30)
 
 

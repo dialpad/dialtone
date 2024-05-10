@@ -1,3 +1,10 @@
+## [2.130.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.130.1...dialtone-vue2/v2.130.2) (2024-05-08)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1717 fix link overflow ([#302](https://github.com/dialpad/dialtone/issues/302)) ([999ab18](https://github.com/dialpad/dialtone/commit/999ab183005dc04258024dfc17068982e132b971))
+
 # [2.130.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.129.0...dialtone-vue2/v2.130.0) (2024-04-30)
 
 

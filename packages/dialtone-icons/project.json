@@ -16,7 +16,7 @@
         "parallel": false
       },
       "inputs": ["{projectRoot}/src/**/*", "{projectRoot}/transformSVGtoVue.cjs", "{projectRoot}/gulpfile.cjs"],
-      "outputs": ["{projectRoot}/src/icons", "{projectRoot}/dist", "{projectRoot}/vue2/dist", "{projectRoot}/vue3/dist"]
+      "outputs": ["{projectRoot}/src/icons", "{projectRoot}/src/illustrations", "{projectRoot}/dist", "{projectRoot}/vue2/dist", "{projectRoot}/vue3/dist"]
     },
     "publish": {
       "executor": "nx:run-commands",

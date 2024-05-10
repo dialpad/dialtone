@@ -1,3 +1,15 @@
+## [8.31.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.0...dialtone-css/v8.31.1) (2024-05-09)
+
+
+### Bug Fixes
+
+* NO-JIRA define "Segoe UI Adjusted" font ([#306](https://github.com/dialpad/dialtone/issues/306)) ([f860dba](https://github.com/dialpad/dialtone/commit/f860dba7437350e4950e12754c70d6d2d60ff40a))
+
+
+### Documentation
+
+* NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
 # [8.31.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.30.0...dialtone-css/v8.31.0) (2024-04-26)
 
 
