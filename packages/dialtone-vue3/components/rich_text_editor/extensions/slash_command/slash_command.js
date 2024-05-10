@@ -1,5 +1,5 @@
 import Mention from '@tiptap/extension-mention';
-import { VueNodeViewRenderer } from '@tiptap/vue-2';
+import { VueNodeViewRenderer } from '@tiptap/vue-3';
 import { PluginKey } from '@tiptap/pm/state';
 
 // Slash Command Mention component

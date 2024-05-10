@@ -1,4 +1,4 @@
-import { VueRenderer } from '@tiptap/vue-2';
+import { VueRenderer } from '@tiptap/vue-3';
 import tippy from 'tippy.js';
 
 import SuggestionList from '../suggestion/SuggestionList.vue';
