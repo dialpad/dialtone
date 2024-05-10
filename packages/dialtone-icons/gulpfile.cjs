@@ -164,28 +164,6 @@ const buildIllustrations = function (done) {
   .pipe(dest(paths.illustrations.outputSvg));
 };
 
-const buildIllustrations = function (done) {
-  //  Make sure this feature is activated before running
-  if (!settings.svgs) return done();
-
-  //  Compile icons
-  return src(paths.illustrations.input)
-    .pipe(replace('<svg', function (match) {
-      const name = path.parse(this.file.path).name;
-      const title = name
-        .replace(/\b\S/g, t => t.toUpperCase())
-        .replace(/-+/g, ' ');
-      return `${match}
-      aria-hidden="true"
-      focusable="false"
-      role="img"
-      data-name="${title}"
-      class="d-illustration d-illustration--${name}"`;
-    }))
-    .pipe(rename({ dirname: '' }))
-  .pipe(dest(paths.illustrations.outputSvg));
-};
-
 const transformSVGtoVue = function (done) {
   exec('node ./transformSVGtoVue.cjs', (err, stdout, stderr) => {
     console.error(stderr);
