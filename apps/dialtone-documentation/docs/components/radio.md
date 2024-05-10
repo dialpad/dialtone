@@ -90,7 +90,7 @@ htmlCode='
     <div class="d-radio-group">
       <div class="d-radio__input"><input name="Value" type="radio" class="d-radio" value="Value" /></div>
       <div class="d-radio__copy d-radio__label">
-        <div class="">Radio label</div>
+        <div>Radio label</div>
       </div>
     </div>
   </label>
@@ -100,7 +100,7 @@ htmlCode='
     <div class="d-radio-group d-radio-group--disabled">
       <div class="d-radio__input"><input name="Disabled" disabled="disabled" type="radio" class="d-radio" value="Disabled" /></div>
       <div class="d-radio__copy d-radio__label">
-        <div class="">Radio label thats been disabled</div>
+        <div>Radio label thats been disabled</div>
       </div>
     </div>
   </label>
@@ -110,7 +110,7 @@ htmlCode='
     <div class="d-radio-group d-radio-group--disabled">
       <div class="d-radio__input"><input name="CheckedDisabled" disabled="disabled" type="radio" class="d-radio" value="Checked" /></div>
       <div class="d-radio__copy d-radio__label">
-        <div class="">Radio label thats been disabled &amp; checked</div>
+        <div>Radio label thats been disabled &amp; checked</div>
       </div>
     </div>
   </label>
@@ -156,7 +156,7 @@ htmlCode='
     <div class="d-radio-group">
       <div class="d-radio__input"><input name="ValueWDesc" type="radio" class="d-radio" value="Value" /></div>
       <div class="d-radio__copy d-radio__label">
-        <div class="">To voicemail</div>
+        <div>To voicemail</div>
         <div class="d-description">So they can hear your voice</div>
       </div>
     </div>
@@ -166,9 +166,9 @@ htmlCode='
   <label>
     <div class="d-radio-group d-radio-group--disabled">
       <div class="d-radio__input"><input name="DisabledWDesc" type="radio" class="d-radio" value="Disabled" disabled="disabled" /></div>
-      <div data-qa="radio-label-description-container" class="d-radio__copy d-radio__label">
-        <div data-qa="radio-label" class="">Disabled</div>
-        <div data-qa="radio-description" class="d-description">With Description</div>
+      <div class="d-radio__copy d-radio__label">
+        <div>Disabled</div>
+        <div class="d-description">With Description</div>
       </div>
     </div>
   </label>
@@ -221,11 +221,10 @@ htmlCode='
   <label>
     <div class="d-radio-group">
       <div class="d-radio__input"><input name="ValidationMessageWarning" type="radio" class="d-radio d-radio--warning" value="Validation Message Warning" /></div>
-      <div data-qa="radio-label-description-container" class="d-radio__copy d-radio__label">
-        <div data-qa="radio-label" class="">To voicemail</div>
-        <!---->
-        <div data-qa="dt-radio-validation-messages" class="base-input__messages d-validation-message__container">
-          <div role="status" aria-live="polite" data-qa="validation-message" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning"><p>So they can hear your voice</p></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>To voicemail</div>
+        <div class="base-input__messages d-validation-message__container">
+          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning"><p>So they can hear your voice</p></div>
         </div>
       </div>
     </div>
@@ -235,11 +234,10 @@ htmlCode='
   <label>
     <div class="d-radio-group">
       <div class="d-radio__input"><input name="ValidationMessageError" type="radio" class="d-radio d-radio--error" value="Validation Message Error" /></div>
-      <div data-qa="radio-label-description-container" class="d-radio__copy d-radio__label">
-        <div data-qa="radio-label" class="">To a message (no voicemail)</div>
-        <!---->
-        <div data-qa="dt-radio-validation-messages" class="base-input__messages d-validation-message__container">
-          <div role="status" aria-live="polite" data-qa="validation-message" class="base-input__message d-validation-message base-input__message--error d-validation-message--error">
+      <div class="d-radio__copy d-radio__label">
+        <div>To a message (no voicemail)</div>
+        <div class="base-input__messages d-validation-message__container">
+          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error">
             <p>Because they probably dont need to leave a message anyway.</p>
           </div>
         </div>
@@ -251,11 +249,10 @@ htmlCode='
   <label>
     <div class="d-radio-group">
       <div class="d-radio__input"><input name="ValidationMessageSuccess" type="radio" class="d-radio d-radio--success" value="Validation Message Success" /></div>
-      <div data-qa="radio-label-description-container" class="d-radio__copy d-radio__label">
-        <div data-qa="radio-label" class="">To a team member or room phone</div>
-        <!---->
-        <div data-qa="dt-radio-validation-messages" class="base-input__messages d-validation-message__container">
-          <div role="status" aria-live="polite" data-qa="validation-message" class="base-input__message d-validation-message base-input__message--success d-validation-message--success">
+      <div class="d-radio__copy d-radio__label">
+        <div>To a team member or room phone</div>
+        <div class="base-input__messages d-validation-message__container">
+          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success">
             <p>Because someone else might be able to talk to them.</p>
           </div>
         </div>
