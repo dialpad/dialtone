@@ -369,3 +369,118 @@ nx run dialtone:release:alpha
 ```bash
 nx run dialtone:release:beta
 ```
+
+## Usage
+
+### Install it via NPM:
+
+#### Vue 3
+
+```shell
+npm install @dialpad/dialtone@next @tiptap/vue-3
+```
+
+#### Vue 2
+
+```shell
+npm install @dialpad/dialtone@next @linusborg/vue-simple-portal @tiptap/vue-2
+```
+
+### Import packages:
+
+#### Dialtone CSS
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/css";
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/css";
+```
+
+#### Dialtone eslint-plugin
+
+```js
+import dialtone from "@dialpad/dialtone/eslint-plugin"
+```
+
+#### Dialtone icons
+
+- Importing for Vue 2:
+
+```js
+// Named import
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue2'; 
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
+```
+
+- Importing for Vue 3:
+
+```js
+// Named import
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3'; 
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
+```
+
+- Importing json files
+
+```js
+import keywords from '@dialpad/dialtone-icons/keywords.json';
+import iconsList from '@dialpad/dialtone-icons/icons.json';
+```
+
+#### Dialtone Vue
+
+- Vue 2
+
+```js
+// Named import
+import { DtButton } from "@dialpad/dialtone/vue2" 
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
+```
+
+- Vue 3
+
+```js
+// Named import
+import { DtButton } from "@dialpad/dialtone/vue3" 
+
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
+import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
+```
+
+#### Dialtone Tokens
+
+Dialtone tokens doesn't have a default export, so you need to access
+the files directly as following:
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/tokens/variables-light.css" // Light tokens
+@import "@dialpad/dialtone/tokens/variables-dark.css" // Dark tokens
+```
+
+- LESS
+
+```less
+@import "@dialpad/dialtone/tokens/variables-light.less" // Light tokens
+@import "@dialpad/dialtone/tokens/variables-dark.less" // Dark tokens
+```
+
+- JSON
+
+```js
+import "@dialpad/dialtone/tokens/tokens-light.json" // Light tokens
+import "@dialpad/dialtone/tokens/tokens-dark.json" // Dark tokens
+```
