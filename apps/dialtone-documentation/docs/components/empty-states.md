@@ -73,7 +73,6 @@ We identify 4 types of empty states:
 </template>
 
 </dialtone-usage>
-<img class="d-w90p" alt="empty state bullets" src="/assets/images/components/empty-state-dodont.png">
 
 ### Writing and tone
 
