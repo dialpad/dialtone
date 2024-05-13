@@ -14,16 +14,35 @@ module.exports = {
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
       releaseRules: [
-        {type: 'refactor', release: 'patch'},
+        { type: 'refactor', release: 'patch' },
       ],
     }],
     ['@semantic-release/release-notes-generator', {
       config: '@dialpad/conventional-changelog-angular',
     }],
+    ['@dialpad/semantic-release-changelog-json', {
+      changelogFile: `${srcRoot}/CHANGELOG.md`,
+      changelogJsonFile: `${srcRoot}/CHANGELOG.json`,
+    }],
+    ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
+    ['@semantic-release/npm', {
+      verifyConditions: false,
+      publish: false,
+    }],
+    ['@semantic-release/git', {
+      assets: [
+        `${srcRoot}/CHANGELOG.md`,
+        `${srcRoot}/CHANGELOG.json`,
+        `${srcRoot}/package.json`,
+      ],
+      message: `chore(release): NO-JIRA ${name}` +
+        '/v${nextRelease.version}\n\n${nextRelease.notes}',
+    }],
     '@semantic-release/github',
   ],
   branches: [
-    'production',
+    'staging',
+    'next',
     {
       name: 'beta',
       prerelease: true,

@@ -7,15 +7,9 @@ const srcRoot = `packages/${name}`;
  */
 module.exports = {
   extends: 'release.config.base.js',
-  ci: false,
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
   commitPaths: [`${srcRoot}/*`],
-  assets: [
-    `${srcRoot}/CHANGELOG.md`,
-    `${srcRoot}/CHANGELOG.json`,
-    `${srcRoot}/package.json`,
-  ],
   plugins: [
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
@@ -37,14 +31,24 @@ module.exports = {
       changelogJsonFile: `${srcRoot}/CHANGELOG.json`,
     }],
     ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
-    ['@semantic-release/npm', { npmPublish: false }],
+    ['@semantic-release/npm', {
+      verifyConditions: false,
+      publish: false,
+    }],
     ['@semantic-release/git', {
+      assets: [
+        `${srcRoot}/CHANGELOG.md`,
+        `${srcRoot}/CHANGELOG.json`,
+        `${srcRoot}/package.json`,
+      ],
       message: `chore(release): NO-JIRA ${name}` +
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
+    '@semantic-release/github',
   ],
   branches: [
     'staging',
+    'next',
     {
       name: 'beta',
       prerelease: true,
