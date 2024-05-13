@@ -97,17 +97,9 @@ storybook: https://dialtone.dialpad.com/vue/vue3/?path=/story/components-scrolle
 </dt-scroller>
 </code-well-header>
 
-<code-example-tabs
-htmlCode='
-<div data-v-f28a4c1a="" class="vue-recycle-scroller ready direction-vertical scroller" tabindex="0" style="width: 300px; height: 200px;">
-  <div class="vue-recycle-scroller__item-wrapper" style="min-height: 1600px;">
-    <div class="vue-recycle-scroller__item-view" style="transform: translateY(0px) translateX(0px);"><div data-v-f28a4c1a="" class="user">User 0</div></div>
-    <div class="vue-recycle-scroller__item-view" style="transform: translateY(32px) translateX(0px);"><div data-v-f28a4c1a="" class="user">User 1</div></div>
-   ...
-  </div>
-</div>
-'
-vueCode='
+<br>
+
+```html
 <dt-scroller
  :items="items"
  :item-size="32"
@@ -120,8 +112,7 @@ vueCode='
    </div>
  </template>
 </dt-scroller>
-'
-showHtmlWarning />
+```
 
 #### Dynamic Scroller
 
@@ -179,55 +170,9 @@ showHtmlWarning />
     </dt-scroller>
 </code-well-header>
 
-<code-example-tabs
-htmlCode='
-<div data-v-01cb3cee="" class="vue-recycle-scroller ready direction-vertical scroller" tabindex="0" style="width: 500px; height: 300px;">
-  <div class="vue-recycle-scroller__item-wrapper" style="min-height: 3263px;">
-    <div class="vue-recycle-scroller__item-view" style="transform: translateY(0px) translateX(0px);">
-      <div data-index="0">
-        <div data-v-01cb3cee="" class="avatar">0 <img data-v-01cb3cee="" src="https://dialtone.dialpad.com/vue3/assets/person-7Odn8LOm.png" alt="avatar" class="image" /></div>
-        <div data-v-01cb3cee="" class="text">
-          lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor,nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget
-          ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam
-        </div>
-      </div>
-    </div>
-    <div class="vue-recycle-scroller__item-view" style="transform: translateY(175px) translateX(0px);">
-      <div data-index="1">
-        <div data-v-01cb3cee="" class="avatar">1 <img data-v-01cb3cee="" src="https://dialtone.dialpad.com/vue3/assets/person-7Odn8LOm.png" alt="avatar" class="image" /></div>
-        <div data-v-01cb3cee="" class="text">
-          lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget
-          ultrices aliquam,nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam
-          nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </div>
-      </div>
-    </div>
-    <div class="vue-recycle-scroller__item-view" style="transform: translateY(494px) translateX(0px);">
-      <div data-index="2">
-        <div data-v-01cb3cee="" class="avatar">2 <img data-v-01cb3cee="" src="https://dialtone.dialpad.com/vue3/assets/person-7Odn8LOm.png" alt="avatar" class="image" /></div>
-        <div data-v-01cb3cee="" class="text">
-          lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor,nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget
-          ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam
-        </div>
-      </div>
-    </div>
-    <div class="vue-recycle-scroller__item-view" style="transform: translateY(-9999px) translateX(0px);">
-      <div data-index="3">
-        <div data-v-01cb3cee="" class="avatar">3 <img data-v-01cb3cee="" src="https://dialtone.dialpad.com/vue3/assets/person-7Odn8LOm.png" alt="avatar" class="image" /></div>
-        <div data-v-01cb3cee="" class="text">
-          lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget
-          ultrices aliquam,nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam
-          nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </div>
-      </div>
-    </div>
-    ...
-  </div>
-</div>
-'
-vueCode='
+<br>
+
+```html
 <dt-scroller
  :items="dynamicItems"
  :min-item-size="54"
@@ -250,8 +195,7 @@ vueCode='
   </div>
  </template>
 </dt-scroller>
-'
-showHtmlWarning />
+```
 
 ## Vue API
 
