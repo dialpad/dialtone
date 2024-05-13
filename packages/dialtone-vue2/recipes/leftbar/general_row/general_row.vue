@@ -77,18 +77,31 @@
         />
       </div>
       <dt-tooltip
-        v-else-if="showUnreadCount"
+        v-else-if="showUnreadCount || showUnreadMentionCount"
         :message="unreadCountTooltip"
         placement="top"
       >
         <template #anchor>
           <dt-badge
+            v-if="showUnreadCount"
             kind="count"
             type="bulletin"
             data-qa="dt-leftbar-row-unread-badge"
-            class="dt-leftbar-row__unread-badge"
+            :class="['dt-leftbar-row__unread-badge', { 'unread-count-badge': hasUnreadMentions }]"
           >
             {{ unreadCount }}
+          </dt-badge>
+          <dt-badge
+            v-if="showUnreadMentionCount"
+            kind="count"
+            type="bulletin"
+            data-qa="dt-leftbar-row-unread-badge"
+            :class="['dt-leftbar-row__unread-badge',
+                     { 'unread-mention-count-badge': hasUnreads },
+                     { 'unread-mention-count-only-badge': hasUnreadMentions && !hasUnreads },
+            ]"
+          >
+            {{ unreadMentionCount }}
           </dt-badge>
         </template>
       </dt-tooltip>
@@ -207,10 +220,23 @@ export default {
       default: false,
     },
 
+    hasUnreadMentions: {
+      type: Boolean,
+      default: false,
+    },
+
     /**
      * Number of unread messages
      */
     unreadCount: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Number of unread mention messages
+     */
+    unreadMentionCount: {
       type: String,
       default: null,
     },
@@ -331,8 +357,8 @@ export default {
         'dt-leftbar-row',
         {
           'dt-leftbar-row--no-action': !this.hasCallButton,
-          'dt-leftbar-row--has-unread': this.hasUnreads,
-          'dt-leftbar-row--unread-count': this.showUnreadCount,
+          'dt-leftbar-row--has-unread': this.hasUnreads || this.hasUnreadMentions,
+          'dt-leftbar-row--unread-count': this.showUnreadCount || this.showUnreadMentionCount,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,
           'dt-leftbar-row--action-focused': this.actionFocused,
@@ -359,11 +385,16 @@ export default {
     },
 
     hasActions () {
-      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton;
+      // eslint-disable-next-line max-len
+      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton || this.showUnreadMentionCount;
     },
 
     showUnreadCount () {
       return !!this.unreadCount && this.hasUnreads;
+    },
+
+    showUnreadMentionCount () {
+      return !!this.unreadMentionCount && this.hasUnreadMentions;
     },
   },
 
@@ -410,4 +441,16 @@ export default {
 
 <style lang="less" scoped>
 @import "../style/leftbar_row.less";
+.unread-count-badge {
+  border-radius: 100% 0 0 100%;
+}
+
+.unread-mention-count-badge {
+  border-radius: 0 100% 100% 0;
+  background-color: var(--color-purple-500, #3A1D95);
+}
+
+.unread-mention-count-only-badge {
+  background-color: var(--color-purple-500, #3A1D95);
+}
 </style>

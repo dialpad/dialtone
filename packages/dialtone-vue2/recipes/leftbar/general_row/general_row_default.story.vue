@@ -3,8 +3,10 @@
     :type="$attrs.type"
     :color="$attrs.color"
     :description="$attrs.description"
-    :unread-count="$attrs.unreadCount"
     :has-unreads="$attrs.hasUnreads"
+    :unread-count="$attrs.unreadCount"
+    :has-unread-mentions="$attrs.hasUnreadMentions"
+    :unread-mention-count="$attrs.unreadMentionCount"
     :aria-label="$attrs.ariaLabel"
     :unread-count-tooltip="$attrs.unreadCountTooltip"
     :selected="$attrs.selected"
@@ -29,3 +31,4 @@ export default {
   components: { DtRecipeGeneralRow },
 };
 </script>
+
