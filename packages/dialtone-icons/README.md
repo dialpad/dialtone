@@ -57,7 +57,8 @@ Requesting a feature or reporting a bug? Please do so at the below links:
 
 Please also feel free to contact us via the #dialtone Dialpad channel with any questions.
 
-# Dialtone Illustrations
+## Dialtone Illustrations
+
 Illustrations are also part of dialtone-icons package.
 It includes the resources needed to implement illustrations on your application that conform to Dialpad’s design principles and best practices.
 
