@@ -30,8 +30,7 @@ Image with bullets
 5.Background
 
 The empty state uses all the space of the container it's replacing, always keeping the content in the middle.
-
-*optionals
+_optionals
 
 The space taken by the empty state can vary, the padding will be minimum 24px and can be flexible and adapt the container size.
 
