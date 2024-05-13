@@ -1,6 +1,6 @@
 ---
-title: Card
-description: A card contains summary content and actions about a single subject. It can be used by itself or within a list, and is generally interactive.
+title: Empty state
+description: When there's no data to display in a list, table, or other information container, we use an ‘Empty State’ component to guide users, clarifying the expected information and suggesting ways to populate it.
 status: ready
 thumb: true
 image: assets/images/components/card.png
@@ -9,25 +9,25 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 ---
 
 <code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__header">
-      <div class="d-headline--md">
-        Lorem ipsum
-      </div>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
-        <dt-icon name="more-vertical" size="200" />
-      </button>
-    </div>
-    <div class="d-card__content">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
-    </div>
-    <div class="d-card__footer">
-      <div class="d-d-flex d-gg8">
-        <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </div>
-    </div>
-  </div>
+ <!-- Empty state storybook-->
 </code-well-header>
+
+## Morphology & Anatomy
+
+Image with bullets
+
+1. Illustrations*
+2. Title
+3. Description*
+4. Actions
+5. Primary (this primary action, can be a primary button or a muted one)
+6. Secondary*
+7. Background
+
+The empty state uses all the space of the container it's replacing, always keeping the content in the middle.
+*optionals
+
+The space taken by the empty state can vary, the padding will be minimum 24px and can be flexible and adapt the container size.
 
 ## Usage
 
@@ -39,11 +39,13 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 - To display content and actions on a single topic.
 </template>
+
 <template #dont>
 
 - Add too many call-to-action elements to the same card. A card should only contain a single primary action.
 - Inform users about important changes.
 </template>
+
 </dialtone-usage>
 
 ### Best Practices
