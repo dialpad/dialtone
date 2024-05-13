@@ -9,25 +9,28 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 ---
 
 <code-well-header>
- <!-- Empty state storybook-->
+Empty state storybook
 </code-well-header>
 
 ## Morphology & Anatomy
 
 Image with bullets
-<code-well-header bgclass="d-bgc-neutral-white">
-  <image class="d-w60p" src="/assets/images/components/preview--combobox.mp4" autoplay loop></image>
+<code-well-header>
+<img class="d-w90p" alt="empty state bullets" src="/assets/images/components/empty-state01.png">
 </code-well-header>
 
 1. Illustrations*
 2. Title
 3. Description*
 4. Actions
-5. Primary (this primary action, can be a primary button or a muted one)
-6. Secondary*
-7. Background
+
+- Primary (this primary action, can be a primary button or a muted one)
+- Secondary*
+
+5.Background
 
 The empty state uses all the space of the container it's replacing, always keeping the content in the middle.
+
 *optionals
 
 The space taken by the empty state can vary, the padding will be minimum 24px and can be flexible and adapt the container size.
@@ -38,11 +41,19 @@ We identify 4 types of empty states:
 
 <b> Zero state: </b> nothing has been added yet, we recommend to use this space to teach the user how to fill this container, or give a useful tip like a shortcut for something relatable or tell them what needs to happen if no action can be taken.
 
+<img class="d-w90p" alt="empty state example" src="/assets/images/components/empty-state02.png">
+
 <b> No results:</b> the user performed an action and there are no results, in this scenario the best usage of the empty state will be to recommend how to recover. If the user is filtering a table, recommend another filter that has results or, like the zero state case, how to create a new entry with the properties the user is filtering.
+
+<img class="d-w90p" alt="empty state example" src="/assets/images/components/empty-state03.png">
 
 <b> New feature:</b> A new section or screen the user doesn’t know and we want to introduce to them, if this action would include a change in their plan we should inform it in the component, also try to indulge/seduce the user to use this feature or to look interesting to them.
 
+<img class="d-w90p" alt="empty state example" src="/assets/images/components/empty-state04.png">
+
 <b> Not enabled:</b> the section isn’t available to the user at the moment.
+
+<img class="d-w90p" alt="empty state example" src="/assets/images/components/empty-state05.png">
 
 <dialtone-usage>
 <template #do>
@@ -62,6 +73,7 @@ We identify 4 types of empty states:
 </template>
 
 </dialtone-usage>
+<img class="d-w90p" alt="empty state bullets" src="/assets/images/components/empty-state-dodont.png">
 
 ### Writing and tone
 
