@@ -74,9 +74,24 @@ Row: flow horizontally
 <code-example-tabs
 htmlCode='
 <div class="d-stack d-stack--row d-stack--gap-500">
-  <div class="d-bgc-magenta-100">Stack item 1</div>
-  <div class="d-bgc-magenta-100">Stack item 2</div>
-  <div class="d-bgc-magenta-100">Stack item 3</div>
+  <span class="d-badge">
+    <span class="d-badge__label"> co-host </span>
+  </span>
+  <span class="d-badge">
+    <span class="d-badge__label"> Customer </span>
+  </span>
+  <span class="d-badge">
+    <span class="d-badge__icon-left">
+      <svg>...</svg>
+    </span>
+    <span class="d-badge__label"> Locked </span>
+  </span>
+  <span class="d-badge">
+    <span class="d-badge__icon-left">
+      <svg>...</svg>
+    </span>
+    <span class="d-badge__label"> Chat log </span>
+  </span>
 </div>
 '
 vueCode='
@@ -84,26 +99,16 @@ vueCode='
   gap="500"
   direction="row"
 >
-<span class="d-badge">Co-host</span>
-<span class="d-badge">Customer</span>
-<span class="d-badge">
-  <span class="d-badge__icon-left">
-    <dt-icon
-      name="lock"
-      size="200"
-    />
-  </span>
-  <span class="d-badge__label">Locked</span>
-</span>
-<span class="d-badge">
-  <span class="d-badge__icon-left">
-    <dt-icon
-      name="message"
-      size="200"
-    />
-  </span>
-  <span class="d-badge__label">Chat log</span>
-</span>
+  <dt-badge text="co-host" />
+  <dt-badge text="Customer" />
+  <dt-badge
+    icon-left="lock"
+    text="Locked"
+  />
+  <dt-badge
+    icon-left="message"
+    text="Chat log"
+  />
 </dt-stack>
 '
 showHtmlWarning />
