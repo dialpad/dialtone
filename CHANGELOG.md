@@ -1,3 +1,31 @@
+# [9.35.0-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0-beta.1...dialtone/v9.35.0-beta.2) (2024-05-14)
+
+
+### Bug Fixes
+
+* NO-JIRA define "Segoe UI Adjusted" font ([#306](https://github.com/dialpad/dialtone/issues/306)) ([f860dba](https://github.com/dialpad/dialtone/commit/f860dba7437350e4950e12754c70d6d2d60ff40a))
+* remove test change ([f52a240](https://github.com/dialpad/dialtone/commit/f52a240720414665d971ac3976ccb2e3a7e43470))
+* **Rich Text Editor:** DLT-1717 fix link overflow ([#302](https://github.com/dialpad/dialtone/issues/302)) ([999ab18](https://github.com/dialpad/dialtone/commit/999ab183005dc04258024dfc17068982e132b971))
+* test change ([9000b9c](https://github.com/dialpad/dialtone/commit/9000b9caba84ead567b5c9a8e59bd66a0a8af3c2))
+
+
+### Code Refactoring
+
+* test release ([dfb74b6](https://github.com/dialpad/dialtone/commit/dfb74b6091356610586727499e444ffa56b37860))
+
+
+### Documentation
+
+* DLT-1538 illustrations workflow ([#283](https://github.com/dialpad/dialtone/issues/283)) ([59d83c6](https://github.com/dialpad/dialtone/commit/59d83c6236cd888dbcf4fe9737c18a7e603c7527))
+* DLT-1577 use CodeExampleTabs from Popover to Root layout ([#301](https://github.com/dialpad/dialtone/issues/301)) ([8367a8b](https://github.com/dialpad/dialtone/commit/8367a8b3227d485de45ee141ff0fbb44b632d047))
+* DLT-1578 use CodeExampleTabs from Scroller to Table ([#303](https://github.com/dialpad/dialtone/issues/303)) ([464990e](https://github.com/dialpad/dialtone/commit/464990ed9c46bc4031e008de3548d3b2ce6db409))
+* NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
+
+### Features
+
+* test release ([deaf1ff](https://github.com/dialpad/dialtone/commit/deaf1ff76a9d136505fa604b5c6e02a4447d6b85))
+
 ## [9.34.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.2...dialtone/v9.34.3) (2024-05-09)
 
 
