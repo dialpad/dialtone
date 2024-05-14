@@ -23,7 +23,6 @@ on:
 
 env:
   HUSKY: 0
-  GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
 jobs:
   get-branch-name:
@@ -41,6 +40,8 @@ jobs:
       # Will prevent the rest of the steps from running on fail
       - name: Check if user is a dialpad member
         uses: octokit/request-action@v2.x
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
         with:
           route: GET /orgs/dialpad/members/${{ github.actor }}
 
@@ -58,11 +59,13 @@ jobs:
       DIALTONE_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'next' || needs.get-branch-name.outputs.current_branch }}
       DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
       NPM_TOKEN: ${{ secrets.DIALTONE_NPM_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -139,10 +142,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: 'production'
+          token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
       - name: Merge changes to production
         run: |
-          git config --global user.name 'Eng Bot'
-          git config --global user.email 'engbot@dialpad.com'
+          git config --global user.name 'Brad Paugh'
+          git config --global user.email 'brad.paugh@dialpad.com'
           git merge --ff-only staging
           git push
