@@ -80,7 +80,7 @@
         v-else-if="showUnreadCount || showUnreadMentionCount"
         :message="unreadCountTooltip"
         placement="top"
-        :offset="hasUnreadMentions ? [12, -4] : ''"
+        :offset="hasUnreadMentions && hasUnreads ? [-12, -4] : ''"
       >
         <template #anchor>
           <dt-badge
@@ -98,7 +98,7 @@
             type="bulletin"
             data-qa="dt-leftbar-row-unread-badge"
             :class="['dt-leftbar-row__unread-badge',
-                     { 'unread-mention-count-badge': hasUnreads },
+                     { 'unread-mention-count-badge': hasUnreadMentions && hasUnreads },
                      { 'unread-mention-count-only-badge': hasUnreadMentions && !hasUnreads },
             ]"
           >
