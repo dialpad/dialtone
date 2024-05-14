@@ -24,7 +24,7 @@ module.exports = {
       changelogJsonFile: `${srcRoot}/CHANGELOG.json`,
     }],
     ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
-    ['@semantic-release/npm', { publish: false }],
+    ['@semantic-release/npm', { npmPublish: false }],
     ['@semantic-release/git', {
       assets: [
         `${srcRoot}/CHANGELOG.md`,
