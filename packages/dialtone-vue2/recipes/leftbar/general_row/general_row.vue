@@ -80,7 +80,7 @@
         v-else-if="showUnreadCount || showUnreadMentionCount"
         :message="unreadCountTooltip"
         placement="top"
-        :offset="[12, -4]"
+        :offset="hasUnreadMentions ? [12, -4] : ''"
       >
         <template #anchor>
           <dt-badge
