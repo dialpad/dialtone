@@ -18,28 +18,20 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm publish",
-        "parallel": false
+        "command": "pnpm publish"
       }
     },
-    "release-github": {
+    "release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./release-ci.config.cjs",
-        "parallel": false
-      }
-    },
-    "release-local": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm semantic-release-plus --skip-tag --extends ./release-local.config.cjs",
+        "command": "pnpm semantic-release-plus --extends ./release.config.cjs",
         "parallel": false
       }
     },
     "test": {
       "executor": "nx:run-script",
       "options": {
-        "script": "test:vitest"
+        "script": "test:vue"
       }
     }
   }

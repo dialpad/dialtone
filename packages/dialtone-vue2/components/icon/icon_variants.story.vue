@@ -20,7 +20,7 @@
 
 <script>
 import { DtIcon } from './';
-import { categories } from '@dialpad/dialtone-icons/keywords.json';
+import { categories } from '@dialpad/dialtone-icons/keywords-icons.json';
 
 export default {
   name: 'IconDefault',

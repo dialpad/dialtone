@@ -4,21 +4,13 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm publish --filter ./packages/eslint-plugin-dialtone",
-        "parallel": false
+        "command": "pnpm publish --filter ./packages/eslint-plugin-dialtone"
       }
     },
-    "release-github": {
+    "release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./packages/eslint-plugin-dialtone/release-ci.config.cjs",
-        "parallel": false
-      }
-    },
-    "release-local": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm semantic-release-plus --skip-tag --extends ./packages/eslint-plugin-dialtone/release-local.config.cjs",
+        "command": "pnpm semantic-release-plus --extends ./packages/eslint-plugin-dialtone/release.config.cjs",
         "parallel": false
       }
     }

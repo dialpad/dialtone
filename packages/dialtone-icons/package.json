@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.15.1-alpha.1",
+  "version": "4.15.2",
   "description": "Dialtone icon library",
   "files": [
     "dist",
@@ -25,7 +25,9 @@
       "require": "./vue3/dist/components/*.cjs"
     },
     "./icons.json": "./dist/icons.json",
-    "./keywords.json": "./dist/keywords.json",
+    "./illustrations.json": "./dist/illustrations.json",
+    "./keywords-icons.json": "./dist/keywords-icons.json",
+    "./keywords-illustrations.json": "./dist/keywords-illustrations.json",
     "./*": "./dist/svg/*"
   },
   "devDependencies": {

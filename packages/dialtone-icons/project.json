@@ -16,7 +16,7 @@
         "parallel": false
       },
       "inputs": ["{projectRoot}/src/**/*", "{projectRoot}/transformSVGtoVue.cjs", "{projectRoot}/gulpfile.cjs"],
-      "outputs": ["{projectRoot}/src/icons", "{projectRoot}/dist", "{projectRoot}/vue2/dist", "{projectRoot}/vue3/dist"]
+      "outputs": ["{projectRoot}/src/icons", "{projectRoot}/src/illustrations", "{projectRoot}/dist", "{projectRoot}/vue2/dist", "{projectRoot}/vue3/dist"]
     },
     "publish": {
       "executor": "nx:run-commands",
@@ -24,16 +24,11 @@
         "command": "pnpm publish --filter ./packages/dialtone-icons"
       }
     },
-    "release-github": {
+    "release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs"
-      }
-    },
-    "release-local": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm semantic-release-plus --skip-tag --extends ./packages/dialtone-icons/release-local.config.cjs"
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-icons/release.config.cjs",
+        "parallel": false
       }
     }
   }
