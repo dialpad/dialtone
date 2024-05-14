@@ -6,7 +6,6 @@ const srcRoot = '.';
  * @type {import('semantic-release').GlobalConfig}
  */
 module.exports = {
-  extends: 'release.config.base.js',
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
   commitPaths: [`${srcRoot}/*`],
