@@ -149,5 +149,5 @@ jobs:
         run: |
           git config --global user.name 'Brad Paugh'
           git config --global user.email 'brad.paugh@dialpad.com'
-          git merge --ff-only staging
+          git merge --ff-only origin/staging
           git push
