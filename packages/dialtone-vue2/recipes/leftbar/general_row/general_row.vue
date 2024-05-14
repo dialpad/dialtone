@@ -80,6 +80,7 @@
         v-else-if="showUnreadCount || showUnreadMentionCount"
         :message="unreadCountTooltip"
         placement="top"
+        :offset="[12, -4]"
       >
         <template #anchor>
           <dt-badge
@@ -442,11 +443,11 @@ export default {
 <style lang="less" scoped>
 @import "../style/leftbar_row.less";
 .unread-count-badge {
-  border-radius: 100% 0 0 100%;
+  border-radius: 50vh 0 0 50vh;
 }
 
 .unread-mention-count-badge {
-  border-radius: 0 100% 100% 0;
+  border-radius: 0 50vh 50vh 0;
   background-color: var(--color-purple-500, #3A1D95);
 }
 
