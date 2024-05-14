@@ -28,7 +28,6 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HUSKY: 0
-  ACTOR: ${{ github.actor }}
 
 jobs:
   get-branch-name:
