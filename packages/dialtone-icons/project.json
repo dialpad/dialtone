@@ -21,7 +21,7 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm publish --filter --dry-run ./packages/dialtone-icons"
+        "command": "pnpm publish --filter ./packages/dialtone-icons"
       }
     },
     "release": {

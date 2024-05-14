@@ -4,7 +4,7 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm publish --filter --dry-run ./packages/dialtone-emojis"
+        "command": "pnpm publish --filter ./packages/dialtone-emojis"
       }
     },
     "release": {
