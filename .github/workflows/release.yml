@@ -6,9 +6,9 @@ on:
       package:
         type: 'choice'
         required: true
-        description: 'Select a package to run a single release, leave empty to release all'
+        description: 'Select a package to run the release'
         options:
-          - ' '
+          - all
           - dialtone
           - css
           - emojis
@@ -94,39 +94,39 @@ jobs:
 
       # Release to GitHub
       - name: Release dialtone ${{ env.DIALTONE_RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'dialtone' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
         run: pnpm nx release dialtone
 
       - name: Release dialtone css ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'css' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}
         run: pnpm nx release dialtone-css
 
       - name: Release dialtone emojis ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'emojis' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'emojis' }}
         run: pnpm nx release dialtone-emojis
 
       - name: Release dialtone icons ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'icons' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'icons' }}
         run: pnpm nx release dialtone-icons
 
       - name: Release dialtone tokens ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'tokens' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}
         run: pnpm nx release dialtone-tokens
 
       - name: Release dialtone-vue@${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'vue2' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue2' }}
         run: pnpm nx release dialtone-vue2
 
       - name: Release dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'vue3' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
         run: pnpm nx release dialtone-vue3
 
       - name: Release Dialtone eslint plugin ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'eslint-plugin' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'eslint-plugin' }}
         run: pnpm nx release eslint-plugin-dialtone
 
       - name: Release Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == ' ' || github.event.inputs.package == 'stylelint-plugin' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'stylelint-plugin' }}
         run: pnpm nx release stylelint-plugin-dialtone
 
   push:
