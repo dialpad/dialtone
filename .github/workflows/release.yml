@@ -23,6 +23,7 @@ on:
 
 env:
   HUSKY: 0
+  GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
 jobs:
   get-branch-name:
@@ -42,8 +43,6 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: GET /orgs/dialpad/members/${{ github.actor }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
   release:
     needs: [get-branch-name, check-dialpad-member]
@@ -58,7 +57,6 @@ jobs:
       RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'latest' || needs.get-branch-name.outputs.current_branch }}
       DIALTONE_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'next' || needs.get-branch-name.outputs.current_branch }}
       DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NPM_TOKEN: ${{ secrets.DIALTONE_NPM_TOKEN }}
     steps:
       - name: Checkout
@@ -141,7 +139,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: 'production'
-          token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
       - name: Merge changes to production
         run: |
