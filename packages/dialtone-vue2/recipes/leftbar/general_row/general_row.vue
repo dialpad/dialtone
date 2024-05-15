@@ -386,8 +386,8 @@ export default {
     },
 
     hasActions () {
-      // eslint-disable-next-line max-len
-      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton || this.showUnreadMentionCount;
+      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton ||
+        this.showUnreadMentionCount;
     },
 
     showUnreadCount () {
