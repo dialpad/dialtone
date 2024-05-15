@@ -1,3 +1,10 @@
+## [3.123.4](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.3...dialtone-vue3/v3.123.4) (2024-05-15)
+
+
+### Bug Fixes
+
+* **Datepicker:** DP-89398 change tooltip fallback positions ([#311](https://github.com/dialpad/dialtone/issues/311)) ([10470e8](https://github.com/dialpad/dialtone/commit/10470e8e711f5497a8a5ae4504b587867179e221))
+
 ## [3.123.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.2...dialtone-vue3/v3.123.3) (2024-05-15)
 
 
