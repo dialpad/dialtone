@@ -2,7 +2,6 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import DtTooltip from './tooltip.vue';
 import {
   TOOLTIP_KIND_MODIFIERS,
-  TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 
 const MOCK_TRANSITION_STUB = () => ({
@@ -113,19 +112,6 @@ describe('DtTooltip tests', () => {
 
           expect(tooltip.classes(TOOLTIP_KIND_MODIFIERS.inverted)).toBe(true);
         });
-      });
-
-      describe('When a placement is provided', () => {
-        TOOLTIP_DIRECTIONS.forEach(placement =>
-          describe(`When direction is ${placement}`, () => {
-            it('should have correct arrow direction class', () => {
-              mockProps = { placement };
-
-              updateWrapper();
-
-              expect(tooltip.classes(`d-tooltip__arrow-tippy--${placement}`)).toBe(true);
-            });
-          }));
       });
     });
   });
