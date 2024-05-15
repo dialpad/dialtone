@@ -87,7 +87,10 @@
             kind="count"
             type="bulletin"
             data-qa="dt-leftbar-row-unread-badge"
-            :class="['dt-leftbar-row__unread-badge', { 'unread-count-badge': hasUnreadMentions }]"
+            :class="['dt-leftbar-row__unread-badge', {
+              'dt-leftbar-row__unread-count-badge':
+                shouldShowCustomStyleForCountBadge,
+            }]"
           >
             {{ unreadCount }}
           </dt-badge>
@@ -97,8 +100,8 @@
             type="bulletin"
             data-qa="dt-leftbar-row-unread-mention-badge"
             :class="['dt-leftbar-row__unread-badge',
-                     { 'unread-mention-count-badge': hasUnreads },
-                     { 'unread-mention-count-only-badge': hasUnreadMentions && !hasUnreads },
+                     { 'dt-leftbar-row__unread-mention-count-only-badge': hasUnreads && hasUnreadMentionCount },
+                     { 'dt-leftbar-row__unread-mention-count-badge': shouldShowCustomStyleForCountBadge },
             ]"
           >
             {{ unreadMentionCount }}
@@ -216,11 +219,6 @@ export default {
      * the unread count badge.
      */
     hasUnreads: {
-      type: Boolean,
-      default: false,
-    },
-
-    hasUnreadMentions: {
       type: Boolean,
       default: false,
     },
@@ -349,7 +347,7 @@ export default {
         'dt-leftbar-row',
         {
           'dt-leftbar-row--no-action': !this.hasCallButton,
-          'dt-leftbar-row--has-unread': this.hasUnreads || this.hasUnreadMentions,
+          'dt-leftbar-row--has-unread': this.hasUnreads,
           'dt-leftbar-row--unread-count': this.showUnreadCount || this.showUnreadMentionCount,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,
@@ -362,10 +360,10 @@ export default {
     getIcon () {
       switch (this.type) {
         case LEFTBAR_GENERAL_ROW_TYPES.CHANNELS:
-          if (this.hasUnreads || this.hasUnreadMentions) return 'channel unread';
+          if (this.hasUnreads) return 'channel unread';
           break;
         case LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL:
-          if (this.hasUnreads || this.hasUnreadMentions) return 'locked channel unread';
+          if (this.hasUnreads) return 'locked channel unread';
           break;
       }
       return this.type;
@@ -391,7 +389,19 @@ export default {
     },
 
     showUnreadMentionCount () {
-      return !!this.unreadMentionCount && this.hasUnreadMentions;
+      return !!this.unreadMentionCount && this.hasUnreads;
+    },
+
+    hasUnreadCount () {
+      return Number(this.unreadCount) > 0;
+    },
+
+    hasUnreadMentionCount () {
+      return Number(this.unreadMentionCount) > 0;
+    },
+
+    shouldShowCustomStyleForCountBadge () {
+      return this.hasUnreads && this.hasUnreadCount && this.hasUnreadMentionCount;
     },
   },
 
@@ -438,16 +448,4 @@ export default {
 
 <style lang="less" scoped>
 @import "../style/leftbar_row.less";
-.unread-count-badge {
-  border-radius: 50vh 0 0 50vh;
-}
-
-.unread-mention-count-badge {
-  border-radius: 0 50vh 50vh 0;
-  background-color: var(--color-purple-500, #3A1D95);
-}
-
-.unread-mention-count-only-badge {
-  background-color: var(--color-purple-500, #3A1D95);
-}
 </style>
