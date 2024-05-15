@@ -52,7 +52,7 @@
       <dt-recipe-general-row
         type="channels"
         unread-mention-count="1"
-        :has-unread-mentions="true"
+        :has-unreads="true"
         description="Channel name"
       />
     </div>
@@ -65,7 +65,6 @@
         unread-count="4"
         :has-unreads="true"
         unread-mention-count="1"
-        :has-unread-mentions="true"
         description="Channel name"
       />
     </div>
