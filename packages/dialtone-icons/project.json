@@ -24,16 +24,11 @@
         "command": "pnpm publish --filter ./packages/dialtone-icons"
       }
     },
-    "release-github": {
+    "release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs"
-      }
-    },
-    "release-local": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm semantic-release-plus --skip-tag --extends ./packages/dialtone-icons/release-local.config.cjs"
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs",
+        "parallel": false
       }
     }
   }

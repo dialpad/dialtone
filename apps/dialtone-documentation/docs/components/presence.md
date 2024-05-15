@@ -24,11 +24,18 @@ When a user is available.
   <example-presence presence="active"/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-presence">
   <div class="d-presence__inner d-presence__inner--active"></div>
 </div>
-```
+'
+vueCode='
+<dt-presence
+  presence="active"
+/>
+'
+showHtmlWarning />
 
 ### Busy
 
@@ -37,11 +44,18 @@ When a user is unavailable, either due to being **'On a call'**, **'In a meeting
   <example-presence presence="busy"/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-presence">
   <div class="d-presence__inner d-presence__inner--busy"></div>
 </div>
-```
+'
+vueCode='
+<dt-presence
+  presence="busy"
+/>
+'
+showHtmlWarning />
 
 ### Away
 
@@ -50,11 +64,18 @@ When a user has a scheduled meeting on their synced calendar (Google G Suite or 
   <example-presence presence="away"/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-presence">
   <div class="d-presence__inner d-presence__inner--away"></div>
 </div>
-```
+'
+vueCode='
+<dt-presence
+  presence="away"
+/>
+'
+showHtmlWarning />
 
 ### Offline
 
@@ -63,11 +84,18 @@ When a user has not logged in for their first time.
   <example-presence presence="offline"/>
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
 <div class="d-presence">
   <div class="d-presence__inner d-presence__inner--offline"></div>
 </div>
-```
+'
+vueCode='
+<dt-presence
+  presence="offline"
+/>
+'
+showHtmlWarning />
 
 ## Vue API
 
