@@ -10,7 +10,7 @@
     "release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./packages/stylelint-plugin-dialtone/release.config.cjs",
+        "command": "pnpm semantic-release-plus --extends ./packages/stylelint-plugin-dialtone/release-ci.config.cjs",
         "parallel": false
       }
     }

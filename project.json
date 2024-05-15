@@ -24,7 +24,7 @@
     "release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./release.config.cjs",
+        "command": "pnpm semantic-release-plus --extends ./release-ci.config.cjs",
         "parallel": false
       }
     },
