@@ -15,7 +15,7 @@ export let emojiFileExtensionLarge = '.png';
 
 export const emojiJson = emojiJsonLocal;
 
-export const emojiShortCodeRegex = /(^| ):\w+:/g;
+export const emojiShortCodeRegex = /(^| |(?<=:))(:\w+:)/g;
 
 export function getEmojiData () {
   return emojiJson;
