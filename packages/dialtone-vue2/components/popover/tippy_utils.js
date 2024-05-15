@@ -1,5 +1,4 @@
 import tippy, { sticky } from 'tippy.js';
-import { getArrowDetected } from '../tooltip/modifiers';
 
 export const BASE_TIPPY_DIRECTIONS = [
   'bottom', 'bottom-start', 'bottom-end',
@@ -9,14 +8,20 @@ export const BASE_TIPPY_DIRECTIONS = [
 ];
 
 export const TIPPY_STICKY_VALUES = [true, false, 'reference', 'popper'];
-
-export const createTippy = (anchorElement, options) => {
+export const createTippyPopover = (anchorElement, options) => {
   const { contentElement } = { ...options };
   delete options.contentElement;
   return tippy(anchorElement, {
     ...options,
     plugins: [sticky],
     render: () => getContentWrapper(contentElement),
+  });
+};
+
+export const createTippy = (anchorElement, options) => {
+  return tippy(anchorElement, {
+    ...options,
+    plugins: [sticky],
   });
 };
 
@@ -49,9 +54,6 @@ export const getPopperOptions = ({
           tether,
         },
       },
-      getArrowDetected(({ state }) => {
-        onChangePlacement(state.placement);
-      }),
     ],
   };
 };
