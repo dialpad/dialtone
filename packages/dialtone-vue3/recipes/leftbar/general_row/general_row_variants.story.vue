@@ -36,6 +36,41 @@
     </div>
     <div>
       <h3>
+        Channel with unread messages
+      </h3>
+      <dt-recipe-general-row
+        type="channels"
+        unread-count="1"
+        :has-unreads="true"
+        description="Channel name"
+      />
+    </div>
+    <div>
+      <h3>
+        Channel with unread messages only show mentioned messages
+      </h3>
+      <dt-recipe-general-row
+        type="channels"
+        unread-mention-count="1"
+        :has-unread-mentions="true"
+        description="Channel name"
+      />
+    </div>
+    <div>
+      <h3>
+        Channel with both unread messages unread mention messages
+      </h3>
+      <dt-recipe-general-row
+        type="channels"
+        unread-count="4"
+        :has-unreads="true"
+        unread-mention-count="1"
+        :has-unread-mentions="true"
+        description="Channel name"
+      />
+    </div>
+    <div>
+      <h3>
         Contact Center with DND and unread count
       </h3>
       <dt-recipe-general-row
