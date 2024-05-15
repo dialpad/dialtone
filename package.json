@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.34.5",
+  "version": "9.34.6",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "test:all": "nx run-many --target=test",

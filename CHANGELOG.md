@@ -1,3 +1,10 @@
+## [9.34.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.5...dialtone/v9.34.6) (2024-05-15)
+
+
+### Bug Fixes
+
+* **Datepicker:** DP-89398 change tooltip fallback positions ([#311](https://github.com/dialpad/dialtone/issues/311)) ([10470e8](https://github.com/dialpad/dialtone/commit/10470e8e711f5497a8a5ae4504b587867179e221))
+
 ## [9.34.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.4...dialtone/v9.34.5) (2024-05-15)
 
 
