@@ -6,7 +6,6 @@
     :unread-count="$attrs.unreadCount"
     :has-unreads="$attrs.hasUnreads"
     :unread-mention-count="$attrs.unreadMentionCount"
-    :has-unread-mentions="$attrs.hasUnreadMentions"
     :aria-label="$attrs.ariaLabel"
     :unread-count-tooltip="$attrs.unreadCountTooltip"
     :selected="$attrs.selected"

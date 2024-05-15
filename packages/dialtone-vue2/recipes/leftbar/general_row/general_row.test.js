@@ -108,11 +108,11 @@ describe('DtRecipeGeneralRow Tests', () => {
     describe('When a unreadMentionCount is provided', () => {
       // Test Environment
       const unreadMentionCount = '25';
-      const hasUnreadMentions = true;
+      const hasUnreads = true;
 
       // Test Setup
       beforeEach(async () => {
-        propsData = { ...propsData, hasUnreadMentions, unreadMentionCount };
+        propsData = { ...propsData, hasUnreads, unreadMentionCount };
         await _setWrappers();
       });
 
@@ -124,14 +124,12 @@ describe('DtRecipeGeneralRow Tests', () => {
     describe('When both unreadMentionCount and unreadCount are provided', () => {
       // Test Environment
       const unreadMentionCount = '25';
-      const hasUnreadMentions = true;
-
       const unreadCount = '25';
       const hasUnreads = true;
 
       // Test Setup
       beforeEach(async () => {
-        propsData = { ...propsData, hasUnreadMentions, unreadMentionCount, hasUnreads, unreadCount };
+        propsData = { ...propsData, unreadMentionCount, hasUnreads, unreadCount };
         await _setWrappers();
       });
 
