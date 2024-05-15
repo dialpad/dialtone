@@ -95,7 +95,7 @@
             v-if="showUnreadMentionCount"
             kind="count"
             type="bulletin"
-            data-qa="dt-leftbar-row-unread-badge"
+            data-qa="dt-leftbar-row-unread-mention-badge"
             :class="['dt-leftbar-row__unread-badge',
                      { 'unread-mention-count-badge': hasUnreads },
                      { 'unread-mention-count-only-badge': hasUnreadMentions && !hasUnreads },
