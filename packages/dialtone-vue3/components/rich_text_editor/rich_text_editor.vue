@@ -488,14 +488,18 @@ export default {
     },
 
     parseEmojis () {
-      const matches = [...this.modelValue.matchAll(emojiRegex()), ...this.modelValue.matchAll(emojiShortCodeRegex)];
+      const matches = new Set(
+        [...this.modelValue.matchAll(emojiRegex()), ...this.modelValue.matchAll(emojiShortCodeRegex)]
+          .map(match => match[0].trim()),
+      );
       if (!matches) return;
 
-      matches.forEach(match => {
-        const emoji = codeToEmojiData(match[0]);
-        if (!emoji) return;
-        this.internalValue = this.internalValue.replace(new RegExp(`${match[0]}`), ` <emoji-component code="${emoji.shortname}"></emoji-component>`);
-      });
+      matches
+        .forEach(match => {
+          const emoji = codeToEmojiData(match);
+          if (!emoji) return;
+          this.internalValue = this.internalValue.replace(new RegExp(`${match}`, 'g'), `<emoji-component code="${emoji.shortname}"></emoji-component>`);
+        });
     },
 
     parseChannels () {

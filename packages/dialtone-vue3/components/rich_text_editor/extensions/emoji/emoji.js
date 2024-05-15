@@ -9,7 +9,7 @@ import suggestionOptions from './suggestion';
 
 export const EmojiPluginKey = new PluginKey('emoji');
 
-const inputShortCodeRegex = /(^| )(:\w+:)$/;
+const inputShortCodeRegex = /(^| |(?<=:))(:\w+:)$/;
 /* eslint-disable max-len */
 const inputUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])$/;
 const pasteUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g;
@@ -100,7 +100,7 @@ export const Emoji = Node.create({
         type: this.type,
         getAttributes (attrs) {
           return {
-            code: ` ${attrs[0]}`,
+            code: attrs[0],
           };
         },
       }),
@@ -131,7 +131,7 @@ export const Emoji = Node.create({
         type: this.type,
         getAttributes (attrs) {
           return {
-            code: ` ${attrs[0]}`,
+            code: attrs[0],
           };
         },
       }),
@@ -140,7 +140,7 @@ export const Emoji = Node.create({
         type: this.type,
         getAttributes (attrs) {
           return {
-            code: ` ${attrs[0]}`,
+            code: attrs[0],
           };
         },
       }),
