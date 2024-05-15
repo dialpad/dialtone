@@ -99,7 +99,6 @@ jobs:
     env:
       BRANCH_NAME: ${{ needs.get-branch-name.outputs.current_branch }}
       RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'latest' || needs.get-branch-name.outputs.current_branch }}
-      DIALTONE_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'next' || needs.get-branch-name.outputs.current_branch }}
       DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
     steps:
       - name: Checkout
@@ -135,9 +134,9 @@ jobs:
       - name: Set npm token
         run: pnpm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
 
-      - name: Publish dialtone ${{ env.DIALTONE_RELEASE_TAG }}
+      - name: Publish dialtone ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
-        run: pnpm nx publish dialtone --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.DIALTONE_RELEASE_TAG }}
+        run: pnpm nx publish dialtone --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone css ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.css == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}
@@ -177,7 +176,6 @@ jobs:
     env:
       BRANCH_NAME: ${{ needs.get-branch-name.outputs.current_branch }}
       RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'latest' || needs.get-branch-name.outputs.current_branch }}
-      DIALTONE_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'next' || needs.get-branch-name.outputs.current_branch }}
       DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
     steps:
       - name: Checkout
@@ -216,9 +214,9 @@ jobs:
       - name: Set GitHub auth token
         run: pnpm config set //npm.pkg.github.com/:_authToken=${{ env.GITHUB_TOKEN }}
 
-      - name: Publish dialtone ${{ env.DIALTONE_RELEASE_TAG }}
+      - name: Publish dialtone ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
-        run: pnpm nx publish dialtone --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.DIALTONE_RELEASE_TAG }}
+        run: pnpm nx publish dialtone --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
 
       - name: Publish dialtone css ${{ env.RELEASE_TAG }}
         if: ${{ needs.filter-actions.outputs.css == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}
