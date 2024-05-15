@@ -12,25 +12,19 @@
       @mouseenter="onEnterAnchor"
       @mouseleave="onLeaveAnchor"
       @keydown.esc="onLeaveAnchor"
-      @touchstart="onTouchStart"
     >
       <!-- @slot Slot for the anchor element -->
       <slot
         name="anchor"
       />
     </span>
-    <dt-lazy-show
+    <div
       :id="id"
       ref="content"
-      :show="isVisible"
-      role="tooltip"
-      aria-hidden="false"
       data-qa="dt-tooltip"
-      :appear="contentAppear"
-      :transition="transition"
       :class="[
         'd-tooltip',
-        `d-tooltip__arrow-tippy--${currentPlacement}`,
+        'd-tooltip--hidden',
         {
           [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
         },
@@ -44,7 +38,7 @@
       <slot>
         {{ message }}
       </slot>
-    </dt-lazy-show>
+    </div>
   </div>
 </template>
 
@@ -59,12 +53,12 @@ import {
   POPOVER_APPEND_TO_VALUES,
 } from '../popover/popover_constants';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
-import { DtLazyShow } from '@/components/lazy_show';
 import {
   createTippy,
   getAnchor,
   getPopperOptions,
 } from '@/components/popover/tippy_utils';
+import { roundArrow } from 'tippy.js';
 
 /**
  * A tooltip is a floating label that briefly explains an action, function, or an element.
@@ -74,9 +68,6 @@ import {
  */
 export default {
   name: 'DtTooltip',
-  components: {
-    DtLazyShow,
-  },
 
   props: {
     /**
@@ -127,7 +118,7 @@ export default {
      */
     offset: {
       type: Array,
-      default: () => [0, -4],
+      default: () => [0, 12],
     },
 
     /**
@@ -300,9 +291,6 @@ export default {
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
-
-      // flag check touch based device
-      isTouchDevice: false,
     };
   },
 
@@ -333,8 +321,7 @@ export default {
     tippyProps () {
       return {
         offset: this.offset,
-        interactive: false,
-        trigger: 'manual',
+        delay: this.delay ? TOOLTIP_DELAY_MS : false,
         placement: this.placement,
         sticky: this.sticky,
         popperOptions: getPopperOptions({
@@ -426,10 +413,6 @@ export default {
     },
 
     onEnterAnchor (e) {
-      // Note: This is to stop the call of mouseenter event when touchstart event is triggered,
-      //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null
-      if (this.isTouchDevice && !e.relatedTarget) return;
-
       if (this.delay && this.inTimer === null) {
         this.inTimer = setTimeout(() => {
           this.triggerShow(e);
@@ -437,9 +420,6 @@ export default {
       } else {
         this.triggerShow(e);
       }
-
-      // since this method will be trigger by mouse event, updating the flag is non-touch device
-      this.isTouchDevice = false;
     },
 
     triggerShow (e) {
@@ -505,8 +485,17 @@ export default {
     },
 
     initOptions () {
+      const template = this.$refs.content.cloneNode(true);
+      template.classList.remove('d-tooltip--hidden');
       return {
-        contentElement: this.$refs.content.$el,
+        content: template,
+        arrow: roundArrow,
+        // same as our custom fade delay in dialtone-globals.less
+        duration: 180,
+        interactive: false,
+        trigger: 'manual',
+        animation: 'fade',
+        touch: false,
         allowHTML: true,
         zIndex: this.calculateAnchorZindex(),
         onMount: this.onMount,
@@ -531,19 +520,25 @@ export default {
         this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
     },
-
-    onTouchStart () {
-      this.isTouchDevice = true;
-    },
   },
 };
 </script>
 
 <style lang="less">
+@import 'tippy.js/dist/svg-arrow.css';
+
 .tippy-box[data-popper-reference-hidden] {
   .d-tooltip {
     visibility: hidden;
     pointer-events: none;
   }
+}
+
+.tippy-box > .tippy-svg-arrow {
+  fill: var(--dt-color-surface-contrast);
+}
+
+.tippy-box[data-animation='fade'][data-state='hidden'] {
+  opacity: 0;
 }
 </style>
