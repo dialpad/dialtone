@@ -31,4 +31,3 @@ export default {
   components: { DtRecipeGeneralRow },
 };
 </script>
-
