@@ -476,7 +476,7 @@ export default {
     },
 
     initOptions () {
-      const template = this.$refs.content.$el.cloneNode(true);
+      const template = this.$refs.content.cloneNode(true);
       template.classList.remove('d-tooltip--hidden');
       return {
         content: template,
