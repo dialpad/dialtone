@@ -366,13 +366,14 @@ export default {
       ];
     },
 
+    // eslint-disable-next-line complexity
     getIcon () {
       switch (this.type) {
         case LEFTBAR_GENERAL_ROW_TYPES.CHANNELS:
-          if (this.hasUnreads) return 'channel unread';
+          if (this.hasUnreads || this.hasUnreadMentions) return 'channel unread';
           break;
         case LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL:
-          if (this.hasUnreads) return 'locked channel unread';
+          if (this.hasUnreads || this.hasUnreadMentions) return 'locked channel unread';
           break;
       }
       return this.type;
