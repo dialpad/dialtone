@@ -1,3 +1,10 @@
+## [9.34.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.4...dialtone/v9.34.5) (2024-05-15)
+
+
+### Bug Fixes
+
+* DLT-1710 unexpected emoji on links ([#308](https://github.com/dialpad/dialtone/issues/308)) ([d14931a](https://github.com/dialpad/dialtone/commit/d14931a3fa762d226197c3afb9d1660fbf557e91))
+
 ## [9.34.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.3...dialtone/v9.34.4) (2024-05-14)
 
 
