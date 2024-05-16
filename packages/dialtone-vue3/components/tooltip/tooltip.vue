@@ -488,10 +488,14 @@ export default {
         duration: 180,
         interactive: false,
         trigger: 'manual',
+        hideOnClick: false,
         // disable tooltip from displaying on touch devices
         touch: false,
         allowHTML: true,
         onMount: this.onMount,
+        popperOptions: getPopperOptions({
+          hasHideModifierEnabled: true,
+        }),
       };
     },
 
@@ -519,11 +523,9 @@ export default {
 <style lang="less">
 @import 'tippy.js/dist/svg-arrow.css';
 
-.tippy-box[data-popper-reference-hidden] {
-  .d-tooltip {
-    visibility: hidden;
-    pointer-events: none;
-  }
+.tippy-box[data-reference-hidden] {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .tippy-box > .tippy-svg-arrow {
