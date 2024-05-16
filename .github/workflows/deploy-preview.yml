@@ -59,7 +59,7 @@ jobs:
           ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -107,13 +107,13 @@ jobs:
 
       - id: auth
         name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
 
       - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
+        uses: google-github-actions/setup-gcloud@v2
 
       # -------------- #
       # Cleanup bucket #
@@ -140,7 +140,7 @@ jobs:
 
       - name: Upload Dialtone to GCP
         if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
-        uses: google-github-actions/upload-cloud-storage@v1
+        uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: apps/dialtone-documentation/docs/.vuepress/dist
           destination: ${{ env.DIALTONE_BUCKET_DIRECTORY }}
@@ -148,7 +148,7 @@ jobs:
 
       - name: Upload Dialtone-vue 2 to GCP
         if: ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' }}
-        uses: google-github-actions/upload-cloud-storage@v1
+        uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: packages/dialtone-vue2/storybook-static
           destination: ${{ env.DIALTONE_VUE_2_BUCKET_DIRECTORY }}
@@ -156,7 +156,7 @@ jobs:
 
       - name: Upload Dialtone-vue 3 to GCP
         if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
-        uses: google-github-actions/upload-cloud-storage@v1
+        uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: packages/dialtone-vue3/storybook-static
           destination: ${{ env.DIALTONE_VUE_3_BUCKET_DIRECTORY }}
@@ -168,7 +168,7 @@ jobs:
 
       - name: Add preview ready message
         if: (needs.filter-actions.outputs.dialtone == 'true' || needs.filter-actions.outputs.dialtone-vue-2 == 'true' || needs.filter-actions.outputs.dialtone-vue-3 == 'true' )
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@v2
         env:
           BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -178,4 +178,5 @@ jobs:
             ${{ needs.filter-actions.outputs.dialtone == 'true' && format('😎 Dialtone preview: https://{0}', env.DIALTONE_BUCKET_DIRECTORY) || '' }}
             ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' && format('😎 Dialtone-vue 2 preview: https://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) || '' }}
             ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' && format('😎 Dialtone-vue 3 the preview: https://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) || '' }}
-          allow-repeats: true
+          message-id: 'deploy-preview-message'
+          refresh-message-position: true

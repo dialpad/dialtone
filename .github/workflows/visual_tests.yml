@@ -4,7 +4,7 @@ on:
   push:
     branches: [ staging ]
   pull_request:
-    types: [ labeled, synchronize, opened ]
+    types: [ unlabeled, labeled, synchronize, opened ]
 
 env:
   HUSKY: 0
@@ -20,40 +20,43 @@ jobs:
       pull-requests: read
     outputs:
       dialtone-vue-2: ${{ steps.filter.outputs.dialtone-vue-2 }}
-      dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Filter actions by path
+        if: github.event_name == 'pull_request'
         uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
             dialtone-vue-2:
-              - 'packages/dialtone/**'
+              - 'packages/dialtone-css/**'
               - 'packages/dialtone-icons/**'
               - 'packages/dialtone-tokens/**'
               - 'packages/dialtone-vue2/**'
-            dialtone-vue-3:
-              - 'packages/dialtone/**'
-              - 'packages/dialtone-icons/**'
-              - 'packages/dialtone-tokens/**'
-              - 'packages/dialtone-vue3/**'
 
   prompt-for-label:
     needs: filter-actions
-    if: ((needs.filter-actions.outputs.dialtone-vue-2 == 'true' || needs.filter-actions.outputs.dialtone-vue-3 == 'true') && (github.event_name == 'pull_request' && github.ref != 'refs/heads/staging' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test') && !contains(github.event.pull_request.labels.*.name, 'visual-test-ready')))
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
-      - uses: actions/github-script@v6
+      - name: Add label prompt message
+        uses: mshick/add-pr-comment@v2
+        if: ${{ github.event_name == 'pull_request' && needs.filter-actions.outputs.dialtone-vue-2 == 'true' && (!contains(github.event.pull_request.labels.*.name, 'visual-test-ready') && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')) }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          script: |
-            throw "Please add either the visual-test-ready or no-visual-test label to this PR depending on whether you want to run visual tests or not. It is recommended to run visual tests if your PR changes any UI.";
+          message: |
+            Please add either the `visual-test-ready` or `no-visual-test` label to this PR depending on whether you want to run visual tests or not.
+            It is recommended to run visual tests if your PR changes any UI. ‼️
+          message-id: 'missing-visual-test-label'
+          refresh-message-position: true
 
   dialtone-vue-2:
     needs: filter-actions
-    if: ((needs.filter-actions.outputs.dialtone-vue-2 == 'true' && contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) || github.event_name == 'push')
+    if: ${{ github.event_name == 'push' || (needs.filter-actions.outputs.dialtone-vue-2 == 'true' && contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) }}
 
     runs-on: ubuntu-latest
     steps:
@@ -61,7 +64,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -95,47 +98,3 @@ jobs:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
         run: pnpm nx run --verbose dialtone-vue2:test:visual
-
-  dialtone-vue-3:
-    needs: filter-actions
-    if: (false && ((needs.filter-actions.outputs.dialtone-vue-3 == 'true' && contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) || github.event_name == 'push'))
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out branch
-        uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build Dialtone-vue 3 library and documentation site
-        run: pnpm nx run --verbose dialtone-vue3:build-docs
-
-      - name: Run Dialtone-vue 3 Visual Tests
-        env:
-          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-          PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: pnpm nx run --verbose dialtone-vue3:test:visual
