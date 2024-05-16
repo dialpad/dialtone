@@ -1,3 +1,15 @@
+# [3.125.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.124.0...dialtone-vue3/v3.125.0) (2024-05-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1757 round button alignment ([#314](https://github.com/dialpad/dialtone/issues/314)) ([eabd110](https://github.com/dialpad/dialtone/commit/eabd1102e139801ee113a38c9e6f9765eb6c2c9e))
+
+
+### Features
+
+* DLT-1756 add unread mention count ([#312](https://github.com/dialpad/dialtone/issues/312)) ([ff21d01](https://github.com/dialpad/dialtone/commit/ff21d0115775fa8ec62a01e365d2a09bac3fd2c3))
+
 # [3.124.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.4...dialtone-vue3/v3.124.0) (2024-05-16)
 
 
