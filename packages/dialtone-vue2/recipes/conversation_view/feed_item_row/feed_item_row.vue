@@ -21,6 +21,7 @@
             :full-name="displayName"
             :image-src="avatarImageUrl"
             image-alt=""
+            :icon-name="iconName"
             :seed="avatarSeed"
           />
         </slot>
@@ -167,6 +168,14 @@ export default {
     },
 
     /**
+     * Initials will never be shown. Instead it will show a "User" icon.
+     */
+    noInitials: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * time string displayed as is.
      * Shown on the header when showHeader is true
      */
@@ -260,6 +269,10 @@ export default {
           this.$emit('keydown', event);
         },
       };
+    },
+
+    iconName () {
+      return this.noInitials ? 'user' : null;
     },
 
     listItemClasses () {
