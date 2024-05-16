@@ -115,7 +115,7 @@ describe('DtTooltip tests', () => {
       });
 
       it.each(TOOLTIP_DIRECTIONS)('when placement is %s should have correct data-placement attribute', async (placement) => {
-        wrapper.unmount();
+        wrapper.destroy();
         mockProps = { show: true, placement, fallbackPlacements: [] };
         updateWrapper();
 
