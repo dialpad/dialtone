@@ -18,7 +18,6 @@
         :offset="$attrs.offset"
         :sticky="$attrs.sticky"
         :content-class="$attrs.contentClass"
-        :content-appear="$attrs.contentAppear"
         :transition="$attrs.transition"
         :show.sync="$attrs.show"
         :enabled="$attrs.enabled"
