@@ -37,7 +37,6 @@ jobs:
               - 'packages/dialtone-vue2/**'
 
   prompt-for-label:
-    if: ${{ github.event_name == 'pull_request' && needs.filter-actions.outputs.dialtone-vue-2 == 'true' && (!contains(github.event.pull_request.labels.*.name, 'visual-test-ready') && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')) }}
     needs: filter-actions
     runs-on: ubuntu-latest
     permissions:
@@ -45,6 +44,7 @@ jobs:
     steps:
       - name: Add preview ready message
         uses: mshick/add-pr-comment@v2
+        if: ${{ github.event_name == 'pull_request' && needs.filter-actions.outputs.dialtone-vue-2 == 'true' && (!contains(github.event.pull_request.labels.*.name, 'visual-test-ready') && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
