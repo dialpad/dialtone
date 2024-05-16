@@ -89,7 +89,7 @@
             data-qa="dt-leftbar-row-unread-badge"
             :class="['dt-leftbar-row__unread-badge', {
               'dt-leftbar-row__unread-count-badge':
-                shouldShowCustomStyleForCountBadge,
+                shouldApplyCustomStyleForCountBadge,
             }]"
           >
             {{ unreadCount }}
@@ -100,8 +100,8 @@
             type="bulletin"
             data-qa="dt-leftbar-row-unread-mention-badge"
             :class="['dt-leftbar-row__unread-badge',
-                     { 'dt-leftbar-row__unread-mention-count-only-badge': hasUnreads && hasUnreadMentionCount },
-                     { 'dt-leftbar-row__unread-mention-count-badge': shouldShowCustomStyleForCountBadge },
+                     { 'dt-leftbar-row__unread-mention-count-only-badge': hasUnreadMentionCount },
+                     { 'dt-leftbar-row__unread-mention-count-badge': shouldApplyCustomStyleForCountBadge },
             ]"
           >
             {{ unreadMentionCount }}
@@ -404,8 +404,8 @@ export default {
       return this.unreadMentionCount !== null;
     },
 
-    shouldShowCustomStyleForCountBadge () {
-      return this.hasUnreads && this.hasUnreadCount && this.hasUnreadMentionCount;
+    shouldApplyCustomStyleForCountBadge () {
+      return this.hasUnreadCount && this.hasUnreadMentionCount;
     },
   },
 
