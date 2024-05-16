@@ -27,15 +27,6 @@ describe('DtRecipeGeneralRow Tests', () => {
   let provide = {};
 
   // Helpers
-  const _setChildWrappers = async () => {
-    await vi.dynamicImportSettled();
-    iconType = wrapper.find('[data-qa="dt-leftbar-row-icon"]');
-    description = wrapper.find('.dt-leftbar-row__description');
-    unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
-    unreadMentionBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-mention-badge"]');
-  };
-
-
   const _setWrappers = async () => {
     wrapper = mount(DtRecipeGeneralRow, {
       props,
@@ -47,6 +38,7 @@ describe('DtRecipeGeneralRow Tests', () => {
     iconType = wrapper.find('[data-qa="dt-leftbar-row-icon"]');
     description = wrapper.find('.dt-leftbar-row__description');
     unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
+    unreadMentionBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-mention-badge"]');
   };
 
   beforeEach(async () => {
