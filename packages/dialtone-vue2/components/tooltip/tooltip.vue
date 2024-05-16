@@ -543,14 +543,6 @@ export default {
   fill: var(--dt-color-surface-moderate);
 }
 
-.tippy-content .d-tooltip:empty {
-    display: none;
-}
-
-.tippy-content:empty + .tippy-arrow {
-    display: none;
-}
-
 .tippy-box[data-animation='fade'][data-state='hidden'] {
   opacity: 0;
 }
