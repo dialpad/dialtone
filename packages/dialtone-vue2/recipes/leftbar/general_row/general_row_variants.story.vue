@@ -47,7 +47,7 @@
     </div>
     <div>
       <h3>
-        Channel with unread messages only show mentioned messages
+        Channel only show unread mentioned count
       </h3>
       <dt-recipe-general-row
         type="channels"
@@ -58,7 +58,7 @@
     </div>
     <div>
       <h3>
-        Channel with both unread messages unread mention messages
+        Channel show both unread and unread mention count
       </h3>
       <dt-recipe-general-row
         type="channels"
