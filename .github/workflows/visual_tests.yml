@@ -4,7 +4,7 @@ on:
   push:
     branches: [ staging ]
   pull_request:
-    types: [ labeled, synchronize, opened ]
+    types: [ unlabeled, labeled, synchronize, opened ]
 
 env:
   HUSKY: 0
