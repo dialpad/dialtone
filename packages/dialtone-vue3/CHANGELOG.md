@@ -1,3 +1,10 @@
+# [3.124.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.4...dialtone-vue3/v3.124.0) (2024-05-16)
+
+
+### Features
+
+* DP-91907 add leftbar contact centers recipe ([#291](https://github.com/dialpad/dialtone/issues/291)) ([73faf83](https://github.com/dialpad/dialtone/commit/73faf83a43cbf1e600581272e0233bfc565ee5cd))
+
 ## [3.123.4](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.3...dialtone-vue3/v3.123.4) (2024-05-15)
 
 
