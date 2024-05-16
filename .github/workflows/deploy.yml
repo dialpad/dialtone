@@ -67,6 +67,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
   deploy:
+    name: Deploy sites
     needs: [check-dialpad-member, get-branch-name, filter-actions]
     runs-on: ubuntu-latest
     permissions:
