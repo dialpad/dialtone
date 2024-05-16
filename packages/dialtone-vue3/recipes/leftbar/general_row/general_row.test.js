@@ -18,6 +18,7 @@ describe('DtRecipeGeneralRow Tests', () => {
   let iconType;
   let description;
   let unreadBadge;
+  let unreadMentionBadge;
 
   // Environment
   let props = baseProps;
@@ -37,6 +38,7 @@ describe('DtRecipeGeneralRow Tests', () => {
     iconType = wrapper.find('[data-qa="dt-leftbar-row-icon"]');
     description = wrapper.find('.dt-leftbar-row__description');
     unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
+    unreadMentionBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-mention-badge"]');
   };
 
   beforeEach(async () => {
@@ -82,6 +84,40 @@ describe('DtRecipeGeneralRow Tests', () => {
       });
 
       it('should render the unreadCount', () => {
+        expect(unreadBadge.text()).toBe(unreadCount);
+      });
+    });
+
+    describe('When a unreadMentionCount is provided', () => {
+      // Test Environment
+      const unreadMentionCount = '25';
+      const hasUnreads = true;
+
+      // Test Setup
+      beforeEach(async () => {
+        props = { ...baseProps, hasUnreads, unreadMentionCount };
+        await _setWrappers();
+      });
+
+      it('should render the unreadMentionCount', () => {
+        expect(unreadMentionBadge.text()).toBe(unreadMentionCount);
+      });
+    });
+
+    describe('When both unreadMentionCount and unreadCount are provided', () => {
+      // Test Environment
+      const unreadMentionCount = '25';
+      const unreadCount = '25';
+      const hasUnreads = true;
+
+      // Test Setup
+      beforeEach(async () => {
+        props = { ...baseProps, unreadMentionCount, hasUnreads, unreadCount };
+        await _setWrappers();
+      });
+
+      it('should render the unreadMentionCount and the unreadCount', () => {
+        expect(unreadMentionBadge.text()).toBe(unreadMentionCount);
         expect(unreadBadge.text()).toBe(unreadCount);
       });
     });
