@@ -393,11 +393,11 @@ export default {
     },
 
     hasUnreadCount () {
-      return Number(this.unreadCount) > 0;
+      return this.unreadCount !== null;
     },
 
     hasUnreadMentionCount () {
-      return Number(this.unreadMentionCount) > 0;
+      return this.unreadMentionCount !== null;
     },
 
     shouldShowCustomStyleForCountBadge () {
