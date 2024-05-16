@@ -405,7 +405,7 @@ export default {
     },
 
     shouldShowCustomStyleForCountBadge () {
-      return this.hasUnreads && this.hasUnreadCount && this.hasUnreadMentionCount > 0;
+      return this.hasUnreads && this.hasUnreadCount && this.hasUnreadMentionCount;
     },
   },
 
