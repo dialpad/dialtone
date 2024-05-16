@@ -477,6 +477,13 @@ export default {
       this.setProps();
     },
 
+    onShow (tooltipInstance) {
+      // don't show tooltip when no content
+      if (tooltipInstance.props.content.textContent.length === 0) {
+        return false;
+      }
+    },
+
     // set initial options here. If any of the options need to dynamically change, they should be put in
     // tippyProps instead.
     initOptions () {
@@ -491,8 +498,8 @@ export default {
         hideOnClick: false,
         // disable tooltip from displaying on touch devices
         touch: false,
-        allowHTML: true,
         onMount: this.onMount,
+        onShow: this.onShow,
         popperOptions: getPopperOptions({
           hasHideModifierEnabled: true,
         }),
@@ -534,6 +541,14 @@ export default {
 
 .tippy-box[data-theme~='inverted'] > .tippy-svg-arrow {
   fill: var(--dt-color-surface-moderate);
+}
+
+.tippy-content .d-tooltip:empty {
+    display: none;
+}
+
+.tippy-content:empty + .tippy-arrow {
+    display: none;
 }
 
 .tippy-box[data-animation='fade'][data-state='hidden'] {
