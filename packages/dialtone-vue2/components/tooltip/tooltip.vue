@@ -221,12 +221,11 @@ export default {
     },
 
     /**
-     * Named transition when the content display is toggled.
-     * @see DtLazyShow
+     * Whether the tooltip should have a transition effect.
      */
     transition: {
-      type: String,
-      default: 'fade',
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -316,6 +315,9 @@ export default {
         placement: this.placement,
         sticky: this.sticky,
         theme: this.inverted ? 'inverted' : undefined,
+        animation: this.transition ? 'fade' : false,
+        zIndex: this.calculateAnchorZindex(),
+        appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
         popperOptions: getPopperOptions({
           fallbackPlacements: this.fallbackPlacements,
           hasHideModifierEnabled: true,
@@ -465,8 +467,6 @@ export default {
       if (this.tip && this.tip.setProps) {
         this.tip.setProps({
           ...this.tippyProps,
-          zIndex: this.calculateAnchorZindex(),
-          appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
         });
       }
     },
@@ -475,19 +475,20 @@ export default {
       this.setProps();
     },
 
+    // set initial options here. If any of the options need to dynamically change, they should be put in
+    // tippyProps instead.
     initOptions () {
       const template = this.$refs.content;
       return {
         content: template,
         arrow: roundArrow,
-        // same as our custom fade delay in dialtone-globals.less
+        // transition duration - same as our custom fade delay in dialtone-globals.less
         duration: 180,
         interactive: false,
         trigger: 'manual',
-        animation: 'fade',
+        // disable tooltip from displaying on touch devices
         touch: false,
         allowHTML: true,
-        zIndex: this.calculateAnchorZindex(),
         onMount: this.onMount,
         ...this.tippyProps,
       };
