@@ -364,7 +364,6 @@ export default {
       ];
     },
 
-    // eslint-disable-next-line complexity
     getIcon () {
       switch (this.type) {
         case LEFTBAR_GENERAL_ROW_TYPES.CHANNELS:
