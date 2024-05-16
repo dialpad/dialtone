@@ -24,7 +24,6 @@
       data-qa="dt-tooltip"
       :class="[
         'd-tooltip',
-        'd-tooltip--hidden',
         {
           [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
         },
@@ -324,6 +323,7 @@ export default {
         delay: this.delay ? TOOLTIP_DELAY_MS : false,
         placement: this.placement,
         sticky: this.sticky,
+        theme: this.inverted ? 'inverted' : undefined,
         popperOptions: getPopperOptions({
           fallbackPlacements: this.fallbackPlacements,
           hasHideModifierEnabled: true,
@@ -485,8 +485,7 @@ export default {
     },
 
     initOptions () {
-      const template = this.$refs.content.cloneNode(true);
-      template.classList.remove('d-tooltip--hidden');
+      const template = this.$refs.content;
       return {
         content: template,
         arrow: roundArrow,
@@ -536,6 +535,10 @@ export default {
 
 .tippy-box > .tippy-svg-arrow {
   fill: var(--dt-color-surface-contrast);
+}
+
+.tippy-box[data-theme~='inverted'] > .tippy-svg-arrow {
+  fill: var(--dt-color-surface-moderate);
 }
 
 .tippy-box[data-animation='fade'][data-state='hidden'] {
