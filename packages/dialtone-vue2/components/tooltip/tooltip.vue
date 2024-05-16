@@ -57,7 +57,6 @@ import {
   getAnchor,
   getPopperOptions,
 } from '@/components/popover/tippy_utils';
-import { roundArrow } from 'tippy.js';
 
 /**
  * A tooltip is a floating label that briefly explains an action, function, or an element.
@@ -490,7 +489,7 @@ export default {
       const template = this.$refs.content;
       return {
         content: template,
-        arrow: roundArrow,
+        arrow: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="6"><path transform="rotate(180 6.21875 3.575)" d="m12.844.45-6 6-6-6h12Z"/></svg>',
         // transition duration - same as our custom fade delay in dialtone-globals.less
         duration: 180,
         interactive: false,
