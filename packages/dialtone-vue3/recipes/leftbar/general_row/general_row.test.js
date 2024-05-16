@@ -35,6 +35,7 @@ describe('DtRecipeGeneralRow Tests', () => {
     unreadMentionBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-mention-badge"]');
   };
 
+
   const _setWrappers = async () => {
     wrapper = mount(DtRecipeGeneralRow, {
       props,
@@ -42,7 +43,10 @@ describe('DtRecipeGeneralRow Tests', () => {
       slots,
       provide,
     });
-    await _setChildWrappers();
+
+    iconType = wrapper.find('[data-qa="dt-leftbar-row-icon"]');
+    description = wrapper.find('.dt-leftbar-row__description');
+    unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
   };
 
   beforeEach(async () => {

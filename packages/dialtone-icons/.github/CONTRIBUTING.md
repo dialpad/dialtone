@@ -16,7 +16,7 @@ or standalone as SVG files.
 
 - In the [Icons Figma file] select and export each icon as SVG.
 - Place the exported SVG file(s) in the appropriate folder category inside `./src/svg/`
-- Add the name and keywords in the `keywords.json` file. Add the keywords array as the value. e.g:
+- Add the name and keywords in the `keywords-icons.json` file. Add the keywords array as the value. e.g:
 
 ```js
 {
@@ -45,9 +45,12 @@ Generated Vue icons are output to the `src/icons/` folder when you do `nx build 
 
 ## Important Folders and Files
 
-- `src/svg`: All the source SVG icon files.
-- `keywords.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable while searching on [Dialtone icons documentation](https://dialpad.design/components/icon.html).
+- `src/icons/svg`: All the source SVG icon files.
+- `src/illustrations/svg`: All the source SVG icon files.
+- `keywords-icons.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable while searching on [Dialtone icons documentation](https://dialpad.design/components/icon.html).
+- `keywords-illustrations.json`: Contains the categories on which illustrations are going to be included and the keywords to make the illustrations more discoverable.
 - `icons.json`: This file is auto generated and used to list all the icons in Storybook.
+- `illustrations.json`: This file is auto generated and used to list all the illustrations in Storybook.
 
 [Dialtone-vue icon]: https://vue.dialpad.design/?path=/story/components-icon--default
 [Icons Figma file]: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT9-Icon-Library?type=design&node-id=10023-2864&mode=design&t=MvRnRubYryeiG1az-0

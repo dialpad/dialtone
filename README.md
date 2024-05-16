@@ -11,13 +11,13 @@ All packages of the monorepo are combined into a single Dialtone package for eas
 #### Vue 3
 
 ```shell
-npm install @dialpad/dialtone@next @tiptap/vue-3
+npm install @dialpad/dialtone@latest @tiptap/vue-3
 ```
 
 #### Vue 2
 
 ```shell
-npm install @dialpad/dialtone@next @linusborg/vue-simple-portal @tiptap/vue-2
+npm install @dialpad/dialtone@latest @linusborg/vue-simple-portal @tiptap/vue-2
 ```
 
 ### Import packages:
@@ -98,6 +98,32 @@ import { DtButton } from "@dialpad/dialtone/vue3"
 
 // Default import (Prefered if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
+```
+
+#### Dialtone Tokens
+
+Dialtone tokens doesn't have a default export, so you need to access
+the files directly as following:
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/tokens/variables-light.css" // Light tokens
+@import "@dialpad/dialtone/tokens/variables-dark.css" // Dark tokens
+```
+
+- LESS
+
+```less
+@import "@dialpad/dialtone/tokens/variables-light.less" // Light tokens
+@import "@dialpad/dialtone/tokens/variables-dark.less" // Dark tokens
+```
+
+- JSON
+
+```js
+import "@dialpad/dialtone/tokens/tokens-light.json" // Light tokens
+import "@dialpad/dialtone/tokens/tokens-dark.json" // Dark tokens
 ```
 
 ## About this repo
@@ -323,49 +349,50 @@ nx build dialtone-documentation
 
 ### Releasing
 
-Running these commands will call [release.sh](./scripts/release.sh) which
-automatically release all packages that need to be released.
-
-Once done, a GitHub Action will be triggered, you can check the progress here:
-[release.yml](https://github.com/dialpad/dialtone/actions/workflows/release.yml)
-
-If something goes wrong, and you need to re-run the release, you can run the workflow manually through the `Run workflow`
-option on GitHub.
-
-Select the `production` branch and pass the `commit SHA` which you would like to be the base to detect the changes or
-choose a `package` to release individually.
+Currently, Dialtone packages are being release in two different ways: `scheduled` and `manually`.
+The `scheduled` release will only release changes to `production` while `manually` you can choose to release
+`alpha`, `beta` or `next` branches.
 
 #### Production
 
-This can only be run while on **staging** branch. After running the command, it will execute the following steps:
+##### Scheduled
 
-1. Run build on the affected projects to improve the speed of the next step.
-2. Run release-local script on the affected projects to verify and increase the version according to commits.
-3. Merge `staging` version changes to `production`
-4. Push `production` branch.
-   - A GHA will publish the release on npm and GitHub with `@latest` tag.
-5. Merge changes from `production` back to `staging`
+On every Tuesday at 10:00 am UTC, [release action](.github/workflows/release.yml) will trigger the production release process which
+automatically release all packages that need to be released following the next steps:
+
+1. Run the `nx release` on every project.
+2. Merge the release commits created by the semantic release bot on `staging` to `production` branch.
+3. Push the `production` branch.
+4. An [action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
+
+##### Manually
+
+In case you need to release earlier than the next scheduled date, you can trigger the release via `Run workflow` on [GitHub](https://github.com/dialpad/dialtone/actions/workflows/release.yml).
+
+  1. Select `staging` branch.
+  2. Select the `package` that you want to release or leave it empty to release all of them.
+
+This will trigger the [release action](.github/workflows/release.yml), release changes on `staging` and automatically publish the selected packages following the next steps:
+
+1. Run the `nx release` on selected packages (all if `package` is empty).
+2. Merge the release commits created by the semantic release bot on `staging` to `production` branch.
+3. Push the `production` branch.
+4. An [action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
 
 ```bash
 nx run release
 ```
 
-#### Alpha/Beta
+#### Alpha/Beta/Next
 
-Needs to be run while on your feature branch. After running the command, it will execute the following steps:
+##### Manually
 
-1. Delete local and remote `alpha/beta` branch.
-2. Checkout to a clean `alpha/beta` branch and push to origin.
-3. Run build on the affected projects to improve the speed of the next step.
-4. Run release-local script on the affected projects to verify and increase the version according to commits.
-5. Push updated `alpha/beta` branch to origin.
-   - A GHA will publish the release on npm and GitHub with `@alpha` or `@beta` tag.
-6. Merge changes from `alpha/beta` back to your feature branch.
+1. Merge your changes to the branch you want to release, commit and push to origin.
+2. Go to [GitHub](https://github.com/dialpad/dialtone/actions/workflows/release.yml) and click on `Run workflow`.
+3. Select `alpha`, `beta` or `next` branch.
+4. Select the `package` that you want to release or leave it empty to release all of them.
 
-```bash
-nx run dialtone:release:alpha
-```
+This will trigger the [release action](.github/workflows/release.yml), release changes on the selected branch and automatically publish the selected packages following the next steps:
 
-```bash
-nx run dialtone:release:beta
-```
+1. Run the `nx release` on selected packages (all if `package` is empty).
+2. An [action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.

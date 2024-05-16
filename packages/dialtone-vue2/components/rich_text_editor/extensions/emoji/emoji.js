@@ -1,7 +1,7 @@
 import { mergeAttributes, Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import { VueNodeViewRenderer } from '@tiptap/vue-2';
 import EmojiComponent from './EmojiComponent.vue';
-import { codeToEmojiData } from '@/common/emoji';
+import { codeToEmojiData, emojiShortCodeRegex } from '@/common/emoji';
 import { PluginKey } from '@tiptap/pm/state';
 
 import Suggestion from '@tiptap/suggestion';
@@ -9,8 +9,7 @@ import suggestionOptions from './suggestion';
 
 export const EmojiPluginKey = new PluginKey('emoji');
 
-const inputShortCodeRegex = /:\w+:$/;
-export const emojiShortCodeRegex = /:\w+:/g;
+const inputShortCodeRegex = /(^| |(?<=:))(:\w+:)$/;
 /* eslint-disable max-len */
 const inputUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])$/;
 const pasteUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g;
@@ -18,12 +17,13 @@ const pasteUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|
 
 const inputRuleMatch = (match) => {
   if (match && codeToEmojiData(match[0])) {
+    const text = match[2] || match[0];
     // needs to be a dict returned
     // ref type InputRuleMatch:
     // https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/InputRule.ts#L16
     return {
       index: match.index,
-      text: match[0],
+      text,
       match,
     };
   }
@@ -94,6 +94,7 @@ export const Emoji = Node.create({
       nodeInputRule({
         find: (text) => {
           const match = text.match(inputShortCodeRegex);
+          if (!match) return;
           return inputRuleMatch(match);
         },
         type: this.type,
@@ -107,6 +108,7 @@ export const Emoji = Node.create({
       nodeInputRule({
         find: (text) => {
           const match = text.match(inputUnicodeRegex);
+          if (!match) return;
           return inputRuleMatch(match);
         },
         type: this.type,

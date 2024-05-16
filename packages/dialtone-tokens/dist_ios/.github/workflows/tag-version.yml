@@ -9,7 +9,7 @@ jobs:
   commitlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: tag most recent commit
         run: git tag $(cat VERSION) HEAD

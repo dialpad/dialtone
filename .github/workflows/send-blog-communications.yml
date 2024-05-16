@@ -83,6 +83,14 @@ jobs:
           sed -i 10q $FILE_PATH &&
           echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
 
+      - name: Wait for deployment to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Deploy sites'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
       - name: Send email
         uses: dawidd6/action-send-mail@v3
         with:
@@ -127,6 +135,14 @@ jobs:
         id: get-heading
         run: |
           echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH)" >> $GITHUB_ENV
+
+      - name: Wait for deployment to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Deploy sites'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
 
       - id: auth
         name: Authenticate to Google Cloud

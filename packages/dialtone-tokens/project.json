@@ -17,16 +17,11 @@
         "command": "pnpm publish --filter ./packages/dialtone-tokens"
       }
     },
-    "release-github": {
+    "release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-tokens/release-ci.config.cjs"
-      }
-    },
-    "release-local": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm semantic-release-plus --skip-tag --extends ./packages/dialtone-tokens/release-local.config.cjs"
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-tokens/release-ci.config.cjs",
+        "parallel": false
       }
     }
   }
