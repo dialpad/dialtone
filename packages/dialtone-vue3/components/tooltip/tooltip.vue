@@ -315,8 +315,7 @@ export default {
         sticky: this.sticky,
         theme: this.inverted ? 'inverted' : undefined,
         animation: this.transition ? 'fade' : false,
-        zIndex: this.calculateAnchorZindex(),
-        appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
+
         popperOptions: getPopperOptions({
           fallbackPlacements: this.fallbackPlacements,
           hasHideModifierEnabled: true,
@@ -467,6 +466,9 @@ export default {
       if (this.tip && this.tip.setProps) {
         this.tip.setProps({
           ...this.tippyProps,
+          // these need to be set here rather than in tippyProps because they are non-reactive
+          appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
+          zIndex: this.calculateAnchorZindex(),
         });
       }
     },
@@ -490,7 +492,6 @@ export default {
         touch: false,
         allowHTML: true,
         onMount: this.onMount,
-        ...this.tippyProps,
       };
     },
 
