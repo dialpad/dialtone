@@ -42,7 +42,7 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Add preview ready message
+      - name: Add label prompt message
         uses: mshick/add-pr-comment@v2
         if: ${{ github.event_name == 'pull_request' && needs.filter-actions.outputs.dialtone-vue-2 == 'true' && (!contains(github.event.pull_request.labels.*.name, 'visual-test-ready') && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')) }}
         env:
@@ -51,6 +51,7 @@ jobs:
           message: |
             Please add either the `visual-test-ready` or `no-visual-test` label to this PR depending on whether you want to run visual tests or not.
             It is recommended to run visual tests if your PR changes any UI. ‼️
+          message-id: 'missing-visual-test-label'
           refresh-message-position: true
 
   dialtone-vue-2:
