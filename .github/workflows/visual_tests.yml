@@ -51,7 +51,6 @@ jobs:
           message: |
             Please add either the `visual-test-ready` or `no-visual-test` label to this PR depending on whether you want to run visual tests or not.
             It is recommended to run visual tests if your PR changes any UI. ‼️
-          message-id: 'missing-visual-test-label'
           refresh-message-position: true
 
   dialtone-vue-2:
