@@ -2,6 +2,7 @@ import { mount, flushPromises } from '@vue/test-utils';
 import DtTooltip from './tooltip.vue';
 import {
   TOOLTIP_KIND_MODIFIERS,
+  TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 
 // jsdom doesn't like this.anchor?.getRootNode() so use document.body.
@@ -19,6 +20,7 @@ describe('DtTooltip tests', () => {
   let tooltipContainer;
   let tooltip;
   let tippyContent;
+  let tippyBox;
   let anchor;
 
   const updateWrapper = () => {
@@ -35,6 +37,7 @@ describe('DtTooltip tests', () => {
     tooltipContainer = wrapper.find('[data-qa="dt-tooltip-container"]');
     tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
     tippyContent = document.body.querySelector('.tippy-content');
+    tippyBox = document.body.querySelector('.tippy-box');
     anchor = wrapper.find('[data-qa="dt-tooltip-anchor"]');
   };
 
@@ -96,6 +99,17 @@ describe('DtTooltip tests', () => {
           expect([...tooltip.classList].includes(TOOLTIP_KIND_MODIFIERS.inverted)).not.toBeNull();
         });
       });
+
+      it.each(TOOLTIP_DIRECTIONS)('when placement is %s should have correct data-placement attribute', async (placement) => {
+        wrapper.unmount();
+        mockProps = { show: true, placement, fallbackPlacements: [] };
+        updateWrapper();
+
+        await flushPromises();
+        tippyBox = document.body.querySelector('.tippy-box');
+
+        expect(tippyBox.getAttribute('data-placement')).toBe(placement);
+      });
     });
   });
 
@@ -105,6 +119,7 @@ describe('DtTooltip tests', () => {
         mockProps = { show: true };
         updateWrapper();
         await flushPromises();
+
         expect(tippyContent.getAttribute('data-state')).toBe('visible');
       });
     });
@@ -114,6 +129,7 @@ describe('DtTooltip tests', () => {
         mockProps = { show: true };
         updateWrapper();
         await wrapper.setProps({ show: false });
+
         expect(tippyContent.getAttribute('data-state')).not.toBe('visible');
       });
     });
