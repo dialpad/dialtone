@@ -17,7 +17,7 @@ const localVue = createLocalVue();
 const baseProps = {
   value: 'initial value',
   inputAriaLabel: 'aria-label text',
-  link: true,
+  customLink: true,
   inputClass: 'qa-editor',
 };
 
@@ -44,7 +44,7 @@ const _getLinksFromJSON = () => {
 
   for (const paragraph of json.content) {
     for (const textNode of paragraph.content) {
-      if (!textNode.marks?.some(mark => mark.type === 'Link')) {
+      if (!textNode.marks?.some(mark => mark.type === 'CustomLink')) {
         continue;
       }
       links.push(textNode);

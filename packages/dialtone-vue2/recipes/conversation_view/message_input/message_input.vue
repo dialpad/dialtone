@@ -329,7 +329,7 @@ export default {
      */
     link: {
       type: [Boolean, Object],
-      default: false,
+      default: true,
     },
 
     /**
