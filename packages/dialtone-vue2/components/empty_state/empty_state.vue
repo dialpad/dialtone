@@ -1,23 +1,23 @@
 <template>
-  <div
-    :class="emptyStateClasses"
-  >
-    <dt-icon
-      v-if="iconName"
-      :name="iconName"
-      :size="iconSize"
-    />
+  <div :class="emptyStateClasses">
+    <template v-if="showIllustration">
+      <dt-icon
+        v-if="showIcon"
+        :name="iconName"
+        size="800"
+      />
 
-    <dt-illustration
-      v-if="showIllustration && !!illustrationName"
-      :name="illustrationName"
-    />
+      <dt-illustration
+        v-if="showIllustrationComponent"
+        :name="illustrationName"
+      />
+    </template>
 
-    <h1 v-if="!!headerText">
+    <h1 v-if="headerText">
       {{ headerText }}
     </h1>
 
-    <p v-if="!!bodyText">
+    <p v-if="bodyText">
       {{ bodyText }}
     </p>
 
@@ -41,7 +41,7 @@ export default {
   props: {
     /**
      * The empty state size.
-     * @values sm, md, lg
+     * @values 'sm', 'md', 'lg'
      */
     size: {
       type: String,
@@ -51,6 +51,7 @@ export default {
 
     /**
      * The illustration name in kebab-case
+     * @type {String}
      */
     illustrationName: {
       type: String,
@@ -60,6 +61,7 @@ export default {
 
     /**
      * The icon name in kebab-case
+     * @type {String}
      */
     iconName: {
       type: String,
@@ -74,6 +76,7 @@ export default {
     headerText: {
       type: String,
       default: null,
+      required: true,
     },
 
     /**
@@ -96,17 +99,28 @@ export default {
   },
 
   computed: {
-    iconSize () {
-      switch (this.size) {
-        case 'sm':
-          return '200';
-        case 'md':
-          return '500';
-        case 'lg':
-          return '800';
-        default:
-          return '400';
+    /**
+     * Illustration will always be shown in lg and md size
+     * Illustration will not be shown in sm size
+     */
+    showIllustrationComponent () {
+      return this.illustrationName && this.notSmSize;
+    },
+
+    /**
+     * Icon will be shown in lg and md size only if illustration is not provided
+     * Icon will always be shown in sm size
+     */
+    showIcon () {
+      if (!this.iconName) {
+        return false;
       }
+
+      return !(this.illustrationName && this.notSmSize);
+    },
+
+    notSmSize () {
+      return this.size !== 'sm';
     },
 
     sizeClass () {
@@ -116,6 +130,12 @@ export default {
     emptyStateClasses () {
       return ['d-empty-state', this.sizeClass];
     },
+  },
+
+  mounted () {
+    if (!this.bodyText && !this.$slots.body) {
+      console.warn('Dialtone Empty State component: You should provide either bodyText or content on body slot.');
+    }
   },
 };
 </script>
@@ -130,7 +150,7 @@ export default {
   margin: 0 auto;
 
   &--size-sm {
-    width: 40%;
+    width: 50%;
     h1{
       font-size: 1.5rem;
     }
@@ -140,7 +160,7 @@ export default {
   }
 
   &--size-md {
-    width: 60%;
+    width: 70%;
     h1{
       font-size: 2.7rem;
     }
