@@ -7,7 +7,7 @@ let wrapper;
 let editorEl;
 
 // Test Environment
-let propsData;
+let props;
 let attrs;
 let slots;
 let listeners;
@@ -16,7 +16,7 @@ let listeners;
 const baseProps = {
   value: 'initial value',
   inputAriaLabel: 'aria-label text',
-  link: true,
+  customLink: true,
   inputClass: 'qa-editor',
 };
 
@@ -43,7 +43,7 @@ const _getLinksFromJSON = () => {
 
   for (const paragraph of json.content) {
     for (const textNode of paragraph.content) {
-      if (!textNode.marks?.some(mark => mark.type === 'Link')) {
+      if (!textNode.marks?.some(mark => mark.type === 'CustomLink')) {
         continue;
       }
       links.push(textNode);
@@ -62,7 +62,7 @@ const _mountWrapper = () => {
   // multiple elements when re-mounting.
   editorEl?.remove();
   wrapper = mount(DtRichTextEditor, {
-    propsData,
+    props,
     components: { EditorContent },
     listeners,
     attrs,
@@ -92,7 +92,7 @@ describe('DtRichTextEditor Link Extension tests', () => {
   });
 
   beforeEach(async () => {
-    propsData = baseProps;
+    props = baseProps;
     _mountWrapper();
     await wrapper.vm.$nextTick();
     _setChildWrappers();
@@ -100,7 +100,7 @@ describe('DtRichTextEditor Link Extension tests', () => {
 
   // Test Teardown
   afterEach(() => {
-    propsData = baseProps;
+    props = baseProps;
     slots = {};
   });
 
