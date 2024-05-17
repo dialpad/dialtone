@@ -75,7 +75,6 @@ export default {
      */
     headerText: {
       type: String,
-      default: null,
       required: true,
     },
 
