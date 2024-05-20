@@ -45,35 +45,65 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 ## Variants and examples
 
+### Default
+
 <code-well-header>
   <a href="#link" class="d-link">Base link</a>
   <a href="#link" class="d-link d-link--danger">Danger link</a>
   <a href="#link" class="d-link d-link--muted">Muted link</a>
   <a href="#link" class="d-link d-link--success">Success link</a>
   <a href="#link" class="d-link d-link--warning">Warning link</a>
-  <a href="#link" class="d-link d-link--disabled">Disabled link</a>
   <a href="#link" class="d-link d-link--mention">Mention link</a>
 </code-well-header>
 
-```html
-<a href="#link" class="d-link">...</a>
-<a href="#link" class="d-link d-link--danger">...</a>
-<a href="#link" class="d-link d-link--muted">...</a>
-<a href="#link" class="d-link d-link--success">...</a>
-<a href="#link" class="d-link d-link--warning">...</a>
-<a href="#link" class="d-link d-link--disabled">...</a>
-<a href="#link" class="d-link d-link--mention">...</a>
-```
+<code-example-tabs
+htmlCode='
+<a href="#link" class="d-link">Link</a>
+<a href="#link" class="d-link d-link--danger">Danger link</a>
+<a href="#link" class="d-link d-link--muted">Muted link</a>
+<a href="#link" class="d-link d-link--success">Success link</a>
+<a href="#link" class="d-link d-link--warning">Warning link</a>
+<a href="#link" class="d-link d-link--mention">Mention link</a>
+'
+vueCode='
+<dt-link :href="#link">Link</dt-link>
+<dt-link :href="#link" kind="danger">Danger link</dt-link>
+<dt-link :href="#link" kind="muted">Muted link</dt-link>
+<dt-link :href="#link" kind="success">Success link</dt-link>
+<dt-link :href="#link" kind="warning">Warning link</dt-link>
+<dt-link :href="#link" kind="mention">Mention link</dt-link>
+'
+showHtmlWarning />
+
+### Inverted
 
 <code-well-header bgclass="d-bgc-contrast">
   <a href="#link" class="d-link d-link--inverted">Inverted base link</a>
-  <a href="#link" class="d-link d-link--inverted-disabled">Inverted disabled link</a>
+  <a href="#link" class="d-link d-link--inverted-danger">Inverted danger link</a>
+  <a href="#link" class="d-link d-link--inverted-success">Inverted success link</a>
+  <a href="#link" class="d-link d-link--inverted-warning">Inverted warning link</a>
+  <a href="#link" class="d-link d-link--inverted-muted">Inverted muted link</a>
+  <a href="#link" class="d-link d-link--inverted-mention">Inverted mention link</a>
 </code-well-header>
 
-```html
-<a href="#link" class="d-link d-link--inverted">...</a>
-<a href="#link" class="d-link d-link--inverted-disabled">Inverted disabled link</a>
-```
+<code-example-tabs
+htmlCode='
+<a href="#link" class="d-link d-link--inverted">Inverted link</a>
+<a href="#link" class="d-link d-link--inverted-danger">Inverted danger link</a>
+<a href="#link" class="d-link d-link--inverted-success">Inverted success link</a>
+<a href="#link" class="d-link d-link--inverted-warning">Inverted warning link</a>
+<a href="#link" class="d-link d-link--inverted-muted">Inverted muted link</a>
+<a href="#link" class="d-link d-link--inverted-mention">Inverted muted link</a>
+'
+vueCode='
+<dt-link :href="#link" inverted>Inverted link</dt-link>
+<dt-link :href="#link" kind="danger" inverted>Inverted danger link</dt-link>
+<dt-link :href="#link" kind="success" inverted>Inverted success link</dt-link>
+<dt-link :href="#link" kind="warning" inverted>Inverted warning link</dt-link>
+<dt-link :href="#link" kind="muted" inverted>Inverted muted link</dt-link>
+<dt-link :href="#link" kind="mention" inverted>Inverted mention link</dt-link>
+'
+showHtmlWarning />
 
 ## Vue API
 
