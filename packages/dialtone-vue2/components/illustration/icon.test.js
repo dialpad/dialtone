@@ -1,11 +1,11 @@
-import DtIcon from './icon.vue';
+import DtIcon from './illustration.vue';
 import { mount } from '@vue/test-utils';
 
-const baseProps = { name: 'accessibility' };
+const baseProps = { name: 'mind' };
 
 let mockProps = {};
 
-describe('DtIcon Tests', () => {
+describe('DtIllustration Tests', () => {
   let wrapper;
   let icon;
 
@@ -15,7 +15,7 @@ describe('DtIcon Tests', () => {
     });
     await vi.dynamicImportSettled();
 
-    icon = wrapper.find('[data-qa="dt-icon"]');
+    icon = wrapper.find('[data-qa="dt-illustration"]');
   };
 
   beforeEach(async () => {
@@ -27,43 +27,9 @@ describe('DtIcon Tests', () => {
   });
 
   describe('Presentation Tests', () => {
-    it('Should render the accessibility icon', () => {
+    it('Should render the mind illustration', () => {
       expect(wrapper).toBeDefined();
-      expect(icon.classes().includes('d-icon--accessibility')).toBe(true);
-    });
-
-    describe('When size prop is not set', () => {
-      it('Should have default class', () => {
-        expect(icon.classes().includes('d-icon--size-500')).toBe(true);
-      });
-    });
-
-    describe('When size prop is set', () => {
-      it('Should have correct class', async () => {
-        mockProps = { size: '800' };
-
-        await updateWrapper();
-
-        expect(icon.classes().includes('d-icon--size-800')).toBe(true);
-      });
-    });
-  });
-
-  describe('Accessibility Tests', () => {
-    describe('When ariaLabel prop is set', () => {
-      beforeEach(async () => {
-        mockProps = { ariaLabel: 'icon description' };
-
-        await updateWrapper();
-      });
-
-      it('sets the aria-label attribute', () => {
-        expect(icon.attributes()['aria-label']).toBe('icon description');
-      });
-
-      it('sets aria-hidden to false', () => {
-        expect(icon.attributes()['aria-hidden']).toBe('false');
-      });
+      expect(icon.classes().includes('d-illustration--mind')).toBe(true);
     });
   });
 });
