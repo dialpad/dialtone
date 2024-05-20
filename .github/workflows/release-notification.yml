@@ -1,0 +1,60 @@
+name: Release notification
+
+on:
+  push:
+    tags:
+      - dialtone/v*
+
+env:
+  RELEASE_URL: ${{ format('https://github.com/dialpad/dialtone/releases/tag/{0}', github.ref_name) }}
+
+jobs:
+  send-sms:
+    name: Send SMS
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v2.1.0
+
+      - name: Sanitize release notes
+        id: sanitize-notes
+        env:
+          EXTRACTED_NOTES: ${{ steps.extract-release-notes.outputs.release_notes }}
+        run: >
+          echo "RELEASE_NOTES=$(
+            echo ${EXTRACTED_NOTES//$'\n'/\\n} |
+            sed -e 's/[(][^)]*[)]//g' -e 's/"/\\"/g' |
+            tr -d '()'
+          )" >> $GITHUB_ENV;
+
+      - id: get-released-version
+        name: Get released version from tag
+        run: |
+          echo "RELEASE_VERSION=${GITHUB_REF#*dialtone/v}" >> $GITHUB_ENV
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+          token_format: "id_token"
+          id_token_audience: ${{ env.API_URL }}
+
+      - name: Send sms
+        run: |
+          curl -m 70 -X POST ${{ env.API_URL }} \
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published 🎉. Included changes:\n```markdown\n${{ env.RELEASE_NOTES }}```\nRead the full changelog: ${{ env.RELEASE_URL }}"
+          }'

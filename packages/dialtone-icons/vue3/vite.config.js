@@ -9,12 +9,19 @@ const iconEntries = glob.sync('../src/icons/*.vue').reduce((entries, path) => {
   entries[entryName] = path;
   return entries;
 }, {});
+
+const illustrationEntries = glob.sync('../src/illustrations/*.vue').reduce((entries, path) => {
+  const entryName = path.replace(/^\.\.\/src\/illustrations\/(.*)\.vue$/, 'components/$1');
+  entries[entryName] = path;
+  return entries;
+}, {});
 export default defineConfig({
   build: {
     sourcemap: true,
     lib: {
       entry: {
         ...iconEntries,
+        ...illustrationEntries,
         'dialtone-icons': resolve(__dirname, '../index.js'),
       },
       formats: ['es', 'cjs'],
@@ -23,7 +30,6 @@ export default defineConfig({
       external: ['vue'],
       output: {
         minifyInternalExports: true,
-        sourcemap: true,
       },
     },
     minify: true,

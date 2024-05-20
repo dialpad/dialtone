@@ -309,18 +309,22 @@ export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
   // Some older browser versions don't support lookbehind, so provide a RegExp
   // version without it. It fails just one test case, so IMO it's still good
   // enough to use. https://caniuse.com/js-regexp-lookbehind
-  let canUseLookBehind = true;
   try {
-    // eslint-disable-next-line prefer-regex-literals
-    RegExp('(?<=\\W)');
+    return new RegExp(
+      '(?:^|(?<=\\W))' +
+      '(?![\\s\\-])\\+?(?:[0-9()\\- \\t]' +
+      `{${minLength},${maxLength}}` +
+      ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
+    );
   } catch (e) {
-    canUseLookBehind = false;
+    // eslint-disable-next-line no-console
+    console.warn('This browser doesn\'t support regex lookahead/lookbehind');
   }
+
   return new RegExp(
-    `${canUseLookBehind ? '(?:^|(?<=\\W))' : ''}` +
     '(?![\\s\\-])\\+?(?:[0-9()\\- \\t]' +
-    `{${minLength},${maxLength}}` +
-    ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
+      `{${minLength},${maxLength}}` +
+      ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
   );
 }
 

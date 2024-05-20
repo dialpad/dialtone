@@ -1,3 +1,10 @@
+## [1.30.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.30.0...dialtone-tokens/v1.30.1) (2024-04-26)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
+
 # [1.30.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.29.0...dialtone-tokens/v1.30.0) (2024-04-12)
 
 

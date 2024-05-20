@@ -2,7 +2,7 @@
   <div class="d-h264">
     <dt-recipe-message-input
       ref="input"
-      v-model="modelValue"
+      v-model="$attrs.modelValue"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :allow-blockquote="$attrs.allowBlockquote"
@@ -20,6 +20,7 @@
       :max-height="$attrs.maxHeight"
       :mention-suggestion="$attrs.mentionSuggestion"
       :channel-suggestion="$attrs.channelSuggestion"
+      :slash-command-suggestion="$attrs.slashCommandSuggestion"
       :show-emoji-picker="$attrs.showEmojiPicker"
       :emoji-picker-props="$attrs.emojiPickerProps"
       :emoji-tooltip-message="$attrs.emojiTooltipMessage"
@@ -34,6 +35,7 @@
       @input="$attrs.onInput"
       @select-media="$attrs.onSelectMedia"
       @selected-emoji="$attrs.onSelectedEmoji"
+      @selected-command="$attrs.onSelectedCommand"
       @skin-tone="$attrs.onSkinTone"
       @add-media="$attrs.onAddMedia"
       @paste-media="$attrs.onPasteMedia"
@@ -49,10 +51,5 @@ import DtRecipeMessageInput from './message_input.vue';
 export default {
   name: 'DtRecipeMessageInputDefault',
   components: { DtRecipeMessageInput },
-  data () {
-    return {
-      modelValue: this.$attrs.modelValue,
-    };
-  },
 };
 </script>

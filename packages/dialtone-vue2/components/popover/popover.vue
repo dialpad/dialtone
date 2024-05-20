@@ -134,7 +134,7 @@ import { getUniqueString, isOutOfViewPort } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal';
-import { createTippy, getPopperOptions } from './tippy_utils';
+import { createTippyPopover, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
@@ -947,7 +947,7 @@ export default {
     },
 
     initTippyInstance () {
-      this.tip = createTippy(this.anchorEl, {
+      this.tip = createTippyPopover(this.anchorEl, {
         popperOptions: this.popperOptions(),
         contentElement: this.popoverContentEl,
         placement: this.placement,

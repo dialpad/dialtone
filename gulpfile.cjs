@@ -28,7 +28,7 @@ const paths = {
     tokens: [
       './packages/dialtone-tokens/dist/**',
       '!./packages/dialtone-tokens/dist/android/**',
-      '!./packages/dialtone-tokens/dist/ios/**'
+      '!./packages/dialtone-tokens/dist/ios/**',
     ],
     vue2: './packages/dialtone-vue2/dist/**',
     vue3: './packages/dialtone-vue3/dist/**',

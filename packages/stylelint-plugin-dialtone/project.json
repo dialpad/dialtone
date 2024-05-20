@@ -4,21 +4,13 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm publish --filter ./packages/stylelint-plugin-dialtone",
-        "parallel": false
+        "command": "pnpm publish --filter ./packages/stylelint-plugin-dialtone"
       }
     },
-    "release-github": {
+    "release": {
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm semantic-release-plus --extends ./packages/stylelint-plugin-dialtone/release-ci.config.cjs",
-        "parallel": false
-      }
-    },
-    "release-local": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./packages/stylelint-plugin-dialtone/release-local.config.cjs",
         "parallel": false
       }
     }

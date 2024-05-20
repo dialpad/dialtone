@@ -1,6 +1,6 @@
 <template>
   <dt-rich-text-editor
-    v-model="$attrs.inputValue"
+    v-model="$attrs.modelValue"
     :editable="$attrs.editable"
     :input-aria-label="$attrs.inputAriaLabel"
     :input-class="$attrs.inputClass"
@@ -10,6 +10,7 @@
     :link="$attrs.link"
     :mention-suggestion="$attrs.mentionSuggestion"
     :channel-suggestion="$attrs.channelSuggestion"
+    :slash-command-suggestion="$attrs.slashCommandSuggestion"
     :allow-blockquote="$attrs.allowBlockquote"
     :allow-bold="$attrs.allowBold"
     :allow-bullet-list="$attrs.allowBulletList"
