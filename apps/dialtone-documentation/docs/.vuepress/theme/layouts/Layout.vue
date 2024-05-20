@@ -2,8 +2,10 @@
   <dt-root-layout
     :fixed="false"
     :header-sticky="true"
-    sidebar-class="dialtone-sidebar lg:d-d-none"
-    footer-class="d-text-right"
+    header-class="d-ol-none"
+    sidebar-class="dialtone-sidebar lg:d-d-none d-ol-none"
+    footer-class="d-text-right d-ol-none"
+    content-class="d-ol-none"
   >
     <template #header>
       <div class="dialtone-header">

@@ -1,3 +1,72 @@
+## [4.15.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.2...dialtone-icons/v4.15.3) (2024-05-15)
+
+
+### Documentation
+
+* DLT-1538 illustrations workflow ([#283](https://github.com/dialpad/dialtone/issues/283)) ([59d83c6](https://github.com/dialpad/dialtone/commit/59d83c6236cd888dbcf4fe9737c18a7e603c7527))
+* DLT-1577 use CodeExampleTabs from Popover to Root layout ([#301](https://github.com/dialpad/dialtone/issues/301)) ([8367a8b](https://github.com/dialpad/dialtone/commit/8367a8b3227d485de45ee141ff0fbb44b632d047))
+
+## [4.15.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.1...dialtone-icons/v4.15.2) (2024-05-09)
+
+
+### Documentation
+
+* NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
+# [4.15.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.14.0...dialtone-icons/v4.15.0) (2024-05-02)
+
+
+### Features
+
+* DLT-1682 add channel-api icon ([#279](https://github.com/dialpad/dialtone/issues/279)) ([d909531](https://github.com/dialpad/dialtone/commit/d9095311e878dc03b19f5f02375790b6bd038743))
+
+# [4.14.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.13.1...dialtone-icons/v4.14.0) (2024-04-26)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
+
+
+### Features
+
+* DLT-1732 add scan-file icon ([#285](https://github.com/dialpad/dialtone/issues/285)) ([a32bb03](https://github.com/dialpad/dialtone/commit/a32bb03a6d76c43f145caf137db02e9587d615d0))
+
 ## [4.13.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.13.0...dialtone-icons/v4.13.1) (2024-04-22)
 
 

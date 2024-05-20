@@ -2,8 +2,6 @@
   "name": "dialtone",
   "implicitDependencies": [
     "dialtone-css",
-    "dialtone-icons-vue2",
-    "dialtone-icons-vue3",
     "dialtone-tokens",
     "dialtone-vue2",
     "dialtone-vue3",
@@ -20,28 +18,20 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm publish",
-        "parallel": false
+        "command": "pnpm publish"
       }
     },
-    "release-github": {
+    "release": {
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm semantic-release-plus --extends ./release-ci.config.cjs",
         "parallel": false
       }
     },
-    "release-local": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm semantic-release-plus --no-ci --extends ./release-local.config.cjs",
-        "parallel": false
-      }
-    },
     "test": {
       "executor": "nx:run-script",
       "options": {
-        "script": "test:vitest"
+        "script": "test:vue"
       }
     }
   }

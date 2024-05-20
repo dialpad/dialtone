@@ -35,10 +35,12 @@
         :placeholder="placeholder"
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
+        :slash-command-suggestion="slashCommandSuggestion"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
         @input="onInput($event)"
+        @selected-command="onSelectedCommand"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -88,47 +90,42 @@
         </dt-tooltip>
         <dt-popover
           v-if="showEmojiPicker"
+          v-model:open="emojiPickerOpened"
           data-qa="dt-message-input-emoji-picker-popover"
-          :open="emojiPickerOpened"
           initial-focus-element="#searchInput"
           padding="none"
-          @opened="(open) => { emojiPickerOpened = open }"
         >
-          <template #anchor>
-            <dt-tooltip
-              :message="emojiTooltipMessage"
-              :offset="[0, -4]"
+          <template #anchor="{ attrs }">
+            <dt-button
+              v-dt-tooltip="emojiTooltipMessage"
+              v-bind="attrs"
+              data-qa="dt-message-input-emoji-picker-btn"
+              size="sm"
+              circle
+              :kind="emojiPickerHovered ? 'default' : 'muted'"
+              importance="clear"
+              :aria-label="emojiButtonAriaLabel"
+              @click="toggleEmojiPicker"
+              @mouseenter="emojiPickerFocus = true"
+              @mouseleave="emojiPickerFocus = false"
+              @focus="emojiPickerFocus = true"
+              @blur="emojiPickerFocus = false"
             >
-              <template #anchor>
-                <dt-button
-                  data-qa="dt-message-input-emoji-picker-btn"
-                  size="sm"
-                  circle
-                  :kind="emojiPickerHovered ? 'default' : 'muted'"
-                  importance="clear"
-                  :aria-label="emojiButtonAriaLabel"
-                  :offset="[0, 0]"
-                  @click="toggleEmojiPicker"
-                  @mouseenter="emojiPickerFocus = true"
-                  @mouseleave="emojiPickerFocus = false"
-                  @focus="emojiPickerFocus = true"
-                  @blur="emojiPickerFocus = false"
-                >
-                  <template #icon>
-                    <dt-icon
-                      :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
-                      size="300"
-                    />
-                  </template>
-                </dt-button>
+              <template #icon>
+                <dt-icon
+                  :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
+                  size="300"
+                />
               </template>
-            </dt-tooltip>
+            </dt-button>
           </template>
-          <template #content>
+          <template
+            #content="{ close }"
+          >
             <dt-emoji-picker
               v-bind="emojiPickerProps"
               @skin-tone="onSkinTone"
-              @selected-emoji="onSelectEmoji"
+              @selected-emoji="(emoji) => { close(); onSelectEmoji(emoji); }"
             />
           </template>
         </dt-popover>
@@ -462,6 +459,24 @@ export default {
     },
 
     /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the slash commands for suggestion.
+     * items({ query }) => { return [SlashCommandObject]; }
+     * SlashCommandObject format:
+     * { command: string, description: string, parametersExample?: string }
+     * The "parametersExample" parameter is optional, and describes an example
+     * of the parameters that command can take.
+     *
+     * When null, it does not add the plugin.
+     */
+    slashCommandSuggestion: {
+      type: Object,
+      default: null,
+    },
+
+    /**
      * Whether the input allows for block quote.
      */
     allowBlockquote: {
@@ -568,6 +583,14 @@ export default {
     'selected-emoji',
 
     /**
+     * Fires when a slash command is selected
+     *
+     * @event selected-command
+     * @type {String}
+     */
+    'selected-command',
+
+    /**
      * Native focus event
      * @event input
      * @type {String|JSON}
@@ -587,6 +610,13 @@ export default {
      * @type {String|JSON}
      */
     'input',
+
+    /**
+     * Event to sync the value with the parent
+     * @event update:modelValue
+     * @type {String|JSON}
+     */
+    'update:modelValue',
   ],
 
   data () {
@@ -634,6 +664,12 @@ export default {
     modelValue (newValue) {
       this.internalInputValue = newValue;
     },
+
+    emojiPickerOpened (newValue) {
+      if (!newValue) {
+        this.$refs.richTextEditor?.focusEditor();
+      }
+    },
   },
 
   methods: {
@@ -666,7 +702,6 @@ export default {
 
     onSelectEmoji (emoji) {
       if (!emoji) {
-        this.emojiPickerOpened = false;
         return;
       }
 
@@ -677,8 +712,11 @@ export default {
           code: emoji.shortname,
         },
       });
-      this.emojiPickerOpened = false;
       this.$emit('selected-emoji', emoji);
+    },
+
+    onSelectedCommand (command) {
+      this.$emit('selected-command', command);
     },
 
     onSelectImage () {
@@ -717,6 +755,7 @@ export default {
 
     onInput (event) {
       this.$emit('input', event);
+      this.$emit('update:modelValue', event);
     },
   },
 };

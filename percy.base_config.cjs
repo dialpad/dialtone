@@ -66,4 +66,13 @@ module.exports = {
     enableJavaScript: true,
     widths: [1280],
   },
+  discovery: {
+    disableCache: true,
+    allowedHostnames: [
+      'proxyme.percy.io',
+      'render.percy.local',
+    ],
+    networkIdleTimeout: 150,
+    concurrency: 1,
+  },
 };

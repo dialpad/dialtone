@@ -129,6 +129,9 @@ export default {
         case 'channel':
           this.command({ name: item.name, id: item.id });
           break;
+        case 'slash-command':
+          this.command({ command: item.command });
+          break;
       }
     },
   },

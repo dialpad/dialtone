@@ -1,3 +1,80 @@
+## [3.125.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.125.0...dialtone-vue3/v3.125.1) (2024-05-17)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA svg size fix ([02e9f87](https://github.com/dialpad/dialtone/commit/02e9f87c45fa071e55671bbf3685cfefe920dd41))
+
+# [3.125.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.124.0...dialtone-vue3/v3.125.0) (2024-05-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1757 round button alignment ([#314](https://github.com/dialpad/dialtone/issues/314)) ([eabd110](https://github.com/dialpad/dialtone/commit/eabd1102e139801ee113a38c9e6f9765eb6c2c9e))
+
+
+### Features
+
+* DLT-1756 add unread mention count ([#312](https://github.com/dialpad/dialtone/issues/312)) ([ff21d01](https://github.com/dialpad/dialtone/commit/ff21d0115775fa8ec62a01e365d2a09bac3fd2c3))
+
+# [3.124.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.4...dialtone-vue3/v3.124.0) (2024-05-16)
+
+
+### Features
+
+* DP-91907 add leftbar contact centers recipe ([#291](https://github.com/dialpad/dialtone/issues/291)) ([73faf83](https://github.com/dialpad/dialtone/commit/73faf83a43cbf1e600581272e0233bfc565ee5cd))
+
+## [3.123.4](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.3...dialtone-vue3/v3.123.4) (2024-05-15)
+
+
+### Bug Fixes
+
+* **Datepicker:** DP-89398 change tooltip fallback positions ([#311](https://github.com/dialpad/dialtone/issues/311)) ([10470e8](https://github.com/dialpad/dialtone/commit/10470e8e711f5497a8a5ae4504b587867179e221))
+
+## [3.123.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.2...dialtone-vue3/v3.123.3) (2024-05-15)
+
+
+### Bug Fixes
+
+* DLT-1710 unexpected emoji on links ([#308](https://github.com/dialpad/dialtone/issues/308)) ([d14931a](https://github.com/dialpad/dialtone/commit/d14931a3fa762d226197c3afb9d1660fbf557e91))
+
+
+### Documentation
+
+* DLT-1538 illustrations workflow ([#283](https://github.com/dialpad/dialtone/issues/283)) ([59d83c6](https://github.com/dialpad/dialtone/commit/59d83c6236cd888dbcf4fe9737c18a7e603c7527))
+* NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
+## [3.123.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.123.1...dialtone-vue3/v3.123.2) (2024-05-08)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1717 fix link overflow ([#302](https://github.com/dialpad/dialtone/issues/302)) ([999ab18](https://github.com/dialpad/dialtone/commit/999ab183005dc04258024dfc17068982e132b971))
+
+# [3.123.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.122.0...dialtone-vue3/v3.123.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* DLT-1738 phone number regex lookahead ([#292](https://github.com/dialpad/dialtone/issues/292)) ([3100dfe](https://github.com/dialpad/dialtone/commit/3100dfeb9d306d3d32822f0c773663179bd9afc3))
+
+
+### Features
+
+* DLT-1651 message input parse suggestion ([#287](https://github.com/dialpad/dialtone/issues/287)) ([9c674c6](https://github.com/dialpad/dialtone/commit/9c674c63e7b7aa6367c5008883497fc4ef2e79c4))
+
+# [3.122.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.121.0...dialtone-vue3/v3.122.0) (2024-04-26)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
+
+
+### Features
+
+* **Dt Notice:** DLT-1671 add support for truncating text ([#281](https://github.com/dialpad/dialtone/issues/281)) ([a0ab1be](https://github.com/dialpad/dialtone/commit/a0ab1be9b28d829f20bd2a2c7ef6b6f35756e1c4))
+
 # [3.121.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.120.2...dialtone-vue3/v3.121.0) (2024-04-22)
 
 

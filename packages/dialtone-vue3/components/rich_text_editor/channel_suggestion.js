@@ -3,19 +3,19 @@ export default {
   items ({ query }) {
     const CHANNEL_LIST = [
       {
-        id: '1',
+        id: 'dialpad',
         name: 'dialpad',
       },
       {
-        id: '2',
+        id: 'dialtone',
         name: 'dialtone',
       },
       {
-        id: '3',
+        id: 'dialtone-vue',
         name: 'dialtone-vue',
       },
       {
-        id: '4',
+        id: 'dialtone-internal',
         name: 'dialtone-internal',
         locked: true,
       },

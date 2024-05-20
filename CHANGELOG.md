@@ -1,3 +1,153 @@
+## [9.36.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.36.0...dialtone/v9.36.1) (2024-05-17)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA svg size fix ([02e9f87](https://github.com/dialpad/dialtone/commit/02e9f87c45fa071e55671bbf3685cfefe920dd41))
+
+# [9.36.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.35.0...dialtone/v9.36.0) (2024-05-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1757 round button alignment ([#314](https://github.com/dialpad/dialtone/issues/314)) ([eabd110](https://github.com/dialpad/dialtone/commit/eabd1102e139801ee113a38c9e6f9765eb6c2c9e))
+
+
+### Features
+
+* DLT-1756 add unread mention count ([#312](https://github.com/dialpad/dialtone/issues/312)) ([ff21d01](https://github.com/dialpad/dialtone/commit/ff21d0115775fa8ec62a01e365d2a09bac3fd2c3))
+
+# [9.35.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.6...dialtone/v9.35.0) (2024-05-16)
+
+
+### Features
+
+* DP-91907 add leftbar contact centers recipe ([#291](https://github.com/dialpad/dialtone/issues/291)) ([73faf83](https://github.com/dialpad/dialtone/commit/73faf83a43cbf1e600581272e0233bfc565ee5cd))
+
+## [9.34.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.5...dialtone/v9.34.6) (2024-05-15)
+
+
+### Bug Fixes
+
+* **Datepicker:** DP-89398 change tooltip fallback positions ([#311](https://github.com/dialpad/dialtone/issues/311)) ([10470e8](https://github.com/dialpad/dialtone/commit/10470e8e711f5497a8a5ae4504b587867179e221))
+
+## [9.34.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.4...dialtone/v9.34.5) (2024-05-15)
+
+
+### Bug Fixes
+
+* DLT-1710 unexpected emoji on links ([#308](https://github.com/dialpad/dialtone/issues/308)) ([d14931a](https://github.com/dialpad/dialtone/commit/d14931a3fa762d226197c3afb9d1660fbf557e91))
+
+## [9.34.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.3...dialtone/v9.34.4) (2024-05-14)
+
+
+### Bug Fixes
+
+* NO-JIRA remove dry-run ([7f96350](https://github.com/dialpad/dialtone/commit/7f96350689b7a9168fea813cde8e2b7c590fae95))
+
+
+### Documentation
+
+* DLT-1538 illustrations workflow ([#283](https://github.com/dialpad/dialtone/issues/283)) ([59d83c6](https://github.com/dialpad/dialtone/commit/59d83c6236cd888dbcf4fe9737c18a7e603c7527))
+* DLT-1577 use CodeExampleTabs from Popover to Root layout ([#301](https://github.com/dialpad/dialtone/issues/301)) ([8367a8b](https://github.com/dialpad/dialtone/commit/8367a8b3227d485de45ee141ff0fbb44b632d047))
+* DLT-1578 use CodeExampleTabs from Scroller to Table ([#303](https://github.com/dialpad/dialtone/issues/303)) ([464990e](https://github.com/dialpad/dialtone/commit/464990ed9c46bc4031e008de3548d3b2ce6db409))
+
+## [9.34.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.2...dialtone/v9.34.3) (2024-05-09)
+
+
+### Bug Fixes
+
+* NO-JIRA define "Segoe UI Adjusted" font ([#306](https://github.com/dialpad/dialtone/issues/306)) ([f860dba](https://github.com/dialpad/dialtone/commit/f860dba7437350e4950e12754c70d6d2d60ff40a))
+
+
+### Documentation
+
+* NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
+## [9.34.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1...dialtone/v9.34.2) (2024-05-07)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1717 fix link overflow ([#302](https://github.com/dialpad/dialtone/issues/302)) ([999ab18](https://github.com/dialpad/dialtone/commit/999ab183005dc04258024dfc17068982e132b971))
+
+# [9.35.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.1...dialtone/v9.35.0-beta.1) (2024-05-06)
+
+
+### Bug Fixes
+
+* missing dollar sign ([b4b5fd1](https://github.com/dialpad/dialtone/commit/b4b5fd1cda3eda27449ea899efb408e57ee42c5d))
+* NO-JIRA test sanitized release notes ([ee6412f](https://github.com/dialpad/dialtone/commit/ee6412f311dd65d35da99cf967c6fb4fafd7c7ee))
+* remove parentheses ([0f6807b](https://github.com/dialpad/dialtone/commit/0f6807b0528d23072ceabe2db2a04e397e185836))
+* remove test change ([d7a45c2](https://github.com/dialpad/dialtone/commit/d7a45c2b70c39048f8e391cd38f859d200ee4c9f))
+* spacing ([3bf9f6c](https://github.com/dialpad/dialtone/commit/3bf9f6cc982fac664f69b13e004e68db28502eec))
+* test change ([ffb5420](https://github.com/dialpad/dialtone/commit/ffb5420290db00190fb829486a071f5a99c69be1))
+* test HTML ([61e2579](https://github.com/dialpad/dialtone/commit/61e2579441aeb5ea396a0a302e319cfa59f36643))
+* try with code block ([302b802](https://github.com/dialpad/dialtone/commit/302b8021b28d561a688cb1990d976de0fa5be4da))
+
+
+### Code Refactoring
+
+* add quotes ([4125189](https://github.com/dialpad/dialtone/commit/4125189ae1ca313cc597b6353b1c38586ba46c7f))
+* change release message ([f128619](https://github.com/dialpad/dialtone/commit/f128619fa3e9940d804f5ef89938eccf734a0055))
+* fix indentation ([f6734d3](https://github.com/dialpad/dialtone/commit/f6734d3b3747f1b915d46d059ff7e3b06499c52e))
+* fix release action ([eb733b5](https://github.com/dialpad/dialtone/commit/eb733b5f43cb46fbedaea28cb5e045d451fd8f7d))
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+* scape quotes ([786f3cd](https://github.com/dialpad/dialtone/commit/786f3cd1829b75be83210fe2ce1bc61d2e2d9f5f))
+* test release ([971bd9b](https://github.com/dialpad/dialtone/commit/971bd9bc40cc05e39b3c4ef14213cbef647e8992))
+
+
+### Features
+
+* test release ([7a07314](https://github.com/dialpad/dialtone/commit/7a07314ec402a18b0cbc603f516c9245d0753112))
+
+## [9.34.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.34.0...dialtone/v9.34.1) (2024-05-06)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1711 focus message input on emoji select ([#297](https://github.com/dialpad/dialtone/issues/297)) ([724acd5](https://github.com/dialpad/dialtone/commit/724acd51e8b7e35eaf60f1ec493c4111dcb94e78))
+* **Tooltip:** DLT-1747 tooltip staying open over overlay ([#299](https://github.com/dialpad/dialtone/issues/299)) ([3233c11](https://github.com/dialpad/dialtone/commit/3233c11a000b6088fc62095354d46f49c778aef9))
+
+# [9.34.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.33.0...dialtone/v9.34.0) (2024-05-02)
+
+
+### Documentation
+
+* **Lists:** NO-JIRA clarify list css utilities ([#293](https://github.com/dialpad/dialtone/issues/293)) ([0f09daf](https://github.com/dialpad/dialtone/commit/0f09daf2be403408648045b03ab24daea12a9097))
+
+
+### Features
+
+* DLT-1682 add channel-api icon ([#279](https://github.com/dialpad/dialtone/issues/279)) ([d909531](https://github.com/dialpad/dialtone/commit/d9095311e878dc03b19f5f02375790b6bd038743))
+
+# [9.33.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.32.0...dialtone/v9.33.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* DLT-1738 phone number regex lookahead ([#292](https://github.com/dialpad/dialtone/issues/292)) ([3100dfe](https://github.com/dialpad/dialtone/commit/3100dfeb9d306d3d32822f0c773663179bd9afc3))
+
+
+### Features
+
+* DLT-1651 message input parse suggestion ([#287](https://github.com/dialpad/dialtone/issues/287)) ([9c674c6](https://github.com/dialpad/dialtone/commit/9c674c63e7b7aa6367c5008883497fc4ef2e79c4))
+* **Rich Text Editor:** DLT-1598 add slash commands suggestions ([#284](https://github.com/dialpad/dialtone/issues/284)) ([3e39932](https://github.com/dialpad/dialtone/commit/3e399328238cd37822adc47a374d67028826cde8))
+
+# [9.32.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.31.1...dialtone/v9.32.0) (2024-04-26)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
+* NO-JIRA move peer dependencies to dependencies. ([#289](https://github.com/dialpad/dialtone/issues/289)) ([daf8436](https://github.com/dialpad/dialtone/commit/daf84369bb8ee39f6220d2ccaac6676fe1d433e6))
+
+
+### Features
+
+* DLT-1732 add scan-file icon ([#285](https://github.com/dialpad/dialtone/issues/285)) ([a32bb03](https://github.com/dialpad/dialtone/commit/a32bb03a6d76c43f145caf137db02e9587d615d0))
+* **Dt Notice:** DLT-1671 add support for truncating text ([#281](https://github.com/dialpad/dialtone/issues/281)) ([a0ab1be](https://github.com/dialpad/dialtone/commit/a0ab1be9b28d829f20bd2a2c7ef6b6f35756e1c4))
+
 ## [9.31.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.31.0...dialtone/v9.31.1) (2024-04-22)
 
 
