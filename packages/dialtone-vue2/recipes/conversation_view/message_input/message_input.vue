@@ -170,11 +170,11 @@
 
         <!-- Send button -->
         <dt-tooltip
-          v-if="true"
+          v-if="showSend"
           placement="top-end"
           :enabled="!showSend"
           :message="showSend.tooltipLabel"
-          :show="true"
+          :show="!isSendDisabled && sendButtonFocus"
           :offset="[6, 8]"
         >
           <template #anchor>
