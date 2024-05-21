@@ -4,44 +4,21 @@ import * as IllustrationStories from './illustration.stories';
 
 <Meta of={IllustrationStories}/>
 
-# Icon
+# Illustration
 
 <Subtitle>
-  The Icon component provides a set of glyphs and sizes to provide context your application.
+  The Illustration component provides a set of images to provide context to your application.
 </Subtitle>
-
-## Sizes
-
-Dialtone provides eight sizes for icons, three of them are **device only**. Each of the sizes represents the width and
-a height the icon is going to have:
-
-1. **100**: 12px (1.2rem)
-2. **200**: 14px (1.4rem)
-3. **300**: 18px (1.8rem)
-4. **400**: 20px (2.0rem)
-5. **500**: 24px (2.4rem)
-6. **600**: 32px (3.2rem)
-7. **700**: 38px (3.8rem)
-8. **800**: 48px (4.8rem)
-
-> **Please note** These are the only available size options and no overrides should be needed to properly size the icons.
 
 ## Base Style
 
 <Canvas>
-  <Story of={IconStories.Default} />
+  <Story of={IllustrationStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
 <Controls />
-
-## Accessibility
-
-If you use an icon to portray something more than just it's visual appearance, make sure to add a description of its
-function to the ariaLabel prop.
-
-Example: A down arrow icon button that opens a dropdown settings menu, set the ariaLabel as 'open settings menu'.
 
 ## Usage
 
@@ -50,12 +27,11 @@ Example: A down arrow icon button that opens a dropdown settings menu, set the a
 In order for dt-icon to be tree-shakeable, import it as following, depending on the bundler your application is using.
 
 ```js
-import { DtIcon } from '@dialpad/dialtone-vue'; // vite
-import { DtIcon } from '@dialpad/dialtone-vue/components/icon'; // webpack
+import { DtIllustration } from '@dialpad/dialtone-vue';
 ```
 
 ### Default
 
 ```html
-<dt-icon name="accessibility" size="500" />
+<dt-illustration name="mind" />
 ```

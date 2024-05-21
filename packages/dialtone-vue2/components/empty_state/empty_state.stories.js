@@ -1,9 +1,8 @@
 import DtEmptyState from './empty_state.vue';
 import { EMPTY_STATE_SIZE_MODIFIERS } from './empty_state_constants.js';
-
 import DtEmptyStateDefaultTemplate from './empty_state_default.story.vue';
-// import DtIconVariantsTemplate from './icon_variants.story.vue';
 import { createRenderConfig, getIconNames, getIllustrationNames } from '@/common/storybook_utils';
+
 const illustrationsList = getIllustrationNames();
 const iconsList = getIconNames();
 

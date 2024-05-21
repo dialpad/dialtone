@@ -1,0 +1,67 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as EmptyStateStories from './empty_state.stories';
+
+<Meta of={EmptyStateStories}/>
+
+# Empty state
+
+<Subtitle>
+  When there's no data to display in a list, table, or other information container, we use an ‘Empty State’ component to guide users, clarifying the expected information and suggesting ways to populate it.
+</Subtitle>
+
+## Uses & Best practices
+We identify 4 types of empty states:
+
+<b>Zero state:</b> nothing has been added yet, we recommend to use this space to teach the user how to fill this container, or give a useful tip like a shortcut for something relatable or tell them what needs to happen if no action can be taken.
+
+<b>No results:</b> the user performed an action and there are no results, in this scenario the best usage of the empty state will be to recommend how to recover. If the user is filtering a table, recommend another filter that has results or, like the zero state case, how to create a new entry with the properties the user is filtering.
+
+<b>New feature:</b> A new section or screen the user doesn’t know and we want to introduce to them, if this action would include a change in their plan we should inform it in the component, also try to indulge/seduce the user to use this feature or to look interesting to them.
+
+<b>Not enabled:</b> the section isn’t available to the user at the moment.
+
+
+## Writing and tone#
+We think this component is one of the most important regarding the writing guidelines (along with the error messages) so we take some time to write about how to communicate with our empty states. First of all, let’s talk about the different atoms that can have a writing variable
+
+<b>Titles:</b> Needs to be scannable and informative, keep it short and concise. <br/>
+<b>Body:</b> Avoid repeating the content of the title. Also, same as the title, keep it short and to the point. If you need to provide a link to the user, you can use it here (e.g learn more) but please consider using the CTA section to be more concise to the user and more consistent to Dialtone.<br/>
+<b>CTA:</b> We recommend the usage of imperative verbs (Create, Delete) instead of using more open words such as (OK, No, Yes). Also, try to connect the Title wording to the CTA, to keep the action clear to the user, we recommend avoiding using more than two words.<br/>
+
+And regarding the difference of the types of variables of the component:
+
+<b>Zero state:</b> Like we said in the uses and best practices, we recommend combining the title and the CTA (if usable and possible) to teach the user how to populate this area. E.g Title: You don’t have any a.i recaps yet Description: Use it to analyze your calls and get more insights about it! CTA: [Activate]<br/>
+<b>No results:</b> In this scenario, we need to contemplate the variables of the user to understand how to react, this could be a expected scenario (searching for something you know you won’t find) or the surprised scenario (‘I was expecting to find something here, but there’s nothing’) Title: No results found Description: Try adjusting the your search or filters to find what you are looking for CTA: [create] [clear filters]<br/>
+<b>New feature:</b> We want to communicate this variable to be as easy to understand as possible. Usually when we communicate with this variable, we are offering a new service (paid or not) that the user can take advantage of, so work on selling it in a more marketable way. Title: Now you can analyze your metrics in live calls! Description: Don’t need to end a call to have the best insights. CTA: [Activate]<br/>
+<b>Not available:</b> The user doesn’t have permission to see the information for X or Y. Try to use this space to make it easier to request permission to access. Be clear and concise to communicate that they don’t have access, and don’t spend too much time telling them why, focus on asking for permission. Title: You don’t have access to this information Description: Ask your administrators permission CTA: Request permission<br/>
+
+## Base Style
+
+<Canvas>
+  <Story of={EmptyStateStories.Default} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+In order for dt-icon to be tree-shakeable, import it as following, depending on the bundler your application is using.
+
+```js
+import { DtEmptyState } from '@dialpad/dialtone-vue'; // vite
+```
+
+### Default
+
+```html
+<dt-empty-state
+  illustration-name="mind"
+  header-text="Nothing to see here"
+  body-text="Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque."
+/>
+```
