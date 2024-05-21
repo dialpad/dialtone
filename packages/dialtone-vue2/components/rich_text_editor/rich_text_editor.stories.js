@@ -13,7 +13,7 @@ import slashCommandSuggestion from './slash_command_suggestion';
 
 // Default Prop Values
 export const argsData = {
-  value: `I am not a standalone component, please use Message Input instead :v_tone3: 🤖!`,
+  value: `I am not a standalone component, please use Message Input instead :v_tone3::robot:!`,
   editable: true,
   inputAriaLabel: 'This is a descriptive label',
   outputFormat: 'text',

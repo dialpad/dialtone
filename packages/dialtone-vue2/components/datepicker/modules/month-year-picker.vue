@@ -13,6 +13,7 @@
       <dt-tooltip
         :message="prevYearLabel"
         placement="top"
+        :fallback-placements="['top-start', 'auto']"
       >
         <template #anchor>
           <dt-button
@@ -38,6 +39,7 @@
       <dt-tooltip
         :message="prevMonthLabel"
         placement="top"
+        :fallback-placements="['top-end', 'auto']"
       >
         <template #anchor>
           <dt-button
@@ -78,6 +80,7 @@
       <dt-tooltip
         :message="nextMonthLabel"
         placement="top"
+        :fallback-placements="['top-start', 'auto']"
       >
         <template #anchor>
           <dt-button
@@ -103,6 +106,7 @@
       <dt-tooltip
         :message="nextYearLabel"
         placement="top"
+        :fallback-placements="['top-end', 'auto']"
       >
         <template #anchor>
           <dt-button

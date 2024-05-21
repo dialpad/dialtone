@@ -43,7 +43,7 @@ export const SlashCommandPlugin = Mention.extend({
       command: {
         default: '',
       },
-      paramentersExample: {
+      parametersExample: {
         default: '',
       },
       description: {

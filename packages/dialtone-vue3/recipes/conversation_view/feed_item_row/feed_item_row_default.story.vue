@@ -4,6 +4,7 @@
     :avatar-image-url="$attrs.avatarImageUrl"
     :display-name="$attrs.displayName"
     :time="$attrs.time"
+    :no-initials="$attrs.noInitials"
     :short-time="$attrs.shortTime"
     :is-active="$attrs.isActive"
     :state="$attrs.state"

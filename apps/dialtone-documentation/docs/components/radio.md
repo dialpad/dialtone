@@ -58,15 +58,7 @@ Radio buttons are a common way to allow users to make a single selection from a 
   <fieldset class="d-input-group__fieldset d-stack8">
     <div class="d-radio-group">
       <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample1" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioExample1">Radio label</label>
-      </div>
-    </div>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample2" checked />
+        <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample2" />
       </div>
       <div class="d-radio__copy">
         <label class="d-radio__label" for="Dialtone-RadioExample2">Radio label</label>
@@ -85,126 +77,51 @@ Radio buttons are a common way to allow users to make a single selection from a 
         <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample4" disabled checked />
       </div>
       <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioExample4">Radio label that's been disabled</label>
+        <label class="d-radio__label" for="Dialtone-RadioExample4">Radio label that's been disabled & checked</label>
       </div>
     </div>
+  </fieldset>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div>
+  <label>
+    <div class="d-radio-group">
+      <div class="d-radio__input"><input name="Value" type="radio" class="d-radio" value="Value" /></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>Radio label</div>
+      </div>
+    </div>
+  </label>
+</div>
+<div>
+  <label>
     <div class="d-radio-group d-radio-group--disabled">
-      <div class="d-radio__input">
-        <input class="d-radio d-radio--disabled" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample5" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioExample5">Radio label that's been disabled (but without the `disabled` attribute)</label>
+      <div class="d-radio__input"><input name="Disabled" disabled="disabled" type="radio" class="d-radio" value="Disabled" /></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>Radio label thats been disabled</div>
       </div>
     </div>
-  </fieldset>
-</code-well-header>
-
-```html
-<fieldset class="d-input-group__fieldset d-stack8">
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample1" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioExample1">Radio label</label>
-    </div>
-  </div>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample2" checked />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioExample2">Radio label</label>
-    </div>
-  </div>
-  <div class="d-radio-group d-radio-group--disabled">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample3" disabled />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioExample3">Radio label that's been disabled</label>
-    </div>
-  </div>
-  <div class="d-radio-group d-radio-group--disabled">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample4" disabled checked />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioExample4">Radio label that's been disabled</label>
-    </div>
-  </div>
-  <div class="d-radio-group d-radio-group--disabled">
-    <div class="d-radio__input">
-      <input class="d-radio d-radio--disabled" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample5" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioExample5">Radio label that's been disabled (but without the `disabled` attribute)</label>
-    </div>
-  </div>
-</fieldset>
-```
-
-### Stacked Group
-
-<code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
-    <legend class="d-label">Advanced missed call routing</legend>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup2" id="Dialtone-RadioGroupAExample1" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupAExample1" checked>To voicemail</label>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-radio-group d-radio-group--disabled">
+      <div class="d-radio__input"><input name="CheckedDisabled" disabled="disabled" type="radio" class="d-radio" value="Checked" /></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>Radio label thats been disabled &amp; checked</div>
       </div>
     </div>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup2" id="Dialtone-RadioGroupAExample2" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupAExample2">To a message (no voicemail)</label>
-      </div>
-    </div>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup2" id="Dialtone-RadioGroupAExample3" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupAExample3">To a team member or room phone</label>
-      </div>
-    </div>
-  </fieldset>
-</code-well-header>
-
-```html
-<fieldset class="d-input-group__fieldset d-stack8">
-  <legend class="d-label">Advanced missed call routing</legend>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup2" id="Dialtone-RadioGroupAExample1" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupAExample1" checked>To voicemail</label>
-    </div>
-  </div>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup2" id="Dialtone-RadioGroupAExample2" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupAExample2">To a message (no voicemail)</label>
-    </div>
-  </div>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup2" id="Dialtone-RadioGroupAExample3" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupAExample3">To a team member or room phone</label>
-    </div>
-  </div>
-</fieldset>
-```
+  </label>
+</div>
+'
+vueCode='
+<dt-radio name="Value" value="Value" label="Radio label"/>
+<dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
+<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" checked disabled />
+'
+showHtmlWarning />
 
 ### With Description Text
 
@@ -222,57 +139,46 @@ Radio buttons are a common way to allow users to make a single selection from a 
     </div>
     <div class="d-radio-group">
       <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup3" id="Dialtone-RadioGroupBExample2" />
+        <input class="d-radio" type="radio" disabled name="Dialtone-RadioGroup3" id="Dialtone-RadioGroupBExample1" />
       </div>
       <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupBExample2">To a message (no voicemail)</label>
-        <div class="d-description">Because they probably don't need to leave a message anyway.</div>
-      </div>
-    </div>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup3" id="Dialtone-RadioGroupBExample3" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupBExample3">To a team member or room phone</label>
-        <div class="d-description">Because someone else might be able to talk to them.</div>
+        <label class="d-radio__label" for="Dialtone-RadioGroupBExample1" checked>Disabled</label>
+        <div class="d-description">With Description</div>
       </div>
     </div>
   </fieldset>
 </code-well-header>
 
-```html
-<fieldset class="d-input-group__fieldset d-stack8">
-  <legend class="d-label">Advanced missed call routing</legend>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup3" id="Dialtone-RadioGroupBExample1" />
+<code-example-tabs
+htmlCode='
+<div>
+  <label>
+    <div class="d-radio-group">
+      <div class="d-radio__input"><input name="ValueWDesc" type="radio" class="d-radio" value="Value" /></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>To voicemail</div>
+        <div class="d-description">So they can hear your voice</div>
+      </div>
     </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupBExample1" checked>To voicemail</label>
-      <div class="d-description">So they can hear your voice</div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-radio-group d-radio-group--disabled">
+      <div class="d-radio__input"><input name="DisabledWDesc" type="radio" class="d-radio" value="Disabled" disabled="disabled" /></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>Disabled</div>
+        <div class="d-description">With Description</div>
+      </div>
     </div>
-  </div>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup3" id="Dialtone-RadioGroupBExample2" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupBExample2">To a message (no voicemail)</label>
-      <div class="d-description">Because they probably don't need to leave a message anyway.</div>
-    </div>
-  </div>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup3" id="Dialtone-RadioGroupBExample3" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupBExample3">To a team member or room phone</label>
-      <div class="d-description">Because someone else might be able to talk to them.</div>
-    </div>
-  </div>
-</fieldset>
-```
+  </label>
+</div>
+'
+vueCode='
+<dt-radio name="ValueWDesc" value="Value" label="To voicemail" description="So they can hear your voice"/>
+<dt-radio name="DisabledWDesc" value="Disabled" label="Disabled" description="With Description" disabled />
+'
+showHtmlWarning />
 
 ### With validation states
 
@@ -309,38 +215,79 @@ Radio buttons are a common way to allow users to make a single selection from a 
   </fieldset>
 </code-well-header>
 
-```html
-<fieldset class="d-input-group__fieldset d-stack8">
-  <legend class="d-label">Advanced missed call routing</legend>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio d-radio--warning" type="radio" name="Dialtone-RadioGroup4" id="Dialtone-RadioGroupCExample1" />
+<code-example-tabs
+htmlCode='
+<div>
+  <label>
+    <div class="d-radio-group">
+      <div class="d-radio__input"><input name="ValidationMessageWarning" type="radio" class="d-radio d-radio--warning" value="Validation Message Warning" /></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>To voicemail</div>
+        <div class="base-input__messages d-validation-message__container">
+          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning"><p>So they can hear your voice</p></div>
+        </div>
+      </div>
     </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupCExample1">To voicemail</label>
-      <div class="d-validation-message d-validation-message--warning">So they can hear your voice</div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-radio-group">
+      <div class="d-radio__input"><input name="ValidationMessageError" type="radio" class="d-radio d-radio--error" value="Validation Message Error" /></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>To a message (no voicemail)</div>
+        <div class="base-input__messages d-validation-message__container">
+          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error">
+            <p>Because they probably dont need to leave a message anyway.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio d-radio--error" type="radio" name="Dialtone-RadioGroup4" id="Dialtone-RadioGroupCExample2" />
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-radio-group">
+      <div class="d-radio__input"><input name="ValidationMessageSuccess" type="radio" class="d-radio d-radio--success" value="Validation Message Success" /></div>
+      <div class="d-radio__copy d-radio__label">
+        <div>To a team member or room phone</div>
+        <div class="base-input__messages d-validation-message__container">
+          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success">
+            <p>Because someone else might be able to talk to them.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupCExample2">To a message (no voicemail)</label>
-      <div class="d-validation-message d-validation-message--error">Because they probably don't need to leave a message anyway.</div>
-    </div>
-  </div>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio d-radio--success" type="radio" name="Dialtone-RadioGroup4" id="Dialtone-RadioGroupCExample3" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioGroupCExample3">To a team member or room phone</label>
-      <div class="d-validation-message d-validation-message--success">Because someone else might be able to talk to them.</div>
-    </div>
-  </div>
-</fieldset>
-```
+  </label>
+</div>
+'
+vueCode='
+<dt-radio
+  name="ValidationMessageWarning"
+  value="Validation Message Warning"
+  label="To voicemail"
+  validation-state="warning"
+  :messages="[{ message: `So they can hear your voice`, type: `warning` }]"
+  checked
+/>
+<dt-radio
+  name="ValidationMessageError"
+  value="Validation Message Error"
+  label="To a message (no voicemail)"
+  validation-state="error"
+  :messages="[{ message: `Because they probably dont need to leave a message anyway.`, type: `error` }]"
+  checked
+/>
+<dt-radio
+  name="ValidationMessageSuccess"
+  value="Validation Message Success"
+  label="To a team member or room phone"
+  validation-state="success"
+  :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
+  checked
+/>
+'
+showHtmlWarning />
 
 ## Classes
 

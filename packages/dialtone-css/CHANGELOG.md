@@ -1,3 +1,10 @@
+## [8.31.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.1...dialtone-css/v8.31.2) (2024-05-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1757 round button alignment ([#314](https://github.com/dialpad/dialtone/issues/314)) ([eabd110](https://github.com/dialpad/dialtone/commit/eabd1102e139801ee113a38c9e6f9765eb6c2c9e))
+
 ## [8.31.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.0...dialtone-css/v8.31.1) (2024-05-09)
 
 

@@ -91,11 +91,9 @@ export const argTypesData = {
   },
 
   transition: {
-    options: ['', 'fade', 'pop', 'shake'],
-    control: {
-      type: 'select',
-    },
+    type: 'boolean',
   },
+
   // Events
   onShown: {
     table: {

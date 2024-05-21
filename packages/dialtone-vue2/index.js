@@ -86,6 +86,7 @@ export * from './recipes/conversation_view/time_pill';
 export * from './recipes/header/settings_menu_button';
 export * from './recipes/item_layout/contact_info';
 export * from './recipes/leftbar/callbox';
+export * from './recipes/leftbar/contact_centers_row';
 export * from './recipes/leftbar/contact_row';
 export * from './recipes/leftbar/general_row';
 export * from './recipes/leftbar/group_row';

@@ -141,6 +141,23 @@ describe('DtFeedItemRow tests', () => {
       });
     });
 
+    describe('When noInitials prop is true and has no img', () => {
+      beforeEach(() => {
+        propsData = {
+          ...basePropsData,
+          showHeader: true,
+          noInitials: true,
+        };
+        _mountWrapper();
+        _setChildWrappers();
+      });
+
+      it('should display "person" icon', () => {
+        const userIcon = wrapper.find('[data-qa="dt-avatar"] .d-icon--user');
+        expect(userIcon.exists()).toBe(true);
+      });
+    });
+
     describe('When default slot content is provided', () => {
       const TEST_CONTENT = 'Test default content';
       beforeEach(() => {
