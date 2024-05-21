@@ -107,6 +107,15 @@ describe('DtTooltip tests', () => {
         expect(tooltip.textContent).toBe('Test message');
       });
 
+      describe('When tooltip content is a space character', () => {
+        it('should not render the content', async () => {
+          wrapper.destroy();
+          mockProps = { show: true, message: ' ' };
+          updateWrapper();
+          expect(tippyContent.getAttribute('data-state')).not.toBe('visible');
+        });
+      });
+
       describe('When inverted is true', () => {
         it('should have the inverted class set', async () => {
           await wrapper.setProps({ show: true, inverted: true });
