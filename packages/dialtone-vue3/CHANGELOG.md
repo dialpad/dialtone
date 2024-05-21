@@ -1,3 +1,10 @@
+# [3.126.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.125.1...dialtone-vue3/v3.126.0) (2024-05-21)
+
+
+### Features
+
+* **Feed Item Row:** DLT-1725 add noInitials to feed item row ([#317](https://github.com/dialpad/dialtone/issues/317)) ([62ac0a6](https://github.com/dialpad/dialtone/commit/62ac0a6cd323e0643350fc19cce22520407d2ded))
+
 ## [3.125.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.125.0...dialtone-vue3/v3.125.1) (2024-05-17)
 
 
