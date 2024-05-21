@@ -478,7 +478,7 @@ export default {
 
     onShow (tooltipInstance) {
       // don't show tooltip when no content
-      if (tooltipInstance.props.content.textContent.length === 0) {
+      if (tooltipInstance.props.content.textContent.trim().length === 0) {
         return false;
       }
     },

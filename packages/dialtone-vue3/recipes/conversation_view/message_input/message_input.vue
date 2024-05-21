@@ -53,7 +53,7 @@
           v-if="showImagePicker"
           placement="top-start"
           :message="showImagePicker.tooltipLabel"
-          :offset="[-4, -4]"
+          :offset="[-4, 12]"
         >
           <template #anchor>
             <dt-button
@@ -141,7 +141,7 @@
           placement="top-end"
           :enabled="characterLimitTooltipEnabled"
           :message="showCharacterLimit.message"
-          :offset="[10, -8]"
+          :offset="[10, 8]"
         >
           <template #anchor>
             <p
@@ -170,12 +170,12 @@
 
         <!-- Send button -->
         <dt-tooltip
-          v-if="showSend"
+          v-if="true"
           placement="top-end"
           :enabled="!showSend"
           :message="showSend.tooltipLabel"
-          :show="!isSendDisabled && sendButtonFocus"
-          :offset="[6, -8]"
+          :show="true"
+          :offset="[6, 8]"
         >
           <template #anchor>
             <!-- Right positioned UI - send button -->
