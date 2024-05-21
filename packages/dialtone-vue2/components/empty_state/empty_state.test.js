@@ -63,9 +63,21 @@ describe('DtIllustration Tests', () => {
     it('Should render the custom body slot', () => {
       expect(bodySlot.html()).toBe(MOCK_BODY_SLOT);
     });
+
+    it('Should render size classes in wrapper', () => {
+      expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size-lg')).toBe(true);
+    });
   });
 
   describe('Interactivity Tests', () => {
+    describe('On size change', () => {
+      it('Should update size classes in wrapper', () => {
+        wrapper.setProps({ size: 'md' });
+
+        expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size-md')).toBe(true);
+      });
+    });
+
     describe('With illustration and icon provided', () => {
       it('Should render illustration component on `lg` size and not icon', () => {
         mockProps = { size: 'lg', iconName: 'accessibility' };
