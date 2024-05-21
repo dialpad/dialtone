@@ -27,7 +27,7 @@ import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import Emoji from './extensions/emoji';
-import Link from './extensions/link';
+import CustomLink from './extensions/custom_link';
 import { MentionPlugin, mentionRegex } from './extensions/mentions/mention';
 import { ChannelPlugin, channelRegex } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
@@ -139,9 +139,27 @@ export default {
     },
 
     /**
-     * Enables the Link extension and optionally passes configurations to it
+     * Enables the TipTap Link extension and optionally passes configurations to it
+     *
+     * It is not recommended to use this and the custom link extension at the same time.
      */
     link: {
+      type: [Boolean, Object],
+      default: false,
+    },
+
+    /**
+     * Enables the Custom Link extension and optionally passes configurations to it
+     *
+     * It is not recommended to use this and the built in TipTap link extension at the same time.
+     *
+     * The custom link does some additional things on top of the built in TipTap link
+     * extension such as styling phone numbers and IP adresses as links, and allows you
+     * to linkify text without having to type a space after the link. Currently it is missing some
+     * functionality such as editing links and will likely require more work to be fully usable,
+     * so it is recommended to use the built in TipTap link for now.
+     */
+    customLink: {
       type: [Boolean, Object],
       default: false,
     },
@@ -297,7 +315,16 @@ export default {
       // These are the default extensions needed just for plain text.
       const extensions = [Document, Paragraph, Text];
       if (this.link) {
-        extensions.push(this.getExtension(Link, this.link));
+        extensions.push(TipTapLink.extend({ inclusive: false }).configure({
+          HTMLAttributes: {
+            class: 'd-link d-wb-break-all',
+          },
+          autolink: true,
+          protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
+        }));
+      }
+      if (this.customLink) {
+        extensions.push(this.getExtension(CustomLink, this.customLink));
       }
       if (this.allowBlockquote) {
         extensions.push(Blockquote);
@@ -323,9 +350,11 @@ export default {
       }
 
       // Enable placeholderText
-      extensions.push(
-        Placeholder.configure({ placeholder: this.placeholder }),
-      );
+      if (this.placeholder) {
+        extensions.push(
+          Placeholder.configure({ placeholder: this.placeholder }),
+        );
+      }
 
       // make sure that this is defined before any other extensions
       // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
@@ -346,11 +375,6 @@ export default {
           }),
         );
       }
-
-      extensions.push(TipTapLink.extend({ inclusive: false }).configure({
-        autolink: true,
-        protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
-      }));
 
       if (this.mentionSuggestion) {
         // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
