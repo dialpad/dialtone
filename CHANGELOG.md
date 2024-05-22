@@ -1,3 +1,17 @@
+# [9.38.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.37.0...dialtone/v9.38.0) (2024-05-22)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1719 separate link and custom link ([#318](https://github.com/dialpad/dialtone/issues/318)) ([cf38451](https://github.com/dialpad/dialtone/commit/cf38451e57d6d5180622ac30e050a8900184a9f7))
+* **Tooltip:** DP-99352 correct offsets, trim empty check ([#322](https://github.com/dialpad/dialtone/issues/322)) ([558059d](https://github.com/dialpad/dialtone/commit/558059d565d99a75b48fe377956ac5ccc4d34e67))
+
+
+### Features
+
+* **Icon:** DLT-1759 fixed attestation alignment ([#319](https://github.com/dialpad/dialtone/issues/319)) ([3c0882a](https://github.com/dialpad/dialtone/commit/3c0882a0c2a521c9a8623469379756c093fbceec))
+* **Icon:** DLT-1760 add rocket icon ([#320](https://github.com/dialpad/dialtone/issues/320)) ([8563d2b](https://github.com/dialpad/dialtone/commit/8563d2b363b82f47b4d24fc4d9f3b67ad4dc263c))
+
 # [9.37.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.36.1...dialtone/v9.37.0) (2024-05-21)
 
 
