@@ -335,9 +335,7 @@ export default {
       if (this.allowBulletList) {
         extensions.push(BulletList);
         extensions.push(ListItem);
-        extensions.push(OrderedList.configure({
-          itemTypeName: 'listItem',
-        }));
+        extensions.push(OrderedList);
       }
       if (this.allowItalic) {
         extensions.push(Italic);
@@ -366,6 +364,7 @@ export default {
                 Enter: () => true,
                 'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
                   () => commands.newlineInCode(),
+                  () => commands.splitListItem('listItem'),
                   () => commands.createParagraphNear(),
                   () => commands.liftEmptyBlock(),
                   () => commands.splitBlock(),
@@ -620,34 +619,40 @@ export default {
 </script>
 
 <style lang="less">
-  .ProseMirror p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: var(--dt-color-foreground-placeholder);
-    pointer-events: none;
-    height: 0;
-  }
-
-  .ProseMirror ul > li {
-    list-style-type: disc;
-  }
-
-  .ProseMirror ol > li {
-    list-style-type: decimal;
-  }
-
-  .ProseMirror blockquote {
-    padding-left: var(--dt-space-400);
-    border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
-    margin-left: 0;
-  }
-
-  .dt-rich-text-editor--code-block {
-    background: var(--dt-color-surface-secondary);
-    padding: var(--dt-space-400);
-  }
-
   .dt-rich-text-editor {
-    overflow: hidden;
+    &--code-block {
+      background: var(--dt-color-surface-secondary);
+      padding: var(--dt-space-400);
+    }
+
+    > .ProseMirror {
+      box-shadow: none;
+
+      p.is-editor-empty:first-child::before {
+        content: attr(data-placeholder);
+        float: left;
+        color: var(--dt-color-foreground-placeholder);
+        pointer-events: none;
+        height: 0;
+      }
+
+      ul, ol {
+        padding-left: var(--dt-space-525);
+      }
+
+      ul > li {
+        list-style-type: disc;
+      }
+
+      ol > li {
+        list-style-type: decimal;
+      }
+
+      blockquote {
+        padding-left: var(--dt-space-400);
+        border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
+        margin-left: 0;
+      }
+    }
   }
 </style>
