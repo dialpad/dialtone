@@ -1,8 +1,8 @@
 <!-- eslint-disable max-len -->
 <template>
   <section class="hero">
-    <div class="hero--inner-wrapper d-d-flex d-jc-space-between d-mx-auto d-wmx1340 d-pl32 d-pr32 d-ai-center">
-      <div class="hero--content d-d-flex d-fd-column d-jc-center">
+    <div class="hero__inner-wrapper d-d-flex d-jc-space-between d-mx-auto d-wmx1340 d-pl32 d-pr32 d-ai-center">
+      <div class="hero__content d-d-flex d-fd-column d-jc-center">
         <h1 class="d-headline--xxl d-mb12">
           Improve your UI's reception with Dialtone
         </h1>
@@ -71,7 +71,7 @@
           </router-link>
         </div>
       </div>
-      <svg-loader class="hero--image d-w50p" name="home-billboard" />
+      <svg-loader class="hero__image d-w50p" name="home-billboard" />
     </div>
   </section>
   <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">

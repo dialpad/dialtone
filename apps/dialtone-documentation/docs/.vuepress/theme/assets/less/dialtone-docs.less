@@ -523,7 +523,7 @@ a.header-anchor {
   position: relative;
   background-color: var(--dt-color-surface-primary);
 
-  &--inner-wrapper {
+  &__inner-wrapper {
     padding-top: calc(var(--dt-space-300) * 32);
     padding-bottom: calc(var(--dt-space-300) * 32);
 
@@ -532,7 +532,7 @@ a.header-anchor {
     }
   }
 
-  &--content {
+  &__content {
     align-items: flex-start;
     max-width: 40%;
 
@@ -543,18 +543,10 @@ a.header-anchor {
     }
   }
 
-  &--image {
+  &__image {
     @media (max-width: 640px) {
       display: none;
     }
-  }
-
-  .dp-logo {
-    position: absolute;
-    inset: 0;
-    background-color: var(--dt-color-surface-strong);
-    opacity: .05;
-    mask: url("/assets/images/home-dp-logo.svg") 80% bottom no-repeat;
   }
 
   @media (max-width: 640px) {
