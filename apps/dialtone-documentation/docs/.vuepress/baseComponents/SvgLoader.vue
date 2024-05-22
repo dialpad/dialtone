@@ -1,11 +1,11 @@
 <template>
   <template v-for="svg in svgs" :key="svg">
-    <component :is="svg" v-if="svg" />
+    <component :is="svg" v-if="svg" :class="class" />
   </template>
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent, defineProps } from 'vue';
 
 // render an svg by name
 const props = defineProps({
@@ -15,6 +15,13 @@ const props = defineProps({
   name: {
     type: String,
     required: true,
+  },
+  /**
+   * Class attribute to be added to the component.
+   */
+  class: {
+    type: String,
+    default: '',
   },
 });
 
