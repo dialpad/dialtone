@@ -1,18 +1,20 @@
 <template>
   <div
     v-if="category === 'color'"
-    class="d-bar-circle d-w42 d-h42"
+    class="d-bar4 d-w128 d-h32"
     :style="getColorStyle"
   />
-  <p
+  <div
     v-if="category === 'typography'"
-    :style="getTypographyStyle"
+    class="d-w128 d-h32 d-d-flex d-jc-center d-ai-center"
   >
-    Aa
-  </p>
+    <div :style="getTypographyStyle">
+      Aa
+    </div>
+  </div>
   <div
     v-if="category === 'shadow'"
-    class="d-bar2 d-w42 d-h42"
+    class="d-bar4 d-w128 d-h32"
     :style="getShadowStyle"
   />
   <div

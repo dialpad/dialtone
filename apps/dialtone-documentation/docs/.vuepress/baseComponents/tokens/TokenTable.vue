@@ -64,7 +64,7 @@
             {{ description }}
           </div>
         </th>
-        <td class="d-code--sm d-fc-purple-400 d-ta-right d-wmx264">
+        <td class="d-code--sm d-fc-purple-400 d-ta-right d-wmx164">
           <div v-if="isCompositionToken(tokenValue)">
             <span v-for="value in tokenValue" :key="value">
               <span v-if="valueIsDivided(value)">
