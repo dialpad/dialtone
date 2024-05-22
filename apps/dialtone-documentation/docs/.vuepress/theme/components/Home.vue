@@ -1,14 +1,14 @@
 <!-- eslint-disable max-len -->
 <template>
   <section class="hero">
-    <div class="hero--inner-wrapper d-d-flex d-jc-space-between d-mx-auto d-wmx1340 d-pl32 d-pr32">
+    <div class="hero--inner-wrapper d-d-flex d-jc-space-between d-mx-auto d-wmx1340 d-pl32 d-pr32 d-ai-center">
       <div class="hero--content d-d-flex d-fd-column d-jc-center">
         <h1 class="d-headline--xxl d-mb12">
           Improve your UI's reception with Dialtone
         </h1>
         <p class="d-fs-300 d-lh-400 d-mb16 d-fc-secondary">
           Documented styles, components, and utility classes to help you quickly design and build unified experiences
-          across Dialpad and Dialpad Meetings.
+          across Dialpad experiences.
         </p>
         <div class="d-mb32 d-d-flex d-jc-center d-flow8">
           <a
@@ -71,122 +71,102 @@
           </router-link>
         </div>
       </div>
-      <svg-loader class="hero--image d-w50p d-as-flex-start" name="home-billboard" />
+      <svg-loader class="hero--image d-w50p" name="home-billboard" />
     </div>
   </section>
-  <section class="links d-d-grid d-gg16 d-g-cols12 d-wmx1340 d-mx-auto">
-    <div class="link d-body--md d-gc3 d-px32 d-ta-center">
-      <router-link
-        class="d-fc-primary h:d-fc-purple-400 d-d-block d-td-none d-bar8 d-pt4"
-        to="/design/"
-      >
-        <svg-loader class="d-h96 d-mb24" name="home-design-language" />
-        <h2 class="d-headline--xl d-mb8 d-baw0">
-          Design language
-        </h2>
-      </router-link>
-      <p class="d-mb8 d-body--md-compact d-fc-secondary">
-        Foundational color, iconography, and spacing guidelines
-      </p>
-      <router-link
-        class="d-link"
-        to="/design/"
-      >
-        Browse design guidelines
-      </router-link>
-    </div>
-    <div class="link d-body--md d-gc3 d-px32 d-ta-center">
-      <router-link
-        class="d-fc-primary h:d-fc-purple-400 d-d-block d-td-none d-bar8 d-pt4"
-        to="/components/"
-      >
-        <svg-loader class="d-h96 d-mb24" name="home-components" />
-        <h2 class="d-headline--xl d-mb8 d-baw0">
-          Components
-        </h2>
-      </router-link>
-      <p class="d-mb8 d-body--md-compact d-fc-secondary">
-        Presentational UI components offered in CSS and Vue
-      </p>
-      <div class="d-d-inline-flex d-fd-column d-stack4">
-        <router-link
-          class="d-link"
-          to="/components/"
-        >
-          Browse CSS components
+  <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">
+    <div class="d-d-grid d-gg16 d-g-cols12 d-wmx1340 d-mx-auto">
+      <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
+        <router-link class="d-fc-primary h:d-fc-purple-400 h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
+          <dt-stack gap="600">
+            <svg-loader class="d-h96" name="home-design-language" />
+            <h2 class="d-headline--xl">
+              Design language
+            </h2>
+          </dt-stack>
         </router-link>
-        <a
-          class="d-link"
-          href="https://dialtone.dialpad.com/vue"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Browse Vue 2 components</a>
-        <a
-          class="d-link"
-          href="https://dialtone.dialpad.com/vue3"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Browse Vue 3 components</a>
-      </div>
-    </div>
-    <div class="link d-body--md d-gc3 d-px32 d-ta-center">
-      <router-link
-        class="d-fc-primary h:d-fc-purple-400 d-d-block d-td-none d-bar8 d-pt4"
-        to="/utilities/"
-      >
-        <svg-loader class="d-h96 d-mb24" name="home-utilities" />
-        <h2 class="d-headline--xl d-mb8 d-baw0">
-          Utilities
-        </h2>
-      </router-link>
-      <p class="d-mb8 d-body--md-compact d-fc-secondary">
-        A utility-first CSS framework for building user interfaces.
-      </p>
-      <router-link
-        class="d-link"
-        to="/utilities/"
-      >
-        Browse utility classes
-      </router-link>
-    </div>
-    <div class="link d-body--md d-gc3 d-px32 d-ta-center">
-      <router-link
-        class="d-fc-primary h:d-fc-purple-400 d-d-block d-td-none d-bar8 d-pt4"
-        to="/guides/"
-      >
-        <svg-loader class="d-h96 d-mb24" name="home-guides" />
-        <h2 class="d-headline--xl d-mb8 d-baw0">
-          Guides
-        </h2>
-      </router-link>
-      <p class="d-mb8 d-body--md-compact d-fc-secondary">
-        Reference guidelines for Accessibility, Writing, and more
-      </p>
-      <div class="d-d-inline-flex d-fd-column d-stack4">
-        <router-link
-          class="d-link"
-          to="/guides/getting-started/"
-        >
-          Getting started
+        <p class="d-body--md-compact d-fc-secondary">
+          Foundational color, iconography, and spacing guidelines
+        </p>
+        <dt-stack gap="300">
+          <router-link class="d-link" to="/design/">
+            Browse design guidelines
+          </router-link>
+        </dt-stack>
+      </dt-stack>
+      <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
+        <router-link class="d-fc-primary h:d-fc-purple-400 h:d-td-underline d-td-none d-bar8 d-pt4" to="/components/">
+          <dt-stack gap="600">
+            <svg-loader class="d-h96" name="home-components" />
+            <h2 class="d-headline--xl">
+              Components
+            </h2>
+          </dt-stack>
         </router-link>
-        <router-link
-          class="d-link"
-          to="/guides/content/"
-        >
-          Writing guidelines
+        <p class="d-body--md-compact d-fc-secondary">
+          Presentational UI components offered in CSS and Vue
+        </p>
+        <dt-stack gap="300">
+          <router-link class="d-link" to="/components/">
+            Browse CSS components
+          </router-link>
+          <a class="d-link" href="https://dialtone.dialpad.com/vue" target="_blank" rel="noopener noreferrer">
+            Browse Vue 2 components
+          </a>
+          <a class="d-link" href="https://dialtone.dialpad.com/vue3" target="_blank" rel="noopener noreferrer">
+            Browse Vue 3 components
+          </a>
+        </dt-stack>
+      </dt-stack>
+      <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
+        <router-link class="d-fc-primary h:d-fc-purple-400 h:d-td-underline d-td-none d-bar8 d-pt4" to="/utilities/">
+          <dt-stack gap="600">
+            <svg-loader class="d-h96" name="home-utilities" />
+            <h2 class="d-headline--xl">
+              Utilities
+            </h2>
+          </dt-stack>
         </router-link>
-        <router-link
-          class="d-link"
-          to="/guides/accessibility/"
-        >
-          Accessibility
+        <p class="d-body--md-compact d-fc-secondary">
+          A utility-first CSS framework for building user interfaces.
+        </p>
+        <dt-stack gap="300">
+          <router-link class="d-link" to="/utilities/">
+            Browse utility classes
+          </router-link>
+        </dt-stack>
+      </dt-stack>
+      <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
+        <router-link class="d-fc-primary h:d-fc-purple-400 h:d-td-underline d-td-none d-bar8 d-pt4" to="/guides/">
+          <dt-stack gap="600">
+            <svg-loader class="d-h96" name="home-guides" />
+            <h2 class="d-headline--xl">
+              Guides
+            </h2>
+          </dt-stack>
         </router-link>
-      </div>
+        <p class="d-body--md-compact d-fc-secondary">
+          Reference guidelines for Accessibility, Writing, and more
+        </p>
+        <dt-stack gap="300">
+          <router-link class="d-link" to="/guides/getting-started/">
+            Getting started
+          </router-link>
+          <router-link class="d-link" to="/guides/content/">
+            Writing guidelines
+          </router-link>
+          <router-link class="d-link" to="/guides/accessibility/">
+            Accessibility
+          </router-link>
+        </dt-stack>
+      </dt-stack>
     </div>
   </section>
-  <section class="d-bt d-bc-subtle d-bgc-secondary d-py64 d-ta-center">
-    <div class="d-headline--lg d-fw-medium d-fc-secondary d-px48 d-flow16 d-d-flex d-jc-center d-ai-center">
-      <div>Don't see something? Want to contribute?</div>
+  <section class="d-py64 d-ta-center">
+    <dt-stack direction="row" gap="500" class="d-fc-secondary d-px48 d-mx-auto d-d-inline-flex d-ai-center">
+      <h2 class="d-headline--lg d-fw-semibold">
+        Don't see something? Want to contribute?
+      </h2>
       <a
         class="d-btn d-btn--muted d-btn--outlined d-btn--lg"
         href="https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10975&pid=12508"
@@ -203,7 +183,7 @@
       >
         Report a bug
       </a>
-    </div>
+    </dt-stack>
   </section>
 </template>
 
