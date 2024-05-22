@@ -1,3 +1,10 @@
+## [3.126.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.126.1...dialtone-vue3/v3.126.2) (2024-05-22)
+
+
+### Bug Fixes
+
+* DLT-1668 message input bullet lists ([#323](https://github.com/dialpad/dialtone/issues/323)) ([29979a5](https://github.com/dialpad/dialtone/commit/29979a57eef73bd5309513bf0e5d12a98aac1fff))
+
 ## [3.126.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.126.0...dialtone-vue3/v3.126.1) (2024-05-22)
 
 
