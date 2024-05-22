@@ -1,3 +1,11 @@
+## [2.133.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.133.0...dialtone-vue2/v2.133.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1719 separate link and custom link ([#318](https://github.com/dialpad/dialtone/issues/318)) ([cf38451](https://github.com/dialpad/dialtone/commit/cf38451e57d6d5180622ac30e050a8900184a9f7))
+* **Tooltip:** DP-99352 correct offsets, trim empty check ([#322](https://github.com/dialpad/dialtone/issues/322)) ([558059d](https://github.com/dialpad/dialtone/commit/558059d565d99a75b48fe377956ac5ccc4d34e67))
+
 # [2.133.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.132.1...dialtone-vue2/v2.133.0) (2024-05-21)
 
 
