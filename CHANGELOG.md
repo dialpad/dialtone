@@ -1,3 +1,10 @@
+## [9.38.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.38.0...dialtone/v9.38.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* DLT-1668 message input bullet lists ([#323](https://github.com/dialpad/dialtone/issues/323)) ([29979a5](https://github.com/dialpad/dialtone/commit/29979a57eef73bd5309513bf0e5d12a98aac1fff))
+
 # [9.38.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.37.0...dialtone/v9.38.0) (2024-05-22)
 
 
