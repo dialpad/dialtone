@@ -77,6 +77,6 @@ export const Default = {
     size: 'lg',
     headerText: 'Nothing to see here',
     bodyText: 'Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque.',
-    body: '<div class="d-mt8 d-stack d-stack--row d-stack--gap-300"><button data-qa="dt-button" type="button" class="base-button__button d-btn"><!----><span data-qa="dt-button-label" class="d-btn__label base-button__label"> Click me </span></button><button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--primary"><!----><span data-qa="dt-button-label" class="d-btn__label base-button__label">Click me</span></button></div>',
+    body: '<div class="d-mt8 d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Click me</button><button class="d-btn d-btn--primary">Click me</button></div>',
   },
 };

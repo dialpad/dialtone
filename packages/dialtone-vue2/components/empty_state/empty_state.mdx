@@ -22,7 +22,7 @@ We identify 4 types of empty states:
 <b>Not enabled:</b> the section isn’t available to the user at the moment.
 
 
-## Writing and tone#
+## Writing and tone
 We think this component is one of the most important regarding the writing guidelines (along with the error messages) so we take some time to write about how to communicate with our empty states. First of all, let’s talk about the different atoms that can have a writing variable
 
 <b>Titles:</b> Needs to be scannable and informative, keep it short and concise. <br/>
@@ -31,7 +31,7 @@ We think this component is one of the most important regarding the writing guide
 
 And regarding the difference of the types of variables of the component:
 
-<b>Zero state:</b> Like we said in the uses and best practices, we recommend combining the title and the CTA (if usable and possible) to teach the user how to populate this area. E.g Title: You don’t have any a.i recaps yet Description: Use it to analyze your calls and get more insights about it! CTA: [Activate]<br/>
+<b>Zero state:</b> Like we said in the uses and best practices, we recommend combining the title and the CTA (if usable and possible) to teach the user how to populate this area. E.g Title: You don’t have any AI recaps yet Description: Use it to analyze your calls and get more insights about it! CTA: [Activate]<br/>
 <b>No results:</b> In this scenario, we need to contemplate the variables of the user to understand how to react, this could be a expected scenario (searching for something you know you won’t find) or the surprised scenario (‘I was expecting to find something here, but there’s nothing’) Title: No results found Description: Try adjusting the your search or filters to find what you are looking for CTA: [create] [clear filters]<br/>
 <b>New feature:</b> We want to communicate this variable to be as easy to understand as possible. Usually when we communicate with this variable, we are offering a new service (paid or not) that the user can take advantage of, so work on selling it in a more marketable way. Title: Now you can analyze your metrics in live calls! Description: Don’t need to end a call to have the best insights. CTA: [Activate]<br/>
 <b>Not available:</b> The user doesn’t have permission to see the information for X or Y. Try to use this space to make it easier to request permission to access. Be clear and concise to communicate that they don’t have access, and don’t spend too much time telling them why, focus on asking for permission. Title: You don’t have access to this information Description: Ask your administrators permission CTA: Request permission<br/>
@@ -49,8 +49,6 @@ And regarding the difference of the types of variables of the component:
 ## Usage
 
 ### Import
-
-In order for dt-icon to be tree-shakeable, import it as following, depending on the bundler your application is using.
 
 ```js
 import { DtEmptyState } from '@dialpad/dialtone-vue'; // vite
