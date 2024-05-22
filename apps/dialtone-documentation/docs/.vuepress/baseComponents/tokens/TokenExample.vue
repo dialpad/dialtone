@@ -1,9 +1,13 @@
 <template>
   <div
     v-if="category === 'color'"
-    class="d-bar4 d-w128 d-h32"
+    class="d-bar4 d-w128 d-h32 d-d-flex d-jc-center d-ai-center colorRectangle"
     :style="getColorStyle"
-  />
+  >
+    <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
+      Aa
+    </div>
+  </div>
   <div
     v-if="category === 'typography'"
     class="d-w128 d-h32 d-d-flex d-jc-center d-ai-center"
@@ -81,19 +85,29 @@ const props = defineProps({
   },
 });
 
+const isForeground = computed(() => {
+  return props.name.includes('foreground');
+});
+
+const isLink = computed(() => {
+  return props.name.includes('link');
+});
+
 const getColorStyle = computed(() => {
-  const property = props.name.split('--dt-')[1]?.split('-')[0];
-  switch (property) {
-    case 'color':
-    case 'theme':
-      return { background: props.value };
-
-    case 'opacity':
-      return { background: `rgba(0, 0, 0, ${props.value})` };
-
-    default:
-      return null;
+  if (props.name.includes('opacity')) {
+    return { background: `rgba(0, 0, 0, ${props.value})` };
   }
+  if (props.name.includes('border')) {
+    return { border: `var(--dt-size-200) solid ${props.value}` };
+  }
+  if (isForeground.value || isLink.value) {
+    return { backgroundColor: foregroundBackgroundColor.value, color: props.value };
+  }
+  return { background: props.value };
+});
+
+const foregroundBackgroundColor = computed(() => {
+  return props.name.includes('inverted') ? 'var(--dt-color-surface-contrast)' : 'var(--dt-color-surface-primary)';
 });
 
 const getTypographyStyle = computed(() => {
@@ -146,6 +160,15 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 </script>
 
 <style scoped lang="less">
+.colorRectangle {
+  border: var(--dt-size-border-100) dashed var(--dt-color-border-subtle)
+}
+
+.link-example {
+  border-bottom: var(--dt-size-200) solid;
+  line-height: initial;
+}
+
 .sizeRectangle {
   height: var(--dt-size-600);
   background-color: var(--dt-color-purple-400);
