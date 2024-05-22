@@ -17,7 +17,7 @@
   />
   <div
     v-if="category === 'size'"
-    class="rectangle"
+    class="sizeRectangle"
     :style="getSizeStyle"
   />
   <div v-if="category === 'space'" class="space">
@@ -25,7 +25,7 @@
       A
     </div>
     <div
-      class="rectangle"
+      class="spaceRectangle"
       :style="getSizeStyle"
     />
     <div
@@ -115,11 +115,14 @@ const getShadowStyle = computed(() => {
 
 const getSizeStyle = computed(() => {
   if (props.name.includes('radius')) {
-    return { width: 'var(--dt-size-625)', borderRadius: props.value };
+    if (props.name.includes('circle')) {
+      return { width: 'var(--dt-size-600)', borderRadius: props.value };
+    }
+    return { width: 'var(--dt-size-100-percent)', borderRadius: props.value };
   }
   if (props.name.includes('border')) {
     return {
-      width: 'var(--dt-size-625)',
+      width: 'var(--dt-size-100-percent)',
       backgroundColor: 'var(--dt-color-neutral-transparent)',
       border: `${props.value} solid var(--dt-color-border-brand)`,
     };
@@ -141,24 +144,41 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 </script>
 
 <style scoped lang="less">
-.rectangle {
-  height: var(--dt-size-625);
-  background-color: var(--dt-color-brand-purple);
+.sizeRectangle {
+  height: var(--dt-size-600);
+  background-color: var(--dt-color-purple-400);
+  border-radius: var(--dt-size-radius-300);
   width: 0;
 }
+
+.spaceRectangle {
+  height: var(--dt-size-600);
+  background-color: var(--dt-color-purple-400);
+  width: 0;
+}
+
 .space {
   display: flex;
   position: relative;
 }
+
 .spaceReference {
-  height: var(--dt-size-625);
+  height: var(--dt-size-600);
   width: var(--dt-size-500);
-  background-color: var(--dt-color-black-200);
+  background-color: var(--dt-color-surface-moderate);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--dt-font-size-100);
-  color: var(--dt-color-black-500);
+  font: var(--dt-typography-body-sm);
+  color: var(--dt-color-foreground-muted);
+  padding: var(--dt-space-400) var(--dt-space-200);
+  border-top-right-radius: var(--dt-size-radius-300);
+  border-bottom-right-radius: var(--dt-size-radius-300);
+  &.spaceBefore {
+    border-radius: var(--dt-size-radius-0);
+    border-top-left-radius: var(--dt-size-radius-300);
+    border-bottom-left-radius: var(--dt-size-radius-300);
+  }
 }
 
 .spaceReference.percentage {
