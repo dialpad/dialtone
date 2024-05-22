@@ -1,3 +1,11 @@
+# [4.16.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.3...dialtone-icons/v4.16.0) (2024-05-22)
+
+
+### Features
+
+* **Icon:** DLT-1759 fixed attestation alignment ([#319](https://github.com/dialpad/dialtone/issues/319)) ([3c0882a](https://github.com/dialpad/dialtone/commit/3c0882a0c2a521c9a8623469379756c093fbceec))
+* **Icon:** DLT-1760 add rocket icon ([#320](https://github.com/dialpad/dialtone/issues/320)) ([8563d2b](https://github.com/dialpad/dialtone/commit/8563d2b363b82f47b4d24fc4d9f3b67ad4dc263c))
+
 ## [4.15.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.2...dialtone-icons/v4.15.3) (2024-05-15)
 
 
