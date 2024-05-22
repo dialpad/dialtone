@@ -357,6 +357,7 @@ export default {
       // make sure that this is defined before any other extensions
       // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
       if (!this.allowLineBreaks) {
+        const self = this;
         extensions.push(
           HardBreak.extend({
             addKeyboardShortcuts () {
@@ -364,7 +365,7 @@ export default {
                 Enter: () => true,
                 'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
                   () => commands.newlineInCode(),
-                  () => commands.splitListItem('listItem'),
+                  () => self.allowBulletList && commands.splitListItem('listItem'),
                   () => commands.createParagraphNear(),
                   () => commands.liftEmptyBlock(),
                   () => commands.splitBlock(),
