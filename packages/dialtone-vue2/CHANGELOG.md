@@ -1,3 +1,10 @@
+## [2.133.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.133.1...dialtone-vue2/v2.133.2) (2024-05-22)
+
+
+### Bug Fixes
+
+* DLT-1668 message input bullet lists ([#323](https://github.com/dialpad/dialtone/issues/323)) ([29979a5](https://github.com/dialpad/dialtone/commit/29979a57eef73bd5309513bf0e5d12a98aac1fff))
+
 ## [2.133.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.133.0...dialtone-vue2/v2.133.1) (2024-05-22)
 
 
