@@ -1,7 +1,7 @@
 <template>
   <div>
     <dt-link
-      v-for="kind in filteredKindClasses"
+      v-for="kind in LINK_VARIANTS"
       :key="kind"
       href="#"
       :kind="kind"
@@ -11,11 +11,14 @@
     </dt-link>
     <div class="d-bgc-purple-600">
       <dt-link
-        kind="inverted"
+        v-for="kind in LINK_VARIANTS"
+        :key="kind"
+        inverted
         href="#"
-        class="d-tt-capitalize"
+        :kind="kind"
+        class="d-tt-capitalize d-mr8"
       >
-        Inverted link
+        Inverted {{ kind }} link
       </dt-link>
     </div>
   </div>
@@ -23,7 +26,7 @@
 
 <script>
 import DtLink from './link.vue';
-import { LINK_VARIANTS, INVERTED } from './link_constants';
+import { LINK_VARIANTS } from './link_constants';
 
 export default {
   name: 'DtLinkVariants',
@@ -32,12 +35,6 @@ export default {
     return {
       LINK_VARIANTS,
     };
-  },
-
-  computed: {
-    filteredKindClasses () {
-      return LINK_VARIANTS.filter(kind => kind !== INVERTED);
-    },
   },
 };
 </script>
