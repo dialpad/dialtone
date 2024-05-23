@@ -1,3 +1,22 @@
+# [9.39.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.38.2...dialtone/v9.39.0) (2024-05-23)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1758 add legacy styles back ([#326](https://github.com/dialpad/dialtone/issues/326)) ([79d087b](https://github.com/dialpad/dialtone/commit/79d087be14681d435e93837bae9a05b17b93507e))
+
+
+### Documentation
+
+* **Homepage:** NO-JIRA homepage svg loader and stack ([#325](https://github.com/dialpad/dialtone/issues/325)) ([e66ed5c](https://github.com/dialpad/dialtone/commit/e66ed5cd0f2811f4099e15bac898d36c4f71a61c))
+
+
+### Features
+
+* dlt-1397 init empty state ([#315](https://github.com/dialpad/dialtone/issues/315)) ([38d3103](https://github.com/dialpad/dialtone/commit/38d31039c592d0b99312b27de8096bd229ca7bc2))
+* **Link:** DLT-1631 add inverted utility classes ([#321](https://github.com/dialpad/dialtone/issues/321)) ([0aa8259](https://github.com/dialpad/dialtone/commit/0aa8259fa3577de6b5ec7a1b30a1e203771fa7e8))
+* **Message Input:** DLT-1767 add ability to disallow codeblock ([#327](https://github.com/dialpad/dialtone/issues/327)) ([c47ab66](https://github.com/dialpad/dialtone/commit/c47ab66e962c2b2d48c037dae6f0fd100ac0c4da))
+
 ## [9.38.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.38.1...dialtone/v9.38.2) (2024-05-22)
 
 
