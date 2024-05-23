@@ -1,3 +1,12 @@
+# [2.134.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.133.2...dialtone-vue2/v2.134.0) (2024-05-23)
+
+
+### Features
+
+* dlt-1397 init empty state ([#315](https://github.com/dialpad/dialtone/issues/315)) ([38d3103](https://github.com/dialpad/dialtone/commit/38d31039c592d0b99312b27de8096bd229ca7bc2))
+* **Link:** DLT-1631 add inverted utility classes ([#321](https://github.com/dialpad/dialtone/issues/321)) ([0aa8259](https://github.com/dialpad/dialtone/commit/0aa8259fa3577de6b5ec7a1b30a1e203771fa7e8))
+* **Message Input:** DLT-1767 add ability to disallow codeblock ([#327](https://github.com/dialpad/dialtone/issues/327)) ([c47ab66](https://github.com/dialpad/dialtone/commit/c47ab66e962c2b2d48c037dae6f0fd100ac0c4da))
+
 ## [2.133.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.133.1...dialtone-vue2/v2.133.2) (2024-05-22)
 
 
