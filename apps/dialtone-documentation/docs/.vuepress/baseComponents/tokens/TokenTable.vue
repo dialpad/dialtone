@@ -40,7 +40,12 @@
         @focusout="onLeaveRow()"
       >
         <td>
-          <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
+          <token-example
+            :category="category"
+            :name="exampleName || name"
+            :value="exampleValue.toString()"
+            :theme="theme"
+          />
         </td>
         <th scope="row">
           <dt-stack
@@ -126,6 +131,11 @@ export default {
     tokenList: {
       type: Boolean,
       default: false,
+    },
+
+    theme: {
+      type: String,
+      required: true,
     },
   },
 

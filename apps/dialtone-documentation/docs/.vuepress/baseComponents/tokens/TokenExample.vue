@@ -83,6 +83,11 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  theme: {
+    type: String,
+    required: true,
+  },
 });
 
 const isForeground = computed(() => {
@@ -107,7 +112,16 @@ const getColorStyle = computed(() => {
 });
 
 const foregroundBackgroundColor = computed(() => {
-  return props.name.includes('inverted') ? 'var(--dt-color-surface-contrast)' : 'var(--dt-color-surface-primary)';
+  if (props.theme === 'light') {
+    if (props.name.includes('inverted')) {
+      return 'var(--dt-color-neutral-black)';
+    }
+    return 'var(--dt-color-neutral-white)';
+  }
+  if (props.name.includes('inverted')) {
+    return 'var(--dt-color-neutral-white)';
+  }
+  return 'var(--dt-color-neutral-black)';
 });
 
 const getTypographyStyle = computed(() => {
