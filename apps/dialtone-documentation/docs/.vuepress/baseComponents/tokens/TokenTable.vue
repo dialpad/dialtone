@@ -200,4 +200,8 @@ export default {
   color: var(--color-foreground-tertiary);
   font-weight: var(--dt-font-weight-semi-bold);
 }
+
+.d-table tr th:first-child {
+  width: 16rem;
+}
 </style>
