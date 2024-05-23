@@ -9,6 +9,7 @@
         :allow-blockquote="$attrs.allowBlockquote"
         :allow-bold="$attrs.allowBold"
         :allow-bullet-list="$attrs.allowBulletList"
+        :allow-codeblock="$attrs.allowCodeblock"
         :allow-italic="$attrs.allowItalic"
         :allow-strike="$attrs.allowStrike"
         :allow-underline="$attrs.allowUnderline"

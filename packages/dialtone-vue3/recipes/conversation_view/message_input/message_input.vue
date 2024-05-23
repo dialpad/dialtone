@@ -23,6 +23,7 @@
         :allow-blockquote="allowBlockquote"
         :allow-bold="allowBold"
         :allow-bullet-list="allowBulletList"
+        :allow-codeblock="allowCodeblock"
         :allow-italic="allowItalic"
         :allow-strike="allowStrike"
         :allow-underline="allowUnderline"
@@ -520,6 +521,14 @@ export default {
      * Whether the input allows for underline to be introduced in the text.
      */
     allowUnderline: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows codeblock to be introduced in the text.
+     */
+    allowCodeblock: {
       type: Boolean,
       default: true,
     },

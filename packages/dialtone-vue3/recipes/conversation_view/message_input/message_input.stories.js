@@ -178,5 +178,6 @@ export const WithoutExtensions = {
     allowItalic: false,
     allowStrike: false,
     allowUnderline: false,
+    allowCodeblock: false,
   },
 };
