@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, defineProps } from 'vue';
+import { defineAsyncComponent } from 'vue';
 
 // render an svg by name
 const props = defineProps({
@@ -20,7 +20,7 @@ const props = defineProps({
    * Class attribute to be added to the component.
    */
   class: {
-    type: String,
+    type: [String, Array, Object],
     default: '',
   },
 });
