@@ -56,6 +56,12 @@
   text-align: center;
   background-color: var(--tooltip-color-background);
   border-radius: var(--tooltip-border-radius);
+
+  &::after {
+    position: absolute;
+    border: var(--dt-size-350) solid transparent;
+    content: '';
+  }
 }
 
 //  ============================================================================
