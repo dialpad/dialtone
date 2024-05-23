@@ -261,6 +261,14 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Whether the input allows codeblock to be introduced in the text.
+     */
+    allowCodeblock: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   emits: [
@@ -403,11 +411,13 @@ export default {
         defaultAlignment: 'left',
       }));
 
-      extensions.push(CodeBlock.configure({
-        HTMLAttributes: {
-          class: 'dt-rich-text-editor--code-block',
-        },
-      }));
+      if (this.allowCodeblock) {
+        extensions.push(CodeBlock.configure({
+          HTMLAttributes: {
+            class: 'dt-rich-text-editor--code-block',
+          },
+        }));
+      }
 
       return extensions;
     },
