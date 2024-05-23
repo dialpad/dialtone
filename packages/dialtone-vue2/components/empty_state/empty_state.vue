@@ -13,13 +13,15 @@
       />
     </template>
 
-    <h1 v-if="headerText">
-      {{ headerText }}
-    </h1>
+    <div :class="emptyStateContentSpacing">
+      <h1>
+        {{ headerText }}
+      </h1>
 
-    <p v-if="bodyText">
-      {{ bodyText }}
-    </p>
+      <p v-if="bodyText">
+        {{ bodyText }}
+      </p>
+    </div>
 
     <slot name="body" />
   </div>
@@ -51,6 +53,8 @@ export default {
 
     /**
      * The illustration name in kebab-case
+     * This only displays when size is 'lg' or 'md'
+     * This has priority over icon.
      * @type {String}
      */
     illustrationName: {
@@ -61,6 +65,8 @@ export default {
 
     /**
      * The icon name in kebab-case
+     * This will be shown in 'lg' and 'md' size only if illustrationName prop is not provided and
+     * Will always be shown in 'sm' size.
      * @type {String}
      */
     iconName: {
@@ -128,6 +134,19 @@ export default {
 
     emptyStateClasses () {
       return ['d-empty-state', this.sizeClass];
+    },
+
+    emptyStateContentSpacing () {
+      switch (this.size) {
+        case 'sm':
+          return 'd-p16';
+        case 'md':
+          return 'd-p32';
+        case 'lg':
+          return 'd-p32';
+        default:
+          return 'd-p32';
+      }
     },
   },
 
