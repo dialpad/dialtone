@@ -1,3 +1,16 @@
+# [8.32.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.2...dialtone-css/v8.32.0) (2024-05-23)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1758 add legacy styles back ([#326](https://github.com/dialpad/dialtone/issues/326)) ([79d087b](https://github.com/dialpad/dialtone/commit/79d087be14681d435e93837bae9a05b17b93507e))
+
+
+### Features
+
+* dlt-1397 init empty state ([#315](https://github.com/dialpad/dialtone/issues/315)) ([38d3103](https://github.com/dialpad/dialtone/commit/38d31039c592d0b99312b27de8096bd229ca7bc2))
+* **Link:** DLT-1631 add inverted utility classes ([#321](https://github.com/dialpad/dialtone/issues/321)) ([0aa8259](https://github.com/dialpad/dialtone/commit/0aa8259fa3577de6b5ec7a1b30a1e203771fa7e8))
+
 ## [8.31.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.1...dialtone-css/v8.31.2) (2024-05-16)
 
 
