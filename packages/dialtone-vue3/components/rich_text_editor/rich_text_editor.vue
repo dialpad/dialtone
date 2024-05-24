@@ -40,8 +40,7 @@ import {
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
-import emojiRegex from 'emoji-regex';
-import { codeToEmojiData, emojiShortCodeRegex } from '@/common/emoji';
+import { codeToEmojiData, emojiShortCodeRegex, emojiRegex } from '@/common/emoji';
 
 export default {
   name: 'DtRichTextEditor',
@@ -513,9 +512,10 @@ export default {
 
     parseEmojis () {
       const matches = new Set(
-        [...this.modelValue.matchAll(emojiRegex()), ...this.modelValue.matchAll(emojiShortCodeRegex)]
+        [...this.modelValue.matchAll(emojiRegex), ...this.modelValue.matchAll(emojiShortCodeRegex)]
           .map(match => match[0].trim()),
       );
+
       if (!matches) return;
 
       matches

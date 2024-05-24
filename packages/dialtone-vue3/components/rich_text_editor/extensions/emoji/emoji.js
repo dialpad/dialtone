@@ -1,19 +1,17 @@
 import { mergeAttributes, Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import { VueNodeViewRenderer } from '@tiptap/vue-3';
 import EmojiComponent from './EmojiComponent.vue';
-import { codeToEmojiData, emojiShortCodeRegex } from '@/common/emoji';
+import { codeToEmojiData, emojiShortCodeRegex, emojiRegex } from '@/common/emoji';
 import { PluginKey } from '@tiptap/pm/state';
 
 import Suggestion from '@tiptap/suggestion';
 import suggestionOptions from './suggestion';
+import { emojiPattern } from 'regex-combined-emojis';
 
 export const EmojiPluginKey = new PluginKey('emoji');
 
 const inputShortCodeRegex = /(^| |(?<=:))(:\w+:)$/;
-/* eslint-disable max-len */
-const inputUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])$/;
-const pasteUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g;
-/* eslint-enable max-len */
+const inputUnicodeRegex = new RegExp(emojiPattern + '$');
 
 const inputRuleMatch = (match) => {
   if (match && codeToEmojiData(match[0])) {
@@ -113,11 +111,9 @@ export const Emoji = Node.create({
         },
         type: this.type,
         getAttributes (attrs) {
-          const unicode = codeToEmojiData(attrs[0]).unicode_output;
-          const emoji = String.fromCodePoint(parseInt(unicode, 16));
+          const emoji = codeToEmojiData(attrs[0]).shortname;
           return {
             code: emoji,
-            label: 'emoji',
           };
         },
       }),
@@ -136,7 +132,7 @@ export const Emoji = Node.create({
         },
       }),
       nodePasteRule({
-        find: pasteUnicodeRegex,
+        find: emojiRegex,
         type: this.type,
         getAttributes (attrs) {
           return {
