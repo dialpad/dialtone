@@ -63,7 +63,7 @@ const isFont = (name, key) => name.includes(`--dt-font-${key}`);
 const getRectSizeStyle = (value) => {
   if (value.endsWith('%')) return { width: value };
   const size = parseFloat(value.replace('rem', ''));
-  if (size < 12.8 && size >= 0) return { width: value };
+  if (size < 12.8 && size > -12.8) return { width: `${Math.abs(size)}rem` };
   return null;
 };
 
@@ -163,7 +163,7 @@ const getSizeStyle = computed(() => {
 const displaySpaceReference = computed(() => {
   if (props.value.endsWith('%')) return true;
   const value = parseFloat(props.value.replace('rem', ''));
-  return (value < 12.8 && value >= 0);
+  return (value < 12.8 && value > -12.8);
 });
 
 const getSpaceAfterStyle = computed(() => {
