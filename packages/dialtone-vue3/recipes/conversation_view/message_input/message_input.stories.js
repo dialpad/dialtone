@@ -99,7 +99,31 @@ export const argTypesData = {
 
 // Set default values at the story level here.
 export const argsData = {
-  modelValue: 'Always the Padawan, never the Jedi.',
+  modelValue: `Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  Always the Padawan, never the Jedi.
+  `,
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',

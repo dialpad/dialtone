@@ -14,7 +14,8 @@
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
-      class="d-of-auto d-mx16 d-mt8 d-mb4"
+      v-dt-scrollbars
+      class="d-mx16 d-mt8 d-mb4"
       :style="{ 'max-height': maxHeight }"
     >
       <dt-rich-text-editor

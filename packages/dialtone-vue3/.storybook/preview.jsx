@@ -1,5 +1,6 @@
 import '../css/dialtone-globals.less';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
+import 'overlayscrollbars/overlayscrollbars.css';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { setup } from '@storybook/vue3';
 import React from 'react';
@@ -10,6 +11,7 @@ import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCus
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DtTooltipDirective } from "@/directives/tooltip";
+import { DtScrollbarsDirective } from "@/directives/scrollbars";
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
@@ -19,6 +21,7 @@ setCustomEmojiJson(customEmojiJson);
 setup((app) => {
   app.use(fixDefaultSlot)
   app.use(DtTooltipDirective);
+  app.use(DtScrollbarsDirective);
 });
 
 export default {
