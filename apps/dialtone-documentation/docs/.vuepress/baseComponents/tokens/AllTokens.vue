@@ -14,7 +14,7 @@
       &OpenCurlyDoubleQuote;{{ searchCriteria }}&CloseCurlyDoubleQuote;
     </strong>
   </div>
-  <token-tree v-else :node="filteredTokens" :category="null" :level="2" />
+  <token-tree v-else :node="filteredTokens" :category="null" :level="2" :theme="theme" />
 </template>
 
 <script setup>

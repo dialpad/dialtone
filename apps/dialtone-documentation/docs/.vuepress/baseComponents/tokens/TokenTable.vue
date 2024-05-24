@@ -40,7 +40,12 @@
         @focusout="onLeaveRow()"
       >
         <td>
-          <token-example :category="category" :name="exampleName || name" :value="exampleValue.toString()" />
+          <token-example
+            :category="category"
+            :name="exampleName || name"
+            :value="exampleValue.toString()"
+            :theme="theme"
+          />
         </td>
         <th scope="row">
           <dt-stack
@@ -64,7 +69,7 @@
             {{ description }}
           </div>
         </th>
-        <td class="d-code--sm d-fc-purple-400 d-ta-right d-wmx264">
+        <td class="d-code--sm d-fc-purple-400 d-ta-right d-wmx164">
           <div v-if="isCompositionToken(tokenValue)">
             <span v-for="value in tokenValue" :key="value">
               <span v-if="valueIsDivided(value)">
@@ -126,6 +131,11 @@ export default {
     tokenList: {
       type: Boolean,
       default: false,
+    },
+
+    theme: {
+      type: String,
+      required: true,
     },
   },
 
@@ -189,5 +199,9 @@ export default {
 .d-table th {
   color: var(--color-foreground-tertiary);
   font-weight: var(--dt-font-weight-semi-bold);
+}
+
+.d-table tr th:first-child {
+  width: 16rem;
 }
 </style>
