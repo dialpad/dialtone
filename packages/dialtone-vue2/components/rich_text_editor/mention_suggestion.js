@@ -43,9 +43,9 @@ const CONTACT_LIST = [
 ];
 
 export default {
-  items ({ query }) {
+  async items ({ query }) {
     // simulate an API call by waiting 1000 seconds.
-    // new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     if (query.length === 0) return CONTACT_LIST;
     return CONTACT_LIST.filter((contact) => { return contact.name.toLowerCase().startsWith(query.toLowerCase()); });
