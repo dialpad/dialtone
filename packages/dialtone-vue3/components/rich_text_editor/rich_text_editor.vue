@@ -28,8 +28,8 @@ import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
-import { MentionPlugin, mentionRegex } from './extensions/mentions/mention';
-import { ChannelPlugin, channelRegex } from './extensions/channels/channel';
+import { MentionPlugin } from './extensions/mentions/mention';
+import { ChannelPlugin } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
@@ -472,9 +472,8 @@ export default {
         // through the parent, so don't do anything here.
         return;
       }
-
-      this.internalValue = newValue;
-      this.insertContent();
+      // Otherwise replace the content (resets the cursor position).
+      this.editor.commands.setContent(newValue, false);
     },
   },
 
@@ -495,6 +494,7 @@ export default {
       // For all available options, see https://tiptap.dev/api/editor#settings
       this.editor = new Editor({
         autofocus: this.autoFocus,
+        content: this.value,
         editable: this.editable,
         extensions: this.extensions,
         editorProps: {
@@ -504,76 +504,7 @@ export default {
           },
         },
       });
-      this.insertContent();
       this.addEditorListeners();
-    },
-
-    /**
-     * This function is necessary as tiptap doesn't render the content passed
-     * directly through `editor.commands.setContent` the content passed down to it
-     * should be already parsed. So We're parsing the elements into it's corresponding
-     * HTML version before setting it.
-     */
-    insertContent () {
-      this.parseMentions();
-      this.parseChannels();
-      this.parseEmojis();
-      this.editor.commands.setContent(this.internalValue, true);
-    },
-
-    parseEmojis () {
-      const matches = new Set(
-        [...this.modelValue.matchAll(emojiRegex()), ...this.modelValue.matchAll(emojiShortCodeRegex)]
-          .map(match => match[0].trim()),
-      );
-      if (!matches) return;
-
-      matches
-        .forEach(match => {
-          const emoji = codeToEmojiData(match);
-          if (!emoji) return;
-          this.internalValue = this.internalValue.replace(new RegExp(`${match}`, 'g'), `<emoji-component code="${emoji.shortname}"></emoji-component>`);
-        });
-    },
-
-    parseChannels () {
-      if (!this.channelSuggestion) return;
-
-      const suggestions = this.channelSuggestion.items({ query: '' });
-      const matches = [...this.modelValue.matchAll(channelRegex)]
-        .filter(match => suggestions.some(({ id }) => id === match[1]));
-
-      if (!matches) return;
-
-      matches.forEach(match => {
-        const channel = suggestions.find(({ id }) => id === match[1]);
-        this.internalValue = this.internalValue.replace(
-          `#${match[1]}`,
-          /** The space at the beginning is important as tiptap removes that while rendering.
-           *  So if multiple mentions, channels or emojis are next to each other it will fail
-           */
-          ` <channel-component name="${channel.name}" id="${channel.id}"></channel-component>`,
-        );
-      });
-    },
-
-    parseMentions () {
-      if (!this.mentionSuggestion) return;
-
-      const suggestions = this.mentionSuggestion.items({ query: '' });
-      const matches = [...this.modelValue.matchAll(mentionRegex)]
-        .filter(match => suggestions.some(({ id }) => id === match[1]));
-
-      if (!matches) return;
-
-      matches.forEach(match => {
-        const mention = suggestions.find(({ id }) => id === match[1]);
-        this.internalValue = this.internalValue.replace(`@${match[1]}`, ` <mention-component name="${mention.name}" id="${mention.id}"></mention-component>`);
-      });
-    },
-
-    destroyEditor () {
-      this.editor.destroy();
     },
 
     /**

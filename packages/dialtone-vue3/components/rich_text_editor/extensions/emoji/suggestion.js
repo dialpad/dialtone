@@ -77,7 +77,6 @@ export default {
           interactive: true,
           trigger: 'manual',
           placement: 'top-start',
-          contentElement: null,
           zIndex: 650,
         });
       },

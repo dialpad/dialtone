@@ -13,7 +13,7 @@ import slashCommandSuggestion from './slash_command_suggestion';
 
 // Default Prop Values
 export const argsData = {
-  modelValue: `I am not a standalone component, please use Message Input instead :v_tone3::robot:!`,
+  modelValue: '<p>I am not a standalone component, please use Message Input instead<emoji-component code=":v_tone3:" id="270c-1f3fd"></emoji-component><emoji-component code=":robot:" id="1f916"></emoji-component> !</p>',
   editable: true,
   inputAriaLabel: 'This is a descriptive label',
   outputFormat: 'text',
@@ -113,15 +113,14 @@ export const WithLinks = {
   ...Default,
   args: {
     link: true,
-    modelValue: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
-    'IP addresses: 192.158.1.38, email addresses: noreply@dialpad.com and phone numbers: (778) 765-8813, +17787658813!',
+    modelValue: '<p>The editor can autolink URLs: <a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="http://dialpad.com">dialpad.com</a>, <a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="https://www.dialpad.com/about-us/">https://www.dialpad.com/about-us/</a>, email addresses: <a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="mailto:noreply@dialpad.com">noreply@dialpad.com</a></p>',
   },
 };
 
 export const WithMentionSuggestions = {
   ...Default,
   args: {
-    modelValue: 'The editor can also suggest mentions: @test.person, @test.person2! and channel suggestions: #dialpad.',
+    modelValue: '<p>The editor can also suggest mentions: <mention-component name="Test Person" avatarsrc="" id="test.person"></mention-component>, <mention-component name="Test Person 2" avatarsrc="" id="test.person2"></mention-component>! and channel suggestions: <channel-component name="dialpad" id="dialpad" locked="false"></channel-component>. The suggestions dropdown will wait 1000ms to simulate an API call.</p>',
     mentionSuggestion,
     channelSuggestion,
     slashCommandSuggestion,
