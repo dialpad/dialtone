@@ -31,7 +31,7 @@ const CONTACT_LIST = [
     avatarSrc: 'https://avatars.githubusercontent.com/u/13851061?s=460&u=1f1b5b0b5b2b2b2b2b2b2b2b2b2b2b2b2b2b2b&v=4',
   },
   {
-    id: 'ignacio.Ropolo',
+    id: 'ignacio.ropolo',
     name: 'Ignacio Ropolo',
     avatarSrc: 'https://avatars.githubusercontent.com/u/13851061?s=460&u=1f1b5b0b5b2b2b2b2b2b2b2b2b2b2b2b2b2b2b&v=4',
   },
