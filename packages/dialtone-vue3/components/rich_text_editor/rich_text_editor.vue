@@ -505,6 +505,10 @@ export default {
       this.addEditorListeners();
     },
 
+    destroyEditor () {
+      this.editor.destroy();
+    },
+
     /**
      * The Editor exposes event hooks that we have to map our emits into. See
      * https://tiptap.dev/api/events for all events.
