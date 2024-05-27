@@ -122,7 +122,7 @@ export default {
      */
     outputFormat: {
       type: String,
-      default: 'text',
+      default: 'html',
       validator (outputFormat) {
         return RICH_TEXT_EDITOR_OUTPUT_FORMATS.includes(outputFormat);
       },
