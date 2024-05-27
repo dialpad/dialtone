@@ -53,7 +53,7 @@ export default {
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
      */
-    value: {
+    modelValue: {
       type: [Object, String],
       default: '',
     },
@@ -459,7 +459,7 @@ export default {
       this.createEditor();
     },
 
-    value (newValue) {
+    modelValue (newValue) {
       let currentValue = this.getOutput();
       if (this.outputFormat === 'json') {
         newValue = JSON.stringify(newValue);
@@ -492,7 +492,7 @@ export default {
       // For all available options, see https://tiptap.dev/api/editor#settings
       this.editor = new Editor({
         autofocus: this.autoFocus,
-        content: this.value,
+        content: this.modelValue,
         editable: this.editable,
         extensions: this.extensions,
         editorProps: {

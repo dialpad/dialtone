@@ -36,12 +36,12 @@ export default {
 
   data () {
     return {
-      value: this.$attrs.value,
+      value: this.$attrs.modelValue,
     };
   },
 
   watch: {
-    '$attrs.value' (value) {
+    '$attrs.modelValue' (value) {
       this.value = value;
     },
   },
