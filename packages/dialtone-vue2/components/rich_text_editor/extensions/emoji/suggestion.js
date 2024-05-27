@@ -18,7 +18,7 @@ export default {
       }
       return false;
     });
-    return filteredEmoji.map(item => { return { id: item.unicode_character, code: item.shortname }; });
+    return filteredEmoji.map(item => { return { code: item.shortname }; });
   },
 
   command: ({ editor, range, props }) => {
