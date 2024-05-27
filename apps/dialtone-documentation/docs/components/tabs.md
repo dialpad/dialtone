@@ -21,34 +21,111 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <example-tabs />
 </code-well-header>
 
-```html
-<div class="d-tablist js-tablist" role="tablist" aria-label="Label Example Group">
-  <button class="d-tab d-tab--selected js-tab" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="0">First tab</button>
-  <button class="d-tab js-tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="-1">Second tab</button>
-  <button class="d-tab js-tab" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" tabindex="-1">Third tab</button>
+<code-example-tabs
+htmlCode='
+<div>
+  <div role="tablist" class="d-tablist">
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab d-tab--selected" id="dt-tab-1" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">
+      <span class="d-btn__label base-button__label"> First </span>
+    </button>
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab" id="dt-tab-3" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">
+      <span class="d-btn__label base-button__label"> Second </span>
+    </button>
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab" id="dt-tab-5`" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">
+      <span class="d-btn__label base-button__label"> Third </span>
+    </button>
+  </div>
+  <div>
+    <div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false" style=""><p>First Panel</p></div>
+    <div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;"><p>Second Panel</p></div>
+    <div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;"><p>Third Panel</p></div>
+  </div>
 </div>
-<div id="panel-1" class="js-tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
-  <p>First tab content panel</p>
-</div>
-<div id="panel-2" class="js-tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-2" hidden>
-  <p>Second tab content panel</p>
-</div>
-<div id="panel-3" class="js-tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-3" hidden>
-  <p>Third tab content panel</p>
-</div>
-```
+'
+vueCode='
+<dt-tab-group>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      First
+    </dt-tab>
+    <dt-tab id="3" panel-id="4">
+      Second
+    </dt-tab>
+    <dt-tab id="5`" panel-id="6">
+      Third
+    </dt-tab>
+  </template>
+
+  <div>
+    <dt-tab-panel id="2" tab-id="1">
+      <p>First Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="4" tab-id="3">
+      <p>Second Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="6" tab-id="5">
+      <p>Third Panel</p>
+    </dt-tab-panel>
+  </div>
+</dt-tab-group>
+'
+showHtmlWarning />
 
 ### Sizes
 
 <code-well-header bgclass="d-bgc-primary">
-  <example-tabs hide-content />
   <example-tabs hide-content size="small" />
 </code-well-header>
 
-```html
-<div class="d-tablist">…</div>
-<div class="d-tablist d-tablist--sm">…</div>
-```
+<code-example-tabs
+htmlCode='
+<div>
+  <div role="tablist" class="d-tablist d-tablist--sm">
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab d-tab--selected" id="dt-tab-1" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">
+      <span class="d-btn__label base-button__label"> First </span>
+    </button>
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab" id="dt-tab-3" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">
+      <span class="d-btn__label base-button__label"> Second </span>
+    </button>
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab" id="dt-tab-5`" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">
+      <span class="d-btn__label base-button__label"> Third </span>
+    </button>
+  </div>
+  <div>
+    <div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false" style=""><p>First Panel</p></div>
+    <div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;"><p>Second Panel</p></div>
+    <div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;"><p>Third Panel</p></div>
+  </div>
+</div>
+'
+vueCode='
+<dt-tab-group size="sm">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      First
+    </dt-tab>
+    <dt-tab id="3" panel-id="4">
+      Second
+    </dt-tab>
+    <dt-tab id="5`" panel-id="6">
+      Third
+    </dt-tab>
+  </template>
+
+  <div>
+    <dt-tab-panel id="2" tab-id="1">
+      <p>First Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="4" tab-id="3">
+      <p>Second Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="6" tab-id="5">
+      <p>Third Panel</p>
+    </dt-tab-panel>
+  </div>
+</dt-tab-group>
+'
+showHtmlWarning />
 
 ### Borderless
 
@@ -56,13 +133,57 @@ Add a `d-tablist--no-border` to remove the bottom border of any tablist. Handy f
 
 <code-well-header bgclass="d-bgc-primary">
   <example-tabs hide-content borderless />
-  <example-tabs hide-content size="small" borderless />
 </code-well-header>
 
-```html
-<div class="d-tablist d-tablist--no-border">…</div>
-<div class="d-tablist d-tablist--sm d-tablist--no-border">…</div>
-```
+<code-example-tabs
+htmlCode='
+<div>
+  <div role="tablist" class="d-tablist d-tablist--no-border">
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab d-tab--selected" id="dt-tab-1" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">
+      <span class="d-btn__label base-button__label"> First </span>
+    </button>
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab" id="dt-tab-3" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">
+      <span class="d-btn__label base-button__label"> Second </span>
+    </button>
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab" id="dt-tab-5`" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">
+      <span class="d-btn__label base-button__label"> Third </span>
+    </button>
+  </div>
+  <div>
+    <div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false" style=""><p>First Panel</p></div>
+    <div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;"><p>Second Panel</p></div>
+    <div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;"><p>Third Panel</p></div>
+  </div>
+</div>
+'
+vueCode='
+<dt-tab-group :borderless="true">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      First
+    </dt-tab>
+    <dt-tab id="3" panel-id="4">
+      Second
+    </dt-tab>
+    <dt-tab id="5`" panel-id="6">
+      Third
+    </dt-tab>
+  </template>
+
+  <div>
+    <dt-tab-panel id="2" tab-id="1">
+      <p>First Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="4" tab-id="3">
+      <p>Second Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="6" tab-id="5">
+      <p>Third Panel</p>
+    </dt-tab-panel>
+  </div>
+</dt-tab-group>
+'
+showHtmlWarning />
 
 ### Inverted
 
@@ -72,9 +193,55 @@ Add `d-tablist--inverted` when you want to display tabs on a darker background.
   <example-tabs inverted />
 </code-well-header>
 
-```html
-<div class="d-tablist d-tablist--inverted">…</div>
-```
+<code-example-tabs
+htmlCode='
+<div>
+  <div role="tablist" class="d-tablist d-tablist--inverted">
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab d-tab--selected" id="dt-tab-1" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">
+      <span class="d-btn__label base-button__label"> First </span>
+    </button>
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab" id="dt-tab-3" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">
+      <span class="d-btn__label base-button__label"> Second </span>
+    </button>
+    <button type="button" class="base-button__button d-btn d-btn--primary d-tab" id="dt-tab-5`" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">
+      <span class="d-btn__label base-button__label"> Third </span>
+    </button>
+  </div>
+  <div>
+    <div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false" style=""><p>First Panel</p></div>
+    <div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;"><p>Second Panel</p></div>
+    <div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;"><p>Third Panel</p></div>
+  </div>
+</div>
+'
+vueCode='
+<dt-tab-group :inverted="true">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      First
+    </dt-tab>
+    <dt-tab id="3" panel-id="4">
+      Second
+    </dt-tab>
+    <dt-tab id="5`" panel-id="6">
+      Third
+    </dt-tab>
+  </template>
+
+  <div>
+    <dt-tab-panel id="2" tab-id="1">
+      <p>First Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="4" tab-id="3">
+      <p>Second Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="6" tab-id="5">
+      <p>Third Panel</p>
+    </dt-tab-panel>
+  </div>
+</dt-tab-group>
+'
+showHtmlWarning />
 
 ## Vue API
 

@@ -64,60 +64,46 @@ The Toggle component acts as a way to allow the User to switch between two mutua
   </fieldset>
 </code-well-header>
 
-```html
-<fieldset class="d-stack8">
-  <div class="d-toggle-group d-d-flex d-ai-center">
-    <div class="d-toggle-copy">
-      <label class="d-toggle-label" for="Dialtone-Toggle1">Unchecked Toggle</label>
-    </div>
-    <div class="d-toggle-button">
-      <button class="d-toggle" type="button" role="switch" id="Dialtone-Toggle1" >
-        <span class="d-toggle__inner" />
-      </button>
-    </div>
-  </div>
-  <div class="d-toggle-group d-d-flex d-ai-center">
-    <div class="d-toggle-copy">
-      <label class="d-toggle-label" for="Dialtone-Toggle2">Checked Toggle</label>
-    </div>
-    <div class="d-toggle-button">
-      <button class="d-toggle d-toggle--checked" type="button" role="switch" id="Dialtone-Toggle2" >
-        <span class="d-toggle__inner" />
-      </button>
-    </div>
-  </div>
-  <div class="d-toggle-group d-d-flex d-ai-center">
-    <div class="d-toggle-copy">
-      <label class="d-toggle-label" for="Dialtone-Toggle3">Unchecked Disabled</label>
-    </div>
-    <div class="d-toggle-button">
-      <button class="d-toggle" type="button" role="switch" disabled id="Dialtone-Toggle3" >
-        <span class="d-toggle__inner" />
-      </button>
-    </div>
-  </div>
-  <div class="d-toggle-group d-d-flex d-ai-center">
-    <div class="d-toggle-copy">
-      <label class="d-toggle-label" for="Dialtone-Toggle4">Checked Disabled</label>
-    </div>
-    <div class="d-toggle-button">
-      <button class="d-toggle d-toggle--checked" type="button" role="switch" disabled id="Dialtone-Toggle4" >
-        <span class="d-toggle__inner" />
-      </button>
-    </div>
-  </div>
-  <div class="d-toggle-group d-d-flex d-ai-center">
-    <div class="d-toggle-copy">
-      <label class="d-toggle-label" for="Dialtone-Toggle5">Indeterminate Toggle</label>
-    </div>
-    <div class="d-toggle-button">
-      <button class="d-toggle d-toggle--indeterminate" type="button" role="checkbox" aria-checked="mixed" id="Dialtone-Toggle5">
-        <span class="d-toggle__inner" />
-      </button>
-    </div>
-  </div>
-</fieldset>
-```
+<code-example-tabs
+htmlCode='
+<div class="d-toggle-wrapper">
+  <label for="dt3"> Unchecked Toggle </label><button id="dt3" role="switch" type="button" aria-checked="false" aria-disabled="false" class="d-toggle"><span class="d-toggle__inner"></span></button>
+</div>
+<div class="d-toggle-wrapper">
+  <label for="dt4"> Checked Toggle </label>
+  <button id="dt4" role="switch" type="button" aria-checked="true" aria-disabled="false" class="d-toggle d-toggle--checked"><span class="d-toggle__inner"></span></button>
+</div>
+<div class="d-toggle-wrapper">
+  <label for="dt5"> Unchecked Disabled </label>
+  <button id="dt5" role="switch" type="button" aria-checked="false" aria-disabled="true" class="d-toggle d-toggle--disabled" disabled="disabled"><span class="d-toggle__inner"></span></button>
+</div>
+<div class="d-toggle-wrapper">
+  <label for="dt6"> Checked Disabled </label>
+  <button id="dt6" role="switch" type="button" aria-checked="true" disabled="disabled" aria-disabled="true" class="d-toggle d-toggle--checked d-toggle--disabled"><span class="d-toggle__inner"></span></button>
+</div>
+<div class="d-toggle-wrapper">
+  <label for="dt7"> Indeterminate Disabled </label>
+  <button id="dt7" role="checkbox" type="button" aria-checked="mixed" disabled="disabled" aria-disabled="true" class="d-toggle d-toggle--disabled d-toggle--indeterminate"><span class="d-toggle__inner"></span></button>
+</div>
+'
+vueCode='
+<dt-toggle>
+  Unchecked Toggle
+</dt-toggle>
+<dt-toggle :checked="true">
+  Checked Toggle
+</dt-toggle>
+<dt-toggle :disabled="true">
+  Unchecked Disabled
+</dt-toggle>
+<dt-toggle :checked="true" :disabled="true">
+  Checked Disabled
+</dt-toggle>
+<dt-toggle checked="mixed" :disabled="true">
+  Indeterminate Disabled
+</dt-toggle>
+'
+showHtmlWarning />
 
 ### Sizes
 
@@ -132,84 +118,24 @@ The Toggle component acts as a way to allow the User to switch between two mutua
   </fieldset>
 </code-well-header>
 
-```html
-<fieldset class="d-stack8">
-  <div class="d-toggle-group d-d-flex d-ai-center">
-    <div class="d-toggle-copy">
-      <label class="d-toggle-label" for="Dialtone-Toggle6">Small size</label>
-    </div>
-    <div class="d-toggle-button">
-      <button class="d-toggle d-toggle--small" type="button" role="switch" id="Dialtone-Toggle6" >
-        <span class="d-toggle__inner" />
-      </button>
-    </div>
-  </div>
-  <div class="d-toggle-group d-d-flex d-ai-center">
-    <div class="d-toggle-copy">
-      <label class="d-toggle-label" for="Dialtone-Toggle7">Default size</label>
-    </div>
-    <div class="d-toggle-button">
-      <button class="d-toggle" type="button" role="switch" id="Dialtone-Toggle7" >
-        <span class="d-toggle__inner" />
-      </button>
-    </div>
-  </div>
-</fieldset>
-```
-
-### Example: Stacked Group
-
-<code-well-header>
-  <fieldset class="d-w25p d-stack8">
-    <legend class="d-headline--lg">DND Settings</legend>
-    <div class="d-toggle-wrapper d-d-flex d-fd-column d-stack8">
-      <div class="row d-d-flex d-ai-center d-jc-space-between">
-        <div class="d-headline--md">Status</div>
-        <div class="d-headline--md">DND</div>
-      </div>
-      <div class="row d-d-flex d-ai-center d-jc-space-between">
-        <example-toggle label="Acorn Test" id="Dialtone-Toggle8" />
-      </div>
-      <div class="row d-d-flex d-ai-center d-jc-space-between">
-        <example-toggle label="California Zoo" id="Dialtone-Toggle9" />
-      </div>
-      <div class="row d-d-flex d-ai-center d-jc-space-between">
-        <example-toggle label="Montana Centre" id="Dialtone-Toggle10" />
-      </div>
-      <div class="row d-d-flex d-ai-center d-jc-space-between">
-        <example-toggle label="Wilson Centre" id="Dialtone-Toggle11" />
-      </div>
-    </div>
-  </fieldset>
-</code-well-header>
-
-```html
-<fieldset class="d-w25p d-stack8">
-  <legend class="d-headline--lg">DND Settings</legend>
-  <div class="d-toggle-wrapper d-d-flex d-fd-column d-stack8">
-    <div class="row d-d-flex d-ai-center d-jc-space-between">
-      <div class="d-headline--md">Status</div>
-      <div class="d-headline--md">DND</div>
-    </div>
-    <div class="row d-d-flex d-ai-center d-jc-space-between">
-      <div class="d-toggle-copy"><label class="d-toggle-label" for="Dialtone-Toggle8">Acorn Test</label></div>
-      <div class="d-toggle-button"><button id="Dialtone-Toggle8" class="d-toggle d-toggle--checked" aria-checked="true" type="button" role="switch"><span class="d-toggle__inner"></span></button></div>
-    </div>
-    <div class="row d-d-flex d-ai-center d-jc-space-between">
-      <div class="d-toggle-copy"><label class="d-toggle-label" for="Dialtone-Toggle9">California Zoo</label></div>
-      <div class="d-toggle-button"><button id="Dialtone-Toggle9" class="d-toggle" aria-checked="false" type="button" role="switch"><span class="d-toggle__inner"></span></button></div>
-    </div>
-    <div class="row d-d-flex d-ai-center d-jc-space-between">
-      <div class="d-toggle-copy"><label class="d-toggle-label" for="Dialtone-Toggle10">Montana Centre</label></div>
-      <div class="d-toggle-button"><button id="Dialtone-Toggle10" class="d-toggle" aria-checked="false" type="button" role="switch"><span class="d-toggle__inner"></span></button></div>
-    </div>
-    <div class="row d-d-flex d-ai-center d-jc-space-between">
-      <div class="d-toggle-copy"><label class="d-toggle-label" for="Dialtone-Toggle11">Wilson Centre</label></div>
-      <div class="d-toggle-button"><button id="Dialtone-Toggle11" class="d-toggle" aria-checked="false" type="button" role="switch"><span class="d-toggle__inner"></span></button></div>
-    </div>
-  </div>
-</fieldset>
-```
+<code-example-tabs
+htmlCode='
+<div class="d-toggle-wrapper">
+  <label for="dt3"> Default size </label><button id="dt3" role="switch" type="button" aria-checked="false" aria-disabled="false" class="d-toggle"><span class="d-toggle__inner"></span></button>
+</div>
+<div class="d-toggle-wrapper">
+  <label for="dt14"> Small size </label><button id="dt14" role="switch" type="button" aria-checked="false" aria-disabled="false" class="d-toggle d-toggle--small"><span class="d-toggle__inner"></span></button>
+</div>
+'
+vueCode='
+<dt-toggle>
+  Default size
+</dt-toggle>
+<dt-toggle size="sm">
+  Small size
+</dt-toggle>
+'
+showHtmlWarning />
 
 ## Vue API
 

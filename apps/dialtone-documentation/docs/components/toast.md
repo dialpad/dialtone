@@ -37,7 +37,8 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   @close="toggleToast"
 />
 
-```html
+<code-example-tabs
+htmlCode='
 <aside class="d-toast-wrapper">
   <div class="d-toast d-toast--base" role="status" aria-hidden="true">
     <div class="d-toast__dialog">
@@ -63,7 +64,31 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 <aside class="d-toast-wrapper">
   <div class="d-toast d-toast--warning" role="status" aria-hidden="true">...</div>
 </aside>
-```
+'
+vueCode='
+<dt-toast
+  title="Title"
+  show="false"
+  important="false"
+  kind="Base"
+  @close="closeEvent"
+>
+  Message body with
+  <dt-link>
+    a link
+  </dt-link>
+  <template #action>
+    <dt-button
+      size="sm"
+      importance="outlined"
+      kind="muted"
+    >
+      Action
+    </dt-button>
+  </template>
+</dt-toast>
+'
+showHtmlWarning />
 
 ## Vue API
 
