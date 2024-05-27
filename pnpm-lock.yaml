@@ -618,6 +618,12 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      overlayscrollbars:
+        specifier: 2.8.3
+        version: 2.8.3
+      overlayscrollbars-vue:
+        specifier: 0.5.9
+        version: 0.5.9(overlayscrollbars@2.8.3)(vue@2.7.15)
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -29260,6 +29266,11 @@ snapshots:
     dependencies:
       domino: 2.1.6
       validator: 13.11.0
+
+  overlayscrollbars-vue@0.5.9(overlayscrollbars@2.8.3)(vue@2.7.15):
+    dependencies:
+      overlayscrollbars: 2.8.3
+      vue: 2.7.15
 
   overlayscrollbars-vue@0.5.9(overlayscrollbars@2.8.3)(vue@3.3.8(typescript@5.3.3)):
     dependencies:
