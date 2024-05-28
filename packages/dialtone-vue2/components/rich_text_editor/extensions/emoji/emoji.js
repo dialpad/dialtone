@@ -65,10 +65,6 @@ export const Emoji = Node.create({
       code: {
         default: null,
       },
-
-      id: {
-        default: null,
-      },
     };
   },
 
