@@ -18,7 +18,7 @@
         :sticky="$attrs.sticky"
         :content-class="$attrs.contentClass"
         :transition="$attrs.transition"
-        :show="$attrs.showTooltip"
+        :show="showTooltip"
         :enabled="$attrs.enabled"
         :delay="$attrs.delay"
         :external-anchor="$attrs.externalAnchor"

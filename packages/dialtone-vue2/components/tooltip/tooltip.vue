@@ -296,17 +296,10 @@ export default {
     tooltipListeners () {
       return {
         ...this.$listeners,
-
-        'after-leave': () => {
-          this.onLeaveTransitionComplete();
-        },
-
-        'after-enter': () => {
-          this.onEnterTransitionComplete();
-        },
       };
     },
 
+    // eslint-disable-next-line complexity
     tippyProps () {
       return {
         offset: this.offset,
@@ -315,6 +308,10 @@ export default {
         sticky: this.sticky,
         theme: this.inverted ? 'inverted' : undefined,
         animation: this.transition ? 'fade' : false,
+        // onShown only triggers when transition is truthy, otherwise use onShow
+        onShown: this.transition ? this.onEnterTransitionComplete : () => {},
+        onShow: this.transition ? () => {} : this.onEnterTransitionComplete,
+        onHidden: this.onLeaveTransitionComplete,
 
         popperOptions: getPopperOptions({
           fallbackPlacements: this.fallbackPlacements,
