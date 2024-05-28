@@ -10,32 +10,16 @@
           Documented styles, components, and utility classes to help you quickly design and build unified experiences
           across Dialpad experiences.
         </p>
-        <div class="d-mb32 d-d-flex d-jc-center d-flow8">
+        <div class="d-mb32 d-d-flex d-jc-flex-start">
           <a
             class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/"
+            href="https://github.com/dialpad/dialtone"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <img
-              alt="Dialtone CSS version number"
-              src="https://img.shields.io/github/package-json/v/dialpad/dialtone?color=D3BCFF&label=CSS"
-            >
-          </a>
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone-vue"
-          >
-            <img
-              alt="Dialtone Vue version number"
-              src="https://img.shields.io/github/package-json/v/dialpad/dialtone-vue?color=D3BCFF&label=Vue"
-            >
-          </a>
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone-vue/tree/vue3"
-          >
-            <img
-              alt="Dialtone Vue version number"
-              src="https://img.shields.io/github/package-json/v/dialpad/dialtone-vue/vue3?color=D3BCFF&label=Vue 3"
+              alt="Dialtone version number"
+              src="https://img.shields.io/npm/v/@dialpad/dialtone?color=D3BCFF&label=Dialtone"
             >
           </a>
         </div>
