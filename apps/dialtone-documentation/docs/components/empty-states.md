@@ -9,7 +9,18 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 ---
 
 <code-well-header>
-Empty state storybook
+  <dt-empty-state
+    illustration-name="mind"
+    header-text="Nothing to see here"
+    body-text="Looks like there's no data to display here."
+  >
+    <template #body>
+      <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+        <button class="d-btn">Click me</button>
+        <button class="d-btn d-btn--primary">Click me</button>
+      </div>
+    </template>
+  </dt-empty-state>
 </code-well-header>
 
 ## Morphology & Anatomy
@@ -104,255 +115,255 @@ Description: Ask your administrators permission
 CTA: Request permission
 
 ## Variants and examples
+There is some rules to follow when using the empty state.
+
+<ol>
+  <li>Consumer should <b><u>always</u></b> provide either a <b>bodyText</b> prop or content in <b>body</b> slot.</li>
+  <li>Console warning If both <b>bodyText</b> prop or <b>body</b> slot are not provided</li>
+</ol>
+<br>
+On variable size:
+<ol>
+  <li>Size only chages <b>headerText</b> and <b>bodyText</b> font size and width container.</li>
+  <li>Illustration component has priority over icon in <b>lg</b> and <b>md</b> size.</li>
+  <li>Illustration component will not be shown in <b>sm</b> size.</li>
+  <li>Icon component will be shown in <b>lg</b> and <b>md</b> size only if illustrationName prop is not provided.</li>
+  <li>Icon component will always be shown in <b>sm</b> size.</li>
+</ol>
+
+<br>
+<br>
+There is multiple ways to use the empty state, here are some examples:
 
 ### Base
 
 <code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__header">
-      <div>(header slot)</div>
-    </div>
-    <div class="d-card__content">
-      <div>(content slot)</div>
-    </div>
-    <div class="d-card__footer">
-      <div>(footer slot)</div>
-    </div>
-  </div>
+  <dt-empty-state
+    illustration-name="mind"
+    header-text="Nothing to see here"
+    body-text="Looks like there's no data to display here."
+  >
+    <template #body>
+      <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+        <button class="d-btn">Click me</button>
+        <button class="d-btn d-btn--primary">Click me</button>
+      </div>
+    </template>
+  </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
-  <div class="d-card__header">
-    <div>(header slot)</div>
+<div class="d-empty-state d-empty-state--size-lg">
+  <svg>...</svg>
+  <div class="d-p32">
+    <h1>Nothing to see here</h1>
+    <p>Looks like theres no data to display here.</p>
   </div>
-  <div class="d-card__content">
-    <div>(content slot)</div>
-  </div>
-  <div class="d-card__footer">
-    <div>(footer slot)</div>
+  <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+    <button class="d-btn">Click me</button>
+    <button class="d-btn d-btn--primary">Click me</button>
   </div>
 </div>
 '
 vueCode='
-<dt-card class="d-w264">
-  <template #header>
-    (header slot)
+<dt-empty-state
+  illustration-name="mind"
+  header-text="Nothing to see here"
+  body-text="Looks like theres no data to display here."
+>
+  <template #body>
+    <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+      <button class="d-btn">Click me</button>
+      <button class="d-btn d-btn--primary">Click me</button>
+    </div>
   </template>
-  <template #content>
-    (content slot)
-  </template>
-  <template #footer>
-    (footer slot)
-  </template>
-</dt-card>
+</dt-empty-state>
 '
 showHtmlWarning />
 
-### With Header
+### With Header and Body text
 
 <code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__header">
-      <div class="d-headline--md">
-        Lorem ipsum
-      </div>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
-        <dt-icon name="more-vertical" size="200" />
-      </button>
-    </div>
-    <div class="d-card__content">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
-    </div>
-  </div>
+<dt-empty-state
+  illustration-name="mind"
+  header-text="Nothing to see here"
+  body-text="Looks like theres no data to display here."
+/>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
-  <div class="d-card__header">
-    <div class="d-headline--md">
-      Lorem ipsum
-    </div>
-    <button type="button" class="d-btn d-btn--xs d-btn--circle">
-      <dt-icon name="more-vertical" size="200" />
-    </button>
-  </div>
-  <div class="d-card__content">
-    <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+<div class="d-empty-state d-empty-state--size-lg">
+  <svg></svg>
+  <div class="d-p32">
+    <h1>Nothing to see here</h1>
+    <p>Looks like theres no data to display here.</p>
   </div>
 </div>
 '
 vueCode='
-<dt-card class="d-w264">
-  <template #header>
-    <p class="d-headline-medium">Lorem ipsum</p>
-      <dt-button
-        size="xs"
-        importance="clear"
-        aria-label="Menu button"
-      >
-        <template #icon>
-          <dt-icon
-            name="more-vertical"
-            size="100"
-          />
-        </template>
-      </dt-button>
-  </template>
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-</dt-card>
+<dt-empty-state
+  illustration-name="mind"
+  header-text="Nothing to see here"
+  body-text="Looks like theres no data to display here."
+/>
 '
 showHtmlWarning />
 
-### With Footer
+### With Header and Body slot
 
 <code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__content">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
-    </div>
-    <div class="d-card__footer">
-      <div class="d-d-flex d-gg8">
-        <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
+  <dt-empty-state
+    illustration-name="mind"
+    header-text="Nothing to see here"
+  >
+    <template #body>
+      <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+        <button class="d-btn">Click me</button>
+        <button class="d-btn d-btn--primary">Click me</button>
       </div>
-    </div>
-  </div>
+    </template>
+  </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
-  <div class="d-card__content">
-    <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+<div class="d-empty-state d-empty-state--size-lg">
+  <svg></svg>
+  <div class="d-p32">
+    <h1>Nothing to see here</h1>
   </div>
-  <div class="d-card__footer">
-    <div class="d-d-flex d-gg8">
-      <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-    </div>
+  <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+    <button class="d-btn">Click me</button> 
+    <button class="d-btn d-btn--primary">Click me</button>
   </div>
 </div>
 '
 vueCode='
-<dt-card class="d-w264">
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+<dt-empty-state
+  illustration-name="mind"
+  header-text="Nothing to see here"
+>
+  <template #body>
+    <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+      <button class="d-btn">Click me</button>
+      <button class="d-btn d-btn--primary">Click me</button>
+    </div>
   </template>
-  <template #footer>
-    <dt-button
-      importance="outlined"
-      size="sm"
-    >
-      Button
-    </dt-button>
-  </template>
-</dt-card>
+</dt-empty-state>
 '
 showHtmlWarning />
 
-### Content only
+## Variable size
+
+Remember there is some rules to follow on variable size when using the empty state.
+
+<ol>
+  <li>Size only chages <b>headerText</b> and <b>bodyText</b> font size and width container.</li>
+  <li>Illustration component has priority over icon in <b>lg</b> and <b>md</b> size.</li>
+  <li>Illustration component will not be shown in <b>sm</b> size.</li>
+  <li>Icon component will be shown in <b>lg</b> and <b>md</b> size only if illustrationName prop is not provided.</li>
+  <li>Icon component will always be shown in <b>sm</b> size.</li>
+</ol>
+<br>
+There is multiple ways to use the empty state on variable size, here are some examples:
+
+### Small size with icon
 
 <code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__content">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+<dt-empty-state
+  size="sm"
+  icon-name="concierge-bell"
+  header-text="Nothing to see here"
+  body-text="Looks like theres no data to display here."
+>
+  <template #body>
+    <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+      <button class="d-btn">Click me</button>
+      <button class="d-btn d-btn--primary">Click me</button>
     </div>
-  </div>
+  </template>
+</dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
-  <div class="d-card__content">
-    <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+<div class="d-empty-state d-empty-state--size-sm">
+  <svg>...</svg>
+  <div class="d-p16">
+    <h1>Nothing to see here</h1>
+    <p>Looks like theres no data to display here.</p>
+  </div>
+  <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+    <button class="d-btn">Click me</button> 
+    <button class="d-btn d-btn--primary">Click me</button>
   </div>
 </div>
 '
 vueCode='
-<dt-card class="d-w264">
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+<dt-empty-state
+  size="sm"
+  icon-name="concierge-bell"
+  header-text="Nothing to see here"
+  body-text="Looks like theres no data to display here."
+>
+  <template #body>
+    <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+      <button class="d-btn">Click me</button>
+      <button class="d-btn d-btn--primary">Click me</button>
+    </div>
   </template>
-</dt-card>
+</dt-empty-state>
 '
 showHtmlWarning />
 
-### With Header, Footer and scrollable content
+### Medium size without illustration and icon
 
 <code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__header">
-      <div class="d-headline--md">
-        Lorem ipsum
-      </div>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
-        <dt-icon name="more-vertical" size="200" />
-      </button>
+<dt-empty-state
+  size="md"
+  icon-name="concierge-bell"
+  header-text="Nothing to see here"
+  body-text="Looks like theres no data to display here."
+>
+  <template #body>
+    <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+      <button class="d-btn">Click me</button>
+      <button class="d-btn d-btn--primary">Click me</button>
     </div>
-    <div class="d-card__content d-h72">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
-    </div>
-    <div class="d-card__footer">
-      <div class="d-d-flex d-gg8">
-        <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </div>
-    </div>
-  </div>
+  </template>
+</dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
-  <div class="d-card__header">
-    <div class="d-headline--md">
-      Lorem ipsum
-    </div>
-    <button type="button" class="d-btn d-btn--xs d-btn--circle">
-      <dt-icon name="more-vertical" size="200" />
-    </button>
+<div class="d-empty-state d-empty-state--size-md">
+  <svg>...</svg>
+  <div class="d-p16">
+    <h1>Nothing to see here</h1>
+    <p>Looks like theres no data to display here.</p>
   </div>
-  <div class="d-card__content d-h84">
-    <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
-  </div>
-  <div class="d-card__footer">
-    <div class="d-d-flex d-gg8">
-      <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-    </div>
+  <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+    <button class="d-btn">Click me</button> 
+    <button class="d-btn d-btn--primary">Click me</button>
   </div>
 </div>
 '
 vueCode='
-<dt-card max-height="50px" class="d-w264">
-  <template #header>
-    <p class="d-headline-medium">Lorem ipsum</p>
-      <dt-button
-        size="xs"
-        importance="clear"
-        aria-label="Menu button"
-      >
-        <template #icon>
-          <dt-icon
-            name="more-vertical"
-            size="100"
-          />
-        </template>
-      </dt-button>
+<dt-empty-state
+  size="md"
+  icon-name="concierge-bell"
+  header-text="Nothing to see here"
+  body-text="Looks like theres no data to display here."
+>
+  <template #body>
+    <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+      <button class="d-btn">Click me</button>
+      <button class="d-btn d-btn--primary">Click me</button>
+    </div>
   </template>
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-  <template #footer>
-    <dt-button
-      importance="outlined"
-      size="sm"
-    >
-      Button
-    </dt-button>
-  </template>
-</dt-card>
+</dt-empty-state>
 '
 showHtmlWarning />
 

@@ -1,24 +1,24 @@
 {
   "classes": [
     {
-      "class": "d-card",
+      "class": "d-empty-state",
       "applies": "N/A",
-      "description": "Container for the card and its elements."
+      "description": "Container for the empty state and its elements."
     },
     {
-      "class": "d-card__header",
-      "applies": "Child of .d-card",
-      "description": "Contains the header content."
+      "class": "d-empty--size-lg",
+      "applies": ".d-empty",
+      "description": "Styles empty state in large size"
     },
     {
-      "class": "d-card__content",
-      "applies": "Child of .d-card",
-      "description": "Contains the main body content of the card."
+      "class": "d-empty--size-md",
+      "applies": ".d-empty",
+      "description": "Styles empty state in medium size"
     },
     {
-      "class": "d-card__footer",
-      "applies": "Child of .d-card",
-      "description": "Contains the footer content."
+      "class": "d-empty--size-sm",
+      "applies": ".d-empty",
+      "description": "Styles empty state in small size"
     }
   ]
 }
