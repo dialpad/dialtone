@@ -615,12 +615,12 @@ importers:
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
-      emoji-regex:
-        specifier: 10.3.0
-        version: 10.3.0
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      regex-combined-emojis:
+        specifier: 1.6.0
+        version: 1.6.0
       tippy.js:
         specifier: 6.3.7
         version: 6.3.7
@@ -841,12 +841,12 @@ importers:
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
-      emoji-regex:
-        specifier: 10.3.0
-        version: 10.3.0
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      regex-combined-emojis:
+        specifier: 1.6.0
+        version: 1.6.0
       tippy.js:
         specifier: 6.3.7
         version: 6.3.7
@@ -13162,6 +13162,9 @@ packages:
 
   regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
+
+  regex-combined-emojis@1.6.0:
+    resolution: {integrity: sha512-pkQZHqM8M00hN0Md5e6Fag5mjxseDyjzB2gXmawdX0aoZzx5I9on/Eg77di1+ahPcPrCXkvT7Br5eJUp+BaeoA==}
 
   regex-not@1.0.2:
     resolution: {integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==}
@@ -31159,6 +31162,8 @@ snapshots:
   regenerator-transform@0.15.2:
     dependencies:
       '@babel/runtime': 7.23.2
+
+  regex-combined-emojis@1.6.0: {}
 
   regex-not@1.0.2:
     dependencies:
