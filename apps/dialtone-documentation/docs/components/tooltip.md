@@ -49,6 +49,10 @@ showHtmlWarning />
 #### With Placement
 It's possible to change the tooltip default placement with directive arguments, possible values: bottom, bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end, top, top-start, top-end.
 
+<code-well-header class='d-hmn164'>
+<dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder button</dt-button>
+</code-well-header>
+
 ```javascript
 <dt-button v-dt-tooltip:bottom-start="Tooltip text">Placeholder button</dt-button>
 ```

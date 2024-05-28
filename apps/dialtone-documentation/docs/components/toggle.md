@@ -61,6 +61,9 @@ The Toggle component acts as a way to allow the User to switch between two mutua
     <div class="d-toggle-group d-d-flex d-ai-center">
       <example-toggle label="Indeterminate Toggle" indeterminate id="Dialtone-Toggle5"/>
     </div>
+    <div class="d-toggle-group d-d-flex d-ai-center">
+      <example-toggle label="Indeterminate Disabled" disabled indeterminate id="Dialtone-Toggle6"/>
+    </div>
   </fieldset>
 </code-well-header>
 
@@ -82,8 +85,12 @@ htmlCode='
   <button id="dt6" role="switch" type="button" aria-checked="true" disabled="disabled" aria-disabled="true" class="d-toggle d-toggle--checked d-toggle--disabled"><span class="d-toggle__inner"></span></button>
 </div>
 <div class="d-toggle-wrapper">
-  <label for="dt7"> Indeterminate Disabled </label>
-  <button id="dt7" role="checkbox" type="button" aria-checked="mixed" disabled="disabled" aria-disabled="true" class="d-toggle d-toggle--disabled d-toggle--indeterminate"><span class="d-toggle__inner"></span></button>
+  <label for="dt7"> Indeterminate Toggle </label>
+  <button id="dt7" role="checkbox" type="button" aria-checked="mixed" aria-disabled="false" class="d-toggle d-toggle--indeterminate"><span class="d-toggle__inner"></span></button>
+</div>
+<div class="d-toggle-wrapper">
+  <label for="dt8"> Indeterminate Disabled </label>
+  <button id="dt8" role="checkbox" type="button" aria-checked="mixed" disabled="disabled" aria-disabled="true" class="d-toggle d-toggle--disabled d-toggle--indeterminate"><span class="d-toggle__inner"></span></button>
 </div>
 '
 vueCode='
@@ -98,6 +105,9 @@ vueCode='
 </dt-toggle>
 <dt-toggle :checked="true" :disabled="true">
   Checked Disabled
+</dt-toggle>
+<dt-toggle checked="mixed">
+  Indeterminate Toggle
 </dt-toggle>
 <dt-toggle checked="mixed" :disabled="true">
   Indeterminate Disabled

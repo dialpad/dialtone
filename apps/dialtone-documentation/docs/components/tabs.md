@@ -187,7 +187,7 @@ showHtmlWarning />
 
 ### Inverted
 
-Add `d-tablist--inverted` when you want to display tabs on a darker background.
+Add `d-tablist--inverted` when you want to display tabs on inverted background.
 
 <code-well-header bgclass="d-bgc-contrast">
   <example-tabs inverted />
