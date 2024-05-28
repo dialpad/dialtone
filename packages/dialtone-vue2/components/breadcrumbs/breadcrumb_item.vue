@@ -8,6 +8,7 @@
   >
     <dt-link
       :kind="linkKind"
+      :inverted="linkInverted"
       :aria-current="ariaCurrent"
       data-qa="breadcrumb-item"
       v-bind="$attrs"
@@ -23,7 +24,7 @@
 <script>
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './breadcrumbs_constants';
 import { DtLink } from '../link';
-import { INVERTED, MUTED } from '../link/link_constants';
+import { MUTED } from '../link/link_constants';
 
 export default {
   name: 'DtBreadcrumbItem',
@@ -68,7 +69,11 @@ export default {
 
   computed: {
     linkKind () {
-      return this.inverted ? INVERTED : MUTED;
+      return this.inverted ? '' : MUTED;
+    },
+
+    linkInverted () {
+      return !!this.inverted;
     },
 
     ariaCurrent () {

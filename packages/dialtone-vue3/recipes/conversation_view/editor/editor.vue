@@ -165,7 +165,7 @@
         :auto-focus="autoFocus"
         :placeholder="placeholder"
         :allow-line-breaks="true"
-        :link="false"
+        :link="true"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"

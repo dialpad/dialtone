@@ -1,0 +1,56 @@
+//
+//  DIALTONE
+//  COMPONENTS: EMPTY-STATE
+//
+//  These are the styles for empty-state component.
+//
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+
+//  @@  BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+
+  &--size-sm {
+    width: 50%;
+    padding: var(--dt-space-500);
+
+   h1{
+      font: var(--dt-typography-headline-md);
+    }
+    p{
+      font: var(--dt-typography-body-sm);
+    }
+  }
+
+  &--size-md {
+    width: 70%;
+    padding: var(--dt-space-500);
+
+    h1{
+      font: var(--dt-typography-headline-xl);
+    }
+    p{
+      font: var(--dt-typography-body-sm);
+    }
+  }
+
+  &--size-lg {
+    width: 100%;
+    padding: var(--dt-space-600);
+
+    h1{
+      font: var(--dt-typography-headline-xxl);
+    }
+    p{
+      font: var(--dt-typography-body-md);
+    }
+  }
+}

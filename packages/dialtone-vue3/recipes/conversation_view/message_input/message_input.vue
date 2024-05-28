@@ -23,6 +23,7 @@
         :allow-blockquote="allowBlockquote"
         :allow-bold="allowBold"
         :allow-bullet-list="allowBulletList"
+        :allow-codeblock="allowCodeblock"
         :allow-italic="allowItalic"
         :allow-strike="allowStrike"
         :allow-underline="allowUnderline"
@@ -53,7 +54,7 @@
           v-if="showImagePicker"
           placement="top-start"
           :message="showImagePicker.tooltipLabel"
-          :offset="[-4, -4]"
+          :offset="[-4, 12]"
         >
           <template #anchor>
             <dt-button
@@ -141,7 +142,7 @@
           placement="top-end"
           :enabled="characterLimitTooltipEnabled"
           :message="showCharacterLimit.message"
-          :offset="[10, -8]"
+          :offset="[10, 8]"
         >
           <template #anchor>
             <p
@@ -175,7 +176,7 @@
           :enabled="!showSend"
           :message="showSend.tooltipLabel"
           :show="!isSendDisabled && sendButtonFocus"
-          :offset="[6, -8]"
+          :offset="[6, 8]"
         >
           <template #anchor>
             <!-- Right positioned UI - send button -->
@@ -329,7 +330,7 @@ export default {
      */
     link: {
       type: [Boolean, Object],
-      default: false,
+      default: true,
     },
 
     /**
@@ -520,6 +521,14 @@ export default {
      * Whether the input allows for underline to be introduced in the text.
      */
     allowUnderline: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows codeblock to be introduced in the text.
+     */
+    allowCodeblock: {
       type: Boolean,
       default: true,
     },

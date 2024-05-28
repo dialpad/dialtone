@@ -1,3 +1,57 @@
+# [9.39.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.38.2...dialtone/v9.39.0) (2024-05-23)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1758 add legacy styles back ([#326](https://github.com/dialpad/dialtone/issues/326)) ([79d087b](https://github.com/dialpad/dialtone/commit/79d087be14681d435e93837bae9a05b17b93507e))
+
+
+### Documentation
+
+* **Homepage:** NO-JIRA homepage svg loader and stack ([#325](https://github.com/dialpad/dialtone/issues/325)) ([e66ed5c](https://github.com/dialpad/dialtone/commit/e66ed5cd0f2811f4099e15bac898d36c4f71a61c))
+
+
+### Features
+
+* dlt-1397 init empty state ([#315](https://github.com/dialpad/dialtone/issues/315)) ([38d3103](https://github.com/dialpad/dialtone/commit/38d31039c592d0b99312b27de8096bd229ca7bc2))
+* **Link:** DLT-1631 add inverted utility classes ([#321](https://github.com/dialpad/dialtone/issues/321)) ([0aa8259](https://github.com/dialpad/dialtone/commit/0aa8259fa3577de6b5ec7a1b30a1e203771fa7e8))
+* **Message Input:** DLT-1767 add ability to disallow codeblock ([#327](https://github.com/dialpad/dialtone/issues/327)) ([c47ab66](https://github.com/dialpad/dialtone/commit/c47ab66e962c2b2d48c037dae6f0fd100ac0c4da))
+
+## [9.38.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.38.1...dialtone/v9.38.2) (2024-05-22)
+
+
+### Bug Fixes
+
+* NO-JIRA newline in keywords file ([98bd576](https://github.com/dialpad/dialtone/commit/98bd576b9d9bdb3a1a26a6a9c7d55f794f6ed49e))
+
+## [9.38.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.38.0...dialtone/v9.38.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* DLT-1668 message input bullet lists ([#323](https://github.com/dialpad/dialtone/issues/323)) ([29979a5](https://github.com/dialpad/dialtone/commit/29979a57eef73bd5309513bf0e5d12a98aac1fff))
+
+# [9.38.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.37.0...dialtone/v9.38.0) (2024-05-22)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1719 separate link and custom link ([#318](https://github.com/dialpad/dialtone/issues/318)) ([cf38451](https://github.com/dialpad/dialtone/commit/cf38451e57d6d5180622ac30e050a8900184a9f7))
+* **Tooltip:** DP-99352 correct offsets, trim empty check ([#322](https://github.com/dialpad/dialtone/issues/322)) ([558059d](https://github.com/dialpad/dialtone/commit/558059d565d99a75b48fe377956ac5ccc4d34e67))
+
+
+### Features
+
+* **Icon:** DLT-1759 fixed attestation alignment ([#319](https://github.com/dialpad/dialtone/issues/319)) ([3c0882a](https://github.com/dialpad/dialtone/commit/3c0882a0c2a521c9a8623469379756c093fbceec))
+* **Icon:** DLT-1760 add rocket icon ([#320](https://github.com/dialpad/dialtone/issues/320)) ([8563d2b](https://github.com/dialpad/dialtone/commit/8563d2b363b82f47b4d24fc4d9f3b67ad4dc263c))
+
+# [9.37.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.36.1...dialtone/v9.37.0) (2024-05-21)
+
+
+### Features
+
+* **Feed Item Row:** DLT-1725 add noInitials to feed item row ([#317](https://github.com/dialpad/dialtone/issues/317)) ([62ac0a6](https://github.com/dialpad/dialtone/commit/62ac0a6cd323e0643350fc19cce22520407d2ded))
+
 ## [9.36.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.36.0...dialtone/v9.36.1) (2024-05-17)
 
 

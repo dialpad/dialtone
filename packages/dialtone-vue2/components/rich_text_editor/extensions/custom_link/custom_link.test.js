@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import { DtRichTextEditor } from '@/components/rich_text_editor';
-import { EditorContent } from '@tiptap/vue-3';
+import { EditorContent } from '@tiptap/vue-2';
 
 // Wrappers
 let wrapper;
@@ -11,12 +11,13 @@ let propsData;
 let attrs;
 let slots;
 let listeners;
+const localVue = createLocalVue();
 
 // Constants
 const baseProps = {
   value: 'initial value',
   inputAriaLabel: 'aria-label text',
-  link: true,
+  customLink: true,
   inputClass: 'qa-editor',
 };
 
@@ -43,7 +44,7 @@ const _getLinksFromJSON = () => {
 
   for (const paragraph of json.content) {
     for (const textNode of paragraph.content) {
-      if (!textNode.marks?.some(mark => mark.type === 'Link')) {
+      if (!textNode.marks?.some(mark => mark.type === 'CustomLink')) {
         continue;
       }
       links.push(textNode);
@@ -67,6 +68,7 @@ const _mountWrapper = () => {
     listeners,
     attrs,
     slots,
+    localVue,
     attachTo: document.body,
   });
 };

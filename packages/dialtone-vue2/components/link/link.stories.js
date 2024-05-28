@@ -10,6 +10,7 @@ import { LINK_VARIANTS } from './link_constants';
 export const argsData = {
   default: 'Default link',
   href: '#',
+  inverted: false,
   kind: '',
   rel: undefined,
   onClick: action('click'),
@@ -35,6 +36,9 @@ export const argTypesData = {
     control: {
       type: 'select',
     },
+  },
+  inverted: {
+    control: 'boolean',
   },
 
   // HTML attributes

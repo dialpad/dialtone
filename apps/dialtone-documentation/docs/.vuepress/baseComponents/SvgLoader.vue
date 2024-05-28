@@ -1,6 +1,6 @@
 <template>
   <template v-for="svg in svgs" :key="svg">
-    <component :is="svg" v-if="svg" />
+    <component :is="svg" v-if="svg" :class="class" />
   </template>
 </template>
 
@@ -15,6 +15,13 @@ const props = defineProps({
   name: {
     type: String,
     required: true,
+  },
+  /**
+   * Class attribute to be added to the component.
+   */
+  class: {
+    type: [String, Array, Object],
+    default: '',
   },
 });
 

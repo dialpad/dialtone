@@ -1,3 +1,34 @@
+# [2.134.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.133.2...dialtone-vue2/v2.134.0) (2024-05-23)
+
+
+### Features
+
+* dlt-1397 init empty state ([#315](https://github.com/dialpad/dialtone/issues/315)) ([38d3103](https://github.com/dialpad/dialtone/commit/38d31039c592d0b99312b27de8096bd229ca7bc2))
+* **Link:** DLT-1631 add inverted utility classes ([#321](https://github.com/dialpad/dialtone/issues/321)) ([0aa8259](https://github.com/dialpad/dialtone/commit/0aa8259fa3577de6b5ec7a1b30a1e203771fa7e8))
+* **Message Input:** DLT-1767 add ability to disallow codeblock ([#327](https://github.com/dialpad/dialtone/issues/327)) ([c47ab66](https://github.com/dialpad/dialtone/commit/c47ab66e962c2b2d48c037dae6f0fd100ac0c4da))
+
+## [2.133.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.133.1...dialtone-vue2/v2.133.2) (2024-05-22)
+
+
+### Bug Fixes
+
+* DLT-1668 message input bullet lists ([#323](https://github.com/dialpad/dialtone/issues/323)) ([29979a5](https://github.com/dialpad/dialtone/commit/29979a57eef73bd5309513bf0e5d12a98aac1fff))
+
+## [2.133.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.133.0...dialtone-vue2/v2.133.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-1719 separate link and custom link ([#318](https://github.com/dialpad/dialtone/issues/318)) ([cf38451](https://github.com/dialpad/dialtone/commit/cf38451e57d6d5180622ac30e050a8900184a9f7))
+* **Tooltip:** DP-99352 correct offsets, trim empty check ([#322](https://github.com/dialpad/dialtone/issues/322)) ([558059d](https://github.com/dialpad/dialtone/commit/558059d565d99a75b48fe377956ac5ccc4d34e67))
+
+# [2.133.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.132.1...dialtone-vue2/v2.133.0) (2024-05-21)
+
+
+### Features
+
+* **Feed Item Row:** DLT-1725 add noInitials to feed item row ([#317](https://github.com/dialpad/dialtone/issues/317)) ([62ac0a6](https://github.com/dialpad/dialtone/commit/62ac0a6cd323e0643350fc19cce22520407d2ded))
+
 ## [2.132.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.132.0...dialtone-vue2/v2.132.1) (2024-05-17)
 
 
