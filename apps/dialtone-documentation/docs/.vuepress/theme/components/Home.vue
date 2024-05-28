@@ -10,95 +10,16 @@
           Documented styles, components, and utility classes to help you quickly design and build unified experiences
           across Dialpad experiences.
         </p>
-        <div class="d-mb32 d-d-flex d-jc-center d-gg8 d-w100p d-fw-wrap">
-          <!-- Dialtone -->
+        <div class="d-mb32 d-d-flex d-jc-flex-start">
           <a
             class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/staging/packages/dialtone"
+            href="https://github.com/dialpad/dialtone"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               alt="Dialtone version number"
               src="https://img.shields.io/npm/v/@dialpad/dialtone?color=D3BCFF&label=Dialtone"
-            >
-          </a>
-          <!-- Dialtone CSS -->
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-css"
-          >
-            <img
-              alt="Dialtone CSS version number"
-              src="https://img.shields.io/npm/v/@dialpad/dialtone-css?color=D3BCFF&label=CSS"
-            >
-          </a>
-          <!-- Dialtone Emojis -->
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-emojis"
-          >
-            <img
-              alt="Dialtone Emojis version number"
-              src="https://img.shields.io/npm/v/@dialpad/dialtone-emojis?color=D3BCFF&label=Emojis"
-            >
-          </a>
-          <!-- Dialtone Icons -->
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-icons"
-          >
-            <img
-              alt="Dialtone Icons version number"
-              src="https://img.shields.io/npm/v/@dialpad/dialtone-icons?color=D3BCFF&label=Icons"
-            >
-          </a>
-          <!-- Dialtone Tokens -->
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-tokens"
-          >
-            <img
-              alt="Dialtone Tokens version number"
-              src="https://img.shields.io/npm/v/@dialpad/dialtone-tokens?color=D3BCFF&label=Tokens"
-            >
-          </a>
-          <!-- Dialtone Vue@latest -->
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-vue2"
-          >
-            <img
-              alt="Dialtone Vue version number"
-              src="https://img.shields.io/npm/v/@dialpad/dialtone-vue?color=D3BCFF&label=Vue"
-            >
-          </a>
-          <!-- Dialtone Vue@3 -->
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/packages/dialtone-vue3"
-          >
-            <img
-              alt="Dialtone Vue version number"
-              src="https://img.shields.io/npm/v/%40dialpad/dialtone-vue/vue3?color=D3BCFF&label=Vue 3"
-            >
-          </a>
-          <!-- Dialtone ESlint plugin -->
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/staging/packages/eslint-plugin-dialtone"
-          >
-            <img
-              alt="Dialtone ESlint plugin version number"
-              src="https://img.shields.io/npm/v/@dialpad/eslint-plugin-dialtone?color=D3BCFF&label=ESlint%20plugin"
-            >
-          </a>
-          <!-- Dialtone Stylelint plugin -->
-          <a
-            class="d-td-unset d-d-inline-flex"
-            href="https://github.com/dialpad/dialtone/tree/staging/packages/stylelint-plugin-dialtone"
-          >
-            <img
-              alt="Dialtone Stylelint plugin version number"
-              src="https://img.shields.io/npm/v/@dialpad/stylelint-plugin-dialtone?color=D3BCFF&label=Stylelint%20plugin"
             >
           </a>
         </div>
