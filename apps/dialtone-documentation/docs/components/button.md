@@ -290,17 +290,32 @@ All button styles and variations appear the same when disabled.
 <code-well-header>
   <div class="d-d-flex d-flow8">
     <div>
-      <button type="button" disabled="disabled" class="base-button__button d-btn d-btn--primary"><span class="d-btn__label base-button__label">Place call</span></button>
+      <button type="button" disabled="disabled" class="base-button__button d-btn d-btn--primary"><span class="d-btn__label base-button__label">Place call (disabled attribute)</span></button>
+    </div>
+    <div>
+      <span class="d-c-not-allowed">
+        <button type="button" class="base-button__button d-btn d-btn--primary d-btn--disabled"><span class="d-btn__label base-button__label">Place call (disabled class)</span></button>
+      </span>
     </div>
   </div>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
+<!-- disabled attribute -->
 <button class="d-btn" type="button" disabled><span class="d-btn__label">...</span></button>
+<!-- disabled class -->
+<span class="d-c-not-allowed">
+  <button type="button" class="base-button__button d-btn d-btn--primary d-btn--disabled"><span class="d-btn__label base-button__label">...</span></button>
+</span>
 '
 vueCode='
-<dt-button disabled> Place call </dt-button>
+<!-- disabled attribute -->
+<dt-button disabled>Place call</dt-button>
+<!-- disabled class -->
+<span class="d-c-not-allowed">
+  <dt-button class="d-btn--disabled">Place call</dt-button>
+</span>
 '
 showHtmlWarning />
 
@@ -495,7 +510,7 @@ htmlCode='
 </button>
 '
 vueCode='
-<!-- icon-position can be "right/top/bottom" , 
+<!-- icon-position can be "right/top/bottom" ,
      no icon-position will be left -->
 <dt-button importance="outlined" icon-position="right">
   <template #icon>
