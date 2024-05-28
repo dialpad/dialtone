@@ -26,12 +26,21 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   />
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
+<div class="base-input__messages d-validation-message__container">
+  <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success">
+    <p>Positive validation message</p>
+  </div>
+</div>
+'
+vueCode='
 <dt-validation-messages
   id="sample--02"
-  :validationMessages='[{"message":"Positive validation message","type":"success"}]'
+  :validationMessages=`[{"message":"Positive validation message","type":"success"}]`
 />
-```
+'
+showHtmlWarning />
 
 ### Critical / Error
 
@@ -42,12 +51,21 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   />
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
+<div class="base-input__messages d-validation-message__container">
+  <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error">
+    <p>Critical validation message</p>
+  </div>
+</div>
+'
+vueCode='
 <dt-validation-messages
   id="sample--03"
-  :validationMessages='[{"message":"Critical validation message","type":"error"}]'
+  :validationMessages=`[{"message":"Critical validation message","type":"error"}]`
 />
-```
+'
+showHtmlWarning />
 
 ### Warning
 
@@ -58,12 +76,21 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   />
 </code-well-header>
 
-```html
+<code-example-tabs
+htmlCode='
+<div class="base-input__messages d-validation-message__container">
+  <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning">
+    <p>Critical validation message</p>
+  </div>
+</div>
+'
+vueCode='
 <dt-validation-messages
   id="sample--04"
-  :validationMessages='[{"message":"Critical validation message","type":"warning"}]'
+  :validationMessages=`[{"message":"Critical validation message","type":"warning"}]`
 />
-```
+'
+showHtmlWarning />
 
 ## Vue API
 
