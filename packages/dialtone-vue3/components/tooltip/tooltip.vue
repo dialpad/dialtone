@@ -29,7 +29,6 @@
         },
         contentClass,
       ]"
-      v-on="tooltipListeners"
     >
       <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
       <!-- after-leave event can be used instead of transitionend -->
@@ -294,18 +293,7 @@ export default {
       return shouldBeVisible && isDeviceCompatible;
     },
 
-    tooltipListeners () {
-      return {
-        'after-leave': () => {
-          this.onLeaveTransitionComplete();
-        },
-
-        'after-enter': () => {
-          this.onEnterTransitionComplete();
-        },
-      };
-    },
-
+    // eslint-disable-next-line complexity
     tippyProps () {
       return {
         offset: this.offset,
@@ -314,6 +302,10 @@ export default {
         sticky: this.sticky,
         theme: this.inverted ? 'inverted' : undefined,
         animation: this.transition ? 'fade' : false,
+        // onShown only triggers when transition is truthy, otherwise use onShow
+        onShown: this.transition ? this.onEnterTransitionComplete : () => {},
+        onShow: this.transition ? () => {} : this.onEnterTransitionComplete,
+        onHidden: this.onLeaveTransitionComplete,
 
         popperOptions: getPopperOptions({
           fallbackPlacements: this.fallbackPlacements,
