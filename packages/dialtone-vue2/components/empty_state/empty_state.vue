@@ -1,5 +1,7 @@
 <template>
-  <div :class="emptyStateClasses">
+  <dt-stack
+    :class="emptyStateClasses"
+  >
     <template v-if="showIllustration">
       <dt-icon
         v-if="showIcon"
@@ -13,24 +15,31 @@
       />
     </template>
 
-    <div :class="`d-stack d-stack--gap-450 ${emptyStateContentSpacing}`">
-      <h1>
+    <dt-stack
+      gap="450"
+      class="d-empty-state--content"
+    >
+      <div :class="headlineClass">
         {{ headerText }}
-      </h1>
+      </div>
 
-      <p v-if="bodyText">
+      <p
+        v-if="bodyText"
+        :class="bodyClass"
+      >
         {{ bodyText }}
       </p>
-    </div>
+    </dt-stack>
 
     <slot name="body" />
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import { EMPTY_STATE_SIZE_MODIFIERS } from './empty_state_constants.js';
 import { DtIllustration, ILLUSTRATION_NAMES } from '@/components/illustration';
 import { DtIcon, ICON_NAMES } from '@/components/icon';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtEmptyState',
@@ -38,6 +47,7 @@ export default {
   components: {
     DtIllustration,
     DtIcon,
+    DtStack,
   },
 
   props: {
@@ -136,16 +146,29 @@ export default {
       return ['d-empty-state', this.sizeClass];
     },
 
-    emptyStateContentSpacing () {
+    headlineClass () {
       switch (this.size) {
         case 'sm':
-          return 'd-p16';
+          return 'd-headline--md';
         case 'md':
-          return 'd-p32';
+          return 'd-headline--xl';
         case 'lg':
-          return 'd-p32';
+          return 'd-headline--xxl';
         default:
-          return 'd-p32';
+          return 'd-headline--xxl';
+      }
+    },
+
+    bodyClass () {
+      switch (this.size) {
+        case 'sm':
+          return 'd-body--sm';
+        case 'md':
+          return 'd-body--sm';
+        case 'lg':
+          return 'd-body--md';
+        default:
+          return 'd-body--md';
       }
     },
   },
