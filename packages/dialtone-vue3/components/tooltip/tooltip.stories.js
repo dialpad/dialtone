@@ -93,6 +93,11 @@ export const argTypesData = {
   },
 
   // Events
+  showTooltip: {
+    table: {
+      disable: true,
+    },
+  },
   onShown: {
     table: {
       disable: true,
