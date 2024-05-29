@@ -1,71 +1,73 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <div class="tokens-bar">
-    <dt-input
-      id="search-input"
-      v-model="searchInput"
-      autofocus
-      aria-label="Search tokens"
-      placeholder="Search Tokens / Value / Keyword"
-      type="text"
-      autocomplete="off"
-      @keyup="searchToken"
-    >
-      <template #leftIcon>
-        <dt-icon name="search" size="300" />
-      </template>
-      <template #rightIcon>
-        <dt-button
-          v-if="hasSearchTerm"
-          id="search-input-button-close"
-          kind="muted"
-          importance="clear"
-          size="xs"
-          circle
-          aria-label="Clear search"
-          @click="resetSearch"
-        >
-          <template #icon>
-            <dt-icon name="close" size="200" />
-          </template>
-        </dt-button>
-      </template>
-    </dt-input>
-    <dt-select-menu
-      name="format-select"
-      label="Select Format"
-      select-class="d-w128"
-      :value="selectedFormat"
-      :options="formatSelectMenuOptions"
-      @change="setFormat"
-    />
-    <dt-select-menu
-      name="theme-select"
-      label="Select Theme"
-      select-class="d-w128"
-      :value="selectedTheme"
-      :options="THEMES"
-      @change="setTheme"
-    />
-  </div>
-  <div class="d-ta-right d-mt4">
-    <dt-button
-      v-dt-tooltip="shareLinkTooltip"
-      size="xs"
-      importance="clear"
-      kind="muted"
-      icon-position="right"
-      @click="copyURLToClipboard"
-    >
-      share filter
-      <template #icon="{ iconSize }">
-        <dt-icon
-          name="link-2"
-          :size="iconSize"
-        />
-      </template>
-    </dt-button>
-  </div>
+  <dt-stack gap="400">
+    <div class="tokens-bar">
+      <dt-input
+        id="search-input"
+        v-model="searchInput"
+        autofocus
+        aria-label="Search tokens"
+        placeholder="Search Tokens / Value / Keyword"
+        type="text"
+        autocomplete="off"
+        @keyup="searchToken"
+      >
+        <template #leftIcon>
+          <dt-icon name="search" size="300" />
+        </template>
+        <template #rightIcon>
+          <dt-button
+            v-if="hasSearchTerm"
+            id="search-input-button-close"
+            kind="muted"
+            importance="clear"
+            size="xs"
+            circle
+            aria-label="Clear search"
+            @click="resetSearch"
+          >
+            <template #icon>
+              <dt-icon name="close" size="200" />
+            </template>
+          </dt-button>
+        </template>
+      </dt-input>
+      <dt-select-menu
+        name="format-select"
+        label="Select Format"
+        select-class="d-w128"
+        :value="selectedFormat"
+        :options="formatSelectMenuOptions"
+        @change="setFormat"
+      />
+      <dt-select-menu
+        name="theme-select"
+        label="Select Theme"
+        select-class="d-w128"
+        :value="selectedTheme"
+        :options="THEMES"
+        @change="setTheme"
+      />
+    </div>
+    <div class="d-ta-right">
+      <dt-button
+        v-dt-tooltip="shareLinkTooltip"
+        size="xs"
+        importance="clear"
+        kind="muted"
+        icon-position="right"
+        @click="copyURLToClipboard"
+      >
+        share filter
+        <template #icon="{ iconSize }">
+          <dt-icon
+            name="link-2"
+            :size="iconSize"
+          />
+        </template>
+      </dt-button>
+    </div>
+  </dt-stack>
 </template>
 
 <script setup>
