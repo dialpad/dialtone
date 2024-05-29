@@ -3,7 +3,7 @@ export const LEFTBAR_GENERAL_ROW_TYPES = {
   CONTACTS: 'contacts',
   CHANNELS: 'channels',
   THREADS: 'threads',
-  LAUNCHPAD: 'home',
+  LAUNCHPAD: 'launchpad',
   LOCKED_CHANNEL: 'locked channel',
   CONTACT_CENTER: 'contact center',
   QUICK_START: 'quick start',
