@@ -23,10 +23,13 @@ import TokenTree from './TokenTree.vue';
 import TokensToc from './TokensToc.vue';
 import TokensBar from './TokensBar.vue';
 import { addComposedTokens, addTokensToStructure } from './utilities';
+import { useRoute } from 'vue-router';
 
-const format = ref('CSS');
-const theme = ref('light');
-const searchCriteria = ref(null);
+const route = useRoute();
+
+const format = ref(route.query.format || 'CSS');
+const theme = ref(route.query.theme || 'light');
+const searchCriteria = ref(route.query.search || null);
 const processedTokens = {}; // is set beforeMount and never changes
 const filteredTokens = ref({}); // same as processedTokens but filtered by format, theme and search
 const filteredHeaders = ref([]); // to fill the dynamic table of contents
