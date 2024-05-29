@@ -35,6 +35,7 @@
       name="format-select"
       label="Select Format"
       select-class="d-w128"
+      :value="selectedFormat"
       :options="formatSelectMenuOptions"
       @change="setFormat"
     />
@@ -42,9 +43,28 @@
       name="theme-select"
       label="Select Theme"
       select-class="d-w128"
+      :value="selectedTheme"
       :options="THEMES"
       @change="setTheme"
     />
+  </div>
+  <div class="d-ta-right d-mt4">
+    <dt-button
+      v-dt-tooltip="shareLinkTooltip"
+      size="xs"
+      importance="clear"
+      kind="muted"
+      icon-position="right"
+      @click="copyURLToClipboard"
+    >
+      share filter
+      <template #icon="{ iconSize }">
+        <dt-icon
+          name="link-2"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
   </div>
 </template>
 
@@ -52,11 +72,18 @@
 import { computed, ref } from 'vue';
 import { FORMAT_MAP, THEMES } from './constants';
 import { debounce } from '../../common/utilities';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
 
 const emit = defineEmits(['changeSearchCriteria', 'changeFormat', 'changeTheme']);
 
-const searchInput = ref(null);
+const searchInput = ref(route.query.search || null);
+const selectedFormat = ref(route.query.format || 'CSS');
+const selectedTheme = ref(route.query.theme || 'light');
 const searchCriteria = ref(null);
+const shareLinkTooltip = ref('Copy URL to clipboard');
 
 const formatSelectMenuOptions = computed(() => {
   return Object.keys(FORMAT_MAP).map((item) => {
@@ -66,6 +93,7 @@ const formatSelectMenuOptions = computed(() => {
 
 const setSearchCriteria = () => {
   searchCriteria.value = searchInput.value?.trim();
+  router.replace({ path: '/tokens/', query: { ...route.query, search: searchCriteria.value } });
   emit('changeSearchCriteria', searchCriteria.value);
 };
 
@@ -81,11 +109,25 @@ const resetSearch = () => {
 const hasSearchTerm = computed(() => searchInput.value && searchInput.value.trim().length > 0);
 
 const setFormat = (newFormat) => {
+  router.replace({ path: '/tokens/', query: { ...route.query, format: newFormat } });
   emit('changeFormat', newFormat);
 };
 
 const setTheme = (newTheme) => {
+  router.replace({ path: '/tokens/', query: { ...route.query, theme: newTheme } });
   emit('changeTheme', newTheme);
+};
+
+const copyURLToClipboard = async () => {
+  try {
+    const defaultValue = shareLinkTooltip.value;
+    await navigator.clipboard.writeText(window.location);
+    shareLinkTooltip.value = 'Copied';
+    await new Promise(resolve => setTimeout(resolve, 750));
+    shareLinkTooltip.value = defaultValue;
+  } catch (err) {
+    console.error('Error copying to clipboard');
+  }
 };
 </script>
 
