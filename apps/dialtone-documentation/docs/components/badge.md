@@ -196,6 +196,66 @@ vueCode='
 '
 showHtmlWarning />
 
+## Outlined
+
+<code-well-header bgclass="d-bgc-primary">
+  <dt-stack direction="row" gap="400">
+    <span class="d-badge d-badge--outlined"><span class="d-badge__label">Label</span></span>
+    <span class="d-badge d-badge--info d-badge--outlined"><span class="d-badge__label">Label</span></span>
+    <span class="d-badge d-badge--success d-badge--outlined"><span class="d-badge__label">Label</span></span>
+    <span class="d-badge d-badge--warning d-badge--outlined"><span class="d-badge__label">Label</span></span>
+    <span class="d-badge d-badge--critical d-badge--outlined"><span class="d-badge__label">Label</span></span>
+    <span class="d-badge d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+    <span class="d-badge d-badge--info d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+    <span class="d-badge d-badge--success d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+    <span class="d-badge d-badge--warning d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+    <span class="d-badge d-badge--critical d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<span class="d-badge d-badge--outlined"><span class="d-badge__label">Label</span></span>
+<span class="d-badge d-badge--info d-badge--outlined"><span class="d-badge__label">Label</span></span>
+<span class="d-badge d-badge--success d-badge--outlined"><span class="d-badge__label">Label</span></span>
+<span class="d-badge d-badge--warning d-badge--outlined"><span class="d-badge__label">Label</span></span>
+<span class="d-badge d-badge--critical d-badge--outlined"><span class="d-badge__label">Label</span></span>
+<span class="d-badge d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+<span class="d-badge d-badge--info d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+<span class="d-badge d-badge--success d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+<span class="d-badge d-badge--warning d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+<span class="d-badge d-badge--critical d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+'
+vueCode='
+(TBD)
+'
+showHtmlWarning />
+
+## Subtle
+
+At the moment, only the `bulletin` type has a subtle variant.
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <span class="d-badge d-badge--bulletin d-badge--subtle"><span class="d-badge__label">Label</span></span>
+    <span class="d-badge d-badge--bulletin d-badge--subtle d-badge--outlined"><span class="d-badge__label">Label</span></span>
+    <span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count"><span class="d-badge__label">1</span></span>
+    <span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<span class="d-badge d-badge--bulletin d-badge--subtle"><span class="d-badge__label">Label</span></span>
+<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--outlined"><span class="d-badge__label">Label</span></span>
+<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count"><span class="d-badge__label">1</span></span>
+<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
+'
+vueCode='
+(TBD)
+'
+showHtmlWarning />
+
 ## Icon
 
 <code-well-header bgclass="d-bgc-primary">
