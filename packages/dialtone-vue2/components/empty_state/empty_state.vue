@@ -13,7 +13,7 @@
       />
     </template>
 
-    <div :class="emptyStateContentSpacing">
+    <div :class="`d-stack d-stack--gap-450 ${emptyStateContentSpacing}`">
       <h1>
         {{ headerText }}
       </h1>

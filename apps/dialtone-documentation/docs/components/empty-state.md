@@ -121,21 +121,12 @@ Description: Ask your administrators permission
 CTA: Request permission
 
 ## Variants and examples
+
 There are some rules to follow when using empty state.
 
 - Consumer should <b><u>always</u></b> provide either a <b>bodyText</b> prop or content in <b>body</b> slot.
 - Console warning if both <b>bodyText</b> prop or <b>body</b> slot are not provided
 
-<br>
-On variable size:
-- Size only changes <b>headerText</b> and <b>bodyText</b> font size and width container.
-- Illustration component has priority over icon in <b>lg</b> and <b>md</b> size.
-- Illustration component will not be shown in <b>sm</b> size.
-- Icon component will be shown in <b>lg</b> and <b>md</b> size only if illustrationName prop is not provided.
-- Icon component will always be shown in <b>sm</b> size.
-
-<br>
-<br>
 There are multiple ways to use empty state as shown below:
 
 ### Base
