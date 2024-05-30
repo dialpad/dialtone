@@ -131,10 +131,6 @@ jobs:
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'stylelint-plugin' }}
         run: pnpm nx run stylelint-plugin-dialtone:release
 
-      # Pause to avoid hitting rate limit
-      - name: Pause
-        run: sleep 3
-
   push:
     needs: [ release ]
     if: ${{ needs.get-branch-name.outputs.current_branch == 'staging' }}
