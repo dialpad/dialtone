@@ -282,13 +282,12 @@ export default {
   },
 
   computed: {
-    // whether the tooltip is visible or not.
-    isVisible () {
+    shouldDisplay () {
       const hasMessage = !!this.message?.trim();
       const hasDefaultSlot = !!this.$slots?.default;
       const isDeviceCompatible = !this.isTouchDevice;
 
-      const shouldBeVisible = this.isShown && this.enabled && (hasMessage || hasDefaultSlot);
+      const shouldBeVisible = this.enabled && (hasMessage || hasDefaultSlot);
 
       return shouldBeVisible && isDeviceCompatible;
     },
@@ -396,6 +395,7 @@ export default {
     },
 
     onEnterAnchor (e) {
+      if (!this.shouldDisplay) return;
       if (this.delay && this.inTimer === null) {
         this.inTimer = setTimeout(() => {
           this.triggerShow(e);
