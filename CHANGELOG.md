@@ -1,3 +1,25 @@
+# [9.40.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.39.0...dialtone/v9.40.0) (2024-05-30)
+
+
+### Bug Fixes
+
+* DLT-1731 skin tone emojis ([#329](https://github.com/dialpad/dialtone/issues/329)) ([08d0cb3](https://github.com/dialpad/dialtone/commit/08d0cb3f10bf3712085b722f5193cd284575ae1d))
+* **Rich Text Editor:** DLT-1752 remove custom parsing ([#331](https://github.com/dialpad/dialtone/issues/331)) ([3f0c6c1](https://github.com/dialpad/dialtone/commit/3f0c6c114c0c07e282b37dcfca55bbfcd6333a12))
+* **Tooltip:** DLT-1776 shown event trigger ([#335](https://github.com/dialpad/dialtone/issues/335)) ([404bda4](https://github.com/dialpad/dialtone/commit/404bda4efa59fa33dba2e0dabda07ef8c61e7063))
+
+
+### Documentation
+
+* **Button:** NO-JIRA add disabled class docs back into examples ([#333](https://github.com/dialpad/dialtone/issues/333)) ([8ea5249](https://github.com/dialpad/dialtone/commit/8ea5249c39e1b6ca82496876b67976e66561450f))
+* dlt-1579 use CodeExampleTabs from Tabs to Validation messages ([#332](https://github.com/dialpad/dialtone/issues/332)) ([947c35f](https://github.com/dialpad/dialtone/commit/947c35f203449e9e598fd3f8ecf11996756dfd20))
+* NO-JIRA update badges ([#334](https://github.com/dialpad/dialtone/issues/334)) ([1f6e61e](https://github.com/dialpad/dialtone/commit/1f6e61ec0a51aa1126036e9b3baedc89d2b7f562))
+* **Tokens:** DLT-1635 add tokens examples for each category ([#324](https://github.com/dialpad/dialtone/issues/324)) ([5128728](https://github.com/dialpad/dialtone/commit/51287285cf6a1354f256de9b20cddee052515c64))
+
+
+### Features
+
+* NO-JIRA add launchpad icon ([#336](https://github.com/dialpad/dialtone/issues/336)) ([30b3e66](https://github.com/dialpad/dialtone/commit/30b3e6675e7ab16ce2a6f35a35cb836a723b4e2f))
+
 # [9.39.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.38.2...dialtone/v9.39.0) (2024-05-23)
 
 
