@@ -25,10 +25,12 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 - To flag and draw awareness to a specific element or feature of focus. For example, something is unique about that separates it from other like content.
 - As a notification system with minimal footprint.
 </template>
+
 <template #dont>
 
 - To indicate that interaction by the user is required.
 </template>
+
 </dialtone-usage>
 
 ### Best practices
@@ -52,7 +54,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 htmlCode='
 <span class="d-badge"><span class="d-badge__label">Label</span></span>'
 vueCode='
-<dt-badge type="default" kind="label" text="Label" />
+<dt-badge text="Label" />
 '
 showHtmlWarning />
 
@@ -66,7 +68,7 @@ showHtmlWarning />
 htmlCode='
 <span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>'
 vueCode='
-<dt-badge type="default" kind="count" default="1" />
+<dt-badge kind="count" text="1" />
 '
 showHtmlWarning />
 
@@ -180,7 +182,7 @@ htmlCode='
 <span class="d-badge d-badge--count d-badge--bulletin"><span class="d-badge__label">6</span></span>
 '
 vueCode='
-<dt-badge type="default" kind="label" text="Label" />
+<dt-badge kind="label" text="Label" />
 <dt-badge type="info" kind="label" text="Label" />
 <dt-badge type="success" kind="label" text="Label" />
 <dt-badge type="warning" kind="label" text="Label" />
@@ -188,11 +190,11 @@ vueCode='
 <dt-badge type="bulletin" kind="label" text="Label" />
 <dt-badge type="ai" text="Label" kind="label" icon-left="dialpad-ai" />
 <dt-badge type="default" text="1" kind="count" />
-<dt-badge type="info" text="1" kind="count" />
-<dt-badge type="success" text="1" kind="count" />
-<dt-badge type="warning" text="1" kind="count" />
-<dt-badge type="critical" text="1" kind="count" />
-<dt-badge type="bulletin" text="1" kind="count" />
+<dt-badge type="info" text="2" kind="count" />
+<dt-badge type="success" text="3" kind="count" />
+<dt-badge type="warning" text="4" kind="count" />
+<dt-badge type="critical" text="5" kind="count" />
+<dt-badge type="bulletin" text="6" kind="count" />
 '
 showHtmlWarning />
 
@@ -227,7 +229,16 @@ htmlCode='
 <span class="d-badge d-badge--critical d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
 '
 vueCode='
-(TBD)
+<dt-badge text="Label" outlined />
+<dt-badge text="Label" type="info" outlined />
+<dt-badge text="Label" type="success" outlined />
+<dt-badge text="Label" type="warning" outlined />
+<dt-badge text="Label" type="critical" outlined />
+<dt-badge text="1" kind="count" outlined />
+<dt-badge text="1" type="info" kind="count" outlined />
+<dt-badge text="1" type="success" kind="count" outlined />
+<dt-badge text="1" type="warning" kind="count" outlined />
+<dt-badge text="1" type="critical" kind="count" outlined />
 '
 showHtmlWarning />
 
@@ -252,7 +263,10 @@ htmlCode='
 <span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
 '
 vueCode='
-(TBD)
+<dt-badge text="Label" type="bulletin" subtle />
+<dt-badge text="Label" type="bulletin" subtle outlined />
+<dt-badge text="1" type="bulletin" subtle kind="count" />
+<dt-badge text="1" type="bulletin" subtle kind="count" outlined />
 '
 showHtmlWarning />
 
@@ -387,6 +401,7 @@ showHtmlWarning />
 
 - Use for categories of items with a limited number of options (eg. call categories, AI moments).
 </template>
+
 <template #dont>
 
 - Use for categories of items with an unlimited or unknown number of options (eg. user-defined contact labels, RTA cards, contact centers).
@@ -397,6 +412,7 @@ showHtmlWarning />
 - Change the customize the Badge's background color text style,
 - Extend the decorative slot color beyond what Dialtone provides.
 </template>
+
 </dialtone-usage>
 
 ### Best practices
