@@ -1,3 +1,10 @@
+# [8.33.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.32.0...dialtone-css/v8.33.0) (2024-05-30)
+
+
+### Features
+
+* **Badge:** DLT-1777 subtle and outlined variants ([#338](https://github.com/dialpad/dialtone/issues/338)) ([1da1fe9](https://github.com/dialpad/dialtone/commit/1da1fe9eaccbc54724d3c580eb906b697b97bcaf))
+
 # [8.32.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.2...dialtone-css/v8.32.0) (2024-05-23)
 
 
