@@ -51,7 +51,7 @@
     </div>
     <div class="d-ta-right">
       <dt-button
-        v-dt-tooltip="shareLinkTooltip"
+        v-dt-tooltip:top-end="shareLinkTooltip"
         size="xs"
         importance="clear"
         kind="muted"
@@ -121,15 +121,17 @@ const setTheme = (newTheme) => {
 };
 
 const copyURLToClipboard = async () => {
+  const defaultValue = shareLinkTooltip.value;
+
   try {
-    const defaultValue = shareLinkTooltip.value;
-    await navigator.clipboard.writeText(window.location);
+    await navigator.clipboard.writeText(window.location.href);
     shareLinkTooltip.value = 'Copied';
-    await new Promise(resolve => setTimeout(resolve, 750));
-    shareLinkTooltip.value = defaultValue;
   } catch (err) {
-    console.error('Error copying to clipboard');
+    shareLinkTooltip.value = 'Error copying to clipboard';
   }
+
+  await new Promise(resolve => setTimeout(resolve, 750));
+  shareLinkTooltip.value = defaultValue;
 };
 </script>
 
