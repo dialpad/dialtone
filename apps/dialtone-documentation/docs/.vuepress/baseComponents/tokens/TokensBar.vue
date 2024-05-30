@@ -1,37 +1,37 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
   <dt-stack gap="400">
-    <div class="tokens-bar">
-      <dt-input
-        id="search-input"
-        v-model="searchInput"
-        autofocus
-        aria-label="Search tokens"
-        placeholder="Search Tokens / Value / Keyword"
-        type="text"
-        autocomplete="off"
-        @keyup="searchToken"
-      >
-        <template #leftIcon>
-          <dt-icon name="search" size="300" />
-        </template>
-        <template #rightIcon>
-          <dt-button
-            v-if="hasSearchTerm"
-            id="search-input-button-close"
-            kind="muted"
-            importance="clear"
-            size="xs"
-            circle
-            aria-label="Clear search"
-            @click="resetSearch"
-          >
-            <template #icon>
-              <dt-icon name="close" size="200" />
-            </template>
-          </dt-button>
-        </template>
-      </dt-input>
+    <dt-input
+      id="search-input"
+      v-model="searchInput"
+      autofocus
+      aria-label="Search tokens"
+      placeholder="Search Tokens / Value / Keyword"
+      type="text"
+      autocomplete="off"
+      @keyup="searchToken"
+    >
+      <template #leftIcon>
+        <dt-icon name="search" size="300" />
+      </template>
+      <template #rightIcon>
+        <dt-button
+          v-if="hasSearchTerm"
+          id="search-input-button-close"
+          kind="muted"
+          importance="clear"
+          size="xs"
+          circle
+          aria-label="Clear search"
+          @click="resetSearch"
+        >
+          <template #icon>
+            <dt-icon name="close" size="200" />
+          </template>
+        </dt-button>
+      </template>
+    </dt-input>
+    <dt-stack direction="row" gap="400" class="d-ai-flex-end">
       <dt-select-menu
         name="format-select"
         label="Select Format"
@@ -48,17 +48,14 @@
         :options="THEMES"
         @change="setTheme"
       />
-    </div>
-    <div class="d-ta-right">
       <dt-button
         v-dt-tooltip:top-end="shareLinkTooltip"
-        size="xs"
         importance="clear"
         kind="muted"
         icon-position="right"
         @click="copyURLToClipboard"
       >
-        share filter
+        Share filter
         <template #icon="{ iconSize }">
           <dt-icon
             name="link-2"
@@ -66,7 +63,7 @@
           />
         </template>
       </dt-button>
-    </div>
+    </dt-stack>
   </dt-stack>
 </template>
 
@@ -134,12 +131,3 @@ const copyURLToClipboard = async () => {
   shareLinkTooltip.value = defaultValue;
 };
 </script>
-
-<style scoped>
-  .tokens-bar {
-    display: grid;
-    grid-gap: var(--dt-space-400);
-    grid-template-columns: auto min-content min-content;
-    align-items: end;
-  }
-</style>
