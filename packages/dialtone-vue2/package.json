@@ -56,7 +56,6 @@
     "emoji-toolkit": "8.0.0",
     "regex-combined-emojis": "1.6.0",
     "overlayscrollbars": "2.8.3",
-    "overlayscrollbars-vue": "0.5.9",
     "tippy.js": "6.3.7"
   },
   "devDependencies": {

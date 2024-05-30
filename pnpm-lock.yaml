@@ -621,9 +621,6 @@ importers:
       overlayscrollbars:
         specifier: 2.8.3
         version: 2.8.3
-      overlayscrollbars-vue:
-        specifier: 0.5.9
-        version: 0.5.9(overlayscrollbars@2.8.3)(vue@2.7.15)
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -853,9 +850,6 @@ importers:
       overlayscrollbars:
         specifier: 2.8.3
         version: 2.8.3
-      overlayscrollbars-vue:
-        specifier: 0.5.9
-        version: 0.5.9(overlayscrollbars@2.8.3)(vue@3.3.8(typescript@5.3.3))
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -11571,12 +11565,6 @@ packages:
   oslllo-validator@3.1.0:
     resolution: {integrity: sha512-eqaVuDxnxDO55+pncqTTphbeq6O5XHMyrSfWQoL48mG2rUjr2ZBzvkFkcxIiG3l7IaIY6/L1oX1AJIDdZyzuPQ==}
     engines: {node: '>= 10.0'}
-
-  overlayscrollbars-vue@0.5.9:
-    resolution: {integrity: sha512-zZEcsb6llnKaRwXTP44E4RrmwuH+eAi70mgCdiiPwcPBE2H99Vs2V0q7sWnEanqU3462ch38e4SmIMnuH906DQ==}
-    peerDependencies:
-      overlayscrollbars: ^2.0.0
-      vue: ^3.2.25
 
   overlayscrollbars@2.8.3:
     resolution: {integrity: sha512-7JHA1oWm3Gru3RF5wwaeBdgk4keGtc56HMWEQRQi/RdLdY3pZTUDlSfUk1jyv1yQN12otr828n52rT6VNzYO4w==}
@@ -29266,16 +29254,6 @@ snapshots:
     dependencies:
       domino: 2.1.6
       validator: 13.11.0
-
-  overlayscrollbars-vue@0.5.9(overlayscrollbars@2.8.3)(vue@2.7.15):
-    dependencies:
-      overlayscrollbars: 2.8.3
-      vue: 2.7.15
-
-  overlayscrollbars-vue@0.5.9(overlayscrollbars@2.8.3)(vue@3.3.8(typescript@5.3.3)):
-    dependencies:
-      overlayscrollbars: 2.8.3
-      vue: 3.3.8(typescript@5.3.3)
 
   overlayscrollbars@2.8.3: {}
 
