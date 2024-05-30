@@ -22,6 +22,7 @@
   //  --------------------------------------------------------------------------
   --badge-color-text: var(--dt-badge-color-foreground-default);
   --badge-color-background: var(--dt-badge-color-background-default);
+  --badge-color-outline: var(--dt-color-border-subtle);
   --badge-radius: var(--dt-size-300);
   --badge-line-height: calc(var(--dt-size-500) + var(--dt-size-200));
   --badge-font-size: var(--dt-font-size-100);
@@ -82,6 +83,17 @@
   &--bulletin {
     --badge-color-text: var(--dt-badge-color-foreground-bulletin);
     --badge-color-background: var(--dt-badge-color-background-bulletin);
+
+    &.d-badge--subtle {
+      --badge-color-text: hsl(var(--primary-color-h) var(--primary-color-s) calc(var(--primary-color-l) - 40%));
+      --badge-color-background: hsla(var(--primary-color-hsl) / 0.1);
+      --badge-color-outline: hsla(var(--primary-color-hsl) / 0.5);
+
+      .dialtone-theme-dark & {
+        --badge-color-text: var(--dt-color-foreground-primary);
+        --badge-color-background: hsla(var(--primary-color-hsl) / 0.6);
+      }
+    }
   }
 
   &--ai {
@@ -91,6 +103,12 @@
     background-image: var(--dt-badge-color-background-ai);
   }
 
+  &--outlined {
+    box-shadow: 0 0 0 var(--dt-size-border-150) var(--badge-color-outline) inset;
+  }
+
+  //  DECORATIVE
+  //  --------------------------------------------------------------------------
   &--decorate-black-400 { --badge-decorative-color: var(--dt-color-black-400); }
   &--decorate-black-500 { --badge-decorative-color: var(--dt-color-black-500); }
   &--decorate-black-900 { --badge-decorative-color: var(--dt-color-black-900); }
