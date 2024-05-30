@@ -1,3 +1,10 @@
+# [9.41.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.40.0...dialtone/v9.41.0) (2024-05-30)
+
+
+### Features
+
+* **Badge:** DLT-1777 subtle and outlined variants ([#338](https://github.com/dialpad/dialtone/issues/338)) ([1da1fe9](https://github.com/dialpad/dialtone/commit/1da1fe9eaccbc54724d3c580eb906b697b97bcaf))
+
 # [9.40.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.39.0...dialtone/v9.40.0) (2024-05-30)
 
 
