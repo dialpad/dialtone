@@ -5,7 +5,7 @@
     <div class="d-emoji-picker--header">
       <emoji-tabset
         ref="tabsetRef"
-        :emoji-filter="searchQuery"
+        :emoji-filter="internalSearchQuery"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tab-set-labels="tabSetLabels"
@@ -18,10 +18,11 @@
     </div>
     <div class="d-emoji-picker--body">
       <emoji-search
+        v-if="showSearch"
         ref="searchInputRef"
-        :model-value="searchQuery"
+        :model-value="internalSearchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
-        @update:model-value="newValue => searchQuery = newValue"
+        @update:model-value="newValue => internalSearchQuery = newValue"
         @select-first-emoji="$emit('selected-emoji', highlightedEmoji)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
         @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"
@@ -29,7 +30,7 @@
       />
       <emoji-selector
         ref="emojiSelectorRef"
-        :emoji-filter="searchQuery"
+        :emoji-filter="internalSearchQuery"
         :skin-tone="skinTone"
         :tab-set-labels="tabSetLabels"
         :search-results-label="searchResultsLabel"
@@ -112,11 +113,21 @@ export default {
       type: String,
       required: true,
     },
+
+    searchQuery: {
+      type: String,
+      default: '',
+    },
+
+    showSearch: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data () {
     return {
-      searchQuery: '',
+      internalSearchQuery: this.searchQuery,
       highlightedEmoji: null,
       selectedTabset: {},
       scrollIntoTab: 0,
@@ -130,9 +141,15 @@ export default {
     },
   },
 
+  watch: {
+    searchQuery (value) {
+      this.internalSearchQuery = value;
+    },
+  },
+
   methods: {
     scrollToSelectedTabset (tabId) {
-      this.searchQuery = '';
+      this.internalSearchQuery = '';
       this.selectedTabset = { ...this.selectedTabset, tabId };
     },
 
