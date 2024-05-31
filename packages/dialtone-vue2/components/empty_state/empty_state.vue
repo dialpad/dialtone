@@ -19,13 +19,13 @@
       gap="450"
       class="d-empty-state--content"
     >
-      <div :class="headlineClass">
+      <div :class="['d-empty-state--header-text', headlineClass]">
         {{ headerText }}
       </div>
 
       <p
         v-if="bodyText"
-        :class="bodyClass"
+        :class="['d-empty-state--body-text', bodyClass]"
       >
         {{ bodyText }}
       </p>
