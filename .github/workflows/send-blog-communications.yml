@@ -76,23 +76,22 @@ jobs:
       # - Ellipsis the article to the first 10 lines.
       # - Append the URL of the article at the end of the article.
       - name: Process Markdown file
-        run: >
-          sed -i -E
-          -e '/^---$/,/^---$/d'
-          -e '/^<script setup>$/,/^<\/script>$/d'
-          -e '/^<\/*BlogPost.*$/d'
-          -e '/^<!--.*$/d'
-          -e '/./,$!d'
-          -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g'
-          $FILE_PATH &&
-          sed -i 10q $FILE_PATH &&
-          echo -e '... Read the full article: $POST_URL' >> $FILE_PATH;
+        run: |
+          sed -i -E \
+          -e '/^---$/,/^---$/d' \
+          -e '/^<script setup>$/,/^<\/script>$/d' \
+          -e '/^<\/*BlogPost.*$/d' \
+          -e '/^<!--.*$/d' \
+          -e '/./,$!d' \
+          -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
+          $FILE_PATH && \
+          sed -i 10q $FILE_PATH && \
+          echo -e '... Read the full article: $POST_URL' >> $FILE_PATH; \
           {
             echo 'MESSAGE_BODY<<EOF'
             $(cat $FILE_PATH)
-            echo
             echo EOF
-          } >> "$GITHUB_ENV";
+          } >> $GITHUB_ENV;
 
       - name: Wait for deployment to succeed
         if: ${{ github.event_name == 'push' }}
