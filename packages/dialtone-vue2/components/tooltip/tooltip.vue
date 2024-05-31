@@ -29,7 +29,7 @@
         },
         contentClass,
       ]"
-      v-on="tooltipListeners"
+      v-on="$listeners"
     >
       <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
       <!-- after-leave event can be used instead of transitionend -->
@@ -159,7 +159,7 @@ export default {
      */
     sticky: {
       type: [Boolean, String],
-      default: false,
+      default: true,
       validator: (sticky) => {
         return TOOLTIP_STICKY_VALUES.includes(sticky);
       },
@@ -220,7 +220,7 @@ export default {
     },
 
     /**
-     * Whether the tooltip should have a transition effect.
+     * Whether the tooltip should have a transition effect (fade).
      */
     transition: {
       type: Boolean,
@@ -272,7 +272,7 @@ export default {
 
       // Internal state for whether the tooltip is shown. Changing the prop
       // will update this.
-      isShown: false,
+      internalShow: false,
 
       // this is where the placement currently is, this can be different than
       // the placement prop when there is not enough available room for the tip
@@ -282,23 +282,6 @@ export default {
   },
 
   computed: {
-    // whether the tooltip is visible or not.
-    isVisible () {
-      const hasMessage = !!this.message?.trim();
-      const hasDefaultSlot = !!this.$slots?.default;
-      const isDeviceCompatible = !this.isTouchDevice;
-
-      const shouldBeVisible = this.isShown && this.enabled && (hasMessage || hasDefaultSlot);
-
-      return shouldBeVisible && isDeviceCompatible;
-    },
-
-    tooltipListeners () {
-      return {
-        ...this.$listeners,
-      };
-    },
-
     // eslint-disable-next-line complexity
     tippyProps () {
       return {
@@ -308,10 +291,11 @@ export default {
         sticky: this.sticky,
         theme: this.inverted ? 'inverted' : undefined,
         animation: this.transition ? 'fade' : false,
-        // onShown only triggers when transition is truthy, otherwise use onShow
-        onShown: this.transition ? this.onEnterTransitionComplete : () => {},
-        onShow: this.transition ? () => {} : this.onEnterTransitionComplete,
-        onHidden: this.onLeaveTransitionComplete,
+        // onShown only triggers when transition is truthy
+        onShown: (tooltipInstance) => this.onShow(tooltipInstance, 'onShown'),
+        // onShown will always be called, but it will be called before the animation is complete
+        onShow: (tooltipInstance) => this.onShow(tooltipInstance, 'onShow'),
+        onHidden: this.onHide,
 
         popperOptions: getPopperOptions({
           fallbackPlacements: this.fallbackPlacements,
@@ -336,15 +320,15 @@ export default {
     show: {
       handler: function (show) {
         if (show !== null) {
-          this.isShown = show;
+          this.internalShow = show;
         }
       },
 
       immediate: true,
     },
 
-    isShown (isShown) {
-      if (isShown) {
+    internalShow (value) {
+      if (value) {
         this.setProps();
         this.tip.show();
       } else {
@@ -366,12 +350,6 @@ export default {
     }
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
-
-    // immediate watcher fires before mounted, so have this here in case
-    // show prop was initially set to true.
-    if (this.isShown) {
-      this.tip.show();
-    }
   },
 
   beforeDestroy () {
@@ -420,10 +398,10 @@ export default {
         // closing it with the mouse would trigger the tooltip to display as
         // the anchor is focused on close. Not what we want.
         if (this.show === null && this.hasVisibleFocus()) {
-          this.isShown = true;
+          this.internalShow = true;
         }
       } else {
-        if (this.show === null) this.isShown = true;
+        if (this.show === null) this.internalShow = true;
       }
     },
 
@@ -436,14 +414,14 @@ export default {
     },
 
     triggerHide () {
-      if (this.show === null) this.isShown = false;
+      if (this.show === null) this.internalShow = false;
     },
 
     onChangePlacement (placement) {
       this.currentPlacement = placement;
     },
 
-    onLeaveTransitionComplete () {
+    onHide () {
       this.tip?.unmount();
       this.$emit('shown', false);
       if (this.show !== null) {
@@ -451,7 +429,13 @@ export default {
       }
     },
 
-    onEnterTransitionComplete () {
+    onShow (tooltipInstance, callingMethod) {
+      if (!this.tooltipHasContent(tooltipInstance)) {
+        return false;
+      }
+      if (this.transition && callingMethod === 'onShow') {
+        return;
+      }
       this.$emit('shown', true);
       if (this.show !== null) {
         this.$emit('update:show', true);
@@ -473,11 +457,12 @@ export default {
       this.setProps();
     },
 
-    onShow (tooltipInstance) {
+    tooltipHasContent (tooltipInstance) {
       // don't show tooltip when no content
       if (tooltipInstance.props.content.textContent.trim().length === 0) {
         return false;
       }
+      return true;
     },
 
     // set initial options here. If any of the options need to dynamically change, they should be put in
@@ -495,7 +480,7 @@ export default {
         // disable tooltip from displaying on touch devices
         touch: false,
         onMount: this.onMount,
-        onShow: this.onShow,
+        showOnCreate: this.internalShow,
         popperOptions: getPopperOptions({
           hasHideModifierEnabled: true,
         }),
