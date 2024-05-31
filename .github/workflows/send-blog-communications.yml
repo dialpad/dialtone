@@ -1,5 +1,8 @@
 name: Send blog communications
 on:
+  pull_request:
+    paths:
+      - 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
   push:
     branches:
       - production
@@ -42,10 +45,9 @@ jobs:
       matrix:
         files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
     env:
-      FROM_MAIL: ${{ secrets.MAIL_ACCOUNT }}
-      TO_MAIL: dialtone-users@dialpad.com
+      TO_MAIL: julio.ortega@dialpad.com
       FILE_PATH: ${{ matrix.files }}
-      REPLY_TO: dialtone@dialpad.com
+      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-email
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -84,6 +86,7 @@ jobs:
           echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
 
       - name: Wait for deployment to succeed
+        if: ${{ github.event_name == 'push' }}
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
           ref: ${{ github.ref }}
@@ -91,24 +94,28 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
 
-      - name: Send email
-        uses: dawidd6/action-send-mail@v3
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          connection_url: ${{ secrets.MAIL_CONNECTION }}
-          subject: "[dialtone] New blog post: '${{ env.BLOG_POST_HEADING }}'"
-          to: ${{ env.TO_MAIL }}
-          from: Dialtone <${{ env.FROM_MAIL }}>
-          html_body: file://${{ env.FILE_PATH }}
-          bcc: ${{ env.FROM_MAIL }}
-          reply_to: ${{ env.REPLY_TO }}
-          convert_markdown: true
-          # Optional nodemailer log: true/false
-          nodemailerlog: true
-          # Optional nodemailer debug: true/false
-          # if true log nodemailer will also be set true
-          nodemailerdebug: true
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+          token_format: "id_token"
+          id_token_audience: ${{ env.API_URL }}
+
+      - name: Send email
+        run: |
+          curl -m 70 -X POST ${{ env.API_URL }} \
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "to": "${{ env.TO_MAIL }}"
+            "subject": "[dialtone] New blog post: '${{ env.BLOG_POST_HEADING }}'",
+            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}"
+          }'
 
   send-sms:
+    if: false
     name: Send SMS
     runs-on: ubuntu-latest
     permissions:
