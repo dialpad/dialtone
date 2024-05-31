@@ -5,7 +5,7 @@
     <div class="d-emoji-picker--header">
       <emoji-tabset
         ref="tabsetRef"
-        :emoji-filter="searchQuery"
+        :emoji-filter="internalSearchQuery"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tab-set-labels="tabSetLabels"
@@ -18,10 +18,11 @@
     </div>
     <div class="d-emoji-picker--body">
       <emoji-search
+        v-if="showSearch"
         ref="searchInputRef"
-        :model-value="searchQuery"
+        :model-value="internalSearchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
-        @update:model-value="newValue => searchQuery = newValue"
+        @update:model-value="newValue => internalSearchQuery = newValue"
         @select-first-emoji="$emit('selected-emoji', highlightedEmoji)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
         @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"
@@ -29,7 +30,7 @@
       />
       <emoji-selector
         ref="emojiSelectorRef"
-        :emoji-filter="searchQuery"
+        :emoji-filter="internalSearchQuery"
         :skin-tone="skinTone"
         :tab-set-labels="tabSetLabels"
         :search-results-label="searchResultsLabel"
@@ -80,43 +81,122 @@ export default {
   },
 
   props: {
+    /**
+     * The array with recently used  emoji object
+     * This list is necessary to fill the recently used tab
+     * @type {Array}
+     * @default []
+     * @example
+     * <dt-emoji-picker :recentlyUsedEmojis="[emojiObject, emojiObject]" />
+     */
+    // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
     recentlyUsedEmojis: {
       type: Array,
     },
 
+    /**
+     * The placeholder text for the search input
+     * @type {String}
+     * @required
+     * @example
+     * <dt-emoji-picker :searchPlaceholderLabel="'Search...'" />
+     */
     searchPlaceholderLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * The label for the search results tab
+     * @type {String}
+     * @required
+     * @example
+     * <dt-emoji-picker :searchResultsLabel="'Search results'" />
+     */
     searchResultsLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * The label for the search no results
+     * @type {String}
+     * @required
+     * @example
+     * <dt-emoji-picker :searchNoResultsLabel="'No results'" />
+     */
     searchNoResultsLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * The list of tabsets to show, it is necessary to be updated with the correct language
+     * It must respect the provided order.
+     * @type {Array}
+     * @required
+     * @example
+     * <dt-emoji-picker
+     *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
+     *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+     */
     tabSetLabels: {
       type: Array,
       required: true,
     },
 
+    /**
+     * The skin tone to show the emojis
+     * This prop gives the possibility to use the skin tone selected by the user previously
+     * @type {String}
+     * @default 'Default'
+     * @values 'Default', 'Light', 'MediumLight', 'Medium', 'MediumDark', 'Dark'
+     * @example
+     * <dt-emoji-picker :skinTone="'Default'" />
+     */
     skinTone: {
       type: String,
+      default: 'Default',
     },
 
+    /**
+     * Tooltip shown when skin selector button is hovered.
+     * @type {String}
+     * @required
+     * @example
+     * <dt-emoji-picker :skin-selector-button-tooltip-label="'Change default skin tone'" />
+     */
     skinSelectorButtonTooltipLabel: {
       type: String,
       required: true,
+    },
+
+    /**
+     * Sets the search query that filters emojis.
+     * @type {String}
+     * @example
+     * <dt-emoji-picker search-query="smile" />
+     */
+    searchQuery: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Shows the search input
+     * @type {Boolean}
+     * @example
+     * <dt-emoji-picker :show-search="false" />
+     */
+    showSearch: {
+      type: Boolean,
+      default: true,
     },
   },
 
   data () {
     return {
-      searchQuery: '',
+      internalSearchQuery: this.searchQuery,
       highlightedEmoji: null,
       selectedTabset: {},
       scrollIntoTab: 0,
@@ -130,9 +210,15 @@ export default {
     },
   },
 
+  watch: {
+    searchQuery (value) {
+      this.internalSearchQuery = value;
+    },
+  },
+
   methods: {
     scrollToSelectedTabset (tabId) {
-      this.searchQuery = '';
+      this.internalSearchQuery = '';
       this.selectedTabset = { ...this.selectedTabset, tabId };
     },
 
