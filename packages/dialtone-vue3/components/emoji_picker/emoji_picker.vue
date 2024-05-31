@@ -5,7 +5,7 @@
     <div class="d-emoji-picker--header">
       <emoji-tabset
         ref="tabsetRef"
-        :emoji-filter="searchQuery"
+        :emoji-filter="internalSearchQuery"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tabset-labels="tabSetLabels"
@@ -18,8 +18,9 @@
     </div>
     <div class="d-emoji-picker--body">
       <emoji-search
+        v-if="showSearch"
         ref="searchInputRef"
-        v-model="searchQuery"
+        v-model="internalSearchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
         @select-first-emoji="emits('selected-emoji', highlightedEmoji)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
@@ -28,7 +29,7 @@
       />
       <emoji-selector
         ref="emojiSelectorRef"
-        :emoji-filter="searchQuery"
+        :emoji-filter="internalSearchQuery"
         :skin-tone="skinTone"
         :tabset-labels="tabSetLabels"
         :search-results-label="searchResultsLabel"
@@ -66,7 +67,7 @@ import EmojiTabset from './modules/emoji_tabset.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
   /**
@@ -159,6 +160,28 @@ const props = defineProps({
     type: String,
     required: true,
   },
+
+  /**
+   * Sets the search query that filters emojis.
+   * @type {String}
+   * @example
+   * <dt-emoji-picker search-query="smile" />
+   */
+  searchQuery: {
+    type: String,
+    default: '',
+  },
+
+  /**
+   * Shows the search input
+   * @type {String}
+   * @example
+   * <dt-emoji-picker :show-search="false" />
+   */
+  showSearch: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const emits = defineEmits(
@@ -185,7 +208,7 @@ const emits = defineEmits(
   ],
 );
 
-const searchQuery = ref('');
+const internalSearchQuery = ref(props.searchQuery.value);
 const highlightedEmoji = ref(null);
 const selectedTabset = ref({});
 
@@ -193,6 +216,13 @@ const scrollIntoTab = ref(0);
 const isScrolling = ref(false);
 
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
+
+watch(
+  () => props.searchQuery,
+  (newValue) => {
+    internalSearchQuery.value = newValue;
+  },
+);
 
 /**
  * Handle the selected tabset event
@@ -204,7 +234,7 @@ const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
  * @param tabName {String} - The name of the tab that was selected
  */
 function scrollToSelectedTabset (tabId) {
-  searchQuery.value = '';
+  internalSearchQuery.value = '';
   selectedTabset.value = tabId;
   selectedTabset.value = { ...selectedTabset.value, tabId };
 }
