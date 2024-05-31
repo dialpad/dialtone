@@ -10,6 +10,7 @@
     :assertive-on-focus="$attrs.assertiveOnFocus"
     :link="$attrs.link"
     :link-kind="$attrs.linkKind"
+    :link-inverted="$attrs.linkInverted"
     :icon-position="$attrs.iconPosition"
     :disabled="$attrs.disabled"
     :width="$attrs.width"
