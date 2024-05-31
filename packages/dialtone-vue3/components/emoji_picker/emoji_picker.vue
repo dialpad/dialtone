@@ -174,7 +174,7 @@ const props = defineProps({
 
   /**
    * Shows the search input
-   * @type {String}
+   * @type {Boolean}
    * @example
    * <dt-emoji-picker :show-search="false" />
    */
