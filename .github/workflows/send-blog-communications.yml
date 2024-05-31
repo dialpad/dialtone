@@ -40,6 +40,9 @@ jobs:
   send-email:
     name: Send email
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     needs: [added-posts]
     strategy:
       matrix:
