@@ -5,6 +5,7 @@
     <div
       id="d-emoji-picker-list"
       ref="listRef"
+      v-dt-scrollbars
       class="d-emoji-picker__list"
     >
       <p
