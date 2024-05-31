@@ -112,7 +112,7 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "to": "${{ env.TO_MAIL }}"
+            "to": "${{ env.TO_MAIL }}",
             "subject": "[dialtone] New blog post: \"${{ env.BLOG_POST_HEADING }}\"",
             "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}"
           }'
