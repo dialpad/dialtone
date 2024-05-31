@@ -156,6 +156,7 @@ export default {
      */
     skinTone: {
       type: String,
+      default: 'Default',
     },
 
     /**
