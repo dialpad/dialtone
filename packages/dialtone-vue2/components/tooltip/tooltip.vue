@@ -433,11 +433,12 @@ export default {
       if (!this.tooltipHasContent(tooltipInstance)) {
         return false;
       }
-      if (this.transition && callingMethod !== 'onShow') {
-        this.$emit('shown', true);
-        if (this.show !== null) {
-          this.$emit('update:show', true);
-        }
+      if (this.transition && callingMethod === 'onShow') {
+        return;
+      }
+      this.$emit('shown', true);
+      if (this.show !== null) {
+        this.$emit('update:show', true);
       }
     },
 
