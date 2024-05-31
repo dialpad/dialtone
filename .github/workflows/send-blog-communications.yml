@@ -86,7 +86,8 @@ jobs:
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g'
           $FILE_PATH &&
           sed -i 10q $FILE_PATH &&
-          echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
+          echo -e "... Read the full article: $POST_URL" >> $FILE_PATH &&
+          echo "MESSAGE_BODY=$(cat $FILE_PATH)" >> $GITHUB_ENV;
 
       - name: Wait for deployment to succeed
         if: ${{ github.event_name == 'push' }}
@@ -114,7 +115,7 @@ jobs:
           -d '{
             "to": "${{ env.TO_MAIL }}",
             "subject": "[dialtone] New blog post: \"${{ env.BLOG_POST_HEADING }}\"",
-            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}"
+            "message": "${{ env.MESSAGE_BODY }}"
           }'
 
   send-sms:
