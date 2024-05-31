@@ -84,12 +84,12 @@ jobs:
           -e '/^<!--.*$/d' \
           -e '/./,$!d' \
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
-          $FILE_PATH && \
-          sed -i 10q $FILE_PATH && \
-          echo -e '... Read the full article: $POST_URL' >> $FILE_PATH; \
+          $FILE_PATH;
+          sed -i 10q $FILE_PATH;
+          echo -e '... Read the full article: $POST_URL' >> $FILE_PATH;
           {
             echo 'MESSAGE_BODY<<EOF'
-            $(cat $FILE_PATH)
+            cat $FILE_PATH
             echo EOF
           } >> $GITHUB_ENV;
 
