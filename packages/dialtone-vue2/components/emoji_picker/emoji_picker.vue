@@ -81,44 +81,112 @@ export default {
   },
 
   props: {
+    /**
+     * The array with recently used  emoji object
+     * This list is necessary to fill the recently used tab
+     * @type {Array}
+     * @default []
+     * @example
+     * <dt-emoji-picker :recentlyUsedEmojis="[emojiObject, emojiObject]" />
+     */
+    // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
     recentlyUsedEmojis: {
       type: Array,
     },
 
+    /**
+     * The placeholder text for the search input
+     * @type {String}
+     * @required
+     * @example
+     * <dt-emoji-picker :searchPlaceholderLabel="'Search...'" />
+     */
     searchPlaceholderLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * The label for the search results tab
+     * @type {String}
+     * @required
+     * @example
+     * <dt-emoji-picker :searchResultsLabel="'Search results'" />
+     */
     searchResultsLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * The label for the search no results
+     * @type {String}
+     * @required
+     * @example
+     * <dt-emoji-picker :searchNoResultsLabel="'No results'" />
+     */
     searchNoResultsLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * The list of tabsets to show, it is necessary to be updated with the correct language
+     * It must respect the provided order.
+     * @type {Array}
+     * @required
+     * @example
+     * <dt-emoji-picker
+     *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
+     *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+     */
     tabSetLabels: {
       type: Array,
       required: true,
     },
 
+    /**
+     * The skin tone to show the emojis
+     * This prop gives the possibility to use the skin tone selected by the user previously
+     * @type {String}
+     * @default 'Default'
+     * @values 'Default', 'Light', 'MediumLight', 'Medium', 'MediumDark', 'Dark'
+     * @example
+     * <dt-emoji-picker :skinTone="'Default'" />
+     */
     skinTone: {
       type: String,
     },
 
+    /**
+     * Tooltip shown when skin selector button is hovered.
+     * @type {String}
+     * @required
+     * @example
+     * <dt-emoji-picker :skin-selector-button-tooltip-label="'Change default skin tone'" />
+     */
     skinSelectorButtonTooltipLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * Sets the search query that filters emojis.
+     * @type {String}
+     * @example
+     * <dt-emoji-picker search-query="smile" />
+     */
     searchQuery: {
       type: String,
       default: '',
     },
 
+    /**
+     * Shows the search input
+     * @type {String}
+     * @example
+     * <dt-emoji-picker :show-search="false" />
+     */
     showSearch: {
       type: Boolean,
       default: true,
