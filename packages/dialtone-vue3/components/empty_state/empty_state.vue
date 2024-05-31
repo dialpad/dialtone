@@ -1,5 +1,7 @@
 <template>
-  <div :class="emptyStateClasses">
+  <dt-stack
+    :class="emptyStateClasses"
+  >
     <template v-if="showIllustration">
       <dt-icon
         v-if="showIcon"
@@ -13,18 +15,24 @@
       />
     </template>
 
-    <div :class="emptyStateContentSpacing">
-      <h1>
+    <dt-stack
+      gap="450"
+      class="d-empty-state--content"
+    >
+      <div :class="['d-empty-state--header-text', headlineClass]">
         {{ headerText }}
-      </h1>
+      </div>
 
-      <p v-if="bodyText">
+      <p
+        v-if="bodyText"
+        :class="['d-empty-state--body-text', bodyClass]"
+      >
         {{ bodyText }}
       </p>
-    </div>
+    </dt-stack>
 
     <slot name="body" />
-  </div>
+  </dt-stack>
 </template>
 
 <script setup>
@@ -32,6 +40,7 @@ import { useSlots, computed, onMounted } from 'vue';
 import { EMPTY_STATE_SIZE_MODIFIERS } from './empty_state_constants.js';
 import { DtIllustration, ILLUSTRATION_NAMES } from '@/components/illustration';
 import { DtIcon, ICON_NAMES } from '@/components/icon';
+import { DtStack } from '@/components/stack';
 import { hasSlotContent } from '@/common/utils';
 
 const slots = useSlots();
@@ -114,16 +123,29 @@ const sizeClass = computed(() => EMPTY_STATE_SIZE_MODIFIERS[props.size]);
 
 const emptyStateClasses = computed(() => ['d-empty-state', sizeClass.value]);
 
-const emptyStateContentSpacing = computed(() => {
+const headlineClass = computed(() => {
   switch (props.size) {
     case 'sm':
-      return 'd-p16';
+      return 'd-headline--md';
     case 'md':
-      return 'd-p32';
+      return 'd-headline--xl';
     case 'lg':
-      return 'd-p32';
+      return 'd-headline--xxl';
     default:
-      return 'd-p32';
+      return 'd-headline--xxl';
+  }
+});
+
+const bodyClass = computed(() => {
+  switch (props.size) {
+    case 'sm':
+      return 'd-body--sm';
+    case 'md':
+      return 'd-body--sm';
+    case 'lg':
+      return 'd-body--md';
+    default:
+      return 'd-body--md';
   }
 });
 
