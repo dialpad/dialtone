@@ -3,29 +3,37 @@
     :class="emptyStateClasses"
   >
     <template v-if="showIllustration">
-      <dt-icon
+      <span
         v-if="showIcon"
-        :name="iconName"
-        size="800"
-      />
+        class="d-empty-state__icon"
+      >
+        <dt-icon
+          :name="iconName"
+          size="800"
+        />
+      </span>
 
-      <dt-illustration
+      <span
         v-if="showIllustrationComponent"
-        :name="illustrationName"
-      />
+        class="d-empty-state__illustration"
+      >
+        <dt-illustration
+          :name="illustrationName"
+        />
+      </span>
     </template>
 
     <dt-stack
       gap="450"
-      class="d-empty-state--content"
+      :class="['d-empty-state__content', contentClass]"
     >
-      <div :class="['d-empty-state--header-text', headlineClass]">
+      <div :class="['d-empty-state__header-text', headlineClass]">
         {{ headerText }}
       </div>
 
       <p
         v-if="bodyText"
-        :class="['d-empty-state--body-text', bodyClass]"
+        :class="['d-empty-state__body-text', bodyClass]"
       >
         {{ bodyText }}
       </p>
@@ -122,6 +130,19 @@ const showIcon = computed(() => {
 const sizeClass = computed(() => EMPTY_STATE_SIZE_MODIFIERS[props.size]);
 
 const emptyStateClasses = computed(() => ['d-empty-state', sizeClass.value]);
+
+const contentClass = computed(() => {
+  switch (props.size) {
+    case 'sm':
+      return 'd-empty-state__content--sm';
+    case 'md':
+      return 'd-empty-state__content--md';
+    case 'lg':
+      return 'd-empty-state__content--lg';
+    default:
+      return 'd-empty-state__content--lg';
+  }
+});
 
 const headlineClass = computed(() => {
   switch (props.size) {

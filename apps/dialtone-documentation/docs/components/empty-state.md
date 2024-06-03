@@ -15,10 +15,10 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
     body-text="Looks like there's no data to display here."
   >
     <template #body>
-      <div class="d-stack d-stack--row d-stack--gap-300">
-        <button class="d-btn">Click me</button>
-        <button class="d-btn d-btn--primary">Click me</button>
-      </div>
+      <dt-stack direction="row" gap="300">
+        <dt-button importance="clear">Click me</dt-button>
+        <dt-button>Click me</dt-button>
+      </dt-stack>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -138,26 +138,25 @@ There are multiple ways to use empty state as shown below:
     body-text="Looks like there's no data to display here."
   >
     <template #body>
-      <div class="d-stack d-stack--row d-stack--gap-300">
-        <button class="d-btn">Click me</button>
-        <button class="d-btn d-btn--primary">Click me</button>
-      </div>
+      <dt-stack direction="row" gap="300">
+        <dt-button importance="clear">Click me</dt-button>
+        <dt-button>Click me</dt-button>
+      </dt-stack>
     </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-empty-state d-empty-state--size-lg">
-  <svg>...</svg>
-  <div class="d-p32">
-    <h1>Nothing to see here</h1>
-    <p>Looks like theres no data to display here.</p>
+<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-lg">
+  <span class="d-empty-state__illustration">
+    <svg>...</svg>
+  </span>
+  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--lg">
+    <div class="d-empty-state__header-text d-headline--xxl">Nothing to see here</div>
+    <p class="d-empty-state__body-text d-body--md">Looks like theres no data to display here.</p>
   </div>
-  <div class="d-stack d-stack--row d-stack--gap-300">
-    <button class="d-btn">Click me</button>
-    <button class="d-btn d-btn--primary">Click me</button>
-  </div>
+  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Click me</button> <button class="d-btn d-btn--primary">Click me</button></div>
 </div>
 '
 vueCode='
@@ -167,10 +166,10 @@ vueCode='
   body-text="Looks like theres no data to display here."
 >
   <template #body>
-    <div class="d-stack d-stack--row d-stack--gap-300">
-      <button class="d-btn">Click me</button>
-      <button class="d-btn d-btn--primary">Click me</button>
-    </div>
+    <dt-stack direction="row" gap="300">
+      <dt-button importance="clear">Click me</dt-button>
+      <dt-button>Click me</dt-button>
+    </dt-stack>
   </template>
 </dt-empty-state>
 '
@@ -188,11 +187,13 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-empty-state d-empty-state--size-lg">
-  <svg></svg>
-  <div class="d-p32">
-    <h1>Nothing to see here</h1>
-    <p>Looks like theres no data to display here.</p>
+<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-lg">
+  <span class="d-empty-state__illustration">
+    <svg>...</svg>
+  </span>
+  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--lg">
+    <div class="d-empty-state__header-text d-headline--xxl">Nothing to see here</div>
+    <p class="d-empty-state__body-text d-body--md">Looks like theres no data to display here.</p>
   </div>
 </div>
 '
@@ -213,25 +214,24 @@ showHtmlWarning />
     header-text="Nothing to see here"
   >
     <template #body>
-      <div class="d-stack d-stack--row d-stack--gap-300">
-        <button class="d-btn">Click me</button>
-        <button class="d-btn d-btn--primary">Click me</button>
-      </div>
+      <dt-stack direction="row" gap="300">
+        <dt-button importance="clear">Click me</dt-button>
+        <dt-button>Click me</dt-button>
+      </dt-stack>
     </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-empty-state d-empty-state--size-lg">
-  <svg></svg>
-  <div class="d-p32">
-    <h1>Nothing to see here</h1>
+<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-lg">
+  <span class="d-empty-state__illustration">
+    <svg>...</svg>
+  </span>
+  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--lg">
+    <div class="d-empty-state__header-text d-headline--xxl">Nothing to see here</div>
   </div>
-  <div class="d-stack d-stack--row d-stack--gap-300">
-    <button class="d-btn">Click me</button> 
-    <button class="d-btn d-btn--primary">Click me</button>
-  </div>
+  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Click me</button> <button class="d-btn d-btn--primary">Click me</button></div>
 </div>
 '
 vueCode='
@@ -240,10 +240,10 @@ vueCode='
   header-text="Nothing to see here"
 >
   <template #body>
-    <div class="d-stack d-stack--row d-stack--gap-300">
-      <button class="d-btn">Click me</button>
-      <button class="d-btn d-btn--primary">Click me</button>
-    </div>
+    <dt-stack direction="row" gap="300">
+      <dt-button importance="clear">Click me</dt-button>
+      <dt-button>Click me</dt-button>
+    </dt-stack>
   </template>
 </dt-empty-state>
 '
@@ -272,26 +272,25 @@ Below are some examples of how to render empty state at different sizes:
   body-text="Looks like theres no data to display here."
 >
   <template #body>
-    <div class="d-stack d-stack--row d-stack--gap-300">
-      <button class="d-btn">Click me</button>
-      <button class="d-btn d-btn--primary">Click me</button>
-    </div>
+    <dt-stack direction="row" gap="300">
+      <dt-button importance="clear">Click me</dt-button>
+      <dt-button>Click me</dt-button>
+    </dt-stack>
   </template>
 </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-empty-state d-empty-state--size-sm">
-  <svg>...</svg>
-  <div class="d-p16">
-    <h1>Nothing to see here</h1>
-    <p>Looks like theres no data to display here.</p>
+<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-sm">
+  <span class="d-empty-state__icon">
+    <svg>...</svg>
+  </span>
+  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--sm">
+    <div class="d-empty-state__header-text d-headline--md">Nothing to see here</div>
+    <p class="d-empty-state__body-text d-body--sm">Looks like theres no data to display here.</p>
   </div>
-  <div class="d-stack d-stack--row d-stack--gap-300">
-    <button class="d-btn">Click me</button> 
-    <button class="d-btn d-btn--primary">Click me</button>
-  </div>
+  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Click me</button> <button class="d-btn d-btn--primary">Click me</button></div>
 </div>
 '
 vueCode='
@@ -302,10 +301,10 @@ vueCode='
   body-text="Looks like theres no data to display here."
 >
   <template #body>
-    <div class="d-stack d-stack--row d-stack--gap-300">
-      <button class="d-btn">Click me</button>
-      <button class="d-btn d-btn--primary">Click me</button>
-    </div>
+    <dt-stack direction="row" gap="300">
+      <dt-button importance="clear">Click me</dt-button>
+      <dt-button>Click me</dt-button>
+    </dt-stack>
   </template>
 </dt-empty-state>
 '
@@ -321,26 +320,25 @@ showHtmlWarning />
   body-text="Looks like theres no data to display here."
 >
   <template #body>
-    <div class="d-stack d-stack--row d-stack--gap-300">
-      <button class="d-btn">Click me</button>
-      <button class="d-btn d-btn--primary">Click me</button>
-    </div>
+    <dt-stack direction="row" gap="300">
+      <dt-button importance="clear">Click me</dt-button>
+      <dt-button>Click me</dt-button>
+    </dt-stack>
   </template>
 </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-empty-state d-empty-state--size-md">
-  <svg>...</svg>
-  <div class="d-p16">
-    <h1>Nothing to see here</h1>
-    <p>Looks like theres no data to display here.</p>
+<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-md">
+  <span class="d-empty-state__icon">
+    <svg>...</svg>
+  </span>
+  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--md">
+    <div class="d-empty-state__header-text d-headline--xl">Nothing to see here</div>
+    <p class="d-empty-state__body-text d-body--sm">Looks like theres no data to display here.</p>
   </div>
-  <div class="d-stack d-stack--row d-stack--gap-300">
-    <button class="d-btn">Click me</button> 
-    <button class="d-btn d-btn--primary">Click me</button>
-  </div>
+  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Click me</button> <button class="d-btn d-btn--primary">Click me</button></div>
 </div>
 '
 vueCode='
@@ -351,10 +349,10 @@ vueCode='
   body-text="Looks like theres no data to display here."
 >
   <template #body>
-    <div class="d-stack d-stack--row d-stack--gap-300">
-      <button class="d-btn">Click me</button>
-      <button class="d-btn d-btn--primary">Click me</button>
-    </div>
+    <dt-stack direction="row" gap="300">
+      <dt-button importance="clear">Click me</dt-button>
+      <dt-button>Click me</dt-button>
+    </dt-stack>
   </template>
 </dt-empty-state>
 '
