@@ -20,7 +20,7 @@
         <template #anchor>
           <dt-button class="dialtone-icon-card__header js-dialtone-icon-card-copy-area">
             <div class="dialtone-icon-card__icon--autosize">
-              <svg-loader :name="file" />
+              <svg-loader :illustration="illustration" :name="file" />
             </div>
           </dt-button>
         </template>
@@ -138,6 +138,11 @@ defineProps({
   rawSvg: {
     type: String,
     required: true,
+  },
+
+  illustration: {
+    type: Boolean,
+    default: false,
   },
 });
 

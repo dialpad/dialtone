@@ -5,21 +5,6 @@
         "blank",
         "space"
       ],
-      "mind": [
-        "mind"
-      ],
-      "vector-vortex": [
-        "vector",
-        "vortex"
-      ],
-      "dialpad-word": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
-      ],
       "dialpad-logo": [
         "logo",
         "brand",
@@ -38,6 +23,21 @@
         "unitone",
         "solid",
         "marketing"
+      ],
+      "dialpad-word": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
+      "mind": [
+        "mind"
+      ],
+      "vector-vortex": [
+        "vector",
+        "vortex"
       ]
     }
   }
