@@ -33,8 +33,8 @@ describe('DtIllustration Tests', () => {
 
     illustration = wrapper.find('[data-qa="dt-illustration"]');
     icon = wrapper.find('[data-qa="dt-icon"]');
-    headerText = wrapper.find('h1');
-    bodyText = wrapper.find('p');
+    headerText = wrapper.find('.d-empty-state__header-text');
+    bodyText = wrapper.find('.d-empty-state__body-text');
     bodySlot = wrapper.find('h2');
   };
 
@@ -65,16 +65,46 @@ describe('DtIllustration Tests', () => {
     });
 
     it('Should render size classes in wrapper', () => {
-      expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size-lg')).toBe(true);
+      expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size--lg')).toBe(true);
+    });
+
+    it('Should render correct headline classes in header text', () => {
+      expect(headerText.classes().includes('d-headline--xxl')).toBe(true);
+    });
+
+    it('Should render correct body classes in body text', () => {
+      expect(bodyText.classes().includes('d-body--md')).toBe(true);
     });
   });
 
   describe('Interactivity Tests', () => {
     describe('On size change', () => {
       it('Should update size classes in wrapper', () => {
-        wrapper.setProps({ size: 'md' });
+        mockProps = { size: 'md' };
 
-        expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size-md')).toBe(true);
+        updateWrapper();
+
+        expect(wrapper.classes().includes('d-empty-state--size--md')).toBe(true);
+      });
+
+      it('Should update headline classes in header text', () => {
+        mockProps = { size: 'md' };
+
+        updateWrapper();
+
+        headerText = wrapper.find('.d-empty-state__header-text');
+
+        expect(headerText.classes().includes('d-headline--xl')).toBe(true);
+      });
+
+      it('Should update body classes in body text', () => {
+        mockProps = { size: 'md' };
+
+        updateWrapper();
+
+        bodyText = wrapper.find('.d-empty-state__body-text');
+
+        expect(bodyText.classes().includes('d-body--sm')).toBe(true);
       });
     });
 
