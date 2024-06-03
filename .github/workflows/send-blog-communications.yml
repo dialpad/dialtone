@@ -92,7 +92,7 @@ jobs:
           sed -i 10q $FILE_PATH;
           echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
           {
-            echo "MESSAGE_BODY<<EOF"
+            echo 'MESSAGE_BODY<<EOF'
             cat $FILE_PATH
             echo EOF
           } >> $GITHUB_ENV;
