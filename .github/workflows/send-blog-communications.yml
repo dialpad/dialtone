@@ -48,7 +48,7 @@ jobs:
       matrix:
         files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
     env:
-      TO_MAIL: julio.ortega@dialpad.com
+      TO_MAIL: "julio.ortega@dialpad.com, nina.repetto@dialpad.com, brad.paugh@dialpad.com, ignacio.ropolo@dialpad.com"
       FILE_PATH: ${{ matrix.files }}
       API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-email
     steps:
