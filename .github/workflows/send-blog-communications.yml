@@ -85,15 +85,16 @@ jobs:
           -e '/^<\/*BlogPost.*$/d' \
           -e '/^<!--.*$/d' \
           -e '/./,$!d' \
-          -e "s/'/u0027/g" \
+          -e "s/'/\\x0027/g" \
           -e 's/"/\\"/g' \
+          -e 's/$/\\n/g' \
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
           $FILE_PATH;
           sed -i 10q $FILE_PATH;
           echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
           {
             echo 'MESSAGE_BODY<<EOF'
-            cat $FILE_PATH
+            cat $FILE_PATH | tr -d '\n'
             echo EOF
           } >> $GITHUB_ENV;
 
@@ -124,7 +125,7 @@ jobs:
             "to": "${{ env.TO_MAIL }}",
             "subject": "[dialtone] New blog post: \"${{ env.BLOG_POST_HEADING }}\"",
             "message": "${{ env.MESSAGE_BODY }}"
-          }"
+          }'
 
   send-sms:
     if: false
