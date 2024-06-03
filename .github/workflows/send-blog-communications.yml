@@ -85,7 +85,7 @@ jobs:
           -e '/^<\/*BlogPost.*$/d' \
           -e '/^<!--.*$/d' \
           -e '/./,$!d' \
-          -e "s/'/\\\'/g" \
+          -e "s/'/u0027/g" \
           -e 's/"/\\"/g' \
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
           $FILE_PATH;
@@ -121,10 +121,10 @@ jobs:
           -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
           -H "Content-Type: application/json" \
           -d '{
-            \'to\': \'${{ env.TO_MAIL }}\',
-            \'subject\': \'[dialtone] New blog post: \"${{ env.BLOG_POST_HEADING }}\"\',
-            \'message\': \'${{ env.MESSAGE_BODY }}\'
-          }'
+            "to": "${{ env.TO_MAIL }}",
+            "subject": "[dialtone] New blog post: \"${{ env.BLOG_POST_HEADING }}\"",
+            "message": "${{ env.MESSAGE_BODY }}"
+          }"
 
   send-sms:
     if: false
