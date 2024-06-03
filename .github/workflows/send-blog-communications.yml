@@ -85,8 +85,8 @@ jobs:
           -e '/^<\/*BlogPost.*$/d' \
           -e '/^<!--.*$/d' \
           -e '/./,$!d' \
-          -e "/'/\'/g"
-          -e '/"\"/g'
+          -e "/'/\'/g" \
+          -e '/"\"/g' \
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
           $FILE_PATH;
           sed -i 10q $FILE_PATH;
