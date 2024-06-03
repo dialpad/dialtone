@@ -86,16 +86,16 @@ Dialtone provides four core button **types**, each with three levels of **import
     <tr>
       <th class="d-ta-left d-va-top"></th>
       <th class="d-ta-left d-va-top">
-        Clear
-        <div class="d-fw-normal d-tt-none d-fs-200 d-lh-200">Default level of importance. Typically used for secondary or minimally important actions.</div>
+        <div class="d-lh-300">Clear</div>
+        <div class="d-tt-none d-body--md-compact">Default level of importance. Typically used for secondary or minimally important actions.</div>
       </th>
       <th class="d-ta-left d-va-top">
-        Outlined
-        <div class="d-fw-normal d-tt-none d-fs-200 d-lh-200">Slightly more important than clear, presenting a contrasting border and transparent background.</div>
+        <div class="d-lh-300">Outlined</div>
+        <div class="d-tt-none d-body--md-compact">Slightly more important than clear, presenting a contrasting border and transparent background.</div>
       </th>
       <th class="d-ta-left d-va-top">
-        Primary
-        <div class="d-fw-normal d-tt-none d-fs-200 d-lh-200">Highest level of importance, presenting a solid background color.</div>
+        <div class="d-lh-300">Primary</div>
+        <div class="d-tt-none d-body--md-compact">Highest level of importance, presenting a solid background color.</div>
       </th>
     </tr>
   </thead>
@@ -495,7 +495,7 @@ htmlCode='
 </button>
 '
 vueCode='
-<!-- icon-position can be "right/top/bottom" , 
+<!-- icon-position can be "right/top/bottom" ,
      no icon-position will be left -->
 <dt-button importance="outlined" icon-position="right">
   <template #icon>
