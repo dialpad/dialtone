@@ -74,9 +74,11 @@ jobs:
       # - Remove empty lines at the beginning of the file.
       # - Escape quotes
       # - Escape double quotes
+      # - Add new line escaped character at the end of every line
       # - Replace links paths for their absolute paths (prefixed by https://dialtone.dialpad.com).
       # - Ellipsis the article to the first 10 lines.
       # - Append the URL of the article at the end of the article.
+      # - Print the result to MESSAGE_BODY env variable removing the new lines to avoid issues with JSON
       - name: Process Markdown file
         run: |
           sed -i -E \
