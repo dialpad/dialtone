@@ -72,6 +72,8 @@ jobs:
       # - Remove blog post component.
       # - Remove comments.
       # - Remove empty lines at the beginning of the file.
+      # - Escape quotes
+      # - Escape double quotes
       # - Replace links paths for their absolute paths (prefixed by https://dialtone.dialpad.com).
       # - Ellipsis the article to the first 10 lines.
       # - Append the URL of the article at the end of the article.
@@ -83,6 +85,8 @@ jobs:
           -e '/^<\/*BlogPost.*$/d' \
           -e '/^<!--.*$/d' \
           -e '/./,$!d' \
+          -e "/'/\'/g"
+          -e '/"\"/g'
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
           $FILE_PATH;
           sed -i 10q $FILE_PATH;
