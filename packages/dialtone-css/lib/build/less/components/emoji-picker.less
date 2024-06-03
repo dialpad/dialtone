@@ -35,11 +35,11 @@
   }
 
   &__alignment {
+    // !important to default value to override popover dialog box-sizing: border-box style
+    box-sizing: content-box !important;
     width: auto;
     max-width: calc(var(--dt-size-925) + var(--dt-size-400));
     margin: 0 var(--dt-space-500);
-    // !important to default value to override popover dialog box-sizing: border-box style
-    box-sizing: content-box !important;
   }
 
   &--footer {
@@ -149,7 +149,10 @@
     padding-bottom: calc(var(--dt-space-300) + var(--dt-space-100));
     overflow: hidden auto;
 
-    div:not(:first-child) {
+    // when using the custom scrollbars element, the actual scrollable
+    // element ends up being the second child of the element where the
+    // scrollbars are added
+    div:nth-child(2) div:not(:first-child) {
       p {
         margin-top: calc(var(--dt-space-525) + var(--dt-space-200));
       }
