@@ -95,6 +95,7 @@ jobs:
           {
             echo 'MESSAGE_BODY<<EOF'
             cat $FILE_PATH | tr -d '\n'
+            echo
             echo EOF
           } >> $GITHUB_ENV;
 
