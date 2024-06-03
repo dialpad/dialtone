@@ -10,26 +10,35 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 
 ## Usage
 
-### In Figma
+<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+  <div class="d-p16 d-p16 d-plc-center">
+
+### In Figma
 
 Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library), or search the icons in the search library within your Figma file.
 
-<dt-stack class="d-gc2" direction="column" gap="500">
-<img alt="Figma Search Icon" src="/assets/images/figma-search-icon.gif" style="border-radius: var(--dt-size-radius-400)">
-<p class="d-body--md d-fc-tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</p>
-</dt-stack>
+  </div>
+  <div class="d-gc2 d-p16">
+    <dt-stack class="d-gc2" direction="column" gap="500">
+      <img alt="Figma Search Icon" src="/assets/images/figma-search-icon.gif" style="border-radius: var(--dt-size-radius-400)">
+      <p class="d-body--md d-fc-tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</p>
+    </dt-stack>
+  </div>
 </div>
+
+<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+
+  <div class="d-p16 d-p16 d-plc-center">
 
 ### In Vue
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
-
 For detailed instructions on using the icons, check the [Icon component](/components/icon.html).
 
-<div class="d-gc2">
-<code-well-header>
+  </div>
+  <div class="d-gc2 d-p16">
+
+<code-well-header bgclass="d-bgc-primary">
   <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1 d-w100p">
     <div class="d-fl-center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
@@ -44,29 +53,90 @@ import { DtIcon } from '@dialpad/dialtone-vue';
 <dt-icon name="icon-name" size="500" ariaLabel="Description" />
 ```
 
+  </div>
 </div>
-</div>
+
+
+<div class="d-d-grid d-g-cols1 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+
+  <div class="d-p16 d-p16 d-plc-center">
 
 ### Choosing the right icon
 
 Some icons are linked to specific actions, like the Settings gear <dt-icon name="settings" size="200" /> or the Edit pencil <dt-icon name="edit" size="200" />. For actions without a dedicated icon, avoid reusing icons that are already associated with other actions, this helps prevent confusion and ensures clear understanding. Instead, select an existing icon from the Icon Catalog without a specific action meaning or consider [creating a new one](#crafting-an-icon) that clearly represents the intended action.
 
+  </div>
+</div>
+
+<div class="d-d-grid d-g-cols1 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+
+  <div class="d-p16 d-p16 d-plc-center">
+
 ### Sizing
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+These are the only available size options and overrides should not be needed to properly size the icons.
 
-The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
-
-<div class="d-gc2">
-<p class="d-body--sm"><dt-icon name="food" size="200" /> 200 when body small</p>
-<p class="d-body--md"><dt-icon name="food" size="300" /> 300 when body base</p>
-<p class="d-headline--lg"><dt-icon name="food" size="400" /> 400 when headline large</p>
-<p class="d-headline--xl"><dt-icon name="food" size="500" /> 500  when headline extra large</p>
-<p class="d-fs-300-tv"><dt-icon name="food" size="600" /> 600 when device 300</p>
-<p class="d-fs-400-tv"><dt-icon name="food" size="700" /> 700 when device 400</p>
-<!-- <p class="d-fs-500-tv"><dt-icon name="food" size="800" /> 800 when device 500</p> -->
-
-</div>
+  </div>
+  <div class="d-p16 d-pt0 d-plc-center">
+    <dt-stack gap="500" direction="row">
+      <dt-stack gap="300">
+        <span class="d-p8 d-w64 d-h64 d-plc-center d-ta-center">
+          <dt-icon name="food" size="100" />
+        </span>
+        <span class="d-ta-center"><code>100</code></span>
+        <span class="d-ta-center">(12px)</span>
+      </dt-stack>
+      <dt-stack gap="300">
+        <span class="d-p8 d-w64 d-h64 d-plc-center d-ta-center">
+          <dt-icon name="food" size="200" />
+        </span>
+        <span class="d-ta-center"><code>200</code></span>
+        <span class="d-ta-center">(14px)</span>
+      </dt-stack>
+      <dt-stack gap="300">
+        <span class="d-p8 d-w64 d-h64 d-plc-center d-ta-center">
+          <dt-icon name="food" size="300" />
+        </span>
+        <span class="d-ta-center"><code>300</code></span>
+        <span class="d-ta-center">(18px)</span>
+      </dt-stack>
+      <dt-stack gap="300">
+        <span class="d-p8 d-w64 d-h64 d-plc-center d-ta-center">
+          <dt-icon name="food" size="400" />
+        </span>
+        <span class="d-ta-center"><code>400</code></span>
+        <span class="d-ta-center">(20px)</span>
+      </dt-stack>
+      <dt-stack gap="300">
+        <span class="d-p8 d-w64 d-h64 d-plc-center d-ta-center">
+          <dt-icon name="food" size="500" />
+        </span>
+        <span class="d-ta-center"><code>500</code></span>
+        <span class="d-ta-center">(24px)</span>
+      </dt-stack>
+      <dt-stack gap="300">
+        <span class="d-p8 d-w64 d-h64 d-plc-center d-ta-center">
+          <dt-icon name="food" size="600" />
+        </span>
+        <span class="d-ta-center"><code>600</code></span>
+        <span class="d-ta-center">(32px)</span>
+      </dt-stack>
+      <dt-stack gap="300">
+        <span class="d-p8 d-w64 d-h64 d-plc-center d-ta-center">
+          <dt-icon name="food" size="700" />
+        </span>
+        <span class="d-ta-center"><code>700</code></span>
+        <span class="d-ta-center">(38px)</span>
+      </dt-stack>
+      <dt-stack gap="300">
+        <span class="d-p8 d-w64 d-h64 d-plc-center d-ta-center">
+          <dt-icon name="food" size="800" />
+        </span>
+        <span class="d-ta-center"><code>800</code></span>
+        <span class="d-ta-center">(48px)</span>
+      </dt-stack>
+    </dt-stack>
+  </div>
 </div>
 
 ## Crafting an icon
