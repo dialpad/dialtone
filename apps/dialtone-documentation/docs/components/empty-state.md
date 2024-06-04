@@ -619,7 +619,7 @@ Be direct in communicating the unavailability of a feature or service, and provi
 
 ```
 Title: Restricted access
-Description: Permission required. You can requeste access from the owner.
+Description: Permission required. You can request access from the owner.
 Action: [Cancel] [Request access]
 ```
 
