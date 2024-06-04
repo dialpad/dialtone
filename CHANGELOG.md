@@ -1,3 +1,21 @@
+# [9.43.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.42.0...dialtone/v9.43.0) (2024-06-04)
+
+
+### Bug Fixes
+
+* NO-JIRA empty state update ([#348](https://github.com/dialpad/dialtone/issues/348)) ([bd41d50](https://github.com/dialpad/dialtone/commit/bd41d50508f9e2a0f7799c25c05a0d72d2ebd0a6))
+
+
+### Documentation
+
+* DLT-1399 add empty state section ([#282](https://github.com/dialpad/dialtone/issues/282)) ([053bd2b](https://github.com/dialpad/dialtone/commit/053bd2b6ef9b0f4a06b93eab9b8ac297aeb60171))
+* **Empty State:** NO-JIRA restructure and content refinement ([#347](https://github.com/dialpad/dialtone/issues/347)) ([7c087e7](https://github.com/dialpad/dialtone/commit/7c087e76e73a42db0551e3a07e7a62be1c0ac49f))
+
+
+### Features
+
+* DLT-1762 dialpad logo updated ([#328](https://github.com/dialpad/dialtone/issues/328)) ([492ba32](https://github.com/dialpad/dialtone/commit/492ba32863b29bc872701e9bc3ce7def6fa61362))
+
 # [9.42.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.41.0...dialtone/v9.42.0) (2024-05-31)
 
 
