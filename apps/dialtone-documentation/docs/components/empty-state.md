@@ -47,7 +47,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state-
 - Empty states fill the space of its surrounding container and is always  centered vertically and horizontally.
 - Actions are optional if there is no direct action to be taken.
 - The primary action is always to the right when presenting multiple actions.
-- The primary action is usually `kind="default"` (aka "primary"), though may be `kind="muted"` and `importance="outlined"`
+- Action buttons are usually `kind="default"` (aka "primary"), though may be `kind="muted"`. Do not mix `kind`s.
 - Surface color most often will be transparent, deferring to its parent container's surface color.
 
 ## Usage
@@ -353,8 +353,8 @@ showHtmlWarning />
   >
     <template #body>
       <dt-stack direction="row" gap="300">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
+        <dt-button size="sm" importance="clear">Action</dt-button>
+        <dt-button size="sm">Action</dt-button>
       </dt-stack>
     </template>
   </dt-empty-state>
@@ -370,7 +370,7 @@ htmlCode='
     <div class="d-empty-state__header-text d-headline--md">Nothing to see here</div>
     <p class="d-empty-state__body-text d-body--sm">Looks like there is no data to display here.</p>
   </div>
-  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Action</button> <button class="d-btn d-btn--primary">Action</button></div>
+  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn d-btn--sm">Action</button> <button class="d-btn d-btn--sm d-btn--primary">Action</button></div>
 </div>
 '
 vueCode='
@@ -499,6 +499,54 @@ htmlCode='
 vueCode='
 <dt-empty-state
   illustration-name="mind"
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #body>
+    <dt-stack direction="row" gap="300">
+      <dt-button importance="clear">Action</dt-button>
+      <dt-button>Action</dt-button>
+    </dt-stack>
+  </template>
+</dt-empty-state>
+'
+showHtmlWarning />
+
+### Small, with muted actions
+
+<code-well-header>
+  <dt-empty-state
+    size="sm"
+    icon-name="box"
+    header-text="Nothing to see here"
+    body-text="Looks like there is no data to display here."
+  >
+    <template #body>
+      <dt-stack direction="row" gap="300">
+        <dt-button kind="muted" size="sm" importance="clear">Action</dt-button>
+        <dt-button kind="muted" importance="outlined" size="sm">Action</dt-button>
+      </dt-stack>
+    </template>
+  </dt-empty-state>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-sm">
+  <span class="d-empty-state__icon">
+    <svg>...</svg>
+  </span>
+  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--sm">
+    <div class="d-empty-state__header-text d-headline--md">Nothing to see here</div>
+    <p class="d-empty-state__body-text d-body--sm">Looks like there is no data to display here.</p>
+  </div>
+  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn d-btn--muted d-btn--sm">Action</button> <button class="d-btn d-btn--sm d-btn--muted d-btn--outlined">Action</button></div>
+</div>
+'
+vueCode='
+<dt-empty-state
+  size="sm"
+  icon-name="box"
   header-text="Nothing to see here"
   body-text="Looks like there is no data to display here."
 >
