@@ -1,3 +1,15 @@
+## [3.129.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.129.0...dialtone-vue3/v3.129.1) (2024-06-04)
+
+
+### Bug Fixes
+
+* NO-JIRA empty state update ([#348](https://github.com/dialpad/dialtone/issues/348)) ([bd41d50](https://github.com/dialpad/dialtone/commit/bd41d50508f9e2a0f7799c25c05a0d72d2ebd0a6))
+
+
+### Documentation
+
+* DLT-1399 add empty state section ([#282](https://github.com/dialpad/dialtone/issues/282)) ([053bd2b](https://github.com/dialpad/dialtone/commit/053bd2b6ef9b0f4a06b93eab9b8ac297aeb60171))
+
 # [3.129.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.128.0...dialtone-vue3/v3.129.0) (2024-05-31)
 
 
