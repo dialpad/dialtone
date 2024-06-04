@@ -5,6 +5,33 @@
         "blank",
         "space"
       ],
+      "dialpad-logo": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
+      "dialpad-mono": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "monochrome",
+        "mono",
+        "unitone",
+        "solid",
+        "marketing"
+      ],
+      "dialpad-word": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
       "mind": [
         "mind"
       ],
