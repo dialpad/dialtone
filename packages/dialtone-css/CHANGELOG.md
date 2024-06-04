@@ -1,3 +1,15 @@
+# [8.34.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.33.0...dialtone-css/v8.34.0) (2024-05-31)
+
+
+### Bug Fixes
+
+* NO-JIRA remove double classes from dialtone output ([#340](https://github.com/dialpad/dialtone/issues/340)) ([0fcea93](https://github.com/dialpad/dialtone/commit/0fcea93dd6bc6acff01ffb8882b5ddaf7e0a59d2))
+
+
+### Features
+
+* **Emoji Picker:** DLT-1781 allow hiding of search and setting searchQuery via prop ([#345](https://github.com/dialpad/dialtone/issues/345)) ([d5e5373](https://github.com/dialpad/dialtone/commit/d5e5373d81169afb3845fe815bf212c2d1ab7384))
+
 # [8.33.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.32.0...dialtone-css/v8.33.0) (2024-05-30)
 
 

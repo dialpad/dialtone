@@ -81,6 +81,12 @@ export const argTypesData = {
     options: ['Default', 'Light', 'MediumLight', 'Medium', 'MediumDark', 'Dark'],
     control: 'select',
   },
+  searchQuery: {
+    control: 'text',
+  },
+  showSearch: {
+    control: 'boolean',
+  },
   onSkinTone: {
     table: {
       disable: true,
@@ -92,6 +98,11 @@ export const argTypesData = {
     },
   },
   onClose: {
+    table: {
+      disable: true,
+    },
+  },
+  showPopover: {
     table: {
       disable: true,
     },

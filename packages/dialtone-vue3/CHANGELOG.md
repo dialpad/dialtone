@@ -1,3 +1,16 @@
+# [3.129.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.128.0...dialtone-vue3/v3.129.0) (2024-05-31)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA do not display when empty, general cleanup ([#344](https://github.com/dialpad/dialtone/issues/344)) ([a83d619](https://github.com/dialpad/dialtone/commit/a83d619c4d7053a4ed63edfee2c933c86a44ccf5))
+
+
+### Features
+
+* **Button:** DLT-1779 add link-inverted prop ([#343](https://github.com/dialpad/dialtone/issues/343)) ([6819394](https://github.com/dialpad/dialtone/commit/681939413c72c358b6a8df80a7e2096a8d7bdcb2))
+* **Emoji Picker:** DLT-1781 allow hiding of search and setting searchQuery via prop ([#345](https://github.com/dialpad/dialtone/issues/345)) ([d5e5373](https://github.com/dialpad/dialtone/commit/d5e5373d81169afb3845fe815bf212c2d1ab7384))
+
 # [3.128.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.127.0...dialtone-vue3/v3.128.0) (2024-05-30)
 
 
