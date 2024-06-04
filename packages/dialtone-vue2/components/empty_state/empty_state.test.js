@@ -65,7 +65,7 @@ describe('DtIllustration Tests', () => {
     });
 
     it('Should render size classes in wrapper', () => {
-      expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size--lg')).toBe(true);
+      expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size-lg')).toBe(true);
     });
 
     it('Should render correct headline classes in header text', () => {
@@ -84,7 +84,7 @@ describe('DtIllustration Tests', () => {
 
         updateWrapper();
 
-        expect(wrapper.classes().includes('d-empty-state--size--md')).toBe(true);
+        expect(wrapper.classes().includes('d-empty-state--size-md')).toBe(true);
       });
 
       it('Should update headline classes in header text', () => {
