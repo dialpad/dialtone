@@ -53,7 +53,6 @@ module.exports = {
       disallowVueBuiltInComponents: true,
       disallowVue3BuiltInComponents: true,
     }],
-    'vue/no-v-model-argument': ['warn'],
     'vue/padding-line-between-blocks': ['warn'],
     'vue/require-direct-export': ['warn'],
     'vue/require-name-property': ['error'],

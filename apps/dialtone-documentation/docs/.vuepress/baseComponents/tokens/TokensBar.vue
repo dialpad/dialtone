@@ -3,7 +3,7 @@
   <dt-stack gap="500">
     <dt-input
       id="search-input"
-      v-model="searchInput"
+      v-model="searchCriteria"
       autofocus
       aria-label="Search tokens"
       placeholder="Search Tokens / Value / Keyword"
@@ -36,17 +36,17 @@
         name="format-select"
         label="Format"
         select-class="d-w128"
-        :value="selectedFormat"
+        :value="format"
         :options="formatSelectMenuOptions"
-        @change="setFormat"
+        @change="updateFormat"
       />
       <dt-select-menu
         name="theme-select"
         label="Theme"
         select-class="d-w128"
-        :value="selectedTheme"
+        :value="theme"
         :options="THEMES"
-        @change="setTheme"
+        @change="updateTheme"
       />
       <dt-button
         v-dt-tooltip:top-end="shareLinkTooltip"
@@ -73,15 +73,26 @@ import { FORMAT_MAP, THEMES } from './constants';
 import { debounce } from '../../common/utilities';
 import { useRoute, useRouter } from 'vue-router';
 
+const props = defineProps({
+  search: {
+    type: String,
+    default: null,
+  },
+  format: {
+    type: String,
+    required: true,
+  },
+  theme: {
+    type: String,
+    required: true,
+  },
+});
+
 const route = useRoute();
 const router = useRouter();
 
-const emit = defineEmits(['changeSearchCriteria', 'changeFormat', 'changeTheme']);
-
-const searchInput = ref(route.query.search || null);
-const selectedFormat = ref(route.query.format || 'CSS');
-const selectedTheme = ref(route.query.theme || 'light');
-const searchCriteria = ref(null);
+const emit = defineEmits(['filter', 'update:search', 'update:format', 'update:theme']);
+const searchCriteria = ref(props.search?.trim());
 const shareLinkTooltip = ref('Copy URL to clipboard');
 
 const formatSelectMenuOptions = computed(() => {
@@ -91,9 +102,10 @@ const formatSelectMenuOptions = computed(() => {
 });
 
 const setSearchCriteria = () => {
-  searchCriteria.value = searchInput.value?.trim();
+  if (searchCriteria.value === props.search?.trim()) return;
   router.replace({ path: route.path, hash: route.hash, query: { ...route.query, search: searchCriteria.value } });
-  emit('changeSearchCriteria', searchCriteria.value);
+  emit('update:search', searchCriteria.value);
+  emit('filter');
 };
 
 const searchToken = () => {
@@ -101,20 +113,24 @@ const searchToken = () => {
 };
 
 const resetSearch = () => {
-  searchInput.value = null;
+  searchCriteria.value = null;
   setSearchCriteria();
 };
 
-const hasSearchTerm = computed(() => searchInput.value && searchInput.value.trim().length > 0);
+const hasSearchTerm = computed(() => props.search && props.search.trim().length > 0);
 
-const setFormat = (newFormat) => {
-  router.replace({ path: route.path, hash: route.hash, query: { ...route.query, format: newFormat } });
-  emit('changeFormat', newFormat);
+const updateFormat = async (newFormat) => {
+  if (props.format === newFormat) return;
+  await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, format: newFormat } });
+  emit('update:format', newFormat);
+  emit('filter');
 };
 
-const setTheme = (newTheme) => {
-  router.replace({ path: route.path, hash: route.hash, query: { ...route.query, theme: newTheme } });
-  emit('changeTheme', newTheme);
+const updateTheme = async (newTheme) => {
+  if (props.theme === newTheme) return;
+  await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, theme: newTheme } });
+  emit('update:theme', newTheme);
+  emit('filter');
 };
 
 const copyURLToClipboard = async () => {
