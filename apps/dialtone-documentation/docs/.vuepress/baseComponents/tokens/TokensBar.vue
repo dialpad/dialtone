@@ -92,7 +92,7 @@ const formatSelectMenuOptions = computed(() => {
 
 const setSearchCriteria = () => {
   searchCriteria.value = searchInput.value?.trim();
-  router.replace({ path: '/tokens/', query: { ...route.query, search: searchCriteria.value } });
+  router.replace({ path: route.path, hash: route.hash, query: { ...route.query, search: searchCriteria.value } });
   emit('changeSearchCriteria', searchCriteria.value);
 };
 
@@ -108,12 +108,12 @@ const resetSearch = () => {
 const hasSearchTerm = computed(() => searchInput.value && searchInput.value.trim().length > 0);
 
 const setFormat = (newFormat) => {
-  router.replace({ path: '/tokens/', query: { ...route.query, format: newFormat } });
+  router.replace({ path: route.path, hash: route.hash, query: { ...route.query, format: newFormat } });
   emit('changeFormat', newFormat);
 };
 
 const setTheme = (newTheme) => {
-  router.replace({ path: '/tokens/', query: { ...route.query, theme: newTheme } });
+  router.replace({ path: route.path, hash: route.hash, query: { ...route.query, theme: newTheme } });
   emit('changeTheme', newTheme);
 };
 
