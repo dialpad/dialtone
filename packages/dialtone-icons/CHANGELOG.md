@@ -1,3 +1,10 @@
+# [4.17.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.16.3...dialtone-icons/v4.17.0) (2024-06-04)
+
+
+### Features
+
+* DLT-1762 dialpad logo updated ([#328](https://github.com/dialpad/dialtone/issues/328)) ([492ba32](https://github.com/dialpad/dialtone/commit/492ba32863b29bc872701e9bc3ce7def6fa61362))
+
 ## [4.16.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.16.2...dialtone-icons/v4.16.3) (2024-05-31)
 
 ## [4.16.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.16.1...dialtone-icons/v4.16.2) (2024-05-30)
