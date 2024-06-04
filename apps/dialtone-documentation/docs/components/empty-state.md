@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/empty-state.png
 figma: planned
-storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state--default
 ---
 
 <code-well-header>
