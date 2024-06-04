@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <dt-stack gap="400">
+  <dt-stack gap="500">
     <dt-input
       id="search-input"
       v-model="searchInput"
@@ -31,10 +31,10 @@
         </dt-button>
       </template>
     </dt-input>
-    <dt-stack direction="row" gap="400" class="d-ai-flex-end">
+    <dt-stack direction="row" gap="500" class="d-ai-flex-end">
       <dt-select-menu
         name="format-select"
-        label="Select Format"
+        label="Format"
         select-class="d-w128"
         :value="selectedFormat"
         :options="formatSelectMenuOptions"
@@ -42,7 +42,7 @@
       />
       <dt-select-menu
         name="theme-select"
-        label="Select Theme"
+        label="Theme"
         select-class="d-w128"
         :value="selectedTheme"
         :options="THEMES"
