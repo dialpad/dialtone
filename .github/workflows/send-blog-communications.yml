@@ -1,8 +1,5 @@
 name: Send blog communications
 on:
-  pull_request:
-    paths:
-      - 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
   push:
     branches:
       - production
@@ -48,7 +45,7 @@ jobs:
       matrix:
         files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
     env:
-      TO_MAIL: "julio.ortega@dialpad.com, nina.repetto@dialpad.com, brad.paugh@dialpad.com, ignacio.ropolo@dialpad.com"
+      TO_MAIL: dialtone-users@dialpad.com
       FILE_PATH: ${{ matrix.files }}
       API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-email
     steps:
@@ -102,7 +99,6 @@ jobs:
           } >> $GITHUB_ENV;
 
       - name: Wait for deployment to succeed
-        if: ${{ github.event_name == 'push' }}
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
           ref: ${{ github.ref }}
@@ -131,7 +127,6 @@ jobs:
           }'
 
   send-sms:
-    if: false
     name: Send SMS
     runs-on: ubuntu-latest
     permissions:
