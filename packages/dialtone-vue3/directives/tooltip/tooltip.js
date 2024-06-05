@@ -48,6 +48,7 @@ export const DtTooltipDirective = {
               key: id,
               message,
               placement,
+              sticky: true,
               /**
                * Set the delay to false when running tests only.
                */

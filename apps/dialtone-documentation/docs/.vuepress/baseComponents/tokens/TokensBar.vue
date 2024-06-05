@@ -1,9 +1,9 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <div class="tokens-bar">
+  <dt-stack gap="500">
     <dt-input
       id="search-input"
-      v-model="searchInput"
+      v-model="searchCriteria"
       autofocus
       aria-label="Search tokens"
       placeholder="Search Tokens / Value / Keyword"
@@ -31,32 +31,69 @@
         </dt-button>
       </template>
     </dt-input>
-    <dt-select-menu
-      name="format-select"
-      label="Select Format"
-      select-class="d-w128"
-      :options="formatSelectMenuOptions"
-      @change="setFormat"
-    />
-    <dt-select-menu
-      name="theme-select"
-      label="Select Theme"
-      select-class="d-w128"
-      :options="THEMES"
-      @change="setTheme"
-    />
-  </div>
+    <dt-stack direction="row" gap="500" class="d-ai-flex-end">
+      <dt-select-menu
+        name="format-select"
+        label="Format"
+        select-class="d-w128"
+        :value="format"
+        :options="formatSelectMenuOptions"
+        @change="updateFormat"
+      />
+      <dt-select-menu
+        name="theme-select"
+        label="Theme"
+        select-class="d-w128"
+        :value="theme"
+        :options="THEMES"
+        @change="updateTheme"
+      />
+      <dt-button
+        v-dt-tooltip:top-end="shareLinkTooltip"
+        importance="clear"
+        kind="muted"
+        icon-position="right"
+        @click="copyURLToClipboard"
+      >
+        Share filter
+        <template #icon="{ iconSize }">
+          <dt-icon
+            name="link-2"
+            :size="iconSize"
+          />
+        </template>
+      </dt-button>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
 import { FORMAT_MAP, THEMES } from './constants';
 import { debounce } from '../../common/utilities';
+import { useRoute, useRouter } from 'vue-router';
 
-const emit = defineEmits(['changeSearchCriteria', 'changeFormat', 'changeTheme']);
+const props = defineProps({
+  search: {
+    type: String,
+    default: null,
+  },
+  format: {
+    type: String,
+    required: true,
+  },
+  theme: {
+    type: String,
+    required: true,
+  },
+});
 
-const searchInput = ref(null);
-const searchCriteria = ref(null);
+const route = useRoute();
+const router = useRouter();
+
+const emit = defineEmits(['filter', 'update:search', 'update:format', 'update:theme']);
+const searchCriteria = ref(props.search?.trim());
+const shareLinkTooltip = ref('Copy URL to clipboard');
 
 const formatSelectMenuOptions = computed(() => {
   return Object.keys(FORMAT_MAP).map((item) => {
@@ -65,8 +102,10 @@ const formatSelectMenuOptions = computed(() => {
 });
 
 const setSearchCriteria = () => {
-  searchCriteria.value = searchInput.value?.trim();
-  emit('changeSearchCriteria', searchCriteria.value);
+  if (searchCriteria.value === props.search?.trim()) return;
+  router.replace({ path: route.path, hash: route.hash, query: { ...route.query, search: searchCriteria.value } });
+  emit('update:search', searchCriteria.value);
+  emit('filter');
 };
 
 const searchToken = () => {
@@ -74,26 +113,37 @@ const searchToken = () => {
 };
 
 const resetSearch = () => {
-  searchInput.value = null;
+  searchCriteria.value = null;
   setSearchCriteria();
 };
 
-const hasSearchTerm = computed(() => searchInput.value && searchInput.value.trim().length > 0);
+const hasSearchTerm = computed(() => props.search && props.search.trim().length > 0);
 
-const setFormat = (newFormat) => {
-  emit('changeFormat', newFormat);
+const updateFormat = async (newFormat) => {
+  if (props.format === newFormat) return;
+  await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, format: newFormat } });
+  emit('update:format', newFormat);
+  emit('filter');
 };
 
-const setTheme = (newTheme) => {
-  emit('changeTheme', newTheme);
+const updateTheme = async (newTheme) => {
+  if (props.theme === newTheme) return;
+  await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, theme: newTheme } });
+  emit('update:theme', newTheme);
+  emit('filter');
+};
+
+const copyURLToClipboard = async () => {
+  const defaultValue = shareLinkTooltip.value;
+
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    shareLinkTooltip.value = 'Copied';
+  } catch (err) {
+    shareLinkTooltip.value = 'Error copying to clipboard';
+  }
+
+  await new Promise(resolve => setTimeout(resolve, 750));
+  shareLinkTooltip.value = defaultValue;
 };
 </script>
-
-<style scoped>
-  .tokens-bar {
-    display: grid;
-    grid-gap: var(--dt-space-400);
-    grid-template-columns: auto min-content min-content;
-    align-items: end;
-  }
-</style>

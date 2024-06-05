@@ -47,6 +47,7 @@ export const DtTooltipDirective = {
                 props: {
                   message,
                   placement,
+                  sticky: true,
                   /**
                    * Set the delay to false when running tests only.
                    */
