@@ -100,7 +100,6 @@
             type="bulletin"
             data-qa="dt-leftbar-row-unread-mention-badge"
             :class="['dt-leftbar-row__unread-badge',
-                     { 'dt-leftbar-row__unread-mention-count-only-badge': hasUnreadMentionCount },
                      { 'dt-leftbar-row__unread-mention-count-badge': shouldApplyCustomStyleForCountBadge },
             ]"
           >
@@ -401,6 +400,10 @@ export default {
 
     shouldApplyCustomStyleForCountBadge () {
       return this.hasUnreadCount && this.hasUnreadMentionCount;
+    },
+
+    shouldApplyCustomStyleForMentionOnly () {
+      return !this.hasUnreadCount && this.hasUnreadMentionCount;
     },
   },
 
