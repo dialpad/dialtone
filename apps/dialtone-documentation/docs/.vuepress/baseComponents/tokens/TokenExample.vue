@@ -102,14 +102,24 @@ const getColorStyle = computed(() => {
   if (props.name.includes('opacity')) {
     return { background: `rgba(0, 0, 0, ${props.value})` };
   }
-  if (props.name.includes('border')) {
-    return { border: `var(--dt-size-200) solid ${props.value}` };
-  }
+  if (props.name.includes('border')) return getBorderStyle();
   if (isForeground.value || isLink.value) {
     return { backgroundColor: foregroundBackgroundColor.value, color: props.value };
   }
   return { background: props.value };
 });
+
+const getBorderStyle = () => {
+  if (props.name.includes('border-ai')) {
+    return {
+      background: `linear-gradient(var(--dt-color-neutral-white), var(--dt-color-neutral-white)) padding-box,
+      ${props.value} border-box`,
+      borderWidth: 'var(--dt-size-border-200)',
+      borderColor: 'transparent',
+    };
+  }
+  return { border: `var(--dt-size-200) solid ${props.value}` };
+};
 
 const foregroundBackgroundColor = computed(() => {
   if (props.theme === 'light') {
