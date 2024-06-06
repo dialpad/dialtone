@@ -52,3 +52,10 @@ When writing in sentence casing, capitalize the first word of the sentence and p
   * Short conjunctions (e.g., “and”, “as”, “but”, “for”, “if”, “so”)
   * Articles (“a”, “an”, “the”)
   * Short prepositions (e.g., “as”, “at”, “for”, “in”, “off”, “of”, “on”, “to”)
+
+## Contractions
+
+Contractions are abbreviated words (e.g., can’t”, “aren’t”, and “you’re”). Their use helps us sound human and approachable in our writing. While we should feel free to use contractions in most cases, avoid using them in the following scenarios:
+They sound awkward when you say them out loud
+They’re no longer regularly used in modern speech
+They’re regional (i.e., “n’at”, “y’all”, “I’mma”)

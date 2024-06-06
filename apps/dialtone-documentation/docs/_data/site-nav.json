@@ -57,8 +57,17 @@
           "planned": true
         },
         {
-          "text": "Writing guidelines",
-          "link": "/guides/writing-guidelines/"
+          "text": "Content",
+          "children": [
+            {
+              "text": "Overview",
+              "link": "/guides/content/"
+            },
+            {
+              "text": "G",
+              "link": "/guides/content/grammar-and-mechanics/"
+            }
+          ]
         },
         {
           "text": "Accessibility",
