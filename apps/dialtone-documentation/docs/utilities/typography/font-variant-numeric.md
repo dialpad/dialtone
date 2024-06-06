@@ -26,7 +26,7 @@ The class `d-fvn-ordinal` forces the use of special glyphs for ordinal markers, 
 </code-well-header>
 
 ```html
-<p class="d-fs-300 d-fvn-ordinal">...</p>
+<p class="d-fs-300 d-fvn-ordinal">1st, 2nd, 3rd, 4th</p>
 ```
 
 ## Proportional-nums
@@ -68,7 +68,7 @@ Use `d-fvn-proportional` to set different sizes for each number.
 
 ## Tabular-nums
 
-Use `d-fvn-tabular` to set the same size for each number. Useful for easily align them in tables.
+Use `d-fvn-tabular` for aligning tabular data and preventing layout shifts of dynamically-changing content. For example, a timer counting down.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <div class="d-fs-300 d-fc-purple-400 d-fvn-tabular">
@@ -112,12 +112,12 @@ Use `d-fvn-diagonal` to display numerator and denominator smaller and separated 
 </code-well-header>
 
 ```html
-<p class="d-fs-300 d-fvn-diagonal">...</p>
+<p class="d-fs-300 d-fvn-diagonal">1/2 3/4 5/6</p>
 ```
 
 ## Unset
 
-Use `d-fvn-unset` to deactivate other value previusly set to `font-variant-numeric`.
+Use `d-fvn-unset` to deactivate other value previously set to `font-variant-numeric`.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <p class="d-fs-300 d-fc-purple-400 d-fvn-unset">1234567890</p>
