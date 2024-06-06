@@ -115,6 +115,7 @@ const getBorderStyle = () => {
       background: `linear-gradient(var(--dt-color-neutral-white), var(--dt-color-neutral-white)) padding-box,
       ${props.value} border-box`,
       borderWidth: 'var(--dt-size-border-200)',
+      borderColor: 'transparent',
     };
   }
   return { border: `var(--dt-size-200) solid ${props.value}` };
