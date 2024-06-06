@@ -22,6 +22,20 @@ To write in an active voice, you place the subject at the start of a sentence. I
   </aside>
 </section>
 
+## Passive voice
+
+Try to catch if you're using a passive voice by looking out for the following signs:
+
+* When the object becomes the subject (“the call was made by the admin”)
+* Using past tense verbs (“was called”, “was messaged”)
+* Using “to be” verbs (“was”, “is”, “were”)
+
+There are times when passive voice is permissible:
+
+* To avoid referring to yourself or Dialpad
+* To make it clear that you didn’t personally take an action or make a decision
+* If the object is more important than the subject
+
 ### Clear
 
 * Avoid jargon. Use simple words.
