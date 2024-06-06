@@ -1,9 +1,6 @@
 <template>
   <a
-    :class="[
-      'd-link',
-      LINK_KIND_MODIFIERS[kind],
-    ]"
+    :class="getLinkClasses()"
     data-qa="dt-link"
     :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
     v-on="$listeners"
@@ -14,7 +11,7 @@
 </template>
 
 <script>
-import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants';
+import { LINK_VARIANTS, LINK_KIND_MODIFIERS, getLinkKindModifier } from './link_constants';
 
 /**
  * A link is a navigational element that can be found on its own, within other text, or directly following content.
@@ -28,7 +25,7 @@ export default {
   props: {
     /**
      * Applies the link variant styles
-     * @values null, danger, warning, success, muted, inverted, mention
+     * @values null, danger, warning, success, muted, mention
      */
     kind: {
       type: String,
@@ -36,6 +33,16 @@ export default {
       validator (kind) {
         return LINK_VARIANTS.includes(kind);
       },
+    },
+
+    /**
+     * Determines whether the link should have inverted styling
+     * default is false.
+     * @values true, false
+     */
+    inverted: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -69,6 +76,15 @@ export default {
     return {
       LINK_KIND_MODIFIERS,
     };
+  },
+
+  methods: {
+    getLinkClasses () {
+      return [
+        'd-link',
+        getLinkKindModifier(this.kind, this.inverted),
+      ];
+    },
   },
 };
 </script>

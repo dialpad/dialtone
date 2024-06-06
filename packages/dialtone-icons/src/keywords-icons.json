@@ -1612,6 +1612,14 @@
         "query",
         "queries"
       ],
+      "rocket": [
+        "release",
+        "boost",
+        "launch",
+        "space",
+        "version",
+        "science"
+      ],
       "satisfied": [
         "happy",
         "pleased",

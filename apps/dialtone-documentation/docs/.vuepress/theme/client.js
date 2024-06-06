@@ -4,6 +4,7 @@ import NotFound from './layouts/NotFound.vue';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
+import '@dialpad/dialtone/vue3/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 import { onBeforeMount, provide, ref } from 'vue';

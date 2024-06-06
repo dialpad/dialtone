@@ -19,6 +19,7 @@ export const argsData = {
   onFocusOut: action('focusout'),
   size: 'md',
   link: false,
+  linkInverted: false,
 };
 
 const iconsList = getIconNames();
@@ -82,6 +83,9 @@ export const argTypesData = {
   linkKind: {
     control: 'select',
     options: Object.keys(LINK_KIND_MODIFIERS),
+  },
+  linkInverted: {
+    control: 'boolean',
   },
   loading: {
     control: 'boolean',

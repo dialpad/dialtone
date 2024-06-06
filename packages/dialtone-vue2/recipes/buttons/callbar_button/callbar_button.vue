@@ -1,7 +1,7 @@
 <template>
   <dt-tooltip
     :id="id"
-    :offset="[0, 8]"
+    :offset="[0, 24]"
   >
     <template #anchor>
       <span

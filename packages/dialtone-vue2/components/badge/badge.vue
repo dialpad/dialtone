@@ -5,6 +5,8 @@
       BADGE_TYPE_MODIFIERS[type],
       BADGE_KIND_MODIFIERS[kind],
       BADGE_DECORATION_MODIFIERS[decoration],
+      { 'd-badge--subtle': subtle },
+      { 'd-badge--outlined': outlined },
     ]"
     data-qa="dt-badge"
   >
@@ -123,6 +125,23 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Shows a subtle appearance for the badge
+     * Currently only affects the badge when type is bulletin.
+     */
+    subtle: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Outlines the badge with a border
+     */
+    outlined: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data () {
@@ -158,6 +177,9 @@ export default {
     validateTypePropCombination () {
       if (this.type === 'ai' && this.kind === 'count') {
         console.error('DtBadge error: type: \'ai\' with kind: \'count\' is an invalid combination.');
+      }
+      if (this.type !== 'bulletin' && this.subtle) {
+        console.error('DtBadge error: subtle can only be used with type \'bulletin\'');
       }
     },
 

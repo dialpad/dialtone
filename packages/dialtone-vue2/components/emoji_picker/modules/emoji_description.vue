@@ -8,7 +8,7 @@
       :title="emoji.name"
       :src="`${CDN_URL + emoji.unicode_character}.png`"
     >
-    {{ emoji?.name }}
+    <div>{{ emoji?.name }}</div>
   </div>
 </template>
 

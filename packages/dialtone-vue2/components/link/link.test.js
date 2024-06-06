@@ -6,7 +6,7 @@ import {
   SUCCESS,
   WARNING,
   MUTED,
-  INVERTED,
+  getLinkKindModifier,
 } from './link_constants';
 
 const baseProps = {
@@ -72,16 +72,6 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is inverted', () => {
-      it('should have correct class', async () => {
-        mockProps = { kind: INVERTED };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(LINK_KIND_MODIFIERS[INVERTED])).toBe(true);
-      });
-    });
-
     describe('When kind is success', () => {
       it('should have correct class', async () => {
         mockProps = { kind: SUCCESS };
@@ -109,6 +99,56 @@ describe('DtLink tests', () => {
         updateWrapper();
 
         expect(nativeLink.classes(LINK_KIND_MODIFIERS[MUTED])).toBe(true);
+      });
+    });
+
+    describe('When inverted is true', () => {
+      it('should have correct class', async () => {
+        mockProps = { inverted: true };
+
+        updateWrapper();
+
+        expect(nativeLink.classes(getLinkKindModifier('', true))).toBe(true);
+      });
+    });
+
+    describe('When kind is danger and inverted is true', () => {
+      it('should have correct class', async () => {
+        mockProps = { kind: DANGER, inverted: true };
+
+        updateWrapper();
+
+        expect(nativeLink.classes(getLinkKindModifier(DANGER, true))).toBe(true);
+      });
+    });
+
+    describe('When kind is success and inverted is true', () => {
+      it('should have correct class', async () => {
+        mockProps = { kind: SUCCESS, inverted: true };
+
+        updateWrapper();
+
+        expect(nativeLink.classes(getLinkKindModifier(SUCCESS, true))).toBe(true);
+      });
+    });
+
+    describe('When kind is warning and inverted is true', () => {
+      it('should have correct class', async () => {
+        mockProps = { kind: WARNING, inverted: true };
+
+        updateWrapper();
+
+        expect(nativeLink.classes(getLinkKindModifier(WARNING, true))).toBe(true);
+      });
+    });
+
+    describe('When kind is muted and inverted is true', () => {
+      it('should have correct class', async () => {
+        mockProps = { kind: MUTED, inverted: true };
+
+        updateWrapper();
+
+        expect(nativeLink.classes(getLinkKindModifier(MUTED, true))).toBe(true);
       });
     });
   });

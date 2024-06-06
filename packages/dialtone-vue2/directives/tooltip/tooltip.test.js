@@ -2,10 +2,6 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import { DtTooltipDirective } from './tooltip.js';
 import { getUniqueString } from '@/common/utils';
 
-import {
-  TOOLTIP_DIRECTIONS,
-} from '@/components/tooltip';
-
 const MOCK_TOOLTIP_TEXT = 'Tooltip text content';
 const MOCK_ANCHOR_TEXT = 'Button placeholder';
 
@@ -93,20 +89,6 @@ describe('DtTooltipDirective Tests', () => {
       it('should render the message', () => {
         expect(document.body.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe(MOCK_TOOLTIP_TEXT);
       });
-    });
-    describe('When a placement is provided', () => {
-      TOOLTIP_DIRECTIONS.forEach(placement =>
-        describe(`When direction is ${placement}`, () => {
-          beforeEach(async () => {
-            mockProps = { placement };
-            await updateWrapper();
-            await anchor.trigger('mouseenter');
-          });
-
-          it('should have correct arrow direction class', () => {
-            expect(document.body.innerHTML.includes(`d-tooltip__arrow-tippy--${placement}`)).toBe(true);
-          });
-        }));
     });
   });
 });

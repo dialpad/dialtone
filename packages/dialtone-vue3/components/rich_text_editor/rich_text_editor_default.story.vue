@@ -1,6 +1,6 @@
 <template>
   <dt-rich-text-editor
-    v-model="$attrs.modelValue"
+    v-model="value"
     :editable="$attrs.editable"
     :input-aria-label="$attrs.inputAriaLabel"
     :input-class="$attrs.inputClass"
@@ -14,6 +14,7 @@
     :allow-blockquote="$attrs.allowBlockquote"
     :allow-bold="$attrs.allowBold"
     :allow-bullet-list="$attrs.allowBulletList"
+    :allow-codeblock="$attrs.allowCodeblock"
     :allow-italic="$attrs.allowItalic"
     :allow-strike="$attrs.allowStrike"
     :allow-underline="$attrs.allowUnderline"
@@ -31,6 +32,18 @@ export default {
 
   components: {
     DtRichTextEditor,
+  },
+
+  data () {
+    return {
+      value: this.$attrs.modelValue,
+    };
+  },
+
+  watch: {
+    '$attrs.modelValue' (value) {
+      this.value = value;
+    },
   },
 };
 </script>

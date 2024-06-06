@@ -20,13 +20,18 @@
         v-if="modelValue.length > 0"
         #rightIcon
       >
-        <button
-          class="d-emoji-picker__search-button"
+        <dt-button
+          importance="clear"
+          kind="muted"
           @click="clearSearch"
-          @keydown.enter="clearSearch"
         >
-          <dt-icon name="close" />
-        </button>
+          <template #icon>
+            <dt-icon
+              name="x-circle"
+              size="200"
+            />
+          </template>
+        </dt-button>
       </template>
     </dt-input>
   </div>
@@ -35,6 +40,7 @@
 <script setup>
 import { DtInput } from '@/components/input';
 import { DtIcon } from '@/components/icon';
+import { DtButton } from '@/components/button';
 import { onMounted, ref } from 'vue';
 
 defineProps({

@@ -1,4 +1,5 @@
 import iconNames from '@dialpad/dialtone-icons/icons.json';
+import illustrationNames from '@dialpad/dialtone-icons/illustrations.json';
 
 /**
  * Will use a Vue SFC to render the template rather than a template string.
@@ -27,6 +28,14 @@ export function getIconNames () {
   return [undefined, ...iconNames];
 }
 
+/**
+ * Gets the full list of icon component names from the dialtone package
+ * @returns {string[]} icon component names
+ */
+export function getIllustrationNames () {
+  return [undefined, ...illustrationNames];
+}
+
 export const generateTemplate = (component,
   { props = [], excludeProps = [], customProps = [], childTemplate } = {}) => {
   if (!component) {
@@ -52,5 +61,6 @@ export const generateTemplate = (component,
 export default {
   generateTemplate,
   createTemplateFromVueFile,
+  getIllustrationNames,
   getIconNames,
 };

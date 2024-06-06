@@ -13,7 +13,6 @@ export const argsData = {
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. You can set the position of the tooltip using the placement prop!`,
-  sticky: false,
   onShown: action('shown'),
   showTooltip: null,
 };
@@ -59,11 +58,6 @@ export const argTypesData = {
     control: {
       type: 'select',
     },
-    table: {
-      defaultValue: {
-        summary: 'false',
-      },
-    },
   },
 
   appendTo: {
@@ -91,12 +85,15 @@ export const argTypesData = {
   },
 
   transition: {
-    options: ['', 'fade', 'pop', 'shake'],
-    control: {
-      type: 'select',
+    type: 'boolean',
+  },
+
+  // Events
+  showTooltip: {
+    table: {
+      disable: true,
     },
   },
-  // Events
   onShown: {
     table: {
       disable: true,

@@ -615,12 +615,12 @@ importers:
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
-      emoji-regex:
-        specifier: 10.3.0
-        version: 10.3.0
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      regex-combined-emojis:
+        specifier: 1.6.0
+        version: 1.6.0
       tippy.js:
         specifier: 6.3.7
         version: 6.3.7
@@ -841,12 +841,12 @@ importers:
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
-      emoji-regex:
-        specifier: 10.3.0
-        version: 10.3.0
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      regex-combined-emojis:
+        specifier: 1.6.0
+        version: 1.6.0
       tippy.js:
         specifier: 6.3.7
         version: 6.3.7
@@ -13163,6 +13163,9 @@ packages:
   regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
 
+  regex-combined-emojis@1.6.0:
+    resolution: {integrity: sha512-pkQZHqM8M00hN0Md5e6Fag5mjxseDyjzB2gXmawdX0aoZzx5I9on/Eg77di1+ahPcPrCXkvT7Br5eJUp+BaeoA==}
+
   regex-not@1.0.2:
     resolution: {integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==}
     engines: {node: '>=0.10.0'}
@@ -15227,8 +15230,8 @@ packages:
   vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
 
-  vue-component-type-helpers@2.0.16:
-    resolution: {integrity: sha512-qisL/iAfdO++7w+SsfYQJVPj6QKvxp4i1MMxvsNO41z/8zu3KuAw9LkhKUfP/kcOWGDxESp+pQObWppXusejCA==}
+  vue-component-type-helpers@2.0.19:
+    resolution: {integrity: sha512-cN3f1aTxxKo4lzNeQAkVopswuImUrb5Iurll9Gaw5cqpnbTAxtEMM1mgi6ou4X79OCyqYv1U1mzBHJkzmiK82w==}
 
   vue-demi@0.14.7:
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
@@ -20079,7 +20082,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.8(typescript@5.3.3)
-      vue-component-type-helpers: 2.0.16
+      vue-component-type-helpers: 2.0.19
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -31160,6 +31163,8 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.23.2
 
+  regex-combined-emojis@1.6.0: {}
+
   regex-not@1.0.2:
     dependencies:
       extend-shallow: 3.0.2
@@ -33691,7 +33696,7 @@ snapshots:
 
   vue-component-type-helpers@1.8.24: {}
 
-  vue-component-type-helpers@2.0.16: {}
+  vue-component-type-helpers@2.0.19: {}
 
   vue-demi@0.14.7(vue@3.4.15(typescript@5.3.3)):
     dependencies:

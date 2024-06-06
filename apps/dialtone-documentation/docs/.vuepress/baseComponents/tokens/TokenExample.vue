@@ -1,23 +1,29 @@
 <template>
   <div
     v-if="category === 'color'"
-    class="d-bar-circle d-w42 d-h42"
+    class="d-bar4 d-w128 d-h32 d-d-flex d-jc-center d-ai-center colorRectangle"
     :style="getColorStyle"
-  />
-  <p
-    v-if="category === 'typography'"
-    :style="getTypographyStyle"
   >
-    Aa
-  </p>
+    <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
+      Aa
+    </div>
+  </div>
+  <div
+    v-if="category === 'typography'"
+    class="d-w128 d-h32 d-d-flex d-jc-center d-ai-center"
+  >
+    <div :style="getTypographyStyle">
+      Aa
+    </div>
+  </div>
   <div
     v-if="category === 'shadow'"
-    class="d-bar2 d-w42 d-h42"
+    class="d-bar4 d-w128 d-h32"
     :style="getShadowStyle"
   />
   <div
     v-if="category === 'size'"
-    class="rectangle"
+    class="sizeRectangle"
     :style="getSizeStyle"
   />
   <div v-if="category === 'space'" class="space">
@@ -25,7 +31,7 @@
       A
     </div>
     <div
-      class="rectangle"
+      class="spaceRectangle"
       :style="getSizeStyle"
     />
     <div
@@ -57,7 +63,7 @@ const isFont = (name, key) => name.includes(`--dt-font-${key}`);
 const getRectSizeStyle = (value) => {
   if (value.endsWith('%')) return { width: value };
   const size = parseFloat(value.replace('rem', ''));
-  if (size < 12.8 && size >= 0) return { width: value };
+  if (size < 12.8 && size > -12.8) return { width: `${Math.abs(size)}rem` };
   return null;
 };
 
@@ -77,21 +83,55 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  theme: {
+    type: String,
+    required: true,
+  },
+});
+
+const isForeground = computed(() => {
+  return props.name.includes('foreground');
+});
+
+const isLink = computed(() => {
+  return props.name.includes('link');
 });
 
 const getColorStyle = computed(() => {
-  const property = props.name.split('--dt-')[1]?.split('-')[0];
-  switch (property) {
-    case 'color':
-    case 'theme':
-      return { background: props.value };
-
-    case 'opacity':
-      return { background: `rgba(0, 0, 0, ${props.value})` };
-
-    default:
-      return null;
+  if (props.name.includes('opacity')) {
+    return { background: `rgba(0, 0, 0, ${props.value})` };
   }
+  if (props.name.includes('border')) return getBorderStyle();
+  if (isForeground.value || isLink.value) {
+    return { backgroundColor: foregroundBackgroundColor.value, color: props.value };
+  }
+  return { background: props.value };
+});
+
+const getBorderStyle = () => {
+  if (props.name.includes('border-ai')) {
+    return {
+      background: `linear-gradient(var(--dt-color-neutral-white), var(--dt-color-neutral-white)) padding-box,
+      ${props.value} border-box`,
+      borderWidth: 'var(--dt-size-border-200)',
+      borderColor: 'transparent',
+    };
+  }
+  return { border: `var(--dt-size-200) solid ${props.value}` };
+};
+
+const foregroundBackgroundColor = computed(() => {
+  if (props.theme === 'light') {
+    if (props.name.includes('inverted')) {
+      return 'var(--dt-color-neutral-black)';
+    }
+    return 'var(--dt-color-neutral-white)';
+  }
+  if (props.name.includes('inverted')) {
+    return 'var(--dt-color-neutral-white)';
+  }
+  return 'var(--dt-color-neutral-black)';
 });
 
 const getTypographyStyle = computed(() => {
@@ -115,11 +155,14 @@ const getShadowStyle = computed(() => {
 
 const getSizeStyle = computed(() => {
   if (props.name.includes('radius')) {
-    return { width: 'var(--dt-size-625)', borderRadius: props.value };
+    if (props.name.includes('circle')) {
+      return { width: 'var(--dt-size-600)', borderRadius: props.value };
+    }
+    return { width: 'var(--dt-size-100-percent)', borderRadius: props.value };
   }
   if (props.name.includes('border')) {
     return {
-      width: 'var(--dt-size-625)',
+      width: 'var(--dt-size-100-percent)',
       backgroundColor: 'var(--dt-color-neutral-transparent)',
       border: `${props.value} solid var(--dt-color-border-brand)`,
     };
@@ -130,7 +173,7 @@ const getSizeStyle = computed(() => {
 const displaySpaceReference = computed(() => {
   if (props.value.endsWith('%')) return true;
   const value = parseFloat(props.value.replace('rem', ''));
-  return (value < 12.8 && value >= 0);
+  return (value < 12.8 && value > -12.8);
 });
 
 const getSpaceAfterStyle = computed(() => {
@@ -141,24 +184,50 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 </script>
 
 <style scoped lang="less">
-.rectangle {
-  height: var(--dt-size-625);
-  background-color: var(--dt-color-brand-purple);
+.colorRectangle {
+  border: var(--dt-size-border-100) dashed var(--dt-color-border-subtle)
+}
+
+.link-example {
+  border-bottom: var(--dt-size-200) solid;
+  line-height: initial;
+}
+
+.sizeRectangle {
+  height: var(--dt-size-600);
+  background-color: var(--dt-color-purple-400);
+  border-radius: var(--dt-size-radius-300);
   width: 0;
 }
+
+.spaceRectangle {
+  height: var(--dt-size-600);
+  background-color: var(--dt-color-purple-400);
+  width: 0;
+}
+
 .space {
   display: flex;
   position: relative;
 }
+
 .spaceReference {
-  height: var(--dt-size-625);
+  height: var(--dt-size-600);
   width: var(--dt-size-500);
-  background-color: var(--dt-color-black-200);
+  background-color: var(--dt-color-surface-moderate);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--dt-font-size-100);
-  color: var(--dt-color-black-500);
+  font: var(--dt-typography-body-sm);
+  color: var(--dt-color-foreground-muted);
+  padding: var(--dt-space-400) var(--dt-space-200);
+  border-top-right-radius: var(--dt-size-radius-300);
+  border-bottom-right-radius: var(--dt-size-radius-300);
+  &.spaceBefore {
+    border-radius: var(--dt-size-radius-0);
+    border-top-left-radius: var(--dt-size-radius-300);
+    border-bottom-left-radius: var(--dt-size-radius-300);
+  }
 }
 
 .spaceReference.percentage {

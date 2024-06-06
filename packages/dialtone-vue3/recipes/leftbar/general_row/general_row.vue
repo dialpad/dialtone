@@ -401,10 +401,13 @@ export default {
     shouldApplyCustomStyleForCountBadge () {
       return this.hasUnreadCount && this.hasUnreadMentionCount;
     },
+<<<<<<< HEAD
 
     shouldApplyCustomStyleForMentionOnly () {
       return !this.hasUnreadCount && this.hasUnreadMentionCount;
     },
+=======
+>>>>>>> staging
   },
 
   watch: {
