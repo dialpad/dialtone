@@ -29,30 +29,6 @@ The class `d-fvn-ordinal` forces the use of special glyphs for ordinal markers, 
 <p class="d-fs-300 d-fvn-ordinal">...</p>
 ```
 
-## Slashed zero
-
-Use `d-fvn-slashed-zero` to add a slash to zeros. This is useful when a clear distinction between O and 0 is needed.
-
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-purple-400 d-fvn-slashed-zero d-ff-mono">1234567890</p>
-</code-well-header>
-
-```html
-<p class="d-fs-300 d-ff-mono d-fvn-slashed-zero">...</p>
-```
-
-## Lining-nums
-
-The class `d-fvn-lining` control the figures used for numbers. Activates the set of figures where numbers are all lying on the baseline.
-
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-purple-400 d-fvn-lining">1234567890</p>
-</code-well-header>
-
-```html
-<p class="d-fs-300 d-fvn-lining">...</p>
-```
-
 ## Proportional-nums
 
 Use `d-fvn-proportional` to set different sizes for each number.
@@ -137,18 +113,6 @@ Use `d-fvn-diagonal` to display numerator and denominator smaller and separated 
 
 ```html
 <p class="d-fs-300 d-fvn-diagonal">...</p>
-```
-
-## Stacked-fractions
-
-Use `d-fvn-stacked` to display numerator and denominator smaller and separated by a horizontal line.
-
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-purple-400 d-fvn-stacked">1/2 3/4 5/6</p>
-</code-well-header>
-
-```html
-<p class="d-fs-300 d-fvn-stacked">...</p>
 ```
 
 ## Unset

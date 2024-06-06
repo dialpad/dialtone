@@ -588,14 +588,6 @@
       "output": "ordinal"
     },
     {
-      "class": "slashed-zero",
-      "output": "slashed-zero"
-    },
-    {
-      "class": "lining",
-      "output": "lining-nums"
-    },
-    {
       "class": "proportional",
       "output": "proportional-nums"
     },
@@ -606,10 +598,6 @@
     {
       "class": "diagonal",
       "output": "diagonal-fractions"
-    },
-    {
-      "class": "stacked",
-      "output": "stacked-fractions"
     },
     {
       "class": "unset",
