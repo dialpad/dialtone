@@ -30,6 +30,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  max-width: var(--dt-size-100-percent);
   padding: var(--dt-space-300) var(--dt-space-400);
   color: var(--chip-color-text);
   font-size: var(--dt-font-size-200);
@@ -38,10 +39,9 @@
   background-color: var(--chip-color-background);
   border: none;
   border-radius: var(--chip-border-radius);
-  transition-timing-function: var(--ttf-in-out);
+  transition-timing-function: var(--ttf-out-quint);
   transition-duration: var(--td200);
   transition-property: background-color;
-  max-width: var(--dt-size-100-percent);
 
   // Reserves space within the chip for the close button, since the close button is
   // not nested within the chip. Only apply if close button exists (more than one child).
@@ -61,13 +61,13 @@
     cursor: pointer;
 
     &:hover {
-      --chip-color-background: var(--dt-color-black-300);
+      --chip-color-background: var(--dt-color-surface-bold-opaque);
 
       text-decoration: none;
     }
 
     &:active {
-      --chip-color-background: var(--dt-color-black-400);
+      --chip-color-background: var(--dt-color-surface-moderate-opaque);
     }
 
     &:focus-visible {
