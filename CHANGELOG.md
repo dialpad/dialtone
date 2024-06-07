@@ -1,3 +1,22 @@
+# [9.44.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.43.0...dialtone/v9.44.0) (2024-06-07)
+
+
+### Bug Fixes
+
+* **Icon:** DLT-1785 dialpad-ai-color-reversed 1px too big ([#349](https://github.com/dialpad/dialtone/issues/349)) ([55a1ca2](https://github.com/dialpad/dialtone/commit/55a1ca28f28b0efc130a3471423a6a8f03d3f9d4))
+* NO-JIRA change mention count badge color ([#354](https://github.com/dialpad/dialtone/issues/354)) ([7295cef](https://github.com/dialpad/dialtone/commit/7295cef90f2171cc05d5d8ee588541192f1ef16c))
+
+
+### Documentation
+
+* DLT-1695 add share filter functionality to tokens ([#337](https://github.com/dialpad/dialtone/issues/337)) ([098d322](https://github.com/dialpad/dialtone/commit/098d322a6cb53f2ab0d2d18984c801606746fa98))
+* **Tokens:** NO-JIRA add border example for border-ai ([#350](https://github.com/dialpad/dialtone/issues/350)) ([a9d90df](https://github.com/dialpad/dialtone/commit/a9d90dfd80e5623b19240ba0b5a22417c35973be))
+
+
+### Features
+
+* **Css Utility:** DLT-619 add font-variant-numeric utility ([#351](https://github.com/dialpad/dialtone/issues/351)) ([d02a6ae](https://github.com/dialpad/dialtone/commit/d02a6aeffb3839f5045c5c8d24ed2300194030a4))
+
 # [9.43.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.42.0...dialtone/v9.43.0) (2024-06-04)
 
 
