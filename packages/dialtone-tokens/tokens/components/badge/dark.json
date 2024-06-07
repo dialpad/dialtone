@@ -1,0 +1,42 @@
+{
+  "badge": {
+    "color": {
+      "background": {
+        "bulletin-subtle": {
+          "value": "{color.purple.400}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".6",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      },
+      "foreground": {
+        "bulletin-subtle": {
+          "value": "{color.foreground.primary}",
+          "type": "color"
+        }
+      },
+      "border": {
+        "bulletin-subtle": {
+          "value": "{color.purple.400}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".4",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

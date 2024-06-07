@@ -1249,7 +1249,11 @@
       "typography.headline.lg-soft": "S:be6ab2f45cfdb396d2b45f508d85e371fd8dc7c7,",
       "typography.headline.lg-soft-compact": "S:c48906d0bcb8002f7f927d02265ff08ae8a6ab4f,",
       "typography.headline.xl-compact": "S:7282c98bf7ca59ded3f3a616389cd60ff4fefe54,",
-      "typography.headline.xxl-compact": "S:469b7d5fbde59f70952c871bb3e2d60b5e7354ff,"
+      "typography.headline.xxl-compact": "S:469b7d5fbde59f70952c871bb3e2d60b5e7354ff,",
+      "badge.color.background.bulletin-subtle": "S:8e3eb135f8794fe637f8a5976e8cd734fe59de27,",
+      "badge.color.foreground.bulletin-subtle": "S:eca65ece40ceb2a65b393f0d5e207e533aeb6b3a,",
+      "badge.color.border.bulletin-subtle": "S:4d9da10ca0ac983573d06e53ec82a52d8ae9828d,",
+      "badge.color.border.default": "S:483e34d8dfd52676a36a7544a406eff463931833,"
     },
     "selectedTokenSets": {
       "base/dark": "enabled",
@@ -1263,7 +1267,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source"
+      "root": "source",
+      "components/badge/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
