@@ -343,7 +343,11 @@
       "typography.helper.md": "S:bd6d8bf50cf823d4f18c64d7db264d04299009ab,",
       "typography.helper.sm": "S:6dcf585780ee317be52afa4db35129aa7407ca79,",
       "typography.code.md": "S:b1e0a27050abaa49f6d79f6ff12391f95970c33f,",
-      "typography.code.sm": "S:6b0167223c738182dad01f5e271d3f1ed25ce608,"
+      "typography.code.sm": "S:6b0167223c738182dad01f5e271d3f1ed25ce608,",
+      "badge.color.background.bulletin-subtle": "S:e650cf4f07f00aaf67283b72b59a0afe60a1e5b4,",
+      "badge.color.foreground.bulletin-subtle": "S:8d9a5c94e0c27f7268f0d3e716679a03f8f2355e,",
+      "badge.color.border.default": "S:a3c79a6d4fdc38b4210fbd9bce3267204acf3dea,",
+      "badge.color.border.bulletin-subtle": "S:c390f0a63586ca48aac6566934330ee1847e2ca3,"
     },
     "selectedTokenSets": {
       "base/default": "enabled",
