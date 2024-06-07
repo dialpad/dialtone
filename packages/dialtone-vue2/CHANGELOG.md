@@ -1,3 +1,15 @@
+## [2.136.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.136.1...dialtone-vue2/v2.136.2) (2024-06-07)
+
+
+### Bug Fixes
+
+* NO-JIRA change mention count badge color ([#354](https://github.com/dialpad/dialtone/issues/354)) ([7295cef](https://github.com/dialpad/dialtone/commit/7295cef90f2171cc05d5d8ee588541192f1ef16c))
+
+
+### Documentation
+
+* DLT-1695 add share filter functionality to tokens ([#337](https://github.com/dialpad/dialtone/issues/337)) ([098d322](https://github.com/dialpad/dialtone/commit/098d322a6cb53f2ab0d2d18984c801606746fa98))
+
 ## [2.136.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.136.0...dialtone-vue2/v2.136.1) (2024-06-04)
 
 
