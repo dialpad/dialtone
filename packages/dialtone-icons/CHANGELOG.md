@@ -1,3 +1,10 @@
+## [4.17.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.17.0...dialtone-icons/v4.17.1) (2024-06-07)
+
+
+### Bug Fixes
+
+* **Icon:** DLT-1785 dialpad-ai-color-reversed 1px too big ([#349](https://github.com/dialpad/dialtone/issues/349)) ([55a1ca2](https://github.com/dialpad/dialtone/commit/55a1ca28f28b0efc130a3471423a6a8f03d3f9d4))
+
 # [4.17.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.16.3...dialtone-icons/v4.17.0) (2024-06-04)
 
 
