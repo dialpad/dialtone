@@ -1,3 +1,16 @@
+# [8.35.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.34.0...dialtone-css/v8.35.0) (2024-06-07)
+
+
+### Documentation
+
+* DLT-1399 add empty state section ([#282](https://github.com/dialpad/dialtone/issues/282)) ([053bd2b](https://github.com/dialpad/dialtone/commit/053bd2b6ef9b0f4a06b93eab9b8ac297aeb60171))
+* **Empty State:** NO-JIRA restructure and content refinement ([#347](https://github.com/dialpad/dialtone/issues/347)) ([7c087e7](https://github.com/dialpad/dialtone/commit/7c087e76e73a42db0551e3a07e7a62be1c0ac49f))
+
+
+### Features
+
+* **Css Utility:** DLT-619 add font-variant-numeric utility ([#351](https://github.com/dialpad/dialtone/issues/351)) ([d02a6ae](https://github.com/dialpad/dialtone/commit/d02a6aeffb3839f5045c5c8d24ed2300194030a4))
+
 # [8.34.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.33.0...dialtone-css/v8.34.0) (2024-05-31)
 
 
