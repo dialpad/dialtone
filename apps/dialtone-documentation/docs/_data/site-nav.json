@@ -57,17 +57,12 @@
           "planned": true
         },
         {
-          "text": "Content",
-          "children": [
-            {
-              "text": "Overview",
-              "link": "/guides/content/"
-            },
-            {
-              "text": "Grammar and mechanics",
-              "link": "/guides/content/grammar-and-mechanics/"
-            }
-          ]
+          "text": "OLD Writing Guidelines",
+          "link": "guides/content"
+        },
+        {
+          "text": "Grammar and mechanics",
+          "link": "/guides/content/grammar-and-mechanics/"
         },
         {
           "text": "Accessibility",
