@@ -430,6 +430,10 @@
           "link": "/utilities/typography/font-style.html"
         },
         {
+          "text": "Font variant numeric",
+          "link": "/utilities/typography/font-variant-numeric.html"
+        },
+        {
           "text": "Font weight",
           "link": "/utilities/typography/font-weight.html"
         },
@@ -560,6 +564,10 @@
         {
           "text": "Emoji text wrapper",
           "link": "/components/emoji-text-wrapper.html"
+        },
+        {
+          "text": "Empty state",
+          "link": "/components/empty-state.html"
         },
         {
           "text": "Icon",

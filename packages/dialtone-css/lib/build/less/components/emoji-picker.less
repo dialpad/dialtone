@@ -35,11 +35,11 @@
   }
 
   &__alignment {
+    // !important to default value to override popover dialog box-sizing: border-box style
+    box-sizing: content-box !important;
     width: auto;
     max-width: calc(var(--dt-size-925) + var(--dt-size-400));
     margin: 0 var(--dt-space-500);
-    // !important to default value to override popover dialog box-sizing: border-box style
-    box-sizing: content-box !important;
   }
 
   &--footer {
@@ -217,7 +217,7 @@
 
   &__data {
     display: flex;
-    gap: var(--dt-space-100);
+    gap: var(--dt-space-400);
     align-items: center;
     width: 100%;
     max-width: calc(var(--dt-size-905) + var(--dt-size-550) + var(--dt-size-200));

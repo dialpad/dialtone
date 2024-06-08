@@ -40,7 +40,10 @@ module.exports = {
       message: `chore(release): NO-JIRA ${name}` +
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
-    '@semantic-release/github',
+    ['@semantic-release/github', {
+      successComment: false,
+      failTitle: false,
+    }],
   ],
   branches: [
     'staging',

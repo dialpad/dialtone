@@ -16,6 +16,7 @@
       <base-icon
         v-for="(icon, index) in icons"
         :key="index"
+        :illustration="illustration"
         :desc="icon.desc"
         :code="icon.code"
         :file="icon.file"
@@ -60,6 +61,11 @@ export default {
     title: {
       type: String,
       default: null,
+    },
+
+    illustration: {
+      type: Boolean,
+      default: false,
     },
   },
 

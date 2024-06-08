@@ -577,5 +577,31 @@
       "lh-class": "16"
     }
   ],
-  "opacity": [0, 10, 25, 50, 75, 90, 95, 99]
+  "opacity": [0, 10, 25, 50, 75, 90, 95, 99],
+  "fontVariantNumeric": [
+    {
+      "class": "normal",
+      "output": "normal"
+    },
+    {
+      "class": "ordinal",
+      "output": "ordinal"
+    },
+    {
+      "class": "proportional",
+      "output": "proportional-nums"
+    },
+    {
+      "class": "tabular",
+      "output": "tabular-nums"
+    },
+    {
+      "class": "diagonal",
+      "output": "diagonal-fractions"
+    },
+    {
+      "class": "unset",
+      "output": "unset"
+    }
+  ]
 }

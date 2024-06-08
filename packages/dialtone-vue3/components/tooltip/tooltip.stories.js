@@ -13,7 +13,6 @@ export const argsData = {
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. You can set the position of the tooltip using the placement prop!`,
-  sticky: false,
   onShown: action('shown'),
   showTooltip: null,
 };
@@ -58,11 +57,6 @@ export const argTypesData = {
     options: TOOLTIP_STICKY_VALUES,
     control: {
       type: 'select',
-    },
-    table: {
-      defaultValue: {
-        summary: 'false',
-      },
     },
   },
 

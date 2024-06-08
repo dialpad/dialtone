@@ -1,36 +1,53 @@
 <template>
-  <div :class="emptyStateClasses">
+  <dt-stack
+    :class="emptyStateClasses"
+  >
     <template v-if="showIllustration">
-      <dt-icon
+      <span
         v-if="showIcon"
-        :name="iconName"
-        size="800"
-      />
+        class="d-empty-state__icon"
+      >
+        <dt-icon
+          :name="iconName"
+          size="800"
+        />
+      </span>
 
-      <dt-illustration
+      <span
         v-if="showIllustrationComponent"
-        :name="illustrationName"
-      />
+        class="d-empty-state__illustration"
+      >
+        <dt-illustration
+          :name="illustrationName"
+        />
+      </span>
     </template>
 
-    <div :class="emptyStateContentSpacing">
-      <h1>
+    <dt-stack
+      gap="450"
+      :class="['d-empty-state__content', contentClass]"
+    >
+      <div :class="['d-empty-state__header-text', headlineClass]">
         {{ headerText }}
-      </h1>
+      </div>
 
-      <p v-if="bodyText">
+      <p
+        v-if="bodyText"
+        :class="['d-empty-state__body-text', bodyClass]"
+      >
         {{ bodyText }}
       </p>
-    </div>
+    </dt-stack>
 
     <slot name="body" />
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import { EMPTY_STATE_SIZE_MODIFIERS } from './empty_state_constants.js';
 import { DtIllustration, ILLUSTRATION_NAMES } from '@/components/illustration';
 import { DtIcon, ICON_NAMES } from '@/components/icon';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtEmptyState',
@@ -38,6 +55,7 @@ export default {
   components: {
     DtIllustration,
     DtIcon,
+    DtStack,
   },
 
   props: {
@@ -136,16 +154,42 @@ export default {
       return ['d-empty-state', this.sizeClass];
     },
 
-    emptyStateContentSpacing () {
+    contentClass () {
       switch (this.size) {
         case 'sm':
-          return 'd-p16';
+          return 'd-empty-state__content--sm';
         case 'md':
-          return 'd-p32';
+          return 'd-empty-state__content--md';
         case 'lg':
-          return 'd-p32';
+          return 'd-empty-state__content--lg';
         default:
-          return 'd-p32';
+          return 'd-empty-state__content--lg';
+      }
+    },
+
+    headlineClass () {
+      switch (this.size) {
+        case 'sm':
+          return 'd-headline--md';
+        case 'md':
+          return 'd-headline--xl';
+        case 'lg':
+          return 'd-headline--xxl';
+        default:
+          return 'd-headline--xxl';
+      }
+    },
+
+    bodyClass () {
+      switch (this.size) {
+        case 'sm':
+          return 'd-body--sm';
+        case 'md':
+          return 'd-body--sm';
+        case 'lg':
+          return 'd-body--md';
+        default:
+          return 'd-body--md';
       }
     },
   },

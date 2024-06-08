@@ -1,3 +1,21 @@
+## [4.17.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.17.0...dialtone-icons/v4.17.1) (2024-06-07)
+
+
+### Bug Fixes
+
+* **Icon:** DLT-1785 dialpad-ai-color-reversed 1px too big ([#349](https://github.com/dialpad/dialtone/issues/349)) ([55a1ca2](https://github.com/dialpad/dialtone/commit/55a1ca28f28b0efc130a3471423a6a8f03d3f9d4))
+
+# [4.17.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.16.3...dialtone-icons/v4.17.0) (2024-06-04)
+
+
+### Features
+
+* DLT-1762 dialpad logo updated ([#328](https://github.com/dialpad/dialtone/issues/328)) ([492ba32](https://github.com/dialpad/dialtone/commit/492ba32863b29bc872701e9bc3ce7def6fa61362))
+
+## [4.16.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.16.2...dialtone-icons/v4.16.3) (2024-05-31)
+
+## [4.16.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.16.1...dialtone-icons/v4.16.2) (2024-05-30)
+
 ## [4.16.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.16.0...dialtone-icons/v4.16.1) (2024-05-22)
 
 

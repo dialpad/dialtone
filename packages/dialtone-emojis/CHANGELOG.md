@@ -1,3 +1,12 @@
+## [1.0.7](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.6...dialtone-emojis/v1.0.7) (2024-05-31)
+
+## [1.0.6](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.5...dialtone-emojis/v1.0.6) (2024-05-30)
+
+
+### Documentation
+
+* NO-JIRA update badges ([#334](https://github.com/dialpad/dialtone/issues/334)) ([1f6e61e](https://github.com/dialpad/dialtone/commit/1f6e61ec0a51aa1126036e9b3baedc89d2b7f562))
+
 ## [1.0.5](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.4...dialtone-emojis/v1.0.5) (2024-05-15)
 
 ## [1.0.4](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.3...dialtone-emojis/v1.0.4) (2024-05-08)
