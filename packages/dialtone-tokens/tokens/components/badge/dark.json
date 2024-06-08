@@ -19,7 +19,16 @@
       "foreground": {
         "bulletin-subtle": {
           "value": "{color.foreground.primary}",
-          "type": "color"
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": "1",
+                "space": "hsl"
+              }
+            }
+          }
         }
       },
       "border": {
@@ -30,7 +39,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".4",
+                "value": ".6",
                 "space": "hsl"
               }
             }
