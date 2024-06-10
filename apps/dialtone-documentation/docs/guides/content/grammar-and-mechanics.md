@@ -440,8 +440,8 @@ When using relative timestamps, use these formats:
   <thead>
     <tr>
       <th scope="col">Duration</th>
-      <th scope="col">Format</th>
-      <th scope="col">Example</th>
+      <th scope="col" style="width: calc(100% / 3);">Format</th>
+      <th scope="col" style="width: calc(100% / 3);">Example</th>
     </tr>
   </thead>
   <tbody>
@@ -494,8 +494,8 @@ When using absolute timestamps, use these formats:
   <thead>
     <tr>
       <th scope="col">Duration</th>
-      <th scope="col">Format</th>
-      <th scope="col">Example</th>
+      <th scope="col" style="width: calc(100% / 3);">Format</th>
+      <th scope="col" style="width: calc(100% / 3);">Example</th>
     </tr>
   </thead>
   <tbody>
@@ -525,8 +525,8 @@ For calls, meetings, or any other session-based interaction, we show the duratio
   <thead>
     <tr>
       <th scope="col">Available Space</th>
-      <th scope="col">Format</th>
-      <th scope="col">Example</th>
+      <th scope="col" style="width: calc(100% / 3);">Format</th>
+      <th scope="col" style="width: calc(100% / 3);">Example</th>
     </tr>
   </thead>
   <tbody>
@@ -583,14 +583,14 @@ When adding a duration after a time range, wrap the duration amount in paranthes
 
 * 4:01 pm–5:02 pm <span class="d-fc-muted">(1 hr 2 min)</span>
 * 11:27 am–11:28 am <span class="d-fc-muted">(1 min 30 sec)</span>
-* Monday, June 19 11:00 am–Tuesday, June 20 12:01 pm <span class="d-fc-muted">(1 day 1 hour 1 min)</span>
+* Monday 11:00 am–Tuesday 12:01 pm <span class="d-fc-muted">(1 day 1 hour 1 min)</span>
 
 </template>
 <template #dont>
 
 * 4:01 pm–5:02 pm (62 min)
 * 11:27 am–11:28 am for 90 sec
-* Monday, June 19 11:00 am–Tuesday, June 20 12:01 pm, 25 hr 1 min
+* Monday 11:00 am–Tuesday 12:01 pm, 25 hr 1 min
 
 </template>
 </dialtone-usage>
@@ -944,3 +944,319 @@ Always use the ellipsis character, not three periods.
 Consider space constraints in the interface when deciding to use truncation. Identify the portion of the text strings users need the most. It’s usually the beginning or the end. If both are important, consider truncating the middle of the string.
 
 A button with an ellipsis icon (not the same as the text) is used to expand secondary actions. It’s typically used on table rows or with horizontal action sets when space is limited.
+
+### En-dashes and em-dashes
+
+Use an en dash with no spaces in between (–) for a fixed range of numbers.
+
+<dialtone-usage>
+<template #do>
+
+* 2020–2024
+
+</template>
+<template #dont>
+
+* 2020 – 2024
+
+</template>
+</dialtone-usage>
+
+Use an em dash only if you can’t make your message clearer by splitting it into two sentences. Use an em dash without a space on either side (—).
+
+<dialtone-usage>
+<template #do>
+
+* Customize your chatbot theme’s colors, typography, and loading screen—all in one place.
+
+</template>
+<template #dont>
+
+* Customize your chatbot theme—colors, typography, and loading screen—all in one place.
+
+</template>
+</dialtone-usage>
+
+On Mac the keyboard shortcuts for these punctuation marks are:
+
+* En dash: <dt-keyboard-shortcut shortcut="Option+-"/>
+* Em dash: <dt-keyboard-shortcut shortcut="Shift+Option+-"/>
+
+### Exclamation marks
+
+Avoid using exclamation marks. Most of our copy is rarely that exciting. If you absolutely have to, limit yourself to one exclamation mark to a page.
+
+<dialtone-usage>
+<template #do>
+
+* Your chatbot is ready to deploy!
+
+</template>
+<template #dont>
+
+* You’ve updated your contact center title!
+
+</template>
+</dialtone-usage>
+
+### Hyphens
+
+Use hyphens to form compound modifiers, which are two words that combine to modify or describe the noun that follows.
+
+<dialtone-usage>
+<template #do>
+
+* Start your free, no-risk, 14-day trial today.
+* Purchase a toll-free number.
+* Log into your account.
+
+</template>
+<template #dont>
+
+* Start your free, no risk, 14 day trial.
+* Purchase a toll free number.
+* Log-in to your account
+
+</template>
+</dialtone-usage>
+
+Join prefixes and suffixes only if there are two vowels beside each other. Never use hyphens in the word "email."
+
+<dialtone-usage>
+<template #do>
+
+* Re-open
+* Resend
+* Sign up
+* Log in
+
+</template>
+<template #dont>
+
+* Reopen
+* Re-send
+* Sign-up
+* Login
+
+</template>
+</dialtone-usage>
+
+### Periods
+
+Periods can often end up in places they shouldn’t or be omitted incorrectly. In general, don’t use periods in interface copy unless it’s a full sentence description.
+
+Use periods for:
+
+* Complete sentences
+* Body text, descriptions, and subtitles
+* Help text under input fields
+
+Don't use periods for:
+
+* Sentence fragments
+* Top-level headings or page titles
+* Buttons
+* Notifications
+* Toast messages
+* Placeholder copy
+* Navigation menu items
+* Hover/tooltip text
+* Radio button and checkbox text
+
+<dialtone-usage>
+<template #do>
+
+* **Placeholder example:** Search Dialpad
+* **Description example:** Mask your outbound phone number while keeping the call associated with your account. If you are sending a message, your number will not be masked.
+* **Button example:** Create Scorecard
+
+</template>
+<template #dont>
+
+* **Placeholder example:** Search…
+* **Description example:** Mask your outbound phone number while keeping the call associated with your account
+* **Button example:** Create Scorecard.
+
+</template>
+</dialtone-usage>
+
+You may use periods in bulleted, numbered, or link lists when a list item has two or more full sentences.
+
+### Question marks
+
+Avoid using question marks wherever possible. Reword sentences into affirmative statements wherever you can, but there are exceptions.
+
+Use a question mark if you don’t know the result of a question:
+
+* “Did you forget your password?”
+* “Are you porting Canadian, Hawaiian, toll-free, or international numbers?”
+
+Don't use question marks if:
+
+* It's the only option available (e.g. "Reset password")
+* It's an on/off option (e.g. show/hide input)
+
+<dialtone-usage>
+<template #do>
+
+* Forgot?
+
+</template>
+<template #dont>
+
+* Reset password?
+
+</template>
+</dialtone-usage>
+
+### Quotation marks
+
+Use quotation marks to define words (“agents”) or to quote text. Use quotation marks to indicate input that the user has provided such as a title or file name. Use this indication only when the input appears in running text.
+
+<dialtone-usage>
+<template #do>
+
+* Are you sure you want to delete “Leap Year” holiday?
+* “css-pain.gif” failed to upload
+
+</template>
+<template #dont>
+
+* Are you sure you want to delete Leap Year holiday?
+* css-pain.gif failed to upload
+
+</template>
+</dialtone-usage>
+
+Place commas and periods inside quotation marks. When working with literal strings like typed commands or user inputs, place the punctuation outside quotation marks.
+
+When referring to specific UI areas, wrap the title in quotation marks.
+
+<dialtone-usage>
+<template #do>
+
+* Avoid general words like “all”, “every”, or “most.”
+* To remove this contact center, type “CONTACT CENTER”.
+* Select “Advanced settings”
+
+</template>
+<template #dont>
+
+* Avoid general words like “all”, “every”, or “most”.
+* To remove this contact center, type “CONTACT CENTER.”
+* Select Advanced Settings
+
+</template>
+</dialtone-usage>
+
+### Semicolons
+
+Avoid semicolons if possible. If you need to use them, use them only to connect two closely related ideas, as long as they are both independent clauses (full sentences that could stand on their own). Also you can use semicolons to replace a comma or the word “and” between two closely related ideas.
+
+<dialtone-usage>
+<template #do>
+
+The design team continues to grow; we’re improving daily.
+
+</template>
+<template #dont>
+
+The design team continues to grow; the rain is starting.
+
+</template>
+</dialtone-usage>
+
+## Spelling and formatting
+
+### American spelling
+
+Use American spelling for all external-facing Dialpad content. When in doubt, review the [Merriam-Webster dictionary](https://www.merriam-webster.com/) for the preferred word spelling.
+
+<dialtone-usage>
+<template #do>
+
+* Color
+* Center
+* Canceled
+
+</template>
+<template #dont>
+
+* Colour
+* Centre
+* Cancelled
+
+</template>
+</dialtone-usage>
+
+It’s easy to miss Canadian spelling. Switch your computer’s language settings to American English and turn spell check on. It will highlight words you might miss.
+
+### Bold
+
+When in doubt, don’t bold copy. We use bold sparingly and only when strong emphasis is required. Don’t use bold to artificially create a heading or emphasize proper nouns, user input, or checkbox titles.
+
+<dialtone-usage>
+<template #do>
+
+We’ve sent a confirmation email to [user@domain.com](mailto:user@domain.com).
+
+</template>
+<template #dont>
+
+We’ve sent a confirmation email to **[user@domain.com](mailto:user@domain.com)**.
+
+</template>
+</dialtone-usage>
+
+## You, we, and other personal pronouns
+
+### Addressing users
+
+Always refer to users as “you.” Don’t speak for users with phrases that use “I” or “my.”
+
+<dialtone-usage>
+<template #do>
+
+* Change your profile picture
+
+</template>
+<template #dont>
+
+* Change my profile picture
+
+</template>
+</dialtone-usage>
+
+In some cases, such as when having users consent or grant permissions, you should refer to users as “I.”
+
+<dialtone-usage>
+<template #do>
+
+* I agree to the terms and conditions.
+
+</template>
+<template #dont>
+
+* You agree to the terms and conditions.
+
+</template>
+</dialtone-usage>
+
+### Referring to Dialpad
+
+Always refer to Dialpad as “we,” but avoid inserting Dialpad into content as much as possible (except when a human is taking an action, such as reviewing a request).
+
+<dialtone-usage>
+<template #do>
+
+* Add your team members
+* Integrate with the tools you use every day
+
+</template>
+<template #dont>
+
+* Add your team members to Dialpad
+* We offer integrations to the tools you use every day
+
+</template>
+</dialtone-usage>
