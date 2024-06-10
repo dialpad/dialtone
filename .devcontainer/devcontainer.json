@@ -18,7 +18,7 @@
 
   "updateContentCommand": "pnpm install",
 
-  "postCreateCommand": "pnpm setup && pnpm install -g nx",
+  "postCreateCommand": "pnpm install -g nx",
 
   // Configure tool-specific properties.
   "customizations": {
