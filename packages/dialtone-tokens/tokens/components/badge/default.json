@@ -26,6 +26,19 @@
           "value": "{color.brand.purple}",
           "type": "color"
         },
+        "bulletin-subtle": {
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
         "ai": {
           "value": "{color.gradient.magenta-purple}",
           "type": "color"
@@ -39,6 +52,38 @@
         "bulletin": {
           "value": "{color.neutral.white}",
           "type": "color"
+        },
+        "bulletin-subtle": {
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.6",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      },
+      "border": {
+        "default": {
+          "value": "{color.border.subtle}",
+          "type": "color"
+        },
+        "bulletin-subtle": {
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
         }
       }
     }
