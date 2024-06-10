@@ -155,3 +155,30 @@ manually specify which position it will move to in what order you can do so via 
     </template>
 </dt-tooltip>
 ```
+
+### Custom theme
+
+If you want to style the tooltip background in a different color you will have to set the theme and style it yourself
+in the css using that theme, or else the tooltip arrow will not be colored.
+
+```html
+<template>
+    <dt-tooltip theme="purple" message="Message">
+        <template #anchor>
+            <dt-button importance="outlined" class="d-w128">
+                top
+            </dt-button>
+        </template>
+    </dt-tooltip>
+</template>
+
+<style>
+.tippy-box[data-theme~='purple'] > .tippy-svg-arrow {
+  fill: var(--dt-color-purple-200);
+}
+.tippy-box[data-theme~='purple'] .d-tooltip {
+  background-color: var(--dt-color-purple-200);
+  color: var(--dt-color-foreground-primary);
+}
+</style>
+```
