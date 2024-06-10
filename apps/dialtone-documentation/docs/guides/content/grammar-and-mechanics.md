@@ -11,24 +11,18 @@ To write in an active voice, you place the subject at the start of a sentence. I
 
 > Subject (Person / Thing) + Verb (the action) + Object (What receives the action)
 
-<section class="d-d-grid d-gg16 d-g-cols2">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <p>Calls will be sent to voicemail.</p>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <p>Missed calls were sent to voicemail.</p>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+Calls will be sent to voicemail.
+
+</template>
+<template #dont>
+
+Missed calls were sent to voicemail.
+
+</template>
+</dialtone-usage>
 
 ## Passive voice
 
@@ -69,40 +63,30 @@ Contractions are abbreviated words (e.g., can’t”, “aren’t”, and “you
 * They’re no longer regularly used in modern speech
 * They’re regional (i.e., “n’at”, “y’all”, “I’mma”)
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">You’ll receive a confirmation email shortly.</li>
-        <li class="d-docsite--list-element">You’re all set to go!</li>
-        <li class="d-docsite--list-element">Your playbook doesn’t have any topics.</li>
-        <li class="d-docsite--list-element">An error occurred and your updates couldn’t be saved.</li>
-        <li class="d-docsite--list-element">Your number hasn’t finished porting yet.</li>
-        <li class="d-docsite--list-element">You haven’t connected your account.</li>
-        <li class="d-docsite--list-element">You’ve reached your department limit.</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">This action is possible if you’d update the application.</li>
-        <li class="d-docsite--list-element">There’re 100 people in this meeting.</li>
-        <li class="d-docsite--list-element">There are 10 people who’re in your room.</li>
-        <li class="d-docsite--list-element">It’d be a good idea to lock this call.</li>
-        <li class="d-docsite--list-element">Your number hasn’t finished porting yet.</li>
-        <li class="d-docsite--list-element">You gotta set up recurring credit payments to avoid platform disruption.</li>
-        <li class="d-docsite--list-element">That’ll be everything you need to do.</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* You’ll receive a confirmation email shortly.
+* You’re all set to go!
+* Your playbook doesn’t have any topics.
+* An error occurred and your updates couldn’t be saved.
+* Your number hasn’t finished porting yet.
+* You haven’t connected your account.
+* You’ve reached your department limit.
+
+</template>
+<template #dont>
+
+* This action is possible if you’d update the application.
+* There’re 100 people in this meeting.
+* There are 10 people who’re in your room.
+* It’d be a good idea to lock this call.
+* Your number hasn’t finished porting yet.
+* You gotta set up recurring credit payments to avoid platform disruption.
+* That’ll be everything you need to do.
+
+</template>
+</dialtone-usage>
 
 ## Plain language
 
@@ -110,30 +94,20 @@ When writing, communicate the way our customers do. Avoid using jargon or techni
 
 Sentences should have a single focus. Remember that we aim for an 8th grade reading level or lower in all communication.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Secure your account with additional security.</li>
-        <li class="d-docsite--list-element">Choose the language for your office phone number, voicemail, and voice menus.</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Enable multi-factor authentication to ensure your account isn’t compromised.</li>
-        <li class="d-docsite--list-element">Choose the default main line number, IVR, and voicemail language.</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Secure your account with additional security.
+* Choose the language for your office phone number, voicemail, and voice menus.
+
+</template>
+<template #dont>
+
+* Enable multi-factor authentication to ensure your account isn’t compromised.
+* Choose the default main line number, IVR, and voicemail language.
+
+</template>
+</dialtone-usage>
 
 ## Capitalization
 
@@ -146,63 +120,43 @@ We use [sentence casing](#sentence-versus-title-casing) for all writing except i
 
 Use sentence case for all headings. Capitalize the first word of each phrase, proper names, or trademarked nouns (i.e., branded product features).
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Create an office</li>
-        <li class="d-docsite--list-element">Calls to France are now even easier!</li>
-        <li class="d-docsite--list-element">Activate Ai Scorecards for this contact center</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Create an Office</li>
-        <li class="d-docsite--list-element">Calls to france are now even easier!</li>
-        <li class="d-docsite--list-element">Activate ai scorecards for this contact center</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Create an office
+* Calls to France are now even easier!
+* Activate Ai Scorecards for this contact center
+
+</template>
+<template #dont>
+
+* Create an Office
+* Calls to france are now even easier!
+* Activate ai scorecards for this contact center
+
+</template>
+</dialtone-usage>
 
 ### Products and feature names
 
 If a product or feature isn’t unique to Dialpad, such as contact centers, teams, or offices, then don’t capitalize the name. However, if it is unique to Dialpad and we can market it as a distinct product in the market, such as Ai Scorecards or Ai Playbooks, then capitalize it.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">teams</li>
-        <li class="d-docsite--list-element">Ai Scorecards</li>
-        <li class="d-docsite--list-element">main line number</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Teams</li>
-        <li class="d-docsite--list-element">ai scorecards</li>
-        <li class="d-docsite--list-element">Main Line Number</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* teams
+* Ai Scorecards
+* main line number
+
+</template>
+<template #dont>
+
+* Teams
+* ai scorecards
+* Main Line Number
+
+</template>
+</dialtone-usage>
 
 ### Trademarks
 
@@ -214,61 +168,41 @@ For example, Salesforce does not allow their brand name to be used as part of a 
 
 Job titles should use title casing when placed close to a person’s name. When referring to a title without referencing a person, use sentence casing.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Jane Moreno, Staff Product Designer</li>
-        <li class="d-docsite--list-element">Staff Product Designer Jane Moreno</li>
-        <li class="d-docsite--list-element">Joy Davis is a senior software engineer.</li>
-        <li class="d-docsite--list-element">The senior software engineer coordinates multiple, strategic efforts across product teams.</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Jane Moreno, staff product designer</li>
-        <li class="d-docsite--list-element">staff product designer Jane Moreno</li>
-        <li class="d-docsite--list-element">Jane Moreno is a Senior Software Engineer.</li>
-        <li class="d-docsite--list-element">The Senior Software Engineer coordinates multiple, strategic efforts across product teams.</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Jane Moreno, Staff Product Designer
+* Staff Product Designer Jane Moreno
+* Joy Davis is a senior software engineer.
+* The senior software engineer coordinates multiple, strategic efforts across product teams.
+
+</template>
+<template #dont>
+
+* Jane Moreno, staff product designer
+* staff product designer Jane Moreno
+* Jane Moreno is a Senior Software Engineer.
+* The Senior Software Engineer coordinates multiple, strategic efforts across product teams.
+
+</template>
+</dialtone-usage>
 
 ### Letters following slashes
 
 The first word following a slash shouldn’t be capitalized.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">ZIP/postal code required</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">ZIP/Postal code required</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* ZIP/postal code required
+
+</template>
+<template #dont>
+
+* ZIP/Postal code required
+
+</template>
+</dialtone-usage>
 
 ## Lists
 
@@ -280,35 +214,27 @@ Introduce lists with a full sentence and a colon. Capitalize the first word of a
 
 Avoid lists with only one bullet point.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <p>Using Ai Playbooks provides the following benefits:</p>
-      <ul class="d-docsite--unordered-list">
-        <li class="d-docsite--list-element">Increased consistency to drive higher quality conversions</li>
-        <li class="d-docsite--list-element">Monitor your team’s calls in real-time</li>
-        <li class="d-docsite--list-element">Identify coachable moments afterwards with your team</li>
-        <li class="d-docsite--list-element">Create custom playbooks that aligns with your team’s unique needs</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <p>Using Ai Playbooks</p>
-      <ul class="d-docsite--unordered-list">
-        <li class="d-docsite--list-element">…increases consistency and drives higher quality conversions</li>
-        <li class="d-docsite--list-element">…you can monitor your team’s calls in real-time! Also you can review coachable moments later</li>
-        <li class="d-docsite--list-element">…allows you to create a custom playbook that aligns with your team’s unique needs</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+Using Ai Playbooks provides the following benefits:
+
+* Increased consistency to drive higher quality conversions
+* Monitor your team’s calls in real-time
+* Identify coachable moments afterwards with your team
+* Create custom playbooks that aligns with your team’s unique needs
+
+</template>
+<template #dont>
+
+Using Ai Playbooks…
+
+* …increases consistency and drives higher quality conversions
+* …you can monitor your team’s calls in real-time! Also you can review coachable moments later
+* …allows you to create a custom playbook that aligns with your team’s unique needs
+
+</template>
+</dialtone-usage>
 
 ### Numbered
 
@@ -318,34 +244,26 @@ Introduce lists with a full sentence and a colon. Capitalize the first word of a
 
 Avoid lists with only one bullet point.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <p>To start a phone number porting request:</p>
-      <ol class="d-docsite--ordered-list">
-        <li class="d-docsite--list-element">Gather all the necessary information</li>
-        <li class="d-docsite--list-element">Create a new port request in your office’s settings</li>
-        <li class="d-docsite--list-element">Verify the request</li>
-      </ol>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <p>To start a phone number porting request, you will need to:</p>
-      <ol class="d-docsite--ordered-list">
-        <li class="d-docsite--list-element">gather all the necessary information</li>
-        <li class="d-docsite--list-element">create a new port request in your office’s settings</li>
-        <li class="d-docsite--list-element">verify the request</li>
-      </ol>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+To start a phone number porting request:
+
+1. Gather all the necessary information
+1. Create a new port request in your office’s settings
+1. Verify the request
+
+</template>
+<template #dont>
+
+To start a phone number porting request, you will need to:
+
+1. gather all the necessary information
+1. create a new port request in your office’s settings
+1. verify the request
+
+</template>
+</dialtone-usage>
 
 ### Menu bars
 
@@ -355,69 +273,50 @@ When space is limited, it's permissible to use horizontal action menus for the u
 
 Menu labels follow the same “Verb” + “Noun” pattern outlined in buttons. If there’s enough context, only a verb might be necessary.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Edit</li>
-        <li class="d-docsite--list-element">Add contact</li>
-        <li class="d-docsite--list-element">Copy</li>
-        <li class="d-docsite--list-element">Reply in thread</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Edit contact name</li>
-        <li class="d-docsite--list-element">add</li>
-        <li class="d-docsite--list-element">Copy Message Text</li>
-        <li class="d-docsite--list-element">Reply</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Edit
+* Add contact
+* Copy
+* Reply in thread
+
+</template>
+<template #dont>
+
+* Edit contact name
+* add
+* Copy Message Text
+* Reply
+
+</template>
+</dialtone-usage>
 
 #### Nouns in a menu
 
 Nouns should be concise, but give users enough information that they can easily identify and select the desired item.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <p>Time range filter</p>
-      <ul class="d-docsite--unordered-list">
-        <li class="d-docsite--list-element">Today</li>
-        <li class="d-docsite--list-element">Last week</li>
-        <li class="d-docsite--list-element">Last month</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Filter today</li>
-        <li class="d-docsite--list-element">Filter last week</li>
-        <li class="d-docsite--list-element">Filter from</li>
-        <li class="d-docsite--list-element">Filter call direction</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
 
-## Date, numbers, and measurements
+Time range filter
+
+* Today
+* Last week
+* Last month
+
+</template>
+<template #dont>
+
+* Filter today
+* Filter last week
+* Filter from
+* Filter call direction
+
+</template>
+</dialtone-usage>
+
+## Date and numbers
 
 We attempt to properly localize dates, numbers, and measurements. These guidelines are for manually formatting in American English, which we use as the base before translating to other languages.
 
@@ -432,83 +331,53 @@ Whenever possible, fully write out dates. Dates are always represented in this o
 * Include all 4 digits in the year.
 * Omit the year if the date is older than one year from the date.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Friday, July 13</li>
-        <li class="d-docsite--list-element">June 13, 2023</li>
-        <li class="d-docsite--list-element">Feb 20, 2020</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Thur, July 13, 2024</li>
-        <li class="d-docsite--list-element">June 13, ‘23</li>
-        <li class="d-docsite--list-element">2/20/20</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Friday, July 13
+* June 13, 2023
+* Feb 20, 2020
+
+</template>
+<template #dont>
+
+* Thur, July 13, 2024
+* June 13, ‘23
+* 2/20/20
+
+</template>
+</dialtone-usage>
 
 Don’t use ordinal indicators, which are words representing position or rank in a sequential order (1st, 2nd, 3rd, etc).
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">February 1–April 30</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">February 1st–April 30th</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* February 1–April 30
+
+</template>
+<template #dont>
+
+* February 1st–April 30th
+
+</template>
+</dialtone-usage>
 
 Avoid writing dates numerically. We don’t localize dates and times currently, standardizing all numerical dates with American English format. Dates can be written numerically when displayed in a table or extremely tight spaces. Use the MM/DD/YY format.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">09/02/22</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">9/2/22</li>
-        <li class="d-docsite--list-element">2/9/22</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* 09/02/22
+
+</template>
+<template #dont>
+
+* 9/2/22
+* 2/9/22
+
+</template>
+</dialtone-usage>
 
 ### Time
 
@@ -520,32 +389,22 @@ Currently all time formats are formatted using the following guidelines:
 * To show a time range, use an en dash and include the am/pm after both times, for example, 3:00 pm–4:00 pm.
 * If indicating both the date and time, separate them with the word “at” instead of a comma.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Thursday, September 2, 2022 at 12:45 pm</li>
-        <li class="d-docsite--list-element">September 2 at 12:45 pm</li>
-        <li class="d-docsite--list-element">Sep 2 at 12:45 pm</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Thu, September 2, 2022, 12:45 pm</li>
-        <li class="d-docsite--list-element">September 2 at 12:45PM</li>
-        <li class="d-docsite--list-element">Sep 2 @ 12:45 PM</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Thursday, September 2, 2022 at 12:45 pm
+* September 2 at 12:45 pm
+* Sep 2 at 12:45 pm
+
+</template>
+<template #dont>
+
+* Thu, September 2, 2022, 12:45 pm
+* September 2 at 12:45PM
+* Sep 2 @ 12:45 PM
+
+</template>
+</dialtone-usage>
 
 ### Time zones
 
@@ -554,28 +413,18 @@ Currently all time formats are formatted using the following guidelines:
 * If users are in a single time zone, don’t include an S (for Standard) or D (for Daylight). For example, 3:15 pm PT.
 * If users are a combination of multiple time zones, then in the S (for Standard) or D (for Daylight). For example, 3:15 pm PDT.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Thursday, September 2, 2022 at 12:45 pm EDT</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">2022–10-02, 2:00 P.M. EDT</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Thursday, September 2, 2022 at 12:45 pm EDT
+
+</template>
+<template #dont>
+
+* 2022–10-02, 2:00 P.M. EDT
+
+</template>
+</dialtone-usage>
 
 ### Timestamps
 
@@ -710,32 +559,41 @@ For calls, meetings, or any other session-based interaction, we show the duratio
 
 Use common day, hour, minute, and second amounts when rendering durations (i.e., “1 hr 2 min” versus “62 min”).
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">1 hr 2 min</li>
-        <li class="d-docsite--list-element">1 min 30 sec</li>
-        <li class="d-docsite--list-element">1 day 1 hour 1 min</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">62 min</li>
-        <li class="d-docsite--list-element">90 sec</li>
-        <li class="d-docsite--list-element">25 hr 1 min</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* 1 hr 2 min
+* 1 min 30 sec
+* 1 day 1 hour 1 min
+
+</template>
+<template #dont>
+
+* 62 min
+* 90 sec
+* 25 hr 1 min
+
+</template>
+</dialtone-usage>
+
+When adding a duration after a time range, wrap the duration amount in paranthesis. Since the duration is secondary information to the time range, use a muted foreground color to visually diminish its importance.
+
+<dialtone-usage>
+<template #do>
+
+* 4:01 pm–5:02 pm <span class="d-fc-muted">(1 hr 2 min)</span>
+* 11:27 am–11:28 am <span class="d-fc-muted">(1 min 30 sec)</span>
+* Monday, June 19 11:00 am–Tuesday, June 20 12:01 pm <span class="d-fc-muted">(1 day 1 hour 1 min)</span>
+
+</template>
+<template #dont>
+
+* 4:01 pm–5:02 pm (62 min)
+* 11:27 am–11:28 am for 90 sec
+* Monday, June 19 11:00 am–Tuesday, June 20 12:01 pm, 25 hr 1 min
+
+</template>
+</dialtone-usage>
 
 ### Currency
 
@@ -743,97 +601,67 @@ Use common day, hour, minute, and second amounts when rendering durations (i.e.,
 * When rendering prices, the currency always follows the dollar amount.
 * Don’t include the cents digits (“.00”) or whole dollar amounts unless it is grouped with other amounts which have non-zero digit amounts.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">$25 USD</li>
-        <li class="d-docsite--list-element">£ 38.27 GBP</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">$25.00 USD</li>
-        <li class="d-docsite--list-element">$25,000USD</li>
-        <li class="d-docsite--list-element">$1KUSD</li>
-        <li class="d-docsite--list-element">GBP £ 38.27</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* $25 USD
+* £ 38.27 GBP
+
+</template>
+<template #dont>
+
+* $25.00 USD
+* $25,000USD
+* $1KUSD
+* GBP £ 38.27
+
+</template>
+</dialtone-usage>
 
 ### Numbers
 
 Whenever possible use numerals. If the number is below 10 and not integral to the sentence, you may spell it out in full.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">12</li>
-        <li class="d-docsite--list-element">100</li>
-        <li class="d-docsite--list-element">1</li>
-        <li class="d-docsite--list-element">Here are 2 phone numbers you can use.</li>
-        <li class="d-docsite--list-element">You have 35 unread messages.</li>
-        <li class="d-docsite--list-element">You no longer need to read messages in three places.</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">nine</li>
-        <li class="d-docsite--list-element">one hundred</li>
-        <li class="d-docsite--list-element">one</li>
-        <li class="d-docsite--list-element">Here are two phone numbers you can use.</li>
-        <li class="d-docsite--list-element">You have thirty-five unread messages.</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* 12
+* 100
+* 1
+* Here are 2 phone numbers you can use.
+* You have 35 unread messages.
+* You no longer need to read messages in three places.
+
+</template>
+<template #dont>
+
+* nine
+* one hundred
+* one
+* Here are two phone numbers you can use.
+* You have thirty-five unread messages.
+
+</template>
+</dialtone-usage>
 
 Use commas for numbers with four or more digits. Whenever possible, don’t truncate numbers.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">9,865</li>
-        <li class="d-docsite--list-element">89,865</li>
-        <li class="d-docsite--list-element">1,089,865</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">9865</li>
-        <li class="d-docsite--list-element">89k</li>
-        <li class="d-docsite--list-element">1.09 m</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* 9,865
+* 89,865
+* 1,089,865
+
+</template>
+<template #dont>
+
+* 9865
+* 89k
+* 1.09 m
+
+</template>
+</dialtone-usage>
 
 Our default phone number format for designs is the North American format. In Dialpad we localize phone number formats for each country. Format consistency helps our customers quickly identify similar numbers.
 
@@ -841,193 +669,123 @@ Our default phone number format for designs is the North American format. In Dia
 * For North American numbers, wrap the area code in parentheses and hyphenate the first 3 and last 4 digits
 * For European numbers, separate the area code and subscriber number with a space
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">(415) 555-1234</li>
-        <li class="d-docsite--list-element">+1 (800) 555-1234</li>
-        <li class="d-docsite--list-element">+33 055 512345</li>
-        <li class="d-docsite--list-element">Ext. 55555</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">415.555.1234</li>
-        <li class="d-docsite--list-element">18005551234</li>
-        <li class="d-docsite--list-element">33 05 55 12 345</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* (415) 555-1234
+* +1 (800) 555-1234
+* +33 055 512345
+* Ext. 55555
+
+</template>
+<template #dont>
+
+* 415.555.1234
+* 18005551234
+* 33 05 55 12 345
+
+</template>
+</dialtone-usage>
 
 Use an en dash without surrounding spaces between number ranges.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">May 27–30</li>
-        <li class="d-docsite--list-element">1:33 pm–2:28 pm</li>
-        <li class="d-docsite--list-element">5–10 licenses</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">May 27 – 30</li>
-        <li class="d-docsite--list-element">1:33 pm – 2:28 pm</li>
-        <li class="d-docsite--list-element">5 – 10 licenses</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* May 27–30
+* 1:33 pm–2:28 pm
+* 5–10 licenses
+
+</template>
+<template #dont>
+
+* May 27 – 30
+* 1:33 pm – 2:28 pm
+* 5 – 10 licenses
+
+</template>
+</dialtone-usage>
 
 Use “to” instead of an en dash if a number range is preceded by “from” in a phrase. Use “and” if a range is preceded by “between.”
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Active from May 1 to May 15</li>
-        <li class="d-docsite--list-element">Available between 1 pm and 3 pm</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Active from May 1–May 15</li>
-        <li class="d-docsite--list-element">Available between 1–3pm</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Active from May 1 to May 15
+* Available between 1 pm and 3 pm
+
+</template>
+<template #dont>
+
+* Active from May 1–May 15
+* Available between 1–3pm
+
+</template>
+</dialtone-usage>
 
 For undefined upward ranges, use “and up” or “or more.”
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">$80 and up</li>
-        <li class="d-docsite--list-element">10 or more</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">$80+</li>
-        <li class="d-docsite--list-element">> 10</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* $80 and up
+* 10 or more
+
+</template>
+<template #dont>
+
+* $80+
+* > 10
+
+</template>
+</dialtone-usage>
 
 For downward ranges, be specific.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">$5–$25</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">$25 or less</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* $5–$25
+
+</template>
+<template #dont>
+
+* $25 or less
+
+</template>
+</dialtone-usage>
 
 ## Places
 
 Use a nation’s proper name when referring to it as a noun.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Your office is located in the United States.</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Your office is located in the US.</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Your office is located in the United States.
+
+</template>
+<template #dont>
+
+* Your office is located in the US.
+
+</template>
+</dialtone-usage>
 
 When using a country as an adjective (such as when referring to currency), use the abbreviated form without punctuation.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">You have 10 unassigned UK phone numbers.</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">You have 10 unassigned U.K. phone numbers.</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* You have 10 unassigned UK phone numbers.
+
+</template>
+<template #dont>
+
+* You have 10 unassigned U.K. phone numbers.
+
+</template>
+</dialtone-usage>
 
 Be sure to not use colloquial forms of a nation or state name, for example, America instead of the United States. Also verify if a nation commonly uses “the” before their name, for example, “the Philippines.”
 
@@ -1037,28 +795,18 @@ Be sure to not use colloquial forms of a nation or state name, for example, Amer
 
 Don’t use ampersands (&). They attract attention to the least important part of the sentence. Instead spell out the word “and.”
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Taxes and fees</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Taxes & fees</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Taxes and fees
+
+</template>
+<template #dont>
+
+* Taxes & fees
+
+</template>
+</dialtone-usage>
 
 ### Apostrophes
 
@@ -1076,190 +824,122 @@ Use apostrophes to form possessives:
 
 Don’t use apostrophes to form possessive pronouns such as hers or his.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Office’s settings</li>
-        <li class="d-docsite--list-element">Customers’ credit cards</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Offices settings</li>
-        <li class="d-docsite--list-element">Customers credit cards</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Office’s settings
+* Customers’ credit cards
+
+</template>
+<template #dont>
+
+* Offices settings
+* Customers credit cards
+
+</template>
+</dialtone-usage>
 
 ### Colons
 
 Avoid using colons in sentences. If you need to use one, don’t capitalize the first word after the colon unless it’s a proper noun.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Dialpad offers phone numbers in the United States, Canada, and Australia.</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Dialpad offers phone numbers in: the United States, Canada, and Australia.</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Dialpad offers phone numbers in the United States, Canada, and Australia.
+
+</template>
+<template #dont>
+
+* Dialpad offers phone numbers in: the United States, Canada, and Australia.
+
+</template>
+</dialtone-usage>
 
 Don’t use colons to introduce radio buttons or checkboxes.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Routed calls will be sent</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Routed calls will be sent:</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Routed calls will be sent
+
+</template>
+<template #dont>
+
+* Routed calls will be sent:
+
+</template>
+</dialtone-usage>
 
 Use colons to introduce bulleted lists.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <p>Correct the following payment information to continue:</p>
-      <ul class="d-docsite--unordered-list">
-        <li class="d-docsite--list-element">The credit card verification value (CVV) doesn’t match the credit card</li>
-        <li class="d-docsite--list-element">The billing address ZIP or postal code doesn’t match the credit card address</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <p>Correct the following payment information to continue.</p>
-      <ul class="d-docsite--unordered-list">
-        <li class="d-docsite--list-element">The credit card verification value (CVV) doesn’t match the credit card</li>
-        <li class="d-docsite--list-element">The billing address ZIP or postal code doesn’t match the credit card address</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+Correct the following payment information to continue:
+
+* The credit card verification value (CVV) doesn’t match the credit card
+* The billing address ZIP or postal code doesn’t match the credit card address
+
+</template>
+<template #dont>
+
+Correct the following payment information to continue.
+
+* The credit card verification value (CVV) doesn’t match the credit card
+* The billing address ZIP or postal code doesn’t match the credit card address
+
+</template>
+</dialtone-usage>
 
 ### Commas
 
 Use the oxford comma (also known as the serial comma) in sentences. There should be a comma after every list of 3 or more items (unless you’re using a bulleted or numbered list).
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Dialtone is a design system that outlines content writing guidelines, design foundations, and implementation guidance.</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Dialtone is a design system that outlines content writing guidelines, design foundations and implementation guidance.</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+Dialtone is a design system that outlines content writing guidelines, design foundations, and implementation guidance.
+
+</template>
+<template #dont>
+
+Dialtone is a design system that outlines content writing guidelines, design foundations and implementation guidance.
+
+</template>
+</dialtone-usage>
 
 ### Ellipses
 
 Use an ellipsis (…) in place of missing text (or portions of it) such as truncation in a recap summary or user status messages. Don’t use ellipses for placeholder copy or to trail off a sentence.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Search calls</li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">Search calls…</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* Search calls
+
+</template>
+<template #dont>
+
+* Search calls…
+
+</template>
+</dialtone-usage>
 
 Always use the ellipsis character, not three periods.
 
-<section class="d-d-grid d-gg16 d-g-cols2 d-mt16 d-mb24">
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-green-400 d-bco25 d-bgc-success d-fc-success d-fs-100" style="--bco: .25; width: calc(100% + 2px)"><dt-icon name="check" size="200" /> <strong>Do</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">… <dt-keyboard-shortcut shortcut="Option+;"/></li>
-      </ul>
-    </template>
-  </dt-card>
-  <dt-card class="d-jc-flex-start d-bs-none d-ba d-bc-subtle d-bar12" headerClass="d-p0">
-    <template #header>
-      <div class="d-d-flex d-ai-center d-mn1 d-gg4 d-px16 d-py6 d-btr12 d-ba d-bc-red-400 d-bco25 d-bgc-critical d-fc-critical d-fs-100" style="--bco: .15; width: calc(100% + 2px)"><dt-icon name="close" size="200" /> <strong>Don't</strong></div>
-    </template>
-    <template #content>
-      <ul class="d-docsite--unordered-list d-m0">
-        <li class="d-docsite--list-element">...</li>
-      </ul>
-    </template>
-  </dt-card>
-</section>
+<dialtone-usage>
+<template #do>
+
+* … <dt-keyboard-shortcut shortcut="Option+;"/>
+
+</template>
+<template #dont>
+
+* ...
+
+</template>
+</dialtone-usage>
 
 Consider space constraints in the interface when deciding to use truncation. Identify the portion of the text strings users need the most. It’s usually the beginning or the end. If both are important, consider truncating the middle of the string.
 
