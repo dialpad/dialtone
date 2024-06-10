@@ -16,7 +16,7 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [4000, 9010, 9011],
 
-  "updateContentCommand": "SHELL=bash pnpm setup && source .bashrc && pnpm install -g nx && pnpm install",
+  "updateContentCommand": "SHELL=bash pnpm setup && SHELL=bash source .bashrc && pnpm install -g nx && pnpm install",
 
   // Configure tool-specific properties.
   "customizations": {
