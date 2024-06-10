@@ -61,7 +61,11 @@
           "link": "guides/content"
         },
         {
-          "text": "Grammar and mechanics",
+          "text": "Action Language",
+          "link": "/guides/content/action-language/"
+        },
+        {
+          "text": "Grammar and Mchanics",
           "link": "/guides/content/grammar-and-mechanics/"
         },
         {
@@ -74,7 +78,7 @@
           "planned": true
         },
         {
-          "text": "Design assets",
+          "text": "Design Assets",
           "link": "/guides/design-assets/",
           "planned": true
         }
