@@ -69,8 +69,12 @@
           "link": "/guides/content/error-messages/"
         },
         {
-          "text": "Grammar and Mchanics",
+          "text": "Grammar and Mechanics",
           "link": "/guides/content/grammar-and-mechanics/"
+        },
+        {
+          "text": "Help Content",
+          "link": "/guides/content/help-content/"
         },
         {
           "text": "Accessibility",
