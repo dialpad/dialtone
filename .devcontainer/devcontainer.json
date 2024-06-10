@@ -4,6 +4,10 @@
   "name": "Node.js",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+  "mounts": [
+    "source=global-pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume"
+  ],
+  "postCreateCommand": "sudo chown node .pnpm-store",
   "features": {
     "ghcr.io/devcontainers-contrib/features/pnpm:2": {}
   },
