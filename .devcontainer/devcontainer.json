@@ -22,7 +22,7 @@
 
   "updateContentCommand": "pnpm install",
 
-  "postCreateCommand": "pnpm setup && /bin/bash source /home/node/.bashrc && pnpm -g add pnpm && pnpm -g add nx",
+  "postCreateCommand": "bash -c 'pnpm setup && source /home/node/.bashrc && pnpm -g add pnpm && pnpm -g add nx'",
 
   // Configure tool-specific properties.
   "customizations": {
