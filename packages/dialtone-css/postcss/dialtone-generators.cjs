@@ -184,7 +184,7 @@ function opacityUtilities (Rule, clonedSource, declaration) {
     }));
     generatedRules.borderOpacity.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bco-${opacity}`),
+      selector: appendHoverFocusSelectors(`.d-bco${opacity}`),
       nodes: [
         declaration.clone({ prop: '--bco', value: `${opacity}% !important` }),
       ],
