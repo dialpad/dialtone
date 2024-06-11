@@ -19,19 +19,23 @@
     @opened="(e) => ($emit('opened', e))"
   >
     <template #anchor="{ attrs }">
+      <!-- @slot Anchor element that activates the hovercard. Usually a button. -->
       <slot
         name="anchor"
         v-bind="attrs"
       />
     </template>
     <template #content>
+      <!-- @slot Slot for the content that is displayed in the hovercard. -->
       <slot name="content" />
     </template>
     <template #headerContent>
+      <!-- @slot Slot for hovercard header content -->
       <slot name="headerContent" />
     </template>
 
     <template #footerContent>
+      <!-- @slot Slot for the footer content. -->
       <slot name="footerContent" />
     </template>
   </dt-popover>
@@ -163,5 +167,13 @@ defineProps({
   },
 });
 
-defineEmits(['opened']);
+defineEmits([
+  /**
+   * Emitted when hovercard is shown or hidden
+   *
+   * @event opened
+   * @type {Boolean | Array}
+   */
+  'opened',
+]);
 </script>
