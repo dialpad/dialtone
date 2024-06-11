@@ -1,3 +1,16 @@
+# [8.36.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.35.0...dialtone-css/v8.36.0) (2024-06-11)
+
+
+### Bug Fixes
+
+* **Utility:** NO-JIRA border color opacity utility ([#356](https://github.com/dialpad/dialtone/issues/356)) ([a0e4d08](https://github.com/dialpad/dialtone/commit/a0e4d0872e2e081921f46ebe1d4db1a05fe55ec6))
+
+
+### Features
+
+* **Badge:** DLT-1788 design tokens for subtle and outline variants ([#358](https://github.com/dialpad/dialtone/issues/358)) ([4e008b7](https://github.com/dialpad/dialtone/commit/4e008b768b33758b64a20418c217db245902f384))
+* **Chip:** NO-JIRA update chip bg colors ([#355](https://github.com/dialpad/dialtone/issues/355)) ([52a5043](https://github.com/dialpad/dialtone/commit/52a50437220734de749da7cfcc57b424853bbdec))
+
 # [8.35.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.34.0...dialtone-css/v8.35.0) (2024-06-07)
 
 
