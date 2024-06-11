@@ -9,7 +9,11 @@ description: Branding and illustration assets.
   "Illustrations are the slightly grown up version of icons with a little more detail. A illustration is an image that typically works in tandem with inline text to communicate a state in a more friendly way. They’re most often used in empty states, onboarding, and in-product announcements."
 -->
 
-## All Illustrations and Brand Logos
+## Illustrations
+
+<icons illustration kind="spot" size="large"></icons>
+
+## Brand Logos
 
 <dt-notice
   kind="info"
@@ -22,7 +26,7 @@ description: Branding and illustration assets.
   </template>
 </dt-notice>
 
-<icons illustration kind="spot" size="large"></icons>
+<icons illustration kind="brand-logos" size="large"></icons>
 
 ## Choosing between Dialpad logo color options
 

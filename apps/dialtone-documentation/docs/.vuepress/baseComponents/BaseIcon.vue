@@ -22,6 +22,9 @@
             <div class="dialtone-icon-card__icon--autosize">
               <svg-loader :illustration="illustration" :name="file" />
             </div>
+            <div v-if="displayName" class="dialtone-icon-card__name">
+              {{ name }}
+            </div>
           </dt-button>
         </template>
         <template #headerContent>
@@ -146,6 +149,11 @@ const props = defineProps({
   },
 
   illustration: {
+    type: Boolean,
+    default: false,
+  },
+
+  displayName: {
     type: Boolean,
     default: false,
   },

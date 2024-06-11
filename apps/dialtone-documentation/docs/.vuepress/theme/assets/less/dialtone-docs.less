@@ -412,14 +412,14 @@ a.header-anchor {
 
   display: grid;
   grid-auto-rows: 12rem;
+  grid-gap: var(--dt-space-500);
   grid-template-columns: repeat(var(--icon-grid-columns), [col] var(--icon-card-width));
 
   &--large {
+    grid-auto-rows: 18rem;
     &:extend(.d-gl-docsite-icons);
 
     --icon-card-width: 18rem;
-
-    grid-auto-rows: 18rem;
   }
 }
 
@@ -469,6 +469,10 @@ a.header-anchor {
     .dialtone-icon-card[data-selected='yes'] & {
       background-color: hsl(var(--dt-color-neutral-black-h), var(--dt-color-neutral-black-s), var(--dt-color-neutral-black-l), 0.8);
     }
+
+    .dialtone-icon-card__name {
+      color: var(--dt-color-neutral-white);
+    }
   }
 
   &.logo-black {
@@ -478,14 +482,22 @@ a.header-anchor {
     .dialtone-icon-card[data-selected='yes'] & {
       background-color: hsl(0deg, 0%, 91.37%, 0.4);
     }
+
+    .dialtone-icon-card__name {
+      color: var(--dt-color-neutral-black);
+    }
   }
 
   &.logo-inverted {
-    background-color: var(--dt-color-black-900);
+    background-color: var(--dt-color-surface-contrast);
 
     &:hover,
     .dialtone-icon-card[data-selected='yes'] & {
       background-color: hsl(var(--dt-color-black-900-h), var(--dt-color-black-900-s), var(--dt-color-black-900-l), 0.8);
+    }
+
+    .dialtone-icon-card__name {
+      color: var(--dt-color-foreground-primary-inverted);
     }
   }
 }
@@ -532,6 +544,13 @@ a.header-anchor {
   white-space: nowrap;
   text-align: center;
   text-overflow: ellipsis;
+}
+
+.dialtone-icon-card__name {
+  position: absolute;
+  bottom: var(--dt-space-400);
+  color: var(--dt-color-foreground-primary);
+  font: var(--dt-typography-code-sm);
 }
 
 .dialtone-icon-popover {
