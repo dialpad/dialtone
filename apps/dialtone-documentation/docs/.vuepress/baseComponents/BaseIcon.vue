@@ -31,17 +31,22 @@
           />
         </template>
         <template #content>
-          <div class="d-stack16 d-fc-primary">
+          <dt-stack gap="500">
+            <div class="d-d-flex d-fd-column d-fl-grow5">
+              <span class="d-label d-label--sm">Name</span>
+              <div class="d-d-flex d-jc-space-between">
+                <span class="d-body--md-compact">{{ name }}</span>
+                <dt-link class="d-body--md-compact" :href="figmaLink" target="_blank" rel="noopener noreferrer">
+                  Figma
+                </dt-link>
+              </div>
+            </div>
             <div class="d-d-flex d-ai-center">
               <div class="d-d-flex d-fd-column d-fl-grow5">
-                <span class="d-label d-label--sm">Name</span>
-                <div class="d-d-flex d-jc-space-between">
-                  <span class="d-body--md-compact">{{ name }}</span>
-                  <dt-link :href="figmaLink" target="_blank" rel="noopener noreferrer">
-                    Figma
-                  </dt-link>
+                <span class="d-label d-label--sm">Description</span>
+                <div class="d-body--md-compact">
+                  {{ desc }}
                 </div>
-                <span class="d-body--sm-compact">{{ desc }}</span>
               </div>
             </div>
             <div class="d-d-flex d-ai-flex-end">
@@ -78,7 +83,7 @@
                 aria-label="Copy Vue markup"
               />
             </div>
-          </div>
+          </dt-stack>
         </template>
       </dt-popover>
     </aside>
