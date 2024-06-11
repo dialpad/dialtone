@@ -17,7 +17,7 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [4000, 9010, 9011],
 
-  "updateContentCommand": "bash -c 'npm install -g pnpm && source /home/node/.bashrc && pnpm install && npx pnpm add -g pnpm && pnpm setup && pnpm -g add nx'",
+  "updateContentCommand": "bash -c 'npm install -g pnpm && source /home/node/.bashrc && pnpm add -g pnpm'",
 
   // Configure tool-specific properties.
   "customizations": {
