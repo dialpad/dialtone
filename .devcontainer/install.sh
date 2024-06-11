@@ -1,6 +1,7 @@
 #!/bin/bash
 curl -fsSL https://get.pnpm.io/install.sh | sh -
+pnpm bin -g
 pnpm setup
-pnpm config set store-dir /workspaces/.pnpm-store
 source /home/node/.bashrc
+pnpm bin -g
 pnpm -g add nx
