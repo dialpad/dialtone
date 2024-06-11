@@ -17,7 +17,7 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [4000, 9010, 9011],
 
-  "postCreateCommand": "npm install -g pnpm && pnpm setup && source /home/node/.bashrc && pnpm -g add nx",
+  "postCreateCommand": "bash .devcontainer/install.sh",
 
   // Configure tool-specific properties.
   "customizations": {
