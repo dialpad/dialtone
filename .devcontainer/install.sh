@@ -1,6 +1,3 @@
 #!/bin/bash
-
-npm install -g pnpm
-pnpm setup
-source /home/node/.bashrc
+curl -fsSL https://get.pnpm.io/install.sh
 pnpm -g add nx
