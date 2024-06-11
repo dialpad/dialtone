@@ -1,3 +1,10 @@
+# [3.131.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.130.0...dialtone-vue3/v3.131.0) (2024-06-11)
+
+
+### Features
+
+* **Callbar Button With Popover:** NO-JIRA add offset as passthrough prop ([#362](https://github.com/dialpad/dialtone/issues/362)) ([fc9b285](https://github.com/dialpad/dialtone/commit/fc9b28536f251f8a54e68e3d539acda5ea1dfc4f))
+
 # [3.130.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.129.2...dialtone-vue3/v3.130.0) (2024-06-11)
 
 
