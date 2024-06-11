@@ -1,3 +1,10 @@
+# [2.137.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.136.2...dialtone-vue2/v2.137.0) (2024-06-11)
+
+
+### Features
+
+* **Tooltip:** DLT-1793 new prop to set tippy theme ([#357](https://github.com/dialpad/dialtone/issues/357)) ([0bd6f3a](https://github.com/dialpad/dialtone/commit/0bd6f3a8ea5aef20c464ca748b961e3309be3119))
+
 ## [2.136.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.136.1...dialtone-vue2/v2.136.2) (2024-06-07)
 
 
