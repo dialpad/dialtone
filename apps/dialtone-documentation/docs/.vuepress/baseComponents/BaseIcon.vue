@@ -18,7 +18,7 @@
         @opened="onPopoverOpened"
       >
         <template #anchor>
-          <dt-button class="dialtone-icon-card__header js-dialtone-icon-card-copy-area">
+          <dt-button :class="buttonClasses">
             <div class="dialtone-icon-card__icon--autosize">
               <svg-loader :illustration="illustration" :name="file" />
             </div>
@@ -96,7 +96,7 @@ import { ICON_KINDS } from './constants.js';
 import CopyButton from './CopyButton.vue';
 import SvgLoader from './SvgLoader.vue';
 
-defineProps({
+const props = defineProps({
   name: {
     type: String,
     required: true,
@@ -152,6 +152,21 @@ defineProps({
 });
 
 const selected = ref(false);
+
+const buttonClasses = computed(() =>
+  ['dialtone-icon-card__header', 'js-dialtone-icon-card-copy-area', getLogoClass(props.name)]);
+
+const getLogoClass = name => {
+  if (name.endsWith('white')) {
+    return 'logo-white';
+  }
+  if (name.endsWith('black')) {
+    return 'logo-black';
+  }
+  if (name.endsWith('inverted')) {
+    return 'logo-inverted';
+  }
+};
 
 const selectedStatus = computed(() => selected.value ? 'yes' : 'no');
 const onPopoverOpened = (open) => {

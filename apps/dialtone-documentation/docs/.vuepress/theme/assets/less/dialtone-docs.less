@@ -449,7 +449,7 @@ a.header-anchor {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: var(--icon-card-width);
   height: 100%;
   padding: var(--dt-space-400);
   background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0);
@@ -457,12 +457,36 @@ a.header-anchor {
   cursor: pointer;
   transition: all 150ms var(--ttf-in-out);
 
-  &:hover {
+  &:hover,
+  .dialtone-icon-card[data-selected='yes'] & {
     background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0.4);
   }
 
-  .dialtone-icon-card[data-selected='yes'] & {
-    background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0.4);
+  &.logo-white {
+    background-color: var(--dt-color-neutral-black);
+
+    &:hover,
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: hsl(var(--dt-color-neutral-black-h), var(--dt-color-neutral-black-s), var(--dt-color-neutral-black-l), 0.8);
+    }
+  }
+
+  &.logo-black {
+    background-color: var(--dt-color-neutral-white);
+
+    &:hover,
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: hsl(0deg, 0%, 91.37%, 0.4);
+    }
+  }
+
+  &.logo-inverted {
+    background-color: var(--dt-color-black-900);
+
+    &:hover,
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: hsl(var(--dt-color-black-900-h), var(--dt-color-black-900-s), var(--dt-color-black-900-l), 0.8);
+    }
   }
 }
 
