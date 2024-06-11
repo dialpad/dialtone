@@ -1,3 +1,17 @@
+# [9.45.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.44.0...dialtone/v9.45.0) (2024-06-11)
+
+
+### Bug Fixes
+
+* **Utility:** NO-JIRA border color opacity utility ([#356](https://github.com/dialpad/dialtone/issues/356)) ([a0e4d08](https://github.com/dialpad/dialtone/commit/a0e4d0872e2e081921f46ebe1d4db1a05fe55ec6))
+
+
+### Features
+
+* **Badge:** DLT-1788 design tokens for subtle and outline variants ([#358](https://github.com/dialpad/dialtone/issues/358)) ([4e008b7](https://github.com/dialpad/dialtone/commit/4e008b768b33758b64a20418c217db245902f384))
+* **Chip:** NO-JIRA update chip bg colors ([#355](https://github.com/dialpad/dialtone/issues/355)) ([52a5043](https://github.com/dialpad/dialtone/commit/52a50437220734de749da7cfcc57b424853bbdec))
+* **Tooltip:** DLT-1793 new prop to set tippy theme ([#357](https://github.com/dialpad/dialtone/issues/357)) ([0bd6f3a](https://github.com/dialpad/dialtone/commit/0bd6f3a8ea5aef20c464ca748b961e3309be3119))
+
 # [9.44.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.43.0...dialtone/v9.44.0) (2024-06-07)
 
 
