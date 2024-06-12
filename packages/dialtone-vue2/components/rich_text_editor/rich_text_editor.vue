@@ -3,7 +3,7 @@
     :editor="editor"
     data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
-    v-on="$listeners"
+    v-on="editorListeners"
   />
 </template>
 
@@ -317,6 +317,15 @@ export default {
   },
 
   computed: {
+    editorListeners () {
+      return {
+        ...this.$listeners,
+        input: () => {},
+        focus: () => {},
+        blur: () => {},
+      };
+    },
+
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.

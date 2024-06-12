@@ -37,11 +37,11 @@
         :allow-italic="allowItalic"
         :allow-strike="allowStrike"
         :allow-underline="allowUnderline"
-        :additional-extensions="[meetingPill]"
+        :additional-extensions="additionalExtensions"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
-        @input="onInput($event)"
+        @input="onInput"
         v-on="$listeners"
       />
     </div>
@@ -602,27 +602,6 @@ export default {
     'selected-command',
 
     /**
-     * Native focus event
-     * @event input
-     * @type {String|JSON}
-     */
-    'focus',
-
-    /**
-     * Native blur event
-     * @event input
-     * @type {String|JSON}
-     */
-    'blur',
-
-    /**
-     * Native input event
-     * @event input
-     * @type {String|JSON}
-     */
-    'input',
-
-    /**
      * Event to sync the value with the parent
      * @event update:value
      * @type {String|JSON}
@@ -632,7 +611,7 @@ export default {
 
   data () {
     return {
-      meetingPill,
+      additionalExtensions: [meetingPill],
       internalInputValue: this.value, // internal input content
       hasFocus: false,
       imagePickerFocus: false,
@@ -753,16 +732,13 @@ export default {
     onFocus (event) {
       this.hasFocus = true;
       this.$refs.richTextEditor?.focusEditor();
-      this.$emit('focus', event);
     },
 
     onBlur (event) {
       this.hasFocus = false;
-      this.$emit('blur', event);
     },
 
     onInput (event) {
-      this.$emit('input', event);
       this.$emit('update:value', event);
     },
   },
