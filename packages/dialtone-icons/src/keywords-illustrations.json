@@ -5,12 +5,69 @@
         "blank",
         "space"
       ],
+      "dialpad-logo-black": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
+      "dialpad-logo-inverted": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
+      "dialpad-logo-white": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
       "dialpad-logo": [
         "logo",
         "brand",
         "branding",
         "dialpad",
         "word",
+        "marketing"
+      ],
+      "dialpad-mono-black": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "monochrome",
+        "mono",
+        "unitone",
+        "solid",
+        "marketing"
+      ],
+      "dialpad-mono-inverted": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "monochrome",
+        "mono",
+        "unitone",
+        "solid",
+        "marketing"
+      ],
+      "dialpad-mono-white": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "monochrome",
+        "mono",
+        "unitone",
+        "solid",
         "marketing"
       ],
       "dialpad-mono": [
@@ -24,7 +81,31 @@
         "solid",
         "marketing"
       ],
-      "dialpad-word": [
+      "dialpad-wordmark-black": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
+      "dialpad-wordmark-inverted": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
+      "dialpad-wordmark-white": [
+        "logo",
+        "brand",
+        "branding",
+        "dialpad",
+        "word",
+        "marketing"
+      ],
+      "dialpad-wordmark": [
         "logo",
         "brand",
         "branding",

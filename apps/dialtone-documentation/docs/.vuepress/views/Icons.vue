@@ -26,6 +26,7 @@
         :vue="icon.vue"
         :figma-link="icon.figmaLink"
         :raw-svg="icon.rawSvg"
+        :display-name="kind === 'brand-logos'"
       />
     </div>
   </div>

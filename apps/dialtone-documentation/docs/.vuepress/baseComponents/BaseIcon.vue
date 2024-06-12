@@ -18,9 +18,12 @@
         @opened="onPopoverOpened"
       >
         <template #anchor>
-          <dt-button class="dialtone-icon-card__header js-dialtone-icon-card-copy-area">
+          <dt-button :class="buttonClasses">
             <div class="dialtone-icon-card__icon--autosize">
               <svg-loader :illustration="illustration" :name="file" />
+            </div>
+            <div v-if="displayName" class="dialtone-icon-card__name">
+              {{ name }}
             </div>
           </dt-button>
         </template>
@@ -31,17 +34,22 @@
           />
         </template>
         <template #content>
-          <div class="d-stack16 d-fc-primary">
+          <dt-stack gap="500">
+            <div class="d-d-flex d-fd-column d-fl-grow5">
+              <span class="d-label d-label--sm">Name</span>
+              <div class="d-d-flex d-jc-space-between">
+                <span class="d-body--md-compact">{{ name }}</span>
+                <dt-link class="d-body--md-compact" :href="figmaLink" target="_blank" rel="noopener noreferrer">
+                  Figma
+                </dt-link>
+              </div>
+            </div>
             <div class="d-d-flex d-ai-center">
               <div class="d-d-flex d-fd-column d-fl-grow5">
-                <span class="d-label d-label--sm">Name</span>
-                <div class="d-d-flex d-jc-space-between">
-                  <span class="d-body--md-compact">{{ name }}</span>
-                  <dt-link :href="figmaLink" target="_blank" rel="noopener noreferrer">
-                    Figma
-                  </dt-link>
+                <span class="d-label d-label--sm">Description</span>
+                <div class="d-body--md-compact">
+                  {{ desc }}
                 </div>
-                <span class="d-body--sm-compact">{{ desc }}</span>
               </div>
             </div>
             <div class="d-d-flex d-ai-flex-end">
@@ -78,7 +86,7 @@
                 aria-label="Copy Vue markup"
               />
             </div>
-          </div>
+          </dt-stack>
         </template>
       </dt-popover>
     </aside>
@@ -91,7 +99,7 @@ import { ICON_KINDS } from './constants.js';
 import CopyButton from './CopyButton.vue';
 import SvgLoader from './SvgLoader.vue';
 
-defineProps({
+const props = defineProps({
   name: {
     type: String,
     required: true,
@@ -144,9 +152,29 @@ defineProps({
     type: Boolean,
     default: false,
   },
+
+  displayName: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const selected = ref(false);
+
+const buttonClasses = computed(() =>
+  ['dialtone-icon-card__header', 'js-dialtone-icon-card-copy-area', getLogoClass(props.name)]);
+
+const getLogoClass = name => {
+  if (name.endsWith('white')) {
+    return 'logo-white';
+  }
+  if (name.endsWith('black')) {
+    return 'logo-black';
+  }
+  if (name.endsWith('inverted')) {
+    return 'logo-inverted';
+  }
+};
 
 const selectedStatus = computed(() => selected.value ? 'yes' : 'no');
 const onPopoverOpened = (open) => {
