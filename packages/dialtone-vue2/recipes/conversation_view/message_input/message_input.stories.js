@@ -89,6 +89,18 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onMeetingPillClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onSelectedCommand: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
