@@ -7,6 +7,7 @@
     :output-format="$attrs.outputFormat"
     :auto-focus="$attrs.autoFocus"
     :placeholder="$attrs.placeholder"
+    :prevent-typing="$attrs.preventTyping"
     :link="$attrs.link"
     :mention-suggestion="$attrs.mentionSuggestion"
     :channel-suggestion="$attrs.channelSuggestion"

@@ -67,6 +67,14 @@ export default {
     },
 
     /**
+     * Prevents the user from typing any further. Deleting text will still work.
+     */
+    preventTyping: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Whether the input allows for line breaks to be introduced in the text.
      */
     allowLineBreaks: {
@@ -311,8 +319,7 @@ export default {
   data () {
     return {
       editor: null,
-      popoverOpened: false,
-      internalValue: this.value,
+      lastValue: this.value,
     };
   },
 
@@ -528,8 +535,13 @@ export default {
       // The content has changed.
       this.editor.on('update', () => {
         const value = this.getOutput();
+        if (this.preventTyping && value.length > this.lastValue.length) {
+          this.editor.commands.setContent(this.lastValue, false);
+          return;
+        }
         this.$emit('input', value);
         this.$emit('update:value', value);
+        this.lastValue = value;
       });
 
       // The editor is focused.
