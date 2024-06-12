@@ -3,7 +3,7 @@ title: Hovercard
 description: The Hovercard component provides a popover-like experience for displaying additional information.
 status: ready
 thumb: true
-image: assets/images/components/list-item.png
+image: assets/images/components/hovercard.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-hovercard--default
 figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/DT9-Component-Library?node-id=14395-441&t=l9JqN3TZt1kqjnzE-0
 ---
