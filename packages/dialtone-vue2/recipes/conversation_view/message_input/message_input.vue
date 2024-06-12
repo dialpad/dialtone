@@ -800,9 +800,11 @@ export default {
   &__bottom-section-left {
     display: flex;
   }
+
   &__bottom-section-right {
     display: flex;
   }
+
   &__image-input {
     position: absolute;
   }
