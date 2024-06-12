@@ -10,7 +10,7 @@ description: Branding assets.
   class="d-wmx100p"
 >
   <template #default>
-    If you're looking for just the Dialpad logomark (the "Ai" shape), you can find them as an icon in <router-link class="d-link d-link--muted" to="/design/icons/?search=dialpad-ai">Dialtone's Icon library</router-link>
+    If you're looking for just the Dialpad logomark (the "Ai" shape), you can find them as an icon in <router-link class="d-link d-link--muted" :to="{ path: '/design/icons', query: { search: 'dialpad-ai' } }" target="_blank">Dialtone's Icon library</router-link>
   </template>
 </dt-notice>
 
@@ -42,3 +42,12 @@ Logos are available in a fixed set of color options to suit different background
 * `dialpad-workmark-inverted`: Appropriate for use on a contrasting surface color. For example, in a light theme the wordmark will be light on a dark contrasting surface.
 * `dialpad-workmark-black`: When the wordmark must remain black regardless of theme or context.
 * `dialpad-workmark-white`: When the wordmark must remain white regardless of theme or context.
+
+<script setup>
+// import { useRouter } from 'vue-router';
+
+// const router = useRouter();
+
+// router.push({ name: 'icons', path: '/design/icons' });
+
+</script>
