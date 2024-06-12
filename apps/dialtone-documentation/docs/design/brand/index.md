@@ -10,7 +10,7 @@ description: Branding assets.
   class="d-wmx100p"
 >
   <template #default>
-    If you're looking for just the Dialpad logomark (the "Ai" shape), you can find them as an icon in <router-link class="d-link d-link--muted" :to="{ path: '/design/icons', query: { search: 'dialpad-ai' } }" target="_blank">Dialtone's Icon library</router-link>
+    If you're looking for just the Dialpad logomark (the "Ai" shape), you can find them as an icon in <a class="d-link d-link--muted" href="/design/icons/?search=dialpad-ai">Dialtone's Icon library</a>
   </template>
 </dt-notice>
 
