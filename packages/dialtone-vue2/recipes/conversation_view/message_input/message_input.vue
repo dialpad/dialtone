@@ -37,11 +37,12 @@
         :allow-italic="allowItalic"
         :allow-strike="allowStrike"
         :allow-underline="allowUnderline"
+        :additional-extensions="[meetingPill]"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
         @input="onInput($event)"
-        @selected-command="onSelectedCommand"
+        v-on="$listeners"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -228,6 +229,7 @@ import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
+import meetingPill from './meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -630,6 +632,7 @@ export default {
 
   data () {
     return {
+      meetingPill,
       internalInputValue: this.value, // internal input content
       hasFocus: false,
       imagePickerFocus: false,
@@ -722,10 +725,6 @@ export default {
         },
       });
       this.$emit('selected-emoji', emoji);
-    },
-
-    onSelectedCommand (command) {
-      this.$emit('selected-command', command);
     },
 
     onSelectImage () {

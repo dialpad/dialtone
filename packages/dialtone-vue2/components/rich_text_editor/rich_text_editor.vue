@@ -3,7 +3,7 @@
     :editor="editor"
     data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
-    @selected-command="onSelectedCommand"
+    v-on="$listeners"
   />
 </template>
 
@@ -206,6 +206,7 @@ export default {
      * of the parameters that command can take.
      *
      * When null, it does not add the plugin.
+     * Note that slash commands only work when they are the first word in the input.
      */
     slashCommandSuggestion: {
       type: Object,
@@ -267,6 +268,14 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Additional TipTap extensions to be added to the editor.
+     */
+    additionalExtensions: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   emits: [
@@ -297,14 +306,6 @@ export default {
      * @type {FocusEvent}
      */
     'focus',
-
-    /**
-     * Fires when a slash command is selected
-     *
-     * @event selected-command
-     * @type {String}
-     */
-    'selected-command',
   ],
 
   data () {
@@ -417,6 +418,10 @@ export default {
         }));
       }
 
+      if (this.additionalExtensions.length) {
+        extensions.push(...this.additionalExtensions);
+      }
+
       return extensions;
     },
 
@@ -484,9 +489,6 @@ export default {
   },
 
   methods: {
-    onSelectedCommand (command) {
-      this.$emit('selected-command', command);
-    },
 
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
