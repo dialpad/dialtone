@@ -194,6 +194,6 @@ export const WithMeetingPill = {
         ];
       },
     },
-    value: '<meeting-pill text="Start a meeting"/>',
+    value: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
   },
 };

@@ -17,6 +17,7 @@
         <div class="dt-message-input-meeting-pill__close">
           <dt-button
             circle
+            :aria-label="node.attrs['close-button-aria-label']"
             size="xs"
             importance="clear"
             @click="close"
