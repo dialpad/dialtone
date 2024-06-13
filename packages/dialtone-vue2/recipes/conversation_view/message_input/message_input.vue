@@ -27,6 +27,7 @@
         :auto-focus="autoFocus"
         :link="link"
         :placeholder="placeholder"
+        :prevent-typing="preventTyping"
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
@@ -279,6 +280,14 @@ export default {
       type: String,
       required: true,
       default: '',
+    },
+
+    /**
+     * Prevents the user from typing any further. Deleting text will still work.
+     */
+    preventTyping: {
+      type: Boolean,
+      default: false,
     },
 
     /**

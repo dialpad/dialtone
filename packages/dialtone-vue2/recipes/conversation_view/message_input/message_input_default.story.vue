@@ -14,6 +14,7 @@
         :allow-strike="$attrs.allowStrike"
         :allow-underline="$attrs.allowUnderline"
         :editable="$attrs.editable"
+        :prevent-typing="$attrs.preventTyping"
         :input-class="$attrs.inputClass"
         :link="$attrs.link"
         :output-format="$attrs.outputFormat"
