@@ -753,7 +753,7 @@ export default {
   display: flex;
   flex-direction: column;
   border-radius: var(--dt-size-radius-400);
-  border: var(--dt-space-100) solid;
+  border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-default);
   cursor: text;
 
@@ -764,10 +764,7 @@ export default {
 
   &__editor-wrapper {
     overflow: auto;
-    margin-left: var(--dt-space-500);
-    margin-right: var(--dt-space-500);
-    margin-top: var(--dt-space-400);
-    margin-bottom: var(--dt-space-300);
+    padding: var(--dt-space-400) var(--dt-space-500) var(--dt-space-300);
   }
 
   &__remaining-char-tooltip {
@@ -794,7 +791,7 @@ export default {
   &__bottom-section {
     display: flex;
     justify-content: space-between;
-    margin: var(--dt-space-300) var(--dt-space-400);
+    padding: var(--dt-space-300) var(--dt-space-400);
   }
 
   &__bottom-section-left {
