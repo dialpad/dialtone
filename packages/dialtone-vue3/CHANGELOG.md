@@ -1,3 +1,20 @@
+# [3.132.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.131.0...dialtone-vue3/v3.132.0) (2024-06-13)
+
+
+### Bug Fixes
+
+* **Input:** NO-JIRA set autocomplete="off" on input ([#360](https://github.com/dialpad/dialtone/issues/360)) ([bc47341](https://github.com/dialpad/dialtone/commit/bc473418b7ac0066739cc77a88d5e8155f035022))
+
+
+### Code Refactoring
+
+* **Message Input:** NO-JIRA remove util classes and clean up ([#364](https://github.com/dialpad/dialtone/issues/364)) ([3b82ed6](https://github.com/dialpad/dialtone/commit/3b82ed627c8c5cac09c7396def230d2f6a5ad0a7))
+
+
+### Features
+
+* **Message Input:** DLT-1753 add support for dpm meeting pill ([#363](https://github.com/dialpad/dialtone/issues/363)) ([9843166](https://github.com/dialpad/dialtone/commit/98431666571520c6f96504aec243af33b62dd24c))
+
 # [3.131.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.130.0...dialtone-vue3/v3.131.0) (2024-06-11)
 
 
