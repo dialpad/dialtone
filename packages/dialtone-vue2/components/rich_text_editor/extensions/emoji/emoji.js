@@ -1,7 +1,7 @@
 import { mergeAttributes, Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import { VueNodeViewRenderer } from '@tiptap/vue-2';
 import EmojiComponent from './EmojiComponent.vue';
-import { codeToEmojiData, emojiShortCodeRegex, emojiRegex } from '@/common/emoji';
+import { codeToEmojiData, emojiShortCodeRegex, emojiRegex, stringToUnicode } from '@/common/emoji';
 import { PluginKey } from '@tiptap/pm/state';
 
 import Suggestion from '@tiptap/suggestion';
@@ -75,7 +75,10 @@ export const Emoji = Node.create({
   },
 
   renderText ({ node }) {
-    return node.attrs.code;
+    // output emoji in text as unicode character rather than shortname for backwards compatibility with
+    // our backend.
+    const unicodeEmoji = stringToUnicode(codeToEmojiData(node.attrs.code).unicode_output);
+    return unicodeEmoji;
   },
 
   renderHTML ({ HTMLAttributes }) {
