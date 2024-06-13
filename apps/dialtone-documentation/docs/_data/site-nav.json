@@ -574,6 +574,10 @@
           "link": "/components/empty-state.html"
         },
         {
+          "text": "Hovercard",
+          "link": "/components/hovercard.html"
+        },
+        {
           "text": "Icon",
           "link": "/components/icon.html"
         },
