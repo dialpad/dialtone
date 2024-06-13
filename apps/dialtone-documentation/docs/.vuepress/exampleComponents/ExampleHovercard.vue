@@ -1,5 +1,5 @@
 <template>
-  <dt-hovercard placement="bottom-start">
+  <dt-hovercard placement="bottom-start" content-class="d-wmn332 ">
     <template #anchor>
       <dt-button kind="muted" importance="outlined">
         Hover over me
