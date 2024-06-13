@@ -3,7 +3,7 @@
     :editor="editor"
     data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
-    v-on="editorListeners"
+    v-bind="attrs"
   />
 </template>
 
@@ -324,12 +324,12 @@ export default {
   },
 
   computed: {
-    editorListeners () {
+    attrs () {
       return {
-        ...this.$listeners,
-        input: () => {},
-        focus: () => {},
-        blur: () => {},
+        ...this.$attrs,
+        onInput: () => {},
+        onFocus: () => {},
+        onBlur: () => {},
       };
     },
 

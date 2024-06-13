@@ -43,7 +43,6 @@
         @focus="onFocus"
         @blur="onBlur"
         @input="onInput"
-        v-on="$listeners"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -620,12 +619,8 @@ export default {
 
   data () {
     return {
-<<<<<<< ours
-      internalInputValue: this.modelValue, // internal input content
-=======
       additionalExtensions: [meetingPill],
-      internalInputValue: this.value, // internal input content
->>>>>>> theirs
+      internalInputValue: this.modelValue, // internal input content
       hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
@@ -752,12 +747,7 @@ export default {
     },
 
     onInput (event) {
-<<<<<<< ours
-      this.$emit('input', event);
       this.$emit('update:modelValue', event);
-=======
-      this.$emit('update:value', event);
->>>>>>> theirs
     },
   },
 };
