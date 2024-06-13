@@ -135,6 +135,7 @@ export const argsData = {
   showSend: {
     icon: 'send',
     ariaLabel: 'send',
+    tooltipLabel: 'Send',
   },
   mentionSuggestion,
   channelSuggestion,
