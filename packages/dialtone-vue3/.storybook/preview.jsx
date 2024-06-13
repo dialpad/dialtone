@@ -10,6 +10,7 @@ import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCus
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DtTooltipDirective } from "@/directives/tooltip";
+import { faker } from '@faker-js/faker';
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
@@ -19,6 +20,7 @@ setCustomEmojiJson(customEmojiJson);
 setup((app) => {
   app.use(fixDefaultSlot)
   app.use(DtTooltipDirective);
+  faker.seed(6687422389464139);
 });
 
 export default {
