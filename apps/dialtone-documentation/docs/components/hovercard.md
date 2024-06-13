@@ -1,6 +1,6 @@
 ---
 title: Hovercard
-description: The Hovercard component provides a popover-like experience for displaying additional information.
+description: A Hovercard toggles a content overlay when its anchor element is hovered for a minimum amount of time.
 status: ready
 thumb: true
 image: assets/images/components/hovercard.png
@@ -21,7 +21,7 @@ htmlCode='
     <div id="DtPopover__anchor21" data-qa="dt-hovercard-anchor">
       <button class="base-button__button d-btn d-btn--outlined d-btn--muted" data-qa="dt-button" type="button" aria-expanded="true">
         <span data-qa="dt-button-label" class="d-btn__label base-button__label">
-          Hover to see the hovercard
+          Hover over me
         </span>
       </button>
     </div>
@@ -31,15 +31,15 @@ htmlCode='
   <div id="dt20" role="dialog" data-qa="dt-hovercard__dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor21" aria-modal="true" class="d-popover__dialog" tabindex="-1" style="">
     <div data-qa="dt-popover-header-footer" class="d-popover__header d-pl16">
       <div data-qa="dt-popover-header-footer-content" class="d-popover__header__content">
-        <span>This is the header</span>
+        <div>Header</div>
       </div>
     </div>
     <div data-qa="dt-hovercard-content" class="d-popover__content d-p16">
-      <div>This is the content of the hovercard</div>
+      <div>Content</div>
     </div>
     <div data-qa="dt-popover-header-footer" class="d-popover__footer d-pl16">
       <div data-qa="dt-popover-header-footer-content" class="d-popover__footer__content">
-        <span>This is the footer</span>
+        <div>Footer</div>
       </div>
     </div>
   </div>
@@ -49,17 +49,17 @@ vueCode='
 <dt-hovercard placement="bottom-start">
   <template #anchor>
     <dt-button kind="muted" importance="outlined">
-      Hover to see the hovercard
+      Hover over me
     </dt-button>
   </template>
   <template #content>
-    <div>This is the content of the hovercard</div>
+    <div>Content</div>
   </template>
   <template #headerContent>
-    <span>This is the header</span>
+    <div>Header</div>
   </template>
   <template #footerContent>
-    <span>This is the footer</span>
+    <div>Footer</div>
   </template>
 </dt-hovercard>
 '

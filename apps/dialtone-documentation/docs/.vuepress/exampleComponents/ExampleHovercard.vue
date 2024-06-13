@@ -2,17 +2,17 @@
   <dt-hovercard placement="bottom-start">
     <template #anchor>
       <dt-button kind="muted" importance="outlined">
-        Hover to see the hovercard
+        Hover over me
       </dt-button>
     </template>
     <template #content>
-      <div>This is the content of the hovercard</div>
+      <div>Content</div>
     </template>
     <template #headerContent>
-      <span>This is the header</span>
+      <div>Header</div>
     </template>
     <template #footerContent>
-      <span>This is the footer</span>
+      <div>Footer</div>
     </template>
   </dt-hovercard>
 </template>
