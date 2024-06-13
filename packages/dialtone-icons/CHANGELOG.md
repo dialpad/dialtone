@@ -1,3 +1,10 @@
+# [4.18.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.17.1...dialtone-icons/v4.18.0) (2024-06-13)
+
+
+### Features
+
+* **Logo:** DLT-1802 color options ([#359](https://github.com/dialpad/dialtone/issues/359)) ([14958c8](https://github.com/dialpad/dialtone/commit/14958c8629b2d0697abacf3e9bcfe00b6452442c))
+
 ## [4.17.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.17.0...dialtone-icons/v4.17.1) (2024-06-07)
 
 
