@@ -105,20 +105,19 @@ describe('DtRecipeMessageInput tests', () => {
     });
 
     it('should not have border applied on message-input when not focused', () => {
-      expect(messageInputEl.classes('d-bc-default')).toBe(true);
-      expect(messageInputEl.classes('d-bc-bold')).toBe(false);
+      expect(messageInputEl.classes('dt-message-input--focused')).toBe(false);
     });
 
     describe('When we focus anywhere on the message input', () => {
       it('should focus and add the border for the message input', async () => {
         await editor.trigger('focus');
-        expect(messageInputEl.classes('d-bc-bold')).toBe(true);
+        expect(messageInputEl.classes('dt-message-input--focused')).toBe(true);
       });
 
       it('should programmatically focus to input', async () => {
         wrapper.vm.onFocus();
         await wrapper.vm.$nextTick();
-        expect(messageInputEl.classes('d-bc-bold')).toBe(true);
+        expect(messageInputEl.classes('dt-message-input--focused')).toBe(true);
       });
     });
 
