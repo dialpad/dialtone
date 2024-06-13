@@ -1365,6 +1365,12 @@
       ]
     },
     "general": {
+      "accessibility-mac": [
+        "humanpictos",
+        "people",
+        "man silhouette",
+        "man silhouette"
+      ],
       "accessibility": [
         "disability",
         "disabled",
