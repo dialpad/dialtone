@@ -78,12 +78,6 @@ export const argTypesData = {
     },
   },
 
-  onSelectedCommand: {
-    table: {
-      disable: true,
-    },
-  },
-
   onCancel: {
     table: {
       disable: true,
@@ -91,6 +85,18 @@ export const argTypesData = {
   },
 
   onSkinTone: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onMeetingPillClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onSelectedCommand: {
     table: {
       disable: true,
     },
@@ -140,6 +146,7 @@ export const argsData = {
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
   onSelectedCommand: action('selected-command'),
+  onMeetingPillClose: action('meeting-pill-close'),
   onAddMedia: action('add-media'),
   onPasteMedia: action('paste-media'),
   onNoticeClose: action('notice-close'),
@@ -179,5 +186,22 @@ export const WithoutExtensions = {
     allowStrike: false,
     allowUnderline: false,
     allowCodeblock: false,
+  },
+};
+
+export const WithMeetingPill = {
+  render: DefaultTemplate,
+  args: {
+    slashCommandSuggestion: {
+      items: ({ query }) => {
+        return [
+          {
+            command: 'dpm',
+            description: 'Start a Dialpad Meeting',
+          },
+        ];
+      },
+    },
+    value: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
   },
 };

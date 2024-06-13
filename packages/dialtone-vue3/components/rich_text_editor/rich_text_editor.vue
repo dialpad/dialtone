@@ -3,7 +3,7 @@
     :editor="editor"
     data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
-    @selected-command="onSelectedCommand"
+    v-on="editorListeners"
   />
 </template>
 
@@ -64,6 +64,14 @@ export default {
     editable: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Prevents the user from typing any further. Deleting text will still work.
+     */
+    preventTyping: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -206,6 +214,7 @@ export default {
      * of the parameters that command can take.
      *
      * When null, it does not add the plugin.
+     * Note that slash commands only work when they are the first word in the input.
      */
     slashCommandSuggestion: {
       type: Object,
@@ -267,6 +276,14 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Additional TipTap extensions to be added to the editor.
+     */
+    additionalExtensions: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   emits: [
@@ -297,25 +314,25 @@ export default {
      * @type {FocusEvent}
      */
     'focus',
-
-    /**
-     * Fires when a slash command is selected
-     *
-     * @event selected-command
-     * @type {String}
-     */
-    'selected-command',
   ],
 
   data () {
     return {
       editor: null,
-      popoverOpened: false,
-      internalValue: this.modelValue,
+      lastValue: this.modelValue,
     };
   },
 
   computed: {
+    editorListeners () {
+      return {
+        ...this.$listeners,
+        input: () => {},
+        focus: () => {},
+        blur: () => {},
+      };
+    },
+
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
@@ -417,6 +434,10 @@ export default {
         }));
       }
 
+      if (this.additionalExtensions.length) {
+        extensions.push(...this.additionalExtensions);
+      }
+
       return extensions;
     },
 
@@ -484,9 +505,6 @@ export default {
   },
 
   methods: {
-    onSelectedCommand (command) {
-      this.$emit('selected-command', command);
-    },
 
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
@@ -517,8 +535,13 @@ export default {
       // The content has changed.
       this.editor.on('update', () => {
         const value = this.getOutput();
+        if (this.preventTyping && value.length > this.lastValue.length) {
+          this.editor.commands.setContent(this.lastValue, false);
+          return;
+        }
         this.$emit('input', value);
         this.$emit('update:modelValue', value);
+        this.lastValue = value;
       });
 
       // The editor is focused.

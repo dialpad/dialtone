@@ -34,14 +34,16 @@
         :auto-focus="autoFocus"
         :link="link"
         :placeholder="placeholder"
+        :prevent-typing="preventTyping"
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
+        :additional-extensions="additionalExtensions"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
-        @input="onInput($event)"
-        @selected-command="onSelectedCommand"
+        @input="onInput"
+        v-on="$listeners"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -228,6 +230,7 @@ import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
+import meetingPill from './meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -277,6 +280,14 @@ export default {
       type: String,
       required: true,
       default: '',
+    },
+
+    /**
+     * Prevents the user from typing any further. Deleting text will still work.
+     */
+    preventTyping: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -600,27 +611,6 @@ export default {
     'selected-command',
 
     /**
-     * Native focus event
-     * @event input
-     * @type {String|JSON}
-     */
-    'focus',
-
-    /**
-     * Native blur event
-     * @event input
-     * @type {String|JSON}
-     */
-    'blur',
-
-    /**
-     * Native input event
-     * @event input
-     * @type {String|JSON}
-     */
-    'input',
-
-    /**
      * Event to sync the value with the parent
      * @event update:modelValue
      * @type {String|JSON}
@@ -630,7 +620,12 @@ export default {
 
   data () {
     return {
+<<<<<<< ours
       internalInputValue: this.modelValue, // internal input content
+=======
+      additionalExtensions: [meetingPill],
+      internalInputValue: this.value, // internal input content
+>>>>>>> theirs
       hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
@@ -724,10 +719,6 @@ export default {
       this.$emit('selected-emoji', emoji);
     },
 
-    onSelectedCommand (command) {
-      this.$emit('selected-command', command);
-    },
-
     onSelectImage () {
       this.$refs.messageInputImageUpload.$refs.input.click();
     },
@@ -754,17 +745,19 @@ export default {
     onFocus (event) {
       this.hasFocus = true;
       this.$refs.richTextEditor?.focusEditor();
-      this.$emit('focus', event);
     },
 
     onBlur (event) {
       this.hasFocus = false;
-      this.$emit('blur', event);
     },
 
     onInput (event) {
+<<<<<<< ours
       this.$emit('input', event);
       this.$emit('update:modelValue', event);
+=======
+      this.$emit('update:value', event);
+>>>>>>> theirs
     },
   },
 };
