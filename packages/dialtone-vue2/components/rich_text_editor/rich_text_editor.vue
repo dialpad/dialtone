@@ -319,7 +319,6 @@ export default {
   data () {
     return {
       editor: null,
-      lastValue: this.value,
     };
   },
 
@@ -535,13 +534,12 @@ export default {
       // The content has changed.
       this.editor.on('update', () => {
         const value = this.getOutput();
-        if (this.preventTyping && value.length > this.lastValue.length) {
-          this.editor.commands.setContent(this.lastValue, false);
+        if (this.preventTyping && value.length > this.value.length) {
+          this.editor.commands.setContent(this.value, false);
           return;
         }
         this.$emit('input', value);
         this.$emit('update:value', value);
-        this.lastValue = value;
       });
 
       // The editor is focused.
