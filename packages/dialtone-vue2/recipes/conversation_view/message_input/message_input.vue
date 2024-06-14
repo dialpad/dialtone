@@ -590,6 +590,14 @@ export default {
     'selected-command',
 
     /**
+     * Fires when meeting pill is closed
+     *
+     * @event meeting-pill-close
+     * @type {String}
+     */
+    'meeting-pill-close',
+
+    /**
      * Event to sync the value with the parent
      * @event update:value
      * @type {String|JSON}
