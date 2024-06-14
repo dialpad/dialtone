@@ -1,7 +1,7 @@
 <template>
   <table class="d-table dialtone-doc-table">
     <thead>
-      <tr>
+      <tr class="sm:d-d-none">
         <th
           scope="col"
           class="d-label--sm-compact d-tt-none"
@@ -39,7 +39,7 @@
         @focusin="onEnterRow(name)"
         @focusout="onLeaveRow()"
       >
-        <td>
+        <td class="d-w128 sm:d-w72 d-box-content">
           <token-example
             :category="category"
             :name="exampleName || name"
@@ -59,6 +59,7 @@
             <div class="d-w32">
               <dt-lazy-show :show="showCopyButton(name)">
                 <copy-button
+                  v-if="!isSmallDevice"
                   :text="name"
                   aria-label="Copy Token"
                 />
@@ -68,27 +69,14 @@
           <div class="d-body--sm">
             {{ description }}
           </div>
+          <token-value
+            v-if="!showValueColumn()"
+            :token-value="valueToString(tokenValue)"
+            :tokens="tokens"
+          />
         </th>
-        <td class="d-code--sm d-fc-purple-400 d-ta-right d-wmx164">
-          <div v-if="isCompositionToken(tokenValue)">
-            <span v-for="value in tokenValue" :key="value">
-              <span v-if="valueIsDivided(value)">
-                <span v-dt-tooltip="getTokenValue(getFirstValue(value))" class="h:d-fc-secondary">
-                  {{ getFirstValue(value) }}
-                </span>
-                /
-                <span v-dt-tooltip="getTokenValue(getSecondValue(value))" class="h:d-fc-secondary">
-                  {{ getSecondValue(value) }}&nbsp;
-                </span>
-              </span>
-              <span v-else v-dt-tooltip="getTokenValue(value)" class="h:d-fc-secondary">
-                {{ value }}&nbsp;
-              </span>
-            </span>
-          </div>
-          <div v-else>
-            {{ tokenValue }}
-          </div>
+        <td v-if="showValueColumn()" class="d-code--sm d-fc-purple-400 d-ta-right d-wmx164">
+          <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
         </td>
         <td
           v-if="!!tokenList"
@@ -106,6 +94,7 @@
 <script>
 import CopyButton from '../CopyButton.vue';
 import TokenExample from './TokenExample.vue';
+import TokenValue from './TokenValue.vue';
 import { CATEGORY_MAP } from './constants';
 
 export default {
@@ -114,6 +103,7 @@ export default {
   components: {
     CopyButton,
     TokenExample,
+    TokenValue,
   },
 
   props: {
@@ -141,6 +131,7 @@ export default {
 
   data: () => ({
     hoveredRow: null,
+    isSmallDevice: false,
   }),
 
   computed: {
@@ -149,30 +140,21 @@ export default {
     },
   },
 
-  methods: {
-    getTokenValue (value) {
-      return this.tokens.find(token => token.name === value.replace(/,$/, ''))?.tokenValue.toString();
-    },
+  beforeMount () {
+    this.isSmallDevice = window.outerWidth <= 480;
+  },
 
-    isCompositionToken (value) {
-      return Array.isArray(value);
+  methods: {
+    valueToString (value) {
+      if (Array.isArray(value)) {
+        return value.map(partial => partial.toString());
+      }
+      return value.toString();
     },
 
     remToPixels (value) {
       if (this.category !== 'size' && this.category !== 'space') return;
       return `${parseFloat(value.replace('rem', '')) * 10}px`;
-    },
-
-    valueIsDivided (value) {
-      return value.includes(' / ');
-    },
-
-    getFirstValue (value) {
-      return value.split(' / ')[0];
-    },
-
-    getSecondValue (value) {
-      return value.split(' / ')[1];
     },
 
     onEnterRow (name) {
@@ -185,6 +167,10 @@ export default {
 
     showCopyButton (name) {
       return this.hoveredRow === name;
+    },
+
+    showValueColumn () {
+      return this.isSmallDevice === false;
     },
   },
 };
