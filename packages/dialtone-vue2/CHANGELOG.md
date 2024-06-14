@@ -1,3 +1,11 @@
+## [2.139.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.139.0...dialtone-vue2/v2.139.1) (2024-06-14)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA small issues with slash commands ([#371](https://github.com/dialpad/dialtone/issues/371)) ([d7c18fa](https://github.com/dialpad/dialtone/commit/d7c18fa53ba1239281e6e6aed73b91ab1bb8f69b))
+* **Rich Text Editor:** NO-JIRA output emojis in text as unicode rather than shortname ([#366](https://github.com/dialpad/dialtone/issues/366)) ([549bd47](https://github.com/dialpad/dialtone/commit/549bd47df95f956d543647d21a3a425ed98eea51))
+
 # [2.139.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.138.0...dialtone-vue2/v2.139.0) (2024-06-13)
 
 
