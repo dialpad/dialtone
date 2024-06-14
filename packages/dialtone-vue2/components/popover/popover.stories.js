@@ -243,3 +243,21 @@ export const Variants = {
     },
   },
 };
+
+export const IframeTest = {
+  render: (argsData) => createRenderConfig(DtPopover, PopoverDefault, argsData),
+
+  args: {
+    appendTo: window.parent.document.body,
+    placement: 'top-start',
+    fallbackPlacements: [],
+  },
+
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
+    }),
+  ],
+
+  parameters: {},
+};

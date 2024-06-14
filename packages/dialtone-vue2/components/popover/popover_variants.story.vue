@@ -109,7 +109,7 @@
     </dt-popover>
     <dt-popover
       :open="$attrs.open"
-      :modal="modal || false"
+      :modal="false"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
       width-content="anchor"
@@ -421,7 +421,7 @@
     </dt-popover>
 
     <dt-popover
-      :modal="modal || false"
+      :modal="false"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
       content-class="d-pl12 d-pr16"
@@ -446,6 +446,11 @@
         </p>
       </template>
     </dt-popover>
+
+    <iframe
+      title="iframe popover example"
+      src="http://localhost:9010/iframe.html?args=&id=components-popover--iframe-test&viewMode=story"
+    />
   </div>
 </template>
 
@@ -459,6 +464,7 @@ import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'PopoverVariantsStory',
+
   components: {
     DtPopover,
     DtButton,
