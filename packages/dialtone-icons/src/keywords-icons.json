@@ -263,6 +263,9 @@
         "microsoft",
         "office"
       ],
+      "webex": [
+        "cisco"
+      ],
       "office-365": [],
       "pipedrive": [],
       "play-store-badge": [],
