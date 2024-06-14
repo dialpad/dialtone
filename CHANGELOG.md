@@ -1,3 +1,16 @@
+## [9.47.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.47.0...dialtone/v9.47.1) (2024-06-14)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA small issues with slash commands ([#371](https://github.com/dialpad/dialtone/issues/371)) ([d7c18fa](https://github.com/dialpad/dialtone/commit/d7c18fa53ba1239281e6e6aed73b91ab1bb8f69b))
+* **Rich Text Editor:** NO-JIRA output emojis in text as unicode rather than shortname ([#366](https://github.com/dialpad/dialtone/issues/366)) ([549bd47](https://github.com/dialpad/dialtone/commit/549bd47df95f956d543647d21a3a425ed98eea51))
+
+
+### Documentation
+
+* **Hovercard:** DLT-1510 add Hovercard component to doc site ([#361](https://github.com/dialpad/dialtone/issues/361)) ([97a39f0](https://github.com/dialpad/dialtone/commit/97a39f01e0f5969b4f742a98124025961a3ffe9a))
+
 # [9.47.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.46.0...dialtone/v9.47.0) (2024-06-13)
 
 
