@@ -4,170 +4,137 @@
       <dt-recipe-general-row
         v-for="item in mainOptions"
         :key="item"
-        :description="item.description"
-        :has-unreads="item.hasUnreads"
-        :unread-count="item.unreadCount"
-        :unread-count-tooltip="`${item.unreadCount} unread messages`"
-        :type="item.type"
+        v-bind="item"
       />
     </dt-stack>
     <dt-stack
       gap="200"
     >
-      <dt-collapsible :open="isFavoritesOpen">
-        <template #anchor="{ attrs }">
-          <leftbar-section-header
-            v-model="isFavoritesOpen"
-            text="Favorites"
-            v-bind="attrs"
-            show-mark-as-read
-          />
-        </template>
-        <template #content>
+      <leftbar-section title="Favorites">
+        <template #items>
           <dt-stack gap="200">
             <dt-recipe-general-row
               v-for="channel in favoriteChannels"
               :key="channel.description"
-              :description="channel.description"
-              :has-call-button="channel.hasCallButton"
-              :type="channel.type"
-              :icon-size="channel.iconSize"
-              :unread-count="channel.unreadCount"
-              :unread-count-tooltip="`${channel.unreadCount} unread messages`"
-              :has-unreads="channel.hasUnreads"
+              v-bind="channel"
             />
             <dt-recipe-general-row
               v-for="group in favoriteGroups"
               :key="group.description"
-              :description="group.description"
-              :has-call-button="group.hasCallButton"
-              :type="group.type"
-              :icon-size="group.iconSize"
-              :unread-count="group.unreadCount"
-              :unread-count-tooltip="`${group.unreadCount} unread messages`"
-              :has-unreads="group.hasUnreads"
+              v-bind="group"
             />
             <dt-recipe-contact-row
-              v-for="item in favoriteContacts"
-              :key="item.text"
-              :name="item.name"
-              :avatar-seed="item.name"
-              :avatar-presence="item.avatarPresence"
-              :call-button-tooltip="item.callButtonTooltip"
-              :has-call-button="item.hasCallButton"
-              :presence-text="item.presenceText"
-              :has-unreads="item.hasUnreads"
-              :unread-count="item.unreadCount"
+              v-for="contact in favoriteContacts"
+              :key="contact.name"
+              v-bind="contact"
             />
           </dt-stack>
         </template>
-      </dt-collapsible>
-      <dt-collapsible :open="isContactCentersOpen">
-        <template #anchor="{ attrs }">
-          <leftbar-section-header
-            v-model="isContactCentersOpen"
-            text="Contact centers"
-            v-bind="attrs"
-            show-contact-center-availability
-          />
+        <template #action>
+          <mark-all-as-read-button />
         </template>
-        <template #content>
+      </leftbar-section>
+
+      <leftbar-section title="Contact centers">
+        <template #items>
           <dt-stack gap="200">
             <dt-recipe-general-row
               v-for="contactCenter in contactCenters"
               :key="contactCenter.description"
-              :description="contactCenter.description"
-              :type="contactCenter.type"
-              :color="contactCenter.color"
-              :unread-count="contactCenter.unreadCount"
-              :unread-count-tooltip="`${contactCenter.unreadCount} unread messages`"
-              :has-unreads="contactCenter.hasUnreads"
+              v-bind="contactCenter"
             />
           </dt-stack>
         </template>
-      </dt-collapsible>
-      <dt-collapsible :open="isChannelsOpen">
-        <template #anchor="{ attrs }">
-          <leftbar-section-header
-            v-model="isChannelsOpen"
-            text="Channels"
-            v-bind="attrs"
-            :show-dropdown="true"
-          />
+        <template #action>
+          <dt-button
+            class="d-fc-success d-bar-pill"
+            kind="muted"
+            importance="clear"
+            size="xs"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon
+                name="bell-ring"
+                :size="iconSize"
+              />
+            </template>
+            <span>Available</span>
+          </dt-button>
         </template>
-        <template #content>
+      </leftbar-section>
+
+      <leftbar-section title="Channels">
+        <template #items>
           <dt-stack gap="200">
             <dt-recipe-general-row
               v-for="channel in channels"
               :key="channel.description"
-              :description="channel.description"
-              :type="channel.type"
-              :icon-size="channel.iconSize"
-              :unread-count="channel.unreadCount"
-              :unread-count-tooltip="`${channel.unreadCount} unread messages`"
-              :has-unreads="channel.hasUnreads"
+              v-bind="channel"
             />
           </dt-stack>
         </template>
-      </dt-collapsible>
-      <dt-collapsible :open="isRecentsOpen">
-        <template #anchor="{ attrs }">
-          <leftbar-section-header
-            v-model="isRecentsOpen"
-            text="Recents"
-            v-bind="attrs"
-            :show-mark-as-read="true"
-          />
+        <template #action>
+          <options-dropdown />
         </template>
-        <template #content>
+      </leftbar-section>
+
+      <leftbar-section title="Recents">
+        <template #items>
           <dt-stack gap="200">
             <dt-recipe-general-row
               v-for="group in groups"
               :key="group.description"
-              :description="group.description"
-              :type="group.type"
-              :unread-count="group.unreadCount"
-              :unread-count-tooltip="`${group.unreadCount} unread messages`"
-              :has-unreads="group.hasUnreads"
+              v-bind="group"
             />
             <dt-recipe-contact-row
               v-for="contact in contacts"
               :key="contact.name"
-              :name="contact.name"
-              :avatar-seed="contact.name"
-              :avatar-presence="contact.avatarPresence"
-              :call-button-tooltip="contact.callButtonTooltip"
-              :has-call-button="contact.hasCallButton"
-              :presence-text="contact.presenceText"
-              :has-unreads="contact.hasUnreads"
-              :unread-count="contact.unreadCount"
+              v-bind="contact"
             />
           </dt-stack>
         </template>
-      </dt-collapsible>
+        <template #action>
+          <mark-all-as-read-button />
+        </template>
+      </leftbar-section>
     </dt-stack>
   </dt-stack>
 </template>
 
 <script setup>
-import LeftbarSectionHeader from './dialpad_leftbar_section_header.vue';
+import LeftbarSection from './components/leftbar_section.vue';
+import MarkAllAsReadButton from './components/mark_all_as_read_button.vue';
+import OptionsDropdown from './components/options_dropdown.vue';
+import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/icon';
 import { DtStack } from '@/components/stack';
-import { DtCollapsible } from '@/components/collapsible';
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';
 import { faker } from '@faker-js/faker';
 import { ref, computed } from 'vue';
 
-const isFavoritesOpen = ref(true);
-const isContactCentersOpen = ref(true);
-const isChannelsOpen = ref(true);
-const isRecentsOpen = ref(true);
-
 const mainOptions = ref([
-  { description: 'Inbox', type: 'inbox', hasUnreads: true },
-  { description: 'Contacts', type: 'contacts', hasUnreads: false },
-  { description: 'All channels', type: 'channels', hasUnreads: false },
-  { description: 'Threads', type: 'threads', hasUnreads: false },
+  { description: 'Inbox', type: 'inbox' },
+  { description: 'Contacts', type: 'contacts' },
+  {
+    description: 'All channels',
+    type: 'channels',
+    hasUnreads: true,
+    unreadMentionCount: faker.number.int({ min: 1, max: 20 }).toString(),
+    get unreadCountTooltip () {
+      return unreadCountMessage({ mentions: this.unreadMentionCount });
+    },
+  },
+  {
+    description: 'Threads',
+    type: 'threads',
+    hasUnreads: true,
+    unreadCount: faker.number.int({ min: 1, max: 20 }).toString(),
+    unreadMentionCount: faker.number.int({ min: 1, max: 20 }).toString(),
+    get unreadCountTooltip () {
+      return unreadCountMessage({ messages: this.unreadCount, mentions: this.unreadMentionCount });
+    },
+  },
 ]);
 const channels = ref([
   {
@@ -176,36 +143,28 @@ const channels = ref([
     iconSize: '200',
     unreadCount: faker.number.int({ min: 0, max: 9 }).toString(),
     hasUnreads: true,
+    get unreadCountTooltip () {
+      return unreadCountMessage({ messages: this.unreadCount });
+    },
   },
-  {
-    description: faker.word.sample(),
-    type: 'channels',
-    iconSize: '200',
-  },
-  {
-    description: faker.word.sample({ strategy: 'longest' }),
-    type: 'locked channel',
-    iconSize: '200',
-  },
+
+  { description: faker.word.sample(), type: 'channels', iconSize: '200' },
+  { description: faker.word.sample({ strategy: 'longest' }), type: 'locked channel', iconSize: '200' },
 ]);
 const contactCenters = ref([
-  {
-    description: faker.person.fullName(),
-    type: 'contact center',
-    color: 'magenta-200',
-  },
+  { description: faker.person.fullName(), type: 'contact center', color: 'magenta-200' },
   {
     description: faker.person.fullName(),
     type: 'contact center',
     color: 'gold-300',
     unreadCount: faker.number.int({ min: 0, max: 99 }).toString(),
     hasUnreads: true,
+    get unreadCountTooltip () {
+      return unreadCountMessage({ messages: this.unreadCount });
+    },
   },
-  {
-    description: faker.person.fullName(),
-    type: 'contact center',
-    color: 'purple-300',
-  },
+
+  { description: faker.person.fullName(), type: 'contact center', color: 'purple-300' },
 ]);
 const contacts = ref([
   {
@@ -215,24 +174,39 @@ const contacts = ref([
     presenceText: 'Work from home',
     hasUnreads: true,
     unreadCount: faker.number.int({ min: 0, max: 99 }).toString(),
+    get unreadCountTooltip () {
+      return unreadCountMessage({ messages: this.unreadCount });
+    },
+    get avatarSeed () {
+      return this.name;
+    },
   },
   {
     name: faker.person.fullName(),
     avatarPresence: 'away',
     callButtonTooltip: 'Call',
     presenceText: 'In a meeting',
+    get avatarSeed () {
+      return this.name;
+    },
   },
   {
     name: faker.person.fullName(),
     avatarPresence: 'busy',
     callButtonTooltip: 'Call',
     presenceText: 'DND',
+    get avatarSeed () {
+      return this.name;
+    },
   },
   {
     name: faker.person.fullName(),
     avatarPresence: 'offline',
     callButtonTooltip: 'Call',
     presenceText: 'DND',
+    get avatarSeed () {
+      return this.name;
+    },
   },
 ]);
 const groups = ref([
@@ -241,8 +215,18 @@ const groups = ref([
     type: 'coaching group',
     hasUnreads: true,
     unreadCount: faker.number.int({ min: 0, max: 99 }).toString(),
+    get unreadCountTooltip () {
+      return unreadCountMessage({ messages: this.unreadCount });
+    },
   },
 ]);
+
+const unreadCountMessage = ({ messages, mentions }) => {
+  const unreadMessages = messages && `${messages} unread messages`;
+  const unreadMentions = mentions && `${mentions} unread mentions`;
+
+  return [unreadMessages, unreadMentions].filter(item => !!item).join(' and ');
+};
 
 const favoriteChannels = computed(() => channels.value.slice(0, 1));
 const favoriteContacts = computed(() => contacts.value.slice(0, 1));
