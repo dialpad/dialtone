@@ -46,6 +46,12 @@ const argTypesData = {
   },
 
   // Action Event Handlers
+  onOpened: {
+    table: {
+      disable: true,
+    },
+  },
+
   opened: {
     description: 'Emitted whenever the content is collapsed or expanded.',
     table: {
@@ -68,11 +74,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCollapsibleDefaultStory,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtCollapsibleDefaultStory);
 
 export const Default = {
   render: DefaultTemplate,
