@@ -29,7 +29,12 @@ const props = defineProps({
 });
 const formattedComponentName = computed(() => `Dt${props.componentName}`);
 
-const docSlots = ComponentDocs.find(f => f.displayName.toLowerCase() === formattedComponentName.value.toLowerCase())
+const isSameComponentName = (name) => {
+  return name.toLowerCase() === formattedComponentName.value.toLowerCase() ||
+    name.toLowerCase() === props.componentName.toLowerCase();
+};
+
+const docSlots = ComponentDocs.find(f => isSameComponentName(f.displayName))
   ?.slots?.map((item) => {
     return {
       name: item.name,
@@ -37,7 +42,7 @@ const docSlots = ComponentDocs.find(f => f.displayName.toLowerCase() === formatt
     };
   });
 
-const docProps = ComponentDocs.find(f => f.displayName.toLowerCase() === formattedComponentName.value.toLowerCase())
+const docProps = ComponentDocs.find(f => isSameComponentName(f.displayName))
   ?.props?.map((item) => {
     return {
       name: item?.name,
@@ -49,7 +54,7 @@ const docProps = ComponentDocs.find(f => f.displayName.toLowerCase() === formatt
     };
   });
 
-const docEvents = ComponentDocs.find(f => f.displayName.toLowerCase() === formattedComponentName.value.toLowerCase())
+const docEvents = ComponentDocs.find(f => isSameComponentName(f.displayName))
   ?.events?.map((item) => {
     return {
       name: item.name,

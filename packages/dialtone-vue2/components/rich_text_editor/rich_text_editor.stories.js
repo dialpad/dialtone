@@ -8,13 +8,14 @@ import {
 } from './rich_text_editor_constants';
 
 import mentionSuggestion from './mention_suggestion';
+import channelSuggestion from './channel_suggestion';
+import slashCommandSuggestion from './slash_command_suggestion';
 
 // Default Prop Values
 export const argsData = {
-  value: `I am not a standalone component, please use Message Input instead 🙏!`,
+  value: '<p>I am not a standalone component, please use Message Input instead <emoji-component code=":v_tone3:"></emoji-component><emoji-component code=":robot:"></emoji-component>!</p>',
   editable: true,
   inputAriaLabel: 'This is a descriptive label',
-  outputFormat: 'text',
   autoFocus: false,
   placeholder: 'Type here...',
   link: true,
@@ -104,15 +105,29 @@ export const WithLinks = {
   render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
   args: {
     link: true,
-    value: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
-    'IP addresses: 192.158.1.38, email addresses: noreply@dialpad.com and phone numbers: (778) 765-8813, +17787658813!',
+    value: '<p>The editor can autolink URLs: <a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="http://dialpad.com">dialpad.com</a>, <a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="https://www.dialpad.com/about-us/">https://www.dialpad.com/about-us/</a>, email addresses: <a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="mailto:noreply@dialpad.com">noreply@dialpad.com</a></p>',
   },
 };
 
 export const WithMentionSuggestions = {
   render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
   args: {
-    value: 'The editor can also suggest mentions: @John Doe, @Jane Doe!',
+    value: '<p>The editor can also suggest mentions: <mention-component name="Test Person" avatarsrc="" id="test.person"></mention-component>, <mention-component name="Test Person 2" avatarsrc="" id="test.person2"></mention-component>! and channel suggestions: <channel-component name="dialpad" id="dialpad" locked="false"></channel-component>. The suggestions dropdown will wait 1000ms to simulate an API call.</p>',
     mentionSuggestion,
+    channelSuggestion,
+    slashCommandSuggestion,
+  },
+};
+
+export const WithCustomExtensions = {
+  render: (argsData) => createRenderConfig(DtRichTextEditor, DtRichTextEditorDefaultTemplate, argsData),
+  args: {
+    allowBlockquote: false,
+    allowBold: false,
+    allowBulletList: false,
+    allowItalic: false,
+    allowStrike: false,
+    allowUnderline: false,
+    allowCodeblock: false,
   },
 };

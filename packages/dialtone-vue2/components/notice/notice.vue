@@ -158,6 +158,16 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Truncates the content instead of wrapping.
+     * Used when the notice needs to have a fixed height.
+     * @values true, false
+     */
+    truncateText: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -181,7 +191,7 @@ export default {
       return [
         'd-notice',
         noticeKinds[this.kind],
-        { 'd-notice--important': this.important },
+        { 'd-notice--important': this.important, 'd-notice--truncate': this.truncateText },
       ];
     },
   },

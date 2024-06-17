@@ -1,7 +1,8 @@
-import emojiRegex from 'emoji-regex';
+import { emojiPattern } from 'regex-combined-emojis';
 import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json';
 
-export const emojiVersion = '6.6';
+export const emojiRegex = new RegExp(emojiPattern, 'g');
+export const emojiVersion = '8.0';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
 export let customEmojiAssetUrl = null;
 
@@ -14,6 +15,8 @@ export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
 export const emojiJson = emojiJsonLocal;
+
+export const emojiShortCodeRegex = /(^| |(?<=:))(:\w+:)/g;
 
 export function getEmojiData () {
   return emojiJson;
@@ -167,11 +170,11 @@ export function stringToUnicode (str) {
 
 // Takes in a code (which could be unicode or shortcode) and returns the emoji data for it.
 export function codeToEmojiData (code) {
+  code = code?.trim();
   if (code.startsWith(':') && code.endsWith(':')) {
     return shortcodeToEmojiData(code);
   } else {
     const unicodeString = unicodeToString(code);
-
     const result = emojiJson[unicodeString];
     if (result) result.key = unicodeString;
     return result;
@@ -183,7 +186,9 @@ export function codeToEmojiData (code) {
 // removes duplicates.
 // @returns {string[]}
 export function findShortCodes (textContent) {
-  const shortcodes = textContent.match(/:\w+:/g);
+  const shortcodes = (
+    textContent.match(emojiShortCodeRegex) || []
+  ).map(code => code.trim());
   return filterValidShortCodes(shortcodes);
 }
 
@@ -196,7 +201,7 @@ export function filterValidShortCodes (shortcodes) {
 // removes duplicates
 // @returns {string[]}
 export function findEmojis (textContent) {
-  const matches = [...textContent.matchAll(emojiRegex())];
+  const matches = [...textContent.matchAll(emojiRegex)];
   const emojis = matches.length ? matches.map(match => match[0]) : [];
   return new Set(emojis);
 }

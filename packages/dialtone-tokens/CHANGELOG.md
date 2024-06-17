@@ -1,3 +1,43 @@
+# [1.31.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.30.1...dialtone-tokens/v1.31.0) (2024-06-11)
+
+
+### Documentation
+
+* NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
+
+### Features
+
+* **Badge:** DLT-1788 design tokens for subtle and outline variants ([#358](https://github.com/dialpad/dialtone/issues/358)) ([4e008b7](https://github.com/dialpad/dialtone/commit/4e008b768b33758b64a20418c217db245902f384))
+
+## [1.30.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.30.0...dialtone-tokens/v1.30.1) (2024-04-26)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
+
+# [1.30.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.29.0...dialtone-tokens/v1.30.0) (2024-04-12)
+
+
+### Features
+
+* DLT-1627 adding new tokens for expressive mode ([#214](https://github.com/dialpad/dialtone/issues/214)) ([90f304f](https://github.com/dialpad/dialtone/commit/90f304feb933d23535cb7c891839c18646d63836))
+
+# [1.29.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.28.0...dialtone-tokens/v1.29.0) (2024-04-09)
+
+
+### Features
+
+* DLT-1678 build all themes ([#253](https://github.com/dialpad/dialtone/issues/253)) ([fe9c373](https://github.com/dialpad/dialtone/commit/fe9c373212f74a56afac3c7e9efe0d15bdeb7a7b))
+
+# [1.28.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.2...dialtone-tokens/v1.28.0) (2024-04-07)
+
+
+### Features
+
+* **Focus Ring:** NO-JIRA reduce focus ring size ([#244](https://github.com/dialpad/dialtone/issues/244)) ([e24d0aa](https://github.com/dialpad/dialtone/commit/e24d0aabdbc87f8ff0e4e41bb42ef7f4b4d33a78))
+
 ## [1.27.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.1...dialtone-tokens/v1.27.2) (2024-03-26)
 
 

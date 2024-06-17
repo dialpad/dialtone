@@ -3,6 +3,7 @@
     <dt-link
       :href="$attrs.href"
       :kind="$attrs.kind"
+      :inverted="$attrs.inverted"
       :rel="$attrs.rel"
       @click="$attrs.onClick"
       @focusin="$attrs.onFocusIn"

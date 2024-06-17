@@ -1,3 +1,99 @@
+# [8.36.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.35.0...dialtone-css/v8.36.0) (2024-06-11)
+
+
+### Bug Fixes
+
+* **Utility:** NO-JIRA border color opacity utility ([#356](https://github.com/dialpad/dialtone/issues/356)) ([a0e4d08](https://github.com/dialpad/dialtone/commit/a0e4d0872e2e081921f46ebe1d4db1a05fe55ec6))
+
+
+### Features
+
+* **Badge:** DLT-1788 design tokens for subtle and outline variants ([#358](https://github.com/dialpad/dialtone/issues/358)) ([4e008b7](https://github.com/dialpad/dialtone/commit/4e008b768b33758b64a20418c217db245902f384))
+* **Chip:** NO-JIRA update chip bg colors ([#355](https://github.com/dialpad/dialtone/issues/355)) ([52a5043](https://github.com/dialpad/dialtone/commit/52a50437220734de749da7cfcc57b424853bbdec))
+
+# [8.35.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.34.0...dialtone-css/v8.35.0) (2024-06-07)
+
+
+### Documentation
+
+* DLT-1399 add empty state section ([#282](https://github.com/dialpad/dialtone/issues/282)) ([053bd2b](https://github.com/dialpad/dialtone/commit/053bd2b6ef9b0f4a06b93eab9b8ac297aeb60171))
+* **Empty State:** NO-JIRA restructure and content refinement ([#347](https://github.com/dialpad/dialtone/issues/347)) ([7c087e7](https://github.com/dialpad/dialtone/commit/7c087e76e73a42db0551e3a07e7a62be1c0ac49f))
+
+
+### Features
+
+* **Css Utility:** DLT-619 add font-variant-numeric utility ([#351](https://github.com/dialpad/dialtone/issues/351)) ([d02a6ae](https://github.com/dialpad/dialtone/commit/d02a6aeffb3839f5045c5c8d24ed2300194030a4))
+
+# [8.34.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.33.0...dialtone-css/v8.34.0) (2024-05-31)
+
+
+### Bug Fixes
+
+* NO-JIRA remove double classes from dialtone output ([#340](https://github.com/dialpad/dialtone/issues/340)) ([0fcea93](https://github.com/dialpad/dialtone/commit/0fcea93dd6bc6acff01ffb8882b5ddaf7e0a59d2))
+
+
+### Features
+
+* **Emoji Picker:** DLT-1781 allow hiding of search and setting searchQuery via prop ([#345](https://github.com/dialpad/dialtone/issues/345)) ([d5e5373](https://github.com/dialpad/dialtone/commit/d5e5373d81169afb3845fe815bf212c2d1ab7384))
+
+# [8.33.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.32.0...dialtone-css/v8.33.0) (2024-05-30)
+
+
+### Features
+
+* **Badge:** DLT-1777 subtle and outlined variants ([#338](https://github.com/dialpad/dialtone/issues/338)) ([1da1fe9](https://github.com/dialpad/dialtone/commit/1da1fe9eaccbc54724d3c580eb906b697b97bcaf))
+
+# [8.32.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.2...dialtone-css/v8.32.0) (2024-05-23)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1758 add legacy styles back ([#326](https://github.com/dialpad/dialtone/issues/326)) ([79d087b](https://github.com/dialpad/dialtone/commit/79d087be14681d435e93837bae9a05b17b93507e))
+
+
+### Features
+
+* dlt-1397 init empty state ([#315](https://github.com/dialpad/dialtone/issues/315)) ([38d3103](https://github.com/dialpad/dialtone/commit/38d31039c592d0b99312b27de8096bd229ca7bc2))
+* **Link:** DLT-1631 add inverted utility classes ([#321](https://github.com/dialpad/dialtone/issues/321)) ([0aa8259](https://github.com/dialpad/dialtone/commit/0aa8259fa3577de6b5ec7a1b30a1e203771fa7e8))
+
+## [8.31.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.1...dialtone-css/v8.31.2) (2024-05-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1757 round button alignment ([#314](https://github.com/dialpad/dialtone/issues/314)) ([eabd110](https://github.com/dialpad/dialtone/commit/eabd1102e139801ee113a38c9e6f9765eb6c2c9e))
+
+## [8.31.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.31.0...dialtone-css/v8.31.1) (2024-05-09)
+
+
+### Bug Fixes
+
+* NO-JIRA define "Segoe UI Adjusted" font ([#306](https://github.com/dialpad/dialtone/issues/306)) ([f860dba](https://github.com/dialpad/dialtone/commit/f860dba7437350e4950e12754c70d6d2d60ff40a))
+
+
+### Documentation
+
+* NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
+# [8.31.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.30.0...dialtone-css/v8.31.0) (2024-04-26)
+
+
+### Features
+
+* **Dt Notice:** DLT-1671 add support for truncating text ([#281](https://github.com/dialpad/dialtone/issues/281)) ([a0ab1be](https://github.com/dialpad/dialtone/commit/a0ab1be9b28d829f20bd2a2c7ef6b6f35756e1c4))
+
+# [8.30.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.3...dialtone-css/v8.30.0) (2024-04-07)
+
+
+### Bug Fixes
+
+* **Input:** DLT-1646 scrollbar overlapping border ([#250](https://github.com/dialpad/dialtone/issues/250)) ([0cfe5b3](https://github.com/dialpad/dialtone/commit/0cfe5b3ef41a4d70e36572c123dbd0aeaa9e567e))
+
+
+### Features
+
+* **Focus Ring:** NO-JIRA reduce focus ring size ([#244](https://github.com/dialpad/dialtone/issues/244)) ([e24d0aa](https://github.com/dialpad/dialtone/commit/e24d0aabdbc87f8ff0e4e41bb42ef7f4b4d33a78))
+
 ## [8.29.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.29.2...dialtone-css/v8.29.3) (2024-03-28)
 
 

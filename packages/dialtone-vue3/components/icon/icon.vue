@@ -1,29 +1,16 @@
 <template>
-  <span class="d-icon__wrapper">
-    <dt-skeleton
-      v-show="!iconLoaded && showSkeleton"
-      :offset="0"
-      :shape-option="{ shape: 'circle', size: '100%' }"
-      :aria-label="ariaLabel"
-      :class="['d-icon', iconSize]"
-    />
-    <component
-      :is="icon"
-      v-show="iconLoaded"
-      :size="size"
-      :aria-label="ariaLabel"
-      :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
-      v-bind="$attrs"
-      @loaded="iconLoaded = true"
-    />
-  </span>
+  <component
+    :is="icon"
+    v-if="icon"
+    :size="size"
+    :aria-label="ariaLabel"
+    :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
+  />
 </template>
 
 <script>
-import { DtSkeleton } from '../skeleton';
-import * as icons from '@dialpad/dialtone-icons/vue3';
+import { icons } from '@dialpad/dialtone-icons/vue3';
 import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
-import { defineAsyncComponent } from 'vue';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -31,16 +18,6 @@ import { defineAsyncComponent } from 'vue';
  */
 export default {
   name: 'DtIcon',
-
-  components: {
-    DtSkeleton,
-    ...Object.keys(icons).reduce((acc, icon) => {
-      acc[icon] = defineAsyncComponent(icons[icon]);
-      return acc;
-    }, {}),
-  },
-
-  inheritAttrs: false,
 
   props: {
     /**
@@ -69,15 +46,6 @@ export default {
       type: String,
       default: undefined,
     },
-
-    /**
-     * Shows a skeleton loader while the emoji asset is loading.
-     * @values true, false
-     */
-    showSkeleton: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   data () {
@@ -87,12 +55,8 @@ export default {
   },
 
   computed: {
-    iconSize () {
-      return ICON_SIZE_MODIFIERS[this.size];
-    },
-
     icon () {
-      return `dt-icon-${this.name}`;
+      return icons[`./src/icons/${this.name}.vue`];
     },
   },
 };

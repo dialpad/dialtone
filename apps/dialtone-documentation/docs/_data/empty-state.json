@@ -1,24 +1,59 @@
 {
   "classes": [
     {
-      "class": "d-card",
+      "class": "d-empty-state",
       "applies": "N/A",
-      "description": "Container for the card and its elements."
+      "description": "Container for the empty state and its elements."
     },
     {
-      "class": "d-card__header",
-      "applies": "Child of .d-card",
-      "description": "Contains the header content."
+      "class": "d-empty-state__icon",
+      "applies": ".d-empty-state",
+      "description": "Styles empty state icon"
     },
     {
-      "class": "d-card__content",
-      "applies": "Child of .d-card",
-      "description": "Contains the main body content of the card."
+      "class": "d-empty-state__illustration",
+      "applies": ".d-empty-state",
+      "description": "Styles empty state illustration"
     },
     {
-      "class": "d-card__footer",
-      "applies": "Child of .d-card",
-      "description": "Contains the footer content."
+      "class": "d-empty-state__content",
+      "applies": ".d-empty-state",
+      "description": "Styles empty state content"
+    },
+    {
+      "class": "d-empty-state__content--sm",
+      "applies": ".d-empty-state__content",
+      "description": "Styles empty state content on small size"
+    },
+    {
+      "class": "d-empty-state__content--md",
+      "applies": ".d-empty-state__content",
+      "description": "Styles empty state content on medium size"
+    },
+    {
+      "class": "d-empty-state__content--lg",
+      "applies": ".d-empty-state__content",
+      "description": "Styles empty state content on large size"
+    },
+    {
+      "class": "d-empty-state__header-text",
+      "applies": ".d-empty-state",
+      "description": "Styles empty state header text"
+    },
+    {
+      "class": "d-empty-state__body-text",
+      "applies": ".d-empty-state",
+      "description": "Styles empty state body text"
+    },
+    {
+      "class": "d-empty-state--size--sm",
+      "applies": ".d-empty-state",
+      "description": "Styles empty state in small size"
+    },
+    {
+      "class": "d-empty-state--size--md",
+      "applies": ".d-empty-state",
+      "description": "Styles empty state in medium size"
     }
   ]
 }

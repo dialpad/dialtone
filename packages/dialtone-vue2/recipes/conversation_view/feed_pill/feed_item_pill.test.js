@@ -63,7 +63,6 @@ describe('DtRecipeFeedItemPill Tests', function () {
 
       it('should render a feed item pill', async () => {
         expect(feedItemPill.exists()).toBeTruthy();
-        console.log(wrapper.html());
         expect(icon.exists()).toBe(true);
         expect(icon.classes()).toContain(`d-icon--${MOCK_ICON_NAME}`);
         expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(false);

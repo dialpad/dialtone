@@ -256,6 +256,12 @@ html body {
       padding-left: var(--dt-space-400);
     }
   }
+
+  >.toc-list >.toc-item {
+    >a {
+      font-weight: var(--dt-font-weight-semi-bold);
+    }
+  }
 }
 
 
@@ -344,15 +350,8 @@ a.header-anchor {
   grid-template-columns: [content] minmax(32rem, 104rem);
 }
 
+.d-gl-docsite-toc,
 .d-gl-docsite.tokens-page {
-  grid-template-columns: [content] minmax(32rem, 0.6fr);
-
-  @media (max-width: 1260px) {
-    grid-template-columns: [content] minmax(32rem, 104rem);
-  }
-}
-
-.d-gl-docsite-toc {
   grid-template-areas: 'content toc';
   grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(min-content, 21.6rem);
 
@@ -413,14 +412,14 @@ a.header-anchor {
 
   display: grid;
   grid-auto-rows: 12rem;
+  grid-gap: var(--dt-space-500);
   grid-template-columns: repeat(var(--icon-grid-columns), [col] var(--icon-card-width));
 
   &--large {
+    grid-auto-rows: 18rem;
     &:extend(.d-gl-docsite-icons);
 
     --icon-card-width: 18rem;
-
-    grid-auto-rows: 18rem;
   }
 }
 
@@ -450,7 +449,7 @@ a.header-anchor {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: var(--icon-card-width);
   height: 100%;
   padding: var(--dt-space-400);
   background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0);
@@ -458,12 +457,48 @@ a.header-anchor {
   cursor: pointer;
   transition: all 150ms var(--ttf-in-out);
 
-  &:hover {
+  &:hover,
+  .dialtone-icon-card[data-selected='yes'] & {
     background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0.4);
   }
 
-  .dialtone-icon-card[data-selected='yes'] & {
-    background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0.4);
+  &.logo-white {
+    background-color: var(--dt-color-neutral-black);
+
+    &:hover,
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: hsl(var(--dt-color-neutral-black-h), var(--dt-color-neutral-black-s), var(--dt-color-neutral-black-l), 0.8);
+    }
+
+    .dialtone-icon-card__name {
+      color: var(--dt-color-neutral-white);
+    }
+  }
+
+  &.logo-black {
+    background-color: var(--dt-color-neutral-white);
+
+    &:hover,
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: hsl(0deg, 0%, 91.37%, 0.4);
+    }
+
+    .dialtone-icon-card__name {
+      color: var(--dt-color-neutral-black);
+    }
+  }
+
+  &.logo-inverted {
+    background-color: var(--dt-color-surface-contrast);
+
+    &:hover,
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: hsl(var(--dt-color-black-900-h), var(--dt-color-black-900-s), var(--dt-color-black-900-l), 0.8);
+    }
+
+    .dialtone-icon-card__name {
+      color: var(--dt-color-foreground-primary-inverted);
+    }
   }
 }
 
@@ -511,6 +546,13 @@ a.header-anchor {
   text-overflow: ellipsis;
 }
 
+.dialtone-icon-card__name {
+  position: absolute;
+  bottom: var(--dt-space-400);
+  color: var(--dt-color-foreground-primary);
+  font: var(--dt-typography-code-sm);
+}
+
 .dialtone-icon-popover {
   max-width: var(--dt-size-950);
 }
@@ -524,7 +566,7 @@ a.header-anchor {
   position: relative;
   background-color: var(--dt-color-surface-primary);
 
-  &--inner-wrapper {
+  &__inner-wrapper {
     padding-top: calc(var(--dt-space-300) * 32);
     padding-bottom: calc(var(--dt-space-300) * 32);
 
@@ -533,7 +575,7 @@ a.header-anchor {
     }
   }
 
-  &--content {
+  &__content {
     align-items: flex-start;
     max-width: 40%;
 
@@ -544,18 +586,10 @@ a.header-anchor {
     }
   }
 
-  &--image {
+  &__image {
     @media (max-width: 640px) {
       display: none;
     }
-  }
-
-  .dp-logo {
-    position: absolute;
-    inset: 0;
-    background-color: var(--dt-color-surface-strong);
-    opacity: .05;
-    mask: url("/assets/images/home-dp-logo.svg") 80% bottom no-repeat;
   }
 
   @media (max-width: 640px) {

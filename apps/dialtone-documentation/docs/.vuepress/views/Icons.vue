@@ -16,6 +16,7 @@
       <base-icon
         v-for="(icon, index) in icons"
         :key="index"
+        :illustration="illustration"
         :desc="icon.desc"
         :code="icon.code"
         :file="icon.file"
@@ -25,6 +26,7 @@
         :vue="icon.vue"
         :figma-link="icon.figmaLink"
         :raw-svg="icon.rawSvg"
+        :display-name="kind === 'brand-logos'"
       />
     </div>
   </div>
@@ -60,6 +62,11 @@ export default {
     title: {
       type: String,
       default: null,
+    },
+
+    illustration: {
+      type: Boolean,
+      default: false,
     },
   },
 

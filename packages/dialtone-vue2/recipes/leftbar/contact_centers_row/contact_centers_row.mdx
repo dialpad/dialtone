@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as ContactCentersRowStories from './contact_centers_row.stories.js';
+
+<Meta of={ContactCentersRowStories}/>
+
+# Contact Centers Row
+
+<Subtitle>
+  This component covers the Ai Contact Centers leftbar row that will contain complex controls in the same row.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story of={ContactCentersRowStories.Default} />
+</Canvas>
+
+
+## Off duty agent
+
+<Canvas>
+  <Story of={ContactCentersRowStories.OffDuty} />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story of={ContactCentersRowStories.Variants} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```js
+import { DtRecipeContactCentersRow } from '@dialpad/dialtone-vue';
+```
+
+### Simple Ai Contact Centers row
+
+```html
+<dt-recipe-contact-centers-row
+  description="Channel name"
+  unread-count="29"
+/>
+```

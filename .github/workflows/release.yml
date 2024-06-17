@@ -1,36 +1,30 @@
-name: Release
+name: Release packages
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - production
-      - alpha
-      - beta
-      - next
+    inputs:
+      package:
+        type: 'choice'
+        required: true
+        description: 'Select a package to run the release'
+        options:
+          - all
+          - dialtone
+          - css
+          - emojis
+          - icons
+          - tokens
+          - vue2
+          - vue3
+          - eslint-plugin
+          - stylelint-plugin
+  schedule:
+    - cron: "0 10 * * 2"
 
 env:
   HUSKY: 0
 
 jobs:
-  filter-actions:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-    outputs:
-      dialtone-tokens: ${{ steps.filter.outputs.dialtone-tokens }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Filter actions by path
-        uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            dialtone-tokens:
-              - 'packages/dialtone-tokens/**'
-
   get-branch-name:
     runs-on: ubuntu-latest
     outputs:
@@ -38,120 +32,50 @@ jobs:
     steps:
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@v7.0.7
+        uses: tj-actions/branch-names@v8
+
   check-dialpad-member:
     runs-on: ubuntu-latest
     steps:
       # Will prevent the rest of the steps from running on fail
       - name: Check if user is a dialpad member
         uses: octokit/request-action@v2.x
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
         with:
           route: GET /orgs/dialpad/members/${{ github.actor }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
-  npm:
+
+  release:
     needs: [get-branch-name, check-dialpad-member]
-    concurrency: ${{ github.workflow }}-${{ github.ref }}-npm
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Set npm token
-        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
-
-      - name: Publish production
-        if: ${{ github.ref == 'refs/heads/production' }}
-        continue-on-error: true
-        run: pnpm nx run-many --verbose --target=publish --parallel=false
-
-      - name: Publish pre-release
-        if: ${{ github.ref != 'refs/heads/production' }}
-        continue-on-error: true
-        run: pnpm nx run-many --verbose --target=publish --parallel=false --publish-branch ${{ needs.get-branch-name.outputs.current_branch }}  --tag ${{ needs.get-branch-name.outputs.current_branch }}
-
-      - name: Set registry to GitHub packages
-        run: npm config set @dialpad:registry https://npm.pkg.github.com
-
-      - name: Set GitHub auth token
-        run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish production to GitHub packages
-        if: ${{ github.ref == 'refs/heads/production' }}
-        continue-on-error: true
-        run: pnpm nx run-many --verbose --target=publish --parallel=false
-
-      - name: Publish pre-release to GitHub packages
-        if: ${{ github.ref != 'refs/heads/production' }}
-        continue-on-error: true
-        run: pnpm nx run-many --verbose --target=publish --parallel=false --publish-branch ${{ needs.get-branch-name.outputs.current_branch }} --tag ${{ needs.get-branch-name.outputs.current_branch }}
-
-      - name: Github Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm nx run-many --verbose --target=release-github --parallel=false
-
-  android:
-    needs: [check-dialpad-member, filter-actions]
-    if: (github.ref == 'refs/heads/production' && needs.filter-actions.outputs.dialtone-tokens == 'true')
-    concurrency: ${{ github.workflow }}-${{ github.ref }}-android
+    if: ${{ contains(fromJSON('["staging", "alpha", "beta"]'), needs.get-branch-name.outputs.current_branch) }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
       issues: write
       pull-requests: write
-
+    env:
+      RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'latest' || needs.get-branch-name.outputs.current_branch }}
+      DIALTONE_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'next' || needs.get-branch-name.outputs.current_branch }}
+      DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
+      NPM_TOKEN: ${{ secrets.DIALTONE_NPM_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: 'temurin'
-          cache: 'gradle'
-          cache-dependency-path: |
-            packages/dialtone-tokens/*.gradle*
-            packages/dialtone-tokens/**/gradle-wrapper.properties
-
       - name: Use pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: 9
           run_install: false
 
       - name: Get pnpm store directory
@@ -160,72 +84,68 @@ jobs:
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - name: Setup pnpm cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build android
-        run: pnpm nx run --verbose dialtone-tokens:publish:android-package
+      # Release to GitHub
+      - name: Release dialtone ${{ env.DIALTONE_RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
+        run: pnpm nx run dialtone:release
 
-      - name: Publish production - Gradle
-        working-directory: ./packages/dialtone-tokens
-        run: ./gradlew publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_USER: braddialpad
+      - name: Release dialtone css ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}
+        run: pnpm nx run dialtone-css:release
 
-  swift:
-    needs: check-dialpad-member
-    if: ${{ github.ref == 'refs/heads/production' }}
-    concurrency: ${{ github.workflow }}-${{ github.ref }}-swift
+      - name: Release dialtone emojis ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'emojis' }}
+        run: pnpm nx run dialtone-emojis:release
+
+      - name: Release dialtone icons ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'icons' }}
+        run: pnpm nx run dialtone-icons:release
+
+      - name: Release dialtone tokens ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}
+        run: pnpm nx run dialtone-tokens:release
+
+      - name: Release dialtone-vue@${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue2' }}
+        run: pnpm nx run dialtone-vue2:release
+
+      - name: Release dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
+        run: pnpm nx run dialtone-vue3:release
+
+      - name: Release Dialtone eslint plugin ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'eslint-plugin' }}
+        run: pnpm nx run eslint-plugin-dialtone:release
+
+      - name: Release Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'stylelint-plugin' }}
+        run: pnpm nx run stylelint-plugin-dialtone:release
+
+  push:
+    needs: [ release ]
+    if: ${{ needs.get-branch-name.outputs.current_branch == 'staging' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
         with:
-          node-version: 20
+          ref: 'production'
+          fetch-depth: 0
+          token: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
 
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
+      - name: Merge changes to production
         run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build swift
-        run: pnpm nx run --verbose dialtone-tokens:publish:ios-package
-
-      - name: Publish production - Swift
-        uses: cpina/github-action-push-to-another-repository@v1.5.1
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
-        with:
-          user-email: 'dialtone@dialpad.com'
-          source-directory: 'packages/dialtone-tokens/dist_ios'
-          destination-repository-name: 'dialtone-tokens-swift'
-          destination-github-username: 'dialpad'
-          commit-message: "dialtone-tokens-swift release"
+          git merge --ff-only origin/staging
+          git push

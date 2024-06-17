@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import { getUniqueString } from '../utils';
-import { ICON_SIZE_MODIFIERS } from '../constants';
+import { getUniqueString } from '@/src/utils';
+import { ICON_SIZE_MODIFIERS } from '@/src/constants';
 
 export default {
   name: '__ICON_NAME__',

@@ -12,31 +12,23 @@
       @mouseenter="onEnterAnchor"
       @mouseleave="onLeaveAnchor"
       @keydown.esc="onLeaveAnchor"
-      @touchstart="onTouchStart"
     >
       <!-- @slot Slot for the anchor element -->
       <slot
         name="anchor"
       />
     </span>
-    <dt-lazy-show
+    <div
       :id="id"
       ref="content"
-      :show="isVisible"
-      role="tooltip"
-      aria-hidden="false"
       data-qa="dt-tooltip"
-      :appear="contentAppear"
-      :transition="transition"
       :class="[
         'd-tooltip',
-        `d-tooltip__arrow-tippy--${currentPlacement}`,
         {
           [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
         },
         contentClass,
       ]"
-      v-on="tooltipListeners"
     >
       <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
       <!-- after-leave event can be used instead of transitionend -->
@@ -44,7 +36,7 @@
       <slot>
         {{ message }}
       </slot>
-    </dt-lazy-show>
+    </div>
   </div>
 </template>
 
@@ -59,7 +51,6 @@ import {
   POPOVER_APPEND_TO_VALUES,
 } from '../popover/popover_constants';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
-import { DtLazyShow } from '@/components/lazy_show';
 import {
   createTippy,
   getAnchor,
@@ -74,9 +65,6 @@ import {
  */
 export default {
   name: 'DtTooltip',
-  components: {
-    DtLazyShow,
-  },
 
   props: {
     /**
@@ -127,7 +115,7 @@ export default {
      */
     offset: {
       type: Array,
-      default: () => [0, -4],
+      default: () => [0, 12],
     },
 
     /**
@@ -170,7 +158,7 @@ export default {
      */
     sticky: {
       type: [Boolean, String],
-      default: false,
+      default: true,
       validator: (sticky) => {
         return TOOLTIP_STICKY_VALUES.includes(sticky);
       },
@@ -231,21 +219,11 @@ export default {
     },
 
     /**
-     * Named transition when the content display is toggled.
-     * @see DtLazyShow
+     * Whether the tooltip should have a transition effect (fade).
      */
     transition: {
-      type: String,
-      default: 'fade',
-    },
-
-    /**
-     * Whether to apply transition on initial render in the content lazy show component.
-     * @values true, false
-     */
-    contentAppear: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -255,6 +233,14 @@ export default {
     delay: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Set a custom theme on the tooltip. See https://atomiks.github.io/tippyjs/v6/themes/
+     */
+    theme: {
+      type: String,
+      default: undefined,
     },
 
     /**
@@ -294,49 +280,31 @@ export default {
 
       // Internal state for whether the tooltip is shown. Changing the prop
       // will update this.
-      isShown: false,
+      internalShow: false,
 
       // this is where the placement currently is, this can be different than
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
-
-      // flag check touch based device
-      isTouchDevice: false,
     };
   },
 
   computed: {
-    // whether the tooltip is visible or not.
-    isVisible () {
-      const hasMessage = !!this.message?.trim();
-      const hasDefaultSlot = !!this.$slots?.default;
-      const isDeviceCompatible = !this.isTouchDevice;
-
-      const shouldBeVisible = this.isShown && this.enabled && (hasMessage || hasDefaultSlot);
-
-      return shouldBeVisible && isDeviceCompatible;
-    },
-
-    tooltipListeners () {
-      return {
-        'after-leave': () => {
-          this.onLeaveTransitionComplete();
-        },
-
-        'after-enter': () => {
-          this.onEnterTransitionComplete();
-        },
-      };
-    },
-
+    // eslint-disable-next-line complexity
     tippyProps () {
       return {
         offset: this.offset,
-        interactive: false,
-        trigger: 'manual',
+        delay: this.delay ? TOOLTIP_DELAY_MS : false,
         placement: this.placement,
         sticky: this.sticky,
+        theme: this.inverted ? 'inverted' : this.theme,
+        animation: this.transition ? 'fade' : false,
+        // onShown only triggers when transition is truthy
+        onShown: (tooltipInstance) => this.onShow(tooltipInstance, 'onShown'),
+        // onShown will always be called, but it will be called before the animation is complete
+        onShow: (tooltipInstance) => this.onShow(tooltipInstance, 'onShow'),
+        onHidden: this.onHide,
+
         popperOptions: getPopperOptions({
           fallbackPlacements: this.fallbackPlacements,
           hasHideModifierEnabled: true,
@@ -360,15 +328,15 @@ export default {
     show: {
       handler: function (show) {
         if (show !== null) {
-          this.isShown = show;
+          this.internalShow = show;
         }
       },
 
       immediate: true,
     },
 
-    isShown (isShown) {
-      if (isShown) {
+    internalShow (value) {
+      if (value) {
         this.setProps();
         this.tip.show();
       } else {
@@ -391,12 +359,6 @@ export default {
 
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
-
-    // immediate watcher fires before mounted, so have this here in case
-    // show prop was initially set to true.
-    if (this.isShown) {
-      this.tip.show();
-    }
   },
 
   beforeUnmount () {
@@ -426,20 +388,13 @@ export default {
     },
 
     onEnterAnchor (e) {
-      // Note: This is to stop the call of mouseenter event when touchstart event is triggered,
-      //       as when triggered by click or touch, the relatedTarget property of MouseEvent is null
-      if (this.isTouchDevice && !e.relatedTarget) return;
-
-      if (this.delay) {
-        this.inTimer = setTimeout(function (event) {
-          this.triggerShow(event);
-        }.bind(this, e), TOOLTIP_DELAY_MS);
+      if (this.delay && this.inTimer === null) {
+        this.inTimer = setTimeout(() => {
+          this.triggerShow(e);
+        }, TOOLTIP_DELAY_MS);
       } else {
         this.triggerShow(e);
       }
-
-      // since this method will be trigger by mouse event, updating the flag is non-touch device
-      this.isTouchDevice = false;
     },
 
     triggerShow (e) {
@@ -452,10 +407,10 @@ export default {
         // closing it with the mouse would trigger the tooltip to display as
         // the anchor is focused on close. Not what we want.
         if (this.show === null && this.hasVisibleFocus()) {
-          this.isShown = true;
+          this.internalShow = true;
         }
       } else {
-        if (this.show === null) this.isShown = true;
+        if (this.show === null) this.internalShow = true;
       }
     },
 
@@ -463,18 +418,19 @@ export default {
       if (e.type === 'keydown' && e.code !== 'Escape') return;
 
       clearTimeout(this.inTimer);
+      this.inTimer = null;
       this.triggerHide();
     },
 
     triggerHide () {
-      if (this.show === null) this.isShown = false;
+      if (this.show === null) this.internalShow = false;
     },
 
     onChangePlacement (placement) {
       this.currentPlacement = placement;
     },
 
-    onLeaveTransitionComplete () {
+    onHide () {
       this.tip?.unmount();
       this.$emit('shown', false);
       if (this.show !== null) {
@@ -482,7 +438,13 @@ export default {
       }
     },
 
-    onEnterTransitionComplete () {
+    onShow (tooltipInstance, callingMethod) {
+      if (!this.tooltipHasContent(tooltipInstance)) {
+        return false;
+      }
+      if (this.transition && callingMethod === 'onShow') {
+        return;
+      }
       this.$emit('shown', true);
       if (this.show !== null) {
         this.$emit('update:show', true);
@@ -493,8 +455,9 @@ export default {
       if (this.tip && this.tip.setProps) {
         this.tip.setProps({
           ...this.tippyProps,
-          zIndex: this.calculateAnchorZindex(),
+          // these need to be set here rather than in tippyProps because they are non-reactive
           appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
+          zIndex: this.calculateAnchorZindex(),
         });
       }
     },
@@ -503,13 +466,33 @@ export default {
       this.setProps();
     },
 
+    tooltipHasContent (tooltipInstance) {
+      // don't show tooltip when no content
+      if (tooltipInstance.props.content.textContent.trim().length === 0) {
+        return false;
+      }
+      return true;
+    },
+
+    // set initial options here. If any of the options need to dynamically change, they should be put in
+    // tippyProps instead.
     initOptions () {
+      const template = this.$refs.content;
       return {
-        contentElement: this.$refs.content.$el,
-        allowHTML: true,
-        zIndex: this.calculateAnchorZindex(),
+        content: template,
+        arrow: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="7"><path d="M 14.5,7 8,0 1.5,7 Z"/></svg>',
+        // transition duration - same as our custom fade delay in dialtone-globals.less
+        duration: 180,
+        interactive: false,
+        trigger: 'manual',
+        hideOnClick: false,
+        // disable tooltip from displaying on touch devices
+        touch: false,
         onMount: this.onMount,
-        ...this.tippyProps,
+        showOnCreate: this.internalShow,
+        popperOptions: getPopperOptions({
+          hasHideModifierEnabled: true,
+        }),
       };
     },
 
@@ -530,19 +513,27 @@ export default {
         this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
     },
-
-    onTouchStart () {
-      this.isTouchDevice = true;
-    },
   },
 };
 </script>
 
 <style lang="less">
-.tippy-box[data-popper-reference-hidden] {
-  .d-tooltip {
-    visibility: hidden;
-    pointer-events: none;
-  }
+@import 'tippy.js/dist/svg-arrow.css';
+
+.tippy-box[data-reference-hidden] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tippy-box > .tippy-svg-arrow {
+  fill: var(--dt-color-surface-contrast);
+}
+
+.tippy-box[data-theme~='inverted'] > .tippy-svg-arrow {
+  fill: var(--dt-color-surface-moderate);
+}
+
+.tippy-box[data-animation='fade'][data-state='hidden'] {
+  opacity: 0;
 }
 </style>

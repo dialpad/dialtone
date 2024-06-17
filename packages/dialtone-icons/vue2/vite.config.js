@@ -1,5 +1,6 @@
 import vue from '@vitejs/plugin-vue2';
 import { defineConfig } from 'vite';
+import { fileURLToPath } from 'url';
 import { resolve } from 'path';
 import { glob } from 'glob';
 
@@ -8,15 +9,22 @@ const iconEntries = glob.sync('../src/icons/*.vue').reduce((entries, path) => {
   entries[entryName] = path;
   return entries;
 }, {});
+
+const illustrationEntries = glob.sync('../src/illustrations/*.vue').reduce((entries, path) => {
+  const entryName = path.replace(/^\.\.\/src\/illustrations\/(.*)\.vue$/, 'components/$1');
+  entries[entryName] = path;
+  return entries;
+}, {});
 export default defineConfig({
-  plugins: [vue()],
   build: {
+    sourcemap: true,
     lib: {
       entry: {
         ...iconEntries,
+        ...illustrationEntries,
         'dialtone-icons': resolve(__dirname, '../index.js'),
       },
-      formats: ['es'],
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
       external: ['vue'],
@@ -25,5 +33,11 @@ export default defineConfig({
       },
     },
     minify: true,
+  },
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('../', import.meta.url)),
+    },
   },
 });

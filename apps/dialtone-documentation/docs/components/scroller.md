@@ -97,6 +97,8 @@ storybook: https://dialtone.dialpad.com/vue/vue3/?path=/story/components-scrolle
 </dt-scroller>
 </code-well-header>
 
+<br>
+
 ```html
 <dt-scroller
  :items="items"
@@ -167,6 +169,8 @@ storybook: https://dialtone.dialpad.com/vue/vue3/?path=/story/components-scrolle
       </template>
     </dt-scroller>
 </code-well-header>
+
+<br>
 
 ```html
 <dt-scroller

@@ -14,10 +14,27 @@
       ]
     }
   ],
-  "/tokens/": {
-    "text": "Tokens",
-    "children": "auto"
-  },
+  "/tokens/": [
+    {
+      "text": "Design Tokens",
+      "children": [
+        {
+          "text": "All Design Tokens",
+          "link": "/tokens/"
+        },
+        {
+          "text": "For Designers",
+          "link": "/tokens/for-designers",
+          "planned": true
+        },
+        {
+          "text": "For Developers",
+          "link": "/tokens/for-developers",
+          "planned": true
+        }
+      ]
+    }
+  ],
   "/guides/": [
     {
       "text": "Guides",
@@ -67,6 +84,10 @@
         {
           "text": "Overview",
           "link": "/design/"
+        },
+        {
+          "text": "Brand",
+          "link": "/design/brand/"
         },
         {
           "text": "Colors",
@@ -413,6 +434,10 @@
           "link": "/utilities/typography/font-style.html"
         },
         {
+          "text": "Font variant numeric",
+          "link": "/utilities/typography/font-variant-numeric.html"
+        },
+        {
           "text": "Font weight",
           "link": "/utilities/typography/font-weight.html"
         },
@@ -543,6 +568,14 @@
         {
           "text": "Emoji text wrapper",
           "link": "/components/emoji-text-wrapper.html"
+        },
+        {
+          "text": "Empty state",
+          "link": "/components/empty-state.html"
+        },
+        {
+          "text": "Hovercard",
+          "link": "/components/hovercard.html"
         },
         {
           "text": "Icon",

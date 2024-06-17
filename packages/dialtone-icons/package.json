@@ -1,22 +1,33 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.12.1",
+  "version": "4.18.0",
   "description": "Dialtone icon library",
-  "scripts": {
-    "build": "gulp"
-  },
   "files": [
     "dist",
     "vue2/dist",
     "vue3/dist"
   ],
   "exports": {
-    "./vue2": "./vue2/dist/dialtone-icons.js",
-    "./vue2/*": "./vue2/dist/components/*",
-    "./vue3": "./vue3/dist/dialtone-icons.js",
-    "./vue3/*": "./vue3/dist/components/*",
+    "./vue2": {
+      "import": "./vue2/dist/dialtone-icons.js",
+      "require": "./vue2/dist/dialtone-icons.cjs"
+    },
+    "./vue2/*": {
+      "import": "./vue2/dist/components/*.js",
+      "require": "./vue2/dist/components/*.cjs"
+    },
+    "./vue3": {
+      "import": "./vue3/dist/dialtone-icons.js",
+      "require": "./vue3/dist/dialtone-icons.cjs"
+    },
+    "./vue3/*": {
+      "import": "./vue3/dist/components/*.js",
+      "require": "./vue3/dist/components/*.cjs"
+    },
     "./icons.json": "./dist/icons.json",
-    "./keywords.json": "./dist/keywords.json",
+    "./illustrations.json": "./dist/illustrations.json",
+    "./keywords-icons.json": "./dist/keywords-icons.json",
+    "./keywords-illustrations.json": "./dist/keywords-illustrations.json",
     "./*": "./dist/svg/*"
   },
   "devDependencies": {
@@ -67,6 +78,5 @@
     "Icon Library"
   ],
   "license": "MIT",
-  "type": "module",
-  "sideEffects": false
+  "type": "module"
 }

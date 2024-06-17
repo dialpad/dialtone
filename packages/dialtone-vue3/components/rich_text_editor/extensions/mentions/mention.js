@@ -1,9 +1,10 @@
 import Mention from '@tiptap/extension-mention';
+import { mergeAttributes } from '@tiptap/core';
 import { VueNodeViewRenderer } from '@tiptap/vue-3';
+import { PluginKey } from '@tiptap/pm/state';
 
 // Mention component
 import MentionComponent from './MentionComponent.vue';
-import { mergeAttributes } from '@tiptap/core';
 
 export const MentionPlugin = Mention.extend({
 
@@ -39,5 +40,11 @@ export const MentionPlugin = Mention.extend({
 
   renderHTML ({ HTMLAttributes }) {
     return ['mention-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+  },
+
+}).configure({
+  suggestion: {
+    char: '@',
+    pluginKey: new PluginKey('mentionSuggestion'),
   },
 });

@@ -1,36 +1,34 @@
 import { mergeAttributes, Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import { VueNodeViewRenderer } from '@tiptap/vue-3';
 import EmojiComponent from './EmojiComponent.vue';
-import { shortcodeToEmojiData, codeToEmojiData } from '@/common/emoji';
+import { codeToEmojiData, emojiShortCodeRegex, emojiRegex, stringToUnicode } from '@/common/emoji';
 import { PluginKey } from '@tiptap/pm/state';
 
 import Suggestion from '@tiptap/suggestion';
 import suggestionOptions from './suggestion';
+import { emojiPattern } from 'regex-combined-emojis';
 
 export const EmojiPluginKey = new PluginKey('emoji');
 
-const inputShortCodeRegex = /:\w+:$/;
-const pasteShortCodeRegex = /:\w+:/g;
-/* eslint-disable max-len */
-const inputUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])$/;
-const pasteUnicodeRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g;
-/* eslint-enable max-len */
+const inputShortCodeRegex = /(^| |(?<=:))(:\w+:)$/;
+const inputUnicodeRegex = new RegExp(emojiPattern + '$');
 
 const inputRuleMatch = (match) => {
   if (match && codeToEmojiData(match[0])) {
+    const text = match[2] || match[0];
     // needs to be a dict returned
     // ref type InputRuleMatch:
     // https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/InputRule.ts#L16
     return {
       index: match.index,
-      text: match[0],
+      text,
       match,
     };
   }
 };
 
 const shortCodePasteMatch = (text) => {
-  const matches = [...text.matchAll(pasteShortCodeRegex)];
+  const matches = [...text.matchAll(emojiShortCodeRegex)];
 
   return matches
     .filter(match => codeToEmojiData(match[0]))
@@ -65,10 +63,6 @@ export const Emoji = Node.create({
       code: {
         default: null,
       },
-
-      id: {
-        default: null,
-      },
     };
   },
 
@@ -81,7 +75,10 @@ export const Emoji = Node.create({
   },
 
   renderText ({ node }) {
-    return node.attrs.code;
+    // output emoji in text as unicode character rather than shortname for backwards compatibility with
+    // our backend.
+    const unicodeEmoji = stringToUnicode(codeToEmojiData(node.attrs.code).unicode_output);
+    return unicodeEmoji;
   },
 
   renderHTML ({ HTMLAttributes }) {
@@ -94,6 +91,7 @@ export const Emoji = Node.create({
       nodeInputRule({
         find: (text) => {
           const match = text.match(inputShortCodeRegex);
+          if (!match) return;
           return inputRuleMatch(match);
         },
         type: this.type,
@@ -107,15 +105,14 @@ export const Emoji = Node.create({
       nodeInputRule({
         find: (text) => {
           const match = text.match(inputUnicodeRegex);
+          if (!match) return;
           return inputRuleMatch(match);
         },
         type: this.type,
         getAttributes (attrs) {
-          const unicode = shortcodeToEmojiData(attrs[0]).unicode_output;
-          const emoji = String.fromCodePoint(parseInt(unicode, 16));
+          const emoji = codeToEmojiData(attrs[0]).shortname;
           return {
             code: emoji,
-            label: 'emoji',
           };
         },
       }),
@@ -134,7 +131,7 @@ export const Emoji = Node.create({
         },
       }),
       nodePasteRule({
-        find: pasteUnicodeRegex,
+        find: emojiRegex,
         type: this.type,
         getAttributes (attrs) {
           return {

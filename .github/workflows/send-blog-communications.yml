@@ -1,0 +1,181 @@
+name: Send blog communications
+on:
+  push:
+    branches:
+      - production
+    paths:
+      - 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
+
+env:
+  HUSKY: 0
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  added-posts:
+    name: Get added posts
+    runs-on: ubuntu-latest
+    outputs:
+      added_posts: ${{ steps.changed-files.outputs.added_files }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        with:
+          files: 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
+          json: true
+          escape_json: false
+      - name: List all added posts
+        run: echo '${{ steps.changed-files.outputs.added_files }}'
+
+  send-email:
+    name: Send email
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs: [added-posts]
+    strategy:
+      matrix:
+        files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
+    env:
+      TO_MAIL: dialtone-users@dialpad.com
+      FILE_PATH: ${{ matrix.files }}
+      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-email
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get link from file name
+        id: get-post-url
+        run: |
+          PREFIX="https:\/\/dialtone.dialpad.com"
+          echo "POST_URL=$(echo $FILE_PATH | sed -e "s/apps\/dialtone-documentation\/docs/$PREFIX/" -e 's/md/html/')" >> $GITHUB_ENV
+
+      - name: Get heading from blog post
+        id: get-heading
+        run: |
+          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH)" >> $GITHUB_ENV
+
+      # This will do the following:
+      # - Remove frontmatter.
+      # - Remove script setup.
+      # - Remove blog post component.
+      # - Remove comments.
+      # - Remove empty lines at the beginning of the file.
+      # - Escape quotes
+      # - Escape double quotes
+      # - Add new line escaped character at the end of every line
+      # - Replace links paths for their absolute paths (prefixed by https://dialtone.dialpad.com).
+      # - Ellipsis the article to the first 10 lines.
+      # - Append the URL of the article at the end of the article.
+      # - Print the result to MESSAGE_BODY env variable removing the new lines to avoid issues with JSON
+      - name: Process Markdown file
+        run: |
+          sed -i -E \
+          -e '/^---$/,/^---$/d' \
+          -e '/^<script setup>$/,/^<\/script>$/d' \
+          -e '/^<\/*BlogPost.*$/d' \
+          -e '/^<!--.*$/d' \
+          -e '/./,$!d' \
+          -e "s/'/'\\\''/g" \
+          -e 's/"/\\"/g' \
+          -e 's/$/\\n/g' \
+          -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
+          $FILE_PATH;
+          sed -i 10q $FILE_PATH;
+          echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
+          {
+            echo 'MESSAGE_BODY<<EOF'
+            cat $FILE_PATH | tr -d '\n'
+            echo
+            echo EOF
+          } >> $GITHUB_ENV;
+
+      - name: Wait for deployment to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Deploy sites'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+          token_format: "id_token"
+          id_token_audience: ${{ env.API_URL }}
+
+      - name: Send email
+        run: |
+          curl -m 70 -X POST ${{ env.API_URL }} \
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "to": "${{ env.TO_MAIL }}",
+            "subject": "[dialtone] New blog post: \"${{ env.BLOG_POST_HEADING }}\"",
+            "message": "${{ env.MESSAGE_BODY }}"
+          }'
+
+  send-sms:
+    name: Send SMS
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs: [ added-posts ]
+    strategy:
+      matrix:
+        files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
+    env:
+      FILE_PATH: ${{ matrix.files }}
+      API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-sms-to-dialtone-channel
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get link from file name
+        id: get-post-url
+        run: |
+          PREFIX="https:\/\/dialtone.dialpad.com"
+          echo "POST_URL=$(echo $FILE_PATH | sed -e "s/apps\/dialtone-documentation\/docs/$PREFIX/" -e 's/md/html/')" >> $GITHUB_ENV
+
+      - name: Get heading from blog post
+        id: get-heading
+        run: |
+          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH)" >> $GITHUB_ENV
+
+      - name: Wait for deployment to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Deploy sites'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+          token_format: "id_token"
+          id_token_audience: ${{ env.API_URL }}
+
+      - name: Send sms
+        run: |
+          curl -m 70 -X POST ${{ env.API_URL }} \
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}"
+          }'

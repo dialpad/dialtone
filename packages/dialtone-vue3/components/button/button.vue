@@ -54,7 +54,7 @@ import {
   INVALID_COMBINATION,
 } from './button_constants';
 
-import { LINK_KIND_MODIFIERS } from '@/components/link';
+import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
 
 /**
  * A button is a UI element which allows users to take an action throughout the app.
@@ -109,13 +109,23 @@ export default {
 
     /**
      * The color of the link and button if the button is styled as a link.
-     * @values default, warning, danger, success, muted, inverted
+     * @values default, warning, danger, success, muted
      * @see DtLink
      */
     linkKind: {
       type: String,
       default: 'default',
       validator: (lk) => Object.keys(LINK_KIND_MODIFIERS).includes(lk),
+    },
+
+    /**
+     * Determines whether the link should have inverted styling if the button is styled as a link.
+     * @values true, false
+     * @see DtLink
+     */
+    linkInverted: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -295,7 +305,7 @@ export default {
       if (this.link) {
         return [
           'd-link',
-          LINK_KIND_MODIFIERS[this.linkKind],
+          getLinkKindModifier(this.linkKind, this.linkInverted),
           BUTTON_SIZE_MODIFIERS[this.size],
         ];
       }

@@ -11,7 +11,7 @@ import Overview from './views/Overview.vue';
 import CodeWellHeader from './baseComponents/CodeWellHeader.vue';
 import UtilityClassTable from './baseComponents/UtilityClassTable.vue';
 import ComponentClassTable from './baseComponents/ComponentClassTable.vue';
-import TokenTable from './baseComponents/TokenTable.vue';
+import TokenTable from './baseComponents/tokens/TokenTable.vue';
 import ComponentVueApi from './baseComponents/ComponentVueApi.vue';
 import ComponentAccessibleTable from './baseComponents/ComponentAccessibleTable.vue';
 import ComponentCombinator from './baseComponents/ComponentCombinator.vue';

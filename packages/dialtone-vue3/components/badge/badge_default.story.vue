@@ -7,6 +7,8 @@
     :icon-left="$attrs.iconLeft"
     :icon-right="$attrs.iconRight"
     :label-class="$attrs.labelClass"
+    :subtle="$attrs.subtle"
+    :outlined="$attrs.outlined"
   >
     <template v-if="defaultSlot">
       {{ defaultSlot }}

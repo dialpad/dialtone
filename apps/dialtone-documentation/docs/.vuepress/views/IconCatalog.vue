@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
   <div class="d-d-grid d-gg16 d-g-cols6 d-mt32 d-mb16">
     <div class="d-gc4">
@@ -5,6 +6,7 @@
         id="search-input"
         ref="searchRef"
         v-model="search"
+        autofocus
         aria-label="Search icon"
         placeholder="Search for an icon"
         class="d-input d-input-icon--left d-input-icon--right"
@@ -115,7 +117,7 @@
 </template>
 
 <script setup>
-import { categories } from '@dialpad/dialtone-icons/keywords.json';
+import { categories } from '@dialpad/dialtone-icons/keywords-icons.json';
 import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import IconPopover from '../baseComponents/IconPopover.vue';
 import IconPopoverContent from '../baseComponents/IconPopoverContent.vue';

@@ -25,10 +25,13 @@ const paths = {
   },
   input: {
     css: './packages/dialtone-css/lib/dist/**',
+    tokens: [
+      './packages/dialtone-tokens/dist/**',
+      '!./packages/dialtone-tokens/dist/android/**',
+      '!./packages/dialtone-tokens/dist/ios/**',
+    ],
     vue2: './packages/dialtone-vue2/dist/**',
     vue3: './packages/dialtone-vue3/dist/**',
-    'eslint-plugin': './packages/eslint-plugin-dialtone/lib/**',
-    'stylelint-plugin': './packages/stylelint-plugin-dialtone/lib/**',
   },
   output: {
     css: './dist/css',
@@ -36,8 +39,6 @@ const paths = {
     tokens: './dist/tokens',
     vue2: './dist/vue2',
     vue3: './dist/vue3',
-    'eslint-plugin': './dist/eslint-plugin',
-    'stylelint-plugin': './dist/stylelint-plugin',
   },
 };
 
@@ -68,10 +69,7 @@ const cleanDist = () => {
 //  ================================================================================
 const copyFiles = function (done) {
   Object.keys(paths.input).forEach(name => {
-    const base = paths.input[name].base || '.';
-    const inputGlobs = paths.input[name].files || paths.input[name];
-
-    src(inputGlobs)
+    src(paths.input[name])
       .pipe(dest(paths.output[name]));
   });
   return done();

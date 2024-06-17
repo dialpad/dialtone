@@ -22,6 +22,7 @@
   //  --------------------------------------------------------------------------
   --badge-color-text: var(--dt-badge-color-foreground-default);
   --badge-color-background: var(--dt-badge-color-background-default);
+  --badge-color-outline: var(--dt-badge-color-border-default);
   --badge-radius: var(--dt-size-300);
   --badge-line-height: calc(var(--dt-size-500) + var(--dt-size-200));
   --badge-font-size: var(--dt-font-size-100);
@@ -82,6 +83,12 @@
   &--bulletin {
     --badge-color-text: var(--dt-badge-color-foreground-bulletin);
     --badge-color-background: var(--dt-badge-color-background-bulletin);
+
+    &.d-badge--subtle {
+      --badge-color-text: var(--dt-badge-color-foreground-bulletin-subtle);
+      --badge-color-background: var(--dt-badge-color-background-bulletin-subtle);
+      --badge-color-outline: var(--dt-badge-color-border-bulletin-subtle);
+    }
   }
 
   &--ai {
@@ -91,6 +98,12 @@
     background-image: var(--dt-badge-color-background-ai);
   }
 
+  &--outlined {
+    box-shadow: 0 0 0 var(--dt-size-border-150) var(--badge-color-outline) inset;
+  }
+
+  //  DECORATIVE
+  //  --------------------------------------------------------------------------
   &--decorate-black-400 { --badge-decorative-color: var(--dt-color-black-400); }
   &--decorate-black-500 { --badge-decorative-color: var(--dt-color-black-500); }
   &--decorate-black-900 { --badge-decorative-color: var(--dt-color-black-900); }

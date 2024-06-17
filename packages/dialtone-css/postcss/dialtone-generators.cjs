@@ -111,7 +111,7 @@ function colorUtilities (Rule, clonedSource, declaration) {
     const colorNoPrefix = removePrefixFromColor(color);
     generatedRules.fontColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-fc-${colorNoPrefix}.d-fc-${colorNoPrefix}`),
+      selector: appendHoverFocusSelectors(`.d-fc-${colorNoPrefix}`),
       nodes: [
         declaration.clone({ prop: '--fco', value: '100%' }),
         declaration.clone({ prop: 'color', value: `${hslaColor} / var(--fco)) !important` }),
@@ -119,7 +119,7 @@ function colorUtilities (Rule, clonedSource, declaration) {
     }));
     generatedRules.borderColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bc-${colorNoPrefix}.d-bc-${colorNoPrefix}`),
+      selector: appendHoverFocusSelectors(`.d-bc-${colorNoPrefix}`),
       nodes: [
         declaration.clone({ prop: '--bco', value: '100%' }),
         declaration.clone({ prop: 'border-color', value: `${hslaColor} / var(--bco)) !important` }),
@@ -127,7 +127,7 @@ function colorUtilities (Rule, clonedSource, declaration) {
     }));
     generatedRules.backgroundColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bgc-${colorNoPrefix}.d-bgc-${colorNoPrefix}`),
+      selector: appendHoverFocusSelectors(`.d-bgc-${colorNoPrefix}`),
       nodes: [
         declaration.clone({ prop: '--bgo', value: '100%' }),
         declaration.clone({ prop: 'background-color', value: `${hslaColor} / var(--bgo)) !important` }),
@@ -135,7 +135,7 @@ function colorUtilities (Rule, clonedSource, declaration) {
     }));
     generatedRules.dividerColor.push(new Rule({
       source: clonedSource,
-      selector: `.d-divide-${colorNoPrefix}.d-divide-${colorNoPrefix} > * + *`,
+      selector: `.d-divide-${colorNoPrefix} > * + *`,
       nodes: [
         declaration.clone({ prop: '--dco', value: '100%' }),
         declaration.clone({ prop: 'border-color', value: `${hslaColor} / var(--dco)) !important` }),
@@ -143,7 +143,7 @@ function colorUtilities (Rule, clonedSource, declaration) {
     }));
     generatedRules.backgroundGradientFromColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bgg-from-${colorNoPrefix}.d-bgg-from-${colorNoPrefix}`),
+      selector: appendHoverFocusSelectors(`.d-bgg-from-${colorNoPrefix}`),
       nodes: [
         declaration.clone({ prop: '--bgg-from-opacity', value: '100%' }),
         declaration.clone({ prop: '--bgg-from', value: `${hslaColor} / var(--bgg-from-opacity))` }),
@@ -152,7 +152,7 @@ function colorUtilities (Rule, clonedSource, declaration) {
     }));
     generatedRules.backgroundGradientToColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bgg-to-${colorNoPrefix}.d-bgg-to-${colorNoPrefix}`),
+      selector: appendHoverFocusSelectors(`.d-bgg-to-${colorNoPrefix}`),
       nodes: [
         declaration.clone({ prop: '--bgg-to-opacity', value: '100%' }),
         declaration.clone({ prop: '--bgg-to', value: `${hslaColor} / var(--bgg-to-opacity)) !important` }),
@@ -184,7 +184,7 @@ function opacityUtilities (Rule, clonedSource, declaration) {
     }));
     generatedRules.borderOpacity.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bco-${opacity}`),
+      selector: appendHoverFocusSelectors(`.d-bco${opacity}`),
       nodes: [
         declaration.clone({ prop: '--bco', value: `${opacity}% !important` }),
       ],

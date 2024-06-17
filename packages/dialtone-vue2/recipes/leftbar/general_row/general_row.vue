@@ -77,18 +77,33 @@
         />
       </div>
       <dt-tooltip
-        v-else-if="showUnreadCount"
+        v-else-if="showUnreadCount || showUnreadMentionCount"
         :message="unreadCountTooltip"
         placement="top"
       >
         <template #anchor>
           <dt-badge
+            v-if="showUnreadCount"
             kind="count"
             type="bulletin"
             data-qa="dt-leftbar-row-unread-badge"
-            class="dt-leftbar-row__unread-badge"
+            :class="['dt-leftbar-row__unread-badge', {
+              'dt-leftbar-row__unread-count-badge':
+                shouldApplyCustomStyleForCountBadge,
+            }]"
           >
             {{ unreadCount }}
+          </dt-badge>
+          <dt-badge
+            v-if="showUnreadMentionCount"
+            kind="count"
+            type="bulletin"
+            data-qa="dt-leftbar-row-unread-mention-badge"
+            :class="['dt-leftbar-row__unread-badge',
+                     { 'dt-leftbar-row__unread-mention-count-badge': shouldApplyCustomStyleForCountBadge },
+            ]"
+          >
+            {{ unreadMentionCount }}
           </dt-badge>
         </template>
       </dt-tooltip>
@@ -216,6 +231,14 @@ export default {
     },
 
     /**
+     * Number of unread mention messages
+     */
+    unreadMentionCount: {
+      type: String,
+      default: null,
+    },
+
+    /**
      * Text shown when the unread count is hovered.
      */
     unreadCountTooltip: {
@@ -332,7 +355,7 @@ export default {
         {
           'dt-leftbar-row--no-action': !this.hasCallButton,
           'dt-leftbar-row--has-unread': this.hasUnreads,
-          'dt-leftbar-row--unread-count': this.showUnreadCount,
+          'dt-leftbar-row--unread-count': this.showUnreadCount || this.showUnreadMentionCount,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,
           'dt-leftbar-row--action-focused': this.actionFocused,
@@ -359,11 +382,28 @@ export default {
     },
 
     hasActions () {
-      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton;
+      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton ||
+        this.showUnreadMentionCount;
     },
 
     showUnreadCount () {
       return !!this.unreadCount && this.hasUnreads;
+    },
+
+    showUnreadMentionCount () {
+      return !!this.unreadMentionCount && this.hasUnreads;
+    },
+
+    hasUnreadCount () {
+      return this.unreadCount !== null;
+    },
+
+    hasUnreadMentionCount () {
+      return this.unreadMentionCount !== null;
+    },
+
+    shouldApplyCustomStyleForCountBadge () {
+      return this.hasUnreadCount && this.hasUnreadMentionCount;
     },
   },
 

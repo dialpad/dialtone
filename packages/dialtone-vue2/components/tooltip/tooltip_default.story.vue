@@ -13,12 +13,13 @@
         :placement="$attrs.placement"
         :inverted="$attrs.inverted"
         :message="$attrs.message"
+        :theme="$attrs.theme"
         :fallback-placements="$attrs.fallbackPlacements"
         :offset="$attrs.offset"
         :sticky="$attrs.sticky"
         :content-class="$attrs.contentClass"
         :transition="$attrs.transition"
-        :show="$attrs.showTooltip"
+        :show="showTooltip"
         :enabled="$attrs.enabled"
         :delay="$attrs.delay"
         :external-anchor="$attrs.externalAnchor"
@@ -67,3 +68,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.tippy-box[data-theme~='purple'] > .tippy-svg-arrow {
+  fill: var(--dt-color-purple-200);
+}
+.tippy-box[data-theme~='purple'] > .d-tooltip {
+  background-color: var(--dt-color-purple-200);
+}
+</style>

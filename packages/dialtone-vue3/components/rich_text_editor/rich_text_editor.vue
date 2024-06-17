@@ -3,10 +3,12 @@
     :editor="editor"
     data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
+    v-bind="attrs"
   />
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
@@ -25,15 +27,19 @@ import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import Emoji from './extensions/emoji';
-import Link from './extensions/link';
+import CustomLink from './extensions/custom_link';
 import { MentionPlugin } from './extensions/mentions/mention';
+import { ChannelPlugin } from './extensions/channels/channel';
+import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
   RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
 } from './rich_text_editor_constants';
 
-import suggestion from './extensions/mentions/suggestion';
+import mentionSuggestion from './extensions/mentions/suggestion';
+import channelSuggestion from './extensions/channels/suggestion';
+import slashCommandSuggestion from './extensions/slash_command/suggestion';
 
 export default {
   name: 'DtRichTextEditor',
@@ -58,6 +64,14 @@ export default {
     editable: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Prevents the user from typing any further. Deleting text will still work.
+     */
+    preventTyping: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -116,7 +130,7 @@ export default {
      */
     outputFormat: {
       type: String,
-      default: 'text',
+      default: 'html',
       validator (outputFormat) {
         return RICH_TEXT_EDITOR_OUTPUT_FORMATS.includes(outputFormat);
       },
@@ -131,9 +145,27 @@ export default {
     },
 
     /**
-     * Enables the Link extension and optionally passes configurations to it
+     * Enables the TipTap Link extension and optionally passes configurations to it
+     *
+     * It is not recommended to use this and the custom link extension at the same time.
      */
     link: {
+      type: [Boolean, Object],
+      default: false,
+    },
+
+    /**
+     * Enables the Custom Link extension and optionally passes configurations to it
+     *
+     * It is not recommended to use this and the built in TipTap link extension at the same time.
+     *
+     * The custom link does some additional things on top of the built in TipTap link
+     * extension such as styling phone numbers and IP adresses as links, and allows you
+     * to linkify text without having to type a space after the link. Currently it is missing some
+     * functionality such as editing links and will likely require more work to be fully usable,
+     * so it is recommended to use the built in TipTap link for now.
+     */
+    customLink: {
       type: [Boolean, Object],
       default: false,
     },
@@ -153,6 +185,105 @@ export default {
       type: Object,
       default: null,
     },
+
+    /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the channels for suggestion.
+     * items({ query }) => { return [ChannelObject]; }
+     * ChannelObject format:
+     * { name: string, id: string, locked: boolean }
+     *
+     * When null, it does not add the plugin. Setting locked to true will display a lock rather than hash.
+     */
+    channelSuggestion: {
+      type: Object,
+      default: null,
+    },
+
+    /**
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the slash commands for suggestion.
+     * items({ query }) => { return [SlashCommandObject]; }
+     * SlashCommandObject format:
+     * { command: string, description: string, parametersExample?: string }
+     * The "parametersExample" parameter is optional, and describes an example
+     * of the parameters that command can take.
+     *
+     * When null, it does not add the plugin.
+     * Note that slash commands only work when they are the first word in the input.
+     */
+    slashCommandSuggestion: {
+      type: Object,
+      default: null,
+    },
+
+    /**
+     * Whether the input allows for block quote.
+     */
+    allowBlockquote: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for bold to be introduced in the text.
+     */
+    allowBold: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for bullet list to be introduced in the text.
+    */
+    allowBulletList: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for italic to be introduced in the text.
+     */
+    allowItalic: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for strike to be introduced in the text.
+     */
+    allowStrike: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows for underline to be introduced in the text.
+     */
+    allowUnderline: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Whether the input allows codeblock to be introduced in the text.
+     */
+    allowCodeblock: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Additional TipTap extensions to be added to the editor.
+     */
+    additionalExtensions: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   emits: [
@@ -165,7 +296,7 @@ export default {
 
     /**
      * Event to sync the value with the parent
-     * @event input
+     * @event update:value
      * @type {String|JSON}
      */
     'update:modelValue',
@@ -188,37 +319,67 @@ export default {
   data () {
     return {
       editor: null,
-      popoverOpened: false,
     };
   },
 
   computed: {
+    attrs () {
+      return {
+        ...this.$attrs,
+        onInput: () => {},
+        onFocus: () => {},
+        onBlur: () => {},
+      };
+    },
+
+    // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [
-        Blockquote,
-        Bold,
-        BulletList,
-        Document,
-        Italic,
-        ListItem,
-        Paragraph,
-        Strike,
-        Text,
-        Underline,
-      ];
+      const extensions = [Document, Paragraph, Text];
       if (this.link) {
-        extensions.push(this.getExtension(Link, this.link));
+        extensions.push(TipTapLink.extend({ inclusive: false }).configure({
+          HTMLAttributes: {
+            class: 'd-link d-wb-break-all',
+          },
+          autolink: true,
+          protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
+        }));
+      }
+      if (this.customLink) {
+        extensions.push(this.getExtension(CustomLink, this.customLink));
+      }
+      if (this.allowBlockquote) {
+        extensions.push(Blockquote);
+      }
+      if (this.allowBold) {
+        extensions.push(Bold);
+      }
+      if (this.allowBulletList) {
+        extensions.push(BulletList);
+        extensions.push(ListItem);
+        extensions.push(OrderedList);
+      }
+      if (this.allowItalic) {
+        extensions.push(Italic);
+      }
+      if (this.allowStrike) {
+        extensions.push(Strike);
+      }
+      if (this.allowUnderline) {
+        extensions.push(Underline);
       }
 
       // Enable placeholderText
-      extensions.push(
-        Placeholder.configure({ placeholder: this.placeholder }),
-      );
+      if (this.placeholder) {
+        extensions.push(
+          Placeholder.configure({ placeholder: this.placeholder }),
+        );
+      }
 
       // make sure that this is defined before any other extensions
       // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
       if (!this.allowLineBreaks) {
+        const self = this;
         extensions.push(
           HardBreak.extend({
             addKeyboardShortcuts () {
@@ -226,6 +387,7 @@ export default {
                 Enter: () => true,
                 'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
                   () => commands.newlineInCode(),
+                  () => self.allowBulletList && commands.splitListItem('listItem'),
                   () => commands.createParagraphNear(),
                   () => commands.liftEmptyBlock(),
                   () => commands.splitBlock(),
@@ -236,15 +398,22 @@ export default {
         );
       }
 
-      extensions.push(TipTapLink.extend({ inclusive: false }).configure({
-        autolink: true,
-        protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
-      }));
-
       if (this.mentionSuggestion) {
         // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
-        const suggestionObject = { ...this.mentionSuggestion, ...suggestion };
+        const suggestionObject = { ...this.mentionSuggestion, ...mentionSuggestion };
         extensions.push(MentionPlugin.configure({ suggestion: suggestionObject }));
+      }
+
+      if (this.channelSuggestion) {
+        // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
+        const suggestionObject = { ...this.channelSuggestion, ...channelSuggestion };
+        extensions.push(ChannelPlugin.configure({ suggestion: suggestionObject }));
+      }
+
+      if (this.slashCommandSuggestion) {
+        // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
+        const suggestionObject = { ...this.slashCommandSuggestion, ...slashCommandSuggestion };
+        extensions.push(SlashCommandPlugin.configure({ suggestion: suggestionObject }));
       }
 
       // Emoji has some interactions with Enter key
@@ -256,15 +425,17 @@ export default {
         defaultAlignment: 'left',
       }));
 
-      extensions.push(CodeBlock.configure({
-        HTMLAttributes: {
-          class: 'dt-rich-text-editor--code-block',
-        },
-      }));
+      if (this.allowCodeblock) {
+        extensions.push(CodeBlock.configure({
+          HTMLAttributes: {
+            class: 'dt-rich-text-editor--code-block',
+          },
+        }));
+      }
 
-      extensions.push(OrderedList.configure({
-        itemTypeName: 'listItem',
-      }));
+      if (this.additionalExtensions.length) {
+        extensions.push(...this.additionalExtensions);
+      }
 
       return extensions;
     },
@@ -333,6 +504,7 @@ export default {
   },
 
   methods: {
+
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
       this.editor = new Editor({
@@ -362,6 +534,10 @@ export default {
       // The content has changed.
       this.editor.on('update', () => {
         const value = this.getOutput();
+        if (this.preventTyping && value.length > this.value.length) {
+          this.editor.commands.setContent(this.value, false);
+          return;
+        }
         this.$emit('input', value);
         this.$emit('update:modelValue', value);
       });
@@ -408,34 +584,40 @@ export default {
 </script>
 
 <style lang="less">
-  .ProseMirror p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: var(--dt-color-foreground-placeholder);
-    pointer-events: none;
-    height: 0;
-  }
-
-  .ProseMirror ul > li {
-    list-style-type: disc;
-  }
-
-  .ProseMirror ol > li {
-    list-style-type: decimal;
-  }
-
-  .ProseMirror blockquote {
-    padding-left: var(--dt-space-400);
-    border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
-    margin-left: 0;
-  }
-
-  .dt-rich-text-editor--code-block {
-    background: var(--dt-color-surface-secondary);
-    padding: var(--dt-space-400);
-  }
-
   .dt-rich-text-editor {
-    overflow: hidden;
+    &--code-block {
+      background: var(--dt-color-surface-secondary);
+      padding: var(--dt-space-400);
+    }
+
+    > .ProseMirror {
+      box-shadow: none;
+
+      p.is-editor-empty:first-child::before {
+        content: attr(data-placeholder);
+        float: left;
+        color: var(--dt-color-foreground-placeholder);
+        pointer-events: none;
+        height: 0;
+      }
+
+      ul, ol {
+        padding-left: var(--dt-space-525);
+      }
+
+      ul > li {
+        list-style-type: disc;
+      }
+
+      ol > li {
+        list-style-type: decimal;
+      }
+
+      blockquote {
+        padding-left: var(--dt-space-400);
+        border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
+        margin-left: 0;
+      }
+    }
   }
 </style>

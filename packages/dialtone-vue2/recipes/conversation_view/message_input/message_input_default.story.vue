@@ -3,10 +3,18 @@
     <div class="d-h264">
       <dt-recipe-message-input
         ref="input"
-        v-model="value"
+        v-model="$attrs.value"
         :input-aria-label="$attrs.inputAriaLabel"
         :auto-focus="$attrs.autoFocus"
+        :allow-blockquote="$attrs.allowBlockquote"
+        :allow-bold="$attrs.allowBold"
+        :allow-bullet-list="$attrs.allowBulletList"
+        :allow-codeblock="$attrs.allowCodeblock"
+        :allow-italic="$attrs.allowItalic"
+        :allow-strike="$attrs.allowStrike"
+        :allow-underline="$attrs.allowUnderline"
         :editable="$attrs.editable"
+        :prevent-typing="$attrs.preventTyping"
         :input-class="$attrs.inputClass"
         :link="$attrs.link"
         :output-format="$attrs.outputFormat"
@@ -14,6 +22,8 @@
         :disable-send="$attrs.disableSend"
         :max-height="$attrs.maxHeight"
         :mention-suggestion="$attrs.mentionSuggestion"
+        :channel-suggestion="$attrs.channelSuggestion"
+        :slash-command-suggestion="$attrs.slashCommandSuggestion"
         :show-emoji-picker="$attrs.showEmojiPicker"
         :emoji-picker-props="$attrs.emojiPickerProps"
         :emoji-tooltip-message="$attrs.emojiTooltipMessage"
@@ -28,6 +38,8 @@
         @input="$attrs.onInput"
         @select-media="$attrs.onSelectMedia"
         @selected-emoji="$attrs.onSelectedEmoji"
+        @selected-command="$attrs.onSelectedCommand"
+        @meeting-pill-close="$attrs.onMeetingPillClose"
         @skin-tone="$attrs.onSkinTone"
         @add-media="$attrs.onAddMedia"
         @paste-media="$attrs.onPasteMedia"
@@ -44,10 +56,5 @@ import DtRecipeMessageInput from './message_input.vue';
 export default {
   name: 'DtRecipeMessageInputDefault',
   components: { DtRecipeMessageInput },
-  data () {
-    return {
-      value: this.$attrs.value,
-    };
-  },
 };
 </script>

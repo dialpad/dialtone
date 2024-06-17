@@ -148,22 +148,6 @@ describe('DtEmojiTextWrapper Tests', () => {
             expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC);
           });
         });
-
-        describe('When default slot contains invalid unicode emoji', () => {
-          beforeEach(() => {
-            mockSlots = { default: 'Content with invalid 🫡 emoji.' };
-
-            updateWrapper();
-          });
-
-          it('Contains emoji component', () => {
-            expect(emoji.exists()).toBe(true);
-          });
-
-          it('Renders the invalid emoji image', () => {
-            expect(emoji.attributes('src')).toBe('invalid');
-          });
-        });
       });
     });
 

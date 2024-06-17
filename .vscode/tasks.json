@@ -6,7 +6,7 @@
     {
       "label": "start: dialtone docsite",
       "type": "shell",
-      "command": "pnpm start:dialtone",
+      "command": "nx start:dialtone",
       "problemMatcher": [
         "$vite"
       ],
@@ -15,7 +15,7 @@
     {
       "label": "start: dialtone vue 2 storybook",
       "type": "shell",
-      "command": "pnpm start:dialtone-vue2",
+      "command": "nx start:dialtone-vue2",
       "problemMatcher": [
         "$vite"
       ],
@@ -24,7 +24,7 @@
     {
       "label": "start: dialtone vue 3 storybook",
       "type": "shell",
-      "command": "pnpm start:dialtone-vue3",
+      "command": "nx start:dialtone-vue3",
       "problemMatcher": [
         "$vite"
       ],
@@ -45,7 +45,7 @@
     {
       "label": "lint: all",
       "type": "shell",
-      "command": "pnpm lint",
+      "command": "nx lint",
       "problemMatcher": [
         "$eslint-stylish"
       ]
@@ -53,13 +53,13 @@
     {
       "label": "test: all",
       "type": "shell",
-      "command": "pnpm test",
+      "command": "nx test",
       "problemMatcher": []
     },
     {
       "label": "build: all",
       "type": "shell",
-      "command": "pnpm build",
+      "command": "nx build",
       "problemMatcher": []
     }
   ]

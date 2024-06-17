@@ -7,6 +7,8 @@
     :search-results-label="$attrs.searchResultsLabel"
     :search-no-results-label="$attrs.searchNoResultsLabel"
     :search-placeholder-label="$attrs.searchPlaceholderLabel"
+    :search-query="$attrs.searchQuery"
+    :show-search="$attrs.showSearch"
     @skin-tone="isSkinTone = $event; $attrs.onSkinTone($event)"
     @close="$attrs.onClose($event)"
     @selected-emoji="$attrs.onSelectedEmoji($event)"

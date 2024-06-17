@@ -3,6 +3,8 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion';
+import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
+import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
 
 /*
   Controls
@@ -87,6 +89,18 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onMeetingPillClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onSelectedCommand: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -121,14 +135,19 @@ export const argsData = {
   showSend: {
     icon: 'send',
     ariaLabel: 'send',
+    tooltipLabel: 'Send',
   },
   mentionSuggestion,
+  channelSuggestion,
+  slashCommandSuggestion,
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),
   onInput: action('input'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
+  onSelectedCommand: action('selected-command'),
+  onMeetingPillClose: action('meeting-pill-close'),
   onAddMedia: action('add-media'),
   onPasteMedia: action('paste-media'),
   onNoticeClose: action('notice-close'),
@@ -156,4 +175,34 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = {
   render: DefaultTemplate,
   args: {},
+};
+
+export const WithoutExtensions = {
+  render: DefaultTemplate,
+  args: {
+    allowBlockquote: false,
+    allowBold: false,
+    allowBulletList: false,
+    allowItalic: false,
+    allowStrike: false,
+    allowUnderline: false,
+    allowCodeblock: false,
+  },
+};
+
+export const WithMeetingPill = {
+  render: DefaultTemplate,
+  args: {
+    slashCommandSuggestion: {
+      items: ({ query }) => {
+        return [
+          {
+            command: 'dpm',
+            description: 'Start a Dialpad Meeting',
+          },
+        ];
+      },
+    },
+    modelValue: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
+  },
 };

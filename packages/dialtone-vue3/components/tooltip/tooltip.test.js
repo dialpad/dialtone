@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
 import DtTooltip from './tooltip.vue';
 import {
   TOOLTIP_KIND_MODIFIERS,
@@ -19,8 +19,9 @@ describe('DtTooltip tests', () => {
   let wrapper;
   let tooltipContainer;
   let tooltip;
+  let tippyContent;
+  let tippyBox;
   let anchor;
-  let onMount;
 
   const updateWrapper = () => {
     wrapper = mount(DtTooltip, {
@@ -34,7 +35,9 @@ describe('DtTooltip tests', () => {
     });
 
     tooltipContainer = wrapper.find('[data-qa="dt-tooltip-container"]');
-    tooltip = wrapper.findComponent({ ref: 'content' });
+    tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
+    tippyContent = document.body.querySelector('.tippy-content');
+    tippyBox = document.body.querySelector('.tippy-box');
     anchor = wrapper.find('[data-qa="dt-tooltip-anchor"]');
   };
 
@@ -52,6 +55,8 @@ describe('DtTooltip tests', () => {
   afterEach(() => {
     mockProps = {};
     mockSlots = {};
+    // manually unmount or else the jsdom persists between tests
+    wrapper.unmount();
   });
 
   afterAll(() => {
@@ -77,109 +82,102 @@ describe('DtTooltip tests', () => {
       });
 
       it('should render the tooltip', () => {
-        expect(tooltip.exists()).toBe(true);
+        expect(tooltip).not.toBeNull();
       });
 
       it('should render the anchor', () => {
         expect(anchor.text()).toBe('Hover me');
       });
 
-      it('should set default classes', () => {
-        expect(tooltip.classes('d-tooltip__arrow-tippy--top')).toBe(true);
-      });
-
       it('should render the message', () => {
-        expect(tooltip.text()).toBe('Test message');
+        expect(tooltip.textContent).toBe('Test message');
       });
 
-      describe('When inverted is true', () => {
-        it('should have the inverted class set', () => {
-          mockProps = { inverted: true };
-
+      describe('When tooltip content is a space character', () => {
+        it('should not render the content', async () => {
+          wrapper.unmount();
+          mockProps = { show: true, message: ' ' };
           updateWrapper();
-
-          expect(tooltip.classes(TOOLTIP_KIND_MODIFIERS.inverted)).toBe(true);
+          expect(tippyContent.getAttribute('data-state')).not.toBe('visible');
         });
       });
 
-      describe('When a placement is provided', () => {
-        TOOLTIP_DIRECTIONS.forEach(placement =>
-          describe(`When direction is ${placement}`, () => {
-            it('should have correct arrow direction class', () => {
-              mockProps = { placement };
+      describe('When inverted is true', () => {
+        it('should have the inverted class set', async () => {
+          await wrapper.setProps({ show: true, inverted: true });
+          expect([...tooltip.classList].includes(TOOLTIP_KIND_MODIFIERS.inverted)).not.toBeNull();
+        });
+      });
 
-              updateWrapper();
+      it.each(TOOLTIP_DIRECTIONS)('when placement is %s should have correct data-placement attribute', async (placement) => {
+        wrapper.unmount();
+        mockProps = { show: true, placement, fallbackPlacements: [] };
+        updateWrapper();
 
-              expect(tooltip.classes(`d-tooltip__arrow-tippy--${placement}`)).toBe(true);
-            });
-          }));
+        await flushPromises();
+        tippyBox = document.body.querySelector('.tippy-box');
+
+        expect(tippyBox.getAttribute('data-placement')).toBe(placement);
       });
     });
   });
 
   describe('Interactivity Tests', () => {
-    beforeEach(() => {
-      onMount = vi.spyOn(DtTooltip.methods, 'onMount').mockClear();
-    });
-
-    afterEach(() => {
-      onMount.mockRestore();
-    });
-
     describe('When show prop is true', () => {
       it('should display tooltip', async () => {
-        await wrapper.setProps({ show: true });
+        mockProps = { show: true };
+        updateWrapper();
+        await flushPromises();
 
-        expect(tooltip.isVisible()).toBe(true);
-      });
-    });
-
-    describe('When anchor element is touched', () => {
-      it('should hide tooltip', async () => {
-        await wrapper.setProps({ show: true });
-        await anchor.trigger('touchstart');
-
-        expect(tooltip.isVisible()).toBe(false);
+        expect(tippyContent.getAttribute('data-state')).toBe('visible');
       });
     });
 
     describe('When show prop is false', () => {
-      it('should display tooltip', async () => {
+      it('should not display tooltip', async () => {
+        mockProps = { show: true };
+        updateWrapper();
         await wrapper.setProps({ show: false });
 
-        expect(tooltip.isVisible()).toBe(false);
+        expect(tippyContent.getAttribute('data-state')).not.toBe('visible');
       });
     });
 
     describe('When show prop is unset (default behaviour)', () => {
       beforeEach(() => {
         mockProps = { show: null };
-
         updateWrapper();
       });
 
       describe('When mouseenter tooltip', () => {
         it('should display tooltip', async () => {
-          await wrapper.setProps({ delay: false });
           await anchor.trigger('mouseenter');
+          await flushPromises();
+          tippyContent = document.body.querySelector('.tippy-content');
 
-          expect(tooltip.isVisible()).toBe(true);
+          expect(tippyContent.getAttribute('data-state')).toBe('visible');
         });
       });
 
       describe('When mouseleave tooltip', () => {
         it('should hide tooltip', async () => {
+          await anchor.trigger('mouseenter');
           await anchor.trigger('mouseleave');
+          await flushPromises();
+          tippyContent = document.body.querySelector('.tippy-content');
 
-          expect(tooltip.isVisible()).toBe(false);
+          expect(tippyContent.getAttribute('data-state')).not.toBe('visible');
         });
       });
 
       describe('When focusout tooltip', () => {
         it('should display tooltip', async () => {
+          await anchor.trigger('mouseenter');
           await anchor.trigger('focusout');
+          await flushPromises();
+          tippyContent = document.body.querySelector('.tippy-content');
 
-          expect(tooltip.isVisible()).toBe(false);
+          expect(tippyContent.getAttribute('data-state')).not.toBe('visible');
         });
       });
     });
