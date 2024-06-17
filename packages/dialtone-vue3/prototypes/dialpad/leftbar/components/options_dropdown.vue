@@ -8,7 +8,7 @@
       <dt-button
         ref="dropdownAnchor"
         v-dt-tooltip="'Section options'"
-        class="d-px0 d-w24 d-h24 d-py8 d-fc-tertiary"
+        class="d-fc-tertiary"
         importance="clear"
         kind="muted"
         size="sm"
