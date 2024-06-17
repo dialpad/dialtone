@@ -8,153 +8,192 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--defa
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A20208&viewport=-1695%2C219%2C0.19&t=xHutRjwo1o5zMTgT-11
 ---
 
-
-
-
 <div class="d-p16 d-bgc-critical">
-<input type="checkbox" checked /> Initial HTML structure <br>
-<input type="checkbox" /> Can structure be better?<br>
-<input type="checkbox" checked /> Default and small size <br>
-<input type="checkbox" /> All the sizes <br>
-<input type="checkbox" /> Add icon alpha button <br>
-<input type="checkbox" /> split border always indented from top/bottom? or just the clear ones?<br>
-<input type="checkbox" /> what should x-padding be across all? including icon-onloy alpha<br>
-<input type="checkbox" /> identify smoothest, least breakable way to manage split button presentation across the CSS soup that is d-btn.<br>
+  <input type="checkbox" checked /> Initial HTML structure <br>
+  <input type="checkbox" /> Style: rounded corners vs not rounded corners, selectively<br>
+  <input type="checkbox" /> Can structure be better?<br>
+  <input type="checkbox" checked /> Default and small size <br>
+  <input type="checkbox" /> All the sizes <br>
+  <input type="checkbox" /> Add icon alpha button <br>
+  <input type="checkbox" /> split border always indented from top/bottom? or just the clear ones?<br>
+  <input type="checkbox" /> what should x-padding be across all? including icon-onloy alpha<br>
+  <input type="checkbox" /> identify smoothest, least breakable way to manage split button presentation across the CSS soup that is d-btn.<br>
 </div>
 
 <table class="d-table dialtone-doc-table d-my32">
-  <tr>
-    <td class="d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-    <td class="d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--outlined d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--outlined d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--outlined d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-    <td class="d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--primary d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--primary d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--primary d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--primary d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td class="d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--danger d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--danger d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--danger d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--danger d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-    <td class="d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--outlined d-btn--danger d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--outlined d-btn--danger d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--outlined d-btn--danger d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--outlined d-btn--danger d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-    <td class="d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--primary d-btn--danger d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--primary d-btn--danger d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--primary d-btn--danger d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--primary d-btn--danger d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td class="d-bgc-contrast d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--inverted d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--inverted d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--inverted d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--inverted d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-    <td class="d-bgc-contrast d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--outlined d-btn--inverted d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--outlined d-btn--inverted d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--outlined d-btn--inverted d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--outlined d-btn--inverted d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-    <td class="d-bgc-contrast d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--primary d-btn--inverted d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--primary d-btn--inverted d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--primary d-btn--inverted d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--primary d-btn--inverted d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td class="d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--muted d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--muted d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--muted d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--muted d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-    <td class="d-ta-center">
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--muted d-btn--outlined d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--muted d-btn--outlined d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span></button>
-      </div>
-      <div class="d-h8"></div>
-      <div class="d-split-btn">
-        <button class="d-btn d-btn--sm d-btn--muted d-btn--outlined d-split-btn__alpha" type="button"> <span class="d-btn__label">Place call</span> </button>
-        <button class="d-btn d-btn--sm d-btn--muted d-btn--outlined d-btn--icon-only d-split-btn__omega" type="button"><span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="200" /></span></button>
-      </div>
-    </td>
-    <td class="d-ta-center d-lh-200">
-      <abbr class="d-fc-black-400 d-td-none d-fs-100" title="Not applicable">N/A</abbr>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th class="d-ta-center">
+        &nbsp;
+      </th>
+      <th class="d-ta-center">
+        Clear
+      </th>
+      <th class="d-ta-center">
+        Outlined
+      </th>
+      <th class="d-ta-center">
+        Primary
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="d-ta-left" scope="row">
+        <strong>Base</strong>
+      </th>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button importance="clear" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button importance="clear" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button importance="outlined" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button importance="outlined" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+    </tr>
+    <tr>
+      <th class="d-ta-left" scope="row">
+        <strong>Danger</strong>
+      </th>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button importance="clear" kind="danger" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button importance="clear" kind="danger" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button importance="outlined" kind="danger" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button importance="outlined" kind="danger" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button kind="danger" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button kind="danger" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+    </tr>
+    <tr class="d-bgc-contrast">
+      <th class="d-ta-left" scope="row">
+        <strong class="d-fc-primary-inverted">Inverted</strong>
+      </th>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button importance="clear" kind="inverted" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button importance="clear" kind="inverted" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button importance="outlined" kind="inverted" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button importance="outlined" kind="inverted" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button kind="inverted" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button kind="inverted" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+    </tr>
+    <tr>
+      <th class="d-ta-left" scope="row">
+        <strong>Muted</strong>
+      </th>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button importance="clear" kind="muted" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button importance="clear" kind="muted" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+      <td>
+        <dt-stack gap="400" class="d-ai-flex-start">
+          <div class="d-split-btn">
+            <dt-button importance="outlined" kind="muted" class="d-split-btn__alpha">Place call</dt-button>
+            <dt-button importance="outlined" kind="muted" class="d-split-btn__omega" aria-label="More options">
+              <template #icon>
+                <dt-icon name="chevron-down" size="300" />
+              </template>
+            </dt-button>
+          </div>
+        </dt-stack>
+      </td>
+      <td>
+        <abbr class="d-fc-muted d-td-none d-fs-100" title="Not applicable">N/A</abbr>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <code-well-header>
