@@ -36,18 +36,9 @@ Logos are available in a fixed set of color options to suit different background
 * `dialpad-mono-black`: When the entire logo must remain black regardless of theme.
 * `dialpad-mono-white`: When the entire logo must remain white regardless of theme.
 
-### Workmark-only
+### Wordmark-only
 
-* `dialpad-workmark`: Foreground color responds to Dialtone light and dark themes. For example, the wordmark will be dark in the default theme, and light in the dark theme.
-* `dialpad-workmark-inverted`: Appropriate for use on a contrasting surface color. For example, in a light theme the wordmark will be light on a dark contrasting surface.
-* `dialpad-workmark-black`: When the wordmark must remain black regardless of theme or context.
-* `dialpad-workmark-white`: When the wordmark must remain white regardless of theme or context.
-
-<script setup>
-// import { useRouter } from 'vue-router';
-
-// const router = useRouter();
-
-// router.push({ name: 'icons', path: '/design/icons' });
-
-</script>
+* `dialpad-wordmark`: Foreground color responds to Dialtone light and dark themes. For example, the wordmark will be dark in the default theme, and light in the dark theme.
+* `dialpad-wordmark-inverted`: Appropriate for use on a contrasting surface color. For example, in a light theme the wordmark will be light on a dark contrasting surface.
+* `dialpad-wordmark-black`: When the wordmark must remain black regardless of theme or context.
+* `dialpad-wordmark-white`: When the wordmark must remain white regardless of theme or context.
