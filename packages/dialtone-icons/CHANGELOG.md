@@ -1,3 +1,10 @@
+# [4.19.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.18.0...dialtone-icons/v4.19.0) (2024-06-18)
+
+
+### Features
+
+* **Logo:** NO-JIRA gradient update ([#372](https://github.com/dialpad/dialtone/issues/372)) ([559a517](https://github.com/dialpad/dialtone/commit/559a5178131f799065cbdcc5610238cac9d9556e))
+
 # [4.18.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.17.1...dialtone-icons/v4.18.0) (2024-06-13)
 
 
