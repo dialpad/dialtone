@@ -70,12 +70,12 @@
             {{ description }}
           </div>
           <token-value
-            v-if="!showValueColumn()"
+            v-if="isSmallDevice"
             :token-value="valueToString(tokenValue)"
             :tokens="tokens"
           />
         </th>
-        <td v-if="showValueColumn()" class="d-code--sm d-fc-purple-400 d-ta-right d-wmx164">
+        <td v-if="!isSmallDevice" class="d-code--sm d-fc-purple-400 d-ta-right d-wmx164">
           <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
         </td>
         <td
@@ -167,10 +167,6 @@ export default {
 
     showCopyButton (name) {
       return this.hoveredRow === name;
-    },
-
-    showValueColumn () {
-      return this.isSmallDevice === false;
     },
   },
 };
