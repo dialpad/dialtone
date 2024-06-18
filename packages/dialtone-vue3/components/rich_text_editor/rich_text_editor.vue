@@ -396,6 +396,8 @@ export default {
             },
           }),
         );
+      } else {
+        extensions.push(HardBreak);
       }
 
       if (this.mentionSuggestion) {
