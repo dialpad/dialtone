@@ -1,3 +1,11 @@
+## [4.20.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.20.1...dialtone-icons/v4.20.2) (2024-06-18)
+
+
+### Bug Fixes
+
+* **Icons:** NO-JIRA add webex.svg ([14ede84](https://github.com/dialpad/dialtone/commit/14ede84a4111c8e0d832992c6c389791c12a5ee6))
+* **Icons:** NO-JIRA delete webex.svg ([94162dc](https://github.com/dialpad/dialtone/commit/94162dcf5995b828de394ab6277370d400eb134c))
+
 ## [4.20.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.20.0...dialtone-icons/v4.20.1) (2024-06-18)
 
 
