@@ -204,5 +204,6 @@ export const WithMeetingPill = {
       },
     },
     modelValue: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
+    preventTyping: true,
   },
 };
