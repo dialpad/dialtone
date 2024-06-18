@@ -1,3 +1,11 @@
+## [2.139.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.139.1...dialtone-vue2/v2.139.2) (2024-06-18)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA preventTyping not working with pills ([#375](https://github.com/dialpad/dialtone/issues/375)) ([1091d61](https://github.com/dialpad/dialtone/commit/1091d61111a31a9ce8d9ffb655baab3c1dd9be7f))
+* **Rich Text Editor:** DLT-1822 inputs with line breaks are not working for editor ([#374](https://github.com/dialpad/dialtone/issues/374)) ([d0d16de](https://github.com/dialpad/dialtone/commit/d0d16de6981f1a10d904ac52d0023757a7bcb279))
+
 ## [2.139.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.139.0...dialtone-vue2/v2.139.1) (2024-06-14)
 
 
