@@ -1,3 +1,10 @@
+# [4.20.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.19.0...dialtone-icons/v4.20.0) (2024-06-18)
+
+
+### Features
+
+* **Icon:** DLT-1804 add webex ([#367](https://github.com/dialpad/dialtone/issues/367)) ([72cab26](https://github.com/dialpad/dialtone/commit/72cab26d6ff379cd5ca2b6610ace5465b6d7190b))
+
 # [4.19.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.18.0...dialtone-icons/v4.19.0) (2024-06-18)
 
 
