@@ -7,6 +7,7 @@ import {
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import PopoverVariants from './popover_variants.story.vue';
+import PopoverIframe from './popover_iframe.story.vue';
 import { createRenderConfig } from '@/common/storybook_utils';
 
 import { action } from '@storybook/addon-actions';
@@ -245,19 +246,11 @@ export const Variants = {
 };
 
 export const IframeTest = {
-  render: (argsData) => createRenderConfig(DtPopover, PopoverDefault, argsData),
+  render: (argsData) => createRenderConfig(DtPopover, PopoverIframe, argsData),
 
   args: {
     appendTo: window.parent.document.body,
     placement: 'top-start',
     fallbackPlacements: [],
   },
-
-  decorators: [
-    () => ({
-      template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
-    }),
-  ],
-
-  parameters: {},
 };

@@ -35,6 +35,7 @@ export const getPopperOptions = ({
   tether = true,
 } = {}) => {
   return {
+    strategy: 'fixed',
     modifiers: [
       {
         name: 'flip',
