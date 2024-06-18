@@ -1,3 +1,10 @@
+## [4.20.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.20.0...dialtone-icons/v4.20.1) (2024-06-18)
+
+
+### Bug Fixes
+
+* **Icons:** NO-JIRA webex icon ([aecc85b](https://github.com/dialpad/dialtone/commit/aecc85b10a0a1e5743e29ef19f43dc61b5b57d5e))
+
 # [4.20.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.19.0...dialtone-icons/v4.20.0) (2024-06-18)
 
 
