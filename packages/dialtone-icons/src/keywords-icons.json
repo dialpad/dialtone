@@ -263,9 +263,6 @@
         "microsoft",
         "office"
       ],
-      "webex": [
-        "cisco"
-      ],
       "office-365": [],
       "pipedrive": [],
       "play-store-badge": [],
@@ -286,6 +283,9 @@
       "viber": [],
       "visa": [],
       "we-chat": [],
+      "webex": [
+        "cisco"
+      ],
       "whatsapp": [],
       "x-brand": [
         "twitter"
