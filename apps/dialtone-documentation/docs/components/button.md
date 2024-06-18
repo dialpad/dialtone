@@ -1240,18 +1240,22 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
       </tr>
     </tbody>
   </table>
-  <div class="d-p16 d-m32 d-bgc-critical d-ba d-bar8 d-bc-moderate">
-    <dt-stack>
-      <dt-checkbox checked label="Initial HTML structure" />
-      <dt-checkbox checked label="Use DtButton with minimal change or extension" />
-      <dt-checkbox checked label="Style: rounded corners vs not rounded corners, selectively" />
-      <dt-checkbox label="Can structure be better?" />
-      <dt-checkbox label="All the sizes" />
-      <dt-checkbox indeterminate label="Add icon only examples in alpha button" />
-      <dt-checkbox label="Split border always indented from top/bottom? or just the clear ones?" />
-      <dt-checkbox checked label="What should x-padding be across all? including icon-onloy alpha" />
-      <dt-checkbox label="identify smoothest, least breakable way to manage split button presentation across the CSS soup that is d-btn" />
-    </dt-stack>
+  <div class="d-p16 d-m32 d-bgc-moderate d-ba d-bar8 d-bc-moderate">
+    <details>
+      <summary class="d-c-pointer">Todo...</summary>
+      <dt-stack class="d-pt16">
+        <dt-checkbox checked label="Initial HTML structure" />
+        <dt-checkbox checked label="Use DtButton with minimal change or extension" />
+        <dt-checkbox checked label="Style: rounded corners vs not rounded corners, selectively" />
+        <dt-checkbox label="Can structure be better?" />
+        <dt-checkbox label="All the sizes" />
+        <dt-checkbox indeterminate label="Add icon only examples in alpha button" />
+        <dt-checkbox label="Split border always indented from top/bottom? or just the clear ones?" />
+        <dt-checkbox checked label="What should x-padding be across all? including icon-onloy alpha" />
+        <dt-checkbox label="identify smoothest, least breakable way to manage split button presentation across the CSS soup that is d-btn" />
+        <dt-checkbox label="Explore using :has()" />
+      </dt-stack>
+    </details>
   </div>
 </div>
 
