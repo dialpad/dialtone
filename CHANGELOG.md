@@ -1,3 +1,16 @@
+# [9.49.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.48.0...dialtone/v9.49.0) (2024-06-18)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA preventTyping not working with pills ([#375](https://github.com/dialpad/dialtone/issues/375)) ([1091d61](https://github.com/dialpad/dialtone/commit/1091d61111a31a9ce8d9ffb655baab3c1dd9be7f))
+* **Rich Text Editor:** DLT-1822 inputs with line breaks are not working for editor ([#374](https://github.com/dialpad/dialtone/issues/374)) ([d0d16de](https://github.com/dialpad/dialtone/commit/d0d16de6981f1a10d904ac52d0023757a7bcb279))
+
+
+### Features
+
+* **Icon:** DLT-1804 add webex ([#367](https://github.com/dialpad/dialtone/issues/367)) ([72cab26](https://github.com/dialpad/dialtone/commit/72cab26d6ff379cd5ca2b6610ace5465b6d7190b))
+
 # [9.48.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.47.1...dialtone/v9.48.0) (2024-06-18)
 
 
