@@ -538,15 +538,6 @@
 //  $   SPLIT BUTTON
 //  ----------------------------------------------------------------------------
 
-// <div class="d-split-btn">
-//     <button class="d-btn d-btn--outlined d-split-btn__alpha" type="button">
-//         <span class="d-btn__label">Label</span>
-//     </button>
-//     <button class="d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega" type="button">
-//         <span class="d-btn__icon d-btn__icon--left"><dt-icon name="chevron-down" size="300" /></span>
-//     </button>
-// </div>
-
 .d-split-btn {
     display: inline-flex;
     gap: var(--dt-space-0);
@@ -560,46 +551,93 @@
         &:focus-visible {
             box-shadow: var(--dt-shadow-focus-inset);
         }
+
+        &:hover ~ ::before,
+        &:hover::before {
+            opacity: 0;
+        }
+
+        &.d-btn--outlined:hover ~ ::before,
+        &.d-btn--outlined:hover::before {
+            opacity: var(--dt-opacity-600);
+        }
+
+        &.d-btn--primary:hover ~ ::before,
+        &.d-btn--primary:hover::before {
+            opacity: var(--dt-opacity-600);
+        }
+    }
+
+    &__omega--xs.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-300);
+    }
+
+    &__omega--sm.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-300);
+    }
+
+    &__omega--md.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-300);
+    }
+
+    &__omega--lg.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-350);
+    }
+
+    &__omega--xl.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-450);
     }
 
     &__omega {
-        // --button-padding-x: 2px;
-
         &::before {
             position: absolute;
             top: var(--button-border-radius);
             bottom: var(--button-border-radius);
-            left: var(--dt-size-50-negative);
+            left: var(--dt-size-100-negative);
             width: var(--dt-space-100);
             background-color: var(--button-color-text);
-            opacity: .4;
+            opacity: var(--dt-opacity-600);
             content: '';
         }
 
-        &.d-btn--outlined::before,
         &.d-btn--primary::before {
+            top: var(--dt-size-100-negative);
+            bottom: var(--dt-size-100-negative);
+        }
+
+        &.d-btn--outlined::before {
             top: 0;
             bottom: 0;
         }
     }
 
-    &__alpha:not(.d-btn--muted) {
+    &__alpha.d-btn--primary,
+    &__alpha.d-btn--outlined {
         border-right: 0;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
 
-    &__omega:not(.d-btn--muted) {
+    &__omega.d-btn--primary,
+    &__omega.d-btn--outlined {
         border-left: 0;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-
 }
 
 //  ============================================================================
 //  $   BUTTON GROUP
 //  ----------------------------------------------------------------------------
+
+.asdfasdfqwerqwer {
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+    overflow: auto;
+    background-color: var(--dt-color-surface-primary);
+}
+
 .d-btn-group {
     display: flex;
 
