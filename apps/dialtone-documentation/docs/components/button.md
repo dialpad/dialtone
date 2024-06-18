@@ -9,29 +9,29 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 
 <div class="asdfasdfqwerqwer">
-  <table class="d-table dialtone-doc-table d-bb d-bc-default">
+  <table class="d-table dialtone-doc-table d-bb d-bbw2 d-bc-default">
     <thead>
       <tr>
-        <th class="d-ta-center">
+        <th class="d-ta-center d-br d-bc-default">
           &nbsp;
         </th>
-        <th class="d-ta-center">
+        <th class="d-ta-center d-br d-bc-default">
           Clear
         </th>
-        <th class="d-ta-center">
+        <th class="d-ta-center d-br d-bc-default">
           Outlined
         </th>
-        <th class="d-ta-center">
+        <th class="d-ta-center d-br d-bc-default">
           Primary
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th class="d-ta-right d-br d-bc-default" scope="row">
+        <th class="d-ta-right d-br d-brw2 d-bc-default" scope="row">
           <span class="d-headline--eyebrow">Base</span>
         </th>
-        <td>
+        <td class="d-ta-right d-br d-bc-default">
           <dt-stack direction="row" gap="500">
             <dt-stack gap="400">
               <div class="d-split-btn">
@@ -139,7 +139,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
             </dt-stack>
           </dt-stack>
         </td>
-        <td>
+        <td class="d-ta-right d-br d-bc-default">
           <dt-stack direction="row" gap="500">
             <dt-stack gap="400">
               <div class="d-split-btn">
@@ -357,7 +357,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
         </td>
       </tr>
       <tr>
-        <th class="d-ta-right d-br d-bc-default" scope="row">
+        <th class="d-ta-right d-br d-brw2 d-bc-default" scope="row">
           <span class="d-headline--eyebrow">Danger</span>
         </th>
         <td class="d-br d-bc-default">
@@ -686,7 +686,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
         </td>
       </tr>
       <tr class="d-bgc-contrast">
-        <th class="d-ta-right d-br d-bc-default-inverted" scope="row">
+        <th class="d-ta-right d-br d-brw2 d-bc-default-inverted" scope="row">
           <span class="d-headline--eyebrow d-fc-primary-inverted">Inverted</span>
         </th>
         <td class="d-br d-bc-default-inverted">
@@ -1015,7 +1015,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
         </td>
       </tr>
       <tr>
-        <th class="d-ta-right d-br d-bc-default" scope="row">
+        <th class="d-ta-right d-br d-brw2 d-bc-default" scope="row">
           <span class="d-headline--eyebrow">Muted</span>
         </th>
         <td class="d-br d-bc-default">
@@ -1242,7 +1242,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   </table>
   <div class="d-p16 d-m32 d-bgc-moderate d-ba d-bar8 d-bc-moderate">
     <details>
-      <summary class="d-c-pointer">Todo...</summary>
+      <summary class="d-c-pointer"><span class="d-pl4">To do...</span></summary>
       <dt-stack class="d-pt16">
         <dt-checkbox checked label="Initial HTML structure" />
         <dt-checkbox checked label="Use DtButton with minimal change or extension" />
