@@ -1,24 +1,24 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-flg12 d-fl-col2">
-    <dt-button
-      id="anchor"
-      @click="toggleOpen(!internalOpen)"
-    >
-      popover anchor
-    </dt-button>
+  <div class="d-ml128">
     <dt-popover
-      :open="internalOpen"
+      :open="$attrs.open"
       :modal="true"
       width-content="anchor"
       :placement="$attrs.placement"
       initial-focus-element="first"
-      class="d-mb128"
-      external-anchor="anchor"
-      :append-to="$attrs.appendTo"
-      sticky="popper"
-      @update:open="toggleOpen"
+      append-to="root"
     >
+      <template
+        slot="anchor"
+        slot-scope="{ attrs }"
+      >
+        <dt-button
+          v-bind="attrs"
+        >
+          popover anchor
+        </dt-button>
+      </template>
       <template
         slot="content"
         slot-scope="{ close }"
@@ -48,18 +48,6 @@ export default {
   components: {
     DtPopover,
     DtButton,
-  },
-
-  data () {
-    return {
-      internalOpen: this.$attrs.open,
-    };
-  },
-
-  methods: {
-    toggleOpen (value) {
-      this.internalOpen = value;
-    },
   },
 };
 </script>

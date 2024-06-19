@@ -492,7 +492,7 @@ export default {
     /**
      * Sets the element to which the popover is going to append to.
      * 'body' will append to the nearest body (supports shadow DOM).
-     * @values 'body', 'parent', HTMLElement,
+     * @values 'body', 'parent', 'root', HTMLElement
      */
     appendTo: {
       type: [HTMLElement, String],
@@ -946,16 +946,61 @@ export default {
       }
     },
 
+    getReferenceClientRect (appendTo, error) {
+      const anchorReferenceRect = this.anchorEl.getBoundingClientRect();
+
+      if (this.appendTo !== 'root' || error) return anchorReferenceRect;
+
+      const iframe = appendTo.getElementsByTagName('iframe');
+      const iframeReferenceRect = iframe[0].getBoundingClientRect();
+
+      if (!iframe || this.anchorEl.ownerDocument === iframe[0].ownerDocument) return anchorReferenceRect;
+
+      return {
+        width: anchorReferenceRect.width,
+        height: anchorReferenceRect.height,
+        top: iframeReferenceRect.top + anchorReferenceRect.top,
+        left: iframeReferenceRect.left + anchorReferenceRect.left,
+        right: iframeReferenceRect.right + anchorReferenceRect.right,
+        bottom: iframeReferenceRect.bottom + anchorReferenceRect.bottom,
+      };
+    },
+
     initTippyInstance () {
+      let internalAppendTo = null;
+      let iFrameError = false;
+
+      switch (this.appendTo) {
+        case 'body':
+          internalAppendTo = this.anchorEl?.getRootNode()?.querySelector('body');
+          break;
+
+        case 'root':
+          // Try to attach the popover to root document, fallback to parent is fail
+          try {
+            internalAppendTo = window.parent.document.body;
+          } catch (err) {
+            console.error('Could not attach the popover to iframe parent window: ', err);
+            internalAppendTo = 'parent';
+            iFrameError = true;
+          }
+          break;
+
+        default:
+          internalAppendTo = this.appendTo;
+          break;
+      }
+
       this.tip = createTippyPopover(this.anchorEl, {
         popperOptions: this.popperOptions(),
         contentElement: this.popoverContentEl,
         placement: this.placement,
         offset: this.offset,
         sticky: this.sticky,
-        appendTo: this.appendTo === 'body' ? this.anchorEl?.getRootNode()?.querySelector('body') : this.appendTo,
+        appendTo: internalAppendTo,
         interactive: true,
         trigger: 'manual',
+        getReferenceClientRect: () => this.getReferenceClientRect(internalAppendTo, iFrameError),
         // We have to manage hideOnClick functionality manually to handle
         // popover within popover situations.
         hideOnClick: false,

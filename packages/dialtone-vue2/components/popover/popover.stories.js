@@ -249,8 +249,6 @@ export const IframeTest = {
   render: (argsData) => createRenderConfig(DtPopover, PopoverIframe, argsData),
 
   args: {
-    appendTo: window.parent.document.body,
-    placement: 'top-start',
-    fallbackPlacements: [],
+    placement: 'top-end',
   },
 };
