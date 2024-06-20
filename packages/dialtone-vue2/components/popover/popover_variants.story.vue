@@ -451,6 +451,11 @@
       title="iframe popover example"
       src="/iframe.html?args=&id=components-popover--iframe-test&viewMode=story"
     />
+
+    <iframe
+      title="iframe popover example 2"
+      src="/iframe.html?args=&id=components-popover--iframe-test&viewMode=story"
+    />
   </div>
 </template>
 
