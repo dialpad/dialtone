@@ -449,12 +449,12 @@
 
     <iframe
       title="iframe popover example"
-      src="/iframe.html?args=&id=components-popover--iframe-test&viewMode=story"
+      :src="withURLprefix('?args=&id=components-popover--iframe-test&viewMode=story')"
     />
 
     <iframe
       title="iframe popover example 2"
-      src="/iframe.html?args=&id=components-popover--iframe-test&viewMode=story"
+      :src="withURLprefix('?args=&id=components-popover--iframe-test&viewMode=story')"
     />
   </div>
 </template>
@@ -497,6 +497,10 @@ export default {
 
     onMouseOut () {
       this.openPopoverWithTriggerOverride = false;
+    },
+
+    withURLprefix (query) {
+      return window.location.origin + window.location.pathname + query;
     },
   },
 };
