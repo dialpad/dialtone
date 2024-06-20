@@ -548,11 +548,6 @@
     &__omega {
         position: relative;
 
-        // &[disabled] {
-        //     background-color: transparent;
-        //     cursor: not-allowed;
-        // }
-
         &:focus-visible {
             z-index: var(--zi-active);
         }
@@ -595,6 +590,8 @@
         }
     }
 
+    &__alpha:disabled:not(.d-btn--outlined),
+    &__alpha:disabled:not(.d-btn--primary),
     &__alpha.d-btn--primary,
     &__alpha.d-btn--outlined {
         border-right: 0;
@@ -602,6 +599,8 @@
         border-bottom-right-radius: 0;
     }
 
+    &__omega:disabled:not(.d-btn--outlined),
+    &__omega:disabled:not(.d-btn--primary),
     &__omega.d-btn--primary,
     &__omega.d-btn--outlined {
         border-left: 0;
