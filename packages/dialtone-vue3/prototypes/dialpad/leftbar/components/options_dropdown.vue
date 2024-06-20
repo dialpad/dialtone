@@ -8,7 +8,7 @@
       <dt-button
         ref="dropdownAnchor"
         v-dt-tooltip="'Section options'"
-        class="d-fc-tertiary"
+        class="d-fc-tertiary d-h24 d-w24"
         importance="clear"
         kind="muted"
         size="sm"
@@ -51,7 +51,7 @@ import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
 import { DtListItem } from '@/components/list_item';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 
 const emits = defineEmits(['select-menu-option', 'open-dropdown']);
 

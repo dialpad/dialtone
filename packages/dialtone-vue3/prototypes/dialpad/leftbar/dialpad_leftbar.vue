@@ -35,7 +35,7 @@
         </template>
       </leftbar-section>
 
-      <leftbar-section title="Contact centers">
+      <leftbar-section title="Contact centers Contact centers">
         <template #items>
           <dt-stack gap="200">
             <dt-recipe-general-row
@@ -47,7 +47,7 @@
         </template>
         <template #action>
           <dt-button
-            class="d-fc-success d-bar-pill"
+            class="d-fc-success d-bar-pill d-h24"
             kind="muted"
             importance="clear"
             size="xs"
@@ -111,9 +111,9 @@ import { DtStack } from '@/components/stack';
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';
 import { faker } from '@faker-js/faker';
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
-const mainOptions = ref([
+const mainOptions = [
   { description: 'Inbox', type: 'inbox' },
   { description: 'Contacts', type: 'contacts' },
   {
@@ -135,8 +135,8 @@ const mainOptions = ref([
       return unreadCountMessage({ messages: this.unreadCount, mentions: this.unreadMentionCount });
     },
   },
-]);
-const channels = ref([
+];
+const channels = [
   {
     description: faker.word.sample({ strategy: 'longest' }),
     type: 'channels',
@@ -150,8 +150,8 @@ const channels = ref([
 
   { description: faker.word.sample(), type: 'channels', iconSize: '200' },
   { description: faker.word.sample({ strategy: 'longest' }), type: 'locked channel', iconSize: '200' },
-]);
-const contactCenters = ref([
+];
+const contactCenters = [
   { description: faker.person.fullName(), type: 'contact center', color: 'magenta-200' },
   {
     description: faker.person.fullName(),
@@ -165,8 +165,8 @@ const contactCenters = ref([
   },
 
   { description: faker.person.fullName(), type: 'contact center', color: 'purple-300' },
-]);
-const contacts = ref([
+];
+const contacts = [
   {
     name: faker.person.fullName(),
     avatarPresence: 'active',
@@ -195,6 +195,7 @@ const contacts = ref([
     avatarPresence: 'busy',
     callButtonTooltip: 'Call',
     presenceText: 'DND',
+    muted: true,
     get avatarSeed () {
       return this.name;
     },
@@ -204,12 +205,13 @@ const contacts = ref([
     avatarPresence: 'offline',
     callButtonTooltip: 'Call',
     presenceText: 'DND',
+    muted: true,
     get avatarSeed () {
       return this.name;
     },
   },
-]);
-const groups = ref([
+];
+const groups = [
   {
     description: faker.person.fullName(),
     type: 'coaching group',
@@ -219,7 +221,7 @@ const groups = ref([
       return unreadCountMessage({ messages: this.unreadCount });
     },
   },
-]);
+];
 
 const unreadCountMessage = ({ messages, mentions }) => {
   const unreadMessages = messages && `${messages} unread messages`;
@@ -228,7 +230,7 @@ const unreadCountMessage = ({ messages, mentions }) => {
   return [unreadMessages, unreadMentions].filter(item => !!item).join(' and ');
 };
 
-const favoriteChannels = computed(() => channels.value.slice(0, 1));
-const favoriteContacts = computed(() => contacts.value.slice(0, 1));
-const favoriteGroups = computed(() => groups.value.slice(0, 1));
+const favoriteChannels = computed(() => channels.slice(0, 1));
+const favoriteContacts = computed(() => contacts.slice(0, 1));
+const favoriteGroups = computed(() => groups.slice(0, 1));
 </script>
