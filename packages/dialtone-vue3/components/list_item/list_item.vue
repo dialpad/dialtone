@@ -159,14 +159,6 @@ export default {
      * @event mousedown
      */
     'mousedown',
-
-    /**
-     * Native click event
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
   ],
 
   data () {
@@ -203,10 +195,6 @@ export default {
         mouseleave: event => {
           this.onMouseLeave(event);
           this.$emit('mouseleave', event);
-        },
-
-        click: event => {
-          this.$emit('click', event);
         },
       };
     },
