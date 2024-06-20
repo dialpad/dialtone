@@ -947,22 +947,25 @@ export default {
     },
 
     getReferenceClientRect (appendTo, error) {
-      const anchorReferenceRect = this.anchorEl.getBoundingClientRect();
+      const anchorReferenceRect = this.anchorEl?.getBoundingClientRect();
 
       if (this.appendTo !== 'root' || error) return anchorReferenceRect;
 
-      const iframe = appendTo.getElementsByTagName('iframe');
-      const iframeReferenceRect = iframe[0].getBoundingClientRect();
+      const anchorOwnerDocument = this.anchorEl?.ownerDocument;
+      const anchorParentWindow = anchorOwnerDocument?.defaultView || anchorOwnerDocument?.parentWindow;
+      const anchorIframe = anchorParentWindow?.frameElement;
 
-      if (!iframe || this.anchorEl.ownerDocument === iframe[0].ownerDocument) return anchorReferenceRect;
+      if (!anchorIframe) return anchorReferenceRect;
+
+      const iframeReferenceRect = anchorIframe.getBoundingClientRect();
 
       return {
-        width: anchorReferenceRect.width,
-        height: anchorReferenceRect.height,
-        top: iframeReferenceRect.top + anchorReferenceRect.top,
-        left: iframeReferenceRect.left + anchorReferenceRect.left,
-        right: iframeReferenceRect.right + anchorReferenceRect.right,
-        bottom: iframeReferenceRect.bottom + anchorReferenceRect.bottom,
+        width: anchorReferenceRect?.width,
+        height: anchorReferenceRect?.height,
+        top: iframeReferenceRect?.top + anchorReferenceRect?.top,
+        left: iframeReferenceRect?.left + anchorReferenceRect?.left,
+        right: iframeReferenceRect?.right + anchorReferenceRect?.right,
+        bottom: iframeReferenceRect?.bottom + anchorReferenceRect?.bottom,
       };
     },
 
