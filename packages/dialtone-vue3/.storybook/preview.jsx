@@ -20,6 +20,7 @@ setCustomEmojiJson(customEmojiJson);
 setup((app) => {
   app.use(fixDefaultSlot)
   app.use(DtTooltipDirective);
+  // global seed, to make sure results are reproducible on percy and don't change on every reload too.
   faker.seed(6687422389464139);
 });
 
