@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 
 <div class="asdfasdfqwerqwer">
-  <table class="d-table dialtone-doc-table d-bb d-bbw2 d-bc-default">
+  <table class="d-table dialtone-doc-table d-bt d-bb d-bbw2 d-bc-default">
     <thead>
       <tr>
         <th class="d-ta-center d-br d-bc-default">
@@ -1240,10 +1240,18 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
       </tr>
     </tbody>
   </table>
+  <div class="d-p16 d-ta-center">
+    <dt-toggle size="sm" onclick="const splitButtons = document.querySelectorAll('.d-split-btn'); splitButtons.forEach(splitButton => { const buttons = splitButton.querySelectorAll('.d-btn'); buttons.forEach(button => { if (button.hasAttribute('disabled')) { button.removeAttribute('disabled'); } else { button.setAttribute('disabled', 'true'); } }); });">
+      <div class="d-mr6">
+        Disable all split buttons
+      </div>
+    </dt-toggle>
+  </div>
   <div class="d-p16 d-m32 d-bgc-moderate d-ba d-bar8 d-bc-moderate">
     <details>
       <summary class="d-c-pointer"><span class="d-pl4">To do...</span></summary>
       <dt-stack class="d-pt16">
+        <dt-checkbox label="disabled state, resolve radius" />
         <dt-checkbox checked label="match :focus with :hover" />
         <dt-checkbox checked label="Initial HTML structure" />
         <dt-checkbox checked label="Use DtButton with minimal change or extension" />
