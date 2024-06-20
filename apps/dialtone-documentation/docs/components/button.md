@@ -185,60 +185,60 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
             </dt-stack>
             <dt-stack gap="400">
               <div class="d-split-btn">
-                <dt-button size="xs" importance="outlined" kind="muted" class="d-split-btn__alpha d-split-btn__alpha--xs">
+                <dt-button size="xs" importance="outlined" class="d-split-btn__alpha d-split-btn__alpha--xs">
                   <template #icon>
                     <dt-icon name="phone" size="200" />
                   </template>
                 </dt-button>
-                <dt-button size="xs" importance="outlined" kind="muted" class="d-split-btn__omega d-split-btn__omega--xs" aria-label="More options">
+                <dt-button size="xs" importance="outlined" class="d-split-btn__omega d-split-btn__omega--xs" aria-label="More options">
                   <template #icon>
                     <dt-icon name="chevron-down" size="200" />
                   </template>
                 </dt-button>
               </div>
               <div class="d-split-btn">
-                <dt-button size="sm" importance="outlined" kind="muted" class="d-split-btn__alpha d-split-btn__alpha--sm">
+                <dt-button size="sm" importance="outlined" class="d-split-btn__alpha d-split-btn__alpha--sm">
                   <template #icon>
                     <dt-icon name="phone" size="200" />
                   </template>
                 </dt-button>
-                <dt-button size="sm" importance="outlined" kind="muted" class="d-split-btn__omega d-split-btn__omega--sm" aria-label="More options">
+                <dt-button size="sm" importance="outlined" class="d-split-btn__omega d-split-btn__omega--sm" aria-label="More options">
                   <template #icon>
                     <dt-icon name="chevron-down" size="200" />
                   </template>
                 </dt-button>
               </div>
               <div class="d-split-btn">
-                <dt-button size="md" importance="outlined" kind="muted" class="d-split-btn__alpha d-split-btn__alpha--md">
+                <dt-button size="md" importance="outlined" class="d-split-btn__alpha d-split-btn__alpha--md">
                   <template #icon>
                     <dt-icon name="phone" size="300" />
                   </template>
                 </dt-button>
-                <dt-button size="md" importance="outlined" kind="muted" class="d-split-btn__omega d-split-btn__omega--md" aria-label="More options">
+                <dt-button size="md" importance="outlined" class="d-split-btn__omega d-split-btn__omega--md" aria-label="More options">
                   <template #icon>
                     <dt-icon name="chevron-down" size="300" />
                   </template>
                 </dt-button>
               </div>
               <div class="d-split-btn">
-                <dt-button size="lg" importance="outlined" kind="muted" class="d-split-btn__alpha d-split-btn__alpha--lg">
+                <dt-button size="lg" importance="outlined" class="d-split-btn__alpha d-split-btn__alpha--lg">
                   <template #icon>
                     <dt-icon name="phone" size="400" />
                   </template>
                 </dt-button>
-                <dt-button size="lg" importance="outlined" kind="muted" class="d-split-btn__omega d-split-btn__omega--lg" aria-label="More options">
+                <dt-button size="lg" importance="outlined" class="d-split-btn__omega d-split-btn__omega--lg" aria-label="More options">
                   <template #icon>
                     <dt-icon name="chevron-down" size="400" />
                   </template>
                 </dt-button>
               </div>
               <div class="d-split-btn">
-                <dt-button size="xl" importance="outlined" kind="muted" class="d-split-btn__alpha d-split-btn__alpha--xl">
+                <dt-button size="xl" importance="outlined" class="d-split-btn__alpha d-split-btn__alpha--xl">
                   <template #icon>
                     <dt-icon name="phone" size="500" />
                   </template>
                 </dt-button>
-                <dt-button size="xl" importance="outlined" kind="muted" class="d-split-btn__omega d-split-btn__omega--xl" aria-label="More options">
+                <dt-button size="xl" importance="outlined" class="d-split-btn__omega d-split-btn__omega--xl" aria-label="More options">
                   <template #icon>
                     <dt-icon name="chevron-down" size="500" />
                   </template>
@@ -1244,17 +1244,17 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     <details>
       <summary class="d-c-pointer"><span class="d-pl4">To do...</span></summary>
       <dt-stack class="d-pt16">
-        <dt-checkbox label="match :focus with :hover" />
+        <dt-checkbox checked label="match :focus with :hover" />
         <dt-checkbox checked label="Initial HTML structure" />
         <dt-checkbox checked label="Use DtButton with minimal change or extension" />
         <dt-checkbox checked label="Style: rounded corners vs not rounded corners, selectively" />
-        <dt-checkbox label="Can structure be better?" />
-        <dt-checkbox label="All the sizes" />
-        <dt-checkbox indeterminate label="Add icon only examples in alpha button" />
-        <dt-checkbox label="Split border always indented from top/bottom? or just the clear ones?" />
-        <dt-checkbox checked label="What should x-padding be across all? including icon-onloy alpha" />
-        <dt-checkbox label="identify smoothest, least breakable way to manage split button presentation across the CSS soup that is d-btn" />
-        <dt-checkbox label="Explore using :has()" />
+        <dt-checkbox checked label="Can structure be better?" />
+        <dt-checkbox checked label="All the sizes" />
+        <dt-checkbox checked indeterminate label="Add icon only examples in alpha button" />
+        <dt-checkbox checked label="Split border always indented from top/bottom? or just the clear ones?" />
+        <dt-checkbox checked label="What should x-padding be across all? including icon-only alpha" />
+        <dt-checkbox checked label="identify smoothest, least breakable way to manage split button presentation across the CSS soup that is d-btn" />
+        <dt-checkbox checked label="Explore using :has() to target hiding divider" />
       </dt-stack>
     </details>
   </div>

@@ -551,66 +551,39 @@
         &:focus-visible {
             box-shadow: var(--dt-shadow-focus-inset);
         }
-
-        &:focus-visible ~ ::before,
-        &:focus-visible::before,
-        &:hover ~ ::before,
-        &:hover::before {
-            opacity: 0;
-        }
-
-        &.d-btn--outlined:focus-visible ~ ::before,
-        &.d-btn--outlined:focus-visible::before,
-        &.d-btn--outlined:hover ~ ::before,
-        &.d-btn--outlined:hover::before {
-            opacity: var(--dt-opacity-600);
-        }
-
-        &.d-btn--primary:focus-visible ~ ::before,
-        &.d-btn--primary:focus-visible::before,
-        &.d-btn--primary:hover ~ ::before,
-        &.d-btn--primary:hover::before {
-            opacity: var(--dt-opacity-600);
-        }
-    }
-
-    &__omega--xs.d-btn--icon-only {
-        --button-padding-x: var(--dt-space-300);
-    }
-
-    &__omega--sm.d-btn--icon-only {
-        --button-padding-x: var(--dt-space-300);
-    }
-
-    &__omega--md.d-btn--icon-only {
-        --button-padding-x: var(--dt-space-300);
-    }
-
-    &__omega--lg.d-btn--icon-only {
-        --button-padding-x: var(--dt-space-350);
-    }
-
-    &__omega--xl.d-btn--icon-only {
-        --button-padding-x: var(--dt-space-450);
     }
 
     &__omega {
         &::before {
+            // create a divider line between the two buttons
             position: absolute;
             top: var(--button-border-radius);
             bottom: var(--button-border-radius);
             left: var(--dt-size-100-negative);
-            width: var(--dt-space-100);
-            background-color: var(--button-color-text);
-            opacity: var(--dt-opacity-600);
+            width: var(--dt-size-100);
+            background-color: var(--button-color-text); // use text color for divider line
+            opacity: var(--dt-opacity-600); // soften it
             content: '';
+
+            // hide divider line when hovering of focusing any button within the split button
+            .d-split-btn:has(:focus-visible, :hover) & {
+                opacity: 0;
+            }
+
+            // DO NOT hide divider line for primary or outlined buttons
+            .d-split-btn:has(.d-btn--outlined:focus-visible, .d-btn--outlined:hover) &,
+            .d-split-btn:has(.d-btn--primary:focus-visible, .d-btn--primary:hover) & {
+                opacity: var(--dt-opacity-600);
+            }
         }
 
+        // bleed divider line to absolute top and bottom of the button
         &.d-btn--primary::before {
             top: var(--dt-size-100-negative);
             bottom: var(--dt-size-100-negative);
         }
 
+        // position divider line just inside top and bottom of the button
         &.d-btn--outlined::before {
             top: 0;
             bottom: 0;
@@ -630,6 +603,27 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
+
+    // adjust x-padding for icon-only button at each size
+    &__omega--xs.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-300);
+    }
+
+    &__omega--sm.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-300);
+    }
+
+    &__omega--md.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-300);
+    }
+
+    &__omega--lg.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-350);
+    }
+
+    &__omega--xl.d-btn--icon-only {
+        --button-padding-x: var(--dt-space-450);
+    }
 }
 
 //  ============================================================================
@@ -638,8 +632,8 @@
 
 .asdfasdfqwerqwer {
     position: fixed;
-    z-index: 99999;
-    inset: 0;
+    z-index: var(--zi-notification);
+    inset: var(--dt-size-700) var(--dt-size-0) var(--dt-size-0);
     overflow: auto;
     background-color: var(--dt-color-surface-primary);
 }
