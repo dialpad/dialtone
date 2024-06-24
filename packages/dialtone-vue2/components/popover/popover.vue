@@ -492,6 +492,8 @@ export default {
     /**
      * Sets the element to which the popover is going to append to.
      * 'body' will append to the nearest body (supports shadow DOM).
+     * 'root' will try append to the iFrame's parent body if it is contained in an iFrame
+     * and has permissions to access it, else, it'd default to 'parent'.
      * @values 'body', 'parent', 'root', HTMLElement
      */
     appendTo: {
