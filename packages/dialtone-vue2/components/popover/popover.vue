@@ -948,7 +948,12 @@ export default {
       }
     },
 
-    getReferenceClientRect (appendTo, error) {
+    /**
+     * Return's the anchor ClientRect object relative to the window.
+     * Refer to: https://atomiks.github.io/tippyjs/v6/all-props/#getreferenceclientrect for more information
+     * @param error
+     */
+    getReferenceClientRect (error) {
       const anchorReferenceRect = this.anchorEl?.getBoundingClientRect();
 
       if (this.appendTo !== 'root' || error) return anchorReferenceRect;
@@ -1005,7 +1010,7 @@ export default {
         appendTo: internalAppendTo,
         interactive: true,
         trigger: 'manual',
-        getReferenceClientRect: () => this.getReferenceClientRect(internalAppendTo, iFrameError),
+        getReferenceClientRect: () => this.getReferenceClientRect(iFrameError),
         // We have to manage hideOnClick functionality manually to handle
         // popover within popover situations.
         hideOnClick: false,
