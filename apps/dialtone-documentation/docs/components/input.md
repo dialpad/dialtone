@@ -301,6 +301,16 @@ showHtmlWarning />
 
 ### Search input
 
+<dt-notice
+  kind="warning"
+  hideClose="true"
+  class="d-wmx100p d-mb24"
+>
+  <template #default>
+  Note: The usage of <code>type="search"</code> is not recommended for this component as it may cause unintended styling issues in Chrome. Instead, refer to the provided example code if you need to implement a search input.
+  </template>
+</dt-notice>
+
 <code-well-header>
   <div class="d-w100p">
     <dt-input
