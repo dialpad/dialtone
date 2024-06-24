@@ -299,7 +299,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With left icon and clear button
+### Search input
 
 <code-well-header>
   <div class="d-w100p">
