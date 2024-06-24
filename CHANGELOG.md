@@ -1,3 +1,38 @@
+## [9.49.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.49.1...dialtone/v9.49.2) (2024-06-18)
+
+
+### Bug Fixes
+
+* **Icons:** NO-JIRA add webex.svg ([14ede84](https://github.com/dialpad/dialtone/commit/14ede84a4111c8e0d832992c6c389791c12a5ee6))
+* **Icons:** NO-JIRA delete webex.svg ([94162dc](https://github.com/dialpad/dialtone/commit/94162dcf5995b828de394ab6277370d400eb134c))
+
+## [9.49.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.49.0...dialtone/v9.49.1) (2024-06-18)
+
+
+### Bug Fixes
+
+* **Icons:** NO-JIRA webex icon ([aecc85b](https://github.com/dialpad/dialtone/commit/aecc85b10a0a1e5743e29ef19f43dc61b5b57d5e))
+
+# [9.49.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.48.0...dialtone/v9.49.0) (2024-06-18)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA preventTyping not working with pills ([#375](https://github.com/dialpad/dialtone/issues/375)) ([1091d61](https://github.com/dialpad/dialtone/commit/1091d61111a31a9ce8d9ffb655baab3c1dd9be7f))
+* **Rich Text Editor:** DLT-1822 inputs with line breaks are not working for editor ([#374](https://github.com/dialpad/dialtone/issues/374)) ([d0d16de](https://github.com/dialpad/dialtone/commit/d0d16de6981f1a10d904ac52d0023757a7bcb279))
+
+
+### Features
+
+* **Icon:** DLT-1804 add webex ([#367](https://github.com/dialpad/dialtone/issues/367)) ([72cab26](https://github.com/dialpad/dialtone/commit/72cab26d6ff379cd5ca2b6610ace5465b6d7190b))
+
+# [9.48.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.47.1...dialtone/v9.48.0) (2024-06-18)
+
+
+### Features
+
+* **Logo:** NO-JIRA gradient update ([#372](https://github.com/dialpad/dialtone/issues/372)) ([559a517](https://github.com/dialpad/dialtone/commit/559a5178131f799065cbdcc5610238cac9d9556e))
+
 ## [9.47.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.47.0...dialtone/v9.47.1) (2024-06-14)
 
 

@@ -396,6 +396,8 @@ export default {
             },
           }),
         );
+      } else {
+        extensions.push(HardBreak);
       }
 
       if (this.mentionSuggestion) {
@@ -534,7 +536,9 @@ export default {
       // The content has changed.
       this.editor.on('update', () => {
         const value = this.getOutput();
-        if (this.preventTyping && value.length > this.value.length) {
+        // When preventTyping is true and user wants to type, we revert to last value
+        // If Backspace (keyCode = 8) is pressed, we allow updating the text
+        if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
           this.editor.commands.setContent(this.value, false);
           return;
         }

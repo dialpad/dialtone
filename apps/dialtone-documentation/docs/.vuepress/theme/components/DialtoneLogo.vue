@@ -4,18 +4,11 @@
     title="Go back to the homepage"
     to="/"
   >
-    <img
-      class="d-h42"
-      :alt="brandLogoAlt"
-      :src="brandLogo"
-    >
+    <svg-loader :illustration="true" name="dialpad-logo" />
   </router-link>
 </template>
 
 <script setup>
-import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import { useSiteLocaleData } from '@vuepress/client';
+import SvgLoader from '../../baseComponents/SvgLoader.vue';
 
-const brandLogo = useThemeLocaleData().value.logo;
-const brandLogoAlt = useSiteLocaleData().value.title;
 </script>
