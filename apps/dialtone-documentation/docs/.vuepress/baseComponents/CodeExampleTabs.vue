@@ -64,18 +64,33 @@ import CopyButton from './CopyButton.vue';
 import { getUniqueString } from '@workspaceRoot/common/utils';
 
 const props = defineProps({
+  /**
+   * Retrieves the reference to the example component to get the HTML code.
+   * If not provided, the HTML code will be used.
+   *
+   * @returns {Component} The reference to the component.
+   */
   getComponentRef: {
     type: Function,
     default: null,
   },
+  /**
+   * The HTML code to be displayed in the HTML tab if the component reference is not provided.
+   */
   htmlCode: {
     type: String,
     default: null,
   },
+  /**
+   * The Vue code to be displayed in the Vue tab.
+   */
   vueCode: {
     type: String,
     required: true,
   },
+  /**
+   * Indicates whether to show a warning for HTML code.
+   */
   showHtmlWarning: {
     type: Boolean,
     default: true,
