@@ -1,5 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
-
+import { Subtitle, Meta } from '@storybook/blocks';
 import * as ButtonGroupStories from './button_group.stories';
 
 <Meta of={ButtonGroupStories}/>
@@ -7,40 +6,5 @@ import * as ButtonGroupStories from './button_group.stories';
 # Button Group
 
 <Subtitle>
-  Button Groups are used to group buttons that have a relationship or similar actions.
+  Check the documentation [here](https://dialtone.dialpad.com/components/button-group.html).
 </Subtitle>
-
-## Base Style
-
-Buttons are surrounded by a parent that handles the layout of the buttons.
-
-<Canvas>
-  <Story of={ButtonGroupStories.Default} />
-</Canvas>
-
-## Slots, Props & Events
-
-<Controls />
-
-## Usage
-
-### Import
-
-```jsx
-import { DtButtonGroup, DtButton } from '@dialpad/dialtone-vue';
-```
-
-#### Default
-
-```html
-<template>
-  <dt-button-group class="d-gg8">
-    <dt-button importance="primary">
-      Confirm
-    </dt-button>
-    <dt-button importance="outlined">
-      Cancel
-    </dt-button>
-  </dt-button-group>
-</template>
-```
