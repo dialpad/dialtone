@@ -1460,12 +1460,23 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
       </tr>
     </tbody>
   </table>
-  <div class="d-p16 d-ta-center">
-    <dt-toggle size="sm" onclick="const splitButtons = document.querySelectorAll('.d-split-btn'); splitButtons.forEach(splitButton => { const buttons = splitButton.querySelectorAll('.d-btn'); buttons.forEach(button => { if (button.hasAttribute('disabled')) { button.removeAttribute('disabled'); } else { button.setAttribute('disabled', 'true'); } }); });">
-      <div class="d-mr6">
-        Disable all split buttons
-      </div>
-    </dt-toggle>
+  <div class="d-p16">
+    <dt-stack direction="row" gap="600" class="d-jc-center">
+      <dt-toggle size="sm" onclick="const splitButtons = document.querySelectorAll('.d-split-btn'); splitButtons.forEach(splitButton => { const buttons = splitButton.querySelectorAll('.d-btn'); buttons.forEach(button => { if (button.hasAttribute('disabled')) { button.removeAttribute('disabled'); } else { button.setAttribute('disabled', 'true'); } }); });">
+        <div class="d-mr6">
+          Disable all split buttons
+        </div>
+      </dt-toggle>
+      <dt-button importance="outlined" icon-position="left" onclick="var element=document.querySelector('.asdfasdfqwerqwer');if(element){element.closest('.asdfasdfqwerqwer').setAttribute('hidden','');}">
+        Hide grid
+        <template #icon>
+          <dt-icon
+            name="eye"
+            size="300"
+          />
+        </template>
+      </dt-button>
+    </dt-stack>
   </div>
   <div class="d-p16 d-m32 d-bgc-moderate d-ba d-bar8 d-bc-moderate">
     <details>
