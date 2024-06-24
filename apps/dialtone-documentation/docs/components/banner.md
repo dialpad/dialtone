@@ -25,6 +25,8 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 
 ## Variants and examples
 
+### Kind
+
 <code-well-header>
     <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
         <div class="d-fl-grow1">
@@ -74,7 +76,36 @@ vueCode='
 <dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
 <dt-banner important="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
 '
-showHtmlWarning />
+/>
+
+### Pinned
+
+Pins the banner to the top of the window.
+
+<code-well-header>
+    <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
+        <dt-button @click="toggleBanner">Toggle Example</dt-button>
+    </div>
+</code-well-header>
+
+<dt-banner
+  :pinned="true"
+  :close-button-props="{ariaLabel: 'Close button'}"
+  title="Optional banner title"
+  v-show="showBanner"
+  @close="showBanner = false"
+>
+  Message body
+</dt-banner>
+
+<code-example-tabs
+htmlCode='
+<aside class="d-banner d-banner--base d-banner--pinned" role="alert" aria-hidden="false">...</aside>
+'
+vueCode='
+<dt-banner kind="base" title="Optional banner title" :pinned="true"> Message body </dt-banner>
+'
+/>
 
 ## Vue API
 
