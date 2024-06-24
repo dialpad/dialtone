@@ -299,6 +299,83 @@ vueCode='
 '
 showHtmlWarning />
 
+### Search input
+
+<dt-notice
+  kind="warning"
+  hideClose="true"
+  class="d-wmx100p d-mb24"
+>
+  <template #default>
+  Note: The usage of <code>type="search"</code> is not recommended for this component as it may cause unintended styling issues in Chrome. Instead, refer to the provided example code if you need to implement a search input.
+  </template>
+</dt-notice>
+
+<code-well-header>
+  <div class="d-w100p">
+    <dt-input
+      aria-label="Search items"
+      placeholder="Search Items"
+      type="text"
+    >
+      <template #leftIcon>
+        <dt-icon name="search" size="300" />
+      </template>
+      <template #rightIcon>
+        <dt-button
+          kind="muted"
+          importance="clear"
+          size="xs"
+          circle
+          aria-label="Clear search"
+        >
+          <template #icon>
+            <dt-icon name="close" size="200" />
+          </template>
+        </dt-button>
+      </template>
+    </dt-input>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-input__wrapper">
+  <span class="base-input__icon--left d-input-icon--left d-input-icon">...</span>
+  <input type="text" autocomplete="off" class="base-input__input d-input d-input-icon--left d-input-icon--right" placeholder="Search Items">
+  <span class="base-input__icon--right d-input-icon--right d-input-icon undefined" data-qa="dt-input-right-icon-wrapper">
+    <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-btn--icon-only" data-qa="dt-button" type="button" aria-label="Clear search">
+      <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
+    </button>
+  </span>
+</div>
+'
+vueCode='
+<dt-input
+  aria-label="Search items"
+  placeholder="Search Items"
+  type="text"
+>
+  <template #leftIcon>
+    <dt-icon name="search" size="300" />
+  </template>
+  <template #rightIcon>
+    <dt-button
+      kind="muted"
+      importance="clear"
+      size="xs"
+      circle
+      aria-label="Clear search"
+    >
+      <template #icon>
+        <dt-icon name="close" size="200" />
+      </template>
+    </dt-button>
+  </template>
+</dt-input>
+'
+showHtmlWarning />
+
 ### Input sizes
 
 We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.

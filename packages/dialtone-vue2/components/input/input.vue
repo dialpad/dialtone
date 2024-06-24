@@ -147,9 +147,10 @@ export default {
     },
 
     /**
-     * Type of the input, one of: `text`, `password`, `email`, `number`, `textarea`, 'date', 'time'.
+     * Type of the input.
      * When `textarea` a `<textarea>` element will be rendered instead of an `<input>` element.
-     * @values text, password, email, number, textarea, date, time
+     * @values text, password, email, number, textarea, date, time, file, tel
+     * @default 'text'
      */
     type: {
       type: String,
@@ -471,6 +472,7 @@ export default {
     },
 
     shouldValidateLength () {
+      // eslint-disable-next-line max-lines
       return !!(
         this.validationProps.length.description &&
         this.validationProps.length.max
