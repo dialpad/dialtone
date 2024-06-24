@@ -57,26 +57,52 @@
 </template>
 
 <script setup>
+import { computed, onMounted, ref, nextTick } from 'vue';
 import Prism from 'prismjs';
+import pretty from 'pretty';
 import CopyButton from './CopyButton.vue';
-import { ref } from 'vue';
 import { getUniqueString } from '@workspaceRoot/common/utils';
 
 const props = defineProps({
+  getComponentRef: {
+    type: Function,
+    default: null,
+  },
   htmlCode: {
     type: String,
-    required: true,
+    default: null,
   },
   vueCode: {
     type: String,
     required: true,
   },
-  showHtmlWarning: Boolean,
+  showHtmlWarning: {
+    type: Boolean,
+    default: true,
+  },
 });
 
-const trimmedHtmlCode = props.htmlCode.replace(/^\n/gm, '');
+const elementHTML = ref(null);
+
+const trimmedHtmlCode = computed(() => {
+  if (elementHTML.value) {
+    return formatHTML(elementHTML.value);
+  }
+  return props.htmlCode ? props.htmlCode.replace(/^\n/gm, '') : '';
+});
+
+const highlightedHtml = computed(() => {
+  if (elementHTML.value) {
+    return Prism.highlight(
+      formatHTML(elementHTML.value),
+      Prism.languages.html,
+      'html',
+    );
+  }
+  return props.htmlCode ? Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html') : '';
+});
+
 const trimmedVueCode = props.vueCode.replace(/^\n/gm, '');
-const highlightedHtml = Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html');
 const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html');
 
 const vueTabId = getUniqueString();
@@ -85,6 +111,33 @@ const htmlTabId = getUniqueString();
 const htmlPanelId = getUniqueString();
 
 const selectedPanelId = ref(vuePanelId);
+
+/**
+ * Transforms a single-line HTML string to an indented multiline HTML string.
+ * Removes comments, id and data-qa attributes, and simplifies svg tags.
+ * Also, adds a new line before each svg, img, and span tag because pretty
+ * doesn't do it.
+ * @param elementHTML - The HTML code to be formatted.
+ * @returns The formatted HTML code.
+ */
+const formatHTML = (elementHTML) => {
+  const normalizedHTML = elementHTML
+    .replace(/<!--.*?-->/g, '')
+    .replace(/id=".*?"/g, '')
+    .replace(/data-qa=".*?"/g, '')
+    .replace(/<svg.*?>.*?<\/svg>/g, '<svg>...</svg>')
+    .replace(/<svg/g, '\n<svg')
+    .replace(/<img/g, '\n<img')
+    .replace(/<span/g, '\n<span');
+  return pretty(normalizedHTML, { ocd: true });
+};
+
+onMounted(() => {
+  if (props.getComponentRef) {
+    const compRef = props.getComponentRef();
+    nextTick(() => (elementHTML.value = compRef.$el.outerHTML));
+  }
+});
 </script>
 
 <style scoped lang="less">
