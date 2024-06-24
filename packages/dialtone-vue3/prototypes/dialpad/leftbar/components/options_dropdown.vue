@@ -51,16 +51,15 @@ import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
 import { DtListItem } from '@/components/list_item';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
-import { ref } from 'vue';
 
 const emits = defineEmits(['select-menu-option', 'open-dropdown']);
 
-const menuOptions = ref([
+const menuOptions = [
   { value: 0, name: 'Mark all as read' },
   { value: 1, separator: true },
   { value: 2, name: 'Create new channel' },
   { value: 3, name: 'Browse channels' },
-]);
+];
 
 const openDropdown = (value) => {
   emits('open-dropdown', value);
