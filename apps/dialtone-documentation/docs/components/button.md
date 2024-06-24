@@ -1471,7 +1471,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     <details>
       <summary class="d-c-pointer"><span class="d-pl4">To do...</span></summary>
       <dt-stack class="d-pt16">
-        <dt-checkbox label="disabled state, resolve radius" />
+        <dt-checkbox checked label="disabled state, resolve radius" />
         <dt-checkbox checked label="match :focus with :hover" />
         <dt-checkbox checked label="Initial HTML structure" />
         <dt-checkbox checked label="Use DtButton with minimal change or extension" />

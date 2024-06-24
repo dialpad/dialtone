@@ -565,12 +565,13 @@
             opacity: var(--dt-opacity-600); // soften it
             content: '';
 
-            // hide divider line when hovering of focusing any button within the split button
+            // hide divider line when hovering or focusing any button within the split button
             .d-split-btn:has(:focus-visible, :hover) & {
                 opacity: 0;
             }
 
-            // DO NOT hide divider line for primary or outlined buttons
+            // DO NOT hide divider line for primary, outlined, or disabled buttons
+            .d-split-btn:has(:disabled) &,
             .d-split-btn:has(.d-btn--outlined:focus-visible, .d-btn--outlined:hover) &,
             .d-split-btn:has(.d-btn--primary:focus-visible, .d-btn--primary:hover) & {
                 opacity: var(--dt-opacity-600);
@@ -578,15 +579,10 @@
         }
 
         // bleed divider line to absolute top and bottom of the button
+        &.d-btn--outlined::before,
         &.d-btn--primary::before {
             top: var(--dt-size-100-negative);
             bottom: var(--dt-size-100-negative);
-        }
-
-        // position divider line just inside top and bottom of the button
-        &.d-btn--outlined::before {
-            top: 0;
-            bottom: 0;
         }
     }
 
