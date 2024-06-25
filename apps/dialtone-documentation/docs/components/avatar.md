@@ -125,7 +125,7 @@ vueCode='
 
 ### Image
 
-If `image-src` is not provided, or if image fails to load, the avatar will fall back to the initials extracted from the `full-name`. By default, the `alt` attribute of the image will be the `full-name`, this can be overridden via `image-alt` prop.
+If `image-src` is not provided, or if image fails to load, the avatar will fall back to the initials extracted from the `full-name`.
 
 <code-well-header>
   <dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
