@@ -7,6 +7,7 @@ import {
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import PopoverVariants from './popover_variants.story.vue';
+import PopoverIframe from './popover_iframe.story.vue';
 import { createRenderConfig } from '@/common/storybook_utils';
 
 import { action } from '@storybook/addon-actions';
@@ -241,5 +242,13 @@ export const Variants = {
         open: true,
       },
     },
+  },
+};
+
+export const IframeTest = {
+  render: (argsData) => createRenderConfig(DtPopover, PopoverIframe, argsData),
+
+  args: {
+    placement: 'top-end',
   },
 };
