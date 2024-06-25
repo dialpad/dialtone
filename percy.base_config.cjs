@@ -29,6 +29,7 @@ module.exports = {
       'Components/Link: Default',
       'Components/Pagination: Default',
       'Components/Popover: Default',
+      'Components/Popover: Iframe Test',
       'Components/Presence: Default',
       'Components/Radio: Default',
       'Components/Radio Group: Default',
