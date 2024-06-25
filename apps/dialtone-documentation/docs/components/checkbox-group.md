@@ -7,6 +7,8 @@ image: assets/images/components/checkbox-group.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox-group--default
 ---
 
+Checkbox Groups are typically paired with a legend which identifies the group. If no legend is provided then it is expected that an `aria-label` will be given in order to provide an invisible label to screen readers. Each Checkbox Group should contain one or more Checkboxes which users can make selections from.
+
 <code-well-header>
   <dt-checkbox-group
     name="fruits-checkbox-group"
@@ -118,6 +120,86 @@ vueCode='
 </dt-checkbox-group>
 '
 showHtmlWarning />
+
+### With selected values
+
+<code-well-header>
+  <dt-checkbox-group
+    name="my-group-name"
+    legend="My Legend"
+    :selected-values="['option1']"
+    ref="with-selected-values"
+  >
+    <dt-checkbox
+      value="option1"
+      label="Option 1"
+    />
+    <dt-checkbox
+      value="option2"
+      label="Option 2"
+    />
+  </dt-checkbox-group>
+</code-well-header>
+
+<code-example-tabs
+:getComponentRef="() => $refs['with-selected-values']"
+vueCode='
+<dt-checkbox-group
+  name="my-group-name"
+  legend="My Legend"
+  :selected-values="[`option1`]"
+>
+  <dt-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <dt-checkbox
+    value="option2"
+    label="Option 2"
+  />
+</dt-checkbox-group>
+'
+/>
+
+### Disabled
+
+<code-well-header>
+  <dt-checkbox-group
+    name="my-group-name"
+    legend="My Legend"
+    disabled
+    ref="example-disabled"
+  >
+    <dt-checkbox
+      value="option1"
+      label="Option 1"
+    />
+    <dt-checkbox
+      value="option2"
+      label="Option 2"
+    />
+  </dt-checkbox-group>
+</code-well-header>
+
+<code-example-tabs
+:getComponentRef="() => $refs['example-disabled']"
+vueCode='
+<dt-checkbox-group
+  name="my-group-name"
+  legend="My Legend"
+  disabled
+>
+  <dt-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <dt-checkbox
+    value="option2"
+    label="Option 2"
+  />
+</dt-checkbox-group>
+'
+/>
 
 ### With validation states
 
@@ -272,6 +354,48 @@ vueCode='
 </dt-checkbox-group>
 '
 showHtmlWarning />
+
+### With validation messages hidden
+
+<code-well-header>
+  <dt-checkbox-group
+    name="my-group-name"
+    legend="My Legend"
+    :messages="[{ message: 'My Success Message', type: `success` }]"
+    :show-messages="false"
+    ref="with-messages-hidden"
+  >
+    <dt-checkbox
+      value="option1"
+      label="Option 1"
+    />
+    <dt-checkbox
+      value="option2"
+      label="Option 2"
+    />
+  </dt-checkbox-group>
+</code-well-header>
+
+<code-example-tabs
+:getComponentRef="() => $refs['with-messages-hidden']"
+vueCode='
+<dt-checkbox-group
+  name="my-group-name"
+  legend="My Legend"
+  :messages="[{ message: `My Success Message`, type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+  :show-messages="false"
+>
+  <dt-checkbox
+    value="option1"
+    label="Option 1"
+  />
+  <dt-checkbox
+    value="option2"
+    label="Option 2"
+  />
+</dt-checkbox-group>
+'
+/>
 
 ## Vue API
 
