@@ -1,3 +1,10 @@
+# [4.21.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.20.2...dialtone-icons/v4.21.0) (2024-06-25)
+
+
+### Features
+
+* **Icon:** DLT-1806 accessibility-mac ([#365](https://github.com/dialpad/dialtone/issues/365)) ([8735843](https://github.com/dialpad/dialtone/commit/8735843735d5fd2b8c39084a7d2c553329428f73))
+
 ## [4.20.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.20.1...dialtone-icons/v4.20.2) (2024-06-18)
 
 
