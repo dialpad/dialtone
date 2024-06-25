@@ -251,4 +251,16 @@ export const IframeTest = {
   args: {
     placement: 'top-end',
   },
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+
+    percy: {
+      args: {
+        open: true,
+      },
+    },
+  },
 };
