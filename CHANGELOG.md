@@ -1,3 +1,17 @@
+# [9.50.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.49.2...dialtone/v9.50.0) (2024-06-25)
+
+
+### Documentation
+
+* DLT-1764 update to new Dialpad logo in doc site header ([#377](https://github.com/dialpad/dialtone/issues/377)) ([6536125](https://github.com/dialpad/dialtone/commit/6536125f9a0071a0b4f06ba76b6e5433756f8fc1))
+* **Input:** DLT-1782 add search input example ([#376](https://github.com/dialpad/dialtone/issues/376)) ([a6b6416](https://github.com/dialpad/dialtone/commit/a6b64165cb6ccefbd4c3dd7c07b5989492a6f71a))
+* **Tokens:** DLT-1655 update tokens page for mobile ([#370](https://github.com/dialpad/dialtone/issues/370)) ([4bb8e4f](https://github.com/dialpad/dialtone/commit/4bb8e4f6363a4e3fa41646406fc0c09a3594492e))
+
+
+### Features
+
+* **Icon:** DLT-1806 accessibility-mac ([#365](https://github.com/dialpad/dialtone/issues/365)) ([8735843](https://github.com/dialpad/dialtone/commit/8735843735d5fd2b8c39084a7d2c553329428f73))
+
 ## [9.49.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.49.1...dialtone/v9.49.2) (2024-06-18)
 
 
