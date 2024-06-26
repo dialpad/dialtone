@@ -59,7 +59,8 @@
 <script setup>
 import { computed, onMounted, ref, nextTick } from 'vue';
 import Prism from 'prismjs';
-import pretty from 'pretty';
+import prettier from 'prettier/standalone';
+import htmlParser from 'prettier/plugins/html.mjs';
 import CopyButton from './CopyButton.vue';
 import { getUniqueString } from '@workspaceRoot/common/utils';
 
@@ -97,19 +98,19 @@ const props = defineProps({
   },
 });
 
-const elementHTML = ref(null);
+const formattedHTML = ref(null);
 
 const trimmedHtmlCode = computed(() => {
-  if (elementHTML.value) {
-    return formatHTML(elementHTML.value);
+  if (formattedHTML.value) {
+    return formattedHTML.value;
   }
   return props.htmlCode ? props.htmlCode.replace(/^\n/gm, '') : '';
 });
 
 const highlightedHtml = computed(() => {
-  if (elementHTML.value) {
+  if (formattedHTML.value) {
     return Prism.highlight(
-      formatHTML(elementHTML.value),
+      formattedHTML.value,
       Prism.languages.html,
       'html',
     );
@@ -127,22 +128,23 @@ const htmlPanelId = getUniqueString();
 
 const selectedPanelId = ref(vuePanelId);
 
-onMounted(() => {
+onMounted(async () => {
   if (props.getComponentRef) {
     const compRef = props.getComponentRef();
-    nextTick(() => (elementHTML.value = compRef.$el.outerHTML));
+    const formatted = await formatHTML(compRef.$el.outerHTML);
+    formattedHTML.value = formatted;
   }
 });
 
 /**
  * Transforms a single-line HTML string to an indented multiline HTML string.
  * Removes comments, id and data-qa attributes, and simplifies svg tags.
- * Also, adds a new line before each svg, img, and span tag because pretty
+ * Also, adds a new line before each svg, img, and span tag because prettier
  * doesn't do it.
  * @param elementHTML - The HTML code to be formatted.
  * @returns The formatted HTML code.
  */
-const formatHTML = (elementHTML) => {
+const formatHTML = async (elementHTML) => {
   const normalizedHTML = elementHTML
     .replace(/<!--.*?-->/g, '')
     .replace(/id=".*?"/g, '')
@@ -151,7 +153,8 @@ const formatHTML = (elementHTML) => {
     .replace(/<svg/g, '\n<svg')
     .replace(/<img/g, '\n<img')
     .replace(/<span/g, '\n<span');
-  return pretty(normalizedHTML, { ocd: true });
+  const prettyHTML = await prettier.format(normalizedHTML, { parser: 'html', plugins: [htmlParser] });
+  return prettyHTML;
 };
 </script>
 

@@ -297,6 +297,9 @@ importers:
       '@vuepress/utils':
         specifier: 2.0.0-beta.60
         version: 2.0.0-beta.60
+      angular-html-parser:
+        specifier: 5.2.0
+        version: 5.2.0
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -309,9 +312,9 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      pretty:
-        specifier: 2.0.0
-        version: 2.0.0
+      prettier:
+        specifier: 3.3.2
+        version: 3.3.2
       prismjs:
         specifier: ^1.29.0
         version: 1.29.0
@@ -5366,6 +5369,10 @@ packages:
 
   algoliasearch@4.20.0:
     resolution: {integrity: sha512-y+UHEjnOItoNy0bYO+WWmLWBlPwDjKHW6mNHrPi0NkuhpQOOEbrkwQH/wgKFDLh7qlKjzoKeiRtlpewDPDG23g==}
+
+  angular-html-parser@5.2.0:
+    resolution: {integrity: sha512-8S/8g5iMcuGhRmBUJ+xuXm9hdjqIcaky2z52RA7tSyz9tWN0mgiP/JR9+kx/SiS1REJpTXnEKpMCMEeVVIeo3A==}
+    engines: {node: '>= 14'}
 
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -12713,6 +12720,11 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
+  prettier@3.3.2:
+    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   pretty-bytes@6.1.1:
     resolution: {integrity: sha512-mQUvGU6aUFQ+rNvTIAcZuWGRT9a6f6Yrg9bHs4ImKF+HZCEK+plBvnAZYSIQztknZF2qnzNtr6F8s0+IuptdlQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
@@ -15234,8 +15246,8 @@ packages:
   vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
 
-  vue-component-type-helpers@2.0.21:
-    resolution: {integrity: sha512-3NaicyZ7N4B6cft4bfb7dOnPbE9CjLcx+6wZWAg5zwszfO4qXRh+U52dN5r5ZZfc6iMaxKCEcoH9CmxxoFZHLg==}
+  vue-component-type-helpers@2.0.22:
+    resolution: {integrity: sha512-gPr2Ba7efUwy/Vfbuf735bHSVdN4ycoZUCHfypkI33M9DUH+ieRblLLVM2eImccFYaWNWwEzURx02EgoXDBmaQ==}
 
   vue-demi@0.14.7:
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
@@ -20086,7 +20098,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.8(typescript@5.3.3)
-      vue-component-type-helpers: 2.0.21
+      vue-component-type-helpers: 2.0.22
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -21990,6 +22002,10 @@ snapshots:
       '@algolia/requester-common': 4.20.0
       '@algolia/requester-node-http': 4.20.0
       '@algolia/transporter': 4.20.0
+
+  angular-html-parser@5.2.0:
+    dependencies:
+      tslib: 2.6.2
 
   ansi-align@3.0.1:
     dependencies:
@@ -30594,6 +30610,8 @@ snapshots:
 
   prettier@2.8.8: {}
 
+  prettier@3.3.2: {}
+
   pretty-bytes@6.1.1: {}
 
   pretty-error@4.0.0:
@@ -33706,7 +33724,7 @@ snapshots:
 
   vue-component-type-helpers@1.8.24: {}
 
-  vue-component-type-helpers@2.0.21: {}
+  vue-component-type-helpers@2.0.22: {}
 
   vue-demi@0.14.7(vue@3.4.15(typescript@5.3.3)):
     dependencies:
