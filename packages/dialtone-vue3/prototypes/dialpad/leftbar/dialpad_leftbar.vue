@@ -3,7 +3,7 @@
     <dt-stack gap="200">
       <dt-recipe-general-row
         v-for="item in mainOptions"
-        :key="item"
+        :key="item.description"
         v-bind="item"
       />
     </dt-stack>

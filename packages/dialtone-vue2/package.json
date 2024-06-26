@@ -60,6 +60,7 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
+    "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.28.2",
     "@percy/storybook": "5.0.3",
     "@storybook/addon-a11y": "^7.6.1",
