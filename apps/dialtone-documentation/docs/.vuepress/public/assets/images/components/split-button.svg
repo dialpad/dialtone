@@ -1,0 +1,8 @@
+<svg viewBox="0 0 264 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M191.143 33H72.8571C67.4132 33 63 36.5817 63 41V65C63 69.4183 67.4132 73 72.8571 73H191.143C196.587 73 201 69.4183 201 65V41C201 36.5817 196.587 33 191.143 33Z" fill="var(--dt-action-color-background-base-primary-default)"></path>
+<path d="M180.447 51.4976L184.451 55.5024L188.456 51.4976" stroke="var(--dt-action-color-foreground-base-primary-default)" stroke-width="1.99529" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M142.082 49H86.8207C84.2774 49 82.2156 50.7909 82.2156 53C82.2156 55.2091 84.2774 57 86.8207 57H142.082C144.626 57 146.688 55.2091 146.688 53C146.688 50.7909 144.626 49 142.082 49Z" fill="var(--dt-action-color-foreground-base-primary-default)"></path>
+<rect x="165.903" y="32.8476" width="2" height="40.1524" fill="var(--dt-action-color-foreground-base-primary-default)" style="
+  opacity: .4;
+"></rect>
+</svg>
