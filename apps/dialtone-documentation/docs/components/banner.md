@@ -33,7 +33,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
             <dt-select-menu label="Style" :options="bannerOptions" @change="changeKind" />
         </div>
         <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
-        <dt-button @click="toggleBanner">Toggle Example</dt-button>
+        <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
     </div>
 </code-well-header>
 
@@ -43,8 +43,8 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
   :kind="selectedKind"
   :close-button-props="{ariaLabel: 'Close button'}"
   title="Optional banner title"
-  v-show="showBanner"
-  @close="showBanner = false"
+  v-show="shownBanner === 'example-kind'"
+  @close="closeBanner"
 >
   Message body
 </dt-banner>
@@ -84,7 +84,7 @@ Pins the banner to the top of the window.
 
 <code-well-header>
     <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
-        <dt-button @click="toggleBanner">Toggle Example</dt-button>
+        <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
     </div>
 </code-well-header>
 
@@ -92,8 +92,8 @@ Pins the banner to the top of the window.
   :pinned="true"
   :close-button-props="{ariaLabel: 'Close button'}"
   title="Optional banner title"
-  v-show="showBanner"
-  @close="showBanner = false"
+  v-show="shownBanner === 'example-pinned'"
+  @close="closeBanner"
 >
   Message body
 </dt-banner>
@@ -130,21 +130,29 @@ const bannerOptions = [
   { value: 'success', label: 'Success' },
   { value: 'warning', label: 'Warning' },
 ];
-const showBanner = ref(false);
+
+const shownBanner = ref(null);
 const important = ref(false);
 const pinned = ref(false);
 const selectedKind = ref('base');
 
-function toggleBanner () {
-  showBanner.value = !showBanner.value;
+function toggleBanner (id) {
+  if (shownBanner.value === id) {
+    shownBanner.value = null;
+  } else {
+    shownBanner.value = id;
+  }
 }
+
 function toggleImportant () {
   important.value = !important.value;
 }
-function togglePinned () {
-  pinned.value = !pinned.value;
-}
+
 function changeKind (kind) {
   selectedKind.value = kind;
+}
+
+function closeBanner () {
+  shownBanner.value = null;
 }
 </script>

@@ -127,6 +127,13 @@ const htmlPanelId = getUniqueString();
 
 const selectedPanelId = ref(vuePanelId);
 
+onMounted(() => {
+  if (props.getComponentRef) {
+    const compRef = props.getComponentRef();
+    nextTick(() => (elementHTML.value = compRef.$el.outerHTML));
+  }
+});
+
 /**
  * Transforms a single-line HTML string to an indented multiline HTML string.
  * Removes comments, id and data-qa attributes, and simplifies svg tags.
@@ -146,13 +153,6 @@ const formatHTML = (elementHTML) => {
     .replace(/<span/g, '\n<span');
   return pretty(normalizedHTML, { ocd: true });
 };
-
-onMounted(() => {
-  if (props.getComponentRef) {
-    const compRef = props.getComponentRef();
-    nextTick(() => (elementHTML.value = compRef.$el.outerHTML));
-  }
-});
 </script>
 
 <style scoped lang="less">
