@@ -52,6 +52,12 @@ const argTypesData = {
   },
 
   // Action Event Handlers
+  onOpened: {
+    table: {
+      disable: true,
+    },
+  },
+
   opened: {
     description: 'Emitted whenever the content is collapsed or expanded.',
     table: {

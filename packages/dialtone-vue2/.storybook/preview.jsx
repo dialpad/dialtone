@@ -9,6 +9,7 @@ import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCus
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DtTooltipDirective } from "@/directives/tooltip";
+import { faker } from '@faker-js/faker';
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
@@ -20,6 +21,8 @@ Vue.use(DtTooltipDirective);
 // Fixes method "toJSON" is not defined on click event in Sb 6.5.11
 // See https://github.com/storybookjs/storybook/issues/14933#issuecomment-920578274
 Vue.prototype.toJSON = () => {}
+// global seed, to make sure results are reproducible on percy and don't change on every reload too.
+faker.seed(6687422389464139);
 
 export default {
   parameters: {

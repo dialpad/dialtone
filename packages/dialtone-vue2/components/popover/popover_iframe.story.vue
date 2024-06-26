@@ -9,20 +9,14 @@
       initial-focus-element="first"
       append-to="root"
     >
-      <template
-        slot="anchor"
-        slot-scope="{ attrs }"
-      >
+      <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
         >
           popover anchor
         </dt-button>
       </template>
-      <template
-        slot="content"
-        slot-scope="{ close }"
-      >
+      <template #content="{ close }">
         <div>
           <p class="d-mb4">
             I will be displayed in the popover!
