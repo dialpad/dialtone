@@ -101,6 +101,7 @@
             data-qa="dt-leftbar-row-unread-mention-badge"
             :class="['dt-leftbar-row__unread-badge',
                      { 'dt-leftbar-row__unread-mention-count-badge': shouldApplyCustomStyleForCountBadge },
+                     { 'dt-leftbar-row__unread-mention-only-count-badge': shouldApplyCustomStyleForMentionOnly },
             ]"
           >
             {{ unreadMentionCount }}
@@ -211,6 +212,14 @@ export default {
       validator: (color) => {
         return Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(color);
       },
+    },
+
+    /**
+     * The channel setting, either 'mention' or 'always'.
+     */
+    channelSetting: {
+      type: String,
+      default: null,
     },
 
     /**
@@ -400,6 +409,15 @@ export default {
 
     shouldApplyCustomStyleForCountBadge () {
       return this.hasUnreadCount && this.hasUnreadMentionCount;
+    },
+
+    /**
+     * When a channel in 'always' setting, meaning the user should see both unread count and unread mention count,
+     * if there are only mention messages, we should apply the custom background with var(--dt-color-purple-500).
+     * @returns {boolean}
+     */
+    shouldApplyCustomStyleForMentionOnly () {
+      return this.channelSetting === 'always' && !this.hasUnreadCount && this.hasUnreadMentionCount;
     },
   },
 
