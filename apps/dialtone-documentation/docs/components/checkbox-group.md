@@ -142,7 +142,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['with-selected-values']"
+:htmlCode="() => $refs['with-selected-values']"
 vueCode='
 <dt-checkbox-group
   name="my-group-name"
@@ -182,7 +182,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['example-disabled']"
+:htmlCode="() => $refs['example-disabled']"
 vueCode='
 <dt-checkbox-group
   name="my-group-name"
@@ -377,7 +377,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['with-messages-hidden']"
+:htmlCode="() => $refs['with-messages-hidden']"
 vueCode='
 <dt-checkbox-group
   name="my-group-name"

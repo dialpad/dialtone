@@ -48,7 +48,7 @@ The collapsible component consists of two parts: the anchor and the content. If 
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['example-collapsible']"
+:htmlCode="() => $refs['example-collapsible']"
 vueCode='
 <dt-collapsible
   anchorText="Click me to toggle Content"
@@ -78,7 +78,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['with-anchor-slot']"
+:htmlCode="() => $refs['with-anchor-slot']"
 vueCode='
 <dt-collapsible :open="isOpen">
   <template #anchor>

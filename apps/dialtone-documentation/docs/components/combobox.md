@@ -8,19 +8,15 @@ figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--default
 ---
 
-<code-well-header bgclass="d-bgc-neutral-white">
-  <video class="d-w60p" src="/assets/images/components/preview--combobox.mp4" autoplay loop></video>
-</code-well-header>
-
 ## Base Style
 
 A combobox provides accessibility controls and common functionality. It does not render any functioning UI on it's own, but it depends on the elements passed to it via slots.
 
-A combobox has 2 major pieces that are provided as required named slots: the **input** and the **list**.
+It has 2 core required slots:
 
-The **input** slot contains the input element that controls the items in the list. Almost always this will be a dt-input.
-
-The **list** contains a list of items to show in the context of the input's value. Almost always this will be a list of dt-list-item.
+1. `input`: contains the input element controlling the list. This will usually be the [Input component](/components/input.html).
+2. `list`: the list of items to display responding to `input`'s value. Almost always this will be a list of `dt-list-item`.
+This will usually be the [List Item component](/components/list-item.html).
 
 <code-well-header class="d-d-block">
   <dt-combobox
@@ -67,7 +63,7 @@ The **list** contains a list of items to show in the context of the input's valu
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['example-combobox']"
+:htmlCode="() => $refs['example-combobox']"
 vueCode='
 <dt-combobox
   :show-list="!!value"
@@ -133,13 +129,13 @@ vueCode='
       />
     </template>
     <template #emptyListItem>
-      <span>No matches found.</span>
+      <div class="d-py8 d-fc-tertiary">No matches found.</div>
     </template>
   </dt-combobox>
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['example-with-empty-list']"
+:htmlCode="() => $refs['example-with-empty-list']"
 vueCode='
 <dt-combobox
   :show-list="!!value"
@@ -158,7 +154,7 @@ vueCode='
     />
   </template>
   <template #emptyListItem>
-    <span>No matches found.</span>
+    <div class="d-py8 d-fc-tertiary">No matches found.</div>
   </template>
 </dt-combobox>
 '
@@ -166,19 +162,22 @@ vueCode='
 
 ## Accessibility
 
-The combobox has a role of "combobox", the list has a role "listbox" and the list items have a role "option". Depending on the use case, the user should be able to use `ESC` key to hide the list and/or empty the input's value, but this is not determined by the combobox.
+The combobox input has a role of "combobox", the list has a role "listbox" and the list items have a role "option".
+Depending on the use case, the user should be able to use `ESC` key to hide the list and/or empty the input's value,
+but this is not determined by the combobox.
 
-When `loading` prop is set to `true`, the list also has the aria-busy attribute set to true.
+When `loading` prop is set to `true`, the list also has the `aria-busy` attribute set to true.
 
 See [W3C guidelines](https://www.w3.org/WAI/ARIA/apg/) for more information.
 
 ### Input
 
-The input element should be fully accessible by keyboard. The easiest way to do this is by using an element like a `DtInput` that is already accessible. There are some required ARIA attributes for the input element. To make this as straightforward as possible, these ARIA attributes are passed with the correct values as the `inputProps` slot-scope to the input slot.
+The input element should be fully accessible by keyboard. The easiest way to do this is by using an element like a `DtInput` that is already accessible. There are some required ARIA attributes for the input element. To make this as straightforward as possible, these ARIA attributes are passed with the correct values as the `inputProps` slot prop of the input slot.
 
 ### List
 
-The list element mainly has to contain the correct ARIA attributes, which are passed as `listProps` slot-scope to the list slot. The combobox has a prop `listAriaLabel` that should be passed as it is used to describe the contents of the list. The list itself can be a Dialtone component or a native HTML element, such as `<ol></ol>`.
+The list element mainly has to contain the correct ARIA attributes, which are passed as `listProps` slot prop of the list slot.
+The combobox has a prop `listAriaLabel` that should be passed as it is used to describe the contents of the list. The list itself can be a Dialtone component or a native HTML element, such as `<ol></ol>`.
 
 ### List Item
 
