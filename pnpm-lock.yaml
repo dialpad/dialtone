@@ -297,6 +297,9 @@ importers:
       '@vuepress/utils':
         specifier: 2.0.0-beta.60
         version: 2.0.0-beta.60
+      angular-html-parser:
+        specifier: 5.2.0
+        version: 5.2.0
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -309,6 +312,9 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
+      prettier:
+        specifier: 3.3.2
+        version: 3.3.2
       prismjs:
         specifier: ^1.29.0
         version: 1.29.0
@@ -5253,7 +5259,7 @@ packages:
     peerDependencies:
       '@types/inquirer': ^9.0.3
       inquirer: '*'
-      mem-fs: ^3.0.0 || ^4.0.0
+      mem-fs: ^3.0.0
       mem-fs-editor: ^10.0.2
     peerDependenciesMeta:
       inquirer:
@@ -5373,6 +5379,10 @@ packages:
 
   algoliasearch@4.20.0:
     resolution: {integrity: sha512-y+UHEjnOItoNy0bYO+WWmLWBlPwDjKHW6mNHrPi0NkuhpQOOEbrkwQH/wgKFDLh7qlKjzoKeiRtlpewDPDG23g==}
+
+  angular-html-parser@5.2.0:
+    resolution: {integrity: sha512-8S/8g5iMcuGhRmBUJ+xuXm9hdjqIcaky2z52RA7tSyz9tWN0mgiP/JR9+kx/SiS1REJpTXnEKpMCMEeVVIeo3A==}
+    engines: {node: '>= 14'}
 
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -8536,6 +8546,7 @@ packages:
   glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
     engines: {node: '>=12'}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-agent@2.2.0:
     resolution: {integrity: sha512-+20KpaW6DDLqhG7JDiJpD1JvNvb8ts+TNl7BPOYcURqCrXqnN1Vf+XVOrkKJAFPqfX+oEhsdzOj1hLWkBTdNJg==}
@@ -12717,6 +12728,11 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+
+  prettier@3.3.2:
+    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+    engines: {node: '>=14'}
     hasBin: true
 
   pretty-bytes@6.1.1:
@@ -21999,6 +22015,10 @@ snapshots:
       '@algolia/requester-node-http': 4.20.0
       '@algolia/transporter': 4.20.0
 
+  angular-html-parser@5.2.0:
+    dependencies:
+      tslib: 2.6.2
+
   ansi-align@3.0.1:
     dependencies:
       string-width: 4.2.3
@@ -30601,6 +30621,8 @@ snapshots:
   prepend-http@2.0.0: {}
 
   prettier@2.8.8: {}
+
+  prettier@3.3.2: {}
 
   pretty-bytes@6.1.1: {}
 

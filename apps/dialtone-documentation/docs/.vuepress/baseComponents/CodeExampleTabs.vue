@@ -57,26 +57,59 @@
 </template>
 
 <script setup>
+import { computed, onMounted, ref, nextTick } from 'vue';
 import Prism from 'prismjs';
+import prettier from 'prettier/standalone';
+import htmlParser from 'prettier/plugins/html.mjs';
 import CopyButton from './CopyButton.vue';
-import { ref } from 'vue';
 import { getUniqueString } from '@workspaceRoot/common/utils';
 
 const props = defineProps({
+  /**
+   * The HTML code to be displayed in the HTML tab if the component reference is not provided or
+   * a function that retrieves the reference to the example component to get the HTML code.
+   */
   htmlCode: {
-    type: String,
+    type: [String, Function],
     required: true,
   },
+  /**
+   * The Vue code to be displayed in the Vue tab.
+   */
   vueCode: {
     type: String,
     required: true,
   },
-  showHtmlWarning: Boolean,
+  /**
+   * Indicates whether to show a warning for HTML code.
+   */
+  showHtmlWarning: {
+    type: Boolean,
+    default: true,
+  },
 });
 
-const trimmedHtmlCode = props.htmlCode.replace(/^\n/gm, '');
+const formattedHTML = ref(null);
+
+const trimmedHtmlCode = computed(() => {
+  if (formattedHTML.value) {
+    return formattedHTML.value;
+  }
+  return typeof props.htmlCode === 'string' ? props.htmlCode.replace(/^\n/gm, '') : '';
+});
+
+const highlightedHtml = computed(() => {
+  if (formattedHTML.value) {
+    return Prism.highlight(
+      formattedHTML.value,
+      Prism.languages.html,
+      'html',
+    );
+  }
+  return typeof props.htmlCode === 'string' ? Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html') : '';
+});
+
 const trimmedVueCode = props.vueCode.replace(/^\n/gm, '');
-const highlightedHtml = Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html');
 const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html');
 
 const vueTabId = getUniqueString();
@@ -85,6 +118,35 @@ const htmlTabId = getUniqueString();
 const htmlPanelId = getUniqueString();
 
 const selectedPanelId = ref(vuePanelId);
+
+onMounted(async () => {
+  if (typeof props.htmlCode === 'function') {
+    const componentRef = props.htmlCode();
+    const formatted = await formatHTML(componentRef.$el.outerHTML);
+    formattedHTML.value = formatted;
+  }
+});
+
+/**
+ * Transforms a single-line HTML string to an indented multiline HTML string.
+ * Removes comments, id and data-qa attributes, and simplifies svg tags.
+ * Also, adds a new line before each svg, img, and span tag because prettier
+ * doesn't do it.
+ * @param elementHTML - The HTML code to be formatted.
+ * @returns The formatted HTML code.
+ */
+const formatHTML = async (elementHTML) => {
+  const normalizedHTML = elementHTML
+    .replace(/<!--.*?-->/g, '')
+    .replace(/id=".*?"/g, '')
+    .replace(/data-qa=".*?"/g, '')
+    .replace(/<svg.*?>.*?<\/svg>/g, '<svg>...</svg>')
+    .replace(/<svg/g, '\n<svg')
+    .replace(/<img/g, '\n<img')
+    .replace(/<span/g, '\n<span');
+  const prettyHTML = await prettier.format(normalizedHTML, { parser: 'html', plugins: [htmlParser] });
+  return prettyHTML;
+};
 </script>
 
 <style scoped lang="less">
