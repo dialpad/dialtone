@@ -309,7 +309,7 @@ If you need to create a clickable avatar you can set the clickable prop. This wi
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['example-clickable']"
+:htmlCode="() => $refs['example-clickable']"
 vueCode='
 <dt-avatar icon-name="user" clickable icon-aria-label="user" />
 '
@@ -326,7 +326,7 @@ You may use a seed to make the randomly generated color be the same every time f
 </code-well-header>
 
 <code-example-tabs
-:getComponentRef="() => $refs['example-seeded']"
+:htmlCode="() => $refs['example-seeded']"
 vueCode='
 <dt-avatar full-name="Jaqueline Nackos" seed="X5G3D7D3DS3WL7" />
 '

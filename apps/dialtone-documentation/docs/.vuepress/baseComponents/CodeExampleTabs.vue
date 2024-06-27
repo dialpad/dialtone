@@ -66,21 +66,12 @@ import { getUniqueString } from '@workspaceRoot/common/utils';
 
 const props = defineProps({
   /**
-   * Retrieves the reference to the example component to get the HTML code.
-   * If not provided, the HTML code will be used.
-   *
-   * @returns {Component} The reference to the component.
-   */
-  getComponentRef: {
-    type: Function,
-    default: null,
-  },
-  /**
-   * The HTML code to be displayed in the HTML tab if the component reference is not provided.
+   * The HTML code to be displayed in the HTML tab if the component reference is not provided or
+   * a function that retrieves the reference to the example component to get the HTML code.
    */
   htmlCode: {
-    type: String,
-    default: null,
+    type: [String, Function],
+    required: true,
   },
   /**
    * The Vue code to be displayed in the Vue tab.
@@ -104,7 +95,7 @@ const trimmedHtmlCode = computed(() => {
   if (formattedHTML.value) {
     return formattedHTML.value;
   }
-  return props.htmlCode ? props.htmlCode.replace(/^\n/gm, '') : '';
+  return typeof props.htmlCode === 'string' ? props.htmlCode.replace(/^\n/gm, '') : '';
 });
 
 const highlightedHtml = computed(() => {
@@ -115,7 +106,7 @@ const highlightedHtml = computed(() => {
       'html',
     );
   }
-  return props.htmlCode ? Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html') : '';
+  return typeof props.htmlCode === 'string' ? Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html') : '';
 });
 
 const trimmedVueCode = props.vueCode.replace(/^\n/gm, '');
@@ -129,9 +120,9 @@ const htmlPanelId = getUniqueString();
 const selectedPanelId = ref(vuePanelId);
 
 onMounted(async () => {
-  if (props.getComponentRef) {
-    const compRef = props.getComponentRef();
-    const formatted = await formatHTML(compRef.$el.outerHTML);
+  if (typeof props.htmlCode === 'function') {
+    const componentRef = props.htmlCode();
+    const formatted = await formatHTML(componentRef.$el.outerHTML);
     formattedHTML.value = formatted;
   }
 });
