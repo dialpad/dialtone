@@ -26,6 +26,7 @@ import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
+import History from '@tiptap/extension-history';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
 import { MentionPlugin } from './extensions/mentions/mention';
@@ -335,7 +336,7 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text];
+      const extensions = [Document, Paragraph, Text, History];
       if (this.link) {
         extensions.push(TipTapLink.extend({ inclusive: false }).configure({
           HTMLAttributes: {
