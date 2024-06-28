@@ -216,6 +216,7 @@ export default {
 
     /**
      * The channel setting, either 'mention' or 'always'.
+     * @values 'mention', 'always', null.
      */
     channelSetting: {
       type: String,
