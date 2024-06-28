@@ -47,11 +47,24 @@
     </div>
     <div>
       <h3>
-        Channel only show unread mentioned count
+        Channel only show unread mentioned count with 'always' setting
       </h3>
       <dt-recipe-general-row
         type="channels"
         unread-mention-count="1"
+        channel-setting="always"
+        :has-unreads="true"
+        description="Channel name"
+      />
+    </div>
+    <div>
+      <h3>
+        Channel show unread mentioned count with other than 'always' setting
+      </h3>
+      <dt-recipe-general-row
+        type="channels"
+        unread-mention-count="1"
+        channel-setting="mention"
         :has-unreads="true"
         description="Channel name"
       />
