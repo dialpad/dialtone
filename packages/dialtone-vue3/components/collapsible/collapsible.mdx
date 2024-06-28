@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Subtitle, Meta } from '@storybook/blocks';
 
 import * as CollapsibleStories from './collapsible.stories';
 
@@ -7,65 +7,5 @@ import * as CollapsibleStories from './collapsible.stories';
 # Collapsible
 
 <Subtitle>
-    A collapsible is a component consisting of an interactive anchor that toggled the
-    expandable/collapsible element.
+  Check the documentation [here](https://dialtone.dialpad.com/components/collapsible.html).
 </Subtitle>
-
-## Basic Style
-
-The collapsible has two components. The anchor and the content.
-
-The **anchor** will default to a basic button with some text if the slot is not filled.
-
-The **content** must be provided and is the element that can be hidden or shown when the anchor is clicked.
-
-<Canvas>
-  <Story of={CollapsibleStories.Default} />
-</Canvas>
-
-## Slots, Props and Events
-
-<Controls />
-
-### Basic Usage without Anchor Slot
-
-```js
-import { DtCollapsible } from '@dialpad/dialtone-vue';
-```
-
-```html
-<dt-collapsible
-  :anchor-text="Click Me!"
-  @opened="onOpen"
->
-  <template #content>
-    <p>
-      This will be shown in the expanded area.
-    </p>
-  </template>
-</dt-collapsible>
-```
-
-### Basic Usage with Anchor Slot
-
-By default, the content starts expanded and is toggled when the anchor is clicked.
-This can be overriden if the `open` prop is set.
-
-```js
-import { DtCollapsible, DtButton } from '@dialpad/dialtone-vue';
-```
-
-```html
-<dt-collapsible @opened="onOpen">
-  <template #anchor={ attrs }>
-    <dt-button v-bind="attrs">
-      Click Me!
-    </dt-button>
-  </template>
-  <template #content>
-    <p>
-      This will be shown in the expanded area.
-    </p>
-  </template>
-</dt-collapsible>
-```

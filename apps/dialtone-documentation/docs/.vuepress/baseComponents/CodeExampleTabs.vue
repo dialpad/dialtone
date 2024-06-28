@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, nextTick } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import Prism from 'prismjs';
 import prettier from 'prettier/standalone';
 import htmlParser from 'prettier/plugins/html.mjs';
@@ -144,7 +144,12 @@ const formatHTML = async (elementHTML) => {
     .replace(/<svg/g, '\n<svg')
     .replace(/<img/g, '\n<img')
     .replace(/<span/g, '\n<span');
-  const prettyHTML = await prettier.format(normalizedHTML, { parser: 'html', plugins: [htmlParser] });
+  const prettyHTML = await prettier.format(normalizedHTML,
+    {
+      parser: 'html',
+      plugins: [htmlParser],
+      htmlWhitespaceSensitivity: 'ignore',
+    });
   return prettyHTML;
 };
 </script>
