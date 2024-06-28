@@ -1889,6 +1889,10 @@
         "disk",
         "hard disk"
       ],
+      "token": [
+        "symbol",
+        "figma"
+      ]
       "import": [
         "save"
       ],
