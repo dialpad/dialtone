@@ -78,10 +78,10 @@ import { DtInput, DtIcon } from '@dialpad/dialtone-vue';
   v-model="text"
   placeholder="placeholder"
 >
-  <template #leftIcon="{ size }">
+  <template #leftIcon="{ iconSize }">
     <dt-icon
       name="send"
-      :size="size"
+      :size="iconSize"
     />
   </template>
 </dt-input>
@@ -134,16 +134,16 @@ import { DtInput } from '@dialpad/dialtone-vue';
   v-model="text"
   placeholder="placeholder"
 >
-  <template #leftIcon="{ size }">
+  <template #leftIcon="{ iconSize }">
     <dt-icon
       name="send"
-      :size="size"
+      :size="iconSize"
     />
   </template>
-  <template #rightIcon="{ size }">
+  <template #rightIcon="{ iconSize }">
     <dt-icon
       name="lock"
-      :size="size"
+      :size="iconSize"
     />
   </template>
 </dt-input>

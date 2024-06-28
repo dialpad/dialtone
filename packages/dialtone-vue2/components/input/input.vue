@@ -58,7 +58,7 @@
           <!-- @slot Slot for left icon -->
           <slot
             name="leftIcon"
-            :size="iconSize"
+            :icon-size="iconSize"
           />
         </span>
         <textarea
@@ -120,6 +120,8 @@ import {
   INPUT_SIZE_CLASSES,
   INPUT_ICON_SIZES,
   INPUT_STATE_CLASSES,
+  DESCRIPTION_SIZE_CLASSES,
+  LABEL_SIZE_CLASSES,
 } from './input_constants';
 import {
   getUniqueString,
@@ -209,11 +211,11 @@ export default {
 
     /**
      * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
-     * @values null, xs, sm, md, lg, xl
+     * @values xs, sm, md, lg, xl
      */
     size: {
       type: String,
-      default: null,
+      default: 'md',
       validator: (t) => Object.values(INPUT_SIZES).includes(t),
     },
 
@@ -343,19 +345,6 @@ export default {
 
   data () {
     return {
-      descriptionSizeClasses: {
-        lg: 'd-description--lg',
-        xl: 'd-description--xl',
-      },
-
-      labelSizeClasses: {
-        xs: 'd-label--xs',
-        sm: 'd-label--sm',
-        md: 'd-label--md',
-        lg: 'd-label--lg',
-        xl: 'd-label--xl',
-      },
-
       isInputFocused: false,
       isInvalid: false,
       defaultLength: 0,
@@ -515,6 +504,11 @@ export default {
         }
       },
     },
+  },
+
+  beforeMount () {
+    this.descriptionSizeClasses = DESCRIPTION_SIZE_CLASSES;
+    this.labelSizeClasses = LABEL_SIZE_CLASSES;
   },
 
   methods: {

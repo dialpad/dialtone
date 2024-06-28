@@ -38,16 +38,16 @@
     >
       <span v-html="$attrs.description" />
     </template>
-    <template #leftIcon="{ size }">
+    <template #leftIcon="{ iconSize }">
       <dt-icon
         :name="$attrs.leftIcon"
-        :size="size"
+        :size="iconSize"
       />
     </template>
-    <template #rightIcon="{ size }">
+    <template #rightIcon="{ iconSize }">
       <dt-icon
         :name="$attrs.rightIcon"
-        :size="size"
+        :size="iconSize"
       />
     </template>
   </dt-input>
