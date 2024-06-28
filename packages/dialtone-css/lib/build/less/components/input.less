@@ -151,17 +151,46 @@
     padding: 0;
     overflow-y: auto;
 
-    .d-input-icon.d-input-icon--right {
-        margin-right: var(--dt-space-400);
-    }
-
-    .d-input-icon.d-input-icon--left {
-        margin-left: var(--dt-space-400);
-    }
-
-    .d-textarea + .d-input-icon.d-input-icon--right {
+    .d-textarea + .d-input-icon--right {
       position: absolute;
       right: var(--dt-space-450);
+    }
+
+    .d-input-icon--left:has(+ .d-textarea) {
+        align-items: flex-start;
+    }
+
+    .d-input-icon:has(+ .d-textarea),
+    .d-textarea+.d-input-icon {
+        padding-top: calc(var(--input-padding-y) + var(--dt-space-200));
+    }
+
+    .d-input-icon:has(+ .d-textarea--xs),
+    .d-textarea--xs + .d-input-icon {
+        #d-internal__input-and-select-xs();
+
+        padding-top: calc(var(--input-padding-y) + var(--dt-space-100));
+    }
+
+    .d-input-icon:has(+ .d-textarea--sm),
+    .d-textarea--sm+.d-input-icon {
+        #d-internal__input-and-select-sm();
+
+        padding-top: calc(var(--input-padding-y) + var(--dt-space-100));
+    }
+
+    .d-input-icon:has(+ .d-textarea--lg),
+    .d-textarea--lg+.d-input-icon {
+        #d-internal__input-and-select-lg();
+
+        padding-top: calc(var(--input-padding-y) + var(--dt-space-100));
+    }
+
+    .d-input-icon:has(+ .d-textarea--xl),
+    .d-textarea--xl+.d-input-icon {
+        #d-internal__input-and-select-xl();
+
+        padding-top: calc(var(--input-padding-y) + (var(--dt-space-350) - var(--dt-space-100)));
     }
 
     .d-input,
@@ -176,20 +205,6 @@
             outline: 0;
             box-shadow: none !important;
         }
-
-        &.d-input-icon--right {
-            padding-right: var(--dt-space-350);
-        }
-
-        &.d-input-icon--left {
-            padding-left: var(--dt-space-350);
-        }
-    }
-
-    .d-textarea {
-      &.d-input-icon--right {
-        padding-right: var(--dt-space-625);
-      }
     }
 }
 
@@ -270,54 +285,14 @@
 //  $  INPUT ICONS
 //  ----------------------------------------------------------------------------
 .d-input-icon {
-    //  Component CSS Vars
-    //  ------------------------------------------------------------------------
-    --input-icon-size: var(--dt-size-500);
-    --input-icon-container-height: var(--dt-size-600);
-
-    z-index: var(--zi-base1);
     display: inline-flex;
     align-items: center;
-    height: var(--input-icon-container-height);
-    margin: 0;
-}
 
-
-
-//  $$ SIZES
-//  ----------------------------------------------------------------------------
-.d-input-icon.d-input--xs {
-    --input-icon-container-height: calc(var(--dt-size-600) - var(--dt-size-300));
-}
-
-.d-input-icon--xs {
-    // Backwards-compatible to DT6 icons
-    --input-icon-size: var(--dt-icon-size-100);
-}
-
-.d-input-icon.d-input--sm {
-    --input-icon-container-height: var(--dt-size-600);
-}
-
-.d-input-icon--sm {
-    // Backwards-compatible to DT6 icons
-    --input-icon-size: var(--dt-icon-size-200);
-}
-
-.d-input-icon.d-input--lg {
-    --input-icon-container-height: calc(var(--dt-size-300) * 10);
-}
-
-.d-input-icon--lg {
-    // Backwards-compatible to DT6 icons
-    --input-icon-size: var(--dt-icon-size-400);
-}
-
-.d-input-icon.d-input--xl {
-    --input-icon-container-height: calc(var(--dt-size-300) * 14);
-}
-
-.d-input-icon--xl {
-    // Backwards-compatible to DT6 icons
-    --input-icon-size: var(--dt-icon-size-500);
-}
+    &--right > svg {
+        margin-right: var(--dt-space-400);
+    }
+    
+    &--left > svg {
+        margin-left: var(--dt-space-400);
+    }
+} 

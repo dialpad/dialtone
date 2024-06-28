@@ -5,7 +5,6 @@
     :type="$attrs.type"
     :messages="$attrs.messages"
     :size="$attrs.size"
-    :icon-size="$attrs.iconSize"
     :label="$attrs.label"
     :messages-child-props="$attrs.messagesChildProps"
     :name="$attrs.name"
@@ -39,17 +38,17 @@
     >
       <span v-html="$attrs.description" />
     </template>
-    <template
-      v-if="$attrs.leftIcon"
-      slot="leftIcon"
-    >
-      <dt-icon :name="$attrs.leftIcon" />
+    <template #leftIcon="{ size }">
+      <dt-icon
+        :name="$attrs.leftIcon"
+        :size="size"
+      />
     </template>
-    <template
-      v-if="$attrs.rightIcon"
-      slot="rightIcon"
-    >
-      <dt-icon :name="$attrs.rightIcon" />
+    <template #rightIcon="{ size }">
+      <dt-icon
+        :name="$attrs.rightIcon"
+        :size="size"
+      />
     </template>
   </dt-input>
 </template>
