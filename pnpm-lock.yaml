@@ -576,6 +576,9 @@ importers:
       '@tiptap/extension-hard-break':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
+      '@tiptap/extension-history':
+        specifier: 2.3.0
+        version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))(@tiptap/pm@2.3.0)
       '@tiptap/extension-italic':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
@@ -805,6 +808,9 @@ importers:
       '@tiptap/extension-hard-break':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
+      '@tiptap/extension-history':
+        specifier: 2.3.0
+        version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))(@tiptap/pm@2.3.0)
       '@tiptap/extension-italic':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
@@ -4340,6 +4346,12 @@ packages:
     resolution: {integrity: sha512-9pXi69SzLabbjY5KZ54UKzu7HAHTla9aYZKH56VatOAiJOPKJppFbU2/NfJwGzDrEtfOiDqr3dYbUDF3RuCFoQ==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
+
+  '@tiptap/extension-history@2.3.0':
+    resolution: {integrity: sha512-EF5Oq9fe/VBzU1Lsow2ubOlx1e1r4OQT1WUPGsRnL7pr94GH1Skpk7/hs9COJ9K6kP3Ebt42XjP0JEQodR58YA==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
 
   '@tiptap/extension-italic@2.3.0':
     resolution: {integrity: sha512-jdFjLjdt5JtPlGMpoS6TEq5rznjbAYVlPwcw5VkYENVIYIGIR1ylIw2JwK1nUEsQ+OgYwVxHLejcUXWG1dCi2g==}
@@ -20251,6 +20263,11 @@ snapshots:
   '@tiptap/extension-hard-break@2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))':
     dependencies:
       '@tiptap/core': 2.3.0(@tiptap/pm@2.3.0)
+
+  '@tiptap/extension-history@2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))(@tiptap/pm@2.3.0)':
+    dependencies:
+      '@tiptap/core': 2.3.0(@tiptap/pm@2.3.0)
+      '@tiptap/pm': 2.3.0
 
   '@tiptap/extension-italic@2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))':
     dependencies:
