@@ -1,3 +1,27 @@
+# [3.133.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.132.2...dialtone-vue3/v3.133.0) (2024-07-01)
+
+
+### Bug Fixes
+
+* **Badge:** DP-102533 mention only color ([#386](https://github.com/dialpad/dialtone/issues/386)) ([b6dc77d](https://github.com/dialpad/dialtone/commit/b6dc77d1b450803c004eaaeddf00c92ea04225c2))
+* **Emoji Picker:** DP-102475 fix keyboard navigation ([#389](https://github.com/dialpad/dialtone/issues/389)) ([6ca1d16](https://github.com/dialpad/dialtone/commit/6ca1d16b934f377414c652d102429c57fb76182b))
+
+
+### Documentation
+
+* DLT-1764 update to new Dialpad logo in doc site header ([#377](https://github.com/dialpad/dialtone/issues/377)) ([6536125](https://github.com/dialpad/dialtone/commit/6536125f9a0071a0b4f06ba76b6e5433756f8fc1))
+* DLT-1765 update favicon to Ai logomark ([#378](https://github.com/dialpad/dialtone/issues/378)) ([59ff0a4](https://github.com/dialpad/dialtone/commit/59ff0a4b75b820d5a81209c6073fbbef2b0da78f))
+* DLT-1791 move storybook to doc site -  Avatar to ButtonGroup ([#380](https://github.com/dialpad/dialtone/issues/380)) ([b754575](https://github.com/dialpad/dialtone/commit/b75457589a1f9dabcae0df582a77bdea114507a5))
+* DLT-1792 move storybook to doc site - Card to Combobox ([#383](https://github.com/dialpad/dialtone/issues/383)) ([56fbb43](https://github.com/dialpad/dialtone/commit/56fbb4386d6035286149cbb64fd0dd11c85ff2d6))
+* **Input:** DLT-1782 add search input example ([#376](https://github.com/dialpad/dialtone/issues/376)) ([a6b6416](https://github.com/dialpad/dialtone/commit/a6b64165cb6ccefbd4c3dd7c07b5989492a6f71a))
+* **Prototypes:** DLT-1740 left bar prototype - vue 2 ([#385](https://github.com/dialpad/dialtone/issues/385)) ([689af1b](https://github.com/dialpad/dialtone/commit/689af1be7bf4bff0a1016651697dc8b9998f2046))
+* **Prototypes:** DLT-1740 left bar prototype ([#368](https://github.com/dialpad/dialtone/issues/368)) ([b0e3c9a](https://github.com/dialpad/dialtone/commit/b0e3c9a7f734a4bb863b2fdd39088c563bcef080))
+
+
+### Features
+
+* **Popover:** DLT-1826 appendTo root ([#382](https://github.com/dialpad/dialtone/issues/382)) ([35480c5](https://github.com/dialpad/dialtone/commit/35480c5c96bfdee85d97510c6282b78bf4c75554))
+
 ## [3.132.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.132.1...dialtone-vue3/v3.132.2) (2024-06-18)
 
 
