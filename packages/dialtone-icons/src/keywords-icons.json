@@ -272,6 +272,9 @@
       "slack": [],
       "snapchat": [],
       "telegram": [],
+      "t-mobile": [
+        "tmo"
+      ],
       "threads": [
         "meta",
         "facebook"
