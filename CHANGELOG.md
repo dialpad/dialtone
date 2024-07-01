@@ -1,3 +1,29 @@
+# [9.51.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.50.0...dialtone/v9.51.0) (2024-07-01)
+
+
+### Bug Fixes
+
+* **Badge:** DP-102533 mention only color ([#386](https://github.com/dialpad/dialtone/issues/386)) ([b6dc77d](https://github.com/dialpad/dialtone/commit/b6dc77d1b450803c004eaaeddf00c92ea04225c2))
+* **Emoji Picker:** DP-102475 fix keyboard navigation ([#389](https://github.com/dialpad/dialtone/issues/389)) ([6ca1d16](https://github.com/dialpad/dialtone/commit/6ca1d16b934f377414c652d102429c57fb76182b))
+* **Expressive Theme:** NO-JIRA corrected figma and tokens studio connection ([#384](https://github.com/dialpad/dialtone/issues/384)) ([255936f](https://github.com/dialpad/dialtone/commit/255936f7956473167358a06631187b4384a0dc2d))
+* **Logo:** DLT-1833 corrected antialiased edging  ([#381](https://github.com/dialpad/dialtone/issues/381)) ([67322e6](https://github.com/dialpad/dialtone/commit/67322e69bab916a403387159187cb2a01b15f0ae))
+
+
+### Documentation
+
+* DLT-1765 update favicon to Ai logomark ([#378](https://github.com/dialpad/dialtone/issues/378)) ([59ff0a4](https://github.com/dialpad/dialtone/commit/59ff0a4b75b820d5a81209c6073fbbef2b0da78f))
+* DLT-1791 move storybook to doc site -  Avatar to ButtonGroup ([#380](https://github.com/dialpad/dialtone/issues/380)) ([b754575](https://github.com/dialpad/dialtone/commit/b75457589a1f9dabcae0df582a77bdea114507a5))
+* DLT-1792 move storybook to doc site - Card to Combobox ([#383](https://github.com/dialpad/dialtone/issues/383)) ([56fbb43](https://github.com/dialpad/dialtone/commit/56fbb4386d6035286149cbb64fd0dd11c85ff2d6))
+* **Prototypes:** DLT-1740 left bar prototype - vue 2 ([#385](https://github.com/dialpad/dialtone/issues/385)) ([689af1b](https://github.com/dialpad/dialtone/commit/689af1be7bf4bff0a1016651697dc8b9998f2046))
+* **Prototypes:** DLT-1740 left bar prototype ([#368](https://github.com/dialpad/dialtone/issues/368)) ([b0e3c9a](https://github.com/dialpad/dialtone/commit/b0e3c9a7f734a4bb863b2fdd39088c563bcef080))
+
+
+### Features
+
+* **Icon:** DLT-1712 add token icon  ([#388](https://github.com/dialpad/dialtone/issues/388)) ([66d2474](https://github.com/dialpad/dialtone/commit/66d2474afab14373d9f75235454995fba929f52f))
+* **Popover:** DLT-1826 appendTo root ([#379](https://github.com/dialpad/dialtone/issues/379)) ([4d2c54d](https://github.com/dialpad/dialtone/commit/4d2c54d83108bee15380f32f592e9a757287f855))
+* **Popover:** DLT-1826 appendTo root ([#382](https://github.com/dialpad/dialtone/issues/382)) ([35480c5](https://github.com/dialpad/dialtone/commit/35480c5c96bfdee85d97510c6282b78bf4c75554))
+
 # [9.50.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.49.2...dialtone/v9.50.0) (2024-06-25)
 
 
