@@ -146,6 +146,7 @@ export default {
       }
     },
 
+    // eslint-disable-next-line complexity
     handleKeyDown (event, tabId) {
       if (event.key === 'Enter') {
         this.selectTabset(tabId);
@@ -157,14 +158,14 @@ export default {
       if (event.key === 'Tab') {
         event.preventDefault();
         if (event.shiftKey) {
-          this.$emit('focus-skin-selector');
+          this.$emit('shift-tab-key-pressed');
         } else {
-          this.$emit('focus-search-input');
+          this.$emit('tab-key-pressed');
         }
       }
 
       if (event.key === 'ArrowDown') {
-        this.$emit('focus-search-input');
+        this.$emit('arrow-down-key-pressed');
       }
     },
   },

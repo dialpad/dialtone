@@ -1889,10 +1889,6 @@
         "disk",
         "hard disk"
       ],
-      "token": [
-        "symbol",
-        "figma"
-      ],
       "import": [
         "save"
       ],
@@ -1989,6 +1985,10 @@
         "forbidden",
         "prohibited",
         "error"
+      ],
+      "token": [
+        "symbol",
+        "figma"
       ],
       "toy-brick": [
         "lego",

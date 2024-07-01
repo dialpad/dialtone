@@ -10,8 +10,9 @@
         :scroll-into-tab="scrollIntoTab"
         :tabset-labels="tabSetLabels"
         :is-scrolling="isScrolling"
-        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
-        @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
+        @tab-key-pressed="focusNextSectionFromEmojiTabSet"
+        @shift-tab-key-pressed="$refs.skinSelectorRef.focusSkinSelector()"
+        @arrow-down-key-pressed="focusNextSectionFromEmojiTabSet"
         @selected-tabset="scrollToSelectedTabset"
         @keydown.esc="emits('close')"
       />
@@ -41,7 +42,7 @@
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
-        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
+        @shift-tab-key-pressed="focusNextSectionFromEmojiSelector"
         @keydown.esc="emits('close')"
       />
     </div>
@@ -215,6 +216,10 @@ const selectedTabset = ref({});
 const scrollIntoTab = ref(0);
 const isScrolling = ref(false);
 
+const searchInputRef = ref(null);
+const emojiSelectorRef = ref(null);
+const tabsetRef = ref(null);
+
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
 
 watch(
@@ -248,5 +253,21 @@ function updateIsScrolling (value) {
 }
 function updateHighlightedEmoji (emoji) {
   highlightedEmoji.value = emoji;
+}
+
+function focusNextSectionFromEmojiTabSet () {
+  if (props.showSearch) {
+    searchInputRef.value.focusSearchInput();
+  } else {
+    emojiSelectorRef.value.focusEmojiSelector();
+  }
+}
+
+function focusNextSectionFromEmojiSelector () {
+  if (props.showSearch) {
+    searchInputRef.value.focusSearchInput();
+  } else {
+    tabsetRef.value.focusTabset();
+  }
 }
 </script>

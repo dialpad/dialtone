@@ -101,6 +101,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import { emojisGrouped as emojisImported } from '@dialpad/dialtone-emojis';
 import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker';
 
@@ -396,6 +397,7 @@ export default {
       return false;
     },
 
+    // eslint-disable-next-line complexity
     handleKeyDown: function (event, indexTab, indexEmoji, emoji) {
       event.preventDefault();
 
@@ -480,7 +482,7 @@ export default {
           this.scrollToTab(indexTab, true);
         } else {
           this.scrollToTab(1, false);
-          this.$emit('focus-search-input');
+          this.$emit('shift-tab-key-pressed');
         }
       }
 

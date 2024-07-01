@@ -10,8 +10,9 @@
         :scroll-into-tab="scrollIntoTab"
         :tab-set-labels="tabSetLabels"
         :is-scrolling="isScrolling"
-        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
-        @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
+        @tab-key-pressed="focusNextSectionFromEmojiTabSet"
+        @shift-tab-key-pressed="$refs.skinSelectorRef.focusSkinSelector()"
+        @arrow-down-key-pressed="focusNextSectionFromEmojiTabSet"
         @selected-tabset="scrollToSelectedTabset"
         @keydown.esc.native="$emit('close')"
       />
@@ -42,7 +43,7 @@
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="$emit('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
-        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
+        @shift-tab-key-pressed="focusNextSectionFromEmojiSelector"
         @keydown.esc.native="$emit('close')"
       />
     </div>
@@ -232,6 +233,22 @@ export default {
 
     updateHighlightedEmoji (emoji) {
       this.highlightedEmoji = emoji;
+    },
+
+    focusNextSectionFromEmojiTabSet () {
+      if (this.showSearch) {
+        this.$refs.searchInputRef.focusSearchInput();
+      } else {
+        this.$refs.emojiSelectorRef.focusEmojiSelector();
+      }
+    },
+
+    focusNextSectionFromEmojiSelector () {
+      if (this.showSearch) {
+        this.$refs.searchInputRef.focusSearchInput();
+      } else {
+        this.$refs.tabsetRef.focusTabset();
+      }
     },
   },
 };
