@@ -1,3 +1,10 @@
+## [1.31.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.31.0...dialtone-tokens/v1.31.1) (2024-07-01)
+
+
+### Bug Fixes
+
+* **Expressive Theme:** NO-JIRA corrected figma and tokens studio connection ([#384](https://github.com/dialpad/dialtone/issues/384)) ([255936f](https://github.com/dialpad/dialtone/commit/255936f7956473167358a06631187b4384a0dc2d))
+
 # [1.31.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.30.1...dialtone-tokens/v1.31.0) (2024-06-11)
 
 
