@@ -5,6 +5,7 @@
     <div
       id="d-emoji-picker-list"
       ref="listRef"
+      v-dt-scrollbars
       class="d-emoji-picker__list"
     >
       <p
@@ -333,7 +334,10 @@ export default {
       const tabElement = tabLabel.ref[0];
 
       vm.$nextTick(function () {
-        const container = vm.$refs.listRef;
+        // when using the custom scrollbars element, the actual scrollable
+        // element ends up being the second child of the element where the
+        // scrollbars are added
+        const container = vm.$refs.listRef.children[1];
         const offsetTop = tabIndex === '1' ? 0 : tabElement.offsetTop - 20;
 
         let isScrolling = true;
@@ -612,7 +616,10 @@ export default {
 
       this.tabLabelObserver.observe(this.$refs.tabCategoryRef);
 
-      Array.from(this.$refs.listRef.children).forEach((child, index) => {
+      // when using the custom scrollbars element, the actual scrollable
+      // element ends up being the second child of the element where the
+      // scrollbars are added. That is the reason for the .children[1]
+      Array.from(this.$refs.listRef.children[1].children).forEach((child, index) => {
         this.tabLabelObserver.observe(child);
         child.dataset.index = index;
       });
