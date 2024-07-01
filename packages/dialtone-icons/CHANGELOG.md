@@ -1,3 +1,16 @@
+# [4.22.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.21.0...dialtone-icons/v4.22.0) (2024-07-01)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** DP-102475 fix keyboard navigation ([#389](https://github.com/dialpad/dialtone/issues/389)) ([6ca1d16](https://github.com/dialpad/dialtone/commit/6ca1d16b934f377414c652d102429c57fb76182b))
+* **Logo:** DLT-1833 corrected antialiased edging  ([#381](https://github.com/dialpad/dialtone/issues/381)) ([67322e6](https://github.com/dialpad/dialtone/commit/67322e69bab916a403387159187cb2a01b15f0ae))
+
+
+### Features
+
+* **Icon:** DLT-1712 add token icon  ([#388](https://github.com/dialpad/dialtone/issues/388)) ([66d2474](https://github.com/dialpad/dialtone/commit/66d2474afab14373d9f75235454995fba929f52f))
+
 # [4.21.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.20.2...dialtone-icons/v4.21.0) (2024-06-25)
 
 
