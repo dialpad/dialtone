@@ -205,9 +205,9 @@ const emits = defineEmits([
 
   /**
    * Emitted when the user shift tab in first tab of emoji selector
-   * @event shift-tab-key-pressed
+   * @event focus-search-input
     */
-  'shift-tab-key-pressed',
+  'focus-search-input',
 ]);
 
 const {
@@ -541,7 +541,7 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
           scrollToTab(indexTab, true);
         } else {
           scrollToTab(1, false);
-          emits('shift-tab-key-pressed');
+          emits('focus-search-input');
         }
       } else {
         if (focusEmoji(indexTab + 1, 0)) {

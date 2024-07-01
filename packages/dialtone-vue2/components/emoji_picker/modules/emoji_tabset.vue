@@ -158,14 +158,14 @@ export default {
       if (event.key === 'Tab') {
         event.preventDefault();
         if (event.shiftKey) {
-          this.$emit('shift-tab-key-pressed');
+          this.$emit('focus-skin-selector');
         } else {
-          this.$emit('tab-key-pressed');
+          this.$emit('focus-search-input');
         }
       }
 
       if (event.key === 'ArrowDown') {
-        this.$emit('arrow-down-key-pressed');
+        this.$emit('focus-search-input');
       }
     },
   },
