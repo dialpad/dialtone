@@ -285,14 +285,18 @@
 //  $  INPUT ICONS
 //  ----------------------------------------------------------------------------
 .d-input-icon {
-    display: inline-flex;
+    display: none;
     align-items: center;
 
-    &--right > svg {
+    &:has( > svg) {
+        display: inline-flex;
+    }
+
+    &--right:has( > svg) {
         margin-right: var(--dt-space-400);
     }
     
-    &--left > svg {
+    &--left:has(> svg) {
         margin-left: var(--dt-space-400);
     }
 } 
