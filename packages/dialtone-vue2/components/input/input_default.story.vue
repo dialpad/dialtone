@@ -2,6 +2,7 @@
   <dt-input
     ref="input"
     v-model="inputValue"
+    autocomplete="on"
     :type="$attrs.type"
     :messages="$attrs.messages"
     :size="$attrs.size"
