@@ -13,6 +13,7 @@ const baseProps = {
 const baseAttrs = {
   placeholder: 'input-placeholder',
   name: 'input-name',
+  autocomplete: 'on',
 };
 const baseSlots = {};
 
