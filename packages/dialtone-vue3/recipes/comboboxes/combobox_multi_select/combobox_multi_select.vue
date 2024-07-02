@@ -23,9 +23,9 @@
           class="combobox__chip-wrapper"
         >
           <dt-chip
-            v-for="(item, index) in selectedItems"
+            v-for="item in selectedItems"
             ref="chips"
-            :key="`${item}-${index}`"
+            :key="getMultiSelectItemKey(item)"
             :label-class="['d-chip__label']"
             class="combobox__chip"
             :close-button-props="{ ariaLabel: 'close' }"
@@ -107,7 +107,7 @@ import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
 import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
 import { validationMessageValidator } from '@/common/validators';
-import { hasSlotContent } from '@/common/utils';
+import utils, { hasSlotContent } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/popover/popover_constants';
@@ -605,6 +605,10 @@ export default {
       } else {
         this.showValidationMessages = false;
       }
+    },
+
+    getMultiSelectItemKey (item) {
+      return `${item}-${utils.getUniqueString()}`;
     },
   },
 };

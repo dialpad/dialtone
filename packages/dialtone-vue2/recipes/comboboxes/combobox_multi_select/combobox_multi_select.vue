@@ -23,9 +23,9 @@
           class="combobox__chip-wrapper"
         >
           <dt-chip
-            v-for="(item, index) in selectedItems"
+            v-for="item in selectedItems"
             ref="chips"
-            :key="`${item}-${index}`"
+            :key="getMultiSelectItemKey(item)"
             :label-class="['d-chip__label']"
             class="combobox__chip"
             :close-button-props="{ ariaLabel: 'close' }"
@@ -116,6 +116,7 @@ import {
   CHIP_TOP_POSITION,
 } from './combobox_multi_select_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import utils from '@/common/utils';
 
 export default {
   name: 'DtRecipeComboboxMultiSelect',
@@ -604,6 +605,10 @@ export default {
       } else {
         this.showValidationMessages = false;
       }
+    },
+
+    getMultiSelectItemKey (item) {
+      return `${item}-${utils.getUniqueString()}`;
     },
   },
 };
