@@ -862,6 +862,9 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      overlayscrollbars:
+        specifier: 2.9.1
+        version: 2.9.1
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
