@@ -1,3 +1,10 @@
+# [9.52.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.51.0...dialtone/v9.52.0) (2024-07-02)
+
+
+### Features
+
+* **Icon:** DLT-1804 add t-mobile ([#387](https://github.com/dialpad/dialtone/issues/387)) ([4ce82b2](https://github.com/dialpad/dialtone/commit/4ce82b21b2466b2056d802a6b6cf6f936dd09091))
+
 # [9.51.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.50.0...dialtone/v9.51.0) (2024-07-01)
 
 
