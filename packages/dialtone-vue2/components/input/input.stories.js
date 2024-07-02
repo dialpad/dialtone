@@ -11,7 +11,7 @@ const iconsList = getIconNames();
 export const argsData = {
   type: DtInput.props.type.default,
   size: INPUT_SIZES.DEFAULT,
-  placeholder: 'Placeholder',
+  placeholder: 'placeholder',
   label: 'Label',
   onBlur: action('blur'),
   onInput: action('input'),
