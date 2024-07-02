@@ -23,9 +23,9 @@
           class="combobox__chip-wrapper"
         >
           <dt-chip
-            v-for="item in selectedItems"
+            v-for="(item, index) in selectedItems"
             ref="chips"
-            :key="item"
+            :key="`${item}-${index}`"
             :label-class="['d-chip__label']"
             class="combobox__chip"
             :close-button-props="{ ariaLabel: 'close' }"

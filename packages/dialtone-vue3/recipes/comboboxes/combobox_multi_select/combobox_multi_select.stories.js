@@ -176,3 +176,11 @@ export const WithMaxSelectValidation = {
     },
   },
 };
+
+export const DuplicatedNames = {
+  render: Template,
+
+  args: {
+    selectedItems: ['item12', 'item12', 'item12'],
+  },
+};
