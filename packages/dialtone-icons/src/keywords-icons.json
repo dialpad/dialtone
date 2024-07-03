@@ -271,10 +271,10 @@
       "servicenow": [],
       "slack": [],
       "snapchat": [],
-      "telegram": [],
       "t-mobile": [
         "tmo"
       ],
+      "telegram": [],
       "threads": [
         "meta",
         "facebook"
