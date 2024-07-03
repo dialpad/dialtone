@@ -1,8 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import { DtScrollbarsDirective } from './scrollbars.js';
 import { OverlayScrollbars } from 'overlayscrollbars';
-import { beforeEach } from 'vitest';
-import { expect } from 'chai';
 
 const WrapperComponent = {
   name: 'wrapper-component',
