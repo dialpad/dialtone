@@ -1,3 +1,15 @@
+# [4.24.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.23.0...dialtone-icons/v4.24.0) (2024-07-03)
+
+
+### Bug Fixes
+
+* NO-JIRA keywords ([eb8527d](https://github.com/dialpad/dialtone/commit/eb8527d12255707d93425e0719595b029c2fa2f5))
+
+
+### Features
+
+* **Rich Text Editor:** DLT-1835 add undo behaviour ([#390](https://github.com/dialpad/dialtone/issues/390)) ([2d65590](https://github.com/dialpad/dialtone/commit/2d65590147c0a3f24e6294e23e17aff5beab6b27))
+
 # [4.23.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.22.0...dialtone-icons/v4.23.0) (2024-07-02)
 
 
