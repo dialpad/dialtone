@@ -1,3 +1,15 @@
+# [2.141.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.140.0...dialtone-vue2/v2.141.0) (2024-07-03)
+
+
+### Bug Fixes
+
+* **Input:** NO-JIRA autocomplete attr override ([#395](https://github.com/dialpad/dialtone/issues/395)) ([2af258d](https://github.com/dialpad/dialtone/commit/2af258d9445d4ebcab26de4f796c0c569bed1f4d))
+
+
+### Features
+
+* **Rich Text Editor:** DLT-1835 add undo behaviour ([#390](https://github.com/dialpad/dialtone/issues/390)) ([2d65590](https://github.com/dialpad/dialtone/commit/2d65590147c0a3f24e6294e23e17aff5beab6b27))
+
 # [2.140.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.139.2...dialtone-vue2/v2.140.0) (2024-07-01)
 
 
