@@ -6,7 +6,7 @@ export const DtScrollbarsDirective = {
   install (Vue) {
     Vue.directive('dt-scrollbars', {
       inserted (el) {
-        OverlayScrollbars(el, { scrollbars: { autoHide: 'never' } });
+        OverlayScrollbars(el, { scrollbars: { autoHide: 'scroll' } });
         el.setAttribute('data-overlayscrollbars-initialize', true);
         el.classList.add('custom-scrollbars');
       },
