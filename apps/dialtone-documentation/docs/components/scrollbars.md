@@ -8,7 +8,7 @@ image: assets/images/components/scroller.png
 
 ## Scrollbars directive
 
-Allows to add overlay scrollbars that will look the same for every browser.
+Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 <code-well-header>
   <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-black-300" v-dt-scrollbars>
@@ -52,6 +52,7 @@ vueCode='
 ## Usage
 
 To add customized overlay scrollbars to a scrollable section, simply include the `v-dt-scrollbars` directive on the desired element.
+Add a `max-height` to the element of you want to set up a vertical scrollbar, or a `max-width` if you want to set up a horizontal scrollbar.
 
 ## Characteristics
 
@@ -59,6 +60,7 @@ To add customized overlay scrollbars to a scrollable section, simply include the
 * It grows when hovering the scrollbar handle for better accessibility
 * Appears on scroll over the scrollable area
 * The look and feel will be the same for every browser and OS
+* Responds to the keyword events just like the native scrollbar.
 
 ## Limitations
 
