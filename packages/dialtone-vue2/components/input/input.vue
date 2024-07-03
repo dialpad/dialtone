@@ -585,9 +585,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.d-input--hidden {
-  visibility: hidden;
-}
-</style>
