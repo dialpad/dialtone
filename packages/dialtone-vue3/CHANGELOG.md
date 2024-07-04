@@ -1,3 +1,10 @@
+# [3.135.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.134.0...dialtone-vue3/v3.135.0) (2024-07-04)
+
+
+### Features
+
+* **Input:** DLT-1808 icon scoped slot ([#392](https://github.com/dialpad/dialtone/issues/392)) ([de7b0f1](https://github.com/dialpad/dialtone/commit/de7b0f1aea9b307ceba80caaea49484498348749))
+
 # [3.134.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.133.0...dialtone-vue3/v3.134.0) (2024-07-03)
 
 
