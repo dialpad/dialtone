@@ -1,3 +1,15 @@
+# [9.54.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.53.0...dialtone/v9.54.0) (2024-07-04)
+
+
+### Bug Fixes
+
+* NO-JIRA add tiptap extension history to root package.json ([d23f8bb](https://github.com/dialpad/dialtone/commit/d23f8bbab5a470d47bc8a2dec789e66366b44880))
+
+
+### Features
+
+* **Input:** DLT-1808 icon scoped slot ([#392](https://github.com/dialpad/dialtone/issues/392)) ([de7b0f1](https://github.com/dialpad/dialtone/commit/de7b0f1aea9b307ceba80caaea49484498348749))
+
 # [9.53.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.52.0...dialtone/v9.53.0) (2024-07-03)
 
 
