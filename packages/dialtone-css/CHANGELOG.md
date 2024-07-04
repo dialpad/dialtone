@@ -1,3 +1,10 @@
+# [8.37.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.36.0...dialtone-css/v8.37.0) (2024-07-04)
+
+
+### Features
+
+* **Input:** DLT-1808 icon scoped slot ([#392](https://github.com/dialpad/dialtone/issues/392)) ([de7b0f1](https://github.com/dialpad/dialtone/commit/de7b0f1aea9b307ceba80caaea49484498348749))
+
 # [8.36.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.35.0...dialtone-css/v8.36.0) (2024-06-11)
 
 
