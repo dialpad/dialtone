@@ -1,23 +1,20 @@
-<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
     ref="container"
-    :class="['base-input', { 'd-vi-hidden': hidden }]"
+    :class="{ 'd-input--hidden': hidden }"
     data-qa="dt-input"
   >
     <label
-      class="base-input__label"
       :aria-details="$slots.description || description ? descriptionKey : undefined"
       data-qa="dt-input-label-wrapper"
     >
-      <!-- @slot slot for label, defaults to label prop -->
+      <!-- @slot Slot for label, defaults to label prop -->
       <slot name="labelSlot">
         <div
           v-if="labelVisible && label"
           ref="label"
           data-qa="dt-input-label"
           :class="[
-            'base-input__label-text',
             'd-label',
             labelSizeClasses[size],
           ]"
@@ -30,7 +27,6 @@
         :id="descriptionKey"
         ref="description"
         :class="[
-          'base-input__description',
           'd-description',
           descriptionSizeClasses[size],
         ]"
@@ -39,7 +35,7 @@
         <div
           v-if="$slots.description || description"
         >
-          <!-- @slot slot for description, defaults to description prop -->
+          <!-- @slot Slot for description, defaults to description prop -->
           <slot name="description">{{ description }}</slot>
         </div>
         <div
@@ -55,13 +51,15 @@
         :read-only="disabled"
       >
         <span
-          v-if="$slots.leftIcon"
-          :class="inputIconClasses('left')"
+          class="d-input-icon d-input-icon--left"
           data-qa="dt-input-left-icon-wrapper"
           @focusout="onBlur"
         >
           <!-- @slot Slot for left icon -->
-          <slot name="leftIcon" />
+          <slot
+            name="leftIcon"
+            :icon-size="iconSize"
+          />
         </span>
         <textarea
           v-if="isTextarea"
@@ -91,13 +89,15 @@
           v-on="inputListeners"
         >
         <span
-          v-if="$slots.rightIcon"
-          :class="inputIconClasses('right')"
+          class="d-input-icon d-input-icon--right"
           data-qa="dt-input-right-icon-wrapper"
           @focusout="onBlur"
         >
           <!-- @slot Slot for right icon -->
-          <slot name="rightIcon" />
+          <slot
+            name="rightIcon"
+            :icon-size="iconSize"
+          />
         </span>
       </div>
     </label>
@@ -112,8 +112,17 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import { INPUT_TYPES, INPUT_SIZES } from './input_constants';
+import {
+  INPUT_TYPES,
+  INPUT_SIZES,
+  INPUT_SIZE_CLASSES,
+  INPUT_ICON_SIZES,
+  INPUT_STATE_CLASSES,
+  DESCRIPTION_SIZE_CLASSES,
+  LABEL_SIZE_CLASSES,
+} from './input_constants';
 import {
   getUniqueString,
   getValidationState,
@@ -202,22 +211,11 @@ export default {
 
     /**
      * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
-     * @values null, xs, sm, md, lg, xl
+     * @values xs, sm, md, lg, xl
      */
     size: {
       type: String,
-      default: null,
-      validator: (t) => Object.values(INPUT_SIZES).includes(t),
-    },
-
-    /**
-     * Size of the icon. One of `xs`, `sm`, `md`, `lg`, `xl`. If you do not set this the icon will size relative
-     * to the input size
-     * @values null, xs, sm, md, lg, xl
-     */
-    iconSize: {
-      type: String,
-      default: null,
+      default: 'md',
       validator: (t) => Object.values(INPUT_SIZES).includes(t),
     },
 
@@ -347,19 +345,6 @@ export default {
 
   data () {
     return {
-      descriptionSizeClasses: {
-        lg: 'd-description--lg',
-        xl: 'd-description--xl',
-      },
-
-      labelSizeClasses: {
-        xs: 'd-label--xs',
-        sm: 'd-label--sm',
-        md: 'd-label--md',
-        lg: 'd-label--lg',
-        xl: 'd-label--xl',
-      },
-
       isInputFocused: false,
       isInvalid: false,
       defaultLength: 0,
@@ -376,12 +361,8 @@ export default {
       return this.size === INPUT_SIZES.DEFAULT;
     },
 
-    isDefaultIconSize () {
-      return this.iconSizeComputed === INPUT_SIZES.DEFAULT;
-    },
-
-    iconSizeComputed () {
-      return this.iconSize ? this.iconSize : this.size;
+    iconSize () {
+      return INPUT_ICON_SIZES[this.size];
     },
 
     isValidSize () {
@@ -498,40 +479,11 @@ export default {
         return '';
       }
 
-      const sizeClasses = {
-        input: {
-          xs: 'd-input--xs',
-          sm: 'd-input--sm',
-          lg: 'd-input--lg',
-          xl: 'd-input--xl',
-        },
-
-        textarea: {
-          xs: 'd-textarea--xs',
-          sm: 'd-textarea--sm',
-          lg: 'd-textarea--lg',
-          xl: 'd-textarea--xl',
-        },
-      };
-
-      return sizeClasses[this.inputComponent][this.size];
+      return INPUT_SIZE_CLASSES[this.inputComponent][this.size];
     },
 
     stateClass () {
-      const inputStateClasses = {
-        input: {
-          error: 'd-input--error base-input__input--error',
-          warning: 'd-input--warning base-input__input--warning',
-          success: 'd-input--success base-input__input--success',
-        },
-
-        textarea: {
-          error: 'd-textarea--error base-input__input--error',
-          warning: 'd-textarea--warning base-input__input--warning',
-          success: 'd-textarea--success base-input__input--success',
-        },
-      };
-      return [inputStateClasses[this.inputComponent][this.inputState]];
+      return [INPUT_STATE_CLASSES[this.inputComponent][this.inputState]];
     },
   },
 
@@ -554,10 +506,14 @@ export default {
     },
   },
 
+  beforeMount () {
+    this.descriptionSizeClasses = DESCRIPTION_SIZE_CLASSES;
+    this.labelSizeClasses = LABEL_SIZE_CLASSES;
+  },
+
   methods: {
     inputClasses () {
       return [
-        'base-input__input',
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         {
           [this.stateClass]: this.showInputState,
@@ -593,26 +549,6 @@ export default {
         message: this.validationProps.length.message,
         type: this.inputLengthState,
       };
-    },
-
-    inputIconClasses (side) {
-      const iconSizeClasses = {
-        xs: 'd-input-icon--xs',
-        sm: 'd-input-icon--sm',
-        lg: 'd-input-icon--lg',
-        xl: 'd-input-icon--xl',
-      };
-      const iconOrientationClasses = {
-        left: 'base-input__icon--left d-input-icon--left',
-        right: 'base-input__icon--right d-input-icon--right',
-      };
-
-      return [
-        iconOrientationClasses[side],
-        'd-input-icon',
-        { [iconSizeClasses[this.iconSizeComputed]]: !this.isDefaultIconSize },
-        this.sizeModifierClass,
-      ];
     },
 
     onBlur (e) {
