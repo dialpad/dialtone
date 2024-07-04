@@ -13,7 +13,7 @@
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
-      v-dt-scrollbars
+      v-dt-scrollbar
       class="dt-message-input__editor-wrapper"
       :style="{ 'max-height': maxHeight }"
     >

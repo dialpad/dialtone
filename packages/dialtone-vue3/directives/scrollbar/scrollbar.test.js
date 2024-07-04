@@ -1,21 +1,21 @@
 import { mount } from '@vue/test-utils';
-import { DtScrollbarsDirective } from './scrollbars.js';
+import { DtScrollbarDirective } from './scrollbar.js';
 import { OverlayScrollbars } from 'overlayscrollbars';
 
 const WrapperComponent = {
   name: 'wrapper-component',
   template: `
-    <div v-dt-scrollbars></div>
+    <div v-dt-scrollbar></div>
   `,
 };
 
-describe('DtScrollbarsDirective Tests', () => {
+describe('DtScrollbarDirective Tests', () => {
   let wrapper;
 
   const updateWrapper = () => {
     wrapper = mount(WrapperComponent, {
       global: {
-        plugins: [DtScrollbarsDirective],
+        plugins: [DtScrollbarDirective],
       },
       attachTo: document.body,
     });

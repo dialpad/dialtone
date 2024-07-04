@@ -638,8 +638,8 @@
           "link": "/components/root-layout.html"
         },
         {
-          "text": "Scrollbars",
-          "link": "/components/scrollbars.html"
+          "text": "Scrollbar",
+          "link": "/components/scrollbar.html"
         },
         {
           "text": "Scroller",

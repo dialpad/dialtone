@@ -1,17 +1,17 @@
 ---
-title: Scrollbars
+title: Scrollbar
 description: A directive that adds customized overlay scrollbars to any scrollable section.
 status: beta
 thumb: true
 image: assets/images/components/scroller.png
 ---
 
-## Scrollbars directive
+## Scrollbar directive
 
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 <code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-black-300" v-dt-scrollbars>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-black-300" v-dt-scrollbar>
     <div v-for="item in items" class="item">
       {{ item}}
     </div>
@@ -41,7 +41,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-black-300" v-dt-scrollbars>
+<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-black-300" v-dt-scrollbar>
   <div v-for="item in items" class="item">
     {{ item}}
   </div>
@@ -54,16 +54,16 @@ vueCode='
 Import the directive from dialtone-vue
 
 ```javascript
-import { DtTooltipScrollbars } from "@dialpad/dialtone-vue";
+import { DtScrollbarDirective } from "@dialpad/dialtone-vue";
 ```
 
 Install the directive into vue instance
 
 ```javascript
-Vue.use(DtTooltipScrollbars);
+Vue.use(DtScrollbarDirective);
 ```
 
-To add customized overlay scrollbars to a scrollable section, simply include the `v-dt-scrollbars` directive on the desired element.
+To add customized overlay scrollbars to a scrollable section, simply include the `v-dt-scrollbar` directive on the desired element.
 Add a `max-height` to the element if you want to set up a vertical scrollbar, or a `max-width` if you want to set up a horizontal scrollbar.
 
 ## Characteristics
