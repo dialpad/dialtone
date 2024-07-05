@@ -81,6 +81,10 @@ function isItemActive (item) {
   return item.link === route.hash;
 }
 
+watch(() => props.headers, (headers) => {
+  internalHeaders.value = headers;
+}, { immediate: true });
+
 watch(route, () => {
   if (props.headers) return;
 
