@@ -78,9 +78,8 @@ const emits = defineEmits([
    */
   'selected-tabset',
 
-  'shift-tab-key-pressed',
-  'tab-key-pressed',
-  'arrow-down-key-pressed',
+  'focus-search-input',
+  'focus-skin-selector',
 ]);
 
 const TABS_DATA = [
@@ -160,15 +159,15 @@ function handleKeyDown (event, tabId) {
   if (event.key === 'Tab') {
     event.preventDefault();
     if (event.shiftKey) {
-      emits('shift-tab-key-pressed');
+      emits('focus-skin-selector');
     } else {
-      emits('tab-key-pressed');
+      emits('focus-search-input');
     }
   }
 
   if (event.key === 'ArrowDown') {
     // Jump to search input
-    emits('arrow-down-key-pressed');
+    emits('focus-search-input');
   }
 }
 

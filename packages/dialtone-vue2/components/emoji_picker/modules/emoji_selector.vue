@@ -482,7 +482,7 @@ export default {
           this.scrollToTab(indexTab, true);
         } else {
           this.scrollToTab(1, false);
-          this.$emit('shift-tab-key-pressed');
+          this.$emit('focus-search-input');
         }
       }
 
