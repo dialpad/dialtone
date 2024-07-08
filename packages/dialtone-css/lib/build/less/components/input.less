@@ -290,17 +290,17 @@
 //  ----------------------------------------------------------------------------
 .d-input-icon {
     display: none;
-    align-items: center;
-
-    &:has( > svg) {
+    
+    &:not(:empty) {
         display: inline-flex;
+        align-items: center;
     }
 
-    &--right:has( > svg) {
+    &--right:not(:empty) {
         margin-right: var(--dt-space-400);
     }
     
-    &--left:has(> svg) {
+    &--left:not(:empty) {
         margin-left: var(--dt-space-400);
     }
 } 
