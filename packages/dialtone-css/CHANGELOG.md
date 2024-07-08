@@ -1,3 +1,10 @@
+## [8.37.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.0...dialtone-css/v8.37.1) (2024-07-08)
+
+
+### Bug Fixes
+
+* **Input:** NO-JIRA content not displaying on right slot ([168af7c](https://github.com/dialpad/dialtone/commit/168af7c1fab9d2a19b7b5aa6fc09ea0830c34fb0))
+
 # [8.37.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.36.0...dialtone-css/v8.37.0) (2024-07-04)
 
 
