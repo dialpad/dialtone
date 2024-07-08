@@ -17,10 +17,12 @@
       <span
         ref="inputSlotWrapper"
         class="combobox__input-wrapper"
+        @focusin="handleInputFocusIn"
+        @focusout="handleInputFocusOut"
       >
         <span
           ref="chipsWrapper"
-          class="combobox__chip-wrapper"
+          :class="['combobox__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
             v-for="({ item, key }) in selectedItemsWithKeys"
@@ -102,6 +104,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue';
 import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
@@ -291,6 +294,15 @@ export default {
       type: String,
       default: 'fade',
     },
+
+    /**
+     * Determines whether the combobox should collapse to a single when losing focus.
+     * @type {boolean}
+     */
+    collapseOnFocusOut: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -340,10 +352,10 @@ export default {
       value: '',
       popoverOffset: [0, 4],
       showValidationMessages: false,
-      initialInputPadding: {},
       resizeWindowObserver: null,
-      originalInputSize: null,
+      initialInputHeight: null,
       CHIP_SIZES,
+      inputFocused: false,
     };
   },
 
@@ -391,6 +403,12 @@ export default {
         key: getUniqueString(selectedItem),
       }));
     },
+
+    chipWrapperClass () {
+      return {
+        [`combobox__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+      };
+    },
   },
 
   watch: {
@@ -417,7 +435,7 @@ export default {
         await this.$nextTick();
         const input = this.getInput();
         this.revertInputPadding(input);
-        this.originalInputSize = input.getBoundingClientRect().height;
+        this.initialInputHeight = input.getBoundingClientRect().height;
         this.setInputPadding();
         this.setChipsTopPosition();
       },
@@ -425,6 +443,7 @@ export default {
   },
 
   mounted () {
+    this.setInitialInputHeight();
     // Recalculate chip position and input padding when resizing window
     this.resizeWindowObserver = new ResizeObserver(async () => {
       this.setChipsTopPosition();
@@ -575,7 +594,7 @@ export default {
       const top = lastChip.offsetTop + 2;
 
       // Add padding to Top only if the chips need more space
-      if (chipsSize > this.originalInputSize) {
+      if (chipsSize > this.initialInputHeight) {
         input.style.paddingTop = `${top}px`;
       }
     },
@@ -613,6 +632,28 @@ export default {
         this.showValidationMessages = false;
       }
     },
+
+    setInitialInputHeight () {
+      const input = this.getInput();
+      if (!input) return;
+      this.initialInputHeight = input.getBoundingClientRect().height;
+    },
+
+    async handleInputFocusIn () {
+      this.inputFocused = true;
+      if (this.collapseOnFocusOut) {
+        await this.$nextTick();
+        this.setInputPadding();
+      }
+    },
+
+    async handleInputFocusOut () {
+      this.inputFocused = false;
+      if (this.collapseOnFocusOut) {
+        await this.$nextTick();
+        this.setInputPadding();
+      }
+    },
   },
 };
 </script>
@@ -629,6 +670,19 @@ export default {
   margin-right: var(--dt-space-200);
   padding-left: var(--dt-space-100);
   max-width: calc(var(--dt-size-100-percent) - var(--dt-space-400));
+  max-height: initial;
+  overflow-y: visible;
+}
+
+.combobox__chip-wrapper-md--collapsed {
+  max-height: 2.8rem;
+  overflow-y: hidden;
+}
+
+.combobox__chip-wrapper-sm--collapsed,
+.combobox__chip-wrapper-xs--collapsed {
+  max-height: 2.5rem;
+  overflow-y: hidden;
 }
 
 .combobox__chip {
