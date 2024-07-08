@@ -1,3 +1,12 @@
+## [9.54.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.54.0...dialtone/v9.54.1) (2024-07-08)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA fix keyboard proposal ([#393](https://github.com/dialpad/dialtone/issues/393)) ([e5e7dfa](https://github.com/dialpad/dialtone/commit/e5e7dfa798b46bc84ca458b0dcff7d0c17e35e80))
+* **Input:** NO-JIRA content not displaying on right slot ([168af7c](https://github.com/dialpad/dialtone/commit/168af7c1fab9d2a19b7b5aa6fc09ea0830c34fb0))
+* **Tooltip:** DLT-1846 inverted not working properly ([#398](https://github.com/dialpad/dialtone/issues/398)) ([af57943](https://github.com/dialpad/dialtone/commit/af57943cdd3abe23a0e8fe67e663f5d54d1cff62))
+
 # [9.54.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.53.0...dialtone/v9.54.0) (2024-07-04)
 
 
