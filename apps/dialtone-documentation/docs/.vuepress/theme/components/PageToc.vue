@@ -5,7 +5,7 @@
     </h2>
     <nav>
       <ul
-        v-for="header in internalHeaders"
+        v-for="header in headers"
         :key="header.slug"
       >
         <li v-if="!header.children.length">
@@ -62,15 +62,8 @@ import { usePageData } from '@vuepress/client';
 import { useRoute } from 'vue-router';
 import TocItem from './TocItem.vue';
 
-const props = defineProps({
-  headers: {
-    type: Array,
-    default: undefined,
-  },
-});
-
 const route = useRoute();
-const internalHeaders = ref(props.headers);
+const headers = ref(null);
 
 function isHeaderActive (header) {
   const links = [header.link, ...header.children.map(child => child.link)];
@@ -81,23 +74,17 @@ function isItemActive (item) {
   return item.link === route.hash;
 }
 
-watch(() => props.headers, (headers) => {
-  internalHeaders.value = headers;
-}, { immediate: true });
-
 watch(route, () => {
-  if (props.headers) return;
-
-  internalHeaders.value = usePageData().value.headers;
+  const filteredHeaders = JSON.parse(localStorage.getItem('filteredHeaders'));
+  const pageHeaders = usePageData().value.headers;
+  headers.value = filteredHeaders ?? pageHeaders;
 }, { flush: 'pre', immediate: true, deep: true });
 </script>
 
 <style lang="less" scoped>
 .dialtone-toc {
   width: var(--dt-size-850);
-    height: calc(100vh - var(--dt-size-700));
-    top: var(--dt-space-700);
-    right: 3%; // Magic number?
-    z-index: var(--zi-base1);  /* to be on top of the page default toc */
+  height: calc(100vh - var(--dt-size-700));
+  top: var(--dt-space-700);
 }
 </style>
