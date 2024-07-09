@@ -1,3 +1,12 @@
+## [3.135.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.135.1...dialtone-vue3/v3.135.2) (2024-07-09)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** DLT-1864 tabs not focusing properly ([#400](https://github.com/dialpad/dialtone/issues/400)) ([fa92c89](https://github.com/dialpad/dialtone/commit/fa92c89768d4162b71b3454afe370f80f7542943))
+* **General Row:** NO-JIRA lint fix leftbar_row.less ([72af60f](https://github.com/dialpad/dialtone/commit/72af60fb73ee3a8963c42ef6b17d8a5ce21674ae))
+* **Input:** NO-JIRA add identifier classes ([#401](https://github.com/dialpad/dialtone/issues/401)) ([670a1ba](https://github.com/dialpad/dialtone/commit/670a1bada1a06b2a300dc64e521ef3cb133ff44d))
+
 ## [3.135.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.135.0...dialtone-vue3/v3.135.1) (2024-07-08)
 
 
