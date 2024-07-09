@@ -70,6 +70,7 @@ export default {
 
   methods: {
     onKeyDown ({ event }) {
+      if (this.items.length === 0) return;
       if (event.key === 'ArrowUp') {
         this.upHandler();
         return true;
@@ -81,9 +82,7 @@ export default {
       }
 
       if (event.key === 'Enter' || event.key === 'Tab') {
-        event.preventDefault(); // prevent moving the focus for the tab key
         this.selectHandler();
-        event.stopPropagation();
         return true;
       }
 
