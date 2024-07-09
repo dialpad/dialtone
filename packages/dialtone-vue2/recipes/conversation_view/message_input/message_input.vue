@@ -749,6 +749,12 @@ export default {
   border-color: var(--dt-color-border-default);
   cursor: text;
 
+  &__bottom-section-left {
+    .d-btn {
+      color: var(--dt-color-foreground-muted);
+    }
+  }
+
   &--focused {
     border-color: var(--dt-color-border-bold);
     box-shadow: var(--dt-shadow-small);
