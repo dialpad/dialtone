@@ -1,3 +1,10 @@
+## [8.37.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.1...dialtone-css/v8.37.2) (2024-07-09)
+
+
+### Bug Fixes
+
+* **Input:** NO-JIRA add identifier classes ([#401](https://github.com/dialpad/dialtone/issues/401)) ([670a1ba](https://github.com/dialpad/dialtone/commit/670a1bada1a06b2a300dc64e521ef3cb133ff44d))
+
 ## [8.37.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.0...dialtone-css/v8.37.1) (2024-07-08)
 
 
