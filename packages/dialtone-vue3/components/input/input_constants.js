@@ -45,17 +45,9 @@ export const INPUT_SIZE_CLASSES = {
 };
 
 export const INPUT_STATE_CLASSES = {
-  input: {
-    error: 'd-input--error',
-    warning: 'd-input--warning',
-    success: 'd-input--success',
-  },
-
-  textarea: {
-    error: 'd-textarea--error',
-    warning: 'd-textarea--warning',
-    success: 'd-textarea--success',
-  },
+  error: 'd-input--error',
+  warning: 'd-input--warning',
+  success: 'd-input--success',
 };
 
 export const DESCRIPTION_SIZE_CLASSES = {
