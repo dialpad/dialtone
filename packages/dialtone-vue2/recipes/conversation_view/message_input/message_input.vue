@@ -8,7 +8,6 @@
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
-    @keydown.enter.exact="onSend"
     @paste="onPaste"
   >
     <!-- Some wrapper to restrict the height and show the scrollbar -->
@@ -42,6 +41,7 @@
         @focus="onFocus"
         @blur="onBlur"
         @input="onInput"
+        @enter="onSend"
         v-on="$listeners"
       />
     </div>

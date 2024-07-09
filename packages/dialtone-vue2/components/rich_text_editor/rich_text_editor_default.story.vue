@@ -23,6 +23,7 @@
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
     @focus="$attrs.onFocus"
+    @enter="$attrs.onEnter"
   />
 </template>
 
