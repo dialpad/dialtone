@@ -9,8 +9,17 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Base default medium text style for main content."
+        "type": "typography"
+      },
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       },
       "sm": {
         "value": {
@@ -20,8 +29,17 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Reduced small text style for less prominent or adjacent content."
+        "type": "typography"
+      },
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       }
     },
     "headline": {
@@ -33,8 +51,7 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.uppercase}"
         },
-        "type": "typography",
-        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
+        "type": "typography"
       },
       "sm": {
         "value": {
@@ -44,8 +61,37 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Smaller text size for secondary information or subheadings."
+        "type": "typography"
+      },
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "sm-soft": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "sm-soft-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       },
       "md": {
         "value": {
@@ -55,8 +101,17 @@
           "fontSize": "{font.size.300}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Medium-sized base text style for headlines."
+        "type": "typography"
+      },
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       },
       "lg": {
         "value": {
@@ -66,8 +121,37 @@
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Large text style for headlines to attract attention."
+        "type": "typography"
+      },
+      "lg-soft": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.400}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "lg-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.400}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "lg-soft-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.400}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       },
       "xl": {
         "value": {
@@ -77,8 +161,17 @@
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Extra large text style for high importance headlines."
+        "type": "typography"
+      },
+      "xl-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.100}",
+          "fontSize": "{font.size.500}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       },
       "xxl": {
         "value": {
@@ -88,8 +181,17 @@
           "fontSize": "{font.size.600}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Largest text style for extra extra large content."
+        "type": "typography"
+      },
+      "xxl-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.100}",
+          "fontSize": "{font.size.600}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       }
     },
     "label": {
@@ -101,8 +203,37 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Base default medium-sized text style for labels, providing clear identification and categorization."
+        "type": "typography"
+      },
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "md-plain": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "md-plain-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       },
       "sm": {
         "value": {
@@ -112,8 +243,37 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy."
+        "type": "typography"
+      },
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "sm-plain": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
+      },
+      "sm-plain-compact": {
+        "value": {
+          "fontFamily": "{font.family.expressive}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography"
       }
     },
     "helper": {
@@ -125,8 +285,7 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Base default medium-sized text style for supplementary contextual information."
+        "type": "typography"
       },
       "sm": {
         "value": {
@@ -136,8 +295,7 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption."
+        "type": "typography"
       }
     },
     "code": {
@@ -149,8 +307,7 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Base default medium-sized text style for monospace code snippets of technical content."
+        "type": "typography"
       },
       "sm": {
         "value": {
@@ -160,8 +317,7 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography",
-        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
+        "type": "typography"
       }
     }
   },
