@@ -100,7 +100,7 @@ const includeToc = computed(() => {
   const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
   if (!items[key] || !Array.isArray(items[key])) return false;
   const headers = usePageData().value.headers;
-  return headers?.length > 0;
+  return headers?.length > 0 || localStorage.getItem('filteredHeaders');
 });
 
 const tokensPageClass = computed(() => {
