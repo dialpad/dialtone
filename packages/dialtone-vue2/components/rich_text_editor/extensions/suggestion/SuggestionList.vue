@@ -70,7 +70,6 @@ export default {
 
   methods: {
     onKeyDown ({ event }) {
-      if (this.items.length === 0) return;
       if (event.key === 'ArrowUp') {
         this.upHandler();
         return true;

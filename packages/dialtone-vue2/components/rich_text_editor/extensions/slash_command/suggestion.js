@@ -45,20 +45,21 @@ export default {
       },
 
       onUpdate (props) {
-        component.updateProps(props);
+        component?.updateProps(props);
 
         if (!props.clientRect) {
           return;
         }
 
-        popup[0].setProps({
+        popup?.[0].setProps({
           getReferenceClientRect: props.clientRect,
         });
       },
 
       onKeyDown (props) {
+        if (!popup) return true;
         if (props.event.key === 'Escape') {
-          popup[0].hide();
+          popup?.[0].hide();
 
           return true;
         }
@@ -67,8 +68,10 @@ export default {
       },
 
       onExit () {
-        popup[0].destroy();
-        component.destroy();
+        popup?.[0].destroy();
+        popup = null;
+        component?.destroy();
+        component = null;
       },
     };
   },
