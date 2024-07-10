@@ -1,5 +1,5 @@
 <template>
-  <div class="d-popover__dialog">
+  <div class="d-popover__dialog d-hmx216">
     <ul
       v-show="items.length"
       ref="suggestionList"
@@ -141,7 +141,6 @@ export default {
 .dt-suggestion-list {
   position: relative;
   padding: var(--dt-size-300);
-  max-height: var(--dt-size-875) !important;
   min-width: var(--dt-size-925);
   max-width: var(--dt-size-975);
 }
