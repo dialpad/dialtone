@@ -4,6 +4,7 @@ import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtPopover from '@/components/popover/popover.vue';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
+import * as utils from '@/common/utils';
 
 // Constants
 const basePropsData = {
@@ -213,6 +214,10 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
     });
 
     describe('Should navigate between last chip and input', () => {
+      beforeAll(() => {
+        vi.spyOn(utils, 'getUniqueString').mockImplementation((item) => `mockedUniqueString-${item}`);
+      });
+
       let lastChip;
       beforeEach(async () => {
         await wrapper.setProps({ selectedItems: ['1'] });
