@@ -1,6 +1,6 @@
 <template>
   <router-link
-    class="d-btn d-btn--muted h:d-bgc-transparent d-py6 d-px12 d-w216 d-jc-flex-start"
+    class="d-pl8 d-w216 d-fc-secondary d-td-none"
     title="Go back to the homepage"
     to="/"
   >
