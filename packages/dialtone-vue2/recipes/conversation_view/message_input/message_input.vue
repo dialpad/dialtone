@@ -10,6 +10,8 @@
     @drop="onDrop"
     @paste="onPaste"
   >
+    <!-- @slot Renders above the input, but still within the borders. -->
+    <slot name="top"></slot>
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       class="dt-message-input__editor-wrapper"
