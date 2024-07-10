@@ -9,7 +9,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Base default medium text style for main content."
       },
       "md-compact": {
         "value": {
@@ -19,7 +20,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of medium body style."
       },
       "sm": {
         "value": {
@@ -29,7 +31,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Reduced small text style for less prominent or adjacent content."
       },
       "sm-compact": {
         "value": {
@@ -39,7 +42,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of small body style."
       }
     },
     "headline": {
@@ -51,7 +55,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.uppercase}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
       },
       "sm": {
         "value": {
@@ -61,7 +66,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Smaller text size for secondary information or subheadings."
       },
       "sm-compact": {
         "value": {
@@ -71,7 +77,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of small headline style."
       },
       "sm-soft": {
         "value": {
@@ -81,7 +88,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A softer font weight version of small headline style."
       },
       "sm-soft-compact": {
         "value": {
@@ -91,7 +99,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A softer font weight, tighter-spaced version of small headline style."
       },
       "md": {
         "value": {
@@ -101,7 +110,8 @@
           "fontSize": "{font.size.300}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Medium-sized base text style for headlines."
       },
       "md-compact": {
         "value": {
@@ -111,7 +121,8 @@
           "fontSize": "{font.size.300}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of medium headline style."
       },
       "lg": {
         "value": {
@@ -121,7 +132,8 @@
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Large text style for headlines to attract attention."
       },
       "lg-soft": {
         "value": {
@@ -131,7 +143,8 @@
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A softer font weight version of large headline style."
       },
       "lg-compact": {
         "value": {
@@ -141,7 +154,8 @@
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of large body style."
       },
       "lg-soft-compact": {
         "value": {
@@ -151,7 +165,8 @@
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A softer font weight, tighter spaced version of large headline style."
       },
       "xl": {
         "value": {
@@ -161,7 +176,8 @@
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Extra large text style for high importance headlines."
       },
       "xl-compact": {
         "value": {
@@ -171,7 +187,8 @@
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of extra large headline style."
       },
       "xxl": {
         "value": {
@@ -181,7 +198,8 @@
           "fontSize": "{font.size.600}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Largest text style for extra extra large content."
       },
       "xxl-compact": {
         "value": {
@@ -191,7 +209,8 @@
           "fontSize": "{font.size.600}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of extra extra large headline style."
       }
     },
     "label": {
@@ -203,7 +222,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Base default medium-sized text style for labels, providing clear identification and categorization."
       },
       "md-compact": {
         "value": {
@@ -213,7 +233,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of medium label style."
       },
       "md-plain": {
         "value": {
@@ -223,7 +244,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A non-bold version of medium label style."
       },
       "md-plain-compact": {
         "value": {
@@ -233,7 +255,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A non-bolded, tighter-spaced version of medium label style."
       },
       "sm": {
         "value": {
@@ -243,7 +266,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy."
       },
       "sm-compact": {
         "value": {
@@ -253,7 +277,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A tighter-spaced version of small label style."
       },
       "sm-plain": {
         "value": {
@@ -263,7 +288,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A non-bold version of small label style."
       },
       "sm-plain-compact": {
         "value": {
@@ -273,7 +299,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "A non-bolded, tighter-spaced version of small label style."
       }
     },
     "helper": {
@@ -285,7 +312,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Base default medium-sized text style for supplementary contextual information."
       },
       "sm": {
         "value": {
@@ -295,7 +323,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption."
       }
     },
     "code": {
@@ -307,7 +336,8 @@
           "fontSize": "{font.size.200}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Base default medium-sized text style for monospace code snippets of technical content."
       },
       "sm": {
         "value": {
@@ -317,7 +347,8 @@
           "fontSize": "{font.size.100}",
           "textCase": "{font.text-case.none}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
       }
     }
   },
