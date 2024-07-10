@@ -57,34 +57,6 @@
           "planned": true
         },
         {
-          "text": "Content Guidelines",
-          "link": "guides/content"
-        },
-        {
-          "text": "Action Language",
-          "link": "/guides/content/action-language/"
-        },
-        {
-          "text": "Error Messages",
-          "link": "/guides/content/error-messages/"
-        },
-        {
-          "text": "Grammar and Mechanics",
-          "link": "/guides/content/grammar-and-mechanics/"
-        },
-        {
-          "text": "Help Content",
-          "link": "/guides/content/help-content/"
-        },
-        {
-          "text": "Inclusive Language",
-          "link": "/guides/content/inclusive-language/"
-        },
-        {
-          "text": "Voice and Tone",
-          "link": "/guides/content/voice-and-tone/"
-        },
-        {
           "text": "Accessibility",
           "link": "/guides/accessibility/"
         },
@@ -97,6 +69,37 @@
           "text": "Design Assets",
           "link": "/guides/design-assets/",
           "planned": true
+        }
+      ]
+    }
+  ],
+  "/content": [
+    {
+      "text": "Content",
+      "children": [
+        {
+          "text": "Action Language",
+          "link": "/content/action-language/"
+        },
+        {
+          "text": "Error Messages",
+          "link": "/content/error-messages/"
+        },
+        {
+          "text": "Grammar and Mechanics",
+          "link": "/content/grammar-mechanics/"
+        },
+        {
+          "text": "Help Content",
+          "link": "/content/help-content/"
+        },
+        {
+          "text": "Inclusive Language",
+          "link": "/content/inclusive-language/"
+        },
+        {
+          "text": "Voice and Tone",
+          "link": "/content/voice-tone/"
         }
       ]
     }

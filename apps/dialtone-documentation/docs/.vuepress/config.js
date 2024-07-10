@@ -20,6 +20,7 @@ const themeConfig = {
     { text: 'Components', link: '/components/' },
     { text: 'Utilities', link: '/utilities/' },
     { text: 'Tokens', link: '/tokens/' },
+    { text: 'Content', link: '/content/' },
     { text: 'Guides', link: '/guides/' },
     { text: 'About', link: '/about/dialtone' },
   ],
