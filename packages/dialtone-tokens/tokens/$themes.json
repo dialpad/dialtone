@@ -347,7 +347,8 @@
       "badge.color.background.bulletin-subtle": "S:e650cf4f07f00aaf67283b72b59a0afe60a1e5b4,",
       "badge.color.foreground.bulletin-subtle": "S:8d9a5c94e0c27f7268f0d3e716679a03f8f2355e,",
       "badge.color.border.default": "S:a3c79a6d4fdc38b4210fbd9bce3267204acf3dea,",
-      "badge.color.border.bulletin-subtle": "S:c390f0a63586ca48aac6566934330ee1847e2ca3,"
+      "badge.color.border.bulletin-subtle": "S:c390f0a63586ca48aac6566934330ee1847e2ca3,",
+      "color.brand.gold": "S:a93609c07d43bca028d6298b018416a767db8e0f,"
     },
     "selectedTokenSets": {
       "base/default": "enabled",
