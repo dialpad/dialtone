@@ -11,11 +11,11 @@ image: assets/images/components/scroller.png
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 <code-well-header>
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
+  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
     <div v-for="item in items" class="item">
       {{ item}}
     </div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -110,9 +110,7 @@ This can make it challenging to use with components that rely on event listeners
 <style lang="less" scoped>
 .item {
   padding: var(--dt-space-300) var(--dt-space-400);
-  display: flex;
-  align-items: center;
-border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-default);
+  border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-default);
   &:last-child {
     border-bottom: none;
   }
