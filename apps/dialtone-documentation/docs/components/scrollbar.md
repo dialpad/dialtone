@@ -20,7 +20,8 @@ Allows to add overlay scrollbars that will look the same for every browser. The 
 
 <code-example-tabs
 htmlCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default scrollbar" data-overlayscrollbars="host" data-overlayscrollbars-initialize="true">
+<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default scrollbar" data-overlayscrollbars="host"
+  data-overlayscrollbars-initialize="true">
   <div class="os-size-observer">
     <div class="os-size-observer-listener"></div>
   </div>
@@ -28,12 +29,14 @@ htmlCode='
     <div class="item">user 1</div>
     ...
   </div>
-  <div class="os-scrollbar os-scrollbar-horizontal os-theme-dark os-scrollbar-auto-hide os-scrollbar-handle-interactive os-scrollbar-cornerless os-scrollbar-unusable">
+  <div class="os-scrollbar os-scrollbar-horizontal os-theme-dark os-scrollbar-auto-hide
+  os-scrollbar-handle-interactive os-scrollbar-cornerless os-scrollbar-unusable">
     <div class="os-scrollbar-track">
       <div class="os-scrollbar-handle"></div>
     </div>
   </div>
-  <div class="os-scrollbar os-scrollbar-vertical os-theme-dark os-scrollbar-auto-hide os-scrollbar-handle-interactive os-scrollbar-visible os-scrollbar-cornerless">
+  <div class="os-scrollbar os-scrollbar-vertical os-theme-dark os-scrollbar-auto-hide
+  os-scrollbar-handle-interactive os-scrollbar-visible os-scrollbar-cornerless">
     <div class="os-scrollbar-track">
       <div class="os-scrollbar-handle"></div>
     </div>
