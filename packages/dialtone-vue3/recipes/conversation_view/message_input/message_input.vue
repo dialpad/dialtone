@@ -11,7 +11,7 @@
     @paste="onPaste"
   >
     <!-- @slot Renders above the input, but still within the borders. -->
-    <slot name="top"></slot>
+    <slot name="top" />
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       class="dt-message-input__editor-wrapper"
@@ -748,12 +748,6 @@ export default {
   border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-default);
   cursor: text;
-
-  &__bottom-section-left {
-    .d-btn {
-      color: var(--dt-color-foreground-muted);
-    }
-  }
 
   &--focused {
     border-color: var(--dt-color-border-bold);
