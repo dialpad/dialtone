@@ -347,7 +347,8 @@
       "badge.color.background.bulletin-subtle": "S:e650cf4f07f00aaf67283b72b59a0afe60a1e5b4,",
       "badge.color.foreground.bulletin-subtle": "S:8d9a5c94e0c27f7268f0d3e716679a03f8f2355e,",
       "badge.color.border.default": "S:a3c79a6d4fdc38b4210fbd9bce3267204acf3dea,",
-      "badge.color.border.bulletin-subtle": "S:c390f0a63586ca48aac6566934330ee1847e2ca3,"
+      "badge.color.border.bulletin-subtle": "S:c390f0a63586ca48aac6566934330ee1847e2ca3,",
+      "color.brand.gold": "S:a93609c07d43bca028d6298b018416a767db8e0f,"
     },
     "selectedTokenSets": {
       "base/default": "enabled",
@@ -1253,7 +1254,8 @@
       "badge.color.background.bulletin-subtle": "S:8e3eb135f8794fe637f8a5976e8cd734fe59de27,",
       "badge.color.foreground.bulletin-subtle": "S:eca65ece40ceb2a65b393f0d5e207e533aeb6b3a,",
       "badge.color.border.bulletin-subtle": "S:4d9da10ca0ac983573d06e53ec82a52d8ae9828d,",
-      "badge.color.border.default": "S:483e34d8dfd52676a36a7544a406eff463931833,"
+      "badge.color.border.default": "S:483e34d8dfd52676a36a7544a406eff463931833,",
+      "color.brand.gold": "S:51dcb29f80476ac7a56cbe1ffe849c771b9da67f,"
     },
     "selectedTokenSets": {
       "base/dark": "enabled",
@@ -3633,7 +3635,8 @@
       "shadow.extraLarge": "S:0b34dac462e80c46d9a9f94294beb90cf4949e5c,",
       "shadow.card": "S:231f3972c60d9ea98e7ade375984f49cadf1504f,",
       "shadow.focus": "S:aa690ee3f437645407cf292aa6c7cf0fcb09071a,",
-      "shadow.focus-inset": "S:cbfb7176be6801456a23e70fa237564e4795ae11,"
+      "shadow.focus-inset": "S:cbfb7176be6801456a23e70fa237564e4795ae11,",
+      "color.brand.gold": "S:533de62a1316c0294dc795f9bff9092aff638ffd,"
     },
     "selectedTokenSets": {
       "root": "source",
