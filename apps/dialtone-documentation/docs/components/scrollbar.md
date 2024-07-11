@@ -80,23 +80,7 @@ see [variants](#variants).
 
 ## Variants
 
-To customize the behavior of the scrollbar, you can use different arguments with the directive. The allowed arguments are 'never', 'scroll', 'leave' (default), and 'move'.
-
-### Never
-
-Always show the scrollbar if the region is overflowing the available space.
-
-```javascript
-<div v-dt-scrollbar:never></div>
-```
-
-### Scroll
-
-Show the scrollbar on scroll.
-
-```javascript
-<div v-dt-scrollbar:scroll></div>
-```
+To customize the behavior of the scrollbar, you can use different arguments with the directive. The allowed arguments are 'leave' (default), 'never', 'scroll', and 'move'.
 
 ### Leave (default option)
 
@@ -106,6 +90,46 @@ Show the scrollbar when the mouse enters the scrollable area. This is the defaul
 <div v-dt-scrollbar></div>
 ```
 
+<code-well-header>
+  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
+    <div v-for="item in items" class="item">
+      {{ item}}
+    </div>
+  </dt-stack>
+</code-well-header>
+
+### Never
+
+Always show the scrollbar if the region is overflowing the available space.
+
+```javascript
+<div v-dt-scrollbar:never></div>
+```
+
+<code-well-header>
+  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:never>
+    <div v-for="item in items" class="item">
+      {{ item}}
+    </div>
+  </dt-stack>
+</code-well-header>
+
+### Scroll
+
+Show the scrollbar on scroll.
+
+```javascript
+<div v-dt-scrollbar:scroll></div>
+```
+
+<code-well-header>
+  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:scroll>
+    <div v-for="item in items" class="item">
+      {{ item}}
+    </div>
+  </dt-stack>
+</code-well-header>
+
 ### Move
 
 Show the scrollbar when the mouse moves inside the scrollable area.
@@ -113,6 +137,14 @@ Show the scrollbar when the mouse moves inside the scrollable area.
 ```javascript
 <div v-dt-scrollbar:move></div>
 ```
+
+<code-well-header>
+  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:move>
+    <div v-for="item in items" class="item">
+      {{ item}}
+    </div>
+  </dt-stack>
+</code-well-header>
 
 ## Limitations
 
