@@ -70,9 +70,46 @@ There is no need to explicitly add an `overflow` property. If the section overfl
 
 * Has an overlay style: it appears on top of the content rather than the scrollbar taking up space within the container.
 * It grows when hovering the scrollbar handle for better accessibility.
-* Appears on scroll over the scrollable area.
+* Appears when the mouse enters the scrollable area and disappears on mouse out after a certain time. This can be customized,
+see [variants](#variants).
 * The look and feel will be the same for every browser and OS.
 * Emulates a browser's native scrollbar keyboard and mouse events.
+
+## Variants
+
+To customize the behavior of the scrollbar, you can use different arguments with the directive. The allowed arguments are 'never', 'scroll', 'leave' (default), and 'move'.
+
+### Never
+
+Always show the scrollbar if the region is overflowing the available space.
+
+```javascript
+<div v-dt-scrollbar:never></div>
+```
+
+### Scroll
+
+Show the scrollbar on scroll.
+
+```javascript
+<div v-dt-scrollbar:scroll></div>
+```
+
+### Leave (default option)
+
+Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no argument is needed.
+
+```javascript
+<div v-dt-scrollbar></div>
+```
+
+### Move
+
+Show the scrollbar when the mouse moves inside the scrollable area.
+
+```javascript
+<div v-dt-scrollbar:move></div>
+```
 
 ## Limitations
 
