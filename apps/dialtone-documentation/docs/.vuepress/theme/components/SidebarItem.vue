@@ -1,59 +1,107 @@
 <template>
-  <li>
-    <h3
-      class="d-headline--eyebrow d-fw-semibold d-pl12 d-pt8 d-pb8 d-fc-secondary"
-      v-text="item.text"
-    />
-    <dt-stack
-      as="ul"
-      class="d-pl0"
-      gap="200"
-    >
-      <li
-        v-for="subItem in subItems"
-        :key="subItem.text"
+  <dt-collapsible
+    element-type="li"
+    max-width="100%"
+    :open="isOpen"
+  >
+    <template #anchor="{ attrs }">
+      <dt-stack
+        direction="row"
+        class="d-ps-relative"
       >
         <router-link
-          v-if="!subItem.planned"
-          v-slot="{ href, navigate, isExactActive }"
-          :to="subItem.link"
+          v-slot="{ navigate, isExactActive }"
+          :to="item.link ?? ''"
           custom
         >
-          <a
-            :href="href"
+          <dt-button
+            importance="clear"
+            kind="muted"
+            label-class="d-jc-flex-start"
             :class="[
-              itemClass,
+              'd-headline--eyebrow d-fw-semibold d-fc-secondary',
+              'd-bar-pill d-mb2 d-w100p d-us-none d-td-none',
               {
-                'd-btn--active d-fw-medium': isActiveLink(isExactActive, subItem.link),
+                'd-btn--active d-fw-medium': isActiveLink(isExactActive, item.link),
+                'd-bgc-transparent d-c-default': !item.link,
               },
             ]"
-            @click="navigate"
+            @click="handleAnchorClick(navigate, item.link)"
+          >
+            {{ item.text }}
+          </dt-button>
+        </router-link>
+        <dt-button
+          v-bind="attrs"
+          class="d-ps-absolute d-r0 d-t0"
+          circle
+          importance="clear"
+          @click="isOpen = !isOpen"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon
+              :name="isOpen ? 'chevron-down' : 'chevron-right'"
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+      </dt-stack>
+    </template>
+    <template #content>
+      <dt-stack
+        as="ul"
+        class="d-pl8"
+        gap="200"
+      >
+        <li
+          v-for="subItem in subItems"
+          :key="subItem.text"
+        >
+          <sidebar-item v-if="subItem.children" :item="subItem" />
+          <router-link
+            v-else-if="!subItem.planned"
+            v-slot="{ navigate, isExactActive }"
+            :to="subItem.link"
+            custom
+          >
+            <dt-button
+              importance="clear"
+              kind="muted"
+              label-class="d-jc-flex-start"
+              :class="[
+                'd-bar-pill d-w100p d-jc-flex-start d-fw-normal d-fc-primary',
+                'd-mb2 d-us-none',
+                {
+                  'd-btn--active d-fw-medium': isActiveLink(isExactActive, subItem.link),
+                },
+              ]"
+              @click="navigate"
+            >
+              {{ subItem.text }}
+            </dt-button>
+          </router-link>
+          <div
+            v-else
+            class="d-btn d-w100p d-jc-flex-start d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
           >
             {{ subItem.text }}
-          </a>
-        </router-link>
-        <div
-          v-else
-          class="d-btn d-w100p d-jc-flex-start d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
-        >
-          {{ subItem.text }}
-          <dt-badge
-            v-if="subItem.planned"
-            class="d-fw-normal d-ml4"
-          >
-            Planned
-          </dt-badge>
-        </div>
-      </li>
-    </dt-stack>
-  </li>
+            <dt-badge
+              v-if="subItem.planned"
+              class="d-fw-normal d-ml4"
+            >
+              Planned
+            </dt-badge>
+          </div>
+        </li>
+      </dt-stack>
+    </template>
+  </dt-collapsible>
 </template>
 
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-const itemClass = 'd-btn d-btn--muted d-bar-pill d-w100p d-jc-flex-start d-fw-normal d-fc-primary';
 const props = defineProps({
   isSinglePage: {
     type: Boolean,
@@ -69,6 +117,7 @@ const subItems = computed(() => {
 });
 const route = useRoute();
 const hash = ref(route.hash);
+const isOpen = ref(true);
 
 watch(route, newRoute => {
   hash.value = newRoute.hash;
@@ -77,7 +126,14 @@ watch(route, newRoute => {
 // isExactActive from the router-link doesn't work with hashes,
 // that's why we need to check for the hash if it's a single page
 const isActiveLink = (isExactActive, link) => {
+  if (!link) return false;
   if (props.isSinglePage) return hash.value === link;
   return isExactActive;
 };
+
+function handleAnchorClick (navigate, link) {
+  isOpen.value = true;
+  if (!link) return;
+  navigate();
+}
 </script>

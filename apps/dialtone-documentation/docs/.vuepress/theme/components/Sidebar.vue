@@ -5,7 +5,7 @@
   <dt-stack
     v-if="sidebarItems[0]?.children.length"
     as="ul"
-    gap="500"
+    gap="200"
     class="dialtone-sidebar__list"
   >
     <sidebar-item
