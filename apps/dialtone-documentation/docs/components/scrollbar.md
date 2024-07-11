@@ -11,11 +11,13 @@ image: assets/images/components/scroller.png
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 <code-well-header>
-  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
-    <div v-for="item in items" class="item">
-      {{ item}}
-    </div>
-  </dt-stack>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
+    <dt-stack>
+      <div v-for="item in items" class="item">
+        {{ item}}
+      </div>
+    </dt-stack>
+  </div>
 </code-well-header>
 
 <code-example-tabs
@@ -45,9 +47,11 @@ htmlCode='
 '
 vueCode='
 <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
-  <div v-for="item in items" class="item">
-    {{ item}}
-  </div>
+  <dt-stack>
+    <div v-for="item in items" class="item">
+      {{ item}}
+    </div>
+  </dt-stack>
 </div>
 '
 />
@@ -82,7 +86,7 @@ see [variants](#variants).
 
 To customize the behavior of the scrollbar, you can use different arguments with the directive. The allowed arguments are 'leave' (default), 'never', 'scroll', and 'move'.
 
-### Enter (default option)
+### Enter (default)
 
 Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no argument is needed.
 
@@ -148,7 +152,8 @@ Show the scrollbar when the mouse moves inside the scrollable area.
 
 ## Limitations
 
-Adding this directive to a DOM element or a Vue component will alter the DOM structure, by adding four elements inside the one that the directive was attached to.
+Adding this directive to a DOM element or a Vue component will alter the DOM structure, by adding four elements inside the one that the directive was attached to. If the scrollable region is a Vue component, it's recommended to wrap it in a `<div v-dt-scrollbars></div>`, to avoid altering the structure
+that the component needs.
 
 The added elements are:
 
