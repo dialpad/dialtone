@@ -48,7 +48,7 @@ describe('DtScrollbarDirective Tests', () => {
       });
 
       it('should setup directive', () => {
-        expect(OverlayScrollbars).toHaveBeenCalledWith(wrapper.element, { scrollbars: { autoHide: 'leave' } });
+        expect(OverlayScrollbars).toHaveBeenCalledWith(wrapper.element, { scrollbars: { autoHide: 'leave', clickScroll: true } });
         expect(OverlayScrollbars).toHaveBeenCalledTimes(1);
         expect(wrapper.element.getAttribute('data-overlayscrollbars-initialize')).toBe('true');
         expect(wrapper.element.classList.contains('scrollbar')).toBe(true);
