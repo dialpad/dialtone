@@ -20,7 +20,7 @@ Allows to add overlay scrollbars that will look the same for every browser. The 
 
 <code-example-tabs
 htmlCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default custom-scrollbars" data-overlayscrollbars="host" data-overlayscrollbars-initialize="true">
+<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default scrollbar" data-overlayscrollbars="host" data-overlayscrollbars-initialize="true">
   <div class="os-size-observer">
     <div class="os-size-observer-listener"></div>
   </div>
@@ -68,12 +68,11 @@ Add a `max-height` to the element if you want to set up a vertical scrollbar, or
 
 ## Characteristics
 
-* Has an overlay style: it appears on top of the content rather than the scrollbar taking up space within the container
-* It grows when hovering the scrollbar handle for better accessibility
-* Appears on scroll over the scrollable area
-* The look and feel will be the same for every browser and OS
+* Has an overlay style: it appears on top of the content rather than the scrollbar taking up space within the container.
+* It grows when hovering the scrollbar handle for better accessibility.
+* Appears on scroll over the scrollable area.
+* The look and feel will be the same for every browser and OS.
 * Emulates a browser's native scrollbar keyboard and mouse events.
-* ```
 
 ## Limitations
 
@@ -110,7 +109,7 @@ This can make it challenging to use with components that rely on event listeners
 
 <style lang="less" scoped>
 .item {
-  padding: var(--dt-space-300) var(--dt-space-400); 
+  padding: var(--dt-space-300) var(--dt-space-400);
   display: flex;
   align-items: center;
 border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-default);

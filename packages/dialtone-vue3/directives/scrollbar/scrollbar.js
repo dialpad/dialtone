@@ -8,7 +8,7 @@ export const DtScrollbarDirective = {
       mounted (el) {
         OverlayScrollbars(el, { scrollbars: { autoHide: 'scroll' } });
         el.setAttribute('data-overlayscrollbars-initialize', true);
-        el.classList.add('custom-scrollbars');
+        el.classList.add('scrollbar');
       },
     });
   },

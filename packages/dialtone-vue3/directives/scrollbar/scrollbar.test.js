@@ -51,7 +51,7 @@ describe('DtScrollbarDirective Tests', () => {
         expect(OverlayScrollbars).toHaveBeenCalledWith(wrapper.element, { scrollbars: { autoHide: 'scroll' } });
         expect(OverlayScrollbars).toHaveBeenCalledTimes(1);
         expect(wrapper.element.getAttribute('data-overlayscrollbars-initialize')).toBe('true');
-        expect(wrapper.element.classList.contains('custom-scrollbars')).toBe(true);
+        expect(wrapper.element.classList.contains('scrollbar')).toBe(true);
       });
     });
   });
