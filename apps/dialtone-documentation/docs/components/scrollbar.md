@@ -1,6 +1,6 @@
 ---
 title: Scrollbar
-description: A directive that adds customized overlay scrollbars to any scrollable section.
+description: A directive that adds a custom overlay scrollbar to any scrollable region.
 status: beta
 thumb: true
 image: assets/images/components/scroller.png
@@ -11,7 +11,7 @@ image: assets/images/components/scroller.png
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 <code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-black-300" v-dt-scrollbar>
+<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
     <div v-for="item in items" class="item">
       {{ item}}
     </div>
@@ -20,7 +20,7 @@ Allows to add overlay scrollbars that will look the same for every browser. The 
 
 <code-example-tabs
 htmlCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-black-300 custom-scrollbars" data-overlayscrollbars="host" data-overlayscrollbars-initialize="true">
+<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default custom-scrollbars" data-overlayscrollbars="host" data-overlayscrollbars-initialize="true">
   <div class="os-size-observer">
     <div class="os-size-observer-listener"></div>
   </div>
@@ -41,7 +41,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-black-300" v-dt-scrollbar>
+<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
   <div v-for="item in items" class="item">
     {{ item}}
   </div>
@@ -63,7 +63,7 @@ Install the directive into vue instance
 Vue.use(DtScrollbarDirective);
 ```
 
-To add customized overlay scrollbars to a scrollable section, simply include the `v-dt-scrollbar` directive on the desired element.
+To add a custom overlay scrollbar to a scrollable region, apply the `v-dt-scrollbar` directive to the desired region.
 Add a `max-height` to the element if you want to set up a vertical scrollbar, or a `max-width` if you want to set up a horizontal scrollbar.
 
 ## Characteristics
@@ -72,7 +72,8 @@ Add a `max-height` to the element if you want to set up a vertical scrollbar, or
 * It grows when hovering the scrollbar handle for better accessibility
 * Appears on scroll over the scrollable area
 * The look and feel will be the same for every browser and OS
-* Responds to the keyword events just like the native scrollbar.
+* Emulates a browser's native scrollbar keyboard and mouse events.
+* ```
 
 ## Limitations
 
@@ -109,11 +110,10 @@ This can make it challenging to use with components that rely on event listeners
 
 <style lang="less" scoped>
 .item {
-  height: 25px;
-  padding: 0 12px;
+  padding: var(--dt-space-300) var(--dt-space-400); 
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--dt-color-black-300);
+border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-default);
   &:last-child {
     border-bottom: none;
   }

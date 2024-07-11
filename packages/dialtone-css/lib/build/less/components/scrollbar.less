@@ -1,7 +1,7 @@
 .custom-scrollbars {
   .os-theme-dark {
     // main color for the scrollbars handle
-    --os-handle-color: var(--dt-color-black-800);
+    --os-handle-color: var(--dt-color-surface-contrast);
     --os-handle-bg: var(--os-handle-color);
     --os-handle-bg-hover: var(--os-handle-color);
     --os-handle-bg-active: var(--os-handle-color);
@@ -10,15 +10,15 @@
   .os-scrollbar {
     .os-scrollbar-handle {
       cursor: auto;
-      opacity: 0.44;
+      opacity: var(--dt-opacity-700);
 
       &:hover {
         width: calc(var(--os-handle-perpendicular-size) + var(--dt-size-200));
-        opacity: 0.55;
+        opacity: var(--dt-opacity-800);
       }
 
       &:active {
-        opacity: 0.66;
+        opacity: var(--dt-opacity-900);
       }
     }
   }
