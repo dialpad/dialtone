@@ -82,7 +82,7 @@ see [variants](#variants).
 
 To customize the behavior of the scrollbar, you can use different arguments with the directive. The allowed arguments are 'leave' (default), 'never', 'scroll', and 'move'.
 
-### Leave (default option)
+### Enter (default option)
 
 Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no argument is needed.
 
@@ -98,7 +98,7 @@ Show the scrollbar when the mouse enters the scrollable area. This is the defaul
   </dt-stack>
 </code-well-header>
 
-### Never
+### Always
 
 Always show the scrollbar if the region is overflowing the available space.
 
