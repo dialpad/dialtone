@@ -315,6 +315,13 @@ export default {
      * @type {FocusEvent}
      */
     'focus',
+
+    /**
+     * Enter was pressed. Note that shift enter must be pressed to line break the input.
+     * @event enter
+     * @type {String}
+     */
+    'enter',
   ],
 
   data () {
@@ -385,14 +392,20 @@ export default {
           HardBreak.extend({
             addKeyboardShortcuts () {
               return {
-                Enter: () => true,
-                'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
-                  () => commands.newlineInCode(),
-                  () => self.allowBulletList && commands.splitListItem('listItem'),
-                  () => commands.createParagraphNear(),
-                  () => commands.liftEmptyBlock(),
-                  () => commands.splitBlock(),
-                ]),
+                Enter: () => {
+                  self.$emit('enter');
+                  return true;
+                },
+                'Shift-Enter': () => {
+                  this.editor.commands.first(({ commands }) => [
+                    () => commands.newlineInCode(),
+                    () => self.allowBulletList && commands.splitListItem('listItem'),
+                    () => commands.createParagraphNear(),
+                    () => commands.liftEmptyBlock(),
+                    () => commands.splitBlock(),
+                  ]);
+                  return true;
+                },
               };
             },
           }),
