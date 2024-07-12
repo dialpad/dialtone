@@ -51,14 +51,16 @@ export default {
     replaceDtEmojis (replaceList, textContent) {
       const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
       const split = textContent.split(regexp);
-      return split.map((item) => {
-        if (replaceList.includes(item)) {
-          return this.$createElement(DtEmoji, {
-            props: { code: item, size: this.size },
-          });
-        }
-        return this.$createElement('span', item);
-      });
+      return split
+        .filter(item => item.trim() !== '')
+        .map((item) => {
+          if (replaceList.includes(item)) {
+            return this.$createElement(DtEmoji, {
+              props: { code: item, size: this.size },
+            });
+          }
+          return item;
+        });
     },
 
     /**
@@ -101,9 +103,15 @@ export default {
     return h(
       this.elementType,
       { class: 'd-emoji-text-wrapper' },
-      this.loadingEmojiJson
-        ? defaultSlotContent
-        : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
+      [
+        h(
+          'div',
+          { class: 'd-emoji-text-wrapper__container' },
+          this.loadingEmojiJson
+            ? defaultSlotContent
+            : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
+        ),
+      ],
     );
   },
 };

@@ -1,5 +1,10 @@
 .d-emoji-text-wrapper {
-  .d-icon {
-    vertical-align: top;
+  display: flex !important;
+  align-items: center;
+
+  &__container {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
