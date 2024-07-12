@@ -52,12 +52,14 @@ export default {
     replaceDtEmojis (replaceList, textContent) {
       const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
       const split = textContent.split(regexp);
-      return split.map((item) => {
-        if (replaceList.includes(item)) {
-          return h(DtEmoji, { size: this.size, code: item });
-        }
-        return h('span', item);
-      });
+      return split
+        .filter(item => item.trim() !== '')
+        .map((item) => {
+          if (replaceList.includes(item)) {
+            return h(DtEmoji, { size: this.size, code: item });
+          }
+          return item;
+        });
     },
 
     /**
@@ -102,9 +104,15 @@ export default {
         'data-qa': 'emoji-text-wrapper',
         class: 'd-emoji-text-wrapper',
       },
-      this.loadingEmojiJson
-        ? defaultSlotContent
-        : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
+      [
+        h(
+          'div',
+          { class: 'd-emoji-text-wrapper__container' },
+          this.loadingEmojiJson
+            ? defaultSlotContent
+            : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
+        ),
+      ],
     );
   },
 };
