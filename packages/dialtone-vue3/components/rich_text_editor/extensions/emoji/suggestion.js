@@ -6,6 +6,7 @@ import SuggestionList from '../suggestion/SuggestionList.vue';
 import EmojiSuggestion from './EmojiSuggestion.vue';
 
 import tippy from 'tippy.js';
+import hideOnEsc from '../tippy_plugins/hide_on_esc';
 
 export default {
   items: ({ query }) => {
@@ -53,6 +54,7 @@ export default {
   render: () => {
     let component;
     let popup;
+    let popupIsOpen = false;
 
     return {
       onStart: props => {
@@ -73,35 +75,38 @@ export default {
           getReferenceClientRect: props.clientRect,
           appendTo: () => document.body,
           content: component.element,
-          showOnCreate: true,
+          showOnCreate: false,
+          onShow: () => { popupIsOpen = true; },
+          onHidden: () => { popupIsOpen = false; },
           interactive: true,
           trigger: 'manual',
           placement: 'top-start',
           zIndex: 650,
+          plugins: [hideOnEsc],
         });
+
+        if (props.items.length > 0) {
+          popup?.[0].show();
+        }
       },
 
       onUpdate (props) {
         component?.updateProps(props);
 
-        if (!props.clientRect) {
-          return;
+        if (props.items.length > 0) {
+          popup?.[0].show();
+        } else {
+          popup?.[0].hide();
         }
-
         popup?.[0].setProps({
           getReferenceClientRect: props.clientRect,
         });
       },
 
       onKeyDown (props) {
-        if (!popup) return true;
-        if (props.event.key === 'Escape') {
-          popup?.[0].hide();
-
-          return true;
+        if (popupIsOpen) {
+          return component?.ref?.onKeyDown(props);
         }
-
-        return component?.ref?.onKeyDown(props);
       },
 
       onExit () {

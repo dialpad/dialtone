@@ -1,5 +1,5 @@
 <template>
-  <div class="d-popover__dialog d-hmx216">
+  <div class="d-popover__dialog dt-suggestion-list__container">
     <ul
       v-show="items.length"
       ref="suggestionList"
@@ -14,7 +14,7 @@
         ]"
         navigation-type="arrow-keys"
         @click="selectItem(index)"
-        @keydown.prevent.stop="onKeyDown"
+        @keydown.prevent="onKeyDown"
       >
         <component
           :is="itemComponent"
@@ -100,7 +100,8 @@ export default {
       this.scrollActiveElementIntoView();
     },
 
-    scrollActiveElementIntoView () {
+    async scrollActiveElementIntoView () {
+      await this.$nextTick();
       const activeElement = this.$refs.suggestionList.querySelector('.dt-list-item--highlighted');
       if (activeElement) {
         activeElement.scrollIntoView({
@@ -137,6 +138,10 @@ export default {
 </script>
 
 <style>
+.dt-suggestion-list__container {
+  max-height: var(--dt-size-875);
+}
+
 .dt-suggestion-list {
   position: relative;
   padding: var(--dt-size-300);
