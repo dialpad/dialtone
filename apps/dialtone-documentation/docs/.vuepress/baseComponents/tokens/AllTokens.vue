@@ -5,7 +5,6 @@
     v-model:theme="theme"
     @filter="filterTokens"
   />
-  <tokens-toc :headers="filteredHeaders" />
   <div
     v-if="noSearchResults"
     class="d-d-flex d-fl-center d-p16 d-gg4 d-fc-tertiary d-fs-300"
@@ -21,10 +20,9 @@
 <script setup>
 import { capitalize, computed, ref, onBeforeMount } from 'vue';
 import TokenTree from './TokenTree.vue';
-import TokensToc from './TokensToc.vue';
 import TokensBar from './TokensBar.vue';
 import { addComposedTokens, addTokensToStructure } from './utilities';
-import { useRoute } from 'vue-router';
+import { onBeforeRouteLeave, useRoute } from 'vue-router';
 
 const route = useRoute();
 const format = ref(route.query.format || 'CSS');
@@ -92,6 +90,7 @@ const noSearchResults = computed(() => filteredTokens.value === null);
 const updateHeaders = () => {
   if (filteredTokens.value === null) return [];
   filteredHeaders.value = updateHeadersRecursively(filteredTokens.value, null);
+  localStorage.setItem('filteredHeaders', JSON.stringify(filteredHeaders.value));
 };
 
 const updateHeadersRecursively = (node, category) => {
@@ -102,6 +101,9 @@ const updateHeadersRecursively = (node, category) => {
         title: capitalize(subNodeKey),
         level: 2,
         slug: category === null ? subNodeKey : `${category}-${subNodeKey}`,
+        get link () {
+          return `#${this.slug}`;
+        },
         children: updateHeadersRecursively(node[subNodeKey], category === null ? subNodeKey : category),
       };
     });
@@ -111,5 +113,9 @@ onBeforeMount(() => {
   addTokensToStructure(processedTokens);
   addComposedTokens(processedTokens);
   filterTokens();
+});
+
+onBeforeRouteLeave(() => {
+  localStorage.removeItem('filteredHeaders');
 });
 </script>

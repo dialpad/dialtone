@@ -170,3 +170,12 @@ export const WithMaxSelectValidation = {
     },
   },
 };
+
+export const DuplicatedNames = {
+  render: (argsData) =>
+    createRenderConfig(DtRecipeComboboxMultiSelect, DtRecipeComboboxMultiSelectDefaultTemplate, argsData),
+
+  args: {
+    selectedItems: ['item12', 'item12', 'item12'],
+  },
+};

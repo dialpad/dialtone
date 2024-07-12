@@ -230,6 +230,11 @@
         "value": "#F9008E",
         "type": "color",
         "description": "Secondary brand color, typically used as an accent color."
+      },
+      "gold": {
+        "value": "#F6AB3C",
+        "type": "color",
+        "description": "Secondary brand color, typically used as an accent color."
       }
     }
   },

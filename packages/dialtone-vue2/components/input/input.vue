@@ -1,10 +1,11 @@
 <template>
   <div
     ref="container"
-    :class="{ 'd-input--hidden': hidden }"
+    :class="['d-input__root', { 'd-input--hidden': hidden }]"
     data-qa="dt-input"
   >
     <label
+      class="d-input__label"
       :aria-details="$slots.description || description ? descriptionKey : undefined"
       data-qa="dt-input-label-wrapper"
     >
@@ -15,6 +16,7 @@
           ref="label"
           data-qa="dt-input-label"
           :class="[
+            'd-input__label-text',
             'd-label',
             labelSizeClasses[size],
           ]"
@@ -27,6 +29,7 @@
         :id="descriptionKey"
         ref="description"
         :class="[
+          'd-input__description',
           'd-description',
           descriptionSizeClasses[size],
         ]"
@@ -483,7 +486,7 @@ export default {
     },
 
     stateClass () {
-      return [INPUT_STATE_CLASSES[this.inputComponent][this.inputState]];
+      return [INPUT_STATE_CLASSES[this.inputState]];
     },
   },
 
@@ -514,6 +517,7 @@ export default {
   methods: {
     inputClasses () {
       return [
+        'd-input__input',
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         {
           [this.stateClass]: this.showInputState,
