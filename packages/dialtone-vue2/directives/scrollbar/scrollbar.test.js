@@ -33,17 +33,22 @@ describe('DtScrollbarDirective Tests', () => {
     testContext.localVue = createLocalVue();
     testContext.localVue.use(DtScrollbarDirective);
 
+    // Mock the overlayscrollbars plugin
     vi.mock('overlayscrollbars', () => {
+      const mockPlugin = vi.fn(); // Mock the plugin method
+      const OverlayScrollbarsMock = vi.fn().mockImplementation(() => ({}));
+      OverlayScrollbarsMock.plugin = mockPlugin;
       return {
-        OverlayScrollbars: vi.fn(),
+        OverlayScrollbars: OverlayScrollbarsMock,
+        ClickScrollPlugin: vi.fn(),
       };
     });
   });
 
   describe('Presentation Tests', () => {
     describe('when scrollbars directive is present', () => {
-      beforeEach(async () => {
-        await updateWrapper();
+      beforeEach(() => {
+        updateWrapper();
       });
 
       it('should render the component', () => {
@@ -51,7 +56,7 @@ describe('DtScrollbarDirective Tests', () => {
       });
 
       it('should setup directive', () => {
-        expect(OverlayScrollbars).toHaveBeenCalledWith(wrapper.element, { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: 0 } });
+        expect(OverlayScrollbars).toHaveBeenCalledWith(wrapper.element, { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: '0' } });
         expect(OverlayScrollbars).toHaveBeenCalledTimes(1);
         expect(wrapper.element.getAttribute('data-overlayscrollbars-initialize')).toBe('true');
         expect(wrapper.element.classList.contains('scrollbar')).toBe(true);
