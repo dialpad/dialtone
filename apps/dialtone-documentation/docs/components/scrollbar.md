@@ -3,7 +3,7 @@ title: Scrollbar
 description: A directive that adds a custom overlay scrollbar to any scrollable region.
 status: beta
 thumb: true
-image: assets/images/components/scroller.png
+image: assets/images/components/scrollbar.png
 ---
 
 ## Scrollbar directive
