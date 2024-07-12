@@ -40,7 +40,7 @@ function _blogPostsFrontmatter (app) {
 }
 
 function _extractFrontmatter (app, path, options, exceptions = []) {
-  const sortingArr = options?.sidebar[path][0].children.map(child => child.text.toLowerCase().replaceAll(' ', '-'));
+  const sortingArr = getChildrenPageNames(path, options.sidebar).map(child => child.text.toLowerCase().replaceAll(' ', '-'));
   const indexPage = app.pages.find(page => page.path === path);
   const regExpPath = new RegExp(`${path}.+`);
 
@@ -87,6 +87,18 @@ function _extractComponentStatus (app) {
     .sort((a, b) => _sortAlphabetically(a.name, b.name));
 }
 
+function getChildrenPageNames (path, pages) {
+  const [, parent, child] = path.split('/');
+  const page = Object.keys(pages).find(pageKey => {
+    return pageKey === `/${parent}/` || pages[pageKey]?.link?.endsWith(`${path}/`);
+  });
+  const children = pages?.[page]?.[0]?.children || pages?.[page]?.children;
+
+  if (!child) return children || [];
+
+  return getChildrenPageNames(child, children);
+}
+
 export const dialtoneVuepressTheme = (options) => {
   return {
     name: '@dialpad/vuepress-theme-dialtone',
@@ -121,6 +133,7 @@ export const dialtoneVuepressTheme = (options) => {
     onInitialized (app) {
       _blogPostsFrontmatter(app);
       _extractFrontmatter(app, '/guides/', options, ['/guides/content/']);
+      _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
       _extractFrontmatter(app, '/design/', options);
       _extractComponentStatus(app);

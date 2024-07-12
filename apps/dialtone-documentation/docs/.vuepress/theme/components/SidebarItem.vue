@@ -2,7 +2,7 @@
   <dt-collapsible
     element-type="li"
     max-width="100%"
-    :open="isOpen"
+    :open="item.link ? isOpen : true"
   >
     <template #anchor="{ attrs }">
       <dt-stack
@@ -15,36 +15,30 @@
           custom
         >
           <dt-button
+            v-bind="attrs"
             importance="clear"
             kind="muted"
             label-class="d-jc-flex-start"
+            icon-position="right"
             :class="[
-              'd-headline--eyebrow d-fw-semibold d-fc-secondary',
               'd-bar-pill d-mb2 d-w100p d-us-none d-td-none',
               {
                 'd-btn--active d-fw-medium': isActiveLink(isExactActive, item.link),
-                'd-bgc-transparent d-c-default': !item.link,
+                'd-headline--eyebrow d-fw-semibold d-fc-secondary d-bgc-transparent d-c-default': !item.link,
               },
             ]"
             @click="handleAnchorClick(navigate, item.link)"
           >
             {{ item.text }}
+            <template #icon="{ iconSize }">
+              <dt-icon
+                v-if="item.link"
+                :name="isOpen ? 'chevron-down' : 'chevron-right'"
+                :size="iconSize"
+              />
+            </template>
           </dt-button>
         </router-link>
-        <dt-button
-          v-bind="attrs"
-          class="d-ps-absolute d-r0 d-t0"
-          circle
-          importance="clear"
-          @click="isOpen = !isOpen"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon
-              :name="isOpen ? 'chevron-down' : 'chevron-right'"
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
       </dt-stack>
     </template>
     <template #content>
@@ -99,7 +93,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const props = defineProps({
@@ -117,10 +111,16 @@ const subItems = computed(() => {
 });
 const route = useRoute();
 const hash = ref(route.hash);
-const isOpen = ref(true);
+const isOpen = ref(false);
 
 watch(route, newRoute => {
   hash.value = newRoute.hash;
+});
+
+onMounted(() => {
+  if (route.path === props.item.link) {
+    isOpen.value = true;
+  }
 });
 
 // isExactActive from the router-link doesn't work with hashes,
