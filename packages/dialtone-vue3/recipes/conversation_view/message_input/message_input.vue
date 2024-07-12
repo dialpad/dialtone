@@ -3,8 +3,7 @@
   <div
     data-qa="dt-message-input"
     role="presentation"
-    :class="['dt-message-input', { 'dt-message-input--focused': hasFocus }]"
-    @click="$refs.richTextEditor?.focusEditor()"
+    :class="['dt-message-input']"
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
@@ -609,7 +608,6 @@ export default {
     return {
       additionalExtensions: [meetingPill],
       internalInputValue: this.modelValue, // internal input content
-      hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
       emojiPickerOpened: false,
@@ -724,15 +722,6 @@ export default {
       this.$emit('cancel');
     },
 
-    onFocus (event) {
-      this.hasFocus = true;
-      this.$refs.richTextEditor?.focusEditor();
-    },
-
-    onBlur (event) {
-      this.hasFocus = false;
-    },
-
     onInput (event) {
       this.$emit('update:modelValue', event);
     },
@@ -749,7 +738,7 @@ export default {
   border-color: var(--dt-color-border-default);
   cursor: text;
 
-  &--focused {
+  &:focus-within {
     border-color: var(--dt-color-border-bold);
     box-shadow: var(--dt-shadow-small);
   }
