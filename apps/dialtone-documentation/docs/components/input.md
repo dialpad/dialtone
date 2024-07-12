@@ -217,13 +217,13 @@ showHtmlWarning />
 <code-well-header>
   <div class="d-stack16 d-w100p">
     <dt-input label="Left icon" type="text" placeholder="Placeholder">
-      <template #leftIcon>
-        <dt-icon name="send" size="200" />
+      <template #leftIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
     <dt-input label="Right icon" type="text" placeholder="Placeholder">
-      <template #rightIcon>
-        <dt-icon name="lock" size="200" />
+      <template #rightIcon="{ iconSize }">
+        <dt-icon name="lock" :size="iconSize" />
       </template>
     </dt-input>
   </div>
@@ -234,27 +234,31 @@ htmlCode='
 <div>
   <label class="d-label" for="Dialtone--InputExample--IconLeft">Label</label>
   <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left"><dt-icon name="send" size="200" /></span>
-    <input class="d-input d-input-icon--left" id="Dialtone--InputExample--IconLeft" type="text" placeholder="Placeholder" />
+    <span class="d-input-icon d-input-icon--left">
+      <svg class="d-icon d-icon--size-200">...</svg>
+    </span>
+    <input class="d-input" id="Dialtone--InputExample--IconLeft" type="text" placeholder="Placeholder" />
   </div>
 </div>
 <div>
   <label class="d-label" for="Dialtone--InputExample--IconRight">Label</label>
   <div class="d-input__wrapper">
-    <input class="d-input d-input-icon--right" id="Dialtone--InputExample--IconRight" type="text" placeholder="Placeholder" />
-    <span class="d-input-icon d-input-icon--right"><dt-icon name="lock" size="200" /></span>
+    <input class="d-input" id="Dialtone--InputExample--IconRight" type="text" placeholder="Placeholder" />
+    <span class="d-input-icon d-input-icon--right">
+      <svg class="d-icon d-icon--size-200">...</svg>
+    </span>
   </div>
 </div>
 '
 vueCode='
 <dt-input label="Left icon" type="text" placeholder="Placeholder">
-  <template #leftIcon>
-    <dt-icon name="send" size="200" />
+  <template #leftIcon="{ iconSize }">
+    <dt-icon name="send" :size="iconSize" />
   </template>
 </dt-input>
 <dt-input label="Right icon" type="text" placeholder="Placeholder">
-  <template #rightIcon>
-    <dt-icon name="lock" size="200" />
+  <template #rightIcon="{ iconSize }">
+    <dt-icon name="lock" :size="iconSize" />
   </template>
 </dt-input>
 '
@@ -263,13 +267,13 @@ showHtmlWarning />
 <code-well-header>
   <div class="d-stack16 d-w100p">
     <dt-input label="Left icon" type="textarea" placeholder="Placeholder">
-      <template #leftIcon>
-        <dt-icon name="send" size="200" />
+      <template #leftIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
     <dt-input label="Right icon" type="textarea" placeholder="Placeholder">
-      <template #rightIcon>
-        <dt-icon name="lock" size="200" />
+      <template #rightIcon="{ iconSize }">
+        <dt-icon name="lock" :size="iconSize" />
       </template>
     </dt-input>
   </div>
@@ -280,20 +284,99 @@ htmlCode='
 <div>
   <label class="d-label" for="Dialtone--InputExample--IconLeft">...</label>
   <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">...</span>
-    <textarea class="d-textarea d-input-icon--left" id="Dialtone--InputExample--IconLeft" type="text" placeholder="..."></textarea>
+    <span class="d-input-icon d-input-icon--left">
+      <svg class="d-icon d-icon--size-200">...</svg>
+    </span>
+    <textarea class="d-textarea" id="Dialtone--InputExample--IconLeft" type="text" placeholder="..."></textarea>
   </div>
 </div>
 '
 vueCode='
 <dt-input label="Left icon" type="textarea" placeholder="Placeholder">
-  <template #leftIcon>
-    <dt-icon name="send" size="200" />
+  <template #leftIcon="{ iconSize }">
+    <dt-icon name="send" :size="iconSize" />
   </template>
 </dt-input>
 <dt-input label="Right icon" type="textarea" placeholder="Placeholder">
+  <template #rightIcon="{ iconSize }">
+    <dt-icon name="lock" :size="iconSize" />
+  </template>
+</dt-input>
+'
+showHtmlWarning />
+
+### Search input
+
+<dt-notice
+  kind="warning"
+  hideClose="true"
+  class="d-wmx100p d-mb24"
+>
+  <template #default>
+  Note: The usage of <code>type="search"</code> is not recommended for this component as it may cause unintended styling issues in Chrome. Instead, refer to the provided example code if you need to implement a search input.
+  </template>
+</dt-notice>
+
+<code-well-header>
+  <div class="d-w100p">
+    <dt-input
+      aria-label="Search items"
+      placeholder="Search Items"
+      type="text"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon name="search" :size="iconSize" />
+      </template>
+      <template #rightIcon>
+        <dt-button
+          kind="muted"
+          importance="clear"
+          size="xs"
+          circle
+          aria-label="Clear search"
+        >
+        <template #icon="{ iconSize }">
+            <dt-icon name="close" :size="iconSize" />
+          </template>
+        </dt-button>
+      </template>
+    </dt-input>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-input__wrapper">
+  <span class="base-input__icon--left d-input-icon--left d-input-icon">...</span>
+  <input type="text" autocomplete="off" class="base-input__input d-input d-input-icon--left d-input-icon--right" placeholder="Search Items">
+  <span class="base-input__icon--right d-input-icon--right d-input-icon undefined" data-qa="dt-input-right-icon-wrapper">
+    <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-btn--icon-only" data-qa="dt-button" type="button" aria-label="Clear search">
+      <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
+    </button>
+  </span>
+</div>
+'
+vueCode='
+<dt-input
+  aria-label="Search items"
+  placeholder="Search Items"
+  type="text"
+>
+  <template #leftIcon="{ iconSize }">
+    <dt-icon name="search" :size="iconSize" />
+  </template>
   <template #rightIcon>
-    <dt-icon name="lock" size="200" />
+    <dt-button
+      kind="muted"
+      importance="clear"
+      size="xs"
+      circle
+      aria-label="Clear search"
+    >
+      <template #icon="{ iconSize }">
+        <dt-icon name="close" :size="iconSize" />
+      </template>
+    </dt-button>
   </template>
 </dt-input>
 '
@@ -433,17 +516,17 @@ You may use different icon sizes in different sized inputs
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
-    <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" icon-size="lg" size="sm">
+    <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
       <template #leftIcon>
-        <dt-icon name="send" size="200" />
+        <dt-icon name="send" size="400" />
       </template>
     </dt-input>
-    <dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder" icon-size="xl">
+    <dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
       <template #leftIcon>
-        <dt-icon name="send" size="200" />
+        <dt-icon name="send" size="500" />
       </template>
     </dt-input>
-    <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" icon-size="md" size="xl">
+    <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
       <template #leftIcon>
         <dt-icon name="send" size="200" />
       </template>
@@ -463,8 +546,10 @@ htmlCode='
     <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:sm Icon:lg</label>
   </div>
   <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left d-input--sm d-input-icon--lg"><dt-icon name="send" /></span>
-    <input class="d-input d-input-icon--left d-input--sm" id="Dialtone--InputExample--IconLeft-sm-lg" type="text" placeholder="Placeholder" />
+    <span class="d-input-icon d-input-icon--left">
+      <svg class="d-icon d-icon--size-400">...</svg>
+    </span>
+    <input class="d-input d-input--sm" id="Dialtone--InputExample--IconLeft-sm-lg" type="text" placeholder="Placeholder" />
   </div>
 </div>
 <div>
@@ -472,8 +557,10 @@ htmlCode='
     <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:md(default), Icon:xl</label>
   </div>
   <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left d-input-icon--xl"><dt-icon name="send" /></span>
-    <input class="d-input d-input-icon--left" id="Dialtone--InputExample--IconLeft-md-xl" type="text" placeholder="Placeholder" />
+    <span class="d-input-icon d-input-icon--left">
+      <svg class="d-icon d-icon--size-500">...</svg>
+    </span>
+    <input class="d-input" id="Dialtone--InputExample--IconLeft-md-xl" type="text" placeholder="Placeholder" />
   </div>
 </div>
 <div>
@@ -481,8 +568,10 @@ htmlCode='
     <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:xl Icon:md(default)</label>
   </div>
   <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left d-input--xl"><dt-icon name="send" /></span>
-    <input class="d-input d-input-icon--left d-input--xl" id="Dialtone--InputExample--IconLeft-xl-md" type="text" placeholder="Placeholder" />
+    <span class="d-input-icon d-input-icon--left">
+      <svg class="d-icon d-icon--size-200">...</svg>
+    </span>
+    <input class="d-input d-input--xl" id="Dialtone--InputExample--IconLeft-xl-md" type="text" placeholder="Placeholder" />
   </div>
 </div>
 <div>
@@ -490,28 +579,30 @@ htmlCode='
     <label class="d-label" for="Dialtone--InputExample--IconLeft">Textarea:lg Icon:md(default)</label>
   </div>
   <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left d-input--lg"><dt-icon name="send" /></span>
-    <textarea class="d-textarea d-input-icon--left d-textarea--lg" id="Dialtone--TextareaExample--IconLeft-lg-md" type="text" placeholder="Placeholder"></textarea>
+    <span class="d-input-icon d-input-icon--left">
+      <svg class="d-icon d-icon--size-200">...</svg>
+    </span>
+    <textarea class="d-textarea d-textarea--lg" id="Dialtone--TextareaExample--IconLeft-lg-md" type="text" placeholder="Placeholder"></textarea>
   </div>
 </div>
 '
 vueCode='
-<dt-input label="Small input with large icon" type="text" placeholder="Placeholder" icon-size="lg" size="sm">
+<dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
+  <template #leftIcon>
+    <dt-icon name="send" size="400" />
+  </template>
+</dt-input>
+<dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
+  <template #leftIcon>
+    <dt-icon name="send" size="500" />
+  </template>
+</dt-input>
+<dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
   <template #leftIcon>
     <dt-icon name="send" size="200" />
   </template>
 </dt-input>
-<dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder" icon-size="xl">
-  <template #leftIcon>
-    <dt-icon name="send" size="200" />
-  </template>
-</dt-input>
-<dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" icon-size="md" size="xl">
-  <template #leftIcon>
-    <dt-icon name="send" size="200" />
-  </template>
-</dt-input>
-<dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" icon-size="md" size="lg">
+<dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" size="lg">
   <template #leftIcon>
     <dt-icon name="send" size="200" />
   </template>

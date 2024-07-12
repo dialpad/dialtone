@@ -13,6 +13,7 @@
     "semantic/cox/dark",
     "components/avatar/default",
     "components/badge/default",
+    "components/badge/dark",
     "components/checkbox/default",
     "components/checkbox/dark",
     "components/icon/default",

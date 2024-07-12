@@ -1,6 +1,5 @@
 import { getDirname, path } from '@vuepress/utils';
 import { themeDataPlugin } from '@vuepress/plugin-theme-data';
-import { tocPlugin } from '@vuepress/plugin-toc';
 import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
@@ -96,9 +95,8 @@ export const dialtoneVuepressTheme = (options) => {
       themeDataPlugin({
         themeData: options,
       }),
-      tocPlugin(),
       activeHeaderLinksPlugin({
-        headerLinkSelector: 'a.d-btn',
+        headerLinkSelector: 'a.d-link',
         offset: 128,
       }),
       prismjsPlugin({}),

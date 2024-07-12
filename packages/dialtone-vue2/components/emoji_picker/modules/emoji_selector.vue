@@ -101,6 +101,8 @@
 </template>
 
 <script>
+/* eslint-disable max-len */
+/* eslint-disable max-lines */
 import { emojisGrouped as emojisImported } from '@dialpad/dialtone-emojis';
 import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker';
 
@@ -158,6 +160,7 @@ export default {
   },
 
   computed: {
+    /* eslint-disable-next-line complexity */
     currentEmojis () {
       return [
         ...this.emojis[`People${this.skinTone}`] || [],
@@ -337,6 +340,7 @@ export default {
         let prevScrollTop = container.scrollTop;
         vm.$emit('is-scrolling', true);
 
+        /* eslint-disable-next-line complexity */
         container.addEventListener('scroll', function () {
           if (isScrolling) {
             const scrollTop = container.scrollTop;
@@ -396,6 +400,7 @@ export default {
       return false;
     },
 
+    // eslint-disable-next-line complexity
     handleKeyDown: function (event, indexTab, indexEmoji, emoji) {
       event.preventDefault();
 
@@ -489,6 +494,7 @@ export default {
       }
     },
 
+    /* eslint-disable-next-line complexity */
     handleHorizontalNavigation: function (direction, indexTab, indexEmoji) {
       if (this.isFiltering) {
         if (direction === 'left') {
@@ -535,6 +541,7 @@ export default {
       }
     },
 
+    /* eslint-disable-next-line complexity */
     handleKeyDownFilteredEmojis (event, indexEmoji, emoji) {
       event.preventDefault();
       this.hoverFirstEmoji = false;
@@ -584,6 +591,8 @@ export default {
 
     setTabLabelObserver () {
       this.tabLabelObserver = new IntersectionObserver(entries => {
+        this.$emit('is-scrolling', false);
+        /* eslint-disable-next-line complexity */
         entries.forEach(entry => {
           const { target } = entry;
           const index = parseInt(target.dataset.index);

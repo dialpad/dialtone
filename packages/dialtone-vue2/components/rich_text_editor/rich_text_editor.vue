@@ -3,7 +3,7 @@
     :editor="editor"
     data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
-    @selected-command="onSelectedCommand"
+    v-on="editorListeners"
   />
 </template>
 
@@ -26,6 +26,7 @@ import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
+import History from '@tiptap/extension-history';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
 import { MentionPlugin } from './extensions/mentions/mention';
@@ -64,6 +65,14 @@ export default {
     editable: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Prevents the user from typing any further. Deleting text will still work.
+     */
+    preventTyping: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -206,6 +215,7 @@ export default {
      * of the parameters that command can take.
      *
      * When null, it does not add the plugin.
+     * Note that slash commands only work when they are the first word in the input.
      */
     slashCommandSuggestion: {
       type: Object,
@@ -267,6 +277,14 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Additional TipTap extensions to be added to the editor.
+     */
+    additionalExtensions: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   emits: [
@@ -297,29 +315,28 @@ export default {
      * @type {FocusEvent}
      */
     'focus',
-
-    /**
-     * Fires when a slash command is selected
-     *
-     * @event selected-command
-     * @type {String}
-     */
-    'selected-command',
   ],
 
   data () {
     return {
       editor: null,
-      popoverOpened: false,
-      internalValue: this.value,
     };
   },
 
   computed: {
+    editorListeners () {
+      return {
+        ...this.$listeners,
+        input: () => {},
+        focus: () => {},
+        blur: () => {},
+      };
+    },
+
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text];
+      const extensions = [Document, Paragraph, Text, History];
       if (this.link) {
         extensions.push(TipTapLink.extend({ inclusive: false }).configure({
           HTMLAttributes: {
@@ -380,6 +397,8 @@ export default {
             },
           }),
         );
+      } else {
+        extensions.push(HardBreak);
       }
 
       if (this.mentionSuggestion) {
@@ -415,6 +434,10 @@ export default {
             class: 'dt-rich-text-editor--code-block',
           },
         }));
+      }
+
+      if (this.additionalExtensions.length) {
+        extensions.push(...this.additionalExtensions);
       }
 
       return extensions;
@@ -484,9 +507,6 @@ export default {
   },
 
   methods: {
-    onSelectedCommand (command) {
-      this.$emit('selected-command', command);
-    },
 
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
@@ -517,6 +537,12 @@ export default {
       // The content has changed.
       this.editor.on('update', () => {
         const value = this.getOutput();
+        // When preventTyping is true and user wants to type, we revert to last value
+        // If Backspace (keyCode = 8) is pressed, we allow updating the text
+        if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
+          this.editor.commands.setContent(this.value, false);
+          return;
+        }
         this.$emit('input', value);
         this.$emit('update:value', value);
       });

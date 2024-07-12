@@ -492,7 +492,9 @@ export default {
     /**
      * Sets the element to which the popover is going to append to.
      * 'body' will append to the nearest body (supports shadow DOM).
-     * @values 'body', 'parent', HTMLElement,
+     * 'root' will try append to the iFrame's parent body if it is contained in an iFrame
+     * and has permissions to access it, else, it'd default to 'parent'.
+     * @values 'body', 'parent', 'root', HTMLElement
      */
     appendTo: {
       type: [HTMLElement, String],
@@ -946,16 +948,69 @@ export default {
       }
     },
 
+    /**
+     * Return's the anchor ClientRect object relative to the window.
+     * Refer to: https://atomiks.github.io/tippyjs/v6/all-props/#getreferenceclientrect for more information
+     * @param error
+     */
+    getReferenceClientRect (error) {
+      const anchorReferenceRect = this.anchorEl?.getBoundingClientRect();
+
+      if (this.appendTo !== 'root' || error) return anchorReferenceRect;
+
+      const anchorOwnerDocument = this.anchorEl?.ownerDocument;
+      const anchorParentWindow = anchorOwnerDocument?.defaultView || anchorOwnerDocument?.parentWindow;
+      const anchorIframe = anchorParentWindow?.frameElement;
+
+      if (!anchorIframe) return anchorReferenceRect;
+
+      const iframeReferenceRect = anchorIframe.getBoundingClientRect();
+
+      return {
+        width: anchorReferenceRect?.width,
+        height: anchorReferenceRect?.height,
+        top: iframeReferenceRect?.top + anchorReferenceRect?.top,
+        left: iframeReferenceRect?.left + anchorReferenceRect?.left,
+        right: iframeReferenceRect?.right + anchorReferenceRect?.right,
+        bottom: iframeReferenceRect?.bottom + anchorReferenceRect?.bottom,
+      };
+    },
+
     initTippyInstance () {
+      let internalAppendTo = null;
+      let iFrameError = false;
+
+      switch (this.appendTo) {
+        case 'body':
+          internalAppendTo = this.anchorEl?.getRootNode()?.querySelector('body');
+          break;
+
+        case 'root':
+          // Try to attach the popover to root document, fallback to parent is fail
+          try {
+            internalAppendTo = window.parent.document.body;
+          } catch (err) {
+            console.error('Could not attach the popover to iframe parent window: ', err);
+            internalAppendTo = 'parent';
+            iFrameError = true;
+          }
+          break;
+
+        default:
+          internalAppendTo = this.appendTo;
+          break;
+      }
+
       this.tip = createTippyPopover(this.anchorEl, {
         popperOptions: this.popperOptions(),
         contentElement: this.popoverContentEl,
         placement: this.placement,
         offset: this.offset,
         sticky: this.sticky,
-        appendTo: this.appendTo === 'body' ? this.anchorEl?.getRootNode()?.querySelector('body') : this.appendTo,
+        appendTo: internalAppendTo,
         interactive: true,
         trigger: 'manual',
+        getReferenceClientRect: () => this.getReferenceClientRect(iFrameError),
         // We have to manage hideOnClick functionality manually to handle
         // popover within popover situations.
         hideOnClick: false,

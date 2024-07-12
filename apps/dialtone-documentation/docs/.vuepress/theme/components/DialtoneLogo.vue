@@ -1,21 +1,15 @@
 <template>
   <router-link
-    class="d-btn h:d-bgc-transparent d-py6 d-w216 d-jc-flex-start"
+    class="d-pl8 d-w216 d-fc-secondary d-td-none"
     title="Go back to the homepage"
     to="/"
   >
-    <img
-      class="d-h42"
-      :alt="brandLogoAlt"
-      :src="brandLogo"
-    >
+    <dt-stack gap="400" direction="row">
+      <dt-icon
+        name="dialpad-ai-color-reversed"
+        size="500"
+      />
+      <span class="d-fs-300 d-fw-bold">Dialtone</span>
+    </dt-stack>
   </router-link>
 </template>
-
-<script setup>
-import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import { useSiteLocaleData } from '@vuepress/client';
-
-const brandLogo = useThemeLocaleData().value.logo;
-const brandLogoAlt = useSiteLocaleData().value.title;
-</script>

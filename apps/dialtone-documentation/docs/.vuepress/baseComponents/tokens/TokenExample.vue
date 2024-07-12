@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="category === 'color'"
-    class="d-bar4 d-w128 d-h32 d-d-flex d-jc-center d-ai-center colorRectangle"
+    class="d-bar4 d-h32 d-d-flex d-jc-center d-ai-center colorRectangle"
     :style="getColorStyle"
   >
     <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
@@ -10,7 +10,7 @@
   </div>
   <div
     v-if="category === 'typography'"
-    class="d-w128 d-h32 d-d-flex d-jc-center d-ai-center"
+    class="d-h32 d-d-flex d-jc-center d-ai-center"
   >
     <div :style="getTypographyStyle">
       Aa
@@ -18,7 +18,7 @@
   </div>
   <div
     v-if="category === 'shadow'"
-    class="d-bar4 d-w128 d-h32"
+    class="d-bar4 d-h32"
     :style="getShadowStyle"
   />
   <div
@@ -102,14 +102,24 @@ const getColorStyle = computed(() => {
   if (props.name.includes('opacity')) {
     return { background: `rgba(0, 0, 0, ${props.value})` };
   }
-  if (props.name.includes('border')) {
-    return { border: `var(--dt-size-200) solid ${props.value}` };
-  }
+  if (props.name.includes('border')) return getBorderStyle();
   if (isForeground.value || isLink.value) {
     return { backgroundColor: foregroundBackgroundColor.value, color: props.value };
   }
   return { background: props.value };
 });
+
+const getBorderStyle = () => {
+  if (props.name.includes('border-ai')) {
+    return {
+      background: `linear-gradient(var(--dt-color-neutral-white), var(--dt-color-neutral-white)) padding-box,
+      ${props.value} border-box`,
+      borderWidth: 'var(--dt-size-border-200)',
+      borderColor: 'transparent',
+    };
+  }
+  return { border: `var(--dt-size-200) solid ${props.value}` };
+};
 
 const foregroundBackgroundColor = computed(() => {
   if (props.theme === 'light') {

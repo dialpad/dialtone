@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <!-- eslint-disable max-lines -->
 <template>
   <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-flg12 d-fl-col2">
@@ -98,7 +97,7 @@
     </dt-popover>
     <dt-popover
       :open="$attrs.open"
-      :modal="$attrs.modal || false"
+      :modal="false"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
       width-content="anchor"
@@ -400,8 +399,7 @@
     </dt-popover>
 
     <dt-popover
-      v-model:open="openPopoverWithTriggerOverride"
-      :modal="$attrs.modal || false"
+      :modal="false"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
       content-class="d-pl12 d-pr16"
@@ -425,6 +423,16 @@
         </p>
       </template>
     </dt-popover>
+
+    <iframe
+      title="iframe popover example"
+      :src="withURLprefix('?args=&id=components-popover--iframe-test&viewMode=story')"
+    />
+
+    <iframe
+      title="iframe popover example 2"
+      :src="withURLprefix('?args=&id=components-popover--iframe-test&viewMode=story')"
+    />
   </div>
 </template>
 
@@ -438,6 +446,7 @@ import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'PopoverVariantsStory',
+
   components: {
     DtPopover,
     DtButton,
@@ -465,6 +474,10 @@ export default {
 
     onMouseLeave () {
       this.openPopoverWithTriggerOverride = false;
+    },
+
+    withURLprefix (query) {
+      return window.location.origin + window.location.pathname + query;
     },
   },
 };

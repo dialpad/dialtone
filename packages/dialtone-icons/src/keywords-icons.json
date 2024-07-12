@@ -271,6 +271,9 @@
       "servicenow": [],
       "slack": [],
       "snapchat": [],
+      "t-mobile": [
+        "tmo"
+      ],
       "telegram": [],
       "threads": [
         "meta",
@@ -283,6 +286,9 @@
       "viber": [],
       "visa": [],
       "we-chat": [],
+      "webex": [
+        "cisco"
+      ],
       "whatsapp": [],
       "x-brand": [
         "twitter"
@@ -1365,6 +1371,15 @@
       ]
     },
     "general": {
+      "accessibility-mac": [
+        "humanpictos",
+        "people",
+        "man silhouette",
+        "disability",
+        "disabled",
+        "dda",
+        "inclusive"
+      ],
       "accessibility": [
         "disability",
         "disabled",
@@ -1973,6 +1988,10 @@
         "forbidden",
         "prohibited",
         "error"
+      ],
+      "token": [
+        "symbol",
+        "figma"
       ],
       "toy-brick": [
         "lego",

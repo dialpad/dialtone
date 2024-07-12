@@ -13,6 +13,7 @@ const baseProps = {
 const baseAttrs = {
   placeholder: 'input-placeholder',
   name: 'input-name',
+  autocomplete: 'on',
 };
 const baseSlots = {};
 const baseListeners = { input: MOCK_INPUT_STUB };
@@ -227,54 +228,20 @@ describe('DtInput tests', () => {
         updateWrapper();
       });
 
-      describe('When a size is not provided', () => {
-        it('should render the icon wrapper', () => {
-          expect(leftIconWrapper.exists()).toBe(true);
-        });
-
-        it('should have input icon class', () => {
-          expect(leftIconWrapper.classes().includes('d-input-icon')).toBe(true);
-        });
-
-        it('should have input icon side class', () => {
-          expect(leftIconWrapper.classes().includes('d-input-icon--left')).toBe(true);
-        });
-
-        it('should have input icon size class', () => {
-          expect(leftIconWrapper.classes().includes(`d-input-icon--${INPUT_SIZES.DEFAULT}`)).toBe(false);
-        });
-
-        it('should render the provided icon', () => {
-          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
-        });
+      it('should render the icon wrapper', () => {
+        expect(leftIconWrapper.exists()).toBe(true);
       });
 
-      describe('When a size is provided', () => {
-        beforeEach(() => {
-          mockProps = { size: INPUT_SIZES.EXTRA_LARGE };
+      it('should have input icon class', () => {
+        expect(leftIconWrapper.classes().includes('d-input-icon')).toBe(true);
+      });
 
-          updateWrapper();
-        });
+      it('should have input icon side class', () => {
+        expect(leftIconWrapper.classes().includes('d-input-icon--left')).toBe(true);
+      });
 
-        it('should render the icon wrapper', () => {
-          expect(leftIconWrapper.exists()).toBe(true);
-        });
-
-        it('should have input icon class', () => {
-          expect(leftIconWrapper.classes().includes('d-input-icon')).toBe(true);
-        });
-
-        it('should have input icon side class', () => {
-          expect(leftIconWrapper.classes().includes('d-input-icon--left')).toBe(true);
-        });
-
-        it('should have input icon size class', () => {
-          expect(leftIconWrapper.classes().includes(`d-input-icon--${INPUT_SIZES.EXTRA_LARGE}`)).toBe(true);
-        });
-
-        it('should render the provided icon', () => {
-          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
-        });
+      it('should render the provided icon', () => {
+        expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
       });
     });
 
@@ -285,54 +252,20 @@ describe('DtInput tests', () => {
         updateWrapper();
       });
 
-      describe('When a size is not provided', () => {
-        it('should render the icon wrapper', () => {
-          expect(rightIconWrapper.exists()).toBe(true);
-        });
-
-        it('should have input icon class', () => {
-          expect(rightIconWrapper.classes().includes('d-input-icon')).toBe(true);
-        });
-
-        it('should have input icon side class', () => {
-          expect(rightIconWrapper.classes().includes('d-input-icon--right')).toBe(true);
-        });
-
-        it('should have input icon size class', () => {
-          expect(rightIconWrapper.classes().includes(`d-input-icon--${INPUT_SIZES.DEFAULT}`)).toBe(false);
-        });
-
-        it('should render the provided icon', () => {
-          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
-        });
+      it('should render the icon wrapper', () => {
+        expect(rightIconWrapper.exists()).toBe(true);
       });
 
-      describe('When a size is provided', () => {
-        beforeEach(() => {
-          mockProps = { size: INPUT_SIZES.EXTRA_LARGE };
+      it('should have input icon class', () => {
+        expect(rightIconWrapper.classes().includes('d-input-icon')).toBe(true);
+      });
 
-          updateWrapper();
-        });
+      it('should have input icon side class', () => {
+        expect(rightIconWrapper.classes().includes('d-input-icon--right')).toBe(true);
+      });
 
-        it('should render the icon wrapper', () => {
-          expect(rightIconWrapper.exists()).toBe(true);
-        });
-
-        it('should have input icon class', () => {
-          expect(rightIconWrapper.classes().includes('d-input-icon')).toBe(true);
-        });
-
-        it('should have input icon side class', () => {
-          expect(rightIconWrapper.classes().includes('d-input-icon--right')).toBe(true);
-        });
-
-        it('should have input icon size class', () => {
-          expect(rightIconWrapper.classes().includes(`d-input-icon--${INPUT_SIZES.EXTRA_LARGE}`)).toBe(true);
-        });
-
-        it('should render the provided icon', () => {
-          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
-        });
+      it('should render the provided icon', () => {
+        expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
       });
     });
 

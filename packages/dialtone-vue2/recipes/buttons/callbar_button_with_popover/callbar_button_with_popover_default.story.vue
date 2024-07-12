@@ -7,6 +7,7 @@
     :initial-focus-element="$attrs.initialFocusElement"
     :show-close-button="$attrs.showCloseButton"
     :disabled="$attrs.disabled"
+    :offset="$attrs.offset"
     :force-show-arrow="$attrs.forceShowArrow"
     :active="$attrs.active"
     :danger="$attrs.danger"

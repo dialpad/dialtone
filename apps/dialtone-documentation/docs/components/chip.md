@@ -191,7 +191,7 @@ htmlCode='
 '
 vueCode='
 <dt-chip :interactive="false">
-    Chip
+  Chip
 </dt-chip>
 '
 showHtmlWarning />
