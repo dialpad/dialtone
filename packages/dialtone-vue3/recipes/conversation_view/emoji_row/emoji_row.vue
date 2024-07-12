@@ -157,6 +157,10 @@ export default {
   &__emoji {
     margin-right: var(--dt-space-300);
     display: inline-flex;
+
+    .d-emoji {
+      display: inline-flex;
+    }
   }
 
   &__reaction-number {
