@@ -152,7 +152,7 @@ Show the scrollbar when the mouse moves inside the scrollable area.
 
 ## Limitations
 
-Adding this directive to a DOM element or a Vue component will alter the DOM structure, by adding four elements inside the one that the directive was attached to. If the scrollable region is a Vue component, it's recommended to wrap it in a `<div v-dt-scrollbars></div>`, to avoid altering the structure
+Adding this directive to a DOM element or a Vue component will alter the DOM structure, by adding four elements inside the one that the directive was attached to. If the scrollable region is a Vue component, it's recommended to wrap it in a `<div v-dt-scrollbar></div>`, to avoid altering the structure
 that the component needs.
 
 The added elements are:
