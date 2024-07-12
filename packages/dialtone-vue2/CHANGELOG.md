@@ -1,3 +1,16 @@
+# [2.143.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.142.2...dialtone-vue2/v2.143.0) (2024-07-12)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA multiple improvements ([#402](https://github.com/dialpad/dialtone/issues/402)) ([c30b3a7](https://github.com/dialpad/dialtone/commit/c30b3a7049245fb39fcaf382420c74bf25e11146))
+
+
+### Features
+
+* **Multi Select:** DLT-1845 allow duplicated names on multiselect ([#394](https://github.com/dialpad/dialtone/issues/394)) ([ff8be5f](https://github.com/dialpad/dialtone/commit/ff8be5f1c40277ca4384ee58740430b9c346771a))
+* **Scrollbar:** DLT-1473 add scrollbar directive ([#391](https://github.com/dialpad/dialtone/issues/391)) ([05af2ff](https://github.com/dialpad/dialtone/commit/05af2ff7fc11759935b2623212b31b716b26d774))
+
 ## [2.142.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.142.1...dialtone-vue2/v2.142.2) (2024-07-09)
 
 
