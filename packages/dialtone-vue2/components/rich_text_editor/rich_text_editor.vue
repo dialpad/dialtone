@@ -392,14 +392,20 @@ export default {
           HardBreak.extend({
             addKeyboardShortcuts () {
               return {
-                Enter: () => self.$emit('enter'),
-                'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
-                  () => commands.newlineInCode(),
-                  () => self.allowBulletList && commands.splitListItem('listItem'),
-                  () => commands.createParagraphNear(),
-                  () => commands.liftEmptyBlock(),
-                  () => commands.splitBlock(),
-                ]),
+                Enter: () => {
+                  self.$emit('enter');
+                  return true;
+                },
+                'Shift-Enter': () => {
+                  this.editor.commands.first(({ commands }) => [
+                    () => commands.newlineInCode(),
+                    () => self.allowBulletList && commands.splitListItem('listItem'),
+                    () => commands.createParagraphNear(),
+                    () => commands.liftEmptyBlock(),
+                    () => commands.splitBlock(),
+                  ]);
+                  return true;
+                },
               };
             },
           }),
