@@ -7,7 +7,12 @@ export const DtScrollbarDirective = {
     OverlayScrollbars.plugin(ClickScrollPlugin);
     app.directive('dt-scrollbar', {
       mounted (el, binding) {
-        OverlayScrollbars(el, {
+        OverlayScrollbars({
+          target: el,
+          elements: {
+            viewport: el.children[0],
+          },
+        }, {
           scrollbars: {
             autoHide: `${binding.arg || 'leave'}`,
             clickScroll: true,

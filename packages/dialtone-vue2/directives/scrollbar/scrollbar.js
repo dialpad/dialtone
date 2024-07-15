@@ -7,7 +7,12 @@ export const DtScrollbarDirective = {
     OverlayScrollbars.plugin(ClickScrollPlugin);
     Vue.directive('dt-scrollbar', {
       inserted (el, binding) {
-        OverlayScrollbars(el, {
+        OverlayScrollbars({
+          target: el,
+          elements: {
+            viewport: el.children[0],
+          },
+        }, {
           scrollbars: {
             autoHide: `${binding.arg || 'leave'}`,
             clickScroll: true,
