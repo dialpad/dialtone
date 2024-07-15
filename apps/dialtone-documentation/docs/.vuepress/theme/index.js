@@ -132,7 +132,18 @@ export const dialtoneVuepressTheme = (options) => {
     },
     onInitialized (app) {
       _blogPostsFrontmatter(app);
-      _extractFrontmatter(app, '/guides/', options, ['/guides/content/']);
+      _extractFrontmatter(
+        app,
+        '/guides/',
+        options,
+        [
+          '/guides/content/action-language/',
+          '/guides/content/error-messages/',
+          '/guides/content/grammar-mechanics/',
+          '/guides/content/help-content/',
+          '/guides/content/inclusive-language/',
+          '/guides/content/voice-tone/',
+        ]);
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
       _extractFrontmatter(app, '/design/', options);

@@ -44,14 +44,14 @@
     <template #content>
       <dt-stack
         as="ul"
-        class="d-pl8"
+        :class="{ 'd-pl8': nested }"
         gap="200"
       >
         <li
           v-for="subItem in subItems"
           :key="subItem.text"
         >
-          <sidebar-item v-if="subItem.children" :item="subItem" />
+          <sidebar-item v-if="subItem.children" :item="subItem" nested />
           <router-link
             v-else-if="!subItem.planned"
             v-slot="{ navigate, isExactActive }"
@@ -105,6 +105,10 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
+  nested: {
+    type: Boolean,
+    default: false,
+  },
 });
 const subItems = computed(() => {
   return props.item?.children || [];
@@ -113,9 +117,10 @@ const route = useRoute();
 const hash = ref(route.hash);
 const isOpen = ref(false);
 
-watch(route, newRoute => {
+watch(route, (newRoute) => {
   hash.value = newRoute.hash;
-});
+  isOpen.value = false;
+}, { flush: 'pre', immediate: true, deep: true });
 
 onMounted(() => {
   if (route.path === props.item.link) {
@@ -127,8 +132,9 @@ onMounted(() => {
 // that's why we need to check for the hash if it's a single page
 const isActiveLink = (isExactActive, link) => {
   if (!link) return false;
-  if (props.isSinglePage) return hash.value === link;
-  return isExactActive;
+  const active = props.isSinglePage ? hash.value === link : isExactActive;
+  if (route.path === link) { isOpen.value = active; }
+  return active;
 };
 
 function handleAnchorClick (navigate, link) {
