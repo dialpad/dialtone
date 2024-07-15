@@ -1,3 +1,30 @@
+# [1.32.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.31.1...dialtone-tokens/v1.32.0) (2024-07-12)
+
+
+### Features
+
+* **Design Tokens:** DLT-1870 additional expressive typography tokens ([#404](https://github.com/dialpad/dialtone/issues/404)) ([2bdc3a5](https://github.com/dialpad/dialtone/commit/2bdc3a5c6cbf0aa6cfc78b77842eff7071642247))
+* **Design Tokens:** DLT-1871 added gold brand color ([#405](https://github.com/dialpad/dialtone/issues/405)) ([ab0d032](https://github.com/dialpad/dialtone/commit/ab0d0321cac9a02b955a0da73924d947467a7f28))
+
+## [1.31.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.31.0...dialtone-tokens/v1.31.1) (2024-07-01)
+
+
+### Bug Fixes
+
+* **Expressive Theme:** NO-JIRA corrected figma and tokens studio connection ([#384](https://github.com/dialpad/dialtone/issues/384)) ([255936f](https://github.com/dialpad/dialtone/commit/255936f7956473167358a06631187b4384a0dc2d))
+
+# [1.31.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.30.1...dialtone-tokens/v1.31.0) (2024-06-11)
+
+
+### Documentation
+
+* NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
+
+### Features
+
+* **Badge:** DLT-1788 design tokens for subtle and outline variants ([#358](https://github.com/dialpad/dialtone/issues/358)) ([4e008b7](https://github.com/dialpad/dialtone/commit/4e008b768b33758b64a20418c217db245902f384))
+
 ## [1.30.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.30.0...dialtone-tokens/v1.30.1) (2024-04-26)
 
 

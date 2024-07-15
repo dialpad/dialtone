@@ -6,7 +6,6 @@ let wrapper;
 let editor;
 
 let imageInputEl;
-let messageInputEl;
 let characterLimitEl;
 
 let imageBtn;
@@ -46,7 +45,6 @@ const _setChildWrappers = () => {
 
   // Els
   imageInputEl = wrapper.find('[data-qa="dt-message-input-image-input"]');
-  messageInputEl = wrapper.find('[data-qa="dt-message-input"]');
   characterLimitEl = wrapper.find('[data-qa="dt-message-input-character-limit"]');
 };
 
@@ -102,24 +100,6 @@ describe('DtRecipeMessageInput tests', () => {
 
     it('should contain send button', function () {
       expect(sendBtn.exists()).toBe(true);
-    });
-
-    it('should not have border applied on message-input when not focused', () => {
-      expect(messageInputEl.classes('d-bc-default')).toBe(true);
-      expect(messageInputEl.classes('d-bc-bold')).toBe(false);
-    });
-
-    describe('When we focus anywhere on the message input', () => {
-      it('should focus and add the border for the message input', async () => {
-        await editor.trigger('focus');
-        expect(messageInputEl.classes('d-bc-bold')).toBe(true);
-      });
-
-      it('should programmatically focus to input', async () => {
-        wrapper.vm.onFocus();
-        await wrapper.vm.$nextTick();
-        expect(messageInputEl.classes('d-bc-bold')).toBe(true);
-      });
     });
 
     describe('When character Limit is disabled', () => {

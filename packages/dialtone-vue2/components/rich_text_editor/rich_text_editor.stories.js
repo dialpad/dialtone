@@ -13,7 +13,7 @@ import slashCommandSuggestion from './slash_command_suggestion';
 
 // Default Prop Values
 export const argsData = {
-  value: '<p>I am not a standalone component, please use Message Input instead<emoji-component code=":v_tone3:"></emoji-component><emoji-component code=":robot:"></emoji-component>!</p>',
+  value: '<p>I am not a standalone component, please use Message Input instead <emoji-component code=":v_tone3:"></emoji-component><emoji-component code=":robot:"></emoji-component>!</p>',
   editable: true,
   inputAriaLabel: 'This is a descriptive label',
   autoFocus: false,
@@ -22,6 +22,7 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
+  onEnter: action('enter'),
 };
 
 export const argTypesData = {
@@ -82,6 +83,11 @@ export const argTypesData = {
     },
   },
   onFocus: {
+    table: {
+      disable: true,
+    },
+  },
+  onEnter: {
     table: {
       disable: true,
     },

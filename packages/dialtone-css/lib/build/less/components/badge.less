@@ -22,7 +22,7 @@
   //  --------------------------------------------------------------------------
   --badge-color-text: var(--dt-badge-color-foreground-default);
   --badge-color-background: var(--dt-badge-color-background-default);
-  --badge-color-outline: var(--dt-color-border-subtle);
+  --badge-color-outline: var(--dt-badge-color-border-default);
   --badge-radius: var(--dt-size-300);
   --badge-line-height: calc(var(--dt-size-500) + var(--dt-size-200));
   --badge-font-size: var(--dt-font-size-100);
@@ -85,14 +85,9 @@
     --badge-color-background: var(--dt-badge-color-background-bulletin);
 
     &.d-badge--subtle {
-      --badge-color-text: hsl(var(--primary-color-h) var(--primary-color-s) calc(var(--primary-color-l) - 40%));
-      --badge-color-background: hsla(var(--primary-color-hsl) / 0.1);
-      --badge-color-outline: hsla(var(--primary-color-hsl) / 0.5);
-
-      .dialtone-theme-dark & {
-        --badge-color-text: var(--dt-color-foreground-primary);
-        --badge-color-background: hsla(var(--primary-color-hsl) / 0.6);
-      }
+      --badge-color-text: var(--dt-badge-color-foreground-bulletin-subtle);
+      --badge-color-background: var(--dt-badge-color-background-bulletin-subtle);
+      --badge-color-outline: var(--dt-badge-color-border-bulletin-subtle);
     }
   }
 

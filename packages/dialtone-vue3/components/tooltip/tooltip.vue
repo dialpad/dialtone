@@ -236,6 +236,14 @@ export default {
     },
 
     /**
+     * Set a custom theme on the tooltip. See https://atomiks.github.io/tippyjs/v6/themes/
+     */
+    theme: {
+      type: String,
+      default: null,
+    },
+
+    /**
      * External anchor id to use in those cases the anchor can't be provided via the slot.
      * For instance, using the combobox's input as the anchor for the popover.
      */
@@ -289,7 +297,7 @@ export default {
         delay: this.delay ? TOOLTIP_DELAY_MS : false,
         placement: this.placement,
         sticky: this.sticky,
-        theme: this.inverted ? 'inverted' : undefined,
+        theme: this.inverted ? 'inverted' : this.theme,
         animation: this.transition ? 'fade' : false,
         // onShown only triggers when transition is truthy
         onShown: (tooltipInstance) => this.onShow(tooltipInstance, 'onShown'),

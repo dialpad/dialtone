@@ -31,7 +31,7 @@
       :placement="placement"
       :initial-focus-element="initialFocusElement"
       :show-close-button="showCloseButton"
-      :offset="[0, 16]"
+      :offset="offset"
       padding="none"
       class="dt-recipe--callbar-button-with-popover--popover-wrapper"
       :dialog-class="['dt-recipe--callbar-button-with-popover--popover', contentClass]"
@@ -139,6 +139,22 @@ export default {
     placement: {
       type: String,
       default: 'top',
+    },
+
+    /**
+     *  Displaces the content box from its anchor element
+     *  by the specified number of pixels.
+     *  <a
+     *    class="d-link"
+     *    href="https://atomiks.github.io/tippyjs/v6/all-props/#offset"
+     *    target="_blank"
+     *  >
+     *    Tippy.js docs
+     *  </a>
+     */
+    offset: {
+      type: Array,
+      default: () => [0, 16],
     },
 
     /**

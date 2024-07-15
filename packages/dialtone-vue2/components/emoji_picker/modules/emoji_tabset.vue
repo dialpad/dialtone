@@ -146,6 +146,7 @@ export default {
       }
     },
 
+    // eslint-disable-next-line complexity
     handleKeyDown (event, tabId) {
       if (event.key === 'Enter') {
         this.selectTabset(tabId);

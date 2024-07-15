@@ -3,18 +3,18 @@
   <div
     data-qa="dt-message-input"
     role="presentation"
-    :class="['d-d-flex', 'd-fd-column', 'd-bar8', 'd-baw1', 'd-ba', 'd-c-text',
-             { 'd-bc-bold d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }]"
-    @click="$refs.richTextEditor?.focusEditor()"
+    :class="['dt-message-input']"
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
-    @keydown.enter.exact="onSend"
     @paste="onPaste"
   >
+    <!-- @slot Renders above the input, but still within the borders. -->
+    <slot name="top" />
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
-      class="d-of-auto d-mx16 d-mt8 d-mb4"
+      v-dt-scrollbar
+      class="dt-message-input__editor-wrapper"
       :style="{ 'max-height': maxHeight }"
     >
       <dt-rich-text-editor
@@ -34,61 +34,55 @@
         :auto-focus="autoFocus"
         :link="link"
         :placeholder="placeholder"
+        :prevent-typing="preventTyping"
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
+        :additional-extensions="additionalExtensions"
         v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
-        @input="onInput($event)"
-        @selected-command="onSelectedCommand"
+        @input="onInput"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
     <slot name="middle" />
     <!-- Section for the bottom UI -->
-    <section class="d-d-flex d-jc-space-between d-mx8 d-my4">
+    <section class="dt-message-input__bottom-section">
       <!-- Left content -->
-      <div class="d-d-flex">
-        <dt-tooltip
+      <div class="dt-message-input__bottom-section-left">
+        <dt-button
           v-if="showImagePicker"
-          placement="top-start"
-          :message="showImagePicker.tooltipLabel"
-          :offset="[-4, 12]"
+          v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
+          data-qa="dt-message-input-image-btn"
+          size="sm"
+          circle
+          :kind="imagePickerFocus ? 'default' : 'muted'"
+          importance="clear"
+          :aria-label="showImagePicker.ariaLabel"
+          @click="onSelectImage"
+          @mouseenter="imagePickerFocus = true"
+          @mouseleave="imagePickerFocus = false"
+          @focus="imagePickerFocus = true"
+          @blur="imagePickerFocus = false"
         >
-          <template #anchor>
-            <dt-button
-              data-qa="dt-message-input-image-btn"
-              size="sm"
-              circle
-              :kind="imagePickerFocus ? 'default' : 'muted'"
-              importance="clear"
-              :aria-label="showImagePicker.ariaLabel"
-              @click="onSelectImage"
-              @mouseenter="imagePickerFocus = true"
-              @mouseleave="imagePickerFocus = false"
-              @focus="imagePickerFocus = true"
-              @blur="imagePickerFocus = false"
-            >
-              <template #icon>
-                <dt-icon
-                  name="image"
-                  size="300"
-                />
-              </template>
-            </dt-button>
-            <dt-input
-              ref="messageInputImageUpload"
-              data-qa="dt-message-input-image-input"
-              accept="image/*, video/*"
-              type="file"
-              class="d-ps-absolute"
-              multiple
-              hidden
-              @input="onImageUpload"
+          <template #icon>
+            <dt-icon
+              name="image"
+              size="300"
             />
           </template>
-        </dt-tooltip>
+        </dt-button>
+        <dt-input
+          ref="messageInputImageUpload"
+          data-qa="dt-message-input-image-input"
+          accept="image/*, video/*"
+          type="file"
+          class="dt-message-input__image-input"
+          multiple
+          hidden
+          @input="onImageUpload"
+        />
         <dt-popover
           v-if="showEmojiPicker"
           v-model:open="emojiPickerOpened"
@@ -134,11 +128,11 @@
         <slot name="emojiGiphyPicker" />
       </div>
       <!-- Right content -->
-      <div class="d-d-flex">
+      <div class="dt-message-input__bottom-section-right">
         <!-- Optionally displayed remaining character counter -->
         <dt-tooltip
           v-if="Boolean(showCharacterLimit)"
-          class="dt-message-input--remaining-char-tooltip"
+          class="dt-message-input__remaining-char-tooltip"
           placement="top-end"
           :enabled="characterLimitTooltipEnabled"
           :message="showCharacterLimit.message"
@@ -147,7 +141,7 @@
           <template #anchor>
             <p
               v-show="displayCharacterLimitWarning"
-              class="d-fc-error d-mr16 dt-message-input--remaining-char"
+              class="dt-message-input__remaining-char"
               data-qa="dt-message-input-character-limit"
             >
               {{ showCharacterLimit.count - inputLength }}
@@ -159,7 +153,7 @@
         <dt-button
           v-if="showCancel"
           data-qa="dt-message-input-cancel-button"
-          class="dt-message-input--cancel-button"
+          class="dt-message-input__cancel-button"
           size="sm"
           kind="muted"
           importance="clear"
@@ -170,52 +164,39 @@
         </dt-button>
 
         <!-- Send button -->
-        <dt-tooltip
+        <!-- Right positioned UI - send button -->
+        <dt-button
           v-if="showSend"
-          placement="top-end"
-          :enabled="!showSend"
-          :message="showSend.tooltipLabel"
-          :show="!isSendDisabled && sendButtonFocus"
-          :offset="[6, 8]"
+          v-dt-tooltip:top-end="showSend?.tooltipLabel"
+          data-qa="dt-message-input-send-btn"
+          size="sm"
+          kind="default"
+          importance="primary"
+          :class="[
+            {
+              'dt-message-input__send-button--disabled': isSendDisabled,
+              'd-btn--circle': showSend.icon,
+            },
+          ]"
+          :aria-label="showSend.ariaLabel"
+          :aria-disabled="isSendDisabled"
+          @click="onSend"
         >
-          <template #anchor>
-            <!-- Right positioned UI - send button -->
-            <dt-button
-              data-qa="dt-message-input-send-btn"
-              size="sm"
-              kind="default"
-              importance="primary"
-              :class="[
-                {
-                  'message-input-button__disabled d-fc-muted': isSendDisabled,
-                  'd-btn--circle': showSend.icon,
-                },
-              ]"
-              :aria-label="showSend.ariaLabel"
-              :aria-disabled="isSendDisabled"
-              @click="onSend"
-              @mouseenter="sendButtonFocus = true"
-              @mouseleave="sendButtonFocus = false"
-              @focus="sendButtonFocus = true"
-              @blur="sendButtonFocus = false"
-            >
-              <template
-                v-if="showSend.icon"
-                #icon
-              >
-                <dt-icon
-                  :name="showSend.icon"
-                  size="300"
-                />
-              </template>
-              <template
-                v-if="showSend.text"
-              >
-                <p>{{ showSend.text }}</p>
-              </template>
-            </dt-button>
+          <template
+            v-if="showSend.icon"
+            #icon
+          >
+            <dt-icon
+              :name="showSend.icon"
+              size="300"
+            />
           </template>
-        </dt-tooltip>
+          <template
+            v-if="showSend.text"
+          >
+            <p>{{ showSend.text }}</p>
+          </template>
+        </dt-button>
       </div>
     </section>
   </div>
@@ -228,6 +209,7 @@ import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
+import meetingPill from './meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -277,6 +259,14 @@ export default {
       type: String,
       required: true,
       default: '',
+    },
+
+    /**
+     * Prevents the user from typing any further. Deleting text will still work.
+     */
+    preventTyping: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -600,25 +590,12 @@ export default {
     'selected-command',
 
     /**
-     * Native focus event
-     * @event input
-     * @type {String|JSON}
+     * Fires when meeting pill is closed
+     *
+     * @event meeting-pill-close
+     * @type {String}
      */
-    'focus',
-
-    /**
-     * Native blur event
-     * @event input
-     * @type {String|JSON}
-     */
-    'blur',
-
-    /**
-     * Native input event
-     * @event input
-     * @type {String|JSON}
-     */
-    'input',
+    'meeting-pill-close',
 
     /**
      * Event to sync the value with the parent
@@ -630,11 +607,10 @@ export default {
 
   data () {
     return {
+      additionalExtensions: [meetingPill],
       internalInputValue: this.modelValue, // internal input content
-      hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
-      sendButtonFocus: false,
       emojiPickerOpened: false,
     };
   },
@@ -724,10 +700,6 @@ export default {
       this.$emit('selected-emoji', emoji);
     },
 
-    onSelectedCommand (command) {
-      this.$emit('selected-command', command);
-    },
-
     onSelectImage () {
       this.$refs.messageInputImageUpload.$refs.input.click();
     },
@@ -751,19 +723,7 @@ export default {
       this.$emit('cancel');
     },
 
-    onFocus (event) {
-      this.hasFocus = true;
-      this.$refs.richTextEditor?.focusEditor();
-      this.$emit('focus', event);
-    },
-
-    onBlur (event) {
-      this.hasFocus = false;
-      this.$emit('blur', event);
-    },
-
     onInput (event) {
-      this.$emit('input', event);
       this.$emit('update:modelValue', event);
     },
   },
@@ -771,21 +731,60 @@ export default {
 </script>
 
 <style lang="less">
-.dt-message-input--remaining-char-tooltip {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.dt-message-input--remaining-char {
-  font-size: 1.2rem;
-}
+.dt-message-input {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--dt-size-radius-400);
+  border: var(--dt-size-border-100) solid;
+  border-color: var(--dt-color-border-default);
+  cursor: text;
 
-.message-input-button__disabled {
-  background-color: unset;
-  color: var(--theme-sidebar-icon-color);
-  cursor: default;
-}
+  &:focus-within {
+    border-color: var(--dt-color-border-bold);
+    box-shadow: var(--dt-shadow-small);
+  }
 
-.dt-message-input--cancel-button {
-  margin-right: var(--dt-space-300);
+  &__editor-wrapper {
+    padding: var(--dt-space-400) var(--dt-space-500) var(--dt-space-300);
+  }
+
+  &__remaining-char-tooltip {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  &__remaining-char {
+    color: var(--dt-color-foreground-critical);
+    font-size: var(--dt-font-size-100);
+    margin-right: var(--dt-space-500);
+  }
+
+  &__send-button--disabled {
+    background-color: unset;
+    color: var(--dt-color-foreground-muted);
+    cursor: default;
+  }
+
+  &__cancel-button {
+    margin-right: var(--dt-space-300);
+  }
+
+  &__bottom-section {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--dt-space-300) var(--dt-space-400);
+  }
+
+  &__bottom-section-left {
+    display: flex;
+  }
+
+  &__bottom-section-right {
+    display: flex;
+  }
+
+  &__image-input {
+    position: absolute;
+  }
 }
 </style>

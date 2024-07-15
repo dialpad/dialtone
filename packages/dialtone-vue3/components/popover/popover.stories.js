@@ -7,6 +7,7 @@ import {
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import PopoverVariants from './popover_variants.story.vue';
+import PopoverIframe from './popover_iframe.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 import { action } from '@storybook/addon-actions';
@@ -164,6 +165,7 @@ export default {
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverDefault);
 const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverVariants);
+const TemplateIFrame = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverIframe);
 
 export const Default = {
   render: Template,
@@ -195,6 +197,26 @@ export const Variants = {
           },
         ],
       },
+    },
+
+    percy: {
+      args: {
+        open: true,
+      },
+    },
+  },
+};
+
+export const IframeTest = {
+  render: TemplateIFrame,
+
+  args: {
+    placement: 'top-end',
+  },
+
+  parameters: {
+    options: {
+      showPanel: false,
     },
 
     percy: {

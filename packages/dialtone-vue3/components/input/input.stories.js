@@ -13,7 +13,6 @@ export const argsData = {
   size: INPUT_SIZES.DEFAULT,
   placeholder: 'placeholder',
   label: 'Label',
-  iconSize: null,
   onBlur: action('blur'),
   onInput: action('input'),
   onClear: action('clear'),
@@ -28,7 +27,6 @@ export const argsData = {
 export const argTypesData = {
   // Slots
   description: {
-    description: 'slot for description, defaults to description prop',
     table: {
       type: { summary: 'VNode' },
     },
@@ -91,17 +89,6 @@ export const argTypesData = {
     table: {
       defaultValue: {
         summary: INPUT_SIZES.DEFAULT,
-      },
-    },
-  },
-  iconSize: {
-    options: [null, ...Object.values(INPUT_SIZES)],
-    control: {
-      type: 'select',
-    },
-    table: {
-      defaultValue: {
-        summary: 'null',
       },
     },
   },

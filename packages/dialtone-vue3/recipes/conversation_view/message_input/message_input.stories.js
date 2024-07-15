@@ -23,6 +23,32 @@ import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_
 */
 
 export const argTypesData = {
+  // Slots
+  emojiGiphyPicker: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  middle: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  top: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
   // Events
   onSubmit: {
     table: {
@@ -78,12 +104,6 @@ export const argTypesData = {
     },
   },
 
-  onSelectedCommand: {
-    table: {
-      disable: true,
-    },
-  },
-
   onCancel: {
     table: {
       disable: true,
@@ -95,11 +115,26 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onMeetingPillClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onSelectedCommand: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
 export const argsData = {
   modelValue: 'Always the Padawan, never the Jedi.',
+  top: '',
+  middle: '',
+  emojiGiphyPicker: '',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',
@@ -129,6 +164,7 @@ export const argsData = {
   showSend: {
     icon: 'send',
     ariaLabel: 'send',
+    tooltipLabel: 'Send',
   },
   mentionSuggestion,
   channelSuggestion,
@@ -140,6 +176,7 @@ export const argsData = {
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
   onSelectedCommand: action('selected-command'),
+  onMeetingPillClose: action('meeting-pill-close'),
   onAddMedia: action('add-media'),
   onPasteMedia: action('paste-media'),
   onNoticeClose: action('notice-close'),
@@ -179,5 +216,23 @@ export const WithoutExtensions = {
     allowStrike: false,
     allowUnderline: false,
     allowCodeblock: false,
+  },
+};
+
+export const WithMeetingPill = {
+  render: DefaultTemplate,
+  args: {
+    slashCommandSuggestion: {
+      items: ({ query }) => {
+        return [
+          {
+            command: 'dpm',
+            description: 'Start a Dialpad Meeting',
+          },
+        ];
+      },
+    },
+    modelValue: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
+    preventTyping: true,
   },
 };

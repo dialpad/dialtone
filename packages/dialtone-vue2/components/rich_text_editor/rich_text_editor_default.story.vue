@@ -7,6 +7,7 @@
     :output-format="$attrs.outputFormat"
     :auto-focus="$attrs.autoFocus"
     :placeholder="$attrs.placeholder"
+    :prevent-typing="$attrs.preventTyping"
     :link="$attrs.link"
     :mention-suggestion="$attrs.mentionSuggestion"
     :channel-suggestion="$attrs.channelSuggestion"
@@ -17,10 +18,13 @@
     :allow-codeblock="$attrs.allowCodeblock"
     :allow-italic="$attrs.allowItalic"
     :allow-strike="$attrs.allowStrike"
+    :allow-line-breaks="$attrs.allowLineBreaks"
     :allow-underline="$attrs.allowUnderline"
+    :additional-extensions="$attrs.additionalExtensions"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
     @focus="$attrs.onFocus"
+    @enter="$attrs.onEnter"
   />
 </template>
 

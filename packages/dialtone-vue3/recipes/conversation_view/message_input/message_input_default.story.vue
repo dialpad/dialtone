@@ -13,6 +13,7 @@
       :allow-strike="$attrs.allowStrike"
       :allow-underline="$attrs.allowUnderline"
       :editable="$attrs.editable"
+      :prevent-typing="$attrs.preventTyping"
       :input-class="$attrs.inputClass"
       :link="$attrs.link"
       :output-format="$attrs.outputFormat"
@@ -37,12 +38,32 @@
       @select-media="$attrs.onSelectMedia"
       @selected-emoji="$attrs.onSelectedEmoji"
       @selected-command="$attrs.onSelectedCommand"
+      @meeting-pill-close="$attrs.onMeetingPillClose"
       @skin-tone="$attrs.onSkinTone"
       @add-media="$attrs.onAddMedia"
       @paste-media="$attrs.onPasteMedia"
       @notice-close="$attrs.onNoticeClose"
       @cancel="$attrs.onCancel"
-    />
+    >
+      <template
+        v-if="$attrs.emojiGiphyPicker"
+        #emojiGiphyPicker
+      >
+        <span v-html="$attrs.emojiGiphyPicker" />
+      </template>
+      <template
+        v-if="$attrs.middle"
+        #middle
+      >
+        <span v-html="$attrs.middle" />
+      </template>
+      <template
+        v-if="$attrs.top"
+        #top
+      >
+        <span v-html="$attrs.top" />
+      </template>
+    </dt-recipe-message-input>
   </div>
 </template>
 

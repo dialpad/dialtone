@@ -100,6 +100,24 @@
         </template>
       </dt-tooltip>
     </div>
+    <div class="d-d-flex d-jc-center d-w100p">
+      <!-- Custom Theme -->
+      <dt-tooltip
+        class="d-mb64 d-mt32"
+        theme="purple"
+        :transition="$attrs.transition"
+        :message="localMessage"
+        :show="$attrs.showTooltip"
+      >
+        <template #anchor>
+          <dt-button
+            importance="outlined"
+          >
+            Custom Theme
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </div>
     <div class="d-bgc-purple-600 d-pt64 d-d-flex d-jc-center">
       <div class="d-py64">
         <!-- Inverted state -->
@@ -159,3 +177,13 @@ export default {
   },
 };
 </script>
+
+<style>
+.tippy-box[data-theme~='purple'] > .tippy-svg-arrow {
+  fill: var(--dt-color-purple-200);
+}
+.tippy-box[data-theme~='purple'] .d-tooltip {
+  background-color: var(--dt-color-purple-200);
+  color: var(--dt-color-foreground-primary);
+}
+</style>

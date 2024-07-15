@@ -5,6 +5,7 @@
     :description="$attrs.description"
     :unread-count="$attrs.unreadCount"
     :has-unreads="$attrs.hasUnreads"
+    :channel-setting="$attrs.channelSetting"
     :unread-mention-count="$attrs.unreadMentionCount"
     :aria-label="$attrs.ariaLabel"
     :unread-count-tooltip="$attrs.unreadCountTooltip"

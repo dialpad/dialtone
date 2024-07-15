@@ -113,6 +113,10 @@
           "link": "/design/"
         },
         {
+          "text": "Brand",
+          "link": "/design/brand/"
+        },
+        {
           "text": "Colors",
           "link": "/design/colors/"
         },
@@ -457,6 +461,10 @@
           "link": "/utilities/typography/font-style.html"
         },
         {
+          "text": "Font variant numeric",
+          "link": "/utilities/typography/font-variant-numeric.html"
+        },
+        {
           "text": "Font weight",
           "link": "/utilities/typography/font-weight.html"
         },
@@ -593,6 +601,10 @@
           "link": "/components/empty-state.html"
         },
         {
+          "text": "Hovercard",
+          "link": "/components/hovercard.html"
+        },
+        {
           "text": "Icon",
           "link": "/components/icon.html"
         },
@@ -651,6 +663,10 @@
         {
           "text": "Root layout",
           "link": "/components/root-layout.html"
+        },
+        {
+          "text": "Scrollbar",
+          "link": "/components/scrollbar.html"
         },
         {
           "text": "Scroller",
