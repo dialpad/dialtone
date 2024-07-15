@@ -23,6 +23,32 @@ import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_
 */
 
 export const argTypesData = {
+  // Slots
+  emojiGiphyPicker: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  middle: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  top: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
   // Events
   onSubmit: {
     table: {
@@ -106,6 +132,9 @@ export const argTypesData = {
 // Set default values at the story level here.
 export const argsData = {
   modelValue: 'Always the Padawan, never the Jedi.',
+  top: '',
+  middle: '',
+  emojiGiphyPicker: '',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',

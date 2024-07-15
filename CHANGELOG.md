@@ -1,3 +1,32 @@
+## [9.55.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.55.0...dialtone/v9.55.1) (2024-07-15)
+
+
+### Bug Fixes
+
+* **Scrollbar:** NO-JIRA fix to explicitly set the viewport ([#409](https://github.com/dialpad/dialtone/issues/409)) ([42b98a4](https://github.com/dialpad/dialtone/commit/42b98a4d736ceddc972ed7ee8add00bee5d69bdf))
+
+# [9.55.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.54.2...dialtone/v9.55.0) (2024-07-12)
+
+
+### Bug Fixes
+
+* NO-JIRA corrupted pnpm-lock file ([4f732c8](https://github.com/dialpad/dialtone/commit/4f732c89c2c1874baeb4ef4877c73c3efa01e6f4))
+* **Rich Text Editor:** NO-JIRA multiple improvements ([#402](https://github.com/dialpad/dialtone/issues/402)) ([c30b3a7](https://github.com/dialpad/dialtone/commit/c30b3a7049245fb39fcaf382420c74bf25e11146))
+
+
+### Documentation
+
+* DLT-1787 implement custom TOC ([#397](https://github.com/dialpad/dialtone/issues/397)) ([bf82624](https://github.com/dialpad/dialtone/commit/bf82624a63dece3b5a7d0aea7d8863f12145773b))
+* **Logo:** DLT-1866 modify dialtone documentation logo ([#403](https://github.com/dialpad/dialtone/issues/403)) ([8047550](https://github.com/dialpad/dialtone/commit/8047550923830efe31522f3be0b601e3a75a24f2))
+
+
+### Features
+
+* **Design Tokens:** DLT-1870 additional expressive typography tokens ([#404](https://github.com/dialpad/dialtone/issues/404)) ([2bdc3a5](https://github.com/dialpad/dialtone/commit/2bdc3a5c6cbf0aa6cfc78b77842eff7071642247))
+* **Design Tokens:** DLT-1871 added gold brand color ([#405](https://github.com/dialpad/dialtone/issues/405)) ([ab0d032](https://github.com/dialpad/dialtone/commit/ab0d0321cac9a02b955a0da73924d947467a7f28))
+* **Multi Select:** DLT-1845 allow duplicated names on multiselect ([#394](https://github.com/dialpad/dialtone/issues/394)) ([ff8be5f](https://github.com/dialpad/dialtone/commit/ff8be5f1c40277ca4384ee58740430b9c346771a))
+* **Scrollbar:** DLT-1473 add scrollbar directive ([#391](https://github.com/dialpad/dialtone/issues/391)) ([05af2ff](https://github.com/dialpad/dialtone/commit/05af2ff7fc11759935b2623212b31b716b26d774))
+
 ## [9.54.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.54.1...dialtone/v9.54.2) (2024-07-09)
 
 

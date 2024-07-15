@@ -10,6 +10,7 @@ import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DtTooltipDirective } from "@/directives/tooltip";
 import { faker } from '@faker-js/faker';
+import { DtScrollbarDirective } from "@/directives/scrollbar";
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
@@ -17,6 +18,7 @@ setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 
 Vue.use(DtTooltipDirective);
+Vue.use(DtScrollbarDirective);
 
 // Fixes method "toJSON" is not defined on click event in Sb 6.5.11
 // See https://github.com/storybookjs/storybook/issues/14933#issuecomment-920578274

@@ -32,7 +32,7 @@
       :id="vuePanelId"
       :tab-id="vueTabId"
     >
-      <div class="language-html" data-ext="html">
+      <div v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
         <pre class="language-html" v-html="highlightedVue" />
       </div>
     </dt-tab-panel>
@@ -49,7 +49,7 @@
         When using HTML / CSS code only the visuals of the component are rendered. It may require
         additional javascript to function the same way as the example.
       </dt-banner>
-      <div class="language-html" data-ext="html">
+      <div v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
         <pre class="language-html" v-html="highlightedHtml" />
       </div>
     </dt-tab-panel>
