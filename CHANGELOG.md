@@ -1,3 +1,10 @@
+## [9.55.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.55.0...dialtone/v9.55.1) (2024-07-15)
+
+
+### Bug Fixes
+
+* **Scrollbar:** NO-JIRA fix to explicitly set the viewport ([#409](https://github.com/dialpad/dialtone/issues/409)) ([42b98a4](https://github.com/dialpad/dialtone/commit/42b98a4d736ceddc972ed7ee8add00bee5d69bdf))
+
 # [9.55.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.54.2...dialtone/v9.55.0) (2024-07-12)
 
 
