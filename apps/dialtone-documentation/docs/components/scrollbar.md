@@ -71,6 +71,7 @@ Vue.use(DtScrollbarDirective);
 ```
 
 To add a custom overlay scrollbar to a scrollable region, apply the `v-dt-scrollbar` directive to the parent element of the desired region.
+This parent element should have one and only one child. In the case where there are siblings, the scrollable element should be wrapped inside a new `<div>` tag with the directive attached by adding `<div v-dt-scrollbar></div>` around the element.
 There is no need to explicitly add an `overflow` property. If the section overflows the available vertical space, a vertical scrollbar will be present. Similarly, if it exceeds the horizontal space, a horizontal scrollbar will appear.
 
 ## Characteristics
