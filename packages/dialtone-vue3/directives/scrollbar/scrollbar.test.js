@@ -5,12 +5,13 @@ import { OverlayScrollbars } from 'overlayscrollbars';
 const WrapperComponent = {
   name: 'wrapper-component',
   template: `
-    <div v-dt-scrollbar></div>
+    <div v-dt-scrollbar><div id="viewport"></div></div>
   `,
 };
 
 describe('DtScrollbarDirective Tests', () => {
   let wrapper;
+  let viewportElement;
 
   const updateWrapper = () => {
     wrapper = mount(WrapperComponent, {
@@ -19,6 +20,8 @@ describe('DtScrollbarDirective Tests', () => {
       },
       attachTo: document.body,
     });
+
+    viewportElement = wrapper.find('#viewport').element;
   };
 
   afterEach(() => {
@@ -53,7 +56,14 @@ describe('DtScrollbarDirective Tests', () => {
       });
 
       it('should setup directive', () => {
-        expect(OverlayScrollbars).toHaveBeenCalledWith(wrapper.element, { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: '0' } });
+        expect(OverlayScrollbars).toHaveBeenCalledWith(
+          {
+            target: wrapper.element,
+            elements: {
+              viewport: viewportElement,
+            },
+          },
+          { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: '0' } });
         expect(OverlayScrollbars).toHaveBeenCalledTimes(1);
         expect(wrapper.element.getAttribute('data-overlayscrollbars-initialize')).toBe('true');
         expect(wrapper.element.classList.contains('scrollbar')).toBe(true);

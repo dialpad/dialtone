@@ -70,7 +70,7 @@ Install the directive into vue instance
 Vue.use(DtScrollbarDirective);
 ```
 
-To add a custom overlay scrollbar to a scrollable region, apply the `v-dt-scrollbar` directive to the desired region.
+To add a custom overlay scrollbar to a scrollable region, apply the `v-dt-scrollbar` directive to the parent element of the desired region.
 There is no need to explicitly add an `overflow` property. If the section overflows the available vertical space, a vertical scrollbar will be present. Similarly, if it exceeds the horizontal space, a horizontal scrollbar will appear.
 
 ## Characteristics
@@ -95,11 +95,13 @@ Show the scrollbar when the mouse enters the scrollable area. This is the defaul
 ```
 
 <code-well-header>
-  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
-    <div v-for="item in items" class="item">
-      {{ item}}
-    </div>
-  </dt-stack>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
+    <dt-stack>
+      <div v-for="item in items" class="item">
+        {{ item}}
+      </div>
+    </dt-stack>
+  </div>
 </code-well-header>
 
 ### Always
@@ -111,11 +113,13 @@ Always show the scrollbar if the region is overflowing the available space.
 ```
 
 <code-well-header>
-  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:never>
-    <div v-for="item in items" class="item">
-      {{ item}}
-    </div>
-  </dt-stack>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:never>
+    <dt-stack>
+      <div v-for="item in items" class="item">
+        {{ item}}
+      </div>
+    </dt-stack>
+  </div>
 </code-well-header>
 
 ### Scroll
@@ -127,11 +131,13 @@ Show the scrollbar on scroll.
 ```
 
 <code-well-header>
-  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:scroll>
-    <div v-for="item in items" class="item">
-      {{ item}}
-    </div>
-  </dt-stack>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:scroll>
+    <dt-stack>
+      <div v-for="item in items" class="item">
+        {{ item}}
+      </div>
+    </dt-stack>
+  </div>
 </code-well-header>
 
 ### Move
@@ -143,22 +149,23 @@ Show the scrollbar when the mouse moves inside the scrollable area.
 ```
 
 <code-well-header>
-  <dt-stack class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:move>
-    <div v-for="item in items" class="item">
-      {{ item}}
-    </div>
-  </dt-stack>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:move>
+    <dt-stack>
+      <div v-for="item in items" class="item">
+        {{ item}}
+      </div>
+    </dt-stack>
+  </div>
 </code-well-header>
 
 ## Limitations
 
-Adding this directive to a DOM element or a Vue component will alter the DOM structure, by adding four elements inside the one that the directive was attached to. If the scrollable region is a Vue component, it's recommended to wrap it in a `<div v-dt-scrollbar></div>`, to avoid altering the structure
-that the component needs.
+Adding this directive to a DOM element or a Vue component will alter the DOM structure, by adding four elements inside the one that the directive was attached to. If the scrollable region is a Vue component, it's recommended to wrap it in a `<div v-dt-scrollbar></div>`, to avoid altering the structure that the component needs.
 
 The added elements are:
 
 * One with the class `os-size-observer`
-* The second one is the actual scrollable element
+* The second one is the scrollable viewport
 * The horizontal scrollbar
 * The vertical scrollbar
 
