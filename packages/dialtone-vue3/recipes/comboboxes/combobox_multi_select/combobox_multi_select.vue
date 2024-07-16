@@ -643,8 +643,9 @@ export default {
     async handleInputFocusOut () {
       this.inputFocused = false;
       if (this.collapseOnFocusOut) {
-        await this.$nextTick();
-        this.setInputPadding();
+        const input = this.getInput();
+        if (!input) return;
+        this.revertInputPadding(input);
       }
     },
   },
