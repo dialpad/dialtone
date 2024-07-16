@@ -1,3 +1,10 @@
+# [9.56.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.55.1...dialtone/v9.56.0) (2024-07-16)
+
+
+### Features
+
+* **Combobox Multiselect:** NO-JIRA add collapse on focus out ([#399](https://github.com/dialpad/dialtone/issues/399)) ([e4595c9](https://github.com/dialpad/dialtone/commit/e4595c9598cdde1c1ce8fd6cf2fef2e766470f57))
+
 ## [9.55.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.55.0...dialtone/v9.55.1) (2024-07-15)
 
 
