@@ -3,6 +3,7 @@
     element-type="li"
     max-width="100%"
     :open="item.link ? isOpen : true"
+    class="dt-sidebar-item"
   >
     <template #anchor="{ attrs }">
       <dt-stack
@@ -21,10 +22,10 @@
             label-class="d-jc-flex-start"
             icon-position="right"
             :class="[
-              'd-bar-pill d-mb2 d-w100p d-us-none d-td-none',
+              'd-bar-pill d-w100p d-fw-normal d-us-none d-td-none d-fc-primary',
               {
-                'd-btn--active d-fw-medium': isActiveLink(isExactActive, item.link),
                 'd-headline--eyebrow d-fw-semibold d-fc-secondary d-bgc-transparent d-c-default': !item.link,
+                'd-btn--active d-fw-medium': isActiveLink(isExactActive, item.link),
               },
             ]"
             @click="handleAnchorClick(navigate, item.link)"
@@ -48,7 +49,7 @@
         gap="200"
       >
         <li
-          v-for="subItem in subItems"
+          v-for="(subItem, index) in subItems"
           :key="subItem.text"
         >
           <sidebar-item v-if="subItem.children" :item="subItem" nested />
@@ -63,10 +64,10 @@
               kind="muted"
               label-class="d-jc-flex-start"
               :class="[
-                'd-bar-pill d-w100p d-jc-flex-start d-fw-normal d-fc-primary',
-                'd-mb2 d-us-none',
+                'd-bar-pill d-w100p d-fw-normal d-us-none d-td-none d-fc-primary',
                 {
                   'd-btn--active d-fw-medium': isActiveLink(isExactActive, subItem.link),
+                  'd-mt2': (index === 0 && nested), // add margin top to first nested item
                 },
               ]"
               @click="navigate"
@@ -143,3 +144,9 @@ function handleAnchorClick (navigate, link) {
   navigate();
 }
 </script>
+
+<style lang="less" scoped>
+.dt-sidebar-item {
+  width: var(--dt-size-100-percent);
+}
+</style>
