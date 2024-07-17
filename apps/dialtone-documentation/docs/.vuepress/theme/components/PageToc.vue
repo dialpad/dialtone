@@ -10,7 +10,6 @@
       >
         <li v-if="!header.children.length">
           <toc-item
-            class="d-fw-semibold"
             :active="isItemActive(header)"
             :to="header.link"
             :text="header.title"
@@ -25,7 +24,6 @@
           <template #anchor="{ attrs }">
             <toc-item
               v-bind="attrs"
-              class="d-fw-semibold"
               :active="isItemActive(header)"
               :to="header.link"
               :text="header.title"

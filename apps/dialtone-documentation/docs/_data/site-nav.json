@@ -52,6 +52,36 @@
           "link": "/guides/contributing/"
         },
         {
+          "text": "Content",
+          "link": "/guides/content/",
+          "children": [
+            {
+              "text": "Action Language",
+              "link": "/guides/content/action-language/"
+            },
+            {
+              "text": "Error Messages",
+              "link": "/guides/content/error-messages/"
+            },
+            {
+              "text": "Grammar and Mechanics",
+              "link": "/guides/content/grammar-mechanics/"
+            },
+            {
+              "text": "Help Content",
+              "link": "/guides/content/help-content/"
+            },
+            {
+              "text": "Inclusive Language",
+              "link": "/guides/content/inclusive-language/"
+            },
+            {
+              "text": "Voice and Tone",
+              "link": "/guides/content/voice-tone/"
+            }
+          ]
+        },
+        {
           "text": "Design principles",
           "link": "/guides/design-principles/",
           "planned": true
@@ -69,37 +99,6 @@
           "text": "Design Assets",
           "link": "/guides/design-assets/",
           "planned": true
-        }
-      ]
-    }
-  ],
-  "/content": [
-    {
-      "text": "Content",
-      "children": [
-        {
-          "text": "Action Language",
-          "link": "/content/action-language/"
-        },
-        {
-          "text": "Error Messages",
-          "link": "/content/error-messages/"
-        },
-        {
-          "text": "Grammar and Mechanics",
-          "link": "/content/grammar-mechanics/"
-        },
-        {
-          "text": "Help Content",
-          "link": "/content/help-content/"
-        },
-        {
-          "text": "Inclusive Language",
-          "link": "/content/inclusive-language/"
-        },
-        {
-          "text": "Voice and Tone",
-          "link": "/content/voice-tone/"
         }
       ]
     }
@@ -346,7 +345,7 @@
         {
           "text": "Resize",
           "link": "/utilities/interactivity/resize.html"
-      }
+        }
       ]
     },
     {
@@ -512,7 +511,6 @@
           "text": "Word wrap",
           "link": "/utilities/typography/word-wrap.html"
         }
-
       ]
     }
   ],

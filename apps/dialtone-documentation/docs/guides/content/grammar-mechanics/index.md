@@ -1,5 +1,7 @@
 ---
 title: Grammar and mechanics
+prev: { link: "/guides/content/error-messages/", text: "Error messages" }
+next: { link: "/guides/content/help-content/", text: "Help content" }
 description: These guidelines exist to help everyone at Dialpad write helpful copy that shares the same voice, tone, and consistency.
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: Action language
+prev: { link: "/guides/content/", text: "Content" }
+next: { link: "/guides/content/error-messages/", text: "Error messages" }
 description: Customers use Dialpad to connect with others. Content should be written and structured to help them understand and take the most important actions.
 ---
 
