@@ -1,4 +1,12 @@
 .d-emoji-text-wrapper {
-  display: flex !important;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  column-gap: var(--dt-space-300);
+
+  > :not(.d-emoji) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
