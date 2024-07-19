@@ -49,13 +49,10 @@ export default {
      * @returns {Array<VNode|string>}
      */
     replaceDtEmojis (replaceList, textContent) {
-      let items = [];
-      if (replaceList.length) {
-        const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
-        items = textContent.split(regexp);
-      } else {
-        items = textContent.split(' ');
-      }
+      if (!replaceList?.length) return textContent;
+
+      const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
+      const items = textContent.split(regexp);
 
       return items
         .filter(item => item.trim() !== '')
@@ -65,7 +62,7 @@ export default {
               props: { code: item, size: this.size },
             });
           }
-          return this.$createElement('span', item);
+          return this.$createElement('span', { class: 'd-emoji-text-wrapper__text' }, item);
         });
     },
 

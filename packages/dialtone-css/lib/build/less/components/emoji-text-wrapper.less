@@ -1,12 +1,16 @@
 .d-emoji-text-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  column-gap: var(--dt-space-300);
+  &__text {
+    vertical-align: middle;
+  }
 
-  > :not(.d-emoji) {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  .d-emoji {
+    position: relative;
+    vertical-align: middle;
+
+    .d-icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 }
