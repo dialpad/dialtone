@@ -104,7 +104,10 @@ export default {
     const defaultSlotContent = this.$slots.default || [];
     return h(
       this.elementType,
-      { class: 'd-emoji-text-wrapper' },
+      {
+        'data-qa': 'emoji-text-wrapper',
+        class: 'd-emoji-text-wrapper',
+      },
       this.loadingEmojiJson
         ? defaultSlotContent
         : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),

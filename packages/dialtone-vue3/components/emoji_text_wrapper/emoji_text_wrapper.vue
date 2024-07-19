@@ -50,15 +50,18 @@ export default {
      * @returns {Array<VNode|string>}
      */
     replaceDtEmojis (replaceList, textContent) {
+      if (!replaceList?.length) return textContent;
+
       const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
-      const split = textContent.split(regexp);
-      return split
+      const items = textContent.split(regexp);
+
+      return items
         .filter(item => item.trim() !== '')
         .map((item) => {
           if (replaceList.includes(item)) {
-            return h(DtEmoji, { size: this.size, code: item });
+            return h(DtEmoji, { code: item, size: this.size });
           }
-          return item;
+          return h('span', { class: 'd-emoji-text-wrapper__text' }, item);
         });
     },
 
@@ -104,15 +107,9 @@ export default {
         'data-qa': 'emoji-text-wrapper',
         class: 'd-emoji-text-wrapper',
       },
-      [
-        h(
-          'div',
-          { class: 'd-emoji-text-wrapper__container' },
-          this.loadingEmojiJson
-            ? defaultSlotContent
-            : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
-        ),
-      ],
+      this.loadingEmojiJson
+        ? defaultSlotContent
+        : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
     );
   },
 };
