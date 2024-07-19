@@ -1,3 +1,10 @@
+# [8.38.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.2...dialtone-css/v8.38.0) (2024-07-12)
+
+
+### Features
+
+* **Scrollbar:** DLT-1473 add scrollbar directive ([#391](https://github.com/dialpad/dialtone/issues/391)) ([05af2ff](https://github.com/dialpad/dialtone/commit/05af2ff7fc11759935b2623212b31b716b26d774))
+
 ## [8.37.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.1...dialtone-css/v8.37.2) (2024-07-09)
 
 

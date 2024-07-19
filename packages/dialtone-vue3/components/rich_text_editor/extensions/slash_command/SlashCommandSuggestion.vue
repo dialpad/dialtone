@@ -4,7 +4,7 @@
     <div class="d-body--md-compact">
       <span>/{{ command }}</span><span v-if="parametersExample"> {{ parametersExample }}</span>
     </div>
-    <div class="d-body--sm">
+    <div class="d-body--sm d-fc-tertiary">
       {{ description }}
     </div>
   </div>

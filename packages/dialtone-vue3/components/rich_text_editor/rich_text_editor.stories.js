@@ -22,6 +22,7 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
+  onEnter: action('enter'),
 };
 
 export const argTypesData = {
@@ -82,6 +83,11 @@ export const argTypesData = {
     },
   },
   onFocus: {
+    table: {
+      disable: true,
+    },
+  },
+  onEnter: {
     table: {
       disable: true,
     },

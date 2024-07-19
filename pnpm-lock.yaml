@@ -627,6 +627,9 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      overlayscrollbars:
+        specifier: 2.9.1
+        version: 2.9.1
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -859,6 +862,9 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      overlayscrollbars:
+        specifier: 2.9.1
+        version: 2.9.1
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -11589,6 +11595,9 @@ packages:
   oslllo-validator@3.1.0:
     resolution: {integrity: sha512-eqaVuDxnxDO55+pncqTTphbeq6O5XHMyrSfWQoL48mG2rUjr2ZBzvkFkcxIiG3l7IaIY6/L1oX1AJIDdZyzuPQ==}
     engines: {node: '>= 10.0'}
+
+  overlayscrollbars@2.9.1:
+    resolution: {integrity: sha512-BY3hfQcQVZvi25e3YcYe06HPy9yn0lE3akBnUE02fGu3S8OyJmGFx/LDC9rjFJg6Im+YdweXLYEFJTuEhVLMvA==}
 
   p-any@2.1.0:
     resolution: {integrity: sha512-JAERcaMBLYKMq+voYw36+x5Dgh47+/o7yuv2oQYuSSUml4YeqJEFznBrY2UeEkoSHqBua6hz518n/PsowTYLLg==}
@@ -29284,6 +29293,8 @@ snapshots:
     dependencies:
       domino: 2.1.6
       validator: 13.11.0
+
+  overlayscrollbars@2.9.1: {}
 
   p-any@2.1.0:
     dependencies:

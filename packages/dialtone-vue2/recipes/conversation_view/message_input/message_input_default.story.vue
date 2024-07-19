@@ -45,7 +45,26 @@
         @paste-media="$attrs.onPasteMedia"
         @notice-close="$attrs.onNoticeClose"
         @cancel="$attrs.onCancel"
-      />
+      >
+        <template
+          v-if="$attrs.emojiGiphyPicker"
+          #emojiGiphyPicker
+        >
+          <span v-html="$attrs.emojiGiphyPicker" />
+        </template>
+        <template
+          v-if="$attrs.middle"
+          #middle
+        >
+          <span v-html="$attrs.middle" />
+        </template>
+        <template
+          v-if="$attrs.top"
+          #top
+        >
+          <span v-html="$attrs.top" />
+        </template>
+      </dt-recipe-message-input>
     </div>
   </div>
 </template>
