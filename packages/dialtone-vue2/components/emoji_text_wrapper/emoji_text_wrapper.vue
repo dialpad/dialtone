@@ -49,7 +49,7 @@ export default {
      * @returns {Array<VNode|string>}
      */
     replaceDtEmojis (replaceList, textContent) {
-      if (!replaceList?.length) return textContent;
+      if (!replaceList.length) return textContent;
 
       const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
       const items = textContent.split(regexp);
