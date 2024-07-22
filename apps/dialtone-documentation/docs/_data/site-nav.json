@@ -554,6 +554,10 @@
           "link": "/components/datepicker.html"
         },
         {
+          "text": "Description list",
+          "link": "/components/description-list.html"
+        },
+        {
           "text": "Dropdown",
           "link": "/components/dropdown.html"
         },
