@@ -59,7 +59,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
 
 The dropdown component provides accessibility controls when using with List item component.
 
-The dropdown has 2 major pieces that are provided as required named slots: the anchor and the list.
+The dropdown has two major pieces that are provided as required named slots: the anchor and the list.
 
 The **anchor** slot contains the element that controls the dropdown's visibility.
 
