@@ -14,7 +14,7 @@ export default defineClientConfig({
     // Register libraries
     if (!__VUEPRESS_SSR__) {
       await registerDialtoneVue(app);
-      await registerDialtoneCombinator(app);
+      // await registerDialtoneCombinator(app);
     }
     router.options.scrollBehavior = (to, from, savedPosition) => {
       if (to.hash) {
@@ -76,9 +76,12 @@ async function registerDialtoneVue (app) {
   window.DIALTONE_CONSTANTS = dialtoneConstants;
 }
 
-async function registerDialtoneCombinator (app) {
-  const module = await import('@dialpad/dialtone-combinator');
-  app.component('DtcCombinator', module.DtcCombinator);
-  app.component('DtcSection', module.DtcSection);
-  app.provide('variantBank', module.variantBank());
-}
+// This is commented because we are currently not using the combinator and it's
+// adding some wrong styles to the page for the dt-list-item component.
+
+// async function registerDialtoneCombinator (app) {
+//   const module = await import('@dialpad/dialtone-combinator');
+//   app.component('DtcCombinator', module.DtcCombinator);
+//   app.component('DtcSection', module.DtcSection);
+//   app.provide('variantBank', module.variantBank());
+// }

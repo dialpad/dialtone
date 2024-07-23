@@ -1,3 +1,17 @@
+## [8.38.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.0...dialtone-css/v8.38.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* **Scrollbar:** NO-JIRA fix horizontal scrollbar on hover ([73acc8f](https://github.com/dialpad/dialtone/commit/73acc8ff376f78121084a75b1d87b0ff696cffcc))
+
+# [8.38.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.2...dialtone-css/v8.38.0) (2024-07-12)
+
+
+### Features
+
+* **Scrollbar:** DLT-1473 add scrollbar directive ([#391](https://github.com/dialpad/dialtone/issues/391)) ([05af2ff](https://github.com/dialpad/dialtone/commit/05af2ff7fc11759935b2623212b31b716b26d774))
+
 ## [8.37.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.1...dialtone-css/v8.37.2) (2024-07-09)
 
 

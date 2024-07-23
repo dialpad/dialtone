@@ -1,3 +1,42 @@
+## [3.137.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.137.0...dialtone-vue3/v3.137.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* **Multi Select:** NO-JIRA update input padding when focus out ([#410](https://github.com/dialpad/dialtone/issues/410)) ([2dd6dce](https://github.com/dialpad/dialtone/commit/2dd6dce1a9b16f3164b8c576639724e799cafc82))
+
+
+### Documentation
+
+* DLT-1794 move storybook to doc site Datepicker to Dropdown ([#411](https://github.com/dialpad/dialtone/issues/411)) ([9f71cd2](https://github.com/dialpad/dialtone/commit/9f71cd2f7e15732ec407cda695218a0d1e886a9b))
+
+# [3.137.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.136.1...dialtone-vue3/v3.137.0) (2024-07-16)
+
+
+### Features
+
+* **Combobox Multiselect:** NO-JIRA add collapse on focus out ([#399](https://github.com/dialpad/dialtone/issues/399)) ([e4595c9](https://github.com/dialpad/dialtone/commit/e4595c9598cdde1c1ce8fd6cf2fef2e766470f57))
+
+## [3.136.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.136.0...dialtone-vue3/v3.136.1) (2024-07-15)
+
+
+### Bug Fixes
+
+* **Scrollbar:** NO-JIRA fix to explicitly set the viewport ([#409](https://github.com/dialpad/dialtone/issues/409)) ([42b98a4](https://github.com/dialpad/dialtone/commit/42b98a4d736ceddc972ed7ee8add00bee5d69bdf))
+
+# [3.136.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.135.2...dialtone-vue3/v3.136.0) (2024-07-12)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA multiple improvements ([#402](https://github.com/dialpad/dialtone/issues/402)) ([c30b3a7](https://github.com/dialpad/dialtone/commit/c30b3a7049245fb39fcaf382420c74bf25e11146))
+
+
+### Features
+
+* **Multi Select:** DLT-1845 allow duplicated names on multiselect ([#394](https://github.com/dialpad/dialtone/issues/394)) ([ff8be5f](https://github.com/dialpad/dialtone/commit/ff8be5f1c40277ca4384ee58740430b9c346771a))
+* **Scrollbar:** DLT-1473 add scrollbar directive ([#391](https://github.com/dialpad/dialtone/issues/391)) ([05af2ff](https://github.com/dialpad/dialtone/commit/05af2ff7fc11759935b2623212b31b716b26d774))
+
 ## [3.135.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.135.1...dialtone-vue3/v3.135.2) (2024-07-09)
 
 
