@@ -8,12 +8,19 @@
   }
 
   .os-scrollbar {
+    &.os-scrollbar-horizontal .os-scrollbar-handle:hover {
+      height: calc(var(--os-handle-perpendicular-size) + var(--dt-size-200));
+    }
+
+    &.os-scrollbar-vertical .os-scrollbar-handle:hover {
+      width: calc(var(--os-handle-perpendicular-size) + var(--dt-size-200));
+    }
+
     .os-scrollbar-handle {
       cursor: auto;
       opacity: var(--dt-opacity-700);
 
       &:hover {
-        width: calc(var(--os-handle-perpendicular-size) + var(--dt-size-200));
         opacity: var(--dt-opacity-800);
       }
 

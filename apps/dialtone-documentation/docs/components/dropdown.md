@@ -9,23 +9,30 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 
 <code-well-header>
-<body>
-  <dt-dropdown class="d-mr8">
-    <template #anchor>
-      <dt-button>
+  <dt-dropdown navigation-type="arrow-keys">
+    <template #anchor="{ attrs }">
+      <dt-button v-bind="attrs">
         Click to Open
       </dt-button>
     </template>
-    <template #list>
+    <template #list="{ close }">
       <dt-list-item-group
         heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
         heading="Menu Heading A"
       >
-        <dt-list-item>
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="close"
+        >
           Menu Item 1
         </dt-list-item>
         <dt-dropdown-separator />
-        <dt-list-item>
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="close"
+        >
           Menu Item 2
         </dt-list-item>
       </dt-list-item-group>
@@ -34,13 +41,150 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
         heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
         heading="Menu Heading B"
       >
-        <dt-list-item>
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="close"
+        >
           Menu Item 3
         </dt-list-item>
       </dt-list-item-group>
     </template>
   </dt-dropdown>
-</body>
+</code-well-header>
+
+## Usage
+
+Use the Dropdown component when you have a list of links or actions that can be performed. Use the [Select Menu](/components/select-menu.html) component to allow the users to choose one option from the list.
+
+The dropdown component provides accessibility controls when using with List item component.
+
+The dropdown has two major pieces that are provided as required named slots: the anchor and the list.
+
+The **anchor** slot contains the element that controls the dropdown's visibility.
+
+The **list** slot contains a list of items to show as dropdown menu items.
+
+## Variants and examples
+
+### Default
+
+<code-well-header>
+  <dt-dropdown navigation-type="arrow-keys">
+    <template #anchor="{ attrs }">
+      <dt-button v-bind="attrs">
+        Click to open
+      </dt-button>
+    </template>
+    <template #list="{ close }">
+      <dt-list-item
+        v-for="(item) in items"
+        :key="item.id"
+        role="menuitem"
+        :navigation-type="arrow-keys"
+        @click="close"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </template>
+  </dt-dropdown>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div>
+  <div class="d-popover">
+    <div id="DtPopover__anchor2">
+      <button class="base-button__button d-btn d-btn--primary">
+        <span class="d-btn__label base-button__label"> Click to open </span>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-13" data-popper-placement="bottom" style="...">
+  <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
+    <div class="d-popover__content">
+      <ul id="dt6" class="d-dropdown-list d-py0">
+        <li class="dt-list-item" tabindex="-1" role="menuitem" aria-selected="false">
+          <div class="dt-item-layout">
+            <section class="dt-item-layout--content">
+              <div class="dt-item-layout--title">Menu Item 1</div>
+            </section>
+          </div>
+        </li>
+        ...
+      </ul>
+    </div>
+  </div>
+</div>
+'
+vueCode='
+<dt-dropdown navigation-type="arrow-keys">
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      v-for="(item) in items"
+      :key="item.id"
+      role="menuitem"
+      :navigation-type="arrow-keys"
+      @click="close"
+    >
+      {{ item.name }}
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+'
+/>
+
+### With sections and headings
+
+<code-well-header>
+  <dt-dropdown navigation-type="arrow-keys">
+    <template #anchor="{ attrs }">
+      <dt-button v-bind="attrs">
+        Click to open
+      </dt-button>
+    </template>
+    <template #list="{ close }">
+      <dt-list-item-group
+        heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+        heading="Menu Heading A"
+      >
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="close"
+        >
+          Menu Item 1
+        </dt-list-item>
+        <dt-dropdown-separator />
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="close"
+        >
+          Menu Item 2
+        </dt-list-item>
+      </dt-list-item-group>
+      <dt-dropdown-separator />
+      <dt-list-item-group
+        heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+        heading="Menu Heading B"
+      >
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="close"
+        >
+          Menu Item 3
+        </dt-list-item>
+      </dt-list-item-group>
+    </template>
+  </dt-dropdown>
 </code-well-header>
 
 <code-example-tabs
@@ -99,22 +243,30 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-dropdown class="d-mr8">
-  <template #anchor>
-    <dt-button>
-      with sections and headings
+<dt-dropdown navigation-type="arrow-keys">
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
+      Click to open
     </dt-button>
   </template>
-  <template #list>
+  <template #list="{ close }">
     <dt-list-item-group
       heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
       heading="Menu Heading A"
     >
-      <dt-list-item>
+      <dt-list-item
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
+      >
         Menu Item 1
       </dt-list-item>
       <dt-dropdown-separator />
-      <dt-list-item>
+      <dt-list-item
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
+      >
         Menu Item 2
       </dt-list-item>
     </dt-list-item-group>
@@ -123,7 +275,11 @@ vueCode='
       heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
       heading="Menu Heading B"
     >
-      <dt-list-item>
+      <dt-list-item
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
+      >
         Menu Item 3
       </dt-list-item>
     </dt-list-item-group>
@@ -132,6 +288,86 @@ vueCode='
 '
 showHtmlWarning />
 
+### Context menu
+
+Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger behavior.
+
+<code-well-header>
+  <dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
+    <template #anchor="{ attrs }">
+      <div
+        v-bind="attrs"
+        class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
+      >
+        Right click to open
+      </div>
+    </template>
+    <template #list="{ close }">
+      <dt-list-item
+        v-for="(item) in items"
+        :key="item.id"
+        role="menuitem"
+        :navigation-type="arrow-keys"
+        @click="close"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </template>
+  </dt-dropdown>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
+  <template #anchor="{ attrs }">
+    <div
+      v-bind="attrs"
+      class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
+    >
+      Right click to open
+    </div>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      v-for="(item) in items"
+      :key="item.id"
+      role="menuitem"
+      :navigation-type="arrow-keys"
+      @click="close"
+    >
+      {{ item.name }}
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="dropdown" />
+
+## Accessibility
+
+It is possible to include a screen reader visible only close button setting `visually-hidden-close` and `visually-hidden-close-label` props.
+
+The dropdown menu has a role of "menu" and the list items have a role "menuitem". See [W3C guidelines](https://www.w3.org/WAI/ARIA/apg/#menubutton) for more information.
+
+### List
+
+The Dropdown is rendered with semantic `<ul>` and `<li>`. The list slot is wrapped in `<ul>` element so make sure the items are wrapped in `<li>` element and each item has the menuitem role. It is recommended to use the [List Item component](/components/list-item.html) as it supports all the necessary accessibility props and interactions.
+
+### Focus & Keyboard
+
+A dropdown menu has well defined standard [keyboard interactions](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-links/#kbd_label) that it should support. The focus will be set to the the active item on keyboard navigation. `UP` and `DOWN` arrows move the highlighted selection between the list items. `HOME` and `END` keys will jump straight to the first or the last item. Once the beginning or the end of the list is reached the selection will move to the opposite end of the list by default. If you want custom behavior you can pass `onBeginningOfList` and `onEndOfList` methods as props. `A-Z` keys will cycle through items that start with the corresponding letter.
+
+Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the **highlight** selection changes, a highlight event is emitted with the index of the currently highlighted item. `SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
+
+<script setup>
+const items = [
+  { name: 'Menu item 1', id: 1 },
+  { name: 'Menu item 2', id: 2 },
+  { name: 'Another menu item 1', id: 3 },
+  { name: 'Menu item 3', id: 4 },
+  { name: 'Another menu item 2', id: 5 },
+];
+</script>

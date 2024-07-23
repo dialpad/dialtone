@@ -12,6 +12,7 @@
             Vue
           </dt-tab>
           <dt-tab
+            v-if="!!htmlCode"
             :id="htmlTabId"
             label="HTML code"
             :panel-id="htmlPanelId"
@@ -37,6 +38,7 @@
       </div>
     </dt-tab-panel>
     <dt-tab-panel
+      v-if="!!htmlCode"
       :id="htmlPanelId"
       :tab-id="htmlTabId"
     >
@@ -71,7 +73,7 @@ const props = defineProps({
    */
   htmlCode: {
     type: [String, Function],
-    required: true,
+    default: null,
   },
   /**
    * The Vue code to be displayed in the Vue tab.
