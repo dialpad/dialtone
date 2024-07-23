@@ -50,29 +50,29 @@ If the error cause is visible, show the error message as close to the problem so
 
 Occasionally it is helpful to provide error feedback to the user while the user is still typing. These type of error messages should not be used for “empty state” errors.
 
-[ image of example ]
+<img alt="Picture shows input validation error" src="/assets/images/content/validation-error@2x.png" class="d-w100p d-wmx464" />
 
 ### Warnings
 
 When an input is valid, but has potentially unexpected consequences, inform the user clearly and concisely about the impact(s) of this change.
 
-[ image of example ]
+<img alt="Picture shows input warning error" src="/assets/images/content/validation-warning@2x.png" class="d-w100p d-wmx464" />
 
 ### Placement
 
 Good warning and error messages are placed close to the problem source, however there are instances when this isn’t possible. In these cases, place the message closest to the area it relates to the most.
 
-### List
+### Lists
 
 Placing a message within or next to a component can help users make better decisions with routine tasks.
 
-[ image of example ]
+<img alt="Picture shows error being placed within a list" src="/assets/images/content/list-errors@2x.png" class="d-w100p d-wmx464" />
 
 ### Component
 
 Place a message on top of the component when the message relates to multiple areas within the component.
 
-[ image of example ]
+<img alt="Picture shows warning banner on top of the modal" src="/assets/images/content/warning-top-modal@2x.png" class="d-w100p d-wmx464" />
 
 ### Page
 
@@ -83,7 +83,7 @@ The use of page-level banners should only be reserved for when:
 * Multiple problems exist and need to be summarized
 * The problem was delayed and you’re informing the user of the issue when they return or reload the page or area
 
-[ image of example ]
+<img alt="Picture shows page level banner" src="/assets/images/content/page-level@2x.png" class="d-w100p d-wmx464" />
 
 ### App
 
@@ -92,13 +92,11 @@ Error notifications should be rarely shown on the Launchpad page. Always attempt
 * A high-priority task that must be completed to continue using Dialpad (e.g., expired billing payment information)
 * An active product doesn’t have necessary information to continue working (e.g., broken chatbot knowledge)
 
-[ image of example ]
+<img alt="Picture shows app level banner" src="/assets/images/content/app-banner@2x.png" class="d-w100p d-wmx464" />
 
 ### Error pages
 
 Use an error page when a server error (e.g., 400 or 500-series errors) prevents a page from being displayed or account permissions are preventing a user from accessing a page.
-
-[ image of example ]
 
 ## Colors
 
@@ -114,12 +112,12 @@ Use critical messages to bring attention to tasks that, if not dealt with immedi
 <dialtone-usage>
 <template #do>
 
-[ correct red banner color example image ]
+<img alt="Picture shows using correct critical color usage" src="/assets/images/content/error-color-red-correct@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
 
-[ incorrect yellow banner color example image ]
+<img alt="Picture shows using correct critical color usage" src="/assets/images/content/error-color-red-incorrect@2x.png" class="d-w100p" />
 
 </template>
 </dialtone-usage>
@@ -136,12 +134,12 @@ Use warning messages to help users potentially address non-blocking issues as th
 <dialtone-usage>
 <template #do>
 
-[ correct yellow banner color example image ]
+<img alt="Picture shows using correct warning color usage" src="/assets/images/content/warning-color-yellow-correct@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
 
-[ incorrect red banner color example image ]
+<img alt="Picture shows using correct warning color usage" src="/assets/images/content/warning-color-yellow-incorrect@2x.png" class="d-w100p" />
 
 </template>
 </dialtone-usage>
@@ -179,7 +177,7 @@ When writing message copy:
 * Avoid using words such as “invalid” to define an error
 * Only need to explain why the error happened. Optionally, the message can clarify next steps or offer one-click fixes.
 
-[ image of example ]
+<img alt="Picture shows input validation error" src="/assets/images/content/validation-error@2x.png" class="d-w100p d-wmx464" />
 
 Perform validation checks once a user finishes typing in the field. Users can be considered to be finished typing only when keyboard focus moves away to another field and at least one character has been added to the field. This helps avoid marking a field as not valid before users have attempted to add information.
 
@@ -189,7 +187,7 @@ Once an error has been identified, complete the validation check after each keys
 
 If the validation process takes less than a second but not instant, show a spinner within the field to visually indicate a validation process is in progress.
 
-[ image of example ]
+<img alt="Picture shows input submission progress" src="/assets/images/content/input-submission@2x.png" class="d-w100p d-wmx464" />
 
 ### Forms
 
@@ -201,15 +199,13 @@ Don’t point out how many errors occurred, rather explain how to proceed. Be de
 
 Always indicate submission progress. If the fields aren’t valid, don’t clear or alter them on the user’s behalf during validation.
 
-[ image of example ]
+<img alt="Picture shows input validation error" src="/assets/images/content/validation-error@2x.png" class="d-w100p d-wmx464" />
 
 If the form submission has a single error, move the scroll position to the field that isn’t valid, focus on the field, and show an error message below the field.
 
-[ image of example ]
-
 If the form submission has multiple errors, move the scroll position to the top of the page, use a banner to display a summary of the errors, and show an error message below each invalid field so users can quickly scroll through the page and make corrections..
 
-[ image of example ]
+<img alt="Picture shows error list above the form" src="/assets/images/content/form-error-list@2x.png" class="d-w100p d-wmx464" />
 
 ## Warnings
 
@@ -263,7 +259,7 @@ Other considerations:
 * Try adding the next step, whether in a button or link
 * Use a banner when there is more than one call to action
 
-[ image of example ]
+<img alt="Picture shows warning banner on top of the modal" src="/assets/images/content/warning-top-modal@2x.png" class="d-w100p d-wmx464" />
 
 ## Lists
 
@@ -282,15 +278,13 @@ Other considerations:
 * A title is optional
 * Links are optional, but are not common because the list item is already actionable
 
-[ image of example ]
+<img alt="Picture shows error being placed within a list" src="/assets/images/content/list-errors@2x.png" class="d-w100p d-wmx464" />
 
 ## App unavailable errors
 
 Sometimes Dialpad can’t be displayed due to a network issue, browser limitation, connection problem, or server issue. 400 and 500 series errors fall in this category. In these cases, always explain what went wrong and provide users with a troubleshooting step, such as refreshing the page or verifying their internet connection.
 
 Don’t use these page level errors when the error can be placed in context, next to the problem source. Also don’t use internal language in the error messages and avoid question formats.
-
-[ image of example ]
 
 ### Content
 

@@ -380,7 +380,7 @@ Use “Save” in modals and popovers when the user’s changes are saved direct
 <dialtone-usage>
 <template #do>
 
-* [Picture with “Save”]
+<img alt="Picture shows Save option at the bottom of the modal" src="/assets/images/content/saving-in-modal@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
@@ -399,7 +399,7 @@ Use the “Save” + “noun” content formula for save button actions at the b
 <dialtone-usage>
 <template #do>
 
-* [RTA Picture with “Save Card”]
+<img alt="Picture shows Save option at the bottom of the modal" src="/assets/images/content/saving-bottom-page@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
@@ -421,7 +421,7 @@ Instead use “Done” here. When the modal or popover closes, the user will be 
 <dialtone-usage>
 <template #do>
 
-* [Analytic Filter Picture with “Save”]
+<img alt="Picture shows correct usage of Done label when updates are not immediately saved to the database" src="/assets/images/content/deferred-save@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
@@ -440,7 +440,7 @@ When using a datepicker, also use “Done”.
 <dialtone-usage>
 <template #do>
 
-* [Analytic Filter Picture with “Done”]
+<img alt="Picture shows correct use of Done action in a datepicker" src="/assets/images/content/deferred-save-datepicker@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
@@ -459,7 +459,7 @@ Use the verb “Close” when users confirm that they’ve finished reading some
 <dialtone-usage>
 <template #do>
 
-[Picture] with “Close”
+<img alt="Picture shows using close instead of accept if no action requires accepting legal terms" src="/assets/images/content/close-accept@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
@@ -497,7 +497,7 @@ Use back arrow buttons as a call-to-action for modals and screens when the conte
 <dialtone-usage>
 <template #do>
 
-[Picture with back button]
+<img alt="Picture with back button" src="/assets/images/content/back-button@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
@@ -514,7 +514,7 @@ Use the “Cancel” action as an option for users to back out changes made on a
 <dialtone-usage>
 <template #do>
 
-[Picture with cancel/save buttons]
+<img alt="Picture shows correct position of save and cancel actions in a popover or modal" src="/assets/images/content/deferred-save@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
@@ -581,7 +581,8 @@ Use the verb “edit” when you can change the value of an input field (letters
 <dialtone-usage>
 <template #do>
 
-* [Edit contact picture] with “Edit” action
+<img alt="Picture shows contact card with edit action" src="/assets/images/content/edit-content@2x.png" class="d-w100p" />
+
 * Edit a Real-Time Assist card
 
 </template>
@@ -633,8 +634,7 @@ Use the verb “switch” when it’s important for users to know what they’re
 <dialtone-usage>
 <template #do>
 
-* [Caller ID picture] Switch
-* [Join meetings account] Switch
+<img alt="Picture shows Save option at the bottom of the modal" src="/assets/images/content/switch-accounts@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>

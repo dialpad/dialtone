@@ -16,12 +16,12 @@ Don’t label actions or features using “disable” or “disabled.” This ca
 <dialtone-usage>
 <template #do>
 
-[ image of Ai “On” example ]
+<img alt="Picture shows correct usage of Ai on badge" src="/assets/images/content/ai-on@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
 
-[ image of Ai Disabled example ]
+<img alt="Picture shows incorrect usage of Ai disabled badge" src="/assets/images/content/ai-disabled@2x.png" class="d-w100p" />
 
 </template>
 </dialtone-usage>
