@@ -124,7 +124,8 @@ const selectedPanelId = ref(vuePanelId);
 onMounted(async () => {
   if (typeof props.htmlCode === 'function') {
     const componentRef = props.htmlCode();
-    const formatted = await formatHTML(componentRef.$el.outerHTML);
+    const el = componentRef.$el ?? componentRef;
+    const formatted = await formatHTML(el.outerHTML);
     formattedHTML.value = formatted;
   }
 });
