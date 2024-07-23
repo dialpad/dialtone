@@ -1,6 +1,7 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
+    "../index.js",
     "../src/icons/*.vue",
     "../src/illustrations/*.vue",
     "../src/constants.js",

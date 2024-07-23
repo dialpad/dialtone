@@ -20,10 +20,12 @@
   "module": "./dist/dialtone-icons.js",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/dialtone-icons.js",
       "require": "./dist/dialtone-icons.cjs"
     },
     "./*": {
+      "types": "./dist/types/src/**/*.d.ts",
       "import": "./dist/components/*.js",
       "require": "./dist/components/*.cjs"
     }
