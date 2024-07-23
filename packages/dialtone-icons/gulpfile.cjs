@@ -244,19 +244,28 @@ const updateIllustrationsJSON = function (done) {
 };
 
 const updateExports = function (done) {
-  const exportsListIcons = 'export const icons = import.meta.glob(\'./src/icons/*.vue\', { eager: true, import: \'default\' });';
-  const exportsListIllustrations = 'export const illustrations = import.meta.glob(\'./src/illustrations/*.vue\', { eager: true, import: \'default\' });';
+  let exportsListIcons = 'export const icons = import.meta.glob(\'./src/icons/*.vue\', { eager: true, import: \'default\' });\n';
+  let exportsListIllustrations = 'export const illustrations = import.meta.glob(\'./src/illustrations/*.vue\', { eager: true, import: \'default\' });\n';
 
-  // svgList.forEach(file => {
-  //   const fileName = file.split('/').slice(-2)[1].split('.')[0];
-  //   const iconName = `dt-icon-${fileName}`.toLowerCase()
-  //   .split('-')
-  //   .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  //   .join('');
-  //   exportsList += `export const ${iconName} = () => import('./src/icons/${fileName}.vue');\n`;
-  // });
+  svgListIcons.forEach(file => {
+    const fileName = file.split('/').slice(-2)[1].split('.')[0];
+    const iconName = `dt-icon-${fileName}`.toLowerCase()
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('');
+    exportsListIcons += `export { default as ${iconName} } from './src/icons/${fileName}.vue';\n`;
+  });
 
-  fs.writeFileSync(paths.exports.index, exportsListIcons + '\n' + exportsListIllustrations);
+  svgListIllustrations.forEach(file => {
+    const fileName = file.split('/').slice(-2)[1].split('.')[0];
+    const illustrationName = `dt-illustration-${fileName}`.toLowerCase()
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('');
+    exportsListIllustrations += `export { default as ${illustrationName} } from './src/illustrations/${fileName}.vue';\n`;
+  });
+
+  fs.writeFileSync(paths.exports.index, '/* eslint-disable max-lines */\n' + exportsListIcons + exportsListIllustrations);
 
   return done();
 };
