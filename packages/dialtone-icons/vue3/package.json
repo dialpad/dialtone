@@ -1,13 +1,19 @@
 {
   "scripts": {
-    "build": "vite build"
+    "build": "run-s clean build:main build:typescript",
+    "build:main": "vite build",
+    "build:typescript": "vue-tsc",
+    "clean": "rm -rf ./dist"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.3",
-    "glob": "^10.3.10",
     "@vue/compiler-sfc": "^3.4.15",
+    "@vue/tsconfig": "^0.4.0",
+    "glob": "^10.3.10",
+    "npm-run-all": "^4.1.5",
     "vite": "^5.0.12",
-    "vue": "^3.4.15"
+    "vue": "^3.4.15",
+    "vue-tsc": "^1.8.25"
   },
   "type": "module",
   "main": "./dist/dialtone-icons.cjs",

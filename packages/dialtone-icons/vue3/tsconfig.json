@@ -1,0 +1,25 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": [
+    "../src/icons/*.vue",
+    "../src/illustrations/*.vue",
+    "../src/constants.js",
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "declarationDir": "dist/types",
+    "strict": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.vite.json"
+    }
+  ]
+}
