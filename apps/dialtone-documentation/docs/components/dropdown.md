@@ -13,7 +13,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <dt-dropdown class="d-mr8">
     <template #anchor>
       <dt-button>
-        Click to open
+        Click to Open
       </dt-button>
     </template>
     <template #list>

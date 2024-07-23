@@ -24,7 +24,7 @@
           :text="selectedPanelId === htmlPanelId ? trimmedHtmlCode : trimmedVueCode"
           aria-label=""
         >
-          Copy code
+          Copy Code
         </copy-button>
       </div>
     </template>
