@@ -380,7 +380,7 @@ Use “Save” in modals and popovers when the user’s changes are saved direct
 <dialtone-usage>
 <template #do>
 
-<img alt="Picture shows Save option at the bottom of the modal" src="/assets/images/content/saving-in-modal@2x.png" class="d-w100p" />
+<img alt="Picture shows Save option at the bottom of the modal" src="/assets/images/content/saving-modal@2x.png" class="d-w100p" />
 
 </template>
 <template #dont>
