@@ -22,6 +22,7 @@ Don’t label actions or features using “disable” or “disabled.” This ca
 <template #dont>
 
 <img alt="Picture shows incorrect usage of Ai disabled badge" src="/assets/images/content/ai-disabled@2x.png" class="d-w100p" />
+TEst
 
 </template>
 </dialtone-usage>
