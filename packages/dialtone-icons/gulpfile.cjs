@@ -161,14 +161,14 @@ const buildIllustrations = function (done) {
       class="d-illustration d-illustration--${name}"`;
     }))
     .pipe(rename({ dirname: '' }))
-  .pipe(dest(paths.illustrations.outputSvg));
+    .pipe(dest(paths.illustrations.outputSvg));
 };
 
 const transformSVGtoVue = function (done) {
   exec('node ./transformSVGtoVue.cjs', (err, stdout, stderr) => {
     console.error(stderr);
     console.log(stdout);
-    done(err)
+    done(err);
   });
 };
 
@@ -178,7 +178,7 @@ const transformSVGtoVue = function (done) {
 //  into the respective category.
 //  ================================================================================
 const updateIconsJSON = function (done) {
-  const rawData = fs.readFileSync(paths.exports.keywordsIcons)
+  const rawData = fs.readFileSync(paths.exports.keywordsIcons);
   const keywordsJSON = JSON.parse(rawData).categories;
   const iconsList = [];
 
@@ -186,7 +186,7 @@ const updateIconsJSON = function (done) {
     const [category, fileName] = file.split('/').slice(-2);
     const iconName = fileName.replace('.svg', '');
     const keywords = keywordsJSON[category][iconName] || [];
-    acc[category] = {...acc[category], [iconName]: keywords}
+    acc[category] = { ...acc[category], [iconName]: keywords };
 
     iconsList.push(iconName);
 
@@ -195,23 +195,23 @@ const updateIconsJSON = function (done) {
 
   iconsList.sort();
 
-  fs.writeFileSync(paths.exports.keywordsIcons, JSON.stringify({ categories: {...updatedKeywords}}));
+  fs.writeFileSync(paths.exports.keywordsIcons, JSON.stringify({ categories: { ...updatedKeywords } }));
   fs.writeFileSync(paths.exports.iconsList, JSON.stringify(iconsList));
 
   // Copies the icons.json and keywords-icons.json to dist/
   src([paths.exports.keywordsIcons, paths.exports.iconsList])
-  .pipe(dest('./dist/'));
+    .pipe(dest('./dist/'));
 
   // Prettifies the JSON to improve readability and easier keyword adding.
   src(paths.exports.keywordsIcons)
-  .pipe(jsonFormat(2))
-  .pipe(dest('./src/'));
+    .pipe(jsonFormat(2))
+    .pipe(dest('./src/'));
 
   return done();
 };
 
 const updateIllustrationsJSON = function (done) {
-  const rawData = fs.readFileSync(paths.exports.keywordsIllustrations)
+  const rawData = fs.readFileSync(paths.exports.keywordsIllustrations);
   const keywordsJSON = JSON.parse(rawData).categories;
   const illustrationsList = [];
 
@@ -219,7 +219,7 @@ const updateIllustrationsJSON = function (done) {
     const [category, fileName] = file.split('/').slice(-2);
     const illustrationName = fileName.replace('.svg', '');
     const keywords = keywordsJSON[category][illustrationName] || [];
-    acc[category] = {...acc[category], [illustrationName]: keywords}
+    acc[category] = { ...acc[category], [illustrationName]: keywords };
 
     illustrationsList.push(illustrationName);
 
@@ -228,24 +228,24 @@ const updateIllustrationsJSON = function (done) {
 
   illustrationsList.sort();
 
-  fs.writeFileSync(paths.exports.keywordsIllustrations, JSON.stringify({ categories: {...updatedKeywords}}));
+  fs.writeFileSync(paths.exports.keywordsIllustrations, JSON.stringify({ categories: { ...updatedKeywords } }));
   fs.writeFileSync(paths.exports.illustrationsList, JSON.stringify(illustrationsList));
 
   // Copies the illustrations.json and keywords-illustrations.json to dist/
   src([paths.exports.keywordsIllustrations, paths.exports.illustrationsList])
-  .pipe(dest('./dist/'));
+    .pipe(dest('./dist/'));
 
   // Prettifies the JSON to improve readability and easier keyword adding.
   src(paths.exports.keywordsIllustrations)
-  .pipe(jsonFormat(2))
-  .pipe(dest('./src/'));
+    .pipe(jsonFormat(2))
+    .pipe(dest('./src/'));
 
   return done();
 };
 
 const updateExports = function (done) {
-  let exportsListIcons = "export const icons = import.meta.glob('./src/icons/*.vue', { eager: true, import: 'default' });";
-  let exportsListIllustrations = "export const illustrations = import.meta.glob('./src/illustrations/*.vue', { eager: true, import: 'default' });";
+  const exportsListIcons = 'export const icons = import.meta.glob(\'./src/icons/*.vue\', { eager: true, import: \'default\' });';
+  const exportsListIllustrations = 'export const illustrations = import.meta.glob(\'./src/illustrations/*.vue\', { eager: true, import: \'default\' });';
 
   // svgList.forEach(file => {
   //   const fileName = file.split('/').slice(-2)[1].split('.')[0];
