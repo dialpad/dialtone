@@ -229,14 +229,7 @@ By default the emoji will be rendered with an aria-label attribute describing th
 * [emojipedia](https://emojipedia.org/) - Good for looking up details about specific emojis.
 
 <script setup>
-import { ref, inject } from 'vue';
-import customEmojis from '@data/custom-emoji.json';
-
-const dialtoneComponents = inject('dialtoneComponents');
-const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneComponents;
-
-setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
-setCustomEmojiJson(customEmojis);
 
 const sizes = ['100', '200', '300', '400', '500', '600', '700', '800'];
+
 </script>
