@@ -581,6 +581,7 @@ export default {
       this.revertInputPadding(input);
       this.popoverOffset = [0, 4];
       if (!lastChip) return;
+      if (this.collapseOnFocusOut && !this.inputFocused) return;
 
       // Get the position of the last chip
       // The input cursor should be the same "top" as that chip and next besides it
