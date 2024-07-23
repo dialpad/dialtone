@@ -1,16 +1,13 @@
 .d-emoji-text-wrapper {
-  &__text {
-    vertical-align: middle;
-  }
-
   .d-emoji {
     position: relative;
-    display: inline-flex;
+    height: 1em;
     vertical-align: middle;
 
     .d-icon {
       position: absolute;
-      top: 50%;
+      top: calc(50% - 1px);
+      display: block;
       transform: translateY(-50%);
     }
   }
