@@ -136,7 +136,7 @@
           <router-link class="d-link" to="/guides/getting-started/">
             Getting started
           </router-link>
-          <router-link class="d-link" to="/content/">
+          <router-link class="d-link" to="/guides/content/">
             Writing guidelines
           </router-link>
           <router-link class="d-link" to="/guides/accessibility/">
