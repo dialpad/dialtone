@@ -117,9 +117,6 @@ vueCode='
 ### Import
 
 ```javascript
-// Note you must import from @dialpad/dialtone-vue. The emoji module is not included in the main
-// @dialpad/dialtone-vue package due to it's large size. You may wish to consider dynamically importing
-// the emoji module in your application.
 import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
 ```
 
