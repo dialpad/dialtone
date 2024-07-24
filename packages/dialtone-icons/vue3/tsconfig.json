@@ -4,7 +4,7 @@
     "../index.js",
     "../src/icons/*.vue",
     "../src/illustrations/*.vue",
-    "../src/constants.js",
+    "../src/constants.js"
   ],
   "compilerOptions": {
     "baseUrl": ".",
