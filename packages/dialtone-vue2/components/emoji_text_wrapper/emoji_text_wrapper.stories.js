@@ -27,7 +27,6 @@ export const argTypesData = {
   // Props
   size: {
     options: Object.keys(ICON_SIZE_MODIFIERS),
-    mapping: ICON_SIZE_MODIFIERS,
     control: {
       type: 'select',
     },

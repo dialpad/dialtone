@@ -1,3 +1,16 @@
+## [9.56.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.56.0...dialtone/v9.56.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* **Multi Select:** NO-JIRA update input padding when focus out ([#410](https://github.com/dialpad/dialtone/issues/410)) ([2dd6dce](https://github.com/dialpad/dialtone/commit/2dd6dce1a9b16f3164b8c576639724e799cafc82))
+* **Scrollbar:** NO-JIRA fix horizontal scrollbar on hover ([73acc8f](https://github.com/dialpad/dialtone/commit/73acc8ff376f78121084a75b1d87b0ff696cffcc))
+
+
+### Documentation
+
+* DLT-1794 move storybook to doc site Datepicker to Dropdown ([#411](https://github.com/dialpad/dialtone/issues/411)) ([9f71cd2](https://github.com/dialpad/dialtone/commit/9f71cd2f7e15732ec407cda695218a0d1e886a9b))
+
 # [9.56.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.55.1...dialtone/v9.56.0) (2024-07-16)
 
 

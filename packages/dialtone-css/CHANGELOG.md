@@ -1,3 +1,10 @@
+## [8.38.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.0...dialtone-css/v8.38.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* **Scrollbar:** NO-JIRA fix horizontal scrollbar on hover ([73acc8f](https://github.com/dialpad/dialtone/commit/73acc8ff376f78121084a75b1d87b0ff696cffcc))
+
 # [8.38.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.2...dialtone-css/v8.38.0) (2024-07-12)
 
 
