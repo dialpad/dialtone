@@ -1,6 +1,6 @@
 import Helpers from '@dialpad/dialtone-css/postcss/helpers.cjs';
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, THEMES, getTokensStructure } from './constants';
+import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, THEMES, BRANDS, getTokensStructure } from './constants';
 
 /**
  * Compose typography tokens
@@ -88,10 +88,20 @@ export const addTokensToStructure = (structure) => {
   Object.keys(FORMAT_MAP).forEach(format => {
     structure[format] = {};
     for (const theme of THEMES) {
-      structure[format][theme.value] = getTokensStructure();
-      Object.entries(tokensJson[theme.value]).forEach((token) => {
-        addTokensToCategories(token, format, structure[format][theme.value]);
-      });
+      const baseThemeKey = `base-${theme.value}`;
+
+      for (const brand of BRANDS) {
+        const brandThemeKey = `${brand.value}-${theme.value}`;
+        structure[format][brandThemeKey] = getTokensStructure();
+
+        // merge base and semantic tokens into one object per theme
+        Object.entries(tokensJson[baseThemeKey]).forEach((token) => {
+          addTokensToCategories(token, format, structure[format][brandThemeKey]);
+        });
+        Object.entries(tokensJson[brandThemeKey]).forEach((token) => {
+          addTokensToCategories(token, format, structure[format][brandThemeKey]);
+        });
+      }
     }
   });
 };
@@ -101,7 +111,7 @@ const addTokensToCategories = (token, format, structure) => {
   const [key, value] = token;
   if (!value[FORMAT_MAP[format]] || !value[FORMAT_MAP.CSS] || isBaseToken(key)) return;
 
-  const { name, value: tokenValue, description, keywords } = value[FORMAT_MAP[format]];
+  const { name, value: tokenValue, description, keywords, isCompositionToken } = value[FORMAT_MAP[format]];
   const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
   const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords };
 
@@ -136,7 +146,7 @@ const addTokensToCategories = (token, format, structure) => {
 
   // TYPOGRAPHY
   if (key.startsWith('typography')) {
-    structure.typography['font style']._children.push({ ...displayToken, hidden: true });
+    structure.typography['font style']._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 
@@ -164,7 +174,7 @@ const addTokensToCategories = (token, format, structure) => {
 
   // SHADOW
   if (key.startsWith('shadow')) {
-    structure.shadow._children.push({ ...displayToken, hidden: true });
+    structure.shadow._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 

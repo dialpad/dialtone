@@ -174,6 +174,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
+import { setTheme } from '@workspaceRoot/common/theme';
 
 defineProps({
   items: {
@@ -185,7 +186,6 @@ defineEmits(['search']);
 
 const route = useRoute();
 const currentTheme = inject('currentTheme');
-const systemPrefersDark = inject('systemPrefersDark');
 const themes = ['system', 'light', 'dark'];
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -204,34 +204,21 @@ const isActiveLink = (text) => {
   return route.path.search(linkBase) !== -1;
 };
 
-const updateThemeBasedOnSystem = () => {
-  if (currentTheme.value === 'system') {
-    document.body.className = systemPrefersDark.matches ? 'dialtone-theme-dark' : 'dialtone-theme-light';
-  }
-};
-
 const toggleTheme = () => {
   const currentIndex = themes.indexOf(currentTheme.value);
   const nextIndex = (currentIndex + 1) % themes.length;
-
   currentTheme.value = themes[nextIndex];
 
+  setTheme(currentTheme.value, 'dp');
   localStorage.setItem('preferredTheme', currentTheme.value);
-
-  updateThemeBasedOnSystem();
-
-  if (currentTheme.value !== 'system') {
-    document.body.className = `dialtone-theme-${currentTheme.value}`;
-  }
 };
 
 onMounted(() => {
-  mediaQuery.addEventListener('change', updateThemeBasedOnSystem);
-
-  updateThemeBasedOnSystem();
+  mediaQuery.addEventListener('change', toggleTheme);
+  setTheme(currentTheme.value, 'dp');
 });
 
 onUnmounted(() => {
-  mediaQuery.removeEventListener('change', updateThemeBasedOnSystem);
+  mediaQuery.removeEventListener('change', toggleTheme);
 });
 </script>
