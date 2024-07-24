@@ -6,7 +6,7 @@
       </h3>
       <dt-recipe-general-row
         type="channels"
-        description="Channel name"
+        description="Channel name 😄"
         unread-count="29"
         unread-count-tooltip="29 unread messages"
       />
@@ -100,7 +100,7 @@
       </h3>
       <dt-recipe-general-row
         :active-voice-chat="true"
-        description="Long contact center name"
+        description="Long contact center name :smile: with emoji"
         color="magenta-200"
       />
     </div>
