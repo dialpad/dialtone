@@ -581,6 +581,8 @@ export default {
       this.revertInputPadding(input);
       this.popoverOffset = [0, 4];
       if (!lastChip) return;
+      // Avoid adding extra padding when the input is not focused if collapseOnFocusOut is true
+      // This ensures the input returns to its original state when resizing
       if (this.collapseOnFocusOut && !this.inputFocused) return;
 
       // Get the position of the last chip
