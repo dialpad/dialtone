@@ -12,7 +12,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <dt-dropdown navigation-type="arrow-keys">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">
-        Click to open
+        Click to Open
       </dt-button>
     </template>
     <template #list="{ close }">
