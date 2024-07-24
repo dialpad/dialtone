@@ -95,6 +95,7 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/dialtone-tokens": "workspace:*",
     "@tiptap/core": "2.3.0",
     "@tiptap/extension-blockquote": "2.3.0",
     "@tiptap/extension-bold": "2.3.0",

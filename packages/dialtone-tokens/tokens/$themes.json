@@ -2726,12 +2726,12 @@
     "name": "dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "base/dark": "enabled",
+      "base/dark": "source",
       "components/checkbox/dark": "enabled",
       "components/radio/dark": "enabled",
       "semantic/tmo/dark": "enabled",
       "semantic/dp/dark": "enabled",
-      "base/default": "enabled",
+      "base/default": "source",
       "semantic/dp/default": "enabled",
       "semantic/tmo/default": "enabled",
       "components/avatar/default": "enabled",
@@ -3714,7 +3714,7 @@
   },
   {
     "id": "2f63bc06422150ef708aff75020998ea70824c62",
-    "name": "default",
+    "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "root": "source",
