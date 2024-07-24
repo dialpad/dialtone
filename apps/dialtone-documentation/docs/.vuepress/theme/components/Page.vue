@@ -108,7 +108,7 @@ const includeToc = computed(() => {
 watch(route, async () => {
   // waits for the filteredHeaders to be set in the child page
   await nextTick();
-  const filteredHeaders = JSON.parse(localStorage.getItem('filteredHeaders'));
+  const { filteredHeaders } = window;
   const pageHeaders = usePageData().value.headers;
   headers.value = filteredHeaders ?? pageHeaders;
 }, { flush: 'pre', immediate: true, deep: true });
