@@ -47,6 +47,9 @@ export default defineClientConfig({
 
       provide('currentTheme', currentTheme);
       provide('systemPrefersDark', systemPrefersDark);
+
+      // reset the filtered headers when the page is reloaded
+      localStorage.removeItem('filteredHeaders');
     });
   },
   layouts: {
