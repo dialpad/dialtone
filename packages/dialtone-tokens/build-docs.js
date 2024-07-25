@@ -7,7 +7,8 @@ const docTokens = {};
 // Recurse through style dictionary object and pick out
 // bottom level token values.
 export function buildDocs (platformName, theme, currentObj) {
-  if (currentObj === null || typeof currentObj !== 'object') {
+  // tokens marked as "source" should not be output.
+  if (currentObj === null || typeof currentObj !== 'object' || currentObj.isSource === false) {
     return null;
   }
 
