@@ -52,7 +52,7 @@ function boxShadows (shadowDeclarations, Declaration) {
         .split(shadowSegmentsRegex)
         .filter(chunk => !!chunk);
 
-      shadows[name] = Number.parseInt(index) + 1;
+      shadows[name] = Number.parseInt(index);
       return shadows;
     }, {});
 
