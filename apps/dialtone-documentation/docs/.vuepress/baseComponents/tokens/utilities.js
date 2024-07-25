@@ -106,6 +106,18 @@ export const addTokensToStructure = (structure) => {
   });
 };
 
+/**
+ * split a composition token into an array based on a slash or a css var() function
+ */
+const splitCompositionTokenIntoArray = (value) => {
+  const regex = /var\([^)]+\)|\//g;
+  const matches = value.match(regex);
+  if (matches) {
+    return matches;
+  }
+  return value;
+};
+
 // eslint-disable-next-line complexity
 const addTokensToCategories = (token, format, structure) => {
   const [key, value] = token;
@@ -114,6 +126,10 @@ const addTokensToCategories = (token, format, structure) => {
   const { name, value: tokenValue, description, keywords, isCompositionToken } = value[FORMAT_MAP[format]];
   const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
   const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords };
+
+  if (isCompositionToken) {
+    displayToken.tokenValue = splitCompositionTokenIntoArray(tokenValue);
+  }
 
   const splitKeys = key.split('/');
 
