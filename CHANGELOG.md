@@ -1,3 +1,10 @@
+# [9.57.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.56.2...dialtone/v9.57.0) (2024-07-25)
+
+
+### Features
+
+* **Icons:** DLT-1697 add types ([#415](https://github.com/dialpad/dialtone/issues/415)) ([9adcd81](https://github.com/dialpad/dialtone/commit/9adcd8164de8e25c6b986e7850983088bf584f87))
+
 ## [9.56.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.56.1...dialtone/v9.56.2) (2024-07-24)
 
 
