@@ -9,7 +9,7 @@ const docTokens = {};
 // eslint-disable-next-line complexity
 export function buildDocs (platformName, theme, currentObj) {
   // tokens marked as "source" should not be output.
-  if ((currentObj === null || typeof currentObj !== 'object') && currentObj.isSource === false) {
+  if (currentObj === null || typeof currentObj !== 'object' || currentObj.isSource === false) {
     return null;
   }
 
