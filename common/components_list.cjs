@@ -39,6 +39,7 @@ module.exports = [
   'scroller.vue',
   'select_menu.vue',
   'skeleton.vue',
+  'split_button.vue',
   'stack.vue',
   'tab.vue',
   'tab_group.vue',
