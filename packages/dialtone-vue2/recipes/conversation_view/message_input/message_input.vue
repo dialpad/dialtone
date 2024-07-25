@@ -199,6 +199,9 @@
             <p>{{ showSend.text }}</p>
           </template>
         </dt-button>
+
+        <!-- @slot Slot for button picker -->
+        <slot name="button" />
       </div>
     </section>
   </div>
