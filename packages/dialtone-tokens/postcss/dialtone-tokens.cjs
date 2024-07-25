@@ -66,7 +66,7 @@ function boxShadows (shadowDeclarations, Declaration) {
       const value = Array(times)
         .fill(undefined)
         .map((val, i) => {
-          const shadowNumber = i;
+          const shadowNumber = i + 1;
           return `var(${shadowVar}-${shadowNumber}-x) var(${shadowVar}-${shadowNumber}-y) var(${shadowVar}-${shadowNumber}-blur) var(${shadowVar}-${shadowNumber}-spread) var(${shadowVar}-${shadowNumber}-color)${isInset ? ' inset' : ''}`;
         }).join(', ');
 
