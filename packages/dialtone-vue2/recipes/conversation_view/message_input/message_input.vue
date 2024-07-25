@@ -200,8 +200,8 @@
           </template>
         </dt-button>
 
-        <!-- @slot Slot for button picker -->
-        <slot name="button" />
+        <!-- @slot Slot for sendButton picker -->
+        <slot name="sendButton" />
       </div>
     </section>
   </div>

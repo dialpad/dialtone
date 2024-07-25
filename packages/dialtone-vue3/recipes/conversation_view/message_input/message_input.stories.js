@@ -48,7 +48,7 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  button: {
+  sendButton: {
     table: {
       type: { summary: 'VNode' },
     },
@@ -143,7 +143,7 @@ export const argsData = {
   top: '',
   middle: '',
   emojiGiphyPicker: '',
-  button: '',
+  sendButton: '',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',
