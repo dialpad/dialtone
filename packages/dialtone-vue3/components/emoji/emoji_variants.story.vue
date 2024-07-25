@@ -1,77 +1,32 @@
 <template>
-  <div>
-    <div>
+  <dt-stack gap="300">
+    <dt-stack
+      v-for="size in sizes"
+      :key="`emoji-size${size}`"
+      gap="200"
+      direction="row"
+    >
       <dt-emoji
-        id="emoji-size100"
         code=":smile:"
-        size="100"
+        :size="size"
       />
-      <label for="emoji-size100">size 100</label>
-    </div>
-    <div>
-      <dt-emoji
-        id="emoji-size200"
-        code=":smile:"
-        size="200"
-      />
-      <label for="emoji-size200">size 200</label>
-    </div>
-    <div>
-      <dt-emoji
-        id="emoji-size300"
-        code=":smile:"
-        size="300"
-      />
-      <label for="emoji-size300">size 300</label>
-    </div>
-    <div>
-      <dt-emoji
-        id="emoji-size400"
-        code=":smile:"
-        size="400"
-      />
-      <label for="emoji-size400">size 400</label>
-    </div>
-    <div>
-      <dt-emoji
-        id="emoji-size500"
-        code=":smile:"
-        size="500"
-      />
-      <label for="emoji-size500">size 500</label>
-    </div>
-    <div>
-      <dt-emoji
-        id="emoji-size600"
-        code=":smile:"
-        size="600"
-      />
-      <label for="emoji-size600">size 600</label>
-    </div>
-    <div>
-      <dt-emoji
-        id="emoji-size700"
-        code=":smile:"
-        size="700"
-      />
-      <label for="emoji-size700">size 700</label>
-    </div>
-    <div>
-      <dt-emoji
-        id="emoji-size800"
-        code=":smile:"
-        size="800"
-      />
-      <label for="emoji-size800">size 800</label>
-    </div>
-  </div>
+      <label :for="`emoji-size${size}`">size {{ size }}</label>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script>
-import DtEmoji from './emoji.vue';
+import { DtEmoji } from './';
+import { DtStack } from '@/components/stack';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon';
 
 export default {
   name: 'DtEmojiDefault',
-  components: { DtEmoji },
+  components: { DtEmoji, DtStack },
+  data () {
+    return {
+      sizes: Object.keys(ICON_SIZE_MODIFIERS),
+    };
+  },
 };
 </script>
