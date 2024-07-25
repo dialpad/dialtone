@@ -4,6 +4,8 @@ import { THEMES, BRANDS, THEME_MAP, BRAND_MAP } from './constants';
 let currentTheme = 'system';
 let currentBrand = 'dp';
 
+window.setDialtoneTheme = setTheme;
+
 /**
  * Set the current theme and optionally the brand
  * @param theme the theme to set. Must be one of 'light' or 'dark'
