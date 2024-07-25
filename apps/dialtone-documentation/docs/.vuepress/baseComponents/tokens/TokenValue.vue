@@ -29,19 +29,7 @@ const isCompositionToken = (value) => {
   return Array.isArray(value);
 };
 
-const valueIsDivided = (value) => {
-  return value.includes(' / ');
-};
-
 const getTooltipValue = (value) => {
   return props.tokens.find(token => token.name === value)?.tokenValue.toString();
-};
-
-const getCompositionTokenNumerator = (value) => {
-  return value.split(' / ')[0];
-};
-
-const getCompositionTokenDenominator = (value) => {
-  return value.split(' / ')[1];
 };
 </script>
