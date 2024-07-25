@@ -18,11 +18,10 @@ export const addTokensToStructure = (structure) => {
         const brandThemeKey = `${brand.value}-${theme.value}`;
         structure[format][brandThemeKey] = getTokensStructure();
 
+        const combined = { ...tokensJson[baseThemeKey], ...tokensJson[brandThemeKey] };
+
         // merge base and semantic tokens into one object per theme
-        Object.entries(tokensJson[baseThemeKey]).forEach((token) => {
-          addTokensToCategories(token, format, structure[format][brandThemeKey]);
-        });
-        Object.entries(tokensJson[brandThemeKey]).forEach((token) => {
+        Object.entries(combined).forEach((token) => {
           addTokensToCategories(token, format, structure[format][brandThemeKey]);
         });
       }
