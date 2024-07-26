@@ -163,42 +163,43 @@
           <p>{{ showCancel.text }}</p>
         </dt-button>
 
-        <!-- Send button -->
-        <!-- Right positioned UI - send button -->
-        <dt-button
-          v-if="showSend"
-          v-dt-tooltip:top-end="showSend?.tooltipLabel"
-          data-qa="dt-message-input-send-btn"
-          size="sm"
-          kind="default"
-          importance="primary"
-          :class="[
-            {
-              'dt-message-input__send-button--disabled': isSendDisabled,
-              'd-btn--circle': showSend.icon,
-            },
-          ]"
-          :aria-label="showSend.ariaLabel"
-          :aria-disabled="isSendDisabled"
-          @click="onSend"
-        >
-          <template
-            v-if="showSend.icon"
-            #icon
-          >
-            <dt-icon
-              :name="showSend.icon"
-              size="300"
-            />
-          </template>
-          <template
-            v-if="showSend.text"
-          >
-            <p>{{ showSend.text }}</p>
-          </template>
-        </dt-button>
         <!-- @slot Slot for sendButton picker -->
-        <slot name="sendButton" />
+        <slot name="sendButton">
+          <!-- Send button -->
+          <!-- Right positioned UI - send button -->
+          <dt-button
+            v-if="showSend"
+            v-dt-tooltip:top-end="showSend?.tooltipLabel"
+            data-qa="dt-message-input-send-btn"
+            size="sm"
+            kind="default"
+            importance="primary"
+            :class="[
+              {
+                'dt-message-input__send-button--disabled': isSendDisabled,
+                'd-btn--circle': showSend.icon,
+              },
+            ]"
+            :aria-label="showSend.ariaLabel"
+            :aria-disabled="isSendDisabled"
+            @click="onSend"
+          >
+            <template
+              v-if="showSend.icon"
+              #icon
+            >
+              <dt-icon
+                :name="showSend.icon"
+                size="300"
+              />
+            </template>
+            <template
+              v-if="showSend.text"
+            >
+              <p>{{ showSend.text }}</p>
+            </template>
+          </dt-button>
+        </slot>
       </div>
     </section>
   </div>
