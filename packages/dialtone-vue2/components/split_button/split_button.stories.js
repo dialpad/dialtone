@@ -16,6 +16,7 @@ const iconsList = getIconNames();
 export const argsData = {
   onAlphaClicked: action('alpha-clicked'),
   onOmegaClicked: action('omega-clicked'),
+  omegaAriaLabel: 'Open dropdown',
   default: 'Place call',
   alphaIcon: undefined,
   omegaIcon: undefined,
