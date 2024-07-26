@@ -1,9 +1,7 @@
 /**
- * This file contains the constants that we use to dynamically generate
- * the dialtone utility classes and variables.
+ * This file contains the constants that we use to dynamically generate dialtone utility classes.
  *
- * Put here the unique values that are needed to generate the classes or mappings
- * to utilities/variables.
+ * Put here the unique values that are needed to generate utility classes
 
  * This data shouldn't duplicate values under `/docs/_data/` folder
  */
@@ -215,37 +213,6 @@ module.exports = {
       'card',
       'none',
       'unset',
-    ].join('|'),
-    SHADOW_VARIABLES: [
-      'Small',
-      'Medium',
-      'Large',
-      'ExtraLarge',
-      'Card',
-      'Focus',
-      'FocusInset',
-    ].join('|'),
-    TYPOGRAPHY_VARIABLES: [
-      'Compact',
-      'Eyebrow',
-      'Soft',
-      'SoftCompact',
-      'Plain',
-      'PlainCompact',
-    ].join('|'),
-    TYPOGRAPHY_TYPE: [
-      'Headline',
-      'Body',
-      'Label',
-      'Helper',
-      'Code',
-    ].join('|'),
-    TYPOGRAPHY_SIZES: [
-      'Sm',
-      'Md',
-      'Lg',
-      'Xl',
-      'Xxl',
     ].join('|'),
     TEXT_DECORATION: [
       'dotted',

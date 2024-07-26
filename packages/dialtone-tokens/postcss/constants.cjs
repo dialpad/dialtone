@@ -1,9 +1,9 @@
 /**
  * This file contains the constants that we use to dynamically generate
- * the dialtone utility classes and variables.
+ * the dialtone hsl tokens and composition tokens
  *
  * Put here the unique values that are needed to generate the classes or mappings
- * to utilities/variables.
+ * to variables.
 
  * This data shouldn't duplicate values under `/docs/_data/` folder
  */
@@ -14,97 +14,6 @@ module.exports = {
   IS_SHADOW_REGEX: /--dt.*-shadow/,
   IS_TYPOGRAPHY_REGEX: /--dt.*-typography/,
   REGEX_OPTIONS: {
-    COLORS: [
-      'white',
-      'black',
-      'purple',
-      'blue',
-      'magenta',
-      'gold',
-      'green',
-      'red',
-      'tan',
-    ].join('|'),
-    HOVER_FOCUS_PREFIXES: [
-      'h',
-      'f',
-      'fv',
-    ].join('|'),
-    BACKGROUND_GRADIENTS: [
-      'none',
-      'unset',
-    ].join('|'),
-    FONT_COLORS: [
-      'primary',
-      'secondary',
-      'tertiary',
-      'muted',
-      'placeholder',
-      'disabled',
-      'success',
-      'warning',
-      'error',
-      'critical',
-      'current',
-      'transparent',
-      'unset',
-    ].join('|'),
-    FONT_COLOR_VARIATIONS: [
-      'strong-inverted',
-      'inverted',
-      'strong',
-    ].join('|'),
-    BACKGROUND_COLORS: [
-      'primary',
-      'secondary',
-      'moderate',
-      'strong',
-      'contrast',
-      'bold',
-      'backdrop',
-      'success',
-      'warning',
-      'info',
-      'error',
-      'critical',
-      'danger',
-      'transparent',
-      'unset',
-    ].join('|'),
-    BACKGROUND_COLOR_VARIATIONS: [
-      'opaque',
-      'subtle-opaque',
-      'subtle',
-      'strong',
-    ].join('|'),
-    BORDER_COLORS: [
-      'default',
-      'subtle',
-      'moderate',
-      'bold',
-      'focus',
-      'critical',
-      'success',
-      'warning',
-      'brand',
-      'accent',
-    ].join('|'),
-    BORDER_COLOR_VARIATIONS: [
-      'inverted',
-      'subtle',
-      'strong',
-      'subtle-inverted',
-      'strong-inverted',
-    ].join('|'),
-    BOX_SHADOWS: [
-      'sm',
-      'md',
-      'lg',
-      'xl',
-      'card',
-      'none',
-      'unset',
-    ].join('|'),
     SHADOW_VARIABLES: [
       'small',
       'medium',
@@ -135,23 +44,6 @@ module.exports = {
       'lg',
       'xl',
       'xxl',
-    ].join('|'),
-    TEXT_DECORATION: [
-      'dotted',
-      'line-through',
-      'none',
-      'underline',
-      'unset',
-    ].join('|'),
-    OPACITY_VARIATIONS: [
-      '0',
-      '10',
-      '25',
-      '50',
-      '75',
-      '90',
-      '95',
-      '99',
     ].join('|'),
   },
   PLATFORM_FONT_SIZES: {
