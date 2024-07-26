@@ -69,6 +69,7 @@ export * from './components/validation_messages';
 
 // Directives
 export * from './directives/tooltip';
+export * from './directives/scrollbar';
 
 /// Recipes
 export * from './recipes/buttons/callbar_button';

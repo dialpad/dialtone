@@ -243,30 +243,6 @@ html body {
 }
 
 //  ============================================================================
-//  $   TOC
-//      Because we're using a third-party plugin to generate the subnav menu,
-//      we can't add utility classes directly to the HTML. So we have to use
-//      custom CSS here instead.
-//  ----------------------------------------------------------------------------
-.vuepress-toc {
-  // height: fit-content;
-
-  .toc-item {
-    >.toc-list {
-      padding-left: var(--dt-space-400);
-    }
-  }
-
-  >.toc-list >.toc-item {
-    >a {
-      font-weight: var(--dt-font-weight-semi-bold);
-    }
-  }
-}
-
-
-
-//  ============================================================================
 //  $   LAYOUT
 //      Because the doc site needs layout specifications that aren't
 //      appropriate to ship as part of Dialtone.
@@ -355,7 +331,7 @@ a.header-anchor {
   grid-template-areas: 'content toc';
   grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(min-content, 21.6rem);
 
-  @media (max-width: 1260px) {
+  @media (max-width: 1264px) {
     grid-template-areas: 'content';
     grid-template-columns: [content] minmax(32rem, 99rem);
   }
@@ -809,11 +785,11 @@ a.header-anchor {
 
     .d-docsite--unordered-list {
       // unfortunate
-      margin: 0 !important;
+      margin: 0;
+      margin-left: var(--dt-space-500);
       padding: 0;
-      list-style: none;
 
-      *+* {
+      > *+* {
         margin-top: var(--dt-space-400);
       }
     }

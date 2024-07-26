@@ -4,6 +4,7 @@ import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 
 import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_constants';
+import { ITEMS_LIST_DATA } from './combobox_multi_select_story_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -174,5 +175,22 @@ export const WithMaxSelectValidation = {
         showList: true,
       },
     },
+  },
+};
+
+export const DuplicatedNames = {
+  render: Template,
+
+  args: {
+    selectedItems: ['item12', 'item12', 'item12'],
+  },
+};
+
+export const WithCollapseOnFocusOut = {
+  render: Template,
+
+  args: {
+    selectedItems: ITEMS_LIST_DATA.map(item => item.value),
+    collapseOnFocusOut: true,
   },
 };

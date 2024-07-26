@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.132.2",
+  "version": "3.137.2",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "build": "run-s clean build:main build:typescript build:documentation",
@@ -37,6 +37,7 @@
     "@tiptap/extension-code-block": "2.3.0",
     "@tiptap/extension-document": "2.3.0",
     "@tiptap/extension-hard-break": "2.3.0",
+    "@tiptap/extension-history": "2.3.0",
     "@tiptap/extension-italic": "2.3.0",
     "@tiptap/extension-link": "2.3.0",
     "@tiptap/extension-list-item": "2.3.0",
@@ -53,12 +54,14 @@
     "@tiptap/vue-3": "2.3.0",
     "date-fns": "2.30.0",
     "emoji-toolkit": "8.0.0",
+    "overlayscrollbars": "2.9.1",
     "regex-combined-emojis": "1.6.0",
     "tippy.js": "6.3.7"
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
+    "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.28.2",
     "@percy/storybook": "5.0.3",
     "@storybook/addon-a11y": "^7.6.1",

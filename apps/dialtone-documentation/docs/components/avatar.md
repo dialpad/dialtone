@@ -20,6 +20,15 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 ## Usage
 
+The Avatar component is designed to prioritize different sources for content display. It will sequentially check for the availability of an image source (`image-src`) or an icon name (`icon-name`). If both properties are not provided, the avatar will extract and display initials from the full name (`full-name`). The resulting initials are extracted using the following logic:
+
+* If the string contains two or more words, the result will be the first character of the first and last word capitalized. E.g.:
+`full-name: "Jaqueline Nackos"` will result in: `JN`.
+* If the string contains only one word, the result will be the first two characters capitalized. E.g:
+`full-name: "Jaqueline"` will result in: `JA`.
+`full-name: "10"` will result in: `10`.
+* If full-name is not provided, the result will be an empty string.
+
 <table class="d-table dialtone-doc-table d-mb16">
     <colgroup>
         <col class="d-w64">
@@ -87,7 +96,7 @@ vueCode='
   icon-name="person"
 />
 '
-showHtmlWarning />
+/>
 
 ### Initials
 
@@ -112,9 +121,11 @@ vueCode='
   color="100"
 />
 '
-showHtmlWarning />
+/>
 
 ### Image
+
+If `image-src` is not provided, or if image fails to load, the avatar will fall back to the initials extracted from the `full-name`.
 
 <code-well-header>
   <dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
@@ -131,7 +142,7 @@ htmlCode='
 vueCode='
 <dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
 '
-showHtmlWarning />
+/>
 
 ### Sizes
 
@@ -176,7 +187,7 @@ vueCode='
 <dt-avatar size="lg" icon-name="user" />
 <dt-avatar size="xl" icon-name="user" />
 '
-showHtmlWarning />
+/>
 
 ### Group
 
@@ -206,7 +217,7 @@ vueCode='
 <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 '
-showHtmlWarning />
+/>
 
 ### Presence
 
@@ -254,7 +265,72 @@ vueCode='
 <dt-avatar size="lg" presence="offline" color="1200" full-name="JH" />
 <dt-avatar size="xl" color="1500" full-name="AE" />
 '
-showHtmlWarning />
+/>
+
+### Overlay
+
+<code-well-header>
+  <div class="d-d-flex d-ai-center d-flow16">
+    <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-icon="hear" />
+    <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-avatar d-avatar--lg">
+  <div class="d-avatar__canvas">
+    <img class="d-avatar__image" src="/path/to/image" alt="avatar user" />
+  </div>
+  <div class="d-avatar__overlay">...</div>
+</div>
+<div class="d-avatar d-avatar--lg">
+  <div class="d-avatar__canvas">
+    <img class="d-avatar__image" src="/path/to/image" alt="avatar user" />
+  </div>
+  <div class="d-avatar__overlay">
+    <p class="d-avatar__overlay-text">+3</p>
+  </div>
+</div>'
+vueCode='
+<dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-icon="hear" />
+<dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
+'
+/>
+
+### Clickable
+
+If you need to create a clickable avatar you can set the clickable prop. This will make the avatar a clickable component, set some styling and will be navigable by keyboard. In order for the clickable avatar to be fully accessible, you need to either set `full-name`, `image-alt` or `icon-aria-label` attributes.
+
+<code-well-header>
+  <div class="d-d-flex d-ai-center d-flow16">
+    <dt-avatar icon-name="user" clickable icon-aria-label="user" ref="example-clickable" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs['example-clickable']"
+vueCode='
+<dt-avatar icon-name="user" clickable icon-aria-label="user" />
+'
+/>
+
+### Seeded
+
+You may use a seed to make the randomly generated color be the same every time for that seed. This is useful if you want users to always have the same color, just pass in their unique user ID as the seed.
+
+<code-well-header>
+  <div class="d-d-flex d-ai-center d-flow16">
+    <dt-avatar full-name="Jaqueline Nackos" seed="X5G3D7D3DS3WL7" ref="example-seeded" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs['example-seeded']"
+vueCode='
+<dt-avatar full-name="Jaqueline Nackos" seed="X5G3D7D3DS3WL7" />
+'
+/>
 
 ## Vue API
 

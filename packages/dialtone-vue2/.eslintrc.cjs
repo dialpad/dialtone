@@ -193,5 +193,18 @@ module.exports = {
         ],
       },
     },
+    {
+      files: [
+        'prototypes/**/*.vue',
+      ],
+      rules: {
+        'vue/no-bare-strings-in-template': [
+          'off',
+        ],
+        'vue/no-restricted-class': [
+          'off',
+        ],
+      },
+    },
   ],
 };

@@ -1,6 +1,7 @@
 import { defineClientConfig } from '@vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
+import customEmojis from '@data/custom-emoji.json';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
@@ -14,7 +15,7 @@ export default defineClientConfig({
     // Register libraries
     if (!__VUEPRESS_SSR__) {
       await registerDialtoneVue(app);
-      await registerDialtoneCombinator(app);
+      // await registerDialtoneCombinator(app);
     }
     router.options.scrollBehavior = (to, from, savedPosition) => {
       if (to.hash) {
@@ -74,11 +75,19 @@ async function registerDialtoneVue (app) {
   app.provide('dialtoneComponents', dialtoneComponents);
 
   window.DIALTONE_CONSTANTS = dialtoneConstants;
+
+  // setup custom emojis
+  const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneComponents;
+  setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
+  setCustomEmojiJson(customEmojis);
 }
 
-async function registerDialtoneCombinator (app) {
-  const module = await import('@dialpad/dialtone-combinator');
-  app.component('DtcCombinator', module.DtcCombinator);
-  app.component('DtcSection', module.DtcSection);
-  app.provide('variantBank', module.variantBank());
-}
+// This is commented because we are currently not using the combinator and it's
+// adding some wrong styles to the page for the dt-list-item component.
+
+// async function registerDialtoneCombinator (app) {
+//   const module = await import('@dialpad/dialtone-combinator');
+//   app.component('DtcCombinator', module.DtcCombinator);
+//   app.component('DtcSection', module.DtcSection);
+//   app.provide('variantBank', module.variantBank());
+// }

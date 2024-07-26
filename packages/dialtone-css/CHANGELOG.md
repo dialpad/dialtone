@@ -1,3 +1,45 @@
+## [8.38.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.1...dialtone-css/v8.38.2) (2024-07-24)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-1699 emoji alignment ([#407](https://github.com/dialpad/dialtone/issues/407)) ([bac9692](https://github.com/dialpad/dialtone/commit/bac9692091f32763c3b4227a46d3c94c0b9091a9))
+
+## [8.38.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.0...dialtone-css/v8.38.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* **Scrollbar:** NO-JIRA fix horizontal scrollbar on hover ([73acc8f](https://github.com/dialpad/dialtone/commit/73acc8ff376f78121084a75b1d87b0ff696cffcc))
+
+# [8.38.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.2...dialtone-css/v8.38.0) (2024-07-12)
+
+
+### Features
+
+* **Scrollbar:** DLT-1473 add scrollbar directive ([#391](https://github.com/dialpad/dialtone/issues/391)) ([05af2ff](https://github.com/dialpad/dialtone/commit/05af2ff7fc11759935b2623212b31b716b26d774))
+
+## [8.37.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.1...dialtone-css/v8.37.2) (2024-07-09)
+
+
+### Bug Fixes
+
+* **Input:** NO-JIRA add identifier classes ([#401](https://github.com/dialpad/dialtone/issues/401)) ([670a1ba](https://github.com/dialpad/dialtone/commit/670a1bada1a06b2a300dc64e521ef3cb133ff44d))
+
+## [8.37.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.37.0...dialtone-css/v8.37.1) (2024-07-08)
+
+
+### Bug Fixes
+
+* **Input:** NO-JIRA content not displaying on right slot ([168af7c](https://github.com/dialpad/dialtone/commit/168af7c1fab9d2a19b7b5aa6fc09ea0830c34fb0))
+
+# [8.37.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.36.0...dialtone-css/v8.37.0) (2024-07-04)
+
+
+### Features
+
+* **Input:** DLT-1808 icon scoped slot ([#392](https://github.com/dialpad/dialtone/issues/392)) ([de7b0f1](https://github.com/dialpad/dialtone/commit/de7b0f1aea9b307ceba80caaea49484498348749))
+
 # [8.36.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.35.0...dialtone-css/v8.36.0) (2024-06-11)
 
 

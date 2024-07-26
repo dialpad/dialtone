@@ -20,7 +20,7 @@
       type="button"
       @click="openModal"
     >
-      Launch modal
+      Launch Example
     </button>
   </div>
   <aside
@@ -84,7 +84,7 @@
           :class="{ 'd-btn--danger': isDanger }"
           type="button"
         >
-          Save changes
+          Save
         </button>
         <button
           class="d-btn"

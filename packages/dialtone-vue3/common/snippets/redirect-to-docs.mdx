@@ -1,0 +1,11 @@
+import { Subtitle } from '@storybook/blocks';
+
+export const DocumentationLink = ({ name }) => (
+  <Subtitle>
+    Please see the component documentation <a href={`https://dialtone.dialpad.com/components/${name}.html`}>here</a>.
+  </Subtitle>
+);
+
+<DocumentationLink name={props.name} />
+
+Component documentation has been moved to our main documentation site and storybook remains to be used as a component playground only.

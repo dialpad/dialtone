@@ -1,3 +1,49 @@
+# [4.25.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.24.0...dialtone-icons/v4.25.0) (2024-07-25)
+
+
+### Features
+
+* **Icons:** DLT-1697 add types ([#415](https://github.com/dialpad/dialtone/issues/415)) ([9adcd81](https://github.com/dialpad/dialtone/commit/9adcd8164de8e25c6b986e7850983088bf584f87))
+
+# [4.24.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.23.0...dialtone-icons/v4.24.0) (2024-07-03)
+
+
+### Bug Fixes
+
+* NO-JIRA keywords ([eb8527d](https://github.com/dialpad/dialtone/commit/eb8527d12255707d93425e0719595b029c2fa2f5))
+
+
+### Features
+
+* **Rich Text Editor:** DLT-1835 add undo behaviour ([#390](https://github.com/dialpad/dialtone/issues/390)) ([2d65590](https://github.com/dialpad/dialtone/commit/2d65590147c0a3f24e6294e23e17aff5beab6b27))
+
+# [4.23.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.22.0...dialtone-icons/v4.23.0) (2024-07-02)
+
+
+### Features
+
+* **Icon:** DLT-1804 add t-mobile ([#387](https://github.com/dialpad/dialtone/issues/387)) ([4ce82b2](https://github.com/dialpad/dialtone/commit/4ce82b21b2466b2056d802a6b6cf6f936dd09091))
+
+# [4.22.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.21.0...dialtone-icons/v4.22.0) (2024-07-01)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** DP-102475 fix keyboard navigation ([#389](https://github.com/dialpad/dialtone/issues/389)) ([6ca1d16](https://github.com/dialpad/dialtone/commit/6ca1d16b934f377414c652d102429c57fb76182b))
+* **Logo:** DLT-1833 corrected antialiased edging  ([#381](https://github.com/dialpad/dialtone/issues/381)) ([67322e6](https://github.com/dialpad/dialtone/commit/67322e69bab916a403387159187cb2a01b15f0ae))
+
+
+### Features
+
+* **Icon:** DLT-1712 add token icon  ([#388](https://github.com/dialpad/dialtone/issues/388)) ([66d2474](https://github.com/dialpad/dialtone/commit/66d2474afab14373d9f75235454995fba929f52f))
+
+# [4.21.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.20.2...dialtone-icons/v4.21.0) (2024-06-25)
+
+
+### Features
+
+* **Icon:** DLT-1806 accessibility-mac ([#365](https://github.com/dialpad/dialtone/issues/365)) ([8735843](https://github.com/dialpad/dialtone/commit/8735843735d5fd2b8c39084a7d2c553329428f73))
+
 ## [4.20.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.20.1...dialtone-icons/v4.20.2) (2024-06-18)
 
 

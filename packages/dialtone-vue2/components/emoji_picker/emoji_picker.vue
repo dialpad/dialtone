@@ -10,8 +10,8 @@
         :scroll-into-tab="scrollIntoTab"
         :tab-set-labels="tabSetLabels"
         :is-scrolling="isScrolling"
-        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
+        @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.emojiSelectorRef.focusEmojiSelector()"
         @selected-tabset="scrollToSelectedTabset"
         @keydown.esc.native="$emit('close')"
       />
@@ -42,7 +42,7 @@
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="$emit('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
-        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
+        @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.tabsetRef.focusTabset()"
         @keydown.esc.native="$emit('close')"
       />
     </div>
