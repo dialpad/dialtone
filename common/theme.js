@@ -62,7 +62,3 @@ function _setThemeAttributeOnRoot (theme, brand) {
   document.documentElement.setAttribute('data-dt-theme', theme);
   document.documentElement.setAttribute('data-dt-brand', brand);
 }
-
-export default {
-  setTheme,
-};
