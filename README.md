@@ -409,7 +409,7 @@ nx run release
 
 ##### Manually
 
-1. Merge your changes to the branch you want to release, commit and push to origin.
+1. Merge your changes to the branch you want to release, commit and push to origin. (Note: If your dialtone version number is behind the last production release number, it may fail. Merge in staging or update the version number manually.)
 2. Go to [GitHub](https://github.com/dialpad/dialtone/actions/workflows/release.yml) and click on `Run workflow`.
 3. Select `alpha`, `beta` or `next` branch.
 4. Select the `package` that you want to release or leave it empty to release all of them.
