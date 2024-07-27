@@ -1,3 +1,24 @@
+# [9.57.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.56.2...dialtone/v9.57.0) (2024-07-25)
+
+
+### Features
+
+* **Icons:** DLT-1697 add types ([#415](https://github.com/dialpad/dialtone/issues/415)) ([9adcd81](https://github.com/dialpad/dialtone/commit/9adcd8164de8e25c6b986e7850983088bf584f87))
+
+## [9.56.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.56.1...dialtone/v9.56.2) (2024-07-24)
+
+
+### Bug Fixes
+
+* DLT-1899 page TOC persisting from page to page ([#414](https://github.com/dialpad/dialtone/issues/414)) ([86759dc](https://github.com/dialpad/dialtone/commit/86759dca3727d52b723edf62d6d6c0f22bd432a2))
+* **Emoji Text Wrapper:** DLT-1699 emoji alignment ([#407](https://github.com/dialpad/dialtone/issues/407)) ([bac9692](https://github.com/dialpad/dialtone/commit/bac9692091f32763c3b4227a46d3c94c0b9091a9))
+* **Multi Select:** NO-JIRA update input padding when resizing ([#413](https://github.com/dialpad/dialtone/issues/413)) ([06bc49d](https://github.com/dialpad/dialtone/commit/06bc49dd78d8f8c168b5b0af024da0ecb3bd5c51))
+
+
+### Documentation
+
+* **Writing Guidelines:** DDT-554 ux content writing guidelines v2 ([#352](https://github.com/dialpad/dialtone/issues/352)) ([d9819a0](https://github.com/dialpad/dialtone/commit/d9819a0c75f4ca1c936bb4dfc5bf845000631412))
+
 ## [9.56.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.56.0...dialtone/v9.56.1) (2024-07-23)
 
 

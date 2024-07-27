@@ -67,9 +67,11 @@ import "@dialpad/dialtone/vue3/css";
 ```js
 // Named import
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue2';
+import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue2';
 
 // Default import (Prefered if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
+import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space';
 ```
 
 - Vue 3:
@@ -77,9 +79,11 @@ import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
 ```js
 // Named import
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
+import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3';
 
 // Default import (Prefered if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
+import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 ```
 
 #### Dialtone Vue components

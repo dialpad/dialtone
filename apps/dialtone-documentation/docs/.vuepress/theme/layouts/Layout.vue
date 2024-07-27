@@ -41,8 +41,8 @@
       <home v-if="$frontmatter.home" />
       <page
         v-else
-        :prev="prev"
-        :next="next"
+        :prev="$frontmatter.prev || prev"
+        :next="$frontmatter.next || next"
         :is-mobile="isMobile"
       />
     </template>

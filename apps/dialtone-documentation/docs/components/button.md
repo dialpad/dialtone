@@ -10,7 +10,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 <code-well-header>
   <button class="d-btn d-btn--primary" type="button">
-    <span class="d-btn__label">Place call</span>
+    <span class="d-btn__label">Place Call</span>
   </button>
 </code-well-header>
 
@@ -106,13 +106,13 @@ Dialtone provides four core button **types**, each with three levels of **import
         <div class="d-fw-normal d-lh-200">Our default button colors.</div>
       </th>
       <td class="d-ta-center">
-        <button class="d-btn" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
       <td class="d-ta-center">
-        <button class="d-btn d-btn--outlined" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--outlined" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
       <td class="d-ta-center">
-        <button class="d-btn d-btn--primary" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--primary" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
     </tr>
     <tr>
@@ -121,13 +121,13 @@ Dialtone provides four core button **types**, each with three levels of **import
         <div class="d-fw-normal d-lh-200">Potentially destructive or otherwise critical actions.</div>
       </th>
       <td class="d-ta-center">
-        <button class="d-btn d-btn--danger" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--danger" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
       <td class="d-ta-center">
-        <button class="d-btn d-btn--outlined d-btn--danger" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--outlined d-btn--danger" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
       <td class="d-ta-center">
-        <button class="d-btn d-btn--primary d-btn--danger" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--primary d-btn--danger" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
     </tr>
     <tr>
@@ -136,13 +136,13 @@ Dialtone provides four core button **types**, each with three levels of **import
         <div class="d-fw-normal d-lh-200">Use for placement on non-white, dark backgrounds.</div>
       </th>
       <td class="d-bgc-contrast d-ta-center">
-        <button class="d-btn d-btn--inverted" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--inverted" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
       <td class="d-bgc-contrast d-ta-center">
-        <button class="d-btn d-btn--outlined d-btn--inverted" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--outlined d-btn--inverted" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
       <td class="d-bgc-contrast d-ta-center">
-        <button class="d-btn d-btn--primary d-btn--inverted" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--primary d-btn--inverted" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
     </tr>
     <tr>
@@ -151,10 +151,10 @@ Dialtone provides four core button **types**, each with three levels of **import
         <div class="d-fw-normal">For non-primary actions and contexts where base style may not work.</div>
       </th>
       <td class="d-ta-center">
-        <button class="d-btn d-btn--muted" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--muted" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
       <td class="d-ta-center">
-        <button class="d-btn d-btn--muted d-btn--outlined" type="button"> <span class="d-btn__label">Place call</span> </button>
+        <button class="d-btn d-btn--muted d-btn--outlined" type="button"> <span class="d-btn__label">Place Call</span> </button>
       </td>
       <td class="d-ta-center d-lh-200">
         <abbr class="d-fc-black-400 d-td-none d-fs-100" title="Not applicable">N/A</abbr>
@@ -170,13 +170,13 @@ The base button should be the go-to button for most of your needs. When in doubt
 <code-well-header>
   <div class="d-d-flex d-flow8">
       <div>
-          <button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">Place call</span></button>
+          <button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
       </div>
       <div>
-          <button class="d-btn d-btn--outlined" type="button"><span class="d-btn__label">Place call</span></button>
+          <button class="d-btn d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
       </div>
       <div>
-          <button class="d-btn" type="button"><span class="d-btn__label">Place call</span></button>
+          <button class="d-btn" type="button"><span class="d-btn__label">Place Call</span></button>
       </div>
   </div>
 </code-well-header>
@@ -188,9 +188,9 @@ htmlCode='
 <button class="d-btn" type="button"><span class="d-btn__label">...</span></button>
 '
 vueCode='
-<dt-button> Place call </dt-button>
-<dt-button importance="outlined"> Place call </dt-button>
-<dt-button importance="clear"> Place call </dt-button>
+<dt-button> Place Call </dt-button>
+<dt-button importance="outlined"> Place Call </dt-button>
+<dt-button importance="clear"> Place Call </dt-button>
 '
 showHtmlWarning />
 
@@ -201,13 +201,13 @@ The danger button style is used to communicate critical or destructive actions s
 <code-well-header>
   <div class="d-d-flex d-flow8">
     <div>
-      <button class="d-btn d-btn--danger d-btn--primary" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--danger d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--danger d-btn--outlined" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--danger d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--danger" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--danger" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
   </div>
 </code-well-header>
@@ -219,9 +219,9 @@ htmlCode='
 <button class="d-btn d-btn--danger" type="button"><span class="d-btn__label">...</span></button>
 '
 vueCode='
-<dt-button kind="danger"> Place call </dt-button>
-<dt-button kind="danger" importance="outlined"> Place call </dt-button>
-<dt-button kind="danger" importance="clear"> Place call </dt-button>
+<dt-button kind="danger"> Place Call </dt-button>
+<dt-button kind="danger" importance="outlined"> Place Call </dt-button>
+<dt-button kind="danger" importance="clear"> Place Call </dt-button>
 '
 showHtmlWarning />
 
@@ -232,13 +232,13 @@ The inverted button style is used to visually separate buttons set on darker bac
 <code-well-header bgclass="d-bgc-contrast">
   <div class="d-d-flex d-flow8">
     <div>
-      <button class="d-btn d-btn--inverted d-btn--primary" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--inverted d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--inverted d-btn--outlined" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--inverted d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--inverted" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--inverted" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
   </div>
 </code-well-header>
@@ -250,9 +250,9 @@ htmlCode='
 <button class="d-btn d-btn--inverted" type="button"><span class="d-btn__label">...</span></button>
 '
 vueCode='
-<dt-button kind="inverted"> Place call </dt-button>
-<dt-button kind="inverted" importance="outlined"> Place call </dt-button>
-<dt-button kind="inverted" importance="clear"> Place call </dt-button>
+<dt-button kind="inverted"> Place Call </dt-button>
+<dt-button kind="inverted" importance="outlined"> Place Call </dt-button>
+<dt-button kind="inverted" importance="clear"> Place Call </dt-button>
 '
 showHtmlWarning />
 
@@ -263,10 +263,10 @@ The muted button style is used to communicate non-primary actions for contexts i
 <code-well-header>
   <div class="d-d-flex d-flow8">
     <div>
-      <button class="d-btn d-btn--muted" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--muted" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--muted d-btn--outlined" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--muted d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
   </div>
 </code-well-header>
@@ -277,8 +277,8 @@ htmlCode='
 <button class="d-btn d-btn--muted d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
 '
 vueCode='
-<dt-button kind="muted" importance="clear"> Place call </dt-button>
-<dt-button kind="muted" importance="outlined"> Place call </dt-button>
+<dt-button kind="muted" importance="clear"> Place Call </dt-button>
+<dt-button kind="muted" importance="outlined"> Place Call </dt-button>
 '
 showHtmlWarning />
 
@@ -290,11 +290,11 @@ All button styles and variations appear the same when disabled.
 <code-well-header>
   <div class="d-d-flex d-flow8">
     <div>
-      <button type="button" disabled="disabled" class="base-button__button d-btn d-btn--primary"><span class="d-btn__label base-button__label">Place call (disabled attribute)</span></button>
+      <button type="button" disabled="disabled" class="base-button__button d-btn d-btn--primary"><span class="d-btn__label base-button__label">Place Call (disabled attribute)</span></button>
     </div>
     <div>
       <span class="d-c-not-allowed">
-        <button type="button" class="base-button__button d-btn d-btn--primary d-btn--disabled"><span class="d-btn__label base-button__label">Place call (disabled class)</span></button>
+        <button type="button" class="base-button__button d-btn d-btn--primary d-btn--disabled"><span class="d-btn__label base-button__label">Place Call (disabled class)</span></button>
       </span>
     </div>
   </div>
@@ -311,10 +311,10 @@ htmlCode='
 '
 vueCode='
 <!-- disabled attribute -->
-<dt-button disabled>Place call</dt-button>
+<dt-button disabled>Place Call</dt-button>
 <!-- disabled class -->
 <span class="d-c-not-allowed">
-  <dt-button class="d-btn--disabled">Place call</dt-button>
+  <dt-button class="d-btn--disabled">Place Call</dt-button>
 </span>
 '
 showHtmlWarning />
@@ -328,27 +328,27 @@ Different button styles and variations appear different when active.
   <div class="d-d-flex d-flow8">
     <div>
       <button class="d-btn d-btn--active" type="button">
-        <span class="d-btn__label">Place call</span>
+        <span class="d-btn__label">Place Call</span>
       </button>
     </div>
     <div>
       <button class="d-btn d-btn--primary d-btn--active" type="button">
-        <span class="d-btn__label">Place call</span>
+        <span class="d-btn__label">Place Call</span>
       </button>
     </div>
     <div>
       <button class="d-btn d-btn--danger d-btn--active" type="button">
-        <span class="d-btn__label">Place call</span>
+        <span class="d-btn__label">Place Call</span>
       </button>
     </div>
     <div>
       <button class="d-btn d-btn--inverted d-btn--primary d-btn--active" type="button">
-        <span class="d-btn__label">Place call</span>
+        <span class="d-btn__label">Place Call</span>
       </button>
     </div>
     <div>
       <button class="d-btn d-btn--muted d-btn--active" type="button">
-        <span class="d-btn__label">Place call</span>
+        <span class="d-btn__label">Place Call</span>
       </button>
     </div>
   </div>
@@ -363,11 +363,11 @@ htmlCode='
 <button class="d-btn d-btn--primary d-btn--muted d-btn--active" type="button"><span class="d-btn__label">...</span></button>
 '
 vueCode='
-<dt-button active importance="clear"> Place call </dt-button>
-<dt-button active> Place call </dt-button>
-<dt-button active kind="danger" importance="clear"> Place call </dt-button>
-<dt-button active kind="inverted"> Place call </dt-button>
-<dt-button active kind="muted"> Place call </dt-button>
+<dt-button active importance="clear"> Place Call </dt-button>
+<dt-button active> Place Call </dt-button>
+<dt-button active kind="danger" importance="clear"> Place Call </dt-button>
+<dt-button active kind="inverted"> Place Call </dt-button>
+<dt-button active kind="muted"> Place Call </dt-button>
 '
 showHtmlWarning />
 
@@ -377,8 +377,8 @@ Buttons can be styled as a [Link](link.md) in situations for which you need the 
 
 <code-well-header>
   <div class="d-d-flex d-flow8">
-    <button type="button" class="d-link">Place call</button>
-    <button type="button" class="d-link" disabled>Place call</button>
+    <button type="button" class="d-link">Place Call</button>
+    <button type="button" class="d-link" disabled>Place Call</button>
   </div>
 </code-well-header>
 
@@ -388,8 +388,8 @@ htmlCode='
 <button type="button" class="d-link" disabled>...</button>
 '
 vueCode='
-<dt-button link> Place call </dt-button>
-<dt-button link disabled> Place call </dt-button>
+<dt-button link> Place Call </dt-button>
+<dt-button link disabled> Place Call </dt-button>
 '
 showHtmlWarning />
 
@@ -400,19 +400,19 @@ The base button font size is 16px and should be used in most cases. Every button
 <code-well-header>
   <div class="d-d-flex d-flow8 d-ai-center">
     <div>
-      <button class="d-btn d-btn--primary d-btn--xs" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--primary d-btn--xs" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--primary d-btn--sm" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--primary d-btn--sm" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--primary d-btn--lg" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--primary d-btn--lg" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--primary d-btn--xl" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--primary d-btn--xl" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
   </div>
 </code-well-header>
@@ -426,11 +426,11 @@ htmlCode='
 <button class="d-btn d-btn--primary d-btn--xl" type="button"><span class="d-btn__label">...</span></button>
 '
 vueCode='
-<dt-button size="xs"> Place call </dt-button>
-<dt-button size="sm"> Place call </dt-button>
-<dt-button> Place call </dt-button>
-<dt-button size="lg"> Place call </dt-button>
-<dt-button size="xl"> Place call </dt-button>
+<dt-button size="xs"> Place Call </dt-button>
+<dt-button size="sm"> Place Call </dt-button>
+<dt-button> Place Call </dt-button>
+<dt-button size="lg"> Place Call </dt-button>
+<dt-button size="xl"> Place Call </dt-button>
 '
 showHtmlWarning />
 
@@ -441,27 +441,27 @@ Loading buttons are useful for communicating a delay between the button interact
 <code-well-header>
   <div class="d-d-flex d-flow8">
     <div>
-      <button class="d-btn d-btn--loading d-btn--primary" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--loading d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--loading d-btn--outlined" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--loading d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
     <div>
-      <button class="d-btn d-btn--danger d-btn--loading" type="button"><span class="d-btn__label">Place call</span></button>
+      <button class="d-btn d-btn--danger d-btn--loading" type="button"><span class="d-btn__label">Place Call</span></button>
     </div>
   </div>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<button class="d-btn d-btn--loading d-btn--primary" type="button"><span class="d-btn__label">Place call</span></button>
-<button class="d-btn d-btn--loading d-btn--outlined" type="button"><span class="d-btn__label">Place call</span></button>
-<button class="d-btn d-btn--danger d-btn--loading" type="button"><span class="d-btn__label">Place call</span></button>
+<button class="d-btn d-btn--loading d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
+<button class="d-btn d-btn--loading d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
+<button class="d-btn d-btn--danger d-btn--loading" type="button"><span class="d-btn__label">Place Call</span></button>
 '
 vueCode='
-<dt-button loading> Place call </dt-button>
-<dt-button loading importance="outlined"> Place call </dt-button>
-<dt-button loading importance="clear" kind="danger"> Place call </dt-button>
+<dt-button loading> Place Call </dt-button>
+<dt-button loading importance="outlined"> Place Call </dt-button>
+<dt-button loading importance="clear" kind="danger"> Place Call </dt-button>
 '
 showHtmlWarning />
 
