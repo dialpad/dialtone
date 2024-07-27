@@ -1,3 +1,15 @@
+# [9.58.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.57.0...dialtone/v9.58.0-beta.1) (2024-07-27)
+
+
+### Documentation
+
+* DLT-1897 move storybook to doc site - Emoji to Emoji Text Wrapper ([#412](https://github.com/dialpad/dialtone/issues/412)) ([dedb229](https://github.com/dialpad/dialtone/commit/dedb229c6e5ebbea8638c0537a8a31c37bf7ef3c))
+
+
+### Features
+
+* **Message Input:** DLT-1912 add slot for split button ([#419](https://github.com/dialpad/dialtone/issues/419)) ([e50139e](https://github.com/dialpad/dialtone/commit/e50139e659988b70aa349bf492213d81947e5538))
+
 # [9.57.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.56.2...dialtone/v9.57.0) (2024-07-25)
 
 
