@@ -26,9 +26,68 @@ npm install @dialpad/dialtone@latest @linusborg/vue-simple-portal @tiptap/vue-2
 
 ### Import packages:
 
+#### Dialtone Tokens
+
+##### Importing tokens via javascript function
+
+For efficiency, the Dialtone tokens are not included in the main dialtone css package, as it is an application side choice which theme to use.
+
+The simplest way to set theme is by calling the `setTheme` javascript function that is included with Dialtone:
+
+```js
+import { setTheme } from '@dialpad/dialtone/theme';
+setTheme('light', 'dp');
+```
+
+possible themes keys are as follows:
+
+- light
+- dark
+- system (sets light or dark based on system preference)
+
+possible brand keys are as follows
+
+- dp (Dialpad)
+- tmo (T-Mobile)
+- expressive (Marketing)
+- expressive-sm (Marketing Small)
+
+Note it is required to load a theme to use Dialtone. Without setting the theme via setTheme, or importing tokens manually, no CSS variables will be set and therefore no Dialtone styles will be displayed.
+
+##### Importing tokens via manually importing files
+
+You may want to use this method if you don't want to use javascript, or you want more control over how the tokens files are loaded and included in your bundle.
+
+You need to import two tokens files in order to apply a theme. A base tokens files, which is either light or dark, and
+a semantic brand tokens file which is named after a brand and theme 'tokens-dp-light', 'tokens-dp-dark', 'tokens-tmo-light', ...
+
+Dialtone tokens doesn't have a default export, so you need to access
+the files directly as following:
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
+@import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
+```
+
+- LESS
+
+```less
+@import "@dialpad/dialtone/tokens/tokens-base-light.less" // Base light tokens
+@import "@dialpad/dialtone/tokens/tokens-dp-light.less" // Dialpad light brand
+```
+
+- JSON
+
+```js
+import "@dialpad/dialtone/tokens/tokens-base-light.json" // Base light tokens
+import "@dialpad/dialtone/tokens/tokens-dp-light.json" // Dialpad light brand
+```
+
 #### Dialtone CSS
 
-Dialtone CSS includes all utility classes as well as tokens.
+Dialtone CSS includes Dialtone utility classes and CSS reset.
 
 - CSS
 
@@ -102,32 +161,6 @@ import { DtButton } from "@dialpad/dialtone/vue3"
 
 // Default import (Prefered if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
-```
-
-#### Dialtone Tokens
-
-Dialtone tokens doesn't have a default export, so you need to access
-the files directly as following:
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/tokens/variables-light.css" // Light tokens
-@import "@dialpad/dialtone/tokens/variables-dark.css" // Dark tokens
-```
-
-- LESS
-
-```less
-@import "@dialpad/dialtone/tokens/variables-light.less" // Light tokens
-@import "@dialpad/dialtone/tokens/variables-dark.less" // Dark tokens
-```
-
-- JSON
-
-```js
-import "@dialpad/dialtone/tokens/tokens-light.json" // Light tokens
-import "@dialpad/dialtone/tokens/tokens-dark.json" // Dark tokens
 ```
 
 ## About this repo
