@@ -1,10 +1,12 @@
 <template>
   <span
+    data-qa="dt-split-button"
     class="d-split-btn"
     :style="{ width: width }"
   >
     <dt-button
       v-dt-tooltip="alphaTooltipText"
+      data-qa="dt-split-button-alpha"
       :size="size"
       :class="[`d-split-btn__alpha d-split-btn__alpha--${size}`]"
       :active="alphaActive"
@@ -33,6 +35,7 @@
             v-bind="attrs"
             :id="omegaId"
             v-dt-tooltip="omegaTooltipText"
+            data-qa="dt-split-button-omega"
             :size="size"
             :active="omegaActive"
             :aria-label="omegaAriaLabel"
@@ -44,8 +47,7 @@
           >
             <template #icon>
               <slot name="omegaIcon">
-                <dt-icon
-                  name="chevron-down"
+                <dt-icon-chevron-down
                   :size="SPLIT_BUTTON_ICON_SIZES[size]"
                 />
               </slot>
@@ -70,7 +72,7 @@ import {
   BUTTON_SIZE_MODIFIERS,
   ICON_POSITION_MODIFIERS,
 } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue2';
 import { DtDropdown } from '@/components/dropdown';
 import { getUniqueString } from '@/common/utils';
 
@@ -79,7 +81,7 @@ export default {
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconChevronDown,
     DtDropdown,
   },
 
@@ -249,7 +251,7 @@ export default {
      * @event click
      * @type {PointerEvent | KeyboardEvent}
      */
-    'alphaClicked',
+    'alpha-clicked',
 
     /**
      * Native omega button click event
@@ -257,7 +259,7 @@ export default {
      * @event click
      * @type {PointerEvent | KeyboardEvent}
      */
-    'omegaClicked',
+    'omega-clicked',
   ],
 
   data () {

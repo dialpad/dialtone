@@ -1,125 +1,262 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtSplitButton from './split_button.vue';
+import { DtIconSend } from '@dialpad/dialtone-icons/vue2';
+import { DtTooltipDirective } from '@/directives/tooltip';
 
-/**
- * Auxiliary variables
- * These variables will be used inside tests to help readability and DRY
- * @prefix MOCK_
- * @notation MOCK_[NAME]
- */
-const MOCK_EXPECTED_VALUE = true;
-// const MOCK_FIELD_NAME = 'mockFieldName';
-// const MOCK_FUNCTION = vi.fn();
+const MOCK_TRANSITION_STUB = () => ({
+  render: function (h) {
+    return this.$options._renderChildren;
+  },
+});
+const MOCK_ALPHA_BUTTON_STUB = vi.fn();
+const MOCK_OMEGA_BUTTON_STUB = vi.fn();
+const MOCK_ALPHA_TOOLTIP_TEXT = 'Alpha tooltip text';
+const MOCK_OMEGA_TOOLTIP_TEXT = 'Omega tooltip text';
 
-/**
- * Environment Constants variables
- * Will be always present in every test
- * @prefix base
- * @notation base[NAME]
- */
 const baseProps = {};
-const baseAttrs = {};
-const baseSlots = {};
-const baseProvide = {};
+const baseSlots = {
+  default: 'Button text',
+};
+const baseStubs = {
+  // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
+  transition: MOCK_TRANSITION_STUB(),
+};
 
-/**
- * Environment variables
- * Will be reset after each test
- * @prefix mock
- * @notation mock[NAME]
- */
 let mockProps = {};
-let mockAttrs = {};
 let mockSlots = {};
-let mockProvide = {};
+let mockStubs = {};
 let mockListeners = {};
 
 const testContext = {};
 
 describe('DtSplitButton Tests', function () {
-  /**
-   * Wrappers
-   * Will contain the component and all its necessary children
-   */
   let wrapper;
+  let alphaButton;
+  let omegaButton;
+  let alphaIconSlot;
+  let omegaIconSlot;
 
   const updateWrapper = () => {
     wrapper = mount(DtSplitButton, {
       propsData: { ...baseProps, ...mockProps },
-      attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
-      provide: { ...baseProvide, ...mockProvide },
+      stubs: { ...baseStubs, ...mockStubs },
       listeners: { ...mockListeners },
       localVue: testContext.localVue,
+      attachTo: document.body,
+      components: { DtIconSend },
     });
+
+    alphaButton = wrapper.find('[data-qa="dt-split-button-alpha"]');
+    alphaIconSlot = alphaButton.find('[data-qa="dt-button-icon"]');
+    omegaButton = wrapper.find('[data-qa="dt-split-button-omega"]');
+    omegaIconSlot = omegaButton.find('[data-qa="dt-button-icon"]');
   };
 
-  /**
-   * Setup
-   * Will prepare the environment for each test
-   */
   beforeAll(() => {
     testContext.localVue = createLocalVue();
+    testContext.localVue.use(DtTooltipDirective);
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
   });
 
   beforeEach(() => {
     updateWrapper();
   });
 
-  /**
-   * Teardown
-   * Will reset the environment after each test
-   */
+  afterAll(() => {
+    // Restore RequestAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
+  });
+
   afterEach(() => {
     mockProps = {};
-    mockAttrs = {};
     mockSlots = {};
-    mockProvide = {};
+    mockStubs = {};
     mockListeners = {};
+    wrapper.destroy();
   });
 
   describe('Presentation Tests', () => {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
-    it('Should render the component', () => {
-      expect(wrapper).toBeDefined();
-    });
-  });
+    describe('When rendered with default props', () => {
+      it('Should render the component', () => {
+        expect(wrapper.exists()).toBe(true);
+        expect(alphaButton.exists()).toBe(true);
+        expect(omegaButton.exists()).toBe(true);
+        expect(omegaIconSlot.exists()).toBe(true);
+      });
 
-  describe('Accessibility Tests', () => {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
-    it('Bypass empty test suite', () => {
-      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+      it('Should render primary by default', async () => {
+        // Default (no props) button should be d-btn--primary
+        expect(alphaButton.classes().includes('d-btn--primary')).toBe(true);
+        expect(omegaButton.classes().includes('d-btn--primary')).toBe(true);
+      });
+    });
+
+    describe('When kind is set to danger', () => {
+      it('Should have danger class', async () => {
+        mockProps = { kind: 'danger' };
+
+        updateWrapper();
+
+        expect(alphaButton.classes().includes('d-btn--danger')).toBe(true);
+        expect(omegaButton.classes().includes('d-btn--danger')).toBe(true);
+      });
+    });
+
+    describe('When importance is set to outlined', () => {
+      it('Should have outlined class', async () => {
+        mockProps = { importance: 'outlined' };
+
+        updateWrapper();
+
+        expect(alphaButton.classes().includes('d-btn--outlined')).toBe(true);
+        expect(omegaButton.classes().includes('d-btn--outlined')).toBe(true);
+      });
+    });
+
+    describe('When loading is set to true', () => {
+      it('Should have loading class', async () => {
+        mockProps = { alphaLoading: true };
+
+        updateWrapper();
+
+        expect(alphaButton.classes().includes('d-btn--loading')).toBe(true);
+      });
+    });
+
+    describe('When alpha-active is set to true', () => {
+      it('Should have active class', async () => {
+        mockProps = { alphaActive: true };
+
+        updateWrapper();
+
+        expect(alphaButton.classes().includes('d-btn--active')).toBe(true);
+      });
+    });
+
+    describe('When omega-active is set to true', () => {
+      it('Should have active class', async () => {
+        mockProps = { omegaActive: true };
+
+        updateWrapper();
+
+        expect(omegaButton.classes().includes('d-btn--active')).toBe(true);
+      });
+    });
+
+    describe('When size is set to xl', () => {
+      it('Class is set to the correct size', async () => {
+        mockProps = { size: 'xl' };
+
+        updateWrapper();
+
+        expect(alphaButton.classes().includes('d-btn--xl')).toBe(true);
+        expect(omegaButton.classes().includes('d-btn--xl')).toBe(true);
+      });
+    });
+
+    describe('When alphaIcon slot is set', () => {
+      beforeEach(() => {
+        mockSlots = { alphaIcon: '<dt-icon-send />' };
+
+        updateWrapper();
+      });
+
+      it('Should render the custom icon', () => {
+        expect(alphaIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
+      });
+
+      it('Should render left by default', () => {
+        expect(alphaIconSlot.classes().includes('d-btn__icon--left')).toBe(true);
+      });
+
+      describe('When alpha-icon-position is set to right', () => {
+        it('Should have correct class', () => {
+          mockProps = { alphaIconPosition: 'right' };
+
+          updateWrapper();
+
+          expect(alphaIconSlot.classes().includes('d-btn__icon--right')).toBe(true);
+        });
+      });
+    });
+
+    describe('When omegaIcon slot is set', () => {
+      beforeEach(() => {
+        mockSlots = { omegaIcon: '<dt-icon-send />' };
+
+        updateWrapper();
+      });
+
+      it('should render the custom icon', () => {
+        expect(omegaIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
+      });
+    });
+
+    describe('When alpha-tooltip-text is set', () => {
+      it('Should render the tooltip with correct text', async () => {
+        mockProps = { alphaTooltipText: MOCK_ALPHA_TOOLTIP_TEXT };
+        await updateWrapper();
+        await alphaButton.trigger('mouseenter');
+
+        const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
+
+        expect(tooltip.textContent.trim()).toBe(MOCK_ALPHA_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When omega-tooltip-text is set', () => {
+      it('Should render the tooltip with correct text', async () => {
+        mockProps = { omegaTooltipText: MOCK_OMEGA_TOOLTIP_TEXT };
+        await updateWrapper();
+        await omegaButton.trigger('mouseenter');
+
+        const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
+
+        expect(tooltip.textContent.trim()).toBe(MOCK_OMEGA_TOOLTIP_TEXT);
+      });
     });
   });
 
   describe('Interactivity Tests', () => {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
-    it('Bypass empty test suite', () => {
-      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
-    });
-  });
+    describe('When alpha button is clicked', () => {
+      beforeEach(async () => {
+        mockListeners = { 'alpha-clicked': MOCK_ALPHA_BUTTON_STUB };
 
-  describe('Validation Tests', () => {
-    /*
-     * Test(s) to ensure that custom validators are working as expected
-     */
-    it('Bypass empty test suite', () => {
-      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
-    });
-  });
+        updateWrapper();
 
-  describe('Extendability Tests', () => {
-    /*
-     * Test(s) to ensure that the component can be correctly extended
-     */
-    it('Bypass empty test suite', () => {
-      expect(MOCK_EXPECTED_VALUE).toBeTruthy();
+        await alphaButton.trigger('click');
+      });
+
+      it('Should call listener', async () => {
+        expect(MOCK_ALPHA_BUTTON_STUB).toHaveBeenCalledTimes(1);
+      });
+
+      it('Should emit alpha-clicked event', () => {
+        expect(wrapper.emitted()).toHaveProperty('alpha-clicked');
+      });
+    });
+
+    describe('When omega button is clicked', () => {
+      beforeEach(async () => {
+        mockListeners = { 'omega-clicked': MOCK_OMEGA_BUTTON_STUB };
+
+        updateWrapper();
+
+        await omegaButton.trigger('click');
+      });
+
+      it('Should call listener', async () => {
+        expect(MOCK_OMEGA_BUTTON_STUB).toHaveBeenCalledTimes(1);
+      });
+
+      it('Should emit omega-clicked event', () => {
+        expect(wrapper.emitted()).toHaveProperty('omega-clicked');
+      });
     });
   });
 });
