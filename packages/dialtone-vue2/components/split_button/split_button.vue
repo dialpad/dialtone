@@ -29,42 +29,39 @@
     </dt-button>
     <!-- @slot Omega (right) content slot -->
     <slot name="omega">
-      <dt-dropdown>
+      <dt-dropdown v-if="!omegaId && $slots.dropdownList">
         <template #anchor="{ attrs }">
-          <dt-button
-            v-bind="attrs"
-            :id="omegaId"
-            v-dt-tooltip="omegaTooltipText"
-            data-qa="dt-split-button-omega"
-            :size="size"
-            :active="omegaActive"
-            :aria-label="omegaAriaLabel"
-            :disabled="disabled"
-            :importance="importance"
-            :kind="kind"
-            :class="`d-split-btn__omega d-split-btn__omega--${size}`"
-            @click="(e) => handleClick('omega', e)"
+          <split-button-omega
+            v-bind="{ ...attrs, ...omegaButtonProps }"
+            @click="(e) => $emit('omega-clicked', e)"
           >
             <template #icon>
-              <slot name="omegaIcon">
-                <dt-icon-chevron-down
-                  :size="SPLIT_BUTTON_ICON_SIZES[size]"
-                />
-              </slot>
+              <!-- @slot Omega (right) button icon slot -->
+              <slot name="omegaIcon" />
             </template>
-          </dt-button>
+          </split-button-omega>
         </template>
         <template #list>
           <!-- @slot Built-in dropdown contents -->
           <slot name="dropdownList" />
         </template>
       </dt-dropdown>
+
+      <split-button-omega
+        v-else
+        v-bind="omegaButtonProps"
+        @click="(e) => $emit('omega-clicked', e)"
+      >
+        <template #icon>
+          <!-- @slot Omega (right) button icon slot -->
+          <slot name="omegaIcon" />
+        </template>
+      </split-button-omega>
     </slot>
   </span>
 </template>
 
 <script>
-import { SPLIT_BUTTON_ICON_SIZES } from './split_button_constants';
 import {
   DtButton,
   BUTTON_IMPORTANCE_MODIFIERS,
@@ -72,16 +69,15 @@ import {
   BUTTON_SIZE_MODIFIERS,
   ICON_POSITION_MODIFIERS,
 } from '@/components/button';
-import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue2';
+import SplitButtonOmega from './split_button-omega.vue';
 import { DtDropdown } from '@/components/dropdown';
-import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'DtSplitButton',
 
   components: {
     DtButton,
-    DtIconChevronDown,
+    SplitButtonOmega,
     DtDropdown,
   },
 
@@ -210,7 +206,7 @@ export default {
      */
     omegaId: {
       type: String,
-      default: getUniqueString(),
+      default: undefined,
     },
 
     /**
@@ -262,10 +258,19 @@ export default {
     'omega-clicked',
   ],
 
-  data () {
-    return {
-      SPLIT_BUTTON_ICON_SIZES,
-    };
+  computed: {
+    omegaButtonProps () {
+      return {
+        id: this.omegaId,
+        tooltipText: this.omegaTooltipText,
+        size: this.size,
+        active: this.omegaActive,
+        ariaLabel: this.omegaAriaLabel,
+        disabled: this.disabled,
+        importance: this.importance,
+        kind: this.kind,
+      };
+    },
   },
 
   methods: {

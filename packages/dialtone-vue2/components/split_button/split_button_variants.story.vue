@@ -64,6 +64,7 @@
                     <dt-list-item
                       v-for="item in listItems"
                       :key="item.id"
+                      navigation-type="tab"
                     >
                       {{ item.text }}
                     </dt-list-item>
@@ -103,6 +104,7 @@
                 <dt-list-item
                   v-for="item in listItems"
                   :key="item.id"
+                  navigation-type="tab"
                 >
                   {{ item.text }}
                 </dt-list-item>
@@ -135,6 +137,7 @@
                 <dt-list-item
                   v-for="item in listItems"
                   :key="item.id"
+                  navigation-type="tab"
                 >
                   {{ item.text }}
                 </dt-list-item>
@@ -169,6 +172,7 @@
                 <dt-list-item
                   v-for="item in listItems"
                   :key="item.id"
+                  navigation-type="tab"
                 >
                   {{ item.text }}
                 </dt-list-item>
@@ -253,14 +257,38 @@
         </dt-stack>
       </dt-stack>
     </dt-stack>
+    <dt-stack>
+      <h2>External anchor</h2>
+      <div>
+        <dt-split-button
+          omega-id="external-anchor-example"
+          @omega-clicked="isPopoverShown = true"
+        >
+          External anchor example
+        </dt-split-button>
+      </div>
+
+      <dt-popover
+        external-anchor="external-anchor-example"
+        :open.sync="isPopoverShown"
+      >
+        <template #content>
+          <ul>
+            <li>Custom popover Content</li>
+          </ul>
+        </template>
+      </dt-popover>
+    </dt-stack>
   </dt-stack>
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import { DtSplitButton } from './';
 import { DtStack } from '@/components/stack';
 import { DtIcon } from '@/components/icon';
 import { DtListItem } from '@/components/list_item';
+import { DtPopover } from '@/components/popover';
 
 export default {
   name: 'DtSplitButtonVariants',
@@ -269,6 +297,7 @@ export default {
     DtStack,
     DtIcon,
     DtListItem,
+    DtPopover,
   },
 
   data () {
@@ -289,6 +318,8 @@ export default {
         { id: 1, text: 'First item' },
         { id: 2, text: 'Second item' },
       ],
+
+      isPopoverShown: false,
     };
   },
 
