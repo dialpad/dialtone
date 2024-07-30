@@ -240,7 +240,7 @@ export default {
      */
     theme: {
       type: String,
-      default: undefined,
+      default: null,
     },
 
     /**

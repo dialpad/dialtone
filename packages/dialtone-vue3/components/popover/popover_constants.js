@@ -15,7 +15,7 @@ export const POPOVER_HEADER_FOOTER_PADDING_CLASSES = {
 export const POPOVER_ROLES = ['dialog', 'menu', 'listbox', 'tree', 'grid'];
 export const POPOVER_CONTENT_WIDTHS = ['', 'anchor'];
 export const POPOVER_INITIAL_FOCUS_STRINGS = ['none', 'dialog', 'first'];
-export const POPOVER_APPEND_TO_VALUES = ['parent', 'body'];
+export const POPOVER_APPEND_TO_VALUES = ['parent', 'body', 'root'];
 export const POPOVER_STICKY_VALUES = [
   ...TIPPY_STICKY_VALUES,
 ];

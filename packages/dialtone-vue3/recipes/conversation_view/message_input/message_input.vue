@@ -3,16 +3,17 @@
   <div
     data-qa="dt-message-input"
     role="presentation"
-    :class="['dt-message-input', { 'dt-message-input--focused': hasFocus }]"
-    @click="$refs.richTextEditor?.focusEditor()"
+    :class="['dt-message-input']"
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
-    @keydown.enter.exact="onSend"
     @paste="onPaste"
   >
+    <!-- @slot Renders above the input, but still within the borders. -->
+    <slot name="top" />
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
+      v-dt-scrollbar
       class="dt-message-input__editor-wrapper"
       :style="{ 'max-height': maxHeight }"
     >
@@ -162,40 +163,43 @@
           <p>{{ showCancel.text }}</p>
         </dt-button>
 
-        <!-- Send button -->
-        <!-- Right positioned UI - send button -->
-        <dt-button
-          v-if="showSend"
-          v-dt-tooltip:top-end="showSend?.tooltipLabel"
-          data-qa="dt-message-input-send-btn"
-          size="sm"
-          kind="default"
-          importance="primary"
-          :class="[
-            {
-              'dt-message-input__send-button--disabled': isSendDisabled,
-              'd-btn--circle': showSend.icon,
-            },
-          ]"
-          :aria-label="showSend.ariaLabel"
-          :aria-disabled="isSendDisabled"
-          @click="onSend"
-        >
-          <template
-            v-if="showSend.icon"
-            #icon
+        <!-- @slot Slot for sendButton picker -->
+        <slot name="sendButton">
+          <!-- Send button -->
+          <!-- Right positioned UI - send button -->
+          <dt-button
+            v-if="showSend"
+            v-dt-tooltip:top-end="showSend?.tooltipLabel"
+            data-qa="dt-message-input-send-btn"
+            size="sm"
+            kind="default"
+            importance="primary"
+            :class="[
+              {
+                'dt-message-input__send-button--disabled': isSendDisabled,
+                'd-btn--circle': showSend.icon,
+              },
+            ]"
+            :aria-label="showSend.ariaLabel"
+            :aria-disabled="isSendDisabled"
+            @click="onSend"
           >
-            <dt-icon
-              :name="showSend.icon"
-              size="300"
-            />
-          </template>
-          <template
-            v-if="showSend.text"
-          >
-            <p>{{ showSend.text }}</p>
-          </template>
-        </dt-button>
+            <template
+              v-if="showSend.icon"
+              #icon
+            >
+              <dt-icon
+                :name="showSend.icon"
+                size="300"
+              />
+            </template>
+            <template
+              v-if="showSend.text"
+            >
+              <p>{{ showSend.text }}</p>
+            </template>
+          </dt-button>
+        </slot>
       </div>
     </section>
   </div>
@@ -608,7 +612,6 @@ export default {
     return {
       additionalExtensions: [meetingPill],
       internalInputValue: this.modelValue, // internal input content
-      hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
       emojiPickerOpened: false,
@@ -723,15 +726,6 @@ export default {
       this.$emit('cancel');
     },
 
-    onFocus (event) {
-      this.hasFocus = true;
-      this.$refs.richTextEditor?.focusEditor();
-    },
-
-    onBlur (event) {
-      this.hasFocus = false;
-    },
-
     onInput (event) {
       this.$emit('update:modelValue', event);
     },
@@ -748,13 +742,12 @@ export default {
   border-color: var(--dt-color-border-default);
   cursor: text;
 
-  &--focused {
+  &:focus-within {
     border-color: var(--dt-color-border-bold);
     box-shadow: var(--dt-shadow-small);
   }
 
   &__editor-wrapper {
-    overflow: auto;
     padding: var(--dt-space-400) var(--dt-space-500) var(--dt-space-300);
   }
 

@@ -6,7 +6,7 @@
       </h3>
       <dt-recipe-general-row
         type="channels"
-        description="Channel name"
+        description="Channel name 😄"
         unread-count="29"
         unread-count-tooltip="29 unread messages"
       />
@@ -47,11 +47,24 @@
     </div>
     <div>
       <h3>
-        Channel only show unread mentioned count
+        Channel only show unread mentioned count with 'always' setting
       </h3>
       <dt-recipe-general-row
         type="channels"
         unread-mention-count="1"
+        channel-setting="always"
+        :has-unreads="true"
+        description="Channel name"
+      />
+    </div>
+    <div>
+      <h3>
+        Channel show unread mentioned count with other than 'always' setting
+      </h3>
+      <dt-recipe-general-row
+        type="channels"
+        unread-mention-count="1"
+        channel-setting="mention"
         :has-unreads="true"
         description="Channel name"
       />
@@ -87,7 +100,7 @@
       </h3>
       <dt-recipe-general-row
         :active-voice-chat="true"
-        description="Long contact center name"
+        description="Long contact center name :smile: with emoji"
         color="magenta-200"
       />
     </div>

@@ -1,6 +1,7 @@
 ---
 title: Accessibility and inclusive design
 shortTitle: accessibility
+prev: { link: "/guides/content/voice-tone/", text: "Voice and tone" }
 description: Guidance on building products for everyone.
 ---
 

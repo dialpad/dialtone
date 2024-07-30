@@ -404,5 +404,19 @@ describe('DtEmojiPicker Tests', () => {
 
       expect(document.activeElement).toBe(searchInput.element);
     });
+
+    it('Should jump to the first emoji from tabset if showSearch is false', async () => {
+      mockProps = { showSearch: false };
+
+      updateWrapper();
+
+      const firstTab = wrapper.find('.d-tablist button');
+      const firstEmoji = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(2) button');
+
+      await firstTab.element.focus();
+      await firstTab.trigger('keydown.Tab');
+
+      expect(document.activeElement).toBe(firstEmoji.element);
+    });
   });
 });

@@ -40,6 +40,9 @@ importers:
       '@tiptap/extension-hard-break':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
+      '@tiptap/extension-history':
+        specifier: 2.3.0
+        version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))(@tiptap/pm@2.3.0)
       '@tiptap/extension-italic':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
@@ -291,12 +294,12 @@ importers:
       '@vuepress/plugin-theme-data':
         specifier: 2.0.0-beta.60
         version: 2.0.0-beta.60(typescript@5.3.3)
-      '@vuepress/plugin-toc':
-        specifier: 2.0.0-beta.60
-        version: 2.0.0-beta.60(typescript@5.3.3)
       '@vuepress/utils':
         specifier: 2.0.0-beta.60
         version: 2.0.0-beta.60
+      angular-html-parser:
+        specifier: 5.2.0
+        version: 5.2.0
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -309,6 +312,9 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
+      prettier:
+        specifier: 3.3.2
+        version: 3.3.2
       prismjs:
         specifier: ^1.29.0
         version: 1.29.0
@@ -468,9 +474,15 @@ importers:
       '@vitejs/plugin-vue2':
         specifier: ^2.3.1
         version: 2.3.1(vite@5.0.12(@types/node@20.9.0)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.24.0))(vue@2.7.16)
+      '@vue/tsconfig':
+        specifier: ^0.4.0
+        version: 0.4.0
       glob:
         specifier: ^10.3.10
         version: 10.3.10
+      npm-run-all:
+        specifier: ^4.1.5
+        version: 4.1.5
       vite:
         specifier: ^5.0.12
         version: 5.0.12(@types/node@20.9.0)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.24.0)
@@ -480,6 +492,9 @@ importers:
       vue-template-compiler:
         specifier: ^2.7.16
         version: 2.7.16(vue@2.7.16)
+      vue-tsc:
+        specifier: ^1.8.25
+        version: 1.8.25(typescript@5.3.3)(vue@2.7.16)
 
   packages/dialtone-icons/vue3:
     devDependencies:
@@ -489,15 +504,24 @@ importers:
       '@vue/compiler-sfc':
         specifier: ^3.4.15
         version: 3.4.15
+      '@vue/tsconfig':
+        specifier: ^0.4.0
+        version: 0.4.0
       glob:
         specifier: ^10.3.10
         version: 10.3.10
+      npm-run-all:
+        specifier: ^4.1.5
+        version: 4.1.5
       vite:
         specifier: ^5.0.12
         version: 5.0.12(@types/node@20.9.0)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.24.0)
       vue:
         specifier: ^3.4.15
         version: 3.4.15(typescript@5.3.3)
+      vue-tsc:
+        specifier: ^1.8.25
+        version: 1.8.25(typescript@5.3.3)(vue@3.4.15(typescript@5.3.3))
 
   packages/dialtone-tokens:
     devDependencies:
@@ -570,6 +594,9 @@ importers:
       '@tiptap/extension-hard-break':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
+      '@tiptap/extension-history':
+        specifier: 2.3.0
+        version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))(@tiptap/pm@2.3.0)
       '@tiptap/extension-italic':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
@@ -618,6 +645,9 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      overlayscrollbars:
+        specifier: 2.9.1
+        version: 2.9.1
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -631,6 +661,9 @@ importers:
       '@dialpad/generator-dialtone':
         specifier: workspace:*
         version: link:../../generator-dialtone
+      '@faker-js/faker':
+        specifier: 8.4.1
+        version: 8.4.1
       '@percy/cli':
         specifier: 1.28.2
         version: 1.28.2(typescript@5.3.3)
@@ -796,6 +829,9 @@ importers:
       '@tiptap/extension-hard-break':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
+      '@tiptap/extension-history':
+        specifier: 2.3.0
+        version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))(@tiptap/pm@2.3.0)
       '@tiptap/extension-italic':
         specifier: 2.3.0
         version: 2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))
@@ -844,6 +880,9 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      overlayscrollbars:
+        specifier: 2.9.1
+        version: 2.9.1
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -857,6 +896,9 @@ importers:
       '@dialpad/generator-dialtone':
         specifier: workspace:*
         version: link:../../generator-dialtone
+      '@faker-js/faker':
+        specifier: 8.4.1
+        version: 8.4.1
       '@percy/cli':
         specifier: 1.28.2
         version: 1.28.2(typescript@5.3.3)
@@ -2457,6 +2499,10 @@ packages:
   '@eslint/js@8.56.0':
     resolution: {integrity: sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@faker-js/faker@8.4.1':
+    resolution: {integrity: sha512-XQ3cU+Q8Uqmrbf2e0cIC/QN43sTBSC8KF12u29Mb47tWrt2hAgBXSgpZMj4Ao8Uk0iJcU99QsOCaIL8934obCg==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
 
   '@fal-works/esbuild-plugin-global-externals@2.1.2':
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
@@ -4325,6 +4371,12 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.0.0
 
+  '@tiptap/extension-history@2.3.0':
+    resolution: {integrity: sha512-EF5Oq9fe/VBzU1Lsow2ubOlx1e1r4OQT1WUPGsRnL7pr94GH1Skpk7/hs9COJ9K6kP3Ebt42XjP0JEQodR58YA==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+
   '@tiptap/extension-italic@2.3.0':
     resolution: {integrity: sha512-jdFjLjdt5JtPlGMpoS6TEq5rznjbAYVlPwcw5VkYENVIYIGIR1ylIw2JwK1nUEsQ+OgYwVxHLejcUXWG1dCi2g==}
     peerDependencies:
@@ -5112,9 +5164,6 @@ packages:
   '@vuepress/plugin-theme-data@2.0.0-beta.60':
     resolution: {integrity: sha512-3b34sXEAzShvUzeEMA/0JE4VrLxoMqGJOGMl0I9m0DKg2apgjRG6nYYq6gUnJW0gcUVK+tOOOHsMT6mTMs3xdA==}
 
-  '@vuepress/plugin-toc@2.0.0-beta.60':
-    resolution: {integrity: sha512-rl65GtYahh7Mm6JiOT7WKuvYgkPquhQCFOSOFKWFEH/4A+950XKfSARJVwu+bsn0xx25X3RMErWuS1l7hNkNgw==}
-
   '@vuepress/shared@2.0.0-beta.53':
     resolution: {integrity: sha512-B0qWorGxC3ruSHdZcJW24XtEDEU3L3uPr0xzTeKVfHjOM4b9hN83YzBtW4n/WPnmk1RXVE9266Ulh9ZL5okGOw==}
 
@@ -5363,6 +5412,10 @@ packages:
 
   algoliasearch@4.20.0:
     resolution: {integrity: sha512-y+UHEjnOItoNy0bYO+WWmLWBlPwDjKHW6mNHrPi0NkuhpQOOEbrkwQH/wgKFDLh7qlKjzoKeiRtlpewDPDG23g==}
+
+  angular-html-parser@5.2.0:
+    resolution: {integrity: sha512-8S/8g5iMcuGhRmBUJ+xuXm9hdjqIcaky2z52RA7tSyz9tWN0mgiP/JR9+kx/SiS1REJpTXnEKpMCMEeVVIeo3A==}
+    engines: {node: '>= 14'}
 
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -8526,6 +8579,7 @@ packages:
   glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
     engines: {node: '>=12'}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-agent@2.2.0:
     resolution: {integrity: sha512-+20KpaW6DDLqhG7JDiJpD1JvNvb8ts+TNl7BPOYcURqCrXqnN1Vf+XVOrkKJAFPqfX+oEhsdzOj1hLWkBTdNJg==}
@@ -11560,6 +11614,9 @@ packages:
     resolution: {integrity: sha512-eqaVuDxnxDO55+pncqTTphbeq6O5XHMyrSfWQoL48mG2rUjr2ZBzvkFkcxIiG3l7IaIY6/L1oX1AJIDdZyzuPQ==}
     engines: {node: '>= 10.0'}
 
+  overlayscrollbars@2.9.1:
+    resolution: {integrity: sha512-BY3hfQcQVZvi25e3YcYe06HPy9yn0lE3akBnUE02fGu3S8OyJmGFx/LDC9rjFJg6Im+YdweXLYEFJTuEhVLMvA==}
+
   p-any@2.1.0:
     resolution: {integrity: sha512-JAERcaMBLYKMq+voYw36+x5Dgh47+/o7yuv2oQYuSSUml4YeqJEFznBrY2UeEkoSHqBua6hz518n/PsowTYLLg==}
     engines: {node: '>=8'}
@@ -12707,6 +12764,11 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+
+  prettier@3.3.2:
+    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+    engines: {node: '>=14'}
     hasBin: true
 
   pretty-bytes@6.1.1:
@@ -15230,8 +15292,8 @@ packages:
   vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
 
-  vue-component-type-helpers@2.0.19:
-    resolution: {integrity: sha512-cN3f1aTxxKo4lzNeQAkVopswuImUrb5Iurll9Gaw5cqpnbTAxtEMM1mgi6ou4X79OCyqYv1U1mzBHJkzmiK82w==}
+  vue-component-type-helpers@2.0.28:
+    resolution: {integrity: sha512-hoK0UsKXrXDY9zdpdk+drqOqYHpPhbmfQUJ2mFYK57+l73mQxcYyCteQsolllwGaxhWihT077+OA/FR5ZPTceg==}
 
   vue-demi@0.14.7:
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
@@ -17229,6 +17291,8 @@ snapshots:
   '@eslint/js@8.55.0': {}
 
   '@eslint/js@8.56.0': {}
+
+  '@faker-js/faker@8.4.1': {}
 
   '@fal-works/esbuild-plugin-global-externals@2.1.2': {}
 
@@ -20082,7 +20146,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.8(typescript@5.3.3)
-      vue-component-type-helpers: 2.0.19
+      vue-component-type-helpers: 2.0.28
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -20223,6 +20287,11 @@ snapshots:
   '@tiptap/extension-hard-break@2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))':
     dependencies:
       '@tiptap/core': 2.3.0(@tiptap/pm@2.3.0)
+
+  '@tiptap/extension-history@2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))(@tiptap/pm@2.3.0)':
+    dependencies:
+      '@tiptap/core': 2.3.0(@tiptap/pm@2.3.0)
+      '@tiptap/pm': 2.3.0
 
   '@tiptap/extension-italic@2.3.0(@tiptap/core@2.3.0(@tiptap/pm@2.3.0))':
     dependencies:
@@ -21263,6 +21332,22 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
+  '@vue/language-core@1.8.25(typescript@5.3.3)(vue@2.7.16)':
+    dependencies:
+      '@volar/language-core': 1.11.1
+      '@volar/source-map': 1.11.1
+      '@vue/compiler-dom': 3.4.15
+      '@vue/shared': 3.4.15
+      computeds: 0.0.1
+      minimatch: 9.0.3
+      muggle-string: 0.3.1
+      path-browserify: 1.0.1
+      vue-template-compiler: 2.7.16(vue@2.7.16)
+    optionalDependencies:
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - vue
+
   '@vue/language-core@1.8.25(typescript@5.3.3)(vue@3.3.8(typescript@5.3.3))':
     dependencies:
       '@volar/language-core': 1.11.1
@@ -21274,6 +21359,22 @@ snapshots:
       muggle-string: 0.3.1
       path-browserify: 1.0.1
       vue-template-compiler: 2.7.16(vue@3.3.8(typescript@5.3.3))
+    optionalDependencies:
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - vue
+
+  '@vue/language-core@1.8.25(typescript@5.3.3)(vue@3.4.15(typescript@5.3.3))':
+    dependencies:
+      '@volar/language-core': 1.11.1
+      '@volar/source-map': 1.11.1
+      '@vue/compiler-dom': 3.4.15
+      '@vue/shared': 3.4.15
+      computeds: 0.0.1
+      minimatch: 9.0.3
+      muggle-string: 0.3.1
+      path-browserify: 1.0.1
+      vue-template-compiler: 2.7.16(vue@3.4.15(typescript@5.3.3))
     optionalDependencies:
       typescript: 5.3.3
     transitivePeerDependencies:
@@ -21628,17 +21729,6 @@ snapshots:
       - supports-color
       - typescript
 
-  '@vuepress/plugin-toc@2.0.0-beta.60(typescript@5.3.3)':
-    dependencies:
-      '@vuepress/client': 2.0.0-beta.60(typescript@5.3.3)
-      '@vuepress/core': 2.0.0-beta.60(typescript@5.3.3)
-      '@vuepress/utils': 2.0.0-beta.60
-      vue: 3.3.8(typescript@5.3.3)
-      vue-router: 4.2.5(vue@3.3.8(typescript@5.3.3))
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-
   '@vuepress/shared@2.0.0-beta.53':
     dependencies:
       '@mdit-vue/types': 0.11.0
@@ -21986,6 +22076,10 @@ snapshots:
       '@algolia/requester-common': 4.20.0
       '@algolia/requester-node-http': 4.20.0
       '@algolia/transporter': 4.20.0
+
+  angular-html-parser@5.2.0:
+    dependencies:
+      tslib: 2.6.2
 
   ansi-align@3.0.1:
     dependencies:
@@ -29246,6 +29340,8 @@ snapshots:
       domino: 2.1.6
       validator: 13.11.0
 
+  overlayscrollbars@2.9.1: {}
+
   p-any@2.1.0:
     dependencies:
       p-cancelable: 2.1.1
@@ -29937,11 +30033,11 @@ snapshots:
     dependencies:
       postcss: 7.0.39
 
-  postcss-html@0.36.0(postcss-syntax@0.36.2)(postcss@7.0.39):
+  postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39):
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss@8.4.33)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
 
   postcss-image-set-function@3.0.1:
     dependencies:
@@ -29952,11 +30048,11 @@ snapshots:
     dependencies:
       postcss: 7.0.39
 
-  postcss-jsx@0.36.4(postcss-syntax@0.36.2)(postcss@7.0.39):
+  postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39):
     dependencies:
       '@babel/core': 7.23.2
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss@8.4.33)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -30000,10 +30096,10 @@ snapshots:
     dependencies:
       postcss: 7.0.39
 
-  postcss-markdown@0.36.0(postcss-syntax@0.36.2)(postcss@7.0.39):
+  postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss@8.4.33)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -30497,9 +30593,15 @@ snapshots:
       postcss-value-parser: 4.2.0
       svgo: 3.0.2
 
-  postcss-syntax@0.36.2(postcss@8.4.33):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
-      postcss: 8.4.33
+      postcss: 7.0.39
+    optionalDependencies:
+      postcss-html: 0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39)
+      postcss-jsx: 0.36.4(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39)
+      postcss-less: 3.1.4
+      postcss-markdown: 0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39)
+      postcss-scss: 2.1.1
 
   postcss-unique-selectors@5.1.1(postcss@8.4.32):
     dependencies:
@@ -30583,6 +30685,8 @@ snapshots:
   prepend-http@2.0.0: {}
 
   prettier@2.8.8: {}
+
+  prettier@3.3.2: {}
 
   pretty-bytes@6.1.1: {}
 
@@ -32574,10 +32678,10 @@ snapshots:
       normalize-selector: 0.2.0
       pify: 4.0.1
       postcss: 7.0.39
-      postcss-html: 0.36.0(postcss-syntax@0.36.2)(postcss@7.0.39)
-      postcss-jsx: 0.36.4(postcss-syntax@0.36.2)(postcss@7.0.39)
+      postcss-html: 0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39)
+      postcss-jsx: 0.36.4(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39)
       postcss-less: 3.1.4
-      postcss-markdown: 0.36.0(postcss-syntax@0.36.2)(postcss@7.0.39)
+      postcss-markdown: 0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39)
       postcss-media-query-parser: 0.2.3
       postcss-reporter: 6.0.1
       postcss-resolve-nested-selector: 0.1.1
@@ -32585,7 +32689,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss@8.4.33)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.33))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
@@ -33696,7 +33800,7 @@ snapshots:
 
   vue-component-type-helpers@1.8.24: {}
 
-  vue-component-type-helpers@2.0.19: {}
+  vue-component-type-helpers@2.0.28: {}
 
   vue-demi@0.14.7(vue@3.4.15(typescript@5.3.3)):
     dependencies:
@@ -33895,7 +33999,6 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
       vue: 3.4.15(typescript@5.3.3)
-    optional: true
 
   vue-template-es2015-compiler@1.9.1: {}
 
@@ -33916,10 +34019,28 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
+  vue-tsc@1.8.25(typescript@5.3.3)(vue@2.7.16):
+    dependencies:
+      '@volar/typescript': 1.11.1
+      '@vue/language-core': 1.8.25(typescript@5.3.3)(vue@2.7.16)
+      semver: 7.5.4
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - vue
+
   vue-tsc@1.8.25(typescript@5.3.3)(vue@3.3.8(typescript@5.3.3)):
     dependencies:
       '@volar/typescript': 1.11.1
       '@vue/language-core': 1.8.25(typescript@5.3.3)(vue@3.3.8(typescript@5.3.3))
+      semver: 7.5.4
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - vue
+
+  vue-tsc@1.8.25(typescript@5.3.3)(vue@3.4.15(typescript@5.3.3)):
+    dependencies:
+      '@volar/typescript': 1.11.1
+      '@vue/language-core': 1.8.25(typescript@5.3.3)(vue@3.4.15(typescript@5.3.3))
       semver: 7.5.4
       typescript: 5.3.3
     transitivePeerDependencies:

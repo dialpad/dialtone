@@ -101,7 +101,8 @@
 </template>
 
 <script setup>
-// eslint-disable max-len
+/* eslint-disable max-len */
+/* eslint-disable max-lines */
 import { emojisGrouped as emojis } from '@dialpad/dialtone-emojis';
 import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
 import { CDN_URL, ARROW_KEYS } from '@/components/emoji_picker/emoji_picker_constants';
@@ -425,6 +426,7 @@ function scrollToTab (tabIndex, focusFirstEmoji = true) {
      * position (scrollTop <= offsetTop),or if the scrollToTab function is scrolling from top to bottom and has
      * passed the desired position(scrollTop >= offsetTop), then isScrolling is set to false.
      */
+    /* eslint-disable-next-line complexity */
     container.addEventListener('scroll', () => {
       if (isScrolling) {
         const scrollTop = container.scrollTop;
@@ -463,7 +465,9 @@ function setTabLabelObserver () {
    * The code extracts the target element and its index from the IntersectionObserverEntry object,
    * and checks whether the target intersects with the root and is positioned above or below it.
    */
-  tabLabelObserver.value = new IntersectionObserver(entries => {
+  tabLabelObserver.value = new IntersectionObserver(async (entries) => {
+    emits('is-scrolling', false);
+    // eslint-disable-next-line complexity
     entries.forEach(entry => {
       const { target } = entry;
       const index = parseInt(target.dataset.index);
@@ -526,6 +530,7 @@ const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
   }
 };
 
+/* eslint-disable-next-line complexity */
 const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
   event.preventDefault();
 

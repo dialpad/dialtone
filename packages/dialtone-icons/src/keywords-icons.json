@@ -271,6 +271,9 @@
       "servicenow": [],
       "slack": [],
       "snapchat": [],
+      "t-mobile": [
+        "tmo"
+      ],
       "telegram": [],
       "threads": [
         "meta",
@@ -1985,6 +1988,10 @@
         "forbidden",
         "prohibited",
         "error"
+      ],
+      "token": [
+        "symbol",
+        "figma"
       ],
       "toy-brick": [
         "lego",

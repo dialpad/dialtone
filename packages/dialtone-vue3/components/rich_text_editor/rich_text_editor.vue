@@ -26,6 +26,7 @@ import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
+import History from '@tiptap/extension-history';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
 import { MentionPlugin } from './extensions/mentions/mention';
@@ -314,6 +315,13 @@ export default {
      * @type {FocusEvent}
      */
     'focus',
+
+    /**
+     * Enter was pressed. Note that shift enter must be pressed to line break the input.
+     * @event enter
+     * @type {String}
+     */
+    'enter',
   ],
 
   data () {
@@ -335,7 +343,7 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text];
+      const extensions = [Document, Paragraph, Text, History];
       if (this.link) {
         extensions.push(TipTapLink.extend({ inclusive: false }).configure({
           HTMLAttributes: {
@@ -384,14 +392,20 @@ export default {
           HardBreak.extend({
             addKeyboardShortcuts () {
               return {
-                Enter: () => true,
-                'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
-                  () => commands.newlineInCode(),
-                  () => self.allowBulletList && commands.splitListItem('listItem'),
-                  () => commands.createParagraphNear(),
-                  () => commands.liftEmptyBlock(),
-                  () => commands.splitBlock(),
-                ]),
+                Enter: () => {
+                  self.$emit('enter');
+                  return true;
+                },
+                'Shift-Enter': () => {
+                  this.editor.commands.first(({ commands }) => [
+                    () => commands.newlineInCode(),
+                    () => self.allowBulletList && commands.splitListItem('listItem'),
+                    () => commands.createParagraphNear(),
+                    () => commands.liftEmptyBlock(),
+                    () => commands.splitBlock(),
+                  ]);
+                  return true;
+                },
               };
             },
           }),
