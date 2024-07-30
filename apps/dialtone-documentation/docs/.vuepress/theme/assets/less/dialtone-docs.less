@@ -733,7 +733,8 @@ a.header-anchor {
 //  ----------------------------------------------------------------------------
 
 .dialtone-usage {
-  --usage-item-color-background: var(--dt-color-surface-secondary);
+  --usage-item-color-border: var(--dt-color-border-default);
+  --usage-item-background-hd: var(--dt-color-surface-bold-opaque);
 
   display: flex;
   flex-direction: column;
@@ -747,16 +748,21 @@ a.header-anchor {
 
   &__hd {
     display: flex;
-    gap: var(--dt-space-400);
+    gap: var(--dt-space-200);
     align-items: center;
-    font-size: var(--dt-font-size-200);
+    align-self: baseline;
+    padding: var(--dt-space-100) var(--dt-space-400);
+    color: var(--dt-color-foreground-primary-inverted);
+    font-size: var(--dt-font-size-100);
+    background-color: var(--usage-item-background-hd);
+    border-radius: var(--dt-size-radius-pill);
 
     &--do {
-      color: var(--dt-color-foreground-success);
+      --usage-item-background-hd: var(--dt-color-surface-success-strong);
     }
 
     &--dont {
-      color: var(--dt-color-foreground-critical-strong);
+      --usage-item-background-hd: var(--dt-color-surface-critical-strong);
     }
   }
 
@@ -766,15 +772,15 @@ a.header-anchor {
     flex-direction: column;
     gap: var(--dt-space-500);
     padding: var(--dt-space-500);
-    background-color: var(--usage-item-color-background);
+    border: 1px solid var(--usage-item-color-border);
     border-radius: var(--dt-size-400);
 
     &--do {
-      --usage-item-color-background: var(--dt-color-surface-success-subtle);
+      --usage-item-color-border: var(--dt-color-border-success);
     }
 
     &--dont {
-      --usage-item-color-background: var(--dt-color-surface-critical-subtle);
+      --usage-item-color-border: var(--dt-color-border-critical);
     }
 
   }
