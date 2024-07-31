@@ -327,7 +327,7 @@ export default {
 
     show: {
       handler: function (show) {
-        if (show !== null) {
+        if (show !== null && this.enabled) {
           this.internalShow = show;
         }
       },
@@ -387,6 +387,7 @@ export default {
     },
 
     onEnterAnchor (e) {
+      if (!this.enabled) return;
       if (this.delay && this.inTimer === null) {
         this.inTimer = setTimeout(() => {
           this.triggerShow(e);
