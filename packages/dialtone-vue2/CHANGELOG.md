@@ -1,3 +1,15 @@
+# [2.147.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.146.0...dialtone-vue2/v2.147.0) (2024-07-31)
+
+
+### Bug Fixes
+
+* **Ivr Node Assign:** DP-95641 fix constant export ([#426](https://github.com/dialpad/dialtone/issues/426)) ([5e72815](https://github.com/dialpad/dialtone/commit/5e7281586872f2cb39b7a4add42d11e16d8c738d))
+
+
+### Features
+
+* **Leftbar:** DLT-1929 add scheduled icon ([#423](https://github.com/dialpad/dialtone/issues/423)) ([65c6e02](https://github.com/dialpad/dialtone/commit/65c6e02275c99d816b1dbaa7ed34d97ce5669c2a))
+
 # [2.146.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.145.0...dialtone-vue2/v2.146.0) (2024-07-31)
 
 
