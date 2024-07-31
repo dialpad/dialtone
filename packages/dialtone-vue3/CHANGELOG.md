@@ -1,3 +1,10 @@
+# [3.139.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.138.0...dialtone-vue3/v3.139.0) (2024-07-31)
+
+
+### Features
+
+* **Ivr Node Assign:** DP-95641 add assign step type ([#422](https://github.com/dialpad/dialtone/issues/422)) ([3da6278](https://github.com/dialpad/dialtone/commit/3da62787bf7b9861a9a1786462ef62bab1e65c85))
+
 # [3.138.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.137.2...dialtone-vue3/v3.138.0) (2024-07-30)
 
 
