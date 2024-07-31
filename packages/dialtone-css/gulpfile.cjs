@@ -106,7 +106,7 @@ const paths = {
     output: './lib/dist/js/',
   },
   styles: {
-    inputLib: './lib/build/less/dialtone.less',
+    inputLib: ['./lib/build/less/dialtone.less', './lib/build/less/dialtone-default-theme.less'],
     outputLib: './lib/dist/',
   },
   tokens: {
