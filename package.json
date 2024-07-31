@@ -2,6 +2,7 @@
   "name": "@dialpad/dialtone",
   "version": "9.56.1",
   "description": "Dialpad's Dialtone design system monorepo",
+  "type": "module",
   "scripts": {
     "test:all": "nx run-many --target=test",
     "build:all": "nx run-many --target=build",
@@ -90,9 +91,9 @@
       "import": "./dist/vue3/*.js",
       "require": "./dist/vue3/*.cjs"
     },
-    "./theme": {
-      "import": "./dist/theme.js",
-      "require": "./dist/theme.cjs"
+    "./themes": {
+      "import": "./dist/themes/*.js",
+      "require": "./dist/themes/*.cjs"
     },
     "./*": "./dist/*"
   },

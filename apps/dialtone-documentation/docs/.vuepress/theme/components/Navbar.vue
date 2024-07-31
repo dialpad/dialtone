@@ -174,7 +174,9 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
-import { setTheme } from '@workspaceRoot/common/theme';
+import { setTheme } from '@dialpad/dialtone/themes/config';
+import DpLight from '@dialpad/dialtone/themes/dp-light';
+import DpDark from '@dialpad/dialtone/themes/dp-dark';
 
 defineProps({
   items: {
@@ -209,13 +211,23 @@ const toggleTheme = () => {
   const nextIndex = (currentIndex + 1) % themes.length;
   currentTheme.value = themes[nextIndex];
 
-  setTheme(currentTheme.value, 'dp');
+  setCssForTheme(currentTheme.value);
   localStorage.setItem('preferredTheme', currentTheme.value);
+};
+
+const setCssForTheme = (currentTheme) => {
+  if (currentTheme === 'system') {
+    mediaQuery.matches ? setTheme(DpDark) : setTheme(DpLight);
+  } else if (currentTheme === 'dark') {
+    setTheme(DpDark);
+  } else {
+    setTheme(DpLight);
+  }
 };
 
 onMounted(() => {
   mediaQuery.addEventListener('change', toggleTheme);
-  setTheme(currentTheme.value, 'dp');
+  setCssForTheme(currentTheme.value);
 });
 
 onUnmounted(() => {

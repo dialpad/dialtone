@@ -237,6 +237,7 @@ const libStylesDev = function (done) {
     .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify]))
     .pipe(postCSS([autoprefixer()]))
     .pipe(sourcemaps.mapSources(function (sourcePath) {
+      if (sourcePath === '<no source>') return sourcePath;
       return '../../build/less/' + sourcePath;
     }))
     .pipe(sourcemaps.write())
