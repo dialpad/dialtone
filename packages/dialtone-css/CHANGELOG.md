@@ -1,3 +1,10 @@
+# [8.39.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.2...dialtone-css/v8.39.0-beta.1) (2024-07-31)
+
+
+### Features
+
+* NO-JIRA update theme apply ([9155f91](https://github.com/dialpad/dialtone/commit/9155f91916d5be485a9120ce6b5be06f555b6818))
+
 ## [8.38.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.1...dialtone-css/v8.38.2) (2024-07-24)
 
 
