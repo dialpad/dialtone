@@ -1,3 +1,15 @@
+# [2.146.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.145.0...dialtone-vue2/v2.146.0) (2024-07-31)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1921 enabled prop not working ([#424](https://github.com/dialpad/dialtone/issues/424)) ([bc16e6d](https://github.com/dialpad/dialtone/commit/bc16e6db8e27d264531b35e362745f595f8298f1))
+
+
+### Features
+
+* **Ivr Node Assign:** DP-95641 add assign step type ([#422](https://github.com/dialpad/dialtone/issues/422)) ([3da6278](https://github.com/dialpad/dialtone/commit/3da62787bf7b9861a9a1786462ef62bab1e65c85))
+
 # [2.145.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.144.2...dialtone-vue2/v2.145.0) (2024-07-30)
 
 
