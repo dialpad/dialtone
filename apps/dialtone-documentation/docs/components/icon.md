@@ -8,15 +8,13 @@ storybook: https://dialtone.dialpad.com/vue/?path=/docs/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
 
-Check out our complete icon collection in the [Icon Catalog](/design/icons/#icon-catalog).
+Check out our complete icon collection in the [icon catalog](/design/icons/#icon-catalog).
 
-## Usage
-
-### Changing the Icon
+## Changing icons
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
-To change the icon, modify the `name` prop to your desired icon. Explore the [Icon Catalog](/design/icons/) for options.
+To change an icon, modify the `name` prop to your desired icon. Explore the [icon catalog](/design/icons/) for options.
 
 <div class="d-gc2">
 <code-well-header>
@@ -35,7 +33,7 @@ To change the icon, modify the `name` prop to your desired icon. Explore the [Ic
 </div>
 </div>
 
-### Changing the Size
+## Changing Sizes
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
@@ -58,7 +56,7 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 </div>
 </div>
 
-### Changing the Color
+## Changing color
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
@@ -130,7 +128,7 @@ When setting the color of an icon take these into considaration:
 </div>
 </div>
 
-### Icon and Text aligment
+## Icon and text aligment
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
@@ -159,7 +157,7 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 </div>
 </div>
 
-### Accessibility
+## Accessibility
 
 - If the icon serves a purpose beyond its visual representation, provide a clear description in the `aria-label` prop. This ensures all users understand its function, regardless of how they interact with it, e.g: `<dt-icon name="settings" aria-label="Edit your profile" />`
 
@@ -167,7 +165,7 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 
 - Avoid using icons as clickable elements; instead, use the [Icon Button](/components/button.html#icon-only) for interactive actions.
 
-### Sizes
+## Sizes
 
 <table class="d-table dialtone-doc-table">
   <thead>

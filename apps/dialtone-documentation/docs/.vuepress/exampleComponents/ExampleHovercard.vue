@@ -2,7 +2,7 @@
   <dt-hovercard placement="bottom-start" content-class="d-wmn332 ">
     <template #anchor>
       <dt-button kind="muted" importance="outlined">
-        Hover over me
+        Hover for Example
       </dt-button>
     </template>
     <template #content>

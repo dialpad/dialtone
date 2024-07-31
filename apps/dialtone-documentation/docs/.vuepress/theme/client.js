@@ -1,6 +1,7 @@
 import { defineClientConfig } from '@vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
+import customEmojis from '@data/custom-emoji.json';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
@@ -64,6 +65,11 @@ async function registerDialtoneVue (app) {
   app.provide('dialtoneComponents', dialtoneComponents);
 
   window.DIALTONE_CONSTANTS = dialtoneConstants;
+
+  // setup custom emojis
+  const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneComponents;
+  setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
+  setCustomEmojiJson(customEmojis);
 }
 
 // This is commented because we are currently not using the combinator and it's

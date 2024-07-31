@@ -1,0 +1,28 @@
+{
+  "octocat": {
+    "name": "octocat",
+    "category": "",
+    "shortname": ":octocat:",
+    "shortname_alternates": [],
+    "keywords": [
+      "octo",
+      "cat",
+      "github"
+    ],
+    "extension": ".png",
+    "custom": true
+  },
+  "shipit": {
+    "name": "ship it",
+    "category": "",
+    "shortname": ":shipit:",
+    "shortname_alternates": [],
+    "keywords": [
+      "ship",
+      "it",
+      "github"
+    ],
+    "extension": ".png",
+    "custom": true
+  }
+}

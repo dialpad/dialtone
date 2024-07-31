@@ -1,3 +1,10 @@
+## [8.38.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.1...dialtone-css/v8.38.2) (2024-07-24)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-1699 emoji alignment ([#407](https://github.com/dialpad/dialtone/issues/407)) ([bac9692](https://github.com/dialpad/dialtone/commit/bac9692091f32763c3b4227a46d3c94c0b9091a9))
+
 ## [8.38.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.0...dialtone-css/v8.38.1) (2024-07-23)
 
 

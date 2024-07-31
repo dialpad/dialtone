@@ -48,6 +48,14 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  sendButton: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
 
   // Events
   onSubmit: {
@@ -135,6 +143,7 @@ export const argsData = {
   top: '',
   middle: '',
   emojiGiphyPicker: '',
+  sendButton: '',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',

@@ -13,6 +13,16 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-text-w
   </dt-emoji-text-wrapper>
 </code-well-header>
 
+## Variants and examples
+
+### Text only
+
+<code-well-header>
+  <dt-emoji-text-wrapper>
+    Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:
+  </dt-emoji-text-wrapper>
+</code-well-header>
+
 <code-example-tabs
 htmlCode='
 <div class="d-emoji-text-wrapper">
@@ -47,6 +57,74 @@ vueCode='
 '
 showHtmlWarning />
 
+### Variants
+
+<code-well-header>
+  <div class="d-stack16" ref="variantsExample">
+    <dt-emoji-text-wrapper>
+      <button class="d-btn d-btn--primary d-btn--danger">
+        Button with shortcode :cry: emoji
+      </button>
+    </dt-emoji-text-wrapper>
+    <dt-emoji-text-wrapper>
+      Text only with unicode 😃 emoji
+    </dt-emoji-text-wrapper>
+    <dt-emoji-text-wrapper>
+      <button class="d-btn d-btn--primary">
+        Button wrapper :smile:
+      </button>
+    </dt-emoji-text-wrapper>
+    <dt-emoji-text-wrapper size="800">
+      Bigger emoji size :smile:
+    </dt-emoji-text-wrapper>
+    <dt-emoji-text-wrapper size="300">
+      Smaller emoji size :smile:
+    </dt-emoji-text-wrapper>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.variantsExample"
+vueCode='
+<dt-emoji-text-wrapper>
+  <button class="d-btn d-btn--primary d-btn--danger">
+    Button with shortcode :cry: emoji
+  </button>
+</dt-emoji-text-wrapper>
+<dt-emoji-text-wrapper>
+  Text only with unicode 😃 emoji
+</dt-emoji-text-wrapper>
+<dt-emoji-text-wrapper>
+  <button class="d-btn d-btn--primary">
+    Button wrapper :smile:
+  </button>
+</dt-emoji-text-wrapper>
+<dt-emoji-text-wrapper size="800">
+  Bigger emoji size :smile:
+</dt-emoji-text-wrapper>
+<dt-emoji-text-wrapper size="300">
+  Smaller emoji size :smile:
+</dt-emoji-text-wrapper>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="emojitextwrapper" />
+
+## Usage
+
+### Import
+
+```javascript
+import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
+```
+
+### Limitations
+
+Currently, this wrapper component **can't handle Vue components**, make sure to wrap only native HTML elements and text.
+
+### Custom emojis
+
+It supports custom emojis, you can use the shortcode to display them. For example, `:octocat:` will render the octocat emoji.
+To do this, you need to [set up custom emojis](/components/emoji.html#custom-emoji) in your application.

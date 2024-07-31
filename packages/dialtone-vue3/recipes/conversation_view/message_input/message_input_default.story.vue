@@ -63,6 +63,12 @@
       >
         <span v-html="$attrs.top" />
       </template>
+      <template
+        v-if="$attrs.sendButton"
+        #sendButton
+      >
+        <span v-html="$attrs.sendButton" />
+      </template>
     </dt-recipe-message-input>
   </div>
 </template>

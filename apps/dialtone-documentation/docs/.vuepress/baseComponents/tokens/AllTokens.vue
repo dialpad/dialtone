@@ -92,7 +92,7 @@ const brandThemeKey = computed(() => `${brand.value}-${theme.value}`);
 const updateHeaders = () => {
   if (filteredTokens.value === null) return [];
   filteredHeaders.value = updateHeadersRecursively(filteredTokens.value, null);
-  localStorage.setItem('filteredHeaders', JSON.stringify(filteredHeaders.value));
+  window.filteredHeaders = filteredHeaders.value;
 };
 
 const updateHeadersRecursively = (node, category) => {
@@ -117,6 +117,6 @@ onBeforeMount(() => {
 });
 
 onBeforeRouteLeave(() => {
-  localStorage.removeItem('filteredHeaders');
+  window.filteredHeaders = null;
 });
 </script>
