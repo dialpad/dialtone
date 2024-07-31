@@ -6,6 +6,7 @@ export const IVR_NODE_GO_TO = 'goto';
 export const IVR_NODE_BRANCH = 'branch';
 export const IVR_NODE_TRANSFER = 'transfer';
 export const IVR_NODE_HANGUP = 'hangup';
+export const IVR_NODE_ASSIGN = 'assign';
 
 export const IVR_NODE_ICON_TYPES = {
   [IVR_NODE_PROMPT_MENU]: 'keypad',
@@ -16,6 +17,7 @@ export const IVR_NODE_ICON_TYPES = {
   [IVR_NODE_GO_TO]: 'call-merge',
   [IVR_NODE_TRANSFER]: 'transfer',
   [IVR_NODE_HANGUP]: 'phone-hang-up',
+  [IVR_NODE_ASSIGN]: 'chevrons-right',
 };
 
 export const IVR_NODE_LABELS = {
@@ -27,6 +29,7 @@ export const IVR_NODE_LABELS = {
   [IVR_NODE_GO_TO]: 'Go-to',
   [IVR_NODE_TRANSFER]: 'Transfer',
   [IVR_NODE_HANGUP]: 'Hangup',
+  [IVR_NODE_ASSIGN]: 'Assign',
 };
 
 const IVR_NODE_COLORS = {
@@ -51,6 +54,7 @@ export const IVR_NODE_COLOR_MAPPING = {
   [IVR_NODE_EXPERT]: IVR_NODE_COLORS.LOGIC,
   [IVR_NODE_BRANCH]: IVR_NODE_COLORS.LOGIC,
   [IVR_NODE_GO_TO]: IVR_NODE_COLORS.LOGIC,
+  [IVR_NODE_ASSIGN]: IVR_NODE_COLORS.LOGIC,
   [IVR_NODE_TRANSFER]: IVR_NODE_COLORS.TERMINAL,
   [IVR_NODE_HANGUP]: IVR_NODE_COLORS.TERMINAL,
 };

@@ -169,6 +169,27 @@ A node in IVR used to step to another workflow or step in a workflow.
 </dt-recipe-ivr-node>
 ```
 
+## Assign Node
+
+A node in IVR used to assign variables that will be available for use throughout the workflow.
+
+<Canvas>
+    <Story of={IvrNodeStories.Assign} />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="Assign"
+  :node-type="assign"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fw-bold">Assign</p>
+  <p>Description</p>
+</dt-recipe-ivr-node>
+```
+
 ## Transfer Node
 
 A node in IVR used to transfer to person, department, call center, etc.
