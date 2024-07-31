@@ -1,3 +1,20 @@
+# [9.59.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.58.0...dialtone/v9.59.0-beta.1) (2024-07-31)
+
+
+### Documentation
+
+* DLT-1918 update do / don't usage well styles ([#421](https://github.com/dialpad/dialtone/issues/421)) ([77bae3d](https://github.com/dialpad/dialtone/commit/77bae3d88f5148977242d288cec64307c2ae0393))
+
+
+### Features
+
+* NO-JIRA update theme apply ([9155f91](https://github.com/dialpad/dialtone/commit/9155f91916d5be485a9120ce6b5be06f555b6818))
+
+
+### Reverts
+
+* Revert "fix "off by one" issue in shadow generation" ([0eab096](https://github.com/dialpad/dialtone/commit/0eab09664ae24d1297b15c62bf7b3fdec5328916))
+
 # [9.58.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.57.0...dialtone/v9.58.0-beta.1) (2024-07-27)
 
 
