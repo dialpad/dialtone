@@ -32,30 +32,31 @@ npm install @dialpad/dialtone@latest @linusborg/vue-simple-portal @tiptap/vue-2
 
 For efficiency, the Dialtone tokens are not included in the main dialtone css package, as it is an application side choice which theme to use.
 
-The simplest way to import the you want to use, and pass it into the `setTheme` javascript function that is included with Dialtone:
+The simplest way to set theme is by calling the `setTheme` javascript function that is included with Dialtone:
 
 ```js
-import { setTheme } from '@dialpad/dialtone/themes/config';
-import DpLight from '@dialpad/dialtone/themes/dp-light';
-setTheme(DpLight);
+import { setTheme } from '@dialpad/dialtone/theme';
+setTheme('light', 'dp');
 ```
 
-possible themes are as follows:
+possible themes keys are as follows:
 
-- DpLight - Dialpad Light
-- DpDark - Dialpad Dark
-- TmoLight - T-Mobile Light
-- TmoDark - T-Mobile Dark
-- ExpressiveLight - Marketing Light
-- ExpressiveDark - Marketing Dark
-- ExpressiveSmLight - Marketing Small Light
-- ExpressiveSmDark - Marketing Small Dark
+- light
+- dark
+- system (sets light or dark based on system preference)
+
+possible brand keys are as follows
+
+- dp (Dialpad)
+- tmo (T-Mobile)
+- expressive (Marketing)
+- expressive-sm (Marketing Small)
 
 Note it is required to load a theme to use Dialtone. Without setting the theme via setTheme, or importing tokens manually, no CSS variables will be set and therefore no Dialtone styles will be displayed.
 
 ##### Importing tokens via manually importing files
 
-You may want to use this method if you don't want to, or are unable to use javascript.
+You may want to use this method if you don't want to use javascript, or you want more control over how the tokens files are loaded and included in your bundle.
 
 You need to import two tokens files in order to apply a theme. A base tokens files, which is either light or dark, and
 a semantic brand tokens file which is named after a brand and theme 'tokens-dp-light', 'tokens-dp-dark', 'tokens-tmo-light', ...
