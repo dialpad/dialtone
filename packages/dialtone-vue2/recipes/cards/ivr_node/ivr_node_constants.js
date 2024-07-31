@@ -15,9 +15,9 @@ export const IVR_NODE_ICON_TYPES = {
   [IVR_NODE_EXPERT]: 'expert-node',
   [IVR_NODE_BRANCH]: 'branch',
   [IVR_NODE_GO_TO]: 'call-merge',
+  [IVR_NODE_ASSIGN]: 'chevrons-right',
   [IVR_NODE_TRANSFER]: 'transfer',
   [IVR_NODE_HANGUP]: 'phone-hang-up',
-  [IVR_NODE_ASSIGN]: 'chevrons-right',
 };
 
 export const IVR_NODE_LABELS = {
