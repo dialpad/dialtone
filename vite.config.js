@@ -23,6 +23,11 @@ export default defineConfig({
       },
       formats: ['es', 'cjs'],
     },
+    rollupOptions: {
+      output: {
+        chunkFileNames: () => 'chunks/[name]-[hash].js',
+      },
+    },
     minify: true,
   },
   resolve: {

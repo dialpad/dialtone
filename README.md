@@ -26,13 +26,58 @@ npm install @dialpad/dialtone@latest @linusborg/vue-simple-portal @tiptap/vue-2
 
 ### Import packages:
 
-#### Dialtone Tokens
+#### Without theming
 
-##### Importing tokens via javascript function
+If you don't care about theming and just want to use Dialtone with the default light theme:
 
-For efficiency, the Dialtone tokens are not included in the main dialtone css package, as it is an application side choice which theme to use.
+- CSS
 
-The simplest way to import the you want to use, and pass it into the `setTheme` javascript function that is included with Dialtone:
+```css
+@import "@dialpad/dialtone/css-default-theme";
+/* If using vue components */
+@import "@dialpad/dialtone/vue2/css";
+/* Or */
+@import "@dialpad/dialtone/vue3/css";
+
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/css-default-theme";
+/* If using vue components */
+import "@dialpad/dialtone/vue2/css";
+/* Or */
+import "@dialpad/dialtone/vue3/css";
+```
+
+#### With theming
+
+If you want to use theming, import from the below path. This file does not include design tokens so it is required to also set a theme to apply design tokens to the root element.
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/css";
+/* If using vue components */
+@import "@dialpad/dialtone/vue2/css";
+/* Or */
+@import "@dialpad/dialtone/vue3/css";
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/css";
+/* If using vue components */
+import "@dialpad/dialtone/vue2/css";
+/* Or */
+import "@dialpad/dialtone/vue3/css";
+```
+
+##### Set theme via setTheme() javascript function (preferred)
+
+Import the theme you want to use and set it via the `setTheme` function:
 
 ```js
 import { setTheme } from '@dialpad/dialtone/themes/config';
@@ -40,7 +85,7 @@ import DpLight from '@dialpad/dialtone/themes/dp-light';
 setTheme(DpLight);
 ```
 
-possible themes are as follows:
+Possible themes are as follows:
 
 - DpLight - Dialpad Light
 - DpDark - Dialpad Dark
@@ -51,17 +96,12 @@ possible themes are as follows:
 - ExpressiveSmLight - Marketing Small Light
 - ExpressiveSmDark - Marketing Small Dark
 
-Note it is required to load a theme to use Dialtone. Without setting the theme via setTheme, or importing tokens manually, no CSS variables will be set and therefore no Dialtone styles will be displayed.
+##### Set theme manually by importing files
 
-##### Importing tokens via manually importing files
-
-You may want to use this method if you don't want to, or are unable to use javascript.
+You may want to use this method if you are unable to use javascript.
 
 You need to import two tokens files in order to apply a theme. A base tokens files, which is either light or dark, and
 a semantic brand tokens file which is named after a brand and theme 'tokens-dp-light', 'tokens-dp-dark', 'tokens-tmo-light', ...
-
-Dialtone tokens doesn't have a default export, so you need to access
-the files directly as following:
 
 - CSS
 
@@ -70,52 +110,11 @@ the files directly as following:
 @import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
 ```
 
-- LESS
-
-```less
-@import "@dialpad/dialtone/tokens/tokens-base-light.less" // Base light tokens
-@import "@dialpad/dialtone/tokens/tokens-dp-light.less" // Dialpad light brand
-```
-
-- JSON
-
-```js
-import "@dialpad/dialtone/tokens/tokens-base-light.json" // Base light tokens
-import "@dialpad/dialtone/tokens/tokens-dp-light.json" // Dialpad light brand
-```
-
-#### Dialtone CSS
-
-Dialtone CSS includes Dialtone utility classes and CSS reset.
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/css";
-```
-
 - Javascript
 
 ```js
-import "@dialpad/dialtone/css";
-```
-
-If you are using the Vue components, then import either Vue 2 or Vue 3 css:
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/vue2/css";
-/* Or */
-@import "@dialpad/dialtone/vue3/css";
-```
-
-- Javascript
-
-```js
-import "@dialpad/dialtone/vue2/css";
-/* Or */
-import "@dialpad/dialtone/vue3/css";
+import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
+import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
 ```
 
 #### Dialtone icons
@@ -403,7 +402,7 @@ nx build dialtone-documentation
 
 ### Releasing
 
-Currently, Dialtone packages are being release in two different ways: `scheduled` and `manually`.
+Currently, Dialtone packages are being released in two different ways: `scheduled` and `manually`.
 The `scheduled` release will only release changes to `production` while `manually` you can choose to release
 `alpha`, `beta` or `next` branches.
 
