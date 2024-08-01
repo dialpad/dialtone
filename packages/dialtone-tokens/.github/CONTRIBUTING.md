@@ -12,8 +12,7 @@ This repo's `tokens` folder contains multiple json files which are the source of
 
 ## What libraries are used to do this?
 
-- [Token Transformer](https://www.npmjs.com/package/token-transformer): To convert Figma Tokens to style dictionary token format, we use this for Android and iOS. We use sd-transforms for web.
-- [sd-transforms](https://github.com/tokens-studio/sd-transforms): The simplest way to convert tokens from Figma Tokens to style dictionary format. Unfortunately only works for web right now.
+- [sd-transforms](https://github.com/tokens-studio/sd-transforms): Converts tokens from Figma to Style Dictionary format.
 - [Style Dictionary](https://amzn.github.io/style-dictionary/#/README): To read our base tokens and output them in different formats.
 - [NPM](https://www.npmjs.com/): To install dependencies needed for this repo and deploy our NPM package.
 - [Gradle](https://gradle.org/): To package and deploy our Android tokens.
@@ -26,12 +25,10 @@ This syntax must be translated into a format that Style Dictionary expects.
 
 To do this we use:
 
-- [token-transformer](https://www.npmjs.com/package/token-transformer) for Android / iOS. It can be run individually via `nx build:token-transformer dialtone-tokens`.
 - [sd-transforms](https://github.com/tokens-studio/sd-transforms) for web.
 - [transform](../sync-scripts/transform.ts) As a custom translator for [Figma Variables](https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma).
 
 It can also be run as part of `nx build dialtone-tokens` which will build and output all different formats.
-Token Transformer outputs the new json file to the `token_transformer` directory.
 
 Next in the process is running Style Dictionary which will output tokens to a variety of different formats.
 We currently output the following:
@@ -47,9 +44,9 @@ All of these are output to the dist folder when you do `nx build dialtone-tokens
 
 ## Style Dictionary Configuration
 
-sd-transforms and token-transformer each have their own style dictionary configuration. You can find this in `build-sd-transforms.js` and `build-token-transformer.js` respectively. sd-transforms has it's own built in transform group `custom/css/tokens-studio` which we add some custom transforms to. token-transformer's configuration is more manual. See style dictionary's documentation for more info. <https://amzn.github.io/style-dictionary>
+sd-transforms has a style dictionary configuration. You can find this in `build-sd-transforms.js`. sd-transforms has it's own built in transform group `custom/css/tokens-studio` which we add some custom transforms to. See style dictionary's documentation for more info. <https://amzn.github.io/style-dictionary>
 
-We have to use some custom transformers to get the desired output we want. These are stored in `dialtone-transforms.js` and can be used in both sd-transforms and token-transformer as needed.
+We have to use some custom transformers to get the desired output we want. These are stored in `dialtone-transforms.js` and can be used as needed.
 
 For more details on the above, please read the [Style Dictionary Documentation](https://amzn.github.io/style-dictionary/#/architecture)
 

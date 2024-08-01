@@ -1,7 +1,8 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.56.1",
+  "version": "9.58.0",
   "description": "Dialpad's Dialtone design system monorepo",
+  "type": "module",
   "scripts": {
     "test:all": "nx run-many --target=test",
     "build:all": "nx run-many --target=build",
@@ -66,6 +67,7 @@
   "exports": {
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",
+    "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
     "./tokens/*.less": "./dist/tokens/less/*.less",
     "./vue2": {
@@ -89,6 +91,10 @@
       "types": "./dist/vue3/types/index.d.ts",
       "import": "./dist/vue3/*.js",
       "require": "./dist/vue3/*.cjs"
+    },
+    "./themes": {
+      "import": "./dist/themes/*.js",
+      "require": "./dist/themes/*.cjs"
     },
     "./*": "./dist/*"
   },
@@ -164,6 +170,7 @@
     "stylelint-config-standard": "^33.0.0",
     "stylelint-less": "1.0.4",
     "stylelint-no-px": "^1.0.1",
+    "vite": "^5.0.0",
     "vitest": "^1.0.4",
     "vue-docgen-api": "^4.75.0",
     "wait-on": "^7.2.0"

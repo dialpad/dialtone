@@ -12,7 +12,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     <div class="d-tooltip d-tooltip__arrow--bottom-center d-ps-absolute">
       <span>Simple tooltip</span>
     </div>
-    <span>Hover over me to see a tooltip</span>
+    <span>Hover for Tooltip Example</span>
   </button>
 </code-well-header>
 
@@ -21,6 +21,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ### Usage
 
 #### Default
+
 Default tooltip directive uses top as default placement
 
 <code-well-header class="d-hmn164">
@@ -42,22 +43,24 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-button v-dt-tooltip="Tooltip text">Placeholder button</dt-button>
+<dt-button v-dt-tooltip="Tooltip text">Placeholder Button</dt-button>
 '
 showHtmlWarning />
 
 #### With Placement
+
 It's possible to change the tooltip default placement with directive arguments, possible values: bottom, bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end, top, top-start, top-end.
 
 <code-well-header class='d-hmn164'>
-<dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder button</dt-button>
+<dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder Button</dt-button>
 </code-well-header>
 
 ```javascript
-<dt-button v-dt-tooltip:bottom-start="Tooltip text">Placeholder button</dt-button>
+<dt-button v-dt-tooltip:bottom-start="Tooltip text">Placeholder Button</dt-button>
 ```
 
 ### Import
+
 Import the directive from dialtone-vue
 
 ```javascript
@@ -65,10 +68,10 @@ import { DtTooltipDirective } from "@dialpad/dialtone-vue";
 ```
 
 Install the directive into vue instance
+
 ```javascript
 Vue.use(DtTooltipDirective);
 ```
-
 
 ## Tooltip as a component
 

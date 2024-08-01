@@ -106,7 +106,7 @@ const paths = {
     output: './lib/dist/js/',
   },
   styles: {
-    inputLib: './lib/build/less/dialtone.less',
+    inputLib: ['./lib/build/less/dialtone.less', './lib/build/less/dialtone-default-theme.less'],
     outputLib: './lib/dist/',
   },
   tokens: {
@@ -237,6 +237,7 @@ const libStylesDev = function (done) {
     .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify]))
     .pipe(postCSS([autoprefixer()]))
     .pipe(sourcemaps.mapSources(function (sourcePath) {
+      if (sourcePath === '<no source>') return sourcePath;
       return '../../build/less/' + sourcePath;
     }))
     .pipe(sourcemaps.write())

@@ -4,6 +4,7 @@ node_modules
 # NX #
 .nx/installation
 .nx/cache
+.nx/workspace-data
 
 # OS generated files #
 .DS_Store

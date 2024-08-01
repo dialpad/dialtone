@@ -1,3 +1,23 @@
+# [3.138.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.137.2...dialtone-vue3/v3.138.0) (2024-07-30)
+
+
+### Documentation
+
+* DLT-1897 move storybook to doc site - Emoji to Emoji Text Wrapper ([#412](https://github.com/dialpad/dialtone/issues/412)) ([dedb229](https://github.com/dialpad/dialtone/commit/dedb229c6e5ebbea8638c0537a8a31c37bf7ef3c))
+
+
+### Features
+
+* **Message Input:** DLT-1912 add slot for split button ([#419](https://github.com/dialpad/dialtone/issues/419)) ([e50139e](https://github.com/dialpad/dialtone/commit/e50139e659988b70aa349bf492213d81947e5538))
+
+## [3.137.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.137.1...dialtone-vue3/v3.137.2) (2024-07-24)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-1699 emoji alignment ([#407](https://github.com/dialpad/dialtone/issues/407)) ([bac9692](https://github.com/dialpad/dialtone/commit/bac9692091f32763c3b4227a46d3c94c0b9091a9))
+* **Multi Select:** NO-JIRA update input padding when resizing ([#413](https://github.com/dialpad/dialtone/issues/413)) ([06bc49d](https://github.com/dialpad/dialtone/commit/06bc49dd78d8f8c168b5b0af024da0ecb3bd5c51))
+
 ## [3.137.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.137.0...dialtone-vue3/v3.137.1) (2024-07-23)
 
 

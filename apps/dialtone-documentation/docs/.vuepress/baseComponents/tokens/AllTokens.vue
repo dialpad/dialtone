@@ -3,6 +3,7 @@
     v-model:search="searchCriteria"
     v-model:format="format"
     v-model:theme="theme"
+    v-model:brand="brand"
     @filter="filterTokens"
   />
   <div
@@ -21,12 +22,13 @@
 import { capitalize, computed, ref, onBeforeMount } from 'vue';
 import TokenTree from './TokenTree.vue';
 import TokensBar from './TokensBar.vue';
-import { addComposedTokens, addTokensToStructure } from './utilities';
+import { addTokensToStructure } from './utilities';
 import { onBeforeRouteLeave, useRoute } from 'vue-router';
 
 const route = useRoute();
 const format = ref(route.query.format || 'CSS');
 const theme = ref(route.query.theme || 'light');
+const brand = ref(route.query.brand || 'dp');
 const searchCriteria = ref(route.query.search || null);
 const processedTokens = {}; // is set beforeMount and never changes
 const filteredTokens = ref({}); // same as processedTokens but filtered by format, theme and search
@@ -34,7 +36,7 @@ const filteredHeaders = ref([]); // to fill the dynamic table of contents
 
 const filterTokens = () => {
   if (!searchCriteria.value) {
-    filteredTokens.value = structuredClone(processedTokens[format.value][theme.value]);
+    filteredTokens.value = structuredClone(processedTokens[format.value][brandThemeKey.value]);
     updateHeaders();
     return;
   }
@@ -45,8 +47,7 @@ const filterTokens = () => {
   const searchValues = searchCriteria.value.replace(/\/|-/g, ' ').split(' ');
   const searchRegexArray = searchValues.map(value => value.replace(/\(/, '\\(').replace(/\)/, '\\)')); // escape parenthesis
   const regexArray = searchRegexArray.map(searchRegex => new RegExp(searchRegex, 'i'));
-
-  filteredTokens.value = filterTokenNode(processedTokens[format.value][theme.value], null, regexArray);
+  filteredTokens.value = filterTokenNode(processedTokens[format.value][brandThemeKey.value], null, regexArray);
   updateHeaders();
 };
 
@@ -86,11 +87,12 @@ const filterTokenNode = (node, name, regexArray) => {
 };
 
 const noSearchResults = computed(() => filteredTokens.value === null);
+const brandThemeKey = computed(() => `${brand.value}-${theme.value}`);
 
 const updateHeaders = () => {
   if (filteredTokens.value === null) return [];
   filteredHeaders.value = updateHeadersRecursively(filteredTokens.value, null);
-  localStorage.setItem('filteredHeaders', JSON.stringify(filteredHeaders.value));
+  window.filteredHeaders = filteredHeaders.value;
 };
 
 const updateHeadersRecursively = (node, category) => {
@@ -111,11 +113,10 @@ const updateHeadersRecursively = (node, category) => {
 
 onBeforeMount(() => {
   addTokensToStructure(processedTokens);
-  addComposedTokens(processedTokens);
   filterTokens();
 });
 
 onBeforeRouteLeave(() => {
-  localStorage.removeItem('filteredHeaders');
+  window.filteredHeaders = null;
 });
 </script>

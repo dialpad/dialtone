@@ -9,6 +9,13 @@ export const THEMES = [
   { value: 'dark', label: 'Dark' },
 ];
 
+export const BRANDS = [
+  { value: 'dp', label: 'Dialpad' },
+  { value: 'tmo', label: 'T-Mobile' },
+  { value: 'expressive', label: 'Expressive' },
+  { value: 'expressive-sm', label: 'Expressive Small' },
+];
+
 export const CATEGORY_MAP = {
   color: ['color', 'opacity', 'theme'],
   typography: ['typography', 'font'],
