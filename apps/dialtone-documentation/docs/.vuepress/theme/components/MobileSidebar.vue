@@ -26,7 +26,7 @@
       class="
         mobile-header-drop-down-navigation d-ps-fixed d-l0 d-w100p
         d-bgc-primary d-of-auto d-d-flex
-        d-fd-column d-ai-baseline d-pt24 d-pr16 d-pl64
+        d-fd-column d-ai-baseline d-pt24 d-px16
       "
     >
       <sidebar-item

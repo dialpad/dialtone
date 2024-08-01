@@ -35,7 +35,7 @@
               @click="(e) => { sendAnalyticsEvent(); navigate(e); }"
               @keypress.enter="(e) => { sendAnalyticsEvent(); navigate(e); }"
             >
-              Get started
+              Get Started
             </dt-button>
           </router-link>
           <router-link
@@ -50,7 +50,7 @@
               @click="(e) => { navigate(e); }"
               @keypress.enter="(e) => { navigate(e); }"
             >
-              What's new?
+              What's New?
             </dt-button>
           </router-link>
         </div>

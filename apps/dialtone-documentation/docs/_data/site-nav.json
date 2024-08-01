@@ -19,7 +19,7 @@
       "text": "Design Tokens",
       "children": [
         {
-          "text": "All Design Tokens",
+          "text": "All Tokens",
           "link": "/tokens/"
         },
         {
@@ -44,7 +44,7 @@
           "link": "/guides/"
         },
         {
-          "text": "Getting started",
+          "text": "Getting Started",
           "link": "/guides/getting-started/"
         },
         {
@@ -52,13 +52,39 @@
           "link": "/guides/contributing/"
         },
         {
-          "text": "Design principles",
-          "link": "/guides/design-principles/",
-          "planned": true
+          "text": "Content",
+          "link": "/guides/content/",
+          "children": [
+            {
+              "text": "Action Language",
+              "link": "/guides/content/action-language/"
+            },
+            {
+              "text": "Error Messages",
+              "link": "/guides/content/error-messages/"
+            },
+            {
+              "text": "Grammar and Mechanics",
+              "link": "/guides/content/grammar-mechanics/"
+            },
+            {
+              "text": "Help Content",
+              "link": "/guides/content/help-content/"
+            },
+            {
+              "text": "Inclusive Language",
+              "link": "/guides/content/inclusive-language/"
+            },
+            {
+              "text": "Voice and Tone",
+              "link": "/guides/content/voice-tone/"
+            }
+          ]
         },
         {
-          "text": "Writing guidelines",
-          "link": "/guides/writing-guidelines/"
+          "text": "Design Principles",
+          "link": "/guides/design-principles/",
+          "planned": true
         },
         {
           "text": "Accessibility",
@@ -70,7 +96,7 @@
           "planned": true
         },
         {
-          "text": "Design assets",
+          "text": "Design Assets",
           "link": "/guides/design-assets/",
           "planned": true
         }
@@ -79,7 +105,7 @@
   ],
   "/design/": [
     {
-      "text": "Design language",
+      "text": "Design Language",
       "children": [
         {
           "text": "Overview",
@@ -128,7 +154,7 @@
   ],
   "/utilities/": [
     {
-      "text": "CSS utilities",
+      "text": "CSS Utilities",
       "children": [
         {
           "text": "Overview",
@@ -140,27 +166,27 @@
       "text": "Backgrounds",
       "children": [
         {
-          "text": "Background attachment",
+          "text": "Background Attachment",
           "link": "/utilities/backgrounds/attachment.html"
         },
         {
-          "text": "Background clip",
+          "text": "Background Clip",
           "link": "/utilities/backgrounds/clip.html"
         },
         {
-          "text": "Background color",
+          "text": "Background Color",
           "link": "/utilities/backgrounds/color.html"
         },
         {
-          "text": "Background position",
+          "text": "Background Position",
           "link": "/utilities/backgrounds/position.html"
         },
         {
-          "text": "Background repeat",
+          "text": "Background Repeat",
           "link": "/utilities/backgrounds/repeat.html"
         },
         {
-          "text": "Background size",
+          "text": "Background Size",
           "link": "/utilities/backgrounds/size.html"
         },
         {
@@ -177,31 +203,31 @@
       "text": "Borders",
       "children": [
         {
-          "text": "Border color",
+          "text": "Border Color",
           "link": "/utilities/borders/color.html"
         },
         {
-          "text": "Border direction",
+          "text": "Border Direction",
           "link": "/utilities/borders/direction.html"
         },
         {
-          "text": "Border radius",
+          "text": "Border Radius",
           "link": "/utilities/borders/radius.html"
         },
         {
-          "text": "Border style",
+          "text": "Border Style",
           "link": "/utilities/borders/style.html"
         },
         {
-          "text": "Border width",
+          "text": "Border Width",
           "link": "/utilities/borders/width.html"
         },
         {
-          "text": "Divide color",
+          "text": "Divide Color",
           "link": "/utilities/borders/divide-color.html"
         },
         {
-          "text": "Divide width",
+          "text": "Divide Width",
           "link": "/utilities/borders/divide-width.html"
         }
       ]
@@ -210,7 +236,7 @@
       "text": "Effects & Transitions",
       "children": [
         {
-          "text": "Box shadow",
+          "text": "Box Shadow",
           "link": "/utilities/effects/box-shadow.html"
         },
         {
@@ -227,31 +253,31 @@
       "text": "Flex",
       "children": [
         {
-          "text": "Align content",
+          "text": "Align Content",
           "link": "/utilities/flex/align-content.html"
         },
         {
-          "text": "Align items",
+          "text": "Align Items",
           "link": "/utilities/flex/align-items.html"
         },
         {
-          "text": "Align self",
+          "text": "Align Self",
           "link": "/utilities/flex/align-self.html"
         },
         {
-          "text": "Columns & layouts",
+          "text": "Columns and Gaps",
           "link": "/utilities/flex/columns-layouts.html"
         },
         {
-          "text": "Direction, Wrap, & Flow",
+          "text": "Direction, Wrap, and Flow",
           "link": "/utilities/flex/direction-wrap-flow.html"
         },
         {
-          "text": "Flex, Grow, & Shrink",
+          "text": "Flex, Grow, and Shrink",
           "link": "/utilities/flex/flex-grow-shrink.html"
         },
         {
-          "text": "Justify content",
+          "text": "Justify Content",
           "link": "/utilities/flex/justify.html"
         },
         {
@@ -272,11 +298,11 @@
           "link": "/utilities/grid/gap.html"
         },
         {
-          "text": "Justify items",
+          "text": "Justify Items",
           "link": "/utilities/grid/justify-items.html"
         },
         {
-          "text": "Justify self",
+          "text": "Justify Self",
           "link": "/utilities/grid/justify-self.html"
         },
         {
@@ -284,15 +310,15 @@
           "link": "/utilities/grid/layouts.html"
         },
         {
-          "text": "Place content",
+          "text": "Place Content",
           "link": "/utilities/grid/place-content.html"
         },
         {
-          "text": "Place items",
+          "text": "Place Items",
           "link": "/utilities/grid/place-items.html"
         },
         {
-          "text": "Place self",
+          "text": "Place Self",
           "link": "/utilities/grid/place-self.html"
         },
         {
@@ -313,20 +339,20 @@
           "link": "/utilities/interactivity/outline.html"
         },
         {
-          "text": "Pointer events",
+          "text": "Pointer Events",
           "link": "/utilities/interactivity/pointer-events.html"
         },
         {
           "text": "Resize",
           "link": "/utilities/interactivity/resize.html"
-      }
+        }
       ]
     },
     {
       "text": "Layout",
       "children": [
         {
-          "text": "Box sizing",
+          "text": "Box Sizing",
           "link": "/utilities/layout/box-sizing.html"
         },
         {
@@ -372,11 +398,11 @@
           "link": "/utilities/sizing/height.html"
         },
         {
-          "text": "Max-height",
+          "text": "Max Height",
           "link": "/utilities/sizing/max-height.html"
         },
         {
-          "text": "Min-height",
+          "text": "Min Height",
           "link": "/utilities/sizing/min-height.html"
         },
         {
@@ -384,11 +410,11 @@
           "link": "/utilities/sizing/width.html"
         },
         {
-          "text": "Max-width",
+          "text": "Max Width",
           "link": "/utilities/sizing/max-width.html"
         },
         {
-          "text": "Min-width",
+          "text": "Min Width",
           "link": "/utilities/sizing/min-width.html"
         }
       ]
@@ -397,7 +423,7 @@
       "text": "Spacing",
       "children": [
         {
-          "text": "Auto spacing",
+          "text": "Auto Spacing",
           "link": "/utilities/spacing/auto-spacing.html"
         },
         {
@@ -418,31 +444,31 @@
           "link": "/utilities/typography/styles.html"
         },
         {
-          "text": "Font color",
+          "text": "Font Color",
           "link": "/utilities/typography/font-color.html"
         },
         {
-          "text": "Font family",
+          "text": "Font Family",
           "link": "/utilities/typography/font-family.html"
         },
         {
-          "text": "Font size",
+          "text": "Font Size",
           "link": "/utilities/typography/font-size.html"
         },
         {
-          "text": "Font style",
+          "text": "Font Style",
           "link": "/utilities/typography/font-style.html"
         },
         {
-          "text": "Font variant numeric",
+          "text": "Font Variant Numeric",
           "link": "/utilities/typography/font-variant-numeric.html"
         },
         {
-          "text": "Font weight",
+          "text": "Font Weight",
           "link": "/utilities/typography/font-weight.html"
         },
         {
-          "text": "Line height",
+          "text": "Line Height",
           "link": "/utilities/typography/line-height.html"
         },
         {
@@ -450,27 +476,27 @@
           "link": "/utilities/typography/lists.html"
         },
         {
-          "text": "Text align",
+          "text": "Text Alignment",
           "link": "/utilities/typography/text-align.html"
         },
         {
-          "text": "Text decoration",
+          "text": "Text Decoration",
           "link": "/utilities/typography/text-decoration.html"
         },
         {
-          "text": "Text opacity",
+          "text": "Text Opacity",
           "link": "/utilities/typography/text-opacity.html"
         },
         {
-          "text": "Text overflow",
+          "text": "Text Overflow",
           "link": "/utilities/typography/text-overflow.html"
         },
         {
-          "text": "Text transform",
+          "text": "Text Transform",
           "link": "/utilities/typography/text-transform.html"
         },
         {
-          "text": "Vertical align",
+          "text": "Vertical Alignment",
           "link": "/utilities/typography/vertical-align.html"
         },
         {
@@ -478,14 +504,13 @@
           "link": "/utilities/typography/whitespace.html"
         },
         {
-          "text": "Word break",
+          "text": "Word Break",
           "link": "/utilities/typography/word-break.html"
         },
         {
-          "text": "Word wrap",
+          "text": "Word Wrap",
           "link": "/utilities/typography/word-wrap.html"
         }
-
       ]
     }
   ],
@@ -498,7 +523,7 @@
           "link": "/components/"
         },
         {
-          "text": "Component status",
+          "text": "Component Status",
           "link": "/components/status"
         },
         {
@@ -522,7 +547,7 @@
           "link": "/components/button.html"
         },
         {
-          "text": "Button group",
+          "text": "Button Group",
           "link": "/components/button-group.html"
         },
         {
@@ -534,7 +559,7 @@
           "link": "/components/checkbox.html"
         },
         {
-          "text": "Checkbox group",
+          "text": "Checkbox Group",
           "link": "/components/checkbox-group.html"
         },
         {
@@ -566,15 +591,15 @@
           "link": "/components/emoji.html"
         },
         {
-          "text": "Emoji picker",
+          "text": "Emoji Picker",
           "link": "/components/emoji-picker.html"
         },
         {
-          "text": "Emoji text wrapper",
+          "text": "Emoji Text Wrapper",
           "link": "/components/emoji-text-wrapper.html"
         },
         {
-          "text": "Empty state",
+          "text": "Empty State",
           "link": "/components/empty-state.html"
         },
         {
@@ -590,15 +615,15 @@
           "link": "/components/input.html"
         },
         {
-          "text": "Item layout",
+          "text": "Item Layout",
           "link": "/components/item-layout.html"
         },
         {
-          "text": "Keyboard shortcut",
+          "text": "Keyboard Shortcut",
           "link": "/components/keyboard-shortcut.html"
         },
         {
-          "text": "Lazy show",
+          "text": "Lazy Show",
           "link": "/components/lazy-show.html"
         },
         {
@@ -606,7 +631,7 @@
           "link": "/components/link.html"
         },
         {
-          "text": "List item",
+          "text": "List Item",
           "link": "/components/list-item.html"
         },
         {
@@ -634,11 +659,11 @@
           "link": "/components/radio.html"
         },
         {
-          "text": "Radio group",
+          "text": "Radio Group",
           "link": "/components/radio-group.html"
         },
         {
-          "text": "Root layout",
+          "text": "Root Layout",
           "link": "/components/root-layout.html"
         },
         {
@@ -650,7 +675,7 @@
           "link": "/components/scroller.html"
         },
         {
-          "text": "Select menu",
+          "text": "Select Menu",
           "link": "/components/select-menu.html"
         },
         {
@@ -682,7 +707,7 @@
           "link": "/components/tooltip.html"
         },
         {
-          "text": "Validation messages",
+          "text": "Validation Messages",
           "link": "/components/validation-messages.html"
         }
       ]

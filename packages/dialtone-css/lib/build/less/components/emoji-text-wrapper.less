@@ -1,5 +1,14 @@
 .d-emoji-text-wrapper {
-  .d-icon {
-    vertical-align: top;
+  .d-emoji {
+    position: relative;
+    height: 1em;
+    vertical-align: middle;
+
+    .d-icon {
+      position: absolute;
+      top: calc(50% - 1px);
+      display: block;
+      transform: translateY(-50%);
+    }
   }
 }
