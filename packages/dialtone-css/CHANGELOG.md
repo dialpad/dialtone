@@ -1,3 +1,10 @@
+# [8.39.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.2...dialtone-css/v8.39.0) (2024-08-01)
+
+
+### Features
+
+* **Tokens:** DLT-1696 theme and brand tokens ([#416](https://github.com/dialpad/dialtone/issues/416)) ([11085dc](https://github.com/dialpad/dialtone/commit/11085dc9aeb0698f8f9f277c9b66b9f5869bec71))
+
 ## [8.38.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.1...dialtone-css/v8.38.2) (2024-07-24)
 
 
