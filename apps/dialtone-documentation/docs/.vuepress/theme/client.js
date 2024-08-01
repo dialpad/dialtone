@@ -35,19 +35,9 @@ export default defineClientConfig({
   },
   setup () {
     onBeforeMount(() => {
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
       const preferredTheme = localStorage.getItem('preferredTheme') || 'system';
-
       const currentTheme = ref(preferredTheme);
-
-      if (currentTheme.value !== 'system') {
-        document.body.className = `dialtone-theme-${currentTheme.value}`;
-      } else {
-        document.body.className = systemPrefersDark.matches ? 'dialtone-theme-dark' : 'dialtone-theme-light';
-      }
-
       provide('currentTheme', currentTheme);
-      provide('systemPrefersDark', systemPrefersDark);
     });
   },
   layouts: {

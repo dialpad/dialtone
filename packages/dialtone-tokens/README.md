@@ -21,8 +21,8 @@ npm install @dialpad/dialtone-tokens
 #### Import CSS Tokens
 
 ```css
-@import "@dialpad/dialtone-tokens/dist/css/variables-dark.css";  // Dark variables
-@import "@dialpad/dialtone-tokens/dist/css/variables-light.css"; // Light variables
+@import "@dialpad/dialtone-tokens/dist/tokens-base-light.css"; // Light variables
+@import "@dialpad/dialtone-tokens/dist/tokens-base-dark.css";  // Dark variables
 ```
 
 #### Use CSS Token
@@ -38,8 +38,8 @@ Or
 #### Import LESS Tokens
 
 ```less
-@import "@dialpad/dialtone-tokens/dist/less/variables-dark.less";  // Dark variables
-@import "@dialpad/dialtone-tokens/dist/less/variables-light.less"; // Light variables
+@import "@dialpad/dialtone-tokens/dist/less/tokens-base-light.less"; // Light variables
+@import "@dialpad/dialtone-tokens/dist/less/tokens-base-dark.less";  // Dark variables
 ```
 
 #### Use LESS Token
@@ -53,8 +53,8 @@ Or
 #### Import JSON
 
 ```js
-import "@dialpad/dialtone/tokens/tokens-light.json" // Light tokens
-import "@dialpad/dialtone/tokens/tokens-dark.json" // Dark tokens
+import "@dialpad/dialtone-tokens/dist/tokens-base-light.json" // Light tokens
+import "@dialpad/dialtone-tokens/dist/tokens-base-dark.json" // Dark tokens
 ```
 
 ### iOS (swift)

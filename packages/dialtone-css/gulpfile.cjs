@@ -9,6 +9,7 @@ const settings = {
   scripts: true, // Turn on/off script tasks
   styles: true, // Turn on/off style tasks
   svgs: true, // Turn on/off SVG tasks
+  tokens: true, // Turn on/off tokens
   patterns: true, // Turn on/off SVG Pattern tasks
   spot: true, // Turn on/off SVG spot illustration tasks
   fonts: true, // Turn on/off webfonts
@@ -105,8 +106,12 @@ const paths = {
     output: './lib/dist/js/',
   },
   styles: {
-    inputLib: './lib/build/less/dialtone.less',
+    inputLib: ['./lib/build/less/dialtone.less', './lib/build/less/dialtone-default-theme.less'],
     outputLib: './lib/dist/',
+  },
+  tokens: {
+    input: 'node_modules/@dialpad/dialtone-tokens/dist/css/*.css',
+    output: './lib/dist/tokens',
   },
   svgs: {
     sysInput: './lib/build/svg/system/**/*.svg',
@@ -191,6 +196,15 @@ const libScripts = function (done) {
     .pipe(dest(paths.scripts.output));
 };
 
+const tokens = function (done) {
+  //  Make sure this feature is activated before running
+  if (!settings.tokens) return done();
+
+  //  Compile library files
+  return src(paths.tokens.input)
+    .pipe(dest(paths.tokens.output));
+};
+
 //  ================================================================================
 //  @@  COMPILE CSS
 //      Lint, minify, and concatenate style files
@@ -223,6 +237,7 @@ const libStylesDev = function (done) {
     .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify]))
     .pipe(postCSS([autoprefixer()]))
     .pipe(sourcemaps.mapSources(function (sourcePath) {
+      if (sourcePath === '<no source>') return sourcePath;
       return '../../build/less/' + sourcePath;
     }))
     .pipe(sourcemaps.write())
@@ -401,6 +416,7 @@ exports.default = series(
   exports.clean,
   webfonts,
   exports.svg,
+  tokens,
   libStyles,
   libScripts,
 );
@@ -410,6 +426,7 @@ exports.default = series(
 exports.buildWatch = series(
   webfonts,
   exports.svg,
+  tokens,
   libStylesDev,
 );
 

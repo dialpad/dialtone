@@ -26,27 +26,40 @@ npm install @dialpad/dialtone@latest @linusborg/vue-simple-portal @tiptap/vue-2
 
 ### Import packages:
 
-#### Dialtone CSS
+#### Without theming
 
-Dialtone CSS includes all utility classes as well as tokens.
+If you don't care about theming and just want to use Dialtone with the default light theme:
 
 - CSS
 
 ```css
-@import "@dialpad/dialtone/css";
+@import "@dialpad/dialtone/css-default-theme";
+/* If using vue components */
+@import "@dialpad/dialtone/vue2/css";
+/* Or */
+@import "@dialpad/dialtone/vue3/css";
+
 ```
 
 - Javascript
 
 ```js
-import "@dialpad/dialtone/css";
+import "@dialpad/dialtone/css-default-theme";
+/* If using vue components */
+import "@dialpad/dialtone/vue2/css";
+/* Or */
+import "@dialpad/dialtone/vue3/css";
 ```
 
-If you are using the Vue components, then import either Vue 2 or Vue 3 css:
+#### With theming
+
+If you want to use theming, import from the below path. This file does not include design tokens so it is required to also set a theme to apply design tokens to the root element.
 
 - CSS
 
 ```css
+@import "@dialpad/dialtone/css";
+/* If using vue components */
 @import "@dialpad/dialtone/vue2/css";
 /* Or */
 @import "@dialpad/dialtone/vue3/css";
@@ -55,9 +68,53 @@ If you are using the Vue components, then import either Vue 2 or Vue 3 css:
 - Javascript
 
 ```js
+import "@dialpad/dialtone/css";
+/* If using vue components */
 import "@dialpad/dialtone/vue2/css";
 /* Or */
 import "@dialpad/dialtone/vue3/css";
+```
+
+##### Set theme via setTheme() javascript function (preferred)
+
+Import the theme you want to use and set it via the `setTheme` function:
+
+```js
+import { setTheme } from '@dialpad/dialtone/themes/config';
+import DpLight from '@dialpad/dialtone/themes/dp-light';
+setTheme(DpLight);
+```
+
+Possible themes are as follows:
+
+- DpLight - Dialpad Light
+- DpDark - Dialpad Dark
+- TmoLight - T-Mobile Light
+- TmoDark - T-Mobile Dark
+- ExpressiveLight - Marketing Light
+- ExpressiveDark - Marketing Dark
+- ExpressiveSmLight - Marketing Small Light
+- ExpressiveSmDark - Marketing Small Dark
+
+##### Set theme manually by importing files
+
+You may want to use this method if you are unable to use javascript.
+
+You need to import two tokens files in order to apply a theme. A base tokens files, which is either light or dark, and
+a semantic brand tokens file which is named after a brand and theme 'tokens-dp-light', 'tokens-dp-dark', 'tokens-tmo-light', ...
+
+- CSS
+
+```css
+@import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
+@import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
+```
+
+- Javascript
+
+```js
+import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
+import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
 ```
 
 #### Dialtone icons
@@ -106,32 +163,6 @@ import { DtButton } from "@dialpad/dialtone/vue3"
 
 // Default import (Prefered if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
-```
-
-#### Dialtone Tokens
-
-Dialtone tokens doesn't have a default export, so you need to access
-the files directly as following:
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/tokens/variables-light.css" // Light tokens
-@import "@dialpad/dialtone/tokens/variables-dark.css" // Dark tokens
-```
-
-- LESS
-
-```less
-@import "@dialpad/dialtone/tokens/variables-light.less" // Light tokens
-@import "@dialpad/dialtone/tokens/variables-dark.less" // Dark tokens
-```
-
-- JSON
-
-```js
-import "@dialpad/dialtone/tokens/tokens-light.json" // Light tokens
-import "@dialpad/dialtone/tokens/tokens-dark.json" // Dark tokens
 ```
 
 ## About this repo
@@ -371,7 +402,7 @@ nx build dialtone-documentation
 
 ### Releasing
 
-Currently, Dialtone packages are being release in two different ways: `scheduled` and `manually`.
+Currently, Dialtone packages are being released in two different ways: `scheduled` and `manually`.
 The `scheduled` release will only release changes to `production` while `manually` you can choose to release
 `alpha`, `beta` or `next` branches.
 

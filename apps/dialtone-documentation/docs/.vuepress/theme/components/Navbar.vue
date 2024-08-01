@@ -174,6 +174,9 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
+import { setTheme } from '@dialpad/dialtone/themes/config';
+import DpLight from '@dialpad/dialtone/themes/dp-light';
+import DpDark from '@dialpad/dialtone/themes/dp-dark';
 
 defineProps({
   items: {
@@ -185,7 +188,6 @@ defineEmits(['search']);
 
 const route = useRoute();
 const currentTheme = inject('currentTheme');
-const systemPrefersDark = inject('systemPrefersDark');
 const themes = ['system', 'light', 'dark'];
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -204,34 +206,31 @@ const isActiveLink = (text) => {
   return route.path.search(linkBase) !== -1;
 };
 
-const updateThemeBasedOnSystem = () => {
-  if (currentTheme.value === 'system') {
-    document.body.className = systemPrefersDark.matches ? 'dialtone-theme-dark' : 'dialtone-theme-light';
-  }
-};
-
 const toggleTheme = () => {
   const currentIndex = themes.indexOf(currentTheme.value);
   const nextIndex = (currentIndex + 1) % themes.length;
-
   currentTheme.value = themes[nextIndex];
 
+  setCssForTheme(currentTheme.value);
   localStorage.setItem('preferredTheme', currentTheme.value);
+};
 
-  updateThemeBasedOnSystem();
-
-  if (currentTheme.value !== 'system') {
-    document.body.className = `dialtone-theme-${currentTheme.value}`;
+const setCssForTheme = (currentTheme) => {
+  if (currentTheme === 'system') {
+    mediaQuery.matches ? setTheme(DpDark) : setTheme(DpLight);
+  } else if (currentTheme === 'dark') {
+    setTheme(DpDark);
+  } else {
+    setTheme(DpLight);
   }
 };
 
 onMounted(() => {
-  mediaQuery.addEventListener('change', updateThemeBasedOnSystem);
-
-  updateThemeBasedOnSystem();
+  mediaQuery.addEventListener('change', toggleTheme);
+  setCssForTheme(currentTheme.value);
 });
 
 onUnmounted(() => {
-  mediaQuery.removeEventListener('change', updateThemeBasedOnSystem);
+  mediaQuery.removeEventListener('change', toggleTheme);
 });
 </script>

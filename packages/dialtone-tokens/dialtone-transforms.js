@@ -6,9 +6,9 @@
 
 import Color from 'tinycolor2';
 
-const SIZE_IDENTIFIERS = ['fontSizes', 'sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y'];
+const SIZE_IDENTIFIERS = ['fontSizes', 'sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
 const SPACING_IDENTIFIERS = ['spacing'];
-const FONT_FAMILY_IDENTIFIERS = ['fontFamilies', 'fontFamily', 'typography'];
+const FONT_FAMILY_IDENTIFIERS = ['fontFamily'];
 const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
 const WEIGHT_IDENTIFIERS = ['fontWeights', 'fontWeight'];
 const LINE_HEIGHT_IDENTIFIERS = ['lineHeights', 'lineHeight'];
@@ -48,28 +48,28 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/size/pxToRem',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return SIZE_IDENTIFIERS.includes(token.type);
     },
-    transformer: pxToRemTransformer,
+    transform: pxToRemTransformer,
   });
 
   styleDictionary.registerTransform({
     name: 'dt/space/pxToRem',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return SPACING_IDENTIFIERS.includes(token.type);
     },
-    transformer: pxToRemTransformer,
+    transform: pxToRemTransformer,
   });
 
   styleDictionary.registerTransform({
     name: 'dt/android/xml/color',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return ['color'].includes(token.type);
     },
-    transformer: function (token) {
+    transform: function (token) {
       if (token.value === 'transparent') { return '#00ffffff'; }
       const str = Color(token.value).toHex8();
       return '#' + str.slice(6) + str.slice(0, 6);
@@ -79,10 +79,11 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/color',
     type: 'value',
-    matcher: function (token) {
+    transitive: true,
+    filter: function (token) {
       return ['color'].includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const hex8 = Color(token.value).toHex8();
       return `Color(0x${hex8.slice(6) + hex8.slice(0, 6)})`;
     },
@@ -91,10 +92,11 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/fonts/transformToStack',
     type: 'value',
-    matcher: function (token) {
+    transitive: true,
+    filter: function (token) {
       return FONT_FAMILY_IDENTIFIERS.includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       if (token.name === 'mono' || token.path.includes('code')) {
         return 'FontFamily.Monospace';
       }
@@ -105,10 +107,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/fonts/weight',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return WEIGHT_IDENTIFIERS.includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       return `FontWeight.${ANDROID_WEIGHTS[token.value]}`;
     },
   });
@@ -116,10 +118,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/size/pxToDp',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
@@ -134,10 +136,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/size/pxToSp',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return [...FONT_SIZE_IDENTIFIERS].includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
@@ -151,10 +153,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/lineHeight/percentToDecimal',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return LINE_HEIGHT_IDENTIFIERS.includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
@@ -173,10 +175,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/opacity/percentToFloat',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return ['opacity'].includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
@@ -190,10 +192,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/stringify',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return ['type', 'textCase'].includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       return `"${token.value}"`;
     },
   });
@@ -201,10 +203,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/fonts/transformToStack',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return FONT_FAMILY_IDENTIFIERS.includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       if (token.name === 'mono' || token.path.includes('code')) {
         return 'UIFont.monospacedSystemFont(ofSize: 15, weight: .regular)';
       }
@@ -215,10 +217,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/color',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return ['color'].includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const { r, g, b, a } = Color(token.value).toRgb();
       const rFixed = (r / 255.0).toFixed(3);
       const gFixed = (g / 255.0).toFixed(3);
@@ -230,10 +232,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/size/pxToCGFloat',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
@@ -247,10 +249,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/lineHeight/percentToDecimal',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return ['opacity', ...LINE_HEIGHT_IDENTIFIERS].includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
@@ -264,10 +266,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/lineHeight/percentToDecimal',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return LINE_HEIGHT_IDENTIFIERS.includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
@@ -285,10 +287,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/fonts/transformToStack',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return FONT_FAMILY_IDENTIFIERS.includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       if (token.name === 'body' || token.name === 'expressive') {
         return `${token.value}, ${FALLBACK_FONTS.join(', ')}`;
       } else if (token.name === 'mono') {
@@ -301,10 +303,10 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/lineHeight/percentToDecimal',
     type: 'value',
-    matcher: function (token) {
+    filter: function (token) {
       return LINE_HEIGHT_IDENTIFIERS.includes(token.type);
     },
-    transformer: (token) => {
+    transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
