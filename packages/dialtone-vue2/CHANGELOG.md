@@ -1,3 +1,27 @@
+# [2.147.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.146.0...dialtone-vue2/v2.147.0) (2024-07-31)
+
+
+### Bug Fixes
+
+* **Ivr Node Assign:** DP-95641 fix constant export ([#426](https://github.com/dialpad/dialtone/issues/426)) ([5e72815](https://github.com/dialpad/dialtone/commit/5e7281586872f2cb39b7a4add42d11e16d8c738d))
+
+
+### Features
+
+* **Leftbar:** DLT-1929 add scheduled icon ([#423](https://github.com/dialpad/dialtone/issues/423)) ([65c6e02](https://github.com/dialpad/dialtone/commit/65c6e02275c99d816b1dbaa7ed34d97ce5669c2a))
+
+# [2.146.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.145.0...dialtone-vue2/v2.146.0) (2024-07-31)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-1921 enabled prop not working ([#424](https://github.com/dialpad/dialtone/issues/424)) ([bc16e6d](https://github.com/dialpad/dialtone/commit/bc16e6db8e27d264531b35e362745f595f8298f1))
+
+
+### Features
+
+* **Ivr Node Assign:** DP-95641 add assign step type ([#422](https://github.com/dialpad/dialtone/issues/422)) ([3da6278](https://github.com/dialpad/dialtone/commit/3da62787bf7b9861a9a1786462ef62bab1e65c85))
+
 # [2.145.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.144.2...dialtone-vue2/v2.145.0) (2024-07-30)
 
 
