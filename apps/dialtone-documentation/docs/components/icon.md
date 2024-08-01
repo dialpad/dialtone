@@ -167,6 +167,8 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 
 ## Sizes
 
+Dialtone provides eight sizes for icons, three of them are **device only**. Each of the sizes represents the width and a height the icon is going to have:
+
 <table class="d-table dialtone-doc-table">
   <thead>
     <tr>
@@ -186,6 +188,10 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
     </tr>
   </tbody>
 </table>
+
+## Vue API
+
+<component-vue-api component-name="icon" />
 
 <script setup>
   import { ref } from 'vue';
