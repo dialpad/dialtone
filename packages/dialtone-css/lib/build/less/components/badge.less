@@ -27,10 +27,11 @@
   --badge-line-height: calc(var(--dt-size-500) + var(--dt-size-200));
   --badge-font-size: var(--dt-font-size-100);
   --badge-font-weight: var(--dt-font-weight-semi-bold);
-  --badge-gap: var(--dt-space-300);
+  --badge-gap: var(--dt-space-200);
   --badge-letter-spacing: var(--dt-size-50);
   --badge-padding-y: var(--dt-space-100);
-  --badge-padding-x: var(--dt-space-350);
+  --badge-padding-x: var(--dt-space-300);
+  --badge-label-padding-x: var(--dt-space-200);
   --badge-text-case: none;
   --badge-decorative-color: var(--dt-color-black-900);
 
@@ -60,6 +61,8 @@
     --badge-padding-x: calc(var(--dt-space-400) - var(--dt-space-100));
     --badge-padding-y: var(--dt-space-300);
     --badge-line-height: var(--dt-size-500);
+    --badge-label-padding-x: var(--dt-space-0);
+    --badge-gap: var(--dt-space-300);
   }
 
   //  TYPE
@@ -135,11 +138,13 @@
     height: var(--dt-size-400);
     background-color: var(--badge-decorative-color);
     border-radius: var(--dt-size-200);
+    margin-inline-start: var(--dt-space-200);
   }
 
   &__label {
     display: flex;
     align-items: center;
+    padding-inline: var(--badge-label-padding-x);
   }
 
   &__icon-left,
