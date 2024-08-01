@@ -748,10 +748,10 @@ a.header-anchor {
 
   &__hd {
     display: flex;
-    gap: var(--dt-space-200);
+    gap: var(--dt-space-100);
     align-items: center;
     align-self: baseline;
-    padding: var(--dt-space-100) var(--dt-space-400);
+    padding: var(--dt-space-100) var(--dt-space-350);
     color: var(--dt-color-foreground-primary-inverted);
     font-size: var(--dt-font-size-100);
     background-color: var(--usage-item-background-hd);
@@ -764,6 +764,10 @@ a.header-anchor {
     &--dont {
       --usage-item-background-hd: var(--dt-color-surface-critical-strong);
     }
+  }
+
+  &__label {
+    padding-inline: var(--dt-space-200);
   }
 
   &__item {
