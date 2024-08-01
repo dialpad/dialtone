@@ -45,14 +45,13 @@ function typography (typographyDeclarations, Declaration) {
  * @param { Declaration } declaration
  */
 function boxShadows (shadowDeclarations, Declaration) {
-  const shadowSegmentsRegex = new RegExp(`--dt-shadow-(${REGEX_OPTIONS.SHADOW_VARIABLES})-([0-9])-(\\w+)`);
+  const shadowSegmentsRegex = new RegExp(`--dt-shadow-(${REGEX_OPTIONS.SHADOW_VARIABLES})-?([0-9])?-(\\w+)`);
   const shadowMap = shadowDeclarations.map(m => m.prop)
     .reduce((shadows, shadow) => {
       const [name, index] = shadow
-        .split(shadowSegmentsRegex)
-        .filter(chunk => !!chunk);
-
-      shadows[name] = Number.parseInt(index);
+        .split(shadowSegmentsRegex).slice(1, -1);
+      // if not a number that means it's only a single shadow so set to 1.
+      shadows[name] = Number.isNaN(Number.parseInt(index)) ? 1 : Number.parseInt(index);
       return shadows;
     }, {});
 
@@ -66,8 +65,12 @@ function boxShadows (shadowDeclarations, Declaration) {
       const value = Array(times)
         .fill(undefined)
         .map((val, i) => {
-          const shadowNumber = i + 1;
-          return `var(${shadowVar}-${shadowNumber}-x) var(${shadowVar}-${shadowNumber}-y) var(${shadowVar}-${shadowNumber}-blur) var(${shadowVar}-${shadowNumber}-spread) var(${shadowVar}-${shadowNumber}-color)${isInset ? ' inset' : ''}`;
+          let shadowNumber = `-${i + 1}`;
+          // tokens no longer get numbered if there is only a single one, so if this is the case, do not number it.
+          if (times === 1) {
+            shadowNumber = '';
+          }
+          return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
         }).join(', ');
 
       shadowDeclarations.at(-1).after(new Declaration({ prop: shadowVar, value }));

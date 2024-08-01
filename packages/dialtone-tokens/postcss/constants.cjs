@@ -20,8 +20,9 @@ module.exports = {
       'large',
       'extra-large',
       'card',
-      'focus',
+      // keep focus inset above focus or else the regex will capture focus first
       'focus-inset',
+      'focus',
     ].join('|'),
     TYPOGRAPHY_VARIABLES: [
       'compact',
