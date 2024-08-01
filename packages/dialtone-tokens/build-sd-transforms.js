@@ -21,7 +21,7 @@ StyleDictionary.registerAction({
   do: function (dictionary, config) {
     const platformName = config.files[0].format.name;
     const theme = config.theme;
-    buildDocs(platformName, theme, dictionary.properties);
+    buildDocs(platformName, theme, dictionary.allTokens);
   },
   undo: function () {},
 });
