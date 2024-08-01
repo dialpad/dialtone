@@ -4,6 +4,7 @@
     :label="label"
     :show-list="showList"
     :max-height="listMaxHeight"
+    :max-width="listMaxWidth"
     :popover-offset="popoverOffset"
     :has-suggestion-list="hasSuggestionList"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
@@ -302,6 +303,15 @@ export default {
     collapseOnFocusOut: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|em
+     */
+    listMaxWidth: {
+      type: String,
+      default: '',
     },
   },
 
