@@ -1,3 +1,10 @@
+# [3.141.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.140.0...dialtone-vue3/v3.141.0) (2024-08-01)
+
+
+### Features
+
+* **Tokens:** DLT-1696 theme and brand tokens ([#416](https://github.com/dialpad/dialtone/issues/416)) ([11085dc](https://github.com/dialpad/dialtone/commit/11085dc9aeb0698f8f9f277c9b66b9f5869bec71))
+
 # [3.140.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.139.0...dialtone-vue3/v3.140.0) (2024-07-31)
 
 
