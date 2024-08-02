@@ -13,6 +13,7 @@
     :append-to="appendTo"
     :transition="transition"
     @select="onComboboxSelect"
+    @highlight="comboboxHighlight"
   >
     <template #input="{ onInput }">
       <span
@@ -355,6 +356,14 @@ export default {
      * @type {KeyboardEvent}
       */
     'keyup',
+
+    /**
+     * Event fired when combobox item is highlighted
+     *
+     * @event combobox-highlight
+     * @type {Object}
+     */
+    'combobox-highlight',
   ],
 
   data () {
@@ -469,6 +478,10 @@ export default {
   },
 
   methods: {
+    comboboxHighlight (highlightIndex) {
+      this.$emit('combobox-highlight', highlightIndex);
+    },
+
     async initSelectedItems () {
       await this.$nextTick();
       this.setInputPadding();
