@@ -15,6 +15,7 @@
     :max-selected="$attrs.maxSelected"
     :list-max-height="$attrs.listMaxHeight"
     :list-max-width="$attrs.listMaxWidth"
+    :collapse-on-focus-out="$attrs.collapseOnFocusOut"
     :max-selected-message="$attrs.maxSelectedMessage"
     :has-suggestion-list="$attrs.hasSuggestionList"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
