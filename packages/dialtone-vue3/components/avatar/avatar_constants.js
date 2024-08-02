@@ -34,6 +34,7 @@ export const AVATAR_ICON_SIZES = {
 };
 
 export const AVATAR_COLORS = [
+  '000',
   '100',
   '200',
   '300',
@@ -54,6 +55,9 @@ export const AVATAR_COLORS = [
   '1800',
 ];
 
+// We do not use the color '000' (grey) in the randomized avatar colors, but it can still be set manually.
+export const AVATAR_RANDOM_COLORS = AVATAR_COLORS.slice(1);
+
 export const AVATAR_GROUP_VALIDATOR = (group) => group > 1;
 
 export default {
@@ -63,5 +67,6 @@ export default {
   AVATAR_PRESENCE_STATES,
   AVATAR_ICON_SIZES,
   AVATAR_COLORS,
+  AVATAR_RANDOM_COLORS,
   AVATAR_GROUP_VALIDATOR,
 };
