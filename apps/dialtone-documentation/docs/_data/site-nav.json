@@ -623,6 +623,10 @@
           "link": "/components/input.html"
         },
         {
+          "text": "Input Group",
+          "link": "/components/input-group.html"
+        },
+        {
           "text": "Item Layout",
           "link": "/components/item-layout.html"
         },
