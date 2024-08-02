@@ -4,29 +4,7 @@
     class="d-split-btn"
     :style="{ width }"
   >
-    <dt-button
-      v-dt-tooltip="alphaTooltipText"
-      data-qa="dt-split-button-alpha"
-      :size="size"
-      :class="[`d-split-btn__alpha d-split-btn__alpha--${size}`]"
-      :active="alphaActive"
-      :aria-label="alphaAriaLabel"
-      :icon-position="alphaIconPosition"
-      :label-class="alphaLabelClass"
-      :loading="alphaLoading"
-      :assertive-on-focus="assertiveOnFocus"
-      :disabled="disabled"
-      :importance="importance"
-      :kind="kind"
-      @click="(e) => handleClick('alpha', e)"
-    >
-      <template #icon>
-        <!-- @slot Alpha (left) button icon slot -->
-        <slot name="alphaIcon" />
-      </template>
-      <!-- @slot Default content slot -->
-      <slot name="default" />
-    </dt-button>
+    <split-button-alpha v-bind="alphaButtonProps" />
     <!-- @slot Omega (right) content slot -->
     <slot name="omega">
       <dt-dropdown v-if="!omegaId && $slots.dropdownList">
@@ -69,12 +47,12 @@
 
 <script>
 import {
-  DtButton,
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
   BUTTON_SIZE_MODIFIERS,
   ICON_POSITION_MODIFIERS,
 } from '@/components/button';
+import SplitButtonAlpha from './split_button-alpha.vue';
 import SplitButtonOmega from './split_button-omega.vue';
 import { DtDropdown } from '@/components/dropdown';
 
@@ -82,9 +60,9 @@ export default {
   name: 'DtSplitButton',
 
   components: {
-    DtButton,
     SplitButtonOmega,
     DtDropdown,
+    SplitButtonAlpha,
   },
 
   props: {
@@ -265,6 +243,23 @@ export default {
   ],
 
   computed: {
+    alphaButtonProps () {
+      return {
+        size: this.size,
+        alphaActive: this.alphaActive,
+        alphaAriaLabel: this.alphaAriaLabel,
+        alphaIconPosition: this.alphaIconPosition,
+        alphaLabelClass: this.alphaLabelClass,
+        alphaLoading: this.alphaLoading,
+        assertiveOnFocus: this.assertiveOnFocus,
+        disabled: this.disabled,
+        importance: this.importance,
+        kind: this.kind,
+        alphaTooltipText: this.alphaTooltipText,
+        handleClick: this.handleClick,
+      };
+    },
+
     omegaButtonProps () {
       return {
         id: this.omegaId,
